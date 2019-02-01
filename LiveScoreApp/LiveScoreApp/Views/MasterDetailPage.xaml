@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="LiveScoreApp.Views.MasterDetailPage"
+                xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+                prism:ViewModelLocator.AutowireViewModel="True"
+                xmlns:views="clr-namespace:LiveScoreApp.Views">
+    <MasterDetailPage.Master>
+        <views:MenuPage />
+    </MasterDetailPage.Master>
+</MasterDetailPage>

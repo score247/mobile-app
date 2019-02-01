@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<prism:PrismApplication
+                xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                xmlns:dark="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Dark"
+                xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+                x:Class="LiveScoreApp.App">
+    <Application.Resources>
+
+        <!-- Application resource dictionary -->
+        <ResourceDictionary  MergedWith="dark:DarkThemeResources">
+            <!--Global Styles-->
+            <Color x:Key="PrimaryDarkColor">#1E1E1E</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+                <Setter Property="BarTextColor" Value="#e6e6e6" />
+            </Style>
+            <Style TargetType="TabbedPage">
+                <Setter Property="BarTextColor" Value="#e6e6e6" />
+            </Style>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="#e6e6e6" />
+            </Style>
+            <Style  x:Key="btnStyle" TargetType="Button">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="#e6e6e6" />
+            </Style>
+
+            <Style x:Key="listViewStyle" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="#1D2133" />
+            </Style>
+
+            <Style x:Key="LeagueStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#666" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
+            </Style>
+
+            <Style x:Key="TimeStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#666" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+            </Style>
+
+            <Style x:Key="EventStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#666" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="HomeTeamStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#30C2FF" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+            </Style>
+
+            <Style x:Key="AwayTeamStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="Margin" Value="0,0,0,10" />
+            </Style>
+
+            <Style x:Key="Teamfont" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+            <Style x:Key="Scorefont" TargetType="Label">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="Margin" Value="0,5" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</prism:PrismApplication>

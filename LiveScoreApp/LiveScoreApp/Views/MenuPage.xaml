@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LiveScoreApp.Views.MenuPage"
+             Icon="hamburger.png"
+             Title="Menu">
+
+    <StackLayout VerticalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding MenuItems}"
+                  SelectedItem="{Binding SelectedMenuItem}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
+                            <Button FlexLayout.Grow="1"
+                                    Text="&#xf1e3;"
+                                    FontSize="Medium"
+                                    CornerRadius="0"
+                                    FontAttributes="Bold"
+                                    HeightRequest="25"
+                                    Opacity="0.8"
+                                    Style="{StaticResource btnStyle}">
+                                <Button.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String"
+                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
+                                                    iOS="Font Awesome 5 Free" />
+                                </Button.FontFamily>
+                            </Button>
+                            <Label FlexLayout.Grow="9" Text="{Binding Title}" FontSize="12" />
+                        </FlexLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Tournament.Views.TournamentPage"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <StackLayout BackgroundColor="#1D2133">
+        <SearchBar Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10"/>
+        <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding Tournaments}"
+                SelectedItem="{Binding SelectedTournament}"
+                IsPullToRefreshEnabled="true"
+                Style="{StaticResource listViewStyle}">
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior
+                    EventName="ItemTapped"
+                    Command="{Binding ItemTappedCommand}" />
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15" Spacing="0">
+                            <StackLayout
+                                    HorizontalOptions="Start"
+                                    VerticalOptions="Center"
+                                    Orientation="Horizontal">
+                                <Label Text="{Binding Text}"
+                                    LineBreakMode="NoWrap"
+                                    Style="{StaticResource labelStyle}" />
+                            </StackLayout>
+                            <StackLayout
+                                    HorizontalOptions="EndAndExpand"
+                                    VerticalOptions="Center"
+                                    Orientation="Horizontal">
+                                <Button Text="&#xf105;"
+                                        FontSize="Large"
+                                        FontAttributes="Bold"
+                                        Style="{StaticResource btnStyle}">
+                                    <Button.FontFamily>
+                                        <OnPlatform x:TypeArguments="x:String"
+                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
+                                                    iOS="Font Awesome 5 Free" />
+                                    </Button.FontFamily>
+                                </Button>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
