@@ -3,15 +3,15 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             prism:ViewModelLocator.AutowireViewModel="True"
-			xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-            xmlns:local="clr-namespace:Tournament.Views;assembly=Tournament"
+            xmlns:tournament="clr-namespace:Tournament.Views;assembly=Tournament"
+            xmlns:score="clr-namespace:Score.Views;assembly=Score"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
             BarTextColor="#e6e6e6">
     <TabbedPage.Children>
-        <local:TournamentDetailPage Title="Scores" Icon="hamburger.png" />
+        <score:ScorePage Title="Scores" Icon="hamburger.png" />
         <ContentPage Title="Live" Icon="hamburger.png" />
         <ContentPage Title="Favourites" Icon="hamburger.png" />
-        <local:TournamentPage Title="Menu" Icon="hamburger.png" />
+        <tournament:TournamentPage Title="Menu" Icon="hamburger.png" />
         <ContentPage Title="News" Icon="hamburger.png" />
     </TabbedPage.Children>
 </TabbedPage>

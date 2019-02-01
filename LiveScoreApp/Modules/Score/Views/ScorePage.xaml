@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Score.Views.ScorePage"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="{Binding Title}">
+    <StackLayout>
+        <ListView
+                ItemsSource="{Binding GroupMatches}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                IsPullToRefreshEnabled="true"
+                CachingStrategy="RecycleElement"
+                IsGroupingEnabled="True"
+                GroupDisplayBinding="{Binding Key}"
+                SeparatorColor="#1D2133"
+                Style="{StaticResource listViewStyle}">
+            <ListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell Height="25">
+                        <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#0F111C">
+                            <Image Source="Flag1.png"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       WidthRequest="16"
+                                       HeightRequest="16"
+                                       Aspect="AspectFit"
+                                       Margin="18, 8, 12, 8" />
+
+                            <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       HeightRequest="30"
+                                       Text="{Binding Key}"
+                                       Style="{StaticResource LeagueStyle}" />
+
+                            <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="24 Jan"
+                                       HorizontalOptions="EndAndExpand"
+                                       Style="{StaticResource TimeStyle}" />
+
+                            <Image Source="Detail.png"
+                                       Grid.Row="0"
+                                       Grid.Column="3"
+                                       WidthRequest="12"
+                                       Margin="8" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.GroupHeaderTemplate>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout BackgroundColor="Red"
+                                         Orientation="Vertical"
+                                         VerticalOptions="StartAndExpand"
+                                         Spacing="0">
+                                <Grid HorizontalOptions="FillAndExpand"
+                                      BackgroundColor="#1D2133"
+                                      RowSpacing="0"
+                                      ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="32" />
+                                        <ColumnDefinition Width="45" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="10" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.RowSpan="3"
+                                   Grid.Column="0"
+                                   Text="FT"
+                                   Style="{StaticResource EventStyle}" />
+
+                                    <Label Grid.Row="0"
+                                Grid.Column="1"
+                                Text="{Binding HomeTeam}"
+                                Style="{StaticResource HomeTeamStyle}" />
+
+                                    <Label Grid.Row="2"
+                                Grid.Column="1"
+                                Text="{Binding AwayTeam}"
+                                Style="{StaticResource AwayTeamStyle}" />
+
+                                    <Label Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding HomeScore}"
+                                Style="{StaticResource Scorefont}" />
+                                    <Label Grid.Row="2"
+                                    Grid.Column="2"
+                                    Text="{Binding AwayScore}"
+                                    Style="{StaticResource Scorefont}" />
+
+                                    <Button
+                                Text="&#xf005;"
+                                        Grid.RowSpan="3"
+                                            Grid.Column="3"
+                                            WidthRequest="12"
+                                            Margin="8"
+                                Style="{StaticResource btnStyle}">
+                                        <Button.FontFamily>
+                                            <OnPlatform x:TypeArguments="x:String"
+                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
+                                                    iOS="Font Awesome 5 Free" />
+                                        </Button.FontFamily>
+                                    </Button>
+                                </Grid>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>

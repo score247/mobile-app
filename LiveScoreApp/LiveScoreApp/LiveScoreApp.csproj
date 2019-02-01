@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules\Score\Score.csproj" />
     <ProjectReference Include="..\Modules\Tournament\Tournament.csproj" />
   </ItemGroup>
 

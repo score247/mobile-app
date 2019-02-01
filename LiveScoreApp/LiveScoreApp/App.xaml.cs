@@ -48,6 +48,7 @@ namespace LiveScoreApp
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<Tournament.TournamentModule>();
+            moduleCatalog.AddModule<Score.ScoreModule>();
         }
     }
 }
