@@ -1,0 +1,38 @@
+@font-face {
+  font-family: 'livescore';
+  src:  url('fonts/livescore.eot?1xrmmh');
+  src:  url('fonts/livescore.eot?1xrmmh#iefix') format('embedded-opentype'),
+    url('fonts/livescore.ttf?1xrmmh') format('truetype'),
+    url('fonts/livescore.woff?1xrmmh') format('woff'),
+    url('fonts/livescore.svg?1xrmmh#livescore') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'livescore' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-basketball:before {
+  content: "\e900";
+  color: #fff;
+}
+.icon-e-sports:before {
+  content: "\e901";
+  color: #fff;
+}
+.icon-soccer:before {
+  content: "\e902";
+  color: #fff;
+}

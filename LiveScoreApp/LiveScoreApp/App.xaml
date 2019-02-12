@@ -9,6 +9,31 @@
 
         <!-- Application resource dictionary -->
         <ResourceDictionary  MergedWith="dark:DarkThemeResources">
+            <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
+                <On Platform="Android" Value="livescore.ttf#livescore" />
+                <On Platform="iOS" Value="livescore" />
+            </OnPlatform>
+
+            <!-- Icons Styles-->
+            <Style x:Key="Icons" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource LiveScore}" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="WidthRequest" Value="40" />
+            </Style>
+
+            <Style x:Key="SoccerIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe902;"/>
+            </Style>
+
+            <Style x:Key="BasketBallIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe900;"/>
+            </Style>
+
+            <Style x:Key="ESportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe901;"/>
+            </Style>
+
             <!--Global Styles-->
             <Color x:Key="PrimaryDarkColor">#1E1E1E</Color>
             <Style TargetType="NavigationPage">

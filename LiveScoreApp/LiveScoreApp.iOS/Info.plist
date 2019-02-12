@@ -49,10 +49,8 @@
     <key>UILaunchStoryboardName</key>
     <string>LaunchScreen</string>
     <key>UIAppFonts</key>
-	<array>     
-		<string>fa-solid-900.ttf</string>
-		<string>fa-brands-400.ttf</string>
-		<string>fa-regular-400.ttf</string>
-	</array>    
+	<array> 
+		<string>livescore/fonts/livescore.ttf</string>
+	</array>
   </dict>
 </plist>

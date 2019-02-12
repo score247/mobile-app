@@ -99,6 +99,11 @@
     <BundleResource Include="Resources\fa-brands-400.ttf" />
     <BundleResource Include="Resources\fa-regular-400.ttf" />
     <BundleResource Include="Resources\fa-solid-900.ttf" />
+    <BundleResource Include="Resources\livescore\selection.json" />
+    <BundleResource Include="Resources\livescore\fonts\livescore.eot" />
+    <BundleResource Include="Resources\livescore\fonts\livescore.ttf" />
+    <BundleResource Include="Resources\livescore\fonts\livescore.woff" />
+    <BundleResource Include="Resources\livescore.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
@@ -209,6 +214,24 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Flag1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\demo.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\Read Me.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\style.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\demo-files\demo.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\demo-files\demo.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\livescore\fonts\livescore.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

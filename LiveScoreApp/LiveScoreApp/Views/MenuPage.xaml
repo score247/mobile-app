@@ -14,20 +14,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                            <Button FlexLayout.Grow="1"
-                                    Text="&#xf1e3;"
-                                    FontSize="Medium"
-                                    CornerRadius="0"
-                                    FontAttributes="Bold"
-                                    HeightRequest="25"
-                                    Opacity="0.8"
-                                    Style="{StaticResource btnStyle}">
-                                <Button.FontFamily>
-                                    <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                </Button.FontFamily>
-                            </Button>
+                            <Label Style="{StaticResource BasketBallIcon}" />
                             <Label FlexLayout.Grow="9" Text="{Binding Title}" FontSize="12" />
                         </FlexLayout>
                     </ViewCell>
