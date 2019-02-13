@@ -1,16 +1,15 @@
 ﻿namespace LiveScoreApp.Models
 {
-    public enum MenuItemType
-    {
-        Soccer,
-        Hockey,
-        Basketball
-    }
-
     public class MenuItem
     {
-        public MenuItemType Id { get; set; }
+        public int Id { get; set; }
+
+        public int GroupId { get; set; }
+
+        public string GroupName { get; set; }
 
         public string Title { get; set; }
+
+        public string IconValue { get; set; }
     }
 }

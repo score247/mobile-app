@@ -14,7 +14,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                            <Label Style="{StaticResource BasketBallIcon}" />
+                            <Label Style="{StaticResource Icons}" Text="{Binding IconValue}" />
                             <Label FlexLayout.Grow="9" Text="{Binding Title}" FontSize="12" />
                         </FlexLayout>
                     </ViewCell>
