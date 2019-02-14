@@ -2,13 +2,12 @@
 <prism:PrismApplication
                 xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                xmlns:dark="clr-namespace:Xamarin.Forms.Themes;assembly=Xamarin.Forms.Theme.Dark"
                 xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
                 x:Class="LiveScoreApp.App">
     <Application.Resources>
 
         <!-- Application resource dictionary -->
-        <ResourceDictionary  MergedWith="dark:DarkThemeResources">
+        <ResourceDictionary>
             <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
                 <On Platform="Android" Value="livescore.ttf#livescore" />
                 <On Platform="iOS" Value="livescore" />
@@ -23,15 +22,15 @@
             </Style>
 
             <Style x:Key="SoccerIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
-                <Setter Property="Text" Value="&#xe902;"/>
+                <Setter Property="Text" Value="&#xe902;" />
             </Style>
 
             <Style x:Key="BasketBallIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
-                <Setter Property="Text" Value="&#xe900;"/>
+                <Setter Property="Text" Value="&#xe900;" />
             </Style>
 
             <Style x:Key="ESportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
-                <Setter Property="Text" Value="&#xe901;"/>
+                <Setter Property="Text" Value="&#xe901;" />
             </Style>
 
             <!--Global Styles-->
