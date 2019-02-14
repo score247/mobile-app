@@ -1,20 +1,19 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using SettingMenu.ViewModels;
-using SettingMenu.Views;
+using Setting.Views;
+using Setting.ViewModels;
 
-namespace SettingMenu
+namespace Setting
 {
-    public class SettingMenuModule : IModule
+    public class SettingModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<AutomaticRefreshPage, AutomaticRefreshPageViewModel>();
+            containerRegistry.RegisterForNavigation<RefreshPage, RefreshPageViewModel>();
         }
     }
 }

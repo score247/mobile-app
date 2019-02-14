@@ -49,7 +49,7 @@ namespace LiveScoreApp
         {
             moduleCatalog.AddModule<Tournament.TournamentModule>();
             moduleCatalog.AddModule<Score.ScoreModule>();
-            moduleCatalog.AddModule<SettingMenu.SettingMenuModule>();
+            moduleCatalog.AddModule<Setting.SettingModule>();
         }
     }
 }

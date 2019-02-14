@@ -35,10 +35,9 @@ namespace LiveScoreApp.ViewModels
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/");
         }
 
-
         private async void NavigateRefreshSetting()
         {
-            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/AutomaticRefreshPage");
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/RefreshPage");
         }
     }
 }

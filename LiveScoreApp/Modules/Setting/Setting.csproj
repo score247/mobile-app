@@ -10,13 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AutomaticRefreshPage.xaml.cs">
-      <DependentUpon>AutomaticRefreshPage.xaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Views\AutomaticRefreshPage.xaml">
+    <EmbeddedResource Update="Views\RefreshPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

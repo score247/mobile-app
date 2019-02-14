@@ -4,11 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SettingMenu.ViewModels
+namespace Setting.ViewModels
 {
-	public class AutomaticRefreshPageViewModel : BindableBase
+	public class RefreshPageViewModel : BindableBase
 	{
-        public AutomaticRefreshPageViewModel()
+        public RefreshPageViewModel()
         {
 
         }
