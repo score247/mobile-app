@@ -1,4 +1,4 @@
-﻿using Foundation;
+using Foundation;
 using Prism;
 using Prism.Ioc;
 using UIKit;

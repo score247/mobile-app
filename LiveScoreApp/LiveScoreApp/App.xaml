@@ -5,7 +5,6 @@
                 xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
                 x:Class="LiveScoreApp.App">
     <Application.Resources>
-
         <!-- Application resource dictionary -->
         <ResourceDictionary>
             <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
@@ -13,24 +12,52 @@
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
 
-            <!-- Icons Styles-->
+            <!-- Icons for Menu -->
             <Style x:Key="Icons" TargetType="Label">
                 <Setter Property="FontFamily" Value="{StaticResource LiveScore}" />
-                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="White" />
-                <Setter Property="WidthRequest" Value="40" />
             </Style>
 
             <Style x:Key="SoccerIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
                 <Setter Property="Text" Value="&#xe902;" />
             </Style>
-
             <Style x:Key="BasketBallIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
                 <Setter Property="Text" Value="&#xe900;" />
             </Style>
-
             <Style x:Key="ESportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
                 <Setter Property="Text" Value="&#xe901;" />
+            </Style>
+
+            <Style x:Key="ReFreshIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe90d;"/>
+            </Style>
+            <Style x:Key="ClearCacheIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe904;"/>
+            </Style>
+            <Style x:Key="DefaultSportIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe907;"/>
+            </Style>
+            <Style x:Key="DefaultLanguageIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe90a;"/>
+            </Style>
+            <Style x:Key="TimeZoneIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe910;"/>
+            </Style>
+            <Style x:Key="InfoAlertIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe903;"/>
+            </Style>
+            <Style x:Key="FAQIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe908;"/>
+            </Style>
+            <Style x:Key="TellFriendIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe909;"/>
+            </Style>
+            <Style x:Key="ContactIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe906;"/>
+            </Style>
+            <Style x:Key="ArrowRightIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe913;"/>
             </Style>
 
             <!--Global Styles-->

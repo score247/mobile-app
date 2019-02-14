@@ -5,6 +5,15 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="{Binding Title}">
+  <ContentPage.Resources>
+    <Style x:Key="LeagueStyle" TargetType="Label">
+      <Setter Property="TextColor" Value="#666" />
+      <Setter Property="FontSize" Value="10" />
+      <Setter Property="FontAttributes" Value="Bold" />
+      <Setter Property="VerticalTextAlignment" Value="Center" />
+      <Setter Property="HorizontalTextAlignment" Value="Start" />
+    </Style>
+  </ContentPage.Resources>
     <StackLayout>
         <ListView
                 ItemsSource="{Binding GroupMatches}"
