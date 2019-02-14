@@ -20,16 +20,25 @@ namespace LiveScoreApp.ViewModels
 
         public DelegateCommand NavigateCommand { get; }
 
+        public DelegateCommand OnClickRefreshCommand { get; }
+
         public MenuPageViewModel(INavigationService navigationService, IMenuService menuService)
             : base(navigationService)
         {
             MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
             NavigateCommand = new DelegateCommand(Navigate);
+            OnClickRefreshCommand = new DelegateCommand(NavigateRefreshSetting);
         }
 
         private async void Navigate()
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/");
+        }
+
+
+        private async void NavigateRefreshSetting()
+        {
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/AutomaticRefreshPage");
         }
     }
 }

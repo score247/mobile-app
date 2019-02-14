@@ -6,7 +6,8 @@
             xmlns:tournament="clr-namespace:Tournament.Views;assembly=Tournament"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
-            BarTextColor="#e6e6e6">
+            BarTextColor="#e6e6e6"
+            BarBackgroundColor="#161416">
     <TabbedPage.Children>
         <score:ScorePage Title="Scores" Icon="hamburger.png" />
         <ContentPage Title="Live" Icon="hamburger.png" />
