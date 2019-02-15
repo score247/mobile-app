@@ -1,7 +1,8 @@
-﻿using Xamarin.Forms;
-
-namespace Setting.Views
+﻿namespace Setting.Views
 {
+    using System;
+    using Xamarin.Forms;
+
     public partial class RefreshPage : ContentPage
     {
         public RefreshPage()
@@ -9,11 +10,6 @@ namespace Setting.Views
             InitializeComponent();
         }
 
-        //protected override bool OnBackButtonPressed()
-        //{
-        //    // If you want to continue going back
-        //    base.OnBackButtonPressed();
-        //    return false;
-        //}
+        private async void OnClickDoneButton(object sender, EventArgs args) => await Navigation.PopModalAsync();
     }
 }

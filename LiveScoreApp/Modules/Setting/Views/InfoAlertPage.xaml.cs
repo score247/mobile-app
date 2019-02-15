@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Setting.Views
 {
@@ -8,5 +9,7 @@ namespace Setting.Views
         {
             InitializeComponent();
         }
+
+        private async void OnClickDoneButton(object sender, EventArgs args) => await Navigation.PopModalAsync();
     }
 }

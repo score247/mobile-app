@@ -1,16 +1,11 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Setting.ViewModels
+﻿namespace Setting.ViewModels
 {
-	public class RefreshPageViewModel : BindableBase
-	{
-        public RefreshPageViewModel()
-        {
+    using Prism.Navigation;
 
+    public class RefreshPageViewModel : ViewModelBase
+    {
+        public RefreshPageViewModel(INavigationService navigationService) : base(navigationService)
+        {
         }
-	}
+    }
 }
