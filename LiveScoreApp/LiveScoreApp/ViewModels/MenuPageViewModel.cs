@@ -24,6 +24,12 @@ namespace LiveScoreApp.ViewModels
 
         public DelegateCommand OnClickDefaultReportCommand { get; }
 
+        public DelegateCommand OnClickDefaultLanguageCommand { get; }
+
+        public DelegateCommand OnClickInfoAlertCommand { get; }
+
+        public DelegateCommand OnClickFAQCommand { get; }
+
         public MenuPageViewModel(INavigationService navigationService, IMenuService menuService)
             : base(navigationService)
         {
@@ -31,6 +37,9 @@ namespace LiveScoreApp.ViewModels
             NavigateCommand = new DelegateCommand(Navigate);
             OnClickRefreshCommand = new DelegateCommand(NavigateRefreshSetting);
             OnClickDefaultReportCommand = new DelegateCommand(NavigateDefaultSportSetting);
+            OnClickDefaultLanguageCommand = new DelegateCommand(NavigateDefaultLanguageSetting);
+            OnClickInfoAlertCommand = new DelegateCommand(NavigateInfoAlertSetting);
+            OnClickFAQCommand = new DelegateCommand(NavigateFAQSetting);
         }
 
         private async void Navigate()
@@ -47,5 +56,21 @@ namespace LiveScoreApp.ViewModels
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/DefaultSportPage");
         }
+
+        private async void NavigateDefaultLanguageSetting()
+        {
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/DefaultLanguagePage");
+        }
+
+        private async void NavigateInfoAlertSetting()
+        {
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/InfoAlertPage");
+        }
+
+        private async void NavigateFAQSetting()
+        {
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/FAQPage");
+        }
+        
     }
 }

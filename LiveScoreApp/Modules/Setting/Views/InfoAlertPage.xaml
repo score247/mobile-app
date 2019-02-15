@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Setting.Views.InfoAlertPage"
+             Title="Info Alert">
+    <ContentPage.ToolbarItems x:Uid="toolbarItem">
+        <ToolbarItem Name="MenuItem1" Order="Primary" Text="Settings" Priority="0" />
+        <ToolbarItem Name="MenuItem2" Order="Primary" Text="Done" Priority="1"  />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="Start"
+                     Spacing="0">
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite Team Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource MenuLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite Player Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource MenuLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite Match Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource MenuLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite League Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource MenuLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite Nation Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource MenuLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Favorite Club Alert" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

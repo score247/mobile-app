@@ -15,6 +15,9 @@ namespace Setting
         {
             containerRegistry.RegisterForNavigation<RefreshPage, RefreshPageViewModel>();
             containerRegistry.RegisterForNavigation<DefaultSportPage, DefaultSportPageViewModel>();
+            containerRegistry.RegisterForNavigation<DefaultLanguagePage, DefaultLanguagePageViewModel>();
+            containerRegistry.RegisterForNavigation<InfoAlertPage, InfoAlertPageViewModel>();
+            containerRegistry.RegisterForNavigation<FAQPage, FAQPageViewModel>(); 
         }
     }
 }

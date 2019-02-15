@@ -8,47 +8,47 @@
              Title="Menu"
              BackgroundColor="#0F111C"
              WidthRequest="325">
-    <ContentPage.Resources>
+    <!--<ContentPage.Resources>
         <StyleSheetExtension Source="../Assets/styles.css" />
-    </ContentPage.Resources>
-    
+    </ContentPage.Resources>-->
     <StackLayout Orientation="Vertical"
-                 VerticalOptions="FillAndExpand"
-                 Spacing="0"
-                 Margin="0, 50, 0, 0">
+                     Spacing="0"
+                     Margin="0, 50, 0, 0">
         <StackLayout Orientation="Horizontal" 
                      HorizontalOptions="FillAndExpand" 
                      VerticalOptions="Center"
                      Margin="10,0,0,20">
-            <Label Style="{StaticResource BasketBallIcon}"/>
-            <Label TextColor="#fff" Text="Score247" />
+            <Label TextColor="#fff" Text="SCORE247" />
         </StackLayout>
-        
+
         <!-- Sports -->
-        <StackLayout BackgroundColor="#0F111C"
+        <StackLayout Orientation="Vertical">
+            <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
-            <Label Text="SPORT" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
-        </StackLayout>
-        <ListView ItemsSource="{Binding MenuItems}"
-                  SelectedItem="{Binding SelectedMenuItem}"
-                  SeparatorColor="#2E3245"
-                  BackgroundColor="#1D2133"
-                  SeparatorVisibility="None">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                            <Label Style="{StaticResource Icons}" Text="{Binding IconValue}" Margin="10" />
-                            <Label FlexLayout.Grow="9" Text="{Binding Title}" 
+                <Label Text="SPORT" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
+            </StackLayout>
+            <ListView ItemsSource="{Binding MenuItems}"
+                              SelectedItem="{Binding SelectedMenuItem}"
+                              SeparatorColor="#2E3245"
+                              BackgroundColor="#1D2133"
+                              SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
+                                <Label Style="{StaticResource Icons}" Text="{Binding IconValue}" Margin="10" />
+                                <Label FlexLayout.Grow="9" Text="{Binding Title}" 
                                    FontSize="14"
                                    TextColor="#fff"/>
-                            <Label Text="5" TextColor="#676C8B" FontSize="14" Margin="10, 12" />
-                        </FlexLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
+                                <Label Text="5" TextColor="#676C8B" FontSize="14" Margin="10, 12" />
+                            </FlexLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+
+
         <!-- Settings -->
         <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
@@ -77,7 +77,7 @@
                 <Label Style="{StaticResource ArrowRightIcon}" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe907;" Margin="10"/>
                 <Label FlexLayout.Grow="9" Text="Default sport" 
@@ -91,40 +91,47 @@
                 </FlexLayout.GestureRecognizers>
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe90a;" Margin="10"/>
-                <Label FlexLayout.Grow="9" Text="Default sport" 
+                <Label FlexLayout.Grow="9" Text="Default language" 
                                    FontSize="14"
                                    TextColor="#fff"/>
 
                 <StackLayout Orientation="Horizontal">
-                    <Image Source="flag-en.png" Aspect="AspectFit" />
+                    <Image Source="flag_en.png" Aspect="AspectFit" />
                     <Label Text="English" TextColor="#676C8B" FontSize="14" Margin="8,14,12,14" />
-                </StackLayout> 
+                </StackLayout>
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnClickDefaultLanguageCommand}" />
+                </FlexLayout.GestureRecognizers>
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe910;" Margin="10"/>
-                <Label FlexLayout.Grow="9" Text="Default sport" 
+                <Label FlexLayout.Grow="9" Text="Time zone" 
                                    FontSize="14"
                                    TextColor="#fff"/>
 
                 <Label Text="GMT+7" TextColor="#676C8B" FontSize="14" Margin="12,14" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10"/>
-                <Label FlexLayout.Grow="9" Text="Default sport" 
+                <Label FlexLayout.Grow="9" Text="Info alert" 
                                    FontSize="14"
                                    TextColor="#fff"/>
 
                 <Label Style="{StaticResource ArrowRightIcon}" />
+
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnClickInfoAlertCommand}" />
+                </FlexLayout.GestureRecognizers>
             </FlexLayout>
         </StackLayout>
-        
+
         <!-- Information -->
         <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
@@ -138,9 +145,12 @@
                                    TextColor="#fff"/>
 
                 <Label Style="{StaticResource ArrowRightIcon}" />
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding OnClickFAQCommand}" />
+                </FlexLayout.GestureRecognizers>
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10"/>
                 <Label FlexLayout.Grow="9" Text="Tell a friend" 
@@ -150,13 +160,13 @@
                 <Label Style="{StaticResource ArrowRightIcon}" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
-            
+
             <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource Icons}" Text="&#xe906;" Margin="10"/>
                 <Label FlexLayout.Grow="9" Text="Contact" 
                                    FontSize="14"
                                    TextColor="#fff"/>
- 
+
                 <Label Style="{StaticResource ArrowRightIcon}" />
             </FlexLayout>
         </StackLayout>

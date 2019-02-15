@@ -147,9 +147,6 @@
     <BundleResource Include="Resources\hamburger.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Flag1.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\livescore\demo.html" />
   </ItemGroup>
   <ItemGroup>
@@ -168,9 +165,6 @@
     <BundleResource Include="Resources\livescore\fonts\livescore.svg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag-en.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\league.png" />
   </ItemGroup>
   <ItemGroup>
@@ -181,6 +175,21 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\live.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_cn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_en.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_in.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_th.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_vn.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

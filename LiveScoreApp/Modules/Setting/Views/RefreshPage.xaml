@@ -4,8 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Setting.Views.RefreshPage"
-             BackgroundColor="#0F111C"
              Title="Automatic Refresh"
+             BackgroundColor="#0F111C"
              NavigationPage.HasBackButton="True"
              NavigationPage.BackButtonTitle="Back"
              NavigationPage.HasNavigationBar="True">
@@ -13,31 +13,18 @@
         <ToolbarItem Name="MenuItem1" Order="Primary" Text="Settings" Priority="0" />
         <ToolbarItem Name="MenuItem2" Order="Primary" Text="Done" Priority="1"  />
     </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-    </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout Orientation="Vertical"
                      HorizontalOptions="Start"
                      Spacing="0">
-            <FlexLayout Direction="Row" 
-                        JustifyContent="SpaceBetween"
-                        AlignItems="Center"
-                        HeightRequest="44"
-                        BackgroundColor="#1D2133">
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
                 <Label Text="Automatic Refresh" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
-            <FlexLayout Direction="Row" 
-                        JustifyContent="SpaceBetween"
-                        AlignItems="Center"
-                        HeightRequest="44"
-                        BackgroundColor="#1D2133">
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
                 <Label Text="Refresh Interval" TextColor="#fff" Margin="16,0" />
                 <StackLayout Orientation="Horizontal">
                     <Label Text="30 seconds" TextColor="#676C8B" VerticalOptions="Center" />
