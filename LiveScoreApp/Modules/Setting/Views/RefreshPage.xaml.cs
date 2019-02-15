@@ -8,5 +8,12 @@ namespace Setting.Views
         {
             InitializeComponent();
         }
+
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    // If you want to continue going back
+        //    base.OnBackButtonPressed();
+        //    return false;
+        //}
     }
 }

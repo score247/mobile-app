@@ -14,6 +14,7 @@ namespace Setting
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<RefreshPage, RefreshPageViewModel>();
+            containerRegistry.RegisterForNavigation<DefaultSportPage, DefaultSportPageViewModel>();
         }
     }
 }

@@ -6,13 +6,13 @@
             xmlns:tournament="clr-namespace:Tournament.Views;assembly=Tournament"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
-            BarTextColor="#e6e6e6"
+            BarTextColor="#666666"
             BarBackgroundColor="#161416">
     <TabbedPage.Children>
-        <score:ScorePage Title="Scores" Icon="hamburger.png" />
-        <ContentPage Title="Live" Icon="hamburger.png" />
-        <ContentPage Title="Favourites" Icon="hamburger.png" />
-        <tournament:TournamentPage Title="Menu" Icon="hamburger.png" />
-        <ContentPage Title="News" Icon="hamburger.png" />
+        <score:ScorePage Title="Scores" Icon="scores.png" />
+        <ContentPage Title="Live" Icon="live.png" />
+        <ContentPage Title="Favorites" Icon="Star.png" />
+        <tournament:TournamentPage Title="Leagues" Icon="league.png" />
+        <ContentPage Title="TV schedule" Icon="tv.png" />
     </TabbedPage.Children>
 </TabbedPage>

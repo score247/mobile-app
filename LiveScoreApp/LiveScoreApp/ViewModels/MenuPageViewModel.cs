@@ -22,12 +22,15 @@ namespace LiveScoreApp.ViewModels
 
         public DelegateCommand OnClickRefreshCommand { get; }
 
+        public DelegateCommand OnClickDefaultReportCommand { get; }
+
         public MenuPageViewModel(INavigationService navigationService, IMenuService menuService)
             : base(navigationService)
         {
             MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
             NavigateCommand = new DelegateCommand(Navigate);
             OnClickRefreshCommand = new DelegateCommand(NavigateRefreshSetting);
+            OnClickDefaultReportCommand = new DelegateCommand(NavigateDefaultSportSetting);
         }
 
         private async void Navigate()
@@ -38,6 +41,11 @@ namespace LiveScoreApp.ViewModels
         private async void NavigateRefreshSetting()
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/RefreshPage");
+        }
+
+        private async void NavigateDefaultSportSetting()
+        {
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/DefaultSportPage");
         }
     }
 }

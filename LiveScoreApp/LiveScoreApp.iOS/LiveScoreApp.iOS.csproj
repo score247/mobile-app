@@ -170,5 +170,17 @@
   <ItemGroup>
     <BundleResource Include="Resources\flag-en.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\league.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\tv.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\scores.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\live.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
