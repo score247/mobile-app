@@ -9,10 +9,30 @@
             BarTextColor="#666666"
             BarBackgroundColor="#161416">
     <TabbedPage.Children>
-        <score:ScorePage Title="Scores" Icon="scores.png" />
-        <ContentPage Title="Live" Icon="live.png" />
-        <ContentPage Title="Favorites" Icon="Star.png" />
-        <tournament:TournamentPage Title="Leagues" Icon="league.png" />
-        <ContentPage Title="TV schedule" Icon="tv.png" />
+        <NavigationPage Title="Scores" Icon="scores.png">
+            <x:Arguments>
+                <score:ScorePage Title="Scores" />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Live" Icon="live.png">
+            <x:Arguments>
+                <ContentPage Title="Live" />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Favorites" Icon="Star.png">
+            <x:Arguments>
+                <ContentPage Title="Favorites" />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="Leagues"  Icon="league.png">
+            <x:Arguments>
+                <tournament:TournamentPage Title="Leagues" />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="TV schedule" Icon="tv.png">
+            <x:Arguments>
+                <ContentPage Title="TV schedule" />
+            </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

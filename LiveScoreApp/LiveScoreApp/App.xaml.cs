@@ -30,7 +30,7 @@ namespace LiveScoreApp
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("MasterDetailPage/NavigationPage/MenuTabbedPage");
+            await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
