@@ -12,7 +12,7 @@ namespace LiveScoreApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuTabbedPage : TabbedPage
     {
-        public MenuTabbedPage ()
+        public MenuTabbedPage()
         {
             InitializeComponent();
         }

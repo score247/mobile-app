@@ -5,6 +5,9 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Prism.Modularity;
 using LiveScoreApp.Services;
+using LiveScoreApp.ViewModels;
+using Prism.Mvvm;
+using Prism.Navigation;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -29,7 +32,7 @@ namespace LiveScoreApp
         protected override async void OnInitialized()
         {
             InitializeComponent();
-
+            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewViewModel>();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
         }
 
@@ -41,6 +44,7 @@ namespace LiveScoreApp
             containerRegistry.RegisterForNavigation<MenuTabbedPage>();
             containerRegistry.RegisterForNavigation<Views.MasterDetailPage>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<SelectSportPage, SelectSportPageViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

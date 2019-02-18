@@ -9,9 +9,10 @@ namespace LiveScoreApp.ViewModels
 {
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; private set; }
+        protected INavigationService NavigationService { get; }
 
         private string _title;
+
         public string Title
         {
             get { return _title; }
@@ -25,22 +26,18 @@ namespace LiveScoreApp.ViewModels
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatingTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void Destroy()
         {
-
         }
     }
 }

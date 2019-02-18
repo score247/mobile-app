@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LiveScoreApp.Views.NavigationTitleView">
+    <ContentView.Content>
+        <StackLayout>
+            <FlexLayout JustifyContent="Center">
+                <Label  Text="{Binding SubTitle}" Style="{StaticResource labelStyle}" />
+                <Label Style="{StaticResource Icons}" Text="&#xe913;" FontSize="10" Margin="1.5, 1, 0, 0" />
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
+                </FlexLayout.GestureRecognizers>
+            </FlexLayout>
+            <Label x:Name="titleLabel" Style="{StaticResource labelStyle}" Text="{Binding Title}" FontSize="15"  HorizontalOptions="Center" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

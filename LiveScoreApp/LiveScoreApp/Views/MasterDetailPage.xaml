@@ -22,7 +22,7 @@
                 <StackLayout Orientation="Vertical"
                      Spacing="0"
                      Margin="0, 50, 0, 0">
-                    
+
                     <!-- Settings -->
                     <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
@@ -182,7 +182,6 @@
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
-            
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>
