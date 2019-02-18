@@ -6,6 +6,9 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Scores"
              BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="images/search.png" Priority="1"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
    
         <!--Scores Styles-->
@@ -33,23 +36,186 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
 
-        <Style x:Key="HomeTeamStyle" TargetType="Label">
-            <Setter Property="TextColor" Value="#30C2FF" />
+        <Style x:Key="TeamStyle" TargetType="Label">
             <Setter Property="FontSize" Value="12" />
+            <Setter Property="HeightRequest" Value="22"/>            
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="HomeTeamStyle" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
+            <Setter Property="TextColor" Value="#30C2FF" />
+            <Setter Property="Margin" Value="0,4,0,0"/>
         </Style>
 
-        <Style x:Key="AwayTeamStyle" TargetType="Label">
+        <Style x:Key="AwayTeamStyle" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
             <Setter Property="TextColor" Value="#fff" />
-            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="0,0,0,4"/>
         </Style>
-        
-        <Style x:Key="Scorefont" TargetType="Label">
-            <Setter Property="FontSize" Value="12" />
+
+        <Style x:Key="Scorefont" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
             <Setter Property="TextColor" Value="#fff" />
             <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="Margin" Value="0,0,20,0"/>
         </Style>
     </ContentPage.Resources>
     <StackLayout>
+        <FlexLayout Direction="Row"
+                    AlignItems="Stretch"
+                    JustifyContent="SpaceBetween"
+                    HeightRequest="32"
+                    Margin="10,8,10,10">
+            
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <Label Style="{StaticResource Icons}"
+                       Text="&#xe91e;" 
+                       FontSize="14"
+                       HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                       TextColor="#F24822" />
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0" Orientation="Vertical">
+                    <Label Text="25"
+                           TextColor="#939393"
+                           FontSize="18"
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="FRI" 
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="26" 
+                           TextColor="#939393"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="SAT"
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="27" 
+                           TextColor="#939393"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="SUN"
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="28" 
+                           TextColor="#F24822"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="MON"
+                           TextColor="#F24822"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="29" 
+                           TextColor="#939393"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="TUE"
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="30" 
+                           TextColor="#939393"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="WED"
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   HeightRequest="32"
+                   Margin="0,0,8,0"
+                   Padding="0">
+                <StackLayout Spacing="0">
+                    <Label Text="31" 
+                           TextColor="#939393"
+                           FontSize="18" 
+                           HorizontalTextAlignment="Center" />
+                    <Label Text="THU"
+                           TextColor="#939393"
+                           FontAttributes="Bold" 
+                           FontSize="6" 
+                           HorizontalTextAlignment="Center" />
+                </StackLayout>
+            </Frame>
+            
+            <Frame CornerRadius="5"
+                   BackgroundColor="#1D2133"
+                   WidthRequest="32"
+                   Padding="0">
+                <Label Style="{StaticResource Icons}"
+                   Text="&#xe91f;"
+                   HorizontalTextAlignment="Center"
+                   VerticalTextAlignment="Center"
+                   TextColor="#939393"
+                   FontSize="16" />
+            </Frame>
+            
+        </FlexLayout>
         <ListView
                 ItemsSource="{Binding GroupMatches}"
                 VerticalOptions="FillAndExpand"
@@ -63,7 +229,8 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell Height="28">
-                        <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#0F111C">
+                        <StackLayout Orientation="Horizontal" 
+                                     Spacing="0" BackgroundColor="#0F111C">
                             <Image Source="flag_league/flag_england.png"
                                        Grid.Row="0"
                                        Grid.Column="0"
@@ -84,11 +251,15 @@
                                        HorizontalOptions="EndAndExpand"
                                        Style="{StaticResource TimeStyle}" />
 
-                            <Label Style="{StaticResource Icons}" Text="&#xe915;"
-                                       Grid.Row="0"
-                                       Grid.Column="3"
-                                       WidthRequest="12"
-                                       Margin="8" />
+                            <Label Grid.Row="0"
+                                    Grid.Column="3"
+                                    WidthRequest="12"
+                                    Style="{StaticResource Icons}"
+                                    Text="&#xe915;"
+                                    TextColor="#666666"                                       
+                                    FontSize="12"
+                                    VerticalTextAlignment="Center"                                   
+                                    Margin="12,0" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -109,7 +280,7 @@
                                         <ColumnDefinition Width="50" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="36" />
+                                        <ColumnDefinition Width="25" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
@@ -123,43 +294,32 @@
 
                                     <Label Grid.Row="0"
                                         Grid.Column="1"
-                                        Text="{Binding HomeTeam}"
-                                        HeightRequest="26"
-                                        VerticalTextAlignment="Center"
+                                        Text="{Binding HomeTeam}"                                        
                                         Style="{StaticResource HomeTeamStyle}" />
                                     <Label Grid.Row="1"
                                         Grid.Column="1"
                                         Text="{Binding AwayTeam}"
-                                        HeightRequest="26"
-                                        VerticalTextAlignment="Center"
                                         Style="{StaticResource AwayTeamStyle}" />   
 
                                     <Label Grid.Row="0"
                                         Grid.Column="2"
                                         Text="{Binding HomeScore}"
-                                        HeightRequest="26"
-                                        VerticalTextAlignment="Center"
-                                        Style="{StaticResource Scorefont}" />
+                                        Style="{StaticResource Scorefont}"
+                                        Margin="0,4,20,0"/>
                                     <Label Grid.Row="1"
-                                        Grid.Column="2"
-                                        HeightRequest="26"
-                                        VerticalTextAlignment="Center"
-                                        Text="{Binding AwayScore}"
-                                        Style="{StaticResource Scorefont}" />
-                                    
-                                    <StackLayout Grid.RowSpan="2"
-                                            Grid.Column="3"
-                                            Orientation="Horizontal"
-                                                 HorizontalOptions="Center"
-                                                 VerticalOptions="Center">
-                                        <Label 
+                                            Grid.Column="2"
+                                            Text="{Binding AwayScore}"
+                                            Style="{StaticResource Scorefont}"
+                                           Margin="0,0,20,4"/>
+
+                                    <Label Grid.RowSpan="2"
+                                           Grid.Column="3"
                                            Style="{StaticResource Icons}"
                                            Text="&#xe90f;"
                                            TextColor="#666666"
-                                           FontSize="14"
-                                           WidthRequest="16"
-                                           Margin="8" />
-                                    </StackLayout>
+                                           FontSize="13"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalTextAlignment="Start"/>
                                 </Grid>
                             </StackLayout>
                         </ViewCell.View>

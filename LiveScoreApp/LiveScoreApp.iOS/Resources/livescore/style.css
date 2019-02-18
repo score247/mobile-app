@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'livescore';
-  src:  url('fonts/livescore.eot?gfvxnc');
-  src:  url('fonts/livescore.eot?gfvxnc#iefix') format('embedded-opentype'),
-    url('fonts/livescore.ttf?gfvxnc') format('truetype'),
-    url('fonts/livescore.woff?gfvxnc') format('woff'),
-    url('fonts/livescore.svg?gfvxnc#livescore') format('svg');
+  src:  url('fonts/livescore.eot?3yizpa');
+  src:  url('fonts/livescore.eot?3yizpa#iefix') format('embedded-opentype'),
+    url('fonts/livescore.ttf?3yizpa') format('truetype'),
+    url('fonts/livescore.woff?3yizpa') format('woff'),
+    url('fonts/livescore.svg?3yizpa#livescore') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,43 +24,13 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-detail:before {
+  content: "\e915";
+  color: #666;
+}
 .icon-checked:before {
   content: "\e914";
   color: #3ec28f;
-}
-.icon-detail .path1:before {
-  content: "\e915";
-  color: rgb(102, 102, 102);
-}
-.icon-detail .path2:before {
-  content: "\e916";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
-}
-.icon-detail .path3:before {
-  content: "\e917";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
-}
-.icon-detail .path4:before {
-  content: "\e918";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
-}
-.icon-detail .path5:before {
-  content: "\e919";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
-}
-.icon-detail .path6:before {
-  content: "\e91a";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
-}
-.icon-detail .path7:before {
-  content: "\e91b";
-  margin-left: -1em;
-  color: rgb(29, 33, 51);
 }
 .icon-arrow-down:before {
   content: "\e91c";
