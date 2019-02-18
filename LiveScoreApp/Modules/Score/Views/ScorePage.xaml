@@ -4,19 +4,51 @@
              x:Class="Score.Views.ScorePage"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="Scores">
-    <!--<NavigationPage.TitleView>
-        <Slider HeightRequest="44" WidthRequest="300" />
-    </NavigationPage.TitleView>-->
-  <ContentPage.Resources>
-    <Style x:Key="LeagueStyle" TargetType="Label">
-      <Setter Property="TextColor" Value="#666" />
-      <Setter Property="FontSize" Value="10" />
-      <Setter Property="FontAttributes" Value="Bold" />
-      <Setter Property="VerticalTextAlignment" Value="Center" />
-      <Setter Property="HorizontalTextAlignment" Value="Start" />
-    </Style>
-  </ContentPage.Resources>
+             Title="Scores"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+   
+        <!--Scores Styles-->
+
+        <Style x:Key="LeagueStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+        </Style>
+
+        <Style x:Key="TimeStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="11" />            
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+        </Style>
+
+        <Style x:Key="EventStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="HomeTeamStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#30C2FF" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style x:Key="AwayTeamStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+        
+        <Style x:Key="Scorefont" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+        </Style>
+    </ContentPage.Resources>
     <StackLayout>
         <ListView
                 ItemsSource="{Binding GroupMatches}"
@@ -26,17 +58,17 @@
                 CachingStrategy="RecycleElement"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Key}"
-                SeparatorColor="#1D2133"
+                SeparatorColor="#2E3245"
                 Style="{StaticResource listViewStyle}">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <ViewCell Height="25">
+                    <ViewCell Height="28">
                         <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#0F111C">
-                            <Image Source="Flag1.png"
+                            <Image Source="flag_league/flag_england.png"
                                        Grid.Row="0"
                                        Grid.Column="0"
                                        WidthRequest="16"
-                                       HeightRequest="16"
+                                       HeightRequest="12"
                                        Aspect="AspectFit"
                                        Margin="18, 8, 12, 8" />
 
@@ -52,7 +84,7 @@
                                        HorizontalOptions="EndAndExpand"
                                        Style="{StaticResource TimeStyle}" />
 
-                            <Image Source="Detail.png"
+                            <Label Style="{StaticResource Icons}" Text="&#xe915;"
                                        Grid.Row="0"
                                        Grid.Column="3"
                                        WidthRequest="12"
@@ -77,51 +109,57 @@
                                         <ColumnDefinition Width="50" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="45" />
+                                        <ColumnDefinition Width="36" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
-                                        <RowDefinition Height="10" />
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.RowSpan="3"
-                                   Grid.Column="0"
-                                   Text="FT"
-                                   Style="{StaticResource EventStyle}" />
+                                    <Label Grid.RowSpan="2"
+                                       Grid.Column="0"
+                                       Text="FT"
+                                       Style="{StaticResource EventStyle}" />
 
                                     <Label Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding HomeTeam}"
-                                Style="{StaticResource HomeTeamStyle}" />
-
-                                    <Label Grid.Row="2"
-                                Grid.Column="1"
-                                Text="{Binding AwayTeam}"
-                                Style="{StaticResource AwayTeamStyle}" />
+                                        Grid.Column="1"
+                                        Text="{Binding HomeTeam}"
+                                        HeightRequest="26"
+                                        VerticalTextAlignment="Center"
+                                        Style="{StaticResource HomeTeamStyle}" />
+                                    <Label Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding AwayTeam}"
+                                        HeightRequest="26"
+                                        VerticalTextAlignment="Center"
+                                        Style="{StaticResource AwayTeamStyle}" />   
 
                                     <Label Grid.Row="0"
-                                Grid.Column="2"
-                                Text="{Binding HomeScore}"
-                                Style="{StaticResource Scorefont}" />
-                                    <Label Grid.Row="2"
-                                    Grid.Column="2"
-                                    Text="{Binding AwayScore}"
-                                    Style="{StaticResource Scorefont}" />
-
-                                    <Button
-                                Text="&#xf005;"
-                                        Grid.RowSpan="3"
+                                        Grid.Column="2"
+                                        Text="{Binding HomeScore}"
+                                        HeightRequest="26"
+                                        VerticalTextAlignment="Center"
+                                        Style="{StaticResource Scorefont}" />
+                                    <Label Grid.Row="1"
+                                        Grid.Column="2"
+                                        HeightRequest="26"
+                                        VerticalTextAlignment="Center"
+                                        Text="{Binding AwayScore}"
+                                        Style="{StaticResource Scorefont}" />
+                                    
+                                    <StackLayout Grid.RowSpan="2"
                                             Grid.Column="3"
-                                            WidthRequest="12"
-                                            Margin="8"
-                                Style="{StaticResource btnStyle}">
-                                        <Button.FontFamily>
-                                            <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                        </Button.FontFamily>
-                                    </Button>
+                                            Orientation="Horizontal"
+                                                 HorizontalOptions="Center"
+                                                 VerticalOptions="Center">
+                                        <Label 
+                                           Style="{StaticResource Icons}"
+                                           Text="&#xe90f;"
+                                           TextColor="#666666"
+                                           FontSize="14"
+                                           WidthRequest="16"
+                                           Margin="8" />
+                                    </StackLayout>
                                 </Grid>
                             </StackLayout>
                         </ViewCell.View>

@@ -16,193 +16,173 @@
              BackgroundColor="#0F111C"
              WidthRequest="325">
             <!--<ContentPage.Resources>
-        <StyleSheetExtension Source="../Assets/styles.css" />
-    </ContentPage.Resources>-->
-            <StackLayout Orientation="Vertical"
+                <StyleSheetExtension Source="../Assets/styles.css" />
+            </ContentPage.Resources>-->
+            <ScrollView>
+                <StackLayout Orientation="Vertical"
                      Spacing="0"
                      Margin="0, 50, 0, 0">
-                <StackLayout Orientation="Horizontal"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="Center"
-                     Margin="10,0,0,20">
-                    <Label TextColor="#fff" Text="SCORE247" />
-                </StackLayout>
-
-                <!-- Sports -->
-                <StackLayout Orientation="Vertical">
+                    
+                    <!-- Settings -->
                     <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
-                        <Label Text="SPORT" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
+                        <Label Text="SETTINGS" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
                     </StackLayout>
-                    <ListView ItemsSource="{Binding MenuItems}"
-                              SelectedItem="{Binding SelectedMenuItem}"
-                              SeparatorColor="#2E3245"
-                              BackgroundColor="#1D2133"
-                              SeparatorVisibility="None">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                                        <Label Style="{StaticResource Icons}" Text="{Binding IconValue}" Margin="10" />
-                                        <Label FlexLayout.Grow="9" Text="{Binding Title}"
+                    <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe90d;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Refresh"
                                    FontSize="14"
                                    TextColor="#fff" />
-                                        <Label Text="5" TextColor="#676C8B" FontSize="14" Margin="10, 12" />
-                                    </FlexLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
 
-                <!-- Settings -->
-                <StackLayout BackgroundColor="#0F111C"
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="RefreshPage" />
+                            </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe904;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Clear Cache"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe907;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Default sport"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Text="Soccer" TextColor="#676C8B" FontSize="14" Margin="12,14" />
+
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer  Command="{Binding NavigateCommand}" CommandParameter="DefaultSportPage" />
+                            </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe90a;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Default language"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="flag_en.png" Aspect="AspectFit" />
+                                <Label Text="English" TextColor="#676C8B" FontSize="14" Margin="8,14,12,14" />
+                            </StackLayout>
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DefaultLanguagePage" />
+                            </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe910;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Time zone"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Text="GMT+7" TextColor="#676C8B" FontSize="14" Margin="12,14" />
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Notification"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Switch  IsToggled="True" Margin="12,0" />
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Info alert"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="InfoAlertPage" />
+                            </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                    </StackLayout>
+
+                    <!-- Information -->
+                    <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
-                    <Label Text="SETTINGS" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
-                </StackLayout>
-                <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe90d;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Refresh"
+                        <Label Text="INFORMATION" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
+                        <FlexLayout JustifyContent="SpaceAround"  Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="FAQ"
                                    FontSize="14"
                                    TextColor="#fff" />
 
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="RefreshPage" />
-                        </FlexLayout.GestureRecognizers>
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                            <FlexLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="FAQPage" />
+                            </FlexLayout.GestureRecognizers>
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
 
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center" StyleClass="border-top">
-                        <Label Style="{StaticResource Icons}" Text="&#xe904;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Clear Cache"
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Tell a friend"
                                    FontSize="14"
                                    TextColor="#fff" />
 
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
 
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe907;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Default sport"
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe906;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Contact"
                                    FontSize="14"
                                    TextColor="#fff" />
 
-                        <Label Text="Soccer" TextColor="#676C8B" FontSize="14" Margin="12,14" />
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
+                    </StackLayout>
 
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer  Command="{Binding NavigateCommand}" CommandParameter="DefaultSportPage" />
-                        </FlexLayout.GestureRecognizers>
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe90a;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Default language"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <StackLayout Orientation="Horizontal">
-                            <Image Source="flag_en.png" Aspect="AspectFit" />
-                            <Label Text="English" TextColor="#676C8B" FontSize="14" Margin="8,14,12,14" />
-                        </StackLayout>
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DefaultLanguagePage" />
-                        </FlexLayout.GestureRecognizers>
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe910;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Time zone"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Text="GMT+7" TextColor="#676C8B" FontSize="14" Margin="12,14" />
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Info alert"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="InfoAlertPage" />
-                        </FlexLayout.GestureRecognizers>
-                    </FlexLayout>
-                </StackLayout>
-
-                <!-- Information -->
-                <StackLayout BackgroundColor="#0F111C"
+                    <!-- My profiles -->
+                    <StackLayout BackgroundColor="#0F111C"
                      Padding="12, 7, 12, 7">
-                    <Label Text="INFORMATION" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
+                        <Label Text="MY PROFILES" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
+                    </StackLayout>
+                    <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Change Password"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
+                        <BoxView Style="{StaticResource MenuLine}" />
+
+                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                            <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
+                            <Label FlexLayout.Grow="9" Text="Sign out"
+                                   FontSize="14"
+                                   TextColor="#fff" />
+
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
+                    </StackLayout>
                 </StackLayout>
-                <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="FAQ"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                        <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="FAQPage" />
-                        </FlexLayout.GestureRecognizers>
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Tell a friend"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe906;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Contact"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                    </FlexLayout>
-                </StackLayout>
-
-                <!-- My profiles -->
-                <StackLayout BackgroundColor="#0F111C"
-                     Padding="12, 7, 12, 7">
-                    <Label Text="MY PROFILES" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
-                </StackLayout>
-                <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Change Password"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource MenuLine}" />
-
-                    <FlexLayout JustifyContent="SpaceAround" AlignContent="Center" AlignItems="Center">
-                        <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
-                        <Label FlexLayout.Grow="9" Text="Sign out"
-                                   FontSize="14"
-                                   TextColor="#fff" />
-
-                        <Label Style="{StaticResource ArrowRightIcon}" />
-                    </FlexLayout>
-                </StackLayout>
-            </StackLayout>
+            </ScrollView>
+            
         </ContentPage>
     </MasterDetailPage.Master>
 </MasterDetailPage>

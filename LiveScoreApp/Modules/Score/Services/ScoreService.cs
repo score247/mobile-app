@@ -15,14 +15,14 @@
         {
             return new List<Match>
                 {
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Round of 16" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Round of 16" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Round of 16" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group A" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group A" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group A" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group B" },
-                    new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group B" },
+                    new Match { HomeTeam = "Chelsea", AwayTeam = "Tottenham Hotspur", EventDate = DateTime.Today, GroupName = "ENGLAND EFL CUP" },
+                    new Match { HomeTeam = "Fortuna Sittard", AwayTeam = "Vitesse", EventDate = DateTime.Today, GroupName = "NETHERLANDS EREDIVISIE" },
+                    new Match { HomeTeam = "FC Utrecht", AwayTeam = "Willem II", EventDate = DateTime.Today, GroupName = "NETHERLANDS EREDIVISIE" },
+                    new Match { HomeTeam = "Feyenoord", AwayTeam = "Ajax Amsterdam", EventDate = DateTime.Today, GroupName = "NETHERLANDS EREDIVISIE" },
+                    new Match { HomeTeam = "SC Heerenveen", AwayTeam = "AZ Alkmaar", EventDate = DateTime.Today, GroupName = "NETHERLANDS EREDIVISIE" },
+                    new Match { HomeTeam = "Verona", AwayTeam = "Cosenza", EventDate = DateTime.Today, GroupName = "ITALY SERIE C: GROUP A" },
+                    new Match { HomeTeam = "Cararese Calcio 1908", AwayTeam = "As Lucchese Libertas 1905", EventDate = DateTime.Today, GroupName = "ITALY SERIE C: GROUP A" },
+                    new Match { HomeTeam = "Olbia Calcio 1905", AwayTeam = "Virtus Entella", EventDate = DateTime.Today, GroupName = "ITALY SERIE C: GROUP A" },
                     new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group C" },
                     new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group C" },
                     new Match { HomeTeam = "Manchester United", AwayTeam = "Chelsea", EventDate = DateTime.Today, GroupName = "Champions League Group D" },
