@@ -2,11 +2,13 @@
 <TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+            xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:tournament="clr-namespace:Tournament.Views;assembly=Tournament"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             xmlns:views="clr-namespace:LiveScoreApp.Views"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
+            x:Name="self"
             BarTextColor="#666666"
             BarBackgroundColor="#161416">
     <TabbedPage.Children>
@@ -14,7 +16,7 @@
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Scores" />
+                        <views:NavigationTitleView Title="Scores" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:ScorePage>
             </x:Arguments>

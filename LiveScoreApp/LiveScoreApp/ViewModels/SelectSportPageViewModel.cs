@@ -1,21 +1,26 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
+    using LiveScoreApp.Models;
+    using LiveScoreApp.Services;
     using Prism.Navigation;
+    using System.Collections.ObjectModel;
 
     public class SelectSportPageViewModel : ViewModelBase
     {
-        public SelectSportPageViewModel(INavigationService navigationService) : base(navigationService)
+        private SportItem selectedSportItem;
+
+        public SportItem SelectedSportItem
         {
+            get => selectedSportItem;
+            set => SetProperty(ref selectedSportItem, value);
         }
 
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
-        }
+        public ObservableCollection<SportItem> SportItems { get; set; }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public SelectSportPageViewModel(INavigationService navigationService, ISportService sportService)
+            : base(navigationService)
         {
-            base.OnNavigatedTo(parameters);
+            SportItems = new ObservableCollection<SportItem>(sportService.GetSportItems());
         }
     }
 }

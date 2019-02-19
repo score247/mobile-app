@@ -13,6 +13,10 @@ namespace LiveScoreApp.Views
         public MainPage()
         {
             InitializeComponent();
+
+#if DEBUG
+            this.InitComponent();
+#endif
         }
     }
 }

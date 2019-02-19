@@ -16,7 +16,7 @@ namespace LiveScoreApp.Views
     {
         public NavigationTitleView()
         {
-            InitializeComponent();
+            this.InitComponent(InitializeComponent);
             titleLabel.BindingContext = this;
         }
 

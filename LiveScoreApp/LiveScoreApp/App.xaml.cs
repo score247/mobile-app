@@ -31,20 +31,25 @@ namespace LiveScoreApp
 
         protected override async void OnInitialized()
         {
+#if DEBUG
+            HotReloader.Current.Start();
+#endif
+
             InitializeComponent();
-            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewViewModel>();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IMenuService, MenuService>();
+            containerRegistry.Register<ISportService, SportService>();
 
             containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedPage>();
             containerRegistry.RegisterForNavigation<Views.MasterDetailPage>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SelectSportPage, SelectSportPageViewModel>();
+            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

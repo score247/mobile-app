@@ -1,22 +1,19 @@
-﻿using LiveScoreApp.Views;
-using Prism.Commands;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace LiveScoreApp.ViewModels
+﻿namespace LiveScoreApp.ViewModels
 {
+    using LiveScoreApp.Models;
+    using LiveScoreApp.Services;
+    using Prism.Commands;
+    using Prism.Navigation;
+    using System.Collections.ObjectModel;
+
     public class NavigationTitleViewViewModel : ViewModelBase
     {
-        private string _title;
+        private string title;
 
         public string SubTitle
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
 
         public DelegateCommand SelectSportCommand { get; set; }
@@ -24,7 +21,7 @@ namespace LiveScoreApp.ViewModels
         public NavigationTitleViewViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            SubTitle = "Test;";
+            SubTitle = "Soccer";
             SelectSportCommand = new DelegateCommand(NavigateSelectSportPage);
         }
 

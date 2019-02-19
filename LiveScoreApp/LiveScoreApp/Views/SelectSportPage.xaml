@@ -4,25 +4,32 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LiveScoreApp.Views.SelectSportPage"
+             Title="Select Sport"
              BackgroundColor="#0F111C">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="MenuItem2" Order="Primary" Text="Done" Priority="1" />
+        <ToolbarItem Name="MenuItem2" Order="Primary" Text="Done" Priority="1" Clicked="OnClickDoneButton" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical" Spacing="0">
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label Text="Soccer" TextColor="#fff" Margin="16,0" />
-            <Label Style="{StaticResource Icons}" Text="&#xe914;" TextColor="#3EC28F" FontSize="14" Margin="16,0" />
-        </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
-
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label Text="Basketball" TextColor="#fff" Margin="16,0" />
-        </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
-
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label Text="E-Sport" TextColor="#fff" Margin="16,0" />
-        </FlexLayout>
+    <StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+        <ListView ItemsSource="{Binding SportItems}"
+                  SelectedItem="{Binding SelectedSportItem}"
+                  BackgroundColor="#1D2133"
+                  SeparatorColor="#2E3245"
+                  VerticalOptions="FillAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                            <Label Text="{Binding Name}" TextColor="#fff" Margin="16,0" />
+                            <Label Style="{StaticResource Icons}" IsVisible="{Binding IsVisible}" Text="&#xe914;" TextColor="#3EC28F" FontSize="14" Margin="16,0" />
+                        </FlexLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <StackLayout Orientation="Horizontal">
+                </StackLayout>
+            </ListView.Footer>
+        </ListView>
     </StackLayout>
 </ContentPage>

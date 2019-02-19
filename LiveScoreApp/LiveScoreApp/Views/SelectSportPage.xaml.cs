@@ -1,12 +1,15 @@
-﻿using Xamarin.Forms;
-
-namespace LiveScoreApp.Views
+﻿namespace LiveScoreApp.Views
 {
+    using System;
+    using Xamarin.Forms;
+
     public partial class SelectSportPage : ContentPage
     {
         public SelectSportPage()
         {
-            InitializeComponent();
+            this.InitComponent(InitializeComponent);
         }
+
+        private async void OnClickDoneButton(object sender, EventArgs args) => await Navigation.PopModalAsync();
     }
 }
