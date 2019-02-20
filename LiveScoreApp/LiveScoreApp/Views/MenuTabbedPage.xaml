@@ -12,7 +12,7 @@
             BarTextColor="#666666"
             BarBackgroundColor="#161416">
     <TabbedPage.Children>
-        <NavigationPage Title="Scores" Icon="scores.png">
+        <!--<NavigationPage Title="Scores" Icon="scores.png">
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
@@ -20,23 +20,34 @@
                     </NavigationPage.TitleView>
                 </score:ScorePage>
             </x:Arguments>
+        </NavigationPage>-->
+
+        <NavigationPage Title="Scores" Icon="images/scores.png">
+            <x:Arguments>
+                <score:MatchInfoPage Title="Scores">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="Match Info" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:MatchInfoPage>
+            </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Live" Icon="live.png">
+
+        <NavigationPage Title="Live" Icon="images/live.png">
             <x:Arguments>
                 <ContentPage Title="Live" />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Favorites" Icon="Star.png">
+        <NavigationPage Title="Favorites" Icon="images/star.png">
             <x:Arguments>
                 <ContentPage Title="Favorites" />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Leagues"  Icon="league.png">
+        <NavigationPage Title="Leagues"  Icon="images/league.png">
             <x:Arguments>
-                <tournament:TournamentPage Title="Leagues" />
+                <tournament:TournamentPage Title="images/Leagues" />
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="TV schedule" Icon="tv.png">
+        <NavigationPage Title="TV schedule" Icon="images/tv.png">
             <x:Arguments>
                 <ContentPage Title="TV schedule" />
             </x:Arguments>

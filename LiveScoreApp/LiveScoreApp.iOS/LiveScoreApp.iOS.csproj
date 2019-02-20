@@ -144,10 +144,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\Star.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\hamburger.png" />
+    <BundleResource Include="Resources\images\hamburger.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\livescore\demo.html" />
@@ -168,31 +165,31 @@
     <BundleResource Include="Resources\livescore\fonts\livescore.svg" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\league.png" />
+    <BundleResource Include="Resources\images\league.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\tv.png" />
+    <BundleResource Include="Resources\images\tv.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\scores.png" />
+    <BundleResource Include="Resources\images\scores.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\live.png" />
+    <BundleResource Include="Resources\images\live.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag_cn.png" />
+    <BundleResource Include="Resources\images\flag_cn.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag_en.png" />
+    <BundleResource Include="Resources\images\flag_en.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag_in.png" />
+    <BundleResource Include="Resources\images\flag_in.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag_th.png" />
+    <BundleResource Include="Resources\images\flag_th.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\flag_vn.png" />
+    <BundleResource Include="Resources\images\flag_vn.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\flag_league\flag_england.png" />
@@ -202,6 +199,21 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logos\logo_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logos\logo_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\card_yellow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\star.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

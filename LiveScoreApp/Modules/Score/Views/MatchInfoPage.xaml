@@ -4,30 +4,227 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Score.Views.MatchInfoPage"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="#1D2133">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Favorite" />
+        <ToolbarItem Icon="images/star.png" />
     </ContentPage.ToolbarItems>
-    <StackLayout Orientation="Vertical">
-        <FlexLayout Direction="Row">
-            <StackLayout>
-                <Image Source="logos/logo_1.png" Aspect="AspectFit"/>
-                <Label Text="Verona" TextColor="#30C2FF" FontSize="12"/>
-            </StackLayout>
-            <StackLayout>
-                <Frame BackgroundColor="#3EC28F" Padding="0">
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                        <Label Text="2" FontSize="12" TextColor="#fff" />
-                        <Label Text="-" FontSize="12" TextColor="#fff" />
-                        <Label Text="1" FontSize="12" TextColor="#fff" />
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="TextColor" Value="#fff" />
+        </Style>
+        <Style x:Key="TextTab" TargetType="Label">
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="8,0"/>            
+        </Style>
+        <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal"/>
+            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Key="MatchScore" TargetType="Label">
+            <Setter Property="TextColor" Value="#3EC28F" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <StackLayout Orientation="Vertical"
+                 HorizontalOptions="FillAndExpand"
+                 Spacing="0">
+            <!-- Match Score -->
+            <StackLayout BackgroundColor="#0F111C">
+                <FlexLayout Direction="Row"
+                    AlignItems="Stretch"
+                    JustifyContent="Center"
+                    Margin="0,20">
+                    <StackLayout Margin="0,0,50,0">
+                        <Image Source="logos/logo_1.png" Aspect="AspectFit"/>
+                        <Label Text="Verona" TextColor="#30C2FF"/>
                     </StackLayout>
-                </Frame>
-                <Label Text="Full Time" TextColor="#666" FontSize="10" HorizontalTextAlignment="Center" />
+                    <StackLayout FlexLayout.Basis="50"
+                         Margin="0"
+                         Padding="0">
+                        <Frame BackgroundColor="#3EC28F"
+                               HeightRequest="20"
+                               WidthRequest="48"
+                               CornerRadius="10"
+                               Padding="0"
+                               Margin="0,18,0,0"
+                               HasShadow="False">
+                            <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center">
+                                <Label Text="2" FontAttributes="Bold" />
+                                <Label Text="-" FontAttributes="Bold" />
+                                <Label Text="1" />
+                            </StackLayout>
+                        </Frame>
+                        <Label Text="Full Time" 
+                               TextColor="#666"
+                               FontSize="10"
+                               FontAttributes="Bold"
+                               HorizontalTextAlignment="Center"/>
+                    </StackLayout>
+                    <StackLayout Margin="50,0,0,0">
+                        <Image Source="logos/logo_2.png" Aspect="AspectFit"/>
+                        <Label Text="Cosenza" />
+                    </StackLayout>
+                </FlexLayout>
             </StackLayout>
-            <StackLayout>
-                <Image Source="logos/logo_12.png" Aspect="AspectFit"/>
-                <Label Text="Cosenza" TextColor="#30C2FF" FontSize="12"/>
+
+            <!-- Tab list -->
+            <ScrollView Orientation="Horizontal" 
+                    HeightRequest="24"
+                    Padding="8,0"
+                    BackgroundColor="#0F111C">
+                <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
+                    <Label Text="INFO" Style="{StaticResource TextTab}" TextColor="#FFF" FontAttributes="Bold" Margin="8,0" FontSize="10" />
+                    <Label Text="TRACKER" TextColor="#666" FontAttributes="Bold" Margin="8,0" FontSize="10" />
+                    <Label Text="STATS" Style="{StaticResource TextTab}" />
+                    <Label Text="LINE-UPS" Style="{StaticResource TextTab}" />
+                    <Label Text="H2H" Style="{StaticResource TextTab}" />
+                    <Label Text="TABLE" Style="{StaticResource TextTab}" />
+                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
+                </StackLayout>
+            </ScrollView>
+            <!-- Tab Content -->
+            <FlexLayout Direction="Column"
+                    JustifyContent="Center" 
+                    AlignItems="Stretch">
+                <Grid Margin="16,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="12'" HorizontalTextAlignment="Start" Margin="8,0" />
+                    <StackLayout Grid.Column="2" Orientation="Horizontal" HorizontalOptions="End">
+                        <Label  Text="Carlos Embalo" FontAttributes="Bold" TextColor="#fff" HorizontalTextAlignment="Start" />
+                        <Image Source="images/card_yellow.png"/>
+                    </StackLayout>
+                </Grid>
+                <Grid Margin="16,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FlexLayout Grid.Column="0"
+                             Direction="Row"
+                            JustifyContent="SpaceBetween">
+                        <Label  Text="34'" HorizontalTextAlignment="Start" Margin="4,0" />
+                        <Image Source="images/ball.png" Margin="0,0,4,0" />
+                        <Label Text="Lumbomir Tu" FontAttributes="Bold" />
+                    </FlexLayout>
+                    <Label Grid.Column="1" Text="1 - 0" Style="{StaticResource MatchScore}" />
+                </Grid>
+                <Grid Margin="16,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FlexLayout Grid.Column="0"
+                             Direction="Row"                                
+                            JustifyContent="SpaceBetween">
+                        <Label Text="54'" FlexLayout.Shrink="0" />
+                        <Image Source="images/card_yellow.png" Margin="4,0" FlexLayout.Shrink="0" />
+                        <Label Text="Jacob Rasussen" FontAttributes="Bold" FlexLayout.Shrink="0" />
+                    </FlexLayout>
+                </Grid>
+                <Grid Margin="16,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <FlexLayout Grid.Column="0"
+                             Direction="Row"
+                            JustifyContent="SpaceBetween">
+                        <Label  Text="63'" HorizontalTextAlignment="Start" Margin="4,0" />
+                        <Image Source="images/ball.png" Margin="0,0,4,0" />
+                        <Label Text="Giovani Lorenzo" FontAttributes="Bold" />
+                    </FlexLayout>
+                    <Label Grid.Column="1" Text="2 - 0" Style="{StaticResource MatchScore}" />
+                </Grid>
+                <Grid Margin="16,22">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Text="88'" HorizontalTextAlignment="Start" Margin="4,0" />
+                    <Label Grid.Column="1" Text="2 - 0" Style="{StaticResource MatchScore}" />
+                    <FlexLayout Grid.Column="2"
+                             Direction="Row"
+                            AlignItems="Start"
+                            JustifyContent="End">
+                        <StackLayout Orientation="Vertical"
+                                 Spacing="0">
+                            <Label Text="Darko Lazovic" FontAttributes="Bold" />
+                            <Label Text="Daniel Bessa" TextColor="#666" FontAttributes="Bold" />
+                        </StackLayout>
+                        <Image Source="images/ball.png" Margin="4,4,0,0" />
+                    </FlexLayout>
+                </Grid>
+            </FlexLayout>
+
+            <!-- Match info -->
+            <StackLayout BackgroundColor="#0F111C"
+                   Padding="16,0"
+                   HeightRequest="24"
+                   Orientation="Horizontal"
+                   VerticalOptions="Center">
+                <Label Text="MATCH INFO" 
+                   TextColor="#666" 
+                   FontAttributes="Bold"
+                   FontSize="10"
+                   VerticalTextAlignment="Center"/>
             </StackLayout>
-        </FlexLayout>
-    </StackLayout>
+            <Grid Margin="16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Referee:" />
+                <Label Grid.Column="1" Text="Federico La Penna (Italy)" FontAttributes="Bold" />
+            </Grid>
+            <Grid Margin="16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Venue:" TextColor="#fff" />
+                <Label Grid.Column="1" Text="Carlo Castellany" FontAttributes="Bold" />
+            </Grid>
+            <Grid Margin="16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Date and Time:" />
+                <Label Grid.Column="1" Text="15:00 Jan 25, 2019" FontAttributes="Bold" />
+            </Grid>
+            <Grid Margin="16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Spectators:" />
+                <Label Grid.Column="1" Text="6215" FontAttributes="Bold" />
+            </Grid>
+            <Grid Margin="16,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="League:" />
+                <Label Grid.Column="1" Text="Serie A Italy" FontAttributes="Bold" />
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </ContentPage>
