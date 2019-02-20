@@ -9,7 +9,5 @@
         {
             InitializeComponent();
         }
-
-        private async void OnClickDoneButton(object sender, EventArgs args) => await Navigation.PopModalAsync();
     }
 }

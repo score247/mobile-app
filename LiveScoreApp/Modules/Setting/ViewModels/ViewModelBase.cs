@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Navigation;
 
 namespace Setting.ViewModels
@@ -6,6 +7,7 @@ namespace Setting.ViewModels
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; }
+        public DelegateCommand DoneCommand { get; set; }
 
         private string _title;
 
@@ -18,6 +20,7 @@ namespace Setting.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
+            DoneCommand = new DelegateCommand(OnDone);
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
@@ -34,6 +37,11 @@ namespace Setting.ViewModels
 
         public virtual void Destroy()
         {
+        }
+
+        protected virtual async void OnDone()
+        {
+            await NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }
 }

@@ -27,7 +27,7 @@
 
         private async void NavigateSelectSportPage()
         {
-            await NavigationService.NavigateAsync("NavigationPage/SelectSportPage");
+            await NavigationService.NavigateAsync("NavigationPage/SelectSportPage", useModalNavigation: true);
         }
     }
 }
