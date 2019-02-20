@@ -1,8 +1,10 @@
 ﻿namespace Score.ViewModels
 {
+    using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;
     using Score.Services;
+    using Score.Views;
     using System.Collections.ObjectModel;
     using System.Linq;
 
@@ -10,6 +12,8 @@
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
         private IScoreService scoreService;
+
+        public DelegateCommand SelectMatchCommand { get; set; }
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -21,13 +25,14 @@
             : base(navigationService)
         {
             this.scoreService = scoreService;
+            var matches = scoreService.GetAll();
+            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
+            SelectMatchCommand = new DelegateCommand(OnSelectMatch);
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        private async void OnSelectMatch()
         {
-            var matches = scoreService.GetAll();
-
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
+            await NavigationService.NavigateAsync(nameof(MatchInfoPage));
         }
     }
 }

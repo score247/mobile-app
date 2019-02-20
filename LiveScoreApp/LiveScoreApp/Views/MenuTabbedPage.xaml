@@ -12,7 +12,7 @@
             BarTextColor="#666666"
             BarBackgroundColor="#161416">
     <TabbedPage.Children>
-        <!--<NavigationPage Title="Scores" Icon="scores.png">
+        <NavigationPage Title="Scores" Icon="images/scores.png">
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
@@ -20,9 +20,9 @@
                     </NavigationPage.TitleView>
                 </score:ScorePage>
             </x:Arguments>
-        </NavigationPage>-->
+        </NavigationPage>
 
-        <NavigationPage Title="Scores" Icon="images/scores.png">
+        <!--<NavigationPage Title="Scores" Icon="images/scores.png">
             <x:Arguments>
                 <score:MatchInfoPage Title="Scores">
                     <NavigationPage.TitleView>
@@ -30,7 +30,7 @@
                     </NavigationPage.TitleView>
                 </score:MatchInfoPage>
             </x:Arguments>
-        </NavigationPage>
+        </NavigationPage>-->
 
         <NavigationPage Title="Live" Icon="images/live.png">
             <x:Arguments>
