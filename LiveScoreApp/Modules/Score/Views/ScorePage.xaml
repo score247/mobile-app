@@ -267,47 +267,51 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <Grid HorizontalOptions="FillAndExpand"
+                            <StackLayout BackgroundColor="Red"
+                                         Orientation="Vertical"
+                                         VerticalOptions="StartAndExpand"
+                                         Spacing="0">
+                                <Grid HorizontalOptions="FillAndExpand"
                                       BackgroundColor="#1D2133"
                                       RowSpacing="0"
                                       ColumnSpacing="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="32" />
-                                    <ColumnDefinition Width="25" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto" />
-                                    <RowDefinition Height="auto" />
-                                </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="32" />
+                                        <ColumnDefinition Width="25" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
 
-                                <Label Grid.RowSpan="2"
+                                    <Label Grid.RowSpan="2"
                                        Grid.Column="0"
                                        Text="FT"
                                        Style="{StaticResource EventStyle}" />
 
-                                <Label Grid.Row="0"
+                                    <Label Grid.Row="0"
                                         Grid.Column="1"
                                         Text="{Binding HomeTeam}"
                                         Style="{StaticResource HomeTeamStyle}" />
-                                <Label Grid.Row="1"
+                                    <Label Grid.Row="1"
                                         Grid.Column="1"
                                         Text="{Binding AwayTeam}"
                                         Style="{StaticResource AwayTeamStyle}" />
 
-                                <Label Grid.Row="0"
+                                    <Label Grid.Row="0"
                                         Grid.Column="2"
                                         Text="{Binding HomeScore}"
                                         Style="{StaticResource Scorefont}"
                                         Margin="0,4,20,0" />
-                                <Label Grid.Row="1"
+                                    <Label Grid.Row="1"
                                             Grid.Column="2"
                                             Text="{Binding AwayScore}"
                                             Style="{StaticResource Scorefont}"
                                            Margin="0,0,20,4" />
 
-                                <Label Grid.RowSpan="2"
+                                    <Label Grid.RowSpan="2"
                                            Grid.Column="3"
                                            Style="{StaticResource Icons}"
                                            Text="&#xe90f;"
@@ -315,10 +319,8 @@
                                            FontSize="13"
                                            VerticalTextAlignment="Center"
                                            HorizontalTextAlignment="Start" />
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="MatchInfoPage" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
+                                </Grid>
+                            </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
                 </DataTemplate>

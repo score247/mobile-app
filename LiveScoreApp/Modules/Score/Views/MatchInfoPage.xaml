@@ -1,19 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            xmlns:score="clr-namespace:Score.Views;assembly=Score"
-            prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="Score.Views.MatchInfoPage">
-    <TabbedPage.Children>
-                <score:ScorePage Title="Scores" />
-       
-                <ContentPage Title="Live" />
-           
-      
-                <ContentPage Title="Favorites" />
-        
-                <ContentPage Title="TV schedule" />
-            
-    </TabbedPage.Children>
-</TabbedPage>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Score.Views.MatchInfoPage"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Favorite" />
+    </ContentPage.ToolbarItems>
+    <StackLayout Orientation="Vertical">
+        <FlexLayout Direction="Row">
+            <StackLayout>
+                <Image Source="logos/logo_1.png" Aspect="AspectFit"/>
+                <Label Text="Verona" TextColor="#30C2FF" FontSize="12"/>
+            </StackLayout>
+            <StackLayout>
+                <Frame BackgroundColor="#3EC28F" Padding="0">
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                        <Label Text="2" FontSize="12" TextColor="#fff" />
+                        <Label Text="-" FontSize="12" TextColor="#fff" />
+                        <Label Text="1" FontSize="12" TextColor="#fff" />
+                    </StackLayout>
+                </Frame>
+                <Label Text="Full Time" TextColor="#666" FontSize="10" HorizontalTextAlignment="Center" />
+            </StackLayout>
+            <StackLayout>
+                <Image Source="logos/logo_12.png" Aspect="AspectFit"/>
+                <Label Text="Cosenza" TextColor="#30C2FF" FontSize="12"/>
+            </StackLayout>
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

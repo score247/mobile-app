@@ -4,14 +4,14 @@
              x:Class="LiveScoreApp.Views.NavigationTitleView">
     <ContentView.Content>
         <StackLayout>
-            <FlexLayout JustifyContent="Center">
-                <Label  Text="{Binding SubTitle}" Style="{StaticResource labelStyle}" />
-                <Label Style="{StaticResource Icons}" Text="&#xe913;" FontSize="10" Margin="1.5, 1, 0, 0" />
+            <FlexLayout JustifyContent="Center" AlignItems="Center">
+                <Label x:Name="sportLabel" Style="{StaticResource labelStyle}" Text="{Binding Sport}" FontSize="9" TextColor="#fff" FontAttributes="Bold" HorizontalOptions="Center" />
+                <Label Style="{StaticResource Icons}" Text="&#xe91c;" FontSize="4" TextColor="#fff" Margin="2,0,0,0" />
                 <FlexLayout.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
                 </FlexLayout.GestureRecognizers>
             </FlexLayout>
-            <Label x:Name="titleLabel" Style="{StaticResource labelStyle}" Text="{Binding Title}" FontSize="15"  HorizontalOptions="Center" />
+            <Label x:Name="titleLabel" Style="{StaticResource labelStyle}" Text="{Binding Title}" FontSize="12"  HorizontalOptions="Center" />            
         </StackLayout>
     </ContentView.Content>
 </ContentView>

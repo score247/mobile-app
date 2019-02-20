@@ -18,6 +18,7 @@ namespace LiveScoreApp.Views
         {
             this.InitComponent(InitializeComponent);
             titleLabel.BindingContext = this;
+            sportLabel.BindingContext = this;
         }
 
         public static readonly BindableProperty TitleProperty
@@ -27,6 +28,15 @@ namespace LiveScoreApp.Views
         {
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
+        }
+
+        public static readonly BindableProperty SportProperty
+            = BindableProperty.Create("Sport", typeof(string), typeof(NavigationTitleView), string.Empty);
+
+        public string Sport
+        {
+            get { return (string)GetValue(SportProperty); }
+            set { SetValue(SportProperty, value); }
         }
     }
 }
