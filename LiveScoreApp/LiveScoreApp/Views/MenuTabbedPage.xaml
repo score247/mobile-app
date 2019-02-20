@@ -34,7 +34,11 @@
 
         <NavigationPage Title="Live" Icon="images/live.png">
             <x:Arguments>
-                <ContentPage Title="Live" />
+                <ContentPage Title="Live">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="Live" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </ContentPage>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Favorites" Icon="images/star.png">

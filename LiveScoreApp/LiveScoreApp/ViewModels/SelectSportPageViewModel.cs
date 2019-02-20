@@ -2,13 +2,16 @@
 {
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
+    using LiveScoreApp.Settings;
     using Prism.Commands;
     using Prism.Navigation;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
 
     public class SelectSportPageViewModel : ViewModelBase
     {
         private SportItem selectedSportItem;
+        private ObservableCollection<SportItem> sportItems;
 
         public SportItem SelectedSportItem
         {
@@ -18,16 +21,35 @@
 
         public DelegateCommand SelectSportItemCommand { get; set; }
 
-        public ObservableCollection<SportItem> SportItems { get; set; }
+        public DelegateCommand DoneCommand { get; set; }
 
-        public SelectSportPageViewModel(INavigationService navigationService, ISportService sportService)
+        public ObservableCollection<SportItem> SportItems
+        {
+            get => sportItems;
+            set => SetProperty(ref sportItems, value);
+        }
+
+        public SelectSportPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            SportItems = new ObservableCollection<SportItem>(sportService.GetSportItems());
             SelectSportItemCommand = new DelegateCommand(OnSelectSportItem);
+            DoneCommand = new DelegateCommand(OnDone);
+        }
+
+        public override void OnNavigatingTo(INavigationParameters parameters)
+        {
+            SportItems = new ObservableCollection<SportItem>(parameters["sportItems"] as IEnumerable<SportItem>);
         }
 
         private async void OnSelectSportItem()
+        {
+            Settings.CurrentSportName = SelectedSportItem.Name;
+            Settings.CurrentSportId = SelectedSportItem.Id;
+
+            await NavigationService.GoBackAsync(useModalNavigation: true);
+        }
+
+        private async void OnDone()
         {
             await NavigationService.GoBackAsync(useModalNavigation: true);
         }

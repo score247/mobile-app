@@ -16,7 +16,7 @@ namespace LiveScoreApp.Services
         {
             return new List<SportItem>
            {
-               new SportItem {Id = 1, Name = "Soccer", NumberOfEvent = 2, IsVisible = true},
+               new SportItem {Id = 1, Name = "Soccer", NumberOfEvent = 2},
                new SportItem {Id = 2, Name = "Tennis", NumberOfEvent = 3},
                new SportItem {Id = 3, Name = "ESport", NumberOfEvent = 4},
                new SportItem {Id = 4, Name = "Hockey", NumberOfEvent = 5},

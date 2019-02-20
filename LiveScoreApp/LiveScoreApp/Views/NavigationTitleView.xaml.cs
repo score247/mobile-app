@@ -28,6 +28,5 @@ namespace LiveScoreApp.Views
             get { return (string)GetValue(TitleProperty); }
             set { SetValue(TitleProperty, value); }
         }
-
     }
 }
