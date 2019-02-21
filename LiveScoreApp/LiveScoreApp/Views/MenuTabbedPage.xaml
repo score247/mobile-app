@@ -24,11 +24,11 @@
 
         <!--<NavigationPage Title="Scores" Icon="images/scores.png">
             <x:Arguments>
-                <score:MatchInfoPage Title="Scores">
+                <score:MatchTrackerPage Title="Scores">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="Match Info" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </score:MatchInfoPage>
+                </score:MatchTrackerPage>
             </x:Arguments>
         </NavigationPage>-->
 

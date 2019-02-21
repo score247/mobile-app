@@ -17,6 +17,7 @@
             containerRegistry.Register<IScoreService, ScoreService>();
             containerRegistry.RegisterForNavigation<ScorePage, ScorePageViewModel>();
             containerRegistry.RegisterForNavigation<MatchInfoPage, MatchInfoPageViewModel>();
+            containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
         }
     }
 }
