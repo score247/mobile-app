@@ -1,5 +1,6 @@
 ﻿namespace Score.ViewModels
 {
+    using LiveScoreApp.Core.Settings;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;
@@ -11,9 +12,8 @@
     public class ScorePageViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
-        private IScoreService scoreService;
-
-        public DelegateCommand SelectMatchCommand { get; set; }
+        private bool isRefreshingMatchList;
+        private readonly IScoreService scoreService;
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -21,18 +21,38 @@
             set { SetProperty(ref groupMatches, value); }
         }
 
+        public bool IsRefreshingMatchList
+        {
+            get { return isRefreshingMatchList; }
+            set { SetProperty(ref isRefreshingMatchList, value); }
+        }
+
+        public DelegateCommand SelectMatchCommand
+         => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
+
+        public DelegateCommand RefreshCommand
+            => new DelegateCommand(() =>
+            {
+                IsRefreshingMatchList = true;
+                GetMatches();
+                IsRefreshingMatchList = false;
+            });
+
         public ScorePageViewModel(INavigationService navigationService, IScoreService scoreService)
             : base(navigationService)
         {
             this.scoreService = scoreService;
-            var matches = scoreService.GetAll();
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
-            SelectMatchCommand = new DelegateCommand(OnSelectMatch);
         }
 
-        private async void OnSelectMatch()
+        public override void OnAppearing()
         {
-            await NavigationService.NavigateAsync(nameof(MatchInfoPage));
+            GetMatches();
+        }
+
+        private void GetMatches()
+        {
+            var matches = scoreService.GetAll(Settings.CurrentSportId).ToList();
+            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
         }
     }
 }

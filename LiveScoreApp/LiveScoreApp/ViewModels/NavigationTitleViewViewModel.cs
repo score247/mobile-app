@@ -1,8 +1,8 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
+    using LiveScoreApp.Core.Settings;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
-    using LiveScoreApp.Settings;
     using Prism.Commands;
     using Prism.Navigation;
     using System.Collections.Generic;
@@ -26,27 +26,18 @@
             : base(navigationService)
         {
             this.sportService = sportService;
-            GetAndSetCurrentSport();
             SelectSportCommand = new DelegateCommand(NavigateSelectSportPage);
         }
 
         public override void OnAppearing()
         {
             CurrentSportName = Settings.CurrentSportName;
+            sportItems = sportService.GetSportItems();
 
             foreach (var sportItem in sportItems)
             {
                 sportItem.IsVisible = sportItem.Id == Settings.CurrentSportId;
             }
-        }
-
-        private void GetAndSetCurrentSport()
-        {
-            sportItems = sportService.GetSportItems();
-            var currentSport = sportItems.FirstOrDefault(s => s.Id == 1);
-            currentSport.IsVisible = true;
-            Settings.CurrentSportName = currentSport?.Name ?? "Soccer";
-            Settings.CurrentSportId = currentSport?.Id ?? 1;
         }
 
         private async void NavigateSelectSportPage()

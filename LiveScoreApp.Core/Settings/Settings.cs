@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.Settings
+﻿namespace LiveScoreApp.Core.Settings
 {
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;
@@ -15,7 +15,7 @@
 
         public static int CurrentSportId
         {
-            get => AppSettings.GetValueOrDefault(nameof(CurrentSportId), 0);
+            get => AppSettings.GetValueOrDefault(nameof(CurrentSportId), 1);
             set => AppSettings.AddOrUpdateValue(nameof(CurrentSportId), value);
         }
     }

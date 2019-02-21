@@ -4,25 +4,26 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Score.Views.MatchInfoPage"
+             Title="Match Info"
              BackgroundColor="#1D2133">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/star.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontSize" Value="12" />
             <Setter Property="TextColor" Value="#fff" />
         </Style>
         <Style x:Key="TextTab" TargetType="Label">
-            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontSize" Value="10" />
             <Setter Property="TextColor" Value="#666" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Margin" Value="8,0"/>            
+            <Setter Property="Margin" Value="8,0" />
         </Style>
         <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
-            <Setter Property="Orientation" Value="Horizontal"/>
-            <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
         </Style>
         <Style x:Key="MatchScore" TargetType="Label">
             <Setter Property="TextColor" Value="#3EC28F" />
@@ -41,8 +42,8 @@
                     JustifyContent="Center"
                     Margin="0,20">
                     <StackLayout Margin="0,0,50,0">
-                        <Image Source="logos/logo_1.png" Aspect="AspectFit"/>
-                        <Label Text="Verona" TextColor="#30C2FF"/>
+                        <Image Source="logos/logo_1.png" Aspect="AspectFit" />
+                        <Label Text="Verona" TextColor="#30C2FF" />
                     </StackLayout>
                     <StackLayout FlexLayout.Basis="50"
                          Margin="0"
@@ -62,21 +63,21 @@
                                 <Label Text="1" />
                             </StackLayout>
                         </Frame>
-                        <Label Text="Full Time" 
+                        <Label Text="Full Time"
                                TextColor="#666"
                                FontSize="10"
                                FontAttributes="Bold"
-                               HorizontalTextAlignment="Center"/>
+                               HorizontalTextAlignment="Center" />
                     </StackLayout>
                     <StackLayout Margin="50,0,0,0">
-                        <Image Source="logos/logo_2.png" Aspect="AspectFit"/>
+                        <Image Source="logos/logo_2.png" Aspect="AspectFit" />
                         <Label Text="Cosenza" />
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>
 
             <!-- Tab list -->
-            <ScrollView Orientation="Horizontal" 
+            <ScrollView Orientation="Horizontal"
                     HeightRequest="24" 
                     Padding="8,0"
                     BackgroundColor="#0F111C">
@@ -93,7 +94,7 @@
             </ScrollView>
             <!-- Tab Content -->
             <FlexLayout Direction="Column"
-                    JustifyContent="Center" 
+                    JustifyContent="Center"
                     AlignItems="Stretch">
                 <Grid Margin="16,22">
                     <Grid.ColumnDefinitions>
@@ -112,7 +113,7 @@
                     <Label Grid.Column="0" Grid.Row="0" Text="12'" HorizontalTextAlignment="Start" Margin="8,0" />
                     <StackLayout Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalOptions="End">
                         <Label  Text="Carlos Embalo" FontAttributes="Bold" TextColor="#fff" HorizontalTextAlignment="Start" />
-                        <Image Source="images/card_yellow.png"/>
+                        <Image Source="images/card_yellow.png" />
                     </StackLayout>
 
                     <FlexLayout Grid.Column="0"
@@ -130,7 +131,7 @@
 
                     <FlexLayout Grid.Column="0"
                                 Grid.Row="2"
-                             Direction="Row"                                
+                             Direction="Row"
                             JustifyContent="SpaceBetween">
                         <Label Text="54'" FlexLayout.Shrink="0" />
                         <Image Source="images/card_yellow.png" Margin="4,0" FlexLayout.Shrink="0" />
@@ -173,11 +174,11 @@
                    HeightRequest="24"
                    Orientation="Horizontal"
                    VerticalOptions="Center">
-                <Label Text="MATCH INFO" 
-                   TextColor="#666" 
+                <Label Text="MATCH INFO"
+                   TextColor="#666"
                    FontAttributes="Bold"
                    FontSize="10"
-                   VerticalTextAlignment="Center"/>
+                   VerticalTextAlignment="Center" />
             </StackLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>

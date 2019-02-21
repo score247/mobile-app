@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Prism.AppModel;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace Score.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible
+    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
         protected INavigationService NavigationService { get; }
 
@@ -37,6 +38,22 @@ namespace Score.ViewModels
         }
 
         public virtual void Destroy()
+        {
+        }
+
+        public virtual void OnResume()
+        {
+        }
+
+        public virtual void OnSleep()
+        {
+        }
+
+        public virtual void OnAppearing()
+        {
+        }
+
+        public virtual void OnDisappearing()
         {
         }
     }

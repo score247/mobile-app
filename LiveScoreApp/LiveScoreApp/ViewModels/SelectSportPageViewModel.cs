@@ -1,8 +1,7 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
+    using LiveScoreApp.Core.Settings;
     using LiveScoreApp.Models;
-    using LiveScoreApp.Services;
-    using LiveScoreApp.Settings;
     using Prism.Commands;
     using Prism.Navigation;
     using System.Collections.Generic;

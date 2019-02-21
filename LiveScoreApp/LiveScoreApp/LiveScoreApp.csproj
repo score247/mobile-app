@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\LiveScoreApp.Core\LiveScoreApp.Core.csproj" />
     <ProjectReference Include="..\Modules\Score\Score.csproj" />
     <ProjectReference Include="..\Modules\Setting\Setting.csproj" />
     <ProjectReference Include="..\Modules\Tournament\Tournament.csproj" />
