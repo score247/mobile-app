@@ -15,7 +15,7 @@ namespace LiveScoreApp.Views
     {
         public MasterDetailPage()
         {
-            InitializeComponent();
+            this.InitComponent(InitializeComponent);
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;
