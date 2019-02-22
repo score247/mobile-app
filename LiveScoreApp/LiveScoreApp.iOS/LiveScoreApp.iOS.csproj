@@ -218,5 +218,11 @@
   <ItemGroup>
     <BundleResource Include="Resources\images\tracker.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\news.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\add.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

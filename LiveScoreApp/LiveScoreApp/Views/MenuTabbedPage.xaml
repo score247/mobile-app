@@ -34,19 +34,28 @@
 
         <NavigationPage Title="Live" Icon="images/live.png">
             <x:Arguments>
-                <ContentPage Title="Live">
+                <score:LivePage Title="Live">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="Live" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </ContentPage>
+                </score:LivePage>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Favorites" Icon="images/star.png">
             <x:Arguments>
-                <ContentPage Title="Favorites" />
+                <score:FavoritePage Title="Favorites">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="Favorites" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:FavoritePage>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="Leagues"  Icon="images/league.png">
+            <x:Arguments>
+                <tournament:TournamentPage Title="images/Leagues" />
+            </x:Arguments>
+        </NavigationPage>
+        <NavigationPage Title="News"  Icon="images/news.png">
             <x:Arguments>
                 <tournament:TournamentPage Title="images/Leagues" />
             </x:Arguments>

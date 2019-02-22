@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Score.Views.LivePage">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="images/search.png" Priority="1" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Resources>
+        <!--Scores Styles-->
+        <Style x:Key="listViewStyle" TargetType="ListView">
+            <Setter Property="BackgroundColor" Value="#1D2133" />
+        </Style>
+        
+        <Style x:Key="LeagueStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Start" />
+        </Style>
+
+        <Style x:Key="TimeStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+        </Style>
+
+        <Style x:Key="EventStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="TeamStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="HeightRequest" Value="22" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="HomeTeamStyle" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
+            <Setter Property="TextColor" Value="#30C2FF" />
+            <Setter Property="Margin" Value="0,4,0,0" />
+        </Style>
+
+        <Style x:Key="AwayTeamStyle" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="Margin" Value="0,0,0,4" />
+        </Style>
+
+        <Style x:Key="Scorefont" BasedOn="{StaticResource TeamStyle}" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="HorizontalTextAlignment" Value="End" />
+            <Setter Property="Margin" Value="0,0,20,0" />
+        </Style>
+    </ContentPage.Resources>
+    
+    <ListView
+                ItemsSource="{Binding GroupMatches}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                IsPullToRefreshEnabled="true"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshingMatchList}"
+                CachingStrategy="RecycleElement"
+                IsGroupingEnabled="True"
+                GroupDisplayBinding="{Binding Key}"
+                SeparatorColor="#2E3245"
+                Style="{StaticResource listViewStyle}">
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell Height="28">
+                    <StackLayout Orientation="Horizontal"
+                                     Spacing="0" BackgroundColor="#0F111C">
+                        <Image Source="flag_league/flag_england.png"
+                                       Grid.Row="0"
+                                       Grid.Column="0"
+                                       WidthRequest="16"
+                                       HeightRequest="12"
+                                       Aspect="AspectFit"
+                                       Margin="18, 8, 12, 8" />
+
+                        <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       HeightRequest="30"
+                                       Text="{Binding Key}"
+                                       Style="{StaticResource LeagueStyle}" />
+
+                        <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="24 Jan"
+                                       HorizontalOptions="EndAndExpand"
+                                       Style="{StaticResource TimeStyle}" />
+
+                        <Label Grid.Row="0"
+                                    Grid.Column="3"
+                                    WidthRequest="12"
+                                    Style="{StaticResource Icons}"
+                                    Text="&#xe915;"
+                                    TextColor="#666666"
+                                    FontSize="12"
+                                    VerticalTextAlignment="Center"
+                                    Margin="12,0" />
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <ViewCell.View>
+                        <StackLayout BackgroundColor="Red"
+                                    Orientation="Vertical"
+                                    VerticalOptions="StartAndExpand"
+                                    Spacing="0">
+                            <Grid HorizontalOptions="FillAndExpand"
+                                    BackgroundColor="#1D2133"
+                                    RowSpacing="0"
+                                    ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="32" />
+                                    <ColumnDefinition Width="25" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackLayout Grid.RowSpan="2"
+                                             Grid.Column="0"
+                                             VerticalOptions="Center"
+                                             HorizontalOptions="Center"
+                                             Spacing="0">
+                                    <Label Style="{StaticResource Icons}"
+                                           Text="&#xe905;"
+                                           TextColor="#666666"
+                                           FontSize="16"
+                                           HorizontalTextAlignment="Center" />
+                                    <Label Text="50'"
+                                           Style="{StaticResource EventStyle}"
+                                           HorizontalTextAlignment="Center"
+                                           Margin="0,3,0,0"/>
+                                </StackLayout>
+                                
+
+                                <Label Grid.Row="0"
+                                        Grid.Column="1"
+                                        Text="{Binding HomeTeam}"
+                                        Style="{StaticResource HomeTeamStyle}" />
+                                <Label Grid.Row="1"
+                                        Grid.Column="1"
+                                        Text="{Binding AwayTeam}"
+                                        Style="{StaticResource AwayTeamStyle}" />
+
+                                <Label Grid.Row="0"
+                                        Grid.Column="2"
+                                        Text="{Binding HomeScore}"
+                                        Style="{StaticResource Scorefont}"
+                                        Margin="0,4,20,0" />
+                                <Label Grid.Row="1"
+                                        Grid.Column="2"
+                                        Text="{Binding AwayScore}"
+                                        Style="{StaticResource Scorefont}"
+                                        Margin="0,0,20,4" />
+
+                                <Label Grid.RowSpan="2"
+                                        Grid.Column="3"
+                                        Style="{StaticResource Icons}"
+                                        Text="&#xe90f;"
+                                        TextColor="#3EC28F"
+                                        FontSize="13"
+                                        VerticalTextAlignment="Center"
+                                        HorizontalTextAlignment="Start" />
+                            </Grid>
+                        </StackLayout>
+                    </ViewCell.View>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>
