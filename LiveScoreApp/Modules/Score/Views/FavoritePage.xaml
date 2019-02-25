@@ -3,9 +3,59 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Score.Views.FavoritePage">
+             x:Class="Score.Views.FavoritePage"
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
-    
+    <ContentPage.Resources>
+        <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row" />
+            <Setter Property="JustifyContent" Value="SpaceBetween" />
+            <Setter Property="AlignItems" Value="Center" />
+        </Style>
+        <Style x:Key="LeagueLogo" TargetType="Image">
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="WidthRequest" Value="21" />
+            <Setter Property="Margin" Value="10,0,2,0" />
+        </Style>
+        <Style x:Key="LeagueName" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout Spacing="0">
+        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
+                    JustifyContent="SpaceAround"
+                    HeightRequest="30">
+            <Label Text="TEAMS" Style="{StaticResource TextTab}" />
+            <Label Text="MATCHES" Style="{StaticResource TextTab}" />
+            <Label Text="LEAGUES" Style="{StaticResource TextTab}" TextColor="#fff" />
+            <Label Text="NATIONS" Style="{StaticResource TextTab}" />
+        </FlexLayout>
+        <FlexLayout x:Name="ChampionLeague" Style="{StaticResource FlexLayoutHorizontalCenter}"
+                    HeightRequest="44"
+                    Margin="0,12,0,0" 
+                    BackgroundColor="#1D2133">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand">
+                <Image Source="flag_league/champion_league.png" Style="{StaticResource LeagueLogo}"  />
+                <Label Text="Champion League" Style="{StaticResource LeagueName}" />
+            </StackLayout>
+            <Label Style="{StaticResource ArrowRightIcon}" Text="&#xe913;" />
+        </FlexLayout>
+        <FlexLayout x:Name="EuropaLeague" Style="{StaticResource FlexLayoutHorizontalCenter}"
+                    HeightRequest="44"
+                     Margin="0,12,0,0" 
+                    BackgroundColor="#1D2133">
+            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand">
+                <Image Source="flag_league/europa_league.png" Style="{StaticResource LeagueLogo}" />
+                <Label Text="Europa League" Style="{StaticResource LeagueName}"  />
+            </StackLayout>
+            <Label Style="{StaticResource ArrowRightIcon}" Text="&#xe913;" />
+        </FlexLayout>
+    </StackLayout>
 </ContentPage>

@@ -14,21 +14,43 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="TextColor" Value="#fff" />
         </Style>
-        <Style x:Key="TextTab" TargetType="Label">
-            <Setter Property="FontSize" Value="10" />
+
+        <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row" />
+            <Setter Property="AlignItems" Value="Stretch" />
+            <Setter Property="JustifyContent" Value="Center" />
+            <Setter Property="Margin" Value="0,20" />
+        </Style>
+
+        <Style x:Key="MatchScoreBox" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="#3EC28F" />
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,18,0,0" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+
+        <Style x:Key="GeneralMatchStatus" TargetType="Label">
             <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Margin" Value="8,0" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
-        <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="Center" />
-        </Style>
+
+        
+
         <Style x:Key="MatchScore" TargetType="Label">
             <Setter Property="TextColor" Value="#3EC28F" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="HorizontalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
         </Style>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -37,37 +59,20 @@
                  Spacing="0">
             <!-- Match Score -->
             <StackLayout BackgroundColor="#0F111C">
-                <FlexLayout Direction="Row"
-                    AlignItems="Stretch"
-                    JustifyContent="Center"
-                    Margin="0,20">
+                <FlexLayout Style="{StaticResource MatchScoreContainer}" >
                     <StackLayout Margin="0,0,50,0">
                         <Image Source="logos/logo_1.png" Aspect="AspectFit" />
-                        <Label Text="Verona" TextColor="#30C2FF" />
+                        <Label Text="Verona" TextColor="{StaticResource HomeColor}" />
                     </StackLayout>
-                    <StackLayout FlexLayout.Basis="50"
-                         Margin="0"
-                         Padding="0">
-                        <Frame BackgroundColor="#3EC28F"
-                               HeightRequest="20"
-                               WidthRequest="48"
-                               CornerRadius="10"
-                               Padding="0"
-                               Margin="0,18,0,0"
-                               HasShadow="False">
+                    <StackLayout>
+                        <Frame Style="{StaticResource MatchScoreBox}">
                             <StackLayout Orientation="Horizontal"
                                  HorizontalOptions="Center"
                                  VerticalOptions="Center">
-                                <Label Text="2" FontAttributes="Bold" />
-                                <Label Text="-" FontAttributes="Bold" />
-                                <Label Text="1" />
+                                <Label Text="2 - 1" FontAttributes="Bold" />
                             </StackLayout>
                         </Frame>
-                        <Label Text="Full Time"
-                               TextColor="#666"
-                               FontSize="10"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" />
                     </StackLayout>
                     <StackLayout Margin="50,0,0,0">
                         <Image Source="logos/logo_2.png" Aspect="AspectFit" />

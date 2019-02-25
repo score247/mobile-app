@@ -10,7 +10,7 @@
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
             x:Name="self"
             BarTextColor="#666666"
-            BarBackgroundColor="#161416">
+            BarBackgroundColor="#0F111C">
     <TabbedPage.Children>
         <NavigationPage Title="Scores" Icon="images/scores.png">
             <x:Arguments>

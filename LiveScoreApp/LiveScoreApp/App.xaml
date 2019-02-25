@@ -13,6 +13,7 @@
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0F111C</Color>
+            <Color x:Key="HomeColor">#30C2FF</Color>
 
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
@@ -45,7 +46,15 @@
             <Style x:Key="GreenColor" TargetType="Label">
                 <Setter Property="TextColor" Value="#3EC28F" />
             </Style>
-
+            
+            <!-- Tabs -->
+            <Style x:Key="TextTab" TargetType="Label">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="#666" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="10,0" />
+            </Style>
+            
             <!--Global Styles-->
             <Color x:Key="PrimaryDarkColor">#1E1E1E</Color>
             <Style TargetType="NavigationPage">

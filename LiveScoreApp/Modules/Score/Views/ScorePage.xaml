@@ -16,6 +16,13 @@
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
         </ResourceDictionary>
         <!--Scores Styles-->
+        <Style x:Key="CalendarBox" TargetType="Frame">
+            <Setter Property="CornerRadius" Value="5" />
+            <Setter Property="BackgroundColor" Value="#1D2133" />
+            <Setter Property="WidthRequest" Value="32" />
+            <Setter Property="HeightRequest" Value="32" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
 
         <Style x:Key="LeagueStyle" TargetType="Label">
             <Setter Property="TextColor" Value="#666" />
@@ -68,11 +75,7 @@
                     HeightRequest="32"
                     Margin="10,8,10,10">
 
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
+            <Frame Style="{StaticResource CalendarBox}" Margin="0,0,8,0">
                 <Label Style="{StaticResource Icons}"
                        Text="&#xe91e;"
                        FontSize="14"
@@ -94,14 +97,10 @@
                     <DataTemplate>
                         <ViewCell IsEnabled="false">
                             <ViewCell.View>
-                                <Frame CornerRadius="5"
+                                <Frame Style="{StaticResource CalendarBox}"
                                        Rotation="90"
-                                       BackgroundColor="#1D2133"
-                                       HeightRequest="32"
-                                       WidthRequest="32"
                                        VerticalOptions="Center"
-                                       HorizontalOptions="Center"
-                                       Padding="0">
+                                       HorizontalOptions="Center">
                                     <StackLayout Spacing="0" Orientation="Vertical" Padding="0">
                                         <Label Text="{Binding Day}"
                                            TextColor="#939393"
@@ -119,137 +118,8 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <!--<Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0" Orientation="Vertical">
-                    <Label Text="25"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="FRI"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="26"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="SAT"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="27"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="SUN"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="28"
-                           TextColor="#F24822"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="MON"
-                           TextColor="#F24822"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="29"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="TUE"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="30"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="WED"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   HeightRequest="32"
-                   Margin="0,0,8,0"
-                   Padding="0">
-                <StackLayout Spacing="0">
-                    <Label Text="31"
-                           TextColor="#939393"
-                           FontSize="18"
-                           HorizontalTextAlignment="Center" />
-                    <Label Text="THU"
-                           TextColor="#939393"
-                           FontAttributes="Bold"
-                           FontSize="6"
-                           HorizontalTextAlignment="Center" />
-                </StackLayout>
-            </Frame>-->
 
-            <Frame CornerRadius="5"
-                   BackgroundColor="#1D2133"
-                   WidthRequest="32"
-                   Padding="0">
+            <Frame Style="{StaticResource CalendarBox}">
                 <Label Style="{StaticResource Icons}"
                    Text="&#xe91f;"
                    HorizontalTextAlignment="Center"
