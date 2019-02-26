@@ -13,8 +13,39 @@
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0F111C</Color>
+            <Color x:Key="OrangeColor">#F24822</Color>
+            <Color x:Key="GreyColor">#666</Color>
+            <Color x:Key="GreenColor">#3EC28F</Color>
+            <Color x:Key="YellowColor">#E5C20B</Color>
+            
+            <Color x:Key="LineColor">#2E3245</Color>
             <Color x:Key="HomeColor">#30C2FF</Color>
+            <Color x:Key="AwayColor">#fff</Color>
 
+            <Style TargetType="StackLayout">
+                <Setter Property="Spacing" Value="0" />
+            </Style>
+            <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style TargetType="Grid">
+                <Setter Property="RowSpacing" Value="0" />
+                <Setter Property="ColumnSpacing" Value="0" />
+            </Style>
+
+            <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Row" />
+                <Setter Property="JustifyContent" Value="SpaceBetween" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
+
+            <Style TargetType="Frame">
+                <Setter Property="Padding" Value="0" />
+            </Style>
+            
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
             </Style>
@@ -43,9 +74,7 @@
                 <Setter Property="Margin" Value="12,14" />
             </Style>
 
-            <Style x:Key="GreenColor" TargetType="Label">
-                <Setter Property="TextColor" Value="#3EC28F" />
-            </Style>
+            
             
             <!-- Tabs -->
             <Style x:Key="TextTab" TargetType="Label">

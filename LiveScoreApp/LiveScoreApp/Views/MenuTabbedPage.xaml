@@ -49,10 +49,14 @@
                     </NavigationPage.TitleView>
                 </score:FavoritePage>
             </x:Arguments>
-        </NavigationPage>
+        </NavigationPage> 
         <NavigationPage Title="Leagues"  Icon="images/league.png">
             <x:Arguments>
-                <tournament:TournamentPage Title="images/Leagues" />
+                <score:LeaguePage Title="Leagues">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="Leagues" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:LeaguePage>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage Title="News"  Icon="images/news.png">

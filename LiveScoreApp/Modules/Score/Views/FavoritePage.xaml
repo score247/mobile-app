@@ -8,12 +8,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
-        <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
-            <Setter Property="Direction" Value="Row" />
-            <Setter Property="JustifyContent" Value="SpaceBetween" />
-            <Setter Property="AlignItems" Value="Center" />
-        </Style>
+    <ContentPage.Resources>        
         <Style x:Key="LeagueLogo" TargetType="Image">
             <Setter Property="Aspect" Value="AspectFit" />
             <Setter Property="WidthRequest" Value="21" />

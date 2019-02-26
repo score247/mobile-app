@@ -10,21 +10,88 @@
             <Setter Property="FontSize" Value="12" />
             <Setter Property="TextColor" Value="#fff" />
         </Style>
-        <Style x:Key="TextTab" TargetType="Label">
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="TextColor" Value="#666" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Margin" Value="8,0" />
+
+        <!-- Match Score -->
+        <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row" />
+            <Setter Property="AlignItems" Value="Stretch" />
+            <Setter Property="JustifyContent" Value="Center" />
+            <Setter Property="Margin" Value="0,20" />
         </Style>
+
+        <Style x:Key="MatchScoreBox" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="{StaticResource GreenColor}" />
+            <Setter Property="HeightRequest" Value="20" />
+            <Setter Property="WidthRequest" Value="50" />
+            <Setter Property="CornerRadius" Value="10" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Margin" Value="0,10,0,0" />
+            <Setter Property="HasShadow" Value="False" />
+        </Style>
+
+        <Style x:Key="ScoreText" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#fff" />
+        </Style>
+
+        <Style x:Key="GeneralMatchStatus" TargetType="Label">
+            <Setter Property="TextColor" Value="#666" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        
+        <!-- Tab -->
         <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             <Setter Property="VerticalOptions" Value="Center" />
         </Style>
 
-        <Color x:Key="GoalColor">#3EC28F</Color>
-        <Color x:Key="YellowCardColor">#E5C20B</Color>
+        <!-- Commentaries -->
+        <Style x:Key="Group" TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
 
+        <Style x:Key="GroupName" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="OptionGroup" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="MatchEndIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+            <Setter Property="Grid.Column" Value="0" />
+            <Setter Property="Grid.Row" Value="0" />
+            <Setter Property="Text" Value="&#xe905;" />
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,7" />
+        </Style>
+
+        <Style x:Key="CommentariesText" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="0,7" />
+        </Style>
+        
         <Style x:Key="TimeBg" TargetType="Frame">
             <Setter Property="WidthRequest" Value="20" />
             <Setter Property="HeightRequest" Value="12" />
@@ -34,17 +101,27 @@
             <Setter Property="Padding" Value="2,1" />
             <Setter Property="HasShadow" Value="False" />
         </Style>
-        <Style x:Key="CommentariesTime" TargetType="Frame" BasedOn="{StaticResource TimeBg}">
+
+        <Style x:Key="Minutes" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />            
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="TextColor" Value="#fff" />
+        </Style>
+
+        <Style x:Key="CommentariesTime" TargetType="Frame" BasedOn="{StaticResource TimeBg}">            
+            <Setter Property="Margin" Value="0,7" />
             <Setter Property="BorderColor" Value="#fff" />
             <Setter Property="BackgroundColor" Value="#1D2133" />
         </Style>
         <Style x:Key="CommentariesGoal" TargetType="Frame" BasedOn="{StaticResource TimeBg}">
-            <Setter Property="BorderColor" Value="{StaticResource GoalColor}" />
-            <Setter Property="BackgroundColor" Value="{StaticResource GoalColor}" />
+            <Setter Property="Margin" Value="0,7" />
+            <Setter Property="BorderColor" Value="{StaticResource GreenColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource GreenColor}" />
         </Style>
         <Style x:Key="CommentariesYellpwCard" TargetType="Frame" BasedOn="{StaticResource TimeBg}">
-            <Setter Property="BorderColor" Value="{StaticResource YellowCardColor}" />
-            <Setter Property="BackgroundColor" Value="{StaticResource YellowCardColor}" />
+            <Setter Property="BorderColor" Value="{StaticResource YellowColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource YellowColor}" />
         </Style>
     </ContentPage.Resources>
 
@@ -54,41 +131,20 @@
                  Spacing="0">
             <!-- Match Score -->
             <StackLayout BackgroundColor="#0F111C">
-                <FlexLayout Direction="Row"
-                    AlignItems="Stretch"
-                    JustifyContent="Center"
-                    Margin="0,20">
+                <FlexLayout Style="{StaticResource MatchScoreContainer}" >
                     <StackLayout Margin="0,0,50,0">
                         <Image Source="logos/logo_1.png" Aspect="AspectFit" />
-                        <Label Text="Verona" TextColor="#30C2FF" />
+                        <Label Text="Verona" TextColor="{StaticResource HomeColor}" />
                     </StackLayout>
-                    <StackLayout FlexLayout.Basis="50"
-                         Margin="0"
-                         Padding="0">
-                        <Frame BackgroundColor="#3EC28F"
-                               HeightRequest="20"
-                               WidthRequest="48"
-                               CornerRadius="10"
-                               Padding="0"
-                               Margin="0,18,0,0"
-                               HasShadow="False">
-                            <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="Center">
-                                <Label Text="2" FontAttributes="Bold" />
-                                <Label Text="-" FontAttributes="Bold" />
-                                <Label Text="1" />
-                            </StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        <Frame Style="{StaticResource MatchScoreBox}">
+                            <Label Text="2 - 1" Style="{StaticResource ScoreText}" />
                         </Frame>
-                        <Label Text="Full Time"
-                               TextColor="#666"
-                               FontSize="10"
-                               FontAttributes="Bold"
-                               HorizontalTextAlignment="Center" />
+                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" Margin="0,8,0,0" />
                     </StackLayout>
                     <StackLayout Margin="50,0,0,0">
                         <Image Source="logos/logo_2.png" Aspect="AspectFit" />
-                        <Label Text="Cosenza" />
+                        <Label Text="Cosenza" TextColor="{StaticResource AwayColor}" />
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>
@@ -99,13 +155,14 @@
                     Padding="8,0"
                     BackgroundColor="#0F111C">
                 <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
-                    <Label Text="INFO" Style="{StaticResource TextTab}" FontAttributes="Bold" Margin="8,0" FontSize="10" />
+                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label Text="INFO" Style="{StaticResource TextTab}" />
                     <Label Text="TRACKER" Style="{StaticResource TextTab}" TextColor="#FFF" />
                     <Label Text="STATS" Style="{StaticResource TextTab}" />
                     <Label Text="LINE-UPS" Style="{StaticResource TextTab}" />
                     <Label Text="H2H" Style="{StaticResource TextTab}" />
                     <Label Text="TABLE" Style="{StaticResource TextTab}" />
-                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label Text="SOCIAL" Style="{StaticResource TextTab}" />
                     <Label Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
                 </StackLayout>
             </ScrollView>
@@ -115,17 +172,9 @@
             </AbsoluteLayout>
 
             <!-- COMMENTARIES -->
-            <StackLayout BackgroundColor="#0F111C"
-                   Padding="16,0"
-                   HeightRequest="24"
-                   Orientation="Horizontal"
-                   VerticalOptions="Center">
-                <Label Text="COMMENTARIES"
-                   TextColor="#666"
-                   FontAttributes="Bold"
-                   FontSize="10"
-                   VerticalTextAlignment="Center" />
-                <Label Text="Highlight" TextColor="#666" />
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="COMMENTARIES" Style="{StaticResource GroupName}" />
+                <Label Text="Highlight" Style="{StaticResource OptionGroup}" />
             </StackLayout>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -141,54 +190,42 @@
                 </Grid.RowDefinitions>
 
                 <!-- Match ends -->
-                <Label Grid.Column="0"
-                       Grid.Row="0"
-                       Style="{StaticResource Icons}"
-                       Text="&#xe905;"
-                       FontSize="18"
-                       HorizontalTextAlignment="Center"
-                       VerticalTextAlignment="Center"
-                       Margin="0,7" />
+                <Label Style="{StaticResource MatchEndIcon}" />
                 <Label Grid.Column="1"
                        Grid.Row="0"
                        Text="Match ends, Verona 2, Cosenza 1."
-                       VerticalTextAlignment="Center"
-                       Margin="0,7" />
+                       Style="{StaticResource CommentariesText}" />
 
                 <!-- Time -->
                 <Frame Grid.Column="0"
-                       Grid.Row="1"
-                       Style="{StaticResource CommentariesTime}"
-                       Margin="0,7">
-                    <Label Text="90'" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                        Grid.Row="1"
+                        Style="{StaticResource CommentariesTime}">
+                    <Label Text="90'" Style="{StaticResource Minutes}" />
                 </Frame>
                 <Label Grid.Column="1"
                        Grid.Row="1"
                        Text="Second Half ends, Verona 2, Cosenza 1."
-                       VerticalTextAlignment="Center"
-                       Margin="0,7" />
+                       Style="{StaticResource CommentariesText}" />
 
                 <!-- Goal! -->
                 <Frame Grid.Column="0"
                        Grid.Row="2"
-                       Style="{StaticResource CommentariesGoal}"
-                       Margin="0,7">
-                    <Label Text="88'" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                       Style="{StaticResource CommentariesGoal}">
+                    <Label Text="88'" Style="{StaticResource Minutes}" />
                 </Frame>
                 <StackLayout Grid.Column="1"
                             Grid.Row="2"
                              Spacing="0"
                              Margin="0,7">
-                    <Label Text="GOAL!" TextColor="{StaticResource GoalColor}" FontAttributes="Bold" />
+                    <Label Text="GOAL!" TextColor="{StaticResource GreenColor}" FontAttributes="Bold" />
                     <Label Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
                 </StackLayout>
 
                 <!-- Time -->
                 <Frame Grid.Column="0"
                        Grid.Row="3"
-                       Style="{StaticResource CommentariesTime}"
-                       Margin="0,7">
-                    <Label Text="82'" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                       Style="{StaticResource CommentariesTime}">
+                    <Label Text="82'" Style="{StaticResource Minutes}" />
                 </Frame>
                 <Label Grid.Column="1"
                        Grid.Row="3"
@@ -201,12 +238,12 @@
                        Grid.Row="4"
                        Style="{StaticResource CommentariesYellpwCard}"
                        Margin="0,7">
-                    <Label Text="63'" HorizontalTextAlignment="Center" FontAttributes="Bold" />
+                    <Label Text="63'" Style="{StaticResource Minutes}" />
                 </Frame>
                 <Label Grid.Column="1"
                        Grid.Row="4"
                        Text="YELLOW CARD!"
-                       TextColor="{StaticResource YellowCardColor}"
+                       TextColor="{StaticResource YellowColor}"
                        FontAttributes="Bold"
                        VerticalTextAlignment="Center"
                        Margin="0,7" />

@@ -12,9 +12,9 @@
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextColor" Value="#fff" />
-        </Style>
+        </Style>        
 
+        <!-- Match Score -->
         <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
             <Setter Property="Direction" Value="Row" />
             <Setter Property="AlignItems" Value="Stretch" />
@@ -28,8 +28,15 @@
             <Setter Property="WidthRequest" Value="50" />
             <Setter Property="CornerRadius" Value="10" />
             <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,18,0,0" />
+            <Setter Property="Margin" Value="0,10,0,0" />
             <Setter Property="HasShadow" Value="False" />
+        </Style>
+
+        <Style x:Key="ScoreText" TargetType="Label">
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="#fff" />
         </Style>
 
         <Style x:Key="GeneralMatchStatus" TargetType="Label">
@@ -39,18 +46,90 @@
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
 
+        <!-- Tab -->
+        <Style x:Key="ScrollTab" TargetType="ScrollView">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="BackgroundColor" Value="#0F111C" />
+        </Style>
         
+        <!-- Tab content -->
 
-        <Style x:Key="MatchScore" TargetType="Label">
-            <Setter Property="TextColor" Value="#3EC28F" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="HorizontalOptions" Value="Center" />
+        <Style x:Key="TabContent" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Column" />
+            <Setter Property="JustifyContent" Value="Center" />
+            <Setter Property="AlignItems" Value="Stretch" />
         </Style>
 
-        <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
+        <Style x:Key="MatchStatusRow" TargetType="FlexLayout">
+            <Setter Property="Direction" Value="Row" />
+            <Setter Property="AlignItems" Value="Stretch" />
+            <Setter Property="HeightRequest" Value="42" />
+        </Style>
+
+        <Style x:Key="MatchStatusAlignRight" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
+            <Setter Property="JustifyContent" Value="End" />
+        </Style>
+
+        <Style x:Key="MatchStatusAlignLeft" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
+            <Setter Property="JustifyContent" Value="Start" />
+        </Style>
+
+        <Style x:Key="MatchStatusAlignJustify" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
+            <Setter Property="JustifyContent" Value="SpaceBetween" />
+        </Style>
+
+        <Style x:Key="InfoContentRight" TargetType="StackLayout">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Padding" Value="10,14" />
+        </Style>
+
+        <Style x:Key="MatchMinutes" TargetType="Label">
+            <Setter Property="WidthRequest" Value="42" />
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="Card" BasedOn="{StaticResource Icons}" TargetType="Label">
+            <Setter Property="Text" Value="&#xe91a;" />
+            <Setter Property="WidthRequest" Value="12" />
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+        </Style>
+
+        <Style x:Key="YellowCard" BasedOn="{StaticResource Card}" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource YellowColor}" />
+        </Style>
+
+        <Style x:Key="RedCard" BasedOn="{StaticResource Card}" TargetType="Label">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+
+        <Style x:Key="InfoText" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+            <Setter Property="Margin" Value="14,0" />
+        </Style>
+
+        <!-- Group -->
+        <Style x:Key="Group" TargetType="StackLayout">
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="Padding" Value="16,0" />
+            <Setter Property="HeightRequest" Value="24" />
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HorizontalOptions" Value="FillAndExpand" />
             <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+
+        <Style x:Key="GroupName" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="FontSize" Value="10" />
+            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
         </Style>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -64,126 +143,134 @@
                         <Image Source="logos/logo_1.png" Aspect="AspectFit" />
                         <Label Text="Verona" TextColor="{StaticResource HomeColor}" />
                     </StackLayout>
-                    <StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand">
                         <Frame Style="{StaticResource MatchScoreBox}">
-                            <StackLayout Orientation="Horizontal"
-                                 HorizontalOptions="Center"
-                                 VerticalOptions="Center">
-                                <Label Text="2 - 1" FontAttributes="Bold" />
-                            </StackLayout>
+                            <Label Text="2 - 1" Style="{StaticResource ScoreText}" />
                         </Frame>
-                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" />
+                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" Margin="0,8,0,0" />
                     </StackLayout>
                     <StackLayout Margin="50,0,0,0">
                         <Image Source="logos/logo_2.png" Aspect="AspectFit" />
-                        <Label Text="Cosenza" />
+                        <Label Text="Cosenza" TextColor="{StaticResource AwayColor}" />
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>
 
             <!-- Tab list -->
-            <ScrollView Orientation="Horizontal"
-                    HeightRequest="24" 
-                    Padding="8,0"
-                    BackgroundColor="#0F111C">
+            <ScrollView Style="{StaticResource ScrollTab}">
                 <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
-                    <Label Text="INFO" Style="{StaticResource TextTab}" TextColor="#FFF" FontAttributes="Bold" Margin="8,0" FontSize="10" />
-                    <Label Text="TRACKER" TextColor="#666" FontAttributes="Bold" Margin="8,0" FontSize="10" />
+                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label Text="INFO" Style="{StaticResource TextTab}" TextColor="#FFF" />
+                    <Label Text="TRACKER" Style="{StaticResource TextTab}" />
                     <Label Text="STATS" Style="{StaticResource TextTab}" />
                     <Label Text="LINE-UPS" Style="{StaticResource TextTab}" />
                     <Label Text="H2H" Style="{StaticResource TextTab}" />
                     <Label Text="TABLE" Style="{StaticResource TextTab}" />
-                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label Text="SOCIAL" Style="{StaticResource TextTab}" />
                     <Label Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
                 </StackLayout>
             </ScrollView>
+            
             <!-- Tab Content -->
-            <FlexLayout Direction="Column"
-                    JustifyContent="Center"
-                    AlignItems="Stretch">
-                <Grid Margin="16,22">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="50" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="60" />
-                    </Grid.RowDefinitions>
-                    
-                    <Label Grid.Column="0" Grid.Row="0" Text="12'" HorizontalTextAlignment="Start" Margin="8,0" />
-                    <StackLayout Grid.Column="2" Grid.Row="0" Orientation="Horizontal" HorizontalOptions="End">
-                        <Label  Text="Carlos Embalo" FontAttributes="Bold" TextColor="#fff" HorizontalTextAlignment="Start" />
-                        <Image Source="images/card_yellow.png" />
+            <FlexLayout Style="{StaticResource TabContent}">
+                <FlexLayout Style="{StaticResource MatchStatusAlignRight}">
+                    <StackLayout Style="{StaticResource InfoContentRight}">
+                        <Label Text="Carlos Embalo" Style="{StaticResource InfoText}" />
+                        <Label Style="{StaticResource YellowCard}" />
                     </StackLayout>
+                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                    <Label Text="12'" Style="{StaticResource MatchMinutes}"/>
+                </FlexLayout>
+                <BoxView BackgroundColor="{StaticResource LineColor}" HeightRequest="1" />
 
-                    <FlexLayout Grid.Column="0"
-                                Grid.Row="1"
-                             Direction="Row"
-                            JustifyContent="SpaceBetween">
-                        <Label  Text="34'" HorizontalTextAlignment="Start" Margin="4,0" />
-                        <Image Source="images/ball.png" Margin="0,0,4,0" />
-                        <Label Text="Lumbomir Tu" FontAttributes="Bold" />
-                    </FlexLayout>
-                    <Label Grid.Column="1"
-                           Grid.Row="1"
-                           Text="1 - 0" 
-                           Style="{StaticResource MatchScore}" />
-
-                    <FlexLayout Grid.Column="0"
-                                Grid.Row="2"
-                             Direction="Row"
-                            JustifyContent="SpaceBetween">
-                        <Label Text="54'" FlexLayout.Shrink="0" />
-                        <Image Source="images/card_yellow.png" Margin="4,0" FlexLayout.Shrink="0" />
-                        <Label Text="Jacob Rasussen" FontAttributes="Bold" FlexLayout.Shrink="0" />
-                    </FlexLayout>
-
-                    <FlexLayout Grid.Column="0"
-                                Grid.Row="3"
-                             Direction="Row"
-                            JustifyContent="SpaceBetween">
-                        <Label  Text="63'" HorizontalTextAlignment="Start" Margin="4,0" />
-                        <Image Source="images/ball.png" Margin="0,0,4,0" />
-                        <Label Text="Giovani Lorenzo" FontAttributes="Bold" />
-                    </FlexLayout>
-                    <Label Grid.Column="1"
-                           Grid.Row="3"
-                           Text="2 - 0"
-                           Style="{StaticResource MatchScore}" />
-
-                    <Label Grid.Column="0" Grid.Row="4" Text="88'" Margin="4,0" />
-                    <Label Grid.Column="1" Grid.Row="4" Text="2 - 0" Style="{StaticResource MatchScore}" />
-                    <FlexLayout Grid.Column="2"
-                                Grid.Row="4"
-                             Direction="Row"
-                            AlignItems="Start"
-                            JustifyContent="End">
-                        <StackLayout Orientation="Vertical"
-                                 Spacing="0">
-                            <Label Text="Darko Lazovic" FontAttributes="Bold" />
-                            <Label Text="Daniel Bessa" TextColor="#666" FontAttributes="Bold" />
+                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="34'" Style="{StaticResource MatchMinutes}" />
+                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
+                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
-                        <Image Source="images/ball.png" Margin="4,4,0,0" />
-                    </FlexLayout>
-                </Grid>
-            </FlexLayout>
+                    </StackLayout>
+                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                        <Frame Style="{StaticResource MatchScoreBox}">
+                            <Label Text="1 - 0" Style="{StaticResource ScoreText}" />
+                        </Frame>
+                    </StackLayout>
+                </FlexLayout>
+                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+
+                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
+                    <Label Text="54'" Style="{StaticResource MatchMinutes}" />
+                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
+                        <Label Style="{StaticResource YellowCard}" />
+                        <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
+                    </StackLayout>
+                </FlexLayout>
+                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+
+                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="63'" Style="{StaticResource MatchMinutes}" />
+                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
+                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                        <Frame Style="{StaticResource MatchScoreBox}">
+                            <Label Text="2 - 0" Style="{StaticResource ScoreText}" />
+                        </Frame>
+                    </StackLayout>
+                </FlexLayout>
+                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+
+                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
+                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                        <Frame Style="{StaticResource MatchScoreBox}">
+                            <Label Text="2 - 0" Style="{StaticResource ScoreText}" />
+                        </Frame>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">  
+                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0">
+                            <StackLayout>
+                                <Label Text="Darko Lazovic" Style="{StaticResource InfoText}" />
+                                <Label Text="Daniel Bessa" Style="{StaticResource InfoText}" TextColor="{StaticResource GreyColor}" />
+                            </StackLayout>                            
+                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                        </StackLayout>
+                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                        <Label Text="88'" Style="{StaticResource MatchMinutes}" />
+                    </StackLayout>
+                    
+                </FlexLayout>
+                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+
+                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
+                    <Label Text="90'" Style="{StaticResource MatchMinutes}" />
+                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
+                        <Label Style="{StaticResource YellowCard}" />
+                        <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
+                    </StackLayout>
+                </FlexLayout>
+                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+
+                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
+                    <Label Text="91'" Style="{StaticResource MatchMinutes}" />
+                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
+                        <Label Style="{StaticResource YellowCard}" />
+                        <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
+                    </StackLayout>
+                </FlexLayout>
+            </FlexLayout> 
 
             <!-- Match info -->
-            <StackLayout BackgroundColor="#0F111C"
-                   Padding="16,0"
-                   HeightRequest="24"
-                   Orientation="Horizontal"
-                   VerticalOptions="Center">
-                <Label Text="MATCH INFO"
-                   TextColor="#666"
-                   FontAttributes="Bold"
-                   FontSize="10"
-                   VerticalTextAlignment="Center" />
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="MATCH INFO" Style="{StaticResource GroupName}" />
             </StackLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>
@@ -197,20 +284,20 @@
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                 </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Text="Referee:" />
-                <Label Grid.Column="1" Grid.Row="0" Text="Federico La Penna (Italy)" FontAttributes="Bold" />
+                <Label Grid.Column="0" Grid.Row="0" Text="Referee:" TextColor="#fff" />
+                <Label Grid.Column="1" Grid.Row="0" Text="Federico La Penna (Italy)" TextColor="#fff" FontAttributes="Bold" />
 
-                <Label Grid.Column="0" Grid.Row="1" Text="Venue:" />
-                <Label Grid.Column="1" Grid.Row="1" Text="Carlo Castellany" FontAttributes="Bold" />
-                
-                <Label Grid.Column="0" Grid.Row="2" Text="Date and Time:" />
-                <Label Grid.Column="1" Grid.Row="2" Text="15:00 Jan 25, 2019" FontAttributes="Bold" />
+                <Label Grid.Column="0" Grid.Row="1" Text="Venue:" TextColor="#fff" />
+                <Label Grid.Column="1" Grid.Row="1" Text="Carlo Castellany" TextColor="#fff" FontAttributes="Bold" />
 
-                <Label Grid.Column="0" Grid.Row="3" Text="Spectators:" />
-                <Label Grid.Column="1" Grid.Row="3" Text="6215" FontAttributes="Bold" />
+                <Label Grid.Column="0" Grid.Row="2" Text="Date and Time:" TextColor="#fff" />
+                <Label Grid.Column="1" Grid.Row="2" Text="15:00 Jan 25, 2019" TextColor="#fff" FontAttributes="Bold" />
 
-                <Label Grid.Column="0" Grid.Row="4" Text="League:" />
-                <Label Grid.Column="1" Grid.Row="4" Text="Serie A Italy" FontAttributes="Bold" />
+                <Label Grid.Column="0" Grid.Row="3" Text="Spectators:" TextColor="#fff" />
+                <Label Grid.Column="1" Grid.Row="3" Text="6215" TextColor="#fff" FontAttributes="Bold" />
+
+                <Label Grid.Column="0" Grid.Row="4" Text="League:" TextColor="#fff" />
+                <Label Grid.Column="1" Grid.Row="4" Text="Serie A Italy" TextColor="#fff" FontAttributes="Bold" />
             </Grid>
         </StackLayout>
     </ScrollView>
