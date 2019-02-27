@@ -12,7 +12,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:ScorePageResource />
+                <resources:FavoritePageResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>

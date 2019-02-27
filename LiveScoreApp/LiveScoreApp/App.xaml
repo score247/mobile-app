@@ -100,14 +100,11 @@
             </Style>
 
             <!--Global Styles-->
-            <Color x:Key="PrimaryDarkColor">#1E1E1E</Color>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryDarkColor}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="BarTextColor" Value="#e6e6e6" />
             </Style>
-            <Style TargetType="TabbedPage">
-                <Setter Property="BarTextColor" Value="#e6e6e6" />
-            </Style>
+            
             <Style x:Key="labelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="10" />
                 <Setter Property="TextColor" Value="#e6e6e6" />

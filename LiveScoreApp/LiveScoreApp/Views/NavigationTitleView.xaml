@@ -1,9 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LiveScoreApp.Views.NavigationTitleView">
+             x:Class="LiveScoreApp.Views.NavigationTitleView"
+              BackgroundColor="#0F111C"
+             >
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout >
             <FlexLayout x:Name="SportName" JustifyContent="Center" AlignItems="Center">
                 <Label Style="{StaticResource labelStyle}" Text="{Binding CurrentSportName}" FontSize="9" TextColor="#fff" FontAttributes="Bold" HorizontalOptions="Center" />
                 <Label Style="{StaticResource Icons}" Text="&#xe91c;" FontSize="4" TextColor="#fff" Margin="2,0,0,0" />

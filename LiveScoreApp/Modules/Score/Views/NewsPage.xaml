@@ -13,8 +13,10 @@
     <StackLayout>
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
                     JustifyContent="Start"
-                    HeightRequest="30">
-            <Label Text="FAVOURITES" Style="{StaticResource TextTab}" />
+                    HeightRequest="30"
+                    
+                    Wrap="Wrap">
+            <Label Text="FAVOURITES" Style="{StaticResource TextTab}"  FlexLayout.AlignSelf="Start"/>
             <Label Text="WORLD NEWS" Style="{StaticResource ActiveTextTab}" />
             <Label Text="TRANSFERS" Style="{StaticResource TextTab}" />
             <Label Text="VIDEOS" Style="{StaticResource TextTab}" />
@@ -49,10 +51,11 @@
                     <AbsoluteLayout WidthRequest="96">
                         <Image Source="news/news_2.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <StackLayout Padding="12,0">
-                        <Label Text="Carvaja wishes Morata well at Atletico" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                    <FlexLayout Direction="Column" JustifyContent="SpaceAround" AlignItems="Start" Wrap="Wrap">
+                        <Label Text="Carvaja wishes Morata well at Atletico asdasd asdasda asdasd asdasd asdad" FlexLayout.AlignSelf="Start" 
+                               TextColor="#fff" LineBreakMode="CharacterWrap" />
                         <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
-                    </StackLayout>
+                    </FlexLayout>
                 </StackLayout>
                 <StackLayout Orientation="Horizontal" 
                              VerticalOptions="Center"
