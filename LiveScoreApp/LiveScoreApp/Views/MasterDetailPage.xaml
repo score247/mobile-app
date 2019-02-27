@@ -29,7 +29,7 @@
                         <Label Text="SETTINGS" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
                     </StackLayout>
                     <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="Refresh" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe90d;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Refresh"
                                    FontSize="14"
@@ -42,7 +42,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="ClearCache" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe904;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Clear Cache"
                                    FontSize="14"
@@ -52,7 +52,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="DefaultSport" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe907;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Default sport"
                                    FontSize="14"
@@ -66,7 +66,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="DefaultLanguage" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe90a;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Default language"
                                    FontSize="14"
@@ -82,7 +82,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="TimeZone" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe910;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Time zone"
                                    FontSize="14"
@@ -92,7 +92,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="Notification" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Notification"
                                    FontSize="14"
@@ -102,7 +102,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="InfoAlert" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Info alert"
                                    FontSize="14"
@@ -122,7 +122,7 @@
                         <Label Text="INFORMATION" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
                     </StackLayout>
                     <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                        <FlexLayout JustifyContent="SpaceAround"  Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="FAQ" JustifyContent="SpaceAround"  Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="FAQ"
                                    FontSize="14"
@@ -135,7 +135,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="TellFriend" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Tell a friend"
                                    FontSize="14"
@@ -145,7 +145,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="Contact" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe906;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Contact"
                                    FontSize="14"
@@ -161,7 +161,7 @@
                         <Label Text="MY PROFILES" FontAttributes="Bold" TextColor="#666666" FontSize="11" />
                     </StackLayout>
                     <StackLayout Orientation="Vertical" BackgroundColor="#1D2133">
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="ChangePassword" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe908;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Change Password"
                                    FontSize="14"
@@ -171,7 +171,7 @@
                         </FlexLayout>
                         <BoxView Style="{StaticResource MenuLine}" />
 
-                        <FlexLayout JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <FlexLayout x:Name="Signout" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
                             <Label Style="{StaticResource Icons}" Text="&#xe909;" Margin="10" />
                             <Label FlexLayout.Grow="9" Text="Sign out"
                                    FontSize="14"

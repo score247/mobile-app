@@ -12,7 +12,7 @@
             BarTextColor="#666666"
             BarBackgroundColor="#0F111C">
     <TabbedPage.Children>
-        <NavigationPage Title="Scores" Icon="images/scores.png">
+        <NavigationPage x:Name="Scores" Title="Scores" Icon="images/scores.png">
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
@@ -32,7 +32,7 @@
             </x:Arguments>
         </NavigationPage>-->
 
-        <NavigationPage Title="Live" Icon="images/live.png">
+        <NavigationPage x:Name="Live" Title="Live" Icon="images/live.png">
             <x:Arguments>
                 <score:LivePage Title="Live">
                     <NavigationPage.TitleView>
@@ -41,7 +41,7 @@
                 </score:LivePage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="Favorites" Icon="images/star.png">
+        <NavigationPage x:Name="Favorites" Title="Favorites" Icon="images/star.png">
             <x:Arguments>
                 <score:FavoritePage Title="Favorites">
                     <NavigationPage.TitleView>
@@ -49,8 +49,8 @@
                     </NavigationPage.TitleView>
                 </score:FavoritePage>
             </x:Arguments>
-        </NavigationPage> 
-        <NavigationPage Title="Leagues"  Icon="images/league.png">
+        </NavigationPage>
+        <NavigationPage x:Name="Leagues" Title="Leagues"  Icon="images/league.png">
             <x:Arguments>
                 <score:LeaguePage Title="Leagues">
                     <NavigationPage.TitleView>
@@ -59,12 +59,16 @@
                 </score:LeaguePage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="News"  Icon="images/news.png">
+        <NavigationPage x:Name="News" Title="News" Icon="images/news.png">
             <x:Arguments>
-                <tournament:TournamentPage Title="images/Leagues" />
+                <score:NewsPage Title="News">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="News" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:NewsPage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage Title="TV schedule" Icon="images/tv.png">
+        <NavigationPage x:Name="TVschedule" Title="TV schedule" Icon="images/tv.png">
             <x:Arguments>
                 <ContentPage Title="TV schedule" />
             </x:Arguments>

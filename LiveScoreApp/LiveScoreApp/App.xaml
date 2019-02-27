@@ -13,6 +13,7 @@
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0F111C</Color>
+            <Color x:Key="SecondColor">#1D2133</Color>
             <Color x:Key="OrangeColor">#F24822</Color>
             <Color x:Key="GreyColor">#666</Color>
             <Color x:Key="GreenColor">#3EC28F</Color>
@@ -72,10 +73,17 @@
                 <Setter Property="TextColor" Value="#676C8B" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Margin" Value="12,14" />
+                <Setter Property="Text" Value="&#xe913;" />
+            </Style>
+            
+            <Style x:Key="CheckIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="Text" Value="&#xe913;" />
+                <Setter Property="TextColor" Value="#3EC28F" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="16,0" />
+                <Setter Property="Text" Value="&#xe914;" />
             </Style>
 
-            
-            
             <!-- Tabs -->
             <Style x:Key="TextTab" TargetType="Label">
                 <Setter Property="FontSize" Value="10" />
@@ -83,7 +91,14 @@
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="10,0" />
             </Style>
-            
+
+            <Style x:Key="ActiveTextTab" BasedOn="{StaticResource TextTab}" TargetType="Label">
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="Margin" Value="10,0" />
+            </Style>
+
             <!--Global Styles-->
             <Color x:Key="PrimaryDarkColor">#1E1E1E</Color>
             <Style TargetType="NavigationPage">

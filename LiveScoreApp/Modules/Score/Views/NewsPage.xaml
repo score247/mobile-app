@@ -1,0 +1,158 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Score.Views.NewsPage"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
+                    JustifyContent="Start"
+                    HeightRequest="30">
+            <Label Text="FAVOURITES" Style="{StaticResource TextTab}" />
+            <Label Text="WORLD NEWS" Style="{StaticResource ActiveTextTab}" />
+            <Label Text="TRANSFERS" Style="{StaticResource TextTab}" />
+            <Label Text="VIDEOS" Style="{StaticResource TextTab}" />
+        </FlexLayout>
+        <ScrollView Orientation="Vertical" 
+                    Margin="0,12,0,0">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                     VerticalOptions="Center"
+                     HorizontalOptions="FillAndExpand"
+                     Padding="4"
+                     Margin="0,0,0,4"
+                     BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_1.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <AbsoluteLayout>
+                        <Label Text="Luis Enrique casts doubt over Isco's Spain place" TextColor="#fff" 
+                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
+                               AbsoluteLayout.LayoutFlags="All"/>
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}"
+                               AbsoluteLayout.LayoutBounds="0,1,1,1" 
+                               AbsoluteLayout.LayoutFlags="All"/>
+                    </AbsoluteLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"        
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_2.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Carvaja wishes Morata well at Atletico" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"        
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_3.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_4.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Vinicius happy with Real Madrid role" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_5.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Alba : United and Juve? My dream is to retire at Barca" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"        
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_2.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Carvaja wishes Morata well at Atletico" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"        
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_3.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_4.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Vinicius happy with Real Madrid role" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" 
+                             VerticalOptions="Center"
+                             HorizontalOptions="FillAndExpand"
+                             Padding="4"
+                             Margin="0,0,0,4"
+                             BackgroundColor="{StaticResource SecondColor}">
+                    <AbsoluteLayout WidthRequest="96">
+                        <Image Source="news/news_5.png" Aspect="AspectFill" />
+                    </AbsoluteLayout>
+                    <StackLayout Padding="12,0">
+                        <Label Text="Alba : United and Juve? My dream is to retire at Barca" TextColor="#fff" LineBreakMode="CharacterWrap" />
+                        <Label Text="28 Jan 2019, 15:04" TextColor="{StaticResource GreyColor}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

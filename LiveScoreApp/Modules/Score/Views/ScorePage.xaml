@@ -9,7 +9,7 @@
              Title="Scores"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="images/search.png" Priority="1" />
+        <ToolbarItem Name="Search" Icon="images/search.png" Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -161,7 +161,7 @@
     </ContentPage.Resources>
     <StackLayout>
         <FlexLayout Style="{StaticResource CalendarContainer}">
-            <Frame Style="{StaticResource CalendarBox}" Margin="0,0,8,0">
+            <Frame x:Name="HomeIcon" Style="{StaticResource CalendarBox}" Margin="0,0,8,0">
                 <Label Style="{StaticResource HomeIcon}" />
             </Frame>
             <ListView x:Name="Calendar"
@@ -188,7 +188,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame Style="{StaticResource CalendarBox}">
+            <Frame x:Name="CalendarIcon" Style="{StaticResource CalendarBox}">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>
@@ -211,7 +211,7 @@
                             <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
                             <Label Text="24 Jan" Style="{StaticResource MatchDate}" />
-                            <Label Style="{StaticResource DetailIcon}" />
+                            <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

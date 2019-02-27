@@ -20,7 +20,8 @@
             containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
             containerRegistry.RegisterForNavigation<LivePage, LivePageViewModel>();
             containerRegistry.RegisterForNavigation<FavoritePage, FavoritePageViewModel>();
-            containerRegistry.RegisterForNavigation<LeaguePage, LeaguePageViewModel>(); 
+            containerRegistry.RegisterForNavigation<LeaguePage, LeaguePageViewModel>();
+            containerRegistry.RegisterForNavigation<NewsPage, NewsPageViewModel>();
         }
     }
 }

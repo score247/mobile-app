@@ -44,10 +44,11 @@
         </Style>
         
         <!-- Tab -->
-        <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
+        <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="Padding" Value="8,0" />
+            <Setter Property="BackgroundColor" Value="#0F111C" />
         </Style>
 
         <!-- Commentaries -->
@@ -150,20 +151,17 @@
             </StackLayout>
 
             <!-- Tab list -->
-            <ScrollView Orientation="Horizontal"
-                    HeightRequest="24"
-                    Padding="8,0"
-                    BackgroundColor="#0F111C">
+            <ScrollView Style="{StaticResource ScrollTab}">
                 <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
-                    <Label Text="ODDS" Style="{StaticResource TextTab}" />
-                    <Label Text="INFO" Style="{StaticResource TextTab}" />
-                    <Label Text="TRACKER" Style="{StaticResource TextTab}" TextColor="#FFF" />
-                    <Label Text="STATS" Style="{StaticResource TextTab}" />
-                    <Label Text="LINE-UPS" Style="{StaticResource TextTab}" />
-                    <Label Text="H2H" Style="{StaticResource TextTab}" />
-                    <Label Text="TABLE" Style="{StaticResource TextTab}" />
-                    <Label Text="SOCIAL" Style="{StaticResource TextTab}" />
-                    <Label Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
+                    <Label x:Name="ODDS" Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="INFO" Text="INFO" Style="{StaticResource ActiveTextTab}" />
+                    <Label x:Name="TRACKER" Text="TRACKER" Style="{StaticResource TextTab}" />
+                    <Label x:Name="STATS" Text="STATS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="LINEUPS" Text="LINE-UPS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="H2H" Text="H2H" Style="{StaticResource TextTab}" />
+                    <Label x:Name="TABLE" Text="TABLE" Style="{StaticResource TextTab}" />
+                    <Label x:Name="SOCIAL" Text="SOCIAL" Style="{StaticResource TextTab}" />
+                    <Label x:Name="TV" Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
                 </StackLayout>
             </ScrollView>
 

@@ -230,5 +230,38 @@
   <ItemGroup>
     <BundleResource Include="Resources\flag_league\europa_league.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\asia_cup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\copa_america_centenario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\uefa_nation_league.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\uefa_woman_champion_league.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\uefa_youth_league.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\flag_league\world_cup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\news\news_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\news\news_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\news\news_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\news\news_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\news\news_2.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

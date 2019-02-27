@@ -15,37 +15,37 @@
                      HorizontalOptions="Start"
                      Spacing="0">
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite Team Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoriteTeamAlert" Text="Favorite Team Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite Player Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoritePlayerAlert" Text="Favorite Player Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite Match Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoriteMatchAlert" Text="Favorite Match Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite League Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoriteLeagueAlert" Text="Favorite League Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite Nation Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoriteNationAlert" Text="Favorite Nation Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
             <BoxView Style="{StaticResource MenuLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                <Label Text="Favorite Club Alert" TextColor="#fff" Margin="16,0" />
+                <Label x:Name="FavoriteClubAlert" Text="Favorite Club Alert" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
         </StackLayout>
