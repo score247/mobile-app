@@ -3,6 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Score.Views.CalendarPage">
+             x:Class="Score.Views.CalendarPage"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <StackLayout>
+        <FlexLayout Direction="Row">
+            <Frame BackgroundColor="{StaticResource SecondColor}">
+                <Label Style="{StaticResource Icons}" Text="&#xe913;" TextColor="#636886" />
+            </Frame>
+        </FlexLayout>
+    </StackLayout>
   
 </ContentPage>

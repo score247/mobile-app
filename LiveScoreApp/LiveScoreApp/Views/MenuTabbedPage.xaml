@@ -73,5 +73,10 @@
                 <ContentPage Title="TV schedule" />
             </x:Arguments>
         </NavigationPage>
+        <NavigationPage x:Name="Calendar" Title="Calendar" Icon="images/tv.png">
+        <x:Arguments>
+                <score:CalendarPage Title="Calendar"></score:CalendarPage>
+        </x:Arguments>
+        </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

@@ -6,7 +6,7 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FavoritePageResource : ResourceDictionary
     {
-        public ScorePageResource()
+        public FavoritePageResource()
         {
             InitializeComponent();
         }
