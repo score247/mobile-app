@@ -4,29 +4,17 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Score.Views.FavoritePage"
+             xmlns:resources="clr-namespace:Score.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
-        
-        <Style x:Key="LeagueGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-            <Setter Property="HeightRequest" Value="44" />
-            <Setter Property="Margin" Value="0,12,0,0" />
-            <Setter Property="BackgroundColor" Value="#1D2133" />
-        </Style>
-        
-        <Style x:Key="LeagueLogo" TargetType="Image">
-            <Setter Property="Aspect" Value="AspectFit" />
-            <Setter Property="WidthRequest" Value="21" />
-            <Setter Property="Margin" Value="10,0,2,0" />
-        </Style>
-        <Style x:Key="LeagueName" TargetType="Label">
-            <Setter Property="TextColor" Value="#fff" />
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:ScorePageResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Spacing="0">
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
@@ -40,7 +28,7 @@
         <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="StartAndExpand">
-                <Image Source="flag_league/champion_league.png" Style="{StaticResource LeagueLogo}"  />
+                <Image Source="flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
                 <Label Text="Champion League" Style="{StaticResource LeagueName}" />
             </StackLayout>
             <Label Style="{StaticResource ArrowRightIcon}" />
@@ -49,9 +37,9 @@
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="StartAndExpand">
                 <Image Source="flag_league/europa_league.png" Style="{StaticResource LeagueLogo}" />
-                <Label Text="Europa League" Style="{StaticResource LeagueName}"  />
+                <Label Text="Europa League" Style="{StaticResource LeagueName}" />
             </StackLayout>
             <Label Style="{StaticResource ArrowRightIcon}" />
         </FlexLayout>
-    </StackLayout> 
+    </StackLayout>
 </ContentPage>
