@@ -22,6 +22,7 @@
             containerRegistry.RegisterForNavigation<FavoritePage, FavoritePageViewModel>();
             containerRegistry.RegisterForNavigation<LeaguePage, LeaguePageViewModel>();
             containerRegistry.RegisterForNavigation<NewsPage, NewsPageViewModel>();
+            containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();
         }
     }
 }

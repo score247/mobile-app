@@ -7,7 +7,7 @@
              BackgroundColor="#0F111C"
              Title="Info Alert">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="MenuItem2" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
