@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.Core.Settings
+﻿namespace Core.Settings
 {
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;

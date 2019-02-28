@@ -1,13 +1,14 @@
-﻿using Prism;
-using Prism.Ioc;
-using LiveScoreApp.Views;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Prism.Modularity;
+﻿using Core.LangResources;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
+using LiveScoreApp.Views;
+using Plugin.Multilingual;
+using Prism;
+using Prism.Ioc;
+using Prism.Modularity;
 using Prism.Mvvm;
-using Prism.Navigation;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -34,6 +35,7 @@ namespace LiveScoreApp
 #if DEBUG
             HotReloader.Current.Start();
 #endif
+            AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");

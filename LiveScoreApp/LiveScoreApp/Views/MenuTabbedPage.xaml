@@ -4,9 +4,9 @@
             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             prism:ViewModelLocator.AutowireViewModel="True"
-            xmlns:tournament="clr-namespace:Tournament.Views;assembly=Tournament"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             xmlns:views="clr-namespace:LiveScoreApp.Views"
+            xmlns:langs="clr-namespace:Core.LangResources;assembly=Core"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
             x:Name="self"
             BarTextColor="#666666"
@@ -17,27 +17,17 @@
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Scores" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate Scores}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:ScorePage>
             </x:Arguments>
         </NavigationPage>
 
-        <!--<NavigationPage Title="Scores" Icon="images/scores.png">
-            <x:Arguments>
-                <score:MatchTrackerPage Title="Scores">
-                    <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Match Info" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-                    </NavigationPage.TitleView>
-                </score:MatchTrackerPage>
-            </x:Arguments>
-        </NavigationPage>-->
-
         <NavigationPage x:Name="Live" Title="Live" Icon="images/live.png">
             <x:Arguments>
                 <score:LivePage Title="Live">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Live" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:LivePage>
             </x:Arguments>
@@ -46,7 +36,7 @@
             <x:Arguments>
                 <score:FavoritePage Title="Favorites">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Favorites" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:FavoritePage>
             </x:Arguments>
@@ -55,7 +45,7 @@
             <x:Arguments>
                 <score:LeaguePage Title="Leagues">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="Leagues" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate Leagues}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:LeaguePage>
             </x:Arguments>
@@ -75,9 +65,9 @@
             </x:Arguments>
         </NavigationPage>
         <NavigationPage x:Name="Calendar" Title="Calendar" Icon="images/tv.png">
-        <x:Arguments>
+            <x:Arguments>
                 <score:CalendarPage Title="Calendar"></score:CalendarPage>
-        </x:Arguments>
+            </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>
 </TabbedPage>

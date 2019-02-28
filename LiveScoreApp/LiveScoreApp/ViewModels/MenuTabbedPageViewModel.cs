@@ -1,4 +1,5 @@
-﻿using LiveScoreApp.Views;
+﻿using Core.LangResources;
+using LiveScoreApp.Views;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;

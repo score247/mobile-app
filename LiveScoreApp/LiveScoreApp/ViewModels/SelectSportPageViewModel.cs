@@ -1,11 +1,11 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
-    using LiveScoreApp.Core.Settings;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using Core.Settings;
     using LiveScoreApp.Models;
     using Prism.Commands;
     using Prism.Navigation;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
 
     public class SelectSportPageViewModel : ViewModelBase
     {

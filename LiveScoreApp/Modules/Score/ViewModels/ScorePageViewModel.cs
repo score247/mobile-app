@@ -1,14 +1,14 @@
 ﻿namespace Score.ViewModels
 {
-    using LiveScoreApp.Core.Settings;
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Core.Settings;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;
     using Score.Services;
     using Score.Views;
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
 
     public class ScorePageViewModel : ViewModelBase
     {

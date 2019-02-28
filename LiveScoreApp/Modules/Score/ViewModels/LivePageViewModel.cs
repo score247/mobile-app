@@ -1,17 +1,14 @@
-﻿using LiveScoreApp.Core.Settings;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
-using Score.Models;
-using Score.Services;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-
-namespace Score.ViewModels
+﻿namespace Score.ViewModels
 {
-	public class LivePageViewModel :  ViewModelBase
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Core.Settings;
+    using Prism.Commands;
+    using Prism.Navigation;
+    using Score.Models;
+    using Score.Services;
+
+    public class LivePageViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
         private bool isRefreshingMatchList;
@@ -22,7 +19,7 @@ namespace Score.ViewModels
             get { return groupMatches; }
             set { SetProperty(ref groupMatches, value); }
         }
-        
+
         public bool IsRefreshingMatchList
         {
             get { return isRefreshingMatchList; }

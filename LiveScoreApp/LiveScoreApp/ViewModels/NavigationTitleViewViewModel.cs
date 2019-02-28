@@ -1,12 +1,11 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
-    using LiveScoreApp.Core.Settings;
+    using System.Collections.Generic;
+    using Core.Settings;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
     using Prism.Commands;
     using Prism.Navigation;
-    using System.Collections.Generic;
-    using System.Linq;
 
     public class NavigationTitleViewViewModel : ViewModelBase
     {
