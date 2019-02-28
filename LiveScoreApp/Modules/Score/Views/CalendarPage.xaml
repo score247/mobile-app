@@ -23,6 +23,11 @@
             <Setter Property="Text" Value="&#xe913;" />
         </Style>
 
+        <Style x:Key="CurrentYear" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+            <Setter Property="FontSize" Value="20" />
+        </Style>
+
         <Style x:Key="Day" TargetType="Label">
             <Setter Property="TextColor" Value="#636886" />
             <Setter Property="FontSize" Value="12" />
@@ -48,9 +53,9 @@
         </Style>
     </ContentPage.Resources>
     <StackLayout Padding="16" Orientation="Vertical">
-        <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
             <Button Style="{StaticResource PrevButton}" />
-            <Label Text="January 2019" TextColor="{StaticResource GreenColor}" FontSize="20" />
+            <Label Text="January 2019" Style="{StaticResource CurrentYear}" />
             <Button Style="{StaticResource NextButton}" />
         </FlexLayout>
 

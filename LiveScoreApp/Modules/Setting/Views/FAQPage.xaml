@@ -7,7 +7,7 @@
              Title="Frequently Asked Questions"
              BackgroundColor="#0F111C">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1"  Command="{Binding DoneCommand}" />
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -22,21 +22,65 @@
             <StackLayout Orientation="Vertical"
                          VerticalOptions="Start"
                          BackgroundColor="#1D2133"
-                         Padding="16">
-                <Label Text="Which sports do your scoreboards cover?" FontAttributes="Bold" Margin="0,0,0,8" />
-                <Label Text="We currently support baseball, softball, handball, football, MMA, basketball, rugby (league, nation, AAFL, hockey, tennis and multi-sport." />
-                <Label Text="These score-boards and  controls have been optimized for a perfect usage." />
-                <Label Text="Multi-Sport is a general scoreboard for all kinds of sport. If you need another sport, just tell us and we considẻ to implement it for upcoming versions." />
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Which sports do your scoreboards cover?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
             </StackLayout>
 
             <StackLayout Orientation="Vertical"
                          VerticalOptions="Start"
                          BackgroundColor="#1D2133"
-                         Padding="16"
-                         Margin="0,16">
-                <Label Text="Do you have a free version?" FontAttributes="Bold" Margin="0,0,0,8" />
-                <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
-                <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Do you have a free version?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
+                <StackLayout Padding="16,0,16,16">
+                    <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
+                    <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Start"
+                         BackgroundColor="#1D2133"
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Start"
+                         BackgroundColor="#1D2133"
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Start"
+                         BackgroundColor="#1D2133"
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
+            </StackLayout>
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Start"
+                         BackgroundColor="#1D2133"
+                         Margin="0,0,0,16">
+                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
+                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+                    <Label Style="{StaticResource ArrowRightIcon}" />
+                </FlexLayout>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
