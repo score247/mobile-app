@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tournament.Models
+namespace League.Models
 {
-    public class Tournament
+    public class League
     {
         public string Id { get; set; }
 

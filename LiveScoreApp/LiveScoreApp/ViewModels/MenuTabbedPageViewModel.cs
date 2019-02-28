@@ -1,14 +1,7 @@
-﻿using Core.LangResources;
-using LiveScoreApp.Views;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace LiveScoreApp.ViewModels
+﻿namespace LiveScoreApp.ViewModels
 {
+    using Prism.Navigation;
+
     public class MenuTabbedPageViewModel : ViewModelBase
     {
         public MenuTabbedPageViewModel(INavigationService navigationService)

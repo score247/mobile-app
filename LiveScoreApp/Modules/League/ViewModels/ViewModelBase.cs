@@ -1,12 +1,8 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Tournament.ViewModels
+﻿namespace League.ViewModels
 {
+    using Prism.Mvvm;
+    using Prism.Navigation;
+
     public class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; }

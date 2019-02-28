@@ -1,4 +1,4 @@
-﻿namespace Core.LangResources
+﻿namespace Common.LangResources
 {
     using System;
     using System.Reflection;
@@ -10,7 +10,7 @@
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        private const string ResourceId = "Core.LangResources.AppResources";
+        private const string ResourceId = "Common.LangResources.AppResources";
 
         private static readonly Lazy<ResourceManager> resourceManager
             = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Core.LangResources {
+namespace Common.LangResources {
     using System;
     
     

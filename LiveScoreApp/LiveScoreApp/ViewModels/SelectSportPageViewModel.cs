@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Core.Settings;
+    using Common.Settings;
     using LiveScoreApp.Models;
     using Prism.Commands;
     using Prism.Navigation;

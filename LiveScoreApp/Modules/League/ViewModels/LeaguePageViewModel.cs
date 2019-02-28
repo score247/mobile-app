@@ -1,38 +1,32 @@
-﻿namespace Tournament.ViewModels
+﻿namespace League.ViewModels
 {
-    using Prism.Commands;
-    using Prism.Mvvm;
-    using Prism.Navigation;
-    using System;
     using System.Collections.ObjectModel;
+    using League.Models;
+    using League.Services;
+    using Prism.Commands;
+    using Prism.Navigation;
     using Xamarin.Forms;
-    using Tournament.Models;
-    using Tournament.Services;
 
-    public class TournamentPageViewModel : ViewModelBase
+    public class LeaguePageViewModel : ViewModelBase
     {
-        private Tournament selectedTournament;
-        private ITournamentService tournamentService;
+        private League selectedTournament;
 
-        public ObservableCollection<Tournament> Tournaments { get; set; }
+        public ObservableCollection<League> Leagues { get; set; }
 
         public DelegateCommand ItemTappedCommand { get; set; }
 
-        public Tournament SelectedTournament
+        public League SelectedTournament
         {
             get => selectedTournament;
             set => SetProperty(ref selectedTournament, value);
         }
 
-        public TournamentPageViewModel(INavigationService navigationService, ITournamentService tournamentService)
+        public LeaguePageViewModel(INavigationService navigationService, ILeagueService leagueService)
             : base(navigationService)
         {
-            this.tournamentService = tournamentService;
-
-            Title = "Tournament";
+            Title = "League";
             ItemTappedCommand = new DelegateCommand(ItemTapped);
-
-            Tournaments = new ObservableCollection<Tournament>(tournamentService.GetAll());
+            Leagues = new ObservableCollection<League>(leagueService.GetAll());
         }
 
         private async void ItemTapped()

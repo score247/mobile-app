@@ -1,43 +1,43 @@
-﻿namespace Tournament.Services
+﻿namespace League.Services
 {
     using System;
     using System.Collections.Generic;
-    using Tournament.Models;
+    using League.Models;
 
-    public interface ITournamentService
+    public interface ILeagueService
     {
-        IList<Tournament> GetAll();
+        IList<League> GetAll();
 
-        IList<Match> GetTournamentMatches(string tournamentId);
+        IList<Match> GetLeagueMatches(string tournamentId);
     }
 
-    internal class TournamentService : ITournamentService
+    internal class LeagueService : ILeagueService
     {
-        public IList<Tournament> GetAll()
+        public IList<League> GetAll()
         {
-            return new List<Tournament>
+            return new List<League>
             {
-                new Tournament { Id = "1", Text = "Champions League", Description="This is an item description.", Image = "tab_feed.png" },
-                new Tournament { Id = "2", Text = "Europa League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "Premiere League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "Bundesliga", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "Laliga", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
-                new Tournament { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = "1", Text = "Champions League", Description="This is an item description.", Image = "tab_feed.png" },
+                new League { Id = "2", Text = "Europa League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "Premiere League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "Bundesliga", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "Laliga", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
+                new League { Id = Guid.NewGuid().ToString(), Text = "V-League", Description="This is an item description.",Image = "tab_feed.png" },
             };
         }
 
-        public IList<Match> GetTournamentMatches(string tournamentId)
+        public IList<Match> GetLeagueMatches(string leagueId)
         {
             IList<Match> matches;
 
-            if (tournamentId == "1")
+            if (leagueId == "1")
             {
                 matches = new List<Match>
                 {

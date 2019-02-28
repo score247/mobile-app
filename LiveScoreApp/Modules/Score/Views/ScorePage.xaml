@@ -33,9 +33,8 @@
                     <DataTemplate>
                         <ViewCell IsEnabled="false">
                             <ViewCell.View>
-                                <Frame Style="{StaticResource CalendarBox}"
-                                       Rotation="90">
-                                    <StackLayout>
+                                <Frame Style="{StaticResource CalendarBox}" Rotation="90">
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label Text="{Binding Day}"
                                                Style="{StaticResource CalendarDay}"
                                                 FontSize="18" />

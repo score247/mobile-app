@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tournament.Models
+namespace League.Models
 {
     public class Match
     {

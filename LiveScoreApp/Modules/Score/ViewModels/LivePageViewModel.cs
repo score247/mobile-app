@@ -2,7 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Core.Settings;
+    using Common.Settings;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;

@@ -23,10 +23,10 @@
     <PackageReference Include="Xamarin.HotReload" Version="1.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Modules\Core\Core.csproj" />
+    <ProjectReference Include="..\Modules\Common\Common.csproj" />
+    <ProjectReference Include="..\Modules\League\League.csproj" />
     <ProjectReference Include="..\Modules\Score\Score.csproj" />
     <ProjectReference Include="..\Modules\Setting\Setting.csproj" />
-    <ProjectReference Include="..\Modules\Tournament\Tournament.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Views\MasterDetailPage.xaml">

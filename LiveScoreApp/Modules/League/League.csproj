@@ -10,8 +10,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\TournamentPage.xaml.cs">
-      <DependentUpon>TournamentPage.xaml</DependentUpon>
+    <Compile Update="Views\LeaguePage.xaml.cs">
+      <DependentUpon>LeaguePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -19,6 +19,15 @@
     <EmbeddedResource Update="Views\TournamentDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Views\LeagueDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\LeaguePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>

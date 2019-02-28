@@ -1,15 +1,15 @@
-﻿namespace Tournament.ViewModels
+﻿namespace League.ViewModels
 {
     using Prism.Navigation;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Tournament.Models;
-    using Tournament.Services;
+    using League.Models;
+    using League.Services;
 
-    public class TournamentDetailPageViewModel : ViewModelBase
+    public class LeagueDetailPageViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
-        private ITournamentService tournamentService;
+        private readonly ILeagueService leagueService;
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -17,16 +17,16 @@
             set { SetProperty(ref groupMatches, value); }
         }
 
-        public TournamentDetailPageViewModel(INavigationService navigationService, ITournamentService tournamentService)
+        public LeagueDetailPageViewModel(INavigationService navigationService, ILeagueService leagueService)
             : base(navigationService)
         {
-            this.tournamentService = tournamentService;
+            this.leagueService = leagueService;
         }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             var tournamentId = parameters["id"] as string;
-            var matches = tournamentService.GetTournamentMatches(tournamentId);
+            var matches = leagueService.GetLeagueMatches(tournamentId);
 
             GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
         }

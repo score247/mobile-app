@@ -1,4 +1,4 @@
-﻿namespace Core.Settings
+﻿namespace Common.Settings
 {
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;

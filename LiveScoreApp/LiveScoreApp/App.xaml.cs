@@ -1,4 +1,4 @@
-﻿using Core.LangResources;
+﻿using Common.LangResources;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
@@ -56,7 +56,7 @@ namespace LiveScoreApp
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Tournament.TournamentModule>();
+            moduleCatalog.AddModule<League.LeagueModule>();
             moduleCatalog.AddModule<Score.ScoreModule>();
             moduleCatalog.AddModule<Setting.SettingModule>();
         }

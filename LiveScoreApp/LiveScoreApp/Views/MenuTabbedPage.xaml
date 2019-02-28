@@ -6,7 +6,7 @@
             prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             xmlns:views="clr-namespace:LiveScoreApp.Views"
-            xmlns:langs="clr-namespace:Core.LangResources;assembly=Core"
+            xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
             x:Name="self"
             BarTextColor="#666666"
