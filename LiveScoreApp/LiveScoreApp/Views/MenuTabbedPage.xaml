@@ -13,7 +13,7 @@
             BarBackgroundColor="{StaticResource PrimaryColor}"
             BackgroundColor="{StaticResource PrimaryColor}">
     <TabbedPage.Children>
-        <NavigationPage x:Name="Scores" Title="Scores" Icon="images/scores.png">
+        <NavigationPage x:Name="Scores" Title="{langs:Translate Scores}" Icon="images/scores.png">
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
@@ -23,7 +23,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Live" Title="Live" Icon="images/live.png">
+        <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/live.png">
             <x:Arguments>
                 <score:LivePage Title="Live">
                     <NavigationPage.TitleView>
@@ -32,16 +32,16 @@
                 </score:LivePage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage x:Name="Favorites" Title="Favorites" Icon="images/star.png">
+        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/star.png">
             <x:Arguments>
                 <score:FavoritePage Title="Favorites">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate Favorites}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:FavoritePage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage x:Name="Leagues" Title="Leagues"  Icon="images/league.png">
+        <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/league.png">
             <x:Arguments>
                 <score:LeaguePage Title="Leagues">
                     <NavigationPage.TitleView>
@@ -50,18 +50,18 @@
                 </score:LeaguePage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage x:Name="News" Title="News" Icon="images/news.png">
+        <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/news.png">
             <x:Arguments>
                 <score:NewsPage Title="News">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="News" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <views:NavigationTitleView Title="{langs:Translate News}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:NewsPage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage x:Name="TVschedule" Title="TV schedule" Icon="images/tv.png">
+        <NavigationPage x:Name="TVschedule" Title="{langs:Translate TVSchedule}" Icon="images/tv.png">
             <x:Arguments>
-                <ContentPage Title="TV schedule" />
+                <ContentPage Title="{langs:Translate TVSchedule}" />
             </x:Arguments>
         </NavigationPage>
         <NavigationPage x:Name="Calendar" Title="Calendar" Icon="images/tv.png">

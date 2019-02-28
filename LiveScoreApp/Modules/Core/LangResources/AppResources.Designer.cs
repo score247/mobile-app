@@ -59,5 +59,59 @@ namespace Core.LangResources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Favorites.
+        /// </summary>
+        public static string Favorites {
+            get {
+                return ResourceManager.GetString("Favorites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Leagues.
+        /// </summary>
+        public static string Leagues {
+            get {
+                return ResourceManager.GetString("Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Live.
+        /// </summary>
+        public static string Live {
+            get {
+                return ResourceManager.GetString("Live", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to News.
+        /// </summary>
+        public static string News {
+            get {
+                return ResourceManager.GetString("News", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scores.
+        /// </summary>
+        public static string Scores {
+            get {
+                return ResourceManager.GetString("Scores", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TV Schedule.
+        /// </summary>
+        public static string TVSchedule {
+            get {
+                return ResourceManager.GetString("TVSchedule", resourceCulture);
+            }
+        }
     }
 }
