@@ -16,7 +16,8 @@
                   SelectedItem="{Binding SelectedSportItem}"
                   BackgroundColor="#1D2133"
                   SeparatorColor="#2E3245"
-                  VerticalOptions="FillAndExpand">
+                  VerticalOptions="FillAndExpand"
+                  AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectSportItemCommand}" />
             </ListView.Behaviors>

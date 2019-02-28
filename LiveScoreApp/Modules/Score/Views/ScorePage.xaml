@@ -27,7 +27,8 @@
             </Frame>
             <ListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"
-                      Style="{StaticResource CalendarListView}">
+                      Style="{StaticResource CalendarListView}"
+                      AutomationProperties.IsInAccessibleTree="False">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell IsEnabled="false">
@@ -64,7 +65,8 @@
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
-                Style="{StaticResource listViewStyle}">
+                Style="{StaticResource listViewStyle}"
+                AutomationProperties.IsInAccessibleTree="False">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell Height="28">

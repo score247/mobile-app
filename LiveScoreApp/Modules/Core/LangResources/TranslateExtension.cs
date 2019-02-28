@@ -12,7 +12,7 @@
     {
         private const string ResourceId = "Core.LangResources.AppResources";
 
-        private static readonly Lazy<ResourceManager> resmgr
+        private static readonly Lazy<ResourceManager> resourceManager
             = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 
         public string Text { get; set; }
@@ -20,16 +20,18 @@
         public object ProvideValue(IServiceProvider serviceProvider)
         {
             if (Text == null)
-                return "";
+            {
+                return string.Empty;
+            }
 
-            var ci = CrossMultilingual.Current.CurrentCultureInfo;
-            var translation = resmgr.Value.GetString(Text, ci);
+            var cultureInfo = CrossMultilingual.Current.CurrentCultureInfo;
+            var translation = resourceManager.Value.GetString(Text, cultureInfo);
 
             if (translation == null)
             {
 #if DEBUG
                 throw new ArgumentException(
-                    $"Key '{Text}' was not found in resources '{ResourceId}' for culture '{ci.Name}'.", Text);
+                    $"Key '{Text}' was not found in resources '{ResourceId}' for culture '{cultureInfo.Name}'.", Text);
 #else
                 translation = Text; // returns the key, which GETS DISPLAYED TO THE USER
 #endif
