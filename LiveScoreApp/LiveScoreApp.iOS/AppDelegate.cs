@@ -2,7 +2,6 @@ using Foundation;
 using Prism;
 using Prism.Ioc;
 using UIKit;
-using Xamarin.Forms;
 
 namespace LiveScoreApp.iOS
 {
@@ -32,7 +31,6 @@ namespace LiveScoreApp.iOS
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            HotReloader.Current.Start();
             // Register any platform specific implementations
         }
     }

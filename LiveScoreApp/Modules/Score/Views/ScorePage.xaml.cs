@@ -6,7 +6,10 @@ namespace Score.Views
     {
         public ScorePage()
         {
-            this.InitComponent(InitializeComponent);
+#if DEBUG
+            LiveReload.Init();
+#endif
+            InitializeComponent();
         }
     }
 }

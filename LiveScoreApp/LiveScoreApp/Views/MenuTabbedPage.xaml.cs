@@ -14,7 +14,10 @@ namespace LiveScoreApp.Views
     {
         public MenuTabbedPage()
         {
-            this.InitComponent(InitializeComponent);
+#if DEBUG
+            LiveReload.Init();
+#endif
+            InitializeComponent();
         }
     }
 }

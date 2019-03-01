@@ -7,7 +7,10 @@
     {
         public SelectSportPage()
         {
-            this.InitComponent(InitializeComponent);
+#if DEBUG
+            LiveReload.Init();
+#endif
+            InitializeComponent();
         }
     }
 }

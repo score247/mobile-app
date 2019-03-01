@@ -32,9 +32,6 @@ namespace LiveScoreApp
 
         protected override async void OnInitialized()
         {
-#if DEBUG
-            HotReloader.Current.Start();
-#endif
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
