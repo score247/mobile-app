@@ -5,6 +5,7 @@
             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
+            xmlns:league="clr-namespace:League.Views;assembly=League"
             xmlns:views="clr-namespace:LiveScoreApp.Views"
             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
@@ -33,11 +34,11 @@
         </NavigationPage>
         <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/league.png">
             <x:Arguments>
-                <score:LeaguePage Title="Leagues">
+                <league:LeaguePage Title="Leagues">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate Leagues}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </score:LeaguePage>
+                </league:LeaguePage>
             </x:Arguments>
         </NavigationPage>
         <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/news.png">

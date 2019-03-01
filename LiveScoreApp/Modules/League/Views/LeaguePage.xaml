@@ -5,11 +5,35 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             Title="{Binding Title}">
-    <StackLayout BackgroundColor="#1D2133">
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Icon="images/add.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+
+        <Style x:Key="LeagueGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+            <Setter Property="HeightRequest" Value="44" />
+            <Setter Property="Margin" Value="0,12,0,0" />
+            <Setter Property="BackgroundColor" Value="#1D2133" />
+        </Style>
+
+        <Style x:Key="LeagueLogo" TargetType="Image">
+            <Setter Property="Aspect" Value="AspectFit" />
+            <Setter Property="WidthRequest" Value="21" />
+            <Setter Property="Margin" Value="10,0,12,0" />
+        </Style>
+        <Style x:Key="LeagueName" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
+
+    <StackLayout>
         <SearchBar Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10" />
         <ListView x:Name="ItemsListView"
-                ItemsSource="{Binding Tournaments}"
+                ItemsSource="{Binding Leagues}"
                 SelectedItem="{Binding SelectedTournament}"
                 IsPullToRefreshEnabled="true"
                 Style="{StaticResource listViewStyle}">
@@ -21,31 +45,14 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Orientation="Horizontal" Padding="15" Spacing="0">
-                            <StackLayout
-                                    HorizontalOptions="Start"
-                                    VerticalOptions="Center"
-                                    Orientation="Horizontal">
-                                <Label Text="{Binding Text}"
-                                    LineBreakMode="NoWrap"
-                                    Style="{StaticResource labelStyle}" />
+                        <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
+                            <StackLayout Orientation="Horizontal"
+                         HorizontalOptions="StartAndExpand">
+                                <Image Source="flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
+                                <Label Text="Champion League" Style="{StaticResource LeagueName}" />
                             </StackLayout>
-                            <StackLayout
-                                    HorizontalOptions="EndAndExpand"
-                                    VerticalOptions="Center"
-                                    Orientation="Horizontal">
-                                <Button Text="&#xf105;"
-                                        FontSize="Large"
-                                        FontAttributes="Bold"
-                                        Style="{StaticResource btnStyle}">
-                                    <Button.FontFamily>
-                                        <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                    </Button.FontFamily>
-                                </Button>
-                            </StackLayout>
-                        </StackLayout>
+                            <Label Style="{StaticResource ArrowRightIcon}" />
+                        </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

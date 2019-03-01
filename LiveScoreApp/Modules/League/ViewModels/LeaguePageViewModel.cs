@@ -9,16 +9,16 @@
 
     public class LeaguePageViewModel : ViewModelBase
     {
-        private League selectedTournament;
+        private League selectedLeague;
 
         public ObservableCollection<League> Leagues { get; set; }
 
         public DelegateCommand ItemTappedCommand { get; set; }
 
-        public League SelectedTournament
+        public League SelectedLeague
         {
-            get => selectedTournament;
-            set => SetProperty(ref selectedTournament, value);
+            get => selectedLeague;
+            set => SetProperty(ref selectedLeague, value);
         }
 
         public LeaguePageViewModel(INavigationService navigationService, ILeagueService leagueService)
@@ -31,7 +31,7 @@
 
         private async void ItemTapped()
         {
-            var result = await NavigationService.NavigateAsync($"TournamentDetailPage?id={selectedTournament.Id}");
+            var result = await NavigationService.NavigateAsync($"TournamentDetailPage?id={selectedLeague.Id}");
 
             if (!result.Success)
             {
