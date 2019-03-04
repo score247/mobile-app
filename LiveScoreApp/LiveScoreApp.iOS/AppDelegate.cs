@@ -1,3 +1,4 @@
+using Firebase.PerformanceMonitoring;
 using Foundation;
 using Prism;
 using Prism.Ioc;
@@ -21,6 +22,12 @@ namespace LiveScoreApp.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            Performance.SharedInstance.InstrumentationEnabled = true;
+            Performance.SharedInstance.DataCollectionEnabled = true;
+
+            Firebase.Core.App.Configure();
+
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);
