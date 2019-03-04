@@ -2,49 +2,40 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:resources="clr-namespace:League.ViewResources"
              x:Class="League.Views.LeagueDetailPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:LeagueDetailPageResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout>
         <ListView
                 ItemsSource="{Binding GroupMatches}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="true"
+                RefreshCommand="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsRefreshingMatchList}"
                 CachingStrategy="RecycleElement"
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Key}"
-                SeparatorColor="#1D2133"
-                Style="{StaticResource listViewStyle}">
+                SeparatorColor="{StaticResource LineColor}"
+                Style="{StaticResource listViewStyle}"
+                AutomationProperties.IsInAccessibleTree="False">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
-                    <ViewCell Height="25">
-                        <StackLayout Orientation="Horizontal" Spacing="0" BackgroundColor="#0F111C">
-                            <Image Source="Flag1.png"
-                                       Grid.Row="0"
-                                       Grid.Column="0"
-                                       WidthRequest="16"
-                                       HeightRequest="16"
-                                       Aspect="AspectFit"
-                                       Margin="18, 8, 12, 8" />
-
-                            <Label Grid.Row="0"
-                                       Grid.Column="1"
-                                       HeightRequest="30"
-                                       Text="{Binding Key}"
-                                       Style="{StaticResource LeagueStyle}" />
-
-                            <Label Grid.Row="0"
-                                       Grid.Column="2"
-                                       Text="24 Jan"
-                                       HorizontalOptions="EndAndExpand"
-                                       Style="{StaticResource TimeStyle}" />
-
-                            <Image Source="Detail.png"
-                                       Grid.Row="0"
-                                       Grid.Column="3"
-                                       WidthRequest="12"
-                                       Margin="8" />
+                    <ViewCell Height="28">
+                        <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
+                            <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                            <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
+                            <Label Text="24 Jan" Style="{StaticResource MatchDate}" />
+                            <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -53,162 +44,43 @@
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout BackgroundColor="Red"
-                                         Orientation="Vertical"
-                                         VerticalOptions="StartAndExpand"
-                                         Spacing="0">
+                            <StackLayout>
                                 <Grid HorizontalOptions="FillAndExpand"
-                                      BackgroundColor="#1D2133"
-                                      RowSpacing="0"
-                                      ColumnSpacing="0">
+                                      BackgroundColor="#1D2133">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="50" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="45" />
+                                        <ColumnDefinition Width="25" />
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="auto" />
-                                        <RowDefinition Height="10" />
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
 
-                                    <Label Grid.RowSpan="3"
-                                   Grid.Column="0"
-                                   Text="FT"
-                                   Style="{StaticResource EventStyle}" />
-
+                                    <Label Text="FT" Style="{StaticResource MatchStatus}" />
+                                    <Label Text="{Binding HomeTeam}" Style="{StaticResource HomeTeam}" />
+                                    <Label Text="{Binding AwayTeam}" Style="{StaticResource AwayTeam}" />
                                     <Label Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding HomeTeam}"
-                                Style="{StaticResource HomeTeamStyle}" />
-
-                                    <Label Grid.Row="2"
-                                Grid.Column="1"
-                                Text="{Binding AwayTeam}"
-                                Style="{StaticResource AwayTeamStyle}" />
-
-                                    <Label Grid.Row="0"
-                                Grid.Column="2"
-                                Text="{Binding HomeScore}"
-                                Style="{StaticResource Scorefont}" />
-                                    <Label Grid.Row="2"
-                                    Grid.Column="2"
-                                    Text="{Binding AwayScore}"
-                                    Style="{StaticResource Scorefont}" />
-
-                                    <Button
-                                Text="&#xf005;"
-                                        Grid.RowSpan="3"
-                                            Grid.Column="3"
-                                            WidthRequest="12"
-                                            Margin="8"
-                                Style="{StaticResource btnStyle}">
-                                        <Button.FontFamily>
-                                            <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                        </Button.FontFamily>
-                                    </Button>
-                                    <!--<Image
-                                            Source="Star.png"
-                                            Grid.RowSpan="3"
-                                            Grid.Column="3"
-                                            WidthRequest="12"
-                                            Margin="8">
-                                    </Image>-->
+                                        Grid.Column="2"
+                                        Text="{Binding HomeScore}"
+                                        Style="{StaticResource Score}"
+                                        Margin="0,4,20,0" />
+                                    <Label Grid.Row="1"
+                                            Grid.Column="2"
+                                            Text="{Binding AwayScore}"
+                                            Style="{StaticResource Score}"
+                                           Margin="0,0,20,4" />
+                                    <Label Style="{StaticResource FavoriteIcon}" />
                                 </Grid>
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
+            </ListView.Behaviors>
         </ListView>
-
-        <!--Using Flexlayout-->
-        <!--<ListView x:Name="ItemsListView"
-                ItemsSource="{Binding GroupMatches}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                IsPullToRefreshEnabled="true"
-                CachingStrategy="RecycleElement"
-                IsGroupingEnabled="True"
-                GroupDisplayBinding="{Binding Key}"
-                SeparatorColor="#313131">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell Height="25">
-                        <FlexLayout JustifyContent="SpaceAround" AlignItems="Center" AlignContent="Center" BackgroundColor="#313131">
-                            <Image FlexLayout.Grow="1.1" Source="championleague.png" HeightRequest="15" />
-                            <Label FlexLayout.Grow="7.9"
-                                   Text="{Binding Key}"
-                                   VerticalOptions="Center" FlexLayout.AlignSelf="Center"
-                                   Style="{StaticResource labelStyle}" />
-                            <Button FlexLayout.Grow="1"
-                                    Text="&#xf138;"
-                                    FontSize="Small"
-                                    BackgroundColor="#404040"
-                                    CornerRadius="0"
-                                    FontAttributes="Bold"
-                                    HeightRequest="25"
-                                    Opacity="0.8"
-                                    Style="{StaticResource btnStyle}">
-                                <Button.FontFamily>
-                                    <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                </Button.FontFamily>
-                            </Button>
-                        </FlexLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell Height="60">
-                        <FlexLayout JustifyContent="SpaceBetween" AlignItems="Center" AlignContent="Center">
-                            <Label Text="FT"
-                                   FlexLayout.Grow="1"
-                                   VerticalTextAlignment="Center"
-                                   HorizontalTextAlignment="Center"
-                                   Style="{StaticResource labelStyle}" />
-                            <FlexLayout Direction="Column" FlexLayout.Grow="7" JustifyContent="SpaceEvenly">
-                                <Label Text="{Binding HomeTeamName}"  Style="{StaticResource labelStyle}" />
-                                <Label Text="{Binding AwayTeamName}"  Style="{StaticResource labelStyle}" />
-                            </FlexLayout>
-                            <FlexLayout Direction="Column" FlexLayout.Grow="0.25" AlignItems="Start" JustifyContent="Center">
-                                <Label Text="{Binding HomeScore}"  Style="{StaticResource labelStyle}" TextColor="#ff9900" />
-                                <Label Text="{Binding AwayScore}"  Style="{StaticResource labelStyle}" TextColor="#ff9900" />
-                            </FlexLayout>
-                            <Button FlexLayout.Grow="0.75"
-                                    Text="&#xf105;"
-                                    FontSize="Large"
-                                    FontAttributes="Bold"
-                                    Style="{StaticResource btnStyle}">
-                                <Button.FontFamily>
-                                    <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                </Button.FontFamily>
-                            </Button>
-                            <Button
-                                BackgroundColor="#313131"
-                                FlexLayout.Grow="1"
-                                Text="&#xf005;"
-                                CornerRadius="0"
-                                HeightRequest="60"
-                                Opacity="0.8"
-                                Style="{StaticResource btnStyle}">
-                                <Button.FontFamily>
-                                    <OnPlatform x:TypeArguments="x:String"
-                                                    Android="fa-solid-900.ttf#Font Awesome 5 Free Regular"
-                                                    iOS="Font Awesome 5 Free" />
-                                </Button.FontFamily>
-                            </Button>
-                        </FlexLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>-->
     </StackLayout>
 </ContentPage>

@@ -34,7 +34,7 @@
         <SearchBar Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10" />
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Leagues}"
-                SelectedItem="{Binding SelectedTournament}"
+                SelectedItem="{Binding SelectedLeague}"
                 IsPullToRefreshEnabled="true"
                 Style="{StaticResource listViewStyle}">
             <ListView.Behaviors>

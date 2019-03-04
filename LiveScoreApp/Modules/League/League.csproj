@@ -10,6 +10,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="ViewResources\LeagueDetailPageResource.xaml.cs">
+      <DependentUpon>LeagueDetailPageResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\LeaguePage.xaml.cs">
       <DependentUpon>LeaguePage.xaml</DependentUpon>
     </Compile>

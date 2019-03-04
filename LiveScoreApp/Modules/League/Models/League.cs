@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace League.Models
+﻿namespace League.Models
 {
+    using System.Collections.Generic;
+
     public class League
     {
         public string Id { get; set; }

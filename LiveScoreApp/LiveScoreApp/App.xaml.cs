@@ -5,6 +5,7 @@ using LiveScoreApp.Views;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
+using Prism.Logging;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
@@ -40,6 +41,7 @@ namespace LiveScoreApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<ILoggerFacade, LogService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
 

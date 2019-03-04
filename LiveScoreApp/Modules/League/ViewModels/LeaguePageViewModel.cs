@@ -31,7 +31,7 @@
 
         private async void ItemTapped()
         {
-            var result = await NavigationService.NavigateAsync($"TournamentDetailPage?id={selectedLeague.Id}");
+            var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
 
             if (!result.Success)
             {
