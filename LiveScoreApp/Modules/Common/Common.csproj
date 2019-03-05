@@ -25,4 +25,7 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewResources\" />
+  </ItemGroup>
 </Project>
