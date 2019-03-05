@@ -7,7 +7,6 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converter="clr-namespace:Score.Converters"
              xmlns:resources="clr-namespace:Score.ViewResources"
-             Title="Scores"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/search.png" Priority="1" />

@@ -2,6 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using System.Linq;
+    using Common.ViewModels;
     using League.Models;
     using League.Services;
     using Prism.Commands;

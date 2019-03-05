@@ -19,7 +19,6 @@
             containerRegistry.RegisterForNavigation<MatchInfoPage, MatchInfoPageViewModel>();
             containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
             containerRegistry.RegisterForNavigation<LivePage, LivePageViewModel>();
-            containerRegistry.RegisterForNavigation<LeaguePage, LeaguePageViewModel>();
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();
         }
     }

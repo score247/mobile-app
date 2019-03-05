@@ -1,10 +1,8 @@
-﻿using LiveScoreApp.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LiveScoreApp.Services
+﻿namespace LiveScoreApp.Services
 {
+    using System.Collections.Generic;
+    using LiveScoreApp.Models;
+
     public interface ISportService
     {
         IEnumerable<SportItem> GetSportItems();

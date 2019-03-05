@@ -1,9 +1,10 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
+    using System.Collections.ObjectModel;
+    using Common.ViewModels;
     using LiveScoreApp.Services;
     using Prism.Commands;
     using Prism.Navigation;
-    using System.Collections.ObjectModel;
     using Xamarin.Forms;
 
     public class MasterDetailPageViewModel : ViewModelBase

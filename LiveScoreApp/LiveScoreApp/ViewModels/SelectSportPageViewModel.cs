@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Common.Settings;
+    using Common.ViewModels;
     using LiveScoreApp.Models;
     using Prism.Commands;
     using Prism.Navigation;

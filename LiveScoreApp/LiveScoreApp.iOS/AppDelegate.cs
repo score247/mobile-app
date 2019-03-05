@@ -27,7 +27,6 @@ namespace LiveScoreApp.iOS
             Performance.SharedInstance.DataCollectionEnabled = true;
 
             Firebase.Core.App.Configure();
-
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

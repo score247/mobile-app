@@ -1,6 +1,7 @@
 ﻿namespace League.ViewModels
 {
     using System.Collections.ObjectModel;
+    using Common.ViewModels;
     using League.Models;
     using League.Services;
     using Prism.Commands;

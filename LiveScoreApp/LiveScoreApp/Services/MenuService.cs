@@ -1,9 +1,7 @@
 ﻿namespace LiveScoreApp.Services
 {
-    using LiveScoreApp.Models;
-    using System;
     using System.Collections.Generic;
-    using System.Text;
+    using LiveScoreApp.Models;
 
     public interface IMenuService
     {

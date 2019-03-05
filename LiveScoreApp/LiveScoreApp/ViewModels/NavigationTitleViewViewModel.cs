@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Common.Settings;
+    using Common.ViewModels;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
     using Prism.Commands;
