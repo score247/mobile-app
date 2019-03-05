@@ -15,7 +15,7 @@
             <StackLayout Style="{StaticResource TabContainer}">
                 <AbsoluteLayout Style="{StaticResource TabGroup}">
                     <Label x:Name="FAVOURITES" Text="world News" Style="{StaticResource TextTab}" />
-                    <BoxView BackgroundColor="{StaticResource GreenColor}"
+                    <BoxView BackgroundColor="{StaticResource SecondAccentColor}"
                          HeightRequest="2"
                          AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
                          AbsoluteLayout.LayoutFlags="All" />
@@ -25,7 +25,7 @@
                 </AbsoluteLayout>
                 <AbsoluteLayout Style="{StaticResource TabGroup}">
                     <Label x:Name="TRANSFERS" Text="TRANSFERS" Style="{StaticResource TextTab}" />
-                    <BoxView BackgroundColor="{StaticResource GreenColor}"
+                    <BoxView BackgroundColor="{StaticResource SecondAccentColor}"
                          HeightRequest="2"
                          AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
                          AbsoluteLayout.LayoutFlags="All" />
@@ -61,7 +61,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -83,7 +83,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -105,7 +105,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -127,7 +127,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -149,7 +149,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -171,7 +171,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -193,7 +193,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -215,7 +215,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />
@@ -237,7 +237,7 @@
                                TextColor="#fff"
                                AbsoluteLayout.LayoutBounds="0,0,1,1"
                                AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
+                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
                                AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
                                VerticalOptions="End" />

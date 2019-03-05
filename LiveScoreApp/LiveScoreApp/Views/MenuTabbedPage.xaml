@@ -12,7 +12,7 @@
             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
             x:Name="self"
-            BarTextColor="#666666"
+            BarTextColor="{StaticResource SecondTextColor}"
             BarBackgroundColor="{StaticResource PrimaryColor}"
             BackgroundColor="{StaticResource PrimaryColor}">
     <TabbedPage.Children>

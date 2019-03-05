@@ -1,21 +1,20 @@
-﻿using Xamarin.Forms.Xaml;
+﻿using Common.LangResources;
+using LiveScoreApp.Services;
+using LiveScoreApp.ViewModels;
+using LiveScoreApp.Views;
+using Plugin.Multilingual;
+using Prism;
+using Prism.Ioc;
+using Prism.Logging;
+using Prism.Modularity;
+using Prism.Mvvm;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
 namespace LiveScoreApp
 {
-    using Common.LangResources;
-    using LiveScoreApp.Services;
-    using LiveScoreApp.ViewModels;
-    using LiveScoreApp.Views;
-    using Plugin.Multilingual;
-    using Prism;
-    using Prism.Ioc;
-    using Prism.Logging;
-    using Prism.Modularity;
-    using Prism.Mvvm;
-    using Xamarin.Forms;
-
     public partial class App
     {
         /*
@@ -46,6 +45,7 @@ namespace LiveScoreApp
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
 
+            containerRegistry.RegisterForNavigation<MainPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedPage>();
             containerRegistry.RegisterForNavigation<Views.MasterDetailPage>();
             containerRegistry.RegisterForNavigation<NavigationPage>();

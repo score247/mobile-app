@@ -20,25 +20,25 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <FlexLayout Style="{StaticResource CalendarContainer}">
-            <Frame x:Name="HomeIcon" Style="{StaticResource CalendarBox}" Margin="0,0,8,0">
+        <FlexLayout Style="{StaticResource QuickAccessContainer}">
+            <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
                 <Label Style="{StaticResource HomeIcon}" />
             </Frame>
             <ListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"
-                      Style="{StaticResource CalendarListView}"
+                      Style="{StaticResource QuickAccessCalendarListView}"
                       AutomationProperties.IsInAccessibleTree="False">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell IsEnabled="false">
                             <ViewCell.View>
-                                <Frame Style="{StaticResource CalendarBox}" Rotation="90">
+                                <Frame Style="{StaticResource QuickAccessCalendarBox}" Rotation="90">
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label Text="{Binding Day}"
-                                               Style="{StaticResource CalendarDay}"
+                                               Style="{StaticResource QuickAccessCalendarDate}"
                                                 FontSize="18" />
                                         <Label Text="{Binding DayOfWeek,  Converter={StaticResource dayOfWeekConverter}}"
-                                               Style="{StaticResource CalendarDay}"
+                                               Style="{StaticResource QuickAccessCalendarDate}"
                                                FontAttributes="Bold"
                                                FontSize="6" />
                                     </StackLayout>
@@ -48,7 +48,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame x:Name="CalendarIcon" Style="{StaticResource CalendarBox}">
+            <Frame x:Name="CalendarIcon" Style="{StaticResource QuickAccessCalendarBox}">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>

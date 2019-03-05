@@ -17,7 +17,7 @@
         <Setter Property="Grid.Column" Value="1" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
-        <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
@@ -28,13 +28,13 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-        <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="11" />
     </Style>
 
     <Style x:Key="DetailIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Text" Value="&#xe915;" />
-        <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="12,0" />
@@ -48,7 +48,7 @@
         <Setter Property="Grid.Column" Value="0" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="10" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
@@ -62,14 +62,14 @@
     <Style x:Key="HomeTeam" BasedOn="{StaticResource Team}" TargetType="Label">
         <Setter Property="Grid.Row" Value="0" />
         <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="TextColor" Value="{StaticResource HomeColor}" />
+        <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
         <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
 
     <Style x:Key="AwayTeam" BasedOn="{StaticResource Team}" TargetType="Label">
         <Setter Property="Grid.Row" Value="1" />
         <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="TextColor" Value="{StaticResource AwayColor}" />
+        <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
         <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
 
@@ -83,13 +83,13 @@
         <Setter Property="Grid.RowSpan" Value="2" />
         <Setter Property="Grid.Column" Value="3" />
         <Setter Property="Text" Value="&#xe90f;" />
-        <Setter Property="TextColor" Value="{StaticResource GreyColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
     </Style>
 
     <Style x:Key="ActiveFavoriteIcon" BasedOn="{StaticResource FavoriteIcon}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource GreenColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
     </Style>
 </ResourceDictionary>
