@@ -6,6 +6,8 @@
             prism:ViewModelLocator.AutowireViewModel="True"
             xmlns:score="clr-namespace:Score.Views;assembly=Score"
             xmlns:league="clr-namespace:League.Views;assembly=League"
+            xmlns:news="clr-namespace:News.Views;assembly=News"
+            xmlns:favorites="clr-namespace:Favorites.Views;assembly=Favorites"
             xmlns:views="clr-namespace:LiveScoreApp.Views"
             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
             x:Class="LiveScoreApp.Views.MenuTabbedPage"
@@ -23,15 +25,17 @@
                 </score:ScorePage>
             </x:Arguments>
         </NavigationPage>
+
         <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/star.png">
             <x:Arguments>
-                <score:FavoritePage Title="Favorites">
+                <favorites:FavoritePage Title="Favorites">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate Favorites}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </score:FavoritePage>
+                </favorites:FavoritePage>
             </x:Arguments>
         </NavigationPage>
+
         <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/league.png">
             <x:Arguments>
                 <league:LeaguePage Title="Leagues">
@@ -41,20 +45,23 @@
                 </league:LeaguePage>
             </x:Arguments>
         </NavigationPage>
+
         <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/news.png">
             <x:Arguments>
-                <score:NewsPage Title="News">
+                <news:NewsPage Title="News">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate News}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </score:NewsPage>
+                </news:NewsPage>
             </x:Arguments>
         </NavigationPage>
-        <NavigationPage x:Name="TVschedule" Title="{langs:Translate TVSchedule}" Icon="images/tv.png">
+
+        <NavigationPage x:Name="TVSchedule" Title="{langs:Translate TVSchedule}" Icon="images/tv.png">
             <x:Arguments>
                 <ContentPage Title="{langs:Translate TVSchedule}" />
             </x:Arguments>
         </NavigationPage>
+
         <NavigationPage x:Name="Calendar" Title="Calendar" Icon="images/tv.png">
             <x:Arguments>
                 <score:CalendarPage Title="Calendar"></score:CalendarPage>

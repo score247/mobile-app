@@ -1,16 +1,13 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Score.ViewModels
+﻿namespace Score.ViewModels
 {
-	public class MatchTrackerPageViewModel : BindableBase
-	{
-        public MatchTrackerPageViewModel()
-        {
+    using Common.ViewModels;
+    using Prism.Navigation;
 
+    public class MatchTrackerPageViewModel : ViewModelBase
+    {
+        public MatchTrackerPageViewModel(INavigationService navigationService)
+            : base(navigationService)
+        {
         }
-	}
+    }
 }

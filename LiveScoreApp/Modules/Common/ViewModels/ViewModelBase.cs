@@ -1,23 +1,20 @@
-﻿using Prism.AppModel;
-using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Score.ViewModels
+﻿namespace Common.ViewModels
 {
-    public class ViewModelBase : BindableBase, INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
+    using Prism.AppModel;
+    using Prism.Mvvm;
+    using Prism.Navigation;
+
+    public class ViewModelBase : BindableBase,
+            INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
         protected INavigationService NavigationService { get; }
 
-        private string _title;
+        private string title;
 
         public string Title
         {
-            get { return _title; }
-            set { SetProperty(ref _title, value); }
+            get { return title; }
+            set { SetProperty(ref title, value); }
         }
 
         public ViewModelBase(INavigationService navigationService)

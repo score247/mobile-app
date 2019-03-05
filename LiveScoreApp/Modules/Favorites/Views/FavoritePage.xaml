@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Score.Views.FavoritePage"
-             xmlns:resources="clr-namespace:Score.ViewResources"
+             x:Class="Favorites.Views.FavoritePage"
+             xmlns:resources="clr-namespace:Favorites.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />

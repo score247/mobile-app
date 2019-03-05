@@ -3,13 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Score.Views.NewsPage"
+             x:Class="News.Views.NewsPage"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="12" />
         </Style>
-        
     </ContentPage.Resources>
     <StackLayout>
         <!--<ScrollView Style="{StaticResource TabScroll}">
@@ -19,22 +18,20 @@
                     <BoxView BackgroundColor="{StaticResource GreenColor}"
                          HeightRequest="2"
                          AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
-                         AbsoluteLayout.LayoutFlags="All"/>
+                         AbsoluteLayout.LayoutFlags="All" />
                 </AbsoluteLayout>
                 <AbsoluteLayout Style="{StaticResource TabGroup}">
                     <Label x:Name="WORLDNEWS" Text="WORLD NEWS" Style="{StaticResource ActiveTextTab}" />
-                    
                 </AbsoluteLayout>
                 <AbsoluteLayout Style="{StaticResource TabGroup}">
                     <Label x:Name="TRANSFERS" Text="TRANSFERS" Style="{StaticResource TextTab}" />
                     <BoxView BackgroundColor="{StaticResource GreenColor}"
                          HeightRequest="2"
                          AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
-                         AbsoluteLayout.LayoutFlags="All"/>
+                         AbsoluteLayout.LayoutFlags="All" />
                 </AbsoluteLayout>
                 <AbsoluteLayout Style="{StaticResource TabGroup}">
                     <Label x:Name="VIDEOS" Text="INFO" Style="{StaticResource TextTab}" />
-                   
                 </AbsoluteLayout>
             </StackLayout>
         </ScrollView>-->
@@ -46,10 +43,10 @@
             <Label Text="TRANSFERS" Style="{StaticResource TextTab}" />
             <Label Text="VIDEOS" Style="{StaticResource TextTab}" />
         </FlexLayout>
-        <ScrollView Orientation="Vertical" 
+        <ScrollView Orientation="Vertical"
                     Margin="0,12,0,0">
             <StackLayout>
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -60,18 +57,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Luis Enrique casts doubt over Isco's Spain place"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -82,18 +79,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Carvaja wishes Morata well at Atletico"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -104,18 +101,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -126,18 +123,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Vinicius happy with Real Madrid role"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -148,19 +145,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
-                
-                
-                <StackLayout Orientation="Horizontal" 
+
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -171,18 +167,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Carvaja wishes Morata well at Atletico"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -193,18 +189,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -215,18 +211,18 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Vinicius happy with Real Madrid role"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal" 
+                <StackLayout Orientation="Horizontal"
                      VerticalOptions="Center"
                      HorizontalOptions="FillAndExpand"
                      Padding="4"
@@ -237,14 +233,14 @@
                     </AbsoluteLayout>
                     <AbsoluteLayout Padding="12,0">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               FontSize="12" 
-                               TextColor="#fff" 
-                               AbsoluteLayout.LayoutBounds="0,0,1,1" 
-                               AbsoluteLayout.LayoutFlags="All"/>
+                               FontSize="12"
+                               TextColor="#fff"
+                               AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               AbsoluteLayout.LayoutFlags="All" />
                         <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource GreyColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3" 
+                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
                                AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End"/>
+                               VerticalOptions="End" />
                     </AbsoluteLayout>
                 </StackLayout>
             </StackLayout>

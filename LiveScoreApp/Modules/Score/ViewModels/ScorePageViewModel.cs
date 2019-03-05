@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using Common.Settings;
+    using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;

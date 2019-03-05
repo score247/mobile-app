@@ -1,4 +1,4 @@
-﻿namespace Score.ViewResources
+﻿namespace Favorites.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
