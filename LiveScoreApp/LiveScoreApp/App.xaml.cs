@@ -41,7 +41,7 @@ namespace LiveScoreApp
             InitializeComponent();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
 
-            AppCenter.Start("ios=e8eb6ecb-ab2f-4699-a265-4bdc101427ef;", typeof(Analytics), typeof(Crashes));
+            AppCenter.Start("ios=78840378-a040-416b-84c6-91390b3edb55;", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

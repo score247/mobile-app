@@ -1,5 +1,6 @@
 ﻿namespace League.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using Common.ViewModels;
     using League.Models;
@@ -32,12 +33,14 @@
 
         private async void ItemTapped()
         {
-            var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
+            throw new InvalidOperationException("Auto-generated exception");
 
-            if (!result.Success)
-            {
-                await Application.Current.MainPage.DisplayAlert("Alert", "Error loading tournament page", "Cancel");
-            }
+            //var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
+
+            //if (!result.Success)
+            //{
+            //    await Application.Current.MainPage.DisplayAlert("Alert", "Error loading tournament page", "Cancel");
+            //}
         }
     }
 }
