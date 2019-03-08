@@ -8,9 +8,6 @@
     {
         public MenuTabbedPage()
         {
-#if DEBUG
-            LiveReload.Init();
-#endif
             InitializeComponent();
         }
     }

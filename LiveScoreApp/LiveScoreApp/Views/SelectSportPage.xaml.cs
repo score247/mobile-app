@@ -6,9 +6,6 @@
     {
         public SelectSportPage()
         {
-#if DEBUG
-            LiveReload.Init();
-#endif
             InitializeComponent();
         }
     }

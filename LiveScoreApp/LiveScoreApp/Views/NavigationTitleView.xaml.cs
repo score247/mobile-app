@@ -8,9 +8,6 @@
     {
         public NavigationTitleView()
         {
-#if DEBUG
-            LiveReload.Init();
-#endif
             InitializeComponent();
             titleLabel.BindingContext = this;
         }

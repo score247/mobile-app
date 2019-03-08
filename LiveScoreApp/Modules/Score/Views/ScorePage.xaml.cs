@@ -6,9 +6,6 @@ namespace Score.Views
     {
         public ScorePage()
         {
-#if DEBUG
-            LiveReload.Init();
-#endif
             InitializeComponent();
         }
     }

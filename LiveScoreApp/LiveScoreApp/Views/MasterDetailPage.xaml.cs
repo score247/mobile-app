@@ -10,9 +10,6 @@
     {
         public MasterDetailPage()
         {
-#if DEBUG
-            LiveReload.Init();
-#endif
             InitializeComponent();
         }
 
