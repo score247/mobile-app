@@ -1,19 +1,17 @@
 ﻿namespace Score.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Common.Settings;
+    using Common.Models;
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
-    using Score.Models;
-    using Score.Services;
 
     public class LivePageViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
         private bool isRefreshingMatchList;
-        private readonly IScoreService scoreService;
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -35,10 +33,9 @@
                 IsRefreshingMatchList = false;
             });
 
-        public LivePageViewModel(INavigationService navigationService, IScoreService scoreService)
+        public LivePageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            this.scoreService = scoreService;
         }
 
         public override void OnAppearing()
@@ -48,8 +45,8 @@
 
         private void GetMatches()
         {
-            var matches = scoreService.GetAll(Settings.CurrentSportId).ToList();
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
+            var matches = new List<Match>();
+            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.League.Id));
         }
     }
 }

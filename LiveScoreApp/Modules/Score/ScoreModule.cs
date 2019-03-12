@@ -4,7 +4,6 @@
     using Prism.Modularity;
     using Score.Views;
     using Score.ViewModels;
-    using Score.Services;
 
     public class ScoreModule : IModule
     {
@@ -14,7 +13,6 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IScoreService, ScoreService>();
             containerRegistry.RegisterForNavigation<ScorePage, ScorePageViewModel>();
             containerRegistry.RegisterForNavigation<MatchInfoPage, MatchInfoPageViewModel>();
             containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
