@@ -35,11 +35,18 @@
             var language = Settings.LanguageMapper[Settings.CurrentLanguage];
             var eventDate = date.ToSportRadarFormat();
             var apiKey = Settings.SportRadarApiKey;
+            try
+            {
+                var dailySchedule = await matchApi.GetDailySchedules(sportName, language, eventDate, apiKey).ConfigureAwait(false);
+                dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
-            var dailySchedule = await matchApi.GetDailySchedules(sportName, language, eventDate, apiKey).ConfigureAwait(false);
-            dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
+                return dailySchedule.Matches;
+            }
+            catch (Exception ex)
+            {
+                return Enumerable.Empty<Match>().ToList();
+            }
 
-            return dailySchedule.Matches;
         }
     }
 }

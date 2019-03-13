@@ -13,10 +13,7 @@ namespace LiveScoreApp.iOS.Renderers
         {
             var cell = base.GetCell(item, reusableCell, tv);
 
-            cell.SelectedBackgroundView = new UIView
-            {
-                BackgroundColor = UIColor.Clear,
-            };
+            cell.SelectionStyle = UITableViewCellSelectionStyle.None;
 
             return cell;
         }

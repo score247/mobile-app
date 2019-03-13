@@ -13,6 +13,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter"/>
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <resources:ScorePageResource />
@@ -27,7 +28,7 @@
             <ListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource QuickAccessCalendarListView}"
-                      SelectedItem="{Binding CurrentDate}"
+                      SelectedItem="{Binding SelectedCalendarDate}"
                       AutomationProperties.IsInAccessibleTree="False">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
@@ -38,13 +39,14 @@
                             <ViewCell.View>
                                 <Frame Style="{StaticResource QuickAccessCalendarBox}" Rotation="90">
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                        <Label Text="{Binding Day}"
+                                        <Label Text="{Binding Date.Day}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
-                                               TextColor="{Binding TextColor}"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource calendarTextColorConverter}}"
                                                FontSize="18" />
-                                        <Label Text="{Binding DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
+                                        <Label Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
                                                FontAttributes="Bold"
+                                               TextColor="{Binding IsSelected, Converter={StaticResource calendarTextColorConverter}}"
                                                FontSize="6" />
                                     </StackLayout>
                                 </Frame>

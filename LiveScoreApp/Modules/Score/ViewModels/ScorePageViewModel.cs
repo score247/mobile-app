@@ -8,16 +8,17 @@
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
+    using Score.Models;
     using Score.Services;
     using Score.Views;
 
     public class ScorePageViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
-        private ObservableCollection<DateTime> calendarItems;
+        private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
         private readonly IMatchService matchService;
-        private DateTime currentDate;
+        private CalendarDate selectedCalendarDate;
 
         public ScorePageViewModel(
             INavigationService navigationService,
@@ -27,18 +28,10 @@
             this.matchService = matchService;
         }
 
-        private string textColor = "#F24822";
-
-        public string TextColor
+        public CalendarDate SelectedCalendarDate
         {
-            get { return textColor; }
-            set { SetProperty(ref textColor, value); }
-        }
-
-        public DateTime CurrentDate
-        {
-            get { return currentDate; }
-            set { SetProperty(ref currentDate, value); }
+            get { return selectedCalendarDate; }
+            set { SetProperty(ref selectedCalendarDate, value); }
         }
 
         public ObservableCollection<IGrouping<dynamic, Match>> GroupMatches
@@ -53,7 +46,7 @@
             set => SetProperty(ref isRefreshingMatchList, value);
         }
 
-        public ObservableCollection<DateTime> CalendarItems
+        public ObservableCollection<CalendarDate> CalendarItems
         {
             get => calendarItems;
             set => SetProperty(ref calendarItems, value);
@@ -66,7 +59,7 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                GetMatches();
+                GetMatches(SelectedCalendarDate.Date);
                 IsRefreshingMatchList = false;
             });
 
@@ -74,35 +67,43 @@
 
         private void OnSelectDateCommandExecuted()
         {
-            Settings.CurrentDate = CurrentDate;
+            GenerateCalendar(SelectedCalendarDate.Date);
+            GetMatches(SelectedCalendarDate.Date);
         }
 
         public override void OnAppearing()
         {
-            GetMatches();
-            GenerateCalendar();
+            GetMatches(DateTime.Now);
+            GenerateCalendar(DateTime.Now);
         }
 
-        private void GetMatches()
+        private void GetMatches(DateTime currentDate)
         {
-            var matches = matchService.GetDailyMatches(DateTime.Today.AddDays(-1)).Result;
+            var matches = matchService.GetDailyMatches(currentDate).Result;
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
         }
 
-        private void GenerateCalendar()
+        private void GenerateCalendar(DateTime currentDate)
         {
-            CalendarItems = new ObservableCollection<DateTime>
+            var calendar = new ObservableCollection<CalendarDate>();
+
+            for (int i = -3; i <= 3; i++)
             {
-                DateTime.Today.AddDays(-3),
-                DateTime.Today.AddDays(-2),
-                DateTime.Today.AddDays(-1),
-                DateTime.Today,
-                DateTime.Today.AddDays(1),
-                DateTime.Today.AddDays(2),
-                DateTime.Today.AddDays(3)
-            };
+                var date = DateTime.Today.AddDays(i);
+
+                calendar.Add(
+                    new CalendarDate
+                    {
+                        Date = date,
+                        IsSelected = currentDate.Day == date.Day
+                            && currentDate.Month == date.Month
+                            && currentDate.Year == date.Year
+                    });
+            }
+
+            CalendarItems = new ObservableCollection<CalendarDate>(calendar);
         }
     }
 }
