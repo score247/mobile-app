@@ -144,6 +144,7 @@
     <BundleResource Include="Resources\images\soccer%403x.png" />
     <BundleResource Include="Resources\images\tv%402x.png" />
     <BundleResource Include="Resources\images\tv%403x.png" />
+    <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">

@@ -23,24 +23,7 @@ namespace LiveScoreApp.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
 
-            SetSelectedTabColor();
-
             return base.FinishedLaunching(app, options);
-        }
-
-        private void SetSelectedTabColor()
-        {
-            UIColor selectedTabColor = UIColor.FromRGB(62, 194, 143);
-
-            UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
-
-            UITabBarItem.Appearance.SetTitleTextAttributes
-            (new UITextAttributes()
-            {
-                TextColor = selectedTabColor
-            },
-                UIControlState.Selected);
-
         }
     }
 
