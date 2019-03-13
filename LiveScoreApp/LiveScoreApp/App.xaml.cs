@@ -38,6 +38,10 @@ namespace LiveScoreApp
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
+#if DEBUG
+            HotReloader.Current.Start(this);
+#endif
+
             InitializeComponent();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
 

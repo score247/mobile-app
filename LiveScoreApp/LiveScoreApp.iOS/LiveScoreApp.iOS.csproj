@@ -135,10 +135,13 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Xamarin.HotReload">
+      <Version>1.2.2</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveScoreApp\LiveScoreApp.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{CEA846A3-CF25-459B-9FB0-971A672B486B}</Project>
       <Name>LiveScoreApp</Name>
     </ProjectReference>
   </ItemGroup>
