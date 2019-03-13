@@ -112,6 +112,7 @@
     <BundleResource Include="Resources\livescore\fonts\livescore.ttf" />
     <BundleResource Include="Resources\livescore\fonts\livescore.woff" />
     <BundleResource Include="Resources\livescore.ttf" />
+    <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
@@ -133,7 +134,7 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
     <PackageReference Include="Xamarin.HotReload">
       <Version>1.2.2</Version>
@@ -264,6 +265,9 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\news\news_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

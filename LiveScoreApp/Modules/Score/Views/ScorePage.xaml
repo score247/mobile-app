@@ -27,10 +27,14 @@
             <ListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource QuickAccessCalendarListView}"
+                      SelectedItem="{Binding CurrentDate}"
                       AutomationProperties.IsInAccessibleTree="False">
+                <ListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell IsEnabled="false">
+                        <ViewCell>
                             <ViewCell.View>
                                 <Frame Style="{StaticResource QuickAccessCalendarBox}" Rotation="90">
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">

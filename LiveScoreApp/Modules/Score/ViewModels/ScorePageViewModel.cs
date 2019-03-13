@@ -66,7 +66,7 @@
 
         private void OnSelectDateCommandExecuted()
         {
-            Settings.CurrentDate = currentDate;
+            Settings.CurrentDate = CurrentDate;
         }
 
         public override void OnAppearing()
