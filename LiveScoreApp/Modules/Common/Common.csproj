@@ -14,6 +14,9 @@
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Models\MatchHeader.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="LangResources\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

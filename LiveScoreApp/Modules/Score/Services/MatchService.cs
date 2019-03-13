@@ -1,10 +1,12 @@
-﻿namespace Common.Services
+﻿namespace Score.Services
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Common.Models;
+    using Common.Settings;
     using Refit;
 
     public interface IMatchApi
@@ -24,17 +26,18 @@
 
         public MatchService(IMatchApi matchApi)
         {
-            this.matchApi = matchApi ?? RestService.For<IMatchApi>(Settings.Settings.BaseSportRadarEndPoint);
+            this.matchApi = matchApi ?? RestService.For<IMatchApi>(Settings.BaseSportRadarEndPoint);
         }
 
         public async Task<IList<Match>> GetDailyMatches(DateTime date)
         {
-            var sportName = Settings.Settings.SportNameMapper[Settings.Settings.CurrentSportName];
-            var language = Settings.Settings.LanguageMapper[Settings.Settings.CurrentLanguage];
+            var sportName = Settings.SportNameMapper[Settings.CurrentSportName];
+            var language = Settings.LanguageMapper[Settings.CurrentLanguage];
             var eventDate = date.ToSportRadarFormat();
-            var apiKey = Settings.Settings.SportRadarApiKey;
+            var apiKey = Settings.SportRadarApiKey;
 
             var dailySchedule = await matchApi.GetDailySchedules(sportName, language, eventDate, apiKey).ConfigureAwait(false);
+            dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
             return dailySchedule.Matches;
         }

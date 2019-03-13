@@ -8,5 +8,7 @@
         {
             return value.ToString("yyyy-MM-dd");
         }
+
+        public static string ToShortDayMonth(this DateTime value) => value.ToString("dd MMM");
     }
 }

@@ -4,10 +4,11 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using Common.Models;
-    using Common.Services;
+    using Common.Settings;
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
+    using Score.Services;
     using Score.Views;
 
     public class ScorePageViewModel : ViewModelBase
@@ -16,6 +17,7 @@
         private ObservableCollection<DateTime> calendarItems;
         private bool isRefreshingMatchList;
         private readonly IMatchService matchService;
+        private DateTime currentDate;
 
         public ScorePageViewModel(
             INavigationService navigationService,
@@ -23,6 +25,12 @@
         : base(navigationService)
         {
             this.matchService = matchService;
+        }
+
+        public DateTime CurrentDate
+        {
+            get { return currentDate; }
+            set { SetProperty(ref currentDate, value); }
         }
 
         public ObservableCollection<IGrouping<dynamic, Match>> GroupMatches
@@ -44,7 +52,7 @@
         }
 
         public DelegateCommand SelectMatchCommand
-         => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
+            => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
         public DelegateCommand RefreshCommand
             => new DelegateCommand(() =>
@@ -53,6 +61,13 @@
                 GetMatches();
                 IsRefreshingMatchList = false;
             });
+
+        public DelegateCommand SelectDateCommand => new DelegateCommand(OnSelectDateCommandExecuted);
+
+        private void OnSelectDateCommandExecuted()
+        {
+            Settings.CurrentDate = currentDate;
+        }
 
         public override void OnAppearing()
         {
@@ -65,7 +80,7 @@
             var matches = matchService.GetDailyMatches(DateTime.Today.AddDays(-1)).Result;
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
-                matches.GroupBy(m => new { m.Event.League.Name, m.Event.EventDate.Day }));
+                matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
         }
 
         private void GenerateCalendar()

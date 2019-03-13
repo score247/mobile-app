@@ -1,5 +1,6 @@
 ﻿namespace Common.Settings
 {
+    using System;
     using System.Collections.Generic;
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;
@@ -36,6 +37,12 @@
         {
             get => AppSettings.GetValueOrDefault(nameof(SportRadarApiKey), "s37g6cgqfabegn5mu8snw293");
             set => AppSettings.AddOrUpdateValue(nameof(SportRadarApiKey), value);
+        }
+
+        public static DateTime CurrentDate
+        {
+            get => AppSettings.GetValueOrDefault(nameof(CurrentDate), DateTime.Today);
+            set => AppSettings.AddOrUpdateValue(nameof(CurrentDate), value);
         }
 
         public static IDictionary<string, string> LanguageMapper { get; } = new Dictionary<string, string>

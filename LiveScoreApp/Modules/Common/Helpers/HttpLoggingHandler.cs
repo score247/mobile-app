@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Common.Helpers
 {
-    internal class HttpLoggingHandler : DelegatingHandler
+    public class HttpLoggingHandler : DelegatingHandler
     {
         public HttpLoggingHandler(HttpMessageHandler innerHandler = null) : base(
             innerHandler ?? new HttpClientHandler())

@@ -14,7 +14,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
-            <converter:MatchHeaderDateConverter x:Key="matchHeaderDateConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <resources:ScorePageResource />
             </ResourceDictionary.MergedDictionaries>
@@ -72,7 +71,7 @@
                         <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
                             <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
-                            <Label Text="{Binding Key.Day, Converter={StaticResource matchHeaderDateConverter}}"
+                            <Label Text="{Binding Key.ShortEventDate}"
                                    Style="{StaticResource MatchDate}" />
                             <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
                         </StackLayout>

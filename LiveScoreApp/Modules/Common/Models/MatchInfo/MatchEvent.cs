@@ -20,5 +20,7 @@
 
         [JsonProperty("venue")]
         public Venue Venue { get; set; }
+
+        public string ShortEventDate { get; set; }
     }
 }
