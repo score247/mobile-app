@@ -40,7 +40,8 @@
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label Text="{Binding Day}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
-                                                FontSize="18" />
+                                               TextColor="{Binding TextColor}"
+                                               FontSize="18" />
                                         <Label Text="{Binding DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
                                                FontAttributes="Bold"

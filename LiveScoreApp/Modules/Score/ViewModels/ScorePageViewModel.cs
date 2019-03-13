@@ -27,6 +27,14 @@
             this.matchService = matchService;
         }
 
+        private string textColor = "#F24822";
+
+        public string TextColor
+        {
+            get { return textColor; }
+            set { SetProperty(ref textColor, value); }
+        }
+
         public DateTime CurrentDate
         {
             get { return currentDate; }
