@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -27,6 +27,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchFloat32>true</MtouchFloat32>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -98,6 +100,21 @@
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants></DefineConstants>
+    <WarningLevel>4</WarningLevel>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchDebug>true</MtouchDebug>
+    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
+    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchVerbosity></MtouchVerbosity>
+    <IOSDebuggerPort>32138</IOSDebuggerPort>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -112,7 +129,24 @@
     <BundleResource Include="Resources\livescore\fonts\livescore.ttf" />
     <BundleResource Include="Resources\livescore\fonts\livescore.woff" />
     <BundleResource Include="Resources\livescore.ttf" />
+<<<<<<< HEAD
     <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
+=======
+    <BundleResource Include="Resources\images\league%402x.png" />
+    <BundleResource Include="Resources\images\league%403x.png" />
+    <BundleResource Include="Resources\images\favorite.png" />
+    <BundleResource Include="Resources\images\favorite%402x.png" />
+    <BundleResource Include="Resources\images\favorite%403x.png" />
+    <BundleResource Include="Resources\images\live%402x.png" />
+    <BundleResource Include="Resources\images\live%403x.png" />
+    <BundleResource Include="Resources\images\news%402x.png" />
+    <BundleResource Include="Resources\images\news%403x.png" />
+    <BundleResource Include="Resources\images\soccer.png" />
+    <BundleResource Include="Resources\images\soccer%402x.png" />
+    <BundleResource Include="Resources\images\soccer%403x.png" />
+    <BundleResource Include="Resources\images\tv%402x.png" />
+    <BundleResource Include="Resources\images\tv%403x.png" />
+>>>>>>> fe7a0ce... update tab bar
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
