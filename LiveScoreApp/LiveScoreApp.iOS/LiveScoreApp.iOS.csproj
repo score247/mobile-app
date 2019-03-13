@@ -118,6 +118,7 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -129,9 +130,6 @@
     <BundleResource Include="Resources\livescore\fonts\livescore.ttf" />
     <BundleResource Include="Resources\livescore\fonts\livescore.woff" />
     <BundleResource Include="Resources\livescore.ttf" />
-<<<<<<< HEAD
-    <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
-=======
     <BundleResource Include="Resources\images\league%402x.png" />
     <BundleResource Include="Resources\images\league%403x.png" />
     <BundleResource Include="Resources\images\favorite.png" />
@@ -146,7 +144,6 @@
     <BundleResource Include="Resources\images\soccer%403x.png" />
     <BundleResource Include="Resources\images\tv%402x.png" />
     <BundleResource Include="Resources\images\tv%403x.png" />
->>>>>>> fe7a0ce... update tab bar
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
