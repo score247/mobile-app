@@ -145,6 +145,13 @@
     <BundleResource Include="Resources\images\tv%402x.png" />
     <BundleResource Include="Resources\images\tv%403x.png" />
     <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
+    <BundleResource Include="Resources\images\edit.png" />
+    <BundleResource Include="Resources\images\edit%402x.png" />
+    <BundleResource Include="Resources\images\edit%403x.png" />
+    <BundleResource Include="Resources\images\hamburger%402x.png" />
+    <BundleResource Include="Resources\images\hamburger%403x.png" />
+    <BundleResource Include="Resources\images\search%402x.png" />
+    <BundleResource Include="Resources\images\search%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
