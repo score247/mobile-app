@@ -18,17 +18,22 @@ namespace LiveScoreApp.iOS.Renderers
 
         private void SetSelectedTabColor()
         {
-            UIColor selectedTabColor = UIColor.FromRGB(62, 194, 143);
+            var color = App.Current.Resources["SecondAccentColor"];
 
-            UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
-
-            UITabBarItem.Appearance.SetTitleTextAttributes
-            (new UITextAttributes()
+            if (color != null)
             {
-                TextColor = selectedTabColor
-            },
-                UIControlState.Selected);
+                var selectedColor = (Color)color;
+                UIColor selectedTabColor = UIColor.FromRGB((nfloat)selectedColor.R, (nfloat)selectedColor.G, (nfloat)selectedColor.B);
 
+                UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
+
+                UITabBarItem.Appearance.SetTitleTextAttributes
+                (new UITextAttributes()
+                {
+                    TextColor = selectedTabColor
+                },
+                    UIControlState.Selected);
+            }
         }
     }
 }
