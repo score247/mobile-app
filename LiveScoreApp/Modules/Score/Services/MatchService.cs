@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
@@ -11,8 +12,8 @@
 
     public interface IMatchApi
     {
-        [Get("/{sport}-t3/eu/{lang}/schedules/{date}/results.json?api_key={key}")]
-        Task<DailySchedule> GetDailySchedules(string sport, string lang, string date, string key);
+        [Get("/{sport}-t3/{group}/{lang}/schedules/{date}/results.json?api_key={key}")]
+        Task<DailySchedule> GetDailySchedules(string sport, string group, string lang, string date, string key);
     }
 
     public interface IMatchService
@@ -35,18 +36,34 @@
             var language = Settings.LanguageMapper[Settings.CurrentLanguage];
             var eventDate = date.ToSportRadarFormat();
             var apiKey = Settings.SportRadarApiKey;
+            var matches = new List<Match>();
+
+            var tasks = Settings.SportRadarLeagueGroup.Select(async (group) =>
+            {
+                matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate));
+            });
+
+            await Task.WhenAll(tasks);
+
+            return matches;
+        }
+
+        private async Task<IEnumerable<Match>> GetMatchesFromAPI(string group, string sportName, string language, string eventDate)
+        {
+            var apiKeyByGroup = Settings.ApiKeyMapper[group];
+
             try
             {
-                var dailySchedule = await matchApi.GetDailySchedules(sportName, language, eventDate, apiKey).ConfigureAwait(false);
+                var dailySchedule = await matchApi.GetDailySchedules(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
                 dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
                 return dailySchedule.Matches;
             }
             catch (Exception ex)
             {
-                return Enumerable.Empty<Match>().ToList();
+                Debug.WriteLine(ex.Message);
+                return Enumerable.Empty<Match>();
             }
-
         }
     }
 }

@@ -45,6 +45,17 @@
             set => AppSettings.AddOrUpdateValue(nameof(CurrentDate), value);
         }
 
+        public static IDictionary<string, string> ApiKeyMapper { get; } = new Dictionary<string, string>
+        {
+            { "eu", "s37g6cgqfabegn5mu8snw293" },
+            { "as", "sryuchhgtvff7nb62wktdre4" },
+            { "intl", "vrpveq5y64pvxpx4z7x5j24j" },
+            { "other", "3py8dv68pmb4dypxaqesm9jq" }
+        };
+
+        public static string[] SportRadarLeagueGroup = new string[] { "eu", "as", "intl", "other" };
+
+
         public static IDictionary<string, string> LanguageMapper { get; } = new Dictionary<string, string>
         {
             {"en-US", "en" }

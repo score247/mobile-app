@@ -13,6 +13,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="inverseBoolConverter"/>
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter"/>
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <ResourceDictionary.MergedDictionaries>
@@ -59,7 +60,21 @@
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>
+        <ActivityIndicator x:Name="activity"  
+                           IsRunning="{Binding IsLoadingMatches}"
+                           IsVisible="{Binding IsLoadingMatches}"
+                           IsEnabled="{Binding IsLoadingMatches}"
+                           Color="White"  
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Height,
+                                        Factor=0.33}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Height,
+                                        Factor=0.33}"/> 
         <ListView
+                IsVisible="{Binding IsLoadingMatches, Converter={StaticResource inverseBoolConverter}}"
                 ItemsSource="{Binding GroupMatches}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -76,6 +91,8 @@
                 <DataTemplate>
                     <ViewCell Height="28">
                         <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
+                      
+        
                             <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
                             <Label Text="{Binding Key.ShortEventDate}"
@@ -127,5 +144,6 @@
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
             </ListView.Behaviors>
         </ListView>
+        
     </StackLayout>
 </ContentPage>

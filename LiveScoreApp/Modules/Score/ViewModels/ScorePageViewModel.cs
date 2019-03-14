@@ -3,8 +3,8 @@
     using System;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Common.Models;
-    using Common.Settings;
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
@@ -17,6 +17,7 @@
         private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
         private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
+        private bool isLoadingMatches;
         private readonly IMatchService matchService;
         private CalendarDate selectedCalendarDate;
 
@@ -28,6 +29,18 @@
             this.matchService = matchService;
         }
 
+        public override async void OnAppearing()
+        {
+            LoadCalendar(DateTime.Now);
+
+            IsLoadingMatches = true;
+            await LoadMatches(DateTime.Now);
+            IsLoadingMatches = false;
+        }
+
+
+        #region BINDING PROPERTIES
+
         public CalendarDate SelectedCalendarDate
         {
             get { return selectedCalendarDate; }
@@ -38,6 +51,12 @@
         {
             get => groupMatches;
             set => SetProperty(ref groupMatches, value);
+        }
+
+        public bool IsLoadingMatches
+        {
+            get { return isLoadingMatches; }
+            set { SetProperty(ref isLoadingMatches, value); }
         }
 
         public bool IsRefreshingMatchList
@@ -52,40 +71,42 @@
             set => SetProperty(ref calendarItems, value);
         }
 
+        #endregion
+
+        #region BINDING COMMAND
+
         public DelegateCommand SelectMatchCommand
-            => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
+           => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
         public DelegateCommand RefreshCommand
-            => new DelegateCommand(() =>
+            => new DelegateCommand(async () =>
             {
                 IsRefreshingMatchList = true;
-                GetMatches(SelectedCalendarDate.Date);
+                await LoadMatches(SelectedCalendarDate.Date);
                 IsRefreshingMatchList = false;
             });
 
         public DelegateCommand SelectDateCommand => new DelegateCommand(OnSelectDateCommandExecuted);
 
-        private void OnSelectDateCommandExecuted()
+        private async void OnSelectDateCommandExecuted()
         {
-            GenerateCalendar(SelectedCalendarDate.Date);
-            GetMatches(SelectedCalendarDate.Date);
+            IsLoadingMatches = true;
+            LoadCalendar(SelectedCalendarDate.Date);
+            await LoadMatches(SelectedCalendarDate.Date);
+            IsLoadingMatches = false;
         }
 
-        public override void OnAppearing()
-        {
-            GetMatches(DateTime.Now);
-            GenerateCalendar(DateTime.Now);
-        }
+        #endregion
 
-        private void GetMatches(DateTime currentDate)
+        private async Task LoadMatches(DateTime currentDate)
         {
-            var matches = matchService.GetDailyMatches(currentDate).Result;
+            var matches = await matchService.GetDailyMatches(currentDate);
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
         }
 
-        private void GenerateCalendar(DateTime currentDate)
+        private void LoadCalendar(DateTime currentDate)
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
