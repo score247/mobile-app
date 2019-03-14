@@ -139,7 +139,6 @@
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
-
             NewDateCalendarItemCount += moreNewDay;
             OldDateCalendarItemCount += moreOldDay;
 

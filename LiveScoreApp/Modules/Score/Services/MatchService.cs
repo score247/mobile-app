@@ -35,7 +35,6 @@
             var sportName = Settings.SportNameMapper[Settings.CurrentSportName];
             var language = Settings.LanguageMapper[Settings.CurrentLanguage];
             var eventDate = date.ToSportRadarFormat();
-            var apiKey = Settings.SportRadarApiKey;
             var matches = new List<Match>();
 
             var tasks = Settings.SportRadarLeagueGroup.Select(async (group) =>
