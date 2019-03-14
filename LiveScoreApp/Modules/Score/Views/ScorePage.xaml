@@ -7,6 +7,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converter="clr-namespace:Score.Converters"
              xmlns:resources="clr-namespace:Score.ViewResources"
+             xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/search.png" Priority="1" />
@@ -26,15 +27,19 @@
             <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
                 <Label Style="{StaticResource HomeIcon}" />
             </Frame>
-            <ListView x:Name="Calendar"
+            <controls:InfiniteListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource QuickAccessCalendarListView}"
                       SelectedItem="{Binding SelectedCalendarDate}"
+                      LoadMoreCommand="{Binding LoadMoreCalendarCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsRefreshingCalendarList}"
+                      RefreshCommand="{Binding RefreshCalendarListCommand}"
                       AutomationProperties.IsInAccessibleTree="False">
-                <ListView.Behaviors>
+                <controls:InfiniteListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
+                </controls:InfiniteListView.Behaviors>
+                <controls:InfiniteListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
@@ -54,8 +59,8 @@
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </controls:InfiniteListView.ItemTemplate>
+            </controls:InfiniteListView>
             <Frame x:Name="CalendarIcon" Style="{StaticResource QuickAccessCalendarBox}">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
@@ -79,7 +84,7 @@
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="true"
-                RefreshCommand="{Binding RefreshCommand}"
+                RefreshCommand="{Binding RefreshMatchListCommand}"
                 IsRefreshing="{Binding IsRefreshingMatchList}"
                 CachingStrategy="RecycleElement"
                 IsGroupingEnabled="True"

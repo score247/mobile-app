@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Models;
-    using Common.Settings;
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
@@ -15,10 +14,13 @@
 
     public class ScorePageViewModel : ViewModelBase
     {
+        private int OldDateCalendarItemCount = 3;
+        private int NewDateCalendarItemCount = 7;
         private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
         private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
         private bool isLoadingMatches;
+        private bool isRefreshingCalendarList;
         private readonly IMatchService matchService;
         private CalendarDate selectedCalendarDate;
 
@@ -76,6 +78,12 @@
             set => SetProperty(ref calendarItems, value);
         }
 
+        public bool IsRefreshingCalendarList
+        {
+            get { return isRefreshingCalendarList; }
+            set { SetProperty(ref isRefreshingCalendarList, value); }
+        }
+
         #endregion
 
         #region BINDING COMMAND
@@ -83,13 +91,29 @@
         public DelegateCommand SelectMatchCommand
            => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
-        public DelegateCommand RefreshCommand
+        public DelegateCommand RefreshMatchListCommand
             => new DelegateCommand(async () =>
             {
-                IsRefreshingMatchList = true;
                 await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
                 IsRefreshingMatchList = false;
             });
+
+        public DelegateCommand RefreshCalendarListCommand => new DelegateCommand(OnRefreshCalendarListCommandExecuted);
+
+        private void OnRefreshCalendarListCommandExecuted()
+        {
+            var date = SelectedCalendarDate == null ? DateTime.Now : SelectedCalendarDate.Date;
+            LoadCalendar(date, moreOldDay: 7);
+            IsRefreshingCalendarList = false;
+        }
+
+        public DelegateCommand LoadMoreCalendarCommand => new DelegateCommand(OnLoadMoreCalendarCommandExecuted);
+
+        private void OnLoadMoreCalendarCommandExecuted()
+        {
+            var date = SelectedCalendarDate == null ? DateTime.Now : SelectedCalendarDate.Date;
+            LoadCalendar(date, moreNewDay: 3);
+        }
 
         public DelegateCommand SelectDateCommand => new DelegateCommand(OnSelectDateCommandExecuted);
 
@@ -118,11 +142,13 @@
 
         }
 
-        private void LoadCalendar(DateTime currentDate)
+        private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)
         {
             var calendar = new ObservableCollection<CalendarDate>();
+            OldDateCalendarItemCount += moreOldDay;
+            NewDateCalendarItemCount += moreNewDay;
 
-            for (int i = -3; i <= 3; i++)
+            for (int i = OldDateCalendarItemCount * -1; i <= NewDateCalendarItemCount; i++)
             {
                 var date = DateTime.Today.AddDays(i);
 
