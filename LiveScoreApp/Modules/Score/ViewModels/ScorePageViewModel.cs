@@ -111,7 +111,7 @@
         {
             IsLoadingMatches = showLoadingIndicator;
             var matches = await matchService.GetDailyMatches(currentDate);
-            IsLoadingMatches = !IsLoadingMatches;
+            IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));

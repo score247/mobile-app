@@ -42,12 +42,12 @@
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label Text="{Binding Date.Day}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
-                                               TextColor="{Binding IsSelected, Converter={StaticResource calendarTextColorConverter}}"
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}"
                                                FontSize="18" />
                                         <Label Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
                                                FontAttributes="Bold"
-                                               TextColor="{Binding IsSelected, Converter={StaticResource calendarTextColorConverter}}"
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}"
                                                FontSize="6" />
                                     </StackLayout>
                                 </Frame>
