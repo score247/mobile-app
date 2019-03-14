@@ -15,6 +15,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:InverseBoolConverter x:Key="inverseBoolConverter"/>
+            <converter:MatchStatusConverter x:Key="matchStatusConverter"/>
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter"/>
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <ResourceDictionary.MergedDictionaries>
@@ -96,8 +97,6 @@
                 <DataTemplate>
                     <ViewCell Height="28">
                         <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
-                      
-        
                             <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
                             <Label Text="{Binding Key.ShortEventDate}"
@@ -124,8 +123,7 @@
                                         <RowDefinition Height="auto" />
                                         <RowDefinition Height="auto" />
                                     </Grid.RowDefinitions>
-
-                                    <Label Text="FT" Style="{StaticResource MatchStatus}" />
+                                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}" Style="{StaticResource MatchStatus}" />
                                     <Label Text="{Binding Event.Teams[0].Name}" Style="{StaticResource HomeTeam}" />
                                     <Label Text="{Binding Event.Teams[1].Name}" Style="{StaticResource AwayTeam}" />
                                     <Label Grid.Row="0"

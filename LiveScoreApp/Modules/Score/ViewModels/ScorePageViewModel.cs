@@ -30,7 +30,6 @@
         : base(navigationService)
         {
             this.matchService = matchService;
-
             Task.Run(Initialize).Wait();
         }
 
@@ -50,7 +49,7 @@
 
         public CalendarDate SelectedCalendarDate
         {
-            get { return selectedCalendarDate; }
+            get { return selectedCalendarDate ?? new CalendarDate { Date = DateTime.Today, IsSelected = true }; }
             set { SetProperty(ref selectedCalendarDate, value); }
         }
 
@@ -88,40 +87,34 @@
 
         #region BINDING COMMAND
 
-        public DelegateCommand SelectMatchCommand
-           => new DelegateCommand(async () => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
+        public DelegateCommand SelectMatchCommand => new DelegateCommand(async ()
+            => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
-        public DelegateCommand RefreshMatchListCommand
-            => new DelegateCommand(async () =>
-            {
-                await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
-                IsRefreshingMatchList = false;
-            });
-
-        public DelegateCommand RefreshCalendarListCommand => new DelegateCommand(OnRefreshCalendarListCommandExecuted);
-
-        private void OnRefreshCalendarListCommandExecuted()
+        public DelegateCommand RefreshMatchListCommand => new DelegateCommand(async () =>
         {
-            var date = SelectedCalendarDate == null ? DateTime.Now : SelectedCalendarDate.Date;
-            LoadCalendar(date, moreOldDay: 7);
+            await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
+            IsRefreshingMatchList = false;
+        });
+
+        public DelegateCommand RefreshCalendarListCommand => new DelegateCommand(() =>
+        {
+            LoadCalendar(SelectedCalendarDate.Date, moreOldDay: 7);
             IsRefreshingCalendarList = false;
-        }
+        });
 
-        public DelegateCommand LoadMoreCalendarCommand => new DelegateCommand(OnLoadMoreCalendarCommandExecuted);
-
-        private void OnLoadMoreCalendarCommandExecuted()
+        public DelegateCommand LoadMoreCalendarCommand => new DelegateCommand(() =>
         {
-            var date = SelectedCalendarDate == null ? DateTime.Now : SelectedCalendarDate.Date;
-            LoadCalendar(date, moreNewDay: 3);
-        }
+            if (NewDateCalendarItemCount <= 30)
+            {
+                LoadCalendar(SelectedCalendarDate.Date, moreNewDay: 3);
+            }
+        });
 
-        public DelegateCommand SelectDateCommand => new DelegateCommand(OnSelectDateCommandExecuted);
-
-        private async void OnSelectDateCommandExecuted()
+        public DelegateCommand SelectDateCommand => new DelegateCommand(async () =>
         {
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date);
-        }
+        });
 
         #endregion
 
@@ -145,8 +138,10 @@
         private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)
         {
             var calendar = new ObservableCollection<CalendarDate>();
-            OldDateCalendarItemCount += moreOldDay;
+
+
             NewDateCalendarItemCount += moreNewDay;
+            OldDateCalendarItemCount += moreOldDay;
 
             for (int i = OldDateCalendarItemCount * -1; i <= NewDateCalendarItemCount; i++)
             {

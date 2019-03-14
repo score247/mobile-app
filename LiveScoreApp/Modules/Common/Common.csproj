@@ -32,5 +32,6 @@
   <ItemGroup>
     <Folder Include="ViewResources\" />
     <Folder Include="Controls\" />
+    <Folder Include="Contants\" />
   </ItemGroup>
 </Project>
