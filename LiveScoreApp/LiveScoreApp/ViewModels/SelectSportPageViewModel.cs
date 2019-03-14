@@ -13,15 +13,18 @@
         private SportItem selectedSportItem;
         private ObservableCollection<SportItem> sportItems;
 
+        public SelectSportPageViewModel(INavigationService navigationService)
+          : base(navigationService)
+        {
+            SelectSportItemCommand = new DelegateCommand(OnSelectSportItem);
+            DoneCommand = new DelegateCommand(OnDone);
+        }
+
         public SportItem SelectedSportItem
         {
             get => selectedSportItem;
             set => SetProperty(ref selectedSportItem, value);
         }
-
-        public DelegateCommand SelectSportItemCommand { get; set; }
-
-        public DelegateCommand DoneCommand { get; set; }
 
         public ObservableCollection<SportItem> SportItems
         {
@@ -29,12 +32,11 @@
             set => SetProperty(ref sportItems, value);
         }
 
-        public SelectSportPageViewModel(INavigationService navigationService)
-            : base(navigationService)
-        {
-            SelectSportItemCommand = new DelegateCommand(OnSelectSportItem);
-            DoneCommand = new DelegateCommand(OnDone);
-        }
+
+        public DelegateCommand SelectSportItemCommand { get; set; }
+
+        public DelegateCommand DoneCommand { get; set; }
+
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -43,10 +45,18 @@
 
         private async void OnSelectSportItem()
         {
-            Settings.CurrentSportName = SelectedSportItem.Name;
-            Settings.CurrentSportId = SelectedSportItem.Id;
+            var parameters = new NavigationParameters
+            {
+                { "changeSport", Settings.CurrentSportId != SelectedSportItem.Id && SelectedSportItem.Id != 0 }
+            };
 
-            await NavigationService.GoBackAsync(useModalNavigation: true);
+            if (SelectedSportItem.Id != 0)
+            {
+                Settings.CurrentSportName = SelectedSportItem.Name;
+                Settings.CurrentSportId = SelectedSportItem.Id;
+            }
+
+            await NavigationService.GoBackAsync(useModalNavigation: true, parameters: parameters);
         }
 
         private async void OnDone()

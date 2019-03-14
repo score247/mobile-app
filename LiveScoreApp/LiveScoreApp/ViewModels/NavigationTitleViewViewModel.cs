@@ -42,8 +42,10 @@
 
         private async void NavigateSelectSportPage()
         {
-            var parameters = new NavigationParameters();
-            parameters.Add(nameof(sportItems), sportItems);
+            var parameters = new NavigationParameters
+            {
+                { nameof(sportItems), sportItems }
+            };
 
             await NavigationService.NavigateAsync("NavigationPage/SelectSportPage", parameters, useModalNavigation: true);
         }

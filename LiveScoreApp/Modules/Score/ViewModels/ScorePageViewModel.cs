@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Models;
+    using Common.Settings;
     using Common.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
@@ -27,17 +28,21 @@
         : base(navigationService)
         {
             this.matchService = matchService;
+
+            Task.Run(Initialize).Wait();
         }
 
-        public override async void OnAppearing()
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            LoadCalendar(DateTime.Now);
+            base.OnNavigatedTo(parameters);
 
-            IsLoadingMatches = true;
-            await LoadMatches(DateTime.Now);
-            IsLoadingMatches = false;
+            var changeSport = parameters.GetValue<bool>("changeSport");
+
+            if (changeSport)
+            {
+                await Initialize();
+            }
         }
-
 
         #region BINDING PROPERTIES
 
@@ -82,7 +87,7 @@
             => new DelegateCommand(async () =>
             {
                 IsRefreshingMatchList = true;
-                await LoadMatches(SelectedCalendarDate.Date);
+                await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
                 IsRefreshingMatchList = false;
             });
 
@@ -90,20 +95,27 @@
 
         private async void OnSelectDateCommandExecuted()
         {
-            IsLoadingMatches = true;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date);
-            IsLoadingMatches = false;
         }
 
         #endregion
 
-        private async Task LoadMatches(DateTime currentDate)
+        private async Task Initialize()
         {
+            LoadCalendar(DateTime.Now);
+            await LoadMatches(DateTime.Now);
+        }
+
+        private async Task LoadMatches(DateTime currentDate, bool showLoadingIndicator = true)
+        {
+            IsLoadingMatches = showLoadingIndicator;
             var matches = await matchService.GetDailyMatches(currentDate);
+            IsLoadingMatches = !IsLoadingMatches;
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
+
         }
 
         private void LoadCalendar(DateTime currentDate)
