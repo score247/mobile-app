@@ -59,7 +59,11 @@
 
         <NavigationPage x:Name="TVSchedule" Title="{langs:Translate TVSchedule}" Icon="images/tv.png">
             <x:Arguments>
-                <ContentPage Title="{langs:Translate TVSchedule}" />
+                <score:TVSchedulePage Title="{langs:Translate TVSchedule}">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="{langs:Translate TVSchedule}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:TVSchedulePage>
             </x:Arguments>
         </NavigationPage>
 
