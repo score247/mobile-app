@@ -33,14 +33,12 @@
 
         private async void ItemTapped()
         {
-            throw new InvalidOperationException("Auto-generated exception");
+            var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
 
-            //var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
-
-            //if (!result.Success)
-            //{
-            //    await Application.Current.MainPage.DisplayAlert("Alert", "Error loading tournament page", "Cancel");
-            //}
+            if (!result.Success)
+            {
+                await Application.Current.MainPage.DisplayAlert("Alert", "Error loading tournament page", "Cancel");
+            }
         }
     }
 }
