@@ -181,7 +181,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LiveScoreApp\LiveScoreApp.csproj">
-      <Project>{CEA846A3-CF25-459B-9FB0-971A672B486B}</Project>
+      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
       <Name>LiveScoreApp</Name>
     </ProjectReference>
   </ItemGroup>
