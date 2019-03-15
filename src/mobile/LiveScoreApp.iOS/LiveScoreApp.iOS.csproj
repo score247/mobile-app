@@ -122,36 +122,202 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <BundleResource Include="Resources\fa-brands-400.ttf" />
-    <BundleResource Include="Resources\fa-regular-400.ttf" />
-    <BundleResource Include="Resources\fa-solid-900.ttf" />
-    <BundleResource Include="Resources\livescore\selection.json" />
-    <BundleResource Include="Resources\livescore\fonts\livescore.eot" />
-    <BundleResource Include="Resources\livescore\fonts\livescore.ttf" />
-    <BundleResource Include="Resources\livescore\fonts\livescore.woff" />
-    <BundleResource Include="Resources\livescore.ttf" />
-    <BundleResource Include="Resources\images\league%402x.png" />
-    <BundleResource Include="Resources\images\league%403x.png" />
-    <BundleResource Include="Resources\images\favorite.png" />
-    <BundleResource Include="Resources\images\favorite%402x.png" />
-    <BundleResource Include="Resources\images\favorite%403x.png" />
-    <BundleResource Include="Resources\images\live%402x.png" />
-    <BundleResource Include="Resources\images\live%403x.png" />
-    <BundleResource Include="Resources\images\news%402x.png" />
-    <BundleResource Include="Resources\images\news%403x.png" />
-    <BundleResource Include="Resources\images\soccer.png" />
-    <BundleResource Include="Resources\images\soccer%402x.png" />
-    <BundleResource Include="Resources\images\soccer%403x.png" />
-    <BundleResource Include="Resources\images\tv%402x.png" />
-    <BundleResource Include="Resources\images\tv%403x.png" />
     <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
-    <BundleResource Include="Resources\images\edit.png" />
-    <BundleResource Include="Resources\images\edit%402x.png" />
-    <BundleResource Include="Resources\images\edit%403x.png" />
-    <BundleResource Include="Resources\images\hamburger%402x.png" />
-    <BundleResource Include="Resources\images\hamburger%403x.png" />
-    <BundleResource Include="Resources\images\search%402x.png" />
-    <BundleResource Include="Resources\images\search%403x.png" />
+    <BundleResource Include="..\CommonResources\Font\livescore\fonts\livescore.eot">
+      <Link>Resources\fonts\livescore.eot</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Font\livescore\fonts\livescore.svg">
+      <Link>Resources\fonts\livescore.svg</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Font\livescore\fonts\livescore.ttf">
+      <Link>Resources\fonts\livescore.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Font\livescore\fonts\livescore.woff">
+      <Link>Resources\fonts\livescore.woff</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\add.png">
+      <Link>Resources\images\common\add.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\ball.png">
+      <Link>Resources\images\common\ball.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\card_yellow.png">
+      <Link>Resources\images\common\card_yellow.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\edit.png">
+      <Link>Resources\images\common\edit.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\edit%402x.png">
+      <Link>Resources\images\common\edit%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\edit%403x.png">
+      <Link>Resources\images\common\edit%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite.png">
+      <Link>Resources\images\common\favorite.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite%402x.png">
+      <Link>Resources\images\common\favorite%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite%403x.png">
+      <Link>Resources\images\common\favorite%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite_active.png">
+      <Link>Resources\images\common\favorite_active.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite_active%402x.png">
+      <Link>Resources\images\common\favorite_active%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\favorite_active%403x.png">
+      <Link>Resources\images\common\favorite_active%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\flag_cn.png">
+      <Link>Resources\images\common\flag_cn.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\flag_en.png">
+      <Link>Resources\images\common\flag_en.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\flag_in.png">
+      <Link>Resources\images\common\flag_in.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\flag_th.png">
+      <Link>Resources\images\common\flag_th.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\flag_vn.png">
+      <Link>Resources\images\common\flag_vn.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\hamburger.png">
+      <Link>Resources\images\common\hamburger.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\hamburger%402x.png">
+      <Link>Resources\images\common\hamburger%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\hamburger%403x.png">
+      <Link>Resources\images\common\hamburger%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\league.png">
+      <Link>Resources\images\common\league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\league%402x.png">
+      <Link>Resources\images\common\league%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\league%403x.png">
+      <Link>Resources\images\common\league%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\live.png">
+      <Link>Resources\images\common\live.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\live%402x.png">
+      <Link>Resources\images\common\live%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\live%403x.png">
+      <Link>Resources\images\common\live%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\news.png">
+      <Link>Resources\images\common\news.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\news%402x.png">
+      <Link>Resources\images\common\news%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\news%403x.png">
+      <Link>Resources\images\common\news%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\scores.png">
+      <Link>Resources\images\common\scores.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\search.png">
+      <Link>Resources\images\common\search.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\search%402x.png">
+      <Link>Resources\images\common\search%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\search%403x.png">
+      <Link>Resources\images\common\search%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\soccer.png">
+      <Link>Resources\images\common\soccer.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\soccer%402x.png">
+      <Link>Resources\images\common\soccer%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\soccer%403x.png">
+      <Link>Resources\images\common\soccer%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\star.png">
+      <Link>Resources\images\common\star.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tab_feed.png">
+      <Link>Resources\images\common\tab_feed.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tab_feed%402x.png">
+      <Link>Resources\images\common\tab_feed%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tab_feed%403x.png">
+      <Link>Resources\images\common\tab_feed%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tracker.png">
+      <Link>Resources\images\common\tracker.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tv.png">
+      <Link>Resources\images\common\tv.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tv%402x.png">
+      <Link>Resources\images\common\tv%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\common\tv%403x.png">
+      <Link>Resources\images\common\tv%403x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\asia_cup.png">
+      <Link>Resources\images\flag_league\asia_cup.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\champion_league.png">
+      <Link>Resources\images\flag_league\champion_league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\copa_america_centenario.png">
+      <Link>Resources\images\flag_league\copa_america_centenario.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\europa_league.png">
+      <Link>Resources\images\flag_league\europa_league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\flag_england.png">
+      <Link>Resources\images\flag_league\flag_england.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\flag_netherlands.png">
+      <Link>Resources\images\flag_league\flag_netherlands.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\uefa_nation_league.png">
+      <Link>Resources\images\flag_league\uefa_nation_league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\uefa_woman_champion_league.png">
+      <Link>Resources\images\flag_league\uefa_woman_champion_league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\uefa_youth_league.png">
+      <Link>Resources\images\flag_league\uefa_youth_league.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\flag_league\world_cup.png">
+      <Link>Resources\images\flag_league\world_cup.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\logos\logo_1.png">
+      <Link>Resources\images\logos\logo_1.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\logos\logo_2.png">
+      <Link>Resources\images\logos\logo_2.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\news\news_1.png">
+      <Link>Resources\images\news\news_1.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\news\news_2.png">
+      <Link>Resources\images\news\news_2.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\news\news_3.png">
+      <Link>Resources\images\news\news_3.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\news\news_4.png">
+      <Link>Resources\images\news\news_4.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\CommonResources\Image\news\news_5.png">
+      <Link>Resources\images\news\news_5.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\Contents.json">
@@ -186,127 +352,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\hamburger.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\demo.html" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\Read Me.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\style.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\demo-files\demo.css" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\demo-files\demo.js" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\livescore\fonts\livescore.svg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\tv.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\scores.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\live.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\flag_cn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\flag_en.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\flag_in.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\flag_th.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\flag_vn.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\flag_england.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\flag_netherlands.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logos\logo_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logos\logo_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\card_yellow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\ball.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\star.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\tracker.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\news.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\add.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\champion_league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\europa_league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\asia_cup.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\copa_america_centenario.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\uefa_nation_league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\uefa_woman_champion_league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\uefa_youth_league.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\flag_league\world_cup.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\news\news_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\news\news_3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\news\news_4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\news\news_5.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\news\news_2.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Renderers\" />
+    <Folder Include="Resources\images\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

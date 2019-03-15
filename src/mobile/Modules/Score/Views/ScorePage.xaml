@@ -97,7 +97,7 @@
                 <DataTemplate>
                     <ViewCell Height="28">
                         <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
-                            <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
                             <Label Text="{Binding Key.ShortEventDate}"
                                    Style="{StaticResource MatchDate}" />

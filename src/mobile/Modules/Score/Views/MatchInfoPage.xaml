@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -7,7 +7,7 @@
              Title="Match Info"
              BackgroundColor="#1D2133">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="images/star.png" />
+        <ToolbarItem Icon="images/common/star.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -126,7 +126,7 @@
             <StackLayout BackgroundColor="#0F111C">
                 <FlexLayout Style="{StaticResource MatchScoreContainer}" >
                     <StackLayout Margin="0,0,50,0">
-                        <Image Source="logos/logo_1.png" Aspect="AspectFit" />
+                        <Image Source="images/logos/logo_1.png" Aspect="AspectFit" />
                         <Label Text="Verona" TextColor="{StaticResource HomeTeamColor}" />
                     </StackLayout>
                     <StackLayout VerticalOptions="CenterAndExpand">
@@ -136,7 +136,7 @@
                         <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" Margin="0,8,0,0" />
                     </StackLayout>
                     <StackLayout Margin="50,0,0,0">
-                        <Image Source="logos/logo_2.png" Aspect="AspectFit" />
+                        <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
                         <Label Text="Cosenza" TextColor="{StaticResource AwayTeamColor}" />
                     </StackLayout>
                 </FlexLayout>
@@ -174,7 +174,7 @@
                         <Label Text="34'" Style="{StaticResource MatchMinutes}" />
                         <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
@@ -201,7 +201,7 @@
                         <Label Text="63'" Style="{StaticResource MatchMinutes}" />
                         <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
                         <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
@@ -225,7 +225,7 @@
                                 <Label Text="Darko Lazovic" Style="{StaticResource InfoText}" />
                                 <Label Text="Daniel Bessa" Style="{StaticResource InfoText}" TextColor="{StaticResource SecondTextColor}" />
                             </StackLayout>                            
-                            <Image Source="images/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
                         </StackLayout>
                         <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
                         <Label Text="88'" Style="{StaticResource MatchMinutes}" />

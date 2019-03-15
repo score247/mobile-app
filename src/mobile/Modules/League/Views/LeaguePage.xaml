@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="League.Views.LeaguePage"
@@ -48,7 +48,7 @@
                         <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
                             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="StartAndExpand">
-                                <Image Source="flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
+                                <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
                                 <Label Text="Champion League" Style="{StaticResource LeagueName}" />
                             </StackLayout>
                             <Label Style="{StaticResource ArrowRightIcon}" />

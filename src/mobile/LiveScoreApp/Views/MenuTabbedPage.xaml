@@ -17,7 +17,7 @@
             BackgroundColor="{StaticResource PrimaryColor}"
             >
     <TabbedPage.Children>
-        <NavigationPage x:Name="Scores" Title="{langs:Translate Scores}" Icon="images/soccer.png">
+        <NavigationPage x:Name="Scores" Title="{langs:Translate Scores}" Icon="images/common/soccer.png">
             <x:Arguments>
                 <score:ScorePage Title="Scores">
                     <NavigationPage.TitleView>
@@ -27,7 +27,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/star.png">
+        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/star.png">
             <x:Arguments>
                 <favorites:FavoritePage Title="Favorites">
                     <NavigationPage.TitleView>
@@ -37,7 +37,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/league.png">
+        <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/common/league.png">
             <x:Arguments>
                 <league:LeaguePage Title="Leagues">
                     <NavigationPage.TitleView>
@@ -47,7 +47,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/news.png">
+        <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/common/news.png">
             <x:Arguments>
                 <news:NewsPage Title="News">
                     <NavigationPage.TitleView>

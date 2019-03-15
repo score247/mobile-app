@@ -50,12 +50,11 @@
 	<string>LaunchScreen</string>
 	<key>UIAppFonts</key>
 	<array>
-		<string>livescore/fonts/livescore.ttf</string>
-		<string>fa-brands-400.ttf</string>
-		<string>fa-regular-400.ttf</string>
-		<string>fa-solid-900.ttf</string>
+		<string>fonts/livescore.ttf</string>
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
+	<key>CFBundleName</key>
+	<string>LiveScoreApp</string>
 </dict>
 </plist>
