@@ -100,7 +100,6 @@
         <Style x:Key="ActiveFavoriteIcon" BasedOn="{StaticResource FavoriteIcon}" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
         </Style>
-
     </ContentPage.Resources>
     <ListView
                 ItemsSource="{Binding GroupMatches}"
@@ -157,9 +156,9 @@
                                 <Label Text="50'"
                                        Style="{StaticResource EventStyle}"
                                        HorizontalTextAlignment="Center"
-                                       Margin="0,3,0,0"/>
+                                       Margin="0,3,0,0" />
                               </StackLayout>
-                              
+
                                 <Label Text="{Binding HomeTeam}" Style="{StaticResource HomeTeam}" />
                                 <Label Text="{Binding AwayTeam}" Style="{StaticResource AwayTeam}" />
                                 <Label Grid.Row="0"

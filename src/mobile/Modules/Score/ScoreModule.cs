@@ -15,6 +15,7 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            // Method intentionally left empty.
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
@@ -32,8 +33,6 @@
             containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
             containerRegistry.RegisterForNavigation<LivePage, LivePageViewModel>();
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();
-
-
         }
     }
 }

@@ -93,7 +93,7 @@
             set { SetProperty(ref selectHome, value); }
         }
 
-        #endregion
+        #endregion BINDING PROPERTIES
 
         #region BINDING COMMAND
 
@@ -121,7 +121,7 @@
 
         public DelegateCommand SelectHomeCommand { get; private set; }
 
-        #endregion
+        #endregion BINDING COMMAND
 
         #region Command Handlers
 
@@ -152,16 +152,15 @@
             await LoadMatches(SelectedCalendarDate.Date);
         }
 
-
-
         private void OnSelectHomeCommandExecuted()
         {
             SelectHome = true;
             LoadCalendar(DateTime.MinValue);
 
-            // TODO: Load matches for home 
+            // TODO: Load matches for home
         }
-        #endregion
+
+        #endregion Command Handlers
 
         #region Data Handlers
 
@@ -206,6 +205,6 @@
             CalendarItems = new ObservableCollection<CalendarDate>(calendar);
         }
 
-        #endregion
+        #endregion Data Handlers
     }
 }

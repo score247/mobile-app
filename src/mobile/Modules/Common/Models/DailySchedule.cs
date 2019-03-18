@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using Common.Models.MatchInfo;
     using Newtonsoft.Json;
 
     public class DailySchedule

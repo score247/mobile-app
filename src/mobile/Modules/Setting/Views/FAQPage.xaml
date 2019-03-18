@@ -42,7 +42,7 @@
                     <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
                 </StackLayout>
             </StackLayout>
-            
+
             <StackLayout Orientation="Vertical"
                          VerticalOptions="Start"
                          BackgroundColor="#1D2133"

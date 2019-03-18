@@ -30,9 +30,9 @@
         </Style>
 
         <Style x:Key="ScoreText" TargetType="Label">
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="VerticalTextAlignment" Value="Center"/>
-            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="#fff" />
         </Style>
 
@@ -42,7 +42,7 @@
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
-        
+
         <!-- Tab -->
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
@@ -92,7 +92,7 @@
             <Setter Property="VerticalTextAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,7" />
         </Style>
-        
+
         <Style x:Key="TimeBg" TargetType="Frame">
             <Setter Property="WidthRequest" Value="20" />
             <Setter Property="HeightRequest" Value="12" />
@@ -105,12 +105,12 @@
 
         <Style x:Key="Minutes" TargetType="Label">
             <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="FontAttributes" Value="Bold" />            
+            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="FontSize" Value="12" />
             <Setter Property="TextColor" Value="#fff" />
         </Style>
 
-        <Style x:Key="CommentariesTime" TargetType="Frame" BasedOn="{StaticResource TimeBg}">            
+        <Style x:Key="CommentariesTime" TargetType="Frame" BasedOn="{StaticResource TimeBg}">
             <Setter Property="Margin" Value="0,7" />
             <Setter Property="BorderColor" Value="#fff" />
             <Setter Property="BackgroundColor" Value="#1D2133" />
@@ -132,7 +132,7 @@
                  Spacing="0">
             <!-- Match Score -->
             <StackLayout BackgroundColor="#0F111C">
-                <FlexLayout Style="{StaticResource MatchScoreContainer}" >
+                <FlexLayout Style="{StaticResource MatchScoreContainer}">
                     <StackLayout Margin="0,0,50,0">
                         <Image Source="logos/logo_1.png" Aspect="AspectFit" />
                         <Label Text="Verona" TextColor="{StaticResource HomeTeamColor}" />

@@ -4,6 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <NeutralLanguage></NeutralLanguage>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LiveXAML" Version="2.1.70" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />

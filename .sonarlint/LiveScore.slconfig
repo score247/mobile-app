@@ -1,0 +1,11 @@
+{
+  "ServerUri": "https://sonarqube.nexdev.net/",
+  "Organization": null,
+  "ProjectKey": "livescore",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "cs-sonar-way-80515",
+      "ProfileTimestamp": "2019-03-13T14:14:07+07:00"
+    }
+  }
+}

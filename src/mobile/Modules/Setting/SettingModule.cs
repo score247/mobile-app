@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
-using Setting.Views;
 using Setting.ViewModels;
+using Setting.Views;
 
 namespace Setting
 {
@@ -17,7 +17,7 @@ namespace Setting
             containerRegistry.RegisterForNavigation<DefaultSportPage, DefaultSportPageViewModel>();
             containerRegistry.RegisterForNavigation<DefaultLanguagePage, DefaultLanguagePageViewModel>();
             containerRegistry.RegisterForNavigation<InfoAlertPage, InfoAlertPageViewModel>();
-            containerRegistry.RegisterForNavigation<FAQPage, FAQPageViewModel>(); 
+            containerRegistry.RegisterForNavigation<FAQPage, FAQPageViewModel>();
         }
     }
 }

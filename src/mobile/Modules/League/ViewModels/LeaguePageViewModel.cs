@@ -1,6 +1,5 @@
 ﻿namespace League.ViewModels
 {
-    using System;
     using System.Collections.ObjectModel;
     using Common.ViewModels;
     using League.Models;

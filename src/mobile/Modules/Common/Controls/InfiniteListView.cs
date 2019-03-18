@@ -20,7 +20,7 @@
             ItemAppearing += InfiniteListView_ItemAppearing;
         }
 
-        void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+        private void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
             if (ItemsSource is IList items && e.Item == items[items.Count - 1])
             {

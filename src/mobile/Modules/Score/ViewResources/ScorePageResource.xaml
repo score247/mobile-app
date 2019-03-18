@@ -102,6 +102,4 @@
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="Margin" Value="0,0,20,0" />
     </Style>
-
-    
 </ResourceDictionary>

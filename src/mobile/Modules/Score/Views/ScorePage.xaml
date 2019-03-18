@@ -14,11 +14,11 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:InverseBoolConverter x:Key="inverseBoolConverter"/>
-            <converter:MatchStatusConverter x:Key="matchStatusConverter"/>
-            <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter"/>
+            <converter:InverseBoolConverter x:Key="inverseBoolConverter" />
+            <converter:MatchStatusConverter x:Key="matchStatusConverter" />
+            <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
-            <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter"/>
+            <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <resources:ScorePageResource />
             </ResourceDictionary.MergedDictionaries>
@@ -28,9 +28,9 @@
         <FlexLayout Style="{StaticResource QuickAccessContainer}">
             <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
                 <Label Style="{StaticResource HomeIcon}"
-                       TextColor="{Binding SelectHome, Converter={StaticResource homeLabelTextColorConverter}}"/>
+                       TextColor="{Binding SelectHome, Converter={StaticResource homeLabelTextColorConverter}}" />
                 <Frame.GestureRecognizers>
-                     <TapGestureRecognizer Command="{Binding SelectHomeCommand}"/>
+                     <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
                 </Frame.GestureRecognizers>
             </Frame>
             <controls:InfiniteListView x:Name="Calendar"
@@ -71,11 +71,11 @@
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>
-        <ActivityIndicator x:Name="activity"  
+        <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoadingMatches}"
                            IsVisible="{Binding IsLoadingMatches}"
                            IsEnabled="{Binding IsLoadingMatches}"
-                           Color="White"  
+                           Color="White"
                            BackgroundColor="Transparent"
                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
                            RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
@@ -83,7 +83,7 @@
                                         Factor=0.33}"
                            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
                                         Property=Height,
-                                        Factor=0.33}"/> 
+                                        Factor=0.33}" />
         <ListView
                 IsVisible="{Binding IsLoadingMatches, Converter={StaticResource inverseBoolConverter}}"
                 ItemsSource="{Binding GroupMatches}"
@@ -152,6 +152,5 @@
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
             </ListView.Behaviors>
         </ListView>
-        
     </StackLayout>
 </ContentPage>

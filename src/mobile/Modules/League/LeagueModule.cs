@@ -1,10 +1,10 @@
 ﻿namespace League
 {
+    using League.Services;
+    using League.ViewModels;
+    using League.Views;
     using Prism.Ioc;
     using Prism.Modularity;
-    using League.Views;
-    using League.ViewModels;
-    using League.Services;
 
     public class LeagueModule : IModule
     {

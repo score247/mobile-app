@@ -7,7 +7,7 @@
              Title="Default Sport"
              BackgroundColor="#0F111C">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}"/>
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
 
     <StackLayout Orientation="Vertical" Spacing="0">
