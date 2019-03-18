@@ -30,8 +30,9 @@
         : base(navigationService)
         {
             this.matchService = matchService;
+            InitializeCommands();
             SelectHome = true;
-            Task.Run(Initialize).Wait();
+            Task.Run(InitializeData).Wait();
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -42,7 +43,7 @@
 
             if (changeSport)
             {
-                await Initialize();
+                await InitializeData();
             }
         }
 
@@ -96,38 +97,62 @@
 
         #region BINDING COMMAND
 
-        public DelegateCommand SelectMatchCommand => new DelegateCommand(async ()
-            => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
+        private void InitializeCommands()
+        {
+            SelectMatchCommand = new DelegateCommand(async ()
+                => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
-        public DelegateCommand RefreshMatchListCommand => new DelegateCommand(async () =>
+            RefreshMatchListCommand = new DelegateCommand(OnRefreshMatchListCommand);
+            RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
+            LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
+            SelectDateCommand = new DelegateCommand(OnSelectDateCommand);
+            SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
+        }
+
+        public DelegateCommand SelectMatchCommand { get; private set; }
+
+        public DelegateCommand RefreshMatchListCommand { get; private set; }
+
+        public DelegateCommand RefreshCalendarListCommand { get; private set; }
+
+        public DelegateCommand LoadMoreCalendarCommand { get; private set; }
+
+        public DelegateCommand SelectDateCommand { get; private set; }
+
+        public DelegateCommand SelectHomeCommand { get; private set; }
+
+        #endregion
+
+        #region Command Handlers
+
+        private async void OnRefreshMatchListCommand()
         {
             await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
             IsRefreshingMatchList = false;
-        });
+        }
 
-        public DelegateCommand RefreshCalendarListCommand => new DelegateCommand(() =>
+        private void OnRefreshCalendarListCommand()
         {
             LoadCalendar(SelectedCalendarDate.Date, moreOldDay: 7);
             IsRefreshingCalendarList = false;
-        });
+        }
 
-        public DelegateCommand LoadMoreCalendarCommand => new DelegateCommand(() =>
+        private void OnLoadMoreCalendarCommand()
         {
             if (NewDateCalendarItemCount <= 30)
             {
                 LoadCalendar(SelectedCalendarDate.Date, moreNewDay: 3);
             }
-        });
+        }
 
-        public DelegateCommand SelectDateCommand => new DelegateCommand(async () =>
+        private async void OnSelectDateCommand()
         {
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date);
-        });
+        }
 
 
-        public DelegateCommand SelectHomeCommand => new DelegateCommand(OnSelectHomeCommandExecuted);
 
         private void OnSelectHomeCommandExecuted()
         {
@@ -136,10 +161,11 @@
 
             // TODO: Load matches for home 
         }
-
         #endregion
 
-        private async Task Initialize()
+        #region Data Handlers
+
+        private async Task InitializeData()
         {
             LoadCalendar(DateTime.MinValue);
             await LoadMatches(DateTime.Now);
@@ -179,5 +205,7 @@
 
             CalendarItems = new ObservableCollection<CalendarDate>(calendar);
         }
+
+        #endregion
     }
 }
