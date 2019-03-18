@@ -2,9 +2,6 @@
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
@@ -45,7 +42,7 @@ namespace LiveScoreApp
             InitializeComponent();
             await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
 
-            AppCenter.Start("ios=78840378-a040-416b-84c6-91390b3edb55;", typeof(Analytics), typeof(Crashes));
+            //AppCenter.Start("ios=78840378-a040-416b-84c6-91390b3edb55;", typeof(Analytics), typeof(Crashes));
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

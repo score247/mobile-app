@@ -18,6 +18,7 @@
             <converter:MatchStatusConverter x:Key="matchStatusConverter"/>
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter"/>
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
+            <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter"/>
             <ResourceDictionary.MergedDictionaries>
                 <resources:ScorePageResource />
             </ResourceDictionary.MergedDictionaries>
@@ -26,7 +27,11 @@
     <StackLayout>
         <FlexLayout Style="{StaticResource QuickAccessContainer}">
             <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
-                <Label Style="{StaticResource HomeIcon}" />
+                <Label Style="{StaticResource HomeIcon}"
+                       TextColor="{Binding SelectHome, Converter={StaticResource homeLabelTextColorConverter}}"/>
+                <Frame.GestureRecognizers>
+                     <TapGestureRecognizer Command="{Binding SelectHomeCommand}"/>
+                </Frame.GestureRecognizers>
             </Frame>
             <controls:InfiniteListView x:Name="Calendar"
                       ItemsSource="{Binding CalendarItems}"

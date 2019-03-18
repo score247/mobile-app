@@ -6,9 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="LiveXAML" Version="2.1.70" />
-    <PackageReference Include="Microsoft.AppCenter" Version="1.13.2" />
-    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.13.2" />
-    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.13.2" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.220655" />
@@ -39,5 +36,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\components\" />
+    <Folder Include="ViewResources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewResources\DarkThemeResource %28copy%29.xaml.cs" />
   </ItemGroup>
 </Project>

@@ -3,32 +3,19 @@
                 xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
+                xmlns:resources="clr-namespace:LiveScoreApp.ViewResources"
                 x:Class="LiveScoreApp.App">
     <Application.Resources>
         <!-- Application resource dictionary -->
+            
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:DarkThemeResource/>
+            </ResourceDictionary.MergedDictionaries>
             <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
                 <On Platform="Android" Value="livescore.ttf#livescore" />
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
-
-            <Color x:Key="PrimaryColor">#0F111C</Color>
-            <Color x:Key="SecondColor">#1D2133</Color>
-            <!-- Orange Color -->
-            <Color x:Key="PrimaryAccentColor">#F24822</Color>
-            <!-- GreenColor -->
-            <Color x:Key="SecondAccentColor">#3EC28F</Color>
-            <Color x:Key="SiteBackgroundColor">#0F111C</Color>
-            <Style x:Key="SiteFontSize" TargetType="Label">
-                <Setter Property="FontSize" Value="13" />
-            </Style>
-            <Color x:Key="HomeTeamColor">#30C2FF</Color>
-            <Color x:Key="AwayTeamColor">#fff</Color>
-            <Color x:Key="PrimaryTextColor">#fff</Color>
-            <Color x:Key="SecondTextColor">#666</Color>
-            <Color x:Key="LineColor">#2E3245</Color>
-            <Color x:Key="YellowCardColor">#E5C20B</Color>
-            <Color x:Key="RedCardColor">#FC1923</Color>
 
             <!-- Calendar Page -->
             <Color x:Key="DateColor">#fff</Color>
@@ -134,7 +121,6 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
                 <Setter Property="Text" Value="&#xe91e;" />
             </Style>
 

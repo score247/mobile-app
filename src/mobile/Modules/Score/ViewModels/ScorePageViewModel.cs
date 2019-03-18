@@ -30,6 +30,7 @@
         : base(navigationService)
         {
             this.matchService = matchService;
+            SelectHome = true;
             Task.Run(Initialize).Wait();
         }
 
@@ -49,7 +50,7 @@
 
         public CalendarDate SelectedCalendarDate
         {
-            get { return selectedCalendarDate ?? new CalendarDate { Date = DateTime.Today, IsSelected = true }; }
+            get { return selectedCalendarDate ?? new CalendarDate { Date = DateTime.MinValue, IsSelected = true }; }
             set { SetProperty(ref selectedCalendarDate, value); }
         }
 
@@ -83,6 +84,14 @@
             set { SetProperty(ref isRefreshingCalendarList, value); }
         }
 
+        private bool selectHome;
+
+        public bool SelectHome
+        {
+            get { return selectHome; }
+            set { SetProperty(ref selectHome, value); }
+        }
+
         #endregion
 
         #region BINDING COMMAND
@@ -112,27 +121,39 @@
 
         public DelegateCommand SelectDateCommand => new DelegateCommand(async () =>
         {
+            SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date);
         });
+
+
+        public DelegateCommand SelectHomeCommand => new DelegateCommand(OnSelectHomeCommandExecuted);
+
+        private void OnSelectHomeCommandExecuted()
+        {
+            SelectHome = true;
+            LoadCalendar(DateTime.MinValue);
+
+            // TODO: Load matches for home 
+        }
 
         #endregion
 
         private async Task Initialize()
         {
-            LoadCalendar(DateTime.Now);
+            LoadCalendar(DateTime.MinValue);
             await LoadMatches(DateTime.Now);
         }
 
         private async Task LoadMatches(DateTime currentDate, bool showLoadingIndicator = true)
         {
             IsLoadingMatches = showLoadingIndicator;
-            var matches = await matchService.GetDailyMatches(currentDate);
-            IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
 
+            var matches = await matchService.GetDailyMatches(currentDate);
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
 
+            IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
         }
 
         private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)
