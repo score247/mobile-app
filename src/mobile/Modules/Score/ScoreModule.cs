@@ -24,7 +24,7 @@
               RestService.For<IMatchApi>(
                   new HttpClient(new HttpLoggingHandler())
                   {
-                      BaseAddress = new Uri(Settings.BaseSportRadarEndPoint)
+                      BaseAddress = new Uri(Settings.ApiEndPoint)
                   }));
             containerRegistry.Register<IMatchService, MatchService>();
 

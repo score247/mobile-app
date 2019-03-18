@@ -8,7 +8,7 @@
     {
         private static ISettings AppSettings => CrossSettings.Current;
 
-        public static string BaseSportRadarEndPoint => "https://api.sportradar.us";
+        public static string ApiEndPoint => "https://api.sportradar.us";
 
         public static IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
@@ -18,7 +18,7 @@
             { "other", "3py8dv68pmb4dypxaqesm9jq" }
         };
 
-        public static string[] SportRadarLeagueGroup => new string[] { "eu", "as", "intl", "other" };
+        public static string[] LeagueGroups => new string[] { "eu", "as", "intl", "other" };
 
         public static IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {

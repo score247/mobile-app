@@ -27,7 +27,7 @@
 
         public MatchService(IMatchApi matchApi)
         {
-            this.matchApi = matchApi ?? RestService.For<IMatchApi>(Settings.BaseSportRadarEndPoint);
+            this.matchApi = matchApi ?? RestService.For<IMatchApi>(Settings.ApiEndPoint);
         }
 
         public async Task<IList<Match>> GetDailyMatches(DateTime date)
@@ -37,7 +37,7 @@
             var eventDate = date.ToSportRadarFormat();
             var matches = new List<Match>();
 
-            var tasks = Settings.SportRadarLeagueGroup.Select(async (group) =>
+            var tasks = Settings.LeagueGroups.Select(async (group) =>
             {
                 matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate));
             });

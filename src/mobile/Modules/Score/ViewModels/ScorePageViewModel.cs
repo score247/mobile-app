@@ -47,8 +47,6 @@
             }
         }
 
-        #region BINDING PROPERTIES
-
         public CalendarDate SelectedCalendarDate
         {
             get { return selectedCalendarDate ?? new CalendarDate { Date = DateTime.MinValue, IsSelected = true }; }
@@ -93,21 +91,8 @@
             set { SetProperty(ref selectHome, value); }
         }
 
-        #endregion BINDING PROPERTIES
 
-        #region BINDING COMMAND
 
-        private void InitializeCommands()
-        {
-            SelectMatchCommand = new DelegateCommand(async ()
-                => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
-
-            RefreshMatchListCommand = new DelegateCommand(OnRefreshMatchListCommand);
-            RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
-            LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
-            SelectDateCommand = new DelegateCommand(OnSelectDateCommand);
-            SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
-        }
 
         public DelegateCommand SelectMatchCommand { get; private set; }
 
@@ -121,9 +106,17 @@
 
         public DelegateCommand SelectHomeCommand { get; private set; }
 
-        #endregion BINDING COMMAND
+        private void InitializeCommands()
+        {
+            SelectMatchCommand = new DelegateCommand(async ()
+                => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
-        #region Command Handlers
+            RefreshMatchListCommand = new DelegateCommand(OnRefreshMatchListCommand);
+            RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
+            LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
+            SelectDateCommand = new DelegateCommand(OnSelectDateCommand);
+            SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
+        }
 
         private async void OnRefreshMatchListCommand()
         {
@@ -159,10 +152,6 @@
 
             // TODO: Load matches for home
         }
-
-        #endregion Command Handlers
-
-        #region Data Handlers
 
         private async Task InitializeData()
         {
@@ -204,7 +193,5 @@
 
             CalendarItems = new ObservableCollection<CalendarDate>(calendar);
         }
-
-        #endregion Data Handlers
     }
 }

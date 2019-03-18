@@ -24,7 +24,7 @@
         {
             if (ItemsSource is IList items && e.Item == items[items.Count - 1])
             {
-                if (LoadMoreCommand != null && LoadMoreCommand.CanExecute(null)) { }
+                if (LoadMoreCommand != null && LoadMoreCommand.CanExecute(null))
                 {
                     LoadMoreCommand.Execute(null);
                 }
