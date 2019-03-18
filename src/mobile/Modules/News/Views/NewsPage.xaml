@@ -11,30 +11,6 @@
         </Style>
     </ContentPage.Resources>
     <StackLayout>
-        <!--<ScrollView Style="{StaticResource TabScroll}">
-            <StackLayout Style="{StaticResource TabContainer}">
-                <AbsoluteLayout Style="{StaticResource TabGroup}">
-                    <Label x:Name="FAVOURITES" Text="world News" Style="{StaticResource TextTab}" />
-                    <BoxView BackgroundColor="{StaticResource SecondAccentColor}"
-                         HeightRequest="2"
-                         AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
-                         AbsoluteLayout.LayoutFlags="All" />
-                </AbsoluteLayout>
-                <AbsoluteLayout Style="{StaticResource TabGroup}">
-                    <Label x:Name="WORLDNEWS" Text="WORLD NEWS" Style="{StaticResource ActiveTextTab}" />
-                </AbsoluteLayout>
-                <AbsoluteLayout Style="{StaticResource TabGroup}">
-                    <Label x:Name="TRANSFERS" Text="TRANSFERS" Style="{StaticResource TextTab}" />
-                    <BoxView BackgroundColor="{StaticResource SecondAccentColor}"
-                         HeightRequest="2"
-                         AbsoluteLayout.LayoutBounds="0,1.2,1,.1"
-                         AbsoluteLayout.LayoutFlags="All" />
-                </AbsoluteLayout>
-                <AbsoluteLayout Style="{StaticResource TabGroup}">
-                    <Label x:Name="VIDEOS" Text="INFO" Style="{StaticResource TextTab}" />
-                </AbsoluteLayout>
-            </StackLayout>
-        </ScrollView>-->
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
                     JustifyContent="Start"
                     HeightRequest="30">

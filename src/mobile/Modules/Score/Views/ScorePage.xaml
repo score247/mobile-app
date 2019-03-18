@@ -116,33 +116,26 @@
                     <ViewCell>
                         <ViewCell.View>
                             <StackLayout>
-                                <Grid HorizontalOptions="FillAndExpand"
-                                      BackgroundColor="#1D2133">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="25" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-                                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}" Style="{StaticResource MatchStatus}" />
-                                    <Label Text="{Binding Event.Teams[0].Name}" Style="{StaticResource HomeTeam}" />
-                                    <Label Text="{Binding Event.Teams[1].Name}" Style="{StaticResource AwayTeam}" />
-                                    <Label Grid.Row="0"
-                                        Grid.Column="2"
-                                        Text="{Binding Status.HomeScore}"
-                                        Style="{StaticResource Score}"
-                                        Margin="0,4,20,0" />
-                                    <Label Grid.Row="1"
-                                            Grid.Column="2"
-                                            Text="{Binding Status.AwayScore}"
-                                            Style="{StaticResource Score}"
-                                           Margin="0,0,20,4" />
-                                    <Label Style="{StaticResource FavoriteIcon}" />
-                                </Grid>
+                                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}"
+                                           Style="{StaticResource MatchStatus}"/>
+                                    <StackLayout FlexLayout.Grow="1">
+                                        <Label Text="{Binding Event.Teams[0].Name}"
+                                               Style="{StaticResource HomeTeam}" />
+                                        <Label Text="{Binding Event.Teams[1].Name}"
+                                               Style="{StaticResource AwayTeam}" />
+                                    </StackLayout>
+                                    <StackLayout WidthRequest="32">
+                                        <Label  Text="{Binding Status.HomeScore}" 
+                                                Style="{StaticResource Score}"
+                                                Margin="0,4,20,0"/>
+                                        <Label Text="{Binding Status.AwayScore}"
+                                               Style="{StaticResource Score}"
+                                               Margin="0,0,20,4" />
+                                    </StackLayout>
+                                    <Label Style="{StaticResource FavoriteIcon}"
+                                           WidthRequest="25"/>
+                                </FlexLayout>
                             </StackLayout>
                         </ViewCell.View>
                     </ViewCell>
