@@ -8,6 +8,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
     using System.Threading.Tasks;
+    using Common.Extensions;
 
     public class LeagueViewModel : ViewModelBase
     {
@@ -31,9 +32,19 @@
             Title = "League";
             this.leagueService = leagueService;
             ItemTappedCommand = new DelegateCommand(ItemTapped);
-            LoadLeaguesCommand = new DelegateCommand(async () => await LoadLeagues());
+            LoadLeaguesCommand = new DelegateCommand(async() => await LoadLeaguesAsync());
 
-            LoadLeaguesCommand.Execute();
+            Leagues = new ObservableCollection<League>();
+        }
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if(Leagues.Count == 0)
+            {
+                LoadLeaguesCommand.Execute();
+            }
         }
 
         private async void ItemTapped()
@@ -46,13 +57,16 @@
             }
         }
 
-        private async Task LoadLeagues()
+        private async Task LoadLeaguesAsync()
         {
             //IsLoadingMatches = showLoadingIndicator;
 
             var leagues = await leagueService.GetAllAsync("eu", "soccer", "en");
 
-            Leagues = new ObservableCollection<League>(leagues);           
+            foreach(var league in leagues)
+            {
+                Leagues.Add(league);
+            }
 
         }
     }
