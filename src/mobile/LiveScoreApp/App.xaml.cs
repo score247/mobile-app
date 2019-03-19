@@ -1,4 +1,6 @@
-﻿using Common.LangResources;
+﻿using System;
+using System.Reflection;
+using Common.LangResources;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
@@ -40,9 +42,23 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-            await NavigationService.NavigateAsync("MasterDetailPage/MenuTabbedPage");
+            await NavigationService.NavigateAsync(nameof(MasterDetailView) + "/" + nameof(MenuTabbedView));
 
             //AppCenter.Start("ios=78840378-a040-416b-84c6-91390b3edb55;", typeof(Analytics), typeof(Crashes));
+        }
+
+        protected override void ConfigureViewModelLocator()
+        {
+            base.ConfigureViewModelLocator();
+
+            ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
+            {
+                var viewName = viewType.FullName.Replace(".ViewModels.", ".Views.");
+                var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
+                var viewModelName = $"{viewName.Replace("View", string.Empty)}ViewModel, {viewAssemblyName}";
+
+                return Type.GetType(viewModelName);
+            });
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -51,12 +67,12 @@ namespace LiveScoreApp
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
 
-            containerRegistry.RegisterForNavigation<MainPage>();
-            containerRegistry.RegisterForNavigation<MenuTabbedPage>();
-            containerRegistry.RegisterForNavigation<Views.MasterDetailPage>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<SelectSportPage, SelectSportPageViewModel>();
-            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewViewModel>();
+            containerRegistry.RegisterForNavigation<MainView>();
+            containerRegistry.RegisterForNavigation<MenuTabbedView>();
+            containerRegistry.RegisterForNavigation<MasterDetailView, MasterDetailViewModel>();
+            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
+            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <Compile Update="ViewResources\FavoritePageResource.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+      <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\FavoritePage.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+      <DependentUpon>FavoriteView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

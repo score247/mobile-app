@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Setting.Views.RefreshView"
+             Title="Automatic Refresh"
+             BackgroundColor="#0F111C">
+    <ContentPage.ToolbarItems x:Uid="toolbarItem">
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical"
+                     HorizontalOptions="Start"
+                     Spacing="0">
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Automatic Refresh" TextColor="#fff" Margin="16,0" />
+                <Switch  IsToggled="True" Margin="16,0" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+                <Label Text="Refresh Interval" TextColor="#fff" Margin="16,0" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="30 seconds" TextColor="#676C8B" VerticalOptions="Center" />
+                    <Label Style="{StaticResource ArrowRightIcon}" VerticalOptions="Center" Margin="16,0" />
+                </StackLayout>
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                x:Class="LiveScoreApp.Views.MasterDetailView"
+                xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
+                xmlns:behavior="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+                xmlns:resources="clr-namespace:LiveScoreApp.ViewResources"
+                prism:ViewModelLocator.AutowireViewModel="True"
+                xmlns:views="clr-namespace:LiveScoreApp.Views">
+    <MasterDetailPage.Master>
+        <ContentPage
+            xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             Icon="images/common/hamburger.png"
+             Title="Menu"
+             BackgroundColor="{StaticResource PrimaryColor}"
+             WidthRequest="325">
+
+            <ContentPage.Resources>
+                <ResourceDictionary>                   
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MasterDetailViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ContentPage.Resources>
+
+            <ScrollView>
+                <StackLayout Style="{StaticResource SideBar}">
+                    <!-- Settings -->
+                    <StackLayout Style="{StaticResource FunctionGroup}">
+                        <Label Text="SETTINGS" Style="{StaticResource FunctionGroupName}" />
+                    </StackLayout>
+                    <FlexLayout x:Name="Refresh" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe90d;" />
+                        <Label Text="Refresh" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="RefreshView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>                    
+
+                    <FlexLayout x:Name="ClearCache" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe904;" />
+                        <Label Text="Clear Cache" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="DefaultSport" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe907;" />
+                        <Label Text="Default sport" Style="{StaticResource FunctionName}" />
+                        <Label Text="Soccer" Style="{StaticResource FunctionValue}" />
+
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding NavigateCommand}" CommandParameter="DefaultSportView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="DefaultLanguage" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe90a;" />
+                        <Label Text="Default language" Style="{StaticResource FunctionName}" />
+                        <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
+                            <Image Source="images/common/flag_en.png" Aspect="AspectFit" />
+                            <Label Text="English" Style="{StaticResource LanguageName}" />
+                        </StackLayout>
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DefaultLanguageView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="TimeZone" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe910;" />
+                        <Label Text="Time zone" Style="{StaticResource FunctionName}" />
+                        <Label Text="GMT+7" Style="{StaticResource FunctionValue}" />
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                        
+                    <FlexLayout x:Name="NightMode" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource Icons}" Text="&#xe903;" Margin="10" />
+                        <Label Text="Night Mode" Style="{StaticResource FunctionName}" />
+
+                        <Switch IsToggled="{Binding NightMode}" Margin="12,0">
+                            <Switch.Behaviors>
+                                    <behavior:EventToCommandBehavior EventName="Toggled"
+                                        Command="{Binding ChangeThemeCommand}"/>
+                            </Switch.Behaviors>
+                        </Switch>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+                    
+                    <FlexLayout x:Name="Notification" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe903;" />
+                        <Label Text="Notification" Style="{StaticResource FunctionName}" />
+                        <Switch  IsToggled="True" Margin="12,0" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="InfoAlert" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe903;" />
+                        <Label Text="Info alert" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="InfoAlertView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+
+                    <!-- Information -->
+                    <StackLayout  Style="{StaticResource FunctionGroup}">
+                        <Label Text="INFORMATION" Style="{StaticResource FunctionGroupName}" />
+                    </StackLayout>
+                    <FlexLayout x:Name="FAQ" JustifyContent="SpaceAround"  Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe908;" />
+                        <Label Text="FAQ" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="FAQView" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="TellFriend" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe909;" />
+                        <Label Text="Tell a friend" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="Contact" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe906;" />
+                        <Label Text="Contact" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                    </FlexLayout>
+
+                    <!-- My profiles -->
+                    <StackLayout  Style="{StaticResource FunctionGroup}">
+                        <Label Text="MY PROFILES" Style="{StaticResource FunctionGroupName}" />
+                    </StackLayout>
+                    
+                    <FlexLayout x:Name="ChangePassword" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe908;" />
+                        <Label Text="Change Password" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </ContentView>
+
+                    <FlexLayout x:Name="Signout" JustifyContent="SpaceAround" Style="{StaticResource SettingMenuRow}">
+                        <Label Style="{StaticResource SideBarIcon}" Text="&#xe909;" />
+                        <Label Text="Sign out" Style="{StaticResource FunctionName}" />
+                        <Label Style="{StaticResource ArrowRightIcon}" />
+                    </FlexLayout>
+                </StackLayout>
+            </ScrollView>
+        </ContentPage>
+    </MasterDetailPage.Master>
+</MasterDetailPage>

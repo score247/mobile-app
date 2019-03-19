@@ -13,7 +13,7 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<FavoritePage, FavoritePageViewModel>();
+            containerRegistry.RegisterForNavigation<FavoriteView, FavoriteViewModel>();
         }
     }
 }

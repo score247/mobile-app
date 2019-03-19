@@ -101,8 +101,6 @@
     </MtouchFastDev>
     <MtouchProfiling>
     </MtouchProfiling>
-    <MtouchSdkVersion>
-    </MtouchSdkVersion>
     <MtouchExtraArgs>
     </MtouchExtraArgs>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>

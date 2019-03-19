@@ -12,7 +12,7 @@
 
         public static IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
-            { "eu", "s37g6cgqfabegn5mu8snw293" },
+            { "eu", "vequ6wxdqyt7eg8qzh26dm5u" },
             { "as", "sryuchhgtvff7nb62wktdre4" },
             { "intl", "vrpveq5y64pvxpx4z7x5j24j" },
             { "other", "3py8dv68pmb4dypxaqesm9jq" }

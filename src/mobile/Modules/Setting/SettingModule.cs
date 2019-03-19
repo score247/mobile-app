@@ -13,11 +13,11 @@ namespace Setting
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<RefreshPage, RefreshPageViewModel>();
-            containerRegistry.RegisterForNavigation<DefaultSportPage, DefaultSportPageViewModel>();
-            containerRegistry.RegisterForNavigation<DefaultLanguagePage, DefaultLanguagePageViewModel>();
-            containerRegistry.RegisterForNavigation<InfoAlertPage, InfoAlertPageViewModel>();
-            containerRegistry.RegisterForNavigation<FAQPage, FAQPageViewModel>();
+            containerRegistry.RegisterForNavigation<RefreshView, RefreshViewModel>();
+            containerRegistry.RegisterForNavigation<DefaultSportView, DefaultSportViewModel>();
+            containerRegistry.RegisterForNavigation<DefaultLanguageView, DefaultLanguageViewModel>();
+            containerRegistry.RegisterForNavigation<InfoAlertView, InfoAlertViewModel>();
+            containerRegistry.RegisterForNavigation<FAQView, FAQPageViewModel>();
         }
     }
 }

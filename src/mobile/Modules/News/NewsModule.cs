@@ -13,7 +13,7 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<NewsPage, NewsPageViewModel>();
+            containerRegistry.RegisterForNavigation<NewsView, NewsViewModel>();
         }
     }
 }

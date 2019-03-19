@@ -23,7 +23,7 @@
 
   <ItemGroup>
     <Compile Update="Views\NewsPage.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
+      <DependentUpon>NewsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 

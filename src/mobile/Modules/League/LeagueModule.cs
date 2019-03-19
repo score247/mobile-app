@@ -15,8 +15,8 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ILeagueService, LeagueService>();
-            containerRegistry.RegisterForNavigation<LeaguePage, LeaguePageViewModel>();
-            containerRegistry.RegisterForNavigation<LeagueDetailPage, LeagueDetailPageViewModel>();
+            containerRegistry.RegisterForNavigation<LeagueView, LeagueViewModel>();
+            containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>();
         }
     }
 }

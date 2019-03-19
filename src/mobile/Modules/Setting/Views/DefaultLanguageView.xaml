@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Setting.Views.DefaultLanguageView"
+             Title="Default Language"
+             BackgroundColor="#0F111C">
+    <ContentPage.ToolbarItems x:Uid="toolbarItem">
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Spacing="0">
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
+            <StackLayout Margin="16,0" Orientation="Horizontal">
+                <Image Source="images/flag_en.png" Aspect="AspectFit" Margin="0,0,8,0" />
+                <Label x:Name="English" Text="English" TextColor="#fff" />
+            </StackLayout>
+            <Label Style="{StaticResource CheckIcon}" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
+            <Image Source="images/flag_in.png" Aspect="AspectFit" Margin="16,0,8,0" />
+            <Label x:Name="Indonesian" Text="Indonesian" TextColor="#fff" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
+            <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
+            <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" TextColor="#fff" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
+            <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
+            <Label x:Name="TraditionalChinese" Text="Traditional Chinese" TextColor="#fff" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
+            <Image Source="images/flag_th.png" Aspect="AspectFit" Margin="16,0,8,0" />
+            <Label x:Name="Thai" Text="Thai" TextColor="#fff" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
+            <Image Source="images/flag_vn.png" Aspect="AspectFit" Margin="16,0,8,0" />
+            <Label x:Name="Vietnamese" Text="Vietnamese" TextColor="#fff" />
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

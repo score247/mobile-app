@@ -28,12 +28,11 @@
                   }));
             containerRegistry.Register<IMatchService, MatchService>();
 
-            containerRegistry.RegisterForNavigation<ScorePage, ScorePageViewModel>();
-            containerRegistry.RegisterForNavigation<MatchInfoPage, MatchInfoPageViewModel>();
-            containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
-            containerRegistry.RegisterForNavigation<LivePage, LivePageViewModel>();
-            containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();
-            containerRegistry.RegisterForNavigation<TVSchedulePage, TVSchedulePageViewModel>();
+            containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
+            containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>();
+            containerRegistry.RegisterForNavigation<MatchTrackerView, MatchTrackerViewModel>();
+            containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();
+            containerRegistry.RegisterForNavigation<TVScheduleView, TVScheduleViewModel>();
         }
     }
 }

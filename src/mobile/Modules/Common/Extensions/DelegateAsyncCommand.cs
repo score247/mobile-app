@@ -11,8 +11,11 @@
         private bool _allowMultipleExecution { get; }
         private Action<Exception> _exceptionHandler { get; }
 
-        public DelegateAsyncCommand(Func<Task> commandTask, Func<bool> canExecute = null, bool allowMultipleExecution = false,
-                            Action<Exception> exceptionHandler = null)
+        public DelegateAsyncCommand(
+            Func<Task> commandTask,
+            Func<bool> canExecute = null,
+            bool allowMultipleExecution = false,
+            Action<Exception> exceptionHandler = null)
         {
             _commandTask = commandTask;
             _canExecute = canExecute;
@@ -29,7 +32,7 @@
             await _commandTask().ConfigureAwait(false);
 
         protected override bool CanExecute(object parameter) =>
-    _canExecute?.Invoke() ?? CanExecuteAgain();
+            _canExecute?.Invoke() ?? CanExecuteAgain();
 
         protected override void Execute(object parameter)
         {

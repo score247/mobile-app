@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:Score.ViewResources"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Score.Views.MatchTrackerView"
+             BackgroundColor="#1D2133">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchTrackerViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView Orientation="Vertical">
+        <StackLayout Orientation="Vertical"
+                 HorizontalOptions="FillAndExpand"
+                 Spacing="0">
+            <!-- Match Score -->
+            <StackLayout BackgroundColor="#0F111C">
+                <FlexLayout Style="{StaticResource MatchScoreContainer}">
+                    <StackLayout Margin="0,0,50,0">
+                        <Image Source="logos/logo_1.png" Aspect="AspectFit" />
+                        <Label Text="Verona" TextColor="{StaticResource HomeTeamColor}" />
+                    </StackLayout>
+                    <StackLayout VerticalOptions="CenterAndExpand">
+                        <Frame Style="{StaticResource MatchScoreBox}">
+                            <Label Text="2 - 1" Style="{StaticResource ScoreText}" />
+                        </Frame>
+                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" Margin="0,8,0,0" />
+                    </StackLayout>
+                    <StackLayout Margin="50,0,0,0">
+                        <Image Source="logos/logo_2.png" Aspect="AspectFit" />
+                        <Label Text="Cosenza" TextColor="{StaticResource AwayTeamColor}" />
+                    </StackLayout>
+                </FlexLayout>
+            </StackLayout>
+
+            <!-- Tab list -->
+            <ScrollView Style="{StaticResource ScrollTab}">
+                <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
+                    <Label x:Name="ODDS" Text="ODDS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="INFO" Text="INFO" Style="{StaticResource ActiveTextTab}" />
+                    <Label x:Name="TRACKER" Text="TRACKER" Style="{StaticResource TextTab}" />
+                    <Label x:Name="STATS" Text="STATS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="LINEUPS" Text="LINE-UPS" Style="{StaticResource TextTab}" />
+                    <Label x:Name="H2H" Text="H2H" Style="{StaticResource TextTab}" />
+                    <Label x:Name="TABLE" Text="TABLE" Style="{StaticResource TextTab}" />
+                    <Label x:Name="SOCIAL" Text="SOCIAL" Style="{StaticResource TextTab}" />
+                    <Label x:Name="TV" Text="TV SCHEDULE" Style="{StaticResource TextTab}" />
+                </StackLayout>
+            </ScrollView>
+
+            <AbsoluteLayout Padding="7">
+                <Image Source="images/tracker.png" Aspect="AspectFill" />
+            </AbsoluteLayout>
+
+            <!-- COMMENTARIES -->
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="COMMENTARIES" Style="{StaticResource GroupName}" />
+                <Label Text="Highlight" Style="{StaticResource OptionGroup}" />
+            </StackLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+
+                <!-- Match ends -->
+                <Label Style="{StaticResource MatchEndIcon}" />
+                <Label Grid.Column="1"
+                       Grid.Row="0"
+                       Text="Match ends, Verona 2, Cosenza 1."
+                       Style="{StaticResource CommentariesText}" />
+
+                <!-- Time -->
+                <Frame Grid.Column="0"
+                        Grid.Row="1"
+                        Style="{StaticResource CommentariesTime}">
+                    <Label Text="90'" Style="{StaticResource Minutes}" />
+                </Frame>
+                <Label Grid.Column="1"
+                       Grid.Row="1"
+                       Text="Second Half ends, Verona 2, Cosenza 1."
+                       Style="{StaticResource CommentariesText}" />
+
+                <!-- Goal! -->
+                <Frame Grid.Column="0"
+                       Grid.Row="2"
+                       Style="{StaticResource CommentariesGoal}">
+                    <Label Text="88'" Style="{StaticResource Minutes}" />
+                </Frame>
+                <StackLayout Grid.Column="1"
+                            Grid.Row="2"
+                             Spacing="0"
+                             Margin="0,7">
+                    <Label Text="GOAL!" TextColor="{StaticResource SecondAccentColor}" FontAttributes="Bold" />
+                    <Label Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                </StackLayout>
+
+                <!-- Time -->
+                <Frame Grid.Column="0"
+                       Grid.Row="3"
+                       Style="{StaticResource CommentariesTime}">
+                    <Label Text="82'" Style="{StaticResource Minutes}" />
+                </Frame>
+                <Label Grid.Column="1"
+                       Grid.Row="3"
+                       Text="Goal kick for Verona at Carlo Castellani"
+                       VerticalTextAlignment="Center"
+                       Margin="0,7" />
+
+                <!-- Yellow card -->
+                <Frame Grid.Column="0"
+                       Grid.Row="4"
+                       Style="{StaticResource CommentariesYellpwCard}"
+                       Margin="0,7">
+                    <Label Text="63'" Style="{StaticResource Minutes}" />
+                </Frame>
+                <Label Grid.Column="1"
+                       Grid.Row="4"
+                       Text="YELLOW CARD!"
+                       TextColor="{StaticResource YellowCardColor}"
+                       FontAttributes="Bold"
+                       VerticalTextAlignment="Center"
+                       Margin="0,7" />
+            </Grid>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

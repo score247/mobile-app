@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:Score.ViewResources"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="Score.Controls.Calendar"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:CalendarViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout Padding="16" Orientation="Vertical">
+        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+            <Button Style="{StaticResource PrevButton}" />
+            <Label Text="January 2019" Style="{StaticResource CurrentYear}" />
+            <Button Style="{StaticResource NextButton}" />
+        </FlexLayout>
+
+        <Grid Margin="0,24,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Text="MON" Style="{StaticResource Day}" />
+            <Label Grid.Column="1" Grid.Row="0" Text="TUE" Style="{StaticResource Day}" />
+            <Label Grid.Column="2" Grid.Row="0" Text="WEB" Style="{StaticResource Day}" />
+            <Label Grid.Column="3" Grid.Row="0" Text="THU" Style="{StaticResource Day}" />
+            <Label Grid.Column="4" Grid.Row="0" Text="FRI" Style="{StaticResource Day}" />
+            <Label Grid.Column="5" Grid.Row="0" Text="SAT" Style="{StaticResource Day}" />
+            <Label Grid.Column="6" Grid.Row="0" Text="SUN" Style="{StaticResource Day}" />
+
+            <BoxView Grid.ColumnSpan="7" Grid.Row="1" BackgroundColor="{StaticResource LineColor}" />
+
+            <!-- Week 1 -->
+            <Button Grid.Column="0"
+                    Grid.Row="2"
+                    Text="31"
+                    Style="{StaticResource DisabledDate}" />
+            <Button Grid.Column="1"
+                    Grid.Row="2"
+                    Text="1"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="2"
+                    Grid.Row="2"
+                    Text="2"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="3"
+                    Grid.Row="2"
+                    Text="3"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="4"
+                    Grid.Row="2"
+                    Text="4"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="5"
+                    Grid.Row="2"
+                    Text="5"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="6"
+                    Grid.Row="2"
+                    Text="6"
+                    Style="{StaticResource Date}" />
+
+            <!-- Week 2 -->
+            <Button Grid.Column="0"
+                    Grid.Row="3"
+                    Text="7"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="1"
+                    Grid.Row="3"
+                    Text="8"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="2"
+                    Grid.Row="3"
+                    Text="9"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="3"
+                    Grid.Row="3"
+                    Text="10"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="4"
+                    Grid.Row="3"
+                    Text="11"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="5"
+                    Grid.Row="3"
+                    Text="12"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="6"
+                    Grid.Row="3"
+                    Text="13"
+                    Style="{StaticResource Date}" />
+
+            <!-- Week 3 -->
+            <Button Grid.Column="0"
+                    Grid.Row="4"
+                    Text="14"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="1"
+                    Grid.Row="4"
+                    Text="15"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="2"
+                    Grid.Row="4"
+                    Text="16"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="3"
+                    Grid.Row="4"
+                    Text="17"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="4"
+                    Grid.Row="4"
+                    Text="18"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="5"
+                    Grid.Row="4"
+                    Text="19"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="6"
+                    Grid.Row="4"
+                    Text="20"
+                    Style="{StaticResource Date}" />
+
+            <!-- Week 4 -->
+            <Button Grid.Column="0"
+                    Grid.Row="5"
+                    Text="21"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="1"
+                    Grid.Row="5"
+                    Text="22"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="2"
+                    Grid.Row="5"
+                    Text="23"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="3"
+                    Grid.Row="5"
+                    Text="24"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="4"
+                    Grid.Row="5"
+                    Text="25"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="5"
+                    Grid.Row="5"
+                    Text="26"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="6"
+                    Grid.Row="5"
+                    Text="27"
+                    Style="{StaticResource Date}" />
+
+            <!-- Week 5 -->
+            <Button Grid.Column="0"
+                    Grid.Row="6"
+                    Text="28"
+                    Style="{StaticResource CurrentDate}" />
+            <Button Grid.Column="1"
+                    Grid.Row="6"
+                    Text="29"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="2"
+                    Grid.Row="6"
+                    Text="30"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="3"
+                    Grid.Row="6"
+                    Text="31"
+                    Style="{StaticResource Date}" />
+            <Button Grid.Column="4"
+                    Grid.Row="6"
+                    Text="1"
+                    Style="{StaticResource DisabledDate}" />
+            <Button Grid.Column="5"
+                    Grid.Row="6"
+                    Text="2"
+                    Style="{StaticResource DisabledDate}" />
+            <Button Grid.Column="6"
+                    Grid.Row="6"
+                    Text="3"
+                    Style="{StaticResource DisabledDate}" />
+        </Grid>
+    </StackLayout>
+</ContentPage>
