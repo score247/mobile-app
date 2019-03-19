@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:Score.ViewResources"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Score.Views.MatchInfoPage"
              Title="Match Info"
@@ -10,113 +11,11 @@
         <ToolbarItem Icon="images/common/star.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="12" />
-        </Style>
-
-        <!-- Match Score -->
-        <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
-            <Setter Property="Direction" Value="Row" />
-            <Setter Property="AlignItems" Value="Stretch" />
-            <Setter Property="JustifyContent" Value="Center" />
-            <Setter Property="Margin" Value="0,20" />
-        </Style>
-
-        <Style x:Key="MatchScoreBox" TargetType="Frame">
-            <Setter Property="BackgroundColor" Value="#3EC28F" />
-            <Setter Property="HeightRequest" Value="20" />
-            <Setter Property="WidthRequest" Value="50" />
-            <Setter Property="CornerRadius" Value="10" />
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,10,0,0" />
-            <Setter Property="HasShadow" Value="False" />
-        </Style>
-
-        <Style x:Key="ScoreText" TargetType="Label">
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="TextColor" Value="#fff" />
-        </Style>
-
-        <Style x:Key="GeneralMatchStatus" TargetType="Label">
-            <Setter Property="TextColor" Value="#666" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-        </Style>
-
-        <!-- Tab -->
-        <Style x:Key="ScrollTab" TargetType="ScrollView">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HeightRequest" Value="24" />
-            <Setter Property="Padding" Value="8,0" />
-            <Setter Property="BackgroundColor" Value="#0F111C" />
-        </Style>
-
-        <!-- Tab content -->
-
-        <Style x:Key="TabContent" TargetType="FlexLayout">
-            <Setter Property="Direction" Value="Column" />
-            <Setter Property="JustifyContent" Value="Center" />
-            <Setter Property="AlignItems" Value="Stretch" />
-        </Style>
-
-        <Style x:Key="MatchStatusRow" TargetType="FlexLayout">
-            <Setter Property="Direction" Value="Row" />
-            <Setter Property="AlignItems" Value="Stretch" />
-            <Setter Property="HeightRequest" Value="42" />
-        </Style>
-
-        <Style x:Key="MatchStatusAlignRight" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
-            <Setter Property="JustifyContent" Value="End" />
-        </Style>
-
-        <Style x:Key="MatchStatusAlignLeft" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
-            <Setter Property="JustifyContent" Value="Start" />
-        </Style>
-
-        <Style x:Key="MatchStatusAlignJustify" BasedOn="{StaticResource MatchStatusRow}" TargetType="FlexLayout">
-            <Setter Property="JustifyContent" Value="SpaceBetween" />
-        </Style>
-
-        <Style x:Key="InfoContentRight" TargetType="StackLayout">
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-            <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="Padding" Value="10,14" />
-        </Style>
-
-        <Style x:Key="MatchMinutes" TargetType="Label">
-            <Setter Property="WidthRequest" Value="42" />
-            <Setter Property="TextColor" Value="#fff" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="InfoText" TargetType="Label">
-            <Setter Property="TextColor" Value="#fff" />
-            <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-            <Setter Property="Margin" Value="14,0" />
-        </Style>
-
-        <!-- Group -->
-        <Style x:Key="Group" TargetType="StackLayout">
-            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-            <Setter Property="Padding" Value="16,0" />
-            <Setter Property="HeightRequest" Value="24" />
-            <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-            <Setter Property="VerticalOptions" Value="Center" />
-        </Style>
-
-        <Style x:Key="GroupName" TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="FontSize" Value="10" />
-            <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchInfoPageResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <StackLayout Orientation="Vertical"
@@ -162,19 +61,25 @@
                 <FlexLayout Style="{StaticResource MatchStatusAlignRight}">
                     <StackLayout Style="{StaticResource InfoContentRight}">
                         <Label Text="Carlos Embalo" Style="{StaticResource InfoText}" />
-                        <Label Style="{StaticResource YellowCard}" />
+                        <Label Style="{StaticResource MatchYellowCard}" />
                     </StackLayout>
-                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>                    
                     <Label Text="12'" Style="{StaticResource MatchMinutes}" />
                 </FlexLayout>
-                <BoxView BackgroundColor="{StaticResource LineColor}" HeightRequest="1" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="34'" Style="{StaticResource MatchMinutes}" />
-                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
-                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <StackLayout Style="{StaticResource InfoContainer}">
+                            <Image Style="{StaticResource MatchInfoBall}" />
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
@@ -184,24 +89,32 @@
                         </Frame>
                     </StackLayout>
                 </FlexLayout>
-                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
                     <Label Text="54'" Style="{StaticResource MatchMinutes}" />
-                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
-                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                        <Label Style="{StaticResource YellowCard}" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <StackLayout Style="{StaticResource InfoContainer}">
+                        <Label Style="{StaticResource MatchYellowCard}" />
                         <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
                     </StackLayout>
                 </FlexLayout>
-                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
                     <StackLayout Orientation="Horizontal">
                         <Label Text="63'" Style="{StaticResource MatchMinutes}" />
-                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
-                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <StackLayout Style="{StaticResource InfoContainer}">
+                            <Image Style="{StaticResource MatchInfoBall}" />
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
@@ -211,7 +124,9 @@
                         </Frame>
                     </StackLayout>
                 </FlexLayout>
-                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
                     <StackLayout Margin="10,0" VerticalOptions="Center">
@@ -219,35 +134,45 @@
                             <Label Text="2 - 0" Style="{StaticResource ScoreText}" />
                         </Frame>
                     </StackLayout>
-                    <StackLayout Orientation="Horizontal">
-                        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,0">
+                    <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
+                        <StackLayout Style="{StaticResource InfoContainer}">
                             <StackLayout>
                                 <Label Text="Darko Lazovic" Style="{StaticResource InfoText}" />
                                 <Label Text="Daniel Bessa" Style="{StaticResource InfoText}" TextColor="{StaticResource SecondTextColor}" />
                             </StackLayout>
-                            <Image Source="images/common/ball.png" Aspect="AspectFit" WidthRequest="12"  HorizontalOptions="EndAndExpand" />
+                            <Image Style="{StaticResource MatchInfoBall}" />
                         </StackLayout>
-                        <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
                         <Label Text="88'" Style="{StaticResource MatchMinutes}" />
                     </StackLayout>
                 </FlexLayout>
-                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
                     <Label Text="90'" Style="{StaticResource MatchMinutes}" />
-                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
-                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                        <Label Style="{StaticResource YellowCard}" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <StackLayout Style="{StaticResource InfoContainer}">
+                        <Label Style="{StaticResource MatchYellowCard}" />
                         <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
                     </StackLayout>
                 </FlexLayout>
-                <BoxView HeightRequest="1" BackgroundColor="{StaticResource LineColor}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
 
                 <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
                     <Label Text="91'" Style="{StaticResource MatchMinutes}" />
-                    <BoxView WidthRequest="1" BackgroundColor="{StaticResource LineColor}" />
-                    <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="10,14">
-                        <Label Style="{StaticResource YellowCard}" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <StackLayout Style="{StaticResource InfoContainer}">
+                        <Label Style="{StaticResource MatchYellowCard}" />
                         <Label Text="Jacob Rasussen" Style="{StaticResource InfoText}" />
                     </StackLayout>
                 </FlexLayout>

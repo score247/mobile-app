@@ -53,13 +53,10 @@
                                     <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                                         <Label Text="{Binding Date.Day}"
                                                Style="{StaticResource QuickAccessCalendarDate}"
-                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}"
-                                               FontSize="18" />
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
                                         <Label Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
-                                               Style="{StaticResource QuickAccessCalendarDate}"
-                                               FontAttributes="Bold"
-                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}"
-                                               FontSize="6" />
+                                               Style="{StaticResource QuickAccessCalendarDay}"
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
                                     </StackLayout>
                                 </Frame>
                             </ViewCell.View>
@@ -101,12 +98,12 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell Height="28">
-                        <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
+                        <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
                             <Label Text="{Binding Key.ShortEventDate}"
                                    Style="{StaticResource MatchDate}" />
-                            <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
+                            <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

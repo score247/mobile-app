@@ -23,6 +23,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="ViewResources\MatchTrackerPageResource.xaml.cs">
+      <DependentUpon>MatchTrackerPageResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MatchInfoPageResource.xaml.cs">
+      <DependentUpon>MatchInfoPageResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\CalendarPageResource.xaml.cs">
+      <DependentUpon>CalendarPageResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\TVSchedulePageResource.xaml.cs">
+      <DependentUpon>TVSchedulePageResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ScorePage.xaml.cs">
       <DependentUpon>ScorePage.xaml</DependentUpon>
     </Compile>

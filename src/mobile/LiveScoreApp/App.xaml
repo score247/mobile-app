@@ -3,19 +3,33 @@
                 xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                 xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms"
-                xmlns:resources="clr-namespace:LiveScoreApp.ViewResources"
                 x:Class="LiveScoreApp.App">
     <Application.Resources>
         <!-- Application resource dictionary -->
-            
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <resources:DarkThemeResource/>
-            </ResourceDictionary.MergedDictionaries>
             <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
                 <On Platform="Android" Value="livescore.ttf#livescore" />
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
+
+            <Color x:Key="PrimaryColor">#0F111C</Color>
+            <Color x:Key="SecondColor">#1D2133</Color>
+            <!-- Orange Color -->
+            <Color x:Key="PrimaryAccentColor">#F24822</Color>
+            <!-- GreenColor -->
+            <Color x:Key="SecondAccentColor">#3EC28F</Color>
+            <Color x:Key="SiteBackgroundColor">#0F111C</Color>
+            <Style x:Key="SiteFontSize" TargetType="Label">
+                <Setter Property="FontSize" Value="13" />
+            </Style>
+            <Color x:Key="HomeTeamColor">#30C2FF</Color>
+            <Color x:Key="AwayTeamColor">#fff</Color>
+            <Color x:Key="NeutralPlaceColor">#fff</Color>
+            <Color x:Key="PrimaryTextColor">#fff</Color>
+            <Color x:Key="SecondTextColor">#666</Color>
+            <Color x:Key="LineColor">#2E3245</Color>
+            <Color x:Key="YellowCardColor">#E5C20B</Color>
+            <Color x:Key="RedCardColor">#FC1923</Color>
 
             <!-- Calendar Page -->
             <Color x:Key="DateColor">#fff</Color>
@@ -46,15 +60,20 @@
             <Style TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
             </Style>
-            <Style x:Key="MenuLine" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="#2E3245" />
-                <Setter Property="HeightRequest" Value="1" />
-            </Style>
             <Style x:Key="SettingMenuRow" TargetType="FlexLayout">
                 <Setter Property="Direction" Value="Row" />
                 <Setter Property="HeightRequest" Value="44" />
                 <Setter Property="AlignItems" Value="Center" />
                 <Setter Property="BackgroundColor" Value="#1D2133" />
+            </Style>
+
+            <Style x:Key="VerticalLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="#2E3245" />
+                <Setter Property="WidthRequest" Value="1" />
+            </Style>
+            <Style x:Key="HorizontalLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="#2E3245" />
+                <Setter Property="HeightRequest" Value="1" />
             </Style>
 
             <!-- Icons -->
@@ -102,11 +121,11 @@
                 <Setter Property="Text" Value="&#xe915;" />
                 <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="Margin" Value="12,0" />
-                <Setter Property="Grid.Row" Value="0" />
-                <Setter Property="Grid.Column" Value="3" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />                
                 <Setter Property="WidthRequest" Value="12" />
+            </Style>
+            <Style x:Key="LeagueDetail" BasedOn="{StaticResource DetailIcon}" TargetType="Label">
+                <Setter Property="Margin" Value="15,0" />
             </Style>
 
             <Style x:Key="CalendarIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
@@ -121,6 +140,7 @@
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
                 <Setter Property="Text" Value="&#xe91e;" />
             </Style>
 

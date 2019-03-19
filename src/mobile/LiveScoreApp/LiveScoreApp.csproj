@@ -47,4 +47,9 @@
   <ItemGroup>
     <Compile Remove="ViewResources\DarkThemeResource %28copy%29.xaml.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ViewResources\MasterDetailPageResource.xaml.cs">
+      <DependentUpon>MasterDetailPageResource.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

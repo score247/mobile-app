@@ -18,7 +18,7 @@
                 <Label Text="Automatic Refresh" TextColor="#fff" Margin="16,0" />
                 <Switch  IsToggled="True" Margin="16,0" />
             </FlexLayout>
-            <BoxView Style="{StaticResource MenuLine}" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
                 <Label Text="Refresh Interval" TextColor="#fff" Margin="16,0" />

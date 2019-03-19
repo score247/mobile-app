@@ -15,12 +15,12 @@
             <Label x:Name="Soccer" Text="Soccer" TextColor="#fff" Margin="16,0" />
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
             <Label x:Name="Basketball" Text="Basketball" TextColor="#fff" Margin="16,0" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
             <Label x:Name="ESport" Text="E-Sport" TextColor="#fff" Margin="16,0" />

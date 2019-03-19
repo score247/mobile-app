@@ -33,6 +33,7 @@
             containerRegistry.RegisterForNavigation<MatchTrackerPage, MatchTrackerPageViewModel>();
             containerRegistry.RegisterForNavigation<LivePage, LivePageViewModel>();
             containerRegistry.RegisterForNavigation<CalendarPage, CalendarPageViewModel>();
+            containerRegistry.RegisterForNavigation<TVSchedulePage, TVSchedulePageViewModel>();
         }
     }
 }

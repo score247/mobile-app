@@ -18,31 +18,31 @@
             </StackLayout>
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
             <Image Source="images/flag_in.png" Aspect="AspectFit" Margin="16,0,8,0" />
             <Label x:Name="Indonesian" Text="Indonesian" TextColor="#fff" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
             <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
             <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" TextColor="#fff" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
             <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
             <Label x:Name="TraditionalChinese" Text="Traditional Chinese" TextColor="#fff" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
             <Image Source="images/flag_th.png" Aspect="AspectFit" Margin="16,0,8,0" />
             <Label x:Name="Thai" Text="Thai" TextColor="#fff" />
         </FlexLayout>
-        <BoxView Style="{StaticResource MenuLine}" />
+        <BoxView Style="{StaticResource HorizontalLine}" />
 
         <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
             <Image Source="images/flag_vn.png" Aspect="AspectFit" Margin="16,0,8,0" />
