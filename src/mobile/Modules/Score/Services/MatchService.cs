@@ -39,7 +39,7 @@
 
             var tasks = Settings.LeagueGroups.Select(async (group) =>
             {
-                matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate));
+                matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate).ConfigureAwait(false));
             });
 
             await Task.WhenAll(tasks);

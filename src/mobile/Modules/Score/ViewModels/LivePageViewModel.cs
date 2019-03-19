@@ -15,8 +15,8 @@
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
-            get { return groupMatches; }
-            set { SetProperty(ref groupMatches, value); }
+            get => groupMatches;
+            set => SetProperty(ref groupMatches, value);
         }
 
         public bool IsRefreshingMatchList

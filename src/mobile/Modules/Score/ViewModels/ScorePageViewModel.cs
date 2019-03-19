@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common.Extensions;
     using Common.Models;
     using Common.ViewModels;
     using Prism.Commands;
@@ -96,13 +97,13 @@
 
         public DelegateCommand SelectMatchCommand { get; private set; }
 
-        public DelegateCommand RefreshMatchListCommand { get; private set; }
+        public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
 
         public DelegateCommand RefreshCalendarListCommand { get; private set; }
 
         public DelegateCommand LoadMoreCalendarCommand { get; private set; }
 
-        public DelegateCommand SelectDateCommand { get; private set; }
+        public DelegateAsyncCommand SelectDateCommand { get; private set; }
 
         public DelegateCommand SelectHomeCommand { get; private set; }
 
@@ -111,16 +112,16 @@
             SelectMatchCommand = new DelegateCommand(async ()
                 => await NavigationService.NavigateAsync(nameof(MatchInfoPage)));
 
-            RefreshMatchListCommand = new DelegateCommand(OnRefreshMatchListCommand);
+            RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
             RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
             LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
-            SelectDateCommand = new DelegateCommand(OnSelectDateCommand);
+            SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
             SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
         }
 
-        private async void OnRefreshMatchListCommand()
-        {
-            await LoadMatches(SelectedCalendarDate.Date, showLoadingIndicator: false);
+        private async Task OnRefreshMatchListCommandAsync()
+        {            
+            await LoadMatches(SelectedCalendarDate.Date, false).ConfigureAwait(false);
             IsRefreshingMatchList = false;
         }
 
@@ -138,11 +139,11 @@
             }
         }
 
-        private async void OnSelectDateCommand()
+        private async Task OnSelectDateCommandAsync()
         {
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
-            await LoadMatches(SelectedCalendarDate.Date);
+            await LoadMatches(SelectedCalendarDate.Date).ConfigureAwait(false);
         }
 
         private void OnSelectHomeCommandExecuted()
@@ -163,7 +164,7 @@
         {
             IsLoadingMatches = showLoadingIndicator;
 
-            var matches = await matchService.GetDailyMatches(currentDate);
+            var matches = await matchService.GetDailyMatches(currentDate).ConfigureAwait(false);
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
 
