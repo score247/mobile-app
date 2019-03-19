@@ -17,9 +17,24 @@
         }
 
         [Test]
+        public void ScorePage_Launches_DisplayTabBars()
+        {
+            var totalTabs = scorePage.tabBars.Length;
+
+            Assert.AreEqual(5, totalTabs, "Tab bars binding incorrect!");
+        }
+
+        [Test]
         public void ScorePageLaunches()
         {
             app.Screenshot("ScorePage");
+        }
+
+        [Ignore]
+        [Test]
+        public void Repl()
+        {
+            app.Repl();
         }
     }
 }

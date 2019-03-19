@@ -1,17 +1,16 @@
 ﻿namespace LiveScoreApp.UITests.Pages
 {   
     using Xamarin.UITest;
-
-    using Query = System.Func<Xamarin.UITest.Queries.AppQuery, Xamarin.UITest.Queries.AppQuery>;
+    using Xamarin.UITest.Queries;
 
     public class ScorePage : BasePage
     {
-        readonly Query tabbedBar;
-
+        public readonly AppResult[] tabBars;
+        public readonly AppResult[] sportSelect;
 
         public ScorePage(IApp app, Platform platform) : base(app, platform, "Scores")
         {
-            //tabbedBar = x => x.Marked("Add");
+            tabBars = app.Query(c => c.Class("UITabBarButton"));
         }
     }
 }
