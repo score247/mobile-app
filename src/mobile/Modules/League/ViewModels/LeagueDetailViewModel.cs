@@ -3,10 +3,11 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using Common.ViewModels;
-    using League.Models;
+    using Common.Models.MatchInfo;
     using League.Services;
     using Prism.Commands;
     using Prism.Navigation;
+    using Common.Models;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
@@ -46,7 +47,7 @@
             currentLeagueId = parameters["id"] as string;
             var matches = leagueService.GetMatches(currentLeagueId);
 
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
+            //GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
         }
     }
 }

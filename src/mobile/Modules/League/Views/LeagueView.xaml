@@ -23,11 +23,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
-                            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand">
+                        <FlexLayout Style="{StaticResource LeagueGroup}">
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
                                 <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                                <Label Text="Champion League" Style="{StaticResource LeagueName}" />
+                                <Label Text="{Binding Text}" Style="{StaticResource LeagueName}" />
                             </StackLayout>
                             <Label Style="{StaticResource LeagueArrowRightIcon}" />
                         </FlexLayout>
