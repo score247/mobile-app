@@ -9,9 +9,9 @@
     using Xamarin.Forms;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.Linq;
+    using League.Views;
 
     public class LeagueViewModel : ViewModelBase
     {
@@ -69,8 +69,6 @@
             leagueList = new List<League>();
             IsLoading = true;
             HasData = !IsLoading;
-
-            Debug.WriteLine("ctor LeagueViewModel");
         }
        
         public override void OnAppearing()
@@ -90,7 +88,7 @@
 
         private async void ItemTapped()
         {
-            var result = await NavigationService.NavigateAsync($"LeagueDetailPage?id={selectedLeague.Id}");
+            var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={selectedLeague.Id}");
 
             if (!result.Success)
             {
@@ -128,7 +126,6 @@
             {
                 Leagues.Add(league);
             }
-
         }
        
     }
