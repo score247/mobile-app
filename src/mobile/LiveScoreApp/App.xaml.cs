@@ -42,9 +42,7 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-            await NavigationService.NavigateAsync(nameof(MasterDetailView) + "/" + nameof(MenuTabbedView));
-
-            //AppCenter.Start("ios=78840378-a040-416b-84c6-91390b3edb55;", typeof(Analytics), typeof(Crashes));
+            await NavigationService.NavigateAsync(nameof(MasterDetailView) + "/" + nameof(MenuTabbedView));           
         }
 
         protected override void ConfigureViewModelLocator()

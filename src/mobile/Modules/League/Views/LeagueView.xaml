@@ -5,12 +5,29 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
+             
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
     <StackLayout>
+        <ActivityIndicator x:Name="activity"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           IsEnabled="{Binding IsLoading}"
+                           Color="White"
+                           BackgroundColor="Transparent"
+                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Height,
+                                        Factor=0.33}"
+                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                                        Property=Height,
+                                        Factor=0.33}" />
+        
+        <SearchBar IsVisible="{Binding HasData}" Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10" />
         <ListView x:Name="ItemsListView"
+                IsVisible="{Binding HasData}"
                 ItemsSource="{Binding Leagues}"
                 SelectedItem="{Binding SelectedLeague}"
                 IsPullToRefreshEnabled="true"

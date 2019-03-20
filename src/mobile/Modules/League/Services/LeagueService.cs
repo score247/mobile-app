@@ -19,9 +19,7 @@
 
     public interface ILeagueService
     {
-        IList<League> GetAll();
-
-        Task<IList<League>> GetAllAsync(string group, string sportName, string language);
+        Task<IList<League>> GetAllAsync();
 
         IList<Match> GetMatches(string leagueId);
     }
@@ -34,22 +32,7 @@
         {
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(Settings.ApiEndPoint);
         }
-
-        public IList<League> GetAll()
-        {
-
-
-            return new List<League>
-            {
-                new League { Id = "1", Name = "Champions League" },
-                new League { Id = "2", Name = "Europa League"},
-                new League { Id = Guid.NewGuid().ToString(), Name = "Premiere League" },
-                new League { Id = Guid.NewGuid().ToString(), Name = "Bundesliga"},
-                new League { Id = Guid.NewGuid().ToString(), Name = "Laliga" }
-             
-            };
-        }
-
+               
         public IList<Match> GetMatches(string leagueId)
         {
             switch (leagueId)
@@ -103,7 +86,24 @@
                 };
         }
 
-        public async Task<IList<League>> GetAllAsync(string group, string sportName, string language)
+        public async Task<IList<League>> GetAllAsync()
+        {
+
+            var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
+            var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
+            var leagues = new List<League>();
+
+            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
+            {
+                leagues.AddRange(await GetSportLeagues(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
+            });
+
+            await Task.WhenAll(tasks);
+
+            return leagues.OrderBy(x=>x.Name).ToList();
+        }
+
+        private async Task<IList<League>> GetSportLeagues(string group, string sportName, string language) 
         {
             var apiKeyByGroup = Settings.ApiKeyMapper[group];
             var leagues = new List<League>();
