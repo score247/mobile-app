@@ -71,13 +71,10 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Views\MatchDetail\">
-      <DependentUpon>MatchDetail</DependentUpon>
     </Folder>
     <Folder Include="ViewModels\MatchDetail\">
-      <DependentUpon>MatchDetail</DependentUpon>
     </Folder>
     <Folder Include="Controls\">
-      <DependentUpon>Controls</DependentUpon>
     </Folder>
   </ItemGroup>
 </Project>

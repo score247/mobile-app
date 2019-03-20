@@ -44,5 +44,11 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Contants\" />
+    <Folder Include="Views\">
+      <DependentUpon>Views</DependentUpon>
+    </Folder>
+    <Folder Include="Views\Soccer\">
+      <DependentUpon>Soccer</DependentUpon>
+    </Folder>
   </ItemGroup>
 </Project>
