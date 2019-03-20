@@ -115,8 +115,12 @@
 
         private void SearchLeagues() 
         {
+            var filterLeagues = leagueList;
 
-            var filterLeagues = leagueList.Where(x => x.Name.Contains(Filter));
+            if (!string.IsNullOrWhiteSpace(Filter))
+            {
+                filterLeagues = leagueList.Where(x => x.Name.ToLower().Contains(Filter.ToLower())).ToList();
+            }
 
             Leagues.Clear();
 
