@@ -19,7 +19,7 @@
         public ObservableCollection<League> Leagues { get; set; }
 
         public DelegateCommand ItemTappedCommand { get; set; }
-        public DelegateCommand LoadLeaguesCommand { get; set; }
+        public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
         private bool isLoading;
 
@@ -49,7 +49,7 @@
             Title = "League";
             this.leagueService = leagueService;
             ItemTappedCommand = new DelegateCommand(ItemTapped);
-            LoadLeaguesCommand = new DelegateCommand(async() => await LoadLeaguesAsync());
+            LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
 
             Leagues = new ObservableCollection<League>();
             IsLoading = true;
@@ -57,25 +57,14 @@
 
             Debug.WriteLine("ctor LeagueViewModel");
         }
-
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
-
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
-
+       
         public override void OnAppearing()
         {
             base.OnAppearing();
 
             if (Leagues.Count == 0)
             {
-                LoadLeaguesCommand.Execute();
+                Task.Run(LoadLeaguesCommand.ExecuteAsync).Wait();
             }
             else 
             {
@@ -90,7 +79,7 @@
 
             if (!result.Success)
             {
-                await Application.Current.MainPage.DisplayAlert("Alert", "Error loading tournament page", "Cancel");
+                await Application.Current.MainPage.DisplayAlert("Alert", "Error loading league page", "Cancel");
             }
         }
 

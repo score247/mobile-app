@@ -28,7 +28,7 @@
         private bool CanExecuteAgain() =>
             _allowMultipleExecution || !IsExecuting;
 
-        private async Task ExecuteAsync() =>
+        public async Task ExecuteAsync() =>
             await _commandTask().ConfigureAwait(false);
 
         protected override bool CanExecute(object parameter) =>
