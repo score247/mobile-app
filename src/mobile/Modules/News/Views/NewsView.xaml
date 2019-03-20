@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:resources="clr-namespace:News.ViewResources"
+             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="News.Views.NewsView"
              BackgroundColor="{StaticResource PrimaryColor}">
@@ -17,19 +18,19 @@
     <StackLayout>
         <FlexLayout Style="{StaticResource NavTabs}">
             <StackLayout Style="{StaticResource Tab}">
-                <Label Text="FAVOURITES" Style="{StaticResource TabText}"  />
+                <Label x:Name="Favorites" Text="{langs:Translate Favorites}" Style="{StaticResource TabText}"  />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label Text="WORLD NEWS" Style="{StaticResource TabActiveText}"  />
+                <Label x:Name="WorldNews" Text="{langs:Translate WorldNews}" Style="{StaticResource TabActiveText}"  />
                 <ContentView>
                     <BoxView Style="{StaticResource TabActiveLine}" />
                 </ContentView>
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label Text="TRANSFERS" Style="{StaticResource TabText}"  />
+                <Label x:Name="Transfers" Text="{langs:Translate Transfers}" Style="{StaticResource TabText}"  />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label Text="VIDEOS" Style="{StaticResource TabText}"  />
+                <Label x:Name="Videos" Text="{langs:Translate Videos}" Style="{StaticResource TabText}"  />
             </StackLayout>
         </FlexLayout>
         <ScrollView Orientation="Vertical">

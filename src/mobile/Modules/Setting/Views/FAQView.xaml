@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Setting.Views.FAQView"
              Title="Frequently Asked Questions"
-             BackgroundColor="#0F111C">
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
@@ -14,71 +14,65 @@
             <Setter Property="TextColor" Value="#fff" />
             <Setter Property="FontSize" Value="13" />
         </Style>
+        <Style x:Key="FAQ" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Start" />
+            <Setter Property="BackgroundColor" Value="#1D2133" />
+            <Setter Property="Margin" Value="0,0,0,16" />
+            <Setter Property="Padding" Value="16,0"/>
+        </Style>
+        <Style x:Key="Question" TargetType="Label">
+            <Setter Property="TextColor" Value="#fff" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="0,16" />
+        </Style>
+        <Style x:Key="Answer" TargetType="StackLayout">
+            <Setter Property="Padding" Value="0,0,0,16"/>
+        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical"
-                     HorizontalOptions="Start"
-                     Spacing="0">
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Which sports do your scoreboards cover?" FontAttributes="Bold" Margin="16" />
+        <StackLayout>
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Which sports do your scoreboards cover?" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Do you have a free version?" FontAttributes="Bold" Margin="16" />
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Do you have a free version?" FontAttributes="Bold" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
-                <StackLayout Padding="16,0,16,16">
+                <StackLayout Style="{StaticResource Answer}">
                     <Label Text="Yes, we do offer a free version. The free Standard Edition contains everything you need to host a fully functional scoreboard." />
                     <Label Text="The only thing that needs to be purchased is a remote control within your mobile app." />
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
-            <StackLayout Orientation="Vertical"
-                         VerticalOptions="Start"
-                         BackgroundColor="#1D2133"
-                         Margin="0,0,0,16">
-                <FlexLayout Direction="Row" JustifyContent="SpaceBetween" AlignItems="Center">
-                    <Label Text="Another frequently asked question?" FontAttributes="Bold" Margin="16" />
+            <StackLayout Style="{StaticResource FAQ}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>

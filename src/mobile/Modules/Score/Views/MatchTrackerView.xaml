@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <resources:CommonMatchInfoViewResource />
                 <resources:MatchTrackerViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

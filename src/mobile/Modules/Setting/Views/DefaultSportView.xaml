@@ -5,25 +5,25 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Setting.Views.DefaultSportView"
              Title="Default Sport"
-             BackgroundColor="#0F111C">
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical" Spacing="0">
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label x:Name="Soccer" Text="Soccer" TextColor="#fff" Margin="16,0" />
+    <StackLayout>
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="Soccer" Text="Soccer" Style="{StaticResource NavName}" />
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
         <BoxView Style="{StaticResource HorizontalLine}" />
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label x:Name="Basketball" Text="Basketball" TextColor="#fff" Margin="16,0" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource NavName}" />
         </FlexLayout>
         <BoxView Style="{StaticResource HorizontalLine}" />
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <Label x:Name="ESport" Text="E-Sport" TextColor="#fff" Margin="16,0" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="ESport" Text="E-Sport" Style="{StaticResource NavName}" />
         </FlexLayout>
     </StackLayout>
 </ContentPage>

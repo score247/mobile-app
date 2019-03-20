@@ -3,35 +3,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="LiveScoreApp.ViewResources.MasterDetailViewResource">
     <Style x:Key="SideBar" TargetType="StackLayout">
-        <Setter Property="Orientation" Value="Vertical" />
-        <Setter Property="Spacing" Value="0" />
         <Setter Property="Margin" Value="0,50,0,0" />
     </Style>
-
-    <Style x:Key="FunctionGroup" TargetType="StackLayout">
+    <Style x:Key="NavGroup" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="#0F111C" />
-        <Setter Property="Padding" Value="12, 7, 12, 7" />
+        <Setter Property="Padding" Value="12,0" />
     </Style>
-    <Style x:Key="FunctionGroupName" TargetType="Label">
+    <Style x:Key="NavGroupName" TargetType="Label">
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="#666666" />
         <Setter Property="FontSize" Value="11" />
     </Style>
-
-    <Style x:Key="SideBarIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
-        <Setter Property="Margin" Value="10" />
+    <Style x:Key="NavIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
-    <Style x:Key="FunctionName" TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#fff" />
-    </Style>
-    <Style x:Key="FunctionValue" TargetType="Label">
-        <Setter Property="TextColor" Value="#676C8B" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Margin" Value="12,14" />
-    </Style>
-    <Style x:Key="LanguageName" BasedOn="{StaticResource FunctionValue}" TargetType="Label">
-        <Setter Property="Margin" Value="8,14,12,14" />
+   
+    <Style x:Key="LanguageName" BasedOn="{StaticResource NavValue}" TargetType="Label">
+        <Setter Property="Margin" Value="8,14,0,14" />
     </Style>
 </ResourceDictionary>

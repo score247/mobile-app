@@ -5,48 +5,96 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Setting.Views.DefaultLanguageView"
              Title="Default Language"
-             BackgroundColor="#0F111C">
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Spacing="0">
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-            <StackLayout Margin="16,0" Orientation="Horizontal">
-                <Image Source="images/flag_en.png" Aspect="AspectFit" Margin="0,0,8,0" />
-                <Label x:Name="English" Text="English" TextColor="#fff" />
+    <ContentPage.Resources>
+        <Style x:Key="FlagBox" TargetType="AbsoluteLayout">
+            <Setter Property="WidthRequest" Value="22" />
+            <Setter Property="HeightRequest" Value="14" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+        <Style x:Key="Flag" TargetType="Image">
+            <Setter Property="Aspect" Value="AspectFit" />            
+        </Style>
+    </ContentPage.Resources>
+    <StackLayout>
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_en.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>
+                <Label x:Name="English" Text="English" Style="{StaticResource NavName}" />
             </StackLayout>
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
-            <Image Source="images/flag_in.png" Aspect="AspectFit" Margin="16,0,8,0" />
-            <Label x:Name="Indonesian" Text="Indonesian" TextColor="#fff" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_in.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>
+                <Label x:Name="Indonesian" Text="Indonesian" Style="{StaticResource NavName}" />
+            </StackLayout>
+           
         </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
-            <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
-            <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" TextColor="#fff" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>
+                <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" Style="{StaticResource NavName}" />
+            </StackLayout>
+            
         </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
-            <Image Source="images/flag_cn.png" Aspect="AspectFit" Margin="16,0,8,0" />
-            <Label x:Name="TraditionalChinese" Text="Traditional Chinese" TextColor="#fff" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>
+                <Label x:Name="TraditionalChinese" Text="Traditional Chinese" Style="{StaticResource NavName}" />
+            </StackLayout>
+            
         </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
-            <Image Source="images/flag_th.png" Aspect="AspectFit" Margin="16,0,8,0" />
-            <Label x:Name="Thai" Text="Thai" TextColor="#fff" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_th.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>
+                <Label x:Name="Thai" Text="Thai" Style="{StaticResource NavName}" />
+            </StackLayout>
+            
         </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
 
-        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="Start">
-            <Image Source="images/flag_vn.png" Aspect="AspectFit" Margin="16,0,8,0" />
-            <Label x:Name="Vietnamese" Text="Vietnamese" TextColor="#fff" />
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                    <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
+                </AbsoluteLayout>                
+                <Label x:Name="Vietnamese" Text="Vietnamese" Style="{StaticResource NavName}" />
+            </StackLayout>
+            
         </FlexLayout>
     </StackLayout>
 </ContentPage>

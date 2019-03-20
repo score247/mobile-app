@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:commonresources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:resources="clr-namespace:Score.ViewResources"
+             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Score.Views.TVScheduleView"
              BackgroundColor="{StaticResource PrimaryColor}">
@@ -12,6 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <commonresources:CalendarQuickAccessViewResource />
                 <resources:TVScheduleViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
@@ -94,20 +97,20 @@
 
 
         <FlexLayout Style="{StaticResource TVScheduleTitleBox}" >
-            <Label Text="Time"
+            <Label Text="{langs:Translate Time}"
                    Style="{StaticResource TVScheduleTimeTitle}"
                    />
             <ContentView>
                 <BoxView Style="{StaticResource VerticalLine}" />
-            </ContentView>            
-            
-            <Label Text="Match"
+            </ContentView>
+
+            <Label Text="{langs:Translate Match}"
                    Style="{StaticResource TVScheduleMatchTitle}" />
             <ContentView>
                 <BoxView Style="{StaticResource VerticalLine}" />
             </ContentView>
-            
-            <Label Text="Channel"
+
+            <Label Text="{langs:Translate Channel}"
                    Style="{StaticResource TVScheduleChannelTitle}" />
         </FlexLayout>
         <ContentView>

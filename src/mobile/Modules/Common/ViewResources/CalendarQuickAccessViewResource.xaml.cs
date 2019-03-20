@@ -1,12 +1,12 @@
-﻿namespace Favorites.ViewResources
+﻿namespace Common.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FavoriteViewResource : ResourceDictionary
+    public partial class CalendarQuickAccessViewResource : ResourceDictionary
     {
-        public FavoriteViewResource()
+        public CalendarQuickAccessViewResource()
         {
             InitializeComponent();
         }

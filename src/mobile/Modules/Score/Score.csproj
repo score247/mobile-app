@@ -26,6 +26,9 @@
     <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewResources\CommonMatchInfoViewResource.xaml.cs">
+      <DependentUpon>CommonMatchInfoViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchTrackerPageResource.xaml.cs">
       <DependentUpon>MatchTrackerViewResource.xaml</DependentUpon>
     </Compile>

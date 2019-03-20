@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'livescore';
-  src:  url('fonts/livescore.eot?wsx5t1');
-  src:  url('fonts/livescore.eot?wsx5t1#iefix') format('embedded-opentype'),
-    url('fonts/livescore.ttf?wsx5t1') format('truetype'),
-    url('fonts/livescore.woff?wsx5t1') format('woff'),
-    url('fonts/livescore.svg?wsx5t1#livescore') format('svg');
+  src:  url('fonts/livescore.eot?85erug');
+  src:  url('fonts/livescore.eot?85erug#iefix') format('embedded-opentype'),
+    url('fonts/livescore.ttf?85erug') format('truetype'),
+    url('fonts/livescore.woff?85erug') format('woff'),
+    url('fonts/livescore.svg?85erug#livescore') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-night-mode:before {
+  content: "\e91b";
+  color: #fff;
+}
 .icon-card:before {
   content: "\e91a";
   color: #ffd600;

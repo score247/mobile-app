@@ -2,36 +2,30 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Favorites.Views.FavoriteView"
-             xmlns:resources="clr-namespace:Favorites.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <resources:FavoriteViewResource />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    
     <StackLayout Spacing="0">
         <FlexLayout Style="{StaticResource NavTabs}">
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Teams" Text="TEAMS" Style="{StaticResource TabText}" />
+                <Label x:Name="Teams" Text="{langs:Translate Teams}" Style="{StaticResource TabText}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Matches" Text="MATCHES" Style="{StaticResource TabText}" />
+                <Label x:Name="Matches" Text="{langs:Translate Matches}" Style="{StaticResource TabText}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Leagues" Text="LEAGUES" Style="{StaticResource TabActiveText}" />
+                <Label x:Name="Leagues" Text="{langs:Translate Leagues}" Style="{StaticResource TabActiveText}" />
                 <ContentView>
                     <BoxView Style="{StaticResource TabActiveLine}" />
                 </ContentView>
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Nations" Text="NATIONS" Style="{StaticResource TabText}" />
+                <Label x:Name="Nations" Text="{langs:Translate Nations}" Style="{StaticResource TabText}" />
             </StackLayout>
         </FlexLayout>
         <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
@@ -40,7 +34,7 @@
                 <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
                 <Label Text="Champion League" Style="{StaticResource LeagueName}" />
             </StackLayout>
-            <Label Style="{StaticResource ArrowRightIcon}" />
+            <Label Style="{StaticResource LeagueArrowRightIcon}" />
         </FlexLayout>
         <FlexLayout x:Name="EuropaLeague" Style="{StaticResource LeagueGroup}">
             <StackLayout Orientation="Horizontal"
@@ -48,7 +42,7 @@
                 <Image Source="images/flag_league/europa_league.png" Style="{StaticResource LeagueLogo}" />
                 <Label Text="Europa League" Style="{StaticResource LeagueName}" />
             </StackLayout>
-            <Label Style="{StaticResource ArrowRightIcon}" />
+            <Label Style="{StaticResource LeagueArrowRightIcon}" />
         </FlexLayout>
     </StackLayout>
 </ContentPage>

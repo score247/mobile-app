@@ -6,7 +6,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converter="clr-namespace:Score.Converters"
-             xmlns:resources="clr-namespace:Score.ViewResources"
+             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -20,7 +20,8 @@
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
             <ResourceDictionary.MergedDictionaries>
-                <resources:ScoresViewResource />
+                <resources:CalendarQuickAccessViewResource />
+                <resources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>

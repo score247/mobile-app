@@ -4,13 +4,13 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:resources="clr-namespace:League.ViewResources"
+             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
              x:Class="League.Views.LeagueDetailView">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:LeagueDetailViewResource />
+                <resources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -31,7 +31,7 @@
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell Height="28">
-                        <StackLayout x:Name="{Binding Key}" Orientation="Horizontal" BackgroundColor="{StaticResource PrimaryColor}">
+                        <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
                             <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                             <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
                             <Label Text="24 Jan" Style="{StaticResource MatchDate}" />

@@ -28,6 +28,12 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="ViewResources\CalendarQuickAccessViewResource.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MatchViewResource.xaml.cs">
+      <DependentUpon>MatchViewResource.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="LangResources\AppResources.resx">
@@ -36,7 +42,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewResources\" />
     <Folder Include="Controls\" />
     <Folder Include="Contants\" />
   </ItemGroup>

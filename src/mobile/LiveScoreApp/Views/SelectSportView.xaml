@@ -6,16 +6,16 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LiveScoreApp.Views.SelectSportView"
              Title="Select Sport"
-             BackgroundColor="#0F111C">
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout Orientation="Vertical" Spacing="0" VerticalOptions="FillAndExpand">
+    <StackLayout>
         <ListView ItemsSource="{Binding SportItems}"
                   SelectedItem="{Binding SelectedSportItem}"
-                  BackgroundColor="#1D2133"
-                  SeparatorColor="#2E3245"
+                  BackgroundColor="{StaticResource PrimaryColor}"
+                  SeparatorColor="{StaticResource LineColor}"
                   VerticalOptions="FillAndExpand"
                   AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
@@ -24,9 +24,9 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <FlexLayout Style="{StaticResource SettingMenuRow}" JustifyContent="SpaceBetween">
-                            <Label x:Name="{Binding Name}" Text="{Binding Name}" TextColor="#fff" Margin="16,0" />
-                            <Label Style="{StaticResource Icons}" IsVisible="{Binding IsVisible}" Text="&#xe914;" TextColor="#3EC28F" FontSize="14" Margin="16,0" />
+                        <FlexLayout Style="{StaticResource SettingMenuRow}">
+                            <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource NavName}" />
+                            <Label Style="{StaticResource CheckIcon}" />
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>

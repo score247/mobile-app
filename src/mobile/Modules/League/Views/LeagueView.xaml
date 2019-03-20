@@ -9,29 +9,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
-    <ContentPage.Resources>
-
-        <Style x:Key="LeagueGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-            <Setter Property="HeightRequest" Value="44" />
-            <Setter Property="Margin" Value="0,12,0,0" />
-            <Setter Property="BackgroundColor" Value="#1D2133" />
-        </Style>
-
-        <Style x:Key="LeagueLogo" TargetType="Image">
-            <Setter Property="Aspect" Value="AspectFit" />
-            <Setter Property="WidthRequest" Value="21" />
-            <Setter Property="Margin" Value="10,0,12,0" />
-        </Style>
-        <Style x:Key="LeagueName" TargetType="Label">
-            <Setter Property="TextColor" Value="#fff" />
-            <Setter Property="FontSize" Value="13" />
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-        </Style>
-    </ContentPage.Resources>
-
     <StackLayout>
-        <SearchBar Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10" />
         <ListView x:Name="ItemsListView"
                 ItemsSource="{Binding Leagues}"
                 SelectedItem="{Binding SelectedLeague}"
@@ -51,7 +29,7 @@
                                 <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
                                 <Label Text="Champion League" Style="{StaticResource LeagueName}" />
                             </StackLayout>
-                            <Label Style="{StaticResource ArrowRightIcon}" />
+                            <Label Style="{StaticResource LeagueArrowRightIcon}" />
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
