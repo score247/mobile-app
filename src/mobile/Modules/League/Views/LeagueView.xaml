@@ -33,14 +33,14 @@
         <ListView x:Name="ItemsListView"
                 IsVisible="{Binding HasData}"
                 ItemsSource="{Binding Leagues}"
-                SelectedItem="{Binding SelectedLeague}"
                 IsPullToRefreshEnabled="true"
                 Style="{StaticResource ListViewHasBackground}"
                 CachingStrategy="RecycleElement">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior
                     EventName="ItemTapped"
-                    Command="{Binding ItemTappedCommand}" />
+                    Command="{Binding ItemTappedCommand}" 
+                    EventArgsParameterPath="Item"/>
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>

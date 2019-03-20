@@ -16,13 +16,12 @@
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
-        private League selectedLeague;
         private string filter;
         private List<League> leagueList;
 
         public ObservableCollection<League> Leagues { get; set; }
 
-        public DelegateCommand ItemTappedCommand { get; set; }
+        public DelegateCommand<League> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
         public DelegateCommand SearchCommand { get; set; }
@@ -43,12 +42,6 @@
             set { SetProperty(ref hasData, value); }
         }
 
-        public League SelectedLeague
-        {
-            get => selectedLeague;
-            set => SetProperty(ref selectedLeague, value);
-        }
-
         public string Filter
         {
             get => filter;
@@ -61,7 +54,7 @@
             Title = "League";
             this.leagueService = leagueService;
 
-            ItemTappedCommand = new DelegateCommand(ItemTapped);
+            ItemTappedCommand = new DelegateCommand<League>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
             SearchCommand = new DelegateCommand(SearchLeagues);           
 
@@ -86,9 +79,9 @@
             }
         }
 
-        private async void ItemTapped()
+        private async void ItemTapped(League Item)
         {
-            var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={selectedLeague.Id}");
+            var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={Item.Id}");
 
             if (!result.Success)
             {
