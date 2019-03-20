@@ -34,7 +34,6 @@
             this.matchService = matchService;
             InitializeCommands();
             SelectHome = true;
-            Task.Run(InitializeData).Wait();
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -42,7 +41,7 @@
             base.OnNavigatedTo(parameters);
             var changeSport = parameters.GetValue<bool>("changeSport");
 
-            if (changeSport)
+            if (changeSport || GroupMatches == null)
             {
                 await InitializeData();
             }
