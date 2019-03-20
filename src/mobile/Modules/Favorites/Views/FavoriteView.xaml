@@ -17,13 +17,22 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout Spacing="0">
-        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
-                    JustifyContent="SpaceAround"
-                    HeightRequest="30">
-            <Label x:Name="Teams" Text="TEAMS" Style="{StaticResource TextTab}" />
-            <Label x:Name="Matches" Text="MATCHES" Style="{StaticResource TextTab}" />
-            <Label x:Name="Leagues" Text="LEAGUES" Style="{StaticResource ActiveTextTab}" />
-            <Label x:Name="Nations" Text="NATIONS" Style="{StaticResource TextTab}" />
+        <FlexLayout Style="{StaticResource NavTabs}">
+            <StackLayout Style="{StaticResource Tab}">
+                <Label x:Name="Teams" Text="TEAMS" Style="{StaticResource TabText}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label x:Name="Matches" Text="MATCHES" Style="{StaticResource TabText}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label x:Name="Leagues" Text="LEAGUES" Style="{StaticResource TabActiveText}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource TabActiveLine}" />
+                </ContentView>
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label x:Name="Nations" Text="NATIONS" Style="{StaticResource TabText}" />
+            </StackLayout>
         </FlexLayout>
         <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
             <StackLayout Orientation="Horizontal"

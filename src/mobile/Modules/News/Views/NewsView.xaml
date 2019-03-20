@@ -2,221 +2,143 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:News.ViewResources"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="News.Views.NewsView"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="12" />
-        </Style>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:NewsViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ContentPage.Resources>
+    
     <StackLayout>
-        <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}"
-                    JustifyContent="Start"
-                    HeightRequest="30">
-            <Label Text="FAVOURITES" Style="{StaticResource TextTab}" />
-            <Label Text="WORLD NEWS" Style="{StaticResource ActiveTextTab}" />
-            <Label Text="TRANSFERS" Style="{StaticResource TextTab}" />
-            <Label Text="VIDEOS" Style="{StaticResource TextTab}" />
+        <FlexLayout Style="{StaticResource NavTabs}">
+            <StackLayout Style="{StaticResource Tab}">
+                <Label Text="FAVOURITES" Style="{StaticResource TabText}"  />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label Text="WORLD NEWS" Style="{StaticResource TabActiveText}"  />
+                <ContentView>
+                    <BoxView Style="{StaticResource TabActiveLine}" />
+                </ContentView>
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label Text="TRANSFERS" Style="{StaticResource TabText}"  />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label Text="VIDEOS" Style="{StaticResource TabText}"  />
+            </StackLayout>
         </FlexLayout>
-        <ScrollView Orientation="Vertical"
-                    Margin="0,12,0,0">
+        <ScrollView Orientation="Vertical">
             <StackLayout>
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
-                        <Image Source="images/news/news_1.png" Aspect="AspectFill" />
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                        <Image Source="images/news/news_1.png" Aspect="AspectFit" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Luis Enrique casts doubt over Isco's Spain place"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                                Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04" 
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
-                        <Image Source="images/news/news_2.png" Aspect="AspectFill" />
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                        <Image Source="images/news/news_2.png" Aspect="AspectFit" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Carvaja wishes Morata well at Atletico"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_1.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_4.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Vinicius happy with Real Madrid role"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04" 
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_5.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_2.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Carvaja wishes Morata well at Atletico"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_1.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_4.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Vinicius happy with Real Madrid role"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
 
-                <StackLayout Orientation="Horizontal"
-                     VerticalOptions="Center"
-                     HorizontalOptions="FillAndExpand"
-                     Padding="4"
-                     Margin="0,0,0,4"
-                     BackgroundColor="{StaticResource SecondColor}">
-                    <AbsoluteLayout WidthRequest="96">
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <AbsoluteLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_5.png" Aspect="AspectFill" />
                     </AbsoluteLayout>
-                    <AbsoluteLayout Padding="12,0">
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               FontSize="12"
-                               TextColor="#fff"
-                               AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               AbsoluteLayout.LayoutFlags="All" />
-                        <Label Text="28 Jan 2019, 15:04" FontSize="11" TextColor="{StaticResource SecondTextColor}"
-                               AbsoluteLayout.LayoutBounds="0,1,1,.3"
-                               AbsoluteLayout.LayoutFlags="All"
-                               VerticalOptions="End" />
+                               Style="{StaticResource NewsTitle}" />
+                        <Label Text="28 Jan 2019, 15:04"
+                               Style="{StaticResource NewsDate}"/>
                     </AbsoluteLayout>
                 </StackLayout>
             </StackLayout>

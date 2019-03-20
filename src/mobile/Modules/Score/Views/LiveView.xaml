@@ -112,7 +112,7 @@
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
-                Style="{StaticResource listViewStyle}">
+                Style="{StaticResource ListViewHasBackground}">
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell Height="28">

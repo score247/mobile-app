@@ -165,16 +165,28 @@
                 <Setter Property="TextColor" Value="{StaticResource RedCardColor}" />
             </Style>
 
-            <!-- Tabs -->
-            <Style x:Key="TextTab" TargetType="Label">
+            <!-- NavTabs -->
+            <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="Margin" Value="0,0,0,12" />
+            </Style>
+            <Style x:Key="Tab" TargetType="StackLayout">
+                <Setter Property="Margin" Value="8,0" />
+            </Style>
+            <Style x:Key="TabText" TargetType="Label">
                 <Setter Property="FontSize" Value="10" />
                 <Setter Property="TextColor" Value="#666" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="10,0" />
+                <Setter Property="Margin" Value="4,0" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
-
-            <Style x:Key="ActiveTextTab" BasedOn="{StaticResource TextTab}" TargetType="Label">
+            <Style x:Key="TabActiveText" BasedOn="{StaticResource TabText}" TargetType="Label">
                 <Setter Property="TextColor" Value="#fff" />
+            </Style>
+            <Style x:Key="TabActiveLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="HeightRequest" Value="2" />
+                <Setter Property="Margin" Value="0,1,0,0" />
             </Style>
 
             <!--Global Styles-->
@@ -197,13 +209,8 @@
                 <Setter Property="FontSize" Value="12" />
             </Style>
 
-            <Style  x:Key="btnStyle" TargetType="Button">
-                <Setter Property="FontSize" Value="10" />
-                <Setter Property="TextColor" Value="#e6e6e6" />
-            </Style>
-
-            <Style x:Key="listViewStyle" TargetType="ListView">
-                <Setter Property="BackgroundColor" Value="#1D2133" />
+            <Style x:Key="ListViewHasBackground" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

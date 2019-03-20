@@ -26,7 +26,7 @@
                 IsGroupingEnabled="True"
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
-                Style="{StaticResource listViewStyle}"
+                Style="{StaticResource ListViewHasBackground}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>

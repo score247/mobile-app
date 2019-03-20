@@ -56,7 +56,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="TVSchedule" Title="{langs:Translate TVSchedule}" Icon="images/tv.png">
+        <NavigationPage x:Name="TVSchedule" Title="{langs:Translate TVSchedule}" Icon="images/common/tv.png">
             <x:Arguments>
                 <score:TVScheduleView Title="{langs:Translate TVSchedule}">
                     <NavigationPage.TitleView>

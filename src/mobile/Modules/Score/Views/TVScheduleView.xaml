@@ -61,17 +61,17 @@
             <Frame Style="{StaticResource QuickAccessCalendarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="28"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource QuickAccessCalendarTodayDate}" />
                     <Label Text="MON"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource QuickAccessCalendarTodayDay}" />
                 </StackLayout>
             </Frame>
             <Frame Style="{StaticResource QuickAccessCalendarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="29"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource QuickAccessCalendarActiveDate}" />
                     <Label Text="TUE"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource QuickAccessCalendarActiveDay}" />
                 </StackLayout>
             </Frame>
             <Frame Style="{StaticResource QuickAccessCalendarBox}">

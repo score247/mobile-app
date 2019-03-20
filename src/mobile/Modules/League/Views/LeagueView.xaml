@@ -36,7 +36,7 @@
                 ItemsSource="{Binding Leagues}"
                 SelectedItem="{Binding SelectedLeague}"
                 IsPullToRefreshEnabled="true"
-                Style="{StaticResource listViewStyle}">
+                Style="{StaticResource ListViewHasBackground}">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior
                     EventName="ItemTapped"
