@@ -25,7 +25,11 @@
                                         Property=Height,
                                         Factor=0.33}" />
         
-        <SearchBar IsVisible="{Binding HasData}" Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10" />
+        <SearchBar x:Name="LeagueSearchEntry" Text="{Binding Filter}" IsVisible="{Binding HasData}" Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10">
+            <SearchBar.Behaviors>
+                    <b:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}" />
+            </SearchBar.Behaviors>
+        </SearchBar>
         <ListView x:Name="ItemsListView"
                 IsVisible="{Binding HasData}"
                 ItemsSource="{Binding Leagues}"

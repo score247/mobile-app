@@ -13,7 +13,6 @@
     public interface ILeagueApi
     {
         [Get("/{sport}-t3/{group}/{lang}/tournaments.json?api_key={key}")]
-        //https://api.sportradar.us/soccer-t3/eu/en/tournaments.json?api_key=vequ6wxdqyt7eg8qzh26dm5u
         Task<LeagueInfo> GetLeagues(string sport, string group, string lang, string key);
     }
 

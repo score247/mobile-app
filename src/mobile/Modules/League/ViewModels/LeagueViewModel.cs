@@ -10,16 +10,22 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using System.Diagnostics;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
         private League selectedLeague;
+        private string filter;
+        private List<League> leagueList;
 
         public ObservableCollection<League> Leagues { get; set; }
 
         public DelegateCommand ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
+
+        public DelegateCommand SearchCommand { get; set; }
 
         private bool isLoading;
 
@@ -43,15 +49,24 @@
             set => SetProperty(ref selectedLeague, value);
         }
 
+        public string Filter
+        {
+            get => filter;
+            set => SetProperty(ref filter, value);
+        }
+
         public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService)
             : base(navigationService)
         {
             Title = "League";
             this.leagueService = leagueService;
+
             ItemTappedCommand = new DelegateCommand(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
+            SearchCommand = new DelegateCommand(SearchLeagues);           
 
             Leagues = new ObservableCollection<League>();
+            leagueList = new List<League>();
             IsLoading = true;
             HasData = !IsLoading;
 
@@ -92,8 +107,25 @@
                 Leagues.Add(league);
             }
 
+            leagueList.AddRange(leagues);
+
             IsLoading = false;
             HasData = !IsLoading;
         }
+
+        private void SearchLeagues() 
+        {
+
+            var filterLeagues = leagueList.Where(x => x.Name.Contains(Filter));
+
+            Leagues.Clear();
+
+            foreach (var league in filterLeagues)
+            {
+                Leagues.Add(league);
+            }
+
+        }
+       
     }
 }
