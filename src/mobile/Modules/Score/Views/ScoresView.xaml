@@ -140,7 +140,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
+                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" EventArgsParameterPath="Item" />
             </ListView.Behaviors>
         </ListView>
     </StackLayout>

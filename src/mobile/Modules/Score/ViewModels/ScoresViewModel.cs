@@ -90,7 +90,7 @@
             set { SetProperty(ref selectHome, value); }
         }
 
-        public DelegateAsyncCommand SelectMatchCommand { get; private set; }
+        public DelegateAsyncCommand<Match> SelectMatchCommand { get; private set; }
 
         public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
 
@@ -104,8 +104,10 @@
 
         private void InitializeCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand(async ()
-                => await NavigationService.NavigateAsync(nameof(MatchDetailView)));
+            SelectMatchCommand = new DelegateAsyncCommand<Match>(async (Match item) =>
+            {
+                await NavigationService.NavigateAsync(nameof(MatchDetailView));
+            });
 
             RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
             RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
@@ -116,7 +118,14 @@
 
         private async Task OnRefreshMatchListCommandAsync()
         {
-            await LoadMatches(SelectedCalendarDate.Date, false).ConfigureAwait(false);
+            var date = SelectedCalendarDate.Date;
+
+            if (date.Date == DateTime.MinValue)
+            {
+                date = DateTime.Today;
+            }
+
+            await LoadMatches(date, false).ConfigureAwait(false);
             IsRefreshingMatchList = false;
         }
 
@@ -160,6 +169,7 @@
             IsLoadingMatches = showLoadingIndicator;
 
             var matches = await matchService.GetDailyMatches(currentDate).ConfigureAwait(false);
+
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                 matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
 
