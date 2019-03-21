@@ -22,6 +22,7 @@
              <ResourceDictionary.MergedDictionaries>
                 <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
+            <commonTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
             <commonTemplates:SoccerMatchListViewTemplate x:Key="soccerListViewTemplate" />
             <commonTemplates:BasketBallMatchListViewTemplate x:Key="basketBallListViewTemplate" />
             <commonConverters:MatchListViewDataTemplateSelector 
@@ -51,21 +52,9 @@
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
+                GroupHeaderTemplate="{StaticResource matchHeaderListViewTemplate}"
                 ItemTemplate="{StaticResource matchListViewDataTemplateSelector}"
                 AutomationProperties.IsInAccessibleTree="False">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell Height="28">
-                        <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
-                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                            <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
-                            <Label Text="{Binding Key.ShortEventDate}"
-                                   Style="{StaticResource MatchDate}" />
-                            <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" EventArgsParameterPath="Item" />
             </ListView.Behaviors>

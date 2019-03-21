@@ -38,7 +38,7 @@
       <DependentUpon>SoccerMatchListViewTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate %28copy%29.xaml.cs">
-      <DependentUpon>BasketBallMatchListViewTemplate %28copy%29.xaml</DependentUpon>
+      <DependentUpon>MatchHeaderListViewTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\BasketBallMatchListViewTemplate %28copy%29.xaml.cs">
       <DependentUpon>ESportsMatchListViewTemplate.xaml</DependentUpon>
