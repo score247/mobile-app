@@ -42,7 +42,7 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-            await NavigationService.NavigateAsync(nameof(MasterDetailView) + "/" + nameof(MenuTabbedView));           
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 
         protected override void ConfigureViewModelLocator()
@@ -68,7 +68,7 @@ namespace LiveScoreApp
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainView>();
             containerRegistry.RegisterForNavigation<MenuTabbedView>();
-            containerRegistry.RegisterForNavigation<MasterDetailView, MasterDetailViewModel>();
+            containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewModel>();
         }

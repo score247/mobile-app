@@ -27,6 +27,9 @@
     <ProjectReference Include="..\Modules\Setting\Setting.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Remove="Views\MasterDetailView.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="Views\MasterDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -46,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewResources\DarkThemeResource %28copy%29.xaml.cs" />
+    <Compile Remove="Views\MasterDetailView.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ViewResources\MasterDetailPageResource.xaml.cs">
