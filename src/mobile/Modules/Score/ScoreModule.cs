@@ -30,7 +30,6 @@
 
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
             containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>();
-            containerRegistry.RegisterForNavigation<MatchTrackerView, MatchTrackerViewModel>();
             containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();
             containerRegistry.RegisterForNavigation<TVScheduleView, TVScheduleViewModel>();
         }

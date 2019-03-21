@@ -1,4 +1,4 @@
-﻿namespace Score.Converters
+﻿namespace Common.Converters
 {
     using System;
     using System.Globalization;

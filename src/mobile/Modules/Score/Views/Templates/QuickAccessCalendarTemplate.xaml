@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Name="view" 
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:converter="clr-namespace:Score.Converters"
+             xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
+             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
+             x:Class="Score.Views.Templates.QuickAccessCalendarTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                <resources:CalendarQuickAccessViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
+            <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
+            <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <FlexLayout Style="{StaticResource QuickAccessContainer}">
+            <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
+                <Label Style="{StaticResource HomeIcon}"
+                       TextColor="{Binding SelectHome, Converter={StaticResource homeLabelTextColorConverter}}" />
+                <Frame.GestureRecognizers>
+                     <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <controls:InfiniteListView x:Name="Calendar"
+                      ItemsSource="{Binding CalendarItems}"
+                      Style="{StaticResource QuickAccessCalendarListView}"
+                      SelectedItem="{Binding SelectedCalendarDate}"
+                      LoadMoreCommand="{Binding LoadMoreCalendarCommand}"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsRefreshingCalendarList}"
+                      RefreshCommand="{Binding RefreshCalendarListCommand}"
+                      AutomationProperties.IsInAccessibleTree="False">
+                <controls:InfiniteListView.Behaviors>
+                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
+                </controls:InfiniteListView.Behaviors>
+                <controls:InfiniteListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Frame Style="{StaticResource QuickAccessCalendarBox}" Rotation="90">
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label Text="{Binding Date.Day}"
+                                               Style="{StaticResource QuickAccessCalendarDate}"
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
+                                        <Label Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
+                                               Style="{StaticResource QuickAccessCalendarDay}"
+                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </controls:InfiniteListView.ItemTemplate>
+            </controls:InfiniteListView>
+            <Frame x:Name="CalendarIcon" Style="{StaticResource QuickAccessCalendarBox}">
+                <Label Style="{StaticResource CalendarIcon}" />
+            </Frame>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

@@ -45,6 +45,14 @@
       <DependentUpon>Calendar.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchTrackerView.xaml.cs">
+      <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchTrackerTemplate.xaml.cs">
+      <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -67,7 +75,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\MatchDetail\">
+    <Folder Include="Views\Templates\">
     </Folder>
     <Folder Include="ViewModels\MatchDetail\">
     </Folder>

@@ -259,6 +259,16 @@
             <Style x:Key="LeagueArrowRightIcon" BasedOn="{StaticResource ArrowRightIcon}" TargetType="Label">
                 <Setter Property="Margin" Value="10,0" />
             </Style>
+            
+            <Style x:Key="CenterActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="White" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="RelativeLayout.XConstraint" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" />
+                <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

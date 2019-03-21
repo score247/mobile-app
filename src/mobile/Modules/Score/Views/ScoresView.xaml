@@ -8,9 +8,10 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converter="clr-namespace:Score.Converters"
-             xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
-             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
-             xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
+             xmlns:templates="clr-namespace:Score.Views.Templates"
+             xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
+             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:commonControls="clr-namespace:Common.Controls;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -19,81 +20,24 @@
     <ContentPage.Resources>
         <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                <resources:CalendarQuickAccessViewResource />
-                <resources:MatchViewResource />
+                <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            
             <commonTemplates:SoccerMatchListViewTemplate x:Key="soccerListViewTemplate" />
             <commonTemplates:BasketBallMatchListViewTemplate x:Key="basketBallListViewTemplate" />
-            <commonConverter:MatchListViewDataTemplateSelector 
+            <commonConverters:MatchListViewDataTemplateSelector 
                 x:Key="matchListViewDataTemplateSelector"
                 SoccerTemplate="{StaticResource soccerListViewTemplate}"
                 BasketBallTemplate="{StaticResource basketBallListViewTemplate}" />
-            
-            <converter:InverseBoolConverter x:Key="inverseBoolConverter" />
-            <converter:MatchStatusConverter x:Key="matchStatusConverter" />
-            <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
-            <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
-            <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
+            <commonConverters:InverseBoolConverter x:Key="inverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <FlexLayout Style="{StaticResource QuickAccessContainer}">
-            <Frame x:Name="HomeIcon" Style="{StaticResource QuickAccessCalendarBox}" Margin="0,0,8,0">
-                <Label Style="{StaticResource HomeIcon}"
-                       TextColor="{Binding SelectHome, Converter={StaticResource homeLabelTextColorConverter}}" />
-                <Frame.GestureRecognizers>
-                     <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
-                </Frame.GestureRecognizers>
-            </Frame>
-            <controls:InfiniteListView x:Name="Calendar"
-                      ItemsSource="{Binding CalendarItems}"
-                      Style="{StaticResource QuickAccessCalendarListView}"
-                      SelectedItem="{Binding SelectedCalendarDate}"
-                      LoadMoreCommand="{Binding LoadMoreCalendarCommand}"
-                      IsPullToRefreshEnabled="true"
-                      IsRefreshing="{Binding IsRefreshingCalendarList}"
-                      RefreshCommand="{Binding RefreshCalendarListCommand}"
-                      AutomationProperties.IsInAccessibleTree="False">
-                <controls:InfiniteListView.Behaviors>
-                    <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
-                </controls:InfiniteListView.Behaviors>
-                <controls:InfiniteListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <Frame Style="{StaticResource QuickAccessCalendarBox}" Rotation="90">
-                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-                                        <Label Text="{Binding Date.Day}"
-                                               Style="{StaticResource QuickAccessCalendarDate}"
-                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
-                                        <Label Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
-                                               Style="{StaticResource QuickAccessCalendarDay}"
-                                               TextColor="{Binding ., Converter={StaticResource calendarTextColorConverter}}" />
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </controls:InfiniteListView.ItemTemplate>
-            </controls:InfiniteListView>
-            <Frame x:Name="CalendarIcon" Style="{StaticResource QuickAccessCalendarBox}">
-                <Label Style="{StaticResource CalendarIcon}" />
-            </Frame>
-        </FlexLayout>
+        <templates:QuickAccessCalendarTemplate></templates:QuickAccessCalendarTemplate>
         <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoadingMatches}"
                            IsVisible="{Binding IsLoadingMatches}"
                            IsEnabled="{Binding IsLoadingMatches}"
-                           Color="White"
-                           BackgroundColor="Transparent"
-                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
-                           RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent,
-                                        Property=Height,
-                                        Factor=0.33}"
-                           RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
-                                        Property=Height,
-                                        Factor=0.33}" />
+                           Style="{StaticResource CenterActivityIndicator}"/>
         <ListView
                 IsVisible="{Binding IsLoadingMatches, Converter={StaticResource inverseBoolConverter}}"
                 ItemsSource="{Binding GroupMatches}"
