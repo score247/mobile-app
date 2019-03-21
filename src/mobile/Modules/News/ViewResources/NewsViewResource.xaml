@@ -2,9 +2,6 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="News.ViewResources.NewsViewResource">
-    <Style TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-    </Style>
     
     <Style x:Key="NewsBlock" TargetType="StackLayout">
         <Setter Property="Orientation" Value="Horizontal" />
@@ -22,11 +19,12 @@
     </Style>
     <Style x:Key="NewsTitle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
     <Style x:Key="NewsDate" TargetType="Label">
-        <Setter Property="FontSize" Value="11" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="AbsoluteLayout.LayoutBounds" Value="0,1,1,0.3" />
         <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
     </Style>
 </ResourceDictionary>

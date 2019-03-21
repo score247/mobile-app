@@ -11,11 +11,11 @@
         <Setter Property="HeightRequest" Value="32" />
     </Style>
     <Style x:Key="TVScheduleTitle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />        
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
     <Style x:Key="TVScheduleTimeTitle" BasedOn="{StaticResource TVScheduleTitle}" TargetType="Label">
         <Setter Property="FlexLayout.Basis" Value="54" />
@@ -30,6 +30,11 @@
     </Style>
 
     <!-- Leagues -->
+    <Style x:Key="TVScheduleLeagueName" TargetType="StackLayout">        
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
         <Setter Property="WidthRequest" Value="16" />
         <Setter Property="Aspect" Value="AspectFit" />
@@ -39,7 +44,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
@@ -48,33 +53,19 @@
         <Setter Property="FlexLayout.Basis" Value="54" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
     <Style x:Key="MatchBox" TargetType="StackLayout">
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="Padding" Value="8,0" />
     </Style>
-    <Style x:Key="Team" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="HeightRequest" Value="22" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="NeutralPlaceFirstTeam" BasedOn="{StaticResource Team}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource NeutralPlaceColor}" />
-        <Setter Property="Margin" Value="0,4,0,0" />
-    </Style>
-    <Style x:Key="NeutralPlaceSecondTeam" BasedOn="{StaticResource Team}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource NeutralPlaceColor}" />
-        <Setter Property="Margin" Value="0,0,0,4" />
-    </Style>
-    <Style x:Key="TVScheduleChannel" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+    <Style x:Key="TVScheduleChannel" TargetType="Label">        
         <Setter Property="FlexLayout.Basis" Value="96" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="Margin" Value="8,0" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 </ResourceDictionary>

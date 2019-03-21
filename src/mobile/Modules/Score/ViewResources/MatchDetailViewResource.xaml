@@ -14,14 +14,14 @@
         <Setter Property="Margin" Value="0,20" />
     </Style>
 
-    <Style x:Key="MatchScoreBox" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
+    <Style x:Key="MatchScoreBox" TargetType="Frame">        
         <Setter Property="HeightRequest" Value="20" />
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="CornerRadius" Value="10" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="0,10,0,0" />
         <Setter Property="HasShadow" Value="False" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
     </Style>
 
     <Style x:Key="ScoreText" TargetType="Label">
@@ -32,11 +32,11 @@
     </Style>
 
     <Style x:Key="GeneralMatchStatus" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,8,0,0" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <!-- Tab -->
@@ -45,5 +45,24 @@
         <Setter Property="HeightRequest" Value="24" />
         <Setter Property="Padding" Value="8,0" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+
+    <!-- Group -->
+    <Style x:Key="Group" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+
+    <Style x:Key="GroupName" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 </ResourceDictionary>

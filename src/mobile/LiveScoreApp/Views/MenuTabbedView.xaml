@@ -26,6 +26,16 @@
             </x:Arguments>
         </NavigationPage>
 
+        <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png">
+            <x:Arguments>
+                <score:LiveView Title="Scores">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </score:LiveView>
+            </x:Arguments>
+        </NavigationPage>
+
         <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/star.png">
             <x:Arguments>
                 <favorites:FavoriteView Title="Favorites">

@@ -16,7 +16,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style x:Key="MatchDate" TargetType="Label">
@@ -24,7 +24,7 @@
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchStatus" TargetType="Label">
@@ -32,29 +32,14 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="Team" TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="HeightRequest" Value="22" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="HomeTeam" BasedOn="{StaticResource Team}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
-        <Setter Property="Margin" Value="0,4,0,0" />
-    </Style>
-
-    <Style x:Key="AwayTeam" BasedOn="{StaticResource Team}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
-        <Setter Property="Margin" Value="0,0,0,4" />
-    </Style>
-
     <Style x:Key="Score" BasedOn="{StaticResource Team}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="Margin" Value="0,0,20,0" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
 </ResourceDictionary>

@@ -118,7 +118,7 @@
         </ContentView>
         
         <!-- League Name-->
-        <StackLayout BackgroundColor="{StaticResource SecondColor}" Orientation="Horizontal" HeightRequest="30">
+        <StackLayout Style="{StaticResource TVScheduleLeagueName}" >
             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
             <Label Text="CHAMPION LEAGUE" Style="{StaticResource LeagueName}" />
             <Label Style="{StaticResource LeagueDetail}" HorizontalOptions="EndAndExpand" />
@@ -136,8 +136,8 @@
             </ContentView>
 
             <StackLayout Style="{StaticResource MatchBox}">
-                <Label Text="Chelsea" Style="{ StaticResource NeutralPlaceFirstTeam}" />
-                <Label Text="Tottenham Hotspur" Style="{ StaticResource NeutralPlaceSecondTeam}" />
+                <Label Text="Chelsea" Style="{ StaticResource HomeTeam}" />
+                <Label Text="Tottenham Hotspur" Style="{ StaticResource AwayTeam}" />
             </StackLayout>
             <ContentView>
                 <BoxView Style="{StaticResource VerticalLine}" />
@@ -158,8 +158,8 @@
             </ContentView>
 
             <StackLayout Style="{StaticResource MatchBox}">
-                <Label Text="Chelsea" Style="{ StaticResource NeutralPlaceFirstTeam}" />
-                <Label Text="Tottenham Hotspur" Style="{ StaticResource NeutralPlaceSecondTeam}" />
+                <Label Text="Chelsea" Style="{ StaticResource HomeTeam}" />
+                <Label Text="Tottenham Hotspur" Style="{ StaticResource AwayTeam}" />
             </StackLayout>
             <ContentView>
                 <BoxView Style="{StaticResource VerticalLine}" />

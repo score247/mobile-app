@@ -4,7 +4,7 @@
                     x:Class="Score.ViewResources.MatchInfoViewResource">
     
     <!-- Tab content -->
-
+    
     <Style x:Key="TabContent" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Center" />
@@ -41,6 +41,7 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
     </Style>
 
     <Style x:Key="InfoText" TargetType="Label">
@@ -48,6 +49,7 @@
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="14,0" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
     </Style>
 
     <Style x:Key="MatchYellowCard" BasedOn="{StaticResource YellowCard}" TargetType="Label">
@@ -66,21 +68,11 @@
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Padding" Value="10,0" />
     </Style>
-    <!-- Group -->
-    <Style x:Key="Group" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-        <Setter Property="Padding" Value="16,0" />
-        <Setter Property="HeightRequest" Value="24" />
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="Center" />
+    <Style x:Key="MatchInfoTitle" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
     </Style>
-
-    <Style x:Key="GroupName" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Style x:Key="MatchInfoValue" BasedOn="{StaticResource MatchInfoTitle}" TargetType="Label">
+        <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
 </ResourceDictionary>

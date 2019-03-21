@@ -68,10 +68,9 @@
                 </Frame>
                 <StackLayout Grid.Column="1"
                             Grid.Row="2"
-                             Spacing="0"
                              Margin="0,7">
-                    <Label Text="GOAL!" TextColor="{StaticResource SecondAccentColor}" FontAttributes="Bold" />
-                    <Label Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                    <Label Text="GOAL!" Style="{StaticResource CommentariesContentGoal}"  />
+                    <Label Style="{StaticResource CommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
                 </StackLayout>
 
                 <!-- Time -->
@@ -83,23 +82,18 @@
                 <Label Grid.Column="1"
                        Grid.Row="3"
                        Text="Goal kick for Verona at Carlo Castellani"
-                       VerticalTextAlignment="Center"
-                       Margin="0,7" />
+                       Style="{StaticResource CommentariesText}" />
 
                 <!-- Yellow card -->
                 <Frame Grid.Column="0"
                        Grid.Row="4"
-                       Style="{StaticResource CommentariesYellpwCard}"
-                       Margin="0,7">
+                       Style="{StaticResource CommentariesYellowCard}">
                     <Label Text="63'" Style="{StaticResource Minutes}" />
                 </Frame>
                 <Label Grid.Column="1"
                        Grid.Row="4"
                        Text="YELLOW CARD!"
-                       TextColor="{StaticResource YellowCardColor}"
-                       FontAttributes="Bold"
-                       VerticalTextAlignment="Center"
-                       Margin="0,7" />
+                       Style="{StaticResource CommentariesContentYellowCard}" />
             </Grid>
         </StackLayout>
     </ContentView.Content>
