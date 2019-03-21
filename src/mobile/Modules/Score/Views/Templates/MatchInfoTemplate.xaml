@@ -144,16 +144,16 @@
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                 </Grid.RowDefinitions>
-                <Label Grid.Column="0" Grid.Row="0" Text="Referee:" TextColor="#fff" />
-                <Label Grid.Column="1" Grid.Row="0" Text="Federico La Penna (Italy)" TextColor="#fff" FontAttributes="Bold" />
-                <Label Grid.Column="0" Grid.Row="1" Text="Venue:" TextColor="#fff" />
-                <Label Grid.Column="1" Grid.Row="1" Text="Carlo Castellany" TextColor="#fff" FontAttributes="Bold" />
-                <Label Grid.Column="0" Grid.Row="2" Text="Date and Time:" TextColor="#fff" />
-                <Label Grid.Column="1" Grid.Row="2" Text="15:00 Jan 25, 2019" TextColor="#fff" FontAttributes="Bold" />
-                <Label Grid.Column="0" Grid.Row="3" Text="Spectators:" TextColor="#fff" />
-                <Label Grid.Column="1" Grid.Row="3" Text="6215" TextColor="#fff" FontAttributes="Bold" />
-                <Label Grid.Column="0" Grid.Row="4" Text="League:" TextColor="#fff" />
-                <Label Grid.Column="1" Grid.Row="4" Text="Serie A Italy" TextColor="#fff" FontAttributes="Bold" />
+                <Label Grid.Column="0" Grid.Row="0" Text="Referee:" Style="{StaticResource MatchInfoTitle}" />
+                <Label Grid.Column="1" Grid.Row="0" Text="Federico La Penna (Italy)" Style="{StaticResource MatchInfoValue}" />
+                <Label Grid.Column="0" Grid.Row="1" Text="Venue:" Style="{StaticResource MatchInfoTitle}" />
+                <Label Grid.Column="1" Grid.Row="1" Text="Carlo Castellany" Style="{StaticResource MatchInfoValue}"  />
+                <Label Grid.Column="0" Grid.Row="2" Text="Date and Time:" Style="{StaticResource MatchInfoTitle}" />
+                <Label Grid.Column="1" Grid.Row="2" Text="15:00 Jan 25, 2019" Style="{StaticResource MatchInfoValue}"  />
+                <Label Grid.Column="0" Grid.Row="3" Text="Spectators:" Style="{StaticResource MatchInfoTitle}" />
+                <Label Grid.Column="1" Grid.Row="3" Text="6215" Style="{StaticResource MatchInfoValue}"  />
+                <Label Grid.Column="0" Grid.Row="4" Text="League:" Style="{StaticResource MatchInfoTitle}" />
+                <Label Grid.Column="1" Grid.Row="4" Text="Serie A Italy" Style="{StaticResource MatchInfoValue}"  />
             </Grid>
         </StackLayout>
     </ContentView.Content>

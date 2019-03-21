@@ -16,10 +16,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout Orientation="Vertical"
-                 HorizontalOptions="FillAndExpand"
-                 Spacing="0">
-
+        <StackLayout HorizontalOptions="FillAndExpand">
             <AbsoluteLayout Padding="7">
                 <Image Source="images/tracker.png" Aspect="AspectFill" />
             </AbsoluteLayout>
@@ -70,7 +67,8 @@
                             Grid.Row="2"
                              Margin="0,7">
                     <Label Text="GOAL!" Style="{StaticResource CommentariesContentGoal}"  />
-                    <Label Style="{StaticResource CommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                    <Label Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross"
+                           Style="{StaticResource CommentariesDetailGoal}" />
                 </StackLayout>
 
                 <!-- Time -->
