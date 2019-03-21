@@ -21,7 +21,7 @@
             <ContentPage.Resources>
                 <ResourceDictionary>                   
                     <ResourceDictionary.MergedDictionaries>
-                        <resources:MasterDetailViewResource />
+                        <resources:MainViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ContentPage.Resources>

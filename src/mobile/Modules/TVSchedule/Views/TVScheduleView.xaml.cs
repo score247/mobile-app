@@ -1,12 +1,12 @@
-﻿namespace LiveScoreApp.ViewResources
+﻿namespace TVSchedule.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterDetailViewResource : ResourceDictionary
+    public partial class TVScheduleView : ContentPage
     {
-        public MasterDetailViewResource()
+        public TVScheduleView()
         {
             InitializeComponent();
         }

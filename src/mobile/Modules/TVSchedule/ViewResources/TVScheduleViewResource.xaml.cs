@@ -1,12 +1,12 @@
-﻿namespace Score.Views
+﻿namespace TVSchedule.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TVScheduleView : ContentPage
+    public partial class TVScheduleViewResource : ResourceDictionary
     {
-        public TVScheduleView()
+        public TVScheduleViewResource()
         {
             InitializeComponent();
         }

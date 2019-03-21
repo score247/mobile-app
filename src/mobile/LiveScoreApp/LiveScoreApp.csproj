@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Modules\News\News.csproj" />
     <ProjectReference Include="..\Modules\Score\Score.csproj" />
     <ProjectReference Include="..\Modules\Setting\Setting.csproj" />
+    <ProjectReference Include="..\Modules\TVSchedule\TVSchedule.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\MasterDetailView.xaml" />
@@ -45,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\components\" />
-    <Folder Include="ViewResources\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ViewResources\DarkThemeResource %28copy%29.xaml.cs" />
@@ -54,6 +54,9 @@
   <ItemGroup>
     <Compile Update="ViewResources\MasterDetailPageResource.xaml.cs">
       <DependentUpon>MasterDetailViewResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MainViewResource.xaml.cs">
+      <DependentUpon>MainViewResource.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
