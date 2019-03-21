@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -47,12 +47,8 @@
   <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Contants\" />
-    <Folder Include="Views\">
-    </Folder>
-    <Folder Include="Converters\">
-    <Folder Include="Views\Soccer\">
-    </Folder>
-    <Folder Include="Views\Templates\">
-    </Folder>
+    <Folder Include="Views\" />    
+    <Folder Include="Converters\" />
+    <Folder Include="Views\Templates\" />    
   </ItemGroup>
 </Project>
