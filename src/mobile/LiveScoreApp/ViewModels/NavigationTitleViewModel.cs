@@ -32,7 +32,7 @@
 
         public override void OnAppearing()
         {
-            CurrentSportName = Settings.CurrentSportName;
+            CurrentSportName = Settings.CurrentSportName.ToUpperInvariant();
             sportItems = sportService.GetSportItems();
 
             foreach (var sportItem in sportItems)
