@@ -7,12 +7,10 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:converter="clr-namespace:Score.Converters"
-             xmlns:templates="clr-namespace:Score.Views.Templates"
              xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
              xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
-             xmlns:commonControls="clr-namespace:Common.Controls;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
+             xmlns:templates="clr-namespace:Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
