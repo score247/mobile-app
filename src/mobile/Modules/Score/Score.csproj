@@ -77,8 +77,6 @@
     <Folder Include="Models\" />
     <Folder Include="Views\Templates\">
     </Folder>
-    <Folder Include="ViewModels\MatchDetail\">
-    </Folder>
     <Folder Include="Controls\">
     </Folder>
   </ItemGroup>
