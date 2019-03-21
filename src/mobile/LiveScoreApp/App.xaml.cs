@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Reflection;
 using Common.LangResources;
+using Common.Logging;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
-using Prism.Logging;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
@@ -42,6 +42,8 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
+            LoggingService.Init();
+
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 
@@ -61,7 +63,6 @@ namespace LiveScoreApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<ILoggerFacade, LogService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
 

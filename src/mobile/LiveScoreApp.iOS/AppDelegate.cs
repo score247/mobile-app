@@ -1,4 +1,7 @@
+using System;
+using Common.Logging;
 using Foundation;
+using ObjCRuntime;
 using Prism;
 using Prism.Ioc;
 using UIKit;
@@ -26,6 +29,16 @@ namespace LiveScoreApp.iOS
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));
+
+            Runtime.MarshalManagedException += (object sender, MarshalManagedExceptionEventArgs args) =>
+            {
+                LoggingService.LogError(args.Exception);
+            };
+
+            Runtime.MarshalObjectiveCException += (object sender, MarshalObjectiveCExceptionEventArgs args) =>
+            {
+                LoggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.Description}"));
+            };
 
             return base.FinishedLaunching(app, options);
         }

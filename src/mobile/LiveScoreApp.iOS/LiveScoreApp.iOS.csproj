@@ -372,6 +372,10 @@
       <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
       <Name>LiveScoreApp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\Common\Common.csproj">
+      <Project>{BFB06D86-9210-4C63-AAF0-4725B9E647F8}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\add%402x.png" />
