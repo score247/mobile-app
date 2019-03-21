@@ -1,4 +1,4 @@
-﻿namespace Common.Models
+﻿namespace League.Models
 {
     using System.Collections.Generic;
     using Common.Models.MatchInfo;

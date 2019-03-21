@@ -15,6 +15,9 @@
         [JsonProperty("tournament")]
         public League League { get; set; }
 
+        [JsonProperty("tournament_round")]
+        public LeagueRound LeagueRound { get; set; }
+
         [JsonProperty("competitors")]
         public IList<Team> Teams { get; set; }
 

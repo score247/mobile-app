@@ -21,6 +21,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\MatchHeader.cs" />
+    <Compile Remove="Models\LeagueInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="LangResources\AppResources.Designer.cs">

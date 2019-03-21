@@ -8,6 +8,7 @@
     using Common.Models;
     using Common.Models.MatchInfo;
     using Common.Settings;
+    using League.Models;
     using Refit;
 
     public interface ILeagueApi
@@ -39,55 +40,9 @@
         {
             var matchEvents = await GetMatchEvents("eu", "soccer", "en", leagueId);
 
-            switch (leagueId)
-            {
-                case "1":
-                    return GetSoccerMatches();
+            var matches = matchEvents.Select(x => new Match { Event = x }).ToList();
 
-                case "2":
-                    return GetTennisMatches();
-
-                case "3":
-                    return GetESportMatches();
-
-                case "4":
-                    return GetHockeyMatches();
-
-                default:
-                    return GetSoccerMatches();
-            }
-        }
-
-        private IList<Match> GetSoccerMatches()
-        {
-            return new List<Match>
-                {
-                   
-                };
-        }
-
-        private IList<Match> GetTennisMatches()
-        {
-            return new List<Match>
-                {
-                   
-                };
-        }
-
-        private IList<Match> GetESportMatches()
-        {
-            return new List<Match>
-                {
-                   
-                };
-        }
-
-        private IList<Match> GetHockeyMatches()
-        {
-            return new List<Match>
-                {
-                    
-                };
+            return matches;
         }
 
         public async Task<IList<League>> GetAllAsync()

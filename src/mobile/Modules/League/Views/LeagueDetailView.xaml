@@ -5,13 +5,14 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
              x:Class="League.Views.LeagueDetailView">
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
+            <commonTemplates:SoccerMatchListViewTemplate x:Key="matchListViewTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
@@ -27,57 +28,19 @@
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
-                AutomationProperties.IsInAccessibleTree="False">
+                AutomationProperties.IsInAccessibleTree="False"
+                ItemTemplate="{StaticResource matchListViewTemplate}">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell Height="28">
                         <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
-                            <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                            <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
-                            <Label Text="24 Jan" Style="{StaticResource MatchDate}" />
-                            <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
+                            <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
+                            <Label Text="{Binding Key.ShortEventDate}"
+                                   Style="{StaticResource MatchDate}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <StackLayout>
-                                <Grid HorizontalOptions="FillAndExpand"
-                                      BackgroundColor="#1D2133">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="32" />
-                                        <ColumnDefinition Width="25" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="auto" />
-                                        <RowDefinition Height="auto" />
-                                    </Grid.RowDefinitions>
-
-                                    <Label Text="FT" Style="{StaticResource MatchStatus}" />
-                                    <Label Text="{Binding HomeTeam}" Style="{StaticResource HomeTeam}" />
-                                    <Label Text="{Binding AwayTeam}" Style="{StaticResource AwayTeam}" />
-                                    <Label Grid.Row="0"
-                                        Grid.Column="2"
-                                        Text="{Binding HomeScore}"
-                                        Style="{StaticResource Score}"
-                                        Margin="0,4,20,0" />
-                                    <Label Grid.Row="1"
-                                            Grid.Column="2"
-                                            Text="{Binding AwayScore}"
-                                            Style="{StaticResource Score}"
-                                           Margin="0,0,20,4" />
-                                    <Label Style="{StaticResource FavoriteIcon}" />
-                                </Grid>
-                            </StackLayout>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
             </ListView.Behaviors>

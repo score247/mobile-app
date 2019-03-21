@@ -49,7 +49,7 @@
 
             var matches = await leagueService.GetMatches(currentLeagueId);
 
-            //GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
+            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.LeagueRound.Number));
         }
     }
 }
