@@ -8,6 +8,7 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:converter="clr-namespace:Score.Converters"
+             xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
              xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
@@ -17,16 +18,23 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
+             <ResourceDictionary.MergedDictionaries>
+                <resources:CalendarQuickAccessViewResource />
+                <resources:MatchViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            
+            <commonTemplates:SoccerMatchListViewTemplate x:Key="soccerListViewTemplate" />
+            <commonTemplates:BasketBallMatchListViewTemplate x:Key="basketBallListViewTemplate" />
+            <commonConverter:MatchListViewDataTemplateSelector 
+                x:Key="matchListViewDataTemplateSelector"
+                SoccerTemplate="{StaticResource soccerListViewTemplate}"
+                BasketBallTemplate="{StaticResource basketBallListViewTemplate}" />
+            
             <converter:InverseBoolConverter x:Key="inverseBoolConverter" />
             <converter:MatchStatusConverter x:Key="matchStatusConverter" />
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
-            <commonTemplates:SoccerMatchListViewTemplate x:Key="matchListViewTemplate" />
-            <ResourceDictionary.MergedDictionaries>
-                <resources:CalendarQuickAccessViewResource />
-                <resources:MatchViewResource />
-            </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
@@ -99,7 +107,7 @@
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
-                ItemTemplate="{StaticResource matchListViewTemplate}"
+                ItemTemplate="{StaticResource matchListViewDataTemplateSelector}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>

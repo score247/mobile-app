@@ -37,6 +37,18 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate.xaml.cs">
       <DependentUpon>SoccerMatchListViewTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate %28copy%29.xaml.cs">
+      <DependentUpon>BasketBallMatchListViewTemplate %28copy%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\BasketBallMatchListViewTemplate %28copy%29.xaml.cs">
+      <DependentUpon>ESportsMatchListViewTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\BasketBallMatchListViewTemplate.xaml.cs">
+      <DependentUpon>BasketBallMatchListViewTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\ESportsMatchListViewTemplate.xaml.cs">
+      <DependentUpon>ESportsMatchListViewTemplate.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="LangResources\AppResources.resx">

@@ -1,6 +1,8 @@
 ﻿namespace Common.Settings
 {
     using System.Collections.Generic;
+    using Common.Contants;
+    using Common.Extensions;
     using Plugin.Settings;
     using Plugin.Settings.Abstractions;
 
@@ -32,13 +34,13 @@
 
         public static string CurrentSportName
         {
-            get => AppSettings.GetValueOrDefault(nameof(CurrentSportName), "Soccer");
+            get => AppSettings.GetValueOrDefault(nameof(CurrentSportName), SportType.Soccer.GetDescription());
             set => AppSettings.AddOrUpdateValue(nameof(CurrentSportName), value);
         }
 
         public static int CurrentSportId
         {
-            get => AppSettings.GetValueOrDefault(nameof(CurrentSportId), 1);
+            get => AppSettings.GetValueOrDefault(nameof(CurrentSportId), (int)SportType.Soccer);
             set => AppSettings.AddOrUpdateValue(nameof(CurrentSportId), value);
         }
 
