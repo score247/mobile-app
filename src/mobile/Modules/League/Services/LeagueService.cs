@@ -14,7 +14,7 @@
     public interface ILeagueApi
     {
         [Get("/{sport}-t3/{group}/{lang}/tournaments.json?api_key={key}")]
-        Task<LeagueInfo> GetLeagues(string sport, string group, string lang, string key);
+        Task<LeagueInfo> GetLeaguesByGroup(string sport, string group, string lang, string key);
 
         [Get("/{sport}-t3/{group}/{lang}/tournaments/{leagueId}/schedule.json?api_key={key}")]
         Task<LeagueSchedule> GetMatches(string sport, string group, string lang, string leagueId, string key);
@@ -22,7 +22,7 @@
 
     public interface ILeagueService
     {
-        Task<IList<League>> GetAllAsync();
+        Task<IList<Category>> GetCategories();
 
         Task<IList<Match>> GetMatches(string leagueId);
     }
@@ -45,7 +45,7 @@
             return matches;
         }
 
-        public async Task<IList<League>> GetAllAsync()
+        public async Task<IList<Category>> GetCategories()
         {
 
             var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
@@ -54,24 +54,24 @@
 
             var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
             {
-                leagues.AddRange(await GetSportLeagues(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
+                leagues.AddRange(await GetLeaguesByGroup(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
             });
 
             await Task.WhenAll(tasks);
 
-            var groups = leagues.GroupBy(x => x.Id);
+            var categories = leagues.GroupBy(x => x.Category.Id).Select(g => g.First().Category).ToList();
 
-            return leagues.OrderBy(x=>x.Name).ToList();
+            return categories;
         }
 
-        private async Task<IList<League>> GetSportLeagues(string group, string sportName, string language) 
+        private async Task<IList<League>> GetLeaguesByGroup(string group, string sportName, string language) 
         {
             var apiKeyByGroup = Settings.ApiKeyMapper[group];
             var leagues = new List<League>();
 
             try
             {
-                var leaguesResult = await leagueApi.GetLeagues(sportName, group, language, apiKeyByGroup).ConfigureAwait(false);
+                var leaguesResult = await leagueApi.GetLeaguesByGroup(sportName, group, language, apiKeyByGroup).ConfigureAwait(false);
 
                 return leaguesResult.Leagues;
             }

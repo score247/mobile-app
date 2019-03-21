@@ -17,11 +17,11 @@
     {
         private readonly ILeagueService leagueService;
         private string filter;
-        private List<League> leagueList;
+        private List<Category> leagueList;
 
-        public ObservableCollection<League> Leagues { get; set; }
+        public ObservableCollection<Category> Leagues { get; set; }
 
-        public DelegateAsyncCommand<League> ItemTappedCommand { get; set; }
+        public DelegateAsyncCommand<Category> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
         public DelegateCommand SearchCommand { get; set; }
@@ -54,12 +54,12 @@
             Title = "League";
             this.leagueService = leagueService;
 
-            ItemTappedCommand = new DelegateAsyncCommand<League>(ItemTapped);
+            ItemTappedCommand = new DelegateAsyncCommand<Category>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
             SearchCommand = new DelegateCommand(SearchLeagues);           
 
-            Leagues = new ObservableCollection<League>();
-            leagueList = new List<League>();
+            Leagues = new ObservableCollection<Category>();
+            leagueList = new List<Category>();
             IsLoading = true;
             HasData = !IsLoading;
         }
@@ -79,7 +79,7 @@
             }
         }
 
-        private async Task ItemTapped(League Item)
+        private async Task ItemTapped(Category Item)
         {
             var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={Item.Id}");
 
