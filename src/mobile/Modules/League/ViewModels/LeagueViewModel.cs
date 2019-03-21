@@ -21,7 +21,7 @@
 
         public ObservableCollection<League> Leagues { get; set; }
 
-        public DelegateCommand<League> ItemTappedCommand { get; set; }
+        public DelegateAsyncCommand<League> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
         public DelegateCommand SearchCommand { get; set; }
@@ -54,7 +54,7 @@
             Title = "League";
             this.leagueService = leagueService;
 
-            ItemTappedCommand = new DelegateCommand<League>(ItemTapped);
+            ItemTappedCommand = new DelegateAsyncCommand<League>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
             SearchCommand = new DelegateCommand(SearchLeagues);           
 
@@ -79,7 +79,7 @@
             }
         }
 
-        private async void ItemTapped(League Item)
+        private async Task ItemTapped(League Item)
         {
             var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={Item.Id}");
 
