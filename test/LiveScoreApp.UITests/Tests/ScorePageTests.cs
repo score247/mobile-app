@@ -30,7 +30,7 @@
             app.Screenshot("ScorePage");
         }
 
-        [Ignore]
+        [Ignore("some reason")]
         [Test]
         public void Repl()
         {
