@@ -14,13 +14,16 @@
     {
         [Get("/{sport}-t3/{group}/{lang}/tournaments.json?api_key={key}")]
         Task<LeagueInfo> GetLeagues(string sport, string group, string lang, string key);
+
+        [Get("/{sport}-t3/{group}/{lang}/tournaments/{leagueId}/schedule.json?api_key={key}")]
+        Task<LeagueSchedule> GetMatches(string sport, string group, string lang, string leagueId, string key);
     }
 
     public interface ILeagueService
     {
         Task<IList<League>> GetAllAsync();
 
-        IList<Match> GetMatches(string leagueId);
+        Task<IList<Match>> GetMatches(string leagueId);
     }
 
     internal class LeagueService : ILeagueService
@@ -32,8 +35,10 @@
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(Settings.ApiEndPoint);
         }
                
-        public IList<Match> GetMatches(string leagueId)
+        public async Task<IList<Match>>  GetMatches(string leagueId)
         {
+            var matchEvents = await GetMatchEvents("eu", "soccer", "en", leagueId);
+
             switch (leagueId)
             {
                 case "1":
@@ -120,6 +125,26 @@
             }
 
             return leagues;
+        }
+
+        private async Task<IList<MatchEvent>> GetMatchEvents(string group, string sportName, string language, string leagueId)
+        {
+            var apiKeyByGroup = Settings.ApiKeyMapper[group];
+            var matches = new List<MatchEvent>();
+
+            try
+            {
+                var result = await leagueApi.GetMatches(sportName, group, language, leagueId, apiKeyByGroup).ConfigureAwait(false);
+
+                return result.SportEvents;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+            }
+
+            return matches;
         }
     }
 }

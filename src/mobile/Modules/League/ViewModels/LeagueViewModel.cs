@@ -64,13 +64,13 @@
             HasData = !IsLoading;
         }
        
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
             base.OnAppearing();
 
             if (Leagues.Count == 0)
             {
-                Task.Run(LoadLeaguesCommand.ExecuteAsync).Wait();
+                await LoadLeaguesCommand.ExecuteAsync();
             }
             else 
             {

@@ -50,6 +50,7 @@
     <Folder Include="Views\">
     </Folder>
     <Folder Include="Converters\">
+    <Folder Include="Views\Soccer\">
     </Folder>
     <Folder Include="Views\Templates\">
     </Folder>

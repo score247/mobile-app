@@ -1,7 +1,5 @@
-﻿using System;
-namespace Common.Models
+﻿namespace Common.Models
 {
-    using System;
     using System.Collections.Generic;
     using Common.Models.MatchInfo;
     using Newtonsoft.Json;

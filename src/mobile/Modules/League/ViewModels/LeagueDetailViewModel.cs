@@ -8,6 +8,7 @@
     using Prism.Commands;
     using Prism.Navigation;
     using Common.Models;
+    using System.Threading.Tasks;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
@@ -42,10 +43,11 @@
             this.leagueService = leagueService;
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             currentLeagueId = parameters["id"] as string;
-            var matches = leagueService.GetMatches(currentLeagueId);
+
+            var matches = await leagueService.GetMatches(currentLeagueId);
 
             //GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.GroupName));
         }
