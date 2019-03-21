@@ -91,7 +91,7 @@
 
         private async Task LoadLeaguesAsync()
         {
-            var leagues = await leagueService.GetAllAsync();
+            var leagues = await leagueService.GetCategories();
 
             foreach(var league in leagues)
             {

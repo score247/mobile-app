@@ -30,7 +30,7 @@
             app.Screenshot("ScorePage");
         }
 
-        [Ignore("some reason")]
+        [Ignore("render elements tree, only use for building tests")]
         [Test]
         public void Repl()
         {
