@@ -13,9 +13,9 @@
         public static IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
             { "eu", "vequ6wxdqyt7eg8qzh26dm5u" },
-            { "as", "sryuchhgtvff7nb62wktdre4" },
-            { "intl", "vrpveq5y64pvxpx4z7x5j24j" },
-            { "other", "3py8dv68pmb4dypxaqesm9jq" }
+            { "as", "2hr7x43y4st2g7a5j3yfa9yt" },
+            { "intl", "33sv7bm2f7uq286wyhe2ejcp" },
+            { "other", "cwp8y9e84bnsnxst7vah7xcn" }
         };
 
         public static string[] LeagueGroups => new string[] { "eu", "as", "intl", "other" };
