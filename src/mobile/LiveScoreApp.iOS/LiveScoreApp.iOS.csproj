@@ -192,15 +192,6 @@
     <BundleResource Include="..\CommonResources\Image\common\favorite%403x.png">
       <Link>Resources\images\common\favorite%403x.png</Link>
     </BundleResource>
-    <BundleResource Include="..\CommonResources\Image\common\favorite_active.png">
-      <Link>Resources\images\common\favorite_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\CommonResources\Image\common\favorite_active%402x.png">
-      <Link>Resources\images\common\favorite_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\CommonResources\Image\common\favorite_active%403x.png">
-      <Link>Resources\images\common\favorite_active%403x.png</Link>
-    </BundleResource>
     <BundleResource Include="..\CommonResources\Image\common\flag_cn.png">
       <Link>Resources\images\common\flag_cn.png</Link>
     </BundleResource>
@@ -272,9 +263,6 @@
     </BundleResource>
     <BundleResource Include="..\CommonResources\Image\common\soccer%403x.png">
       <Link>Resources\images\common\soccer%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\CommonResources\Image\common\star.png">
-      <Link>Resources\images\common\star.png</Link>
     </BundleResource>
     <BundleResource Include="..\CommonResources\Image\common\tab_feed.png">
       <Link>Resources\images\common\tab_feed.png</Link>
