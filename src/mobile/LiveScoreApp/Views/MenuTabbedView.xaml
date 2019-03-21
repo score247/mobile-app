@@ -36,7 +36,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/star.png">
+        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
             <x:Arguments>
                 <favorites:FavoriteView Title="Favorites">
                     <NavigationPage.TitleView>

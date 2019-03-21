@@ -59,6 +59,8 @@
 
             await Task.WhenAll(tasks);
 
+            var groups = leagues.GroupBy(x => x.Id);
+
             return leagues.OrderBy(x=>x.Name).ToList();
         }
 
