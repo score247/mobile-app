@@ -10,7 +10,7 @@
              xmlns:converter="clr-namespace:Score.Converters"
              xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
-             xmlns:commonViews="clr-namespace:Common.Views.Soccer;assembly=Common"
+             xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
@@ -22,6 +22,7 @@
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
             <converter:HomeLabelTextColorConverter x:Key="homeLabelTextColorConverter" />
+            <commonTemplates:SoccerMatchListViewTemplate x:Key="matchListViewTemplate" />
             <ResourceDictionary.MergedDictionaries>
                 <resources:CalendarQuickAccessViewResource />
                 <resources:MatchViewResource />
@@ -98,6 +99,7 @@
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
+                ItemTemplate="{StaticResource matchListViewTemplate}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
@@ -112,36 +114,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <ViewCell.View>
-                            <StackLayout>
-                                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}"
-                                           Style="{StaticResource MatchStatus}"/>
-                                    <StackLayout FlexLayout.Grow="1">
-                                        <Label Text="{Binding Event.Teams[0].Name}"
-                                               Style="{StaticResource HomeTeam}" />
-                                        <Label Text="{Binding Event.Teams[1].Name}"
-                                               Style="{StaticResource AwayTeam}" />
-                                    </StackLayout>
-                                    <StackLayout WidthRequest="32">
-                                        <Label  Text="{Binding Status.HomeScore}" 
-                                                Style="{StaticResource Score}"
-                                                Margin="0,4,20,0"/>
-                                        <Label Text="{Binding Status.AwayScore}"
-                                               Style="{StaticResource Score}"
-                                               Margin="0,0,20,4" />
-                                    </StackLayout>
-                                    <Label Style="{StaticResource FavoriteIcon}"
-                                           WidthRequest="25"/>
-                                </FlexLayout>
-                            </StackLayout>
-                        </ViewCell.View>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" EventArgsParameterPath="Item" />
             </ListView.Behaviors>

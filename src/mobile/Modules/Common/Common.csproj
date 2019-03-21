@@ -34,6 +34,9 @@
     <Compile Update="ViewResources\MatchViewResource.xaml.cs">
       <DependentUpon>MatchViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate.xaml.cs">
+      <DependentUpon>SoccerMatchListViewTemplate.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="LangResources\AppResources.resx">
@@ -45,10 +48,10 @@
     <Folder Include="Controls\" />
     <Folder Include="Contants\" />
     <Folder Include="Views\">
-      <DependentUpon>Views</DependentUpon>
     </Folder>
-    <Folder Include="Views\Soccer\">
-      <DependentUpon>Soccer</DependentUpon>
+    <Folder Include="Converters\">
+    </Folder>
+    <Folder Include="Views\Templates\">
     </Folder>
   </ItemGroup>
 </Project>

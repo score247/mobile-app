@@ -13,7 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:CommonMatchInfoViewResource />
+                <resources:MatchDetailViewResource />
                 <resources:MatchInfoViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

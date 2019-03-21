@@ -4,9 +4,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CommonMatchInfoViewResource : ResourceDictionary
+    public partial class MatchDetailViewResource : ResourceDictionary
     {
-        public CommonMatchInfoViewResource()
+        public MatchDetailViewResource()
         {
             InitializeComponent();
         }
