@@ -10,7 +10,7 @@
         <Setter Property="Padding" Value="12,0" />
     </Style>
     <Style x:Key="NavGroupName" TargetType="Label">
-        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="HeightRequest" Value="28" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />

@@ -15,7 +15,9 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
             <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
-                <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                <AbsoluteLayout Style="{StaticResource LeagueFlagContainer}">
+                    <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                </AbsoluteLayout>                
                 <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
                 <Label Text="{Binding Key.ShortEventDate}"
                        Style="{StaticResource MatchDate}" />
