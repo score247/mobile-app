@@ -5,7 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Logging;
+    using Common.Helpers.Logging;
     using Common.Models;
     using Common.Models.MatchInfo;
     using Common.Settings;

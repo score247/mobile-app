@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 using Common.LangResources;
-using Common.Logging;
+using Common.Helpers.Logging;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;

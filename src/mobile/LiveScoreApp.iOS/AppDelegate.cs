@@ -1,5 +1,5 @@
 using System;
-using Common.Logging;
+using Common.Helpers.Logging;
 using Foundation;
 using ObjCRuntime;
 using Prism;

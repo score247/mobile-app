@@ -20,6 +20,8 @@
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
     <PackageReference Include="Fanex.Logging" Version="2.0.0" />
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+    <PackageReference Include="SharpRaven" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\MatchHeader.cs" />
@@ -65,6 +67,6 @@
     <Folder Include="Views\" />    
     <Folder Include="Converters\" />
     <Folder Include="Views\Templates\" />    
-    <Folder Include="Logging\" />
+    <Folder Include="Helpers\Logging\" />
   </ItemGroup>
 </Project>

@@ -6,7 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.Logging;
+    using Common.Helpers.Logging;
     using Common.Models;
     using Common.Settings;
     using Refit;
