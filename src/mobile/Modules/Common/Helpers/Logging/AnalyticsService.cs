@@ -50,7 +50,8 @@ namespace Common.Helpers.Logging
 
             evt.Contexts.Device.Model = DeviceInfo.Model;
             evt.Contexts.Device.Name = DeviceInfo.Name;
-            evt.Contexts.OperatingSystem.Name = DeviceInfo.VersionString;
+            evt.Contexts.OperatingSystem.Name = DeviceInfo.Platform.ToString();
+            evt.Contexts.OperatingSystem.Version = DeviceInfo.VersionString;
 
             return evt;
         }
