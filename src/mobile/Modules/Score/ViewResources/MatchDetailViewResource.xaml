@@ -29,6 +29,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
     </Style>
 
     <Style x:Key="GeneralMatchStatus" TargetType="Label">
