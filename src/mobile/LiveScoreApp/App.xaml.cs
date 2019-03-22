@@ -42,7 +42,8 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-            LoggingService.Init();
+
+            LoggingService.Init("Mobile", "DEV", "https://3a1df1b72a8c43069712d4938730589a@sentry.io/1420554");
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }

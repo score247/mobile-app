@@ -32,12 +32,12 @@ namespace LiveScoreApp.iOS
 
             Runtime.MarshalManagedException += (object sender, MarshalManagedExceptionEventArgs args) =>
             {
-                LoggingService.LogError(args.Exception);
+                LoggingService.LogError("MarshalManagedException", args.Exception);
             };
 
             Runtime.MarshalObjectiveCException += (object sender, MarshalObjectiveCExceptionEventArgs args) =>
             {
-                LoggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.Description}"));
+                LoggingService.LogError("Marshaling Objective-C exception", new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.Description}"));
             };
 
             return base.FinishedLaunching(app, options);

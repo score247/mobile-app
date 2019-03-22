@@ -8,17 +8,18 @@ namespace Common.Logging
 {
     public static class LoggingService
     {
-        public static void Init() 
+
+        public static void Init(string category, string environment, string dsn) 
         { 
             if(LogManager == null)
             {
                 LogManager
-                 .SetDefaultLogCategory("Mobile")
+                 .SetDefaultLogCategory(category)
                  .Use(new List<ILogEngine>
                  {
                      new SentryLogging(new SentryEngineOptions {
-                        Dsn = new Dsn("https://3a1df1b72a8c43069712d4938730589a@sentry.io/1420554"),
-                        Environment = "DEV"
+                        Dsn = new Dsn(dsn),
+                        Environment = environment
                      })
                  });
             }          
@@ -26,9 +27,9 @@ namespace Common.Logging
 
         public static LogManager LogManager { get; }
 
-        public static void LogError(Exception exception) 
+        public static void LogError(string message, Exception exception) 
         {
-            LogService.Error("Global exception", exception);
+            LogService.Error(message, exception);
         }
     }
 }
