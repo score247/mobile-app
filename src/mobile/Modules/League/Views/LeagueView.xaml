@@ -26,14 +26,9 @@
                 IsVisible="{Binding HasData}"
                 ItemsSource="{Binding Leagues}"
                 IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsLoading}"
                 Style="{StaticResource ListViewHasBackground}"
                 CachingStrategy="RecycleElement">
-            <ListView.Behaviors>
-                <b:EventToCommandBehavior
-                    EventName="ItemTapped"
-                    Command="{Binding ItemTappedCommand}" 
-                    EventArgsParameterPath="Item"/>
-            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -47,6 +42,10 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"  EventArgsParameterPath="Item"/>
+                <b:EventToCommandBehavior EventName="Refreshing" Command="{Binding RefreshCommand}" />
+            </ListView.Behaviors>
         </ListView>
     </StackLayout>
 </ContentPage>

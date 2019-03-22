@@ -15,7 +15,6 @@
     using System.Threading;
     using System;
     using Common.Logging;
-    using System.Diagnostics;
 
     public class LeagueViewModel : ViewModelBase
     {
@@ -27,6 +26,7 @@
 
         public DelegateAsyncCommand<Category> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
+        public DelegateAsyncCommand RefreshCommand { get; set; }
 
         public DelegateAsyncCommand SearchCommand { get; set; }
 
@@ -59,8 +59,9 @@
             this.leagueService = leagueService;
 
             ItemTappedCommand = new DelegateAsyncCommand<Category>(ItemTapped);
-            LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
+            LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagueCategories);
             SearchCommand = new DelegateAsyncCommand(DelayedQueryKeyboardSearches);
+            RefreshCommand = new DelegateAsyncCommand(Refresh);
 
             Leagues = new ObservableCollection<Category>();
             leagueList = new List<Category>();
@@ -93,7 +94,18 @@
             }
         }
 
-        private async Task LoadLeaguesAsync()
+        private async Task Refresh() 
+        {
+            IsLoading = true;
+            HasData = !IsLoading;
+
+            leagueList.Clear();
+            Leagues.Clear();
+
+            await GetLeagueCategories();
+        }
+
+        private async Task GetLeagueCategories()
         {
             var leagues = await leagueService.GetCategories();
 
@@ -131,12 +143,10 @@
 
         private void SearchLeagues(string query)
         {
-            Debug.WriteLine($"Searching {query}");
             var filterLeagues = leagueList;
 
             if (!string.IsNullOrWhiteSpace(query))
             {
-
                 filterLeagues = leagueList
                         .Where(x => x.Name.ToLower()
                         .Contains(query.ToLower())).ToList();

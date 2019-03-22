@@ -96,7 +96,7 @@
                 return result.SportEvents;
             }
             catch (Exception ex)
-            {
+            {               
                 HandleException(ex);
             }
 
