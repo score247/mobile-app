@@ -14,7 +14,7 @@
     using League.Views;
     using System.Threading;
     using System;
-    using Common.Logging;
+    using Common.Helpers.Logging;
 
     public class LeagueViewModel : ViewModelBase
     {
