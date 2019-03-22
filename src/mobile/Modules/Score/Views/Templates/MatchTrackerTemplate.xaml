@@ -18,7 +18,7 @@
     <ContentView.Content>
         <StackLayout HorizontalOptions="FillAndExpand">
             <AbsoluteLayout Padding="7">
-                <Image Source="images/tracker.png" Aspect="AspectFill" />
+                <Image Source="images/common/tracker.png" Aspect="AspectFill" />
             </AbsoluteLayout>
 
             <!-- COMMENTARIES -->

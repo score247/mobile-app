@@ -15,11 +15,12 @@
     <Style x:Key="MatchEndIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Grid.Column" Value="0" />
         <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Text" Value="&#xe905;" />
-        <Setter Property="FontSize" Value="18" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,7" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="Text" Value="&#xe905;" />
+        <Setter Property="FontSize" Value="18" />        
     </Style>
 
     <Style x:Key="CommentariesText" TargetType="Label">

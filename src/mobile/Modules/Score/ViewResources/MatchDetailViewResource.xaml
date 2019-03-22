@@ -53,17 +53,18 @@
     <Style x:Key="Group" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Padding" Value="16,0" />
-        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="HeightRequest" Value="28" />
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
 
     <Style x:Key="GroupName" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="10" />
         <Setter Property="HorizontalOptions" Value="StartAndExpand" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />        
     </Style>
 </ResourceDictionary>
