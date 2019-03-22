@@ -36,8 +36,8 @@
         {
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(Settings.ApiEndPoint);
         }
-               
-        public async Task<IList<Match>>  GetMatches(string leagueId)
+
+        public async Task<IList<Match>> GetMatches(string leagueId)
         {
             var matchEvents = await GetMatchEvents("eu", "soccer", "en", leagueId);
 
@@ -48,10 +48,10 @@
 
         public async Task<IList<Category>> GetCategories()
         {
-
+            var categories = new List<Category>();
+            var leagues = new List<League>();
             var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
             var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
-            var leagues = new List<League>();
 
             var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
             {
@@ -60,12 +60,16 @@
 
             await Task.WhenAll(tasks);
 
-            var categories = leagues.GroupBy(x => x.Category.Id).Select(g => g.First().Category).ToList();
+            if (leagues.Any())
+            {
+                var leagueCategories = leagues.GroupBy(x => x.Category.Id).Select(g => g.First().Category).ToList();
+                categories.AddRange(leagueCategories);
+            }
 
             return categories;
         }
 
-        private async Task<IList<League>> GetLeaguesByGroup(string group, string sportName, string language) 
+        private async Task<IList<League>> GetLeaguesByGroup(string group, string sportName, string language)
         {
             var apiKeyByGroup = Settings.ApiKeyMapper[group];
             var leagues = new List<League>();
@@ -74,7 +78,10 @@
             {
                 var leaguesResult = await leagueApi.GetLeaguesByGroup(sportName, group, language, apiKeyByGroup).ConfigureAwait(false);
 
-                return leaguesResult.Leagues;
+                if (leaguesResult.Leagues.Any())
+                {
+                    leagues.AddRange(leaguesResult.Leagues);
+                }
             }
             catch (Exception ex)
             {
@@ -96,16 +103,24 @@
                 return result.SportEvents;
             }
             catch (Exception ex)
-            {               
+            {
                 HandleException(ex);
             }
 
             return matches;
         }
 
-        private void HandleException(Exception ex) 
+        private void HandleException(Exception ex)
         {
-            LoggingService.LogError("LeagueService request data error", ex);
+            if (ex is ApiException)
+            {
+                LoggingService.LogError($"LeagueService request data for {((ApiException)ex).Uri.ToString()} occurs error", ex);
+            }
+            else
+            {
+                LoggingService.LogError("LeagueService request data error", ex);
+            }
+
             Debug.WriteLine(ex.Message);
         }
     }

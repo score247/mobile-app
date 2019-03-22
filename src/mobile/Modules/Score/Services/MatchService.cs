@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
+    using Common.Logging;
     using Common.Models;
     using Common.Settings;
     using Refit;
@@ -60,6 +61,15 @@
             }
             catch (Exception ex)
             {
+                if (ex is ApiException)
+                {
+                    LoggingService.LogError($"LeagueService request data for {((ApiException)ex).Uri.ToString()} occurs error", ex);
+                }
+                else
+                {
+                    LoggingService.LogError("LeagueService request data error", ex);
+                }
+
                 Debug.WriteLine(ex.Message);
                 return Enumerable.Empty<Match>();
             }
