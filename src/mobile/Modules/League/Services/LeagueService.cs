@@ -5,6 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common.Logging;
     using Common.Models;
     using Common.Models.MatchInfo;
     using Common.Settings;
@@ -77,8 +78,7 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-
+                HandleException(ex);
             }
 
             return leagues;
@@ -97,11 +97,16 @@
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-
+                HandleException(ex);
             }
 
             return matches;
+        }
+
+        private void HandleException(Exception ex) 
+        {
+            LoggingService.LogError("LeagueService request data error", ex);
+            Debug.WriteLine(ex.Message);
         }
     }
 }
