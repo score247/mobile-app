@@ -12,6 +12,10 @@
     using System.Collections.Generic;
     using System.Linq;
     using League.Views;
+    using System.Threading;
+    using System;
+    using Common.Logging;
+    using System.Diagnostics;
 
     public class LeagueViewModel : ViewModelBase
     {
@@ -24,7 +28,7 @@
         public DelegateAsyncCommand<Category> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
-        public DelegateCommand SearchCommand { get; set; }
+        public DelegateAsyncCommand SearchCommand { get; set; }
 
         private bool isLoading;
 
@@ -56,14 +60,14 @@
 
             ItemTappedCommand = new DelegateAsyncCommand<Category>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(LoadLeaguesAsync);
-            SearchCommand = new DelegateCommand(SearchLeagues);           
+            SearchCommand = new DelegateAsyncCommand(DelayedQueryKeyboardSearches);
 
             Leagues = new ObservableCollection<Category>();
             leagueList = new List<Category>();
             IsLoading = true;
             HasData = !IsLoading;
         }
-       
+
         public override async void OnAppearing()
         {
             base.OnAppearing();
@@ -72,7 +76,7 @@
             {
                 await LoadLeaguesCommand.ExecuteAsync();
             }
-            else 
+            else
             {
                 IsLoading = false;
                 HasData = !IsLoading;
@@ -93,7 +97,7 @@
         {
             var leagues = await leagueService.GetCategories();
 
-            foreach(var league in leagues)
+            foreach (var league in leagues)
             {
                 Leagues.Add(league);
             }
@@ -104,13 +108,38 @@
             HasData = !IsLoading;
         }
 
-        private void SearchLeagues() 
+
+        private CancellationTokenSource throttleCts = new CancellationTokenSource();
+        private async Task DelayedQueryKeyboardSearches()
         {
+            try
+            {
+                Interlocked.Exchange(ref throttleCts, new CancellationTokenSource()).Cancel();
+
+                await Task.Delay(TimeSpan.FromMilliseconds(500), throttleCts.Token)
+                            .ContinueWith(task => SearchLeagues(Filter),
+                            CancellationToken.None,
+                            TaskContinuationOptions.OnlyOnRanToCompletion,
+                            TaskScheduler.FromCurrentSynchronizationContext());
+
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogError("DelayedQueryKeyboardSearches search command occurs error", ex);
+            }
+        }
+
+        private void SearchLeagues(string query)
+        {
+            Debug.WriteLine($"Searching {query}");
             var filterLeagues = leagueList;
 
-            if (!string.IsNullOrWhiteSpace(Filter))
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                filterLeagues = leagueList.Where(x => x.Name.ToLower().Contains(Filter.ToLower())).ToList();
+
+                filterLeagues = leagueList
+                        .Where(x => x.Name.ToLower()
+                        .Contains(query.ToLower())).ToList();
             }
 
             Leagues.Clear();
@@ -120,6 +149,11 @@
                 Leagues.Add(league);
             }
         }
-       
+
+        //TODO clean all resources and requests
+        public override void Destroy()
+        {
+            base.Destroy();
+        }
     }
 }
