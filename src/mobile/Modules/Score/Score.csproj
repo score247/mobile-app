@@ -26,6 +26,12 @@
     <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewResources\MatchInfoViewResource - Copy.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MatchStatsViewResource.xaml.cs">
+      <DependentUpon>MatchStatsViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchTrackerPageResource.xaml.cs">
       <DependentUpon>MatchTrackerViewResource.xaml</DependentUpon>
     </Compile>
@@ -44,6 +50,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Templates\MatchStatsTemplate.xaml.cs">
+      <DependentUpon>MatchStatsTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchTrackerView.xaml.cs">
       <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
@@ -75,8 +84,6 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
-    <Folder Include="Views\Templates\">
-    </Folder>
     <Folder Include="Controls\">
     </Folder>
   </ItemGroup>

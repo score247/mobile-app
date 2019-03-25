@@ -77,8 +77,9 @@
                     </StackLayout>
                 </FlexLayout>
             </ScrollView>
-            <templates:MatchInfoTemplate />
             <!-- Tab Content -->
+            <!--<templates:MatchInfoTemplate />-->
+            <templates:MatchStatsTemplate />
         </StackLayout>
     </ScrollView>
 </ContentPage>
