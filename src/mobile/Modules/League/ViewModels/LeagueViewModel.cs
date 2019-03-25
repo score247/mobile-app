@@ -5,15 +5,11 @@ namespace League.ViewModels
     using Common.ViewModels;
     using League.Services;
     using Prism.Navigation;
-    using Xamarin.Forms;
     using System.Threading.Tasks;
     using Common.Extensions;
     using System.Collections.Generic;
     using System.Linq;
     using League.Views;
-    using System.Threading;
-    using System;
-    using Common.Helpers.Logging;
     using League.Models;
     using Prism.Commands;
 
@@ -140,12 +136,7 @@ namespace League.ViewModels
                         .Contains(query.ToLower())).ToList();
             }
 
-            Leagues.Clear();
-
-            foreach (var league in filterLeagues)
-            {
-                Leagues.Add(league);
-            }
+            Leagues = new ObservableCollection<LeagueItem>(filterLeagues);
         }
 
         //TODO clean all resources and requests

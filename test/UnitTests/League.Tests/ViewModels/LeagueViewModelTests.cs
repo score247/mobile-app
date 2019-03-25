@@ -1,4 +1,5 @@
 ﻿using League.Models;
+using System.Linq;
 namespace League.Tests.ViewModels
 {
     using System.Collections.Generic;
@@ -133,6 +134,49 @@ namespace League.Tests.ViewModels
 
             // Assert
             Assert.True(invoked);
+        }
+
+        [Fact]
+        public async Task SearchCommand_ExecutedWithEmptyQuery_ShouldReturnList()
+        {
+            // Arrange
+            var mockLeagueItems = new List<LeagueItem>
+            {
+                new LeagueItem{ Id = "1", Name = "K League"},
+                new LeagueItem{ Id = "1", Name = "Premier League"},
+                new LeagueItem{ Id = "1", Name = "AFC"}
+            };
+
+            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+
+            // Act
+            await viewModel.LoadLeaguesCommand.ExecuteAsync();
+            viewModel.SearchCommand.Execute();
+
+            // Assert
+            Assert.Equal(3, viewModel.Leagues.Count);
+        }
+
+        [Fact]
+        public async Task SearchCommand_ExecutedWithQuery_ShouldReturnFilterdList()
+        {
+            // Arrange
+            var mockLeagueItems = new List<LeagueItem>
+            {
+                new LeagueItem{ Id = "1", Name = "K League"},
+                new LeagueItem{ Id = "1", Name = "Premier League"},
+                new LeagueItem{ Id = "1", Name = "AFC"}
+            };
+
+            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+            viewModel.Filter = "K";
+
+            // Act
+            await viewModel.LoadLeaguesCommand.ExecuteAsync();
+            viewModel.SearchCommand.Execute();
+
+            // Assert
+            Assert.True(viewModel.Leagues.Count == 1 && viewModel.Leagues.FirstOrDefault().Name.Equals("K League"));
         }
     }
 }
