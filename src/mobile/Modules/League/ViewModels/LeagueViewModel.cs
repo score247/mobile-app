@@ -15,24 +15,22 @@ namespace League.ViewModels
     using System;
     using Common.Helpers.Logging;
     using League.Models;
+    using Prism.Commands;
 
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
         private readonly IPageDialogService pageDialogService;
-        private string filter;
-        private List<LeagueItem> leagueList;
 
-        public ObservableCollection<LeagueItem> Leagues { get; set; }
+        private readonly List<LeagueItem> leagueList;
 
         public DelegateAsyncCommand<LeagueItem> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
         public DelegateAsyncCommand RefreshCommand { get; set; }
 
-        public DelegateAsyncCommand SearchCommand { get; set; }
+        public DelegateCommand SearchCommand { get; set; }
 
         private bool isLoading;
-
         public bool IsLoading
         {
             get { return isLoading; }
@@ -40,17 +38,24 @@ namespace League.ViewModels
         }
 
         private bool hasData;
-
         public bool HasData
         {
             get { return hasData; }
             set { SetProperty(ref hasData, value); }
         }
 
+        private string filter;
         public string Filter
         {
             get => filter;
             set => SetProperty(ref filter, value);
+        }
+
+        private ObservableCollection<LeagueItem> leagues;
+        public ObservableCollection<LeagueItem> Leagues
+        {
+            get => leagues;
+            set => SetProperty(ref leagues, value);
         }
 
         public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService, IPageDialogService pageDialogService)
@@ -62,7 +67,7 @@ namespace League.ViewModels
 
             ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagueCategories);
-            SearchCommand = new DelegateAsyncCommand(DelayedQueryKeyboardSearches);
+            SearchCommand = new DelegateCommand(DelayedQueryKeyboardSearches);
             RefreshCommand = new DelegateAsyncCommand(Refresh);
 
             Leagues = new ObservableCollection<LeagueItem>();
@@ -109,12 +114,9 @@ namespace League.ViewModels
 
         private async Task GetLeagueCategories()
         {
-            var leagues = await leagueService.GetLeaguesAsync();
+            var leagueGroups = await leagueService.GetLeaguesAsync();
 
-            foreach (var league in leagues)
-            {
-                Leagues.Add(league);
-            }
+            Leagues = new ObservableCollection<LeagueItem>(leagueGroups);
 
             leagueList.AddRange(leagues);
 
@@ -122,25 +124,9 @@ namespace League.ViewModels
             HasData = !IsLoading;
         }
 
-
-        private CancellationTokenSource throttleCts = new CancellationTokenSource();
-        private async Task DelayedQueryKeyboardSearches()
+        private void DelayedQueryKeyboardSearches()
         {
-            try
-            {
-                Interlocked.Exchange(ref throttleCts, new CancellationTokenSource()).Cancel();
-
-                await Task.Delay(TimeSpan.FromMilliseconds(500), throttleCts.Token)
-                            .ContinueWith(task => SearchLeagues(Filter),
-                            CancellationToken.None,
-                            TaskContinuationOptions.OnlyOnRanToCompletion,
-                            TaskScheduler.FromCurrentSynchronizationContext());
-
-            }
-            catch (Exception ex)
-            {
-                LoggingService.LogError(ex);
-            }
+            SearchLeagues(Filter);
         }
 
         private void SearchLeagues(string query)

@@ -1,6 +1,7 @@
 ﻿using League.Models;
 namespace League.Tests.ViewModels
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using League.Services;
     using League.ViewModels;
@@ -44,7 +45,7 @@ namespace League.Tests.ViewModels
         {
             // Arrange
             var item = new LeagueItem();
-            mockNavigationService.NavigateAsync(Arg.Any<string>()).Returns(new NavigationResult { Success = true});
+            mockNavigationService.NavigateAsync(Arg.Any<string>()).Returns(new NavigationResult { Success = true });
 
             // Act
             await viewModel.ItemTappedCommand.ExecuteAsync(item);
@@ -65,6 +66,73 @@ namespace League.Tests.ViewModels
 
             // Assert
             await mockPageDialog.Received(1).DisplayAlertAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
+        }
+
+        [Fact]
+        public async Task LoadLeaguesCommand_Executed_ShouldCallLeagueService()
+        {
+            // Arrange
+            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+
+            // Act
+            await viewModel.LoadLeaguesCommand.ExecuteAsync();
+
+            // Assert
+            await mockLeagueService.Received(1).GetLeaguesAsync();
+        }
+
+        [Fact]
+        public async Task LoadLeaguesCommand_Executed_ShouldRaisePropertyChanged()
+        {
+            // Arrange
+            bool invoked = false;
+            var mockLeagueItems = new List<LeagueItem>
+            {
+                new LeagueItem{ Id = "1", Name = "League A"}
+            };
+
+            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if(e.PropertyName.Equals("Leagues"))
+                {
+                    invoked = true;
+                }
+            };
+
+            // Act
+            await viewModel.LoadLeaguesCommand.ExecuteAsync();
+
+            // Assert
+            Assert.True(invoked);
+        }
+
+        [Fact]
+        public async Task IsLoading_ExecutedLoadLeaguesCommand_ShouldRaisePropertyChanged()
+        {
+            // Arrange
+            bool invoked = false;
+            var mockLeagueItems = new List<LeagueItem>
+            {
+                new LeagueItem{ Id = "1", Name = "League A"}
+            };
+
+            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+
+            viewModel.PropertyChanged += (sender, e) =>
+            {
+                if (e.PropertyName.Equals("IsLoading"))
+                {
+                    invoked = true;
+                }
+            };
+
+            // Act
+            await viewModel.LoadLeaguesCommand.ExecuteAsync();
+
+            // Assert
+            Assert.True(invoked);
         }
     }
 }
