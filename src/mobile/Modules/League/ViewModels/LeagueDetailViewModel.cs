@@ -33,7 +33,7 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                leagueService.GetMatches(currentLeagueId);
+                leagueService.GetMatchesAsync(currentLeagueId);
                 IsRefreshingMatchList = false;
             });
 
@@ -47,7 +47,7 @@
         {
             currentLeagueId = parameters["id"] as string;
 
-            var matches = await leagueService.GetMatches(currentLeagueId);
+            var matches = await leagueService.GetMatchesAsync(currentLeagueId);
 
             GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.LeagueRound.Number));
         }

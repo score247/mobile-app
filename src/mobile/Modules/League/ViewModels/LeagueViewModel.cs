@@ -1,4 +1,5 @@
-﻿namespace League.ViewModels
+﻿using Prism.Services;
+namespace League.ViewModels
 {
     using System.Collections.ObjectModel;
     using Common.ViewModels;
@@ -18,6 +19,7 @@
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
+        private readonly IPageDialogService pageDialogService;
         private string filter;
         private List<LeagueItem> leagueList;
 
@@ -51,11 +53,12 @@
             set => SetProperty(ref filter, value);
         }
 
-        public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService)
+        public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService, IPageDialogService pageDialogService)
             : base(navigationService)
         {
             Title = "League";
             this.leagueService = leagueService;
+            this.pageDialogService = pageDialogService;
 
             ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagueCategories);
@@ -89,7 +92,7 @@
 
             if (!result.Success)
             {
-                await Application.Current.MainPage.DisplayAlert("Alert", "Error loading league page", "Cancel");
+                await pageDialogService.DisplayAlertAsync("Alert", "Error loading league page", "Cancel");
             }
         }
 
@@ -106,7 +109,7 @@
 
         private async Task GetLeagueCategories()
         {
-            var leagues = await leagueService.GetLeagues();
+            var leagues = await leagueService.GetLeaguesAsync();
 
             foreach (var league in leagues)
             {

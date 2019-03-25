@@ -23,12 +23,12 @@
 
     public interface ILeagueService
     {
-        Task<IList<LeagueItem>> GetLeagues();
+        Task<IList<LeagueItem>> GetLeaguesAsync();
 
-        Task<IList<Match>> GetMatches(string leagueId);
+        Task<IList<Match>> GetMatchesAsync(string leagueId);
     }
 
-    internal class LeagueService : ILeagueService
+    public class LeagueService : ILeagueService
     {
         private readonly ILeagueApi leagueApi;
         private const string ungroupedCategoryId = "sr:category:393";
@@ -38,7 +38,7 @@
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(Settings.ApiEndPoint);
         }
 
-        public async Task<IList<Match>> GetMatches(string leagueId)
+        public async Task<IList<Match>> GetMatchesAsync(string leagueId)
         {
             var matchEvents = await GetMatchEvents("eu", "soccer", "en", leagueId);
 
@@ -47,21 +47,23 @@
             return matches;
         }
 
-        public async Task<IList<LeagueItem>> GetLeagues()
+        public async Task<IList<LeagueItem>> GetLeaguesAsync()
         {
             var leagueItems = new List<LeagueItem>();
             var leagues = await GetAllLeagues();
 
-            IEnumerable<LeagueItem> leagueCategories = GroupLeagueByCategory(leagues);
-            IEnumerable<LeagueItem> ungroupedLeagues = GetLeagueItems(leagues);
+            var leagueCategories = GroupLeagueByCategory(leagues);
+            var ungroupedLeagues = GetLeagueItems(leagues);
 
             leagueItems.AddRange(ungroupedLeagues);
             leagueItems.AddRange(leagueCategories);
 
+
+
             return leagueItems;
         }
 
-        private static IEnumerable<LeagueItem> GetLeagueItems(IList<League> leagues)
+        private static IList<LeagueItem> GetLeagueItems(IList<League> leagues)
         {
             return leagues
                         .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
@@ -70,7 +72,8 @@
                             Id = x.Id,
                             Name = x.Name,
                             IsGrouped = false
-                        });
+                        })
+                        .ToList();
         }
 
         private static IEnumerable<LeagueItem> GroupLeagueByCategory(IList<League> leagues)
@@ -83,7 +86,8 @@
                         Id = g.FirstOrDefault()?.Category.Id,
                         Name = g.FirstOrDefault()?.Category.Name,
                         IsGrouped = true
-                    });
+                    })
+                    .ToList();
         }
 
         private async Task<IList<League>> GetAllLeagues()
