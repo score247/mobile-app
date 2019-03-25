@@ -2,9 +2,7 @@
 {
     using System.Collections.ObjectModel;
     using Common.ViewModels;
-    using Common.Models.MatchInfo;
     using League.Services;
-    using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
     using System.Threading.Tasks;
@@ -15,16 +13,17 @@
     using System.Threading;
     using System;
     using Common.Helpers.Logging;
+    using League.Models;
 
     public class LeagueViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
         private string filter;
-        private List<Category> leagueList;
+        private List<LeagueItem> leagueList;
 
-        public ObservableCollection<Category> Leagues { get; set; }
+        public ObservableCollection<LeagueItem> Leagues { get; set; }
 
-        public DelegateAsyncCommand<Category> ItemTappedCommand { get; set; }
+        public DelegateAsyncCommand<LeagueItem> ItemTappedCommand { get; set; }
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
         public DelegateAsyncCommand RefreshCommand { get; set; }
 
@@ -58,13 +57,13 @@
             Title = "League";
             this.leagueService = leagueService;
 
-            ItemTappedCommand = new DelegateAsyncCommand<Category>(ItemTapped);
+            ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagueCategories);
             SearchCommand = new DelegateAsyncCommand(DelayedQueryKeyboardSearches);
             RefreshCommand = new DelegateAsyncCommand(Refresh);
 
-            Leagues = new ObservableCollection<Category>();
-            leagueList = new List<Category>();
+            Leagues = new ObservableCollection<LeagueItem>();
+            leagueList = new List<LeagueItem>();
             IsLoading = true;
             HasData = !IsLoading;
         }
@@ -84,7 +83,7 @@
             }
         }
 
-        private async Task ItemTapped(Category Item)
+        private async Task ItemTapped(LeagueItem Item)
         {
             var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={Item.Id}");
 
@@ -107,7 +106,7 @@
 
         private async Task GetLeagueCategories()
         {
-            var leagues = await leagueService.GetCategories();
+            var leagues = await leagueService.GetLeagues();
 
             foreach (var league in leagues)
             {

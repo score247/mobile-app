@@ -23,7 +23,7 @@
 
     public interface ILeagueService
     {
-        Task<IList<Category>> GetCategories();
+        Task<IList<LeagueItem>> GetLeagues();
 
         Task<IList<Match>> GetMatches(string leagueId);
     }
@@ -31,6 +31,7 @@
     internal class LeagueService : ILeagueService
     {
         private readonly ILeagueApi leagueApi;
+        private const string ungroupedCategoryId = "sr:category:393";
 
         public LeagueService(ILeagueApi leagueApi)
         {
@@ -46,9 +47,48 @@
             return matches;
         }
 
-        public async Task<IList<Category>> GetCategories()
+        public async Task<IList<LeagueItem>> GetLeagues()
         {
-            var categories = new List<Category>();
+            var leagueItems = new List<LeagueItem>();
+            var leagues = await GetAllLeagues();
+
+            IEnumerable<LeagueItem> leagueCategories = GroupLeagueByCategory(leagues);
+            IEnumerable<LeagueItem> ungroupedLeagues = GetLeagueItems(leagues);
+
+            leagueItems.AddRange(ungroupedLeagues);
+            leagueItems.AddRange(leagueCategories);
+
+            return leagueItems;
+        }
+
+        private static IEnumerable<LeagueItem> GetLeagueItems(IList<League> leagues)
+        {
+            return leagues
+                        .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                        .Select(x => new LeagueItem
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            IsGrouped = false
+                        });
+        }
+
+        private static IEnumerable<LeagueItem> GroupLeagueByCategory(IList<League> leagues)
+        {
+            return leagues
+                    .Where(x => !x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                    .GroupBy(x => x.Category.Id)
+                    .Select(g => new LeagueItem
+                    {
+                        Id = g.FirstOrDefault()?.Category.Id,
+                        Name = g.FirstOrDefault()?.Category.Name,
+                        IsGrouped = true
+                    });
+        }
+
+        private async Task<IList<League>> GetAllLeagues()
+        {
+
             var leagues = new List<League>();
             var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
             var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
@@ -60,13 +100,7 @@
 
             await Task.WhenAll(tasks);
 
-            if (leagues.Any())
-            {
-                var leagueCategories = leagues.GroupBy(x => x.Category.Id).Select(g => g.First().Category).ToList();
-                categories.AddRange(leagueCategories);
-            }
-
-            return categories;
+            return leagues;
         }
 
         private async Task<IList<League>> GetLeaguesByGroup(string group, string sportName, string language)
