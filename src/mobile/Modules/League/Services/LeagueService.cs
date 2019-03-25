@@ -112,14 +112,7 @@
 
         private void HandleException(Exception ex)
         {
-            if (ex is ApiException)
-            {
-                LoggingService.LogError($"LeagueService request data for {((ApiException)ex).Uri.ToString()} occurs error", ex);
-            }
-            else
-            {
-                LoggingService.LogError("LeagueService request data error", ex);
-            }
+            LoggingService.LogError(ex);
 
             Debug.WriteLine(ex.Message);
         }

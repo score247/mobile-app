@@ -137,7 +137,7 @@
             }
             catch (Exception ex)
             {
-                LoggingService.LogError("DelayedQueryKeyboardSearches search command occurs error", ex);
+                LoggingService.LogError(ex);
             }
         }
 
