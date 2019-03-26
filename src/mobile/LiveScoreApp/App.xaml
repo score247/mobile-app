@@ -20,6 +20,8 @@
             <Color x:Key="PrimaryAccentColor">#F24822</Color>
             <!-- GreenColor -->
             <Color x:Key="SecondAccentColor">#3EC28F</Color>
+            <Color x:Key="ThirdAccentColor">#FC1923</Color>
+            <Color x:Key="FourthAccentColor">#303651</Color>
             
             <Color x:Key="HomeTeamColor">#30C2FF</Color>
             <Color x:Key="AwayTeamColor">#fff</Color>
@@ -91,6 +93,9 @@
             <Style TargetType="StackLayout">
                 <Setter Property="Spacing" Value="0" />
             </Style>
+            <Style x:Key="StacklayoutHorizontal" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+            </Style>
             <Style x:Key="StacklayoutHorizontalCenter" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
@@ -99,6 +104,11 @@
             <Style x:Key="StacklayoutAlignLeft" TargetType="StackLayout">
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+            <Style x:Key="StacklayoutAlignRight" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
             
@@ -110,6 +120,16 @@
             <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
                 <Setter Property="Direction" Value="Row" />
                 <Setter Property="JustifyContent" Value="SpaceBetween" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
+            <Style x:Key="FlexLayoutAlignLeft" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Row" />
+                <Setter Property="JustifyContent" Value="Start" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
+            <Style x:Key="FlexLayoutAlignRight" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Row" />
+                <Setter Property="JustifyContent" Value="End" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
             

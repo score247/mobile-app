@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Score.ViewResources.MatchLineUpsViewResource">
+
+    <Style x:Key="LineUpsContainer" TargetType="StackLayout">
+        <Setter Property="Padding" Value="8,0" />
+    </Style>
+    <Style x:Key="Container" TargetType="StackLayout">        
+        <Setter Property="Padding" Value="10,10,10,2" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+    <Style x:Key="SubstitutionAlignLeft" BasedOn="{StaticResource StacklayoutAlignLeft}" TargetType="StackLayout">
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+    <Style x:Key="SubstitutionAlignRight" BasedOn="{StaticResource StacklayoutAlignRight}" TargetType="StackLayout">
+        <Setter Property="Margin" Value="0,0,0,8" />
+    </Style>
+    <Style x:Key="SubstitutionTime" TargetType="Label">
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="Margin" Value="6,0" />        
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+    <Style x:Key="SubstitutionImageBox" TargetType="AbsoluteLayout">
+        <Setter Property="WidthRequest" Value="10" />
+        <Setter Property="HeightRequest" Value="10" />
+    </Style>
+
+    <Style x:Key="PlayerName" TargetType="Label">
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="FontSize" Value="13" />        
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+    <Style x:Key="PlayerNameIn" BasedOn="{StaticResource PlayerName}" TargetType="Label">
+        <Setter Property="TextColor" Value="#57BA63" />
+    </Style>
+    <Style x:Key="PlayerNameOut" BasedOn="{StaticResource PlayerName}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource ThirdAccentColor}" />
+    </Style>
+    <Style x:Key="PlayerNumber" TargetType="Button">
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="WidthRequest" Value="20" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />        
+        <Setter Property="FontAttributes" Value="Bold" />        
+    </Style>
+    <Style x:Key="SubSTPlayerColContainer" TargetType="StackLayout">
+        <Setter Property="FlexLayout.Grow" Value="1" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+    <Style x:Key="SubSTPlayerCol" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="Center" />
+        <Setter Property="Direction" Value="Column" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+    <Style x:Key="SubSTPlayerColLeft" BasedOn="{StaticResource SubSTPlayerCol}" TargetType="FlexLayout">
+        <Setter Property="AlignItems" Value="Start" />
+    </Style>
+    <Style x:Key="SubSTPlayerColRight" BasedOn="{StaticResource SubSTPlayerCol}" TargetType="FlexLayout">
+        <Setter Property="AlignItems" Value="End" />
+    </Style>
+    <Style x:Key="SubSTPlayerImageBox" BasedOn="{StaticResource SubstitutionImageBox}" TargetType="AbsoluteLayout">
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="2,0" />
+    </Style>
+    <Style x:Key="CoachContainer" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+        <Setter Property="Padding" Value="0,0,0,8" />
+    </Style>
+</ResourceDictionary>

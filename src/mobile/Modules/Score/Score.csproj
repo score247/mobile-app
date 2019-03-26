@@ -26,9 +26,6 @@
     <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="ViewResources\MatchInfoViewResource - Copy.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="ViewResources\MatchStatsViewResource.xaml.cs">
       <DependentUpon>MatchStatsViewResource.xaml</DependentUpon>
     </Compile>
@@ -41,6 +38,9 @@
     <Compile Update="ViewResources\CalendarPageResource.xaml.cs">
       <DependentUpon>CalendarViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ViewResources\MatchLineUpsViewResource.xaml.cs">
+      <DependentUpon>MatchLineUpsViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\TVSchedulePageResource.xaml.cs">
       <DependentUpon>TVScheduleViewResource.xaml</DependentUpon>
     </Compile>
@@ -50,6 +50,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Templates\MatchLineUpsTemplate.xaml.cs">
+      <DependentUpon>MatchLineUpsTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Templates\MatchStatsTemplate.xaml.cs">
       <DependentUpon>MatchStatsTemplate.xaml</DependentUpon>

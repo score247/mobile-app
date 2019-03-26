@@ -79,7 +79,7 @@
             </ScrollView>
             <!-- Tab Content -->
             <!--<templates:MatchInfoTemplate />-->
-            <templates:MatchStatsTemplate />
+            <templates:MatchLineUpsTemplate />
         </StackLayout>
     </ScrollView>
 </ContentPage>
