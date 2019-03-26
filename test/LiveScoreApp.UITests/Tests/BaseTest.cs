@@ -12,6 +12,7 @@
         protected Platform platform;
 
         protected ScorePage scorePage;
+        protected LeaguePage leaguePage;
 
         protected BaseTest(Platform platform)
         {
@@ -25,6 +26,9 @@
             app.Screenshot("App Initialized");
 
             scorePage = new ScorePage(app, platform);
+
+            //TODO tapped to League Icon
+            leaguePage = new LeaguePage(app, platform);
         }
     }
 }
