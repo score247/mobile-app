@@ -56,7 +56,7 @@
             <!--Global Styles-->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="BarTextColor" Value="#e6e6e6" />
+                <Setter Property="BarTextColor" Value="#fff" />
             </Style>
             <Style x:Key="NavigationName" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
