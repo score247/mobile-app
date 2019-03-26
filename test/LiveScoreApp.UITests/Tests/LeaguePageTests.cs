@@ -7,13 +7,16 @@
     {
         public LeaguePageTests(Platform platform) : base(platform)
         {
+
         }
 
         public override void BeforeEachTest()
         {
             base.BeforeEachTest();
 
-            scorePage.WaitForPageToLoad();
+            app.Tap(c => c.Class("UITabBarButton").Marked("Leagues"));
+
+            leaguePage.WaitForPageToLoad();
         }
 
         [Test]
@@ -22,7 +25,7 @@
             app.Screenshot("LeaguePage");
         }
 
-        //[Ignore("render elements tree, only use for building tests")]
+        [Ignore("render elements tree, only use for building tests")]
         [Test]
         public void Repl()
         {

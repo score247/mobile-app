@@ -1,6 +1,4 @@
-﻿using League.Models;
-using System.Linq;
-namespace League.Tests.ViewModels
+﻿namespace League.Tests.ViewModels
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -10,6 +8,8 @@ namespace League.Tests.ViewModels
     using Prism.Navigation;
     using Prism.Services;
     using Xunit;
+    using League.Models;
+    using System.Linq;
 
     public class LeagueViewModelTests
     {

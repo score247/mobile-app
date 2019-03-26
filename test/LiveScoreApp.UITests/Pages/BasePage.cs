@@ -20,6 +20,7 @@
             this.pageTitle = pageTitle;
 
         }
+
         public bool IsPageVisible => app.Query(pageTitle).Length > 0;
 
         public void WaitForPageToLoad()

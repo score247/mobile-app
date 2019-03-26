@@ -5,7 +5,6 @@
     using Xamarin.UITest;
 
     [TestFixture(Platform.iOS)]
-
     public abstract class BaseTest
     {
         protected IApp app;
@@ -27,7 +26,6 @@
 
             scorePage = new ScorePage(app, platform);
 
-            //TODO tapped to League Icon
             leaguePage = new LeaguePage(app, platform);
         }
     }

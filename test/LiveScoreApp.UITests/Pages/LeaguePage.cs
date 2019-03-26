@@ -10,9 +10,7 @@
 
         public LeaguePage(IApp app, Platform platform) : base(app, platform, "Leagues")
         {
-            tabBars = app.Query(c => c.Class("UITabBarButton"));
 
-            //app.Tap(addToolbarButton);
         }
     }
 }

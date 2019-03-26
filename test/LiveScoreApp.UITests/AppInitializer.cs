@@ -11,7 +11,8 @@ namespace LiveScoreApp.UITests
         public static IApp StartApp(Platform platform)
         {
             return ConfigureApp
-                .iOS               
+                .iOS   
+                .EnableLocalScreenshots()            
                 .StartApp();
         }
     }
