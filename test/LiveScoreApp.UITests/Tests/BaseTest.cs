@@ -28,5 +28,7 @@
 
             leaguePage = new LeaguePage(app, platform);
         }
+
+       
     }
 }

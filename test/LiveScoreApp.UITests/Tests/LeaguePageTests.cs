@@ -22,6 +22,7 @@
         [Test]
         public void LeaguePageLaunches()
         {
+            leaguePage.WaitForNoActivityIndicator();
             app.Screenshot("LeaguePage");
         }
 
