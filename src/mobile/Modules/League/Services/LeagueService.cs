@@ -42,8 +42,8 @@
 
         public async Task<IList<Match>> GetMatchesAsync(string leagueId, string group)
         {
-            var sportType = Settings.SportNameMapper[Settings.CurrentSportName];
-            var lang = Settings.LanguageMapper[Settings.CurrentLanguage];
+            var sportType = settingsService.SportNameMapper[settingsService.CurrentSportName];
+            var lang = settingsService.LanguageMapper[settingsService.CurrentLanguage];
 
             var matchEvents = await GetMatchEvents(group, sportType, lang, leagueId);
 
@@ -58,7 +58,7 @@
             var leagueCategories = new List<LeagueItem>();
             var ungroupedLeagues = new List<LeagueItem>();
 
-            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
+            var tasks = settingsService.LeagueGroups.Select(async (leagueGroup) =>
             {
                 var leagues = await GetAllLeagues(leagueGroup);
 
@@ -106,10 +106,10 @@
         private async Task<IList<League>> GetAllLeagues(string group)
         {
             var leagues = new List<League>();
-            var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
-            var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
+            var sportNameSetting = settingsService.SportNameMapper[settingsService.CurrentSportName];
+            var languageSetting = settingsService.LanguageMapper[settingsService.CurrentLanguage];
 
-            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
+            var tasks = settingsService.LeagueGroups.Select(async (leagueGroup) =>
             {
                 leagues.AddRange(await GetLeaguesByGroup(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
             });
