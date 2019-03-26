@@ -132,8 +132,8 @@
             if (!string.IsNullOrWhiteSpace(query))
             {
                 filterLeagues = leagueList
-                        .Where(x => x.Name.ToLower()
-                        .Contains(query.ToLower())).ToList();
+                        .Where(x => x.Name.ToLowerInvariant()
+                        .Contains(query.ToLowerInvariant())).ToList();
             }
 
             Leagues = new ObservableCollection<LeagueItem>(filterLeagues);

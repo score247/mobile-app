@@ -60,8 +60,6 @@
             leagueItems.AddRange(ungroupedLeagues);
             leagueItems.AddRange(leagueCategories);
 
-
-
             return leagueItems;
         }
 
@@ -149,7 +147,7 @@
             return matches;
         }
 
-        private void HandleException(Exception ex)
+        private static void HandleException(Exception ex)
         {
             LoggingService.LogError(ex);
 
