@@ -1,4 +1,5 @@
-﻿namespace League.ViewModels
+﻿using League.Models;
+namespace League.ViewModels
 {
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -15,7 +16,7 @@
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
         private readonly ILeagueService leagueService;
         private bool isRefreshingMatchList;
-        private string currentLeagueId;
+        private LeagueItem SelectedLeagueItem;
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -33,7 +34,7 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                leagueService.GetMatchesAsync(currentLeagueId);
+                leagueService.GetMatchesAsync(SelectedLeagueItem.Id, SelectedLeagueItem.GroupName);
                 IsRefreshingMatchList = false;
             });
 
@@ -45,9 +46,12 @@
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            currentLeagueId = parameters["id"] as string;
+            SelectedLeagueItem = parameters[nameof(LeagueItem)] as LeagueItem;
 
-            var matches = await leagueService.GetMatchesAsync(currentLeagueId);
+            Title = SelectedLeagueItem.Name;
+
+            //TODO process grouped
+            var matches = await leagueService.GetMatchesAsync(SelectedLeagueItem.Id, SelectedLeagueItem.GroupName);
 
             GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.LeagueRound.Number));
         }

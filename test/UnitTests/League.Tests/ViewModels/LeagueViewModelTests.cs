@@ -52,7 +52,7 @@ namespace League.Tests.ViewModels
             await viewModel.ItemTappedCommand.ExecuteAsync(item);
 
             // Assert
-            await mockNavigationService.Received(1).NavigateAsync(Arg.Any<string>());
+            await mockNavigationService.Received(1).NavigateAsync(Arg.Any<string>(), Arg.Any<NavigationParameters>());
         }
 
         [Fact]

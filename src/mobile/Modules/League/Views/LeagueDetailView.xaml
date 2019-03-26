@@ -6,7 +6,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
-             x:Class="League.Views.LeagueDetailView">
+             x:Class="League.Views.LeagueDetailView"
+             Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

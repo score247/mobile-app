@@ -8,5 +8,7 @@ namespace League.Models
         public string Name { get; set; }
 
         public bool IsGrouped { get; set; }
+
+        public string GroupName { get; set; }
     }
 }

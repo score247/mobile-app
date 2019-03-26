@@ -25,7 +25,7 @@
     {
         Task<IList<LeagueItem>> GetLeaguesAsync();
 
-        Task<IList<Match>> GetMatchesAsync(string leagueId);
+        Task<IList<Match>> GetMatchesAsync(string leagueId, string group);
     }
 
     public class LeagueService : ILeagueService
@@ -40,9 +40,12 @@
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(settingsService.ApiEndPoint);
         }
 
-        public async Task<IList<Match>> GetMatchesAsync(string leagueId)
+        public async Task<IList<Match>> GetMatchesAsync(string leagueId, string group)
         {
-            var matchEvents = await GetMatchEvents("eu", "soccer", "en", leagueId);
+            var sportType = Settings.SportNameMapper[Settings.CurrentSportName];
+            var lang = Settings.LanguageMapper[Settings.CurrentLanguage];
+
+            var matchEvents = await GetMatchEvents(group, sportType, lang, leagueId);
 
             var matches = matchEvents.Select(x => new Match { Event = x }).ToList();
 
@@ -52,10 +55,18 @@
         public async Task<IList<LeagueItem>> GetLeaguesAsync()
         {
             var leagueItems = new List<LeagueItem>();
-            var leagues = await GetAllLeagues();
+            var leagueCategories = new List<LeagueItem>();
+            var ungroupedLeagues = new List<LeagueItem>();
 
-            var leagueCategories = GroupLeagueByCategory(leagues);
-            var ungroupedLeagues = GetLeagueItems(leagues);
+            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
+            {
+                var leagues = await GetAllLeagues(leagueGroup);
+
+                leagueCategories.AddRange(GroupLeagueByCategory(leagues, leagueGroup));
+                ungroupedLeagues.AddRange(GetLeagueItems(leagues, leagueGroup));
+            });
+
+            await Task.WhenAll(tasks);
 
             leagueItems.AddRange(ungroupedLeagues);
             leagueItems.AddRange(leagueCategories);
@@ -63,20 +74,21 @@
             return leagueItems;
         }
 
-        private static IList<LeagueItem> GetLeagueItems(IList<League> leagues)
+        private static IList<LeagueItem> GetLeagueItems(IList<League> leagues, string group)
         {
             return leagues
-                    .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
-                    .Select(x => new LeagueItem
-                    {
-                        Id = x.Id,
-                        Name = x.Name,
-                        IsGrouped = false
-                    })
-                    .ToList();
+                        .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                        .Select(x => new LeagueItem
+                        {
+                            Id = x.Id,
+                            Name = x.Name,
+                            IsGrouped = false,
+                            GroupName = group
+                        })
+                        .ToList();
         }
 
-        private static IEnumerable<LeagueItem> GroupLeagueByCategory(IList<League> leagues)
+        private static IList<LeagueItem> GroupLeagueByCategory(IList<League> leagues, string group)
         {
             return leagues
                     .Where(x => !x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
@@ -85,18 +97,19 @@
                     {
                         Id = g.FirstOrDefault()?.Category.Id,
                         Name = g.FirstOrDefault()?.Category.Name,
-                        IsGrouped = true
+                        IsGrouped = true,
+                        GroupName = group
                     })
                     .ToList();
         }
 
-        private async Task<IList<League>> GetAllLeagues()
+        private async Task<IList<League>> GetAllLeagues(string group)
         {
             var leagues = new List<League>();
-            var sportNameSetting = settingsService.SportNameMapper[settingsService.CurrentSportName];
-            var languageSetting = settingsService.LanguageMapper["en-US"];
+            var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
+            var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
 
-            var tasks = settingsService.LeagueGroups.Select(async (leagueGroup) =>
+            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
             {
                 leagues.AddRange(await GetLeaguesByGroup(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
             });

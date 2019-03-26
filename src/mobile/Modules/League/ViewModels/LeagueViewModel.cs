@@ -62,7 +62,7 @@
             this.pageDialogService = pageDialogService;
 
             ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
-            LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagueCategories);
+            LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagues);
             SearchCommand = new DelegateCommand(DelayedQueryKeyboardSearches);
             RefreshCommand = new DelegateAsyncCommand(Refresh);
 
@@ -89,7 +89,12 @@
 
         private async Task ItemTapped(LeagueItem Item)
         {
-            var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}?id={Item.Id}");
+            var param = new NavigationParameters
+            {
+                { nameof(LeagueItem), Item }
+            };
+
+            var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}", param);
 
             if (!result.Success)
             {
@@ -105,10 +110,10 @@
             leagueList.Clear();
             Leagues.Clear();
 
-            await GetLeagueCategories();
+            await GetLeagues();
         }
 
-        private async Task GetLeagueCategories()
+        private async Task GetLeagues()
         {
             var leagueGroups = await leagueService.GetLeaguesAsync();
 
