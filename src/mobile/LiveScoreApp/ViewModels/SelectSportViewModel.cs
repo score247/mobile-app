@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Common.Settings;
+    using Common.Services;
     using Common.ViewModels;
     using LiveScoreApp.Models;
     using Prism.Commands;
@@ -10,12 +10,14 @@
 
     public class SelectSportViewModel : ViewModelBase
     {
+        private readonly ISettingsService settingsService;
         private SportItem selectedSportItem;
         private ObservableCollection<SportItem> sportItems;
 
-        public SelectSportViewModel(INavigationService navigationService)
+        public SelectSportViewModel(INavigationService navigationService, ISettingsService settingsService)
           : base(navigationService)
         {
+            this.settingsService = settingsService;
             SelectSportItemCommand = new DelegateCommand(OnSelectSportItem);
             DoneCommand = new DelegateCommand(OnDone);
         }
@@ -47,13 +49,13 @@
         {
             var parameters = new NavigationParameters
             {
-                { "changeSport", Settings.CurrentSportId != SelectedSportItem.Id && SelectedSportItem.Id != 0 }
+                { "changeSport", settingsService.CurrentSportId != SelectedSportItem.Id && SelectedSportItem.Id != 0 }
             };
 
             if (SelectedSportItem.Id != 0)
             {
-                Settings.CurrentSportName = SelectedSportItem.Name;
-                Settings.CurrentSportId = SelectedSportItem.Id;
+                settingsService.CurrentSportName = SelectedSportItem.Name;
+                settingsService.CurrentSportId = SelectedSportItem.Id;
             }
 
             await NavigationService.GoBackAsync(useModalNavigation: true, parameters: parameters);

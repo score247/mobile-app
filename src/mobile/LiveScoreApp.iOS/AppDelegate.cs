@@ -1,13 +1,15 @@
-using System;
-using Common.Helpers.Logging;
-using Foundation;
-using ObjCRuntime;
-using Prism;
-using Prism.Ioc;
-using UIKit;
+
 
 namespace LiveScoreApp.iOS
 {
+    using System;
+    using Common.Helpers.Logging;
+    using Foundation;
+    using ObjCRuntime;
+    using Prism;
+    using Prism.Ioc;
+    using UIKit;
+
     // The UIApplicationDelegate for the application. This class is responsible for launching the
     // User Interface of the application, as well as listening (and optionally responding) to
     // application events from iOS.
@@ -23,9 +25,9 @@ namespace LiveScoreApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-                #if ENABLE_TEST_CLOUD
-                Xamarin.Calabash.Start();
-                #endif
+#if ENABLE_TEST_CLOUD
+            Xamarin.Calabash.Start();
+#endif
 
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App(new iOSInitializer()));

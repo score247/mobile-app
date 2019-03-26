@@ -22,6 +22,7 @@
     <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.0" />
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
     <PackageReference Include="SharpRaven" Version="2.4.0" />
+    <PackageReference Include="akavache" Version="6.4.1" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\MatchHeader.cs" />
@@ -68,5 +69,7 @@
     <Folder Include="Converters\" />
     <Folder Include="Views\Templates\" />    
     <Folder Include="Helpers\Logging\" />
+    <Folder Include="Services\">
+    </Folder>
   </ItemGroup>
 </Project>

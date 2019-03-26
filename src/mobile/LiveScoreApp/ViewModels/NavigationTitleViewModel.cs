@@ -1,12 +1,13 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
     using System.Collections.Generic;
-    using Common.Settings;
+    using System.Threading.Tasks;
+    using Common.Extensions;
+    using Common.Services;
     using Common.ViewModels;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
     using LiveScoreApp.Views;
-    using Prism.Commands;
     using Prism.Navigation;
 
     public class NavigationTitleViewModel : ViewModelBase
@@ -14,6 +15,17 @@
         private string currentSportName;
         private IEnumerable<SportItem> sportItems;
         private readonly ISportService sportService;
+        private readonly ISettingsService settingsService;
+
+        public NavigationTitleViewModel(
+            INavigationService navigationService,
+            ISportService sportService,
+            ISettingsService settingsService) : base(navigationService)
+        {
+            this.sportService = sportService;
+            this.settingsService = settingsService;
+            SelectSportCommand = new DelegateAsyncCommand(NavigateSelectSportPage);
+        }
 
         public string CurrentSportName
         {
@@ -21,27 +33,20 @@
             set { SetProperty(ref currentSportName, value); }
         }
 
-        public DelegateCommand SelectSportCommand { get; set; }
-
-        public NavigationTitleViewModel(INavigationService navigationService, ISportService sportService)
-            : base(navigationService)
-        {
-            this.sportService = sportService;
-            SelectSportCommand = new DelegateCommand(NavigateSelectSportPage);
-        }
+        public DelegateAsyncCommand SelectSportCommand { get; }
 
         public override void OnAppearing()
         {
-            CurrentSportName = Settings.CurrentSportName.ToUpperInvariant();
+            CurrentSportName = settingsService.CurrentSportName.ToUpperInvariant();
             sportItems = sportService.GetSportItems();
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Id == Settings.CurrentSportId;
+                sportItem.IsVisible = sportItem.Id == settingsService.CurrentSportId;
             }
         }
 
-        private async void NavigateSelectSportPage()
+        private async Task NavigateSelectSportPage()
         {
             var parameters = new NavigationParameters
             {

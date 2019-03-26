@@ -2,8 +2,8 @@
 {
     using System;
     using System.Net.Http;
-    using Common.Helpers;
-    using Common.Settings;
+    using Common.Helpers.Logging;
+    using Common.Services;
     using Prism.Ioc;
     using Prism.Modularity;
     using Refit;
@@ -20,14 +20,16 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            var settingsService = new SettingsService();
+
             containerRegistry.RegisterInstance(
               RestService.For<IMatchApi>(
                   new HttpClient(new HttpLoggingHandler())
                   {
-                      BaseAddress = new Uri(Settings.ApiEndPoint)
+                      BaseAddress = new Uri(settingsService.ApiEndPoint)
                   }));
-            containerRegistry.Register<IMatchService, MatchService>();
 
+            containerRegistry.Register<IMatchService, MatchService>();
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
             containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>();
             containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();

@@ -2,6 +2,7 @@
 using League.Models;
 namespace League.Tests.Services
 {
+    using Common.Services;
     using League.Services;
     using NSubstitute;
     using Xunit;
@@ -9,13 +10,14 @@ namespace League.Tests.Services
     public class LeagueServiceTests
     {
         private readonly ILeagueApi mockLeagueApi;
+        private readonly ISettingsService mockSettingsService;
         private ILeagueService service;
 
         public LeagueServiceTests()
         {
             mockLeagueApi = Substitute.For<ILeagueApi>();
-
-            service = new LeagueService(mockLeagueApi);
+            mockSettingsService = Substitute.For<ISettingsService>();
+            service = new LeagueService(mockLeagueApi, mockSettingsService);
         }
     }
 }

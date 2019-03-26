@@ -1,5 +1,6 @@
 ﻿namespace Common
 {
+    using Common.Services;
     using Prism.Ioc;
     using Prism.Modularity;
 
@@ -11,6 +12,7 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+
         }
     }
 }

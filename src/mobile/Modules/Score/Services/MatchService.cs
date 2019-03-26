@@ -8,7 +8,7 @@
     using Common.Extensions;
     using Common.Helpers.Logging;
     using Common.Models;
-    using Common.Settings;
+    using Common.Services;
     using Refit;
 
     public interface IMatchApi
@@ -25,20 +25,23 @@
     public class MatchService : IMatchService
     {
         private readonly IMatchApi matchApi;
+        private readonly ISettingsService settingsService;
 
-        public MatchService(IMatchApi matchApi)
+        public MatchService(IMatchApi matchApi, ISettingsService settingsService)
         {
-            this.matchApi = matchApi ?? RestService.For<IMatchApi>(Settings.ApiEndPoint);
+            this.settingsService = settingsService;
+            this.matchApi = matchApi;
         }
 
         public async Task<IList<Match>> GetDailyMatches(DateTime date)
         {
-            var sportName = Settings.SportNameMapper[Settings.CurrentSportName];
-            var language = Settings.LanguageMapper[Settings.CurrentLanguage];
+            var currentSportName = settingsService.CurrentSportName;
+            var sportName = settingsService.SportNameMapper[currentSportName];
+            var language = settingsService.LanguageMapper["en-US"];
             var eventDate = date.ToSportRadarFormat();
             var matches = new List<Match>();
 
-            var tasks = Settings.LeagueGroups.Select(async (group) =>
+            var tasks = settingsService.LeagueGroups.Select(async (group) =>
             {
                 matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate).ConfigureAwait(false));
             });
@@ -50,7 +53,7 @@
 
         private async Task<IEnumerable<Match>> GetMatchesFromAPI(string group, string sportName, string language, string eventDate)
         {
-            var apiKeyByGroup = Settings.ApiKeyMapper[group];
+            var apiKeyByGroup = settingsService.ApiKeyMapper[group];
 
             try
             {

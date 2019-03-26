@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using Common.LangResources;
 using Common.Helpers.Logging;
+using Common.LangResources;
+using Common.Services;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
@@ -42,8 +43,8 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-
-            LoggingService.Init("Mobile", "DEV", "https://cc2ac9822bfc4a2583404d94405299d7@sentry.nexdev.net/24");
+            Akavache.Registrations.Start("LiveScoreAppStorage");
+            LoggingService.Init("Mobile", "DEV", "https://3a1df1b72a8c43069712d4938730589a@sentry.io/1420554");
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
@@ -64,6 +65,7 @@ namespace LiveScoreApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
 

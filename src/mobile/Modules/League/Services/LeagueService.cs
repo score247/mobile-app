@@ -8,7 +8,7 @@
     using Common.Helpers.Logging;
     using Common.Models;
     using Common.Models.MatchInfo;
-    using Common.Settings;
+    using Common.Services;
     using League.Models;
     using Refit;
 
@@ -30,12 +30,14 @@
 
     public class LeagueService : ILeagueService
     {
-        private readonly ILeagueApi leagueApi;
         private const string ungroupedCategoryId = "sr:category:393";
+        private readonly ILeagueApi leagueApi;
+        private readonly ISettingsService settingsService;
 
-        public LeagueService(ILeagueApi leagueApi)
+        public LeagueService(ILeagueApi leagueApi, ISettingsService settingsService)
         {
-            this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(Settings.ApiEndPoint);
+            this.settingsService = settingsService;
+            this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(settingsService.ApiEndPoint);
         }
 
         public async Task<IList<Match>> GetMatchesAsync(string leagueId)
@@ -66,14 +68,14 @@
         private static IList<LeagueItem> GetLeagueItems(IList<League> leagues)
         {
             return leagues
-                        .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
-                        .Select(x => new LeagueItem
-                        {
-                            Id = x.Id,
-                            Name = x.Name,
-                            IsGrouped = false
-                        })
-                        .ToList();
+                    .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                    .Select(x => new LeagueItem
+                    {
+                        Id = x.Id,
+                        Name = x.Name,
+                        IsGrouped = false
+                    })
+                    .ToList();
         }
 
         private static IEnumerable<LeagueItem> GroupLeagueByCategory(IList<League> leagues)
@@ -92,12 +94,11 @@
 
         private async Task<IList<League>> GetAllLeagues()
         {
-
             var leagues = new List<League>();
-            var sportNameSetting = Settings.SportNameMapper[Settings.CurrentSportName];
-            var languageSetting = Settings.LanguageMapper[Settings.CurrentLanguage];
+            var sportNameSetting = settingsService.SportNameMapper[settingsService.CurrentSportName];
+            var languageSetting = settingsService.LanguageMapper["en-US"];
 
-            var tasks = Settings.LeagueGroups.Select(async (leagueGroup) =>
+            var tasks = settingsService.LeagueGroups.Select(async (leagueGroup) =>
             {
                 leagues.AddRange(await GetLeaguesByGroup(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
             });
@@ -109,7 +110,7 @@
 
         private async Task<IList<League>> GetLeaguesByGroup(string group, string sportName, string language)
         {
-            var apiKeyByGroup = Settings.ApiKeyMapper[group];
+            var apiKeyByGroup = settingsService.ApiKeyMapper[group];
             var leagues = new List<League>();
 
             try
@@ -131,7 +132,7 @@
 
         private async Task<IList<MatchEvent>> GetMatchEvents(string group, string sportName, string language, string leagueId)
         {
-            var apiKeyByGroup = Settings.ApiKeyMapper[group];
+            var apiKeyByGroup = settingsService.ApiKeyMapper[group];
             var matches = new List<MatchEvent>();
 
             try

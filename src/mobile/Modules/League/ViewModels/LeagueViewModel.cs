@@ -1,17 +1,17 @@
-﻿using Prism.Services;
-namespace League.ViewModels
+﻿namespace League.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Common.ViewModels;
-    using League.Services;
-    using Prism.Navigation;
+    using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using System.Collections.Generic;
-    using System.Linq;
-    using League.Views;
+    using Common.ViewModels;
     using League.Models;
+    using League.Services;
+    using League.Views;
     using Prism.Commands;
+    using Prism.Navigation;
+    using Prism.Services;
 
     public class LeagueViewModel : ViewModelBase
     {
@@ -97,7 +97,7 @@ namespace League.ViewModels
             }
         }
 
-        private async Task Refresh() 
+        private async Task Refresh()
         {
             IsLoading = true;
             HasData = !IsLoading;
