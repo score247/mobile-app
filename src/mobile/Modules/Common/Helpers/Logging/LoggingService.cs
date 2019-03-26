@@ -1,4 +1,4 @@
-﻿namespace Common.Helpers.Logging
+﻿namespace Common.Helpers.Logging.Logging
 {
     using System;
     using System.Collections.Generic;

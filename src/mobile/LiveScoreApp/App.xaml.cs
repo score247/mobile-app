@@ -13,6 +13,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Common.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
