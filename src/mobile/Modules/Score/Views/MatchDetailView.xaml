@@ -78,8 +78,7 @@
                 </FlexLayout>
             </ScrollView>
             <!-- Tab Content -->
-            <!--<templates:MatchInfoTemplate />-->
-            <templates:MatchLineUpsTemplate />
+            <templates:MatchInfoTemplate />
         </StackLayout>
     </ScrollView>
 </ContentPage>

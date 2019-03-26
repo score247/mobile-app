@@ -135,6 +135,7 @@
             
             <Style TargetType="Frame">
                 <Setter Property="Padding" Value="0" />
+                <Setter Property="HasShadow" Value="False" />
             </Style>
 
             <Style x:Key="VerticalLine" TargetType="BoxView">
@@ -206,7 +207,8 @@
                 <Setter Property="Text" Value="&#xe915;" />
                 <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
                 <Setter Property="FontSize" Value="12" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />                
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
                 <Setter Property="WidthRequest" Value="12" />
             </Style>
             

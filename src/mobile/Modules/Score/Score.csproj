@@ -26,6 +26,9 @@
     <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewResources\MatchH2HViewResource.xaml.cs">
+      <DependentUpon>MatchH2HViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchStatsViewResource.xaml.cs">
       <DependentUpon>MatchStatsViewResource.xaml</DependentUpon>
     </Compile>
@@ -50,6 +53,15 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\Calendar.xaml.cs">
       <DependentUpon>Calendar.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Templates\MatchH2HAwayTeamTemplate.xaml.cs">
+      <DependentUpon>MatchH2HAwayTeamTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\MatchH2HHomeTeamTemplate.xaml.cs">
+      <DependentUpon>MatchH2HHomeTeamTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\MatchH2HHeadToHeadTemplate.xaml.cs">
+      <DependentUpon>MatchH2HHeadToHeadTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Templates\MatchLineUpsTemplate.xaml.cs">
       <DependentUpon>MatchLineUpsTemplate.xaml</DependentUpon>
