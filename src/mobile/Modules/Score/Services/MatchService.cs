@@ -5,8 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Extensions;
-    using Common.Helpers.Logging.Logging;
+    using Common.Extensions;   
     using Common.Models;
     using Common.Services;
     using Refit;

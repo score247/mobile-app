@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Common.Helpers.Logging;
 using Common.LangResources;
 using Common.Services;
 using LiveScoreApp.Services;
@@ -13,7 +12,6 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Common.Services;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 

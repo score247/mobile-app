@@ -1,4 +1,4 @@
-﻿namespace Common.Helpers.Logging.Logging
+﻿namespace Common.Services
 {
     using System;
     using System.Collections.Generic;
@@ -33,9 +33,13 @@
         public static void TrackEvent(string trackIdentifier, string key, string value)
         {
             if (string.IsNullOrWhiteSpace(key) && string.IsNullOrWhiteSpace(value))
+            {
                 TrackEvent(trackIdentifier);
+            }
             else
+            {
                 TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
+            }
         }
 
         private static SentryEvent CreateSentryEvent(Exception exception)

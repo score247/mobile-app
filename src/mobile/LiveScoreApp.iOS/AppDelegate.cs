@@ -3,7 +3,7 @@
 namespace LiveScoreApp.iOS
 {
     using System;
-    using Common.Helpers.Logging;
+    using Common.Services;
     using Foundation;
     using ObjCRuntime;
     using Prism;
