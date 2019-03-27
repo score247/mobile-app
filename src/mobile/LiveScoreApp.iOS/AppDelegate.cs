@@ -3,6 +3,7 @@
 namespace LiveScoreApp.iOS
 {
     using System;
+    using CarouselView.FormsPlugin.iOS;
     using Common.Services;
     using Foundation;
     using ObjCRuntime;
@@ -30,6 +31,7 @@ namespace LiveScoreApp.iOS
 #endif
 
             global::Xamarin.Forms.Forms.Init();
+            CarouselViewRenderer.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             Runtime.MarshalManagedException += (object sender, MarshalManagedExceptionEventArgs args) =>

@@ -2,9 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:Score.ViewResources"
              xmlns:templates="clr-namespace:Score.Views.Templates"
-             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:converters="clr-namespace:Score.Converters"
+             xmlns:controls="clr-namespace:Score.Controls"
+             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="Score.Views.MatchDetailView"
              Title="Match Info"
              BackgroundColor="#1D2133">
@@ -16,6 +21,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
             </ResourceDictionary.MergedDictionaries>
+             <converters:MatchDetailItemTemplateSelector x:Key="matchDetailItemTemplateSelector"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -49,10 +55,13 @@
                         <Label  x:Name="Odds" Text="ODDS" Style="{StaticResource TabText}" />
                     </StackLayout>
                     <StackLayout Style="{StaticResource Tab}">
-                        <Label  x:Name="Info" Text="INFO" Style="{StaticResource TabActiveText}" />
+                        <Label x:Name="Info" Text="INFO" Style="{StaticResource TabActiveText}" />
                         <ContentView>
                             <BoxView Style="{StaticResource TabActiveLine}" />
                         </ContentView>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SelectMatchDetailTabCommand}" />
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
                     <StackLayout Style="{StaticResource Tab}">
                         <Label  x:Name="Tracker" Text="TRACKER" Style="{StaticResource TabText}" />
@@ -78,7 +87,13 @@
                 </FlexLayout>
             </ScrollView>
             <!-- Tab Content -->
-            <templates:MatchInfoTemplate />
+            <carousel:CarouselViewControl 
+                x:Name="cv"
+                Position="{Binding CurrentMatchDetailIndex}" 
+                ItemsSource="{Binding MatchDetailItems}"
+                ShowIndicators="true"
+                ItemTemplate="{StaticResource matchDetailItemTemplateSelector}" 
+                VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

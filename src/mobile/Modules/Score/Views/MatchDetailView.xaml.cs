@@ -1,5 +1,9 @@
 ﻿namespace Score.Views
 {
+    using System;
+    using CarouselView.FormsPlugin.Abstractions;
+    using Score.Controls;
+    using Score.Converters;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -8,7 +12,14 @@
     {
         public MatchDetailView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }
