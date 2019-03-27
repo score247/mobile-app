@@ -174,8 +174,6 @@
                       matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
 
             IsLoadingMatches = (IsLoadingMatches != true) && showLoadingIndicator;
-
-
         }
 
         private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)

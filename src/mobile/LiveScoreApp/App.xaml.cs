@@ -84,7 +84,7 @@ namespace LiveScoreApp
             moduleCatalog.AddModule<Score.ScoreModule>();
             moduleCatalog.AddModule<Favorites.FavoritesModule>();
             moduleCatalog.AddModule<News.NewsModule>();
-            moduleCatalog.AddModule<Setting.SettingModule>();
+            moduleCatalog.AddModule<Menu.MenuModule>();
         }
     }
 }

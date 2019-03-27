@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace Setting.Views
+namespace Menu.Views
 {
     public partial class FAQView : ContentPage
     {

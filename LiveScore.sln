@@ -27,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "News", "src\mobile\Modules\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Score", "src\mobile\Modules\Score\Score.csproj", "{6FD0AFC7-0AF1-441C-A340-F6191081BE5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setting", "src\mobile\Modules\Setting\Setting.csproj", "{F3C78D5F-DE28-4FEF-9302-F41E91070D0E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Menu", "src\mobile\Modules\Setting\Menu.csproj", "{F3C78D5F-DE28-4FEF-9302-F41E91070D0E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScoreApp.UITests", "test\LiveScoreApp.UITests\LiveScoreApp.UITests.csproj", "{BF382EA4-C559-4C79-A978-CA69DE49366E}"
 EndProject

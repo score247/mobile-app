@@ -1,4 +1,4 @@
-﻿namespace Setting.ViewModels
+﻿namespace Menu.ViewModels
 {
     using Prism.Navigation;
 

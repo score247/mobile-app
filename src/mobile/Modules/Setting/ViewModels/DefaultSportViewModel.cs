@@ -1,6 +1,6 @@
 ﻿using Prism.Navigation;
 
-namespace Setting.ViewModels
+namespace Menu.ViewModels
 {
     public class DefaultSportViewModel : ViewModelBase
     {

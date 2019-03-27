@@ -1,4 +1,4 @@
-﻿namespace Setting.ViewModels
+﻿namespace Menu.ViewModels
 {
     using System.Threading.Tasks;
     using Common.Extensions;

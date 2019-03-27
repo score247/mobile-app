@@ -1,11 +1,11 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using Setting.ViewModels;
-using Setting.Views;
-
-namespace Setting
+﻿namespace Menu
 {
-    public class SettingModule : IModule
+    using Prism.Ioc;
+    using Prism.Modularity;
+    using Menu.ViewModels;
+    using Menu.Views;
+
+    public class MenuModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {

@@ -1,9 +1,9 @@
 ﻿namespace Common.Services
 {
     using System;
+    using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Akavache;
-    using System.Reactive.Linq;
 
     public interface ICacheService
     {

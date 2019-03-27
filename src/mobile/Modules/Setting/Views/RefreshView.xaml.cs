@@ -1,4 +1,4 @@
-﻿namespace Setting.Views
+﻿namespace Menu.Views
 {
     using Xamarin.Forms;
 

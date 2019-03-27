@@ -24,8 +24,8 @@
     <ProjectReference Include="..\Modules\League\League.csproj" />
     <ProjectReference Include="..\Modules\News\News.csproj" />
     <ProjectReference Include="..\Modules\Score\Score.csproj" />
-    <ProjectReference Include="..\Modules\Setting\Setting.csproj" />
     <ProjectReference Include="..\Modules\TVSchedule\TVSchedule.csproj" />
+    <ProjectReference Include="..\Modules\Setting\Menu.csproj" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Views\MasterDetailView.xaml" />
