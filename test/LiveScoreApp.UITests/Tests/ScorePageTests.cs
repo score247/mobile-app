@@ -22,14 +22,6 @@
             app.Screenshot("ScorePage");
         }
 
-        [Test]
-        public void ScorePage_Launches_DisplayTabBars()
-        {
-            var totalTabs = scorePage.tabBars.Length;
-
-            Assert.AreEqual(5, totalTabs, "Tab bars binding incorrect!");
-        }
-
         [Ignore("render elements tree, only use for building tests")]
         [Test]
         public void Repl()

@@ -1,4 +1,5 @@
-﻿namespace LiveScoreApp.UITests.Pages
+﻿using System.Linq;
+namespace LiveScoreApp.UITests.Pages
 {
     using System;
     using Xamarin.UITest;
@@ -15,7 +16,6 @@
         public MainPage(IApp app, Platform platform) : base(app, platform, "Scores")
         {
             tabBars = x => x.Class("UITabBarButton");
-
         }
 
         public void OpenLeaguesTab()
@@ -37,6 +37,13 @@
         {
             navigationTitle = x => x.Class("UILabel").Marked("NavigationTitle").Text(title);
             app.WaitForElement(navigationTitle);
+        }
+
+        public string[] CurrentTabBars() 
+        {
+            var tabs = app.Query(x => x.Class("UITabBarButton"));
+
+            return tabs.Select(x => x.Label).ToArray();
         }
     }
 }

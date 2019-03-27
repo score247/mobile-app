@@ -1,7 +1,6 @@
-﻿
-namespace LiveScoreApp.UITests.Tests
+﻿namespace LiveScoreApp.UITests.Tests
 {
-    using System;
+    using System.Linq;
     using NUnit.Framework;
     using Xamarin.UITest;
 
@@ -28,7 +27,7 @@ namespace LiveScoreApp.UITests.Tests
         }
 
         [Test]
-        public void OpenLeaguesPage()
+        public void TappedLeaguesTab()
         {
             mainPage.OpenLeaguesTab();
             mainPage.WaitForLabel("Leagues");
@@ -37,7 +36,7 @@ namespace LiveScoreApp.UITests.Tests
         }
 
         [Test]
-        public void OpenFavoritesPage()
+        public void TappedFavoritesTab()
         {
             mainPage.OpenFavoritesTab();
             mainPage.WaitForLabel("Favorites");
@@ -46,12 +45,32 @@ namespace LiveScoreApp.UITests.Tests
         }
 
         [Test]
-        public void OpenLivePage()
+        public void TappedLiveTap()
         {
             mainPage.OpenLiveTab();
             mainPage.WaitForLabel("Live");
                        
             app.Screenshot("LivePage");
+        }
+
+        [Test]
+        public void MainPage_Launched_DisplayTabBars() 
+        {
+            // Arrange
+            var expectedTabs = new[] 
+            {
+                "Scores",
+                "Live",
+                "Favorites",
+                "Leagues",
+                "More"
+            };
+
+            // Act
+            var currentTabs = mainPage.CurrentTabBars();
+
+            // Assert
+            Assert.IsTrue(expectedTabs.SequenceEqual(currentTabs));
         }
     }
 }
