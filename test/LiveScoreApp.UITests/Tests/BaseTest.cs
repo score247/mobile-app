@@ -10,6 +10,7 @@
         protected IApp app;
         protected Platform platform;
 
+        protected MainPage mainPage;
         protected ScorePage scorePage;
         protected LeaguePage leaguePage;
 
@@ -22,10 +23,9 @@
         virtual public void BeforeEachTest()
         {
             app = AppInitializer.StartApp(platform);
-            app.Screenshot("App Initialized");
 
+            mainPage = new MainPage(app, platform);
             scorePage = new ScorePage(app, platform);
-
             leaguePage = new LeaguePage(app, platform);
         }
 

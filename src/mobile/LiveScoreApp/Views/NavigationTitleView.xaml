@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LiveScoreApp.Views.NavigationTitleView"
@@ -12,7 +12,7 @@
                     <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
                 </FlexLayout.GestureRecognizers>
             </FlexLayout>
-            <Label x:Name="titleLabel" Style="{StaticResource PageTitle}" Text="{Binding Title}"  />
+            <Label x:Name="titleLabel" Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
         </StackLayout>
     </ContentView.Content>
 </ContentView>
