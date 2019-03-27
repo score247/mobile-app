@@ -4,15 +4,16 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
              x:Class="League.Views.LeagueDetailView"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:MatchViewResource />
+                <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
+            <commonTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
             <commonTemplates:SoccerMatchListViewTemplate x:Key="matchListViewTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>

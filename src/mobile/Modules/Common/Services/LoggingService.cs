@@ -17,10 +17,7 @@
             ravenClientHolder = new Lazy<RavenClient>(() => new RavenClient(dsn) { Release = AppInfo.VersionString });
         }
 
-        public static Task LogErrorAsync(Exception exception)
-        {
-            return RavenClient.CaptureAsync(CreateSentryEvent(exception));
-        }
+        public static Task LogErrorAsync(Exception exception) => RavenClient.CaptureAsync(CreateSentryEvent(exception));
 
         public static void LogError(Exception exception)
         {
