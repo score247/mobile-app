@@ -125,7 +125,7 @@
                 date = DateTime.Today;
             }
 
-            await LoadMatches(date, false).ConfigureAwait(false);
+            await LoadMatches(date, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
             IsRefreshingMatchList = false;
         }
 
@@ -164,11 +164,11 @@
             await LoadMatches(DateTime.Now);
         }
 
-        private async Task LoadMatches(DateTime currentDate, bool showLoadingIndicator = true)
+        private async Task LoadMatches(DateTime currentDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoadingMatches = showLoadingIndicator;
 
-            var matches = await matchService.GetDailyMatches(currentDate);
+            var matches = await matchService.GetDailyMatches(currentDate, forceFetchNewData);
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                       matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));

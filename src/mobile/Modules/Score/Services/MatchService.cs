@@ -5,7 +5,7 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Extensions;   
+    using Common.Extensions;
     using Common.Models;
     using Common.Services;
     using Refit;
@@ -18,31 +18,43 @@
 
     public interface IMatchService
     {
-        Task<IList<Match>> GetDailyMatches(DateTime date);
+        Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false);
     }
 
     public class MatchService : IMatchService
     {
         private readonly IMatchApi matchApi;
         private readonly ISettingsService settingsService;
+        private readonly ICacheService cacheService;
 
-        public MatchService(IMatchApi matchApi, ISettingsService settingsService)
+        public MatchService(IMatchApi matchApi, ISettingsService settingsService, ICacheService cacheService)
         {
             this.settingsService = settingsService;
+            this.cacheService = cacheService;
             this.matchApi = matchApi;
         }
 
-        public async Task<IList<Match>> GetDailyMatches(DateTime date)
+        public async Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false)
         {
             var currentSportName = settingsService.CurrentSportName;
             var sportName = settingsService.SportNameMapper[currentSportName];
             var language = settingsService.LanguageMapper["en-US"];
             var eventDate = date.ToSportRadarFormat();
+
+            return await cacheService.GetAndFetchLatestValue(
+                $"DailyMatches{date.ToString()}",
+                () => GetMatchesByGroup(sportName, language, eventDate),
+                forceFetchNewData,
+                DateTime.Now.AddMinutes(5));
+        }
+
+        private async Task<IList<Match>> GetMatchesByGroup(string sportName, string language, string eventDate)
+        {
             var matches = new List<Match>();
 
             var tasks = settingsService.LeagueGroups.Select(async (group) =>
             {
-                matches.AddRange(await GetMatchesFromAPI(group, sportName, language, eventDate).ConfigureAwait(false));
+                matches.AddRange(await GetMatches(group, sportName, language, eventDate).ConfigureAwait(false));
             });
 
             await Task.WhenAll(tasks);
@@ -50,7 +62,7 @@
             return matches;
         }
 
-        private async Task<IEnumerable<Match>> GetMatchesFromAPI(string group, string sportName, string language, string eventDate)
+        private async Task<IEnumerable<Match>> GetMatches(string group, string sportName, string language, string eventDate)
         {
             var apiKeyByGroup = settingsService.ApiKeyMapper[group];
 

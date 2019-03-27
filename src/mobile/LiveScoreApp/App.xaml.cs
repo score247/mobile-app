@@ -64,6 +64,7 @@ namespace LiveScoreApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<ICacheService, CacheService>();
             containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
