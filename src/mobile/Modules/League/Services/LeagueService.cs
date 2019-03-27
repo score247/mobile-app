@@ -108,12 +108,12 @@
             var sportNameSetting = settingsService.SportNameMapper[settingsService.CurrentSportName];
             var languageSetting = settingsService.LanguageMapper[settingsService.CurrentLanguage];
 
-            var tasks = settingsService.LeagueGroups.Select(async (leagueGroup) =>
-            {
-                leagues.AddRange(await GetLeaguesByGroup(leagueGroup, sportNameSetting, languageSetting).ConfigureAwait(false));
-            });
+            var groupLeagues = await GetLeaguesByGroup(group, sportNameSetting, languageSetting).ConfigureAwait(false);
 
-            await Task.WhenAll(tasks);
+            if(groupLeagues.Any())
+            {
+                leagues.AddRange(groupLeagues);
+            }
 
             return leagues;
         }
@@ -127,9 +127,9 @@
             {
                 var leaguesResult = await leagueApi.GetLeaguesByGroup(sportName, group, language, apiKeyByGroup).ConfigureAwait(false);
 
-                if (leaguesResult.Leagues.Any())
+                if (leaguesResult!= null && leaguesResult.Leagues.Any())
                 {
-                    leagues.AddRange(leaguesResult.Leagues);
+                    leagues = leaguesResult.Leagues.ToList();
                 }
             }
             catch (Exception ex)
