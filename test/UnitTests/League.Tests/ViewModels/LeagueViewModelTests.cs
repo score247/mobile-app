@@ -10,6 +10,7 @@
     using Xunit;
     using League.Models;
     using System.Linq;
+    using System.Collections.ObjectModel;
 
     public class LeagueViewModelTests
     {
@@ -177,6 +178,47 @@
 
             // Assert
             Assert.True(viewModel.Leagues.Count == 1 && viewModel.Leagues.FirstOrDefault().Name.Equals("K League"));
+        }
+
+        [Fact]
+        public async Task RefreshCommand_Executed_ShouldCallLeagueService()
+        {
+            // Arrange
+            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+
+            // Act
+            await viewModel.RefreshCommand.ExecuteAsync();
+
+            // Assert
+            await mockLeagueService.Received(1).GetLeaguesAsync();
+        }
+
+        [Fact]
+        public async Task OnAppearing_LeaguesEmpty_ShouldCallLeagueService()
+        {
+            // Arrange
+            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            await mockLeagueService.Received(1).GetLeaguesAsync();
+        }
+
+        [Fact]
+        public async Task OnAppearing_LeaguesNotEmpty_ShouldNotCallLeagueService()
+        {
+            // Arrange
+            viewModel.Leagues = new ObservableCollection<LeagueItem>();
+            viewModel.Leagues.Add(new LeagueItem { Id = "1", Name = "League A" });
+            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            await mockLeagueService.DidNotReceive().GetLeaguesAsync();
         }
     }
 }
