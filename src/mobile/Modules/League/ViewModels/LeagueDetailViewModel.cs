@@ -1,4 +1,6 @@
 ﻿using League.Models;
+using System.Diagnostics;
+using System;
 namespace League.ViewModels
 {
     using System.Collections.ObjectModel;
@@ -10,15 +12,16 @@ namespace League.ViewModels
     using Prism.Navigation;
     using Common.Models;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        private ObservableCollection<IGrouping<string, Match>> groupMatches;
+        private ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> groupMatches;
         private readonly ILeagueService leagueService;
         private bool isRefreshingMatchList;
         private LeagueItem SelectedLeagueItem;
 
-        public ObservableCollection<IGrouping<string, Match>> GroupMatches
+        public ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> GroupMatches
         {
             get { return groupMatches; }
             set { SetProperty(ref groupMatches, value); }
@@ -42,18 +45,40 @@ namespace League.ViewModels
             : base(navigationService)
         {
             this.leagueService = leagueService;
+            GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>();
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             SelectedLeagueItem = parameters[nameof(LeagueItem)] as LeagueItem;
 
             Title = SelectedLeagueItem.Name;
 
-            //TODO process grouped
-            var matches = await leagueService.GetMatchesAsync(SelectedLeagueItem.Id, SelectedLeagueItem.GroupName);
+            Debug.Write("OnNavigatedTo LeagueDetail");
 
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.LeagueRound.Number));
+            if (GroupMatches.Count == 0)
+            {
+                groupMatches = await GetGroupMatchesAsync(SelectedLeagueItem);
+            }
         }
+
+        private async Task<ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>> GetGroupMatchesAsync(LeagueItem leagueItem)
+        {
+            IList<Match> matches = new List<Match>();
+
+            //TODO process grouped
+            if (!SelectedLeagueItem.IsGrouped)
+            {
+                matches = await leagueService.GetMatchesAsync(SelectedLeagueItem.Id, SelectedLeagueItem.GroupName);
+            }
+
+            var groups = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>
+            (
+                matches.GroupBy(m => new MatchHeaderItemViewModel { Name = m.Event.LeagueRound.Number, ShortEventDate = m.Event.EventDate })
+            );
+
+            return groups;
+        }
+
     }
 }

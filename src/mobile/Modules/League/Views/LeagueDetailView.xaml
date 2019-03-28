@@ -31,18 +31,8 @@
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
                 AutomationProperties.IsInAccessibleTree="False"
+                GroupHeaderTemplate="{StaticResource matchHeaderListViewTemplate}"
                 ItemTemplate="{StaticResource matchListViewTemplate}">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell Height="28">
-                        <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
-                            <Label Text="{Binding Key.Name}" Style="{StaticResource LeagueName}" />
-                            <Label Text="{Binding Key.ShortEventDate}"
-                                   Style="{StaticResource MatchDate}" />
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
             </ListView.Behaviors>
