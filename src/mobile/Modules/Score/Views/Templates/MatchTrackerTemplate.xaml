@@ -15,11 +15,11 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <ContentView.Content>
-        <StackLayout HorizontalOptions="FillAndExpand">
-            <AbsoluteLayout Padding="7">
+    <ScrollView>
+        <StackLayout>
+            <StackLayout Padding="7">
                 <Image Source="images/common/tracker.png" Aspect="AspectFill" />
-            </AbsoluteLayout>
+            </StackLayout>
 
             <!-- COMMENTARIES -->
             <StackLayout Style="{StaticResource Group}">
@@ -94,5 +94,5 @@
                        Style="{StaticResource CommentariesContentYellowCard}" />
             </Grid>
         </StackLayout>
-    </ContentView.Content>
+    </ScrollView>
 </ContentView>

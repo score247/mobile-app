@@ -28,27 +28,32 @@
             <tabstrip:TabViewSelector x:Key="tabViewSelector"></tabstrip:TabViewSelector>
         </ResourceDictionary>
     </ContentPage.Resources>
-        <StackLayout Spacing="0">
-            <!-- Match Score -->
-            <StackLayout BackgroundColor="#0F111C">
-                <FlexLayout Style="{StaticResource MatchScoreContainer}">
-                    <StackLayout Margin="0,0,50,0">
-                        <Image Source="images/logos/logo_1.png" Aspect="AspectFit" />
-                        <Label Text="Verona" TextColor="{StaticResource HomeTeamColor}" />
-                    </StackLayout>
-                    <StackLayout VerticalOptions="CenterAndExpand">
-                        <Frame Style="{StaticResource MatchScoreBox}">
-                            <Label Text="2 - 1" Style="{StaticResource ScoreText}" />
-                        </Frame>
-                        <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" Margin="0,8,0,0" />
-                    </StackLayout>
-                    <StackLayout Margin="50,0,0,0">
-                        <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
-                        <Label Text="Cosenza" TextColor="{StaticResource AwayTeamColor}" />
-                    </StackLayout>
-                </FlexLayout>
+    <StackLayout>
+        <!-- Match Score -->
+        <FlexLayout Style="{StaticResource MatchScoreContainer}">
+            <StackLayout Style="{StaticResource MatchScoreFirstCol}">
+                <StackLayout Style="{StaticResource TeamLogoContainer}">
+                    <Image Source="images/logos/logo_1.png" Aspect="AspectFit" />
+                </StackLayout>
+                <Label Text="Verona" Style="{StaticResource MatchScoreHomeTeam}" />
             </StackLayout>
-            <tabstrip:TabStrip ItemsSource="{Binding MatchDetailItems}"></tabstrip:TabStrip>
+            <StackLayout>
+                <Button Text="2 - 1" Style="{StaticResource MatchScoreBox}" />
+                <StackLayout Style="{StaticResource GeneralMatchStatusContainer}">
+                    <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" />
+                    <Label Text="15:00 Jan 25, 2019" Style="{StaticResource GeneralMatchStatus}" />
+                    <Label Text="Serie B Italy" Style="{StaticResource GeneralMatchStatus}" />
+                </StackLayout>
+                
+            </StackLayout>
+            <StackLayout Style="{StaticResource MatchScoreLastCol}">
+                <StackLayout Style="{StaticResource TeamLogoContainer}">
+                    <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
+                </StackLayout>
+                <Label Text="Cosenza" Style="{StaticResource MatchScoreAwayTeam}"  />
+            </StackLayout>
+        </FlexLayout>
+        <tabstrip:TabStrip ItemsSource="{Binding MatchDetailItems}"></tabstrip:TabStrip>
         
-        </StackLayout>
+    </StackLayout>
 </ContentPage>

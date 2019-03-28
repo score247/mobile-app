@@ -13,8 +13,7 @@
                 <resources:MatchH2HViewResource />
                 <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-        
+        </ResourceDictionary>        
     </ContentView.Resources>
     <StackLayout>
         <Frame Style="{StaticResource SubTabContainer}">
@@ -26,86 +25,91 @@
         </Frame>
         <FlexLayout Style="{StaticResource WinLoseDrawGate}">
             <StackLayout Style="{StaticResource WinLoseDrawGateCol}" >
-                <AbsoluteLayout Style="{StaticResource WinLoseDrawGateImageBox}">
+                <StackLayout Style="{StaticResource WinLoseDrawGateImageBox}">
                     <Image Source="images/common/H2H.png" Aspect="AspectFill" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label Text="Verona" Style="{StaticResource WinLoseDrawGateHomeTeam}" />
             </StackLayout>
             <StackLayout Style="{StaticResource WinLoseDrawGateCol}">
-                <AbsoluteLayout Style="{StaticResource WinLoseDrawGateImageBox}">
-                    <Image Source="images/common/H2H.png" Aspect="AspectFill" />
-                </AbsoluteLayout>
+                <StackLayout Style="{StaticResource WinLoseDrawGateImageBox}">
+                  <Image Source="images/common/H2H.png" Aspect="AspectFill" />
+                </StackLayout>
                 <Label Text="Draw" Style="{StaticResource WinLoseDrawGateInfo}" />
             </StackLayout>
             <StackLayout Style="{StaticResource WinLoseDrawGateCol}">
-                <AbsoluteLayout Style="{StaticResource WinLoseDrawGateImageBox}">
+                <StackLayout Style="{StaticResource WinLoseDrawGateImageBox}">
                     <Image Source="images/common/H2H.png" Aspect="AspectFill" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label Text="Cosenza" Style="{StaticResource WinLoseDrawGateInfo}" />
             </StackLayout>
         </FlexLayout>
-        <StackLayout>
-            <StackLayout Style="{StaticResource LeagueBox}">
-                <AbsoluteLayout Style="{StaticResource LeagueFlagContainer}">
-                    <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                </AbsoluteLayout>
-                <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
-                <Label Text="29 Jan, 2019"
+        <ScrollView>
+            <StackLayout>
+                <StackLayout>
+                    <StackLayout Style="{StaticResource LeagueBox}">
+                        <StackLayout Style="{StaticResource LeagueFlagContainer}">
+                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                        </StackLayout>
+                        <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
+                        <Label Text="29 Jan, 2019"
                        Style="{StaticResource MatchDate}" />
-                <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
-            </StackLayout>
-        </StackLayout>
-        <FlexLayout Style="{StaticResource MatchBox}">
-            <Label Text="FT"
+                        <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
+                    </StackLayout>
+                </StackLayout>
+                <FlexLayout Style="{StaticResource MatchBox}">
+                    <Label Text="FT"
                            Style="{StaticResource MatchStatus}"/>
-            <StackLayout FlexLayout.Grow="1">
-                <Label Text="Verona"
+                    <StackLayout FlexLayout.Grow="1">
+                        <Label Text="Verona"
                        Style="{StaticResource HomeTeam}" />
-                <Label Text="Cosenza"
+                        <Label Text="Cosenza"
                        Style="{StaticResource AwayTeam}" />
-            </StackLayout>
-            <StackLayout WidthRequest="32">
-                <Label  Text="2" 
+                    </StackLayout>
+                    <StackLayout WidthRequest="32">
+                        <Label  Text="2" 
                         Style="{StaticResource Score}"
                         Margin="0,4,20,0"/>
-                <Label Text="1"
+                        <Label Text="1"
                         Style="{StaticResource Score}"
                         Margin="0,0,20,4" />
-            </StackLayout>
-            <Label Style="{StaticResource FavoriteIcon}"
+                    </StackLayout>
+                    <Label Style="{StaticResource FavoriteIcon}"
                     WidthRequest="25"/>
-        </FlexLayout>
+                </FlexLayout>
 
-        <StackLayout>
-            <StackLayout Style="{StaticResource LeagueBox}">
-                <AbsoluteLayout Style="{StaticResource LeagueFlagContainer}">
-                    <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                </AbsoluteLayout>
-                <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
-                <Label Text="29 Jan, 2019"
+                <StackLayout>
+                    <StackLayout Style="{StaticResource LeagueBox}">
+                        <StackLayout Style="{StaticResource LeagueFlagContainer}">
+                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                        </StackLayout>
+                        <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
+                        <Label Text="29 Jan, 2019"
                        Style="{StaticResource MatchDate}" />
-                <Label Style="{StaticResource LeagueDetail}" />
-            </StackLayout>
-        </StackLayout>
-        <FlexLayout Style="{StaticResource MatchBox}">
-            <Label Text="FT"
+                        <Label Style="{StaticResource LeagueDetail}" />
+                    </StackLayout>
+                </StackLayout>
+                <FlexLayout Style="{StaticResource MatchBox}">
+                    <Label Text="FT"
                            Style="{StaticResource MatchStatus}"/>
-            <StackLayout FlexLayout.Grow="1">
-                <Label Text="Verona"
+                    <StackLayout FlexLayout.Grow="1">
+                        <Label Text="Verona"
                        Style="{StaticResource HomeTeam}" />
-                <Label Text="Cosenza"
+                        <Label Text="Cosenza"
                        Style="{StaticResource AwayTeam}" />
-            </StackLayout>
-            <StackLayout WidthRequest="32">
-                <Label  Text="2" 
+                    </StackLayout>
+                    <StackLayout WidthRequest="32">
+                        <Label  Text="2" 
                         Style="{StaticResource Score}"
                         Margin="0,4,20,0"/>
-                <Label Text="1"
+                        <Label Text="1"
                         Style="{StaticResource Score}"
                         Margin="0,0,20,4" />
-            </StackLayout>
-            <Label Style="{StaticResource FavoriteIcon}"
+                    </StackLayout>
+                    <Label Style="{StaticResource FavoriteIcon}"
                     WidthRequest="25"/>
-        </FlexLayout>
+                </FlexLayout>
+            </StackLayout>
+        </ScrollView>
+        
     </StackLayout>
 </ContentView>

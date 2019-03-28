@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" Spacing="0">
+        <StackLayout>
             <FlexLayout Style="{StaticResource TabContent}">
                 <FlexLayout Style="{StaticResource MatchStatusAlignRight}">
                     <StackLayout Style="{StaticResource InfoContentRight}">
@@ -40,9 +40,7 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout Margin="10,0" VerticalOptions="Center">
-                        <Frame Style="{StaticResource MatchScoreBox}">
-                            <Label Text="1 - 0" Style="{StaticResource ScoreText}" />
-                        </Frame>
+                        <Button Text="1 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -73,9 +71,7 @@
                         </StackLayout>
                     </StackLayout>
                     <StackLayout Margin="10,0" VerticalOptions="Center">
-                        <Frame Style="{StaticResource MatchScoreBox}">
-                            <Label Text="2 - 0" Style="{StaticResource ScoreText}" />
-                        </Frame>
+                        <Button Text="2 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -83,9 +79,7 @@
                 </ContentView>
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
                     <StackLayout Margin="10,0" VerticalOptions="Center">
-                        <Frame Style="{StaticResource MatchScoreBox}">
-                            <Label Text="2 - 0" Style="{StaticResource ScoreText}" />
-                        </Frame>
+                        <Button Text="2 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                     <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
                         <StackLayout Style="{StaticResource InfoContainer}">

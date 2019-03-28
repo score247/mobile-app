@@ -14,221 +14,224 @@
         </ResourceDictionary>        
     </ContentView.Resources>
 
-    <StackLayout Style="{StaticResource LineUpsContainer}">
-        <AbsoluteLayout>
-            <Image Source="images/common/line_ups.png" Aspect="AspectFit" />
-        </AbsoluteLayout>
-        <StackLayout Style="{StaticResource Group}">
-            <Label Text="SUBSTITUTIONS" Style="{StaticResource GroupName}" />
-        </StackLayout>
-        <StackLayout Style="{StaticResource Container}">
-            <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="76'" Style="{StaticResource SubstitutionTime}"  />
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
-                        </FlexLayout>
-                    </StackLayout>
-                </FlexLayout>
+    <ScrollView>
+        <StackLayout Style="{StaticResource LineUpsContainer}">
+            <StackLayout>
+                <Image Source="images/common/line_ups.png" Aspect="AspectFit" />
             </StackLayout>
-            <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Tommaso D'Orazio" Style="{StaticResource PlayerNameIn}"  />
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Matteo Legittimo" Style="{StaticResource PlayerNameOut}" />
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                    </StackLayout>
-                    <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
-                </FlexLayout>
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="SUBSTITUTIONS" Style="{StaticResource GroupName}" />
             </StackLayout>
-            <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Leonardo Perez" Style="{StaticResource PlayerNameIn}"  />
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Ricardo Maniero" Style="{StaticResource PlayerNameOut}" />
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                    </StackLayout>
-                    <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
-                </FlexLayout>
+            <StackLayout Style="{StaticResource Container}">
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <Label Text="76'" Style="{StaticResource SubstitutionTime}"  />
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Tommaso D'Orazio" Style="{StaticResource PlayerNameIn}"  />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Matteo Legittimo" Style="{StaticResource PlayerNameOut}" />
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                        </StackLayout>
+                        <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Leonardo Perez" Style="{StaticResource PlayerNameIn}"  />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Ricardo Maniero" Style="{StaticResource PlayerNameOut}" />
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                        </StackLayout>
+                        <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerNameIn}"  />
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Giampaolo Pazzini" Style="{StaticResource PlayerNameOut}" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Matos" Style="{StaticResource PlayerNameIn}"  />
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="Antonio Di Gaudio" Style="{StaticResource PlayerNameOut}" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
+                                <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
+                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </FlexLayout>
+                        </StackLayout>
+                        <Label Text="66'" Style="{StaticResource SubstitutionTime}"  />
+                    </FlexLayout>
+                </StackLayout>
             </StackLayout>
-            <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerNameIn}"  />
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Giampaolo Pazzini" Style="{StaticResource PlayerNameOut}" />
-                        </FlexLayout>
-                    </StackLayout>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Matos" Style="{StaticResource PlayerNameIn}"  />
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_home_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="Antonio Di Gaudio" Style="{StaticResource PlayerNameOut}" />
-                        </FlexLayout>
-                    </StackLayout>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <StackLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
-                            <AbsoluteLayout Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                        <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                            <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
-                            <AbsoluteLayout  Style="{StaticResource SubstitutionImageBox}">
-                                <Image Source="images/common/substitution_away_out.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </FlexLayout>
-                    </StackLayout>
-                    <Label Text="66'" Style="{StaticResource SubstitutionTime}"  />
-                </FlexLayout>
-            </StackLayout>
-        </StackLayout>
 
-        <StackLayout Style="{StaticResource Group}">
-            <Label Text="SUBSTITUTE PLAYERS" Style="{StaticResource GroupName}" />
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="SUBSTITUTE PLAYERS" Style="{StaticResource GroupName}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Container}">
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <Button Text="20" Style="{StaticResource PlayerNumber}" />
+                        <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
+                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </StackLayout>
+                        </FlexLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
+                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                            </StackLayout>
+                        </FlexLayout>
+                        <Button Text="12" Style="{StaticResource PlayerNumber}" />
+                    </StackLayout>
+                </FlexLayout>
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <Button Text="17" Style="{StaticResource PlayerNumber}" />
+                        <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
+                            <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <Label Text="68'" Style="{StaticResource PlayerName}"/>
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </StackLayout>
+                        </FlexLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
+                            <Label Text="Leonardo Perez" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                            </StackLayout>
+                        </FlexLayout>
+                        <Button Text="1" Style="{StaticResource PlayerNumber}" />
+                    </StackLayout>
+                </FlexLayout>
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <Button Text="13" Style="{StaticResource PlayerNumber}" />
+                        <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
+                            <Label Text="Matos" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <Label Text="68'" Style="{StaticResource PlayerName}"/>
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                            </StackLayout>
+                        </FlexLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
+                        <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
+                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                                <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
+                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                </StackLayout>
+                                <Label Text="66'" Style="{StaticResource PlayerName}"/>
+                            </StackLayout>
+                        </FlexLayout>
+                        <Button Text="3" Style="{StaticResource PlayerNumber}" />
+                    </StackLayout>
+                </FlexLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource Group}">
+                <Label Text="COACHES" Style="{StaticResource GroupName}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Container}">
+                <FlexLayout Style="{StaticResource CoachContainer}">
+                    <Label Text="Fabio Grosso" Style="{StaticResource PlayerName}" />
+                    <Label Text="Piero Braglia" Style="{StaticResource PlayerName}" />
+                </FlexLayout>
+            </StackLayout>
         </StackLayout>
-        <StackLayout Style="{StaticResource Container}">
-            <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <Button Text="20" Style="{StaticResource PlayerNumber}" />
-                    <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                        <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <Label Text="70'" Style="{StaticResource PlayerName}"/>
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </StackLayout>
-                    </FlexLayout>
-                </StackLayout>
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                        <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="70'" Style="{StaticResource PlayerName}"/>
-                        </StackLayout>
-                    </FlexLayout>
-                    <Button Text="12" Style="{StaticResource PlayerNumber}" />
-                </StackLayout>
-            </FlexLayout>
-            <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <Button Text="17" Style="{StaticResource PlayerNumber}" />
-                    <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                        <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <Label Text="68'" Style="{StaticResource PlayerName}"/>
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </StackLayout>
-                    </FlexLayout>
-                </StackLayout>
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                        <Label Text="Leonardo Perez" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="70'" Style="{StaticResource PlayerName}"/>
-                        </StackLayout>
-                    </FlexLayout>
-                    <Button Text="1" Style="{StaticResource PlayerNumber}" />
-                </StackLayout>
-            </FlexLayout>
-            <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <Button Text="13" Style="{StaticResource PlayerNumber}" />
-                    <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                        <Label Text="Matos" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <Label Text="68'" Style="{StaticResource PlayerName}"/>
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                        </StackLayout>
-                    </FlexLayout>
-                </StackLayout>
-                <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                    <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                        <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
-                        <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                            <AbsoluteLayout Style="{StaticResource SubSTPlayerImageBox}">
-                                <Image Source="images/common/substitution_home_in.png" Aspect="AspectFill" />
-                            </AbsoluteLayout>
-                            <Label Text="66'" Style="{StaticResource PlayerName}"/>
-                        </StackLayout>
-                    </FlexLayout>
-                    <Button Text="3" Style="{StaticResource PlayerNumber}" />
-                </StackLayout>
-            </FlexLayout>
-        </StackLayout>
-        <StackLayout Style="{StaticResource Group}">
-            <Label Text="COACHES" Style="{StaticResource GroupName}" />
-        </StackLayout>
-        <StackLayout Style="{StaticResource Container}">
-            <FlexLayout Style="{StaticResource CoachContainer}">
-                <Label Text="Fabio Grosso" Style="{StaticResource PlayerName}" />
-                <Label Text="Piero Braglia" Style="{StaticResource PlayerName}" />
-            </FlexLayout>
-        </StackLayout>
-    </StackLayout>
+    </ScrollView>
+    
 </ContentView>

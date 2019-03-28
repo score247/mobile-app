@@ -2,39 +2,52 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Score.ViewResources.MatchDetailViewResource">
-    <Style TargetType="Label">
-        <Setter Property="FontSize" Value="12" />
-    </Style>
-
     <!-- Match Score -->
     <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Row" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="JustifyContent" Value="Center" />
-        <Setter Property="Margin" Value="0,20" />
+        <Setter Property="Padding" Value="0,20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
-
-    <Style x:Key="MatchScoreBox" TargetType="Frame">        
+    <Style x:Key="MatchScoreFirstCol" TargetType="StackLayout">
+        <Setter Property="Margin" Value="0,0,50,0" />
+    </Style>
+    <Style x:Key="MatchScoreLastCol" TargetType="StackLayout">
+        <Setter Property="Margin" Value="50,0,0,0" />
+    </Style>
+    <Style x:Key="TeamLogoContainer" TargetType="StackLayout">
+        <Setter Property="WidthRequest" Value="40" />
+        <Setter Property="HeightRequest" Value="40" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="MatchScoreBox" TargetType="Button">
+        <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="HeightRequest" Value="20" />
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="CornerRadius" Value="10" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="0,10,0,0" />
-        <Setter Property="HasShadow" Value="False" />
+        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
-    </Style>
-
-    <Style x:Key="ScoreText" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center"/>
-        <Setter Property="VerticalTextAlignment" Value="Center"/>
-        <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
     </Style>
 
+    <Style x:Key="MatchScoreHomeTeam" TargetType="Label">
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+    </Style>
+
+    <Style x:Key="MatchScoreAwayTeam" TargetType="Label">
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+    </Style>
+
+    <Style x:Key="GeneralMatchStatusContainer" TargetType="StackLayout">
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
     <Style x:Key="GeneralMatchStatus" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0,8,0,0" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -64,7 +77,7 @@
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style x:Key="SubTab" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
@@ -74,6 +87,7 @@
     <Style x:Key="SubTabActive" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
     </Style>
+    
     <!-- Group -->
     <Style x:Key="Group" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />

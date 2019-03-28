@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Score.ViewResources.MatchTableViewResource">
+    <Style x:Key="TableMatchContainer" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+
+    <Style x:Key="TopInfo" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="SpaceBetween" />
+        <Setter Property="Padding" Value="0,0,0,5" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <Style x:Key="DropdownContainer" TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="FlexLayout.Shrink" Value="0" />
+        <Setter Property="FlexLayout.Basis" Value="90" />
+    </Style>
+    
+    <Style x:Key="DropdownListBox" TargetType="AbsoluteLayout">
+        <Setter Property="WidthRequest" Value="90" />
+        <Setter Property="FlexLayout.Shrink" Value="0" />
+    </Style>
+    
+    <Style x:Key="DropdownList" TargetType="Picker">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TitleColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+    
+    <Style x:Key="DropdownIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="WidthRequest" Value="7" />
+        <Setter Property="AbsoluteLayout.LayoutBounds" Value="1,1,.2,1" />
+        <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
+        <Setter Property="Text" Value="&#xe91c;" />
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="FontSize" Value="6" />        
+    </Style>
+
+    <Style x:Key="Row" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+        <Setter Property="HeightRequest" Value="30" />
+        <Setter Property="Padding" Value="16,0" />
+    </Style>
+
+    <Style x:Key="FirstCol" TargetType="StackLayout">
+        <Setter Property="FlexLayout.Basis" Value="24" />
+    </Style>
+
+    <Style x:Key="CommonNumberCol" TargetType="Label">
+        <Setter Property="FlexLayout.Basis" Value="24" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+    </Style>
+    <Style x:Key="NumberColHeader" BasedOn="{StaticResource CommonNumberCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style x:Key="NumberCol" BasedOn="{StaticResource CommonNumberCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="CommonTeamCol" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="4" />
+        <Setter Property="Margin" Value="10,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />        
+    </Style>
+    <Style x:Key="TeamColHeader" BasedOn="{StaticResource CommonTeamCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style x:Key="TeamCol" BasedOn="{StaticResource CommonTeamCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="CommonResultCol" TargetType="Label">
+        <Setter Property="FlexLayout.Basis" Value="24" />
+        <Setter Property="FlexLayout.Grow" Value="1" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+    </Style>
+    <Style x:Key="ResultColHeader" BasedOn="{StaticResource CommonResultCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style x:Key="ResultCol" BasedOn="{StaticResource CommonResultCol}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="CommonIcon" TargetType="Button">        
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="CornerRadius" Value="1" />
+        <Setter Property="HeightRequest" Value="16" />
+        <Setter Property="WidthRequest" Value="16" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style x:Key="TopFourthTeamOnLeagueIcon" BasedOn="{StaticResource CommonIcon}" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource TopFourthTeamOnLeagueColor}" />
+    </Style>
+    <Style x:Key="FifthTeamOnLeagueIcon" BasedOn="{StaticResource CommonIcon}" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource FifthTeamOnLeagueColor}" />
+    </Style>
+    <Style x:Key="SixthTeamOnLeagueIcon" BasedOn="{StaticResource CommonIcon}" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource SixthTeamOnLeagueColor}" />
+    </Style>
+    <Style x:Key="BottomTeamOnLeagueIcon" BasedOn="{StaticResource CommonIcon}" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="{StaticResource BottomTeamOnLeagueColor}" />
+    </Style>
+
+    <Style x:Key="TableNote" TargetType="Label">
+        <Setter Property="Margin" Value="16,10" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+    <Style x:Key="TableNoteRow" BasedOn="{StaticResource FlexLayoutAlignLeft}" TargetType="FlexLayout">
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="30" />
+    </Style>
+    <Style x:Key="TableNoteIcon" TargetType="StackLayout">
+        <Setter Property="FlexLayout.Basis" Value="16" />
+    </Style>
+    <Style x:Key="TableNoteInfo" TargetType="Label">
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+</ResourceDictionary>

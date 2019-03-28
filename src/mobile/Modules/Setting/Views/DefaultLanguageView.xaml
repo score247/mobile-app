@@ -11,7 +11,7 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
-        <Style x:Key="FlagBox" TargetType="AbsoluteLayout">
+        <Style x:Key="FlagBox" TargetType="StackLayout">
             <Setter Property="WidthRequest" Value="22" />
             <Setter Property="HeightRequest" Value="14" />
             <Setter Property="VerticalOptions" Value="Center" />
@@ -24,9 +24,9 @@
     <StackLayout>
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_en.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label x:Name="English" Text="English" Style="{StaticResource NavName}" />
             </StackLayout>
             <Label Style="{StaticResource CheckIcon}" />
@@ -37,9 +37,9 @@
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_in.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label x:Name="Indonesian" Text="Indonesian" Style="{StaticResource NavName}" />
             </StackLayout>
            
@@ -50,9 +50,9 @@
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" Style="{StaticResource NavName}" />
             </StackLayout>
             
@@ -63,9 +63,9 @@
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label x:Name="TraditionalChinese" Text="Traditional Chinese" Style="{StaticResource NavName}" />
             </StackLayout>
             
@@ -76,9 +76,9 @@
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
+                <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_th.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>
+                </StackLayout>
                 <Label x:Name="Thai" Text="Thai" Style="{StaticResource NavName}" />
             </StackLayout>
             
@@ -89,9 +89,9 @@
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
-                <AbsoluteLayout Style="{StaticResource FlagBox}">
-                    <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
-                </AbsoluteLayout>                
+                <StackLayout Style="{StaticResource FlagBox}">
+                  <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
+                </StackLayout>                
                 <Label x:Name="Vietnamese" Text="Vietnamese" Style="{StaticResource NavName}" />
             </StackLayout>
             

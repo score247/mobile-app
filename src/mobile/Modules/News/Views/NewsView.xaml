@@ -36,9 +36,9 @@
         <ScrollView Orientation="Vertical">
             <StackLayout>
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_1.png" Aspect="AspectFit" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Luis Enrique casts doubt over Isco's Spain place"
                                 Style="{StaticResource NewsTitle}" />
@@ -48,9 +48,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_2.png" Aspect="AspectFit" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Carvaja wishes Morata well at Atletico"
                                Style="{StaticResource NewsTitle}" />
@@ -60,9 +60,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_1.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
                                Style="{StaticResource NewsTitle}" />
@@ -72,9 +72,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_4.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Vinicius happy with Real Madrid role"
                                Style="{StaticResource NewsTitle}" />
@@ -84,9 +84,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_5.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
                                Style="{StaticResource NewsTitle}" />
@@ -96,9 +96,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_2.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Carvaja wishes Morata well at Atletico"
                                Style="{StaticResource NewsTitle}" />
@@ -108,9 +108,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_1.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
                                Style="{StaticResource NewsTitle}" />
@@ -120,9 +120,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_4.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    <StackLayout Style="{StaticResource NewsImage}">
+                      <Image Source="images/news/news_4.png" Aspect="AspectFill" />
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Vinicius happy with Real Madrid role"
                                Style="{StaticResource NewsTitle}" />
@@ -132,9 +132,9 @@
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
-                    <AbsoluteLayout Style="{StaticResource NewsImage}">
+                    <StackLayout Style="{StaticResource NewsImage}">
                         <Image Source="images/news/news_5.png" Aspect="AspectFill" />
-                    </AbsoluteLayout>
+                    </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
                         <Label Text="Alba : United and Juve? My dream is to retire at Barca"
                                Style="{StaticResource NewsTitle}" />

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Name="view" 
+             x:Class="Score.Views.Templates.MatchTableTotalFullListTemplate"
+             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:resources="clr-namespace:Score.ViewResources"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchDetailViewResource />
+                <resources:MatchTableViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>        
+    </ContentView.Resources>
+    
+    <StackLayout Style="{StaticResource TableMatchContainer}">
+        <FlexLayout Style="{StaticResource TopInfo}">
+            <StackLayout FlexLayout.Grow="1">
+                <Frame Style="{StaticResource SubTabContainer}">
+                    <FlexLayout Style="{StaticResource SubTabBox}">
+                        <Label Text="Total" Style="{StaticResource SubTabActive}" />
+                        <Label Text="Home" Style="{StaticResource SubTab}"/>
+                        <Label Text="Away" Style="{StaticResource SubTab}" />
+                    </FlexLayout>
+                </Frame>
+            </StackLayout>
+            <AbsoluteLayout Style="{StaticResource DropdownListBox}">
+                <Picker Title="Full List" Style="{StaticResource DropdownList}">
+                    <Picker.Items>
+                        <x:String>Short List</x:String>
+                        <x:String>Full List</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Style="{StaticResource DropdownIcon}" />
+            </AbsoluteLayout>
+        </FlexLayout>
+
+        <ScrollView>
+            <StackLayout>
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="#" Style="{StaticResource NumberColHeader}"  />
+                    <Label Text=""  Style="{StaticResource TeamColHeader}" />
+                    <Label Text="MP" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="W" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="L" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="D" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="GF" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="GA" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="GD" Style="{StaticResource ResultColHeader}" />
+                    <Label Text="PTS" Style="{StaticResource ResultColHeader}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="1" Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Brescia" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="9" Style="{StaticResource ResultCol}" />
+                    <Label Text="0" Style="{StaticResource ResultCol}" />
+                    <Label Text="77" Style="{StaticResource ResultCol}" />
+                    <Label Text="21" Style="{StaticResource ResultCol}" />
+                    <Label Text="21" Style="{StaticResource ResultCol}" />
+                    <Label Text="50" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="2" Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Palermo" Style="{StaticResource TeamCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="8" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="51" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="14" Style="{StaticResource ResultCol}" />
+                    <Label Text="45" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="3" Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Verona" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="10" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="45" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="4" Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Lecce" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="4" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="17" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="44" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="5" Style="{StaticResource FifthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Pescara" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="5" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="28" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="4" Style="{StaticResource ResultCol}" />
+                    <Label Text="44" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="6" Style="{StaticResource SixthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Benevento" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="4" Style="{StaticResource ResultCol}" />
+                    <Label Text="23" Style="{StaticResource ResultCol}" />
+                    <Label Text="44" Style="{StaticResource ResultCol}" />
+                    <Label Text="9" Style="{StaticResource ResultCol}" />
+                    <Label Text="43" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="7" Style="{StaticResource NumberCol}" />
+                    <Label Text="Cittadella" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="10" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="8" Style="{StaticResource ResultCol}" />
+                    <Label Text="39" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="8" Style="{StaticResource NumberCol}" />
+                    <Label Text="Perugia" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="10" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="38" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="9" Style="{StaticResource NumberCol}" />
+                    <Label Text="Spezia" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="9" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="5" Style="{StaticResource ResultCol}" />
+                    <Label Text="37" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="10" Style="{StaticResource NumberCol}" />
+                    <Label Text="Salernitana" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="10" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="-5" Style="{StaticResource ResultCol}" />
+                    <Label Text="34" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="11" Style="{StaticResource NumberCol}" />
+                    <Label Text="Cosenza" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="10" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="-4" Style="{StaticResource ResultCol}" />
+                    <Label Text="31" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="12" Style="{StaticResource NumberCol}" />
+                    <Label Text="Ascoli" Style="{StaticResource TeamCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="12" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="-6" Style="{StaticResource ResultCol}" />
+                    <Label Text="31" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="13" Style="{StaticResource NumberCol}" />
+                    <Label Text="Livorno" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="14" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="7" Style="{StaticResource ResultCol}" />
+                    <Label Text="-7" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="14" Style="{StaticResource NumberCol}" />
+                    <Label Text="Foggia" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="15" Style="{StaticResource ResultCol}" />
+                    <Label Text="4" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="-5" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="15" Style="{StaticResource NumberCol}" />
+                    <Label Text="Venezia" Style="{StaticResource TeamCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="16" Style="{StaticResource ResultCol}" />
+                    <Label Text="6" Style="{StaticResource ResultCol}" />
+                    <Label Text="0" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="-7" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <Label Text="16" Style="{StaticResource NumberCol}" />
+                    <Label Text="Crotone" Style="{StaticResource TeamCol}" />
+                    <Label Text="25" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="17" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="-9" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="17" Style="{StaticResource BottomTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Padova" Style="{StaticResource TeamCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="27" Style="{StaticResource ResultCol}" />
+                    <Label Text="18" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="3" Style="{StaticResource ResultCol}" />
+                    <Label Text="2" Style="{StaticResource ResultCol}" />
+                    <Label Text="-1" Style="{StaticResource ResultCol}" />
+                    <Label Text="23" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource Row}">
+                    <StackLayout Style="{StaticResource FirstCol}">
+                        <Button Text="18" Style="{StaticResource BottomTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Carpi" Style="{StaticResource TeamCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="26" Style="{StaticResource ResultCol}" />
+                    <Label Text="19" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="0" Style="{StaticResource ResultCol}" />
+                    <Label Text="1" Style="{StaticResource ResultCol}" />
+                    <Label Text="22" Style="{StaticResource ResultCol}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <Label Text="Fullham: 3 points deducted due to decision by the Federation." Style="{StaticResource TableNote}" />
+                <FlexLayout Style="{StaticResource TableNoteRow}">
+                    <StackLayout Style="{StaticResource TableNoteIcon}">
+                        <Button Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Champion League" Style="{StaticResource TableNoteInfo}" />
+                </FlexLayout>
+                <FlexLayout Style="{StaticResource TableNoteRow}">
+                    <StackLayout Style="{StaticResource TableNoteIcon}">
+                        <Button Style="{StaticResource FifthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Europa League" Style="{StaticResource TableNoteInfo}" />
+                </FlexLayout>
+                <FlexLayout Style="{StaticResource TableNoteRow}">
+                    <StackLayout Style="{StaticResource TableNoteIcon}">
+                        <Button Style="{StaticResource SixthTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Europa Le Qualification" Style="{StaticResource TableNoteInfo}" />
+                </FlexLayout>
+                <FlexLayout Style="{StaticResource TableNoteRow}">
+                    <StackLayout Style="{StaticResource TableNoteIcon}">
+                        <Button Style="{StaticResource BottomTeamOnLeagueIcon}"  />
+                    </StackLayout>
+                    <Label Text="Relegation" Style="{StaticResource TableNoteInfo}" />
+                </FlexLayout>
+            </StackLayout>
+        </ScrollView>
+        
+    </StackLayout>
+    
+</ContentView>

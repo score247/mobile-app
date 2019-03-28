@@ -22,7 +22,7 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
-    <Style x:Key="SubstitutionImageBox" TargetType="AbsoluteLayout">
+    <Style x:Key="SubstitutionImageContainer" TargetType="StackLayout">
         <Setter Property="WidthRequest" Value="10" />
         <Setter Property="HeightRequest" Value="10" />
     </Style>
@@ -67,7 +67,9 @@
     <Style x:Key="SubSTPlayerColRight" BasedOn="{StaticResource SubSTPlayerCol}" TargetType="FlexLayout">
         <Setter Property="AlignItems" Value="End" />
     </Style>
-    <Style x:Key="SubSTPlayerImageBox" BasedOn="{StaticResource SubstitutionImageBox}" TargetType="AbsoluteLayout">
+    <Style x:Key="SubSTPlayerImageContainer" BasedOn="{StaticResource SubstitutionImageContainer}" TargetType="StackLayout">
+        <Setter Property="HeightRequest" Value="10" />
+        <Setter Property="WidthRequest" Value="10" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Margin" Value="2,0" />
     </Style>

@@ -19,10 +19,11 @@
             <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
             <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="Margin" Value="4,0,4,2" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
         <Style x:Key="TabActiveText" BasedOn="{StaticResource TabText}" TargetType="Label">
+            <Setter Property="Margin" Value="4,0" />
             <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         </Style>
         <Style x:Key="TabActiveLine" TargetType="BoxView">
