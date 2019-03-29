@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Name="view" x:Class="Common.Controls.TabStrip.TabStripHeader">
+    <ContentView.Resources>
+        <Style x:Key="ScrollTab" TargetType="ScrollView">
+            <Setter Property="Orientation" Value="Horizontal" />
+            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="Padding" Value="8,0" />
+        </Style>
+        <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+            <Setter Property="HeightRequest" Value="30" />
+            <Setter Property="Margin" Value="0,0,0,12" />
+        </Style>
+        <Style x:Key="Tab" TargetType="StackLayout">
+            <Setter Property="Margin" Value="8,0" />
+        </Style>
+        <Style x:Key="TabText" TargetType="Label">
+            <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
+            <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
+        </Style>
+        <Style x:Key="TabActiveText" BasedOn="{StaticResource TabText}" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        </Style>
+        <Style x:Key="TabActiveLine" TargetType="BoxView">
+            <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
+            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="Margin" Value="0,1,0,0" />
+        </Style>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">
+            <FlexLayout x:Name="scrollLayOut" Style="{StaticResource NavTabs}">
+                
+            </FlexLayout>
+        </ScrollView>
+    </ContentView.Content>
+</ContentView>

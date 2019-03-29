@@ -1,48 +1,36 @@
 ﻿namespace Score.ViewModels
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using Common.Controls.TabStrip;
     using Common.ViewModels;
-    using Prism.Commands;
     using Prism.Navigation;
     using Score.Views.Templates;
-    using Xamarin.Forms;
 
     public class MatchDetailViewModel : ViewModelBase
     {
         public MatchDetailViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            MatchDetailItems = new List<string>()
+            MatchDetailItems = new List<TabModel>()
             {
-                "MatchInfo",
-                "MatchStats"
+                new TabModel { Id = 0, Name = "Odds", TemplateType = typeof(MatchInfoTemplate) },
+                new TabModel { Id = 1, Name = "Info", TemplateType = typeof(MatchInfoTemplate) },
+                new TabModel { Id = 2, Name = "Trackers", TemplateType = typeof(MatchTrackerTemplate) },
+                new TabModel { Id = 3, Name = "Stats" , TemplateType = typeof(MatchStatsTemplate)},
+                new TabModel { Id = 4, Name = "LineUps", TemplateType = typeof(MatchLineUpsTemplate) },
+                new TabModel { Id = 5, Name = "H2H" , TemplateType = typeof(MatchH2HHeadToHeadTemplate)},
+                new TabModel { Id = 6, Name = "Table", TemplateType = typeof(MatchInfoTemplate) },
+                new TabModel { Id = 7, Name = "Social", TemplateType = typeof(MatchInfoTemplate) },
+                new TabModel { Id = 8, Name = "TV Schedule", TemplateType = typeof(MatchInfoTemplate) },
             };
-
-            CurrentMatchDetailIndex = 0;
         }
 
-        private List<string> matchDetailItems;
+        private List<TabModel> matchDetailItems;
 
-        public List<string> MatchDetailItems
+        public List<TabModel> MatchDetailItems
         {
             get { return matchDetailItems; }
             set { SetProperty(ref matchDetailItems, value); }
-        }
-
-        private int currentMatchDetailIndex;
-
-        public int CurrentMatchDetailIndex
-        {
-            get { return currentMatchDetailIndex; }
-            set { SetProperty(ref currentMatchDetailIndex, value); }
-        }
-
-        public DelegateCommand SelectMatchDetailTabCommand => new DelegateCommand(OnSelectMatchDetailTabCommandExecuted);
-
-        private void OnSelectMatchDetailTabCommandExecuted()
-        {
-            CurrentMatchDetailIndex = 1;
         }
     }
 }

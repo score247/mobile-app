@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:Common.Controls.TabStrip"
+             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             x:Name="this" 
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"
+             x:Class="Common.Controls.TabStrip.TabStrip">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:TabViewSelector x:Key="tabViewSelecter"></local:TabViewSelector>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout>
+            <local:TabStripHeader x:Name="TabHeader" 
+                                 BackgroundColor="#0F111C"
+                                 Position="{Binding CurrentPosition}" 
+                                 ItemsSource="{Binding Tabs}">
+            </local:TabStripHeader>
+            <carousel:CarouselViewControl 
+                x:Name="TabContent"
+                ItemsSource="{Binding Tabs}"
+                ItemTemplate="{StaticResource tabViewSelecter}"
+                Position="{Binding CurrentPosition}"
+                ShowIndicators="true"
+                Orientation="Horizontal"
+                VerticalOptions="FillAndExpand"
+                HorizontalOptions="FillAndExpand"/>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
