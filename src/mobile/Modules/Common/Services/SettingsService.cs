@@ -41,7 +41,7 @@
             { "other", "cwp8y9e84bnsnxst7vah7xcn" }
         };
 
-        public string[] LeagueGroups => new string[] { "eu", "as", "intl", "other" };
+        public string[] LeagueGroups => new [] { "eu", "as", "intl", "other" };
 
         public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {

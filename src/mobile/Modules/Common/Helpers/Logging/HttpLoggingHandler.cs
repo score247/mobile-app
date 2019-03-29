@@ -93,12 +93,14 @@ namespace Common.Helpers.Logging
 
         private bool IsTextBasedContentType(HttpHeaders headers)
         {
-            IEnumerable<string> values;
-            if (!headers.TryGetValues("Content-Type", out values))
+            if (!headers.TryGetValues("Content-Type", out IEnumerable<string> values))
+            {
                 return false;
+            }
+
             var header = string.Join(" ", values).ToLowerInvariant();
 
-            return types.Any(t => header.Contains(t));
+            return types.Any(header.Contains);
         }
     }
 }
