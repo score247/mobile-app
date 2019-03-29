@@ -31,7 +31,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Menu", "src\mobile\Modules\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScoreApp.UITests", "test\LiveScoreApp.UITests\LiveScoreApp.UITests.csproj", "{BF382EA4-C559-4C79-A978-CA69DE49366E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\mobile\Modules\Common\Common.csproj", "{BFB06D86-9210-4C63-AAF0-4725B9E647F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "src\mobile\Modules\Common\Common.csproj", "{BFB06D86-9210-4C63-AAF0-4725B9E647F8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSchedule", "src\mobile\Modules\TVSchedule\TVSchedule.csproj", "{4D765E5B-E2C4-4A8B-995A-A77F11673497}"
 EndProject
