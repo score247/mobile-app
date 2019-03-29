@@ -39,7 +39,11 @@
             if (control != null)
             {
                 var tabs = (IEnumerable<TabModel>)newValue;
-                control.ViewModel.Tabs = new ObservableCollection<TabModel>(tabs);
+
+                if (tabs != null)
+                {
+                    control.ViewModel.Tabs = new ObservableCollection<TabModel>(tabs);
+                }
             }
         }
     }
