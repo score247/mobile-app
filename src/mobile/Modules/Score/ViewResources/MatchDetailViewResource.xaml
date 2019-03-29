@@ -29,6 +29,7 @@
         <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
 
     <Style x:Key="MatchScoreHomeTeam" TargetType="Label">
