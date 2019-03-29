@@ -29,7 +29,7 @@
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                         <Label Text="34'" Style="{StaticResource MatchMinutes}" />
                         <ContentView>
                             <BoxView Style="{StaticResource VerticalLine}" />
@@ -39,7 +39,7 @@
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
                         <Button Text="1 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                 </FlexLayout>
@@ -60,7 +60,7 @@
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Orientation="Horizontal">
+                    <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                         <Label Text="63'" Style="{StaticResource MatchMinutes}" />
                         <ContentView>
                             <BoxView Style="{StaticResource VerticalLine}" />
@@ -70,7 +70,7 @@
                             <Label Text="Lumbomir Tupta" Style="{StaticResource InfoText}" />
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
                         <Button Text="2 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                 </FlexLayout>
@@ -78,7 +78,7 @@
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
                 <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Margin="10,0" VerticalOptions="Center">
+                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
                         <Button Text="2 - 0" Style="{StaticResource MatchScoreBox}" />
                     </StackLayout>
                     <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">

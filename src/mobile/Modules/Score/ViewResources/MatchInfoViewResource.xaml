@@ -29,6 +29,11 @@
         <Setter Property="JustifyContent" Value="SpaceBetween" />
     </Style>
 
+    <Style x:Key="MatchScoreBoxAlignCenter" TargetType="StackLayout">
+        <Setter Property="Margin" Value="10,0" />
+        <Setter Property="FlexLayout.AlignSelf" Value="Center" />
+    </Style>
+    
     <Style x:Key="InfoContentRight" TargetType="StackLayout">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
