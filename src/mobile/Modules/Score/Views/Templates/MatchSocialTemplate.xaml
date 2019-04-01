@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Name="view" 
+             x:Class="Score.Views.Templates.MatchSocialTemplate"
+             xmlns:resources="clr-namespace:Score.ViewResources"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchDetailViewResource />
+                <resources:MatchOddsViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
+    </ContentView.Resources>
+    <StackLayout>
+        <Label Text="Social Page" TextColor="#fff" />
+    </StackLayout>
+</ContentView>

@@ -12,7 +12,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <ContentView.Content>
+    <ScrollView>
         <StackLayout>
             <FlexLayout Style="{StaticResource TabContent}">
                 <FlexLayout Style="{StaticResource MatchStatusAlignRight}">
@@ -150,5 +150,5 @@
                 <Label Grid.Column="1" Grid.Row="4" Text="Serie A Italy" Style="{StaticResource MatchInfoValue}"  />
             </Grid>
         </StackLayout>
-    </ContentView.Content>
+    </ScrollView>
 </ContentView>

@@ -14,7 +14,8 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <StackLayout>
+    <ScrollView>
+        <StackLayout>
         <StackLayout Padding="7">
             <Image Source="images/common/tracker.png" Aspect="AspectFill" />
         </StackLayout>
@@ -63,4 +64,6 @@
             <Label Grid.Column="1" Grid.Row="4" Text="YELLOW CARD!" Style="{StaticResource CommentariesContentYellowCard}" />
         </Grid>
     </StackLayout>
+    </ScrollView>
+    
 </ContentView>

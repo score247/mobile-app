@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,6 +22,12 @@
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
     </ItemGroup>
     <ItemGroup>
+    <Compile Update="ViewResources\MatchSocialViewResource.xaml.cs">
+      <DependentUpon>MatchSocialViewResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MatchOddsViewResource.xaml.cs">
+      <DependentUpon>MatchOddsViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchTableViewResource.xaml.cs">
       <DependentUpon>MatchTableViewResource.xaml</DependentUpon>
     </Compile>
@@ -53,6 +59,12 @@
             <DependentUpon>Calendar.xaml</DependentUpon>
             <SubType>Code</SubType>
     </Compile>
+        <Compile Update="Views\Templates\MatchSocialTemplate.xaml.cs">
+          <DependentUpon>MatchSocialTemplate.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Templates\MatchOdds1x2Template.xaml.cs">
+          <DependentUpon>MatchOdds1x2Template.xaml</DependentUpon>
+        </Compile>
     <Compile Update="Views\Templates\MatchTableTotalFullListTemplate.xaml.cs">
       <DependentUpon>MatchTableTotalFullListTemplate.xaml</DependentUpon>
         </Compile>

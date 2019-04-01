@@ -268,6 +268,15 @@
                 <Setter Property="TextColor" Value="{StaticResource RedCardColor}" />
             </Style>
 
+            <Style x:Key="ChartIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="WidthRequest" Value="16" />
+                <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Text" Value="&#xe920;" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />                
+            </Style>
+
             <!-- NavTabs -->
             <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
                 <Setter Property="HeightRequest" Value="30" />
@@ -322,6 +331,68 @@
                 <Setter Property="VerticalOptions" Value="CenterAndExpand" />
                 <Setter Property="RelativeLayout.XConstraint" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" />
                 <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.33}" />
+            </Style>
+
+            <!-- Define the basic table -->
+            <Style x:Key="TableContainer" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+            </Style>
+            
+            <Style x:Key="TableRow" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+                <Setter Property="HeightRequest" Value="30" />
+            </Style>
+
+            <Style x:Key="TableCol" TargetType="StackLayout">
+                <Setter Property="FlexLayout.Grow" Value="1" />
+                <Setter Property="FlexLayout.Shrink" Value="0" />
+            </Style>
+            
+            <Style x:Key="TableFlexlayoutCol" TargetType="FlexLayout">
+                <Setter Property="FlexLayout.Grow" Value="1" />
+                <Setter Property="FlexLayout.Shrink" Value="0" />
+            </Style>
+
+            <Style x:Key="TableText" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FlexLayout.Grow" Value="1" />
+                <Setter Property="FlexLayout.Shrink" Value="0" />
+                <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+            </Style>
+
+            <Style x:Key="TableHeaderText" BasedOn="{StaticResource TableText}" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+            </Style>
+
+            <Style x:Key="TableBodyText" BasedOn="{StaticResource TableText}" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+
+            <!-- Dropdown List -->
+            <Style x:Key="DropdownListBox" TargetType="AbsoluteLayout">
+                <Setter Property="FlexLayout.Shrink" Value="0" />
+            </Style>
+
+            <Style x:Key="DropdownList" TargetType="Picker">
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="1,1,1,1" />
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="TitleColor" Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+
+            <Style x:Key="DropdownIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="WidthRequest" Value="7" />
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="1,1,.2,1" />
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
+                <Setter Property="Text" Value="&#xe91c;" />
+                <Setter Property="TextColor" Value="#fff" />
+                <Setter Property="FontSize" Value="6" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

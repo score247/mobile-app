@@ -43,8 +43,7 @@
                     <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" />
                     <Label Text="15:00 Jan 25, 2019" Style="{StaticResource GeneralMatchStatus}" />
                     <Label Text="Serie B Italy" Style="{StaticResource GeneralMatchStatus}" />
-                </StackLayout>
-                
+                </StackLayout>                
             </StackLayout>
             <StackLayout Style="{StaticResource MatchScoreLastCol}">
                 <StackLayout Style="{StaticResource TeamLogoContainer}">
