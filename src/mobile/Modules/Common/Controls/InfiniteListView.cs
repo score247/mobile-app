@@ -22,10 +22,12 @@
 
         private void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            if (ItemsSource is IList items && e.Item == items[items.Count - 1])
+            if (ItemsSource is IList items
+                && e.Item == items[items.Count - 1]
+                && LoadMoreCommand != null
+                && LoadMoreCommand.CanExecute(null))
             {
-                if (LoadMoreCommand != null && LoadMoreCommand.CanExecute(null))
-                    LoadMoreCommand.Execute(null);
+                LoadMoreCommand.Execute(null);
             }
         }
     }

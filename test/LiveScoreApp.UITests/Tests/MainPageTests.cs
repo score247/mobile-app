@@ -4,7 +4,6 @@
     using NUnit.Framework;
     using Xamarin.UITest;
 
-
     public class MainPageTests : BaseTest
     {
         public MainPageTests(Platform platform) : base(platform)
@@ -15,49 +14,49 @@
         {
             base.BeforeEachTest();
 
-            mainPage.WaitForPageToLoad();
+            MainPage.WaitForPageToLoad();
         }
 
         [Test]
         public void MainPageLaunches()
         {
-            mainPage.WaitForLabel("Scores");
+            MainPage.WaitForLabel("Scores");
 
-            app.Screenshot("ScorePage");
+            App.Screenshot("ScorePage");
         }
 
         [Test]
         public void TappedLeaguesTab()
         {
-            mainPage.OpenLeaguesTab();
-            mainPage.WaitForLabel("Leagues");
+            MainPage.OpenLeaguesTab();
+            MainPage.WaitForLabel("Leagues");
 
-            app.Screenshot("LeaguesPage");
+            App.Screenshot("LeaguesPage");
         }
 
         [Test]
         public void TappedFavoritesTab()
         {
-            mainPage.OpenFavoritesTab();
-            mainPage.WaitForLabel("Favorites");
+            MainPage.OpenFavoritesTab();
+            MainPage.WaitForLabel("Favorites");
 
-            app.Screenshot("FavoritesPage");
+            App.Screenshot("FavoritesPage");
         }
 
         [Test]
         public void TappedLiveTap()
         {
-            mainPage.OpenLiveTab();
-            mainPage.WaitForLabel("Live");
-                       
-            app.Screenshot("LivePage");
+            MainPage.OpenLiveTab();
+            MainPage.WaitForLabel("Live");
+
+            App.Screenshot("LivePage");
         }
 
         [Test]
-        public void MainPage_Launched_DisplayTabBars() 
+        public void MainPage_Launched_DisplayTabBars()
         {
             // Arrange
-            var expectedTabs = new[] 
+            var expectedTabs = new[]
             {
                 "Scores",
                 "Live",
@@ -67,7 +66,7 @@
             };
 
             // Act
-            var currentTabs = mainPage.CurrentTabBars();
+            var currentTabs = MainPage.CurrentTabBars();
 
             // Assert
             Assert.IsTrue(expectedTabs.SequenceEqual(currentTabs));

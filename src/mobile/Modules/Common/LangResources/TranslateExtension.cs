@@ -12,7 +12,7 @@
     {
         private const string ResourceId = "Common.LangResources.AppResources";
 
-        private static readonly Lazy<ResourceManager> resourceManager
+        private static readonly Lazy<ResourceManager> ResourceManager
             = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));
 
         public string Text { get; set; }
@@ -25,7 +25,7 @@
             }
 
             var cultureInfo = CrossMultilingual.Current.CurrentCultureInfo;
-            var translation = resourceManager.Value.GetString(Text, cultureInfo);
+            var translation = ResourceManager.Value.GetString(Text, cultureInfo);
 
             if (translation == null)
             {
@@ -36,6 +36,7 @@
                 translation = Text; // returns the key, which GETS DISPLAYED TO THE USER
 #endif
             }
+
             return translation;
         }
     }

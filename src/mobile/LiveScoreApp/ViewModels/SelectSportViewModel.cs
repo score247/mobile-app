@@ -7,7 +7,6 @@
     using Common.Services;
     using Common.ViewModels;
     using LiveScoreApp.Models;
-    using Prism.Commands;
     using Prism.Navigation;
 
     public class SelectSportViewModel : ViewModelBase
@@ -36,11 +35,9 @@
             set => SetProperty(ref sportItems, value);
         }
 
-
         public DelegateAsyncCommand SelectSportItemCommand { get; set; }
 
         public DelegateAsyncCommand DoneCommand { get; set; }
-
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {

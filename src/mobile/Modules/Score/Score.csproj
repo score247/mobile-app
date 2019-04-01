@@ -91,6 +91,9 @@
             <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
+        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewModels\MatchDetailViewModel.cs">
+          <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="ViewResources\ScorePageResource.xaml">

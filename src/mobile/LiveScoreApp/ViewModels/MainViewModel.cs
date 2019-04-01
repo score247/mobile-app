@@ -5,7 +5,6 @@
     using Common.Extensions;
     using Common.ViewModels;
     using LiveScoreApp.Services;
-    using LiveScoreApp.ViewResources;
     using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -14,6 +13,13 @@
     {
         private Models.MenuItem selectedMenuItem;
         private bool nightMode;
+
+        public MainViewModel(INavigationService navigationService, IMenuService menuService) : base(navigationService)
+        {
+            MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
+            NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
+            NightMode = true;
+        }
 
         public ObservableCollection<Models.MenuItem> MenuItems { get; set; }
 
@@ -35,24 +41,7 @@
 
         private void OnChangeThemeExecuted()
         {
-            var currentResource = App.Current.Resources;
-            currentResource.MergedDictionaries.Clear();
-
-            if (NightMode)
-            {
-                currentResource.MergedDictionaries.Add(new DarkThemeResource());
-            }
-            else
-            {
-                currentResource.MergedDictionaries.Add(new LightThemeResource());
-            }
-        }
-
-        public MainViewModel(INavigationService navigationService, IMenuService menuService) : base(navigationService)
-        {
-            MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
-            NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
-            NightMode = true;
+            // TODO Implement later
         }
 
         private async Task Navigate(string page)

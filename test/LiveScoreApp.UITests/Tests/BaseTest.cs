@@ -7,28 +7,35 @@
     [TestFixture(Platform.iOS)]
     public abstract class BaseTest
     {
-        protected IApp app;
-        protected Platform platform;
-
-        protected MainPage mainPage;
-        protected ScorePage scorePage;
-        protected LeaguePage leaguePage;
+        private IApp app;
+        private Platform platform;
+        private MainPage mainPage;
+        private ScorePage scorePage;
+        private LeaguePage leaguePage;
 
         protected BaseTest(Platform platform)
         {
-            this.platform = platform;
+            Platform = platform;
         }
+
+        protected IApp App { get => app; set => app = value; }
+
+        protected Platform Platform { get => platform; set => platform = value; }
+
+        protected MainPage MainPage { get => mainPage; set => mainPage = value; }
+
+        protected ScorePage ScorePage { get => scorePage; set => scorePage = value; }
+
+        protected LeaguePage LeaguePage { get => leaguePage; set => leaguePage = value; }
 
         [SetUp]
-        virtual public void BeforeEachTest()
+        public virtual void BeforeEachTest()
         {
-            app = AppInitializer.StartApp(platform);
+            App = AppInitializer.StartApp(Platform);
 
-            mainPage = new MainPage(app, platform);
-            scorePage = new ScorePage(app, platform);
-            leaguePage = new LeaguePage(app, platform);
+            MainPage = new MainPage(App, Platform);
+            ScorePage = new ScorePage(App, Platform);
+            LeaguePage = new LeaguePage(App, Platform);
         }
-
-       
     }
 }

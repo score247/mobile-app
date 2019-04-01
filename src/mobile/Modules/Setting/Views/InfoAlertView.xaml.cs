@@ -1,7 +1,7 @@
-﻿using Xamarin.Forms;
-
-namespace Menu.Views
+﻿namespace Menu.Views
 {
+    using Xamarin.Forms;
+
     public partial class InfoAlertView : ContentPage
     {
         public InfoAlertView()

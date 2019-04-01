@@ -7,8 +7,6 @@
     public class ViewModelBase : BindableBase,
             INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
-        protected INavigationService NavigationService { get; }
-
         private string title;
 
         public string Title
@@ -21,6 +19,8 @@
         {
             NavigationService = navigationService;
         }
+
+        protected INavigationService NavigationService { get; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

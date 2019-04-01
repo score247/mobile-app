@@ -17,45 +17,14 @@
     {
         private readonly ILeagueService leagueService;
         private readonly IPageDialogService pageDialogService;
-
         private readonly List<LeagueItem> leagueList;
-
-        public DelegateAsyncCommand<LeagueItem> ItemTappedCommand { get; set; }
-        public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
-        public DelegateAsyncCommand RefreshCommand { get; set; }
-
-        public DelegateCommand SearchCommand { get; set; }
-
         private bool isLoading;
-        public bool IsLoading
-        {
-            get { return isLoading; }
-            set { SetProperty(ref isLoading, value); }
-        }
-
         private bool hasData;
-        public bool HasData
-        {
-            get { return hasData; }
-            set { SetProperty(ref hasData, value); }
-        }
-
         private string filter;
-        public string Filter
-        {
-            get => filter;
-            set => SetProperty(ref filter, value);
-        }
-
         private ObservableCollection<LeagueItem> leagues;
-        public ObservableCollection<LeagueItem> Leagues
-        {
-            get => leagues;
-            set => SetProperty(ref leagues, value);
-        }
 
         public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService, IPageDialogService pageDialogService)
-            : base(navigationService)
+          : base(navigationService)
         {
             Title = "League";
             this.leagueService = leagueService;
@@ -70,6 +39,38 @@
             leagueList = new List<LeagueItem>();
             IsLoading = true;
             HasData = !IsLoading;
+        }
+
+        public DelegateAsyncCommand<LeagueItem> ItemTappedCommand { get; set; }
+
+        public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
+
+        public DelegateAsyncCommand RefreshCommand { get; set; }
+
+        public DelegateCommand SearchCommand { get; set; }
+
+        public bool IsLoading
+        {
+            get { return isLoading; }
+            set { SetProperty(ref isLoading, value); }
+        }
+
+        public bool HasData
+        {
+            get { return hasData; }
+            set { SetProperty(ref hasData, value); }
+        }
+
+        public string Filter
+        {
+            get => filter;
+            set => SetProperty(ref filter, value);
+        }
+
+        public ObservableCollection<LeagueItem> Leagues
+        {
+            get => leagues;
+            set => SetProperty(ref leagues, value);
         }
 
         public override async void OnAppearing()
@@ -87,11 +88,16 @@
             }
         }
 
-        private async Task ItemTapped(LeagueItem Item)
+        public override void Destroy()
+        {
+            // TODO clean all resources and requests
+        }
+
+        private async Task ItemTapped(LeagueItem item)
         {
             var param = new NavigationParameters
             {
-                { nameof(LeagueItem), Item }
+                { nameof(LeagueItem), item }
             };
 
             var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}", param);
@@ -142,12 +148,6 @@
             }
 
             Leagues = new ObservableCollection<LeagueItem>(filterLeagues);
-        }
-
-        //TODO clean all resources and requests
-        public override void Destroy()
-        {
-            base.Destroy();
         }
     }
 }

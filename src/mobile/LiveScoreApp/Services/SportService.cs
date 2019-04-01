@@ -14,7 +14,7 @@
         {
             return new List<SportItem>
            {
-               new SportItem {Id = 1, Name = "Soccer", NumberOfEvent = 2}
+               new SportItem { Id = 1, Name = "Soccer" }
            };
         }
     }

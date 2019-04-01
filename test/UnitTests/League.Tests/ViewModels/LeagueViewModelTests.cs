@@ -1,24 +1,23 @@
 ﻿namespace League.Tests.ViewModels
 {
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Threading.Tasks;
+    using League.Models;
     using League.Services;
     using League.ViewModels;
     using NSubstitute;
     using Prism.Navigation;
     using Prism.Services;
     using Xunit;
-    using League.Models;
-    using System.Linq;
-    using System.Collections.ObjectModel;
 
     public class LeagueViewModelTests
     {
         private readonly INavigationService mockNavigationService;
         private readonly ILeagueService mockLeagueService;
         private readonly IPageDialogService mockPageDialog;
-
-        private LeagueViewModel viewModel;
+        private readonly LeagueViewModel viewModel;
 
         public LeagueViewModelTests()
         {
@@ -90,7 +89,7 @@
             bool invoked = false;
             var mockLeagueItems = new List<LeagueItem>
             {
-                new LeagueItem{ Id = "1", Name = "League A"}
+                new LeagueItem { Id = "1", Name = "League A" }
             };
 
             mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
@@ -114,7 +113,7 @@
             bool invoked = false;
             var mockLeagueItems = new List<LeagueItem>
             {
-                new LeagueItem{ Id = "1", Name = "League A"}
+                new LeagueItem { Id = "1", Name = "League A" }
             };
 
             mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
@@ -137,9 +136,9 @@
             // Arrange
             var mockLeagueItems = new List<LeagueItem>
             {
-                new LeagueItem{ Id = "1", Name = "K League"},
-                new LeagueItem{ Id = "1", Name = "Premier League"},
-                new LeagueItem{ Id = "1", Name = "AFC"}
+                new LeagueItem { Id = "1", Name = "K League" },
+                new LeagueItem { Id = "1", Name = "Premier League" },
+                new LeagueItem { Id = "1", Name = "AFC" }
             };
 
             mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
@@ -158,9 +157,9 @@
             // Arrange
             var mockLeagueItems = new List<LeagueItem>
             {
-                new LeagueItem{ Id = "1", Name = "K League"},
-                new LeagueItem{ Id = "1", Name = "Premier League"},
-                new LeagueItem{ Id = "1", Name = "AFC"}
+                new LeagueItem { Id = "1", Name = "K League" },
+                new LeagueItem { Id = "1", Name = "Premier League" },
+                new LeagueItem { Id = "1", Name = "AFC" }
             };
 
             mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
@@ -204,8 +203,10 @@
         public async Task OnAppearing_LeaguesNotEmpty_ShouldNotCallLeagueService()
         {
             // Arrange
-            viewModel.Leagues = new ObservableCollection<LeagueItem>();
-            viewModel.Leagues.Add(new LeagueItem { Id = "1", Name = "League A" });
+            viewModel.Leagues = new ObservableCollection<LeagueItem>
+            {
+                new LeagueItem { Id = "1", Name = "League A" }
+            };
             mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
 
             // Act

@@ -147,7 +147,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <Compile Include="AppDelegate.cs" />
+    <Compile Include="AppDelegate.cs">
+      <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

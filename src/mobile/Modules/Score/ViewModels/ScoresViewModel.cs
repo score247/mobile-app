@@ -15,14 +15,17 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private int OldDateCalendarItemCount = 3;
-        private int NewDateCalendarItemCount = 7;
+        private const int MaximumCalendarItemCount = 30;
+        private const int MoreOldDayCount = 7;
+        private const int MoreNewDayCount = 3;
+        private readonly IMatchService matchService;
+        private int oldDateCalendarItemCount = 3;
+        private int newDateCalendarItemCount = 7;
         private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
         private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
         private bool isLoadingMatches;
         private bool isRefreshingCalendarList;
-        private readonly IMatchService matchService;
         private CalendarDate selectedCalendarDate;
         private bool selectHome;
 
@@ -83,7 +86,6 @@
             set { SetProperty(ref isRefreshingCalendarList, value); }
         }
 
-
         public bool SelectHome
         {
             get { return selectHome; }
@@ -104,7 +106,7 @@
 
         private void InitializeCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand<Match>(async (Match item) =>
+            SelectMatchCommand = new DelegateAsyncCommand<Match>(async (item) =>
             {
                 await NavigationService.NavigateAsync(nameof(MatchDetailView));
             });
@@ -131,15 +133,15 @@
 
         private void OnRefreshCalendarListCommand()
         {
-            LoadCalendar(SelectedCalendarDate.Date, moreOldDay: 7);
+            LoadCalendar(SelectedCalendarDate.Date, moreOldDay: MoreOldDayCount);
             IsRefreshingCalendarList = false;
         }
 
         private void OnLoadMoreCalendarCommand()
         {
-            if (NewDateCalendarItemCount <= 30)
+            if (newDateCalendarItemCount <= MaximumCalendarItemCount)
             {
-                LoadCalendar(SelectedCalendarDate.Date, moreNewDay: 3);
+                LoadCalendar(SelectedCalendarDate.Date, moreNewDay: MoreNewDayCount);
             }
         }
 
@@ -173,17 +175,17 @@
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
                       matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
 
-            IsLoadingMatches = (IsLoadingMatches != true) && showLoadingIndicator;
+            IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
         }
 
         private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
-            NewDateCalendarItemCount += moreNewDay;
-            OldDateCalendarItemCount += moreOldDay;
+            newDateCalendarItemCount += moreNewDay;
+            oldDateCalendarItemCount += moreOldDay;
 
-            for (int i = OldDateCalendarItemCount * -1; i <= NewDateCalendarItemCount; i++)
+            for (int i = oldDateCalendarItemCount * -1; i <= newDateCalendarItemCount; i++)
             {
                 var date = DateTime.Today.AddDays(i);
 

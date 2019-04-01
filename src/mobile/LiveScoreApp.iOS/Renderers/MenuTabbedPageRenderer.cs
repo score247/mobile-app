@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MenuTabbedPageRenderer))]
+
 namespace LiveScoreApp.iOS.Renderers
 {
     public class MenuTabbedPageRenderer : TabbedRenderer
@@ -27,8 +28,8 @@ namespace LiveScoreApp.iOS.Renderers
 
                 UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
 
-                UITabBarItem.Appearance.SetTitleTextAttributes
-                (new UITextAttributes
+                UITabBarItem.Appearance.SetTitleTextAttributes(
+                new UITextAttributes
                 {
                     TextColor = selectedTabColor
                 },

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(ViewCell), typeof(ScoreCalendarCellRenderer))]
+
 namespace LiveScoreApp.iOS.Renderers
 {
     public class ScoreCalendarCellRenderer : ViewCellRenderer

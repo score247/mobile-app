@@ -7,8 +7,11 @@
     public class DelegateAsyncCommand : DelegateCommandBase
     {
         private Func<Task> _commandTask { get; }
+
         private Func<bool> _canExecute { get; }
+
         private bool _allowMultipleExecution { get; }
+
         private Action<Exception> _exceptionHandler { get; }
 
         public DelegateAsyncCommand(
@@ -22,11 +25,6 @@
             _allowMultipleExecution = allowMultipleExecution;
             _exceptionHandler = exceptionHandler;
         }
-
-        private bool IsExecuting { get; set; }
-
-        private bool CanExecuteAgain() =>
-            _allowMultipleExecution || !IsExecuting;
 
         public async Task ExecuteAsync() =>
             await _commandTask().ConfigureAwait(false);
@@ -57,5 +55,10 @@
                 RaiseCanExecuteChanged();
             }
         }
+
+        private bool IsExecuting { get; set; }
+
+        private bool CanExecuteAgain() =>
+            _allowMultipleExecution || !IsExecuting;
     }
 }

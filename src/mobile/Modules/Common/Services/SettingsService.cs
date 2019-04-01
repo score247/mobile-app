@@ -46,12 +46,12 @@
 
         public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {
-            {"en-US", "en" }
+            { "en-US", "en" }
         };
 
         public IDictionary<string, string> SportNameMapper => new Dictionary<string, string>
         {
-            {"Soccer", "soccer" }
+            { "Soccer", "soccer" }
         };
 
         public string CurrentSportName

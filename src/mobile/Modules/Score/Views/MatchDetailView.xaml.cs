@@ -1,6 +1,5 @@
 ﻿namespace Score.Views
 {
-    using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -9,14 +8,7 @@
     {
         public MatchDetailView()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            InitializeComponent();
         }
     }
 }

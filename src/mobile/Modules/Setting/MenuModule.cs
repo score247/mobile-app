@@ -1,14 +1,15 @@
 ﻿namespace Menu
 {
-    using Prism.Ioc;
-    using Prism.Modularity;
     using Menu.ViewModels;
     using Menu.Views;
+    using Prism.Ioc;
+    using Prism.Modularity;
 
     public class MenuModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            // OnInitialized
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

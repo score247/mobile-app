@@ -24,6 +24,7 @@
     public class MatchService : IMatchService
     {
         private const int CacheHours = 2;
+        private const int CachedMonths = 1;
         private readonly IMatchApi matchApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
@@ -41,12 +42,13 @@
             var sportName = settingsService.SportNameMapper[currentSportName];
             var language = settingsService.LanguageMapper["en-US"];
             var eventDate = date.ToSportRadarFormat();
+            var cacheExpiration = date < DateTime.Now ? DateTime.Now.AddMonths(CachedMonths) : DateTime.Now.AddHours(CacheHours);
 
             return await cacheService.GetAndFetchLatestValue(
                 $"DailyMatches{eventDate}",
                 () => GetMatchesByGroup(sportName, language, eventDate),
                 forceFetchNewData,
-                DateTime.Now.AddHours(CacheHours));
+                cacheExpiration);
         }
 
         private async Task<IList<Match>> GetMatchesByGroup(string sportName, string language, string eventDate)

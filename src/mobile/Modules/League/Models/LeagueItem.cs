@@ -1,5 +1,4 @@
-﻿using System;
-namespace League.Models
+﻿namespace League.Models
 {
     public class LeagueItem
     {

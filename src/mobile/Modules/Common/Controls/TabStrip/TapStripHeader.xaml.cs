@@ -19,13 +19,11 @@
               typeof(TabStripHeader),
               propertyChanged: OnItemsSourceChanged);
 
-
         public IEnumerable ItemsSource
         {
             get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
-
 
         public static readonly BindableProperty PositionProperty = BindableProperty.Create(
               "Position",
@@ -33,7 +31,6 @@
               typeof(TabStripHeader),
               defaultBindingMode: BindingMode.TwoWay,
               propertyChanging: OnPositionChanging);
-
 
         public int Position
         {

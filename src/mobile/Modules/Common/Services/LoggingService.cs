@@ -9,8 +9,9 @@
 
     public static class LoggingService
     {
-        static Lazy<RavenClient> ravenClientHolder;
-        static RavenClient RavenClient => ravenClientHolder.Value;
+        private static Lazy<RavenClient> ravenClientHolder;
+
+        private static RavenClient RavenClient => ravenClientHolder.Value;
 
         public static void Init(string category, string environment, string dsn)
         {
@@ -24,8 +25,12 @@
             RavenClient.Capture(CreateSentryEvent(exception));
         }
 
-        public static void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null) =>
-            RavenClient.AddTrail(new Breadcrumb(trackIdentifier) { Data = table });
+        public static void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null)
+            => RavenClient.AddTrail(
+                new Breadcrumb(trackIdentifier)
+                {
+                    Data = table
+                });
 
         public static void TrackEvent(string trackIdentifier, string key, string value)
         {

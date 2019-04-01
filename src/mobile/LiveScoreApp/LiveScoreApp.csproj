@@ -50,9 +50,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\components\" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="ViewResources\DarkThemeResource %28copy%29.xaml.cs" />
     <Compile Remove="Views\MasterDetailView.xaml.cs" />
   </ItemGroup>

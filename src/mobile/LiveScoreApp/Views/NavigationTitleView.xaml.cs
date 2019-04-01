@@ -9,7 +9,8 @@
         public NavigationTitleView()
         {
             InitializeComponent();
-            titleLabel.BindingContext = this;
+            var navigationTitleView = this;
+            titleLabel.BindingContext = navigationTitleView;
         }
 
         public static readonly BindableProperty TitleProperty

@@ -14,12 +14,10 @@
             {
                 var field = type.GetField(name);
 
-                if (field != null)
+                if (field != null &&
+                    Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attr)
                 {
-                    if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute attr)
-                    {
-                        return attr.Description;
-                    }
+                    return attr.Description;
                 }
             }
 

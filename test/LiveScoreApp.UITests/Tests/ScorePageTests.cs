@@ -13,20 +13,20 @@
         {
             base.BeforeEachTest();
 
-            scorePage.WaitForPageToLoad();
+            ScorePage.WaitForPageToLoad();
         }
 
         [Test]
         public void ScorePageLaunches()
         {
-            app.Screenshot("ScorePage");
+            App.Screenshot("ScorePage");
         }
 
         [Ignore("render elements tree, only use for building tests")]
         [Test]
         public void Repl()
         {
-            app.Repl();
+            App.Repl();
         }
     }
 }

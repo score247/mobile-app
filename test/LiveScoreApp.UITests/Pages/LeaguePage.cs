@@ -7,10 +7,13 @@
 
     public class LeaguePage : BasePage
     {
-        public readonly AppResult[] tabBars;
-        public readonly AppResult[] sportSelect;
+        private readonly AppResult[] tabBars;
+        private readonly AppResult[] sportSelect;
+        private readonly Query activityIndicator;
 
-        readonly Query leagueList, activityIndicator;
+        public AppResult[] TabBars => tabBars;
+
+        public AppResult[] SportSelect => sportSelect;
 
         public LeaguePage(IApp app, Platform platform) : base(app, platform, "Leagues")
         {
@@ -19,14 +22,14 @@
 
         public void WaitForActivityIndicator()
         {
-            app.WaitForElement(activityIndicator);
-            app.Screenshot("Activity Indicator Appeared");
+            App.WaitForElement(activityIndicator);
+            App.Screenshot("Activity Indicator Appeared");
         }
 
         public void WaitForNoActivityIndicator()
         {
-            app.WaitForNoElement(activityIndicator);
-            app.Screenshot("Activity Indicator Disappeared");
+            App.WaitForNoElement(activityIndicator);
+            App.Screenshot("Activity Indicator Disappeared");
         }
     }
 }

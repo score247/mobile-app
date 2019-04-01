@@ -10,11 +10,10 @@
 
     public class LeagueServiceTests
     {
-        private const string ungroupedCategoryId = "sr:category:393";
-
+        private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi mockLeagueApi;
         private readonly ISettingsService mockSettingsService;
-        private ILeagueService service;
+        private readonly ILeagueService service;
 
         public LeagueServiceTests()
         {
@@ -103,8 +102,8 @@
             {
                 Leagues = new List<Common.Models.MatchInfo.League>
                 {
-                    CreateMockLeagueData(ungroupedCategoryId, "K League 1"),
-                    CreateMockLeagueData(ungroupedCategoryId, "K League 2")
+                    CreateMockLeagueData(UngroupedCategoryId, "K League 1"),
+                    CreateMockLeagueData(UngroupedCategoryId, "K League 2")
                 }
             });
 
@@ -125,8 +124,8 @@
             {
                 Leagues = new List<Common.Models.MatchInfo.League>
                 {
-                    CreateMockLeagueData(ungroupedCategoryId, "K League 1"),
-                    CreateMockLeagueData(ungroupedCategoryId, "K League 2"),
+                    CreateMockLeagueData(UngroupedCategoryId, "K League 1"),
+                    CreateMockLeagueData(UngroupedCategoryId, "K League 2"),
                     CreateMockLeagueData("sr:category:1", "V League 1"),
                     CreateMockLeagueData("sr:category:1", "V League 2")
                 }

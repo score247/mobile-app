@@ -9,7 +9,7 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-
+            // OnInitialized
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

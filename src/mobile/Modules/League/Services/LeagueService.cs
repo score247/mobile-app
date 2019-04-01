@@ -29,7 +29,7 @@
 
     public class LeagueService : ILeagueService
     {
-        private const string ungroupedCategoryId = "sr:category:393";
+        private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi leagueApi;
         private readonly ISettingsService settingsService;
 
@@ -76,7 +76,7 @@
         private static IList<LeagueItem> GetLeagueItems(IList<League> leagues, string group)
         {
             return leagues
-                        .Where(x => x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                        .Where(x => x.Category.Id.Equals(UngroupedCategoryId, StringComparison.OrdinalIgnoreCase))
                         .Select(x => new LeagueItem
                         {
                             Id = x.Id,
@@ -90,7 +90,7 @@
         private static IList<LeagueItem> GroupLeagueByCategory(IList<League> leagues, string group)
         {
             return leagues
-                    .Where(x => !x.Category.Id.Equals(ungroupedCategoryId, StringComparison.OrdinalIgnoreCase))
+                    .Where(x => !x.Category.Id.Equals(UngroupedCategoryId, StringComparison.OrdinalIgnoreCase))
                     .GroupBy(x => x.Category.Id)
                     .Select(g => new LeagueItem
                     {
@@ -102,6 +102,13 @@
                     .ToList();
         }
 
+        private static void HandleException(Exception ex)
+        {
+            LoggingService.LogError(ex);
+
+            Debug.WriteLine(ex.Message);
+        }
+
         private async Task<IList<League>> GetAllLeagues(string group)
         {
             var leagues = new List<League>();
@@ -110,7 +117,7 @@
 
             var groupLeagues = await GetLeaguesByGroup(group, sportNameSetting, languageSetting).ConfigureAwait(false);
 
-            if(groupLeagues.Any())
+            if (groupLeagues.Any())
             {
                 leagues.AddRange(groupLeagues);
             }
@@ -127,7 +134,7 @@
             {
                 var leaguesResult = await leagueApi.GetLeaguesByGroup(sportName, group, language, apiKeyByGroup).ConfigureAwait(false);
 
-                if (leaguesResult!= null && leaguesResult.Leagues.Any())
+                if (leaguesResult != null && leaguesResult.Leagues.Any())
                 {
                     leagues = leaguesResult.Leagues.ToList();
                 }
@@ -157,13 +164,6 @@
             }
 
             return matches;
-        }
-
-        private static void HandleException(Exception ex)
-        {
-            LoggingService.LogError(ex);
-
-            Debug.WriteLine(ex.Message);
         }
     }
 }

@@ -12,7 +12,6 @@
         Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null);
 
         Task SetValue<T>(string name, T value);
-
     }
 
     public class CacheService : ICacheService

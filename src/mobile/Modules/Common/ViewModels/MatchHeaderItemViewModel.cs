@@ -1,5 +1,4 @@
-﻿
-namespace Common.ViewModels
+﻿namespace Common.ViewModels
 {
     using System;
 

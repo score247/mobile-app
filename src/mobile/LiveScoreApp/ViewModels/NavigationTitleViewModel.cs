@@ -12,10 +12,10 @@
 
     public class NavigationTitleViewModel : ViewModelBase
     {
-        private string currentSportName;
-        private IEnumerable<SportItem> sportItems;
         private readonly ISportService sportService;
         private readonly ISettingsService settingsService;
+        private string currentSportName;
+        private IEnumerable<SportItem> sportItems;
 
         public NavigationTitleViewModel(
             INavigationService navigationService,
