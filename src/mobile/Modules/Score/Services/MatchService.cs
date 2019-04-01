@@ -23,6 +23,7 @@
 
     public class MatchService : IMatchService
     {
+        private const int CacheHours = 2;
         private readonly IMatchApi matchApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
@@ -45,7 +46,7 @@
                 $"DailyMatches{eventDate}",
                 () => GetMatchesByGroup(sportName, language, eventDate),
                 forceFetchNewData,
-                DateTime.Now.AddMinutes(5));
+                DateTime.Now.AddHours(CacheHours));
         }
 
         private async Task<IList<Match>> GetMatchesByGroup(string sportName, string language, string eventDate)

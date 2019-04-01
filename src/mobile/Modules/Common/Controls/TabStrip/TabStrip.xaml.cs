@@ -23,7 +23,6 @@
             "ItemsSource",
             typeof(IEnumerable),
             typeof(TabStrip),
-            null,
             propertyChanged: OnItemsSourceChanged);
 
         public IEnumerable ItemsSource

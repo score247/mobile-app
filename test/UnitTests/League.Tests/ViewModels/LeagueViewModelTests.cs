@@ -97,10 +97,7 @@
 
             viewModel.PropertyChanged += (sender, e) =>
             {
-                if(e.PropertyName.Equals("Leagues"))
-                {
-                    invoked = true;
-                }
+                invoked |= e.PropertyName.Equals("Leagues");
             };
 
             // Act
@@ -124,10 +121,7 @@
 
             viewModel.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName.Equals("IsLoading"))
-                {
-                    invoked = true;
-                }
+                invoked |= e.PropertyName.Equals("IsLoading");
             };
 
             // Act

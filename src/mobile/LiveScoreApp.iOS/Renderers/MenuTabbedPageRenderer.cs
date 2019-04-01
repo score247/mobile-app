@@ -28,7 +28,7 @@ namespace LiveScoreApp.iOS.Renderers
                 UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
 
                 UITabBarItem.Appearance.SetTitleTextAttributes
-                (new UITextAttributes()
+                (new UITextAttributes
                 {
                     TextColor = selectedTabColor
                 },

@@ -53,7 +53,7 @@
                 { nameof(sportItems), sportItems }
             };
 
-            await NavigationService.NavigateAsync("NavigationPage/" + nameof(SelectSportView), parameters, useModalNavigation: true);
+            await NavigationService.NavigateAsync("NavigationPage/" + nameof(SelectSportView), parameters, true);
         }
     }
 }

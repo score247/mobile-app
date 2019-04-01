@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using Common.Extensions;
     using Common.Services;
     using Common.ViewModels;
     using LiveScoreApp.Models;
@@ -18,8 +20,8 @@
           : base(navigationService)
         {
             this.settingsService = settingsService;
-            SelectSportItemCommand = new DelegateCommand(OnSelectSportItem);
-            DoneCommand = new DelegateCommand(OnDone);
+            SelectSportItemCommand = new DelegateAsyncCommand(OnSelectSportItem);
+            DoneCommand = new DelegateAsyncCommand(OnDone);
         }
 
         public SportItem SelectedSportItem
@@ -35,9 +37,9 @@
         }
 
 
-        public DelegateCommand SelectSportItemCommand { get; set; }
+        public DelegateAsyncCommand SelectSportItemCommand { get; set; }
 
-        public DelegateCommand DoneCommand { get; set; }
+        public DelegateAsyncCommand DoneCommand { get; set; }
 
 
         public override void OnNavigatingTo(INavigationParameters parameters)
@@ -45,7 +47,7 @@
             SportItems = new ObservableCollection<SportItem>(parameters["sportItems"] as IEnumerable<SportItem>);
         }
 
-        private async void OnSelectSportItem()
+        private async Task OnSelectSportItem()
         {
             var parameters = new NavigationParameters
             {
@@ -61,7 +63,7 @@
             await NavigationService.GoBackAsync(useModalNavigation: true, parameters: parameters);
         }
 
-        private async void OnDone()
+        private async Task OnDone()
         {
             await NavigationService.GoBackAsync(useModalNavigation: true);
         }

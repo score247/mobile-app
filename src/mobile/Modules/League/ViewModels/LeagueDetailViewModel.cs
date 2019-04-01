@@ -1,18 +1,16 @@
-﻿using League.Models;
-using System.Diagnostics;
-using System;
-namespace League.ViewModels
+﻿namespace League.ViewModels
 {
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
+    using Common.Models;
     using Common.ViewModels;
-    using Common.Models.MatchInfo;
+    using League.Models;
     using League.Services;
     using Prism.Commands;
     using Prism.Navigation;
-    using Common.Models;
-    using System.Threading.Tasks;
-    using System.Collections.Generic;
 
     public class LeagueDetailViewModel : ViewModelBase
     {

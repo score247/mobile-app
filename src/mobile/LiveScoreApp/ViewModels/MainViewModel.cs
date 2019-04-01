@@ -1,6 +1,8 @@
 ﻿namespace LiveScoreApp.ViewModels
 {
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
+    using Common.Extensions;
     using Common.ViewModels;
     using LiveScoreApp.Services;
     using LiveScoreApp.ViewResources;
@@ -27,7 +29,7 @@
             set { SetProperty(ref nightMode, value); }
         }
 
-        public DelegateCommand<string> NavigateCommand { get; set; }
+        public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         public DelegateCommand ChangeThemeCommand => new DelegateCommand(OnChangeThemeExecuted);
 
@@ -49,11 +51,11 @@
         public MainViewModel(INavigationService navigationService, IMenuService menuService) : base(navigationService)
         {
             MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
-            NavigateCommand = new DelegateCommand<string>(Navigate);
+            NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             NightMode = true;
         }
 
-        private async void Navigate(string page)
+        private async Task Navigate(string page)
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }

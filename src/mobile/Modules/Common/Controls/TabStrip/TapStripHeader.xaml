@@ -5,7 +5,7 @@
     <ContentView.Resources>
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
-            <Setter Property="HeightRequest" Value="24" />
+            <Setter Property="HeightRequest" Value="30" />
             <Setter Property="Padding" Value="8,0" />
         </Style>
         <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">

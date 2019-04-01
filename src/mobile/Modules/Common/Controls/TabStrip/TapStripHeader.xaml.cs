@@ -17,7 +17,6 @@
               "ItemsSource",
               typeof(IEnumerable),
               typeof(TabStripHeader),
-              null,
               propertyChanged: OnItemsSourceChanged);
 
 
@@ -32,8 +31,7 @@
               "Position",
               typeof(int),
               typeof(TabStripHeader),
-              null,
-              BindingMode.TwoWay,
+              defaultBindingMode: BindingMode.TwoWay,
               propertyChanging: OnPositionChanging);
 
 
@@ -55,7 +53,7 @@
                 {
                     var itemLayout = new StackLayout
                     {
-                        Style = (Style)control.Resources["Tab"],
+                        Style = (Style)control.Resources["Tab"]
                     };
 
                     var tapGestureRecognizer = new TapGestureRecognizer();
@@ -76,7 +74,7 @@
                     {
                         Content = new BoxView
                         {
-                            Style = (Style)control.Resources["TabActiveLine"],
+                            Style = (Style)control.Resources["TabActiveLine"]
                         },
 
                         IsVisible = item.Id == 0

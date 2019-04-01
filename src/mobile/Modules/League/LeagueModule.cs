@@ -15,6 +15,7 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
+            // Initialize module
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

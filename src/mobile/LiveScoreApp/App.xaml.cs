@@ -79,7 +79,6 @@ namespace LiveScoreApp
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<Common.CommonModule>();
             moduleCatalog.AddModule<League.LeagueModule>();
             moduleCatalog.AddModule<Score.ScoreModule>();
             moduleCatalog.AddModule<Favorites.FavoritesModule>();
