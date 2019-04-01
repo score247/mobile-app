@@ -35,13 +35,14 @@
 
         public IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
-            { "eu", "vequ6wxdqyt7eg8qzh26dm5u" },
-            { "as", "2hr7x43y4st2g7a5j3yfa9yt" },
-            { "intl", "33sv7bm2f7uq286wyhe2ejcp" },
-            { "other", "cwp8y9e84bnsnxst7vah7xcn" }
+            { "am", "a4tmwcm5rj73kd6ctgbvazzb" },
+            { "eu", "udt47krvjf2uugrx94mhf5z4" },
+            { "as", "d5vvgr7c3vg77kksd94rp8t2" },
+            { "intl", "9bs6t3aa8xjhtq5ytf2n8q5q" },
+            { "other", "yfvcbfg8eb6r8jv5z9jsh6bb" }
         };
 
-        public string[] LeagueGroups => new [] { "eu", "as", "intl", "other" };
+        public string[] LeagueGroups => new[] { "am", "eu", "as", "intl", "other" };
 
         public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {

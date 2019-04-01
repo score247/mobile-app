@@ -42,7 +42,7 @@
             var eventDate = date.ToSportRadarFormat();
 
             return await cacheService.GetAndFetchLatestValue(
-                $"DailyMatches{date.ToString()}",
+                $"DailyMatches{eventDate}",
                 () => GetMatchesByGroup(sportName, language, eventDate),
                 forceFetchNewData,
                 DateTime.Now.AddMinutes(5));
