@@ -12,29 +12,6 @@
                 <resources:MatchOddsViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        <Style x:Key="MatchOddsDropdownListBox" BasedOn="{StaticResource DropdownListBox}" TargetType="AbsoluteLayout">
-            <Setter Property="WidthRequest" Value="96" />
-        </Style>
-
-        <Style x:Key="TableSubHeaderText" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
-            <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="BookmarkerName" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
-            <Setter Property="Margin" Value="16,0,0,0" />
-        </Style>
-        
-        <Style x:Key="TableBodyOddsText" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-        </Style>
-
-        <Style x:Key="ASCLiveOddText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
-            <Setter Property="TextColor" Value="#FC1923" />
-        </Style>
-        <Style x:Key="DESCLiveOddText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
-            <Setter Property="TextColor" Value="#169C20" />            
-        </Style>
     </ContentView.Resources>
     <StackLayout>
         <FlexLayout Style="{StaticResource TopInfo}">
