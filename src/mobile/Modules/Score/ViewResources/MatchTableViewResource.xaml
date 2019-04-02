@@ -8,6 +8,7 @@
     </Style>
 
     <Style x:Key="NumberCol" BasedOn="{StaticResource TableCol}" TargetType="StackLayout">
+        <Setter Property="FlexLayout.AlignSelf" Value="Center" />
         <Setter Property="FlexLayout.Basis" Value="24" />
     </Style>
 
@@ -36,7 +37,7 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="CommonIcon" TargetType="Button">        
+    <Style x:Key="CommonIcon" TargetType="Button">
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="CornerRadius" Value="1" />
         <Setter Property="HeightRequest" Value="16" />

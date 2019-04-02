@@ -84,7 +84,7 @@
 
                 <FlexLayout Style="{StaticResource TableRow}">
                     <StackLayout Style="{StaticResource NumberCol}">
-                        <Button Text="1" Style="{StaticResource TopFourthTeamOnLeagueIcon}"  />
+                        <Button Text="1" Style="{StaticResource TopFourthTeamOnLeagueIcon}" />
                     </StackLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource VerticalLine}" />

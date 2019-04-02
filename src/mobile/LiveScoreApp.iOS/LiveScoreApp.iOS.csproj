@@ -481,5 +481,17 @@
   <ItemGroup>
     <BundleResource Include="Resources\images\common\H2H_2%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\user1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\user2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\user3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\user4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

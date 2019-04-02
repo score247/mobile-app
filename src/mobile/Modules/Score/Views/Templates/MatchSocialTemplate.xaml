@@ -9,12 +9,343 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
-                <resources:MatchOddsViewResource />
+                <resources:MatchSocialViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
         
     </ContentView.Resources>
-    <StackLayout>
-        <Label Text="Social Page" TextColor="#fff" />
-    </StackLayout>
+    <ScrollView Style="{StaticResource SocialContainer}">
+        <StackLayout>
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Henry" Style="{StaticResource Username}" />
+                                <Span Text=" I hope that Verona can draw a strong enemy to have a strong dialog" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="2:23AM" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user2.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Fairy.tail.fi" Style="{StaticResource Username}" />
+                                <Span Text=" I want to know if this lottery has not been avoided, hahahaha" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="2:28AM" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                    
+                    <!-- SubComment -->
+                    <StackLayout Style="{StaticResource CommentContainer}">
+                        <StackLayout Style="{StaticResource ProfilePicture}">
+                            <Frame CornerRadius="14">
+                                <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Style="{StaticResource MainContent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Godbless" Style="{StaticResource Username}" />
+                                        <Span Text=" Good luck, bro." Style="{StaticResource CommentContent}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource BottomComment}">
+                                <Label Text="2:29AM" Style="{StaticResource CommentDate}" />
+                                <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource CommentContainer}">
+                        <StackLayout Style="{StaticResource ProfilePicture}">
+                            <Frame CornerRadius="14">
+                                <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Style="{StaticResource MainContent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Fairy.tail.fi" Style="{StaticResource Username}" />
+                                        <Span Text=" Thanks, haha" Style="{StaticResource CommentContent}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource BottomComment}">
+                                <Label Text="2:30AM" Style="{StaticResource CommentDate}" />
+                                <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user3.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="bill.gunner" Style="{StaticResource Username}" />
+                                <Span Text=" u can do it... over 5.5 plzzzzz" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="2:33AM" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user4.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Jolene" Style="{StaticResource Username}" />
+                                <Span Text=" Congratulations!!!!! Verona" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="5 min" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="andrew" Style="{StaticResource Username}" />
+                                <Span Text=" Please make it 4-1" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="34s" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user2.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Henry" Style="{StaticResource Username}" />
+                                <Span Text=" I hope that Verona can draw a strong enemy to have a strong dialog" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="10s" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user2.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Fairy.tail.fi" Style="{StaticResource Username}" />
+                                <Span Text=" I want to know if this lottery has not been avoided, hahahaha" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="2:28AM" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+
+                    <!-- SubComment -->
+                    <StackLayout Style="{StaticResource CommentContainer}">
+                        <StackLayout Style="{StaticResource ProfilePicture}">
+                            <Frame CornerRadius="14">
+                                <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Style="{StaticResource MainContent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Godbless" Style="{StaticResource Username}" />
+                                        <Span Text=" Good luck, bro." Style="{StaticResource CommentContent}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource BottomComment}">
+                                <Label Text="2:29AM" Style="{StaticResource CommentDate}" />
+                                <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                    <StackLayout Style="{StaticResource CommentContainer}">
+                        <StackLayout Style="{StaticResource ProfilePicture}">
+                            <Frame CornerRadius="14">
+                                <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                            </Frame>
+                        </StackLayout>
+                        <StackLayout>
+                            <Label Style="{StaticResource MainContent}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Fairy.tail.fi" Style="{StaticResource Username}" />
+                                        <Span Text=" Thanks, haha" Style="{StaticResource CommentContent}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <StackLayout Style="{StaticResource BottomComment}">
+                                <Label Text="2:30AM" Style="{StaticResource CommentDate}" />
+                                <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user3.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="bill.gunner" Style="{StaticResource Username}" />
+                                <Span Text=" u can do it... over 5.5 plzzzzz" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="2:33AM" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user4.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Jolene" Style="{StaticResource Username}" />
+                                <Span Text=" Congratulations!!!!! Verona" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="5 min" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user1.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="andrew" Style="{StaticResource Username}" />
+                                <Span Text=" Please make it 4-1" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="34s" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+
+            <StackLayout Style="{StaticResource CommentContainer}">
+                <StackLayout Style="{StaticResource ProfilePicture}">
+                    <Frame CornerRadius="14">
+                        <Image Source="images/common/user2.png" Aspect="AspectFit" />
+                    </Frame>
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource MainContent}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Henry" Style="{StaticResource Username}" />
+                                <Span Text=" I hope that Verona can draw a strong enemy to have a strong dialog" Style="{StaticResource CommentContent}" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <StackLayout Style="{StaticResource BottomComment}">
+                        <Label Text="10s" Style="{StaticResource CommentDate}" />
+                        <Label Text="Reply" Style="{StaticResource CommentReply}" />
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    
 </ContentView>

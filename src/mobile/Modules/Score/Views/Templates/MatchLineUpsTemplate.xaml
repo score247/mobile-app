@@ -161,7 +161,7 @@
                             <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
                                 </StackLayout>
                                 <Label Text="70'" Style="{StaticResource PlayerName}"/>
                             </StackLayout>
@@ -187,7 +187,7 @@
                             <Label Text="Leonardo Perez" Style="{StaticResource PlayerName}" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
                                 </StackLayout>
                                 <Label Text="70'" Style="{StaticResource PlayerName}"/>
                             </StackLayout>
@@ -213,7 +213,7 @@
                             <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
                                 </StackLayout>
                                 <Label Text="66'" Style="{StaticResource PlayerName}"/>
                             </StackLayout>
