@@ -22,15 +22,15 @@
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
     </ItemGroup>
     <ItemGroup>
-    <Compile Update="ViewResources\MatchSocialViewResource.xaml.cs">
-      <DependentUpon>MatchSocialViewResource.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ViewResources\MatchOddsViewResource.xaml.cs">
-      <DependentUpon>MatchOddsViewResource.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="ViewResources\MatchTableViewResource.xaml.cs">
-      <DependentUpon>MatchTableViewResource.xaml</DependentUpon>
-    </Compile>
+        <Compile Update="ViewResources\MatchSocialViewResource.xaml.cs">
+            <DependentUpon>MatchSocialViewResource.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="ViewResources\MatchOddsViewResource.xaml.cs">
+            <DependentUpon>MatchOddsViewResource.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="ViewResources\MatchTableViewResource.xaml.cs">
+            <DependentUpon>MatchTableViewResource.xaml</DependentUpon>
+        </Compile>
         <Compile Update="ViewResources\MatchH2HViewResource.xaml.cs">
             <DependentUpon>MatchH2HViewResource.xaml</DependentUpon>
         </Compile>
@@ -58,30 +58,30 @@
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\Calendar.xaml.cs">
             <DependentUpon>Calendar.xaml</DependentUpon>
             <SubType>Code</SubType>
-    </Compile>
+        </Compile>
         <Compile Update="Views\Templates\MatchOddsOUTemplate.xaml.cs">
-          <DependentUpon>MatchOddsOUTemplate.xaml</DependentUpon>
+            <DependentUpon>MatchOddsOUTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchOddsHandicapTemplate.xaml.cs">
-          <DependentUpon>MatchOddsHandicapTemplate.xaml</DependentUpon>
+            <DependentUpon>MatchOddsHandicapTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchOddsBookmarkerOUTemplate.xaml.cs">
-          <DependentUpon>MatchOddsBookmarkerOUTemplate.xaml</DependentUpon>
+            <DependentUpon>MatchOddsBookmarkerOUTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchOddsBookmarkerHDPTemplate.xaml.cs">
-          <DependentUpon>MatchOddsBookmarkerHDPTemplate.xaml</DependentUpon>
+            <DependentUpon>MatchOddsBookmarkerHDPTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchOddsBookmarker1x2Template.xaml.cs">
-          <DependentUpon>MatchOddsBookmarker1x2Template.xaml</DependentUpon>
+            <DependentUpon>MatchOddsBookmarker1x2Template.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchSocialTemplate.xaml.cs">
-          <DependentUpon>MatchSocialTemplate.xaml</DependentUpon>
+            <DependentUpon>MatchSocialTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchOdds1x2Template.xaml.cs">
-          <DependentUpon>MatchOdds1x2Template.xaml</DependentUpon>
+            <DependentUpon>MatchOdds1x2Template.xaml</DependentUpon>
         </Compile>
-    <Compile Update="Views\Templates\MatchTableTotalFullListTemplate.xaml.cs">
-      <DependentUpon>MatchTableTotalFullListTemplate.xaml</DependentUpon>
+        <Compile Update="Views\Templates\MatchTableTotalFullListTemplate.xaml.cs">
+            <DependentUpon>MatchTableTotalFullListTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Update="Views\Templates\MatchH2HAwayTeamTemplate.xaml.cs">
             <DependentUpon>MatchH2HAwayTeamTemplate.xaml</DependentUpon>
@@ -107,25 +107,8 @@
             <SubType>Code</SubType>
         </Compile>
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewModels\MatchDetailViewModel.cs">
-          <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
+            <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
         </Compile>
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Update="ViewResources\ScorePageResource.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Views\LivePage.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Views\MatchInfoPage.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Views\MatchTrackerPage.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </EmbeddedResource>
-        <EmbeddedResource Update="Views\TVSchedulePage.xaml">
-            <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-        </EmbeddedResource>
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Models\" />

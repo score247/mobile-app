@@ -1,43 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
-    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.12.0.8217" />
-    <PackageReference Include="MSBuild.SonarQube.Runner.Tool" Version="4.3.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Views\DefaultLanguagePage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\DefaultSportPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\FAQPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\InfoAlertPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\RefreshPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
+        <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.12.0.8217" />
+        <PackageReference Include="MSBuild.SonarQube.Runner.Tool" Version="4.3.1" />
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Common\Common.csproj" />
+    </ItemGroup>
 </Project>
