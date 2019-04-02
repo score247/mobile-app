@@ -46,11 +46,8 @@
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate.xaml.cs">
             <DependentUpon>SoccerMatchListViewTemplate.xaml</DependentUpon>
         </Compile>
-        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\SoccerMatchListViewTemplate %28copy%29.xaml.cs">
+        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchHeaderListViewTemplate.xaml.cs">
             <DependentUpon>MatchHeaderListViewTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\BasketBallMatchListViewTemplate %28copy%29.xaml.cs">
-            <DependentUpon>ESportsMatchListViewTemplate.xaml</DependentUpon>
         </Compile>
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\BasketBallMatchListViewTemplate.xaml.cs">
             <DependentUpon>BasketBallMatchListViewTemplate.xaml</DependentUpon>
