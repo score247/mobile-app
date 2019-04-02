@@ -8,7 +8,13 @@
         {
             var tab = (TabModel)item;
 
-            return new DataTemplate(tab.TemplateType);
+            return new DataTemplate(() =>
+            {
+                return new ContentView
+                {
+                    Content = tab.Template
+                };
+            });
         }
     }
 }

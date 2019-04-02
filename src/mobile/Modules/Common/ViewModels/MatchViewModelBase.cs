@@ -12,7 +12,6 @@ namespace Common.ViewModels
             set { SetProperty(ref matchId, value); }
         }
 
-
         public MatchViewModelBase(INavigationService navigationService) : base(navigationService)
         {
         }
