@@ -108,7 +108,12 @@
         {
             SelectMatchCommand = new DelegateAsyncCommand<Match>(async (item) =>
             {
-                await NavigationService.NavigateAsync(nameof(MatchDetailView));
+                var navigationParams = new NavigationParameters
+                {
+                    { nameof(Match), item }
+                };
+
+                await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
             });
 
             RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);

@@ -2,11 +2,12 @@
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
+    using Common.Models;
     using Common.ViewModels;
     using Prism.Navigation;
     using Score.Views.Templates;
 
-    public class MatchDetailViewModel : ViewModelBase
+    public class MatchDetailViewModel : MatchViewModelBase
     {
         private List<TabModel> matchDetailItems;
 
@@ -36,6 +37,15 @@
                 new TabModel { Id = 7, Name = "Social", TemplateType = typeof(MatchInfoTemplate) },
                 new TabModel { Id = 8, Name = "TV Schedule", TemplateType = typeof(MatchInfoTemplate) },
             };
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters != null)
+            {
+                var match = parameters[nameof(Match)] as Match;
+                MatchId = match.Event.Id;
+            }
         }
     }
 }
