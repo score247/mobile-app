@@ -64,7 +64,7 @@
 
     <!-- SubTab -->
     <Style x:Key="SubTabContainer" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
         <Setter Property="Padding" Value="1" />
         <Setter Property="CornerRadius" Value="2" />
         <Setter Property="Margin" Value="8,0" />
@@ -82,11 +82,11 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style x:Key="SubTab" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource LineColor}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabBgColor}" />
     </Style>
     <Style x:Key="SubTabActive" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+        <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
     </Style>
     
     <!-- Group -->

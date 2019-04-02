@@ -59,6 +59,21 @@
             <DependentUpon>Calendar.xaml</DependentUpon>
             <SubType>Code</SubType>
     </Compile>
+        <Compile Update="Views\Templates\MatchOddsOUTemplate.xaml.cs">
+          <DependentUpon>MatchOddsOUTemplate.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Templates\MatchOddsHandicapTemplate.xaml.cs">
+          <DependentUpon>MatchOddsHandicapTemplate.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Templates\MatchOddsBookmarkerOUTemplate.xaml.cs">
+          <DependentUpon>MatchOddsBookmarkerOUTemplate.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Templates\MatchOddsBookmarkerHDPTemplate.xaml.cs">
+          <DependentUpon>MatchOddsBookmarkerHDPTemplate.xaml</DependentUpon>
+        </Compile>
+        <Compile Update="Views\Templates\MatchOddsBookmarker1x2Template.xaml.cs">
+          <DependentUpon>MatchOddsBookmarker1x2Template.xaml</DependentUpon>
+        </Compile>
         <Compile Update="Views\Templates\MatchSocialTemplate.xaml.cs">
           <DependentUpon>MatchSocialTemplate.xaml</DependentUpon>
         </Compile>

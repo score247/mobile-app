@@ -31,6 +31,9 @@
             <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
             <Color x:Key="SixthTeamOnLeagueColor">#D9B600</Color>
             <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>
+
+            <Color x:Key="ASCLiveOddColor">#FC1923</Color>
+            <Color x:Key="DESCLiveOddColor">#3EC28F</Color>
             
             <Color x:Key="PrimaryTextColor">#fff</Color>
             <Color x:Key="SecondTextColor">#666</Color>
@@ -40,6 +43,15 @@
             <Color x:Key="LineColor">#2E3245</Color>
             <Color x:Key="YellowCardColor">#E5C20B</Color>
             <Color x:Key="RedCardColor">#FC1923</Color>
+
+            <Color x:Key="TabColor">#666</Color>
+            <Color x:Key="ActiveTabColor">#fff</Color>
+            <Color x:Key="ActiveLineColor">#3EC28F</Color>
+
+            <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
+            <Color x:Key="SubTabColor">#2E3245</Color>
+            <Color x:Key="SubTabBgColor">#0F111C</Color>
+            <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
 
             <x:Double x:Key="GeneralFontSize">13</x:Double>
             <x:Double x:Key="SidebarFontSize">14</x:Double>
@@ -288,17 +300,17 @@
             </Style>
             <Style x:Key="TabText" TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
-                <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TabColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="Margin" Value="4,0,4,2" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
             </Style>
             <Style x:Key="TabActiveText" BasedOn="{StaticResource TabText}" TargetType="Label">
                 <Setter Property="Margin" Value="4,0" />
-                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
             </Style>
             <Style x:Key="TabActiveLine" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ActiveLineColor}" />
                 <Setter Property="HeightRequest" Value="2" />
             </Style>
 
@@ -340,11 +352,13 @@
             
             <Style x:Key="TableRow" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
                 <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="AlignItems" Value="Stretch" />
             </Style>
 
             <Style x:Key="TableCol" TargetType="StackLayout">
                 <Setter Property="FlexLayout.Grow" Value="1" />
                 <Setter Property="FlexLayout.Shrink" Value="0" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
             </Style>
             
             <Style x:Key="TableFlexlayoutCol" TargetType="FlexLayout">

@@ -3,14 +3,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="Score.ViewResources.MatchOddsViewResource">
 
-
     <Style x:Key="MatchOddsDropdownListBox" BasedOn="{StaticResource DropdownListBox}" TargetType="AbsoluteLayout">
         <Setter Property="WidthRequest" Value="96" />
     </Style>
 
     <Style x:Key="TableSubHeaderText" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="FontAttributes" Value="Bold" />        
     </Style>
 
     <Style x:Key="BookmarkerName" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
@@ -22,9 +21,35 @@
     </Style>
 
     <Style x:Key="ASCLiveOddText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
-        <Setter Property="TextColor" Value="#FC1923" />
+        <Setter Property="TextColor" Value="{StaticResource ASCLiveOddColor}" />
     </Style>
     <Style x:Key="DESCLiveOddText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
-        <Setter Property="TextColor" Value="#169C20" />
+        <Setter Property="TextColor" Value="{StaticResource DESCLiveOddColor}" />
     </Style>
+
+    <!-- Bookmarker Details -->
+    <Style x:Key="TimeHeaderText" BasedOn="{StaticResource TableHeaderText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="1.5" />
+    </Style>
+    <Style x:Key="TimeText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="1.5" />
+    </Style>
+    <Style x:Key="LiveTimeText" BasedOn="{StaticResource TimeText}" TargetType="Label">
+        <Setter Property="TextColor" Value="#FC1923" />
+    </Style>
+
+    <Style x:Key="ScoreHeaderText" BasedOn="{StaticResource TableHeaderText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="1.5" />
+    </Style>
+    <Style x:Key="ScoreText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="1.5" />
+    </Style>
+
+    <Style x:Key="LastUpdateHeaderText" BasedOn="{StaticResource TableHeaderText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="2" />
+    </Style>
+    <Style x:Key="LastUpdateText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="2" />
+    </Style>
+    
 </ResourceDictionary>
