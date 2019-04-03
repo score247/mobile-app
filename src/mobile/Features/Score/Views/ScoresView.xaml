@@ -10,6 +10,8 @@
              xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
              xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
+             xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
+             xmlns:basketBallTemplates="clr-namespace:BasketBall.Views.Templates;assembly=BasketBall"
              xmlns:templates="clr-namespace:Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -21,8 +23,8 @@
                 <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
             <commonTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
-            <commonTemplates:SoccerMatchListViewTemplate x:Key="soccerListViewTemplate" />
-            <commonTemplates:BasketBallMatchListViewTemplate x:Key="basketBallListViewTemplate" />
+            <soccerTemplates:MatchDataTemplate x:Key="soccerListViewTemplate" />
+            <basketBallTemplates:MatchDataTemplate x:Key="basketBallListViewTemplate" />
             <commonConverters:MatchListViewDataTemplateSelector 
                 x:Key="matchListViewDataTemplateSelector"
                 SoccerTemplate="{StaticResource soccerListViewTemplate}"

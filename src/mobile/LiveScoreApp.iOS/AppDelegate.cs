@@ -10,7 +10,7 @@ namespace LiveScoreApp.iOS
     using UIKit;
 
     [Register("AppDelegate")]
-    public partial class AppDelegate : global::Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
+    public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {

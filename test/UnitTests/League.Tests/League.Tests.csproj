@@ -17,6 +17,7 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\mobile\Modules\League\League.csproj" />
+    <ProjectReference Include="..\..\..\src\mobile\Shared\Common\Common.csproj" />
+    <ProjectReference Include="..\..\..\src\mobile\Features\League\League.csproj" />
   </ItemGroup>
 </Project>

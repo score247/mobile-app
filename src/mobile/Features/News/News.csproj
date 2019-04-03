@@ -5,34 +5,29 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
+    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.12.0.8217" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="ViewResources\FavoritePageResource.xaml.cs">
-      <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
+    <Compile Update="ViewResources\NewsViewResource.xaml.cs">
+      <DependentUpon>NewsViewResource.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\FavoritePage.xaml.cs">
-      <DependentUpon>FavoriteView.xaml</DependentUpon>
+    <Compile Update="Views\NewsPage.xaml.cs">
+      <DependentUpon>NewsView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ViewResources\" />
+    <ProjectReference Include="..\..\Shared\Common\Common.csproj" />
   </ItemGroup>
-
 </Project>

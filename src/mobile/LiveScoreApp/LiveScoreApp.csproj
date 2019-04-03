@@ -25,15 +25,6 @@
         <PackageReference Include="Xamarin.HotReload" Version="1.2.2" />
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\Modules\Common\Common.csproj" />
-        <ProjectReference Include="..\Modules\Favorites\Favorites.csproj" />
-        <ProjectReference Include="..\Modules\League\League.csproj" />
-        <ProjectReference Include="..\Modules\News\News.csproj" />
-        <ProjectReference Include="..\Modules\Score\Score.csproj" />
-        <ProjectReference Include="..\Modules\TVSchedule\TVSchedule.csproj" />
-        <ProjectReference Include="..\Modules\Setting\Menu.csproj" />
-    </ItemGroup>
-    <ItemGroup>
         <EmbeddedResource Remove="Views\MasterDetailView.xaml" />
     </ItemGroup>
     <ItemGroup>
@@ -46,5 +37,15 @@
         <Compile Update="ViewResources\MainViewResource.xaml.cs">
             <DependentUpon>MainViewResource.xaml</DependentUpon>
         </Compile>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Features\Favorites\Favorites.csproj" />
+      <ProjectReference Include="..\Shared\Common\Common.csproj" />
+      <ProjectReference Include="..\Features\League\League.csproj" />
+      <ProjectReference Include="..\..\service\LiveScore\LiveScore.csproj" />
+      <ProjectReference Include="..\Features\Setting\Menu.csproj" />
+      <ProjectReference Include="..\Features\News\News.csproj" />
+      <ProjectReference Include="..\Features\Score\Score.csproj" />
+      <ProjectReference Include="..\Features\TVSchedule\TVSchedule.csproj" />
     </ItemGroup>
 </Project>
