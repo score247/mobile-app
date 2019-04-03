@@ -31,7 +31,7 @@
                 MatchId = match.Event.Id;
             }
 
-            if(MatchDetailItems.Count == 0)
+            if (MatchDetailItems.Count == 0)
             {
                 InitMatchDetailItems(MatchId);
             }
@@ -41,15 +41,15 @@
         {
             MatchDetailItems = new List<TabModel>
             {
-                new TabModel { Id = 0, Name = "Odds", Template = new MatchOdds1x2Template() },
-                new TabModel { Id = 1, Name = "Info", Template = new MatchInfoTemplate() },
-                new TabModel { Id = 2, Name = "Trackers", Template = new MatchTrackerTemplate { BindingContext = new MatchViewModelBase(NavigationService) { MatchId = matchId } } },
-                new TabModel { Id = 3, Name = "Stats", Template = new MatchStatsTemplate() },
-                new TabModel { Id = 4, Name = "LineUps", Template = new MatchLineUpsTemplate() },
-                new TabModel { Id = 5, Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
-                new TabModel { Id = 6, Name = "Table", Template = new MatchTableTotalFullListTemplate() },
-                new TabModel { Id = 7, Name = "Social", Template = new MatchInfoTemplate() },
-                new TabModel { Id = 8, Name = "TV Schedule", Template = new MatchInfoTemplate() }
+                new TabModel { Name = "Odds", Template = new MatchOdds1x2Template() },
+                new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
+                new TabModel { Name = "Trackers", Template = new MatchTrackerTemplate { BindingContext = new MatchViewModelBase(NavigationService) { MatchId = matchId } } },
+                new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
+                new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
+                new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
+                new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
+                new TabModel { Name = "Social", Template = new MatchInfoTemplate() },
+                new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
             };
         }
     }

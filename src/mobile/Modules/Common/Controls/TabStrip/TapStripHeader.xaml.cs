@@ -44,44 +44,55 @@
 
             if (control != null)
             {
-                var tabs = (IEnumerable<TabModel>)newValue;
+                var tabs = (IList<TabModel>)newValue;
 
-                foreach (var item in tabs)
+                for (int index = 0; index < tabs.Count; index++)
                 {
-                    var itemLayout = new StackLayout
-                    {
-                        Style = (Style)control.Resources["Tab"]
-                    };
-
-                    var tapGestureRecognizer = new TapGestureRecognizer();
-                    tapGestureRecognizer.Tapped += (sender, e) =>
-                    {
-                        control.Position = item.Id;
-                    };
-
-                    itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
-
+                    var item = tabs[index];
+                    var itemLayout = CreateItemLayout(control, index);
                     var itemLabel = new Label
                     {
                         Text = item.Name.ToUpperInvariant(),
                         Style = (Style)control.Resources["TabText"]
                     };
-
-                    var activeTabIndicator = new ContentView
-                    {
-                        Content = new BoxView
-                        {
-                            Style = (Style)control.Resources["TabActiveLine"]
-                        },
-
-                        IsVisible = item.Id == 0
-                    };
+                    ContentView activeTabIndicator = CreateActiveTabIndicator(control, index);
 
                     itemLayout.Children.Add(itemLabel);
                     itemLayout.Children.Add(activeTabIndicator);
                     control.scrollLayOut.Children.Add(itemLayout);
                 }
             }
+        }
+
+        private static StackLayout CreateItemLayout(TabStripHeader control, int index)
+        {
+            var itemLayout = new StackLayout
+            {
+                Style = (Style)control.Resources["Tab"]
+            };
+
+            var tapGestureRecognizer = new TapGestureRecognizer();
+            tapGestureRecognizer.Tapped += (sender, e) =>
+            {
+                control.Position = index;
+            };
+
+            itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
+
+            return itemLayout;
+        }
+
+        private static ContentView CreateActiveTabIndicator(TabStripHeader control, int index)
+        {
+            return new ContentView
+            {
+                Content = new BoxView
+                {
+                    Style = (Style)control.Resources["TabActiveLine"]
+                },
+
+                IsVisible = index == 0
+            };
         }
 
         private static void OnPositionChanging(BindableObject bindable, object oldValue, object newValue)
