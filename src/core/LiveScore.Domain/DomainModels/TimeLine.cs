@@ -1,10 +1,35 @@
-﻿namespace LiveScore.Models
+﻿namespace LiveScore.DomainModels
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json;
 
-    public class TimeLine
+    public interface ITimeLine
+    {
+        long Id { get; }
+
+        string Type { get; }
+
+        DateTime Time { get; }
+
+        int MatchTime { get; }
+
+        string MatchClock { get; }
+
+        string Team { get; }
+
+        int Period { get; }
+
+        string PeriodType { get; }
+
+        int HomeScore { get; }
+
+        int AwayScore { get; }
+
+        Player GoalScorer { get; }
+        IEnumerable<Commentary> Commentaries { get; }
+    }
+
+    public class TimeLine : ITimeLine
     {
         public long Id { get; set; }
 
@@ -12,26 +37,20 @@
 
         public DateTime Time { get; set; }
 
-        [JsonProperty("match_time")]
         public int MatchTime { get; set; }
 
-        [JsonProperty("match_time")]
         public string MatchClock { get; set; }
 
         public string Team { get; set; }
 
         public int Period { get; set; }
 
-        [JsonProperty("period_type")]
         public string PeriodType { get; set; }
 
-        [JsonProperty("home_score")]
         public int HomeScore { get; set; }
 
-        [JsonProperty("away_score")]
         public int AwayScore { get; set; }
 
-        [JsonProperty("goal_scorer")]
         public Player GoalScorer { get; set; }
 
         public IEnumerable<Commentary> Commentaries { get; set; }

@@ -42,7 +42,6 @@
       <ProjectReference Include="..\Features\Favorites\Favorites.csproj" />
       <ProjectReference Include="..\Shared\Common\Common.csproj" />
       <ProjectReference Include="..\Features\League\League.csproj" />
-      <ProjectReference Include="..\..\service\LiveScore\LiveScore.csproj" />
       <ProjectReference Include="..\Features\Setting\Menu.csproj" />
       <ProjectReference Include="..\Features\News\News.csproj" />
       <ProjectReference Include="..\Features\Score\Score.csproj" />

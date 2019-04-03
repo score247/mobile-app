@@ -1,19 +1,16 @@
-﻿namespace LiveScore.ViewModels
+﻿namespace LiveScore.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LiveScore.Models;
-    using Newtonsoft.Json;
+    using LiveScore.DomainModels;
 
-    public class DailyScheduleViewModel
+    public class DailyScheduleModel
     {
         private IEnumerable<DailyScheduleItem> dailyScheduleItems;
 
-        [JsonProperty(PropertyName = "results")]
-        public IEnumerable<Match> Matches { get; set; }
+        public IEnumerable<IMatch> Matches { get; set; }
 
-        [JsonProperty(PropertyName = "generated_at")]
         public DateTime GeneratedTime { get; set; }
 
         public IEnumerable<DailyScheduleItem> DailyScheduleItems
@@ -49,8 +46,8 @@
 
     public class DailyScheduleItem
     {
-        public League League { get; set; }
+        public ILeague League { get; set; }
 
-        public IList<Match> Matches { get; set; }
+        public IList<IMatch> Matches { get; set; }
     }
 }
