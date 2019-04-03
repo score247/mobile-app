@@ -64,7 +64,7 @@
             <Frame Grid.Column="0" Grid.Row="4" Style="{StaticResource CommentariesYellowCard}">
                 <Label Text="63'" Style="{StaticResource Minutes}" />
             </Frame>
-            <Label Grid.Column="1" Grid.Row="4" Text="{Binding MatchId}" Style="{StaticResource CommentariesContentYellowCard}" />
+            <Label Grid.Column="1" Grid.Row="4" Text="YELLOW CARD!" Style="{StaticResource CommentariesContentYellowCard}" />
                 
         </Grid>
             
