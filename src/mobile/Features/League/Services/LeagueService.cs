@@ -5,9 +5,10 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Models;
-    using Common.Models.MatchInfo;
     using Common.Services;
+    using Core.Models;
+    using Core.Models.MatchInfo;
+    using Core.Services;
     using League.Models;
     using Refit;
 

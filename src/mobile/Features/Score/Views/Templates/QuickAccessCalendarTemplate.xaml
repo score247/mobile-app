@@ -5,13 +5,13 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:converter="clr-namespace:Score.Converters"
              xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
-             xmlns:resources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
              x:Class="Score.Views.Templates.QuickAccessCalendarTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                <resources:CalendarQuickAccessViewResource />
+                <coreResources:CalendarQuickAccessViewResource />
             </ResourceDictionary.MergedDictionaries>
             <converter:CalendarItemTextColorConverter x:Key="calendarTextColorConverter" />
             <converter:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />

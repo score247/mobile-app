@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Common.Models;
     using Common.ViewModels;
+    using Core.Models;
     using Prism.Commands;
     using Prism.Navigation;
 

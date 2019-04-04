@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                x:Class="Core.Views.Templates.MatchHeaderListViewTemplate"
+                xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
+                xmlns:resources="clr-namespace:Core.ViewResources" >
+    <ViewCell Height="28">
+        <StackLayout>
+             <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                    <commonConverters:UpperCaseConverter x:Key="upperCaseConverter" />
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
+                <StackLayout Style="{StaticResource LeagueFlagContainer}">
+                    <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                </StackLayout>                
+                <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
+                <Label Text="{Binding Key.ShortEventDate}"
+                       Style="{StaticResource MatchDate}" />
+                <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
+            </StackLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

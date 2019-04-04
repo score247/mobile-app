@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:commonresources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              xmlns:resources="clr-namespace:TVSchedule.ViewResources"
              xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
@@ -14,7 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <commonresources:CalendarQuickAccessViewResource />
+                <coreResources:CalendarQuickAccessViewResource />
                 <resources:TVScheduleViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.Services;
     using Common.ViewModels;
+    using Core.Services;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
     using LiveScoreApp.Views;

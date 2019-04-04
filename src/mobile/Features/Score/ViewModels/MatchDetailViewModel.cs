@@ -2,8 +2,8 @@
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
-    using Common.Models;
-    using Common.ViewModels;
+    using Core.Models;
+    using Core.ViewModels;
     using Prism.Navigation;
     using Score.Views.Templates;
 
@@ -42,14 +42,14 @@
             MatchDetailItems = new List<TabModel>
             {
                 new TabModel { Name = "Odds", Template = new MatchTableTotalFullListTemplate() },
-                new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
-                new TabModel { Name = "Trackers", Template = new MatchTrackerTemplate { BindingContext = new MatchViewModelBase(NavigationService) { MatchId = matchId } } },
-                new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
-                new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
-                new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
-                new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
-                new TabModel { Name = "Social", Template = new MatchSocialTemplate() },
-                new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
+                //new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
+                //new TabModel { Name = "Trackers", Template = new MatchTrackerTemplate { BindingContext = new MatchViewModelBase(NavigationService) { MatchId = matchId } } },
+                //new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
+                //new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
+                //new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
+                //new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
+                //new TabModel { Name = "Social", Template = new MatchSocialTemplate() },
+                //new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
             };
         }
     }

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="Core.ViewResources.CalendarQuickAccessViewResource">
+    <Style x:Key="QuickAccessContainer" TargetType="FlexLayout">
+        <Setter Property="Direction" Value="Row" />
+        <Setter Property="AlignItems" Value="Stretch" />
+        <Setter Property="JustifyContent" Value="SpaceBetween" />
+        <Setter Property="HeightRequest" Value="32" />
+        <Setter Property="Margin" Value="10,8,10,10" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarListView" TargetType="ListView">
+        <Setter Property="FlexLayout.AlignSelf" Value="Center" />
+        <Setter Property="Rotation" Value="270" />
+        <Setter Property="RowHeight" Value="40" />
+        <Setter Property="HeightRequest" Value="280" />
+        <Setter Property="WidthRequest" Value="32" />
+        <Setter Property="Margin" Value="0,0,8,0" />
+        <Setter Property="SeparatorVisibility" Value="None" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarDate" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />        
+        <Setter Property="FontSize" Value="{StaticResource QuickAccessCalendarDateFontSize}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarDay" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />        
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource QuickAccessCalendarDayFontSize}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarTodayDate" BasedOn="{StaticResource QuickAccessCalendarDate}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarTodayDay" BasedOn="{StaticResource QuickAccessCalendarDay}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarActiveDate" BasedOn="{StaticResource QuickAccessCalendarDate}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarActiveDay" BasedOn="{StaticResource QuickAccessCalendarDay}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+
+    <Style x:Key="QuickAccessCalendarBox" TargetType="Frame">
+        <Setter Property="CornerRadius" Value="5" />        
+        <Setter Property="WidthRequest" Value="32" />
+        <Setter Property="HeightRequest" Value="32" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+</ResourceDictionary>

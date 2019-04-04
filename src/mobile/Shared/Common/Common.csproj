@@ -37,15 +37,6 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>AppResources.resx</DependentUpon>
         </Compile>
-        <Compile Update="ViewResources\CalendarQuickAccessViewResource.xaml.cs">
-            <DependentUpon>CalendarQuickAccessViewResource.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="ViewResources\MatchViewResource.xaml.cs">
-            <DependentUpon>MatchViewResource.xaml</DependentUpon>
-        </Compile>
-        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchHeaderListViewTemplate.xaml.cs">
-            <DependentUpon>MatchHeaderListViewTemplate.xaml</DependentUpon>
-        </Compile>
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="LangResources\AppResources.resx">
@@ -55,14 +46,12 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Controls\" />
-        <Folder Include="Contants\" />
-        <Folder Include="Views\" />
         <Folder Include="Converters\" />
-        <Folder Include="Views\Templates\" />
         <Folder Include="Helpers\Logging\" />
         <Folder Include="Services\">
         </Folder>
         <Folder Include="Controls\TabStrip\">
         </Folder>
+        <Folder Include="ViewModels\" />
     </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿namespace League.Models
 {
     using System.Collections.Generic;
-    using Common.Models.MatchInfo;
+    using Core.Models.MatchInfo;
     using Newtonsoft.Json;
 
     public class LeagueInfo

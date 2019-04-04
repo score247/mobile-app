@@ -4,8 +4,8 @@
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.Services;
     using Common.ViewModels;
+    using Core.Services;
     using LiveScoreApp.Models;
     using Prism.Navigation;
 

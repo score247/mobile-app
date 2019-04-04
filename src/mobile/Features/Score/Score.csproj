@@ -114,7 +114,8 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Common\Common.csproj" />
-      <ProjectReference Include="..\..\Shared\BasketBall\BasketBall.csproj" />
-      <ProjectReference Include="..\..\Shared\Soccer\Soccer.csproj" />
+      <ProjectReference Include="..\..\Core\Soccer\Soccer\Soccer.csproj" />
+      <ProjectReference Include="..\..\Core\BasketBall\BasketBall\BasketBall.csproj" />
+      <ProjectReference Include="..\..\Core\Core\Core.csproj" />
     </ItemGroup>
 </Project>

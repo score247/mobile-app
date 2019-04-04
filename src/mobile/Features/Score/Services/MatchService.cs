@@ -6,8 +6,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.Models;
     using Common.Services;
+    using Core.Models;
+    using Core.Services;
     using Refit;
 
     public interface IMatchApi

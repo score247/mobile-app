@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
              x:Class="Score.Views.Templates.MatchH2HHeadToHeadTemplate"
-             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
              xmlns:resources="clr-namespace:Score.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>
@@ -11,7 +10,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
                 <resources:MatchH2HViewResource />
-                <commonResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>        
     </ContentView.Resources>

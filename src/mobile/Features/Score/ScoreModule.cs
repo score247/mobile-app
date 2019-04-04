@@ -3,7 +3,7 @@
     using System;
     using System.Net.Http;
     using Common.Helpers.Logging;
-    using Common.Services;
+    using Core.Services;
     using Prism.Ioc;
     using Prism.Modularity;
     using Refit;

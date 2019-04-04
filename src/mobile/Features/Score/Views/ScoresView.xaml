@@ -8,10 +8,14 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
-             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
-             xmlns:commonTemplates="clr-namespace:Common.Views.Templates;assembly=Common"
+             
+             xmlns:coreConverters="clr-namespace:Core.Converters;assembly=Core"
+             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
+             xmlns:coreTemplates="clr-namespace:Core.Views.Templates;assembly=Core"
+             
              xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
              xmlns:basketBallTemplates="clr-namespace:BasketBall.Views.Templates;assembly=BasketBall"
+             
              xmlns:templates="clr-namespace:Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -20,12 +24,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>
-                <commonResources:MatchViewResource />
+                <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <commonTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
+            <coreTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
             <soccerTemplates:MatchDataTemplate x:Key="soccerListViewTemplate" />
             <basketBallTemplates:MatchDataTemplate x:Key="basketBallListViewTemplate" />
-            <commonConverters:MatchListViewDataTemplateSelector 
+            <coreConverters:MatchListViewDataTemplateSelector 
                 x:Key="matchListViewDataTemplateSelector"
                 SoccerTemplate="{StaticResource soccerListViewTemplate}"
                 BasketBallTemplate="{StaticResource basketBallListViewTemplate}" />

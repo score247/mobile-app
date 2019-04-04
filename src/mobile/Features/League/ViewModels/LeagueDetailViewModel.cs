@@ -4,8 +4,9 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.Models;
     using Common.ViewModels;
+    using Core.Models;
+    using Core.ViewModels;
     using League.Models;
     using League.Services;
     using Prism.Commands;

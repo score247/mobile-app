@@ -6,9 +6,6 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:Score.ViewResources"
-             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
-             xmlns:templates="clr-namespace:Score.Views.Templates"
-             xmlns:converters="clr-namespace:Score.Converters"
              xmlns:controls="clr-namespace:Score.Controls"
              xmlns:tabstrip="clr-namespace:Common.Controls.TabStrip;assembly=Common"
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
@@ -23,7 +20,6 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
-                <commonResources:CalendarQuickAccessViewResource />
             </ResourceDictionary.MergedDictionaries>
             <tabstrip:TabViewSelector x:Key="tabViewSelector"></tabstrip:TabViewSelector>
         </ResourceDictionary>

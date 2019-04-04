@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                x:Class="BasketBall.Views.Templates.MatchDataTemplate"
+                xmlns:coreConverters="clr-namespace:Core.Converters;assembly=Core;"
+                xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core;" >
+     <ViewCell>
+            <StackLayout>
+                <StackLayout.Resources>
+                    <ResourceDictionary>
+                        <coreConverters:MatchStatusConverter x:Key="matchStatusConverter" />
+                        <ResourceDictionary.MergedDictionaries>
+                            <coreResources:MatchViewResource />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </StackLayout.Resources>
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}"
+                           Style="{StaticResource MatchStatus}"/>
+                    <StackLayout FlexLayout.Grow="1">
+                        <Label Text="{Binding Event.Teams[0].Name}"
+                               Style="{StaticResource HomeTeam}" />
+                        <Label Text="{Binding Event.Teams[1].Name}"
+                               Style="{StaticResource AwayTeam}" />
+                    </StackLayout>
+                    <StackLayout WidthRequest="32">
+                        <Label  Text="{Binding Status.HomeScore}" 
+                                Style="{StaticResource Score}"
+                                Margin="0,4,20,0"/>
+                        <Label Text="{Binding Status.AwayScore}"
+                               Style="{StaticResource Score}"
+                               Margin="0,0,20,4" />
+                    </StackLayout>
+                    <Label Style="{StaticResource FavoriteIcon}"
+                           WidthRequest="25"/>
+                </FlexLayout>
+            </StackLayout>
+    </ViewCell>
+</DataTemplate>

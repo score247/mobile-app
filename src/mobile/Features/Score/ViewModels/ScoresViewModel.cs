@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.Models;
     using Common.ViewModels;
+    using Core.Models;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;

@@ -2,6 +2,7 @@
 using System.Reflection;
 using Common.LangResources;
 using Common.Services;
+using Core.Services;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
