@@ -7,10 +7,6 @@
     {
         DateTime EventDate { get; }
 
-        ILeague League { get; }
-
-        ILeagueRound LeagueRound { get; }
-
         IList<ITeam> Teams { get; }
 
         IMatchResult MatchResult { get; }
@@ -23,10 +19,6 @@
     public class Match : Entity<string, string>, IMatch
     {
         public DateTime EventDate { get; set; }
-
-        public ILeague League { get; set; }
-
-        public ILeagueRound LeagueRound { get; set; }
 
         public IList<ITeam> Teams { get; set; }
 
