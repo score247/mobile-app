@@ -3,11 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
              x:Class="Score.Views.Templates.MatchH2HHeadToHeadTemplate"
+             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              xmlns:resources="clr-namespace:Score.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <coreResources:MatchViewResource />
                 <resources:MatchDetailViewResource />
                 <resources:MatchH2HViewResource />
             </ResourceDictionary.MergedDictionaries>
@@ -43,17 +45,15 @@
         </FlexLayout>
         <ScrollView>
             <StackLayout>
-                <StackLayout>
-                  <FlexLayout Style="{StaticResource LeagueBox}">
-                        <StackLayout Style="{StaticResource LeagueFlagContainer}">
-                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                        </StackLayout>
-                        <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
-                        <Label Text="29 Jan, 2019"
-                       Style="{StaticResource MatchDate}" />
-                        <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
-                    </FlexLayout>
-                </StackLayout>
+                <FlexLayout Style="{StaticResource LeagueBox}">
+                    <StackLayout Style="{StaticResource LeagueFlagContainer}">
+                        <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                    </StackLayout>
+                    <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
+                    <Label Text="29 Jan, 2019"
+                   Style="{StaticResource MatchDate}" />
+                    <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
+                </FlexLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"
                            Style="{StaticResource MatchStatus}"/>
@@ -74,8 +74,6 @@
                     <Label Style="{StaticResource FavoriteIcon}"
                     WidthRequest="25"/>
                 </FlexLayout>
-
-                <StackLayout>
                   <FlexLayout Style="{StaticResource LeagueBox}">
                         <StackLayout Style="{StaticResource LeagueFlagContainer}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
@@ -85,7 +83,6 @@
                        Style="{StaticResource MatchDate}" />
                         <Label Style="{StaticResource LeagueDetail}" />
                     </FlexLayout>
-                </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"
                            Style="{StaticResource MatchStatus}"/>

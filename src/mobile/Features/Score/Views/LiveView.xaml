@@ -9,7 +9,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/search.png" Priority="1" />
     </ContentPage.ToolbarItems>
-
     <ContentPage.Resources>
       <ResourceDictionary>
         <ResourceDictionary.MergedDictionaries>
@@ -32,12 +31,12 @@
         <ListView.GroupHeaderTemplate>
             <DataTemplate>
                 <ViewCell Height="28">
-                    <StackLayout  Style="{StaticResource LeagueBox}">
+                    <FlexLayout Style="{StaticResource LeagueBox}">
                         <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
                         <Label Text="24 Jan" Style="{StaticResource MatchDate}" />
                         <Label Style="{StaticResource LeagueDetail}" />
-                    </StackLayout>
+                    </FlexLayout>
                 </ViewCell>
             </DataTemplate>
         </ListView.GroupHeaderTemplate>
