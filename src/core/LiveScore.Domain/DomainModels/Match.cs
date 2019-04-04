@@ -15,8 +15,6 @@
 
         IVenue Venue { get; }
 
-        string ShortEventDate { get; }
-
         IMatchResult MatchResult { get; }
 
         ITimeLine TimeLine { get; }
@@ -35,8 +33,6 @@
         public IList<ITeam> Teams { get; set; }
 
         public IVenue Venue { get; set; }
-
-        public string ShortEventDate { get; set; }
 
         public IMatchResult MatchResult { get; set; }
 
