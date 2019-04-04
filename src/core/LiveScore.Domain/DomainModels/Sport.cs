@@ -1,16 +1,10 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface ISport
+    public interface ISport : IEntity<string, string>
     {
-        string Id { get; }
-
-        string Name { get; }
     }
 
-    public class Sport : ISport
+    public class Sport : Entity<string, string>, ISport
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
     }
 }

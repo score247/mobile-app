@@ -8,8 +8,4 @@
     <ProjectReference Include="..\..\core\LiveScore.Domain\LiveScore.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Shared\Models\Dtos\" />
-  </ItemGroup>
-
 </Project>

@@ -1,16 +1,10 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface IPlayer
+    public interface IPlayer : IEntity<int, string>
     {
-        int Id { get; }
-
-        string Name { get; }
     }
 
-    public class Player : IPlayer
+    public class Player : Entity<int, string>, IPlayer
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
     }
 }

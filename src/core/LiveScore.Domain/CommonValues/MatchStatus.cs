@@ -70,6 +70,5 @@
 
         //ap – The match has ended after penalties
         public const string EndedAfterPenalties = "ap";
-
     }
 }

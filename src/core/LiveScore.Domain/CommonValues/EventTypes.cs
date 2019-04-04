@@ -21,18 +21,22 @@
         //possible_video_assistant_referee
         //red_card
         public const string RedCard = "red_card";
+
         //score_change
         public const string ScoreChange = "score_change";
+
         //shot_off_target
         //shot_on_target
         //shot_saved
         //substitution
         public const string Substitution = "substitution";
+
         //throw_in
         //video_assistant_referee
         //video_assistant_referee_over
         //yellow_card
         public const string YellowCard = "red_card";
+
         //yellow_red_card
         public const string YellowRedCard = "red_card";
     }

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface IEventCondition
+    public interface IMatchCondition
     {
         int Attendance { get; }
 
@@ -9,7 +9,7 @@
         IReferee Referee { get; }
     }
 
-    public class EventCondition : IEventCondition
+    public class MatchCondition : IMatchCondition
     {
         public int Attendance { get; set; }
 

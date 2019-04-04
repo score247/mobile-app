@@ -3,10 +3,8 @@
     using System;
     using System.Collections.Generic;
 
-    public interface ITimeLine
+    public interface ITimeLine : IEntity<long, string>
     {
-        long Id { get; }
-
         string Type { get; }
 
         DateTime Time { get; }
@@ -30,10 +28,8 @@
         IEnumerable<Commentary> Commentaries { get; }
     }
 
-    public class TimeLine : ITimeLine
+    public class TimeLine : Entity<long, string>, ITimeLine
     {
-        public long Id { get; set; }
-
         public string Type { get; set; }
 
         public DateTime Time { get; set; }

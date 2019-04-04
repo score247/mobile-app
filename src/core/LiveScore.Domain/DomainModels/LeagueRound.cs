@@ -1,5 +1,7 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
+    using System.Collections.Generic;
+
     public interface ILeagueRound
     {
         string Type { get; }
@@ -11,6 +13,8 @@
         int CupRoundMatches { get; }
 
         int CupRoundMatchNumber { get; }
+
+        IEnumerable<Match> Matches { get; }
     }
 
     public class LeagueRound : ILeagueRound
@@ -24,5 +28,7 @@
         public int CupRoundMatches { get; set; }
 
         public int CupRoundMatchNumber { get; set; }
+
+        public IEnumerable<Match> Matches { get; set; }
     }
 }

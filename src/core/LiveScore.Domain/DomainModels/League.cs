@@ -1,23 +1,19 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    using LiveScore.Domain.DomainModels;
+    using System.Collections.Generic;
 
-    public interface ILeague
+    public interface ILeague : IEntity<string, string>
     {
-        string Id { get; }
-
-        string Name { get; }
-
         ICategory Category { get; }
+
+        IEnumerable<ILeagueRound> Rounds { get; }
     }
 
-    public class League : ILeague
+    public class League : Entity<string, string>, ILeague
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
-
         public ICategory Category { get; set; }
+
+        public IEnumerable<ILeagueRound> Rounds { get; set; }
 
         public bool Equals(League leagueA, League leagueB)
             => leagueA.Id == leagueB.Id;
