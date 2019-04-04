@@ -5,15 +5,15 @@
     using System.Linq;
     using LiveScore.Domain.DomainModels;
 
-    public class DailyScheduleModel
+    public class ScoresModel
     {
-        private IEnumerable<DailyScheduleItem> dailyScheduleItems;
+        private IEnumerable<MatchGroup> dailyScheduleItems;
 
         public IEnumerable<IMatch> Matches { get; set; }
 
         public DateTime GeneratedTime { get; set; }
 
-        public IEnumerable<DailyScheduleItem> DailyScheduleItems
+        public IEnumerable<MatchGroup> DailyScheduleItems
         {
             get
             {
@@ -26,17 +26,17 @@
             }
         }
 
-        private IEnumerable<DailyScheduleItem> BuildDailyScheduleItems()
+        private IEnumerable<MatchGroup> BuildDailyScheduleItems()
         {
             if(Matches == null || !Matches.Any())
             {
-                return Enumerable.Empty<DailyScheduleItem>();
+                return Enumerable.Empty<MatchGroup>();
             }
 
             return Matches
                 .GroupBy(match => match.Event?.League)
                 .Select(group => 
-                    new DailyScheduleItem
+                    new MatchGroup
                     {
                         League = group.Key,
                         Matches = group.ToList()
@@ -44,7 +44,7 @@
         }
     }
 
-    public class DailyScheduleItem
+    public class MatchGroup
     {
         public ILeague League { get; set; }
 

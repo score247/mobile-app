@@ -1,20 +1,22 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
+    using System.Collections.Generic;
+
     public interface IMatchResult
     {
         string Status { get; }
 
-        int HomeScore { get; }
+        IEnumerable<int> HomeScores { get; }
 
-        int AwayScore { get; }
+        IEnumerable<int> AwayScores { get; }
     }
 
     public class MatchResult : IMatchResult
     {
         public string Status { get; set; }
 
-        public int HomeScore { get; set; }
+        public IEnumerable<int> HomeScores { get; set; }
 
-        public int AwayScore { get; set; }
+        public IEnumerable<int> AwayScores { get; set; }
     }
 }
