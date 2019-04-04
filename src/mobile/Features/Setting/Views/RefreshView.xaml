@@ -9,11 +9,17 @@
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <Style x:Key="RefreshTime" TargetType="Label">
+            <Setter Property="TextColor" Value="{StaticResource ThirdTextColor}" />
+            <Setter Property="VerticalOptions" Value="Center" />
+        </Style>
+    </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout>
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label Text="Automatic Refresh" Style="{StaticResource NavName}" />
+                <Label x:Name="AutomaticRefresh" Text="Automatic Refresh" Style="{StaticResource NavName}" />
                 <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
@@ -21,9 +27,9 @@
             </ContentView>
             
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label Text="Refresh Interval" Style="{StaticResource NavName}" />
-                <StackLayout Orientation="Horizontal">
-                    <Label Text="30 seconds" TextColor="#676C8B" VerticalOptions="Center" />
+                <Label x:Name="RefreshInterval" Text="Refresh Interval" Style="{StaticResource NavName}" />
+                <StackLayout Style="{StaticResource StacklayoutHorizontal}">
+                    <Label Text="30 seconds" Style="{StaticResource RefreshTime}" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </StackLayout>
             </FlexLayout>
