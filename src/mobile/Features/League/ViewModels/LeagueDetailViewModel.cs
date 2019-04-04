@@ -5,9 +5,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.ViewModels;
-    using Core.Models;
+    using Core.Models.LeagueInfo;
+    using Core.Models.MatchInfo;
     using Core.ViewModels;
-    using League.Models;
     using League.Services;
     using Prism.Commands;
     using Prism.Navigation;

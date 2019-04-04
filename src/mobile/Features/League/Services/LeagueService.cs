@@ -7,9 +7,9 @@
     using System.Threading.Tasks;
     using Common.Services;
     using Core.Models;
+    using Core.Models.LeagueInfo;
     using Core.Models.MatchInfo;
     using Core.Services;
-    using League.Models;
     using Refit;
 
     public interface ILeagueApi

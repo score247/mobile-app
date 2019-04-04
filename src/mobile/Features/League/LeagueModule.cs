@@ -28,7 +28,7 @@
                     BaseAddress = new Uri(settingService.ApiEndPoint)
                 }));
 
-            containerRegistry.Register<ILeagueService, LeagueService>();
+            containerRegistry.Register<League.Services.ILeagueService, League.Services.LeagueService>();
             containerRegistry.RegisterForNavigation<LeagueView, LeagueViewModel>();
             containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>();
         }

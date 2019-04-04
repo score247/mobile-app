@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
+    using Core.Models.MatchInfo;
 
-    public class DailySchedule
+    public class MatchSchedule
     {
         [JsonProperty(PropertyName = "results")]
         public IList<Match> Matches { get; set; }

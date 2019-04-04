@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
-    using Core.Models;
+    using Core.Models.MatchInfo;
     using Core.ViewModels;
     using Prism.Navigation;
     using Score.Views.Templates;

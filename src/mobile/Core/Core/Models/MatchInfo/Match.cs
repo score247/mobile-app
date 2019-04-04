@@ -1,6 +1,5 @@
-﻿namespace Core.Models
+﻿namespace Core.Models.MatchInfo
 {
-    using Core.Models.MatchInfo;
     using Newtonsoft.Json;
 
     public class Match

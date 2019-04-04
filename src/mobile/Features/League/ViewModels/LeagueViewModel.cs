@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Common.ViewModels;
-    using League.Models;
+    using Core.Models.LeagueInfo;
     using League.Services;
     using League.Views;
     using Prism.Commands;

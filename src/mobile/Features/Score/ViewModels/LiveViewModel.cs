@@ -4,7 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using Common.ViewModels;
-    using Core.Models;
+    using Core.Models.MatchInfo;
     using Prism.Commands;
     using Prism.Navigation;
 

@@ -1,4 +1,4 @@
-﻿namespace Score.Services
+﻿namespace Soccer.Services
 {
     using System;
     using System.Collections.Generic;
@@ -15,12 +15,7 @@
     public interface IMatchApi
     {
         [Get("/{sport}-t3/{group}/{lang}/schedules/{date}/results.json?api_key={key}")]
-        Task<MatchSchedule> GetDailySchedules(string sport, string group, string lang, string date, string key);
-    }
-
-    public interface IMatchService
-    {
-        Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false);
+        Task<MatchSchedule> GetDailyMatches(string sport, string group, string lang, string date, string key);
     }
 
     public class MatchService : IMatchService
@@ -73,7 +68,7 @@
 
             try
             {
-                var dailySchedule = await matchApi.GetDailySchedules(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
+                var dailySchedule = await matchApi.GetDailyMatches(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
                 dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
                 return dailySchedule.Matches;
@@ -81,10 +76,15 @@
             catch (Exception ex)
             {
                 LoggingService.LogError(ex);
-
                 Debug.WriteLine(ex.Message);
+
                 return Enumerable.Empty<Match>();
             }
+        }
+
+        public Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
+        {
+            throw new NotImplementedException();
         }
     }
 }

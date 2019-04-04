@@ -1,4 +1,4 @@
-﻿namespace Core.Models.MatchInfo
+﻿namespace Core.Models.LeagueInfo
 {
     using Newtonsoft.Json;
 

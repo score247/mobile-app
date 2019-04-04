@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Models.LeagueInfo;
     using Newtonsoft.Json;
 
     public class MatchEvent

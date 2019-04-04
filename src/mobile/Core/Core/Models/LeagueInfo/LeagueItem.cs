@@ -1,4 +1,4 @@
-﻿namespace League.Models
+﻿namespace Core.Models.LeagueInfo
 {
     public class LeagueItem
     {
