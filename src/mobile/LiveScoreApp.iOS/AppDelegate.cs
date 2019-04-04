@@ -3,6 +3,7 @@ namespace LiveScoreApp.iOS
     using System;
     using CarouselView.FormsPlugin.iOS;
     using Common.Services;
+    using Core.Services;
     using Foundation;
     using ObjCRuntime;
     using Prism;
