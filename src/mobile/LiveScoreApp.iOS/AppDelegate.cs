@@ -19,16 +19,20 @@ namespace LiveScoreApp.iOS
 #endif
             Xamarin.Forms.Forms.Init();
             CarouselViewRenderer.Init();
-            LoadApplication(new App(new iOSInitializer()));
+
+            var application = new App(new iOSInitializer());
+            LoadApplication(application);
+
+            var loggingService = application.Container.Resolve<ILoggingService>();
 
             Runtime.MarshalManagedException += (sender, args) =>
             {
-                LoggingService.LogError(args.Exception);
+                loggingService.LogError(args.Exception);
             };
 
             Runtime.MarshalObjectiveCException += (sender, args) =>
             {
-                LoggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
+                loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
             };
 
             return base.FinishedLaunching(uiApplication, launchOptions);
@@ -41,6 +45,9 @@ namespace LiveScoreApp.iOS
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             // Register any platform specific implementations
+            containerRegistry.Register<ISettingsService, SettingsService>();
+            containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
+            containerRegistry.Register<ILoggingService, SentryLogger>();
         }
     }
 #pragma warning restore S101 // Types should be named in PascalCase

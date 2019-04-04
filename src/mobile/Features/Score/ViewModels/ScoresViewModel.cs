@@ -1,6 +1,7 @@
 ﻿namespace Score.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -18,7 +19,9 @@
         private const int MaximumCalendarItemCount = 30;
         private const int MoreOldDayCount = 7;
         private const int MoreNewDayCount = 3;
+
         private readonly IMatchService matchService;
+
         private int oldDateCalendarItemCount = 3;
         private int newDateCalendarItemCount = 7;
         private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
@@ -34,14 +37,17 @@
             IMatchService matchService)
         : base(navigationService)
         {
-            this.matchService = matchService;
+            this.matchService = matchService;           
+
             InitializeCommands();
+
             SelectHome = true;
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
+
             var changeSport = parameters.GetValue<bool>("changeSport");
 
             if (changeSport || GroupMatches == null)
@@ -108,11 +114,12 @@
         {
             SelectMatchCommand = new DelegateAsyncCommand<Match>(async (item) =>
             {
+                throw new InvalidOperationException("auto unhandled exception");
+
                 var navigationParams = new NavigationParameters
                 {
                     { nameof(Match), item }
                 };
-
                 await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
             });
 
@@ -152,9 +159,11 @@
 
         private async Task OnSelectDateCommandAsync()
         {
+            throw new InvalidOperationException("auto unhandled exception");
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date).ConfigureAwait(false);
+
         }
 
         private void OnSelectHomeCommandExecuted()

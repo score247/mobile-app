@@ -28,7 +28,10 @@
                       BaseAddress = new Uri(settingsService.ApiEndPoint)
                   }));
 
-            containerRegistry.Register<Score.Services.IMatchService, MatchService>();
+            containerRegistry.Register<IMatchService, MatchService>();
+            containerRegistry.Register<ISettingsService, SettingsService>();
+            containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
+            containerRegistry.Register<ILoggingService, SentryLogger>();
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
             containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>();
             containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();

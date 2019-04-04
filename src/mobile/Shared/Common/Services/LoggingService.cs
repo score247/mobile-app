@@ -7,53 +7,59 @@
     using SharpRaven.Data;
     using Xamarin.Essentials;
 
-    public static class LoggingService
+    public interface ILoggingService
     {
-        private static Lazy<RavenClient> ravenClientHolder;
+        void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null);
 
-        private static RavenClient RavenClient => ravenClientHolder.Value;
+        void TrackEvent(string trackIdentifier, string key, string value);
 
-        public static void Init(string category, string environment, string dsn)
+        Task LogErrorAsync(Exception exception);
+
+        void LogError(Exception exception);
+
+        SentryEvent CreateSentryEvent(Exception exception);
+    }
+
+    public class SentryLogger : ILoggingService
+    {
+        private readonly IDeviceInfoService deviceInfo;
+        private readonly ISettingsService settingsService;
+
+        private static RavenClient RavenClient;
+
+        public SentryLogger(IDeviceInfoService deviceInfo, ISettingsService settingsService)
         {
-            ravenClientHolder = new Lazy<RavenClient>(() => new RavenClient(dsn) { Release = AppInfo.VersionString });
+            this.deviceInfo = deviceInfo;
+            this.settingsService = settingsService;
+
+            RavenClient = new RavenClient(settingsService.Dsn);
         }
 
-        public static Task LogErrorAsync(Exception exception) => RavenClient.CaptureAsync(CreateSentryEvent(exception));
-
-        public static void LogError(Exception exception)
+        public SentryEvent CreateSentryEvent(Exception exception)
         {
-            RavenClient.Capture(CreateSentryEvent(exception));
+            RavenClient.Release = AppInfo.VersionString;
+            var evt = new SentryEvent(exception);
+
+            evt.Contexts.Device.Model = deviceInfo.Model;
+            evt.Contexts.Device.Name = deviceInfo.Name;
+            evt.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;
+            evt.Contexts.OperatingSystem.Version = deviceInfo.OperatingSystemVersion;
+
+            return evt;
         }
 
-        public static void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null)
+        public void LogError(Exception exception) => RavenClient.Capture(CreateSentryEvent(exception));
+
+        public Task LogErrorAsync(Exception exception) => RavenClient.CaptureAsync(CreateSentryEvent(exception));
+
+        public void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null)
             => RavenClient.AddTrail(
                 new Breadcrumb(trackIdentifier)
                 {
                     Data = table
                 });
 
-        public static void TrackEvent(string trackIdentifier, string key, string value)
-        {
-            if (string.IsNullOrWhiteSpace(key) && string.IsNullOrWhiteSpace(value))
-            {
-                TrackEvent(trackIdentifier);
-            }
-            else
-            {
-                TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
-            }
-        }
-
-        private static SentryEvent CreateSentryEvent(Exception exception)
-        {
-            var evt = new SentryEvent(exception);
-
-            evt.Contexts.Device.Model = DeviceInfo.Model;
-            evt.Contexts.Device.Name = DeviceInfo.Name;
-            evt.Contexts.OperatingSystem.Name = DeviceInfo.Platform.ToString();
-            evt.Contexts.OperatingSystem.Version = DeviceInfo.VersionString;
-
-            return evt;
-        }
+        public void TrackEvent(string trackIdentifier, string key, string value)
+            => TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
     }
 }

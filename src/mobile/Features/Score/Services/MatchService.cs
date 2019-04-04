@@ -30,12 +30,14 @@
         private readonly IMatchApi matchApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
+        private readonly ILoggingService logService;
 
-        public MatchService(IMatchApi matchApi, ISettingsService settingsService, ICacheService cacheService)
+        public MatchService(IMatchApi matchApi, ISettingsService settingsService, ICacheService cacheService, ILoggingService logService)
         {
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.matchApi = matchApi;
+            this.logService = logService;
         }
 
         public async Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false)
@@ -80,7 +82,7 @@
             }
             catch (Exception ex)
             {
-                LoggingService.LogError(ex);
+                logService.LogError(ex);
 
                 Debug.WriteLine(ex.Message);
                 return Enumerable.Empty<Match>();

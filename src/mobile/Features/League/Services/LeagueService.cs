@@ -105,7 +105,7 @@
 
         private static void HandleException(Exception ex)
         {
-            LoggingService.LogError(ex);
+            //LoggingService.LogError(ex);
 
             Debug.WriteLine(ex.Message);
         }
