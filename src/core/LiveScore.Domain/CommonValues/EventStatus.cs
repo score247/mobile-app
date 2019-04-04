@@ -1,4 +1,4 @@
-﻿namespace LiveScore.CommonValues
+﻿namespace LiveScore.Domain.CommonValues
 {
     public static class EventStatus
     {

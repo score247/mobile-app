@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Models
+﻿namespace LiveScore.Domain.Models
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LiveScore.DomainModels;
+    using LiveScore.Domain.DomainModels;
 
     public class DailyScheduleModel
     {

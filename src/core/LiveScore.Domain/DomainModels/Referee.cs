@@ -1,15 +1,15 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface ISport
+    public interface IReferee
     {
-        string Id { get; }
+        int Id { get; }
 
         string Name { get; }
     }
 
-    public class Sport : ISport
+    public class Referee : IReferee
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
     }

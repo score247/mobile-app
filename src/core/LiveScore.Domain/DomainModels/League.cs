@@ -1,4 +1,4 @@
-﻿namespace LiveScore.DomainModels
+﻿namespace LiveScore.Domain.DomainModels
 {
     using LiveScore.Domain.DomainModels;
 

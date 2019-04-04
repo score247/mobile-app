@@ -1,4 +1,4 @@
-﻿namespace LiveScore.DomainModels
+﻿namespace LiveScore.Domain.DomainModels
 {
     using System;
     using System.Collections.Generic;
@@ -26,6 +26,7 @@
         int AwayScore { get; }
 
         Player GoalScorer { get; }
+
         IEnumerable<Commentary> Commentaries { get; }
     }
 
