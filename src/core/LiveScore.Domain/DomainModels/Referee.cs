@@ -1,10 +1,7 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface IReferee : IEntity<int, string>
+    public class Referee
     {
-    }
-
-    public class Referee : Entity<int, string>, IReferee
-    {
+        public string Name { get; set; }
     }
 }

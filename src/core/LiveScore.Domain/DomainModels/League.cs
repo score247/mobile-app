@@ -7,6 +7,8 @@
         ICategory Category { get; }
 
         IEnumerable<ILeagueRound> Rounds { get; }
+
+        IEnumerable<Team> Teams { get; }
     }
 
     public class League : Entity<string, string>, ILeague
@@ -14,6 +16,8 @@
         public ICategory Category { get; set; }
 
         public IEnumerable<ILeagueRound> Rounds { get; set; }
+
+        public IEnumerable<Team> Teams { get; set; }
 
         public bool Equals(League leagueA, League leagueB)
             => leagueA.Id == leagueB.Id;

@@ -6,7 +6,7 @@
 
         IVenue Venue { get; }
 
-        IReferee Referee { get; }
+        Referee Referee { get; }
     }
 
     public class MatchCondition : IMatchCondition
@@ -15,6 +15,6 @@
 
         public IVenue Venue { get; set; }
 
-        public IReferee Referee { get; set; }
+        public Referee Referee { get; set; }
     }
 }
