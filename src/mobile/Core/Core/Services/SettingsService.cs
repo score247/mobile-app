@@ -10,8 +10,6 @@
     {
         string ApiEndPoint { get; }
 
-        string Dsn { get;}
-
         string[] LeagueGroups { get; }
 
         IDictionary<string, string> ApiKeyMapper { get; }
@@ -73,8 +71,6 @@
             get => GetValueOrDefault(nameof(CurrentLanguage), "en-US");
             set => AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
-
-        public string Dsn => "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
 
         public void AddOrUpdateValue<T>(string key, T value)
             => BlobCache.UserAccount.InsertObject(key, value).Wait();

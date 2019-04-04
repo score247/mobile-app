@@ -29,7 +29,6 @@
                   }));
 
             containerRegistry.Register<IMatchService, MatchService>();
-            containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
             containerRegistry.Register<ILoggingService, SentryLogger>();
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();

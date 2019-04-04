@@ -22,17 +22,17 @@
 
     public class SentryLogger : ILoggingService
     {
+        private const string Dsn = "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
         private readonly IDeviceInfoService deviceInfo;
-        private readonly ISettingsService settingsService;
+
 
         private static RavenClient RavenClient;
 
-        public SentryLogger(IDeviceInfoService deviceInfo, ISettingsService settingsService)
+        public SentryLogger(IDeviceInfoService deviceInfo)
         {
             this.deviceInfo = deviceInfo;
-            this.settingsService = settingsService;
 
-            RavenClient = new RavenClient(settingsService.Dsn);
+            RavenClient = new RavenClient(Dsn);
         }
 
         public SentryEvent CreateSentryEvent(Exception exception)
