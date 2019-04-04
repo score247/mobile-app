@@ -13,8 +13,6 @@
 
         IList<ITeam> Teams { get; }
 
-        IVenue Venue { get; }
-
         IMatchResult MatchResult { get; }
 
         ITimeLine TimeLine { get; }
@@ -31,8 +29,6 @@
         public ILeagueRound LeagueRound { get; set; }
 
         public IList<ITeam> Teams { get; set; }
-
-        public IVenue Venue { get; set; }
 
         public IMatchResult MatchResult { get; set; }
 
