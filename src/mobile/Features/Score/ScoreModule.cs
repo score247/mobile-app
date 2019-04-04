@@ -2,7 +2,6 @@
 {
     using System;
     using System.Net.Http;
-    using Common.Helpers.Logging;
     using Core.Services;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -24,7 +23,7 @@
 
             containerRegistry.RegisterInstance(
               RestService.For<IMatchApi>(
-                  new HttpClient(new HttpLoggingHandler())
+                  new HttpClient
                   {
                       BaseAddress = new Uri(settingsService.ApiEndPoint)
                   }));

@@ -28,10 +28,6 @@
         <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Remove="Models\MatchHeader.cs" />
-        <Compile Remove="Models\LeagueInfo.cs" />
-    </ItemGroup>
-    <ItemGroup>
         <Compile Update="LangResources\AppResources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
@@ -47,7 +43,6 @@
     <ItemGroup>
         <Folder Include="Controls\" />
         <Folder Include="Converters\" />
-        <Folder Include="Helpers\Logging\" />
         <Folder Include="Services\">
         </Folder>
         <Folder Include="Controls\TabStrip\">

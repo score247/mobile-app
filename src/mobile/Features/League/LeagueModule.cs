@@ -2,7 +2,6 @@
 {
     using System;
     using System.Net.Http;
-    using Common.Helpers.Logging;
     using Core.Services;
     using League.Services;
     using League.ViewModels;
@@ -23,12 +22,12 @@
             var settingService = new SettingsService();
 
             containerRegistry.RegisterInstance(
-                RestService.For<ILeagueApi>(new HttpClient(new HttpLoggingHandler())
+                RestService.For<ILeagueApi>(new HttpClient
                 {
                     BaseAddress = new Uri(settingService.ApiEndPoint)
                 }));
 
-            containerRegistry.Register<League.Services.ILeagueService, League.Services.LeagueService>();
+            containerRegistry.Register<Services.ILeagueService, LeagueService>();
             containerRegistry.RegisterForNavigation<LeagueView, LeagueViewModel>();
             containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>();
         }
