@@ -14,7 +14,8 @@
                     <commonConverters:UpperCaseConverter x:Key="upperCaseConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
-            <StackLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
+            
+            <FlexLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
                 <StackLayout Style="{StaticResource LeagueFlagContainer}">
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>                
@@ -22,7 +23,7 @@
                 <Label Text="{Binding Key.ShortEventDate}"
                        Style="{StaticResource MatchDate}" />
                 <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
-            </StackLayout>
+            </FlexLayout>
         </StackLayout>
     </ViewCell>
 </DataTemplate>

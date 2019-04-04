@@ -44,7 +44,7 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout>
-                    <StackLayout Style="{StaticResource LeagueBox}">
+                  <FlexLayout Style="{StaticResource LeagueBox}">
                         <StackLayout Style="{StaticResource LeagueFlagContainer}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
@@ -52,7 +52,7 @@
                         <Label Text="29 Jan, 2019"
                        Style="{StaticResource MatchDate}" />
                         <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
-                    </StackLayout>
+                    </FlexLayout>
                 </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"
@@ -76,7 +76,7 @@
                 </FlexLayout>
 
                 <StackLayout>
-                    <StackLayout Style="{StaticResource LeagueBox}">
+                  <FlexLayout Style="{StaticResource LeagueBox}">
                         <StackLayout Style="{StaticResource LeagueFlagContainer}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
@@ -84,7 +84,7 @@
                         <Label Text="29 Jan, 2019"
                        Style="{StaticResource MatchDate}" />
                         <Label Style="{StaticResource LeagueDetail}" />
-                    </StackLayout>
+                    </FlexLayout>
                 </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"

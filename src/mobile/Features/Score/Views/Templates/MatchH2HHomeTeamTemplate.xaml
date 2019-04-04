@@ -24,13 +24,13 @@
         <ScrollView>
             <StackLayout>
                 <StackLayout>
-                    <StackLayout Style="{StaticResource LeagueBox}">
+                  <FlexLayout Style="{StaticResource LeagueBox}">
                         <StackLayout Style="{StaticResource LeagueFlagContainer}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
                         <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
-                        <Label Style="{StaticResource DetailIconAlignRight}" />
-                    </StackLayout>
+                        <Label Style="{StaticResource LeagueDetail}" />
+                    </FlexLayout>
                 </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>

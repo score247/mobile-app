@@ -235,10 +235,6 @@
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="WidthRequest" Value="12" />
             </Style>
-            
-            <Style x:Key="LeagueDetail" BasedOn="{StaticResource DetailIcon}" TargetType="Label">
-                <Setter Property="Margin" Value="15,0" />
-            </Style>
 
             <Style x:Key="LiveIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
                 <Setter Property="Text" Value="&#xe905;" />
