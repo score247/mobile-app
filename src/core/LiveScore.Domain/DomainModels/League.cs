@@ -4,7 +4,7 @@
 
     public interface ILeague : IEntity<string, string>
     {
-        ICategory Category { get; }
+        ILeagueCategory Category { get; }
 
         IEnumerable<ILeagueRound> Rounds { get; }
 
@@ -13,7 +13,7 @@
 
     public class League : Entity<string, string>, ILeague
     {
-        public ICategory Category { get; set; }
+        public ILeagueCategory Category { get; set; }
 
         public IEnumerable<ILeagueRound> Rounds { get; set; }
 

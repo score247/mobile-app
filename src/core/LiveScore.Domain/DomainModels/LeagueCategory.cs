@@ -1,11 +1,11 @@
 ﻿namespace LiveScore.Domain.DomainModels
 {
-    public interface ICategory : IEntity<string, string>
+    public interface ILeagueCategory : IEntity<string, string>
     {
         string CountryCode { get; }
     }
 
-    public class Category : Entity<string, string>, ICategory
+    public class LeagueCategory : Entity<string, string>, ILeagueCategory
     {
         public string CountryCode { get; set; }
     }
