@@ -2,8 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Common.Services;
-    using League.Models;
+    using Core.Models.LeagueInfo;
     using League.Services;
     using NSubstitute;
     using Xunit;
@@ -12,13 +11,13 @@
     {
         private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi mockLeagueApi;
-        private readonly ISettingsService mockSettingsService;
+        private readonly Core.Services.ISettingsService mockSettingsService;
         private readonly ILeagueService service;
 
         public LeagueServiceTests()
         {
             mockLeagueApi = Substitute.For<ILeagueApi>();
-            mockSettingsService = Substitute.For<ISettingsService>();
+            mockSettingsService = Substitute.For<Core.Services.ISettingsService>();
             service = new LeagueService(mockLeagueApi, mockSettingsService);
         }
 
@@ -56,7 +55,7 @@
             mockSettingsService.LeagueGroups.Returns(mockGroups);
             mockLeagueApi.GetLeaguesByGroup(Arg.Any<string>(), "eu", Arg.Any<string>(), Arg.Any<string>()).Returns(new LeagueInfo
             {
-                Leagues = new List<Common.Models.MatchInfo.League>
+                Leagues = new List<League>
                 {
                     CreateMockLeagueData("sr:category:1", "K League 1"),
                     CreateMockLeagueData("sr:category:2", "K League 2")
@@ -78,7 +77,7 @@
             mockSettingsService.LeagueGroups.Returns(mockGroups);
             mockLeagueApi.GetLeaguesByGroup(Arg.Any<string>(), "eu", Arg.Any<string>(), Arg.Any<string>()).Returns(new LeagueInfo
             {
-                Leagues = new List<Common.Models.MatchInfo.League>
+                Leagues = new List<League>
                 {
                     CreateMockLeagueData("sr:category:1", "K League 1"),
                     CreateMockLeagueData("sr:category:1", "K League 2")
@@ -100,7 +99,7 @@
             mockSettingsService.LeagueGroups.Returns(mockGroups);
             mockLeagueApi.GetLeaguesByGroup(Arg.Any<string>(), "eu", Arg.Any<string>(), Arg.Any<string>()).Returns(new LeagueInfo
             {
-                Leagues = new List<Common.Models.MatchInfo.League>
+                Leagues = new List<League>
                 {
                     CreateMockLeagueData(UngroupedCategoryId, "K League 1"),
                     CreateMockLeagueData(UngroupedCategoryId, "K League 2")
@@ -122,7 +121,7 @@
             mockSettingsService.LeagueGroups.Returns(mockGroups);
             mockLeagueApi.GetLeaguesByGroup(Arg.Any<string>(), "eu", Arg.Any<string>(), Arg.Any<string>()).Returns(new LeagueInfo
             {
-                Leagues = new List<Common.Models.MatchInfo.League>
+                Leagues = new List<League>
                 {
                     CreateMockLeagueData(UngroupedCategoryId, "K League 1"),
                     CreateMockLeagueData(UngroupedCategoryId, "K League 2"),
@@ -138,11 +137,11 @@
             Assert.Equal(3, leagues.Count);
         }
 
-        private static Common.Models.MatchInfo.League CreateMockLeagueData(string categoryId, string leagueName)
-        => new Common.Models.MatchInfo.League
+        private static League CreateMockLeagueData(string categoryId, string leagueName)
+        => new League
         {
             Name = leagueName,
-            Category = new Common.Models.MatchInfo.Category
+            Category = new Category
             {
                 Id = categoryId
             }

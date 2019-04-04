@@ -4,7 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using League.Models;
+    using Core.Models.LeagueInfo;
     using League.Services;
     using League.ViewModels;
     using NSubstitute;

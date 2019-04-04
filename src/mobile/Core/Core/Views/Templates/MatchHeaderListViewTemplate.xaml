@@ -15,7 +15,7 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
             
-            <FlexLayout x:Name="{Binding Key}" Style="{StaticResource LeagueBox}">
+            <FlexLayout Style="{StaticResource LeagueBox}">
                 <StackLayout Style="{StaticResource LeagueFlagContainer}">
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>                
