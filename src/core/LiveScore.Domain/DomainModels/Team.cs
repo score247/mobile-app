@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
-
-namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.DomainModels
 {
+    using System.Collections.Generic;
+
     public interface ITeam : IEntity<string, string>
     {
         string Country { get; }
 
         string CountryCode { get; }
 
-        string Qualifier { get; }
+        bool IsHome { get; }
 
         IEnumerable<Player> Players { get; }
     }
@@ -19,7 +19,7 @@ namespace LiveScore.Domain.DomainModels
 
         public string CountryCode { get; set; }
 
-        public string Qualifier { get; set; }
+        public bool IsHome { get; set; }
 
         public IEnumerable<Player> Players { get; set; }
     }

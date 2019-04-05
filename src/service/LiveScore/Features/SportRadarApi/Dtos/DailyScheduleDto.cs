@@ -4,25 +4,31 @@ using System;
 namespace LiveScore.Shared.Models.Dtos
 {
 
+
     public class DailyScheduleDto
     {
         public DateTime generated_at { get; set; }
         public string schema { get; set; }
-        public Sport_Events[] sport_events { get; set; }
+        public Result[] results { get; set; }
     }
 
-    public class Sport_Events
+    public class Result
     {
-        public string id { get; set; }
-        public DateTime scheduled { get; set; }
-        public bool start_time_tbd { get; set; }
-        public string status { get; set; }
-        public Tournament_Round tournament_round { get; set; }
-        public Season season { get; set; }
-        public DailyTournament tournament { get; set; }
-        public Competitor[] competitors { get; set; }
-        public Venue venue { get; set; }
+        public Sport_Event sport_event { get; set; }
+        public Sport_Event_Status sport_event_status { get; set; }
     }
+
+    ////public class Sport_Event
+    ////{
+    ////    public string id { get; set; }
+    ////    public DateTime scheduled { get; set; }
+    ////    public bool start_time_tbd { get; set; }
+    ////    public Tournament_Round tournament_round { get; set; }
+    ////    public Season season { get; set; }
+    ////    public Tournament tournament { get; set; }
+    ////    public Competitor[] competitors { get; set; }
+    ////    public Venue venue { get; set; }
+    ////}
 
     public class Tournament_Round
     {
@@ -45,13 +51,13 @@ namespace LiveScore.Shared.Models.Dtos
         public string tournament_id { get; set; }
     }
 
-    public class DailyTournament
-    {
-        public string id { get; set; }
-        public string name { get; set; }
-        public Sport sport { get; set; }
-        public Category category { get; set; }
-    }
+    //public class Tournament
+    //{
+    //    public string id { get; set; }
+    //    public string name { get; set; }
+    //    public Sport sport { get; set; }
+    //    public Category category { get; set; }
+    //}
 
     public class Sport
     {
@@ -85,5 +91,15 @@ namespace LiveScore.Shared.Models.Dtos
         public string abbreviation { get; set; }
         public string qualifier { get; set; }
     }
+
+    ////public class Sport_Event_Status
+    ////{
+    ////    public string status { get; set; }
+    ////    public int home_score { get; set; }
+    ////    public int away_score { get; set; }
+    ////    public string winner_id { get; set; }
+    ////    public Period_Scores[] period_scores { get; set; }
+    ////}
+
 
 }

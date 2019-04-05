@@ -4,7 +4,6 @@ using System;
 namespace LiveScore.Shared.Models.Dtos
 {
 
-
     public class MatchSummary
     {
         public DateTime generated_at { get; set; }
@@ -22,7 +21,7 @@ namespace LiveScore.Shared.Models.Dtos
         public bool start_time_tbd { get; set; }
         public Tournament_Round tournament_round { get; set; }
         public Season season { get; set; }
-        public DailyTournament tournament { get; set; }
+        public Tournament tournament { get; set; }
         public Competitor[] competitors { get; set; }
         public Venue venue { get; set; }
     }

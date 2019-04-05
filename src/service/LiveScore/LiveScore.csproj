@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Refit" Version="4.6.99" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\core\LiveScore.Domain\LiveScore.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Shared\Models\" />
   </ItemGroup>
 
 </Project>
