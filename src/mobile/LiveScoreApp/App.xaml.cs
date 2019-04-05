@@ -44,7 +44,6 @@ namespace LiveScoreApp
 
             InitializeComponent();
             Akavache.Registrations.Start("LiveScoreAppStorage");
-            //LoggingService.Init("Mobile", "DEV", "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
@@ -69,6 +68,8 @@ namespace LiveScoreApp
             containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
+            containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
+            containerRegistry.Register<ILoggingService, SentryLogger>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainView>();

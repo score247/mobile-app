@@ -378,10 +378,6 @@
       <Project>{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}</Project>
       <Name>Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Core\Core\Core.csproj">
-      <Project>{4FCF46FB-1939-42B3-9D51-EEB6588F4362}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\add%402x.png" />

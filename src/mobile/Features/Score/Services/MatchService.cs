@@ -82,7 +82,7 @@
             }
             catch (Exception ex)
             {
-                logService.LogError(ex);
+                await logService.LogErrorAsync(ex);
 
                 Debug.WriteLine(ex.Message);
                 return Enumerable.Empty<Match>();

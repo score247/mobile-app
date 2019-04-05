@@ -1,7 +1,6 @@
 ﻿namespace Score.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -114,8 +113,6 @@
         {
             SelectMatchCommand = new DelegateAsyncCommand<Match>(async (item) =>
             {
-                throw new InvalidOperationException("auto unhandled exception");
-
                 var navigationParams = new NavigationParameters
                 {
                     { nameof(Match), item }
@@ -159,7 +156,6 @@
 
         private async Task OnSelectDateCommandAsync()
         {
-            throw new InvalidOperationException("auto unhandled exception");
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date).ConfigureAwait(false);

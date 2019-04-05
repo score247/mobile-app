@@ -3,7 +3,6 @@ namespace LiveScoreApp.iOS
     using System;
     using CarouselView.FormsPlugin.iOS;
     using Common.Services;
-    using Core.Services;
     using Foundation;
     using ObjCRuntime;
     using Prism;
@@ -45,10 +44,7 @@ namespace LiveScoreApp.iOS
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
-            containerRegistry.Register<ISettingsService, SettingsService>();
-            containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
-            containerRegistry.Register<ILoggingService, SentryLogger>();
+            // Register any platform specific implementations           
         }
     }
 #pragma warning restore S101 // Types should be named in PascalCase

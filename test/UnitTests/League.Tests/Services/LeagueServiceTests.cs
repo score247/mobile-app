@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Common.Services;
     using Core.Models.LeagueInfo;
     using League.Services;
     using NSubstitute;
@@ -11,6 +12,7 @@
     {
         private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi mockLeagueApi;
+        private readonly ILoggingService mockLogService;
         private readonly Core.Services.ISettingsService mockSettingsService;
         private readonly ILeagueService service;
 
@@ -18,7 +20,8 @@
         {
             mockLeagueApi = Substitute.For<ILeagueApi>();
             mockSettingsService = Substitute.For<Core.Services.ISettingsService>();
-            service = new LeagueService(mockLeagueApi, mockSettingsService);
+            mockLogService = Substitute.For<ILoggingService>();
+            service = new LeagueService(mockLeagueApi, mockSettingsService, mockLogService);
         }
 
         [Fact]

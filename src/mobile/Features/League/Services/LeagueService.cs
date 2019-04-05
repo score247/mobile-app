@@ -33,11 +33,13 @@
         private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi leagueApi;
         private readonly ISettingsService settingsService;
+        private readonly ILoggingService logService;
 
-        public LeagueService(ILeagueApi leagueApi, ISettingsService settingsService)
+        public LeagueService(ILeagueApi leagueApi, ISettingsService settingsService, ILoggingService logService)
         {
             this.settingsService = settingsService;
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(settingsService.ApiEndPoint);
+            this.logService = logService;
         }
 
         public async Task<IList<Match>> GetMatchesAsync(string leagueId, string group)
@@ -103,9 +105,9 @@
                     .ToList();
         }
 
-        private static void HandleException(Exception ex)
+        private void HandleException(Exception ex)
         {
-            //LoggingService.LogError(ex);
+            logService.LogError(ex);
 
             Debug.WriteLine(ex.Message);
         }
