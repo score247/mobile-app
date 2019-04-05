@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Domain.DomainModels.Teams
 {
-    public interface  ICoach : IEntity<int, string>
+    public interface ICoach : IEntity<int, string>
     {
         string Nationality { get; }
 
