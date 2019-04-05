@@ -19,9 +19,9 @@
 
         ICoach Coach { get; }
 
-        ITeamLineUp StartingLineUp { get; }
+        IEnumerable<ITeamLineUp> StartingLineUps { get; }
 
-        ITeamLineUp Substitution { get; }
+        IEnumerable<ITeamLineUp> Substitutions { get; }
     }
 
     public class Team : Entity<string, string>, ITeam
@@ -40,8 +40,8 @@
 
         public string Formation { get; set; }
 
-        public ITeamLineUp StartingLineUp { get; set; }
+        public IEnumerable<ITeamLineUp> StartingLineUps { get; set; }
 
-        public ITeamLineUp Substitution { get; set; }
+        public IEnumerable<ITeamLineUp> Substitutions { get; set; }
     }
 }

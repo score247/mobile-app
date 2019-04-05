@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LiveScore.Shared
+﻿namespace LiveScore.Shared
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
     public abstract class BaseDataAccess
     {
 
