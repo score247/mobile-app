@@ -13,25 +13,29 @@
         void LogError(Exception exception);
 
         void TrackEvent(string trackIdentifier, string key, string value);
+
+        void Init(string Dsn, IRavenClient ravenClient = null);
     }
 
     public class LoggingService : ILoggingService
-    {
-        private const string Dsn = "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
+    { 
         private readonly IEssentialsService deviceInfo;
 
-        private readonly RavenClient ravenClient;
+        private IRavenClient ravenClient;
 
         public LoggingService(IEssentialsService deviceInfo)
         {
             this.deviceInfo = deviceInfo;
-
-            ravenClient = new RavenClient(Dsn) { Release = deviceInfo.AppVersion };
         }
 
-        public void LogError(Exception exception) => ravenClient.Capture(CreateSentryEvent(exception));
+        public void Init(string Dsn, IRavenClient ravenClient = null)
+        {
+            this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion };
+        }
 
-        public Task LogErrorAsync(Exception exception) => ravenClient.CaptureAsync(CreateSentryEvent(exception));
+        public void LogError(Exception exception) => ravenClient?.Capture(CreateSentryEvent(exception));
+
+        public Task LogErrorAsync(Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(exception));
 
         private SentryEvent CreateSentryEvent(Exception exception)
         {
@@ -46,7 +50,7 @@
         }
 
         private void TrackEvent(string trackIdentifier, IDictionary<string, string> table)
-            => ravenClient.AddTrail(
+            => ravenClient?.AddTrail(
                 new Breadcrumb(trackIdentifier)
                 {
                     Data = table
@@ -54,5 +58,6 @@
 
         public void TrackEvent(string trackIdentifier, string key, string value)
             => TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
+
     }
 }
