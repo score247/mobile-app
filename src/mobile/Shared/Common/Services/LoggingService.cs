@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using SharpRaven;
     using SharpRaven.Data;
-    using Xamarin.Essentials;
 
     public interface ILoggingService
     {
@@ -23,21 +22,19 @@
     public class SentryLogger : ILoggingService
     {
         private const string Dsn = "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
-        private readonly IDeviceInfoService deviceInfo;
+        private readonly IEssentialsService deviceInfo;
 
+        private readonly RavenClient ravenClient;
 
-        private static RavenClient RavenClient;
-
-        public SentryLogger(IDeviceInfoService deviceInfo)
+        public SentryLogger(IEssentialsService deviceInfo)
         {
             this.deviceInfo = deviceInfo;
 
-            RavenClient = new RavenClient(Dsn);
+            ravenClient = new RavenClient(Dsn) { Release = deviceInfo.AppVersion };
         }
 
         public SentryEvent CreateSentryEvent(Exception exception)
         {
-            RavenClient.Release = AppInfo.VersionString;
             var evt = new SentryEvent(exception);
 
             evt.Contexts.Device.Model = deviceInfo.Model;
@@ -48,12 +45,12 @@
             return evt;
         }
 
-        public void LogError(Exception exception) => RavenClient.Capture(CreateSentryEvent(exception));
+        public void LogError(Exception exception) => ravenClient.Capture(CreateSentryEvent(exception));
 
-        public Task LogErrorAsync(Exception exception) => RavenClient.CaptureAsync(CreateSentryEvent(exception));
+        public Task LogErrorAsync(Exception exception) => ravenClient.CaptureAsync(CreateSentryEvent(exception));
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null)
-            => RavenClient.AddTrail(
+            => ravenClient.AddTrail(
                 new Breadcrumb(trackIdentifier)
                 {
                     Data = table

@@ -1,8 +1,9 @@
-﻿using Xamarin.Essentials;
-
+﻿
 namespace Common.Services
 {
-    public interface IDeviceInfoService 
+    using Xamarin.Essentials;
+
+    public interface IEssentialsService 
     {
         string Model { get; }
 
@@ -11,9 +12,11 @@ namespace Common.Services
         string OperatingSystemName { get; }
 
         string OperatingSystemVersion { get; }
+
+        string AppVersion { get; }
     }
 
-    public class DeviceInfoService : IDeviceInfoService
+    public class EssentialsService : IEssentialsService
     {
         public string Model => DeviceInfo.Model;
 
@@ -22,5 +25,7 @@ namespace Common.Services
         public string OperatingSystemName => DeviceInfo.Platform.ToString();
 
         public string OperatingSystemVersion => DeviceInfo.VersionString;
+
+        public string AppVersion => AppInfo.VersionString;
     }
 }

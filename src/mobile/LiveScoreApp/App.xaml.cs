@@ -68,7 +68,7 @@ namespace LiveScoreApp
             containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
-            containerRegistry.Register<IDeviceInfoService, DeviceInfoService>();
+            containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.Register<ILoggingService, SentryLogger>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
