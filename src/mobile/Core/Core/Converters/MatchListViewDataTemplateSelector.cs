@@ -1,7 +1,7 @@
-﻿namespace Core.Converters
+﻿namespace LiveScore.Core.Converters
 {
-    using Core.Contants;
-    using Core.Services;
+    using LiveScore.Core.Contants;
+    using LiveScore.Core.Services;
     using Xamarin.Forms;
 
     public class MatchListViewDataTemplateSelector : DataTemplateSelector

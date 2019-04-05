@@ -9,9 +9,9 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              
-             xmlns:coreConverters="clr-namespace:Core.Converters;assembly=Core"
-             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
-             xmlns:coreTemplates="clr-namespace:Core.Views.Templates;assembly=Core"
+             xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              
              xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
              xmlns:basketBallTemplates="clr-namespace:BasketBall.Views.Templates;assembly=BasketBall"

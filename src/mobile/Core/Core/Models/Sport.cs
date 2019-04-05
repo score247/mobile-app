@@ -1,4 +1,4 @@
-﻿namespace Core.Models
+﻿namespace LiveScore.Core.Models
 {
     public class Sport
     {

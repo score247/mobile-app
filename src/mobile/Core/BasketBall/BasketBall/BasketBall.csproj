@@ -14,7 +14,7 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Common\Common.csproj" />
-    <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
   </ItemGroup>
 </Project>

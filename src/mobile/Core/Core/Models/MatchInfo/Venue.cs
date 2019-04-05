@@ -1,4 +1,4 @@
-﻿namespace Core.Models.MatchInfo
+﻿namespace LiveScore.Core.Models.MatchInfo
 {
     using Newtonsoft.Json;
 

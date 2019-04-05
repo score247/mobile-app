@@ -1,8 +1,8 @@
 ﻿namespace Soccer.Factories
 {
     using LiveScore.Common.Services;
-    using Core.Factories;
-    using Core.Services;
+    using LiveScore.Core.Factories;
+    using LiveScore.Core.Services;
     using Soccer.Services;
 
     public class SoccerServiceFactory : ISportServiceFactory

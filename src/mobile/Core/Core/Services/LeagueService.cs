@@ -1,8 +1,8 @@
-﻿namespace Core.Services
+﻿namespace LiveScore.Core.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Models.LeagueInfo;
+    using LiveScore.Core.Models.LeagueInfo;
     using Refit;
 
     public interface ILeagueApi

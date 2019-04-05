@@ -6,8 +6,8 @@
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
-    using Core.Models.MatchInfo;
-    using Core.Services;
+    using LiveScore.Core.Models.MatchInfo;
+    using LiveScore.Core.Services;
 
     public class MatchService : BaseService, IMatchService
     {

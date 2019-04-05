@@ -1,8 +1,8 @@
-﻿namespace Core.ViewModels
+﻿namespace LiveScore.Core.ViewModels
 {
-    using Core.Contants;
-    using Core.Factories;
-    using Core.Services;
+    using LiveScore.Core.Contants;
+    using LiveScore.Core.Factories;
+    using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Mvvm;
     using Prism.Navigation;

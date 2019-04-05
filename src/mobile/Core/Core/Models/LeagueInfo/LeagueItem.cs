@@ -1,4 +1,4 @@
-﻿namespace Core.Models.LeagueInfo
+﻿namespace LiveScore.Core.Models.LeagueInfo
 {
     public class LeagueItem
     {

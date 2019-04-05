@@ -1,7 +1,7 @@
 ﻿using System;
 using BasketBall.Services;
-using Core.Factories;
-using Core.Services;
+using LiveScore.Core.Factories;
+using LiveScore.Core.Services;
 
 namespace BasketBall.Factories
 {

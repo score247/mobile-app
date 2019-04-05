@@ -1,11 +1,11 @@
-﻿namespace Core.Services
+﻿namespace LiveScore.Core.Services
 {
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Models;
-    using Core.Models.LeagueInfo;
-    using Core.Models.MatchInfo;
+    using LiveScore.Core.Models;
+    using LiveScore.Core.Models.LeagueInfo;
+    using LiveScore.Core.Models.MatchInfo;
     using Refit;
 
     public interface IMatchApi

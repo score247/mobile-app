@@ -2,8 +2,8 @@
 <DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                 x:Class="Soccer.Views.Templates.MatchDataTemplate"
-                xmlns:coreConverters="clr-namespace:Core.Converters;assembly=Core;"
-                xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core;" >
+                xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core;"
+                xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;" >
      <ViewCell>
             <StackLayout>
                 <StackLayout.Resources>

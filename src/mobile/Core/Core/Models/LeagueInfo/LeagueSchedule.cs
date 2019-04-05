@@ -1,7 +1,7 @@
-﻿namespace Core.Models.LeagueInfo
+﻿namespace LiveScore.Core.Models.LeagueInfo
 {
     using System.Collections.Generic;
-    using Core.Models.MatchInfo;
+    using LiveScore.Core.Models.MatchInfo;
     using Newtonsoft.Json;
 
     public class LeagueSchedule

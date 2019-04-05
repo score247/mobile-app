@@ -1,6 +1,6 @@
-﻿namespace Core.Factories
+﻿namespace LiveScore.Core.Factories
 {
-    using Core.Contants;
+    using LiveScore.Core.Contants;
 
     public interface IGlobalFactory
     {

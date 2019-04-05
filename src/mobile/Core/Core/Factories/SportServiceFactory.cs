@@ -1,6 +1,6 @@
-﻿namespace Core.Factories
+﻿namespace LiveScore.Core.Factories
 {
-    using Core.Services;
+    using LiveScore.Core.Services;
 
     public interface ISportServiceFactory
     {

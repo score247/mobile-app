@@ -1,9 +1,9 @@
-﻿namespace Core.Models
+﻿namespace LiveScore.Core.Models
 {
     using System;
     using System.Collections.Generic;
     using Newtonsoft.Json;
-    using Core.Models.MatchInfo;
+    using LiveScore.Core.Models.MatchInfo;
 
     public class MatchSchedule
     {

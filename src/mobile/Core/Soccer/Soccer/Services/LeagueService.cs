@@ -5,8 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
-    using Core.Models.LeagueInfo;
-    using Core.Services;
+    using LiveScore.Core.Models.LeagueInfo;
+    using LiveScore.Core.Services;
     using Refit;
 
     public class LeagueService : BaseService, ILeagueService

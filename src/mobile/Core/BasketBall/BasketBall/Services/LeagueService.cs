@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Models.LeagueInfo;
-    using Core.Services;
+    using LiveScore.Core.Models.LeagueInfo;
+    using LiveScore.Core.Services;
 
     public class LeagueService : ILeagueService
     {

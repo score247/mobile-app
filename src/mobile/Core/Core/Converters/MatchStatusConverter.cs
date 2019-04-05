@@ -1,9 +1,9 @@
-﻿namespace Core.Converters
+﻿namespace LiveScore.Core.Converters
 {
     using System;
     using System.Globalization;
     using LiveScore.Common.LangResources;
-    using Core.Contants;
+    using LiveScore.Core.Contants;
     using Xamarin.Forms;
 
     public class MatchStatusConverter : IValueConverter

@@ -1,4 +1,4 @@
-﻿namespace Core.ViewModels
+﻿namespace LiveScore.Core.ViewModels
 {
     using System;
 

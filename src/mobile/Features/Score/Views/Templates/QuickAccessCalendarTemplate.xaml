@@ -5,7 +5,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:converter="clr-namespace:LiveScore.Score.Converters"
              xmlns:commonConverter="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:controls="clr-namespace:LiveScore.Common.Controls;assembly=LiveScore.Common"
              x:Class="LiveScore.Score.Views.Templates.QuickAccessCalendarTemplate">
     <ContentView.Resources>

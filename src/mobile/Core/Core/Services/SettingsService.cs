@@ -1,10 +1,10 @@
-﻿namespace Core.Services
+﻿namespace LiveScore.Core.Services
 {
     using System.Collections.Generic;
     using System.Reactive.Linq;
     using Akavache;
     using LiveScore.Common.Extensions;
-    using Core.Contants;
+    using LiveScore.Core.Contants;
 
     public interface ISettingsService
     {

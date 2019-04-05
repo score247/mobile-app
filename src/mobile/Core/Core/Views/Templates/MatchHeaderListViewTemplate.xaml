@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                x:Class="Core.Views.Templates.MatchHeaderListViewTemplate"
+                x:Class="LiveScore.Core.Views.Templates.MatchHeaderListViewTemplate"
                 xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-                xmlns:resources="clr-namespace:Core.ViewResources" >
+                xmlns:resources="clr-namespace:LiveScore.Core.ViewResources" >
     <ViewCell Height="28">
         <StackLayout>
              <StackLayout.Resources>

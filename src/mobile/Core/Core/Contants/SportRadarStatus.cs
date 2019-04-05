@@ -1,4 +1,4 @@
-﻿namespace Core.Contants
+﻿namespace LiveScore.Core.Contants
 {
     public static class SportRadarStatus
     {

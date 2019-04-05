@@ -4,8 +4,8 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
-             xmlns:coreTemplates="clr-namespace:Core.Views.Templates;assembly=Core"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
              x:Class="LiveScore.League.Views.LeagueDetailView"
              Title="{Binding Title}">

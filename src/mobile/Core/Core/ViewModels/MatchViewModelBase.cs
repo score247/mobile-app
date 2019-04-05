@@ -1,7 +1,7 @@
-namespace Core.ViewModels
+namespace LiveScore.Core.ViewModels
 {
-    using Core.Factories;
-    using Core.Services;
+    using LiveScore.Core.Factories;
+    using LiveScore.Core.Services;
     using Prism.Navigation;
 
     public class MatchViewModelBase : ViewModelBase

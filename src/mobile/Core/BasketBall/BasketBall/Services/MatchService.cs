@@ -3,8 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Models.MatchInfo;
-    using Core.Services;
+    using LiveScore.Core.Models.MatchInfo;
+    using LiveScore.Core.Services;
 
     public class MatchService : IMatchService
     {

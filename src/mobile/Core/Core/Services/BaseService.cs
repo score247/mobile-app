@@ -1,4 +1,4 @@
-﻿namespace Core.Services
+﻿namespace LiveScore.Core.Services
 {
     using System;
     using System.Diagnostics;
