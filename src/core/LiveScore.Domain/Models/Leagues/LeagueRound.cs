@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Domain.DomainModels.Leagues
+﻿namespace LiveScore.Domain.Models.Leagues
 {
     using System.Collections.Generic;
-    using LiveScore.Domain.DomainModels.Matches;
+    using LiveScore.Domain.Models.Matches;
 
     public interface ILeagueRound
     {

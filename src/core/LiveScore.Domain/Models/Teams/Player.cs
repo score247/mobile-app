@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels.Teams
+﻿namespace LiveScore.Domain.Models.Teams
 {
     public interface IPlayer : IEntity<int, string>
     {

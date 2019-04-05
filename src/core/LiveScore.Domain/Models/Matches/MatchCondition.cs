@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels.Matches
+﻿namespace LiveScore.Domain.Models.Matches
 {
     public interface IMatchCondition
     {

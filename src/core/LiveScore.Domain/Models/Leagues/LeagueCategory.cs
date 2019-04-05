@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels.Leagues
+﻿namespace LiveScore.Domain.Models.Leagues
 {
     public interface ILeagueCategory : IEntity<string, string>
     {

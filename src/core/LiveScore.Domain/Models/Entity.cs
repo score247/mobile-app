@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.Models
 {
     public interface IEntity<out TId, out TName>
     {

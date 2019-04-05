@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Domain.DomainModels.Matches
+﻿namespace LiveScore.Domain.Models.Matches
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Domain.DomainModels.Teams;
+    using LiveScore.Domain.Models.Teams;
 
     public interface IMatch : IEntity<string, string>
     {

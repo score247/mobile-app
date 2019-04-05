@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Domain.DomainModels.Leagues;
+    using LiveScore.Domain.Models.Leagues;
 
     public interface LeagueDataAccess
     {

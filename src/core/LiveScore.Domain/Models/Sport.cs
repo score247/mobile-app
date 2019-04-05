@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.Models
 {
     public interface ISport : IEntity<string, string>
     {
