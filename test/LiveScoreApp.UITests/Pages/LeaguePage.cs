@@ -7,13 +7,7 @@
 
     public class LeaguePage : BasePage
     {
-        private readonly AppResult[] tabBars;
-        private readonly AppResult[] sportSelect;
-        private readonly Query activityIndicator;
-
-        public AppResult[] TabBars => tabBars;
-
-        public AppResult[] SportSelect => sportSelect;
+        private readonly Query activityIndicator;       
 
         public LeaguePage(IApp app, Platform platform) : base(app, platform, "Leagues")
         {
