@@ -1,4 +1,4 @@
-﻿namespace Common.LangResources
+﻿namespace LiveScore.Common.LangResources
 {
     using System;
     using System.Reflection;
@@ -10,7 +10,7 @@
     [ContentProperty("Text")]
     public class TranslateExtension : IMarkupExtension
     {
-        private const string ResourceId = "Common.LangResources.AppResources";
+        private const string ResourceId = "LiveScore.Common.LangResources.AppResources";
 
         private static readonly Lazy<ResourceManager> ResourceManager
             = new Lazy<ResourceManager>(() => new ResourceManager(ResourceId, typeof(TranslateExtension).GetTypeInfo().Assembly));

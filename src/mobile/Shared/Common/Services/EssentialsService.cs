@@ -1,5 +1,5 @@
 ﻿
-namespace Common.Services
+namespace LiveScore.Common.Services
 {
     using Xamarin.Essentials;
 

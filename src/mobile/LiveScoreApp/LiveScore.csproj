@@ -40,13 +40,13 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Core\Core\Core.csproj" />
-      <ProjectReference Include="..\Shared\Common\Common.csproj" />
       <ProjectReference Include="..\Features\Score\LiveScore.Score.csproj" />
       <ProjectReference Include="..\Features\Setting\LiveScore.Menu.csproj" />
       <ProjectReference Include="..\Features\News\LiveScore.News.csproj" />
       <ProjectReference Include="..\Features\TVSchedule\LiveScore.TVSchedule.csproj" />
       <ProjectReference Include="..\Features\League\LiveScore.League.csproj" />
       <ProjectReference Include="..\Features\Favorites\LiveScore.Favorites.csproj" />
+      <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Factories\" />

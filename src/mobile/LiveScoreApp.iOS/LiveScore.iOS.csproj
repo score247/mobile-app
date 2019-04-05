@@ -370,16 +370,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Common\Common.csproj">
-      <Project>{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LiveScoreApp\LiveScore.csproj">
-      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
-      <Name>LiveScore</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\add%402x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +482,16 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\user4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LiveScoreApp\LiveScore.csproj">
+      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
+      <Name>LiveScore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj">
+      <Project>{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}</Project>
+      <Name>LiveScore.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

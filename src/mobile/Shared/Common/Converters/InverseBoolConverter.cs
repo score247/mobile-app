@@ -1,4 +1,4 @@
-﻿namespace Common.Converters
+﻿namespace LiveScore.Common.Converters
 {
     using System;
     using System.Globalization;

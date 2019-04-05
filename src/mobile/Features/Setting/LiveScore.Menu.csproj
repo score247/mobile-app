@@ -17,7 +17,7 @@
         <PackageReference Include="MSBuild.SonarQube.Runner.Tool" Version="4.3.1" />
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\..\Shared\Common\Common.csproj" />
       <ProjectReference Include="..\..\Core\Core\Core.csproj" />
+      <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
     </ItemGroup>
 </Project>

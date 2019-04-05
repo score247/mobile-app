@@ -1,4 +1,4 @@
-﻿namespace Common.Extensions
+﻿namespace LiveScore.Common.Extensions
 {
     using System;
     using System.Threading.Tasks;

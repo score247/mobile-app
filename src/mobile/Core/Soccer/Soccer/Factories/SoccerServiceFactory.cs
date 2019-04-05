@@ -1,6 +1,6 @@
 ﻿namespace Soccer.Factories
 {
-    using Common.Services;
+    using LiveScore.Common.Services;
     using Core.Factories;
     using Core.Services;
     using Soccer.Services;

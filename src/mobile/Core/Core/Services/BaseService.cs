@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics;
-    using Common.Services;
+    using LiveScore.Common.Services;
 
     public class BaseService
     {

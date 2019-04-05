@@ -4,9 +4,9 @@
              x:Name="view" 
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:converter="clr-namespace:LiveScore.Score.Converters"
-             xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
+             xmlns:commonConverter="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
-             xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
+             xmlns:controls="clr-namespace:LiveScore.Common.Controls;assembly=LiveScore.Common"
              x:Class="LiveScore.Score.Views.Templates.QuickAccessCalendarTemplate">
     <ContentView.Resources>
         <ResourceDictionary>

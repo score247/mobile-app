@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
              x:Class="LiveScore.Score.Views.Templates.MatchTableTotalFullListTemplate"
-             xmlns:commonResources="clr-namespace:Common.ViewResources;assembly=Common"
+             xmlns:commonResources="clr-namespace:LiveScore.Common.ViewResources;assembly=LiveScore.Common"
              xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>

@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using System.Reactive.Linq;
     using Akavache;
-    using Common.Extensions;
+    using LiveScore.Common.Extensions;
     using Core.Contants;
 
     public interface ISettingsService

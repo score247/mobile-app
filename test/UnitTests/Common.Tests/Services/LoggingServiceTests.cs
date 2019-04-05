@@ -1,8 +1,8 @@
-﻿namespace Common.Tests.Services
+﻿namespace LiveScore.Common.Tests.Services
 {
     using System;
     using System.Threading.Tasks;
-    using Common.Services;
+    using LiveScore.Common.Services;
     using NSubstitute;
     using SharpRaven;
     using SharpRaven.Data;

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
-using Common.LangResources;
-using Common.Services;
+using LiveScore.Common.LangResources;
+using LiveScore.Common.Services;
 using Core.Factories;
 using Core.Services;
 using LiveScore.Factories;

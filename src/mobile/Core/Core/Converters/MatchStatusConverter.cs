@@ -2,7 +2,7 @@
 {
     using System;
     using System.Globalization;
-    using Common.LangResources;
+    using LiveScore.Common.LangResources;
     using Core.Contants;
     using Xamarin.Forms;
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:Common.Controls.TabStrip" 
+             xmlns:local="clr-namespace:LiveScore.Common.Controls.TabStrip" 
              xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Name="this"
-             x:Class="Common.Controls.TabStrip.TabStrip"
+             x:Class="LiveScore.Common.Controls.TabStrip.TabStrip"
              VerticalOptions="FillAndExpand"
              HorizontalOptions="FillAndExpand">
     <ContentView.Resources>

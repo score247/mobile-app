@@ -17,7 +17,8 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\mobile\Shared\Common\Common.csproj" />
-    <ProjectReference Include="..\..\..\src\mobile\Features\League\League.csproj" />
+    <ProjectReference Include="..\..\..\src\mobile\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\..\src\mobile\Features\League\LiveScore.League.csproj" />
+    <ProjectReference Include="..\..\..\src\mobile\Core\Core\Core.csproj" />
   </ItemGroup>
 </Project>

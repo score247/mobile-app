@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:resources="clr-namespace:LiveScore.News.ViewResources"
-             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
+             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LiveScore.News.Views.NewsView"
              BackgroundColor="{StaticResource PrimaryColor}">

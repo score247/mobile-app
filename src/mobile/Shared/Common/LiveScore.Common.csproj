@@ -4,11 +4,12 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <NeutralLanguage>
         </NeutralLanguage>
-        <AssemblyName>Common</AssemblyName>
-        <RootNamespace>Common</RootNamespace>
+        <AssemblyName>LiveScore.Common</AssemblyName>
+        <RootNamespace>LiveScore.Common</RootNamespace>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>
+        <DebugType></DebugType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>

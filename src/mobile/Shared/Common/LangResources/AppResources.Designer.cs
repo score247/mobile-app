@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Common.LangResources {
+namespace LiveScore.Common.LangResources
+{
     using System;
-    
-    
+
+
     /// <summary>
     ///   A strongly-typed resource class, for looking up localized strings, etc.
     /// </summary>
@@ -22,193 +23,235 @@ namespace Common.LangResources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AppResources {
-        
+    public class AppResources
+    {
+
         private static global::System.Resources.ResourceManager resourceMan;
-        
+
         private static global::System.Globalization.CultureInfo resourceCulture;
-        
+
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AppResources() {
+        internal AppResources()
+        {
         }
-        
+
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
-            get {
-                if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Common.LangResources.AppResources", typeof(AppResources).Assembly);
+        public static global::System.Resources.ResourceManager ResourceManager
+        {
+            get
+            {
+                if (object.ReferenceEquals(resourceMan, null))
+                {
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LiveScore.Common.LangResources.AppResources", typeof(AppResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-        
+
         /// <summary>
         ///   Overrides the current thread's CurrentUICulture property for all
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
-            get {
+        public static global::System.Globalization.CultureInfo Culture
+        {
+            get
+            {
                 return resourceCulture;
             }
-            set {
+            set
+            {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Channel.
         /// </summary>
-        public static string Channel {
-            get {
+        public static string Channel
+        {
+            get
+            {
                 return ResourceManager.GetString("Channel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Edit Channel.
         /// </summary>
-        public static string EditChannel {
-            get {
+        public static string EditChannel
+        {
+            get
+            {
                 return ResourceManager.GetString("EditChannel", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
-        public static string Favorites {
-            get {
+        public static string Favorites
+        {
+            get
+            {
                 return ResourceManager.GetString("Favorites", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to FT.
         /// </summary>
-        public static string FullTime {
-            get {
+        public static string FullTime
+        {
+            get
+            {
                 return ResourceManager.GetString("FullTime", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Leagues.
         /// </summary>
-        public static string Leagues {
-            get {
+        public static string Leagues
+        {
+            get
+            {
                 return ResourceManager.GetString("Leagues", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Live.
         /// </summary>
-        public static string Live {
-            get {
+        public static string Live
+        {
+            get
+            {
                 return ResourceManager.GetString("Live", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Match.
         /// </summary>
-        public static string Match {
-            get {
+        public static string Match
+        {
+            get
+            {
                 return ResourceManager.GetString("Match", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Matches.
         /// </summary>
-        public static string Matches {
-            get {
+        public static string Matches
+        {
+            get
+            {
                 return ResourceManager.GetString("Matches", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Nations.
         /// </summary>
-        public static string Nations {
-            get {
+        public static string Nations
+        {
+            get
+            {
                 return ResourceManager.GetString("Nations", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to News.
         /// </summary>
-        public static string News {
-            get {
+        public static string News
+        {
+            get
+            {
                 return ResourceManager.GetString("News", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Scores.
         /// </summary>
-        public static string Scores {
-            get {
+        public static string Scores
+        {
+            get
+            {
                 return ResourceManager.GetString("Scores", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Teams.
         /// </summary>
-        public static string Teams {
-            get {
+        public static string Teams
+        {
+            get
+            {
                 return ResourceManager.GetString("Teams", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
-        public static string Time {
-            get {
+        public static string Time
+        {
+            get
+            {
                 return ResourceManager.GetString("Time", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Transfers.
         /// </summary>
-        public static string Transfers {
-            get {
+        public static string Transfers
+        {
+            get
+            {
                 return ResourceManager.GetString("Transfers", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to TV Schedule.
         /// </summary>
-        public static string TVSchedule {
-            get {
+        public static string TVSchedule
+        {
+            get
+            {
                 return ResourceManager.GetString("TVSchedule", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Videos.
         /// </summary>
-        public static string Videos {
-            get {
+        public static string Videos
+        {
+            get
+            {
                 return ResourceManager.GetString("Videos", resourceCulture);
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to World News.
         /// </summary>
-        public static string WorldNews {
-            get {
+        public static string WorldNews
+        {
+            get
+            {
                 return ResourceManager.GetString("WorldNews", resourceCulture);
             }
         }

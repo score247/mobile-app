@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Name="view" x:Class="Common.Controls.TabStrip.TabStripHeader">
+            x:Name="view" x:Class="LiveScore.Common.Controls.TabStrip.TabStripHeader">
     <ContentView.Resources>
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />

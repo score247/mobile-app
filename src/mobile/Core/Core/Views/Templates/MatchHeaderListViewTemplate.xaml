@@ -2,7 +2,7 @@
 <DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
                 x:Class="Core.Views.Templates.MatchHeaderListViewTemplate"
-                xmlns:commonConverters="clr-namespace:Common.Converters;assembly=Common"
+                xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
                 xmlns:resources="clr-namespace:Core.ViewResources" >
     <ViewCell Height="28">
         <StackLayout>

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
+             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LiveScore.Favorites.Views.FavoriteView"
              BackgroundColor="{StaticResource PrimaryColor}">

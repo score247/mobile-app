@@ -27,7 +27,7 @@
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Shared\Common\Common.csproj" />
     <ProjectReference Include="..\..\Core\Core.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
   </ItemGroup>
 </Project>

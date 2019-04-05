@@ -10,7 +10,7 @@
             xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
             xmlns:tvschedule="clr-namespace:LiveScore.TVSchedule.Views;assembly=LiveScore.TVSchedule"
             xmlns:views="clr-namespace:LiveScore.Views"
-            xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
+            xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
             x:Class="LiveScore.Views.MenuTabbedView"
             x:Name="self"
             BarTextColor="{StaticResource SecondTextColor}"

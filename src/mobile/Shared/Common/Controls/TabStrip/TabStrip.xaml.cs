@@ -1,4 +1,4 @@
-﻿namespace Common.Controls.TabStrip
+﻿namespace LiveScore.Common.Controls.TabStrip
 {
     using System.Collections;
     using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace Common.Services
+﻿namespace LiveScore.Common.Services
 {
     using System;
     using System.Reactive.Linq;

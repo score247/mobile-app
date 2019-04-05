@@ -1,4 +1,4 @@
-﻿namespace Common.Controls
+﻿namespace LiveScore.Common.Controls
 {
     using System.Collections;
     using System.Windows.Input;
