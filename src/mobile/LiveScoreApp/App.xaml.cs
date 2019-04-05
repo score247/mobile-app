@@ -82,7 +82,7 @@ namespace LiveScoreApp
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
-            containerRegistry.Register<ILoggingService, SentryLogger>();
+            containerRegistry.Register<ILoggingService, LoggingService>();
             containerRegistry.RegisterInstance(
                 RestService.For<IMatchApi>(new HttpClient
                 {
@@ -95,7 +95,6 @@ namespace LiveScoreApp
                }));
             containerRegistry.Register<IGlobalFactory, GlobalFactory>();
         }
-            containerRegistry.Register<ILoggingService, LoggingService>();
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)
         {
