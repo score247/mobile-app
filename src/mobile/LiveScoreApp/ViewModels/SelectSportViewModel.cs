@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.ViewModels
+﻿namespace LiveScore.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@
     using Common.Extensions;
     using Core.ViewModels;
     using Core.Services;
-    using LiveScoreApp.Models;
+    using LiveScore.Models;
     using Prism.Navigation;
     using Core.Factories;
 

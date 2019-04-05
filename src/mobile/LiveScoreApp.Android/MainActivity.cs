@@ -1,12 +1,13 @@
-﻿namespace LiveScoreApp.Droid
+﻿namespace LiveScore.Droid
 {
+    using Android;
     using Android.App;
     using Android.Content.PM;
     using Android.OS;
     using Prism;
     using Prism.Ioc;
 
-    [Activity(Label = "LiveScoreApp", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "LiveScore", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)

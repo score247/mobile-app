@@ -8,7 +8,7 @@
     <ProjectGuid>{BB0F6604-FD81-4063-8D1A-40F5084CA1BC}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>LiveScoreApp.iOS</RootNamespace>
+    <RootNamespace>LiveScore.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <AssemblyName>LiveScoreApp.iOS</AssemblyName>
     <NuGetPackageImportStamp>
@@ -370,13 +370,13 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveScoreApp\LiveScoreApp.csproj">
-      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
-      <Name>LiveScoreApp</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Shared\Common\Common.csproj">
       <Project>{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}</Project>
       <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LiveScoreApp\LiveScore.csproj">
+      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
+      <Name>LiveScore</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

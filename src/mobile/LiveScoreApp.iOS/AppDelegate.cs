@@ -1,4 +1,4 @@
-namespace LiveScoreApp.iOS
+namespace LiveScore.iOS
 {
     using System;
     using CarouselView.FormsPlugin.iOS;

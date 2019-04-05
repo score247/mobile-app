@@ -5,10 +5,10 @@ using Common.LangResources;
 using Common.Services;
 using Core.Factories;
 using Core.Services;
-using LiveScoreApp.Factories;
-using LiveScoreApp.Services;
-using LiveScoreApp.ViewModels;
-using LiveScoreApp.Views;
+using LiveScore.Factories;
+using LiveScore.Services;
+using LiveScore.ViewModels;
+using LiveScore.Views;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
@@ -20,7 +20,7 @@ using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
-namespace LiveScoreApp
+namespace LiveScore
 {
     public partial class App
     {
@@ -47,7 +47,7 @@ namespace LiveScoreApp
 #endif
 
             InitializeComponent();
-            Akavache.Registrations.Start("LiveScoreAppStorage");
+            Akavache.Registrations.Start("LiveScore.Storage");
 
             var logService = Container.Resolve<ILoggingService>();
             logService.Init("https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");

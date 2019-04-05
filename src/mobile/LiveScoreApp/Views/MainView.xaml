@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                x:Class="LiveScoreApp.Views.MainView"
+                x:Class="LiveScore.Views.MainView"
                 xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
                 xmlns:nav="clr-namespace:Prism.Navigation.Xaml;assembly=Prism.Forms"
                 xmlns:behavior="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-                xmlns:resources="clr-namespace:LiveScoreApp.ViewResources"
+                xmlns:resources="clr-namespace:LiveScore.ViewResources"
                 prism:ViewModelLocator.AutowireViewModel="True"
-                xmlns:views="clr-namespace:LiveScoreApp.Views">
+                xmlns:views="clr-namespace:LiveScore.Views">
     <MasterDetailPage.Master>
         <ContentPage
             xmlns="http://xamarin.com/schemas/2014/forms"

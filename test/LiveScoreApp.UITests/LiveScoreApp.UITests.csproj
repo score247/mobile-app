@@ -50,7 +50,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\mobile\LiveScoreApp.iOS\LiveScoreApp.iOS.csproj">
       <Project>{BB0F6604-FD81-4063-8D1A-40F5084CA1BC}</Project>
-      <Name>LiveScoreApp.iOS</Name>
+      <Name>LiveScore.iOS</Name>
       <ReferenceOutputAssembly>False</ReferenceOutputAssembly>
       <Private>False</Private>
     </ProjectReference>

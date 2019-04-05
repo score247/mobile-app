@@ -1,7 +1,7 @@
-﻿namespace LiveScoreApp.Services
+﻿namespace LiveScore.Services
 {
     using System.Collections.Generic;
-    using LiveScoreApp.Models;
+    using LiveScore.Models;
 
     public interface ISportService
     {

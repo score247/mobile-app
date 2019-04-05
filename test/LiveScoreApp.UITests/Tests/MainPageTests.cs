@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.UITests.Tests
+﻿namespace LiveScore.UITests.Tests
 {
     using System.Linq;
     using NUnit.Framework;

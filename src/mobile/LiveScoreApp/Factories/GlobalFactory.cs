@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.Factories
+﻿namespace LiveScore.Factories
 {
     using BasketBall.Factories;
     using Common.Services;

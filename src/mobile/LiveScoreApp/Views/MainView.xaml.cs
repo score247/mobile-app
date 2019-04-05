@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.Views
+﻿namespace LiveScore.Views
 {
     using Prism.Navigation;
     using Xamarin.Forms;

@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.UITests
+﻿namespace LiveScore.UITests
 {
     using Xamarin.UITest;
 

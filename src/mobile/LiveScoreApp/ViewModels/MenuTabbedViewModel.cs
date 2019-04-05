@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.ViewModels
+﻿namespace LiveScore.ViewModels
 {
     using Core.Factories;
     using Core.Services;

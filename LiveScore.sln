@@ -11,11 +11,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mobile", "mobile", "{875F33
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Features", "Features", "{B0731F4B-9259-4E51-B5EF-3F18A7727280}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScoreApp", "src\mobile\LiveScoreApp\LiveScoreApp.csproj", "{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore", "src\mobile\LiveScoreApp\LiveScore.csproj", "{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScoreApp.Android", "src\mobile\LiveScoreApp.Android\LiveScoreApp.Android.csproj", "{74EEA90A-96D6-4E2E-BBE5-D9552EA7EC16}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Android", "src\mobile\LiveScoreApp.Android\LiveScore.Android.csproj", "{74EEA90A-96D6-4E2E-BBE5-D9552EA7EC16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScoreApp.iOS", "src\mobile\LiveScoreApp.iOS\LiveScoreApp.iOS.csproj", "{BB0F6604-FD81-4063-8D1A-40F5084CA1BC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.iOS", "src\mobile\LiveScoreApp.iOS\LiveScore.iOS.csproj", "{BB0F6604-FD81-4063-8D1A-40F5084CA1BC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScoreApp.UITests", "test\LiveScoreApp.UITests\LiveScoreApp.UITests.csproj", "{BF382EA4-C559-4C79-A978-CA69DE49366E}"
 EndProject

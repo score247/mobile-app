@@ -1,12 +1,12 @@
 ﻿using System;
-using LiveScoreApp.iOS.Renderers;
+using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MenuTabbedPageRenderer))]
 
-namespace LiveScoreApp.iOS.Renderers
+namespace LiveScore.iOS.Renderers
 {
     public class MenuTabbedPageRenderer : TabbedRenderer
     {

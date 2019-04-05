@@ -9,9 +9,9 @@
             xmlns:news="clr-namespace:News.Views;assembly=News"
             xmlns:favorites="clr-namespace:Favorites.Views;assembly=Favorites"
             xmlns:tvschedule="clr-namespace:TVSchedule.Views;assembly=TVSchedule"
-            xmlns:views="clr-namespace:LiveScoreApp.Views"
+            xmlns:views="clr-namespace:LiveScore.Views"
             xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
-            x:Class="LiveScoreApp.Views.MenuTabbedView"
+            x:Class="LiveScore.Views.MenuTabbedView"
             x:Name="self"
             BarTextColor="{StaticResource SecondTextColor}"
             BarBackgroundColor="{StaticResource PrimaryColor}"
@@ -37,7 +37,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
+        <NavigationPage x:Name="Faites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
             <x:Arguments>
                 <favorites:FavoriteView Title="Favorites">
                     <NavigationPage.TitleView>

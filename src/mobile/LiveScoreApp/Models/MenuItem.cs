@@ -1,4 +1,4 @@
-﻿namespace LiveScoreApp.Models
+﻿namespace LiveScore.Models
 {
     public class MenuItem
     {

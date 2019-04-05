@@ -4,7 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScoreApp.Views.SelectSportView"
+             x:Class="LiveScore.Views.SelectSportView"
              Title="Select Sport"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">

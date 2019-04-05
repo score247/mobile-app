@@ -1,6 +1,6 @@
-﻿namespace LiveScoreApp.UITests.Tests
+﻿namespace LiveScore.UITests.Tests
 {
-    using LiveScoreApp.UITests.Pages;
+    using LiveScore.UITests.Pages;
     using NUnit.Framework;
     using Xamarin.UITest;
 

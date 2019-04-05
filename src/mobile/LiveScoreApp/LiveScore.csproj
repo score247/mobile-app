@@ -40,12 +40,13 @@
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Features\Favorites\Favorites.csproj" />
-      <ProjectReference Include="..\Shared\Common\Common.csproj" />
       <ProjectReference Include="..\Features\League\League.csproj" />
       <ProjectReference Include="..\Features\Setting\Menu.csproj" />
       <ProjectReference Include="..\Features\News\News.csproj" />
       <ProjectReference Include="..\Features\Score\Score.csproj" />
       <ProjectReference Include="..\Features\TVSchedule\TVSchedule.csproj" />
+      <ProjectReference Include="..\Core\Core\Core.csproj" />
+      <ProjectReference Include="..\Shared\Common\Common.csproj" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Factories\" />
