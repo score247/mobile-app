@@ -1,4 +1,4 @@
-﻿namespace Score.ViewModels
+﻿namespace LiveScore.Score.ViewModels
 {
     using System;
     using System.Collections.ObjectModel;
@@ -12,8 +12,8 @@
     using Core.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
-    using Score.Models;
-    using Score.Views;
+    using LiveScore.Score.Models;
+    using LiveScore.Score.Views;
 
     public class ScoresViewModel : ViewModelBase
     {

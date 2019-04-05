@@ -27,17 +27,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{8F1C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\mobile\Shared\Common\Common.csproj", "{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Favorites", "src\mobile\Features\Favorites\Favorites.csproj", "{1A1585BB-4D0B-4BF0-954F-9AD7D921A2B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Favorites", "src\mobile\Features\Favorites\LiveScore.Favorites.csproj", "{1A1585BB-4D0B-4BF0-954F-9AD7D921A2B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League", "src\mobile\Features\League\League.csproj", "{BFCDAD2B-09B1-4F26-BC9F-B8D1D0DEDBE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.League", "src\mobile\Features\League\LiveScore.League.csproj", "{BFCDAD2B-09B1-4F26-BC9F-B8D1D0DEDBE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "News", "src\mobile\Features\News\News.csproj", "{35143CC0-1E85-49A3-8E0F-98CA7BBD57AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.News", "src\mobile\Features\News\LiveScore.News.csproj", "{35143CC0-1E85-49A3-8E0F-98CA7BBD57AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Score", "src\mobile\Features\Score\Score.csproj", "{5690A902-473F-4352-A4C3-0774746D80F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Score", "src\mobile\Features\Score\LiveScore.Score.csproj", "{5690A902-473F-4352-A4C3-0774746D80F9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Menu", "src\mobile\Features\Setting\Menu.csproj", "{6CFA72C4-FDDE-4E67-A6B9-9017679509F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Menu", "src\mobile\Features\Setting\LiveScore.Menu.csproj", "{6CFA72C4-FDDE-4E67-A6B9-9017679509F0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TVSchedule", "src\mobile\Features\TVSchedule\TVSchedule.csproj", "{8CB4F95C-580E-4E0A-8281-C617BFD89AC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.TVSchedule", "src\mobile\Features\TVSchedule\LiveScore.TVSchedule.csproj", "{8CB4F95C-580E-4E0A-8281-C617BFD89AC6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Domain", "src\core\LiveScore.Domain\LiveScore.Domain.csproj", "{8A3AFA98-1564-464A-8AAE-85D47DD54420}"
 EndProject

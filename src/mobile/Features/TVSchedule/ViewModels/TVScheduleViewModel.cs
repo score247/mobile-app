@@ -1,4 +1,4 @@
-﻿namespace TVSchedule.ViewModels
+﻿namespace LiveScore.TVSchedule.ViewModels
 {
     using Prism.Mvvm;
 

@@ -1,4 +1,4 @@
-﻿namespace Score.Models
+﻿namespace LiveScore.Score.Models
 {
     using System;
 

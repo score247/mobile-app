@@ -1,4 +1,4 @@
-﻿namespace League.Views
+﻿namespace LiveScore.League.Views
 {
     using Xamarin.Forms;
 

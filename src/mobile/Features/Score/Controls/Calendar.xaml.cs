@@ -1,4 +1,4 @@
-﻿namespace Score.Controls
+﻿namespace LiveScore.Score.Controls
 {
     using Xamarin.Forms;
 

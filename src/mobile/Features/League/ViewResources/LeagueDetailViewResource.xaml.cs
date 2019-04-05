@@ -1,4 +1,4 @@
-﻿namespace League.ViewResources
+﻿namespace LiveScore.League.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

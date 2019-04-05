@@ -6,6 +6,11 @@ using Common.Services;
 using Core.Factories;
 using Core.Services;
 using LiveScore.Factories;
+using LiveScore.Favorites;
+using LiveScore.League;
+using LiveScore.Menu;
+using LiveScore.News;
+using LiveScore.Score;
 using LiveScore.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
@@ -108,11 +113,11 @@ namespace LiveScore
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<League.LeagueModule>();
-            moduleCatalog.AddModule<Score.ScoreModule>();
-            moduleCatalog.AddModule<Favorites.FavoritesModule>();
-            moduleCatalog.AddModule<News.NewsModule>();
-            moduleCatalog.AddModule<Menu.MenuModule>();
+            moduleCatalog.AddModule<LeagueModule>();
+            moduleCatalog.AddModule<ScoreModule>();
+            moduleCatalog.AddModule<FavoritesModule>();
+            moduleCatalog.AddModule<NewsModule>();
+            moduleCatalog.AddModule<MenuModule>();
         }
 
     }

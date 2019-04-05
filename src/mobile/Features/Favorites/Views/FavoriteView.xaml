@@ -4,7 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Favorites.Views.FavoriteView"
+             x:Class="LiveScore.Favorites.Views.FavoriteView"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />

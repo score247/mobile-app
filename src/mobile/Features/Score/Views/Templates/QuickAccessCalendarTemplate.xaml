@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:converter="clr-namespace:Score.Converters"
+             xmlns:converter="clr-namespace:LiveScore.Score.Converters"
              xmlns:commonConverter="clr-namespace:Common.Converters;assembly=Common"
              xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              xmlns:controls="clr-namespace:Common.Controls;assembly=Common"
-             x:Class="Score.Views.Templates.QuickAccessCalendarTemplate">
+             x:Class="LiveScore.Score.Views.Templates.QuickAccessCalendarTemplate">
     <ContentView.Resources>
         <ResourceDictionary>
              <ResourceDictionary.MergedDictionaries>

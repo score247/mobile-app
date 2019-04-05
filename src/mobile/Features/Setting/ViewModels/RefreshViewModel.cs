@@ -1,4 +1,4 @@
-﻿namespace Menu.ViewModels
+﻿namespace LiveScore.Menu.ViewModels
 {
     using Core.Factories;
     using Core.Services;

@@ -1,4 +1,4 @@
-﻿namespace Menu.Views
+﻿namespace LiveScore.Menu.Views
 {
     using Xamarin.Forms;
 

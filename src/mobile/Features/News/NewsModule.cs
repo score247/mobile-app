@@ -1,7 +1,7 @@
-﻿namespace News
+﻿namespace LiveScore.News
 {
-    using News.ViewModels;
-    using News.Views;
+    using LiveScore.News.ViewModels;
+    using LiveScore.News.Views;
     using Prism.Ioc;
     using Prism.Modularity;
 

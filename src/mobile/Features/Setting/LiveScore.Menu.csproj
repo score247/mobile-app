@@ -5,6 +5,7 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
+        <DebugType></DebugType>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>

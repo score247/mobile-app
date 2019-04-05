@@ -2,8 +2,8 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
-             x:Class="Score.Views.Templates.MatchOddsBookmarkerOUTemplate"
-             xmlns:resources="clr-namespace:Score.ViewResources"
+             x:Class="LiveScore.Score.Views.Templates.MatchOddsBookmarkerOUTemplate"
+             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>
         <ResourceDictionary>

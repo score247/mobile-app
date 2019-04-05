@@ -1,4 +1,4 @@
-﻿namespace League.ViewModels
+﻿namespace LiveScore.League.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -10,7 +10,7 @@
     using Core.Models.LeagueInfo;
     using Core.Services;
     using Core.ViewModels;
-    using League.Views;
+    using LiveScore.League.Views;
     using Prism.Commands;
     using Prism.Navigation;
     using Prism.Services;

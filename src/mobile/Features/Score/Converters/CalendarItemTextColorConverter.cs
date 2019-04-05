@@ -1,8 +1,8 @@
-﻿namespace Score.Converters
+﻿namespace LiveScore.Score.Converters
 {
     using System;
     using System.Globalization;
-    using Score.Models;
+    using LiveScore.Score.Models;
     using Xamarin.Forms;
 
     public class CalendarItemTextColorConverter : IValueConverter

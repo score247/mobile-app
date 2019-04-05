@@ -1,4 +1,4 @@
-﻿namespace Score.ViewModels
+﻿namespace LiveScore.Score.ViewModels
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
@@ -7,7 +7,7 @@
     using Core.Services;
     using Core.ViewModels;
     using Prism.Navigation;
-    using Score.Views.Templates;
+    using LiveScore.Score.Views.Templates;
 
     public class MatchDetailViewModel : MatchViewModelBase
     {

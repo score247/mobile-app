@@ -1,4 +1,4 @@
-﻿namespace Score.Views.Templates
+﻿namespace LiveScore.Score.Views.Templates
 {
     using Xamarin.Forms;
 

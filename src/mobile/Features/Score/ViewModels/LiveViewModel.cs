@@ -1,4 +1,4 @@
-﻿namespace Score.ViewModels
+﻿namespace LiveScore.Score.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

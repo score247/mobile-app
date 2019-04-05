@@ -2,8 +2,8 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Name="view" 
-             x:Class="Score.Views.Templates.MatchH2HAwayTeamTemplate"
-             xmlns:resources="clr-namespace:Score.ViewResources"
+             x:Class="LiveScore.Score.Views.Templates.MatchH2HAwayTeamTemplate"
+             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
              xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>

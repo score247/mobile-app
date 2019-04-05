@@ -1,9 +1,9 @@
-﻿namespace Score
+﻿namespace LiveScore.Score
 {
     using Prism.Ioc;
     using Prism.Modularity;
-    using Score.ViewModels;
-    using Score.Views;
+    using LiveScore.Score.ViewModels;
+    using LiveScore.Score.Views;
 
     public class ScoreModule : IModule
     {

@@ -1,4 +1,4 @@
-﻿namespace Favorites.ViewModels
+﻿namespace LiveScore.Favorites.ViewModels
 {
     using Core.Factories;
     using Core.Services;

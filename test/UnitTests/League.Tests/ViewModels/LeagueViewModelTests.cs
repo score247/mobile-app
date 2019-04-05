@@ -1,4 +1,4 @@
-﻿namespace League.Tests.ViewModels
+﻿namespace LiveScore.League.Tests.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@
     using Core.Factories;
     using Core.Models.LeagueInfo;
     using Core.Services;
-    using League.ViewModels;
+    using LiveScore.League.ViewModels;
     using NSubstitute;
     using Prism.Navigation;
     using Prism.Services;

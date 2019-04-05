@@ -4,7 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Score.Views.LiveView">
+             x:Class="LiveScore.Score.Views.LiveView">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/search.png" Priority="1" />

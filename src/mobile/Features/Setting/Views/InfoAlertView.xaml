@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Menu.Views.InfoAlertView"
+             x:Class="LiveScore.Menu.Views.InfoAlertView"
              BackgroundColor="{StaticResource PrimaryColor}"
              Title="Info Alert">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">

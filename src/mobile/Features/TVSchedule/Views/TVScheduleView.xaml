@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:coreResources="clr-namespace:Core.ViewResources;assembly=Core"
-             xmlns:resources="clr-namespace:TVSchedule.ViewResources"
+             xmlns:resources="clr-namespace:LiveScore.TVSchedule.ViewResources"
              xmlns:langs="clr-namespace:Common.LangResources;assembly=Common"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="TVSchedule.Views.TVScheduleView"
+             x:Class="LiveScore.TVSchedule.Views.TVScheduleView"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/search.png" Priority="1" />

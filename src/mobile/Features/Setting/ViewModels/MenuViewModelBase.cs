@@ -1,4 +1,4 @@
-﻿namespace Menu.ViewModels
+﻿namespace LiveScore.Menu.ViewModels
 {
     using System.Threading.Tasks;
     using Common.Extensions;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Score.Views.ScoresView"
+             x:Class="LiveScore.Score.Views.ScoresView"
              x:Name="self"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
@@ -16,7 +16,7 @@
              xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
              xmlns:basketBallTemplates="clr-namespace:BasketBall.Views.Templates;assembly=BasketBall"
              
-             xmlns:templates="clr-namespace:Score.Views.Templates"
+             xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />

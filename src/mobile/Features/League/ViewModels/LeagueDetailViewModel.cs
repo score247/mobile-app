@@ -1,4 +1,4 @@
-﻿namespace League.ViewModels
+﻿namespace LiveScore.League.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

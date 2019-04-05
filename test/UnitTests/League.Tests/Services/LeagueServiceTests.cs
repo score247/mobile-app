@@ -1,4 +1,4 @@
-﻿namespace League.Tests.Services
+﻿namespace LiveScore.League.Tests.Services
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

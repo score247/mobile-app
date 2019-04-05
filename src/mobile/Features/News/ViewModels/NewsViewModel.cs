@@ -1,4 +1,4 @@
-﻿namespace News.ViewModels
+﻿namespace LiveScore.News.ViewModels
 {
     using Core.Factories;
     using Core.Services;

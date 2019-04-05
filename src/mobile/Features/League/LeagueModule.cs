@@ -1,7 +1,7 @@
-﻿namespace League
+﻿namespace LiveScore.League
 {
-    using League.ViewModels;
-    using League.Views;
+    using LiveScore.League.ViewModels;
+    using LiveScore.League.Views;
     using Prism.Ioc;
     using Prism.Modularity;
 
