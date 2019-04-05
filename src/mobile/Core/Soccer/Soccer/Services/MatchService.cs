@@ -2,37 +2,30 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Common.Services;
-    using Core.Models;
     using Core.Models.MatchInfo;
     using Core.Services;
-    using Refit;
 
-    public interface IMatchApi
-    {
-        [Get("/{sport}-t3/{group}/{lang}/schedules/{date}/results.json?api_key={key}")]
-        Task<MatchSchedule> GetDailyMatches(string sport, string group, string lang, string date, string key);
-    }
-
-    public class MatchService : IMatchService
+    public class MatchService : BaseService, IMatchService
     {
         private const int CacheHours = 2;
         private const int CachedMonths = 1;
-        private readonly IMatchApi matchApi;
+        private readonly IMatchApi soccerMatchApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
-        private readonly ILoggingService logService;
 
-        public MatchService(IMatchApi matchApi, ISettingsService settingsService, ICacheService cacheService, ILoggingService logService)
+        public MatchService(
+            IMatchApi soccerMatchApi,
+            ISettingsService settingsService,
+            ICacheService cacheService,
+            ILoggingService loggingService) : base(loggingService)
         {
             this.settingsService = settingsService;
             this.cacheService = cacheService;
-            this.matchApi = matchApi;
-            this.logService = logService;
+            this.soccerMatchApi = soccerMatchApi;
         }
 
         public async Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false)
@@ -48,6 +41,16 @@
                 () => GetMatchesByGroup(sportName, language, eventDate),
                 forceFetchNewData,
                 cacheExpiration);
+        }
+
+        public async Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
+        {
+            var sportType = settingsService.SportNameMapper[settingsService.CurrentSportName];
+            var lang = settingsService.LanguageMapper[settingsService.CurrentLanguage];
+            var matchEvents = await GetMatchEvents(group, sportType, lang, leagueId);
+            var matches = matchEvents.Select(x => new Match { Event = x }).ToList();
+
+            return matches;
         }
 
         private async Task<IList<Match>> GetMatchesByGroup(string sportName, string language, string eventDate)
@@ -70,23 +73,36 @@
 
             try
             {
-                var dailySchedule = await matchApi.GetDailyMatches(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
+                var dailySchedule = await soccerMatchApi.GetDailyMatches(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
                 dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
                 return dailySchedule.Matches;
             }
             catch (Exception ex)
             {
-                logService.LogError(ex);
-                Debug.WriteLine(ex.Message);
+                HandleException(ex);
 
                 return Enumerable.Empty<Match>();
             }
         }
 
-        public Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
+        private async Task<IList<MatchEvent>> GetMatchEvents(string group, string sportName, string language, string leagueId)
         {
-            throw new NotImplementedException();
+            var apiKeyByGroup = settingsService.ApiKeyMapper[group];
+            var matches = new List<MatchEvent>();
+
+            try
+            {
+                var result = await soccerMatchApi.GetMatchesByLeague(sportName, group, language, leagueId, apiKeyByGroup).ConfigureAwait(false);
+
+                return result.SportEvents;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return matches;
         }
     }
 }

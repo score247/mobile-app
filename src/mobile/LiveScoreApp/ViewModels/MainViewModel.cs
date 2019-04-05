@@ -3,7 +3,9 @@
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.ViewModels;
+    using Core.Factories;
+    using Core.Services;
+    using Core.ViewModels;
     using LiveScoreApp.Services;
     using Prism.Commands;
     using Prism.Navigation;
@@ -14,7 +16,11 @@
         private Models.MenuItem selectedMenuItem;
         private bool nightMode;
 
-        public MainViewModel(INavigationService navigationService, IMenuService menuService) : base(navigationService)
+        public MainViewModel(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService,
+            IMenuService menuService) : base(navigationService, globalFactory, settingsService)
         {
             MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);

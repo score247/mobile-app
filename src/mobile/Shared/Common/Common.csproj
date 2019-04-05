@@ -47,6 +47,5 @@
         </Folder>
         <Folder Include="Controls\TabStrip\">
         </Folder>
-        <Folder Include="ViewModels\" />
     </ItemGroup>
 </Project>

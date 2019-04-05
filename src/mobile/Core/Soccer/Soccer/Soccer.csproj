@@ -12,6 +12,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Services\" />
     <Folder Include="Views\Templates\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />

@@ -3,15 +3,24 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Common.ViewModels;
+    using Core.ViewModels;
     using Core.Models.MatchInfo;
     using Prism.Commands;
     using Prism.Navigation;
+    using Core.Factories;
+    using Core.Services;
 
     public class LiveViewModel : ViewModelBase
     {
         private ObservableCollection<IGrouping<string, Match>> groupMatches;
         private bool isRefreshingMatchList;
+
+        public LiveViewModel(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+        {
+        }
 
         public ObservableCollection<IGrouping<string, Match>> GroupMatches
         {
@@ -32,11 +41,6 @@
                 GetMatches();
                 IsRefreshingMatchList = false;
             });
-
-        public LiveViewModel(INavigationService navigationService)
-            : base(navigationService)
-        {
-        }
 
         public override void OnAppearing()
         {

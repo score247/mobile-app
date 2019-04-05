@@ -5,9 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.ViewModels;
+    using Core.Contants;
+    using Core.Factories;
     using Core.Models.LeagueInfo;
-    using League.Services;
+    using Core.Services;
+    using Core.ViewModels;
     using League.Views;
     using Prism.Commands;
     using Prism.Navigation;
@@ -23,11 +25,16 @@
         private string filter;
         private ObservableCollection<LeagueItem> leagues;
 
-        public LeagueViewModel(INavigationService navigationService, ILeagueService leagueService, IPageDialogService pageDialogService)
-          : base(navigationService)
+
+        public LeagueViewModel(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService,
+            IPageDialogService pageDialogService)
+                : base(navigationService, globalFactory, settingsService)
         {
             Title = "League";
-            this.leagueService = leagueService;
+            leagueService = GlobalFactory.BuildSportService((SportType)SettingsService.CurrentSportId).CreateLeagueService();
             this.pageDialogService = pageDialogService;
 
             ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
@@ -121,7 +128,7 @@
 
         private async Task GetLeagues()
         {
-            var leagueGroups = await leagueService.GetLeaguesAsync();
+            var leagueGroups = await leagueService.GetLeagues();
 
             Leagues = new ObservableCollection<LeagueItem>(leagueGroups);
 

@@ -3,27 +3,27 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.ViewModels;
+    using Core.ViewModels;
     using Core.Services;
     using LiveScoreApp.Models;
     using LiveScoreApp.Services;
     using LiveScoreApp.Views;
     using Prism.Navigation;
+    using Core.Factories;
 
     public class NavigationTitleViewModel : ViewModelBase
     {
         private readonly ISportService sportService;
-        private readonly ISettingsService settingsService;
         private string currentSportName;
         private IEnumerable<SportItem> sportItems;
 
         public NavigationTitleViewModel(
             INavigationService navigationService,
-            ISportService sportService,
-            ISettingsService settingsService) : base(navigationService)
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService,
+            ISportService sportService) : base(navigationService, globalFactory, settingsService)
         {
             this.sportService = sportService;
-            this.settingsService = settingsService;
             SelectSportCommand = new DelegateAsyncCommand(NavigateSelectSportPage);
         }
 
@@ -37,12 +37,12 @@
 
         public override void OnAppearing()
         {
-            CurrentSportName = settingsService.CurrentSportName.ToUpperInvariant();
+            CurrentSportName = SettingsService.CurrentSportName.ToUpperInvariant();
             sportItems = sportService.GetSportItems();
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Id == settingsService.CurrentSportId;
+                sportItem.IsVisible = sportItem.Id == SettingsService.CurrentSportId;
             }
         }
 

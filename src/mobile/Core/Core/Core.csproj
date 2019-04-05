@@ -17,6 +17,7 @@
     <Folder Include="Contants\" />
     <Folder Include="Models\" />
     <Folder Include="Models\LeagueInfo\" />
+    <Folder Include="Factories\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\Common.csproj" />

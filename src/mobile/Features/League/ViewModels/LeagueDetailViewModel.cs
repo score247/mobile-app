@@ -4,25 +4,29 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using Common.ViewModels;
+    using Core.ViewModels;
     using Core.Models.LeagueInfo;
     using Core.Models.MatchInfo;
-    using Core.ViewModels;
-    using League.Services;
     using Prism.Commands;
     using Prism.Navigation;
+    using Core.Factories;
+    using Core.Services;
+    using Core.Contants;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        private readonly ILeagueService leagueService;
+        private readonly IMatchService matchService;
         private bool isRefreshingMatchList;
         private LeagueItem selectedLeagueName;
         private ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> groupMatches;
 
-        public LeagueDetailViewModel(INavigationService navigationService, ILeagueService leagueService)
-            : base(navigationService)
+        public LeagueDetailViewModel(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService)
+                : base(navigationService, globalFactory, settingsService)
         {
-            this.leagueService = leagueService;
+            matchService = GlobalFactory.BuildSportService((SportType)SettingsService.CurrentSportId).CreateMatchService();
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>();
         }
 
@@ -42,7 +46,7 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                leagueService.GetMatchesAsync(selectedLeagueName.Id, selectedLeagueName.GroupName);
+                matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
                 IsRefreshingMatchList = false;
             });
 
@@ -67,7 +71,7 @@
             // TODO process grouped
             if (!selectedLeagueName.IsGrouped)
             {
-                matches = await leagueService.GetMatchesAsync(selectedLeagueName.Id, selectedLeagueName.GroupName);
+                matches = await matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
             }
 
             var groups = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>(

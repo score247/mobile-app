@@ -5,12 +5,14 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Common.ViewModels;
+    using Core.Contants;
+    using Core.Factories;
     using Core.Models.MatchInfo;
+    using Core.Services;
+    using Core.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
     using Score.Models;
-    using Score.Services;
     using Score.Views;
 
     public class ScoresViewModel : ViewModelBase
@@ -19,7 +21,7 @@
         private const int MoreOldDayCount = 7;
         private const int MoreNewDayCount = 3;
 
-        private readonly IMatchService matchService;
+        private IMatchService matchService;
 
         private int oldDateCalendarItemCount = 3;
         private int newDateCalendarItemCount = 7;
@@ -33,13 +35,12 @@
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IMatchService matchService)
-        : base(navigationService)
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService)
+        : base(navigationService, globalFactory, settingsService)
         {
-            this.matchService = matchService;           
-
             InitializeCommands();
-
+            InitServicesBySportType();
             SelectHome = true;
         }
 
@@ -51,6 +52,7 @@
 
             if (changeSport || GroupMatches == null)
             {
+                InitServicesBySportType();
                 await InitializeData();
             }
         }
@@ -125,6 +127,13 @@
             LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
             SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
             SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
+        }
+
+        private void InitServicesBySportType()
+        {
+            matchService = GlobalFactory
+                .BuildSportService((SportType)SettingsService.CurrentSportId)
+                .CreateMatchService();
         }
 
         private async Task OnRefreshMatchListCommandAsync()

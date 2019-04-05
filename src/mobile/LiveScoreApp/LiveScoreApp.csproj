@@ -47,4 +47,7 @@
       <ProjectReference Include="..\Features\Score\Score.csproj" />
       <ProjectReference Include="..\Features\TVSchedule\TVSchedule.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Factories\" />
+    </ItemGroup>
 </Project>

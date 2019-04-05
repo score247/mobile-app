@@ -1,5 +1,8 @@
-﻿namespace Common.ViewModels
+﻿namespace Core.ViewModels
 {
+    using Core.Contants;
+    using Core.Factories;
+    using Core.Services;
     using Prism.AppModel;
     using Prism.Mvvm;
     using Prism.Navigation;
@@ -15,12 +18,21 @@
             set { SetProperty(ref title, value); }
         }
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService)
         {
             NavigationService = navigationService;
+            GlobalFactory = globalFactory;
+            SettingsService = settingsService;
         }
 
         protected INavigationService NavigationService { get; }
+
+        protected IGlobalFactory GlobalFactory { get; }
+
+        protected ISettingsService SettingsService { get; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

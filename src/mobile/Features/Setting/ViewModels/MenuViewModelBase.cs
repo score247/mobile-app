@@ -2,11 +2,17 @@
 {
     using System.Threading.Tasks;
     using Common.Extensions;
+    using Core.Factories;
+    using Core.Services;
+    using Core.ViewModels;
     using Prism.Navigation;
 
-    public class ViewModelBase : Common.ViewModels.ViewModelBase
+    public class MenuViewModelBase : ViewModelBase
     {
-        public ViewModelBase(INavigationService navigationService) : base(navigationService)
+        public MenuViewModelBase(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
             DoneCommand = new DelegateAsyncCommand(OnDone);
         }
@@ -15,6 +21,7 @@
 
         protected virtual async Task OnDone()
         {
+
             await NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }

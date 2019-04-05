@@ -2,7 +2,9 @@
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
+    using Core.Factories;
     using Core.Models.MatchInfo;
+    using Core.Services;
     using Core.ViewModels;
     using Prism.Navigation;
     using Score.Views.Templates;
@@ -17,8 +19,11 @@
             set { SetProperty(ref matchDetailItems, value); }
         }
 
-        public MatchDetailViewModel(INavigationService navigationService)
-            : base(navigationService)
+        public MatchDetailViewModel(
+            INavigationService navigationService,
+            IGlobalFactory globalFactory,
+            ISettingsService settingsService)
+                : base(navigationService, globalFactory, settingsService)
         {
             MatchDetailItems = new List<TabModel>();
         }
@@ -43,7 +48,17 @@
             {
                 new TabModel { Name = "Odds", Template = new MatchTableTotalFullListTemplate() },
                 //new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
-                //new TabModel { Name = "Trackers", Template = new MatchTrackerTemplate { BindingContext = new MatchViewModelBase(NavigationService) { MatchId = matchId } } },
+                new TabModel
+                {
+                    Name = "Trackers",
+                    Template = new MatchTrackerTemplate
+                    {
+                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactory, SettingsService)
+                        {
+                            MatchId = matchId
+                        }
+                    }
+                },
                 //new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
                 //new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
                 //new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },

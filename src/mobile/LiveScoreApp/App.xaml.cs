@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Net.Http;
 using System.Reflection;
 using Common.LangResources;
 using Common.Services;
+using Core.Factories;
 using Core.Services;
+using LiveScoreApp.Factories;
 using LiveScoreApp.Services;
 using LiveScoreApp.ViewModels;
 using LiveScoreApp.Views;
@@ -11,6 +14,7 @@ using Prism;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Refit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -67,13 +71,34 @@ namespace LiveScoreApp
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            RegisterServices(containerRegistry);
+            RegisterForNavigation(containerRegistry);
+        }
+
+        private static void RegisterServices(IContainerRegistry containerRegistry)
+        {
             containerRegistry.Register<ICacheService, CacheService>();
             containerRegistry.Register<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
+            containerRegistry.Register<ILoggingService, SentryLogger>();
+            containerRegistry.RegisterInstance(
+                RestService.For<IMatchApi>(new HttpClient
+                {
+                    BaseAddress = new Uri(SettingsService.ApiEndPoint)
+                }));
+            containerRegistry.RegisterInstance(
+               RestService.For<ILeagueApi>(new HttpClient
+               {
+                   BaseAddress = new Uri(SettingsService.ApiEndPoint)
+               }));
+            containerRegistry.Register<IGlobalFactory, GlobalFactory>();
+        }
             containerRegistry.Register<ILoggingService, LoggingService>();
 
+        private static void RegisterForNavigation(IContainerRegistry containerRegistry)
+        {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainView>();
             containerRegistry.RegisterForNavigation<MenuTabbedView>();

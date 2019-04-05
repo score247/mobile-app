@@ -8,8 +8,6 @@
 
     public interface ISettingsService
     {
-        string ApiEndPoint { get; }
-
         string[] LeagueGroups { get; }
 
         IDictionary<string, string> ApiKeyMapper { get; }
@@ -31,7 +29,7 @@
 
     public class SettingsService : ISettingsService
     {
-        public string ApiEndPoint => "https://api.sportradar.us";
+        public static string ApiEndPoint => "https://api.sportradar.us";
 
         public IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
