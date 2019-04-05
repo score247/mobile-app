@@ -1,13 +1,16 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.DomainModels.Matches
 {
     using System;
     using System.Collections.Generic;
+    using LiveScore.Domain.DomainModels.Teams;
 
     public interface IMatch : IEntity<string, string>
     {
         DateTime EventDate { get; }
 
         IList<ITeam> Teams { get; }
+
+        bool IsLive { get; }
 
         IMatchResult MatchResult { get; }
 
@@ -27,5 +30,7 @@
         public ITimeLine TimeLine { get; set; }
 
         public IMatchCondition EventCondition { get; set; }
+
+        public bool IsLive { get; set; }
     }
 }

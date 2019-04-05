@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.DomainModels.Matches
 {
     using System.Collections.Generic;
 

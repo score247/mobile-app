@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.DomainModels.Matches
 {
     public interface IVenue : IEntity<string, string>
     {

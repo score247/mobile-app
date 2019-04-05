@@ -1,7 +1,8 @@
-﻿namespace LiveScore.Domain.DomainModels
+﻿namespace LiveScore.Domain.DomainModels.Matches
 {
     using System;
     using System.Collections.Generic;
+    using LiveScore.Domain.DomainModels.Teams;
 
     public interface ITimeLine : IEntity<long, string>
     {

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LiveScore.Domain.DomainModels;
+    using LiveScore.Domain.DomainModels.Leagues;
 
     public interface LeagueDataAccess
     {
