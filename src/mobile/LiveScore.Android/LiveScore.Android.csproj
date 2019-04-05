@@ -64,6 +64,9 @@
         <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.1" />
         <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.1" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+        <PackageReference Include="Refit">
+          <Version>4.6.99</Version>
+        </PackageReference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="MainActivity.cs">
@@ -95,14 +98,10 @@
         </AndroidResource>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\LiveScoreApp\LiveScore.csproj">
-            <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
-            <Name>LiveScore</Name>
-        </ProjectReference>
-        <ProjectReference Include="..\Shared\Common\Common.csproj">
-            <Project>{B733EBE7-5193-4230-B5AF-F6A72B13EF7E}</Project>
-            <Name>LiveScore.Common</Name>
-        </ProjectReference>
+      <ProjectReference Include="..\LiveScore\LiveScore.csproj">
+        <Project>{35AC5E48-81EF-4ACA-9FEC-776C84E3F2AB}</Project>
+        <Name>LiveScore</Name>
+      </ProjectReference>
     </ItemGroup>
     <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

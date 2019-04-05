@@ -30,6 +30,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
-    <ProjectReference Include="..\..\Core\Core\LiveScore.Core.csproj" />
+    <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
   </ItemGroup>
 </Project>

@@ -33,9 +33,7 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-        <ProjectReference Include="..\..\Core\Soccer\Soccer\Soccer.csproj" />
-        <ProjectReference Include="..\..\Core\BasketBall\BasketBall\BasketBall.csproj" />
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
-        <ProjectReference Include="..\..\Core\Core\LiveScore.Core.csproj" />
+        <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
     </ItemGroup>
 </Project>

@@ -484,8 +484,8 @@
     <BundleResource Include="Resources\images\common\user4.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LiveScoreApp\LiveScore.csproj">
-      <Project>{FED8DC8C-0854-4DCA-ADB3-87ABD5DB4D59}</Project>
+    <ProjectReference Include="..\LiveScore\LiveScore.csproj">
+      <Project>{35AC5E48-81EF-4ACA-9FEC-776C84E3F2AB}</Project>
       <Name>LiveScore</Name>
     </ProjectReference>
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj">
