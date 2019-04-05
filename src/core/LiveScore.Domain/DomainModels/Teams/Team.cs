@@ -13,15 +13,13 @@
         //"formation": "4-2-3-1",
         string Formation { get; }
 
-        IEnumerable<Player> Players { get; }
-
         ITeamStatistic Statistic { get; }
 
         ICoach Coach { get; }
 
-        IEnumerable<ITeamLineUp> StartingLineUps { get; }
+        IEnumerable<Player> Players { get; }
 
-        IEnumerable<ITeamLineUp> Substitutions { get; }
+        IEnumerable<Player> Substitutions { get; }
     }
 
     public class Team : Entity<string, string>, ITeam
@@ -40,8 +38,6 @@
 
         public string Formation { get; set; }
 
-        public IEnumerable<ITeamLineUp> StartingLineUps { get; set; }
-
-        public IEnumerable<ITeamLineUp> Substitutions { get; set; }
+        public IEnumerable<Player> Substitutions { get; set; }
     }
 }
