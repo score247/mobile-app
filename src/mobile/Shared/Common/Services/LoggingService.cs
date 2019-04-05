@@ -8,32 +8,32 @@
 
     public interface ILoggingService
     {
-        void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null);
-
-        void TrackEvent(string trackIdentifier, string key, string value);
-
         Task LogErrorAsync(Exception exception);
 
         void LogError(Exception exception);
 
-        SentryEvent CreateSentryEvent(Exception exception);
+        void TrackEvent(string trackIdentifier, string key, string value);
     }
 
-    public class SentryLogger : ILoggingService
+    public class LoggingService : ILoggingService
     {
         private const string Dsn = "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
         private readonly IEssentialsService deviceInfo;
 
         private readonly RavenClient ravenClient;
 
-        public SentryLogger(IEssentialsService deviceInfo)
+        public LoggingService(IEssentialsService deviceInfo)
         {
             this.deviceInfo = deviceInfo;
 
             ravenClient = new RavenClient(Dsn) { Release = deviceInfo.AppVersion };
         }
 
-        public SentryEvent CreateSentryEvent(Exception exception)
+        public void LogError(Exception exception) => ravenClient.Capture(CreateSentryEvent(exception));
+
+        public Task LogErrorAsync(Exception exception) => ravenClient.CaptureAsync(CreateSentryEvent(exception));
+
+        private SentryEvent CreateSentryEvent(Exception exception)
         {
             var evt = new SentryEvent(exception);
 
@@ -45,11 +45,7 @@
             return evt;
         }
 
-        public void LogError(Exception exception) => ravenClient.Capture(CreateSentryEvent(exception));
-
-        public Task LogErrorAsync(Exception exception) => ravenClient.CaptureAsync(CreateSentryEvent(exception));
-
-        public void TrackEvent(string trackIdentifier, IDictionary<string, string> table = null)
+        private void TrackEvent(string trackIdentifier, IDictionary<string, string> table)
             => ravenClient.AddTrail(
                 new Breadcrumb(trackIdentifier)
                 {
