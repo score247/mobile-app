@@ -5,15 +5,14 @@
     <Style x:Key="SideBar" TargetType="StackLayout">
         <Setter Property="Margin" Value="0,50,0,0" />
     </Style>
-    <Style x:Key="NavGroup" TargetType="StackLayout">
+    <Style x:Key="NavGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="NavGroupName" TargetType="Label">
-        <Setter Property="HeightRequest" Value="28" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
     </Style>
     <Style x:Key="NavIcon" BasedOn="{StaticResource Icons}" TargetType="Label">

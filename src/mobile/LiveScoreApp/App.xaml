@@ -73,6 +73,18 @@
             <x:Double x:Key="QuickAccessCalendarDateFontSize">18</x:Double>
             <x:Double x:Key="QuickAccessCalendarDayFontSize">6</x:Double>
 
+            <!-- Define Height-size -->
+            <x:Double x:Key="TabsHeight">30</x:Double>
+            <x:Double x:Key="SubTabsHeight">24</x:Double>
+            
+            <x:Double x:Key="FunctionGroupHeight">28</x:Double>
+            <Color x:Key="FunctionGroupColor">#666</Color>
+            
+            <x:Double x:Key="SettingMenuHeight">44</x:Double>
+
+            <x:Double x:Key="LeagueHeight">44</x:Double>
+            <x:Double x:Key="RowTableHeight">32</x:Double>
+
             <!-- Calendar Page -->
             <Color x:Key="DateColor">#fff</Color>
             <Color x:Key="DisabledDateColor">#636886</Color>
@@ -142,17 +154,14 @@
             </Style>
             
             <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
-                <Setter Property="Direction" Value="Row" />
                 <Setter Property="JustifyContent" Value="SpaceBetween" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
             <Style x:Key="FlexLayoutAlignLeft" TargetType="FlexLayout">
-                <Setter Property="Direction" Value="Row" />
                 <Setter Property="JustifyContent" Value="Start" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
             <Style x:Key="FlexLayoutAlignRight" TargetType="FlexLayout">
-                <Setter Property="Direction" Value="Row" />
                 <Setter Property="JustifyContent" Value="End" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
@@ -172,10 +181,8 @@
             </Style>
 
             <!-- Sidebar -->
-
             <Style x:Key="SettingMenuRow" TargetType="FlexLayout">
-                <Setter Property="Direction" Value="Row" />
-                <Setter Property="HeightRequest" Value="44" />
+                <Setter Property="HeightRequest" Value="{StaticResource SettingMenuHeight}" />
                 <Setter Property="AlignItems" Value="Center" />
                 <Setter Property="JustifyContent" Value="SpaceBetween"/>
                 <Setter Property="Padding" Value="16,0"/>
@@ -188,7 +195,6 @@
             <Style x:Key="NavValue" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource ThirdTextColor}" />
                 <Setter Property="FontSize" Value="{StaticResource SidebarFontSize}" />
-                <Setter Property="Margin" Value="0,14" />
             </Style>
             
             <!-- Icons -->
@@ -232,7 +238,6 @@
                 <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="WidthRequest" Value="12" />
             </Style>
 
@@ -294,7 +299,7 @@
 
             <!-- NavTabs -->
             <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
                 <Setter Property="Margin" Value="0,0,0,12" />
             </Style>
             <Style x:Key="Tab" TargetType="StackLayout">
@@ -319,14 +324,14 @@
 
             <!-- League Group -->
             <Style x:Key="LeagueGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-                <Setter Property="HeightRequest" Value="44" />
-                <Setter Property="Margin" Value="0,12,0,0" />
+                <Setter Property="HeightRequest" Value="{StaticResource LeagueHeight}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+                <Setter Property="Padding" Value="16,0" />
             </Style>
             <Style x:Key="LeagueLogo" TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="WidthRequest" Value="21" />
-                <Setter Property="Margin" Value="10,0,12,0" />
+                <Setter Property="Margin" Value="0,0,12,0" />
             </Style>
             <Style x:Key="LeagueName" TargetType="Label">
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -335,7 +340,7 @@
                 <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
             <Style x:Key="LeagueArrowRightIcon" BasedOn="{StaticResource ArrowRightIcon}" TargetType="Label">
-                <Setter Property="Margin" Value="10,0" />
+                <Setter Property="Margin" Value="10,0,0,0" />
             </Style>
             
             <Style x:Key="CenterActivityIndicator" TargetType="ActivityIndicator">
@@ -354,7 +359,7 @@
             </Style>
             
             <Style x:Key="TableRow" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-                <Setter Property="HeightRequest" Value="30" />
+                <Setter Property="HeightRequest" Value="{StaticResource RowTableHeight}" />
                 <Setter Property="AlignItems" Value="Stretch" />
             </Style>
 

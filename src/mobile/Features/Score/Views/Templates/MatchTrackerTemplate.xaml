@@ -20,10 +20,10 @@
             <Image Source="images/common/tracker.png" Aspect="AspectFill" />
         </StackLayout>
         <!-- COMMENTARIES -->
-        <StackLayout Style="{StaticResource Group}">
+        <FlexLayout Style="{StaticResource Group}">
             <Label Text="COMMENTARIES" Style="{StaticResource GroupName}" />
-            <Label Text="Highlight" Style="{StaticResource OptionGroup}" />
-        </StackLayout>
+            <Label Text="Highlight" Style="{StaticResource GroupName}" />
+        </FlexLayout>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="42" />
@@ -36,9 +36,7 @@
                 <RowDefinition Height="auto" />
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
-            <!-- Match ends -->
-                
-                
+            <!-- Match ends -->                
          
             <Label Style="{StaticResource MatchEndIcon}" />
             <Label Grid.Column="1" Grid.Row="0" Text="Match ends, Verona 2, Cosenza 1." Style="{StaticResource CommentariesText}" />

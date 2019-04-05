@@ -46,7 +46,7 @@
         {
             MatchDetailItems = new List<TabModel>
             {
-                new TabModel { Name = "Odds", Template = new MatchTableTotalFullListTemplate() },
+                new TabModel { Name = "Odds", Template = new MatchOdds1x2Template() },
                 //new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
                 new TabModel
                 {
@@ -59,12 +59,12 @@
                         }
                     }
                 },
-                //new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
-                //new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
-                //new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
-                //new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
-                //new TabModel { Name = "Social", Template = new MatchSocialTemplate() },
-                //new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
+                new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
+                new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
+                new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
+                new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
+                new TabModel { Name = "Social", Template = new MatchSocialTemplate() },
+                new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
             };
         }
     }

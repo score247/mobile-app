@@ -6,29 +6,28 @@
     <Style x:Key="LeagueBox" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
     <Style x:Key="LeagueFlagContainer" TargetType="StackLayout">
         <Setter Property="WidthRequest" Value="16" />
         <Setter Property="HeightRequest" Value="12" />
-        <Setter Property="Margin" Value="15, 8, 12, 8" />
+        <Setter Property="Margin" Value="0, 0, 12, 0" />
     </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
         <Setter Property="Aspect" Value="AspectFit" />        
     </Style>
     <Style x:Key="LeagueName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style x:Key="MatchDate" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
-    </Style>
-
-    <Style x:Key="LeagueDetail" BasedOn="{StaticResource DetailIcon}" TargetType="Label">
-        <Setter Property="Margin" Value="15,0" />
+        <Setter Property="Margin" Value="0,0,8,0" />
     </Style>
     
     <Style x:Key="MatchStatus" TargetType="Label">

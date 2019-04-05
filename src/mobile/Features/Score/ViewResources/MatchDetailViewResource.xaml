@@ -54,14 +54,6 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <!-- Tab -->
-    <Style x:Key="ScrollTab" TargetType="ScrollView">
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="HeightRequest" Value="24" />
-        <Setter Property="Padding" Value="8,0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-    </Style>
-
     <!-- SubTab -->
     <Style x:Key="SubTabContainer" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
@@ -72,7 +64,7 @@
     <Style x:Key="SubTabBox" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Stretch" />
-        <Setter Property="HeightRequest" Value="28" />
+        <Setter Property="HeightRequest" Value="{StaticResource SubTabsHeight}" />
     </Style>
     <Style x:Key="CommonSubTab" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
@@ -90,23 +82,17 @@
     </Style>
     
     <!-- Group -->
-    <Style x:Key="Group" TargetType="StackLayout">
+    <Style x:Key="Group" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Padding" Value="16,0" />
-        <Setter Property="HeightRequest" Value="28" />
-        <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
-        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
 
     <Style x:Key="GroupName" TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />        
-    </Style>
+    </Style>    
 
     <Style x:Key="TopInfo" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />

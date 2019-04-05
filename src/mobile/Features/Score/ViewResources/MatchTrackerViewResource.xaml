@@ -4,13 +4,6 @@
                     x:Class="Score.ViewResources.MatchTrackerViewResource">
     
     <!-- Commentaries -->
-    <Style x:Key="OptionGroup" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
 
     <Style x:Key="MatchEndIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Grid.Column" Value="0" />

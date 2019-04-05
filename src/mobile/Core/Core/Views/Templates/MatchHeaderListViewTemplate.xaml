@@ -22,7 +22,7 @@
                 <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
                 <Label Text="{Binding Key.ShortEventDate}"
                        Style="{StaticResource MatchDate}" />
-                <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
+                <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
             </FlexLayout>
         </StackLayout>
     </ViewCell>

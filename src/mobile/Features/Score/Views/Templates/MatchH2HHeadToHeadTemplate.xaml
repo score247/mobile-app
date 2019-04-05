@@ -52,7 +52,7 @@
                     <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
                     <Label Text="29 Jan, 2019"
                    Style="{StaticResource MatchDate}" />
-                    <Label x:Name="DetailIcon" Style="{StaticResource LeagueDetail}" />
+                    <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
                 </FlexLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"
@@ -81,7 +81,7 @@
                         <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
                         <Label Text="29 Jan, 2019"
                        Style="{StaticResource MatchDate}" />
-                        <Label Style="{StaticResource LeagueDetail}" />
+                        <Label Style="{StaticResource DetailIcon}" />
                     </FlexLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <Label Text="FT"

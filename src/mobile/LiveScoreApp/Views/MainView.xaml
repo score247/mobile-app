@@ -29,9 +29,9 @@
             <ScrollView>
                 <StackLayout Style="{StaticResource SideBar}">
                     <!-- Settings -->
-                    <StackLayout Style="{StaticResource NavGroup}">
+                    <FlexLayout Style="{StaticResource NavGroup}">
                         <Label Text="SETTINGS" Style="{StaticResource NavGroupName}" />
-                    </StackLayout>
+                    </FlexLayout>
                     <FlexLayout x:Name="Refresh" Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
                             <Label Style="{StaticResource NavIcon}" Text="&#xe90d;" />
@@ -136,9 +136,9 @@
                     </FlexLayout>
 
                     <!-- Information -->
-                    <StackLayout  Style="{StaticResource NavGroup}">
+                    <FlexLayout  Style="{StaticResource NavGroup}">
                         <Label Text="INFORMATION" Style="{StaticResource NavGroupName}" />
-                    </StackLayout>
+                    </FlexLayout>
                     <FlexLayout x:Name="FAQ" Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
                             <Label Style="{StaticResource NavIcon}" Text="&#xe908;" />
@@ -173,9 +173,9 @@
                     </FlexLayout>
 
                     <!-- My profiles -->
-                    <StackLayout  Style="{StaticResource NavGroup}">
+                    <FlexLayout  Style="{StaticResource NavGroup}">
                         <Label Text="MY PROFILES" Style="{StaticResource NavGroupName}" />
-                    </StackLayout>
+                    </FlexLayout>
                     
                     <FlexLayout x:Name="ChangePassword" Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">

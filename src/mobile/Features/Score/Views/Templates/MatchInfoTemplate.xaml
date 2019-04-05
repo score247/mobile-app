@@ -123,9 +123,9 @@
                 </FlexLayout>
             </FlexLayout>
             <!-- Match info -->
-            <StackLayout Style="{StaticResource Group}">
+            <FlexLayout Style="{StaticResource Group}">
                 <Label Text="MATCH INFO" Style="{StaticResource GroupName}" />
-            </StackLayout>
+            </FlexLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />

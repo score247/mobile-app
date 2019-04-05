@@ -36,6 +36,9 @@
             </StackLayout>
             <Label Style="{StaticResource LeagueArrowRightIcon}" />
         </FlexLayout>
+        <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </ContentView>
         <FlexLayout x:Name="EuropaLeague" Style="{StaticResource LeagueGroup}">
             <StackLayout Orientation="Horizontal"
                          HorizontalOptions="StartAndExpand">

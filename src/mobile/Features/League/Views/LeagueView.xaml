@@ -23,6 +23,7 @@
             </SearchBar.Behaviors>
         </SearchBar>
         <ListView x:Name="ItemsListView"
+                SeparatorVisibility="None"
                 IsVisible="{Binding HasData}"
                 ItemsSource="{Binding Leagues}"
                 IsPullToRefreshEnabled="true"
@@ -32,13 +33,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <FlexLayout Style="{StaticResource LeagueGroup}">
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
-                                <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                                <Label Text="{Binding Name}" Style="{StaticResource LeagueName}" />
-                            </StackLayout>
-                            <Label Style="{StaticResource LeagueArrowRightIcon}" />
-                        </FlexLayout>
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource LeagueGroup}">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                    <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
+                                    <Label Text="{Binding Name}" Style="{StaticResource LeagueName}" />
+                                </StackLayout>
+                                <Label Style="{StaticResource LeagueArrowRightIcon}" />
+                            </FlexLayout>
+                            <ContentView>
+                                <BoxView Style="{StaticResource HorizontalLine}" />
+                            </ContentView>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

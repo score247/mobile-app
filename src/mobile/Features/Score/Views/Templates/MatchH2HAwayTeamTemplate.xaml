@@ -32,7 +32,7 @@
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
                         <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
-                        <Label Style="{StaticResource LeagueDetail}" />
+                        <Label Style="{StaticResource DetailIcon}" />
                     </FlexLayout>
                 </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">

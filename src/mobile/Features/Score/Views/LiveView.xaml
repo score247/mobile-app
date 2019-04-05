@@ -35,7 +35,7 @@
                         <Image Source="flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         <Label Text="{Binding Key}" Style="{StaticResource LeagueName}" />
                         <Label Text="24 Jan" Style="{StaticResource MatchDate}" />
-                        <Label Style="{StaticResource LeagueDetail}" />
+                        <Label Style="{StaticResource DetailIcon}" />
                     </FlexLayout>
                 </ViewCell>
             </DataTemplate>

@@ -119,11 +119,11 @@
         </ContentView>
         
         <!-- League Name-->
-        <StackLayout Style="{StaticResource TVScheduleLeagueName}" >
+        <FlexLayout Style="{StaticResource TVScheduleLeagueName}" >
             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
             <Label Text="CHAMPION LEAGUE" Style="{StaticResource LeagueName}" />
-            <Label Style="{StaticResource LeagueDetail}" HorizontalOptions="EndAndExpand" />
-        </StackLayout>
+            <Label Style="{StaticResource DetailIcon}" HorizontalOptions="EndAndExpand" />
+        </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </ContentView>

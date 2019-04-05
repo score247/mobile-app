@@ -19,9 +19,9 @@
             <StackLayout>
                 <Image Source="images/common/line_ups.png" Aspect="AspectFit" />
             </StackLayout>
-            <StackLayout Style="{StaticResource Group}">
+            <FlexLayout Style="{StaticResource Group}">
                 <Label Text="SUBSTITUTIONS" Style="{StaticResource GroupName}" />
-            </StackLayout>
+            </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
                 <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
@@ -139,9 +139,9 @@
                 </StackLayout>
             </StackLayout>
 
-            <StackLayout Style="{StaticResource Group}">
+            <FlexLayout Style="{StaticResource Group}">
                 <Label Text="SUBSTITUTE PLAYERS" Style="{StaticResource GroupName}" />
-            </StackLayout>
+            </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
@@ -222,9 +222,9 @@
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>
-            <StackLayout Style="{StaticResource Group}">
+            <FlexLayout Style="{StaticResource Group}">
                 <Label Text="COACHES" Style="{StaticResource GroupName}" />
-            </StackLayout>
+            </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
                 <FlexLayout Style="{StaticResource CoachContainer}">
                     <Label Text="Fabio Grosso" Style="{StaticResource PlayerName}" />
