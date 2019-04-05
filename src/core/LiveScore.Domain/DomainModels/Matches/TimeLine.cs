@@ -26,6 +26,18 @@
 
         Player GoalScorer { get; }
 
+        Player Assist { get; }
+
+        Player PlayerOut { get; }
+
+        Player PlayerIn { get; }
+
+        int InjuryTimeAnnounced { get; }
+
+        string Description { get; }
+
+        string Outcome { get; }
+
         IEnumerable<Commentary> Commentaries { get; }
     }
 
@@ -52,6 +64,18 @@
         public Player GoalScorer { get; set; }
 
         public IEnumerable<Commentary> Commentaries { get; set; }
+
+        public Player Assist { get; set; }
+
+        public Player PlayerOut { get; set; }
+
+        public Player PlayerIn { get; set; }
+
+        public int InjuryTimeAnnounced { get; set; }
+
+        public string Description { get; set; }
+
+        public string Outcome { get; set; }
     }
 
     public class Commentary
