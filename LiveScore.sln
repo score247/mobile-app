@@ -43,9 +43,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Domain", "src\cor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sports", "Sports", "{9CEA9109-0DB9-4232-BA97-74976625B5D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer", "src\mobile\Core\Soccer\Soccer\Soccer.csproj", "{551F77E6-79BC-469A-8E42-20923B8A47F0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Soccer", "src\mobile\Core\Soccer\Soccer\LiveScore.Soccer.csproj", "{551F77E6-79BC-469A-8E42-20923B8A47F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasketBall", "src\mobile\Core\BasketBall\BasketBall\BasketBall.csproj", "{A0EC2302-F63A-4F55-854C-3A46FBBB7657}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.BasketBall", "src\mobile\Core\BasketBall\BasketBall\LiveScore.BasketBall.csproj", "{A0EC2302-F63A-4F55-854C-3A46FBBB7657}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Core", "src\mobile\Core\Core\LiveScore.Core.csproj", "{4FCF46FB-1939-42B3-9D51-EEB6588F4362}"
 EndProject

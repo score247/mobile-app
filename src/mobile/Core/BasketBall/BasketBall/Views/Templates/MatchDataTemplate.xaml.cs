@@ -1,4 +1,4 @@
-﻿namespace BasketBall.Views.Templates
+﻿namespace LiveScore.BasketBall.Views.Templates
 {
     using Xamarin.Forms;
 

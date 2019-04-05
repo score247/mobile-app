@@ -1,4 +1,4 @@
-﻿namespace BasketBall.Services
+﻿namespace LiveScore.BasketBall.Services
 {
     using System;
     using System.Collections.Generic;

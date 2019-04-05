@@ -1,4 +1,4 @@
-﻿namespace Soccer.Views.Templates
+﻿namespace LiveScore.Soccer.Views.Templates
 {
     using Xamarin.Forms;
 

@@ -1,4 +1,4 @@
-﻿namespace Soccer.Services
+﻿namespace LiveScore.Soccer.Services
 {
     using System;
     using System.Collections.Generic;

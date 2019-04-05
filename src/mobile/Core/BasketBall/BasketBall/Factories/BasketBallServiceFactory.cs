@@ -1,10 +1,9 @@
-﻿using System;
-using BasketBall.Services;
-using LiveScore.Core.Factories;
-using LiveScore.Core.Services;
-
-namespace BasketBall.Factories
+﻿namespace LiveScore.BasketBall.Factories
 {
+    using LiveScore.BasketBall.Services;
+    using LiveScore.Core.Factories;
+    using LiveScore.Core.Services;
+
     public class BasketBallServiceFactory : ISportServiceFactory
     {
         public ILeagueService CreateLeagueService()

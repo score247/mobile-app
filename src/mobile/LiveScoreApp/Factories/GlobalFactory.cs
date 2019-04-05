@@ -1,11 +1,11 @@
 ﻿namespace LiveScore.Factories
 {
-    using BasketBall.Factories;
     using Common.Services;
     using Core.Contants;
     using Core.Factories;
     using Core.Services;
-    using Soccer.Factories;
+    using LiveScore.BasketBall.Factories;
+    using LiveScore.Soccer.Factories;
 
     public class GlobalFactory : IGlobalFactory
     {

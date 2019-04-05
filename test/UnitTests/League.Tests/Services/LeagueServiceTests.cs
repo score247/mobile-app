@@ -6,7 +6,7 @@
     using Core.Models.LeagueInfo;
     using Core.Services;
     using NSubstitute;
-    using Soccer.Services;
+    using LiveScore.Soccer.Services;
     using Xunit;
 
     public class LeagueServiceTests
