@@ -4,8 +4,10 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Contants;
+    using Core.Factories;
     using Core.Models.LeagueInfo;
-    using League.Services;
+    using Core.Services;
     using League.ViewModels;
     using NSubstitute;
     using Prism.Navigation;
@@ -17,15 +19,21 @@
         private readonly INavigationService mockNavigationService;
         private readonly ILeagueService mockLeagueService;
         private readonly IPageDialogService mockPageDialog;
+        private readonly IGlobalFactory mockGlobalFactory;
+        private readonly ISettingsService mockSettingService;
         private readonly LeagueViewModel viewModel;
 
         public LeagueViewModelTests()
         {
+            mockGlobalFactory = Substitute.For<IGlobalFactory>();
             mockLeagueService = Substitute.For<ILeagueService>();
+            mockSettingService = Substitute.For<ISettingsService>();
+            mockGlobalFactory.BuildSportService(Arg.Any<SportType>()).CreateLeagueService().Returns(mockLeagueService);
             mockNavigationService = Substitute.For<INavigationService>();
             mockPageDialog = Substitute.For<IPageDialogService>();
 
-            viewModel = new LeagueViewModel(mockNavigationService, mockLeagueService, mockPageDialog);
+
+            viewModel = new LeagueViewModel(mockNavigationService, mockGlobalFactory, mockSettingService, mockPageDialog);
         }
 
         [Fact]
@@ -73,13 +81,13 @@
         public async Task LoadLeaguesCommand_Executed_ShouldCallLeagueService()
         {
             // Arrange
-            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+            mockLeagueService.GetLeagues().Returns(new List<LeagueItem>());
 
             // Act
             await viewModel.LoadLeaguesCommand.ExecuteAsync();
 
             // Assert
-            await mockLeagueService.Received(1).GetLeaguesAsync();
+            await mockLeagueService.Received(1).GetLeagues();
         }
 
         [Fact]
@@ -92,7 +100,7 @@
                 new LeagueItem { Id = "1", Name = "League A" }
             };
 
-            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+            mockLeagueService.GetLeagues().Returns(mockLeagueItems);
 
             viewModel.PropertyChanged += (sender, e) =>
             {
@@ -116,7 +124,7 @@
                 new LeagueItem { Id = "1", Name = "League A" }
             };
 
-            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+            mockLeagueService.GetLeagues().Returns(mockLeagueItems);
 
             viewModel.PropertyChanged += (sender, e) =>
             {
@@ -141,7 +149,7 @@
                 new LeagueItem { Id = "1", Name = "AFC" }
             };
 
-            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+            mockLeagueService.GetLeagues().Returns(mockLeagueItems);
 
             // Act
             await viewModel.LoadLeaguesCommand.ExecuteAsync();
@@ -162,7 +170,7 @@
                 new LeagueItem { Id = "1", Name = "AFC" }
             };
 
-            mockLeagueService.GetLeaguesAsync().Returns(mockLeagueItems);
+            mockLeagueService.GetLeagues().Returns(mockLeagueItems);
             viewModel.Filter = "K";
 
             // Act
@@ -177,26 +185,26 @@
         public async Task RefreshCommand_Executed_ShouldCallLeagueService()
         {
             // Arrange
-            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+            mockLeagueService.GetLeagues().Returns(new List<LeagueItem>());
 
             // Act
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await mockLeagueService.Received(1).GetLeaguesAsync();
+            await mockLeagueService.Received(1).GetLeagues();
         }
 
         [Fact]
         public async Task OnAppearing_LeaguesEmpty_ShouldCallLeagueService()
         {
             // Arrange
-            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+            mockLeagueService.GetLeagues().Returns(new List<LeagueItem>());
 
             // Act
             viewModel.OnAppearing();
 
             // Assert
-            await mockLeagueService.Received(1).GetLeaguesAsync();
+            await mockLeagueService.Received(1).GetLeagues();
         }
 
         [Fact]
@@ -207,13 +215,13 @@
             {
                 new LeagueItem { Id = "1", Name = "League A" }
             };
-            mockLeagueService.GetLeaguesAsync().Returns(new List<LeagueItem>());
+            mockLeagueService.GetLeagues().Returns(new List<LeagueItem>());
 
             // Act
             viewModel.OnAppearing();
 
             // Assert
-            await mockLeagueService.DidNotReceive().GetLeaguesAsync();
+            await mockLeagueService.DidNotReceive().GetLeagues();
         }
     }
 }

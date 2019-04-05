@@ -4,8 +4,9 @@
     using System.Threading.Tasks;
     using Common.Services;
     using Core.Models.LeagueInfo;
-    using League.Services;
+    using Core.Services;
     using NSubstitute;
+    using Soccer.Services;
     using Xunit;
 
     public class LeagueServiceTests
@@ -13,13 +14,13 @@
         private const string UngroupedCategoryId = "sr:category:393";
         private readonly ILeagueApi mockLeagueApi;
         private readonly ILoggingService mockLogService;
-        private readonly Core.Services.ISettingsService mockSettingsService;
+        private readonly ISettingsService mockSettingsService;
         private readonly ILeagueService service;
 
         public LeagueServiceTests()
         {
             mockLeagueApi = Substitute.For<ILeagueApi>();
-            mockSettingsService = Substitute.For<Core.Services.ISettingsService>();
+            mockSettingsService = Substitute.For<ISettingsService>();
             mockLogService = Substitute.For<ILoggingService>();
             service = new LeagueService(mockLeagueApi, mockSettingsService, mockLogService);
         }
@@ -30,7 +31,7 @@
             // Arrange
 
             // Act
-            await service.GetLeaguesAsync();
+            await service.GetLeagues();
 
             // Assert
             await mockLeagueApi.DidNotReceive().GetLeaguesByGroup(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
@@ -44,7 +45,7 @@
             mockSettingsService.LeagueGroups.Returns(mockGroups);
 
             // Act
-            await service.GetLeaguesAsync();
+            await service.GetLeagues();
 
             // Assert
             await mockLeagueApi.Received(mockGroups.Length).GetLeaguesByGroup(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<string>());
@@ -66,7 +67,7 @@
             });
 
             // Act
-            var leagues = await service.GetLeaguesAsync();
+            var leagues = await service.GetLeagues();
 
             // Assert
             Assert.Equal(2, leagues.Count);
@@ -88,7 +89,7 @@
             });
 
             // Act
-            var leagues = await service.GetLeaguesAsync();
+            var leagues = await service.GetLeagues();
 
             // Assert
             Assert.Single(leagues);
@@ -110,7 +111,7 @@
             });
 
             // Act
-            var leagues = await service.GetLeaguesAsync();
+            var leagues = await service.GetLeagues();
 
             // Assert
             Assert.Equal(2, leagues.Count);
@@ -134,7 +135,7 @@
             });
 
             // Act
-            var leagues = await service.GetLeaguesAsync();
+            var leagues = await service.GetLeagues();
 
             // Assert
             Assert.Equal(3, leagues.Count);
