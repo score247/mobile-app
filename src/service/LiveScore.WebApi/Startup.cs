@@ -62,7 +62,12 @@ namespace LiveScore.WebApi
                 c.SwaggerEndpoint($"../swagger/v1/swagger.json", "Chatbot API Docs");
             });
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}");
+            });
         }
     }
 }
