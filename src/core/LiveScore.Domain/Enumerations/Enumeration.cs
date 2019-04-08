@@ -11,28 +11,19 @@
     public abstract class Enumeration : IComparable
 #pragma warning restore S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
     {
-        private readonly string _displayName;
-        private readonly string _value;
-
         protected Enumeration()
         {
         }
 
         protected Enumeration(string value, string displayName)
         {
-            _value = value;
-            _displayName = displayName;
+            Value = value;
+            DisplayName = displayName;
         }
 
-        public string DisplayName
-        {
-            get { return _displayName; }
-        }
+        public string DisplayName { get; set; }
 
-        public string Value
-        {
-            get { return _value; }
-        }
+        public string Value { get; set; }
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()
         {
@@ -120,14 +111,14 @@
             }
 
             var typeMatches = GetType().Equals(obj.GetType());
-            var valueMatches = _value.Equals(otherValue.Value);
+            var valueMatches = Value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
         }
 
         public override int GetHashCode()
         {
-            return _value.GetHashCode();
+            return Value.GetHashCode();
         }
 
         public override string ToString()

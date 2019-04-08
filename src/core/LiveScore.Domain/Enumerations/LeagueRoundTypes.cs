@@ -18,7 +18,7 @@
         {
         }
 
-        private LeagueRoundTypes(string value, string displayName)
+        public LeagueRoundTypes(string value, string displayName)
             : base(value, displayName)
         {
         }

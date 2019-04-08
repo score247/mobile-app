@@ -9,10 +9,13 @@
     {
         static void Main(string[] args)
         {
-            var leagueApi = RestService.For<ILeagueApi>("http://ha.nexdev.net:7205/Main/api");
+            var leagueApi = RestService.For<ILeagueApi>("http://localhost:64296/api");
 
             JsonConvert.DefaultSettings =
-                () => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+                () => new JsonSerializerSettings
+                {
+                    TypeNameHandling = TypeNameHandling.All
+                };
 
             var leagues = leagueApi.GetLeagues(
                 1, 

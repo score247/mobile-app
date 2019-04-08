@@ -49,7 +49,7 @@
         {
         }
 
-        private EventTypes(string value, string displayName)
+        public EventTypes(string value, string displayName)
             : base(value, displayName)
         {
         }

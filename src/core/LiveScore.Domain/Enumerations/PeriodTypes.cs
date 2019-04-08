@@ -14,7 +14,7 @@
         {
         }
 
-        private PeriodTypes(string value, string displayName)
+        public PeriodTypes(string value, string displayName)
             : base(value, displayName)
         {
         }

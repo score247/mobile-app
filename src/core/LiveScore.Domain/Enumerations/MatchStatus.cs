@@ -108,7 +108,7 @@
         {
         }
 
-        private MatchStatus(string value, string displayName)
+        public MatchStatus(string value, string displayName)
             : base(value, displayName)
         {
         }

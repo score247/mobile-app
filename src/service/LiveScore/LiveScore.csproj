@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Matches\" />
+    <Folder Include="Features\Teams\" />
     <Folder Include="Shared\Models\" />
   </ItemGroup>
 

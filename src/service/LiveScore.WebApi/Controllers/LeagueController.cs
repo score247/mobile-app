@@ -19,13 +19,13 @@
         }
 
         [HttpGet("GetLeaguesByDate")]
-        public async Task<IEnumerable<League>> GetLeaguesByDate(int sportId, DateTime from, DateTime to)
+        public async Task<IEnumerable<League>> GetLeaguesByDate(int sportId, DateTime from, DateTime to, string language)
         {
             return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(1));
         }
 
         [HttpGet("GetLeagues")]
-        public async Task<IEnumerable<League>> GetLeagues(int sportId)
+        public async Task<IEnumerable<League>> GetLeagues(int sportId, string language)
         {
             return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(1));
         }

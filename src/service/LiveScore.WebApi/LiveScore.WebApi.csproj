@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="App_Data\flags\" />
     <Folder Include="App_Data\staticdata\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
