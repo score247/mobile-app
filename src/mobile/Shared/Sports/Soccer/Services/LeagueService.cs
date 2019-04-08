@@ -20,7 +20,7 @@
             ILoggingService loggingService) : base(loggingService)
         {
             this.settingsService = settingsService;
-            this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(SettingsService.ApiEndPoint);
+            this.leagueApi = leagueApi;
         }
 
         public async Task<IEnumerable<League>> GetLeagues()
