@@ -7,16 +7,18 @@
     using System.Reflection;
 
     [Serializable]
+#pragma warning disable S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
     public abstract class Enumeration : IComparable
+#pragma warning restore S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
     {
         private readonly string _displayName;
-        private readonly byte _value;
+        private readonly string _value;
 
         protected Enumeration()
         {
         }
 
-        protected Enumeration(byte value, string displayName)
+        protected Enumeration(string value, string displayName)
         {
             _value = value;
             _displayName = displayName;
@@ -27,23 +29,9 @@
             get { return _displayName; }
         }
 
-        public byte Value
+        public string Value
         {
             get { return _value; }
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
-            "CA1062:Validate arguments of public methods",
-            MessageId = "1",
-            Justification = "Reviewed"),
-        System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design",
-            "CA1062:Validate arguments of public methods",
-            MessageId = "0",
-            Justification = "Reviewed")]
-        public static byte AbsoluteDifference(Enumeration firstValue, Enumeration secondValue)
-        {
-            var absoluteDifference = (byte)Math.Abs(firstValue.Value - secondValue.Value);
-            return absoluteDifference;
         }
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()
@@ -52,9 +40,9 @@
             return matchingItem;
         }
 
-        public static T FromValue<T>(byte value) where T : Enumeration, new()
+        public static T FromValue<T>(string value) where T : Enumeration, new()
         {
-            var matchingItem = Parse<T, byte>(value, "value", item => item.Value == value);
+            var matchingItem = Parse<T, string>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
@@ -117,30 +105,6 @@
             return !(left == right);
         }
 
-        public static bool operator >(Enumeration left, Enumeration right)
-        {
-            ValidateInputArguments(left, right);
-            return left.Value > right.Value;
-        }
-
-        public static bool operator >=(Enumeration left, Enumeration right)
-        {
-            ValidateInputArguments(left, right);
-            return left.Value >= right.Value;
-        }
-
-        public static bool operator <(Enumeration left, Enumeration right)
-        {
-            ValidateInputArguments(left, right);
-            return left.Value < right.Value;
-        }
-
-        public static bool operator <=(Enumeration left, Enumeration right)
-        {
-            ValidateInputArguments(left, right);
-            return left.Value <= right.Value;
-        }
-
         public override bool Equals(object obj)
         {
             if (obj == null)
@@ -179,19 +143,6 @@
             }
 
             return Value.CompareTo(((Enumeration)obj).Value);
-        }
-
-        private static void ValidateInputArguments(Enumeration left, Enumeration right)
-        {
-            if (ReferenceEquals(left, null))
-            {
-                throw new ArgumentNullException(nameof(left));
-            }
-
-            if (ReferenceEquals(right, null))
-            {
-                throw new ArgumentNullException(nameof(right));
-            }
         }
 
         private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration, new()

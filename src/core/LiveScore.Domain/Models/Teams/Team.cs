@@ -13,6 +13,8 @@
         //"formation": "4-2-3-1",
         string Formation { get; }
 
+        string Abbreviation { get; }
+
         ITeamStatistic Statistic { get; }
 
         ICoach Coach { get; }
@@ -37,6 +39,8 @@
         public ICoach Coach { get; set; }
 
         public string Formation { get; set; }
+
+        public string Abbreviation { get; set; }
 
         public IEnumerable<Player> Substitutions { get; set; }
     }

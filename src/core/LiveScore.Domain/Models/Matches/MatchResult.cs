@@ -1,10 +1,11 @@
 ﻿namespace LiveScore.Domain.Models.Matches
 {
     using System.Collections.Generic;
+    using LiveScore.Domain.Enumerations;
 
     public interface IMatchResult
     {
-        string Status { get; }
+        MatchStatus Status { get; }
 
         IEnumerable<int> HomeScores { get; }
 
@@ -13,7 +14,7 @@
 
     public class MatchResult : IMatchResult
     {
-        public string Status { get; set; }
+        public MatchStatus Status { get; set; }
 
         public IEnumerable<int> HomeScores { get; set; }
 

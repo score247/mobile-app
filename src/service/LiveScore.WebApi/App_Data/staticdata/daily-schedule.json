@@ -1,1431 +1,1877 @@
 {
-  "generated_at": "2019-04-04T04:49:17+00:00",
-  "schema": "http:\/\/schemas.sportradar.com\/bsa\/soccer\/v1\/json\/endpoints\/soccer\/schedule.json",
-  "sport_events": [
-    {
-      "id": "sr:match:9909825",
-      "scheduled": "2016-08-18T14:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909823",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
+    "generated_at": "2019-04-05T02:45:32+00:00",
+    "schema": "http://schemas.sportradar.com/bsa/soccer/v1/json/endpoints/soccer/results.json",
+    "results": [
         {
-          "id": "sr:competitor:36155",
-          "name": "FC Astana",
-          "country": "Kazakhstan",
-          "country_code": "KAZ",
-          "abbreviation": "FCA",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:3350",
-          "name": "FC BATE Borisov",
-          "country": "Belarus",
-          "country_code": "BLR",
-          "abbreviation": "BAT",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1383",
-        "name": "Astana Arena",
-        "capacity": 30000,
-        "city_name": "Astana",
-        "country_name": "Kazakhstan",
-        "map_coordinates": "51.108244,71.402584",
-        "country_code": "KAZ"
-      }
-    },
-    {
-      "id": "sr:match:9909835",
-      "scheduled": "2016-08-18T16:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909833",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:5171",
-          "name": "FC Dinamo Tbilisi",
-          "country": "Georgia",
-          "country_code": "GEO",
-          "abbreviation": "TBI",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909825",
+                "scheduled": "2016-08-18T14:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909823",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:36155",
+                        "name": "FC Astana",
+                        "country": "Kazakhstan",
+                        "country_code": "KAZ",
+                        "abbreviation": "FCA",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3350",
+                        "name": "FC BATE Borisov",
+                        "country": "Belarus",
+                        "country_code": "BLR",
+                        "abbreviation": "BAT",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1383",
+                    "name": "Astana Arena",
+                    "capacity": 30000,
+                    "city_name": "Astana",
+                    "country_name": "Kazakhstan",
+                    "map_coordinates": "51.108244,71.402584",
+                    "country_code": "KAZ"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 2,
+                "away_score": 0,
+                "winner_id": "sr:competitor:36155",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:3251",
-          "name": "PAOK FC",
-          "country": "Greece",
-          "country_code": "GRC",
-          "abbreviation": "PAO",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:889",
-        "name": "Boris Paichadze Dinamo Arena",
-        "capacity": 54549,
-        "city_name": "Tbilisi",
-        "country_name": "Georgia",
-        "map_coordinates": "41.723008,44.789761",
-        "country_code": "GEO"
-      }
-    },
-    {
-      "id": "sr:match:9909881",
-      "scheduled": "2016-08-18T16:15:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909883",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:1295",
-          "name": "SonderjyskE",
-          "country": "Denmark",
-          "country_code": "DNK",
-          "abbreviation": "SON",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:2218",
-          "name": "AC Sparta Prague",
-          "country": "Czech Republic",
-          "country_code": "CZE",
-          "abbreviation": "PRA",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:651",
-        "name": "Sydbank Park",
-        "capacity": 10000,
-        "city_name": "Haderslev",
-        "country_name": "Denmark",
-        "map_coordinates": "55.261402,9.487573",
-        "country_code": "DNK"
-      }
-    },
-    {
-      "id": "sr:match:9909839",
-      "scheduled": "2016-08-18T16:30:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909841",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:1289",
-          "name": "FC Midtjylland",
-          "country": "Denmark",
-          "country_code": "DNK",
-          "abbreviation": "MJY",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909835",
+                "scheduled": "2016-08-18T16:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909833",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:5171",
+                        "name": "FC Dinamo Tbilisi",
+                        "country": "Georgia",
+                        "country_code": "GEO",
+                        "abbreviation": "TBI",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3251",
+                        "name": "PAOK FC",
+                        "country": "Greece",
+                        "country_code": "GRC",
+                        "abbreviation": "PAO",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:889",
+                    "name": "Boris Paichadze Dinamo Arena",
+                    "capacity": 54549,
+                    "city_name": "Tbilisi",
+                    "country_name": "Georgia",
+                    "map_coordinates": "41.723008,44.789761",
+                    "country_code": "GEO"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 3,
+                "winner_id": "sr:competitor:3251",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 2,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:3057",
-          "name": "Osmanlispor FK",
-          "country": "Turkey",
-          "country_code": "TUR",
-          "abbreviation": "OSM",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1041",
-        "name": "MCH Arena",
-        "capacity": 11809,
-        "city_name": "Herning",
-        "country_name": "Denmark",
-        "map_coordinates": "56.116910,8.951817",
-        "country_code": "DNK"
-      }
-    },
-    {
-      "id": "sr:match:9909903",
-      "scheduled": "2016-08-18T16:30:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909901",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:34425",
-          "name": "FC Krasnodar",
-          "country": "Russia",
-          "country_code": "RUS",
-          "abbreviation": "KRA",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:5222",
-          "name": "Partizani Tirana",
-          "country": "Albania",
-          "country_code": "ALB",
-          "abbreviation": "PTI",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:2282",
-        "name": "Kuban",
-        "capacity": 31285,
-        "city_name": "Krasnodar",
-        "country_name": "Russia",
-        "map_coordinates": "45.025278,38.999444",
-        "country_code": "RUS"
-      }
-    },
-    {
-      "id": "sr:match:9909827",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909829",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:3404",
-          "name": "AEK Larnaca FC",
-          "country": "Cyprus",
-          "country_code": "CYP",
-          "abbreviation": "LAR",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909881",
+                "scheduled": "2016-08-18T16:15:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909883",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:1295",
+                        "name": "SonderjyskE",
+                        "country": "Denmark",
+                        "country_code": "DNK",
+                        "abbreviation": "SON",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2218",
+                        "name": "AC Sparta Prague",
+                        "country": "Czech Republic",
+                        "country_code": "CZE",
+                        "abbreviation": "PRA",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:651",
+                    "name": "Sydbank Park",
+                    "capacity": 10000,
+                    "city_name": "Haderslev",
+                    "country_name": "Denmark",
+                    "map_coordinates": "55.261402,9.487573",
+                    "country_code": "DNK"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 0,
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:2219",
-          "name": "FC Slovan Liberec",
-          "country": "Czech Republic",
-          "country_code": "CZE",
-          "abbreviation": "SLI",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:990",
-        "name": "GSZ Stadium",
-        "capacity": 13032,
-        "city_name": "Larnaca",
-        "country_name": "Cyprus",
-        "map_coordinates": "34.925556,33.599722",
-        "country_code": "CYP"
-      }
-    },
-    {
-      "id": "sr:match:9909843",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909847",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:2203",
-          "name": "FK Austria Vienna",
-          "country": "Austria",
-          "country_code": "AUT",
-          "abbreviation": "AUS",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:1161",
-          "name": "Rosenborg BK",
-          "country": "Norway",
-          "country_code": "NOR",
-          "abbreviation": "RBK",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:977",
-        "name": "Ernst Happel Stadion",
-        "capacity": 53008,
-        "city_name": "Vienna",
-        "country_name": "Austria",
-        "map_coordinates": "48.206944,16.420556",
-        "country_code": "AUT"
-      }
-    },
-    {
-      "id": "sr:match:9909873",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909875",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:2216",
-          "name": "SK Slavia Prague",
-          "country": "Czech Republic",
-          "country_code": "CZE",
-          "abbreviation": "SPR",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909839",
+                "scheduled": "2016-08-18T16:30:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909841",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:1289",
+                        "name": "FC Midtjylland",
+                        "country": "Denmark",
+                        "country_code": "DNK",
+                        "abbreviation": "MJY",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3057",
+                        "name": "Osmanlispor FK",
+                        "country": "Turkey",
+                        "country_code": "TUR",
+                        "abbreviation": "OSM",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1041",
+                    "name": "MCH Arena",
+                    "capacity": 11809,
+                    "city_name": "Herning",
+                    "country_name": "Denmark",
+                    "map_coordinates": "56.116910,8.951817",
+                    "country_code": "DNK"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 1,
+                "winner_id": "sr:competitor:3057",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:2900",
-          "name": "RSC Anderlecht",
-          "country": "Belgium",
-          "country_code": "BEL",
-          "abbreviation": "RSC",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1266",
-        "name": "Sinobo Stadium",
-        "capacity": 21000,
-        "city_name": "Prague",
-        "country_name": "Czech Republic",
-        "map_coordinates": "50.067500,14.471667",
-        "country_code": "CZE"
-      }
-    },
-    {
-      "id": "sr:match:9909899",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909897",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:1761",
-          "name": "IFK Goteborg",
-          "country": "Sweden",
-          "country_code": "SWE",
-          "abbreviation": "IFK",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:5962",
-          "name": "Qarabag FK",
-          "country": "Azerbaijan",
-          "country_code": "AZE",
-          "abbreviation": "QAR",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:858",
-        "name": "Gamla Ullevi",
-        "capacity": 18800,
-        "city_name": "Gothenburg",
-        "country_name": "Sweden",
-        "map_coordinates": "57.706111,11.980556",
-        "country_code": "SWE"
-      }
-    },
-    {
-      "id": "sr:match:9909907",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909905",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:5198",
-          "name": "Maccabi Tel Aviv FC",
-          "country": "Israel",
-          "country_code": "ISR",
-          "abbreviation": "MTA",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909903",
+                "scheduled": "2016-08-18T16:30:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909901",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:34425",
+                        "name": "FC Krasnodar",
+                        "country": "Russia",
+                        "country_code": "RUS",
+                        "abbreviation": "KRA",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:5222",
+                        "name": "Partizani Tirana",
+                        "country": "Albania",
+                        "country_code": "ALB",
+                        "abbreviation": "PTI",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:2282",
+                    "name": "Kuban",
+                    "capacity": 31285,
+                    "city_name": "Krasnodar",
+                    "country_name": "Russia",
+                    "map_coordinates": "45.025278,38.999444",
+                    "country_code": "RUS"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 4,
+                "away_score": 0,
+                "winner_id": "sr:competitor:34425",
+                "period_scores": [
+                    {
+                        "home_score": 3,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:2036",
-          "name": "HNK Hajduk Split",
-          "country": "Croatia",
-          "country_code": "HRV",
-          "abbreviation": "HSP",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:967",
-        "name": "Bloomfield",
-        "capacity": 14700,
-        "city_name": "Tel Aviv",
-        "country_name": "Israel",
-        "map_coordinates": "32.051728,34.761439",
-        "country_code": "ISR"
-      }
-    },
-    {
-      "id": "sr:match:9909909",
-      "scheduled": "2016-08-18T17:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9915805",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:36952",
-          "name": "FK Gabala",
-          "country": "Azerbaijan",
-          "country_code": "AZE",
-          "abbreviation": "GAB",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:2420",
-          "name": "NK Maribor",
-          "country": "Slovenia",
-          "country_code": "SVN",
-          "abbreviation": "MAR",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:2551",
-        "name": "Dalga Arena",
-        "capacity": 6500,
-        "city_name": "Baku",
-        "country_name": "Azerbaijan",
-        "map_coordinates": "40.492222,50.138889",
-        "country_code": "AZE"
-      }
-    },
-    {
-      "id": "sr:match:9909871",
-      "scheduled": "2016-08-18T17:30:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909869",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:3086",
-          "name": "Basaksehir FK",
-          "country": "Turkey",
-          "country_code": "TUR",
-          "abbreviation": "BAS",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909827",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909829",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:3404",
+                        "name": "AEK Larnaca FC",
+                        "country": "Cyprus",
+                        "country_code": "CYP",
+                        "abbreviation": "LAR",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2219",
+                        "name": "FC Slovan Liberec",
+                        "country": "Czech Republic",
+                        "country_code": "CZE",
+                        "abbreviation": "SLI",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:990",
+                    "name": "GSZ Stadium",
+                    "capacity": 13032,
+                    "city_name": "Larnaca",
+                    "country_name": "Cyprus",
+                    "map_coordinates": "34.925556,33.599722",
+                    "country_code": "CYP"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 1,
+                "winner_id": "sr:competitor:2219",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:3313",
-          "name": "FC Shakhtar Donetsk",
-          "country": "Ukraine",
-          "country_code": "UKR",
-          "abbreviation": "SHA",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:14806",
-        "name": "Basaksehir Fatih Terim Stadium",
-        "capacity": 17319,
-        "city_name": "Istanbul",
-        "country_name": "Turkey",
-        "map_coordinates": "41.122784,28.808701",
-        "country_code": "TUR"
-      }
-    },
-    {
-      "id": "sr:match:9909853",
-      "scheduled": "2016-08-18T18:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909861",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:5150",
-          "name": "FK Vojvodina",
-          "country": "Serbia",
-          "country_code": "SRB",
-          "abbreviation": "VOJ",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:2950",
-          "name": "AZ Alkmaar",
-          "country": "Netherlands",
-          "country_code": "NLD",
-          "abbreviation": "AZA",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:9477",
-        "name": "Karadorde Stadium",
-        "capacity": 15000,
-        "city_name": "Novi Sad",
-        "country_name": "Serbia",
-        "country_code": "SRB"
-      }
-    },
-    {
-      "id": "sr:match:9909857",
-      "scheduled": "2016-08-18T18:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909859",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:36246",
-          "name": "NK Lokomotiva Zagreb",
-          "country": "Croatia",
-          "country_code": "HRV",
-          "abbreviation": "ZAG",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909843",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909847",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2203",
+                        "name": "FK Austria Vienna",
+                        "country": "Austria",
+                        "country_code": "AUT",
+                        "abbreviation": "AUS",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:1161",
+                        "name": "Rosenborg BK",
+                        "country": "Norway",
+                        "country_code": "NOR",
+                        "abbreviation": "RBK",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:977",
+                    "name": "Ernst Happel Stadion",
+                    "capacity": 53008,
+                    "city_name": "Vienna",
+                    "country_name": "Austria",
+                    "map_coordinates": "48.206944,16.420556",
+                    "country_code": "AUT"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 2,
+                "away_score": 1,
+                "winner_id": "sr:competitor:2203",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:2890",
-          "name": "KRC Genk",
-          "country": "Belgium",
-          "country_code": "BEL",
-          "abbreviation": "GEN",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1267",
-        "name": "Kranjceviceva",
-        "capacity": 10850,
-        "city_name": "Zagreb",
-        "country_name": "Croatia",
-        "map_coordinates": "45.804669,15.960817",
-        "country_code": "HRV"
-      }
-    },
-    {
-      "id": "sr:match:9909885",
-      "scheduled": "2016-08-18T18:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909887",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:3052",
-          "name": "Fenerbahce",
-          "country": "Turkey",
-          "country_code": "TUR",
-          "abbreviation": "FEN",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:2449",
-          "name": "Grasshopper Club Zurich",
-          "country": "Switzerland",
-          "country_code": "CHE",
-          "abbreviation": "GCZ",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:911",
-        "name": "Sukru Saracoglu Stadium",
-        "capacity": 50509,
-        "city_name": "Istanbul",
-        "country_name": "Turkey",
-        "map_coordinates": "40.987778,29.036667",
-        "country_code": "TUR"
-      }
-    },
-    {
-      "id": "sr:match:9909893",
-      "scheduled": "2016-08-18T18:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9917845",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:3248",
-          "name": "Panathinaikos Athens",
-          "country": "Greece",
-          "country_code": "GRC",
-          "abbreviation": "PAN",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909873",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909875",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2216",
+                        "name": "SK Slavia Prague",
+                        "country": "Czech Republic",
+                        "country_code": "CZE",
+                        "abbreviation": "SPR",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2900",
+                        "name": "RSC Anderlecht",
+                        "country": "Belgium",
+                        "country_code": "BEL",
+                        "abbreviation": "RSC",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1266",
+                    "name": "Sinobo Stadium",
+                    "capacity": 21000,
+                    "city_name": "Prague",
+                    "country_name": "Czech Republic",
+                    "map_coordinates": "50.067500,14.471667",
+                    "country_code": "CZE"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 3,
+                "winner_id": "sr:competitor:2900",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 3,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:1281",
-          "name": "Broendby IF",
-          "country": "Denmark",
-          "country_code": "DNK",
-          "abbreviation": "BRO",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:938",
-        "name": "Apostolos Nikolaidis",
-        "capacity": 16003,
-        "city_name": "Athens",
-        "country_name": "Greece",
-        "map_coordinates": "37.987169,23.754194",
-        "country_code": "GRC"
-      }
-    },
-    {
-      "id": "sr:match:9909877",
-      "scheduled": "2016-08-18T18:15:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909879",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:3288",
-          "name": "AFC Astra Giurgiu",
-          "country": "Romania",
-          "country_code": "ROU",
-          "abbreviation": "GIU",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:37",
-          "name": "West Ham United",
-          "country": "England",
-          "country_code": "ENG",
-          "abbreviation": "WHU",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:12201",
-        "name": "Stadionul Marin Anastasovici",
-        "capacity": 8500,
-        "city_name": "Giurgiu",
-        "country_name": "Romania",
-        "map_coordinates": "43.896118,25.981295",
-        "country_code": "ROU"
-      }
-    },
-    {
-      "id": "sr:match:9909867",
-      "scheduled": "2016-08-18T18:30:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909865",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:2903",
-          "name": "KAA Gent",
-          "country": "Belgium",
-          "country_code": "BEL",
-          "abbreviation": "KAA",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909899",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909897",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:1761",
+                        "name": "IFK Goteborg",
+                        "country": "Sweden",
+                        "country_code": "SWE",
+                        "abbreviation": "IFK",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:5962",
+                        "name": "Qarabag FK",
+                        "country": "Azerbaijan",
+                        "country_code": "AZE",
+                        "abbreviation": "QAR",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:858",
+                    "name": "Gamla Ullevi",
+                    "capacity": 18800,
+                    "city_name": "Gothenburg",
+                    "country_name": "Sweden",
+                    "map_coordinates": "57.706111,11.980556",
+                    "country_code": "SWE"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 1,
+                "away_score": 0,
+                "winner_id": "sr:competitor:1761",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:5413",
-          "name": "FK Shkendija",
-          "country": "North Macedonia",
-          "country_code": "MKD",
-          "abbreviation": "FKS",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:13232",
-        "name": "Ghelamco Arena",
-        "capacity": 20000,
-        "city_name": "Gent",
-        "country_name": "Belgium",
-        "map_coordinates": "51.016111,3.734167",
-        "country_code": "BEL"
-      }
-    },
-    {
-      "id": "sr:match:9909889",
-      "scheduled": "2016-08-18T18:45:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909891",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:2793",
-          "name": "US Sassuolo",
-          "country": "Italy",
-          "country_code": "ITA",
-          "abbreviation": "SAS",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:5149",
-          "name": "FK Red Star Belgrade",
-          "country": "Serbia",
-          "country_code": "SRB",
-          "abbreviation": "RSB",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:2031",
-        "name": "Mapei Stadium",
-        "capacity": 21584,
-        "city_name": "Reggio Emilia",
-        "country_name": "Italy",
-        "map_coordinates": "44.713360,10.649211",
-        "country_code": "ITA"
-      }
-    },
-    {
-      "id": "sr:match:9909831",
-      "scheduled": "2016-08-18T19:00:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909837",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:25777",
-          "name": "FC Arouca",
-          "country": "Portugal",
-          "country_code": "PRT",
-          "abbreviation": "ARO",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909907",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909905",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:5198",
+                        "name": "Maccabi Tel Aviv FC",
+                        "country": "Israel",
+                        "country_code": "ISR",
+                        "abbreviation": "MTA",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2036",
+                        "name": "HNK Hajduk Split",
+                        "country": "Croatia",
+                        "country_code": "HRV",
+                        "abbreviation": "HSP",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:967",
+                    "name": "Bloomfield",
+                    "capacity": 14700,
+                    "city_name": "Tel Aviv",
+                    "country_name": "Israel",
+                    "map_coordinates": "32.051728,34.761439",
+                    "country_code": "ISR"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 2,
+                "away_score": 1,
+                "winner_id": "sr:competitor:5198",
+                "period_scores": [
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:3245",
-          "name": "Olympiacos FC",
-          "country": "Greece",
-          "country_code": "GRC",
-          "abbreviation": "OLY",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:8289",
-        "name": "Estadio Municipal de Arouca",
-        "capacity": 5600,
-        "city_name": "Arouca",
-        "country_name": "Portugal",
-        "map_coordinates": "40.932940,-8.250379",
-        "country_code": "PRT"
-      }
-    },
-    {
-      "id": "sr:match:9909845",
-      "scheduled": "2016-08-18T19:05:00+00:00",
-      "start_time_tbd": false,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909855",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:2398",
-          "name": "AS Trencin",
-          "country": "Slovakia",
-          "country_code": "SVK",
-          "abbreviation": "TRE",
-          "qualifier": "home"
-        },
-        {
-          "id": "sr:competitor:2055",
-          "name": "SK Rapid Vienna",
-          "country": "Austria",
-          "country_code": "AUT",
-          "abbreviation": "SCR",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1239",
-        "name": "Stadion na Sihoti",
-        "capacity": 4300,
-        "city_name": "Trencin",
-        "country_name": "Slovakia",
-        "map_coordinates": "48.898676,18.044746",
-        "country_code": "SVK"
-      }
-    },
-    {
-      "id": "sr:match:9909895",
-      "scheduled": "2016-08-18T19:05:00+00:00",
-      "start_time_tbd": true,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909893",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
-        },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
-        {
-          "id": "sr:competitor:1281",
-          "name": "Broendby IF",
-          "country": "Denmark",
-          "country_code": "DNK",
-          "abbreviation": "BRO",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909909",
+                "scheduled": "2016-08-18T17:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9915805",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:36952",
+                        "name": "FK Gabala",
+                        "country": "Azerbaijan",
+                        "country_code": "AZE",
+                        "abbreviation": "GAB",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2420",
+                        "name": "NK Maribor",
+                        "country": "Slovenia",
+                        "country_code": "SVN",
+                        "abbreviation": "MAR",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:2551",
+                    "name": "Dalga Arena",
+                    "capacity": 6500,
+                    "city_name": "Baku",
+                    "country_name": "Azerbaijan",
+                    "map_coordinates": "40.492222,50.138889",
+                    "country_code": "AZE"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 3,
+                "away_score": 1,
+                "winner_id": "sr:competitor:36952",
+                "period_scores": [
+                    {
+                        "home_score": 1,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:3248",
-          "name": "Panathinaikos Athens",
-          "country": "Greece",
-          "country_code": "GRC",
-          "abbreviation": "PAN",
-          "qualifier": "away"
-        }
-      ],
-      "venue": {
-        "id": "sr:venue:1102",
-        "name": "Br\u00f8ndby Stadium",
-        "capacity": 29000,
-        "city_name": "Copenhagen",
-        "country_name": "Denmark",
-        "map_coordinates": "55.648912,12.418216",
-        "country_code": "DNK"
-      }
-    },
-    {
-      "id": "sr:match:9909911",
-      "scheduled": "2016-08-18T19:05:00+00:00",
-      "start_time_tbd": true,
-      "status": "closed",
-      "tournament_round": {
-        "type": "qualification",
-        "number": 4,
-        "name": "cupqround",
-        "cup_round_match_number": 1,
-        "cup_round_matches": 2,
-        "other_match_id": "sr:match:9909909",
-        "phase": "qualification_playoffs"
-      },
-      "season": {
-        "id": "sr:season:33055",
-        "name": "UEFA Europa League 16\/17",
-        "start_date": "2016-06-27",
-        "end_date": "2017-05-28",
-        "year": "16\/17",
-        "tournament_id": "sr:tournament:679"
-      },
-      "tournament": {
-        "id": "sr:tournament:679",
-        "name": "UEFA Europa League",
-        "sport": {
-          "id": "sr:sport:1",
-          "name": "Soccer"
+            "sport_event": {
+                "id": "sr:match:9909871",
+                "scheduled": "2016-08-18T17:30:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909869",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:3086",
+                        "name": "Basaksehir FK",
+                        "country": "Turkey",
+                        "country_code": "TUR",
+                        "abbreviation": "BAS",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3313",
+                        "name": "FC Shakhtar Donetsk",
+                        "country": "Ukraine",
+                        "country_code": "UKR",
+                        "abbreviation": "SHA",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:14806",
+                    "name": "Basaksehir Fatih Terim Stadium",
+                    "capacity": 17319,
+                    "city_name": "Istanbul",
+                    "country_name": "Turkey",
+                    "map_coordinates": "41.122784,28.808701",
+                    "country_code": "TUR"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 1,
+                "away_score": 2,
+                "winner_id": "sr:competitor:3313",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 2,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
-        "category": {
-          "id": "sr:category:393",
-          "name": "International Clubs"
-        }
-      },
-      "competitors": [
         {
-          "id": "sr:competitor:2420",
-          "name": "NK Maribor",
-          "country": "Slovenia",
-          "country_code": "SVN",
-          "abbreviation": "MAR",
-          "qualifier": "home"
+            "sport_event": {
+                "id": "sr:match:9909853",
+                "scheduled": "2016-08-18T18:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909861",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:5150",
+                        "name": "FK Vojvodina",
+                        "country": "Serbia",
+                        "country_code": "SRB",
+                        "abbreviation": "VOJ",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2950",
+                        "name": "AZ Alkmaar",
+                        "country": "Netherlands",
+                        "country_code": "NLD",
+                        "abbreviation": "AZA",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:9477",
+                    "name": "Karadorde Stadium",
+                    "capacity": 15000,
+                    "city_name": "Novi Sad",
+                    "country_name": "Serbia",
+                    "country_code": "SRB"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 3,
+                "winner_id": "sr:competitor:2950",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 2,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
         },
         {
-          "id": "sr:competitor:36952",
-          "name": "FK Gabala",
-          "country": "Azerbaijan",
-          "country_code": "AZE",
-          "abbreviation": "GAB",
-          "qualifier": "away"
+            "sport_event": {
+                "id": "sr:match:9909857",
+                "scheduled": "2016-08-18T18:00:00+00:00",
+                "start_time_tbd": false,
+              "tournament_round": {
+                "type": "qualification",
+                "number": 4,
+                "name": "cupqround",
+                "cup_round_match_number": 1,
+                "cup_round_matches": 2,
+                "other_match_id": "sr:match:9909859",
+                "phase": "qualification_playoffs"
+              },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:36246",
+                        "name": "NK Lokomotiva Zagreb",
+                        "country": "Croatia",
+                        "country_code": "HRV",
+                        "abbreviation": "ZAG",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2890",
+                        "name": "KRC Genk",
+                        "country": "Belgium",
+                        "country_code": "BEL",
+                        "abbreviation": "GEN",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1267",
+                    "name": "Kranjceviceva",
+                    "capacity": 10850,
+                    "city_name": "Zagreb",
+                    "country_name": "Croatia",
+                    "map_coordinates": "45.804669,15.960817",
+                    "country_code": "HRV"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 2,
+                "away_score": 2,
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909885",
+                "scheduled": "2016-08-18T18:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909887",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:3052",
+                        "name": "Fenerbahce",
+                        "country": "Turkey",
+                        "country_code": "TUR",
+                        "abbreviation": "FEN",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2449",
+                        "name": "Grasshopper Club Zurich",
+                        "country": "Switzerland",
+                        "country_code": "CHE",
+                        "abbreviation": "GCZ",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:911",
+                    "name": "Sukru Saracoglu Stadium",
+                    "capacity": 50509,
+                    "city_name": "Istanbul",
+                    "country_name": "Turkey",
+                    "map_coordinates": "40.987778,29.036667",
+                    "country_code": "TUR"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 3,
+                "away_score": 0,
+                "winner_id": "sr:competitor:3052",
+                "period_scores": [
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909893",
+                "scheduled": "2016-08-18T18:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9917845",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:3248",
+                        "name": "Panathinaikos Athens",
+                        "country": "Greece",
+                        "country_code": "GRC",
+                        "abbreviation": "PAN",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:1281",
+                        "name": "Broendby IF",
+                        "country": "Denmark",
+                        "country_code": "DNK",
+                        "abbreviation": "BRO",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:938",
+                    "name": "Apostolos Nikolaidis",
+                    "capacity": 16003,
+                    "city_name": "Athens",
+                    "country_name": "Greece",
+                    "map_coordinates": "37.987169,23.754194",
+                    "country_code": "GRC"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 3,
+                "away_score": 0,
+                "winner_id": "sr:competitor:3248",
+                "period_scores": [
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 2,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909877",
+                "scheduled": "2016-08-18T18:15:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909879",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:3288",
+                        "name": "AFC Astra Giurgiu",
+                        "country": "Romania",
+                        "country_code": "ROU",
+                        "abbreviation": "GIU",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:37",
+                        "name": "West Ham United",
+                        "country": "England",
+                        "country_code": "ENG",
+                        "abbreviation": "WHU",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:12201",
+                    "name": "Stadionul Marin Anastasovici",
+                    "capacity": 8500,
+                    "city_name": "Giurgiu",
+                    "country_name": "Romania",
+                    "map_coordinates": "43.896118,25.981295",
+                    "country_code": "ROU"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 1,
+                "away_score": 1,
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909867",
+                "scheduled": "2016-08-18T18:30:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909865",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2903",
+                        "name": "KAA Gent",
+                        "country": "Belgium",
+                        "country_code": "BEL",
+                        "abbreviation": "KAA",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:5413",
+                        "name": "FK Shkendija",
+                        "country": "North Macedonia",
+                        "country_code": "MKD",
+                        "abbreviation": "FKS",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:13232",
+                    "name": "Ghelamco Arena",
+                    "capacity": 20000,
+                    "city_name": "Gent",
+                    "country_name": "Belgium",
+                    "map_coordinates": "51.016111,3.734167",
+                    "country_code": "BEL"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 2,
+                "away_score": 1,
+                "winner_id": "sr:competitor:2903",
+                "period_scores": [
+                    {
+                        "home_score": 1,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909889",
+                "scheduled": "2016-08-18T18:45:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909891",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2793",
+                        "name": "US Sassuolo",
+                        "country": "Italy",
+                        "country_code": "ITA",
+                        "abbreviation": "SAS",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:5149",
+                        "name": "FK Red Star Belgrade",
+                        "country": "Serbia",
+                        "country_code": "SRB",
+                        "abbreviation": "RSB",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:2031",
+                    "name": "Mapei Stadium",
+                    "capacity": 21584,
+                    "city_name": "Reggio Emilia",
+                    "country_name": "Italy",
+                    "map_coordinates": "44.713360,10.649211",
+                    "country_code": "ITA"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 3,
+                "away_score": 0,
+                "winner_id": "sr:competitor:2793",
+                "period_scores": [
+                    {
+                        "home_score": 2,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 1,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909831",
+                "scheduled": "2016-08-18T19:00:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909837",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:25777",
+                        "name": "FC Arouca",
+                        "country": "Portugal",
+                        "country_code": "PRT",
+                        "abbreviation": "ARO",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3245",
+                        "name": "Olympiacos FC",
+                        "country": "Greece",
+                        "country_code": "GRC",
+                        "abbreviation": "OLY",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:8289",
+                    "name": "Estadio Municipal de Arouca",
+                    "capacity": 5600,
+                    "city_name": "Arouca",
+                    "country_name": "Portugal",
+                    "map_coordinates": "40.932940,-8.250379",
+                    "country_code": "PRT"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 1,
+                "winner_id": "sr:competitor:3245",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 0,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909845",
+                "scheduled": "2016-08-18T19:05:00+00:00",
+                "start_time_tbd": false,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909855",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2398",
+                        "name": "AS Trencin",
+                        "country": "Slovakia",
+                        "country_code": "SVK",
+                        "abbreviation": "TRE",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:2055",
+                        "name": "SK Rapid Vienna",
+                        "country": "Austria",
+                        "country_code": "AUT",
+                        "abbreviation": "SCR",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1239",
+                    "name": "Stadion na Sihoti",
+                    "capacity": 4300,
+                    "city_name": "Trencin",
+                    "country_name": "Slovakia",
+                    "map_coordinates": "48.898676,18.044746",
+                    "country_code": "SVK"
+                }
+            },
+            "sport_event_status": {
+                "status": "closed",
+                "home_score": 0,
+                "away_score": 4,
+                "winner_id": "sr:competitor:2055",
+                "period_scores": [
+                    {
+                        "home_score": 0,
+                        "away_score": 1,
+                        "type": "regular_period",
+                        "number": 1
+                    },
+                    {
+                        "home_score": 0,
+                        "away_score": 3,
+                        "type": "regular_period",
+                        "number": 2
+                    }
+                ]
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909895",
+                "scheduled": "2016-08-18T19:05:00+00:00",
+                "start_time_tbd": true,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909893",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:1281",
+                        "name": "Broendby IF",
+                        "country": "Denmark",
+                        "country_code": "DNK",
+                        "abbreviation": "BRO",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:3248",
+                        "name": "Panathinaikos Athens",
+                        "country": "Greece",
+                        "country_code": "GRC",
+                        "abbreviation": "PAN",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1102",
+                    "name": "Brøndby Stadium",
+                    "capacity": 29000,
+                    "city_name": "Copenhagen",
+                    "country_name": "Denmark",
+                    "map_coordinates": "55.648912,12.418216",
+                    "country_code": "DNK"
+                }
+            },
+            "sport_event_status": {
+                "status": "cancelled"
+            }
+        },
+        {
+            "sport_event": {
+                "id": "sr:match:9909911",
+                "scheduled": "2016-08-18T19:05:00+00:00",
+                "start_time_tbd": true,
+                "tournament_round": {
+                    "type": "qualification",
+                    "number": 4,
+                    "name": "cupqround",
+                    "cup_round_match_number": 1,
+                    "cup_round_matches": 2,
+                    "other_match_id": "sr:match:9909909",
+                    "phase": "qualification_playoffs"
+                },
+                "season": {
+                    "id": "sr:season:33055",
+                    "name": "UEFA Europa League 16/17",
+                    "start_date": "2016-06-27",
+                    "end_date": "2017-05-28",
+                    "year": "16/17",
+                    "tournament_id": "sr:tournament:679"
+                },
+                "tournament": {
+                    "id": "sr:tournament:679",
+                    "name": "UEFA Europa League",
+                    "sport": {
+                        "id": "sr:sport:1",
+                        "name": "Soccer"
+                    },
+                    "category": {
+                        "id": "sr:category:393",
+                        "name": "International Clubs"
+                    }
+                },
+                "competitors": [
+                    {
+                        "id": "sr:competitor:2420",
+                        "name": "NK Maribor",
+                        "country": "Slovenia",
+                        "country_code": "SVN",
+                        "abbreviation": "MAR",
+                        "qualifier": "home"
+                    },
+                    {
+                        "id": "sr:competitor:36952",
+                        "name": "FK Gabala",
+                        "country": "Azerbaijan",
+                        "country_code": "AZE",
+                        "abbreviation": "GAB",
+                        "qualifier": "away"
+                    }
+                ],
+                "venue": {
+                    "id": "sr:venue:1142",
+                    "name": "Ljudski VRT",
+                    "capacity": 12702,
+                    "city_name": "Maribor",
+                    "country_name": "Slovenia",
+                    "map_coordinates": "46.563549,15.641161",
+                    "country_code": "SVN"
+                }
+            },
+            "sport_event_status": {
+                "status": "cancelled"
+            }
         }
-      ],
-      "venue": {
-        "id": "sr:venue:1142",
-        "name": "Ljudski VRT",
-        "capacity": 12702,
-        "city_name": "Maribor",
-        "country_name": "Slovenia",
-        "map_coordinates": "46.563549,15.641161",
-        "country_code": "SVN"
-      }
-    }
-  ]
+    ]
 }

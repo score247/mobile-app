@@ -8,7 +8,7 @@
     {
         DateTime EventDate { get; }
 
-        IList<ITeam> Teams { get; }
+        IEnumerable<ITeam> Teams { get; }
 
         bool IsLive { get; }
 
@@ -16,20 +16,20 @@
 
         ITimeLine TimeLine { get; }
 
-        IMatchCondition EventCondition { get; }
+        IMatchCondition MatchCondition { get; }
     }
 
     public class Match : Entity<string, string>, IMatch
     {
         public DateTime EventDate { get; set; }
 
-        public IList<ITeam> Teams { get; set; }
+        public IEnumerable<ITeam> Teams { get; set; }
 
         public IMatchResult MatchResult { get; set; }
 
         public ITimeLine TimeLine { get; set; }
 
-        public IMatchCondition EventCondition { get; set; }
+        public IMatchCondition MatchCondition { get; set; }
 
         public bool IsLive { get; set; }
     }

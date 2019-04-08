@@ -27,7 +27,14 @@
                 return await Task.FromResult(Enumerable.Empty<League>());
             }
 
-            return null;
+            var leagues = new List<League>();
+
+            for (DateTime date = from.Date; date.Date < to.Date; date = date.AddDays(1))
+            {
+                leagues.AddRange(await leagueDataAccess.GetLeagues(1, date.Date));
+            }
+
+            return leagues;
         }
     }
 }
