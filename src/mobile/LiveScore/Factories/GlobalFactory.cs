@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Factories
 {
     using Common.Services;
-    using Core.Contants;
+    using Core.Constants;
     using Core.Factories;
     using Core.Services;
     using LiveScore.BasketBall.Factories;
