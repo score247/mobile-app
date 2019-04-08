@@ -8,6 +8,8 @@
 
         string CountryCode { get; }
 
+        string Flag { get; }
+
         bool IsHome { get; }
 
         //"formation": "4-2-3-1",
@@ -29,6 +31,8 @@
         public string Country { get; set; }
 
         public string CountryCode { get; set; }
+
+        public string Flag { get; set; }
 
         public bool IsHome { get; set; }
 

@@ -52,51 +52,8 @@
                         "_",
                         result.sport_event.tournament_round.type,
                         result.sport_event.tournament_round.number));
-                var leagueRounds = new List<LeagueRound>();
 
-                foreach (var leagueRoundGroupDto in leagueRoundGroupDtos)
-                {
-                    
-                    var leagueRoundDto = matchByLeagueDtos.FirstOrDefault().sport_event.tournament_round;
-
-                    var leagueRound = new LeagueRound
-                    {
-                        Type = Enumeration.FromValue<LeagueRoundTypes>(leagueRoundDto.type),
-                        Name = leagueRoundDto.name,
-                        Number = leagueRoundDto.number,
-                        Matches = matchByLeagueDtos.Select(matchDto =>
-                        {
-                            var sportEventDto = matchDto.sport_event;
-                            var sportEventStatusDto = matchDto.sport_event_status;
-
-                            return new Match
-                            {
-                                Id = sportEventDto.id,
-                                EventDate = sportEventDto.scheduled,
-                                MatchResult = new MatchResult
-                                {
-                                    Status = Enumeration.FromValue<MatchStatus>(sportEventStatusDto.status),
-                                    HomeScores = new List<int> { sportEventStatusDto.home_score },
-                                    AwayScores = new List<int> { sportEventStatusDto.away_score },
-                                },
-                                Teams = sportEventDto.competitors.Select(competitor
-                                    => new Domain.Models.Teams.Team
-                                    {
-                                        Id = competitor.id,
-                                        Country = competitor.country,
-                                        CountryCode = competitor.country_code,
-                                        Name = competitor.name,
-                                        Abbreviation = competitor.abbreviation,
-                                        IsHome = string.Compare(competitor.qualifier, "home", true) == 0
-                                    })
-                            };
-                        })
-                    };
-
-                    leagueRounds.Add(leagueRound);
-                }
-
-                
+                var leagueRounds = BuildLeagueRound(matchByLeagueDtos, leagueRoundGroupDtos);
 
                 var league = new League
                 {
@@ -114,6 +71,73 @@
             }
 
             return leagues;
+        }
+
+        private static List<LeagueRound> BuildLeagueRound(
+            List<Result> matchByLeagueDtos, 
+            IEnumerable<IGrouping<string, Result>> leagueRoundGroupDtos)
+        {
+            var leagueRounds = new List<LeagueRound>();
+
+            foreach (var leagueRoundGroupDto in leagueRoundGroupDtos)
+            {
+
+                var leagueRoundDto = matchByLeagueDtos.FirstOrDefault().sport_event.tournament_round;
+
+                var matches = BuildMatches(matchByLeagueDtos);
+
+                var leagueRound = new LeagueRound
+                {
+                    Type = Enumeration.FromValue<LeagueRoundTypes>(leagueRoundDto.type),
+                    Name = leagueRoundDto.name,
+                    Number = leagueRoundDto.number,
+                    Matches = matches
+                };
+
+                leagueRounds.Add(leagueRound);
+            }
+
+            return leagueRounds;
+        }
+
+        private static List<Match> BuildMatches(List<Result> matchByLeagueDtos)
+        {
+            var matches = new List<Match>();
+
+            foreach (var matchDto in matchByLeagueDtos)
+            {
+                var sportEventDto = matchDto.sport_event;
+                var sportEventStatusDto = matchDto.sport_event_status;
+                var teams = new List<Domain.Models.Teams.Team>();
+
+                foreach (var competitor in sportEventDto.competitors)
+                {
+                    teams.Add(new Domain.Models.Teams.Team
+                    {
+                        Id = competitor.id,
+                        Country = competitor.country,
+                        CountryCode = competitor.country_code,
+                        Name = competitor.name,
+                        Abbreviation = competitor.abbreviation,
+                        IsHome = string.Compare(competitor.qualifier, "home", true) == 0
+                    });
+                }
+
+                matches.Add(new Match
+                {
+                    Id = sportEventDto.id,
+                    EventDate = sportEventDto.scheduled,
+                    MatchResult = new MatchResult
+                    {
+                        Status = Enumeration.FromValue<MatchStatus>(sportEventStatusDto.status),
+                        HomeScores = new List<int> { sportEventStatusDto.home_score },
+                        AwayScores = new List<int> { sportEventStatusDto.away_score },
+                    },
+                    Teams = teams
+                });
+            }
+
+            return matches;
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LiveScore.Domain.Models.Leagues;
-using LiveScore.Features.Leagues;
-using Microsoft.AspNetCore.Mvc;
-
-namespace LiveScore.WebApi.Controllers
+﻿namespace LiveScore.WebApi.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using LiveScore.Domain.Models.Leagues;
+    using LiveScore.Features.Leagues;
+    using Microsoft.AspNetCore.Mvc;
+
     [Route("api/[controller]")]
     [ApiController]
     public class LeagueController : ControllerBase
@@ -19,8 +19,14 @@ namespace LiveScore.WebApi.Controllers
             this.leagueService = leagueService;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<League>> GetLeagues(int sportId, DateTime from, DateTime to)
+        [HttpGet("GetLeaguesByDate")]
+        public async Task<IEnumerable<League>> GetLeaguesByDate(int sportId, DateTime from, DateTime to)
+        {
+            return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(2));
+        }
+
+        [HttpGet("GetLeagues")]
+        public async Task<IEnumerable<League>> GetLeagues(int sportId)
         {
             return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(2));
         }

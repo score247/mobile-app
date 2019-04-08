@@ -15,6 +15,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using Newtonsoft;
+using Newtonsoft.Json;
 
 namespace LiveScore.WebApi
 {
@@ -41,7 +43,13 @@ namespace LiveScore.WebApi
                 c.SwaggerDoc("v1", new Info { Title = "Chatbot API", Version = "v1" });
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services
+                .AddMvc()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,12 +70,16 @@ namespace LiveScore.WebApi
                 c.SwaggerEndpoint($"../swagger/v1/swagger.json", "Chatbot API Docs");
             });
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}");
-            });
+            
+
+            app
+                .UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller=Home}/{action=Index}");
+                })
+                ;
         }
     }
 }
