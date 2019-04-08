@@ -7,7 +7,7 @@
 
     public interface ILeagueApi
     {
-        [Get("/League?sportId={sportId}&from={fromDate}&to={toDate}")]
+        [Get("/League/GetLeaguesByDate?sportId={sportId}&from={fromDate}&to={toDate}")]
         Task<IEnumerable<League>> GetLeagues(int sportId, string fromDate, string toDate);
     }
 }

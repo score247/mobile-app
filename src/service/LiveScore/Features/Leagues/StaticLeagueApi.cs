@@ -22,6 +22,7 @@
             string date,
             string key)
         {
+            // Temporary for hardcode, please ignore it
             var jsonData = File.ReadAllText($"{appSettings.AppPath}/App_Data/staticdata/daily-schedule.json");
 
             return Task.FromResult(JsonConvert.DeserializeObject<DailyScheduleDto>(jsonData));
