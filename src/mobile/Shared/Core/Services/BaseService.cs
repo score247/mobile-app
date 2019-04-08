@@ -6,7 +6,7 @@
 
     public class BaseService
     {
-        private readonly ILoggingService loggingService;
+        protected readonly ILoggingService loggingService;
 
         public BaseService(ILoggingService loggingService)
         {

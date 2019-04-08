@@ -128,7 +128,7 @@
 
         private async Task GetLeagues()
         {
-            var leagueGroups = await leagueService.GetLeagues();
+            var leagueGroups = await leagueService.GetLeaguesAndRetry();
 
             Leagues = new ObservableCollection<League>(leagueGroups);
 

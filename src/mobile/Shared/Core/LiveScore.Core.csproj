@@ -8,6 +8,7 @@
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="Refit" Version="4.6.99" />
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Polly" Version="7.1.0" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
@@ -21,5 +22,8 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Services\ApiManager.cs" />
   </ItemGroup>
 </Project>

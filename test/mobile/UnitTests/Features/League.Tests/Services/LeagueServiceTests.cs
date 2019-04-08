@@ -15,6 +15,8 @@
         private readonly ILeagueApi mockLeagueApi;
         private readonly ILoggingService mockLogService;
         private readonly ISettingsService mockSettingsService;
+        private readonly INetworkService mockNetworkService;
+
         private readonly ILeagueService service;
 
         public LeagueServiceTests()
@@ -22,7 +24,8 @@
             mockLeagueApi = Substitute.For<ILeagueApi>();
             mockSettingsService = Substitute.For<ISettingsService>();
             mockLogService = Substitute.For<ILoggingService>();
-            service = new LeagueService(mockLeagueApi, mockSettingsService, mockLogService);
+            mockNetworkService = Substitute.For<INetworkService>();
+            service = new LeagueService(mockLeagueApi, mockSettingsService, mockLogService, mockNetworkService);
         }
 
         [Fact]

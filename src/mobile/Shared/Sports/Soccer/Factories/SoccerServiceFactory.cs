@@ -13,19 +13,22 @@
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly ILoggingService loggingService;
+        private readonly INetworkService networkService;
 
         public SoccerServiceFactory(
             IMatchApi matchApi,
             ILeagueApi leagueApi,
             ISettingsService settingsService,
             ICacheService cacheService,
-            ILoggingService loggingService)
+            ILoggingService loggingService,
+            INetworkService networkService)
         {
             this.matchApi = matchApi;
             this.leagueApi = leagueApi;
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.loggingService = loggingService;
+            this.networkService = networkService;
         }
 
         public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
@@ -34,7 +37,7 @@
         }
 
         public ILeagueService CreateLeagueService()
-            => new LeagueService(leagueApi, settingsService, loggingService);
+            => new LeagueService(leagueApi, settingsService, loggingService, networkService);
 
         public IMatchService CreateMatchService()
             => new MatchService(matchApi, settingsService, cacheService, loggingService);
