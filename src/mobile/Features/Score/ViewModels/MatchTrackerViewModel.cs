@@ -9,7 +9,7 @@
     {
         public MatchTrackerViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
         }

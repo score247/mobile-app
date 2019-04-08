@@ -11,7 +11,7 @@
     {
         public MenuViewModelBase(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
             DoneCommand = new DelegateAsyncCommand(OnDone);

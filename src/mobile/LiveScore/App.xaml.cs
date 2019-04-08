@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
+using LiveScore.BasketBall.Factories;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Factories;
@@ -12,6 +13,7 @@ using LiveScore.Menu;
 using LiveScore.News;
 using LiveScore.Score;
 using LiveScore.Services;
+using LiveScore.Soccer.Factories;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using Plugin.Multilingual;
@@ -83,11 +85,11 @@ namespace LiveScore
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ICacheService, CacheService>();
-            containerRegistry.Register<ISettingsService, SettingsService>();
+            containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
-            containerRegistry.Register<ILoggingService, LoggingService>();
+            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterInstance(
                 RestService.For<IMatchApi>(new HttpClient
                 {
@@ -98,7 +100,8 @@ namespace LiveScore
                {
                    BaseAddress = new Uri(SettingsService.ApiEndPoint)
                }));
-            containerRegistry.Register<IGlobalFactory, GlobalFactory>();
+
+            containerRegistry.RegisterSingleton<IGlobalFactoryProvider, GlobalFactoryProvider>();
         }
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)

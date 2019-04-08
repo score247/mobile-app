@@ -20,7 +20,7 @@
 
         public ViewModelBase(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService)
         {
             NavigationService = navigationService;
@@ -30,7 +30,7 @@
 
         protected INavigationService NavigationService { get; }
 
-        protected IGlobalFactory GlobalFactory { get; }
+        protected IGlobalFactoryProvider GlobalFactory { get; }
 
         protected ISettingsService SettingsService { get; }
 

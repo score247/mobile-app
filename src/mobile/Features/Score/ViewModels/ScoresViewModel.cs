@@ -35,12 +35,11 @@
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService)
         : base(navigationService, globalFactory, settingsService)
         {
             InitializeCommands();
-            InitServicesBySportType();
             SelectHome = true;
         }
 
@@ -132,7 +131,7 @@
         private void InitServicesBySportType()
         {
             matchService = GlobalFactory
-                .BuildSportService((SportType)SettingsService.CurrentSportId)
+                .SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId)
                 .CreateMatchService();
         }
 

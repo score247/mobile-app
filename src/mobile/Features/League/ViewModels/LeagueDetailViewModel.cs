@@ -22,11 +22,11 @@
 
         public LeagueDetailViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService)
                 : base(navigationService, globalFactory, settingsService)
         {
-            matchService = GlobalFactory.BuildSportService((SportType)SettingsService.CurrentSportId).CreateMatchService();
+            matchService = GlobalFactory.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateMatchService();
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>();
         }
 

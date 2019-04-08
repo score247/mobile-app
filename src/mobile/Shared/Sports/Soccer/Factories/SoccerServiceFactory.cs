@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.Factories
 {
     using LiveScore.Common.Services;
+    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Services;
@@ -25,6 +26,11 @@
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.loggingService = loggingService;
+        }
+
+        public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
+        {
+            sportServiceFactoryProvider.RegisterInstance(SportType.Soccer, this);
         }
 
         public ILeagueService CreateLeagueService()

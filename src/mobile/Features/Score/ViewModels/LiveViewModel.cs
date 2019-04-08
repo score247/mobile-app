@@ -17,7 +17,7 @@
 
         public LiveViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
         }

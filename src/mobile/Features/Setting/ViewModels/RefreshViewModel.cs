@@ -8,7 +8,7 @@
     {
         public RefreshViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
         }

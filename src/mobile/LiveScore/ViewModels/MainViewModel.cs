@@ -18,7 +18,7 @@
 
         public MainViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService,
             IMenuService menuService) : base(navigationService, globalFactory, settingsService)
         {

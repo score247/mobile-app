@@ -28,14 +28,13 @@
 
         public LeagueViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService,
             IPageDialogService pageDialogService)
                 : base(navigationService, globalFactory, settingsService)
         {
             Title = "League";
-
-            leagueService = GlobalFactory.BuildSportService((SportType)SettingsService.CurrentSportId).CreateLeagueService();
+            leagueService = GlobalFactory.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateLeagueService();
             this.pageDialogService = pageDialogService;
 
             ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);

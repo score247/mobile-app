@@ -4,6 +4,8 @@
 
     public interface ISportServiceFactory
     {
+        void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider);
+
         IMatchService CreateMatchService();
 
         ILeagueService CreateLeagueService();

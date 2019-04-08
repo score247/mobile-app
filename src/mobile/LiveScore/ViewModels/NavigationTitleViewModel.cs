@@ -19,7 +19,7 @@
 
         public NavigationTitleViewModel(
             INavigationService navigationService,
-            IGlobalFactory globalFactory,
+            IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService,
             ISportService sportService) : base(navigationService, globalFactory, settingsService)
         {

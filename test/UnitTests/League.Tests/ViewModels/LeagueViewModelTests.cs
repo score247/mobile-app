@@ -19,13 +19,13 @@
         private readonly INavigationService mockNavigationService;
         private readonly ILeagueService mockLeagueService;
         private readonly IPageDialogService mockPageDialog;
-        private readonly IGlobalFactory mockGlobalFactory;
+        private readonly IGlobalFactoryProvider mockGlobalFactory;
         private readonly ISettingsService mockSettingService;
         private readonly LeagueViewModel viewModel;
 
         public LeagueViewModelTests()
         {
-            mockGlobalFactory = Substitute.For<IGlobalFactory>();
+            mockGlobalFactory = Substitute.For<IGlobalFactoryProvider>();
             mockLeagueService = Substitute.For<ILeagueService>();
             mockSettingService = Substitute.For<ISettingsService>();
             mockGlobalFactory.BuildSportService(Arg.Any<SportType>()).CreateLeagueService().Returns(mockLeagueService);
