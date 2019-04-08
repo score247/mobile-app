@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Factories
 {
-    using LiveScore.Core.Contants;
+    using LiveScore.Core.Constants;
 
     public interface IGlobalFactory
     {

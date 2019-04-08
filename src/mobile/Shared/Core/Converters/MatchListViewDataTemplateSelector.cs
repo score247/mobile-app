@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Converters
 {
-    using LiveScore.Core.Contants;
+    using LiveScore.Core.Constants;
     using LiveScore.Core.Services;
     using Xamarin.Forms;
 

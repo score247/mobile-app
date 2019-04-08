@@ -4,7 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Contants;
+    using Core.Constants;
     using Core.Factories;
     using Core.Models.LeagueInfo;
     using Core.Services;

@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Core.Contants
+﻿namespace LiveScore.Core.Constants
 {
     using System.ComponentModel;
 

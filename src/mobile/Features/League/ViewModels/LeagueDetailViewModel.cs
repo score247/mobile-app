@@ -11,7 +11,7 @@
     using Prism.Navigation;
     using Core.Factories;
     using Core.Services;
-    using Core.Contants;
+    using Core.Constants;
 
     public class LeagueDetailViewModel : ViewModelBase
     {

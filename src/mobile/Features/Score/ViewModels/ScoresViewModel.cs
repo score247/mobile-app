@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.Contants;
+    using Core.Constants;
     using Core.Factories;
     using Core.Models.MatchInfo;
     using Core.Services;

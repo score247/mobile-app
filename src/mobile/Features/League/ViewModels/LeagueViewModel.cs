@@ -34,6 +34,7 @@
                 : base(navigationService, globalFactory, settingsService)
         {
             Title = "League";
+
             leagueService = GlobalFactory.BuildSportService((SportType)SettingsService.CurrentSportId).CreateLeagueService();
             this.pageDialogService = pageDialogService;
 

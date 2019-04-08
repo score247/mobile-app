@@ -4,7 +4,7 @@
     using System.Reactive.Linq;
     using Akavache;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Contants;
+    using LiveScore.Core.Constants;
 
     public interface ISettingsService
     {

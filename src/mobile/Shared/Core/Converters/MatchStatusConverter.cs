@@ -3,7 +3,7 @@
     using System;
     using System.Globalization;
     using LiveScore.Common.LangResources;
-    using LiveScore.Core.Contants;
+    using LiveScore.Core.Constants;
     using Xamarin.Forms;
 
     public class MatchStatusConverter : IValueConverter

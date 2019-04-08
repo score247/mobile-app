@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
-    using LiveScore.Core.Contants;
+    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using Prism.AppModel;
