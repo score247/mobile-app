@@ -29,7 +29,7 @@
 
             SportServiceFactoryProvider = new SportServiceFactoryProvider();
 
-            var soccerServiceFactory = new SoccerServiceFactory(matchApi, leagueApi, settingsService, cacheService, loggingService);
+            var soccerServiceFactory = new SoccerServiceFactory(matchApi, leagueApi, settingsService, cacheService, loggingService, networkService);
             soccerServiceFactory.RegisterTo(SportServiceFactoryProvider);
 
             var basketBallServiceFactory = new BasketBallServiceFactory();

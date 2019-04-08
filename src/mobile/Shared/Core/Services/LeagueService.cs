@@ -13,6 +13,6 @@
 
     public interface ILeagueService
     {
-        Task<IEnumerable<League>> GetLeagues();
+        Task<IList<LeagueItem>> GetLeagues();
     }
 }

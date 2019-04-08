@@ -27,8 +27,8 @@
         {
             mockGlobalFactory = Substitute.For<IGlobalFactoryProvider>();
             mockLeagueService = Substitute.For<ILeagueService>();
-            mockSettingService = Substitute.For<ISettingsService>();
-            mockGlobalFactory.BuildSportService(Arg.Any<SportType>()).CreateLeagueService().Returns(mockLeagueService);
+            mockSettingService = Substitute.For<ISettingsService>();           
+            mockGlobalFactory.SportServiceFactoryProvider.GetInstance(Arg.Any<SportType>()).CreateLeagueService().Returns(mockLeagueService);
             mockNavigationService = Substitute.For<INavigationService>();
             mockPageDialog = Substitute.For<IPageDialogService>();
 

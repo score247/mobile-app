@@ -29,40 +29,19 @@
             this.leagueApi = leagueApi ?? RestService.For<ILeagueApi>(SettingsService.ApiEndPoint);
         }
 
-        public async Task<IList<LeagueItem>> GetLeaguesAndRetry()
+        public async Task<IList<LeagueItem>> GetLeagues()
         {
-            var leagueItems = new List<LeagueItem>();
-
             var leagues = await networkService.WaitAndRetry
                 (
-                    () => GetLeagues(),
+                    () => GetLeagueItems(),
                     sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
                     retryCount: 1
                 );
 
-            //var data = await Policy
-            //.Handle<WebException>()
-            //.Or<ApiException>()
-            //.Or<TaskCanceledException>()
-            //.WaitAndRetryAsync
-            //(
-            //    retryCount: 1,
-            //    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
-            //)
-            //.ExecuteAsync(async () =>
-            //{
-            //    return await GetLeagues();
-            //});
-
-            if (leagues.Any())
-            {
-                leagueItems.AddRange(leagues);
-            }
-
-            return leagueItems;
+            return leagues;
         }
 
-        public async Task<IList<LeagueItem>> GetLeagues()
+        private async Task<IList<LeagueItem>> GetLeagueItems()
         {
             try
             {

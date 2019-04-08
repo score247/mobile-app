@@ -12,10 +12,5 @@
         {
             throw new NotImplementedException();
         }
-
-        public Task<IList<LeagueItem>> GetLeaguesAndRetry()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

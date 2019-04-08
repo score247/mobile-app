@@ -88,11 +88,12 @@ namespace LiveScore
         {
             containerRegistry.Register<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
-            containerRegistry.Register<INetworkService, NetworkService>();
             containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
+            containerRegistry.Register<INetworkService, NetworkService>();
+
             containerRegistry.RegisterInstance(
                 RestService.For<IMatchApi>(new HttpClient
                 {
