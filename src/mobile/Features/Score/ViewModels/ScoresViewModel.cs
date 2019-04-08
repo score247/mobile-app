@@ -7,13 +7,13 @@
     using Common.Extensions;
     using Core.Constants;
     using Core.Factories;
-    using Core.Models.MatchInfo;
     using Core.Services;
     using Core.ViewModels;
     using Prism.Commands;
     using Prism.Navigation;
     using LiveScore.Score.Models;
     using LiveScore.Score.Views;
+    using LiveScore.Core.Models.Matches;
 
     public class ScoresViewModel : ViewModelBase
     {
@@ -130,8 +130,9 @@
 
         private void InitServicesBySportType()
         {
-            matchService = GlobalFactory
-                .SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId)
+            matchService = GlobalFactoryProvider
+                .SportServiceFactoryProvider
+                .GetInstance((SportType)SettingsService.CurrentSportId)
                 .CreateMatchService();
         }
 
@@ -191,7 +192,7 @@
             var matches = await matchService.GetDailyMatches(currentDate, forceFetchNewData);
 
             GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
-                      matches.GroupBy(m => new { m.Event.League.Name, m.Event.ShortEventDate }));
+                      matches.GroupBy(m => new { m.League.Name, m.EventDate }));
 
             IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
         }

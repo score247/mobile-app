@@ -7,9 +7,9 @@
     using Common.Extensions;
     using Core.Constants;
     using Core.Factories;
-    using Core.Models.LeagueInfo;
     using Core.Services;
     using Core.ViewModels;
+    using Core.Models.Leagues;
     using LiveScore.League.Views;
     using Prism.Commands;
     using Prism.Navigation;
@@ -19,11 +19,11 @@
     {
         private readonly ILeagueService leagueService;
         private readonly IPageDialogService pageDialogService;
-        private readonly List<LeagueItem> leagueList;
+        private readonly List<League> leagueList;
         private bool isLoading;
         private bool hasData;
         private string filter;
-        private ObservableCollection<LeagueItem> leagues;
+        private ObservableCollection<League> leagues;
 
 
         public LeagueViewModel(
@@ -34,21 +34,21 @@
                 : base(navigationService, globalFactory, settingsService)
         {
             Title = "League";
-            leagueService = GlobalFactory.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateLeagueService();
+            leagueService = GlobalFactoryProvider.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateLeagueService();
             this.pageDialogService = pageDialogService;
 
-            ItemTappedCommand = new DelegateAsyncCommand<LeagueItem>(ItemTapped);
+            ItemTappedCommand = new DelegateAsyncCommand<League>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagues);
             SearchCommand = new DelegateCommand(DelayedQueryKeyboardSearches);
             RefreshCommand = new DelegateAsyncCommand(Refresh);
 
-            Leagues = new ObservableCollection<LeagueItem>();
-            leagueList = new List<LeagueItem>();
+            Leagues = new ObservableCollection<League>();
+            leagueList = new List<League>();
             IsLoading = true;
             HasData = !IsLoading;
         }
 
-        public DelegateAsyncCommand<LeagueItem> ItemTappedCommand { get; set; }
+        public DelegateAsyncCommand<League> ItemTappedCommand { get; set; }
 
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
@@ -74,7 +74,7 @@
             set => SetProperty(ref filter, value);
         }
 
-        public ObservableCollection<LeagueItem> Leagues
+        public ObservableCollection<League> Leagues
         {
             get => leagues;
             set => SetProperty(ref leagues, value);
@@ -100,11 +100,11 @@
             // TODO clean all resources and requests
         }
 
-        private async Task ItemTapped(LeagueItem item)
+        private async Task ItemTapped(League item)
         {
             var param = new NavigationParameters
             {
-                { nameof(LeagueItem), item }
+                { nameof(League), item }
             };
 
             var result = await NavigationService.NavigateAsync($"{nameof(LeagueDetailView)}", param);
@@ -130,7 +130,7 @@
         {
             var leagueGroups = await leagueService.GetLeagues();
 
-            Leagues = new ObservableCollection<LeagueItem>(leagueGroups);
+            Leagues = new ObservableCollection<League>(leagueGroups);
 
             leagueList.AddRange(leagues);
 
@@ -154,7 +154,7 @@
                         .Contains(query.ToLowerInvariant())).ToList();
             }
 
-            Leagues = new ObservableCollection<LeagueItem>(filterLeagues);
+            Leagues = new ObservableCollection<League>(filterLeagues);
         }
     }
 }

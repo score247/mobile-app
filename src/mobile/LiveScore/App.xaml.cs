@@ -16,6 +16,7 @@ using LiveScore.Services;
 using LiveScore.Soccer.Factories;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
@@ -95,11 +96,10 @@ namespace LiveScore
                 {
                     BaseAddress = new Uri(SettingsService.ApiEndPoint)
                 }));
-            containerRegistry.RegisterInstance(
-               RestService.For<ILeagueApi>(new HttpClient
-               {
-                   BaseAddress = new Uri(SettingsService.ApiEndPoint)
-               }));
+            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
+
+            JsonConvert.DefaultSettings =
+              () => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
             containerRegistry.RegisterSingleton<IGlobalFactoryProvider, GlobalFactoryProvider>();
         }

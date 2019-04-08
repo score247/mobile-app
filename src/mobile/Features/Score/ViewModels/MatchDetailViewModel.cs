@@ -3,11 +3,11 @@
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
     using Core.Factories;
-    using Core.Models.MatchInfo;
     using Core.Services;
     using Core.ViewModels;
     using Prism.Navigation;
     using LiveScore.Score.Views.Templates;
+    using LiveScore.Core.Models.Matches;
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
@@ -33,7 +33,7 @@
             if (parameters != null)
             {
                 var match = parameters[nameof(Match)] as Match;
-                MatchId = match.Event.Id;
+                MatchId = match.Id;
             }
 
             if (MatchDetailItems.Count == 0)
@@ -53,7 +53,7 @@
                     Name = "Trackers",
                     Template = new MatchTrackerTemplate
                     {
-                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactory, SettingsService)
+                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactoryProvider, SettingsService)
                         {
                             MatchId = matchId
                         }

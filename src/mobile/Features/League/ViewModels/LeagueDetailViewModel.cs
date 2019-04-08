@@ -5,19 +5,19 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ViewModels;
-    using Core.Models.LeagueInfo;
-    using Core.Models.MatchInfo;
     using Prism.Commands;
     using Prism.Navigation;
     using Core.Factories;
     using Core.Services;
     using Core.Constants;
+    using Core.Models.Leagues;
+    using LiveScore.Core.Models.Matches;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
         private readonly IMatchService matchService;
         private bool isRefreshingMatchList;
-        private LeagueItem selectedLeagueName;
+        private League selectedLeagueName;
         private ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> groupMatches;
 
         public LeagueDetailViewModel(
@@ -26,7 +26,7 @@
             ISettingsService settingsService)
                 : base(navigationService, globalFactory, settingsService)
         {
-            matchService = GlobalFactory.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateMatchService();
+            matchService = GlobalFactoryProvider.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateMatchService();
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>();
         }
 
@@ -46,7 +46,7 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
+                //matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
                 IsRefreshingMatchList = false;
             });
 
@@ -54,7 +54,7 @@
         {
             if (parameters != null)
             {
-                selectedLeagueName = parameters[nameof(LeagueItem)] as LeagueItem;
+                selectedLeagueName = parameters[nameof(League)] as League;
                 Title = selectedLeagueName?.Name ?? string.Empty;
             }
 
@@ -68,16 +68,16 @@
         {
             IList<Match> matches = new List<Match>();
 
-            // TODO process grouped
-            if (!selectedLeagueName.IsGrouped)
-            {
-                matches = await matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
-            }
+            //// TODO process grouped
+            //if (!selectedLeagueName.IsGrouped)
+            //{
+            //    matches = await matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
+            //}
 
-            var groups = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>(
-                matches.GroupBy(m => new MatchHeaderItemViewModel { Name = m.Event.LeagueRound.Number, ShortEventDate = m.Event.EventDate }));
+            //var groups = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>(
+            //matches.GroupBy(m => new MatchHeaderItemViewModel { Name = m.Event.LeagueRound.Number, ShortEventDate = m.Event.EventDate }));
 
-            return groups;
+            return null;
         }
     }
 }

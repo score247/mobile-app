@@ -31,6 +31,9 @@
     {
         public static string ApiEndPoint => "https://api.sportradar.us";
 
+        public static string LocalEndPoint => "https://testing2.nexdev.net/Main/api";
+
+
         public IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
         {
             { "am", "a4tmwcm5rj73kd6ctgbvazzb" },

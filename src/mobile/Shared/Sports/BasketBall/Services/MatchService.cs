@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Core.Models.MatchInfo;
+    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
 
     public class MatchService : IMatchService

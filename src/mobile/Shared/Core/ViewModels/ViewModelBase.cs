@@ -24,13 +24,13 @@
             ISettingsService settingsService)
         {
             NavigationService = navigationService;
-            GlobalFactory = globalFactory;
+            GlobalFactoryProvider = globalFactory;
             SettingsService = settingsService;
         }
 
         protected INavigationService NavigationService { get; }
 
-        protected IGlobalFactoryProvider GlobalFactory { get; }
+        protected IGlobalFactoryProvider GlobalFactoryProvider { get; }
 
         protected ISettingsService SettingsService { get; }
 

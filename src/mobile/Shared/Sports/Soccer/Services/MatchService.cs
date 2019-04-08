@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Models.MatchInfo;
+    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
 
     public class MatchService : BaseService, IMatchService
@@ -43,15 +43,15 @@
                 cacheExpiration);
         }
 
-        public async Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
-        {
-            var sportType = settingsService.SportNameMapper[settingsService.CurrentSportName];
-            var lang = settingsService.LanguageMapper[settingsService.CurrentLanguage];
-            var matchEvents = await GetMatchEvents(group, sportType, lang, leagueId);
-            var matches = matchEvents.Select(x => new Match { Event = x }).ToList();
+        //public async Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
+        //{
+        //    var sportType = settingsService.SportNameMapper[settingsService.CurrentSportName];
+        //    var lang = settingsService.LanguageMapper[settingsService.CurrentLanguage];
+        //    var matchEvents = await GetMatchEvents(group, sportType, lang, leagueId);
+        //    var matches = matchEvents.Select(x => new Match { Event = x }).ToList();
 
-            return matches;
-        }
+        //    return matches;
+        //}
 
         private async Task<IList<Match>> GetMatchesByGroup(string sportName, string language, string eventDate)
         {
@@ -71,38 +71,45 @@
         {
             var apiKeyByGroup = settingsService.ApiKeyMapper[group];
 
-            try
-            {
-                var dailySchedule = await soccerMatchApi.GetDailyMatches(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
-                dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
+            //try
+            //{
+            //    var dailySchedule = await soccerMatchApi.GetDailyMatches(sportName, group, language, eventDate, apiKeyByGroup).ConfigureAwait(false);
+            //    dailySchedule.Matches.ToList().ForEach(match => match.Event.ShortEventDate = match.Event.EventDate.ToShortDayMonth());
 
-                return dailySchedule.Matches;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
+            //    return dailySchedule.Matches;
+            //}
+            //catch (Exception ex)
+            //{
+            //    HandleException(ex);
 
-                return Enumerable.Empty<Match>();
-            }
+            //    return Enumerable.Empty<Match>();
+            //}
+
+            return Enumerable.Empty<Match>();
         }
 
-        private async Task<IList<MatchEvent>> GetMatchEvents(string group, string sportName, string language, string leagueId)
+        public Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
         {
-            var apiKeyByGroup = settingsService.ApiKeyMapper[group];
-            var matches = new List<MatchEvent>();
-
-            try
-            {
-                var result = await soccerMatchApi.GetMatchesByLeague(sportName, group, language, leagueId, apiKeyByGroup).ConfigureAwait(false);
-
-                return result.SportEvents;
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-
-            return matches;
+            throw new NotImplementedException();
         }
+
+        //private async Task<IList<MatchEvent>> GetMatchEvents(string group, string sportName, string language, string leagueId)
+        //{
+        //    var apiKeyByGroup = settingsService.ApiKeyMapper[group];
+        //    var matches = new List<MatchEvent>();
+
+        //    try
+        //    {
+        //        var result = await soccerMatchApi.GetMatchesByLeague(sportName, group, language, leagueId, apiKeyByGroup).ConfigureAwait(false);
+
+        //        return result.SportEvents;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        HandleException(ex);
+        //    }
+
+        //    return matches;
+        //}
     }
 }

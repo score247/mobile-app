@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Core.Models.LeagueInfo;
+    using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Services;
 
     public class LeagueService : ILeagueService
     {
-        public Task<IList<LeagueItem>> GetLeagues()
+        public Task<IEnumerable<League>> GetLeagues()
         {
             throw new NotImplementedException();
         }

@@ -4,11 +4,11 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using Core.ViewModels;
-    using Core.Models.MatchInfo;
     using Prism.Commands;
     using Prism.Navigation;
     using Core.Factories;
     using Core.Services;
+    using LiveScore.Core.Models.Matches;
 
     public class LiveViewModel : ViewModelBase
     {
@@ -50,7 +50,7 @@
         private void GetMatches()
         {
             var matches = new List<Match>();
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.Event.League.Id));
+            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.League.Id));
         }
     }
 }
