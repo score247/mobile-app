@@ -40,7 +40,7 @@ namespace LiveScore.WebApi
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Chatbot API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "Live Scores API", Version = "v1" });
             });
 
             services
