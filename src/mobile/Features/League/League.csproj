@@ -2,6 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>LiveScore.League</RootNamespace>
+        <AssemblyName>LiveScore.League</AssemblyName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>

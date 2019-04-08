@@ -27,7 +27,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png">
+       <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png">
             <x:Arguments>
                 <score:LiveView Title="Scores">
                     <NavigationPage.TitleView>

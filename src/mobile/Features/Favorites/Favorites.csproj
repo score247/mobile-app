@@ -2,30 +2,35 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>LiveScore.Favorites</RootNamespace>
+    <AssemblyName>LiveScore.Favorites</AssemblyName>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
-    <DebugType></DebugType>
+    <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.12.0.8217" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="ViewResources\NewsViewResource.xaml.cs">
-      <DependentUpon>NewsViewResource.xaml</DependentUpon>
+    <Compile Update="ViewResources\FavoritePageResource.xaml.cs">
+      <DependentUpon>FavoriteViewResource.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\NewsPage.xaml.cs">
-      <DependentUpon>NewsView.xaml</DependentUpon>
+    <Compile Update="Views\FavoritePage.xaml.cs">
+      <DependentUpon>FavoriteView.xaml</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewResources\" />
   </ItemGroup>
 
   <ItemGroup>

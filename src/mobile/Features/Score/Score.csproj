@@ -2,6 +2,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>LiveScore.Score</RootNamespace>
+        <AssemblyName>LiveScore.Score</AssemblyName>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Score.ruleset</CodeAnalysisRuleSet>
@@ -115,7 +117,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
       <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
-      <ProjectReference Include="..\..\Shared\Sports\Soccer\LiveScore.Soccer.csproj" />
-      <ProjectReference Include="..\..\Shared\Sports\BasketBall\LiveScore.BasketBall.csproj" />
+      <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />
+      <ProjectReference Include="..\..\Shared\Sports\BasketBall\BasketBall.csproj" />
     </ItemGroup>
 </Project>
