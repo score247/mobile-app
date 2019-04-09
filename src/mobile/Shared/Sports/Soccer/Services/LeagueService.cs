@@ -34,8 +34,7 @@
             var leagues = await networkService.WaitAndRetry
                 (
                     () => GetLeagueItems(),
-                    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)),
-                    retryCount: 1
+                    sleepDurationProvider: retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt))
                 );
 
             return leagues;

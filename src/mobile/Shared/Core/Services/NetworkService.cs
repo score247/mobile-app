@@ -9,19 +9,25 @@
     public interface INetworkService
     {
         Task<T> WaitAndRetry<T>(Func<Task<T>> func,
-                                Func<int, TimeSpan> sleepDurationProvider,
-                                int retryCount);
+                                Func<int, TimeSpan> sleepDurationProvider);
+
+        Task<T> Timeout<T>(Func<Task<T>> func);
     }
 
     public class NetworkService : INetworkService
     {
-        public Task<T> WaitAndRetry<T>(Func<Task<T>> func, Func<int, TimeSpan> sleepDurationProvider, int retryCount)
+        const int DEFAULT_COUNT = 3;
+        const int TIMEOUT_SECONDS = 2;
+
+        public Task<T> WaitAndRetry<T>(Func<Task<T>> func, Func<int, TimeSpan> sleepDurationProvider)
         => Policy
             .Handle<WebException>()
-            .Or<ApiException>()
+            .Or<ApiException>(ex => !ex.Message.ToLower().Contains("404"))
             .Or<TaskCanceledException>()
-            .WaitAndRetryAsync(retryCount, sleepDurationProvider)
+            .WaitAndRetryAsync(DEFAULT_COUNT, sleepDurationProvider)
             .ExecuteAsync<T>(func);
 
+        public Task<T> Timeout<T>(Func<Task<T>> func)
+            => Policy.TimeoutAsync(TIMEOUT_SECONDS).ExecuteAsync<T>(func);
     }
 }
