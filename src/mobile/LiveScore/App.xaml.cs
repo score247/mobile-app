@@ -79,11 +79,12 @@ namespace LiveScore
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
         }
 
-        private static void RegisterServices(IContainerRegistry containerRegistry)
+        private void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
