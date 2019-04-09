@@ -19,9 +19,13 @@
         }
 
         [HttpGet("GetMatches")]
-        public async Task<IEnumerable<Match>> GetMatches(int sportId, DateTime from, DateTime to, string language)
+        public async Task<IEnumerable<Match>> GetMatches(
+            int sportId, 
+            DateTime from, 
+            DateTime to, 
+            string language)
         {
-            return await matchService.GetMatches(1, DateTime.Now, DateTime.Now.AddDays(1), language);
+            return await matchService.GetMatches(sportId, from, to, language);
         }
     }
 }

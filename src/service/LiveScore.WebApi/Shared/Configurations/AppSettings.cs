@@ -13,5 +13,7 @@
         }
 
         public string AppPath => hostingEnvironment.ContentRootPath;
+
+        public bool IsUseStaticData => true;
     }
 }

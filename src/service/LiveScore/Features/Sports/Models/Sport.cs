@@ -6,11 +6,11 @@
 
     public interface ISport : IEntity<string, string>
     {
-        IEnumerable<League> Leagues { get; set; }
+        IEnumerable<ILeague> Leagues { get; set; }
     }
 
     public class Sport : Entity<string, string>, ISport
     {
-        public IEnumerable<League> Leagues { get; set; }
+        public IEnumerable<ILeague> Leagues { get; set; }
     }
 }

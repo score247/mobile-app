@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Features.Matches
+﻿namespace LiveScore.Features.Matches.DataProviders
 {
     using System.IO;
     using System.Threading.Tasks;
@@ -16,11 +16,9 @@
         }
 
         public Task<DailyScheduleDto> GetDailySchedules(
-            string sportName,
-            string group,
+            int sportId,
             string lang,
-            string date,
-            string key)
+            string date)
         {
             // Temporary for hardcode, please ignore it
             var jsonData = File.ReadAllText($"{appSettings.AppPath}/App_Data/staticdata/daily-schedule.json");

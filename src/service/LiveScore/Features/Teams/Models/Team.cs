@@ -22,9 +22,9 @@
 
         ICoach Coach { get; }
 
-        IEnumerable<Player> Players { get; }
+        IEnumerable<IPlayer> Players { get; }
 
-        IEnumerable<Player> Substitutions { get; }
+        IEnumerable<IPlayer> Substitutions { get; }
     }
 
     public class Team : Entity<string, string>, ITeam
@@ -37,7 +37,7 @@
 
         public bool IsHome { get; set; }
 
-        public IEnumerable<Player> Players { get; set; }
+        public IEnumerable<IPlayer> Players { get; set; }
 
         public ITeamStatistic Statistic { get; set; }
 
@@ -47,6 +47,6 @@
 
         public string Abbreviation { get; set; }
 
-        public IEnumerable<Player> Substitutions { get; set; }
+        public IEnumerable<IPlayer> Substitutions { get; set; }
     }
 }

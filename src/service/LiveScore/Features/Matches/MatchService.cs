@@ -13,28 +13,36 @@
 
     public class MatchServiceImpl : MatchService
     {
-        private readonly MatchDataAccess leagueDataAccess;
+        private readonly MatchDataAccess matchDataAccess;
 
-        public MatchServiceImpl(MatchDataAccess leagueDataAccess)
+        public MatchServiceImpl(MatchDataAccess matchDataAccess)
         {
-            this.leagueDataAccess = leagueDataAccess;
+            this.matchDataAccess = matchDataAccess;
         }
 
-        public async Task<IEnumerable<Match>> GetMatches(int sportId, DateTime from, DateTime to, string language)
+        public async Task<IEnumerable<Match>> GetMatches(
+            int sportId,
+            DateTime from,
+            DateTime to,
+            string language)
         {
-            if (sportId == 0)
+            if (sportId <= 0
+                || from > to
+                || from == DateTime.MinValue
+                || to == DateTime.MinValue)
             {
                 return await Task.FromResult(Enumerable.Empty<Match>());
             }
 
-            var leagues = new List<Match>();
+            var matches = new List<Match>();
 
-            for (DateTime date = from.Date; date.Date < to.Date; date = date.AddDays(1))
+            const int dayIncrementIndex = 1;
+            for (var date = from.Date; date.Date < to.Date; date = date.AddDays(dayIncrementIndex))
             {
-                leagues.AddRange(await leagueDataAccess.GetMatches(1, date.Date));
+                matches.AddRange(await matchDataAccess.GetMatches(sportId, date.Date, language));
             }
 
-            return leagues;
+            return matches;
         }
     }
 }

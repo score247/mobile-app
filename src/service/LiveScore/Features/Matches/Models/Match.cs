@@ -10,9 +10,9 @@
     {
         DateTime EventDate { get; }
 
-        League League { get; }
+        ILeague League { get; }
 
-        LeagueRound LeagueRound { get; }
+        ILeagueRound LeagueRound { get; }
 
         IEnumerable<ITeam> Teams { get; }
 
@@ -39,8 +39,8 @@
 
         public bool IsLive { get; set; }
 
-        public League League { get; set; }
+        public ILeague League { get; set; }
 
-        public LeagueRound LeagueRound { get; set; }
+        public ILeagueRound LeagueRound { get; set; }
     }
 }
