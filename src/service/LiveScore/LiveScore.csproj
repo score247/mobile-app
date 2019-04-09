@@ -20,13 +20,4 @@
     </PackageReference>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\core\LiveScore.Domain\LiveScore.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Teams\" />
-    <Folder Include="Shared\Models\" />
-  </ItemGroup>
-
 </Project>

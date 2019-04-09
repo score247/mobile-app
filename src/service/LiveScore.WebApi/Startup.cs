@@ -1,26 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using LiveScore.Features.Leagues;
-using LiveScore.Shared.Configurations;
-using LiveScore.WebApi.Configurations;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting.Internal;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Swashbuckle.AspNetCore.Swagger;
-using Swashbuckle.AspNetCore.SwaggerGen;
-using Newtonsoft;
-using Newtonsoft.Json;
-using LiveScore.Features.Matches;
-
-namespace LiveScore.WebApi
+﻿namespace LiveScore.WebApi
 {
+    using LiveScore.Features.Leagues;
+    using LiveScore.Features.Matches;
+    using LiveScore.Shared.Configurations;
+    using LiveScore.WebApi.Shared.Configurations;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Swashbuckle.AspNetCore.Swagger;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -33,7 +23,6 @@ namespace LiveScore.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             services.AddSingleton<LeagueService, LeagueServiceImpl>();
             services.AddSingleton<ILeagueApi, StaticLeagueApi>();
             services.AddSingleton<LeagueDataAccess, LeagueDataAccessImpl>();
@@ -41,19 +30,13 @@ namespace LiveScore.WebApi
             services.AddSingleton<MatchDataAccess, MatchDataAccessImpl>();
             services.AddSingleton<IMatchApi, StaticMatchApi>();
             services.AddSingleton<IAppSettings, AppSettings>();
-
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Live Scores API", Version = "v1" });
             });
-
             services
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-                //.AddJsonOptions(options =>
-                //{
-                //    options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
-                //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,26 +47,18 @@ namespace LiveScore.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
-            app.UseSwagger();
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-            // specifying the Swagger JSON endpoint.
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint($"../swagger/v1/swagger.json", "Chatbot API Docs");
-            });
-
-            
-
             app
+                .UseSwagger()
+                .UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint($"../swagger/v1/swagger.json", "Chatbot API Docs");
+                })
                 .UseMvc(routes =>
                 {
                     routes.MapRoute(
                         name: "default",
                         template: "{controller=Home}/{action=Index}");
-                })
-                ;
+                });
         }
     }
 }

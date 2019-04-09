@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Domain.Enumerations;
-    using LiveScore.Domain.Models.Matches;
+    using LiveScore.Features.Leagues.Models;
+    using LiveScore.Features.Matches.Models;
+    using LiveScore.Shared.Models;
 
     public interface MatchDataAccess
     {
@@ -37,11 +38,11 @@
                 var sportEventStatusDto = matchDto.sport_event_status;
                 var leagueDto = matchDto.sport_event.tournament;
                 var leagueRoundDto = matchDto.sport_event.tournament_round;
-                var teams = new List<Domain.Models.Teams.Team>();
+                var teams = new List<Teams.Models.Team>();
 
                 foreach (var competitor in sportEventDto.competitors)
                 {
-                    teams.Add(new Domain.Models.Teams.Team
+                    teams.Add(new Teams.Models.Team
                     {
                         Id = competitor.id,
                         Country = competitor.country,
@@ -52,21 +53,39 @@
                     });
                 }
 
+                var leagueRound = new LeagueRound
+                {
+                    Type = Enumeration.FromValue<LeagueRoundTypes>(leagueRoundDto.type),
+                    Name = leagueRoundDto.name,
+                    Number = leagueRoundDto.number,
+                    Phase = leagueRoundDto.phase
+                };
+
+                var leagueCategoryDto = leagueDto.category;
+
                 matches.Add(new Match
                 {
                     Id = sportEventDto.id,
                     EventDate = sportEventDto.scheduled,
-                    LeagueId = leagueDto?.id,
-                    LeagueName = leagueDto?.name,
-                    LeagueRoundName = leagueRoundDto?.type,
-                    LeagueCategory = leagueDto?.category?.name,
                     MatchResult = new MatchResult
                     {
                         Status = Enumeration.FromValue<MatchStatus>(sportEventStatusDto.status),
                         HomeScores = new List<int> { sportEventStatusDto.home_score },
                         AwayScores = new List<int> { sportEventStatusDto.away_score },
                     },
-                    Teams = teams
+                    Teams = teams,
+                    League = new League
+                    {
+                        Id = leagueDto.id,
+                        Name = leagueDto.name,
+                        Category = new LeagueCategory
+                        {
+                            Id = leagueCategoryDto?.id,
+                            Name = leagueCategoryDto?.name,
+                            CountryCode = leagueCategoryDto?.country_code
+                        }
+                    },
+                    LeagueRound = leagueRound
                 });
             }
 

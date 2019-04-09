@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="App_Data\flags\" />
     <Folder Include="App_Data\staticdata\" />
+    <Folder Include="Features\Teams\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -30,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\core\LiveScore.Domain\LiveScore.Domain.csproj" />
     <ProjectReference Include="..\LiveScore\LiveScore.csproj" />
   </ItemGroup>
 

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Domain.Models.Leagues;
+    using LiveScore.Features.Leagues.Models;
     using Refit;
 
     public interface ILeagueApi

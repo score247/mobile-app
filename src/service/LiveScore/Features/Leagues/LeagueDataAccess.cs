@@ -1,13 +1,13 @@
 ﻿namespace LiveScore.Features.Leagues
 {
     using System;
-    using System.Linq;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
-    using LiveScore.Domain.Models.Leagues;
+    using LiveScore.Features.Leagues.Models;
+    using LiveScore.Features.Matches.Models;
+    using LiveScore.Shared.Models;
     using LiveScore.Shared.Models.Dtos;
-    using LiveScore.Domain.Enumerations;
-    using LiveScore.Domain.Models.Matches;
 
     public interface LeagueDataAccess
     {
@@ -26,10 +26,10 @@
         public async Task<IEnumerable<League>> GetLeagues(int sportId, DateTime date)
         {
             var dailySchedule = await leagueApi.GetDailySchedules(
-                "soccer", 
-                "eu", 
-                "en", 
-                DateTime.Now.ToString(), 
+                "soccer",
+                "eu",
+                "en",
+                DateTime.Now.ToString(),
                 "key");
 
             var leagues = new List<League>();
@@ -74,14 +74,13 @@
         }
 
         private static List<LeagueRound> BuildLeagueRound(
-            List<Result> matchByLeagueDtos, 
+            List<Result> matchByLeagueDtos,
             IEnumerable<IGrouping<string, Result>> leagueRoundGroupDtos)
         {
             var leagueRounds = new List<LeagueRound>();
 
             foreach (var leagueRoundGroupDto in leagueRoundGroupDtos)
             {
-
                 var leagueRoundDto = matchByLeagueDtos.FirstOrDefault().sport_event.tournament_round;
 
                 var matches = BuildMatches(matchByLeagueDtos);
@@ -108,11 +107,11 @@
             {
                 var sportEventDto = matchDto.sport_event;
                 var sportEventStatusDto = matchDto.sport_event_status;
-                var teams = new List<Domain.Models.Teams.Team>();
+                var teams = new List<Teams.Models.Team>();
 
                 foreach (var competitor in sportEventDto.competitors)
                 {
-                    teams.Add(new Domain.Models.Teams.Team
+                    teams.Add(new Teams.Models.Team
                     {
                         Id = competitor.id,
                         Country = competitor.country,
