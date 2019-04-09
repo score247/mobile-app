@@ -97,10 +97,8 @@ namespace LiveScore
                     BaseAddress = new Uri(SettingsService.ApiEndPoint)
                 }));
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
-
             JsonConvert.DefaultSettings =
               () => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
-
             containerRegistry.RegisterSingleton<IGlobalFactoryProvider, GlobalFactoryProvider>();
         }
 
