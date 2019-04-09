@@ -13,7 +13,7 @@
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly ILoggingService loggingService;
-        private readonly INetworkService networkService;
+        private readonly IApiPolicy networkService;
 
         public SoccerServiceFactory(
             IMatchApi matchApi,
@@ -21,7 +21,7 @@
             ISettingsService settingsService,
             ICacheService cacheService,
             ILoggingService loggingService,
-            INetworkService networkService)
+            IApiPolicy networkService)
         {
             this.matchApi = matchApi;
             this.leagueApi = leagueApi;

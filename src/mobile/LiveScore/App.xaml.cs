@@ -92,7 +92,7 @@ namespace LiveScore
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
-            containerRegistry.Register<INetworkService, NetworkService>();
+            containerRegistry.Register<IApiPolicy, ApiPolicy>();
 
             containerRegistry.RegisterInstance(
                 RestService.For<IMatchApi>(new HttpClient
