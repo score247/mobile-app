@@ -14,7 +14,7 @@
 
     public class Startup
     {
-        private IHostingEnvironment hostingEnvironment;
+        private readonly IHostingEnvironment hostingEnvironment;
 
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
@@ -34,12 +34,12 @@
             services.AddSingleton<LeagueDataAccess, LeagueDataAccessImpl>();
             services.AddSingleton<MatchService, MatchServiceImpl>();
             services.AddSingleton<MatchDataAccess, MatchDataAccessImpl>();
-            // 
+            //
             services.AddSingleton<IMatchApi>(
-                appSettings.IsUseStaticData 
+                appSettings.IsUseStaticData
                 ? (IMatchApi)new StaticMatchApi(appSettings)
                 : (IMatchApi)new SportRadarMatchApi());
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Live Scores API", Version = "v1" });
@@ -50,7 +50,10 @@
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             if (env.IsDevelopment())
             {

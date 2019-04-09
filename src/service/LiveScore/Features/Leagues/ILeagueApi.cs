@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using LiveScore.Shared.Models.Dtos;
-    using Refit;
 
     public interface ILeagueApi
     {

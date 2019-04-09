@@ -5,7 +5,7 @@
     using LiveScore.Features.Leagues.Models;
     using Refit;
 
-    public interface ILeagueApi
+    public interface ILiveScoreLeagueApi
     {
         [Get("/League/GetLeaguesByDate?sportId={sportId}&from={fromDate}&to={toDate}")]
         Task<IEnumerable<League>> GetLeagues(int sportId, string fromDate, string toDate);
