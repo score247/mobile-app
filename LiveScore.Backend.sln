@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Demo", "src\servi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "unittests", "unittests", "{72C20749-C34B-4DFC-B557-1D7132149F1A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.UnitTests", "test\UnitTests\service\LiveScore.UnitTests\LiveScore.UnitTests.csproj", "{A146F3F0-E37E-4BC4-8B70-739961FBB609}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{980D988B-35BB-46D6-AB07-71AC19897AE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{980D988B-35BB-46D6-AB07-71AC19897AE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{980D988B-35BB-46D6-AB07-71AC19897AE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A146F3F0-E37E-4BC4-8B70-739961FBB609}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A146F3F0-E37E-4BC4-8B70-739961FBB609}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A146F3F0-E37E-4BC4-8B70-739961FBB609}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A146F3F0-E37E-4BC4-8B70-739961FBB609}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{643EDE66-5BC9-48EB-903E-C822DA05C894} = {DAF1D274-483D-4AAA-B945-D6E1E9488FC6}
 		{980D988B-35BB-46D6-AB07-71AC19897AE8} = {E9AC78D2-2614-4458-A69B-79A161510772}
 		{72C20749-C34B-4DFC-B557-1D7132149F1A} = {78DC0A6C-9232-429D-9088-912159345FA7}
+		{A146F3F0-E37E-4BC4-8B70-739961FBB609} = {72C20749-C34B-4DFC-B557-1D7132149F1A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {246B9D83-0780-47F5-B7E4-DD8514F7293A}

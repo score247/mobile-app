@@ -8,6 +8,14 @@
     {
         DateTime EventDate { get; }
 
+        string LeagueId { get; }
+
+        string LeagueName { get; }
+
+        string LeagueRoundName { get; }
+
+        string LeagueCategory { get; }
+
         IEnumerable<ITeam> Teams { get; }
 
         bool IsLive { get; }
@@ -32,5 +40,13 @@
         public IMatchCondition MatchCondition { get; set; }
 
         public bool IsLive { get; set; }
+
+        public string LeagueId { get; set; }
+
+        public string LeagueName { get; set; }
+
+        public string LeagueRoundName { get; set; }
+
+        public string LeagueCategory { get; set; }
     }
 }

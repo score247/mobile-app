@@ -28,7 +28,7 @@
             var dailySchedule = await leagueApi.GetDailySchedules(
                 "soccer", 
                 "eu", 
-                "us", 
+                "en", 
                 DateTime.Now.ToString(), 
                 "key");
 

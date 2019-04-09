@@ -17,6 +17,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Newtonsoft;
 using Newtonsoft.Json;
+using LiveScore.Features.Matches;
 
 namespace LiveScore.WebApi
 {
@@ -36,6 +37,9 @@ namespace LiveScore.WebApi
             services.AddSingleton<LeagueService, LeagueServiceImpl>();
             services.AddSingleton<ILeagueApi, StaticLeagueApi>();
             services.AddSingleton<LeagueDataAccess, LeagueDataAccessImpl>();
+            services.AddSingleton<MatchService, MatchServiceImpl>();
+            services.AddSingleton<MatchDataAccess, MatchDataAccessImpl>();
+            services.AddSingleton<IMatchApi, StaticMatchApi>();
             services.AddSingleton<IAppSettings, AppSettings>();
 
             services.AddSwaggerGen(c =>
@@ -45,11 +49,11 @@ namespace LiveScore.WebApi
 
             services
                 .AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(options =>
-                {
-                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
-                });
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+                //.AddJsonOptions(options =>
+                //{
+                //    options.SerializerSettings.TypeNameHandling = TypeNameHandling.All;
+                //});
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
