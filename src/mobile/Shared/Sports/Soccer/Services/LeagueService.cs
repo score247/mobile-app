@@ -28,21 +28,15 @@
 
         public async Task<IEnumerable<League>> GetLeagues()
         {
-            var leagues = await apiPolicy.RetryAndTimeout
-                (
-                    () => GetLeagueItems()
-                );
-
-            return leagues;
-        }
-
-        private async Task<IEnumerable<League>> GetLeagueItems()
-        {
             IEnumerable<League> leagues = Enumerable.Empty<League>();
 
             try
             {
-                leagues = await leagueApi.GetLeagues(settingsService.CurrentSportId, settingsService.CurrentLanguage);
+                leagues = await apiPolicy.RetryAndTimeout
+                (
+                    () => leagueApi.GetLeagues(settingsService.CurrentSportId, settingsService.CurrentLanguage)
+                );
+
             }
             catch (Exception ex)
             {
@@ -51,7 +45,5 @@
 
             return leagues;
         }
-
-
     }
 }

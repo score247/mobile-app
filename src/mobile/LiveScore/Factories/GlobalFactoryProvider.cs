@@ -26,10 +26,11 @@
             var settingsService = container.Resolve<ISettingsService>();
             var cacheService = container.Resolve<ICacheService>();
             var loggingService = container.Resolve<ILoggingService>();
+            var apiPolicy = container.Resolve<IApiPolicy>();
 
             SportServiceFactoryProvider = new SportServiceFactoryProvider();
 
-            var soccerServiceFactory = new SoccerServiceFactory(matchApi, leagueApi, settingsService, cacheService, loggingService, networkService);
+            var soccerServiceFactory = new SoccerServiceFactory(matchApi, leagueApi, settingsService, cacheService, loggingService, apiPolicy);
             soccerServiceFactory.RegisterTo(SportServiceFactoryProvider);
 
             var basketBallServiceFactory = new BasketBallServiceFactory();
