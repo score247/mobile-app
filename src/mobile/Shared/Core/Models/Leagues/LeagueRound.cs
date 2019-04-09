@@ -12,17 +12,6 @@
 
         int Number { get; }
 
-        IEnumerable<Match> Matches { get; }
-    }
-
-    public class LeagueRound : ILeagueRound
-    {
-        public LeagueRoundTypes Type { get; set; }
-
-        public string Name { get; set; }
-
-        public int Number { get; set; }
-
-        public IEnumerable<Match> Matches { get; set; }
+        IEnumerable<IMatch> Matches { get; }
     }
 }

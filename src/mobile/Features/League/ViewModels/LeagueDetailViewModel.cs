@@ -17,8 +17,8 @@
     {
         private readonly IMatchService matchService;
         private bool isRefreshingMatchList;
-        private League selectedLeagueName;
-        private ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> groupMatches;
+        private ILeague selectedLeagueName;
+        private ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> groupMatches;
 
         public LeagueDetailViewModel(
             INavigationService navigationService,
@@ -27,10 +27,10 @@
                 : base(navigationService, globalFactory, settingsService)
         {
             matchService = GlobalFactoryProvider.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateMatchService();
-            GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>();
+            GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>();
         }
 
-        public ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>> GroupMatches
+        public ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> GroupMatches
         {
             get { return groupMatches; }
             set { SetProperty(ref groupMatches, value); }
@@ -54,7 +54,7 @@
         {
             if (parameters != null)
             {
-                selectedLeagueName = parameters[nameof(League)] as League;
+                selectedLeagueName = parameters[nameof(League)] as ILeague;
                 Title = selectedLeagueName?.Name ?? string.Empty;
             }
 
@@ -64,9 +64,9 @@
             }
         }
 
-        private async Task<ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>> GetGroupMatchesAsync()
+        private async Task<ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>> GetGroupMatchesAsync()
         {
-            IList<Match> matches = new List<Match>();
+            IList<IMatch> matches = new List<IMatch>();
 
             //// TODO process grouped
             //if (!selectedLeagueName.IsGrouped)

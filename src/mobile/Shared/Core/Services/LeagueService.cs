@@ -8,11 +8,11 @@
     public interface ILeagueApi
     {
         [Get("/League/GetLeagues?sportId={sportId}&language={languageCode}")]
-        Task<IEnumerable<League>> GetLeagues(int sportId, string languageCode);
+        Task<IEnumerable<ILeague>> GetLeagues(int sportId, string languageCode);
     }
 
     public interface ILeagueService
     {
-        Task<IEnumerable<League>> GetLeagues();
+        Task<IEnumerable<ILeague>> GetLeagues();
     }
 }

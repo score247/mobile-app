@@ -11,8 +11,8 @@
     public abstract class Enumeration : IComparable
 #pragma warning restore S1210 // "Equals" and the comparison operators should be overridden when implementing "IComparable"
     {
-        private readonly string _displayName;
-        private readonly string _value;
+        private string _displayName;
+        private string _value;
 
         protected Enumeration()
         {
@@ -27,11 +27,13 @@
         public string DisplayName
         {
             get { return _displayName; }
+            set { _displayName = value; }
         }
 
         public string Value
         {
             get { return _value; }
+            set { _value = value; }
         }
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()

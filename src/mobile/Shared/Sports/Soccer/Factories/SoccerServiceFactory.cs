@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Soccer.Factories
 {
+    using AutoMapper;
     using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
@@ -8,27 +9,30 @@
 
     public class SoccerServiceFactory : ISportServiceFactory
     {
-        private readonly IMatchApi matchApi;
+        private readonly ISoccerMatchApi soccerMatchApi;
         private readonly ILeagueApi leagueApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly ILoggingService loggingService;
         private readonly IApiPolicy networkService;
+        private readonly IMapper mapper;
 
         public SoccerServiceFactory(
-            IMatchApi matchApi,
+            ISoccerMatchApi soccerMatchApi,
             ILeagueApi leagueApi,
             ISettingsService settingsService,
             ICacheService cacheService,
             ILoggingService loggingService,
-            IApiPolicy networkService)
+            IApiPolicy networkService,
+            IMapper mapper)
         {
-            this.matchApi = matchApi;
+            this.soccerMatchApi = soccerMatchApi;
             this.leagueApi = leagueApi;
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.loggingService = loggingService;
             this.networkService = networkService;
+            this.mapper = mapper;
         }
 
         public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
@@ -40,6 +44,6 @@
             => new LeagueService(leagueApi, settingsService, loggingService, networkService);
 
         public IMatchService CreateMatchService()
-            => new MatchService(matchApi, settingsService, cacheService, loggingService);
+            => new MatchService(soccerMatchApi, settingsService, cacheService, loggingService, mapper);
     }
 }

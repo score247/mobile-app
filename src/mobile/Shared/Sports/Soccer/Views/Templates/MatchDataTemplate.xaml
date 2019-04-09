@@ -15,19 +15,19 @@
                     </ResourceDictionary>
                 </StackLayout.Resources>
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="{Binding Status.Status ,Converter={StaticResource matchStatusConverter}}"
+                    <Label Text="{Binding MatchResult.Status ,Converter={StaticResource matchStatusConverter}}"
                            Style="{StaticResource MatchStatus}"/>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="{Binding Event.Teams[0].Name}"
+                        <Label Text="{Binding Teams[0].Name}"
                                Style="{StaticResource HomeTeam}" />
-                        <Label Text="{Binding Event.Teams[1].Name}"
+                        <Label Text="{Binding Teams[1].Name}"
                                Style="{StaticResource AwayTeam}" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="{Binding Status.HomeScore}" 
+                        <Label  Text="{Binding MatchResult.HomeScore[0]}" 
                                 Style="{StaticResource Score}"
                                 Margin="0,4,20,0"/>
-                        <Label Text="{Binding Status.AwayScore}"
+                        <Label Text="{Binding MatchResult.AwayScore[0]}"
                                Style="{StaticResource Score}"
                                Margin="0,0,20,4" />
                     </StackLayout>

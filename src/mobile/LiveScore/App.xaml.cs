@@ -16,6 +16,7 @@ using LiveScore.Score;
 using LiveScore.Services;
 using LiveScore.Soccer;
 using LiveScore.Soccer.Factories;
+using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using Newtonsoft.Json;
@@ -101,6 +102,8 @@ namespace LiveScore
                 {
                     BaseAddress = new Uri(SettingsService.ApiEndPoint)
                 }));
+
+
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
             JsonConvert.DefaultSettings =
               () => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };

@@ -24,13 +24,13 @@
 
         int AwayScore { get; }
 
-        Player GoalScorer { get; }
+        IPlayer GoalScorer { get; }
 
-        Player Assist { get; }
+        IPlayer Assist { get; }
 
-        Player PlayerOut { get; }
+        IPlayer PlayerOut { get; }
 
-        Player PlayerIn { get; }
+        IPlayer PlayerIn { get; }
 
         int InjuryTimeAnnounced { get; }
 
@@ -39,43 +39,6 @@
         string Outcome { get; }
 
         IEnumerable<Commentary> Commentaries { get; }
-    }
-
-    public class TimeLine : Entity<long, string>, ITimeLine
-    {
-        public string Type { get; set; }
-
-        public DateTime Time { get; set; }
-
-        public int MatchTime { get; set; }
-
-        public string MatchClock { get; set; }
-
-        public string Team { get; set; }
-
-        public int Period { get; set; }
-
-        public string PeriodType { get; set; }
-
-        public int HomeScore { get; set; }
-
-        public int AwayScore { get; set; }
-
-        public Player GoalScorer { get; set; }
-
-        public IEnumerable<Commentary> Commentaries { get; set; }
-
-        public Player Assist { get; set; }
-
-        public Player PlayerOut { get; set; }
-
-        public Player PlayerIn { get; set; }
-
-        public int InjuryTimeAnnounced { get; set; }
-
-        public string Description { get; set; }
-
-        public string Outcome { get; set; }
     }
 
     public class Commentary

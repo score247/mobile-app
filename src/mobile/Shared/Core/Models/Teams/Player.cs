@@ -10,15 +10,4 @@
 
         int Order { get; }
     }
-
-    public class Player : Entity<int, string>, IPlayer
-    {
-        public string Type { get; set; }
-
-        public int JerseyNumber { get; set; }
-
-        public string Position { get; set; }
-
-        public int Order { get; set; }
-    }
 }

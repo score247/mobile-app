@@ -8,12 +8,12 @@
 
     public class MatchService : IMatchService
     {
-        public Task<IList<Match>> GetDailyMatches(DateTime date, bool forceFetchNewData = false)
+        public Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IList<Match>> GetMatchesByLeague(string leagueId, string group)
+        public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
         {
             throw new NotImplementedException();
         }

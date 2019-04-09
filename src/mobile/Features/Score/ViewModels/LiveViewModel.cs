@@ -12,7 +12,7 @@
 
     public class LiveViewModel : ViewModelBase
     {
-        private ObservableCollection<IGrouping<string, Match>> groupMatches;
+        private ObservableCollection<IGrouping<string, IMatch>> groupMatches;
         private bool isRefreshingMatchList;
 
         public LiveViewModel(
@@ -22,7 +22,7 @@
         {
         }
 
-        public ObservableCollection<IGrouping<string, Match>> GroupMatches
+        public ObservableCollection<IGrouping<string, IMatch>> GroupMatches
         {
             get => groupMatches;
             set => SetProperty(ref groupMatches, value);
@@ -49,8 +49,8 @@
 
         private void GetMatches()
         {
-            var matches = new List<Match>();
-            GroupMatches = new ObservableCollection<IGrouping<string, Match>>(matches.GroupBy(x => x.League.Id));
+            var matches = new List<IMatch>();
+            GroupMatches = new ObservableCollection<IGrouping<string, IMatch>>(matches.GroupBy(x => x.League.Id));
         }
     }
 }

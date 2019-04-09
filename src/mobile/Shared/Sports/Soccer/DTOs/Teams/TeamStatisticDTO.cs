@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Soccer.Models
+﻿namespace LiveScore.Soccer.DTOs.Teams
 {
     using LiveScore.Core.Models.Teams;
 
-    public class TeamStatistic : ITeamStatistic
+    public class TeamStatisticDTO
     {
         public int Possession { get; set; }
 

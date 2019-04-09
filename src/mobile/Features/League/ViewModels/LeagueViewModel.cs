@@ -19,11 +19,11 @@
     {
         private readonly ILeagueService leagueService;
         private readonly IPageDialogService pageDialogService;
-        private readonly List<League> leagueList;
+        private readonly List<ILeague> leagueList;
         private bool isLoading;
         private bool hasData;
         private string filter;
-        private ObservableCollection<League> leagues;
+        private ObservableCollection<ILeague> leagues;
 
 
         public LeagueViewModel(
@@ -37,18 +37,18 @@
             leagueService = GlobalFactoryProvider.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateLeagueService();
             this.pageDialogService = pageDialogService;
 
-            ItemTappedCommand = new DelegateAsyncCommand<League>(ItemTapped);
+            ItemTappedCommand = new DelegateAsyncCommand<ILeague>(ItemTapped);
             LoadLeaguesCommand = new DelegateAsyncCommand(GetLeagues);
             SearchCommand = new DelegateCommand(DelayedQueryKeyboardSearches);
             RefreshCommand = new DelegateAsyncCommand(Refresh);
 
-            Leagues = new ObservableCollection<League>();
-            leagueList = new List<League>();
+            Leagues = new ObservableCollection<ILeague>();
+            leagueList = new List<ILeague>();
             IsLoading = true;
             HasData = !IsLoading;
         }
 
-        public DelegateAsyncCommand<League> ItemTappedCommand { get; set; }
+        public DelegateAsyncCommand<ILeague> ItemTappedCommand { get; set; }
 
         public DelegateAsyncCommand LoadLeaguesCommand { get; set; }
 
@@ -74,7 +74,7 @@
             set => SetProperty(ref filter, value);
         }
 
-        public ObservableCollection<League> Leagues
+        public ObservableCollection<ILeague> Leagues
         {
             get => leagues;
             set => SetProperty(ref leagues, value);
@@ -100,7 +100,7 @@
             // TODO clean all resources and requests
         }
 
-        private async Task ItemTapped(League item)
+        private async Task ItemTapped(ILeague item)
         {
             var param = new NavigationParameters
             {
@@ -130,7 +130,7 @@
         {
             var leagueGroups = await leagueService.GetLeagues();
 
-            Leagues = new ObservableCollection<League>(leagueGroups);
+            Leagues = new ObservableCollection<ILeague>(leagueGroups);
 
             leagueList.AddRange(leagues);
 
@@ -154,7 +154,7 @@
                         .Contains(query.ToLowerInvariant())).ToList();
             }
 
-            Leagues = new ObservableCollection<League>(filterLeagues);
+            Leagues = new ObservableCollection<ILeague>(filterLeagues);
         }
     }
 }

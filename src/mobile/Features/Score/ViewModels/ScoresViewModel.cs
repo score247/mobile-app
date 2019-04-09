@@ -25,7 +25,7 @@
 
         private int oldDateCalendarItemCount = 3;
         private int newDateCalendarItemCount = 7;
-        private ObservableCollection<IGrouping<dynamic, Match>> groupMatches;
+        private ObservableCollection<IGrouping<dynamic, IMatch>> groupMatches;
         private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
         private bool isLoadingMatches;
@@ -62,7 +62,7 @@
             set { SetProperty(ref selectedCalendarDate, value); }
         }
 
-        public ObservableCollection<IGrouping<dynamic, Match>> GroupMatches
+        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches
         {
             get => groupMatches;
             set => SetProperty(ref groupMatches, value);
@@ -98,7 +98,7 @@
             set { SetProperty(ref selectHome, value); }
         }
 
-        public DelegateAsyncCommand<Match> SelectMatchCommand { get; private set; }
+        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
         public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
 
@@ -112,11 +112,11 @@
 
         private void InitializeCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand<Match>(async (item) =>
+            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(async (item) =>
             {
                 var navigationParams = new NavigationParameters
                 {
-                    { nameof(Match), item }
+                    { nameof(IMatch), item }
                 };
                 await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
             });
@@ -189,9 +189,9 @@
         {
             IsLoadingMatches = showLoadingIndicator;
 
-            var matches = await matchService.GetDailyMatches(currentDate, forceFetchNewData);
+            var matches = await matchService.GetDailyMatches(currentDate, currentDate, forceFetchNewData);
 
-            GroupMatches = new ObservableCollection<IGrouping<dynamic, Match>>(
+            GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate }));
 
             IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;

@@ -8,7 +8,7 @@
 
     public class LeagueService : ILeagueService
     {
-        public Task<IEnumerable<League>> GetLeagues()
+        public Task<IEnumerable<ILeague>> GetLeagues()
         {
             throw new NotImplementedException();
         }

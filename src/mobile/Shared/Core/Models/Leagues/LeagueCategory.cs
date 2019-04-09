@@ -4,9 +4,4 @@
     {
         string CountryCode { get; }
     }
-
-    public class LeagueCategory : Entity<string, string>, ILeagueCategory
-    {
-        public string CountryCode { get; set; }
-    }
 }

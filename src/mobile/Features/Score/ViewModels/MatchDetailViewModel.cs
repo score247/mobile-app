@@ -32,7 +32,7 @@
         {
             if (parameters != null)
             {
-                var match = parameters[nameof(Match)] as Match;
+                var match = parameters["Match"] as IMatch;
                 MatchId = match.Id;
             }
 

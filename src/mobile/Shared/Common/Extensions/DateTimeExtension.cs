@@ -4,7 +4,7 @@
 
     public static class DateTimeExtension
     {
-        public static string ToSportRadarFormat(this DateTime value)
+        public static string ToApiFormat(this DateTime value)
         {
             return value.ToString("yyyy-MM-dd");
         }

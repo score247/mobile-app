@@ -112,5 +112,7 @@
             : base(value, displayName)
         {
         }
+
+        public bool IsClosed => Value == Closed;
     }
 }

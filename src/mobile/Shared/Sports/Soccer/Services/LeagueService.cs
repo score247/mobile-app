@@ -26,9 +26,9 @@
             this.leagueApi = leagueApi;
         }
 
-        public async Task<IEnumerable<League>> GetLeagues()
+        public async Task<IEnumerable<ILeague>> GetLeagues()
         {
-            IEnumerable<League> leagues = Enumerable.Empty<League>();
+            IEnumerable<ILeague> leagues = Enumerable.Empty<ILeague>();
 
             try
             {
