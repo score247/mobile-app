@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Features.Leagues
+﻿namespace LiveScore.Soccers.Features.Leagues
 {
     using System.IO;
     using System.Threading.Tasks;

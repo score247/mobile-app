@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Features.Matches.Models;
+    using LiveScore.Shared;
 
     public interface MatchService
     {
@@ -13,11 +14,12 @@
 
     public class MatchServiceImpl : MatchService
     {
-        private readonly MatchDataAccess matchDataAccess;
+        private readonly InstanceFactory instanceFactory;
 
-        public MatchServiceImpl(MatchDataAccess matchDataAccess)
+        public MatchServiceImpl(
+            InstanceFactory instanceFactory)
         {
-            this.matchDataAccess = matchDataAccess;
+            this.instanceFactory = instanceFactory;
         }
 
         public async Task<IEnumerable<Match>> GetMatches(
@@ -35,6 +37,7 @@
             }
 
             var matches = new List<Match>();
+            var matchDataAccess = instanceFactory.CreateMatchDataAccess(sportId);
 
             const int dayIncrementIndex = 1;
             for (var date = from.Date; date.Date < to.Date; date = date.AddDays(dayIncrementIndex))

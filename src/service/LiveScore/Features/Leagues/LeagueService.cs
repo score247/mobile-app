@@ -5,29 +5,32 @@
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Features.Leagues.Models;
+    using LiveScore.Shared;
 
     public interface LeagueService
     {
-        Task<IEnumerable<League>> GetLeagues(int sportId, DateTime from, DateTime to);
+        Task<IEnumerable<ILeague>> GetLeagues(int sportId, DateTime from, DateTime to);
     }
 
     public class LeagueServiceImpl : LeagueService
     {
-        private readonly LeagueDataAccess leagueDataAccess;
+        private readonly InstanceFactory instanceFactory;
 
-        public LeagueServiceImpl(LeagueDataAccess leagueDataAccess)
+        public LeagueServiceImpl(
+            InstanceFactory instanceFactory)
         {
-            this.leagueDataAccess = leagueDataAccess;
+            this.instanceFactory = instanceFactory;
         }
 
-        public async Task<IEnumerable<League>> GetLeagues(int sportId, DateTime from, DateTime to)
+        public async Task<IEnumerable<ILeague>> GetLeagues(int sportId, DateTime from, DateTime to)
         {
             if (sportId == 0)
             {
-                return await Task.FromResult(Enumerable.Empty<League>());
+                return await Task.FromResult(Enumerable.Empty<ILeague>());
             }
 
-            var leagues = new List<League>();
+            var leagues = new List<ILeague>();
+            var leagueDataAccess = instanceFactory.CreateLeagueDataAccess(sportId);
 
             for (DateTime date = from.Date; date.Date < to.Date; date = date.AddDays(1))
             {

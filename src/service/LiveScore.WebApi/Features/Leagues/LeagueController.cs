@@ -20,7 +20,7 @@
 
         [HttpGet("GetLeaguesByDate")]
 #pragma warning disable RECS0154 // Parameter is never used
-        public async Task<IEnumerable<League>> GetLeaguesByDate(int sportId, DateTime from, DateTime to, string language)
+        public async Task<IEnumerable<ILeague>> GetLeaguesByDate(int sportId, DateTime from, DateTime to, string language)
 #pragma warning restore RECS0154 // Parameter is never used
         {
             return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(1));
@@ -28,7 +28,7 @@
 
         [HttpGet("GetLeagues")]
 #pragma warning disable RECS0154 // Parameter is never used
-        public async Task<IEnumerable<League>> GetLeagues(int sportId, string language)
+        public async Task<IEnumerable<ILeague>> GetLeagues(int sportId, string language)
 #pragma warning restore RECS0154 // Parameter is never used
         {
             return await leagueService.GetLeagues(1, DateTime.Now, DateTime.Now.AddDays(1));

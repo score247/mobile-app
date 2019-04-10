@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Features.Matches.DataProviders
+﻿namespace LiveScore.Soccers.Features.Matches.DataProviders
 {
     using System.Threading.Tasks;
     using LiveScore.Shared.Models.Dtos;
