@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Services
 {
     using System.Collections.Generic;
+    using LiveScore.Core.Constants;
     using LiveScore.Models;
 
     public interface IMenuService
@@ -14,9 +15,9 @@
         {
             return new List<MenuItem>
             {
-                new MenuItem { Id = 1, Title = "Soccer", IconValue = "\ue902", GroupId = 1, GroupName = "Sports" },
-                new MenuItem { Id = 2, Title = "BasketBall", IconValue = "\ue900", GroupId = 1, GroupName = "Sports" },
-                new MenuItem { Id = 3, Title = "E-Sports", IconValue = "\ue901", GroupId = 1, GroupName = "Sports" }
+                new MenuItem { Id = (int)SportType.Soccer, Title = "Soccer", IconValue = "\ue902", GroupId = 1, GroupName = "Sports" },
+                new MenuItem { Id = (int)SportType.BasketBall, Title = "BasketBall", IconValue = "\ue900", GroupId = 1, GroupName = "Sports" },
+                new MenuItem { Id = (int)SportType.ESports, Title = "E-Sports", IconValue = "\ue901", GroupId = 1, GroupName = "Sports" }
             };
         }
     }
