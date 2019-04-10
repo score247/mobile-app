@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>LiveScore.BasketBall</RootNamespace>
-    <AssemblyName>LiveScore.BasketBall</AssemblyName>
+    <RootNamespace>LiveScore.Basketball</RootNamespace>
+    <AssemblyName>LiveScore.Basketball</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

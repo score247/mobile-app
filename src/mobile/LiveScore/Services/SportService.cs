@@ -16,7 +16,7 @@
             return new List<SportItem>
            {
                new SportItem { Id = (int)SportType.Soccer, Name = "Soccer" },
-               new SportItem { Id = (int)SportType.BasketBall, Name = "BasketBall" }
+               new SportItem { Id = (int)SportType.Basketball, Name = "Basketball" }
            };
         }
     }

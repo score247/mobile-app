@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Reflection;
-using LiveScore.BasketBall;
-using LiveScore.BasketBall.Factories;
+using LiveScore.Basketball;
+using LiveScore.Basketball.Factories;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Factories;
@@ -123,7 +123,7 @@ namespace LiveScore
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<SoccerModule>();
-            moduleCatalog.AddModule<BasketBallModule>();
+            moduleCatalog.AddModule<BasketballModule>();
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<FavoritesModule>();

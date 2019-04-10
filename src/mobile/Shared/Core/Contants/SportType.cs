@@ -7,8 +7,8 @@
         [Description("Soccer")]
         Soccer = 1,
 
-        [Description("BasketBall")]
-        BasketBall = 2,
+        [Description("Basketball")]
+        Basketball = 2,
 
         [Description("ESports")]
         ESports = 3

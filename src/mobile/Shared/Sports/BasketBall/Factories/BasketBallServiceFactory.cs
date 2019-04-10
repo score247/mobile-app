@@ -1,11 +1,11 @@
-﻿namespace LiveScore.BasketBall.Factories
+﻿namespace LiveScore.Basketball.Factories
 {
-    using LiveScore.BasketBall.Services;
+    using LiveScore.Basketball.Services;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
 
-    public class BasketBallServiceFactory : ISportServiceFactory
+    public class BasketballServiceFactory : ISportServiceFactory
     {
 
         public ILeagueService CreateLeagueService()
@@ -20,7 +20,7 @@
 
         public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
         {
-            sportServiceFactoryProvider.RegisterInstance(SportType.BasketBall, this);
+            sportServiceFactoryProvider.RegisterInstance(SportType.Basketball, this);
         }
     }
 }

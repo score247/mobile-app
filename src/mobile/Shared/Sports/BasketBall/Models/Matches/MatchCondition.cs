@@ -1,4 +1,4 @@
-﻿namespace LiveScore.BasketBall.Models.Matches
+﻿namespace LiveScore.Basketball.Models.Matches
 {
     using LiveScore.Core.Models.Matches;
 

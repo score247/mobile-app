@@ -815,7 +815,7 @@
     </timestamps>
     <violations />
   </sourcecode>
-  <sourcecode name="BasketBallMatchListViewTemplate.xaml.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="BasketballMatchListViewTemplate.xaml.cs" parser="StyleCop.CSharp.CsParser">
     <timestamps>
       <styleCop>2019/03/13 10:21:43.532</styleCop>
       <settingsFile>2019/04/01 18:14:54.149</settingsFile>

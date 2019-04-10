@@ -19,7 +19,7 @@
 
         public DataTemplate SoccerTemplate { get; set; }
 
-        public DataTemplate BasketBallTemplate { get; set; }
+        public DataTemplate BasketballTemplate { get; set; }
 
         public DataTemplate ESportsTemplate { get; set; }
 
@@ -30,8 +30,8 @@
                 case (int)SportType.Soccer:
                     return SoccerTemplate;
 
-                case (int)SportType.BasketBall:
-                    return BasketBallTemplate;
+                case (int)SportType.Basketball:
+                    return BasketballTemplate;
 
                 case (int)SportType.ESports:
                     return ESportsTemplate;

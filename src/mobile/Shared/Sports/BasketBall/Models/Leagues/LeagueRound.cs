@@ -1,4 +1,4 @@
-﻿namespace LiveScore.BasketBall.Models.Leagues
+﻿namespace LiveScore.Basketball.Models.Leagues
 {
     using System.Collections.Generic;
     using LiveScore.Core.Enumerations;

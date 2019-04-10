@@ -12,7 +12,7 @@
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:soccerTemplates="clr-namespace:LiveScore.Soccer.Views.Templates;assembly=LiveScore.Soccer"
-             xmlns:basketBallTemplates="clr-namespace:LiveScore.BasketBall.Views.Templates;assembly=LiveScore.BasketBall"
+             xmlns:basketBallTemplates="clr-namespace:LiveScore.Basketball.Views.Templates;assembly=LiveScore.Basketball"
              xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -29,7 +29,7 @@
             <coreConverters:MatchListViewDataTemplateSelector 
                 x:Key="matchListViewDataTemplateSelector"
                 SoccerTemplate="{StaticResource soccerListViewTemplate}"
-                BasketBallTemplate="{StaticResource basketBallListViewTemplate}" />
+                BasketballTemplate="{StaticResource basketBallListViewTemplate}" />
             <commonConverters:InverseBoolConverter x:Key="inverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
