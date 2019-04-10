@@ -26,7 +26,7 @@
                     <ViewCell>
                         <FlexLayout Style="{StaticResource SettingMenuRow}">
                             <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource NavName}" />
-                            <Label Style="{StaticResource CheckIcon}" />
+                            <Label IsVisible="{Binding IsVisible}" Style="{StaticResource CheckIcon}" />
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>

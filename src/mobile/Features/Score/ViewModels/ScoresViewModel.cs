@@ -17,19 +17,11 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private const int MaximumCalendarItemCount = 30;
-        private const int MoreOldDayCount = 7;
-        private const int MoreNewDayCount = 3;
-
         private IMatchService matchService;
-
-        private int oldDateCalendarItemCount = 3;
-        private int newDateCalendarItemCount = 7;
         private ObservableCollection<IGrouping<dynamic, IMatch>> groupMatches;
         private ObservableCollection<CalendarDate> calendarItems;
         private bool isRefreshingMatchList;
         private bool isLoadingMatches;
-        private bool isRefreshingCalendarList;
         private CalendarDate selectedCalendarDate;
         private bool selectHome;
 
@@ -86,12 +78,6 @@
             set => SetProperty(ref calendarItems, value);
         }
 
-        public bool IsRefreshingCalendarList
-        {
-            get { return isRefreshingCalendarList; }
-            set { SetProperty(ref isRefreshingCalendarList, value); }
-        }
-
         public bool SelectHome
         {
             get { return selectHome; }
@@ -101,10 +87,6 @@
         public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
         public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
-
-        public DelegateCommand RefreshCalendarListCommand { get; private set; }
-
-        public DelegateCommand LoadMoreCalendarCommand { get; private set; }
 
         public DelegateAsyncCommand SelectDateCommand { get; private set; }
 
@@ -122,8 +104,6 @@
             });
 
             RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
-            RefreshCalendarListCommand = new DelegateCommand(OnRefreshCalendarListCommand);
-            LoadMoreCalendarCommand = new DelegateCommand(OnLoadMoreCalendarCommand);
             SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
             SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
         }
@@ -149,26 +129,11 @@
             IsRefreshingMatchList = false;
         }
 
-        private void OnRefreshCalendarListCommand()
-        {
-            LoadCalendar(SelectedCalendarDate.Date, moreOldDay: MoreOldDayCount);
-            IsRefreshingCalendarList = false;
-        }
-
-        private void OnLoadMoreCalendarCommand()
-        {
-            if (newDateCalendarItemCount <= MaximumCalendarItemCount)
-            {
-                LoadCalendar(SelectedCalendarDate.Date, moreNewDay: MoreNewDayCount);
-            }
-        }
-
         private async Task OnSelectDateCommandAsync()
         {
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
             await LoadMatches(SelectedCalendarDate.Date).ConfigureAwait(false);
-
         }
 
         private void OnSelectHomeCommandExecuted()
@@ -197,14 +162,11 @@
             IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
         }
 
-        private void LoadCalendar(DateTime currentDate, int moreOldDay = 0, int moreNewDay = 0)
+        private void LoadCalendar(DateTime currentDate)
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
-            newDateCalendarItemCount += moreNewDay;
-            oldDateCalendarItemCount += moreOldDay;
-
-            for (int i = oldDateCalendarItemCount * -1; i <= newDateCalendarItemCount; i++)
+            for (int i = -3; i <= 3; i++)
             {
                 var date = DateTime.Today.AddDays(i);
 

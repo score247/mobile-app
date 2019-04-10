@@ -27,19 +27,16 @@
                      <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
                 </Frame.GestureRecognizers>
             </Frame>
-            <controls:InfiniteListView x:Name="Calendar"
+            <ListView x:Name="Calendar"
+                      IsEnabled="false"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource QuickAccessCalendarListView}"
                       SelectedItem="{Binding SelectedCalendarDate}"
-                      LoadMoreCommand="{Binding LoadMoreCalendarCommand}"
-                      IsPullToRefreshEnabled="true"
-                      IsRefreshing="{Binding IsRefreshingCalendarList}"
-                      RefreshCommand="{Binding RefreshCalendarListCommand}"
                       AutomationProperties.IsInAccessibleTree="False">
-                <controls:InfiniteListView.Behaviors>
+                <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" />
-                </controls:InfiniteListView.Behaviors>
-                <controls:InfiniteListView.ItemTemplate>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
@@ -56,8 +53,8 @@
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
-                </controls:InfiniteListView.ItemTemplate>
-            </controls:InfiniteListView>
+                </ListView.ItemTemplate>
+            </ListView>
             <Frame x:Name="CalendarIcon" Style="{StaticResource QuickAccessCalendarBox}">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>

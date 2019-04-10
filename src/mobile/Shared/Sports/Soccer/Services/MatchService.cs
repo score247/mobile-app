@@ -50,7 +50,8 @@
 
             try
             {
-                IEnumerable<MatchDTO> dtoMatches = await cacheService.GetAndFetchLatestValue(
+                // TODO Refactor DTO later
+                var dtoMatches = await cacheService.GetAndFetchLatestValue(
                         $"DailyMatches{fromDateText}-{toDateText}",
                         () => soccerMatchApi.GetDailyMatches(sportId, fromDateText, toDateText),
                         forceFetchNewData,

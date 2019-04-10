@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Services
 {
     using System.Collections.Generic;
+    using LiveScore.Core.Constants;
     using LiveScore.Models;
 
     public interface ISportService
@@ -14,7 +15,8 @@
         {
             return new List<SportItem>
            {
-               new SportItem { Id = 1, Name = "Soccer" }
+               new SportItem { Id = (int)SportType.Soccer, Name = "Soccer" },
+               new SportItem { Id = (int)SportType.BasketBall, Name = "BasketBall" }
            };
         }
     }
