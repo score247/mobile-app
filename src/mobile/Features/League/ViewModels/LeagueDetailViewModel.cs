@@ -15,9 +15,7 @@
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        private readonly IMatchService matchService;
         private bool isRefreshingMatchList;
-        private ILeague selectedLeagueName;
         private ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> groupMatches;
 
         public LeagueDetailViewModel(
@@ -26,7 +24,6 @@
             ISettingsService settingsService)
                 : base(navigationService, globalFactory, settingsService)
         {
-            matchService = GlobalFactoryProvider.SportServiceFactoryProvider.GetInstance((SportType)SettingsService.CurrentSportId).CreateMatchService();
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>();
         }
 
@@ -46,38 +43,17 @@
             => new DelegateCommand(() =>
             {
                 IsRefreshingMatchList = true;
-                //matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
                 IsRefreshingMatchList = false;
             });
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters != null)
             {
-                selectedLeagueName = parameters[nameof(League)] as ILeague;
+                var selectedLeagueName = parameters[nameof(League)] as ILeague;
                 Title = selectedLeagueName?.Name ?? string.Empty;
             }
-
-            if (GroupMatches.Count == 0)
-            {
-                groupMatches = await GetGroupMatchesAsync();
-            }
         }
 
-        private async Task<ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>> GetGroupMatchesAsync()
-        {
-            IList<IMatch> matches = new List<IMatch>();
-
-            //// TODO process grouped
-            //if (!selectedLeagueName.IsGrouped)
-            //{
-            //    matches = await matchService.GetMatchesByLeague(selectedLeagueName.Id, selectedLeagueName.GroupName);
-            //}
-
-            //var groups = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, Match>>(
-            //matches.GroupBy(m => new MatchHeaderItemViewModel { Name = m.Event.LeagueRound.Number, ShortEventDate = m.Event.EventDate }));
-
-            return null;
-        }
     }
 }

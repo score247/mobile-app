@@ -16,12 +16,6 @@
                            IsEnabled="{Binding IsLoading}"
                            Style="{StaticResource CenterActivityIndicator}"
                            AutomationId="LeagueIndicator"/>
-        
-        <SearchBar x:Name="LeagueSearchEntry" Text="{Binding Filter}" IsVisible="{Binding HasData}" Placeholder="Search Tournament" BackgroundColor="#1D2133" FontSize="10">
-            <SearchBar.Behaviors>
-                    <b:EventToCommandBehavior EventName="TextChanged" Command="{Binding SearchCommand}" />
-            </SearchBar.Behaviors>
-        </SearchBar>
         <ListView x:Name="ItemsListView"
                 SeparatorVisibility="None"
                 IsVisible="{Binding HasData}"
