@@ -48,8 +48,12 @@
         {
             var retryPolicy = Policy
             .Handle<WebException>()
-            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))
-            .Retry(DEFAULT_COUNT);
+            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))           
+            .Retry(DEFAULT_COUNT, onRetry: (exception, retryCount, context) =>
+            {
+                //TODO LOG EXCEPTION
+                //logger.Error($"Retry {retryCount} of {context.PolicyKey} at {context.ExecutionKey}, getting {context["Type"]} of id {context["Id"]}, due to: {exception}.");
+            });
 
             var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);
 
