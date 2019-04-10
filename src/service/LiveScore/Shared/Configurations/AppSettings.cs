@@ -4,6 +4,8 @@
     {
         string AppPath { get; }
 
-        bool IsUseStaticData { get; }
+        bool EnabledStaticData { get; }
+
+        IDataProviderSettings DataProviderSettings { get; }
     }
 }

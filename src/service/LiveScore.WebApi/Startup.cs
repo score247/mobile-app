@@ -1,15 +1,18 @@
 ﻿namespace LiveScore.WebApi
 {
+    using System.Collections.Generic;
     using LiveScore.Features.Leagues;
     using LiveScore.Features.Matches;
     using LiveScore.Features.Matches.DataProviders;
     using LiveScore.Shared.Configurations;
+    using LiveScore.Shared.SportRadarApi.Models;
     using LiveScore.WebApi.Shared.Configurations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Newtonsoft.Json;
     using Swashbuckle.AspNetCore.Swagger;
 
     public class Startup
@@ -27,16 +30,25 @@
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var appSettings = new AppSettings(this.hostingEnvironment);
+            services.AddOptions();
+
+
+            var sportRadarDataProviderSettings = new SportRadarDataProviderSettings();
+            Configuration.GetSection("LiveScores:SportRadarSetting").Bind(sportRadarDataProviderSettings);
+                //JsonConvert.DeserializeObject<SportRadarDataProviderSettings>(Configuration.GetSection("LiveScores:SportRadarSetting").Value);
+
+            var appSettings = new AppSettings(hostingEnvironment, Configuration, sportRadarDataProviderSettings);
             services.AddSingleton<IAppSettings>(appSettings);
             services.AddSingleton<LeagueService, LeagueServiceImpl>();
             services.AddSingleton<ILeagueApi, StaticLeagueApi>();
             services.AddSingleton<LeagueDataAccess, LeagueDataAccessImpl>();
             services.AddSingleton<MatchService, MatchServiceImpl>();
             services.AddSingleton<MatchDataAccess, MatchDataAccessImpl>();
+
+            
             //
-            services.AddSingleton<IMatchApi>(
-                appSettings.IsUseStaticData
+            services.AddSingleton(
+                appSettings.EnabledStaticData
                 ? (IMatchApi)new StaticMatchApi(appSettings)
                 : (IMatchApi)new SportRadarMatchApi());
 
