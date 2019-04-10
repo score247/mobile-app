@@ -34,5 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
+    <ProjectReference Include="..\..\Shared\Sports\BasketBall\BasketBall.csproj" />
+    <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>
 </Project>

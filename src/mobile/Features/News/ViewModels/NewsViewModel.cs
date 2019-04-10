@@ -13,6 +13,7 @@
               ISettingsService settingsService)
                  : base(navigationService, globalFactory, settingsService)
         {
+            Title = "News";
         }
     }
 }

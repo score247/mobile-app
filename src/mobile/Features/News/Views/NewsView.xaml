@@ -2,11 +2,17 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:LiveScore.News.ViewResources"
              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:soccerTemplates="clr-namespace:LiveScore.Soccer.Views.Templates;assembly=LiveScore.Soccer"
+             xmlns:basketBallTemplates="clr-namespace:LiveScore.BasketBall.Views.Templates;assembly=LiveScore.BasketBall"
              x:Class="LiveScore.News.Views.NewsView"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource PrimaryColor}"
+             x:Name="self">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
