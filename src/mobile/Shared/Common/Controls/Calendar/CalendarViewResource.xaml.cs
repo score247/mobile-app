@@ -1,12 +1,12 @@
-﻿namespace LiveScore.League.ViewResources
+﻿namespace LiveScore.Common.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LeagueDetailViewResource : ResourceDictionary
+    public partial class CalendarViewResource : ResourceDictionary
     {
-        public LeagueDetailViewResource()
+        public CalendarViewResource()
         {
             InitializeComponent();
         }

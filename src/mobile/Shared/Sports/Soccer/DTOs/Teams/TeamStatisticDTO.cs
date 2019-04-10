@@ -1,7 +1,5 @@
 ﻿namespace LiveScore.Soccer.DTOs.Teams
 {
-    using LiveScore.Core.Models.Teams;
-
     public class TeamStatisticDTO
     {
         public int Possession { get; set; }

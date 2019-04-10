@@ -3,12 +3,12 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Core.ViewModels;
-    using Prism.Commands;
-    using Prism.Navigation;
     using Core.Factories;
     using Core.Services;
+    using Core.ViewModels;
     using LiveScore.Core.Models.Matches;
+    using Prism.Commands;
+    using Prism.Navigation;
 
     public class LiveViewModel : ViewModelBase
     {

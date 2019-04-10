@@ -70,6 +70,7 @@
             var mapper = config.CreateMapper();
             containerRegistry.RegisterInstance(mapper);
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
+            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
         }
     }
 }

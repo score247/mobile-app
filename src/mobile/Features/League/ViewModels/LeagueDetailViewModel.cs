@@ -12,8 +12,6 @@
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        private ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> groupMatches;
-
         public LeagueDetailViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,

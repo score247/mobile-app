@@ -1,22 +1,18 @@
 ﻿namespace LiveScore.League.ViewModels
 {
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using Core.Constants;
     using Core.Factories;
+    using Core.Models.Leagues;
     using Core.Services;
     using Core.ViewModels;
-    using Core.Models.Leagues;
     using Prism.Navigation;
-    using Prism.Services;
 
     public class LeagueViewModel : ViewModelBase
     {
         public LeagueViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService,
-            IPageDialogService pageDialogService)
+            ISettingsService settingsService)
                 : base(navigationService, globalFactory, settingsService)
         {
             Title = "League";

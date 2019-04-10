@@ -12,11 +12,12 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Models;
     using LiveScore.Score.Views;
-    using Prism.Commands;
     using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
     {
+        private const int CalendarOldDayCount = -3;
+        private const int CalendarNewDayCount = 3;
         private IMatchService matchService;
 
         public ScoresViewModel(
@@ -60,22 +61,15 @@
 
         public DelegateAsyncCommand SelectDateCommand { get; private set; }
 
-        public DelegateCommand SelectHomeCommand { get; private set; }
+        public DelegateAsyncCommand SelectHomeCommand { get; private set; }
 
         private void InitializeCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(async (item) =>
-            {
-                var navigationParams = new NavigationParameters
-                {
-                    { nameof(IMatch), item }
-                };
-                await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
-            });
+            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
 
             RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
             SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
-            SelectHomeCommand = new DelegateCommand(OnSelectHomeCommandExecuted);
+            SelectHomeCommand = new DelegateAsyncCommand(OnSelectHomeCommand);
         }
 
         private void InitServicesBySportType()
@@ -86,10 +80,27 @@
                 .CreateMatchService();
         }
 
+        private async Task InitializeData()
+        {
+            LoadCalendar(DateTime.MinValue);
+            await LoadMatches(DateTime.Now.AddDays(-1), DateTime.Now);
+        }
+
+        private async Task OnSelectMatchCommand(IMatch match)
+        {
+            var navigationParams = new NavigationParameters
+            {
+                { nameof(IMatch), match }
+            };
+
+            await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
+        }
+
         private async Task OnRefreshMatchListCommandAsync()
         {
-            var date = SelectedCalendarDate == null ? DateTime.Today : SelectedCalendarDate.Date;
-            await LoadMatches(date, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
+            var fromDate = SelectedCalendarDate == null ? DateTime.Today.AddDays(-1) : SelectedCalendarDate.Date;
+            var toDate = SelectedCalendarDate == null ? DateTime.Today : SelectedCalendarDate.Date;
+            await LoadMatches(fromDate, toDate, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
             IsRefreshingMatchList = false;
         }
 
@@ -97,29 +108,23 @@
         {
             SelectHome = false;
             LoadCalendar(SelectedCalendarDate.Date);
-            await LoadMatches(SelectedCalendarDate.Date).ConfigureAwait(false);
+
+            var fromDate = SelectedCalendarDate.Date;
+            var toDate = SelectedCalendarDate.Date;
+            await LoadMatches(fromDate, toDate).ConfigureAwait(false);
         }
 
-        private void OnSelectHomeCommandExecuted()
+        private async Task OnSelectHomeCommand()
         {
             SelectHome = true;
-            LoadCalendar(DateTime.MinValue);
-
-            // TODO: Load matches for home
+            await InitializeData();
         }
 
-        private async Task InitializeData()
-        {
-            LoadCalendar(DateTime.MinValue);
-            await LoadMatches(DateTime.Now);
-        }
-
-        private async Task LoadMatches(DateTime currentDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task LoadMatches(DateTime fromDate, DateTime toDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoadingMatches = showLoadingIndicator;
 
-            var matches = await matchService.GetDailyMatches(currentDate, currentDate, forceFetchNewData);
-
+            var matches = await matchService.GetDailyMatches(fromDate, toDate, forceFetchNewData);
             GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate }));
 
@@ -130,18 +135,15 @@
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
-            for (int i = -3; i <= 3; i++)
+            for (int i = CalendarOldDayCount; i <= CalendarNewDayCount; i++)
             {
                 var date = DateTime.Today.AddDays(i);
 
-                calendar.Add(
-                    new CalendarDate
-                    {
-                        Date = date,
-                        IsSelected = currentDate.Day == date.Day
-                            && currentDate.Month == date.Month
-                            && currentDate.Year == date.Year
-                    });
+                calendar.Add(new CalendarDate
+                {
+                    Date = date,
+                    IsSelected = currentDate.Day == date.Day && currentDate.Month == date.Month && currentDate.Year == date.Year
+                });
             }
 
             CalendarItems = new ObservableCollection<CalendarDate>(calendar);

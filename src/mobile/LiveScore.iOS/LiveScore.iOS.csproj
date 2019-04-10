@@ -151,7 +151,7 @@
         <Compile Include="AppDelegate.cs">
             <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
         </Compile>
-        <Compile Include="Renderers\ScoreCalendarCellRenderer.cs" />
+        <Compile Include="Renderers\DisableSelectionStyleViewCellRenderer.cs" />
         <None Include="Entitlements.plist" />
         <None Include="Info.plist" />
         <Compile Include="Properties\AssemblyInfo.cs" />

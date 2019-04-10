@@ -5,9 +5,9 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
-    using Prism.Navigation;
-    using LiveScore.Score.Views.Templates;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Score.Views.Templates;
+    using Prism.Navigation;
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
@@ -41,7 +41,6 @@
             MatchDetailItems = new List<TabModel>
             {
                 new TabModel { Name = "Odds", Template = new MatchOdds1x2Template() },
-                //new TabModel { Name = "Info", Template = new MatchInfoTemplate() },
                 new TabModel
                 {
                     Name = "Trackers",

@@ -1,12 +1,10 @@
 ﻿namespace LiveScore.ViewModels
 {
-    using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
-    using LiveScore.Services;
     using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -16,17 +14,11 @@
         public MainViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService,
-            IMenuService menuService) : base(navigationService, globalFactory, settingsService)
+            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
-            MenuItems = new ObservableCollection<Models.MenuItem>(menuService.GetAll());
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
             NightMode = true;
         }
-
-        public ObservableCollection<Models.MenuItem> MenuItems { get; set; }
-
-        public Models.MenuItem SelectedMenuItem { get; set; }
 
         public bool NightMode { get; set; }
 

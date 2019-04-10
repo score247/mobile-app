@@ -9,6 +9,6 @@
 
     public class ApiService<T> : IApiService<T>
     {
-        public T GetApi() => RestService.For<T>(SettingsService.ApiEndPoint);
+        public T GetApi() => RestService.For<T>(SettingsService.LocalEndPoint);
     }
 }

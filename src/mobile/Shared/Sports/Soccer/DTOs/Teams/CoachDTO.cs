@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Soccer.DTOs.Teams
 {
     using LiveScore.Core.Models;
-    using LiveScore.Core.Models.Teams;
 
     public class CoachDTO : Entity<int, string>
     {

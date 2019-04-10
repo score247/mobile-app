@@ -11,6 +11,7 @@
 
     public class MatchService : IMatchService
     {
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public async Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
         {
             Debug.WriteLine("Call Basketball MatchService");
@@ -22,6 +23,8 @@
 
             return matches;
         }
+
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
         {

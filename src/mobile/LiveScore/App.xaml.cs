@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Net.Http;
 using System.Reflection;
 using LiveScore.Basketball;
-using LiveScore.Basketball.Factories;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Factories;
@@ -15,17 +13,13 @@ using LiveScore.News;
 using LiveScore.Score;
 using LiveScore.Services;
 using LiveScore.Soccer;
-using LiveScore.Soccer.Factories;
-using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
-using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
-using Refit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -87,26 +81,14 @@ namespace LiveScore
             RegisterForNavigation(containerRegistry);
         }
 
-        private void RegisterServices(IContainerRegistry containerRegistry)
+        private static void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
-            containerRegistry.Register<IMenuService, MenuService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.Register<IApiPolicy, ApiPolicy>();
-
-            containerRegistry.RegisterInstance(
-                RestService.For<IMatchApi>(new HttpClient
-                {
-                    BaseAddress = new Uri(SettingsService.ApiEndPoint)
-                }));
-
-
-            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
-            JsonConvert.DefaultSettings =
-              () => new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
             containerRegistry.RegisterSingleton<IGlobalFactoryProvider, GlobalFactoryProvider>();
         }
 

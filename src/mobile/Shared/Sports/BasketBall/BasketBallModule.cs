@@ -16,7 +16,6 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            //
         }
     }
 }

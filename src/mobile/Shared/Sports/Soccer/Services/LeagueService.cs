@@ -7,6 +7,13 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Services;
+    using Refit;
+
+    public interface ILeagueApi
+    {
+        [Get("/League/GetLeagues?sportId={sportId}&language={languageCode}")]
+        Task<IEnumerable<ILeague>> GetLeagues(int sportId, string languageCode);
+    }
 
     public class LeagueService : BaseService, ILeagueService
     {

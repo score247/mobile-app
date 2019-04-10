@@ -4,11 +4,11 @@
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.ViewModels;
+    using Core.Factories;
     using Core.Services;
+    using Core.ViewModels;
     using LiveScore.Models;
     using Prism.Navigation;
-    using Core.Factories;
 
     public class SelectSportViewModel : ViewModelBase
     {
