@@ -6,9 +6,12 @@
     {
         public GlobalFactoryProvider()
         {
-            SportServiceFactoryProvider = new SportServiceFactoryProvider();
+            ServiceFactoryProvider = new FactoryProvider<IServiceFactory>();
+            TemplateFactoryProvider = new FactoryProvider<ITemplateFactory>();
         }
 
-        public ISportServiceFactoryProvider SportServiceFactoryProvider { get; private set; }
+        public IFactoryProvider<IServiceFactory> ServiceFactoryProvider { get; private set; }
+
+        public IFactoryProvider<ITemplateFactory> TemplateFactoryProvider { get; private set; }
     }
 }

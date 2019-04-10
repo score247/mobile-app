@@ -33,7 +33,10 @@
             var mapper = containerProvider.Resolve<IMapper>();
 
             var soccerServiceFactory = new SoccerServiceFactory(soccerMatchApi, leagueApi, settingsService, cacheService, loggingService, apiPolicy, mapper);
-            soccerServiceFactory.RegisterTo(globalServiceProvider.SportServiceFactoryProvider);
+            soccerServiceFactory.RegisterTo(globalServiceProvider.ServiceFactoryProvider);
+
+            var soccerTemplateFactory = new SoccerTemplateFactory();
+            soccerTemplateFactory.RegisterTo(globalServiceProvider.TemplateFactoryProvider);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

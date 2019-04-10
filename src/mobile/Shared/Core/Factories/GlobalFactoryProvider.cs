@@ -2,6 +2,8 @@
 {
     public interface IGlobalFactoryProvider
     {
-        ISportServiceFactoryProvider SportServiceFactoryProvider { get; }
+        IFactoryProvider<IServiceFactory> ServiceFactoryProvider { get; }
+
+        IFactoryProvider<ITemplateFactory> TemplateFactoryProvider { get; }
     }
 }

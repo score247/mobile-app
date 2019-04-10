@@ -7,7 +7,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Services;
 
-    public class SoccerServiceFactory : ISportServiceFactory
+    public class SoccerServiceFactory : IServiceFactory
     {
         private readonly ISoccerMatchApi soccerMatchApi;
         private readonly ILeagueApi leagueApi;
@@ -35,9 +35,9 @@
             this.mapper = mapper;
         }
 
-        public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
+        public void RegisterTo(IFactoryProvider<IServiceFactory> serviceFactoryProvider)
         {
-            sportServiceFactoryProvider.RegisterInstance(SportType.Soccer, this);
+            serviceFactoryProvider.RegisterInstance(SportType.Soccer, this);
         }
 
         public ILeagueService CreateLeagueService()

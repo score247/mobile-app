@@ -5,7 +5,7 @@
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
 
-    public class BasketballServiceFactory : ISportServiceFactory
+    public class BasketballServiceFactory : IServiceFactory
     {
 
         public ILeagueService CreateLeagueService()
@@ -18,9 +18,9 @@
             return new MatchService();
         }
 
-        public void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider)
+        public void RegisterTo(IFactoryProvider<IServiceFactory> serviceFactory)
         {
-            sportServiceFactoryProvider.RegisterInstance(SportType.Basketball, this);
+            serviceFactory.RegisterInstance(SportType.Basketball, this);
         }
     }
 }

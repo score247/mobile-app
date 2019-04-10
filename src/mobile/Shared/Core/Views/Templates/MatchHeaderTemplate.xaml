@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                x:Class="LiveScore.Core.Views.Templates.MatchHeaderListViewTemplate"
+                x:Class="LiveScore.Core.Views.Templates.MatchHeaderTemplate"
                 xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+                xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters"
                 xmlns:resources="clr-namespace:LiveScore.Core.ViewResources" >
     <ViewCell Height="28">
         <StackLayout>
@@ -12,6 +13,7 @@
                         <resources:MatchViewResource />
                     </ResourceDictionary.MergedDictionaries>
                     <commonConverters:UpperCaseConverter x:Key="upperCaseConverter" />
+                    <coreConverters:MatchHeaderEventDayConverter x:Key="matchHeaderEventDayConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
             
@@ -20,8 +22,7 @@
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>                
                 <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
-                <Label Text="{Binding Key.ShortEventDate}"
-                       Style="{StaticResource MatchDate}" />
+                <Label Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" Style="{StaticResource MatchDate}" />
                 <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
             </FlexLayout>
         </StackLayout>

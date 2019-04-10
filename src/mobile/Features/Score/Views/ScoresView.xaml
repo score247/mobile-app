@@ -11,8 +11,6 @@
              xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:soccerTemplates="clr-namespace:LiveScore.Soccer.Views.Templates;assembly=LiveScore.Soccer"
-             xmlns:basketBallTemplates="clr-namespace:LiveScore.Basketball.Views.Templates;assembly=LiveScore.Basketball"
              xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -23,13 +21,7 @@
              <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <coreTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
-            <soccerTemplates:MatchDataTemplate x:Key="soccerListViewTemplate" />
-            <basketBallTemplates:MatchDataTemplate x:Key="basketBallListViewTemplate" />
-            <coreConverters:MatchListViewDataTemplateSelector 
-                x:Key="matchListViewDataTemplateSelector"
-                SoccerTemplate="{StaticResource soccerListViewTemplate}"
-                BasketballTemplate="{StaticResource basketBallListViewTemplate}" />
+            <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
             <commonConverters:InverseBoolConverter x:Key="inverseBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -53,8 +45,8 @@
                 GroupDisplayBinding="{Binding Key}"
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
-                GroupHeaderTemplate="{StaticResource matchHeaderListViewTemplate}"
-                ItemTemplate="{StaticResource matchListViewDataTemplateSelector}"
+                GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
+                ItemTemplate="{Binding MatchDataTemplate}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" EventArgsParameterPath="Item" />

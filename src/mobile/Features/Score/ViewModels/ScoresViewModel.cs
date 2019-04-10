@@ -13,6 +13,7 @@
     using LiveScore.Score.Models;
     using LiveScore.Score.Views;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
     public class ScoresViewModel : ViewModelBase
     {
@@ -38,8 +39,17 @@
 
             if (changeSport || GroupMatches == null)
             {
-                InitServicesBySportType();
-                await InitializeData();
+                matchService = GlobalFactoryProvider
+                   .ServiceFactoryProvider
+                   .GetInstance((SportType)SettingsService.CurrentSportId)
+                   .CreateMatchService();
+
+                MatchDataTemplate = GlobalFactoryProvider
+                    .TemplateFactoryProvider
+                    .GetInstance((SportType)SettingsService.CurrentSportId)
+                    .GetMatchTemplate();
+
+                await LoadHomeData();
             }
         }
 
@@ -55,6 +65,8 @@
 
         public bool SelectHome { get; set; }
 
+        public DataTemplate MatchDataTemplate { get; set; }
+
         public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
         public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
@@ -66,21 +78,12 @@
         private void InitializeCommands()
         {
             SelectMatchCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
-
             RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
             SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
             SelectHomeCommand = new DelegateAsyncCommand(OnSelectHomeCommand);
         }
 
-        private void InitServicesBySportType()
-        {
-            matchService = GlobalFactoryProvider
-                .SportServiceFactoryProvider
-                .GetInstance((SportType)SettingsService.CurrentSportId)
-                .CreateMatchService();
-        }
-
-        private async Task InitializeData()
+        private async Task LoadHomeData()
         {
             LoadCalendar(DateTime.MinValue);
             await LoadMatches(DateTime.Now.AddDays(-1), DateTime.Now);
@@ -117,7 +120,7 @@
         private async Task OnSelectHomeCommand()
         {
             SelectHome = true;
-            await InitializeData();
+            await LoadHomeData();
         }
 
         private async Task LoadMatches(DateTime fromDate, DateTime toDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
@@ -126,7 +129,7 @@
 
             var matches = await matchService.GetDailyMatches(fromDate, toDate, forceFetchNewData);
             GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
-                      matches.GroupBy(m => new { m.League.Name, m.EventDate }));
+                      matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
             IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
         }

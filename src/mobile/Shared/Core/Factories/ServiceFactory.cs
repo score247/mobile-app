@@ -2,10 +2,8 @@
 {
     using LiveScore.Core.Services;
 
-    public interface ISportServiceFactory
+    public interface IServiceFactory : IFactory<IFactoryProvider<IServiceFactory>>
     {
-        void RegisterTo(ISportServiceFactoryProvider sportServiceFactoryProvider);
-
         IMatchService CreateMatchService();
 
         ILeagueService CreateLeagueService();

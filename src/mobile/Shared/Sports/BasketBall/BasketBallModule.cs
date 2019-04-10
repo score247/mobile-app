@@ -11,7 +11,10 @@
         {
             var globalServiceProvider = containerProvider.Resolve<IGlobalFactoryProvider>();
             var basketBallServiceFactory = new BasketballServiceFactory();
-            basketBallServiceFactory.RegisterTo(globalServiceProvider.SportServiceFactoryProvider);
+            basketBallServiceFactory.RegisterTo(globalServiceProvider.ServiceFactoryProvider);
+
+            var basketballTemplateFactory = new BasketballTemplateFactory();
+            basketballTemplateFactory.RegisterTo(globalServiceProvider.TemplateFactoryProvider);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

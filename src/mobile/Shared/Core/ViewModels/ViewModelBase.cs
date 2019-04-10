@@ -9,8 +9,6 @@
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
-        public string Title { get; set; }
-
         public ViewModelBase(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -20,6 +18,8 @@
             GlobalFactoryProvider = globalFactory;
             SettingsService = settingsService;
         }
+
+        public string Title { get; set; }
 
         protected INavigationService NavigationService { get; }
 
