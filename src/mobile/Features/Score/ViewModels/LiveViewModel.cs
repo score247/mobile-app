@@ -12,9 +12,6 @@
 
     public class LiveViewModel : ViewModelBase
     {
-        private ObservableCollection<IGrouping<string, IMatch>> groupMatches;
-        private bool isRefreshingMatchList;
-
         public LiveViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -22,17 +19,9 @@
         {
         }
 
-        public ObservableCollection<IGrouping<string, IMatch>> GroupMatches
-        {
-            get => groupMatches;
-            set => SetProperty(ref groupMatches, value);
-        }
+        public ObservableCollection<IGrouping<string, IMatch>> GroupMatches { get; set; }
 
-        public bool IsRefreshingMatchList
-        {
-            get { return isRefreshingMatchList; }
-            set { SetProperty(ref isRefreshingMatchList, value); }
-        }
+        public bool IsRefreshingMatchList { get; set; }
 
         public DelegateCommand RefreshCommand
             => new DelegateCommand(() =>

@@ -13,9 +13,6 @@
 
     public class MainViewModel : ViewModelBase
     {
-        private Models.MenuItem selectedMenuItem;
-        private bool nightMode;
-
         public MainViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -29,17 +26,9 @@
 
         public ObservableCollection<Models.MenuItem> MenuItems { get; set; }
 
-        public Models.MenuItem SelectedMenuItem
-        {
-            get => selectedMenuItem;
-            set => SetProperty(ref selectedMenuItem, value);
-        }
+        public Models.MenuItem SelectedMenuItem { get; set; }
 
-        public bool NightMode
-        {
-            get { return nightMode; }
-            set { SetProperty(ref nightMode, value); }
-        }
+        public bool NightMode { get; set; }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 

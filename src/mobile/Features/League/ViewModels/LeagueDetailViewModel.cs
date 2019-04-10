@@ -1,21 +1,17 @@
 ﻿namespace LiveScore.League.ViewModels
 {
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
+    using Core.Factories;
+    using Core.Models.Leagues;
+    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Models.Matches;
     using Prism.Commands;
     using Prism.Navigation;
-    using Core.Factories;
-    using Core.Services;
-    using Core.Constants;
-    using Core.Models.Leagues;
-    using LiveScore.Core.Models.Matches;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        private bool isRefreshingMatchList;
         private ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> groupMatches;
 
         public LeagueDetailViewModel(
@@ -27,17 +23,9 @@
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>();
         }
 
-        public ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> GroupMatches
-        {
-            get { return groupMatches; }
-            set { SetProperty(ref groupMatches, value); }
-        }
+        public ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>> GroupMatches { get; set; }
 
-        public bool IsRefreshingMatchList
-        {
-            get => isRefreshingMatchList;
-            set => SetProperty(ref isRefreshingMatchList, value);
-        }
+        public bool IsRefreshingMatchList { get; set; }
 
         public DelegateCommand RefreshCommand
             => new DelegateCommand(() =>

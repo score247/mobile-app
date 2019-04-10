@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.League.ViewModels
 {
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;   
+    using System.Collections.ObjectModel;
     using Core.Constants;
     using Core.Factories;
     using Core.Services;
@@ -11,12 +11,7 @@
     using Prism.Services;
 
     public class LeagueViewModel : ViewModelBase
-    {       
-        private bool isLoading;
-        private bool hasData;
-        private ObservableCollection<ILeague> leagues;
-
-
+    {
         public LeagueViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -24,30 +19,18 @@
             IPageDialogService pageDialogService)
                 : base(navigationService, globalFactory, settingsService)
         {
-            Title = "League";          
+            Title = "League";
 
             Leagues = new ObservableCollection<ILeague>();
             IsLoading = true;
             HasData = !IsLoading;
         }
 
-        public bool IsLoading
-        {
-            get { return isLoading; }
-            set { SetProperty(ref isLoading, value); }
-        }
+        public bool IsLoading { get; set; }
 
-        public bool HasData
-        {
-            get { return hasData; }
-            set { SetProperty(ref hasData, value); }
-        }
+        public bool HasData { get; set; }
 
-        public ObservableCollection<ILeague> Leagues
-        {
-            get => leagues;
-            set => SetProperty(ref leagues, value);
-        }
+        public ObservableCollection<ILeague> Leagues { get; set; }
 
         public override void OnAppearing()
         {

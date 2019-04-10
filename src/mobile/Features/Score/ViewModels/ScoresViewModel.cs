@@ -9,21 +9,15 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
-    using Prism.Commands;
-    using Prism.Navigation;
+    using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Models;
     using LiveScore.Score.Views;
-    using LiveScore.Core.Models.Matches;
+    using Prism.Commands;
+    using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
     {
         private IMatchService matchService;
-        private ObservableCollection<IGrouping<dynamic, IMatch>> groupMatches;
-        private ObservableCollection<CalendarDate> calendarItems;
-        private bool isRefreshingMatchList;
-        private bool isLoadingMatches;
-        private CalendarDate selectedCalendarDate;
-        private bool selectHome;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -48,41 +42,17 @@
             }
         }
 
-        public CalendarDate SelectedCalendarDate
-        {
-            get { return selectedCalendarDate ?? new CalendarDate { Date = DateTime.MinValue, IsSelected = true }; }
-            set { SetProperty(ref selectedCalendarDate, value); }
-        }
+        public CalendarDate SelectedCalendarDate { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches
-        {
-            get => groupMatches;
-            set => SetProperty(ref groupMatches, value);
-        }
+        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches { get; set; }
 
-        public bool IsLoadingMatches
-        {
-            get { return isLoadingMatches; }
-            set { SetProperty(ref isLoadingMatches, value); }
-        }
+        public bool IsLoadingMatches { get; set; }
 
-        public bool IsRefreshingMatchList
-        {
-            get => isRefreshingMatchList;
-            set => SetProperty(ref isRefreshingMatchList, value);
-        }
+        public bool IsRefreshingMatchList { get; set; }
 
-        public ObservableCollection<CalendarDate> CalendarItems
-        {
-            get => calendarItems;
-            set => SetProperty(ref calendarItems, value);
-        }
+        public ObservableCollection<CalendarDate> CalendarItems { get; set; }
 
-        public bool SelectHome
-        {
-            get { return selectHome; }
-            set { SetProperty(ref selectHome, value); }
-        }
+        public bool SelectHome { get; set; }
 
         public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
@@ -118,13 +88,7 @@
 
         private async Task OnRefreshMatchListCommandAsync()
         {
-            var date = SelectedCalendarDate.Date;
-
-            if (date.Date == DateTime.MinValue)
-            {
-                date = DateTime.Today;
-            }
-
+            var date = SelectedCalendarDate == null ? DateTime.Today : SelectedCalendarDate.Date;
             await LoadMatches(date, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
             IsRefreshingMatchList = false;
         }

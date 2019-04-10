@@ -1,22 +1,15 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
-    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using Prism.AppModel;
-    using Prism.Mvvm;
     using Prism.Navigation;
+    using PropertyChanged;
 
-    public class ViewModelBase : BindableBase,
-            INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
+    [AddINotifyPropertyChangedInterface]
+    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
-        private string title;
-
-        public string Title
-        {
-            get { return title; }
-            set { SetProperty(ref title, value); }
-        }
+        public string Title { get; set; }
 
         public ViewModelBase(
             INavigationService navigationService,

@@ -14,7 +14,6 @@
     public class NavigationTitleViewModel : ViewModelBase
     {
         private readonly ISportService sportService;
-        private string currentSportName;
         private IEnumerable<SportItem> sportItems;
 
         public NavigationTitleViewModel(
@@ -27,11 +26,7 @@
             SelectSportCommand = new DelegateAsyncCommand(NavigateSelectSportPage);
         }
 
-        public string CurrentSportName
-        {
-            get { return currentSportName; }
-            set { SetProperty(ref currentSportName, value); }
-        }
+        public string CurrentSportName { get; set; }
 
         public DelegateAsyncCommand SelectSportCommand { get; }
 

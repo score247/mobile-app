@@ -6,8 +6,6 @@ namespace LiveScore.Core.ViewModels
 
     public class MatchViewModelBase : ViewModelBase
     {
-        private string matchId;
-
         public MatchViewModelBase(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -15,10 +13,6 @@ namespace LiveScore.Core.ViewModels
         {
         }
 
-        public string MatchId
-        {
-            get { return matchId; }
-            set { SetProperty(ref matchId, value); }
-        }
+        public string MatchId { get; set; }
     }
 }

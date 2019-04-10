@@ -11,13 +11,7 @@
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
-        private List<TabModel> matchDetailItems;
-
-        public List<TabModel> MatchDetailItems
-        {
-            get { return matchDetailItems; }
-            set { SetProperty(ref matchDetailItems, value); }
-        }
+        public List<TabModel> MatchDetailItems { get; set; }
 
         public MatchDetailViewModel(
             INavigationService navigationService,

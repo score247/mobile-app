@@ -28,7 +28,6 @@
                 </Frame.GestureRecognizers>
             </Frame>
             <ListView x:Name="Calendar"
-                      IsEnabled="false"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource QuickAccessCalendarListView}"
                       SelectedItem="{Binding SelectedCalendarDate}"

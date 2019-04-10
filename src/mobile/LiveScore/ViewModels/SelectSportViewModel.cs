@@ -12,9 +12,6 @@
 
     public class SelectSportViewModel : ViewModelBase
     {
-        private SportItem selectedSportItem;
-        private ObservableCollection<SportItem> sportItems;
-
         public SelectSportViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
@@ -24,17 +21,9 @@
             DoneCommand = new DelegateAsyncCommand(OnDone);
         }
 
-        public SportItem SelectedSportItem
-        {
-            get => selectedSportItem;
-            set => SetProperty(ref selectedSportItem, value);
-        }
+        public SportItem SelectedSportItem { get; set; }
 
-        public ObservableCollection<SportItem> SportItems
-        {
-            get => sportItems;
-            set => SetProperty(ref sportItems, value);
-        }
+        public ObservableCollection<SportItem> SportItems { get; set; }
 
         public DelegateAsyncCommand SelectSportItemCommand { get; set; }
 
