@@ -14,9 +14,6 @@ namespace LiveScore.iOS
     {
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
-#if ENABLE_TEST_CLOUD
-            Xamarin.Calabash.Start();
-#endif
             Xamarin.Forms.Forms.Init();
             CarouselViewRenderer.Init();
 
