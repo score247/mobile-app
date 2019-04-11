@@ -56,8 +56,18 @@
                 </league:LeagueView>
             </x:Arguments>
         </NavigationPage>
+        
+         <NavigationPage x:Name="More" Title="More" Icon="images/common/news.png">
+            <x:Arguments>
+                <views:TabMoreView Title="More">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="More" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
+                </views:TabMoreView>
+            </x:Arguments>
+        </NavigationPage>
 
-        <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/common/news.png">
+        <!--<NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/common/news.png">
             <x:Arguments>
                 <news:EmptyNewsView Title="News">
                     <NavigationPage.TitleView>
@@ -75,6 +85,6 @@
                     </NavigationPage.TitleView>
                 </tvschedule:EmptyTVScheduleView>
             </x:Arguments>
-        </NavigationPage>
+        </NavigationPage>-->
     </TabbedPage.Children>
 </TabbedPage>

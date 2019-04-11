@@ -38,6 +38,9 @@
         <Compile Update="ViewResources\MainViewResource.xaml.cs">
             <DependentUpon>MainViewResource.xaml</DependentUpon>
         </Compile>
+        <Compile Update="Views\TabMoreView.xaml.cs">
+          <DependentUpon>TabMoreView.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Factories\" />
