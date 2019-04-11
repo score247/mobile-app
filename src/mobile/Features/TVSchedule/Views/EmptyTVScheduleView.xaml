@@ -5,9 +5,10 @@
             x:Class="LiveScore.TVSchedule.Views.EmptyTVScheduleView"
             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             BackgroundColor="{StaticResource PrimaryColor}">
+            xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            Title="{Binding Title}">
     <ContentPage.Content>
         <Label Text="TV View" TextColor="{StaticResource PrimaryTextColor}" />
     </ContentPage.Content>

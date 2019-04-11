@@ -9,7 +9,7 @@
     using LiveScore.Models;
     using LiveScore.News.Views;
     using LiveScore.TVSchedule.Views;
-    using Prism.Navigation;
+    using Prism.Navigation;   
 
     public class TabMoreViewModel : ViewModelBase
     {
@@ -22,8 +22,8 @@
         {
             TabItems = new ObservableCollection<TabItem>
             {
-                new TabItem("News", nameof(EmptyNewsView)),
-                new TabItem("TV", nameof(EmptyTVScheduleView))
+                new TabItem("TV", nameof(EmptyTVScheduleView)),
+                new TabItem("News", nameof(EmptyNewsView))
             };
 
             ItemTappedCommand = new DelegateAsyncCommand<TabItem>(ItemTapped);

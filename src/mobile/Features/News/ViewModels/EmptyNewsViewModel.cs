@@ -10,6 +10,7 @@
         public EmptyNewsViewModel(INavigationService navigationService, IGlobalFactoryProvider globalFactory, ISettingsService settingsService) 
             : base(navigationService, globalFactory, settingsService)
         {
+            Title = "News";
         }
     }
 }

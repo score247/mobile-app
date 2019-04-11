@@ -10,6 +10,7 @@
         public EmptyTVScheduleViewModel(INavigationService navigationService, IGlobalFactoryProvider globalFactory, ISettingsService settingsService) 
             : base(navigationService, globalFactory, settingsService)
         {
+            Title = "TV Schedule";
         }
     }
 }
