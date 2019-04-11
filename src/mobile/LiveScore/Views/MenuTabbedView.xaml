@@ -29,21 +29,21 @@
 
        <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png">
             <x:Arguments>
-                <score:LiveView Title="Live">
+                <score:LiveView Title="{langs:Translate Live}">
                 </score:LiveView>
             </x:Arguments>
         </NavigationPage>
 
         <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
             <x:Arguments>
-                <favorites:EmptyFavoriteView Title="Favorites">
+                <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                 </favorites:EmptyFavoriteView>
             </x:Arguments>
         </NavigationPage>
 
         <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/common/league.png">
             <x:Arguments>
-                <league:LeagueView Title="Leagues">
+                <league:LeagueView Title="{langs:Translate Leagues}">
                 </league:LeagueView>
             </x:Arguments>
         </NavigationPage>
