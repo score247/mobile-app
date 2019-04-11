@@ -9,7 +9,6 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.DTOs.Matches;
-    using LiveScore.Soccer.Models.Matches;
     using Refit;
 
     public interface ISoccerMatchApi

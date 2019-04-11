@@ -6,4 +6,11 @@
 
         string CountryCode { get; }
     }
+
+    public class Coach : Entity<int, string>, ICoach
+    {
+        public string Nationality { get; set; }
+
+        public string CountryCode { get; set; }
+    }
 }

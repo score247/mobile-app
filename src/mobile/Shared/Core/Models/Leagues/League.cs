@@ -16,4 +16,17 @@
 
         IEnumerable<ITeam> Teams { get; }
     }
+
+    public class League : Entity<string, string>, ILeague
+    {
+        public int Order { get; set; }
+
+        public string Flag { get; set; }
+
+        public ILeagueCategory Category { get; set; }
+
+        public IEnumerable<ILeagueRound> Rounds { get; set; }
+
+        public IEnumerable<ITeam> Teams { get; set; }
+    }
 }

@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using LiveScore.Basketball.Models.Leagues;
-    using LiveScore.Basketball.Models.Matches;
+    using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
 

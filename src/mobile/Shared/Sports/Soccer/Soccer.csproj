@@ -16,10 +16,8 @@
     <Folder Include="Views\Templates\" />
     <Folder Include="Factories\" />
     <Folder Include="Models\" />
-    <Folder Include="Models\Matches\" />
     <Folder Include="DTOs\" />
     <Folder Include="Models\Teams\" />
-    <Folder Include="Models\Leagues\" />
     <Folder Include="DTOs\Leagues\" />
     <Folder Include="DTOs\Matches\" />
     <Folder Include="DTOs\Teams\" />

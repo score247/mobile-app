@@ -11,8 +11,6 @@
     using LiveScore.Soccer.DTOs.Matches;
     using LiveScore.Soccer.DTOs.Teams;
     using LiveScore.Soccer.Factories;
-    using LiveScore.Soccer.Models.Leagues;
-    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
     using LiveScore.Soccer.Services;
     using Prism.Ioc;
