@@ -340,6 +340,9 @@
             <Link>Resources\images\news\news_5.png</Link>
         </BundleResource>
         <None Include="LiveScoreApp.iOS.ruleset" />
+        <BundleResource Include="Resources\images\common\more%402x.png" />
+        <BundleResource Include="Resources\images\common\more.png" />
+        <BundleResource Include="Resources\images\common\more%403x.png" />
     </ItemGroup>
     <ItemGroup>
         <ImageAsset Include="Assets.xcassets\Contents.json">
