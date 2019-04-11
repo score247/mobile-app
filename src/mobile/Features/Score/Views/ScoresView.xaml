@@ -11,7 +11,6 @@
              xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
              xmlns:quickAccessCalendar="clr-namespace:LiveScore.Score.Controls.QuickAccessCalendar.Views"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -22,8 +21,9 @@
              <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
             <commonConverters:InverseBoolConverter x:Key="inverseBoolConverter" />
+            <coreConverters:MatchTemplateSelector x:Key="matchTemplateSelector" />
+            <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
@@ -51,7 +51,7 @@
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
                 GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
-                ItemTemplate="{Binding MatchTemplateSelector}"
+                ItemTemplate="{StaticResource matchTemplateSelector}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior 

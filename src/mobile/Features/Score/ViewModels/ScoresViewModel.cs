@@ -14,6 +14,7 @@
     using LiveScore.Score.Controls.QuickAccessCalendar.Models;
     using LiveScore.Score.Views;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
     public class ScoresViewModel : ViewModelBase
     {
@@ -33,8 +34,6 @@
                 FromDate = DateTime.Today.AddDays(-NumberDisplayDays),
                 ToDate = DateTime.Today.AddDays(NumberDisplayDays)
             };
-
-            MatchTemplateSelector = new MatchTemplateSelector(GlobalFactoryProvider, SettingsService);
         }
 
         public bool IsLoading { get; set; }
@@ -42,8 +41,6 @@
         public bool IsNotLoading => !IsLoading;
 
         public bool IsRefreshing { get; set; }
-
-        public MatchTemplateSelector MatchTemplateSelector { get; set; }
 
         public ObservableCollection<IGrouping<dynamic, IMatch>> MatchGroups { get; set; }
 

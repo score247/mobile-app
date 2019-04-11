@@ -6,9 +6,16 @@
 
     public class BasketballTemplateFactory : ITemplateFactory
     {
+        private MatchDataTemplate matchDataTemplate;
+
         public DataTemplate GetMatchTemplate()
         {
-            return new MatchDataTemplate();
+            if (matchDataTemplate == null)
+            {
+                matchDataTemplate = new MatchDataTemplate();
+            }
+
+            return matchDataTemplate;
         }
     }
 }

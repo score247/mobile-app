@@ -21,11 +21,11 @@
 
         public string Title { get; set; }
 
-        protected INavigationService NavigationService { get; }
+        public INavigationService NavigationService { get; }
 
-        protected IGlobalFactoryProvider GlobalFactoryProvider { get; }
+        public IGlobalFactoryProvider GlobalFactoryProvider { get; }
 
-        protected ISettingsService SettingsService { get; }
+        public ISettingsService SettingsService { get; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
