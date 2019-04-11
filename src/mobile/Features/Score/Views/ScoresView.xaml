@@ -12,6 +12,7 @@
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
+             xmlns:quickAccessCalendar="clr-namespace:LiveScore.Score.Controls.QuickAccessCalendar.Views"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
@@ -26,19 +27,23 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <templates:QuickAccessCalendarTemplate></templates:QuickAccessCalendarTemplate>
+        <quickAccessCalendar:QuickAccessCalendar 
+            DateRange="{Binding QuickAccessCalendarDateRange}"
+            SelectDateCommand="{Binding QuickAccessCalendarSelectDateCommand}"
+            SelectHomeCommand="{Binding QuickAccessCalendarSelectHomeCommand}" />
+        
         <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoading}"
                            IsVisible="{Binding IsLoading}"
                            IsEnabled="{Binding IsLoading}"
-                           Style="{StaticResource CenterActivityIndicator}"/>
+                           Style="{StaticResource CenterActivityIndicator}" />
         <ListView
                 IsVisible="{Binding IsNotLoading}"
-                ItemsSource="{Binding GroupMatches}"
+                ItemsSource="{Binding MatchGroups}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
                 IsPullToRefreshEnabled="true"
-                RefreshCommand="{Binding RefreshMatchListCommand}"
+                RefreshCommand="{Binding MatchRefreshCommand}"
                 IsRefreshing="{Binding IsRefreshing}"
                 CachingStrategy ="RecycleElement"
                 IsGroupingEnabled="True"
@@ -51,7 +56,7 @@
             <ListView.Behaviors>
                 <b:EventToCommandBehavior 
                 EventName="ItemTapped" 
-                Command="{Binding SelectMatchCommand}" 
+                Command="{Binding MatchSelectCommand}" 
                 EventArgsParameterPath="Item" />
             </ListView.Behaviors>
         </ListView>

@@ -11,14 +11,14 @@
     using Core.ViewModels;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Score.Models;
+    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
     using LiveScore.Score.Views;
     using Prism.Navigation;
-    using Xamarin.Forms;
 
     public class ScoresViewModel : ViewModelBase
     {
         private const int NumberDisplayDays = 3;
+        private DateTime currentDate = DateTime.MinValue;
         private IMatchService matchService;
 
         public ScoresViewModel(
@@ -27,7 +27,13 @@
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
             InitializeCommands();
-            SelectHome = true;
+
+            QuickAccessCalendarDateRange = new QuickAccessCalendarDateRange
+            {
+                FromDate = DateTime.Today.AddDays(-NumberDisplayDays),
+                ToDate = DateTime.Today.AddDays(NumberDisplayDays)
+            };
+
             MatchTemplateSelector = new MatchTemplateSelector(GlobalFactoryProvider, SettingsService);
         }
 
@@ -37,23 +43,19 @@
 
         public bool IsRefreshing { get; set; }
 
-        public bool SelectHome { get; set; }
-
-        public CalendarDate SelectedCalendarDate { get; set; }
-
-        public ObservableCollection<CalendarDate> CalendarItems { get; set; }
-
-        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches { get; set; }
-
         public MatchTemplateSelector MatchTemplateSelector { get; set; }
 
-        public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
+        public ObservableCollection<IGrouping<dynamic, IMatch>> MatchGroups { get; set; }
 
-        public DelegateAsyncCommand SelectDateCommand { get; private set; }
+        public DelegateAsyncCommand MatchRefreshCommand { get; private set; }
 
-        public DelegateAsyncCommand SelectHomeCommand { get; private set; }
+        public DelegateAsyncCommand<IMatch> MatchSelectCommand { get; private set; }
 
-        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
+        public QuickAccessCalendarDateRange QuickAccessCalendarDateRange { get; set; }
+
+        public DelegateAsyncCommand QuickAccessCalendarSelectHomeCommand { get; private set; }
+
+        public DelegateAsyncCommand<QuickAccessCalendarDate> QuickAccessCalendarSelectDateCommand { get; private set; }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -61,94 +63,58 @@
 
             var changeSport = parameters.GetValue<bool>("changeSport");
 
-            if (changeSport || GroupMatches == null)
+            if (changeSport || MatchGroups == null)
             {
                 matchService = GlobalFactoryProvider
                    .ServiceFactoryProvider
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
 
-                await LoadHomeData();
+                await LoadMatches();
             }
         }
 
         private void InitializeCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
-            RefreshMatchListCommand = new DelegateAsyncCommand(OnRefreshMatchListCommandAsync);
-            SelectDateCommand = new DelegateAsyncCommand(OnSelectDateCommandAsync);
-            SelectHomeCommand = new DelegateAsyncCommand(OnSelectHomeCommand);
-        }
-
-        private async Task LoadHomeData()
-        {
-            LoadCalendar(DateTime.MinValue);
-            await LoadMatches(DateTime.Now.AddDays(-1), DateTime.Now);
+            MatchSelectCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
+            MatchRefreshCommand = new DelegateAsyncCommand(OnRefreshMatchCommandAsync);
+            QuickAccessCalendarSelectDateCommand = new DelegateAsyncCommand<QuickAccessCalendarDate>(OnSelectDateCommandAsync);
+            QuickAccessCalendarSelectHomeCommand = new DelegateAsyncCommand(OnSelectHomeCommand);
         }
 
         private async Task OnSelectMatchCommand(IMatch match)
-        {
-            var navigationParams = new NavigationParameters
+            => await NavigationService.NavigateAsync(nameof(MatchDetailView), new NavigationParameters
             {
                 { nameof(IMatch), match }
-            };
+            });
 
-            await NavigationService.NavigateAsync(nameof(MatchDetailView), navigationParams);
-        }
-
-        private async Task OnRefreshMatchListCommandAsync()
+        private async Task OnRefreshMatchCommandAsync()
         {
-            var fromDate = SelectedCalendarDate == null ? DateTime.Today.AddDays(-1) : SelectedCalendarDate.Date;
-            var toDate = SelectedCalendarDate == null ? DateTime.Today : SelectedCalendarDate.Date;
-            await LoadMatches(fromDate, toDate, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
+            await LoadMatches(currentDate, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
             IsRefreshing = false;
         }
 
-        private async Task OnSelectDateCommandAsync()
-        {
-            SelectHome = false;
-            LoadCalendar(SelectedCalendarDate.Date);
+        private async Task OnSelectHomeCommand() => await LoadMatches();
 
-            var fromDate = SelectedCalendarDate.Date;
-            var toDate = SelectedCalendarDate.Date;
-            await LoadMatches(fromDate, toDate);
+        private async Task OnSelectDateCommandAsync(QuickAccessCalendarDate calendarDate)
+        {
+            currentDate = calendarDate.Date;
+            await LoadMatches(currentDate);
         }
 
-        private async Task OnSelectHomeCommand()
-        {
-            SelectHome = true;
-            await LoadHomeData();
-        }
-
-        private async Task LoadMatches(DateTime fromDate, DateTime toDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task LoadMatches(DateTime? date = null, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
 
+            var fromDate = date ?? DateTime.Today.AddDays(-1);
+            var toDate = date ?? DateTime.Today;
+
+            MatchGroups = null;
             var matches = await matchService.GetDailyMatches(fromDate, toDate, forceFetchNewData);
-            GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
+            MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
             IsLoading = !IsLoading && showLoadingIndicator;
-        }
-
-        private void LoadCalendar(DateTime currentDate)
-        {
-            var calendar = new ObservableCollection<CalendarDate>();
-
-            for (int i = -NumberDisplayDays; i <= NumberDisplayDays; i++)
-            {
-                var date = DateTime.Today.AddDays(i);
-
-                calendar.Add(new CalendarDate
-                {
-                    Date = date,
-                    IsSelected = currentDate.Day == date.Day
-                        && currentDate.Month == date.Month
-                        && currentDate.Year == date.Year
-                });
-            }
-
-            CalendarItems = new ObservableCollection<CalendarDate>(calendar);
         }
     }
 }

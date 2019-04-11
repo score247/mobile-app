@@ -15,13 +15,13 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
-                <coreResources:CalendarQuickAccessViewResource />
+<!--                <coreResources:CalendarQuickAccessViewResource />-->
                 <resources:TVScheduleViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <FlexLayout Style="{StaticResource QuickAccessContainer}">
+      <!--  <FlexLayout Style="{StaticResource QuickAccessContainer}">
             <Frame Style="{StaticResource QuickAccessCalendarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="24"
@@ -95,7 +95,7 @@
                 </StackLayout>
             </Frame>
         </FlexLayout>
-
+-->
 
         <FlexLayout Style="{StaticResource TVScheduleTitleBox}" >
             <Label Text="{langs:Translate Time}"

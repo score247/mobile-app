@@ -1,18 +1,16 @@
-﻿namespace LiveScore.Score.Converters
+﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Converters
 {
     using System;
     using System.Globalization;
     using Xamarin.Forms;
 
-    public class ShortDayOfWeekConverter : IValueConverter
+    public class HomeLabelTextColorConverter : IValueConverter
     {
-        private const int DayOfWeekLength = 3;
-
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var dayOfWeek = value.ToString();
+            var isSelectHome = (bool)value;
 
-            return dayOfWeek.Substring(0, DayOfWeekLength).ToUpperInvariant();
+            return isSelectHome ? Color.FromHex("#F24822") : Color.FromHex("#939393");
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -9,8 +9,6 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
-        public TabStripViewModel ViewModel { get; set; }
-
         public TabStrip()
         {
             InitializeComponent();
@@ -18,6 +16,8 @@
             TabContent.BindingContext = ViewModel;
             TabHeader.BindingContext = ViewModel;
         }
+
+        public TabStripViewModel ViewModel { get; set; }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             "ItemsSource",

@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "League", "src\mobile\Featur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "News", "src\mobile\Features\News\News.csproj", "{35143CC0-1E85-49A3-8E0F-98CA7BBD57AA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Score", "src\mobile\Features\Score\Score.csproj", "{5690A902-473F-4352-A4C3-0774746D80F9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Score", "src\mobile\Features\Score\Score.csproj", "{5690A902-473F-4352-A4C3-0774746D80F9}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Menu", "src\mobile\Features\Setting\Menu.csproj", "{6CFA72C4-FDDE-4E67-A6B9-9017679509F0}"
 EndProject
@@ -45,7 +45,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Common.Tests", "t
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Android", "src\mobile\LiveScore.Android\LiveScore.Android.csproj", "{74EEA90A-96D6-4E2E-BBE5-D9552EA7EC16}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platform", "Platform", "{F96F1E34-EC23-4EE5-8089-EC572468DB5A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{F96F1E34-EC23-4EE5-8089-EC572468DB5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

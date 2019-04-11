@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Score.Models
+﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Models
 {
     using System;
 
-    public class CalendarDate
+    public class QuickAccessCalendarDate
     {
         public DateTime Date { get; set; }
 

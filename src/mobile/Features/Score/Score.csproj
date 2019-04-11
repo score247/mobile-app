@@ -105,9 +105,17 @@
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewModels\MatchDetailViewModel.cs">
             <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
         </Compile>
+        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\QuickAccessCalendar\QuickAccessCalendarView.xaml.cs">
+          <DependentUpon>QuickAccessCalendar.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Models\" />
+        <Folder Include="Controls\" />
+        <Folder Include="Controls\QuickAccessCalendar\" />
+        <Folder Include="Controls\QuickAccessCalendar\Converters\" />
+        <Folder Include="Controls\QuickAccessCalendar\Models\" />
+        <Folder Include="Controls\QuickAccessCalendar\ViewModels\" />
+        <Folder Include="Controls\QuickAccessCalendar\Views\" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />

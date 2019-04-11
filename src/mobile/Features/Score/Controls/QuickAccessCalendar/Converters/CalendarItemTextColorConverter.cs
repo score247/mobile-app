@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Score.Converters
+﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Converters
 {
     using System;
     using System.Globalization;
-    using LiveScore.Score.Models;
+    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
     using Xamarin.Forms;
 
     public class CalendarItemTextColorConverter : IValueConverter
@@ -14,7 +14,7 @@
                 return Color.FromHex("#939393");
             }
 
-            var calendarDate = value as CalendarDate;
+            var calendarDate = value as QuickAccessCalendarDate;
 
             if (calendarDate.IsSelected)
             {
@@ -34,7 +34,7 @@
             return value;
         }
 
-        private static bool IsToday(CalendarDate calendarDate)
+        private static bool IsToday(QuickAccessCalendarDate calendarDate)
         {
             return calendarDate.Date.Day == DateTime.Today.Day && calendarDate.Date.Month == DateTime.Today.Month && calendarDate.Date.Year == DateTime.Today.Year;
         }
