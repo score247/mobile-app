@@ -36,7 +36,7 @@
                     <ViewCell>
                         <StackLayout>
                             <FlexLayout Style="{StaticResource CustomTabMoreRow}">
-                                <Label Style="{StaticResource NewsIcon}" />
+                                <Image Source="{Binding Icon}" />
                                 <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource CustomTabMoreInfo}" />
                             </FlexLayout>
                             <ContentView>
