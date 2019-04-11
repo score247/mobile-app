@@ -16,11 +16,6 @@
         <Style x:Key="CustomTabMoreInfo" BasedOn="{StaticResource NavName}" TargetType="Label">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
-
-        <Style x:Key="CustomTabMoreActiveInfo" BasedOn="{StaticResource NavName}" TargetType="Label">
-            <Setter Property="Margin" Value="10,0,0,0" />
-            <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
-        </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding TabItems}"
