@@ -6,9 +6,6 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource PrimaryColor}">
-     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
-    </ContentPage.ToolbarItems>
     <StackLayout>
         <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoading}"
