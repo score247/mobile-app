@@ -46,7 +46,7 @@
                 SeparatorColor="{StaticResource LineColor}"
                 Style="{StaticResource ListViewHasBackground}"
                 GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
-                ItemTemplate="{Binding MatchDataTemplate}"
+                ItemTemplate="{Binding MatchTemplateSelector}"
                 AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" EventArgsParameterPath="Item" />

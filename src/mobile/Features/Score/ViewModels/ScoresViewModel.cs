@@ -9,6 +9,7 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Models;
     using LiveScore.Score.Views;
@@ -27,6 +28,7 @@
         {
             InitializeCommands();
             SelectHome = true;
+            MatchTemplateSelector = new MatchTemplateSelector(GlobalFactoryProvider, SettingsService);
         }
 
         public bool IsLoadingMatches { get; set; }
@@ -41,7 +43,7 @@
 
         public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches { get; set; }
 
-        public DataTemplate MatchDataTemplate { get; set; }
+        public MatchTemplateSelector MatchTemplateSelector { get; set; }
 
         public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
 
@@ -63,11 +65,6 @@
                    .ServiceFactoryProvider
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
-
-                MatchDataTemplate = GlobalFactoryProvider
-                    .TemplateFactoryProvider
-                    .GetInstance((SportType)SettingsService.CurrentSportId)
-                    .GetMatchTemplate();
 
                 await LoadHomeData();
             }
