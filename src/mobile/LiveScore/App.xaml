@@ -297,6 +297,26 @@
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />                
             </Style>
 
+            <Style x:Key="TVSchdeduleIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Text" Value="&#xe911;" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+
+            <Style x:Key="ActiveTVSchdeduleIcon" BasedOn="{StaticResource TVSchdeduleIcon}" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+            </Style>
+            
+            <Style x:Key="NewsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Text" Value="&#xe90c;" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+
+            <Style x:Key="ActiveNewsIcon" BasedOn="{StaticResource NewsIcon}" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+            </Style>
+
             <!-- NavTabs -->
             <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
                 <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />

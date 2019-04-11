@@ -8,10 +8,24 @@
              x:Class="LiveScore.Views.TabMoreView"
              Title="More"
              BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <Style x:Key="CustomTabMoreRow" BasedOn="{StaticResource SettingMenuRow}" TargetType="FlexLayout">
+            <Setter Property="JustifyContent" Value="Start" />
+        </Style>
+
+        <Style x:Key="CustomTabMoreInfo" BasedOn="{StaticResource NavName}" TargetType="Label">
+            <Setter Property="Margin" Value="10,0,0,0" />
+        </Style>
+
+        <Style x:Key="CustomTabMoreActiveInfo" BasedOn="{StaticResource NavName}" TargetType="Label">
+            <Setter Property="Margin" Value="10,0,0,0" />
+            <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+        </Style>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <ListView ItemsSource="{Binding TabItems}"
                   BackgroundColor="{StaticResource PrimaryColor}"
-                  SeparatorColor="{StaticResource LineColor}"
+                  SeparatorColor="Transparent"
                   VerticalOptions="FillAndExpand"
                   AutomationProperties.IsInAccessibleTree="False">
             <ListView.Behaviors>
@@ -20,14 +34,18 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource NavName}" />
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource CustomTabMoreRow}">
+                                <Label Style="{StaticResource NewsIcon}" />
+                                <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource CustomTabMoreInfo}" />
+                            </FlexLayout>
+                            <ContentView>
+                                <BoxView Style="{StaticResource HorizontalLine}" />
+                            </ContentView>
+                        </StackLayout>                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-            <ListView.Footer>
-                <StackLayout Orientation="Horizontal">
-                </StackLayout>
-            </ListView.Footer>
         </ListView>
     </ContentPage.Content>
 </ContentPage>
