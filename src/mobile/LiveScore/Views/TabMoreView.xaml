@@ -9,6 +9,22 @@
              Title="More"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Content>
-        <Label Text="More Tabs Here" TextColor="{StaticResource PrimaryTextColor}" />
+        <ListView ItemsSource="{Binding TabItems}"
+                  BackgroundColor="{StaticResource PrimaryColor}"
+                  SeparatorColor="{StaticResource LineColor}"
+                  VerticalOptions="FillAndExpand"
+                  AutomationProperties.IsInAccessibleTree="False">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource NavName}" />
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <StackLayout Orientation="Horizontal">
+                </StackLayout>
+            </ListView.Footer>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
