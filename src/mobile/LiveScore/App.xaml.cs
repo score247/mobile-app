@@ -13,6 +13,7 @@ using LiveScore.News;
 using LiveScore.Score;
 using LiveScore.Services;
 using LiveScore.Soccer;
+using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using Plugin.Multilingual;
@@ -111,6 +112,7 @@ namespace LiveScore
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<FavoritesModule>();
             moduleCatalog.AddModule<NewsModule>();
+            moduleCatalog.AddModule<TVScheduleModule>();
             moduleCatalog.AddModule<MenuModule>();
         }
 

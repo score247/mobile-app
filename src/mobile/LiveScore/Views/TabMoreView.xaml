@@ -14,6 +14,9 @@
                   SeparatorColor="{StaticResource LineColor}"
                   VerticalOptions="FillAndExpand"
                   AutomationProperties.IsInAccessibleTree="False">
+            <ListView.Behaviors>
+                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
