@@ -28,6 +28,9 @@
     <Compile Update="Views\FavoritePage.xaml.cs">
       <DependentUpon>FavoriteView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\EmptyFavoriteView.xaml.cs">
+      <DependentUpon>EmptyFavoriteView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

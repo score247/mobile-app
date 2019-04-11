@@ -29,6 +29,9 @@
     <Compile Update="Views\NewsPage.xaml.cs">
       <DependentUpon>NewsView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\EmptyNewsView.xaml.cs">
+      <DependentUpon>EmptyNewsView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

@@ -37,13 +37,13 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Faites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
+        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
             <x:Arguments>
-                <favorites:FavoriteView Title="Favorites">
+                <favorites:EmptyFavoriteView Title="Favorites">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate Favorites}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </favorites:FavoriteView>
+                </favorites:EmptyFavoriteView>
             </x:Arguments>
         </NavigationPage>
 
@@ -59,21 +59,21 @@
 
         <NavigationPage x:Name="News" Title="{langs:Translate News}" Icon="images/common/news.png">
             <x:Arguments>
-                <news:NewsView Title="News">
+                <news:EmptyNewsView Title="News">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate News}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </news:NewsView>
+                </news:EmptyNewsView>
             </x:Arguments>
         </NavigationPage>
 
         <NavigationPage x:Name="TVSchedule" Title="{langs:Translate TVSchedule}" Icon="images/common/tv.png">
             <x:Arguments>
-                <tvschedule:TVScheduleView Title="{langs:Translate TVSchedule}">
+                <tvschedule:EmptyTVScheduleView Title="{langs:Translate TVSchedule}">
                     <NavigationPage.TitleView>
                         <views:NavigationTitleView Title="{langs:Translate TVSchedule}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
-                </tvschedule:TVScheduleView>
+                </tvschedule:EmptyTVScheduleView>
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

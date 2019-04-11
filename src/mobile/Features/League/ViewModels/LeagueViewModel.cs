@@ -18,7 +18,8 @@
             Title = "League";
 
             Leagues = new ObservableCollection<ILeague>();
-            IsLoading = true;
+
+            IsLoading = false;
             HasData = !IsLoading;
         }
 
@@ -28,12 +29,5 @@
 
         public ObservableCollection<ILeague> Leagues { get; set; }
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            IsLoading = false;
-            HasData = !IsLoading;
-        }
     }
 }

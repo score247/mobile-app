@@ -30,6 +30,9 @@
         <Compile Update="Views\TVScheduleView.xaml.cs">
             <DependentUpon>%(Filename)</DependentUpon>
         </Compile>
+        <Compile Update="Views\EmptyTVScheduleView.xaml.cs">
+          <DependentUpon>EmptyTVScheduleView.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
