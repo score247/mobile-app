@@ -364,10 +364,10 @@
         <Reference Include="Xamarin.iOS" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
+        <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
         <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
         <PackageReference Include="Xamarin.HotReload">
-            <Version>1.2.2</Version>
+            <Version>1.2.4</Version>
         </PackageReference>
         <PackageReference Include="System.Reflection.Emit">
             <Version>4.3.0</Version>

@@ -17,19 +17,39 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private const int CalendarOldDayCount = -3;
-        private const int CalendarNewDayCount = 3;
+        private const int NumberDisplayDays = 3;
         private IMatchService matchService;
 
         public ScoresViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService)
-        : base(navigationService, globalFactory, settingsService)
+            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
             InitializeCommands();
             SelectHome = true;
         }
+
+        public bool IsLoadingMatches { get; set; }
+
+        public bool IsRefreshingMatchList { get; set; }
+
+        public bool SelectHome { get; set; }
+
+        public CalendarDate SelectedCalendarDate { get; set; }
+
+        public ObservableCollection<CalendarDate> CalendarItems { get; set; }
+
+        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches { get; set; }
+
+        public DataTemplate MatchDataTemplate { get; set; }
+
+        public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
+
+        public DelegateAsyncCommand SelectDateCommand { get; private set; }
+
+        public DelegateAsyncCommand SelectHomeCommand { get; private set; }
+
+        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -52,28 +72,6 @@
                 await LoadHomeData();
             }
         }
-
-        public CalendarDate SelectedCalendarDate { get; set; }
-
-        public ObservableCollection<IGrouping<dynamic, IMatch>> GroupMatches { get; set; }
-
-        public bool IsLoadingMatches { get; set; }
-
-        public bool IsRefreshingMatchList { get; set; }
-
-        public ObservableCollection<CalendarDate> CalendarItems { get; set; }
-
-        public bool SelectHome { get; set; }
-
-        public DataTemplate MatchDataTemplate { get; set; }
-
-        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
-
-        public DelegateAsyncCommand RefreshMatchListCommand { get; private set; }
-
-        public DelegateAsyncCommand SelectDateCommand { get; private set; }
-
-        public DelegateAsyncCommand SelectHomeCommand { get; private set; }
 
         private void InitializeCommands()
         {
@@ -138,14 +136,16 @@
         {
             var calendar = new ObservableCollection<CalendarDate>();
 
-            for (int i = CalendarOldDayCount; i <= CalendarNewDayCount; i++)
+            for (int i = -NumberDisplayDays; i <= NumberDisplayDays; i++)
             {
                 var date = DateTime.Today.AddDays(i);
 
                 calendar.Add(new CalendarDate
                 {
                     Date = date,
-                    IsSelected = currentDate.Day == date.Day && currentDate.Month == date.Month && currentDate.Year == date.Year
+                    IsSelected = currentDate.Day == date.Day
+                        && currentDate.Month == date.Month
+                        && currentDate.Year == date.Year
                 });
             }
 
