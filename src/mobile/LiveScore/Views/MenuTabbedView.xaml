@@ -60,9 +60,6 @@
          <NavigationPage x:Name="More" Title="More" Icon="images/common/more.png">
             <x:Arguments>
                 <views:TabMoreView Title="More">
-                    <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="More" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-                    </NavigationPage.TitleView>
                 </views:TabMoreView>
             </x:Arguments>
         </NavigationPage>
