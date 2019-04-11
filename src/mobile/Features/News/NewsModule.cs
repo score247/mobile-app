@@ -15,6 +15,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NewsView, NewsViewModel>();
+            containerRegistry.RegisterForNavigation<EmptyNewsView, EmptyNewsViewModel>();
         }
     }
 }

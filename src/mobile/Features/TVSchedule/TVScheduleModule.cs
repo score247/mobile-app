@@ -15,6 +15,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<TVScheduleView, TVScheduleViewModel>();
+            containerRegistry.RegisterForNavigation<EmptyTVScheduleView, EmptyTVScheduleViewModel>();
         }
     }
 }
