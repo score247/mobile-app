@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Services;
 
-    public interface IServiceFactory : IFactory<IFactoryProvider<IServiceFactory>>
+    public interface IServiceFactory
     {
         IMatchService CreateMatchService();
 

@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
@@ -31,10 +32,10 @@
             var mapper = containerProvider.Resolve<IMapper>();
 
             var soccerServiceFactory = new SoccerServiceFactory(soccerMatchApi, leagueApi, settingsService, cacheService, loggingService, apiPolicy, mapper);
-            soccerServiceFactory.RegisterTo(globalServiceProvider.ServiceFactoryProvider);
-
             var soccerTemplateFactory = new SoccerTemplateFactory();
-            soccerTemplateFactory.RegisterTo(globalServiceProvider.TemplateFactoryProvider);
+
+            globalServiceProvider.ServiceFactoryProvider.RegisterInstance(SportType.Soccer, soccerServiceFactory);
+            globalServiceProvider.TemplateFactoryProvider.RegisterInstance(SportType.Soccer, soccerTemplateFactory);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

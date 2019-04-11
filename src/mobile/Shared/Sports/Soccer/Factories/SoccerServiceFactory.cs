@@ -2,7 +2,6 @@
 {
     using AutoMapper;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Services;
@@ -33,11 +32,6 @@
             this.loggingService = loggingService;
             this.networkService = networkService;
             this.mapper = mapper;
-        }
-
-        public void RegisterTo(IFactoryProvider<IServiceFactory> serviceFactoryProvider)
-        {
-            serviceFactoryProvider.RegisterInstance(SportType.Soccer, this);
         }
 
         public ILeagueService CreateLeagueService()

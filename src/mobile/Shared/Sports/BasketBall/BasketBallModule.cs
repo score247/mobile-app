@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Basketball
 {
     using LiveScore.Basketball.Factories;
+    using LiveScore.Core.Constants;
     using LiveScore.Core.Factories;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -11,10 +12,10 @@
         {
             var globalServiceProvider = containerProvider.Resolve<IGlobalFactoryProvider>();
             var basketBallServiceFactory = new BasketballServiceFactory();
-            basketBallServiceFactory.RegisterTo(globalServiceProvider.ServiceFactoryProvider);
+            globalServiceProvider.ServiceFactoryProvider.RegisterInstance(SportType.Basketball, basketBallServiceFactory);
 
             var basketballTemplateFactory = new BasketballTemplateFactory();
-            basketballTemplateFactory.RegisterTo(globalServiceProvider.TemplateFactoryProvider);
+            globalServiceProvider.TemplateFactoryProvider.RegisterInstance(SportType.Basketball, basketballTemplateFactory);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

@@ -2,7 +2,7 @@
 {
     using Xamarin.Forms;
 
-    public interface ITemplateFactory : IFactory<IFactoryProvider<ITemplateFactory>>
+    public interface ITemplateFactory
     {
         DataTemplate GetMatchTemplate();
     }
