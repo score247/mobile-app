@@ -19,8 +19,8 @@
 
     public class MatchService : BaseService, IMatchService
     {
-        private const int CacheHours = 2;
-        private const int CachedMonths = 1;
+        private const int TodayMatchExpiration = 2;
+        private const int OldMatchExpiration = 120;
         private readonly ISoccerMatchApi soccerMatchApi;
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
@@ -43,7 +43,9 @@
         {
             var sportId = settingsService.CurrentSportId;
             var matches = new List<IMatch>();
-            var cacheExpiration = fromDate < DateTime.Now ? DateTime.Now.AddMonths(CachedMonths) : DateTime.Now.AddHours(CacheHours);
+            var cacheExpiration = fromDate < DateTime.Now
+                ? DateTime.Now.AddMinutes(OldMatchExpiration)
+                : DateTime.Now.AddMinutes(TodayMatchExpiration);
             var fromDateText = fromDate.ToApiFormat();
             var toDateText = toDate.ToApiFormat();
 

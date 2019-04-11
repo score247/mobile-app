@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using Akavache;
 using LiveScore.Basketball;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -54,7 +55,7 @@ namespace LiveScore
 
             InitializeComponent();
             Akavache.Registrations.Start("LiveScore.Storage");
-
+            BlobCache.ForcedDateTimeKind = DateTimeKind.Local;
             var logService = Container.Resolve<ILoggingService>();
             logService.Init("https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");
 
