@@ -31,9 +31,11 @@
             MatchTemplateSelector = new MatchTemplateSelector(GlobalFactoryProvider, SettingsService);
         }
 
-        public bool IsLoadingMatches { get; set; }
+        public bool IsLoading { get; set; }
 
-        public bool IsRefreshingMatchList { get; set; }
+        public bool IsNotLoading => !IsLoading;
+
+        public bool IsRefreshing { get; set; }
 
         public bool SelectHome { get; set; }
 
@@ -99,7 +101,7 @@
             var fromDate = SelectedCalendarDate == null ? DateTime.Today.AddDays(-1) : SelectedCalendarDate.Date;
             var toDate = SelectedCalendarDate == null ? DateTime.Today : SelectedCalendarDate.Date;
             await LoadMatches(fromDate, toDate, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
-            IsRefreshingMatchList = false;
+            IsRefreshing = false;
         }
 
         private async Task OnSelectDateCommandAsync()
@@ -109,7 +111,7 @@
 
             var fromDate = SelectedCalendarDate.Date;
             var toDate = SelectedCalendarDate.Date;
-            await LoadMatches(fromDate, toDate).ConfigureAwait(false);
+            await LoadMatches(fromDate, toDate);
         }
 
         private async Task OnSelectHomeCommand()
@@ -120,13 +122,13 @@
 
         private async Task LoadMatches(DateTime fromDate, DateTime toDate, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
-            IsLoadingMatches = showLoadingIndicator;
+            IsLoading = showLoadingIndicator;
 
             var matches = await matchService.GetDailyMatches(fromDate, toDate, forceFetchNewData);
             GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
-            IsLoadingMatches = !IsLoadingMatches && showLoadingIndicator;
+            IsLoading = !IsLoading && showLoadingIndicator;
         }
 
         private void LoadCalendar(DateTime currentDate)
