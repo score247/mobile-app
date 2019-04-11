@@ -13,7 +13,7 @@
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly ILoggingService loggingService;
-        private readonly IApiPolicy networkService;
+        private readonly IApiPolicy apiPolicy;
         private readonly IMapper mapper;
 
         public SoccerServiceFactory(
@@ -22,7 +22,7 @@
             ISettingsService settingsService,
             ICacheService cacheService,
             ILoggingService loggingService,
-            IApiPolicy networkService,
+            IApiPolicy apiPolicy,
             IMapper mapper)
         {
             this.soccerMatchApi = soccerMatchApi;
@@ -30,14 +30,14 @@
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.loggingService = loggingService;
-            this.networkService = networkService;
+            this.apiPolicy = apiPolicy;
             this.mapper = mapper;
         }
 
         public ILeagueService CreateLeagueService()
-            => new LeagueService(leagueApi, settingsService, loggingService, networkService);
+            => new LeagueService(leagueApi, settingsService, loggingService, apiPolicy);
 
         public IMatchService CreateMatchService()
-            => new MatchService(soccerMatchApi, settingsService, cacheService, loggingService, mapper);
+            => new MatchService(soccerMatchApi, settingsService, cacheService, loggingService, mapper, apiPolicy);
     }
 }

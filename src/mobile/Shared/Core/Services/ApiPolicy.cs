@@ -23,6 +23,7 @@
     {
         const int DEFAULT_COUNT = 3;
         const int TIMEOUT_SECONDS = 2;
+        const int DEFAULT_POW = 2;
 
         // Handle both exceptions and return values in one policy
         readonly HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -49,11 +50,7 @@
             var retryPolicy = Policy
             .Handle<WebException>()
             .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))           
-            .Retry(DEFAULT_COUNT, onRetry: (exception, retryCount, context) =>
-            {
-                //TODO LOG EXCEPTION
-                //logger.Error($"Retry {retryCount} of {context.PolicyKey} at {context.ExecutionKey}, getting {context["Type"]} of id {context["Id"]}, due to: {exception}.");
-            });
+            .Retry(DEFAULT_COUNT);
 
             var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);
 
@@ -62,6 +59,6 @@
             return commonResilience.Execute(func);
         }
 
-        public Func<int, TimeSpan> SleepDurationProvider => retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt));
+        public Func<int, TimeSpan> SleepDurationProvider => retryAttempt => TimeSpan.FromSeconds(Math.Pow(DEFAULT_POW, retryAttempt));
     }
 }

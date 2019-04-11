@@ -25,18 +25,21 @@
         private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly IMapper mapper;
+        private readonly IApiPolicy apiPolicy;
 
         public MatchService(
             ISoccerMatchApi soccerMatchApi,
             ISettingsService settingsService,
             ICacheService cacheService,
             ILoggingService loggingService,
-            IMapper mapper) : base(loggingService)
+            IMapper mapper,
+            IApiPolicy apiPolicy) : base(loggingService)
         {
             this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.soccerMatchApi = soccerMatchApi;
             this.mapper = mapper;
+            this.apiPolicy = apiPolicy;
         }
 
         public async Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
@@ -54,7 +57,7 @@
                 // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
                         $"DailyMatches{fromDateText}-{toDateText}",
-                        () => soccerMatchApi.GetDailyMatches(sportId, fromDateText, toDateText),
+                        () => GetMatches(sportId, fromDateText, toDateText),
                         forceFetchNewData,
                         cacheExpiration);
 
@@ -71,6 +74,12 @@
 
             return matches;
         }
+
+        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string fromDateText, string toDateText)
+            => await apiPolicy.RetryAndTimeout
+                (
+                    () => soccerMatchApi.GetDailyMatches(sportId, fromDateText, toDateText)
+                );
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
         {
