@@ -13,8 +13,8 @@
 
     public interface ISoccerMatchApi
     {
-        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}")]
-        Task<IEnumerable<MatchDTO>> GetDailyMatches(int sportId, string fromDate, string toDate);
+        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&language={language}")]
+        Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDate, string toDate);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -22,29 +22,38 @@
         private const int TodayMatchExpiration = 2;
         private const int OldMatchExpiration = 120;
         private readonly ISoccerMatchApi soccerMatchApi;
-        private readonly ISettingsService settingsService;
         private readonly ICacheService cacheService;
         private readonly IMapper mapper;
         private readonly IApiPolicy apiPolicy;
 
         public MatchService(
             ISoccerMatchApi soccerMatchApi,
-            ISettingsService settingsService,
             ICacheService cacheService,
             ILoggingService loggingService,
             IMapper mapper,
             IApiPolicy apiPolicy) : base(loggingService)
         {
-            this.settingsService = settingsService;
             this.cacheService = cacheService;
             this.soccerMatchApi = soccerMatchApi;
             this.mapper = mapper;
+<<<<<<< refs/remotes/origin/master
             this.apiPolicy = apiPolicy;
+=======
+        }       
+
+        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
+        {
+            throw new NotImplementedException();
+>>>>>>> remove setting service out of matchservice change signature match service interface
         }
 
-        public async Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
+        public async Task<IList<IMatch>> GetMatches(
+            int sportId, 
+            string language, 
+            DateTime fromDate, 
+            DateTime toDate, 
+            bool forceFetchNewData = false)
         {
-            var sportId = settingsService.CurrentSportId;
             var matches = new List<IMatch>();
             var cacheExpiration = fromDate < DateTime.Now
                 ? DateTime.Now.AddMinutes(OldMatchExpiration)
@@ -56,8 +65,13 @@
             {
                 // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
+<<<<<<< refs/remotes/origin/master
                         $"DailyMatches{fromDateText}-{toDateText}",
                         () => GetMatches(sportId, fromDateText, toDateText),
+=======
+                        $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
+                        () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText),
+>>>>>>> remove setting service out of matchservice change signature match service interface
                         forceFetchNewData,
                         cacheExpiration);
 
@@ -75,6 +89,7 @@
             return matches;
         }
 
+<<<<<<< refs/remotes/origin/master
         private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string fromDateText, string toDateText)
             => await apiPolicy.RetryAndTimeout
                 (
@@ -82,6 +97,11 @@
                 );
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
+=======
+        public Task<IList<IMatch>> GetMatchesByLeague(
+            string leagueId, 
+            string group)
+>>>>>>> remove setting service out of matchservice change signature match service interface
         {
             throw new NotImplementedException();
         }

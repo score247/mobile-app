@@ -106,12 +106,17 @@
         {
             IsLoading = showLoadingIndicator;
 
+<<<<<<< refs/remotes/origin/master
             var fromDate = date ?? DateTime.Today.AddDays(-1);
             var toDate = date ?? DateTime.Today;
 
             MatchGroups = null;
             var matches = await matchService.GetDailyMatches(fromDate, toDate, forceFetchNewData);
             MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
+=======
+            var matches = await matchService.GetMatches(SettingsService.CurrentSportId, SettingsService.CurrentLanguage, fromDate, toDate, forceFetchNewData);
+            GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
+>>>>>>> remove setting service out of matchservice change signature match service interface
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
             IsLoading = false;

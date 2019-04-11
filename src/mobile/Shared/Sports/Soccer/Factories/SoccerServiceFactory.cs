@@ -38,6 +38,10 @@
             => new LeagueService(leagueApi, settingsService, loggingService, apiPolicy);
 
         public IMatchService CreateMatchService()
+<<<<<<< refs/remotes/origin/master
             => new MatchService(soccerMatchApi, settingsService, cacheService, loggingService, mapper, apiPolicy);
+=======
+            => new MatchService(soccerMatchApi, cacheService, loggingService, mapper);
+>>>>>>> remove setting service out of matchservice change signature match service interface
     }
 }

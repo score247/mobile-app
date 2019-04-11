@@ -7,7 +7,10 @@
 
     public interface IMatchService
     {
-        Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false);
+
+        Task<IList<IMatch>> GetMatches(int sportId, string languge, DateTime fromDate, DateTime toDate, bool forceFetchNewData = false);
+
+        Task<IList<IMatch>> GetLiveMatches(int sportId, string languge);
 
         Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group);
     }

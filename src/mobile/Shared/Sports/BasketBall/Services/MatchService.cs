@@ -23,6 +23,16 @@
             return matches;
         }
 
+        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<IMatch>> GetMatches(int sportId, string languge, DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
+        {
+            throw new NotImplementedException();
+        }
+
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
