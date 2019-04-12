@@ -10,6 +10,8 @@
     {
         public DateTime EventDate { get; set; }
 
+        public long EventDateUnixTime { get; set; }
+
         public IEnumerable<TeamDTO> Teams { get; set; }
 
         public MatchResultDTO MatchResult { get; set; }

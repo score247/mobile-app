@@ -9,6 +9,8 @@
     {
         DateTime EventDate { get; }
 
+        long EventDateUnixTime { get; }
+
         IEnumerable<ITeam> Teams { get; }
 
         bool IsLive { get; }
@@ -25,6 +27,8 @@
     public class Match : Entity<string, string>, IMatch
     {
         public DateTime EventDate { get; set; }
+
+        public long EventDateUnixTime { get; set; }
 
         public IEnumerable<ITeam> Teams { get; set; }
 
