@@ -36,15 +36,14 @@
             this.cacheService = cacheService;
             this.soccerMatchApi = soccerMatchApi;
             this.mapper = mapper;
-<<<<<<< refs/remotes/origin/master
             this.apiPolicy = apiPolicy;
-=======
+
         }       
 
         public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
         {
             throw new NotImplementedException();
->>>>>>> remove setting service out of matchservice change signature match service interface
+
         }
 
         public async Task<IList<IMatch>> GetMatches(
@@ -65,13 +64,8 @@
             {
                 // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
-<<<<<<< refs/remotes/origin/master
-                        $"DailyMatches{fromDateText}-{toDateText}",
-                        () => GetMatches(sportId, fromDateText, toDateText),
-=======
                         $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
                         () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText),
->>>>>>> remove setting service out of matchservice change signature match service interface
                         forceFetchNewData,
                         cacheExpiration);
 
@@ -89,19 +83,18 @@
             return matches;
         }
 
-<<<<<<< refs/remotes/origin/master
-        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string fromDateText, string toDateText)
+
+        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language , string fromDateText, string toDateText)
             => await apiPolicy.RetryAndTimeout
                 (
-                    () => soccerMatchApi.GetDailyMatches(sportId, fromDateText, toDateText)
+                    () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText)
                 );
 
-        public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
-=======
+
         public Task<IList<IMatch>> GetMatchesByLeague(
             string leagueId, 
             string group)
->>>>>>> remove setting service out of matchservice change signature match service interface
+
         {
             throw new NotImplementedException();
         }
