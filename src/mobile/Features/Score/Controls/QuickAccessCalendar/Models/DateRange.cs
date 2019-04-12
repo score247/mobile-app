@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class QuickAccessCalendarDateRange
+    public class DateRange
     {
         public DateTime FromDate { get; set; }
 

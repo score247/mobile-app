@@ -9,12 +9,10 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
-    using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Controls.QuickAccessCalendar.Models;
     using LiveScore.Score.Views;
     using Prism.Navigation;
-    using Xamarin.Forms;
 
     public class ScoresViewModel : ViewModelBase
     {
@@ -29,7 +27,7 @@
         {
             InitializeCommands();
 
-            QuickAccessCalendarDateRange = new QuickAccessCalendarDateRange
+            DateRange = new DateRange
             {
                 FromDate = DateTime.Today.AddDays(-NumberDisplayDays),
                 ToDate = DateTime.Today.AddDays(NumberDisplayDays)
@@ -48,7 +46,7 @@
 
         public DelegateAsyncCommand<IMatch> MatchSelectCommand { get; private set; }
 
-        public QuickAccessCalendarDateRange QuickAccessCalendarDateRange { get; set; }
+        public DateRange DateRange { get; set; }
 
         public DelegateAsyncCommand QuickAccessCalendarSelectHomeCommand { get; private set; }
 

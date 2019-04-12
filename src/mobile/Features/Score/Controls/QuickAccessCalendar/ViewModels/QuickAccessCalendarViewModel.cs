@@ -17,7 +17,7 @@
 
         public DelegateAsyncCommand SelectHomeCommand { get; set; }
 
-        public void RenderCalendarItems(QuickAccessCalendarDateRange dateRange)
+        public void RenderCalendarItems(DateRange dateRange)
         {
             if (dateRange != null)
             {

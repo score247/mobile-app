@@ -20,13 +20,13 @@
         public static readonly BindableProperty DateRangeProperty
             = BindableProperty.Create(
                 nameof(DateRange),
-                typeof(QuickAccessCalendarDateRange),
+                typeof(DateRange),
                 typeof(QuickAccessCalendar),
                 propertyChanged: OnDateRangeChanged);
 
-        public QuickAccessCalendarDateRange DateRange
+        public DateRange DateRange
         {
-            get { return (QuickAccessCalendarDateRange)GetValue(DateRangeProperty); }
+            get { return (DateRange)GetValue(DateRangeProperty); }
             set { SetValue(DateRangeProperty, value); }
         }
 
@@ -36,7 +36,7 @@
 
             if (control != null)
             {
-                control.ViewModel.RenderCalendarItems((QuickAccessCalendarDateRange)newValue);
+                control.ViewModel.RenderCalendarItems((DateRange)newValue);
             }
         }
 
