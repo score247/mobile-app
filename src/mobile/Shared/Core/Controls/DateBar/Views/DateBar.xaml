@@ -18,7 +18,7 @@
     </ContentView.Resources>
     <ContentView.Content>
         <FlexLayout Style="{StaticResource DateBarContainer}">
-            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}" Margin="0,0,8,0">
+            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}">
                 <Label Style="{StaticResource HomeIcon}"
                        TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
                <Frame.GestureRecognizers>
@@ -37,7 +37,7 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <Frame Style="{StaticResource DateBarBox}" Rotation="90">
-                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                    <StackLayout Style="{StaticResource StacklayoutVerticalCenter}">
                                         <Label Text="{Binding Date.Day}"
                                                Style="{StaticResource DateBarDate}"
                                                TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />

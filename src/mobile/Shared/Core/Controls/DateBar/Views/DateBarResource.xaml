@@ -16,7 +16,6 @@
         <Setter Property="RowHeight" Value="40" />
         <Setter Property="HeightRequest" Value="280" />
         <Setter Property="WidthRequest" Value="32" />
-        <Setter Property="Margin" Value="0,0,8,0" />
         <Setter Property="SeparatorVisibility" Value="None" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>

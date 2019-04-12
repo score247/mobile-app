@@ -147,6 +147,10 @@
                 <Setter Property="HorizontalOptions" Value="End" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
+            <Style x:Key="StacklayoutVerticalCenter" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
             
             <Style TargetType="Grid">
                 <Setter Property="RowSpacing" Value="0" />
