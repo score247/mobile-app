@@ -8,6 +8,7 @@ Resource          Actions/Page_Actions.robot
 
 *** Test Cases ***
 Demo_TC_Simulator
+    [Tags]    Simulator
     Open Application On Simulator    iPhone 8
     Click Element At Coordinates    40    638    #click bottom tab 1st
     sleep    3s
@@ -22,6 +23,7 @@ Demo_TC_Simulator
     Close All Applications
 
 Demo_TC_Real Device
+    [Tags]    Realios
     [Template]
     Open Application On Real Ios Device    Iphone6    34a775db8a3839d4651f0f066d28675b6756623a
     Click Element At Coordinates    123    705
