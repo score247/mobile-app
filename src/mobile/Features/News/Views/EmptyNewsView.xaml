@@ -10,6 +10,14 @@
             BackgroundColor="{StaticResource PrimaryColor}"
             x:Name="self"
             Title="{Binding Title}">
+    <NavigationPage.TitleView>
+        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
+            <Label Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
+            <StackLayout x:Name="SportName">
+                <Label Style="{StaticResource SportName}" Text="SOCCER" />
+            </StackLayout>      
+        </FlexLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Label Text="News View" TextColor="{StaticResource PrimaryTextColor}" />
     </ContentPage.Content>

@@ -9,6 +9,14 @@
             prism:ViewModelLocator.AutowireViewModel="True"
             BackgroundColor="{StaticResource PrimaryColor}"
             Title="{Binding Title}">
+    <NavigationPage.TitleView>
+        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
+            <Label Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
+            <StackLayout x:Name="SportName">
+                <Label Style="{StaticResource SportName}" Text="SOCCER" />
+            </StackLayout>      
+        </FlexLayout>
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <Label Text="TV View" TextColor="{StaticResource PrimaryTextColor}" />
     </ContentPage.Content>

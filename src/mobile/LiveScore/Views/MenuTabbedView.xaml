@@ -30,6 +30,9 @@
        <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png">
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
                 </score:LiveView>
             </x:Arguments>
         </NavigationPage>
@@ -37,6 +40,9 @@
         <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png">
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="{langs:Translate Favorites}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
                 </favorites:EmptyFavoriteView>
             </x:Arguments>
         </NavigationPage>
@@ -44,6 +50,9 @@
         <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/common/league.png">
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
+                    <NavigationPage.TitleView>
+                        <views:NavigationTitleView Title="{langs:Translate Leagues}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                    </NavigationPage.TitleView>
                 </league:LeagueView>
             </x:Arguments>
         </NavigationPage>
