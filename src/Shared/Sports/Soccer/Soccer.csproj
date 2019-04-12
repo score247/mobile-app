@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>LiveScore.Soccer</RootNamespace>
+    <AssemblyName>LiveScore.Soccer</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Class1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Services\" />
+    <Folder Include="Views\Templates\" />
+    <Folder Include="Factories\" />
+    <Folder Include="Models\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Models\Teams\" />
+    <Folder Include="DTOs\Leagues\" />
+    <Folder Include="DTOs\Matches\" />
+    <Folder Include="DTOs\Teams\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\SoccerMatchListViewTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="Refit" Version="4.6.99" />
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
+  </ItemGroup>
+</Project>
