@@ -100,22 +100,17 @@
             }
         }
 
-        private async Task LoadMatches(DateRange dateRange, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task LoadMatches(DateRange dateRangeValue, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
 
-            if (dateRange == null)
-            {
-                dateRange = InitDateRange();
-            }
-
+            var dateRange = dateRangeValue ?? InitDateRange();
             var matches = await matchService.GetMatches(
                     SettingsService.CurrentSportId,
                     SettingsService.CurrentLanguage,
                     dateRange.FromDate,
                     dateRange.ToDate,
                     forceFetchNewData);
-
             MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
@@ -123,13 +118,11 @@
         }
 
         private static DateRange InitDateRange()
-        {
-            return new DateRange
+            => new DateRange
             {
                 FromDate = DateTime.Today.AddDays(-1),
                 ToDate = DateTime.Today
             };
-        }
 
         private bool CurrentDateIsNotSelectedDate(DateTime selectedDate)
             => currentDateRange.FromDate != selectedDate && currentDateRange.ToDate != selectedDate;
