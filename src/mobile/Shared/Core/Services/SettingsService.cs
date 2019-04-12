@@ -7,11 +7,7 @@
     using LiveScore.Core.Constants;
 
     public interface ISettingsService
-    {
-        string[] LeagueGroups { get; }
-
-        IDictionary<string, string> ApiKeyMapper { get; }
-
+    {       
         IDictionary<string, string> LanguageMapper { get; }
 
         IDictionary<string, string> SportNameMapper { get; }
@@ -29,18 +25,7 @@
 
     public class SettingsService : ISettingsService
     {
-        public static string LocalEndPoint => "https://testing2.nexdev.net/Main/api";
-
-        public IDictionary<string, string> ApiKeyMapper => new Dictionary<string, string>
-        {
-            { "am", "a4tmwcm5rj73kd6ctgbvazzb" },
-            { "eu", "udt47krvjf2uugrx94mhf5z4" },
-            { "as", "d5vvgr7c3vg77kksd94rp8t2" },
-            { "intl", "9bs6t3aa8xjhtq5ytf2n8q5q" },
-            { "other", "yfvcbfg8eb6r8jv5z9jsh6bb" }
-        };
-
-        public string[] LeagueGroups => new[] { "am", "eu", "as", "intl", "other" };
+        public static string LocalEndPoint => "https://testing2.nexdev.net/Main/api/";
 
         public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {
