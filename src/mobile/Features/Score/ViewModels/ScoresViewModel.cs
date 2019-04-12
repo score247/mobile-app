@@ -67,7 +67,7 @@
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
 
-                await LoadMatches();
+                await LoadMatches(currentDate);
             }
         }
 
@@ -91,7 +91,7 @@
             IsRefreshing = false;
         }
 
-        private async Task OnSelectHomeCommand() => await LoadMatches();
+        private async Task OnSelectHomeCommand() => await LoadMatches(currentDate);
 
         private async Task OnSelectDateCommandAsync(QuickAccessCalendarDate calendarDate)
         {
@@ -102,13 +102,12 @@
             }
         }
 
-        private async Task LoadMatches(DateTime? date = null, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task LoadMatches(DateTime date, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
 
-
-            var fromDate = date ?? DateTime.Today.AddDays(-1);
-            var toDate = date ?? DateTime.Today;
+            var fromDate = date == DateTime.MinValue ? DateTime.Today.AddDays(-1) : date;
+            var toDate = date == DateTime.MinValue ? DateTime.Today : date;
 
             var matches = await matchService.GetMatches(SettingsService.CurrentSportId, SettingsService.CurrentLanguage, fromDate, toDate, forceFetchNewData);
             MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
