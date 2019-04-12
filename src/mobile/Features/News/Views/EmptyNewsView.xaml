@@ -1,23 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-            xmlns="http://xamarin.com/schemas/2014/forms" 
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-            x:Class="LiveScore.News.Views.EmptyNewsView"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-            xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            prism:ViewModelLocator.AutowireViewModel="True"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            x:Name="self"
-            Title="{Binding Title}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LiveScore.News.Views.EmptyNewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    x:Name="self"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
-            <Label Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
+            <Label
+                AutomationId="NavigationTitle"
+                Style="{StaticResource PageTitle}"
+                Text="{Binding Title}" />
             <StackLayout x:Name="SportName">
                 <Label Style="{StaticResource SportName}" Text="SOCCER" />
-            </StackLayout>      
+            </StackLayout>
         </FlexLayout>
     </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Search"
+            Icon="images/common/icon_transparent.png"
+            Priority="1" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="News View" TextColor="{StaticResource PrimaryTextColor}" />
     </ContentPage.Content>

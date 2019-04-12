@@ -1,22 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-            xmlns="http://xamarin.com/schemas/2014/forms" 
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-            x:Class="LiveScore.TVSchedule.Views.EmptyTVScheduleView"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-            xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-            prism:ViewModelLocator.AutowireViewModel="True"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            Title="{Binding Title}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LiveScore.TVSchedule.Views.EmptyTVScheduleView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="{Binding Title}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
-            <Label Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
+            <Label
+                AutomationId="NavigationTitle"
+                Style="{StaticResource PageTitle}"
+                Text="{Binding Title}" />
             <StackLayout x:Name="SportName">
                 <Label Style="{StaticResource SportName}" Text="SOCCER" />
-            </StackLayout>      
+            </StackLayout>
         </FlexLayout>
     </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Search"
+            Icon="images/common/icon_transparent.png"
+            Priority="1" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="TV View" TextColor="{StaticResource PrimaryTextColor}" />
     </ContentPage.Content>
