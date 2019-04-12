@@ -7,7 +7,6 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
              xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
@@ -21,7 +20,6 @@
              <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <commonConverters:InverseBoolConverter x:Key="inverseBoolConverter" />
             <coreConverters:MatchTemplateSelector x:Key="matchTemplateSelector" />
             <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
         </ResourceDictionary>
