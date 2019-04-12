@@ -47,9 +47,9 @@
             if (currentDateBarItem != selectedItem)
             {
                 currentDateBarItem = selectedItem;
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(selectedItem.Date);
                 HomeIsSelected = false;
                 ReloadCalendarItems(selectedItem);
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(selectedItem.Date);
             }
         }
 
@@ -57,9 +57,10 @@
         {
             if (!HomeIsSelected)
             {
-                EventAggregator.GetEvent<DateBarHomeSelectedEvent>().Publish();
+                currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
+                EventAggregator.GetEvent<DateBarHomeSelectedEvent>().Publish();
             }
         }
 
