@@ -95,8 +95,11 @@
 
         private async Task OnSelectDateCommandAsync(QuickAccessCalendarDate calendarDate)
         {
-            currentDate = calendarDate.Date;
-            await LoadMatches(currentDate);
+            if (currentDate != calendarDate.Date)
+            {
+                currentDate = calendarDate.Date;
+                await LoadMatches(currentDate);
+            }
         }
 
         private async Task LoadMatches(DateTime? date = null, bool showLoadingIndicator = true, bool forceFetchNewData = false)
@@ -111,7 +114,7 @@
             MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
-            IsLoading = !IsLoading && showLoadingIndicator;
+            IsLoading = false;
         }
     }
 }
