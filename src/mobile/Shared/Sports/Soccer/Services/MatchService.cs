@@ -65,7 +65,7 @@
                 // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
                         $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
-                        () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText),
+                        () => GetMatches(sportId, language, fromDateText, toDateText),
                         forceFetchNewData,
                         cacheExpiration);
 
