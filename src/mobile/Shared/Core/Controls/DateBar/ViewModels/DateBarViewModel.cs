@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.DateBar.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using LiveScore.Common.Extensions;
@@ -17,19 +18,16 @@
 
         public DelegateAsyncCommand SelectHomeCommand { get; set; }
 
-        public void RenderCalendarItems(DateRange dateRange)
+        public void RenderCalendarItems(int numberDisplayDays)
         {
-            if (dateRange != null)
+            var dateItems = new List<DateBarItem>();
+
+            for (var i = -numberDisplayDays; i <= numberDisplayDays; i++)
             {
-                var dateItems = new List<DateBarItem>();
-
-                for (var date = dateRange.FromDate; date <= dateRange.ToDate; date = date.AddDays(1))
-                {
-                    dateItems.Add(new DateBarItem { Date = date });
-                }
-
-                CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
+                dateItems.Add(new DateBarItem { Date = DateTime.Today.AddDays(i) });
             }
+
+            CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
         }
 
         public void InitSelectDateCommand(DelegateAsyncCommand<DateBarItem> command)

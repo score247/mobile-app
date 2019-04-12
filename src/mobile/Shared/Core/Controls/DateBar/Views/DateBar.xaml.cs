@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
-    using System;
     using Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Models;
     using LiveScore.Core.Controls.DateBar.ViewModels;
@@ -10,14 +9,7 @@
     {
         public DateBar()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            InitializeComponent();
 
             ViewModel = new DateBarViewModel { HomeIsSelected = true };
             CalendarListView.BindingContext = ViewModel;
@@ -26,26 +18,26 @@
 
         public DateBarViewModel ViewModel { get; set; }
 
-        public static readonly BindableProperty DateRangeProperty
-            = BindableProperty.Create(
-                nameof(DateRange),
-                typeof(DateRange),
-                typeof(DateBar),
-                propertyChanged: OnDateRangeChanged);
+        public static readonly BindableProperty NumberDisplayDaysProperty
+          = BindableProperty.Create(
+              nameof(NumberDisplayDays),
+              typeof(int),
+              typeof(DateBar),
+              propertyChanged: OnNumberDisplayDaysPropertyChanged);
 
-        public DateRange DateRange
+        public int NumberDisplayDays
         {
-            get { return (DateRange)GetValue(DateRangeProperty); }
-            set { SetValue(DateRangeProperty, value); }
+            get { return (int)GetValue(NumberDisplayDaysProperty); }
+            set { SetValue(NumberDisplayDaysProperty, value); }
         }
 
-        private static void OnDateRangeChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnNumberDisplayDaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (DateBar)bindable;
 
             if (control != null)
             {
-                control.ViewModel.RenderCalendarItems((DateRange)newValue);
+                control.ViewModel.RenderCalendarItems((int)newValue);
             }
         }
 
@@ -54,7 +46,7 @@
                nameof(SelectDateCommand),
                typeof(DelegateAsyncCommand<DateBarItem>),
                typeof(DateBar),
-               propertyChanged: OnSelectDateCommandChanged);
+               propertyChanged: OnSelectDateCommandPropertyChanged);
 
         public DelegateAsyncCommand<DateBarItem> SelectDateCommand
         {
@@ -62,7 +54,7 @@
             set { SetValue(SelectDateCommandProperty, value); }
         }
 
-        private static void OnSelectDateCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnSelectDateCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (DateBar)bindable;
 
@@ -78,7 +70,7 @@
                 nameof(SelectHomeCommand),
                 typeof(DelegateAsyncCommand),
                 typeof(DateBar),
-                propertyChanged: OnSelectHomeCommandChanged);
+                propertyChanged: OnSelectHomeCommandPropertyChanged);
 
         public DelegateAsyncCommand SelectHomeCommand
         {
@@ -86,7 +78,7 @@
             set { SetValue(SelectHomeCommandProperty, value); }
         }
 
-        private static void OnSelectHomeCommandChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnSelectHomeCommandPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (DateBar)bindable;
 

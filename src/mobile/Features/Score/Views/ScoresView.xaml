@@ -28,7 +28,7 @@
     </ContentPage.Resources>
     <StackLayout>
         <dateBar:DateBar 
-            DateRange="{Binding DateRange}"
+            NumberDisplayDays="3"
             SelectDateCommand="{Binding SelectDateBarItemCommand}"
             SelectHomeCommand="{Binding SelectDateBarHomeCommand}" />
         

@@ -16,8 +16,7 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private const int NumberDisplayDays = 3;
-        private DateTime currentDate = DateTime.MinValue;
+        private readonly DateRange currentDateRange;
         private IMatchService matchService;
 
         public ScoresViewModel(
@@ -26,12 +25,7 @@
             ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
         {
             InitializeCommands();
-
-            DateRange = new DateRange
-            {
-                FromDate = DateTime.Today.AddDays(-NumberDisplayDays),
-                ToDate = DateTime.Today.AddDays(NumberDisplayDays)
-            };
+            currentDateRange = InitDateRange();
         }
 
         public bool IsLoading { get; set; }
@@ -45,8 +39,6 @@
         public DelegateAsyncCommand MatchRefreshCommand { get; private set; }
 
         public DelegateAsyncCommand<IMatch> MatchSelectCommand { get; private set; }
-
-        public DateRange DateRange { get; set; }
 
         public DelegateAsyncCommand SelectDateBarHomeCommand { get; private set; }
 
@@ -65,7 +57,7 @@
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
 
-                await LoadMatches(currentDate);
+                await LoadMatches(currentDateRange);
             }
         }
 
@@ -85,33 +77,64 @@
 
         private async Task OnRefreshMatchCommandAsync()
         {
-            await LoadMatches(currentDate, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
+            await LoadMatches(currentDateRange, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
             IsRefreshing = false;
         }
 
-        private async Task OnSelectDateBarHomeCommand() => await LoadMatches(currentDate);
-
-        private async Task OnSelectDateBarItemCommandAsync(DateBarItem calendarDate)
+        private async Task OnSelectDateBarHomeCommand()
         {
-            if (currentDate != calendarDate.Date)
+            if (!HomeIsSelected())
             {
-                currentDate = calendarDate.Date;
-                await LoadMatches(currentDate);
+                InitDateRange();
+                await LoadMatches(currentDateRange);
             }
         }
 
-        private async Task LoadMatches(DateTime date, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task OnSelectDateBarItemCommandAsync(DateBarItem calendarDate)
+        {
+            if (CurrentDateIsNotSelectedDate(calendarDate.Date) || HomeIsSelected())
+            {
+                currentDateRange.FromDate = calendarDate.Date;
+                currentDateRange.ToDate = calendarDate.Date;
+                await LoadMatches(currentDateRange);
+            }
+        }
+
+        private async Task LoadMatches(DateRange dateRange, bool showLoadingIndicator = true, bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
 
-            var fromDate = date == DateTime.MinValue ? DateTime.Today.AddDays(-1) : date;
-            var toDate = date == DateTime.MinValue ? DateTime.Today : date;
+            if (dateRange == null)
+            {
+                dateRange = InitDateRange();
+            }
 
-            var matches = await matchService.GetMatches(SettingsService.CurrentSportId, SettingsService.CurrentLanguage, fromDate, toDate, forceFetchNewData);
+            var matches = await matchService.GetMatches(
+                    SettingsService.CurrentSportId,
+                    SettingsService.CurrentLanguage,
+                    dateRange.FromDate,
+                    dateRange.ToDate,
+                    forceFetchNewData);
+
             MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
             IsLoading = false;
         }
+
+        private static DateRange InitDateRange()
+        {
+            return new DateRange
+            {
+                FromDate = DateTime.Today.AddDays(-1),
+                ToDate = DateTime.Today
+            };
+        }
+
+        private bool CurrentDateIsNotSelectedDate(DateTime selectedDate)
+            => currentDateRange.FromDate != selectedDate && currentDateRange.ToDate != selectedDate;
+
+        private bool HomeIsSelected()
+            => currentDateRange.FromDate != currentDateRange.ToDate;
     }
 }
