@@ -111,7 +111,7 @@
             var toDate = date ?? DateTime.Today;
 
             var matches = await matchService.GetMatches(SettingsService.CurrentSportId, SettingsService.CurrentLanguage, fromDate, toDate, forceFetchNewData);
-            var GroupMatches = new ObservableCollection<IGrouping<dynamic, IMatch>>(
+            MatchGroups = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matches.GroupBy(m => new { m.League.Name, m.EventDate.Day, m.EventDate.Month, m.EventDate.Year }));
 
             IsLoading = false;
