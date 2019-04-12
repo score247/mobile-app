@@ -18,7 +18,7 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private readonly DateRange currentDateRange;
+        private DateRange currentDateRange;
         private IMatchService matchService;
 
         public ScoresViewModel(
@@ -84,7 +84,7 @@
 
         private async void OnSelectDateBarHome()
         {
-            InitDateRange();
+            currentDateRange = InitDateRange();
             await LoadMatches(currentDateRange);
         }
 
