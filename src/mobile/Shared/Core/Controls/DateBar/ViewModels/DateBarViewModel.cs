@@ -3,20 +3,32 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using LiveScore.Common.Extensions;
+    using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
+    using Prism.Commands;
+    using Prism.Events;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
     public class DateBarViewModel
     {
-        public ObservableCollection<DateBarItem> CalendarItems { get; set; }
+        private DateBarItem currentDateBarItem;
 
-        public DelegateAsyncCommand<DateBarItem> SelectDateCommand { get; set; }
+        public DateBarViewModel()
+        {
+            SelectHomeCommand = new DelegateCommand(OnSelectHome);
+            SelectDateCommand = new DelegateCommand<DateBarItem>(OnSelectDate);
+        }
+
+        public IEventAggregator EventAggregator { get; set; }
 
         public bool HomeIsSelected { get; set; }
 
-        public DelegateAsyncCommand SelectHomeCommand { get; set; }
+        public ObservableCollection<DateBarItem> CalendarItems { get; private set; }
+
+        public DelegateCommand<DateBarItem> SelectDateCommand { get; }
+
+        public DelegateCommand SelectHomeCommand { get; }
 
         public void RenderCalendarItems(int numberDisplayDays)
         {
@@ -30,24 +42,25 @@
             CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
         }
 
-        public void InitSelectDateCommand(DelegateAsyncCommand<DateBarItem> command)
+        private void OnSelectDate(DateBarItem selectedItem)
         {
-            SelectDateCommand = new DelegateAsyncCommand<DateBarItem>(async (selectedDate) =>
+            if (currentDateBarItem != selectedItem)
             {
+                currentDateBarItem = selectedItem;
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(selectedItem.Date);
                 HomeIsSelected = false;
-                ReloadCalendarItems(selectedDate);
-                await command?.ExecuteAsync(selectedDate);
-            });
+                ReloadCalendarItems(selectedItem);
+            }
         }
 
-        public void InitSelectHomeCommand(DelegateAsyncCommand command)
+        private void OnSelectHome()
         {
-            SelectHomeCommand = new DelegateAsyncCommand(async () =>
+            if (!HomeIsSelected)
             {
+                EventAggregator.GetEvent<DateBarHomeSelectedEvent>().Publish();
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                await command?.ExecuteAsync();
-            });
+            }
         }
 
         private void ReloadCalendarItems(DateBarItem selectedDate = null)

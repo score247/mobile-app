@@ -9,9 +9,11 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
+    using Prism.Events;
     using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
@@ -22,10 +24,15 @@
         public ScoresViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+            ISettingsService settingsService,
+            IEventAggregator eventAggregator) : base(navigationService, globalFactory, settingsService)
         {
             InitializeCommands();
             currentDateRange = InitDateRange();
+            EventAggregator = eventAggregator;
+
+            EventAggregator.GetEvent<DateBarHomeSelectedEvent>().Subscribe(OnSelectDateBarHome);
+            EventAggregator.GetEvent<DateBarItemSelectedEvent>().Subscribe(OnSelectDateBarItem);
         }
 
         public bool IsLoading { get; set; }
@@ -39,10 +46,6 @@
         public DelegateAsyncCommand MatchRefreshCommand { get; private set; }
 
         public DelegateAsyncCommand<IMatch> MatchSelectCommand { get; private set; }
-
-        public DelegateAsyncCommand SelectDateBarHomeCommand { get; private set; }
-
-        public DelegateAsyncCommand<DateBarItem> SelectDateBarItemCommand { get; private set; }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -65,8 +68,6 @@
         {
             MatchSelectCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
             MatchRefreshCommand = new DelegateAsyncCommand(OnRefreshMatchCommandAsync);
-            SelectDateBarItemCommand = new DelegateAsyncCommand<DateBarItem>(OnSelectDateBarItemCommandAsync);
-            SelectDateBarHomeCommand = new DelegateAsyncCommand(OnSelectDateBarHomeCommand);
         }
 
         private async Task OnSelectMatchCommand(IMatch match)
@@ -81,23 +82,17 @@
             IsRefreshing = false;
         }
 
-        private async Task OnSelectDateBarHomeCommand()
+        private async void OnSelectDateBarHome()
         {
-            if (!HomeIsSelected())
-            {
-                InitDateRange();
-                await LoadMatches(currentDateRange);
-            }
+            InitDateRange();
+            await LoadMatches(currentDateRange);
         }
 
-        private async Task OnSelectDateBarItemCommandAsync(DateBarItem calendarDate)
+        private async void OnSelectDateBarItem(DateTime selectedDate)
         {
-            if (CurrentDateIsNotSelectedDate(calendarDate.Date) || HomeIsSelected())
-            {
-                currentDateRange.FromDate = calendarDate.Date;
-                currentDateRange.ToDate = calendarDate.Date;
-                await LoadMatches(currentDateRange);
-            }
+            currentDateRange.FromDate = selectedDate;
+            currentDateRange.ToDate = selectedDate;
+            await LoadMatches(currentDateRange);
         }
 
         private async Task LoadMatches(DateRange dateRangeValue, bool showLoadingIndicator = true, bool forceFetchNewData = false)
@@ -123,11 +118,5 @@
                 FromDate = DateTime.Today.AddDays(-1),
                 ToDate = DateTime.Today
             };
-
-        private bool CurrentDateIsNotSelectedDate(DateTime selectedDate)
-            => currentDateRange.FromDate != selectedDate && currentDateRange.ToDate != selectedDate;
-
-        private bool HomeIsSelected()
-            => currentDateRange.FromDate != currentDateRange.ToDate;
     }
 }

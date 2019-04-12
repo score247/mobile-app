@@ -3,6 +3,7 @@
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using Prism.AppModel;
+    using Prism.Events;
     using Prism.Navigation;
     using PropertyChanged;
 
@@ -10,9 +11,9 @@
     public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
         public ViewModelBase(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService)
+           INavigationService navigationService,
+           IGlobalFactoryProvider globalFactory,
+           ISettingsService settingsService)
         {
             NavigationService = navigationService;
             GlobalFactoryProvider = globalFactory;
@@ -20,6 +21,8 @@
         }
 
         public string Title { get; set; }
+
+        public IEventAggregator EventAggregator { get; protected set; }
 
         public INavigationService NavigationService { get; }
 

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LiveScore.Score.Views.ScoresView"
-             x:Name="self"
+             x:Name="this"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -26,9 +26,8 @@
     </ContentPage.Resources>
     <StackLayout>
         <dateBar:DateBar 
-            NumberDisplayDays="3"
-            SelectDateCommand="{Binding SelectDateBarItemCommand}"
-            SelectHomeCommand="{Binding SelectDateBarHomeCommand}" />
+            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference this}"
+            NumberDisplayDays="3" />
         
         <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoading}"
