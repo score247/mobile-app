@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LiveScore.Score.Views.ScoresView"
-             x:Name="this"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
-             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Score.Views.ScoresView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    x:Name="this"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
+        <ToolbarItem
+            Name="Search"
+            Icon="images/common/search.png"
+            Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-             <ResourceDictionary.MergedDictionaries>
+            <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
             <coreConverters:MatchTemplateSelector x:Key="matchTemplateSelector" />
@@ -25,36 +28,35 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <dateBar:DateBar 
-            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference this}"
-            NumberDisplayDays="3" />
-        
-        <ActivityIndicator x:Name="activity"
-                           IsRunning="{Binding IsLoading}"
-                           IsVisible="{Binding IsLoading}"
-                           IsEnabled="{Binding IsLoading}"
-                           Style="{StaticResource CenterActivityIndicator}" />
+        <dateBar:DateBar mvvm:ViewModelLocator.AutowirePartialView="{x:Reference this}" NumberDisplayDays="3" />
+
+        <ActivityIndicator
+            x:Name="activity"
+            IsEnabled="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            Style="{StaticResource CenterActivityIndicator}" />
         <ListView
-                IsVisible="{Binding IsNotLoading}"
-                ItemsSource="{Binding MatchGroups}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                IsPullToRefreshEnabled="true"
-                RefreshCommand="{Binding MatchRefreshCommand}"
-                IsRefreshing="{Binding IsRefreshing}"
-                CachingStrategy ="RecycleElement"
-                IsGroupingEnabled="True"
-                GroupDisplayBinding="{Binding Key}"
-                SeparatorColor="{StaticResource LineColor}"
-                Style="{StaticResource ListViewHasBackground}"
-                GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
-                ItemTemplate="{StaticResource matchTemplateSelector}"
-                AutomationProperties.IsInAccessibleTree="False">
+            AutomationProperties.IsInAccessibleTree="False"
+            CachingStrategy="RecycleElement"
+            GroupDisplayBinding="{Binding Key}"
+            GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
+            HasUnevenRows="true"
+            IsGroupingEnabled="True"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsRefreshing}"
+            IsVisible="{Binding IsNotLoading}"
+            ItemTemplate="{StaticResource matchTemplateSelector}"
+            ItemsSource="{Binding MatchData}"
+            RefreshCommand="{Binding RefreshCommand}"
+            SeparatorColor="{StaticResource LineColor}"
+            Style="{StaticResource ListViewHasBackground}"
+            VerticalOptions="FillAndExpand">
             <ListView.Behaviors>
-                <b:EventToCommandBehavior 
-                EventName="ItemTapped" 
-                Command="{Binding MatchSelectCommand}" 
-                EventArgsParameterPath="Item" />
+                <b:EventToCommandBehavior
+                    Command="{Binding SelectMatchCommand}"
+                    EventArgsParameterPath="Item"
+                    EventName="ItemTapped" />
             </ListView.Behaviors>
         </ListView>
     </StackLayout>

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
@@ -29,6 +30,11 @@
         }
 
         public Task<IList<IMatch>> GetMatches(int sportId, string languge, DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }

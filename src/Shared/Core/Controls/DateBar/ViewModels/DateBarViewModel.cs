@@ -49,7 +49,7 @@
                 currentDateBarItem = selectedItem;
                 HomeIsSelected = false;
                 ReloadCalendarItems(selectedItem);
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(selectedItem.Date);
+                EventAggregator.GetEvent<DateSelectedEvent>().Publish(selectedItem.Date);
             }
         }
 
@@ -60,7 +60,7 @@
                 currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                EventAggregator.GetEvent<DateBarHomeSelectedEvent>().Publish();
+                EventAggregator.GetEvent<HomeSelectedEvent>().Publish();
             }
         }
 

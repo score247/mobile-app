@@ -38,19 +38,19 @@
             this.mapper = mapper;
             this.apiPolicy = apiPolicy;
 
-        }       
+        }
 
-        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
+        public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
         {
             throw new NotImplementedException();
 
         }
 
         public async Task<IList<IMatch>> GetMatches(
-            int sportId, 
-            string language, 
-            DateTime fromDate, 
-            DateTime toDate, 
+            int sportId,
+            string language,
+            DateTime fromDate,
+            DateTime toDate,
             bool forceFetchNewData = false)
         {
             var matches = new List<IMatch>();
@@ -84,7 +84,7 @@
         }
 
 
-        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language , string fromDateText, string toDateText)
+        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDateText, string toDateText)
             => await apiPolicy.RetryAndTimeout
                 (
                     () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText)
@@ -92,11 +92,43 @@
 
 
         public Task<IList<IMatch>> GetMatchesByLeague(
-            string leagueId, 
+            string leagueId,
             string group)
 
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
+        {
+            var matches = new List<IMatch>();
+            var cacheExpiration = dateRange.FromDate < DateTime.Now
+                ? DateTime.Now.AddMinutes(OldMatchExpiration)
+                : DateTime.Now.AddMinutes(TodayMatchExpiration);
+            var fromDateText = dateRange.FromDate.ToApiFormat();
+            var toDateText = dateRange.ToDate.ToApiFormat();
+
+            try
+            {
+                // TODO Refactor DTO later
+                var dtoMatches = await cacheService.GetAndFetchLatestValue(
+                        $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
+                        () => GetMatches(sportId, language, fromDateText, toDateText),
+                        forceFetchNewData,
+                        cacheExpiration);
+
+                foreach (var dtoMatch in dtoMatches)
+                {
+                    var match = mapper.Map<MatchDTO, Match>(dtoMatch);
+                    matches.Add(match);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+
+            return matches;
         }
     }
 }
