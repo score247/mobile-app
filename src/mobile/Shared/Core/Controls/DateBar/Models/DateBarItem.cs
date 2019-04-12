@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Models
+﻿namespace LiveScore.Core.Controls.DateBar.Models
 {
     using System;
 
-    public class QuickAccessCalendarDate
+    public class DateBarItem
     {
         public DateTime Date { get; set; }
 

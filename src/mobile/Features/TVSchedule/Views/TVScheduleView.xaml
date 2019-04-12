@@ -22,76 +22,76 @@
     </ContentPage.Resources>
     <StackLayout>
       <!--  <FlexLayout Style="{StaticResource QuickAccessContainer}">
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="24"
-                        Style="{StaticResource QuickAccessCalendarDate}"/>
+                        Style="{StaticResource DateBarDate}"/>
                     <Label Text="THU"
-                        Style="{StaticResource QuickAccessCalendarDay}"/>
+                        Style="{StaticResource DateBarDay}"/>
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="24"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="THU"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="25"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="FRI"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="26"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="SAT"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="27"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="SUN"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="28"
-                        Style="{StaticResource QuickAccessCalendarTodayDate}" />
+                        Style="{StaticResource DateBarTodayDate}" />
                     <Label Text="MON"
-                        Style="{StaticResource QuickAccessCalendarTodayDay}" />
+                        Style="{StaticResource DateBarTodayDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="29"
-                        Style="{StaticResource QuickAccessCalendarActiveDate}" />
+                        Style="{StaticResource DateBarActiveDate}" />
                     <Label Text="TUE"
-                        Style="{StaticResource QuickAccessCalendarActiveDay}" />
+                        Style="{StaticResource DateBarActiveDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="30"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="WEB"
-                        Style="{StaticResource QuickAccessCalendarDay}" />
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
-            <Frame Style="{StaticResource QuickAccessCalendarBox}">
+            <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="31"
-                        Style="{StaticResource QuickAccessCalendarDate}" />
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="THU"
-                        Style="{StaticResource QuickAccessCalendarDay}"/>
+                        Style="{StaticResource DateBarDay}"/>
                 </StackLayout>
             </Frame>
         </FlexLayout>

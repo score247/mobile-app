@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Converters
+﻿namespace LiveScore.Core.Controls.DateBar.Converters
 {
     using System;
     using System.Globalization;
-    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
+    using LiveScore.Core.Controls.DateBar.Models;
     using Xamarin.Forms;
 
-    public class CalendarItemTextColorConverter : IValueConverter
+    public class ItemTextColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -14,7 +14,7 @@
                 return Color.FromHex("#939393");
             }
 
-            var calendarDate = value as QuickAccessCalendarDate;
+            var calendarDate = value as DateBarItem;
 
             if (calendarDate.IsSelected)
             {
@@ -34,7 +34,7 @@
             return value;
         }
 
-        private static bool IsToday(QuickAccessCalendarDate calendarDate)
+        private static bool IsToday(DateBarItem calendarDate)
         {
             return calendarDate.Date.Day == DateTime.Today.Day && calendarDate.Date.Month == DateTime.Today.Month && calendarDate.Date.Year == DateTime.Today.Year;
         }

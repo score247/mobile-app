@@ -1,27 +1,36 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Views
+﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
+    using System;
     using Common.Extensions;
-    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
-    using LiveScore.Score.Controls.QuickAccessCalendar.ViewModels;
+    using LiveScore.Core.Controls.DateBar.Models;
+    using LiveScore.Core.Controls.DateBar.ViewModels;
     using Xamarin.Forms;
 
-    public partial class QuickAccessCalendar : ContentView
+    public partial class DateBar : ContentView
     {
-        public QuickAccessCalendar()
+        public DateBar()
         {
-            InitializeComponent();
-            ViewModel = new QuickAccessCalendarViewModel { HomeIsSelected = true };
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            ViewModel = new DateBarViewModel { HomeIsSelected = true };
             CalendarListView.BindingContext = ViewModel;
             HomeButton.BindingContext = ViewModel;
         }
 
-        public QuickAccessCalendarViewModel ViewModel { get; set; }
+        public DateBarViewModel ViewModel { get; set; }
 
         public static readonly BindableProperty DateRangeProperty
             = BindableProperty.Create(
                 nameof(DateRange),
                 typeof(DateRange),
-                typeof(QuickAccessCalendar),
+                typeof(DateBar),
                 propertyChanged: OnDateRangeChanged);
 
         public DateRange DateRange
@@ -32,7 +41,7 @@
 
         private static void OnDateRangeChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (QuickAccessCalendar)bindable;
+            var control = (DateBar)bindable;
 
             if (control != null)
             {
@@ -43,23 +52,23 @@
         public static readonly BindableProperty SelectDateCommandProperty
            = BindableProperty.Create(
                nameof(SelectDateCommand),
-               typeof(DelegateAsyncCommand<QuickAccessCalendarDate>),
-               typeof(QuickAccessCalendar),
+               typeof(DelegateAsyncCommand<DateBarItem>),
+               typeof(DateBar),
                propertyChanged: OnSelectDateCommandChanged);
 
-        public DelegateAsyncCommand<QuickAccessCalendarDate> SelectDateCommand
+        public DelegateAsyncCommand<DateBarItem> SelectDateCommand
         {
-            get { return (DelegateAsyncCommand<QuickAccessCalendarDate>)GetValue(SelectDateCommandProperty); }
+            get { return (DelegateAsyncCommand<DateBarItem>)GetValue(SelectDateCommandProperty); }
             set { SetValue(SelectDateCommandProperty, value); }
         }
 
         private static void OnSelectDateCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (QuickAccessCalendar)bindable;
+            var control = (DateBar)bindable;
 
             if (control != null)
             {
-                var command = (DelegateAsyncCommand<QuickAccessCalendarDate>)newValue;
+                var command = (DelegateAsyncCommand<DateBarItem>)newValue;
                 control.ViewModel.InitSelectDateCommand(command);
             }
         }
@@ -68,7 +77,7 @@
             = BindableProperty.Create(
                 nameof(SelectHomeCommand),
                 typeof(DelegateAsyncCommand),
-                typeof(QuickAccessCalendar),
+                typeof(DateBar),
                 propertyChanged: OnSelectHomeCommandChanged);
 
         public DelegateAsyncCommand SelectHomeCommand
@@ -79,7 +88,7 @@
 
         private static void OnSelectHomeCommandChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (QuickAccessCalendar)bindable;
+            var control = (DateBar)bindable;
 
             if (control != null)
             {

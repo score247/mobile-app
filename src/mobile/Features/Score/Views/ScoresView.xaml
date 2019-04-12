@@ -11,7 +11,7 @@
              xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:quickAccessCalendar="clr-namespace:LiveScore.Score.Controls.QuickAccessCalendar.Views"
+             xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="Search" Icon="images/common/search.png" Priority="1" />
@@ -27,10 +27,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <quickAccessCalendar:QuickAccessCalendar 
-            DateRange="{Binding QuickAccessCalendarDateRange}"
-            SelectDateCommand="{Binding QuickAccessCalendarSelectDateCommand}"
-            SelectHomeCommand="{Binding QuickAccessCalendarSelectHomeCommand}" />
+        <dateBar:DateBar 
+            DateRange="{Binding DateRange}"
+            SelectDateCommand="{Binding SelectDateBarItemCommand}"
+            SelectHomeCommand="{Binding SelectDateBarHomeCommand}" />
         
         <ActivityIndicator x:Name="activity"
                            IsRunning="{Binding IsLoading}"

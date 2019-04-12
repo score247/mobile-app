@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Converters
+﻿namespace LiveScore.Core.Controls.DateBar.Converters
 {
     using System;
     using System.Globalization;

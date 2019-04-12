@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Converters
+﻿namespace LiveScore.Core.Controls.DateBar.Converters
 {
     using System;
     using System.Globalization;
     using Xamarin.Forms;
 
-    public class HomeLabelTextColorConverter : IValueConverter
+    public class HomeTextColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

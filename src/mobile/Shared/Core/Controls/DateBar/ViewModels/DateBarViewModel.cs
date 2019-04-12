@@ -1,17 +1,17 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.ViewModels
+﻿namespace LiveScore.Core.Controls.DateBar.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using LiveScore.Common.Extensions;
-    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
+    using LiveScore.Core.Controls.DateBar.Models;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class QuickAccessCalendarViewModel
+    public class DateBarViewModel
     {
-        public ObservableCollection<QuickAccessCalendarDate> CalendarItems { get; set; }
+        public ObservableCollection<DateBarItem> CalendarItems { get; set; }
 
-        public DelegateAsyncCommand<QuickAccessCalendarDate> SelectDateCommand { get; set; }
+        public DelegateAsyncCommand<DateBarItem> SelectDateCommand { get; set; }
 
         public bool HomeIsSelected { get; set; }
 
@@ -21,20 +21,20 @@
         {
             if (dateRange != null)
             {
-                var dateItems = new List<QuickAccessCalendarDate>();
+                var dateItems = new List<DateBarItem>();
 
                 for (var date = dateRange.FromDate; date <= dateRange.ToDate; date = date.AddDays(1))
                 {
-                    dateItems.Add(new QuickAccessCalendarDate { Date = date });
+                    dateItems.Add(new DateBarItem { Date = date });
                 }
 
-                CalendarItems = new ObservableCollection<QuickAccessCalendarDate>(dateItems);
+                CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
             }
         }
 
-        public void InitSelectDateCommand(DelegateAsyncCommand<QuickAccessCalendarDate> command)
+        public void InitSelectDateCommand(DelegateAsyncCommand<DateBarItem> command)
         {
-            SelectDateCommand = new DelegateAsyncCommand<QuickAccessCalendarDate>(async (selectedDate) =>
+            SelectDateCommand = new DelegateAsyncCommand<DateBarItem>(async (selectedDate) =>
             {
                 HomeIsSelected = false;
                 ReloadCalendarItems(selectedDate);
@@ -52,7 +52,7 @@
             });
         }
 
-        private void ReloadCalendarItems(QuickAccessCalendarDate selectedDate = null)
+        private void ReloadCalendarItems(DateBarItem selectedDate = null)
         {
             var calendarItems = CalendarItems;
 
@@ -64,7 +64,7 @@
                         && selectedDate.Date.Year == item.Date.Year;
             }
 
-            CalendarItems = new ObservableCollection<QuickAccessCalendarDate>(calendarItems);
+            CalendarItems = new ObservableCollection<DateBarItem>(calendarItems);
         }
     }
 }

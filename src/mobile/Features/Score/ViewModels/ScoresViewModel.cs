@@ -9,8 +9,8 @@
     using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Controls.DateBar.Models;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Score.Controls.QuickAccessCalendar.Models;
     using LiveScore.Score.Views;
     using Prism.Navigation;
 
@@ -48,9 +48,9 @@
 
         public DateRange DateRange { get; set; }
 
-        public DelegateAsyncCommand QuickAccessCalendarSelectHomeCommand { get; private set; }
+        public DelegateAsyncCommand SelectDateBarHomeCommand { get; private set; }
 
-        public DelegateAsyncCommand<QuickAccessCalendarDate> QuickAccessCalendarSelectDateCommand { get; private set; }
+        public DelegateAsyncCommand<DateBarItem> SelectDateBarItemCommand { get; private set; }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
@@ -73,8 +73,8 @@
         {
             MatchSelectCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
             MatchRefreshCommand = new DelegateAsyncCommand(OnRefreshMatchCommandAsync);
-            QuickAccessCalendarSelectDateCommand = new DelegateAsyncCommand<QuickAccessCalendarDate>(OnSelectDateCommandAsync);
-            QuickAccessCalendarSelectHomeCommand = new DelegateAsyncCommand(OnSelectHomeCommand);
+            SelectDateBarItemCommand = new DelegateAsyncCommand<DateBarItem>(OnSelectDateBarItemCommandAsync);
+            SelectDateBarHomeCommand = new DelegateAsyncCommand(OnSelectDateBarHomeCommand);
         }
 
         private async Task OnSelectMatchCommand(IMatch match)
@@ -89,9 +89,9 @@
             IsRefreshing = false;
         }
 
-        private async Task OnSelectHomeCommand() => await LoadMatches(currentDate);
+        private async Task OnSelectDateBarHomeCommand() => await LoadMatches(currentDate);
 
-        private async Task OnSelectDateCommandAsync(QuickAccessCalendarDate calendarDate)
+        private async Task OnSelectDateBarItemCommandAsync(DateBarItem calendarDate)
         {
             if (currentDate != calendarDate.Date)
             {

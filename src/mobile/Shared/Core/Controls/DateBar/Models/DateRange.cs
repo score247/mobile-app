@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Score.Controls.QuickAccessCalendar.Models
+﻿namespace LiveScore.Core.Controls.DateBar.Models
 {
     using System;
 

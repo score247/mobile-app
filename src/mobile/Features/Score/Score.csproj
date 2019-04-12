@@ -110,14 +110,6 @@
         </Compile>
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Controls\" />
-        <Folder Include="Controls\QuickAccessCalendar\" />
-        <Folder Include="Controls\QuickAccessCalendar\Converters\" />
-        <Folder Include="Controls\QuickAccessCalendar\Models\" />
-        <Folder Include="Controls\QuickAccessCalendar\ViewModels\" />
-        <Folder Include="Controls\QuickAccessCalendar\Views\" />
-    </ItemGroup>
-    <ItemGroup>
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
       <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
       <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />

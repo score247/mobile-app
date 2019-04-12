@@ -70,8 +70,8 @@
             <x:Double x:Key="SportNameFontSize">13</x:Double>
             <x:Double x:Key="TitlePageFontSize">9</x:Double>
             
-            <x:Double x:Key="QuickAccessCalendarDateFontSize">18</x:Double>
-            <x:Double x:Key="QuickAccessCalendarDayFontSize">6</x:Double>
+            <x:Double x:Key="DateBarDateFontSize">18</x:Double>
+            <x:Double x:Key="DateBarDayFontSize">6</x:Double>
 
             <!-- Define Height-size -->
             <x:Double x:Key="TabsHeight">30</x:Double>
