@@ -67,8 +67,8 @@
             <x:Double x:Key="MediumTextFontSize">12</x:Double>
             <x:Double x:Key="SmallTextFontSize">10</x:Double>
             
-            <x:Double x:Key="SportNameFontSize">9</x:Double>
-            <x:Double x:Key="TitlePageFontSize">11</x:Double>
+            <x:Double x:Key="SportNameFontSize">13</x:Double>
+            <x:Double x:Key="TitlePageFontSize">9</x:Double>
             
             <x:Double x:Key="QuickAccessCalendarDateFontSize">18</x:Double>
             <x:Double x:Key="QuickAccessCalendarDayFontSize">6</x:Double>
@@ -163,6 +163,11 @@
             </Style>
             <Style x:Key="FlexLayoutAlignRight" TargetType="FlexLayout">
                 <Setter Property="JustifyContent" Value="End" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
+            <Style x:Key="FlexLayoutVerticalCenter" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Column" />
+                <Setter Property="JustifyContent" Value="Center" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
             

@@ -4,15 +4,14 @@
              x:Class="LiveScore.Views.NavigationTitleView"
              BackgroundColor="#0F111C">
     <ContentView.Content>
-        <StackLayout>
-            <FlexLayout x:Name="SportName" JustifyContent="Center" AlignItems="Center">
-                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" />
-                <Label Style="{StaticResource ArrowDownIcon}"  />
-                <FlexLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
-                </FlexLayout.GestureRecognizers>
-            </FlexLayout>
+        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
             <Label x:Name="titleLabel" Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
-        </StackLayout>
+            <StackLayout x:Name="SportName">
+                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" />
+                <!--<StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
+                </StackLayout.GestureRecognizers>-->
+            </StackLayout>            
+        </FlexLayout>
     </ContentView.Content>
 </ContentView>
