@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LiveScore.Views.NavigationTitleView"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Views.NavigationTitleView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Content>
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
-            <Label x:Name="titleLabel" Style="{StaticResource PageTitle}" Text="{Binding Title}" AutomationId="NavigationTitle"  />
+            <Label
+                x:Name="titleLabel"
+                AutomationId="NavigationTitle"
+                Style="{StaticResource PageTitle}"
+                Text="{Binding Title}" />
             <StackLayout x:Name="SportName">
                 <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" />
-                <!--<StackLayout.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
-                </StackLayout.GestureRecognizers>-->
-            </StackLayout>            
+            </StackLayout>
         </FlexLayout>
     </ContentView.Content>
 </ContentView>

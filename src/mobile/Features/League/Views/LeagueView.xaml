@@ -1,34 +1,44 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="LiveScore.League.Views.LeagueView"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.League.Views.LeagueView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Search"
+            Icon="images/common/icon_transparent.png"
+            Priority="1" />
+    </ContentPage.ToolbarItems>
+
     <StackLayout>
-        <ActivityIndicator x:Name="activity"
-                           IsRunning="{Binding IsLoading}"
-                           IsVisible="{Binding IsLoading}"
-                           IsEnabled="{Binding IsLoading}"
-                           Style="{StaticResource CenterActivityIndicator}"
-                           AutomationId="LeagueIndicator"/>
-        <ListView x:Name="ItemsListView"
-                SeparatorVisibility="None"
-                IsVisible="{Binding HasData}"
-                ItemsSource="{Binding Leagues}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsLoading}"
-                Style="{StaticResource ListViewHasBackground}"
-                CachingStrategy="RecycleElement">
+        <ActivityIndicator
+            x:Name="activity"
+            AutomationId="LeagueIndicator"
+            IsEnabled="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            Style="{StaticResource CenterActivityIndicator}" />
+        <ListView
+            x:Name="ItemsListView"
+            CachingStrategy="RecycleElement"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsLoading}"
+            IsVisible="{Binding HasData}"
+            ItemsSource="{Binding Leagues}"
+            SeparatorVisibility="None"
+            Style="{StaticResource ListViewHasBackground}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
                             <FlexLayout Style="{StaticResource LeagueGroup}">
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand">
+                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                                     <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                                    <Label Text="{Binding Name}" Style="{StaticResource LeagueName}" />
+                                    <Label Style="{StaticResource LeagueName}" Text="{Binding Name}" />
                                 </StackLayout>
                                 <Label Style="{StaticResource LeagueArrowRightIcon}" />
                             </FlexLayout>
@@ -40,8 +50,11 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}"  EventArgsParameterPath="Item"/>
-                <b:EventToCommandBehavior EventName="Refreshing" Command="{Binding RefreshCommand}" />
+                <b:EventToCommandBehavior
+                    Command="{Binding ItemTappedCommand}"
+                    EventArgsParameterPath="Item"
+                    EventName="ItemTapped" />
+                <b:EventToCommandBehavior Command="{Binding RefreshCommand}" EventName="Refreshing" />
             </ListView.Behaviors>
         </ListView>
     </StackLayout>
