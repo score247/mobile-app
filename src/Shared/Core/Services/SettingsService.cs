@@ -36,7 +36,7 @@
 
         public string CurrentLanguage
         {
-            get => GetValueOrDefault(nameof(CurrentLanguage), Language.En.ToString());
+            get => GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
             set => AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
 
