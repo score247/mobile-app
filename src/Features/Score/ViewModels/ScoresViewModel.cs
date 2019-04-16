@@ -33,7 +33,9 @@
             SetupCommands();
         }
 
-        public bool IsNotLoading { get; set; }
+        public bool IsLoading { get; private set; }
+
+        public bool IsNotLoading => !IsLoading;
 
         public bool IsRefreshing { get; set; }
 
@@ -74,7 +76,7 @@
         private void SetupCommands()
         {
             SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
-            RefreshCommand = new DelegateAsyncCommand(async() => await LoadData(selectedDateRange));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
         private async Task NavigateToMatchDetailView(IMatch match)
@@ -89,7 +91,7 @@
             bool forceFetchNewData = false,
             bool isRefreshing = false)
         {
-            IsNotLoading = !showLoadingIndicator;
+            IsLoading = showLoadingIndicator;
 
             var matchData = await matchService.GetMatches(
                     SettingsService.CurrentSportId,
@@ -102,7 +104,7 @@
                       => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
 
             selectedDateRange = dateRange;
-            IsNotLoading = true;
+            IsLoading = false;
             IsRefreshing = isRefreshing;
         }
 
