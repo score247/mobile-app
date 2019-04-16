@@ -43,7 +43,6 @@
         public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
         {
             throw new NotImplementedException();
-
         }
 
         public async Task<IList<IMatch>> GetMatches(

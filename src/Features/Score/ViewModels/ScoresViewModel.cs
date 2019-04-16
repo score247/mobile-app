@@ -65,12 +65,8 @@
         private void SetupDateBarSubscribers()
         {
             EventAggregator
-                .GetEvent<HomeSelectedEvent>()
-                .Subscribe(async () => await LoadDataFromYesterdayUntilNow());
-
-            EventAggregator
-                .GetEvent<DateSelectedEvent>()
-                .Subscribe(async (selectedDate) => await LoadData(new DateRange(selectedDate)));
+                .GetEvent<DateRangeSelectedEvent>()
+                .Subscribe(async (dateRange) => await LoadData(dateRange));
         }
 
         private void SetupCommands()
@@ -107,8 +103,5 @@
             IsLoading = false;
             IsRefreshing = isRefreshing;
         }
-
-        private async Task LoadDataFromYesterdayUntilNow()
-            => await LoadData(DateRange.FromYesterdayUntilNow());
     }
 }

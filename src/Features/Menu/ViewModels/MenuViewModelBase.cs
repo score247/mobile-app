@@ -21,7 +21,6 @@
 
         protected virtual async Task OnDone()
         {
-
             await NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }

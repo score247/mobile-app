@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
     using Prism.Commands;
@@ -49,7 +50,7 @@
                 currentDateBarItem = selectedItem;
                 HomeIsSelected = false;
                 ReloadCalendarItems(selectedItem);
-                EventAggregator.GetEvent<DateSelectedEvent>().Publish(selectedItem.Date);
+                EventAggregator.GetEvent<DateRangeSelectedEvent>().Publish(new DateRange(selectedItem.Date));
             }
         }
 
@@ -60,7 +61,7 @@
                 currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                EventAggregator.GetEvent<HomeSelectedEvent>().Publish();
+                EventAggregator.GetEvent<DateRangeSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
             }
         }
 
