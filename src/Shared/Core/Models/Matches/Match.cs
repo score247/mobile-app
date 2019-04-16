@@ -44,6 +44,6 @@
 
         public ILeague League { get; set; }
 
-        public string DisplayLocalTime => DateTimeOffset.FromUnixTimeMilliseconds(EventDateUnixTime).DateTime.ToLocalTime().ToShortTimeString();
+        public string DisplayLocalTime => DateTimeOffset.FromUnixTimeMilliseconds(EventDateUnixTime).DateTime.ToLocalTime().ToString("HH:mm");
     }
 }

@@ -15,9 +15,10 @@
                     </ResourceDictionary>
                 </StackLayout.Resources>
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="{Binding MatchResult.EventStatus ,Converter={StaticResource matchStatusConverter}}"
+                    <Label IsVisible="{Binding MatchResult.EventStatus.IsClosed}"
+                           Text="{Binding MatchResult.EventStatus ,Converter={StaticResource matchStatusConverter}}"
                            Style="{StaticResource MatchStatus}"/>
-                    <Label IsVisible="{Binding MatchResult.MatchStatus.IsNotStarted}" 
+                    <Label IsVisible="{Binding MatchResult.EventStatus.IsLiveOrNotStarted}" 
                            Text="{Binding DisplayLocalTime}" 
                            Style="{StaticResource MatchStatus}"/>
                     <StackLayout FlexLayout.Grow="1">
