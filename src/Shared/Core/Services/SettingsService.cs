@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using System.Collections.Generic;
     using System.Reactive.Linq;
     using Akavache;
     using LiveScore.Common.Extensions;
@@ -8,10 +7,6 @@
 
     public interface ISettingsService
     {
-        IDictionary<string, string> LanguageMapper { get; }
-
-        IDictionary<string, string> SportNameMapper { get; }
-
         string CurrentSportName { get; set; }
 
         int CurrentSportId { get; set; }
@@ -26,17 +21,7 @@
     public class SettingsService : ISettingsService
     {
         public static string LocalEndPoint => "https://testing2.nexdev.net/v1/api/";
-
-        public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
-        {
-            { "en-US", "en" }
-        };
-
-        public IDictionary<string, string> SportNameMapper => new Dictionary<string, string>
-        {
-            { "Soccer", "soccer" }
-        };
-
+       
         public string CurrentSportName
         {
             get => GetValueOrDefault(nameof(CurrentSportName), SportType.Soccer.GetDescription());
@@ -51,7 +36,7 @@
 
         public string CurrentLanguage
         {
-            get => GetValueOrDefault(nameof(CurrentLanguage), "en-US");
+            get => GetValueOrDefault(nameof(CurrentLanguage), Language.En.ToString());
             set => AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
 
