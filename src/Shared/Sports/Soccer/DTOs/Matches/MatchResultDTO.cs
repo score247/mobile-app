@@ -2,13 +2,20 @@
 {
     using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Matches;
 
     public class MatchResultDTO
     {
-        public MatchStatus Status { get; set; }
+        public MatchStatus MatchStatus { get; set; }
 
-        public IEnumerable<int> HomeScores { get; set; }
+        public MatchStatus EventStatus { get; set; }
 
-        public IEnumerable<int> AwayScores { get; set; }
+        public int HomeScore { get; set; }
+
+        public int AwayScore { get; set; }
+
+        public string WinnerId { get; set; }
+
+        public IEnumerable<MatchPeriod> MatchPeriods { get; set; }
     }
 }

@@ -7,7 +7,7 @@
     using LiveScore.Core.Constants;
 
     public interface ISettingsService
-    {       
+    {
         IDictionary<string, string> LanguageMapper { get; }
 
         IDictionary<string, string> SportNameMapper { get; }
@@ -25,7 +25,7 @@
 
     public class SettingsService : ISettingsService
     {
-        public static string LocalEndPoint => "https://testing2.nexdev.net/Main/api/";
+        public static string LocalEndPoint => "https://testing2.nexdev.net/v1/api/";
 
         public IDictionary<string, string> LanguageMapper => new Dictionary<string, string>
         {

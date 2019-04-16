@@ -5,19 +5,31 @@
 
     public interface IMatchResult
     {
-        MatchStatus Status { get; }
+        MatchStatus MatchStatus { get; }
 
-        IEnumerable<int> HomeScores { get; }
+        MatchStatus EventStatus { get; }
 
-        IEnumerable<int> AwayScores { get; }
+        int HomeScore { get; }
+
+        int AwayScore { get; }
+
+        string WinnerId { get; }
+
+        IEnumerable<MatchPeriod> MatchPeriods { get; }
     }
 
     public class MatchResult : IMatchResult
     {
-        public MatchStatus Status { get; set; }
+        public MatchStatus MatchStatus { get; set; }
 
-        public IEnumerable<int> HomeScores { get; set; }
+        public MatchStatus EventStatus { get; set; }
 
-        public IEnumerable<int> AwayScores { get; set; }
+        public int HomeScore { get; set; }
+
+        public int AwayScore { get; set; }
+
+        public string WinnerId { get; set; }
+
+        public IEnumerable<MatchPeriod> MatchPeriods { get; set; }
     }
 }
