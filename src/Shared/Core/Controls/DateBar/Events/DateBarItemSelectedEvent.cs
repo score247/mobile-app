@@ -3,7 +3,7 @@
     using LiveScore.Common.Extensions;
     using Prism.Events;
 
-    public class DateRangeSelectedEvent : PubSubEvent<DateRange>
+    public class DateBarItemSelectedEvent : PubSubEvent<DateRange>
     {
     }
 }

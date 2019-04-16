@@ -43,14 +43,14 @@
             CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
         }
 
-        private void OnSelectDate(DateBarItem selectedItem)
+        private void OnSelectDate(DateBarItem dateBarItem)
         {
-            if (currentDateBarItem != selectedItem)
+            if (currentDateBarItem != dateBarItem)
             {
-                currentDateBarItem = selectedItem;
+                currentDateBarItem = dateBarItem;
                 HomeIsSelected = false;
-                ReloadCalendarItems(selectedItem);
-                EventAggregator.GetEvent<DateRangeSelectedEvent>().Publish(new DateRange(selectedItem.Date));
+                ReloadCalendarItems(dateBarItem);
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date));
             }
         }
 
@@ -61,20 +61,20 @@
                 currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                EventAggregator.GetEvent<DateRangeSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
             }
         }
 
-        private void ReloadCalendarItems(DateBarItem selectedDate = null)
+        private void ReloadCalendarItems(DateBarItem dateBarItem = null)
         {
             var calendarItems = CalendarItems;
 
             foreach (var item in calendarItems)
             {
-                item.IsSelected = selectedDate != null
-                        && selectedDate.Date.Day == item.Date.Day
-                        && selectedDate.Date.Month == item.Date.Month
-                        && selectedDate.Date.Year == item.Date.Year;
+                item.IsSelected = dateBarItem != null
+                        && dateBarItem.Date.Day == item.Date.Day
+                        && dateBarItem.Date.Month == item.Date.Month
+                        && dateBarItem.Date.Year == item.Date.Year;
             }
 
             CalendarItems = new ObservableCollection<DateBarItem>(calendarItems);

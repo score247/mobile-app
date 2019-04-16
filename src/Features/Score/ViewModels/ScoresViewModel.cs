@@ -65,7 +65,7 @@
         private void SetupDateBarSubscribers()
         {
             EventAggregator
-                .GetEvent<DateRangeSelectedEvent>()
+                .GetEvent<DateBarItemSelectedEvent>()
                 .Subscribe(async (dateRange) => await LoadData(dateRange));
         }
 
