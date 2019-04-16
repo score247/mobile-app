@@ -17,6 +17,8 @@
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                     <Label Text="{Binding MatchResult.EventStatus ,Converter={StaticResource matchStatusConverter}}"
                            Style="{StaticResource MatchStatus}"/>
+                    <Label Text="{Binding Match.EventDateUnixTime}"
+                           Style="{StaticResource MatchStatus}"/>
                     <StackLayout FlexLayout.Grow="1">
                         <Label Text="{Binding Teams[0].Name}"
                                Style="{StaticResource HomeTeam}" />

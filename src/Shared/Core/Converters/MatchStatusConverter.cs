@@ -12,7 +12,7 @@
         {
             var status = (MatchStatus)value;
 
-            return (status == null || status.IsClosed) ? AppResources.FullTime : value.ToString();
+            return (status != null && status.IsClosed) ? AppResources.FullTime : value?.ToString();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

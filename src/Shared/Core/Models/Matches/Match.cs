@@ -22,6 +22,10 @@
         IMatchCondition MatchCondition { get; }
 
         ILeague League { get; }
+
+        string DisplayTime { get; }
+
+        string TestTime { get; }
     }
 
     public class Match : Entity<string, string>, IMatch
@@ -41,5 +45,14 @@
         public bool IsLive { get; set; }
 
         public ILeague League { get; set; }
+
+        public string TestTime { get; set; }
+
+        public string DisplayTime => EventDate.ToShortTimeString();
+
+        public string DisplayLocalTime => DateTimeOffset.FromUnixTimeMilliseconds(EventDateUnixTime).DateTime.ToLocalTime().ToLongTimeString();
+
+        //public static DateTime ToLocalTime(this long value)
+            //=> DateTimeOffset.FromUnixTimeMilliseconds(value).DateTime.ToLocalTime();
     }
 }
