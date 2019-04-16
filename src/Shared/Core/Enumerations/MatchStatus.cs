@@ -113,6 +113,8 @@
         {
         }
 
-        public bool IsClosed => Value == Closed;
+        public bool IsClosed => Value == Closed || Value == Ended;
+
+        public bool IsNotStarted => Value == NotStarted;
     }
 }
