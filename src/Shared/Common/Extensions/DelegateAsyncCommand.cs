@@ -27,7 +27,7 @@
         }
 
         public async Task ExecuteAsync() =>
-            await _commandTask().ConfigureAwait(false);
+            await _commandTask();
 
         protected override bool CanExecute(object parameter) =>
             _canExecute?.Invoke() ?? CanExecuteAgain();

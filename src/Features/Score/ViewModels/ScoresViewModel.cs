@@ -23,11 +23,12 @@
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService,
-            IEventAggregator eventAggregator) : base(navigationService, globalFactory, settingsService)
+            IEventAggregator eventAggregator)
+            : base(navigationService, globalFactory, settingsService)
         {
             EventAggregator = eventAggregator;
 
-            SetupSubscribers();
+            SetupDateBarSubscribers();
 
             SetupCommands();
         }
@@ -55,28 +56,28 @@
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
 
-                await LoadMatchData(selectedDateRange);
+                await LoadDataToday();
             }
         }
 
-        private void SetupSubscribers()
+        private void SetupDateBarSubscribers()
         {
             EventAggregator
                 .GetEvent<HomeSelectedEvent>()
-                .Subscribe(async () => await LoadMatchData(new DateRange()));
+                .Subscribe(async () => await LoadDataFromYesterdayUntilNow());
 
             EventAggregator
                 .GetEvent<DateSelectedEvent>()
-                .Subscribe(async (selectedDate) => await LoadMatchData(new DateRange(selectedDate)));
+                .Subscribe(async (selectedDate) => await LoadData(new DateRange(selectedDate)));
         }
 
         private void SetupCommands()
         {
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(OnSelectMatchCommand);
+            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
             RefreshCommand = new DelegateAsyncCommand(OnRefreshCommand);
         }
 
-        private async Task OnSelectMatchCommand(IMatch match)
+        private async Task NavigateToMatchDetailView(IMatch match)
             => await NavigationService.NavigateAsync(nameof(MatchDetailView), new NavigationParameters
             {
                 { nameof(IMatch), match }
@@ -84,18 +85,21 @@
 
         private async Task OnRefreshCommand()
         {
-            await LoadMatchData(selectedDateRange, showLoadingIndicator: false, forceFetchNewData: true).ConfigureAwait(false);
+            await LoadData(selectedDateRange, showLoadingIndicator: false, forceFetchNewData: true);
             IsRefreshing = false;
         }
 
-        private async Task LoadMatchData(DateRange dateRange, bool showLoadingIndicator = true, bool forceFetchNewData = false)
+        private async Task LoadData(
+            DateRange dateRange,
+            bool showLoadingIndicator = true,
+            bool forceFetchNewData = false)
         {
             IsNotLoading = !showLoadingIndicator;
 
             var matchData = await matchService.GetMatches(
                     SettingsService.CurrentSportId,
                     SettingsService.CurrentLanguage,
-                    dateRange ?? new DateRange(),
+                    dateRange ?? DateRange.Now(),
                     forceFetchNewData);
 
             MatchData = new ObservableCollection<IGrouping<dynamic, IMatch>>(
@@ -106,5 +110,11 @@
 
             IsNotLoading = true;
         }
+
+        private async Task LoadDataFromYesterdayUntilNow(bool showLoadingIndicator = true, bool forceFetchNewData = true)
+            => await LoadData(DateRange.FromYesterdayUntilNow(), showLoadingIndicator, forceFetchNewData);
+
+        private async Task LoadDataToday(bool showLoadingIndicator = true, bool forceFetchNewData = true)
+           => await LoadData(DateRange.Now(), showLoadingIndicator, forceFetchNewData);
     }
 }

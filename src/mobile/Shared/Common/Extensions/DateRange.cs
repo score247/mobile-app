@@ -4,17 +4,14 @@
 
     public class DateRange
     {
-        /// <summary>
-        /// Default date range: From is Yesterday, and To is tomorrow
-        /// </summary>
         public DateRange()
-            : this(DateTime.Today.AddDays(-1), DateTime.Today)
+            : this(DateTime.Today)
         {
         }
 
-        public DateRange(DateTime date)
+        public DateRange(DateTime datetime)
         {
-            FromDate = ToDate = date;
+            FromDate = ToDate = datetime;
         }
 
         public DateRange(DateTime fromDate, DateTime toDate)
@@ -26,5 +23,11 @@
         public DateTime FromDate { get; set; }
 
         public DateTime ToDate { get; set; }
+
+        public static DateRange FromYesterdayUntilNow()
+            => new DateRange(DateTime.Today.AddDays(-1), DateTime.Today);
+
+        public static DateRange Now()
+            => new DateRange(DateTime.Now);
     }
 }
