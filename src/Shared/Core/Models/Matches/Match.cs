@@ -7,13 +7,9 @@
 
     public interface IMatch : IEntity<string, string>
     {
-        DateTime EventDate { get; }
+        DateTime EventDate { get; }    
 
-        long EventDateUnixTime { get; }
-
-        IEnumerable<ITeam> Teams { get; }
-
-        bool IsLive { get; }
+        IEnumerable<ITeam> Teams { get; }      
 
         IMatchResult MatchResult { get; }
 
@@ -28,9 +24,7 @@
 
     public class Match : Entity<string, string>, IMatch
     {
-        public DateTime EventDate { get; set; }
-
-        public long EventDateUnixTime { get; set; }
+        public DateTime EventDate { get; set; }      
 
         public IEnumerable<ITeam> Teams { get; set; }
 
@@ -40,10 +34,8 @@
 
         public IMatchCondition MatchCondition { get; set; }
 
-        public bool IsLive { get; set; }
-
         public ILeague League { get; set; }
 
-        public string DisplayLocalTime => DateTimeOffset.FromUnixTimeMilliseconds(EventDateUnixTime).DateTime.ToLocalTime().ToString("HH:mm");
+        public string DisplayLocalTime => EventDate.ToString("HH:mm");
     }
 }
