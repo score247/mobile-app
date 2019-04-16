@@ -35,7 +35,7 @@
                                Style="{StaticResource Score}"
                                Margin="0,0,20,4" />
                     </StackLayout>
-                    <Label Style="{StaticResource FavoriteIcon}" Margin="0,0,16,0"/>
+                    <Label Style="{StaticResource FavoriteIcon}" Margin="0,0,16,0" AutomationId="MatchFavoriteBtn"/>
                 </FlexLayout>
             </StackLayout>
     </ViewCell>

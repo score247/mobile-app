@@ -17,7 +17,7 @@
             BarBackgroundColor="{StaticResource PrimaryColor}"
             BackgroundColor="{StaticResource PrimaryColor}">
     <TabbedPage.Children>
-        <NavigationPage x:Name="Scores" Title="{langs:Translate Scores}" Icon="images/common/soccer.png">
+        <NavigationPage x:Name="Scores" AutomationProperties.IsInAccessibleTree="False" Title="{langs:Translate Scores}" Icon="images/common/soccer.png">
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
