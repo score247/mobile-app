@@ -18,7 +18,7 @@
     </ContentView.Resources>
     <ContentView.Content>
         <FlexLayout Style="{StaticResource DateBarContainer}">
-            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}" AutomationId="DateBarHome">
+            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}" AutomationId="DateBar_Home">
                 <Label Style="{StaticResource HomeIcon}"
                        TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
                <Frame.GestureRecognizers>
@@ -52,7 +52,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame x:Name="CalendarIcon" Style="{StaticResource DateBarBox}" AutomationId="DateBarCalendar">
+            <Frame x:Name="CalendarIcon" Style="{StaticResource DateBarBox}" AutomationId="DateBar_Calendar">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>
