@@ -10,6 +10,6 @@
         public static string ToShortDayMonth(this DateTime value)
             => value.ToString("dd MMM");
 
-        public static DateTime Yesteray(this DateTime value) => DateTime.Today.AddDays(-1);
+        public static DateTime Yesterday(this DateTime value) => DateTime.Today.AddDays(-1);
     }
 }
