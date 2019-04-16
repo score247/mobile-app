@@ -8,11 +8,11 @@
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
             <Label
                 x:Name="titleLabel"
-                AutomationId="Navigation_Title"
+                AutomationId="NavigationTitleLbl"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
             <StackLayout x:Name="SportName">
-                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="Sport_Name" />
+                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="SportNameLbl" />
             </StackLayout>
         </FlexLayout>
     </ContentView.Content>

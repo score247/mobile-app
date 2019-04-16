@@ -22,8 +22,8 @@
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>                
                 <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
-                <Label Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" Style="{StaticResource MatchDate}" />
-                <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" />
+                <Label Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" Style="{StaticResource MatchDate}" AutomationId="MatchDateLbl" />
+                <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" AutomationId="LeagueDetailBtn" />
             </FlexLayout>
         </StackLayout>
     </ViewCell>
