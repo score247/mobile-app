@@ -22,6 +22,8 @@
         {
             var baseViewModel = (ViewModelBase)BindingContext;
             ViewModel.EventAggregator = baseViewModel.EventAggregator;
+            ViewModel.SettingsService = baseViewModel.SettingsService;
+            ViewModel.RenderCalendarItems();
         }
 
         public DateBarViewModel ViewModel { get; set; }
@@ -45,7 +47,7 @@
 
             if (control != null)
             {
-                control.ViewModel.RenderCalendarItems((int)newValue);
+                control.ViewModel.NumberOfDisplayDays = (int)newValue;
             }
         }
     }

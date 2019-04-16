@@ -6,6 +6,7 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
+    using LiveScore.Core.Services;
     using Prism.Commands;
     using Prism.Events;
     using PropertyChanged;
@@ -23,6 +24,10 @@
 
         public IEventAggregator EventAggregator { get; set; }
 
+        public ISettingsService SettingsService { get; set; }
+
+        public int NumberOfDisplayDays { get; set; }
+
         public bool HomeIsSelected { get; set; }
 
         public ObservableCollection<DateBarItem> CalendarItems { get; private set; }
@@ -31,13 +36,13 @@
 
         public DelegateCommand SelectHomeCommand { get; }
 
-        public void RenderCalendarItems(int numberDisplayDays)
+        public void RenderCalendarItems()
         {
             var dateItems = new List<DateBarItem>();
 
-            for (var i = -numberDisplayDays; i <= numberDisplayDays; i++)
+            for (var i = -NumberOfDisplayDays; i <= NumberOfDisplayDays; i++)
             {
-                dateItems.Add(new DateBarItem { Date = DateTime.Today.AddDays(i) });
+                dateItems.Add(new DateBarItem { Date = DateTime.Today.ByTimeZone(SettingsService.CurrentTimeZone).AddDays(i) });
             }
 
             CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
@@ -50,7 +55,7 @@
                 currentDateBarItem = dateBarItem;
                 HomeIsSelected = false;
                 ReloadCalendarItems(dateBarItem);
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.AddDays(1)));
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndDay()));
             }
         }
 
@@ -61,7 +66,7 @@
                 currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow(SettingsService.CurrentTimeZone));
             }
         }
 

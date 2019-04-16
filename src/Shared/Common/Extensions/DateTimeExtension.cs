@@ -10,6 +10,11 @@
         public static string ToShortDayMonth(this DateTime value)
             => value.ToString("dd MMM");
 
-        public static DateTime Yesterday(this DateTime value) => DateTime.Today.AddDays(-1);
+        public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
+
+        public static DateTime ByTimeZone(this DateTime value, TimeZoneInfo timeZoneInfo)
+            => TimeZoneInfo.ConvertTimeFromUtc(value.ToUniversalTime(), timeZoneInfo ?? TimeZoneInfo.Local);
+
+        public static DateTime EndDay(this DateTime value) => value.AddDays(1).AddMilliseconds(-1);
     }
 }

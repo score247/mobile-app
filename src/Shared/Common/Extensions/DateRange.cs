@@ -24,8 +24,10 @@
 
         public DateTime ToDate { get; set; }
 
-        public static DateRange FromYesterdayUntilNow()
-            => new DateRange(DateTime.Today.AddDays(-1), DateTime.Today);
+        public static DateRange FromYesterdayUntilNow(TimeZoneInfo timeZoneInfo = null)
+        {
+            return new DateRange(DateTime.Today.ByTimeZone(timeZoneInfo).AddDays(-1), DateTime.Today.ByTimeZone(timeZoneInfo));
+        }
 
         public static DateRange Now()
             => new DateRange(DateTime.Now);

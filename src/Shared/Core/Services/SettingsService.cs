@@ -14,7 +14,7 @@
 
         string CurrentLanguage { get; set; }
 
-        TimeZoneInfo TimeZone { get; set; }
+        TimeZoneInfo CurrentTimeZone { get; set; }
 
         T GetValueOrDefault<T>(string key, T defaultValue);
 
@@ -42,7 +42,12 @@
             get => GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
             set => AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
-        public TimeZoneInfo TimeZone { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public TimeZoneInfo CurrentTimeZone
+        {
+            get => GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.FindSystemTimeZoneById("Asia/Bangkok"));
+            set => AddOrUpdateValue(nameof(CurrentLanguage), value);
+        }
 
         public void AddOrUpdateValue<T>(string key, T value)
             => BlobCache.UserAccount.InsertObject(key, value).Wait();

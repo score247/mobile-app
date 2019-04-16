@@ -11,8 +11,12 @@
 
     public class MatchService : IMatchService
     {
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-        public async Task<IList<IMatch>> GetDailyMatches(DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
+        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
         {
             Debug.WriteLine("Call Basketball MatchService");
 
@@ -23,23 +27,6 @@
 
             return matches;
         }
-
-        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<IMatch>> GetMatches(int sportId, string languge, DateTime fromDate, DateTime toDate, bool forceFetchNewData = false)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
-        {
-            throw new NotImplementedException();
-        }
-
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
         {

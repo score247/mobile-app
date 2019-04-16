@@ -53,6 +53,7 @@
 
             if (changeSport || MatchData == null)
             {
+
                 matchService = GlobalFactoryProvider
                    .ServiceFactoryProvider
                    .GetInstance((SportType)SettingsService.CurrentSportId)
