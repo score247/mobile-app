@@ -18,7 +18,7 @@
     </ContentView.Resources>
     <ContentView.Content>
         <FlexLayout Style="{StaticResource DateBarContainer}">
-            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}">
+            <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}" AutomationId="DateBarHome">
                 <Label Style="{StaticResource HomeIcon}"
                        TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
                <Frame.GestureRecognizers>
@@ -28,7 +28,8 @@
             <ListView x:Name="CalendarListView"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource DateBarListView}"
-                      AutomationProperties.IsInAccessibleTree="False">
+                      AutomationProperties.IsInAccessibleTree="False"
+                      AutomationId="DateBar">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" EventArgsParameterPath="Item" />
                 </ListView.Behaviors>
@@ -51,7 +52,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Frame x:Name="CalendarIcon" Style="{StaticResource DateBarBox}">
+            <Frame x:Name="CalendarIcon" Style="{StaticResource DateBarBox}" AutomationId="DateBarCalendar">
                 <Label Style="{StaticResource CalendarIcon}" />
             </Frame>
         </FlexLayout>

@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Score.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -48,7 +49,6 @@
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-
             var changeSport = parameters.GetValue<bool>("changeSport");
 
             if (changeSport || MatchData == null)
