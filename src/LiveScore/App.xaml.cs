@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Reflection;
-using Akavache;
 using LiveScore.Basketball;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -55,8 +53,10 @@ namespace LiveScore
 #endif
 
             InitializeComponent();
-            Akavache.Registrations.Start("LiveScore.Storage");
-            BlobCache.ForcedDateTimeKind = DateTimeKind.Local;
+
+            var cacheService = Container.Resolve<ICacheService>();
+            cacheService.Init();
+
             var logService = Container.Resolve<ILoggingService>();
             logService.Init("https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
@@ -85,7 +85,7 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<ICacheService, CacheService>();
+            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
@@ -116,6 +116,5 @@ namespace LiveScore
             moduleCatalog.AddModule<TVScheduleModule>();
             moduleCatalog.AddModule<MenuModule>();
         }
-
     }
 }
