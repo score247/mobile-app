@@ -56,7 +56,7 @@
                    .GetInstance((SportType)SettingsService.CurrentSportId)
                    .CreateMatchService();
 
-                await LoadDataToday();
+                await LoadData(selectedDateRange);
             }
         }
 
@@ -74,7 +74,7 @@
         private void SetupCommands()
         {
             SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
-            RefreshCommand = new DelegateAsyncCommand(OnRefreshCommand);
+            RefreshCommand = new DelegateAsyncCommand(async() => await LoadData(selectedDateRange));
         }
 
         private async Task NavigateToMatchDetailView(IMatch match)
@@ -83,23 +83,18 @@
                 { nameof(IMatch), match }
             });
 
-        private async Task OnRefreshCommand()
-        {
-            await LoadData(selectedDateRange, showLoadingIndicator: false, forceFetchNewData: true);
-            IsRefreshing = false;
-        }
-
         private async Task LoadData(
             DateRange dateRange,
             bool showLoadingIndicator = true,
-            bool forceFetchNewData = false)
+            bool forceFetchNewData = false,
+            bool isRefreshing = false)
         {
             IsNotLoading = !showLoadingIndicator;
 
             var matchData = await matchService.GetMatches(
                     SettingsService.CurrentSportId,
                     SettingsService.CurrentLanguage,
-                    dateRange ?? DateRange.Now(),
+                    dateRange ?? DateRange.FromYesterdayUntilNow(),
                     forceFetchNewData);
 
             MatchData = new ObservableCollection<IGrouping<dynamic, IMatch>>(
@@ -107,14 +102,11 @@
                       => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
 
             selectedDateRange = dateRange;
-
             IsNotLoading = true;
+            IsRefreshing = isRefreshing;
         }
 
-        private async Task LoadDataFromYesterdayUntilNow(bool showLoadingIndicator = true, bool forceFetchNewData = true)
-            => await LoadData(DateRange.FromYesterdayUntilNow(), showLoadingIndicator, forceFetchNewData);
-
-        private async Task LoadDataToday(bool showLoadingIndicator = true, bool forceFetchNewData = true)
-           => await LoadData(DateRange.Now(), showLoadingIndicator, forceFetchNewData);
+        private async Task LoadDataFromYesterdayUntilNow()
+            => await LoadData(DateRange.FromYesterdayUntilNow());
     }
 }
