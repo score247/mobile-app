@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using AutoMapper;
     using LiveScore.Common.Extensions;
@@ -13,8 +14,8 @@
 
     public interface ISoccerMatchApi
     {
-        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&language={language}")]
-        Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDate, string toDate);
+        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&timeZone={timezone}&language={language}")]
+        Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDate, string toDate, string timezone);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -52,7 +53,7 @@
             throw new NotImplementedException();
         }
 
-        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
+        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false)
         {
             var matches = new List<IMatch>();
             var cacheExpiration = dateRange.FromDate < DateTime.Now
@@ -66,7 +67,7 @@
                 // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
                         $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
-                        () => GetMatches(sportId, language, fromDateText, toDateText),
+                        () => GetMatches(sportId, language, fromDateText, toDateText, timezone),
                         forceFetchNewData,
                         cacheExpiration);
 
@@ -84,11 +85,14 @@
             return matches;
         }
 
-        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDateText, string toDateText)
-            => await apiPolicy.RetryAndTimeout
-                (
-                    () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText)
-                );
+        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDateText, string toDateText, string timezone)
+        {
+            Debug.WriteLine("GetMatches");
 
+            return await apiPolicy.RetryAndTimeout
+                  (
+                      () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText, timezone)
+                  );
+        }
     }
 }

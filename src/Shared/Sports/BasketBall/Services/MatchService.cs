@@ -16,7 +16,7 @@
             throw new NotImplementedException();
         }
 
-        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false)
+        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false)
         {
             Debug.WriteLine("Call Basketball MatchService");
 

@@ -7,7 +7,7 @@
 
     public interface IMatchService
     {
-        Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, bool forceFetchNewData = false);
+        Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false);
 
         Task<IList<IMatch>> GetLiveMatches(int sportId, string language);
 
