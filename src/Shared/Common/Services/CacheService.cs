@@ -18,12 +18,11 @@
 
     public class CacheService : ICacheService
     {
-        const string STORAGE_NAME = "LiveScore.Storage";
         const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
 
-        public CacheService()
+        public CacheService(IEssentialsService essentials) 
         {
-            Registrations.Start(STORAGE_NAME);
+            Registrations.Start(essentials.AppName);
             BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
         }
 

@@ -14,6 +14,8 @@ namespace LiveScore.Common.Services
         string OperatingSystemVersion { get; }
 
         string AppVersion { get; }
+
+        string AppName { get; }
     }
 
     public class EssentialsService : IEssentialsService
@@ -27,5 +29,7 @@ namespace LiveScore.Common.Services
         public string OperatingSystemVersion => DeviceInfo.VersionString;
 
         public string AppVersion => AppInfo.VersionString;
+
+        public string AppName => AppInfo.Name;
     }
 }
