@@ -17,7 +17,7 @@
             BarBackgroundColor="{StaticResource PrimaryColor}"
             BackgroundColor="{StaticResource PrimaryColor}">
     <TabbedPage.Children>
-        <NavigationPage x:Name="Scores" Title="{langs:Translate Scores}" Icon="images/common/soccer.png">
+        <NavigationPage x:Name="ScoresBar" Title="{langs:Translate Scores}" Icon="images/common/soccer.png">
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
@@ -27,7 +27,7 @@
             </x:Arguments>
         </NavigationPage>
 
-       <NavigationPage x:Name="Live" Title="{langs:Translate Live}" Icon="images/common/live.png" >
+       <NavigationPage x:Name="LiveBar" Title="{langs:Translate Live}" Icon="images/common/live.png" >
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
                     <NavigationPage.TitleView>
@@ -37,7 +37,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Favorites" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png" >
+        <NavigationPage x:Name="FavoritesBar" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png" >
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
@@ -47,7 +47,7 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="Leagues" Title="{langs:Translate Leagues}" Icon="images/common/league.png" >
+        <NavigationPage x:Name="LeaguesBar" Title="{langs:Translate Leagues}" Icon="images/common/league.png" >
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
@@ -57,7 +57,7 @@
             </x:Arguments>
         </NavigationPage>
         
-         <NavigationPage x:Name="More" Title="More" Icon="images/common/more.png">
+         <NavigationPage x:Name="MoreBar" Title="More" Icon="images/common/more.png">
             <x:Arguments>
                 <views:TabMoreView Title="More">
                 </views:TabMoreView>
