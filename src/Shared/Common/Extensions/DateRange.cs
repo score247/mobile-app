@@ -26,7 +26,7 @@
 
         public static DateRange FromYesterdayUntilNow(TimeZoneInfo timeZoneInfo = null)
         {
-            return new DateRange(DateTime.Today.ByTimeZone(timeZoneInfo).AddDays(-1), DateTime.Today.ByTimeZone(timeZoneInfo));
+            return new DateRange(DateTime.Today.ByTimeZone(timeZoneInfo).AddDays(-1), DateTime.Today.EndDay().ByTimeZone(timeZoneInfo));
         }
 
         public static DateRange Now()

@@ -21,7 +21,7 @@
         const string STORAGE_NAME = "LiveScore.Storage";
         const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
 
-        public CacheService() 
+        public CacheService()
         {
             Registrations.Start(STORAGE_NAME);
             BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
