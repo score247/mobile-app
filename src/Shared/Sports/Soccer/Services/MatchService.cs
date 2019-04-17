@@ -8,6 +8,7 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.DTOs.Matches;
     using Refit;
@@ -54,7 +55,7 @@
             throw new NotImplementedException();
         }
 
-        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false)
+        public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             var matches = new List<IMatch>();
             var cacheExpiration = dateRange.FromDate < DateTime.Now
@@ -66,8 +67,8 @@
             try
             {
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
-                        $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
-                        () => GetMatches(sportId, language, fromDateText, toDateText, timezone),
+                        $"DailyMatches-{settings.SportId}-{settings.Language}-{fromDateText}-{toDateText}",
+                        () => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone),
                         forceFetchNewData,
                         cacheExpiration);
 

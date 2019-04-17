@@ -7,6 +7,7 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
 
     public class MatchService : IMatchService
@@ -16,7 +17,7 @@
             throw new NotImplementedException();
         }
 
-        public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false)
+        public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             Debug.WriteLine("Call Basketball MatchService");
 

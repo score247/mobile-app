@@ -5,6 +5,7 @@
     using Akavache;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Constants;
+    using LiveScore.Core.Models.Settings;
 
     public interface ISettingsService
     {
@@ -17,6 +18,8 @@
         T GetValueOrDefault<T>(string key, T defaultValue);
 
         void AddOrUpdateValue<T>(string key, T value);
+
+        UserSettings UserSettings { get; }
     }
 
     public class SettingsService : ISettingsService
@@ -34,6 +37,8 @@
             get => GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
             set => AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
+
+        public UserSettings UserSettings => new UserSettings(CurrentSportId, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
 
         public TimeZoneInfo CurrentTimeZone
         {

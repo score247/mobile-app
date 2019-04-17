@@ -110,11 +110,9 @@
                 MatchItemSource?.Clear();
             }
 
-            var matchData = await MatchService.GetMatches(
-                    (int)SettingsService.CurrentSport,
-                    SettingsService.CurrentLanguage,
+            var matchData = await matchService.GetMatches(
+                    SettingsService.UserSettings,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
-                    TimeZoneInfo.Local.BaseUtcOffset.ToString(),
                     forceFetchNewData);
 
             MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(
