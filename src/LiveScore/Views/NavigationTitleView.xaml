@@ -9,6 +9,8 @@
             <Label
                 x:Name="titleLabel"
                 AutomationId="NavigationTitleLbl"
+                AutomationProperties.IsInAccessibleTree="true"
+                AutomationProperties.Name="NavigationTitleHeaderLbl"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
             <StackLayout x:Name="SportName">
