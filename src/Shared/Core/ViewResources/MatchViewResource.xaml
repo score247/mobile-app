@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="LiveScore.Core.ViewResources.MatchViewResource">
-    <!--Scores Styles-->
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LiveScore.Core.ViewResources.MatchViewResource"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <!--  Scores Styles  -->
     <Style x:Key="LeagueBox" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Center" />
@@ -16,7 +17,7 @@
         <Setter Property="Margin" Value="0, 0, 12, 0" />
     </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
-        <Setter Property="Aspect" Value="AspectFit" />        
+        <Setter Property="Aspect" Value="AspectFit" />
     </Style>
     <Style x:Key="LeagueName" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1" />
@@ -29,7 +30,7 @@
         <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
         <Setter Property="Margin" Value="0,0,8,0" />
     </Style>
-    
+
     <Style x:Key="MatchStatus" TargetType="Label">
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -39,10 +40,41 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="Score" BasedOn="{StaticResource Team}" TargetType="Label">
+    <Style x:Key="TeamContainer" TargetType="StackLayout">
+        <Setter Property="FlexLayout.Grow" Value="1" />
+    </Style>
+
+    <Style x:Key="ScoreContainer" TargetType="StackLayout">
+        <Setter Property="WidthRequest" Value="32" />
+    </Style>
+
+    <Style
+        x:Key="Score"
+        BasedOn="{StaticResource Team}"
+        TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="End" />
-        <Setter Property="Margin" Value="0,0,20,0" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+    </Style>
+
+    <Style
+        x:Key="HomeScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,4,20,0" />
+    </Style>
+
+    <Style
+        x:Key="AwayScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,0,20,4" />
+    </Style>
+
+    <Style
+        x:Key="MatchFavoriteIcon"
+        BasedOn="{StaticResource FavoriteIcon}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,0,16,0" />
     </Style>
 </ResourceDictionary>

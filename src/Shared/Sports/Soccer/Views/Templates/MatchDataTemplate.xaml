@@ -1,42 +1,39 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
-                xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core;"
-                xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;" >
-     <ViewCell>
-            <StackLayout>
-                <StackLayout.Resources>
-                    <ResourceDictionary>
-                        <coreConverters:MatchStatusConverter x:Key="matchStatusConverter" />
-                        <ResourceDictionary.MergedDictionaries>
-                            <coreResources:MatchViewResource />
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </StackLayout.Resources>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label IsVisible="{Binding MatchResult.EventStatus.IsClosed}"
-                           Text="{Binding MatchResult.EventStatus ,Converter={StaticResource matchStatusConverter}}"
-                           Style="{StaticResource MatchStatus}"/>
-                    <Label IsVisible="{Binding MatchResult.EventStatus.IsLiveOrNotStarted}" 
-                           Text="{Binding DisplayLocalTime}" 
-                           Style="{StaticResource MatchStatus}"/>
-                    <StackLayout FlexLayout.Grow="1">
-                        <Label Text="{Binding Teams[0].Name}"
-                               Style="{StaticResource HomeTeam}" />
-                        <Label Text="{Binding Teams[1].Name}"
-                               Style="{StaticResource AwayTeam}" />
-                    </StackLayout>
-                    <StackLayout WidthRequest="32">
-                        <Label  Text="{Binding MatchResult.HomeScore}" 
-                                Style="{StaticResource Score}"
-                                Margin="0,4,20,0"/>
-                        <Label Text="{Binding MatchResult.AwayScore}"
-                               Style="{StaticResource Score}"
-                               Margin="0,0,20,4" />
-                    </StackLayout>
-                    <Label Style="{StaticResource FavoriteIcon}" Margin="0,0,16,0" AutomationId="MatchFavoriteBtn"/>
-                </FlexLayout>
-            </StackLayout>
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate
+    x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core;"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;">
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <coreConverters:MatchStatusConverter x:Key="matchStatusConverter" />
+                    <ResourceDictionary.MergedDictionaries>
+                        <coreResources:MatchViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                <Label
+                    IsVisible="{Binding MatchResult.EventStatus.IsClosed}"
+                    Style="{StaticResource MatchStatus}"
+                    Text="{Binding MatchResult.EventStatus, Converter={StaticResource matchStatusConverter}}" />
+                <Label
+                    IsVisible="{Binding MatchResult.EventStatus.IsLiveOrNotStarted}"
+                    Style="{StaticResource MatchStatus}"
+                    Text="{Binding DisplayLocalTime}" />
+                <StackLayout Style="{StaticResource TeamContainer}">
+                    <Label Style="{StaticResource HomeTeam}" Text="{Binding Teams[0].Name}" />
+                    <Label Style="{StaticResource AwayTeam}" Text="{Binding Teams[1].Name}" />
+                </StackLayout>
+                <StackLayout Style="{StaticResource ScoreContainer}">
+                    <Label Style="{StaticResource HomeScore}" Text="{Binding MatchResult.HomeScore}" />
+                    <Label Style="{StaticResource AwayScore}" Text="{Binding MatchResult.AwayScore}" />
+                </StackLayout>
+                <Label AutomationId="MatchFavoriteBtn" Style="{StaticResource MatchFavoriteIcon}" />
+            </FlexLayout>
+        </StackLayout>
     </ViewCell>
 </DataTemplate>

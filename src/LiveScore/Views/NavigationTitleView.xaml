@@ -6,6 +6,9 @@
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Content>
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
+            <StackLayout x:Name="SportName">
+                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="SportNameLbl" />
+            </StackLayout>
             <Label
                 x:Name="titleLabel"
                 AutomationId="NavigationTitleLbl"
@@ -13,9 +16,7 @@
                 AutomationProperties.Name="NavigationTitleHeaderLbl"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
-            <StackLayout x:Name="SportName">
-                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="SportNameLbl" />
-            </StackLayout>
+            
         </FlexLayout>
     </ContentView.Content>
 </ContentView>
