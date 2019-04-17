@@ -28,7 +28,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <dateBar:DateBar mvvm:ViewModelLocator.AutowirePartialView="{x:Reference this}" NumberDisplayDays="3" />
+        <dateBar:DateBar NumberDisplayDays="3" />
 
         <ActivityIndicator
             x:Name="activity"
