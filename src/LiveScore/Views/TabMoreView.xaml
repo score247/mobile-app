@@ -1,30 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-            xmlns="http://xamarin.com/schemas/2014/forms" 
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Views.TabMoreView"
-             Title="More"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LiveScore.Views.TabMoreView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="More"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>
-        <Style x:Key="CustomTabMoreRow" BasedOn="{StaticResource SettingMenuRow}" TargetType="FlexLayout">
+        <Style
+            x:Key="CustomTabMoreRow"
+            BasedOn="{StaticResource SettingMenuRow}"
+            TargetType="FlexLayout">
             <Setter Property="JustifyContent" Value="Start" />
         </Style>
 
-        <Style x:Key="CustomTabMoreInfo" BasedOn="{StaticResource NavName}" TargetType="Label">
+        <Style
+            x:Key="CustomTabMoreInfo"
+            BasedOn="{StaticResource NavName}"
+            TargetType="Label">
             <Setter Property="Margin" Value="10,0,0,0" />
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ListView ItemsSource="{Binding TabItems}"
-                  BackgroundColor="{StaticResource PrimaryColor}"
-                  SeparatorColor="Transparent"
-                  VerticalOptions="FillAndExpand"
-                  AutomationProperties.IsInAccessibleTree="False">
+        <ListView
+            AutomationProperties.IsInAccessibleTree="False"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            ItemsSource="{Binding TabItems}"
+            SeparatorColor="Transparent"
+            VerticalOptions="FillAndExpand">
             <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding ItemTappedCommand}" EventArgsParameterPath="Item"/>
+                <b:EventToCommandBehavior
+                    Command="{Binding ItemTappedCommand}"
+                    EventArgsParameterPath="Item"
+                    EventName="ItemTapped" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -32,12 +42,15 @@
                         <StackLayout>
                             <FlexLayout Style="{StaticResource CustomTabMoreRow}">
                                 <Image Source="{Binding Icon}" />
-                                <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource CustomTabMoreInfo}" />
+                                <Label
+                                    x:Name="{Binding Name}"
+                                    Style="{StaticResource CustomTabMoreInfo}"
+                                    Text="{Binding Name}" />
                             </FlexLayout>
                             <ContentView>
                                 <BoxView Style="{StaticResource HorizontalLine}" />
                             </ContentView>
-                        </StackLayout>                        
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
