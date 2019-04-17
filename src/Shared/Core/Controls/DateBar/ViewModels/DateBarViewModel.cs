@@ -42,7 +42,7 @@
 
             for (var i = -NumberOfDisplayDays; i <= NumberOfDisplayDays; i++)
             {
-                dateItems.Add(new DateBarItem { Date = DateTime.Today.ByTimeZone(SettingsService.CurrentTimeZone).AddDays(i) });
+                dateItems.Add(new DateBarItem { Date = DateTime.Today.AddDays(i) });
             }
 
             CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
@@ -66,7 +66,7 @@
                 currentDateBarItem = null;
                 HomeIsSelected = true;
                 ReloadCalendarItems();
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow(SettingsService.CurrentTimeZone));
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
             }
         }
 

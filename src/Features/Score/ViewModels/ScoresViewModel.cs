@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Score.ViewModels
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -93,7 +94,7 @@
                     SettingsService.CurrentSportId,
                     SettingsService.CurrentLanguage,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
-                    SettingsService.CurrentTimeZone.BaseUtcOffset.ToString(),
+                    TimeZoneInfo.Local.BaseUtcOffset.ToString(),
                     forceFetchNewData);
 
             MatchData = new ObservableCollection<IGrouping<dynamic, IMatch>>(
