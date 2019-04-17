@@ -13,8 +13,6 @@
 
         Task SetValue<T>(string name, T value);
 
-        void Init();
-
         void Shutdown();
     }
 
@@ -22,6 +20,12 @@
     {
         const string STORAGE_NAME = "LiveScore.Storage";
         const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
+
+        public CacheService() 
+        {
+            Registrations.Start(STORAGE_NAME);
+            BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
+        }
 
         public async Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
         {
@@ -36,12 +40,6 @@
         public async Task SetValue<T>(string name, T value)
         {
             await BlobCache.LocalMachine.InsertObject(name, value);
-        }
-
-        public void Init()
-        {
-            Registrations.Start(STORAGE_NAME);
-            BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
         }
 
         public void Shutdown() => BlobCache.Shutdown().Wait();
