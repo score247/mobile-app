@@ -5,15 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Content>
-        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
+        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}" AutomationProperties.IsInAccessibleTree="true">
             <StackLayout x:Name="SportName">
-                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="SportNameLbl" />
+                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="NavigationSportNameLbl" />
             </StackLayout>
             <Label
                 x:Name="titleLabel"
                 AutomationId="NavigationTitleLbl"
-                AutomationProperties.IsInAccessibleTree="true"
-                AutomationProperties.Name="NavigationTitleHeaderLbl"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
             
