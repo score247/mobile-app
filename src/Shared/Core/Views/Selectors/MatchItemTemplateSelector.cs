@@ -1,16 +1,11 @@
 ﻿namespace LiveScore.Core.Views.Selectors
 {
-    using LiveScore.Core.Constants;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 
-    public interface MatchItemTemplate
-    {
-    }
-
     public class MatchItemTemplateSelector : DataTemplateSelector
     {
-        private MatchItemTemplate matchItemTemplate;
+        private DataTemplate matchItemTemplate;
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
@@ -18,10 +13,10 @@
 
             if (matchItemTemplate == null)
             {
-                matchItemTemplate = viewModel.ServiceLocator.Create<MatchItemTemplate>(nameof(SportType.Soccer));
+                matchItemTemplate = viewModel.ServiceLocator.Create<DataTemplate>(viewModel.SettingsService.CurrentSportName);
             }
 
-            return (DataTemplate)matchItemTemplate;
+            return matchItemTemplate;
         }
     }
 }

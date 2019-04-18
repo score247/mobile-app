@@ -1,9 +1,8 @@
 ﻿namespace LiveScore.Basketball.Views.Templates
 {
-    using LiveScore.Core.Views.Selectors;
     using Xamarin.Forms;
 
-    public partial class MatchDataTemplate : DataTemplate, MatchItemTemplate
+    public partial class MatchDataTemplate : DataTemplate
     {
         public MatchDataTemplate()
         {

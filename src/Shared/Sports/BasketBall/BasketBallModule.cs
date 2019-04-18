@@ -5,9 +5,9 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Services;
-    using LiveScore.Core.Views.Selectors;
     using Prism.Ioc;
     using Prism.Modularity;
+    using Xamarin.Forms;
 
     public class BasketballModule : IModule
     {
@@ -19,7 +19,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IMatchService, MatchService>(SportType.Basketball.GetDescription());
-            containerRegistry.Register<MatchItemTemplate, MatchDataTemplate>(SportType.Basketball.GetDescription());
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Basketball.GetDescription());
         }
     }
 }

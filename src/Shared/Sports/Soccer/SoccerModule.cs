@@ -7,7 +7,6 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
-    using LiveScore.Core.Views.Selectors;
     using LiveScore.Soccer.DTOs.Leagues;
     using LiveScore.Soccer.DTOs.Matches;
     using LiveScore.Soccer.DTOs.Teams;
@@ -17,6 +16,7 @@
     using Prism.Ioc;
     using Prism.Modularity;
     using Refit;
+    using Xamarin.Forms;
 
     public class SoccerModule : IModule
     {
@@ -32,8 +32,7 @@
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
             containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.GetDescription());
-            containerRegistry.Register<MatchItemTemplate, MatchDataTemplate>(SportType.Soccer.GetDescription());
-            containerRegistry.Register<MatchItemTemplate, MatchDataTemplate>(SportType.Soccer.GetDescription());
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.GetDescription());
         }
 
         private static IMapper CreateMapper()
