@@ -57,8 +57,8 @@
         {
             var matches = new List<IMatch>();
             var cacheExpiration = dateRange.FromDate < DateTime.Now
-                ? cacheService.CacheDuration(CacheDurationKind.Long)
-                : cacheService.CacheDuration(CacheDurationKind.Short);
+                ? cacheService.CacheDuration(CacheDurationTerm.Long)
+                : cacheService.CacheDuration(CacheDurationTerm.Short);
 
             var fromDateText = dateRange.FromDate.ToApiFormat();
             var toDateText = dateRange.ToDate.ToApiFormat();

@@ -3,7 +3,6 @@
     using AutoMapper;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Configuration;
-    using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
@@ -69,9 +68,8 @@
             });
 
             var mapper = config.CreateMapper();
-            containerRegistry.RegisterInstance(mapper);
-            containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
-            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
+
+            return mapper;
         }
     }
 }

@@ -20,10 +20,10 @@
 
         Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null);
 
-        DateTime CacheDuration(CacheDurationKind cacheKind);
+        DateTime CacheDuration(CacheDurationTerm cacheKind);
     }
 
-    public enum CacheDurationKind
+    public enum CacheDurationTerm
     {
         Short,
         Long
@@ -63,8 +63,8 @@
         public async Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null) 
             => await BlobCache.LocalMachine.LoadImageFromUrl(url, false, desiredWidth, desiredHeight);
 
-        public DateTime CacheDuration(CacheDurationKind cacheKind)
-        => cacheKind == CacheDurationKind.Short 
+        public DateTime CacheDuration(CacheDurationTerm cacheKind)
+        => cacheKind == CacheDurationTerm.Short 
             ? DateTime.Now.AddMinutes(ShortTerm) 
             : DateTime.Now.AddMinutes(LongTerm);
     }
