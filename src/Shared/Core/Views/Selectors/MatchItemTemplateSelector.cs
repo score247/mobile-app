@@ -10,10 +10,11 @@
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var viewModel = container.BindingContext as ViewModelBase;
+            var template = viewModel.ServiceLocator.Create<DataTemplate>(viewModel.SettingsService.CurrentSportName);
 
-            if (matchItemTemplate == null)
+            if (matchItemTemplate?.GetType() != template?.GetType())
             {
-                matchItemTemplate = viewModel.ServiceLocator.Create<DataTemplate>(viewModel.SettingsService.CurrentSportName);
+                matchItemTemplate = template;
             }
 
             return matchItemTemplate;
