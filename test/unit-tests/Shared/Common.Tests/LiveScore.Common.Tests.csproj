@@ -20,6 +20,6 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\src\mobile\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Shared\Common\LiveScore.Common.csproj" />
   </ItemGroup>
 </Project>
