@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
@@ -12,6 +13,7 @@
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
+    using Prism;
     using Prism.Events;
     using Prism.Navigation;
 
@@ -19,19 +21,23 @@
     {
         private DateRange selectedDateRange;
         private IMatchService matchService;
+        private readonly IServiceLocator serviceLocator;
 
         public ScoresViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
             ISettingsService settingsService,
-            IEventAggregator eventAggregator)
-            : base(navigationService, globalFactory, settingsService)
+            IEventAggregator eventAggregator,
+            IServiceLocator serviceLocator)
+            : base(navigationService, globalFactory, settingsService, serviceLocator)
         {
             EventAggregator = eventAggregator;
 
             SetupDateBarSubscribers();
 
             SetupCommands();
+
+            this.serviceLocator = serviceLocator;
         }
 
         public bool IsLoading { get; private set; }
@@ -54,10 +60,12 @@
             if (changeSport || MatchData == null)
             {
 
-                matchService = GlobalFactoryProvider
-                   .ServiceFactoryProvider
-                   .GetInstance((SportType)SettingsService.CurrentSportId)
-                   .CreateMatchService();
+                //matchService = GlobalFactoryProvider
+                //   .ServiceFactoryProvider
+                //   .GetInstance((SportType)SettingsService.CurrentSportId)
+                //   .CreateMatchService();
+
+                matchService = serviceLocator.Create<IMatchService>(nameof(SportType.Soccer));
 
                 await LoadData(selectedDateRange);
             }
@@ -104,6 +112,6 @@
             selectedDateRange = dateRange;
             IsLoading = false;
             IsRefreshing = isRefreshing;
-        }
+                }
     }
 }

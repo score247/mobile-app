@@ -7,8 +7,8 @@
 
     public class EmptyFavoriteViewModel : ViewModelBase
     {
-        public EmptyFavoriteViewModel(INavigationService navigationService, IGlobalFactoryProvider globalFactory, ISettingsService settingsService) 
-            : base(navigationService, globalFactory, settingsService)
+        public EmptyFavoriteViewModel(INavigationService navigationService, IGlobalFactoryProvider globalFactory, ISettingsService settingsService, IServiceLocator serviceLocator)
+            : base(navigationService, globalFactory, settingsService, serviceLocator)
         {
         }
     }

@@ -16,8 +16,8 @@
         public MatchDetailViewModel(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService)
-                : base(navigationService, globalFactory, settingsService)
+            ISettingsService settingsService, IServiceLocator serviceLocator)
+                : base(navigationService, globalFactory, settingsService, serviceLocator)
         {
             MatchDetailItems = new List<TabModel>();
         }
@@ -46,7 +46,7 @@
                     Name = "Trackers",
                     Template = new MatchTrackerTemplate
                     {
-                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactoryProvider, SettingsService)
+                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactoryProvider, SettingsService, ServiceLocator)
                         {
                             MatchId = matchId
                         }

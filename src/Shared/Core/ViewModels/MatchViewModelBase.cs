@@ -9,7 +9,8 @@ namespace LiveScore.Core.ViewModels
         public MatchViewModelBase(
             INavigationService navigationService,
             IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+            ISettingsService settingsService,
+            IServiceLocator serviceLocator) : base(navigationService, globalFactory, settingsService, serviceLocator)
         {
         }
 

@@ -1,13 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                x:Class="LiveScore.Core.Views.Templates.MatchHeaderTemplate"
-                xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-                xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters"
-                xmlns:resources="clr-namespace:LiveScore.Core.ViewResources" >
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate
+    x:Class="LiveScore.Core.Views.Templates.MatchHeaderTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters"
+    xmlns:resources="clr-namespace:LiveScore.Core.ViewResources">
     <ViewCell Height="28">
         <StackLayout>
-             <StackLayout.Resources>
+            <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
                         <resources:MatchViewResource />
@@ -16,14 +17,20 @@
                     <coreConverters:MatchHeaderEventDayConverter x:Key="matchHeaderEventDayConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
-            
+
             <FlexLayout Style="{StaticResource LeagueBox}">
                 <StackLayout Style="{StaticResource LeagueFlagContainer}">
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                </StackLayout>                
-                <Label Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" Style="{StaticResource LeagueName}" />
-                <Label Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" Style="{StaticResource MatchDate}" AutomationId="MatchDateLbl" />
-                <Label x:Name="DetailIcon" Style="{StaticResource DetailIcon}" AutomationId="LeagueDetailBtn" />
+                </StackLayout>
+                <Label Style="{StaticResource LeagueName}" Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" />
+                <Label
+                    AutomationId="MatchDateLbl"
+                    Style="{StaticResource MatchDate}"
+                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" />
+                <Label
+                    x:Name="DetailIcon"
+                    AutomationId="LeagueDetailBtn"
+                    Style="{StaticResource DetailIcon}" />
             </FlexLayout>
         </StackLayout>
     </ViewCell>

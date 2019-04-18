@@ -23,7 +23,7 @@
 
     public class SettingsService : ISettingsService
     {
-        public static string LocalEndPoint => "https://testing2.nexdev.net/v1/api/";
+        public static string LocalEndPoint => "https://testing2.nexdev.net/main/api/";
 
         public string CurrentSportName
         {

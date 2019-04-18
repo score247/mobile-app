@@ -9,9 +9,11 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int eventDay = System.Convert.ToInt32(value.GetType().GetProperty("Day").GetValue(value));
-            int eventMonth = System.Convert.ToInt32(value.GetType().GetProperty("Month").GetValue(value));
-            int eventYear = System.Convert.ToInt32(value.GetType().GetProperty("Year").GetValue(value));
+            var valueType = value.GetType();
+
+            int eventDay = System.Convert.ToInt32(valueType.GetProperty("Day").GetValue(value));
+            int eventMonth = System.Convert.ToInt32(valueType.GetProperty("Month").GetValue(value));
+            int eventYear = System.Convert.ToInt32(valueType.GetProperty("Year").GetValue(value));
             var eventDate = new DateTime(eventYear, eventMonth, eventDay);
 
             return eventDate.ToShortDayMonth();

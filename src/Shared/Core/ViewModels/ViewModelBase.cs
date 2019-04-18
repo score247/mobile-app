@@ -13,11 +13,24 @@
         public ViewModelBase(
            INavigationService navigationService,
            IGlobalFactoryProvider globalFactory,
-           ISettingsService settingsService)
+           ISettingsService settingsService,
+           IServiceLocator serviceLocator)
         {
             NavigationService = navigationService;
             GlobalFactoryProvider = globalFactory;
             SettingsService = settingsService;
+            ServiceLocator = serviceLocator;
+        }
+
+        public ViewModelBase(
+          INavigationService navigationService,
+          IGlobalFactoryProvider globalFactory,
+          ISettingsService settingsService)
+        {
+            NavigationService = navigationService;
+            GlobalFactoryProvider = globalFactory;
+            SettingsService = settingsService;
+           
         }
 
         public string Title { get; set; }
@@ -29,6 +42,8 @@
         public IGlobalFactoryProvider GlobalFactoryProvider { get; }
 
         public ISettingsService SettingsService { get; }
+
+        public IServiceLocator ServiceLocator { get; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

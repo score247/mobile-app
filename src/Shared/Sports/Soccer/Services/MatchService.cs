@@ -26,13 +26,15 @@
         private readonly ICacheService cacheService;
         private readonly IMapper mapper;
         private readonly IApiPolicy apiPolicy;
+       
 
         public MatchService(
             ISoccerMatchApi soccerMatchApi,
             ICacheService cacheService,
             ILoggingService loggingService,
             IMapper mapper,
-            IApiPolicy apiPolicy) : base(loggingService)
+            IApiPolicy apiPolicy
+            ) : base(loggingService)
         {
             this.cacheService = cacheService;
             this.soccerMatchApi = soccerMatchApi;
@@ -55,6 +57,10 @@
 
         public async Task<IList<IMatch>> GetMatches(int sportId, string language, DateRange dateRange, string timezone, bool forceFetchNewData = false)
         {
+
+
+           
+
             var matches = new List<IMatch>();
             var cacheExpiration = dateRange.FromDate < DateTime.Now
                 ? DateTime.Now.AddMinutes(OldMatchExpiration)

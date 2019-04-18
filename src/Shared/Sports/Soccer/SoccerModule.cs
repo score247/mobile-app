@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Soccer
 {
     using AutoMapper;
-    using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
+    using LiveScore.Core.Converters;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
@@ -14,6 +14,7 @@
     using LiveScore.Soccer.Factories;
     using LiveScore.Soccer.Models.Teams;
     using LiveScore.Soccer.Services;
+    using LiveScore.Soccer.Views.Templates;
     using Prism.Ioc;
     using Prism.Modularity;
     using Refit;
@@ -22,23 +23,38 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            var soccerMatchApi = containerProvider.Resolve<ISoccerMatchApi>();
-            var leagueApi = containerProvider.Resolve<ILeagueApi>();
-            var settingsService = containerProvider.Resolve<ISettingsService>();
-            var cacheService = containerProvider.Resolve<ICacheService>();
-            var loggingService = containerProvider.Resolve<ILoggingService>();
-            var apiPolicy = containerProvider.Resolve<IApiPolicy>();
-            var globalServiceProvider = containerProvider.Resolve<IGlobalFactoryProvider>();
-            var mapper = containerProvider.Resolve<IMapper>();
+            //var soccerMatchApi = containerProvider.Resolve<ISoccerMatchApi>();
+            //var leagueApi = containerProvider.Resolve<ILeagueApi>();
+            //var settingsService = containerProvider.Resolve<ISettingsService>();
+            //var cacheService = containerProvider.Resolve<ICacheService>();
+            //var loggingService = containerProvider.Resolve<ILoggingService>();
+            //var apiPolicy = containerProvider.Resolve<IApiPolicy>();
+          var globalServiceProvider = containerProvider.Resolve<IGlobalFactoryProvider>();
+            //var mapper = containerProvider.Resolve<IMapper>();
 
-            var soccerServiceFactory = new SoccerServiceFactory(soccerMatchApi, leagueApi, settingsService, cacheService, loggingService, apiPolicy, mapper);
+            //var soccerServiceFactory = new SoccerServiceFactory(soccerMatchApi, leagueApi, settingsService, cacheService, loggingService, apiPolicy, mapper);
             var soccerTemplateFactory = new SoccerTemplateFactory();
 
-            globalServiceProvider.ServiceFactoryProvider.RegisterInstance(SportType.Soccer, soccerServiceFactory);
-            globalServiceProvider.TemplateFactoryProvider.RegisterInstance(SportType.Soccer, soccerTemplateFactory);
+            //globalServiceProvider.ServiceFactoryProvider.RegisterInstance(SportType.Soccer, soccerServiceFactory);
+           globalServiceProvider.TemplateFactoryProvider.RegisterInstance(SportType.Soccer, soccerTemplateFactory);
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            IMapper mapper = CreateMapper();
+            containerRegistry.RegisterInstance(mapper);
+            containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
+            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
+            containerRegistry.Register<IMatchService, MatchService>(nameof(SportType.Soccer));
+            containerRegistry.Register<ITemplateFactory, SoccerTemplateFactory>(nameof(SportType.Soccer));
+            containerRegistry.Register<MatchItemTemplate, MatchDataTemplate>(nameof(SportType.Soccer));         
+
+            
+
+
+        }
+
+        private static IMapper CreateMapper()
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -69,10 +85,9 @@
                 cfg.CreateMap<TeamStatisticDTO, TeamStatistic>();
                 cfg.CreateMap<TeamStatisticDTO, ITeamStatistic>().As<TeamStatistic>();
             });
+
             var mapper = config.CreateMapper();
-            containerRegistry.RegisterInstance(mapper);
-            containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
-            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
+            return mapper;
         }
     }
 }
