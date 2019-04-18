@@ -51,7 +51,9 @@
             RefreshCommand="{Binding RefreshCommand}"
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
-            VerticalOptions="FillAndExpand">
+            VerticalOptions="FillAndExpand"
+            x:Name="LeagueTable"
+            AutomationId="LeagueTableId">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior
                     Command="{Binding SelectMatchCommand}"

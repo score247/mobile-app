@@ -7,7 +7,7 @@
     <ContentView.Content>
         <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}" AutomationProperties.IsInAccessibleTree="true">
             <StackLayout x:Name="SportName">
-                <Label Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="NavigationSportNameLbl" />
+                <Label x:Name="sportLabel" Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="NavigationSportNameLbl" />
             </StackLayout>
             <Label
                 x:Name="titleLabel"
