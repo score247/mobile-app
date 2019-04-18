@@ -18,7 +18,7 @@
 
         Task Invalidate(string key);
 
-        Task<IBitmap> LoadImageFromUrl(string url);
+        Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null);
 
         DateTime CacheDuration(CacheDurationKind cacheKind);
     }
@@ -32,8 +32,8 @@
     public class CacheService : ICacheService
     {
         const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
-        const int TodayMatchExpiration = 2;
-        const int OldMatchExpiration = 120;
+        const int ShortTerm = 2;
+        const int LongTerm = 120;
 
         public CacheService(IEssentialsService essentials)
         {
@@ -60,11 +60,12 @@
 
         public async Task Invalidate(string key) => await BlobCache.LocalMachine.Invalidate(key);
 
-        public async Task<IBitmap> LoadImageFromUrl(string url) => await BlobCache.LocalMachine.LoadImageFromUrl(url);
+        public async Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null) 
+            => await BlobCache.LocalMachine.LoadImageFromUrl(url, false, desiredWidth, desiredHeight);
 
         public DateTime CacheDuration(CacheDurationKind cacheKind)
         => cacheKind == CacheDurationKind.Short 
-            ? DateTime.Now.AddMinutes(TodayMatchExpiration) 
-            : DateTime.Now.AddMinutes(OldMatchExpiration);
+            ? DateTime.Now.AddMinutes(ShortTerm) 
+            : DateTime.Now.AddMinutes(LongTerm);
     }
 }

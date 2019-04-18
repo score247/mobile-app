@@ -1,7 +1,4 @@
-﻿using System;
-using LiveScore.Core.Constants;
-
-namespace LiveScore.Core.Models.Settings
+﻿namespace LiveScore.Core.Models.Settings
 {
     public class UserSettings
     {
@@ -17,5 +14,7 @@ namespace LiveScore.Core.Models.Settings
         public string Language { get; set; }
 
         public string TimeZone { get; set; }
+
+        public override string ToString() => $"{SportId}-{Language}-{TimeZone}";
     }
 }

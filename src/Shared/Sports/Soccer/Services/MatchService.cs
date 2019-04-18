@@ -65,16 +65,17 @@
 
             try
             {
-                // TODO Refactor DTO later
-                //var dtoMatches = await cacheService.GetAndFetchLatestValue(
-                        //$"DailyMatches-{settings.SportId}-{settings.Language}-{fromDateText}-{toDateText}",
-                        //() => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone),
-                        //forceFetchNewData,
-                        //cacheExpiration);
 
-                var dtoMatches = await cacheService.GetOrFetchValue(
-                        $"DailyMatches-{settings.SportId}-{settings.Language}-{fromDateText}-{toDateText}",
-                        () => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone));
+                var cacheKey = $"Scores-{settings.ToString()}-{fromDateText}-{toDateText}";
+
+                Debug.WriteLine($"cacheKey {cacheKey}");
+
+                // TODO Refactor DTO later
+                var dtoMatches = await cacheService.GetAndFetchLatestValue(
+                        cacheKey,
+                        () => GetMatches(settings, fromDateText, toDateText),
+                        forceFetchNewData,
+                        cacheExpiration);
 
                 foreach (var dtoMatch in dtoMatches)
                 {
@@ -90,13 +91,18 @@
             return matches;
         }
 
-        private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDateText, string toDateText, string timezone)
+        private async Task<IEnumerable<MatchDTO>> GetMatches(UserSettings settings, string fromDateText, string toDateText)
         {
             Debug.WriteLine($"GetMatches for {fromDateText} - {toDateText}");
 
             return await apiPolicy.RetryAndTimeout
                   (
-                      () => soccerMatchApi.GetMatches(sportId, language, fromDateText, toDateText, timezone)
+                      () =>
+                      {
+                          Debug.WriteLine($"GetMatchesApi for {fromDateText} - {toDateText}");
+
+                          return soccerMatchApi.GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone);
+                      }
                   );
         }
     }
