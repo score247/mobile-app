@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using LiveScore.Basketball;
+using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Factories;
@@ -55,7 +57,8 @@ namespace LiveScore
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init("https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");
+            logService.Init(Configuration.SentryDsn);
+
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 
@@ -111,6 +114,23 @@ namespace LiveScore
             moduleCatalog.AddModule<NewsModule>();
             moduleCatalog.AddModule<TVScheduleModule>();
             moduleCatalog.AddModule<MenuModule>();
+        }
+
+        protected override void OnSleep()
+        {
+            Debug.WriteLine("OnSleep");
+
+            var cacheService = Container.Resolve<ICacheService>();
+            cacheService.Shutdown();
+
+            base.OnSleep();
+        }
+
+        protected override void OnResume()
+        {
+            Debug.WriteLine("OnResume");
+
+            base.OnResume();
         }
     }
 }

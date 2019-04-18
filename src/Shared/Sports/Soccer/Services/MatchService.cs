@@ -21,8 +21,6 @@
 
     public class MatchService : BaseService, IMatchService
     {
-        private const int TodayMatchExpiration = 2;
-        private const int OldMatchExpiration = 120;
         private readonly ISoccerMatchApi soccerMatchApi;
         private readonly ICacheService cacheService;
         private readonly IMapper mapper;
@@ -59,18 +57,24 @@
         {
             var matches = new List<IMatch>();
             var cacheExpiration = dateRange.FromDate < DateTime.Now
-                ? DateTime.Now.AddMinutes(OldMatchExpiration)
-                : DateTime.Now.AddMinutes(TodayMatchExpiration);
+                ? cacheService.CacheDuration(CacheDurationKind.Long)
+                : cacheService.CacheDuration(CacheDurationKind.Short);
+
             var fromDateText = dateRange.FromDate.ToApiFormat();
             var toDateText = dateRange.ToDate.ToApiFormat();
 
             try
             {
-                var dtoMatches = await cacheService.GetAndFetchLatestValue(
+                // TODO Refactor DTO later
+                //var dtoMatches = await cacheService.GetAndFetchLatestValue(
+                        //$"DailyMatches-{settings.SportId}-{settings.Language}-{fromDateText}-{toDateText}",
+                        //() => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone),
+                        //forceFetchNewData,
+                        //cacheExpiration);
+
+                var dtoMatches = await cacheService.GetOrFetchValue(
                         $"DailyMatches-{settings.SportId}-{settings.Language}-{fromDateText}-{toDateText}",
-                        () => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone),
-                        forceFetchNewData,
-                        cacheExpiration);
+                        () => GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone));
 
                 foreach (var dtoMatch in dtoMatches)
                 {
@@ -88,7 +92,7 @@
 
         private async Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDateText, string toDateText, string timezone)
         {
-            Debug.WriteLine("GetMatches");
+            Debug.WriteLine($"GetMatches for {fromDateText} - {toDateText}");
 
             return await apiPolicy.RetryAndTimeout
                   (

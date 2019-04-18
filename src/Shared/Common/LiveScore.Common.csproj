@@ -53,5 +53,6 @@
         <Folder Include="Controls\TabStrip\">
         </Folder>
         <Folder Include="Controls\Calendar\" />
+        <Folder Include="Configuration\" />
     </ItemGroup>
 </Project>
