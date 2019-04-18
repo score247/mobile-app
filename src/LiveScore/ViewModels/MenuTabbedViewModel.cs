@@ -1,16 +1,12 @@
 ﻿namespace LiveScore.ViewModels
 {
-    using Core.Factories;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using Prism.Navigation;
 
     public class MenuTabbedViewModel : ViewModelBase
     {
-        public MenuTabbedViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+        public MenuTabbedViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

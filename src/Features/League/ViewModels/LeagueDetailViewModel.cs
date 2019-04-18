@@ -2,21 +2,16 @@
 {
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Core.Factories;
     using Core.Models.Leagues;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using Prism.Commands;
     using Prism.Navigation;
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        public LeagueDetailViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService)
-                : base(navigationService, globalFactory, settingsService)
+        public LeagueDetailViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
         {
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>();
         }

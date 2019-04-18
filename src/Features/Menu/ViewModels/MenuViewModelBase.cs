@@ -2,17 +2,14 @@
 {
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.Factories;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using Prism.Navigation;
 
     public class MenuViewModelBase : ViewModelBase
     {
-        public MenuViewModelBase(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+        public MenuViewModelBase(INavigationService navigationService, IServiceLocator serviceLocator)
+             : base(navigationService, serviceLocator)
         {
             DoneCommand = new DelegateAsyncCommand(OnDone);
         }

@@ -1,23 +1,20 @@
-﻿namespace LiveScore.Core.Converters
+﻿namespace LiveScore.Core.Views.Selectors
 {
     using LiveScore.Core.Constants;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 
     public interface MatchItemTemplate
-    { }
+    {
+    }
 
-    public class MatchTemplateSelector : DataTemplateSelector
+    public class MatchItemTemplateSelector : DataTemplateSelector
     {
         private MatchItemTemplate matchItemTemplate;
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var viewModel = container.BindingContext as ViewModelBase;
-
-            //return viewModel.GlobalFactoryProvider.TemplateFactoryProvider
-            //    .GetInstance((SportType)viewModel.SettingsService.CurrentSportId)
-            //    .GetMatchTemplate();
 
             if (matchItemTemplate == null)
             {

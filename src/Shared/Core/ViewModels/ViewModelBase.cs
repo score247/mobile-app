@@ -12,38 +12,30 @@
     {
         public ViewModelBase(
            INavigationService navigationService,
-           IGlobalFactoryProvider globalFactory,
-           ISettingsService settingsService,
-           IServiceLocator serviceLocator)
+           IServiceLocator serviceLocator,
+           IEventAggregator eventAggregator) : this(navigationService, serviceLocator)
         {
-            NavigationService = navigationService;
-            GlobalFactoryProvider = globalFactory;
-            SettingsService = settingsService;
-            ServiceLocator = serviceLocator;
+            EventAggregator = eventAggregator;
         }
 
         public ViewModelBase(
-          INavigationService navigationService,
-          IGlobalFactoryProvider globalFactory,
-          ISettingsService settingsService)
+           INavigationService navigationService,
+           IServiceLocator serviceLocator)
         {
             NavigationService = navigationService;
-            GlobalFactoryProvider = globalFactory;
-            SettingsService = settingsService;
-           
+            ServiceLocator = serviceLocator;
+            SettingsService = ServiceLocator.Create<ISettingsService>();
         }
 
-        public string Title { get; set; }
+        public string Title { get; protected set; }
+
+        public IServiceLocator ServiceLocator { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 
-        public INavigationService NavigationService { get; }
+        public INavigationService NavigationService { get; protected set; }
 
-        public IGlobalFactoryProvider GlobalFactoryProvider { get; }
-
-        public ISettingsService SettingsService { get; }
-
-        public IServiceLocator ServiceLocator { get; }
+        public ISettingsService SettingsService { get; protected set; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

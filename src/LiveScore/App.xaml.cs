@@ -5,7 +5,6 @@ using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Factories;
 using LiveScore.Core.Services;
-using LiveScore.Factories;
 using LiveScore.Favorites;
 using LiveScore.League;
 using LiveScore.Menu;
@@ -18,6 +17,7 @@ using LiveScore.ViewModels;
 using LiveScore.Views;
 using Plugin.Multilingual;
 using Prism;
+using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -28,7 +28,7 @@ using Xamarin.Forms.Xaml;
 
 namespace LiveScore
 {
-    public partial class App
+    public partial class App : PrismApplication
     {
         /*
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
@@ -88,7 +88,6 @@ namespace LiveScore
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.Register<IApiPolicy, ApiPolicy>();
-            containerRegistry.RegisterSingleton<IGlobalFactoryProvider, GlobalFactoryProvider>();
             containerRegistry.RegisterSingleton<IServiceLocator, ServiceLocator>();
         }
 

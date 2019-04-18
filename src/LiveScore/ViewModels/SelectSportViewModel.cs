@@ -4,18 +4,14 @@
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.Factories;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using LiveScore.Models;
     using Prism.Navigation;
 
     public class SelectSportViewModel : ViewModelBase
     {
-        public SelectSportViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+        public SelectSportViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
         {
             SelectSportItemCommand = new DelegateAsyncCommand(OnSelectSportItem);
             DoneCommand = new DelegateAsyncCommand(OnDone);
@@ -23,11 +19,11 @@
 
         public SportItem SelectedSportItem { get; set; }
 
-        public ObservableCollection<SportItem> SportItems { get; set; }
+        public ObservableCollection<SportItem> SportItems { get; private set; }
 
-        public DelegateAsyncCommand SelectSportItemCommand { get; set; }
+        public DelegateAsyncCommand SelectSportItemCommand { get; }
 
-        public DelegateAsyncCommand DoneCommand { get; set; }
+        public DelegateAsyncCommand DoneCommand { get; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {

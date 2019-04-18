@@ -4,21 +4,15 @@
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Factories;
-    using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Models;
     using LiveScore.News.Views;
     using LiveScore.TVSchedule.Views;
-    using Prism.Navigation;   
+    using Prism.Navigation;
 
     public class TabMoreViewModel : ViewModelBase
     {
-        public ObservableCollection<TabItem> TabItems { get; set; }
-
-        public DelegateAsyncCommand<TabItem> ItemTappedCommand { get; set; }
-
-        public TabMoreViewModel(INavigationService navigationService, IGlobalFactoryProvider globalFactory, ISettingsService settingsService)
-            : base(navigationService, globalFactory, settingsService)
+        public TabMoreViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
         {
             TabItems = new ObservableCollection<TabItem>
             {
@@ -28,6 +22,10 @@
 
             ItemTappedCommand = new DelegateAsyncCommand<TabItem>(ItemTapped);
         }
+
+        public ObservableCollection<TabItem> TabItems { get; private set; }
+
+        public DelegateAsyncCommand<TabItem> ItemTappedCommand { get; }
 
         private async Task ItemTapped(TabItem item)
         {

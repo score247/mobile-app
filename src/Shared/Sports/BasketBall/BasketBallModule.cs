@@ -1,8 +1,11 @@
 ﻿namespace LiveScore.Basketball
 {
-    using LiveScore.Basketball.Factories;
+    using LiveScore.Basketball.Services;
+    using LiveScore.Basketball.Views.Templates;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Constants;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core.Services;
+    using LiveScore.Core.Views.Selectors;
     using Prism.Ioc;
     using Prism.Modularity;
 
@@ -10,16 +13,13 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            var globalServiceProvider = containerProvider.Resolve<IGlobalFactoryProvider>();
-            var basketBallServiceFactory = new BasketballServiceFactory();
-            globalServiceProvider.ServiceFactoryProvider.RegisterInstance(SportType.Basketball, basketBallServiceFactory);
-
-            var basketballTemplateFactory = new BasketballTemplateFactory();
-            globalServiceProvider.TemplateFactoryProvider.RegisterInstance(SportType.Basketball, basketballTemplateFactory);
+            // OnInitialized 
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.Register<IMatchService, MatchService>(SportType.Basketball.GetDescription());
+            containerRegistry.Register<MatchItemTemplate, MatchDataTemplate>(SportType.Basketball.GetDescription());
         }
     }
 }

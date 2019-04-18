@@ -2,25 +2,21 @@
 {
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
-    using Core.Factories;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views.Templates;
     using Prism.Navigation;
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
-        public List<TabModel> MatchDetailItems { get; set; }
-
-        public MatchDetailViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService, IServiceLocator serviceLocator)
-                : base(navigationService, globalFactory, settingsService, serviceLocator)
+        public MatchDetailViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+            : base(navigationService, serviceLocator)
         {
             MatchDetailItems = new List<TabModel>();
         }
+
+        public List<TabModel> MatchDetailItems { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -46,10 +42,7 @@
                     Name = "Trackers",
                     Template = new MatchTrackerTemplate
                     {
-                        BindingContext = new MatchViewModelBase(NavigationService, GlobalFactoryProvider, SettingsService, ServiceLocator)
-                        {
-                            MatchId = matchId
-                        }
+                        BindingContext = new MatchViewModelBase(NavigationService, ServiceLocator) { MatchId = matchId }
                     }
                 },
                 new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },

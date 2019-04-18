@@ -3,19 +3,16 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using Core.Factories;
-    using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using Prism.Commands;
     using Prism.Navigation;
 
     public class LiveViewModel : ViewModelBase
     {
-        public LiveViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService) : base(navigationService, globalFactory, settingsService)
+        public LiveViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+            : base(navigationService, serviceLocator)
         {
         }
 

@@ -4,23 +4,19 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using Core.Services;
+    using LiveScore.Core.Factories;
     using LiveScore.Models;
     using LiveScore.Services;
     using LiveScore.Views;
     using Prism.Navigation;
-    using Core.Factories;
 
     public class NavigationTitleViewModel : ViewModelBase
     {
         private readonly ISportService sportService;
         private IEnumerable<SportItem> sportItems;
 
-        public NavigationTitleViewModel(
-            INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService,
-            ISportService sportService) : base(navigationService, globalFactory, settingsService)
+        public NavigationTitleViewModel(INavigationService navigationService, IServiceLocator serviceLocator, ISportService sportService)
+            : base(navigationService, serviceLocator)
         {
             this.sportService = sportService;
             SelectSportCommand = new DelegateAsyncCommand(NavigateSelectSportPage);

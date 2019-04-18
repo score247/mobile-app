@@ -1,7 +1,7 @@
-﻿using Prism.Ioc;
-
-namespace LiveScore.Core.Services
+﻿namespace LiveScore.Core.Factories
 {
+    using Prism.Ioc;
+
     public interface IApplicationContext
     {
         int SportId { get; set; }
@@ -10,6 +10,7 @@ namespace LiveScore.Core.Services
     public interface IServiceLocator
     {
         T Create<T>();
+
         T Create<T>(string name);
     }
 
@@ -21,10 +22,9 @@ namespace LiveScore.Core.Services
         {
             this.containerProvider = containerProvider;
         }
-        public T Create<T>()
-            => containerProvider.Resolve<T>();
 
-        public T Create<T>(string name)
-            => containerProvider.Resolve<T>(name);
+        public T Create<T>() => containerProvider.Resolve<T>();
+
+        public T Create<T>(string name) => containerProvider.Resolve<T>(name);
     }
 }

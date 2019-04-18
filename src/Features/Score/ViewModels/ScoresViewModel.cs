@@ -2,18 +2,15 @@
 {
     using System;
     using System.Collections.ObjectModel;
-    using System.ComponentModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.Constants;
-    using Core.Factories;
     using Core.Services;
     using Core.ViewModels;
     using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
-    using Prism;
     using Prism.Events;
     using Prism.Navigation;
 
@@ -21,23 +18,16 @@
     {
         private DateRange selectedDateRange;
         private IMatchService matchService;
-        private readonly IServiceLocator serviceLocator;
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IGlobalFactoryProvider globalFactory,
-            ISettingsService settingsService,
-            IEventAggregator eventAggregator,
-            IServiceLocator serviceLocator)
-            : base(navigationService, globalFactory, settingsService, serviceLocator)
+            IServiceLocator serviceLocator,
+            IEventAggregator eventAggregator)
+            : base(navigationService, serviceLocator, eventAggregator)
         {
-            EventAggregator = eventAggregator;
-
             SetupDateBarSubscribers();
 
             SetupCommands();
-
-            this.serviceLocator = serviceLocator;
         }
 
         public bool IsLoading { get; private set; }
@@ -46,7 +36,7 @@
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, IMatch>> MatchData { get; set; }
+        public ObservableCollection<IGrouping<dynamic, IMatch>> MatchItemSource { get; set; }
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
@@ -57,15 +47,9 @@
             base.OnNavigatedTo(parameters);
             var changeSport = parameters.GetValue<bool>("changeSport");
 
-            if (changeSport || MatchData == null)
+            if (changeSport || MatchItemSource == null)
             {
-
-                //matchService = GlobalFactoryProvider
-                //   .ServiceFactoryProvider
-                //   .GetInstance((SportType)SettingsService.CurrentSportId)
-                //   .CreateMatchService();
-
-                matchService = serviceLocator.Create<IMatchService>(nameof(SportType.Soccer));
+                matchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSportName);
 
                 await LoadData(selectedDateRange);
             }
@@ -105,13 +89,13 @@
                     TimeZoneInfo.Local.BaseUtcOffset.ToString(),
                     forceFetchNewData);
 
-            MatchData = new ObservableCollection<IGrouping<dynamic, IMatch>>(
+            MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(
                       matchData.GroupBy(match
                       => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
 
             selectedDateRange = dateRange;
             IsLoading = false;
             IsRefreshing = isRefreshing;
-                }
+        }
     }
 }
