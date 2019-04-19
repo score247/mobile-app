@@ -66,14 +66,19 @@
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(OnDateBarItemSelected);
+                .Subscribe(OnDateBarItemSelected);
+
+            if (MatchItemSource == null)
+            {
+                await LoadData(null);
+            }
         }
 
-        private void SubscribeDateBarEvent()
+        public override void OnDisappearing()
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Subscribe(OnDateBarItemSelected);
+                .Unsubscribe(OnDateBarItemSelected);
         }
 
         private void SetupCommands()
