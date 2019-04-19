@@ -18,7 +18,7 @@
             containerRegistry.RegisterForNavigation<DefaultSportView, DefaultSportViewModel>();
             containerRegistry.RegisterForNavigation<DefaultLanguageView, DefaultLanguageViewModel>();
             containerRegistry.RegisterForNavigation<InfoAlertView, InfoAlertViewModel>();
-            containerRegistry.RegisterForNavigation<FAQView, FAQPageViewModel>();
+            containerRegistry.RegisterForNavigation<FAQView, FaqPageViewModel>();
         }
     }
 }

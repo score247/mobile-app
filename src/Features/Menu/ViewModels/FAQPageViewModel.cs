@@ -3,9 +3,9 @@
     using LiveScore.Core.Factories;
     using Prism.Navigation;
 
-    public class FAQPageViewModel : MenuViewModelBase
+    public class FaqPageViewModel : MenuViewModelBase
     {
-        public FAQPageViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public FaqPageViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

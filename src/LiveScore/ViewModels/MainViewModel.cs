@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
@@ -25,7 +26,7 @@
 
         private void OnChangeThemeExecuted()
         {
-            // TODO Implement later
+            throw new NotImplementedException();
         }
 
         private async Task Navigate(string page)
