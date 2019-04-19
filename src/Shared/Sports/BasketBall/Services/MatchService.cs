@@ -25,7 +25,7 @@
                 new Match { EventDate = DateTime.Today, League = new League{ Name = "Basketball" }}
             };
 
-            return await new Task<IList<IMatch>>(() => matches);
+            return matches;
         }
 
         public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
