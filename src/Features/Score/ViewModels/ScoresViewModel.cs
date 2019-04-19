@@ -29,8 +29,6 @@
             today = DateTime.Today;
             MatchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
-            SubscribeDateBarEvent();
-
             SetupCommands();
         }
 
@@ -54,10 +52,18 @@
             }
         }
 
-        public override void Dispose()
+        public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            base.Dispose();
+            SubscribeDateBarEvent();
 
+            if (MatchItemSource == null)
+            {
+                await LoadData(DateRange.FromYesterdayUntilNow());
+            }
+        }
+
+        public override void OnDisappearing()
+        {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
                 .Unsubscribe(OnDateBarItemSelected);
@@ -90,11 +96,14 @@
         private async Task LoadData(
             DateRange dateRange,
             bool showLoadingIndicator = true,
-            bool forceFetchNewData = false,
-            bool isRefreshing = false)
+            bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
-            MatchItemSource?.Clear();
+
+            if (showLoadingIndicator)
+            {
+                MatchItemSource?.Clear();
+            }
 
             var matchData = await MatchService.GetMatches(
                     (int)SettingsService.CurrentSport,
@@ -109,7 +118,7 @@
 
             selectedDateRange = dateRange;
             IsLoading = false;
-            IsRefreshing = isRefreshing;
+            IsRefreshing = false;
         }
     }
 }

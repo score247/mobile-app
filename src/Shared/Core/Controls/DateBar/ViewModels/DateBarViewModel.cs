@@ -45,7 +45,7 @@
             EventAggregator = baseViewModel.EventAggregator;
             SettingsService = baseViewModel.SettingsService;
             RenderCalendarItems();
-            SelectHomeCommand.Execute();
+            SelectHomeCommand?.Execute();
         }
 
         public void RenderCalendarItems()
