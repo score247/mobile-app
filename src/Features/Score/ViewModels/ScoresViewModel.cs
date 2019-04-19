@@ -110,7 +110,7 @@
                 MatchItemSource?.Clear();
             }
 
-            var matchData = await matchService.GetMatches(
+            var matchData = await MatchService.GetMatches(
                     SettingsService.UserSettings,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
                     forceFetchNewData);

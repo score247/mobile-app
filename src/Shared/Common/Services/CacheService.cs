@@ -23,6 +23,10 @@
         DateTime CacheDuration(CacheDurationTerm cacheKind);
 
         Task Vacuum();
+
+        void AddOrUpdateValue<T>(string key, T value);
+
+        T GetValueOrDefault<T>(string key, T defaultValue);
     }
 
     public enum CacheDurationTerm
@@ -71,5 +75,11 @@
             : DateTime.Now.AddMinutes(LongTerm);
 
         public async Task Vacuum() => await BlobCache.LocalMachine.Vacuum();
+
+        public void AddOrUpdateValue<T>(string key, T value)
+            => BlobCache.UserAccount.InsertObject(key, value).Wait();
+
+        public T GetValueOrDefault<T>(string key, T defaultValue)
+            => BlobCache.UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
     }
 }
