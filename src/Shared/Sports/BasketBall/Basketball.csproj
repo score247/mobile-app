@@ -5,9 +5,16 @@
     <RootNamespace>LiveScore.Basketball</RootNamespace>
     <AssemblyName>LiveScore.Basketball</AssemblyName>
   </PropertyGroup>
-
+  <PropertyGroup>
+    <DebugType>pdbonly</DebugType>
+    <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
   </ItemGroup>
   <ItemGroup>
