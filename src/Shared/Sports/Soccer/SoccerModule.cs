@@ -27,8 +27,7 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            IMapper mapper = CreateMapper();
-            containerRegistry.RegisterInstance(mapper);
+            containerRegistry.RegisterInstance(CreateMapper());
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
             containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.GetDescription());
