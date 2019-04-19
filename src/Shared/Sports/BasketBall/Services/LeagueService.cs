@@ -6,7 +6,7 @@
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Services;
 
-    public class BasketballLeagueService : ILeagueService
+    public class LeagueService : ILeagueService
     {
         public Task<IEnumerable<ILeague>> GetLeagues()
         {

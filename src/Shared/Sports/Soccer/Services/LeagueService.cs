@@ -15,13 +15,13 @@
         Task<IEnumerable<ILeague>> GetLeagues(int sportId, string languageCode);
     }
 
-    public class SoccerLeagueService : BaseService, ILeagueService
+    public class LeagueService : BaseService, ILeagueService
     {
         private readonly ILeagueApi leagueApi;
         private readonly ISettingsService settingsService;
         private readonly IApiPolicy apiPolicy;
 
-        public SoccerLeagueService(
+        public LeagueService(
             ILeagueApi leagueApi,
             ISettingsService settingsService,
             ILoggingService loggingService,

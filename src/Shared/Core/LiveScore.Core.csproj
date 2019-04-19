@@ -4,6 +4,12 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+
+    <DebugType></DebugType>
+    <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
       <PrivateAssets>all</PrivateAssets>

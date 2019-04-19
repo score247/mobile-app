@@ -18,7 +18,7 @@
         Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDate, string toDate, string timezone);
     }
 
-    public class SoccerMatchService : BaseService, IMatchService
+    public class MatchService : BaseService, IMatchService
     {
         private const int TodayMatchExpiration = 2;
         private const int OldMatchExpiration = 120;
@@ -27,7 +27,7 @@
         private readonly IMapper mapper;
         private readonly IApiPolicy apiPolicy;
 
-        public SoccerMatchService(
+        public MatchService(
             ISoccerMatchApi soccerMatchApi,
             ICacheService cacheService,
             ILoggingService loggingService,
