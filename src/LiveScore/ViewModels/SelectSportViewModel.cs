@@ -47,8 +47,7 @@
 
                 if (isSportChanged)
                 {
-                    await NavigationService.GoBackAsync(useModalNavigation: true);
-                    EventAggregator.GetEvent<SportChangeEvent>().Publish(SettingsService.CurrentSport);
+                    await NavigateToHome();
                 }
             }
         }

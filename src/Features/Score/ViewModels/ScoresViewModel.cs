@@ -8,7 +8,6 @@
     using Core.Services;
     using Core.ViewModels;
     using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
@@ -18,7 +17,7 @@
     public class ScoresViewModel : ViewModelBase
     {
         private readonly DateTime today;
-        private readonly IMatchService matchService;
+        private readonly IMatchService MatchService;
         private DateRange selectedDateRange;
 
         public ScoresViewModel(
@@ -28,9 +27,7 @@
             : base(navigationService, serviceLocator, eventAggregator)
         {
             today = DateTime.Today;
-            matchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
-
-            SubscribeSportChangeEvent();
+            MatchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
             SubscribeDateBarEvent();
 
@@ -53,7 +50,7 @@
         {
             if (today != DateTime.Today)
             {
-                await NavigateToRoot();
+                await NavigateToHome();
             }
         }
 
@@ -99,7 +96,7 @@
             IsLoading = showLoadingIndicator;
             MatchItemSource?.Clear();
 
-            var matchData = await matchService.GetMatches(
+            var matchData = await MatchService.GetMatches(
                     (int)SettingsService.CurrentSport,
                     SettingsService.CurrentLanguage,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),

@@ -2,8 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using LiveScore.Core.Constants;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using Prism.AppModel;
@@ -29,7 +27,6 @@
             NavigationService = navigationService;
             ServiceLocator = serviceLocator;
             SettingsService = ServiceLocator.Create<ISettingsService>();
-
         }
 
         public string Title { get; protected set; }
@@ -76,15 +73,9 @@
 
         public virtual void Dispose()
         {
-            EventAggregator.GetEvent<SportChangeEvent>().Unsubscribe(OnSportChange);
         }
 
-        protected virtual void SubscribeSportChangeEvent()
-            => EventAggregator.GetEvent<SportChangeEvent>().Subscribe(OnSportChange);
-
-        protected virtual async void OnSportChange(SportType sportType) => await NavigateToRoot();
-
-        protected async Task NavigateToRoot()
+        protected async Task NavigateToHome()
         {
             Dispose();
 
