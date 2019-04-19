@@ -2,7 +2,7 @@
 {
     using Refit;
 
-    public interface IApiService<T>
+    public interface IApiService<out T>
     {
         T GetApi();
     }

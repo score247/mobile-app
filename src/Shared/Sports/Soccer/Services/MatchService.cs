@@ -65,7 +65,6 @@
 
             try
             {
-                // TODO Refactor DTO later
                 var dtoMatches = await cacheService.GetAndFetchLatestValue(
                         $"DailyMatches-{sportId}-{language}-{fromDateText}-{toDateText}",
                         () => GetMatches(sportId, language, fromDateText, toDateText, timezone),
