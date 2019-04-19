@@ -28,7 +28,7 @@
             <ListView x:Name="CalendarListView"
                       ItemsSource="{Binding CalendarItems}"
                       Style="{StaticResource DateBarListView}"
-                      AutomationProperties.IsInAccessibleTree="True"
+                      AutomationProperties.IsInAccessibleTree="False"
                       AutomationId="DateBar">
                 <ListView.Behaviors>
                     <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectDateCommand}" EventArgsParameterPath="Item" />
