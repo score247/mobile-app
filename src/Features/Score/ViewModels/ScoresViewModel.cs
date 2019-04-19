@@ -62,16 +62,11 @@
             }
         }
 
-        public override void OnDisappearing()
+        private void SubscribeDateBarEvent()
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
                 .Subscribe(OnDateBarItemSelected);
-
-            if (MatchItemSource == null)
-            {
-                await LoadData(null);
-            }
         }
 
         public override void OnDisappearing()
