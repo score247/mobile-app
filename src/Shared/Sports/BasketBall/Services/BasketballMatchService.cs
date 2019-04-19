@@ -9,7 +9,7 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
 
-    public class MatchService : IMatchService
+    public class BasketballMatchService : IMatchService
     {
         public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
         {

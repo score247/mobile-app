@@ -30,7 +30,7 @@
             containerRegistry.RegisterInstance(CreateMapper());
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(SettingsService.LocalEndPoint));
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(SettingsService.LocalEndPoint));
-            containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.GetDescription());
+            containerRegistry.Register<IMatchService, SoccerMatchService>(SportType.Soccer.GetDescription());
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.GetDescription());
         }
 
