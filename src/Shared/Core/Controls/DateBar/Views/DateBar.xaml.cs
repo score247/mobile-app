@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
     using LiveScore.Core.Controls.DateBar.ViewModels;
-    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 
     public partial class DateBar : ContentView
@@ -9,10 +8,7 @@
         public DateBar()
         {
             InitializeComponent();
-            ViewModel = new DateBarViewModel
-            {
-                HomeIsSelected = true
-            };
+            ViewModel = new DateBarViewModel();
 
             CalendarListView.BindingContext = ViewModel;
             HomeButton.BindingContext = ViewModel;
@@ -20,10 +16,7 @@
 
         protected override void OnBindingContextChanged()
         {
-            var baseViewModel = (ViewModelBase)BindingContext;
-            ViewModel.EventAggregator = baseViewModel.EventAggregator;
-            ViewModel.SettingsService = baseViewModel.SettingsService;
-            ViewModel.RenderCalendarItems();
+            ViewModel.InitializeBindingContext(BindingContext);
         }
 
         public DateBarViewModel ViewModel { get; set; }

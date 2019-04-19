@@ -28,12 +28,12 @@
 
         public override void OnAppearing()
         {
-            CurrentSportName = SettingsService.CurrentSportName;
+            CurrentSportName = SettingsService.CurrentSport.GetDescription();
             sportItems = sportService.GetSportItems();
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Id == SettingsService.CurrentSportId;
+                sportItem.IsVisible = sportItem.Id == (int)SettingsService.CurrentSport;
             }
         }
 

@@ -7,6 +7,7 @@
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
     using LiveScore.Core.Services;
+    using LiveScore.Core.ViewModels;
     using Prism.Commands;
     using Prism.Events;
     using PropertyChanged;
@@ -28,6 +29,8 @@
 
         public int NumberOfDisplayDays { get; set; }
 
+        public DateTime CurrentTodayDate { get; } = DateTime.Today;
+
         public bool HomeIsSelected { get; set; }
 
         public ObservableCollection<DateBarItem> CalendarItems { get; private set; }
@@ -35,6 +38,15 @@
         public DelegateCommand<DateBarItem> SelectDateCommand { get; }
 
         public DelegateCommand SelectHomeCommand { get; }
+
+        public void InitializeBindingContext(object bindingContext)
+        {
+            var baseViewModel = (ViewModelBase)bindingContext;
+            EventAggregator = baseViewModel.EventAggregator;
+            SettingsService = baseViewModel.SettingsService;
+            RenderCalendarItems();
+            SelectHomeCommand.Execute();
+        }
 
         public void RenderCalendarItems()
         {

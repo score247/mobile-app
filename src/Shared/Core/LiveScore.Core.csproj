@@ -30,6 +30,7 @@
     <Folder Include="Factories\" />
     <Folder Include="Enumerations\" />
     <Folder Include="Views\Selectors\" />
+    <Folder Include="Events\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />

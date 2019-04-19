@@ -8,11 +8,9 @@
 
     public interface ISettingsService
     {
-        string CurrentSportName { get; set; }
-
-        int CurrentSportId { get; set; }
-
         string CurrentLanguage { get; set; }
+
+        SportType CurrentSport { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
 
@@ -25,16 +23,10 @@
     {
         public static string LocalEndPoint => "https://testing2.nexdev.net/main/api/";
 
-        public string CurrentSportName
+        public SportType CurrentSport
         {
-            get => GetValueOrDefault(nameof(CurrentSportName), SportType.Soccer.GetDescription());
-            set => AddOrUpdateValue(nameof(CurrentSportName), value);
-        }
-
-        public int CurrentSportId
-        {
-            get => GetValueOrDefault(nameof(CurrentSportId), (int)SportType.Soccer);
-            set => AddOrUpdateValue(nameof(CurrentSportId), value);
+            get => GetValueOrDefault(nameof(CurrentSport), SportType.Soccer);
+            set => AddOrUpdateValue(nameof(CurrentSport), value);
         }
 
         public string CurrentLanguage

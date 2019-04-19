@@ -41,7 +41,7 @@
             {
                 leagues = await apiPolicy.RetryAndTimeout
                 (
-                    () => leagueApi.GetLeagues(settingsService.CurrentSportId, settingsService.CurrentLanguage)
+                    () => leagueApi.GetLeagues((int)settingsService.CurrentSport, settingsService.CurrentLanguage)
                 );
             }
             catch (Exception ex)

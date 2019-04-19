@@ -1,17 +1,25 @@
 ﻿namespace LiveScore.ViewModels
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
+    using LiveScore.Core.Constants;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Factories;
     using LiveScore.Models;
+    using Prism.Events;
     using Prism.Navigation;
 
     public class SelectSportViewModel : ViewModelBase
     {
-        public SelectSportViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public SelectSportViewModel(
+            INavigationService navigationService,
+            IServiceLocator serviceLocator,
+            IEventAggregator eventAggregator)
+                : base(navigationService, serviceLocator, eventAggregator)
         {
             SelectSportItemCommand = new DelegateAsyncCommand(OnSelectSportItem);
             DoneCommand = new DelegateAsyncCommand(OnDone);
@@ -32,18 +40,17 @@
 
         private async Task OnSelectSportItem()
         {
-            var parameters = new NavigationParameters
-            {
-                { "changeSport", SettingsService.CurrentSportId != SelectedSportItem.Id && SelectedSportItem.Id != 0 }
-            };
-
             if (SelectedSportItem.Id != 0)
             {
-                SettingsService.CurrentSportName = SelectedSportItem.Name;
-                SettingsService.CurrentSportId = SelectedSportItem.Id;
-            }
+                var isSportChanged = (int)SettingsService.CurrentSport != SelectedSportItem.Id;
+                SettingsService.CurrentSport = (SportType)Enum.Parse(typeof(SportType), SelectedSportItem.Name);
 
-            await NavigationService.GoBackAsync(useModalNavigation: true, parameters: parameters);
+                if (isSportChanged)
+                {
+                    await NavigationService.GoBackAsync(useModalNavigation: true);
+                    EventAggregator.GetEvent<SportChangeEvent>().Publish(SettingsService.CurrentSport);
+                }
+            }
         }
 
         private async Task OnDone()

@@ -8,6 +8,7 @@
     using Core.Services;
     using Core.ViewModels;
     using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
@@ -16,8 +17,9 @@
 
     public class ScoresViewModel : ViewModelBase
     {
+        private readonly DateTime today;
+        private readonly IMatchService matchService;
         private DateRange selectedDateRange;
-        private IMatchService matchService;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -25,7 +27,12 @@
             IEventAggregator eventAggregator)
             : base(navigationService, serviceLocator, eventAggregator)
         {
-            SetupDateBarSubscribers();
+            today = DateTime.Today;
+            matchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
+
+            SubscribeSportChangeEvent();
+
+            SubscribeDateBarEvent();
 
             SetupCommands();
         }
@@ -42,24 +49,28 @@
 
         public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnResume()
         {
-            base.OnNavigatedTo(parameters);
-            var changeSport = parameters.GetValue<bool>("changeSport");
-
-            if (changeSport || MatchItemSource == null)
+            if (today != DateTime.Today)
             {
-                matchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSportName);
-
-                await LoadData(selectedDateRange);
+                await NavigateToRoot();
             }
         }
 
-        private void SetupDateBarSubscribers()
+        public override void Dispose()
+        {
+            base.Dispose();
+
+            EventAggregator
+                .GetEvent<DateBarItemSelectedEvent>()
+                .Unsubscribe(OnDateBarItemSelected);
+        }
+
+        private void SubscribeDateBarEvent()
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Subscribe(async (dateRange) => await LoadData(dateRange));
+                .Subscribe(OnDateBarItemSelected);
         }
 
         private void SetupCommands()
@@ -74,6 +85,11 @@
                 { nameof(IMatch), match }
             });
 
+        private async void OnDateBarItemSelected(DateRange dateRange)
+        {
+            await LoadData(dateRange);
+        }
+
         private async Task LoadData(
             DateRange dateRange,
             bool showLoadingIndicator = true,
@@ -81,9 +97,10 @@
             bool isRefreshing = false)
         {
             IsLoading = showLoadingIndicator;
+            MatchItemSource?.Clear();
 
             var matchData = await matchService.GetMatches(
-                    SettingsService.CurrentSportId,
+                    (int)SettingsService.CurrentSport,
                     SettingsService.CurrentLanguage,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
                     TimeZoneInfo.Local.BaseUtcOffset.ToString(),
