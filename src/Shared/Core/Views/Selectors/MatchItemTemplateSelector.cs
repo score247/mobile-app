@@ -6,15 +6,17 @@
     public class MatchItemTemplateSelector : DataTemplateSelector
     {
         private DataTemplate matchItemTemplate;
+        private string SportName;
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var viewModel = container.BindingContext as ViewModelBase;
-            var template = viewModel.ServiceLocator.Create<DataTemplate>(viewModel.SettingsService.CurrentSportName);
 
-            if (matchItemTemplate?.GetType() != template?.GetType())
+            if (string.IsNullOrWhiteSpace(SportName) ||
+                SportName != viewModel.SettingsService.CurrentSportName)
             {
-                matchItemTemplate = template;
+                SportName = viewModel.SettingsService.CurrentSportName;
+                matchItemTemplate = viewModel.ServiceLocator.Create<DataTemplate>(SportName);
             }
 
             return matchItemTemplate;
