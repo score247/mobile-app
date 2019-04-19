@@ -23,7 +23,7 @@
     <Style x:Key="WinLoseDrawGateInfo" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,4,0,0" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />        
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="13" />
     </Style>
 

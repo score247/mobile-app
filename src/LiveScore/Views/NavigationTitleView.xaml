@@ -5,9 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Content>
-        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}" AutomationProperties.IsInAccessibleTree="true">
+        <FlexLayout AutomationProperties.IsInAccessibleTree="true" Style="{StaticResource FlexLayoutVerticalCenter}">
             <StackLayout x:Name="SportName">
-                <Label x:Name="sportLabel" Style="{StaticResource SportName}" Text="{Binding CurrentSportName}" AutomationId="NavigationSportNameLbl" />
+                <Label
+                    x:Name="sportLabel"
+                    AutomationId="NavigationSportNameLbl"
+                    Style="{StaticResource SportName}"
+                    Text="{Binding CurrentSportName}" />
             </StackLayout>
             <Label
                 x:Name="titleLabel"
@@ -15,7 +19,7 @@
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
             <FlexLayout.GestureRecognizers>
-                  <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
+                <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
             </FlexLayout.GestureRecognizers>
         </FlexLayout>
     </ContentView.Content>

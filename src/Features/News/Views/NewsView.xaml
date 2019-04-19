@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:resources="clr-namespace:LiveScore.News.ViewResources"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             xmlns:soccerTemplates="clr-namespace:LiveScore.Soccer.Views.Templates;assembly=LiveScore.Soccer"
-             xmlns:basketBallTemplates="clr-namespace:LiveScore.BasketBall.Views.Templates;assembly=LiveScore.BasketBall"
-             x:Class="LiveScore.News.Views.NewsView"
-             BackgroundColor="{StaticResource PrimaryColor}"
-             x:Name="self">
+<ContentPage
+    x:Class="LiveScore.News.Views.NewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:resources="clr-namespace:LiveScore.News.ViewResources"
+    x:Name="self"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -20,132 +16,126 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <StackLayout>
         <FlexLayout Style="{StaticResource NavTabs}">
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Favorites" Text="{langs:Translate Favorites}" Style="{StaticResource TabText}"  />
+                <Label
+                    x:Name="Favorites"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Favorites}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="WorldNews" Text="{langs:Translate WorldNews}" Style="{StaticResource TabActiveText}"  />
+                <Label
+                    x:Name="WorldNews"
+                    Style="{StaticResource TabActiveText}"
+                    Text="{langs:Translate WorldNews}" />
                 <ContentView>
                     <BoxView Style="{StaticResource TabActiveLine}" />
                 </ContentView>
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Transfers" Text="{langs:Translate Transfers}" Style="{StaticResource TabText}"  />
+                <Label
+                    x:Name="Transfers"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Transfers}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Videos" Text="{langs:Translate Videos}" Style="{StaticResource TabText}"  />
+                <Label
+                    x:Name="Videos"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Videos}" />
             </StackLayout>
         </FlexLayout>
         <ScrollView Orientation="Vertical">
             <StackLayout>
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_1.png" Aspect="AspectFit" />
+                        <Image Aspect="AspectFit" Source="images/news/news_1.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Luis Enrique casts doubt over Isco's Spain place"
-                                Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04" 
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Luis Enrique casts doubt over Isco's Spain place" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_2.png" Aspect="AspectFit" />
+                        <Image Aspect="AspectFit" Source="images/news/news_2.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Carvaja wishes Morata well at Atletico"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_1.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_4.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Vinicius happy with Real Madrid role"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04" 
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_5.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_2.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_2.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Carvaja wishes Morata well at Atletico"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_1.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="United States 3 Panama 0: Berhalter enjoys winning debut"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                      <Image Source="images/news/news_4.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Vinicius happy with Real Madrid role"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
 
                 <StackLayout Style="{StaticResource NewsBlock}">
                     <StackLayout Style="{StaticResource NewsImage}">
-                        <Image Source="images/news/news_5.png" Aspect="AspectFill" />
+                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
                     </StackLayout>
                     <AbsoluteLayout Style="{StaticResource NewsContent}">
-                        <Label Text="Alba : United and Juve? My dream is to retire at Barca"
-                               Style="{StaticResource NewsTitle}" />
-                        <Label Text="28 Jan 2019, 15:04"
-                               Style="{StaticResource NewsDate}"/>
+                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
                     </AbsoluteLayout>
                 </StackLayout>
             </StackLayout>

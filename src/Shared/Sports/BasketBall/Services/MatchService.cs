@@ -11,7 +11,7 @@
 
     public class MatchService : IMatchService
     {
-        public Task<IList<IMatch>> GetLiveMatches(int sportId, string languge)
+        public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
         {
             throw new NotImplementedException();
         }

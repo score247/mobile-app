@@ -1,61 +1,61 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Name="view" 
-             x:Class="LiveScore.Score.Views.Templates.MatchH2HAwayTeamTemplate"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
-             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchH2HAwayTeamTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                 <coreResources:MatchViewResource />
+                <coreResources:MatchViewResource />
                 <resources:MatchDetailViewResource />
                 <resources:MatchH2HViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
     </ContentView.Resources>
     <StackLayout>
         <Frame Style="{StaticResource SubTabContainer}">
             <FlexLayout Style="{StaticResource SubTabBox}">
-                <Label Text="Verona" Style="{StaticResource SubTab}" />
-                <Label Text="Head to Head" Style="{StaticResource SubTab}"/>
-                <Label Text="Cosenza" Style="{StaticResource SubTabActive}" />
+                <Label Style="{StaticResource SubTab}" Text="Verona" />
+                <Label Style="{StaticResource SubTab}" Text="Head to Head" />
+                <Label Style="{StaticResource SubTabActive}" Text="Cosenza" />
             </FlexLayout>
         </Frame>
         <ScrollView Orientation="Vertical">
             <StackLayout>
                 <StackLayout>
-                  <FlexLayout Style="{StaticResource LeagueBox}">
+                    <FlexLayout Style="{StaticResource LeagueBox}">
                         <StackLayout Style="{StaticResource LeagueFlagContainer}">
                             <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
-                        <Label Text="ITALY SERIES B" Style="{StaticResource LeagueName}" />
+                        <Label Style="{StaticResource LeagueName}" Text="ITALY SERIES B" />
                         <Label Style="{StaticResource DetailIcon}" />
                     </FlexLayout>
                 </StackLayout>
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="2 Mar" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="2 Mar" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Foggia"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cosenza"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Foggia" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cosenza" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="2" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="1"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="2" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="1" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="L" Style="{StaticResource LoseResult}" />
+                        <Button Style="{StaticResource LoseResult}" Text="L" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -64,25 +64,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="27 Feb" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="27 Feb" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Cosenza"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Carpi"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Cosenza" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Carpi" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="1" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="0"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="1" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="0" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="L" Style="{StaticResource LoseResult}" />
+                        <Button Style="{StaticResource LoseResult}" Text="L" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -91,25 +91,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="23 Feb" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="23 Feb" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Perugia"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cosenza"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Perugia" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cosenza" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="0" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="1"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="0" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="1" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="W" Style="{StaticResource WinResult}" />
+                        <Button Style="{StaticResource WinResult}" Text="W" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -118,25 +118,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="17 Feb" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="17 Feb" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Cosenza"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cremonese"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Cosenza" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cremonese" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="2" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="0"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="2" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="0" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="W" Style="{StaticResource WinResult}" />
+                        <Button Style="{StaticResource WinResult}" Text="W" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -145,25 +145,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="10 Feb" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="10 Feb" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Livorno"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cosenza"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Livorno" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cosenza" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="2" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="0"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="2" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="0" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="W" Style="{StaticResource LoseResult}" />
+                        <Button Style="{StaticResource LoseResult}" Text="W" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -172,25 +172,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="2 Feb" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="2 Feb" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Cosenza"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cittadella"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Cosenza" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cittadella" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="2" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="2"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="2" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="2" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="D" Style="{StaticResource DrawResult}" />
+                        <Button Style="{StaticResource DrawResult}" Text="D" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -199,25 +199,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="29 Jan" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="29 Jan" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Verona"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Cosenza"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Verona" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Cosenza" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="2" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="1"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="2" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="1" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="W" Style="{StaticResource LoseResult}" />
+                        <Button Style="{StaticResource LoseResult}" Text="W" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -226,25 +226,25 @@
 
                 <FlexLayout Style="{StaticResource MatchBox}">
                     <StackLayout>
-                        <Label Text="29 Jan" Style="{StaticResource MatchStatus}" />
-                        <Label Text="FT" Style="{StaticResource MatchStatus}"/>
+                        <Label Style="{StaticResource MatchStatus}" Text="29 Jan" />
+                        <Label Style="{StaticResource MatchStatus}" Text="FT" />
                     </StackLayout>
                     <StackLayout FlexLayout.Grow="1">
-                        <Label Text="Cosenza"
-                       Style="{StaticResource HomeTeam}" />
-                        <Label Text="Ascoli"
-                       Style="{StaticResource AwayTeam}" />
+                        <Label Style="{StaticResource HomeTeam}" Text="Cosenza" />
+                        <Label Style="{StaticResource AwayTeam}" Text="Ascoli" />
                     </StackLayout>
                     <StackLayout WidthRequest="32">
-                        <Label  Text="0" 
-                        Style="{StaticResource Score}"
-                        Margin="0,4,20,0"/>
-                        <Label Text="0"
-                        Style="{StaticResource Score}"
-                        Margin="0,0,20,4" />
+                        <Label
+                            Margin="0,4,20,0"
+                            Style="{StaticResource Score}"
+                            Text="0" />
+                        <Label
+                            Margin="0,0,20,4"
+                            Style="{StaticResource Score}"
+                            Text="0" />
                     </StackLayout>
                     <StackLayout WidthRequest="25">
-                        <Button Text="D" Style="{StaticResource DrawResult}" />
+                        <Button Style="{StaticResource DrawResult}" Text="D" />
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>

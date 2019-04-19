@@ -80,7 +80,7 @@
     <Style x:Key="SubTabActive" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
     </Style>
-    
+
     <!-- Group -->
     <Style x:Key="Group" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
@@ -91,13 +91,12 @@
     <Style x:Key="GroupName" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />        
-    </Style>    
+        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+    </Style>
 
     <Style x:Key="TopInfo" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="Padding" Value="0,0,0,5" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
-
 </ResourceDictionary>

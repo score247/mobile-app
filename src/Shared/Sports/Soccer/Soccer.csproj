@@ -31,6 +31,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Prism.Plugin.Popups.DryIoc" Version="2.1.0.228" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.293080" />
     <PackageReference Include="Refit" Version="4.6.99" />
     <PackageReference Include="AutoMapper" Version="8.0.0" />

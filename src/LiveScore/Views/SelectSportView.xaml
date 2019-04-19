@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Views.SelectSportView"
-             Title="Select Sport"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Views.SelectSportView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Select Sport"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem
+            Name="Done"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Done" />
     </ContentPage.ToolbarItems>
 
     <StackLayout>
-        <ListView ItemsSource="{Binding SportItems}"
-                  SelectedItem="{Binding SelectedSportItem}"
-                  BackgroundColor="{StaticResource PrimaryColor}"
-                  SeparatorColor="{StaticResource LineColor}"
-                  VerticalOptions="FillAndExpand"
-                  AutomationProperties.IsInAccessibleTree="False">
+        <ListView
+            AutomationProperties.IsInAccessibleTree="False"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            ItemsSource="{Binding SportItems}"
+            SelectedItem="{Binding SelectedSportItem}"
+            SeparatorColor="{StaticResource LineColor}"
+            VerticalOptions="FillAndExpand">
             <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectSportItemCommand}" />
+                <b:EventToCommandBehavior Command="{Binding SelectSportItemCommand}" EventName="ItemTapped" />
             </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <FlexLayout Style="{StaticResource SettingMenuRow}">
-                            <Label x:Name="{Binding Name}" Text="{Binding Name}" Style="{StaticResource NavName}" />
+                            <Label
+                                x:Name="{Binding Name}"
+                                Style="{StaticResource NavName}"
+                                Text="{Binding Name}" />
                             <Label IsVisible="{Binding IsVisible}" Style="{StaticResource CheckIcon}" />
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <StackLayout Orientation="Horizontal">
-                </StackLayout>
+                <StackLayout Orientation="Horizontal" />
             </ListView.Footer>
         </ListView>
     </StackLayout>

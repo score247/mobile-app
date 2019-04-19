@@ -7,9 +7,9 @@
 
     public interface IMatch : IEntity<string, string>
     {
-        DateTime EventDate { get; }    
+        DateTime EventDate { get; }
 
-        IEnumerable<ITeam> Teams { get; }      
+        IEnumerable<ITeam> Teams { get; }
 
         IMatchResult MatchResult { get; }
 
@@ -24,7 +24,7 @@
 
     public class Match : Entity<string, string>, IMatch
     {
-        public DateTime EventDate { get; set; }      
+        public DateTime EventDate { get; set; }
 
         public IEnumerable<ITeam> Teams { get; set; }
 

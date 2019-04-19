@@ -8,7 +8,7 @@
     {
         public MatchDetailView()
         {
-            InitializeComponent();           
+            InitializeComponent();
         }
     }
 }

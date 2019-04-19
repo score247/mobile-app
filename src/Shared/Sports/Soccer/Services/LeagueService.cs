@@ -43,7 +43,6 @@
                 (
                     () => leagueApi.GetLeagues(settingsService.CurrentSportId, settingsService.CurrentLanguage)
                 );
-
             }
             catch (Exception ex)
             {

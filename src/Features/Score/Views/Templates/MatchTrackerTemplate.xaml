@@ -1,11 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Score.Views.Templates.MatchTrackerTemplate"
-             BackgroundColor="#1D2133">
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchTrackerTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#1D2133">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -16,57 +17,85 @@
     </ContentView.Resources>
     <ScrollView>
         <StackLayout>
-        <StackLayout Padding="7">
-            <Image Source="images/common/tracker.png" Aspect="AspectFill" />
-        </StackLayout>
-        <!-- COMMENTARIES -->
-        <FlexLayout Style="{StaticResource Group}">
-            <Label Text="COMMENTARIES" Style="{StaticResource GroupName}" />
-            <Label Text="Highlight" Style="{StaticResource GroupName}" />
-        </FlexLayout>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="42" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="auto" />
-            </Grid.RowDefinitions>
-            <!-- Match ends -->                
-         
-            <Label Style="{StaticResource MatchEndIcon}" />
-            <Label Grid.Column="1" Grid.Row="0" Text="Match ends, Verona 2, Cosenza 1." Style="{StaticResource CommentariesText}" />
-            <!-- Time -->
-            <Frame Grid.Column="0" Grid.Row="1" Style="{StaticResource CommentariesTime}">
-                <Label Text="90'" Style="{StaticResource Minutes}" />
-            </Frame>
-            <Label Grid.Column="1" Grid.Row="1" Text="Second Half ends, Verona 2, Cosenza 1." Style="{StaticResource CommentariesText}" />
-            <!-- Goal! -->
-            <Frame Grid.Column="0" Grid.Row="2" Style="{StaticResource CommentariesGoal}">
-                <Label Text="88'" Style="{StaticResource Minutes}" />
-            </Frame>
-            <StackLayout Grid.Column="1" Grid.Row="2" Margin="0,7">
-                <Label Text="GOAL!" Style="{StaticResource CommentariesContentGoal}" />
-                <Label Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" Style="{StaticResource CommentariesDetailGoal}" />
+            <StackLayout Padding="7">
+                <Image Aspect="AspectFill" Source="images/common/tracker.png" />
             </StackLayout>
-            <!-- Time -->
-            <Frame Grid.Column="0" Grid.Row="3" Style="{StaticResource CommentariesTime}">
-                <Label Text="82'" Style="{StaticResource Minutes}" />
-            </Frame>
-            <Label Grid.Column="1" Grid.Row="3" Text="Goal kick for Verona at Carlo Castellani" Style="{StaticResource CommentariesText}" />
-            <!-- Yellow card -->
-            <Frame Grid.Column="0" Grid.Row="4" Style="{StaticResource CommentariesYellowCard}">
-                <Label Text="63'" Style="{StaticResource Minutes}" />
-            </Frame>
-            <Label Grid.Column="1" Grid.Row="4" Text="YELLOW CARD!" Style="{StaticResource CommentariesContentYellowCard}" />
-                
-        </Grid>
-            
-    </StackLayout>
+            <!--  COMMENTARIES  -->
+            <FlexLayout Style="{StaticResource Group}">
+                <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
+                <Label Style="{StaticResource GroupName}" Text="Highlight" />
+            </FlexLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <!--  Match ends  -->
+
+                <Label Style="{StaticResource MatchEndIcon}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource CommentariesText}"
+                    Text="Match ends, Verona 2, Cosenza 1." />
+                <!--  Time  -->
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource CommentariesTime}">
+                    <Label Style="{StaticResource Minutes}" Text="90'" />
+                </Frame>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource CommentariesText}"
+                    Text="Second Half ends, Verona 2, Cosenza 1." />
+                <!--  Goal!  -->
+                <Frame
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Style="{StaticResource CommentariesGoal}">
+                    <Label Style="{StaticResource Minutes}" Text="88'" />
+                </Frame>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,7">
+                    <Label Style="{StaticResource CommentariesContentGoal}" Text="GOAL!" />
+                    <Label Style="{StaticResource CommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                </StackLayout>
+                <!--  Time  -->
+                <Frame
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Style="{StaticResource CommentariesTime}">
+                    <Label Style="{StaticResource Minutes}" Text="82'" />
+                </Frame>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource CommentariesText}"
+                    Text="Goal kick for Verona at Carlo Castellani" />
+                <!--  Yellow card  -->
+                <Frame
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Style="{StaticResource CommentariesYellowCard}">
+                    <Label Style="{StaticResource Minutes}" Text="63'" />
+                </Frame>
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Style="{StaticResource CommentariesContentYellowCard}"
+                    Text="YELLOW CARD!" />
+            </Grid>
+        </StackLayout>
     </ScrollView>
-    
 </ContentView>

@@ -1,234 +1,235 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Name="view" 
-             x:Class="LiveScore.Score.Views.Templates.MatchLineUpsTemplate"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchLineUpsTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
                 <resources:MatchLineUpsViewResource />
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>        
+        </ResourceDictionary>
     </ContentView.Resources>
 
     <ScrollView>
         <StackLayout Style="{StaticResource LineUpsContainer}">
             <StackLayout>
-                <Image Source="images/common/line_ups.png" Aspect="AspectFit" />
+                <Image Aspect="AspectFit" Source="images/common/line_ups.png" />
             </StackLayout>
             <FlexLayout Style="{StaticResource Group}">
-                <Label Text="SUBSTITUTIONS" Style="{StaticResource GroupName}" />
+                <Label Style="{StaticResource GroupName}" Text="SUBSTITUTIONS" />
             </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
-                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}">
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                        <Label Text="76'" Style="{StaticResource SubstitutionTime}"  />
+                        <Label Style="{StaticResource SubstitutionTime}" Text="76'" />
                         <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
                                 </StackLayout>
-                                <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Daniele Sciaudone" />
                             </FlexLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_out.png" />
                                 </StackLayout>
-                                <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Carlos Embalo" />
                             </FlexLayout>
                         </StackLayout>
                     </FlexLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}">
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                         <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Tommaso D'Orazio" Style="{StaticResource PlayerNameIn}"  />
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Tommaso D'Orazio" />
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
                             </FlexLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Matteo Legittimo" Style="{StaticResource PlayerNameOut}" />
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Matteo Legittimo" />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_out.png" />
                                 </StackLayout>
                             </FlexLayout>
                         </StackLayout>
-                        <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
+                        <Label Style="{StaticResource SubstitutionTime}" Text="70'" />
                     </FlexLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}">
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                         <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Leonardo Perez" Style="{StaticResource PlayerNameIn}"  />
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Leonardo Perez" />
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
                             </FlexLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Ricardo Maniero" Style="{StaticResource PlayerNameOut}" />
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Ricardo Maniero" />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_out.png" />
                                 </StackLayout>
                             </FlexLayout>
                         </StackLayout>
-                        <Label Text="70'" Style="{StaticResource SubstitutionTime}"  />
+                        <Label Style="{StaticResource SubstitutionTime}" Text="70'" />
                     </FlexLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}">
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                        <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
+                        <Label Style="{StaticResource SubstitutionTime}" Text="68'" />
                         <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
                                 </StackLayout>
-                                <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerNameIn}"  />
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Samuel Di Carmine" />
                             </FlexLayout>
-                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
-                                </StackLayout>
-                                <Label Text="Giampaolo Pazzini" Style="{StaticResource PlayerNameOut}" />
-                            </FlexLayout>
-                        </StackLayout>
-                    </FlexLayout>
-                </StackLayout>
-                <StackLayout Style="{StaticResource SubstitutionAlignLeft}" >
-                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                        <Label Text="68'" Style="{StaticResource SubstitutionTime}"  />
-                        <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_out.png" />
                                 </StackLayout>
-                                <Label Text="Matos" Style="{StaticResource PlayerNameIn}"  />
-                            </FlexLayout>
-                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_home_out.png" Aspect="AspectFit" />
-                                </StackLayout>
-                                <Label Text="Antonio Di Gaudio" Style="{StaticResource PlayerNameOut}" />
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Giampaolo Pazzini" />
                             </FlexLayout>
                         </StackLayout>
                     </FlexLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource SubstitutionAlignRight}" >
+                <StackLayout Style="{StaticResource SubstitutionAlignLeft}">
+                    <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
+                        <Label Style="{StaticResource SubstitutionTime}" Text="68'" />
+                        <StackLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
+                                </StackLayout>
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Matos" />
+                            </FlexLayout>
+                            <FlexLayout Style="{StaticResource FlexLayoutAlignLeft}">
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_out.png" />
+                                </StackLayout>
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Antonio Di Gaudio" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </FlexLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource SubstitutionAlignRight}">
                     <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                         <StackLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerNameIn}"  />
+                                <Label Style="{StaticResource PlayerNameIn}" Text="Daniele Sciaudone" />
                                 <StackLayout Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
                             </FlexLayout>
                             <FlexLayout Style="{StaticResource FlexLayoutAlignRight}">
-                                <Label Text="Carlos Embalo" Style="{StaticResource PlayerNameOut}" />
-                                <StackLayout  Style="{StaticResource SubstitutionImageContainer}">
-                                    <Image Source="images/common/substitution_away_out.png" Aspect="AspectFit" />
+                                <Label Style="{StaticResource PlayerNameOut}" Text="Carlos Embalo" />
+                                <StackLayout Style="{StaticResource SubstitutionImageContainer}">
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_out.png" />
                                 </StackLayout>
                             </FlexLayout>
                         </StackLayout>
-                        <Label Text="66'" Style="{StaticResource SubstitutionTime}"  />
+                        <Label Style="{StaticResource SubstitutionTime}" Text="66'" />
                     </FlexLayout>
                 </StackLayout>
             </StackLayout>
 
             <FlexLayout Style="{StaticResource Group}">
-                <Label Text="SUBSTITUTE PLAYERS" Style="{StaticResource GroupName}" />
+                <Label Style="{StaticResource GroupName}" Text="SUBSTITUTE PLAYERS" />
             </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                        <Button Text="20" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="20" />
                         <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Daniele Sciaudone" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="70'" />
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
                                 </StackLayout>
                             </StackLayout>
                         </FlexLayout>
                     </StackLayout>
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
                         <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Daniele Sciaudone" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
-                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="70'" />
                             </StackLayout>
                         </FlexLayout>
-                        <Button Text="12" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="12" />
                     </StackLayout>
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                        <Button Text="17" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="17" />
                         <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                            <Label Text="Samuel Di Carmine" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Samuel Di Carmine" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                                <Label Text="68'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="68'" />
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
                                 </StackLayout>
                             </StackLayout>
                         </FlexLayout>
                     </StackLayout>
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
                         <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                            <Label Text="Leonardo Perez" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Leonardo Perez" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
-                                <Label Text="70'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="70'" />
                             </StackLayout>
                         </FlexLayout>
-                        <Button Text="1" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="1" />
                     </StackLayout>
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" >
+                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
-                        <Button Text="13" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="13" />
                         <FlexLayout Style="{StaticResource SubSTPlayerColLeft}">
-                            <Label Text="Matos" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Matos" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                                <Label Text="68'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="68'" />
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_home_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_home_in.png" />
                                 </StackLayout>
                             </StackLayout>
                         </FlexLayout>
                     </StackLayout>
                     <StackLayout Style="{StaticResource SubSTPlayerColContainer}">
                         <FlexLayout Style="{StaticResource SubSTPlayerColRight}">
-                            <Label Text="Daniele Sciaudone" Style="{StaticResource PlayerName}" />
+                            <Label Style="{StaticResource PlayerName}" Text="Daniele Sciaudone" />
                             <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                                 <StackLayout Style="{StaticResource SubSTPlayerImageContainer}">
-                                    <Image Source="images/common/substitution_away_in.png" Aspect="AspectFit" />
+                                    <Image Aspect="AspectFit" Source="images/common/substitution_away_in.png" />
                                 </StackLayout>
-                                <Label Text="66'" Style="{StaticResource PlayerName}"/>
+                                <Label Style="{StaticResource PlayerName}" Text="66'" />
                             </StackLayout>
                         </FlexLayout>
-                        <Button Text="3" Style="{StaticResource PlayerNumber}" />
+                        <Button Style="{StaticResource PlayerNumber}" Text="3" />
                     </StackLayout>
                 </FlexLayout>
             </StackLayout>
             <FlexLayout Style="{StaticResource Group}">
-                <Label Text="COACHES" Style="{StaticResource GroupName}" />
+                <Label Style="{StaticResource GroupName}" Text="COACHES" />
             </FlexLayout>
             <StackLayout Style="{StaticResource Container}">
                 <FlexLayout Style="{StaticResource CoachContainer}">
-                    <Label Text="Fabio Grosso" Style="{StaticResource PlayerName}" />
-                    <Label Text="Piero Braglia" Style="{StaticResource PlayerName}" />
+                    <Label Style="{StaticResource PlayerName}" Text="Fabio Grosso" />
+                    <Label Style="{StaticResource PlayerName}" Text="Piero Braglia" />
                 </FlexLayout>
             </StackLayout>
         </StackLayout>

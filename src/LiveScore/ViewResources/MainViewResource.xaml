@@ -19,7 +19,7 @@
         <Setter Property="Margin" Value="0,0,10,0" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
-   
+
     <Style x:Key="LanguageName" BasedOn="{StaticResource NavValue}" TargetType="Label">
         <Setter Property="Margin" Value="8,14,0,14" />
     </Style>

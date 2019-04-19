@@ -2,8 +2,8 @@
 {
     using System;
     using System.Globalization;
-    using Xamarin.Forms;
     using LiveScore.Common.Extensions;
+    using Xamarin.Forms;
 
     public class MatchHeaderEventDayConverter : IValueConverter
     {

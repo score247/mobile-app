@@ -9,7 +9,7 @@
 
     <Style x:Key="TableSubHeaderText" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="FontAttributes" Value="Bold" />        
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style x:Key="BookmarkerName" BasedOn="{StaticResource TableBodyText}" TargetType="Label">
@@ -51,5 +51,4 @@
     <Style x:Key="LastUpdateText" BasedOn="{StaticResource TableBodyOddsText}" TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="2" />
     </Style>
-    
 </ResourceDictionary>

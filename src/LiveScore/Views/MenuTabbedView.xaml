@@ -1,23 +1,28 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-            prism:ViewModelLocator.AutowireViewModel="True"
-            xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
-            xmlns:league="clr-namespace:LiveScore.League.Views;assembly=LiveScore.League"
-            xmlns:news="clr-namespace:LiveScore.News.Views;assembly=LiveScore.News"
-            xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
-            xmlns:tvschedule="clr-namespace:LiveScore.TVSchedule.Views;assembly=LiveScore.TVSchedule"
-            xmlns:views="clr-namespace:LiveScore.Views"
-            xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-            x:Class="LiveScore.Views.MenuTabbedView"
-            x:Name="self"
-            BarTextColor="{StaticResource SecondTextColor}"
-            BarBackgroundColor="{StaticResource PrimaryColor}"
-            BackgroundColor="{StaticResource PrimaryColor}">
+<TabbedPage
+    x:Class="LiveScore.Views.MenuTabbedView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:league="clr-namespace:LiveScore.League.Views;assembly=LiveScore.League"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:news="clr-namespace:LiveScore.News.Views;assembly=LiveScore.News"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
+    xmlns:tvschedule="clr-namespace:LiveScore.TVSchedule.Views;assembly=LiveScore.TVSchedule"
+    xmlns:views="clr-namespace:LiveScore.Views"
+    x:Name="self"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}"
+    BarBackgroundColor="{StaticResource PrimaryColor}"
+    BarTextColor="{StaticResource SecondTextColor}">
     <TabbedPage.Children>
-        <NavigationPage x:Name="ScoresBar" Title="{langs:Translate Scores}" Icon="images/common/soccer.png" AutomationId="ScoresBar" >
+        <NavigationPage
+            x:Name="ScoresBar"
+            Title="{langs:Translate Scores}"
+            AutomationId="ScoresBar"
+            Icon="images/common/soccer.png">
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
@@ -27,7 +32,11 @@
             </x:Arguments>
         </NavigationPage>
 
-       <NavigationPage x:Name="LiveBar" Title="{langs:Translate Live}" Icon="images/common/live.png" AutomationId="LiveBar" >
+        <NavigationPage
+            x:Name="LiveBar"
+            Title="{langs:Translate Live}"
+            AutomationId="LiveBar"
+            Icon="images/common/live.png">
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
                     <NavigationPage.TitleView>
@@ -37,7 +46,11 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="FavoritesBar" Title="{langs:Translate Favorites}" Icon="images/common/favorite.png" AutomationId="FavoritesBar" >
+        <NavigationPage
+            x:Name="FavoritesBar"
+            Title="{langs:Translate Favorites}"
+            AutomationId="FavoritesBar"
+            Icon="images/common/favorite.png">
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
@@ -47,7 +60,11 @@
             </x:Arguments>
         </NavigationPage>
 
-        <NavigationPage x:Name="LeaguesBar" Title="{langs:Translate Leagues}" Icon="images/common/league.png" AutomationId="LeaguesBar" >
+        <NavigationPage
+            x:Name="LeaguesBar"
+            Title="{langs:Translate Leagues}"
+            AutomationId="LeaguesBar"
+            Icon="images/common/league.png">
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
@@ -56,11 +73,14 @@
                 </league:LeagueView>
             </x:Arguments>
         </NavigationPage>
-        
-         <NavigationPage x:Name="MoreBar" Title="More" Icon="images/common/more.png" AutomationId="MoreBar">
+
+        <NavigationPage
+            x:Name="MoreBar"
+            Title="More"
+            AutomationId="MoreBar"
+            Icon="images/common/more.png">
             <x:Arguments>
-                <views:TabMoreView Title="More">
-                </views:TabMoreView>
+                <views:TabMoreView Title="More" />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

@@ -21,12 +21,12 @@
 
     public class ApiPolicy : IApiPolicy
     {
-        const int DEFAULT_COUNT = 3;
-        const int TIMEOUT_SECONDS = 2;
-        const int DEFAULT_POW = 2;
+        private const int DEFAULT_COUNT = 3;
+        private const int TIMEOUT_SECONDS = 2;
+        private const int DEFAULT_POW = 2;
 
         // Handle both exceptions and return values in one policy
-        readonly HttpStatusCode[] httpStatusCodesWorthRetrying =
+        private readonly HttpStatusCode[] httpStatusCodesWorthRetrying =
         {
             HttpStatusCode.RequestTimeout, // 408
             HttpStatusCode.InternalServerError, // 500
@@ -49,7 +49,7 @@
         {
             var retryPolicy = Policy
             .Handle<WebException>()
-            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))           
+            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))
             .Retry(DEFAULT_COUNT);
 
             var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);

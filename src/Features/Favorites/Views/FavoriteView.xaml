@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Favorites.Views.FavoriteView"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Favorites.Views.FavoriteView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/add.png" />
     </ContentPage.ToolbarItems>
-    
+
     <StackLayout Spacing="0">
         <FlexLayout Style="{StaticResource NavTabs}">
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Teams" Text="{langs:Translate Teams}" Style="{StaticResource TabText}" />
+                <Label
+                    x:Name="Teams"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Teams}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Matches" Text="{langs:Translate Matches}" Style="{StaticResource TabText}" />
+                <Label
+                    x:Name="Matches"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Matches}" />
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Leagues" Text="{langs:Translate Leagues}" Style="{StaticResource TabActiveText}" />
+                <Label
+                    x:Name="Leagues"
+                    Style="{StaticResource TabActiveText}"
+                    Text="{langs:Translate Leagues}" />
                 <ContentView>
                     <BoxView Style="{StaticResource TabActiveLine}" />
                 </ContentView>
             </StackLayout>
             <StackLayout Style="{StaticResource Tab}">
-                <Label x:Name="Nations" Text="{langs:Translate Nations}" Style="{StaticResource TabText}" />
+                <Label
+                    x:Name="Nations"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Nations}" />
             </StackLayout>
         </FlexLayout>
         <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                 <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                <Label Text="Champion League" Style="{StaticResource LeagueName}" />
+                <Label Style="{StaticResource LeagueName}" Text="Champion League" />
             </StackLayout>
             <Label Style="{StaticResource LeagueArrowRightIcon}" />
         </FlexLayout>
@@ -40,10 +52,9 @@
             <BoxView Style="{StaticResource HorizontalLine}" />
         </ContentView>
         <FlexLayout x:Name="EuropaLeague" Style="{StaticResource LeagueGroup}">
-            <StackLayout Orientation="Horizontal"
-                         HorizontalOptions="StartAndExpand">
+            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
                 <Image Source="images/flag_league/europa_league.png" Style="{StaticResource LeagueLogo}" />
-                <Label Text="Europa League" Style="{StaticResource LeagueName}" />
+                <Label Style="{StaticResource LeagueName}" Text="Europa League" />
             </StackLayout>
             <Label Style="{StaticResource LeagueArrowRightIcon}" />
         </FlexLayout>

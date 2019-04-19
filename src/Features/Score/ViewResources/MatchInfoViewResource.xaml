@@ -2,9 +2,9 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="LiveScore.Score.ViewResources.MatchInfoViewResource">
-    
+
     <!-- Tab content -->
-    
+
     <Style x:Key="TabContent" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Center" />
@@ -33,7 +33,7 @@
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FlexLayout.AlignSelf" Value="Center" />
     </Style>
-    
+
     <Style x:Key="InfoContentRight" TargetType="StackLayout">
         <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
@@ -46,7 +46,7 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
 
     <Style x:Key="InfoText" TargetType="Label">
@@ -54,13 +54,13 @@
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="14,0" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
 
     <Style x:Key="MatchYellowCard" BasedOn="{StaticResource YellowCard}" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
-    
+
     <Style x:Key="MatchInfoBall" TargetType="Image">
         <Setter Property="Source" Value="images/common/ball.png" />
         <Setter Property="WidthRequest" Value="12" />
@@ -75,9 +75,9 @@
     </Style>
     <Style x:Key="MatchInfoTitle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
     <Style x:Key="MatchInfoValue" BasedOn="{StaticResource MatchInfoTitle}" TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 </ResourceDictionary>

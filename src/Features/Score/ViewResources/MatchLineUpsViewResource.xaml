@@ -6,7 +6,7 @@
     <Style x:Key="LineUpsContainer" TargetType="StackLayout">
         <Setter Property="Padding" Value="8,0" />
     </Style>
-    <Style x:Key="Container" TargetType="StackLayout">        
+    <Style x:Key="Container" TargetType="StackLayout">
         <Setter Property="Padding" Value="10,10,10,2" />
         <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
     </Style>
@@ -18,7 +18,7 @@
     </Style>
     <Style x:Key="SubstitutionTime" TargetType="Label">
         <Setter Property="WidthRequest" Value="50" />
-        <Setter Property="Margin" Value="6,0" />        
+        <Setter Property="Margin" Value="6,0" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
@@ -29,7 +29,7 @@
 
     <Style x:Key="PlayerName" TargetType="Label">
         <Setter Property="Margin" Value="8,0" />
-        <Setter Property="FontSize" Value="13" />        
+        <Setter Property="FontSize" Value="13" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
     <Style x:Key="PlayerNameIn" BasedOn="{StaticResource PlayerName}" TargetType="Label">
@@ -47,8 +47,8 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />        
-        <Setter Property="FontAttributes" Value="Bold" />        
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style x:Key="SubSTPlayerColContainer" TargetType="StackLayout">
         <Setter Property="FlexLayout.Grow" Value="1" />

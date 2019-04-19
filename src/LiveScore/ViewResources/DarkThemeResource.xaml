@@ -3,7 +3,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="LiveScore.ViewResources.DarkThemeResource">
     <!--Calendar Styles-->
-   
+
             <Color x:Key="PrimaryColor">#0F111C</Color>
             <Color x:Key="SecondColor">#1D2133</Color>
             <!-- Orange Color -->
@@ -21,6 +21,4 @@
             <Color x:Key="LineColor">#2E3245</Color>
             <Color x:Key="YellowCardColor">#E5C20B</Color>
             <Color x:Key="RedCardColor">#FC1923</Color>
-
-    
 </ResourceDictionary>

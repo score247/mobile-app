@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
-             xmlns:controls="clr-namespace:LiveScore.Score.Controls"
-             xmlns:tabstrip="clr-namespace:LiveScore.Common.Controls.TabStrip;assembly=LiveScore.Common"
-             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-             x:Class="LiveScore.Score.Views.MatchDetailView"
-             x:Name="self"
-             Title="Match Info"
-             BackgroundColor="#1D2133">
+<ContentPage
+    x:Class="LiveScore.Score.Views.MatchDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+    xmlns:controls="clr-namespace:LiveScore.Score.Controls"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    xmlns:tabstrip="clr-namespace:LiveScore.Common.Controls.TabStrip;assembly=LiveScore.Common"
+    x:Name="self"
+    Title="Match Info"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#1D2133">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/star.png" />
     </ContentPage.ToolbarItems>
@@ -21,34 +22,33 @@
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <tabstrip:TabViewSelector x:Key="tabViewSelector"></tabstrip:TabViewSelector>
+            <tabstrip:TabViewSelector x:Key="tabViewSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <!-- Match Score -->
+        <!--  Match Score  -->
         <FlexLayout Style="{StaticResource MatchScoreContainer}">
             <StackLayout Style="{StaticResource MatchScoreFirstCol}">
                 <StackLayout Style="{StaticResource TeamLogoContainer}">
-                    <Image Source="images/logos/logo_1.png" Aspect="AspectFit" />
+                    <Image Aspect="AspectFit" Source="images/logos/logo_1.png" />
                 </StackLayout>
-                <Label Text="Verona" Style="{StaticResource MatchScoreHomeTeam}" />
+                <Label Style="{StaticResource MatchScoreHomeTeam}" Text="Verona" />
             </StackLayout>
             <StackLayout>
-                <Button Text="2 - 1" Style="{StaticResource MatchScoreBox}" />
+                <Button Style="{StaticResource MatchScoreBox}" Text="2 - 1" />
                 <StackLayout Style="{StaticResource GeneralMatchStatusContainer}">
-                    <Label Text="Full Time" Style="{StaticResource GeneralMatchStatus}" />
-                    <Label Text="15:00 Jan 25, 2019" Style="{StaticResource GeneralMatchStatus}" />
-                    <Label Text="Serie B Italy" Style="{StaticResource GeneralMatchStatus}" />
-                </StackLayout>                
+                    <Label Style="{StaticResource GeneralMatchStatus}" Text="Full Time" />
+                    <Label Style="{StaticResource GeneralMatchStatus}" Text="15:00 Jan 25, 2019" />
+                    <Label Style="{StaticResource GeneralMatchStatus}" Text="Serie B Italy" />
+                </StackLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource MatchScoreLastCol}">
                 <StackLayout Style="{StaticResource TeamLogoContainer}">
-                    <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
+                    <Image Aspect="AspectFit" Source="images/logos/logo_2.png" />
                 </StackLayout>
-                <Label Text="Cosenza" Style="{StaticResource MatchScoreAwayTeam}"  />
+                <Label Style="{StaticResource MatchScoreAwayTeam}" Text="Cosenza" />
             </StackLayout>
         </FlexLayout>
-        <tabstrip:TabStrip ItemsSource="{Binding MatchDetailItems}"></tabstrip:TabStrip>
-        
+        <tabstrip:TabStrip ItemsSource="{Binding MatchDetailItems}" />
     </StackLayout>
 </ContentPage>

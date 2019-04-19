@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Name="view" 
-             x:Class="LiveScore.Score.Views.Templates.MatchStatsTemplate"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchStatsTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -12,130 +13,130 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    
+
     <ContentView.Content>
         <StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="2" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Shots on target" Style="{StaticResource StatsInfo}" />
-                    <Label Text="5" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="2" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Shots on target" />
+                    <Label Style="{StaticResource StatsInfo}" Text="5" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".2"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".5"></ProgressBar>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="7" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Shots off target" Style="{StaticResource StatsInfo}" />
-                    <Label Text="3" Style="{StaticResource StatsInfo}" />
-                </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".7"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".3"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".2" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".5" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="2" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Blocked shots" Style="{StaticResource StatsInfo}" />
-                    <Label Text="5" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="7" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Shots off target" />
+                    <Label Style="{StaticResource StatsInfo}" Text="3" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".2"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".5"></ProgressBar>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="58" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Possession" Style="{StaticResource StatsInfo}" />
-                    <Label Text="32" Style="{StaticResource StatsInfo}" />
-                </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".5"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".2"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".7" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".3" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="2" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Corner kicks" Style="{StaticResource StatsInfo}" />
-                    <Label Text="3" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="2" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Blocked shots" />
+                    <Label Style="{StaticResource StatsInfo}" Text="5" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".2"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".3"></ProgressBar>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="3" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Offsides" Style="{StaticResource StatsInfo}" />
-                    <Label Text="5" Style="{StaticResource StatsInfo}" />
-                </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".3"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".5"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".2" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".5" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="8" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Fouls" Style="{StaticResource StatsInfo}" />
-                    <Label Text="3" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="58" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Possession" />
+                    <Label Style="{StaticResource StatsInfo}" Text="32" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".8"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".3"></ProgressBar>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="2" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Yellow cards" Style="{StaticResource StatsInfo}" />
-                    <Label Text="0" Style="{StaticResource StatsInfo}" />
-                </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".2"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress="0"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".5" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".2" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="6" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Counter attacks" Style="{StaticResource StatsInfo}" />
-                    <Label Text="9" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="2" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Corner kicks" />
+                    <Label Style="{StaticResource StatsInfo}" Text="3" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".6"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".9"></ProgressBar>
-                </FlexLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="12" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Goal kicks" Style="{StaticResource StatsInfo}" />
-                    <Label Text="4" Style="{StaticResource StatsInfo}" />
-                </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".6"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".2"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".2" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".3" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
             <StackLayout Style="{StaticResource StatContainer}">
-                <FlexLayout Style="{StaticResource StatsRow}" >
-                    <Label Text="6" Style="{StaticResource StatsInfo}" />
-                    <Label Text="Treatments" Style="{StaticResource StatsInfo}" />
-                    <Label Text="2" Style="{StaticResource StatsInfo}" />
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="3" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Offsides" />
+                    <Label Style="{StaticResource StatsInfo}" Text="5" />
                 </FlexLayout>
-                <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}" AlignItems="Center">
-                    <ProgressBar Style="{StaticResource LeftStatsProgressBar}" Progress=".6"></ProgressBar>
-                    <ProgressBar Style="{StaticResource RightStatsProgressBar}" Progress=".2"></ProgressBar>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".3" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".5" Style="{StaticResource RightStatsProgressBar}" />
                 </FlexLayout>
             </StackLayout>
-        </StackLayout>       
+            <StackLayout Style="{StaticResource StatContainer}">
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="8" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Fouls" />
+                    <Label Style="{StaticResource StatsInfo}" Text="3" />
+                </FlexLayout>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".8" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".3" Style="{StaticResource RightStatsProgressBar}" />
+                </FlexLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource StatContainer}">
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="2" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Yellow cards" />
+                    <Label Style="{StaticResource StatsInfo}" Text="0" />
+                </FlexLayout>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".2" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress="0" Style="{StaticResource RightStatsProgressBar}" />
+                </FlexLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource StatContainer}">
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="6" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Counter attacks" />
+                    <Label Style="{StaticResource StatsInfo}" Text="9" />
+                </FlexLayout>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".6" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".9" Style="{StaticResource RightStatsProgressBar}" />
+                </FlexLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource StatContainer}">
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="12" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Goal kicks" />
+                    <Label Style="{StaticResource StatsInfo}" Text="4" />
+                </FlexLayout>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".6" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".2" Style="{StaticResource RightStatsProgressBar}" />
+                </FlexLayout>
+            </StackLayout>
+            <StackLayout Style="{StaticResource StatContainer}">
+                <FlexLayout Style="{StaticResource StatsRow}">
+                    <Label Style="{StaticResource StatsInfo}" Text="6" />
+                    <Label Style="{StaticResource StatsInfo}" Text="Treatments" />
+                    <Label Style="{StaticResource StatsInfo}" Text="2" />
+                </FlexLayout>
+                <FlexLayout AlignItems="Center" Style="{StaticResource FlexLayoutHorizontalCenter}">
+                    <ProgressBar Progress=".6" Style="{StaticResource LeftStatsProgressBar}" />
+                    <ProgressBar Progress=".2" Style="{StaticResource RightStatsProgressBar}" />
+                </FlexLayout>
+            </StackLayout>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>
