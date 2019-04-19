@@ -21,6 +21,8 @@
         Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null);
 
         DateTime CacheDuration(CacheDurationTerm cacheKind);
+
+        Task Vacuum();
     }
 
     public enum CacheDurationTerm
@@ -67,5 +69,7 @@
         => cacheKind == CacheDurationTerm.Short 
             ? DateTime.Now.AddMinutes(ShortTerm) 
             : DateTime.Now.AddMinutes(LongTerm);
+
+        public async Task Vacuum() => await BlobCache.LocalMachine.Vacuum();
     }
 }
