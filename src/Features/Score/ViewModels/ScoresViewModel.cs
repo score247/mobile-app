@@ -54,17 +54,15 @@
         }
 
         public override void OnDisappearing()
-        {
-            EventAggregator
+            => EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(async (dateRange) => await LoadData(dateRange));
-        }
+                .Unsubscribe(OnDateBarItemSelected);
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             EventAggregator
                .GetEvent<DateBarItemSelectedEvent>()
-               .Subscribe(async (dateRange) => await LoadData(dateRange));
+               .Subscribe(OnDateBarItemSelected);
 
             if (MatchItemSource == null)
             {
@@ -77,6 +75,9 @@
             {
                 { nameof(IMatch), match }
             });
+
+        private async void OnDateBarItemSelected(DateRange dateRange)
+            => await LoadData(dateRange);
 
         private async Task LoadData(
             DateRange dateRange,
