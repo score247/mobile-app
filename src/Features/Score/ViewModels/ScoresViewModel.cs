@@ -52,6 +52,13 @@
             }
         }
 
+        public override void OnDisappearing()
+        {
+            EventAggregator
+                .GetEvent<DateBarItemSelectedEvent>()
+                .Unsubscribe(OnDateBarItemSelected);
+        }
+
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             SubscribeDateBarEvent();
@@ -67,13 +74,6 @@
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
                 .Subscribe(OnDateBarItemSelected);
-        }
-
-        public override void OnDisappearing()
-        {
-            EventAggregator
-                .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(OnDateBarItemSelected);
         }
 
         private void SetupCommands()
