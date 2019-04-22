@@ -22,12 +22,7 @@
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
-        public DelegateCommand ChangeThemeCommand => new DelegateCommand(OnChangeThemeExecuted);
-
-        private void OnChangeThemeExecuted()
-        {
-            throw new NotImplementedException();
-        }
+        public DelegateCommand ChangeThemeCommand { get; set; }
 
         private async Task Navigate(string page)
         {

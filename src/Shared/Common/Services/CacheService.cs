@@ -37,9 +37,9 @@
 
     public class CacheService : ICacheService
     {
-        const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
-        const int ShortTerm = 2;
-        const int LongTerm = 120;
+        private const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
+        private const int ShortTerm = 2;
+        private const int LongTerm = 120;
 
         public CacheService(IEssentialsService essentials)
         {
@@ -50,10 +50,8 @@
         public async Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
         => await BlobCache.LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
 
-
         public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null)
-        => await BlobCache.LocalMachine.GetAndFetchLatest(name, fetchFunc, (offset) => forceFetch, absoluteExpiration);
-
+        => await BlobCache.LocalMachine.GetAndFetchLatest(name, fetchFunc, (_) => forceFetch, absoluteExpiration);
 
         public async Task SetValue<T>(string name, T value)
         => await BlobCache.LocalMachine.InsertObject(name, value);
@@ -66,12 +64,16 @@
 
         public async Task Invalidate(string key) => await BlobCache.LocalMachine.Invalidate(key);
 
-        public async Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null) 
-            => await BlobCache.LocalMachine.LoadImageFromUrl(url, false, desiredWidth, desiredHeight);
+#pragma warning disable S3994 // URI Parameters should not be strings
+
+        public async Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null)
+            => await BlobCache.LocalMachine.LoadImageFromUrl(url, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
+
+#pragma warning restore S3994 // URI Parameters should not be strings
 
         public DateTime CacheDuration(CacheDurationTerm cacheKind)
-        => cacheKind == CacheDurationTerm.Short 
-            ? DateTime.Now.AddMinutes(ShortTerm) 
+        => cacheKind == CacheDurationTerm.Short
+            ? DateTime.Now.AddMinutes(ShortTerm)
             : DateTime.Now.AddMinutes(LongTerm);
 
         public async Task CleanAllExpired() => await BlobCache.LocalMachine.Vacuum();

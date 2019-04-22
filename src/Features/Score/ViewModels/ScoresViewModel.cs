@@ -41,9 +41,9 @@
 
         public ObservableCollection<IGrouping<dynamic, IMatch>> MatchItemSource { get; set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; private set; }
+        public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
+        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; }
 
         public override async void OnResume()
         {
@@ -76,8 +76,12 @@
                 { nameof(IMatch), match }
             });
 
+#pragma warning disable S3168 // "async" methods should not return "void"
+
         private async void OnDateBarItemSelected(DateRange dateRange)
             => await LoadData(dateRange);
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadData(
             DateRange dateRange,
