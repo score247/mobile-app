@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Teams;
+    using Newtonsoft.Json;
 
     public interface ITimeLine : IEntity<long, string>
     {
@@ -61,14 +63,18 @@
 
         public int AwayScore { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
         public IPlayer GoalScorer { get; set; }
 
         public IEnumerable<Commentary> Commentaries { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
         public IPlayer Assist { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
         public IPlayer PlayerOut { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
         public IPlayer PlayerIn { get; set; }
 
         public int InjuryTimeAnnounced { get; set; }

@@ -24,11 +24,7 @@
     <Folder Include="ViewModels\" />
     <Folder Include="Views\Templates\" />
     <Folder Include="Models\" />
-    <Folder Include="DTOs\" />
     <Folder Include="Models\Teams\" />
-    <Folder Include="DTOs\Leagues\" />
-    <Folder Include="DTOs\Matches\" />
-    <Folder Include="DTOs\Teams\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -47,7 +43,6 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="Refit" Version="4.6.99" />
-    <PackageReference Include="AutoMapper" Version="8.0.0" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
     <PackageReference Include="Refit" Version="4.6.99" />
   </ItemGroup>
