@@ -10,7 +10,7 @@
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
-        public MatchDetailViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MatchDetailViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             MatchDetailItems = new List<TabModel>();

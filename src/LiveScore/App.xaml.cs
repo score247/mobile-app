@@ -91,7 +91,7 @@ namespace LiveScore
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.Register<IApiPolicy, ApiPolicy>();
-            containerRegistry.RegisterSingleton<IServiceLocator, ServiceLocator>();
+            containerRegistry.RegisterSingleton<IDepdendencyResolver, DepdendencyResolver>();
         }
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)

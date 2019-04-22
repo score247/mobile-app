@@ -11,7 +11,7 @@
 
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MainViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);

@@ -15,7 +15,7 @@
         private readonly ISportService sportService;
         private IEnumerable<SportItem> sportItems;
 
-        public NavigationTitleViewModel(INavigationService navigationService, IServiceLocator serviceLocator, ISportService sportService)
+        public NavigationTitleViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator, ISportService sportService)
             : base(navigationService, serviceLocator)
         {
             this.sportService = sportService;

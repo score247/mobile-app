@@ -12,7 +12,7 @@
 
     public class TabMoreViewModel : ViewModelBase
     {
-        public TabMoreViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public TabMoreViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             TabItems = new ObservableCollection<TabItem>
             {

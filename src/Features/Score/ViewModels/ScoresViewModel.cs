@@ -22,12 +22,12 @@
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IServiceLocator serviceLocator,
+            IDepdendencyResolver serviceLocator,
             IEventAggregator eventAggregator)
             : base(navigationService, serviceLocator, eventAggregator)
         {
             selectedDate = DateTime.Today;
-            MatchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
+            MatchService = ServiceLocator.Resolve<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
             SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));

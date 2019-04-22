@@ -5,7 +5,7 @@ namespace LiveScore.Core.ViewModels
 
     public class MatchViewModelBase : ViewModelBase
     {
-        public MatchViewModelBase(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MatchViewModelBase(INavigationService navigationService, IDepdendencyResolver serviceLocator)
              : base(navigationService, serviceLocator)
         {
         }

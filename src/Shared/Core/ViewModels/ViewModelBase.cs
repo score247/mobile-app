@@ -14,7 +14,7 @@
     {
         public ViewModelBase(
            INavigationService navigationService,
-           IServiceLocator serviceLocator,
+           IDepdendencyResolver serviceLocator,
            IEventAggregator eventAggregator) : this(navigationService, serviceLocator)
         {
             EventAggregator = eventAggregator;
@@ -22,16 +22,16 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IServiceLocator serviceLocator)
+           IDepdendencyResolver serviceLocator)
         {
             NavigationService = navigationService;
             ServiceLocator = serviceLocator;
-            SettingsService = ServiceLocator.Create<ISettingsService>();
+            SettingsService = ServiceLocator.Resolve<ISettingsService>();
         }
 
         public string Title { get; protected set; }
 
-        public IServiceLocator ServiceLocator { get; protected set; }
+        public IDepdendencyResolver ServiceLocator { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 

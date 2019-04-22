@@ -17,7 +17,7 @@
     {
         public SelectSportViewModel(
             INavigationService navigationService,
-            IServiceLocator serviceLocator,
+            IDepdendencyResolver serviceLocator,
             IEventAggregator eventAggregator)
                 : base(navigationService, serviceLocator, eventAggregator)
         {

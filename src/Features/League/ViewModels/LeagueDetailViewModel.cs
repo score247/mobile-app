@@ -11,7 +11,7 @@
 
     public class LeagueDetailViewModel : ViewModelBase
     {
-        public LeagueDetailViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public LeagueDetailViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             GroupMatches = new ObservableCollection<IGrouping<MatchHeaderItemViewModel, IMatch>>();
         }

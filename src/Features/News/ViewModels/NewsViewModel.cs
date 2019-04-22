@@ -6,7 +6,7 @@
 
     public class NewsViewModel : ViewModelBase
     {
-        public NewsViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public NewsViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             Title = "News";
         }

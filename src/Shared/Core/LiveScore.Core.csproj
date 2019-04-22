@@ -32,7 +32,6 @@
     <Folder Include="Converters\" />
     <Folder Include="Constants\" />
     <Folder Include="Models\" />
-    <Folder Include="Factories\" />
     <Folder Include="Enumerations\" />
     <Folder Include="Models\Settings\" />
     <Folder Include="Views\Selectors\" />
