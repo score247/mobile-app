@@ -20,10 +20,10 @@
         }
 
         [Fact]
-        public void EndDay_ShouldReturnCorrectDate()
+        public void EndOfDay_ShouldReturnCorrectDate()
         {
             // Arrange
-            var expected = DateTime.Today.AddMilliseconds(-1);
+            var expected = DateTime.Today.AddDays(1).AddMilliseconds(-1);
 
             // Act
             var actual = DateTimeExtension.EndOfDay(DateTime.Today);
@@ -36,7 +36,7 @@
         public void ToApiFormat_ShouldReturnCorrectFormat()
         {
             // Arrange
-            var expected = "2019-04-22T12:00:00";
+            var expected = "2019-04-22T12:00:00+00:00";
 
             // Act
             var actual = new DateTime(2019, 4, 22, 12, 0,0, DateTimeKind.Utc).ToApiFormat();

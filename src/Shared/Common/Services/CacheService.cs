@@ -24,7 +24,7 @@
 
         Task Invalidate(string key);
 
-        Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null);
+        Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null);
 
         DateTime CacheDuration(CacheDurationTerm cacheKind);
 
@@ -64,12 +64,8 @@
 
         public async Task Invalidate(string key) => await BlobCache.LocalMachine.Invalidate(key);
 
-#pragma warning disable S3994 // URI Parameters should not be strings
-
-        public async Task<IBitmap> LoadImageFromUrl(string url, float? desiredWidth = null, float? desiredHeight = null)
-            => await BlobCache.LocalMachine.LoadImageFromUrl(url, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
-
-#pragma warning restore S3994 // URI Parameters should not be strings
+        public async Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null)
+            => await BlobCache.LocalMachine.LoadImageFromUrl(imageLink, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
 
         public DateTime CacheDuration(CacheDurationTerm cacheKind)
         => cacheKind == CacheDurationTerm.Short
