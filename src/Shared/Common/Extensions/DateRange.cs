@@ -26,7 +26,5 @@
 
         public static DateRange FromYesterdayUntilNow()
             => new DateRange(DateTime.Today.AddDays(-1), DateTime.Today.EndDay());
-
-        public static DateRange Now() => new DateRange(DateTime.Now);
     }
 }

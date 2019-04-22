@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="Services\" />
     <Folder Include="Converters\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\Shared\Common\LiveScore.Common.csproj" />
