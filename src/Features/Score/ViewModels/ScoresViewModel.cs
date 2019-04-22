@@ -29,7 +29,8 @@
             selectedDate = DateTime.Today;
             MatchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
-            SetupCommands();
+            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
         public bool IsLoading { get; private set; }
@@ -61,25 +62,14 @@
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            SubscribeDateBarEvent();
+            EventAggregator
+               .GetEvent<DateBarItemSelectedEvent>()
+               .Subscribe(async (dateRange) => await LoadData(dateRange));
 
             if (MatchItemSource == null)
             {
                 await LoadData(DateRange.FromYesterdayUntilNow());
             }
-        }
-
-        private void SubscribeDateBarEvent()
-        {
-            EventAggregator
-                .GetEvent<DateBarItemSelectedEvent>()
-                .Subscribe(async (dateRange) => await LoadData(dateRange));
-        }
-
-        private void SetupCommands()
-        {
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
         private async Task NavigateToMatchDetailView(IMatch match)
@@ -95,7 +85,7 @@
         {
             IsLoading = showLoadingIndicator;
 
-            if (showLoadingIndicator)
+            if (IsLoading)
             {
                 MatchItemSource?.Clear();
             }
