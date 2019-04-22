@@ -10,7 +10,6 @@
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Score.Views;
     using Prism.Events;
     using Prism.Navigation;
 
@@ -29,7 +28,6 @@
             selectedDate = DateTime.Today;
             MatchService = ServiceLocator.Resolve<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
@@ -70,11 +68,6 @@
             }
         }
 
-        private async Task NavigateToMatchDetailView(IMatch match)
-            => await NavigationService.NavigateAsync(nameof(MatchDetailView), new NavigationParameters
-            {
-                { nameof(IMatch), match }
-            });
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 

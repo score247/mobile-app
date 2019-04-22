@@ -23,6 +23,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
+        <Compile Remove="Views\MatchDetailView.xaml.cs" />
+        <Compile Remove="ViewModels\MatchDetailViewModel.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="ViewResources\MatchSocialViewResource.xaml.cs">
@@ -105,9 +107,6 @@
             <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
-        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewModels\MatchDetailViewModel.cs">
-            <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
-        </Compile>
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Controls\QuickAccessCalendar\QuickAccessCalendarView.xaml.cs">
           <DependentUpon>QuickAccessCalendar.xaml</DependentUpon>
         </Compile>
@@ -117,5 +116,8 @@
       <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
       <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />
       <ProjectReference Include="..\..\Shared\Sports\BasketBall\Basketball.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Remove="Views\MatchDetailView.xaml" />
     </ItemGroup>
 </Project>
