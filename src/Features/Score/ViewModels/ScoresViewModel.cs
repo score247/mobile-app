@@ -16,7 +16,7 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private readonly DateTime today;
+        private readonly DateTime selectedDate;
         private readonly IMatchService MatchService;
         private DateRange selectedDateRange;
 
@@ -26,7 +26,7 @@
             IEventAggregator eventAggregator)
             : base(navigationService, serviceLocator, eventAggregator)
         {
-            today = DateTime.Today;
+            selectedDate = DateTime.Today;
             MatchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
 
             SetupCommands();
@@ -46,7 +46,7 @@
 
         public override async void OnResume()
         {
-            if (today != DateTime.Today)
+            if (selectedDate != DateTime.Today)
             {
                 await NavigateToHome();
             }
@@ -56,7 +56,7 @@
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(OnDateBarItemSelected);
+                .Unsubscribe(async (dateRange) => await LoadData(dateRange));
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
@@ -73,7 +73,7 @@
         {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
-                .Subscribe(OnDateBarItemSelected);
+                .Subscribe(async (dateRange) => await LoadData(dateRange));
         }
 
         private void SetupCommands()
@@ -87,11 +87,6 @@
             {
                 { nameof(IMatch), match }
             });
-
-        private async void OnDateBarItemSelected(DateRange dateRange)
-        {
-            await LoadData(dateRange);
-        }
 
         private async Task LoadData(
             DateRange dateRange,
