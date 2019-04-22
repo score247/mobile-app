@@ -67,7 +67,7 @@
                 currentDateBarItem = dateBarItem;
                 HomeIsSelected = false;
                 ReloadCalendarItems(dateBarItem);
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndDay()));
+                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndOfDay()));
             }
         }
 
