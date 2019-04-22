@@ -7,8 +7,8 @@
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views;
     using Prism.Events;

@@ -5,7 +5,7 @@ using LiveScore.Basketball;
 using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
-using LiveScore.Core.Factories;
+using LiveScore.Core;
 using LiveScore.Core.Services;
 using LiveScore.Favorites;
 using LiveScore.League;
