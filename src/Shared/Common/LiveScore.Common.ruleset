@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RuleSet Name="SonarQube - livescore / LiveScore Nexcel CSharp" ToolsVersion="16.0">
-  <Include Path="..\..\..\..\.sonarlint\livescorecsharp.ruleset" Action="Default" />
   <Include Path="..\..\..\.sonarlint\livescorecsharp.ruleset" Action="Default" />
+  <Include Path="common.ruleset" Action="Default" />
 </RuleSet>

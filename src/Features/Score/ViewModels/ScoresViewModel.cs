@@ -21,9 +21,9 @@
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IDepdendencyResolver serviceLocator,
+            IDepdendencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
-            : base(navigationService, serviceLocator, eventAggregator)
+            : base(navigationService, dependencyResolver, eventAggregator)
         {
             selectedDate = DateTime.Today;
             MatchService = ServiceLocator.Resolve<IMatchService>(SettingsService.CurrentSport.GetDescription());
@@ -31,7 +31,7 @@
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
-        public bool IsLoading { get; private set; }
+        public bool IsLoading { get; set; }
 
         public bool IsNotLoading => !IsLoading;
 
@@ -67,7 +67,6 @@
                 await LoadData(DateRange.FromYesterdayUntilNow());
             }
         }
-
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 

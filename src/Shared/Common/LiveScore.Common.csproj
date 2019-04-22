@@ -8,12 +8,12 @@
         <RootNamespace>LiveScore.Common</RootNamespace>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
         <DebugType></DebugType>
        <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <CodeAnalysisRuleSet>Common.ruleset</CodeAnalysisRuleSet>
+        <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
