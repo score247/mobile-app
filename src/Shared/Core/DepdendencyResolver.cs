@@ -1,11 +1,7 @@
 ﻿namespace LiveScore.Core
 {
+    using System;
     using Prism.Ioc;
-
-    public interface IApplicationContext
-    {
-        int SportId { get; set; }
-    }
 
     public interface IDepdendencyResolver
     {
@@ -20,7 +16,8 @@
 
         public DepdendencyResolver(IContainerProvider containerProvider)
         {
-            this.containerProvider = containerProvider;
+            this.containerProvider
+                = containerProvider ?? throw new ArgumentNullException(nameof(containerProvider));
         }
 
         public T Resolve<T>() => containerProvider.Resolve<T>();
