@@ -73,7 +73,6 @@
 
         protected async Task NavigateToHome()
         {
-            Destroy();
             await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
         }
     }
