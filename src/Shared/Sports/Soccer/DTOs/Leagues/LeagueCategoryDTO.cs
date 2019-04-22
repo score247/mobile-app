@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Models;
 
-    public class LeagueCategoryDTO : Entity<string, string>
+    public class LeagueCategoryDto : Entity<string, string>
     {
         public string CountryCode { get; set; }
     }

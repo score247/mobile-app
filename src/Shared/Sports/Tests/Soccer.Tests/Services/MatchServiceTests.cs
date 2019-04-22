@@ -1,9 +1,1 @@
-﻿namespace Soccer.Tests.Services {     using System;     using System.Collections.Generic;     using System.Threading.Tasks;
-    using AutoMapper;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Models.Settings;
-    using LiveScore.Core.Services;
-    using LiveScore.Soccer.DTOs.Matches;
-    using LiveScore.Soccer.Services;
-    using NSubstitute;     using Xunit;      public class MatchServiceTests     {         private readonly ISoccerMatchApi mockSoccerMatchApi;         private readonly ICacheService mockCache;         private readonly ILoggingService mockLogger;         private readonly IMapper mockMapper;         private readonly IApiPolicy mockPolicy;          private readonly MatchService matchService;          public MatchServiceTests()         {             mockSoccerMatchApi = Substitute.For<ISoccerMatchApi>();             mockCache = Substitute.For<ICacheService>();             mockLogger = Substitute.For<ILoggingService>();             mockMapper = Substitute.For<IMapper>();             mockPolicy = Substitute.For<IApiPolicy>();              matchService = new MatchService(mockSoccerMatchApi, mockCache, mockLogger, mockMapper, mockPolicy);         }          [Fact]         public async Task GetMatches_WhenCall_InjectGetAndFetchLatestValue()         {             // Arrange             var settings = new UserSettings(1, "en", "+07");              // Act             await matchService.GetMatches(settings, new DateRange());              // Assert             await mockCache.Received(1).GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<MatchDTO>>>>());         }     } }  
+﻿

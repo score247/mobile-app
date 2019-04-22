@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Models;
 
-    public class VenueDTO : Entity<string, string>
+    public class VenueDto : Entity<string, string>
     {
         public int Capacity { get; set; }
 

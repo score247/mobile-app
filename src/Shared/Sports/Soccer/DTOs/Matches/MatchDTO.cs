@@ -6,22 +6,22 @@
     using LiveScore.Soccer.DTOs.Leagues;
     using LiveScore.Soccer.DTOs.Teams;
 
-    public class MatchDTO : Entity<string, string>
+    public class MatchDto : Entity<string, string>
     {
         public DateTime EventDate { get; set; }
 
         public long EventDateUnixTime { get; set; }
 
-        public IEnumerable<TeamDTO> Teams { get; set; }
+        public IEnumerable<TeamDto> Teams { get; set; }
 
-        public MatchResultDTO MatchResult { get; set; }
+        public MatchResultDto MatchResult { get; set; }
 
-        public TimeLineDTO TimeLine { get; set; }
+        public TimeLineDto TimeLine { get; set; }
 
-        public MatchConditionDTO MatchCondition { get; set; }
+        public MatchConditionDto MatchCondition { get; set; }
 
         public bool IsLive { get; set; }
 
-        public LeagueDTO League { get; set; }
+        public LeagueDto League { get; set; }
     }
 }

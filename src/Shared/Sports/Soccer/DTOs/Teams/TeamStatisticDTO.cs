@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Soccer.DTOs.Teams
 {
-    public class TeamStatisticDTO
+    public class TeamStatisticDto
     {
         public int Possession { get; set; }
 

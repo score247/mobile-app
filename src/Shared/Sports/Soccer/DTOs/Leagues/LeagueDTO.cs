@@ -4,16 +4,16 @@
     using LiveScore.Core.Models;
     using LiveScore.Soccer.DTOs.Teams;
 
-    public class LeagueDTO : Entity<string, string>
+    public class LeagueDto : Entity<string, string>
     {
         public int Order { get; set; }
 
         public string Flag { get; set; }
 
-        public LeagueCategoryDTO Category { get; set; }
+        public LeagueCategoryDto Category { get; set; }
 
-        public IEnumerable<LeagueRoundDTO> Rounds { get; set; }
+        public IEnumerable<LeagueRoundDto> Rounds { get; set; }
 
-        public IEnumerable<TeamDTO> Teams { get; set; }
+        public IEnumerable<TeamDto> Teams { get; set; }
     }
 }

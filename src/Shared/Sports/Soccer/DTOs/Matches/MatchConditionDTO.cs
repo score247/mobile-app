@@ -1,10 +1,10 @@
 ﻿namespace LiveScore.Soccer.DTOs.Matches
 {
-    public class MatchConditionDTO
+    public class MatchConditionDto
     {
         public int Attendance { get; set; }
 
-        public VenueDTO Venue { get; set; }
+        public VenueDto Venue { get; set; }
 
         public string Referee { get; set; }
     }

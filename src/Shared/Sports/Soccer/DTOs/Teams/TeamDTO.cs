@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using LiveScore.Core.Models;
 
-    public class TeamDTO : Entity<string, string>
+    public class TeamDto : Entity<string, string>
     {
         public string Country { get; set; }
 
@@ -13,16 +13,16 @@
 
         public bool IsHome { get; set; }
 
-        public IEnumerable<PlayerDTO> Players { get; set; }
+        public IEnumerable<PlayerDto> Players { get; set; }
 
-        public TeamStatisticDTO Statistic { get; set; }
+        public TeamStatisticDto Statistic { get; set; }
 
-        public CoachDTO Coach { get; set; }
+        public CoachDto Coach { get; set; }
 
         public string Formation { get; set; }
 
         public string Abbreviation { get; set; }
 
-        public IEnumerable<PlayerDTO> Substitutions { get; set; }
+        public IEnumerable<PlayerDto> Substitutions { get; set; }
     }
 }

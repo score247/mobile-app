@@ -39,32 +39,32 @@
         {
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<MatchDTO, Match>();
-                cfg.CreateMap<MatchDTO, IMatch>().As<Match>();
-                cfg.CreateMap<MatchResultDTO, MatchResult>();
-                cfg.CreateMap<MatchResultDTO, IMatchResult>().As<MatchResult>();
-                cfg.CreateMap<TimeLineDTO, TimeLine>();
-                cfg.CreateMap<TimeLineDTO, ITimeLine>().As<TimeLine>();
-                cfg.CreateMap<MatchConditionDTO, MatchCondition>();
-                cfg.CreateMap<MatchConditionDTO, IMatchCondition>().As<MatchCondition>();
-                cfg.CreateMap<VenueDTO, Venue>();
-                cfg.CreateMap<VenueDTO, IVenue>().As<Venue>();
+                cfg.CreateMap<MatchDto, Match>();
+                cfg.CreateMap<MatchDto, IMatch>().As<Match>();
+                cfg.CreateMap<MatchResultDto, MatchResult>();
+                cfg.CreateMap<MatchResultDto, IMatchResult>().As<MatchResult>();
+                cfg.CreateMap<TimeLineDto, TimeLine>();
+                cfg.CreateMap<TimeLineDto, ITimeLine>().As<TimeLine>();
+                cfg.CreateMap<MatchConditionDto, MatchCondition>();
+                cfg.CreateMap<MatchConditionDto, IMatchCondition>().As<MatchCondition>();
+                cfg.CreateMap<VenueDto, Venue>();
+                cfg.CreateMap<VenueDto, IVenue>().As<Venue>();
 
-                cfg.CreateMap<LeagueDTO, League>();
-                cfg.CreateMap<LeagueDTO, ILeague>().As<League>();
-                cfg.CreateMap<LeagueCategoryDTO, LeagueCategory>();
-                cfg.CreateMap<LeagueCategoryDTO, ILeagueCategory>().As<LeagueCategory>();
-                cfg.CreateMap<LeagueRoundDTO, LeagueRound>();
-                cfg.CreateMap<LeagueRoundDTO, ILeagueRound>().As<LeagueRound>();
+                cfg.CreateMap<LeagueDto, League>();
+                cfg.CreateMap<LeagueDto, ILeague>().As<League>();
+                cfg.CreateMap<LeagueCategoryDto, LeagueCategory>();
+                cfg.CreateMap<LeagueCategoryDto, ILeagueCategory>().As<LeagueCategory>();
+                cfg.CreateMap<LeagueRoundDto, LeagueRound>();
+                cfg.CreateMap<LeagueRoundDto, ILeagueRound>().As<LeagueRound>();
 
-                cfg.CreateMap<TeamDTO, Team>();
-                cfg.CreateMap<TeamDTO, ITeam>().As<Team>();
-                cfg.CreateMap<PlayerDTO, Player>();
-                cfg.CreateMap<PlayerDTO, IPlayer>().As<Player>();
-                cfg.CreateMap<CoachDTO, Coach>();
-                cfg.CreateMap<CoachDTO, ICoach>().As<Coach>();
-                cfg.CreateMap<TeamStatisticDTO, TeamStatistic>();
-                cfg.CreateMap<TeamStatisticDTO, ITeamStatistic>().As<TeamStatistic>();
+                cfg.CreateMap<TeamDto, Team>();
+                cfg.CreateMap<TeamDto, ITeam>().As<Team>();
+                cfg.CreateMap<PlayerDto, Player>();
+                cfg.CreateMap<PlayerDto, IPlayer>().As<Player>();
+                cfg.CreateMap<CoachDto, Coach>();
+                cfg.CreateMap<CoachDto, ICoach>().As<Coach>();
+                cfg.CreateMap<TeamStatisticDto, TeamStatistic>();
+                cfg.CreateMap<TeamStatisticDto, ITeamStatistic>().As<TeamStatistic>();
             });
 
             var mapper = config.CreateMapper();

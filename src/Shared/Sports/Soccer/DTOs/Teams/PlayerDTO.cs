@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Models;
 
-    public class PlayerDTO : Entity<int, string>
+    public class PlayerDto : Entity<int, string>
     {
         public string Type { get; set; }
 

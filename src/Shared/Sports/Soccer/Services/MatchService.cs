@@ -16,7 +16,7 @@
     public interface ISoccerMatchApi
     {
         [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&timeZone={timezone}&language={language}")]
-        Task<IEnumerable<MatchDTO>> GetMatches(int sportId, string language, string fromDate, string toDate, string timezone);
+        Task<IEnumerable<MatchDto>> GetMatches(int sportId, string language, string fromDate, string toDate, string timezone);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -79,7 +79,7 @@
 
                 foreach (var dtoMatch in dtoMatches)
                 {
-                    var match = mapper.Map<MatchDTO, Match>(dtoMatch);
+                    var match = mapper.Map<MatchDto, Match>(dtoMatch);
                     matches.Add(match);
                 }
             }
@@ -91,7 +91,7 @@
             return matches;
         }
 
-        private async Task<IEnumerable<MatchDTO>> GetMatches(UserSettings settings, string fromDateText, string toDateText)
+        private async Task<IEnumerable<MatchDto>> GetMatches(UserSettings settings, string fromDateText, string toDateText)
         {
             Debug.WriteLine($"GetMatches for {fromDateText} - {toDateText}");
 

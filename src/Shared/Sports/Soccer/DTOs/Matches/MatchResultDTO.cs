@@ -4,7 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
 
-    public class MatchResultDTO
+    public class MatchResultDto
     {
         public MatchStatus MatchStatus { get; set; }
 

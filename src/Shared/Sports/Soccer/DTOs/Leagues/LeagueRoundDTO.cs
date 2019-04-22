@@ -4,7 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Soccer.DTOs.Matches;
 
-    public class LeagueRoundDTO
+    public class LeagueRoundDto
     {
         public LeagueRoundTypes Type { get; set; }
 
@@ -12,6 +12,6 @@
 
         public int Number { get; set; }
 
-        public IEnumerable<MatchDTO> Matches { get; set; }
+        public IEnumerable<MatchDto> Matches { get; set; }
     }
 }

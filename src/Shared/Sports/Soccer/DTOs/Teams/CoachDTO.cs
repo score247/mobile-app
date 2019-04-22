@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Models;
 
-    public class CoachDTO : Entity<int, string>
+    public class CoachDto : Entity<int, string>
     {
         public string Nationality { get; set; }
 
