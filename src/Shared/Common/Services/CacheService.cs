@@ -6,6 +6,12 @@
     using Akavache;
     using Splat;
 
+    public enum CacheDurationTerm
+    {
+        Short,
+        Long
+    }
+
     public interface ICacheService
     {
         Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null);
@@ -22,17 +28,11 @@
 
         DateTime CacheDuration(CacheDurationTerm cacheKind);
 
-        Task Vacuum();
+        Task CleanAllExpired();
 
         void AddOrUpdateValue<T>(string key, T value);
 
         T GetValueOrDefault<T>(string key, T defaultValue);
-    }
-
-    public enum CacheDurationTerm
-    {
-        Short,
-        Long
     }
 
     public class CacheService : ICacheService
@@ -74,7 +74,7 @@
             ? DateTime.Now.AddMinutes(ShortTerm) 
             : DateTime.Now.AddMinutes(LongTerm);
 
-        public async Task Vacuum() => await BlobCache.LocalMachine.Vacuum();
+        public async Task CleanAllExpired() => await BlobCache.LocalMachine.Vacuum();
 
         public void AddOrUpdateValue<T>(string key, T value)
             => BlobCache.UserAccount.InsertObject(key, value).Wait();

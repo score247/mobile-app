@@ -37,7 +37,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.iOS", "src\Platfo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore", "src\LiveScore\LiveScore.csproj", "{DFE8CEFD-58E2-4A3F-A920-C0487C223602}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Tests", "test\unit-tests\Shared\Core.Tests\Core.Tests.csproj", "{71E317AE-C426-4FF5-8A50-1DC8B043A9AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Core.Tests", "test\unit-tests\Shared\Core.Tests\LiveScore.Core.Tests.csproj", "{71E317AE-C426-4FF5-8A50-1DC8B043A9AD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Common.Tests", "test\unit-tests\Shared\Common.Tests\LiveScore.Common.Tests.csproj", "{9BDF45FB-2856-4E8C-A836-CABA5AB1D348}"
 EndProject
