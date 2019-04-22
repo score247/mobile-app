@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Models;
     using LiveScore.Services;
     using LiveScore.Views;

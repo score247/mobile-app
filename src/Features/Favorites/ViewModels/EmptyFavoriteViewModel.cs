@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Favorites.ViewModels
 {
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Core.ViewModels;
     using Prism.Navigation;
 

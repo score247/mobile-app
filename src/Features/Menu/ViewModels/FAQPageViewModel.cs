@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Menu.ViewModels
 {
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using Prism.Navigation;
 
     public class FaqPageViewModel : MenuViewModelBase

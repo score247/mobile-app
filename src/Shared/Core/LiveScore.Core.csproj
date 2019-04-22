@@ -8,6 +8,11 @@
 
     <DebugType></DebugType>
     <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+    <CodeAnalysisRuleSet>LiveScore.Core-1.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Core-1.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
   <ItemGroup>

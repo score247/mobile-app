@@ -1,6 +1,5 @@
 namespace LiveScore.Core.ViewModels
 {
-    using LiveScore.Core.Factories;
     using Prism.Navigation;
 
     public class MatchViewModelBase : ViewModelBase

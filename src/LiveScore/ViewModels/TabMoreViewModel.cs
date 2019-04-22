@@ -3,7 +3,7 @@
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Core.ViewModels;
     using LiveScore.Models;
     using LiveScore.News.Views;

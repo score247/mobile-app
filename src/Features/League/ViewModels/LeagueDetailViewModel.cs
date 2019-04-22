@@ -4,7 +4,7 @@
     using System.Linq;
     using Core.Models.Leagues;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using Prism.Commands;
     using Prism.Navigation;

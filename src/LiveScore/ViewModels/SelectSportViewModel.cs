@@ -8,7 +8,7 @@
     using Core.ViewModels;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Events;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Models;
     using Prism.Events;
     using Prism.Navigation;
