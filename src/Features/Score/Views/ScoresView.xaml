@@ -39,7 +39,7 @@
         <ListView
             x:Name="LeagueTable"
             AutomationId="LeagueTableId"
-            AutomationProperties.IsInAccessibleTree="True"
+            AutomationProperties.IsInAccessibleTree="False"
             CachingStrategy="RecycleElement"
             GroupDisplayBinding="{Binding Key}"
             GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
