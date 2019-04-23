@@ -13,17 +13,8 @@
         prism:ViewModelLocator.AutowireViewModel="True"
         BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
-      <!--  <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
-            <Label
-                AutomationId="NavigationTitle"
-                Style="{StaticResource PageTitle}"
-                Text="{Binding Title}" />
-            <StackLayout x:Name="SportName">
-                <Label Style="{StaticResource SportName}" Text="SOCCER" />
-            </StackLayout>
-        </FlexLayout>-->
        <coreTemplates:NavigationTitleTemplate 
-                        Title="{langs:Translate TVSchedule}" 
+                        Title="{langs:Translate TV}" 
                         mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
         
     </NavigationPage.TitleView>

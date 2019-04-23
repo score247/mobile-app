@@ -76,7 +76,7 @@
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
                           <coreTemplates:NavigationTitleTemplate 
-                            Title="{langs:Translate Favorites}" 
+                            Title="{langs:Translate Leagues}" 
                             mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </league:LeagueView>
