@@ -22,9 +22,9 @@
 
     public class ApiPolicy : IApiPolicy
     {
-        const int DEFAULT_COUNT = 2;
-        const int TIMEOUT_SECONDS = 2;
-        const int DEFAULT_POW = 2;
+        private const int DEFAULT_COUNT = 2;
+        private const int TIMEOUT_SECONDS = 2;
+        private const int DEFAULT_POW = 2;
 
         // Handle both exceptions and return values in one policy
         private readonly HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -50,7 +50,7 @@
         {
             var retryPolicy = Policy
             .Handle<WebException>()
-            .Or<ApiException>(ex => HandleApiException(ex))           
+            .Or<ApiException>(ex => HandleApiException(ex))
             .Retry(DEFAULT_COUNT);
 
             var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);

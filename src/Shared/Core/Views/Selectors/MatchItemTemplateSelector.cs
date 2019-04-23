@@ -15,7 +15,7 @@
                 var viewModel = container.BindingContext as ViewModelBase;
                 var sportType = viewModel.SettingsService.CurrentSport;
 
-                matchItemTemplate = viewModel.ServiceLocator.Resolve<DataTemplate>(sportType.GetDescription());
+                matchItemTemplate = viewModel.DepdendencyResolver.Resolve<DataTemplate>(sportType.GetDescription());
             }
 
             return matchItemTemplate;

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using System;   
+    using System;
     using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
     using LiveScore.Core.Models.Settings;
@@ -12,7 +12,7 @@
         SportType CurrentSport { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
-       
+
         UserSettings UserSettings { get; }
     }
 
@@ -20,7 +20,7 @@
     {
         private readonly ICacheService cacheService;
 
-        public SettingsService(ICacheService cacheService) 
+        public SettingsService(ICacheService cacheService)
         {
             this.cacheService = cacheService;
         }

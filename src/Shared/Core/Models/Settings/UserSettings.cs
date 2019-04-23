@@ -2,7 +2,7 @@
 {
     public class UserSettings
     {
-        public UserSettings(int sportId, string language, string timeZone) 
+        public UserSettings(int sportId, string language, string timeZone)
         {
             SportId = sportId;
             Language = language;

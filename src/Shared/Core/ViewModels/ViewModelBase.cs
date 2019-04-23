@@ -20,16 +20,16 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IDepdendencyResolver serviceLocator)
+           IDepdendencyResolver depdendencyResolver)
         {
             NavigationService = navigationService;
-            ServiceLocator = serviceLocator;
-            SettingsService = ServiceLocator.Resolve<ISettingsService>();
+            DepdendencyResolver = depdendencyResolver;
+            SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
         }
 
         public string Title { get; protected set; }
 
-        public IDepdendencyResolver ServiceLocator { get; protected set; }
+        public IDepdendencyResolver DepdendencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 
@@ -70,8 +70,6 @@
         }
 
         protected async Task NavigateToHome()
-        {
-            await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
-        }
+            => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
     }
 }
