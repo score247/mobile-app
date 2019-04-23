@@ -20,3 +20,17 @@ Open Application On Simulator
     [Arguments]    ${deviceName}
     Open Application    http://127.0.0.1:4723/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
     sleep    3s
+
+Init_Simulator
+    [Arguments]    ${simulator_name}
+    #    Start Appium Server
+    Open Application On Simulator    ${simulator_name}
+
+Init_Real Device
+    [Arguments]    ${device_name}    ${udid}
+    Start Appium Server
+    Open Application On Real Ios Device    ${device_name}    ${udid}
+
+Suite TearDown
+    #    Terminate Process    appiumserver    kill=True
+    Close All Applications

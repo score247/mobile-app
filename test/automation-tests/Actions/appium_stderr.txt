@@ -1,6 +1,1 @@
-[35m[HTTP][39m Could not start REST http interface listener. The requested port may already be in use. Please make sure there is no other instance of this server running already.
-Fatal Error: listen EADDRINUSE: address already in use 0.0.0.0:4723
-    at Server.setupListenHandle [as _listen2] (net.js:1258:14)
-    at listenInCluster (net.js:1306:12)
-    at doListen (net.js:1445:7)
-    at processTicksAndRejections (internal/process/task_queues.js:81:17)
+/bin/sh: /usr/local/bin/appium: No such file or directory
