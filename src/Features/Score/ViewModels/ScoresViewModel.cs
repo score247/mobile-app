@@ -26,7 +26,7 @@
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             selectedDate = DateTime.Today;
-            MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSport.GetDescription());
+            MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }

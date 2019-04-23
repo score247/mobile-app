@@ -1,13 +1,10 @@
 ﻿namespace LiveScore.ViewModels
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Core.Constants;
-    using LiveScore.Core.Events;
     using LiveScore.Core;
     using LiveScore.Models;
     using Prism.Events;
@@ -40,10 +37,10 @@
 
         private async Task OnSelectSportItem()
         {
-            if (SelectedSportItem.Id != 0)
+            if (SelectedSportItem.Type != null)
             {
-                var isSportChanged = (int)SettingsService.CurrentSport != SelectedSportItem.Id;
-                SettingsService.CurrentSport = (SportType)Enum.Parse(typeof(SportType), SelectedSportItem.Name);
+                var isSportChanged = SettingsService.CurrentSportType.Value != SelectedSportItem.Type.Value;
+                SettingsService.CurrentSportType = SelectedSportItem.Type;
 
                 if (isSportChanged)
                 {

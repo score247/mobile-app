@@ -1,10 +1,10 @@
 ﻿namespace LiveScore.Models
 {
+    using LiveScore.Core.Enumerations;
+
     public class SportItem
     {
-        public int Id { get; set; }
-
-        public string Name { get; set; }
+        public SportTypes Type { get; set; }
 
         public int NumberOfEvent { get; set; }
 

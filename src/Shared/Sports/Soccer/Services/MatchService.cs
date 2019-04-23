@@ -15,7 +15,7 @@
     public interface ISoccerMatchApi
     {
         [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&timeZone={timezone}&language={language}")]
-        Task<IEnumerable<Match>> GetMatches(int sportId, string language, string fromDate, string toDate, string timezone);
+        Task<IEnumerable<Match>> GetMatches(string sportId, string language, string fromDate, string toDate, string timezone);
     }
 
     public class MatchService : BaseService, IMatchService

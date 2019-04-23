@@ -3,13 +3,14 @@
     using System;
     using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Settings;
 
     public interface ISettingsService
     {
         string CurrentLanguage { get; set; }
 
-        SportType CurrentSport { get; set; }
+        SportTypes CurrentSportType { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
 
@@ -25,10 +26,10 @@
             this.cacheService = cacheService;
         }
 
-        public SportType CurrentSport
+        public SportTypes CurrentSportType
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentSport), SportType.Soccer);
-            set => cacheService.AddOrUpdateValue(nameof(CurrentSport), value);
+            get => cacheService.GetValueOrDefault(nameof(CurrentSportType), SportTypes.Soccer);
+            set => cacheService.AddOrUpdateValue(nameof(CurrentSportType), value);
         }
 
         public string CurrentLanguage
@@ -43,6 +44,6 @@
             set => cacheService.AddOrUpdateValue(nameof(CurrentTimeZone), value);
         }
 
-        public UserSettings UserSettings => new UserSettings((int)CurrentSport, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
+        public UserSettings UserSettings => new UserSettings(CurrentSportType.Value, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
     }
 }

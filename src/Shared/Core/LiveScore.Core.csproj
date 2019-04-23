@@ -32,7 +32,6 @@
     <Folder Include="Enumerations\" />
     <Folder Include="Models\Settings\" />
     <Folder Include="Views\Selectors\" />
-    <Folder Include="Events\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />

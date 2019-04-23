@@ -1,8 +1,7 @@
 ﻿namespace LiveScore.Soccer
 {
     using LiveScore.Common.Configuration;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Constants;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Services;
     using LiveScore.Soccer.Views.Templates;
@@ -22,8 +21,8 @@
         {
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(Configuration.LocalEndPoint));
             containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(Configuration.LocalEndPoint));
-            containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.GetDescription());
-            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.GetDescription());
+            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.Value);
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value);
         }
     }
 }

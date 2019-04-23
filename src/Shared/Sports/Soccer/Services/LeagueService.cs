@@ -12,7 +12,7 @@
     public interface ILeagueApi
     {
         [Get("/League/GetLeagues?sportId={sportId}&language={languageCode}")]
-        Task<IEnumerable<ILeague>> GetLeagues(int sportId, string languageCode);
+        Task<IEnumerable<ILeague>> GetLeagues(string sportId, string languageCode);
     }
 
     public class LeagueService : BaseService, ILeagueService
@@ -41,7 +41,7 @@
             {
                 leagues = await apiPolicy.RetryAndTimeout
                 (
-                    () => leagueApi.GetLeagues((int)settingsService.CurrentSport, settingsService.CurrentLanguage)
+                    () => leagueApi.GetLeagues(settingsService.CurrentSportType.Value, settingsService.CurrentLanguage)
                 );
             }
             catch (Exception ex)

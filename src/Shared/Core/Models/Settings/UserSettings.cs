@@ -2,14 +2,14 @@
 {
     public class UserSettings
     {
-        public UserSettings(int sportId, string language, string timeZone)
+        public UserSettings(string sportId, string language, string timeZone)
         {
             SportId = sportId;
             Language = language;
             TimeZone = timeZone;
         }
 
-        public int SportId { get; private set; }
+        public string SportId { get; private set; }
 
         public string Language { get; private set; }
 

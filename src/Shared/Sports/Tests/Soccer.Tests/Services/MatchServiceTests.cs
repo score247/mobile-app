@@ -36,7 +36,7 @@ namespace Soccer.Tests.Services
         public async Task GetMatches_WhenCall_InjectCacheService()
         {
             // Arrange
-            var settings = new UserSettings(1, "en", "+07:00");
+            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
 
             // Act
@@ -50,10 +50,10 @@ namespace Soccer.Tests.Services
         public async Task GetMatches_ThrowsException_InjectLoggingService()
         {
             // Arrange
-            var settings = new UserSettings(1, "en", "+07:00");
+            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
             mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
-                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key")) ; 
+                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
             await matchService.GetMatches(settings, dateRange);
@@ -66,7 +66,7 @@ namespace Soccer.Tests.Services
         public async Task GetMatches_ThrowsException_ShouldReturnEmptyList()
         {
             // Arrange
-            var settings = new UserSettings(1, "en", "+07:00");
+            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
             mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
@@ -82,7 +82,7 @@ namespace Soccer.Tests.Services
         public async Task GetMatches_HasValue_ShouldReturnCorrectListCount()
         {
             // Arrange
-            var settings = new UserSettings(1, "en", "+07:00");            
+            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
             var matchList = new List<Match>
             {

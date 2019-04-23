@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Views.Selectors
 {
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 
@@ -13,9 +12,9 @@
             if (matchItemTemplate == null)
             {
                 var viewModel = container.BindingContext as ViewModelBase;
-                var sportType = viewModel.SettingsService.CurrentSport;
+                var sportType = viewModel.SettingsService.CurrentSportType;
 
-                matchItemTemplate = viewModel.DepdendencyResolver.Resolve<DataTemplate>(sportType.GetDescription());
+                matchItemTemplate = viewModel.DepdendencyResolver.Resolve<DataTemplate>(sportType.Value);
             }
 
             return matchItemTemplate;
