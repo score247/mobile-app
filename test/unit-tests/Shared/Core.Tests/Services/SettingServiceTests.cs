@@ -26,7 +26,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = SportTypes.Soccer;
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentSport")), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act
             var actual = setting.CurrentSportType;
@@ -45,7 +45,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentSportType = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals("CurrentSport")), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<object>());
         }
 
         [Fact]
@@ -53,7 +53,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = LanguageCode.En.ToString();
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentLanguage")), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
 
             // Act
             var actual = setting.CurrentLanguage;
@@ -72,7 +72,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentLanguage = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals("CurrentLanguage")), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<object>());
         }
 
         [Fact]
@@ -80,7 +80,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = TimeZoneInfo.Local;
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentTimeZone")), Arg.Any<TimeZoneInfo>()).Returns(expected);
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(expected);
 
             // Act
             var actual = setting.CurrentTimeZone;
@@ -99,7 +99,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentTimeZone = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals("CurrentTimeZone")), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<object>());
         }
 
         [Fact]
@@ -107,9 +107,9 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = new UserSettings(SportTypes.Soccer.Value, LanguageCode.En.ToString(), TimeZoneInfo.Local.BaseUtcOffset.ToString());
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentTimeZone")), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentLanguage")), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals("CurrentSport")), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act
             var actual = setting.UserSettings;
