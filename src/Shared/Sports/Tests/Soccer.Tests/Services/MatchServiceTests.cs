@@ -86,8 +86,8 @@ namespace Soccer.Tests.Services
             var dateRange = new DateRange();
             var matchList = new List<Match>
             {
-                new Match{ Id = "match:1" },
-                new Match{ Id = "match:2" }
+                new Match{ Id = "match:1", EventDate = DateTime.Now, MatchResult = new MatchResult{ AwayScore = 1, HomeScore = 2 } },
+                new Match{ Id = "match:2", EventDate = DateTime.Now, MatchResult = new MatchResult{ AwayScore = 1, HomeScore = 2 } }
             };
 
             mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
