@@ -1,23 +1,25 @@
-﻿namespace LiveScore.ViewModels
+﻿namespace LiveScore.Core.ViewModels
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.ViewModels;
     using LiveScore.Core;
-    using LiveScore.Models;
-    using Prism.Events;
+    using LiveScore.Core.Models;
+    using LiveScore.Core.Services;
     using Prism.Navigation;
 
     public class SelectSportViewModel : ViewModelBase
     {
+        private readonly ISportService sportService;
+
         public SelectSportViewModel(
             INavigationService navigationService,
-            IDepdendencyResolver serviceLocator,
-            IEventAggregator eventAggregator)
-                : base(navigationService, serviceLocator, eventAggregator)
+            IDepdendencyResolver dependencyResolver,
+            ISportService sportService)
+                : base(navigationService, dependencyResolver)
         {
+            this.sportService = sportService;
             SelectSportItemCommand = new DelegateAsyncCommand(OnSelectSportItem);
             DoneCommand = new DelegateAsyncCommand(OnDone);
         }
@@ -32,7 +34,14 @@
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
-            SportItems = new ObservableCollection<SportItem>(parameters["sportItems"] as IEnumerable<SportItem>);
+            var sportItems = sportService.GetSportItems();
+
+            foreach (var sportItem in sportItems)
+            {
+                sportItem.IsVisible = sportItem.Type.Value == SettingsService.CurrentSportType.Value;
+            }
+
+            SportItems = new ObservableCollection<SportItem>(sportItems);
         }
 
         private async Task OnSelectSportItem()

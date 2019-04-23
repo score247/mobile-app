@@ -11,7 +11,8 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
     xmlns:tvschedule="clr-namespace:LiveScore.TVSchedule.Views;assembly=LiveScore.TVSchedule"
-    xmlns:views="clr-namespace:LiveScore.Views"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:localViews="clr-namespace:LiveScore.Views"
     x:Name="self"
     mvvm:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
@@ -26,7 +27,9 @@
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="{langs:Translate Scores}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate 
+                            Title="{langs:Translate Scores}" 
+                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:ScoresView>
             </x:Arguments>
@@ -40,7 +43,9 @@
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="{langs:Translate Live}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                         <coreTemplates:NavigationTitleTemplate 
+                            Title="{langs:Translate Live}" 
+                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:LiveView>
             </x:Arguments>
@@ -54,7 +59,9 @@
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="{langs:Translate Favorites}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                       <coreTemplates:NavigationTitleTemplate 
+                            Title="{langs:Translate Favorites}" 
+                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </favorites:EmptyFavoriteView>
             </x:Arguments>
@@ -68,7 +75,9 @@
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
-                        <views:NavigationTitleView Title="{langs:Translate Leagues}" mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                          <coreTemplates:NavigationTitleTemplate 
+                            Title="{langs:Translate Favorites}" 
+                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </league:LeagueView>
             </x:Arguments>
@@ -80,7 +89,7 @@
             AutomationId="MoreBar"
             Icon="images/common/more.png">
             <x:Arguments>
-                <views:TabMoreView Title="More" />
+                <localViews:TabMoreView Title="More" />
             </x:Arguments>
         </NavigationPage>
     </TabbedPage.Children>

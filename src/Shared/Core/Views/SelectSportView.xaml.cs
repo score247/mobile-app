@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Views
+﻿namespace LiveScore.Core.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

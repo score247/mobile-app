@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Models
+﻿namespace LiveScore.Core.Models
 {
     using LiveScore.Core.Enumerations;
 

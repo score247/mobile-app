@@ -7,12 +7,14 @@ using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using LiveScore.Core.Views;
+using LiveScore.Core.Views.Templates;
 using LiveScore.Favorites;
 using LiveScore.League;
 using LiveScore.Menu;
 using LiveScore.News;
 using LiveScore.Score;
-using LiveScore.Services;
 using LiveScore.Soccer;
 using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
@@ -101,7 +103,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
-            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewModel>();
+            ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -120,8 +122,8 @@ namespace LiveScore
         {
             Debug.WriteLine("OnSleep");
 
-            var cacheService = Container.Resolve<ILocalStorage>();
-            cacheService.Shutdown();
+            var localStorage = Container.Resolve<ILocalStorage>();
+            localStorage.Shutdown();
 
             base.OnSleep();
         }
