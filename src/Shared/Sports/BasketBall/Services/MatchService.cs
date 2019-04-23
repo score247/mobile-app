@@ -26,15 +26,5 @@
 
             return matches;
         }
-
-        public Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
