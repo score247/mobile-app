@@ -1,36 +1,25 @@
 namespace Scores.Tests.ViewModels
 {
-    using LiveScore.Core;
+    using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Score.ViewModels;
-    using NSubstitute;
-    using Prism.Events;
-    using Prism.Navigation;
     using Xunit;
 
-    public class ScoresViewModelTests
+    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
-        private readonly INavigationService subNavigationService;
-        private readonly IDepdendencyResolver subDependencyResolver;
-        private readonly IEventAggregator subEventAggregator;
+        private readonly ScoresViewModel viewModel;
 
-        public ScoresViewModelTests()
+        public ScoresViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
-            subNavigationService = Substitute.For<INavigationService>();
-            subDependencyResolver = Substitute.For<IDepdendencyResolver>();
-            subEventAggregator = Substitute.For<IEventAggregator>();
+            viewModel = new ScoresViewModel(
+                viewModelBaseFixture.NavigationService,
+                viewModelBaseFixture.DepdendencyResolver,
+                viewModelBaseFixture.EventAggregator);
         }
-
-        private ScoresViewModel CreateViewModel()
-            => new ScoresViewModel(
-                subNavigationService,
-                subDependencyResolver,
-                subEventAggregator);
 
         [Fact]
         public void IsLoading_Always_GetExpectedSetValue()
         {
             // Arrange
-            var viewModel = CreateViewModel();
             viewModel.IsLoading = true;
 
             // Act
@@ -44,7 +33,6 @@ namespace Scores.Tests.ViewModels
         public void IsNotLoading_Always_GetExpectedSetValue()
         {
             // Arrange
-            var viewModel = CreateViewModel();
             viewModel.IsLoading = true;
 
             // Act
@@ -58,7 +46,6 @@ namespace Scores.Tests.ViewModels
         public void IsRefreshing_Always_GetExpectedSetValue()
         {
             // Arrange
-            var viewModel = CreateViewModel();
             viewModel.IsRefreshing = true;
 
             // Act
