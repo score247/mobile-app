@@ -39,8 +39,8 @@
 
         public TimeZoneInfo CurrentTimeZone
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.FindSystemTimeZoneById("Asia/Bangkok"));
-            set => cacheService.AddOrUpdateValue(nameof(CurrentLanguage), value);
+            get => cacheService.GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.Local);
+            set => cacheService.AddOrUpdateValue(nameof(CurrentTimeZone), value);
         }
 
         public UserSettings UserSettings => new UserSettings((int)CurrentSport, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
