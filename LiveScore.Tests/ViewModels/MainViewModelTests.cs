@@ -21,17 +21,5 @@ namespace LiveScore.Tests.ViewModels
 
             viewModel = new MainViewModel(mockNavigation, mockResolver);
         }
-
-        [Fact]
-        public async Task NavigateCommand_Execute_InjectNavigationService()
-        {
-            // Arrange
-
-            // Act
-            //await viewModel.NavigateCommand.ExecuteAsync("page");
-
-            // Assert
-            //await mockNavigation.Received(1).NavigateAsync(Arg.Any<string>(), Arg.Any<INavigationParameters>(), Arg.Any<bool>(), Arg.Any<bool>());
-        }
     }
 }
