@@ -12,7 +12,7 @@
         Long
     }
 
-    public interface ICacheService
+    public interface ILocalStorage
     {
         Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null);
 
@@ -35,13 +35,13 @@
         T GetValueOrDefault<T>(string key, T defaultValue);
     }
 
-    public class CacheService : ICacheService
+    public class LocalStorage : ILocalStorage
     {
         private const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
         private const int ShortTerm = 2;
         private const int LongTerm = 120;
 
-        public CacheService(IEssentialsService essentials)
+        public LocalStorage(IEssentialsService essentials)
         {
             Registrations.Start(essentials.AppName);
             BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;

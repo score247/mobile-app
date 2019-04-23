@@ -21,12 +21,12 @@
     public class MatchService : BaseService, IMatchService
     {
         private readonly ISoccerMatchApi soccerMatchApi;
-        private readonly ICacheService cacheService;
+        private readonly ILocalStorage cacheService;
         private readonly IApiPolicy apiPolicy;
 
         public MatchService(
             ISoccerMatchApi soccerMatchApi,
-            ICacheService cacheService,
+            ILocalStorage cacheService,
             ILoggingService loggingService,
             IApiPolicy apiPolicy
             ) : base(loggingService)

@@ -85,7 +85,7 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
+            containerRegistry.RegisterSingleton<ILocalStorage, LocalStorage>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
@@ -120,7 +120,7 @@ namespace LiveScore
         {
             Debug.WriteLine("OnSleep");
 
-            var cacheService = Container.Resolve<ICacheService>();
+            var cacheService = Container.Resolve<ILocalStorage>();
             cacheService.Shutdown();
 
             base.OnSleep();

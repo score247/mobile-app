@@ -5,18 +5,18 @@ using Xunit;
 
 namespace LiveScore.Common.Tests.Services
 {
-    public class CacheServiceTests
+    public class LocalStorageTests
     {
         const string DATE_FORMAT = "yyyy-MM-ddTHH:mm:sszzz";
 
         private readonly IEssentialsService mockEssentials;
-        private readonly CacheService cache;
+        private readonly LocalStorage cache;
 
-        public CacheServiceTests()
+        public LocalStorageTests()
         {
             mockEssentials = Substitute.For<IEssentialsService>();
 
-            cache = new CacheService(mockEssentials);
+            cache = new LocalStorage(mockEssentials);
         }
 
         [Fact]

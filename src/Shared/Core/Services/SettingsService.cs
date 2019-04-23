@@ -18,9 +18,9 @@
 
     public class SettingsService : ISettingsService
     {
-        private readonly ICacheService cacheService;
+        private readonly ILocalStorage cacheService;
 
-        public SettingsService(ICacheService cacheService)
+        public SettingsService(ILocalStorage cacheService)
         {
             this.cacheService = cacheService;
         }
