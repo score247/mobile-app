@@ -16,9 +16,6 @@
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Soccer\Soccer.csproj" />
   </ItemGroup>
 </Project>
