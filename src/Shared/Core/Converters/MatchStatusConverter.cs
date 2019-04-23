@@ -11,8 +11,14 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var status = (MatchStatus)value;
+            var convertStatus = string.Empty;
 
-            return (status != null && status.IsClosed) ? AppResources.FullTime : value?.ToString();
+            if (status != null)
+            {
+                convertStatus = status.IsClosed ? AppResources.FullTime : value.ToString();
+            }
+
+            return convertStatus;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
