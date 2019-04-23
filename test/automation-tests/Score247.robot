@@ -68,15 +68,51 @@ SP1_Main_Function_Bar_TC02
     Click Element    ${btn_Live}
     ${header_Live}    Get Element Attribute    xpath=//XCUIElementTypeStaticText[@name="Live"]    value
     Run Keyword And Continue On Failure    Should Be Equal As Strings    ${header_Live}    Live
-    Click Element    ${btn_Leagues}
+    Click Element    ${btn_Favorites}
     ${header_Favorites}    Get Element Attribute    xpath=//XCUIElementTypeStaticText[@name='Favorites']    value
     Run Keyword And Continue On Failure    Should Be Equal As Strings    ${header_Favorites}    Favorites
     Click Element    ${btn_Leagues}
     ${header_Leagues}    Get Element Attribute    xpath=//XCUIElementTypeStaticText[@name="Leagues"]    value
     Run Keyword And Continue On Failure    Should Be Equal As Strings    ${header_Leagues}    Leagues
     #    VP3    Verify each shortcut with text whould be highlighted when user clicks on
+    Click Element    ${btn_Scores}
+    ${highlighted_Scores}    Get Element Attribute    ${btn_Scores}    value
+    Run Keyword And Continue On Failure    Should Be True    ${highlighted_Scores}==1
+    Click Element    ${btn_Live}
+    ${highlighted_Live}    Get Element Attribute    ${btn_Live}    value
+    Run Keyword And Continue On Failure    Should Be True    ${highlighted_Live}==1
+    Click Element    ${btn_Favorites}
+    ${highlighted_Favorites}    Get Element Attribute    ${btn_Favorites}    value
+    Run Keyword And Continue On Failure    Should Be True    ${highlighted_Favorites}==1
+    Click Element    ${btn_Leagues}
+    ${highlighted_Leagues}    Get Element Attribute    ${btn_Leagues}    value
+    Run Keyword And Continue On Failure    Should Be True    ${highlighted_Leagues}==1
+    Click Element    ${btn_More}
+    ${highlighted_More}    Get Element Attribute    ${btn_More}    value
+    Run Keyword And Continue On Failure    Should Be True    ${highlighted_More}==1
     ####    Post-Conditions
-    Close All Applications
+
+SP1_Scores_Date_Bar
+    #    VP1    Verify date bar shoud be orderd from left to right by: Home button, Date frame, Calendar button
+    Click Element    ${btn_Scores}
+    ${home_button_location}    Get Element Location    ${btn_Home}
+    ${date_frame_location}    Get Element Location    ${frm_date}
+    ${calendar_button_location}    Get Element Location    ${btn_calendar}
+    ${home_button_val}    Get Dictionary Values    ${home_button_location}
+    ${date_frame_val}    Get Dictionary Values    ${date_frame_location}
+    ${calendar_button_val}    Get Dictionary Values    ${calendar_button_location}
+    Run Keyword And Continue On Failure    should be true    ${home_button_val}[0]<${date_frame_val}[0]<${calendar_button_val}[0]
+    #    VP2    Verify date bar shoud be orderd from left to right by: 3 days before current day, current day, 3 days after current day
+    ##    Verify location order form left to right
+    ##    Verify date bar order by value from left to right in 7 days
+    ${date1_val}    Get Element Attribute    ${btn_currentdate-3}    value
+    ${date2_val}    Get Element Attribute    ${btn_currentdate-2}    value
+    ${date3_val}    Get Element Attribute    ${btn_currentdate-1}    value
+    ${date4_val}    Get Element Attribute    ${btn_currentdate}    value
+    ${date5_val}    Get Element Attribute    ${btn_currentdate+1}    value
+    ${date6_val}    Get Element Attribute    ${btn_currentdate+2}    value
+    ${date7_val}    Get Element Attribute    ${btn_currentdate+3}    value
+    Run Keyword And Continue On Failure    Should Be True    ${date1_val}+3==${date2_val}+2==${date3_val}+1== ${date4_val}==${date5_val}-1==${date6_val}-2==${date7_val}-3
 
 SP1_Scores_Match_Leagues_TC01
     [Documentation]    Verify Score page should be default screen of the app when user opens app (S001)
@@ -108,26 +144,5 @@ SP1_Scores_Match_Leagues_TC01
     ${l_datev}    Get Dictionary Values    ${l_date}
     ${l_tbl_iconv}    Get Dictionary Values    ${l_tbl_icon}
     Run Keyword And Continue On Failure    should be true    ${l_iconv}[0]<${l_namev}[0]<${l_datev}[0]<${l_tbl_iconv}[0]
-
-SP1_Scores_Date_Bar
-    #    VP1    Verify date bar shoud be orderd from left to right by: Home button, Date frame, Calendar button
-    ${home_button_location}    Get Element Location    ${btn_Home}
-    ${date_frame_location}    Get Element Location    ${frm_date}
-    ${calendar_button_location}    Get Element Location    ${btn_calendar}
-    ${home_button_val}    Get Dictionary Values    ${home_button_location}
-    ${date_frame_val}    Get Dictionary Values    ${date_frame_location}
-    ${calendar_button_val}    Get Dictionary Values    ${calendar_button_location}
-    Run Keyword And Continue On Failure    should be true    ${home_button_val}[0]<${date_frame_val}[0]<${calendar_button_val}[0]
-    #    VP2    Verify date bar shoud be orderd from left to right by: 3 days before current day, current day, 3 days after current day
-    ##    Verify location order form left to right
-    ##    Verify date bar order by value from left to right in 7 days
-    ${date1_val}    Get Element Attribute    ${btn_currentdate-3}    value
-    ${date2_val}    Get Element Attribute    ${btn_currentdate-2}    value
-    ${date3_val}    Get Element Attribute    ${btn_currentdate-1}    value
-    ${date4_val}    Get Element Attribute    ${btn_currentdate}    value
-    ${date5_val}    Get Element Attribute    ${btn_currentdate+1}    value
-    ${date6_val}    Get Element Attribute    ${btn_currentdate+2}    value
-    ${date7_val}    Get Element Attribute    ${btn_currentdate+3}    value
-    Run Keyword And Continue On Failure    Should Be True    ${date1_val}+3==${date2_val}+2==${date3_val}+1== ${date4_val}==${date5_val}-1==${date6_val}-2==${date7_val}-3
 
 *** Keywords ***
