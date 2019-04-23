@@ -60,5 +60,17 @@ namespace LiveScore.Core.Tests.Converters
             // Assert
             Assert.Equal(string.Empty, actual);
         }
+
+        [Fact]
+        public void ConvertBack_ReturnMatchStatus()
+        {
+            // Arrange            
+
+            // Act
+            var actual = converter.ConvertBack(MatchStatus.NotStartedStatus, null, null, null);
+
+            // Assert
+            Assert.IsType<MatchStatus>(actual);
+        }
     }
 }

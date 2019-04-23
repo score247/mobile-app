@@ -36,18 +36,6 @@
             this.apiPolicy = apiPolicy;
         }
 
-        public Task<IList<IMatch>> GetLiveMatches(int sportId, string language)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<IList<IMatch>> GetMatchesByLeague(
-            string leagueId,
-            string group)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             try

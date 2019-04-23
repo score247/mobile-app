@@ -28,5 +28,18 @@ namespace LiveScore.Core.Tests.Converters
             // Assert
             Assert.Equal(expected, actual);
         }
+
+        [Fact]
+        public void ConvertBack_ShouldReturnShortDatime()
+        {
+            // Arrange            
+            var value = "21 Apr";
+
+            // Act
+            var actual = converter.ConvertBack(value, null, null, null);
+
+            // Assert
+            Assert.Equal(value, actual);
+        }
     }
 }

@@ -9,9 +9,5 @@
     public interface IMatchService
     {
         Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false);
-
-        Task<IList<IMatch>> GetLiveMatches(int sportId, string language);
-
-        Task<IList<IMatch>> GetMatchesByLeague(string leagueId, string group);
     }
 }
