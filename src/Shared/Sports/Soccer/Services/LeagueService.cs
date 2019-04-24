@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Soccer.Services
-{
-    using System;
+{    
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -19,7 +18,6 @@
     {
         public LeagueService(
             ILeagueApi leagueApi,
-            ISettingsService settingsService,
             ILoggingService loggingService,
             IApiPolicy apiPolicy) : base(loggingService)
         {
@@ -27,6 +25,5 @@
         }
 
         public async Task<IEnumerable<ILeague>> GetLeagues() => Enumerable.Empty<ILeague>();
-
     }
 }
