@@ -9,7 +9,8 @@
         public NavigationTitleTemplate()
         {
             InitializeComponent();
-            titleLabel.BindingContext = this;
+            var navigationTitleTemplate = this;
+            titleLabel.BindingContext = navigationTitleTemplate;
         }
 
         public static readonly BindableProperty TitleProperty
