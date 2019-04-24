@@ -9,6 +9,7 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Score.ViewModels;
     using NSubstitute;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -94,14 +95,36 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public async Task OnNavigatingTo_Always_SubsribeDateBarItemSelectedEvent()
+        public void OnNavigatingTo_Always_SubsribeDateBarItemSelectedEvent()
         {
             // Arrange
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+            var dateBarItemSelectedEvent = Substitute.For<DateBarItemSelectedEvent>();
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(dateBarItemSelectedEvent);
 
             // Act
+            viewModel.OnNavigatingTo(null);
 
             // Assert
+            dateBarItemSelectedEvent.Received().Subscribe(Arg.Any<Action<DateRange>>());
+        }
+
+        [Fact]
+        public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
+        {
+            // Arrange
+            var dateBarItemSelectedEvent = Substitute.For<DateBarItemSelectedEvent>();
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(dateBarItemSelectedEvent);
+            matchService.GetMatches(
+                viewModel.SettingsService.UserSettings,
+                Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+                false).Returns(matchData);
+
+            // Act
+            viewModel.OnNavigatingTo(null);
+
+            // Assert
+            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+            Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
     }
 }
