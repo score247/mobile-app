@@ -7,7 +7,7 @@
         TName Name { get; }
     }
 
-    public abstract class Entity<TId, TName>
+    public class Entity<TId, TName>
     {
         public TId Id { get; set; }
 

@@ -3,14 +3,14 @@
     using System.Collections.Generic;
     using Common.Controls.TabStrip;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Score.Views.Templates;
     using Prism.Navigation;
 
     public class MatchDetailViewModel : MatchViewModelBase
     {
-        public MatchDetailViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MatchDetailViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             MatchDetailItems = new List<TabModel>();

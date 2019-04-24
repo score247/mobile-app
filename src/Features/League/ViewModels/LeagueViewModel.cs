@@ -3,14 +3,14 @@
     using System.Collections.ObjectModel;
     using Core.Models.Leagues;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using Prism.Navigation;
 
     public class LeagueViewModel : ViewModelBase
     {
         public LeagueViewModel(
             INavigationService navigationService,
-            IServiceLocator serviceLocator)
+            IDepdendencyResolver serviceLocator)
                 : base(navigationService, serviceLocator)
         {
             Title = "League";

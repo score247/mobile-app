@@ -1,11 +1,11 @@
 ﻿namespace LiveScore.Menu.ViewModels
 {
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using Prism.Navigation;
 
     public class DefaultSportViewModel : MenuViewModelBase
     {
-        public DefaultSportViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public DefaultSportViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

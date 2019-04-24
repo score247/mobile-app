@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Reflection;
 using LiveScore.Basketball;
+using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
-using LiveScore.Core.Factories;
+using LiveScore.Core;
 using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using LiveScore.Core.Views;
+using LiveScore.Core.Views.Templates;
 using LiveScore.Favorites;
 using LiveScore.League;
 using LiveScore.Menu;
 using LiveScore.News;
 using LiveScore.Score;
-using LiveScore.Services;
 using LiveScore.Soccer;
 using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
@@ -55,7 +59,8 @@ namespace LiveScore
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init("https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34");
+            logService.Init(Configuration.SentryDsn);
+
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 
@@ -82,13 +87,13 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
+            containerRegistry.RegisterSingleton<ILocalStorage, LocalStorage>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.Register<ISportService, SportService>();
             containerRegistry.Register<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.Register<IApiPolicy, ApiPolicy>();
-            containerRegistry.RegisterSingleton<IServiceLocator, ServiceLocator>();
+            containerRegistry.RegisterSingleton<IDepdendencyResolver, DepdendencyResolver>();
         }
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)
@@ -98,7 +103,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
-            ViewModelLocationProvider.Register<NavigationTitleView, NavigationTitleViewModel>();
+            ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -111,6 +116,23 @@ namespace LiveScore
             moduleCatalog.AddModule<NewsModule>();
             moduleCatalog.AddModule<TVScheduleModule>();
             moduleCatalog.AddModule<MenuModule>();
+        }
+
+        protected override void OnSleep()
+        {
+            Debug.WriteLine("OnSleep");
+
+            var localStorage = Container.Resolve<ILocalStorage>();
+            localStorage.Shutdown();
+
+            base.OnSleep();
+        }
+
+        protected override void OnResume()
+        {
+            Debug.WriteLine("OnResume");
+
+            base.OnResume();
         }
     }
 }

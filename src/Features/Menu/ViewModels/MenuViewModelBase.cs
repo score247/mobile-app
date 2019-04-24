@@ -3,12 +3,12 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using Prism.Navigation;
 
     public class MenuViewModelBase : ViewModelBase
     {
-        public MenuViewModelBase(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MenuViewModelBase(INavigationService navigationService, IDepdendencyResolver serviceLocator)
              : base(navigationService, serviceLocator)
         {
             DoneCommand = new DelegateAsyncCommand(OnDone);

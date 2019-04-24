@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Core.Services
 {
     using System;
+    using System.Diagnostics;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
@@ -12,16 +13,12 @@
     {
         Func<int, TimeSpan> SleepDurationProvider { get; }
 
-        Task<T> WaitAndRetry<T>(Func<Task<T>> func);
-
-        Task<T> Timeout<T>(Func<Task<T>> func);
-
         Task<T> RetryAndTimeout<T>(Func<Task<T>> func);
     }
 
     public class ApiPolicy : IApiPolicy
     {
-        private const int DEFAULT_COUNT = 3;
+        private const int DEFAULT_COUNT = 2;
         private const int TIMEOUT_SECONDS = 2;
         private const int DEFAULT_POW = 2;
 
@@ -32,24 +29,14 @@
             HttpStatusCode.InternalServerError, // 500
             HttpStatusCode.BadGateway, // 502
             HttpStatusCode.ServiceUnavailable, // 503
-            HttpStatusCode.GatewayTimeout // 504
+            HttpStatusCode.GatewayTimeout, // 504
         };
-
-        public Task<T> WaitAndRetry<T>(Func<Task<T>> func)
-        => Policy
-            .Handle<WebException>()
-            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))
-            .WaitAndRetryAsync(DEFAULT_COUNT, SleepDurationProvider)
-            .ExecuteAsync<T>(func);
-
-        public Task<T> Timeout<T>(Func<Task<T>> func)
-            => Policy.TimeoutAsync(TIMEOUT_SECONDS).ExecuteAsync<T>(func);
 
         public Task<T> RetryAndTimeout<T>(Func<Task<T>> func)
         {
             var retryPolicy = Policy
             .Handle<WebException>()
-            .Or<ApiException>(ex => httpStatusCodesWorthRetrying.Contains(ex.StatusCode))
+            .Or<ApiException>(ex => HandleApiException(ex))
             .Retry(DEFAULT_COUNT);
 
             var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);
@@ -57,6 +44,13 @@
             PolicyWrap commonResilience = Policy.Wrap(retryPolicy, timeoutPolicy);
 
             return commonResilience.Execute(func);
+        }
+
+        private bool HandleApiException(ApiException ex)
+        {
+            Debug.WriteLine($"RetryAndTimeout {ex.StatusCode}");
+
+            return httpStatusCodesWorthRetrying.Contains(ex.StatusCode);
         }
 
         public Func<int, TimeSpan> SleepDurationProvider => retryAttempt => TimeSpan.FromSeconds(Math.Pow(DEFAULT_POW, retryAttempt));

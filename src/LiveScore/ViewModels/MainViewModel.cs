@@ -4,30 +4,20 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(INavigationService navigationService, IServiceLocator serviceLocator)
+        public MainViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
-            NightMode = true;
         }
-
-        public bool NightMode { get; set; }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
-
-        public DelegateCommand ChangeThemeCommand => new DelegateCommand(OnChangeThemeExecuted);
-
-        private void OnChangeThemeExecuted()
-        {
-            throw new NotImplementedException();
-        }
 
         private async Task Navigate(string page)
         {

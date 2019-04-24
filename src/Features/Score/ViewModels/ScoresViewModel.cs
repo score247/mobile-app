@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Score.ViewModels
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Scores.Tests")]
+
+namespace LiveScore.Score.ViewModels
 {
     using System;
     using System.Collections.ObjectModel;
@@ -7,37 +11,32 @@
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Events;
-    using LiveScore.Core.Factories;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Score.Views;
     using Prism.Events;
     using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
     {
-        private readonly DateTime today;
-        private readonly IMatchService matchService;
+        private readonly IMatchService MatchService;
         private DateRange selectedDateRange;
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IServiceLocator serviceLocator,
+            IDepdendencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
-            : base(navigationService, serviceLocator, eventAggregator)
+            : base(navigationService, dependencyResolver, eventAggregator)
         {
-            today = DateTime.Today;
-            matchService = ServiceLocator.Create<IMatchService>(SettingsService.CurrentSport.GetDescription());
+            SelectedDate = DateTime.Today;
+            MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
 
-            SubscribeSportChangeEvent();
-
-            SubscribeDateBarEvent();
-
-            SetupCommands();
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
 
-        public bool IsLoading { get; private set; }
+        public DateTime SelectedDate { get; internal set; }
+
+        public bool IsLoading { get; set; }
 
         public bool IsNotLoading => !IsLoading;
 
@@ -45,65 +44,65 @@
 
         public ObservableCollection<IGrouping<dynamic, IMatch>> MatchItemSource { get; set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; private set; }
+        public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; private set; }
+        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; }
 
         public override async void OnResume()
         {
-            if (today != DateTime.Today)
+            if (SelectedDate != DateTime.Today)
             {
-                await NavigateToRoot();
+                await NavigateToHome();
             }
         }
 
-        public override void Dispose()
+        public override void OnDisappearing() => Dispose(true);
+
+        protected override void Dispose(bool disposing)
         {
-            base.Dispose();
-
-            EventAggregator
-                .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(OnDateBarItemSelected);
-        }
-
-        private void SubscribeDateBarEvent()
-        {
-            EventAggregator
-                .GetEvent<DateBarItemSelectedEvent>()
-                .Subscribe(OnDateBarItemSelected);
-        }
-
-        private void SetupCommands()
-        {
-            SelectMatchCommand = new DelegateAsyncCommand<IMatch>(NavigateToMatchDetailView);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
-        }
-
-        private async Task NavigateToMatchDetailView(IMatch match)
-            => await NavigationService.NavigateAsync(nameof(MatchDetailView), new NavigationParameters
+            if (disposing)
             {
-                { nameof(IMatch), match }
-            });
+                EventAggregator
+                    .GetEvent<DateBarItemSelectedEvent>()
+                    .Unsubscribe(OnDateBarItemSelected);
+            }
 
-        private async void OnDateBarItemSelected(DateRange dateRange)
-        {
-            await LoadData(dateRange);
+            base.Dispose(disposing);
         }
+
+        public override async void OnNavigatingTo(INavigationParameters parameters)
+        {
+            EventAggregator
+               .GetEvent<DateBarItemSelectedEvent>()
+               .Subscribe(OnDateBarItemSelected);
+
+            if (MatchItemSource == null)
+            {
+                await LoadData(DateRange.FromYesterdayUntilNow());
+            }
+        }
+
+#pragma warning disable S3168 // "async" methods should not return "void"
+
+        private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadData(
             DateRange dateRange,
             bool showLoadingIndicator = true,
-            bool forceFetchNewData = false,
-            bool isRefreshing = false)
+            bool forceFetchNewData = false)
         {
             IsLoading = showLoadingIndicator;
-            MatchItemSource?.Clear();
 
-            var matchData = await matchService.GetMatches(
-                    (int)SettingsService.CurrentSport,
-                    SettingsService.CurrentLanguage,
+            if (IsLoading)
+            {
+                MatchItemSource?.Clear();
+            }
+
+            var matchData = await MatchService.GetMatches(
+                    SettingsService.UserSettings,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
-                    TimeZoneInfo.Local.BaseUtcOffset.ToString(),
                     forceFetchNewData);
 
             MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(
@@ -112,7 +111,7 @@
 
             selectedDateRange = dateRange;
             IsLoading = false;
-            IsRefreshing = isRefreshing;
+            IsRefreshing = false;
         }
     }
 }

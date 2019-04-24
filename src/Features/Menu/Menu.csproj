@@ -4,6 +4,7 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <RootNamespace>LiveScore.Menu</RootNamespace>
         <AssemblyName>LiveScore.Menu</AssemblyName>
+        <SonarQubeExclude>True</SonarQubeExclude>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>

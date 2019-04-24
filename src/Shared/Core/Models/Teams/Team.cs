@@ -1,6 +1,8 @@
 ﻿namespace LiveScore.Core.Models.Teams
 {
     using System.Collections.Generic;
+    using LiveScore.Common.Extensions;
+    using Newtonsoft.Json;
 
     public interface ITeam : IEntity<string, string>
     {
@@ -36,16 +38,19 @@
 
         public bool IsHome { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
         public IEnumerable<IPlayer> Players { get; set; }
 
         public ITeamStatistic Statistic { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Coach>))]
         public ICoach Coach { get; set; }
 
         public string Formation { get; set; }
 
         public string Abbreviation { get; set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
         public IEnumerable<IPlayer> Substitutions { get; set; }
     }
 }

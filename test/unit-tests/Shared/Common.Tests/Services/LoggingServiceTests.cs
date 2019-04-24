@@ -121,5 +121,7 @@
         public string OperatingSystemVersion => "11.2";
 
         public string AppVersion => "1.2";
+
+        public string AppName => "Score247";
     }
 }

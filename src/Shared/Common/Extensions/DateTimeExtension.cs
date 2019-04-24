@@ -12,6 +12,6 @@
 
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 
-        public static DateTime EndDay(this DateTime value) => value.AddDays(1).AddMilliseconds(-1);
+        public static DateTime EndOfDay(this DateTime value) => value.AddDays(1).AddMilliseconds(-1);
     }
 }

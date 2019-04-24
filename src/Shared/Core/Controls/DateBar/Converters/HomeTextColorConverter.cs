@@ -9,8 +9,10 @@
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var isSelectHome = (bool)value;
-
-            return isSelectHome ? Color.FromHex("#F24822") : Color.FromHex("#939393");
+            var selectedColor = (Color) Application.Current.Resources["PrimaryAccentColor"];
+            var unselectedColor = (Color)Application.Current.Resources["FourthTextColor"];
+            
+            return isSelectHome ? selectedColor : unselectedColor;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -2,9 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using LiveScore.Core.Constants;
-    using LiveScore.Core.Events;
-    using LiveScore.Core.Factories;
     using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Events;
@@ -16,7 +13,7 @@
     {
         public ViewModelBase(
            INavigationService navigationService,
-           IServiceLocator serviceLocator,
+           IDepdendencyResolver serviceLocator,
            IEventAggregator eventAggregator) : this(navigationService, serviceLocator)
         {
             EventAggregator = eventAggregator;
@@ -24,17 +21,16 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IServiceLocator serviceLocator)
+           IDepdendencyResolver depdendencyResolver)
         {
             NavigationService = navigationService;
-            ServiceLocator = serviceLocator;
-            SettingsService = ServiceLocator.Create<ISettingsService>();
-
+            DepdendencyResolver = depdendencyResolver;
+            SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
         }
 
         public string Title { get; protected set; }
 
-        public IServiceLocator ServiceLocator { get; protected set; }
+        public IDepdendencyResolver DepdendencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 
@@ -74,21 +70,17 @@
         {
         }
 
-        public virtual void Dispose()
+        protected async Task NavigateToHome()
+            => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
+
+        public void Dispose()
         {
-            EventAggregator.GetEvent<SportChangeEvent>().Unsubscribe(OnSportChange);
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        protected virtual void SubscribeSportChangeEvent()
-            => EventAggregator.GetEvent<SportChangeEvent>().Subscribe(OnSportChange);
-
-        protected virtual async void OnSportChange(SportType sportType) => await NavigateToRoot();
-
-        protected async Task NavigateToRoot()
+        protected virtual void Dispose(bool disposing)
         {
-            Dispose();
-
-            await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
         }
     }
 }

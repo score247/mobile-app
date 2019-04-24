@@ -19,7 +19,7 @@
     <ContentView.Content>
         <FlexLayout Style="{StaticResource DateBarContainer}">
             <Frame x:Name="HomeButton" Style="{StaticResource DateBarBox}" AutomationId="DateBar_HomeBtn">
-                <Label Style="{StaticResource HomeIcon}" 
+                <Label Style="{StaticResource HomeIcon}"
                        TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
                <Frame.GestureRecognizers>
                      <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />

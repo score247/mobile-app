@@ -1,12 +1,12 @@
 ﻿namespace LiveScore.Favorites.ViewModels
 {
-    using LiveScore.Core.Factories;
+    using LiveScore.Core;
     using LiveScore.Core.ViewModels;
     using Prism.Navigation;
 
     public class EmptyFavoriteViewModel : ViewModelBase
     {
-        public EmptyFavoriteViewModel(INavigationService navigationService, IServiceLocator serviceLocator) : base(navigationService, serviceLocator)
+        public EmptyFavoriteViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

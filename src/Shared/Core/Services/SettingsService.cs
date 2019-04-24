@@ -1,50 +1,49 @@
 ﻿namespace LiveScore.Core.Services
 {
     using System;
-    using System.Reactive.Linq;
-    using Akavache;
-    using LiveScore.Common.Extensions;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Constants;
+    using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Settings;
 
     public interface ISettingsService
     {
         string CurrentLanguage { get; set; }
 
-        SportType CurrentSport { get; set; }
+        SportTypes CurrentSportType { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
 
-        T GetValueOrDefault<T>(string key, T defaultValue);
-
-        void AddOrUpdateValue<T>(string key, T value);
+        UserSettings UserSettings { get; }
     }
 
     public class SettingsService : ISettingsService
     {
-        public static string LocalEndPoint => "https://testing2.nexdev.net/main/api/";
+        private readonly ILocalStorage cacheService;
 
-        public SportType CurrentSport
+        public SettingsService(ILocalStorage cacheService)
         {
-            get => GetValueOrDefault(nameof(CurrentSport), SportType.Soccer);
-            set => AddOrUpdateValue(nameof(CurrentSport), value);
+            this.cacheService = cacheService;
+        }
+
+        public SportTypes CurrentSportType
+        {
+            get => cacheService.GetValueOrDefault(nameof(CurrentSportType), SportTypes.Soccer);
+            set => cacheService.AddOrUpdateValue(nameof(CurrentSportType), value);
         }
 
         public string CurrentLanguage
         {
-            get => GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
-            set => AddOrUpdateValue(nameof(CurrentLanguage), value);
+            get => cacheService.GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
+            set => cacheService.AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
 
         public TimeZoneInfo CurrentTimeZone
         {
-            get => GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.FindSystemTimeZoneById("Asia/Bangkok"));
-            set => AddOrUpdateValue(nameof(CurrentLanguage), value);
+            get => cacheService.GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.Local);
+            set => cacheService.AddOrUpdateValue(nameof(CurrentTimeZone), value);
         }
 
-        public void AddOrUpdateValue<T>(string key, T value)
-            => BlobCache.UserAccount.InsertObject(key, value).Wait();
-
-        public T GetValueOrDefault<T>(string key, T defaultValue)
-            => BlobCache.UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
+        public UserSettings UserSettings => new UserSettings(CurrentSportType.Value, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
     }
 }
