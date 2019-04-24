@@ -1,4 +1,6 @@
-﻿using LiveScore.Core.Controls.DateBar.Events;
+﻿using KellermanSoftware.CompareNetObjects;
+using LiveScore.Common.Extensions;
+using LiveScore.Core.Controls.DateBar.Events;
 using LiveScore.Core.Controls.DateBar.Models;
 using LiveScore.Core.Controls.DateBar.ViewModels;
 using LiveScore.Core.Tests.Fixtures;
@@ -7,41 +9,76 @@ using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
-    public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>, IDisposable
     {
         private readonly DateBarViewModel viewModel;
         private readonly MockViewModelBase mockViewModelBase;
+        private readonly CompareLogic comparer;
+        private DateRange currentDateRange = null;
 
         public DateBarViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
-            viewModel = new DateBarViewModel();
-            viewModel.EventAggregator = viewModelBaseFixture.EventAggregator;
-            viewModel.SettingsService = viewModelBaseFixture.AppSettingsFixture.SettingsService;
+            comparer = viewModelBaseFixture.CommonFixture.Comparer;
+            viewModel = new DateBarViewModel
+            {
+                EventAggregator = viewModelBaseFixture.EventAggregator,
+                SettingsService = viewModelBaseFixture.AppSettingsFixture.SettingsService,
+                NumberOfDisplayDays = 3
+            };
 
-            mockViewModelBase = new MockViewModelBase(Substitute.For<INavigationService>(), Substitute.For<IDepdendencyResolver>(), Substitute.For<IEventAggregator>());
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Subscribe(OnSelectDateBarItem);
+            viewModel.RenderCalendarItems();
+            mockViewModelBase = new MockViewModelBase(
+                Substitute.For<INavigationService>(),
+                Substitute.For<IDepdendencyResolver>(),
+                new EventAggregator());
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>()?.Unsubscribe(OnSelectDateBarItem);
+            currentDateRange = null;
+        }
+
+        private void OnSelectDateBarItem(DateRange dateRange)
+        {
+            currentDateRange = dateRange;
         }
 
         [Fact]
         public void RenderCalendarItems_ShouldReturnListBaseOnNumberDisplayDays()
         {
             // Arrange
-            viewModel.NumberOfDisplayDays = 3;
-            var expectedCount = viewModel.NumberOfDisplayDays * 2 + 1;
+            viewModel.NumberOfDisplayDays = 2;
 
             // Act
             viewModel.RenderCalendarItems();
-            var actualCount = viewModel.CalendarItems.Count;
 
             // Assert
-            Assert.Equal(expectedCount, actualCount);
+            var expectedCalendarItems = new ObservableCollection<DateBarItem>(new List<DateBarItem> {
+                new DateBarItem { Date = DateTime.Today.AddDays(-2) },
+                new DateBarItem { Date = DateTime.Today.AddDays(-1) },
+                new DateBarItem { Date = DateTime.Today },
+                new DateBarItem { Date = DateTime.Today.AddDays(1) },
+                new DateBarItem { Date = DateTime.Today.AddDays(2) }
+            });
+            Assert.True(comparer.Compare(expectedCalendarItems, viewModel.CalendarItems).AreEqual);
         }
 
         [Fact]
-        public void OnSelectHome_SelectingHome_NotGetEvent()
+        public void OnSelectHome_HomeIsSelected_NotFireDateBarItemSelectedEvent()
         {
             // Arrange
             viewModel.HomeIsSelected = true;
@@ -50,46 +87,62 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
             viewModel.SelectHomeCommand.Execute();
 
             // Assert
-            viewModel.EventAggregator.DidNotReceive().GetEvent<DateBarItemSelectedEvent>();
+            Assert.Null(currentDateRange);
         }
 
         [Fact]
-        public void OnSelectHome_NotSelectingHome_InjectEventAggregator()
+        public void OnSelectHome_NotSelectingHome_FireDateBarItemSelectedEvent()
         {
             // Arrange
             viewModel.HomeIsSelected = false;
-            viewModel.NumberOfDisplayDays = 2;
-            viewModel.RenderCalendarItems();
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(new DateBarItemSelectedEvent());
 
             // Act
             viewModel.SelectHomeCommand.Execute();
 
             // Assert
-            viewModel.EventAggregator.Received(1).GetEvent<DateBarItemSelectedEvent>();
+            Assert.Equal(DateRange.FromYesterdayUntilNow().FromDate, currentDateRange.FromDate);
+            Assert.Equal(DateRange.FromYesterdayUntilNow().ToDate, currentDateRange.ToDate);
         }
 
         [Fact]
-        public void SelectDateCommand_DifferentCurrentDate_InjectEventAggregator()
+        public void OnSelectHome_Always_NoItemIsSelected()
         {
-            // Arrange     
-            viewModel.NumberOfDisplayDays = 2;
-            viewModel.RenderCalendarItems();
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(new DateBarItemSelectedEvent());
+            // Arrange
+            viewModel.HomeIsSelected = false;
 
             // Act
-            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Now });
+            viewModel.SelectHomeCommand.Execute();
 
             // Assert
-            viewModel.EventAggregator.Received(1).GetEvent<DateBarItemSelectedEvent>();
+            Assert.DoesNotContain(viewModel.CalendarItems, item => item.IsSelected);
         }
 
         [Fact]
-        public void InitializeBindingContext_ShouldRenderCalendarItems()
+        public void SelectDateCommand_DifferentCurrentDate_FireDateBarItemSelectedEvent()
         {
-            // Arrange     
+            // Act
+            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Today });
+
+            // Assert
+            Assert.Equal(DateTime.Today, currentDateRange.FromDate);
+            Assert.Equal(DateTime.Today.EndOfDay(), currentDateRange.ToDate);
+        }
+
+        [Fact]
+        public void SelectDateCommand_DifferentCurrentDate_HasExpectedSelectedItem()
+        {
+            // Act
+            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Today });
+
+            // Assert
+            Assert.Contains(viewModel.CalendarItems, item => item.IsSelected && item.Date == DateTime.Today);
+        }
+
+        [Fact]
+        public void InitializeBindingContext_ShouldRenderExpectedCalendarItems()
+        {
+            // Arrange
             viewModel.NumberOfDisplayDays = 2;
-            viewModel.HomeIsSelected = true;
 
             // Act
             viewModel.InitializeBindingContext(mockViewModelBase);
@@ -97,16 +150,25 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
             // Assert
             Assert.NotEmpty(viewModel.CalendarItems);
         }
+
+        [Fact]
+        public void InitializeBindingContext_Always_ExecuteSelectHomeCommand()
+        {
+            // Act
+            viewModel.InitializeBindingContext(mockViewModelBase);
+
+            // Assert
+            Assert.True(viewModel.HomeIsSelected);
+        }
     }
 
     public class MockViewModelBase : ViewModelBase
     {
         public MockViewModelBase(
-            INavigationService navigationService, 
-            IDepdendencyResolver serviceLocator, 
+            INavigationService navigationService,
+            IDepdendencyResolver serviceLocator,
             IEventAggregator eventAggregator) : base(navigationService, serviceLocator, eventAggregator)
         {
-
         }
     }
 }

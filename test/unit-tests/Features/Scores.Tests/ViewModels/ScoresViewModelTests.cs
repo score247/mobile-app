@@ -9,6 +9,7 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Score.ViewModels;
     using NSubstitute;
+    using Prism.Events;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -95,25 +96,9 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void OnNavigatingTo_Always_SubsribeDateBarItemSelectedEvent()
-        {
-            // Arrange
-            var dateBarItemSelectedEvent = Substitute.For<DateBarItemSelectedEvent>();
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(dateBarItemSelectedEvent);
-
-            // Act
-            viewModel.OnNavigatingTo(null);
-
-            // Assert
-            dateBarItemSelectedEvent.Received().Subscribe(Arg.Any<Action<DateRange>>());
-        }
-
-        [Fact]
         public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
         {
             // Arrange
-            var dateBarItemSelectedEvent = Substitute.For<DateBarItemSelectedEvent>();
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(dateBarItemSelectedEvent);
             matchService.GetMatches(
                 viewModel.SettingsService.UserSettings,
                 Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
@@ -121,6 +106,24 @@ namespace Scores.Tests.ViewModels
 
             // Act
             viewModel.OnNavigatingTo(null);
+
+            // Assert
+            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+            Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        }
+
+        [Fact]
+        public void OnPublishDateBarItemSelectedEvent_Always_LoadDataByDateRange()
+        {
+            // Arrange
+            matchService.GetMatches(
+                  viewModel.SettingsService.UserSettings,
+                  Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+                  false).Returns(matchData);
+            viewModel.OnNavigatingTo(null);
+
+            // Act
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
             // Assert
             var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();

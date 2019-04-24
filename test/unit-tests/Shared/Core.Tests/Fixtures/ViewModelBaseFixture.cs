@@ -11,7 +11,7 @@
         {
             AppSettingsFixture = new AppSettingsFixture();
             CommonFixture = new CommonFixture();
-
+            EventAggregator = new EventAggregator();
             DepdendencyResolver = Substitute.For<IDepdendencyResolver>();
             DepdendencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
 
@@ -22,7 +22,7 @@
 
         public INavigationService NavigationService { get; }
 
-        public IEventAggregator EventAggregator => Substitute.For<IEventAggregator>();
+        public IEventAggregator EventAggregator { get; }
 
         public AppSettingsFixture AppSettingsFixture { get; }
 
