@@ -11,14 +11,14 @@
         {
             if (value == null)
             {
-                return Color.FromHex("#939393");
+                return (Color)Application.Current.Resources["FourthTextColor"];
             }
 
             var calendarDate = value as DateBarItem;
 
             if (calendarDate.IsSelected)
             {
-                return Color.FromHex("#F24822");
+                return (Color)Application.Current.Resources["PrimaryAccentColor"];
             }
 
             if (IsToday(calendarDate))
@@ -26,7 +26,7 @@
                 return Color.White;
             }
 
-            return Color.FromHex("#939393");
+            return (Color)Application.Current.Resources["FourthTextColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
