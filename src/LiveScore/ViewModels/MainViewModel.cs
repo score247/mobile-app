@@ -15,14 +15,9 @@
             : base(navigationService, serviceLocator)
         {
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
-            NightMode = true;
         }
 
-        public bool NightMode { get; set; }
-
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
-
-        public DelegateCommand ChangeThemeCommand { get; set; }
 
         private async Task Navigate(string page)
         {

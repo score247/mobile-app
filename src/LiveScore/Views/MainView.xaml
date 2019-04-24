@@ -101,9 +101,9 @@
                             <Label Style="{StaticResource NavIcon}" Text="&#xe903;" />
                             <Label Style="{StaticResource NavName}" Text="Night Mode" />
                         </StackLayout>
-                        <Switch IsToggled="{Binding NightMode}">
+                        <Switch IsToggled="True">
                             <Switch.Behaviors>
-                                <behavior:EventToCommandBehavior Command="{Binding ChangeThemeCommand}" EventName="Toggled" />
+                                <behavior:EventToCommandBehavior Command="" EventName="Toggled" />
                             </Switch.Behaviors>
                         </Switch>
                     </FlexLayout>
