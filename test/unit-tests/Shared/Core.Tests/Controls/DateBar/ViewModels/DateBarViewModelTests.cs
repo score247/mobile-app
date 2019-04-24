@@ -13,13 +13,16 @@ using Xunit;
 namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
     public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>
-    {        
+    {
+        private readonly IEventAggregator mockEventAggregator;
         private readonly DateBarViewModel viewModel;
 
         public DateBarViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
+            mockEventAggregator = Substitute.For<IEventAggregator>();
+
             viewModel = new DateBarViewModel();
-            viewModel.EventAggregator = viewModelBaseFixture.EventAggregator;
+            viewModel.EventAggregator = mockEventAggregator;
             viewModel.SettingsService = viewModelBaseFixture.AppSettingsFixture.SettingsService;
         }
 
@@ -62,6 +65,21 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 
             // Act
             viewModel.SelectHomeCommand.Execute();
+
+            // Assert
+            viewModel.EventAggregator.Received(1).GetEvent<DateBarItemSelectedEvent>();
+        }
+
+        [Fact]
+        public void SelectDateCommand_DifferentCurrentDate_InjectEventAggregator()
+        {
+            // Arrange     
+            viewModel.NumberOfDisplayDays = 2;
+            viewModel.RenderCalendarItems();            
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(new DateBarItemSelectedEvent());
+
+            // Act
+            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Now });
 
             // Assert
             viewModel.EventAggregator.Received(1).GetEvent<DateBarItemSelectedEvent>();
