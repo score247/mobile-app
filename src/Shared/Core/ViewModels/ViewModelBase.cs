@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using LiveScore.Core.Services;
     using Prism.AppModel;
@@ -8,7 +9,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
+    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IDisposable
     {
         public ViewModelBase(
            INavigationService navigationService,
@@ -71,5 +72,15 @@
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+        }
     }
 }

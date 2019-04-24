@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Score.ViewModels
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Scores.Tests")]
+
+namespace LiveScore.Score.ViewModels
 {
     using System;
     using System.Collections.ObjectModel;
@@ -15,7 +19,6 @@
 
     public class ScoresViewModel : ViewModelBase
     {
-        private readonly DateTime selectedDate;
         private readonly IMatchService MatchService;
         private DateRange selectedDateRange;
 
@@ -25,11 +28,13 @@
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            selectedDate = DateTime.Today;
+            SelectedDate = DateTime.Today;
             MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
         }
+
+        public DateTime SelectedDate { get; internal set; }
 
         public bool IsLoading { get; set; }
 
@@ -45,16 +50,25 @@
 
         public override async void OnResume()
         {
-            if (selectedDate != DateTime.Today)
+            if (SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
             }
         }
 
-        public override void OnDisappearing()
-            => EventAggregator
-                .GetEvent<DateBarItemSelectedEvent>()
-                .Unsubscribe(OnDateBarItemSelected);
+        public override void OnDisappearing() => Dispose(true);
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                EventAggregator
+                    .GetEvent<DateBarItemSelectedEvent>()
+                    .Unsubscribe(OnDateBarItemSelected);
+            }
+
+            base.Dispose(disposing);
+        }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -70,8 +84,7 @@
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 
-        private async void OnDateBarItemSelected(DateRange dateRange)
-            => await LoadData(dateRange);
+        private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);
 
 #pragma warning restore S3168 // "async" methods should not return "void"
 

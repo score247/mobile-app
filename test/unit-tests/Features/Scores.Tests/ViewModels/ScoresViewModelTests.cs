@@ -5,18 +5,19 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Score.ViewModels;
     using NSubstitute;
-    using Prism.Events;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Xunit;
 
-    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>, IDisposable
     {
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
@@ -40,6 +41,17 @@ namespace Scores.Tests.ViewModels
                 viewModelBaseFixture.NavigationService,
                 viewModelBaseFixture.DepdendencyResolver,
                 viewModelBaseFixture.EventAggregator);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            viewModel.Dispose();
         }
 
         [Fact]
@@ -113,9 +125,10 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void OnPublishDateBarItemSelectedEvent_Always_LoadDataByDateRange()
+        public void OnPublishingDateBarItemSelectedEvent_Always_LoadDataByDateRange()
         {
             // Arrange
+            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
             matchService.GetMatches(
                   viewModel.SettingsService.UserSettings,
                   Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
@@ -128,6 +141,34 @@ namespace Scores.Tests.ViewModels
             // Assert
             var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        }
+
+        [Fact]
+        public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
+        {
+            // Arrange
+            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
+            viewModel.OnNavigatingTo(null);
+
+            // Act
+            viewModel.OnDisappearing();
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+
+            // Assert
+            matchService.DidNotReceive().GetMatches(Arg.Any<UserSettings>(), Arg.Any<DateRange>(), Arg.Any<bool>());
+        }
+
+        [Fact]
+        public void OnResume_SelectedDateIsNotToday_NavigateToHome()
+        {
+            // Arrange
+            viewModel.SelectedDate = DateTime.Today.AddDays(1);
+
+            // Act
+            viewModel.OnResume();
+
+            // Assert
+            viewModel.NavigationService.Received(1).NavigateAsync("app:///MainView/MenuTabbedView");
         }
     }
 }
