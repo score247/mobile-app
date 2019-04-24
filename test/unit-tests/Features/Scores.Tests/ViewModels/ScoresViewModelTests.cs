@@ -3,6 +3,7 @@ namespace Scores.Tests.ViewModels
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
+    using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
@@ -95,6 +96,12 @@ namespace Scores.Tests.ViewModels
         [Fact]
         public async Task OnNavigatingTo_Always_SubsribeDateBarItemSelectedEvent()
         {
+            // Arrange
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+
+            // Act
+
+            // Assert
         }
     }
 }

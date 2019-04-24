@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>LiveScore.News</RootNamespace>
     <AssemblyName>LiveScore.News</AssemblyName>
+    <SonarQubeExclude>True</SonarQubeExclude>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
