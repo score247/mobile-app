@@ -17,4 +17,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\Shared\Core\LiveScore.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controls\DateBar\Converters\" />
+  </ItemGroup>
 </Project>
