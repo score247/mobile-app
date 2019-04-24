@@ -25,6 +25,21 @@
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
         <Compile Remove="Views\MatchDetailView.xaml.cs" />
         <Compile Remove="ViewModels\MatchDetailViewModel.cs" />
+        <Compile Remove="Views\Templates\MatchH2HAwayTeamTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchH2HHeadToHeadTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchH2HHomeTeamTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchInfoTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchLineUpsTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOdds1x2Template.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOddsBookmarker1x2Template.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOddsBookmarkerHDPTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOddsBookmarkerOUTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOddsHandicapTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchOddsOUTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchSocialTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchStatsTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchTableTotalFullListTemplate.xaml.cs" />
+        <Compile Remove="Views\Templates\MatchTrackerTemplate.xaml.cs" />
     </ItemGroup>
     <ItemGroup>
         <Compile Update="ViewResources\MatchSocialViewResource.xaml.cs">
@@ -60,50 +75,7 @@
         <Compile Update="Views\ScorePage.xaml.cs">
             <DependentUpon>ScoresView.xaml</DependentUpon>
         </Compile>
-        <Compile Update="Views\Templates\MatchOddsOUTemplate.xaml.cs">
-            <DependentUpon>MatchOddsOUTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchOddsHandicapTemplate.xaml.cs">
-            <DependentUpon>MatchOddsHandicapTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchOddsBookmarkerOUTemplate.xaml.cs">
-            <DependentUpon>MatchOddsBookmarkerOUTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchOddsBookmarkerHDPTemplate.xaml.cs">
-            <DependentUpon>MatchOddsBookmarkerHDPTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchOddsBookmarker1x2Template.xaml.cs">
-            <DependentUpon>MatchOddsBookmarker1x2Template.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchSocialTemplate.xaml.cs">
-            <DependentUpon>MatchSocialTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchOdds1x2Template.xaml.cs">
-            <DependentUpon>MatchOdds1x2Template.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchTableTotalFullListTemplate.xaml.cs">
-            <DependentUpon>MatchTableTotalFullListTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchH2HAwayTeamTemplate.xaml.cs">
-            <DependentUpon>MatchH2HAwayTeamTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchH2HHomeTeamTemplate.xaml.cs">
-            <DependentUpon>MatchH2HHomeTeamTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchH2HHeadToHeadTemplate.xaml.cs">
-            <DependentUpon>MatchH2HHeadToHeadTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchLineUpsTemplate.xaml.cs">
-            <DependentUpon>MatchLineUpsTemplate.xaml</DependentUpon>
-        </Compile>
-        <Compile Update="Views\Templates\MatchStatsTemplate.xaml.cs">
-            <DependentUpon>MatchStatsTemplate.xaml</DependentUpon>
-        </Compile>
         <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchTrackerView.xaml.cs">
-            <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
-            <SubType>Code</SubType>
-        </Compile>
-        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchTrackerTemplate.xaml.cs">
             <DependentUpon>MatchTrackerTemplate.xaml</DependentUpon>
             <SubType>Code</SubType>
         </Compile>
@@ -119,5 +91,23 @@
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Remove="Views\MatchDetailView.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchH2HAwayTeamTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchH2HHeadToHeadTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchH2HHomeTeamTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchInfoTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchLineUpsTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOdds1x2Template.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOddsBookmarker1x2Template.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOddsBookmarkerHDPTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOddsBookmarkerOUTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOddsHandicapTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchOddsOUTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchSocialTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchStatsTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchTableTotalFullListTemplate.xaml" />
+      <EmbeddedResource Remove="Views\Templates\MatchTrackerTemplate.xaml" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Views\Templates\" />
     </ItemGroup>
 </Project>
