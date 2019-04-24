@@ -2,22 +2,27 @@
 using LiveScore.Core.Controls.DateBar.Models;
 using LiveScore.Core.Controls.DateBar.ViewModels;
 using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Core.ViewModels;
 using NSubstitute;
 using Prism.Events;
+using Prism.Navigation;
 using System;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
     public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>
-    {        
+    {
         private readonly DateBarViewModel viewModel;
+        private readonly MockViewModelBase mockViewModelBase;
 
         public DateBarViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
             viewModel = new DateBarViewModel();
             viewModel.EventAggregator = viewModelBaseFixture.EventAggregator;
             viewModel.SettingsService = viewModelBaseFixture.AppSettingsFixture.SettingsService;
+
+            mockViewModelBase = new MockViewModelBase(Substitute.For<INavigationService>(), Substitute.For<IDepdendencyResolver>(), Substitute.For<IEventAggregator>());
         }
 
         [Fact]
@@ -69,7 +74,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
         {
             // Arrange     
             viewModel.NumberOfDisplayDays = 2;
-            viewModel.RenderCalendarItems();            
+            viewModel.RenderCalendarItems();
             viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Returns(new DateBarItemSelectedEvent());
 
             // Act
@@ -77,6 +82,31 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 
             // Assert
             viewModel.EventAggregator.Received(1).GetEvent<DateBarItemSelectedEvent>();
+        }
+
+        [Fact]
+        public void InitializeBindingContext_ShouldRenderCalendarItems()
+        {
+            // Arrange     
+            viewModel.NumberOfDisplayDays = 2;
+            viewModel.HomeIsSelected = true;
+
+            // Act
+            viewModel.InitializeBindingContext(mockViewModelBase);
+
+            // Assert
+            Assert.NotEmpty(viewModel.CalendarItems);
+        }
+    }
+
+    public class MockViewModelBase : ViewModelBase
+    {
+        public MockViewModelBase(
+            INavigationService navigationService, 
+            IDepdendencyResolver serviceLocator, 
+            IEventAggregator eventAggregator) : base(navigationService, serviceLocator, eventAggregator)
+        {
+
         }
     }
 }
