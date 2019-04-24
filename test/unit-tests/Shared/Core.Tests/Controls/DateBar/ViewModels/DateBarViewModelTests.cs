@@ -1,21 +1,20 @@
-﻿using KellermanSoftware.CompareNetObjects;
-using LiveScore.Common.Extensions;
-using LiveScore.Core.Controls.DateBar.Events;
-using LiveScore.Core.Controls.DateBar.Models;
-using LiveScore.Core.Controls.DateBar.ViewModels;
-using LiveScore.Core.Tests.Fixtures;
-using LiveScore.Core.ViewModels;
-using NSubstitute;
-using Prism.Events;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Xunit;
-
-namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
+﻿namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
+    using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Common.Extensions;
+    using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Controls.DateBar.Models;
+    using LiveScore.Core.Controls.DateBar.ViewModels;
+    using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Core.ViewModels;
+    using NSubstitute;
+    using Prism.Events;
+    using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using Xunit;
+
     public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>, IDisposable
     {
         private readonly DateBarViewModel viewModel;
@@ -44,6 +43,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
         public void Dispose()
         {
             Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
