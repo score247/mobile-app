@@ -23,7 +23,7 @@ Open Application On Simulator
 
 Init_Simulator
     [Arguments]    ${simulator_name}
-    #    Start Appium Server
+    Start Appium Server
     Open Application On Simulator    ${simulator_name}
 
 Init_Real Device
@@ -32,5 +32,5 @@ Init_Real Device
     Open Application On Real Ios Device    ${device_name}    ${udid}
 
 Suite TearDown
-    #    Terminate Process    appiumserver    kill=True
+    Terminate Process    appiumserver    kill=True
     Close All Applications
