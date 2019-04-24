@@ -10,6 +10,7 @@
         public ViewModelBaseFixture()
         {
             AppSettingsFixture = new AppSettingsFixture();
+            CommonFixture = new CommonFixture();
 
             DepdendencyResolver = Substitute.For<IDepdendencyResolver>();
             DepdendencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
@@ -24,5 +25,7 @@
         public IEventAggregator EventAggregator => Substitute.For<IEventAggregator>();
 
         public AppSettingsFixture AppSettingsFixture { get; }
+
+        public CommonFixture CommonFixture { get; set; }
     }
 }

@@ -16,5 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\src\Shared\Core\LiveScore.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\src\Shared\Sports\Soccer\Soccer.csproj" />
+    <ProjectReference Include="..\Common.Tests\LiveScore.Common.Tests.csproj" />
   </ItemGroup>
 </Project>
