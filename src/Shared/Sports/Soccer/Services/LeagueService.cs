@@ -8,7 +8,7 @@
     using LiveScore.Core.Services;
     using Refit;
 
-    public interface ILeagueApi
+    public interface ISoccerLeagueApi
     {
         [Get("/League/GetLeagues?sportId={sportId}&language={languageCode}")]
         Task<IEnumerable<ILeague>> GetLeagues(string sportId, string languageCode);
@@ -17,7 +17,7 @@
     public class LeagueService : BaseService, ILeagueService
     {
         public LeagueService(
-            ILeagueApi leagueApi,
+            ISoccerLeagueApi leagueApi,
             ILoggingService loggingService,
             IApiPolicy apiPolicy) : base(loggingService)
         {

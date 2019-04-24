@@ -20,7 +20,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterInstance(RestService.For<ISoccerMatchApi>(Configuration.LocalEndPoint));
-            containerRegistry.RegisterInstance(RestService.For<ILeagueApi>(Configuration.LocalEndPoint));
+            containerRegistry.RegisterInstance(RestService.For<ISoccerLeagueApi>(Configuration.LocalEndPoint));
             containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.Value);
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value);
         }

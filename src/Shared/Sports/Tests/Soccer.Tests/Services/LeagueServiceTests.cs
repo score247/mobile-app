@@ -9,7 +9,7 @@ namespace Soccer.Tests.Services
 {
     public class LeagueServiceTests
     {
-        private readonly ILeagueApi mockSoccerApi;
+        private readonly ISoccerLeagueApi mockSoccerApi;
         private readonly ILoggingService mockLogger;
         private readonly IApiPolicy mockPolicy;
 
@@ -17,7 +17,7 @@ namespace Soccer.Tests.Services
 
         public LeagueServiceTests()
         {
-            mockSoccerApi = Substitute.For<ILeagueApi>();
+            mockSoccerApi = Substitute.For<ISoccerLeagueApi>();
             mockLogger = Substitute.For<ILoggingService>();
             mockPolicy = Substitute.For<IApiPolicy>();
 
