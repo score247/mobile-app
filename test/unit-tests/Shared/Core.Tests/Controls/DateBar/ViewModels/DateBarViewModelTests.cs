@@ -5,24 +5,18 @@ using LiveScore.Core.Tests.Fixtures;
 using NSubstitute;
 using Prism.Events;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Text;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
     public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>
-    {
-        private readonly IEventAggregator mockEventAggregator;
+    {        
         private readonly DateBarViewModel viewModel;
 
         public DateBarViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
-            mockEventAggregator = Substitute.For<IEventAggregator>();
-
             viewModel = new DateBarViewModel();
-            viewModel.EventAggregator = mockEventAggregator;
+            viewModel.EventAggregator = viewModelBaseFixture.EventAggregator;
             viewModel.SettingsService = viewModelBaseFixture.AppSettingsFixture.SettingsService;
         }
 

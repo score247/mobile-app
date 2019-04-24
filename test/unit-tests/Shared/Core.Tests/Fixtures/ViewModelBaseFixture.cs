@@ -15,14 +15,13 @@
             DepdendencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
 
             NavigationService = Substitute.For<INavigationService>();
-            EventAggregator = Substitute.For<IEventAggregator>();
         }
 
         public IDepdendencyResolver DepdendencyResolver { get; }
 
         public INavigationService NavigationService { get; }
 
-        public IEventAggregator EventAggregator { get; }
+        public IEventAggregator EventAggregator => Substitute.For<IEventAggregator>();
 
         public AppSettingsFixture AppSettingsFixture { get; }
     }
