@@ -13,10 +13,6 @@
     {
         Func<int, TimeSpan> SleepDurationProvider { get; }
 
-        Task<T> WaitAndRetry<T>(Func<Task<T>> func);
-
-        Task<T> Timeout<T>(Func<Task<T>> func);
-
         Task<T> RetryAndTimeout<T>(Func<Task<T>> func);
     }
 
@@ -35,16 +31,6 @@
             HttpStatusCode.ServiceUnavailable, // 503
             HttpStatusCode.GatewayTimeout, // 504
         };
-
-        public Task<T> WaitAndRetry<T>(Func<Task<T>> func)
-        => Policy
-            .Handle<WebException>()
-            .Or<ApiException>(ex => HandleApiException(ex))
-            .WaitAndRetryAsync(DEFAULT_COUNT, SleepDurationProvider)
-            .ExecuteAsync<T>(func);
-
-        public Task<T> Timeout<T>(Func<Task<T>> func)
-            => Policy.TimeoutAsync(TIMEOUT_SECONDS).ExecuteAsync<T>(func);
 
         public Task<T> RetryAndTimeout<T>(Func<Task<T>> func)
         {
