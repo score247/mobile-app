@@ -52,7 +52,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         }
 
         [Fact]
-        public void ConvertBack_StateUnderTest_ExpectedBehavior()
+        public void ConvertBack_ShouldReturnSame()
         {
             // Arrange
             var unitUnderTest = this.CreateHomeTextColorConverter();
