@@ -15,7 +15,7 @@ namespace Soccer.Tests.Services
 {
     public class MatchServiceTests
     {
-        private readonly ISoccerMatchApi mockSoccerApi;
+        private readonly IApiService mockApiService;
         private readonly ILocalStorage mockCache;
         private readonly ILoggingService mockLogger;
         private readonly IApiPolicy mockPolicy;
@@ -23,13 +23,13 @@ namespace Soccer.Tests.Services
         private readonly MatchService matchService;
 
         public MatchServiceTests()
-        {
-            mockSoccerApi = Substitute.For<ISoccerMatchApi>();
+        {   
             mockCache = Substitute.For<ILocalStorage>();
             mockLogger = Substitute.For<ILoggingService>();
             mockPolicy = Substitute.For<IApiPolicy>();
+            mockApiService = Substitute.For<IApiService>();
 
-            matchService = new MatchService(mockSoccerApi, mockCache, mockLogger, mockPolicy);
+            matchService = new MatchService(mockCache, mockLogger, mockPolicy, mockApiService);
         }
 
         [Fact]

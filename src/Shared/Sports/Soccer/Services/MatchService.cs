@@ -19,21 +19,22 @@
     }
 
     public class MatchService : BaseService, IMatchService
-    {
-        private readonly ISoccerMatchApi soccerMatchApi;
+    {        
         private readonly ILocalStorage cacheService;
         private readonly IApiPolicy apiPolicy;
+        private readonly IApiService apiService;
 
-        public MatchService(
-            ISoccerMatchApi soccerMatchApi,
+        public MatchService(            
             ILocalStorage cacheService,
             ILoggingService loggingService,
-            IApiPolicy apiPolicy
+            IApiPolicy apiPolicy,
+            IApiService apiService
             ) : base(loggingService)
         {
-            this.cacheService = cacheService;
-            this.soccerMatchApi = soccerMatchApi;
+            this.cacheService = cacheService;            
             this.apiPolicy = apiPolicy;
+
+            this.apiService = apiService; 
         }
 
         public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
@@ -70,6 +71,6 @@
 
         private async Task<IEnumerable<Match>> GetMatches(UserSettings settings, string fromDateText, string toDateText)
             => await apiPolicy.RetryAndTimeout(
-                () => soccerMatchApi.GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone));
+                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone));
     }
 }

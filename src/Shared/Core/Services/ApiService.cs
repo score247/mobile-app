@@ -3,13 +3,13 @@
     using LiveScore.Common.Configuration;
     using Refit;
 
-    public interface IApiService<out T>
+    public interface IApiService
     {
-        T GetApi();
+        T GetApi<T>();
     }
 
-    public class ApiService<T> : IApiService<T>
+    public class ApiService : IApiService
     {
-        public T GetApi() => RestService.For<T>(Configuration.LocalEndPoint);
+        public T GetApi<T>() => RestService.For<T>(Configuration.LocalEndPoint);        
     }
 }
