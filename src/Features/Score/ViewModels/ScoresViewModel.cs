@@ -106,8 +106,7 @@ namespace LiveScore.Score.ViewModels
                     forceFetchNewData);
 
             MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(
-                      matchData.GroupBy(match
-                      => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
+                      matchData.GroupBy(match => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
 
             selectedDateRange = dateRange;
             IsLoading = false;

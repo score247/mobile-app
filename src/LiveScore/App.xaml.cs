@@ -89,10 +89,11 @@ namespace LiveScore
         {
             containerRegistry.RegisterSingleton<ILocalStorage, LocalStorage>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
-            containerRegistry.Register<ISportService, SportService>();
-            containerRegistry.Register<IEssentialsService, EssentialsService>();
+            containerRegistry.RegisterSingleton<ISportService, SportService>();
+            containerRegistry.RegisterSingleton<IEssentialsService, EssentialsService>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
-            containerRegistry.Register<IApiPolicy, ApiPolicy>();
+            containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
+            containerRegistry.RegisterSingleton<IApiService, ApiService>();
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
         }
 
