@@ -1,5 +1,4 @@
 ﻿using LiveScore.Common.Services;
-using LiveScore.Core.Constants;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Settings;
 using LiveScore.Core.Services;
@@ -52,8 +51,8 @@ namespace LiveScore.Core.Tests.Services
         public void CurrentLanguage_Default_ShouldReturnDefault()
         {
             // Arrange
-            var expected = LanguageCode.En.ToString();
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
+            var expected = Languages.English.Value;
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
 
             // Act
             var actual = setting.CurrentLanguage;
@@ -66,7 +65,7 @@ namespace LiveScore.Core.Tests.Services
         public void CurrentLanguage_Assigned_ShouldInjectCacheService()
         {
             // Arrange
-            var expected = LanguageCode.Vi.ToString();
+            var expected = Languages.Vietnamese.Value;
 
             // Act
             setting.CurrentLanguage = expected;
@@ -106,9 +105,9 @@ namespace LiveScore.Core.Tests.Services
         public void UserSettings_ShouldReturnCorrectly()
         {
             // Arrange
-            var expected = new UserSettings(SportTypes.Soccer.Value, LanguageCode.En.ToString(), TimeZoneInfo.Local.BaseUtcOffset.ToString());
+            var expected = new UserSettings(SportTypes.Soccer.Value, Languages.English.Value, TimeZoneInfo.Local.BaseUtcOffset.ToString());
             mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(LanguageCode.En.ToString());
+            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
             mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act

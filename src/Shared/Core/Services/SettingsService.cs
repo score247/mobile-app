@@ -1,8 +1,7 @@
 ﻿namespace LiveScore.Core.Services
 {
     using System;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Constants;
+    using LiveScore.Common.Services;    
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Settings;
 
@@ -34,7 +33,7 @@
 
         public string CurrentLanguage
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentLanguage), LanguageCode.En.ToString());
+            get => cacheService.GetValueOrDefault(nameof(CurrentLanguage), Languages.English.Value);
             set => cacheService.AddOrUpdateValue(nameof(CurrentLanguage), value);
         }
 
