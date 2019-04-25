@@ -34,7 +34,7 @@
             var expected = "UPPER";
 
             // Act
-            var result = converter.Convert("UPPER", null, null, null);
+            var result = converter.ConvertBack("UPPER", null, null, null);
 
             // Assert
             Assert.Equal(expected, result);
