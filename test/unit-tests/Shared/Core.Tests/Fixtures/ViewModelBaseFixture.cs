@@ -12,13 +12,13 @@
             AppSettingsFixture = new AppSettingsFixture();
             CommonFixture = new CommonFixture();
             EventAggregator = new EventAggregator();
-            DepdendencyResolver = Substitute.For<IDepdendencyResolver>();
+            DepdendencyResolver = Substitute.For<IDependencyResolver>();
             DepdendencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
 
             NavigationService = Substitute.For<INavigationService>();
         }
 
-        public IDepdendencyResolver DepdendencyResolver { get; }
+        public IDependencyResolver DepdendencyResolver { get; }
 
         public INavigationService NavigationService { get; }
 

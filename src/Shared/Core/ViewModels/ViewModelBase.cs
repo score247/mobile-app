@@ -13,7 +13,7 @@
     {
         public ViewModelBase(
            INavigationService navigationService,
-           IDepdendencyResolver serviceLocator,
+           IDependencyResolver serviceLocator,
            IEventAggregator eventAggregator) : this(navigationService, serviceLocator)
         {
             EventAggregator = eventAggregator;
@@ -21,7 +21,7 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IDepdendencyResolver depdendencyResolver)
+           IDependencyResolver depdendencyResolver)
         {
             NavigationService = navigationService;
             DepdendencyResolver = depdendencyResolver;
@@ -30,7 +30,7 @@
 
         public string Title { get; protected set; }
 
-        public IDepdendencyResolver DepdendencyResolver { get; protected set; }
+        public IDependencyResolver DepdendencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 

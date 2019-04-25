@@ -2,11 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:soccerTemplates="clr-namespace:Soccer.Views.Templates;assembly=Soccer"
              x:Class="LiveScore.League.Views.LeagueDetailView"
              Title="{Binding Title}">
     <ContentPage.Resources>
@@ -14,29 +11,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <coreResources:MatchViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <coreTemplates:MatchHeaderListViewTemplate x:Key="matchHeaderListViewTemplate" />
-            <soccerTemplates:MatchDataTemplate x:Key="matchListViewTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <ListView
-                ItemsSource="{Binding GroupMatches}"
-                VerticalOptions="FillAndExpand"
-                HasUnevenRows="true"
-                IsPullToRefreshEnabled="true"
-                RefreshCommand="{Binding RefreshCommand}"
-                IsRefreshing="{Binding IsRefreshingMatchList}"
-                CachingStrategy="RecycleElement"
-                IsGroupingEnabled="True"
-                GroupDisplayBinding="{Binding Key}"
-                SeparatorColor="{StaticResource LineColor}"
-                Style="{StaticResource ListViewHasBackground}"
-                AutomationProperties.IsInAccessibleTree="False"
-                GroupHeaderTemplate="{StaticResource matchHeaderListViewTemplate}"
-                ItemTemplate="{StaticResource matchListViewTemplate}">
-            <ListView.Behaviors>
-                <b:EventToCommandBehavior EventName="ItemTapped" Command="{Binding SelectMatchCommand}" />
-            </ListView.Behaviors>
-        </ListView>
     </StackLayout>
 </ContentPage>

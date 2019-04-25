@@ -5,7 +5,7 @@
 
     public class RefreshViewModel : MenuViewModelBase
     {
-        public RefreshViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public RefreshViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

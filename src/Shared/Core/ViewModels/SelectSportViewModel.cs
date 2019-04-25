@@ -18,7 +18,7 @@ namespace LiveScore.Core.ViewModels
 
         public SelectSportViewModel(
             INavigationService navigationService,
-            IDepdendencyResolver dependencyResolver,
+            IDependencyResolver dependencyResolver,
             ISportService sportService)
                 : base(navigationService, dependencyResolver)
         {

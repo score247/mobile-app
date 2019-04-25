@@ -5,7 +5,7 @@
 
     public class DefaultLanguageViewModel : MenuViewModelBase
     {
-        public DefaultLanguageViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
+        public DefaultLanguageViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
         }

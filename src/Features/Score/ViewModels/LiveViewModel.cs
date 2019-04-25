@@ -6,7 +6,7 @@
 
     public class LiveViewModel : ViewModelBase
     {
-        public LiveViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
+        public LiveViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
         }

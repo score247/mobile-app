@@ -8,7 +8,7 @@
 
     public class NavigationTitleViewModel : ViewModelBase
     {
-        public NavigationTitleViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
+        public NavigationTitleViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             SelectSportCommand = new DelegateAsyncCommand(NavigateSelectSportPage);

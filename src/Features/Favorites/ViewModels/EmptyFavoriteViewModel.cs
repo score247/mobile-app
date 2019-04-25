@@ -6,7 +6,7 @@
 
     public class EmptyFavoriteViewModel : ViewModelBase
     {
-        public EmptyFavoriteViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public EmptyFavoriteViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

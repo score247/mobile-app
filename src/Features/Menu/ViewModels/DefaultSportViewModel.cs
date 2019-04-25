@@ -5,7 +5,7 @@
 
     public class DefaultSportViewModel : MenuViewModelBase
     {
-        public DefaultSportViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public DefaultSportViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

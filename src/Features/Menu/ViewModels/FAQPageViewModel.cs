@@ -5,7 +5,7 @@
 
     public class FaqPageViewModel : MenuViewModelBase
     {
-        public FaqPageViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public FaqPageViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

@@ -8,7 +8,7 @@
 
     public class MenuViewModelBase : ViewModelBase
     {
-        public MenuViewModelBase(INavigationService navigationService, IDepdendencyResolver serviceLocator)
+        public MenuViewModelBase(INavigationService navigationService, IDependencyResolver serviceLocator)
              : base(navigationService, serviceLocator)
         {
             DoneCommand = new DelegateAsyncCommand(OnDone);

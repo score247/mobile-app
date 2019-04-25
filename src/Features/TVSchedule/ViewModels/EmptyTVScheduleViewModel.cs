@@ -6,7 +6,7 @@
 
     public class EmptyTVScheduleViewModel : ViewModelBase
     {
-        public EmptyTVScheduleViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public EmptyTVScheduleViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
             Title = "TV";
         }

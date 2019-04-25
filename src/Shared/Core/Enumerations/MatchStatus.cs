@@ -77,11 +77,6 @@
 
         public static readonly MatchStatus DelayedStatus = new MatchStatus(Delayed, nameof(Delayed));
 
-        //cancelled – The match has been canceled and will not be played
-        public const string Cancelled = "cancelled";
-
-        public static readonly MatchStatus CancelledStatus = new MatchStatus(Cancelled, nameof(Cancelled));
-
         //ended – The match is over
         public const string Ended = "ended";
 

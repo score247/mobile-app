@@ -3,18 +3,18 @@
     using System;
     using Prism.Ioc;
 
-    public interface IDepdendencyResolver
+    public interface IDependencyResolver
     {
         T Resolve<T>();
 
         T Resolve<T>(string name);
     }
 
-    public class DepdendencyResolver : IDepdendencyResolver
+    public class DependencyResolver : IDependencyResolver
     {
         private readonly IContainerProvider containerProvider;
 
-        public DepdendencyResolver(IContainerProvider containerProvider)
+        public DependencyResolver(IContainerProvider containerProvider)
         {
             this.containerProvider
                 = containerProvider ?? throw new ArgumentNullException(nameof(containerProvider));

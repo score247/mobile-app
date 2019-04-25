@@ -10,14 +10,14 @@ namespace LiveScore.Tests.ViewModels
     public class TabMoreViewModelTests
     {
         private readonly INavigationService mockNavigation;
-        private readonly IDepdendencyResolver mockResolver;
+        private readonly IDependencyResolver mockResolver;
 
         private readonly TabMoreViewModel viewModel;
 
         public TabMoreViewModelTests()
         {
             mockNavigation = Substitute.For<INavigationService>();
-            mockResolver = Substitute.For<IDepdendencyResolver>();
+            mockResolver = Substitute.For<IDependencyResolver>();
 
             viewModel = new TabMoreViewModel(mockNavigation, mockResolver);
         }

@@ -41,12 +41,12 @@
         //video_assistant_referee
         //video_assistant_referee_over
         //yellow_card
-        public const string YellowCard = "red_card";
+        public const string YellowCard = "yellow_card";
 
         public static readonly EventTypes YellowCardType = new EventTypes(YellowCard, nameof(YellowCard));
 
         //yellow_red_card
-        public const string YellowRedCard = "red_card";
+        public const string YellowRedCard = "yellow_red_card";
 
         public static readonly EventTypes YellowRedCardType = new EventTypes(YellowRedCard, nameof(YellowRedCard));
 

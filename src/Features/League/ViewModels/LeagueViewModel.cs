@@ -10,7 +10,7 @@
     {
         public LeagueViewModel(
             INavigationService navigationService,
-            IDepdendencyResolver serviceLocator)
+            IDependencyResolver serviceLocator)
                 : base(navigationService, serviceLocator)
         {
             Title = "League";

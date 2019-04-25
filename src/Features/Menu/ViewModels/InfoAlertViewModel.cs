@@ -5,7 +5,7 @@
 
     public class InfoAlertViewModel : MenuViewModelBase
     {
-        public InfoAlertViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public InfoAlertViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
         }
     }

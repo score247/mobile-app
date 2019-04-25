@@ -24,7 +24,7 @@ namespace LiveScore.Score.ViewModels
 
         public ScoresViewModel(
             INavigationService navigationService,
-            IDepdendencyResolver dependencyResolver,
+            IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {

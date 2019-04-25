@@ -6,7 +6,7 @@
 
     public class MatchTrackerViewModel : ViewModelBase
     {
-        public MatchTrackerViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
+        public MatchTrackerViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
         }

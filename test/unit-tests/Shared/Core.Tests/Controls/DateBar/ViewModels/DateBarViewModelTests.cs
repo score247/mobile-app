@@ -36,7 +36,7 @@
             viewModel.RenderCalendarItems();
             mockViewModelBase = new MockViewModelBase(
                 Substitute.For<INavigationService>(),
-                Substitute.For<IDepdendencyResolver>(),
+                Substitute.For<IDependencyResolver>(),
                 new EventAggregator());
         }
 
@@ -166,7 +166,7 @@
     {
         public MockViewModelBase(
             INavigationService navigationService,
-            IDepdendencyResolver serviceLocator,
+            IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator) : base(navigationService, serviceLocator, eventAggregator)
         {
         }

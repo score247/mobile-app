@@ -10,14 +10,14 @@ namespace LiveScore.Tests.ViewModels
     public class MainViewModelTests
     {
         private readonly INavigationService mockNavigation;
-        private readonly IDepdendencyResolver mockResolver;
+        private readonly IDependencyResolver mockResolver;
 
         private readonly MainViewModel viewModel;
 
         public MainViewModelTests()
         {
             mockNavigation = Substitute.For<INavigationService>();
-            mockResolver = Substitute.For<IDepdendencyResolver>();
+            mockResolver = Substitute.For<IDependencyResolver>();
 
             viewModel = new MainViewModel(mockNavigation, mockResolver);
         }
