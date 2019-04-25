@@ -6,6 +6,7 @@
     using System.Net;
     using System.Threading.Tasks;
     using Polly;
+    using Polly.Retry;
     using Polly.Wrap;
     using Refit;
 
@@ -32,18 +33,20 @@
             HttpStatusCode.GatewayTimeout, // 504
         };
 
-        public Task<T> RetryAndTimeout<T>(Func<Task<T>> func)
-        {
-            var retryPolicy = Policy
+        private AsyncRetryPolicy WaitAndRetryPolicy()
+        => Policy
             .Handle<WebException>()
             .Or<ApiException>(ex => HandleApiException(ex))
-            .Retry(DEFAULT_COUNT);
+            .WaitAndRetryAsync(DEFAULT_COUNT, SleepDurationProvider);
 
-            var timeoutPolicy = Policy.Timeout(TIMEOUT_SECONDS);
+        public Task<T> RetryAndTimeout<T>(Func<Task<T>> func)
+        {
+            var retryPolicy = WaitAndRetryPolicy();
+            var timeoutPolicy = Policy.TimeoutAsync(TIMEOUT_SECONDS);
 
-            PolicyWrap commonResilience = Policy.Wrap(retryPolicy, timeoutPolicy);
+            var commonResilience = Policy.WrapAsync(retryPolicy, timeoutPolicy);
 
-            return commonResilience.Execute(func);
+            return commonResilience.ExecuteAsync(func);
         }
 
         private bool HandleApiException(ApiException ex)

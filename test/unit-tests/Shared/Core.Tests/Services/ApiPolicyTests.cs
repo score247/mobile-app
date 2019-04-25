@@ -60,9 +60,9 @@ namespace LiveScore.Core.Tests.Services
 
         private async Task<int> FuncThrowsException(HttpStatusCode statusCode)
         {
-            await Task.Delay(1);            
+            var exception = await ApiException.Create(new HttpRequestMessage(), new HttpMethod("get"), new HttpResponseMessage(statusCode));
 
-            throw await ApiException.Create(new HttpRequestMessage(), new HttpMethod("get"), new HttpResponseMessage(statusCode));
+            throw exception;
         }
     }
 }
