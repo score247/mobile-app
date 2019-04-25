@@ -1,11 +1,9 @@
-﻿using LiveScore.Core.Controls.DateBar.Converters;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-
-namespace LiveScore.Core.Tests.Controls.DateBar.Converters
+﻿namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 {
+    using LiveScore.Core.Controls.DateBar.Converters;
+    using System;
+    using Xunit;
+
     public class ShortDayOfWeekConverterTests
     {
         private readonly ShortDayOfWeekConverter converter;
@@ -19,7 +17,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void Convert_DayOfWeek_ReturnCorrectFormat()
         {
             // Arrange
-            var expected = "MON";
+            const string expected = "MON";
 
             // Act
             var actual = converter.Convert(new DateTime(2019, 4, 22).DayOfWeek, null, null, null);

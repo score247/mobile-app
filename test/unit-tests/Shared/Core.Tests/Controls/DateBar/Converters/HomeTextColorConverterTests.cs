@@ -1,14 +1,11 @@
-using LiveScore.Core.Controls.DateBar.Converters;
-using LiveScore.Core.Tests.Fixtures;
-using LiveScore.Core.Tests.Mocks;
-using System;
-using System.Globalization;
-using Xamarin.Forms;
-using Xunit;
-
 namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 {
-    public class HomeTextColorConverterTests: IClassFixture<ResourcesFixture>
+    using LiveScore.Core.Controls.DateBar.Converters;
+    using LiveScore.Core.Tests.Fixtures;
+    using Xamarin.Forms;
+    using Xunit;
+
+    public class HomeTextColorConverterTests : IClassFixture<ResourcesFixture>
     {
         private HomeTextColorConverter CreateHomeTextColorConverter()
         {
@@ -18,9 +15,9 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         [Fact]
         public void Convert_SelectedHome_ReturnPrimaryAccentColor()
         {
-            // Arrange           
+            // Arrange
             var unitUnderTest = CreateHomeTextColorConverter();
-            var selectedHome = true;            
+            const bool selectedHome = true;
 
             // Act
             var result = unitUnderTest.Convert(
@@ -36,9 +33,9 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         [Fact]
         public void Convert_UnselectedHome_ReturnFouthTextColor()
         {
-            // Arrange           
+            // Arrange
             var unitUnderTest = CreateHomeTextColorConverter();
-            var selectedHome = false;            
+            const bool selectedHome = false;
 
             // Act
             var result = unitUnderTest.Convert(
@@ -55,8 +52,8 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void ConvertBack_ShouldReturnSame()
         {
             // Arrange
-            var unitUnderTest = this.CreateHomeTextColorConverter();
-            var selectedHome = true;            
+            var unitUnderTest = CreateHomeTextColorConverter();
+            const bool selectedHome = true;
 
             // Act
             var result = unitUnderTest.ConvertBack(

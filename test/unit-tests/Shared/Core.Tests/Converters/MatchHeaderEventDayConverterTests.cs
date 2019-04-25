@@ -1,11 +1,8 @@
-﻿using LiveScore.Core.Converters;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Xunit;
-
-namespace LiveScore.Core.Tests.Converters
+﻿namespace LiveScore.Core.Tests.Converters
 {
+    using LiveScore.Core.Converters;
+    using Xunit;
+
     public class MatchHeaderEventDayConverterTests
     {
         private readonly MatchHeaderEventDayConverter converter;
@@ -20,7 +17,7 @@ namespace LiveScore.Core.Tests.Converters
         {
             // Arrange
             var obj = new { Day = "21", Month = "4", Year = "2019" };
-            var expected = "21 Apr";
+            const string expected = "21 Apr";
 
             // Act
             var actual = converter.Convert(obj, null, null, null);
@@ -32,8 +29,8 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void ConvertBack_ShouldReturnShortDatime()
         {
-            // Arrange            
-            var value = "21 Apr";
+            // Arrange
+            const string value = "21 Apr";
 
             // Act
             var actual = converter.ConvertBack(value, null, null, null);

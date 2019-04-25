@@ -1,8 +1,9 @@
-﻿using LiveScore.Core.Converters;
-using LiveScore.Core.Enumerations;
-using Xunit;
-namespace LiveScore.Core.Tests.Converters
+﻿namespace LiveScore.Core.Tests.Converters
 {
+    using LiveScore.Core.Converters;
+    using LiveScore.Core.Enumerations;
+    using Xunit;
+
     public class MatchStatusConverterTests
     {
         private readonly MatchStatusConverter converter;
@@ -16,7 +17,7 @@ namespace LiveScore.Core.Tests.Converters
         public void Convert_StatusIsFullTime_ReturnCorrectFormat()
         {
             // Arrange
-            var expected = "FT";
+            const string expected = "FT";
 
             // Act
             var actual = converter.Convert(MatchStatus.FullTimeStatus, null, null, null);
@@ -28,8 +29,6 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_StatusIsLive_ReturnCorrectFormat()
         {
-            // Arrange            
-
             // Act
             var actual = converter.Convert(MatchStatus.LiveStatus, null, null, null);
 
@@ -40,8 +39,6 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_StatusIsNotStarted_ReturnCorrectFormat()
         {
-            // Arrange            
-
             // Act
             var actual = converter.Convert(MatchStatus.NotStartedStatus, null, null, null);
 
@@ -52,8 +49,6 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_StatusIsNull_ReturnEmpty()
         {
-            // Arrange            
-
             // Act
             var actual = converter.Convert(null, null, null, null);
 
@@ -64,8 +59,6 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void ConvertBack_ReturnMatchStatus()
         {
-            // Arrange            
-
             // Act
             var actual = converter.ConvertBack(MatchStatus.NotStartedStatus, null, null, null);
 

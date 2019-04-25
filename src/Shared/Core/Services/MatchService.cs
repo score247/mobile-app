@@ -8,6 +8,6 @@
 
     public interface IMatchService
     {
-        Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false);
+        Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false);
     }
 }

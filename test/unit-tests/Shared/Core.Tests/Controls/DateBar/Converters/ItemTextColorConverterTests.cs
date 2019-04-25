@@ -1,12 +1,12 @@
-using LiveScore.Core.Controls.DateBar.Converters;
-using LiveScore.Core.Controls.DateBar.Models;
-using LiveScore.Core.Tests.Fixtures;
-using System;
-using Xamarin.Forms;
-using Xunit;
-
 namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 {
+    using LiveScore.Core.Controls.DateBar.Converters;
+    using LiveScore.Core.Controls.DateBar.Models;
+    using LiveScore.Core.Tests.Fixtures;
+    using System;
+    using Xamarin.Forms;
+    using Xunit;
+
     public class ItemTextColorConverterTests : IClassFixture<ResourcesFixture>
     {
         private ItemTextColorConverter CreateItemTextColorConverter()
@@ -18,7 +18,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void Convert_DateBarItemIsNull_ReturnFourthTextColor()
         {
             // Arrange
-            var unitUnderTest = this.CreateItemTextColorConverter();
+            var unitUnderTest = CreateItemTextColorConverter();
 
             // Act
             var result = unitUnderTest.Convert(
@@ -35,8 +35,8 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void Convert_DateBarItemIsSelected_ReturnPrimaryAccentColor()
         {
             // Arrange
-            var unitUnderTest = this.CreateItemTextColorConverter();
-            var value = new DateBarItem { IsSelected = true};
+            var unitUnderTest = CreateItemTextColorConverter();
+            var value = new DateBarItem { IsSelected = true };
 
             // Act
             var result = unitUnderTest.Convert(
@@ -53,7 +53,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void Convert_DateBarItemIsTodayAndNotSelected_ReturnWhiteColor()
         {
             // Arrange
-            var unitUnderTest = this.CreateItemTextColorConverter();
+            var unitUnderTest = CreateItemTextColorConverter();
             var value = new DateBarItem { Date = DateTime.Now };
 
             // Act
@@ -71,7 +71,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         public void ConvertBack_ShouldReturnDateBarItem()
         {
             // Arrange
-            var unitUnderTest = this.CreateItemTextColorConverter();            
+            var unitUnderTest = CreateItemTextColorConverter();
 
             // Act
             var result = unitUnderTest.ConvertBack(

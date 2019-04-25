@@ -5,9 +5,7 @@ namespace LiveScore.Core.Tests.Views.Selectors
     using LiveScore.Core.ViewModels;
     using LiveScore.Core.Views.Selectors;
     using NSubstitute;
-    using System.ComponentModel;
     using Xamarin.Forms;
-    using Xamarin.Forms.Internals;
     using Xunit;
 
     public class MatchItemTemplateSelectorTests : IClassFixture<ViewModelBaseFixture>
@@ -36,22 +34,6 @@ namespace LiveScore.Core.Tests.Views.Selectors
 
             // Assert
             Assert.Equal(expectedTemplate, actualTemplate);
-        }
-
-        [Fact]
-        public void OnSelectTemplate_MatchItemTemplateIsNotNull_NotCallResolveInstance()
-        {
-            // Arrange
-            var templateSelector = new MatchItemTemplateSelector();
-            var expectedTemplate = new DataTemplate();
-            dependencyResolver.Resolve<DataTemplate>(SportTypes.Soccer.Value).Returns(expectedTemplate);
-
-            // Act
-            templateSelector.SelectTemplate(1, bindableObject);
-            templateSelector.SelectTemplate(1, bindableObject);
-
-            // Assert
-            dependencyResolver.Received(1).Resolve<DataTemplate>(SportTypes.Soccer.Value);
         }
     }
 }

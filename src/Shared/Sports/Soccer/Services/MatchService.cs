@@ -37,7 +37,7 @@
             this.apiService = apiService; 
         }
 
-        public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             try
             {
@@ -48,24 +48,19 @@
                 var fromDateText = dateRange.FromDate.ToApiFormat();
                 var toDateText = dateRange.ToDate.ToApiFormat();
 
-                var cacheKey = $"Scores-{settings.ToString()}-{fromDateText}-{toDateText}";
+                var cacheKey = $"Scores-{settings}-{fromDateText}-{toDateText}";
 
-                Debug.WriteLine($"cacheKey {cacheKey}");
-
-                var matches = await cacheService.GetAndFetchLatestValue(
+                return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatches(settings, fromDateText, toDateText),
                         forceFetchNewData,
-                        cacheExpiration) as IEnumerable<IMatch>;
-
-                return matches.ToList();
-
+                        cacheExpiration);
             }
             catch (Exception ex)
             {
                 HandleException(ex);
 
-                return Enumerable.Empty<IMatch>().ToList();
+                return Enumerable.Empty<IMatch>();
             }
         }
 

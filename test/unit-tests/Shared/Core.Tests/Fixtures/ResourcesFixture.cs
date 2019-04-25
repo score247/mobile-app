@@ -1,8 +1,8 @@
-﻿using LiveScore.Core.Tests.Mocks;
-using Xamarin.Forms;
-
-namespace LiveScore.Core.Tests.Fixtures
+﻿namespace LiveScore.Core.Tests.Fixtures
 {
+    using LiveScore.Core.Tests.Mocks;
+    using Xamarin.Forms;
+
     public class ResourcesFixture
     {
         public ResourcesFixture()

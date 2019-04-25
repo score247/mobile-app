@@ -1,29 +1,36 @@
-﻿using LiveScore.Common.Extensions;
-using LiveScore.Common.Services;
-using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Models.Settings;
-using LiveScore.Core.Services;
-using LiveScore.Soccer.Services;
-using NSubstitute;
-using NSubstitute.ExceptionExtensions;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace Soccer.Tests.Services
+﻿namespace Soccer.Tests.Services
 {
-    public class MatchServiceTests
+    using AutoFixture;
+    using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Common.Extensions;
+    using LiveScore.Common.Services;
+    using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Settings;
+    using LiveScore.Core.Services;
+    using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.Services;
+    using NSubstitute;
+    using NSubstitute.ExceptionExtensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Xunit;
+
+    public class MatchServiceTests : IClassFixture<CommonFixture>
     {
+        private readonly CompareLogic comparer;
+        private readonly Fixture fixture;
         private readonly IApiService mockApiService;
         private readonly ILocalStorage mockCache;
         private readonly ILoggingService mockLogger;
         private readonly IApiPolicy mockPolicy;
+        private readonly IMatchService matchService;
 
-        private readonly MatchService matchService;
-
-        public MatchServiceTests()
+        public MatchServiceTests(CommonFixture commonFixture)
         {   
+            comparer = commonFixture.Comparer;
+            fixture = commonFixture.Fixture;
             mockCache = Substitute.For<ILocalStorage>();
             mockLogger = Substitute.For<ILoggingService>();
             mockPolicy = Substitute.For<IApiPolicy>();
@@ -43,7 +50,9 @@ namespace Soccer.Tests.Services
             await matchService.GetMatches(settings, dateRange);
 
             // Assert
-            await mockCache.Received(1).GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>());
+            await mockCache.Received(1)
+                .GetAndFetchLatestValue(
+                    Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>());
         }
 
         [Fact]
@@ -79,25 +88,28 @@ namespace Soccer.Tests.Services
         }
 
         [Fact]
-        public async Task GetMatches_HasValue_ShouldReturnCorrectListCount()
+        public async Task GetMatches_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
-            var dateRange = new DateRange();
-            var matchList = new List<Match>
+            var settings = new UserSettings("1", "en-US", "+07:00");
+            var dateRange = new DateRange
             {
-                new Match{ Id = "match:1", EventDate = DateTime.Now, MatchResult = new MatchResult{ AwayScore = 1, HomeScore = 2 } },
-                new Match{ Id = "match:2", EventDate = DateTime.Now, MatchResult = new MatchResult{ AwayScore = 1, HomeScore = 2 } }
+                FromDate = new DateTime(2019, 04, 25),
+                ToDate = new DateTime(2019, 04, 25)
             };
+            var expectedMatches = fixture.CreateMany<Match>();
 
-            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
-                .Returns(matchList);
+            mockCache.GetAndFetchLatestValue(
+                "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
+                Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                false,
+                Arg.Any<DateTime>()).Returns(expectedMatches);
 
             // Act
-            var matches = await matchService.GetMatches(settings, dateRange);
+            var actualMatches = await matchService.GetMatches(settings, dateRange);
 
             // Assert
-            Assert.Equal(matchList.Count, matches.Count);
+            Assert.True(comparer.Compare(expectedMatches, actualMatches).AreEqual);
         }
     }
 }

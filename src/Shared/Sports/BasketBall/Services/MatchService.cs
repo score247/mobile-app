@@ -12,7 +12,7 @@
 
     public class MatchService : IMatchService
     {
-        public async Task<IList<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             var matches = new List<IMatch>
             {
