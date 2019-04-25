@@ -28,7 +28,7 @@
         private readonly IMatchService matchService;
 
         public MatchServiceTests(CommonFixture commonFixture)
-        {   
+        {
             comparer = commonFixture.Comparer;
             fixture = commonFixture.Fixture;
             mockCache = Substitute.For<ILocalStorage>();

@@ -19,22 +19,22 @@
     }
 
     public class MatchService : BaseService, IMatchService
-    {        
+    {
         private readonly ILocalStorage cacheService;
         private readonly IApiPolicy apiPolicy;
         private readonly IApiService apiService;
 
-        public MatchService(            
+        public MatchService(
             ILocalStorage cacheService,
             ILoggingService loggingService,
             IApiPolicy apiPolicy,
             IApiService apiService
             ) : base(loggingService)
         {
-            this.cacheService = cacheService;            
+            this.cacheService = cacheService;
             this.apiPolicy = apiPolicy;
 
-            this.apiService = apiService; 
+            this.apiService = apiService;
         }
 
         public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
@@ -44,10 +44,8 @@
                 var cacheExpiration = dateRange.FromDate < DateTime.Now
                    ? cacheService.CacheDuration(CacheDurationTerm.Long)
                    : cacheService.CacheDuration(CacheDurationTerm.Short);
-
                 var fromDateText = dateRange.FromDate.ToApiFormat();
                 var toDateText = dateRange.ToDate.ToApiFormat();
-
                 var cacheKey = $"Scores-{settings}-{fromDateText}-{toDateText}";
 
                 return await cacheService.GetAndFetchLatestValue(
