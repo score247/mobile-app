@@ -18,8 +18,6 @@
 
         Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null);
 
-        Task SetValue<T>(string name, T value);
-
         void Shutdown();
 
         Task Invalidate(string key);
@@ -41,43 +39,47 @@
         private const int ShortTerm = 2;
         private const int LongTerm = 120;
 
-        public LocalStorage(IEssentialsService essentials)
+        private readonly IBlobCache LocalMachine;
+        private readonly IBlobCache UserAccount;
+
+        public LocalStorage(IEssentialsService essentials, IBlobCache localMachine = null, IBlobCache userAccount = null)
         {
             Registrations.Start(essentials.AppName);
-            BlobCache.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
+
+            LocalMachine = localMachine ?? BlobCache.LocalMachine;
+            LocalMachine.ForcedDateTimeKind = DEFAULT_DATETIMEKIND;
+
+            UserAccount = userAccount ?? BlobCache.UserAccount;
         }
 
         public async Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
-        => await BlobCache.LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
+        => await LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
 
         public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null)
-        => await BlobCache.LocalMachine.GetAndFetchLatest(name, fetchFunc, (_) => forceFetch, absoluteExpiration);
-
-        public async Task SetValue<T>(string name, T value)
-        => await BlobCache.LocalMachine.InsertObject(name, value);
+        => await LocalMachine.GetAndFetchLatest(name, fetchFunc, (_) => forceFetch, absoluteExpiration);
 
         public void Shutdown()
         {
-            BlobCache.UserAccount.Flush().Wait();
-            BlobCache.LocalMachine.Flush().Wait();
+            UserAccount.Flush().Wait();
+            LocalMachine.Flush().Wait();
         }
 
-        public async Task Invalidate(string key) => await BlobCache.LocalMachine.Invalidate(key);
+        public async Task Invalidate(string key) => await LocalMachine.Invalidate(key);
 
         public async Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null)
-            => await BlobCache.LocalMachine.LoadImageFromUrl(imageLink, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
+            => await LocalMachine.LoadImageFromUrl(imageLink, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
 
         public DateTime CacheDuration(CacheDurationTerm cacheKind)
         => cacheKind == CacheDurationTerm.Short
             ? DateTime.Now.AddMinutes(ShortTerm)
             : DateTime.Now.AddMinutes(LongTerm);
 
-        public async Task CleanAllExpired() => await BlobCache.LocalMachine.Vacuum();
+        public async Task CleanAllExpired() => await LocalMachine.Vacuum();
 
         public void AddOrUpdateValue<T>(string key, T value)
-            => BlobCache.UserAccount.InsertObject(key, value).Wait();
+            => UserAccount.InsertObject(key, value).Wait();
 
         public T GetValueOrDefault<T>(string key, T defaultValue)
-            => BlobCache.UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
+            => UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
     }
 }
