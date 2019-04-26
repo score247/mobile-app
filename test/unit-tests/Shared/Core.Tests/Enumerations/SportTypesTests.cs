@@ -37,5 +37,15 @@ namespace LiveScore.Core.Tests.Enumerations
             Assert.Equal("3", actual.Value);
             Assert.Equal("ESport", actual.DisplayName);
         }
+
+        [Fact]
+        public void Constructor_DoNothing()
+        {
+            // Act
+            new SportTypes();
+
+            // Assert
+            Assert.True(true);
+        }
     }
 }

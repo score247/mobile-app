@@ -59,5 +59,15 @@ namespace LiveScore.Core.Tests.Enumerations
             Assert.Equal("yellow_red_card", actual.Value);
             Assert.Equal("YellowRedCard", actual.DisplayName);
         }
+
+        [Fact]
+        public void Constructor_DoNothing()
+        {
+            // Act
+            new EventTypes();
+
+            // Assert
+            Assert.True(true);
+        }
     }
 }

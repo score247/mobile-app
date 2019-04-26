@@ -68,6 +68,24 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         }
 
         [Fact]
+        public void Convert_DateBarItemIsNormal_ReturnFourthTextColor()
+        {
+            // Arrange
+            var unitUnderTest = CreateItemTextColorConverter();
+            var value = new DateBarItem { Date = DateTime.Today.AddDays(1) };
+
+            // Act
+            var result = unitUnderTest.Convert(
+                value,
+                null,
+                null,
+                null);
+
+            // Assert
+            Assert.Equal(Color.FromHex("#939393"), result);
+        }
+
+        [Fact]
         public void ConvertBack_ShouldReturnDateBarItem()
         {
             // Arrange

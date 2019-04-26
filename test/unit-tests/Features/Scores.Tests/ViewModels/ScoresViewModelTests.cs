@@ -163,12 +163,13 @@ namespace Scores.Tests.ViewModels
         {
             // Arrange
             viewModel.SelectedDate = DateTime.Today.AddDays(1);
+            var navigationService = viewModel.NavigationService as FakeNavigationService;
 
             // Act
             viewModel.OnResume();
 
             // Assert
-            viewModel.NavigationService.Received(1).NavigateAsync("app:///MainView/MenuTabbedView");
+            Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
         }
     }
 }

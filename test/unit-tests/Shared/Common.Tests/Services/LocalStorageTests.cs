@@ -1,15 +1,16 @@
-﻿using Akavache;
-using LiveScore.Common.Services;
-using NSubstitute;
-using System;
-using System.Threading.Tasks;
-using Xunit;
-
-namespace LiveScore.Common.Tests.Services
+﻿namespace LiveScore.Common.Tests.Services
 {
+    using Akavache;
+    using LiveScore.Common.Services;
+    using NSubstitute;
+    using Splat;
+    using System;
+    using System.Threading.Tasks;
+    using Xunit;
+
     public class LocalStorageTests
     {
-        const string DATE_FORMAT = "yyyy-MM-ddTHH:mm:sszzz";
+        private const string DATE_FORMAT = "yyyy-MM-ddTHH:mm:sszzz";
 
         private readonly IEssentialsService mockEssentials;
         private readonly IBlobCache mockLocalMachine;
@@ -32,7 +33,7 @@ namespace LiveScore.Common.Tests.Services
             // Arrange
             var expectedDuration = DateTime.Now.AddMinutes(120);
 
-            // Act            
+            // Act
             var actual = cache.CacheDuration(CacheDurationTerm.Long);
 
             // Assert
@@ -45,7 +46,7 @@ namespace LiveScore.Common.Tests.Services
             // Arrange
             var expectedDuration = DateTime.Now.AddMinutes(2);
 
-            // Act            
+            // Act
             var actual = cache.CacheDuration(CacheDurationTerm.Short);
 
             // Assert
@@ -57,7 +58,7 @@ namespace LiveScore.Common.Tests.Services
         {
             // Arrange
 
-            // Act            
+            // Act
             await cache.CleanAllExpired();
 
             // Assert
@@ -70,7 +71,7 @@ namespace LiveScore.Common.Tests.Services
             // Arrange
             var imageLink = "https://country.flags";
 
-            // Act            
+            // Act
             await cache.Invalidate(imageLink);
 
             // Assert
@@ -80,9 +81,9 @@ namespace LiveScore.Common.Tests.Services
         [Fact]
         public void Shutdown_LocalMachineShouldFlush()
         {
-            // Arrange            
+            // Arrange
 
-            // Act            
+            // Act
             cache.Shutdown();
 
             // Assert
@@ -92,13 +93,41 @@ namespace LiveScore.Common.Tests.Services
         [Fact]
         public void Shutdown_UserAccountShouldFlush()
         {
-            // Arrange            
+            // Arrange
 
-            // Act            
+            // Act
             cache.Shutdown();
 
             // Assert
             mockUserAccount.Received(1).Flush();
         }
+
+        [Fact]
+        public async Task GetAndFetchLatestValue_Always_CallLocalMachineCache()
+        {
+            // Arrange
+            Task<MockModel> fetchFunc() => Task.FromResult(new MockModel());
+
+            // Act
+            await cache.GetAndFetchLatestValue("cacheKey", fetchFunc);
+
+            // Assert
+            mockLocalMachine.Received(1).GetAndFetchLatest("cacheKey", fetchFunc);
+        }
+
+        [Fact]
+        public async Task GetOrFetchValue_Always_CallLocalMachineCache()
+        {
+            // Arrange
+            Task<MockModel> fetchFunc() => Task.FromResult(new MockModel());
+
+            // Act
+            await cache.GetOrFetchValue("cacheKey", fetchFunc);
+
+            // Assert
+            mockLocalMachine.Received(1).GetOrFetchObject("cacheKey", fetchFunc);
+        }
     }
+
+    public class MockModel { }
 }

@@ -59,5 +59,15 @@ namespace LiveScore.Core.Tests.Enumerations
             Assert.Equal("variable", actual.Value);
             Assert.Equal("Variable", actual.DisplayName);
         }
+
+        [Fact]
+        public void Constructor_DoNothing()
+        {
+            // Act
+            new LeagueRoundTypes();
+
+            // Assert
+            Assert.True(true);
+        }
     }
 }
