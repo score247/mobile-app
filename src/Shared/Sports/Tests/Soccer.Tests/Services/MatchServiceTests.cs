@@ -24,7 +24,6 @@
         private readonly IApiService mockApiService;
         private readonly ILocalStorage mockCache;
         private readonly ILoggingService mockLogger;
-        private readonly IApiPolicy mockPolicy;
         private readonly IMatchService matchService;
 
         public MatchServiceTests(CommonFixture commonFixture)
@@ -33,10 +32,9 @@
             fixture = commonFixture.Fixture;
             mockCache = Substitute.For<ILocalStorage>();
             mockLogger = Substitute.For<ILoggingService>();
-            mockPolicy = Substitute.For<IApiPolicy>();
             mockApiService = Substitute.For<IApiService>();
 
-            matchService = new MatchService(mockCache, mockLogger, mockPolicy, mockApiService);
+            matchService = new MatchService(mockCache, mockLogger, mockApiService);
         }
 
         [Fact]

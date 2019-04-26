@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
@@ -21,19 +20,15 @@
     public class MatchService : BaseService, IMatchService
     {
         private readonly ILocalStorage cacheService;
-        private readonly IApiPolicy apiPolicy;
         private readonly IApiService apiService;
 
         public MatchService(
             ILocalStorage cacheService,
             ILoggingService loggingService,
-            IApiPolicy apiPolicy,
             IApiService apiService
             ) : base(loggingService)
         {
             this.cacheService = cacheService;
-            this.apiPolicy = apiPolicy;
-
             this.apiService = apiService;
         }
 
@@ -63,7 +58,9 @@
         }
 
         private async Task<IEnumerable<Match>> GetMatches(UserSettings settings, string fromDateText, string toDateText)
-            => await apiPolicy.RetryAndTimeout(
-                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone));
+            => await apiService.Execute
+            (
+                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(settings.SportId, settings.Language, fromDateText, toDateText, settings.TimeZone)
+            );
     }
 }
