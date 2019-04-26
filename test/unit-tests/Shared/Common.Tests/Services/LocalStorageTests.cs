@@ -127,6 +127,30 @@
             // Assert
             mockLocalMachine.Received(1).GetOrFetchObject("cacheKey", fetchFunc);
         }
+
+        [Fact]
+        public void AddOrUpdateValue_Always_CallLocalMachineCache()
+        {
+            // Arrange
+
+            // Act
+            cache.AddOrUpdateValue("cacheKey", 1);
+
+            // Assert
+            mockUserAccount.ReceivedWithAnyArgs(1).InsertObject("cacheKey", 1);
+        }
+
+        [Fact]
+        public void GetValueOrDefault_Always_CallLocalMachineCache()
+        {
+            // Arrange
+
+            // Act
+            cache.GetValueOrDefault("cacheKey", 1);
+
+            // Assert
+            mockUserAccount.ReceivedWithAnyArgs(1).GetOrCreateObject("cacheKey", () => 1);
+        }
     }
 
     public class MockModel { }
