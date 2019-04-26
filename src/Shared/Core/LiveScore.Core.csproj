@@ -11,7 +11,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
       <PrivateAssets>all</PrivateAssets>
@@ -27,7 +26,6 @@
     <Folder Include="ViewModels\" />
     <Folder Include="ViewResources\" />
     <Folder Include="Converters\" />
-    <Folder Include="Constants\" />
     <Folder Include="Models\" />
     <Folder Include="Enumerations\" />
     <Folder Include="Models\Settings\" />
@@ -35,8 +33,5 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Remove="Services\ApiManager.cs" />
   </ItemGroup>
 </Project>
