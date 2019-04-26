@@ -46,8 +46,6 @@ namespace LiveScore.Score.ViewModels
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<IMatch> SelectMatchCommand { get; }
-
         public override async void OnResume()
         {
             if (SelectedDate != DateTime.Today)

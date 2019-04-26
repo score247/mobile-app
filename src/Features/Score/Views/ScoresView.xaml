@@ -56,7 +56,7 @@
             VerticalOptions="FillAndExpand">
             <ListView.Behaviors>
                 <b:EventToCommandBehavior
-                    Command="{Binding SelectMatchCommand}"
+                    Command=""
                     EventArgsParameterPath="Item"
                     EventName="ItemTapped" />
             </ListView.Behaviors>
