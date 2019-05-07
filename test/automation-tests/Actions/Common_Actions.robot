@@ -4,7 +4,7 @@ Library           AppiumLibrary
 
 *** Keywords ***
 Start Appium Server
-    Start Process    /usr/local/bin/appium \ -p \ 4723    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
+    Start Process    /usr/local/bin/appium —session-override    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
     Process.Process Should Be Running    appiumserver
     Sleep    10s
     Set Appium Timeout    1m
@@ -33,3 +33,4 @@ Init_Real Device
 
 Suite TearDown
     Terminate Process    appiumserver    kill=True
+    Close All Applications
