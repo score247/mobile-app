@@ -4,9 +4,8 @@ Library           AppiumLibrary
 
 *** Keywords ***
 Start Appium Server
-    Start Process    /usr/local/bin/appium    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
-    Process.Process Should Be Running    appiumserver
-    Sleep    1m
+    Start Process    /usr/local/bin/appium —address 0.0.0.0 —port 4723    shell=True    alias=appiumserver
+    Sleep    30S
 
 Open Application On Real Ios Device
     [Arguments]    ${deviceName}    ${udid}
@@ -31,5 +30,4 @@ Init_Real Device
     Open Application On Real Ios Device    ${device_name}    ${udid}
 
 Suite TearDown
-    Terminate Process    appiumserver    kill=True
     Start Process    /usr/bin/pkill -f node|grep appium    shell=True
