@@ -10,6 +10,10 @@
         //injury
         //injury_return
         //injury_time_shown
+        public const string InjuryTimeShown = "injury_time_shown";
+
+        public static readonly EventTypes InjuryTimeShownType = new EventTypes(InjuryTimeShown, nameof(InjuryTimeShown));
+
         //match_ended
         //match_started
         //offside
@@ -58,5 +62,7 @@
             : base(value, displayName)
         {
         }
+
+        public bool IsInjuryTimeShown => Value == InjuryTimeShown;
     }
 }

@@ -14,7 +14,7 @@ namespace LiveScore.Core.Tests.Models.Matches
             match.EventDate = new DateTime(2019, 2, 2, 12, 30, 30);
 
             // Act
-            var actual = match.DisplayLocalTime;
+            var actual = match.EventTime;
 
             // Assert
             Assert.Equal("12:30", actual);

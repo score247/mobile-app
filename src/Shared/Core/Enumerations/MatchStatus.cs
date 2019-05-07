@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Core.Enumerations
+﻿using System.Collections;
+
+namespace LiveScore.Core.Enumerations
 {
     public class MatchStatus : Enumeration
     {
@@ -118,9 +120,9 @@
         public static readonly MatchStatus StartDelayedStatus = new MatchStatus(StartDelayed, nameof(StartDelayed));
 
         //canceled – The match has been canceled and will not be played
-        public const string Canceled = "canceled";
+        public const string Cancelled = "cancelled";
 
-        public static readonly MatchStatus CanceledStatus = new MatchStatus(Canceled, nameof(Canceled));
+        public static readonly MatchStatus CancelledStatus = new MatchStatus(Cancelled, nameof(Cancelled));
 
         public MatchStatus()
         {
@@ -131,8 +133,10 @@
         {
         }
 
-        public bool IsLiveOrNotStarted => Value == NotStarted || Value == Live;
+        public bool IsNotStarted => Value == NotStarted;
 
-        public bool IsClosed => !IsLiveOrNotStarted;
+        public bool IsLive => Value == Live;
+
+        public bool IsClosed => Value == Closed;
     }
 }

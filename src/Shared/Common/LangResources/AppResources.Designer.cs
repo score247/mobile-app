@@ -89,9 +89,9 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-        public static string FullTime {
+        public static string FT {
             get {
-                return ResourceManager.GetString("FullTime", resourceCulture);
+                return ResourceManager.GetString("FT", resourceCulture);
             }
         }
         
@@ -152,6 +152,78 @@ namespace LiveScore.Common.LangResources {
         public static string WorldNews {
             get {
                 return ResourceManager.GetString("WorldNews", resourceCulture);
+            }
+        }
+        
+        public static string Postp {
+            get {
+                return ResourceManager.GetString("Postp", resourceCulture);
+            }
+        }
+        
+        public static string StartDelay {
+            get {
+                return ResourceManager.GetString("StartDelay", resourceCulture);
+            }
+        }
+        
+        public static string Delayed {
+            get {
+                return ResourceManager.GetString("Delayed", resourceCulture);
+            }
+        }
+        
+        public static string Canc {
+            get {
+                return ResourceManager.GetString("Canc", resourceCulture);
+            }
+        }
+        
+        public static string INT {
+            get {
+                return ResourceManager.GetString("INT", resourceCulture);
+            }
+        }
+        
+        public static string HT {
+            get {
+                return ResourceManager.GetString("HT", resourceCulture);
+            }
+        }
+        
+        public static string AB {
+            get {
+                return ResourceManager.GetString("AB", resourceCulture);
+            }
+        }
+        
+        public static string AET {
+            get {
+                return ResourceManager.GetString("AET", resourceCulture);
+            }
+        }
+        
+        public static string AP {
+            get {
+                return ResourceManager.GetString("AP", resourceCulture);
+            }
+        }
+        
+        public static string AwaitPen {
+            get {
+                return ResourceManager.GetString("AwaitPen", resourceCulture);
+            }
+        }
+        
+        public static string Pen {
+            get {
+                return ResourceManager.GetString("Pen", resourceCulture);
+            }
+        }
+        
+        public static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
             }
         }
     }

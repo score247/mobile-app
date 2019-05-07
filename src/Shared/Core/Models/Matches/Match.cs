@@ -21,7 +21,6 @@
 
         ILeague League { get; }
 
-        string DisplayLocalTime { get; }
     }
 
     public class Match : Entity<string, string>, IMatch
@@ -43,6 +42,5 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
         public ILeague League { get; set; }
 
-        public string DisplayLocalTime => EventDate.ToString("HH:mm");
     }
 }

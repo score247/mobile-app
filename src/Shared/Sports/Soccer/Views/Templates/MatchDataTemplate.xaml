@@ -16,14 +16,12 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
             <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                <Label
-                    IsVisible="{Binding MatchResult.EventStatus.IsClosed}"
-                    Style="{StaticResource MatchStatus}"
-                    Text="{Binding MatchResult.EventStatus, Converter={StaticResource matchStatusConverter}}" />
-                <Label
-                    IsVisible="{Binding MatchResult.EventStatus.IsLiveOrNotStarted}"
-                    Style="{StaticResource MatchStatus}"
-                    Text="{Binding DisplayLocalTime}" />
+                <StackLayout Spacing="5">
+                    <Label IsVisible="{Binding MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}"/>
+                    <Label
+                        Style="{StaticResource MatchStatus}"
+                        Text="{Binding ., Converter={StaticResource matchStatusConverter}}" />
+                </StackLayout>
                 <StackLayout Style="{StaticResource TeamContainer}">
                     <Label Style="{StaticResource HomeTeam}" Text="{Binding Teams[0].Name}" />
                     <Label Style="{StaticResource AwayTeam}" Text="{Binding Teams[1].Name}" />

@@ -16,6 +16,8 @@
         string WinnerId { get; }
 
         IEnumerable<MatchPeriod> MatchPeriods { get; }
+
+        string MatchTime { get; }
     }
 
     public class MatchResult : IMatchResult
@@ -31,5 +33,7 @@
         public string WinnerId { get; set; }
 
         public IEnumerable<MatchPeriod> MatchPeriods { get; set; }
+
+        public string MatchTime { get; set; }
     }
 }

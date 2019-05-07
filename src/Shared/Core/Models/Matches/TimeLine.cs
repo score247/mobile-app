@@ -3,18 +3,21 @@
     using System;
     using System.Collections.Generic;
     using LiveScore.Common.Extensions;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Teams;
     using Newtonsoft.Json;
 
     public interface ITimeLine : IEntity<long, string>
     {
-        string Type { get; }
+        EventTypes Type { get; }
 
         DateTime Time { get; }
 
         int MatchTime { get; }
 
         string MatchClock { get; }
+
+        int StoppageTime { get; }
 
         string Team { get; }
 
@@ -45,13 +48,15 @@
 
     public class TimeLine : Entity<long, string>, ITimeLine
     {
-        public string Type { get; set; }
+        public EventTypes Type { get; set; }
 
         public DateTime Time { get; set; }
 
         public int MatchTime { get; set; }
 
         public string MatchClock { get; set; }
+
+        public int StoppageTime { get; set; }
 
         public string Team { get; set; }
 
@@ -82,6 +87,7 @@
         public string Description { get; set; }
 
         public string Outcome { get; set; }
+
     }
 
     public class Commentary
