@@ -143,7 +143,7 @@ SP1_Scores_Match_Leagues_TC01
     @{date_bar_controls}    create list    ${btn_Home}    ${btn_calendar}    ${frm_date}
     #####    Main Steps
     #    VP1    Verify Score page should be default screen of the app when user opens app
-    comment    Pending
+    Click Element    ${btn_Home}
     #    VP2    Verify Score page UI should contain Date bar area, League area, Menu bar area
     ${hasdata}    Run Keyword And Return status    Element Should Be Visible    xpath=//XCUIElementTypeTable[@name='LeagueTableId']/XCUIElementTypeOther[1]//XCUIElementTypeImage
     Pass Execution If    '${hasdata}'=='False'    NO DATA
