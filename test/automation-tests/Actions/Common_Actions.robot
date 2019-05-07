@@ -4,7 +4,7 @@ Library           AppiumLibrary
 
 *** Keywords ***
 Start Appium Server
-    Start Process    /usr/local/bin/appium —address 0.0.0.0 —port 4723    shell=True    alias=appiumserver
+    Start Process    /usr/local/bin/appium    shell=True
     Sleep    30S
 
 Open Application On Real Ios Device
