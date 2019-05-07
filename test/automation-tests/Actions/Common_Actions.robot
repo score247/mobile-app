@@ -4,9 +4,9 @@ Library           AppiumLibrary
 
 *** Keywords ***
 Start Appium Server
-    Start Process    /usr/local/bin/appium —session-override    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
+    Start Process    /usr/local/bin/appium    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
     Process.Process Should Be Running    appiumserver
-    Sleep    10s
+    Sleep    15s
     Set Appium Timeout    1m
 
 Open Application On Real Ios Device
@@ -33,4 +33,4 @@ Init_Real Device
 
 Suite TearDown
     Terminate Process    appiumserver    kill=True
-    Close All Applications
+    Start Process    /usr/bin/pkill -f node|grep appium    shell=True
