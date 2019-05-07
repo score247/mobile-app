@@ -6,7 +6,7 @@ Library           AppiumLibrary
 Start Appium Server
     Start Process    /usr/local/bin/appium    shell=True    alias=appiumserver    stdout=${CURDIR}/appium_stdout.txt    stderr=${CURDIR}/appium_stderr.txt
     Process.Process Should Be Running    appiumserver
-    Sleep    15s
+    Sleep    40s
     Set Appium Timeout    1m
 
 Open Application On Real Ios Device
