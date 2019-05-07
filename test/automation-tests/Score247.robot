@@ -1,6 +1,6 @@
 *** Settings ***
 Suite Setup       Init_Simulator    iPhone 8
-Suite Teardown    Suite TearDown
+Suite Teardown
 Library           AppiumLibrary
 Library           Process
 Resource          Actions/Common_Actions.robot

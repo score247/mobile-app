@@ -21,12 +21,12 @@ Open Application On Simulator
 
 Init_Simulator
     [Arguments]    ${simulator_name}
-    Start Appium Server
+    Comment    Start Appium Server
     Open Application On Simulator    ${simulator_name}
 
 Init_Real Device
     [Arguments]    ${device_name}    ${udid}
-    Start Appium Server
+    Comment    Start Appium Server
     Open Application On Real Ios Device    ${device_name}    ${udid}
 
 Suite TearDown
