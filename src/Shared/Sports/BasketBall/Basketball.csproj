@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>LiveScore.Basketball</RootNamespace>
     <AssemblyName>LiveScore.Basketball</AssemblyName>
+    <Configurations>Debug;Release;QC</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>pdbonly</DebugType>
