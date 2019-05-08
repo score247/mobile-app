@@ -51,7 +51,9 @@
 
             if (match.MatchResult.EventStatus.IsClosed)
             {
-                return GenerateMatchStatus(match);
+                var status = GenerateMatchStatus(match);
+
+                return string.IsNullOrEmpty(status) ? AppResources.FT : status;
             }
 
             return GenerateEventStatus(match);
@@ -85,7 +87,7 @@
         {
             var matchStatus = match.MatchResult?.MatchStatus;
 
-            if (matchStatus != null && StatusDisplayNames.ContainsKey(matchStatus.Value))
+            if (matchStatus?.Value != null && StatusDisplayNames.ContainsKey(matchStatus.Value))
             {
                 return StatusDisplayNames[matchStatus.Value];
             }
@@ -97,7 +99,7 @@
         {
             var eventStatus = match.MatchResult?.EventStatus;
 
-            if (eventStatus != null && StatusDisplayNames.ContainsKey(eventStatus.Value))
+            if (eventStatus?.Value != null && StatusDisplayNames.ContainsKey(eventStatus.Value))
             {
                 return StatusDisplayNames[eventStatus.Value];
             }
