@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Converters
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Globalization;
     using LiveScore.Common.Extensions;
@@ -12,7 +11,7 @@
 
     public class MatchStatusConverter : IValueConverter
     {
-        private readonly IDictionary<string, string> MatchStatusDisplayNames = new Dictionary<string, string>
+        private static readonly IDictionary<string, string> StatusDisplayNames = new Dictionary<string, string>
         {
             { MatchStatus.Postponed, AppResources.Postp },
             { MatchStatus.StartDelayed, AppResources.StartDelay },
@@ -52,10 +51,10 @@
 
             if (match.MatchResult.EventStatus.IsClosed)
             {
-                return GenerateStatusForPostMatch(match);
+                return GenerateMatchStatus(match);
             }
 
-            return GenerateStatusForOtherSituations(match);
+            return GenerateEventStatus(match);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -65,6 +64,13 @@
 
         private static string GenerateStatusForLiveMatch(IMatch match)
         {
+            var status = GenerateMatchStatus(match);
+
+            if (!string.IsNullOrEmpty(status))
+            {
+                return status;
+            }
+
             var matchTime = DateTime.ParseExact(match.MatchResult.MatchTime, "mm:ss", CultureInfo.InvariantCulture);
 
             if (match.TimeLine != null && match.TimeLine.Type.IsInjuryTimeShown)
@@ -75,25 +81,25 @@
             return matchTime.Minute + "'";
         }
 
-        private string GenerateStatusForPostMatch(IMatch match)
+        private static string GenerateMatchStatus(IMatch match)
         {
             var matchStatus = match.MatchResult?.MatchStatus;
 
-            if (matchStatus != null && MatchStatusDisplayNames.ContainsKey(matchStatus.Value))
+            if (matchStatus != null && StatusDisplayNames.ContainsKey(matchStatus.Value))
             {
-                return MatchStatusDisplayNames[matchStatus.Value];
+                return StatusDisplayNames[matchStatus.Value];
             }
 
-            return AppResources.FT;
+            return string.Empty;
         }
 
-        private string GenerateStatusForOtherSituations(IMatch match)
+        private static string GenerateEventStatus(IMatch match)
         {
             var eventStatus = match.MatchResult?.EventStatus;
 
-            if (eventStatus != null && MatchStatusDisplayNames.ContainsKey(eventStatus.Value))
+            if (eventStatus != null && StatusDisplayNames.ContainsKey(eventStatus.Value))
             {
-                return MatchStatusDisplayNames[eventStatus.Value];
+                return StatusDisplayNames[eventStatus.Value];
             }
 
             return string.Empty;

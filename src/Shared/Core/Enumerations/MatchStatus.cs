@@ -1,6 +1,4 @@
-﻿using System.Collections;
-
-namespace LiveScore.Core.Enumerations
+﻿namespace LiveScore.Core.Enumerations
 {
     public class MatchStatus : Enumeration
     {
@@ -138,5 +136,9 @@ namespace LiveScore.Core.Enumerations
         public bool IsLive => Value == Live;
 
         public bool IsClosed => Value == Closed;
+
+        public bool NotShowScore => Value == NotStarted || Value == Cancelled || Value == Postponed || Value == StartDelayed;
+
+        public bool ShowScore => !NotShowScore;
     }
 }

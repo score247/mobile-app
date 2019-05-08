@@ -27,7 +27,7 @@
                     
                     <Label Style="{StaticResource AwayTeam}" Text="{Binding Teams[1].Name}" />
                 </StackLayout>
-                <StackLayout Style="{StaticResource ScoreContainer}">
+                <StackLayout Style="{StaticResource ScoreContainer}" IsVisible="{Binding MatchResult.EventStatus.ShowScore}">
                     <Label Style="{StaticResource HomeScore}" Text="{Binding MatchResult.HomeScore}" />
                     <Label Style="{StaticResource AwayScore}" Text="{Binding MatchResult.AwayScore}" />
                 </StackLayout>
