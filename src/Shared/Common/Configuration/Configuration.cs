@@ -2,10 +2,10 @@
 {
     public static class Configuration
     {
-#if DEV
+#if DEBUG
         public static string LocalEndPoint => "https://testing2.nexdev.net/V1/api/";
 #elif TEST
-        public static string LocalEndPoint => "https://testing2.nexdev.net/Test/api/";
+        public static string LocalEndPoint => "https://testing2.nexdev.net/V2/api/";
 #else
         public static string LocalEndPoint => "https://testing2.nexdev.net/Main/api/";
 #endif

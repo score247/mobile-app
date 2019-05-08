@@ -5,6 +5,7 @@
         <RootNamespace>LiveScore.Menu</RootNamespace>
         <AssemblyName>LiveScore.Menu</AssemblyName>
         <SonarQubeExclude>True</SonarQubeExclude>
+        <Configurations>Debug;Release;Test</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
@@ -12,6 +13,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+      <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />

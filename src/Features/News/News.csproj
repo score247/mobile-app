@@ -5,6 +5,7 @@
     <RootNamespace>LiveScore.News</RootNamespace>
     <AssemblyName>LiveScore.News</AssemblyName>
     <SonarQubeExclude>True</SonarQubeExclude>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -13,6 +14,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 

@@ -5,6 +5,7 @@
     <RootNamespace>LiveScore.Favorites</RootNamespace>
     <AssemblyName>LiveScore.Favorites</AssemblyName>
     <SonarQubeExclude>True</SonarQubeExclude>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -12,6 +13,10 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <CodeAnalysisRuleSet>Favorites.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 

@@ -5,11 +5,15 @@
     <RootNamespace>LiveScore.TVSchedule</RootNamespace>
     <AssemblyName>LiveScore.TVSchedule</AssemblyName>
     <SonarQubeExclude>True</SonarQubeExclude>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>TVSchedule.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>TVSchedule.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <CodeAnalysisRuleSet>TVSchedule.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>

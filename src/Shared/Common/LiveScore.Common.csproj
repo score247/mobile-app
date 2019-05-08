@@ -6,6 +6,7 @@
         </NeutralLanguage>
         <AssemblyName>LiveScore.Common</AssemblyName>
         <RootNamespace>LiveScore.Common</RootNamespace>
+        <Configurations>Debug;Release;Test</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
@@ -14,6 +15,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+      <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
