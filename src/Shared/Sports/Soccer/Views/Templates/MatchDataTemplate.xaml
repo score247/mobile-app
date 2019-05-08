@@ -24,6 +24,7 @@
                 </StackLayout>
                 <StackLayout Style="{StaticResource TeamContainer}">
                     <Label Style="{StaticResource HomeTeam}" Text="{Binding Teams[0].Name}" />
+                    
                     <Label Style="{StaticResource AwayTeam}" Text="{Binding Teams[1].Name}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource ScoreContainer}">

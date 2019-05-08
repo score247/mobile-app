@@ -257,16 +257,5 @@ namespace LiveScore.Core.Tests.Enumerations
             Assert.Equal("start_delayed", actual.Value);
             Assert.Equal("StartDelayed", actual.DisplayName);
         }
-
-        [Fact]
-        public void CanceledStatus_Always_CreateCorrectType()
-        {
-            // Act
-            var actual = MatchStatus.CanceledStatus;
-
-            // Assert
-            Assert.Equal("canceled", actual.Value);
-            Assert.Equal("Canceled", actual.DisplayName);
-        }
     }
 }

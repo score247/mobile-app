@@ -6,18 +6,5 @@ namespace LiveScore.Core.Tests.Models.Matches
 
     public class MatchTests
     {
-        [Fact]
-        public void DisplayLocalTime_Always_GetCorrectFormat()
-        {
-            // Arrange
-            var match = new Match();
-            match.EventDate = new DateTime(2019, 2, 2, 12, 30, 30);
-
-            // Act
-            var actual = match.EventTime;
-
-            // Assert
-            Assert.Equal("12:30", actual);
-        }
     }
 }
