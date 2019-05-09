@@ -93,9 +93,7 @@ SP1_Main_Function_Bar_TC02
     ####    Post-Conditions
 
 SP1_Scores_Date_Bar
-    [Tags]
     #    VP1    Verify date bar shoud be orderd from left to right by: Home button, Date frame, Calendar button
-    Pass Execution If    1==1    MAIA UPDATE TC LATER
     Click Element    ${btn_Scores}
     ${home_button_location}    Get Element Location    ${btn_Home}
     ${date_frame_location}    Get Element Location    ${frm_date}
@@ -114,19 +112,22 @@ SP1_Scores_Date_Bar
     ${date5_val}    Get Element Attribute    ${btn_currentdate+1}    value
     ${date6_val}    Get Element Attribute    ${btn_currentdate+2}    value
     ${date7_val}    Get Element Attribute    ${btn_currentdate+3}    value
-    ${date2_valu}=    Run Keyword if    '${date1_val}'>'${date2_val}'    Evaluate    ${date1_val}+ ${date2_val}
-    ...    ELSE    Set Variable    ${date2_val}
-    ${date3_valu}=    Run Keyword if    '${date2_valu}'> '${date3_val}'    Evaluate    ${date2_valu}+ ${date3_val}
-    ...    ELSE    Set Variable    ${date3_val}
-    ${date4_valu}=    Run Keyword if    '${date3_valu}'> '${date4_val}'    Evaluate    ${date3_valu}+ ${date4_val}
-    ...    ELSE    Set Variable    ${date4_val}
-    ${date5_valu}=    Run Keyword if    '${date4_valu}'> '${date5_val}'    Evaluate    ${date4_valu}+ ${date5_val}
-    ...    ELSE    Set Variable    ${date5_val}
-    ${date6_valu}=    Run Keyword if    '${date5_valu}'> '${date6_val}'    Evaluate    ${date5_valu}+ ${date6_val}
-    ...    ELSE    Set Variable    ${date6_val}
-    ${date7_valu}=    Run Keyword if    '${date6_valu}'> '${date7_val}'    Evaluate    ${date6_valu}+ ${date7_val}
-    ...    ELSE    Set Variable    ${date7_val}
-    Run Keyword And Continue On Failure    Should Be True    ${date1_val}<${date2_valu}<${date3_valu}<${date4_valu}<${date5_valu}<${date6_valu}<${date7_valu}
+    #Run Keyword And Continue On Failure    Should Be True    ${date1_val}+3==${date2_val}+2==${date3_val}+1== ${date4_val}==${date5_val}-1==${date6_val}-2==${date7_val}-3
+    ${datetime}    Get Current Date
+    ${date1}    Subtract Time From Date    ${datetime}    3 days    result_format=%d
+    ${date2}    Subtract Time From Date    ${datetime}    2 days    result_format=%d
+    ${date3}    Subtract Time From Date    ${datetime}    1 days    result_format=%d
+    ${current_date}    Subtract Time From Date    ${datetime}    0 days    result_format=%d
+    ${date5}    Add Time To Date    ${datetime}    1 days    result_format=%d
+    ${date6}    Add Time To Date    ${datetime}    2 days    result_format=%d
+    ${date7}    Add Time To Date    ${datetime}    3 days    result_format=%d
+    Should Be Equal As Integers    ${date1}    ${date1_val}
+    Should Be Equal As Integers    ${date2}    ${date2_val}
+    Should Be Equal As Integers    ${date3}    ${date3_val}
+    Should Be Equal As Integers    ${current_date}    ${date4_val}
+    Should Be Equal As Integers    ${date5}    ${date5_val}
+    Should Be Equal As Integers    ${date6}    ${date6_val}
+    Should Be Equal As Integers    ${date7}    ${date7_val}
 
 SP1_Scores_Match_Leagues_TC01
     [Documentation]    Verify Score page should be default screen of the app when user opens app (S001)
