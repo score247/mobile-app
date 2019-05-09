@@ -5,21 +5,25 @@
 namespace LiveScore.Score.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
+    using LiveScore.Common.Configuration;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
+    using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
     {
         private readonly IMatchService MatchService;
+        private readonly HubConnection matchHubConnection;
         private DateRange selectedDateRange;
 
         public ScoresViewModel(
@@ -30,8 +34,8 @@ namespace LiveScore.Score.ViewModels
         {
             SelectedDate = DateTime.Today;
             MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
-
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
+            matchHubConnection = new HubConnectionBuilder().WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build();
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -63,6 +67,8 @@ namespace LiveScore.Score.ViewModels
                 EventAggregator
                     .GetEvent<DateBarItemSelectedEvent>()
                     .Unsubscribe(OnDateBarItemSelected);
+
+                matchHubConnection.StopAsync().Wait();
             }
 
             base.Dispose(disposing);
@@ -70,15 +76,28 @@ namespace LiveScore.Score.ViewModels
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            EventAggregator
-               .GetEvent<DateBarItemSelectedEvent>()
-               .Subscribe(OnDateBarItemSelected);
-
-            if (MatchItemSource == null)
+            try
             {
-                await LoadData(DateRange.FromYesterdayUntilNow());
+                EventAggregator
+                   .GetEvent<DateBarItemSelectedEvent>()
+                   .Subscribe(OnDateBarItemSelected);
+
+                await matchHubConnection.StartAsync();
+
+                MatchService.SubscribeMatch(matchHubConnection, UpdateMatch);
+
+                if (MatchItemSource == null)
+                {
+                    await LoadData(DateRange.FromYesterdayUntilNow());
+                }
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
             }
         }
+
+
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 
@@ -109,6 +128,28 @@ namespace LiveScore.Score.ViewModels
             selectedDateRange = dateRange;
             IsLoading = false;
             IsRefreshing = false;
+        }
+
+        private void UpdateMatch(string sportId, IDictionary<string, MatchPayload> payloads)
+        {
+            if (sportId == SettingsService.CurrentSportType.Value)
+            {
+                foreach (var league in MatchItemSource)
+                {
+                    foreach (var match in league)
+                    {
+                        if (payloads.ContainsKey(match.Id))
+                        {
+                            var payload = payloads[match.Id];
+
+                            match.MatchResult = payload.MatchResult;
+                            match.TimeLines = payload.Timelines;
+                        }
+                    }
+                }
+
+                MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(MatchItemSource);
+            }
         }
     }
 }

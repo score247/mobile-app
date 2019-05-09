@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Events;
@@ -26,6 +27,7 @@
             NavigationService = navigationService;
             DepdendencyResolver = depdendencyResolver;
             SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
+            LoggingService = DepdendencyResolver.Resolve<ILoggingService>();
         }
 
         public string Title { get; protected set; }
@@ -37,6 +39,8 @@
         public INavigationService NavigationService { get; protected set; }
 
         public ISettingsService SettingsService { get; protected set; }
+
+        public ILoggingService LoggingService { get; protected set; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {

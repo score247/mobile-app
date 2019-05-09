@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
+    using PropertyChanged;
 
     public interface IMatchResult
     {
@@ -20,6 +21,7 @@
         string MatchTime { get; }
     }
 
+    [AddINotifyPropertyChangedInterface]
     public class MatchResult : IMatchResult
     {
         public MatchStatus MatchStatus { get; set; }

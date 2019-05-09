@@ -11,6 +11,7 @@ namespace LiveScore.Basketball.Services
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
 
     public class MatchService : IMatchService
     {
@@ -27,6 +28,11 @@ namespace LiveScore.Basketball.Services
             };
 
             return matches;
+        }
+
+        public void SubscribeMatch(HubConnection hubConnection, Action<string, IDictionary<string, MatchPayload>> handler)
+        {
+            throw new NotImplementedException();
         }
     }
 }

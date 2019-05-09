@@ -9,6 +9,7 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
     using Refit;
 
     public interface ISoccerMatchApi
@@ -19,6 +20,7 @@
 
     public class MatchService : BaseService, IMatchService
     {
+        private const string PushMatchesMethod = "PushMatchEvent";
         private readonly ILocalStorage cacheService;
         private readonly IApiService apiService;
 
@@ -55,6 +57,16 @@
 
                 return Enumerable.Empty<IMatch>();
             }
+        }
+
+        public void SubscribeMatch(
+            HubConnection hubConnection,
+            Action<string, IDictionary<string, MatchPayload>> handler)
+        {
+            hubConnection.On<string, IDictionary<string, MatchPayload>>(PushMatchesMethod, (sportId, payload) =>
+            {
+                handler.Invoke(sportId, payload);
+            });
         }
 
         private async Task<IEnumerable<Match>> GetMatches(UserSettings settings, string fromDateText, string toDateText)

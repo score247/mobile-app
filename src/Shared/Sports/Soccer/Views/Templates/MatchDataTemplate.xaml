@@ -20,7 +20,7 @@
                     <Label IsVisible="{Binding MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}"/>
                     <Label
                         Style="{StaticResource MatchStatus}"
-                        Text="{Binding ., Converter={StaticResource matchStatusConverter}}" />
+                        Text="{Binding Converter={StaticResource matchStatusConverter}}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource TeamContainer}">
                     <Label Style="{StaticResource HomeTeam}" Text="{Binding Teams[0].Name}" />

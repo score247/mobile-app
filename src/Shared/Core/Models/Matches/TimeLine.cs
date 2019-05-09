@@ -3,13 +3,12 @@
     using System;
     using System.Collections.Generic;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Teams;
     using Newtonsoft.Json;
 
     public interface ITimeLine : IEntity<long, string>
     {
-        EventTypes Type { get; }
+        string Type { get; }
 
         DateTime Time { get; }
 
@@ -48,7 +47,7 @@
 
     public class TimeLine : Entity<long, string>, ITimeLine
     {
-        public EventTypes Type { get; set; }
+        public string Type { get; set; }
 
         public DateTime Time { get; set; }
 

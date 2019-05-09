@@ -61,7 +61,7 @@
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (MatchStatus)value;
+            return "FT";
         }
 
         private static string GenerateStatusForLiveMatch(IMatch match)
@@ -72,13 +72,6 @@
             {
                 return status;
             }
-
-            //var matchTime = DateTime.ParseExact(match.MatchResult.MatchTime, "mm:ss", CultureInfo.InvariantCulture);
-
-            //if (match.TimeLine != null && match.TimeLine.Type.IsInjuryTimeShown)
-            //{
-            //    return $"{matchTime.Minute}+{match.TimeLine.StoppageTime}'";
-            //}
 
             return status;
         }
