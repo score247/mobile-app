@@ -7,6 +7,7 @@ Resource          Actions/Common_Actions.robot
 Resource          Actions/Page_Actions.robot
 Resource          UI/Main_Function_Bar.robot
 Library           Collections
+Library           DateTime
 Resource          UI/Date_Bar.robot
 Resource          UI/Leagues_Content.robot
 
