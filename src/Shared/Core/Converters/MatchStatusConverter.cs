@@ -73,14 +73,14 @@
                 return status;
             }
 
-            var matchTime = DateTime.ParseExact(match.MatchResult.MatchTime, "mm:ss", CultureInfo.InvariantCulture);
+            //var matchTime = DateTime.ParseExact(match.MatchResult.MatchTime, "mm:ss", CultureInfo.InvariantCulture);
 
-            if (match.TimeLine != null && match.TimeLine.Type.IsInjuryTimeShown)
-            {
-                return $"{matchTime.Minute}+{match.TimeLine.StoppageTime}'";
-            }
+            //if (match.TimeLine != null && match.TimeLine.Type.IsInjuryTimeShown)
+            //{
+            //    return $"{matchTime.Minute}+{match.TimeLine.StoppageTime}'";
+            //}
 
-            return matchTime.Minute + "'";
+            return status;
         }
 
         private static string GenerateMatchStatus(IMatch match)
