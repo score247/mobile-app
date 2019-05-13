@@ -42,6 +42,5 @@
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
         public ILeague League { get; set; }
-
     }
 }

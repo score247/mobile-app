@@ -59,7 +59,7 @@
             }
         }
 
-        public void SubscribeMatch(
+        public void SubscribeMatches(
             HubConnection hubConnection,
             Action<string, IDictionary<string, MatchPayload>> handler)
         {

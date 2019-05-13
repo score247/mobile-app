@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Xamarin.Forms.Internals;
 
 [assembly: InternalsVisibleTo("Scores.Tests")]
 
@@ -46,7 +47,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, IMatch>> MatchItemSource { get; set; }
+        public ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> MatchItemSource { get; set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -82,14 +83,13 @@ namespace LiveScore.Score.ViewModels
                    .GetEvent<DateBarItemSelectedEvent>()
                    .Subscribe(OnDateBarItemSelected);
 
-                await matchHubConnection.StartAsync();
-
-                MatchService.SubscribeMatch(matchHubConnection, UpdateMatch);
-
                 if (MatchItemSource == null)
                 {
                     await LoadData(DateRange.FromYesterdayUntilNow());
                 }
+
+                await matchHubConnection.StartAsync();
+                MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
             }
             catch (Exception ex)
             {
@@ -97,13 +97,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-
-
-#pragma warning disable S3168 // "async" methods should not return "void"
-
         private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);
-
-#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadData(
             DateRange dateRange,
@@ -117,38 +111,44 @@ namespace LiveScore.Score.ViewModels
                 MatchItemSource?.Clear();
             }
 
-            var matchData = await MatchService.GetMatches(
+            var matches = await MatchService.GetMatches(
                     SettingsService.UserSettings,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
                     forceFetchNewData);
 
-            MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(
-                      matchData.GroupBy(match => new { match.League.Name, match.EventDate.Day, match.EventDate.Month, match.EventDate.Year }));
+            MatchItemSource = BuildMatchItemSource(matches);
 
             selectedDateRange = dateRange;
             IsLoading = false;
             IsRefreshing = false;
         }
 
-        private void UpdateMatch(string sportId, IDictionary<string, MatchPayload> payloads)
+        private ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
-            if (sportId == SettingsService.CurrentSportType.Value)
+            var matchItemViewModels = matches.Select(match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver));
+
+            return new ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>>(matchItemViewModels.GroupBy(item
+                => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
+        }
+
+        private void OnMatchesChanged(string sportId, IDictionary<string, MatchPayload> matchPayloads)
+        {
+            if (sportId != SettingsService.CurrentSportType.Value)
             {
-                foreach (var league in MatchItemSource)
-                {
-                    foreach (var match in league)
-                    {
-                        if (payloads.ContainsKey(match.Id))
-                        {
-                            var payload = payloads[match.Id];
+                return;
+            }
 
-                            match.MatchResult = payload.MatchResult;
-                            match.TimeLines = payload.Timelines;
-                        }
-                    }
-                }
+            var matchItem = MatchItemSource
+                .SelectMany(group => group)
+                .FirstOrDefault(m => matchPayloads.ContainsKey(m.Match.Id));
 
-                MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(MatchItemSource);
+            if (matchItem?.Match != null)
+            {
+                var matchPayload = matchPayloads[matchItem.Match.Id];
+                matchItem.Match.MatchResult = matchPayload.MatchResult;
+                matchItem.Match.TimeLines = matchPayload.Timelines;
+
+                matchItem.ChangeMatchData();
             }
         }
     }

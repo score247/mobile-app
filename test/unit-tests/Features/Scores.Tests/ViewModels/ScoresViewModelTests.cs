@@ -124,39 +124,39 @@ namespace Scores.Tests.ViewModels
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
-        [Fact]
-        public void OnPublishingDateBarItemSelectedEvent_Always_LoadDataByDateRange()
-        {
-            // Arrange
-            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
-            matchService.GetMatches(
-                  viewModel.SettingsService.UserSettings,
-                  Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
-                  false).Returns(matchData);
-            viewModel.OnNavigatingTo(null);
+        //[Fact]
+        //public void OnPublishingDateBarItemSelectedEvent_Always_LoadDataByDateRange()
+        //{
+        //    // Arrange
+        //    viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
+        //    matchService.GetMatches(
+        //          viewModel.SettingsService.UserSettings,
+        //          Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+        //          false).Returns(matchData);
+        //    viewModel.OnNavigatingTo(null);
 
-            // Act
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+        //    // Act
+        //    viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
-            // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
-            Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
-        }
+        //    // Assert
+        //    var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+        //    Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        //}
 
-        [Fact]
-        public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
-        {
-            // Arrange
-            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
-            viewModel.OnNavigatingTo(null);
+        //[Fact]
+        //public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
+        //{
+        //    // Arrange
+        //    viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
+        //    viewModel.OnNavigatingTo(null);
 
-            // Act
-            viewModel.OnDisappearing();
-            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+        //    // Act
+        //    viewModel.OnDisappearing();
+        //    viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
-            // Assert
-            matchService.DidNotReceive().GetMatches(Arg.Any<UserSettings>(), Arg.Any<DateRange>(), Arg.Any<bool>());
-        }
+        //    // Assert
+        //    matchService.DidNotReceive().GetMatches(Arg.Any<UserSettings>(), Arg.Any<DateRange>(), Arg.Any<bool>());
+        //}
 
         [Fact]
         public void OnResume_SelectedDateIsNotToday_NavigateToHome()
