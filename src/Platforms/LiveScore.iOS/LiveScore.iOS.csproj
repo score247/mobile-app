@@ -520,6 +520,7 @@
     <BundleResource Include="..\..\CommonResources\Image\common\user4.png">
       <Link>Resources\images\common\user4.png</Link>
     </BundleResource>
+    <Compile Include="Services\BackgroundService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -614,6 +615,15 @@
       <Project>{7E317128-A40E-459E-BF15-F586A0C3BB30}</Project>
       <Name>LiveScore.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj">
+      <Project>{68150DDE-7169-4682-BDC6-91927456D04F}</Project>
+      <Name>LiveScore.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\">
+      <DependentUpon>Services</DependentUpon>
+    </Folder>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -27,6 +27,9 @@
     <Folder Include="Models\Teams\" />
     <Folder Include="Converters\">
     </Folder>
+    <Folder Include="Jobs\">
+      <DependentUpon>Jobs</DependentUpon>
+    </Folder>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />

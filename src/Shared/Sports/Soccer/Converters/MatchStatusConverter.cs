@@ -6,6 +6,7 @@
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using System.Linq;
 
     public class MatchStatusConverter : IMatchStatusConverter
     {
@@ -64,7 +65,14 @@
                 return status;
             }
 
-            return status;
+            var timeline = match.TimeLines?.FirstOrDefault();
+
+            if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
+            {
+                return $"{timeline.MatchTime}+{timeline.InjuryTimeAnnounced}'";
+            }
+
+            return match.MatchResult.MatchTimeMinute + "'";
         }
 
         private static string BuildMatchStatus(IMatch match)

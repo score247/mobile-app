@@ -125,7 +125,8 @@ namespace LiveScore.Score.ViewModels
 
         private ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver));
+            var matchItemViewModels = matches.Select(
+                    match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver, EventAggregator));
 
             return new ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));

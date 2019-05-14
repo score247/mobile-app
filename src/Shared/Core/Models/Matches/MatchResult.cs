@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
+    using System;
     using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
     using PropertyChanged;
@@ -18,7 +19,9 @@
 
         IEnumerable<MatchPeriod> MatchPeriods { get; }
 
-        string MatchTime { get; }
+        string MatchTime { get; set; }
+
+        int MatchTimeMinute { get; }
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -37,5 +40,7 @@
         public IEnumerable<MatchPeriod> MatchPeriods { get; set; }
 
         public string MatchTime { get; set; }
+
+        public int MatchTimeMinute => string.IsNullOrEmpty(MatchTime) ? 0 : Convert.ToInt32(MatchTime.Split(':')[0]);
     }
 }

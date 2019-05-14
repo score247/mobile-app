@@ -22,6 +22,7 @@
             containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.Value);
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value);
             containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportTypes.Soccer.Value);
+            containerRegistry.Register<IBackgroundJob, MatchAutoUpdateJob>(nameof(MatchAutoUpdateJob) + SportTypes.Soccer.Value);
         }
     }
 }

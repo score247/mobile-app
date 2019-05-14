@@ -1,11 +1,14 @@
+using LiveScore.iOS.Services;
 namespace LiveScore.iOS
 {
     using System;
     using CarouselView.FormsPlugin.iOS;
     using Common.Services;
     using Foundation;
+    using LiveScore.Core.Events;
     using ObjCRuntime;
     using Prism;
+    using Prism.Events;
     using Prism.Ioc;
     using UIKit;
 
@@ -31,6 +34,14 @@ namespace LiveScore.iOS
             {
                 loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
             };
+
+            var eventAggregator = application.Container.Resolve<IEventAggregator>();
+
+            eventAggregator.GetEvent<StartAutoUpdateMatchEvent>().Subscribe(async (job) =>
+            {
+                var backgroundService = new BackgroundService(eventAggregator);
+                await backgroundService.Start(job);
+            });
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
