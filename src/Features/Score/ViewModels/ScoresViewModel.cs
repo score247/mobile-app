@@ -52,15 +52,25 @@ namespace LiveScore.Score.ViewModels
 
         public override async void OnResume()
         {
+            await Initialize();
+
             if (SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
             }
         }
 
-        public override void OnDisappearing() => Dispose(true);
+        public override async void OnNavigatingTo(INavigationParameters parameters)
+        {
+            await Initialize();
 
-        public override async void OnAppearing()
+            if (MatchItemSource == null)
+            {
+                await LoadData(DateRange.FromYesterdayUntilNow());
+            }
+        }
+
+        private async Task Initialize()
         {
             try
             {
@@ -77,26 +87,22 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        protected override async void Clean()
         {
-            if (MatchItemSource == null)
-            {
-                await LoadData(DateRange.FromYesterdayUntilNow());
-            }
-        }
+            base.Clean();
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
+            try
             {
                 EventAggregator
-                    .GetEvent<DateBarItemSelectedEvent>()
-                    .Unsubscribe(OnDateBarItemSelected);
+                 .GetEvent<DateBarItemSelectedEvent>()
+                 .Unsubscribe(OnDateBarItemSelected);
 
-                matchHubConnection.StopAsync().Wait();
+                await matchHubConnection.StopAsync();
             }
-
-            base.Dispose(disposing);
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
+            }
         }
 
         private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);

@@ -10,7 +10,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IDisposable
+    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
         public ViewModelBase(
            INavigationService navigationService,
@@ -56,6 +56,7 @@
 
         public virtual void Destroy()
         {
+            Clean();
         }
 
         public virtual void OnResume()
@@ -64,6 +65,7 @@
 
         public virtual void OnSleep()
         {
+            Clean();
         }
 
         public virtual void OnAppearing()
@@ -72,18 +74,13 @@
 
         public virtual void OnDisappearing()
         {
+            Clean();
         }
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Clean()
         {
         }
     }
