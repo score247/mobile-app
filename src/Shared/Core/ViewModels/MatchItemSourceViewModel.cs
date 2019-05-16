@@ -1,40 +1,31 @@
-﻿
+﻿using PropertyChanged;
 namespace LiveScore.Core.ViewModels
 {
     using LiveScore.Core;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
-    using Prism.Navigation;
+    using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
-    using LiveScore.Core.Events;
-    using LiveScore.Core.Services;
+    using Prism.Navigation;
 
     public class MatchItemSourceViewModel : ViewModelBase
     {
         private readonly IMatchStatusConverter matchStatusConverter;
+        private readonly HubConnection matchHubConnection;
 
         public MatchItemSourceViewModel(
             IMatch match,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            HubConnection matchHubConnection)
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
+            this.matchHubConnection = matchHubConnection;
             matchStatusConverter = DepdendencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
             Match = match;
             ChangeMatchData();
-            StartAutoUpdateJob();
-            SubscribeMatchUpdateEvent();
-        }
-
-        private void StartAutoUpdateJob()
-        {
-            if (Match.MatchResult.EventStatus.IsLive)
-            {
-                var matchAutoUpdateJob = DepdendencyResolver.Resolve<IBackgroundJob>("MatchAutoUpdateJob" + SettingsService.CurrentSportType.Value);
-                matchAutoUpdateJob.Initialize(Match);
-                EventAggregator.GetEvent<StartAutoUpdateMatchEvent>().Publish(matchAutoUpdateJob);
-            }
+            SubscribeMatchTimeChangeEvent();
         }
 
         public IMatch Match { get; private set; }
@@ -46,21 +37,16 @@ namespace LiveScore.Core.ViewModels
             DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
         }
 
-        private void SubscribeMatchUpdateEvent()
+        private void SubscribeMatchTimeChangeEvent()
         {
-            if (Match.MatchResult.EventStatus.IsLive)
+            matchHubConnection.On<string, string, int>("PushMatchTime", (sportId, matchId, matchTime) =>
             {
-                EventAggregator.GetEvent<MatchUpdateEvent>().Subscribe(OnMatchUpdate);
-            }
-        }
-
-        private void OnMatchUpdate(IMatch match)
-        {
-            if (Match.Id == match.Id)
-            {
-                Match = match;
-                ChangeMatchData();
-            }
+                if (sportId == SettingsService.CurrentSportType.Value && Match.Id == matchId)
+                {
+                    Match.MatchResult.MatchTime = $"{matchTime}:00";
+                    ChangeMatchData();
+                }
+            });
         }
     }
 }

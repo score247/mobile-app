@@ -37,12 +37,6 @@ namespace LiveScore.iOS
 
             var eventAggregator = application.Container.Resolve<IEventAggregator>();
 
-            eventAggregator.GetEvent<StartAutoUpdateMatchEvent>().Subscribe(async (job) =>
-            {
-                var backgroundService = new BackgroundService(eventAggregator);
-                await backgroundService.Start(job);
-            });
-
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }

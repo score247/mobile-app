@@ -2,7 +2,6 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using LiveScore.Core.Models.Matches;
 
     public interface IBackgroundJob
     {

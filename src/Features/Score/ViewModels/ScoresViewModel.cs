@@ -1,5 +1,4 @@
 ﻿using System.Runtime.CompilerServices;
-using Xamarin.Forms.Internals;
 
 [assembly: InternalsVisibleTo("Scores.Tests")]
 
@@ -126,7 +125,7 @@ namespace LiveScore.Score.ViewModels
         private ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver, EventAggregator));
+                    match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection));
 
             return new ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
@@ -138,6 +137,7 @@ namespace LiveScore.Score.ViewModels
             {
                 return;
             }
+
 
             var matchItem = MatchItemSource
                 .SelectMany(group => group)

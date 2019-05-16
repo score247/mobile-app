@@ -36,10 +36,8 @@
     <Folder Include="Models\Settings\" />
     <Folder Include="Views\Selectors\" />
     <Folder Include="Events\">
-      <DependentUpon>Events</DependentUpon>
     </Folder>
     <Folder Include="Jobs\">
-      <DependentUpon>Jobs</DependentUpon>
     </Folder>
   </ItemGroup>
   <ItemGroup>

@@ -38,7 +38,7 @@
         {
             try
             {
-                var cacheExpiration = dateRange.FromDate < DateTime.Now
+                var cacheExpiration = dateRange.ToDate <= DateTime.Today
                    ? cacheService.CacheDuration(CacheDurationTerm.Long)
                    : cacheService.CacheDuration(CacheDurationTerm.Short);
                 var fromDateText = dateRange.FromDate.ToApiFormat();
@@ -48,8 +48,11 @@
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatches(settings, fromDateText, toDateText),
-                        forceFetchNewData,
-                        cacheExpiration);
+                        (offset) =>
+                        {
+                            var elapsed = DateTimeOffset.Now - offset;
+                            return elapsed > cacheExpiration;
+                        });
             }
             catch (Exception ex)
             {

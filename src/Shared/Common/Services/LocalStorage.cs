@@ -16,7 +16,7 @@
     {
         Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null);
 
-        Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null);
+        Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null);
 
         void Shutdown();
 
@@ -24,7 +24,7 @@
 
         Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null);
 
-        DateTime CacheDuration(CacheDurationTerm cacheKind);
+        TimeSpan CacheDuration(CacheDurationTerm cacheKind);
 
         Task CleanAllExpired();
 
@@ -36,8 +36,8 @@
     public class LocalStorage : ILocalStorage
     {
         private const DateTimeKind DEFAULT_DATETIMEKIND = DateTimeKind.Local;
-        private const int ShortTerm = 2;
-        private const int LongTerm = 120;
+        private const int ShortTerm = 30;
+        private const int LongTerm = 7200;
 
         private readonly IBlobCache LocalMachine;
         private readonly IBlobCache UserAccount;
@@ -55,8 +55,8 @@
         public async Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
         => await LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
 
-        public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, bool forceFetch = false, DateTime? absoluteExpiration = null)
-        => await LocalMachine.GetAndFetchLatest(name, fetchFunc, (_) => forceFetch, absoluteExpiration);
+        public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null)
+        => await LocalMachine.GetAndFetchLatest(name, fetchFunc, fetchPredicate, absoluteExpiration);
 
         public void Shutdown()
         {
@@ -69,10 +69,10 @@
         public async Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null)
             => await LocalMachine.LoadImageFromUrl(imageLink, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
 
-        public DateTime CacheDuration(CacheDurationTerm cacheKind)
-        => cacheKind == CacheDurationTerm.Short
-            ? DateTime.Now.AddMinutes(ShortTerm)
-            : DateTime.Now.AddMinutes(LongTerm);
+        public TimeSpan CacheDuration(CacheDurationTerm cacheKind)
+            => cacheKind == CacheDurationTerm.Short
+                ? new TimeSpan(0, 0, ShortTerm)
+                : new TimeSpan(0, 0, LongTerm);
 
         public async Task CleanAllExpired() => await LocalMachine.Vacuum();
 
