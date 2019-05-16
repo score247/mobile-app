@@ -60,6 +60,31 @@ namespace LiveScore.Score.ViewModels
 
         public override void OnDisappearing() => Dispose(true);
 
+        public override async void OnAppearing()
+        {
+            try
+            {
+                EventAggregator
+                  .GetEvent<DateBarItemSelectedEvent>()
+                  .Subscribe(OnDateBarItemSelected);
+
+                await matchHubConnection.StartAsync();
+                MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
+            }
+        }
+
+        public override async void OnNavigatingTo(INavigationParameters parameters)
+        {
+            if (MatchItemSource == null)
+            {
+                await LoadData(DateRange.FromYesterdayUntilNow());
+            }
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -72,28 +97,6 @@ namespace LiveScore.Score.ViewModels
             }
 
             base.Dispose(disposing);
-        }
-
-        public override async void OnNavigatingTo(INavigationParameters parameters)
-        {
-            try
-            {
-                EventAggregator
-                   .GetEvent<DateBarItemSelectedEvent>()
-                   .Subscribe(OnDateBarItemSelected);
-
-                if (MatchItemSource == null)
-                {
-                    await LoadData(DateRange.FromYesterdayUntilNow());
-                }
-
-                await matchHubConnection.StartAsync();
-                MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
-            }
         }
 
         private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);

@@ -50,6 +50,11 @@
                         () => GetMatches(settings, fromDateText, toDateText),
                         (offset) =>
                         {
+                            if (forceFetchNewData)
+                            {
+                                return true;
+                            }
+
                             var elapsed = DateTimeOffset.Now - offset;
                             return elapsed > cacheExpiration;
                         });
