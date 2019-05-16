@@ -62,7 +62,7 @@ namespace LiveScore.Core.Enumerations
         public static readonly MatchStatus AwaitingExtraTimeStatus = new MatchStatus(AwaitingExtraTime, nameof(AwaitingExtraTime));
 
         //interrupted – The match has been interrupted
-        public const string Interrupted = "not_stainterruptedrted";
+        public const string Interrupted = "interrupted";
 
         public static readonly MatchStatus InterruptedStatus = new MatchStatus(Interrupted, nameof(Interrupted));
 

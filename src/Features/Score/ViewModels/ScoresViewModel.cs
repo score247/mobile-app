@@ -138,7 +138,6 @@ namespace LiveScore.Score.ViewModels
                 return;
             }
 
-
             var matchItem = MatchItemSource
                 .SelectMany(group => group)
                 .FirstOrDefault(m => matchPayloads.ContainsKey(m.Match.Id));
