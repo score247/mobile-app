@@ -622,7 +622,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\">
-      <DependentUpon>Services</DependentUpon>
     </Folder>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

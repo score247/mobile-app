@@ -3,9 +3,9 @@
     public static class Configuration
     {
 #if DEBUG
-        public static string LocalEndPoint => "https://testing2.nexdev.net/V1/api/";
+        public static string LocalEndPoint => "https://testing2.nexdev.net/V2/api/";
 
-        public static string LocalHubEndPoint => "https://testing2.nexdev.net/V1/hubs/";
+        public static string LocalHubEndPoint => "https://testing2.nexdev.net/V2/hubs/";
 #elif TEST
         public static string LocalEndPoint => "https://testing2.nexdev.net/V2/api/";
 

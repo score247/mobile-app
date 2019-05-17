@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LiveScore.Core.Controls.SearchView.SearchView">
+    <ContentPage.Content>
+        <SearchBar x:Name="CountriesSearchBar"  
+                 TextChanged="Handle_SearchButtonPressed"
+                 BackgroundColor="#FBCBF3"/> 
+        
+        <ListView x:Name="CountrySearchList"
+                 BackgroundColor="#D6F5FE"
+                 Footer=""/>
+    </ContentPage.Content>
+</ContentPage>

@@ -6,6 +6,8 @@ using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
+using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Controls.SearchView;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -104,6 +106,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
+            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
             ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
         }
 

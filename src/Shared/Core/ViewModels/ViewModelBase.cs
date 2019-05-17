@@ -56,7 +56,6 @@
 
         public virtual void Destroy()
         {
-            Clean();
         }
 
         public virtual void OnResume()

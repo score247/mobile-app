@@ -39,6 +39,9 @@
     </Folder>
     <Folder Include="Jobs\">
     </Folder>
+    <Folder Include="Controls\SearchView\">
+      <DependentUpon>SearchView</DependentUpon>
+    </Folder>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />

@@ -50,6 +50,13 @@ namespace LiveScore.Score.ViewModels
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
+        public DelegateAsyncCommand ClickSearchCommand => new DelegateAsyncCommand(OnClickSearchCommandExecuted);
+
+        private async Task OnClickSearchCommandExecuted()
+        {
+            await NavigationService.NavigateAsync("SearchView");
+        }
+
         public override async void OnResume()
         {
             await Initialize();

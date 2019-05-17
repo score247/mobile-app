@@ -67,9 +67,14 @@
 
             var timeline = match.TimeLines?.FirstOrDefault();
 
-            if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
+            if (timeline != null)
             {
-                return $"{timeline.MatchTime}+{timeline.InjuryTimeAnnounced}'";
+                if (timeline.Type == EventTypes.InjuryTimeShown)
+                {
+                    return $"{timeline.MatchTime}+{timeline.InjuryTimeAnnounced}'";
+                }
+
+                return $"{timeline.MatchTime}'";
             }
 
             return match.MatchResult.MatchTimeMinute + "'";
