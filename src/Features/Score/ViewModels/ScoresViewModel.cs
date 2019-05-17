@@ -54,7 +54,7 @@ namespace LiveScore.Score.ViewModels
 
         private async Task OnClickSearchCommandExecuted()
         {
-            await NavigationService.NavigateAsync("SearchView");
+            await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
         }
 
         public override async void OnResume()
@@ -67,7 +67,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnAppearing()
         {
             await Initialize();
 

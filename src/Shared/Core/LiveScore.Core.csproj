@@ -1,49 +1,46 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <Configurations>Debug;Release;Test</Configurations>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
-    <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
-    <PackageReference Include="Refit" Version="4.6.107" />
-    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
-    <PackageReference Include="Polly" Version="7.1.0" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="ViewResources\" />
-    <Folder Include="Converters\" />
-    <Folder Include="Models\" />
-    <Folder Include="Enumerations\" />
-    <Folder Include="Models\Settings\" />
-    <Folder Include="Views\Selectors\" />
-    <Folder Include="Events\">
-    </Folder>
-    <Folder Include="Jobs\">
-    </Folder>
-    <Folder Include="Controls\SearchView\">
-      <DependentUpon>SearchView</DependentUpon>
-    </Folder>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
-  </ItemGroup>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Configurations>Debug;Release;Test</Configurations>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+        <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+        <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+        <PackageReference Include="Refit" Version="4.6.107" />
+        <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
+        <PackageReference Include="Polly" Version="7.1.0" />
+        <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+    </ItemGroup>
+    <ItemGroup>
+        <Folder Include="ViewModels\" />
+        <Folder Include="ViewResources\" />
+        <Folder Include="Converters\" />
+        <Folder Include="Models\" />
+        <Folder Include="Enumerations\" />
+        <Folder Include="Models\Settings\" />
+        <Folder Include="Views\Selectors\" />
+        <Folder Include="Events\">
+        </Folder>
+        <Folder Include="Jobs\">
+        </Folder>
+        <Folder Include="Controls\SearchPage\">
+          <DependentUpon>SearchPage</DependentUpon>
+        </Folder>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
+    </ItemGroup>
 </Project>
