@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.SearchPage
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -61,7 +60,7 @@
             }
 
             var searchSuggestions = Suggestions
-                    .Where(s => s.StartsWith(SearchText, StringComparison.InvariantCultureIgnoreCase))
+                    .Where(s => s.Contains(SearchText.ToLowerInvariant()))
                     .Select(s => new SearchSuggestion { Name = s });
 
             SuggestionItemSource = new ObservableCollection<SearchSuggestion>(searchSuggestions);
