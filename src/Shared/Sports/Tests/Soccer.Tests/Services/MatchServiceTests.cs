@@ -50,7 +50,7 @@
             // Assert
             await mockCache.Received(1)
                 .GetAndFetchLatestValue(
-                    Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>());
+                    Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>());
         }
 
         [Fact]
@@ -59,7 +59,7 @@
             // Arrange
             var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
-            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
+            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
@@ -75,7 +75,7 @@
             // Arrange
             var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
-            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), false, Arg.Any<DateTime>())
+            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
@@ -100,7 +100,7 @@
             mockCache.GetAndFetchLatestValue(
                 "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
-                false,
+                (offset) => false,
                 Arg.Any<DateTime>()).Returns(expectedMatches);
 
             // Act

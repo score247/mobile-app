@@ -51,7 +51,6 @@ namespace Scores.Tests.ViewModels
 
         protected virtual void Dispose(bool disposing)
         {
-            viewModel.Dispose();
         }
 
         [Fact]
