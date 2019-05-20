@@ -56,7 +56,7 @@
                   SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell Height="30">
+                    <ViewCell Height="40">
                         <FlexLayout Style="{StaticResource SuggestionsCellFlexLayout}">
                             <StackLayout Style="{StaticResource SuggestionsCellImage}">
                                 <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
