@@ -207,4 +207,7 @@
     <data name="Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
+    <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

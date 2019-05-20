@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" x:Class="LiveScore.Core.Controls.SearchPage.SearchView">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms" 
+             x:Class="LiveScore.Core.Controls.SearchPage.SearchView"
+             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common">
+    <ContentPage.Resources>
+        <Style x:Key="SearchTextBox" TargetType="SearchBar">
+            <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}"/>
+            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+        </Style>
+        <Style x:Key="CancelLabel" TargetType="Label">
+            <Setter Property="WidthRequest" Value="90"/>
+            <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}"/>
+            <Setter Property="TextColor" Value="{StaticResource FourthTextColor}"/>
+        </Style>
+        <Style x:Key="SuggestionsListView" TargetType="ListView">
+            <Setter Property="Footer" Value=""/>
+            <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}"/>
+        </Style>
+        <Style x:Key="SuggestionsCellFlexLayout" TargetType="FlexLayout">
+            <Setter Property="JustifyContent" Value="Start"/>
+            <Setter Property="Padding" Value="20, 0, 0, 0"/>
+            <Setter Property="AlignItems" Value="Center"/>
+        </Style>
+        <Style x:Key="SuggestionsCellImage" TargetType="StackLayout">
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="WidthRequest" Value="30"/>
+        </Style>
+        <Style x:Key="SuggestionsCellLabel" TargetType="Label">
+            <Setter Property="Margin" Value="20, 0, 0, 0"/>
+            <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}"/>
+            <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}"/>
+        </Style>
+    </ContentPage.Resources>
     <NavigationPage.TitleView>
         <FlexLayout Direction="Row" AlignItems="Center">
-            <SearchBar Text="{Binding SearchText}" FontSize="12" BackgroundColor="#1D2133" TextColor="White">
+            <SearchBar x:Name="searchTextBox" Text="{Binding SearchText}" Style="{StaticResource SearchTextBox}">
                 <SearchBar.Behaviors>
                     <b:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangeCommand}" />
                 </SearchBar.Behaviors>
             </SearchBar>
-            <Label Text="Cancel" TextColor="#939393" WidthRequest="90" FontSize="12" HorizontalTextAlignment="Center">
+            <Label x:Name="cancelLabel" Text="{langs:Translate Cancel}" Style="{StaticResource CancelLabel}" HorizontalTextAlignment="Center">
                 <Label.GestureRecognizers>
                     <TapGestureRecognizer Command="{Binding CancelCommand}" />
                 </Label.GestureRecognizers>
@@ -15,15 +50,18 @@
         </FlexLayout>
     </NavigationPage.TitleView>
     <StackLayout>
-        <ListView BackgroundColor="#1D2133" ItemsSource="{Binding SuggestionItemSource}" SeparatorVisibility="None" Footer="">
+        <ListView x:Name="suggestionsListView" 
+                  Style="{StaticResource SuggestionsListView}" 
+                  ItemsSource="{Binding SuggestionItemSource}" 
+                  SeparatorVisibility="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell Height="30">
-                        <FlexLayout JustifyContent="Start" Padding="20, 0, 0, 0" AlignItems="Center">
-                                <StackLayout HeightRequest="30" WidthRequest="30">
-                                    <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
-                                </StackLayout>
-                            <Label Text="{Binding Name}" Margin="20, 0, 0, 0" TextColor="White" FontSize="13" />
+                        <FlexLayout Style="{StaticResource SuggestionsCellFlexLayout}">
+                            <StackLayout Style="{StaticResource SuggestionsCellImage}">
+                                <Image Source="images/logos/logo_2.png" Aspect="AspectFit" />
+                            </StackLayout>
+                            <Label Style="{StaticResource SuggestionsCellLabel}" Text="{Binding Name}"/>
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>

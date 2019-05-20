@@ -226,5 +226,11 @@ namespace LiveScore.Common.LangResources {
                 return ResourceManager.GetString("Pause", resourceCulture);
             }
         }
+        
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
     }
 }

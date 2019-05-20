@@ -1,15 +1,15 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
-using LiveScore.Common.Extensions;
-using System.Threading.Tasks;
-namespace LiveScore.Core.Controls.SearchPage
+﻿namespace LiveScore.Core.Controls.SearchPage
 {
-    using Prism.Events;
-    using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.ViewModels;
     using Prism.Commands;
-    using System.Collections.Generic;
-    using System;
+    using Prism.Events;
+    using Prism.Navigation;
 
     public class SearchViewModel : ViewModelBase
     {
