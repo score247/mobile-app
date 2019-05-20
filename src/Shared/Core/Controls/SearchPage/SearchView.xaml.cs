@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.SearchPage
 {
-    using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -9,14 +8,7 @@
     {
         public SearchView()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-
-            }
+            InitializeComponent();
         }
 
         protected override void OnAppearing()
