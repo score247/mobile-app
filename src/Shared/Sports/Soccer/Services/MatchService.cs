@@ -69,11 +69,11 @@
 
         public void SubscribeMatches(
             HubConnection hubConnection,
-            Action<string, IDictionary<string, MatchPayload>> handler)
+            Action<string, Dictionary<string, MatchPayload>> handler)
         {
-            hubConnection.On<string, IDictionary<string, MatchPayload>>(PushMatchesMethod, (sportId, payload) =>
+            hubConnection.On<int, Dictionary<string, MatchPayload>>(PushMatchesMethod, (sportId, payload) =>
             {
-                handler.Invoke(sportId, payload);
+                handler.Invoke(sportId.ToString(), payload);
             });
         }
 

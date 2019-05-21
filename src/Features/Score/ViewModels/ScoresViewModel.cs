@@ -93,9 +93,9 @@ namespace LiveScore.Score.ViewModels
                   .GetEvent<DateBarItemSelectedEvent>()
                   .Subscribe(OnDateBarItemSelected);
 
-                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
-
                 MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
+
+                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {
@@ -103,23 +103,18 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        protected override async void Clean()
+        protected override void Clean()
         {
             base.Clean();
 
-            try
-            {
-                EventAggregator
-                     .GetEvent<DateBarItemSelectedEvent>()
-                     .Unsubscribe(OnDateBarItemSelected);
+            EventAggregator
+                 .GetEvent<DateBarItemSelectedEvent>()
+                 .Unsubscribe(OnDateBarItemSelected);
 
+            if (cancellationTokenSource != null)
+            {
                 cancellationTokenSource.Cancel();
                 cancellationTokenSource.Dispose();
-                await matchHubConnection.StopAsync();
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
             }
         }
 
@@ -158,7 +153,7 @@ namespace LiveScore.Score.ViewModels
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
-        private void OnMatchesChanged(string sportId, IDictionary<string, MatchPayload> matchPayloads)
+        private void OnMatchesChanged(string sportId, Dictionary<string, MatchPayload> matchPayloads)
         {
             if (sportId != SettingsService.CurrentSportType.Value)
             {

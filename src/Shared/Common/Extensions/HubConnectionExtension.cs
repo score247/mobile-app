@@ -9,11 +9,20 @@
     {
         public static async Task<HubConnection> StartWithKeepAlive(this HubConnection hubConnection, TimeSpan interval, CancellationToken cancellationToken)
         {
-            while (true)
+            try
             {
-                await hubConnection.StartAsync();
-                await Task.Delay(interval, cancellationToken);
+                while (true)
+                {
+                    await hubConnection.StartAsync();
+                    await Task.Delay(interval, cancellationToken);
+                }
             }
+            catch
+            {
+                await hubConnection.StopAsync();
+            }
+
+            return hubConnection;
         }
     }
 }
