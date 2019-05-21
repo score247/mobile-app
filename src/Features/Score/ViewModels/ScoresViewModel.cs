@@ -8,6 +8,7 @@ namespace LiveScore.Score.ViewModels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.Services;
@@ -22,9 +23,11 @@ namespace LiveScore.Score.ViewModels
 
     public class ScoresViewModel : ViewModelBase
     {
+        private const int HubKeepAliveInterval = 30;
         private readonly IMatchService MatchService;
         private readonly HubConnection matchHubConnection;
         private DateRange selectedDateRange;
+        private CancellationTokenSource cancellationTokenSource;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -70,7 +73,10 @@ namespace LiveScore.Score.ViewModels
         public override async void OnAppearing()
         {
             await Initialize();
+        }
 
+        public override async void OnNavigatingTo(INavigationParameters parameters)
+        {
             if (MatchItemSource == null)
             {
                 await LoadData(DateRange.FromYesterdayUntilNow());
@@ -81,11 +87,14 @@ namespace LiveScore.Score.ViewModels
         {
             try
             {
+                cancellationTokenSource = new CancellationTokenSource();
+
                 EventAggregator
                   .GetEvent<DateBarItemSelectedEvent>()
                   .Subscribe(OnDateBarItemSelected);
 
-                await matchHubConnection.StartAsync();
+                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
+
                 MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
             }
             catch (Exception ex)
@@ -101,9 +110,11 @@ namespace LiveScore.Score.ViewModels
             try
             {
                 EventAggregator
-                 .GetEvent<DateBarItemSelectedEvent>()
-                 .Unsubscribe(OnDateBarItemSelected);
+                     .GetEvent<DateBarItemSelectedEvent>()
+                     .Unsubscribe(OnDateBarItemSelected);
 
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource.Dispose();
                 await matchHubConnection.StopAsync();
             }
             catch (Exception ex)

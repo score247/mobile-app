@@ -67,17 +67,12 @@
 
             var timeline = match.TimeLines?.FirstOrDefault();
 
-            if (timeline != null)
+            if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
             {
-                if (timeline.Type == EventTypes.InjuryTimeShown)
-                {
-                    return $"{timeline.MatchTime}+{timeline.InjuryTimeAnnounced}'";
-                }
-
-                return $"{timeline.MatchTime}'";
+                return $"{match.MatchResult.MatchTime}+{timeline.InjuryTimeAnnounced}'";
             }
 
-            return match.MatchResult.MatchTimeMinute + "'";
+            return match.MatchResult.MatchTime + "'";
         }
 
         private static string BuildMatchStatus(IMatch match)

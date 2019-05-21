@@ -61,7 +61,9 @@
 
             var searchSuggestions = Suggestions
                     .Where(s => s.ToLowerInvariant().Contains(SearchText.ToLowerInvariant()))
-                    .Select(s => new SearchSuggestion { Name = s });
+                    .Select(s => new SearchSuggestion { Name = s })
+                    .OrderBy(s => s.Name);
+
             SuggestionItemSource = new ObservableCollection<SearchSuggestion>(searchSuggestions);
         }
     }

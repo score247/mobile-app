@@ -1,4 +1,4 @@
-﻿using PropertyChanged;
+﻿using System.Threading.Tasks;
 namespace LiveScore.Core.ViewModels
 {
     using LiveScore.Core;
@@ -43,7 +43,7 @@ namespace LiveScore.Core.ViewModels
             {
                 if (sportId == SettingsService.CurrentSportType.Value && Match.Id == matchId)
                 {
-                    Match.MatchResult.MatchTime = $"{matchTime}:00";
+                    Match.MatchResult.MatchTime = matchTime;
                     ChangeMatchData();
                 }
             });
