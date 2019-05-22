@@ -29,6 +29,14 @@
             { MatchStatus.EndedExtraTime, AppResources.AET },
         };
 
+        private static readonly IDictionary<string, int> PeriodEndTimes = new Dictionary<string, int>
+        {
+            { MatchStatus.FirstHaft, 45 },
+            { MatchStatus.SecondHaft, 90 },
+            { MatchStatus.FirstHaftExtra, 105 },
+            { MatchStatus.SecondHaftExtra, 120 }
+        };
+
         public string BuildStatus(IMatch match)
         {
             if (match == null)
@@ -69,7 +77,17 @@
 
             if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
             {
-                return $"{match.MatchResult.MatchTime}+{timeline.InjuryTimeAnnounced}'";
+                var periodEndTime = PeriodEndTimes[match.MatchResult.MatchStatus.Value];
+                var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+                var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
+                var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
+
+                if (currentInjuryTime > annoucedInjuryTime)
+                {
+                    displayInjuryTime = annoucedInjuryTime;
+                }
+
+                return $"{periodEndTime}+{displayInjuryTime}'";
             }
 
             return match.MatchResult.MatchTime + "'";

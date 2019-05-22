@@ -141,6 +141,14 @@ namespace LiveScore.Core.Enumerations
 
         public bool IsClosed => Value == Closed;
 
+        public bool IsFirstHalf => Value == FirstHaft;
+
+        public bool IsSecondHalf => Value == SecondHaft;
+
+        public bool IsFirstHalfExtra => Value == FirstHaftExtra;
+
+        public bool IsSecondHalfExtra => Value == SecondHaftExtra;
+
         public bool NotShowScore => Value == NotStarted || Value == Cancelled || Value == Postponed || Value == StartDelayed;
 
         public bool ShowScore => !NotShowScore;
