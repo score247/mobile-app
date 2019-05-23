@@ -160,17 +160,19 @@ namespace LiveScore.Score.ViewModels
                 return;
             }
 
-            var matchItem = MatchItemSource
-                .SelectMany(group => group)
-                .FirstOrDefault(m => matchPayloads.ContainsKey(m.Match.Id));
-
-            if (matchItem?.Match != null)
+            foreach (var matchPayload in matchPayloads)
             {
-                var matchPayload = matchPayloads[matchItem.Match.Id];
-                matchItem.Match.MatchResult = matchPayload.MatchResult;
-                matchItem.Match.TimeLines = matchPayload.Timelines;
+                var matchItem = MatchItemSource
+                   .SelectMany(group => group)
+                   .FirstOrDefault(m => m.Match.Id == matchPayload.Key);
 
-                matchItem.ChangeMatchData();
+                if (matchItem?.Match != null)
+                {
+                    matchItem.Match.MatchResult = matchPayload.Value.MatchResult;
+                    matchItem.Match.TimeLines = matchPayload.Value.Timelines;
+
+                    matchItem.ChangeMatchData();
+                }
             }
         }
     }
