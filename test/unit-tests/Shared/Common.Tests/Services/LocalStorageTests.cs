@@ -31,26 +31,26 @@
         public void CacheDuration_LongTerm_ReturnCorrectValue()
         {
             // Arrange
-            var expectedDuration = DateTime.Now.AddMinutes(120);
+            var expectedDuration = new TimeSpan(0, 0, 7200);
 
             // Act
             var actual = cache.CacheDuration(CacheDurationTerm.Long);
 
             // Assert
-            Assert.Equal(expectedDuration.ToString(DATE_FORMAT), actual.ToString(DATE_FORMAT));
+            Assert.Equal(expectedDuration, actual);
         }
 
         [Fact]
         public void CacheDuration_ShortTerm_ReturnCorrectValue()
         {
             // Arrange
-            var expectedDuration = DateTime.Now.AddMinutes(2);
+            var expectedDuration = new TimeSpan(0, 0, 30);
 
             // Act
             var actual = cache.CacheDuration(CacheDurationTerm.Short);
 
             // Assert
-            Assert.Equal(expectedDuration.ToString(DATE_FORMAT), actual.ToString(DATE_FORMAT));
+            Assert.Equal(expectedDuration, actual);
         }
 
         [Fact]

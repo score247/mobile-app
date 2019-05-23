@@ -133,7 +133,7 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = MatchStatus.InterruptedStatus;
 
             // Assert
-            Assert.Equal("not_stainterruptedrted", actual.Value);
+            Assert.Equal("interrupted", actual.Value);
             Assert.Equal("Interrupted", actual.DisplayName);
         }
 
