@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>LiveScore.Basketball</RootNamespace>
     <AssemblyName>LiveScore.Basketball</AssemblyName>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>pdbonly</DebugType>
@@ -15,8 +16,11 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Basketball.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <CodeAnalysisRuleSet>Basketball.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

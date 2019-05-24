@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.Services
 {
     using System;
-    using LiveScore.Common.Services;    
+    using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Settings;
 

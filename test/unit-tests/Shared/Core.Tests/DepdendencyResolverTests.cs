@@ -1,8 +1,6 @@
-using LiveScore.Core;
+using System.Collections.Generic;
 using NSubstitute;
 using Prism.Ioc;
-using System;
-using System.Collections.Generic;
 using Xunit;
 
 namespace LiveScore.Core.Tests

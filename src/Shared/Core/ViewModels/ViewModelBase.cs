@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
-    using System;
     using System.Threading.Tasks;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Events;
@@ -9,7 +9,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IDisposable
+    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
         public ViewModelBase(
            INavigationService navigationService,
@@ -26,6 +26,7 @@
             NavigationService = navigationService;
             DepdendencyResolver = depdendencyResolver;
             SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
+            LoggingService = DepdendencyResolver.Resolve<ILoggingService>();
         }
 
         public string Title { get; protected set; }
@@ -37,6 +38,8 @@
         public INavigationService NavigationService { get; protected set; }
 
         public ISettingsService SettingsService { get; protected set; }
+
+        public ILoggingService LoggingService { get; protected set; }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
@@ -60,6 +63,7 @@
 
         public virtual void OnSleep()
         {
+            Clean();
         }
 
         public virtual void OnAppearing()
@@ -68,18 +72,13 @@
 
         public virtual void OnDisappearing()
         {
+            Clean();
         }
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
+        protected virtual void Clean()
         {
         }
     }

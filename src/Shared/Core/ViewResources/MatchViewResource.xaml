@@ -45,7 +45,6 @@
     </Style>
 
     <Style x:Key="ScoreContainer" TargetType="StackLayout">
-        <Setter Property="WidthRequest" Value="32" />
     </Style>
 
     <Style

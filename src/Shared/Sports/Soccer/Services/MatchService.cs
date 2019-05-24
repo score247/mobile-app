@@ -9,6 +9,7 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
     using Refit;
 
     public interface ISoccerMatchApi
@@ -19,6 +20,7 @@
 
     public class MatchService : BaseService, IMatchService
     {
+        private const string PushMatchesMethod = "PushMatchEvent";
         private readonly ILocalStorage cacheService;
         private readonly IApiService apiService;
 
@@ -36,7 +38,7 @@
         {
             try
             {
-                var cacheExpiration = dateRange.FromDate < DateTime.Now
+                var cacheExpiration = dateRange.ToDate <= DateTime.Today
                    ? cacheService.CacheDuration(CacheDurationTerm.Long)
                    : cacheService.CacheDuration(CacheDurationTerm.Short);
                 var fromDateText = dateRange.FromDate.ToApiFormat();
@@ -46,8 +48,17 @@
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatches(settings, fromDateText, toDateText),
-                        forceFetchNewData,
-                        cacheExpiration);
+                        (offset) =>
+                        {
+                            if (forceFetchNewData)
+                            {
+                                return true;
+                            }
+
+                            var elapsed = DateTimeOffset.Now - offset;
+
+                            return elapsed > cacheExpiration;
+                        });
             }
             catch (Exception ex)
             {
@@ -55,6 +66,16 @@
 
                 return Enumerable.Empty<IMatch>();
             }
+        }
+
+        public void SubscribeMatches(
+            HubConnection hubConnection,
+            Action<string, Dictionary<string, MatchPayload>> handler)
+        {
+            hubConnection.On<int, Dictionary<string, MatchPayload>>(PushMatchesMethod, (sportId, payload) =>
+            {
+                handler.Invoke(sportId.ToString(), payload);
+            });
         }
 
         private async Task<IEnumerable<Match>> GetMatches(UserSettings settings, string fromDateText, string toDateText)

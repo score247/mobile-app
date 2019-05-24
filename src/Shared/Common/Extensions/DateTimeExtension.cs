@@ -10,6 +10,9 @@
         public static string ToShortDayMonth(this DateTime value)
             => value.ToString("dd MMM");
 
+        public static string ToTimeWithoutSecond(this DateTime value)
+            => value.ToString("HH:mm");
+
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 
         public static DateTime EndOfDay(this DateTime value) => value.AddDays(1).AddMilliseconds(-1);

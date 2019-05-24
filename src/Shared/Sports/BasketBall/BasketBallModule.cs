@@ -2,7 +2,6 @@
 {
     using LiveScore.Basketball.Services;
     using LiveScore.Basketball.Views.Templates;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
     using Prism.Ioc;

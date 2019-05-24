@@ -1,9 +1,9 @@
 namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 {
+    using System;
     using LiveScore.Core.Controls.DateBar.Converters;
     using LiveScore.Core.Controls.DateBar.Models;
     using LiveScore.Core.Tests.Fixtures;
-    using System;
     using Xamarin.Forms;
     using Xunit;
 

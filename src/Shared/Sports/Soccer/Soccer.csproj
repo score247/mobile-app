@@ -4,6 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>LiveScore.Soccer</RootNamespace>
     <AssemblyName>LiveScore.Soccer</AssemblyName>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>pdbonly</DebugType>
@@ -15,12 +16,17 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Views\" />
     <Folder Include="Views\Templates\" />
     <Folder Include="Models\" />
     <Folder Include="Models\Teams\" />
+    <Folder Include="Converters\">
+    </Folder>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -33,7 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

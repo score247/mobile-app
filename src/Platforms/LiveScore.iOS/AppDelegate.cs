@@ -22,12 +22,12 @@ namespace LiveScore.iOS
 
             var loggingService = application.Container.Resolve<ILoggingService>();
 
-            Runtime.MarshalManagedException += (sender, args) =>
+            Runtime.MarshalManagedException += (_, args) =>
             {
                 loggingService.LogError(args.Exception);
             };
 
-            Runtime.MarshalObjectiveCException += (sender, args) =>
+            Runtime.MarshalObjectiveCException += (_, args) =>
             {
                 loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
             };
@@ -37,12 +37,14 @@ namespace LiveScore.iOS
     }
 
 #pragma warning disable S101 // Types should be named in PascalCase
+
     public class iOSInitializer : IPlatformInitializer
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations           
+            // Register any platform specific implementations
         }
     }
+
 #pragma warning restore S101 // Types should be named in PascalCase
 }

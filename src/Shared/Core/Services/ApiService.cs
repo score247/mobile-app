@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using LiveScore.Common.Configuration;
-    using Refit;
     using System;
     using System.Threading.Tasks;
+    using LiveScore.Common.Configuration;
+    using Refit;
 
     public interface IApiService
     {

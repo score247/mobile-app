@@ -94,7 +94,8 @@ namespace LiveScore.Core.Tests.Mocks
             public void StartTimer(TimeSpan interval, Func<bool> callback)
             {
                 Timer timer = null;
-                TimerCallback onTimeout = o => BeginInvokeOnMainThread(() => {
+                TimerCallback onTimeout = o => BeginInvokeOnMainThread(() =>
+                {
                     if (callback())
                         return;
 

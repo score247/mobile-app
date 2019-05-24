@@ -1,57 +1,65 @@
 namespace Scores.Tests.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Common.Configuration;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Core.ViewModels;
     using LiveScore.Score.ViewModels;
+    using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
+    using NSubstitute.ExceptionExtensions;
     using Xunit;
 
-    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>, IDisposable
+    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
         private readonly IList<IMatch> matchData;
         private readonly CompareLogic comparer;
+        private readonly Fixture specimens;
+        private readonly IEnumerable<MatchItemSourceViewModel> matchItemViewModels;
+        private readonly FakeHubConnection hubConnection;
 
-        public ScoresViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
+        public ScoresViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            comparer = viewModelBaseFixture.CommonFixture.Comparer;
-
-            matchData = viewModelBaseFixture.CommonFixture.Fixture
+            specimens = baseFixture.CommonFixture.Specimens;
+            comparer = baseFixture.CommonFixture.Comparer;
+            matchData = baseFixture.CommonFixture.Specimens
                 .CreateMany<IMatch>().ToList();
-
             matchService = Substitute.For<IMatchService>();
 
-            viewModelBaseFixture.DepdendencyResolver
+            baseFixture.DepdendencyResolver
                .Resolve<IMatchService>(Arg.Any<string>())
                .Returns(matchService);
 
+            hubConnection = Substitute.For<FakeHubConnection>();
+            baseFixture.HubConnectionBuilder
+                .WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub")
+                .Build()
+                .Returns(hubConnection);
+
+            matchItemViewModels = matchData.Select(match => new MatchItemSourceViewModel(
+                    match,
+                    baseFixture.NavigationService, baseFixture.DepdendencyResolver,
+                    baseFixture.EventAggregator,
+                    hubConnection));
+
             viewModel = new ScoresViewModel(
-                viewModelBaseFixture.NavigationService,
-                viewModelBaseFixture.DepdendencyResolver,
-                viewModelBaseFixture.EventAggregator);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            viewModel.Dispose();
+                baseFixture.NavigationService,
+                baseFixture.DepdendencyResolver,
+                baseFixture.EventAggregator,
+                baseFixture.HubConnectionBuilder);
         }
 
         [Fact]
@@ -103,7 +111,7 @@ namespace Scores.Tests.ViewModels
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
@@ -120,35 +128,59 @@ namespace Scores.Tests.ViewModels
             viewModel.OnNavigatingTo(null);
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
         [Fact]
-        public void OnPublishingDateBarItemSelectedEvent_Always_LoadDataByDateRange()
+        public void OnAppearing_PublishDateBarItemSelectedEvent_LoadDataByDateRange()
         {
             // Arrange
-            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
             matchService.GetMatches(
                   viewModel.SettingsService.UserSettings,
                   Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
                   false).Returns(matchData);
-            viewModel.OnNavigatingTo(null);
+            viewModel.OnAppearing();
 
             // Act
             viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).ToList();
+            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        }
+
+        [Fact]
+        public void OnAppearing_Always_CallMatchServiceToSubscribeChanged()
+        {
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            matchService.Received(1)
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+        }
+
+        [Fact]
+        public async Task OnAppearing_OnException_WriteLog()
+        {
+            // Arrange
+            hubConnection
+                .StartWithKeepAlive(TimeSpan.FromSeconds(30), Arg.Any<CancellationToken>())
+                .ThrowsForAnyArgs(new Exception("exception"));
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            await viewModel.LoggingService.Received(1).LogErrorAsync(Arg.Any<Exception>());
         }
 
         [Fact]
         public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
         {
             // Arrange
-            viewModel.MatchItemSource = new ObservableCollection<IGrouping<dynamic, IMatch>>(matchData.GroupBy(match => match));
-            viewModel.OnNavigatingTo(null);
+            viewModel.OnAppearing();
 
             // Act
             viewModel.OnDisappearing();
@@ -159,10 +191,21 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
+        public void OnResume_Always_CallMatchServiceToSubscribeChanged()
+        {
+            // Act
+            viewModel.OnResume();
+
+            // Assert
+            matchService.Received(1)
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+        }
+
+        [Fact]
         public void OnResume_SelectedDateIsNotToday_NavigateToHome()
         {
             // Arrange
-            viewModel.SelectedDate = DateTime.Today.AddDays(1);
+            viewModel.SelectedDate = DateTime.Today.AddDays(10);
             var navigationService = viewModel.NavigationService as FakeNavigationService;
 
             // Act
@@ -170,6 +213,65 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
+        }
+
+        [Fact]
+        public void OnMatchChanged_SportIdIsCurrent_ChangeMatchData()
+        {
+            // Arrange
+            const string sportId = "1";
+            InitViewModelData(
+                 out IMatchResult matchResult,
+                 out IEnumerable<ITimeLine> matchTimelines,
+                 out Dictionary<string, MatchPayload> matchPayloads);
+
+            // Act
+            viewModel.OnMatchesChanged(sportId, matchPayloads);
+
+            // Assert
+            var expectedMatch = viewModel.MatchItemSource
+                .SelectMany(g => g)
+                .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
+
+            Assert.Equal(expectedMatch.MatchResult, matchResult);
+            Assert.Equal(expectedMatch.TimeLines, matchTimelines);
+        }
+
+        [Fact]
+        public void OnMatchChanged_SportIdIsNotCurrent_NotChangeMatchData()
+        {
+            // Arrange
+            const string sportId = "2";
+            InitViewModelData(
+                out IMatchResult matchResult,
+                out IEnumerable<ITimeLine> matchTimelines,
+                out Dictionary<string, MatchPayload> matchPayloads);
+
+            // Act
+            viewModel.OnMatchesChanged(sportId, matchPayloads);
+
+            // Assert
+            var expectedMatch = viewModel.MatchItemSource
+                .SelectMany(g => g)
+                .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
+
+            Assert.NotEqual(expectedMatch.MatchResult, matchResult);
+            Assert.NotEqual(expectedMatch.TimeLines, matchTimelines);
+        }
+
+        private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimeLine> matchTimelines, out Dictionary<string, MatchPayload> matchPayloads)
+        {
+            matchResult = specimens.Create<IMatchResult>();
+            matchTimelines = specimens.CreateMany<ITimeLine>();
+            matchPayloads = new Dictionary<string, MatchPayload>
+            {
+                { matchData[0].Id, new MatchPayload {
+                    MatchResult = matchResult,
+                    Timelines = matchTimelines
+                } },
+            };
+            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), false).Returns(matchData);
+            viewModel.OnNavigatingTo(null);
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 {
-    using LiveScore.Core.Controls.DateBar.Converters;
     using System;
+    using LiveScore.Core.Controls.DateBar.Converters;
     using Xunit;
 
     public class ShortDayOfWeekConverterTests

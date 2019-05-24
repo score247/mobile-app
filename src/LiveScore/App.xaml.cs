@@ -6,6 +6,7 @@ using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
+using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -19,6 +20,7 @@ using LiveScore.Soccer;
 using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using Microsoft.AspNetCore.SignalR.Client;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -83,6 +85,8 @@ namespace LiveScore
             containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
+
+            containerRegistry.RegisterSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
         }
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
@@ -100,10 +104,12 @@ namespace LiveScore
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
+            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
             ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
         }
 

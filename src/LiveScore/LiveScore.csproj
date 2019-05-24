@@ -5,6 +5,7 @@
     <NeutralLanguage>
     </NeutralLanguage>
     <SonarQubeTestProject>False</SonarQubeTestProject>
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
@@ -12,10 +13,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LiveXAML" Version="2.1.70" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

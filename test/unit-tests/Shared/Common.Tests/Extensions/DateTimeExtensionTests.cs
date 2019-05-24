@@ -39,7 +39,7 @@
             var expected = "2019-04-22T12:00:00+00:00";
 
             // Act
-            var actual = new DateTime(2019, 4, 22, 12, 0,0, DateTimeKind.Utc).ToApiFormat();
+            var actual = new DateTime(2019, 4, 22, 12, 0, 0, DateTimeKind.Utc).ToApiFormat();
 
             // Assert
             Assert.Equal(expected, actual);

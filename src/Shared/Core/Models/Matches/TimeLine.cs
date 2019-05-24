@@ -16,6 +16,8 @@
 
         string MatchClock { get; }
 
+        int StoppageTime { get; }
+
         string Team { get; }
 
         int Period { get; }
@@ -53,6 +55,8 @@
 
         public string MatchClock { get; set; }
 
+        public int StoppageTime { get; set; }
+
         public string Team { get; set; }
 
         public int Period { get; set; }
@@ -82,6 +86,7 @@
         public string Description { get; set; }
 
         public string Outcome { get; set; }
+
     }
 
     public class Commentary

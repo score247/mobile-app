@@ -6,6 +6,8 @@
     <IsPackable>false</IsPackable>
 
     <SonarQubeTestProject>True</SonarQubeTestProject>
+
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

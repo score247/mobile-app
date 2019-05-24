@@ -1,5 +1,9 @@
-﻿namespace LiveScore.Core.Enumerations
+﻿
+namespace LiveScore.Core.Enumerations
 {
+    using PropertyChanged;
+
+    [AddINotifyPropertyChangedInterface]
     public class MatchStatus : Enumeration
     {
         //not_started – The match is scheduled to be played
@@ -58,7 +62,7 @@
         public static readonly MatchStatus AwaitingExtraTimeStatus = new MatchStatus(AwaitingExtraTime, nameof(AwaitingExtraTime));
 
         //interrupted – The match has been interrupted
-        public const string Interrupted = "not_stainterruptedrted";
+        public const string Interrupted = "interrupted";
 
         public static readonly MatchStatus InterruptedStatus = new MatchStatus(Interrupted, nameof(Interrupted));
 
@@ -118,9 +122,9 @@
         public static readonly MatchStatus StartDelayedStatus = new MatchStatus(StartDelayed, nameof(StartDelayed));
 
         //canceled – The match has been canceled and will not be played
-        public const string Canceled = "canceled";
+        public const string Cancelled = "cancelled";
 
-        public static readonly MatchStatus CanceledStatus = new MatchStatus(Canceled, nameof(Canceled));
+        public static readonly MatchStatus CancelledStatus = new MatchStatus(Cancelled, nameof(Cancelled));
 
         public MatchStatus()
         {
@@ -131,8 +135,22 @@
         {
         }
 
-        public bool IsLiveOrNotStarted => Value == NotStarted || Value == Live;
+        public bool IsNotStarted => Value == NotStarted;
 
-        public bool IsClosed => !IsLiveOrNotStarted;
+        public bool IsLive => Value == Live;
+
+        public bool IsClosed => Value == Closed;
+
+        public bool IsFirstHalf => Value == FirstHaft;
+
+        public bool IsSecondHalf => Value == SecondHaft;
+
+        public bool IsFirstHalfExtra => Value == FirstHaftExtra;
+
+        public bool IsSecondHalfExtra => Value == SecondHaftExtra;
+
+        public bool NotShowScore => Value == NotStarted || Value == Cancelled || Value == Postponed || Value == StartDelayed;
+
+        public bool ShowScore => !NotShowScore;
     }
 }

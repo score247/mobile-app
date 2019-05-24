@@ -1,5 +1,8 @@
 ﻿namespace LiveScore.Core.Tests.Controls.DateBar.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
@@ -10,9 +13,6 @@
     using NSubstitute;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using Xunit;
 
     public class DateBarViewModelTests : IClassFixture<ViewModelBaseFixture>, IDisposable

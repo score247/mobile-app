@@ -1,10 +1,10 @@
 ﻿namespace Soccer.Tests.Services
 {
+    using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Services;
     using NSubstitute;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class LeagueServiceTests

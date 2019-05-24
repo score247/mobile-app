@@ -1,10 +1,10 @@
 namespace LiveScore.Core.Tests.Services
 {
+    using System.Collections.Generic;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models;
     using LiveScore.Core.Services;
-    using System.Collections.Generic;
     using Xunit;
 
     public class SportServiceTests

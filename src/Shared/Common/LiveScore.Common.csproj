@@ -6,6 +6,7 @@
         </NeutralLanguage>
         <AssemblyName>LiveScore.Common</AssemblyName>
         <RootNamespace>LiveScore.Common</RootNamespace>
+        <Configurations>Debug;Release;Test</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
@@ -14,6 +15,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+      <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
@@ -25,12 +29,13 @@
         <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
         <PackageReference Include="SharpRaven" Version="2.4.0" />
         <PackageReference Include="Fanex.Logging" Version="2.0.0" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="akavache" Version="6.5.1" />
         <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Converters\InverseBoolConverter.cs" />

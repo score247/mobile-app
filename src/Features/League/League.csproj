@@ -5,6 +5,7 @@
         <RootNamespace>LiveScore.League</RootNamespace>
         <AssemblyName>LiveScore.League</AssemblyName>
         <SonarQubeExclude>True</SonarQubeExclude>
+        <Configurations>Debug;Release;Test</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>
@@ -13,11 +14,14 @@
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+      <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
         <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
         <PackageReference Include="Refit" Version="4.6.107" />
-        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
+        <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>

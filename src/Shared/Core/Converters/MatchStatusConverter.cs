@@ -1,29 +1,9 @@
 ﻿namespace LiveScore.Core.Converters
 {
-    using System;
-    using System.Globalization;
-    using LiveScore.Common.LangResources;
-    using LiveScore.Core.Enumerations;
-    using Xamarin.Forms;
+    using LiveScore.Core.Models.Matches;
 
-    public class MatchStatusConverter : IValueConverter
+    public interface IMatchStatusConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            var status = (MatchStatus)value;
-            var convertStatus = string.Empty;
-
-            if (status != null)
-            {
-                convertStatus = status.IsClosed ? AppResources.FullTime : value.ToString();
-            }
-
-            return convertStatus;
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return (MatchStatus)value;
-        }
+        string BuildStatus(IMatch match);
     }
 }

@@ -133,7 +133,7 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = MatchStatus.InterruptedStatus;
 
             // Assert
-            Assert.Equal("not_stainterruptedrted", actual.Value);
+            Assert.Equal("interrupted", actual.Value);
             Assert.Equal("Interrupted", actual.DisplayName);
         }
 
@@ -256,17 +256,6 @@ namespace LiveScore.Core.Tests.Enumerations
             // Assert
             Assert.Equal("start_delayed", actual.Value);
             Assert.Equal("StartDelayed", actual.DisplayName);
-        }
-
-        [Fact]
-        public void CanceledStatus_Always_CreateCorrectType()
-        {
-            // Act
-            var actual = MatchStatus.CanceledStatus;
-
-            // Assert
-            Assert.Equal("canceled", actual.Value);
-            Assert.Equal("Canceled", actual.DisplayName);
         }
     }
 }

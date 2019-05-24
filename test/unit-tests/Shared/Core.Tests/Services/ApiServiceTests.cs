@@ -1,10 +1,10 @@
 namespace LiveScore.Core.Tests.Services
 {
+    using System.Net.Http;
+    using System.Threading.Tasks;
     using LiveScore.Core.Services;
     using NSubstitute;
     using Refit;
-    using System.Net.Http;
-    using System.Threading.Tasks;
     using Xunit;
 
     public interface IMockApi
@@ -29,7 +29,7 @@ namespace LiveScore.Core.Tests.Services
             var httpClient = (HttpClient)mockApi.GetType().GetProperty("Client").GetValue(mockApi);
 
             // Assert
-            Assert.Equal("https://testing2.nexdev.net/Main/api", httpClient.BaseAddress.ToString());
+            Assert.Equal("https://testing2.nexdev.net/V1/api", httpClient.BaseAddress.ToString());
         }
 
         [Fact]

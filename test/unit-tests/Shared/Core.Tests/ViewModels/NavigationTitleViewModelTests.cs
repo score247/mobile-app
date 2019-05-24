@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Core.Tests.ViewModels
 {
+    using System.Threading.Tasks;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class NavigationTitleViewModelTests : IClassFixture<ViewModelBaseFixture>

@@ -1,6 +1,11 @@
 ﻿namespace LiveScore.Core.Tests.Fixtures
 {
+    using System;
+    using System.Threading.Tasks;
     using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
+    using Microsoft.AspNetCore.SignalR.Protocol;
+    using Microsoft.Extensions.Logging;
     using NSubstitute;
     using Prism.Behaviors;
     using Prism.Common;
@@ -8,7 +13,6 @@
     using Prism.Ioc;
     using Prism.Logging;
     using Prism.Navigation;
-    using System.Threading.Tasks;
 
     public class ViewModelBaseFixture
     {
@@ -19,7 +23,7 @@
             EventAggregator = new EventAggregator();
             DepdendencyResolver = Substitute.For<IDependencyResolver>();
             DepdendencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
-
+            HubConnectionBuilder = Substitute.For<IHubConnectionBuilder>();
             NavigationService = new FakeNavigationService();
         }
 
@@ -32,6 +36,19 @@
         public AppSettingsFixture AppSettingsFixture { get; }
 
         public CommonFixture CommonFixture { get; set; }
+
+        public IHubConnectionBuilder HubConnectionBuilder { get; set; }
+    }
+
+    public class FakeHubConnection : HubConnection
+    {
+        public FakeHubConnection() : base(
+            Substitute.For<IConnectionFactory>(),
+            Substitute.For<IHubProtocol>(),
+            Substitute.For<IServiceProvider>(),
+            Substitute.For<ILoggerFactory>())
+        {
+        }
     }
 
     public class FakeNavigationService : PageNavigationService
@@ -49,6 +66,8 @@
 
         public INavigationParameters Parameters { get; private set; }
 
+        public bool IsGoBack { get; private set; }
+
         public FakeNavigationService() : base(null, null, null, null)
         {
         }
@@ -60,6 +79,14 @@
             UseModalNavigation = useModalNavigation;
             Parameters = parameters;
 
+            return Task.FromResult<INavigationResult>(new NavigationResult());
+        }
+
+        protected override Task<INavigationResult> GoBackInternal(INavigationParameters parameters, bool? useModalNavigation, bool animated)
+        {
+            UseModalNavigation = useModalNavigation;
+            Parameters = parameters;
+            IsGoBack = true;
             return Task.FromResult<INavigationResult>(new NavigationResult());
         }
     }
