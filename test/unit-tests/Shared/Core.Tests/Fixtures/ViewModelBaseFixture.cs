@@ -66,6 +66,8 @@
 
         public INavigationParameters Parameters { get; private set; }
 
+        public bool IsGoBack { get; private set; }
+
         public FakeNavigationService() : base(null, null, null, null)
         {
         }
@@ -77,6 +79,14 @@
             UseModalNavigation = useModalNavigation;
             Parameters = parameters;
 
+            return Task.FromResult<INavigationResult>(new NavigationResult());
+        }
+
+        protected override Task<INavigationResult> GoBackInternal(INavigationParameters parameters, bool? useModalNavigation, bool animated)
+        {
+            UseModalNavigation = useModalNavigation;
+            Parameters = parameters;
+            IsGoBack = true;
             return Task.FromResult<INavigationResult>(new NavigationResult());
         }
     }

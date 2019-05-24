@@ -82,7 +82,7 @@
                 var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
                 var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
 
-                if (currentInjuryTime > annoucedInjuryTime)
+                if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
                 {
                     displayInjuryTime = annoucedInjuryTime;
                 }

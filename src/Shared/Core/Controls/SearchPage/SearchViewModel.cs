@@ -36,31 +36,33 @@
         public SearchViewModel(INavigationService navigationService, IDependencyResolver serviceLocator, IEventAggregator eventAggregator)
              : base(navigationService, serviceLocator, eventAggregator)
         {
+            CancelCommand = new DelegateAsyncCommand(OnCancelCommandExecuted);
+            TextChangeCommand = new DelegateCommand(OnTextChangeCommandExecuted);
         }
 
         public string SearchText { get; set; }
 
         public ObservableCollection<SearchSuggestion> SuggestionItemSource { get; set; }
 
-        public DelegateAsyncCommand CancelCommand => new DelegateAsyncCommand(OnCancelCommandExecuted);
+        public DelegateAsyncCommand CancelCommand { get; }
+
+        public DelegateCommand TextChangeCommand { get; }
 
         private async Task OnCancelCommandExecuted()
         {
             await NavigationService.GoBackAsync(useModalNavigation: true);
         }
 
-        public DelegateCommand TextChangeCommand => new DelegateCommand(OnTextChangeCommandExecuted);
-
         private void OnTextChangeCommandExecuted()
         {
             if (string.IsNullOrEmpty(SearchText))
             {
-                SuggestionItemSource.Clear();
+                SuggestionItemSource?.Clear();
                 return;
             }
 
             var searchSuggestions = Suggestions
-                    .Where(s => s.ToLowerInvariant().Contains(SearchText.ToLowerInvariant()))
+                    .Where(s => s.IndexOf(SearchText, System.StringComparison.InvariantCultureIgnoreCase) >= 0)
                     .Select(s => new SearchSuggestion { Name = s })
                     .OrderBy(s => s.Name);
 
