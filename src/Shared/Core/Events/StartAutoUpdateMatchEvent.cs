@@ -1,8 +1,7 @@
 ﻿namespace LiveScore.Core.Events
 {
-    using System;
-    using Prism.Events;
     using LiveScore.Core.Services;
+    using Prism.Events;
 
     public class StartAutoUpdateMatchEvent : PubSubEvent<IBackgroundJob>
     {

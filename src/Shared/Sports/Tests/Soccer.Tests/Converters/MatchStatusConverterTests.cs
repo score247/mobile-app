@@ -1,13 +1,11 @@
 namespace Soccer.Tests.Converters
 {
+    using System;
+    using System.Collections.Generic;
     using LiveScore.Common.LangResources;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Converters;
-    using NSubstitute;
-    using System;
-    using System.Collections.Generic;
     using Xunit;
 
     public class MatchStatusConverterTests

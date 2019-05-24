@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using LiveScore.iOS.Renderers;
+using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using UIKit;
-using System.Linq;
-using System;
 
 [assembly: ExportRenderer(typeof(SearchBar), typeof(CustomSearchBarRenderer))]
 namespace LiveScore.iOS.Renderers

@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using Polly;
     using Polly.Retry;
-    using Polly.Wrap;
     using Refit;
 
     public interface IApiPolicy

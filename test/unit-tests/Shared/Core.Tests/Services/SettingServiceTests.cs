@@ -1,9 +1,9 @@
-﻿using LiveScore.Common.Services;
+﻿using System;
+using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Settings;
 using LiveScore.Core.Services;
 using NSubstitute;
-using System;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Services

@@ -1,5 +1,10 @@
 namespace Scores.Tests.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Configuration;
@@ -14,11 +19,6 @@ namespace Scores.Tests.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>

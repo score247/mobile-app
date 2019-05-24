@@ -1,12 +1,6 @@
 ﻿namespace LiveScore.Core.Tests.Converters
 {
-    using AutoFixture;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Tests.Fixtures;
-    using NSubstitute;
-    using System;
     using Xunit;
 
     public class MatchStatusConverterTests : IClassFixture<CommonFixture>

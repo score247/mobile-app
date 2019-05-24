@@ -1,12 +1,12 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
     using System.Collections.Generic;
+    using System.Linq;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using System.Linq;
 
     public class MatchStatusConverter : IMatchStatusConverter
     {

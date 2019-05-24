@@ -2,8 +2,6 @@
 using LiveScore.ViewModels;
 using NSubstitute;
 using Prism.Navigation;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace LiveScore.Tests.ViewModels
 {

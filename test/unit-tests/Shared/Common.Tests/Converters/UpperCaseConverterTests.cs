@@ -15,7 +15,7 @@
         [Theory]
         [InlineData("upper")]
         [InlineData("Upper")]
-        public void Convert_ReturnUpperString(string value) 
+        public void Convert_ReturnUpperString(string value)
         {
             // Arrange
             var expected = "UPPER";

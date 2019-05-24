@@ -1,5 +1,8 @@
 ﻿namespace Soccer.Tests.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
@@ -9,12 +12,8 @@
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Services;
-    using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class MatchServiceTests : IClassFixture<CommonFixture>

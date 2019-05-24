@@ -1,11 +1,10 @@
 ﻿namespace LiveScore.Common.Tests.Services
 {
+    using System;
+    using System.Threading.Tasks;
     using Akavache;
     using LiveScore.Common.Services;
     using NSubstitute;
-    using Splat;
-    using System;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class LocalStorageTests

@@ -1,11 +1,8 @@
-﻿using LiveScore.Core.Services;
-using Refit;
-using System;
-using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using LiveScore.Core.Services;
+using Refit;
 using Xunit;
 
 namespace LiveScore.Core.Tests.Services
@@ -28,7 +25,7 @@ namespace LiveScore.Core.Tests.Services
             await apiPolicy.RetryAndTimeout(() => SumFunc(1, 2));
 
             // Assert
-            
+
         }
 
         [Theory]

@@ -1,5 +1,7 @@
 ﻿namespace LiveScore.Core.Tests.Fixtures
 {
+    using System;
+    using System.Threading.Tasks;
     using LiveScore.Core.Services;
     using Microsoft.AspNetCore.SignalR.Client;
     using Microsoft.AspNetCore.SignalR.Protocol;
@@ -11,8 +13,6 @@
     using Prism.Ioc;
     using Prism.Logging;
     using Prism.Navigation;
-    using System;
-    using System.Threading.Tasks;
 
     public class ViewModelBaseFixture
     {

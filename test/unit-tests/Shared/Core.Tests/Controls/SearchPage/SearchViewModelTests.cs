@@ -1,16 +1,11 @@
 namespace LiveScore.Core.Tests.Controls.SearchPage
 {
-    using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.SearchPage;
-    using LiveScore.Core.Tests.Fixtures;
-    using NSubstitute;
-    using Prism.Events;
-    using Prism.Navigation;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Core.Controls.SearchPage;
+    using LiveScore.Core.Tests.Fixtures;
     using Xunit;
 
     public class SearchViewModelTests : IClassFixture<ViewModelBaseFixture>

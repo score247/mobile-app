@@ -21,7 +21,10 @@ namespace LiveScore.Score.ViewModels
     using Prism.Events;
     using Prism.Navigation;
 
+#pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
+
     public class ScoresViewModel : ViewModelBase
+#pragma warning restore S2931 // Classes with "IDisposable" members should implement "IDisposable"
     {
         private const int HubKeepAliveInterval = 30;
         private readonly IMatchService MatchService;
@@ -119,7 +122,11 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
+#pragma warning disable S3168 // "async" methods should not return "void"
+
         private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadData(
             DateRange dateRange,

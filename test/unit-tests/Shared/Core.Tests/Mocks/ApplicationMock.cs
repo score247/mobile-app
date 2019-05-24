@@ -6,7 +6,7 @@ namespace LiveScore.Core.Tests.Mocks
     {
         public ApplicationMock()
         {
-            
+
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-namespace LiveScore.Core.ViewModels
+﻿namespace LiveScore.Core.ViewModels
 {
     using LiveScore.Core;
     using LiveScore.Core.Converters;

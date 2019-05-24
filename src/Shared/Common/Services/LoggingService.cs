@@ -18,7 +18,7 @@
     }
 
     public class LoggingService : ILoggingService
-    { 
+    {
         private readonly IEssentialsService deviceInfo;
 
         private IRavenClient ravenClient;

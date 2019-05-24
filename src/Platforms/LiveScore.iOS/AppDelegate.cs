@@ -1,15 +1,11 @@
-using LiveScore.iOS.Services;
-
 namespace LiveScore.iOS
 {
     using System;
     using CarouselView.FormsPlugin.iOS;
     using Common.Services;
     using Foundation;
-    using LiveScore.Core.Events;
     using ObjCRuntime;
     using Prism;
-    using Prism.Events;
     using Prism.Ioc;
     using UIKit;
 
