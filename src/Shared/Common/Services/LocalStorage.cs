@@ -53,10 +53,10 @@
         }
 
         public async Task<T> GetOrFetchValue<T>(string name, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
-        => await LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
+            => await LocalMachine.GetOrFetchObject(name, fetchFunc, absoluteExpiration);
 
         public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null)
-        => await LocalMachine.GetAndFetchLatest(name, fetchFunc, fetchPredicate, absoluteExpiration);
+            => await LocalMachine.GetAndFetchLatest(name, fetchFunc, fetchPredicate, absoluteExpiration);
 
         public void Shutdown()
         {

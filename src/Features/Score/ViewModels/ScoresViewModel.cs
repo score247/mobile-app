@@ -32,13 +32,14 @@ namespace LiveScore.Score.ViewModels
         public ScoresViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            IHubConnectionBuilder hubConnectionBuilder)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
             MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
-            matchHubConnection = new HubConnectionBuilder().WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build();
+            matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build();
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -62,12 +63,12 @@ namespace LiveScore.Score.ViewModels
 
         public override async void OnResume()
         {
-            await Initialize();
-
             if (SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
             }
+
+            await Initialize();
         }
 
         public override async void OnAppearing()
@@ -153,7 +154,7 @@ namespace LiveScore.Score.ViewModels
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
-        private void OnMatchesChanged(string sportId, Dictionary<string, MatchPayload> matchPayloads)
+        internal void OnMatchesChanged(string sportId, Dictionary<string, MatchPayload> matchPayloads)
         {
             if (sportId != SettingsService.CurrentSportType.Value)
             {

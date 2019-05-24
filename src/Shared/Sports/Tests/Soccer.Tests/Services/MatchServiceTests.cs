@@ -9,11 +9,11 @@
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -29,7 +29,7 @@
         public MatchServiceTests(CommonFixture commonFixture)
         {
             comparer = commonFixture.Comparer;
-            fixture = commonFixture.Fixture;
+            fixture = commonFixture.Specimens;
             mockCache = Substitute.For<ILocalStorage>();
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
@@ -50,38 +50,30 @@
             // Assert
             await mockCache.Received(1)
                 .GetAndFetchLatestValue(
-                    Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>());
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                    Arg.Any<Func<DateTimeOffset, bool>>(),
+                    null);
         }
 
         [Fact]
-        public async Task GetMatches_ThrowsException_InjectLoggingService()
+        public async Task GetMatches_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
             var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
-            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>())
-                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
-
-            // Act
-            await matchService.GetMatches(settings, dateRange);
-
-            // Assert
-            mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
-        }
-
-        [Fact]
-        public async Task GetMatches_ThrowsException_ShouldReturnEmptyList()
-        {
-            // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
-            var dateRange = new DateRange();
-            mockCache.GetAndFetchLatestValue(Arg.Any<string>(), Arg.Any<Func<Task<IEnumerable<Match>>>>(), (offset) => false, Arg.Any<DateTime>())
+            mockCache.GetAndFetchLatestValue(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                    Arg.Any<Func<DateTimeOffset, bool>>(),
+                    Arg.Any<DateTimeOffset>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
             var matches = await matchService.GetMatches(settings, dateRange);
 
             // Assert
+            mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
             Assert.Empty(matches);
         }
 
@@ -100,11 +92,11 @@
             mockCache.GetAndFetchLatestValue(
                 "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
-                (offset) => false,
-                Arg.Any<DateTime>()).Returns(expectedMatches);
+                Arg.Any<Func<DateTimeOffset, bool>>(),
+                null).Returns(expectedMatches);
 
             // Act
-            var actualMatches = await matchService.GetMatches(settings, dateRange);
+            var actualMatches = await matchService.GetMatches(settings, dateRange, true);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatches, actualMatches).AreEqual);

@@ -12,24 +12,24 @@
         public CommonFixture()
         {
             Comparer = new CompareLogic();
-            Fixture = new Fixture();
+            Specimens = new Fixture();
 
-            Fixture.Register<IMatch>(() => Fixture.Create<Match>());
-            Fixture.Register<ITeam>(() => Fixture.Create<Team>());
-            Fixture.Register<ITeamStatistic>(() => Fixture.Create<TeamStatistic>());
-            Fixture.Register<ICoach>(() => Fixture.Create<Coach>());
-            Fixture.Register<IPlayer>(() => Fixture.Create<Player>());
-            Fixture.Register<ITimeLine>(() => Fixture.Create<TimeLine>());
-            Fixture.Register<IMatchResult>(() => Fixture.Create<MatchResult>());
-            Fixture.Register<IMatchCondition>(() => Fixture.Create<MatchCondition>());
-            Fixture.Register<ILeague>(() => Fixture.Create<League>());
-            Fixture.Register<IVenue>(() => Fixture.Create<Venue>());
-            Fixture.Register<ILeagueCategory>(() => Fixture.Create<LeagueCategory>());
-            Fixture.Register<ILeagueRound>(() => Fixture.Create<LeagueRound>());
+            Specimens.Register<IMatch>(() => Specimens.Create<Match>());
+            Specimens.Register<ITeam>(() => Specimens.Create<Team>());
+            Specimens.Register<ITeamStatistic>(() => Specimens.Create<TeamStatistic>());
+            Specimens.Register<ICoach>(() => Specimens.Create<Coach>());
+            Specimens.Register<IPlayer>(() => Specimens.Create<Player>());
+            Specimens.Register<ITimeLine>(() => Specimens.Create<TimeLine>());
+            Specimens.Register<IMatchResult>(() => Specimens.Create<MatchResult>());
+            Specimens.Register<IMatchCondition>(() => Specimens.Create<MatchCondition>());
+            Specimens.Register<ILeague>(() => Specimens.Create<League>());
+            Specimens.Register<IVenue>(() => Specimens.Create<Venue>());
+            Specimens.Register<ILeagueCategory>(() => Specimens.Create<LeagueCategory>());
+            Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());
         }
 
         public CompareLogic Comparer { get; }
 
-        public Fixture Fixture { get; }
+        public Fixture Specimens { get; }
     }
 }

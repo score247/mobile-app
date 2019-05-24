@@ -56,6 +56,7 @@
                             }
 
                             var elapsed = DateTimeOffset.Now - offset;
+
                             return elapsed > cacheExpiration;
                         });
             }

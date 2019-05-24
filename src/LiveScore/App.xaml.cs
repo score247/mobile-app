@@ -20,6 +20,7 @@ using LiveScore.Soccer;
 using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using Microsoft.AspNetCore.SignalR.Client;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -84,6 +85,8 @@ namespace LiveScore
             containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
+
+            containerRegistry.RegisterSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
         }
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
