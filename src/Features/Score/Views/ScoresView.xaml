@@ -55,12 +55,12 @@
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
             VerticalOptions="FillAndExpand">
-            <ListView.Behaviors>
+           <!-- <ListView.Behaviors>
                 <b:EventToCommandBehavior
                     Command=""
                     EventArgsParameterPath="Item"
                     EventName="ItemTapped" />
-            </ListView.Behaviors>
+            </ListView.Behaviors>-->
         </ListView>
     </StackLayout>
 </ContentPage>
