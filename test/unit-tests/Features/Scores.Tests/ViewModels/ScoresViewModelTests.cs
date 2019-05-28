@@ -173,7 +173,7 @@ namespace Scores.Tests.ViewModels
             viewModel.OnAppearing();
 
             // Assert
-            await viewModel.LoggingService.Received(1).LogErrorAsync(Arg.Any<Exception>());
+            await viewModel.LoggingService.ReceivedWithAnyArgs(1).LogErrorAsync(Arg.Any<Exception>());
         }
 
         [Fact]
