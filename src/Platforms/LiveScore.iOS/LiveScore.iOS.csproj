@@ -161,6 +161,7 @@
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
+<MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|iPhone'">
     <DebugSymbols>true</DebugSymbols>
@@ -174,6 +175,7 @@
     <CodesignProvision>score247</CodesignProvision>
     <CodesignKey>iPhone Developer: Doan Nhat Phuong (8SX3QLS2R5)</CodesignKey>
     <MtouchArch>ARM64</MtouchArch>
+    <MtouchFastDev>true</MtouchFastDev>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
