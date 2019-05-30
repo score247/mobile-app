@@ -4,8 +4,8 @@ Library           AppiumLibrary
 
 *** Keywords ***
 Start Appium Server
-    Start Process    /usr/local/bin/appium    shell=True
-    Sleep    30S
+    Start Process    /usr/local/bin/appium --session-override    shell=True
+    Sleep    10s
 
 Open Application On Real Ios Device
     [Arguments]    ${deviceName}    ${udid}
@@ -21,12 +21,12 @@ Open Application On Simulator
 
 Init_Simulator
     [Arguments]    ${simulator_name}
-    Comment    Start Appium Server
+    Start Appium Server
     Open Application On Simulator    ${simulator_name}
 
 Init_Real Device
     [Arguments]    ${device_name}    ${udid}
-    Comment    Start Appium Server
+    Start Appium Server
     Open Application On Real Ios Device    ${device_name}    ${udid}
 
 Suite TearDown
