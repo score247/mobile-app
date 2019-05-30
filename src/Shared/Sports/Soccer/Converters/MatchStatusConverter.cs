@@ -77,7 +77,7 @@
 
             if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
             {
-                var periodEndTime = PeriodEndTimes[match.MatchResult.MatchStatus.Value];
+                PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
                 var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
                 var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
                 var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
