@@ -14,10 +14,10 @@ Score247 Documentation
 
     Database <dataflow/database>
     Push Event <dataflow/pushevent>
-    Live Match Clean Up Job <dataflow/livematchclean> 
-    Daily Fetch Data Job <dataflow/dailyfetchdata> 
+    Fetch Match Job <dataflow/fetchdata> 
     Auto Update Match Time Job <dataflow/autoupdatematchtime> 
-
+    Get Match By DateRange <dataflow/getmatchbydate> 
+    Get Live Match <dataflow/getlivematch> 
 .. .. toctree::
 ..    :caption: Scores
 ..    :maxdepth: 2
