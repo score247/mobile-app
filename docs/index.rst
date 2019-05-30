@@ -12,7 +12,10 @@ Score247 Documentation
    :caption: Data Flow
    :maxdepth: 2
 
+<<<<<<< refs/remotes/origin/master
     Database <dataflow/database>
+=======
+>>>>>>> Update docs for data flow
     Push Event <dataflow/pushevent>
     Fetch Match Job <dataflow/fetchdata> 
     Auto Update Match Time Job <dataflow/autoupdatematchtime> 
