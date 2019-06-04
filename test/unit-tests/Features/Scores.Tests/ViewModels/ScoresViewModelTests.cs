@@ -25,6 +25,7 @@ namespace Scores.Tests.ViewModels
     {
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
+        private readonly IHubService hubService;
         private readonly IList<IMatch> matchData;
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
@@ -38,16 +39,14 @@ namespace Scores.Tests.ViewModels
             matchData = baseFixture.CommonFixture.Specimens
                 .CreateMany<IMatch>().ToList();
             matchService = Substitute.For<IMatchService>();
+            hubService = Substitute.For<IHubService>();
 
             baseFixture.DepdendencyResolver
                .Resolve<IMatchService>(Arg.Any<string>())
                .Returns(matchService);
 
             hubConnection = Substitute.For<FakeHubConnection>();
-            baseFixture.HubConnectionBuilder
-                .WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub")
-                .Build()
-                .Returns(hubConnection);
+            hubService.BuildMatchHubConnection().Returns(hubConnection);
 
             matchItemViewModels = matchData.Select(match => new MatchViewModel(
                     match,
@@ -59,7 +58,7 @@ namespace Scores.Tests.ViewModels
                 baseFixture.NavigationService,
                 baseFixture.DepdendencyResolver,
                 baseFixture.EventAggregator,
-                null);
+                hubService);
         }
 
         [Fact]
@@ -113,6 +112,35 @@ namespace Scores.Tests.ViewModels
             // Assert
             var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        }
+
+        [Fact]
+        public async Task TappedMatchCommand_OnExecuting_CallNavigationService()
+        {
+            // Arrange
+            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
+            await viewModel.RefreshCommand.ExecuteAsync();
+            var matchViewModel = viewModel.MatchItemSource.SelectMany(group => group).FirstOrDefault();
+
+            // Act
+            await viewModel.TappedMatchCommand.ExecuteAsync(matchViewModel);
+
+            // Assert
+            var navService = viewModel.NavigationService as FakeNavigationService;
+            Assert.Equal("MatchDetailView", navService.NavigationPath);
+            Assert.Equal(matchViewModel.Match, navService.Parameters["Match"]);
+        }
+
+        [Fact]
+        public async Task ClickSearchCommand_OnExecuting_CallNavigationService()
+        {
+            // Act
+            await viewModel.ClickSearchCommand.ExecuteAsync();
+
+            // Assert
+            var navService = viewModel.NavigationService as FakeNavigationService;
+            Assert.Equal("SearchNavigationPage/SearchView", navService.NavigationPath);
+            Assert.True(navService.UseModalNavigation);
         }
 
         [Fact]
@@ -173,7 +201,7 @@ namespace Scores.Tests.ViewModels
             viewModel.OnAppearing();
 
             // Assert
-            await viewModel.LoggingService.ReceivedWithAnyArgs(1).LogErrorAsync(Arg.Any<Exception>());
+            await viewModel.LoggingService.ReceivedWithAnyArgs().LogErrorAsync(Arg.Any<Exception>());
         }
 
         [Fact]

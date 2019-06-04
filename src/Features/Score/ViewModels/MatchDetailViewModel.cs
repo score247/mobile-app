@@ -1,7 +1,7 @@
-﻿using LiveScore.Common.Extensions;
-using System;
-namespace LiveScore.Score.ViewModels
+﻿namespace LiveScore.Score.ViewModels
 {
+    using LiveScore.Common.Extensions;
+    using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
@@ -14,8 +14,11 @@ namespace LiveScore.Score.ViewModels
     using Prism.Events;
     using Prism.Navigation;
 
+#pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
+
     public class MatchDetailViewModel : ViewModelBase
     {
+        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
         private readonly HubConnection matchHubConnection;
         private CancellationTokenSource cancellationTokenSource;
 
@@ -78,7 +81,7 @@ namespace LiveScore.Score.ViewModels
 
             try
             {
-                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(30), cancellationTokenSource.Token);
+                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {
@@ -101,4 +104,6 @@ namespace LiveScore.Score.ViewModels
             return matchStatus.IsNotStarted ? string.Empty : score.ToString();
         }
     }
+
+#pragma warning restore S2931 // Classes with "IDisposable" members should implement "IDisposable"
 }

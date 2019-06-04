@@ -13,7 +13,6 @@ namespace LiveScore.Score.ViewModels
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
-    using LiveScore.Common.Configuration;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;

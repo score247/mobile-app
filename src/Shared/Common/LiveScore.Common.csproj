@@ -47,13 +47,6 @@
       <Compile Remove="Controls\TabStrip\TapStripHeader.xaml.cs" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Update="LangResources\AppResources.Designer.cs">
-            <DesignTime>True</DesignTime>
-            <AutoGen>True</AutoGen>
-            <DependentUpon>AppResources.resx</DependentUpon>
-        </Compile>
-    </ItemGroup>
-    <ItemGroup>
       <EmbeddedResource Remove="Controls\TabStrip\TabStrip.xaml" />
       <EmbeddedResource Remove="Controls\TabStrip\TapStripHeader.xaml" />
     </ItemGroup>
@@ -68,5 +61,12 @@
         <Folder Include="Converters\" />
         <Folder Include="Controls\Calendar\" />
         <Folder Include="Configuration\" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Update="LangResources\AppResources.Designer.cs">
+        <DesignTime>True</DesignTime>
+        <AutoGen>True</AutoGen>
+        <DependentUpon>AppResources.resx</DependentUpon>
+      </Compile>
     </ItemGroup>
 </Project>

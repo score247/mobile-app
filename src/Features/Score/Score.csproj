@@ -108,7 +108,5 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="Views\Templates\" />
-      <Folder Include="Models\">
-      </Folder>
     </ItemGroup>
 </Project>
