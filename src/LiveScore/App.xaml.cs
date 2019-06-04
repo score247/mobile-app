@@ -98,6 +98,7 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+            containerRegistry.RegisterSingleton<IHubService, HubService>();
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
         }
 

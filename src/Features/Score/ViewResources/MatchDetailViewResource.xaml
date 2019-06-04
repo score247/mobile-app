@@ -1,60 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="LiveScore.Score.ViewResources.MatchDetailViewResource">
-    <!-- Match Score -->
-    <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
-        <Setter Property="Direction" Value="Row" />
-        <Setter Property="AlignItems" Value="Stretch" />
-        <Setter Property="JustifyContent" Value="Center" />
-        <Setter Property="Padding" Value="0,20" />
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="LiveScore.Score.ViewResources.MatchDetailViewResource">
+    <Style x:Key="MatchGeneralInfoContainer" TargetType="StackLayout">
+        <Setter Property="Padding" Value="0, 10" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
-    <Style x:Key="MatchScoreFirstCol" TargetType="StackLayout">
+    <Style x:Key="MatchGeneralInfoHomeTeamContainer" TargetType="StackLayout">
         <Setter Property="Margin" Value="0,0,50,0" />
     </Style>
-    <Style x:Key="MatchScoreLastCol" TargetType="StackLayout">
-        <Setter Property="Margin" Value="50,0,0,0" />
+    
+    <Style x:Key="MatchGeneralInfoHomeTeam" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="End" />
+        <Setter Property="AlignItems" Value="Center" />
     </Style>
-    <Style x:Key="TeamLogoContainer" TargetType="StackLayout">
-        <Setter Property="WidthRequest" Value="40" />
-        <Setter Property="HeightRequest" Value="40" />
-        <Setter Property="HorizontalOptions" Value="Center" />
+    
+       <Style x:Key="MatchGeneralInfoTeamName" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="WidthRequest" Value="125" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
     </Style>
-    <Style x:Key="MatchScoreBox" TargetType="Button">
-        <Setter Property="HorizontalOptions" Value="Center" />
+    
+    <Style x:Key="MatchGeneralInfoHomeTeamName" TargetType="Label"
+           BasedOn="{StaticResource MatchGeneralInfoTeamName}">
+        <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
+        <Setter Property="HorizontalTextAlignment" Value="Right" />
+        <Setter Property="Margin" Value="0,0,5,0" />
+    </Style>
+    
+      <Style x:Key="MatchGeneralInfoAwayTeam" TargetType="FlexLayout">
+        <Setter Property="AlignItems" Value="Center" />
+    </Style>
+   
+    <Style x:Key="MatchGeneralInfoAwayTeamName" TargetType="Label"
+            BasedOn="{StaticResource MatchGeneralInfoTeamName}">
+        <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
+        <Setter Property="Margin" Value="5,0,0,0" />
+    </Style>
+    
+     <Style x:Key="MatchGeneralInfoTeamLogo" TargetType="Button">
+        <Setter Property="WidthRequest" Value="32" />
+        <Setter Property="HeightRequest" Value="32" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BorderRadius" Value="16" />
+    </Style>
+    
+    <Style x:Key="MatchGeneralInfoScore" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="Center" />
+        <Setter Property="AlignItems" Value="Center" />
+    </Style>
+    
+    <Style x:Key="MatchGeneralInfoScoreBox" TargetType="Button">
         <Setter Property="HeightRequest" Value="20" />
         <Setter Property="WidthRequest" Value="50" />
         <Setter Property="CornerRadius" Value="10" />
-        <Setter Property="Margin" Value="0,0,0,0" />
         <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
-
-    <Style x:Key="MatchScoreHomeTeam" TargetType="Label">
-        <Setter Property="Margin" Value="0,4,0,0" />
-        <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+    
+    <Style x:Key="MatchGeneralInfoStatusContainer" TargetType="StackLayout">
     </Style>
-
-    <Style x:Key="MatchScoreAwayTeam" TargetType="Label">
-        <Setter Property="Margin" Value="0,4,0,0" />
-        <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
-    </Style>
-
-    <Style x:Key="GeneralMatchStatusContainer" TargetType="StackLayout">
-        <Setter Property="Margin" Value="0,8,0,0" />
-    </Style>
-    <Style x:Key="GeneralMatchStatus" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    
+      <Style x:Key="MatchGeneralInfoStatusLiveIcon" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,2,4" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+        <Setter Property="WidthRequest" Value="15" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
-
-    <!-- SubTab -->
+    
+    <Style x:Key="MatchGeneralInfoStatus" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+   <!-- 
     <Style x:Key="SubTabContainer" TargetType="Frame">
         <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
         <Setter Property="Padding" Value="1" />
@@ -80,23 +100,19 @@
     <Style x:Key="SubTabActive" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
     </Style>
-
-    <!-- Group -->
     <Style x:Key="Group" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
-
     <Style x:Key="GroupName" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
     </Style>
-
     <Style x:Key="TopInfo" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="Padding" Value="0,0,0,5" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-    </Style>
+    </Style>-->
 </ResourceDictionary>

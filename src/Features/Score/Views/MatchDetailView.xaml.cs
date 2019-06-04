@@ -1,9 +1,10 @@
-﻿namespace LiveScore.Score.Views
-{
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+﻿using System;
+using System.Collections.Generic;
 
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+using Xamarin.Forms;
+
+namespace LiveScore.Score.Views
+{
     public partial class MatchDetailView : ContentPage
     {
         public MatchDetailView()

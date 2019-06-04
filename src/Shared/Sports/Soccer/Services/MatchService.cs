@@ -70,11 +70,11 @@
 
         public void SubscribeMatches(
             HubConnection hubConnection,
-            Action<string, Dictionary<string, MatchPayload>> handler)
+            Action<string, Dictionary<string, MatchPushEvent>> handler)
         {
-            hubConnection.On<int, Dictionary<string, MatchPayload>>(PushMatchesMethod, (sportId, payload) =>
+            hubConnection.On<string, Dictionary<string, MatchPushEvent>>(PushMatchesMethod, (sportId, payload) =>
             {
-                handler.Invoke(sportId.ToString(), payload);
+                handler.Invoke(sportId, payload);
             });
         }
 

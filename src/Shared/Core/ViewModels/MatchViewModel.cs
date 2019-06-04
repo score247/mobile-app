@@ -7,33 +7,36 @@
     using Prism.Events;
     using Prism.Navigation;
 
-    public class MatchItemSourceViewModel : ViewModelBase
+    public class MatchViewModel : ViewModelBase
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly HubConnection matchHubConnection;
+        private readonly bool showFullStatus = false;
 
-        public MatchItemSourceViewModel(
+        public MatchViewModel(
             IMatch match,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver,
             IEventAggregator eventAggregator,
-            HubConnection matchHubConnection)
+            HubConnection matchHubConnection,
+            bool showFullStatus = false)
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
             matchStatusConverter = DepdendencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
             Match = match;
-            ChangeMatchData();
+            this.showFullStatus = showFullStatus;
+            BuildMatchStatus();
             SubscribeMatchTimeChangeEvent();
         }
 
-        public IMatch Match { get; private set; }
+        public IMatch Match { get; protected set; }
 
         public string DisplayMatchStatus { get; private set; }
 
-        public void ChangeMatchData()
+        public void BuildMatchStatus()
         {
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match, showFullStatus);
         }
 
         private void SubscribeMatchTimeChangeEvent()
@@ -43,7 +46,7 @@
                 if (sportId == SettingsService.CurrentSportType.Value && Match.Id == matchId)
                 {
                     Match.MatchResult.MatchTime = matchTime;
-                    ChangeMatchData();
+                    BuildMatchStatus();
                 }
             });
         }

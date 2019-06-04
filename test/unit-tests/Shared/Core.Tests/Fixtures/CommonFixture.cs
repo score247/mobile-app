@@ -19,7 +19,7 @@
             Specimens.Register<ITeamStatistic>(() => Specimens.Create<TeamStatistic>());
             Specimens.Register<ICoach>(() => Specimens.Create<Coach>());
             Specimens.Register<IPlayer>(() => Specimens.Create<Player>());
-            Specimens.Register<ITimeLine>(() => Specimens.Create<TimeLine>());
+            Specimens.Register<ITimeline>(() => Specimens.Create<Timeline>());
             Specimens.Register<IMatchResult>(() => Specimens.Create<MatchResult>());
             Specimens.Register<IMatchCondition>(() => Specimens.Create<MatchCondition>());
             Specimens.Register<ILeague>(() => Specimens.Create<League>());

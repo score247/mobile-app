@@ -16,7 +16,7 @@
 
         IMatchResult MatchResult { get; set; }
 
-        IEnumerable<ITimeLine> TimeLines { get; set; }
+        IEnumerable<ITimeline> TimeLines { get; set; }
 
         IMatchCondition MatchCondition { get; set; }
 
@@ -34,8 +34,8 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchResult>))]
         public IMatchResult MatchResult { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimeLine>>))]
-        public IEnumerable<ITimeLine> TimeLines { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Timeline>>))]
+        public IEnumerable<ITimeline> TimeLines { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchCondition>))]
         public IMatchCondition MatchCondition { get; set; }

@@ -1,57 +1,104 @@
-﻿namespace LiveScore.Score.ViewModels
+﻿using LiveScore.Common.Extensions;
+using System;
+namespace LiveScore.Score.ViewModels
 {
     using System.Collections.Generic;
-    using Common.Controls.TabStrip;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Core.ViewModels;
     using LiveScore.Core;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Score.Views.Templates;
+    using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.SignalR.Client;
+    using Prism.Events;
     using Prism.Navigation;
 
-    public class MatchDetailViewModel : MatchViewModelBase
+    public class MatchDetailViewModel : ViewModelBase
     {
-        public MatchDetailViewModel(INavigationService navigationService, IDepdendencyResolver serviceLocator)
-            : base(navigationService, serviceLocator)
+        private readonly HubConnection matchHubConnection;
+        private CancellationTokenSource cancellationTokenSource;
+
+        public MatchDetailViewModel(
+            INavigationService navigationService,
+            IDependencyResolver dependencyResolver,
+            IEventAggregator eventAggregator,
+            IHubService hubService)
+            : base(navigationService, dependencyResolver, eventAggregator)
         {
-            MatchDetailItems = new List<TabModel>();
+            matchHubConnection = hubService.BuildMatchHubConnection();
         }
 
-        public List<TabModel> MatchDetailItems { get; set; }
+        public MatchViewModel MatchViewModel { get; private set; }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public string DisplayEventDateAndLeagueName { get; set; }
+
+        public string DisplayScore { get; set; }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
+            cancellationTokenSource = new CancellationTokenSource();
+
             if (parameters != null)
             {
                 var match = parameters["Match"] as IMatch;
-                MatchId = match.Id;
-            }
+                MatchViewModel = new MatchViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection, true);
+                BuildMatchDetailData(match);
 
-            if (MatchDetailItems.Count == 0)
-            {
-                InitMatchDetailItems(MatchId);
+                await StartListeningMatchHubEvent(match);
             }
         }
 
-        private void InitMatchDetailItems(string matchId)
+        protected override void Clean()
         {
-            MatchDetailItems = new List<TabModel>
+            base.Clean();
+
+            if (cancellationTokenSource != null)
             {
-                new TabModel { Name = "Odds", Template = new MatchOdds1x2Template() },
-                new TabModel
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource.Dispose();
+            }
+        }
+
+        private async Task StartListeningMatchHubEvent(IMatch match)
+        {
+            matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
+            {
+                if (sportId != SettingsService.CurrentSportType.Value || !payload.ContainsKey(match.Id))
                 {
-                    Name = "Trackers",
-                    Template = new MatchTrackerTemplate
-                    {
-                        BindingContext = new MatchViewModelBase(NavigationService, ServiceLocator) { MatchId = matchId }
-                    }
-                },
-                new TabModel { Name = "Stats", Template = new MatchStatsTemplate() },
-                new TabModel { Name = "LineUps", Template = new MatchLineUpsTemplate() },
-                new TabModel { Name = "H2H", Template = new MatchH2HAwayTeamTemplate() },
-                new TabModel { Name = "Table", Template = new MatchTableTotalFullListTemplate() },
-                new TabModel { Name = "Social", Template = new MatchSocialTemplate() },
-                new TabModel { Name = "TV Schedule", Template = new MatchInfoTemplate() }
-            };
+                    return;
+                }
+
+                var matchPayload = payload[match.Id];
+                match.MatchResult = matchPayload.MatchResult;
+                match.TimeLines = matchPayload.TimeLines;
+                MatchViewModel.BuildMatchStatus();
+                BuildMatchDetailData(match);
+            });
+
+            try
+            {
+                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(30), cancellationTokenSource.Token);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
+            }
+        }
+
+        private void BuildMatchDetailData(IMatch match)
+        {
+            var eventDate = match.EventDate.ToString("MMM dd, yyyy");
+            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
+
+            var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
+            var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
+            DisplayScore = $"{homeScore} - {awayScore}";
+        }
+
+        private static string BuildScore(MatchStatus matchStatus, int score)
+        {
+            return matchStatus.IsNotStarted ? string.Empty : score.ToString();
         }
     }
 }

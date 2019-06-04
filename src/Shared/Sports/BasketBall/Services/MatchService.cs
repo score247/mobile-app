@@ -30,7 +30,7 @@ namespace LiveScore.Basketball.Services
             return matches;
         }
 
-        public void SubscribeMatches(HubConnection hubConnection, Action<string, Dictionary<string, MatchPayload>> handler)
+        public void SubscribeMatches(HubConnection hubConnection, Action<string, Dictionary<string, MatchPushEvent>> handler)
         {
             throw new NotImplementedException();
         }

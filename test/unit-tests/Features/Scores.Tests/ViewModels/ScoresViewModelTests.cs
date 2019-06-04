@@ -28,7 +28,7 @@ namespace Scores.Tests.ViewModels
         private readonly IList<IMatch> matchData;
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
-        private readonly IEnumerable<MatchItemSourceViewModel> matchItemViewModels;
+        private readonly IEnumerable<MatchViewModel> matchItemViewModels;
         private readonly FakeHubConnection hubConnection;
 
         public ScoresViewModelTests(ViewModelBaseFixture baseFixture)
@@ -49,7 +49,7 @@ namespace Scores.Tests.ViewModels
                 .Build()
                 .Returns(hubConnection);
 
-            matchItemViewModels = matchData.Select(match => new MatchItemSourceViewModel(
+            matchItemViewModels = matchData.Select(match => new MatchViewModel(
                     match,
                     baseFixture.NavigationService, baseFixture.DepdendencyResolver,
                     baseFixture.EventAggregator,
@@ -59,7 +59,7 @@ namespace Scores.Tests.ViewModels
                 baseFixture.NavigationService,
                 baseFixture.DepdendencyResolver,
                 baseFixture.EventAggregator,
-                baseFixture.HubConnectionBuilder);
+                null);
         }
 
         [Fact]
@@ -158,7 +158,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -198,7 +198,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -222,8 +222,8 @@ namespace Scores.Tests.ViewModels
             const string sportId = "1";
             InitViewModelData(
                  out IMatchResult matchResult,
-                 out IEnumerable<ITimeLine> matchTimelines,
-                 out Dictionary<string, MatchPayload> matchPayloads);
+                 out IEnumerable<ITimeline> matchTimelines,
+                 out Dictionary<string, MatchPushEvent> matchPayloads);
 
             // Act
             viewModel.OnMatchesChanged(sportId, matchPayloads);
@@ -244,8 +244,8 @@ namespace Scores.Tests.ViewModels
             const string sportId = "2";
             InitViewModelData(
                 out IMatchResult matchResult,
-                out IEnumerable<ITimeLine> matchTimelines,
-                out Dictionary<string, MatchPayload> matchPayloads);
+                out IEnumerable<ITimeline> matchTimelines,
+                out Dictionary<string, MatchPushEvent> matchPayloads);
 
             // Act
             viewModel.OnMatchesChanged(sportId, matchPayloads);
@@ -259,15 +259,15 @@ namespace Scores.Tests.ViewModels
             Assert.NotEqual(expectedMatch.TimeLines, matchTimelines);
         }
 
-        private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimeLine> matchTimelines, out Dictionary<string, MatchPayload> matchPayloads)
+        private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimeline> matchTimelines, out Dictionary<string, MatchPushEvent> matchPayloads)
         {
             matchResult = specimens.Create<IMatchResult>();
-            matchTimelines = specimens.CreateMany<ITimeLine>();
-            matchPayloads = new Dictionary<string, MatchPayload>
+            matchTimelines = specimens.CreateMany<ITimeline>();
+            matchPayloads = new Dictionary<string, MatchPushEvent>
             {
-                { matchData[0].Id, new MatchPayload {
+                { matchData[0].Id, new MatchPushEvent {
                     MatchResult = matchResult,
-                    Timelines = matchTimelines
+                    TimeLines = matchTimelines
                 } },
             };
             matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), false).Returns(matchData);

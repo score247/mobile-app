@@ -36,6 +36,7 @@
         <PackageReference Include="akavache" Version="6.5.1" />
         <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+        <PackageReference Include="LiveXAML" Version="2.1.72" />
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Converters\InverseBoolConverter.cs" />

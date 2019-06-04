@@ -1,19 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Score.Views.MatchDetailView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-    xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
-    xmlns:controls="clr-namespace:LiveScore.Score.Controls"
-    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
-    xmlns:tabstrip="clr-namespace:LiveScore.Common.Controls.TabStrip;assembly=LiveScore.Common"
-    x:Name="self"
-    Title="Match Info"
-    mvvm:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="#1D2133">
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" Title="Match Info" BackgroundColor="#1D2133" x:Class="LiveScore.Score.Views.MatchDetailView">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/star.png" />
     </ContentPage.ToolbarItems>
@@ -22,33 +8,35 @@
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <tabstrip:TabViewSelector x:Key="tabViewSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout>
-        <!--  Match Score  -->
-        <FlexLayout Style="{StaticResource MatchScoreContainer}">
-            <StackLayout Style="{StaticResource MatchScoreFirstCol}">
-                <StackLayout Style="{StaticResource TeamLogoContainer}">
-                    <Image Aspect="AspectFit" Source="images/logos/logo_1.png" />
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Style="{StaticResource MatchGeneralInfoContainer}">
+                <FlexLayout HeightRequest="50">
+                    <FlexLayout FlexLayout.Grow="0.4" Style="{StaticResource MatchGeneralInfoHomeTeam}">
+                        <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" 
+                               Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
+                        <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="H" />
+                    </FlexLayout>
+                    <FlexLayout FlexLayout.Grow="0.2" Style="{StaticResource MatchGeneralInfoScore}">
+                        <Button Style="{StaticResource MatchGeneralInfoScoreBox}" Text="{Binding DisplayScore}" />
+                    </FlexLayout>
+                    <FlexLayout FlexLayout.Grow="0.4" Style="{StaticResource MatchGeneralInfoAwayTeam}">
+                        <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="A" />
+                        <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" 
+                               Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
+                    </FlexLayout>
+                </FlexLayout>
+                <StackLayout Style="{StaticResource MatchGeneralInfoStatusContainer}">
+                    <FlexLayout JustifyContent="Center" AlignContent="Center">
+                        <Label Style="{StaticResource LiveIcon}" FontSize="{StaticResource MediumTextFontSize}" WidthRequest="15" Margin="0,0,2,4"
+                               IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}"/>
+                        <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding MatchViewModel.DisplayMatchStatus}" />
+                    </FlexLayout>
+                    <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
-                <Label Style="{StaticResource MatchScoreHomeTeam}" Text="Verona" />
             </StackLayout>
-            <StackLayout>
-                <Button Style="{StaticResource MatchScoreBox}" Text="2 - 1" />
-                <StackLayout Style="{StaticResource GeneralMatchStatusContainer}">
-                    <Label Style="{StaticResource GeneralMatchStatus}" Text="Full Time" />
-                    <Label Style="{StaticResource GeneralMatchStatus}" Text="15:00 Jan 25, 2019" />
-                    <Label Style="{StaticResource GeneralMatchStatus}" Text="Serie B Italy" />
-                </StackLayout>
-            </StackLayout>
-            <StackLayout Style="{StaticResource MatchScoreLastCol}">
-                <StackLayout Style="{StaticResource TeamLogoContainer}">
-                    <Image Aspect="AspectFit" Source="images/logos/logo_2.png" />
-                </StackLayout>
-                <Label Style="{StaticResource MatchScoreAwayTeam}" Text="Cosenza" />
-            </StackLayout>
-        </FlexLayout>
-        <tabstrip:TabStrip ItemsSource="{Binding MatchDetailItems}" />
-    </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

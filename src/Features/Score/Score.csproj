@@ -27,12 +27,9 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
-        <Compile Remove="Views\MatchDetailView.xaml.cs" />
-        <Compile Remove="ViewModels\MatchDetailViewModel.cs" />
         <Compile Remove="Views\Templates\MatchH2HAwayTeamTemplate.xaml.cs" />
         <Compile Remove="Views\Templates\MatchH2HHeadToHeadTemplate.xaml.cs" />
         <Compile Remove="Views\Templates\MatchH2HHomeTeamTemplate.xaml.cs" />
-        <Compile Remove="Views\Templates\MatchInfoTemplate.xaml.cs" />
         <Compile Remove="Views\Templates\MatchLineUpsTemplate.xaml.cs" />
         <Compile Remove="Views\Templates\MatchOdds1x2Template.xaml.cs" />
         <Compile Remove="Views\Templates\MatchOddsBookmarker1x2Template.xaml.cs" />
@@ -94,11 +91,9 @@
       <ProjectReference Include="..\..\Shared\Sports\BasketBall\Basketball.csproj" />
     </ItemGroup>
     <ItemGroup>
-      <EmbeddedResource Remove="Views\MatchDetailView.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchH2HAwayTeamTemplate.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchH2HHeadToHeadTemplate.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchH2HHomeTeamTemplate.xaml" />
-      <EmbeddedResource Remove="Views\Templates\MatchInfoTemplate.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchLineUpsTemplate.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchOdds1x2Template.xaml" />
       <EmbeddedResource Remove="Views\Templates\MatchOddsBookmarker1x2Template.xaml" />

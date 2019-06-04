@@ -6,7 +6,7 @@
     using LiveScore.Core.Models.Teams;
     using Newtonsoft.Json;
 
-    public interface ITimeLine : IEntity<long, string>
+    public interface ITimeline : IEntity<long, string>
     {
         string Type { get; }
 
@@ -45,7 +45,7 @@
         IEnumerable<Commentary> Commentaries { get; }
     }
 
-    public class TimeLine : Entity<long, string>, ITimeLine
+    public class Timeline : Entity<long, string>, ITimeline
     {
         public string Type { get; set; }
 
