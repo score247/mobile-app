@@ -38,18 +38,21 @@
 
         public string DisplayScore { get; set; }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
-            cancellationTokenSource = new CancellationTokenSource();
-
             if (parameters != null)
             {
                 var match = parameters["Match"] as IMatch;
                 MatchViewModel = new MatchViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
-
-                await StartListeningMatchHubEvent(match);
             }
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            cancellationTokenSource = new CancellationTokenSource();
+
+            await StartListeningMatchHubEvent();
         }
 
         protected override void Clean()
@@ -63,8 +66,10 @@
             }
         }
 
-        private async Task StartListeningMatchHubEvent(IMatch match)
+        private async Task StartListeningMatchHubEvent()
         {
+            var match = MatchViewModel.Match;
+
             matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
             {
                 if (sportId != SettingsService.CurrentSportType.Value || !payload.ContainsKey(match.Id))
