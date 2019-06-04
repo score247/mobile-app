@@ -11,7 +11,7 @@
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly HubConnection matchHubConnection;
-        private readonly bool showFullStatus = false;
+        private readonly bool showFullStatus;
 
         public MatchViewModel(
             IMatch match,
