@@ -9,7 +9,7 @@ namespace LiveScore.Common.Tests.Configuration
         public void LocalEndPoint_Always_GetExpectedValue()
         {
             // Assert
-            Assert.Equal("https://testing2.nexdev.net/V1/api/", Configuration.LocalEndPoint);
+            Assert.Equal("https://api.nexdev.net/V1/api/", Configuration.LocalEndPoint);
         }
 
         [Fact]
