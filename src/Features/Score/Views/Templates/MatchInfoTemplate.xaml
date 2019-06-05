@@ -16,124 +16,236 @@
     <ScrollView>
         <StackLayout>
             <FlexLayout Style="{StaticResource TabContent}">
-                <FlexLayout Style="{StaticResource MatchStatusAlignRight}">
-                    <StackLayout Style="{StaticResource InfoContentRight}">
-                        <Label Style="{StaticResource InfoText}" Text="Carlos Embalo" />
-                        <Label Style="{StaticResource MatchYellowCard}" />
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="8'" />
                     </StackLayout>
-                    <ContentView>
-                        <BoxView Style="{StaticResource VerticalLine}" />
-                    </ContentView>
-                    <Label Style="{StaticResource MatchMinutes}" Text="12'" />
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoRedCard}" />
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                    </StackLayout>
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                        <Label Style="{StaticResource MatchMinutes}" Text="34'" />
-                        <ContentView>
-                            <BoxView Style="{StaticResource VerticalLine}" />
-                        </ContentView>
-                        <StackLayout Style="{StaticResource InfoContainer}">
-                            <Image Style="{StaticResource MatchInfoBall}" />
-                            <Label Style="{StaticResource InfoText}" Text="Lumbomir Tupta" />
-                        </StackLayout>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="10'" />
+
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                        <Label Style="{StaticResource MatchInfoHomeRedCard}" />
                     </StackLayout>
-                    <StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="12'" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoYellowCard}" />
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                    </StackLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="14'" />
+
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                        <Label Style="{StaticResource MatchInfoHomeYellowCard}" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="16'" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Image Style="{StaticResource MatchInfoRedYellowCard}" />
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                    </StackLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="18'" />
+
+                        <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
+                        <Image Style="{StaticResource MatchInfoHomeRedYellowCard}" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}" />
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="34'" />
+
+                        <Label Style="{StaticResource MatchInfoText}" Text="Lumbomir Tupta" />
+                        <Image Style="{StaticResource MatchInfoHomeOwnGoal}" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
                         <Button Style="{StaticResource MatchInfoScoreBox}" Text="1 - 0" />
                     </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
-                    <Label Style="{StaticResource MatchMinutes}" Text="54'" />
-                    <ContentView>
-                        <BoxView Style="{StaticResource VerticalLine}" />
-                    </ContentView>
-                    <StackLayout Style="{StaticResource InfoContainer}">
-                        <Label Style="{StaticResource MatchYellowCard}" />
-                        <Label Style="{StaticResource InfoText}" Text="Jacob Rasussen" />
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="38'" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="1 - 1" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Image Style="{StaticResource MatchInfoOwnGoal}" />
+                        <Label Style="{StaticResource MatchInfoText}" Text="Darko Lazovic" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                        <Label Style="{StaticResource MatchMinutes}" Text="63'" />
-                        <ContentView>
-                            <BoxView Style="{StaticResource VerticalLine}" />
-                        </ContentView>
-                        <StackLayout Style="{StaticResource InfoContainer}">
-                            <Image Style="{StaticResource MatchInfoBall}" />
-                            <Label Style="{StaticResource InfoText}" Text="Lumbomir Tupta" />
+
+                <FlexLayout Style="{StaticResource MatchInfoHalfTime}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoHalfTimeText}" Text="Half Time" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="1 - 1" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="88'" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="1 - 2" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Image Style="{StaticResource MatchInfoBall}" />
+                        <StackLayout Margin="10,0" VerticalOptions="Center">
+                            <Label
+                                FontSize="12"
+                                Text="Darko Lazovic"
+                                TextColor="#fff" />
+                            <Label
+                                FontSize="12"
+                                Text="Darko Lazovic"
+                                TextColor="#666" />
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout>
-                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 0" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="89'" />
+
+                        <Label Style="{StaticResource MatchInfoText}" Text="Darko Lazovic" />
+                        <Image Style="{StaticResource MatchInfoHomeBall}" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 2" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource MatchInfoRow}">
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Label Style="{StaticResource MatchInfoMinutes}" Text="90'" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 3" />
+                    </StackLayout>
+
+                    <StackLayout Style="{StaticResource MatchInfoTeam}">
+                        <Image Style="{StaticResource MatchInfoBall}" />
+                        <Label Style="{StaticResource MatchInfoText}" Text="Darko Lazovic" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
-                <FlexLayout>
-                    <StackLayout>
-                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 0" />
-                    </StackLayout>
-                    <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
-                        <StackLayout Style="{StaticResource InfoContainer}">
-                            <StackLayout>
-                                <Label Style="{StaticResource InfoText}" Text="Darko Lazovic" />
-                                <Label
-                                    Style="{StaticResource InfoText}"
-                                    Text="Daniel Bessa"
-                                    TextColor="{StaticResource SecondTextColor}" />
-                            </StackLayout>
-                            <Image Style="{StaticResource MatchInfoBall}" />
-                        </StackLayout>
-                        <ContentView>
-                            <BoxView Style="{StaticResource VerticalLine}" />
-                        </ContentView>
-                        <Label Style="{StaticResource MatchMinutes}" Text="88'" />
-                    </StackLayout>
-                </FlexLayout>
-                <ContentView>
-                    <BoxView Style="{StaticResource HorizontalLine}" />
-                </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
-                    <Label Style="{StaticResource MatchMinutes}" Text="90'" />
-                    <ContentView>
-                        <BoxView Style="{StaticResource VerticalLine}" />
-                    </ContentView>
-                    <StackLayout Style="{StaticResource InfoContainer}">
-                        <Label Style="{StaticResource MatchYellowCard}" />
-                        <Label Style="{StaticResource InfoText}" Text="Jacob Rasussen" />
-                    </StackLayout>
-                </FlexLayout>
-                <ContentView>
-                    <BoxView Style="{StaticResource HorizontalLine}" />
-                </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignLeft}">
-                    <Label Style="{StaticResource MatchMinutes}" Text="91'" />
-                    <ContentView>
-                        <BoxView Style="{StaticResource VerticalLine}" />
-                    </ContentView>
-                    <StackLayout Style="{StaticResource InfoContainer}">
-                        <Label Style="{StaticResource MatchYellowCard}" />
-                        <Label Style="{StaticResource InfoText}" Text="Jacob Rasussen" />
-                    </StackLayout>
-                </FlexLayout>
             </FlexLayout>
             <!--  Match info  -->
+            <FlexLayout
+                Padding="16,0"
+                BackgroundColor="#0F111C"
+                HeightRequest="28"
+                JustifyContent="Start">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="12"
+                    HorizontalOptions="StartAndExpand"
+                    Text="Match Info"
+                    TextColor="#666666"
+                    VerticalTextAlignment="Center" />
+            </FlexLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
                     <RowDefinition Height="28" />
@@ -178,17 +290,7 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     Style="{StaticResource MatchInfoValue}"
-                    Text="6215" />
-                <Label
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Style="{StaticResource MatchInfoTitle}"
-                    Text="League:" />
-                <Label
-                    Grid.Row="4"
-                    Grid.Column="1"
-                    Style="{StaticResource MatchInfoValue}"
-                    Text="Serie A Italy" />
+                    Text="6,215" />
             </Grid>
         </StackLayout>
     </ScrollView>
