@@ -119,5 +119,22 @@ pipeline{
                 }
             }
         }
+
+        stage("Deploy App to Local"){
+            agent { 
+                label 'slaveMAC'
+            }
+            steps{
+                withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
+                    sh label: "Restore nuget", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
+
+                    sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
+
+                    sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall 13C278BF-A473-4654-B7AE-D1569ADA54E4 Score247.LiveScore"
+
+                    sh label: "Install App", script: "/usr/bin/xcrun simctl install 13C278BF-A473-4654-B7AE-D1569ADA54E4 $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
+                }
+            }
+        }
     }
 }
