@@ -13,6 +13,9 @@
         public static string ToTimeWithoutSecond(this DateTime value)
             => value.ToString("HH:mm");
 
+        public static string ToDayMonthYear(this DateTime value)
+            => value.ToString("dd MMM, yyyy");
+
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 
         public static DateTime EndOfDay(this DateTime value) => value.AddDays(1).AddMilliseconds(-1);

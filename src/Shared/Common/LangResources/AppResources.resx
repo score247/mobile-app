@@ -216,6 +216,12 @@
     <data name="AfterExtraTime" xml:space="preserve">
     <value>After Extra Time</value>
   </data>
+    <data name="AwaitET" xml:space="preserve">
+    <value>Await ET.</value>
+  </data>
+    <data name="AwaitExtraTime" xml:space="preserve">
+    <value>Awaiting Extra Time</value>
+  </data>
     <data name="AP" xml:space="preserve">
     <value>A.P</value>
   </data>

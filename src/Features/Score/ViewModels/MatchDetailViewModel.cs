@@ -95,7 +95,7 @@
 
         private void BuildMatchDetailData(IMatch match)
         {
-            var eventDate = match.EventDate.ToString("MMM dd, yyyy");
+            var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
 
             var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
@@ -105,7 +105,7 @@
 
         private static string BuildScore(MatchStatus matchStatus, int score)
         {
-            return matchStatus.IsNotStarted ? string.Empty : score.ToString();
+            return matchStatus.IsPreMatch ? string.Empty : score.ToString();
         }
     }
 

@@ -245,6 +245,18 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string AwaitET {
+            get {
+                return ResourceManager.GetString("AwaitET", resourceCulture);
+            }
+        }
+        
+        public static string AwaitExtraTime {
+            get {
+                return ResourceManager.GetString("AwaitExtraTime", resourceCulture);
+            }
+        }
+        
         public static string AP {
             get {
                 return ResourceManager.GetString("AP", resourceCulture);

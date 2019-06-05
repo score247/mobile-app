@@ -27,6 +27,7 @@
             { MatchStatus.Closed, AppResources.FT },
             { MatchStatus.EndedAfterPenalties, AppResources.AP },
             { MatchStatus.EndedExtraTime, AppResources.AET },
+            { MatchStatus.AwaitingExtraTime, AppResources.AwaitET }
         };
 
         private static readonly IDictionary<string, string> FullStatusMapper = new Dictionary<string, string>
@@ -46,6 +47,7 @@
             { MatchStatus.Closed, AppResources.FullTime },
             { MatchStatus.EndedAfterPenalties, AppResources.AfterPenalties },
             { MatchStatus.EndedExtraTime, AppResources.AfterExtraTime },
+            { MatchStatus.AwaitingExtraTime, AppResources.AwaitExtraTime }
         };
 
         private static readonly IDictionary<string, int> PeriodEndTimes = new Dictionary<string, int>
