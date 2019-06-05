@@ -61,7 +61,6 @@
 
             if (cancellationTokenSource != null)
             {
-                cancellationTokenSource.Cancel();
                 cancellationTokenSource.Dispose();
             }
         }

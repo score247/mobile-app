@@ -1,22 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Xamarin.Forms;
-
-namespace LiveScore.Score.Views
+﻿namespace LiveScore.Score.Views
 {
+    using Xamarin.Forms;
+
     public partial class MatchDetailView : ContentPage
     {
         public MatchDetailView()
         {
-            try
-            {
-                InitializeComponent();
-            }
-            catch (Exception ex)
-            {
-
-            }
+            InitializeComponent();
         }
     }
 }
