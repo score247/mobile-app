@@ -15,6 +15,11 @@ namespace LiveScore.Basketball.Services
 
     public class MatchService : IMatchService
     {
+        public Task<IMatch> GetMatch(UserSettings settings, string matchId, bool forceFetchNewData = false)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             var matches = new List<IMatch>

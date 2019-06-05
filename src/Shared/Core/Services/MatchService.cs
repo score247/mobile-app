@@ -12,6 +12,8 @@
     {
         Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false);
 
+        Task<IMatch> GetMatch(UserSettings settings, string matchId, bool forceFetchNewData = false);
+
         void SubscribeMatches(HubConnection hubConnection, Action<string, Dictionary<string, MatchPushEvent>> handler);
     }
 }

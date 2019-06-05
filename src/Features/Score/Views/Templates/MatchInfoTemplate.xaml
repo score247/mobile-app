@@ -28,7 +28,7 @@
                         <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
                     </StackLayout>
                 </FlexLayout>
-                <ContentView>
+               <!-- <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
 
@@ -224,7 +224,7 @@
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                </ContentView>
+                </ContentView>-->
             </FlexLayout>
             <!--  Match info  -->
             <FlexLayout

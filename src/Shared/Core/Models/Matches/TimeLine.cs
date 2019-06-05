@@ -28,7 +28,7 @@
 
         int AwayScore { get; }
 
-        IPlayer GoalScorer { get; }
+        GoalScorer GoalScorer { get; }
 
         IPlayer Assist { get; }
 
@@ -67,8 +67,7 @@
 
         public int AwayScore { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer GoalScorer { get; set; }
+        public GoalScorer GoalScorer { get; set; }
 
         public IEnumerable<Commentary> Commentaries { get; set; }
 
@@ -92,5 +91,10 @@
     public class Commentary
     {
         public string Text { get; set; }
+    }
+
+    public class GoalScorer : Entity<string, string>
+    {
+        public string Method { get; set; }
     }
 }

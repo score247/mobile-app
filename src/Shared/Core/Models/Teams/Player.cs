@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Teams
 {
-    public interface IPlayer : IEntity<int, string>
+    public interface IPlayer : IEntity<string, string>
     {
         string Type { get; }
 
@@ -11,7 +11,7 @@
         int Order { get; }
     }
 
-    public class Player : Entity<int, string>, IPlayer
+    public class Player : Entity<string, string>, IPlayer
     {
         public string Type { get; set; }
 
