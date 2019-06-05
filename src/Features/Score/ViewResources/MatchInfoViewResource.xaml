@@ -1,10 +1,19 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="LiveScore.Score.ViewResources.MatchInfoViewResource">
 
     <!-- Tab content -->
-
+    
+    <Style x:Key="MatchInfoScoreBox" TargetType="Button">
+        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+    </Style>
+    
     <Style x:Key="TabContent" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Column" />
         <Setter Property="JustifyContent" Value="Center" />

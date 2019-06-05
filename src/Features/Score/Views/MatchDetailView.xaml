@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" Title="Match Info" BackgroundColor="#1D2133" x:Class="LiveScore.Score.Views.MatchDetailView">
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" 
+             xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates" 
+             Title="Match Info" BackgroundColor="#1D2133"
+             x:Class="LiveScore.Score.Views.MatchDetailView">
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/star.png" />
     </ContentPage.ToolbarItems>
@@ -37,6 +44,7 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
+            <templates:MatchInfoTemplate/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

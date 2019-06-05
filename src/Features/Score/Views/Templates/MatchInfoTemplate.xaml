@@ -40,8 +40,8 @@
                             <Label Style="{StaticResource InfoText}" Text="Lumbomir Tupta" />
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
-                        <Button Style="{StaticResource MatchScoreBox}" Text="1 - 0" />
+                    <StackLayout>
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="1 - 0" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
@@ -71,16 +71,16 @@
                             <Label Style="{StaticResource InfoText}" Text="Lumbomir Tupta" />
                         </StackLayout>
                     </StackLayout>
-                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
-                        <Button Style="{StaticResource MatchScoreBox}" Text="2 - 0" />
+                    <StackLayout>
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 0" />
                     </StackLayout>
                 </FlexLayout>
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
-                <FlexLayout Style="{StaticResource MatchStatusAlignJustify}">
-                    <StackLayout Style="{StaticResource MatchScoreBoxAlignCenter}">
-                        <Button Style="{StaticResource MatchScoreBox}" Text="2 - 0" />
+                <FlexLayout>
+                    <StackLayout>
+                        <Button Style="{StaticResource MatchInfoScoreBox}" Text="2 - 0" />
                     </StackLayout>
                     <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
                         <StackLayout Style="{StaticResource InfoContainer}">
@@ -127,9 +127,6 @@
                 </FlexLayout>
             </FlexLayout>
             <!--  Match info  -->
-            <FlexLayout Style="{StaticResource Group}">
-                <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
-            </FlexLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120" />

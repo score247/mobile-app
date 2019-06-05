@@ -9,7 +9,14 @@ namespace LiveScore.Score.Views
     {
         public MatchDetailView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
