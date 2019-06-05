@@ -14,7 +14,7 @@ pipeline{
                 label 'slaveMAC'
             }
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '${env.BRANCH_NAME}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanCheckout']], submoduleCfg: [], userRemoteConfigs: [[]]])
+                checkout([$class: 'GitSCM', branches: [[name: '${env.BRANCH_NAME}']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'CleanCheckout']], submoduleCfg: [], userRemoteConfigs: [[url: 'git@gitlab.nexdev.net:livescore/LiveScoreApp.git']]])
             }
         }
     }
