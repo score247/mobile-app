@@ -191,9 +191,9 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-        public static string Canceled {
+        public static string Cancelled {
             get {
-                return ResourceManager.GetString("Canceled", resourceCulture);
+                return ResourceManager.GetString("Cancelled", resourceCulture);
             }
         }
         

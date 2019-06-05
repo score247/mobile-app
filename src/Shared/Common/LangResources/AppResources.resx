@@ -189,8 +189,8 @@
     <data name="Canc" xml:space="preserve">
     <value>Canc.</value>
   </data>
-    <data name="Canceled" xml:space="preserve">
-    <value>Canceled</value>
+    <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
   </data>
     <data name="INT" xml:space="preserve">
     <value>INT</value>
@@ -226,7 +226,7 @@
     <value>Await Pen.</value>
   </data>
     <data name="AwaitPenalties" xml:space="preserve">
-    <value>Await Penalties</value>
+    <value>Awaiting Penalties</value>
   </data>
     <data name="Pen" xml:space="preserve">
     <value>Pen.</value>

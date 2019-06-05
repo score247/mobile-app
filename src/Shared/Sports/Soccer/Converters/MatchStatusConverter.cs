@@ -33,7 +33,7 @@
         {
             { MatchStatus.Postponed, AppResources.Postponed },
             { MatchStatus.StartDelayed, AppResources.StartDelayed },
-            { MatchStatus.Cancelled, AppResources.Canceled },
+            { MatchStatus.Cancelled, AppResources.Cancelled },
             { MatchStatus.AwaitingPenalties, AppResources.AwaitPenalties },
             { MatchStatus.Penalties, AppResources.Penalties },
             { MatchStatus.Pause, AppResources.Pause },
