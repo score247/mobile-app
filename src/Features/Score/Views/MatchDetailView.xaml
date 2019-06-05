@@ -27,7 +27,7 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Style="{StaticResource MatchGeneralInfoContainer}">
-                <FlexLayout HeightRequest="40">
+                <FlexLayout Style="{StaticResource MatchGeneralInfoTeams}">
                     <FlexLayout Style="{StaticResource MatchGeneralInfoHomeTeam}">
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="H" />
