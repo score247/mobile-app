@@ -181,6 +181,10 @@
                 <Setter Property="JustifyContent" Value="End" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
+            <Style x:Key="FlexLayoutAlignCenter" TargetType="FlexLayout">
+                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="AlignItems" Value="Center" />
+            </Style>
             <Style x:Key="FlexLayoutVerticalCenter" TargetType="FlexLayout">
                 <Setter Property="Direction" Value="Column" />
                 <Setter Property="JustifyContent" Value="Center" />

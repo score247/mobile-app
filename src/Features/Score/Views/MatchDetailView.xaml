@@ -1,19 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms" 
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" 
-             xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates" 
-             Title="Match Info" 
-             BackgroundColor="#1D2133"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             x:Name="self"
-             x:Class="LiveScore.Score.Views.MatchDetailView">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="LiveScore.Score.Views.MatchDetailView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    xmlns:templates="clr-namespace:LiveScore.Score.Views.Templates"
+    x:Name="self"
+    Title="Match Info"
+    BackgroundColor="#1D2133">
     <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate 
-                        Title="Match Info" 
-                        mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+        <coreTemplates:NavigationTitleTemplate Title="Match Info" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/star.png" />
@@ -28,31 +27,28 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Style="{StaticResource MatchGeneralInfoContainer}">
-                <FlexLayout HeightRequest="50">
-                    <FlexLayout FlexLayout.Grow="0.4" Style="{StaticResource MatchGeneralInfoHomeTeam}">
-                        <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" 
-                               Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
+                <FlexLayout HeightRequest="40">
+                    <FlexLayout Style="{StaticResource MatchGeneralInfoHomeTeam}">
+                        <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="H" />
                     </FlexLayout>
-                    <FlexLayout FlexLayout.Grow="0.2" Style="{StaticResource MatchGeneralInfoScore}">
+                    <FlexLayout Style="{StaticResource MatchGeneralInfoScore}">
                         <Button Style="{StaticResource MatchGeneralInfoScoreBox}" Text="{Binding DisplayScore}" />
                     </FlexLayout>
-                    <FlexLayout FlexLayout.Grow="0.4" Style="{StaticResource MatchGeneralInfoAwayTeam}">
+                    <FlexLayout Style="{StaticResource MatchGeneralInfoAwayTeam}">
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="A" />
-                        <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" 
-                               Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
+                        <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
                     </FlexLayout>
                 </FlexLayout>
-                <StackLayout Style="{StaticResource MatchGeneralInfoStatusContainer}">
-                    <FlexLayout JustifyContent="Center" AlignContent="Center">
-                        <Label Style="{StaticResource LiveIcon}" FontSize="{StaticResource MediumTextFontSize}" WidthRequest="15" Margin="0,0,2,4"
-                               IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}"/>
+                <StackLayout>
+                    <FlexLayout Style="{StaticResource FlexLayoutAlignCenter}">
+                        <Label IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource MatchGeneralInfoStatusLiveIcon}" />
                         <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding MatchViewModel.DisplayMatchStatus}" />
                     </FlexLayout>
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <templates:MatchInfoTemplate/>
+            <templates:MatchInfoTemplate />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
