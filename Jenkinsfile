@@ -27,7 +27,11 @@ pipeline{
             }
         }
           
+<<<<<<< refs/remotes/origin/master
         stage("C# Unit Test"){
+=======
+        stage("C# Test"){
+>>>>>>> 114291 - Initialize Jenkinsfile
             steps{
                 script{
                     pipelineLib.xUnitForNetCore()
@@ -58,6 +62,7 @@ pipeline{
                 }
 
                 unsuccessful{
+<<<<<<< refs/remotes/origin/master
                     emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
                 }
             }
@@ -108,6 +113,9 @@ pipeline{
                 
                 unsuccessful{
                     emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
+=======
+                    emailext body: '$DEFAULT_CONTENT', recipientProviders: [developers(), requestor()], subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
+>>>>>>> 114291 - Initialize Jenkinsfile
                 }
             }
         }
