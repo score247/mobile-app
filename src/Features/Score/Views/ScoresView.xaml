@@ -15,9 +15,9 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Name="Search"
+            Command="{Binding ClickSearchCommand}"
             Icon="images/common/search.png"
-            Priority="1"
-            Command="{Binding ClickSearchCommand}"/>
+            Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

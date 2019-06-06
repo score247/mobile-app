@@ -258,7 +258,7 @@
                 TargetType="Label">
                 <Setter Property="Text" Value="&#xe90f;" />
                 <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-                <Setter Property="FontSize" Value="13" />
+                <Setter Property="FontSize" Value="12" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>

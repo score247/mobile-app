@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary x:Class="LiveScore.Core.ViewResources.MatchViewResource" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LiveScore.Core.ViewResources.MatchViewResource"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <!--  Scores Styles  -->
     <Style x:Key="LeagueBox" TargetType="Grid">
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
@@ -7,7 +10,7 @@
     </Style>
     <Style x:Key="LeagueFlagContainer" TargetType="StackLayout">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Padding" Value="16,0,12,0" />
     </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
         <Setter Property="Aspect" Value="AspectFit" />
@@ -22,7 +25,6 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
-        <Setter Property="Margin" Value="0,0,8,0" />
     </Style>
     <Style x:Key="MatchStatus" TargetType="Label">
         <Setter Property="WidthRequest" Value="50" />
@@ -35,20 +37,31 @@
     <Style x:Key="TeamContainer" TargetType="StackLayout">
         <Setter Property="FlexLayout.Grow" Value="1" />
     </Style>
-    <Style x:Key="ScoreContainer" TargetType="StackLayout">
-    </Style>
-    <Style x:Key="Score" BasedOn="{StaticResource Team}" TargetType="Label">
+    <Style x:Key="ScoreContainer" TargetType="StackLayout" />
+    <Style
+        x:Key="Score"
+        BasedOn="{StaticResource Team}"
+        TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
-    <Style x:Key="HomeScore" BasedOn="{StaticResource Score}" TargetType="Label">
+    <Style
+        x:Key="HomeScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
         <Setter Property="Margin" Value="0,4,20,0" />
     </Style>
-    <Style x:Key="AwayScore" BasedOn="{StaticResource Score}" TargetType="Label">
+    <Style
+        x:Key="AwayScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
         <Setter Property="Margin" Value="0,0,20,4" />
     </Style>
-    <Style x:Key="MatchFavoriteIcon" BasedOn="{StaticResource FavoriteIcon}" TargetType="Label">
-        <Setter Property="Margin" Value="0,0,16,0" />
+    <Style
+        x:Key="MatchFavoriteIcon"
+        BasedOn="{StaticResource FavoriteIcon}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,0,12,0" />
     </Style>
 </ResourceDictionary>

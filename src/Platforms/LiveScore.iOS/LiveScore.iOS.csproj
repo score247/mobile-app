@@ -297,15 +297,6 @@
     <BundleResource Include="..\..\CommonResources\Image\common\favorite_active%403x.png">
       <Link>Resources\images\common\favorite_active%403x.png</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite.png">
-      <Link>Resources\images\common\favorite.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite%402x.png">
-      <Link>Resources\images\common\favorite%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite%403x.png">
-      <Link>Resources\images\common\favorite%403x.png</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\common\flag_cn.png">
       <Link>Resources\images\common\flag_cn.png</Link>
     </BundleResource>
@@ -662,6 +653,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\own_goal%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
