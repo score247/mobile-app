@@ -20,6 +20,7 @@
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
         private readonly HubConnection matchHubConnection;
+        private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
 
         public MatchDetailViewModel(
@@ -30,6 +31,7 @@
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             matchHubConnection = hubService.BuildMatchHubConnection();
+            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -38,13 +40,15 @@
 
         public string DisplayScore { get; set; }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             if (parameters != null)
             {
                 var match = parameters["Match"] as IMatch;
-                MatchViewModel = new MatchViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection, true);
+                MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
+
+                match = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18329617", false);
             }
         }
 
@@ -68,6 +72,7 @@
         private async Task StartListeningMatchHubEvent()
         {
             var match = MatchViewModel.Match;
+
 
             matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
             {

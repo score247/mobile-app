@@ -10,13 +10,11 @@
     {
         string Type { get; }
 
-        DateTime Time { get; }
+        string Time { get; }
 
         int MatchTime { get; }
 
         string MatchClock { get; }
-
-        int StoppageTime { get; }
 
         string Team { get; }
 
@@ -30,11 +28,13 @@
 
         GoalScorer GoalScorer { get; }
 
-        IPlayer Assist { get; }
+        Player Assist { get; }
 
-        IPlayer PlayerOut { get; }
+        Player PlayerOut { get; }
 
-        IPlayer PlayerIn { get; }
+        Player PlayerIn { get; }
+
+        Player Player { get; }
 
         int InjuryTimeAnnounced { get; }
 
@@ -49,13 +49,11 @@
     {
         public string Type { get; set; }
 
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         public int MatchTime { get; set; }
 
         public string MatchClock { get; set; }
-
-        public int StoppageTime { get; set; }
 
         public string Team { get; set; }
 
@@ -71,14 +69,13 @@
 
         public IEnumerable<Commentary> Commentaries { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer Assist { get; set; }
+        public Player Assist { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer PlayerOut { get; set; }
+        public Player PlayerOut { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer PlayerIn { get; set; }
+        public Player PlayerIn { get; set; }
+
+        public Player Player { get; set; }
 
         public int InjuryTimeAnnounced { get; set; }
 
@@ -93,7 +90,12 @@
         public string Text { get; set; }
     }
 
-    public class GoalScorer : Entity<string, string>
+    public interface IGoalScorer : IEntity<string, string>
+    {
+        string Method { get; }
+    }
+
+    public class GoalScorer : Entity<string, string>, IGoalScorer
     {
         public string Method { get; set; }
     }

@@ -24,14 +24,14 @@
            IDependencyResolver depdendencyResolver)
         {
             NavigationService = navigationService;
-            DepdendencyResolver = depdendencyResolver;
-            SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
-            LoggingService = DepdendencyResolver.Resolve<ILoggingService>();
+            DependencyResolver = depdendencyResolver;
+            SettingsService = DependencyResolver.Resolve<ISettingsService>();
+            LoggingService = DependencyResolver.Resolve<ILoggingService>();
         }
 
         public string Title { get; protected set; }
 
-        public IDependencyResolver DepdendencyResolver { get; protected set; }
+        public IDependencyResolver DependencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 

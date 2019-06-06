@@ -39,7 +39,7 @@ namespace LiveScore.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
-            MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
             matchHubConnection = hubService.BuildMatchHubConnection();
         }
@@ -167,7 +167,7 @@ namespace LiveScore.Score.ViewModels
         private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection));
+                    match => new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));

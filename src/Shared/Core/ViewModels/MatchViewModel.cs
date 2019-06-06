@@ -23,7 +23,7 @@
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
-            matchStatusConverter = DepdendencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
             Match = match;
             this.showFullStatus = showFullStatus;
             BuildMatchStatus();
