@@ -19,9 +19,7 @@
                 <ListView>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <ViewCell>
-                                
-                            </ViewCell>
+                            <ViewCell />
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
@@ -37,7 +35,7 @@
                         <Label Style="{StaticResource MatchInfoText}" Text="Carlos Embalo" />
                     </StackLayout>
                 </FlexLayout>
-               <!-- <ContentView>
+                <!-- <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>
 
@@ -251,7 +249,7 @@
             </FlexLayout>
             <Grid Margin="16,8">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="105" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
