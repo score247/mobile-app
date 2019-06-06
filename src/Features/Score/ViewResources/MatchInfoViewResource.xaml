@@ -115,14 +115,28 @@
 
     <Style x:Key="MatchInfoMissedPenaltyGoal" TargetType="Image">
         <Setter Property="Source" Value="images/common/missed_penalty_goal.png" />
-        <Setter Property="WidthRequest" Value="28" />
+        <Setter Property="WidthRequest" Value="13" />
         <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoHomeMissedPenaltyGoal"
+        BasedOn="{StaticResource MatchInfoMissedPenaltyGoal}"
+        TargetType="Image">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchInfoPenaltyGoal" TargetType="Image">
         <Setter Property="Source" Value="images/common/penalty_goal.png" />
         <Setter Property="WidthRequest" Value="12" />
         <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoHomePenaltyGoal"
+        BasedOn="{StaticResource MatchInfoPenaltyGoal}"
+        TargetType="Image">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchInfoOwnGoal" TargetType="Image">
@@ -134,6 +148,19 @@
     <Style
         x:Key="MatchInfoHomeOwnGoal"
         BasedOn="{StaticResource MatchInfoOwnGoal}"
+        TargetType="Image">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+    </Style>
+
+    <Style x:Key="MatchInfoMissedGoal" TargetType="Image">
+        <Setter Property="Source" Value="images/common/missed_goal.png" />
+        <Setter Property="WidthRequest" Value="13" />
+        <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoHomeMissedGoal"
+        BasedOn="{StaticResource MatchInfoMissedGoal}"
         TargetType="Image">
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
