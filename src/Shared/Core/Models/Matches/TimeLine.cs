@@ -10,9 +10,11 @@
     {
         string Type { get; }
 
-        string Time { get; }
+        DateTime Time { get; }
 
         int MatchTime { get; }
+
+        string StoppageTime { get; }
 
         string MatchClock { get; }
 
@@ -49,9 +51,11 @@
     {
         public string Type { get; set; }
 
-        public string Time { get; set; }
+        public DateTime Time { get; set; }
 
         public int MatchTime { get; set; }
+
+        public string StoppageTime { get; set; }
 
         public string MatchClock { get; set; }
 

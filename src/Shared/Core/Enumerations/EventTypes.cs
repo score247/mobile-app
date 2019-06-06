@@ -24,6 +24,10 @@ namespace LiveScore.Core.Enumerations
         public const string PenaltyShootout = "penalty_shootout";
 
         public static readonly EventTypes PenaltyShootoutType = new EventTypes(PenaltyShootout, nameof(PenaltyShootout));
+
+        public const string PenaltyMissed = "penalty_missed";
+
+        public static readonly EventTypes PenaltyMissedType = new EventTypes(PenaltyMissed, nameof(PenaltyMissed));
         //cancelled_video_assistant_referee
         //corner_kick
         //free_kick

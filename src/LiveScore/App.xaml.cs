@@ -29,6 +29,8 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using LiveScore.Score.Views.Templates;
+using LiveScore.Score.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -112,6 +114,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
             ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
+            //ViewModelLocationProvider.Register<MatchInfoTemplate, MatchInfoViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

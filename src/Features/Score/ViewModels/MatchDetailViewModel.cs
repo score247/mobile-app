@@ -20,6 +20,17 @@ namespace LiveScore.Score.ViewModels
 
     public class MatchDetailViewModel : ViewModelBase
     {
+        private static readonly string[] MatchTimelineEventTypes = new string[]
+        {
+            EventTypes.BreakStart,
+            EventTypes.MatchEnded,
+            EventTypes.ScoreChange,
+            EventTypes.PenaltyMissed,
+            EventTypes.YellowCard,
+            EventTypes.RedCard,
+            EventTypes.YellowRedCard,
+        };
+
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
@@ -42,7 +53,7 @@ namespace LiveScore.Score.ViewModels
 
         public string DisplayScore { get; set; }
 
-        public ObservableCollection<ITimeline> DisplayTimelines { get; set; }
+        public ObservableCollection<MatchTimelineItemViewModel> MatchTimelineItemViewModels { get; set; }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -52,10 +63,13 @@ namespace LiveScore.Score.ViewModels
                 MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
 
-                var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:17305435");
-                var timelines = matchData?.TimeLines?.OrderBy(t => t.MatchTime).ToList();
+                var matchData = await matchService.GetMatch(SettingsService.UserSettings, match.Id);
+                var timelines = matchData?.TimeLines?
+                    .Where(t => MatchTimelineEventTypes.Contains(t.Type))
+                    .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
-                DisplayTimelines = new ObservableCollection<ITimeline>(timelines ?? new List<ITimeline>());
+                MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
+                        timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
             }
         }
 
@@ -79,7 +93,6 @@ namespace LiveScore.Score.ViewModels
         private async Task StartListeningMatchHubEvent()
         {
             var match = MatchViewModel.Match;
-
 
             matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
             {
