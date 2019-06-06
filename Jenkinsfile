@@ -91,7 +91,7 @@ pipeline{
             }
             post{
                 always{
-                    step([$class: 'RobotPublisher', disableArchiveOutput: false, enableCache: true, logFileName: 'log.html', onlyCritical: true, otherFiles: '', outputFileName: 'output.xml', outputPath: '$WORKSPACE/Results', passThreshold: 100.0, reportFileName: 'report.html', unstableThreshold: 90.0])
+                    step([$class: 'RobotPublisher', disableArchiveOutput: false, enableCache: true, logFileName: 'log.html', onlyCritical: true, otherFiles: '', outputFileName: 'output.xml', outputPath: 'Results', passThreshold: 100.0, reportFileName: 'report.html', unstableThreshold: 90.0])
                 }
                 
                 unsuccessful{
