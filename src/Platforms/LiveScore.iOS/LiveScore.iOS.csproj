@@ -663,5 +663,14 @@
   <ItemGroup>
     <BundleResource Include="Resources\images\common\favorite%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_function_bar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_function_bar%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_function_bar%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
