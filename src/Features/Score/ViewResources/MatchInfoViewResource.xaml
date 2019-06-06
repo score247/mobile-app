@@ -44,8 +44,6 @@
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
 
-
-
     <Style x:Key="MatchInfoScoreContainer" TargetType="StackLayout">
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FlexLayout.AlignSelf" Value="Center" />

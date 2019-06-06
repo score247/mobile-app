@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Score.ViewModels
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+namespace LiveScore.Score.ViewModels
 {
     using LiveScore.Common.Extensions;
     using System;
@@ -40,6 +42,8 @@
 
         public string DisplayScore { get; set; }
 
+        public ObservableCollection<ITimeline> DisplayTimelines { get; set; }
+
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
             if (parameters != null)
@@ -48,7 +52,10 @@
                 MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
 
-                match = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18329617", false);
+                var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:17305435");
+                var timelines = matchData?.TimeLines?.OrderBy(t => t.MatchTime).ToList();
+
+                DisplayTimelines = new ObservableCollection<ITimeline>(timelines ?? new List<ITimeline>());
             }
         }
 
