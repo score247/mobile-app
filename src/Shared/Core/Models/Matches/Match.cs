@@ -21,6 +21,12 @@
         IMatchCondition MatchCondition { get; set; }
 
         ILeague League { get; set; }
+
+        int Attendance { get; }
+
+        IVenue Venue { get; }
+
+        string Referee { get; }
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -42,5 +48,16 @@
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
         public ILeague League { get; set; }
+
+        public int Attendance { get; set; }
+
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Venue>))]
+        public IVenue Venue { get; set; }
+
+        public string Referee { get; set; }
+
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
+        public ITimeline LatestTimeline { get; set; }
+
     }
 }

@@ -68,6 +68,8 @@ namespace LiveScore.Score.ViewModels
                     .Where(t => MatchTimelineEventTypes.Contains(t.Type))
                     .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
+                MatchViewModel = new MatchViewModel(matchData, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+
                 MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
                         timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
             }
