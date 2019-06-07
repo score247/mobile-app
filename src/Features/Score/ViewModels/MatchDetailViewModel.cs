@@ -24,7 +24,6 @@ namespace LiveScore.Score.ViewModels
     {
         private static readonly string[] MatchTimelineEventTypes = new[] {
             EventTypes.BreakStart,
-            EventTypes.MatchEnded,
             EventTypes.ScoreChange,
             EventTypes.PenaltyMissed,
             EventTypes.YellowCard,

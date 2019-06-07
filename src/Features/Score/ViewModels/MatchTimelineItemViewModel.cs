@@ -153,12 +153,12 @@ namespace LiveScore.Score.ViewModels
             {
                 if (timeline.Team == "home")
                 {
-                    VisibleHomeMissGoalBall = true;
+                    VisibleHomeMissPenaltyGoalBall = true;
                     HomePlayerName = timeline.Player.Name;
                 }
                 else
                 {
-                    VisibleAwayMissGoalBall = true;
+                    VisibleAwayMissPenaltyGoalBall = true;
                     AwayPlayerName = timeline.Player.Name;
                 }
             }
@@ -214,7 +214,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool VisibleHomeRedYellowCard { get; set; }
 
-        public bool VisibleHomeMissGoalBall { get; set; }
+        public bool VisibleHomeMissPenaltyGoalBall { get; set; }
 
         public bool VisibleHomePenaltyGoalBall { get; set; }
 
@@ -236,7 +236,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool VisibleAwayRedYellowCard { get; set; }
 
-        public bool VisibleAwayMissGoalBall { get; set; }
+        public bool VisibleAwayMissPenaltyGoalBall { get; set; }
 
         public bool VisibleAwayPenaltyGoalBall { get; set; }
     }

@@ -19,13 +19,6 @@
         <Setter Property="Padding" Value="9,0" />
     </Style>
 
-    <!--<Style
-        x:Key="MatchInfoHalfTime"
-        BasedOn="{StaticResource MatchInfoRow}"
-        TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="#2E3245" />
-    </Style>-->
-
     <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
         <Setter Property="TextColor" Value="#fff" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
@@ -153,19 +146,6 @@
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
-    <Style x:Key="MatchInfoMissedGoal" TargetType="Image">
-        <Setter Property="Source" Value="images/common/missed_goal.png" />
-        <Setter Property="WidthRequest" Value="13" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeMissedGoal"
-        BasedOn="{StaticResource MatchInfoMissedGoal}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
         <Setter Property="WidthRequest" Value="35" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -209,6 +189,7 @@
         BasedOn="{StaticResource MatchInfoTitle}"
         TargetType="Label">
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FlexLayout.Grow" Value="1" />
     </Style>
 
 </ResourceDictionary>

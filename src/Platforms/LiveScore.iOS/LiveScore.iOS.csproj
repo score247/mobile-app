@@ -515,15 +515,6 @@
     </BundleResource>
     <Compile Include="Services\BackgroundService.cs" />
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
-    <BundleResource Include="..\..\CommonResources\Image\common\missed_goal.png">
-      <Link>Resources\images\common\missed_goal.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\missed_goal%402x.png">
-      <Link>Resources\images\common\missed_goal%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\missed_goal%403x.png">
-      <Link>Resources\images\common\missed_goal%403x.png</Link>
-    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
