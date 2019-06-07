@@ -54,7 +54,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsLoading { get; set; }
 
-        public bool IsNotLoading => !IsLoading;
+        public bool IsNotLoading { get; set; }
 
         public MatchViewModel MatchViewModel { get; private set; }
 
@@ -64,16 +64,22 @@ namespace LiveScore.Score.ViewModels
 
         public ObservableCollection<MatchTimelineItemViewModel> MatchTimelineItemViewModels { get; set; }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             if (parameters != null)
             {
                 var match = parameters["Match"] as IMatch;
                 MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
-
-                await LoadMatchDetail(match.Id);
             }
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            await LoadMatchDetail(MatchViewModel.Match.Id);
+            cancellationTokenSource = new CancellationTokenSource();
+
+            await StartListeningMatchHubEvent();
         }
 
         private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
@@ -90,14 +96,8 @@ namespace LiveScore.Score.ViewModels
                     timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
 
             IsLoading = false;
+            IsNotLoading = true;
             IsRefreshing = false;
-        }
-
-        public override async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            cancellationTokenSource = new CancellationTokenSource();
-
-            await StartListeningMatchHubEvent();
         }
 
         protected override void Clean()

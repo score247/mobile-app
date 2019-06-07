@@ -56,7 +56,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <StackLayout HeightRequest="145" BackgroundColor="{StaticResource SecondColor}">
+                <StackLayout HeightRequest="145" BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}">
                     <FlexLayout Padding="16,0" BackgroundColor="#0F111C" HeightRequest="28" JustifyContent="Start">
                         <Label FontAttributes="Bold" FontSize="12" HorizontalOptions="StartAndExpand" TextColor="#666666" VerticalTextAlignment="Center" Text="Match Info" />
                     </FlexLayout>
