@@ -1,9 +1,9 @@
-﻿using System;
-using System.Globalization;
-using Xamarin.Forms;
-
-namespace LiveScore.Core.Converters
+﻿namespace LiveScore.Core.Converters
 {
+    using System;
+    using System.Globalization;
+    using Xamarin.Forms;
+
     public class MatchMinuteConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -13,7 +13,7 @@ namespace LiveScore.Core.Converters
                 return string.Empty;
             }
 
-            return value.ToString() + "'";
+            return $"{value}'";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -22,4 +22,3 @@ namespace LiveScore.Core.Converters
         }
     }
 }
-

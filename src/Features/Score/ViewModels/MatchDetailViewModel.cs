@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+
 namespace LiveScore.Score.ViewModels
 {
     using System;
@@ -20,8 +21,7 @@ namespace LiveScore.Score.ViewModels
 
     public class MatchDetailViewModel : ViewModelBase
     {
-        private static readonly string[] MatchTimelineEventTypes = new string[]
-        {
+        private static readonly string[] MatchTimelineEventTypes = new[] {
             EventTypes.BreakStart,
             EventTypes.MatchEnded,
             EventTypes.ScoreChange,

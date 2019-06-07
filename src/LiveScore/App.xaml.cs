@@ -112,7 +112,6 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
             ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
-            //ViewModelLocationProvider.Register<MatchInfoTemplate, MatchInfoViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

@@ -20,9 +20,9 @@ namespace LiveScore.Basketball.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
+        public Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
-            var matches = new List<IMatch>
+            IEnumerable<IMatch> matches = new List<IMatch>
             {
                 new Match {
                     EventDate = DateTime.Today,
@@ -32,7 +32,7 @@ namespace LiveScore.Basketball.Services
                 }
             };
 
-            return matches;
+            return Task.FromResult(matches);
         }
 
         public void SubscribeMatches(HubConnection hubConnection, Action<string, Dictionary<string, MatchPushEvent>> handler)
