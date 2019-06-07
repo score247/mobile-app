@@ -63,7 +63,7 @@ namespace LiveScore.Score.ViewModels
                 MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
 
-                var matchData = await matchService.GetMatch(SettingsService.UserSettings, match.Id);
+                var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18297893");
                 var timelines = matchData?.TimeLines?
                     .Where(t => MatchTimelineEventTypes.Contains(t.Type))
                     .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();

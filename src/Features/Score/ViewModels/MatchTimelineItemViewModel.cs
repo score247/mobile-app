@@ -87,7 +87,7 @@ namespace LiveScore.Score.ViewModels
                     }
                     else if (timeline.GoalScorer.Method == GoalMethod.Penalty)
                     {
-
+                        VisibleHomePenaltyGoalBall = true;
                     }
                     else
                     {
@@ -106,7 +106,7 @@ namespace LiveScore.Score.ViewModels
                     }
                     else if (timeline.GoalScorer.Method == GoalMethod.Penalty)
                     {
-
+                        VisibleAwayPenaltyGoalBall = true;
                     }
                     else
                     {
@@ -186,6 +186,8 @@ namespace LiveScore.Score.ViewModels
 
         public bool VisibleHomeMissGoalBall { get; set; }
 
+        public bool VisibleHomePenaltyGoalBall { get; set; }
+
         public bool VisibleScore { get; set; }
 
         public string Score { get; set; }
@@ -203,6 +205,8 @@ namespace LiveScore.Score.ViewModels
         public bool VisibleAwayRedYellowCard { get; set; }
 
         public bool VisibleAwayMissGoalBall { get; set; }
+
+        public bool VisibleAwayPenaltyGoalBall { get; set; }
     }
 }
 
