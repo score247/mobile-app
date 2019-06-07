@@ -19,9 +19,9 @@
                 AutomationId="NavigationTitleLbl"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
-            <FlexLayout.GestureRecognizers>
+           <!-- <FlexLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding SelectSportCommand}" />
-            </FlexLayout.GestureRecognizers>
+            </FlexLayout.GestureRecognizers>-->
         </FlexLayout>
     </ContentView.Content>
 </ContentView>
