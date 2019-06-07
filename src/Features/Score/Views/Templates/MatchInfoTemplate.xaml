@@ -73,7 +73,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <StackLayout BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}">
+                <StackLayout BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}" HeightRequest="300">
                     <FlexLayout Style="{StaticResource Group}">
                         <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
                     </FlexLayout>
