@@ -62,6 +62,10 @@ namespace LiveScore.Score.ViewModels
 
         public string DisplayScore { get; set; }
 
+        public string DisplayEventDate { get; set; }
+
+        public string DisplayVenueCapacity { get; set; }
+
         public ObservableCollection<MatchTimelineItemViewModel> MatchTimelineItemViewModels { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
@@ -86,7 +90,7 @@ namespace LiveScore.Score.ViewModels
         {
             IsLoading = showLoadingIndicator;
 
-            var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18297893", isRefresh);
+            var matchData = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
             var timelines = matchData?.TimeLines?
                 .Where(t => MatchTimelineEventTypes.Contains(t.Type))
                 .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
@@ -146,6 +150,9 @@ namespace LiveScore.Score.ViewModels
             var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
             var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
             DisplayScore = $"{homeScore} - {awayScore}";
+
+            DisplayEventDate = match.EventDate.ToString("HH:mm dd MMM, yyyy");
+            DisplayVenueCapacity = match.Venue?.Capacity.ToString("0,0");
         }
 
         private static string BuildScore(MatchStatus matchStatus, int score)

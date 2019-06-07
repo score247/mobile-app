@@ -76,9 +76,9 @@
                         <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
                         <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
                         <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Date and Time:" />
-                        <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.EventDate}" />
+                        <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" />
                         <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
-                        <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Capacity}" />
+                        <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenueCapacity}" />
                     </Grid>
                 </StackLayout>
             </ListView.Footer>
