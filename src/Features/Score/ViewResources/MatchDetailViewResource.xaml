@@ -115,7 +115,11 @@
     <Style x:Key="SubTabActive" BasedOn="{StaticResource CommonSubTab}" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
     </Style>
-    <Style x:Key="Group" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+    -->
+    <Style
+        x:Key="Group"
+        BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+        TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
@@ -129,5 +133,5 @@
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="Padding" Value="0,0,0,5" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-    </Style>-->
+    </Style>
 </ResourceDictionary>

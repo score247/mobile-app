@@ -1,9 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView x:Class="LiveScore.Score.Views.Templates.MatchInfoTemplate" 
-             xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-             xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" x:Name="view">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchInfoTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -14,72 +16,82 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
-        <ListView BackgroundColor="{StaticResource PrimaryColor}"
-                  ItemsSource="{Binding MatchTimelineItemViewModels}"
-                  CachingStrategy="RecycleElement"
-                  IsPullToRefreshEnabled="true"
-                  IsRefreshing="{Binding IsRefreshing}"
-                  RefreshCommand="{Binding RefreshCommand}"
-                  SeparatorColor="{StaticResource LineColor}">
+        <ListView
+            BackgroundColor="{StaticResource SecondColor}"
+            CachingStrategy="RecycleElement"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsRefreshing}"
+            ItemsSource="{Binding MatchTimelineItemViewModels}"
+            RefreshCommand="{Binding RefreshCommand}"
+            SeparatorColor="{StaticResource LineColor}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <FlexLayout Padding="8,0" Style="{StaticResource MatchInfoRow}" BackgroundColor="{Binding RowColor}">
+                        <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
                             <StackLayout Style="{StaticResource MatchInfoTeam}">
-                                <Label Style="{StaticResource MatchInfoHalfTimeText}" Text="{Binding MainEventStatus}" IsVisible="{Binding VisibleMainEventStatus}" />
-                                <Label Style="{StaticResource MatchInfoMinutes}" Text="{Binding MatchTime}" IsVisible="{Binding VisibleMatchTime}" />
+                                <Label
+                                    IsVisible="{Binding VisibleMainEventStatus}"
+                                    Style="{StaticResource MatchInfoHalfTimeText}"
+                                    Text="{Binding MainEventStatus}" />
+                                <Label
+                                    IsVisible="{Binding VisibleMatchTime}"
+                                    Style="{StaticResource MatchInfoMinutes}"
+                                    Text="{Binding MatchTime}" />
                                 <Label Style="{StaticResource MatchInfoText}" Text="{Binding HomeGoalScorerName}" />
-                                <Image Style="{StaticResource MatchInfoHomeBall}" IsVisible="{Binding VisibleHomeBall}" />
-                                <Image Style="{StaticResource MatchInfoHomeOwnGoal}" IsVisible="{Binding VisibleHomeOwnGoalBall}" />
-                                <Image Style="{StaticResource MatchInfoHomeMissedGoal}" IsVisible="{Binding VisibleHomeMissGoalBall}" />
-                                <Label Style="{StaticResource MatchInfoHomeYellowCard}" IsVisible="{Binding VisibleHomeYellowCard}" />
-                                <Label Style="{StaticResource MatchInfoHomeRedCard}" IsVisible="{Binding VisibleHomeRedCard}" />
-                                <Image Style="{StaticResource MatchInfoHomeRedYellowCard}" IsVisible="{Binding VisibleHomeRedYellowCard}" />
-                                <Image Style="{StaticResource MatchInfoHomeMissedGoal}" IsVisible="{Binding VisibleHomeMissGoalBall}"/>
-                                <Image Style="{StaticResource MatchInfoHomePenaltyGoal}" IsVisible="{Binding VisibleHomePenaltyGoalBall}"/>
+                                <Image IsVisible="{Binding VisibleHomeBall}" Style="{StaticResource MatchInfoHomeBall}" />
+                                <Image IsVisible="{Binding VisibleHomeOwnGoalBall}" Style="{StaticResource MatchInfoHomeOwnGoal}" />
+                                <Image IsVisible="{Binding VisibleHomeMissGoalBall}" Style="{StaticResource MatchInfoHomeMissedGoal}" />
+                                <Label IsVisible="{Binding VisibleHomeYellowCard}" Style="{StaticResource MatchInfoHomeYellowCard}" />
+                                <Label IsVisible="{Binding VisibleHomeRedCard}" Style="{StaticResource MatchInfoHomeRedCard}" />
+                                <Image IsVisible="{Binding VisibleHomeRedYellowCard}" Style="{StaticResource MatchInfoHomeRedYellowCard}" />
+                                <Image IsVisible="{Binding VisibleHomeMissGoalBall}" Style="{StaticResource MatchInfoHomeMissedGoal}" />
+                                <Image IsVisible="{Binding VisibleHomePenaltyGoalBall}" Style="{StaticResource MatchInfoHomePenaltyGoal}" />
                             </StackLayout>
                             <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
-                                <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" IsVisible="{Binding VisibleScore}" />
+                                <Button
+                                    IsVisible="{Binding VisibleScore}"
+                                    Style="{StaticResource MatchInfoScoreBox}"
+                                    Text="{Binding Score}" />
                             </StackLayout>
                             <StackLayout Style="{StaticResource MatchInfoTeam}">
-                                <Label Style="{StaticResource MatchInfoRedCard}" IsVisible="{Binding VisibleAwayRedCard}" />
-                                <Label Style="{StaticResource MatchInfoYellowCard}" IsVisible="{Binding VisibleAwayYellowCard}" />
-                                <Image Style="{StaticResource MatchInfoRedYellowCard}" IsVisible="{Binding VisibleAwayRedYellowCard}" />
-                                <Image Style="{StaticResource MatchInfoBall}" IsVisible="{Binding VisibleAwayBall}" />
-                                <Image Style="{StaticResource MatchInfoOwnGoal}" IsVisible="{Binding VisibleAwayOwnGoalBall}" />
-                                <Image Style="{StaticResource MatchInfoMissedGoal}" IsVisible="{Binding VisibleAwayMissGoalBall}" />
-                                <Image Style="{StaticResource MatchInfoPenaltyGoal}" IsVisible="{Binding VisibleAwayPenaltyGoalBall}"/>
+                                <Label IsVisible="{Binding VisibleAwayRedCard}" Style="{StaticResource MatchInfoRedCard}" />
+                                <Label IsVisible="{Binding VisibleAwayYellowCard}" Style="{StaticResource MatchInfoYellowCard}" />
+                                <Image IsVisible="{Binding VisibleAwayRedYellowCard}" Style="{StaticResource MatchInfoRedYellowCard}" />
+                                <Image IsVisible="{Binding VisibleAwayBall}" Style="{StaticResource MatchInfoBall}" />
+                                <Image IsVisible="{Binding VisibleAwayOwnGoalBall}" Style="{StaticResource MatchInfoOwnGoal}" />
+                                <Image IsVisible="{Binding VisibleAwayMissGoalBall}" Style="{StaticResource MatchInfoMissedGoal}" />
+                                <Image IsVisible="{Binding VisibleAwayPenaltyGoalBall}" Style="{StaticResource MatchInfoPenaltyGoal}" />
                                 <Label Style="{StaticResource MatchInfoText}" Text="{Binding AwayGoalScorerName}" />
+                                <StackLayout IsVisible="False" Style="{StaticResource MatchInfoPlayerGroup}">
+                                    <Label Style="{StaticResource MatchInfoMainPlayer}" Text="Darko Lazovic" />
+                                    <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="Darko Lazovic" />
+                                </StackLayout>
                             </StackLayout>
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <StackLayout HeightRequest="145" BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}">
-                    <FlexLayout Padding="16,0" BackgroundColor="#0F111C" HeightRequest="28" JustifyContent="Start">
-                        <Label FontAttributes="Bold" FontSize="12" HorizontalOptions="StartAndExpand" TextColor="#666666" VerticalTextAlignment="Center" Text="Match Info" />
+                <StackLayout BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}">
+                    <FlexLayout Style="{StaticResource Group}">
+                        <Label Style="{StaticResource GroupName}" Text="Match Info" />
                     </FlexLayout>
-                    <Grid Margin="16,8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="105" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="28" />
-                            <RowDefinition Height="28" />
-                            <RowDefinition Height="28" />
-                            <RowDefinition Height="28" />
-                        </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
-                        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
-                        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
-                        <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
-                        <Label Grid.Row="2" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Date and Time:" />
-                        <Label Grid.Row="2" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" />
-                        <Label Grid.Row="3" Grid.Column="0" Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
-                        <Label Grid.Row="3" Grid.Column="1" Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenueCapacity}" />
-                    </Grid>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Date and Time:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.EventDate}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Capacity}" />
+                    </FlexLayout>
                 </StackLayout>
             </ListView.Footer>
         </ListView>

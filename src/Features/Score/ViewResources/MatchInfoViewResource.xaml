@@ -16,14 +16,15 @@
         <Setter Property="JustifyContent" Value="Start" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="HeightRequest" Value="42" />
+        <Setter Property="Padding" Value="9,0" />
     </Style>
 
-    <Style
+    <!--<Style
         x:Key="MatchInfoHalfTime"
         BasedOn="{StaticResource MatchInfoRow}"
         TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="#2E3245" />
-    </Style>
+    </Style>-->
 
     <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
         <Setter Property="TextColor" Value="#fff" />
@@ -174,14 +175,34 @@
         <Setter Property="FlexLayout.Shrink" Value="0" />
     </Style>
 
-    <Style x:Key="InfoContainer" TargetType="StackLayout">
-        <Setter Property="Orientation" Value="Horizontal" />
+    <Style x:Key="MatchInfoPlayerGroup" TargetType="StackLayout">
+        <Setter Property="Margin" Value="10,0" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Padding" Value="10,0" />
     </Style>
+
+    <Style x:Key="MatchInfoMainPlayer" TargetType="Label">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="TextColor" Value="#fff" />
+    </Style>
+
+    <Style x:Key="MatchInfoAssistedPlayer" TargetType="Label">
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="TextColor" Value="#666" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoDetailRow"
+        BasedOn="{StaticResource FlexLayoutAlignLeft}"
+        TargetType="FlexLayout">
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="28" />
+    </Style>
+
     <Style x:Key="MatchInfoTitle" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FlexLayout.Basis" Value="105" />
+        <Setter Property="FlexLayout.Shrink" Value="0" />
     </Style>
     <Style
         x:Key="MatchInfoValue"
