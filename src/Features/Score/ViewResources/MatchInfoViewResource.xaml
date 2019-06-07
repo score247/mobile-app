@@ -149,7 +149,7 @@
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
         <Setter Property="WidthRequest" Value="35" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="FlexLayout.Shrink" Value="0" />
