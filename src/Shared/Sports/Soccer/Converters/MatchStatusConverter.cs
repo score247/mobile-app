@@ -1,4 +1,5 @@
-﻿namespace LiveScore.Soccer.Converters
+﻿using System;
+namespace LiveScore.Soccer.Converters
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -94,21 +95,12 @@
                 return status;
             }
 
-            var timeline = match.TimeLines?.FirstOrDefault();
+            var timeline = match.LatestTimeline ?? match.TimeLines.LastOrDefault();
+            var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline.StoppageTime) && timeline.StoppageTime != "0";
 
-            if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
+            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
             {
-                PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
-                var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
-                var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
-                var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
-
-                if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
-                {
-                    displayInjuryTime = annoucedInjuryTime;
-                }
-
-                return $"{periodEndTime}+{displayInjuryTime}'";
+                return BuildMatchInjuryTime(match, timeline, stoppageTimeHasValue);
             }
 
             return match.MatchResult.MatchTime + "'";
@@ -138,6 +130,26 @@
             }
 
             return string.Empty;
+        }
+
+        private static string BuildMatchInjuryTime(IMatch match, ITimeline timeline, bool isStoppageTimeHasValue)
+        {
+            PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
+            var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+            var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
+            var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
+
+            if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
+            {
+                displayInjuryTime = annoucedInjuryTime;
+            }
+
+            if (isStoppageTimeHasValue)
+            {
+                displayInjuryTime = int.Parse(timeline.StoppageTime);
+            }
+
+            return $"{periodEndTime}+{displayInjuryTime}'";
         }
     }
 }

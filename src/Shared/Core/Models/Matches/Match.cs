@@ -27,6 +27,8 @@
         IVenue Venue { get; }
 
         string Referee { get; }
+
+        ITimeline LatestTimeline { get; }
     }
 
     [AddINotifyPropertyChangedInterface]
