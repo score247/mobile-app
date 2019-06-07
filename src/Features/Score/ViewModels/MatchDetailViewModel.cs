@@ -98,6 +98,7 @@ namespace LiveScore.Score.ViewModels
             MatchViewModel = new MatchViewModel(matchData, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
             MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
                     timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
+            BuildMatchDetailData(MatchViewModel.Match);
 
             IsLoading = false;
             IsNotLoading = true;
@@ -128,7 +129,7 @@ namespace LiveScore.Score.ViewModels
                 var matchPayload = payload[match.Id];
                 match.MatchResult = matchPayload.MatchResult;
                 match.TimeLines = matchPayload.TimeLines;
-                MatchViewModel.BuildMatchStatus();
+
                 BuildMatchDetailData(match);
             });
 
@@ -144,6 +145,7 @@ namespace LiveScore.Score.ViewModels
 
         private void BuildMatchDetailData(IMatch match)
         {
+            match.EventDate = match.EventDate + (SettingsService.CurrentTimeZone.BaseUtcOffset);
             var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
 
@@ -153,6 +155,7 @@ namespace LiveScore.Score.ViewModels
 
             DisplayEventDate = match.EventDate.ToString("HH:mm dd MMM, yyyy");
             DisplayVenueCapacity = match.Venue?.Capacity.ToString("0,0");
+            MatchViewModel.BuildMatchStatus();
         }
 
         private static string BuildScore(MatchStatus matchStatus, int score)
