@@ -96,7 +96,7 @@ namespace LiveScore.Soccer.Converters
             }
 
             var timeline = match.LatestTimeline ?? match.TimeLines.LastOrDefault();
-            var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline.StoppageTime) && timeline.StoppageTime != "0";
+            var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
             if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
             {

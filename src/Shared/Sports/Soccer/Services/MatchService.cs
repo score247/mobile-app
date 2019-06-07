@@ -14,11 +14,11 @@
 
     public interface ISoccerMatchApi
     {
-        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&timeZone={timezone}&language={language}")]
-        Task<IEnumerable<Match>> GetMatches(string sportId, string language, string fromDate, string toDate, string timezone);
+        [Get("/Match/GetMatches?sportId={sportId}&from={fromDate}&to={toDate}&timeZone={timeZone}&language={language}")]
+        Task<IEnumerable<Match>> GetMatches(string sportId, string language, string fromDate, string toDate, string timeZone);
 
-        [Get("/Match/GetMatch?sportId={sportId}&matchId={matchId}&language={language}")]
-        Task<Match> GetMatch(string sportId, string matchId, string language);
+        [Get("/Match/GetMatch?sportId={sportId}&matchId={matchId}&timeZone={timeZone}&language={language}")]
+        Task<Match> GetMatch(string sportId, string matchId, string timeZone, string language);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -120,7 +120,7 @@
         private async Task<Match> GetMatchFromApi(UserSettings settings, string matchId)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerMatchApi>().GetMatch(settings.SportId, matchId, settings.Language)
+               () => apiService.GetApi<ISoccerMatchApi>().GetMatch(settings.SportId, matchId, settings.TimeZone, settings.Language)
            );
     }
 }

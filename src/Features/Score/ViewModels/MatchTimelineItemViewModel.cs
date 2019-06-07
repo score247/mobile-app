@@ -29,6 +29,8 @@ namespace LiveScore.Score.ViewModels
 
         private void BuildData(ITimeline timeline)
         {
+            Score = $"{timeline.HomeScore} - {timeline.AwayScore}";
+
             BuildMatchTime(timeline);
             BuildBreakStart(timeline);
             BuildMatchEnd(timeline);
@@ -95,7 +97,6 @@ namespace LiveScore.Score.ViewModels
         {
             if (timeline.Type == EventTypes.ScoreChange)
             {
-                Score = $"{timeline.HomeScore} - {timeline.AwayScore}";
                 VisibleScore = true;
 
                 if (timeline.Team == "home")
@@ -151,6 +152,8 @@ namespace LiveScore.Score.ViewModels
 
             if (timeline.Type == EventTypes.PenaltyMissed)
             {
+                VisibleScore = true;
+
                 if (timeline.Team == "home")
                 {
                     VisibleHomeMissPenaltyGoalBall = true;

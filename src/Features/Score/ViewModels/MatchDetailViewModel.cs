@@ -90,15 +90,8 @@ namespace LiveScore.Score.ViewModels
         {
             IsLoading = showLoadingIndicator;
 
-            var matchData = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
-            var timelines = matchData?.TimeLines?
-                .Where(t => MatchTimelineEventTypes.Contains(t.Type))
-                .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
-
-            MatchViewModel = new MatchViewModel(matchData, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
-            MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
-                    timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
-            BuildMatchDetailData(MatchViewModel.Match);
+            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
+            BuildMatchDetailData(match);
 
             IsLoading = false;
             IsNotLoading = true;
@@ -145,7 +138,14 @@ namespace LiveScore.Score.ViewModels
 
         private void BuildMatchDetailData(IMatch match)
         {
-            match.EventDate = match.EventDate + (SettingsService.CurrentTimeZone.BaseUtcOffset);
+            var timelines = match?.TimeLines?
+               .Where(t => MatchTimelineEventTypes.Contains(t.Type))
+               .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
+
+            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
+                    timelines.Select(t => new MatchTimelineItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)));
+
             var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
 
