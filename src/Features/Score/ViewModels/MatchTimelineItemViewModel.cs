@@ -53,12 +53,12 @@ namespace LiveScore.Score.ViewModels
                 if (timeline.Team == "home")
                 {
                     VisibleHomeYellowCard = true;
-                    HomeGoalScorerName = timeline.Player.Name;
+                    HomePlayerName = timeline.Player.Name;
                 }
                 else
                 {
                     VisibleAwayYellowCard = true;
-                    AwayGoalScorerName = timeline.Player.Name;
+                    AwayPlayerName = timeline.Player.Name;
                 }
             }
 
@@ -67,12 +67,12 @@ namespace LiveScore.Score.ViewModels
                 if (timeline.Team == "home")
                 {
                     VisibleHomeRedCard = true;
-                    HomeGoalScorerName = timeline.Player.Name;
+                    HomePlayerName = timeline.Player.Name;
                 }
                 else
                 {
                     VisibleAwayRedCard = true;
-                    AwayGoalScorerName = timeline.Player.Name;
+                    AwayPlayerName = timeline.Player.Name;
                 }
             }
 
@@ -81,12 +81,12 @@ namespace LiveScore.Score.ViewModels
                 if (timeline.Team == "home")
                 {
                     VisibleHomeRedYellowCard = true;
-                    HomeGoalScorerName = timeline.Player.Name;
+                    HomePlayerName = timeline.Player.Name;
                 }
                 else
                 {
                     VisibleAwayRedYellowCard = true;
-                    AwayGoalScorerName = timeline.Player.Name;
+                    AwayPlayerName = timeline.Player.Name;
                 }
             }
         }
@@ -100,8 +100,7 @@ namespace LiveScore.Score.ViewModels
 
                 if (timeline.Team == "home")
                 {
-                    HomeGoalScorerName = timeline.GoalScorer?.Name;
-                    AwayGoalScorerName = string.Empty;
+                    HomePlayerName = timeline.GoalScorer?.Name;
 
                     if (timeline.GoalScorer.Method == GoalMethod.OwnGoal)
                     {
@@ -113,13 +112,13 @@ namespace LiveScore.Score.ViewModels
                     }
                     else
                     {
+                        HomeAssistName = timeline.Assist?.Name;
                         VisibleHomeBall = true;
                     }
                 }
                 else
                 {
-                    AwayGoalScorerName = timeline.GoalScorer?.Name;
-                    HomeGoalScorerName = string.Empty;
+                    AwayPlayerName = timeline.GoalScorer?.Name;
 
                     if (timeline.GoalScorer.Method == GoalMethod.OwnGoal)
                     {
@@ -131,6 +130,7 @@ namespace LiveScore.Score.ViewModels
                     }
                     else
                     {
+                        AwayAssistName = timeline.Assist?.Name;
                         VisibleAwayBall = true;
                     }
                 }
@@ -154,12 +154,12 @@ namespace LiveScore.Score.ViewModels
                 if (timeline.Team == "home")
                 {
                     VisibleHomeMissGoalBall = true;
-                    HomeGoalScorerName = timeline.Player.Name;
+                    HomePlayerName = timeline.Player.Name;
                 }
                 else
                 {
                     VisibleAwayMissGoalBall = true;
-                    AwayGoalScorerName = timeline.Player.Name;
+                    AwayPlayerName = timeline.Player.Name;
                 }
             }
         }
@@ -200,7 +200,9 @@ namespace LiveScore.Score.ViewModels
 
         public bool VisibleMatchTime { get; private set; }
 
-        public string HomeGoalScorerName { get; set; }
+        public string HomePlayerName { get; set; }
+
+        public string HomeAssistName { get; set; }
 
         public bool VisibleHomeBall { get; set; }
 
@@ -220,7 +222,9 @@ namespace LiveScore.Score.ViewModels
 
         public string Score { get; set; }
 
-        public string AwayGoalScorerName { get; set; }
+        public string AwayPlayerName { get; set; }
+
+        public string AwayAssistName { get; set; }
 
         public bool VisibleAwayBall { get; set; }
 

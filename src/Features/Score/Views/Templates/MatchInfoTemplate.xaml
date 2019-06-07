@@ -37,10 +37,12 @@
                                     IsVisible="{Binding VisibleMatchTime}"
                                     Style="{StaticResource MatchInfoMinutes}"
                                     Text="{Binding MatchTime}" />
-                                <Label Style="{StaticResource MatchInfoText}" Text="{Binding HomeGoalScorerName}" />
+                                <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
+                                    <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding HomePlayerName}" HorizontalTextAlignment="End" />
+                                    <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding HomeAssistName}"  HorizontalTextAlignment="End" />
+                                </StackLayout>
                                 <Image IsVisible="{Binding VisibleHomeBall}" Style="{StaticResource MatchInfoHomeBall}" />
                                 <Image IsVisible="{Binding VisibleHomeOwnGoalBall}" Style="{StaticResource MatchInfoHomeOwnGoal}" />
-                                <Image IsVisible="{Binding VisibleHomeMissGoalBall}" Style="{StaticResource MatchInfoHomeMissedGoal}" />
                                 <Label IsVisible="{Binding VisibleHomeYellowCard}" Style="{StaticResource MatchInfoHomeYellowCard}" />
                                 <Label IsVisible="{Binding VisibleHomeRedCard}" Style="{StaticResource MatchInfoHomeRedCard}" />
                                 <Image IsVisible="{Binding VisibleHomeRedYellowCard}" Style="{StaticResource MatchInfoHomeRedYellowCard}" />
@@ -61,10 +63,9 @@
                                 <Image IsVisible="{Binding VisibleAwayOwnGoalBall}" Style="{StaticResource MatchInfoOwnGoal}" />
                                 <Image IsVisible="{Binding VisibleAwayMissGoalBall}" Style="{StaticResource MatchInfoMissedGoal}" />
                                 <Image IsVisible="{Binding VisibleAwayPenaltyGoalBall}" Style="{StaticResource MatchInfoPenaltyGoal}" />
-                                <Label Style="{StaticResource MatchInfoText}" Text="{Binding AwayGoalScorerName}" />
-                                <StackLayout IsVisible="False" Style="{StaticResource MatchInfoPlayerGroup}">
-                                    <Label Style="{StaticResource MatchInfoMainPlayer}" Text="Darko Lazovic" />
-                                    <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="Darko Lazovic" />
+                                <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
+                                    <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
+                                    <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding AwayAssistName}" />
                                 </StackLayout>
                             </StackLayout>
                         </FlexLayout>
