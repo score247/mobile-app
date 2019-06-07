@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace LiveScore.Soccer.Converters
 {
     using System.Collections.Generic;
@@ -95,7 +96,7 @@ namespace LiveScore.Soccer.Converters
                 return status;
             }
 
-            var timeline = match.LatestTimeline ?? match.TimeLines.LastOrDefault();
+            var timeline = match.LatestTimeline ?? match.TimeLines?.LastOrDefault();
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
             if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
