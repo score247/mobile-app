@@ -37,12 +37,19 @@
         <Setter Property="FlexLayout.Grow" Value="0.4" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
-
+     
     <Style x:Key="MatchInfoText" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    </Style>
+    
+    <Style
+        x:Key="MatchInfoHomeText"
+        BasedOn="{StaticResource MatchInfoText}"
+        TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchInfoScoreContainer" TargetType="StackLayout">
@@ -167,7 +174,7 @@
     </Style>
 
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
-        <Setter Property="WidthRequest" Value="32" />
+        <Setter Property="WidthRequest" Value="35" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />

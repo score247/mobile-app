@@ -9,7 +9,14 @@
     {
         public MatchInfoTemplate()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

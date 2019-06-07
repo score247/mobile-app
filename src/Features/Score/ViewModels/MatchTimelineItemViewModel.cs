@@ -43,7 +43,7 @@ namespace LiveScore.Score.ViewModels
 
             MatchTime = string.IsNullOrEmpty(timeline.StoppageTime)
                 ? timeline.MatchTime + "'"
-                : timeline.MatchTime + timeline.StoppageTime + "'";
+                : timeline.MatchTime + "+" + timeline.StoppageTime + "'";
         }
 
         private void BuildCard(ITimeline timeline)
@@ -120,7 +120,6 @@ namespace LiveScore.Score.ViewModels
                 {
                     AwayGoalScorerName = timeline.GoalScorer?.Name;
                     HomeGoalScorerName = string.Empty;
-                    VisibleAwayBall = true;
 
                     if (timeline.GoalScorer.Method == GoalMethod.OwnGoal)
                     {
@@ -132,7 +131,7 @@ namespace LiveScore.Score.ViewModels
                     }
                     else
                     {
-                        VisibleHomeBall = true;
+                        VisibleAwayBall = true;
                     }
                 }
             }
