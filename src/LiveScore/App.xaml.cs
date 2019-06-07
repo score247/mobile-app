@@ -29,8 +29,6 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using LiveScore.Score.Views.Templates;
-using LiveScore.Score.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 

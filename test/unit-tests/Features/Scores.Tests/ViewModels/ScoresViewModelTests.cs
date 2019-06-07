@@ -7,7 +7,6 @@ namespace Scores.Tests.ViewModels
     using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Common.Configuration;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
@@ -16,7 +15,6 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
     using LiveScore.Score.ViewModels;
-    using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
     using Xunit;

@@ -2,13 +2,13 @@
 using LiveScore.Soccer.Enumerations;
 namespace LiveScore.Score.ViewModels
 {
-    using LiveScore.Core.ViewModels;
-    using LiveScore.Core;
-    using Prism.Navigation;
-    using LiveScore.Core.Models.Matches;
-    using Xamarin.Forms;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Common.LangResources;
+    using LiveScore.Core;
+    using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.ViewModels;
+    using Prism.Navigation;
+    using Xamarin.Forms;
 
     public class MatchTimelineItemViewModel : ViewModelBase
     {

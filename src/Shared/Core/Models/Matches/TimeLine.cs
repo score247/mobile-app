@@ -2,9 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Teams;
-    using Newtonsoft.Json;
 
     public interface ITimeline : IEntity<long, string>
     {

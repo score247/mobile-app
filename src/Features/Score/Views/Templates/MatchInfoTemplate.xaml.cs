@@ -1,5 +1,4 @@
-﻿using LiveScore.Core.Models.Matches;
-namespace LiveScore.Score.Views.Templates
+﻿namespace LiveScore.Score.Views.Templates
 {
     using System;
     using Xamarin.Forms;

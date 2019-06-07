@@ -2,12 +2,12 @@
 using System.Linq;
 namespace LiveScore.Score.ViewModels
 {
-    using LiveScore.Common.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
     using Core.ViewModels;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
