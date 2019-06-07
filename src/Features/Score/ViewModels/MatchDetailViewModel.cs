@@ -45,7 +45,16 @@ namespace LiveScore.Score.ViewModels
         {
             matchHubConnection = hubService.BuildMatchHubConnection();
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadMatchDetail(MatchViewModel.Match.Id, false, true));
         }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
+
+        public bool IsRefreshing { get; set; }
+
+        public bool IsLoading { get; set; }
+
+        public bool IsNotLoading => !IsLoading;
 
         public MatchViewModel MatchViewModel { get; private set; }
 
@@ -63,16 +72,25 @@ namespace LiveScore.Score.ViewModels
                 MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
                 BuildMatchDetailData(match);
 
-                var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18297893");
-                var timelines = matchData?.TimeLines?
-                    .Where(t => MatchTimelineEventTypes.Contains(t.Type))
-                    .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
-
-                MatchViewModel = new MatchViewModel(matchData, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
-
-                MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
-                        timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
+                await LoadMatchDetail(match.Id);
             }
+        }
+
+        private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
+        {
+            IsLoading = showLoadingIndicator;
+
+            var matchData = await matchService.GetMatch(SettingsService.UserSettings, "sr:match:18297893", isRefresh);
+            var timelines = matchData?.TimeLines?
+                .Where(t => MatchTimelineEventTypes.Contains(t.Type))
+                .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
+
+            MatchViewModel = new MatchViewModel(matchData, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            MatchTimelineItemViewModels = new ObservableCollection<MatchTimelineItemViewModel>(
+                    timelines.Select(t => new MatchTimelineItemViewModel(t, matchData.MatchResult, NavigationService, DependencyResolver)));
+
+            IsLoading = false;
+            IsRefreshing = false;
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)

@@ -14,7 +14,13 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
-        <ListView BackgroundColor="{StaticResource PrimaryColor}" ItemsSource="{Binding MatchTimelineItemViewModels}" SeparatorColor="{StaticResource LineColor}">
+        <ListView BackgroundColor="{StaticResource PrimaryColor}"
+                  ItemsSource="{Binding MatchTimelineItemViewModels}"
+                  CachingStrategy="RecycleElement"
+                  IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  SeparatorColor="{StaticResource LineColor}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

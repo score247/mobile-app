@@ -51,7 +51,13 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <templates:MatchInfoTemplate />
+            <ActivityIndicator
+                x:Name="activity"
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Style="{StaticResource CenterActivityIndicator}" />
+            <templates:MatchInfoTemplate IsVisible="{Binding IsNotLoading}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
