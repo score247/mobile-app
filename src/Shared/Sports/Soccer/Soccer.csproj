@@ -27,6 +27,8 @@
     </Folder>
     <Folder Include="Enumerations\">
     </Folder>
+    <Folder Include="ViewModels\MatchDetailInfo\">
+    </Folder>
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -47,6 +49,25 @@
     </Compile>
     <Compile Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate.xaml.cs">
       <DependentUpon>ScoreChangeItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\MatchDetailInfo\CardItemTemplate.xaml.cs">
+      <DependentUpon>CardItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\MatchDetailInfo\EventStatusItemTemplate.xaml.cs">
+      <DependentUpon>EventStatusItemTemplate.xaml</DependentUpon>
+      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfoTemplate.xaml.cs">
+      <DependentUpon>MatchDetailInfoTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate %28copy%29.xaml.cs">
+      <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\PenaltyMissedItemTemplate.xaml.cs">
+      <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -7,29 +7,21 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Core.ViewModels;
-    using Xamarin.Forms;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
 
     public class MatchDetailViewModel : ViewModelBase
     {
-        private static readonly string[] MatchTimelineEventTypes = new[] {
-            EventTypes.BreakStart,
-            EventTypes.ScoreChange,
-            EventTypes.PenaltyMissed,
-            EventTypes.YellowCard,
-            EventTypes.RedCard,
-            EventTypes.YellowRedCard,
-        };
-
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
@@ -67,7 +59,7 @@
 
         public ContentView MatchDetailTemplate { get; set; }
 
-        public ObservableCollection<MatchDetailInfoItemViewModel> MatchTimelineItemViewModels { get; set; }
+        public ObservableCollection<BaseInfoItemViewModel> MatchTimelineItemViewModels { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -141,12 +133,13 @@
         private void BuildMatchDetailData(IMatch match)
         {
             var timelines = match?.TimeLines?
-               .Where(t => MatchTimelineEventTypes.Contains(t.Type))
+               .Where(t => BaseInfoItemViewModel.InfoItemEventTypes.Contains(t.Type))
                .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
             MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
-            MatchTimelineItemViewModels = new ObservableCollection<MatchDetailInfoItemViewModel>(
-                    timelines.Select(t => new MatchDetailInfoItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)));
+
+            MatchTimelineItemViewModels = new ObservableCollection<BaseInfoItemViewModel>(
+                timelines.Select(t => new BaseInfoItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver).CreateInstance()));
 
             var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";

@@ -31,4 +31,21 @@
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
       <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DefaultLanguageView.xaml.cs">
+        <DependentUpon>DefaultLanguageView.xaml</DependentUpon>
+      </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\DefaultSportView.xaml.cs">
+        <DependentUpon>DefaultSportView.xaml</DependentUpon>
+      </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\FAQView.xaml.cs">
+        <DependentUpon>FAQView.xaml</DependentUpon>
+      </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\InfoAlertView.xaml.cs">
+        <DependentUpon>InfoAlertView.xaml</DependentUpon>
+      </Compile>
+      <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\RefreshView.xaml.cs">
+        <DependentUpon>RefreshView.xaml</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

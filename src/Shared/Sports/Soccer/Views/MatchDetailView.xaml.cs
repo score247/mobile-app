@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Soccer.Views
 {
+    using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -8,7 +9,14 @@
     {
         public MatchDetailView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }

@@ -36,6 +36,21 @@
     <Compile Update="Views\TabMoreView.xaml.cs">
       <DependentUpon>TabMoreView.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewResources\DarkThemeResource.xaml.cs">
+      <DependentUpon>DarkThemeResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="ViewResources\LightThemeResource.xaml.cs">
+      <DependentUpon>LightThemeResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MenuTabbedView.xaml.cs">
+      <DependentUpon>MenuTabbedView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Shared\Sports\Basketball\Basketball.csproj" />
