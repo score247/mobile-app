@@ -115,7 +115,7 @@
 
                 var matchPayload = payload[match.Id];
                 match.MatchResult = matchPayload.MatchResult;
-                match.TimeLines = matchPayload.TimeLines;
+                match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines);
 
                 BuildMatchDetailData(match);
             });
