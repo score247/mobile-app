@@ -25,10 +25,8 @@
         <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
         <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
         <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
-        <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.0" />
         <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
         <PackageReference Include="SharpRaven" Version="2.4.0" />
-        <PackageReference Include="Fanex.Logging" Version="2.0.0" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -37,6 +35,7 @@
         <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
         <PackageReference Include="LiveXAML" Version="2.1.72" />
+        <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Converters\InverseBoolConverter.cs" />

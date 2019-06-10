@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView x:Class="LiveScore.Score.Views.Templates.MatchInfoTemplate" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common" xmlns:resources="clr-namespace:LiveScore.Score.ViewResources" x:Name="view">
+<ContentView x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.MatchDetailInfoTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
+             x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <resources:MatchDetailViewResource />
-                <resources:MatchInfoViewResource />
+                <resources:MatchDetailInfoViewResource />
             </ResourceDictionary.MergedDictionaries>
             <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
+            <templateSelectors:MatchDetailInfoItemTemplateSelector x:Key="infoTemplateSelector" />
         </ResourceDictionary>
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
-        <ListView BackgroundColor="{StaticResource SecondColor}" CachingStrategy="RecycleElement" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsRefreshing}" ItemsSource="{Binding MatchTimelineItemViewModels}" RefreshCommand="{Binding RefreshCommand}" SeparatorColor="{StaticResource LineColor}">
-            <ListView.ItemTemplate>
+        <ListView BackgroundColor="{StaticResource SecondColor}"
+                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  ItemsSource="{Binding MatchTimelineItemViewModels}"
+                  ItemTemplate="{StaticResource infoTemplateSelector}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  SeparatorColor="{StaticResource LineColor}">
+            <!--<ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
@@ -51,7 +64,7 @@
                         </FlexLayout>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
+            </ListView.ItemTemplate>-->
             <ListView.Footer>
                 <StackLayout BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}" HeightRequest="500">
                     <FlexLayout Style="{StaticResource Group}">

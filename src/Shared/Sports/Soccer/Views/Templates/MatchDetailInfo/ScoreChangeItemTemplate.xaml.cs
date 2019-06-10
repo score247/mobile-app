@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Score.ViewResources
+﻿namespace LiveScore.Soccer.Views.Templates.MatchDetailInfo
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MatchDetailViewResource : ResourceDictionary
+    public partial class ScoreChangeItemTemplate : DataTemplate
     {
-        public MatchDetailViewResource()
+        public ScoreChangeItemTemplate()
         {
             InitializeComponent();
         }

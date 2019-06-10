@@ -16,7 +16,6 @@
         {
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
             containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();
-            containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>();
         }
     }
 }

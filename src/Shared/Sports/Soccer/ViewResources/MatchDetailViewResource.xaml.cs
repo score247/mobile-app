@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Score.ViewResources
+﻿namespace LiveScore.Soccer.ViewResources
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ScoresViewResource : ResourceDictionary
+    public partial class MatchDetailViewResource : ResourceDictionary
     {
-        public ScoresViewResource()
+        public MatchDetailViewResource()
         {
             InitializeComponent();
         }
