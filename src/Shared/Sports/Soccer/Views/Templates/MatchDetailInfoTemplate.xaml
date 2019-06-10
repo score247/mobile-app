@@ -13,15 +13,15 @@
                 <resources:MatchDetailInfoViewResource />
             </ResourceDictionary.MergedDictionaries>
             <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
-            <templateSelectors:MatchDetailInfoItemTemplateSelector x:Key="infoTemplateSelector" />
+            <templateSelectors:MatchDetailInfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
         </ResourceDictionary>
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
         <ListView BackgroundColor="{StaticResource SecondColor}"
                   CachingStrategy="RecycleElement" IsPullToRefreshEnabled="true"
                   IsRefreshing="{Binding IsRefreshing}"
-                  ItemsSource="{Binding MatchTimelineItemViewModels}"
-                  ItemTemplate="{StaticResource infoTemplateSelector}"
+                  ItemsSource="{Binding InfoItemViewModels}"
+                  ItemTemplate="{StaticResource infoItemTemplateSelector}"
                   RefreshCommand="{Binding RefreshCommand}"
                   SeparatorColor="{StaticResource LineColor}">
             <ListView.Footer>

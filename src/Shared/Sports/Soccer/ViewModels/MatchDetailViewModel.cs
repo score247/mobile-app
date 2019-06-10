@@ -22,6 +22,7 @@
 
     public class MatchDetailViewModel : ViewModelBase
     {
+        private const string SpectatorNumberFormat = "0,0";
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
@@ -40,7 +41,6 @@
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
-
         public bool IsRefreshing { get; set; }
 
         public bool IsLoading { get; set; }
@@ -57,9 +57,7 @@
 
         public string DisplayAttendance { get; set; }
 
-        public ContentView MatchDetailTemplate { get; set; }
-
-        public ObservableCollection<BaseInfoItemViewModel> MatchTimelineItemViewModels { get; set; }
+        public ObservableCollection<BaseInfoItemViewModel> InfoItemViewModels { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -68,7 +66,7 @@
                 var match = parameters["Match"] as IMatch;
                 MatchViewModel = new MatchViewModel(
                     match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
-                BuildMatchDetailData(match);
+                BuildData(match);
             }
         }
 
@@ -80,18 +78,6 @@
             await StartListeningMatchHubEvent();
         }
 
-        private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
-        {
-            IsLoading = showLoadingIndicator;
-
-            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
-            BuildMatchDetailData(match);
-
-            IsLoading = false;
-            IsNotLoading = true;
-            IsRefreshing = false;
-        }
-
         protected override void Clean()
         {
             base.Clean();
@@ -100,6 +86,18 @@
             {
                 cancellationTokenSource.Dispose();
             }
+        }
+
+        private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
+        {
+            IsLoading = showLoadingIndicator;
+
+            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
+            BuildData(match);
+
+            IsLoading = false;
+            IsNotLoading = true;
+            IsRefreshing = false;
         }
 
         private async Task StartListeningMatchHubEvent()
@@ -117,7 +115,7 @@
                 match.MatchResult = matchPayload.MatchResult;
                 match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines);
 
-                BuildMatchDetailData(match);
+                BuildData(match);
             });
 
             try
@@ -130,32 +128,45 @@
             }
         }
 
-        private void BuildMatchDetailData(IMatch match)
+        private void BuildData(IMatch match)
+        {
+            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            MatchViewModel.BuildMatchStatus();
+
+            BuildInfoItems(match);
+            BuildGeneralInfo(match);
+            BuildFooterInfo(match);
+        }
+
+        private void BuildInfoItems(IMatch match)
         {
             var timelines = match?.TimeLines?
-               .Where(t => BaseInfoItemViewModel.InfoItemEventTypes.Contains(t.Type))
-               .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
+                 .Where(t => BaseInfoItemViewModel.InfoItemEventTypes.Contains(t.Type))
+                 .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
-            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            InfoItemViewModels = new ObservableCollection<BaseInfoItemViewModel>(timelines.Select(t =>
+                   new BaseInfoItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+                   .CreateInstance()));
+        }
 
-            MatchTimelineItemViewModels = new ObservableCollection<BaseInfoItemViewModel>(
-                timelines.Select(t => new BaseInfoItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver).CreateInstance()));
-
+        private void BuildGeneralInfo(IMatch match)
+        {
             var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
 
             var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
             var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
             DisplayScore = $"{homeScore} - {awayScore}";
+        }
 
-            DisplayEventDate = match.EventDate.ToString("HH:mm dd MMM, yyyy");
+        private void BuildFooterInfo(IMatch match)
+        {
+            DisplayEventDate = match.EventDate.ToFullDateTime();
 
             if (match.Attendance > 0)
             {
-                DisplayAttendance = match.Attendance.ToString("0,0");
+                DisplayAttendance = match.Attendance.ToString(SpectatorNumberFormat);
             }
-
-            MatchViewModel.BuildMatchStatus();
         }
 
         private static string BuildScore(MatchStatus matchStatus, int score)
