@@ -64,7 +64,7 @@ namespace LiveScore.Score.ViewModels
 
         public string DisplayEventDate { get; set; }
 
-        public string DisplayVenueCapacity { get; set; }
+        public string DisplayAttendance { get; set; }
 
         public ObservableCollection<MatchTimelineItemViewModel> MatchTimelineItemViewModels { get; set; }
 
@@ -154,7 +154,12 @@ namespace LiveScore.Score.ViewModels
             DisplayScore = $"{homeScore} - {awayScore}";
 
             DisplayEventDate = match.EventDate.ToString("HH:mm dd MMM, yyyy");
-            DisplayVenueCapacity = match.Venue?.Capacity.ToString("0,0");
+
+            if (match.Attendance > 0)
+            {
+                DisplayAttendance = match.Attendance.ToString("0,0");
+            }
+
             MatchViewModel.BuildMatchStatus();
         }
 

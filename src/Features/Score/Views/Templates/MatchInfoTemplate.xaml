@@ -65,9 +65,9 @@
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
                         <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
                     </FlexLayout>
-                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayVenueCapacity, Converter={StaticResource textNotEmptyConverter}}">
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenueCapacity}" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayAttendance}" />
                     </FlexLayout>
                     <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayEventDate, Converter={StaticResource textNotEmptyConverter}}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Kick Off Time:" />
