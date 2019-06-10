@@ -69,7 +69,7 @@
             }
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnAppearing()
         {
             await LoadMatchDetail(MatchViewModel.Match.Id);
             cancellationTokenSource = new CancellationTokenSource();
