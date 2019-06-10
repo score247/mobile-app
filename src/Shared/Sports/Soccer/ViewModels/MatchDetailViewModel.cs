@@ -16,7 +16,6 @@
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
-    using Xamarin.Forms;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
 

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace LiveScore.Soccer.Converters
+﻿namespace LiveScore.Soccer.Converters
 {
     using System.Collections.Generic;
     using System.Linq;
