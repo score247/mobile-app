@@ -40,6 +40,7 @@
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
+
         public bool IsRefreshing { get; set; }
 
         public bool IsLoading { get; set; }
@@ -63,18 +64,19 @@
             if (parameters != null)
             {
                 var match = parameters["Match"] as IMatch;
-                MatchViewModel = new MatchViewModel(
-                    match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+
                 BuildData(match);
             }
         }
 
+        public override async void OnResume()
+        {
+            await Initialize();
+        }
+
         public override async void OnAppearing()
         {
-            await LoadMatchDetail(MatchViewModel.Match.Id);
-            cancellationTokenSource = new CancellationTokenSource();
-
-            await StartListeningMatchHubEvent();
+            await Initialize();
         }
 
         protected override void Clean()
@@ -85,6 +87,14 @@
             {
                 cancellationTokenSource.Dispose();
             }
+        }
+
+        private async Task Initialize()
+        {
+            await LoadMatchDetail(MatchViewModel.Match.Id);
+            cancellationTokenSource = new CancellationTokenSource();
+
+            await StartListeningMatchHubEvent();
         }
 
         private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
@@ -101,10 +111,10 @@
 
         private async Task StartListeningMatchHubEvent()
         {
-            var match = MatchViewModel.Match;
-
             matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
             {
+                var match = MatchViewModel.Match;
+
                 if (sportId != SettingsService.CurrentSportType.Value || !payload.ContainsKey(match.Id))
                 {
                     return;
@@ -112,7 +122,7 @@
 
                 var matchPayload = payload[match.Id];
                 match.MatchResult = matchPayload.MatchResult;
-                match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines);
+                match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
                 BuildData(match);
             });

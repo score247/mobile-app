@@ -94,12 +94,12 @@
                 return status;
             }
 
-            var timeline = match.LatestTimeline ?? match.TimeLines?.LastOrDefault();
+            var timeline = match.TimeLines?.LastOrDefault();
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
             if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
             {
-                return BuildMatchInjuryTime(match, timeline, stoppageTimeHasValue);
+                return BuildMatchInjuryTime(match, timeline);
             }
 
             return match.MatchResult.MatchTime + "'";
@@ -119,6 +119,7 @@
         }
 
         private static string BuildEventStatus(IMatch match, bool showFullStatus)
+
         {
             var statusMapper = showFullStatus ? FullStatusMapper : StatusMapper;
             var eventStatus = match.MatchResult?.EventStatus;
@@ -131,7 +132,7 @@
             return string.Empty;
         }
 
-        private static string BuildMatchInjuryTime(IMatch match, ITimeline timeline, bool isStoppageTimeHasValue)
+        private static string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
         {
             PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
             var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
@@ -141,11 +142,6 @@
             if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
             {
                 displayInjuryTime = annoucedInjuryTime;
-            }
-
-            if (isStoppageTimeHasValue)
-            {
-                displayInjuryTime = int.Parse(timeline.StoppageTime);
             }
 
             return $"{periodEndTime}+{displayInjuryTime}'";
