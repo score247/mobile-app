@@ -58,24 +58,36 @@ pipeline{
                 }
 
                 unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', recipientProviders: [developers(), requestor()], subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
+                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
                 }
             }
         }
 
-        stage("Deploy App to Local"){
-            agent { 
-                label 'slaveMAC'
-            }
-            steps{
-                withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
-                    sh label: "Restore nuget", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
+        stage("Deploy to Local"){
+            parallel{
+                stage("Deploy Api"){
+                    steps{
+                        script{
+                            pipelineLib.deployByRocketor("11156", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
+                        }
+                    }
+                }
 
-                    sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
+                stage("Deploy App"){
+                    agent { 
+                        label 'slaveMAC'
+                    }
+                    steps{
+                        withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
+                            sh label: "Restore nuget", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
 
-                    sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall 13C278BF-A473-4654-B7AE-D1569ADA54E4 Score247.LiveScore"
+                            sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
 
-                    sh label: "Install App", script: "/usr/bin/xcrun simctl install 13C278BF-A473-4654-B7AE-D1569ADA54E4 $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
+                            sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall 13C278BF-A473-4654-B7AE-D1569ADA54E4 Score247.LiveScore"
+
+                            sh label: "Install App", script: "/usr/bin/xcrun simctl install 13C278BF-A473-4654-B7AE-D1569ADA54E4 $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
+                        }
+                    }
                 }
             }
         }
@@ -95,7 +107,7 @@ pipeline{
                 }
                 
                 unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', recipientProviders: [developers(), requestor()], subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
+                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
                 }
             }
         }
