@@ -94,7 +94,7 @@
                 return status;
             }
 
-            var timeline = match.TimeLines?.LastOrDefault();
+            var timeline = match.LatestTimeline;
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
             if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))

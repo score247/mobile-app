@@ -189,8 +189,7 @@ namespace LiveScore.Score.ViewModels
                 if (matchItem?.Match != null)
                 {
                     matchItem.Match.MatchResult = matchPayload.Value.MatchResult;
-                    matchItem.Match.TimeLines = matchPayload.Value.TimeLines;
-
+                    matchItem.Match.LatestTimeline = matchPayload.Value.TimeLines.LastOrDefault();
                     matchItem.BuildMatchStatus();
                 }
             }

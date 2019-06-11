@@ -22,13 +22,13 @@
 
         ILeague League { get; set; }
 
-        int Attendance { get; }
+        int Attendance { get; set; }
 
-        IVenue Venue { get; }
+        IVenue Venue { get; set; }
 
-        string Referee { get; }
+        string Referee { get; set; }
 
-        ITimeline LatestTimeline { get; }
+        ITimeline LatestTimeline { get; set; }
     }
 
     [AddINotifyPropertyChangedInterface]

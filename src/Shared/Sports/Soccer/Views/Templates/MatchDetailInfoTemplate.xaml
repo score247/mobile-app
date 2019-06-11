@@ -33,7 +33,7 @@
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
                         <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
                     </FlexLayout>
-                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding MatchViewModel.Match.Venue, Converter={StaticResource textNotEmptyConverter}}">
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
                         <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
                     </FlexLayout>

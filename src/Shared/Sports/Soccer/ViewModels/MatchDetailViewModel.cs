@@ -57,6 +57,8 @@
 
         public string DisplayAttendance { get; set; }
 
+        public string DisplayVenue { get; set; }
+
         public ObservableCollection<BaseInfoItemViewModel> InfoItemViewModels { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
@@ -65,7 +67,7 @@
             {
                 var match = parameters["Match"] as IMatch;
 
-                BuildData(match);
+                BuildGeneralInfo(match);
             }
         }
 
@@ -91,7 +93,7 @@
 
         private async Task Initialize()
         {
-            await LoadMatchDetail(MatchViewModel.Match.Id, isRefresh: true);
+            await LoadMatchDetail(MatchViewModel.Match.Id);
             cancellationTokenSource = new CancellationTokenSource();
 
             await StartListeningMatchHubEvent();
@@ -102,7 +104,13 @@
             IsLoading = showLoadingIndicator;
 
             var match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
-            BuildData(match);
+
+            BuildDetailInfo(match);
+
+            if (isRefresh)
+            {
+                BuildGeneralInfo(match);
+            }
 
             IsLoading = false;
             IsNotLoading = true;
@@ -130,7 +138,8 @@
 
                 match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
-                BuildData(match);
+                BuildGeneralInfo(match);
+                BuildDetailInfo(match);
             });
 
             try
@@ -143,13 +152,22 @@
             }
         }
 
-        private void BuildData(IMatch match)
+        private void BuildGeneralInfo(IMatch match)
         {
             MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
             MatchViewModel.BuildMatchStatus();
 
+            var eventDate = match.EventDate.ToDayMonthYear();
+            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
+
+            var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
+            var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
+            DisplayScore = $"{homeScore} - {awayScore}";
+        }
+
+        private void BuildDetailInfo(IMatch match)
+        {
             BuildInfoItems(match);
-            BuildGeneralInfo(match);
             BuildFooterInfo(match);
         }
 
@@ -164,16 +182,6 @@
                    .CreateInstance()));
         }
 
-        private void BuildGeneralInfo(IMatch match)
-        {
-            var eventDate = match.EventDate.ToDayMonthYear();
-            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
-
-            var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
-            var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
-            DisplayScore = $"{homeScore} - {awayScore}";
-        }
-
         private void BuildFooterInfo(IMatch match)
         {
             DisplayEventDate = match.EventDate.ToFullDateTime();
@@ -181,6 +189,11 @@
             if (match.Attendance > 0)
             {
                 DisplayAttendance = match.Attendance.ToString(SpectatorNumberFormat);
+            }
+
+            if (match.Venue != null)
+            {
+                DisplayVenue = match.Venue.Name;
             }
         }
 

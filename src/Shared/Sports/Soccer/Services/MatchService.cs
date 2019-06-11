@@ -89,7 +89,7 @@
 
                             var elapsed = DateTimeOffset.Now - offset;
 
-                            return elapsed > TimeSpan.FromSeconds(5);
+                            return elapsed > TimeSpan.FromSeconds(30);
                         });
 
                 return match;
