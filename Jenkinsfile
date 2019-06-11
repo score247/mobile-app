@@ -58,7 +58,7 @@ pipeline{
                 }
 
                 unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
+                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
                 }
             }
         }
@@ -107,7 +107,7 @@ pipeline{
                 }
                 
                 unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'larry.tran@starixsoft.com,vivian.nguyen@starixsoft.com'
+                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
                 }
             }
         }
