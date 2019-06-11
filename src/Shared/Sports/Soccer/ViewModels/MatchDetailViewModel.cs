@@ -136,6 +136,7 @@
                     match.TimeLines = new List<Timeline>();
                 }
 
+                match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
                 match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
                 BuildGeneralInfo(match);
