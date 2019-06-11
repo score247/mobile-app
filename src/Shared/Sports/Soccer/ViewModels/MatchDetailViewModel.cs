@@ -91,7 +91,7 @@
 
         private async Task Initialize()
         {
-            await LoadMatchDetail(MatchViewModel.Match.Id);
+            await LoadMatchDetail(MatchViewModel.Match.Id, isRefresh: true);
             cancellationTokenSource = new CancellationTokenSource();
 
             await StartListeningMatchHubEvent();
@@ -122,6 +122,12 @@
 
                 var matchPayload = payload[match.Id];
                 match.MatchResult = matchPayload.MatchResult;
+
+                if (match.TimeLines == null)
+                {
+                    match.TimeLines = new List<Timeline>();
+                }
+
                 match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
                 BuildData(match);
