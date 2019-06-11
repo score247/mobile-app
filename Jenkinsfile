@@ -27,7 +27,7 @@ pipeline{
             }
         }
           
-        stage("C# Test"){
+        stage("C# Unit Test"){
             steps{
                 script{
                     pipelineLib.xUnitForNetCore()
@@ -92,7 +92,7 @@ pipeline{
             }
         }
 
-        stage("Run Automation Test"){
+        stage("Run Acceptance Test"){
             agent { 
                 label 'slaveMAC'
             }
