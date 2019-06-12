@@ -12,6 +12,7 @@ pipeline{
 
     triggers{
         pollSCM("H/15 * * * *")
+        cron('H 20 * * *')
     }
 
     stages{
@@ -56,19 +57,18 @@ pipeline{
                     
                     mstest failOnError: false
                 }
-
-                unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
-                }
             }
         }
 
         stage("Deploy to Local"){
+            when { 
+                triggeredBy 'TimerTrigger' 
+            }       
             parallel{
-                stage("Deploy Api"){
+                stage("Deploy Api"){                                
                     steps{
                         script{
-                            pipelineLib.deployByRocketor("11156", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
+                            pipelineLib.deployByRocketor("11156,11095,11114", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
                         }
                     }
                 }
@@ -96,6 +96,9 @@ pipeline{
             agent { 
                 label 'slaveMAC'
             }
+            when { 
+                triggeredBy 'TimerTrigger' 
+            } 
             steps{
                 withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {                    
                     sh label: "Robotframework", script: "robot --outputdir $WORKSPACE/Results --exclude Demo $WORKSPACE/test/automation-tests/Score247.robot"
@@ -105,11 +108,12 @@ pipeline{
                 always{
                     step([$class: 'RobotPublisher', disableArchiveOutput: false, enableCache: true, logFileName: 'log.html', onlyCritical: true, otherFiles: '', outputFileName: 'output.xml', outputPath: 'Results', passThreshold: 100.0, reportFileName: 'report.html', unstableThreshold: 90.0])
                 }
-                
-                unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
-                }
             }
+        }
+    }
+    post{
+        unsuccessful{
+            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com, larry.tran@starixsoft.com'
         }
     }
 }
