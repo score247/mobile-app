@@ -68,6 +68,8 @@ Deploy
 
 
 - Open TestFlight page (https://appstoreconnect.apple.com/), browse to the Prerelease tab of your app to verify the latest version.
+  .. image:: ../_static/testflight/upload_app_4.png
+     :align: center
 
 Reference
 -----------
