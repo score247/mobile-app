@@ -11,16 +11,16 @@ Score247 Documentation
 .. toctree::
    :caption: Data Flow
    :maxdepth: 2
-
-<<<<<<< refs/remotes/origin/master
     Database <dataflow/database>
-=======
->>>>>>> Update docs for data flow
     Push Event <dataflow/pushevent>
     Fetch Match Job <dataflow/fetchdata> 
     Auto Update Match Time Job <dataflow/autoupdatematchtime> 
     Get Match By DateRange <dataflow/getmatchbydate> 
     Get Live Match <dataflow/getlivematch> 
+.. toctree::
+   :caption: Deployment
+   :maxdepth: 2
+   Testflight <deploy/testflight>
 .. .. toctree::
 ..    :caption: Scores
 ..    :maxdepth: 2
