@@ -15,8 +15,11 @@ Requirements
 Deploy
 -----------
 - Select Configuration to deploy
+
 > Release: https://api.nexdev.net/Main/api/
+
 > Test: https://api.nexdev.net/V2/api/
+
 > Dev: https://api.nexdev.net/V1/api/
 
 .. image:: ../_static/testflight/release_configurations.png
