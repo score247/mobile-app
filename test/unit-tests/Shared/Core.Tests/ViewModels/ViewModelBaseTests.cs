@@ -23,7 +23,7 @@ namespace LiveScore.Core.Tests.ViewModels
 
         public ViewModelBaseTests(ViewModelBaseFixture baseFixture)
         {
-            viewModel = new MockViewModel(baseFixture.NavigationService, baseFixture.DepdendencyResolver);
+            viewModel = new MockViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 
         [Fact]

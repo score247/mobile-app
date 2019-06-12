@@ -27,7 +27,6 @@ namespace Scores.Tests.ViewModels
         private readonly IList<IMatch> matchData;
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
-        private readonly IEnumerable<MatchViewModel> matchItemViewModels;
         private readonly FakeHubConnection hubConnection;
 
         public ScoresViewModelTests(ViewModelBaseFixture baseFixture)
@@ -39,7 +38,7 @@ namespace Scores.Tests.ViewModels
             matchService = Substitute.For<IMatchService>();
             hubService = Substitute.For<IHubService>();
 
-            baseFixture.DepdendencyResolver
+            baseFixture.DependencyResolver
                .Resolve<IMatchService>(Arg.Any<string>())
                .Returns(matchService);
 
@@ -48,13 +47,13 @@ namespace Scores.Tests.ViewModels
 
             matchItemViewModels = matchData.Select(match => new MatchViewModel(
                     match,
-                    baseFixture.NavigationService, baseFixture.DepdendencyResolver,
+                    baseFixture.NavigationService, baseFixture.DependencyResolver,
                     baseFixture.EventAggregator,
                     hubConnection));
 
             viewModel = new ScoresViewModel(
                 baseFixture.NavigationService,
-                baseFixture.DepdendencyResolver,
+                baseFixture.DependencyResolver,
                 baseFixture.EventAggregator,
                 hubService);
         }

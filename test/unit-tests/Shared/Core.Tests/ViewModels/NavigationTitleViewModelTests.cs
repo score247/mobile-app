@@ -12,7 +12,7 @@
         {
             viewModel = new NavigationTitleViewModel(
                 viewModelBaseFixture.NavigationService,
-                viewModelBaseFixture.DepdendencyResolver);
+                viewModelBaseFixture.DependencyResolver);
         }
 
         [Fact]

@@ -10,7 +10,7 @@ namespace Scores.Tests.ViewModels
 
         public LiveViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            viewModel = new LiveViewModel(baseFixture.NavigationService, baseFixture.DepdendencyResolver);
+            viewModel = new LiveViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 
         [Fact]
