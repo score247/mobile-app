@@ -24,7 +24,8 @@ Score247 Documentation
    :maxdepth: 2
 
    Testflight <deploy/testflight>
-   Jenkins deploy simulator <deploy/jenkinsdeploysimulator>
+   Jenkins <deploy/jenkinsdeploysimulator>
+   Appium Notes <deploy/appium>
 
 .. .. toctree::
 ..   :caption: Scores
