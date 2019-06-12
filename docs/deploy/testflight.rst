@@ -3,7 +3,7 @@ Testflight
 
 Requirements
 -----------
-- Download certificates from git repository
+- Download certificates from git repository (https://gitlab.nexdev.net/livescore/LiveScoreApp/tree/master/files)
 - Install iPhone Developer certificate
 - Install iPhone Distribution certificate
 
