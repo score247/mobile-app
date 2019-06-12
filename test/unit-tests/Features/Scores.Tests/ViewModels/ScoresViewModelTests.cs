@@ -260,7 +260,7 @@ namespace Scores.Tests.ViewModels
                 .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
 
             Assert.Equal(expectedMatch.MatchResult, matchResult);
-            Assert.Equal(expectedMatch.TimeLines, matchTimelines);
+            Assert.Equal(expectedMatch.LatestTimeline, matchTimelines.LastOrDefault());
         }
 
         [Fact]

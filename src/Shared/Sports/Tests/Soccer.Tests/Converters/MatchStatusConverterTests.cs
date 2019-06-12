@@ -115,11 +115,10 @@ namespace Soccer.Tests.Converters
                     MatchStatus = new MatchStatus { Value = matchStatus },
                     MatchTime = currentMatchTime
                 },
-                TimeLines = new List<Timeline> {
-                    new Timeline {
-                        Type = EventTypes.InjuryTimeShown,
-                        InjuryTimeAnnounced = 5
-                    }
+                LatestTimeline = new Timeline
+                {
+                    Type = EventTypes.InjuryTimeShown,
+                    InjuryTimeAnnounced = 5
                 }
             };
 
