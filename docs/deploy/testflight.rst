@@ -6,6 +6,10 @@ Requirements
 - Download certificates from git repository
 - Install iPhone Developer certificate
 - Install iPhone Distribution certificate
+
+.. image:: ../_static/testflight/verify_certs.png
+   :align: center
+
 - Application Loader In-app password
 
 Deploy
