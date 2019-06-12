@@ -6,7 +6,7 @@ Requirements
 - Download certificates from git repository
 - Install iPhone Developer certificate
 - Install iPhone Distribution certificate
-- Install Application Loader In-app password
+- Application Loader In-app password
 
 Deploy
 -----------
