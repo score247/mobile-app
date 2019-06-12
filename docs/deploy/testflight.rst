@@ -30,11 +30,17 @@ Deploy
   .. image:: ../_static/testflight/application_loader_1.png
      :align: center
 
+     Choose Next
+
   .. image:: ../_static/testflight/application_loader_2.png
      :align: center
 
+     Publish
+
   .. image:: ../_static/testflight/application_loader_3.png
      :align: center
+
+     Select folder to store .ipa file
 
   .. image:: ../_static/testflight/application_loader_4.png
       :align: center
