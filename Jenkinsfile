@@ -12,6 +12,7 @@ pipeline{
 
     triggers{
         pollSCM("H/15 * * * *")
+        cron('H 20 * * *')
     }
 
     stages{
