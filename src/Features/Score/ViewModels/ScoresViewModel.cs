@@ -83,12 +83,7 @@ namespace LiveScore.Score.ViewModels
                 await NavigateToHome();
             }
 
-            await Initialize();
-        }
-
-        public override async void OnAppearing()
-        {
-            await Initialize();
+            Initialize();
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
@@ -99,7 +94,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        private async Task Initialize()
+        protected override async void Initialize()
         {
             try
             {

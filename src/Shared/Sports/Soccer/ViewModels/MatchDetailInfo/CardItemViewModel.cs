@@ -34,11 +34,11 @@
 
             if (TimelineEvent.Team == "home")
             {
-                HomePlayerName = TimelineEvent.Player.Name;
+                HomePlayerName = TimelineEvent?.Player?.Name;
             }
             else
             {
-                AwayPlayerName = TimelineEvent.Player.Name;
+                AwayPlayerName = TimelineEvent?.Player?.Name;
             }
 
             BuildYellowCard();

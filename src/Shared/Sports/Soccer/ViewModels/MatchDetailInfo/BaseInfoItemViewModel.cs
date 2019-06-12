@@ -97,7 +97,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             Score = $"{TimelineEvent.HomeScore} - {TimelineEvent.AwayScore}";
 
-            RowColor = (Color)Application.Current.Resources["SecondColor"];
+            if (Application.Current != null)
+            {
+                RowColor = (Color)Application.Current.Resources["SecondColor"];
+            }
 
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
                 ? TimelineEvent.MatchTime + "'"

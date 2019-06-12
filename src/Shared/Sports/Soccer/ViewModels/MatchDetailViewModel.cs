@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Soccer.ViewModels
+﻿using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Soccer.Tests")]
+
+namespace LiveScore.Soccer.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -67,18 +71,11 @@
             {
                 var match = parameters["Match"] as IMatch;
 
-                BuildGeneralInfo(match);
+                if (match != null)
+                {
+                    BuildGeneralInfo(match);
+                }
             }
-        }
-
-        public override async void OnResume()
-        {
-            await Initialize();
-        }
-
-        public override async void OnAppearing()
-        {
-            await Initialize();
         }
 
         protected override void Clean()
@@ -91,12 +88,19 @@
             }
         }
 
-        private async Task Initialize()
+        protected override async void Initialize()
         {
-            await LoadMatchDetail(MatchViewModel.Match.Id);
-            cancellationTokenSource = new CancellationTokenSource();
+            try
+            {
+                await LoadMatchDetail(MatchViewModel.Match.Id);
+                cancellationTokenSource = new CancellationTokenSource();
 
-            await StartListeningMatchHubEvent();
+                await StartListeningMatchHubEvent();
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
+            }
         }
 
         private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
@@ -119,38 +123,33 @@
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", (sportId, payload) =>
+            matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
+
+            await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
+        }
+
+        protected internal void OnReceivingMatchEvent(string sportId, Dictionary<string, MatchPushEvent> payload)
+        {
+            var match = MatchViewModel.Match;
+
+            if (sportId != SettingsService.CurrentSportType.Value || match?.Id == null || !payload.ContainsKey(match.Id))
             {
-                var match = MatchViewModel.Match;
-
-                if (sportId != SettingsService.CurrentSportType.Value || !payload.ContainsKey(match.Id))
-                {
-                    return;
-                }
-
-                var matchPayload = payload[match.Id];
-                match.MatchResult = matchPayload.MatchResult;
-
-                if (match.TimeLines == null)
-                {
-                    match.TimeLines = new List<Timeline>();
-                }
-
-                match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
-                match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
-
-                BuildGeneralInfo(match);
-                BuildDetailInfo(match);
-            });
-
-            try
-            {
-                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
+                return;
             }
-            catch (Exception ex)
+
+            var matchPayload = payload[match.Id];
+            match.MatchResult = matchPayload.MatchResult;
+
+            if (match.TimeLines == null)
             {
-                await LoggingService.LogErrorAsync(ex);
+                match.TimeLines = new List<Timeline>();
             }
+
+            match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
+            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
+
+            BuildGeneralInfo(match);
+            BuildDetailInfo(match);
         }
 
         private void BuildGeneralInfo(IMatch match)
@@ -159,11 +158,14 @@
             MatchViewModel.BuildMatchStatus();
 
             var eventDate = match.EventDate.ToDayMonthYear();
-            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League.Name.ToUpperInvariant()}";
+            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League?.Name?.ToUpperInvariant() ?? string.Empty}";
 
-            var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
-            var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
-            DisplayScore = $"{homeScore} - {awayScore}";
+            if (match.MatchResult != null)
+            {
+                var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
+                var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
+                DisplayScore = $"{homeScore} - {awayScore}";
+            }
         }
 
         private void BuildDetailInfo(IMatch match)
@@ -200,6 +202,11 @@
 
         private static string BuildScore(MatchStatus matchStatus, int score)
         {
+            if (matchStatus == null)
+            {
+                return string.Empty;
+            }
+
             return matchStatus.IsPreMatch ? string.Empty : score.ToString();
         }
     }

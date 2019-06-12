@@ -36,41 +36,51 @@
         {
             base.BuildInfo();
 
-            if (TimelineEvent.Team == "home")
+            if (TimelineEvent?.Team == "home")
             {
-                HomePlayerName = TimelineEvent.GoalScorer?.Name;
-
-                if (TimelineEvent.GoalScorer.Method == GoalMethod.OwnGoal)
-                {
-                    VisibleHomeOwnGoalBall = true;
-                }
-                else if (TimelineEvent.GoalScorer.Method == GoalMethod.Penalty)
-                {
-                    VisibleHomePenaltyGoalBall = true;
-                }
-                else
-                {
-                    HomeAssistName = TimelineEvent.Assist?.Name;
-                    VisibleHomeBall = true;
-                }
+                BuildHomeInfo();
             }
             else
             {
-                AwayPlayerName = TimelineEvent.GoalScorer?.Name;
+                BuildAwayInfo();
+            }
+        }
 
-                if (TimelineEvent.GoalScorer.Method == GoalMethod.OwnGoal)
-                {
-                    VisibleAwayOwnGoalBall = true;
-                }
-                else if (TimelineEvent.GoalScorer.Method == GoalMethod.Penalty)
-                {
-                    VisibleAwayPenaltyGoalBall = true;
-                }
-                else
-                {
-                    AwayAssistName = TimelineEvent.Assist?.Name;
-                    VisibleAwayBall = true;
-                }
+        private void BuildAwayInfo()
+        {
+            AwayPlayerName = TimelineEvent?.GoalScorer?.Name;
+
+            if (TimelineEvent?.GoalScorer?.Method == GoalMethod.OwnGoal)
+            {
+                VisibleAwayOwnGoalBall = true;
+            }
+            else if (TimelineEvent?.GoalScorer?.Method == GoalMethod.Penalty)
+            {
+                VisibleAwayPenaltyGoalBall = true;
+            }
+            else
+            {
+                AwayAssistName = TimelineEvent.Assist?.Name;
+                VisibleAwayBall = true;
+            }
+        }
+
+        private void BuildHomeInfo()
+        {
+            HomePlayerName = TimelineEvent?.GoalScorer?.Name;
+
+            if (TimelineEvent?.GoalScorer?.Method == GoalMethod.OwnGoal)
+            {
+                VisibleHomeOwnGoalBall = true;
+            }
+            else if (TimelineEvent?.GoalScorer?.Method == GoalMethod.Penalty)
+            {
+                VisibleHomePenaltyGoalBall = true;
+            }
+            else
+            {
+                HomeAssistName = TimelineEvent.Assist?.Name;
+                VisibleHomeBall = true;
             }
         }
     }

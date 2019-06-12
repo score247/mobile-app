@@ -28,6 +28,7 @@ namespace Scores.Tests.ViewModels
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
         private readonly FakeHubConnection hubConnection;
+        private readonly IEnumerable<MatchViewModel> matchItemViewModels;
 
         public ScoresViewModelTests(ViewModelBaseFixture baseFixture)
         {

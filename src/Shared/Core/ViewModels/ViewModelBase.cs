@@ -59,6 +59,7 @@
 
         public virtual void OnResume()
         {
+            Initialize();
         }
 
         public virtual void OnSleep()
@@ -68,6 +69,7 @@
 
         public virtual void OnAppearing()
         {
+            Initialize();
         }
 
         public virtual void OnDisappearing()
@@ -77,6 +79,10 @@
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
+
+        protected virtual void Initialize()
+        {
+        }
 
         protected virtual void Clean()
         {

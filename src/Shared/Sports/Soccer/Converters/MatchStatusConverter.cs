@@ -65,6 +65,11 @@
                 return AppResources.FT;
             }
 
+            if (match.MatchResult == null || match.MatchResult.EventStatus == null)
+            {
+                return AppResources.FT;
+            }
+
             if (match.MatchResult.EventStatus.IsNotStarted)
             {
                 return match.EventDate.ToTimeWithoutSecond();
