@@ -14,6 +14,14 @@ Requirements
 
 Deploy
 -----------
+- Select Configuration to deploy
+> Release: https://api.nexdev.net/Main/api/
+> Test: https://api.nexdev.net/V2/api/
+> Dev: https://api.nexdev.net/V1/api/
+
+.. image:: ../_static/testflight/release_configurations.png
+   :align: center
+
 - Right-Click on the iOS project, and select Archive for Publishing
 
 .. image:: ../_static/testflight/archive_for_publishing.png
@@ -31,7 +39,7 @@ Deploy
 
   > Choose Next
 
-  .. image:: ../_static/testflight/application_loader_2.png     
+  .. image:: ../_static/testflight/application_loader_2.png
 
   > Publish
 
