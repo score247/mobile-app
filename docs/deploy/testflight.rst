@@ -20,4 +20,4 @@ Deploy
 Reference
 -----------
 
-https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/testflight?tabs=macos
+https://docs.microsoft.com/en-us/xamarin/ios/deploy-test/testflight?tabs=macos#upload-your-app
