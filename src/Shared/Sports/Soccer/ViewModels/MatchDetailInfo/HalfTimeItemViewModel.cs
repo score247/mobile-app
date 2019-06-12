@@ -24,13 +24,17 @@
         {
             base.BuildInfo();
 
-            RowColor = (Color)Application.Current.Resources["LineColor"];
+            if (Application.Current != null)
+            {
+                RowColor = (Color)Application.Current.Resources["LineColor"];
+            }
+
             MainEventStatus = AppResources.HalfTime;
 
             if (Result?.MatchPeriods != null)
             {
-                var halfTimeResult = Result.MatchPeriods.FirstOrDefault();
-                Score = $"{halfTimeResult.HomeScore} - {halfTimeResult.AwayScore}";
+                var halfTimeResult = Result.MatchPeriods?.FirstOrDefault();
+                Score = $"{halfTimeResult?.HomeScore} - {halfTimeResult?.AwayScore}";
             }
             else
             {

@@ -26,12 +26,12 @@
             if (TimelineEvent.Team == "home")
             {
                 VisibleHomeMissPenaltyGoalBall = true;
-                HomePlayerName = TimelineEvent.Player.Name;
+                HomePlayerName = TimelineEvent?.Player?.Name;
             }
             else
             {
                 VisibleAwayMissPenaltyGoalBall = true;
-                AwayPlayerName = TimelineEvent.Player.Name;
+                AwayPlayerName = TimelineEvent?.Player?.Name;
             }
         }
     }

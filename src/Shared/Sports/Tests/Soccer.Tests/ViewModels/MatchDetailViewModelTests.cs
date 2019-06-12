@@ -124,7 +124,11 @@ namespace Soccer.Tests.ViewModels
             {
                 new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
                 new Timeline { Type = "yellow_card", Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
-                new Timeline { Type = "corner_kick", Time = new DateTime(2019, 01, 01, 17, 15, 00 )}
+                new Timeline { Type = "corner_kick", Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
+                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
+                new Timeline { Type = "break_start", Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
+                new Timeline { Type = "penalty_missed", Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
+                new Timeline { Type = "score_change", Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
             };
             returnMatch.TimeLines.Returns(returnTimelines);
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
@@ -136,7 +140,11 @@ namespace Soccer.Tests.ViewModels
             var expectedInfoItemViewModels = new ObservableCollection<BaseInfoItemViewModel>
             {
                 new BaseInfoItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseInfoItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+                new BaseInfoItemViewModel(returnTimelines[3], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseInfoItemViewModel(returnTimelines[4], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseInfoItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseInfoItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseInfoItemViewModel(returnTimelines[5], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
             var actualInfoItemViewModels = viewModel.InfoItemViewModels;
             Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
