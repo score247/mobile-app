@@ -28,22 +28,18 @@ Deploy
 - Select the App Store distribution channel to create a package and Publish
 
   .. image:: ../_static/testflight/application_loader_1.png
-     :align: center
 
-     Choose Next
+  > Choose Next
 
-  .. image:: ../_static/testflight/application_loader_2.png
-     :align: center
+  .. image:: ../_static/testflight/application_loader_2.png     
 
-     Publish
+  > Publish
 
   .. image:: ../_static/testflight/application_loader_3.png
-     :align: center
 
-     Select folder to store .ipa file
+  > Select folder to store .ipa file
 
   .. image:: ../_static/testflight/application_loader_4.png
-      :align: center
 
 - On the the Application Loader program, Select the Deliver Your App option, and upload the .ipa file created above
 
