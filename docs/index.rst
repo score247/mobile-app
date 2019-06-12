@@ -25,7 +25,7 @@ Score247 Documentation
 
    Testflight <deploy/testflight>
    Jenkins <deploy/jenkinsdeploysimulator>
-   Appium Notes <deploy/appium>
+   Appium Issues <deploy/appium>
 
 .. .. toctree::
 ..   :caption: Scores
