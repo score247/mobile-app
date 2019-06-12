@@ -22,8 +22,9 @@ Score247 Documentation
 .. toctree::
    :caption: Deployment
    :maxdepth: 2
-   
+
    Testflight <deploy/testflight>
+   Jenkins deploy simulator <deploy/jenkinsdeploysimulator>
 
 .. .. toctree::
 ..   :caption: Scores
