@@ -72,7 +72,7 @@ pipeline{
                 stage("Deploy Api"){                                
                     steps{
                         script{
-                            pipelineLib.deployByRocketor("11156", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
+                            pipelineLib.deployByRocketor("11156,11095,11114", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
                         }
                     }
                 }
@@ -114,7 +114,7 @@ pipeline{
                 }
                 
                 unsuccessful{
-                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com'
+                    emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com, larry.tran@starixsoft.com'
                 }
             }
         }
