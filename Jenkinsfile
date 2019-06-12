@@ -65,8 +65,11 @@ pipeline{
         }
 
         stage("Deploy to Local"){
+            when { 
+                triggeredBy 'TimerTrigger' 
+            }       
             parallel{
-                stage("Deploy Api"){
+                stage("Deploy Api"){                                
                     steps{
                         script{
                             pipelineLib.deployByRocketor("11156", "$BRANCH_NAME", "", "", "86c94ed8b8ed4fad95da4c9961992ff7")
@@ -97,6 +100,9 @@ pipeline{
             agent { 
                 label 'slaveMAC'
             }
+            when { 
+                triggeredBy 'TimerTrigger' 
+            } 
             steps{
                 withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {                    
                     sh label: "Robotframework", script: "robot --outputdir $WORKSPACE/Results --exclude Demo $WORKSPACE/test/automation-tests/Score247.robot"
