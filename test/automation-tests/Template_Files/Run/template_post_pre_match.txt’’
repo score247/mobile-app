@@ -1,0 +1,895 @@
+[
+{
+    "Id": "sr:match:test01",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "Real Betis Balompie - AB",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "FC Barcelona - AB",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "AFC Cup",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-10T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 1,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "abandoned",
+            "DisplayName": "Abandoned"
+        },
+        "MatchStatus": {
+            "Value": "abandoned",
+            "DisplayName": "Abandoned"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test02",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "Real Betis Balompie - Ended",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "FC Barcelona - Ended",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "AFC Cup",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-10T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 1,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchStatus": {
+            "Value": "ended",
+            "DisplayName": "Ended"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test03",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "Real Betis Balompie - Closed",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "FC Barcelona - Closed",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "AFC Cup",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-11T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 1,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 1,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test04",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "KV Kortrijk - Full-time",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "Royal Antwerp FC - Full-time",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "AFC Cup",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-11T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchStatus": {
+            "Value": "full-time",
+            "DisplayName": "FullTime"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 0,
+                "HomeScore": 0,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 0,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test05",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "KV Kortrijk - AET",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "Royal Antwerp FC - AET",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "Italy",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-12T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchStatus": {
+            "Value": "aet",
+            "DisplayName": "EndedExtraTime"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 0,
+                "HomeScore": 0,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 0,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test06",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:4858",
+            "Flag": null,
+            "Name": "Juventus Turin - AP",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "KOR",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:2889",
+            "Flag": null,
+            "Name": "Genoa FC - AP",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Belgium",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "BEL",
+            "Abbreviation": "ANT",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:38",
+        "Flag": null,
+        "Name": "Italy",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:33",
+            "Name": "Belgium",
+            "CountryCode": "BEL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-12T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 30
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 2,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "closed",
+            "DisplayName": "Closed"
+        },
+        "MatchStatus": {
+            "Value": "ap",
+            "DisplayName": "EndedAfterPenalties"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 0,
+                "HomeScore": 0,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 0,
+                "HomeScore": 2,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test07",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:399419",
+            "Flag": null,
+            "Name": "LZS Agroplan Gluszyna - NotStarted",
+            "Coach": null,
+            "IsHome": true,
+            "Country": null,
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": null,
+            "Abbreviation": "LZS",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:272057",
+            "Flag": null,
+            "Name": "Stal Brzeg - NotStarted",
+            "Coach": null,
+            "IsHome": false,
+            "Country": null,
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": null,
+            "Abbreviation": "SBR",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:25839",
+        "Flag": null,
+        "Name": "Premier League",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:47",
+            "Name": "Poland",
+            "CountryCode": "POL"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-14T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": "3",
+        "Phase": "regular season",
+        "Number": 32
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 0,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "not_started",
+            "DisplayName": "NotStarted"
+        },
+        "MatchStatus": {
+            "Value": "not_started",
+            "DisplayName": "NotStarted"
+        },
+        "MatchPeriods": null
+    }
+},
+{
+    "Id": "sr:match:test08",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:2320",
+            "Flag": null,
+            "Name": "FC Lokomotiv Moscow - Postponed",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Russia",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "RUS",
+            "Abbreviation": "LOK",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:34425",
+            "Flag": null,
+            "Name": "FC Krasnodar - Postponed",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Russia",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "RUS",
+            "Abbreviation": "KRA",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:203",
+        "Flag": null,
+        "Name": "Premier League",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:21",
+            "Name": "Russia",
+            "CountryCode": "RUS"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-14T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": null,
+        "Phase": "regular season",
+        "Number": 20
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 0,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "postponed",
+            "DisplayName": "Postponed"
+        },
+        "MatchStatus": {
+            "Value": "postponed",
+            "DisplayName": "Postponed"
+        },
+        "MatchPeriods": [
+            {
+                "Number": 1,
+                "AwayScore": 0,
+                "HomeScore": 0,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            },
+            {
+                "Number": 2,
+                "AwayScore": 0,
+                "HomeScore": 1,
+                "PeriodType": {
+                    "Value": "regular_period",
+                    "DisplayName": "RegularPeriod"
+                }
+            }
+        ]
+    }
+},
+{
+    "Id": "sr:match:test09",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:52679",
+            "Flag": null,
+            "Name": "Arsenal Kiev - StartDelayed",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Ukraine",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "UKR",
+            "Abbreviation": "AKI",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:52672",
+            "Flag": null,
+            "Name": "FC Oleksandriya - StartDelayed",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Ukraine",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "UKR",
+            "Abbreviation": "OLE",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:892",
+        "Flag": null,
+        "Name": "U21",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:86",
+            "Name": "Ukraine",
+            "CountryCode": "UKR"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-06-15T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": "I",
+        "Phase": null,
+        "Number": 24
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 0,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "start_delayed",
+            "DisplayName": "StartDelayed"
+        },
+        "MatchStatus": {
+            "Value": "start_delayed",
+            "DisplayName": "StartDelayed"
+        },
+        "MatchPeriods": null
+    }
+},
+{
+    "Id": "sr:match:test10",
+    "Name": null,
+    "Teams": [
+        {
+            "Id": "sr:competitor:52679",
+            "Flag": null,
+            "Name": "Arsenal Kiev - Cancelled",
+            "Coach": null,
+            "IsHome": true,
+            "Country": "Ukraine",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "UKR",
+            "Abbreviation": "AKI",
+            "Substitutions": null
+        },
+        {
+            "Id": "sr:competitor:52672",
+            "Flag": null,
+            "Name": "FC Oleksandriya - Cancelled",
+            "Coach": null,
+            "IsHome": false,
+            "Country": "Ukraine",
+            "Players": null,
+            "Formation": null,
+            "Statistic": null,
+            "CountryCode": "UKR",
+            "Abbreviation": "OLE",
+            "Substitutions": null
+        }
+    ],
+    "Venue": null,
+    "League": {
+        "Id": "sr:tournament:892",
+        "Flag": null,
+        "Name": "U21",
+        "Order": 0,
+        "Category": {
+            "Id": "sr:category:86",
+            "Name": "Ukraine",
+            "CountryCode": "UKR"
+        }
+    },
+    "Referee": null,
+    "EventDate": "2019-05-07T10:00:00+00:00",
+    "TimeLines": null,
+    "Attendance": 0,
+    "LeagueRound": {
+        "Name": null,
+        "Type": {
+            "Value": "group",
+            "DisplayName": "Group"
+        },
+        "Group": "I",
+        "Phase": null,
+        "Number": 24
+    },
+    "MatchResult": {
+        "Period": 0,
+        "WinnerId": null,
+        "AwayScore": 0,
+        "HomeScore": 0,
+        "MatchTime": 0,
+        "EventStatus": {
+            "Value": "cancelled",
+            "DisplayName": "Cancelled"
+        },
+        "MatchStatus": {
+            "Value": "cancelled",
+            "DisplayName": "Cancelled"
+        },
+        "MatchPeriods": null
+    }
+}
+]
