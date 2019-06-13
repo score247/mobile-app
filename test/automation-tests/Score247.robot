@@ -177,20 +177,20 @@ Insert_data_Post_Pre_Match
     ${date5}=    Add Time To Date    ${current_date}    1 days    result_format=%Y-%m-%d    #1st date after current date
     ${date6}=    Add Time To Date    ${current_date}    2 days    result_format=%Y-%m-%d    #2nd date after current date
     ${date7}=    Add Time To Date    ${current_date}    3 days    result_format=%Y-%m-%d    #3rd date after current date
-    Copy File    Template_Files/template_post_pre_match.txt    Template_Files/Run/template_post_pre_match.txt
-    ${match_list}=    Get File    Template_Files/Run/template_post_pre_match.txt
+    Copy File    ${EXECDIR}/Template_Files/template_post_pre_match.txt    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
+    ${match_list}=    Get File    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
     @{list1}=    Create List    2019-05-01    2019-05-02    2019-05-03    2019-05-05    2019-05-06
     ...    2019-05-07
     @{list2}=    Create List    ${date1}    ${date2}    ${date3}    ${date5}    ${date6}
     ...    ${date7}
     : FOR    ${i}    IN RANGE    0    6
-    \    run    sed -i’’ -e s/@{list1}[${i}]/@{list2}[${i}]/ Template_Files/Run/template_post_pre_match.txt
-    ${match_list1}=    Get File    Template_Files/Run/template_post_pre_match.txt
+    \    run    sed -i’’ -e s/@{list1}[${i}]/@{list2}[${i}]/ ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
+    ${match_list1}=    Get File    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
     PostgreSQLDB.Connect To Postgresql    ${database}    ${user}    ${password}    ${host}    ${port}
-    ${create_match_table}=    PostgreSQLDB.Execute Plpgsql Script    Template_Files/Create_Table_Match.sql
-    ${script_insert_match}=    PostgreSQLDB.Execute Plpgsql Script    Template_Files/script_insert_match.sql
+    ${create_match_table}=    PostgreSQLDB.Execute Plpgsql Script    ${EXECDIR}/Template_Files/Create_Table_Match.sql
+    ${script_insert_match}=    PostgreSQLDB.Execute Plpgsql Script    ${EXECDIR}/Template_Files/script_insert_match.sql
     PostgreSQLDB.Execute Plpgsql Block    CALL public.insert_match('${match_list1}')
-    Remove File    Template_Files/Run/template_post_pre_match.txt
+    Empty Directory    ${EXECDIR}/Template_Files/Run
 
 SP2_Score_Post_Pre_Match_Date1
     [Documentation]    Verify data of Post-Match in the day that happend 3 days before current day
