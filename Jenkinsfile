@@ -8,10 +8,11 @@ pipeline{
     options{
         buildDiscarder(logRotator(numToKeepStr: '5'))    
         disableConcurrentBuilds()
+        gitLabConnection('Gitlab')
     }
 
     triggers{
-        pollSCM("H/15 * * * *")
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: 'All')
         cron('H 20 * * *')
     }
 
