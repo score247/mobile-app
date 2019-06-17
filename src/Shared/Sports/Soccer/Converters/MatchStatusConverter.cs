@@ -13,7 +13,7 @@
         private static readonly IDictionary<string, string> StatusMapper = new Dictionary<string, string>
         {
             { MatchStatus.Postponed, AppResources.Postp },
-            { MatchStatus.StartDelayed, AppResources.StartDelay },
+            { MatchStatus.StartDelayed, AppResources.StartDelayed },
             { MatchStatus.Cancelled, AppResources.Canc },
             { MatchStatus.AwaitingPenalties, AppResources.AwaitPen },
             { MatchStatus.Penalties, AppResources.Pen },
@@ -27,6 +27,27 @@
             { MatchStatus.Closed, AppResources.FT },
             { MatchStatus.EndedAfterPenalties, AppResources.AP },
             { MatchStatus.EndedExtraTime, AppResources.AET },
+            { MatchStatus.AwaitingExtraTime, AppResources.AwaitET }
+        };
+
+        private static readonly IDictionary<string, string> FullStatusMapper = new Dictionary<string, string>
+        {
+            { MatchStatus.Postponed, AppResources.Postponed },
+            { MatchStatus.StartDelayed, AppResources.StartDelayed },
+            { MatchStatus.Cancelled, AppResources.Cancelled },
+            { MatchStatus.AwaitingPenalties, AppResources.AwaitPenalties },
+            { MatchStatus.Penalties, AppResources.Penalties },
+            { MatchStatus.Pause, AppResources.Pause },
+            { MatchStatus.Interrupted, AppResources.Interrupted },
+            { MatchStatus.Halftime, AppResources.HalfTime },
+            { MatchStatus.Delayed, AppResources.Delayed },
+            { MatchStatus.Abandoned, AppResources.Abandoned },
+            { MatchStatus.FullTime, AppResources.FullTime },
+            { MatchStatus.Ended, AppResources.FullTime },
+            { MatchStatus.Closed, AppResources.FullTime },
+            { MatchStatus.EndedAfterPenalties, AppResources.AfterPenalties },
+            { MatchStatus.EndedExtraTime, AppResources.AfterExtraTime },
+            { MatchStatus.AwaitingExtraTime, AppResources.AwaitExtraTime }
         };
 
         private static readonly IDictionary<string, int> PeriodEndTimes = new Dictionary<string, int>
@@ -37,9 +58,14 @@
             { MatchStatus.SecondHaftExtra, 120 }
         };
 
-        public string BuildStatus(IMatch match)
+        public string BuildStatus(IMatch match, bool showFullStatus = false)
         {
             if (match == null)
+            {
+                return AppResources.FT;
+            }
+
+            if (match.MatchResult == null || match.MatchResult.EventStatus == null)
             {
                 return AppResources.FT;
             }
@@ -51,70 +77,79 @@
 
             if (match.MatchResult.EventStatus.IsLive)
             {
-                return BuildStatusForLive(match);
+                return BuildStatusForLive(match, showFullStatus);
             }
 
             if (match.MatchResult.EventStatus.IsClosed)
             {
-                var status = BuildMatchStatus(match);
+                var status = BuildMatchStatus(match, showFullStatus);
 
                 return string.IsNullOrEmpty(status) ? AppResources.FT : status;
             }
 
-            return BuildEventStatus(match);
+            return BuildEventStatus(match, showFullStatus);
         }
 
-        private static string BuildStatusForLive(IMatch match)
+        private static string BuildStatusForLive(IMatch match, bool showFullStatus)
         {
-            var status = BuildMatchStatus(match);
+            var status = BuildMatchStatus(match, showFullStatus);
 
             if (!string.IsNullOrEmpty(status))
             {
                 return status;
             }
 
-            var timeline = match.TimeLines?.FirstOrDefault();
+            var timeline = match.LatestTimeline;
+            var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
-            if (timeline != null && timeline.Type == EventTypes.InjuryTimeShown)
+            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
             {
-                PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
-                var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
-                var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
-                var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
-
-                if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
-                {
-                    displayInjuryTime = annoucedInjuryTime;
-                }
-
-                return $"{periodEndTime}+{displayInjuryTime}'";
+                return BuildMatchInjuryTime(match, timeline);
             }
 
             return match.MatchResult.MatchTime + "'";
         }
 
-        private static string BuildMatchStatus(IMatch match)
+        private static string BuildMatchStatus(IMatch match, bool showFullStatus)
         {
+            var statusMapper = showFullStatus ? FullStatusMapper : StatusMapper;
             var matchStatus = match.MatchResult?.MatchStatus;
 
-            if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus.Value))
+            if (matchStatus?.Value != null && statusMapper.ContainsKey(matchStatus.Value))
             {
-                return StatusMapper[matchStatus.Value];
+                return statusMapper[matchStatus.Value];
             }
 
             return string.Empty;
         }
 
-        private static string BuildEventStatus(IMatch match)
+        private static string BuildEventStatus(IMatch match, bool showFullStatus)
+
         {
+            var statusMapper = showFullStatus ? FullStatusMapper : StatusMapper;
             var eventStatus = match.MatchResult?.EventStatus;
 
-            if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus.Value))
+            if (eventStatus?.Value != null && statusMapper.ContainsKey(eventStatus.Value))
             {
-                return StatusMapper[eventStatus.Value];
+                return statusMapper[eventStatus.Value];
             }
 
             return string.Empty;
+        }
+
+        private static string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
+        {
+            PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
+            var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+            var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
+            var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
+
+            if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
+            {
+                displayInjuryTime = annoucedInjuryTime;
+            }
+
+            return $"{periodEndTime}+{displayInjuryTime}'";
         }
     }
 }

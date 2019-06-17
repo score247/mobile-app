@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.EventStatusItemTemplate"
+              xmlns="http://xamarin.com/schemas/2014/forms" xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailInfoViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
+                <StackLayout Style="{StaticResource MatchInfoTeam}">
+                    <Label Style="{StaticResource MatchInfoHalfTimeText}" Text="{Binding MainEventStatus}" />
+                </StackLayout>
+                <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
+                </StackLayout>
+                <StackLayout Style="{StaticResource MatchInfoTeam}">
+                </StackLayout>
+            </FlexLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

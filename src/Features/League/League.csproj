@@ -33,6 +33,12 @@
         <Compile Update="Views\LeaguePage.xaml.cs">
             <DependentUpon>LeagueView.xaml</DependentUpon>
         </Compile>
+        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\LeagueDetailView.xaml.cs">
+          <DependentUpon>LeagueDetailView.xaml</DependentUpon>
+        </Compile>
+        <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\LeagueView.xaml.cs">
+          <DependentUpon>LeagueView.xaml</DependentUpon>
+        </Compile>
     </ItemGroup>
     <ItemGroup>
         <None Update="Views\LeagueDetailPage.xaml">

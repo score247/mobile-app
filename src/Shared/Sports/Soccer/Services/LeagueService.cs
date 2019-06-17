@@ -26,6 +26,6 @@ namespace LiveScore.Soccer.Services
 
         }
 
-        public async Task<IEnumerable<ILeague>> GetLeagues() => Enumerable.Empty<ILeague>();
+        public Task<IEnumerable<ILeague>> GetLeagues() => Task.FromResult(Enumerable.Empty<ILeague>());
     }
 }

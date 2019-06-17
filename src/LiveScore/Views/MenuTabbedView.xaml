@@ -3,18 +3,18 @@
     x:Class="LiveScore.Views.MenuTabbedView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:league="clr-namespace:LiveScore.League.Views;assembly=LiveScore.League"
+    xmlns:localViews="clr-namespace:LiveScore.Views"
     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:news="clr-namespace:LiveScore.News.Views;assembly=LiveScore.News"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
     xmlns:tvschedule="clr-namespace:LiveScore.TVSchedule.Views;assembly=LiveScore.TVSchedule"
-    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-    xmlns:localViews="clr-namespace:LiveScore.Views"
     x:Name="self"
-    mvvm:ViewModelLocator.AutowireViewModel="True"
+    prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
     BarBackgroundColor="{StaticResource PrimaryColor}"
     BarTextColor="{StaticResource SecondTextColor}">
@@ -27,9 +27,7 @@
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate 
-                            Title="{langs:Translate Scores}" 
-                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:ScoresView>
             </x:Arguments>
@@ -43,9 +41,7 @@
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
                     <NavigationPage.TitleView>
-                         <coreTemplates:NavigationTitleTemplate 
-                            Title="{langs:Translate Live}" 
-                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </score:LiveView>
             </x:Arguments>
@@ -55,13 +51,11 @@
             x:Name="FavoritesBar"
             Title="{langs:Translate Favorites}"
             AutomationId="FavoritesBar"
-            Icon="images/common/favorite.png">
+            Icon="images/common/favorite_function_bar.png">
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
-                       <coreTemplates:NavigationTitleTemplate 
-                            Title="{langs:Translate Favorites}" 
-                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </favorites:EmptyFavoriteView>
             </x:Arguments>
@@ -75,9 +69,7 @@
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
-                          <coreTemplates:NavigationTitleTemplate 
-                            Title="{langs:Translate Leagues}" 
-                            mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
                     </NavigationPage.TitleView>
                 </league:LeagueView>
             </x:Arguments>

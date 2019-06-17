@@ -7,7 +7,6 @@ namespace Scores.Tests.ViewModels
     using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Common.Configuration;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
@@ -16,7 +15,6 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
     using LiveScore.Score.ViewModels;
-    using Microsoft.AspNetCore.SignalR.Client;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
     using Xunit;
@@ -25,11 +23,12 @@ namespace Scores.Tests.ViewModels
     {
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
+        private readonly IHubService hubService;
         private readonly IList<IMatch> matchData;
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
-        private readonly IEnumerable<MatchItemSourceViewModel> matchItemViewModels;
         private readonly FakeHubConnection hubConnection;
+        private readonly IEnumerable<MatchViewModel> matchItemViewModels;
 
         public ScoresViewModelTests(ViewModelBaseFixture baseFixture)
         {
@@ -38,28 +37,26 @@ namespace Scores.Tests.ViewModels
             matchData = baseFixture.CommonFixture.Specimens
                 .CreateMany<IMatch>().ToList();
             matchService = Substitute.For<IMatchService>();
+            hubService = Substitute.For<IHubService>();
 
-            baseFixture.DepdendencyResolver
+            baseFixture.DependencyResolver
                .Resolve<IMatchService>(Arg.Any<string>())
                .Returns(matchService);
 
             hubConnection = Substitute.For<FakeHubConnection>();
-            baseFixture.HubConnectionBuilder
-                .WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub")
-                .Build()
-                .Returns(hubConnection);
+            hubService.BuildMatchHubConnection().Returns(hubConnection);
 
-            matchItemViewModels = matchData.Select(match => new MatchItemSourceViewModel(
+            matchItemViewModels = matchData.Select(match => new MatchViewModel(
                     match,
-                    baseFixture.NavigationService, baseFixture.DepdendencyResolver,
+                    baseFixture.NavigationService, baseFixture.DependencyResolver,
                     baseFixture.EventAggregator,
                     hubConnection));
 
             viewModel = new ScoresViewModel(
                 baseFixture.NavigationService,
-                baseFixture.DepdendencyResolver,
+                baseFixture.DependencyResolver,
                 baseFixture.EventAggregator,
-                baseFixture.HubConnectionBuilder);
+                hubService);
         }
 
         [Fact]
@@ -116,6 +113,35 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
+        public async Task TappedMatchCommand_OnExecuting_CallNavigationService()
+        {
+            // Arrange
+            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
+            await viewModel.RefreshCommand.ExecuteAsync();
+            var matchViewModel = viewModel.MatchItemSource.SelectMany(group => group).FirstOrDefault();
+
+            // Act
+            await viewModel.TappedMatchCommand.ExecuteAsync(matchViewModel);
+
+            // Assert
+            var navService = viewModel.NavigationService as FakeNavigationService;
+            Assert.Equal("MatchDetailView" + viewModel.SettingsService.CurrentSportType.Value, navService.NavigationPath);
+            Assert.Equal(matchViewModel.Match, navService.Parameters["Match"]);
+        }
+
+        [Fact]
+        public async Task ClickSearchCommand_OnExecuting_CallNavigationService()
+        {
+            // Act
+            await viewModel.ClickSearchCommand.ExecuteAsync();
+
+            // Assert
+            var navService = viewModel.NavigationService as FakeNavigationService;
+            Assert.Equal("SearchNavigationPage/SearchView", navService.NavigationPath);
+            Assert.True(navService.UseModalNavigation);
+        }
+
+        [Fact]
         public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
         {
             // Arrange
@@ -158,7 +184,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -173,7 +199,7 @@ namespace Scores.Tests.ViewModels
             viewModel.OnAppearing();
 
             // Assert
-            await viewModel.LoggingService.ReceivedWithAnyArgs(1).LogErrorAsync(Arg.Any<Exception>());
+            await viewModel.LoggingService.ReceivedWithAnyArgs().LogErrorAsync(Arg.Any<Exception>());
         }
 
         [Fact]
@@ -198,7 +224,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPayload>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -222,8 +248,8 @@ namespace Scores.Tests.ViewModels
             const string sportId = "1";
             InitViewModelData(
                  out IMatchResult matchResult,
-                 out IEnumerable<ITimeLine> matchTimelines,
-                 out Dictionary<string, MatchPayload> matchPayloads);
+                 out IEnumerable<ITimeline> matchTimelines,
+                 out Dictionary<string, MatchPushEvent> matchPayloads);
 
             // Act
             viewModel.OnMatchesChanged(sportId, matchPayloads);
@@ -234,7 +260,7 @@ namespace Scores.Tests.ViewModels
                 .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
 
             Assert.Equal(expectedMatch.MatchResult, matchResult);
-            Assert.Equal(expectedMatch.TimeLines, matchTimelines);
+            Assert.Equal(expectedMatch.LatestTimeline, matchTimelines.LastOrDefault());
         }
 
         [Fact]
@@ -244,8 +270,8 @@ namespace Scores.Tests.ViewModels
             const string sportId = "2";
             InitViewModelData(
                 out IMatchResult matchResult,
-                out IEnumerable<ITimeLine> matchTimelines,
-                out Dictionary<string, MatchPayload> matchPayloads);
+                out IEnumerable<ITimeline> matchTimelines,
+                out Dictionary<string, MatchPushEvent> matchPayloads);
 
             // Act
             viewModel.OnMatchesChanged(sportId, matchPayloads);
@@ -259,15 +285,15 @@ namespace Scores.Tests.ViewModels
             Assert.NotEqual(expectedMatch.TimeLines, matchTimelines);
         }
 
-        private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimeLine> matchTimelines, out Dictionary<string, MatchPayload> matchPayloads)
+        private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimeline> matchTimelines, out Dictionary<string, MatchPushEvent> matchPayloads)
         {
             matchResult = specimens.Create<IMatchResult>();
-            matchTimelines = specimens.CreateMany<ITimeLine>();
-            matchPayloads = new Dictionary<string, MatchPayload>
+            matchTimelines = specimens.CreateMany<ITimeline>();
+            matchPayloads = new Dictionary<string, MatchPushEvent>
             {
-                { matchData[0].Id, new MatchPayload {
+                { matchData[0].Id, new MatchPushEvent {
                     MatchResult = matchResult,
-                    Timelines = matchTimelines
+                    TimeLines = matchTimelines
                 } },
             };
             matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), false).Returns(matchData);

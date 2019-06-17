@@ -9,7 +9,7 @@
 #elif TEST
         public static string LocalEndPoint => "https://api.nexdev.net/V2/api/";
 
-         public static string LocalHubEndPoint => "https://api.nexdev.net/V2/hubs/";
+        public static string LocalHubEndPoint => "https://api.nexdev.net/V2/hubs/";
 #else
         public static string LocalEndPoint => "https://api.nexdev.net/Main/api/";
 

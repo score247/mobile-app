@@ -31,16 +31,17 @@
         <Folder Include="Models\" />
         <Folder Include="Enumerations\" />
         <Folder Include="Models\Settings\" />
-        <Folder Include="Views\Selectors\" />
         <Folder Include="Events\">
         </Folder>
         <Folder Include="Jobs\">
         </Folder>
         <Folder Include="Controls\SearchPage\">
-          <DependentUpon>SearchPage</DependentUpon>
         </Folder>
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
+    </ItemGroup>
+    <ItemGroup>
+      <Compile Remove="Converters\MatchMinuteConverter.cs" />
     </ItemGroup>
 </Project>

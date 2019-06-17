@@ -135,6 +135,8 @@ namespace LiveScore.Core.Enumerations
         {
         }
 
+        public bool IsPreMatch => Value == NotStarted || Value == Postponed || Value == Cancelled || Value == StartDelayed;
+
         public bool IsNotStarted => Value == NotStarted;
 
         public bool IsLive => Value == Live;

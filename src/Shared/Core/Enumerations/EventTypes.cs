@@ -1,8 +1,33 @@
-﻿namespace LiveScore.Core.Enumerations
+﻿using System.Collections.Generic;
+
+namespace LiveScore.Core.Enumerations
 {
     public class EventTypes : Enumeration
     {
         //break_start
+        public const string BreakStart = "break_start";
+
+        public static readonly EventTypes BreakStartType = new EventTypes(BreakStart, nameof(BreakStart));
+
+        public const string MatchEnded = "match_ended";
+
+        public static readonly EventTypes MatchEndedType = new EventTypes(MatchEnded, nameof(MatchEnded));
+
+        public const string MatchStarted = "match_started";
+
+        public static readonly EventTypes MatchStartedType = new EventTypes(MatchStarted, nameof(MatchStarted));
+
+        public const string PeriodStart = "period_start";
+
+        public static readonly EventTypes PeriodStartType = new EventTypes(PeriodStart, nameof(PeriodStart));
+
+        public const string PenaltyShootout = "penalty_shootout";
+
+        public static readonly EventTypes PenaltyShootoutType = new EventTypes(PenaltyShootout, nameof(PenaltyShootout));
+
+        public const string PenaltyMissed = "penalty_missed";
+
+        public static readonly EventTypes PenaltyMissedType = new EventTypes(PenaltyMissed, nameof(PenaltyMissed));
         //cancelled_video_assistant_referee
         //corner_kick
         //free_kick
@@ -57,6 +82,19 @@
         public EventTypes()
         {
         }
+
+        public static List<string> BasicSoccerEventTypes
+           => new List<string>
+           {
+                MatchStarted,
+                PeriodStart,
+                BreakStart,
+                ScoreChange,
+                YellowCard,
+                YellowRedCard,
+                RedCard,
+                PenaltyShootout
+           };
 
         private EventTypes(string value, string displayName)
             : base(value, displayName)

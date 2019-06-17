@@ -35,4 +35,9 @@
     <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\..\Common\LiveScore.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

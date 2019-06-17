@@ -13,7 +13,6 @@ namespace LiveScore.Score.ViewModels
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
-    using LiveScore.Common.Configuration;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Models.Matches;
@@ -36,13 +35,13 @@ namespace LiveScore.Score.ViewModels
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
-            IHubConnectionBuilder hubConnectionBuilder)
+            IHubService hubService)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
-            MatchService = DepdendencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
-            matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build();
+            matchHubConnection = hubService.BuildMatchHubConnection();
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -53,9 +52,22 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> MatchItemSource { get; set; }
+        public ObservableCollection<IGrouping<dynamic, MatchViewModel>> MatchItemSource { get; set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
+
+        public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand
+            => new DelegateAsyncCommand<MatchViewModel>(OnTappedMatchCommand);
+
+        private async Task OnTappedMatchCommand(MatchViewModel matchItem)
+        {
+            var parameters = new NavigationParameters
+            {
+                { "Match", matchItem.Match }
+            };
+
+            await NavigationService.NavigateAsync("MatchDetailView" + SettingsService.CurrentSportType.Value, parameters);
+        }
 
         public DelegateAsyncCommand ClickSearchCommand => new DelegateAsyncCommand(OnClickSearchCommandExecuted);
 
@@ -71,12 +83,7 @@ namespace LiveScore.Score.ViewModels
                 await NavigateToHome();
             }
 
-            await Initialize();
-        }
-
-        public override async void OnAppearing()
-        {
-            await Initialize();
+            Initialize();
         }
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
@@ -87,7 +94,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        private async Task Initialize()
+        protected override async void Initialize()
         {
             try
             {
@@ -152,16 +159,16 @@ namespace LiveScore.Score.ViewModels
             IsRefreshing = false;
         }
 
-        private ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
+        private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchItemSourceViewModel(match, NavigationService, DepdendencyResolver, EventAggregator, matchHubConnection));
+                    match => new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection));
 
-            return new ObservableCollection<IGrouping<dynamic, MatchItemSourceViewModel>>(matchItemViewModels.GroupBy(item
+            return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
-        internal void OnMatchesChanged(string sportId, Dictionary<string, MatchPayload> matchPayloads)
+        internal void OnMatchesChanged(string sportId, Dictionary<string, MatchPushEvent> matchPayloads)
         {
             if (sportId != SettingsService.CurrentSportType.Value)
             {
@@ -177,9 +184,8 @@ namespace LiveScore.Score.ViewModels
                 if (matchItem?.Match != null)
                 {
                     matchItem.Match.MatchResult = matchPayload.Value.MatchResult;
-                    matchItem.Match.TimeLines = matchPayload.Value.Timelines;
-
-                    matchItem.ChangeMatchData();
+                    matchItem.Match.LatestTimeline = matchPayload.Value.TimeLines.LastOrDefault();
+                    matchItem.BuildMatchStatus();
                 }
             }
         }

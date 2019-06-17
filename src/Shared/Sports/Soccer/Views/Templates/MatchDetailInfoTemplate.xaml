@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentView x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.MatchDetailInfoTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
+             x:Name="view">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchDetailViewResource />
+                <resources:MatchDetailInfoViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
+            <templateSelectors:MatchDetailInfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <FlexLayout Style="{StaticResource TabContent}">
+        <ListView BackgroundColor="{StaticResource SecondColor}"
+                  CachingStrategy="RecycleElement" IsPullToRefreshEnabled="true"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  ItemsSource="{Binding InfoItemViewModels}"
+                  ItemTemplate="{StaticResource infoItemTemplateSelector}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  SeparatorColor="{StaticResource LineColor}">
+            <ListView.Footer>
+                <StackLayout BackgroundColor="{StaticResource SecondColor}" IsVisible="{Binding IsNotLoading}" HeightRequest="500">
+                    <FlexLayout Style="{StaticResource Group}">
+                        <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding MatchViewModel.Match.Referee, Converter={StaticResource textNotEmptyConverter}}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayAttendance}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchInfoDetailRow}" IsVisible="{Binding DisplayEventDate, Converter={StaticResource textNotEmptyConverter}}">
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Kick Off Time:" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" />
+                    </FlexLayout>
+                </StackLayout>
+            </ListView.Footer>
+        </ListView>
+    </FlexLayout>
+</ContentView>

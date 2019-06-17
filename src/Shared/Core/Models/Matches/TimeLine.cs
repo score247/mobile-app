@@ -2,11 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Teams;
-    using Newtonsoft.Json;
 
-    public interface ITimeLine : IEntity<long, string>
+    public interface ITimeline : IEntity<long, string>
     {
         string Type { get; }
 
@@ -14,9 +12,9 @@
 
         int MatchTime { get; }
 
-        string MatchClock { get; }
+        string StoppageTime { get; }
 
-        int StoppageTime { get; }
+        string MatchClock { get; }
 
         string Team { get; }
 
@@ -28,13 +26,15 @@
 
         int AwayScore { get; }
 
-        IPlayer GoalScorer { get; }
+        GoalScorer GoalScorer { get; }
 
-        IPlayer Assist { get; }
+        Player Assist { get; }
 
-        IPlayer PlayerOut { get; }
+        Player PlayerOut { get; }
 
-        IPlayer PlayerIn { get; }
+        Player PlayerIn { get; }
+
+        Player Player { get; }
 
         int InjuryTimeAnnounced { get; }
 
@@ -45,7 +45,7 @@
         IEnumerable<Commentary> Commentaries { get; }
     }
 
-    public class TimeLine : Entity<long, string>, ITimeLine
+    public class Timeline : Entity<long, string>, ITimeline
     {
         public string Type { get; set; }
 
@@ -53,9 +53,9 @@
 
         public int MatchTime { get; set; }
 
-        public string MatchClock { get; set; }
+        public string StoppageTime { get; set; }
 
-        public int StoppageTime { get; set; }
+        public string MatchClock { get; set; }
 
         public string Team { get; set; }
 
@@ -67,19 +67,17 @@
 
         public int AwayScore { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer GoalScorer { get; set; }
+        public GoalScorer GoalScorer { get; set; }
 
         public IEnumerable<Commentary> Commentaries { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer Assist { get; set; }
+        public Player Assist { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer PlayerOut { get; set; }
+        public Player PlayerOut { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Player>))]
-        public IPlayer PlayerIn { get; set; }
+        public Player PlayerIn { get; set; }
+
+        public Player Player { get; set; }
 
         public int InjuryTimeAnnounced { get; set; }
 
@@ -92,5 +90,15 @@
     public class Commentary
     {
         public string Text { get; set; }
+    }
+
+    public interface IGoalScorer : IEntity<string, string>
+    {
+        string Method { get; }
+    }
+
+    public class GoalScorer : Entity<string, string>, IGoalScorer
+    {
+        public string Method { get; set; }
     }
 }

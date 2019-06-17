@@ -115,11 +115,10 @@ namespace Soccer.Tests.Converters
                     MatchStatus = new MatchStatus { Value = matchStatus },
                     MatchTime = currentMatchTime
                 },
-                TimeLines = new List<TimeLine> {
-                    new TimeLine {
-                        Type = EventTypes.InjuryTimeShown,
-                        InjuryTimeAnnounced = 5
-                    }
+                LatestTimeline = new Timeline
+                {
+                    Type = EventTypes.InjuryTimeShown,
+                    InjuryTimeAnnounced = 5
                 }
             };
 
@@ -136,7 +135,7 @@ namespace Soccer.Tests.Converters
         [InlineData(MatchStatus.Closed, "FT")]
         [InlineData(MatchStatus.Ended, "FT")]
         [InlineData(MatchStatus.FullTime, "FT")]
-        [InlineData(MatchStatus.AwaitingExtraTime, "FT")]
+        [InlineData(MatchStatus.AwaitingExtraTime, "Await ET.")]
         public void BuildStatus_EventStatusIsClosed_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
@@ -160,7 +159,7 @@ namespace Soccer.Tests.Converters
         [InlineData(MatchStatus.Postponed, "Postp.")]
         [InlineData(MatchStatus.StartDelayed, "Start Delayed")]
         [InlineData(MatchStatus.Cancelled, "Canc.")]
-        [InlineData(MatchStatus.AwaitingExtraTime, "")]
+        [InlineData(MatchStatus.AwaitingExtraTime, "Await ET.")]
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange

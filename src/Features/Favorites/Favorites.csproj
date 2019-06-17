@@ -40,6 +40,9 @@
     <Compile Update="Views\EmptyFavoriteView.xaml.cs">
       <DependentUpon>EmptyFavoriteView.xaml</DependentUpon>
     </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\FavoriteView.xaml.cs">
+      <DependentUpon>FavoriteView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

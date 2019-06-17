@@ -17,21 +17,47 @@
                     <coreConverters:MatchHeaderEventDayConverter x:Key="matchHeaderEventDayConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
-
-            <FlexLayout Style="{StaticResource LeagueBox}">
-                <StackLayout Style="{StaticResource LeagueFlagContainer}">
+            <Grid Style="{StaticResource LeagueBox}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="46" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="34" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource LeagueFlagContainer}">
                     <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>
-                <Label Style="{StaticResource LeagueName}" Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" />
                 <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    LineBreakMode="TailTruncation"
+                    Style="{StaticResource LeagueName}"
+                    Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
                     AutomationId="MatchDateLbl"
                     Style="{StaticResource MatchDate}"
-                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}}" />
-                <Label
-                    x:Name="DetailIcon"
-                    AutomationId="LeagueDetailBtn"
-                    Style="{StaticResource DetailIcon}" />
-            </FlexLayout>
+                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}" />
+
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Padding="10,0,12,0"
+                    Style="{StaticResource StacklayoutHorizontalCenter}">
+                    <Label
+                        x:Name="DetailIcon"
+                        AutomationId="LeagueDetailBtn"
+                        Style="{StaticResource DetailIcon}" />
+                </StackLayout>
+
+            </Grid>
         </StackLayout>
     </ViewCell>
 </DataTemplate>

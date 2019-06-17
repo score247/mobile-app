@@ -18,7 +18,7 @@ namespace LiveScore.Core.Tests.Controls.SearchPage
             comparer = baseFixture.CommonFixture.Comparer;
             searchViewModel = new SearchViewModel(
                 baseFixture.NavigationService,
-                baseFixture.DepdendencyResolver,
+                baseFixture.DependencyResolver,
                 baseFixture.EventAggregator);
         }
 

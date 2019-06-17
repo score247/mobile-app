@@ -5,6 +5,8 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Converters;
     using LiveScore.Soccer.Services;
+    using LiveScore.Soccer.ViewModels;
+    using LiveScore.Soccer.Views;
     using LiveScore.Soccer.Views.Templates;
     using Prism.Ioc;
     using Prism.Modularity;
@@ -19,6 +21,9 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterForNavigation<MatchDetailView, MatchDetailViewModel>(
+                nameof(MatchDetailView) + SportTypes.Soccer.Value);
+
             containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.Value);
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value);
             containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportTypes.Soccer.Value);

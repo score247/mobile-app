@@ -4,6 +4,6 @@
 
     public interface IMatchStatusConverter
     {
-        string BuildStatus(IMatch match);
+        string BuildStatus(IMatch match, bool showFullStatus = false);
     }
 }

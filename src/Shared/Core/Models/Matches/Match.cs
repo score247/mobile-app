@@ -16,11 +16,19 @@
 
         IMatchResult MatchResult { get; set; }
 
-        IEnumerable<ITimeLine> TimeLines { get; set; }
+        IEnumerable<ITimeline> TimeLines { get; set; }
 
         IMatchCondition MatchCondition { get; set; }
 
         ILeague League { get; set; }
+
+        int Attendance { get; set; }
+
+        IVenue Venue { get; set; }
+
+        string Referee { get; set; }
+
+        ITimeline LatestTimeline { get; set; }
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -34,13 +42,24 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchResult>))]
         public IMatchResult MatchResult { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimeLine>>))]
-        public IEnumerable<ITimeLine> TimeLines { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Timeline>>))]
+        public IEnumerable<ITimeline> TimeLines { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchCondition>))]
         public IMatchCondition MatchCondition { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
         public ILeague League { get; set; }
+
+        public int Attendance { get; set; }
+
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Venue>))]
+        public IVenue Venue { get; set; }
+
+        public string Referee { get; set; }
+
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
+        public ITimeline LatestTimeline { get; set; }
+
     }
 }

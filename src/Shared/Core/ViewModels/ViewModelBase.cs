@@ -24,14 +24,14 @@
            IDependencyResolver depdendencyResolver)
         {
             NavigationService = navigationService;
-            DepdendencyResolver = depdendencyResolver;
-            SettingsService = DepdendencyResolver.Resolve<ISettingsService>();
-            LoggingService = DepdendencyResolver.Resolve<ILoggingService>();
+            DependencyResolver = depdendencyResolver;
+            SettingsService = DependencyResolver.Resolve<ISettingsService>();
+            LoggingService = DependencyResolver.Resolve<ILoggingService>();
         }
 
         public string Title { get; protected set; }
 
-        public IDependencyResolver DepdendencyResolver { get; protected set; }
+        public IDependencyResolver DependencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
 
@@ -59,6 +59,7 @@
 
         public virtual void OnResume()
         {
+            Initialize();
         }
 
         public virtual void OnSleep()
@@ -68,6 +69,7 @@
 
         public virtual void OnAppearing()
         {
+            Initialize();
         }
 
         public virtual void OnDisappearing()
@@ -77,6 +79,10 @@
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
+
+        protected virtual void Initialize()
+        {
+        }
 
         protected virtual void Clean()
         {

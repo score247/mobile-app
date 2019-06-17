@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Tests.ViewModels
 {
-    using System.Threading.Tasks;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
     using Xunit;
@@ -13,7 +12,7 @@
         {
             viewModel = new NavigationTitleViewModel(
                 viewModelBaseFixture.NavigationService,
-                viewModelBaseFixture.DepdendencyResolver);
+                viewModelBaseFixture.DependencyResolver);
         }
 
         [Fact]
@@ -27,21 +26,6 @@
 
             // Assert
             Assert.Equal(expected, sportName);
-        }
-
-        [Fact]
-        public async Task SelectSportCommand_Always_CallNavigationServiceToSelectSportView()
-        {
-            // Arrange
-            var command = viewModel.SelectSportCommand;
-            var navigationService = viewModel.NavigationService as FakeNavigationService;
-
-            // Act
-            await command.ExecuteAsync();
-
-            // Assert
-            Assert.Equal("NavigationPage/SelectSportView", navigationService.NavigationPath);
-            Assert.True(navigationService.UseModalNavigation);
         }
     }
 }

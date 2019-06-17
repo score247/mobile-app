@@ -95,6 +95,12 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string FullTime {
+            get {
+                return ResourceManager.GetString("FullTime", resourceCulture);
+            }
+        }
+        
         public static string Channel {
             get {
                 return ResourceManager.GetString("Channel", resourceCulture);
@@ -161,9 +167,15 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-        public static string StartDelay {
+        public static string Postponed {
             get {
-                return ResourceManager.GetString("StartDelay", resourceCulture);
+                return ResourceManager.GetString("Postponed", resourceCulture);
+            }
+        }
+        
+        public static string StartDelayed {
+            get {
+                return ResourceManager.GetString("StartDelayed", resourceCulture);
             }
         }
         
@@ -179,9 +191,21 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string Cancelled {
+            get {
+                return ResourceManager.GetString("Cancelled", resourceCulture);
+            }
+        }
+        
         public static string INT {
             get {
                 return ResourceManager.GetString("INT", resourceCulture);
+            }
+        }
+        
+        public static string Interrupted {
+            get {
+                return ResourceManager.GetString("Interrupted", resourceCulture);
             }
         }
         
@@ -191,9 +215,21 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string HalfTime {
+            get {
+                return ResourceManager.GetString("HalfTime", resourceCulture);
+            }
+        }
+        
         public static string AB {
             get {
                 return ResourceManager.GetString("AB", resourceCulture);
+            }
+        }
+        
+        public static string Abandoned {
+            get {
+                return ResourceManager.GetString("Abandoned", resourceCulture);
             }
         }
         
@@ -203,9 +239,33 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string AfterExtraTime {
+            get {
+                return ResourceManager.GetString("AfterExtraTime", resourceCulture);
+            }
+        }
+        
+        public static string AwaitET {
+            get {
+                return ResourceManager.GetString("AwaitET", resourceCulture);
+            }
+        }
+        
+        public static string AwaitExtraTime {
+            get {
+                return ResourceManager.GetString("AwaitExtraTime", resourceCulture);
+            }
+        }
+        
         public static string AP {
             get {
                 return ResourceManager.GetString("AP", resourceCulture);
+            }
+        }
+        
+        public static string AfterPenalties {
+            get {
+                return ResourceManager.GetString("AfterPenalties", resourceCulture);
             }
         }
         
@@ -215,9 +275,21 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
+        public static string AwaitPenalties {
+            get {
+                return ResourceManager.GetString("AwaitPenalties", resourceCulture);
+            }
+        }
+        
         public static string Pen {
             get {
                 return ResourceManager.GetString("Pen", resourceCulture);
+            }
+        }
+        
+        public static string Penalties {
+            get {
+                return ResourceManager.GetString("Penalties", resourceCulture);
             }
         }
         

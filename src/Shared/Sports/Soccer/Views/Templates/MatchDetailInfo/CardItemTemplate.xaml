@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.CardItemTemplate" 
+              xmlns="http://xamarin.com/schemas/2014/forms" xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources" 
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailInfoViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
+                <StackLayout Style="{StaticResource MatchInfoTeam}">
+                    <Label Style="{StaticResource MatchInfoMinutes}" Text="{Binding MatchTime}" />
+                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
+                        <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding HomePlayerName}" HorizontalTextAlignment="End" />
+                    </StackLayout>
+                    <StackLayout VerticalOptions="Center">
+                        <Label IsVisible="{Binding VisibleHomeYellowCard}" Style="{StaticResource MatchInfoHomeYellowCard}" />
+                        <Label IsVisible="{Binding VisibleHomeRedCard}" Style="{StaticResource MatchInfoHomeRedCard}" />
+                        <Image IsVisible="{Binding VisibleHomeRedYellowCard}" Style="{StaticResource MatchInfoHomeRedYellowCard}" />
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                </StackLayout>
+                <StackLayout Style="{StaticResource MatchInfoTeam}">
+                    <Label IsVisible="{Binding VisibleAwayRedCard}" Style="{StaticResource MatchInfoRedCard}" />
+                    <Label IsVisible="{Binding VisibleAwayYellowCard}" Style="{StaticResource MatchInfoYellowCard}" />
+                    <Image IsVisible="{Binding VisibleAwayRedYellowCard}" Style="{StaticResource MatchInfoRedYellowCard}" />
+                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
+                        <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
+                    </StackLayout>
+                </StackLayout>
+            </FlexLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

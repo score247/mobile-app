@@ -16,7 +16,7 @@ namespace LiveScore.Core.Tests.Views.Selectors
         public MatchItemTemplateSelectorTests(ViewModelBaseFixture baseFixture)
         {
             bindableObject = Substitute.For<BindableObject>();
-            dependencyResolver = baseFixture.DepdendencyResolver;
+            dependencyResolver = baseFixture.DependencyResolver;
             bindableObject.BindingContext = new ViewModelBase(baseFixture.NavigationService, dependencyResolver);
         }
 

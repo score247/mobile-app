@@ -141,6 +141,9 @@
     <data name="FT" xml:space="preserve">
     <value>FT</value>
   </data>
+    <data name="FullTime" xml:space="preserve">
+    <value>Full Time</value>
+  </data>
     <data name="Channel" xml:space="preserve">
     <value>Channel</value>
   </data>
@@ -174,7 +177,10 @@
     <data name="Postp" xml:space="preserve">
     <value>Postp.</value>
   </data>
-    <data name="StartDelay" xml:space="preserve">
+    <data name="Postponed" xml:space="preserve">
+    <value>Postponed</value>
+  </data>
+    <data name="StartDelayed" xml:space="preserve">
     <value>Start Delayed</value>
   </data>
     <data name="Delayed" xml:space="preserve">
@@ -183,26 +189,56 @@
     <data name="Canc" xml:space="preserve">
     <value>Canc.</value>
   </data>
+    <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
     <data name="INT" xml:space="preserve">
     <value>INT</value>
+  </data>
+    <data name="Interrupted" xml:space="preserve">
+    <value>Interrupted</value>
   </data>
     <data name="HT" xml:space="preserve">
     <value>HT</value>
   </data>
+    <data name="HalfTime" xml:space="preserve">
+    <value>Half Time</value>
+  </data>
     <data name="AB" xml:space="preserve">
     <value>AB</value>
+  </data>
+    <data name="Abandoned" xml:space="preserve">
+    <value>Abandoned</value>
   </data>
     <data name="AET" xml:space="preserve">
     <value>A.E.T</value>
   </data>
+    <data name="AfterExtraTime" xml:space="preserve">
+    <value>After Extra Time</value>
+  </data>
+    <data name="AwaitET" xml:space="preserve">
+    <value>Await ET.</value>
+  </data>
+    <data name="AwaitExtraTime" xml:space="preserve">
+    <value>Awaiting Extra Time</value>
+  </data>
     <data name="AP" xml:space="preserve">
     <value>A.P</value>
+  </data>
+    <data name="AfterPenalties" xml:space="preserve">
+    <value>After Penalties</value>
   </data>
     <data name="AwaitPen" xml:space="preserve">
     <value>Await Pen.</value>
   </data>
+    <data name="AwaitPenalties" xml:space="preserve">
+    <value>Awaiting Penalties</value>
+  </data>
     <data name="Pen" xml:space="preserve">
     <value>Pen.</value>
+  </data>
+    <data name="Penalties" xml:space="preserve">
+    <value>Penalties</value>
   </data>
     <data name="Pause" xml:space="preserve">
     <value>Pause</value>
