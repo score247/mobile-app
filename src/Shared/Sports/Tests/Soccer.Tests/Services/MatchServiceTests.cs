@@ -100,5 +100,45 @@
             // Assert
             Assert.True(comparer.Compare(expectedMatches, actualMatches).AreEqual);
         }
+
+        [Fact]
+        public async Task GetMatch_CacheHasValue_ReturnDataFromCache()
+        {
+            // Arrange
+            var settings = new UserSettings("1", "en-US", "+07:00");
+            var expectedMatch = fixture.Create<Match>();
+
+            mockCache.GetAndFetchLatestValue(
+               "Match-1-en-US-+07:00-123",
+               Arg.Any<Func<Task<Match>>>(),
+               Arg.Any<Func<DateTimeOffset, bool>>(),
+               null).Returns(expectedMatch);
+
+            // Act
+            var actualMatch = await matchService.GetMatch(settings, "123", false);
+
+            // Assert
+            Assert.Equal(expectedMatch, actualMatch);
+        }
+
+        [Fact]
+        public async Task GetMatch_Exception_WriteLog()
+        {
+            // Arrange
+            var settings = new UserSettings("1", "en-US", "+07:00");
+
+            mockCache.GetAndFetchLatestValue(
+               "Match-1-en-US-+07:00-123",
+               Arg.Any<Func<Task<Match>>>(),
+               Arg.Any<Func<DateTimeOffset, bool>>(),
+               null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+
+            // Act
+            var actualMatch = await matchService.GetMatch(settings, "123", false);
+
+            // Assert
+            mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
+            Assert.Null(actualMatch);
+        }
     }
 }

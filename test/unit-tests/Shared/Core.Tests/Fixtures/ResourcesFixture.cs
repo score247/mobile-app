@@ -13,6 +13,8 @@
 
             app.Resources["PrimaryAccentColor"] = Color.FromHex("#F24822");
             app.Resources["FourthTextColor"] = Color.FromHex("#939393");
+            app.Resources["SecondColor"] = Color.FromHex("#1D2133");
+            app.Resources["LineColor"] = Color.FromHex("#1D2133");
         }
     }
 }

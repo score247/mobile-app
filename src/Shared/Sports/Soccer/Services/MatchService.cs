@@ -97,6 +97,7 @@
             catch (Exception ex)
             {
                 HandleException(ex);
+
                 return null;
             }
         }

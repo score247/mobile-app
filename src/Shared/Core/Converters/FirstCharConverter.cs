@@ -8,7 +8,7 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null)
+            if (value == null || value.ToString()?.Length == 0)
             {
                 return string.Empty;
             }
@@ -22,4 +22,3 @@
         }
     }
 }
-
