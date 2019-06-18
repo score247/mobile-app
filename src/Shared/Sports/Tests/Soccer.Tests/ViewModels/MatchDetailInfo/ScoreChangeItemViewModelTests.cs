@@ -32,7 +32,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.True(viewModel.VisibleHomeOwnGoalBall);
+            Assert.Equal("images/common/own_goal.png", viewModel.ImageSource);
+            Assert.True(viewModel.VisibleHomeImage);
         }
 
         [Fact]
@@ -47,7 +48,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.True(viewModel.VisibleHomePenaltyGoalBall);
+            Assert.Equal("images/common/penalty_goal.png", viewModel.ImageSource);
+            Assert.True(viewModel.VisibleHomeImage);
         }
 
         [Fact]
@@ -64,7 +66,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
             Assert.Equal("Rooney", viewModel.HomeAssistName);
-            Assert.True(viewModel.VisibleHomeBall);
+            Assert.Equal("images/common/ball.png", viewModel.ImageSource);
+            Assert.True(viewModel.VisibleHomeImage);
         }
 
         [Fact]
@@ -79,7 +82,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.True(viewModel.VisibleAwayOwnGoalBall);
+            Assert.Equal("images/common/own_goal.png", viewModel.ImageSource);
+            Assert.True(viewModel.VisibleAwayImage);
         }
 
         [Fact]
@@ -94,7 +98,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.True(viewModel.VisibleAwayPenaltyGoalBall);
+            Assert.Equal("images/common/penalty_goal.png", viewModel.ImageSource);
+            Assert.True(viewModel.VisibleAwayImage);
         }
 
         [Fact]
@@ -111,7 +116,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
             Assert.Equal("Rooney", viewModel.AwayAssistName);
-            Assert.True(viewModel.VisibleAwayBall);
+            Assert.True(viewModel.VisibleAwayImage);
+            Assert.Equal("images/common/ball.png", viewModel.ImageSource);
         }
     }
 }

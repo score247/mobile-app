@@ -18,19 +18,13 @@
 
         public string HomeAssistName { get; set; }
 
-        public bool VisibleHomeBall { get; set; }
-
-        public bool VisibleHomeOwnGoalBall { get; set; }
-
-        public bool VisibleHomePenaltyGoalBall { get; set; }
-
         public string AwayAssistName { get; set; }
 
-        public bool VisibleAwayBall { get; set; }
+        public string ImageSource { get; private set; }
 
-        public bool VisibleAwayOwnGoalBall { get; set; }
+        public bool VisibleHomeImage { get; private set; }
 
-        public bool VisibleAwayPenaltyGoalBall { get; set; }
+        public bool VisibleAwayImage { get; private set; }
 
         protected override void BuildInfo()
         {
@@ -49,38 +43,40 @@
         private void BuildAwayInfo()
         {
             AwayPlayerName = TimelineEvent?.GoalScorer?.Name;
+            VisibleAwayImage = true;
 
             if (TimelineEvent?.GoalScorer?.Method == GoalMethod.OwnGoal)
             {
-                VisibleAwayOwnGoalBall = true;
+                ImageSource = "images/common/own_goal.png";
             }
             else if (TimelineEvent?.GoalScorer?.Method == GoalMethod.Penalty)
             {
-                VisibleAwayPenaltyGoalBall = true;
+                ImageSource = "images/common/penalty_goal.png";
             }
             else
             {
                 AwayAssistName = TimelineEvent.Assist?.Name;
-                VisibleAwayBall = true;
+                ImageSource = "images/common/ball.png";
             }
         }
 
         private void BuildHomeInfo()
         {
             HomePlayerName = TimelineEvent?.GoalScorer?.Name;
+            VisibleHomeImage = true;
 
             if (TimelineEvent?.GoalScorer?.Method == GoalMethod.OwnGoal)
             {
-                VisibleHomeOwnGoalBall = true;
+                ImageSource = "images/common/own_goal.png";
             }
             else if (TimelineEvent?.GoalScorer?.Method == GoalMethod.Penalty)
             {
-                VisibleHomePenaltyGoalBall = true;
+                ImageSource = "images/common/penalty_goal.png";
             }
             else
             {
                 HomeAssistName = TimelineEvent.Assist?.Name;
-                VisibleHomeBall = true;
+                ImageSource = "images/common/ball.png";
             }
         }
     }

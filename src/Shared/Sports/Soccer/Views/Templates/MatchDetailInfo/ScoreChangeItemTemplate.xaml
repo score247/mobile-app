@@ -18,18 +18,25 @@
                         <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding HomeAssistName}" HorizontalTextAlignment="End" />
                     </StackLayout>
                     <StackLayout VerticalOptions="Center">
-                        <Image IsVisible="{Binding VisibleHomeBall}" Style="{StaticResource MatchInfoHomeBall}" />
+                        <Image HorizontalOptions="EndAndExpand"
+                               Style="{StaticResource MatchInfoImage}"
+                               Source="{Binding ImageSource}"
+                               IsVisible="{Binding VisibleHomeImage}" />
+                        <!--<Image IsVisible="{Binding VisibleHomeBall}" Style="{StaticResource MatchInfoHomeBall}" />
                         <Image IsVisible="{Binding VisibleHomeOwnGoalBall}" Style="{StaticResource MatchInfoHomeOwnGoal}" />
-                        <Image IsVisible="{Binding VisibleHomePenaltyGoalBall}" Style="{StaticResource MatchInfoHomePenaltyGoal}" />
+                        <Image IsVisible="{Binding VisibleHomePenaltyGoalBall}" Style="{StaticResource MatchInfoHomePenaltyGoal}" />-->
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
                     <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource MatchInfoTeam}">
-                    <Image IsVisible="{Binding VisibleAwayBall}" Style="{StaticResource MatchInfoBall}" />
+                    <Image Style="{StaticResource MatchInfoImage}"
+                           Source="{Binding ImageSource}"
+                           IsVisible="{Binding VisibleAwayImage}" />
+                    <!--<Image IsVisible="{Binding VisibleAwayBall}" Style="{StaticResource MatchInfoBall}" />
                     <Image IsVisible="{Binding VisibleAwayOwnGoalBall}" Style="{StaticResource MatchInfoOwnGoal}" />
-                    <Image IsVisible="{Binding VisibleAwayPenaltyGoalBall}" Style="{StaticResource MatchInfoPenaltyGoal}" />
+                    <Image IsVisible="{Binding VisibleAwayPenaltyGoalBall}" Style="{StaticResource MatchInfoPenaltyGoal}" />-->
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
                         <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding AwayAssistName}" />

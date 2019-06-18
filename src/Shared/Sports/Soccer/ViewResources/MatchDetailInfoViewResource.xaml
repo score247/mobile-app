@@ -53,6 +53,11 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
+    <Style x:Key="MatchInfoImage" TargetType="Image">
+        <Setter Property="WidthRequest" Value="12" />
+        <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
     <Style x:Key="MatchInfoBall" TargetType="Image">
         <Setter Property="Source" Value="images/common/ball.png" />
         <Setter Property="WidthRequest" Value="12" />
