@@ -42,6 +42,9 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Style="{StaticResource MatchGeneralInfoHomeTeam}">
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
+
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[0].Name, Converter={StaticResource FirstCharConverter}}" />
                     </StackLayout>
@@ -58,13 +61,10 @@
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[1].Name, Converter={StaticResource FirstCharConverter}}" />
                         <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
 
-                        <Image
-                            Aspect="AspectFit"
-                            Source="images/common/second_leg_winner.png"
-                            WidthRequest="13" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
                     </StackLayout>
                 </Grid>
-
                 <StackLayout>
                     <FlexLayout Style="{StaticResource FlexLayoutAlignCenter}">
                         <Label IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource MatchGeneralInfoStatusLiveIcon}" />
@@ -72,6 +72,9 @@
                     </FlexLayout>
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
+            </StackLayout>
+            <StackLayout HeightRequest="24" Style="{StaticResource MatchGeneralInfoSecondLegInfo}">
+                <Label Style="{StaticResource MatchGeneralInfoSecondLegContent}" Text="2nd leg, aggregate score: 3 - 3" />
             </StackLayout>
             <ActivityIndicator
                 x:Name="activity"

@@ -18,7 +18,7 @@
         BasedOn="{StaticResource MatchGeneralInfoTeam}"
         TargetType="StackLayout">
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-        <Setter Property="Padding" Value="16,0,0,0" />
+        <Setter Property="Padding" Value="12,0,0,0" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeamName" TargetType="Label">
@@ -39,7 +39,7 @@
         x:Key="MatchGeneralInfoAwayTeam"
         BasedOn="{StaticResource MatchGeneralInfoTeam}"
         TargetType="StackLayout">
-        <Setter Property="Padding" Value="0,0,16,0" />
+        <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
     <Style
@@ -47,6 +47,12 @@
         BasedOn="{StaticResource MatchGeneralInfoTeamName}"
         TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
+    </Style>
+
+    <Style x:Key="MatchGeneralInfoWinner" TargetType="Image">
+        <Setter Property="Margin" Value="4,0" />
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="WidthRequest" Value="13" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeamLogo" TargetType="Button">
@@ -91,6 +97,20 @@
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
+
+    <Style x:Key="MatchGeneralInfoSecondLegInfo" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="MatchGeneralInfoSecondLegContent" TargetType="Label">
+        <Setter Property="HeightRequest" Value="24" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+
     <Style
         x:Key="Group"
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
