@@ -53,98 +53,9 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="MatchInfoYellowCard" TargetType="Image">
-        <Setter Property="WidthRequest" Value="8" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeYellowCard"
-        BasedOn="{StaticResource MatchInfoYellowCard}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoRedCard" TargetType="Image">
-        <Setter Property="WidthRequest" Value="8" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeRedCard"
-        BasedOn="{StaticResource MatchInfoRedCard}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoBall" TargetType="Image">
-        <Setter Property="Source" Value="images/common/ball.png" />
-        <Setter Property="WidthRequest" Value="12" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
     <Style x:Key="MatchInfoImage" TargetType="Image">
         <Setter Property="WidthRequest" Value="12" />
         <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeBall"
-        BasedOn="{StaticResource MatchInfoBall}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoRedYellowCard" TargetType="Image">
-        <Setter Property="Source" Value="images/common/red_yellow_card.png" />
-        <Setter Property="WidthRequest" Value="10" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeRedYellowCard"
-        BasedOn="{StaticResource MatchInfoRedYellowCard}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoMissedPenaltyGoal" TargetType="Image">
-        <Setter Property="Source" Value="images/common/missed_penalty_goal.png" />
-        <Setter Property="WidthRequest" Value="13" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeMissedPenaltyGoal"
-        BasedOn="{StaticResource MatchInfoMissedPenaltyGoal}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoPenaltyGoal" TargetType="Image">
-        <Setter Property="Source" Value="images/common/penalty_goal.png" />
-        <Setter Property="WidthRequest" Value="12" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomePenaltyGoal"
-        BasedOn="{StaticResource MatchInfoPenaltyGoal}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style x:Key="MatchInfoOwnGoal" TargetType="Image">
-        <Setter Property="Source" Value="images/common/own_goal.png" />
-        <Setter Property="WidthRequest" Value="12" />
-        <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeOwnGoal"
-        BasedOn="{StaticResource MatchInfoOwnGoal}"
-        TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
