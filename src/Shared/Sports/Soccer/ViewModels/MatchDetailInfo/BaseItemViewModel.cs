@@ -14,6 +14,7 @@
     {
         public static readonly string[] InfoItemEventTypes = new[] {
             EventTypes.BreakStart,
+            EventTypes.PeriodStart,
             EventTypes.ScoreChange,
             EventTypes.PenaltyMissed,
             EventTypes.YellowCard,
@@ -23,12 +24,13 @@
 
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
         {
-            { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
             { EventTypes.YellowCard, typeof(DefaultItemViewModel) },
             { EventTypes.YellowRedCard, typeof(DefaultItemViewModel) },
             { EventTypes.RedCard, typeof(DefaultItemViewModel) },
             { EventTypes.PenaltyMissed, typeof(DefaultItemViewModel) },
-            { EventTypes.BreakStart, typeof(MainEventItemViewModel) }
+            { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
+            { EventTypes.BreakStart, typeof(MainEventItemViewModel) },
+            { EventTypes.PeriodStart, typeof(MainEventItemViewModel) }
         };
 
         private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
@@ -38,6 +40,7 @@
             { EventTypes.RedCard, new DefaultItemTemplate() },
             { EventTypes.PenaltyMissed, new DefaultItemTemplate() },
             { EventTypes.BreakStart, new MainEventItemTemplate() },
+            { EventTypes.PeriodStart, new MainEventItemTemplate() },
             { EventTypes.ScoreChange, new ScoreChangeItemTemplate() }
         };
 

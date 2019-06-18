@@ -1,5 +1,4 @@
-﻿
-namespace LiveScore.Core.Enumerations
+﻿namespace LiveScore.Core.Enumerations
 {
     using PropertyChanged;
 
@@ -143,9 +142,15 @@ namespace LiveScore.Core.Enumerations
 
         public bool IsClosed => Value == Closed;
 
+        public bool IsEnded => Value == Ended;
+
         public bool IsFirstHalf => Value == FirstHaft;
 
         public bool IsSecondHalf => Value == SecondHaft;
+
+        public bool IsAfterExtraTime => Value == EndedExtraTime;
+
+        public bool IsAfterPenalties => Value == EndedAfterPenalties;
 
         public bool IsFirstHalfExtra => Value == FirstHaftExtra;
 

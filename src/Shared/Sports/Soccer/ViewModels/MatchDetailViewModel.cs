@@ -180,6 +180,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildInfoItems(IMatch match)
         {
+            // TODO Check period start with penalties type
             var timelines = match?.TimeLines?
                  .Where(t => BaseItemViewModel.InfoItemEventTypes.Contains(t.Type))
                  .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();

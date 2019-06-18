@@ -1,6 +1,7 @@
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
     using System.Collections.Generic;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
@@ -32,32 +33,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         }
 
         [Fact]
-        public void BuildInfo_Always_SetMainEventStatus()
-        {
-            // Act
-            var viewModel = new MainEventItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
-
-            // Assert
-            Assert.Equal("Half Time", viewModel.MainEventStatus);
-        }
-
-        [Fact]
-        public void BuildInfo_HasMatchPeriodResult_ShowScore()
-        {
-            // Arrange
-            matchResult.MatchPeriods.Returns(new List<MatchPeriod>
-            {
-                new MatchPeriod { HomeScore = 1, AwayScore = 2 }
-            });
-
-            // Act
-            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
-
-            // Assert
-            Assert.Equal("1 - 2", viewModel.Score);
-        }
-
-        [Fact]
         public void BuildInfo_NoMatchPeriodResult_ShowHyphen()
         {
             // Act
@@ -65,6 +40,117 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("-", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_BreakStart_PausePeriod_ShowHalfTime()
+        {
+            // Arrange
+            timeline.Type.Returns("break_start");
+            timeline.PeriodType.Returns("pause");
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 }
+            });
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("Half Time", viewModel.MainEventStatus);
+            Assert.Equal("1 - 2", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_MatchEnd_MatchStatusIsEnded_ShowFullTime()
+        {
+            // Arrange
+            timeline.Type.Returns("match_ended");
+            matchResult.MatchStatus.Returns(new MatchStatus { Value = "ended" });
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3 }
+            });
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("Full Time", viewModel.MainEventStatus);
+            Assert.Equal("3 - 5", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_BreakStart_PeriodIsAwaitExtra_ShowFullTime()
+        {
+            // Arrange
+            timeline.Type.Returns("break_start");
+            timeline.PeriodType.Returns("awaiting_extra");
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3 }
+            });
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("Full Time", viewModel.MainEventStatus);
+            Assert.Equal("3 - 5", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_MatchEnd_MatchStatusIsAET_ShowAfterExtraTime()
+        {
+            // Arrange
+            timeline.Type.Returns("match_ended");
+            matchResult.MatchStatus.Returns(new MatchStatus { Value = "aet" });
+            matchResult.HomeScore.Returns(3);
+            matchResult.AwayScore.Returns(6);
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("After Extra Time", viewModel.MainEventStatus);
+            Assert.Equal("3 - 6", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_BreakStart_PeriodIsAwaitPenalties_ShowAfterExtraTime()
+        {
+            // Arrange
+            timeline.Type.Returns("break_start");
+            timeline.PeriodType.Returns("awaiting_penalties");
+            matchResult.HomeScore.Returns(3);
+            matchResult.AwayScore.Returns(6);
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("After Extra Time", viewModel.MainEventStatus);
+            Assert.Equal("3 - 6", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_PeriodStart_Penalties_ShowPenaltyShootOut()
+        {
+            // Arrange
+            timeline.Type.Returns("period_start");
+            timeline.PeriodType.Returns("penalties");
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3 },
+                new MatchPeriod { HomeScore = 0, AwayScore = 2, PeriodType = new PeriodTypes { Value = "overtime" } },
+                new MatchPeriod { HomeScore = 4, AwayScore = 3, PeriodType = new PeriodTypes { Value = "penalties" } }
+            });
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("Penalty Shoot-Out", viewModel.MainEventStatus);
+            Assert.Equal("4 - 3", viewModel.Score);
         }
     }
 }
