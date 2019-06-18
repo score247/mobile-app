@@ -23,7 +23,7 @@ namespace LiveScore.iOS.Services
             }
             catch (OperationCanceledException ex)
             {
-                // Write log
+                throw ex;
             }
 
             UIApplication.SharedApplication.EndBackgroundTask(taskId);

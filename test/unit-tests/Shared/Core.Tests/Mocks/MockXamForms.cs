@@ -22,9 +22,9 @@ namespace LiveScore.Core.Tests.Mocks
 
         internal class MockPlatformServices : IPlatformServices
         {
-            Action<Action> _invokeOnMainThread;
-            Action<Uri> _openUriAction;
-            Func<Uri, CancellationToken, Task<Stream>> _getStreamAsync;
+            private readonly Action<Action> _invokeOnMainThread;
+            private readonly Action<Uri> _openUriAction;
+            private readonly Func<Uri, CancellationToken, Task<Stream>> _getStreamAsync;
 
             public MockPlatformServices(Action<Action> invokeOnMainThread = null, Action<Uri> openUriAction = null, Func<Uri, CancellationToken, Task<Stream>> getStreamAsync = null)
             {
@@ -37,27 +37,26 @@ namespace LiveScore.Core.Tests.Mocks
             {
                 throw new NotImplementedException();
             }
-            static int hex(int v)
-            {
-                if (v < 10)
-                    return '0' + v;
-                return 'a' + v - 10;
-            }
 
-            public double GetNamedSize(NamedSize size, Type targetElement, bool useOldSizes)
+            public double GetNamedSize(NamedSize size, Type targetElementType, bool useOldSizes)
             {
                 switch (size)
                 {
                     case NamedSize.Default:
                         return 10;
+
                     case NamedSize.Micro:
                         return 4;
+
                     case NamedSize.Small:
                         return 8;
+
                     case NamedSize.Medium:
                         return 12;
+
                     case NamedSize.Large:
                         return 16;
+
                     default:
                         throw new ArgumentOutOfRangeException("size");
                 }
@@ -180,7 +179,7 @@ namespace LiveScore.Core.Tests.Mocks
 
         internal class MockTicker : Ticker
         {
-            bool _enabled;
+            private bool _enabled;
 
             protected override void EnableTimer()
             {
