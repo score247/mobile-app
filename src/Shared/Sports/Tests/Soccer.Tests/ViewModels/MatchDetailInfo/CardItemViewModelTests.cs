@@ -10,7 +10,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using System;
     using Xunit;
 
-    public class CardItemViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class CardItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>s
     {
         private readonly ITimeline timeline;
         private readonly IMatchResult matchResult;

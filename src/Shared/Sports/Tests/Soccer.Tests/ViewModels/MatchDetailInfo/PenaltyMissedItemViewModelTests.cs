@@ -7,7 +7,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using NSubstitute;
     using Xunit;
 
-    public class PenaltyMissedItemViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class PenaltyMissedItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly ITimeline timeline;
         private readonly IMatchResult matchResult;

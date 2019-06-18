@@ -7,7 +7,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using NSubstitute;
     using Xunit;
 
-    public class ScoreChangeItemViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class ScoreChangeItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>s
     {
         private readonly ITimeline timeline;
         private readonly IMatchResult matchResult;
