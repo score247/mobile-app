@@ -10,7 +10,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class BaseInfoItemViewModel : ViewModelBase
+    public class BaseItemViewModel : ViewModelBase
     {
         public static readonly string[] InfoItemEventTypes = new[] {
             EventTypes.BreakStart,
@@ -24,24 +24,24 @@
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
         {
             { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
-            { EventTypes.YellowCard, typeof(CardItemViewModel) },
-            { EventTypes.YellowRedCard, typeof(CardItemViewModel) },
-            { EventTypes.RedCard, typeof(CardItemViewModel) },
-            { EventTypes.BreakStart, typeof(HalfTimeItemViewModel) },
-            { EventTypes.PenaltyMissed, typeof(PenaltyMissedItemViewModel) }
+            { EventTypes.YellowCard, typeof(DefaultItemViewModel) },
+            { EventTypes.YellowRedCard, typeof(DefaultItemViewModel) },
+            { EventTypes.RedCard, typeof(DefaultItemViewModel) },
+            { EventTypes.PenaltyMissed, typeof(DefaultItemViewModel) },
+            { EventTypes.BreakStart, typeof(MainEventItemViewModel) }
         };
 
         private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
         {
-            { EventTypes.ScoreChange, new ScoreChangeItemTemplate() },
-            { EventTypes.YellowCard, new CardItemTemplate() },
-            { EventTypes.YellowRedCard, new CardItemTemplate() },
-            { EventTypes.RedCard, new CardItemTemplate() },
-            { EventTypes.BreakStart, new EventStatusItemTemplate() },
-            { EventTypes.PenaltyMissed, new PenaltyMissedItemTemplate() }
+            { EventTypes.YellowCard, new DefaultItemTemplate() },
+            { EventTypes.YellowRedCard, new DefaultItemTemplate() },
+            { EventTypes.RedCard, new DefaultItemTemplate() },
+            { EventTypes.PenaltyMissed, new DefaultItemTemplate() },
+            { EventTypes.BreakStart, new MainEventItemTemplate() },
+            { EventTypes.ScoreChange, new ScoreChangeItemTemplate() }
         };
 
-        public BaseInfoItemViewModel(
+        public BaseItemViewModel(
             ITimeline timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,
@@ -64,20 +64,28 @@
 
         public string Score { get; protected set; }
 
+        public bool VisibleScore { get; protected set; }
+
         public string HomePlayerName { get; protected set; }
 
         public string AwayPlayerName { get; protected set; }
 
-        public BaseInfoItemViewModel CreateInstance()
+        public string ImageSource { get; protected set; }
+
+        public bool VisibleHomeImage { get; protected set; }
+
+        public bool VisibleAwayImage { get; protected set; }
+
+        public BaseItemViewModel CreateInstance()
         {
-            if (BaseInfoItemViewModel.ViewModelMapper.ContainsKey(TimelineEvent.Type))
+            if (ViewModelMapper.ContainsKey(TimelineEvent.Type))
             {
                 return Activator.CreateInstance(
-                    BaseInfoItemViewModel.ViewModelMapper[TimelineEvent.Type],
-                    TimelineEvent, Result, NavigationService, DependencyResolver) as BaseInfoItemViewModel;
+                    ViewModelMapper[TimelineEvent.Type],
+                    TimelineEvent, Result, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
-            return new BaseInfoItemViewModel(TimelineEvent, Result, NavigationService, DependencyResolver);
+            return new BaseItemViewModel(TimelineEvent, Result, NavigationService, DependencyResolver);
         }
 
         public DataTemplate CreateTemplate()
@@ -87,7 +95,7 @@
                 return TemplateMapper[TimelineEvent.Type];
             }
 
-            return new EventStatusItemTemplate();
+            return new MainEventItemTemplate();
         }
 
         protected virtual void BuildInfo()

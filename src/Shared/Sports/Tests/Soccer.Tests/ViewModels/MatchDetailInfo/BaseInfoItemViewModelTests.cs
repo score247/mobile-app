@@ -13,7 +13,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     {
         private readonly ITimeline timeline;
         private readonly IMatchResult matchResult;
-        private readonly BaseInfoItemViewModel viewModel;
+        private readonly BaseItemViewModel viewModel;
 
         public BaseInfoItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
@@ -23,17 +23,17 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             timeline.HomeScore.Returns(1);
             timeline.AwayScore.Returns(2);
             timeline.MatchTime.Returns(20);
-            viewModel = new BaseInfoItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel = new BaseItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 
         [Theory]
         [InlineData("score_change", typeof(ScoreChangeItemViewModel))]
-        [InlineData("yellow_card", typeof(CardItemViewModel))]
-        [InlineData("yellow_red_card", typeof(CardItemViewModel))]
-        [InlineData("red_card", typeof(CardItemViewModel))]
-        [InlineData("break_start", typeof(HalfTimeItemViewModel))]
-        [InlineData("penalty_missed", typeof(PenaltyMissedItemViewModel))]
-        [InlineData("corner_kick", typeof(BaseInfoItemViewModel))]
+        [InlineData("yellow_card", typeof(DefaultItemViewModel))]
+        [InlineData("yellow_red_card", typeof(DefaultItemViewModel))]
+        [InlineData("red_card", typeof(DefaultItemViewModel))]
+        [InlineData("penalty_missed", typeof(DefaultItemViewModel))]
+        [InlineData("break_start", typeof(MainEventItemViewModel))]
+        [InlineData("corner_kick", typeof(BaseItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(string eventType, Type expectedType)
         {
             // Arrange
@@ -48,12 +48,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
         [Theory]
         [InlineData("score_change", typeof(ScoreChangeItemTemplate))]
-        [InlineData("yellow_card", typeof(CardItemTemplate))]
-        [InlineData("yellow_red_card", typeof(CardItemTemplate))]
-        [InlineData("red_card", typeof(CardItemTemplate))]
-        [InlineData("break_start", typeof(EventStatusItemTemplate))]
-        [InlineData("penalty_missed", typeof(PenaltyMissedItemTemplate))]
-        [InlineData("corner_kick", typeof(EventStatusItemTemplate))]
+        [InlineData("yellow_card", typeof(DefaultItemTemplate))]
+        [InlineData("yellow_red_card", typeof(DefaultItemTemplate))]
+        [InlineData("red_card", typeof(DefaultItemTemplate))]
+        [InlineData("penalty_missed", typeof(DefaultItemTemplate))]
+        [InlineData("break_start", typeof(MainEventItemTemplate))]
+        [InlineData("corner_kick", typeof(MainEventItemTemplate))]
         public void CreateTemplate_Always_GetExpectedTemplate(string eventType, Type expectedType)
         {
             // Arrange

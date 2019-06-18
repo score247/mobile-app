@@ -67,7 +67,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public string DisplayVenue { get; set; }
 
-        public ObservableCollection<BaseInfoItemViewModel> InfoItemViewModels { get; set; }
+        public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -181,11 +181,11 @@ namespace LiveScore.Soccer.ViewModels
         private void BuildInfoItems(IMatch match)
         {
             var timelines = match?.TimeLines?
-                 .Where(t => BaseInfoItemViewModel.InfoItemEventTypes.Contains(t.Type))
+                 .Where(t => BaseItemViewModel.InfoItemEventTypes.Contains(t.Type))
                  .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
-            InfoItemViewModels = new ObservableCollection<BaseInfoItemViewModel>(timelines.Select(t =>
-                   new BaseInfoItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
+                   new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
                    .CreateInstance()));
         }
 

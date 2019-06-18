@@ -8,7 +8,7 @@
 
     using Prism.Navigation;
 
-    public class ScoreChangeItemViewModel : BaseInfoItemViewModel
+    public class ScoreChangeItemViewModel : BaseItemViewModel
     {
         private static readonly IDictionary<string, string> GoalImages = new Dictionary<string, string>
         {
@@ -29,12 +29,6 @@
         public string HomeAssistName { get; set; }
 
         public string AwayAssistName { get; set; }
-
-        public string ImageSource { get; private set; }
-
-        public bool VisibleHomeImage { get; private set; }
-
-        public bool VisibleAwayImage { get; private set; }
 
         protected override void BuildInfo()
         {

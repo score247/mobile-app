@@ -4,9 +4,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PenaltyMissedItemTemplate : DataTemplate
+    public partial class MainEventItemTemplate : DataTemplate
     {
-        public PenaltyMissedItemTemplate()
+        public MainEventItemTemplate()
         {
             InitializeComponent();
         }

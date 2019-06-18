@@ -7,9 +7,9 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class HalfTimeItemViewModel : BaseInfoItemViewModel
+    public class MainEventItemViewModel : BaseItemViewModel
     {
-        public HalfTimeItemViewModel(
+        public MainEventItemViewModel(
             ITimeline timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,

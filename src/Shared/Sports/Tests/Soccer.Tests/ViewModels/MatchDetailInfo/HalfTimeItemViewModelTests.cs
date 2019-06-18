@@ -28,7 +28,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_Always_SetRowColor()
         {
             // Act
-            var viewModel = new HalfTimeItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new MainEventItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Assert
             Assert.Equal(Color.FromHex("#1D2133"), viewModel.RowColor);
@@ -38,7 +38,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_Always_SetMainEventStatus()
         {
             // Act
-            var viewModel = new HalfTimeItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new MainEventItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Assert
             Assert.Equal("Half Time", viewModel.MainEventStatus);
@@ -54,7 +54,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             });
 
             // Act
-            var viewModel = new HalfTimeItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Assert
             Assert.Equal("1 - 2", viewModel.Score);
@@ -64,7 +64,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_NoMatchPeriodResult_ShowHyphen()
         {
             // Act
-            var viewModel = new HalfTimeItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new MainEventItemViewModel(timeline, null, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Assert
             Assert.Equal("-", viewModel.Score);

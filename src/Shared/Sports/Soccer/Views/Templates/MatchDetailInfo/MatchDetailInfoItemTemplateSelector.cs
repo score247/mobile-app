@@ -7,7 +7,7 @@
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            var itemViewModel = (BaseInfoItemViewModel)item;
+            var itemViewModel = (BaseItemViewModel)item;
 
             return itemViewModel.CreateTemplate();
         }
