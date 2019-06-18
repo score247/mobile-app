@@ -1,23 +1,20 @@
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
-    using LiveScore.Core;
+    using System.Collections.Generic;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using NSubstitute;
-    using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
     using Xamarin.Forms;
     using Xunit;
 
-    public class HalfTimeItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
+    public class MainEventItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly ITimeline timeline;
         private readonly IMatchResult matchResult;
         private readonly ViewModelBaseFixture baseFixture;
 
-        public HalfTimeItemViewModelTests(ViewModelBaseFixture baseFixture)
+        public MainEventItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
             timeline = Substitute.For<ITimeline>();
