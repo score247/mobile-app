@@ -98,12 +98,12 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoSecondLegInfo" TargetType="StackLayout">
+    <Style x:Key="MatchGeneralInfoImportant" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
         <Setter Property="HorizontalOptions" Value="FillAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
-    <Style x:Key="MatchGeneralInfoSecondLegContent" TargetType="Label">
+    <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
         <Setter Property="HeightRequest" Value="24" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />

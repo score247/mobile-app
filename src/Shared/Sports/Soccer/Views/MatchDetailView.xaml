@@ -73,8 +73,12 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <StackLayout HeightRequest="24" Style="{StaticResource MatchGeneralInfoSecondLegInfo}">
-                <Label Style="{StaticResource MatchGeneralInfoSecondLegContent}" Text="2nd leg, aggregate score: 3 - 3" />
+            <StackLayout Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="2nd leg, aggregate score: 3 - 3" />
+            </StackLayout>
+            <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
+            <StackLayout Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="Penalty shoot-out: 3 - 4" />
             </StackLayout>
             <ActivityIndicator
                 x:Name="activity"
