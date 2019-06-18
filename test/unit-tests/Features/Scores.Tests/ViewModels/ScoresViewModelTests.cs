@@ -188,21 +188,6 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public async Task OnAppearing_OnException_WriteLog()
-        {
-            // Arrange
-            hubConnection
-                .StartWithKeepAlive(TimeSpan.FromSeconds(30), Arg.Any<CancellationToken>())
-                .ThrowsForAnyArgs(new Exception("exception"));
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            await viewModel.LoggingService.ReceivedWithAnyArgs().LogErrorAsync(Arg.Any<Exception>());
-        }
-
-        [Fact]
         public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
         {
             // Arrange

@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
+    using System.Collections;
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Enumerations;

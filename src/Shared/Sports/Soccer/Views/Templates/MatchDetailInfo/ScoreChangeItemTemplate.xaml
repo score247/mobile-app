@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.ScoreChangeItemTemplate" xmlns="http://xamarin.com/schemas/2014/forms" xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.ScoreChangeItemTemplate"
+              xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell>
         <StackLayout>
             <StackLayout.Resources>
@@ -22,9 +25,6 @@
                                Style="{StaticResource MatchInfoImage}"
                                Source="{Binding ImageSource}"
                                IsVisible="{Binding VisibleHomeImage}" />
-                        <!--<Image IsVisible="{Binding VisibleHomeBall}" Style="{StaticResource MatchInfoHomeBall}" />
-                        <Image IsVisible="{Binding VisibleHomeOwnGoalBall}" Style="{StaticResource MatchInfoHomeOwnGoal}" />
-                        <Image IsVisible="{Binding VisibleHomePenaltyGoalBall}" Style="{StaticResource MatchInfoHomePenaltyGoal}" />-->
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
@@ -34,9 +34,6 @@
                     <Image Style="{StaticResource MatchInfoImage}"
                            Source="{Binding ImageSource}"
                            IsVisible="{Binding VisibleAwayImage}" />
-                    <!--<Image IsVisible="{Binding VisibleAwayBall}" Style="{StaticResource MatchInfoBall}" />
-                    <Image IsVisible="{Binding VisibleAwayOwnGoalBall}" Style="{StaticResource MatchInfoOwnGoal}" />
-                    <Image IsVisible="{Binding VisibleAwayPenaltyGoalBall}" Style="{StaticResource MatchInfoPenaltyGoal}" />-->
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
                         <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding AwayAssistName}" />

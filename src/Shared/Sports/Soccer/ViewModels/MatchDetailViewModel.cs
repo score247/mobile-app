@@ -10,14 +10,18 @@ namespace LiveScore.Soccer.ViewModels
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+
     using Core.ViewModels;
+
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+
     using Microsoft.AspNetCore.SignalR.Client;
+
     using Prism.Events;
     using Prism.Navigation;
 
