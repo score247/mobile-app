@@ -23,6 +23,7 @@ Score247 Documentation
    :caption: Deployment
    :maxdepth: 2
 
+   Feature Branching <deploy/branch>
    Testflight <deploy/testflight>
    Jenkins <deploy/jenkinsdeploysimulator>
    Appium Issues <deploy/appium>
