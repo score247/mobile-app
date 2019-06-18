@@ -276,9 +276,6 @@
     <BundleResource Include="..\..\CommonResources\Image\common\ball%403x.png">
       <Link>Resources\images\common\ball%403x.png</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\card_yellow.png">
-      <Link>Resources\images\common\card_yellow.png</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\common\edit.png">
       <Link>Resources\images\common\edit.png</Link>
     </BundleResource>
@@ -671,6 +668,24 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\favorite_function_bar%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\red_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\red_card%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\red_card%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\yellow_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\yellow_card%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\yellow_card%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

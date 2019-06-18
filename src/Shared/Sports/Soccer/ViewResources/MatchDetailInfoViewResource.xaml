@@ -53,43 +53,34 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="MatchInfoImage" TargetType="Image">
-        <Setter Property="WidthRequest" Value="12" />
+    <Style x:Key="MatchInfoYellowCard" TargetType="Image">
+        <Setter Property="WidthRequest" Value="8" />
         <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoHomeYellowCard"
+        BasedOn="{StaticResource MatchInfoYellowCard}"
+        TargetType="Image">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+    </Style>
+
+    <Style x:Key="MatchInfoRedCard" TargetType="Image">
+        <Setter Property="WidthRequest" Value="8" />
+        <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style
+        x:Key="MatchInfoHomeRedCard"
+        BasedOn="{StaticResource MatchInfoRedCard}"
+        TargetType="Image">
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchInfoBall" TargetType="Image">
         <Setter Property="Source" Value="images/common/ball.png" />
         <Setter Property="WidthRequest" Value="12" />
         <Setter Property="Aspect" Value="AspectFit" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoYellowCard"
-        BasedOn="{StaticResource YellowCard}"
-        TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeYellowCard"
-        BasedOn="{StaticResource MatchInfoYellowCard}"
-        TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoRedCard"
-        BasedOn="{StaticResource RedCard}"
-        TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeRedCard"
-        BasedOn="{StaticResource MatchInfoRedCard}"
-        TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style

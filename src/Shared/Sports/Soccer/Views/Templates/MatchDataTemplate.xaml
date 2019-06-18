@@ -15,14 +15,14 @@
             </StackLayout.Resources>
             <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
                 <StackLayout Spacing="5">
-                    <Label IsVisible="{Binding Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}"/>
+                    <Label IsVisible="{Binding Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}" />
                     <Label Style="{StaticResource MatchStatus}" Text="{Binding DisplayMatchStatus}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource TeamContainer}">
                     <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
                     <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
                 </StackLayout>
-                <StackLayout Style="{StaticResource ScoreContainer}" IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}">
+                <StackLayout IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}" Style="{StaticResource ScoreContainer}">
                     <Label Style="{StaticResource HomeScore}" Text="{Binding Match.MatchResult.HomeScore}" />
                     <Label Style="{StaticResource AwayScore}" Text="{Binding Match.MatchResult.AwayScore}" />
                 </StackLayout>

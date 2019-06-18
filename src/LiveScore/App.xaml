@@ -45,10 +45,6 @@
             <Color x:Key="ASCLiveOddColor">#FC1923</Color>
             <Color x:Key="DESCLiveOddColor">#3EC28F</Color>
 
-            <!--  Cards  -->
-            <Color x:Key="YellowCardColor">#E5C20B</Color>
-            <Color x:Key="RedCardColor">#FC1923</Color>
-
             <!--  Tabs  -->
             <Color x:Key="TabColor">#666</Color>
             <Color x:Key="ActiveTabColor">#fff</Color>
@@ -323,29 +319,6 @@
                 <Setter Property="Margin" Value="2,0,0,0" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
                 <Setter Property="Text" Value="&#xe91c;" />
-            </Style>
-
-            <Style
-                x:Key="Card"
-                BasedOn="{StaticResource Icons}"
-                TargetType="Label">
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="Text" Value="&#xe91a;" />
-                <Setter Property="WidthRequest" Value="12" />
-            </Style>
-
-            <Style
-                x:Key="YellowCard"
-                BasedOn="{StaticResource Card}"
-                TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource YellowCardColor}" />
-            </Style>
-
-            <Style
-                x:Key="RedCard"
-                BasedOn="{StaticResource Card}"
-                TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource RedCardColor}" />
             </Style>
 
             <Style

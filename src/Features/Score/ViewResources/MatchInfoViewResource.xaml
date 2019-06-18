@@ -30,14 +30,14 @@
         <Setter Property="FlexLayout.Grow" Value="0.4" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
-     
+
     <Style x:Key="MatchInfoText" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
-    
+
     <Style x:Key="MatchInfoScoreContainer" TargetType="StackLayout">
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FlexLayout.AlignSelf" Value="Center" />
@@ -60,34 +60,6 @@
     </Style>
 
     <Style
-        x:Key="MatchInfoYellowCard"
-        BasedOn="{StaticResource YellowCard}"
-        TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeYellowCard"
-        BasedOn="{StaticResource MatchInfoYellowCard}"
-        TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoRedCard"
-        BasedOn="{StaticResource RedCard}"
-        TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style
-        x:Key="MatchInfoHomeRedCard"
-        BasedOn="{StaticResource MatchInfoRedCard}"
-        TargetType="Label">
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-    </Style>
-
-    <Style
         x:Key="MatchInfoHomeBall"
         BasedOn="{StaticResource MatchInfoBall}"
         TargetType="Image">
@@ -95,7 +67,6 @@
     </Style>
 
     <Style x:Key="MatchInfoRedYellowCard" TargetType="Image">
-        <Setter Property="Source" Value="images/common/red_yellow_card.png" />
         <Setter Property="WidthRequest" Value="10" />
         <Setter Property="Aspect" Value="AspectFit" />
     </Style>
