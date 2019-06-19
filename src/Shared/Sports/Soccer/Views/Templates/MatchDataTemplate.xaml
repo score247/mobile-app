@@ -37,13 +37,25 @@
                 <StackLayout Grid.Row="0" Grid.Column="1">
                     <FlexLayout Style="{StaticResource MatchTeam}">
                         <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
-                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
-                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                        <Image
+                            IsVisible="False"
+                            Source="images/common/penalty_winner.png"
+                            Style="{StaticResource MatchWinnerInfoIcon}" />
+                        <Image
+                            IsVisible="False"
+                            Source="images/common/second_leg_winner.png"
+                            Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
                     <FlexLayout Style="{StaticResource MatchTeam}">
                         <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
-                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
-                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                        <Image
+                            IsVisible="False"
+                            Source="images/common/penalty_winner.png"
+                            Style="{StaticResource MatchWinnerInfoIcon}" />
+                        <Image
+                            IsVisible="False"
+                            Source="images/common/second_leg_winner.png"
+                            Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
                 </StackLayout>
 

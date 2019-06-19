@@ -330,12 +330,9 @@
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
             </Style>
 
-            <Style x:Key="InfoWinnerIcon" TargetType="Image">
-                <Setter Property="Margin" Value="4,0" />
+            <Style x:Key="WinnerInfoIcon" TargetType="Image">
                 <Setter Property="Aspect" Value="AspectFit" />
                 <Setter Property="WidthRequest" Value="13" />
-                <Setter Property="HeightRequest" Value="12" />
-                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <!--  NavTabs  -->

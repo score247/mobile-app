@@ -688,15 +688,6 @@
     <BundleResource Include="Resources\images\common\yellow_card%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\penalty_winner.png" />
   </ItemGroup>
   <ItemGroup>
@@ -704,6 +695,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\penalty_winner%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

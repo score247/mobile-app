@@ -66,9 +66,10 @@
         <Setter Property="Padding" Value="4,2" />
     </Style>
     <Style
-        x:Key="MatchInfoWinnerIcon"
-        BasedOn="{StaticResource InfoWinnerIcon}"
+        x:Key="MatchWinnerInfoIcon"
+        BasedOn="{StaticResource WinnerInfoIcon}"
         TargetType="Image">
         <Setter Property="FlexLayout.Shrink" Value="0" />
+        <Setter Property="Margin" Value="4,0" />
     </Style>
 </ResourceDictionary>
