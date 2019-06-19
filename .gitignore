@@ -110,10 +110,6 @@ _TeamCity*
 # DotCover is a Code Coverage Tool
 *.dotCover
 
-# NCrunch
-_NCrunch_*
-.*crunch*.local.xml
-nCrunchTemp_*
 
 # MightyMoose
 *.mm.*
@@ -265,6 +261,3 @@ __pycache__/
 docs/_build/
 
 *.blob
-
-*.ncrunch*
-
