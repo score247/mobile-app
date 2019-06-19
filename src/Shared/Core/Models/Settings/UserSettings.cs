@@ -9,11 +9,11 @@
             TimeZone = timeZone;
         }
 
-        public string SportId { get; private set; }
+        public string SportId { get; }
 
-        public string Language { get; private set; }
+        public string Language { get; }
 
-        public string TimeZone { get; private set; }
+        public string TimeZone { get; }
 
         public override string ToString() => $"{SportId}-{Language}-{TimeZone}";
     }

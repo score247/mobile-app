@@ -12,7 +12,7 @@ namespace LiveScore.Core.Tests.Converters
         public void Convert_ValueIsNotNull_GetFirstCharWithUpperCase()
         {
             // Arrange
-            var value = "Chelsea";
+            const string value = "Chelsea";
             var converter = new FirstCharConverter();
 
             // Act

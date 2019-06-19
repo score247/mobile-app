@@ -58,6 +58,5 @@
 
         public void TrackEvent(string trackIdentifier, string key, string value)
             => TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
-
     }
 }

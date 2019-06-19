@@ -20,13 +20,8 @@
 
         public HubConnection BuildMatchHubConnection()
         {
-            if (matchHubConnection == null)
-            {
-                matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build();
-            }
-
-            return matchHubConnection;
+            return matchHubConnection ??
+                (matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/MatchHub").Build());
         }
     }
 }
-

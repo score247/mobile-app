@@ -58,7 +58,7 @@ namespace LiveScore.Core.Tests.Mocks
                         return 16;
 
                     default:
-                        throw new ArgumentOutOfRangeException("size");
+                        throw new ArgumentOutOfRangeException(paramName: nameof(size));
                 }
             }
 
@@ -93,13 +93,13 @@ namespace LiveScore.Core.Tests.Mocks
             public void StartTimer(TimeSpan interval, Func<bool> callback)
             {
                 Timer timer = null;
-                TimerCallback onTimeout = o => BeginInvokeOnMainThread(() =>
-                {
-                    if (callback())
-                        return;
+                void onTimeout(object o) => BeginInvokeOnMainThread(() =>
+                 {
+                     if (callback())
+                         return;
 
-                    timer.Dispose();
-                });
+                     timer.Dispose();
+                 });
                 timer = new Timer(onTimeout, null, interval, interval);
             }
 
@@ -149,8 +149,7 @@ namespace LiveScore.Core.Tests.Mocks
             public IResourceDictionary GetSystemResources()
             {
                 var dictionary = new ResourceDictionary();
-                Style style;
-                style = new Style(typeof(Label));
+                Style style = new Style(typeof(Label));
                 dictionary[Device.Styles.BodyStyleKey] = style;
 
                 style = new Style(typeof(Label));

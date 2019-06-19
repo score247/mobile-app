@@ -36,7 +36,7 @@
         public void ToApiFormat_ShouldReturnCorrectFormat()
         {
             // Arrange
-            var expected = "2019-04-22T12:00:00+00:00";
+            const string expected = "2019-04-22T12:00:00+00:00";
 
             // Act
             var actual = new DateTime(2019, 4, 22, 12, 0, 0, DateTimeKind.Utc).ToApiFormat();
@@ -49,7 +49,7 @@
         public void ToShortDayMonth_ShouldReturnCorrectFormat()
         {
             // Arrange
-            var expected = "22 Apr";
+            const string expected = "22 Apr";
 
             // Act
             var actual = new DateTime(2019, 4, 22, 12, 0, 0, DateTimeKind.Utc).ToShortDayMonth();

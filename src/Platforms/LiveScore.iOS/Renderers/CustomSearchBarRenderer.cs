@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(SearchBar), typeof(CustomSearchBarRenderer))]
+
 namespace LiveScore.iOS.Renderers
 {
     public class CustomSearchBarRenderer : SearchBarRenderer
@@ -16,7 +17,6 @@ namespace LiveScore.iOS.Renderers
 
             Control.ShowsCancelButton = false;
         }
-
 
         protected override void OnElementChanged(ElementChangedEventArgs<SearchBar> e)
         {

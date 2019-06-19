@@ -62,9 +62,6 @@
         [Fact]
         public void LogError_WhenCall_CorrectOperatingSystemName()
         {
-            // Arrange
-
-
             // Act
             loggingService.LogError(new InvalidOperationException(""));
 
@@ -107,7 +104,6 @@
             // Assert
             mockRavenClient.Received(1).AddTrail(Arg.Any<Breadcrumb>());
         }
-
     }
 
     public class MockEssentials : IEssentialsService

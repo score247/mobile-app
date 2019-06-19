@@ -9,8 +9,6 @@
 
     public class LocalStorageTests
     {
-        private const string DATE_FORMAT = "yyyy-MM-ddTHH:mm:sszzz";
-
         private readonly IEssentialsService mockEssentials;
         private readonly IBlobCache mockLocalMachine;
         private readonly IBlobCache mockUserAccount;
@@ -68,7 +66,7 @@
         public async Task Invalidate_ShouldInjectBlobCache()
         {
             // Arrange
-            var imageLink = "https://country.flags";
+            const string imageLink = "https://country.flags";
 
             // Act
             await cache.Invalidate(imageLink);

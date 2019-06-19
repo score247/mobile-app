@@ -11,8 +11,10 @@ namespace LiveScore.Common.Tests.Controls
         {
             // Arrange
             var command = new Command(() => { });
-            var listview = new InfiniteListView();
-            listview.LoadMoreCommand = command;
+            var listview = new InfiniteListView
+            {
+                LoadMoreCommand = command
+            };
 
             // Act
             var actual = listview.LoadMoreCommand;
@@ -26,8 +28,10 @@ namespace LiveScore.Common.Tests.Controls
         {
             // Arrange
             var command = new Command(() => { });
-            var listview = new InfiniteListView();
-            listview.LoadMoreCommand = command;
+            var listview = new InfiniteListView
+            {
+                LoadMoreCommand = command
+            };
 
             // Act
             var actual = listview.GetValue(InfiniteListView.LoadMoreCommandProperty);

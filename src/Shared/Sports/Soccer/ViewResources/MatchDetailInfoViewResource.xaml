@@ -19,13 +19,6 @@
         <Setter Property="Padding" Value="9,0" />
     </Style>
 
-    <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="Margin" Value="5,0,0,0" />
-    </Style>
-
     <Style x:Key="MatchInfoTeam" TargetType="StackLayout">
         <Setter Property="FlexLayout.Grow" Value="0.4" />
         <Setter Property="Orientation" Value="Horizontal" />
@@ -56,6 +49,13 @@
     <Style x:Key="MatchInfoImage" TargetType="Image">
         <Setter Property="WidthRequest" Value="12" />
         <Setter Property="Aspect" Value="AspectFit" />
+    </Style>
+
+    <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchInfoMinutes" TargetType="Label">

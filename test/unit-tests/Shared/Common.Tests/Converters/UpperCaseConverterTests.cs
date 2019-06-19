@@ -18,7 +18,7 @@
         public void Convert_ReturnUpperString(string value)
         {
             // Arrange
-            var expected = "UPPER";
+            const string expected = "UPPER";
 
             // Act
             var result = converter.Convert(value, null, null, null);
@@ -31,7 +31,7 @@
         public void ConvertBack_ReturnString()
         {
             // Arrange
-            var expected = "UPPER";
+            const string expected = "UPPER";
 
             // Act
             var result = converter.ConvertBack("UPPER", null, null, null);

@@ -2,21 +2,19 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-
     using Prism.Navigation;
 
     public class DefaultItemViewModel : BaseItemViewModel
     {
         private static readonly IDictionary<string, string> EventImages = new Dictionary<string, string>
         {
-            { EventTypes.YellowCard, "images/common/yellow_card.png" },
-            { EventTypes.YellowRedCard, "images/common/red_yellow_card.png" },
-            { EventTypes.RedCard, "images/common/red_card.png" },
-            { EventTypes.PenaltyMissed, "images/common/missed_penalty_goal.png" },
+            { EventTypes.YellowCard, Images.YellowCard.Value },
+            { EventTypes.YellowRedCard, Images.RedYellowCard.Value },
+            { EventTypes.RedCard, Images.RedCard.Value },
+            { EventTypes.PenaltyMissed, Images.MissPenaltyGoal.Value },
         };
 
         private static readonly string[] VisibleScoreEvents = new[]

@@ -29,6 +29,12 @@
         string Referee { get; set; }
 
         ITimeline LatestTimeline { get; set; }
+
+        int AggregateHomeScore { get; }
+
+        int AggregateAwayScore { get; }
+
+        string AggregateWinnerId { get; }
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -61,5 +67,10 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
         public ITimeline LatestTimeline { get; set; }
 
+        public int AggregateHomeScore { get; }
+
+        public int AggregateAwayScore { get; }
+
+        public string AggregateWinnerId { get; }
     }
 }

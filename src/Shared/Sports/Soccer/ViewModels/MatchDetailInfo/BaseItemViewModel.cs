@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -12,14 +13,13 @@
 
     public class BaseItemViewModel : ViewModelBase
     {
-        public static readonly string[] InfoItemEventTypes = new[] {
-            EventTypes.BreakStart,
-            EventTypes.PeriodStart,
+        private static readonly string[] InfoItemEventTypes = new[] {
             EventTypes.ScoreChange,
             EventTypes.PenaltyMissed,
             EventTypes.YellowCard,
             EventTypes.RedCard,
             EventTypes.YellowRedCard,
+            EventTypes.PenaltyShootout
         };
 
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
@@ -30,7 +30,8 @@
             { EventTypes.PenaltyMissed, typeof(DefaultItemViewModel) },
             { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
             { EventTypes.BreakStart, typeof(MainEventItemViewModel) },
-            { EventTypes.PeriodStart, typeof(MainEventItemViewModel) }
+            { EventTypes.PeriodStart, typeof(MainEventItemViewModel) },
+            { EventTypes.PenaltyShootout, typeof(PenaltyShootOutViewModel) }
         };
 
         private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
@@ -41,7 +42,8 @@
             { EventTypes.PenaltyMissed, new DefaultItemTemplate() },
             { EventTypes.BreakStart, new MainEventItemTemplate() },
             { EventTypes.PeriodStart, new MainEventItemTemplate() },
-            { EventTypes.ScoreChange, new ScoreChangeItemTemplate() }
+            { EventTypes.ScoreChange, new ScoreChangeItemTemplate() },
+            { EventTypes.PenaltyShootout, new PenaltyShootOutTemplate() }
         };
 
         public BaseItemViewModel(
@@ -100,6 +102,17 @@
 
             return new MainEventItemTemplate();
         }
+
+        public static bool ValidateEvent(ITimeline timeline)
+            => InfoItemEventTypes.Contains(timeline.Type)
+                || StartPenalty(timeline)
+                || NotExtraTimeHalfTime(timeline);
+
+        private static bool NotExtraTimeHalfTime(ITimeline timeline)
+            => timeline.Type == EventTypes.BreakStart && timeline.PeriodType != PeriodTypes.ExtraTimeHalfTime;
+
+        private static bool StartPenalty(ITimeline timeline)
+            => timeline.Type == EventTypes.PeriodStart && timeline.PeriodType == PeriodTypes.Penalties;
 
         protected virtual void BuildInfo()
         {

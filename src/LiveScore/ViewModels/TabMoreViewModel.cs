@@ -23,7 +23,7 @@
             ItemTappedCommand = new DelegateAsyncCommand<TabItem>(ItemTapped);
         }
 
-        public ObservableCollection<TabItem> TabItems { get; private set; }
+        public ObservableCollection<TabItem> TabItems { get; }
 
         public DelegateAsyncCommand<TabItem> ItemTappedCommand { get; }
 

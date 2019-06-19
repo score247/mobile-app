@@ -1,20 +1,19 @@
 ﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     using System.Collections.Generic;
-
     using LiveScore.Core;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Enumerations;
-
     using Prism.Navigation;
 
     public class ScoreChangeItemViewModel : BaseItemViewModel
     {
         private static readonly IDictionary<string, string> GoalImages = new Dictionary<string, string>
         {
-            { GoalMethod.OwnGoal, "images/common/own_goal.png" },
-            { GoalMethod.Penalty, "images/common/penalty_goal.png" },
-            { string.Empty, "images/common/ball.png" },
+            { GoalMethod.OwnGoal, Images.OwnGoal.Value },
+            { GoalMethod.Penalty, Images.PenaltyGoal.Value },
+            { string.Empty, Images.Goal.Value },
         };
 
         public ScoreChangeItemViewModel(

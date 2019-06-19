@@ -43,6 +43,18 @@
         string Outcome { get; }
 
         IEnumerable<Commentary> Commentaries { get; }
+
+        Player HomeShootoutPlayer { get; }
+
+        bool IsHomeShootoutScored { get; }
+
+        Player AwayShootoutPlayer { get; }
+
+        bool IsAwayShootoutScored { get; }
+
+        int ShootoutHomeScore { get; }
+
+        int ShootoutAwayScore { get; }
     }
 
     public class Timeline : Entity<long, string>, ITimeline
@@ -85,6 +97,17 @@
 
         public string Outcome { get; set; }
 
+        public Player HomeShootoutPlayer { get; }
+
+        public bool IsHomeShootoutScored { get; }
+
+        public Player AwayShootoutPlayer { get; }
+
+        public bool IsAwayShootoutScored { get; }
+
+        public int ShootoutHomeScore { get; }
+
+        public int ShootoutAwayScore { get; }
     }
 
     public class Commentary
