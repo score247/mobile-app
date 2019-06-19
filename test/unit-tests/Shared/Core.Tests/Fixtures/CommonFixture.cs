@@ -5,6 +5,7 @@
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
 
     public class CommonFixture

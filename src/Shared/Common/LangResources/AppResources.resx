@@ -249,4 +249,7 @@
   <data name="PenaltyShootOut" xml:space="preserve">
     <value>Penalty Shoot-Out</value>
   </data>
+  <data name="SecondLeg" xml:space="preserve">
+    <value>2nd Leg, Aggregate Score:</value>
+  </data>
 </root>

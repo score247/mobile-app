@@ -9,6 +9,8 @@
         public static readonly Images OwnGoal = new Images("images/common/own_goal.png", nameof(OwnGoal));
         public static readonly Images Goal = new Images("images/common/ball.png", nameof(Goal));
         public static readonly Images PenaltyGoal = new Images("images/common/penalty_goal.png", nameof(PenaltyGoal));
+        public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
+        public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
 
         public Images()
         {

@@ -6,6 +6,7 @@ namespace Soccer.Tests.Converters
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Converters;
+    using LiveScore.Soccer.Models.Matches;
     using Xunit;
 
     public class MatchStatusConverterTests

@@ -11,6 +11,7 @@
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Services;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;

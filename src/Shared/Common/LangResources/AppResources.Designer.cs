@@ -385,6 +385,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 2nd Leg, Aggregate Score:.
+        /// </summary>
+        public static string SecondLeg {
+            get {
+                return ResourceManager.GetString("SecondLeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Delayed.
         /// </summary>
         public static string StartDelayed {

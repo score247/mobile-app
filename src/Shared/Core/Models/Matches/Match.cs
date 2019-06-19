@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Teams;
@@ -29,48 +30,5 @@
         string Referee { get; set; }
 
         ITimeline LatestTimeline { get; set; }
-
-        int AggregateHomeScore { get; }
-
-        int AggregateAwayScore { get; }
-
-        string AggregateWinnerId { get; }
-    }
-
-    [AddINotifyPropertyChangedInterface]
-    public class Match : Entity<string, string>, IMatch
-    {
-        public DateTime EventDate { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Team>>))]
-        public IEnumerable<ITeam> Teams { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<MatchResult>))]
-        public IMatchResult MatchResult { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Timeline>>))]
-        public IEnumerable<ITimeline> TimeLines { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<MatchCondition>))]
-        public IMatchCondition MatchCondition { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
-        public ILeague League { get; set; }
-
-        public int Attendance { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Venue>))]
-        public IVenue Venue { get; set; }
-
-        public string Referee { get; set; }
-
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
-        public ITimeline LatestTimeline { get; set; }
-
-        public int AggregateHomeScore { get; }
-
-        public int AggregateAwayScore { get; }
-
-        public string AggregateWinnerId { get; }
     }
 }

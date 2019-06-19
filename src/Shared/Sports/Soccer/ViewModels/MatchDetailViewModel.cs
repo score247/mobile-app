@@ -12,10 +12,12 @@ namespace LiveScore.Soccer.ViewModels
     using System.Threading.Tasks;
     using Core.ViewModels;
     using LiveScore.Common.Extensions;
+    using LiveScore.Common.LangResources;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
@@ -44,7 +46,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public bool IsRefreshing { get; private set; }
+        public bool IsRefreshing { get; set; }
 
         public bool IsLoading { get; private set; }
 
@@ -61,6 +63,10 @@ namespace LiveScore.Soccer.ViewModels
         public string DisplayAttendance { get; private set; }
 
         public string DisplayVenue { get; private set; }
+
+        public string DisplaySecondLeg { get; private set; }
+
+        public string DisplayPenaltyShootOut { get; private set; }
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
@@ -145,18 +151,13 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildGeneralInfo(IMatch match)
         {
-            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
-            MatchViewModel.BuildMatchStatus();
+            BuildViewModel(match);
 
-            var eventDate = match.EventDate.ToDayMonthYear();
-            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League?.Name?.ToUpperInvariant() ?? string.Empty}";
+            BuildScoreAndEventDate(match);
 
-            if (match.MatchResult != null)
-            {
-                var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
-                var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
-                DisplayScore = $"{homeScore} - {awayScore}";
-            }
+            BuildSecondLeg(match);
+
+            BuildPenaltyShootOut(match);
         }
 
         private void BuildDetailInfo(IMatch match)
@@ -191,6 +192,39 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
+        private void BuildPenaltyShootOut(IMatch match)
+        {
+            var penaltyResult = match.MatchResult?.GetPenaltyResult();
+
+            if (penaltyResult != null)
+            {
+                DisplayPenaltyShootOut = $"{AppResources.PenaltyShootOut}: {penaltyResult.HomeScore} - {penaltyResult.AwayScore}";
+            }
+        }
+
+        private void BuildSecondLeg(IMatch match)
+        {
+            var winnerId = match.MatchResult?.AggregateWinnerId;
+
+            if (!string.IsNullOrEmpty(winnerId))
+            {
+                DisplaySecondLeg = $"{AppResources.SecondLeg} {match.MatchResult.AggregateHomeScore} - {match.MatchResult.AggregateAwayScore}";
+            }
+        }
+
+        private void BuildScoreAndEventDate(IMatch match)
+        {
+            var eventDate = match.EventDate.ToDayMonthYear();
+            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League?.Name?.ToUpperInvariant() ?? string.Empty}";
+
+            if (match.MatchResult != null)
+            {
+                var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
+                var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
+                DisplayScore = $"{homeScore} - {awayScore}";
+            }
+        }
+
         private static string BuildScore(MatchStatus matchStatus, int score)
         {
             if (matchStatus == null)
@@ -199,6 +233,12 @@ namespace LiveScore.Soccer.ViewModels
             }
 
             return matchStatus.IsPreMatch ? string.Empty : score.ToString();
+        }
+
+        private void BuildViewModel(IMatch match)
+        {
+            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            MatchViewModel.BuildMatchStatus();
         }
 
         protected virtual void Dispose(bool disposing)

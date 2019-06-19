@@ -22,17 +22,7 @@ namespace LiveScore.Basketball.Services
 
         public Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
-            IEnumerable<IMatch> matches = new List<IMatch>
-            {
-                new Match {
-                    EventDate = DateTime.Today,
-                    League = new League { Name = "Basketball League" },
-                    Teams = new List<Team> { new Team { Name = "Team A" }, new Team { Name = "Team B" } },
-                    MatchResult = new MatchResult { HomeScore = 1, AwayScore = 2 }
-                }
-            };
-
-            return Task.FromResult(matches);
+            return null;
         }
 
         public void SubscribeMatches(HubConnection hubConnection, Action<string, Dictionary<string, MatchPushEvent>> handler)

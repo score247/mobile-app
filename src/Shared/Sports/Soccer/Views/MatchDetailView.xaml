@@ -3,6 +3,7 @@
     x:Class="LiveScore.Soccer.Views.MatchDetailView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:matchDetailInfo="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
@@ -23,6 +24,7 @@
                 <resources:MatchDetailViewResource />
             </ResourceDictionary.MergedDictionaries>
             <coreConverters:FirstCharConverter x:Key="FirstCharConverter" />
+            <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -43,8 +45,8 @@
                         Grid.Column="0"
                         Style="{StaticResource MatchGeneralInfoHomeTeam}">
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
-                            <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.HomePenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.HomeSecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
 
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
@@ -62,10 +64,9 @@
                         Style="{StaticResource MatchGeneralInfoAwayTeam}">
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[1].Name, Converter={StaticResource FirstCharConverter}}" />
                         <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
-
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
-                            <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.AwayPenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.AwaySecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
                     </StackLayout>
                 </Grid>
@@ -77,12 +78,14 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <StackLayout Style="{StaticResource MatchGeneralInfoImportant}">
-                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="2nd leg, aggregate score: 3 - 3" />
+            <StackLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}"
+                         Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
             </StackLayout>
             <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
-            <StackLayout Style="{StaticResource MatchGeneralInfoImportant}">
-                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="Penalty shoot-out: 3 - 4" />
+            <StackLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}"
+                         Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
             </StackLayout>
             <ActivityIndicator
                 x:Name="activity"

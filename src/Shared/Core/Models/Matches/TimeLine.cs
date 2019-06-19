@@ -97,17 +97,17 @@
 
         public string Outcome { get; set; }
 
-        public Player HomeShootoutPlayer { get; }
+        public Player HomeShootoutPlayer { get; set; }
 
-        public bool IsHomeShootoutScored { get; }
+        public bool IsHomeShootoutScored { get; set; }
 
-        public Player AwayShootoutPlayer { get; }
+        public Player AwayShootoutPlayer { get; set; }
 
-        public bool IsAwayShootoutScored { get; }
+        public bool IsAwayShootoutScored { get; set; }
 
-        public int ShootoutHomeScore { get; }
+        public int ShootoutHomeScore { get; set; }
 
-        public int ShootoutAwayScore { get; }
+        public int ShootoutAwayScore { get; set; }
     }
 
     public class Commentary

@@ -9,6 +9,7 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
     using Refit;
 

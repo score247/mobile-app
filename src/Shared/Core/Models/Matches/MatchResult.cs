@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
     using System.Collections.Generic;
+    using System.Linq;
     using LiveScore.Core.Enumerations;
     using PropertyChanged;
 
@@ -21,6 +22,12 @@
         IEnumerable<MatchPeriod> MatchPeriods { get; }
 
         string WinnerId { get; }
+
+        int AggregateHomeScore { get; }
+
+        int AggregateAwayScore { get; }
+
+        string AggregateWinnerId { get; }
     }
 
     [AddINotifyPropertyChangedInterface]
@@ -41,5 +48,11 @@
         public int HomeScore { get; set; }
 
         public int AwayScore { get; set; }
+
+        public int AggregateHomeScore { get; set; }
+
+        public int AggregateAwayScore { get; set; }
+
+        public string AggregateWinnerId { get; set; }
     }
 }
