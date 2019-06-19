@@ -6,7 +6,7 @@ pipeline{
     }
 
     options{
-        buildDiscarder(logRotator(numToKeepStr: '5'))    
+        buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '5')    
         disableConcurrentBuilds()
         gitLabConnection('Gitlab')
     }
@@ -18,6 +18,18 @@ pipeline{
 
     stages{
         stage('Build') {
+            when {
+                anyOf {
+                    allOf {
+                        triggeredBy 'TimerTrigger'
+                        branch '^\\d+\\-Sprint\\d+$'
+                    }
+                    not {
+                        triggeredBy 'TimerTrigger'
+                    }
+                }
+                beforeAgent true
+            }
             steps {        
                 script{
                     pipelineLib.beginSonarQubeForMsBuild("livescore", "LiveScores / LiveScore", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
@@ -30,6 +42,18 @@ pipeline{
         }
           
         stage("C# Unit Test"){
+            when {
+                anyOf {
+                    allOf {
+                        triggeredBy 'TimerTrigger'
+                        branch '^\\d+\\-Sprint\\d+$'
+                    }
+                    not {
+                        triggeredBy 'TimerTrigger'
+                    }
+                }
+                beforeAgent true
+            }
             steps{
                 script{
                     pipelineLib.xUnitForNetCore()
@@ -38,6 +62,18 @@ pipeline{
         }
 
         stage("SonarQube Analysis"){
+            when {
+                anyOf {
+                    allOf {
+                        triggeredBy 'TimerTrigger'
+                        branch '^\\d+\\-Sprint\\d+$'
+                    }
+                    not {
+                        triggeredBy 'TimerTrigger'
+                    }
+                }
+                beforeAgent true
+            }
             steps{       
                 script{
                     pipelineLib.endSonarQubeForMsBuild()
@@ -62,9 +98,12 @@ pipeline{
         }
 
         stage("Deploy to Local"){
-            when { 
-                triggeredBy 'TimerTrigger' 
-            }       
+            when {
+                allOf {
+                    triggeredBy 'TimerTrigger'
+                    branch '^\\d+\\-Sprint\\d+$'
+                }
+            }
             parallel{
                 stage("Deploy Api"){                                
                     steps{
@@ -98,8 +137,11 @@ pipeline{
                 label 'slaveMAC'
             }
             when { 
-                triggeredBy 'TimerTrigger' 
-            } 
+                allOf {
+                    triggeredBy 'TimerTrigger'
+                    branch '^\\d+\\-Sprint\\d+$'
+                }
+            }
             steps{
                 withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {                    
                     sh label: "Robotframework", script: "robot --outputdir $WORKSPACE/Results --exclude Demo $WORKSPACE/test/automation-tests/Score247.robot"
