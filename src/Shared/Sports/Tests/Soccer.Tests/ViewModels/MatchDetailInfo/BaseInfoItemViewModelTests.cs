@@ -33,6 +33,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         [InlineData("red_card", typeof(DefaultItemViewModel))]
         [InlineData("penalty_missed", typeof(DefaultItemViewModel))]
         [InlineData("break_start", typeof(MainEventItemViewModel))]
+        [InlineData("match_ended", typeof(MainEventItemViewModel))]
         [InlineData("corner_kick", typeof(BaseItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(string eventType, Type expectedType)
         {
@@ -53,6 +54,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         [InlineData("red_card", typeof(DefaultItemTemplate))]
         [InlineData("penalty_missed", typeof(DefaultItemTemplate))]
         [InlineData("break_start", typeof(MainEventItemTemplate))]
+        [InlineData("match_ended", typeof(MainEventItemTemplate))]
         [InlineData("corner_kick", typeof(MainEventItemTemplate))]
         public void CreateTemplate_Always_GetExpectedTemplate(string eventType, Type expectedType)
         {

@@ -100,11 +100,11 @@
 
         private bool IsFullTime()
             => (TimelineEvent.Type == EventTypes.BreakStart && TimelineEvent.PeriodType == PeriodTypes.AwaitingExtraTime)
-                || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus.IsEnded);
+                || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus?.IsEnded == true);
 
         private bool IsAfterExtraTime()
             => (TimelineEvent.Type == EventTypes.BreakStart && TimelineEvent.PeriodType == PeriodTypes.AwaitingPenalties)
-              || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus.IsAfterExtraTime);
+              || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus?.IsAfterExtraTime == true);
 
         private bool IsPenaltyShootOut()
             => TimelineEvent.Type == EventTypes.PeriodStart && TimelineEvent.PeriodType == PeriodTypes.Penalties;

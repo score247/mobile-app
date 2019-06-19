@@ -169,7 +169,7 @@ namespace LiveScore.Soccer.ViewModels
         private void BuildInfoItems(IMatch match)
         {
             var timelines = match?.TimeLines?
-                 .Where(t => BaseItemViewModel.ValidateEvent(t))
+                 .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
                  .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>

@@ -31,6 +31,7 @@
             { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
             { EventTypes.BreakStart, typeof(MainEventItemViewModel) },
             { EventTypes.PeriodStart, typeof(MainEventItemViewModel) },
+            { EventTypes.MatchEnded, typeof(MainEventItemViewModel) },
             { EventTypes.PenaltyShootout, typeof(PenaltyShootOutViewModel) }
         };
 
@@ -42,6 +43,7 @@
             { EventTypes.PenaltyMissed, new DefaultItemTemplate() },
             { EventTypes.BreakStart, new MainEventItemTemplate() },
             { EventTypes.PeriodStart, new MainEventItemTemplate() },
+            { EventTypes.MatchEnded, new MainEventItemTemplate() },
             { EventTypes.ScoreChange, new ScoreChangeItemTemplate() },
             { EventTypes.PenaltyShootout, new PenaltyShootOutTemplate() }
         };
@@ -103,16 +105,20 @@
             return new MainEventItemTemplate();
         }
 
-        public static bool ValidateEvent(ITimeline timeline)
+        public static bool ValidateEvent(ITimeline timeline, IMatchResult matchResult)
             => InfoItemEventTypes.Contains(timeline.Type)
                 || StartPenalty(timeline)
-                || NotExtraTimeHalfTime(timeline);
+                || NotExtraTimeHalfTime(timeline)
+                || MatchEndNotAfterPenalty(timeline, matchResult);
 
         private static bool NotExtraTimeHalfTime(ITimeline timeline)
             => timeline.Type == EventTypes.BreakStart && timeline.PeriodType != PeriodTypes.ExtraTimeHalfTime;
 
         private static bool StartPenalty(ITimeline timeline)
             => timeline.Type == EventTypes.PeriodStart && timeline.PeriodType == PeriodTypes.Penalties;
+
+        private static bool MatchEndNotAfterPenalty(ITimeline timeline, IMatchResult matchResult)
+            => timeline.Type == EventTypes.MatchEnded && !matchResult.MatchStatus.IsAfterPenalties;
 
         protected virtual void BuildInfo()
         {
