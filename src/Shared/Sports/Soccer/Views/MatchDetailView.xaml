@@ -42,8 +42,8 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         Style="{StaticResource MatchGeneralInfoHomeTeam}">
-                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
-                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource InfoWinnerIcon}" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource InfoWinnerIcon}" />
 
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[0].Name, Converter={StaticResource FirstCharConverter}}" />
@@ -61,8 +61,8 @@
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[1].Name, Converter={StaticResource FirstCharConverter}}" />
                         <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
 
-                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
-                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchGeneralInfoWinner}" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource InfoWinnerIcon}" />
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource InfoWinnerIcon}" />
                     </StackLayout>
                 </Grid>
                 <StackLayout>
@@ -80,13 +80,13 @@
             <StackLayout Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="Penalty shoot-out: 3 - 4" />
             </StackLayout>
-            <ActivityIndicator
+            <!--<ActivityIndicator
                 x:Name="activity"
                 IsEnabled="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
                 IsVisible="{Binding IsLoading}"
                 Style="{StaticResource CenterActivityIndicator}" />
-            <matchDetailInfo:MatchDetailInfoTemplate IsVisible="{Binding IsNotLoading}" />
+            <matchDetailInfo:MatchDetailInfoTemplate IsVisible="{Binding IsNotLoading}" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -13,21 +13,53 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
-            <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                <StackLayout Spacing="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="38" />
+                </Grid.ColumnDefinitions>
+
+                <FlexLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    AlignItems="Center"
+                    Direction="Column"
+                    JustifyContent="Center">
                     <Label IsVisible="{Binding Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}" />
                     <Label Style="{StaticResource MatchStatus}" Text="{Binding DisplayMatchStatus}" />
+                </FlexLayout>
+
+                <StackLayout Grid.Row="0" Grid.Column="1">
+                    <FlexLayout Style="{StaticResource MatchTeam}">
+                        <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                    </FlexLayout>
+                    <FlexLayout Style="{StaticResource MatchTeam}">
+                        <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
+                        <Image Source="images/common/penalty_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                        <Image Source="images/common/second_leg_winner.png" Style="{StaticResource MatchInfoWinnerIcon}" />
+                    </FlexLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource TeamContainer}">
-                    <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
-                    <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
-                </StackLayout>
-                <StackLayout IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}" Style="{StaticResource ScoreContainer}">
+
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}">
                     <Label Style="{StaticResource HomeScore}" Text="{Binding Match.MatchResult.HomeScore}" />
                     <Label Style="{StaticResource AwayScore}" Text="{Binding Match.MatchResult.AwayScore}" />
                 </StackLayout>
-                <Label AutomationId="MatchFavoriteBtn" Style="{StaticResource MatchFavoriteIcon}" />
-            </FlexLayout>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    AutomationId="MatchFavoriteBtn"
+                    Style="{StaticResource MatchFavoriteIcon}" />
+            </Grid>
         </StackLayout>
     </ViewCell>
 </DataTemplate>

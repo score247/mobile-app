@@ -49,12 +49,6 @@
         <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoWinner" TargetType="Image">
-        <Setter Property="Margin" Value="4,0" />
-        <Setter Property="Aspect" Value="AspectFit" />
-        <Setter Property="WidthRequest" Value="13" />
-    </Style>
-
     <Style x:Key="MatchGeneralInfoTeamLogo" TargetType="Button">
         <Setter Property="WidthRequest" Value="32" />
         <Setter Property="HeightRequest" Value="32" />

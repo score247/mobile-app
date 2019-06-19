@@ -112,7 +112,6 @@
             </Style>
 
             <Style x:Key="Team" TargetType="Label">
-                <Setter Property="HeightRequest" Value="22" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
             </Style>
@@ -121,7 +120,6 @@
                 x:Key="HomeTeam"
                 BasedOn="{StaticResource Team}"
                 TargetType="Label">
-                <Setter Property="Margin" Value="0,4,0,0" />
                 <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
             </Style>
 
@@ -129,7 +127,6 @@
                 x:Key="AwayTeam"
                 BasedOn="{StaticResource Team}"
                 TargetType="Label">
-                <Setter Property="Margin" Value="0,0,0,4" />
                 <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
             </Style>
 
@@ -286,7 +283,7 @@
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="WidthRequest" Value="12" />
+                <Setter Property="WidthRequest" Value="16" />
             </Style>
 
             <Style
@@ -331,6 +328,14 @@
                 <Setter Property="FontSize" Value="12" />
                 <Setter Property="Text" Value="&#xe920;" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+
+            <Style x:Key="InfoWinnerIcon" TargetType="Image">
+                <Setter Property="Margin" Value="4,0" />
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="WidthRequest" Value="13" />
+                <Setter Property="HeightRequest" Value="12" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
             <!--  NavTabs  -->
