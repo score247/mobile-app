@@ -420,15 +420,6 @@
     <BundleResource Include="..\..\CommonResources\Image\common\scores.png">
       <Link>Resources\images\common\scores.png</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\search.png">
-      <Link>Resources\images\common\search.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\search%402x.png">
-      <Link>Resources\images\common\search%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\search%403x.png">
-      <Link>Resources\images\common\search%403x.png</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\common\soccer.png">
       <Link>Resources\images\common\soccer.png</Link>
     </BundleResource>
@@ -652,15 +643,6 @@
     <BundleResource Include="Resources\images\common\own_goal%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\favorite_function_bar.png" />
   </ItemGroup>
   <ItemGroup>
@@ -704,6 +686,24 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\search%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\search%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
