@@ -19,6 +19,8 @@
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
         <ListView
+            AutomationId="MatchDetailInfo"
+            AutomationProperties.IsInAccessibleTree="False"
             BackgroundColor="{StaticResource SecondColor}"
             CachingStrategy="RecycleElement"
             IsPullToRefreshEnabled="true"
