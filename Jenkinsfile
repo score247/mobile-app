@@ -17,19 +17,7 @@ pipeline{
     }
 
     stages{
-        stage('Build') {
-            when {
-                anyOf {
-                    allOf {
-                        triggeredBy 'TimerTrigger'
-                        branch '^\\d+\\-Sprint\\d+$'
-                    }
-                    not {
-                        triggeredBy 'TimerTrigger'
-                    }
-                }
-                beforeAgent true
-            }
+        stage('Build') {            
             steps {        
                 script{
                     pipelineLib.beginSonarQubeForMsBuild("livescore", "LiveScores / LiveScore", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
@@ -41,19 +29,7 @@ pipeline{
             }
         }
           
-        stage("C# Unit Test"){
-            when {
-                anyOf {
-                    allOf {
-                        triggeredBy 'TimerTrigger'
-                        branch '^\\d+\\-Sprint\\d+$'
-                    }
-                    not {
-                        triggeredBy 'TimerTrigger'
-                    }
-                }
-                beforeAgent true
-            }
+        stage("C# Unit Test"){            
             steps{
                 script{
                     pipelineLib.xUnitForNetCore()
@@ -61,19 +37,7 @@ pipeline{
             }
         }
 
-        stage("SonarQube Analysis"){
-            when {
-                anyOf {
-                    allOf {
-                        triggeredBy 'TimerTrigger'
-                        branch '^\\d+\\-Sprint\\d+$'
-                    }
-                    not {
-                        triggeredBy 'TimerTrigger'
-                    }
-                }
-                beforeAgent true
-            }
+        stage("SonarQube Analysis"){            
             steps{       
                 script{
                     pipelineLib.endSonarQubeForMsBuild()
@@ -101,7 +65,7 @@ pipeline{
             when {
                 allOf {
                     triggeredBy 'TimerTrigger'
-                    branch '^\\d+\\-Sprint\\d+$'
+                    expression { BRANCH_NAME ==~ /^(origin\/)*\d+\-Sprint\d+$/ }
                 }
             }
             parallel{
@@ -139,7 +103,7 @@ pipeline{
             when { 
                 allOf {
                     triggeredBy 'TimerTrigger'
-                    branch '^\\d+\\-Sprint\\d+$'
+                    expression { BRANCH_NAME ==~ /^(origin\/)*\d+\-Sprint\d+$/ }
                 }
             }
             steps{
