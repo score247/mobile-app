@@ -205,6 +205,24 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ET.HT.
+        /// </summary>
+        public static string ETHT {
+            get {
+                return ResourceManager.GetString("ETHT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra Time Half Time.
+        /// </summary>
+        public static string ExtraTimeHalfTime {
+            get {
+                return ResourceManager.GetString("ExtraTimeHalfTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Favorites.
         /// </summary>
         public static string Favorites {

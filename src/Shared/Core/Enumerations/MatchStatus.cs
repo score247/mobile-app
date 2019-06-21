@@ -125,6 +125,11 @@
 
         public static readonly MatchStatus CancelledStatus = new MatchStatus(Cancelled, nameof(Cancelled));
 
+        //extra_time_halftime – The match is paused
+        public const string ExtraTimeHalfTime = "extra_time_halftime";
+
+        public static readonly MatchStatus ExtraTimeHalfTimeStatus = new MatchStatus(ExtraTimeHalfTime, nameof(ExtraTimeHalfTime));
+
         public MatchStatus()
         {
         }

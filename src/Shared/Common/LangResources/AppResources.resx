@@ -252,4 +252,10 @@
   <data name="SecondLeg" xml:space="preserve">
     <value>2nd Leg, Aggregate Score:</value>
   </data>
+  <data name="ETHT" xml:space="preserve">
+    <value>ET.HT</value>
+  </data>
+  <data name="ExtraTimeHalfTime" xml:space="preserve">
+    <value>Extra Time Half Time</value>
+  </data>
 </root>

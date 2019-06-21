@@ -56,6 +56,7 @@ namespace Soccer.Tests.Converters
         [InlineData(MatchStatus.Halftime, "HT")]
         [InlineData(MatchStatus.AwaitingPenalties, "Await Pen.")]
         [InlineData(MatchStatus.Penalties, "Pen.")]
+        [InlineData(MatchStatus.ExtraTimeHalfTime, "ET.HT")]
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
         {
             // Arrange
@@ -71,6 +72,35 @@ namespace Soccer.Tests.Converters
 
             // Act
             var status = converter.BuildStatus(match);
+
+            // Assert
+            Assert.Equal(expectedStatus, status);
+        }
+
+        [Theory]
+        [InlineData(MatchStatus.Interrupted, "Interrupted")]
+        [InlineData(MatchStatus.Delayed, "Delayed")]
+        [InlineData(MatchStatus.Abandoned, "Abandoned")]
+        [InlineData(MatchStatus.Pause, "Pause")]
+        [InlineData(MatchStatus.Halftime, "Half Time")]
+        [InlineData(MatchStatus.AwaitingPenalties, "Awaiting Penalties")]
+        [InlineData(MatchStatus.Penalties, "Penalties")]
+        [InlineData(MatchStatus.ExtraTimeHalfTime, "Extra Time Half Time")]
+        public void BuildStatus_EventStatusIsLive_FullTextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
+        {
+            // Arrange
+            var match = new Match
+            {
+                EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
+                MatchResult = new MatchResult
+                {
+                    EventStatus = MatchStatus.LiveStatus,
+                    MatchStatus = new MatchStatus { Value = matchStatus }
+                }
+            };
+
+            // Act
+            var status = converter.BuildStatus(match, true);
 
             // Assert
             Assert.Equal(expectedStatus, status);
@@ -157,6 +187,32 @@ namespace Soccer.Tests.Converters
         }
 
         [Theory]
+        [InlineData(MatchStatus.EndedAfterPenalties, "After Penalties")]
+        [InlineData(MatchStatus.EndedExtraTime, "After Extra Time")]
+        [InlineData(MatchStatus.Closed, "Full Time")]
+        [InlineData(MatchStatus.Ended, "Full Time")]
+        [InlineData(MatchStatus.FullTime, "Full Time")]
+        [InlineData(MatchStatus.AwaitingExtraTime, "Awaiting Extra Time")]
+        public void BuildStatus_EventStatusIsClosed_FullStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
+        {
+            // Arrange
+            var match = new Match
+            {
+                MatchResult = new MatchResult
+                {
+                    EventStatus = MatchStatus.ClosedStatus,
+                    MatchStatus = new MatchStatus { Value = matchStatus }
+                }
+            };
+
+            // Act
+            var status = converter.BuildStatus(match, true);
+
+            // Assert
+            Assert.Equal(expectedStatus, status);
+        }
+
+        [Theory]
         [InlineData(MatchStatus.Postponed, "Postp.")]
         [InlineData(MatchStatus.StartDelayed, "Start Delayed")]
         [InlineData(MatchStatus.Cancelled, "Canc.")]
@@ -174,6 +230,29 @@ namespace Soccer.Tests.Converters
 
             // Act
             var status = converter.BuildStatus(match);
+
+            // Assert
+            Assert.Equal(expectedStatus, status);
+        }
+
+        [Theory]
+        [InlineData(MatchStatus.Postponed, "Postponed")]
+        [InlineData(MatchStatus.StartDelayed, "Start Delayed")]
+        [InlineData(MatchStatus.Cancelled, "Cancelled")]
+        [InlineData(MatchStatus.AwaitingExtraTime, "Awaiting Extra Time")]
+        public void BuildStatus_OtherStatus_FullStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
+        {
+            // Arrange
+            var match = new Match
+            {
+                MatchResult = new MatchResult
+                {
+                    EventStatus = new MatchStatus { Value = matchStatus }
+                }
+            };
+
+            // Act
+            var status = converter.BuildStatus(match, true);
 
             // Assert
             Assert.Equal(expectedStatus, status);
