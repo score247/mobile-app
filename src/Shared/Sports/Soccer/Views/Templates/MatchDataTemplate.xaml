@@ -3,6 +3,7 @@
     x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;">
     <ViewCell>
         <StackLayout>
@@ -11,6 +12,7 @@
                     <ResourceDictionary.MergedDictionaries>
                         <coreResources:MatchViewResource />
                     </ResourceDictionary.MergedDictionaries>
+                    <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
             <Grid>
@@ -38,18 +40,22 @@
                     <FlexLayout Style="{StaticResource MatchTeam}">
                         <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
                         <Image
+                            IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
                             Source="{Binding Match.HomePenaltyImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                         <Image
+                            IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
                             Source="{Binding Match.HomeSecondLegImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
                     <FlexLayout Style="{StaticResource MatchTeam}">
                         <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
                         <Image
+                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
                             Source="{Binding Match.AwayPenaltyImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                         <Image
+                            IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
                             Source="{Binding Match.AwaySecondLegImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>

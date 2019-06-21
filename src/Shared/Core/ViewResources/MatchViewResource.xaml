@@ -34,42 +34,42 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style
-        x:Key="Score"
-        BasedOn="{StaticResource Team}"
-        TargetType="Label">
+      x:Key="Score"
+      BasedOn="{StaticResource Team}"
+      TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
     <Style
-        x:Key="HomeScore"
-        BasedOn="{StaticResource Score}"
-        TargetType="Label">
+      x:Key="HomeScore"
+      BasedOn="{StaticResource Score}"
+      TargetType="Label">
         <Setter Property="Margin" Value="0,4,0,0" />
     </Style>
     <Style
-        x:Key="AwayScore"
-        BasedOn="{StaticResource Score}"
-        TargetType="Label">
+      x:Key="AwayScore"
+      BasedOn="{StaticResource Score}"
+      TargetType="Label">
         <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
     <Style
-        x:Key="MatchFavoriteIcon"
-        BasedOn="{StaticResource FavoriteIcon}"
-        TargetType="Label">
+      x:Key="MatchFavoriteIcon"
+      BasedOn="{StaticResource FavoriteIcon}"
+      TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
     </Style>
     <Style
-        x:Key="MatchTeam"
-        BasedOn="{StaticResource FlexLayoutAlignLeft}"
-        TargetType="FlexLayout">
+      x:Key="MatchTeam"
+      BasedOn="{StaticResource FlexLayoutAlignLeft}"
+      TargetType="FlexLayout">
         <Setter Property="Padding" Value="4,2" />
     </Style>
     <Style
-        x:Key="MatchWinnerInfoIcon"
-        BasedOn="{StaticResource WinnerInfoIcon}"
-        TargetType="Image">
+      x:Key="MatchWinnerInfoIcon"
+      BasedOn="{StaticResource WinnerInfoIcon}"
+      TargetType="Image">
         <Setter Property="FlexLayout.Shrink" Value="0" />
-        <Setter Property="Margin" Value="4,0" />
+        <Setter Property="Margin" Value="4,2,0,0" />
     </Style>
 </ResourceDictionary>
