@@ -82,7 +82,7 @@
                          Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
             </StackLayout>
-            <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
+            <!--<BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />-->
             <StackLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}"
                          Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />

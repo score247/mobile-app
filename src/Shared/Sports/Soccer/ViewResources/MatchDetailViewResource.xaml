@@ -93,13 +93,12 @@
     </Style>
 
     <Style x:Key="MatchGeneralInfoImportant" TargetType="StackLayout">
-        <Setter Property="HeightRequest" Value="24" />
         <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
-        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,2,0,2" />
     </Style>
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
-        <Setter Property="HeightRequest" Value="24" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
