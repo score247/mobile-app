@@ -86,6 +86,8 @@ pipeline{
                             sh label: "Restore nuget", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
 
                             sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
+							
+							sh label: "Boot Simulator", script: "/usr/bin/xcrun simctl boot 13C278BF-A473-4654-B7AE-D1569ADA54E4"
 
                             sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall 13C278BF-A473-4654-B7AE-D1569ADA54E4 Score247.LiveScore"
 
