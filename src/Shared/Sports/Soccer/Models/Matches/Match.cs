@@ -53,11 +53,11 @@
                 Images.PenaltyWinner.Value : string.Empty;
 
         public string HomeSecondLegImage
-              => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.FirstOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
+              => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
-               => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.LastOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
+               => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
     }
 }

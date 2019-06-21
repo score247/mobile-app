@@ -156,7 +156,8 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
-                AggregateWinnerId = "home"
+                AggregateWinnerId = "home",
+                WinnerId = "home"
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -173,7 +174,8 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
-                AggregateWinnerId = "away"
+                AggregateWinnerId = "home",
+                WinnerId = "away"
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
