@@ -78,15 +78,13 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <StackLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}"
-                         Style="{StaticResource MatchGeneralInfoImportant}">
+            <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
-            </StackLayout>
-            <!--<BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />-->
-            <StackLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}"
-                         Style="{StaticResource MatchGeneralInfoImportant}">
+            </FlexLayout>
+            <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
+            <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
-            </StackLayout>
+            </FlexLayout>
             <ActivityIndicator
                 x:Name="activity"
                 IsEnabled="{Binding IsLoading}"

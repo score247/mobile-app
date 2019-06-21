@@ -47,7 +47,6 @@
     </Style>
 
     <Style x:Key="MatchInfoImage" TargetType="Image">
-        <Setter Property="WidthRequest" Value="12" />
         <Setter Property="Aspect" Value="AspectFit" />
     </Style>
 
@@ -59,11 +58,11 @@
     </Style>
 
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
-        <Setter Property="WidthRequest" Value="35" />
+        <Setter Property="WidthRequest" Value="40" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
         <Setter Property="FlexLayout.Shrink" Value="0" />
     </Style>
 

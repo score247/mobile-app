@@ -20,7 +20,7 @@
                     <RowDefinition Height="auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50" />
+                    <ColumnDefinition Width="52" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="38" />
@@ -29,15 +29,13 @@
                 <FlexLayout
                     Grid.Row="0"
                     Grid.Column="0"
-                    AlignItems="Center"
-                    Direction="Column"
-                    JustifyContent="Center">
+                    Style="{StaticResource MatchStatusContainer}">
                     <Label IsVisible="{Binding Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}" />
                     <Label Style="{StaticResource MatchStatus}" Text="{Binding DisplayMatchStatus}" />
                 </FlexLayout>
 
                 <StackLayout Grid.Row="0" Grid.Column="1">
-                    <FlexLayout Style="{StaticResource MatchTeam}">
+                    <FlexLayout Style="{StaticResource MatchHomeTeam}">
                         <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
                         <Image
                             IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
@@ -48,7 +46,7 @@
                             Source="{Binding Match.HomeSecondLegImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
-                    <FlexLayout Style="{StaticResource MatchTeam}">
+                    <FlexLayout Style="{StaticResource MatchAwayTeam}">
                         <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
                         <Image
                             IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
