@@ -55,6 +55,8 @@
         int ShootoutHomeScore { get; }
 
         int ShootoutAwayScore { get; }
+
+        bool IsFirstShoot { get; }
     }
 
     public class Timeline : Entity<long, string>, ITimeline
@@ -108,6 +110,8 @@
         public int ShootoutHomeScore { get; set; }
 
         public int ShootoutAwayScore { get; set; }
+
+        public bool IsFirstShoot { get; set; }
     }
 
     public class Commentary

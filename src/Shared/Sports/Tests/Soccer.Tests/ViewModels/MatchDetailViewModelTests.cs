@@ -139,7 +139,8 @@ namespace Soccer.Tests.ViewModels
             {
                 AggregateHomeScore = 2,
                 AggregateAwayScore = 5,
-                AggregateWinnerId = "home"
+                AggregateWinnerId = "home",
+                EventStatus = MatchStatus.ClosedStatus
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -156,6 +157,7 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
+                EventStatus = MatchStatus.ClosedStatus,
                 AggregateWinnerId = "home",
                 WinnerId = "home"
             };
@@ -174,6 +176,7 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
+                EventStatus = MatchStatus.ClosedStatus,
                 AggregateWinnerId = "home",
                 WinnerId = "away"
             };
@@ -194,7 +197,8 @@ namespace Soccer.Tests.ViewModels
             {
                 MatchPeriods = new List<MatchPeriod> {
                     new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
-                }
+                },
+                EventStatus = MatchStatus.ClosedStatus
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -215,7 +219,8 @@ namespace Soccer.Tests.ViewModels
                 MatchPeriods = new List<MatchPeriod>
                 {
                     new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
-                }
+                },
+                EventStatus = MatchStatus.ClosedStatus
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -236,7 +241,8 @@ namespace Soccer.Tests.ViewModels
                 MatchPeriods = new List<MatchPeriod>
                 {
                     new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
-                }
+                },
+                EventStatus = MatchStatus.ClosedStatus
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -267,7 +273,11 @@ namespace Soccer.Tests.ViewModels
                 new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult { MatchStatus = MatchStatus.EndedAfterPenaltiesStatus };
+            returnMatch.MatchResult = new MatchResult
+            {
+                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
+                EventStatus = MatchStatus.LiveStatus
+            };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
             // Act
@@ -299,7 +309,11 @@ namespace Soccer.Tests.ViewModels
                 new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult { MatchStatus = MatchStatus.EndedExtraTimeStatus };
+            returnMatch.MatchResult = new MatchResult
+            {
+                MatchStatus = MatchStatus.EndedExtraTimeStatus,
+                EventStatus = MatchStatus.ClosedStatus
+            };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
             // Act
@@ -311,6 +325,93 @@ namespace Soccer.Tests.ViewModels
                 new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
 
+            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
+            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
+        }
+
+        [Fact]
+        public void OnAppearing_PostMatch_IgnorePenaltyShootOutFirstShoot()
+        {
+            // Arrange
+            var returnMatch = CreateMatch();
+            returnMatch.TimeLines = new List<ITimeline>
+            {
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+            };
+            returnMatch.MatchResult = new MatchResult
+            {
+                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
+                EventStatus = MatchStatus.ClosedStatus
+            };
+            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>();
+            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
+            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
+        }
+
+        [Fact]
+        public void OnAppearing_LiveMatch_InPenalties_RemoveFirstShootIfHavingNewEvent()
+        {
+            // Arrange
+            var returnMatch = CreateMatch();
+            var timelines = new List<ITimeline>
+            {
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+            };
+            returnMatch.TimeLines = timelines;
+            returnMatch.MatchResult = new MatchResult
+            {
+                MatchStatus = MatchStatus.PenaltiesStatus,
+                EventStatus = MatchStatus.LiveStatus
+            };
+            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
+            {
+                new BaseItemViewModel(timelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+            };
+            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
+            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
+        }
+
+        [Fact]
+        public void OnAppearing_LiveMatch_InPenalties_KeepFirstShoolEventInLast()
+        {
+            // Arrange
+            var returnMatch = CreateMatch();
+            var timelines = new List<ITimeline>
+            {
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+            };
+            returnMatch.TimeLines = timelines;
+            returnMatch.MatchResult = new MatchResult
+            {
+                MatchStatus = MatchStatus.PenaltiesStatus,
+                EventStatus = MatchStatus.LiveStatus
+            };
+            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
+            {
+                new BaseItemViewModel(timelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(timelines[2], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+            };
             var actualInfoItemViewModels = viewModel.InfoItemViewModels;
             Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
         }

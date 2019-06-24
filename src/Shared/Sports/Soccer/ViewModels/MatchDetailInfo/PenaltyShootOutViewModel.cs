@@ -24,20 +24,30 @@
         protected override void BuildInfo()
         {
             base.BuildInfo();
+            var homeScore = "  ";
+            var awayScore = "  ";
 
-            Score = $"{TimelineEvent.ShootoutHomeScore} - {TimelineEvent.ShootoutAwayScore}";
+            if (TimelineEvent.HomeShootoutPlayer != null)
+            {
+                HomeImageSource = TimelineEvent.IsHomeShootoutScored ?
+                    Images.PenaltyGoal.Value :
+                    Images.MissPenaltyGoal.Value;
 
-            HomeImageSource = TimelineEvent.IsHomeShootoutScored ?
+                HomePlayerName = TimelineEvent.HomeShootoutPlayer?.Name;
+                homeScore = TimelineEvent.ShootoutHomeScore.ToString();
+            }
+
+            if (TimelineEvent.AwayShootoutPlayer != null)
+            {
+                AwayImageSource = TimelineEvent.IsAwayShootoutScored ?
                 Images.PenaltyGoal.Value :
                 Images.MissPenaltyGoal.Value;
 
-            HomePlayerName = TimelineEvent.HomeShootoutPlayer?.Name;
+                AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
+                awayScore = TimelineEvent.ShootoutAwayScore.ToString();
+            }
 
-            AwayImageSource = TimelineEvent.IsAwayShootoutScored ?
-                 Images.PenaltyGoal.Value :
-                 Images.MissPenaltyGoal.Value;
-
-            AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
+            Score = $"{homeScore} - {awayScore}";
         }
     }
 }

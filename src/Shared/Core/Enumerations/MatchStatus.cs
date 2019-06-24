@@ -155,6 +155,8 @@
 
         public bool IsAfterExtraTime => Value == EndedExtraTime;
 
+        public bool IsInPenalties => Value == Penalties;
+
         public bool IsAfterPenalties => Value == EndedAfterPenalties;
 
         public bool IsFirstHalfExtra => Value == FirstHaftExtra;

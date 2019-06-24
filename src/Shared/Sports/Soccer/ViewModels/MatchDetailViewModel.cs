@@ -143,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels
             }
 
             match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
-            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
+            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines);
 
             BuildGeneralInfo(match);
             BuildDetailInfo(match);
@@ -168,9 +168,10 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildInfoItems(IMatch match)
         {
-            var timelines = match?.TimeLines?
-                 .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
-                 .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
+            match.TimeLines = BaseItemViewModel.FilterPenaltyEvents(match?.TimeLines, match?.MatchResult);
+            var timelines = match.TimeLines?
+              .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
+              .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
@@ -196,7 +197,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var penaltyResult = match.MatchResult?.GetPenaltyResult();
 
-            if (penaltyResult != null)
+            if (penaltyResult != null && match.MatchResult.EventStatus.IsClosed)
             {
                 DisplayPenaltyShootOut = $"{AppResources.PenaltyShootOut}: {penaltyResult.HomeScore} - {penaltyResult.AwayScore}";
             }
@@ -206,7 +207,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var winnerId = match.MatchResult?.AggregateWinnerId;
 
-            if (!string.IsNullOrEmpty(winnerId))
+            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed)
             {
                 DisplaySecondLeg = $"{AppResources.SecondLeg} {match.MatchResult.AggregateHomeScore} - {match.MatchResult.AggregateAwayScore}";
             }

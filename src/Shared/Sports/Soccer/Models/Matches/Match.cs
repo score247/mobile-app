@@ -45,19 +45,27 @@
         public ITimeline LatestTimeline { get; set; }
 
         public string HomePenaltyImage
-            => (MatchResult.GetPenaltyResult() != null && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId) ?
+            => MatchResult.EventStatus.IsClosed
+                    && MatchResult.GetPenaltyResult() != null
+                    && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId ?
                 Images.PenaltyWinner.Value : string.Empty;
 
         public string AwayPenaltyImage
-             => (MatchResult.GetPenaltyResult() != null && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
+             => MatchResult.EventStatus.IsClosed
+                    && MatchResult.GetPenaltyResult() != null
+                    && Teams.LastOrDefault()?.Id == MatchResult.WinnerId ?
                 Images.PenaltyWinner.Value : string.Empty;
 
         public string HomeSecondLegImage
-              => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId) ?
+              => MatchResult.EventStatus.IsClosed
+                    && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
+                    && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
-               => (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId) && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
+               => MatchResult.EventStatus.IsClosed
+                    && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
+                    && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
     }
 }

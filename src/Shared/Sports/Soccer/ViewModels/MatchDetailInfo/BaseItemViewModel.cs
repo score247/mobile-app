@@ -111,6 +111,43 @@
                 || NotExtraTimeHalfTime(timeline)
                 || MatchEndNotAfterPenalty(timeline, matchResult);
 
+        public static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
+        {
+            if (matchResult == null)
+            {
+                return timelines;
+            }
+
+            if (matchResult.EventStatus.IsClosed)
+            {
+                var timelineEvents = timelines.ToList();
+                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
+
+                return timelineEvents;
+            }
+
+            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
+            {
+                var lastEvent = timelines.LastOrDefault();
+                var timelineEvents = timelines.ToList();
+
+                if (lastEvent.Type == EventTypes.PenaltyShootout && !lastEvent.IsFirstShoot)
+                {
+                    timelineEvents.RemoveAll(t => t.IsFirstShoot);
+                }
+
+                if (lastEvent.IsFirstShoot)
+                {
+                    timelineEvents.RemoveAll(t => t.IsFirstShoot);
+                    timelineEvents.Add(lastEvent);
+                }
+
+                return timelineEvents;
+            }
+
+            return timelines;
+        }
+
         private static bool NotExtraTimeHalfTime(ITimeline timeline)
             => timeline.Type == EventTypes.BreakStart && timeline.PeriodType != PeriodTypes.ExtraTimeHalfTime;
 
