@@ -4,6 +4,10 @@ pipeline{
     agent{
         label 'slave108'
     }
+	
+	parameters {
+		string(name: 'SimulatorUDID', defaultValue: '13C278BF-A473-4654-B7AE-D1569ADA54E4', description: 'Simulator iPhone 8 UDID')
+	}
 
     options{
         buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '1', numToKeepStr: '5')    
@@ -87,11 +91,13 @@ pipeline{
 
                             sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
 							
-							sh label: "Boot Simulator", script: "/usr/bin/xcrun simctl boot 13C278BF-A473-4654-B7AE-D1569ADA54E4"
+							sh label: "Shutdown Simulator", script: "/usr/bin/xcrun simctl shutdown ${params.SimulatorUDID}"
+							
+							sh label: "Boot Simulator", script: "/usr/bin/xcrun simctl boot ${params.SimulatorUDID}"
 
-                            sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall 13C278BF-A473-4654-B7AE-D1569ADA54E4 Score247.LiveScore"
+                            sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall ${params.SimulatorUDID} Score247.LiveScore"
 
-                            sh label: "Install App", script: "/usr/bin/xcrun simctl install 13C278BF-A473-4654-B7AE-D1569ADA54E4 $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
+                            sh label: "Install App", script: "/usr/bin/xcrun simctl install ${params.SimulatorUDID} $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
                         }
                     }
                 }
