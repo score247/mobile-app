@@ -3,19 +3,23 @@ namespace Soccer.Tests.Converters
     using System;
     using System.Collections.Generic;
     using LiveScore.Common.LangResources;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Converters;
     using LiveScore.Soccer.Models.Matches;
+    using NSubstitute;
     using Xunit;
 
     public class MatchStatusConverterTests
     {
         private readonly MatchStatusConverter converter;
+        private readonly ILocalStorage localStorage;
 
         public MatchStatusConverterTests()
         {
-            converter = new MatchStatusConverter();
+            localStorage = Substitute.For<ILocalStorage>();
+            converter = new MatchStatusConverter(localStorage);
         }
 
         [Fact]
@@ -253,6 +257,63 @@ namespace Soccer.Tests.Converters
 
             // Act
             var status = converter.BuildStatus(match, true);
+
+            // Assert
+            Assert.Equal(expectedStatus, status);
+        }
+
+        [Fact]
+        public void BuildStatus_InInjuryTimeShown_ShowExpectedStatus()
+        {
+            // Arrange
+            var match = new Match
+            {
+                MatchResult = new MatchResult
+                {
+                    MatchStatus = MatchStatus.FirstHaftExtraStatus,
+                    EventStatus = MatchStatus.LiveStatus,
+                    MatchTime = 106
+                },
+                LatestTimeline = new Timeline
+                {
+                    Type = "injury_time_shown",
+                    StoppageTime = "1",
+                    InjuryTimeAnnounced = 3
+                }
+            };
+
+            // Act
+            var status = converter.BuildStatus(match, false);
+
+            // Assert
+            Assert.Equal("105+1'", status);
+        }
+
+        [Theory]
+        [InlineData(107, "105+2'")]
+        [InlineData(110, "105+4'")]
+        public void BuildStatus_InEventHasStoppageTime_ShowExpectedStatus(int matchTime, string expectedStatus)
+        {
+            // Arrange
+            localStorage.GetValueOrDefault("InjuryTimeAnnouced123", 0).Returns(4);
+            var match = new Match
+            {
+                Id = "123",
+                MatchResult = new MatchResult
+                {
+                    MatchStatus = MatchStatus.FirstHaftExtraStatus,
+                    EventStatus = MatchStatus.LiveStatus,
+                    MatchTime = matchTime
+                },
+                LatestTimeline = new Timeline
+                {
+                    Type = "yellow_card",
+                    StoppageTime = "2",
+                }
+            };
+
+            // Act
+            var status = converter.BuildStatus(match, false);
 
             // Assert
             Assert.Equal(expectedStatus, status);

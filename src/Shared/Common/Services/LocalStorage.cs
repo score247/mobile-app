@@ -31,6 +31,8 @@
         void AddOrUpdateValue<T>(string key, T value);
 
         T GetValueOrDefault<T>(string key, T defaultValue);
+
+        void InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null);
     }
 
     public class LocalStorage : ILocalStorage
@@ -57,6 +59,9 @@
 
         public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null)
             => await LocalMachine.GetAndFetchLatest(name, fetchFunc, fetchPredicate, absoluteExpiration);
+
+        public async void InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null)
+            => await LocalMachine.InsertObject(name, value, absoluteExpiration);
 
         public void Shutdown()
         {

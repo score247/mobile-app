@@ -6,6 +6,7 @@ namespace Soccer.Tests.ViewModels
     using System.Linq;
     using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Leagues;
@@ -27,13 +28,15 @@ namespace Soccer.Tests.ViewModels
         private readonly IMatchService matchService;
         private readonly CompareLogic comparer;
         private readonly Match match;
+        private readonly ILocalStorage localStorage;
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
             comparer = baseFixture.CommonFixture.Comparer;
+            localStorage = Substitute.For<ILocalStorage>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
                 baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.Value)
-                .Returns(new MatchStatusConverter());
+                .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
             viewModel = new MatchDetailViewModel(

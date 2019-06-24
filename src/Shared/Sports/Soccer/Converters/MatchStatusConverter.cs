@@ -1,9 +1,11 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -60,6 +62,14 @@
             { MatchStatus.SecondHaftExtra, 120 }
         };
 
+        private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
+        private readonly ILocalStorage localStorage;
+
+        public MatchStatusConverter(ILocalStorage localStorage)
+        {
+            this.localStorage = localStorage;
+        }
+
         public string BuildStatus(IMatch match, bool showFullStatus = false)
         {
             if (match == null)
@@ -92,7 +102,7 @@
             return BuildEventStatus(match, showFullStatus);
         }
 
-        private static string BuildStatusForLive(IMatch match, bool showFullStatus)
+        private string BuildStatusForLive(IMatch match, bool showFullStatus)
         {
             var status = BuildMatchStatus(match, showFullStatus);
 
@@ -139,10 +149,18 @@
             return string.Empty;
         }
 
-        private static string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
+        private string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
         {
             PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
-            var annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+            var cacheKey = "InjuryTimeAnnouced" + match.Id;
+            var annoucedInjuryTime = localStorage.GetValueOrDefault(cacheKey, 0);
+
+            if (timeline.InjuryTimeAnnounced > 0)
+            {
+                localStorage.InsertValue(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration);
+                annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+            }
+
             var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
             var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
 
