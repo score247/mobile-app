@@ -59,13 +59,14 @@
                     </FlexLayout>
                 </StackLayout>
 
-                <StackLayout
+                <FlexLayout
                     Grid.Row="0"
                     Grid.Column="2"
-                    IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}">
+                    IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
+                    Style="{StaticResource MatchScoreContainer}">
                     <Label Style="{StaticResource HomeScore}" Text="{Binding Match.MatchResult.HomeScore}" />
                     <Label Style="{StaticResource AwayScore}" Text="{Binding Match.MatchResult.AwayScore}" />
-                </StackLayout>
+                </FlexLayout>
                 <Label
                     Grid.Row="0"
                     Grid.Column="3"
