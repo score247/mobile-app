@@ -76,7 +76,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public ObservableCollection<TabModel> TabViews { get; set; }
 
-        private Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
+        private static Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
         {
             {"Odds", new OddsTemplate()},
             {"Info", new InfoTemplate()},
