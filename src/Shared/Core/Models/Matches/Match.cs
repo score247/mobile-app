@@ -30,5 +30,7 @@
         string Referee { get; set; }
 
         ITimeline LatestTimeline { get; set; }
+
+        IEnumerable<MatchFunction> Functions { get; set; }
     }
 }

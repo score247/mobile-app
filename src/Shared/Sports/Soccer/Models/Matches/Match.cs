@@ -67,5 +67,7 @@
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
                     && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
+
+        public IEnumerable<MatchFunction> Functions { get; set; }
     }
 }
