@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Soccer.Views.Templates.MatchDetailInfo
+﻿namespace LiveScore.Soccer.Views.Templates
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MatchDetailInfoTemplate : ContentView
+    public partial class TrackerTemplate : ContentView
     {
-        public MatchDetailInfoTemplate()
+        public TrackerTemplate()
         {
             InitializeComponent();
         }

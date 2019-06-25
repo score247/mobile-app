@@ -25,6 +25,7 @@ namespace LiveScore.Soccer.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
@@ -74,6 +75,19 @@ namespace LiveScore.Soccer.ViewModels
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
         public ObservableCollection<TabModel> TabViews { get; set; }
+
+        private Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
+        {
+            {"Odds", new OddsTemplate()},
+            {"Info", new InfoTemplate()},
+            {"H2H", new H2HTemplate()},
+            {"Lineups", new LineupsTemplate()},
+            {"Social", new SocialTemplate()},
+            {"Stats", new StatsTemplate()},
+            {"Table", new TableTemplate()},
+            {"TV", new TVTemplate()},
+            {"Tracker", new TrackerTemplate()},
+        };
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -125,7 +139,11 @@ namespace LiveScore.Soccer.ViewModels
 
                 foreach (var tab in match.Functions)
                 {
-                    TabViews.Add(new TabModel { Name = tab.Abbreviation, ContentTemplate = new OddsTemplate() });
+                    TabViews.Add(new TabModel 
+                    { 
+                        Name = tab.Abbreviation, 
+                        ContentTemplate = TabLayouts[tab.Abbreviation.Replace("-" , string.Empty)] 
+                    });
                 }
             }
 

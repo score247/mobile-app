@@ -26,6 +26,7 @@
     </Folder>
     <Folder Include="Enumerations\">
     </Folder>
+    <Folder Include="Views\Templates\MatchDetailTabs\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -44,9 +45,6 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Templates\OddsTemplate.xaml.cs">
-      <DependentUpon>OddsTemplate.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Templates\MatchDetailInfo\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>
@@ -61,13 +59,22 @@
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfoTemplate.xaml.cs">
-      <DependentUpon>MatchDetailInfoTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
-      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+      <DependentUpon>InfoTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate %28copy%29.xaml.cs">
       <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\InfoTemplate.xaml.cs">
+      <DependentUpon>InfoTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\MatchDataTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\OddsTemplate.xaml.cs">
+      <DependentUpon>OddsTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
