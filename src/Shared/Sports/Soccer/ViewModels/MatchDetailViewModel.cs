@@ -143,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels
             }
 
             match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
-            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines);
+            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
             BuildGeneralInfo(match);
             BuildDetailInfo(match);
