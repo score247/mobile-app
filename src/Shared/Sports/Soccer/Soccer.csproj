@@ -66,15 +66,12 @@
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\InfoTemplate.xaml.cs">
       <DependentUpon>InfoTemplate.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\OddsTemplate.xaml.cs">
       <DependentUpon>OddsTemplate.xaml</DependentUpon>
-      <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

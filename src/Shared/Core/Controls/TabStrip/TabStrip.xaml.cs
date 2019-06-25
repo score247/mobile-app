@@ -1,8 +1,9 @@
-﻿namespace LiveScore.Common.Controls.TabStrip
+﻿namespace LiveScore.Core.Controls.TabStrip
 {
-    using System.Collections;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -39,13 +40,26 @@
 
                 if (tabs != null)
                 {
+                    tabs.First().ViewModel.OnAppearing();
                     control.TabContent.Content = tabs.First().ContentTemplate;
+                    control.TabContent.Content.BindingContext = tabs.First().ViewModel;
 
                     MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
                     {
-                        var tab = tabs.ToArray()[int.Parse(index)];
-                        currentTabIndex = int.Parse(index);
-                        control.TabContent.Content = tab.ContentTemplate;
+                        try
+                        {
+                            var tab = tabs.ToArray()[int.Parse(index)];
+                            currentTabIndex = int.Parse(index);
+                            //var currentViewModel = control.TabContent.BindingContext as ViewModelBase;
+                            //currentViewModel.OnDisappearing();
+                            tab.ViewModel.OnAppearing();
+
+                            control.TabContent.Content = tab.ContentTemplate;
+                            control.TabContent.BindingContext = tab.ViewModel;
+                        }
+                        catch (Exception ex)
+                        {
+                        }
                     });
                 }
             }
@@ -53,13 +67,14 @@
 
         private void OnSwiped(object sender, SwipedEventArgs e)
         {
-            var index = 0;
+            int index;
+
             switch (e.Direction)
             {
                 case SwipeDirection.Left:
                     index = currentTabIndex + 1;
 
-                    if (index <= ItemsSource.Count())
+                    if (index < ItemsSource.Count())
                     {
                         MessagingCenter.Send("Tab", "TabChange", index.ToString());
                     }

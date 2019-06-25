@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-            x:Name="view" x:Class="LiveScore.Common.Controls.TabStrip.TabStripHeader">
+            x:Name="view" x:Class="LiveScore.Core.Controls.TabStrip.TabStripHeader">
     <ContentView.Resources>
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
@@ -9,33 +9,32 @@
             <Setter Property="Padding" Value="8,0" />
         </Style>
         <Style x:Key="NavTabs" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-          <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
-          <Setter Property="Margin" Value="0,0,0,12" />
+            <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
+            <Setter Property="Margin" Value="0,0,0,12" />
         </Style>
         <Style x:Key="Tab" TargetType="StackLayout">
-          <Setter Property="Margin" Value="8,0" />
-          <Setter Property="Padding" Value="0,2" />
+            <Setter Property="Margin" Value="8,0" />
+            <Setter Property="Padding" Value="0,2" />
         </Style>
         <Style x:Key="TabText" TargetType="Label">
-          <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
-          <Setter Property="TextColor" Value="{StaticResource TabColor}" />
-          <Setter Property="FontAttributes" Value="Bold" />
-          <Setter Property="Margin" Value="4,0,4,2" />
-          <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
+            <Setter Property="TextColor" Value="{StaticResource TabColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="Margin" Value="4,0,4,2" />
+            <Setter Property="HorizontalTextAlignment" Value="Center" />
         </Style>
         <Style x:Key="TabActiveText" BasedOn="{StaticResource TabText}" TargetType="Label">
-          <Setter Property="Margin" Value="4,0" />
-          <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
+            <Setter Property="Margin" Value="4,0" />
+            <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
         </Style>
         <Style x:Key="TabActiveLine" TargetType="BoxView">
-          <Setter Property="BackgroundColor" Value="{StaticResource ActiveLineColor}" />
-          <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="BackgroundColor" Value="{StaticResource ActiveLineColor}" />
+            <Setter Property="HeightRequest" Value="2" />
         </Style>
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">
             <FlexLayout x:Name="scrollLayOut" Style="{StaticResource NavTabs}" JustifyContent="SpaceAround">
-                
             </FlexLayout>
         </ScrollView>
     </ContentView.Content>

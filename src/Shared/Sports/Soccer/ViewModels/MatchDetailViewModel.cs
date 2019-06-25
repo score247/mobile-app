@@ -11,14 +11,15 @@ namespace LiveScore.Soccer.ViewModels
     using System.Threading;
     using System.Threading.Tasks;
     using Core.ViewModels;
-    using LiveScore.Common.Controls.TabStrip;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
+    using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.ViewModels.DetailOdds;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using LiveScore.Soccer.Views.Templates;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
@@ -31,10 +32,25 @@ namespace LiveScore.Soccer.ViewModels
     {
         private const string SpectatorNumberFormat = "0,0";
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
+
+        private static Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
+        {
+            {"Odds", new OddsTemplate()},
+            {"Info", new InfoTemplate()},
+            {"H2H", new H2HTemplate()},
+            {"Lineups", new LineupsTemplate()},
+            {"Social", new SocialTemplate()},
+            {"Stats", new StatsTemplate()},
+            {"Table", new TableTemplate()},
+            {"TV", new TVTemplate()},
+            {"Tracker", new TrackerTemplate()},
+        };
+
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
+        private Dictionary<string, ViewModelBase> tabViewModels;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -76,24 +92,24 @@ namespace LiveScore.Soccer.ViewModels
 
         public ObservableCollection<TabModel> TabViews { get; set; }
 
-        private static Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
-        {
-            {"Odds", new OddsTemplate()},
-            {"Info", new InfoTemplate()},
-            {"H2H", new H2HTemplate()},
-            {"Lineups", new LineupsTemplate()},
-            {"Social", new SocialTemplate()},
-            {"Stats", new StatsTemplate()},
-            {"Table", new TableTemplate()},
-            {"TV", new TVTemplate()},
-            {"Tracker", new TrackerTemplate()},
-        };
-
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
+
+                tabViewModels = new Dictionary<string, ViewModelBase>
+                {
+                    {"Odds", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Info", new MatchDetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection)},
+                    {"H2H", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Lineups", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Social", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Stats", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Table", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"TV", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                    {"Tracker", new DetailOddsViewModel(NavigationService, DependencyResolver)},
+                };
             }
         }
 
@@ -139,10 +155,11 @@ namespace LiveScore.Soccer.ViewModels
 
                 foreach (var tab in match.Functions)
                 {
-                    TabViews.Add(new TabModel 
-                    { 
-                        Name = tab.Abbreviation, 
-                        ContentTemplate = TabLayouts[tab.Abbreviation.Replace("-" , string.Empty)] 
+                    TabViews.Add(new TabModel
+                    {
+                        Name = tab.Abbreviation,
+                        ContentTemplate = TabLayouts[tab.Abbreviation.Replace("-", string.Empty)],
+                        ViewModel = tabViewModels[tab.Abbreviation.Replace("-", string.Empty)]
                     });
                 }
             }

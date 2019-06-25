@@ -43,4 +43,12 @@
     <ItemGroup>
       <Compile Remove="Converters\MatchMinuteConverter.cs" />
     </ItemGroup>
+    <ItemGroup>
+      <Compile Update="Controls\TabStrip\TabStrip.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\TabStrip\TapStripHeader.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

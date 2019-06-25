@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Common.Controls.TabStrip
+﻿namespace LiveScore.Core.Controls.TabStrip
 {
     using System;
-    using Prism.Mvvm;
+    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 
     public class TabModel
@@ -12,6 +12,6 @@
 
         public View ContentTemplate { get; set; }
 
-        public BindableBase ViewModel { get; set; }
+        public ViewModelBase ViewModel { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Common.Controls.TabStrip
+﻿namespace LiveScore.Core.Controls.TabStrip
 {
     using System.Collections.ObjectModel;
     using Prism.Mvvm;
