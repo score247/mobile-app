@@ -80,18 +80,6 @@ namespace LiveScore.Soccer.ViewModels
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
-
-                //TabViews = new ObservableCollection<TabModel>
-                //{
-                //    new TabModel {
-                //        Name = "Odds",
-                //        ContentTemplate = new OddsTemplate()
-                //    },
-                //    new TabModel {
-                //        Name = "Info",
-                //        ContentTemplate = new MatchDetailInfoTemplate()
-                //    }
-                //};
             }
         }
 
@@ -107,6 +95,7 @@ namespace LiveScore.Soccer.ViewModels
             try
             {
                 await LoadMatchDetail(MatchViewModel.Match.Id);
+
                 cancellationTokenSource = new CancellationTokenSource();
 
                 await StartListeningMatchHubEvent();
@@ -128,6 +117,16 @@ namespace LiveScore.Soccer.ViewModels
             if (isRefresh)
             {
                 BuildGeneralInfo(match);
+            }
+
+            if (match.Functions != null)
+            {
+                TabViews = new ObservableCollection<TabModel>();
+
+                foreach (var tab in match.Functions)
+                {
+                    TabViews.Add(new TabModel { Name = tab.Abbreviation, ContentTemplate = new OddsTemplate() });
+                }
             }
 
             IsLoading = false;

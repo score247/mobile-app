@@ -44,6 +44,8 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
         public ITimeline LatestTimeline { get; set; }
 
+        public IEnumerable<MatchFunction> Functions { get; set; }
+
         public string HomePenaltyImage
             => MatchResult.EventStatus.IsClosed
                     && MatchResult.GetPenaltyResult() != null
@@ -67,7 +69,5 @@
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
                     && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
-
-        public IEnumerable<MatchFunction> Functions { get; set; }
     }
 }
