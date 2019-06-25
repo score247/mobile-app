@@ -2,7 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
+    using System.Linq;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -12,9 +12,7 @@
         public TabStrip()
         {
             InitializeComponent();
-            ViewModel = new TabStripViewModel();
-            TabContent.BindingContext = ViewModel;
-            TabHeader.BindingContext = ViewModel;
+            TabHeader.BindingContext = this;
         }
 
         public TabStripViewModel ViewModel { get; set; }
@@ -41,7 +39,14 @@
 
                 if (tabs != null)
                 {
-                    control.ViewModel.Tabs = new ObservableCollection<TabModel>(tabs);
+                    control.TabContent.Content = tabs.First().ContentTemplate;
+
+                    MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
+                    {
+                        var tab = tabs.ToArray()[int.Parse(index)];
+                        control.TabContent.Content = tab.ContentTemplate;
+                        control.TabContent.Content.BindingContext = tab.ViewModel;
+                    });
                 }
             }
         }

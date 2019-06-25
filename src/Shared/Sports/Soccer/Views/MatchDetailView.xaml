@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+    xmlns:tabStrip="clr-namespace:LiveScore.Common.Controls.TabStrip;assembly=LiveScore.Common"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:matchDetailInfo="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
@@ -85,13 +86,14 @@
             <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
             </FlexLayout>
+            <tabStrip:TabStrip ItemsSource="{Binding TabViews}"></tabStrip:TabStrip>
             <ActivityIndicator
                 x:Name="activity"
                 IsEnabled="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
                 IsVisible="{Binding IsLoading}"
                 Style="{StaticResource CenterActivityIndicator}" />
-            <matchDetailInfo:MatchDetailInfoTemplate IsVisible="{Binding IsNotLoading}" />
+            <!--<matchDetailInfo:MatchDetailInfoTemplate IsVisible="{Binding IsNotLoading}" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -39,15 +39,6 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Converters\InverseBoolConverter.cs" />
-      <Compile Remove="Controls\TabStrip\TabModel.cs" />
-      <Compile Remove="Controls\TabStrip\TabStrip.xaml.cs" />
-      <Compile Remove="Controls\TabStrip\TabStripViewModel.cs" />
-      <Compile Remove="Controls\TabStrip\TabViewSelector.cs" />
-      <Compile Remove="Controls\TabStrip\TapStripHeader.xaml.cs" />
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Remove="Controls\TabStrip\TabStrip.xaml" />
-      <EmbeddedResource Remove="Controls\TabStrip\TapStripHeader.xaml" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="LangResources\AppResources.resx">

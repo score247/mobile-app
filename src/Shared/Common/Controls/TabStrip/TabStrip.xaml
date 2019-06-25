@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:LiveScore.Common.Controls.TabStrip" 
-             xmlns:carousel="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:local="clr-namespace:LiveScore.Common.Controls.TabStrip"
              x:Name="this"
              x:Class="LiveScore.Common.Controls.TabStrip.TabStrip"
              VerticalOptions="FillAndExpand"
@@ -15,17 +14,12 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
-            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" Position="{Binding CurrentPosition}" ItemsSource="{Binding Tabs}">
+            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}">
             </local:TabStripHeader>
-            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <carousel:CarouselViewControl x:Name="TabContent" 
-                                              ItemsSource="{Binding Tabs}" 
-                                              ItemTemplate="{StaticResource tabViewSelecter}"
-                                              Position="{Binding CurrentPosition}"
-                                              Orientation="Horizontal"
-                                              VerticalOptions="FillAndExpand"
-                                              HorizontalOptions="FillAndExpand" />
-            </ScrollView>
+            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <ContentView x:Name="TabContent">
+                </ContentView>
+            </StackLayout>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

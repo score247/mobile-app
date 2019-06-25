@@ -44,6 +44,9 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Templates\OddsTemplate.xaml.cs">
+      <DependentUpon>OddsTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Templates\MatchDetailInfo\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>

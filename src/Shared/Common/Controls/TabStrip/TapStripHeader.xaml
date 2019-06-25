@@ -34,7 +34,7 @@
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">
-            <FlexLayout x:Name="scrollLayOut" Style="{StaticResource NavTabs}">
+            <FlexLayout x:Name="scrollLayOut" Style="{StaticResource NavTabs}" JustifyContent="SpaceAround">
                 
             </FlexLayout>
         </ScrollView>

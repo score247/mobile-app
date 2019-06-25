@@ -75,6 +75,7 @@
             tapGestureRecognizer.Tapped += (sender, e) =>
             {
                 control.Position = index;
+                MessagingCenter.Send("Tab", "TabChange", index.ToString());
             };
 
             itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
