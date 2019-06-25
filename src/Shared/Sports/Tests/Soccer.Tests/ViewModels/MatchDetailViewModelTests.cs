@@ -2,9 +2,7 @@ namespace Soccer.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
@@ -17,7 +15,6 @@ namespace Soccer.Tests.ViewModels
     using LiveScore.Soccer.Converters;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.ViewModels;
-    using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using NSubstitute;
     using Prism.Navigation;
     using Xunit;
@@ -257,184 +254,6 @@ namespace Soccer.Tests.ViewModels
         }
 
         [Fact]
-        public void OnAppearing_Always_LoadMatchDetail()
-        {
-            // Arrange
-            var returnMatch = CreateMatch();
-            var returnTimelines = new List<ITimeline>
-            {
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-                new Timeline { Type = "yellow_card", Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
-                new Timeline { Type = "corner_kick", Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
-                new Timeline { Type = "break_start", PeriodType = "pause", Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
-                new Timeline { Type = "penalty_missed", Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
-                new Timeline { Type = "score_change", Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
-                new Timeline { Type = "break_start", PeriodType = "extra_time_halftime", Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
-                new Timeline { Type = "period_start", PeriodType = "penalties", Time = new DateTime(2019, 01, 01, 18, 55, 00 )},
-                new Timeline { Type = "penalty_shootout", Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
-                new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-            };
-            returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
-            };
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
-            {
-                new BaseItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[3], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[4], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[5], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[8], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[9], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
-            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
-        }
-
-        [Fact]
-        public void OnAppearing_MatchNotPenalty_LoadMatchDetail()
-        {
-            // Arrange
-            var returnMatch = CreateMatch();
-            var returnTimelines = new List<ITimeline>
-            {
-                new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-            };
-            returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedExtraTimeStatus,
-                EventStatus = MatchStatus.ClosedStatus
-            };
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
-            {
-                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-
-            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
-            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
-        }
-
-        [Fact]
-        public void OnAppearing_PostMatch_IgnorePenaltyShootOutFirstShoot()
-        {
-            // Arrange
-            var returnMatch = CreateMatch();
-            returnMatch.TimeLines = new List<ITimeline>
-            {
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-            };
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
-                EventStatus = MatchStatus.ClosedStatus
-            };
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>();
-            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
-            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
-        }
-
-        [Fact]
-        public void OnAppearing_LiveMatch_InPenalties_RemoveFirstShootIfHavingNewEvent()
-        {
-            // Arrange
-            var returnMatch = CreateMatch();
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-            };
-            returnMatch.TimeLines = timelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.PenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
-            };
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
-            {
-                new BaseItemViewModel(timelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
-            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
-        }
-
-        [Fact]
-        public void OnAppearing_LiveMatch_InPenalties_KeepFirstShoolEventInLast()
-        {
-            // Arrange
-            var returnMatch = CreateMatch();
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-            };
-            returnMatch.TimeLines = timelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.PenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
-            };
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
-            {
-                new BaseItemViewModel(timelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(timelines[2], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-            var actualInfoItemViewModels = viewModel.InfoItemViewModels;
-            Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
-        }
-
-        [Fact]
-        public void OnAppearing_Always_LoadFooterInfo()
-        {
-            // Arrange
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(match);
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            Assert.Equal("18:00 01 Jan, 2019", viewModel.DisplayEventDate);
-            Assert.Equal("2,034", viewModel.DisplayAttendance);
-            Assert.Equal("My Dinh", viewModel.DisplayVenue);
-        }
-
-        [Fact]
         public void OnReceivingMatchEvent_IsCurrentMatch_BuildGeneralInfo()
         {
             // Arrange
@@ -466,35 +285,8 @@ namespace Soccer.Tests.ViewModels
             // Assert
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
             Assert.Equal(timelines[0], viewModel.MatchViewModel.Match.LatestTimeline);
-
-            var expectedTimelines = match.TimeLines.Concat(timelines).Distinct();
-            Assert.Equal(expectedTimelines, viewModel.MatchViewModel.Match.TimeLines);
             Assert.Equal("Abandoned", viewModel.MatchViewModel.DisplayMatchStatus);
             Assert.Equal("1 - 2", viewModel.DisplayScore);
-        }
-
-        [Fact]
-        public void OnReceivingMatchEvent_IsCurrentMatch_CurrentTimelinesIsNull_BuildGeneralInfo()
-        {
-            // Arrange
-            var parameters = new NavigationParameters { { "Match", new Match { Id = "1234" } } };
-            viewModel.OnNavigatingTo(parameters);
-
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
-
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                {"1234", new MatchPushEvent {  TimeLines = timelines } }
-            };
-
-            // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
-
-            // Assert
-            Assert.Equal(timelines, viewModel.MatchViewModel.Match.TimeLines);
         }
 
         [Fact]
@@ -516,19 +308,6 @@ namespace Soccer.Tests.ViewModels
 
             // Assert
             Assert.Null(viewModel.MatchViewModel.Match.TimeLines);
-        }
-
-        [Fact]
-        public async Task RefreshCommand_OnExecuted_LoadGeneralInfo()
-        {
-            // Arrange
-            matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, true).Returns(match);
-
-            // Act
-            await viewModel.RefreshCommand.ExecuteAsync();
-
-            // Assert
-            Assert.Equal("01 Jan, 2019 - LALIGA", viewModel.DisplayEventDateAndLeagueName);
         }
 
         [Fact]

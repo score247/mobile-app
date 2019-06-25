@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using LiveScore.Core.ViewModels;
@@ -10,34 +9,12 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
-        private static int currentTabIndex;
-
         public TabStrip()
         {
-            InitializeComponent();
-            TabHeader.BindingContext = this;
+            var currentInstance = this;
 
-            MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
-            {
-                try
-                {
-                    var tabs = ItemsSource;
-                    var tab = tabs.ToArray()[int.Parse(index)];
-                    currentTabIndex = int.Parse(index);
-                    //var currentViewModel = control.TabContent.BindingContext as ViewModelBase;
-                    //currentViewModel.OnDisappearing();
-                    tab.ViewModel.OnAppearing();
-                    TabContent.Children.Clear();
-                    TabContent.Children.Add(new ContentView
-                    {
-                        Content = tab.ContentTemplate,
-                        BindingContext = tab.ViewModel
-                    });
-                }
-                catch (Exception ex)
-                {
-                }
-            });
+            InitializeComponent();
+            TabHeader.BindingContext = currentInstance;
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -56,46 +33,43 @@
         {
             var control = (TabStrip)bindable;
 
-            if (control != null)
+            if (control == null || newValue == null)
             {
-                var tabs = (IEnumerable<TabModel>)newValue;
-
-                if (tabs != null)
-                {
-                    tabs.First().ViewModel.OnAppearing();
-                    control.TabContent.Children.Add(new ContentView
-                    {
-                        Content = tabs.First().ContentTemplate,
-                        BindingContext = tabs.First().ViewModel
-                    });
-                }
+                MessagingCenter.Unsubscribe<string, string>(nameof(TabStrip), "TabChange");
+                return;
             }
+
+            var tabs = (IEnumerable<TabModel>)newValue;
+            InitDefaultTab(control, tabs);
+            SubscribeTabChange(control, tabs);
         }
 
-        private void OnSwiped(object sender, SwipedEventArgs e)
+        private static void InitDefaultTab(TabStrip control, IEnumerable<TabModel> tabs)
         {
-            int index;
-
-            switch (e.Direction)
+            control.TabContent.Children.Clear();
+            control.TabContent.Children.Add(new ContentView
             {
-                case SwipeDirection.Left:
-                    index = currentTabIndex + 1;
+                Content = tabs.First().ContentTemplate,
+                BindingContext = tabs.First().ViewModel
+            });
+            tabs.First().ViewModel.OnAppearing();
+        }
 
-                    if (index < ItemsSource.Count())
-                    {
-                        MessagingCenter.Send("Tab", "TabChange", index.ToString());
-                    }
-                    break;
+        private static void SubscribeTabChange(TabStrip control, IEnumerable<TabModel> tabs)
+        {
+            MessagingCenter.Subscribe<string, string>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                var tab = tabs.ToArray()[int.Parse(index)];
 
-                case SwipeDirection.Right:
-                    index = currentTabIndex - 1;
-
-                    if (index >= 0)
-                    {
-                        MessagingCenter.Send("Tab", "TabChange", index.ToString());
-                    }
-                    break;
-            }
+                control.TabContent.Children.ToList().ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
+                control.TabContent.Children.Clear();
+                control.TabContent.Children.Add(new ContentView
+                {
+                    Content = tab.ContentTemplate,
+                    BindingContext = tab.ViewModel
+                });
+                tab.ViewModel.OnAppearing();
+            });
         }
     }
 }

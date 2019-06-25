@@ -86,14 +86,7 @@
             <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
             </FlexLayout>
-            <tabStrip:TabStrip ItemsSource="{Binding TabViews}"></tabStrip:TabStrip>
-            <ActivityIndicator
-                x:Name="activity"
-                IsEnabled="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}"
-                IsVisible="{Binding IsLoading}"
-                Style="{StaticResource CenterActivityIndicator}" />
-            <!--<matchDetailInfo:MatchDetailInfoTemplate IsVisible="{Binding IsNotLoading}" />-->
+            <tabStrip:TabStrip ItemsSource="{Binding TabViews}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

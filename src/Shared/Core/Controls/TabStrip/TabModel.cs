@@ -8,8 +8,6 @@
     {
         public string Name { get; set; }
 
-        public Type Template { get; set; }
-
         public View ContentTemplate { get; set; }
 
         public ViewModelBase ViewModel { get; set; }

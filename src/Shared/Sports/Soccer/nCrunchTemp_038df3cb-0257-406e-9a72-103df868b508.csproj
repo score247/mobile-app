@@ -1,0 +1,152 @@
+﻿<Project DefaultTargets="Build;NCrunchOutputDataQuery" Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>LiveScore.Soccer</RootNamespace>
+    <AssemblyName>LiveScore.Soccer</AssemblyName>
+    <Configurations>Debug;Release;Test</Configurations>
+  </PropertyGroup>
+  <PropertyGroup>
+    <DebugType>pdbonly</DebugType>
+    <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Models\Teams\" />
+    <Folder Include="Converters\">
+    </Folder>
+    <Folder Include="Enumerations\">
+    </Folder>
+    <Folder Include="Views\Templates\DetailTabs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="ViewResources\MatchDetailInfoViewResource.xaml.cs">
+      <DependentUpon>MatchDetailInfoViewResource.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="ViewResources\MatchDetailViewResource.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MatchDetailView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\SoccerMatchListViewTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\PenaltyShootOutTemplate.xaml.cs">
+      <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\ScoreChangeItemTemplate.xaml.cs">
+      <DependentUpon>ScoreChangeItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\DefaultItemTemplate.xaml.cs">
+      <DependentUpon>DefaultItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\MainEventItemTemplate.xaml.cs">
+      <DependentUpon>MainEventItemTemplate.xaml</DependentUpon>
+      <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfoTemplate.xaml.cs">
+      <DependentUpon>InfoTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate %28copy%29.xaml.cs">
+      <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailInfo\InfoTemplate.xaml.cs">
+      <DependentUpon>InfoTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\MatchDataTemplate.xaml.cs">
+      <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\OddsTemplate.xaml.cs">
+      <DependentUpon>OddsTemplate.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
+    <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+    <PackageReference Include="Refit" Version="4.6.107" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
+  </ItemGroup>
+  <Target Name="AssignProjectConfiguration" DependsOnTargets="">
+  </Target>
+  <Target Name="ResolveTestReferences" DependsOnTargets="">
+  </Target>
+  <Target Name="NCrunchOutputDataQuery" DependsOnTargets="_SplitProjectReferencesByFileExistence;ResolveKeySource;$(ResolveReferencesDependsOn)">
+    <Message Text="#47646caf505f45ab9aac858666003a04=$(Configuration)" />
+    <Message Text="#e21c08476f014bd9a82b525213354680=$(TargetFrameworkVersion)" />
+    <Message Text="#2c3cbe834ff54371bca866ef9e806ab4=$(TargetFramework)" />
+    <Message Text="#1c8535878d454d4abb74bda8b4161319=$(AssemblyName)" />
+    <Message Text="#ad1a07e07d2f42f092947f59600c9055=$(DefaultItemExcludes)" />
+    <Message Text="#e48cbb755d3b4f97b79232972299c5ef=$(DefaultItemExcludesInProjectFolder)" />
+    <Message Text="#61f390fc51f343ae9b5a308bc2f8db35=$(EnableDefaultItems)" />
+    <Message Text="#4b692ca6c5c74601b1bbe23d9f1642a2=$(OutputPath)" />
+    <Message Text="#b9a2e536ff81403ba0fa829360739033=$(OutDir)" />
+    <Message Text="#fe91afba4bcb4f59a212e3a8457ebac7=$(KeyOriginatorFile)" />
+    <Message Text="#145bb6008fe14fedb56beafdc5a2ead3=$(SignAssembly)" />
+    <Message Text="#847b222bcd074a4bb6fdba12b72531fa=$(PlatformTarget)" />
+    <Message Text="#b19451935bd84ae9babe158636230963=$(NuGetToolsPath)" />
+    <Message Text="#e630fc2419b5446794f59d9b63038daf=$(Language)" />
+    <Message Text="#e42774d68eb348808dc36e88afbdc8d8=$(OtherFlags)" />
+    <Message Text="#0ed4e3bf4b1344e6bab3786c298b9fdc=$(PreBuildEvent)" />
+    <Message Text="#0e4c01bdf3064c61826c527263c8bd1d=$(PostBuildEvent)" />
+    <Message Text="#d8fb2d8a643e4cda8f5e95d9cad96fd6=$(LinkedServerProject)" />
+    <Message Text="#ba0171a4a8ea4e62a01df7605236746e=$(ResolveAssemblyReferencesStateFile)" />
+    <Message Text="#b370deadbdcf4121ae6d2898212d03ea=$(SDKReferenceDirectoryRoot)" />
+    <Message Text="#bc8a186b2e144145a6c76a3966a31d64=$(__IntermediateAppConfig)" />
+    <Message Text="#cf6f0c8730aa4cca8caed5c9cc9436e6=$(PrepareForBuildDependsOn)" />
+    <Message Text="#44ffef16977d48308dea6bfd6a028c5e=$(CustomAfterMicrosoftCommonTargets)" />
+    <Message Text="#2187b7bd440e48769837f3e7afa9dcf3=$(ProjectAssetsFile)" />
+    <Message Text="#357b9126f96a44a5b3ce2e12562dc57d=$(DefineConstants)" />
+    <Message Text="#b7a06cac68f54fbeb8a89507f523ff74=$(NuGetPackageFolders)" />
+    <Message Text="#_ResolveComReferenceCache=;@(_ResolveComReferenceCache)" />
+    <Message Text="#AppxManifest=;@(AppxManifest)" />
+    <Message Text="#ReferencePath=;@(ReferencePath)" />
+    <Message Text="#ReferenceDependencyPaths=;@(ReferenceDependencyPaths)" />
+    <Message Text="#ComReferenceWrappers=;@(ComReferenceWrappers)" />
+    <Message Text="#ProjectReference=;@(ProjectReference)" />
+    <Message Text="#None=;@(None)" Condition="'%(None.Generator)'!=''" />
+    <Message Text="#Compile.ClCompile.SpecFlowFeatureFiles=;@(Compile);@(ClCompile);@(SpecFlowFeatureFiles)" />
+    <Message Text="#Content=;@(Content)" />
+    <Message Text="#None.EmbeddedResource.VSCTCompile.Page.ApplicationDefinition.Resource.ClInclude.ResourceCompile.Library.$ApplicationIcon.$Win32Resource.$ApplicationManifest.$KeyOriginatorFile.EntityDeploy.XamlAppdef.$ManifestKeyFile.SplashScreen.BaseApplicationManifest.Midl.ServiceDefinition.ServiceConfiguration.BlendEmbeddedFont.TypeScriptCompile.AndroidResource.InterfaceDefinition.BundleResource.ITunesArtwork.PRIResource.Image.FsYacc.FsLex.Analyzer.AdditionalFiles.Map.XLang.Pipeline.Schema=;@(None);@(EmbeddedResource);@(VSCTCompile);@(Page);@(ApplicationDefinition);@(Resource);@(ClInclude);@(ResourceCompile);@(Library);$(ApplicationIcon);$(Win32Resource);$(ApplicationManifest);$(KeyOriginatorFile);@(EntityDeploy);@(XamlAppdef);$(ManifestKeyFile);@(SplashScreen);@(BaseApplicationManifest);@(Midl);@(ServiceDefinition);@(ServiceConfiguration);@(BlendEmbeddedFont);@(TypeScriptCompile);@(AndroidResource);@(InterfaceDefinition);@(BundleResource);@(ITunesArtwork);@(PRIResource);@(Image);@(FsYacc);@(FsLex);@(Analyzer);@(AdditionalFiles);@(Map);@(XLang);@(Pipeline);@(Schema)" />
+    <Message Text="#LinkedFiles=;@(Compile->'%(Link)')" />
+    <Message Text="#DotNetCliToolReference=@(DotNetCliToolReference)|@(DotNetCliToolReference->'%(Version)')" Condition="'@(DotNetCliToolReference->'%(Version)')'!=''" />
+    <Message Text="#ReferencePathAliases=@(ReferencePath)|%(ReferencePath.Aliases)" Condition="'%(ReferencePath.Aliases)'!=''" />
+    <Message Text="#ReferencePathEmbedInteropTypes=@(ReferencePath)|%(ReferencePath.EmbedInteropTypes)" Condition="'%(ReferencePath.EmbedInteropTypes)'!=''" />
+    <Message Text="#ReferencePathPrivate=@(ReferencePath)|%(ReferencePath.Private)" Condition="'%(ReferencePath.Private)'!=''" />
+    <Message Text="#ReferencePathIsIgnoredNCrunchTestFrameworkReference=@(ReferencePath)|%(ReferencePath.IsIgnoredNCrunchTestFrameworkReference)" Condition="'%(ReferencePath.IsIgnoredNCrunchTestFrameworkReference)'!=''" />
+    <Message Text="#ProjectReferenceAliases=@(ProjectReference)|%(ProjectReference.Aliases)" Condition="'%(ProjectReference.Aliases)'!=''" />
+    <Message Text="#ProjectReferenceEmbedInteropTypes=@(ProjectReference)|%(ProjectReference.EmbedInteropTypes)" Condition="'%(ProjectReference.EmbedInteropTypes)'!=''" />
+    <Message Text="#ProjectReferencePrivate=@(ProjectReference)|%(ProjectReference.Private)" Condition="'%(ProjectReference.Private)'!=''" />
+    <Message Text="#ProjectReferenceIsIgnoredNCrunchTestFrameworkReference=@(ProjectReference)|%(ProjectReference.IsIgnoredNCrunchTestFrameworkReference)" Condition="'%(ProjectReference.IsIgnoredNCrunchTestFrameworkReference)'!=''" />
+    <Message Text="#_ConflictPackageFiles=;@(_ConflictPackageFiles)" />
+    <Message Text="#c0b7caff0a4e454fac8d9c206cabf4df=$(TargetFramework)" />
+    <Message Text="#dc2526d14cc64b0996f90f1979b3eab9=$(TargetFramework)" />
+    <Message Text="#3697d7fc48c94fc4b04db46246c193e6=$(ImplicitFrameworkDefine)" />
+    <Message Text="#87cbe41ff9e84f4d8ebb89574b7c18f9=$(CodeAnalysisRuleSet)" />
+    <Message Text="#CodeAnalysisDictionary=;@(CodeAnalysisDictionary)" />
+    <Message Text="#c2757f507b9d425aa7535cfe643a5584=$(CodeContractsReferenceAssembly)" />
+    <Message Text="#Fakes=;@(Fakes)" />
+    <Message Text="#ce8a4f50612442a0b75791ff6f4b265a=$(MvcBuildViews)" />
+    <Message Text="#c0e381f4c6394040b942174f4d21f5cf=$(StyleCopEnabled)" />
+    <Message Text="#Shadow=;@(Shadow)" />
+  </Target>
+</Project>

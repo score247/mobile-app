@@ -2,12 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Teams;
-    using Newtonsoft.Json;
-    using PropertyChanged;
 
     public interface IMatch : IEntity<string, string>
     {
@@ -31,6 +27,6 @@
 
         ITimeline LatestTimeline { get; set; }
 
-        IEnumerable<MatchFunction> Functions { get; set; }
+        IEnumerable<MatchFunction> MatchFunctions { get; set; }
     }
 }

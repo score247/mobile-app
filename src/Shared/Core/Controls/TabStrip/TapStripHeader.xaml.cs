@@ -14,10 +14,7 @@
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-              "ItemsSource",
-              typeof(IEnumerable),
-              typeof(TabStripHeader),
-              propertyChanged: OnItemsSourceChanged);
+              nameof(ItemsSource), typeof(IEnumerable), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
 
         public IEnumerable ItemsSource
         {
@@ -25,56 +22,54 @@
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public static readonly BindableProperty PositionProperty = BindableProperty.Create(
-              "Position",
-              typeof(int),
-              typeof(TabStripHeader),
-              defaultBindingMode: BindingMode.TwoWay,
-              propertyChanging: OnPositionChanging);
-
-        public int Position
-        {
-            get { return (int)GetValue(PositionProperty); }
-            set { SetValue(PositionProperty, value); }
-        }
-
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStripHeader)bindable;
 
-            if (control != null)
+            if (control == null || newValue == null)
             {
-                var tabs = (IList<TabModel>)newValue;
+                MessagingCenter.Unsubscribe<string, string>(nameof(TabStrip), "TabChange");
+                return;
+            }
 
-                for (int index = 0; index < tabs.Count; index++)
+            var tabs = (IList<TabModel>)newValue;
+            InitTabHeader(control, tabs);
+            SubscribeTabChange(control);
+        }
+
+        private static void SubscribeTabChange(TabStripHeader control)
+        {
+            MessagingCenter.Subscribe<string, string>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                var children = control.scrollLayOut.Children;
+                var currentPosition = int.Parse(index);
+
+                for (int i = 0; i < children.Count; i++)
                 {
-                    var item = tabs[index];
-                    var itemLayout = CreateItemLayout(control, index);
-                    var itemLabel = new Label
-                    {
-                        Text = item.Name.ToUpperInvariant(),
-                        Style = (Style)control.Resources["TabText"]
-                    };
-                    ContentView activeTabIndicator = CreateActiveTabIndicator(control, index);
-
-                    itemLayout.Children.Add(itemLabel);
-                    itemLayout.Children.Add(activeTabIndicator);
-                    control.scrollLayOut.Children.Add(itemLayout);
+                    var childLayout = (StackLayout)children[i];
+                    childLayout.Children[1].IsVisible = i == currentPosition;
                 }
 
-                MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
+                control.scrollView.ScrollToAsync(children[currentPosition], ScrollToPosition.Center, true);
+            });
+        }
+
+        private static void InitTabHeader(TabStripHeader control, IList<TabModel> tabs)
+        {
+            for (int index = 0; index < tabs.Count; index++)
+            {
+                var item = tabs[index];
+                var itemLayout = CreateItemLayout(control, index);
+                var itemLabel = new Label
                 {
-                    var children = control.scrollLayOut.Children;
-                    var currentPosition = int.Parse(index);
+                    Text = item.Name.ToUpperInvariant(),
+                    Style = (Style)control.Resources["TabText"]
+                };
+                var activeTabIndicator = CreateActiveTabIndicator(control, index);
 
-                    for (int i = 0; i < children.Count; i++)
-                    {
-                        var childLayout = (StackLayout)children[i];
-                        childLayout.Children[1].IsVisible = i == currentPosition;
-                    }
-
-                    control.scrollView.ScrollToAsync(children[currentPosition], ScrollToPosition.Center, true);
-                });
+                itemLayout.Children.Add(itemLabel);
+                itemLayout.Children.Add(activeTabIndicator);
+                control.scrollLayOut.Children.Add(itemLayout);
             }
         }
 
@@ -86,9 +81,9 @@
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
+
             tapGestureRecognizer.Tapped += (sender, e) =>
             {
-                control.Position = index;
                 MessagingCenter.Send("Tab", "TabChange", index.ToString());
             };
 
@@ -108,25 +103,6 @@
 
                 IsVisible = index == 0
             };
-        }
-
-        private static void OnPositionChanging(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (TabStripHeader)bindable;
-
-            if (control != null)
-            {
-                var children = control.scrollLayOut.Children;
-                var currentPosition = (int)newValue;
-
-                for (int i = 0; i < children.Count; i++)
-                {
-                    var childLayout = (StackLayout)children[i];
-                    childLayout.Children[1].IsVisible = i == currentPosition;
-                }
-
-                control.scrollView.ScrollToAsync(children[currentPosition], ScrollToPosition.Center, true);
-            }
         }
     }
 }

@@ -30,7 +30,6 @@ namespace LiveScore.Soccer.ViewModels
 
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
-        private const string SpectatorNumberFormat = "0,0";
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
         private static Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
@@ -61,28 +60,13 @@ namespace LiveScore.Soccer.ViewModels
         {
             matchHubConnection = hubService.BuildMatchHubConnection();
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadMatchDetail(MatchViewModel.Match.Id, false, true));
         }
-
-        public DelegateAsyncCommand RefreshCommand { get; }
-
-        public bool IsRefreshing { get; set; }
-
-        public bool IsLoading { get; private set; }
-
-        public bool IsNotLoading { get; private set; }
 
         public MatchViewModel MatchViewModel { get; private set; }
 
         public string DisplayEventDateAndLeagueName { get; private set; }
 
         public string DisplayScore { get; private set; }
-
-        public string DisplayEventDate { get; private set; }
-
-        public string DisplayAttendance { get; private set; }
-
-        public string DisplayVenue { get; private set; }
 
         public string DisplaySecondLeg { get; private set; }
 
@@ -101,7 +85,7 @@ namespace LiveScore.Soccer.ViewModels
                 tabViewModels = new Dictionary<string, ViewModelBase>
                 {
                     {"Odds", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Info", new MatchDetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection)},
+                    {"Info", new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection)},
                     {"H2H", new DetailOddsViewModel(NavigationService, DependencyResolver)},
                     {"Lineups", new DetailOddsViewModel(NavigationService, DependencyResolver)},
                     {"Social", new DetailOddsViewModel(NavigationService, DependencyResolver)},
@@ -136,24 +120,20 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
+        private async Task LoadMatchDetail(string matchId)
         {
-            IsLoading = showLoadingIndicator;
+            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId);
 
-            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
+            BuildTabFunctions(match);
+        }
 
-            BuildDetailInfo(match);
-
-            if (isRefresh)
-            {
-                BuildGeneralInfo(match);
-            }
-
-            if (match.Functions != null)
+        private void BuildTabFunctions(IMatch match)
+        {
+            if (match.MatchFunctions != null)
             {
                 TabViews = new ObservableCollection<TabModel>();
 
-                foreach (var tab in match.Functions)
+                foreach (var tab in match.MatchFunctions)
                 {
                     TabViews.Add(new TabModel
                     {
@@ -163,10 +143,6 @@ namespace LiveScore.Soccer.ViewModels
                     });
                 }
             }
-
-            IsLoading = false;
-            IsNotLoading = true;
-            IsRefreshing = false;
         }
 
         private async Task StartListeningMatchHubEvent()
@@ -187,17 +163,9 @@ namespace LiveScore.Soccer.ViewModels
 
             var matchPayload = payload[match.Id];
             match.MatchResult = matchPayload.MatchResult;
-
-            if (match.TimeLines == null)
-            {
-                match.TimeLines = new List<Timeline>();
-            }
-
             match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
-            match.TimeLines = match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
 
             BuildGeneralInfo(match);
-            BuildDetailInfo(match);
         }
 
         private void BuildGeneralInfo(IMatch match)
@@ -209,39 +177,6 @@ namespace LiveScore.Soccer.ViewModels
             BuildSecondLeg(match);
 
             BuildPenaltyShootOut(match);
-        }
-
-        private void BuildDetailInfo(IMatch match)
-        {
-            BuildInfoItems(match);
-            BuildFooterInfo(match);
-        }
-
-        private void BuildInfoItems(IMatch match)
-        {
-            match.TimeLines = BaseItemViewModel.FilterPenaltyEvents(match?.TimeLines, match?.MatchResult);
-            var timelines = match.TimeLines?
-              .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
-              .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
-
-            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
-                   new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
-                   .CreateInstance()));
-        }
-
-        private void BuildFooterInfo(IMatch match)
-        {
-            DisplayEventDate = match.EventDate.ToFullDateTime();
-
-            if (match.Attendance > 0)
-            {
-                DisplayAttendance = match.Attendance.ToString(SpectatorNumberFormat);
-            }
-
-            if (match.Venue != null)
-            {
-                DisplayVenue = match.Venue.Name;
-            }
         }
 
         private void BuildPenaltyShootOut(IMatch match)

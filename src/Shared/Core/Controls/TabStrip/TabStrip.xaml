@@ -6,24 +6,14 @@
              x:Class="LiveScore.Core.Controls.TabStrip.TabStrip"
              VerticalOptions="FillAndExpand"
              HorizontalOptions="FillAndExpand">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <local:TabViewSelector x:Key="tabViewSelecter">
-            </local:TabViewSelector>
-        </ResourceDictionary>
-    </ContentView.Resources>
-    <ContentView.Content>
-        <StackLayout>
-            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}">
-            </local:TabStripHeader>
-            <StackLayout x:Name="TabContent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <ContentView>
-                    <ContentView.GestureRecognizers>
-                        <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
-                        <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
-                    </ContentView.GestureRecognizers>
-                </ContentView>
-            </StackLayout>
-        </StackLayout>
-    </ContentView.Content>
+  <ContentView.Content>
+    <StackLayout>
+      <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}">
+      </local:TabStripHeader>
+      <StackLayout x:Name="TabContent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ContentView>
+        </ContentView>
+      </StackLayout>
+    </StackLayout>
+  </ContentView.Content>
 </ContentView>

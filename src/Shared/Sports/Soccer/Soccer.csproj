@@ -26,7 +26,7 @@
     </Folder>
     <Folder Include="Enumerations\">
     </Folder>
-    <Folder Include="Views\Templates\MatchDetailTabs\" />
+    <Folder Include="Views\Templates\DetailTabs\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -45,16 +45,16 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetailInfo\PenaltyShootOutTemplate.xaml.cs">
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\ScoreChangeItemTemplate.xaml.cs">
       <DependentUpon>ScoreChangeItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetailInfo\DefaultItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\DefaultItemTemplate.xaml.cs">
       <DependentUpon>DefaultItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetailInfo\MainEventItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\DetailInfo\InfoItems\MainEventItemTemplate.xaml.cs">
       <DependentUpon>MainEventItemTemplate.xaml</DependentUpon>
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
@@ -64,13 +64,13 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate %28copy%29.xaml.cs">
       <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\InfoTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailInfo\InfoTemplate.xaml.cs">
       <DependentUpon>InfoTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\MatchDataTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailTabs\OddsTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\OddsTemplate.xaml.cs">
       <DependentUpon>OddsTemplate.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
