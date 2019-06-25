@@ -16,6 +16,28 @@
         {
             InitializeComponent();
             TabHeader.BindingContext = this;
+
+            MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
+            {
+                try
+                {
+                    var tabs = ItemsSource;
+                    var tab = tabs.ToArray()[int.Parse(index)];
+                    currentTabIndex = int.Parse(index);
+                    //var currentViewModel = control.TabContent.BindingContext as ViewModelBase;
+                    //currentViewModel.OnDisappearing();
+                    tab.ViewModel.OnAppearing();
+                    TabContent.Children.Clear();
+                    TabContent.Children.Add(new ContentView
+                    {
+                        Content = tab.ContentTemplate,
+                        BindingContext = tab.ViewModel
+                    });
+                }
+                catch (Exception ex)
+                {
+                }
+            });
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -41,25 +63,10 @@
                 if (tabs != null)
                 {
                     tabs.First().ViewModel.OnAppearing();
-                    control.TabContent.Content = tabs.First().ContentTemplate;
-                    control.TabContent.Content.BindingContext = tabs.First().ViewModel;
-
-                    MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
+                    control.TabContent.Children.Add(new ContentView
                     {
-                        try
-                        {
-                            var tab = tabs.ToArray()[int.Parse(index)];
-                            currentTabIndex = int.Parse(index);
-                            //var currentViewModel = control.TabContent.BindingContext as ViewModelBase;
-                            //currentViewModel.OnDisappearing();
-                            tab.ViewModel.OnAppearing();
-
-                            control.TabContent.Content = tab.ContentTemplate;
-                            control.TabContent.BindingContext = tab.ViewModel;
-                        }
-                        catch (Exception ex)
-                        {
-                        }
+                        Content = tabs.First().ContentTemplate,
+                        BindingContext = tabs.First().ViewModel
                     });
                 }
             }

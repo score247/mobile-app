@@ -16,8 +16,8 @@
         <StackLayout>
             <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}">
             </local:TabStripHeader>
-            <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <ContentView x:Name="TabContent">
+            <StackLayout x:Name="TabContent" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <ContentView>
                     <ContentView.GestureRecognizers>
                         <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
                         <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
