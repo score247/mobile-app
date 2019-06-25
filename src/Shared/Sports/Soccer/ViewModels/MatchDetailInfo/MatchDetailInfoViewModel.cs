@@ -66,11 +66,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             cancellationTokenSource?.Dispose();
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
-        {
-            base.OnNavigatingTo(parameters);
-        }
-
         protected override async void Initialize()
         {
             try

@@ -61,6 +61,20 @@
                     itemLayout.Children.Add(activeTabIndicator);
                     control.scrollLayOut.Children.Add(itemLayout);
                 }
+
+                MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
+                {
+                    var children = control.scrollLayOut.Children;
+                    var currentPosition = int.Parse(index);
+
+                    for (int i = 0; i < children.Count; i++)
+                    {
+                        var childLayout = (StackLayout)children[i];
+                        childLayout.Children[1].IsVisible = i == currentPosition;
+                    }
+
+                    control.scrollView.ScrollToAsync(children[currentPosition], ScrollToPosition.Center, true);
+                });
             }
         }
 

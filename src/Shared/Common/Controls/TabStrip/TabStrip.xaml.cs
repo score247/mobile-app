@@ -9,23 +9,23 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
+        private static int currentTabIndex;
+
         public TabStrip()
         {
             InitializeComponent();
             TabHeader.BindingContext = this;
         }
 
-        public TabStripViewModel ViewModel { get; set; }
-
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             "ItemsSource",
-            typeof(IEnumerable),
+            typeof(IEnumerable<TabModel>),
             typeof(TabStrip),
             propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable ItemsSource
+        public IEnumerable<TabModel> ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable<TabModel>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -44,10 +44,35 @@
                     MessagingCenter.Subscribe<string, string>("Tab", "TabChange", (_, index) =>
                     {
                         var tab = tabs.ToArray()[int.Parse(index)];
+                        currentTabIndex = int.Parse(index);
                         control.TabContent.Content = tab.ContentTemplate;
-                        control.TabContent.Content.BindingContext = tab.ViewModel;
                     });
                 }
+            }
+        }
+
+        private void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            var index = 0;
+            switch (e.Direction)
+            {
+                case SwipeDirection.Left:
+                    index = currentTabIndex + 1;
+
+                    if (index <= ItemsSource.Count())
+                    {
+                        MessagingCenter.Send("Tab", "TabChange", index.ToString());
+                    }
+                    break;
+
+                case SwipeDirection.Right:
+                    index = currentTabIndex - 1;
+
+                    if (index >= 0)
+                    {
+                        MessagingCenter.Send("Tab", "TabChange", index.ToString());
+                    }
+                    break;
             }
         }
     }

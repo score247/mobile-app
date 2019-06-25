@@ -18,6 +18,10 @@
             </local:TabStripHeader>
             <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <ContentView x:Name="TabContent">
+                    <ContentView.GestureRecognizers>
+                        <SwipeGestureRecognizer Direction="Left" Swiped="OnSwiped" />
+                        <SwipeGestureRecognizer Direction="Right" Swiped="OnSwiped" />
+                    </ContentView.GestureRecognizers>
                 </ContentView>
             </StackLayout>
         </StackLayout>
