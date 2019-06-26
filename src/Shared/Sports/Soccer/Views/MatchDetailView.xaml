@@ -45,8 +45,8 @@
                         Grid.Column="0"
                         Style="{StaticResource MatchGeneralInfoHomeTeam}">
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="{Binding MatchViewModel.Match.HomePenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                             <Image Source="{Binding MatchViewModel.Match.HomeSecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.HomePenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
 
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
@@ -65,8 +65,8 @@
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[1].Name, Converter={StaticResource FirstCharConverter}}" />
                         <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="{Binding MatchViewModel.Match.AwayPenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                             <Image Source="{Binding MatchViewModel.Match.AwaySecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.AwayPenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
                     </StackLayout>
                 </Grid>
