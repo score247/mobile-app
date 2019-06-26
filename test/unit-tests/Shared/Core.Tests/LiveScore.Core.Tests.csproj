@@ -23,4 +23,7 @@
     <ProjectReference Include="..\..\..\..\src\Shared\Sports\Soccer\Soccer.csproj" />
     <ProjectReference Include="..\Common.Tests\LiveScore.Common.Tests.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\NavigationTitleViewModelTests.cs" />
+  </ItemGroup>
 </Project>

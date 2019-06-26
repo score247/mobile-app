@@ -26,24 +26,15 @@ namespace LiveScore.Soccer.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
+    using PropertyChanged;
     using Xamarin.Forms;
 
+    [AddINotifyPropertyChangedInterface]
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
-        private static Dictionary<string, ContentView> TabLayouts => new Dictionary<string, ContentView>
-        {
-            {"Odds", new OddsTemplate()},
-            {"Info", new InfoTemplate()},
-            {"H2H", new H2HTemplate()},
-            {"Lineups", new LineupsTemplate()},
-            {"Social", new SocialTemplate()},
-            {"Stats", new StatsTemplate()},
-            {"Table", new TableTemplate()},
-            {"TV", new TVTemplate()},
-            {"Tracker", new TrackerTemplate()},
-        };
+        private Dictionary<string, ContentView> tabLayouts;
 
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
@@ -80,6 +71,21 @@ namespace LiveScore.Soccer.ViewModels
         {
             if (parameters?["Match"] is IMatch match)
             {
+                tabLayouts = new Dictionary<string, ContentView>
+                {
+                    {"Odds", new OddsTemplate()},
+                    {"Info", new InfoTemplate()},
+                    {"H2H", new H2HTemplate()},
+                    {"Lineups", new LineupsTemplate()},
+                    {"Social", new SocialTemplate()},
+                    {"Stats", new StatsTemplate()},
+                    {"Table", new TableTemplate()},
+                    {"TV", new TVTemplate()},
+                    {"Tracker", new TrackerTemplate()},
+                };
+
+                Title = tabLayouts.First().Key;
+
                 BuildGeneralInfo(match);
 
                 tabViewModels = new Dictionary<string, ViewModelBase>
@@ -102,6 +108,8 @@ namespace LiveScore.Soccer.ViewModels
             base.Clean();
 
             cancellationTokenSource?.Dispose();
+
+            MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
         protected override async void Initialize()
@@ -110,7 +118,7 @@ namespace LiveScore.Soccer.ViewModels
             {
                 await LoadMatchDetail(MatchViewModel.Match.Id);
 
-                cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource = new CancellationTokenSource();               
 
                 await StartListeningMatchHubEvent();
             }
@@ -124,7 +132,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var match = await matchService.GetMatch(SettingsService.UserSettings, matchId);
 
-            BuildTabFunctions(match);
+            BuildTabFunctions(match);           
         }
 
         private void BuildTabFunctions(IMatch match)
@@ -138,10 +146,15 @@ namespace LiveScore.Soccer.ViewModels
                     TabViews.Add(new TabModel
                     {
                         Name = tab.Abbreviation,
-                        ContentTemplate = TabLayouts[tab.Abbreviation.Replace("-", string.Empty)],
+                        ContentTemplate = tabLayouts[tab.Abbreviation.Replace("-", string.Empty)],
                         ViewModel = tabViewModels[tab.Abbreviation.Replace("-", string.Empty)]
                     });
                 }
+
+                MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+                {
+                    Title = TabViews[index].Name;
+                });
             }
         }
 

@@ -14,7 +14,8 @@
         }
 
         public static readonly BindableProperty TitleProperty
-            = BindableProperty.Create("Title", typeof(string), typeof(NavigationTitleTemplate), string.Empty);
+            = BindableProperty.Create("Title", typeof(string), typeof(NavigationTitleTemplate));
+
 
         public string Title
         {

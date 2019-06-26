@@ -57,9 +57,9 @@
 
         private static void SubscribeTabChange(TabStrip control, IEnumerable<TabModel> tabs)
         {
-            MessagingCenter.Subscribe<string, string>(nameof(TabStrip), "TabChange", (_, index) =>
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
-                var tab = tabs.ToArray()[int.Parse(index)];
+                var tab = tabs.ToArray()[index];
 
                 control.TabContent.Children.ToList().ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
                 control.TabContent.Children.Clear();

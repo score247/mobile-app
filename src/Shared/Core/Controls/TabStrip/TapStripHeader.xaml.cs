@@ -28,7 +28,7 @@
 
             if (control == null || newValue == null)
             {
-                MessagingCenter.Unsubscribe<string, string>(nameof(TabStrip), "TabChange");
+                MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
                 return;
             }
 
@@ -39,10 +39,10 @@
 
         private static void SubscribeTabChange(TabStripHeader control)
         {
-            MessagingCenter.Subscribe<string, string>(nameof(TabStrip), "TabChange", (_, index) =>
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
                 var children = control.scrollLayOut.Children;
-                var currentPosition = int.Parse(index);
+                var currentPosition = index;
 
                 for (int i = 0; i < children.Count; i++)
                 {
@@ -84,7 +84,7 @@
 
             tapGestureRecognizer.Tapped += (sender, e) =>
             {
-                MessagingCenter.Send("Tab", "TabChange", index.ToString());
+                MessagingCenter.Send("Tab", "TabChange", index);
             };
 
             itemLayout.GestureRecognizers.Add(tapGestureRecognizer);

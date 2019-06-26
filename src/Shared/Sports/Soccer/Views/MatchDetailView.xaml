@@ -11,10 +11,9 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     x:Name="self"
-    Title="Match Info"
     BackgroundColor="{StaticResource SecondColor}">
     <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate Title="Match Info" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/favorite.png" />

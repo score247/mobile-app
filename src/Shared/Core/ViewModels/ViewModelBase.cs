@@ -27,9 +27,13 @@
             DependencyResolver = depdendencyResolver;
             SettingsService = DependencyResolver.Resolve<ISettingsService>();
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
+
+            CurrentSportName = SettingsService.CurrentSportType.DisplayName;
         }
 
-        public string Title { get; protected set; }
+        public string CurrentSportName { get; set; }
+
+        public string Title { get; set; }
 
         public IDependencyResolver DependencyResolver { get; protected set; }
 

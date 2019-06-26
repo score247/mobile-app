@@ -111,7 +111,6 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
-            ViewModelLocationProvider.Register<NavigationTitleTemplate, NavigationTitleViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
