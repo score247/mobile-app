@@ -44,7 +44,7 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
         public ITimeline LatestTimeline { get; set; }
 
-        public IEnumerable<MatchFunction> MatchFunctions { get; set; }
+        public IEnumerable<MatchFunction> Functions { get; set; }
 
         public string HomePenaltyImage
             => MatchResult.EventStatus.IsClosed

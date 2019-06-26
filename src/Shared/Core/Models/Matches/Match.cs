@@ -27,6 +27,6 @@
 
         ITimeline LatestTimeline { get; set; }
 
-        IEnumerable<MatchFunction> MatchFunctions { get; set; }
+        IEnumerable<MatchFunction> Functions { get; set; }
     }
 }

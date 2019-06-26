@@ -124,11 +124,11 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildTabFunctions(IMatch match)
         {
-            if (match.MatchFunctions != null)
+            if (match.Functions != null)
             {
                 TabViews = new ObservableCollection<TabModel>();
 
-                foreach (var tab in match.MatchFunctions)
+                foreach (var tab in match.Functions)
                 {
                     var tabModel = tabModels[tab.Abbreviation.Replace("-", string.Empty)];
                     tabModel.Name = tab.Abbreviation;
