@@ -37,7 +37,7 @@
                     <FlexLayout Style="{StaticResource Group}">
                         <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
                     </FlexLayout>
-                    <FlexLayout IsVisible="{Binding MatchViewModel.Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <FlexLayout IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
                         <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
                     </FlexLayout>

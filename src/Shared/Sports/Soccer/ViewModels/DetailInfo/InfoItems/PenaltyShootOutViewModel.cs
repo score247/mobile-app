@@ -24,8 +24,8 @@
         protected override void BuildInfo()
         {
             base.BuildInfo();
-            var homeScore = 0;
-            var awayScore = 0;
+            var homeScore = TimelineEvent.ShootoutHomeScore;
+            var awayScore = TimelineEvent.ShootoutAwayScore;
 
             if (TimelineEvent.HomeShootoutPlayer != null)
             {
@@ -34,7 +34,6 @@
                     Images.MissPenaltyGoal.Value;
 
                 HomePlayerName = TimelineEvent.HomeShootoutPlayer?.Name;
-                homeScore = TimelineEvent.ShootoutHomeScore;
             }
 
             if (TimelineEvent.AwayShootoutPlayer != null)
@@ -44,7 +43,6 @@
                     Images.MissPenaltyGoal.Value;
 
                 AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
-                awayScore = TimelineEvent.ShootoutAwayScore;
             }
 
             Score = $"{homeScore} - {awayScore}";

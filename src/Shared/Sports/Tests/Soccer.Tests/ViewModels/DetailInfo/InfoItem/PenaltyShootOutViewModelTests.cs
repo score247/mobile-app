@@ -56,12 +56,13 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             timeline.IsHomeShootoutScored = true;
             timeline.ShootoutHomeScore = 1;
             timeline.AwayShootoutPlayer = null;
+            timeline.ShootoutAwayScore = 1;
 
             // Act
             var viewModel = new PenaltyShootOutViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Assert
-            Assert.Equal("1 - 0", viewModel.Score);
+            Assert.Equal("1 - 1", viewModel.Score);
             Assert.Equal(GetPenaltyGoalImage(true), viewModel.HomeImageSource);
             Assert.Equal("Ronaldo", viewModel.HomePlayerName);
             Assert.Null(viewModel.AwayImageSource);
