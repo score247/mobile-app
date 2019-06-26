@@ -26,21 +26,18 @@ namespace LiveScore.Soccer.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
-    using PropertyChanged;
     using Xamarin.Forms;
 
-    [AddINotifyPropertyChangedInterface]
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-
-        private Dictionary<string, ContentView> tabLayouts;
 
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
-        private Dictionary<string, ViewModelBase> tabViewModels;
+
+        private Dictionary<string, TabModel> tabModels;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -71,35 +68,25 @@ namespace LiveScore.Soccer.ViewModels
         {
             if (parameters?["Match"] is IMatch match)
             {
-                tabLayouts = new Dictionary<string, ContentView>
+                tabModels = new Dictionary<string, TabModel>
                 {
-                    {"Odds", new OddsTemplate()},
-                    {"Info", new InfoTemplate()},
-                    {"H2H", new H2HTemplate()},
-                    {"Lineups", new LineupsTemplate()},
-                    {"Social", new SocialTemplate()},
-                    {"Stats", new StatsTemplate()},
-                    {"Table", new TableTemplate()},
-                    {"TV", new TVTemplate()},
-                    {"Tracker", new TrackerTemplate()},
+                    {MatchFunctions.Odds.ToString(), new TabModel{ ContentTemplate = new OddsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Info.ToString(), new TabModel{ 
+                        ContentTemplate = new InfoTemplate() , 
+                        ViewModel = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection) } 
+                    },
+                    {MatchFunctions.H2H.ToString(), new TabModel{ ContentTemplate = new H2HTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Lineups.ToString(), new TabModel{ ContentTemplate = new LineupsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Social.ToString(), new TabModel{ ContentTemplate = new SocialTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Stats.ToString(), new TabModel{ ContentTemplate = new StatsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Table.ToString(), new TabModel{ ContentTemplate = new TableTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.TV.ToString(), new TabModel{ ContentTemplate = new TVTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {MatchFunctions.Tracker.ToString(), new TabModel{ ContentTemplate = new TrackerTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
                 };
 
-                Title = tabLayouts.First().Key;
+                Title = tabModels.First().Key;
 
                 BuildGeneralInfo(match);
-
-                tabViewModels = new Dictionary<string, ViewModelBase>
-                {
-                    {"Odds", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Info", new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection)},
-                    {"H2H", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Lineups", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Social", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Stats", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Table", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"TV", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                    {"Tracker", new DetailOddsViewModel(NavigationService, DependencyResolver)},
-                };
             }
         }
 
@@ -143,17 +130,16 @@ namespace LiveScore.Soccer.ViewModels
 
                 foreach (var tab in match.MatchFunctions)
                 {
-                    TabViews.Add(new TabModel
-                    {
-                        Name = tab.Abbreviation,
-                        ContentTemplate = tabLayouts[tab.Abbreviation.Replace("-", string.Empty)],
-                        ViewModel = tabViewModels[tab.Abbreviation.Replace("-", string.Empty)]
-                    });
+                    var tabModel = tabModels[tab.Abbreviation.Replace("-", string.Empty)];
+                    tabModel.Name = tab.Abbreviation;
+                    tabModel.Title = tab.Name;
+
+                    TabViews.Add(tabModel);
                 }
 
                 MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
                 {
-                    Title = TabViews[index].Name;
+                    Title = TabViews[index].Title;
                 });
             }
         }
