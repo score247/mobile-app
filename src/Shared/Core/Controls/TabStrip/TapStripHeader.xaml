@@ -15,7 +15,7 @@
             BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
             TargetType="FlexLayout">
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
-            <Setter Property="Margin" Value="0,8" />
+            <Setter Property="Margin" Value="0,0,0,4" />
             <Setter Property="Padding" Value="0,8,0,0" />
         </Style>
         <Style x:Key="Tab" TargetType="StackLayout">
