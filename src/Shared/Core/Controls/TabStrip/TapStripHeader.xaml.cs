@@ -42,15 +42,17 @@
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
                 var children = control.scrollLayOut.Children;
-                var currentPosition = index;
 
                 for (int i = 0; i < children.Count; i++)
                 {
                     var childLayout = (StackLayout)children[i];
-                    childLayout.Children[1].IsVisible = i == currentPosition;
+
+                    ((ContentView)childLayout.Children[1]).Content.Style = i == index
+                    ? (Style)control.Resources["TabActiveLine"] 
+                    : (Style)control.Resources["TabInactiveLine"];
                 }
 
-                control.scrollView.ScrollToAsync(children[currentPosition], ScrollToPosition.Center, true);
+                control.scrollView.ScrollToAsync(children[index], ScrollToPosition.Center, true);
             });
         }
 
@@ -98,10 +100,8 @@
             {
                 Content = new BoxView
                 {
-                    Style = (Style)control.Resources["TabActiveLine"]
-                },
-
-                IsVisible = index == 0
+                    Style = index == 0 ? (Style)control.Resources["TabActiveLine"] : (Style)control.Resources["TabInactiveLine"]
+                }
             };
         }
     }

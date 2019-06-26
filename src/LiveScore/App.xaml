@@ -50,6 +50,7 @@
             <Color x:Key="ActiveTabColor">#fff</Color>
             <Color x:Key="ActiveLineColor">#3EC28F</Color>
             <x:Double x:Key="TabFontSize">12</x:Double>
+            <Color x:Key="InactiveLineColor">#0F111C</Color>
 
             <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
             <Color x:Key="SubTabColor">#2E3245</Color>
