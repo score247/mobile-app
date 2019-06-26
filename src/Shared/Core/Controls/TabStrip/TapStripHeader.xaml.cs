@@ -47,6 +47,10 @@
                 {
                     var childLayout = (StackLayout)children[i];
 
+                    ((Label)childLayout.Children[0]).Style = i == index
+                    ? (Style)control.Resources["TabActiveText"]
+                    : (Style)control.Resources["TabText"];
+
                     ((ContentView)childLayout.Children[1]).Content.Style = i == index
                     ? (Style)control.Resources["TabActiveLine"] 
                     : (Style)control.Resources["TabInactiveLine"];
@@ -65,7 +69,7 @@
                 var itemLabel = new Label
                 {
                     Text = item.Name.ToUpperInvariant(),
-                    Style = (Style)control.Resources["TabText"]
+                    Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
 
