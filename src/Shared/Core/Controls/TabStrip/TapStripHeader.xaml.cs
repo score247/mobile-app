@@ -47,7 +47,7 @@
                 {
                     var childLayout = (StackLayout)children[i];
 
-                    ((Label)childLayout.Children[0]).Style = i == index
+                    childLayout.Children[0].Style = i == index
                     ? (Style)control.Resources["TabActiveText"]
                     : (Style)control.Resources["TabText"];
 

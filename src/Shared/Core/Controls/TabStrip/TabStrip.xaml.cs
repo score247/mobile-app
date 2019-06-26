@@ -9,6 +9,8 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
+        private static int currentTabIndex;
+
         public TabStrip()
         {
             var currentInstance = this;
@@ -64,6 +66,7 @@
         {
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
+                currentTabIndex = index;
                 var tab = tabs.ToArray()[index];
 
                 control.TabContent.Children.ToList()
@@ -77,6 +80,31 @@
 
                 tab.ViewModel.OnAppearing();
             });
+        }
+
+        private void OnSwiped(object sender, SwipedEventArgs e)
+        {
+            if (e.Direction == SwipeDirection.Left)
+            {
+                var newIndex = currentTabIndex + 1;
+
+                if (newIndex < ItemsSource.Count())
+                {
+                    MessagingCenter.Send("Tab", "TabChange", newIndex);
+                }
+            }
+            else
+            {
+                if (e.Direction == SwipeDirection.Right)
+                {
+                    var newIndex = currentTabIndex - 1;
+
+                    if (newIndex >= 0)
+                    {
+                        MessagingCenter.Send("Tab", "TabChange", newIndex);
+                    }
+                }
+            }
         }
     }
 }

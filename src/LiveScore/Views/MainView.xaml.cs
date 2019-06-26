@@ -13,5 +13,15 @@
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (Device.RuntimePlatform == Device.iOS)
+            {
+                IsGestureEnabled = false;
+            }
+        }
     }
 }
