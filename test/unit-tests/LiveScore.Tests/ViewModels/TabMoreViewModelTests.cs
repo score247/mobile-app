@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using LiveScore.Core;
+using LiveScore.Core.Tests.Fixtures;
 using LiveScore.ViewModels;
 using NSubstitute;
 using Prism.Navigation;
@@ -7,31 +8,23 @@ using Xunit;
 
 namespace LiveScore.Tests.ViewModels
 {
-    public class TabMoreViewModelTests
+    public class TabMoreViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
-        private readonly INavigationService mockNavigation;
-        private readonly IDependencyResolver mockResolver;
-
         private readonly TabMoreViewModel viewModel;
 
-        public TabMoreViewModelTests()
+        public TabMoreViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            mockNavigation = Substitute.For<INavigationService>();
-            mockResolver = Substitute.For<IDependencyResolver>();
-
-            viewModel = new TabMoreViewModel(mockNavigation, mockResolver);
+            viewModel = new TabMoreViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 
         [Fact]
         public async Task ItemTappedCommand_Execute_InjectNavigationService()
         {
-            // Arrange
-
             // Act
-            await viewModel.ItemTappedCommand.ExecuteAsync(new Models.TabItem("", "", ""));
+            await viewModel.ItemTappedCommand.ExecuteAsync(new Models.TabItem("", "view", ""));
 
             // Assert
-            await mockNavigation.Received(1).NavigateAsync(Arg.Any<string>());
+            Assert.Equal("view", (viewModel.NavigationService as FakeNavigationService).NavigationPath);
         }
 
         [Fact]
@@ -43,7 +36,7 @@ namespace LiveScore.Tests.ViewModels
             await viewModel.ItemTappedCommand.ExecuteAsync(null);
 
             // Assert
-            await mockNavigation.DidNotReceive().NavigateAsync(Arg.Any<string>());
+            Assert.Null((viewModel.NavigationService as FakeNavigationService).NavigationPath);
         }
     }
 }

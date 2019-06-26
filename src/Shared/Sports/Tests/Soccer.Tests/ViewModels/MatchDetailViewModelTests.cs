@@ -19,7 +19,7 @@ namespace Soccer.Tests.ViewModels
     using Prism.Navigation;
     using Xunit;
 
-    public class MatchDetailViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class MatchDetailViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;

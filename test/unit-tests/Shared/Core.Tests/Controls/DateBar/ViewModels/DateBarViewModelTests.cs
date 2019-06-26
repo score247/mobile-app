@@ -20,7 +20,7 @@
         private readonly DateBarViewModel viewModel;
         private readonly MockViewModelBase mockViewModelBase;
         private readonly CompareLogic comparer;
-        private DateRange currentDateRange = null;
+        private DateRange currentDateRange;
 
         public DateBarViewModelTests(ViewModelBaseFixture viewModelBaseFixture)
         {
@@ -35,8 +35,8 @@
             viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Subscribe(OnSelectDateBarItem);
             viewModel.RenderCalendarItems();
             mockViewModelBase = new MockViewModelBase(
-                Substitute.For<INavigationService>(),
-                Substitute.For<IDependencyResolver>(),
+                viewModelBaseFixture.NavigationService,
+                viewModelBaseFixture.DependencyResolver,
                 new EventAggregator());
         }
 

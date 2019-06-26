@@ -117,7 +117,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 Match.TimeLines = new List<Timeline>();
             }
 
-            Match.TimeLines = Match.TimeLines.Concat(matchPayload.TimeLines).Distinct(new TimelineComparer());
+            Match.TimeLines = Match.TimeLines.Concat(matchPayload.TimeLines);
 
             BuildDetailInfo(Match);
         }
@@ -133,6 +133,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             match.TimeLines = BaseItemViewModel.FilterPenaltyEvents(match?.TimeLines, match?.MatchResult);
             var timelines = match.TimeLines?
               .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
+              .Distinct(new TimelineComparer())
               .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>

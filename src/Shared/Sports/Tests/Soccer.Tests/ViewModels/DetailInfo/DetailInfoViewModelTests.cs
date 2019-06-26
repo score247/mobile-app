@@ -82,17 +82,17 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = CreateMatch();
             var returnTimelines = new List<ITimeline>
             {
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-                new Timeline { Type = "yellow_card", Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
-                new Timeline { Type = "corner_kick", Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
-                new Timeline { Type = "break_start", PeriodType = "pause", Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
-                new Timeline { Type = "penalty_missed", Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
-                new Timeline { Type = "score_change", Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
-                new Timeline { Type = "break_start", PeriodType = "extra_time_halftime", Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
-                new Timeline { Type = "period_start", PeriodType = "penalties", Time = new DateTime(2019, 01, 01, 18, 55, 00 )},
-                new Timeline { Type = "penalty_shootout", Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
-                new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "1", Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new Timeline { Id = "2", Type = "yellow_card", Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
+                new Timeline { Id = "3", Type = "corner_kick", Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
+                new Timeline { Id = "4", Type = "red_card", Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
+                new Timeline { Id = "5", Type = "break_start", PeriodType = "pause", Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
+                new Timeline { Id = "6", Type = "penalty_missed", Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
+                new Timeline { Id = "7", Type = "score_change", Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
+                new Timeline { Id = "8", Type = "break_start", PeriodType = "extra_time_halftime", Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
+                new Timeline { Id = "9", Type = "period_start", PeriodType = "penalties", Time = new DateTime(2019, 01, 01, 18, 55, 00 )},
+                new Timeline { Id = "10", Type = "penalty_shootout", Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
+                new Timeline { Id = "11", Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
@@ -128,7 +128,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = CreateMatch();
             var returnTimelines = new List<ITimeline>
             {
-                new Timeline { Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "1", Type = "match_ended", Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
@@ -183,8 +183,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = CreateMatch();
             var timelines = new List<ITimeline>
             {
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "1", Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "2", Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
@@ -213,9 +213,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = CreateMatch();
             var timelines = new List<ITimeline>
             {
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "1", Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "2", Type = "penalty_shootout", IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new Timeline { Id = "3", Type = "penalty_shootout", IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
