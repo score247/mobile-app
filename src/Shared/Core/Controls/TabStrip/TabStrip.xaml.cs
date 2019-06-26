@@ -40,7 +40,12 @@
             }
 
             var tabs = (IEnumerable<TabModel>)newValue;
-            InitDefaultTab(control, tabs);
+
+            if (oldValue == null)
+            {
+                InitDefaultTab(control, tabs);
+            }
+
             SubscribeTabChange(control, tabs);
         }
 
@@ -61,13 +66,15 @@
             {
                 var tab = tabs.ToArray()[index];
 
-                control.TabContent.Children.ToList().ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
+                control.TabContent.Children.ToList()
+                    .ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
                 control.TabContent.Children.Clear();
                 control.TabContent.Children.Add(new ContentView
                 {
                     Content = tab.ContentTemplate,
                     BindingContext = tab.ViewModel
                 });
+
                 tab.ViewModel.OnAppearing();
             });
         }
