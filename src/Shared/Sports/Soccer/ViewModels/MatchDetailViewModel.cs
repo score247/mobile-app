@@ -60,9 +60,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public string DisplayPenaltyShootOut { get; private set; }
 
-        public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
-
-        public ObservableCollection<TabModel> TabViews { get; set; }
+        public ObservableCollection<TabModel> TabViews { get; private set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -70,18 +68,18 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabModels = new Dictionary<string, TabModel>
                 {
-                    {MatchFunctions.Odds.ToString(), new TabModel{ ContentTemplate = new OddsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Info.ToString(), new TabModel{ 
-                        ContentTemplate = new InfoTemplate() , 
-                        ViewModel = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection) } 
+                    {nameof(MatchFunctions.Odds), new TabModel { Template = new OddsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Info), new TabModel {
+                        Template = new InfoTemplate() ,
+                        ViewModel = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection) }
                     },
-                    {MatchFunctions.H2H.ToString(), new TabModel{ ContentTemplate = new H2HTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Lineups.ToString(), new TabModel{ ContentTemplate = new LineupsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Social.ToString(), new TabModel{ ContentTemplate = new SocialTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Stats.ToString(), new TabModel{ ContentTemplate = new StatsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Table.ToString(), new TabModel{ ContentTemplate = new TableTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.TV.ToString(), new TabModel{ ContentTemplate = new TVTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {MatchFunctions.Tracker.ToString(), new TabModel{ ContentTemplate = new TrackerTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Lineups), new TabModel { Template = new LineupsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Stats), new TabModel { Template = new StatsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
                 };
 
                 Title = tabModels.First().Key;
@@ -105,7 +103,7 @@ namespace LiveScore.Soccer.ViewModels
             {
                 await LoadMatchDetail(MatchViewModel.Match.Id);
 
-                cancellationTokenSource = new CancellationTokenSource();               
+                cancellationTokenSource = new CancellationTokenSource();
 
                 await StartListeningMatchHubEvent();
             }
@@ -119,7 +117,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var match = await matchService.GetMatch(SettingsService.UserSettings, matchId);
 
-            BuildTabFunctions(match);           
+            BuildTabFunctions(match);
         }
 
         private void BuildTabFunctions(IMatch match)

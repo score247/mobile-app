@@ -35,7 +35,7 @@
 
             if (control == null || newValue == null)
             {
-                MessagingCenter.Unsubscribe<string, string>(nameof(TabStrip), "TabChange");
+                MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
                 return;
             }
 
@@ -54,7 +54,7 @@
             control.TabContent.Children.Clear();
             control.TabContent.Children.Add(new ContentView
             {
-                Content = tabs.First().ContentTemplate,
+                Content = tabs.First().Template,
                 BindingContext = tabs.First().ViewModel
             });
             tabs.First().ViewModel.OnAppearing();
@@ -71,7 +71,7 @@
                 control.TabContent.Children.Clear();
                 control.TabContent.Children.Add(new ContentView
                 {
-                    Content = tab.ContentTemplate,
+                    Content = tab.Template,
                     BindingContext = tab.ViewModel
                 });
 

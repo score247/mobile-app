@@ -10,7 +10,7 @@
 
         public string Title { get; set; }
 
-        public View ContentTemplate { get; set; }
+        public View Template { get; set; }
 
         public ViewModelBase ViewModel { get; set; }
     }
