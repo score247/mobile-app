@@ -2,6 +2,6 @@
 {
     public class MatchFunction : Entity<string, string>
     {
-        public string Abbreviation {get;set;}
+        public string Abbreviation { get; set; }
     }
 }

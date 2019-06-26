@@ -1,9 +1,6 @@
 namespace LiveScore.Core.Tests.Converters
 {
     using LiveScore.Core.Converters;
-    using NSubstitute;
-    using System;
-    using System.Globalization;
     using Xunit;
 
     public class FirstCharConverterTests

@@ -52,7 +52,7 @@
                     : (Style)control.Resources["TabText"];
 
                     ((ContentView)childLayout.Children[1]).Content.Style = i == index
-                    ? (Style)control.Resources["TabActiveLine"] 
+                    ? (Style)control.Resources["TabActiveLine"]
                     : (Style)control.Resources["TabInactiveLine"];
                 }
 

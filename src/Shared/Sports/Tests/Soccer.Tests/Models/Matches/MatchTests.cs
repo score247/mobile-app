@@ -1,6 +1,3 @@
-using LiveScore.Soccer.Models.Matches;
-using NSubstitute;
-using System;
 using Xunit;
 
 namespace Soccer.Tests.Models.Matches

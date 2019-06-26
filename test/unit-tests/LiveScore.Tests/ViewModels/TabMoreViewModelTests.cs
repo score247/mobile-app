@@ -1,9 +1,6 @@
 ﻿using System.Threading.Tasks;
-using LiveScore.Core;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.ViewModels;
-using NSubstitute;
-using Prism.Navigation;
 using Xunit;
 
 namespace LiveScore.Tests.ViewModels

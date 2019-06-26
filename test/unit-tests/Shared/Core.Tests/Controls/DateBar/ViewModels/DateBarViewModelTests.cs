@@ -10,7 +10,6 @@
     using LiveScore.Core.Controls.DateBar.ViewModels;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Core.ViewModels;
-    using NSubstitute;
     using Prism.Events;
     using Prism.Navigation;
     using Xunit;

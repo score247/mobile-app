@@ -2,8 +2,6 @@ namespace Soccer.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
@@ -23,7 +21,6 @@ namespace Soccer.Tests.ViewModels
     {
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;
-        private readonly CompareLogic comparer;
         private readonly Match match;
         private readonly ILocalStorage localStorage;
 

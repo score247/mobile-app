@@ -1,7 +1,6 @@
 namespace Soccer.Tests.Converters
 {
     using System;
-    using System.Collections.Generic;
     using LiveScore.Common.LangResources;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;

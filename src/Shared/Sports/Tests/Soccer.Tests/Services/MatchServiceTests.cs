@@ -7,7 +7,6 @@
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;

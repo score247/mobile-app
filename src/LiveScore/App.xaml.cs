@@ -10,7 +10,6 @@ using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
-using LiveScore.Core.Views.Templates;
 using LiveScore.Favorites;
 using LiveScore.League;
 using LiveScore.Menu;

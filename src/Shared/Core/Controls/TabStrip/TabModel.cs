@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
-    using System;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
 

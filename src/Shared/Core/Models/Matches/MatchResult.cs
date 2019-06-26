@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
     using System.Collections.Generic;
-    using System.Linq;
     using LiveScore.Core.Enumerations;
     using PropertyChanged;
 
