@@ -130,11 +130,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildInfoItems(IMatch match)
         {
-            match.TimeLines = BaseItemViewModel.FilterPenaltyEvents(match?.TimeLines, match?.MatchResult);
+            match.TimeLines = BaseItemViewModel.FilterPenaltyEvents(match?.TimeLines?.OrderBy(t => t.Time), match?.MatchResult);
             var timelines = match.TimeLines?
-              .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
-              .Distinct(new TimelineComparer())
-              .OrderBy(t => t.Time).ToList() ?? new List<ITimeline>();
+                .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
+                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimeline>();
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)

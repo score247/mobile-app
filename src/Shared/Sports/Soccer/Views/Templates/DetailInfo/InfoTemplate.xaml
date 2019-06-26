@@ -39,11 +39,11 @@
                     </FlexLayout>
                     <FlexLayout IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Referee}" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding Match.Referee}" />
                     </FlexLayout>
                     <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding MatchViewModel.Match.Venue.Name}" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenue}" />
                     </FlexLayout>
                     <FlexLayout IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
                         <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />

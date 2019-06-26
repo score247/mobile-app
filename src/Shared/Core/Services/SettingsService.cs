@@ -27,20 +27,20 @@
 
         public SportTypes CurrentSportType
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentSportType), SportTypes.Soccer);
-            set => cacheService.AddOrUpdateValue(nameof(CurrentSportType), value);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentSportType), SportTypes.Soccer);
+            set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentSportType), value);
         }
 
         public string CurrentLanguage
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentLanguage), Languages.English.Value);
-            set => cacheService.AddOrUpdateValue(nameof(CurrentLanguage), value);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentLanguage), Languages.English.Value);
+            set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentLanguage), value);
         }
 
         public TimeZoneInfo CurrentTimeZone
         {
-            get => cacheService.GetValueOrDefault(nameof(CurrentTimeZone), TimeZoneInfo.Local);
-            set => cacheService.AddOrUpdateValue(nameof(CurrentTimeZone), value);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentTimeZone), TimeZoneInfo.Local);
+            set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentTimeZone), value);
         }
 
         public UserSettings UserSettings => new UserSettings(CurrentSportType.Value, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());

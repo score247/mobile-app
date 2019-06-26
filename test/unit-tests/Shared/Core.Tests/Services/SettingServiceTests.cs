@@ -25,7 +25,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = SportTypes.Soccer;
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act
             var actual = setting.CurrentSportType;
@@ -44,7 +44,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentSportType = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValueToUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<object>());
         }
 
         [Fact]
@@ -52,7 +52,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = Languages.English.Value;
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
 
             // Act
             var actual = setting.CurrentLanguage;
@@ -71,7 +71,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentLanguage = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValueToUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<object>());
         }
 
         [Fact]
@@ -79,7 +79,7 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = TimeZoneInfo.Local;
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(expected);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(expected);
 
             // Act
             var actual = setting.CurrentTimeZone;
@@ -98,7 +98,7 @@ namespace LiveScore.Core.Tests.Services
             setting.CurrentTimeZone = expected;
 
             // Assert
-            mockCache.Received(1).AddOrUpdateValue(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<object>());
+            mockCache.Received(1).AddOrUpdateValueToUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<object>());
         }
 
         [Fact]
@@ -106,9 +106,9 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var expected = new UserSettings(SportTypes.Soccer.Value, Languages.English.Value, TimeZoneInfo.Local.BaseUtcOffset.ToString());
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
-            mockCache.GetValueOrDefault(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act
             var actual = setting.UserSettings;

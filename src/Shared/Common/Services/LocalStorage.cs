@@ -18,6 +18,14 @@
 
         Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null);
 
+        Task InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null);
+
+        Task<T> GetValueOrDefault<T>(string key, T defaultValue);
+
+        void AddOrUpdateValueToUserAccount<T>(string key, T value);
+
+        T GetValueOrDefaultFromUserAccount<T>(string key, T defaultValue);
+
         void Shutdown();
 
         Task Invalidate(string key);
@@ -27,12 +35,6 @@
         TimeSpan CacheDuration(CacheDurationTerm cacheKind);
 
         Task CleanAllExpired();
-
-        void AddOrUpdateValue<T>(string key, T value);
-
-        T GetValueOrDefault<T>(string key, T defaultValue);
-
-        void InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null);
     }
 
     public class LocalStorage : ILocalStorage
@@ -60,7 +62,10 @@
         public async Task<T> GetAndFetchLatestValue<T>(string name, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null)
             => await LocalMachine.GetAndFetchLatest(name, fetchFunc, fetchPredicate, absoluteExpiration);
 
-        public async void InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null)
+        public async Task<T> GetValueOrDefault<T>(string key, T defaultValue)
+            => await LocalMachine.GetOrCreateObject(key, () => defaultValue);
+
+        public async Task InsertValue<T>(string name, T value, DateTimeOffset? absoluteExpiration = null)
             => await LocalMachine.InsertObject(name, value, absoluteExpiration);
 
         public void Shutdown()
@@ -81,10 +86,10 @@
 
         public async Task CleanAllExpired() => await LocalMachine.Vacuum();
 
-        public void AddOrUpdateValue<T>(string key, T value)
+        public void AddOrUpdateValueToUserAccount<T>(string key, T value)
             => UserAccount.InsertObject(key, value).Wait();
 
-        public T GetValueOrDefault<T>(string key, T defaultValue)
+        public T GetValueOrDefaultFromUserAccount<T>(string key, T defaultValue)
             => UserAccount.GetOrCreateObject(key, () => defaultValue).Wait();
     }
 }

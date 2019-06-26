@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Common.Services;
@@ -153,11 +154,11 @@
         {
             PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;
-            var annoucedInjuryTime = localStorage.GetValueOrDefault(cacheKey, 0);
+            var annoucedInjuryTime = Task.Run(() => localStorage.GetValueOrDefault(cacheKey, 0)).Result;
 
             if (timeline.InjuryTimeAnnounced > 0)
             {
-                localStorage.InsertValue(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration);
+                Task.Run(() => localStorage.InsertValue(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
                 annoucedInjuryTime = timeline.InjuryTimeAnnounced;
             }
 

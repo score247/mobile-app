@@ -124,7 +124,7 @@
                 var timelineEvents = timelines.ToList();
                 timelineEvents.RemoveAll(t => t.IsFirstShoot);
 
-                if (lastEvent.IsFirstShoot)
+                if (lastEvent?.IsFirstShoot == true)
                 {
                     timelineEvents.Add(lastEvent);
                 }

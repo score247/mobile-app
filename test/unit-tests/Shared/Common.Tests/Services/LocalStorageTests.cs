@@ -131,7 +131,7 @@
             // Arrange
 
             // Act
-            cache.AddOrUpdateValue("cacheKey", 1);
+            cache.AddOrUpdateValueToUserAccount("cacheKey", 1);
 
             // Assert
             mockUserAccount.ReceivedWithAnyArgs(1).InsertObject("cacheKey", 1);
@@ -143,7 +143,7 @@
             // Arrange
 
             // Act
-            cache.GetValueOrDefault("cacheKey", 1);
+            cache.GetValueOrDefaultFromUserAccount("cacheKey", 1);
 
             // Assert
             mockUserAccount.ReceivedWithAnyArgs(1).GetOrCreateObject("cacheKey", () => 1);
