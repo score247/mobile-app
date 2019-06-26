@@ -67,7 +67,7 @@
                     Text = item.Name.ToUpperInvariant(),
                     Style = (Style)control.Resources["TabText"]
                 };
-                var activeTabIndicator = CreateActiveTabIndicator(control, index);
+                var activeTabIndicator = CreateTabIndicator(control, index);
 
                 itemLayout.Children.Add(itemLabel);
                 itemLayout.Children.Add(activeTabIndicator);
@@ -94,7 +94,7 @@
             return itemLayout;
         }
 
-        private static ContentView CreateActiveTabIndicator(TabStripHeader control, int index)
+        private static ContentView CreateTabIndicator(TabStripHeader control, int index)
         {
             return new ContentView
             {
