@@ -2,6 +2,7 @@ namespace Soccer.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
@@ -26,7 +27,6 @@ namespace Soccer.Tests.ViewModels
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            comparer = baseFixture.CommonFixture.Comparer;
             localStorage = Substitute.For<ILocalStorage>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
                 baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.Value)
