@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using LiveScore.Core.Models.Teams;
 
-    public interface ITimeline : IEntity<long, string>
+    public interface ITimeline : IEntity<string, string>
     {
         string Type { get; }
 
@@ -59,7 +59,7 @@
         bool IsFirstShoot { get; }
     }
 
-    public class Timeline : Entity<long, string>, ITimeline
+    public class Timeline : Entity<string, string>, ITimeline
     {
         public string Type { get; set; }
 

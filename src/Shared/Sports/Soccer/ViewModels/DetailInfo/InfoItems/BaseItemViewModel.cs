@@ -7,21 +7,13 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class BaseItemViewModel : ViewModelBase
     {
-        private static readonly string[] InfoItemEventTypes = new[] {
-            EventTypes.ScoreChange,
-            EventTypes.PenaltyMissed,
-            EventTypes.YellowCard,
-            EventTypes.RedCard,
-            EventTypes.YellowRedCard,
-            EventTypes.PenaltyShootout
-        };
-
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
         {
             { EventTypes.YellowCard, typeof(DefaultItemViewModel) },
@@ -106,10 +98,10 @@
         }
 
         public static bool ValidateEvent(ITimeline timeline, IMatchResult matchResult)
-            => InfoItemEventTypes.Contains(timeline.Type)
-                || StartPenalty(timeline)
-                || NotExtraTimeHalfTime(timeline)
-                || MatchEndNotAfterPenalty(timeline, matchResult);
+            => timeline.IsDetailInfoEvent()
+                || timeline.IsPenaltyShootOutStart()
+                || timeline.IsNotExtraTimeHalfTimeBreak()
+                || timeline.IsMatchEndNotAfterPenalty(matchResult);
 
         public static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
         {
@@ -130,15 +122,10 @@
             {
                 var lastEvent = timelines.LastOrDefault();
                 var timelineEvents = timelines.ToList();
-
-                if (lastEvent.Type == EventTypes.PenaltyShootout && !lastEvent.IsFirstShoot)
-                {
-                    timelineEvents.RemoveAll(t => t.IsFirstShoot);
-                }
+                timelineEvents.RemoveAll(t => t.IsFirstShoot);
 
                 if (lastEvent.IsFirstShoot)
                 {
-                    timelineEvents.RemoveAll(t => t.IsFirstShoot);
                     timelineEvents.Add(lastEvent);
                 }
 
@@ -147,15 +134,6 @@
 
             return timelines;
         }
-
-        private static bool NotExtraTimeHalfTime(ITimeline timeline)
-            => timeline.Type == EventTypes.BreakStart && timeline.PeriodType != PeriodTypes.ExtraTimeHalfTime;
-
-        private static bool StartPenalty(ITimeline timeline)
-            => timeline.Type == EventTypes.PeriodStart && timeline.PeriodType == PeriodTypes.Penalties;
-
-        private static bool MatchEndNotAfterPenalty(ITimeline timeline, IMatchResult matchResult)
-            => timeline.Type == EventTypes.MatchEnded && !matchResult.MatchStatus.IsAfterPenalties;
 
         protected virtual void BuildInfo()
         {

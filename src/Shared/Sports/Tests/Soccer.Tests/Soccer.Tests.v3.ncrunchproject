@@ -2,35 +2,23 @@
   <Settings>
     <IgnoredTests>
       <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.SoccerModuleTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.Services.MatchServiceTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.Services.LeagueServiceTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.ViewModels.MatchDetailInfo.BaseInfoItemViewModelTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.Enumerations.GoalMethodTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
         <FixtureName>Soccer.Tests.Models.Matches.MatchTests</FixtureName>
       </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.ViewModels.MatchDetailInfo.MainEventItemViewModelTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.ViewModels.MatchDetailInfo.ScoreChangeItemViewModelTests</FixtureName>
-      </FixtureTestSelector>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.Converters.MatchStatusConverterTests</FixtureName>
-      </FixtureTestSelector>
+      <NamedTestSelector>
+        <TestName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests.BuildInfo_IsHomeTeam_MissPenalties_ShowExpectedInfo</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests.BuildInfo_IsAwayTeamAndYellowCard_ShowAwayPlayerNameAndYellowCard</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests.BuildInfo_IsAwayTeamAndRedYellowCard_ShowAwayPlayerNameAndRedYellowCard</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests.BuildInfo_IsAwayTeamAndRedCard_ShowAwayPlayerNameAndRedCard</TestName>
+      </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>Soccer.Tests.ViewModels.MatchDetailInfo.DefaultItemViewModelTests.BuildInfo_IsAwayTeam_MissPenalties_ShowExpectedInfo</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>

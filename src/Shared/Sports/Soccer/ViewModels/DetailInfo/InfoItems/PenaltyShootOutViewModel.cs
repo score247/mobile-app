@@ -40,8 +40,8 @@
             if (TimelineEvent.AwayShootoutPlayer != null)
             {
                 AwayImageSource = TimelineEvent.IsAwayShootoutScored ?
-                Images.PenaltyGoal.Value :
-                Images.MissPenaltyGoal.Value;
+                    Images.PenaltyGoal.Value :
+                    Images.MissPenaltyGoal.Value;
 
                 AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
                 awayScore = TimelineEvent.ShootoutAwayScore;

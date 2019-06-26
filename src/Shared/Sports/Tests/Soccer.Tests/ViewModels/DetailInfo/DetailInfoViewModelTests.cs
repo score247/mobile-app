@@ -262,7 +262,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             match.TimeLines = new List<ITimeline>
             {
-                new Timeline { Type = "yellow_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new Timeline { Id = "1", Type = "yellow_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var matchResult = new MatchResult
@@ -274,7 +274,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             var timelines = new List<ITimeline>
             {
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new Timeline { Id = "2", Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var pushEvents = new Dictionary<string, MatchPushEvent>
@@ -299,7 +299,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
             var timelines = new List<ITimeline>
             {
-                new Timeline { Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new Timeline { Id = "1", Type = "red_card", Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var pushEvents = new Dictionary<string, MatchPushEvent>

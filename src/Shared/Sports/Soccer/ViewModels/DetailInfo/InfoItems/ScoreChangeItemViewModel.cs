@@ -5,6 +5,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
     public class ScoreChangeItemViewModel : BaseItemViewModel
@@ -25,9 +26,9 @@
         {
         }
 
-        public string HomeAssistName { get; set; }
+        public string HomeAssistName { get; private set; }
 
-        public string AwayAssistName { get; set; }
+        public string AwayAssistName { get; private set; }
 
         protected override void BuildInfo()
         {
@@ -40,7 +41,7 @@
                 ImageSource = GoalImages[goalMethod];
             }
 
-            if (TimelineEvent?.Team == "home")
+            if (TimelineEvent.OfHomeTeam())
             {
                 BuildHomeInfo();
             }

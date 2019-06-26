@@ -3,15 +3,13 @@
     using System.Linq;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class MainEventItemViewModel : BaseItemViewModel
     {
-        private const int NumberOfFullTimePeriodsResult = 2;
-
         public MainEventItemViewModel(
             ITimeline timelineEvent,
             IMatchResult matchResult,
@@ -34,7 +32,7 @@
 
             Score = "-";
 
-            if (IsHalfTime())
+            if (TimelineEvent.IsHalfTimeBreak())
             {
                 BuildHalfTime();
                 return;
@@ -52,7 +50,7 @@
                 return;
             }
 
-            if (IsPenaltyShootOut())
+            if (TimelineEvent.IsPenaltyShootOutStart())
             {
                 BuildPenaltyShootOut();
             }
@@ -73,7 +71,7 @@
         {
             MainEventStatus = AppResources.FullTime;
 
-            if (Result?.MatchPeriods != null && Result.MatchPeriods.Count() >= NumberOfFullTimePeriodsResult)
+            if (Result.HasFullTimeResult())
             {
                 var firstHalfResult = Result.MatchPeriods.ToList()[0];
                 var secondHalfResult = Result.MatchPeriods.ToList()[1];
@@ -92,21 +90,17 @@
         private void BuildPenaltyShootOut()
         {
             MainEventStatus = AppResources.PenaltyShootOut;
-            var penaltyScore = Result.MatchPeriods?.FirstOrDefault(p => p.PeriodType?.IsPenalties == true);
+            var penaltyScore = Result?.GetPenaltyResult();
             Score = $"{penaltyScore?.HomeScore} - {penaltyScore?.AwayScore}";
         }
 
-        private bool IsHalfTime() => TimelineEvent.Type == EventTypes.BreakStart && TimelineEvent.PeriodType == PeriodTypes.Pause;
-
         private bool IsFullTime()
-            => (TimelineEvent.Type == EventTypes.BreakStart && TimelineEvent.PeriodType == PeriodTypes.AwaitingExtraTime)
-                || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus?.IsEnded == true);
+            => TimelineEvent.IsAwaitingExtraTimeBreak()
+                || (TimelineEvent.IsAwaitingPenaltiesBreak() && Result.GetOvertimeResult() == null)
+                || (TimelineEvent.IsMatchEndedFullTime(Result));
 
         private bool IsAfterExtraTime()
-            => (TimelineEvent.Type == EventTypes.BreakStart && TimelineEvent.PeriodType == PeriodTypes.AwaitingPenalties)
-              || (TimelineEvent.Type == EventTypes.MatchEnded && Result.MatchStatus?.IsAfterExtraTime == true);
-
-        private bool IsPenaltyShootOut()
-            => TimelineEvent.Type == EventTypes.PeriodStart && TimelineEvent.PeriodType == PeriodTypes.Penalties;
+            => (TimelineEvent.IsAwaitingPenaltiesBreak() && Result.GetOvertimeResult() != null)
+                || TimelineEvent.IsMatchEndedExtraTime(Result);
     }
 }

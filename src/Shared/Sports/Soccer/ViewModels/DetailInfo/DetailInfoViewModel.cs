@@ -15,6 +15,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Navigation;
 
@@ -116,7 +117,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 Match.TimeLines = new List<Timeline>();
             }
 
-            Match.TimeLines = Match.TimeLines.Concat(matchPayload.TimeLines).Distinct();
+            Match.TimeLines = Match.TimeLines.Concat(matchPayload.TimeLines).Distinct(new TimelineComparer());
 
             BuildDetailInfo(Match);
         }

@@ -87,6 +87,26 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             timeline.PeriodType.Returns("awaiting_extra");
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.OvertimeType }
+            });
+
+            // Act
+            var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+
+            // Assert
+            Assert.Equal("Full Time", viewModel.MainEventStatus);
+            Assert.Equal("3 - 5", viewModel.Score);
+        }
+
+        [Fact]
+        public void BuildMainEventStatus_BreakStart_PeriodIsAwaitPenalty_NoOvertime_ShowFullTime()
+        {
+            // Arrange
+            timeline.Type.Returns("break_start");
+            timeline.PeriodType.Returns("awaiting_penalties");
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 }
             });
 
@@ -123,6 +143,11 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             timeline.PeriodType.Returns("awaiting_penalties");
             matchResult.HomeScore.Returns(3);
             matchResult.AwayScore.Returns(6);
+            matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
+                new MatchPeriod { HomeScore = 1, AwayScore = 2 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3 },
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.OvertimeType }
+            });
 
             // Act
             var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);

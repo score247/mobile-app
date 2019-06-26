@@ -5,6 +5,7 @@
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
     public class DefaultItemViewModel : BaseItemViewModel
@@ -48,7 +49,7 @@
                 VisibleScore = true;
             }
 
-            if (TimelineEvent.Team == "home")
+            if (TimelineEvent.OfHomeTeam())
             {
                 HomePlayerName = TimelineEvent?.Player?.Name;
                 VisibleHomeImage = true;
