@@ -86,6 +86,12 @@
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
             </FlexLayout>
             <tabStrip:TabStrip ItemsSource="{Binding TabViews}" />
+            <ActivityIndicator
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                VerticalOptions="StartAndExpand"
+                Style="{StaticResource CenterActivityIndicator}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

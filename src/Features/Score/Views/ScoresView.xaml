@@ -30,7 +30,6 @@
     </ContentPage.Resources>
     <StackLayout>
         <dateBar:DateBar NumberDisplayDays="3" />
-
         <ActivityIndicator
             x:Name="activity"
             IsEnabled="{Binding IsLoading}"

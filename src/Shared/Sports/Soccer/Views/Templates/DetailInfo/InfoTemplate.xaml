@@ -18,7 +18,14 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <FlexLayout Style="{StaticResource TabContent}">
+        <ActivityIndicator
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Margin="20"
+                Style="{StaticResource CenterActivityIndicator}" />
         <ListView
+            IsVisible="{Binding IsNotLoading}"
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"
             BackgroundColor="{StaticResource SecondColor}"
