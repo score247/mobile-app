@@ -9,14 +9,9 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
-        private const int AnimationDuration = 500;
         private const string TabChangeEvent = "TabChange";
         private static int currentTabIndex;
        
-        private const int OutLeft = -1000;
-        private const int OutRight = 1000;
-        private const int InLeft = -500;
-        private const int InRight = 500;
 
         public TabStrip()
         {
@@ -72,28 +67,11 @@
 
         private static void SubscribeTabChange(TabStrip control, IEnumerable<TabModel> tabs)
         {
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", async (_, index) =>
-            {
-                var IsSwipedLeft = currentTabIndex < index;               
-                var inTranslationX = 0;
-                var outTranslationXTo = 0;
-
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {              
                 currentTabIndex = index;
 
-                if (IsSwipedLeft)
-                {
-                    inTranslationX = InRight;
-                    outTranslationXTo = OutLeft;
-                }
-                else
-                {
-                    inTranslationX = InLeft;
-                    outTranslationXTo = OutRight;
-                }
-
                 var tab = tabs.ToArray()[index];
-
-                await ((ContentView)control.TabContent.Children[0]).TranslateTo(outTranslationXTo, 0, AnimationDuration);
 
                 control.TabContent.Children.ToList()
                     .ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
@@ -102,13 +80,10 @@
                 var tabContentView = new ContentView
                 {
                     Content = tab.Template,
-                    BindingContext = tab.ViewModel,
-                    TranslationX = inTranslationX
+                    BindingContext = tab.ViewModel
                 };
 
                 control.TabContent.Children.Add(tabContentView);
-
-                await tabContentView.TranslateTo(0, 0, AnimationDuration);
 
                 tab.ViewModel.OnAppearing();
             });
