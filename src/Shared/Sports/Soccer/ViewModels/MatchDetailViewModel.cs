@@ -113,7 +113,7 @@ namespace LiveScore.Soccer.ViewModels
             {
                 await LoggingService.LogErrorAsync(ex);
             }
-        }
+        }       
 
         private async Task LoadMatchDetail(string matchId)
         {
@@ -126,8 +126,11 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildTabFunctions(IMatch match)
         {
-            if (match.Functions != null && TabViews == null)
+            TabViews = new ObservableCollection<TabModel>();
+
+            if (match.Functions != null)
             {
+
                 TabViews = new ObservableCollection<TabModel>();
 
                 foreach (var tab in match.Functions)
@@ -138,6 +141,7 @@ namespace LiveScore.Soccer.ViewModels
 
                     TabViews.Add(tabModel);
                 }
+
 
                 MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
                 {
