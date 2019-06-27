@@ -39,26 +39,25 @@
                         <Label Style="{StaticResource HomeTeam}" Text="{Binding Match.Teams[0].Name}" />
 
                         <Image
-                            IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
-                            Source="{Binding Match.HomeSecondLegImage}"
+                            IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
+                            Source="{Binding Match.HomePenaltyImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
 
                         <Image
-                            IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                            Source="{Binding Match.HomePenaltyImage}"
+                            IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
+                            Source="{Binding Match.HomeSecondLegImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
                     <FlexLayout Style="{StaticResource MatchAwayTeam}">
                         <Label Style="{StaticResource AwayTeam}" Text="{Binding Match.Teams[1].Name}" />
+                        <Image
+                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
+                            Source="{Binding Match.AwayPenaltyImage}"
+                            Style="{StaticResource MatchWinnerInfoIcon}" />
 
                         <Image
                             IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
                             Source="{Binding Match.AwaySecondLegImage}"
-                            Style="{StaticResource MatchWinnerInfoIcon}" />
-
-                        <Image
-                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                            Source="{Binding Match.AwayPenaltyImage}"
                             Style="{StaticResource MatchWinnerInfoIcon}" />
                     </FlexLayout>
                 </StackLayout>

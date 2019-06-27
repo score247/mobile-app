@@ -4,12 +4,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-    xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:matchDetailInfo="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+    xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     x:Name="self"
     BackgroundColor="{StaticResource SecondColor}">
     <NavigationPage.TitleView>
@@ -45,8 +45,8 @@
                         Grid.Column="0"
                         Style="{StaticResource MatchGeneralInfoHomeTeam}">
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="{Binding MatchViewModel.Match.HomeSecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                             <Image Source="{Binding MatchViewModel.Match.HomePenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.HomeSecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
 
                         <Label Style="{StaticResource MatchGeneralInfoHomeTeamName}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
@@ -65,8 +65,8 @@
                         <Button Style="{StaticResource MatchGeneralInfoTeamLogo}" Text="{Binding MatchViewModel.Match.Teams[1].Name, Converter={StaticResource FirstCharConverter}}" />
                         <Label Style="{StaticResource MatchGeneralInfoAwayTeamName}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
                         <FlexLayout Style="{StaticResource MatchGeneralWinnerInfoContainer}">
-                            <Image Source="{Binding MatchViewModel.Match.AwaySecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                             <Image Source="{Binding MatchViewModel.Match.AwayPenaltyImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
+                            <Image Source="{Binding MatchViewModel.Match.AwaySecondLegImage}" Style="{StaticResource MatchGeneralInfoWinnerInfoIcon}" />
                         </FlexLayout>
                     </StackLayout>
                 </Grid>
@@ -78,20 +78,20 @@
                     <Label Style="{StaticResource MatchGeneralInfoStatus}" Text="{Binding DisplayEventDateAndLeagueName}" />
                 </StackLayout>
             </StackLayout>
-            <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
-            </FlexLayout>
-            <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
             <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                 <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
+            </FlexLayout>
+            <BoxView BackgroundColor="{StaticResource PrimaryColor}" Style="{StaticResource HorizontalLine}" />
+            <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
             </FlexLayout>
             <tabStrip:TabStrip ItemsSource="{Binding TabViews}" />
             <ActivityIndicator
                 IsEnabled="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
                 IsVisible="{Binding IsLoading}"
-                VerticalOptions="StartAndExpand"
-                Style="{StaticResource CenterActivityIndicator}" />
+                Style="{StaticResource CenterActivityIndicator}"
+                VerticalOptions="StartAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
