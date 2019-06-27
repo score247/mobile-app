@@ -60,13 +60,13 @@
         public string HomeSecondLegImage
               => MatchResult.EventStatus.IsClosed
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
-                    && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId) ?
+                    && Teams.FirstOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
                => MatchResult.EventStatus.IsClosed
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
-                    && Teams.LastOrDefault()?.Id == MatchResult.WinnerId) ?
+                    && Teams.LastOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
     }
 }

@@ -174,7 +174,7 @@ namespace Soccer.Tests.ViewModels
             match.MatchResult = new MatchResult
             {
                 EventStatus = MatchStatus.ClosedStatus,
-                AggregateWinnerId = "home",
+                AggregateWinnerId = "away",
                 WinnerId = "away"
             };
             var parameters = new NavigationParameters { { "Match", match } };
