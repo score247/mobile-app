@@ -126,7 +126,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildTabFunctions(IMatch match)
         {
-            if (match.Functions != null)
+            if (match.Functions != null && TabViews == null)
             {
                 TabViews = new ObservableCollection<TabModel>();
 
