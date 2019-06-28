@@ -11,6 +11,10 @@
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
     {
+        public ViewModelBase()
+        {
+        }
+
         public ViewModelBase(
            INavigationService navigationService,
            IDependencyResolver serviceLocator,

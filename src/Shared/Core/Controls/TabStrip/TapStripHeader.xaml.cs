@@ -13,8 +13,6 @@
             InitializeComponent();
         }
 
-
-
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
               nameof(ItemsSource), typeof(IEnumerable), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
 
@@ -36,7 +34,7 @@
 
             var tabs = (IList<TabModel>)newValue;
 
-            if(control.scrollLayOut.Children.Count == 0)
+            if (control.scrollLayOut.Children.Count == 0)
             {
                 InitTabHeader(control, tabs);
             }

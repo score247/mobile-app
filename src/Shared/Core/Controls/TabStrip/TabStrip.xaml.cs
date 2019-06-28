@@ -93,8 +93,8 @@
 
                 var tab = tabs.ToArray()[index];
 
-                await((ContentView)control.TabContent.Children[0]).TranslateTo(outTranslationXTo, 0, AnimationDuration, Easing.SinIn);
-
+                await ((ContentView)control.TabContent.Children[0])
+                    .TranslateTo(outTranslationXTo, 0, AnimationDuration, Easing.SinIn);
 
                 control.TabContent.Children.ToList()
                     .ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());

@@ -15,8 +15,10 @@
             app.Resources["MediumTextFontSize"] = 10;
             app.Resources["UppercaseTextFontSize"] = 10;
             app.Resources["SmalleastTextFontSize"] = 10;
+            app.Resources["TabFontSize"] = 10;
 
             app.Resources["FunctionGroupHeight"] = 10;
+            app.Resources["TabsHeight"] = 12;
 
             app.Resources["FunctionGroupColor"] = Color.FromHex("#F24822");
             app.Resources["PrimaryColor"] = Color.FromHex("#F24822");
@@ -29,6 +31,10 @@
             app.Resources["PrimaryTextColor"] = Color.FromHex("#1D2133");
             app.Resources["SecondTextColor"] = Color.FromHex("#1D2133");
             app.Resources["SecondAccentColor"] = Color.FromHex("#1D2133");
+            app.Resources["TabColor"] = Color.FromHex("#1D2133");
+            app.Resources["ActiveTabColor"] = Color.FromHex("#1D2133");
+            app.Resources["ActiveLineColor"] = Color.FromHex("#1D2133");
+            app.Resources["InactiveLineColor"] = Color.FromHex("#1D2133");
 
             app.Resources["LiveIcon"] = new Style(typeof(Label));
             app.Resources["WinnerInfoIcon"] = new Style(typeof(Image));
