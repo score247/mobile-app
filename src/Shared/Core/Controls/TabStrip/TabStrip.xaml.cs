@@ -12,11 +12,11 @@
         private const string TabChangeEvent = "TabChange";
         private static int currentTabIndex;
 
-        private const int AnimationDuration = 500;
-        private const int OutLeft = -1000;
-        private const int OutRight = 1000;
-        private const int InLeft = -500;
-        private const int InRight = 500;
+        private const int AnimationDuration = 200;
+        private const int OutLeft = -600;
+        private const int OutRight = 600;
+        private const int InLeft = -600;
+        private const int InRight = 600;
 
         public TabStrip()
         {
@@ -93,7 +93,7 @@
 
                 var tab = tabs.ToArray()[index];
 
-                await((ContentView)control.TabContent.Children[0]).TranslateTo(outTranslationXTo, 0, AnimationDuration);
+                await((ContentView)control.TabContent.Children[0]).TranslateTo(outTranslationXTo, 0, AnimationDuration, Easing.SinIn);
 
 
                 control.TabContent.Children.ToList()
@@ -109,7 +109,7 @@
 
                 control.TabContent.Children.Add(tabContentView);
 
-                await tabContentView.TranslateTo(0, 0, AnimationDuration);
+                await tabContentView.TranslateTo(0, 0, AnimationDuration, Easing.SinOut);
 
                 tab.ViewModel.OnAppearing();
             });
