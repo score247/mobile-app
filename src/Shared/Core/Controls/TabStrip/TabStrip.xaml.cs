@@ -12,10 +12,9 @@
         private const string TabChangeEvent = "TabChange";
         private static int currentTabIndex;
 
-        private const int AnimationDuration = 200;
-        private const int OutLeft = -600;
-        private const int OutRight = 600;
-        private const int InLeft = -600;
+        private const int InAnimationDuration = 400;        
+        private const int FadeDuration = 100;
+        private const int InLeft = -1000;
         private const int InRight = 600;
 
         public TabStrip()
@@ -74,27 +73,16 @@
         {
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", async (_, index) =>
             {
-                var IsSwipedLeft = currentTabIndex < index;
-                var inTranslationX = 0;
-                var outTranslationXTo = 0;
+
+                var inTranslationX = currentTabIndex < index ? InRight : InLeft;
 
                 currentTabIndex = index;
 
-                if (IsSwipedLeft)
-                {
-                    inTranslationX = InRight;
-                    outTranslationXTo = OutLeft;
-                }
-                else
-                {
-                    inTranslationX = InLeft;
-                    outTranslationXTo = OutRight;
-                }
-
                 var tab = tabs.ToArray()[index];
 
-                await ((ContentView)control.TabContent.Children[0])
-                    .TranslateTo(outTranslationXTo, 0, AnimationDuration, Easing.SinIn);
+                ((ContentView)control.TabContent.Children[0]).Opacity = 1;
+                
+                await ((ContentView)control.TabContent.Children[0]).FadeTo(0, FadeDuration);
 
                 control.TabContent.Children.ToList()
                     .ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
@@ -109,7 +97,7 @@
 
                 control.TabContent.Children.Add(tabContentView);
 
-                await tabContentView.TranslateTo(0, 0, AnimationDuration, Easing.SinOut);
+                await tabContentView.TranslateTo(0, 0, InAnimationDuration, Easing.SinOut);
 
                 tab.ViewModel.OnAppearing();
             });
