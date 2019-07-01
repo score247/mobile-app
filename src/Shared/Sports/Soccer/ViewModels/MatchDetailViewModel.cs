@@ -54,6 +54,8 @@ namespace LiveScore.Soccer.ViewModels
 
         public bool IsLoading { get; private set; }
 
+        public string DisplayEventDate { get; set; }
+
         public string DisplayEventDateAndLeagueName { get; private set; }
 
         public string DisplayScore { get; private set; }
@@ -113,7 +115,7 @@ namespace LiveScore.Soccer.ViewModels
             {
                 await LoggingService.LogErrorAsync(ex);
             }
-        }       
+        }
 
         private async Task LoadMatchDetail(string matchId)
         {
@@ -130,7 +132,6 @@ namespace LiveScore.Soccer.ViewModels
 
             if (match.Functions != null)
             {
-
                 TabViews = new ObservableCollection<TabModel>();
 
                 foreach (var tab in match.Functions)
@@ -141,7 +142,6 @@ namespace LiveScore.Soccer.ViewModels
 
                     TabViews.Add(tabModel);
                 }
-
 
                 MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
                 {
@@ -208,6 +208,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var eventDate = match.EventDate.ToDayMonthYear();
             DisplayEventDateAndLeagueName = $"{eventDate} - {match.League?.Name?.ToUpperInvariant() ?? string.Empty}";
+            DisplayEventDate = match.EventDate.ToShortDayMonth();
 
             if (match.MatchResult != null)
             {
@@ -229,7 +230,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildViewModel(IMatch match)
         {
-            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, true);
+            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection);
             MatchViewModel.BuildMatchStatus();
         }
 

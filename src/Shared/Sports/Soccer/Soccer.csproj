@@ -67,7 +67,7 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailInfo\InfoTemplate.xaml.cs">
       <DependentUpon>InfoTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\MatchDataTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\OddsTemplate.xaml.cs">
@@ -87,5 +87,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Templates\MatchTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

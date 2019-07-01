@@ -282,7 +282,7 @@ namespace Soccer.Tests.ViewModels
             // Assert
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
             Assert.Equal(timelines[0], viewModel.MatchViewModel.Match.LatestTimeline);
-            Assert.Equal("Abandoned", viewModel.MatchViewModel.DisplayMatchStatus);
+            Assert.Equal("AB", viewModel.MatchViewModel.DisplayMatchStatus);
             Assert.Equal("1 - 2", viewModel.DisplayScore);
         }
 
