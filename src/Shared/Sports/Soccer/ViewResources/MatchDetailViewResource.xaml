@@ -58,4 +58,37 @@
         <Setter Property="Padding" Value="0,0,0,5" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
+
+    <!--  SubTab  -->
+    <Style x:Key="SubTabContainer" TargetType="Frame">
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="Margin" Value="8,0" />
+    </Style>
+    <Style x:Key="SubTabBox" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="SpaceBetween" />
+        <Setter Property="AlignItems" Value="Stretch" />
+        <Setter Property="HeightRequest" Value="{StaticResource SubTabsHeight}" />
+    </Style>
+    <Style x:Key="CommonSubTab" TargetType="Label">
+        <Setter Property="FlexLayout.Grow" Value="1" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style
+        x:Key="SubTab"
+        BasedOn="{StaticResource CommonSubTab}"
+        TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabBgColor}" />
+    </Style>
+    <Style
+        x:Key="SubTabActive"
+        BasedOn="{StaticResource CommonSubTab}"
+        TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
+    </Style>
 </ResourceDictionary>

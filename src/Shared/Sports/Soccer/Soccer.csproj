@@ -38,6 +38,9 @@
     <Compile Update="ViewResources\MatchDetailInfoViewResource.xaml.cs">
       <DependentUpon>MatchDetailInfoViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ViewResources\MatchDetailOddsViewResource.xaml.cs">
+      <DependentUpon>MatchDetailOddsViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchDetailViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
