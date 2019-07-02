@@ -111,15 +111,13 @@
                 </FlexLayout>
             </Grid>
 
-            <StackLayout Style="{StaticResource MatchGeneralInfoImportantContainer}">
-                <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
-                </FlexLayout>
+            <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
+            </FlexLayout>
 
-                <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
-                </FlexLayout>
-            </StackLayout>
+            <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
+                <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
+            </FlexLayout>
 
             <tabStrip:TabStrip ItemsSource="{Binding TabViews}" />
 

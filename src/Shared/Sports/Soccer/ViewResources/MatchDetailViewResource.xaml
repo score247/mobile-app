@@ -13,20 +13,31 @@
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoImportantContainer" TargetType="StackLayout">
-        <Setter Property="Padding" Value="0,8,0,0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-    </Style>
-
     <Style
         x:Key="MatchGeneralInfoImportant"
         BasedOn="{StaticResource FlexLayoutAlignCenter}"
         TargetType="FlexLayout">
         <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
     </Style>
+
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    </Style>
+
+    <Style
+        x:Key="MatchGeneralInfoImportantContentSecondLeg"
+        BasedOn="{StaticResource MatchGeneralInfoImportantContent}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+
+    <Style
+        x:Key="MatchGeneralInfoImportantContentPenalty"
+        BasedOn="{StaticResource MatchGeneralInfoImportantContent}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,0,0,4" />
     </Style>
 
     <Style
