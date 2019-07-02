@@ -262,7 +262,7 @@
                 x:Key="ActiveFavoriteIcon"
                 BasedOn="{StaticResource FavoriteIcon}"
                 TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
             </Style>
 
             <Style

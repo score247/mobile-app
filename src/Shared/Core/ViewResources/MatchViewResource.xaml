@@ -50,8 +50,9 @@
         BasedOn="{StaticResource Team}"
         TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="End" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style
         x:Key="HomeScore"

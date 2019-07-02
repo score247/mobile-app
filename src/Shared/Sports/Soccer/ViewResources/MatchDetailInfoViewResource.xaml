@@ -13,13 +13,14 @@
 
     <Style x:Key="MatchInfoRow" TargetType="FlexLayout">
         <Setter Property="Direction" Value="Row" />
-        <Setter Property="JustifyContent" Value="Start" />
+        <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="HeightRequest" Value="42" />
         <Setter Property="Padding" Value="9,0" />
     </Style>
 
     <Style x:Key="MatchInfoTeam" TargetType="StackLayout">
+        <Setter Property="FlexLayout.Shrink" Value="0" />
         <Setter Property="FlexLayout.Grow" Value="0.4" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
@@ -35,6 +36,7 @@
         <Setter Property="Margin" Value="10,0" />
         <Setter Property="FlexLayout.AlignSelf" Value="Center" />
         <Setter Property="FlexLayout.Basis" Value="68" />
+        <Setter Property="FlexLayout.Shrink" Value="0" />
     </Style>
     <Style x:Key="MatchInfoScoreBox" TargetType="Button">
         <Setter Property="HeightRequest" Value="20" />

@@ -15,6 +15,7 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
             <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
+                <Label Style="{StaticResource MatchInfoMinutes}" />
                 <StackLayout Style="{StaticResource MatchInfoTeam}">
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label
@@ -23,17 +24,17 @@
                             Text="{Binding HomePlayerName}" />
                     </StackLayout>
                     <StackLayout VerticalOptions="Center">
-                        <Image HorizontalOptions="EndAndExpand"
-                               Style="{StaticResource MatchInfoImage}"
-                               Source="{Binding HomeImageSource}" />
+                        <Image
+                            HorizontalOptions="EndAndExpand"
+                            Source="{Binding HomeImageSource}"
+                            Style="{StaticResource MatchInfoImage}" />
                     </StackLayout>
                 </StackLayout>
                 <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
                     <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource MatchInfoTeam}">
-                    <Image Style="{StaticResource MatchInfoImage}"
-                           Source="{Binding AwayImageSource}" />
+                    <Image Source="{Binding AwayImageSource}" Style="{StaticResource MatchInfoImage}" />
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
                     </StackLayout>
