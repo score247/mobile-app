@@ -10,6 +10,10 @@
         public static string LocalEndPoint => "https://api.nexdev.net/V2/api/";
 
         public static string LocalHubEndPoint => "https://api.nexdev.net/V2/hubs/";
+#elif AUTOTEST
+        public static string LocalEndPoint => "https://api.nexdev.net/V4/api/";
+
+        public static string LocalHubEndPoint => "https://api.nexdev.net/V4/hubs/";
 #else
         public static string LocalEndPoint => "https://api.nexdev.net/Main/api/";
 
