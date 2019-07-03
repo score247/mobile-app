@@ -1,7 +1,7 @@
 *** Settings ***
 Suite Setup       Init_Simulator    iPhone 8
-Suite Teardown
-Library           AppiumLibrary
+Suite Teardown    Suite TearDown
+Library           AppiumLibrary    #Suite Teardown    Suite TearDown    #Suite Teardown    Delete_Match_Table
 Library           Process
 Resource          Actions/Common_Actions.robot
 Resource          Actions/Page_Actions.robot
@@ -13,9 +13,9 @@ Library           OperatingSystem
 Library           String
 Library           DatabaseLibrary
 Library           PostgreSQLDB
+Library           REST
 Resource          UI/Date_Bar.robot
 Resource          UI/Leagues_Content.robot
-Resource          DB/DB_Test.robot
 
 *** Test Cases ***
 SP1_Main_Function_Bar_Part1
@@ -169,29 +169,6 @@ SP1_Scores_Match_Leagues
     ${l_tbl_iconv}    Get Dictionary Values    ${l_tbl_icon}
     Run Keyword And Continue On Failure    should be true    ${l_iconv}[0]<${l_namev}[0]<${l_datev}[0]<${l_tbl_iconv}[0]
 
-Insert_data_Post_Pre_Match
-    ${current_date}=    Get Current Date    result_format=%Y-%m-%d    #current date
-    ${date1}=    Subtract Time From Date    ${current_date}    3 days    result_format=%Y-%m-%d    #3rd date before current date
-    ${date2}=    Subtract Time From Date    ${current_date}    2 days    result_format=%Y-%m-%d    #2nd date before current date
-    ${date3}=    Subtract Time From Date    ${current_date}    1 days    result_format=%Y-%m-%d    #1st date before current date
-    ${date5}=    Add Time To Date    ${current_date}    1 days    result_format=%Y-%m-%d    #1st date after current date
-    ${date6}=    Add Time To Date    ${current_date}    2 days    result_format=%Y-%m-%d    #2nd date after current date
-    ${date7}=    Add Time To Date    ${current_date}    3 days    result_format=%Y-%m-%d    #3rd date after current date
-    Copy File    ${EXECDIR}/Template_Files/template_post_pre_match.txt    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
-    ${match_list}=    Get File    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
-    @{list1}=    Create List    2019-05-01    2019-05-02    2019-05-03    2019-05-05    2019-05-06
-    ...    2019-05-07
-    @{list2}=    Create List    ${date1}    ${date2}    ${date3}    ${date5}    ${date6}
-    ...    ${date7}
-    : FOR    ${i}    IN RANGE    0    6
-    \    run    sed -i’’ -e s/@{list1}[${i}]/@{list2}[${i}]/ ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
-    ${match_list1}=    Get File    ${EXECDIR}/Template_Files/Run/template_post_pre_match.txt
-    PostgreSQLDB.Connect To Postgresql    ${database}    ${user}    ${password}    ${host}    ${port}
-    ${create_match_table}=    PostgreSQLDB.Execute Plpgsql Script    ${EXECDIR}/Template_Files/Create_Table_Match.sql
-    ${script_insert_match}=    PostgreSQLDB.Execute Plpgsql Script    ${EXECDIR}/Template_Files/script_insert_match.sql
-    PostgreSQLDB.Execute Plpgsql Block    CALL public.insert_match('${match_list1}')
-    Empty Directory    ${EXECDIR}/Template_Files/Run
-
 SP2_Score_Post_Pre_Match_Date1
     [Documentation]    Verify data of Post-Match in the day that happend 3 days before current day
     ${current_date}=    Get Current Date    result_format=%Y-%m-%d    #current date
@@ -221,9 +198,9 @@ SP2_Score_Post_Pre_Match_Date1
     ${homescore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}=    Set Variable If    '${match1_status}'=='A.E.T'    aet    '${match1_status}'=='A.P'    ap    '${match1_status}'=='Postp.'
+    ${match1_status}=    Set Variable If    '${match1_status}'=='AET'    aet    '${match1_status}'=='AP'    ap    '${match1_status}'=='Postp.'
     ...    postponed    '${match1_status}'=='Can.'    cancelled    '${match1_status}'=='Start Delayed'    start_delayed    '${match1_status}'=='FT'
-    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='A.E.T' and '${match1_status}'!='A.P' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
+    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='AET' and '${match1_status}'!='AP' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
     #Compare data between database and app for match 1
     Should Be Equal As Strings    ${leaguename.lower()}    ${match_results[0][1].lower()}
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
@@ -238,9 +215,9 @@ SP2_Score_Post_Pre_Match_Date1
     ${homescore_match2}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match2}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match2_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match2_status}=    Set Variable If    '${match2_status}'=='A.E.T'    aet    '${match2_status}'=='A.P'    ap    '${match2_status}'=='Postp.'
+    ${match2_status}=    Set Variable If    '${match2_status}'=='AET'    aet    '${match2_status}'=='AP'    ap    '${match2_status}'=='Postp.'
     ...    postponed    '${match2_status}'=='Can.'    cancelled    '${match2_status}'=='Start Delayed'    start_delayed    '${match2_status}'=='FT'
-    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='A.E.T' and '${match2_status}'!='A.P' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
+    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='AET' and '${match2_status}'!='AP' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
     ${match2_status}=    Create List    ${match2_status}
     #Compare data between database and app for match 2
     Should Contain Any    ${match2_status}    full-time    ended    closed
@@ -277,9 +254,9 @@ SP2_Score_Post_Pre_Match_Date2
     ${homescore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}=    Set Variable If    '${match1_status}'=='A.E.T'    aet    '${match1_status}'=='A.P'    ap    '${match1_status}'=='Postp.'
+    ${match1_status}=    Set Variable If    '${match1_status}'=='AET'    aet    '${match1_status}'=='AP'    ap    '${match1_status}'=='Postp.'
     ...    postponed    '${match1_status}'=='Can.'    cancelled    '${match1_status}'=='Start Delayed'    start_delayed    '${match1_status}'=='FT'
-    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='A.E.T' and '${match1_status}'!='A.P' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
+    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='AET' and '${match1_status}'!='AP' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
     ${list_status1}=    Create List    full-time    ended    closed
     #Compare data between database and app for match 1
     Should Be Equal As Strings    ${leaguename.lower()}    ${match_results[0][1].lower()}
@@ -295,9 +272,9 @@ SP2_Score_Post_Pre_Match_Date2
     ${homescore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match2_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match2_status}=    Set Variable If    '${match2_status}'=='A.E.T'    aet    '${match2_status}'=='A.P'    ap    '${match2_status}'=='Postp.'
+    ${match2_status}=    Set Variable If    '${match2_status}'=='AET'    aet    '${match2_status}'=='AP'    ap    '${match2_status}'=='Postp.'
     ...    postponed    '${match2_status}'=='Can.'    cancelled    '${match2_status}'=='Start Delayed'    start_delayed    '${match2_status}'=='FT'
-    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='A.E.T' and '${match2_status}'!='A.P' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
+    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='AET' and '${match2_status}'!='AP' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
     ${list_status2}=    Create List    full-time    ended    closed
     #Compare data between database and app for match 2
     Should Contain Any    ${list_status2}    ${match2_status}
@@ -335,7 +312,7 @@ SP2_Score_Post_Pre_Match_Date3
     ${homescore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}    Run Keyword If    '${match1_status}'=='A.E.T' or '${match1_status}'=='A.P'    Remove String    ${match1_status.lower()}    .    ELSE If
+    ${match1_status}    Run Keyword If    '${match1_status}'=='AET' or '${match1_status}'=='AP'    Remove String    ${match1_status.lower()}    .    ELSE If
     ...    '${match1_status}'=='Postp.'    Set Variable    postponed    ELSE If    '${match1_status}'=='Can.'    Set Variable
     ...    cancelled    ELSE If    '${match1_status}'=='Start Delayed'    Set Variable    start_delayed    ELSE If
     ...    '${match1_status}'=='FT'    Set Variable    full-time    ELSE If    '${match1_status}'=='AB'    Set Variable
@@ -354,7 +331,7 @@ SP2_Score_Post_Pre_Match_Date3
     ${homescore_match2}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match2}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match2_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match2_status}    Run Keyword If    '${match2_status}'=='A.E.T' or '${match2_status}'=='A.P'    Remove String    ${match2_status.lower()}    .    ELSE If
+    ${match2_status}    Run Keyword If    '${match2_status}'=='AET' or '${match2_status}'=='AP'    Remove String    ${match2_status.lower()}    .    ELSE If
     ...    '${match2_status}'=='Postp.'    Set Variable    postponed    ELSE If    '${match2_status}'=='Canc.'    Set Variable
     ...    cancelled    ELSE If    '${match2_status}'=='AB'    Set Variable    abandoned    ELSE If
     ...    '${match2_status}'=='Start Delayed'    Set Variable    start_delayed    ELSE If    '${match2_status}'=='FT'    Set Variable
@@ -393,9 +370,9 @@ SP2_Score_Post_Pre_Match_Date5
     ${homename_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]
     ${awayname_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[1]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}=    Set Variable If    '${match1_status}'=='A.E.T'    aet    '${match1_status}'=='A.P'    ap    '${match1_status}'=='Postp.'
+    ${match1_status}=    Set Variable If    '${match1_status}'=='AET'    aet    '${match1_status}'=='AP'    ap    '${match1_status}'=='Postp.'
     ...    postponed    '${match1_status}'=='Can.'    cancelled    '${match1_status}'=='Start Delayed'    start_delayed    '${match1_status}'=='FT'
-    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='A.E.T' and '${match1_status}'!='A.P' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
+    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='AET' and '${match1_status}'!='AP' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
     Should Be Equal As Strings    ${match1_status}    ${match_results[0][2]}
     Should Be Equal As Strings    ${homename_match1}    ${match_results[0][3]}
     Should Be Equal As Strings    ${awayname_match1}    ${match_results[0][4]}
@@ -404,9 +381,9 @@ SP2_Score_Post_Pre_Match_Date5
     ${homescore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[2]
     ${awayscore_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/following::XCUIElementTypeStaticText[3]
     ${match2_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[1][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match2_status}=    Set Variable If    '${match2_status}'=='A.E.T'    aet    '${match2_status}'=='A.P'    ap    '${match2_status}'=='Postp.'
+    ${match2_status}=    Set Variable If    '${match2_status}'=='AET'    aet    '${match2_status}'=='AP'    ap    '${match2_status}'=='Postp.'
     ...    postponed    '${match2_status}'=='Can.'    cancelled    '${match2_status}'=='Start Delayed'    start_delayed    '${match2_status}'=='FT'
-    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='A.E.T' and '${match2_status}'!='A.P' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
+    ...    full-time    '${match2_status}'=='AB'    abandoned    '${match2_status}'!='AET' and '${match2_status}'!='AP' and '${match2_status}'!='Post.' and '${match2_status}'!='Can.' and '${match2_status}'!='Can.' and '${match2_status}'!='Start Delayed' and '${match2_status}'!='FT' and '${match2_status}'!='AB'    not_started
     Should Be Equal As Strings    ${match2_status}    ${match_results[1][2]}
     Should Be Equal As Strings    ${homename_match1}    ${match_results[1][3]}
     Should Be Equal As Strings    ${awayname_match1}    ${match_results[1][4]}
@@ -441,9 +418,9 @@ SP2_Score_Post_Pre_Match_Date6
     ${awayname_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[1]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}=    Set Variable If    '${match1_status}'=='A.E.T'    aet    '${match1_status}'=='A.P'    ap    '${match1_status}'=='Postp.'
+    ${match1_status}=    Set Variable If    '${match1_status}'=='AET'    aet    '${match1_status}'=='AP'    ap    '${match1_status}'=='Postp.'
     ...    postponed    '${match1_status}'=='Can.'    cancelled    '${match1_status}'=='Start Delayed'    start_delayed    '${match1_status}'=='FT'
-    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='A.E.T' and '${match1_status}'!='A.P' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
+    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='AET' and '${match1_status}'!='AP' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
     #Compare data between database and app
     Should Be Equal As Strings    ${leaguename.lower()}    ${match_results[0][1].lower()}
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
@@ -479,15 +456,298 @@ SP2_Score_Post_Pre_Match_Date7
     ${awayname_match1}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/following::XCUIElementTypeStaticText[1]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
     ${match1_status}=    Get Text    //XCUIElementTypeStaticText[@label="${match_results[0][3]}"]/preceding::XCUIElementTypeStaticText[1]
-    ${match1_status}=    Set Variable If    '${match1_status}'=='A.E.T'    aet    '${match1_status}'=='A.P'    ap    '${match1_status}'=='Postp.'
+    ${match1_status}=    Set Variable If    '${match1_status}'=='AET'    aet    '${match1_status}'=='AP'    ap    '${match1_status}'=='Postp.'
     ...    postponed    '${match1_status}'=='Can.'    cancelled    '${match1_status}'=='Start Delayed'    start_delayed    '${match1_status}'=='FT'
-    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='A.E.T' and '${match1_status}'!='A.P' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
+    ...    full-time    '${match1_status}'=='AB'    abandoned    '${match1_status}'!='AET' and '${match1_status}'!='AP' and '${match1_status}'!='Post.' and '${match1_status}'!='Can.' and '${match1_status}'!='Can.' and '${match1_status}'!='Start Delayed' and '${match1_status}'!='FT' and '${match1_status}'!='AB'    not_started
     #Compare data between database and app
     Should Be Equal As Strings    ${leaguename.lower()}    ${match_results[0][1].lower()}
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    ${match1_status}    ${match_results[0][2]}
     Should Be Equal As Strings    ${homename_match1}    ${match_results[0][3]}
     Should Be Equal As Strings    ${awayname_match1}    ${match_results[0][4]}
-    DatabaseLibrary.Execute Sql String    DELETE FROM "Match" WHERE "Id" in ('sr:match:test01','sr:match:test02','sr:match:test03','sr:match:test04','sr:match:test05','sr:match:test06','sr:match:test07','sr:match:test08','sr:match:test09','sr:match:test10')
+
+SP3_SP4_List_Event_Of_Match1
+    ${json}=    Get File    ${CURDIR}/Template_Files/List_event_data_template1.json
+    #Push events
+    Post    ${Push_File}    ${json}
+    Integer    response status    200
+    Output
+    Sleep    10
+    Click Element    ${btn_Scores}
+    #Go to current date to view data
+    Click Element    ${btn_currentdate}
+    Sleep    5
+    Wait Until Element Is Visible    accessibility_id=Chelsea
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=Chelsea
+    Sleep    5
+    Click Element    accessibility_id=INFO
+    Sleep    5
+    #Event1_Yellowcard_1st
+    ${event1_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event1_matchtime}'    '10''
+    ${event1_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event1_player}'    'George Hilsdon'
+    ${event1_yellowcard_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event1_yellowcard_icon}'    'images/common/yellow_card.png'
+    #Event2_redcard
+    ${event2_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event2_matchtime}'    '15''
+    ${event2_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event2_player}'    'Tony Adams'
+    ${event2_redcard_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event2_redcard_icon}'    'images/common/red_card.png'
+    #Event3_score_change_for_away_1st
+    ${event3_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[3]    value
+    Should Be Equal As Strings    '${event3_matchtime}'    '30''
+    ${event3_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event3_score}'    '0 - 1'
+    ${event3_scorer}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event3_scorer}'    'Colin Addison'
+    ${event3_assist}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event3_assist}'    'Redes, Rodney'
+    ${event3_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event3_ball_icon}'    'images/common/ball.png'
+    #Event4_score_change_for_home_1st
+    ${event4_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event4_matchtime}'    '35''
+    ${event4_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event4_score}'    '1 - 1'
+    ${event4_scorer}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event4_scorer}'    'Jock Cameron'
+    ${event4_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event4_ball_icon}'    'images/common/ball.png'
+    #Event5_yellowredcard
+    ${event5_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event5_matchtime}'    '45+2''
+    ${event5_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event5_player}'    'Emmanuel Adebayor'
+    ${event5_yellowredcard_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event5_yellowredcard_icon}'    'images/common/red_yellow_card.png'
+    #Event6_halftime
+    ${event6_halftime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event6_halftime_text}'    'Half Time'
+    ${event6_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event6_score}'    '1 - 1'
+    #Event7_fulltime
+    ${event7_fulltime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event7_fulltime_text}'    'Full Time'
+    ${event7_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event7_score}'    '1 - 1'
+
+SP3_SP4_List_Event_Of_Match2
+    ${json}=    Get File    ${CURDIR}/Template_Files/List_event_data_template2.json
+    #Push events
+    Post    ${Push_File}    ${json}
+    Integer    response status    200
+    Output
+    Sleep    5
+    Comment    Click Element    ${btn_Scores}
+    #Go to current date to view data
+    Comment    Click Element    ${btn_currentdate}
+    Comment    Sleep    5
+    Wait Until Element Is Visible    accessibility_id=Germany
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=Germany
+    Sleep    3
+    Click Element    accessibility_id=INFO
+    Sleep    3
+    #Event1_halftime
+    ${event1_halftime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event1_halftime_text}'    'Half Time'
+    ${event1_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event1_score}'    '0 - 0'
+    #Event2_score_change_for_home_2nd
+    ${event2_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event2_matchtime}'    '55''
+    ${event2_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event2_score}'    '1 - 0'
+    ${event2_scorer}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event2_scorer}'    'Ben Warren'
+    ${event2_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event2_ball_icon}'    'images/common/penalty_goal.png'
+    #Event3_score_change_for_away_2nd_by_own_goal
+    ${event3_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event3_matchtime}'    '75''
+    ${event3_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event3_score}'    '1 - 1'
+    ${event3_scorer}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event3_scorer}'    'Vivian Woodward'
+    ${event3_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event3_ball_icon}'    'images/common/own_goal.png'
+    #Event4_score_change_for_home_2nd
+    ${event4_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event4_matchtime}'    '80''
+    ${event4_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event4_score}'    '1 - 1'
+    ${event4_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event4_player}'    'Bob Whittingham'
+    ${event4_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event4_ball_icon}'    'images/common/missed_penalty_goal.png'
+    #Event5_fulltime
+    ${event5_fulltime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event5_fulltime_text}'    'Full Time'
+    ${event5_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event5_score}'    '1 - 1'
+
+SP3_SP4_List_Event_Of_Match3
+    ${json}=    Get File    ${CURDIR}/Template_Files/List_event_data_template3.json
+    #Push events
+    Post    http://rocketor.nexdev.net/Release/RefreshCache
+    Post    ${Push_File}    ${json}
+    Integer    response status    200
+    Output
+    Sleep    5
+    Click Element    ${btn_Scores}
+    #Go to current date to view data
+    Comment    Click Element    ${btn_currentdate}
+    Comment    Sleep    5
+    Wait Until Element Is Visible    accessibility_id=France
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=France
+    Sleep    3
+    Click Element    accessibility_id=INFO
+    Sleep    3
+    #Event1_halftime
+    ${event1_halftime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event1_halftime_text}'    'Half Time'
+    ${event1_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event1_score}'    '0 - 0'
+    #Event2_fulltime
+    ${event2_fulltime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event2_fulltime_text}'    'Full Time'
+    ${event2_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event2_score}'    '0 - 0'
+    #Event3_score_change_for_home_extra_time_1st
+    ${event3_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event3_matchtime}'    '96''
+    ${event3_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event3_score}'    '1 - 0'
+    ${event3_scorer}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event3_scorer}'    'Pacheco, German'
+    ${event3_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event3_ball_icon}'    'images/common/ball.png'
+    #Event4_redcard_extra_time_2nd_injury_time_shown
+    ${event4_matchtime}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Should Be Equal As Strings    '${event4_matchtime}'    '105+2''
+    ${event4_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${event4_player}'    'Charles Booth'
+    ${event4_redcard_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeImage    name
+    Should Be Equal As Strings    '${event4_redcard_icon}'    'images/common/red_card.png'
+    #Event5_afterextratime
+    ${event5_afterextratime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Should Be Equal As Strings    '${event5_afterextratime_text}'    'After Extra Time'
+    ${event5_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Should Be Equal As Strings    '${event5_score}'    '1 - 0'
+
+SP3_SP4_List_Event_Of_Match4
+    Comment    ${json}=    Get File    ${CURDIR}/Template_Files/List_event_data_template4.json
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${json}
+    Comment    Integer    response status    200
+    Comment    Output
+    Comment    Sleep    5
+    Click Element    ${btn_Scores}
+    #Go to current date to view data
+    Click Element    ${btn_currentdate}
+    Capture Page Screenshot
+    Sleep    5
+    ${Kick_Of_Time}=    Get Element Attribute    accessibility_id=MatchDateLbl    value
+    Wait Until Element Is Visible    accessibility_id=Brazil
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=Brazil
+    Sleep    5
+    Click Element    accessibility_id=INFO
+    Sleep    5
+    Comment    #Event1_halftime
+    Comment    ${event1_halftime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Comment    Should Be Equal As Strings    '${event1_halftime_text}'    'Half Time'
+    Comment    ${event1_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[1]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event1_score}'    '0 - 0'
+    Comment    #Event2_fulltime
+    Comment    ${event2_fulltime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Comment    Should Be Equal As Strings    '${event2_fulltime_text}'    'Full Time'
+    Comment    ${event2_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[2]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event2_score}'    '0 - 0'
+    Comment    #Event3_afterextratime
+    Comment    ${event3_afterextratime_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Comment    Should Be Equal As Strings    '${event3_afterextratime_text}'    'After Extra Time'
+    Comment    ${event3_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[3]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event3_score}'    '0 - 0'
+    Comment    #Event4_penalty_shoot_out
+    Comment    ${event4_penalty_shoot_out_text}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText    value
+    Comment    Should Be Equal As Strings    '${event4_penalty_shoot_out_text}'    'Penalty Shoot-Out'
+    Comment    ${event4_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[4]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event4_score}'    '3 - 2'
+    Comment    #Event5_penalty_shoot_out_round1
+    Comment    ${event5_home_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Comment    Should Be Equal As Strings    '${event5_home_player}'    'Walter Bettridge'
+    Comment    ${event5_home_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeImage[2]    name
+    Comment    Should Be Equal As Strings    '${event5_home_ball_icon}'    'images/common/missed_penalty_goal.png'
+    Comment    ${event5_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event5_score}'    '0 - 1'
+    Comment    ${event5_away_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Comment    Should Be Equal As Strings    '${event5_away_player}'    'John Anderson'
+    Comment    ${event5_away_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[5]/XCUIElementTypeOther[1]/XCUIElementTypeImage[1]    name
+    Comment    Should Be Equal As Strings    '${event5_away_ball_icon}'    'images/common/penalty_goal.png'
+    Comment    #Event6_penalty_shoot_out_round2
+    Comment    ${event6_home_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Comment    Should Be Equal As Strings    '${event6_home_player}'    'Nils Middelboe'
+    Comment    ${event6_home_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeImage[2]    name
+    Comment    Should Be Equal As Strings    '${event6_home_ball_icon}'    'images/common/penalty_goal.png'
+    Comment    ${event6_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event6_score}'    '1 - 2'
+    Comment    ${event6_away_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Comment    Should Be Equal As Strings    '${event6_away_player}'    'Chuks Aneke'
+    Comment    ${event6_away_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[6]/XCUIElementTypeOther[1]/XCUIElementTypeImage[1]    name
+    Comment    Should Be Equal As Strings    '${event6_away_ball_icon}'    'images/common/penalty_goal.png'
+    Comment    #Event7_penalty_shoot_out_round3
+    Comment    ${event7_home_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Comment    Should Be Equal As Strings    '${event7_home_player}'    'Jack Harrow'
+    Comment    ${event7_home_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeImage[2]    name
+    Comment    Should Be Equal As Strings    '${event7_home_ball_icon}'    'images/common/penalty_goal.png'
+    Comment    ${event7_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event7_score}'    '2 - 2'
+    Comment    ${event7_away_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Comment    Should Be Equal As Strings    '${event7_away_player}'    'Nicolas Anelka'
+    Comment    ${event7_away_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[7]/XCUIElementTypeOther[1]/XCUIElementTypeImage[1]    name
+    Comment    Should Be Equal As Strings    '${event7_away_ball_icon}'    'images/common/missed_penalty_goal.png'
+    Comment    #Event8_penalty_shoot_out_round4
+    Comment    ${event8_home_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[8]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Comment    Should Be Equal As Strings    '${event8_home_player}'    'Harold Halse'
+    Comment    ${event8_home_player}=    Get Element Attribute    accessibility_id=Harold Halse    value
+    Comment    Should Be Equal As Strings    '${event8_home_player}'    'Harold Halse'
+    Comment    ${event8_home_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[8]/XCUIElementTypeOther[1]/XCUIElementTypeImage[2]    name
+    Comment    Should Be Equal As Strings    '${event8_home_ball_icon}'    'images/common/penalty_goal.png'
+    Comment    ${event8_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[8]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event8_score}'    '3 - 2'
+    Comment    ${event8_away_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[8]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Comment    Should Be Equal As Strings    '${event8_away_player}'    'Martin Angha'
+    Comment    ${event8_away_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[8]/XCUIElementTypeOther[1]/XCUIElementTypeImage[1]    name
+    Comment    Should Be Equal As Strings    '${event8_away_ball_icon}'    'images/common/missed_penalty_goal.png'
+    Comment    #Event9_penalty_shoot_out_round5
+    Comment    ${event9_home_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[9]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[1]    value
+    Comment    Should Be Equal As Strings    '${event9_home_player}'    'Bob McNeil'
+    Comment    ${event9_home_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[9]/XCUIElementTypeOther[1]/XCUIElementTypeImage[2]    name
+    Comment    Should Be Equal As Strings    '${event9_home_ball_icon}'    'images/common/missed_penalty_goal.png'
+    Comment    ${event9_score}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[9]/XCUIElementTypeOther[1]/XCUIElementTypeButton    name
+    Comment    Should Be Equal As Strings    '${event9_score}'    '3 - 2'
+    Comment    ${event9_away_player}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[9]/XCUIElementTypeOther[1]/XCUIElementTypeStaticText[2]    value
+    Comment    Should Be Equal As Strings    '${event9_away_player}'    'George Armstrong'
+    Comment    ${event9_away_ball_icon}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchDetailInfo"]/XCUIElementTypeCell[9]/XCUIElementTypeOther[1]/XCUIElementTypeImage[1]    name
+    Comment    Should Be Equal As Strings    '${event9_away_ball_icon}'    'images/common/missed_penalty_goal.png'
+    Comment    Page Should Contain Element    accessibility_id=Referee:
+    Comment    Page Should Contain Element    accessibility_id=Anthony Taylor
+    Comment    Page Should Contain Element    accessibility_id=Venue:
+    Comment    Page Should Contain Element    //XCUIElementTypeStaticText[@name=" Emirates"]
+    Comment    Page Should Contain Element    accessibility_id=Spectators:
+    Comment    Page Should Contain Element    accessibility_id=1,653,490
+    Comment    Page Should Contain Element    accessibility_id=Kick Off Time:
+    ${Kick_Of_Time}=    Catenate    17:00    ${Kick_Of_Time}
+    ${Kick_Of_Time}=    Catenate    SEPARATOR=    ${Kick_Of_Time}    ,
+    ${current_date}=    Get Current Date    result_format=%Y
+    ${Kick_Of_Time}=    Catenate    ${Kick_Of_Time}    ${current_date}
+    Page Should Contain Element    accessibility_id=${Kick_Of_Time}
+    Comment    Page Should Contain Element    accessibility_id=5:00 28 Jun, 87
 
 *** Keywords ***
