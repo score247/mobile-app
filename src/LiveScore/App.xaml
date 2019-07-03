@@ -42,8 +42,8 @@
             <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>
 
             <!--  Odds  -->
-            <Color x:Key="ASCLiveOddColor">#FC1923</Color>
-            <Color x:Key="DESCLiveOddColor">#3EC28F</Color>
+            <Color x:Key="UpLiveOddColor">#FF222C</Color>
+            <Color x:Key="DownLiveOddColor">#66FF59</Color>
 
             <!--  Tabs  -->
             <Color x:Key="TabColor">#666</Color>
@@ -53,7 +53,7 @@
             <Color x:Key="InactiveLineColor">#0F111C</Color>
 
             <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
-            <Color x:Key="SubTabColor">#2E3245</Color>
+            <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#0F111C</Color>
             <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
 
@@ -399,9 +399,9 @@
 
             <Style x:Key="TableText" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="FlexLayout.Grow" Value="1" />
-                <Setter Property="FlexLayout.Shrink" Value="0" />
                 <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
             </Style>
 
             <Style
@@ -409,15 +409,11 @@
                 BasedOn="{StaticResource TableText}"
                 TargetType="Label">
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
-                <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
-            <Style
-                x:Key="TableBodyText"
-                BasedOn="{StaticResource TableText}"
-                TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+            <Style x:Key="GridTableContainer" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
             </Style>
 
             <!--  Dropdown List  -->
@@ -436,17 +432,13 @@
                 <Setter Property="TitleColor" Value="{StaticResource PrimaryTextColor}" />
             </Style>
 
-            <Style
-                x:Key="DropdownIcon"
-                BasedOn="{StaticResource Icons}"
-                TargetType="Label">
-                <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="WidthRequest" Value="7" />
-                <Setter Property="AbsoluteLayout.LayoutBounds" Value="1,1,.2,1" />
-                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
-                <Setter Property="Text" Value="&#xe91c;" />
-                <Setter Property="TextColor" Value="#fff" />
-                <Setter Property="FontSize" Value="6" />
+            <Style x:Key="DropdownIcon" TargetType="Image">
+                <Setter Property="Source" Value="images/common/arrow_down.png" />
+                <Setter Property="WidthRequest" Value="5" />
+                <Setter Property="HeightRequest" Value="3" />
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.9,0.5,5,3" />
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
+                <Setter Property="InputTransparent" Value="False" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
