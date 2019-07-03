@@ -27,8 +27,6 @@
     <Folder Include="Models\Teams\" />
     <Folder Include="Converters\">
     </Folder>
-    <Folder Include="Enumerations\">
-    </Folder>
     <Folder Include="Views\Templates\DetailTabs\" />
   </ItemGroup>
   <ItemGroup>

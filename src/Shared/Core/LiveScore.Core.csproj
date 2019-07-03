@@ -31,7 +31,6 @@
         <Folder Include="ViewModels\" />
         <Folder Include="ViewResources\" />
         <Folder Include="Converters\" />
-        <Folder Include="Models\" />
         <Folder Include="Models\Settings\" />
         <Folder Include="Events\">
         </Folder>

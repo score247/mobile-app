@@ -20,6 +20,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.ViewModels.DetailOdds;
+    using LiveScore.Soccer.ViewModels.DetailStats;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using LiveScore.Soccer.Views.Templates;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
@@ -72,18 +73,18 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabModels = new Dictionary<string, TabModel>
                 {
-                    {nameof(MatchFunctions.Odds), new TabModel { Template = new OddsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Odds), new TabModel { Template = new OddsTemplate() , ViewModel = new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver) } },
                     {nameof(MatchFunctions.Info), new TabModel {
                         Template = new InfoTemplate() ,
                         ViewModel = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection) }
                     },
-                    {nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Lineups), new TabModel { Template = new LineupsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Stats), new TabModel { Template = new StatsTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailOddsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Lineups), new TabModel { Template = new LineupsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Stats), new TabModel { Template = new StatsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
                 };
 
                 Title = tabModels.First().Key;

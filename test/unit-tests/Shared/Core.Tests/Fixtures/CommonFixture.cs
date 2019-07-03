@@ -4,6 +4,7 @@
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
@@ -27,6 +28,10 @@
             Specimens.Register<IVenue>(() => Specimens.Create<Venue>());
             Specimens.Register<ILeagueCategory>(() => Specimens.Create<LeagueCategory>());
             Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());
+            Specimens.Register<IMatchOdds>(() => Specimens.Create<MatchOdds>());
+            Specimens.Register<IBookmaker>(() => Specimens.Create<Bookmaker>());
+            Specimens.Register<IBetOptionOdds>(() => Specimens.Create<BetOptionOdds>());
+            Specimens.Register<IBetTypeOdds>(() => Specimens.Create<BetTypeOdds>());
         }
 
         public CompareLogic Comparer { get; }
