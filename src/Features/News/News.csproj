@@ -5,12 +5,17 @@
     <RootNamespace>LiveScore.News</RootNamespace>
     <AssemblyName>LiveScore.News</AssemblyName>
     <SonarQubeExclude>True</SonarQubeExclude>
-    <Configurations>Debug;Release;Test</Configurations>
+    <Configurations>Debug;Release;Test;AutoTest</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
     <DebugType></DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+    <CodeAnalysisRuleSet>News.ruleset</CodeAnalysisRuleSet>
+    <DebugType />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

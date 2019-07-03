@@ -7,7 +7,7 @@
 
     <SonarQubeTestProject>True</SonarQubeTestProject>
 
-    <Configurations>Debug;Release;Test</Configurations>
+    <Configurations>Debug;Release;Test;AutoTest</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

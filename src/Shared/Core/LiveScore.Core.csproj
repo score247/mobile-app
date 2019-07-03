@@ -2,10 +2,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Configurations>Debug;Release;Test</Configurations>
+        <Configurations>Debug;Release;Test;AutoTest</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+      <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>

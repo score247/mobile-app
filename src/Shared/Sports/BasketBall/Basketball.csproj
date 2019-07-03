@@ -4,13 +4,16 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>LiveScore.Basketball</RootNamespace>
     <AssemblyName>LiveScore.Basketball</AssemblyName>
-    <Configurations>Debug;Release;Test</Configurations>
+    <Configurations>Debug;Release;Test;AutoTest</Configurations>
   </PropertyGroup>
   <PropertyGroup>
     <DebugType>pdbonly</DebugType>
     <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>Basketball.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
     <CodeAnalysisRuleSet>Basketball.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

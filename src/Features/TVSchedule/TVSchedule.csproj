@@ -5,9 +5,12 @@
     <RootNamespace>LiveScore.TVSchedule</RootNamespace>
     <AssemblyName>LiveScore.TVSchedule</AssemblyName>
     <SonarQubeExclude>True</SonarQubeExclude>
-    <Configurations>Debug;Release;Test</Configurations>
+    <Configurations>Debug;Release;Test;AutoTest</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>TVSchedule.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
     <CodeAnalysisRuleSet>TVSchedule.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

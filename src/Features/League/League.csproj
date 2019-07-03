@@ -5,11 +5,15 @@
         <RootNamespace>LiveScore.League</RootNamespace>
         <AssemblyName>LiveScore.League</AssemblyName>
         <SonarQubeExclude>True</SonarQubeExclude>
-        <Configurations>Debug;Release;Test</Configurations>
+        <Configurations>Debug;Release;Test;AutoTest</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>
         <DebugType></DebugType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+      <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>
+      <DebugType />
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>League.ruleset</CodeAnalysisRuleSet>

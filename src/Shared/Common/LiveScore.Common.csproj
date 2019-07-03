@@ -6,12 +6,17 @@
         </NeutralLanguage>
         <AssemblyName>LiveScore.Common</AssemblyName>
         <RootNamespace>LiveScore.Common</RootNamespace>
-        <Configurations>Debug;Release;Test</Configurations>
+        <Configurations>Debug;Release;Test;AutoTest</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
         <DebugType></DebugType>
        <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+      <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+      <DebugType />
+      <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>

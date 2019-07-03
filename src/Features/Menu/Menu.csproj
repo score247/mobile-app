@@ -5,11 +5,15 @@
         <RootNamespace>LiveScore.Menu</RootNamespace>
         <AssemblyName>LiveScore.Menu</AssemblyName>
         <SonarQubeExclude>True</SonarQubeExclude>
-        <Configurations>Debug;Release;Test</Configurations>
+        <Configurations>Debug;Release;Test;AutoTest</Configurations>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
         <DebugType></DebugType>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+      <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
+      <DebugType />
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <CodeAnalysisRuleSet>Setting.ruleset</CodeAnalysisRuleSet>
