@@ -41,6 +41,7 @@
 
             app.Resources["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout));
             app.Resources["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout));
+            app.Resources["FlexLayoutAlignCenter"] = new Style(typeof(FlexLayout));
 
             app.Resources["CenterActivityIndicator"] = new Style(typeof(ActivityIndicator));
         }
