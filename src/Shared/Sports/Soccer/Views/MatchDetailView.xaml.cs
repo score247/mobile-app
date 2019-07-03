@@ -14,12 +14,17 @@
             {
                 if (scrollY <= TabStrip.Y)
                 {
-                    await ScrollView.ScrollToAsync(0, scrollY > 20 ? scrollY : 0, false);
+                    await ScrollView.ScrollToAsync(0, scrollY, false);
                 }
                 else
                 {
                     await ScrollView.ScrollToAsync(0, TabStrip.Y, false);
                 }
+            });
+
+            MessagingCenter.Subscribe<string>("MatchDetail", "OnScrollingBack", async (_) =>
+            {
+                await ScrollView.ScrollToAsync(0, 0, false);
             });
         }
     }

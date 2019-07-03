@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using LiveScore.Core.Controls.MatchDetail;
 using LiveScore.iOS.Renderers;
 using UIKit;
@@ -28,9 +29,16 @@ namespace LiveScore.iOS.Renderers
 
         private void TvDelegate_OnScrolled(object sender, EventArgs e)
         {
-            if (Control.ContentOffset.Y > 0)
+            var scrollY = Control.ContentOffset.Y;
+
+            if (scrollY > 0)
             {
-                MatchDetailListView.OverScrollUpdate(Source, Control.ContentOffset.Y);
+                MatchDetailListView.OnScrolling(scrollY);
+            }
+
+            if (scrollY <= 0)
+            {
+                MatchDetailListView.OnScrollingBack();
             }
         }
     }

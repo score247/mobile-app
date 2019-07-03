@@ -10,9 +10,14 @@
         {
         }
 
-        public static void OverScrollUpdate(object sender, double offset)
+        public static void OnScrolling(double offset)
         {
             MessagingCenter.Send("MatchDetail", "OnScrolling", offset);
+        }
+
+        public static void OnScrollingBack()
+        {
+            MessagingCenter.Send("MatchDetail", "OnScrollingBack");
         }
     }
 }

@@ -37,11 +37,11 @@
             ItemsSource="{Binding InfoItemViewModels}"
             RefreshCommand="{Binding RefreshCommand}"
             SeparatorColor="Transparent"
-            SeparatorVisibility="None">
+            RowHeight="43">
             <matchDetail:MatchDetailListView.Footer>
                 <StackLayout
                     BackgroundColor="{StaticResource SecondColor}"
-                    HeightRequest="300"
+                    HeightRequest="400"
                     IsVisible="{Binding IsNotLoading}">
                     <FlexLayout Style="{StaticResource Group}">
                         <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
