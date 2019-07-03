@@ -195,6 +195,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
+<MtouchFloat32>true</MtouchFloat32>
+<MtouchArch>i386, x86_64</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutoTest|iPhone'">
     <OutputPath>bin\iPhone\AutoTest\</OutputPath>
