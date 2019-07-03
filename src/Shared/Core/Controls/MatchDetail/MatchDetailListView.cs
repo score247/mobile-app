@@ -1,0 +1,18 @@
+﻿namespace LiveScore.Core.Controls.MatchDetail
+{
+    using Xamarin.Forms;
+
+    public class MatchDetailListView : ListView
+    {
+        public delegate void OverScrollUpdateEvent(object sender, float offset);
+
+        public MatchDetailListView() : base(ListViewCachingStrategy.RecycleElement)
+        {
+        }
+
+        public static void OverScrollUpdate(object sender, double offset)
+        {
+            MessagingCenter.Send("MatchDetail", "OnScrolling", offset);
+        }
+    }
+}

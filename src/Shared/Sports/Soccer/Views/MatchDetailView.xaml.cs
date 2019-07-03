@@ -9,6 +9,18 @@
         public MatchDetailView()
         {
             InitializeComponent();
+
+            MessagingCenter.Subscribe<string, double>("MatchDetail", "OnScrolling", async (_, scrollY) =>
+            {
+                if (scrollY <= TabStrip.Y)
+                {
+                    await ScrollView.ScrollToAsync(0, scrollY > 20 ? scrollY : 0, false);
+                }
+                else
+                {
+                    await ScrollView.ScrollToAsync(0, TabStrip.Y, false);
+                }
+            });
         }
     }
 }
