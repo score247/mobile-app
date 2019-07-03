@@ -57,6 +57,8 @@ namespace LiveScore
             HotReloader.Current.Start(this);
 #endif
 
+            Xamarin.Forms.DataGrid.DataGridComponent.Init();
+
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();

@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+    xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
     x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -40,7 +41,33 @@
                 Padding="1"
                 BackgroundColor="{StaticResource LineColor}"
                 Style="{StaticResource TableContainer}">
-                <Grid
+                
+                <dg:DataGrid ItemsSource="{Binding BetTypeOdds}" SelectionEnabled="True" 
+                               RowHeight="70" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#E0E6F8">
+                  <dg:DataGrid.HeaderFontSize>
+                     <OnIdiom  x:TypeArguments="x:Double">
+                      <OnIdiom.Tablet>15</OnIdiom.Tablet>
+                      <OnIdiom.Phone>13</OnIdiom.Phone>
+                    </OnIdiom>
+                  </dg:DataGrid.HeaderFontSize>
+                  <dg:DataGrid.Columns>
+                        <dg:DataGridColumn Title="Bookmaker" PropertyName="Bookmaker" Width="100" />
+                        <dg:DataGridColumn Title="1" PropertyName="HomeLiveOdds" Width="2*"/>
+                        <dg:DataGridColumn Title="X" PropertyName="DrawLiveOdds" Width="0.95*"/>
+                        <dg:DataGridColumn Title="2" PropertyName="AwayLiveOdds"  Width="1*"/>
+                        <dg:DataGridColumn Title="1" PropertyName="HomeOpeningOdds"/>
+                        <dg:DataGridColumn Title="X" PropertyName="DrawOpeningOdds" />
+                        <dg:DataGridColumn Title="2" PropertyName="AwayOpeningOdds" Width="0.7*" />
+                  </dg:DataGrid.Columns>
+                  <dg:DataGrid.RowsBackgroundColorPalette>
+                    <dg:PaletteCollection>
+                      <Color>#F2F2F2</Color>
+                      <Color>#FFFF00</Color>
+                    </dg:PaletteCollection>
+                  </dg:DataGrid.RowsBackgroundColorPalette>
+                </dg:DataGrid>
+                
+               <!-- <Grid
                     ColumnSpacing="1"
                     RowSpacing="1"
                     Style="{StaticResource GridTableContainer}">
@@ -60,7 +87,7 @@
                         <RowDefinition Height="32" />
                     </Grid.RowDefinitions>
 
-                    <!--  Header  -->
+                   
                     <Label
                         Grid.Row="0"
                         Grid.RowSpan="2"
@@ -111,7 +138,7 @@
                         Style="{StaticResource TableHeaderText}"
                         Text="2" />
 
-                    <!--  Row 1  -->
+                    
                     <FlexLayout
                         Grid.Row="2"
                         Grid.Column="0"
@@ -155,7 +182,7 @@
                         Style="{StaticResource TableBodyOddsText}"
                         Text="1.41" />
 
-                    <!--  Row 2  -->
+                    
                     <FlexLayout
                         Grid.Row="3"
                         Grid.Column="0"
@@ -198,7 +225,7 @@
                         Grid.Column="6"
                         Style="{StaticResource TableBodyOddsText}"
                         Text="1.42" />
-                </Grid>
+                </Grid>-->
 
                 <!--<FlexLayout Style="{StaticResource TableRow}">
                     <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
