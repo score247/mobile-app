@@ -5,6 +5,7 @@
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -13,22 +14,22 @@
     {
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
         {
-            { BetType.OneXTwo.ToString(), typeof(OneXTwoViewModel) },
+            { BetTypeEnum.OneXTwo.ToString(), typeof(OneXTwoViewModel) },
         };
 
         private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
         {
-            { BetType.OneXTwo.ToString(), new OneXTwoItemTemplate() },
+            { BetTypeEnum.OneXTwo.ToString(), new OneXTwoItemTemplate() },
         };
 
         public IBetTypeOdds BetTypeOdds { get; }
 
-        public BetType BetType { get; }
+        public BetTypeEnum BetType { get; }
 
         public string type { get; }
 
         public BaseItemViewModel(
-            BetType betType,
+            BetTypeEnum betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)

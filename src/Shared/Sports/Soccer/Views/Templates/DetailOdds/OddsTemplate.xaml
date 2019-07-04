@@ -16,6 +16,13 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <StackLayout>
+        <ActivityIndicator
+            Margin="20"
+            IsEnabled="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            Style="{StaticResource CenterActivityIndicator}" />
+        
         <FlexLayout Style="{StaticResource TopInfo}">
             <StackLayout FlexLayout.Grow="1">
                 <Frame Style="{StaticResource SubTabContainer}">
@@ -48,7 +55,9 @@
                     HasUnevenRows="true"
                     ItemsSource="{Binding BetTypeOdds}"
                     SeparatorVisibility="None"
-                    ItemTemplate="{StaticResource oddsItemTemplateSelector}">
+                    IsRefreshing="{Binding IsRefreshing}"
+                    ItemTemplate="{StaticResource oddsItemTemplateSelector}"
+                    RefreshCommand="{Binding RefreshCommand}">
                 <matchDetail:MatchDetailListView.Header>
                     <Grid ColumnSpacing="1" RowSpacing="1" Style="{StaticResource GridTableContainer}">
                         <Grid.ColumnDefinitions>
@@ -64,7 +73,7 @@
                             <RowDefinition Height="32" />
                             <RowDefinition Height="32" />
                         </Grid.RowDefinitions>
-                        <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource TableHeaderText}" Text="Bookmarker" />
+                        <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource TableHeaderText}" Text="Bookmaker" />
                         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Live Odds" />
                         <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Opening Odds" />
                         <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TableHeaderText}" Text="1" />

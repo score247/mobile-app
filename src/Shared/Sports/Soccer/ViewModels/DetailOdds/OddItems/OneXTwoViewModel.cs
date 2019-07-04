@@ -2,7 +2,6 @@
 {
     using System.Linq;
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;
     using Prism.Navigation;
@@ -18,7 +17,7 @@
         public BetOptionOdds DrawOdds { get; set; }
 
         public OneXTwoViewModel(
-            BetType betType,
+            BetTypeEnum betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)

@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Basketball", "src\Shared\Sports\BasketBall\Basketball.csproj", "{6E998903-BF90-4C31-A82E-986164F34B19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soccer", "src\Shared\Sports\Soccer\Soccer.csproj", "{1337FDBC-9BD3-4862-8F53-6001EEB0EAF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer", "src\Shared\Sports\Soccer\Soccer.csproj", "{1337FDBC-9BD3-4862-8F53-6001EEB0EAF3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Core", "src\Shared\Core\LiveScore.Core.csproj", "{68150DDE-7169-4682-BDC6-91927456D04F}"
 EndProject

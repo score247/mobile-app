@@ -7,18 +7,13 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using Prism.Navigation;
-
-    public enum BetType 
-    { 
-        OneXTwo = 1,
-        AsianHDP = 2,
-        OverUnder = 3
-    }
 
     internal class DetailOddsViewModel : ViewModelBase, IDisposable
     {
@@ -38,22 +33,26 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
 
+        public DelegateAsyncCommand RefreshCommand { get; }
+
         public DetailOddsViewModel(
             string matchId,
             INavigationService navigationService, 
             IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
-            this.matchId = matchId;
+            this.matchId ="sr:match:17457493";
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
+
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds((int)BetTypeEnum.OneXTwo, false, true));
         }
 
         protected override async void Initialize()
         {
             try
             {               
-                await LoadOdds((int) BetType.OneXTwo);
+                await LoadOdds((int) BetTypeEnum.OneXTwo);
             }
             catch (Exception ex)
             {
@@ -70,7 +69,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             if(odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                   new BaseItemViewModel(BetType.OneXTwo ,t, NavigationService, DependencyResolver)
+                   new BaseItemViewModel(BetTypeEnum.OneXTwo ,t, NavigationService, DependencyResolver)
                    .CreateInstance()));
 
                 HasData = true;
