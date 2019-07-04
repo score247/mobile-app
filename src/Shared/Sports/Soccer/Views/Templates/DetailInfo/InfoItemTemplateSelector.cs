@@ -3,7 +3,7 @@
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using Xamarin.Forms;
 
-    public class MatchDetailInfoItemTemplateSelector : DataTemplateSelector
+    public class InfoItemTemplateSelector : DataTemplateSelector
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {

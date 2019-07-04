@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Soccer.Views.Templates
+﻿namespace LiveScore.Soccer.Views.Templates.DetailOdds
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

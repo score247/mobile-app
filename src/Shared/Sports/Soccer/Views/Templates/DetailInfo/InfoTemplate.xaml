@@ -15,7 +15,7 @@
                 <resources:MatchDetailInfoViewResource />
             </ResourceDictionary.MergedDictionaries>
             <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
-            <templateSelectors:MatchDetailInfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
+            <templateSelectors:InfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
         </ResourceDictionary>
     </ContentView.Resources>
     <StackLayout>

@@ -28,8 +28,6 @@
     <Folder Include="Converters\">
     </Folder>
     <Folder Include="Views\Templates\DetailTabs\" />
-    <Folder Include="Views\Templates\Odds\" />
-    <Folder Include="Views\Templates\Odds\OddsItems\" />
     <Folder Include="ViewModels\DetailOdds\OddItems\" />
     <Folder Include="Models\Odds\" />
   </ItemGroup>
@@ -78,7 +76,7 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailTabs\OddsTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\DetailOdds\OddsTemplate.xaml.cs">
       <DependentUpon>OddsTemplate.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

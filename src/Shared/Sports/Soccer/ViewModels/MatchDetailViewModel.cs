@@ -23,6 +23,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.ViewModels.DetailStats;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using LiveScore.Soccer.Views.Templates;
+    using LiveScore.Soccer.Views.Templates.DetailOdds;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;

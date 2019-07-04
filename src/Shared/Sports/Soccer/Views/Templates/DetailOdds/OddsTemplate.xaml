@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentView x:Class="LiveScore.Soccer.Views.Templates.OddsTemplate" 
-             xmlns="http://xamarin.com/schemas/2014/forms" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources" 
-             xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.Odds"
+<ContentView x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
+             xmlns:matchDetail="clr-namespace:LiveScore.Core.Controls.MatchDetail;assembly=LiveScore.Core"
              x:Name="view">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -36,49 +37,46 @@
                 <Image Style="{StaticResource DropdownIcon}" />
             </AbsoluteLayout>
         </FlexLayout>
-        
-            <StackLayout IsVisible="{Binding HasData}" Padding="1" BackgroundColor="{StaticResource LineColor}" Style="{StaticResource TableContainer}">
-                <ListView 
-                    IsVisible="{Binding IsNotLoading}" 
-                    AutomationId="MatchOdds" 
-                    AutomationProperties.IsInAccessibleTree="False" 
-                    BackgroundColor="{StaticResource SecondColor}" 
-                    CachingStrategy="RecycleElement" 
-                    IsPullToRefreshEnabled="true" 
+
+        <StackLayout IsVisible="{Binding HasData}" Padding="1" BackgroundColor="{StaticResource LineColor}" Style="{StaticResource TableContainer}">
+            <matchDetail:MatchDetailListView
+                    IsVisible="{Binding IsNotLoading}"
+                    AutomationId="MatchOdds"
+                    AutomationProperties.IsInAccessibleTree="False"
+                    BackgroundColor="{StaticResource SecondColor}"
+                    IsPullToRefreshEnabled="true"
                     HasUnevenRows="true"
-                    ItemsSource="{Binding BetTypeOdds}" 
+                    ItemsSource="{Binding BetTypeOdds}"
                     SeparatorVisibility="None"
-                    ItemTemplate="{StaticResource oddsItemTemplateSelector}"
-                    >
-                    <ListView.Header>
-                        <Grid ColumnSpacing="1" RowSpacing="1" Style="{StaticResource GridTableContainer}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="3*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="1*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="32" />
-                                <RowDefinition Height="32" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource TableHeaderText}" Text="Bookmarker" />
-                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Live Odds" />
-                            <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Opening Odds" />
-                            <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TableHeaderText}" Text="1" />
-                            <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource TableHeaderText}" Text="X" />
-                            <Label Grid.Row="1" Grid.Column="3" Style="{StaticResource TableHeaderText}" Text="2" />
-                            <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource TableHeaderText}" Text="1" />
-                            <Label Grid.Row="1" Grid.Column="5" Style="{StaticResource TableHeaderText}" Text="X" />
-                            <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource TableHeaderText}" Text="2" />
-                        </Grid>
-                        
-                    </ListView.Header>
-                </ListView>
-                <!-- <Grid
+                    ItemTemplate="{StaticResource oddsItemTemplateSelector}">
+                <matchDetail:MatchDetailListView.Header>
+                    <Grid ColumnSpacing="1" RowSpacing="1" Style="{StaticResource GridTableContainer}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="32" />
+                            <RowDefinition Height="32" />
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource TableHeaderText}" Text="Bookmarker" />
+                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Live Odds" />
+                        <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="3" Style="{StaticResource TableHeaderText}" Text="Opening Odds" />
+                        <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource TableHeaderText}" Text="1" />
+                        <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource TableHeaderText}" Text="X" />
+                        <Label Grid.Row="1" Grid.Column="3" Style="{StaticResource TableHeaderText}" Text="2" />
+                        <Label Grid.Row="1" Grid.Column="4" Style="{StaticResource TableHeaderText}" Text="1" />
+                        <Label Grid.Row="1" Grid.Column="5" Style="{StaticResource TableHeaderText}" Text="X" />
+                        <Label Grid.Row="1" Grid.Column="6" Style="{StaticResource TableHeaderText}" Text="2" />
+                    </Grid>
+                </matchDetail:MatchDetailListView.Header>
+            </matchDetail:MatchDetailListView>
+            <!-- <Grid
                     ColumnSpacing="1"
                     RowSpacing="1"
                     Style="{StaticResource GridTableContainer}">
@@ -98,7 +96,6 @@
                         <RowDefinition Height="32" />
                     </Grid.RowDefinitions>
 
-                   
                     <Label
                         Grid.Row="0"
                         Grid.RowSpan="2"
@@ -149,7 +146,6 @@
                         Style="{StaticResource TableHeaderText}"
                         Text="2" />
 
-                    
                     <FlexLayout
                         Grid.Row="2"
                         Grid.Column="0"
@@ -159,7 +155,6 @@
                         <Label Style="{StaticResource TableText}" Text="Macauslot" />
                         <Image Source="images/common/bookmarker_detail.png" />
                     </FlexLayout>
-
 
                     <Label
                         Grid.Row="2"
@@ -193,7 +188,6 @@
                         Style="{StaticResource TableBodyOddsText}"
                         Text="1.41" />
 
-                    
                     <FlexLayout
                         Grid.Row="3"
                         Grid.Column="0"
@@ -203,7 +197,6 @@
                         <Label Style="{StaticResource TableText}" Text="Macauslot" />
                         <Image Source="images/common/bookmarker_detail.png" />
                     </FlexLayout>
-
 
                     <Label
                         Grid.Row="3"
@@ -237,7 +230,7 @@
                         Style="{StaticResource TableBodyOddsText}"
                         Text="1.42" />
                 </Grid>-->
-                <!--<FlexLayout Style="{StaticResource TableRow}">
+            <!--<FlexLayout Style="{StaticResource TableRow}">
                     <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
                         <Label Style="{StaticResource BookmarkerName}" Text="Macauslot" />
                         <Label Style="{StaticResource ChartIcon}" />
@@ -464,11 +457,9 @@
                 <ContentView>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                 </ContentView>-->
-            </StackLayout>
+        </StackLayout>
         <StackLayout IsVisible="{Binding NoData}">
             <Label Style="{StaticResource TableBodyOddsText}" Text="No data yet..."></Label>
         </StackLayout>
-            
-        
     </StackLayout>
 </ContentView>

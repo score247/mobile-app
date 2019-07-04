@@ -19,6 +19,7 @@
 
             app.Resources["FunctionGroupHeight"] = 10;
             app.Resources["TabsHeight"] = 12;
+            app.Resources["SubTabsHeight"] = 12;
 
             app.Resources["FunctionGroupColor"] = Color.FromHex("#F24822");
             app.Resources["PrimaryColor"] = Color.FromHex("#F24822");
@@ -35,15 +36,28 @@
             app.Resources["ActiveTabColor"] = Color.FromHex("#1D2133");
             app.Resources["ActiveLineColor"] = Color.FromHex("#1D2133");
             app.Resources["InactiveLineColor"] = Color.FromHex("#1D2133");
+            app.Resources["SubTabContainerBgColor"] = Color.FromHex("#1D2133");
+            app.Resources["SubTabColor"] = Color.FromHex("#1D2133");
+            app.Resources["SubTabBgColor"] = Color.FromHex("#1D2133");
+            app.Resources["ActiveSubTabColor"] = Color.FromHex("#1D2133");
+            app.Resources["UpLiveOddColor"] = Color.FromHex("#1D2133");
+            app.Resources["DownLiveOddColor"] = Color.FromHex("#1D2133");
 
             app.Resources["LiveIcon"] = new Style(typeof(Label));
+            app.Resources["DropdownIcon"] = new Style(typeof(Label));
             app.Resources["WinnerInfoIcon"] = new Style(typeof(Image));
+            app.Resources["TableText"] = new Style(typeof(Label));
+            app.Resources["TableHeaderText"] = new Style(typeof(Label));
 
             app.Resources["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout));
             app.Resources["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout));
             app.Resources["FlexLayoutAlignCenter"] = new Style(typeof(FlexLayout));
+            app.Resources["DropdownListBox"] = new Style(typeof(AbsoluteLayout));
+            app.Resources["TableContainer"] = new Style(typeof(StackLayout));
+            app.Resources["GridTableContainer"] = new Style(typeof(Grid));
 
             app.Resources["CenterActivityIndicator"] = new Style(typeof(ActivityIndicator));
+            app.Resources["DropdownList"] = new Style(typeof(Picker));
         }
     }
 }

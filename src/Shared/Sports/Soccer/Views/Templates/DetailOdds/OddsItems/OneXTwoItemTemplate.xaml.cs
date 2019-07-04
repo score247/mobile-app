@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using Xamarin.Forms;
-
-namespace LiveScore.Soccer.Views.Templates.OddsItems
+﻿namespace LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems
 {
+    using Xamarin.Forms;
+
     public partial class OneXTwoItemTemplate : DataTemplate
     {
         public OneXTwoItemTemplate()
