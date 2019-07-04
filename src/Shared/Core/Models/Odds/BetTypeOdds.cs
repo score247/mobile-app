@@ -3,15 +3,15 @@
     using System.Collections.Generic;
     public interface IBetTypeOdds: IEntity<int, string>
     {
-        IBookmaker Bookmaker { get; }
+        Bookmaker Bookmaker { get; }
 
-        IEnumerable<IBetOptionOdds> BetOptions { get; set; }
+        IEnumerable<BetOptionOdds> BetOptions { get; set; }
     }
 
     public class BetTypeOdds : Entity<int, string>, IBetTypeOdds
     {
-        public IBookmaker Bookmaker { get; set; }
+        public Bookmaker Bookmaker { get; set; }
 
-        public IEnumerable<IBetOptionOdds> BetOptions { get; set; }
+        public IEnumerable<BetOptionOdds> BetOptions { get; set; }
     }
 }

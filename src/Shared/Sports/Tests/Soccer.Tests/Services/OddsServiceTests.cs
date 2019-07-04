@@ -3,10 +3,9 @@
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.Services;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
@@ -38,11 +37,9 @@
         public async Task GetOdds_WhenCall_InjectCacheService()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
-           
 
             // Act
-            await oddsService.GetOdds(settings, "sr:match:1", 1);
+            await oddsService.GetOdds("sr:match:1", 1);
 
             // Assert
             await mockCache.Received(1)
@@ -57,7 +54,6 @@
         public async Task GetOdds_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");            
             mockCache.GetAndFetchLatestValue(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOdds>>>(),
@@ -66,7 +62,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var odds = await oddsService.GetOdds(settings, "sr:match:1", 1);
+            var odds = await oddsService.GetOdds("sr:match:1", 1);
 
             // Assert
             mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());

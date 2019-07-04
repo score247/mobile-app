@@ -1,21 +1,8 @@
 ﻿namespace LiveScore.Core.Models.Odds
 {
     using LiveScore.Core.Enumerations;
-
-    public interface IBetOptionOdds : IEntity<int, string>
-    {
-        string Type { get;  }
-
-        decimal LiveOdds { get; }
-
-        decimal OpeningOdds { get; }
-
-        string OptionValue { get; }
-
-        OddsTrend OddsTrend { get; }
-    }
-
-    public class BetOptionOdds : Entity<int, string>, IBetOptionOdds
+   
+    public class BetOptionOdds : Entity<int, string>
     {
         public string Type { get; set; }
 

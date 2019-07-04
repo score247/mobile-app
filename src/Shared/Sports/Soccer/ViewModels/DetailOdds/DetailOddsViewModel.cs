@@ -8,21 +8,19 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using Prism.Navigation;
-    using PropertyChanged;
 
     public enum BetType 
     { 
-        OneXTwo,
-        AsianHDP,
-        OverUnder
+        OneXTwo = 1,
+        AsianHDP = 2,
+        OverUnder = 3
     }
 
-    internal class DetailOddsViewModel : ViewModelBase
+    internal class DetailOddsViewModel : ViewModelBase, IDisposable
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
@@ -33,7 +31,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public bool IsNotLoading { get; private set; }
 
-        public ObservableCollection<BetTypeOddItemViewModel> BetTypeOdds { get; private set; }
+        public bool HasData { get; private set; }
+        public bool NoData { get; private set; }
+
+        private bool disposedValue;
+
+        public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
 
         public DetailOddsViewModel(
             string matchId,
@@ -49,9 +52,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         protected override async void Initialize()
         {
             try
-            {
-                BetTypeOdds = new ObservableCollection<BetTypeOddItemViewModel>();
-                await LoadOdds(1, true, true);
+            {               
+                await LoadOdds((int) BetType.OneXTwo);
             }
             catch (Exception ex)
             {
@@ -63,56 +65,42 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             IsLoading = showLoadingIndicator;
 
-            var odds = await oddsService.GetOdds(SettingsService.UserSettings, matchId, bettypeId, isRefresh);
+            var odds = await oddsService.GetOdds(matchId, bettypeId, isRefresh);
 
-            if(odds.BetTypeOddsList.Any())
+            if(odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
-                foreach(var betType in odds.BetTypeOddsList)
-                {
-                    BetTypeOdds.Add(new BetTypeOddItemViewModel 
-                    { 
-                        Bookmaker = betType.Bookmaker.Name,
-                        HomeLiveOdds = betType.BetOptions.First(x => x.Type == "home").LiveOdds,
-                        HomeLiveTrend = betType.BetOptions.First(x => x.Type == "home").OddsTrend,
-                        HomeOpeningOdds = betType.BetOptions.First(x => x.Type == "home").OpeningOdds,
-                        DrawLiveOdds = betType.BetOptions.First(x => x.Type == "draw").LiveOdds,
-                        DrawLiveTrend = betType.BetOptions.First(x => x.Type == "draw").OddsTrend,
-                        DrawOpeningOdds = betType.BetOptions.First(x => x.Type == "draw").OpeningOdds,
-                        AwayLiveOdds = betType.BetOptions.First(x => x.Type == "away").LiveOdds,
-                        AwayLiveTrend = betType.BetOptions.First(x => x.Type == "away").OddsTrend,
-                        AwayOpeningOdds = betType.BetOptions.First(x => x.Type == "away").OpeningOdds,
+                BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
+                   new BaseItemViewModel(BetType.OneXTwo ,t, NavigationService, DependencyResolver)
+                   .CreateInstance()));
 
-                    });
-                }
+                HasData = true;
+                NoData = !HasData;
+            }
+            else 
+            {
+                HasData = false;
+                NoData = !HasData;
             }
 
             IsLoading = false;
             IsNotLoading = true;
             IsRefreshing = false;
         }
-    }
 
-    [AddINotifyPropertyChangedInterface]
-    public class BetTypeOddItemViewModel 
-    {
-        public string Bookmaker { get; set; }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposedValue)
+            {
+                // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
+                disposedValue = true;
+            }
+        }
 
-        public decimal HomeLiveOdds { get; set; }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-        public OddsTrend HomeLiveTrend { get; set; }
-
-        public decimal DrawLiveOdds { get; set; }
-
-        public OddsTrend DrawLiveTrend { get; set; }
-
-        public decimal AwayLiveOdds { get; set; }
-
-        public OddsTrend AwayLiveTrend { get; set; }
-
-        public decimal HomeOpeningOdds { get; set; }
-
-        public decimal DrawOpeningOdds { get; set; }
-
-        public decimal AwayOpeningOdds { get; set; }
     }
 }

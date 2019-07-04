@@ -28,6 +28,10 @@
     <Folder Include="Converters\">
     </Folder>
     <Folder Include="Views\Templates\DetailTabs\" />
+    <Folder Include="Views\Templates\Odds\" />
+    <Folder Include="Views\Templates\Odds\OddsItems\" />
+    <Folder Include="ViewModels\DetailOdds\OddItems\" />
+    <Folder Include="Models\Odds\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -87,7 +91,6 @@
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />
     <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
     <PackageReference Include="Refit" Version="4.6.107" />
-    <PackageReference Include="Xamarin.Forms.DataGrid" Version="3.1.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />

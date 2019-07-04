@@ -9,12 +9,13 @@
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Odds;
     using Refit;
 
     public interface ISoccerOddsApi
     {
-        [Get("/Odds/Get?sportId={sportId}&matchId={matchId}&betTypeId={betTypeId}")]
-        Task<MatchOdds> GetOdds(string sportId, string matchId, int betTypeId);
+        [Get("/soccer/Odds/Get?matchId={matchId}&betTypeId={betTypeId}")]
+        Task<MatchOdds> GetOdds(string matchId, int betTypeId);
     }
 
     public class OddsService : BaseService, IOddsService
@@ -32,7 +33,7 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(UserSettings settings, string matchId, int betTypeId, bool forceFetchNewData = false)
+        public async Task<IMatchOdds> GetOdds(string matchId, int betTypeId, bool forceFetchNewData = false)
         {
             try
             {
@@ -41,8 +42,7 @@
 
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
-                        //() => GetOddsFromApi(settings.SportId, matchId, betTypeId),
-                        () => GetDummyOdds(settings.SportId, matchId, betTypeId),
+                        () => GetOddsFromApi(matchId, betTypeId),
                         (offset) =>
                         {
                             if (forceFetchNewData)
@@ -63,36 +63,10 @@
             }
         }
 
-        private async Task<MatchOdds> GetOddsFromApi(string sportId, string matchId, int betTypeId)
+        private async Task<MatchOdds> GetOddsFromApi(string matchId, int betTypeId)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(sportId, matchId, betTypeId)
+               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(matchId, betTypeId)
            );
-
-        private async Task<MatchOdds> GetDummyOdds(string sportId, string matchId, int betTypeId)
-           => await apiService.Execute
-           (
-               () => Task.FromResult(DummyData(matchId))
-           );
-
-        private MatchOdds DummyData(string matchId)
-        => new MatchOdds
-        {
-            MatchId = matchId,
-            BetTypeOddsList = new List<BetTypeOdds>
-            {
-                new BetTypeOdds { Id = 1, Name = "1x2", Bookmaker = new Bookmaker{ Id = "1", Name = "Bookmaker 01" }, BetOptions = DummyBetOptionOdds() },
-                new BetTypeOdds { Id = 1, Name = "1x2", Bookmaker = new Bookmaker{ Id = "2", Name = "Bookmaker 02" }, BetOptions = DummyBetOptionOdds() },
-                new BetTypeOdds { Id = 1, Name = "1x2", Bookmaker = new Bookmaker{ Id = "3", Name = "Bookmaker 03" }, BetOptions = DummyBetOptionOdds() }
-            }
-        };
-
-        private List<BetOptionOdds> DummyBetOptionOdds()
-         => new List<BetOptionOdds>
-         {
-             new BetOptionOdds{ Type = "home", OpeningOdds = 5.4m, LiveOdds = 5.4m, OddsTrend = OddsTrend.Neutral },
-             new BetOptionOdds{ Type = "away", OpeningOdds = 5.3m, LiveOdds = 5.4m, OddsTrend = OddsTrend.Up },
-             new BetOptionOdds{ Type = "draw", OpeningOdds = 5.0m, LiveOdds = 4.8m, OddsTrend = OddsTrend.Down }
-         };
     }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate 
+    x:Class="LiveScore.Soccer.Views.Templates.OddsItems.OneXTwoItemTemplate" 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
+    <ViewCell>
+        <Grid ColumnSpacing="1" RowSpacing="1" Style="{StaticResource GridTableContainer}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailOddsViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <FlexLayout Grid.Row="0" Grid.Column="0" Padding="8,0" BackgroundColor="{StaticResource SecondColor}" JustifyContent="SpaceBetween">
+                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}" />
+                <Image Source="images/common/bookmarker_detail.png" />
+            </FlexLayout>
+            <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource MatchDetailOddsDownOddText}" Text="{Binding HomeLiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawLiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="3" Style="{StaticResource MatchDetailOddsUpOddText}" Text="{Binding AwayLiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="4" Style="{StaticResource TableBodyOddsText}" Text="{Binding HomeOpeningOdds}" />
+            <Label Grid.Row="0" Grid.Column="5" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawOpeningOdds}" />
+            <Label Grid.Row="0" Grid.Column="6" Style="{StaticResource TableBodyOddsText}" Text="{Binding AwayOpeningOdds}" />
+        </Grid>
+    </ViewCell>
+</DataTemplate>

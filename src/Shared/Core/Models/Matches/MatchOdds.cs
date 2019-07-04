@@ -9,11 +9,4 @@
 
         IEnumerable<IBetTypeOdds> BetTypeOddsList { get; }
     }
-
-    public class MatchOdds : IMatchOdds
-    {
-        public string MatchId { get; set; }
-
-        public IEnumerable<IBetTypeOdds> BetTypeOddsList { get; set; }
-    }
 }
