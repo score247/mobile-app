@@ -30,12 +30,12 @@
                 <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}" />
                 <Image Source="images/common/bookmarker_detail.png" />
             </FlexLayout>
-            <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource MatchDetailOddsDownOddText}" Text="{Binding HomeLiveOdds}" />
-            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawLiveOdds}" />
-            <Label Grid.Row="0" Grid.Column="3" Style="{StaticResource MatchDetailOddsUpOddText}" Text="{Binding AwayLiveOdds}" />
-            <Label Grid.Row="0" Grid.Column="4" Style="{StaticResource TableBodyOddsText}" Text="{Binding HomeOpeningOdds}" />
-            <Label Grid.Row="0" Grid.Column="5" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawOpeningOdds}" />
-            <Label Grid.Row="0" Grid.Column="6" Style="{StaticResource TableBodyOddsText}" Text="{Binding AwayOpeningOdds}" />
+            <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource MatchDetailOddsDownOddText}" Text="{Binding HomeOdds.LiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawOdds.LiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="3" Style="{StaticResource MatchDetailOddsUpOddText}" Text="{Binding AwayOdds.LiveOdds}" />
+            <Label Grid.Row="0" Grid.Column="4" Style="{StaticResource TableBodyOddsText}" Text="{Binding HomeOdds.OpeningOdds}" />
+            <Label Grid.Row="0" Grid.Column="5" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawOdds.OpeningOdds}" />
+            <Label Grid.Row="0" Grid.Column="6" Style="{StaticResource TableBodyOddsText}" Text="{Binding AwayOdds.OpeningOdds}" />
         </Grid>
     </ViewCell>
 </DataTemplate>
