@@ -30,16 +30,7 @@ namespace LiveScore.iOS.Renderers
         private void TvDelegate_OnScrolled(object sender, EventArgs e)
         {
             var scrollY = Control.ContentOffset.Y;
-
-            if (scrollY > 0)
-            {
-                MatchDetailListView.OnScrolling(scrollY);
-            }
-
-            if (scrollY <= 0)
-            {
-                MatchDetailListView.OnScrollingBack();
-            }
+            MatchDetailListView.OnScrolling(scrollY > 0 ? scrollY : 0);
         }
     }
 

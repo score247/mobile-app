@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using LiveScore.Core.ViewModels;
+    using PanCardView;
+    using PanCardView.EventArgs;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -10,12 +12,6 @@
     public partial class TabStrip : ContentView
     {
         private const string TabChangeEvent = "TabChange";
-        private static int currentTabIndex;
-
-        private const int InAnimationDuration = 400;        
-        private const int FadeDuration = 100;
-        private const int InLeft = -1000;
-        private const int InRight = 600;
 
         public TabStrip()
         {
@@ -23,6 +19,7 @@
 
             InitializeComponent();
             TabHeader.BindingContext = currentInstance;
+            TabContent.BindingContext = currentInstance;
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -37,6 +34,8 @@
             set { SetValue(ItemsSourceProperty, value); }
         }
 
+        public int SelectedTabIndex { get; set; }
+
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStrip)bindable;
@@ -44,88 +43,36 @@
             if (control == null || newValue == null)
             {
                 MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), TabChangeEvent);
-                currentTabIndex = 0;
                 return;
             }
 
-            var tabs = (IEnumerable<TabModel>)newValue;
+            control.TabContent.ItemBeforeAppearing += TabContent_ItemBeforeAppearing;
+            control.TabContent.ItemAppearing += TabContent_ItemAppearing;
+            control.TabContent.ItemDisappearing += TabContent_ItemDisappearing;
 
-            if (oldValue == null)
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
-                InitDefaultTab(control, tabs);
-            }
-
-            SubscribeTabChange(control, tabs);
-        }
-
-        private static void InitDefaultTab(TabStrip control, IEnumerable<TabModel> tabs)
-        {
-            control.TabContent.Children.Clear();
-            control.TabContent.Children.Add(new ContentView
-            {
-                Content = tabs.First().Template,
-                BindingContext = tabs.First().ViewModel
-            });
-            tabs.First().ViewModel.OnAppearing();
-        }
-
-        private static void SubscribeTabChange(TabStrip control, IEnumerable<TabModel> tabs)
-        {
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", async (_, index) =>
-            {
-
-                var inTranslationX = currentTabIndex < index ? InRight : InLeft;
-
-                currentTabIndex = index;
-
-                var tab = tabs.ToArray()[index];
-
-                ((ContentView)control.TabContent.Children[0]).Opacity = 1;
-                
-                await ((ContentView)control.TabContent.Children[0]).FadeTo(0, FadeDuration);
-
-                control.TabContent.Children.ToList()
-                    .ForEach(c => (c.BindingContext as ViewModelBase)?.OnDisappearing());
-                control.TabContent.Children.Clear();
-
-                var tabContentView = new ContentView
-                {
-                    Content = tab.Template,
-                    BindingContext = tab.ViewModel,
-                    TranslationX = inTranslationX
-                };
-
-                control.TabContent.Children.Add(tabContentView);
-
-                await tabContentView.TranslateTo(0, 0, InAnimationDuration, Easing.SinOut);
-
-                tab.ViewModel.OnAppearing();
+                control.SelectedTabIndex = index;
             });
         }
 
-        private void OnSwiped(object sender, SwipedEventArgs e)
+        private static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)
         {
-            if (e.Direction == SwipeDirection.Left)
-            {
-                var newIndex = currentTabIndex + 1;
+            MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
+        }
 
-                if (newIndex < ItemsSource.Count())
-                {
-                    MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, newIndex);
-                }
-            }
-            else
-            {
-                if (e.Direction == SwipeDirection.Right)
-                {
-                    var newIndex = currentTabIndex - 1;
+        private static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
+        {
+            var currentView = view.CurrentView;
+            var viewModel = (args.Item as TabModel)?.ViewModel;
+            viewModel?.OnAppearing();
+            currentView.BindingContext = viewModel;
+        }
 
-                    if (newIndex >= 0)
-                    {
-                        MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, newIndex);
-                    }
-                }
-            }
+        private static void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
+        {
+            var tab = args.Item as TabModel;
+            tab.ViewModel?.OnDisappearing();
         }
     }
 }

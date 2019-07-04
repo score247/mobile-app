@@ -14,10 +14,5 @@
         {
             MessagingCenter.Send("MatchDetail", "OnScrolling", offset);
         }
-
-        public static void OnScrollingBack()
-        {
-            MessagingCenter.Send("MatchDetail", "OnScrollingBack");
-        }
     }
 }
