@@ -132,6 +132,10 @@
                 <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
             </Style>
 
+            <Style TargetType="Image">
+                <Setter Property="IsOpaque" Value="True" />
+            </Style>
+
             <!--  Layout  -->
             <Style TargetType="StackLayout">
                 <Setter Property="Spacing" Value="0" />
