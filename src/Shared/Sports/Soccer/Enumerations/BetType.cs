@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Soccer.Enumerations
 {
-    public enum BetTypeEnum
+    public enum BetType
     {
         OneXTwo = 1,
         AsianHDP = 2,

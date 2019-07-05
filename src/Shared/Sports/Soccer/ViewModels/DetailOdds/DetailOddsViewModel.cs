@@ -38,7 +38,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds((int)BetTypeEnum.OneXTwo, false, true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds((int)BetType.OneXTwo, false, true));
         }
 
         public bool IsRefreshing { get; set; }
@@ -55,7 +55,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
-                await LoadOdds((int)BetTypeEnum.OneXTwo);
+                await LoadOdds((int) BetType.OneXTwo);
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             if (odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                   new BaseItemViewModel(BetTypeEnum.OneXTwo, t, NavigationService, DependencyResolver)
+                   new BaseItemViewModel(BetType.OneXTwo ,t, NavigationService, DependencyResolver)
                    .CreateInstance()));
 
                 HasData = true;

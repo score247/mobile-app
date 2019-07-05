@@ -14,22 +14,22 @@
     {
         private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
         {
-            { BetTypeEnum.OneXTwo.ToString(), typeof(OneXTwoViewModel) },
+            { BetType.OneXTwo.ToString(), typeof(OneXTwoViewModel) },
         };
 
         private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
         {
-            { BetTypeEnum.OneXTwo.ToString(), new OneXTwoItemTemplate() },
+            { BetType.OneXTwo.ToString(), new OneXTwoItemTemplate() },
         };
 
         public IBetTypeOdds BetTypeOdds { get; }
 
-        public BetTypeEnum BetType { get; }
+        public BetType BetType { get; }
 
         public string type { get; }
 
         public BaseItemViewModel(
-            BetTypeEnum betType,
+            BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)

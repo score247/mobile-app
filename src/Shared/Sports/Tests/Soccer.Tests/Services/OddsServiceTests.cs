@@ -68,5 +68,24 @@
             mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
             Assert.NotNull(odds);
         }
+
+        [Fact]
+        public async Task GetOdds_CacheHasValue_ShouldReturnCorrectListCountFromCache()
+        {
+            // Arrange            
+            var expectedMatchOdds = fixture.Create<MatchOdds>();
+
+            mockCache.GetAndFetchLatestValue(
+                "Odds-sr:match:1",
+                Arg.Any<Func<Task<MatchOdds>>>(),
+                Arg.Any<Func<DateTimeOffset, bool>>(),
+                null).Returns(expectedMatchOdds);
+
+            // Act
+            var actualOdds = await oddsService.GetOdds("sr:match:1", 1);
+
+            // Assert
+            Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
+        }
     }
 }

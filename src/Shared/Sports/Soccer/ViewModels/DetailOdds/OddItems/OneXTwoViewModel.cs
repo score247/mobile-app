@@ -26,7 +26,7 @@
 
         private readonly IBetTypeOdds betTypeOdds;
         public OneXTwoViewModel(
-            BetTypeEnum betType,
+            BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
