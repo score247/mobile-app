@@ -35,8 +35,8 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
             <FlexLayout Style="{StaticResource SubTabBox}">
-                <Label Style="{StaticResource SubTabActive}" Text="1x2" />
-                <Label Style="{StaticResource SubTab}" Text="Handicap" />
+                <Label Style="{StaticResource SubTabActive}" Text="1X2" />
+                <Label Style="{StaticResource SubTab}" Text="Asian HDP" />
                 <BoxView Style="{StaticResource VerticalLine}" />
                 <Label Style="{StaticResource SubTab}" Text="Over/Under" />
             </FlexLayout>
