@@ -10,12 +10,12 @@ Library           DatabaseLibrary
 Library           PostgreSQLDB
 
 *** Variables ***
-${database}       Score247.Test
+${database}       Score247.AutomationTest
 ${user}           postgres
 ${password}       1234aa
 ${host}           10.18.200.110
 ${port}           5444
-${Push_File}      https://testing2.nexdev.net/V2/api/Mock/PushMatchEvents
+${Push_File}      https://api.nexdev.net/V4/api/Mock/PushMatchEvents
 
 *** Keywords ***
 Start Appium Server
