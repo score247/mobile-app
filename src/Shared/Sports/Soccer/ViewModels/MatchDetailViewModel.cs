@@ -39,12 +39,10 @@ namespace LiveScore.Soccer.ViewModels
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
-
         private Dictionary<string, TabItemViewModelBase> tabItemViewModels;
 
         public MatchDetailViewModel(
@@ -63,10 +61,6 @@ namespace LiveScore.Soccer.ViewModels
         public bool IsLoading { get; private set; }
 
         public string DisplayEventDate { get; set; }
-
-        public string DisplayEventDateAndLeagueName { get; private set; }
-
-        public string DisplayScore { get; private set; }
 
         public string DisplaySecondLeg { get; private set; }
 
@@ -211,16 +205,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildScoreAndEventDate(IMatch match)
         {
-            var eventDate = match.EventDate.ToDayMonthYear();
-            DisplayEventDateAndLeagueName = $"{eventDate} - {match.League?.Name?.ToUpperInvariant() ?? string.Empty}";
             DisplayEventDate = match.EventDate.ToShortDayMonth();
-
-            if (match.MatchResult != null)
-            {
-                var homeScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.HomeScore);
-                var awayScore = BuildScore(match.MatchResult.EventStatus, match.MatchResult.AwayScore);
-                DisplayScore = $"{homeScore} - {awayScore}";
-            }
         }
 
         private static string BuildScore(MatchStatus matchStatus, int score)

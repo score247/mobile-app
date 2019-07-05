@@ -11,21 +11,18 @@
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly HubConnection matchHubConnection;
-        private readonly bool showFullStatus;
 
         public MatchViewModel(
             IMatch match,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver,
             IEventAggregator eventAggregator,
-            HubConnection matchHubConnection,
-            bool showFullStatus = false)
+            HubConnection matchHubConnection)
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
             Match = match;
-            this.showFullStatus = showFullStatus;
             BuildMatchStatus();
             SubscribeMatchTimeChangeEvent();
         }
@@ -36,7 +33,7 @@
 
         public void BuildMatchStatus()
         {
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match, showFullStatus);
+            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
         }
 
         private void SubscribeMatchTimeChangeEvent()

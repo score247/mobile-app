@@ -2,7 +2,6 @@ namespace Soccer.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
@@ -83,49 +82,6 @@ namespace Soccer.Tests.ViewModels
 
             // Assert
             Assert.Equal("45+4'", viewModel.MatchViewModel.DisplayMatchStatus);
-        }
-
-        [Fact]
-        public void OnNavigatingTo_ParametersIsNotNull_BuildLeagueNameAndEventDate()
-        {
-            // Arrange
-            var parameters = new NavigationParameters { { "Match", match } };
-
-            // Act
-            viewModel.OnNavigatingTo(parameters);
-
-            // Assert
-            Assert.Equal("01 Jan, 2019 - LALIGA", viewModel.DisplayEventDateAndLeagueName);
-        }
-
-        [Fact]
-        public void OnNavigatingTo_IsNotPreMatch_ShowScore()
-        {
-            // Arrange
-            var parameters = new NavigationParameters { { "Match", match } };
-
-            // Act
-            viewModel.OnNavigatingTo(parameters);
-
-            // Assert
-            Assert.Equal("5 - 1", viewModel.DisplayScore);
-        }
-
-        [Fact]
-        public void OnNavigatingTo_IsPreMatch_NotShowScore()
-        {
-            // Arrange
-            match.MatchResult = new MatchResult
-            {
-                EventStatus = new MatchStatus { Value = MatchStatus.NotStarted }
-            };
-            var parameters = new NavigationParameters { { "Match", match } };
-
-            // Act
-            viewModel.OnNavigatingTo(parameters);
-
-            // Assert
-            Assert.Equal(" - ", viewModel.DisplayScore);
         }
 
         [Fact]
@@ -283,7 +239,6 @@ namespace Soccer.Tests.ViewModels
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
             Assert.Equal(timelines[0], viewModel.MatchViewModel.Match.LatestTimeline);
             Assert.Equal("AB", viewModel.MatchViewModel.DisplayMatchStatus);
-            Assert.Equal("1 - 2", viewModel.DisplayScore);
         }
 
         [Fact]

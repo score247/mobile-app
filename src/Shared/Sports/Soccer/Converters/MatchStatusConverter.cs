@@ -33,27 +33,6 @@
             { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
         };
 
-        private static readonly IDictionary<string, string> FullStatusMapper = new Dictionary<string, string>
-        {
-            { MatchStatus.Postponed, AppResources.Postponed },
-            { MatchStatus.StartDelayed, AppResources.StartDelayed },
-            { MatchStatus.Cancelled, AppResources.Cancelled },
-            { MatchStatus.AwaitingPenalties, AppResources.AwaitPenalties },
-            { MatchStatus.Penalties, AppResources.Penalties },
-            { MatchStatus.Pause, AppResources.Pause },
-            { MatchStatus.Interrupted, AppResources.Interrupted },
-            { MatchStatus.Halftime, AppResources.HalfTime },
-            { MatchStatus.Delayed, AppResources.Delayed },
-            { MatchStatus.Abandoned, AppResources.Abandoned },
-            { MatchStatus.FullTime, AppResources.FullTime },
-            { MatchStatus.Ended, AppResources.FullTime },
-            { MatchStatus.Closed, AppResources.FullTime },
-            { MatchStatus.EndedAfterPenalties, AppResources.AfterPenalties },
-            { MatchStatus.EndedExtraTime, AppResources.AfterExtraTime },
-            { MatchStatus.AwaitingExtraTime, AppResources.AwaitExtraTime },
-            { MatchStatus.ExtraTimeHalfTime, AppResources.ExtraTimeHalfTime }
-        };
-
         private static readonly IDictionary<string, int> PeriodEndTimes = new Dictionary<string, int>
         {
             { MatchStatus.FirstHaft, 45 },
@@ -70,7 +49,7 @@
             this.localStorage = localStorage;
         }
 
-        public string BuildStatus(IMatch match, bool showFullStatus = false)
+        public string BuildStatus(IMatch match)
         {
             if (match == null)
             {
@@ -89,22 +68,22 @@
 
             if (match.MatchResult.EventStatus.IsLive)
             {
-                return BuildStatusForLive(match, showFullStatus);
+                return BuildStatusForLive(match);
             }
 
             if (match.MatchResult.EventStatus.IsClosed)
             {
-                var status = BuildMatchStatus(match, showFullStatus);
+                var status = BuildMatchStatus(match);
 
                 return string.IsNullOrEmpty(status) ? AppResources.FT : status;
             }
 
-            return BuildEventStatus(match, showFullStatus);
+            return BuildEventStatus(match);
         }
 
-        private string BuildStatusForLive(IMatch match, bool showFullStatus)
+        private string BuildStatusForLive(IMatch match)
         {
-            var status = BuildMatchStatus(match, showFullStatus);
+            var status = BuildMatchStatus(match);
 
             if (!string.IsNullOrEmpty(status))
             {
@@ -122,28 +101,26 @@
             return match.MatchResult.MatchTime + "'";
         }
 
-        private static string BuildMatchStatus(IMatch match, bool showFullStatus)
+        private static string BuildMatchStatus(IMatch match)
         {
-            var statusMapper = showFullStatus ? FullStatusMapper : StatusMapper;
             var matchStatus = match.MatchResult?.MatchStatus;
 
-            if (matchStatus?.Value != null && statusMapper.ContainsKey(matchStatus.Value))
+            if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus.Value))
             {
-                return statusMapper[matchStatus.Value];
+                return StatusMapper[matchStatus.Value];
             }
 
             return string.Empty;
         }
 
-        private static string BuildEventStatus(IMatch match, bool showFullStatus)
+        private static string BuildEventStatus(IMatch match)
 
         {
-            var statusMapper = showFullStatus ? FullStatusMapper : StatusMapper;
             var eventStatus = match.MatchResult?.EventStatus;
 
-            if (eventStatus?.Value != null && statusMapper.ContainsKey(eventStatus.Value))
+            if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus.Value))
             {
-                return statusMapper[eventStatus.Value];
+                return StatusMapper[eventStatus.Value];
             }
 
             return string.Empty;
