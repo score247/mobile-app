@@ -28,7 +28,6 @@
         <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="ViewModels\" />
         <Folder Include="ViewResources\" />
         <Folder Include="Converters\" />
         <Folder Include="Models\Settings\" />

@@ -10,16 +10,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Core.ViewModels;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
+    using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
-    public class DetailInfoViewModel : ViewModelBase, IDisposable
+    public class DetailInfoViewModel : TabItemViewModelBase, IDisposable
     {
         private const string SpectatorNumberFormat = "0,0";
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
@@ -33,8 +34,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             string matchId,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            HubConnection matchHubConnection)
-            : base(navigationService, dependencyResolver)
+            HubConnection matchHubConnection,
+            DataTemplate dataTemplate)
+            : base(navigationService, dependencyResolver, dataTemplate)
         {
             this.matchId = matchId;
             this.matchHubConnection = matchHubConnection;

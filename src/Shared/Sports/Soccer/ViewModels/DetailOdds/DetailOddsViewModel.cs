@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
+
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
     using System;
@@ -9,26 +10,18 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
+    using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
     internal class DetailOddsViewModel : ViewModelBase, IDisposable
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
-
-        public bool IsRefreshing { get; set; }
-
-        public bool IsLoading { get; private set; }
-
-        public bool IsNotLoading { get; private set; }
-
-        public bool HasData { get; private set; }
-        public bool NoData { get; private set; }
-
         private bool disposedValue;
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -37,9 +30,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public DetailOddsViewModel(
             string matchId,
-            INavigationService navigationService, 
-            IDependencyResolver serviceLocator)
-            : base(navigationService, serviceLocator)
+            INavigationService navigationService,
+            IDependencyResolver serviceLocator,
+            DataTemplate dataTemplate)
+            : base(navigationService, serviceLocator, dataTemplate)
         {
             this.matchId = matchId;
 
@@ -47,6 +41,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds((int)BetTypeEnum.OneXTwo, false, true));
         }
+
+        public bool IsRefreshing { get; set; }
+
+        public bool IsLoading { get; private set; }
+
+        public bool IsNotLoading { get; private set; }
+
+        public bool HasData { get; private set; }
+
+        public bool NoData { get; private set; }
 
         protected override async void Initialize()
         {
@@ -66,7 +70,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             var odds = await oddsService.GetOdds(matchId, bettypeId, isRefresh);
 
-            if(odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
+            if (odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
                    new BaseItemViewModel(BetTypeEnum.OneXTwo ,t, NavigationService, DependencyResolver)
@@ -75,7 +79,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 HasData = true;
                 NoData = !HasData;
             }
-            else 
+            else
             {
                 HasData = false;
                 NoData = !HasData;
@@ -100,6 +104,5 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using LiveScore.Core.ViewModels;
     using PanCardView;
     using PanCardView.EventArgs;
     using Xamarin.Forms;
@@ -24,13 +24,13 @@
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             nameof(ItemsSource),
-            typeof(IEnumerable<TabModel>),
+            typeof(IEnumerable),
             typeof(TabStrip),
             propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable<TabModel> ItemsSource
+        public IEnumerable ItemsSource
         {
-            get { return (IEnumerable<TabModel>)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -50,6 +50,9 @@
             control.TabContent.ItemAppearing += TabContent_ItemAppearing;
             control.TabContent.ItemDisappearing += TabContent_ItemDisappearing;
 
+            var tabItems = newValue as IEnumerable<TabItemViewModelBase>;
+            tabItems.ToArray()[control.SelectedTabIndex]?.OnAppearing();
+
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
                 control.SelectedTabIndex = index;
@@ -63,16 +66,12 @@
 
         private static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
-            var currentView = view.CurrentView;
-            var viewModel = (args.Item as TabModel)?.ViewModel;
-            viewModel?.OnAppearing();
-            currentView.BindingContext = viewModel;
+            (args.Item as TabItemViewModelBase)?.OnAppearing();
         }
 
         private static void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
         {
-            var tab = args.Item as TabModel;
-            tab.ViewModel?.OnDisappearing();
+            (args.Item as TabItemViewModelBase)?.OnDisappearing();
         }
     }
 }

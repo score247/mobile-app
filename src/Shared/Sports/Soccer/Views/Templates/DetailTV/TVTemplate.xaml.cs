@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Soccer.Views.Templates.DetailInfo
+namespace LiveScore.Soccer.Views.Templates.DetailTV
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InfoTemplate : DataTemplate
+    public partial class TVTemplate : DataTemplate
     {
-        public InfoTemplate()
+        public TVTemplate()
         {
             InitializeComponent();
         }

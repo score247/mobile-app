@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Soccer.Views.Templates.DetailInfo
+namespace LiveScore.Soccer.Views.Templates.DetailH2H
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class InfoTemplate : DataTemplate
+    public partial class H2HTemplate : DataTemplate
     {
-        public InfoTemplate()
+        public H2HTemplate()
         {
             InitializeComponent();
         }

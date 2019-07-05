@@ -2,6 +2,7 @@
 {
     using System.Collections;
     using System.Collections.Generic;
+    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -32,7 +33,7 @@
                 return;
             }
 
-            var tabs = (IList<TabModel>)newValue;
+            var tabs = (IList<TabItemViewModelBase>)newValue;
 
             if (control.scrollLayOut.Children.Count == 0)
             {
@@ -65,7 +66,7 @@
             });
         }
 
-        private static void InitTabHeader(TabStripHeader control, IList<TabModel> tabs)
+        private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModelBase> tabs)
         {
             for (int index = 0; index < tabs.Count; index++)
             {
@@ -73,7 +74,7 @@
                 var itemLayout = CreateItemLayout(control, index);
                 var itemLabel = new Label
                 {
-                    Text = item.Name.ToUpperInvariant(),
+                    Text = item.HeaderTitle.ToUpperInvariant(),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);

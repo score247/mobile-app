@@ -22,9 +22,15 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.ViewModels.DetailOdds;
     using LiveScore.Soccer.ViewModels.DetailStats;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-    using LiveScore.Soccer.Views.Templates;
+    using LiveScore.Soccer.Views.Templates.DetailH2H;
+    using LiveScore.Soccer.Views.Templates.DetailInfo;
+    using LiveScore.Soccer.Views.Templates.DetailLinesUp;
     using LiveScore.Soccer.Views.Templates.DetailOdds;
-    using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
+    using LiveScore.Soccer.Views.Templates.DetailSocial;
+    using LiveScore.Soccer.Views.Templates.DetailStatistics;
+    using LiveScore.Soccer.Views.Templates.DetailTable;
+    using LiveScore.Soccer.Views.Templates.DetailTracker;
+    using LiveScore.Soccer.Views.Templates.DetailTV;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
@@ -39,7 +45,7 @@ namespace LiveScore.Soccer.ViewModels
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
 
-        private Dictionary<string, TabModel> tabModels;
+        private Dictionary<string, TabItemViewModelBase> tabItemViewModels;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -66,29 +72,26 @@ namespace LiveScore.Soccer.ViewModels
 
         public string DisplayPenaltyShootOut { get; private set; }
 
-        public ObservableCollection<TabModel> TabViews { get; private set; }
+        public ObservableCollection<TabItemViewModelBase> TabViews { get; private set; }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
-                tabModels = new Dictionary<string, TabModel>
+                tabItemViewModels = new Dictionary<string, TabItemViewModelBase>
                 {
-                    {nameof(MatchFunctions.Odds), new TabModel { Template = new OddsTemplate() , ViewModel = new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Info), new TabModel {
-                        Template = new InfoTemplate() ,
-                        ViewModel = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection) }
-                    },
-                    {nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Lineups), new TabModel { Template = new LineupsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Stats), new TabModel { Template = new StatsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    {nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
+                    {nameof(MatchFunctions.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
+                    //{nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.Lineups), new TabModel { Template = new LinesUpTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.Stats), new TabModel { Template = new StatisticsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    //{nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
                 };
 
-                Title = tabModels.First().Key;
+                Title = tabItemViewModels.First().Key;
 
                 BuildGeneralInfo(match);
             }
@@ -130,17 +133,17 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildTabFunctions(IMatch match)
         {
-            TabViews = new ObservableCollection<TabModel>();
+            TabViews = new ObservableCollection<TabItemViewModelBase>();
 
             if (match.Functions != null)
             {
-                TabViews = new ObservableCollection<TabModel>();
+                TabViews = new ObservableCollection<TabItemViewModelBase>();
 
                 foreach (var tab in match.Functions)
                 {
-                    var tabModel = tabModels[tab.Abbreviation.Replace("-", string.Empty)];
-                    tabModel.Name = tab.Abbreviation;
+                    var tabModel = tabItemViewModels[tab.Abbreviation.Replace("-", string.Empty)];
                     tabModel.Title = tab.Name;
+                    tabModel.HeaderTitle = tab.Abbreviation;
 
                     TabViews.Add(tabModel);
                 }
