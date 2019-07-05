@@ -40,8 +40,8 @@
             app.Resources["SubTabColor"] = Color.FromHex("#1D2133");
             app.Resources["SubTabBgColor"] = Color.FromHex("#1D2133");
             app.Resources["ActiveSubTabColor"] = Color.FromHex("#1D2133");
-            app.Resources["UpLiveOddColor"] = Color.FromHex("#1D2133");
-            app.Resources["DownLiveOddColor"] = Color.FromHex("#1D2133");
+            app.Resources["UpLiveOddColor"] = Color.FromHex("#FF222C");
+            app.Resources["DownLiveOddColor"] = Color.FromHex("#66FF59");
 
             app.Resources["LiveIcon"] = new Style(typeof(Label));
             app.Resources["DropdownIcon"] = new Style(typeof(Label));
