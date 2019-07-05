@@ -3,6 +3,7 @@
 
     using System;
     using System.Globalization;
+    using LiveScore.Core.Enumerations;
     using Xamarin.Forms;
 
     public class OddsStatusConverter : IValueConverter
@@ -14,28 +15,18 @@
             if (value != null)
             {
                 string valueAsString = value.ToString();
-                switch (valueAsString)
+
+                if(valueAsString.Equals(OddsTrend.Up.Value, StringComparison.OrdinalIgnoreCase))
                 {
-                    case ("up"):
-                        {
-                            color = Color.Red;
-                            break;
-                        }
-                    case ("down"):
-                        {
-                            color = Color.Green;
-                            break;
-                        }
-                    default:
-                        {
-                            color = Color.White;
-                            break;
-                        }
+                    color = Color.Red;
+                }
+                else if (valueAsString.Equals(OddsTrend.Down.Value, StringComparison.OrdinalIgnoreCase))
+                {
+                    color = Color.Green;
                 }
             }
 
             return color;
-
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
