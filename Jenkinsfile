@@ -87,17 +87,17 @@ pipeline{
                     }
                     steps{
                         withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
-                            sh label: "Restore nuget", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
+                            sh label: "Restore nuget", script: "msbuild /p:Configuration=AutoTest /p:Platform=iPhoneSimulator /t:Restore $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /v:minimal"
 
-                            sh label: "Build IOS App", script: "msbuild /p:Configuration=Test /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
+                            sh label: "Build IOS App", script: "msbuild /p:Configuration=AutoTest /p:Platform=iPhoneSimulator /t:ReBuild $WORKSPACE/src/Platforms/LiveScore.iOS/LiveScore.iOS.csproj /p:MtouchArch=x86_64 /v:minimal"
 							
-							sh label: "Shutdown Simulator", script: "/usr/bin/xcrun simctl shutdown ${params.SimulatorUDID}"
+							sh label: "Shutdown Simulator", script: "/usr/bin/xcrun simctl shutdown all"
 							
 							sh label: "Boot Simulator", script: "/usr/bin/xcrun simctl boot ${params.SimulatorUDID}"
 
                             sh label: "Uninstall App", script: "/usr/bin/xcrun simctl uninstall ${params.SimulatorUDID} Score247.LiveScore"
 
-                            sh label: "Install App", script: "/usr/bin/xcrun simctl install ${params.SimulatorUDID} $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/Test/LiveScoreApp.iOS.app"
+                            sh label: "Install App", script: "/usr/bin/xcrun simctl install ${params.SimulatorUDID} $WORKSPACE/src/Platforms/LiveScore.iOS/bin/iPhoneSimulator/AutoTest/LiveScoreApp.iOS.app"
                         }
                     }
                 }
