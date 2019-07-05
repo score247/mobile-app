@@ -195,8 +195,8 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
-<MtouchFloat32>true</MtouchFloat32>
-<MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchFloat32>true</MtouchFloat32>
+    <MtouchArch>i386, x86_64</MtouchArch>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutoTest|iPhone'">
     <OutputPath>bin\iPhone\AutoTest\</OutputPath>
@@ -760,15 +760,6 @@
     <BundleResource Include="Resources\images\common\odd_desc%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\bookmarker_detail.png" />
   </ItemGroup>
   <ItemGroup>
@@ -776,6 +767,15 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\bookmarker_detail%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\arrow_down%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\arrow_down%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

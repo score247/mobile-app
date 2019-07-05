@@ -60,23 +60,23 @@
     </Style>
 
     <!--  SubTab  -->
-    <Style x:Key="SubTabContainer" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
-        <Setter Property="Padding" Value="1" />
-        <Setter Property="CornerRadius" Value="2" />
-        <Setter Property="Margin" Value="8,0" />
+    <Style x:Key="SubTabContainer" TargetType="Grid">
+        <Setter Property="Padding" Value="0,8" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
     <Style x:Key="SubTabBox" TargetType="FlexLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="HeightRequest" Value="{StaticResource SubTabsHeight}" />
+        <Setter Property="Padding" Value="1" />
     </Style>
     <Style x:Key="CommonSubTab" TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FlexLayout.Grow" Value="1" />
     </Style>
     <Style
         x:Key="SubTab"

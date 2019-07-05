@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <DataTemplate
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OneXTwoItemTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -6,48 +6,68 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:soccerConverters="clr-namespace:LiveScore.Soccer.Converters;assembly=LiveScore.Soccer">
     <ViewCell>
-        <Grid ColumnSpacing="1" RowSpacing="1" Style="{StaticResource GridTableContainer}">
+        <Grid Padding="0" Style="{StaticResource GridTableContainer}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
-                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="32" />
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <ResourceDictionary>
-                    <soccerConverters:OddsStatusConverter x:Key="OddsStatusConverter"/>
+                    <soccerConverters:OddsStatusConverter x:Key="OddsStatusConverter" />
                     <ResourceDictionary.MergedDictionaries>
                         <resources:MatchDetailViewResource />
                         <resources:MatchDetailOddsViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </Grid.Resources>
-            <FlexLayout Grid.Row="0" Grid.Column="0" Padding="8,0" BackgroundColor="{StaticResource SecondColor}" JustifyContent="SpaceBetween">
+            <FlexLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Style="{StaticResource MatchDetailOddsBookmaker}">
                 <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}" />
                 <Image Source="images/common/bookmarker_detail.png" />
             </FlexLayout>
-            
-            <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TableBodyOddsText}" 
-                   Text="{Binding HomeLiveOdds}"
-                   TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}"/>
-            
-            <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TableBodyOddsText}" 
-                   Text="{Binding DrawLiveOdds}"
-                   TextColor="{Binding DrawOddsTrend, Converter={StaticResource OddsStatusConverter}}"/>
-            
-            <Label Grid.Row="0" Grid.Column="3" Style="{StaticResource MatchDetailOddsUpOddText}" 
-                   Text="{Binding AwayLiveOdds}" 
-                   TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}"/>
-            
-            <Label Grid.Row="0" Grid.Column="4" Style="{StaticResource TableBodyOddsText}" Text="{Binding HomeOpeningOdds}" />
-            <Label Grid.Row="0" Grid.Column="5" Style="{StaticResource TableBodyOddsText}" Text="{Binding DrawOpeningOdds}" />
-            <Label Grid.Row="0" Grid.Column="6" Style="{StaticResource TableBodyOddsText}" Text="{Binding AwayOpeningOdds}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding HomeLiveOdds}"
+                TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="2"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding DrawLiveOdds}"
+                TextColor="{Binding DrawOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="3"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding AwayLiveOdds}"
+                TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="4"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding HomeOpeningOdds}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="5"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding DrawOpeningOdds}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="6"
+                Style="{StaticResource MatchDetailOddsOddsText}"
+                Text="{Binding AwayOpeningOdds}" />
         </Grid>
     </ViewCell>
 </DataTemplate>

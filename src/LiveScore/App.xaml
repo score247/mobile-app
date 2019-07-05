@@ -382,28 +382,9 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
             </Style>
 
-            <Style
-                x:Key="TableRow"
-                BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
-                TargetType="FlexLayout">
-                <Setter Property="HeightRequest" Value="{StaticResource RowTableHeight}" />
-                <Setter Property="AlignItems" Value="Stretch" />
-            </Style>
-
-            <Style x:Key="TableCol" TargetType="StackLayout">
-                <Setter Property="FlexLayout.Grow" Value="1" />
-                <Setter Property="FlexLayout.Shrink" Value="0" />
-                <Setter Property="VerticalOptions" Value="FillAndExpand" />
-            </Style>
-
-            <Style x:Key="TableFlexlayoutCol" TargetType="FlexLayout">
-                <Setter Property="FlexLayout.Grow" Value="1" />
-                <Setter Property="FlexLayout.Shrink" Value="0" />
-            </Style>
-
             <Style x:Key="TableText" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
                 <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
                 <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
             </Style>
@@ -418,6 +399,9 @@
 
             <Style x:Key="GridTableContainer" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+                <Setter Property="Padding" Value="1" />
+                <Setter Property="ColumnSpacing" Value="1" />
+                <Setter Property="RowSpacing" Value="1" />
             </Style>
 
             <!--  Dropdown List  -->
@@ -430,19 +414,17 @@
                 <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="TitleColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="TitleColor" Value="{StaticResource SecondAccentColor}" />
             </Style>
 
             <Style x:Key="DropdownIcon" TargetType="Image">
                 <Setter Property="Source" Value="images/common/arrow_down.png" />
                 <Setter Property="WidthRequest" Value="5" />
                 <Setter Property="HeightRequest" Value="3" />
-                <Setter Property="AbsoluteLayout.LayoutBounds" Value="0.9,0.5,5,3" />
-                <Setter Property="AbsoluteLayout.LayoutFlags" Value="PositionProportional" />
-                <Setter Property="InputTransparent" Value="False" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Margin" Value="8,0" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

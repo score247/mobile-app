@@ -11,7 +11,15 @@
     </Style>
 
     <Style
-        x:Key="TableBodyOddsText"
+        x:Key="MatchDetailOddsBookmaker"
+        BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+        TargetType="FlexLayout">
+        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+
+    <Style
+        x:Key="MatchDetailOddsOddsText"
         BasedOn="{StaticResource TableText}"
         TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -19,15 +27,26 @@
 
     <Style
         x:Key="MatchDetailOddsUpOddText"
-        BasedOn="{StaticResource TableBodyOddsText}"
+        BasedOn="{StaticResource MatchDetailOddsOddsText}"
         TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource UpLiveOddColor}" />
     </Style>
     <Style
         x:Key="MatchDetailOddsDownOddText"
-        BasedOn="{StaticResource TableBodyOddsText}"
+        BasedOn="{StaticResource MatchDetailOddsOddsText}"
         TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource DownLiveOddColor}" />
+    </Style>
+
+    <Style x:Key="MatchDetailOddsDropdownContainer" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    </Style>
+
+    <Style x:Key="MatchDetailOddsDropdownText" TargetType="Label">
+        <Setter Property="Margin" Value="16,0,0,0" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
     <!--  Bookmarker Details  -->
@@ -39,7 +58,7 @@
     </Style>
     <Style
         x:Key="TimeText"
-        BasedOn="{StaticResource TableBodyOddsText}"
+        BasedOn="{StaticResource MatchDetailOddsOddsText}"
         TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1.5" />
     </Style>
@@ -58,7 +77,7 @@
     </Style>
     <Style
         x:Key="ScoreText"
-        BasedOn="{StaticResource TableBodyOddsText}"
+        BasedOn="{StaticResource MatchDetailOddsOddsText}"
         TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="1.5" />
     </Style>
@@ -71,7 +90,7 @@
     </Style>
     <Style
         x:Key="LastUpdateText"
-        BasedOn="{StaticResource TableBodyOddsText}"
+        BasedOn="{StaticResource MatchDetailOddsOddsText}"
         TargetType="Label">
         <Setter Property="FlexLayout.Grow" Value="2" />
     </Style>
