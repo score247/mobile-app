@@ -40,7 +40,8 @@
             viewModel = new DetailOddsViewModel(
                 matchId,
                 baseFixture.NavigationService,
-                baseFixture.DependencyResolver);
+                baseFixture.DependencyResolver,
+                null);
 
             var parameters = new NavigationParameters { { "MatchId", matchId } };
             viewModel.OnNavigatingTo(parameters);
