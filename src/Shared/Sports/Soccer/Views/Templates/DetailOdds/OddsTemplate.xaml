@@ -131,7 +131,7 @@
             </matchDetail:MatchDetailListView>
         </StackLayout>
         <StackLayout IsVisible="{Binding NoData}">
-            <Label Style="{StaticResource NoData}" Text="No data yet..." />
+            <Label Style="{StaticResource NoInfo}" Text="No data yet..." />
         </StackLayout>
     </StackLayout>
 </DataTemplate>
