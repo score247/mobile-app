@@ -12,13 +12,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Services;
-    using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailOddsViewModel : ViewModelBase, IDisposable
+    internal class DetailOddsViewModel : TabItemViewModelBase, IDisposable
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
@@ -55,8 +54,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         protected override async void Initialize()
         {
             try
-            {               
-                await LoadOdds((int) BetTypeEnum.OneXTwo);
+            {
+                await LoadOdds((int)BetTypeEnum.OneXTwo);
             }
             catch (Exception ex)
             {
@@ -73,7 +72,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             if (odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                   new BaseItemViewModel(BetTypeEnum.OneXTwo ,t, NavigationService, DependencyResolver)
+                   new BaseItemViewModel(BetTypeEnum.OneXTwo, t, NavigationService, DependencyResolver)
                    .CreateInstance()));
 
                 HasData = true;

@@ -82,13 +82,13 @@ namespace LiveScore.Soccer.ViewModels
                 {
                     {nameof(MatchFunctions.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
                     {nameof(MatchFunctions.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
-                    //{nameof(MatchFunctions.H2H), new TabModel { Template = new H2HTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.Lineups), new TabModel { Template = new LinesUpTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.Social), new TabModel { Template = new SocialTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.Stats), new TabModel { Template = new StatisticsTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.Table), new TabModel { Template = new TableTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.TV), new TabModel { Template = new TVTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
-                    //{nameof(MatchFunctions.Tracker), new TabModel { Template = new TrackerTemplate() , ViewModel = new DetailStatsViewModel(NavigationService, DependencyResolver) } },
+                    {nameof(MatchFunctions.H2H), new DetailStatsViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
+                    {nameof(MatchFunctions.Lineups),  new DetailStatsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
+                    {nameof(MatchFunctions.Social), new DetailStatsViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
+                    {nameof(MatchFunctions.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
+                    {nameof(MatchFunctions.Table), new DetailStatsViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
+                    {nameof(MatchFunctions.TV), new DetailStatsViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
+                    {nameof(MatchFunctions.Tracker), new DetailStatsViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
                 };
 
                 Title = tabItemViewModels.First().Key;

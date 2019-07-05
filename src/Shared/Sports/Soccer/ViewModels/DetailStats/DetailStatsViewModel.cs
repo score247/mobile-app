@@ -1,19 +1,18 @@
-﻿
-
-namespace LiveScore.Soccer.ViewModels.DetailStats
+﻿namespace LiveScore.Soccer.ViewModels.DetailStats
 {
     using LiveScore.Core;
-    using LiveScore.Core.ViewModels;
+    using LiveScore.Core.Controls.TabStrip;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
-    internal class DetailStatsViewModel : ViewModelBase
+    internal class DetailStatsViewModel : TabItemViewModelBase
     {
         public DetailStatsViewModel(
             INavigationService navigationService,
-            IDependencyResolver serviceLocator)
-            : base(navigationService, serviceLocator)
+            IDependencyResolver serviceLocator,
+            DataTemplate dataTemplate)
+            : base(navigationService, serviceLocator, dataTemplate)
         {
-           
         }
     }
 }
