@@ -394,7 +394,7 @@ SP3_SP4_List_Event_Of_Match1
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
-    Click Element    ${btn_Scores}
+    Click Element    ${btn_Home}
     Wait Until Element Is Visible    accessibility_id=Chelsea
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=Chelsea
@@ -459,7 +459,7 @@ SP3_SP4_List_Event_Of_Match2
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
-    Click Element    ${btn_Scores}
+    Click Element    ${btn_Home}
     Wait Until Element Is Visible    accessibility_id=Germany
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=Germany
@@ -510,7 +510,7 @@ SP3_SP4_List_Event_Of_Match3
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
-    Click Element    ${btn_Scores}
+    Click Element    ${btn_Home}
     Wait Until Element Is Visible    accessibility_id=France
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=France
@@ -555,7 +555,7 @@ SP3_SP4_List_Event_Of_Match4
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
-    Click Element    ${btn_Scores}
+    Click Element    ${btn_Home}
     Sleep    3
     Click Element    ${btn_currentdate}
     Sleep    3
