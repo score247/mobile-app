@@ -45,7 +45,7 @@
                 Grid.Column="1"
                 Orientation="Horizontal"
                 Style="{StaticResource MatchDetailOddsDropdownContainer}">
-                <Label Style="{StaticResource MatchDetailOddsDropdownText}" Text="Hongkong" />
+                <Label Style="{StaticResource MatchDetailOddsDropdownText}" Text="Decimal" />
                 <Image Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
