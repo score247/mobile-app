@@ -47,7 +47,7 @@ Init_Real Device
 
 Suite TearDown
     Comment    Start Process    /usr/bin/pkill -f node|grep appium    shell=True
-    Clean_Up_DB
+    Comment    Clean_Up_DB
 
 Insert_Matches
     Clean_Up_DB
