@@ -53,10 +53,6 @@ namespace LiveScore
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-#if DEBUG
-            HotReloader.Current.Start(this);
-#endif
-
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
