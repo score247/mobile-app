@@ -459,6 +459,8 @@ SP3_SP4_List_Event_Of_Match2
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
+    Click Element    ${btn_Scores}
+    Sleep    3
     Click Element    ${btn_Home}
     Wait Until Element Is Visible    accessibility_id=Germany
     #Go to Match Info page from Scores page
@@ -510,6 +512,8 @@ SP3_SP4_List_Event_Of_Match3
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
+    Click Element    ${btn_Scores}
+    Sleep    3
     Click Element    ${btn_Home}
     Wait Until Element Is Visible    accessibility_id=France
     #Go to Match Info page from Scores page
@@ -555,6 +559,8 @@ SP3_SP4_List_Event_Of_Match4
     Post    ${Push_File}    ${json}
     Integer    response status    200
     Output
+    Click Element    ${btn_Scores}
+    Sleep    3
     Click Element    ${btn_Home}
     Sleep    3
     Click Element    ${btn_currentdate}
