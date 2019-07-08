@@ -11,19 +11,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
-    <PackageReference Include="Refit" Version="4.6.107" />
+    <PackageReference Include="AutoFixture" Version="4.8.0" />
+    <PackageReference Include="CompareNETObjects" Version="4.58.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1" />
     <PackageReference Include="NSubstitute" Version="4.0.0" />
+    <PackageReference Include="SharpRaven" Version="2.4.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\src\Shared\Core\LiveScore.Core.csproj" />
-    <ProjectReference Include="..\..\..\..\src\Shared\Sports\Soccer\Soccer.csproj" />
-    <ProjectReference Include="..\Common.Tests\LiveScore.Common.Tests.csproj" />
+    <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="ViewModels\NavigationTitleViewModelTests.cs" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\LiveScore.Common.csproj" />
   </ItemGroup>
 </Project>

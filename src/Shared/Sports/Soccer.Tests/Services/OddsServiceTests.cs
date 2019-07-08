@@ -72,7 +72,7 @@
         [Fact]
         public async Task GetOdds_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
-            // Arrange            
+            // Arrange
             var expectedMatchOdds = fixture.Create<MatchOdds>();
 
             mockCache.GetAndFetchLatestValue(

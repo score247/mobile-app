@@ -50,32 +50,6 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void IsLoading_Always_GetExpectedSetValue()
-        {
-            // Arrange
-            viewModel.IsLoading = true;
-
-            // Act
-            var actual = viewModel.IsLoading;
-
-            // Assert
-            Assert.True(actual);
-        }
-
-        [Fact]
-        public void IsNotLoading_Always_GetExpectedSetValue()
-        {
-            // Arrange
-            viewModel.IsLoading = true;
-
-            // Act
-            var actual = viewModel.IsNotLoading;
-
-            // Assert
-            Assert.False(actual);
-        }
-
-        [Fact]
         public void IsRefreshing_Always_GetExpectedSetValue()
         {
             // Arrange
