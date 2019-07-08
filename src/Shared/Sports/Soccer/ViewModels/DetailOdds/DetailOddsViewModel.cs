@@ -21,6 +21,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
+        private bool isFirstLoad = true;
 
         public DetailOddsViewModel(
             string matchId,
@@ -62,7 +63,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOdds(BetType betTypeId, bool showLoadingIndicator = true, bool isRefresh = false)
         {
-            IsLoading = showLoadingIndicator;
+            IsLoading = showLoadingIndicator && isFirstLoad;
 
             var odds = await oddsService.GetOdds(matchId, (int)betTypeId, isRefresh);
 
@@ -81,6 +82,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 NoData = !HasData;
             }
 
+            isFirstLoad = false;
             IsLoading = false;
             IsNotLoading = true;
             IsRefreshing = false;
