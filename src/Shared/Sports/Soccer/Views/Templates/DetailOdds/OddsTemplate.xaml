@@ -20,12 +20,6 @@
                 <templateSelectors:OddsItemTemplateSelector x:Key="oddsItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
-        <ActivityIndicator
-        Margin="20"
-        IsEnabled="{Binding IsLoading}"
-        IsRunning="{Binding IsLoading}"
-        IsVisible="{Binding IsLoading}"
-        Style="{StaticResource CenterActivityIndicator}" />
 
         <Grid Style="{StaticResource SubTabContainer}">
             <Grid.RowDefinitions>
@@ -50,6 +44,13 @@
                 <Image Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
+        
+        <ActivityIndicator
+        Margin="20"
+        IsEnabled="{Binding IsLoading}"
+        IsRunning="{Binding IsLoading}"
+        IsVisible="{Binding IsLoading}"
+        Style="{StaticResource CenterActivityIndicator}" />
 
         <StackLayout IsVisible="{Binding HasData}" Style="{StaticResource TableContainer}">
             <tabStrip:TabITemListView
