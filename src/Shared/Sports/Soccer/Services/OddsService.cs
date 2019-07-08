@@ -34,7 +34,7 @@
             try
             {
                 var cacheExpiration = cacheService.CacheDuration(CacheDurationTerm.Long);
-                var cacheKey = $"Odds-{matchId}";
+                var cacheKey = $"Odds-{betTypeId}-{matchId}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
