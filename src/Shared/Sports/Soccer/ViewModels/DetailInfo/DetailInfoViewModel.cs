@@ -29,6 +29,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private readonly string matchId;
+        private bool isFirstLoad = true;
 
         public DetailInfoViewModel(
             string matchId,
@@ -86,12 +87,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
         {
-            IsLoading = showLoadingIndicator;
+            IsLoading = showLoadingIndicator && isFirstLoad;
 
             Match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
 
             BuildDetailInfo(Match);
 
+            isFirstLoad = false;
             IsLoading = false;
             IsNotLoading = true;
             IsRefreshing = false;

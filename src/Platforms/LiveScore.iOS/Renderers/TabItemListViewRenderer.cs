@@ -1,16 +1,15 @@
 ﻿using System;
-using System.Threading;
-using LiveScore.Core.Controls.MatchDetail;
+using LiveScore.Core.Controls.TabStrip;
 using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(MatchDetailListView), typeof(MatchDetailListViewRenderer))]
+[assembly: ExportRenderer(typeof(TabITemListView), typeof(TabItemListViewRenderer))]
 
 namespace LiveScore.iOS.Renderers
 {
-    public class MatchDetailListViewRenderer : ListViewRenderer
+    public class TabItemListViewRenderer : ListViewRenderer
     {
         protected override void OnElementChanged(ElementChangedEventArgs<ListView> e)
         {
@@ -25,12 +24,12 @@ namespace LiveScore.iOS.Renderers
             }
         }
 
-        protected internal MatchDetailListView Source => Element as MatchDetailListView;
+        protected internal TabITemListView Source => Element as TabITemListView;
 
         private void TvDelegate_OnScrolled(object sender, EventArgs e)
         {
             var scrollY = Control.ContentOffset.Y;
-            MatchDetailListView.OnScrolling(scrollY > 0 ? scrollY : 0);
+            TabITemListView.OnScrolling(scrollY > 0 ? scrollY : 0);
         }
     }
 

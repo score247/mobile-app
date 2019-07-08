@@ -4,7 +4,7 @@
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-              xmlns:matchDetail="clr-namespace:LiveScore.Core.Controls.MatchDetail;assembly=LiveScore.Core"
+              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
               mc:Ignorable="d"
@@ -26,7 +26,7 @@
             IsRunning="{Binding IsLoading}"
             IsVisible="{Binding IsLoading}"
             Style="{StaticResource CenterActivityIndicator}" />
-        <matchDetail:MatchDetailListView
+        <tabStrip:TabITemListView
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"
             BackgroundColor="{StaticResource LineColor}"
@@ -39,7 +39,7 @@
             RefreshCommand="{Binding RefreshCommand}"
             SeparatorColor="Transparent"
             RowHeight="43">
-            <matchDetail:MatchDetailListView.Footer>
+            <tabStrip:TabITemListView.Footer>
                 <StackLayout
                     BackgroundColor="{StaticResource SecondColor}"
                     HeightRequest="400"
@@ -64,7 +64,7 @@
                         <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" />
                     </FlexLayout>
                 </StackLayout>
-            </matchDetail:MatchDetailListView.Footer>
-        </matchDetail:MatchDetailListView>
+            </tabStrip:TabITemListView.Footer>
+        </tabStrip:TabITemListView>
     </StackLayout>
 </DataTemplate>

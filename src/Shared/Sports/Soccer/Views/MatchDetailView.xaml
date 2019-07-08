@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-    xmlns:matchDetail="clr-namespace:LiveScore.Core.Controls.MatchDetail;assembly=LiveScore.Core"
+    xmlns:controls="clr-namespace:LiveScore.Core.Controls;assembly=LiveScore.Core"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
@@ -30,7 +30,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <matchDetail:MatchDetailScrollView x:Name="ScrollView">
+        <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
                 <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
                     <Grid.RowDefinitions>
@@ -128,6 +128,6 @@
                 Style="{StaticResource CenterActivityIndicator}"
                 VerticalOptions="StartAndExpand" />
             </StackLayout>
-        </matchDetail:MatchDetailScrollView>
+        </controls:DetailScrollView>
     </ContentPage.Content>
 </ContentPage>

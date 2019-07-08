@@ -12,18 +12,17 @@
             <StackLayout.Resources>
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>
-            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}">
-            </local:TabStripHeader>
-            <ScrollView  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <cards:CarouselView
+            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}" />
+            <cards:CarouselView
+                    VerticalOptions="FillAndExpand"
+                    HorizontalOptions="FillAndExpand"
                     x:Name="TabContent"
                     IsCyclical="false"
                     IsViewCacheEnabled="True"
                     SelectedIndex="{Binding SelectedTabIndex}"
                     ItemsSource="{Binding ItemsSource}"
                     ItemTemplate="{StaticResource tabItemTemplateSelector}">
-                </cards:CarouselView>
-            </ScrollView>
+            </cards:CarouselView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

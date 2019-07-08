@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using PanCardView;
@@ -24,13 +23,13 @@
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             nameof(ItemsSource),
-            typeof(IEnumerable),
+            typeof(IEnumerable<TabItemViewModelBase>),
             typeof(TabStrip),
             propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable ItemsSource
+        public IEnumerable<TabItemViewModelBase> ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable<TabItemViewModelBase>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -59,17 +58,17 @@
             });
         }
 
-        private static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)
+        public static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)
         {
             MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
         }
 
-        private static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
+        public static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
             (args.Item as TabItemViewModelBase)?.OnAppearing();
         }
 
-        private static void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
+        public static void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
         {
             (args.Item as TabItemViewModelBase)?.OnDisappearing();
         }

@@ -219,12 +219,12 @@
     <Compile Include="AppDelegate.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="Renderers\MatchDetailScrollViewRenderer.cs" />
+    <Compile Include="Renderers\DetailScrollViewRenderer.cs" />
     <Compile Include="Renderers\DisableSelectionStyleViewCellRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Renderers\MatchDetailListViewRenderer.cs" />
+    <Compile Include="Renderers\TabItemListViewRenderer.cs" />
     <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
     <None Include="LiveScoreApp.iOS.ruleset" />
     <BundleResource Include="..\..\CommonResources\Image\flag_league\asia_cup.png">

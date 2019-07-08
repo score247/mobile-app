@@ -1,8 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
-    using System.Collections;
     using System.Collections.Generic;
-    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -15,11 +13,11 @@
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-              nameof(ItemsSource), typeof(IEnumerable), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
+              nameof(ItemsSource), typeof(IEnumerable<TabItemViewModelBase>), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable ItemsSource
+        public IEnumerable<TabItemViewModelBase> ItemsSource
         {
-            get { return (IEnumerable)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable<TabItemViewModelBase>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -74,7 +72,7 @@
                 var itemLayout = CreateItemLayout(control, index);
                 var itemLabel = new Label
                 {
-                    Text = item.HeaderTitle.ToUpperInvariant(),
+                    Text = item.HeaderTitle?.ToUpperInvariant(),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);

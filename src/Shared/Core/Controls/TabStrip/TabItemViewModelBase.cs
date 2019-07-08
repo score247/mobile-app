@@ -6,6 +6,10 @@
 
     public class TabItemViewModelBase : ViewModelBase
     {
+        public TabItemViewModelBase()
+        {
+        }
+
         public TabItemViewModelBase(INavigationService navigationService, IDependencyResolver depdendencyResolver, DataTemplate dataTemplate)
             : base(navigationService, depdendencyResolver)
         {

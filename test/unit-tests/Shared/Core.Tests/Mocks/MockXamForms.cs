@@ -79,10 +79,16 @@ namespace LiveScore.Core.Tests.Mocks
 
             public void BeginInvokeOnMainThread(Action action)
             {
-                if (_invokeOnMainThread == null)
-                    action();
-                else
-                    _invokeOnMainThread(action);
+                try
+                {
+                    if (_invokeOnMainThread == null)
+                        action();
+                    else
+                        _invokeOnMainThread(action);
+                }
+                catch
+                {
+                }
             }
 
             public Ticker CreateTicker()
