@@ -15,6 +15,11 @@ Score247 Documentation
     Match <core_business/match>
 
 .. toctree::
+   :caption: APIs
+   :maxdepth: 2
+   Soccer <apis/soccer>    
+
+.. toctree::
    :caption: System Data Flow
    :maxdepth: 2
 
