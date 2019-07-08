@@ -208,16 +208,6 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = match.EventDate.ToShortDayMonth();
         }
 
-        private static string BuildScore(MatchStatus matchStatus, int score)
-        {
-            if (matchStatus == null)
-            {
-                return string.Empty;
-            }
-
-            return matchStatus.IsPreMatch ? string.Empty : score.ToString();
-        }
-
         private void BuildViewModel(IMatch match)
         {
             MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection);
