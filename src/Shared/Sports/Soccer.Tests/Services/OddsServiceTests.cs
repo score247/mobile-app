@@ -76,7 +76,7 @@
             var expectedMatchOdds = fixture.Create<MatchOdds>();
 
             mockCache.GetAndFetchLatestValue(
-                "Odds-sr:match:1",
+                "Odds-1-sr:match:1",
                 Arg.Any<Func<Task<MatchOdds>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
                 null).Returns(expectedMatchOdds);
