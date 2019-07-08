@@ -1,13 +1,9 @@
 ﻿namespace LiveScore.Soccer.Services
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Odds;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using Refit;

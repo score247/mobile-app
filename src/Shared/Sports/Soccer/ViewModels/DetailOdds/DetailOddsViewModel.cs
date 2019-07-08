@@ -23,10 +23,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private readonly string matchId;
         private bool disposedValue;
 
-        public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
-
-        public DelegateAsyncCommand RefreshCommand { get; }
-
         public DetailOddsViewModel(
             string matchId,
             INavigationService navigationService,
@@ -35,11 +31,13 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             : base(navigationService, serviceLocator, dataTemplate)
         {
             this.matchId = matchId;
-
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
-
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds((int)BetType.OneXTwo, false, true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds(BetType.OneXTwo, false, true));
         }
+
+        public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public bool IsRefreshing { get; set; }
 
@@ -55,7 +53,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
-                await LoadOdds((int) BetType.OneXTwo);
+                await LoadOdds(BetType.OneXTwo);
             }
             catch (Exception ex)
             {
@@ -63,16 +61,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        private async Task LoadOdds(int bettypeId, bool showLoadingIndicator = true, bool isRefresh = false)
+        private async Task LoadOdds(BetType betTypeId, bool showLoadingIndicator = true, bool isRefresh = false)
         {
             IsLoading = showLoadingIndicator;
 
-            var odds = await oddsService.GetOdds(matchId, bettypeId, isRefresh);
+            var odds = await oddsService.GetOdds(matchId, (int)betTypeId, isRefresh);
 
             if (odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                   new BaseItemViewModel(BetType.OneXTwo ,t, NavigationService, DependencyResolver)
+                   new BaseItemViewModel(BetType.OneXTwo, t, NavigationService, DependencyResolver)
                    .CreateInstance()));
 
                 HasData = true;

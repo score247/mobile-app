@@ -10,21 +10,8 @@
     {
         private const string OddsNumerFormat = "0.00";
 
-        public string Bookmaker { get; set; }
-    
-        public string HomeLiveOdds { get; set; }
-        public string HomeOpeningOdds { get; set; }
-        public string HomeOddsTrend { get; set; }
-
-        public string AwayLiveOdds { get; set; }
-        public string AwayOpeningOdds { get; set; }
-        public string AwayOddsTrend { get; set; }
-
-        public string DrawLiveOdds { get; set; }
-        public string DrawOpeningOdds { get; set; }
-        public string DrawOddsTrend { get; set; }
-
         private readonly IBetTypeOdds betTypeOdds;
+
         public OneXTwoViewModel(
             BetType betType,
             IBetTypeOdds betTypeOdds,
@@ -32,32 +19,65 @@
             IDependencyResolver depdendencyResolver)
              : base(betType, betTypeOdds, navigationService, depdendencyResolver)
         {
-            this.betTypeOdds = betTypeOdds;          
+            this.betTypeOdds = betTypeOdds;
 
-            Init();
+            Initialize();
         }
 
-        private void Init()
-        {
+        public string Bookmaker { get; private set; }
 
+        public string HomeLiveOdds { get; private set; }
+
+        public string HomeOpeningOdds { get; private set; }
+
+        public string HomeOddsTrend { get; private set; }
+
+        public string AwayLiveOdds { get; private set; }
+
+        public string AwayOpeningOdds { get; private set; }
+
+        public string AwayOddsTrend { get; private set; }
+
+        public string DrawLiveOdds { get; private set; }
+
+        public string DrawOpeningOdds { get; private set; }
+
+        public string DrawOddsTrend { get; private set; }
+
+        protected override void Initialize()
+        {
             Bookmaker = betTypeOdds.Bookmaker.Name;
 
+            BuildHomeOdds();
+
+            BuildDrawOdds();
+
+            BuildAwayOdds();
+        }
+
+        private void BuildAwayOdds()
+        {
+            var awayOdds = GetOddsInfo(BetOption.Away);
+            AwayOpeningOdds = awayOdds.OpeningOdds.ToString(OddsNumerFormat);
+            AwayLiveOdds = awayOdds.LiveOdds.ToString(OddsNumerFormat);
+            AwayOddsTrend = awayOdds.OddsTrend.Value;
+        }
+
+        private void BuildDrawOdds()
+        {
+            var drawOdds = GetOddsInfo(BetOption.Draw);
+            DrawOpeningOdds = drawOdds.OpeningOdds.ToString(OddsNumerFormat);
+            DrawLiveOdds = drawOdds.LiveOdds.ToString(OddsNumerFormat);
+            DrawOddsTrend = drawOdds.OddsTrend.Value;
+        }
+
+        private void BuildHomeOdds()
+        {
             var homeOdds = GetOddsInfo(BetOption.Home);
 
             HomeLiveOdds = homeOdds.LiveOdds.ToString(OddsNumerFormat);
             HomeOpeningOdds = homeOdds.OpeningOdds.ToString(OddsNumerFormat);
             HomeOddsTrend = homeOdds.OddsTrend.Value;
-
-            var drawOdds = GetOddsInfo(BetOption.Draw);
-            DrawOpeningOdds = drawOdds.OpeningOdds.ToString(OddsNumerFormat);
-            DrawLiveOdds = drawOdds.LiveOdds.ToString(OddsNumerFormat);
-            DrawOddsTrend = drawOdds.OddsTrend.Value;
-
-            var awayOdds = GetOddsInfo(BetOption.Away);
-            AwayOpeningOdds = awayOdds.OpeningOdds.ToString(OddsNumerFormat);
-            AwayLiveOdds = awayOdds.LiveOdds.ToString(OddsNumerFormat);
-            AwayOddsTrend = awayOdds.OddsTrend.Value;
-
         }
 
         private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.First(x => x.Type.Equals(option));

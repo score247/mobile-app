@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Soccer.Models.Odds
 {
-    using System;
     using System.Collections.Generic;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Matches;

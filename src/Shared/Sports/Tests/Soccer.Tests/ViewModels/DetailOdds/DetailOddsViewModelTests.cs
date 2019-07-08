@@ -1,5 +1,7 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -12,17 +14,13 @@
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
     using Prism.Navigation;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using Xunit;
-
 
     public class DetailOddsViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
         private readonly DetailOddsViewModel viewModel;
         private readonly IOddsService oddsService;
         private readonly CompareLogic comparer;
-        private readonly ILocalStorage localStorage;
         private readonly ILoggingService loggingService;
 
         private const string matchId = "sr:match:1";
@@ -30,10 +28,9 @@
         public DetailOddsViewModelTests(ViewModelBaseFixture baseFixture)
         {
             comparer = baseFixture.CommonFixture.Comparer;
-            localStorage = Substitute.For<ILocalStorage>();
             loggingService = Substitute.For<ILoggingService>();
             oddsService = Substitute.For<IOddsService>();
-            
+
             baseFixture.DependencyResolver.Resolve<IOddsService>("1").Returns(oddsService);
             baseFixture.DependencyResolver.Resolve<ILoggingService>("1").Returns(loggingService);
 
@@ -92,7 +89,7 @@
         [Fact]
         public void OnAppearing_NoData()
         {
-            // Arrange           
+            // Arrange
 
             // Act
             viewModel.OnAppearing();
@@ -104,5 +101,5 @@
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
         }
-    }    
+    }
 }

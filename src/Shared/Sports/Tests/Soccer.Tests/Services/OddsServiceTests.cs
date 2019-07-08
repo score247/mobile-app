@@ -1,5 +1,7 @@
 ﻿namespace Soccer.Tests.Services
 {
+    using System;
+    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
@@ -9,8 +11,6 @@
     using LiveScore.Soccer.Services;
     using NSubstitute;
     using NSubstitute.ExceptionExtensions;
-    using System;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class OddsServiceTests : IClassFixture<CommonFixture>

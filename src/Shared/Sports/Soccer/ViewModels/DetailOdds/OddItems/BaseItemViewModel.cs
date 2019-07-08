@@ -12,21 +12,15 @@
 
     public class BaseItemViewModel : ViewModelBase
     {
-        private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
+        private static readonly IDictionary<BetType, Type> ViewModelMapper = new Dictionary<BetType, Type>
         {
-            { BetType.OneXTwo.ToString(), typeof(OneXTwoViewModel) },
+            { BetType.OneXTwo, typeof(OneXTwoViewModel) },
         };
 
-        private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
+        private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>
         {
-            { BetType.OneXTwo.ToString(), new OneXTwoItemTemplate() },
+            { BetType.OneXTwo, new OneXTwoItemTemplate() },
         };
-
-        public IBetTypeOdds BetTypeOdds { get; }
-
-        public BetType BetType { get; }
-
-        public string type { get; }
 
         public BaseItemViewModel(
             BetType betType,
@@ -37,14 +31,17 @@
         {
             BetTypeOdds = betTypeOdds;
             BetType = betType;
-            type = betType.ToString();
         }
+
+        public IBetTypeOdds BetTypeOdds { get; }
+
+        public BetType BetType { get; }
 
         public DataTemplate CreateTemplate()
         {
-            if (TemplateMapper.ContainsKey(type))
+            if (TemplateMapper.ContainsKey(BetType))
             {
-                return TemplateMapper[type];
+                return TemplateMapper[BetType];
             }
 
             return new OneXTwoItemTemplate();
@@ -52,10 +49,10 @@
 
         public BaseItemViewModel CreateInstance()
         {
-            if (ViewModelMapper.ContainsKey(type))
+            if (ViewModelMapper.ContainsKey(BetType))
             {
                 return Activator.CreateInstance(
-                    ViewModelMapper[type],
+                    ViewModelMapper[BetType],
                     BetType, BetTypeOdds, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 

@@ -1,8 +1,7 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using System.Threading.Tasks;
+    using LiveScore.Core.Models.Matches;
 
     public interface IOddsService
     {
