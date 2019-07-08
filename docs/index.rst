@@ -17,6 +17,7 @@ Score247 Documentation
 .. toctree::
    :caption: APIs
    :maxdepth: 2
+   
    Soccer <apis/soccer>    
 
 .. toctree::
