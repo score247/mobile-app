@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -22,7 +23,6 @@
         private readonly IOddsService oddsService;
         private readonly CompareLogic comparer;
         private readonly ILoggingService loggingService;
-
         private const string matchId = "sr:match:1";
 
         public DetailOddsViewModelTests(ViewModelBaseFixture baseFixture)
@@ -45,14 +45,14 @@
         }
 
         private MatchOdds CreateOdds()
-        => new MatchOdds
-        {
-            MatchId = matchId,
-            BetTypeOddsList = new List<BetTypeOdds>
+            => new MatchOdds
             {
-                CreateBetTypeOdds()
-            }
-        };
+                MatchId = matchId,
+                BetTypeOddsList = new List<BetTypeOdds>
+                {
+                    CreateBetTypeOdds()
+                }
+            };
 
         private BetTypeOdds CreateBetTypeOdds() => new BetTypeOdds
         {
@@ -100,6 +100,16 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
+        }
+
+        [Fact]
+        public async Task RefreshCommand_OnExecute_LoadOdds()
+        {
+            // Act
+            await viewModel.RefreshCommand.ExecuteAsync();
+
+            // Assert
+            await oddsService.Received(1).GetOdds(Arg.Is(matchId), Arg.Is(1), true);
         }
     }
 }

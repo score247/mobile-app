@@ -17,11 +17,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailOddsViewModel : TabItemViewModelBase, IDisposable
+    internal class DetailOddsViewModel : TabItemViewModelBase
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
-        private bool disposedValue;
 
         public DetailOddsViewModel(
             string matchId,
@@ -67,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             var odds = await oddsService.GetOdds(matchId, (int)betTypeId, isRefresh);
 
-            if (odds.BetTypeOddsList != null && odds.BetTypeOddsList.Any())
+            if (odds.BetTypeOddsList?.Any() == true)
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
                    new BaseItemViewModel(BetType.OneXTwo, t, NavigationService, DependencyResolver)
@@ -85,21 +84,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             IsLoading = false;
             IsNotLoading = true;
             IsRefreshing = false;
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
-                disposedValue = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }
