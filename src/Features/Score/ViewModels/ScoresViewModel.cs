@@ -122,11 +122,7 @@ namespace LiveScore.Score.ViewModels
                  .GetEvent<DateBarItemSelectedEvent>()
                  .Unsubscribe(OnDateBarItemSelected);
 
-            if (cancellationTokenSource != null)
-            {
-                cancellationTokenSource.Cancel();
-                cancellationTokenSource.Dispose();
-            }
+            cancellationTokenSource?.Dispose();
         }
 
 #pragma warning disable S3168 // "async" methods should not return "void"
