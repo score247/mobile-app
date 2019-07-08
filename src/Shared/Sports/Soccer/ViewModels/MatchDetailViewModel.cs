@@ -58,8 +58,6 @@ namespace LiveScore.Soccer.ViewModels
 
         public MatchViewModel MatchViewModel { get; private set; }
 
-        public bool IsLoading { get; private set; }
-
         public string DisplayEventDate { get; set; }
 
         public string DisplaySecondLeg { get; private set; }
@@ -104,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             try
             {
-                await LoadMatchDetail(MatchViewModel.Match.Id);
+                await LoadData(() => LoadMatchDetail(MatchViewModel.Match.Id));
 
                 cancellationTokenSource = new CancellationTokenSource();
 
@@ -118,9 +116,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private async Task LoadMatchDetail(string matchId)
         {
-            IsLoading = true;
             var match = await matchService.GetMatch(SettingsService.UserSettings, matchId);
-            IsLoading = false;
 
             BuildTabFunctions(match);
         }

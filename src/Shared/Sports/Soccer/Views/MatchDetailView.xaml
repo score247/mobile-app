@@ -122,11 +122,11 @@
                 <tabStrip:TabStrip ItemsSource="{Binding TabViews}" x:Name="TabStrip" />
 
                 <ActivityIndicator
-                IsEnabled="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}"
-                IsVisible="{Binding IsLoading}"
-                Style="{StaticResource CenterActivityIndicator}"
-                VerticalOptions="StartAndExpand" />
+                    IsEnabled="{Binding IsLoading}"
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    Style="{StaticResource CenterActivityIndicator}"
+                    VerticalOptions="StartAndExpand" />
             </StackLayout>
         </controls:DetailScrollView>
     </ContentPage.Content>

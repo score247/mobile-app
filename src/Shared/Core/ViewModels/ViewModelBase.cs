@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
+    using System;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Services;
@@ -49,6 +50,10 @@
 
         public ILoggingService LoggingService { get; protected set; }
 
+        public bool IsLoading { get; protected set; }
+
+        public bool IsNotLoading => !IsLoading;
+
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
         }
@@ -83,6 +88,15 @@
         public virtual void OnDisappearing()
         {
             Clean();
+        }
+
+        protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
+        {
+            IsLoading = showLoading;
+
+            await loadDataFunc.Invoke();
+
+            IsLoading = false;
         }
 
         protected async Task NavigateToHome()

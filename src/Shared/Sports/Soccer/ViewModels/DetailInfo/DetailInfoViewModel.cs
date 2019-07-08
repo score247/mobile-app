@@ -29,7 +29,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private readonly string matchId;
-        private bool isFirstLoad = true;
 
         public DetailInfoViewModel(
             string matchId,
@@ -42,16 +41,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.matchId = matchId;
             this.matchHubConnection = matchHubConnection;
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadMatchDetail(Match.Id, false, true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(Match.Id, true), false));
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public bool IsRefreshing { get; set; }
-
-        public bool IsLoading { get; private set; }
-
-        public bool IsNotLoading { get; private set; }
 
         public IMatch Match { get; private set; }
 
@@ -74,8 +69,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             try
             {
-                await LoadMatchDetail(matchId);
                 cancellationTokenSource = new CancellationTokenSource();
+
+                await LoadData(() => LoadMatchDetail(matchId));
 
                 await StartListeningMatchHubEvent();
             }
@@ -85,17 +81,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
         }
 
-        private async Task LoadMatchDetail(string matchId, bool showLoadingIndicator = true, bool isRefresh = false)
+        private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
         {
-            IsLoading = showLoadingIndicator && isFirstLoad;
-
             Match = await matchService.GetMatch(SettingsService.UserSettings, matchId, isRefresh);
 
             BuildDetailInfo(Match);
 
-            isFirstLoad = false;
-            IsLoading = false;
-            IsNotLoading = true;
             IsRefreshing = false;
         }
 

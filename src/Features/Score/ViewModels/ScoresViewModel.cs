@@ -40,15 +40,11 @@ namespace LiveScore.Score.ViewModels
         {
             SelectedDate = DateTime.Today;
             MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(selectedDateRange, false, true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
             matchHubConnection = hubService.BuildMatchHubConnection();
         }
 
         public DateTime SelectedDate { get; internal set; }
-
-        public bool IsLoading { get; set; }
-
-        public bool IsNotLoading => !IsLoading;
 
         public bool IsRefreshing { get; set; }
 
@@ -90,7 +86,7 @@ namespace LiveScore.Score.ViewModels
         {
             if (MatchItemSource == null)
             {
-                await LoadData(DateRange.FromYesterdayUntilNow());
+                await LoadMatches(DateRange.FromYesterdayUntilNow());
             }
         }
 
@@ -127,17 +123,14 @@ namespace LiveScore.Score.ViewModels
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 
-        private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(dateRange);
+        private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(() => LoadMatches(dateRange));
 
 #pragma warning restore S3168 // "async" methods should not return "void"
 
-        private async Task LoadData(
+        private async Task LoadMatches(
             DateRange dateRange,
-            bool showLoadingIndicator = true,
             bool forceFetchNewData = false)
         {
-            IsLoading = showLoadingIndicator;
-
             if (IsLoading)
             {
                 MatchItemSource?.Clear();
@@ -151,7 +144,6 @@ namespace LiveScore.Score.ViewModels
             MatchItemSource = BuildMatchItemSource(matches);
 
             selectedDateRange = dateRange;
-            IsLoading = false;
             IsRefreshing = false;
         }
 

@@ -21,7 +21,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     {
         private readonly IOddsService oddsService;
         private readonly string matchId;
-        private bool isFirstLoad = true;
 
         public DetailOddsViewModel(
             string matchId,
@@ -32,7 +31,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             this.matchId = matchId;
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOdds(BetType.OneXTwo, false, true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OneXTwo, true), false));
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -40,10 +39,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public bool IsRefreshing { get; set; }
-
-        public bool IsLoading { get; private set; }
-
-        public bool IsNotLoading { get; private set; }
 
         public bool HasData { get; private set; }
 
@@ -53,7 +48,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
-                await LoadOdds(BetType.OneXTwo);
+                await LoadData(() => LoadOdds(BetType.OneXTwo));
             }
             catch (Exception ex)
             {
@@ -61,10 +56,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        private async Task LoadOdds(BetType betTypeId, bool showLoadingIndicator = true, bool isRefresh = false)
+        private async Task LoadOdds(BetType betTypeId, bool isRefresh = false)
         {
-            IsLoading = showLoadingIndicator && isFirstLoad;
-
             var odds = await oddsService.GetOdds(matchId, (int)betTypeId, isRefresh);
 
             if (odds.BetTypeOddsList?.Any() == true)
@@ -82,9 +75,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 NoData = !HasData;
             }
 
-            isFirstLoad = false;
-            IsLoading = false;
-            IsNotLoading = true;
             IsRefreshing = false;
         }
     }
