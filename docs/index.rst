@@ -9,6 +9,12 @@ Score247 Documentation
    Technical Requirements <introduction/technical_requirements> 
 
 .. toctree::
+   :caption: APIs
+   :maxdepth: 2
+
+   Soccer <apis/soccer>
+
+.. toctree::
    :caption: Sport Radar Data
    :maxdepth: 2
 
