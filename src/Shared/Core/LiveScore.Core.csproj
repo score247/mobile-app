@@ -17,6 +17,14 @@
         <CodeAnalysisRuleSet>LiveScore.Core.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Remove="Animations\**" />
+      <Compile Remove="Triggers\**" />
+      <EmbeddedResource Remove="Animations\**" />
+      <EmbeddedResource Remove="Triggers\**" />
+      <None Remove="Animations\**" />
+      <None Remove="Triggers\**" />
+    </ItemGroup>
+    <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

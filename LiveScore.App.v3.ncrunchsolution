@@ -33,6 +33,9 @@
       <Value>Services\EssentialsService.cs:src\Shared\Common\LiveScore.Common.csproj</Value>
       <Value>src\Shared\Common\LiveScore.Common.csproj\Controls</Value>
       <Value>src\Shared\Sports\Soccer\Soccer.csproj\ViewResources</Value>
+      <Value>src\Shared\Core\LiveScore.Core.csproj\Animations</Value>
+      <Value>src\Shared\Core\LiveScore.Core.csproj\Triggers</Value>
+      <Value>src\Shared\Core\LiveScore.Core.csproj\Events</Value>
     </MetricsExclusionList>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
