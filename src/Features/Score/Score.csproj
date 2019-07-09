@@ -24,7 +24,6 @@
       <None Remove="Views\Templates\**" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Xamarin.Forms" Version="4.1.0.555618" />
         <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
         <PackageReference Include="Refit" Version="4.7.9" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
@@ -32,6 +31,7 @@
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
         <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+        <PackageReference Include="Xamarin.Forms" Version="3.6.0.539721" />
     </ItemGroup>
     <ItemGroup>
         <Compile Remove="ViewModels\CalendarPageViewModel.cs" />
@@ -82,5 +82,37 @@
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ViewResources\" />
+    </ItemGroup>
+    <ItemGroup>
+      <None Update="ViewResources\MatchH2HViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchInfoViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchLineUpsViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchOddsViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchSocialViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchStatsViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchTableViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="ViewResources\MatchTrackerViewResource.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="Views\LiveView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
+      <None Update="Views\ScoresView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+      </None>
     </ItemGroup>
 </Project>
