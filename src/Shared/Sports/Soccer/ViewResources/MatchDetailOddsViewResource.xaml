@@ -40,6 +40,7 @@
 
     <Style x:Key="MatchDetailOddsDropdownContainer" TargetType="StackLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
     <Style x:Key="MatchDetailOddsDropdownText" TargetType="Label">
