@@ -18,11 +18,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" colorSpace="calibratedRGB" red="0.054901960784313725" green="0.058823529411764705" blue="0.10980392156862745" alpha="1"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="464" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" image="images/common/logo_splash_screen.png">
-                                <rect key="frame" x="115" y="180" width="140" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="1472" translatesAutoresizingMaskIntoConstraints="NO" image="images/common/logo_splash_screen.png">
+                                <rect key="frame" x="149" y="177" width="116" height="148"/>
                             </imageView>
                         </subviews>
+                        <constraints>
+                            <constraint id="3044" firstItem="1472" firstAttribute="top" secondItem="Y8P-hJ-Z43" secondAttribute="bottom" constant="157"/>
+                            <constraint id="3243" firstItem="1472" firstAttribute="leading" secondItem="yd7-JS-zBw" secondAttribute="leadingMargin" constant="129"/>
+                            <constraint id="3660" firstItem="1472" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
+                            <constraint id="3661" firstItem="1472" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
+                            <constraint id="3662" firstItem="1472" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
+                            <constraint id="3663" firstItem="1472" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
+                            <constraint id="3664" firstItem="1472" firstAttribute="centerX" secondItem="yd7-JS-zBw" secondAttribute="centerX"/>
+                            <constraint id="3665" firstAttribute="trailingMargin" secondItem="1472" secondAttribute="trailing" constant="129"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XAI-xm-WK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
