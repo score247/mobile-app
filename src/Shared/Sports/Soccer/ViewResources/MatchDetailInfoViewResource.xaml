@@ -14,8 +14,6 @@
     </Style>
 
     <Style x:Key="MatchInfoTeam" TargetType="StackLayout">
-        <Setter Property="FlexLayout.Shrink" Value="0" />
-        <Setter Property="FlexLayout.Grow" Value="0.4" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
 
@@ -27,10 +25,8 @@
     </Style>
 
     <Style x:Key="MatchInfoScoreContainer" TargetType="StackLayout">
-        <Setter Property="Margin" Value="10,0" />
-        <Setter Property="FlexLayout.AlignSelf" Value="Center" />
-        <Setter Property="FlexLayout.Basis" Value="68" />
-        <Setter Property="FlexLayout.Shrink" Value="0" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="VerticalOptions" Value="Center" />
     </Style>
     <Style x:Key="MatchInfoScoreBox" TargetType="Button">
         <Setter Property="HeightRequest" Value="20" />
@@ -54,12 +50,9 @@
     </Style>
 
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
-        <Setter Property="WidthRequest" Value="40" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="HorizontalTextAlignment" Value="Start" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
-        <Setter Property="FlexLayout.Shrink" Value="0" />
     </Style>
 
     <Style x:Key="MatchInfoPlayerGroup" TargetType="StackLayout">

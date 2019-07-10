@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
-    <ViewCell Height="42">
+    <ViewCell>
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
@@ -14,9 +14,27 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
-            <FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
-                <Label Style="{StaticResource MatchInfoMinutes}" Text="{Binding MatchTime}" />
-                <StackLayout Style="{StaticResource MatchInfoTeam}">
+
+            <Grid Padding="16,0" BackgroundColor="{Binding RowColor}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="68" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42" />
+                </Grid.RowDefinitions>
+
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchInfoMinutes}"
+                    Text="{Binding MatchTime}" />
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchInfoTeam}">
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label
                             HorizontalTextAlignment="End"
@@ -35,10 +53,16 @@
                             Style="{StaticResource MatchInfoImage}" />
                     </StackLayout>
                 </StackLayout>
-                <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Style="{StaticResource MatchInfoScoreContainer}">
                     <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
                 </StackLayout>
-                <StackLayout Style="{StaticResource MatchInfoTeam}">
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    Style="{StaticResource MatchInfoTeam}">
                     <Image
                         IsVisible="{Binding VisibleAwayImage}"
                         Source="{Binding ImageSource}"
@@ -48,7 +72,8 @@
                         <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding AwayAssistName}" />
                     </StackLayout>
                 </StackLayout>
-            </FlexLayout>
+
+            </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>

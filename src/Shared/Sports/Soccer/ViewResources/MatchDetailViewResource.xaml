@@ -24,7 +24,7 @@
         x:Key="MatchGeneralInfoImportant"
         BasedOn="{StaticResource FlexLayoutAlignCenter}"
         TargetType="FlexLayout">
-        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="HeightRequest" Value="24" />
         <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
     </Style>
 
