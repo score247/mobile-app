@@ -71,7 +71,7 @@
                 RefreshCommand="{Binding RefreshCommand}"
                 SeparatorVisibility="None"
                 Header="{Binding}"
-                HeaderTemplate="{StaticResource OneXTwoHeaderTemplate}">
+                HeaderTemplate="{Binding HeaderTemplate}">
             </tabStrip:TabITemListView>
         </StackLayout>
         <StackLayout IsVisible="{Binding NoData}">

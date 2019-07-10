@@ -14,7 +14,7 @@
     {
         private static readonly IDictionary<BetType, Type> ViewModelMapper = new Dictionary<BetType, Type>
         {
-            { BetType.OneXTwo, typeof(OneXTwoViewModel) },
+            { BetType.OneXTwo, typeof(OneXTwoItemViewModel) },
         };
 
         private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>

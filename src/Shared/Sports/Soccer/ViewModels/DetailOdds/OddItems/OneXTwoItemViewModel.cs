@@ -6,13 +6,13 @@
     using LiveScore.Soccer.Enumerations;
     using Prism.Navigation;
 
-    public class OneXTwoViewModel : BaseItemViewModel
+    public class OneXTwoItemViewModel : BaseItemViewModel
     {
         private const string OddsNumerFormat = "0.00";
 
         private readonly IBetTypeOdds betTypeOdds;
 
-        public OneXTwoViewModel(
+        public OneXTwoItemViewModel(
             BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,

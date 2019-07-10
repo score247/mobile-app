@@ -19,6 +19,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
     internal class DetailOddsViewModel : TabItemViewModelBase
     {
+
+
         private readonly IOddsService oddsService;
         private readonly string matchId;
 
@@ -35,6 +37,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
+
+        public DataTemplate HeaderTemplate { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -56,15 +60,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        private async Task LoadOdds(BetType betTypeId, bool isRefresh = false)
+        private async Task LoadOdds(BetType betType, bool isRefresh = false)
         {
-            var odds = await oddsService.GetOdds(matchId, (int)betTypeId, isRefresh);
+            var odds = await oddsService.GetOdds(matchId, (int)betType, isRefresh);
 
             if (odds.BetTypeOddsList?.Any() == true)
             {
                 BetTypeOdds = new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                   new BaseItemViewModel(BetType.OneXTwo, t, NavigationService, DependencyResolver)
+                   new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
                    .CreateInstance()));
+
+                HeaderTemplate = new BaseHeaderViewModel(betType, NavigationService, DependencyResolver).CreateTemplate();
 
                 HasData = true;
                 NoData = !HasData;
