@@ -15,25 +15,29 @@
             { BetType.OneXTwo, new OneXTwoHeaderTemplate() },
         };
 
+        private readonly bool HasData;
+
         public BaseHeaderViewModel(
             BetType betType,
+            bool hasData,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
             : base(navigationService, depdendencyResolver)
         {          
             BetType = betType;
+            HasData = hasData;
         }
 
         public BetType BetType { get; }
 
         public DataTemplate CreateTemplate()
         {
-            if (TemplateMapper.ContainsKey(BetType))
+            if (HasData && TemplateMapper.ContainsKey(BetType))
             {
                 return TemplateMapper[BetType];
             }
 
-            return new OneXTwoHeaderTemplate();
+            return new NoDataTemplate();
         }
     }
 }

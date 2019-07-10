@@ -9,7 +9,6 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
-    xmlns:oddTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems"
     mc:Ignorable="d">
     <StackLayout>
         <StackLayout.Resources>
@@ -19,7 +18,6 @@
                     <resources:MatchDetailOddsViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <templateSelectors:OddsItemTemplateSelector x:Key="oddsItemTemplateSelector" />
-                <oddTemplates:OneXTwoHeaderTemplate x:Key="OneXTwoHeaderTemplate" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
@@ -57,7 +55,7 @@
             IsVisible="{Binding IsLoading}"
             Style="{StaticResource CenterActivityIndicator}" />
 
-        <StackLayout IsVisible="{Binding HasData}" Style="{StaticResource TableContainer}">
+        <StackLayout Style="{StaticResource TableContainer}">
             <tabStrip:TabITemListView
                 AutomationId="MatchOdds"
                 AutomationProperties.IsInAccessibleTree="False"
@@ -73,9 +71,6 @@
                 Header="{Binding}"
                 HeaderTemplate="{Binding HeaderTemplate}">
             </tabStrip:TabITemListView>
-        </StackLayout>
-        <StackLayout IsVisible="{Binding NoData}">
-            <Label Style="{StaticResource NoInfo}" Text="{langs:Translate NoData}" />
         </StackLayout>
     </StackLayout>
 </DataTemplate>
