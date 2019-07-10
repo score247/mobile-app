@@ -776,5 +776,14 @@
   <ItemGroup>
     <BundleResource Include="Resources\images\common\arrow_down%403x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\logo_splash_screen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\logo_splash_screen%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\logo_splash_screen%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
