@@ -46,7 +46,7 @@
 
         protected override void Initialize()
         {
-            Bookmaker = betTypeOdds.Bookmaker.Name;
+            Bookmaker = betTypeOdds.Bookmaker?.Name;
 
             BuildHomeOdds();
 
@@ -58,28 +58,39 @@
         private void BuildAwayOdds()
         {
             var awayOdds = GetOddsInfo(BetOption.Away);
-            AwayOpeningOdds = awayOdds.OpeningOdds.ToString(OddsNumerFormat);
-            AwayLiveOdds = awayOdds.LiveOdds.ToString(OddsNumerFormat);
-            AwayOddsTrend = awayOdds.OddsTrend.Value;
+
+            if (awayOdds != null)
+            {
+                AwayOpeningOdds = awayOdds.OpeningOdds.ToString(OddsNumerFormat);
+                AwayLiveOdds = awayOdds.LiveOdds.ToString(OddsNumerFormat);
+                AwayOddsTrend = awayOdds.OddsTrend.Value;
+            }            
         }
 
         private void BuildDrawOdds()
         {
             var drawOdds = GetOddsInfo(BetOption.Draw);
-            DrawOpeningOdds = drawOdds.OpeningOdds.ToString(OddsNumerFormat);
-            DrawLiveOdds = drawOdds.LiveOdds.ToString(OddsNumerFormat);
-            DrawOddsTrend = drawOdds.OddsTrend.Value;
+
+            if (drawOdds != null)
+            {
+                DrawOpeningOdds = drawOdds.OpeningOdds.ToString(OddsNumerFormat);
+                DrawLiveOdds = drawOdds.LiveOdds.ToString(OddsNumerFormat);
+                DrawOddsTrend = drawOdds.OddsTrend.Value;
+            }            
         }
 
         private void BuildHomeOdds()
         {
             var homeOdds = GetOddsInfo(BetOption.Home);
 
-            HomeLiveOdds = homeOdds.LiveOdds.ToString(OddsNumerFormat);
-            HomeOpeningOdds = homeOdds.OpeningOdds.ToString(OddsNumerFormat);
-            HomeOddsTrend = homeOdds.OddsTrend.Value;
+            if (homeOdds != null)
+            {
+                HomeLiveOdds = homeOdds.LiveOdds.ToString(OddsNumerFormat);
+                HomeOpeningOdds = homeOdds.OpeningOdds.ToString(OddsNumerFormat);
+                HomeOddsTrend = homeOdds.OddsTrend.Value;
+            }
         }
 
-        private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.First(x => x.Type.Equals(option));
+        private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }
