@@ -86,7 +86,7 @@ namespace LiveScore.Score.ViewModels
         {
             if (MatchItemSource == null)
             {
-                await LoadMatches(DateRange.FromYesterdayUntilNow());
+                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
             }
         }
 
