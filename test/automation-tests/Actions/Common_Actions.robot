@@ -16,6 +16,7 @@ ${password}       1234aa
 ${host}           10.18.200.110
 ${port}           5444
 ${Push_File}      https://api.nexdev.net/V4/api/Mock/PushMatchEvents
+${Push_Odds}      https://api.nexdev.net/V2/api/Mock/InsertOdds
 
 *** Keywords ***
 Start Appium Server
@@ -31,7 +32,7 @@ Open Application On Real Ios Device
 
 Open Application On Simulator
     [Arguments]    ${deviceName}
-    Open Application    http://0.0.0.0:4723/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
+    Open Application    http://0.0.0.0:4726/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
     sleep    3s
 
 Init_Simulator

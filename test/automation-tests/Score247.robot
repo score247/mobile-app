@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Init_Simulator    iPhone 8
+Suite Setup       Init_Simulator    iPhone X
 Suite Teardown    Suite TearDown
 Library           AppiumLibrary
 Library           Process
@@ -665,5 +665,119 @@ SP3_SP4_List_Event_Of_Match4
     ${current_date}=    Get Current Date    result_format=%Y
     ${Kick_Of_Time}=    Catenate    ${Kick_Of_Time}    ${current_date}
     Page Should Contain Element    accessibility_id=${Kick_Of_Time}
+
+SP5_Odds_1x2_Post Match
+    ${json}=    Get File    ${CURDIR}/Template_Files/Data_Odds_1x2_auto.json
+    #Push events
+    Post    ${Push_Odds}    ${json}
+    Integer    response status    200
+    Output
+    Sleep    5
+    Click Element    ${btn_Scores}
+    #Go to current date to view data
+    Sleep    5
+    Click Element    ${btn_currentdate-2}
+    Capture Page Screenshot
+    Sleep    5
+    Wait Until Element Is Visible    accessibility_id=Gzira United
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=Gzira United
+    Sleep    3
+    # Verify odd of Bookmaker 1
+    ${bmaker1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name    #name of bookmaker
+    Should Be Equal As Strings    ${bmaker1}    Alibaba
+    ${live_odd1_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name    #verify value of home (1)
+    Should Be Equal As Numbers    ${live_odd1_1}    3.75
+    ${live_odd1_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name    #verify value of Draw (X)
+    Should Be Equal As Numbers    ${live_odd1_X}    4.90
+    ${live_odd1_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name    #verify value of away (2)
+    Should Be Equal As Numbers    ${live_odd1_2}    2.40
+    ${open_odd1_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Should Be Equal As Numbers    ${open_odd1_1}    3.95
+    ${open_odd1_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Should Be Equal As Numbers    ${open_odd1_X}    4.90
+    ${open_odd1_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[1]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Should Be Equal As Numbers    ${open_odd1_2}    1.57
+    # Verify odd of Bookmaker 2
+    ${bmaker2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
+    Should Be Equal As Strings    ${bmaker2}    BiTis
+    ${live_odd2_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
+    Should Be Equal As Numbers    ${live_odd2_1}    4.50
+    ${live_odd2_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
+    Should Be Equal As Numbers    ${live_odd2_X}    5.50
+    ${live_odd2_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
+    Should Be Equal As Numbers    ${live_odd2_2}    2.40
+    ${open_odd2_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Should Be Equal As Numbers    ${open_odd2_1}    4.00
+    ${open_odd2_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Should Be Equal As Numbers    ${open_odd2_X}    4.50
+    ${open_odd2_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[2]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Should Be Equal As Numbers    ${open_odd2_2}    1.60
+    # Verify odd of Bookmaker 3
+    ${bmaker3}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
+    Should Be Equal As Strings    ${bmaker3}    Sunny203
+    ${live_odd3_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
+    Should Be Equal As Numbers    ${live_odd3_1}    3.75
+    ${live_odd3_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
+    Should Be Equal As Numbers    ${live_odd3_X}    4.75
+    ${live_odd3_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
+    Should Be Equal As Numbers    ${live_odd3_2}    1.40
+    ${open_odd3_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Should Be Equal As Numbers    ${open_odd3_1}    4.00
+    ${open_odd3_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Should Be Equal As Numbers    ${open_odd3_X}    4.50
+    ${open_odd3_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[3]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Should Be Equal As Numbers    ${open_odd3_2}    1.57
+    # Verify odd of Bookmaker 4
+    ${bmaker4}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
+    Should Be Equal As Strings    ${bmaker4}    TigerBet
+    ${live_odd4_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
+    Should Be Equal As Numbers    ${live_odd4_1}    6.00
+    ${live_odd4_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
+    Should Be Equal As Numbers    ${live_odd4_X}    4.30
+    ${live_odd4_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
+    Should Be Equal As Numbers    ${live_odd4_2}    2.20
+    ${open_odd4_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Should Be Equal As Numbers    ${open_odd4_1}    6.00
+    ${open_odd4_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Should Be Equal As Numbers    ${open_odd4_X}    4.50
+    ${open_odd4_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Should Be Equal As Numbers    ${open_odd4_2}    2.35
+    Comment    # Verify odd of Bookmaker 5
+    Comment    ${bmaker5}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
+    Comment    Should Be Equal As Strings    ${bmaker5}    Sunny203
+    Comment    ${live_odd5_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
+    Comment    Should Be Equal As Numbers    ${live_odd5_1}    2.99
+    Comment    ${live_odd5_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
+    Comment    Should Be Equal As Numbers    ${live_odd5_X}    4.78
+    Comment    ${live_odd5_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
+    Comment    Should Be Equal As Numbers    ${live_odd5_2}    2.39
+    Comment    ${open_odd5_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Comment    Should Be Equal As Numbers    ${open_odd5_1}    3.86
+    Comment    ${open_odd5_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Comment    Should Be Equal As Numbers    ${open_odd5_X}    4.24
+    Comment    ${open_odd5_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Comment    Should Be Equal As Numbers    ${open_odd5_2}    2.39
+    Comment    # Verify odd of Bookmaker 6
+    Comment    ${bmaker6}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
+    Comment    Should Be Equal As Strings    ${bmaker6}    TigerBet
+    Comment    ${live_odd6_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
+    Comment    Should Be Equal As Numbers    ${live_odd6_1}    2.20
+    Comment    ${live_odd6_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
+    Comment    Should Be Equal As Numbers    ${live_odd6_X}    3.75
+    Comment    ${live_odd6_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
+    Comment    Should Be Equal As Numbers    ${live_odd6_2}    2.40
+    Comment    ${open_odd6_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
+    Comment    Should Be Equal As Numbers    ${open_odd6_1}    3.80
+    Comment    ${open_odd6_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
+    Comment    Should Be Equal As Numbers    ${open_odd6_X}    3.75
+    Comment    ${open_odd6_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
+    Comment    Should Be Equal As Numbers    ${open_odd6_2}    1.70
+    #Verify Name of Bookmaker asc
+    ${list_bookmaker_app}=    Create List    ${bmaker1}    ${bmaker2}    ${bmaker3}    ${bmaker4}    # list bookmaker name on app
+    ${list_bookmaker_app_before}=    Create List    ${bmaker1}    ${bmaker2}    ${bmaker3}    ${bmaker4}    # list bookmaker name on app
+    Sort List    ${list_bookmaker_app}    # Sort list bookmaker name on app acs anphalbe
+    Log List    ${list_bookmaker_app}
+    Lists Should Be Equal    ${list_bookmaker_app}    ${list_bookmaker_app_before}    # list after sorting asc and list name on app
 
 *** Keywords ***
