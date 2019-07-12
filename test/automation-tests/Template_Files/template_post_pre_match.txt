@@ -6,7 +6,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "Real Betis Balompie - AB",
+            "Name": "FC Astana",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -20,7 +20,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "FC Barcelona - AB",
+            "Name": "CFR Cluj",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -36,7 +36,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "AFC Cup",
+        "Name": "CHAMPIONS LEAGUE - QUALIFICATION",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -101,7 +101,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "Real Betis Balompie - Ended",
+            "Name": "Ararat Armenia",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -115,7 +115,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "FC Barcelona - Ended",
+            "Name": "AIK",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -131,7 +131,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "AFC Cup",
+        "Name": "CHAMPIONS LEAGUE - QUALIFICATION",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -196,7 +196,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "Real Betis Balompie - Closed",
+            "Name": "Gzira United",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -210,7 +210,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "FC Barcelona - Closed",
+            "Name": "Hajduk Split",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -226,7 +226,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "AFC Cup",
+        "Name": "EUROPA LEAGUE - QUALIFICATION",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -291,7 +291,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "KV Kortrijk - Full-time",
+            "Name": "AS Jeunesse Esch",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -305,7 +305,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "Royal Antwerp FC - Full-time",
+            "Name": "Tobol Kostanay",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -321,7 +321,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "AFC Cup",
+        "Name": "EUROPA LEAGUE - QUALIFICATION",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -386,7 +386,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "KV Kortrijk - AET",
+            "Name": "Livingston",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -400,7 +400,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "Royal Antwerp FC - AET",
+            "Name": "Alloa Athletic",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -416,7 +416,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "Italy",
+        "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -481,7 +481,7 @@
         {
             "Id": "sr:competitor:4858",
             "Flag": null,
-            "Name": "Juventus Turin - AP",
+            "Name": "Carlisle United",
             "Coach": null,
             "IsHome": true,
             "Country": "Belgium",
@@ -495,7 +495,7 @@
         {
             "Id": "sr:competitor:2889",
             "Flag": null,
-            "Name": "Genoa FC - AP",
+            "Name": "Hibernian",
             "Coach": null,
             "IsHome": false,
             "Country": "Belgium",
@@ -511,7 +511,7 @@
     "League": {
         "Id": "sr:tournament:38",
         "Flag": null,
-        "Name": "Italy",
+        "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
         "Category": {
             "Id": "sr:category:33",
@@ -576,7 +576,7 @@
         {
             "Id": "sr:competitor:399419",
             "Flag": null,
-            "Name": "LZS Agroplan Gluszyna - NotStarted",
+            "Name": "Accrington Stanley",
             "Coach": null,
             "IsHome": true,
             "Country": null,
@@ -590,7 +590,7 @@
         {
             "Id": "sr:competitor:272057",
             "Flag": null,
-            "Name": "Stal Brzeg - NotStarted",
+            "Name": "Marseille",
             "Coach": null,
             "IsHome": false,
             "Country": null,
@@ -606,7 +606,7 @@
     "League": {
         "Id": "sr:tournament:25839",
         "Flag": null,
-        "Name": "Premier League",
+        "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
         "Category": {
             "Id": "sr:category:47",
@@ -652,7 +652,7 @@
         {
             "Id": "sr:competitor:2320",
             "Flag": null,
-            "Name": "FC Lokomotiv Moscow - Postponed",
+            "Name": "Tranmere Rovers",
             "Coach": null,
             "IsHome": true,
             "Country": "Russia",
@@ -666,7 +666,7 @@
         {
             "Id": "sr:competitor:34425",
             "Flag": null,
-            "Name": "FC Krasnodar - Postponed",
+            "Name": "Liverpool",
             "Coach": null,
             "IsHome": false,
             "Country": "Russia",
@@ -682,7 +682,7 @@
     "League": {
         "Id": "sr:tournament:203",
         "Flag": null,
-        "Name": "Premier League",
+        "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
         "Category": {
             "Id": "sr:category:21",
@@ -747,7 +747,7 @@
         {
             "Id": "sr:competitor:52679",
             "Flag": null,
-            "Name": "Arsenal Kiev - StartDelayed",
+            "Name": "AFC Eskilstuna",
             "Coach": null,
             "IsHome": true,
             "Country": "Ukraine",
@@ -761,7 +761,7 @@
         {
             "Id": "sr:competitor:52672",
             "Flag": null,
-            "Name": "FC Oleksandriya - StartDelayed",
+            "Name": "Kalmar FF",
             "Coach": null,
             "IsHome": false,
             "Country": "Ukraine",
@@ -777,7 +777,7 @@
     "League": {
         "Id": "sr:tournament:892",
         "Flag": null,
-        "Name": "U21",
+        "Name": "SWEDEN - ALLSVENSKAN",
         "Order": 0,
         "Category": {
             "Id": "sr:category:86",
@@ -823,7 +823,7 @@
         {
             "Id": "sr:competitor:52679",
             "Flag": null,
-            "Name": "Arsenal Kiev - Cancelled",
+            "Name": "Broendby IF",
             "Coach": null,
             "IsHome": true,
             "Country": "Ukraine",
@@ -837,7 +837,7 @@
         {
             "Id": "sr:competitor:52672",
             "Flag": null,
-            "Name": "FC Oleksandriya - Cancelled",
+            "Name": "Silkeborg",
             "Coach": null,
             "IsHome": false,
             "Country": "Ukraine",
@@ -853,7 +853,7 @@
     "League": {
         "Id": "sr:tournament:892",
         "Flag": null,
-        "Name": "U21",
+        "Name": "DENMARK - SUPERLIGA",
         "Order": 0,
         "Category": {
             "Id": "sr:category:86",

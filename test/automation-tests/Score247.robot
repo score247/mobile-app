@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Init_Simulator    iPhone X
+Suite Setup       Init_Simulator    iPhone 8
 Suite Teardown    Suite TearDown
 Library           AppiumLibrary
 Library           Process
@@ -185,18 +185,18 @@ SP2_Score_Post_Pre_Match_Date1
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="AB"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="AFC CUP"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="AFC CUP"]/preceding::XCUIElementTypeStaticText[2]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="CHAMPIONS LEAGUE - QUALIFICATION"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="CHAMPIONS LEAGUE - QUALIFICATION"]/preceding::XCUIElementTypeStaticText[2]
     ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AB"]    value
     ${homescore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AB"]/following::XCUIElementTypeStaticText[1]    value
     ${awayscore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AB"]/following::XCUIElementTypeStaticText[2]    value
     ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AB"]/following::XCUIElementTypeStaticText[3]    value
     ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AB"]/following::XCUIElementTypeStaticText[4]    value
-    Should Be Equal As Strings    '${leaguename}'    'AFC CUP'
+    Should Be Equal As Strings    '${leaguename}'    'CHAMPIONS LEAGUE - QUALIFICATION'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    'AB'
-    Should Be Equal As Strings    '${homename_match1}'    'Real Betis Balompie - AB'
-    Should Be Equal As Strings    '${awayname_match1}'    'FC Barcelona - AB'
+    Should Be Equal As Strings    '${homename_match1}'    'FC Astana'
+    Should Be Equal As Strings    '${awayname_match1}'    'CFR Cluj'
     Should Be Equal As Integers    ${homescore_match1}    2
     Should Be Equal As Integers    ${awayscore_match1}    1
     #Get data from app for match 2
@@ -206,8 +206,8 @@ SP2_Score_Post_Pre_Match_Date1
     ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="FT"]/following::XCUIElementTypeStaticText[3]    value
     ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="FT"]/following::XCUIElementTypeStaticText[4]    value
     Should Be Equal As Strings    '${match2_status}'    'FT'
-    Should Be Equal As Strings    '${homename_match2}'    'Real Betis Balompie - Ended'
-    Should Be Equal As Strings    '${awayname_match2}'    'FC Barcelona - Ended'
+    Should Be Equal As Strings    '${homename_match2}'    'Ararat Armenia'
+    Should Be Equal As Strings    '${awayname_match2}'    'AIK'
     Should Be Equal As Strings    ${homescore_match2}    2
     Should Be Equal As Strings    ${awayscore_match2}    1
 
@@ -227,30 +227,30 @@ SP2_Score_Post_Pre_Match_Date2
     Click Element    //XCUIElementTypeStaticText[@name="${date2_dd}"]
     Sleep    5
     Capture Page Screenshot
-    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="AFC CUP"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="AFC CUP"]/preceding::XCUIElementTypeStaticText[2]
-    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homescore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]/preceding::XCUIElementTypeStaticText[2]    value
-    ${awayscore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]/preceding::XCUIElementTypeStaticText[1]    value
-    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]    value
-    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Real Betis Balompie - Closed"]/following::XCUIElementTypeStaticText[1]    value
-    Should Be Equal As Strings    '${leaguename}'    'AFC CUP'
+    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Gzira United"]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="EUROPA LEAGUE - QUALIFICATION"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="EUROPA LEAGUE - QUALIFICATION"]/preceding::XCUIElementTypeStaticText[2]
+    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Gzira United"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homescore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Gzira United"]/preceding::XCUIElementTypeStaticText[2]    value
+    ${awayscore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Gzira United"]/preceding::XCUIElementTypeStaticText[1]    value
+    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Gzira United"]    value
+    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Gzira United"]/following::XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${leaguename}'    'EUROPA LEAGUE - QUALIFICATION'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    'FT'
-    Should Be Equal As Strings    '${homename_match1}'    'Real Betis Balompie - Closed'
-    Should Be Equal As Strings    '${awayname_match1}'    'FC Barcelona - Closed'
+    Should Be Equal As Strings    '${homename_match1}'    'Gzira United'
+    Should Be Equal As Strings    '${awayname_match1}'    'Hajduk Split'
     Should Be Equal As Integers    ${homescore_match1}    2
     Should Be Equal As Integers    ${awayscore_match1}    1
     #Get data from app for match 2
-    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - Full-time"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homescore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - Full-time"]/preceding::XCUIElementTypeStaticText[2]    value
-    ${awayscore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - Full-time"]/preceding::XCUIElementTypeStaticText[1]    value
-    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - Full-time"]    value
-    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - Full-time"]/following::XCUIElementTypeStaticText[1]    value
+    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AS Jeunesse Esch"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homescore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AS Jeunesse Esch"]/preceding::XCUIElementTypeStaticText[2]    value
+    ${awayscore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AS Jeunesse Esch"]/preceding::XCUIElementTypeStaticText[1]    value
+    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AS Jeunesse Esch"]    value
+    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AS Jeunesse Esch"]/following::XCUIElementTypeStaticText[1]    value
     Should Be Equal As Strings    '${match2_status}'    'FT'
-    Should Be Equal As Strings    '${homename_match2}'    'KV Kortrijk - Full-time'
-    Should Be Equal As Strings    '${awayname_match2}'    'Royal Antwerp FC - Full-time'
+    Should Be Equal As Strings    '${homename_match2}'    'AS Jeunesse Esch'
+    Should Be Equal As Strings    '${awayname_match2}'    'Tobol Kostanay'
     Should Be Equal As Strings    ${homescore_match2}    2
     Should Be Equal As Strings    ${awayscore_match2}    0
 
@@ -270,30 +270,30 @@ SP2_Score_Post_Pre_Match_Date3
     Click Element    //XCUIElementTypeStaticText[@name="${date3_dd}"]
     Sleep    5
     Capture Page Screenshot
-    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="ITALY"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="ITALY"]/preceding::XCUIElementTypeStaticText[2]
-    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homescore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]/preceding::XCUIElementTypeStaticText[2]    value
-    ${awayscore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]/preceding::XCUIElementTypeStaticText[1]    value
-    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]    value
-    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="KV Kortrijk - AET"]/following::XCUIElementTypeStaticText[1]    value
-    Should Be Equal As Strings    '${leaguename}'    'ITALY'
+    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Livingston"]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="INTERNATIONAL - CLUB FRIENDLIES"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="INTERNATIONAL - CLUB FRIENDLIES"]/preceding::XCUIElementTypeStaticText[2]
+    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Livingston"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homescore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Livingston"]/preceding::XCUIElementTypeStaticText[2]    value
+    ${awayscore_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Livingston"]/preceding::XCUIElementTypeStaticText[1]    value
+    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Livingston"]    value
+    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Livingston"]/following::XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${leaguename}'    'INTERNATIONAL - CLUB FRIENDLIES'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    'AET'
-    Should Be Equal As Strings    '${homename_match1}'    'KV Kortrijk - AET'
-    Should Be Equal As Strings    '${awayname_match1}'    'Royal Antwerp FC - AET'
+    Should Be Equal As Strings    '${homename_match1}'    'Livingston'
+    Should Be Equal As Strings    '${awayname_match1}'    'Alloa Athletic'
     Should Be Equal As Integers    ${homescore_match1}    2
     Should Be Equal As Integers    ${awayscore_match1}    0
     #Get data from app for match 2
-    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Juventus Turin - AP"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homescore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Juventus Turin - AP"]/preceding::XCUIElementTypeStaticText[2]    value
-    ${awayscore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Juventus Turin - AP"]/preceding::XCUIElementTypeStaticText[1]    value
-    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Juventus Turin - AP"]    value
-    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Juventus Turin - AP"]/following::XCUIElementTypeStaticText[1]    value
+    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Carlisle United"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homescore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Carlisle United"]/preceding::XCUIElementTypeStaticText[2]    value
+    ${awayscore_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Carlisle United"]/preceding::XCUIElementTypeStaticText[1]    value
+    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Carlisle United"]    value
+    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Carlisle United"]/following::XCUIElementTypeStaticText[1]    value
     Should Be Equal As Strings    '${match2_status}'    'AP'
-    Should Be Equal As Strings    '${homename_match2}'    'Juventus Turin - AP'
-    Should Be Equal As Strings    '${awayname_match2}'    'Genoa FC - AP'
+    Should Be Equal As Strings    '${homename_match2}'    'Carlisle United'
+    Should Be Equal As Strings    '${awayname_match2}'    'Hibernian'
     Should Be Equal As Strings    ${homescore_match2}    2
     Should Be Equal As Strings    ${awayscore_match2}    0
 
@@ -313,24 +313,24 @@ SP2_Score_Post_Pre_Match_Date5
     Click Element    //XCUIElementTypeStaticText[@name="${date5_dd}"]
     Sleep    5
     Capture Page Screenshot
-    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="LZS Agroplan Gluszyna - NotStarted"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="PREMIER LEAGUE"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="PREMIER LEAGUE"]/preceding::XCUIElementTypeStaticText[2]
-    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="LZS Agroplan Gluszyna - NotStarted"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="LZS Agroplan Gluszyna - NotStarted"]    value
-    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="LZS Agroplan Gluszyna - NotStarted"]/following::XCUIElementTypeStaticText[1]    value
-    Should Be Equal As Strings    '${leaguename}'    'PREMIER LEAGUE'
+    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Accrington Stanley"]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="INTERNATIONAL - CLUB FRIENDLIES"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="INTERNATIONAL - CLUB FRIENDLIES"]/preceding::XCUIElementTypeStaticText[2]
+    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Accrington Stanley"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Accrington Stanley"]    value
+    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Accrington Stanley"]/following::XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${leaguename}'    'INTERNATIONAL - CLUB FRIENDLIES'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    '17:00'
-    Should Be Equal As Strings    '${homename_match1}'    'LZS Agroplan Gluszyna - NotStarted'
-    Should Be Equal As Strings    '${awayname_match1}'    'Stal Brzeg - NotStarted'
+    Should Be Equal As Strings    '${homename_match1}'    'Accrington Stanley'
+    Should Be Equal As Strings    '${awayname_match1}'    'Marseille'
     #Get data from app for match 2
-    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="FC Lokomotiv Moscow - Postponed"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="FC Lokomotiv Moscow - Postponed"]    value
-    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="FC Lokomotiv Moscow - Postponed"]/following::XCUIElementTypeStaticText[1]    value
+    ${match2_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Tranmere Rovers"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homename_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Tranmere Rovers"]    value
+    ${awayname_match2}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Tranmere Rovers"]/following::XCUIElementTypeStaticText[1]    value
     Should Be Equal As Strings    '${match2_status}'    'Postp.'
-    Should Be Equal As Strings    '${homename_match2}'    'FC Lokomotiv Moscow - Postponed'
-    Should Be Equal As Strings    '${awayname_match2}'    'FC Krasnodar - Postponed'
+    Should Be Equal As Strings    '${homename_match2}'    'Tranmere Rovers'
+    Should Be Equal As Strings    '${awayname_match2}'    'Liverpool'
 
 SP2_Score_Post_Pre_Match_Date6
     [Documentation]    Verify data of Pre-Match in the day that will happend 2 days after current day
@@ -348,17 +348,17 @@ SP2_Score_Post_Pre_Match_Date6
     Click Element    //XCUIElementTypeStaticText[@name="${date6_dd}"]
     Sleep    5
     Capture Page Screenshot
-    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Arsenal Kiev - StartDelayed"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="U21"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="U21"]/preceding::XCUIElementTypeStaticText[2]
-    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - StartDelayed"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - StartDelayed"]    value
-    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - StartDelayed"]/following::XCUIElementTypeStaticText[1]    value
-    Should Be Equal As Strings    '${leaguename}'    'U21'
+    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="AFC Eskilstuna"]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="SWEDEN - ALLSVENSKAN"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="SWEDEN - ALLSVENSKAN"]/preceding::XCUIElementTypeStaticText[2]
+    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AFC Eskilstuna"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AFC Eskilstuna"]    value
+    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="AFC Eskilstuna"]/following::XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${leaguename}'    'SWEDEN - ALLSVENSKAN'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    'Start Delayed'
-    Should Be Equal As Strings    '${homename_match1}'    'Arsenal Kiev - StartDelayed'
-    Should Be Equal As Strings    '${awayname_match1}'    'FC Oleksandriya - StartDelayed'
+    Should Be Equal As Strings    '${homename_match1}'    'AFC Eskilstuna'
+    Should Be Equal As Strings    '${awayname_match1}'    'Kalmar FF'
 
 SP2_Score_Post_Pre_Match_Date7
     [Documentation]    Verify data of Pre-Match in the day that will happend 3 days after current day
@@ -376,17 +376,17 @@ SP2_Score_Post_Pre_Match_Date7
     Click Element    //XCUIElementTypeStaticText[@name="${date7_dd}"]
     Sleep    5
     Capture Page Screenshot
-    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Arsenal Kiev - Cancelled"]
-    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="U21"]
-    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="U21"]/preceding::XCUIElementTypeStaticText[2]
-    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - Cancelled"]/preceding::XCUIElementTypeStaticText[3]    value
-    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - Cancelled"]    value
-    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Arsenal Kiev - Cancelled"]/following::XCUIElementTypeStaticText[1]    value
-    Should Be Equal As Strings    '${leaguename}'    'U21'
+    Wait Until Page Contains Element    //XCUIElementTypeStaticText[@name="Broendby IF"]
+    ${leaguename}=    Get Text    //XCUIElementTypeStaticText[@label="DENMARK - SUPERLIGA"]
+    ${league_date_app}=    Get Text    //XCUIElementTypeStaticText[@label="DENMARK - SUPERLIGA"]/preceding::XCUIElementTypeStaticText[2]
+    ${match1_status}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Broendby IF"]/preceding::XCUIElementTypeStaticText[3]    value
+    ${homename_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Broendby IF"]    value
+    ${awayname_match1}=    Get Element Attribute    //XCUIElementTypeStaticText[@name="Broendby IF"]/following::XCUIElementTypeStaticText[1]    value
+    Should Be Equal As Strings    '${leaguename}'    'DENMARK - SUPERLIGA'
     Should Be Equal As Strings    ${league_date_app}    ${league_date_db}
     Should Be Equal As Strings    '${match1_status}'    'Canc.'
-    Should Be Equal As Strings    '${homename_match1}'    'Arsenal Kiev - Cancelled'
-    Should Be Equal As Strings    '${awayname_match1}'    'FC Oleksandriya - Cancelled'
+    Should Be Equal As Strings    '${homename_match1}'    'Broendby IF'
+    Should Be Equal As Strings    '${awayname_match1}'    'Silkeborg'
 
 SP3_SP4_List_Event_Of_Match1
     ${json}=    Get File    ${CURDIR}/Template_Files/List_event_data_template1.json
@@ -743,36 +743,6 @@ SP5_Odds_1x2_Post Match
     Should Be Equal As Numbers    ${open_odd4_X}    4.50
     ${open_odd4_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[4]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
     Should Be Equal As Numbers    ${open_odd4_2}    2.35
-    Comment    # Verify odd of Bookmaker 5
-    Comment    ${bmaker5}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
-    Comment    Should Be Equal As Strings    ${bmaker5}    Sunny203
-    Comment    ${live_odd5_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
-    Comment    Should Be Equal As Numbers    ${live_odd5_1}    2.99
-    Comment    ${live_odd5_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
-    Comment    Should Be Equal As Numbers    ${live_odd5_X}    4.78
-    Comment    ${live_odd5_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
-    Comment    Should Be Equal As Numbers    ${live_odd5_2}    2.39
-    Comment    ${open_odd5_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
-    Comment    Should Be Equal As Numbers    ${open_odd5_1}    3.86
-    Comment    ${open_odd5_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
-    Comment    Should Be Equal As Numbers    ${open_odd5_X}    4.24
-    Comment    ${open_odd5_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[5]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
-    Comment    Should Be Equal As Numbers    ${open_odd5_2}    2.39
-    Comment    # Verify odd of Bookmaker 6
-    Comment    ${bmaker6}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[6]    name
-    Comment    Should Be Equal As Strings    ${bmaker6}    TigerBet
-    Comment    ${live_odd6_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[7]    name
-    Comment    Should Be Equal As Numbers    ${live_odd6_1}    2.20
-    Comment    ${live_odd6_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[1]    name
-    Comment    Should Be Equal As Numbers    ${live_odd6_X}    3.75
-    Comment    ${live_odd6_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[2]    name
-    Comment    Should Be Equal As Numbers    ${live_odd6_2}    2.40
-    Comment    ${open_odd6_1}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[3]    name
-    Comment    Should Be Equal As Numbers    ${open_odd6_1}    3.80
-    Comment    ${open_odd6_X}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[4]    name
-    Comment    Should Be Equal As Numbers    ${open_odd6_X}    3.75
-    Comment    ${open_odd6_2}=    Get Element Attribute    //XCUIElementTypeTable[@name="MatchOdds"]/XCUIElementTypeCell[6]/XCUIElementTypeOther/XCUIElementTypeStaticText[5]    name
-    Comment    Should Be Equal As Numbers    ${open_odd6_2}    1.70
     #Verify Name of Bookmaker asc
     ${list_bookmaker_app}=    Create List    ${bmaker1}    ${bmaker2}    ${bmaker3}    ${bmaker4}    # list bookmaker name on app
     ${list_bookmaker_app_before}=    Create List    ${bmaker1}    ${bmaker2}    ${bmaker3}    ${bmaker4}    # list bookmaker name on app
