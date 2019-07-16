@@ -5,6 +5,7 @@
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             this.matchId = matchId;
 
             oddsFormat = OddsFormat.Decimal.Value;
+            BetTypes = new List<BetType> { BetType.AsianHDP, BetType.OneXTwo, BetType.OverUnder };
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
 
@@ -61,6 +63,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public bool HasData { get; private set; }
 
         public BetType SelectedBetType { get; private set; }
+
+        public IList<BetType> BetTypes { get; private set; }
+
+        public bool IsOneXTwoSelected => SelectedBetType == BetType.OneXTwo;
+        public bool IsAsianHdpSelected => SelectedBetType == BetType.AsianHDP;
+        public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
         protected override async void Initialize()
         {

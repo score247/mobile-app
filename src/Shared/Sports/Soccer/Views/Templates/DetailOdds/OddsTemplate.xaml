@@ -9,6 +9,7 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
     mc:Ignorable="d">
     <StackLayout>
         <StackLayout.Resources>
@@ -18,6 +19,7 @@
                     <resources:MatchDetailOddsViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <templateSelectors:OddsItemTemplateSelector x:Key="oddsItemTemplateSelector" />
+                <commonConverters:SelectedTabColorConverter x:Key="selectedTabColorConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
@@ -33,10 +35,18 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource SubTabBox}">
-                <Button Style="{StaticResource SubTabActive}" Command="{Binding LoadOneXTwoCommand}" Text="{langs:Translate BetTypeOneXTwo}" />
-                <Button Style="{StaticResource SubTab}" Command="{Binding LoadAsianHdpCommand}" Text="{langs:Translate BetTypeAsianHandicap}" />
+                <Button Style="{StaticResource SubTab}" 
+                        Command="{Binding LoadOneXTwoCommand}" Text="{langs:Translate BetTypeOneXTwo}"
+                        TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
+                
                 <BoxView Style="{StaticResource VerticalLine}" />
-                <Button Style="{StaticResource SubTab}" Command="{Binding LoadOverUnderCommand}" Text="{langs:Translate BetTypeOverUnder}" />
+                <Button Style="{StaticResource SubTab}" 
+                        Command="{Binding LoadAsianHdpCommand}" Text="{langs:Translate BetTypeAsianHandicap}" 
+                        TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
+                <BoxView Style="{StaticResource VerticalLine}" />
+                <Button Style="{StaticResource SubTab}" 
+                        Command="{Binding LoadOverUnderCommand}" Text="{langs:Translate BetTypeOverUnder}" 
+                        TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
