@@ -282,4 +282,16 @@
   <data name="OpeningOdds" xml:space="preserve">
     <value>Opening Odds</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>  
+  <data name="Away" xml:space="preserve">
+    <value>Away</value>
+  </data>
+  <data name="Over" xml:space="preserve">
+    <value>Over</value>
+  </data>  
+  <data name="Under" xml:space="preserve">
+    <value>Under</value>
+  </data>
 </root>
