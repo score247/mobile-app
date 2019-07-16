@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<DataTemplate   xmlns="http://xamarin.com/schemas/2014/forms" 
-                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-                xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core;"
-                xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;"
-                x:Class="LiveScore.Basketball.Views.Templates.MatchDataTemplate">
-     <ViewCell>
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate
+    x:Class="LiveScore.Basketball.Views.Templates.MatchDataTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core;"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;">
+    <ViewCell>
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
@@ -24,8 +25,8 @@
                     Style="{StaticResource MatchStatus}"
                     Text="{Binding DisplayLocalTime}" />
                 <StackLayout Style="{StaticResource TeamContainer}">
-                    <Label Style="{StaticResource HomeTeam}" Text="{Binding Teams[0].Name}" />
-                    <Label Style="{StaticResource AwayTeam}" Text="{Binding Teams[1].Name}" />
+                    <Label Style="{StaticResource Team}" Text="{Binding Teams[0].Name}" />
+                    <Label Style="{StaticResource Team}" Text="{Binding Teams[1].Name}" />
                 </StackLayout>
                 <StackLayout Style="{StaticResource ScoreContainer}">
                     <Label Style="{StaticResource HomeScore}" Text="{Binding MatchResult.HomeScore}" />

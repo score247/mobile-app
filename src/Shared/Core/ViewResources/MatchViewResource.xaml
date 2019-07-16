@@ -6,18 +6,18 @@
     <!--  Scores Styles  -->
     <Style x:Key="LeagueBox" TargetType="Grid">
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
     </Style>
     <Style x:Key="LeagueFlagContainer" TargetType="StackLayout">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Padding" Value="16,0,12,0" />
+        <Setter Property="Padding" Value="16,0,16,0" />
     </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
         <Setter Property="Aspect" Value="AspectFit" />
     </Style>
     <Style x:Key="LeagueName" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource FunctionGroupFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
@@ -50,8 +50,8 @@
         BasedOn="{StaticResource Team}"
         TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="End" />
-        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource LargeTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
     <Style
@@ -84,6 +84,7 @@
         TargetType="FlexLayout">
         <Setter Property="Padding" Value="0,3,0,8" />
     </Style>
+
     <Style
         x:Key="MatchWinnerInfoIcon"
         BasedOn="{StaticResource WinnerInfoIcon}"

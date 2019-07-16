@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Style x:Key="DateBarContainer" TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Direction" Value="Row" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="JustifyContent" Value="SpaceBetween" />
@@ -19,7 +19,7 @@
         <Setter Property="HeightRequest" Value="280" />
         <Setter Property="WidthRequest" Value="32" />
         <Setter Property="SeparatorVisibility" Value="None" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
 
     <Style x:Key="DateBarDate" TargetType="Label">

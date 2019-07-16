@@ -13,11 +13,11 @@
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0F111C</Color>
-            <Color x:Key="SecondColor">#1D2133</Color>
+            <Color x:Key="SecondColor">#1A1C28</Color>
             <Color x:Key="SiteBackgroundColor">#0F111C</Color>
 
             <Color x:Key="PrimaryTextColor">#fff</Color>
-            <Color x:Key="SecondTextColor">#999</Color>
+            <Color x:Key="SecondTextColor">#C6C6C9</Color>
             <Color x:Key="ThirdTextColor">#676C8B</Color>
             <Color x:Key="FourthTextColor">#999</Color>
 
@@ -28,12 +28,11 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#303651</Color>
 
-            <Color x:Key="LineColor">#2E3245</Color>
+            <Color x:Key="LineColor">#1A1C28</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
 
             <!--  Match  -->
-            <Color x:Key="HomeTeamColor">#30C2FF</Color>
-            <Color x:Key="AwayTeamColor">#fff</Color>
+            <Color x:Key="TeamColor">#FFF</Color>
 
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
@@ -62,6 +61,7 @@
             <x:Double x:Key="GeneralFontSize">14</x:Double>
             <x:Double x:Key="SidebarFontSize">14</x:Double>
             <x:Double x:Key="UppercaseTextFontSize">13</x:Double>
+            <x:Double x:Key="LargeTextFontSize">16</x:Double>
             <x:Double x:Key="MediumTextFontSize">13</x:Double>
             <x:Double x:Key="SmallTextFontSize">12</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
@@ -70,14 +70,15 @@
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
 
             <x:Double x:Key="DateBarDateFontSize">18</x:Double>
-            <x:Double x:Key="DateBarDayFontSize">8</x:Double>
+            <x:Double x:Key="DateBarDayFontSize">10</x:Double>
 
             <!--  Define Height-size  -->
             <x:Double x:Key="TabsHeight">40</x:Double>
             <x:Double x:Key="SubTabsHeight">24</x:Double>
 
-            <x:Double x:Key="FunctionGroupHeight">28</x:Double>
-            <Color x:Key="FunctionGroupColor">#999</Color>
+            <x:Double x:Key="FunctionGroupHeight">36</x:Double>
+            <x:Double x:Key="FunctionGroupFontSize">12</x:Double>
+            <Color x:Key="FunctionGroupColor">#C6C6C9</Color>
 
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
 
@@ -111,26 +112,13 @@
                 <Setter Property="FontSize" Value="{StaticResource TitlePageFontSize}" />
             </Style>
             <Style x:Key="ListViewHasBackground" TargetType="ListView">
-                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
             </Style>
 
             <Style x:Key="Team" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
-            </Style>
-
-            <Style
-                x:Key="HomeTeam"
-                BasedOn="{StaticResource Team}"
-                TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource HomeTeamColor}" />
-            </Style>
-
-            <Style
-                x:Key="AwayTeam"
-                BasedOn="{StaticResource Team}"
-                TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource AwayTeamColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TeamColor}" />
             </Style>
 
             <Style TargetType="Image">
@@ -257,7 +245,7 @@
                 BasedOn="{StaticResource Icons}"
                 TargetType="Label">
                 <Setter Property="Text" Value="&#xe90f;" />
-                <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
