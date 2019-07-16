@@ -33,10 +33,10 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource SubTabBox}">
-                <Label Style="{StaticResource SubTabActive}" Text="{langs:Translate BetTypeOneXTwo}" />
-                <Label Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeAsianHandicap}" />
+                <Button Style="{StaticResource SubTabActive}" Text="{langs:Translate BetTypeOneXTwo}" />
+                <Button Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeAsianHandicap}" />
                 <BoxView Style="{StaticResource VerticalLine}" />
-                <Label Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeOverUnder}" />
+                <Button Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeOverUnder}" />
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
@@ -61,16 +61,15 @@
                 AutomationProperties.IsInAccessibleTree="False"
                 BackgroundColor="{StaticResource SecondColor}"
                 HasUnevenRows="true"
+                Header="{Binding}"
+                HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
                 IsVisible="{Binding IsNotLoading}"
                 ItemTemplate="{StaticResource oddsItemTemplateSelector}"
                 ItemsSource="{Binding BetTypeOdds}"
                 RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None"
-                Header="{Binding}"
-                HeaderTemplate="{Binding HeaderTemplate}">
-            </tabStrip:TabITemListView>
+                SeparatorVisibility="None" />
         </StackLayout>
     </StackLayout>
 </DataTemplate>
