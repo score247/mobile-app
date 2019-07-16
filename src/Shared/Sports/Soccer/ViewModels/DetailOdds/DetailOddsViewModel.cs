@@ -29,9 +29,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            this.matchId = matchId;
+            //this.matchId = matchId;
+            this.matchId = "sr:match:18575332";
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OneXTwo, true), false));
+
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, true), false));
+
+            LoadOneXTwoCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OneXTwo), false));
+            LoadAsianHdpCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.AsianHDP), false));
+            LoadOverUnderCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OverUnder), false));
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -40,11 +46,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
+        public DelegateAsyncCommand LoadOneXTwoCommand { get; }
+
+        public DelegateAsyncCommand LoadAsianHdpCommand { get; }
+
+        public DelegateAsyncCommand LoadOverUnderCommand { get; }
+
         public bool IsRefreshing { get; set; }
 
         public bool HasData { get; private set; }
 
-        public bool NoData { get; private set; }
+        public BetType SelectedBetType { get; private set; }
 
         protected override async void Initialize()
         {
@@ -60,10 +72,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOdds(BetType betType, bool isRefresh = false)
         {
-            var odds = await oddsService.GetOdds(matchId, (int)betType, isRefresh);
+            SelectedBetType = betType;
+
+            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)betType, isRefresh);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
-            NoData = !HasData;
 
             HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 

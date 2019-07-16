@@ -13,6 +13,8 @@
         private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>
         {
             { BetType.OneXTwo, new OneXTwoHeaderTemplate() },
+            { BetType.AsianHDP, new AsianHdpHeaderTemplate() },
+            { BetType.OverUnder, new OverUnderHeaderTemplate() },
         };
 
         private readonly bool HasData;

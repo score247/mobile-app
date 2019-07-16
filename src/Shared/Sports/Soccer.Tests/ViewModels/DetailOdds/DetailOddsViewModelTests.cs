@@ -69,7 +69,7 @@
         public void OnAppearing_Always_LoadOdds()
         {
             // Arrange
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<int>(), Arg.Any<bool>()).Returns(CreateOdds());
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<bool>()).Returns(CreateOdds());
             var expectedViewModels = new ObservableCollection<BaseItemViewModel>
             {
                 new BaseItemViewModel(BetType.OneXTwo, CreateBetTypeOdds(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
@@ -96,7 +96,6 @@
 
             // Assert
             Assert.False(viewModel.HasData);
-            Assert.True(viewModel.NoData);
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
@@ -109,7 +108,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Is(matchId), Arg.Is(1), true);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), true);
         }
     }
 }

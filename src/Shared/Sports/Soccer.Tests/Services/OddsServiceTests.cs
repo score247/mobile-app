@@ -39,7 +39,7 @@
             // Arrange
 
             // Act
-            await oddsService.GetOdds("sr:match:1", 1);
+            await oddsService.GetOdds("en", "sr:match:1", 1);
 
             // Assert
             await mockCache.Received(1)
@@ -62,7 +62,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var odds = await oddsService.GetOdds("sr:match:1", 1);
+            var odds = await oddsService.GetOdds("en", "sr:match:1", 1);
 
             // Assert
             mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
@@ -82,7 +82,7 @@
                 null).Returns(expectedMatchOdds);
 
             // Act
-            var actualOdds = await oddsService.GetOdds("sr:match:1", 1);
+            var actualOdds = await oddsService.GetOdds("en", "sr:match:1", 1);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate
+    x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OverUnderHeaderTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
+
+    <Grid Style="{StaticResource GridTableContainer}">
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailOddsViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0"
+            Style="{StaticResource TableHeaderText}"
+            Text="{langs:Translate Bookmaker}" />
+        <Label
+            Grid.Row="0"
+            Grid.Column="1"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource TableHeaderText}"
+            Text="{langs:Translate LiveOdds}" />
+        <Label
+            Grid.Row="0"
+            Grid.Column="4"
+            Grid.ColumnSpan="3"
+            Style="{StaticResource TableHeaderText}"
+            Text="{langs:Translate OpeningOdds}" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="1"
+            Style="{StaticResource TableHeaderText}"
+            Text="Over" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="2"
+            Style="{StaticResource TableHeaderText}"
+            Text="o/u" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="3"
+            Style="{StaticResource TableHeaderText}"
+            Text="Under" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="4"
+            Style="{StaticResource TableHeaderText}"
+            Text="Over" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="5"
+            Style="{StaticResource TableHeaderText}"
+            Text="o/u" />
+        <Label
+            Grid.Row="1"
+            Grid.Column="6"
+            Style="{StaticResource TableHeaderText}"
+            Text="Under" />
+    </Grid>
+
+</DataTemplate>

@@ -3,7 +3,7 @@
     public enum BetType
     {
         OneXTwo = 1,
-        AsianHDP = 2,
-        OverUnder = 3
+        OverUnder = 2,
+        AsianHDP = 3,
     }
 }

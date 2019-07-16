@@ -16,6 +16,14 @@
 
         public static readonly BetOption AwayType = new BetOption(Away, nameof(Away));
 
+        public const string Over = "over";
+
+        public static readonly BetOption OverType = new BetOption(Over, nameof(Over));
+
+        public const string Under = "under";
+
+        public static readonly BetOption UnderType = new BetOption(Under, nameof(Under));
+
         private BetOption(string value, string displayName)
            : base(value, displayName)
         {

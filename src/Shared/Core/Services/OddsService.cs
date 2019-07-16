@@ -5,6 +5,6 @@
 
     public interface IOddsService
     {
-        Task<IMatchOdds> GetOdds(string matchId, int betTypeId, bool forceFetchNewData = false);
+        Task<IMatchOdds> GetOdds(string lang, string matchId, int betTypeId, bool forceFetchNewData = false);
     }
 }

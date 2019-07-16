@@ -10,8 +10,8 @@
 
     public interface ISoccerOddsApi
     {
-        [Get("/soccer/Odds/Get?matchId={matchId}&betTypeId={betTypeId}")]
-        Task<MatchOdds> GetOdds(string matchId, int betTypeId);
+        [Get("/soccer/{lang}/Odds/{matchId}/{betTypeId}")]
+        Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId);
     }
 
     public class OddsService : BaseService, IOddsService
@@ -29,7 +29,7 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(string matchId, int betTypeId, bool forceFetchNewData = false)
+        public async Task<IMatchOdds> GetOdds(string lang, string matchId, int betTypeId, bool forceFetchNewData = false)
         {
             try
             {
@@ -38,7 +38,7 @@
 
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
-                        () => GetOddsFromApi(matchId, betTypeId),
+                        () => GetOddsFromApi(lang, matchId, betTypeId),
                         (offset) =>
                         {
                             if (forceFetchNewData)
@@ -59,10 +59,10 @@
             }
         }
 
-        private async Task<MatchOdds> GetOddsFromApi(string matchId, int betTypeId)
+        private async Task<MatchOdds> GetOddsFromApi(string lang, string matchId, int betTypeId)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(matchId, betTypeId)
+               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId)
            );
     }
 }
