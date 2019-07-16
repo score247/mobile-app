@@ -12,7 +12,7 @@
 
         public string OptionValue { get; set; }
 
-        public string OpenningOptionValue { get; set; }
+        public string OpeningOptionValue { get; set; }
 
         public OddsTrend OddsTrend { get; set; }
     }

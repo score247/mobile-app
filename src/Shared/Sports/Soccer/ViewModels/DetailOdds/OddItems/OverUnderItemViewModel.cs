@@ -71,7 +71,7 @@
 
             if (overOdds != null)
             {
-                OpeningOverOptionValue = overOdds.OpenningOptionValue;
+                OpeningOverOptionValue = overOdds.OpeningOptionValue;
                 LiveOverOptionValue = overOdds.OptionValue;
             }
         }

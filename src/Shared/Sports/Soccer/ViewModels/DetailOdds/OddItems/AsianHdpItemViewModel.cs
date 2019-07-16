@@ -71,7 +71,7 @@
 
             if (homeOdds != null)
             {
-                OpeningHdp = homeOdds.OpenningOptionValue;
+                OpeningHdp = homeOdds.OpeningOptionValue;
                 LiveHdp = homeOdds.OptionValue;
             }
         }
