@@ -10,8 +10,8 @@
 
     public interface ISoccerOddsApi
     {
-        [Get("/soccer/{lang}/Odds/{matchId}/{betTypeId}")]
-        Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId);
+        [Get("/soccer/{lang}/Odds/{matchId}/{betTypeId}/{formatType}")]
+        Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
     }
 
     public class OddsService : BaseService, IOddsService
@@ -29,16 +29,16 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(string lang, string matchId, int betTypeId, bool forceFetchNewData = false)
+        public async Task<IMatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType, bool forceFetchNewData = false)
         {
             try
             {
                 var cacheExpiration = cacheService.CacheDuration(CacheDurationTerm.Long);
-                var cacheKey = $"Odds-{betTypeId}-{matchId}";
+                var cacheKey = $"Odds-{matchId}-{betTypeId}-{formatType}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
-                        () => GetOddsFromApi(lang, matchId, betTypeId),
+                        () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
                         (offset) =>
                         {
                             if (forceFetchNewData)
@@ -59,10 +59,10 @@
             }
         }
 
-        private async Task<MatchOdds> GetOddsFromApi(string lang, string matchId, int betTypeId)
+        private async Task<MatchOdds> GetOddsFromApi(string lang, string matchId, int betTypeId, string formatType)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId)
+               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
            );
     }
 }

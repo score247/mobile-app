@@ -58,18 +58,18 @@
         {
             Bookmaker = new Bookmaker { Id = "sr:book:1", Name = "Bet188Com" },
             BetOptions = new List<BetOptionOdds>
-                    {
-                        new BetOptionOdds{ Type = "home", LiveOdds = 5.0m, OpeningOdds = 4.9m, OddsTrend = OddsTrend.Up },
-                        new BetOptionOdds{ Type = "draw", LiveOdds = 3.2m, OpeningOdds = 3.2m, OddsTrend = OddsTrend.Neutral },
-                        new BetOptionOdds{ Type = "away", LiveOdds = 2.5m, OpeningOdds = 2.8m, OddsTrend = OddsTrend.Down }
-                    }
+            {
+                new BetOptionOdds{ Type = "home", LiveOdds = 5.0m, OpeningOdds = 4.9m, OddsTrend = OddsTrend.Up },
+                new BetOptionOdds{ Type = "draw", LiveOdds = 3.2m, OpeningOdds = 3.2m, OddsTrend = OddsTrend.Neutral },
+                new BetOptionOdds{ Type = "away", LiveOdds = 2.5m, OpeningOdds = 2.8m, OddsTrend = OddsTrend.Down }
+            }
         };
 
         [Fact]
         public void OnAppearing_Always_LoadOdds()
         {
             // Arrange
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<bool>()).Returns(CreateOdds());
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             var expectedViewModels = new ObservableCollection<BaseItemViewModel>
             {
                 new BaseItemViewModel(BetType.OneXTwo, CreateBetTypeOdds(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
@@ -108,7 +108,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), true);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), true);
         }
     }
 }
