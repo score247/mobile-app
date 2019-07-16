@@ -31,8 +31,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            //this.matchId = matchId;
-            this.matchId = "sr:match:18575332";
+            this.matchId = matchId;
+
             oddsFormat = OddsFormat.Decimal.Value;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
