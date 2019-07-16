@@ -18,6 +18,8 @@
 
     <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
         <Setter Property="Padding" Value="0,0,12,0" />
+        <Setter Property="Margin" Value="0,0,0,18" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
     </Style>
 
     <Style

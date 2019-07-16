@@ -141,7 +141,7 @@
 
             if (Application.Current != null)
             {
-                RowColor = (Color)Application.Current.Resources["SecondColor"];
+                RowColor = (Color)Application.Current.Resources["PrimaryColor"];
             }
 
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)

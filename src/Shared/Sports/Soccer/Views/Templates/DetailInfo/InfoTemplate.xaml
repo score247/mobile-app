@@ -1,14 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
-              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-              xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
-              mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Templates.DetailInfo.InfoTemplate">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate
+    x:Class="LiveScore.Soccer.Views.Templates.DetailInfo.InfoTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+    xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+    xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
+    mc:Ignorable="d">
     <StackLayout>
         <StackLayout.Resources>
             <ResourceDictionary>
@@ -29,7 +30,7 @@
         <tabStrip:TabITemListView
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"
-            BackgroundColor="{StaticResource LineColor}"
+            BackgroundColor="{StaticResource PrimaryColor}"
             HasUnevenRows="True"
             IsPullToRefreshEnabled="true"
             IsRefreshing="{Binding IsRefreshing}"
@@ -37,8 +38,8 @@
             ItemTemplate="{StaticResource infoItemTemplateSelector}"
             ItemsSource="{Binding InfoItemViewModels}"
             RefreshCommand="{Binding RefreshCommand}"
-            SeparatorColor="Transparent"
-            RowHeight="43">
+            RowHeight="43"
+            SeparatorColor="Transparent">
             <tabStrip:TabITemListView.Footer>
                 <StackLayout
                     BackgroundColor="{StaticResource SecondColor}"

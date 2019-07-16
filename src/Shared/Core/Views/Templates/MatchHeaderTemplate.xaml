@@ -6,7 +6,7 @@
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters"
     xmlns:resources="clr-namespace:LiveScore.Core.ViewResources">
-    <ViewCell Height="28">
+    <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
@@ -22,7 +22,7 @@
                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="46" />
+                    <ColumnDefinition Width="52" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />

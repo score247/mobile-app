@@ -27,7 +27,7 @@
 
             if (Application.Current != null)
             {
-                RowColor = (Color)Application.Current.Resources["LineColor"];
+                RowColor = (Color)Application.Current.Resources["SecondColor"];
             }
 
             Score = "-";

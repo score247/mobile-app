@@ -12,7 +12,7 @@
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
 
-            <Color x:Key="PrimaryColor">#0F111C</Color>
+            <Color x:Key="PrimaryColor">#0B0D14</Color>
             <Color x:Key="SecondColor">#1A1C28</Color>
             <Color x:Key="SiteBackgroundColor">#0F111C</Color>
 

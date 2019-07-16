@@ -10,7 +10,6 @@
     </Style>
     <Style x:Key="LeagueFlagContainer" TargetType="StackLayout">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Padding" Value="16,0,16,0" />
     </Style>
     <Style x:Key="LeagueFlag" TargetType="Image">
         <Setter Property="Aspect" Value="AspectFit" />
@@ -58,13 +57,13 @@
         x:Key="HomeScore"
         BasedOn="{StaticResource Score}"
         TargetType="Label">
-        <Setter Property="Margin" Value="0,8,0,3" />
+        <Setter Property="Margin" Value="0,6,0,3" />
     </Style>
     <Style
         x:Key="AwayScore"
         BasedOn="{StaticResource Score}"
         TargetType="Label">
-        <Setter Property="Margin" Value="0,3,0,8" />
+        <Setter Property="Margin" Value="0,3,0,6" />
     </Style>
     <Style
         x:Key="MatchFavoriteIcon"
@@ -76,13 +75,13 @@
         x:Key="MatchHomeTeam"
         BasedOn="{StaticResource FlexLayoutAlignLeft}"
         TargetType="FlexLayout">
-        <Setter Property="Padding" Value="0,8,0,3" />
+        <Setter Property="Padding" Value="0,6,0,3" />
     </Style>
     <Style
         x:Key="MatchAwayTeam"
         BasedOn="{StaticResource FlexLayoutAlignLeft}"
         TargetType="FlexLayout">
-        <Setter Property="Padding" Value="0,3,0,8" />
+        <Setter Property="Padding" Value="0,3,0,6" />
     </Style>
 
     <Style
