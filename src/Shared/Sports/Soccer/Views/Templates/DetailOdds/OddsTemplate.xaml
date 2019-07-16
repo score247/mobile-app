@@ -33,10 +33,10 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource SubTabBox}">
-                <Button Style="{StaticResource SubTabActive}" Text="{langs:Translate BetTypeOneXTwo}" />
-                <Button Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeAsianHandicap}" />
+                <Button Style="{StaticResource SubTabActive}" Command="{Binding LoadOneXTwoCommand}" Text="{langs:Translate BetTypeOneXTwo}" />
+                <Button Style="{StaticResource SubTab}" Command="{Binding LoadAsianHdpCommand}" Text="{langs:Translate BetTypeAsianHandicap}" />
                 <BoxView Style="{StaticResource VerticalLine}" />
-                <Button Style="{StaticResource SubTab}" Text="{langs:Translate BetTypeOverUnder}" />
+                <Button Style="{StaticResource SubTab}" Command="{Binding LoadOverUnderCommand}" Text="{langs:Translate BetTypeOverUnder}" />
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
