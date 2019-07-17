@@ -8,8 +8,7 @@
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
-            <Setter Property="Padding" Value="8,0" />
-            <Setter Property="Margin" Value="0,15,0,0" />
+            <Setter Property="Margin" Value="0,10,0,0" />
             <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         </Style>
         <Style
@@ -19,7 +18,6 @@
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
         </Style>
         <Style x:Key="Tab" TargetType="StackLayout">
-            <Setter Property="Margin" Value="6,0" />
             <Setter Property="Padding" Value="0,20,0,0" />
         </Style>
         <Style x:Key="TabText" TargetType="Label">
@@ -27,20 +25,22 @@
             <Setter Property="TextColor" Value="{StaticResource TabColor}" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="Margin" Value="12,0,12,4" />
         </Style>
         <Style
             x:Key="TabActiveText"
             BasedOn="{StaticResource TabText}"
             TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
+            <Setter Property="FontAttributes" Value="Bold" />
         </Style>
         <Style x:Key="TabActiveLine" TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="{StaticResource ActiveLineColor}" />
-            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="HeightRequest" Value="4" />
         </Style>
         <Style x:Key="TabInactiveLine" TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="{StaticResource InactiveLineColor}" />
-            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="HeightRequest" Value="4" />
         </Style>
     </ContentView.Resources>
     <ContentView.Content>

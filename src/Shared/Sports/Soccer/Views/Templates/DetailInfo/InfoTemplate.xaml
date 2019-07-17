@@ -42,7 +42,6 @@
             SeparatorColor="Transparent">
             <tabStrip:TabITemListView.Footer>
                 <StackLayout
-                    Padding="0,2,0,0"
                     BackgroundColor="{StaticResource PrimaryColor}"
                     HeightRequest="400"
                     IsVisible="{Binding IsNotLoading}">

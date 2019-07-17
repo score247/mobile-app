@@ -11,33 +11,34 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoBox" TargetType="Frame">
-        <Setter Property="Margin" Value="8,8,8,1" />
-        <Setter Property="Padding" Value="1" />
-        <Setter Property="CornerRadius" Value="2" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
-    </Style>
-
     <Style x:Key="MatchGeneralInfoLeagueBox" TargetType="Grid">
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
         <Setter Property="Padding" Value="0,0,12,0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="#171920" />
+    </Style>
+
+    <Style
+        x:Key="MatchGeneralInfoTeam"
+        BasedOn="{StaticResource Team}"
+        TargetType="Label">
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
     <Style
         x:Key="MatchGeneralInfoImportant"
         BasedOn="{StaticResource FlexLayoutAlignCenter}"
         TargetType="FlexLayout">
-        <Setter Property="Margin" Value="8,0,8,1" />
-        <Setter Property="HeightRequest" Value="28" />
-        <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="HeightRequest" Value="22" />
+        <Setter Property="BackgroundColor" Value="#272A33" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 

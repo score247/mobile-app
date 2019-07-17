@@ -32,97 +32,102 @@
     <ContentPage.Content>
         <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
-                <Frame Style="{StaticResource MatchGeneralInfoBox}">
-                    <StackLayout>
-                        <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="46" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <StackLayout
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Style="{StaticResource LeagueFlagContainer}">
-                                <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
-                            </StackLayout>
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="1"
-                                LineBreakMode="TailTruncation"
-                                Style="{StaticResource LeagueName}"
-                                Text="{Binding MatchViewModel.Match.League.Name, Converter={StaticResource upperCaseConverter}}" />
-                            <Label
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                AutomationId="MatchDateLbl"
-                                Style="{StaticResource MatchDate}"
-                                Text="{Binding DisplayEventDate}" />
-                        </Grid>
-                        <Grid Style="{StaticResource MatchGeneralInfoTeams}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="52" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="20" />
-                            </Grid.ColumnDefinitions>
-                            <FlexLayout
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Style="{StaticResource MatchStatusContainer}">
-                                <Label IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}" />
-                                <Label Style="{StaticResource MatchStatus}" Text="{Binding MatchViewModel.DisplayMatchStatus}" />
+
+                <StackLayout Margin="8,8,8,1" BackgroundColor="#171920">
+                    <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource LeagueFlagContainer}">
+                            <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                        </StackLayout>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            LineBreakMode="TailTruncation"
+                            Style="{StaticResource LeagueName}"
+                            Text="{Binding MatchViewModel.Match.League.Name, Converter={StaticResource upperCaseConverter}}" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            AutomationId="MatchDateLbl"
+                            Style="{StaticResource MatchDate}"
+                            Text="{Binding DisplayEventDate}" />
+                    </Grid>
+                    <BoxView BackgroundColor="#06070A" Style="{StaticResource HorizontalLine}" />
+                    <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="20" />
+                        </Grid.ColumnDefinitions>
+                        <FlexLayout
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource MatchStatusContainer}">
+                            <Label IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}" Style="{StaticResource LiveIcon}" />
+                            <Label Style="{StaticResource MatchStatus}" Text="{Binding MatchViewModel.DisplayMatchStatus}" />
+                        </FlexLayout>
+
+                        <StackLayout Grid.Row="0" Grid.Column="1">
+                            <FlexLayout Style="{StaticResource MatchHomeTeam}">
+                                <Label Style="{StaticResource MatchGeneralInfoTeam}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
+                                <Image
+                                    IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
+                                    Source="{Binding MatchViewModel.Match.HomePenaltyImage}"
+                                    Style="{StaticResource MatchWinnerInfoIcon}" />
+
+                                <Image
+                                    IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
+                                    Source="{Binding MatchViewModel.Match.HomeSecondLegImage}"
+                                    Style="{StaticResource MatchWinnerInfoIcon}" />
                             </FlexLayout>
-
-                            <StackLayout Grid.Row="0" Grid.Column="1">
-                                <FlexLayout Style="{StaticResource MatchHomeTeam}">
-                                    <Label Style="{StaticResource Team}" Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
-                                    <Image
-                                        IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                                        Source="{Binding MatchViewModel.Match.HomePenaltyImage}"
-                                        Style="{StaticResource MatchWinnerInfoIcon}" />
-
-                                    <Image
-                                        IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
-                                        Source="{Binding MatchViewModel.Match.HomeSecondLegImage}"
-                                        Style="{StaticResource MatchWinnerInfoIcon}" />
-                                </FlexLayout>
-                                <FlexLayout Style="{StaticResource MatchAwayTeam}">
-                                    <Label Style="{StaticResource Team}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
-                                    <Image
-                                        IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                                        Source="{Binding MatchViewModel.Match.AwayPenaltyImage}"
-                                        Style="{StaticResource MatchWinnerInfoIcon}" />
-                                    <Image
-                                        IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
-                                        Source="{Binding MatchViewModel.Match.AwaySecondLegImage}"
-                                        Style="{StaticResource MatchWinnerInfoIcon}" />
-                                </FlexLayout>
-                            </StackLayout>
-                            <FlexLayout
-                                Grid.Row="0"
-                                Grid.Column="2"
-                                IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.ShowScore}"
-                                Style="{StaticResource MatchScoreContainer}">
-                                <Label Style="{StaticResource HomeScore}" Text="{Binding MatchViewModel.Match.MatchResult.HomeScore}" />
-                                <Label Style="{StaticResource AwayScore}" Text="{Binding MatchViewModel.Match.MatchResult.AwayScore}" />
+                            <FlexLayout Style="{StaticResource MatchAwayTeam}">
+                                <Label Style="{StaticResource MatchGeneralInfoTeam}" Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
+                                <Image
+                                    IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
+                                    Source="{Binding MatchViewModel.Match.AwayPenaltyImage}"
+                                    Style="{StaticResource MatchWinnerInfoIcon}" />
+                                <Image
+                                    IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
+                                    Source="{Binding MatchViewModel.Match.AwaySecondLegImage}"
+                                    Style="{StaticResource MatchWinnerInfoIcon}" />
                             </FlexLayout>
-                        </Grid>
-                    </StackLayout>
-                </Frame>
-
+                        </StackLayout>
+                        <FlexLayout
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.ShowScore}"
+                            Style="{StaticResource MatchScoreContainer}">
+                            <Label Style="{StaticResource HomeScore}" Text="{Binding MatchViewModel.Match.MatchResult.HomeScore}" />
+                            <Label Style="{StaticResource AwayScore}" Text="{Binding MatchViewModel.Match.MatchResult.AwayScore}" />
+                        </FlexLayout>
+                    </Grid>
+                </StackLayout>
 
                 <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
+                    <Label
+                        Margin="0,7,0,3"
+                        Style="{StaticResource MatchGeneralInfoImportantContent}"
+                        Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
 
                 <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
+                    <Label
+                        Margin="0,3,0,7"
+                        Style="{StaticResource MatchGeneralInfoImportantContent}"
+                        Text="{Binding DisplayPenaltyShootOut}" />
                 </FlexLayout>
 
                 <tabStrip:TabStrip x:Name="TabStrip" ItemsSource="{Binding TabViews}" />

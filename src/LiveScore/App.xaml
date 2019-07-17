@@ -28,7 +28,7 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
 
-            <Color x:Key="LineColor">#161923</Color>
+            <Color x:Key="LineColor">#212531</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
 
             <!--  Match  -->
@@ -64,6 +64,7 @@
             <x:Double x:Key="LargeTextFontSize">16</x:Double>
             <x:Double x:Key="MediumTextFontSize">13</x:Double>
             <x:Double x:Key="SmallTextFontSize">12</x:Double>
+            <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
 
             <x:Double x:Key="SportNameFontSize">15</x:Double>
