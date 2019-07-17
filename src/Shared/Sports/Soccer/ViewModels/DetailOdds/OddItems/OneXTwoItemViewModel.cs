@@ -4,12 +4,11 @@
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
     public class OneXTwoItemViewModel : BaseItemViewModel
-    {
-        private const string OddsNumerFormat = "0.00";
-
+    {       
         private readonly IBetTypeOdds betTypeOdds;
 
         public OneXTwoItemViewModel(
@@ -61,8 +60,8 @@
 
             if (awayOdds != null)
             {
-                AwayOpeningOdds = awayOdds.OpeningOdds.ToString(OddsNumerFormat);
-                AwayLiveOdds = awayOdds.LiveOdds.ToString(OddsNumerFormat);
+                AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
+                AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
                 AwayOddsTrend = awayOdds.OddsTrend.Value;
             }            
         }
@@ -73,8 +72,8 @@
 
             if (drawOdds != null)
             {
-                DrawOpeningOdds = drawOdds.OpeningOdds.ToString(OddsNumerFormat);
-                DrawLiveOdds = drawOdds.LiveOdds.ToString(OddsNumerFormat);
+                DrawOpeningOdds = drawOdds.OpeningOdds.ToOddsFormat();
+                DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();
                 DrawOddsTrend = drawOdds.OddsTrend.Value;
             }            
         }
@@ -85,8 +84,8 @@
 
             if (homeOdds != null)
             {
-                HomeLiveOdds = homeOdds.LiveOdds.ToString(OddsNumerFormat);
-                HomeOpeningOdds = homeOdds.OpeningOdds.ToString(OddsNumerFormat);
+                HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
+                HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
                 HomeOddsTrend = homeOdds.OddsTrend.Value;
             }
         }

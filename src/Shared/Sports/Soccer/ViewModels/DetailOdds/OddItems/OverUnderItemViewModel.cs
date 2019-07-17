@@ -4,12 +4,11 @@
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
     public class OverUnderItemViewModel : BaseItemViewModel
     {
-        private const string OddsNumerFormat = "0.00";
-
         private readonly IBetTypeOdds betTypeOdds;
 
         public OverUnderItemViewModel(
@@ -59,8 +58,8 @@
 
             if (underOdds != null)
             {
-                UnderOpeningOdds = underOdds.OpeningOdds.ToString(OddsNumerFormat);
-                UnderLiveOdds = underOdds.LiveOdds.ToString(OddsNumerFormat);
+                UnderOpeningOdds = underOdds.OpeningOdds.ToOddsFormat();
+                UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
                 UnderOddsTrend = underOdds.OddsTrend.Value;
             }
         }
@@ -71,8 +70,8 @@
 
             if (overOdds != null)
             {
-                OpeningOverOptionValue = overOdds.OpeningOptionValue;
-                LiveOverOptionValue = overOdds.OptionValue;
+                OpeningOverOptionValue = overOdds.OpeningOptionValue.ToOddsOptionFormat();
+                LiveOverOptionValue = overOdds.OptionValue.ToOddsOptionFormat();
             }
         }
 
@@ -82,8 +81,8 @@
 
             if (overOdds != null)
             {
-                OverLiveOdds = overOdds.LiveOdds.ToString(OddsNumerFormat);
-                OverOpeningOdds = overOdds.OpeningOdds.ToString(OddsNumerFormat);
+                OverLiveOdds = overOdds.LiveOdds.ToOddsFormat();
+                OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();
                 OverOddsTrend = overOdds.OddsTrend.Value;
             }
         }

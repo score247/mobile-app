@@ -82,6 +82,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
+            IsLoading = true;
 
             SelectedBetType = betType;
 
@@ -98,7 +99,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 : new ObservableCollection<BaseItemViewModel>();
 
             IsRefreshing = false;
-
+            IsLoading = false;
         }
     }
 }
