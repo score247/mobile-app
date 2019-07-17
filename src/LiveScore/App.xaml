@@ -55,6 +55,7 @@
             <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
             <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#0F111C</Color>
+            <Color x:Key="ActiveSubTabBgColor">#1A1C28</Color>
             <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
 
             <!--  Define font-size  -->
