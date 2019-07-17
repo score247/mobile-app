@@ -33,7 +33,7 @@
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
                         <Label
                             HorizontalTextAlignment="End"
-                            Style="{StaticResource MatchInfoMainPlayer}"
+                            Style="{StaticResource MatchInfoMainPlayerDarkColor}"
                             Text="{Binding HomePlayerName}" />
                     </StackLayout>
                     <StackLayout VerticalOptions="Center">
@@ -56,40 +56,10 @@
                     Style="{StaticResource MatchInfoTeam}">
                     <Image Source="{Binding AwayImageSource}" Style="{StaticResource MatchInfoImage}" />
                     <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
-                        <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
+                        <Label Style="{StaticResource MatchInfoMainPlayerDarkColor}" Text="{Binding AwayPlayerName}" />
                     </StackLayout>
                 </StackLayout>
             </Grid>
-
-
-
-
-            <!--<FlexLayout BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchInfoRow}">
-                <Label Style="{StaticResource MatchInfoMinutes}" />
-                <StackLayout Style="{StaticResource MatchInfoTeam}">
-                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
-                        <Label
-                            HorizontalTextAlignment="End"
-                            Style="{StaticResource MatchInfoMainPlayer}"
-                            Text="{Binding HomePlayerName}" />
-                    </StackLayout>
-                    <StackLayout VerticalOptions="Center">
-                        <Image
-                            HorizontalOptions="EndAndExpand"
-                            Source="{Binding HomeImageSource}"
-                            Style="{StaticResource MatchInfoImage}" />
-                    </StackLayout>
-                </StackLayout>
-                <StackLayout Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
-                </StackLayout>
-                <StackLayout Style="{StaticResource MatchInfoTeam}">
-                    <Image Source="{Binding AwayImageSource}" Style="{StaticResource MatchInfoImage}" />
-                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
-                        <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}" />
-                    </StackLayout>
-                </StackLayout>
-            </FlexLayout>-->
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>

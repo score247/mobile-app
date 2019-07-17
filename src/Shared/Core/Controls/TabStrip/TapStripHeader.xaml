@@ -9,17 +9,18 @@
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
             <Setter Property="Padding" Value="8,0" />
+            <Setter Property="Margin" Value="0,15,0,0" />
+            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         </Style>
         <Style
             x:Key="NavTabs"
             BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
             TargetType="FlexLayout">
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
-            <Setter Property="Margin" Value="0,0,0,4" />
         </Style>
         <Style x:Key="Tab" TargetType="StackLayout">
             <Setter Property="Margin" Value="6,0" />
-            <Setter Property="Padding" Value="0,10,0,2" />
+            <Setter Property="Padding" Value="0,20,0,0" />
         </Style>
         <Style x:Key="TabText" TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
@@ -44,7 +45,10 @@
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">
-            <FlexLayout x:Name="scrollLayOut" Style="{StaticResource NavTabs}" JustifyContent="Start" />
+            <FlexLayout
+                x:Name="scrollLayOut"
+                JustifyContent="Start"
+                Style="{StaticResource NavTabs}" />
         </ScrollView>
     </ContentView.Content>
 </ContentView>

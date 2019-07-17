@@ -34,7 +34,7 @@
     <Style x:Key="MatchStatus" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+        <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
@@ -89,6 +89,6 @@
         BasedOn="{StaticResource WinnerInfoIcon}"
         TargetType="Image">
         <Setter Property="FlexLayout.Shrink" Value="0" />
-        <Setter Property="Margin" Value="4,2,0,0" />
+        <Setter Property="Margin" Value="4,0,0,0" />
     </Style>
 </ResourceDictionary>

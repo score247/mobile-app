@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -72,7 +72,8 @@
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution: Doan Nhat Phuong (D6D3U376DF)</CodesignKey>
-    <CodesignEntitlements></CodesignEntitlements>    
+    <CodesignEntitlements>
+    </CodesignEntitlements>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DISABLE_XAMARINFORMSLIVE</DefineConstants>
     <CodesignProvision>Score247</CodesignProvision>
@@ -318,15 +319,6 @@
     </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\common\edit%403x.png">
       <Link>Resources\images\common\edit%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite_active.png">
-      <Link>Resources\images\common\favorite_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite_active%402x.png">
-      <Link>Resources\images\common\favorite_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\favorite_active%403x.png">
-      <Link>Resources\images\common\favorite_active%403x.png</Link>
     </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\common\flag_cn.png">
       <Link>Resources\images\common\flag_cn.png</Link>
@@ -707,24 +699,6 @@
     <BundleResource Include="Resources\images\common\yellow_card%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\search.png" />
   </ItemGroup>
   <ItemGroup>
@@ -732,15 +706,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\search%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\odd_asc.png" />
@@ -786,6 +751,42 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\logo_splash_screen%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_active.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_active%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\favorite_active%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\penalty_winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\penalty_winner%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\penalty_winner%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

@@ -26,13 +26,13 @@
             <!--  GreenColor  -->
             <Color x:Key="SecondAccentColor">#3EC28F</Color>
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
-            <Color x:Key="FourthAccentColor">#303651</Color>
+            <Color x:Key="FourthAccentColor">#171920</Color>
 
-            <Color x:Key="LineColor">#1A1C28</Color>
+            <Color x:Key="LineColor">#161923</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
 
             <!--  Match  -->
-            <Color x:Key="TeamColor">#FFF</Color>
+            <Color x:Key="TeamColor">#C6C6C9</Color>
 
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
@@ -45,11 +45,11 @@
             <Color x:Key="DownLiveOddColor">#66FF59</Color>
 
             <!--  Tabs  -->
-            <Color x:Key="TabColor">#666</Color>
+            <Color x:Key="TabColor">#999</Color>
             <Color x:Key="ActiveTabColor">#fff</Color>
             <Color x:Key="ActiveLineColor">#3EC28F</Color>
-            <x:Double x:Key="TabFontSize">12</x:Double>
-            <Color x:Key="InactiveLineColor">#0F111C</Color>
+            <x:Double x:Key="TabFontSize">11</x:Double>
+            <Color x:Key="InactiveLineColor">#0B0D14</Color>
 
             <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
             <Color x:Key="SubTabColor">#fff</Color>

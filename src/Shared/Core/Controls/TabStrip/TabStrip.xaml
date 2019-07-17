@@ -1,28 +1,29 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
-             x:Name="this"
-             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-             x:Class="LiveScore.Core.Controls.TabStrip.TabStrip"
-             VerticalOptions="FillAndExpand"
-             HorizontalOptions="FillAndExpand">
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Core.Controls.TabStrip.TabStrip"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
+    x:Name="this"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
     <ContentView.Content>
         <StackLayout>
             <StackLayout.Resources>
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>
-            <local:TabStripHeader x:Name="TabHeader" BackgroundColor="#0F111C" ItemsSource="{Binding ItemsSource}" />
+            <local:TabStripHeader x:Name="TabHeader" ItemsSource="{Binding ItemsSource}" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
             <cards:CarouselView
-                    VerticalOptions="FillAndExpand"
-                    HorizontalOptions="FillAndExpand"
-                    x:Name="TabContent"
-                    IsCyclical="false"
-                    IsViewCacheEnabled="True"
-                    SelectedIndex="{Binding SelectedTabIndex}"
-                    ItemsSource="{Binding ItemsSource}"
-                    ItemTemplate="{StaticResource tabItemTemplateSelector}">
-            </cards:CarouselView>
+                x:Name="TabContent"
+                HorizontalOptions="FillAndExpand"
+                IsCyclical="false"
+                IsViewCacheEnabled="True"
+                ItemTemplate="{StaticResource tabItemTemplateSelector}"
+                ItemsSource="{Binding ItemsSource}"
+                SelectedIndex="{Binding SelectedTabIndex}"
+                VerticalOptions="FillAndExpand" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>

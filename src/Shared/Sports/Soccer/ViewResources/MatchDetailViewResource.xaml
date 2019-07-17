@@ -11,23 +11,29 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
+    <Style x:Key="MatchGeneralInfoBox" TargetType="Frame">
+        <Setter Property="Margin" Value="8,8,8,1" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="CornerRadius" Value="2" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+
     <Style x:Key="MatchGeneralInfoLeagueBox" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
         <Setter Property="Padding" Value="0,0,12,0" />
-        <Setter Property="Margin" Value="0,0,0,18" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
 
     <Style
         x:Key="MatchGeneralInfoImportant"
         BasedOn="{StaticResource FlexLayoutAlignCenter}"
         TargetType="FlexLayout">
-        <Setter Property="HeightRequest" Value="24" />
-        <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+        <Setter Property="Margin" Value="8,0,8,1" />
+        <Setter Property="HeightRequest" Value="28" />
+        <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
@@ -53,12 +59,12 @@
         x:Key="Group"
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="GroupName" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
     </Style>
