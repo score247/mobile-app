@@ -5,7 +5,6 @@
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading.Tasks;
@@ -32,7 +31,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            this.matchId = matchId;
+            this.matchId = matchId;           
 
             oddsFormat = OddsFormat.Decimal.Value;
             SelectedBetType = BetType.OneXTwo;
@@ -82,24 +81,30 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
-            IsLoading = true;
+            if(CanLoadOdds(betType, isRefresh))
+            {
+                IsLoading = true;
 
-            SelectedBetType = betType;
+                SelectedBetType = betType;
 
-            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)betType, formatType, isRefresh);
+                var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)betType, formatType, isRefresh);
 
-            HasData = odds.BetTypeOddsList?.Any() == true;
+                HasData = odds.BetTypeOddsList?.Any() == true;
 
-            HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+                HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
-            BetTypeOdds = HasData
-                ? new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                    new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
-                    .CreateInstance()))
-                : new ObservableCollection<BaseItemViewModel>();
+                BetTypeOdds = HasData
+                    ? new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
+                        new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
+                        .CreateInstance()))
+                    : new ObservableCollection<BaseItemViewModel>();
 
-            IsRefreshing = false;
-            IsLoading = false;
+                IsRefreshing = false;
+                IsLoading = false;
+            }
         }
+
+        private bool CanLoadOdds(BetType betType, bool isRefresh)
+        => isRefresh || SelectedBetType != betType || BetTypeOdds == null || !BetTypeOdds.Any();
     }
 }
