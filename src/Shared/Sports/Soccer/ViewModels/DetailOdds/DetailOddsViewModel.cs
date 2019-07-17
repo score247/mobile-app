@@ -31,18 +31,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            this.matchId = matchId;           
+            this.matchId = matchId;
 
             oddsFormat = OddsFormat.Decimal.Value;
             SelectedBetType = BetType.OneXTwo;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, true), false));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, true)));
 
-            LoadOneXTwoCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OneXTwo, oddsFormat), false));
-            LoadAsianHdpCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.AsianHDP, oddsFormat), false));
-            LoadOverUnderCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(BetType.OverUnder, oddsFormat), false));
+            OnButtonClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -51,11 +49,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand LoadOneXTwoCommand { get; }
-
-        public DelegateAsyncCommand LoadAsianHdpCommand { get; }
-
-        public DelegateAsyncCommand LoadOverUnderCommand { get; }
+        public DelegateAsyncCommand<string> OnButtonClicked { get; }
 
         public bool IsRefreshing { get; set; }
 
@@ -79,9 +73,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
+        private Task HandleButtonCommand(string betTypeId)
+        => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));    
+
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
-            if(CanLoadOdds(betType, isRefresh))
+            if (CanLoadOdds(betType, isRefresh))
             {
                 IsLoading = true;
 
