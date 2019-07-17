@@ -10,6 +10,12 @@
             => value.ToString(OddsNumerFormat);
 
         public static string ToOddsOptionFormat(this string value)
-            => float.Parse(value).ToString(CultureInfo.CurrentCulture);
+        {           
+            var isParsed = float.TryParse(value, out float newValue);
+
+            return isParsed 
+                ? newValue.ToString(CultureInfo.InvariantCulture) 
+                : value;
+        }
     }
 }
