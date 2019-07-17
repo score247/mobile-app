@@ -20,6 +20,7 @@
                 </ResourceDictionary.MergedDictionaries>
                 <templateSelectors:OddsItemTemplateSelector x:Key="oddsItemTemplateSelector" />
                 <commonConverters:SelectedTabColorConverter x:Key="selectedTabColorConverter" />
+                <commonConverters:SelectedTabBackgroundColorConverter x:Key="selectedTabBgColorConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
@@ -37,16 +38,18 @@
                 Style="{StaticResource SubTabBox}">
                 <Button Style="{StaticResource SubTab}" 
                         Command="{Binding LoadOneXTwoCommand}" Text="{langs:Translate BetTypeOneXTwo}"
-                        TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
-                
+                        TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}"
+                        BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
                 <BoxView Style="{StaticResource VerticalLine}" />
                 <Button Style="{StaticResource SubTab}" 
                         Command="{Binding LoadAsianHdpCommand}" Text="{langs:Translate BetTypeAsianHandicap}" 
-                        TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
+                        TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}"
+                        BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
                 <BoxView Style="{StaticResource VerticalLine}" />
                 <Button Style="{StaticResource SubTab}" 
                         Command="{Binding LoadOverUnderCommand}" Text="{langs:Translate BetTypeOverUnder}" 
-                        TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}"/>
+                        TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}"
+                        BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
