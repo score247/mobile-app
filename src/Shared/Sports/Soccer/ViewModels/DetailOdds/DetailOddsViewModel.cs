@@ -35,7 +35,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             this.matchId = matchId;
 
             oddsFormat = OddsFormat.Decimal.Value;
-            BetTypes = new List<BetType> { BetType.AsianHDP, BetType.OneXTwo, BetType.OverUnder };
+            SelectedBetType = BetType.OneXTwo;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
 
@@ -64,8 +64,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public BetType SelectedBetType { get; private set; }
 
-        public IList<BetType> BetTypes { get; private set; }
-
         public bool IsOneXTwoSelected => SelectedBetType == BetType.OneXTwo;
         public bool IsAsianHdpSelected => SelectedBetType == BetType.AsianHDP;
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
@@ -74,7 +72,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
-                await LoadData(() => LoadOdds(BetType.OneXTwo, oddsFormat));
+                await LoadData(() => LoadOdds(SelectedBetType, oddsFormat));
             }
             catch (Exception ex)
             {
@@ -84,6 +82,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
+
             SelectedBetType = betType;
 
             var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)betType, formatType, isRefresh);
@@ -99,6 +98,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 : new ObservableCollection<BaseItemViewModel>();
 
             IsRefreshing = false;
+
         }
     }
 }
