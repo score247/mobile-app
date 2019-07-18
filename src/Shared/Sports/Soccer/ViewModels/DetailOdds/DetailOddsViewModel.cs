@@ -15,7 +15,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
-    using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -32,7 +31,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            this.matchId = "sr:match:18575332";
+            this.matchId = "sr:match:17956709";
 
             //this.matchId = matchId;
 
@@ -121,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 { "Format",  oddsFormat}
             };
 
-            await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
         }
     }
 }

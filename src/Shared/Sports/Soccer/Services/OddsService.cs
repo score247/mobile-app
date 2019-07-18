@@ -12,6 +12,9 @@
     {
         [Get("/soccer/{lang}/Odds/{matchId}/{betTypeId}/{formatType}")]
         Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
+
+        [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
+        Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
     }
 
     public class OddsService : BaseService, IOddsService
@@ -64,5 +67,42 @@
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
            );
+
+        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false)
+        {
+            try
+            {
+                var cacheExpiration = cacheService.CacheDuration(CacheDurationTerm.Long);
+                var cacheKey = $"OddsMovement-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+
+                return await cacheService.GetAndFetchLatestValue(
+                        cacheKey,
+                        () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
+                        (offset) =>
+                        {
+                            if (forceFetchNewData)
+                            {
+                                return true;
+                            }
+
+                            var elapsed = DateTimeOffset.Now - offset;
+
+                            return elapsed > cacheExpiration;
+                        });
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return new MatchOddsMovement();
+            }
+        }
+
+        private async Task<MatchOddsMovement> GetOddsMovementFromApi(string lang, string matchId, int betTypeId, string formatType, string bookmakerId)
+           => await apiService.Execute
+           (
+               () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
+           );
+
     }
 }
