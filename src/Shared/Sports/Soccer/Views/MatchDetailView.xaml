@@ -32,7 +32,10 @@
     <ContentPage.Content>
         <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
-                <StackLayout Margin="8,8,8,0" BackgroundColor="#272A33">
+                <StackLayout
+                    Margin="8"
+                    Padding="1,0,1,1"
+                    BackgroundColor="#2D2F3F">
                     <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
@@ -61,7 +64,7 @@
                             Style="{StaticResource MatchDate}"
                             Text="{Binding DisplayEventDate}" />
                     </Grid>
-                    <BoxView BackgroundColor="#06070A" Style="{StaticResource HorizontalLine}" />
+
                     <Grid Style="{StaticResource MatchGeneralInfoTeams}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" />

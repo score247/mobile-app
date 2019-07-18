@@ -3,18 +3,18 @@
     x:Class="LiveScore.Views.MenuTabbedView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:league="clr-namespace:LiveScore.League.Views;assembly=LiveScore.League"
-    xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
     xmlns:localViews="clr-namespace:LiveScore.Views"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
     x:Name="self"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
-    BarBackgroundColor="{StaticResource PrimaryColor}"
-    BarTextColor="{StaticResource SecondTextColor}">
+    BarBackgroundColor="{StaticResource FunctionBarBgColor}"
+    BarTextColor="{StaticResource FunctionBarColor}">
     <TabbedPage.Children>
         <NavigationPage
             x:Name="ScoresBar"

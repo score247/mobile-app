@@ -3,15 +3,15 @@
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
-    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     mc:Ignorable="d">
-    <StackLayout>
+    <StackLayout Padding="8">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -36,23 +36,29 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource SubTabBox}">
-                <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnOddsTabClicked}" CommandParameter="1"
-                        Text="{langs:Translate BetTypeOneXTwo}"
-                        TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}"
-                        BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
+                <Button
+                    BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}"
+                    Command="{Binding OnOddsTabClicked}"
+                    CommandParameter="1"
+                    Style="{StaticResource SubTab}"
+                    Text="{langs:Translate BetTypeOneXTwo}"
+                    TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource VerticalLine}" />
-                <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnOddsTabClicked}" CommandParameter="3"
-                        Text="{langs:Translate BetTypeAsianHandicap}" 
-                        TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}"
-                        BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
+                <Button
+                    BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}"
+                    Command="{Binding OnOddsTabClicked}"
+                    CommandParameter="3"
+                    Style="{StaticResource SubTab}"
+                    Text="{langs:Translate BetTypeAsianHandicap}"
+                    TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource VerticalLine}" />
-                <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnOddsTabClicked}" CommandParameter="2"
-                        Text="{langs:Translate BetTypeOverUnder}" 
-                        TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}"
-                        BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
+                <Button
+                    BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}"
+                    Command="{Binding OnOddsTabClicked}"
+                    CommandParameter="2"
+                    Style="{StaticResource SubTab}"
+                    Text="{langs:Translate BetTypeOverUnder}"
+                    TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}" />
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
@@ -84,9 +90,9 @@
                 IsVisible="{Binding IsNotLoading}"
                 ItemTemplate="{StaticResource oddsItemTemplateSelector}"
                 ItemsSource="{Binding BetTypeOdds}"
+                MinimumHeightRequest="1000"
                 RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None"
-                MinimumHeightRequest="1000"/>
+                SeparatorVisibility="None" />
         </StackLayout>
     </StackLayout>
 </DataTemplate>

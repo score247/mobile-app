@@ -28,11 +28,11 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
 
-            <Color x:Key="LineColor">#212531</Color>
+            <Color x:Key="LineColor">#2D2F3F</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
 
             <!--  Match  -->
-            <Color x:Key="TeamColor">#C6C6C9</Color>
+            <Color x:Key="TeamColor">#fff</Color>
 
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
@@ -50,12 +50,27 @@
             <Color x:Key="ActiveLineColor">#3EC28F</Color>
             <x:Double x:Key="TabFontSize">11</x:Double>
             <Color x:Key="InactiveLineColor">#0B0D14</Color>
+            <x:Double x:Key="TabsHeight">40</x:Double>
 
-            <Color x:Key="SubTabContainerBgColor">#1D2133</Color>
+
+            <Color x:Key="SubTabContainerBgColor">#1A1C28</Color>
             <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#0F111C</Color>
             <Color x:Key="ActiveSubTabBgColor">#1A1C28</Color>
             <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
+            <x:Double x:Key="SubTabsHeight">42</x:Double>
+            <x:Double x:Key="SubTabsFontSize">11</x:Double>
+
+            <!--  Table  -->
+            <Color x:Key="TableBgColor">#1A1C28</Color>
+            <Color x:Key="TableHeaderBgColor">#1A1C28</Color>
+            <Color x:Key="TableHeaderColor">#1A1C28</Color>
+            <x:Double x:Key="TableHeaderFontSize">12</x:Double>
+            <Color x:Key="TableOddRowBgColor">#1A1C28</Color>
+            <Color x:Key="TableEvenRowBgColor">#1A1C28</Color>
+            <Color x:Key="TableRowColor">#1A1C28</Color>
+            <x:Double x:Key="TableRowFontSize">12</x:Double>
+            <Color x:Key="TableLineColor">#1A1C28</Color>
 
             <!--  Define font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
@@ -67,6 +82,11 @@
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
 
+            <!--  Define function bar  -->
+            <Color x:Key="FunctionBarBgColor">#2D2F3F</Color>
+            <Color x:Key="FunctionBarColor">#fff</Color>
+
+            <!--  Define Header bar  -->
             <x:Double x:Key="SportNameFontSize">15</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
 
@@ -74,12 +94,10 @@
             <x:Double x:Key="DateBarDayFontSize">10</x:Double>
 
             <!--  Define Height-size  -->
-            <x:Double x:Key="TabsHeight">40</x:Double>
-            <x:Double x:Key="SubTabsHeight">24</x:Double>
-
             <x:Double x:Key="FunctionGroupHeight">36</x:Double>
-            <x:Double x:Key="FunctionGroupFontSize">12</x:Double>
-            <Color x:Key="FunctionGroupColor">#C6C6C9</Color>
+            <x:Double x:Key="FunctionGroupFontSize">11</x:Double>
+            <Color x:Key="FunctionGroupBgColor">#2D2F3F</Color>
+            <Color x:Key="FunctionGroupColor">#fff</Color>
 
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
 
@@ -259,14 +277,10 @@
                 <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
             </Style>
 
-            <Style
-                x:Key="DetailIcon"
-                BasedOn="{StaticResource Icons}"
-                TargetType="Label">
-                <Setter Property="Text" Value="&#xe915;" />
-                <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-                <Setter Property="FontSize" Value="15" />
-                <Setter Property="VerticalTextAlignment" Value="Center" />
+            <Style x:Key="DetailIcon" TargetType="Image">
+                <Setter Property="Source" Value="images/common/league_detail.png" />
+                <Setter Property="WidthRequest" Value="14" />
+                <Setter Property="HeightRequest" Value="14" />
             </Style>
 
             <Style
@@ -369,7 +383,7 @@
 
             <!--  Define the basic table  -->
             <Style x:Key="TableContainer" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
             </Style>
 
             <Style x:Key="TableText" TargetType="Label">
@@ -388,7 +402,7 @@
             </Style>
 
             <Style x:Key="GridTableContainer" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
                 <Setter Property="Padding" Value="1" />
                 <Setter Property="ColumnSpacing" Value="1" />
                 <Setter Property="RowSpacing" Value="1" />

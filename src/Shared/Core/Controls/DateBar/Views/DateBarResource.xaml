@@ -72,4 +72,9 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="BackgroundColor" Value="Transparent" />
     </Style>
+
+    <Style x:Key="DateBarLine" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="#292a2e" />
+        <Setter Property="HeightRequest" Value="1" />
+    </Style>
 </ResourceDictionary>

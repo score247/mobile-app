@@ -18,55 +18,59 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <FlexLayout Style="{StaticResource DateBarContainer}">
-            <Frame
-                x:Name="HomeButton"
-                AutomationId="DateBar_HomeBtn"
-                Style="{StaticResource DateBarBox}">
-                <Label Style="{StaticResource HomeIcon}" TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
-                <Frame.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
-                </Frame.GestureRecognizers>
-            </Frame>
-            <ListView
-                x:Name="CalendarListView"
-                AutomationId="DateBar"
-                AutomationProperties.IsInAccessibleTree="False"
-                ItemsSource="{Binding CalendarItems}"
-                Style="{StaticResource DateBarListView}">
-                <ListView.Behaviors>
-                    <b:EventToCommandBehavior
-                        Command="{Binding SelectDateCommand}"
-                        EventArgsParameterPath="Item"
-                        EventName="ItemTapped" />
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <Frame Rotation="90" Style="{StaticResource DateBarBox}">
-                                    <StackLayout Style="{StaticResource StacklayoutVerticalCenter}">
-                                        <Label
-                                            Style="{StaticResource DateBarDate}"
-                                            Text="{Binding Date.Day}"
-                                            TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
-                                        <Label
-                                            Style="{StaticResource DateBarDay}"
-                                            Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
-                                            TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
-                                    </StackLayout>
-                                </Frame>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <Frame
-                x:Name="CalendarIcon"
-                AutomationId="DateBar_CalendarBtn"
-                Style="{StaticResource DateBarBox}">
-                <Label Style="{StaticResource CalendarIcon}" />
-            </Frame>
-        </FlexLayout>
+        <StackLayout>
+            <BoxView Style="{StaticResource DateBarLine}" />
+            <FlexLayout Style="{StaticResource DateBarContainer}">
+                <Frame
+                    x:Name="HomeButton"
+                    AutomationId="DateBar_HomeBtn"
+                    Style="{StaticResource DateBarBox}">
+                    <Label Style="{StaticResource HomeIcon}" TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+                <ListView
+                    x:Name="CalendarListView"
+                    AutomationId="DateBar"
+                    AutomationProperties.IsInAccessibleTree="False"
+                    ItemsSource="{Binding CalendarItems}"
+                    Style="{StaticResource DateBarListView}">
+                    <ListView.Behaviors>
+                        <b:EventToCommandBehavior
+                            Command="{Binding SelectDateCommand}"
+                            EventArgsParameterPath="Item"
+                            EventName="ItemTapped" />
+                    </ListView.Behaviors>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <Frame Rotation="90" Style="{StaticResource DateBarBox}">
+                                        <StackLayout Style="{StaticResource StacklayoutVerticalCenter}">
+                                            <Label
+                                                Style="{StaticResource DateBarDate}"
+                                                Text="{Binding Date.Day}"
+                                                TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
+                                            <Label
+                                                Style="{StaticResource DateBarDay}"
+                                                Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
+                                                TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Frame
+                    x:Name="CalendarIcon"
+                    AutomationId="DateBar_CalendarBtn"
+                    Style="{StaticResource DateBarBox}">
+                    <Label Style="{StaticResource CalendarIcon}" />
+                </Frame>
+            </FlexLayout>
+        </StackLayout>
+
     </ContentView.Content>
 </ContentView>

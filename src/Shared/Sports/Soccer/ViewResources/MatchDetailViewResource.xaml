@@ -6,9 +6,9 @@
 
     <Style x:Key="NoInfo" TargetType="Label">
         <Setter Property="Margin" Value="16,12" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoLeagueBox" TargetType="Grid">
@@ -16,6 +16,7 @@
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="#0B0D14" />
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
@@ -23,7 +24,6 @@
         x:Key="MatchGeneralInfoTeam"
         BasedOn="{StaticResource Team}"
         TargetType="Label">
-        <Setter Property="TextColor" Value="#fff" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
@@ -33,7 +33,7 @@
         TargetType="FlexLayout">
         <Setter Property="Margin" Value="8,0" />
         <Setter Property="HeightRequest" Value="23" />
-        <Setter Property="BackgroundColor" Value="#171920" />
+        <Setter Property="BackgroundColor" Value="#2D2F3F" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
@@ -76,7 +76,6 @@
 
     <!--  SubTab  -->
     <Style x:Key="SubTabContainer" TargetType="Grid">
-        <Setter Property="Padding" Value="0,8" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
     </Style>
     <Style x:Key="SubTabBox" TargetType="FlexLayout">
@@ -87,7 +86,7 @@
         <Setter Property="Padding" Value="1" />
     </Style>
     <Style x:Key="CommonSubTab" TargetType="Button">
-        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="CornerRadius" Value="0" />
