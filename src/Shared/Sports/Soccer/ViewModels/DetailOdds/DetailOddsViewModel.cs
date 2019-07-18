@@ -40,7 +40,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, true)));
 
-            OnButtonClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
+            OnOddsTabClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<string> OnButtonClicked { get; }
+        public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
 
         public bool IsRefreshing { get; set; }
 

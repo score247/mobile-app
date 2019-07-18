@@ -115,7 +115,7 @@
         public async Task OnButtonClicked_OnExecute_LoadOdds()
         {
             // Act
-            await viewModel.OnButtonClicked.ExecuteAsync("1");
+            await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             // Assert
             await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), false);

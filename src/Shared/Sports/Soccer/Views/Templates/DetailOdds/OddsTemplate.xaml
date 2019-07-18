@@ -37,19 +37,19 @@
                 Grid.Column="0"
                 Style="{StaticResource SubTabBox}">
                 <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnButtonClicked}" CommandParameter="1"
+                        Command="{Binding OnOddsTabClicked}" CommandParameter="1"
                         Text="{langs:Translate BetTypeOneXTwo}"
                         TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}"
                         BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
                 <BoxView Style="{StaticResource VerticalLine}" />
                 <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnButtonClicked}" CommandParameter="3"
+                        Command="{Binding OnOddsTabClicked}" CommandParameter="3"
                         Text="{langs:Translate BetTypeAsianHandicap}" 
                         TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}"
                         BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
                 <BoxView Style="{StaticResource VerticalLine}" />
                 <Button Style="{StaticResource SubTab}" 
-                        Command="{Binding OnButtonClicked}" CommandParameter="2"
+                        Command="{Binding OnOddsTabClicked}" CommandParameter="2"
                         Text="{langs:Translate BetTypeOverUnder}" 
                         TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}"
                         BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}"/>
