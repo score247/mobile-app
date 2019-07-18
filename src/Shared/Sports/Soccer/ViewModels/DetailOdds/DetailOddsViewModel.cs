@@ -117,7 +117,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             {
                 { "MatchId", matchId },
                 { "Bookmaker", item.BetTypeOdds.Bookmaker},
-                { "Bettype", SelectedBetType },
+                { "BetType", SelectedBetType },
                 { "Format",  oddsFormat}
             };
 

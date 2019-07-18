@@ -335,21 +335,21 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-        public static string BetTypeOneXTwo {
+        public static string OneXTwo {
             get {
-                return ResourceManager.GetString("BetTypeOneXTwo", resourceCulture);
+                return ResourceManager.GetString("OneXTwo", resourceCulture);
             }
         }
         
-        public static string BetTypeAsianHandicap {
+        public static string AsianHDP {
             get {
-                return ResourceManager.GetString("BetTypeAsianHandicap", resourceCulture);
+                return ResourceManager.GetString("AsianHDP", resourceCulture);
             }
         }
         
-        public static string BetTypeOverUnder {
+        public static string OverUnder {
             get {
-                return ResourceManager.GetString("BetTypeOverUnder", resourceCulture);
+                return ResourceManager.GetString("OverUnder", resourceCulture);
             }
         }
         

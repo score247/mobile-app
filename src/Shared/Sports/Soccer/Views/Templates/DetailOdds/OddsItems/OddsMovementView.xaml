@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage 
+    x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OddsMovementView"
     xmlns="http://xamarin.com/schemas/2014/forms" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-    x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OddsMovementView">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    mc:Ignorable="d"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <NavigationPage.TitleView>
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
-        <Label Text="Odds movement page"></Label>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailOddsViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
+       <Label Text="Odds movement page"/>
+       
+    </StackLayout>
     </ContentPage.Content>
 </ContentPage>

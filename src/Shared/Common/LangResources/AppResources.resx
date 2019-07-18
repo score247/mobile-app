@@ -261,13 +261,13 @@
   <data name="NoData" xml:space="preserve">
     <value>No data yet ...</value>
   </data>
-  <data name="BetTypeOneXTwo" xml:space="preserve">
+  <data name="OneXTwo" xml:space="preserve">
     <value>1X2</value>
   </data>
-  <data name="BetTypeAsianHandicap" xml:space="preserve">
+  <data name="AsianHDP" xml:space="preserve">
     <value>Asian HDP</value>
   </data>
-  <data name="BetTypeOverUnder" xml:space="preserve">
+  <data name="OverUnder" xml:space="preserve">
     <value>Over/Under</value>
   </data>
   <data name="OddsTypeDecimal" xml:space="preserve">
