@@ -3,7 +3,6 @@
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -43,7 +42,7 @@
                     Command="{Binding OnOddsTabClicked}"
                     CommandParameter="1"
                     Style="{StaticResource SubTab}"
-                    Text="{langs:Translate BetTypeOneXTwo}"
+                    Text="{langs:Translate OneXTwo}"
                     TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource SubTabLine}" />
                 <Button
@@ -51,7 +50,7 @@
                     Command="{Binding OnOddsTabClicked}"
                     CommandParameter="3"
                     Style="{StaticResource SubTab}"
-                    Text="{langs:Translate BetTypeAsianHandicap}"
+                    Text="{langs:Translate AsianHDP}"
                     TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource SubTabLine}" />
                 <Button
@@ -59,7 +58,7 @@
                     Command="{Binding OnOddsTabClicked}"
                     CommandParameter="2"
                     Style="{StaticResource SubTab}"
-                    Text="{langs:Translate BetTypeOverUnder}"
+                    Text="{langs:Translate OverUnder}"
                     TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}" />
             </FlexLayout>
             <StackLayout
@@ -94,8 +93,7 @@
                     ItemsSource="{Binding BetTypeOdds}"
                     MinimumHeightRequest="1000"
                     RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None"
-                MinimumHeightRequest="1000">
+                SeparatorVisibility="None">
                 
                 <tabStrip:TabITemListView.Behaviors>
                     <b:EventToCommandBehavior
