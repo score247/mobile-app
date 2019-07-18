@@ -9,7 +9,7 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
-    xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     mc:Ignorable="d">
     <StackLayout>
         <StackLayout.Resources>
@@ -19,8 +19,8 @@
                     <resources:MatchDetailOddsViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <templateSelectors:OddsItemTemplateSelector x:Key="oddsItemTemplateSelector" />
-                <commonConverters:SelectedTabColorConverter x:Key="selectedTabColorConverter" />
-                <commonConverters:SelectedTabBackgroundColorConverter x:Key="selectedTabBgColorConverter" />
+                <coreConverters:SelectedTabColorConverter x:Key="selectedTabColorConverter" />
+                <coreConverters:SelectedTabBackgroundColorConverter x:Key="selectedTabBgColorConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
 

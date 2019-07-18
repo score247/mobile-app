@@ -45,6 +45,8 @@
     </ItemGroup>
     <ItemGroup>
       <Compile Remove="Converters\InverseBoolConverter.cs" />
+      <Compile Remove="Converters\SelectedTabBackgroundColorConverter.cs" />
+      <Compile Remove="Converters\SelectedTabColorConverter.cs" />
     </ItemGroup>
     <ItemGroup>
         <EmbeddedResource Update="LangResources\AppResources.resx">
