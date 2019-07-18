@@ -56,6 +56,8 @@
             {
                 control.SelectedTabIndex = index;
             });
+
+            control.TabHeaderDivider.IsVisible = true;
         }
 
         public static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)

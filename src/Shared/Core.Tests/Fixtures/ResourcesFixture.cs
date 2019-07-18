@@ -22,9 +22,10 @@
             app.Resources["SubTabsHeight"] = 12;
 
             app.Resources["FunctionGroupColor"] = Color.FromHex("#F24822");
-            app.Resources["PrimaryColor"] = Color.FromHex("#F24822");
+            app.Resources["PrimaryColor"] = Color.FromHex("#1D2133");
             app.Resources["PrimaryAccentColor"] = Color.FromHex("#F24822");
             app.Resources["FourthTextColor"] = Color.FromHex("#939393");
+            app.Resources["FourthAccentColor"] = Color.FromHex("#1D2133");
             app.Resources["SecondColor"] = Color.FromHex("#1D2133");
             app.Resources["LineColor"] = Color.FromHex("#1D2133");
             app.Resources["HomeTeamColor"] = Color.FromHex("#1D2133");
@@ -59,6 +60,8 @@
 
             app.Resources["CenterActivityIndicator"] = new Style(typeof(ActivityIndicator));
             app.Resources["DropdownList"] = new Style(typeof(Picker));
+
+            app.Resources["HorizontalLine"] = new Style(typeof(BoxView));
         }
     }
 }

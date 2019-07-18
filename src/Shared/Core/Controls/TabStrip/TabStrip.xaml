@@ -14,7 +14,7 @@
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>
             <local:TabStripHeader x:Name="TabHeader" ItemsSource="{Binding ItemsSource}" />
-            <BoxView Style="{StaticResource HorizontalLine}" />
+            <BoxView x:Name="TabHeaderDivider" Style="{StaticResource HorizontalLine}" IsVisible="False" />
             <cards:CarouselView
                 x:Name="TabContent"
                 HorizontalOptions="FillAndExpand"
