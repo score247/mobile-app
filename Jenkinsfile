@@ -117,7 +117,7 @@ pipeline{
             steps{
                 withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {                    
                     fileOperations {
-			            fileCopyOperation("$WORKSPACE/test/automation-tests/Template_Files","$WORKSPACE/Template_Files")
+			            fileCopyOperation(includes: "$WORKSPACE/test/automation-tests/Template_Files", targetLocation: "$WORKSPACE/Template_Files")
 			        }
 
                     sh label: "Robotframework", script: "robot --outputdir $WORKSPACE/Results --exclude Demo $WORKSPACE/test/automation-tests/Score247.robot"
