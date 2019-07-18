@@ -32,8 +32,7 @@
     <ContentPage.Content>
         <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
-
-                <StackLayout Margin="8,8,8,1" BackgroundColor="#171920">
+                <StackLayout Margin="8,8,8,0" BackgroundColor="#272A33">
                     <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
@@ -118,14 +117,14 @@
 
                 <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                     <Label
-                        Margin="0,7,0,3"
+                        Margin="0,7,0,4"
                         Style="{StaticResource MatchGeneralInfoImportantContent}"
                         Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
 
                 <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
                     <Label
-                        Margin="0,3,0,7"
+                        Margin="0,4,0,7"
                         Style="{StaticResource MatchGeneralInfoImportantContent}"
                         Text="{Binding DisplayPenaltyShootOut}" />
                 </FlexLayout>
