@@ -12,11 +12,10 @@
         private readonly IBetTypeOdds betTypeOdds;
 
         public OneXTwoItemViewModel(
-            BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
-             : base(betType, betTypeOdds, navigationService, depdendencyResolver)
+             : base(BetType.OneXTwo, betTypeOdds, navigationService, depdendencyResolver)
         {
             this.betTypeOdds = betTypeOdds;
 

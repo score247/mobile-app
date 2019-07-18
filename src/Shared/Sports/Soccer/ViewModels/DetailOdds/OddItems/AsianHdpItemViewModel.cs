@@ -11,12 +11,11 @@
     {
         private readonly IBetTypeOdds betTypeOdds;
 
-        public AsianHdpItemViewModel(
-            BetType betType,
+        public AsianHdpItemViewModel(           
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
-             : base(betType, betTypeOdds, navigationService, depdendencyResolver)
+             : base(BetType.AsianHDP, betTypeOdds, navigationService, depdendencyResolver)
         {
             this.betTypeOdds = betTypeOdds;
 

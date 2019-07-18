@@ -32,7 +32,7 @@
         public void OverLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OverUnderItemViewModel(BetType.OverUnder, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OverUnderItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -45,7 +45,7 @@
         public void OptionValue_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OverUnderItemViewModel(BetType.OverUnder, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OverUnderItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -59,7 +59,7 @@
         public void UnderLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OverUnderItemViewModel(BetType.OverUnder, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OverUnderItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();

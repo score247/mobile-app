@@ -41,6 +41,8 @@
 
         public BetType BetType { get; }
 
+        public string MatchId { get; }
+
         public DataTemplate CreateTemplate()
         {
             if (TemplateMapper.ContainsKey(BetType))
@@ -57,7 +59,7 @@
             {
                 return Activator.CreateInstance(
                     ViewModelMapper[BetType],
-                    BetType, BetTypeOdds, NavigationService, DependencyResolver) as BaseItemViewModel;
+                    BetTypeOdds, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
             return new BaseItemViewModel(BetType, BetTypeOdds, NavigationService, DependencyResolver);

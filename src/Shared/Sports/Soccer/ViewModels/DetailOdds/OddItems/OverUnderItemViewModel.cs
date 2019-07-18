@@ -12,11 +12,10 @@
         private readonly IBetTypeOdds betTypeOdds;
 
         public OverUnderItemViewModel(
-            BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
-             : base(betType, betTypeOdds, navigationService, depdendencyResolver)
+             : base(BetType.OverUnder, betTypeOdds, navigationService, depdendencyResolver)
         {
             this.betTypeOdds = betTypeOdds;
 

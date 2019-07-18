@@ -32,7 +32,7 @@
         public void HomeLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new AsianHdpItemViewModel(BetType.AsianHDP, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new AsianHdpItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -45,7 +45,7 @@
         public void HdpValue_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new AsianHdpItemViewModel(BetType.AsianHDP, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new AsianHdpItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -59,7 +59,7 @@
         public void AwayLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new AsianHdpItemViewModel(BetType.AsianHDP, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new AsianHdpItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();

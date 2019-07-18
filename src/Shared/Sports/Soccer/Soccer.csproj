@@ -78,6 +78,9 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Templates\DetailOdds\OddsItems\OddsMovementView.xaml.cs">
+      <DependentUpon>OddsMovementView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />

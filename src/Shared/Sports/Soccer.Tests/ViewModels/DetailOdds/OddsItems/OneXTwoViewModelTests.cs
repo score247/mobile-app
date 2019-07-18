@@ -33,7 +33,7 @@
         public void HomeLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OneXTwoItemViewModel(BetType.OneXTwo, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OneXTwoItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -46,7 +46,7 @@
         public void DrawLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OneXTwoItemViewModel(BetType.OneXTwo, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OneXTwoItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();
@@ -59,7 +59,7 @@
         public void AwayLiveOdds_Always_GetExpectedFormat()
         {
             // Arrange               
-            var viewModel = new OneXTwoItemViewModel(BetType.OneXTwo, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            var viewModel = new OneXTwoItemViewModel(betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
             viewModel.CreateInstance();

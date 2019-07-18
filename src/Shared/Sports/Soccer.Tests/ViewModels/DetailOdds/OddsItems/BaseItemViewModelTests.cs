@@ -25,6 +25,8 @@
 
         [Theory]     
         [InlineData(BetType.OneXTwo, typeof(OneXTwoItemViewModel))]
+        [InlineData(BetType.AsianHDP, typeof(AsianHdpItemViewModel))]
+        [InlineData(BetType.OverUnder, typeof(OverUnderItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(BetType betType, Type expectedType)
         {
             // Arrange               
@@ -38,7 +40,9 @@
         }
 
         [Theory]
-        [InlineData(BetType.OneXTwo, typeof(OneXTwoItemTemplate))]       
+        [InlineData(BetType.OneXTwo, typeof(OneXTwoItemTemplate))]
+        [InlineData(BetType.AsianHDP, typeof(AsianHdpItemTemplate))]
+        [InlineData(BetType.OverUnder, typeof(OverUnderItemTemplate))]
         public void CreateTemplate_Always_GetExpectedTemplate(BetType betType, Type expectedType)
         {
             // Arrange
