@@ -14,7 +14,9 @@
             {
                 bool isSelected = (bool)value;
 
-                color = isSelected ? (Color)Application.Current.Resources["ActiveSubTabBgColor"] : (Color)Application.Current.Resources["SubTabBgColor"];
+                color = isSelected 
+                    ? (Color)Application.Current.Resources["ActiveSubTabBgColor"] 
+                    : (Color)Application.Current.Resources["SubTabBgColor"];
             }
 
             return color;

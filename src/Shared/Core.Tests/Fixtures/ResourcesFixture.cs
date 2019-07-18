@@ -37,9 +37,10 @@
             app.Resources["ActiveLineColor"] = Color.FromHex("#1D2133");
             app.Resources["InactiveLineColor"] = Color.FromHex("#1D2133");
             app.Resources["SubTabContainerBgColor"] = Color.FromHex("#1D2133");
-            app.Resources["SubTabColor"] = Color.FromHex("#1D2133");
-            app.Resources["SubTabBgColor"] = Color.FromHex("#1D2133");
-            app.Resources["ActiveSubTabColor"] = Color.FromHex("#1D2133");
+            app.Resources["SubTabColor"] = Color.FromHex("#fff");
+            app.Resources["SubTabBgColor"] = Color.FromHex("#0F111C");
+            app.Resources["ActiveSubTabBgColor"] = Color.FromHex("#1A1C28");
+            app.Resources["ActiveSubTabColor"] = Color.FromHex("#3EC28F");
             app.Resources["UpLiveOddColor"] = Color.FromHex("#FF222C");
             app.Resources["DownLiveOddColor"] = Color.FromHex("#66FF59");
 
