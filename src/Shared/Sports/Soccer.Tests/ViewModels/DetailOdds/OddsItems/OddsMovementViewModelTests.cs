@@ -13,6 +13,7 @@
     using Prism.Navigation;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class OddsMovementViewModelTests : IClassFixture<ViewModelBaseFixture>
@@ -75,7 +76,7 @@
             };
 
         [Fact]
-        public void OnAppearing_Always_LoadOdds()
+        public void OnAppearing_Always_LoadOddsMovement()
         {
             // Arrange
             oddsService.GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>())
@@ -109,6 +110,16 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
+        }
+
+        [Fact]
+        public async Task RefreshCommand_OnExecute_LoadOddsMovement()
+        {
+            // Act
+            await viewModel.RefreshCommand.ExecuteAsync();
+
+            // Assert
+            await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>(), true);
         }
     }
 }

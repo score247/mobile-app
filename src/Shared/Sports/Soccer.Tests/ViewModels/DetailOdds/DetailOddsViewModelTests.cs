@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
+    using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Services;
@@ -23,6 +24,8 @@
         private readonly IOddsService oddsService;
         private readonly CompareLogic comparer;
         private readonly ILoggingService loggingService;
+        private readonly IDependencyResolver dependencyResolver;
+        private readonly INavigationService navigationService;
         private const string matchId = "sr:match:1";
 
         public DetailOddsViewModelTests(ViewModelBaseFixture baseFixture)
@@ -33,6 +36,8 @@
 
             baseFixture.DependencyResolver.Resolve<IOddsService>("1").Returns(oddsService);
             baseFixture.DependencyResolver.Resolve<ILoggingService>("1").Returns(loggingService);
+            navigationService = baseFixture.NavigationService;
+            dependencyResolver = baseFixture.DependencyResolver;
 
             viewModel = new DetailOddsViewModel(
                 matchId,
@@ -112,13 +117,63 @@
         }
 
         [Fact]
-        public async Task OnButtonClicked_OnExecute_LoadOdds()
+        public async Task OnOddsTabClicked_OnExecute_LoadOdds()
         {
             // Act
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             // Assert
             await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), false);
+        }
+
+        [Fact]
+        public async Task IsOneXTwoSelected_SelectedOneXTwo_MustTrue()
+        {
+            // Act
+            await viewModel.OnOddsTabClicked.ExecuteAsync("1");
+
+            // Assert
+            Assert.True(viewModel.IsOneXTwoSelected);
+        }
+
+        [Fact]
+        public async Task IsOverUnderSelected_SelectedOverUnder_MustTrue()
+        {
+            // Act
+            await viewModel.OnOddsTabClicked.ExecuteAsync("2");
+
+            // Assert
+            Assert.True(viewModel.IsOverUnderSelected);
+        }
+
+        [Fact]
+        public async Task IsAsianHdpSelected_SelectedAsianHdp_MustTrue()
+        {
+            // Act
+            await viewModel.OnOddsTabClicked.ExecuteAsync("3");
+
+            // Assert
+            Assert.True(viewModel.IsAsianHdpSelected);
+        }
+
+        [Fact]
+        public async Task TappedOddsItemCommand_OnExecuting_CallNavigationService()
+        {
+            // Arrange
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+            await viewModel.RefreshCommand.ExecuteAsync();
+            var oddsItemViewModel = new BaseItemViewModel(
+                BetType.OneXTwo, 
+                CreateBetTypeOdds(), 
+                navigationService,
+                dependencyResolver);
+
+            // Act
+            await viewModel.TappedOddsItemCommand.ExecuteAsync(oddsItemViewModel);
+
+            // Assert
+            var navService = viewModel.NavigationService as FakeNavigationService;
+            Assert.Equal("OddsMovementView" + viewModel.SettingsService.CurrentSportType.Value, navService.NavigationPath);
         }
     }
 }
