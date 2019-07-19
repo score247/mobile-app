@@ -31,6 +31,8 @@
             Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());
             Specimens.Register<IMatchOdds>(() => Specimens.Create<MatchOdds>());
             Specimens.Register<IBetTypeOdds>(() => Specimens.Create<BetTypeOdds>());
+            Specimens.Register<IMatchOddsMovement>(() => Specimens.Create<MatchOddsMovement>());
+            Specimens.Register<IOddsMovement>(() => Specimens.Create<OddsMovement>());
         }
 
         public CompareLogic Comparer { get; }

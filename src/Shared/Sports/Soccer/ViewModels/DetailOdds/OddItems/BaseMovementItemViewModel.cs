@@ -24,7 +24,7 @@
 
         public BaseMovementItemViewModel(
             BetType betType,
-            OddsMovement oddsMovement,
+            IOddsMovement oddsMovement,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
             : base(navigationService, depdendencyResolver)
@@ -33,11 +33,9 @@
             BetType = betType;
         }
 
-        public OddsMovement OddsMovement { get; }
+        public IOddsMovement OddsMovement { get; }
 
         public BetType BetType { get; }
-
-        public string MatchId { get; }
 
         public DataTemplate CreateTemplate()
         {

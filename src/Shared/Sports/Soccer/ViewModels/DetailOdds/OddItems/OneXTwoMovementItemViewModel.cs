@@ -11,7 +11,7 @@
     public class OneXTwoMovementItemViewModel : BaseMovementItemViewModel 
     {
         public OneXTwoMovementItemViewModel(
-            OddsMovement oddsMovement, 
+            IOddsMovement oddsMovement, 
             INavigationService navigationService, 
             IDependencyResolver depdendencyResolver) 
             : base(BetType.OneXTwo, oddsMovement, navigationService, depdendencyResolver)
@@ -37,7 +37,7 @@
 
         public string UpdateTime { get; private set; }
 
-        private void Initialize(OddsMovement oddsMovement)        
+        private void Initialize(IOddsMovement oddsMovement)        
         {
 
             MatchScore = oddsMovement.IsMatchStarted 
@@ -54,7 +54,7 @@
             BuildAwayOdds(oddsMovement);
         }
 
-        private void BuildAwayOdds(OddsMovement oddsMovement)
+        private void BuildAwayOdds(IOddsMovement oddsMovement)
         {
             var awayOdds = GetOddsInfo(BetOption.Away, oddsMovement);
 
@@ -65,7 +65,7 @@
             }
         }
 
-        private void BuildDrawOdds(OddsMovement oddsMovement)
+        private void BuildDrawOdds(IOddsMovement oddsMovement)
         {
             var drawOdds = GetOddsInfo(BetOption.Draw, oddsMovement);
 
@@ -76,7 +76,7 @@
             }
         }
 
-        private void BuildHomeOdds(OddsMovement oddsMovement)
+        private void BuildHomeOdds(IOddsMovement oddsMovement)
         {
             var homeOdds = GetOddsInfo(BetOption.Home, oddsMovement);
 
@@ -87,6 +87,6 @@
             }
         }
 
-        private static BetOptionOdds GetOddsInfo(string option, OddsMovement oddsMovement) => oddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+        private static BetOptionOdds GetOddsInfo(string option, IOddsMovement oddsMovement) => oddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }

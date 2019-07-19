@@ -3,7 +3,22 @@
     using System;
     using System.Collections.Generic;
 
-    public class OddsMovement : Entity<int, string>
+    public interface IOddsMovement : IEntity<int, string>
+    {
+        IEnumerable<BetOptionOdds> BetOptions { get; }
+
+        string MatchTime { get; }
+
+        int HomeScore { get; }
+
+        int AwayScore { get; }
+
+        DateTime UpdateTime { get; }
+
+        bool IsMatchStarted { get; }
+    }
+
+    public class OddsMovement : Entity<int, string>, IOddsMovement
     {
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }
 
