@@ -1,12 +1,19 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System.Linq;
+    using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
+    using Prism.Navigation;
 
-    public class OneXTwoMovementItemViewModel 
+    public class OneXTwoMovementItemViewModel : BaseMovementItemViewModel 
     {
-        public OneXTwoMovementItemViewModel(OddsMovement oddsMovement)
+        public OneXTwoMovementItemViewModel(
+            OddsMovement oddsMovement, 
+            INavigationService navigationService, 
+            IDependencyResolver depdendencyResolver) 
+            : base(BetType.OneXTwo, oddsMovement, navigationService, depdendencyResolver)
         {
             Initialize(oddsMovement);
         }

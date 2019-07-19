@@ -14,7 +14,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -44,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public bool HasData { get; private set; }
 
-        public ObservableCollection<OneXTwoMovementItemViewModel> OddsMovement{ get; private set; }
+        public ObservableCollection<BaseMovementItemViewModel> OddsMovement{ get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -60,8 +59,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 oddsFormat = parameters["Format"].ToString();
 
                 Title = $"{bookmaker.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
-
-                HeaderTemplate = new OneXTwoMovementHeaderTemplate();
             }
             catch (Exception ex)
             {
@@ -89,9 +86,13 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
+            HeaderTemplate = new BaseMovementHeaderViewModel(betType, NavigationService, DependencyResolver).CreateTemplate();
+
             OddsMovement = HasData
-                    ? new ObservableCollection<OneXTwoMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(x=> new OneXTwoMovementItemViewModel(x)))
-                    : new ObservableCollection<OneXTwoMovementItemViewModel>();
+                    ? new ObservableCollection<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
+                        new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
+                        .CreateInstance()))
+                    : new ObservableCollection<BaseMovementItemViewModel>();
 
             IsRefreshing = false;
             IsLoading = false;
