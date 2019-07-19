@@ -52,11 +52,11 @@
                 {
                     var childLayout = (StackLayout)children[i];
 
-                    childLayout.Children[0].Style = i == index
+                    childLayout.Children[1].Style = i == index
                     ? (Style)control.Resources["TabActiveText"]
                     : (Style)control.Resources["TabText"];
 
-                    ((ContentView)childLayout.Children[1]).Content.Style = i == index
+                    ((ContentView)childLayout.Children[2]).Content.Style = i == index
                     ? (Style)control.Resources["TabActiveLine"]
                     : (Style)control.Resources["TabInactiveLine"];
                 }
@@ -75,7 +75,7 @@
                 var itemIcon = new Image
                 {
                     Source = Images.TabIcon.Value,
-                    Style= (Style)control.Resources["TabIcon"],
+                    Style = (Style)control.Resources["TabIcon"],
                     WidthRequest = 16,
                     HeightRequest = 16
                 };

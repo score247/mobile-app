@@ -95,7 +95,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var actualRowColor = viewModel.RowColor;
 
             // Assert
-            Assert.Equal(Color.FromHex("#0F111C"), actualRowColor);
+            Assert.Equal(Color.FromHex("#1D2133"), actualRowColor);
         }
     }
 }

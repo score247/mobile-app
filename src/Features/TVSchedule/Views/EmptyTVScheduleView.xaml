@@ -13,10 +13,9 @@
         prism:ViewModelLocator.AutowireViewModel="True"
         BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
-       <coreTemplates:NavigationTitleTemplate 
-                        Title="{langs:Translate TV}" 
+        <coreTemplates:NavigationTitleTemplate
+                        Title="{langs:Translate TV}"
                         mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-        
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -26,8 +25,8 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="TV Schedule is comming soon"
-               TextColor="{StaticResource SecondTextColor}" 
-               HorizontalOptions="Center" 
+               TextColor="{StaticResource SecondTextColor}"
+               HorizontalOptions="Center"
                VerticalOptions="Center" FontSize="13" />
     </ContentPage.Content>
 </ContentPage>

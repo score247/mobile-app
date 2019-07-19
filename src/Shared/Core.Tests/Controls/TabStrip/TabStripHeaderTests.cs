@@ -31,12 +31,12 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
 
             // Assert
             var firstTabLayout = tabHeaders[0] as StackLayout;
-            Assert.Equal("INFO", (firstTabLayout?.Children[0] as Label)?.Text);
-            Assert.NotNull(firstTabLayout?.Children[1] as ContentView);
+            Assert.Equal("INFO", (firstTabLayout?.Children[1] as Label)?.Text);
+            Assert.NotNull(firstTabLayout?.Children[2] as ContentView);
 
             var secondTabLayout = tabHeaders[1] as StackLayout;
-            Assert.Equal("TRACKER", (secondTabLayout?.Children[0] as Label)?.Text);
-            Assert.NotNull(secondTabLayout?.Children[1] as ContentView);
+            Assert.Equal("TRACKER", (secondTabLayout?.Children[1] as Label)?.Text);
+            Assert.NotNull(secondTabLayout?.Children[2] as ContentView);
         }
     }
 }
