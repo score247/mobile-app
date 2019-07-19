@@ -8,6 +8,8 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStripHeader : ContentView
     {
+        private const int TabLineIndex = 2;
+
         public TabStripHeader()
         {
             InitializeComponent();
@@ -56,7 +58,7 @@
                     ? (Style)control.Resources["TabActiveText"]
                     : (Style)control.Resources["TabText"];
 
-                    ((ContentView)childLayout.Children[2]).Content.Style = i == index
+                    ((ContentView)childLayout.Children[TabLineIndex]).Content.Style = i == index
                     ? (Style)control.Resources["TabActiveLine"]
                     : (Style)control.Resources["TabInactiveLine"];
                 }

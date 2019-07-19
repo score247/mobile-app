@@ -93,7 +93,7 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
-            Assert.True(comparer.Compare(expectedViewModels, viewModel.OddsMovement).AreEqual);
+            Assert.True(comparer.Compare(expectedViewModels, viewModel.OddsMovementItems).AreEqual);
         }
 
         [Fact]
