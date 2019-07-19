@@ -43,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public bool HasData { get; private set; }
 
-        public ObservableCollection<BaseMovementItemViewModel> OddsMovement{ get; private set; }
+        public ObservableCollection<BaseMovementItemViewModel> OddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -88,7 +88,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             HeaderTemplate = new BaseMovementHeaderViewModel(betType, NavigationService, DependencyResolver).CreateTemplate();
 
-            OddsMovement = HasData
+            OddsMovementItems = HasData
                     ? new ObservableCollection<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
                         new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
                         .CreateInstance()))

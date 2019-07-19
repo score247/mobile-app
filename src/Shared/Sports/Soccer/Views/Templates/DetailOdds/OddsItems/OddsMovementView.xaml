@@ -4,11 +4,11 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     mc:Ignorable="d"
     BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
@@ -41,8 +41,8 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
                 RefreshCommand="{Binding RefreshCommand}"
-                IsVisible="{Binding IsNotLoading}"
-                ItemsSource="{Binding OddsMovement}"
+                IsVisible="{Binding HasData}"
+                ItemsSource="{Binding OddsMovementItems}"
                 SeparatorVisibility="None"
                 Header="{Binding}"
                 HeaderTemplate="{Binding HeaderTemplate}"
