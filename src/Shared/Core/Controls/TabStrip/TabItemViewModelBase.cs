@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.ViewModels;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -22,7 +23,11 @@
 
         public DataTemplate Template { get; }
 
-        public string HeaderTitle { get; set; }
+        public string TabHeaderTitle { get; set; }
+
+        public Images TabHeaderIcon { get; set; }
+
+        public Images TabHeaderActiveIcon { get; set; }
 
         protected override async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
         {

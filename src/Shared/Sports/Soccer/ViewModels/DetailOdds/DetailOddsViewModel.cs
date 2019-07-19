@@ -43,6 +43,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             OnOddsTabClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
+
+            TabHeaderIcon = TabDetailImages.Odds;
+            TabHeaderActiveIcon = TabDetailImages.OddsActive;
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOdds { get; private set; }
@@ -62,7 +65,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public BetType SelectedBetType { get; private set; }
 
         public bool IsOneXTwoSelected => SelectedBetType == BetType.OneXTwo;
+
         public bool IsAsianHdpSelected => SelectedBetType == BetType.AsianHDP;
+
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
         protected override async void Initialize()
@@ -78,7 +83,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         private Task HandleButtonCommand(string betTypeId)
-        => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));    
+        => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
@@ -108,7 +113,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private bool CanLoadOdds(BetType betType, bool isRefresh)
         => isRefresh || SelectedBetType != betType || BetTypeOdds == null || !BetTypeOdds.Any();
 
-        private async Task HandleOddsItemTapCommand(BaseItemViewModel item) 
+        private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
             var parameters = new NavigationParameters
             {

@@ -53,6 +53,7 @@
             RefreshCommand="{Binding RefreshCommand}"
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
+            Footer=""
             VerticalOptions="FillAndExpand">
             <customListView:CustomListView.Behaviors>
                 <b:EventToCommandBehavior

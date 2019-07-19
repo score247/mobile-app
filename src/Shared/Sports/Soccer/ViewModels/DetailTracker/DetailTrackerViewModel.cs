@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailStats
+﻿namespace LiveScore.Soccer.ViewModels.DetailTracker
 {
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
@@ -6,16 +6,16 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailStatsViewModel : TabItemViewModelBase
+    internal class DetailTrackerViewModel : TabItemViewModelBase
     {
-        public DetailStatsViewModel(
+        public DetailTrackerViewModel(
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            TabHeaderIcon = TabDetailImages.Stats;
-            TabHeaderActiveIcon = TabDetailImages.StatsActive;
+            TabHeaderIcon = TabDetailImages.Tracker;
+            TabHeaderActiveIcon = TabDetailImages.TrackerActive;
         }
     }
 }

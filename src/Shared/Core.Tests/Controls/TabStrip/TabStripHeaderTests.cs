@@ -14,8 +14,8 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
         {
             tabs = new List<TabItemViewModelBase>
             {
-                new TabItemViewModelBase() { HeaderTitle = "Info" },
-                new TabItemViewModelBase() { HeaderTitle = "Tracker" },
+                new TabItemViewModelBase() { TabHeaderTitle = "Info" },
+                new TabItemViewModelBase() { TabHeaderTitle = "Tracker" },
             };
         }
 

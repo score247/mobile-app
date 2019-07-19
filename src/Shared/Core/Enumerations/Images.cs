@@ -18,7 +18,7 @@
         {
         }
 
-        private Images(string value, string displayName)
+        protected Images(string value, string displayName)
             : base(value, displayName)
         {
         }

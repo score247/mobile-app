@@ -13,6 +13,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
@@ -42,6 +43,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.matchHubConnection = matchHubConnection;
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(Match.Id, true), false));
+
+            TabHeaderIcon = TabDetailImages.Info;
+            TabHeaderActiveIcon = TabDetailImages.InfoActive;
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }

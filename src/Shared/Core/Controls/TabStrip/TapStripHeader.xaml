@@ -30,7 +30,7 @@
             x:Key="TabActiveText"
             BasedOn="{StaticResource TabText}"
             TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
+            <Setter Property="TextColor" Value="{StaticResource ActiveLineColor}" />
             <Setter Property="FontAttributes" Value="Bold" />
         </Style>
         <Style x:Key="TabActiveLine" TargetType="BoxView">

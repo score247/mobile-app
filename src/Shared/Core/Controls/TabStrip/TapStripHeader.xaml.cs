@@ -2,6 +2,7 @@
 {
     using LiveScore.Core.Enumerations;
     using System.Collections.Generic;
+    using System.Linq;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -48,22 +49,27 @@
         {
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
-                var children = control.scrollLayOut.Children;
+                var tabHeaders = control.scrollLayOut.Children;
 
-                for (int i = 0; i < children.Count; i++)
+                for (int i = 0; i < tabHeaders.Count; i++)
                 {
-                    var childLayout = (StackLayout)children[i];
+                    var tabHeader = (StackLayout)tabHeaders[i];
+                    var tabModel = control.ItemsSource.ToList()[i];
 
-                    childLayout.Children[1].Style = i == index
-                    ? (Style)control.Resources["TabActiveText"]
-                    : (Style)control.Resources["TabText"];
+                    (tabHeader.Children[0] as Image).Source = i == index
+                        ? tabModel.TabHeaderActiveIcon?.Value
+                        : tabModel.TabHeaderIcon?.Value;
 
-                    ((ContentView)childLayout.Children[TabLineIndex]).Content.Style = i == index
-                    ? (Style)control.Resources["TabActiveLine"]
-                    : (Style)control.Resources["TabInactiveLine"];
+                    tabHeader.Children[1].Style = i == index
+                        ? (Style)control.Resources["TabActiveText"]
+                        : (Style)control.Resources["TabText"];
+
+                    ((ContentView)tabHeader.Children[2]).Content.Style = i == index
+                        ? (Style)control.Resources["TabActiveLine"]
+                        : (Style)control.Resources["TabInactiveLine"];
                 }
 
-                control.scrollView.ScrollToAsync(children[index], ScrollToPosition.Center, true);
+                control.scrollView.ScrollToAsync(tabHeaders[index], ScrollToPosition.Center, true);
             });
         }
 
@@ -76,7 +82,7 @@
 
                 var itemIcon = new Image
                 {
-                    Source = Images.TabIcon.Value,
+                    Source = index == 0 ? item.TabHeaderActiveIcon?.Value : item.TabHeaderIcon?.Value,
                     Style = (Style)control.Resources["TabIcon"],
                     WidthRequest = 16,
                     HeightRequest = 16
@@ -84,7 +90,7 @@
 
                 var itemLabel = new Label
                 {
-                    Text = item.HeaderTitle?.ToUpperInvariant(),
+                    Text = item.TabHeaderTitle?.ToUpperInvariant(),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);

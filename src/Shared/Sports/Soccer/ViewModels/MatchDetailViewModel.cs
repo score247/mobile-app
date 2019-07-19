@@ -19,8 +19,14 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.ViewModels.DetailH2H;
+    using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
+    using LiveScore.Soccer.ViewModels.DetailSocial;
     using LiveScore.Soccer.ViewModels.DetailStats;
+    using LiveScore.Soccer.ViewModels.DetailTable;
+    using LiveScore.Soccer.ViewModels.DetailTracker;
+    using LiveScore.Soccer.ViewModels.DetailTV;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using LiveScore.Soccer.Views.Templates.DetailH2H;
     using LiveScore.Soccer.Views.Templates.DetailInfo;
@@ -74,13 +80,13 @@ namespace LiveScore.Soccer.ViewModels
                 {
                     {nameof(MatchFunctions.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
                     {nameof(MatchFunctions.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
-                    {nameof(MatchFunctions.H2H), new DetailStatsViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
-                    {nameof(MatchFunctions.Lineups),  new DetailStatsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
-                    {nameof(MatchFunctions.Social), new DetailStatsViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
+                    {nameof(MatchFunctions.H2H), new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
+                    {nameof(MatchFunctions.Lineups),  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
+                    {nameof(MatchFunctions.Social), new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
                     {nameof(MatchFunctions.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
-                    {nameof(MatchFunctions.Table), new DetailStatsViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
-                    {nameof(MatchFunctions.TV), new DetailStatsViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                    {nameof(MatchFunctions.Tracker), new DetailStatsViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
+                    {nameof(MatchFunctions.Table), new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
+                    {nameof(MatchFunctions.TV), new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
+                    {nameof(MatchFunctions.Tracker), new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
                 };
 
                 Title = tabItemViewModels.First().Key;
@@ -133,7 +139,7 @@ namespace LiveScore.Soccer.ViewModels
                 {
                     var tabModel = tabItemViewModels[tab.Abbreviation.Replace("-", string.Empty)];
                     tabModel.Title = tab.Name;
-                    tabModel.HeaderTitle = tab.Abbreviation;
+                    tabModel.TabHeaderTitle = tab.Abbreviation;
 
                     TabViews.Add(tabModel);
                 }
