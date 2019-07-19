@@ -14,11 +14,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
     using Prism.Events;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
-    public class OddsMovementViewModel : ViewModelBase, IDisposable
+    public class OddsMovementViewModel : ViewModelBase
     {
         private readonly IOddsService oddsService;
 
@@ -47,6 +48,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
+        public DataTemplate HeaderTemplate { get; private set; }
+
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
             try
@@ -57,6 +60,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 oddsFormat = parameters["Format"].ToString();
 
                 Title = $"{bookmaker.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
+
+                HeaderTemplate = new OneXTwoMovementHeaderTemplate();
             }
             catch (Exception ex)
             {
@@ -78,40 +83,18 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         private async Task LoadOddsMovement(bool isRefresh = false)
         {
-
-            IsLoading = true;
+            IsLoading = !isRefresh;
 
             var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, (int)betType, oddsFormat, bookmaker.Id, isRefresh);
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
             OddsMovement = HasData
-                    ? new ObservableCollection<OneXTwoMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(x=> MapToViewModel(x)))
+                    ? new ObservableCollection<OneXTwoMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(x=> new OneXTwoMovementItemViewModel(x)))
                     : new ObservableCollection<OneXTwoMovementItemViewModel>();
 
             IsRefreshing = false;
             IsLoading = false;
-
-        }
-
-        private static OneXTwoMovementItemViewModel MapToViewModel(OddsMovement oddsMovement)
-        => new OneXTwoMovementItemViewModel 
-            { 
-                MatchScore = $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}",
-                MatchTime = oddsMovement.MatchTime, 
-                HomeOdds = oddsMovement.BetOptions.First(x=>x.Type=="home").LiveOdds.ToOddsFormat(),
-                HomeOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "home").OddsTrend.Value,
-                DrawOdds = oddsMovement.BetOptions.First(x => x.Type == "draw").LiveOdds.ToOddsFormat(),
-                DrawOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "draw").OddsTrend.Value,
-                AwayOdds = oddsMovement.BetOptions.First(x => x.Type == "away").LiveOdds.ToOddsFormat(),
-                AwayOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "away").OddsTrend.Value,
-                UpdateTime = oddsMovement.UpdateTime.ToString("dd-MM HH:mm") //TODO convert to gmt+7
-            };
-
-
-        public void Dispose()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -1,23 +1,45 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
-    public class OneXTwoMovementItemViewModel
+    using System.Linq;
+    using LiveScore.Core.Models.Odds;
+    using LiveScore.Soccer.Extensions;
+
+    public class OneXTwoMovementItemViewModel 
     {
-        public string MatchTime { get; set; }
+        public OneXTwoMovementItemViewModel(OddsMovement oddsMovement)
+        {
+            Initialize(oddsMovement);
+        }
 
-        public string MatchScore { get; set; }
+        public string MatchTime { get; private set; }
 
-        public string HomeOdds { get; set; }
+        public string MatchScore { get; private set; }
 
-        public string HomeOddsTrend { get; set; }
+        public string HomeOdds { get; private set; }
 
-        public string DrawOdds { get; set; }
+        public string HomeOddsTrend { get; private set; }
 
-        public string DrawOddsTrend { get; set; }
+        public string DrawOdds { get; private set; }
 
-        public string AwayOdds { get; set; }
+        public string DrawOddsTrend { get; private set; }
 
-        public string AwayOddsTrend { get; set; }
+        public string AwayOdds { get; private set; }
 
-        public string UpdateTime { get; set; }
+        public string AwayOddsTrend { get; private set; }
+
+        public string UpdateTime { get; private set; }
+
+        private void Initialize(OddsMovement oddsMovement)        
+        {
+            MatchScore = $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}";
+            MatchTime = oddsMovement.MatchTime;
+            HomeOdds = oddsMovement.BetOptions.First(x => x.Type == "home").LiveOdds.ToOddsFormat();
+            HomeOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "home").OddsTrend.Value;
+            DrawOdds = oddsMovement.BetOptions.First(x => x.Type == "draw").LiveOdds.ToOddsFormat();
+            DrawOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "draw").OddsTrend.Value;
+            AwayOdds = oddsMovement.BetOptions.First(x => x.Type == "away").LiveOdds.ToOddsFormat();
+            AwayOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "away").OddsTrend.Value;
+            UpdateTime = oddsMovement.UpdateTime.ToString("dd-MM HH:mm"); //TODO convert to gmt+7
+        }
     }
 }

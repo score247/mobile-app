@@ -86,7 +86,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             if (CanLoadOdds(betType, isRefresh))
             {
-                IsLoading = true;
+                IsLoading = !isRefresh;
 
                 SelectedBetType = betType;
 
@@ -120,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 { "Format",  oddsFormat}
             };
 
-            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
+            await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
         }
     }
 }
