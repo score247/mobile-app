@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System.Linq;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;
@@ -14,7 +15,7 @@
             INavigationService navigationService, 
             IDependencyResolver depdendencyResolver) 
             : base(BetType.OneXTwo, oddsMovement, navigationService, depdendencyResolver)
-        {
+        {           
             Initialize(oddsMovement);
         }
 
@@ -38,15 +39,54 @@
 
         private void Initialize(OddsMovement oddsMovement)        
         {
-            MatchScore = $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}";
+
+            MatchScore = oddsMovement.IsMatchStarted 
+                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}" 
+                : string.Empty;
+
             MatchTime = oddsMovement.MatchTime;
-            HomeOdds = oddsMovement.BetOptions.First(x => x.Type == "home").LiveOdds.ToOddsFormat();
-            HomeOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "home").OddsTrend.Value;
-            DrawOdds = oddsMovement.BetOptions.First(x => x.Type == "draw").LiveOdds.ToOddsFormat();
-            DrawOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "draw").OddsTrend.Value;
-            AwayOdds = oddsMovement.BetOptions.First(x => x.Type == "away").LiveOdds.ToOddsFormat();
-            AwayOddsTrend = oddsMovement.BetOptions.First(x => x.Type == "away").OddsTrend.Value;
-            UpdateTime = oddsMovement.UpdateTime.ToString("dd-MM HH:mm"); //TODO convert to gmt+7
+            UpdateTime = oddsMovement.UpdateTime.ToDateAndTime(); //TODO convert to gmt+7
+
+            BuildHomeOdds(oddsMovement);
+
+            BuildDrawOdds(oddsMovement);
+
+            BuildAwayOdds(oddsMovement);
         }
+
+        private void BuildAwayOdds(OddsMovement oddsMovement)
+        {
+            var awayOdds = GetOddsInfo(BetOption.Away, oddsMovement);
+
+            if (awayOdds != null)
+            {               
+                AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
+                AwayOddsTrend = awayOdds.OddsTrend.Value;
+            }
+        }
+
+        private void BuildDrawOdds(OddsMovement oddsMovement)
+        {
+            var drawOdds = GetOddsInfo(BetOption.Draw, oddsMovement);
+
+            if (drawOdds != null)
+            {
+                DrawOdds = drawOdds.LiveOdds.ToOddsFormat();
+                DrawOddsTrend = drawOdds.OddsTrend.Value;
+            }
+        }
+
+        private void BuildHomeOdds(OddsMovement oddsMovement)
+        {
+            var homeOdds = GetOddsInfo(BetOption.Home, oddsMovement);
+
+            if (homeOdds != null)
+            {
+                HomeOdds = homeOdds.LiveOdds.ToOddsFormat();
+                HomeOddsTrend = homeOdds.OddsTrend.Value;
+            }
+        }
+
+        private static BetOptionOdds GetOddsInfo(string option, OddsMovement oddsMovement) => oddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }

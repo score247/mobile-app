@@ -14,5 +14,7 @@
         public int AwayScore { get; set; }
 
         public DateTime UpdateTime { get; set; }
+
+        public bool IsMatchStarted { get; set; }
     }
 }
