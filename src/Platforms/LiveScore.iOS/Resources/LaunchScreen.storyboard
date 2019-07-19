@@ -16,7 +16,7 @@
                     <view key="view" contentMode="center" id="yd7-JS-zBw">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.054901960784313725" green="0.058823529411764705" blue="0.10980392156862745" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.11372549019607843" green="0.12941176470588237" blue="0.2" alpha="1"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="6378" translatesAutoresizingMaskIntoConstraints="NO" image="images/common/logo_splash_screen.png">
                                 <rect key="frame" x="138" y="235" width="137" height="175"/>

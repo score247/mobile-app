@@ -50,49 +50,9 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
-    <!--  Bookmarker Details  -->
-    <Style
-        x:Key="TimeHeaderText"
-        BasedOn="{StaticResource TableHeaderText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1.5" />
-    </Style>
-    <Style
-        x:Key="TimeText"
-        BasedOn="{StaticResource MatchDetailOddsOddsText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1.5" />
-    </Style>
-    <Style
-        x:Key="LiveTimeText"
-        BasedOn="{StaticResource TimeText}"
-        TargetType="Label">
-        <Setter Property="TextColor" Value="#FC1923" />
-    </Style>
-
-    <Style
-        x:Key="ScoreHeaderText"
-        BasedOn="{StaticResource TableHeaderText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1.5" />
-    </Style>
-    <Style
-        x:Key="ScoreText"
-        BasedOn="{StaticResource MatchDetailOddsOddsText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1.5" />
-    </Style>
-
-    <Style
-        x:Key="LastUpdateHeaderText"
-        BasedOn="{StaticResource TableHeaderText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="2" />
-    </Style>
-    <Style
-        x:Key="LastUpdateText"
-        BasedOn="{StaticResource MatchDetailOddsOddsText}"
-        TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="2" />
+    <Style x:Key="MatchDetailOddsMovementChart" TargetType="Image">
+        <Setter Property="Margin" Value="0,20,0,0" />
+        <Setter Property="HeightRequest" Value="91" />
+        <Setter Property="WidthRequest" Value="371" />
     </Style>
 </ResourceDictionary>

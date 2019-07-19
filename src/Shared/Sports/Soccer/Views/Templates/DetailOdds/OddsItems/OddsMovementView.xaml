@@ -1,16 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OddsMovementView"
-    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-    mc:Ignorable="d"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource PrimaryColor}"
+    mc:Ignorable="d">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
     </NavigationPage.TitleView>
@@ -26,27 +26,27 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
 
-             <ActivityIndicator
-                    IsEnabled="{Binding IsLoading}"
-                    IsRunning="{Binding IsLoading}"
-                    IsVisible="{Binding IsLoading}"
-                    Style="{StaticResource CenterActivityIndicator}"
-                    VerticalOptions="StartAndExpand" />
-            
+            <ActivityIndicator
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Style="{StaticResource CenterActivityIndicator}"
+                VerticalOptions="StartAndExpand" />
+
             <ListView
                 AutomationId="MatchOddsMovement"
                 AutomationProperties.IsInAccessibleTree="False"
-                BackgroundColor="{StaticResource SecondColor}"
+                BackgroundColor="{StaticResource PrimaryColor}"
                 HasUnevenRows="true"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsRefreshing}"
-                RefreshCommand="{Binding RefreshCommand}"
-                IsVisible="{Binding HasData}"
-                ItemsSource="{Binding OddsMovementItems}"
-                SeparatorVisibility="None"
                 Header="{Binding}"
                 HeaderTemplate="{Binding HeaderTemplate}"
-                ItemTemplate="{StaticResource oddsMovementItemTemplateSelector}" />
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsRefreshing}"
+                IsVisible="{Binding HasData}"
+                ItemTemplate="{StaticResource oddsMovementItemTemplateSelector}"
+                ItemsSource="{Binding OddsMovementItems}"
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

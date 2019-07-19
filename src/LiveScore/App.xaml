@@ -69,8 +69,9 @@
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
             <Color x:Key="TableEvenRowBgColor">#131724</Color>
             <Color x:Key="TableRowColor">#fff</Color>
-            <x:Double x:Key="TableRowFontSize">11</x:Double>
             <Color x:Key="TableLineColor">#262A3D</Color>
+            <x:Double x:Key="TableRowFontSize">11</x:Double>
+            <x:Double x:Key="TableRowHeight">40</x:Double>
 
             <!--  Define font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
@@ -410,6 +411,11 @@
                 <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
                 <Setter Property="RowSpacing" Value="1" />
                 <Setter Property="ColumnSpacing" Value="1" />
+            </Style>
+
+            <Style x:Key="TableLine" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
             </Style>
 
             <!--  Dropdown List  -->

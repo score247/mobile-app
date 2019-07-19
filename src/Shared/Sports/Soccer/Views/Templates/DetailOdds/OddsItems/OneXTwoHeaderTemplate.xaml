@@ -7,7 +7,7 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
 
     <StackLayout>
-        <BoxView BackgroundColor="{StaticResource TableLineColor}" HeightRequest="1" />
+        <BoxView Style="{StaticResource TableLine}" />
         <Grid Style="{StaticResource GridTableContainer}">
             <Grid.Resources>
                 <ResourceDictionary>
@@ -27,8 +27,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="40" />
+                <RowDefinition Height="{StaticResource TableRowHeight}" />
+                <RowDefinition Height="{StaticResource TableRowHeight}" />
             </Grid.RowDefinitions>
 
             <Label

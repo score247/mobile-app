@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="{StaticResource TableRowHeight}" />
             </Grid.RowDefinitions>
             <Grid.Resources>
                 <ResourceDictionary>
