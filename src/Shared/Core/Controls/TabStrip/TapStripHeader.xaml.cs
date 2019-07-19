@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
+    using LiveScore.Core.Enumerations;
     using System.Collections.Generic;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -70,6 +71,15 @@
             {
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
+
+                var itemIcon = new Image
+                {
+                    Source = Images.TabIcon.Value,
+                    Style= (Style)control.Resources["TabIcon"],
+                    WidthRequest = 16,
+                    HeightRequest = 16
+                };
+
                 var itemLabel = new Label
                 {
                     Text = item.HeaderTitle?.ToUpperInvariant(),
@@ -77,6 +87,7 @@
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
 
+                itemLayout.Children.Add(itemIcon);
                 itemLayout.Children.Add(itemLabel);
                 itemLayout.Children.Add(activeTabIndicator);
                 control.scrollLayOut.Children.Add(itemLayout);

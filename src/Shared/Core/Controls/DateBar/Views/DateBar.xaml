@@ -19,7 +19,6 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
-            <BoxView Style="{StaticResource DateBarLine}" />
             <FlexLayout Style="{StaticResource DateBarContainer}">
                 <Frame
                     x:Name="HomeButton"

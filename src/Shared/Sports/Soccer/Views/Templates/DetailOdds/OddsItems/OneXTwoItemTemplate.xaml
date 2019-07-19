@@ -6,7 +6,7 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:soccerConverters="clr-namespace:LiveScore.Soccer.Converters;assembly=LiveScore.Soccer">
     <ViewCell>
-        <Grid Padding="0" Style="{StaticResource GridTableContainer}">
+        <Grid Style="{StaticResource GridTableContainer}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*" />
                 <ColumnDefinition Width="*" />

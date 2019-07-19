@@ -15,7 +15,7 @@
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
         <Setter Property="Padding" Value="8,0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource TableBgColor}" />
     </Style>
 
     <Style

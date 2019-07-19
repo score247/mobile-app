@@ -12,6 +12,8 @@
         public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
         public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
 
+        public static readonly Images TabIcon = new Images("images/common/tab_icon.png", nameof(TabIcon));
+
         public Images()
         {
         }

@@ -717,15 +717,6 @@
     <BundleResource Include="Resources\images\common\odd_desc%403x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\images\common\arrow_down.png" />
   </ItemGroup>
   <ItemGroup>
@@ -796,6 +787,24 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\images\common\league_detail%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\bookmarker_detail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\bookmarker_detail%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\bookmarker_detail%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\tab_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\tab_icon%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\images\common\tab_icon%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

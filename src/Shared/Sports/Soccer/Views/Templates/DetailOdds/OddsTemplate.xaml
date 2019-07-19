@@ -11,7 +11,7 @@
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
     mc:Ignorable="d">
-    <StackLayout Padding="8">
+    <StackLayout Padding="0,8">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -24,7 +24,7 @@
             </ResourceDictionary>
         </StackLayout.Resources>
 
-        <Grid Style="{StaticResource SubTabContainer}">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
             </Grid.RowDefinitions>
@@ -43,7 +43,7 @@
                     Style="{StaticResource SubTab}"
                     Text="{langs:Translate BetTypeOneXTwo}"
                     TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
-                <BoxView Style="{StaticResource VerticalLine}" />
+                <BoxView Style="{StaticResource SubTabLine}" />
                 <Button
                     BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}"
                     Command="{Binding OnOddsTabClicked}"
@@ -51,7 +51,7 @@
                     Style="{StaticResource SubTab}"
                     Text="{langs:Translate BetTypeAsianHandicap}"
                     TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
-                <BoxView Style="{StaticResource VerticalLine}" />
+                <BoxView Style="{StaticResource SubTabLine}" />
                 <Button
                     BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}"
                     Command="{Binding OnOddsTabClicked}"
@@ -70,29 +70,31 @@
             </StackLayout>
         </Grid>
 
-        <ActivityIndicator
-            Margin="20"
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
-            Style="{StaticResource CenterActivityIndicator}" />
+        <StackLayout BackgroundColor="{StaticResource SubTabContainerBgColor}">
+            <ActivityIndicator
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Style="{StaticResource CenterActivityIndicator}" />
 
-        <StackLayout Style="{StaticResource TableContainer}">
-            <tabStrip:TabITemListView
-                AutomationId="MatchOdds"
-                AutomationProperties.IsInAccessibleTree="False"
-                BackgroundColor="{StaticResource SecondColor}"
-                HasUnevenRows="true"
-                Header="{Binding}"
-                HeaderTemplate="{Binding HeaderTemplate}"
-                IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsRefreshing}"
-                IsVisible="{Binding IsNotLoading}"
-                ItemTemplate="{StaticResource oddsItemTemplateSelector}"
-                ItemsSource="{Binding BetTypeOdds}"
-                MinimumHeightRequest="1000"
-                RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None" />
+            <StackLayout Style="{StaticResource TableContainer}">
+                <tabStrip:TabITemListView
+                    AutomationId="MatchOdds"
+                    AutomationProperties.IsInAccessibleTree="False"
+                    BackgroundColor="{StaticResource SubTabContainerBgColor}"
+                    HasUnevenRows="true"
+                    Header="{Binding}"
+                    HeaderTemplate="{Binding HeaderTemplate}"
+                    IsPullToRefreshEnabled="true"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    IsVisible="{Binding IsNotLoading}"
+                    ItemTemplate="{StaticResource oddsItemTemplateSelector}"
+                    ItemsSource="{Binding BetTypeOdds}"
+                    MinimumHeightRequest="1000"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    SeparatorVisibility="None" />
+            </StackLayout>
         </StackLayout>
+
     </StackLayout>
 </DataTemplate>

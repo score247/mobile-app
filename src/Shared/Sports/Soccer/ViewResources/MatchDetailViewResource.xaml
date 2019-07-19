@@ -11,6 +11,12 @@
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
 
+    <Style x:Key="MatchGeneralInfoContainer" TargetType="StackLayout">
+        <Setter Property="Margin" Value="8,8,8,0" />
+        <Setter Property="Padding" Value="1,0,1,1" />
+        <Setter Property="BackgroundColor" Value="#2D2F3F" />
+    </Style>
+
     <Style x:Key="MatchGeneralInfoLeagueBox" TargetType="Grid">
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
@@ -59,7 +65,7 @@
         x:Key="Group"
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
@@ -75,15 +81,13 @@
     </Style>
 
     <!--  SubTab  -->
-    <Style x:Key="SubTabContainer" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-    </Style>
+
     <Style x:Key="SubTabBox" TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
         <Setter Property="JustifyContent" Value="SpaceBetween" />
         <Setter Property="AlignItems" Value="Stretch" />
         <Setter Property="HeightRequest" Value="{StaticResource SubTabsHeight}" />
-        <Setter Property="Padding" Value="1" />
+        <Setter Property="Padding" Value="1,1,1,0" />
     </Style>
     <Style x:Key="CommonSubTab" TargetType="Button">
         <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
@@ -103,5 +107,9 @@
         BasedOn="{StaticResource CommonSubTab}"
         TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
+    </Style>
+    <Style x:Key="SubTabLine" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
+        <Setter Property="WidthRequest" Value="1" />
     </Style>
 </ResourceDictionary>

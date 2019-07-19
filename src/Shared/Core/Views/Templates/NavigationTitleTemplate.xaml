@@ -2,8 +2,7 @@
 <ContentView
     x:Class="LiveScore.Core.Views.Templates.NavigationTitleTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
         <FlexLayout AutomationProperties.IsInAccessibleTree="False" Style="{StaticResource FlexLayoutVerticalCenter}">
             <StackLayout x:Name="SportName">

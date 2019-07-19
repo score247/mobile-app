@@ -13,7 +13,7 @@
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0B0D14</Color>
-            <Color x:Key="SecondColor">#1A1C28</Color>
+            <Color x:Key="SecondColor">#2D2F3F</Color>
             <Color x:Key="SiteBackgroundColor">#0F111C</Color>
 
             <Color x:Key="PrimaryTextColor">#fff</Color>
@@ -47,7 +47,7 @@
             <!--  Tabs  -->
             <Color x:Key="TabColor">#999</Color>
             <Color x:Key="ActiveTabColor">#fff</Color>
-            <Color x:Key="ActiveLineColor">#3EC28F</Color>
+            <Color x:Key="ActiveLineColor">#F24822</Color>
             <x:Double x:Key="TabFontSize">11</x:Double>
             <Color x:Key="InactiveLineColor">#0B0D14</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
@@ -55,22 +55,22 @@
 
             <Color x:Key="SubTabContainerBgColor">#1A1C28</Color>
             <Color x:Key="SubTabColor">#fff</Color>
-            <Color x:Key="SubTabBgColor">#0F111C</Color>
+            <Color x:Key="SubTabBgColor">#06070A</Color>
             <Color x:Key="ActiveSubTabBgColor">#1A1C28</Color>
             <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
             <x:Double x:Key="SubTabsHeight">42</x:Double>
             <x:Double x:Key="SubTabsFontSize">11</x:Double>
 
             <!--  Table  -->
-            <Color x:Key="TableBgColor">#1A1C28</Color>
+            <Color x:Key="TableBgColor">#06070A</Color>
             <Color x:Key="TableHeaderBgColor">#1A1C28</Color>
-            <Color x:Key="TableHeaderColor">#1A1C28</Color>
+            <Color x:Key="TableHeaderColor">#fff</Color>
             <x:Double x:Key="TableHeaderFontSize">12</x:Double>
-            <Color x:Key="TableOddRowBgColor">#1A1C28</Color>
-            <Color x:Key="TableEvenRowBgColor">#1A1C28</Color>
-            <Color x:Key="TableRowColor">#1A1C28</Color>
-            <x:Double x:Key="TableRowFontSize">12</x:Double>
-            <Color x:Key="TableLineColor">#1A1C28</Color>
+            <Color x:Key="TableOddRowBgColor">#06070A</Color>
+            <Color x:Key="TableEvenRowBgColor">#131724</Color>
+            <Color x:Key="TableRowColor">#fff</Color>
+            <x:Double x:Key="TableRowFontSize">11</x:Double>
+            <Color x:Key="TableLineColor">#262A3D</Color>
 
             <!--  Define font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
@@ -87,6 +87,8 @@
             <Color x:Key="FunctionBarColor">#fff</Color>
 
             <!--  Define Header bar  -->
+            <Color x:Key="NavigationPageBgColor">#2D2F3F</Color>
+            <Color x:Key="NavigationPageColor">#fff</Color>
             <x:Double x:Key="SportNameFontSize">15</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
 
@@ -110,11 +112,11 @@
 
             <!--  Global Styles  -->
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryColor}" />
-                <Setter Property="BarTextColor" Value="#fff" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPageBgColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource NavigationPageColor}" />
             </Style>
             <Style x:Key="NavigationName" TargetType="Label">
-                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="TextColor" Value="{StaticResource NavigationPageColor}" />
                 <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
             <Style
@@ -383,29 +385,31 @@
 
             <!--  Define the basic table  -->
             <Style x:Key="TableContainer" TargetType="StackLayout">
-                <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
+                <Setter Property="Margin" Value="0,8" />
             </Style>
 
             <Style x:Key="TableText" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
-                <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
-                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource TableRowFontSize}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableBgColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TableRowColor}" />
             </Style>
 
             <Style
                 x:Key="TableHeaderText"
                 BasedOn="{StaticResource TableText}"
                 TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableHeaderBgColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TableHeaderColor}" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
 
             <Style x:Key="GridTableContainer" TargetType="Grid">
-                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
-                <Setter Property="Padding" Value="1" />
-                <Setter Property="ColumnSpacing" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
                 <Setter Property="RowSpacing" Value="1" />
+                <Setter Property="ColumnSpacing" Value="1" />
             </Style>
 
             <!--  Dropdown List  -->
