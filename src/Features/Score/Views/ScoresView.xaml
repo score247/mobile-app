@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
@@ -36,11 +37,10 @@
             IsRunning="{Binding IsLoading}"
             IsVisible="{Binding IsLoading}"
             Style="{StaticResource CenterActivityIndicator}" />
-        <ListView
+        <customListView:CustomListView
             x:Name="LeagueTable"
             AutomationId="LeagueTableId"
             AutomationProperties.IsInAccessibleTree="False"
-            CachingStrategy="RecycleElement"
             GroupDisplayBinding="{Binding Key}"
             GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
             HasUnevenRows="true"
@@ -54,12 +54,12 @@
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
             VerticalOptions="FillAndExpand">
-            <ListView.Behaviors>
+            <customListView:CustomListView.Behaviors>
                 <b:EventToCommandBehavior
                     Command="{Binding TappedMatchCommand}"
                     EventArgsParameterPath="Item"
                     EventName="ItemTapped" />
-            </ListView.Behaviors>
-        </ListView>
+            </customListView:CustomListView.Behaviors>
+        </customListView:CustomListView>
     </StackLayout>
 </ContentPage>
