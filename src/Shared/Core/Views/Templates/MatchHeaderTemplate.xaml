@@ -38,13 +38,14 @@
                     Grid.Column="1"
                     LineBreakMode="TailTruncation"
                     Style="{StaticResource LeagueName}"
-                    Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" />
+                    Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}"
+                    AutomationId="{Binding Key.Id, StringFormat='LeagueName-{0}'}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="2"
-                    AutomationId="MatchDateLbl"
                     Style="{StaticResource MatchDate}"
-                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}" />
+                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}"
+                    AutomationId="{Binding Key.Id, StringFormat='LeagueEventDate-{0}'}" />
 
                 <StackLayout
                     Grid.Row="0"
@@ -53,10 +54,9 @@
                     Style="{StaticResource StacklayoutHorizontalCenter}">
                     <Image
                         x:Name="DetailIcon"
-                        AutomationId="LeagueDetailBtn"
+                        AutomationId="{Binding Key.Id, StringFormat='LeagueDetailBtn-{0}'}"
                         Style="{StaticResource DetailIcon}" />
                 </StackLayout>
-
             </Grid>
         </StackLayout>
     </ViewCell>

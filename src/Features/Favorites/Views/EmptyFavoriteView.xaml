@@ -3,7 +3,6 @@
     x:Class="LiveScore.Favorites.Views.EmptyFavoriteView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
@@ -14,6 +13,9 @@
             Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="Favorite View" TextColor="{StaticResource PrimaryTextColor}" />
+        <Label Text="Favourites is comming soon"
+               TextColor="{StaticResource SecondTextColor}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" FontSize="13" />
     </ContentPage.Content>
 </ContentPage>

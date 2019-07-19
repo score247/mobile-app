@@ -25,6 +25,9 @@
             Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="TV View" TextColor="{StaticResource PrimaryTextColor}" />
+        <Label Text="TV Schedule is comming soon"
+               TextColor="{StaticResource SecondTextColor}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" FontSize="13" />
     </ContentPage.Content>
 </ContentPage>

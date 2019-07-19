@@ -153,7 +153,7 @@ namespace LiveScore.Score.ViewModels
                     match => new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
-                => new { item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
+                => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
         internal void OnMatchesChanged(string sportId, Dictionary<string, MatchPushEvent> matchPayloads)

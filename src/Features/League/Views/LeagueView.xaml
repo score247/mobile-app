@@ -14,48 +14,10 @@
             Priority="1" />
     </ContentPage.ToolbarItems>
 
-    <StackLayout>
-        <ActivityIndicator
-            x:Name="activity"
-            AutomationId="LeagueIndicator"
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
-            Style="{StaticResource CenterActivityIndicator}" />
-        <ListView
-            x:Name="ItemsListView"
-            CachingStrategy="RecycleElement"
-            IsPullToRefreshEnabled="true"
-            IsRefreshing="{Binding IsLoading}"
-            IsVisible="{Binding HasData}"
-            ItemsSource="{Binding Leagues}"
-            SeparatorVisibility="None"
-            Style="{StaticResource ListViewHasBackground}">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <FlexLayout Style="{StaticResource LeagueGroup}">
-                                <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                                    <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                                    <Label Style="{StaticResource LeagueName}" Text="{Binding Name}" />
-                                </StackLayout>
-                                <Label Style="{StaticResource LeagueArrowRightIcon}" />
-                            </FlexLayout>
-                            <ContentView>
-                                <BoxView Style="{StaticResource HorizontalLine}" />
-                            </ContentView>
-                        </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.Behaviors>
-                <b:EventToCommandBehavior
-                    Command="{Binding ItemTappedCommand}"
-                    EventArgsParameterPath="Item"
-                    EventName="ItemTapped" />
-                <b:EventToCommandBehavior Command="{Binding RefreshCommand}" EventName="Refreshing" />
-            </ListView.Behaviors>
-        </ListView>
-    </StackLayout>
+    <ContentPage.Content>
+        <Label Text="Leagues is comming soon"
+               TextColor="{StaticResource SecondTextColor}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" FontSize="13" />
+    </ContentPage.Content>
 </ContentPage>

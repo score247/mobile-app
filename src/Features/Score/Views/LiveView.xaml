@@ -4,11 +4,18 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Name="Search"
             Icon="images/common/icon_transparent.png"
             Priority="1" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Label Text="Live is comming soon"
+               TextColor="{StaticResource SecondTextColor}" 
+               HorizontalOptions="Center" 
+               VerticalOptions="Center" FontSize="13" />
+    </ContentPage.Content>
 </ContentPage>
