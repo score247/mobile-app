@@ -23,7 +23,6 @@
         <Style x:Key="TabText" TargetType="Label">
             <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
             <Setter Property="TextColor" Value="{StaticResource TabColor}" />
-            <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
             <Setter Property="Margin" Value="12,0,12,2" />
         </Style>
@@ -36,11 +35,11 @@
         </Style>
         <Style x:Key="TabActiveLine" TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="{StaticResource ActiveLineColor}" />
-            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="HeightRequest" Value="1" />
         </Style>
         <Style x:Key="TabInactiveLine" TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="{StaticResource InactiveLineColor}" />
-            <Setter Property="HeightRequest" Value="2" />
+            <Setter Property="HeightRequest" Value="1" />
         </Style>
 
         <Style x:Key="TabIcon" TargetType="Image">
