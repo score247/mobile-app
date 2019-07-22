@@ -56,20 +56,20 @@
             <Color x:Key="SubTabContainerBgColor">#1A1C28</Color>
             <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#06070A</Color>
-            <Color x:Key="ActiveSubTabBgColor">#1A1C28</Color>
-            <Color x:Key="ActiveSubTabColor">#3EC28F</Color>
+            <Color x:Key="ActiveSubTabBgColor">#2D2F3F</Color>
+            <Color x:Key="ActiveSubTabColor">#F24822</Color>
             <x:Double x:Key="SubTabsHeight">42</x:Double>
             <x:Double x:Key="SubTabsFontSize">11</x:Double>
 
             <!--  Table  -->
             <Color x:Key="TableBgColor">#06070A</Color>
-            <Color x:Key="TableHeaderBgColor">#1A1C28</Color>
+            <Color x:Key="TableHeaderBgColor">#2D2F3F</Color>
             <Color x:Key="TableHeaderColor">#fff</Color>
             <x:Double x:Key="TableHeaderFontSize">12</x:Double>
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
             <Color x:Key="TableEvenRowBgColor">#131724</Color>
             <Color x:Key="TableRowColor">#fff</Color>
-            <Color x:Key="TableLineColor">#262A3D</Color>
+            <Color x:Key="TableLineColor">#393B4D</Color>
             <x:Double x:Key="TableRowFontSize">11</x:Double>
             <x:Double x:Key="TableRowHeight">40</x:Double>
 
@@ -429,8 +429,8 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
                 <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
-                <Setter Property="TitleColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+                <Setter Property="TitleColor" Value="{StaticResource PrimaryAccentColor}" />
             </Style>
 
             <Style x:Key="DropdownIcon" TargetType="Image">

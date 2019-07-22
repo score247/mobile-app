@@ -19,46 +19,47 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="68" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="42" />
                 </Grid.RowDefinitions>
 
-                <StackLayout
+                <Label
                     Grid.Row="0"
                     Grid.Column="1"
-                    Style="{StaticResource MatchInfoTeam}">
-                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
-                        <Label
-                            HorizontalTextAlignment="End"
-                            Style="{StaticResource MatchInfoMainPlayerDarkColor}"
-                            Text="{Binding HomePlayerName}" />
-                    </StackLayout>
-                    <StackLayout VerticalOptions="Center">
-                        <Image
-                            HorizontalOptions="EndAndExpand"
-                            Source="{Binding HomeImageSource}"
-                            Style="{StaticResource MatchInfoImage}" />
-                    </StackLayout>
-                </StackLayout>
-
-                <StackLayout
+                    HorizontalTextAlignment="End"
+                    Style="{StaticResource MatchInfoMainPlayerDarkColor}"
+                    Text="{Binding HomePlayerName}" />
+                <FlexLayout
                     Grid.Row="0"
                     Grid.Column="2"
-                    Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
-                </StackLayout>
+                    Style="{StaticResource FlexLayoutAlignCenter}">
+                    <Image
+                        HorizontalOptions="EndAndExpand"
+                        Source="{Binding HomeImageSource}"
+                        Style="{StaticResource MatchInfoImage}" />
+                </FlexLayout>
                 <StackLayout
                     Grid.Row="0"
                     Grid.Column="3"
-                    Style="{StaticResource MatchInfoTeam}">
-                    <Image Source="{Binding AwayImageSource}" Style="{StaticResource MatchInfoImage}" />
-                    <StackLayout Style="{StaticResource MatchInfoPlayerGroup}">
-                        <Label Style="{StaticResource MatchInfoMainPlayerDarkColor}" Text="{Binding AwayPlayerName}" />
-                    </StackLayout>
+                    Style="{StaticResource MatchInfoScoreContainer}">
+                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
                 </StackLayout>
+                <FlexLayout
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    Style="{StaticResource FlexLayoutAlignCenter}">
+                    <Image Source="{Binding AwayImageSource}" Style="{StaticResource MatchInfoImage}" />
+                </FlexLayout>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    Style="{StaticResource MatchInfoMainPlayerDarkColor}"
+                    Text="{Binding AwayPlayerName}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>

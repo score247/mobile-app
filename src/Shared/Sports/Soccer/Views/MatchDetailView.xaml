@@ -119,17 +119,11 @@
                 </StackLayout>
 
                 <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label
-                        Margin="0,7,0,4"
-                        Style="{StaticResource MatchGeneralInfoImportantContent}"
-                        Text="{Binding DisplaySecondLeg}" />
+                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
 
                 <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label
-                        Margin="0,4,0,7"
-                        Style="{StaticResource MatchGeneralInfoImportantContent}"
-                        Text="{Binding DisplayPenaltyShootOut}" />
+                    <Label Style="{StaticResource MatchGeneralInfoImportantContent}" Text="{Binding DisplayPenaltyShootOut}" />
                 </FlexLayout>
 
                 <tabStrip:TabStrip x:Name="TabStrip" ItemsSource="{Binding TabViews}" />

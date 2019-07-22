@@ -3,14 +3,14 @@
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
-    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
-    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     mc:Ignorable="d">
     <StackLayout Padding="0,8">
         <StackLayout.Resources>
@@ -70,8 +70,8 @@
                 <Image Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
-
-        <StackLayout BackgroundColor="{StaticResource SubTabContainerBgColor}">
+        <BoxView Style="{StaticResource SubTabHorizontalLine}" />
+        <StackLayout>
             <ActivityIndicator
                 IsEnabled="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
@@ -82,7 +82,7 @@
                 <tabStrip:TabITemListView
                     AutomationId="MatchOdds"
                     AutomationProperties.IsInAccessibleTree="False"
-                    BackgroundColor="{StaticResource SubTabContainerBgColor}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
                     HasUnevenRows="true"
                     Header="{Binding}"
                     HeaderTemplate="{Binding HeaderTemplate}"
@@ -93,16 +93,16 @@
                     ItemsSource="{Binding BetTypeOdds}"
                     MinimumHeightRequest="1000"
                     RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None">
-                
-                <tabStrip:TabITemListView.Behaviors>
-                    <b:EventToCommandBehavior
-                        Command="{Binding TappedOddsItemCommand}"
-                        EventArgsParameterPath="Item"
-                        EventName="ItemTapped" />
-                </tabStrip:TabITemListView.Behaviors>
-                
-            </tabStrip:TabITemListView>
+                    SeparatorVisibility="None">
+
+                    <tabStrip:TabITemListView.Behaviors>
+                        <b:EventToCommandBehavior
+                            Command="{Binding TappedOddsItemCommand}"
+                            EventArgsParameterPath="Item"
+                            EventName="ItemTapped" />
+                    </tabStrip:TabITemListView.Behaviors>
+
+                </tabStrip:TabITemListView>
             </StackLayout>
         </StackLayout>
 
