@@ -15,7 +15,7 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
 
-            <Grid Padding="16,0" BackgroundColor="{Binding RowColor}">
+            <Grid BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchDetailInfoRow}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40" />
                     <ColumnDefinition Width="*" />

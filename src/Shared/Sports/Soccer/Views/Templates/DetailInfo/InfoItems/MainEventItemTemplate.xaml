@@ -14,7 +14,7 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
-            <Grid Padding="12,0" BackgroundColor="{Binding RowColor}">
+            <Grid BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchDetailInfoRow}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="40" />

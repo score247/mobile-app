@@ -52,13 +52,13 @@
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
-        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="Padding" Value="8,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="GroupName" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
     <Style x:Key="TopInfo" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="SpaceBetween" />
