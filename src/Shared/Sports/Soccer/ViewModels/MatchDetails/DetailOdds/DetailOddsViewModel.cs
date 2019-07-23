@@ -111,7 +111,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)
-        => isRefresh || SelectedBetType != betType || BetTypeOdds == null || !BetTypeOdds.Any();
+            => isRefresh || SelectedBetType != betType || BetTypeOdds == null || !BetTypeOdds.Any();
 
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {

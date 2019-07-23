@@ -27,7 +27,6 @@
     <Folder Include="Models\Teams\" />
     <Folder Include="Converters\">
     </Folder>
-    <Folder Include="ViewModels\DetailOdds\OddItems\" />
     <Folder Include="Models\Odds\" />
   </ItemGroup>
   <ItemGroup>
@@ -50,23 +49,23 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Templates\DetailInfo\InfoItems\PenaltyShootOutTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailInfo\InfoItems\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\DetailInfo\InfoItems\ScoreChangeItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailInfo\InfoItems\ScoreChangeItemTemplate.xaml.cs">
       <DependentUpon>ScoreChangeItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\DetailInfo\InfoItems\DefaultItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailInfo\InfoItems\DefaultItemTemplate.xaml.cs">
       <DependentUpon>DefaultItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\DetailInfo\InfoItems\MainEventItemTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailInfo\InfoItems\MainEventItemTemplate.xaml.cs">
       <DependentUpon>MainEventItemTemplate.xaml</DependentUpon>
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
-    <Compile Update="Views\Templates\DetailInfo\InfoTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailInfo\InfoTemplate.xaml.cs">
       <DependentUpon>InfoTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\DetailOdds\OddsTemplate.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailOdds\OddsTemplate.xaml.cs">
       <DependentUpon>OddsTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Templates\MatchDetailInfoTemplate.xaml.cs">
@@ -78,7 +77,7 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\DetailOdds\OddsItems\OddsMovementView.xaml.cs">
+    <Compile Update="Views\Templates\MatchDetails\DetailOdds\OddsItems\OddsMovementView.xaml.cs">
       <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -97,34 +96,31 @@
     <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Views\Templates\DetailH2H\H2HTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailH2H\H2HTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailInfo\InfoTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailInfo\InfoTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailLinesUp\LinesUpTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailLinesUp\LinesUpTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailOdds\OddsTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailOdds\OddsTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailSocial\SocialTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailSocial\SocialTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailStatistics\StatisticsTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailStatistics\StatisticsTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailTable\TableTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailTable\TableTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailTracker\TrackerTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailTracker\TrackerTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\DetailTV\TVTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailTV\TVTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

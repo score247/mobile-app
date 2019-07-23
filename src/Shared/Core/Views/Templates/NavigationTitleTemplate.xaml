@@ -8,13 +8,13 @@
             <StackLayout x:Name="SportName">
                 <Label
                     x:Name="sportLabel"
-                    AutomationId="NavigationSportNameLbl"
+                    AutomationId="{Binding CurrentSportName, StringFormat='NavigationSportName-{0}'}"
                     Style="{StaticResource SportName}"
                     Text="{Binding CurrentSportName}" />
             </StackLayout>
             <Label
                 x:Name="titleLabel"
-                AutomationId="NavigationTitleLbl"
+                AutomationId="{Binding Title, StringFormat='NavigationTitle-{0}'}"
                 Style="{StaticResource PageTitle}"
                 Text="{Binding Title}" />
         </FlexLayout>
