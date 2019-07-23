@@ -19,7 +19,7 @@ namespace LiveScore.iOS.Renderers
 
         private void SetSelectedTabColor()
         {
-            var color = App.Current.Resources["SecondAccentColor"];
+            var color = App.Current.Resources["FunctionBarActiveColor"];
 
             if (color != null)
             {
