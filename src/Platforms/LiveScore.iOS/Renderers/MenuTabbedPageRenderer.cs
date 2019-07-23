@@ -13,7 +13,7 @@ namespace LiveScore.iOS.Renderers
         public override void ViewWillAppear(bool animated)
         {
             SetSelectedTabColor();
-
+            UpdateAllTabBarItems();
             base.ViewWillAppear(animated);
         }
 
@@ -29,11 +29,23 @@ namespace LiveScore.iOS.Renderers
                 UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
 
                 UITabBarItem.Appearance.SetTitleTextAttributes(
-                new UITextAttributes
-                {
-                    TextColor = selectedTabColor
-                },
+                    new UITextAttributes
+                    {
+                        TextColor = selectedTabColor,
+                    },
                     UIControlState.Selected);
+            }
+        }
+
+        private void UpdateAllTabBarItems()
+        {
+            float.TryParse(App.Current.Resources["TabbedPageFontSize"].ToString(), out float tabbedPageFont);
+
+            foreach (var controller in ViewControllers)
+            {
+                controller.TabBarItem.SetTitleTextAttributes(
+                    new UITextAttributes { Font = FontManager.GetFont(tabbedPageFont) },
+                    UIControlState.Normal);
             }
         }
     }

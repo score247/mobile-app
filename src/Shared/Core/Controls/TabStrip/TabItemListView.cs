@@ -4,11 +4,19 @@
 
     public class TabITemListView : ListView
     {
-        public delegate void OverScrollUpdateEvent(object sender, float offset);
+#if TEST || AUTOTEST
+
+          public TabITemListView() : base(ListViewCachingStrategy.RetainElement)
+        {
+        }
+
+#else
 
         public TabITemListView() : base(ListViewCachingStrategy.RecycleElement)
         {
         }
+
+#endif
 
         public static void OnScrolling(double offset)
         {

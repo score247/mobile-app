@@ -52,7 +52,6 @@
             <Color x:Key="InactiveLineColor">#0B0D14</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
 
-
             <Color x:Key="SubTabContainerBgColor">#1A1C28</Color>
             <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#06070A</Color>
@@ -82,11 +81,11 @@
             <x:Double x:Key="SmallTextFontSize">12</x:Double>
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
+            <x:Double x:Key="TabbedPageFontSize">12</x:Double>
 
             <!--  Function bar  -->
             <Color x:Key="FunctionBarBgColor">#2D2F3F</Color>
             <Color x:Key="FunctionBarColor">#999</Color>
-
 
             <!--  Date bar  -->
             <x:Double x:Key="DateBarDateFontSize">18</x:Double>

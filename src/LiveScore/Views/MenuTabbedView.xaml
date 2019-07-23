@@ -14,7 +14,7 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
     BarBackgroundColor="{StaticResource FunctionBarBgColor}"
-    BarTextColor="{StaticResource FunctionBarColor}">
+    BarTextColor="{StaticResource TabColor}">
     <TabbedPage.Children>
         <NavigationPage
             x:Name="ScoresBar"
