@@ -86,6 +86,7 @@
             <!--  Function bar  -->
             <Color x:Key="FunctionBarBgColor">#2D2F3F</Color>
             <Color x:Key="FunctionBarColor">#999</Color>
+            <x:Double x:Key="FunctionBarFontSize">12</x:Double>
 
             <!--  Date bar  -->
             <x:Double x:Key="DateBarDateFontSize">18</x:Double>
