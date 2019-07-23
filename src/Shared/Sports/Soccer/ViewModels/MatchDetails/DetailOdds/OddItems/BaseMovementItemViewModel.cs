@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.ViewModels;
@@ -31,11 +32,18 @@
         {
             OddsMovement = oddsMovement;
             BetType = betType;
+
+            UpdateTime = oddsMovement.UpdateTime.ToDateAndTime(); //TODO convert to gmt+7
+            FullUpdateTime = oddsMovement.UpdateTime.ToFullDateAndTime();
         }
 
         public IOddsMovement OddsMovement { get; }
 
         public BetType BetType { get; }
+
+        public string UpdateTime { get; }
+
+        public string FullUpdateTime { get; }
 
         public DataTemplate CreateTemplate()
         {

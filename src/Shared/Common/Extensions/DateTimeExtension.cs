@@ -25,5 +25,8 @@
 
         public static string ToDateAndTime(this DateTime value)
             => value.ToString("dd-MM HH:mm");
+
+        public static string ToFullDateAndTime(this DateTime value)
+           => value.ToString("yyyy-dd-MM HH:mm:ss");
     }
 }

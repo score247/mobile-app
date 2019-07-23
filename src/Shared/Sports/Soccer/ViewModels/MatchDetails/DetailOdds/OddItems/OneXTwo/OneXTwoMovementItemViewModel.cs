@@ -35,17 +35,13 @@
 
         public string AwayOddsTrend { get; private set; }
 
-        public string UpdateTime { get; private set; }
-
         private void Initialize(IOddsMovement oddsMovement)
         {
-
             MatchScore = oddsMovement.IsMatchStarted
                 ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"
                 : string.Empty;
 
             MatchTime = oddsMovement.MatchTime;
-            UpdateTime = oddsMovement.UpdateTime.ToDateAndTime(); //TODO convert to gmt+7
 
             BuildHomeOdds(oddsMovement);
 

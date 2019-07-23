@@ -32,40 +32,40 @@
                 Grid.Column="0"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding MatchTime}"
-                AutomationId="{Binding MatchTime, StringFormat='MatchTime-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='MatchTime-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding MatchScore}"
-                AutomationId="{Binding MatchTime, StringFormat='MatchScore-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='MatchScore-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="2"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding HomeOdds}"
                 TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}"
-                AutomationId="{Binding MatchTime, StringFormat='HomeOdds-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='HomeOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="3"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding DrawOdds}"
                 TextColor="{Binding DrawOddsTrend, Converter={StaticResource OddsStatusConverter}}"
-                AutomationId="{Binding MatchTime, StringFormat='DrawOdds-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='DrawOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="4"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding AwayOdds}"
                 TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}"
-                AutomationId="{Binding MatchTime, StringFormat='AwayOdds-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='AwayOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="5"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding UpdateTime}"
-                AutomationId="{Binding MatchTime, StringFormat='UpdateTime-{0}'}" />
+                AutomationId="{Binding FullUpdateTime, StringFormat='UpdateTime-{0}'}" />
         </Grid>
     </ViewCell>
 </DataTemplate>
