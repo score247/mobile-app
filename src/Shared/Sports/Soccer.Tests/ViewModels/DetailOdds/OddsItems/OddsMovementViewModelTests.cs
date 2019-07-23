@@ -1,5 +1,8 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -11,9 +14,6 @@
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
     using Prism.Navigation;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Threading.Tasks;
     using Xunit;
 
     public class OddsMovementViewModelTests : IClassFixture<ViewModelBaseFixture>

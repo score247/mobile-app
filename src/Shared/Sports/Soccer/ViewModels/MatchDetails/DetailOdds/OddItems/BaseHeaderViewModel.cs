@@ -25,7 +25,7 @@
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
             : base(navigationService, depdendencyResolver)
-        {          
+        {
             BetType = betType;
             HasData = hasData;
         }

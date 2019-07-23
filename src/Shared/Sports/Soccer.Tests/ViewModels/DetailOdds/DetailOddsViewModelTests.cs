@@ -163,8 +163,8 @@
             oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             await viewModel.RefreshCommand.ExecuteAsync();
             var oddsItemViewModel = new BaseItemViewModel(
-                BetType.OneXTwo, 
-                CreateBetTypeOdds(), 
+                BetType.OneXTwo,
+                CreateBetTypeOdds(),
                 navigationService,
                 dependencyResolver);
 

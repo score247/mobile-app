@@ -13,6 +13,6 @@
         public Bookmaker Bookmaker { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<OddsMovement>>))]
-        public IEnumerable<IOddsMovement> OddsMovements{ get; set; }
+        public IEnumerable<IOddsMovement> OddsMovements { get; set; }
     }
 }

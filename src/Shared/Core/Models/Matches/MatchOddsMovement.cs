@@ -8,7 +8,7 @@
         string MatchId { get; }
 
         Bookmaker Bookmaker { get; }
-        
+
         IEnumerable<IOddsMovement> OddsMovements { get; }
     }
 }

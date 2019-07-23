@@ -10,11 +10,11 @@
             => value.ToString(OddsNumerFormat);
 
         public static string ToOddsOptionFormat(this string value)
-        {           
+        {
             var isParsed = float.TryParse(value, out float newValue);
 
-            return isParsed 
-                ? newValue.ToString(CultureInfo.InvariantCulture) 
+            return isParsed
+                ? newValue.ToString(CultureInfo.InvariantCulture)
                 : value;
         }
     }

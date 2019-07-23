@@ -19,7 +19,7 @@
 
         private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>
         {
-            { BetType.OneXTwo, new OneXTwoMovementItemTemplate() },         
+            { BetType.OneXTwo, new OneXTwoMovementItemTemplate() },
         };
 
         public BaseMovementItemViewModel(

@@ -8,7 +8,7 @@
     using Prism.Navigation;
 
     public class OneXTwoItemViewModel : BaseItemViewModel
-    {       
+    {
         private readonly IBetTypeOdds betTypeOdds;
 
         public OneXTwoItemViewModel(
@@ -62,7 +62,7 @@
                 AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
                 AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
                 AwayOddsTrend = awayOdds.OddsTrend.Value;
-            }            
+            }
         }
 
         private void BuildDrawOdds()
@@ -74,7 +74,7 @@
                 DrawOpeningOdds = drawOdds.OpeningOdds.ToOddsFormat();
                 DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();
                 DrawOddsTrend = drawOdds.OddsTrend.Value;
-            }            
+            }
         }
 
         private void BuildHomeOdds()

@@ -1,12 +1,11 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
 {
+    using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
-    using System.Collections.Generic;
     using Xunit;
 
     public class OneXTwoViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>

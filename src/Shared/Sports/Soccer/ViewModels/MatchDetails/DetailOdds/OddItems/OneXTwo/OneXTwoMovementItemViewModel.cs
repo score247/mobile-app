@@ -8,14 +8,14 @@
     using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
-    public class OneXTwoMovementItemViewModel : BaseMovementItemViewModel 
+    public class OneXTwoMovementItemViewModel : BaseMovementItemViewModel
     {
         public OneXTwoMovementItemViewModel(
-            IOddsMovement oddsMovement, 
-            INavigationService navigationService, 
-            IDependencyResolver depdendencyResolver) 
+            IOddsMovement oddsMovement,
+            INavigationService navigationService,
+            IDependencyResolver depdendencyResolver)
             : base(BetType.OneXTwo, oddsMovement, navigationService, depdendencyResolver)
-        {           
+        {
             Initialize(oddsMovement);
         }
 
@@ -37,11 +37,11 @@
 
         public string UpdateTime { get; private set; }
 
-        private void Initialize(IOddsMovement oddsMovement)        
+        private void Initialize(IOddsMovement oddsMovement)
         {
 
-            MatchScore = oddsMovement.IsMatchStarted 
-                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}" 
+            MatchScore = oddsMovement.IsMatchStarted
+                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"
                 : string.Empty;
 
             MatchTime = oddsMovement.MatchTime;
@@ -59,7 +59,7 @@
             var awayOdds = GetOddsInfo(BetOption.Away, oddsMovement);
 
             if (awayOdds != null)
-            {               
+            {
                 AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
                 AwayOddsTrend = awayOdds.OddsTrend.Value;
             }

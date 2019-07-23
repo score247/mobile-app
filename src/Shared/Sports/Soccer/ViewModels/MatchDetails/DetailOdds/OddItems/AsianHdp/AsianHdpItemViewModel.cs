@@ -11,7 +11,7 @@
     {
         private readonly IBetTypeOdds betTypeOdds;
 
-        public AsianHdpItemViewModel(           
+        public AsianHdpItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
