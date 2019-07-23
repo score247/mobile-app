@@ -73,7 +73,7 @@
             <x:Double x:Key="TableRowFontSize">11</x:Double>
             <x:Double x:Key="TableRowHeight">40</x:Double>
 
-            <!--  Define font-size  -->
+            <!--  Font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
             <x:Double x:Key="SidebarFontSize">14</x:Double>
             <x:Double x:Key="UppercaseTextFontSize">13</x:Double>
@@ -83,35 +83,34 @@
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
 
-            <!--  Define function bar  -->
+            <!--  Function bar  -->
             <Color x:Key="FunctionBarBgColor">#2D2F3F</Color>
-            <Color x:Key="FunctionBarColor">#fff</Color>
+            <Color x:Key="FunctionBarColor">#999</Color>
 
-            <!--  Define Header bar  -->
-            <Color x:Key="NavigationPageBgColor">#2D2F3F</Color>
-            <Color x:Key="NavigationPageColor">#fff</Color>
-            <x:Double x:Key="SportNameFontSize">15</x:Double>
-            <x:Double x:Key="TitlePageFontSize">12</x:Double>
 
+            <!--  Date bar  -->
             <x:Double x:Key="DateBarDateFontSize">18</x:Double>
             <x:Double x:Key="DateBarDayFontSize">10</x:Double>
 
-            <!--  Define Height-size  -->
+            <!--  Calendar Page  -->
+            <Color x:Key="DateColor">#fff</Color>
+            <Color x:Key="DisabledDateColor">#636886</Color>
+
+            <!--  Function Group  -->
             <x:Double x:Key="FunctionGroupHeight">36</x:Double>
             <x:Double x:Key="FunctionGroupFontSize">11</x:Double>
             <Color x:Key="FunctionGroupBgColor">#2D2F3F</Color>
             <Color x:Key="FunctionGroupColor">#fff</Color>
 
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
-
             <x:Double x:Key="LeagueHeight">44</x:Double>
-            <x:Double x:Key="RowTableHeight">32</x:Double>
 
-            <!--  Calendar Page  -->
-            <Color x:Key="DateColor">#fff</Color>
-            <Color x:Key="DisabledDateColor">#636886</Color>
+            <!--  Header bar  -->
+            <Color x:Key="NavigationPageBgColor">#2D2F3F</Color>
+            <Color x:Key="NavigationPageColor">#fff</Color>
+            <x:Double x:Key="SportNameFontSize">15</x:Double>
+            <x:Double x:Key="TitlePageFontSize">12</x:Double>
 
-            <!--  Global Styles  -->
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPageBgColor}" />
                 <Setter Property="BarTextColor" Value="{StaticResource NavigationPageColor}" />
@@ -133,6 +132,7 @@
                 TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource TitlePageFontSize}" />
             </Style>
+
             <Style x:Key="ListViewHasBackground" TargetType="ListView">
                 <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
             </Style>
