@@ -22,8 +22,6 @@
             Initialize();
         }
 
-        public string Bookmaker { get; private set; }
-
         public string HomeLiveOdds { get; private set; }
 
         public string HomeOpeningOdds { get; private set; }
@@ -42,8 +40,6 @@
 
         protected override void Initialize()
         {
-            Bookmaker = betTypeOdds.Bookmaker?.Name;
-
             BuildHomeOdds();
 
             BuildBetOptionsValue();

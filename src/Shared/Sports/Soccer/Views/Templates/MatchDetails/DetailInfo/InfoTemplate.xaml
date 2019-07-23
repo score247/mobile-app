@@ -22,6 +22,14 @@
             </ResourceDictionary>
         </StackLayout.Resources>
 
+        <ActivityIndicator
+                Margin="20"
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Style="{StaticResource CenterActivityIndicator}"
+                VerticalOptions="StartAndExpand" />
+
         <tabStrip:TabITemListView
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"
@@ -38,30 +46,30 @@
             <tabStrip:TabITemListView.Footer>
                 <StackLayout
                     BackgroundColor="{StaticResource PrimaryColor}"
-                    HeightRequest="400"
+                    HeightRequest="500"
                     IsVisible="{Binding IsNotLoading}">
                     <FlexLayout Style="{StaticResource Group}">
-                        <Label Style="{StaticResource GroupName}" Text="MATCH INFO" />
+                        <Label Style="{StaticResource GroupName}" Text="MATCH INFO" AutomationId="MatchInfoHeaderTitle" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
-                        <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding Match.Referee}" />
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Referee:" AutomationId="RefereeTitle" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding Match.Referee}" AutomationId="RefereeName" />
                     </FlexLayout>
                     <BoxView IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
-                        <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenue}" />
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Venue:" AutomationId="VenueTitle" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayVenue}" AutomationId="VenueName" />
                     </FlexLayout>
                     <BoxView IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
-                        <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayAttendance}" />
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Spectators:" AutomationId="AttendanceTitle" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayAttendance}" AutomationId="Attendance" />
                     </FlexLayout>
                     <BoxView IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding DisplayEventDate, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
-                        <Label Style="{StaticResource MatchInfoTitle}" Text="Kick Off Time:" />
-                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" />
+                        <Label Style="{StaticResource MatchInfoTitle}" Text="Kick Off Time:" AutomationId="EventDateTitle" />
+                        <Label Style="{StaticResource MatchInfoValue}" Text="{Binding DisplayEventDate}" AutomationId="EventDate" />
                     </FlexLayout>
                 </StackLayout>
             </tabStrip:TabITemListView.Footer>

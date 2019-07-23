@@ -34,49 +34,58 @@
                 Grid.RowSpan="2"
                 Grid.Column="0"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate Bookmaker}" />
+                Text="{langs:Translate Bookmaker}"
+                AutomationId="AsianHdpBookmakerHeader" />
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
                 Grid.ColumnSpan="3"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate LiveOdds}" />
+                Text="{langs:Translate LiveOdds}"
+                AutomationId="AsianHdpLiveOddsHeader" />
             <Label
                 Grid.Row="0"
                 Grid.Column="4"
                 Grid.ColumnSpan="3"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate OpeningOdds}" />
+                Text="{langs:Translate OpeningOdds}"
+                AutomationId="AsianHdpOpeningOddsHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="1"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate Home}" />
+                Text="{langs:Translate Home}"
+                AutomationId="AsianHdpLiveHomeHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="2"
                 Style="{StaticResource TableHeaderText}"
-                Text="HDP" />
+                Text="HDP"
+                AutomationId="AsianHdpLiveHDPHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="3"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate Away}" />
+                Text="{langs:Translate Away}"
+                AutomationId="AsianHdpLiveAwayHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="4"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate Home}" />
+                Text="{langs:Translate Home}"
+                AutomationId="AsianHdpOpeningHomeHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="5"
                 Style="{StaticResource TableHeaderText}"
-                Text="HDP" />
+                Text="HDP"
+                AutomationId="AsianHdpOpeningHDPHeader" />
             <Label
                 Grid.Row="1"
                 Grid.Column="6"
                 Style="{StaticResource TableHeaderText}"
-                Text="{langs:Translate Away}" />
+                Text="{langs:Translate Away}"
+                AutomationId="AsianHdpOpeningAwayHeader" />
         </Grid>
     </StackLayout>
 </DataTemplate>

@@ -30,13 +30,15 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Style="{StaticResource MatchInfoHalfTimeText}"
-                    Text="{Binding MainEventStatus}" />
+                    Text="{Binding MainEventStatus}"
+                    AutomationId="{Binding TimelineEvent.Id, StringFormat='MainEventStatus-{0}'}" />
 
                 <StackLayout
                     Grid.Row="0"
                     Grid.Column="3"
                     Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}" />
+                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}"
+                             AutomationId="{Binding TimelineEvent.Id, StringFormat='Score-{0}'}" />
                 </StackLayout>
             </Grid>
             <BoxView BackgroundColor="{StaticResource SecondColor}" Style="{StaticResource HorizontalLine}" />

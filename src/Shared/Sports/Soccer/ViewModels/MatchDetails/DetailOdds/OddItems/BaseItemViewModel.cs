@@ -35,7 +35,11 @@
         {
             BetTypeOdds = betTypeOdds;
             BetType = betType;
+
+            Bookmaker = betTypeOdds.Bookmaker?.Name;
         }
+
+        public string Bookmaker { get; }
 
         public IBetTypeOdds BetTypeOdds { get; }
 

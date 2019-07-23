@@ -32,14 +32,16 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Style="{StaticResource MatchInfoMinutes}"
-                    Text="{Binding MatchTime}" />
+                    Text="{Binding MatchTime}"
+                    AutomationId="{Binding TimelineEvent.Id, StringFormat='MatchTime-{0}'}" />
 
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
                     HorizontalTextAlignment="End"
                     Style="{StaticResource MatchInfoMainPlayer}"
-                    Text="{Binding HomePlayerName}" />
+                    Text="{Binding HomePlayerName}"
+                    AutomationId="{Binding TimelineEvent.Id, StringFormat='HomePlayerName-{0}'}" />
                 <FlexLayout
                     Grid.Row="0"
                     Grid.Column="2"
@@ -48,7 +50,8 @@
                         HorizontalOptions="EndAndExpand"
                         IsVisible="{Binding VisibleHomeImage}"
                         Source="{Binding ImageSource}"
-                        Style="{StaticResource MatchInfoImage}" />
+                        Style="{StaticResource MatchInfoImage}"
+                        AutomationId="{Binding TimelineEvent.Id, StringFormat='HomeImage-{0}'}" />
                 </FlexLayout>
                 <StackLayout
                     Grid.Row="0"
@@ -57,7 +60,8 @@
                     <Button
                         IsVisible="{Binding VisibleScore}"
                         Style="{StaticResource MatchInfoScoreBox}"
-                        Text="{Binding Score}" />
+                        Text="{Binding Score}"
+                        AutomationId="{Binding TimelineEvent.Id, StringFormat='Score-{0}'}" />
                 </StackLayout>
                 <FlexLayout
                     Grid.Row="0"
@@ -66,17 +70,18 @@
                     <Image
                         IsVisible="{Binding VisibleAwayImage}"
                         Source="{Binding ImageSource}"
-                        Style="{StaticResource MatchInfoImage}" />
+                        Style="{StaticResource MatchInfoImage}"
+                        AutomationId="{Binding TimelineEvent.Id, StringFormat='AwayImage-{0}'}" />
                 </FlexLayout>
 
                 <Label
                     Grid.Row="0"
                     Grid.Column="5"
                     Style="{StaticResource MatchInfoMainPlayer}"
-                    Text="{Binding AwayPlayerName}" />
+                    Text="{Binding AwayPlayerName}"
+                    AutomationId="{Binding TimelineEvent.Id, StringFormat='AwayPlayerName-{0}'}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
-
     </ViewCell>
 </DataTemplate>

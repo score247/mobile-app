@@ -32,42 +32,50 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource MatchDetailOddsBookmaker}">
-                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}" />
-                <Image Source="images/common/bookmarker_detail.png" />
+                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}"
+                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerName-{0}'}" />
+                <Image Source="images/common/bookmarker_detail.png"
+                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerDetailIcon-{0}'}" />
             </FlexLayout>
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding HomeLiveOdds}"
-                TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}"
+                AutomationId="{Binding Bookmaker, StringFormat='HomeLiveOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="2"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding DrawLiveOdds}"
-                TextColor="{Binding DrawOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                TextColor="{Binding DrawOddsTrend, Converter={StaticResource OddsStatusConverter}}"
+                AutomationId="{Binding Bookmaker, StringFormat='DrawLiveOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="3"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding AwayLiveOdds}"
-                TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}"
+                AutomationId="{Binding Bookmaker, StringFormat='AwayLiveOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="4"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding HomeOpeningOdds}" />
+                Text="{Binding HomeOpeningOdds}"
+                AutomationId="{Binding Bookmaker, StringFormat='HomeOpeningOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="5"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding DrawOpeningOdds}" />
+                Text="{Binding DrawOpeningOdds}"
+                AutomationId="{Binding Bookmaker, StringFormat='DrawOpeningOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="6"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding AwayOpeningOdds}" />
+                Text="{Binding AwayOpeningOdds}"
+                AutomationId="{Binding Bookmaker, StringFormat='AwayOpeningOdds-{0}'}" />
         </Grid>
     </ViewCell>
 </DataTemplate>

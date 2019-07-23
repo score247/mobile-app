@@ -83,7 +83,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         private Task HandleButtonCommand(string betTypeId)
-        => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));
+            => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {

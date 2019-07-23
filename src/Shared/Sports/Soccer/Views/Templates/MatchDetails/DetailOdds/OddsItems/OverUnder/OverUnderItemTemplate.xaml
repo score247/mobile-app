@@ -32,41 +32,49 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Style="{StaticResource MatchDetailOddsBookmaker}">
-                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}" />
-                <Image Source="images/common/bookmarker_detail.png" />
+                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}"
+                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerName-{0}'}" />
+                <Image Source="images/common/bookmarker_detail.png"
+                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerDetailIcon-{0}'}" />
             </FlexLayout>
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding OverLiveOdds}"
-                TextColor="{Binding OverOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                TextColor="{Binding OverOddsTrend, Converter={StaticResource OddsStatusConverter}}"
+                AutomationId="{Binding Bookmaker, StringFormat='OverLiveOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="2"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding LiveOverOptionValue}" />
+                Text="{Binding LiveOverOptionValue}"
+                AutomationId="{Binding Bookmaker, StringFormat='LiveOverOption-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="3"
                 Style="{StaticResource MatchDetailOddsOddsText}"
                 Text="{Binding UnderLiveOdds}"
-                TextColor="{Binding UnderOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                TextColor="{Binding UnderOddsTrend, Converter={StaticResource OddsStatusConverter}}"
+                AutomationId="{Binding Bookmaker, StringFormat='UnderLiveOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="4"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding OverOpeningOdds}" />
+                Text="{Binding OverOpeningOdds}"
+                AutomationId="{Binding Bookmaker, StringFormat='OverOpeningOdds-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="5"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding OpeningOverOptionValue}" />
+                Text="{Binding OpeningOverOptionValue}"
+                AutomationId="{Binding Bookmaker, StringFormat='OpeningOverOption-{0}'}" />
             <Label
                 Grid.Row="0"
                 Grid.Column="6"
                 Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding UnderOpeningOdds}" />
+                Text="{Binding UnderOpeningOdds}"
+                AutomationId="{Binding Bookmaker, StringFormat='UnderOpeningOdds-{0}'}" />
         </Grid>
     </ViewCell>
 </DataTemplate>

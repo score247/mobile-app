@@ -71,10 +71,17 @@
             </StackLayout>
         </Grid>
         <BoxView Style="{StaticResource SubTabHorizontalLine}" />
-        <StackLayout>
 
-            <StackLayout Style="{StaticResource TableContainer}">
-                <tabStrip:TabITemListView
+        <ActivityIndicator
+                    Margin="20"
+                    IsEnabled="{Binding IsLoading}"
+                    IsRunning="{Binding IsLoading}"
+                    IsVisible="{Binding IsLoading}"
+                    Style="{StaticResource CenterActivityIndicator}"
+                    VerticalOptions="StartAndExpand" />
+
+        <StackLayout Style="{StaticResource TableContainer}">
+            <tabStrip:TabITemListView
                     AutomationId="MatchOdds"
                     AutomationProperties.IsInAccessibleTree="False"
                     BackgroundColor="{StaticResource PrimaryColor}"
@@ -90,14 +97,13 @@
                     RefreshCommand="{Binding RefreshCommand}"
                     SeparatorVisibility="None">
 
-                    <tabStrip:TabITemListView.Behaviors>
-                        <b:EventToCommandBehavior
+                <tabStrip:TabITemListView.Behaviors>
+                    <b:EventToCommandBehavior
                             Command="{Binding TappedOddsItemCommand}"
                             EventArgsParameterPath="Item"
                             EventName="ItemTapped" />
-                    </tabStrip:TabITemListView.Behaviors>
-                </tabStrip:TabITemListView>
-            </StackLayout>
+                </tabStrip:TabITemListView.Behaviors>
+            </tabStrip:TabITemListView>
         </StackLayout>
     </StackLayout>
 </DataTemplate>
