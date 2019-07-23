@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -89,7 +90,7 @@
 
                 var itemLabel = new Label
                 {
-                    Text = item.TabHeaderTitle?.ToUpperInvariant(),
+                    Text = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(item.TabHeaderTitle),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
