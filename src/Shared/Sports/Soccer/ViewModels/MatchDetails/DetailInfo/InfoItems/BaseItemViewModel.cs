@@ -51,7 +51,10 @@
             Result = matchResult;
 
             BuildData();
+            ItemAutomationId = $"{TimelineEvent.Id}-{TimelineEvent.Type}";
         }
+
+        public string ItemAutomationId { get; }
 
         public ITimeline TimelineEvent { get; }
 
