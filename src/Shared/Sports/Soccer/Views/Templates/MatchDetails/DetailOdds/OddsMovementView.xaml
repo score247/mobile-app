@@ -3,10 +3,9 @@
     x:Class="LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems.OddsMovementView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.DetailOdds"
     BackgroundColor="{StaticResource PrimaryColor}"
@@ -15,7 +14,7 @@
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
     </NavigationPage.TitleView>
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -26,19 +25,23 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
 
+            <Image Source="images/common/odd_movement_chart.png"
+                   IsVisible="{Binding HasData}"
+                   Style="{StaticResource MatchDetailOddsMovementChart}" />
+
             <ActivityIndicator
                 IsEnabled="{Binding IsLoading}"
                 IsRunning="{Binding IsLoading}"
                 IsVisible="{Binding IsLoading}"
                 Style="{StaticResource CenterActivityIndicator}"
-                VerticalOptions="StartAndExpand" />
+                VerticalOptions="Center" />
 
             <ListView
                 AutomationId="MatchOddsMovement"
                 AutomationProperties.IsInAccessibleTree="False"
                 BackgroundColor="{StaticResource PrimaryColor}"
                 HasUnevenRows="true"
-                Header="{Binding}"
+                Header=""
                 HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
@@ -47,6 +50,13 @@
                 ItemsSource="{Binding OddsMovementItems}"
                 RefreshCommand="{Binding RefreshCommand}"
                 SeparatorVisibility="None" />
+
+            <Label Text="Comming Soon"
+                   TextColor="White"
+                   FontSize="12"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand"
+                   IsVisible="{Binding HasNoData}"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

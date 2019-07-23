@@ -21,12 +21,7 @@
                 <templateSelectors:InfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
-        <ActivityIndicator
-            Margin="20"
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
-            Style="{StaticResource CenterActivityIndicator}" />
+
         <tabStrip:TabITemListView
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"

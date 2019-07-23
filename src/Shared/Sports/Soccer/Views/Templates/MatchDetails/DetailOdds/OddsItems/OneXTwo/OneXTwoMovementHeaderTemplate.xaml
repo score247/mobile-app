@@ -15,8 +15,6 @@
             </ResourceDictionary>
         </StackLayout.Resources>
 
-        <Image Source="images/common/odd_movement_chart.png" Style="{StaticResource MatchDetailOddsMovementChart}" />
-
         <BoxView Style="{StaticResource TableLine}" />
         <Grid Style="{StaticResource GridTableContainer}">
             <Grid.ColumnDefinitions>
