@@ -90,7 +90,7 @@
 
                 var itemLabel = new Label
                 {
-                    Text = Thread.CurrentThread.CurrentCulture.TextInfo.ToTitleCase(item.TabHeaderTitle),
+                    Text = item.TabHeaderTitle.ToUpperInvariant(),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
