@@ -24,14 +24,13 @@
             <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
             <Setter Property="TextColor" Value="{StaticResource TabColor}" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="Margin" Value="16,0,16,4" />
+            <Setter Property="Margin" Value="12,0,12,4" />
         </Style>
         <Style
             x:Key="TabActiveText"
             BasedOn="{StaticResource TabText}"
             TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource ActiveLineColor}" />
-            <Setter Property="FontAttributes" Value="Bold" />
         </Style>
         <Style x:Key="TabLine" TargetType="BoxView">
             <Setter Property="HeightRequest" Value="1" />
