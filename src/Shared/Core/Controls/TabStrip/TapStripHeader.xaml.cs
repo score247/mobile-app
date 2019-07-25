@@ -106,7 +106,6 @@
         {
             var itemLayout = new StackLayout
             {
-                Style = (Style)control.Resources["Tab"]
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
