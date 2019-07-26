@@ -137,11 +137,16 @@ namespace LiveScore.Soccer.ViewModels
 
                 foreach (var tab in match.Functions)
                 {
-                    var tabModel = tabItemViewModels[tab.Abbreviation.Replace("-", string.Empty)];
-                    tabModel.Title = tab.Name;
-                    tabModel.TabHeaderTitle = tab.Abbreviation;
+                    var tabName = tab.Abbreviation.Replace("-", string.Empty);
 
-                    TabViews.Add(tabModel);
+                    if (tabItemViewModels.ContainsKey(tabName))
+                    {
+                        var tabModel = tabItemViewModels[tabName];
+                        tabModel.Title = tab.Name;
+                        tabModel.TabHeaderTitle = tab.Abbreviation;
+
+                        TabViews.Add(tabModel);
+                    }
                 }
 
                 MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
