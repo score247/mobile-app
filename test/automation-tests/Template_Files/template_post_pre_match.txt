@@ -604,7 +604,7 @@
     ],
     "Venue": null,
     "League": {
-        "Id": "sr:tournament:25839",
+        "Id": "sr:tournament:38",
         "Flag": null,
         "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
@@ -680,7 +680,7 @@
     ],
     "Venue": null,
     "League": {
-        "Id": "sr:tournament:203",
+        "Id": "sr:tournament:38",
         "Flag": null,
         "Name": "INTERNATIONAL - CLUB FRIENDLIES",
         "Order": 0,
@@ -899,7 +899,7 @@
 {
 "Id": "sr:competitor:399419",
 "Flag": null,
-"Name": "Chelsea",
+"Name": "Aston Villa",
 "Coach": null,
 "IsHome": true,
 "Country": null,
@@ -913,7 +913,7 @@
 {
 "Id": "sr:competitor:272057",
 "Flag": null,
-"Name": "Arsenal",
+"Name": "Everton",
 "Coach": null,
 "IsHome": false,
 "Country": null,
@@ -983,7 +983,7 @@
 {
 "Id": "sr:competitor:399419",
 "Flag": null,
-"Name": "Germany",
+"Name": "West Ham",
 "Coach": null,
 "IsHome": true,
 "Country": null,
@@ -997,7 +997,7 @@
 {
 "Id": "sr:competitor:272057",
 "Flag": null,
-"Name": "Italy",
+"Name": "Man City",
 "Coach": null,
 "IsHome": false,
 "Country": null,
@@ -1067,7 +1067,7 @@
 {
 "Id": "sr:competitor:399419",
 "Flag": null,
-"Name": "France",
+"Name": "Liverpool",
 "Coach": null,
 "IsHome": true,
 "Country": null,
@@ -1081,7 +1081,7 @@
 {
 "Id": "sr:competitor:272057",
 "Flag": null,
-"Name": "Portugal",
+"Name": "Norwich",
 "Coach": null,
 "IsHome": false,
 "Country": null,
@@ -1151,7 +1151,7 @@
 {
 "Id": "sr:competitor:399419",
 "Flag": null,
-"Name": "Brazil",
+"Name": "Chelsea",
 "Coach": null,
 "IsHome": true,
 "Country": null,
@@ -1165,7 +1165,7 @@
 {
 "Id": "sr:competitor:272057",
 "Flag": null,
-"Name": "Uruguay",
+"Name": "Arsenal",
 "Coach": null,
 "IsHome": false,
 "Country": null,

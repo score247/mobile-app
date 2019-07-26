@@ -282,7 +282,7 @@
 				"away_score": 0,
 				"goal_scorer": {
 					"id": "sr:player:83700",
-					"name": "Pacheco, German"
+					"name": "Dejan Lovren"
 				}
 			}
 		},
@@ -332,7 +332,7 @@
 				"injury_time_announced": 3,
 				"player": {
 					"id": "sr:player:176727",
-					"name": "Charles Booth"
+					"name": "James Husband"
 				},
 				"team": "away",
 				"period": 1,

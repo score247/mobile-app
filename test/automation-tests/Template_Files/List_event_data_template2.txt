@@ -197,7 +197,7 @@
         "goal_scorer": {
           "method":"penalty",
 		  "id": "sr:player:83700",
-          "name": "Ben Warren"
+          "name": "Aaron Cresswell"
         }
       }
     },
@@ -251,7 +251,7 @@
         "goal_scorer": {
           "method":"own_goal",
 		  "id": "sr:player:83700",
-          "name": "Vivian Woodward"
+          "name": "Angelo Ogbonna"
         }
       }
     },
@@ -304,7 +304,7 @@
         "away_score": 1,
         "player": {
 		  "id": "sr:player:83700",
-          "name": "Bob Whittingham"
+          "name": "Ryan Fredericks"
         }
       }
     },
