@@ -54,6 +54,7 @@
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
             Footer=""
+            SelectionMode="None"
             VerticalOptions="FillAndExpand">
             <customListView:CustomListView.Behaviors>
                 <b:EventToCommandBehavior

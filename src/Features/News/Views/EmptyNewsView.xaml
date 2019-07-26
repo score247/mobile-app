@@ -12,15 +12,18 @@
         prism:ViewModelLocator.AutowireViewModel="True"
         BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
-         <coreTemplates:NavigationTitleTemplate 
+        <coreTemplates:NavigationTitleTemplate 
                         Title="{langs:Translate News}" 
                         mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Name="Search"
-            Icon="images/common/icon_transparent.png"
-            Priority="1" />
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="News is comming soon"

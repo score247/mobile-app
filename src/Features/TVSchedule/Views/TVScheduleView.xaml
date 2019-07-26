@@ -9,9 +9,6 @@
     xmlns:resources="clr-namespace:LiveScore.TVSchedule.ViewResources"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="images/search.png" Priority="1" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,6 +18,15 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <StackLayout>
         <!--  <FlexLayout Style="{StaticResource QuickAccessContainer}">
             <Frame Style="{StaticResource DateBarBox}">

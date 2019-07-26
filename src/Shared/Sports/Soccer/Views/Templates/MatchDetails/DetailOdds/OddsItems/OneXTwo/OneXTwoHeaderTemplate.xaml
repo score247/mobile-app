@@ -8,7 +8,7 @@
 
     <StackLayout>
         <BoxView Style="{StaticResource TableLine}" />
-        <Grid Style="{StaticResource GridTableContainer}">
+        <Grid Style="{StaticResource GridTableHeaderContainer}">
             <Grid.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -82,8 +82,6 @@
                 Style="{StaticResource TableHeaderText}"
                 Text="2" />
         </Grid>
+        <BoxView Style="{StaticResource TableLine}" />
     </StackLayout>
-
-
-
 </DataTemplate>

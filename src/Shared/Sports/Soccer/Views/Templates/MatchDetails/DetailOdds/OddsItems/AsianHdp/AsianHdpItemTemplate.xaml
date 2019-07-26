@@ -6,75 +6,79 @@
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:soccerConverters="clr-namespace:LiveScore.Soccer.Converters;assembly=LiveScore.Soccer">
     <ViewCell>
-        <Grid Style="{StaticResource GridTableContainer}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource TableRowHeight}" />
-            </Grid.RowDefinitions>
-            <Grid.Resources>
-                <ResourceDictionary>
-                    <soccerConverters:OddsStatusConverter x:Key="OddsStatusConverter" />
-                    <ResourceDictionary.MergedDictionaries>
-                        <resources:MatchDetailViewResource />
-                        <resources:MatchDetailOddsViewResource />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </Grid.Resources>
-            <FlexLayout
-                Grid.Row="0"
-                Grid.Column="0"
-                Style="{StaticResource MatchDetailOddsBookmaker}">
-                <Label Style="{StaticResource TableText}" Text="{Binding Bookmaker}"
-                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerName-{0}'}" />
-                <Image Source="images/common/bookmarker_detail.png"
-                       AutomationId="{Binding Bookmaker, StringFormat='BookmakerDetailIcon-{0}'}" />
-            </FlexLayout>
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding HomeLiveOdds}"
-                TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}"
-                AutomationId="{Binding Bookmaker, StringFormat='HomeLiveOdds-{0}'}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="2"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding LiveHdp}"
-                AutomationId="{Binding Bookmaker, StringFormat='LiveHdp-{0}'}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="3"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding AwayLiveOdds}"
-                TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}"
-                AutomationId="{Binding Bookmaker, StringFormat='AwayLiveOdds-{0}'}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="4"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding HomeOpeningOdds}"
-                AutomationId="{Binding Bookmaker, StringFormat='HomeOpeningOdds-{0}'}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="5"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding OpeningHdp}"
-                AutomationId="{Binding Bookmaker, StringFormat='OpeningHdp-{0}'}" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="6"
-                Style="{StaticResource MatchDetailOddsOddsText}"
-                Text="{Binding AwayOpeningOdds}"
-                AutomationId="{Binding Bookmaker, StringFormat='AwayOpeningOdds-{0}'}" />
-        </Grid>
+        <StackLayout>
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.Resources>
+                    <ResourceDictionary>
+                        <soccerConverters:OddsStatusConverter x:Key="OddsStatusConverter" />
+                        <ResourceDictionary.MergedDictionaries>
+                            <resources:MatchDetailViewResource />
+                            <resources:MatchDetailOddsViewResource />
+                        </ResourceDictionary.MergedDictionaries>
+                    </ResourceDictionary>
+                </Grid.Resources>
+                <FlexLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchDetailOddsBookmaker}">
+                    <Label
+                        AutomationId="{Binding Bookmaker, StringFormat='BookmakerName-{0}'}"
+                        Style="{StaticResource TableText}"
+                        Text="{Binding Bookmaker}" />
+                    <Image AutomationId="{Binding Bookmaker, StringFormat='BookmakerDetailIcon-{0}'}" Source="images/common/bookmarker_detail.png" />
+                </FlexLayout>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    AutomationId="{Binding Bookmaker, StringFormat='HomeLiveOdds-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding HomeLiveOdds}"
+                    TextColor="{Binding HomeOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    AutomationId="{Binding Bookmaker, StringFormat='LiveHdp-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding LiveHdp}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    AutomationId="{Binding Bookmaker, StringFormat='AwayLiveOdds-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding AwayLiveOdds}"
+                    TextColor="{Binding AwayOddsTrend, Converter={StaticResource OddsStatusConverter}}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="4"
+                    AutomationId="{Binding Bookmaker, StringFormat='HomeOpeningOdds-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding HomeOpeningOdds}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="5"
+                    AutomationId="{Binding Bookmaker, StringFormat='OpeningHdp-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding OpeningHdp}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="6"
+                    AutomationId="{Binding Bookmaker, StringFormat='AwayOpeningOdds-{0}'}"
+                    Style="{StaticResource MatchDetailOddsOddsText}"
+                    Text="{Binding AwayOpeningOdds}" />
+            </Grid>
+            <BoxView Style="{StaticResource TableLine}" />
+        </StackLayout>
     </ViewCell>
 </DataTemplate>

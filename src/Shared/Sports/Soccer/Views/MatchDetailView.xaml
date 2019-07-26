@@ -38,7 +38,7 @@
                             <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="60" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
@@ -71,7 +71,7 @@
                             <RowDefinition Height="auto" />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition Width="60" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
