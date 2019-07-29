@@ -938,4 +938,280 @@ SP6_Odd_Movement_Of_Bettype_1x2
     Should Be Equal As Strings    '${UpdateTime 10_app}'    '${UpdateTime 10_file}'
     Remove File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
 
+SP5_Odds_1x2_Post_Match
+    #Go to current date to view data
+    ${current_date}=    Get Current Date    result_format=%d    #current date
+    ${current_date}=    Convert To Integer    ${current_date}
+    Click Element    accessibility_id=${current_date}
+    Sleep    3
+    Capture Page Screenshot
+    Sleep    5
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=HomeTeamName-sr:match:test14
+    Sleep    3
+    Comment    Click Element    accessibility_id=1X2
+    # Get All Bookmaker of Match
+    ${json_file}=    Load Json From File    ${CURDIR}/Template_Files/Data_Odds_1x2_auto.json
+    ${Bookmaker_name}=    Get Value From Json    ${json_file}    $..books..name
+    ${Bookmaker_name1}=    BuiltIn.Catenate    @{Bookmaker_name}[0]
+    ${Bookmaker_name2}=    BuiltIn.Catenate    @{Bookmaker_name}[1]
+    ${Bookmaker_name3}=    BuiltIn.Catenate    @{Bookmaker_name}[2]
+    ${Bookmaker_name4}=    BuiltIn.Catenate    @{Bookmaker_name}[3]
+    ${list_name}=    BuiltIn.Create List    ${Bookmaker_name1}    ${Bookmaker_name2}    ${Bookmaker_name3}    ${Bookmaker_name4}
+    Sort List    ${list_name}
+    Log    ${list_name}
+    # Get Odd infor of each Bookmaker
+    ${Bk1_list_odd1x2}=    GetOdds_1x2    ${json_file}    ${list_name[0]}
+    ${Bk2_list_odd1x2}=    GetOdds_1x2    ${json_file}    ${list_name[1]}
+    ${Bk3_list_odd1x2}=    GetOdds_1x2    ${json_file}    ${list_name[2]}
+    ${Bk4_list_odd1x2}=    GetOdds_1x2    ${json_file}    ${list_name[3]}
+    #Compare data of Bookmaker 1
+    ${id_name}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk1_list_odd1x2}[0]    # Create “Id” attribute of element by bookmaker’s name
+    ${id_homelive_1}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk1_list_odd1x2}[0]
+    ${id_drawlive_1}=    Catenate    SEPARATOR=    accessibility_id=DrawLiveOdds-    ${Bk1_list_odd1x2}[0]
+    ${id_awaylive_1}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk1_list_odd1x2}[0]
+    ${id_home_open_1}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk1_list_odd1x2}[0]
+    ${id_draw_open_1}=    Catenate    SEPARATOR=    accessibility_id=DrawOpeningOdds-    ${Bk1_list_odd1x2}[0]
+    ${id_away_open_1}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk1_list_odd1x2}[0]
+    ${Bk_name_app_1}=    Get Element Attribute    ${id_name}    value
+    Element Attribute Should Match    ${id_name}    value    ${Bk1_list_odd1x2}[0]
+    Element Attribute Should Match    ${id_homelive_1}    value    ${Bk1_list_odd1x2}[1]
+    Element Attribute Should Match    ${id_drawlive_1}    value    ${Bk1_list_odd1x2}[2]
+    Element Attribute Should Match    ${id_awaylive_1}    value    ${Bk1_list_odd1x2}[3]
+    Element Attribute Should Match    ${id_home_open_1}    value    ${Bk1_list_odd1x2}[4]
+    Element Attribute Should Match    ${id_draw_open_1}    value    ${Bk1_list_odd1x2}[5]
+    Element Attribute Should Match    ${id_away_open_1}    value    ${Bk1_list_odd1x2}[6]
+    #Compare data of Bookmaker 2
+    ${id_name_2}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk2_list_odd1x2}[0]
+    ${id_homelive_2}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk2_list_odd1x2}[0]
+    ${id_drawlive_2}=    Catenate    SEPARATOR=    accessibility_id=DrawLiveOdds-    ${Bk2_list_odd1x2}[0]
+    ${id_awaylive_2}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk2_list_odd1x2}[0]
+    ${id_home_open_2}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk2_list_odd1x2}[0]
+    ${id_draw_open_2}=    Catenate    SEPARATOR=    accessibility_id=DrawOpeningOdds-    ${Bk2_list_odd1x2}[0]
+    ${id_away_open_2}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk2_list_odd1x2}[0]
+    ${Bk_name_app_2}=    Get Element Attribute    ${id_name_2}    value
+    Element Attribute Should Match    ${id_name_2}    value    ${Bk2_list_odd1x2}[0]
+    Element Attribute Should Match    ${id_homelive_2}    value    ${Bk2_list_odd1x2}[1]
+    Element Attribute Should Match    ${id_drawlive_2}    value    ${Bk2_list_odd1x2}[2]
+    Element Attribute Should Match    ${id_awaylive_2}    value    ${Bk2_list_odd1x2}[3]
+    Element Attribute Should Match    ${id_home_open_2}    value    ${Bk2_list_odd1x2}[4]
+    Element Attribute Should Match    ${id_draw_open_2}    value    ${Bk2_list_odd1x2}[5]
+    Element Attribute Should Match    ${id_away_open_2}    value    ${Bk2_list_odd1x2}[6]
+    #Compare data of Bookmaker 3
+    ${id_name_3}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk3_list_odd1x2}[0]
+    ${id_homelive_3}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk3_list_odd1x2}[0]
+    ${id_drawlive_3}=    Catenate    SEPARATOR=    accessibility_id=DrawLiveOdds-    ${Bk3_list_odd1x2}[0]
+    ${id_awaylive_3}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk3_list_odd1x2}[0]
+    ${id_home_open_3}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk3_list_odd1x2}[0]
+    ${id_draw_open_3}=    Catenate    SEPARATOR=    accessibility_id=DrawOpeningOdds-    ${Bk3_list_odd1x2}[0]
+    ${id_away_open_3}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk3_list_odd1x2}[0]
+    ${Bk_name_app_3}=    Get Element Attribute    ${id_name_3}    value
+    Element Attribute Should Match    ${id_name_3}    value    ${Bk3_list_odd1x2}[0]
+    Element Attribute Should Match    ${id_homelive_3}    value    ${Bk3_list_odd1x2}[1]
+    Element Attribute Should Match    ${id_drawlive_3}    value    ${Bk3_list_odd1x2}[2]
+    Element Attribute Should Match    ${id_awaylive_3}    value    ${Bk3_list_odd1x2}[3]
+    Element Attribute Should Match    ${id_home_open_3}    value    ${Bk3_list_odd1x2}[4]
+    Element Attribute Should Match    ${id_draw_open_3}    value    ${Bk3_list_odd1x2}[5]
+    Element Attribute Should Match    ${id_away_open_3}    value    ${Bk3_list_odd1x2}[6]
+    #Compare data of Bookmaker 4
+    ${id_name_4}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${BK4_list_odd1x2}[0]
+    ${id_homelive_4}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${BK4_list_odd1x2}[0]
+    ${id_drawlive_4}=    Catenate    SEPARATOR=    accessibility_id=DrawLiveOdds-    ${BK4_list_odd1x2}[0]
+    ${id_awaylive_4}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${BK4_list_odd1x2}[0]
+    ${id_home_open_4}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${BK4_list_odd1x2}[0]
+    ${id_draw_open_4}=    Catenate    SEPARATOR=    accessibility_id=DrawOpeningOdds-    ${BK4_list_odd1x2}[0]
+    ${id_away_open_4}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${BK4_list_odd1x2}[0]
+    ${Bk_name_app_4}=    Get Element Attribute    ${id_name_4}    value
+    Element Attribute Should Match    ${id_name_4}    value    ${BK4_list_odd1x2}[0]
+    Element Attribute Should Match    ${id_homelive_4}    value    ${BK4_list_odd1x2}[1]
+    Element Attribute Should Match    ${id_drawlive_4}    value    ${BK4_list_odd1x2}[2]
+    Element Attribute Should Match    ${id_awaylive_4}    value    ${BK4_list_odd1x2}[3]
+    Element Attribute Should Match    ${id_home_open_4}    value    ${BK4_list_odd1x2}[4]
+    Element Attribute Should Match    ${id_draw_open_4}    value    ${BK4_list_odd1x2}[5]
+    Element Attribute Should Match    ${id_away_open_4}    value    ${BK4_list_odd1x2}[6]
+    ${list_name_app}=    Create List    ${Bk_name_app_1}    ${Bk_name_app_2}    ${Bk_name_app_3}    ${Bk_name_app_4}
+    Lists Should Be Equal    ${list_name_app}    ${list_name}
+    Remove Files    Template_Files/Run/Data_Odds_1x2_auto.json
+
+SP6_Odds_HDP_PostMatch
+    #Go to Asian Handicap Tab
+    Click Element    accessibility_id=Asian HDP
+    # Get All Bookmaker of Match
+    ${json_file}=    Load JSON From File    ${CURDIR}/Template_Files/Data_Odds_AsianHDP_live.json
+    ${json_file_opening}=    Load JSON From File    ${CURDIR}/Template_Files/Data_Odds_AsianHDP.json
+    ${bookmaker_name}=    Get Value From Json    ${json_file}    $..books..name
+    ${bookmaker_name1}=    BuiltIn.Catenate    @{bookmaker_name}[0]
+    ${bookmaker_name2}=    BuiltIn.Catenate    @{bookmaker_name}[1]
+    ${bookmaker_name3}=    BuiltIn.Catenate    @{bookmaker_name}[2]
+    ${bookmaker_name4}=    BuiltIn.Catenate    @{bookmaker_name}[3]
+    ${list_name}=    BuiltIn.Create List    ${bookmaker_name1}    ${bookmaker_name2}    ${bookmaker_name3}    ${bookmaker_name4}
+    Sort List    ${list_name}
+    log    ${list_name}
+    log    ${list_name}[0]
+    # Get odd_opening_info of Bookmaker
+    ${Bk1_Hdp_opening_infor}=    Get_Odds_HDP    ${json_file_opening}    ${list_name}[0]    # Bookmaker_1
+    ${Bk2_Hdp_opening_infor}=    Get_Odds_HDP    ${json_file_opening}    ${list_name}[1]
+    ${Bk3_Hdp_opening_infor}=    Get_Odds_HDP    ${json_file_opening}    ${list_name}[2]
+    ${Bk4_Hdp_opening_infor}=    Get_Odds_HDP    ${json_file_opening}    ${list_name}[3]
+    #Get Odd_Live_Info
+    ${Bk1_Hdp_live_infor}=    Get_Odds_HDP    ${json_file}    ${list_name}[0]
+    ${Bk2_Hdp_live_infor}=    Get_Odds_HDP    ${json_file}    ${list_name}[1]
+    ${Bk3_Hdp_live_infor}=    Get_Odds_HDP    ${json_file}    ${list_name}[2]
+    ${Bk4_Hdp_live_infor}=    Get_Odds_HDP    ${json_file}    ${list_name}[3]
+    # Verify odd of Bookmaker 1
+    ${id_name_hdp_1}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk1_Hdp_live_infor}[0]    # Create “Id” attribute of element by bookmaker’s name
+    ${id_homelive_hdp_1}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk1_Hdp_live_infor}[0]
+    ${id_hdplive_1}=    Catenate    SEPARATOR=    accessibility_id=LiveHdp-    ${Bk1_Hdp_live_infor}[0]
+    ${id_awaylive_hdp_1}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk1_Hdp_live_infor}[0]
+    ${id_home_open_hdp_1}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk1_Hdp_live_infor}[0]
+    ${id_hdp_open_1}=    Catenate    SEPARATOR=    accessibility_id=OpeningHdp-    ${Bk1_Hdp_live_infor}[0]
+    ${id_away_open_hdp_1}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk1_Hdp_live_infor}[0]
+    ${Bookmaker_HDP_1}=    Get Element Attribute    ${id_name_hdp_1}    value
+    Element Attribute Should Match    ${id_name_hdp_1}    value    ${Bk1_Hdp_live_infor}[0]
+    Element Attribute Should Match    ${id_homelive_hdp_1}    value    ${Bk1_Hdp_live_infor}[1]
+    Element Attribute Should Match    ${id_hdplive_1}    value    ${Bk1_Hdp_live_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_hdp_1}    value    ${Bk1_Hdp_live_infor}[3]
+    Element Attribute Should Match    ${id_home_open_hdp_1}    value    ${Bk1_Hdp_opening_infor}[1]
+    Element Attribute Should Match    ${id_hdp_open_1}    value    ${Bk1_Hdp_opening_infor}[2]
+    Element Attribute Should Match    ${id_away_open_hdp_1}    value    ${Bk1_Hdp_opening_infor}[3]
+    # Verify odd of Bookmaker 2
+    ${id_name_hdp_2}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk2_Hdp_live_infor}[0]
+    ${id_homelive_hdp_2}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk2_Hdp_live_infor}[0]
+    ${id_hdplive_2}=    Catenate    SEPARATOR=    accessibility_id=LiveHdp-    ${Bk2_Hdp_live_infor}[0]
+    ${id_awaylive_hdp_2}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk2_Hdp_live_infor}[0]
+    ${id_home_open_hdp_2}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk2_Hdp_live_infor}[0]
+    ${id_hdp_open_2}=    Catenate    SEPARATOR=    accessibility_id=OpeningHdp-    ${Bk2_Hdp_live_infor}[0]
+    ${id_away_open_hdp_2}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk2_Hdp_live_infor}[0]
+    ${Bookmaker_HDP_2}=    Get Element Attribute    ${id_name_hdp_2}    value
+    Element Attribute Should Match    ${id_name_hdp_2}    value    ${Bk2_Hdp_live_infor}[0]
+    Element Attribute Should Match    ${id_homelive_hdp_2}    value    ${Bk2_Hdp_live_infor}[1]
+    Element Attribute Should Match    ${id_hdplive_2}    value    ${Bk2_Hdp_live_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_hdp_2}    value    ${Bk2_Hdp_live_infor}[3]
+    Element Attribute Should Match    ${id_home_open_hdp_2}    value    ${Bk2_Hdp_opening_infor}[1]
+    Element Attribute Should Match    ${id_hdp_open_2}    value    ${Bk2_Hdp_opening_infor}[2]
+    Element Attribute Should Match    ${id_away_open_hdp_2}    value    ${Bk2_Hdp_opening_infor}[3]
+    # Verify odd of Bookmaker 3
+    ${id_name_hdp_3}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk3_Hdp_live_infor}[0]
+    ${id_homelive_hdp_3}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk3_Hdp_live_infor}[0]
+    ${id_hdplive_3}=    Catenate    SEPARATOR=    accessibility_id=LiveHdp-    ${Bk3_Hdp_live_infor}[0]
+    ${id_awaylive_hdp_3}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk3_Hdp_live_infor}[0]
+    ${id_home_open_hdp_3}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk3_Hdp_live_infor}[0]
+    ${id_hdp_open_3}=    Catenate    SEPARATOR=    accessibility_id=OpeningHdp-    ${Bk3_Hdp_live_infor}[0]
+    ${id_away_open_hdp_3}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk3_Hdp_live_infor}[0]
+    ${Bookmaker_HDP_3}=    Get Element Attribute    ${id_name_hdp_3}    value
+    Element Attribute Should Match    ${id_name_hdp_3}    value    ${Bk3_Hdp_live_infor}[0]
+    Element Attribute Should Match    ${id_homelive_hdp_3}    value    ${Bk3_Hdp_live_infor}[1]
+    Element Attribute Should Match    ${id_hdplive_3}    value    ${Bk3_Hdp_live_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_hdp_3}    value    ${Bk3_Hdp_live_infor}[3]
+    Element Attribute Should Match    ${id_home_open_hdp_3}    value    ${Bk3_Hdp_opening_infor}[1]
+    Element Attribute Should Match    ${id_hdp_open_3}    value    ${Bk3_Hdp_opening_infor}[2]
+    Element Attribute Should Match    ${id_away_open_hdp_3}    value    ${Bk3_Hdp_opening_infor}[3]
+    # Verify odd of Bookmaker 4
+    ${id_name_hdp_4}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk4_Hdp_live_infor}[0]
+    ${id_homelive_hdp_4}=    Catenate    SEPARATOR=    accessibility_id=HomeLiveOdds-    ${Bk4_Hdp_live_infor}[0]
+    ${id_hdplive_4}=    Catenate    SEPARATOR=    accessibility_id=LiveHdp-    ${Bk4_Hdp_live_infor}[0]
+    ${id_awaylive_hdp_4}=    Catenate    SEPARATOR=    accessibility_id=AwayLiveOdds-    ${Bk4_Hdp_live_infor}[0]
+    ${id_home_open_hdp_4}=    Catenate    SEPARATOR=    accessibility_id=HomeOpeningOdds-    ${Bk4_Hdp_live_infor}[0]
+    ${id_hdp_open_4}=    Catenate    SEPARATOR=    accessibility_id=OpeningHdp-    ${Bk4_Hdp_live_infor}[0]
+    ${id_away_open_hdp_4}=    Catenate    SEPARATOR=    accessibility_id=AwayOpeningOdds-    ${Bk4_Hdp_live_infor}[0]
+    ${Bookmaker_HDP_4}=    Get Element Attribute    ${id_name_hdp_4}    value
+    Element Attribute Should Match    ${id_name_hdp_4}    value    ${Bk4_Hdp_live_infor}[0]
+    Element Attribute Should Match    ${id_homelive_hdp_4}    value    ${Bk4_Hdp_live_infor}[1]
+    Element Attribute Should Match    ${id_hdplive_4}    value    ${Bk4_Hdp_live_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_hdp_4}    value    ${Bk4_Hdp_live_infor}[3]
+    Element Attribute Should Match    ${id_home_open_hdp_4}    value    ${Bk4_Hdp_opening_infor}[1]
+    Element Attribute Should Match    ${id_hdp_open_4}    value    ${Bk4_Hdp_opening_infor}[2]
+    Element Attribute Should Match    ${id_away_open_hdp_4}    value    ${Bk4_Hdp_opening_infor}[3]
+    # Verify List name of Bookmaker is ascending abc
+    ${list_name_app}=    Create List    ${Bookmaker_HDP_1}    ${Bookmaker_HDP_2}    ${Bookmaker_HDP_3}    ${Bookmaker_HDP_4}
+    Lists Should Be Equal    ${list_name_app}    ${list_name}
+    Remove Files    Template_Files/Run/Data_Odds_AsianHDP.json    Template_Files/Run/Data_Odds_AsianHDP_live.json
+
+SP6_Odds_Over_Under_PostMatch
+    #Go to Over/Under Tab
+    Click Element    accessibility_id=Over/Under
+    # Get All Bookmaker of Match
+    ${json_file}=    Load JSON From File    ${CURDIR}/Template_Files/Data_Odds_Over_Under_auto.json
+    ${bookmaker_name}=    Get Value From Json    ${json_file}    $..books..name
+    ${bookmaker_name1}=    BuiltIn.Catenate    @{bookmaker_name}[0]
+    ${bookmaker_name2}=    BuiltIn.Catenate    @{bookmaker_name}[1]
+    ${bookmaker_name3}=    BuiltIn.Catenate    @{bookmaker_name}[2]
+    ${bookmaker_name4}=    BuiltIn.Catenate    @{bookmaker_name}[3]
+    ${list_name}=    BuiltIn.Create List    ${bookmaker_name1}    ${bookmaker_name2}    ${bookmaker_name3}    ${bookmaker_name4}
+    Sort List    ${list_name}
+    log    ${list_name}
+    log    ${list_name}[0]
+    #Get Odds_Info
+    ${Bk1_OU_Odds_infor}=    GetOdds_Over_Under    ${json_file}    ${list_name}[0]
+    ${Bk2_OU_Odds_infor}=    GetOdds_Over_Under    ${json_file}    ${list_name}[1]
+    ${Bk3_OU_Odds_infor}=    GetOdds_Over_Under    ${json_file}    ${list_name}[2]
+    ${Bk4_OU_Odds_infor}=    GetOdds_Over_Under    ${json_file}    ${list_name}[3]
+    # Verify odd of Bookmaker 1
+    ${id_name_OU_1}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk1_OU_Odds_infor}[0]    # Create “Id” attribute of element by bookmaker’s name
+    ${id_homelive_OU_1}=    Catenate    SEPARATOR=    accessibility_id=OverLiveOdds-    ${Bk1_OU_Odds_infor}[0]
+    ${id_OU_value_live_1}=    Catenate    SEPARATOR=    accessibility_id=LiveOverOption-    ${Bk1_OU_Odds_infor}[0]
+    ${id_awaylive_OU_1}=    Catenate    SEPARATOR=    accessibility_id=UnderLiveOdds-    ${Bk1_OU_Odds_infor}[0]
+    ${id_home_open_OU_1}=    Catenate    SEPARATOR=    accessibility_id=OverOpeningOdds-    ${Bk1_OU_Odds_infor}[0]
+    ${id_OU_value_open_1}=    Catenate    SEPARATOR=    accessibility_id=OpeningOverOption-    ${Bk1_OU_Odds_infor}[0]
+    ${id_away_open_OU_1}=    Catenate    SEPARATOR=    accessibility_id=UnderOpeningOdds-    ${Bk1_OU_Odds_infor}[0]
+    ${Bookmaker_OU_1}=    Get Element Attribute    ${id_name_OU_1}    value
+    Element Attribute Should Match    ${id_name_OU_1}    value    ${Bk1_OU_Odds_infor}[0]
+    Element Attribute Should Match    ${id_homelive_OU_1}    value    ${Bk1_OU_Odds_infor}[1]
+    Element Attribute Should Match    ${id_OU_value_live_1}    value    ${Bk1_OU_Odds_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_OU_1}    value    ${Bk1_OU_Odds_infor}[3]
+    Element Attribute Should Match    ${id_home_open_OU_1}    value    ${Bk1_OU_Odds_infor}[4]
+    Element Attribute Should Match    ${id_OU_value_open_1}    value    ${Bk1_OU_Odds_infor}[5]
+    Element Attribute Should Match    ${id_away_open_OU_1}    value    ${Bk1_OU_Odds_infor}[6]
+    # Verify odd of Bookmaker 2
+    ${id_name_OU_2}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk2_OU_Odds_infor}[0]
+    ${id_homelive_OU_2}=    Catenate    SEPARATOR=    accessibility_id=OverLiveOdds-    ${Bk2_OU_Odds_infor}[0]
+    ${id_OU_value_live_2}=    Catenate    SEPARATOR=    accessibility_id=LiveOverOption-    ${Bk2_OU_Odds_infor}[0]
+    ${id_awaylive_OU_2}=    Catenate    SEPARATOR=    accessibility_id=UnderLiveOdds-    ${Bk2_OU_Odds_infor}[0]
+    ${id_home_open_OU_2}=    Catenate    SEPARATOR=    accessibility_id=OverOpeningOdds-    ${Bk2_OU_Odds_infor}[0]
+    ${id_OU_value_open_2}=    Catenate    SEPARATOR=    accessibility_id=OpeningOverOption-    ${Bk2_OU_Odds_infor}[0]
+    ${id_away_open_OU_2}=    Catenate    SEPARATOR=    accessibility_id=UnderOpeningOdds-    ${Bk2_OU_Odds_infor}[0]
+    ${Bookmaker_OU_2}=    Get Element Attribute    ${id_name_OU_2}    value
+    Element Attribute Should Match    ${id_name_OU_2}    value    ${Bk2_OU_Odds_infor}[0]
+    Element Attribute Should Match    ${id_homelive_OU_2}    value    ${Bk2_OU_Odds_infor}[1]
+    Element Attribute Should Match    ${id_OU_value_live_2}    value    ${Bk2_OU_Odds_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_OU_2}    value    ${Bk2_OU_Odds_infor}[3]
+    Element Attribute Should Match    ${id_home_open_OU_2}    value    ${Bk2_OU_Odds_infor}[4]
+    Element Attribute Should Match    ${id_OU_value_open_2}    value    ${Bk2_OU_Odds_infor}[5]
+    Element Attribute Should Match    ${id_away_open_OU_2}    value    ${Bk2_OU_Odds_infor}[6]
+    # Verify odd of Bookmaker 3
+    ${id_name_OU_3}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk3_OU_Odds_infor}[0]
+    ${id_homelive_OU_3}=    Catenate    SEPARATOR=    accessibility_id=OverLiveOdds-    ${Bk3_OU_Odds_infor}[0]
+    ${id_OU_value_live_3}=    Catenate    SEPARATOR=    accessibility_id=LiveOverOption-    ${Bk3_OU_Odds_infor}[0]
+    ${id_awaylive_OU_3}=    Catenate    SEPARATOR=    accessibility_id=UnderLiveOdds-    ${Bk3_OU_Odds_infor}[0]
+    ${id_home_open_OU_3}=    Catenate    SEPARATOR=    accessibility_id=OverOpeningOdds-    ${Bk3_OU_Odds_infor}[0]
+    ${id_OU_value_open_3}=    Catenate    SEPARATOR=    accessibility_id=OpeningOverOption-    ${Bk3_OU_Odds_infor}[0]
+    ${id_away_open_OU_3}=    Catenate    SEPARATOR=    accessibility_id=UnderOpeningOdds-    ${Bk3_OU_Odds_infor}[0]
+    ${Bookmaker_OU_3}=    Get Element Attribute    ${id_name_OU_3}    value
+    Element Attribute Should Match    ${id_name_OU_3}    value    ${Bk3_OU_Odds_infor}[0]
+    Element Attribute Should Match    ${id_homelive_OU_3}    value    ${Bk3_OU_Odds_infor}[1]
+    Element Attribute Should Match    ${id_OU_value_live_3}    value    ${Bk3_OU_Odds_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_OU_3}    value    ${Bk3_OU_Odds_infor}[3]
+    Element Attribute Should Match    ${id_home_open_OU_3}    value    ${Bk3_OU_Odds_infor}[4]
+    Element Attribute Should Match    ${id_OU_value_open_3}    value    ${Bk3_OU_Odds_infor}[5]
+    Element Attribute Should Match    ${id_away_open_OU_3}    value    ${Bk3_OU_Odds_infor}[6]
+    # Verify odd of Bookmaker 4
+    ${id_name_OU_4}=    Catenate    SEPARATOR=    accessibility_id=BookmakerName-    ${Bk4_OU_Odds_infor}[0]
+    ${id_homelive_OU_4}=    Catenate    SEPARATOR=    accessibility_id=OverLiveOdds-    ${Bk4_OU_Odds_infor}[0]
+    ${id_OU_value_live_4}=    Catenate    SEPARATOR=    accessibility_id=LiveOverOption-    ${Bk4_OU_Odds_infor}[0]
+    ${id_awaylive_OU_4}=    Catenate    SEPARATOR=    accessibility_id=UnderLiveOdds-    ${Bk4_OU_Odds_infor}[0]
+    ${id_home_open_OU_4}=    Catenate    SEPARATOR=    accessibility_id=OverOpeningOdds-    ${Bk4_OU_Odds_infor}[0]
+    ${id_OU_value_open_4}=    Catenate    SEPARATOR=    accessibility_id=OpeningOverOption-    ${Bk4_OU_Odds_infor}[0]
+    ${id_away_open_OU_4}=    Catenate    SEPARATOR=    accessibility_id=UnderOpeningOdds-    ${Bk4_OU_Odds_infor}[0]
+    ${Bookmaker_OU_4}=    Get Element Attribute    ${id_name_OU_4}    value
+    Element Attribute Should Match    ${id_name_OU_4}    value    ${Bk4_OU_Odds_infor}[0]
+    Element Attribute Should Match    ${id_homelive_OU_4}    value    ${Bk4_OU_Odds_infor}[1]
+    Element Attribute Should Match    ${id_OU_value_live_4}    value    ${Bk4_OU_Odds_infor}[2]
+    Element Attribute Should Match    ${id_awaylive_OU_4}    value    ${Bk4_OU_Odds_infor}[3]
+    Element Attribute Should Match    ${id_home_open_OU_4}    value    ${Bk4_OU_Odds_infor}[4]
+    Element Attribute Should Match    ${id_OU_value_open_4}    value    ${Bk4_OU_Odds_infor}[5]
+    Element Attribute Should Match    ${id_away_open_OU_4}    value    ${Bk4_OU_Odds_infor}[6]
+    ${list_value_app}=    Create List    ${Bookmaker_OU_1}    ${Bookmaker_OU_2}    ${Bookmaker_OU_3}    ${Bookmaker_OU_4}
+    Lists Should Be Equal    ${list_value_app}    ${list_name}
+    Remove Files    Template_Files/Run/Data_Odds_Over_Under_auto.json
+
 *** Keywords ***

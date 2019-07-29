@@ -39,6 +39,7 @@ Init_Simulator
     [Arguments]    ${simulator_name}
     Comment    Start Appium Server
     Insert_Matches
+    Push_Odds_For_PostMatch
     Open Application On Simulator    ${simulator_name}
 
 Init_Real Device
@@ -119,3 +120,121 @@ Return day month
     ${day_monthname}    Set Variable    @{MONTHS}[${month}]
     ${day_monthname}    Set Variable    ${day}${space}${day_monthname}
     [Return]    ${day_monthname}
+
+Push_Odds_For_PostMatch
+    #Push Odds for 1x2
+    Update_Template_Odds_1x2
+    ${json}=    Get File    Template_Files/Data_Odds_1x2_auto.json
+    Post    ${Push_odds}    ${json}
+    Integer    response status    200
+    Sleep    3
+    #Push Odds for HDP
+    Update_Template_Odds_AsianHdp
+    ${json_old}=    Get File    Template_Files/Run/Data_Odds_AsianHDP.json
+    #Push Odds hdp to DB
+    Post    ${Push_odds}    ${json_old}
+    Integer    response status    200
+    Sleep    3
+    ${json1}=    Get File    Template_Files/Run/Data_Odds_AsianHDP_live.json
+    #Push Odds hdp to DB
+    Post    ${Push_odds}    ${json1}
+    Integer    response status    200
+    Sleep    3
+    #Push Odds_OU
+    Update_Template_Odds_Over_Under
+    ${json2}=    Get File    Template_Files/Run/Data_Odds_Over_Under_auto.json
+    #Push Odds hdp to DB
+    Post    ${Push_odds}    ${json2}
+    Integer    response status    200
+    Sleep    3
+
+Get_Value_Number
+    [Arguments]    ${json_file}    ${json_path}
+    ${Return_value}=    Get Value From Json    ${json_file}    ${json_path}
+    ${Return_value}    BuiltIn.Catenate    @{Return_value}
+    ${Return_value}=    Builtin.Convert To Number    ${Return_value}    2
+    ${Return_value}=    Convert To String    ${Return_value}
+    [Return]    ${Return_value}
+
+Update_Template_Odds_1x2
+    ${current_date}=    Get Current Date    result_format=%Y-%m-%d    #current date
+    #Update date update_time for push odds
+    Copy File    Template_Files/Data_Odds_1x2_auto.json    Template_Files/Run/Data_Odds_1x2_auto.json
+    @{list_date_odds_1}=    Create List    2019-07-01
+    @{list_date_odds_2}=    Create List    ${current_date}
+    : FOR    ${i}    IN RANGE    0    1
+    \    run    sed -i’’ -e s/@{list_date_odds_1}[${i}]/@{list_date_odds_2}[${i}]/ Template_Files/Run/Data_Odds_1x2_auto.json
+    ${match1_event1}=    Get File    Template_Files/Run/Data_Odds_1x2_auto.json
+
+GetOdds_1x2
+    [Arguments]    ${json_file}    ${Bookmaker_name}
+    ${path_live_Odd_1}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[0].odds
+    ${path_live_Odd_draw}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[2].odds
+    ${path_live_Odd_2}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[1].odds
+    ${path_open_Odd_1}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[0].opening_odds
+    ${path_open_Odd_draw}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[2].opening_odds
+    ${path_open_Odd_2}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${Bookmaker_name}    ')].outcomes.[1].opening_odds
+    ${bk_live_1}=    Get_Value_Number    ${json_file}    ${path_live_Odd_1}
+    ${bk_live_X}=    Get_Value_Number    ${json_file}    ${path_live_Odd_draw}
+    ${bk_live_2}=    Get_Value_Number    ${json_file}    ${path_live_Odd_2}
+    ${bk_open_1}=    Get_Value_Number    ${json_file}    ${path_open_Odd_1}
+    ${bk_open_X}=    Get_Value_Number    ${json_file}    ${path_open_Odd_draw}
+    ${bk_open_2}=    Get_Value_Number    ${json_file}    ${path_open_Odd_2}
+    ${Odds_infor_1x2}=    Create List    ${Bookmaker_name}    ${bk_live_1}    ${bk_live_X}    ${bk_live_2}    ${bk_open_1}
+    ...    ${bk_open_X}    ${bk_open_2}
+    [Return]    ${Odds_infor_1x2}
+
+Update_Template_Odds_AsianHdp
+    ${current_date}=    Get Current Date    result_format=%Y-%m-%d    #current date
+    #Update date for Asian_Hdp_1st
+    Copy File    Template_Files/Data_Odds_AsianHDP.json    Template_Files/Run/Data_Odds_AsianHDP.json
+    @{list_date_odds_1}=    Create List    2019-07-01
+    @{list_date_odds_2}=    Create List    ${current_date}
+    : FOR    ${i}    IN RANGE    0    1
+    \    run    sed -i’’ -e s/@{list_date_odds_1}[${i}]/@{list_date_odds_2}[${i}]/ Template_Files/Run/Data_Odds_AsianHDP.json
+    ${match1_event1}=    Get File    Template_Files/Run/Data_Odds_AsianHDP.json
+    #Update date for Asian_Hdp_2nd
+    Copy File    Template_Files/Data_Odds_AsianHDP_live.json    Template_Files/Run/Data_Odds_AsianHDP_live.json
+    : FOR    ${j}    IN RANGE    0    1
+    \    run    sed -i’’ -e s/@{list_date_odds_1}[${j}]/@{list_date_odds_2}[${j}]/ Template_Files/Run/Data_Odds_AsianHDP_live.json
+    ${match1_event2}=    Get File    Template_Files/Run/Data_Odds_AsianHDP_live.json
+
+Get_Odds_HDP
+    [Arguments]    ${json_file}    ${bookmaker_name}
+    Comment    ${json_file}=    Load_File_Json    ${address_file}
+    ${path_odd_home}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name}    ')].outcomes.[0].odds
+    ${path_odd_away}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name}    ')].outcomes.[1].odds
+    ${path_handicap}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name}    ')].outcomes.[0].handicap
+    ${bk_odds_home}=    Get_Value_Number    ${json_file}    ${path_odd_home}
+    ${bk_odds_away}=    Get_Value_Number    ${json_file}    ${path_odd_away}
+    ${bk_handicap}=    Get_Value_Number    ${json_file}    ${path_handicap}
+    ${Odds_infor}=    Create List    ${bookmaker_name}    ${bk_odds_home}    ${bk_handicap}    ${bk_odds_away}
+    [Return]    ${Odds_infor}
+
+Update_Template_Odds_Over_Under
+    ${current_date}=    Get Current Date    result_format=%Y-%m-%d    #current date
+    #Update date update_time for push odds
+    Copy File    Template_Files/Data_Odds_Over_Under_auto.json    Template_Files/Run/Data_Odds_Over_Under_auto.json
+    @{list_date_odds_1}=    Create List    2019-07-01
+    @{list_date_odds_2}=    Create List    ${current_date}
+    : FOR    ${i}    IN RANGE    0    1
+    \    run    sed -i’’ -e s/@{list_date_odds_1}[${i}]/@{list_date_odds_2}[${i}]/ Template_Files/Run/Data_Odds_Over_Under_auto.json
+    ${match1_event1}=    Get File    Template_Files/Run/Data_Odds_Over_Under_auto.json
+
+GetOdds_Over_Under
+    [Arguments]    ${json_file}    ${bookmaker_name_OU}
+    ${path_live_over}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[0].odds
+    ${path_live_under}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[1].odds
+    ${path_live_value_OU}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[0].total
+    ${bk_live_over}=    Get_Value_Number    ${json_file}    ${path_live_over}
+    ${bk_live_under}=    Get_Value_Number    ${json_file}    ${path_live_under}
+    ${bk_live_value_OU}=    Get_Value_Number    ${json_file}    ${path_live_value_OU}
+    ${path_opening_over}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[0].opening_odds
+    ${path_opening_under}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[1].opening_odds
+    ${path_opening_value_OU}=    BuiltIn.Catenate    SEPARATOR=    $..books[?(@.name=='    ${bookmaker_name_OU}    ')].outcomes.[0].opening_total
+    ${bk_opening_over}=    Get_Value_Number    ${json_file}    ${path_opening_over}
+    ${bk_opening_under}=    Get_Value_Number    ${json_file}    ${path_opening_under}
+    ${bk_opening_value_OU}=    Get_Value_Number    ${json_file}    ${path_opening_value_OU}
+    ${OU_Odds_infor}=    Create List    ${bookmaker_name_OU}    ${bk_live_over}    ${bk_live_value_OU}    ${bk_live_under}    ${bk_opening_over}
+    ...    ${bk_opening_value_OU}    ${bk_opening_under}
+    [Return]    ${OU_Odds_infor}
