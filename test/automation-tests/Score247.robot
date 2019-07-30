@@ -612,6 +612,7 @@ SP6_Odd_Movement_Of_Bettype_1x2
     Output
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
+    Click Element    ${btn_Scores}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
     Wait Until Element Is Visible    accessibility_id=Aston Villa
     #Go to Match Info page at ODDS tab from Scores page
@@ -863,10 +864,9 @@ SP5_Odds_1x2_Post_Match
     #Go to current date to view data
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
+    Click Element    ${btn_Scores}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
     Sleep    3
-    Capture Page Screenshot
-    Sleep    5
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test14
     Sleep    3
@@ -955,6 +955,15 @@ SP5_Odds_1x2_Post_Match
     Remove Files    Template_Files/Run/Data_Odds_1x2_auto.json
 
 SP6_Odds_HDP_PostMatch
+    #Go to current date to view data
+    ${current_date}=    Get Current Date    result_format=%d    #current date
+    ${current_date}=    Convert To Integer    ${current_date}
+    Click Element    ${btn_Scores}
+    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    Sleep    3
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=HomeTeamName-sr:match:test14
+    Sleep    3
     #Go to Asian Handicap Tab
     Click Element    accessibility_id=Asian HDP
     # Get All Bookmaker of Match
@@ -1049,6 +1058,15 @@ SP6_Odds_HDP_PostMatch
     Remove Files    Template_Files/Run/Data_Odds_AsianHDP.json    Template_Files/Run/Data_Odds_AsianHDP_live.json
 
 SP6_Odds_Over_Under_PostMatch
+    #Go to current date to view data
+    ${current_date}=    Get Current Date    result_format=%d    #current date
+    ${current_date}=    Convert To Integer    ${current_date}
+    Click Element    ${btn_Scores}
+    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    Sleep    3
+    #Go to Match Info page from Scores page
+    Click Element    accessibility_id=HomeTeamName-sr:match:test14
+    Sleep    3
     #Go to Over/Under Tab
     Click Element    accessibility_id=Over/Under
     # Get All Bookmaker of Match
