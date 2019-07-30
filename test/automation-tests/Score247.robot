@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Init_Simulator    iPhone 8
+Suite Setup       Init_Simulator    iPhone X
 Suite Teardown    Suite TearDown
 Library           AppiumLibrary
 Library           Process
@@ -364,12 +364,12 @@ SP2_Score_Post_Pre_Match_Date7
     Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test10    value    ${match1_away_name}
 
 SP3_SP4_List_Event_Of_Match1
-    Update_Template_List_Event_Of_Match1
-    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
-    #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    Comment    Update_Template_List_Event_Of_Match1
+    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${file}
+    Comment    Integer    response status    200
+    Comment    Output
     ${result}=    Load JSON From File    Template_Files/Run/List_event_data_template1.txt
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
@@ -604,19 +604,13 @@ SP3_SP4_List_Event_Of_Match4
     Click Element    ${btn_Scores}
 
 SP6_Odd_Movement_Of_Bettype_1x2
-    Update_Template_Odds_Movement_Of_Match1_Bettype_1x2
-    ${file}=    Get File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
-    #Push events to insert odds
-    Post    ${Push_odds}    ${file}
-    Integer    response status    200
-    Output
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    ${btn_Scores}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
-    Wait Until Element Is Visible    accessibility_id=Aston Villa
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
     #Go to Match Info page at ODDS tab from Scores page
-    Click Element    accessibility_id=Aston Villa
+    Click Element    accessibility_id=HomeTeamName-sr:match:test11
     ${result}=    Load JSON From File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
     ${BookmakerName}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][name]
     ${BookmakerName}    Catenate    @{BookmakerName}

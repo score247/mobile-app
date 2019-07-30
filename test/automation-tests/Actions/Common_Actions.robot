@@ -32,13 +32,14 @@ Open Application On Real Ios Device
 
 Open Application On Simulator
     [Arguments]    ${deviceName}
-    Open Application    http://0.0.0.0:4723/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
+    Open Application    http://0.0.0.0:4726/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
     sleep    3s
 
 Init_Simulator
     [Arguments]    ${simulator_name}
     Comment    Start Appium Server
     Insert_Matches
+    Push_Event_PostMatch
     Push_Odds_For_PostMatch
     Open Application On Simulator    ${simulator_name}
 
@@ -50,7 +51,7 @@ Init_Real Device
 Suite TearDown
     Comment    Start Process    /usr/bin/pkill -f node|grep appium    shell=True
     Comment    Clean_Up_DB
-    Empty Directory    Template_Files/Run
+    Comment    Empty Directory    Template_Files/Run
 
 Insert_Matches
     Clean_Up_DB
@@ -124,7 +125,7 @@ Return day month
 Push_Odds_For_PostMatch
     #Push Odds for 1x2
     Update_Template_Odds_1x2
-    ${json}=    Get File    Template_Files/Data_Odds_1x2_auto.json
+    ${json}=    Get File    Template_Files/Run/Data_Odds_1x2_auto.json
     Post    ${Push_odds}    ${json}
     Integer    response status    200
     Sleep    3
@@ -147,6 +148,11 @@ Push_Odds_For_PostMatch
     Post    ${Push_odds}    ${json2}
     Integer    response status    200
     Sleep    3
+    Update_Template_Odds_Movement_Of_Match1_Bettype_1x2
+    ${file}=    Get File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
+    #Push events to insert odds
+    Post    ${Push_odds}    ${file}
+    Integer    response status    200
 
 Get_Value_Number
     [Arguments]    ${json_file}    ${json_path}
@@ -238,3 +244,11 @@ GetOdds_Over_Under
     ${OU_Odds_infor}=    Create List    ${bookmaker_name_OU}    ${bk_live_over}    ${bk_live_value_OU}    ${bk_live_under}    ${bk_opening_over}
     ...    ${bk_opening_value_OU}    ${bk_opening_under}
     [Return]    ${OU_Odds_infor}
+
+Push_Event_PostMatch
+    Update_Template_List_Event_Of_Match1
+    ${file}=    Get File    Template_Files/Run/List_event_data_template1.txt
+    #Push events
+    Post    ${Push_File}    ${file}
+    Integer    response status    200
+    Output
