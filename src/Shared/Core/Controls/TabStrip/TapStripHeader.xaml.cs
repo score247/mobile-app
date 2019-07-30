@@ -64,7 +64,7 @@
                         ? (Style)control.Resources["TabActiveText"]
                         : (Style)control.Resources["TabText"];
 
-                    ((ContentView)tabHeader.Children[2]).Content.Style = i == index
+                    ((ContentView)tabHeader.Children[TabLineIndex]).Content.Style = i == index
                         ? (Style)control.Resources["TabActiveLine"]
                         : (Style)control.Resources["TabInactiveLine"];
                 }
