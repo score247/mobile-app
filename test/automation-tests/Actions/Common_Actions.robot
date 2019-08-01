@@ -32,7 +32,7 @@ Open Application On Real Ios Device
 
 Open Application On Simulator
     [Arguments]    ${deviceName}
-    Open Application    http://0.0.0.0:4726/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
+    Open Application    http://0.0.0.0:4723/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    newCommandTimeout=120
     sleep    3s
 
 Init_Simulator

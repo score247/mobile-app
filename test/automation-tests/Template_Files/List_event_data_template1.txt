@@ -343,7 +343,7 @@
         "stoppage_time": "2",
         "player": {
           "id": "sr:player:176727",
-          "name": "Dan Doyle"
+          "name": "Gershom Cox"
         },
         "team": "away",
         "period": 1,

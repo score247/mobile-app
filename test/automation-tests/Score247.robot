@@ -1,5 +1,5 @@
 *** Settings ***
-Suite Setup       Init_Simulator    iPhone X
+Suite Setup       Init_Simulator    iPhone 8
 Suite Teardown    Suite TearDown
 Library           AppiumLibrary
 Library           Process
@@ -364,57 +364,46 @@ SP2_Score_Post_Pre_Match_Date7
     Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test10    value    ${match1_away_name}
 
 SP3_SP4_List_Event_Of_Match1
-    Comment    Update_Template_List_Event_Of_Match1
-    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
-    Comment    #Push events
-    Comment    Post    ${Push_File}    ${file}
-    Comment    Integer    response status    200
-    Comment    Output
+    Update_Template_List_Event_Of_Match1
+    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
+    #Push events
+    Post    ${Push_File}    ${file}
+    Integer    response status    200
+    Output
     ${result}=    Load JSON From File    Template_Files/Run/List_event_data_template1.txt
+    ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
-    Wait Until Element Is Visible    accessibility_id=Aston Villa
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
     #Go to Match Info page from Scores page
-    Click Element    accessibility_id=Aston Villa
+    Click Element    accessibility_id=HomeTeamName-sr:match:test11
     Sleep    3
     Click Element    accessibility_id=INFO
     Sleep    3
     #Event1_Yellowcard_1st
     Element Attribute Should Match    accessibility_id=MatchTime-3-yellow_card    value    10'
-    ${player_name_1}    Get Value From Json    ${result}    $[2][payload][event][player][name]
-    ${player_name_1}    Catenate    @{player_name_1}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-3-yellow_card    value    ${player_name_1}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-3-yellow_card    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-3-yellow_card    name    HomeImage-3-yellow_card
     #Event2_redcard
     Element Attribute Should Match    accessibility_id=MatchTime-4-red_card    value    15'
-    ${player_name_2}    Get Value From Json    ${result}    $[3][payload][event][player][name]
-    ${player_name_2}    Catenate    @{player_name_2}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-4-red_card    value    ${player_name_2}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-4-red_card    value    @{player_name}[1]
     Element Attribute Should Match    accessibility_id=AwayImage-4-red_card    name    AwayImage-4-red_card
     #Event3_score_change_for_away_1st
     Element Attribute Should Match    accessibility_id=MatchTime-5-score_change    value    30'
     Element Attribute Should Match    accessibility_id=Score-5-score_change    label    0 - 1
-    ${player_name_3}    Get Value From Json    ${result}    $[4][payload][event][goal_scorer][name]
-    ${player_name_3}    Catenate    @{player_name_3}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-5-score_change    value    ${player_name_3}
-    ${player_name_4}    Get Value From Json    ${result}    $[4][payload][event][assist][name]
-    ${player_name_4}    Catenate    @{player_name_4}
-    Element Attribute Should Match    accessibility_id=AwayAssistPlayerName-5-score_change    value    ${player_name_4}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-5-score_change    value    @{player_name}[3]
+    Element Attribute Should Match    accessibility_id=AwayAssistPlayerName-5-score_change    value    @{player_name}[2]
     Element Attribute Should Match    accessibility_id=AwayImage-5-score_change    name    AwayImage-5-score_change
     #Event4_score_change_for_home_1st
     Element Attribute Should Match    accessibility_id=MatchTime-6-score_change    value    35'
     Element Attribute Should Match    accessibility_id=Score-6-score_change    label    1 - 1
-    ${player_name_5}    Get Value From Json    ${result}    $[5][payload][event][goal_scorer][name]
-    ${player_name_5}    Catenate    @{player_name_5}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-6-score_change    value    ${player_name_5}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-6-score_change    value    @{player_name}[4]
     Element Attribute Should Match    accessibility_id=HomeImage-6-score_change    name    HomeImage-6-score_change
     #Event5_yellowredcard
     Element Attribute Should Match    accessibility_id=MatchTime-8-yellow_red_card    value    45+2'
-    ${player_name_6}    Get Value From Json    ${result}    $[7][payload][event][player][name]
-    ${player_name_6}    Catenate    @{player_name_6}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-8-yellow_red_card    value    ${player_name_6}
-    Element Attribute Should Match    accessibility_id=AwayImage-8-yellow_red_card    name    AwayImage-8-yellow_red_card
+    Element Attribute Should Match    accessibility_id=HomePlayerName-8-yellow_red_card    value    @{player_name}[5]
+    Element Attribute Should Match    accessibility_id=HomeImage-8-yellow_red_card    name    HomeImage-8-yellow_red_card
     #Event6_halftime
     Element Attribute Should Match    accessibility_id=MainEventStatus-9-break_start    value    Half Time
     Element Attribute Should Match    accessibility_id=Score-9-break_start    label    1 - 1
@@ -431,12 +420,13 @@ SP3_SP4_List_Event_Of_Match2
     Integer    response status    200
     Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template2.txt
+    ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
-    Wait Until Element Is Visible    accessibility_id=West Ham
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test12
     #Go to Match Info page from Scores page
-    Click Element    accessibility_id=West Ham
+    Click Element    accessibility_id=HomeTeamName-sr:match:test12
     Sleep    3
     Click Element    accessibility_id=INFO
     Sleep    3
@@ -446,23 +436,23 @@ SP3_SP4_List_Event_Of_Match2
     #Event2_score_change_for_home_2nd
     Element Attribute Should Match    accessibility_id=MatchTime-11-score_change    value    55'
     Element Attribute Should Match    accessibility_id=Score-11-score_change    label    1 - 0
-    ${player_name_1}    Get Value From Json    ${result}    $[4][payload][event][goal_scorer][name]
-    ${player_name_1}    Catenate    @{player_name_1}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-11-score_change    value    ${player_name_1}
+    Comment    ${player_name_1}    Get Value From Json    ${result}    $[4][payload][event][goal_scorer][name]
+    Comment    ${player_name_1}    Catenate    @{player_name_1}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-11-score_change    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-11-score_change    name    HomeImage-11-score_change
     #Event3_score_change_for_away_2nd_by_own_goal
     Element Attribute Should Match    accessibility_id=MatchTime-12-score_change    value    75'
     Element Attribute Should Match    accessibility_id=Score-12-score_change    label    1 - 1
-    ${player_name_2}    Get Value From Json    ${result}    $[5][payload][event][goal_scorer][name]
-    ${player_name_2}    Catenate    @{player_name_2}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-12-score_change    value    ${player_name_2}
+    Comment    ${player_name_2}    Get Value From Json    ${result}    $[5][payload][event][goal_scorer][name]
+    Comment    ${player_name_2}    Catenate    @{player_name_2}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-12-score_change    value    @{player_name}[1]
     Element Attribute Should Match    accessibility_id=AwayImage-12-score_change    name    AwayImage-12-score_change
     #Event4_score_change_for_home_2nd
     Element Attribute Should Match    accessibility_id=MatchTime-13-penalty_missed    value    80'
     Element Attribute Should Match    accessibility_id=Score-13-penalty_missed    label    1 - 1
-    ${player_name_3}    Get Value From Json    ${result}    $[6][payload][event][player][name]
-    ${player_name_3}    Catenate    @{player_name_3}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-13-penalty_missed    value    ${player_name_3}
+    Comment    ${player_name_3}    Get Value From Json    ${result}    $[6][payload][event][player][name]
+    Comment    ${player_name_3}    Catenate    @{player_name_3}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-13-penalty_missed    value    @{player_name}[2]
     Element Attribute Should Match    accessibility_id=HomeImage-13-penalty_missed    name    HomeImage-13-penalty_missed
     #Event5_fulltime
     Element Attribute Should Match    accessibility_id=MainEventStatus-14-match_ended    value    Full Time
@@ -476,12 +466,13 @@ SP3_SP4_List_Event_Of_Match3
     Integer    response status    200
     Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template3.txt
+    ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
-    Wait Until Element Is Visible    accessibility_id=Liverpool
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test13
     #Go to Match Info page from Scores page
-    Click Element    accessibility_id=Liverpool
+    Click Element    accessibility_id=HomeTeamName-sr:match:test13
     Sleep    3
     Click Element    accessibility_id=INFO
     Sleep    3
@@ -494,15 +485,11 @@ SP3_SP4_List_Event_Of_Match3
     #Event3_score_change_for_home_extra_time_1st
     Element Attribute Should Match    accessibility_id=MatchTime-7-score_change    value    96'
     Element Attribute Should Match    accessibility_id=Score-7-score_change    label    1 - 0
-    ${player_name_1}    Get Value From Json    ${result}    $[6][payload][event][goal_scorer][name]
-    ${player_name_1}    Catenate    @{player_name_1}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-7-score_change    value    ${player_name_1}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-7-score_change    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-7-score_change    name    HomeImage-7-score_change
     #Event4_redcard_extra_time_2nd_injury_time_shown
     Element Attribute Should Match    accessibility_id=MatchTime-8-red_card    value    105+2'
-    ${player_name_2}    Get Value From Json    ${result}    $[7][payload][event][player][name]
-    ${player_name_2}    Catenate    @{player_name_2}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-8-red_card    value    ${player_name_2}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-8-red_card    value    @{player_name}[1]
     Element Attribute Should Match    accessibility_id=AwayImage-8-red_card    name    AwayImage-8-red_card
     #Event5_afterextratime
     Element Attribute Should Match    accessibility_id=MainEventStatus-11-match_ended    value    After Extra Time
@@ -516,14 +503,15 @@ SP3_SP4_List_Event_Of_Match4
     Integer    response status    200
     Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template4.txt
+    ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
     Sleep    3
     ${Kick_Of_Time}=    Get Element Attribute    accessibility_id=LeagueEventDate-sr:tournament:25839    value
-    Wait Until Element Is Visible    accessibility_id=Chelsea
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test14
     #Go to Match Info page from Scores page
-    Click Element    accessibility_id=Chelsea
+    Click Element    accessibility_id=HomeTeamName-sr:match:test14
     Sleep    3
     Click Element    accessibility_id=INFO
     Sleep    3
@@ -540,54 +528,34 @@ SP3_SP4_List_Event_Of_Match4
     Element Attribute Should Match    accessibility_id=MainEventStatus-26-period_start    value    Penalty Shoot-Out
     Element Attribute Should Match    accessibility_id=Score-26-period_start    label    3 - 2
     #Event5_penalty_shoot_out_round1
-    ${player_name_1}    Get Value From Json    ${result}    $[8][payload][event][player][name]
-    ${player_name_1}    Catenate    @{player_name_1}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-28-penalty_shootout    value    ${player_name_1}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-28-penalty_shootout    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-28-penalty_shootout    name    HomeImage-28-penalty_shootout
     Element Attribute Should Match    accessibility_id=Score-28-penalty_shootout    label    0 - 1
-    ${player_name_2}    Get Value From Json    ${result}    $[9][payload][event][player][name]
-    ${player_name_2}    Catenate    @{player_name_2}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-28-penalty_shootout    value    ${player_name_2}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-28-penalty_shootout    value    @{player_name}[1]
     Element Attribute Should Match    accessibility_id=AwayImage-28-penalty_shootout    name    AwayImage-28-penalty_shootout
     #Event6_penalty_shoot_out_round2
-    ${player_name_3}    Get Value From Json    ${result}    $[10][payload][event][player][name]
-    ${player_name_3}    Catenate    @{player_name_3}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-30-penalty_shootout    value    ${player_name_3}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-30-penalty_shootout    value    @{player_name}[2]
     Element Attribute Should Match    accessibility_id=HomeImage-30-penalty_shootout    name    HomeImage-30-penalty_shootout
     Element Attribute Should Match    accessibility_id=Score-30-penalty_shootout    label    1 - 2
-    ${player_name_4}    Get Value From Json    ${result}    $[11][payload][event][player][name]
-    ${player_name_4}    Catenate    @{player_name_4}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-30-penalty_shootout    value    ${player_name_4}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-30-penalty_shootout    value    @{player_name}[3]
     Element Attribute Should Match    accessibility_id=AwayImage-30-penalty_shootout    name    AwayImage-30-penalty_shootout
     #Event7_penalty_shoot_out_round3
-    ${player_name_5}    Get Value From Json    ${result}    $[12][payload][event][player][name]
-    ${player_name_5}    Catenate    @{player_name_5}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-32-penalty_shootout    value    ${player_name_5}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-32-penalty_shootout    value    @{player_name}[4]
     Element Attribute Should Match    accessibility_id=HomeImage-32-penalty_shootout    name    HomeImage-32-penalty_shootout
     Element Attribute Should Match    accessibility_id=Score-32-penalty_shootout    label    2 - 2
-    ${player_name_6}    Get Value From Json    ${result}    $[13][payload][event][player][name]
-    ${player_name_6}    Catenate    @{player_name_6}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-32-penalty_shootout    value    ${player_name_6}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-32-penalty_shootout    value    @{player_name}[5]
     Element Attribute Should Match    accessibility_id=AwayImage-32-penalty_shootout    name    AwayImage-32-penalty_shootout
     #Event8_penalty_shoot_out_round4
-    ${player_name_7}    Get Value From Json    ${result}    $[14][payload][event][player][name]
-    ${player_name_7}    Catenate    @{player_name_7}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-34-penalty_shootout    value    ${player_name_7}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-34-penalty_shootout    value    @{player_name}[6]
     Element Attribute Should Match    accessibility_id=HomeImage-34-penalty_shootout    name    HomeImage-34-penalty_shootout
     Element Attribute Should Match    accessibility_id=Score-34-penalty_shootout    label    3 - 2
-    ${player_name_8}    Get Value From Json    ${result}    $[15][payload][event][player][name]
-    ${player_name_8}    Catenate    @{player_name_8}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-34-penalty_shootout    value    ${player_name_8}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-34-penalty_shootout    value    @{player_name}[7]
     Element Attribute Should Match    accessibility_id=AwayImage-34-penalty_shootout    name    AwayImage-34-penalty_shootout
     #Event9_penalty_shoot_out_round5
-    ${player_name_9}    Get Value From Json    ${result}    $[16][payload][event][player][name]
-    ${player_name_9}    Catenate    @{player_name_9}
-    Element Attribute Should Match    accessibility_id=HomePlayerName-36-penalty_shootout    value    ${player_name_9}
+    Element Attribute Should Match    accessibility_id=HomePlayerName-36-penalty_shootout    value    @{player_name}[8]
     Element Attribute Should Match    accessibility_id=HomeImage-36-penalty_shootout    name    HomeImage-36-penalty_shootout
     Element Attribute Should Match    accessibility_id=Score-36-penalty_shootout    label    3 - 2
-    ${player_name_10}    Get Value From Json    ${result}    $[17][payload][event][player][name]
-    ${player_name_10}    Catenate    @{player_name_10}
-    Element Attribute Should Match    accessibility_id=AwayPlayerName-36-penalty_shootout    value    ${player_name_10}
+    Element Attribute Should Match    accessibility_id=AwayPlayerName-36-penalty_shootout    value    @{player_name}[9]
     Element Attribute Should Match    accessibility_id=AwayImage-36-penalty_shootout    name    AwayImage-36-penalty_shootout
     Page Should Contain Element    accessibility_id=HomeTeamPenalty
     Page Should Contain Element    accessibility_id=HomeTeamSecondLeg
@@ -606,252 +574,146 @@ SP3_SP4_List_Event_Of_Match4
 SP6_Odd_Movement_Of_Bettype_1x2
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    ${btn_Scores}
     Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
     Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
     #Go to Match Info page at ODDS tab from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test11
     ${result}=    Load JSON From File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
     ${BookmakerName}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][name]
-    ${BookmakerName}    Catenate    @{BookmakerName}
-    ${BookmakerName_id}    Catenate    SEPARATOR=    BookmakerName-    ${BookmakerName}
+    ${BookmakerName_id}    ${Title}=    Set Variable    BookmakerName-${BookmakerName}[0]    ${BookmakerName}[0] - 1X2 Odds
     Wait Until Element Is Visible    accessibility_id=${BookmakerName_id}
     Page Should Contain Element    accessibility_id=MatchOdds-BetTypeOneXTwo
     #Go to Odds Movement
     Click Element    accessibility_id=${BookmakerName_id}
-    ${Title}    Catenate    ${BookmakerName}    - 1X2 Odds
     Element Attribute Should Match    accessibility_id=NavigationTitle-    value    ${Title}
     Page Should Contain Element    accessibility_id=images/common/odd_movement_chart.png
     Page Should Contain Element    accessibility_id=MatchOddsMovement
     #Check values of Odds Movement
+    ${odds_value}=    Get Value From Json    ${result}    $..odds
+    ${opening_odds_value}=    Get Value From Json    ${result}    $..opening_odds
+    ${UpdateTime}    Get Value From Json    ${result}    $..markets_last_updated
     ##Check values of row 1
-    ${UpdateTime 1}    Get Value From Json    ${result}    $[sport_events][9][markets_last_updated]
-    ${UpdateTime 1}    Catenate    @{UpdateTime 1}
+    ${UpdateTime 1}=    Set Variable    ${UpdateTime}[9]
     ${UpdateTime 1_file}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 1}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 1_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 1}
+    ${MatchTime 1_id}    Set Variable    MatchTime-${UpdateTime 1}
     Element Attribute Should Match    ${MatchTime 1_id}    value    HT
-    ${MatchScore 1_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 1}
-    ${MatchScore 1_app}    Get Element Attribute    ${MatchScore 1_id}    value
+    ${MatchScore 1_id}    Set Variable    MatchScore-${UpdateTime 1}
     Element Attribute Should Match    ${MatchScore 1_id}    value    1 - 1
-    ${HomeOdds 1_file}    Get Value From Json    ${result}    $[sport_events][9][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 1_file}    Catenate    @{HomeOdds 1_file}
-    ${HomeOdds 1_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 1}
-    Element Attribute Should Match    ${HomeOdds 1_id}    value    ${HomeOdds 1_file}
-    ${AwayOdds 1_file}    Get Value From Json    ${result}    $[sport_events][9][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 1_file}    Catenate    @{AwayOdds 1_file}
-    ${AwayOdds 1_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 1}
-    Element Attribute Should Match    ${AwayOdds 1_id}    value    ${AwayOdds 1_file}
-    ${DrawOdds 1_file}    Get Value From Json    ${result}    $[sport_events][9][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 1_file}    Catenate    @{DrawOdds 1_file}
-    ${DrawOdds 1_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 1}
-    Element Attribute Should Match    ${DrawOdds 1_id}    value    ${DrawOdds 1_file}
-    ${UpdateTime 1_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 1}
-    Element Attribute Should Match    ${UpdateTime 1_id}    value    ${UpdateTime 1_file}
+    ${HomeOdds 1_id}    ${AwayOdds 1_id}    ${DrawOdds 1_id}    ${UpdateTime 1_id}=    Set Variable    HomeOdds-${UpdateTime 1}    AwayOdds-${UpdateTime 1}
+    ...    DrawOdds-${UpdateTime 1}    UpdateTime-${UpdateTime 1}
+    Element Attribute Should Match    ${HomeOdds 1_id}    value    @{odds_value}[27]
+    Element Attribute Should Match    ${AwayOdds 1_id}    value    @{odds_value}[28]
+    Element Attribute Should Match    ${DrawOdds 1_id}    value    @{odds_value}[29]
     ##Check values of row 2
-    ${UpdateTime 2}    Get Value From Json    ${result}    $[sport_events][8][markets_last_updated]
-    ${UpdateTime 2}    Catenate    @{UpdateTime 2}
+    ${UpdateTime 2}=    Set Variable    ${UpdateTime}[8]
     ${UpdateTime 2_file}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 2}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 2_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 2}
+    ${MatchTime 2_id}    Set Variable    MatchTime-${UpdateTime 2}
     Element Attribute Should Match    ${MatchTime 2_id}    value    HT
-    ${MatchScore 2_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 2}
-    ${MatchScore 2_app}    Get Element Attribute    ${MatchScore 2_id}    value
+    ${MatchScore 2_id}    Set Variable    MatchScore-${UpdateTime 2}
     Element Attribute Should Match    ${MatchScore 2_id}    value    1 - 1
-    ${HomeOdds 2_file}    Get Value From Json    ${result}    $[sport_events][8][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 2_file}    Catenate    @{HomeOdds 2_file}
-    ${HomeOdds 2_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 2}
-    Element Attribute Should Match    ${HomeOdds 2_id}    value    ${HomeOdds 2_file}
-    ${AwayOdds 2_file}    Get Value From Json    ${result}    $[sport_events][8][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 2_file}    Catenate    @{AwayOdds 2_file}
-    ${AwayOdds 2_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 2}
-    Element Attribute Should Match    ${AwayOdds 2_id}    value    ${AwayOdds 2_file}
-    ${DrawOdds 2_file}    Get Value From Json    ${result}    $[sport_events][8][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 2_file}    Catenate    @{DrawOdds 2_file}
-    ${DrawOdds 2_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 2}
-    Element Attribute Should Match    ${DrawOdds 2_id}    value    ${DrawOdds 2_file}
-    ${UpdateTime 2_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 2}
-    Element Attribute Should Match    ${UpdateTime 2_id}    value    ${UpdateTime 2_file}
+    ${HomeOdds 2_id}    ${AwayOdds 2_id}    ${DrawOdds 2_id}    ${UpdateTime 2_id}=    Set Variable    HomeOdds-${UpdateTime 2}    AwayOdds-${UpdateTime 2}
+    ...    DrawOdds-${UpdateTime 2}    UpdateTime-${UpdateTime 2}
+    Element Attribute Should Match    ${HomeOdds 2_id}    value    @{odds_value}[24]
+    Element Attribute Should Match    ${AwayOdds 2_id}    value    @{odds_value}[25]
+    Element Attribute Should Match    ${DrawOdds 2_id}    value    @{odds_value}[26]
     ##Check values of row 3
-    ${UpdateTime 3}    Get Value From Json    ${result}    $[sport_events][7][markets_last_updated]
-    ${UpdateTime 3}    Catenate    @{UpdateTime 3}
+    ${UpdateTime 3}=    Set Variable    ${UpdateTime}[7]
     ${UpdateTime 3_file}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 3}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 3_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 3}
+    ${MatchTime 3_id}    Set Variable    MatchTime-${UpdateTime 3}
     Element Attribute Should Match    ${MatchTime 3_id}    value    35'
-    ${MatchScore 3_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 3}
-    ${MatchScore 3_app}    Get Element Attribute    ${MatchScore 3_id}    value
+    ${MatchScore 3_id}    Set Variable    MatchScore-${UpdateTime 3}
     Element Attribute Should Match    ${MatchScore 3_id}    value    1 - 1
-    ${HomeOdds 3_file}    Get Value From Json    ${result}    $[sport_events][7][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 3_file}    Catenate    @{HomeOdds 3_file}
-    ${HomeOdds 3_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 3}
-    Element Attribute Should Match    ${HomeOdds 3_id}    value    ${HomeOdds 3_file}
-    ${AwayOdds 3_file}    Get Value From Json    ${result}    $[sport_events][7][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 3_file}    Catenate    @{AwayOdds 3_file}
-    ${AwayOdds 3_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 3}
-    Element Attribute Should Match    ${AwayOdds 3_id}    value    ${AwayOdds 3_file}
-    ${DrawOdds 3_file}    Get Value From Json    ${result}    $[sport_events][7][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 3_file}    Catenate    @{DrawOdds 3_file}
-    ${DrawOdds 3_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 3}
-    Element Attribute Should Match    ${DrawOdds 3_id}    value    ${DrawOdds 3_file}
-    ${UpdateTime 3_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 3}
-    Element Attribute Should Match    ${UpdateTime 3_id}    value    ${UpdateTime 3_file}
+    ${HomeOdds 3_id}    ${AwayOdds 3_id}    ${DrawOdds 3_id}    ${UpdateTime 3_id}=    Set Variable    HomeOdds-${UpdateTime 3}    AwayOdds-${UpdateTime 3}
+    ...    DrawOdds-${UpdateTime 3}    UpdateTime-${UpdateTime 3}
+    Element Attribute Should Match    ${HomeOdds 3_id}    value    @{odds_value}[21]
+    Element Attribute Should Match    ${AwayOdds 3_id}    value    @{odds_value}[22]
+    Element Attribute Should Match    ${DrawOdds 3_id}    value    @{odds_value}[23]
     ##Check values of row 4
-    ${UpdateTime 4}    Get Value From Json    ${result}    $[sport_events][6][markets_last_updated]
-    ${UpdateTime 4}    Catenate    @{UpdateTime 4}
+    ${UpdateTime 4}=    Set Variable    ${UpdateTime}[6]
     ${UpdateTime 4_file}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 4}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 4_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 4}
+    ${MatchTime 4_id}    Set Variable    MatchTime-${UpdateTime 4}
     Element Attribute Should Match    ${MatchTime 4_id}    value    30'
-    ${MatchScore 4_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 4}
-    ${MatchScore 4_app}    Get Element Attribute    ${MatchScore 4_id}    value
+    ${MatchScore 4_id}    Set Variable    MatchScore-${UpdateTime 4}
     Element Attribute Should Match    ${MatchScore 4_id}    value    0 - 1
-    ${HomeOdds 4_file}    Get Value From Json    ${result}    $[sport_events][6][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 4_file}    Catenate    @{HomeOdds 4_file}
-    ${HomeOdds 4_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 4}
-    Element Attribute Should Match    ${HomeOdds 4_id}    value    ${HomeOdds 4_file}
-    ${AwayOdds 4_file}    Get Value From Json    ${result}    $[sport_events][6][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 4_file}    Catenate    @{AwayOdds 4_file}
-    ${AwayOdds 4_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 4}
-    Element Attribute Should Match    ${AwayOdds 4_id}    value    ${AwayOdds 4_file}
-    ${DrawOdds 4_file}    Get Value From Json    ${result}    $[sport_events][6][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 4_file}    Catenate    @{DrawOdds 4_file}
-    ${DrawOdds 4_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 4}
-    Element Attribute Should Match    ${DrawOdds 4_id}    value    ${DrawOdds 4_file}
-    ${UpdateTime 4_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 4}
-    Element Attribute Should Match    ${UpdateTime 4_id}    value    ${UpdateTime 4_file}
+    ${HomeOdds 4_id}    ${AwayOdds 4_id}    ${DrawOdds 4_id}    ${UpdateTime 4_id}=    Set Variable    HomeOdds-${UpdateTime 4}    AwayOdds-${UpdateTime 4}
+    ...    DrawOdds-${UpdateTime 4}    UpdateTime-${UpdateTime 4}
+    Element Attribute Should Match    ${HomeOdds 4_id}    value    @{odds_value}[18]
+    Element Attribute Should Match    ${AwayOdds 4_id}    value    @{odds_value}[19]
+    Element Attribute Should Match    ${DrawOdds 4_id}    value    @{odds_value}[20]
     ##Check values of row 5
-    ${UpdateTime 5}    Get Value From Json    ${result}    $[sport_events][5][markets_last_updated]
-    ${UpdateTime 5}    Catenate    @{UpdateTime 5}
+    ${UpdateTime 5}=    Set Variable    ${UpdateTime}[5]
     ${UpdateTime 5_file}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 5}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 5_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 5}
+    ${MatchTime 5_id}    Set Variable    MatchTime-${UpdateTime 5}
     Element Attribute Should Match    ${MatchTime 5_id}    value    20'
-    ${MatchScore 5_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 5}
-    ${MatchScore 5_app}    Get Element Attribute    ${MatchScore 5_id}    value
+    ${MatchScore 5_id}    Set Variable    MatchScore-${UpdateTime 5}
     Element Attribute Should Match    ${MatchScore 5_id}    value    0 - 0
-    ${HomeOdds 5_file}    Get Value From Json    ${result}    $[sport_events][5][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 5_file}    Catenate    @{HomeOdds 5_file}
-    ${HomeOdds 5_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 5}
-    Element Attribute Should Match    ${HomeOdds 5_id}    value    ${HomeOdds 5_file}
-    ${AwayOdds 5_file}    Get Value From Json    ${result}    $[sport_events][5][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 5_file}    Catenate    @{AwayOdds 5_file}
-    ${AwayOdds 5_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 5}
-    Element Attribute Should Match    ${AwayOdds 5_id}    value    ${AwayOdds 5_file}
-    ${DrawOdds 5_file}    Get Value From Json    ${result}    $[sport_events][5][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 5_file}    Catenate    @{DrawOdds 5_file}
-    ${DrawOdds 5_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 5}
-    Element Attribute Should Match    ${DrawOdds 5_id}    value    ${DrawOdds 5_file}
-    ${UpdateTime 5_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 5}
-    Element Attribute Should Match    ${UpdateTime 5_id}    value    ${UpdateTime 5_file}
+    ${HomeOdds 5_id}    ${AwayOdds 5_id}    ${DrawOdds 5_id}    ${UpdateTime 5_id}=    Set Variable    HomeOdds-${UpdateTime 5}    AwayOdds-${UpdateTime 5}
+    ...    DrawOdds-${UpdateTime 5}    UpdateTime-${UpdateTime 5}
+    Element Attribute Should Match    ${HomeOdds 5_id}    value    @{odds_value}[15]
+    Element Attribute Should Match    ${AwayOdds 5_id}    value    @{odds_value}[16]
+    Element Attribute Should Match    ${DrawOdds 5_id}    value    @{odds_value}[17]
     ##Check values of row 6
-    ${UpdateTime 6}    Get Value From Json    ${result}    $[sport_events][4][markets_last_updated]
-    ${UpdateTime 6}    Catenate    @{UpdateTime 6}
+    ${UpdateTime 6}=    Set Variable    ${UpdateTime}[4]
     ${UpdateTime 6_file}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 6}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 6_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 6}
+    ${MatchTime 6_id}    Set Variable    MatchTime-${UpdateTime 6}
     Element Attribute Should Match    ${MatchTime 6_id}    value    KO
-    ${MatchScore 6_id}    Catenate    SEPARATOR=    MatchScore-    ${UpdateTime 6}
-    ${MatchScore 6_app}    Get Element Attribute    ${MatchScore 6_id}    value
+    ${MatchScore 6_id}    Set Variable    MatchScore-${UpdateTime 6}
     Element Attribute Should Match    ${MatchScore 6_id}    value    0 - 0
-    ${HomeOdds 6_file}    Get Value From Json    ${result}    $[sport_events][4][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 6_file}    Catenate    @{HomeOdds 6_file}
-    ${HomeOdds 6_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 6}
-    Element Attribute Should Match    ${HomeOdds 6_id}    value    ${HomeOdds 6_file}
-    ${AwayOdds 6_file}    Get Value From Json    ${result}    $[sport_events][4][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 6_file}    Catenate    @{AwayOdds 6_file}
-    ${AwayOdds 6_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 6}
-    Element Attribute Should Match    ${AwayOdds 6_id}    value    ${AwayOdds 6_file}
-    ${DrawOdds 6_file}    Get Value From Json    ${result}    $[sport_events][4][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 6_file}    Catenate    @{DrawOdds 6_file}
-    ${DrawOdds 6_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 6}
-    Element Attribute Should Match    ${DrawOdds 6_id}    value    ${DrawOdds 6_file}
-    ${UpdateTime 6_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 6}
-    Element Attribute Should Match    ${UpdateTime 6_id}    value    ${UpdateTime 6_file}
+    ${HomeOdds 6_id}    ${AwayOdds 6_id}    ${DrawOdds 6_id}    ${UpdateTime 6_id}=    Set Variable    HomeOdds-${UpdateTime 6}    AwayOdds-${UpdateTime 6}
+    ...    DrawOdds-${UpdateTime 6}    UpdateTime-${UpdateTime 6}
+    Element Attribute Should Match    ${HomeOdds 6_id}    value    @{odds_value}[12]
+    Element Attribute Should Match    ${AwayOdds 6_id}    value    @{odds_value}[13]
+    Element Attribute Should Match    ${DrawOdds 6_id}    value    @{odds_value}[14]
     ##Check values of row 7
-    ${UpdateTime 7}    Get Value From Json    ${result}    $[sport_events][3][markets_last_updated]
-    ${UpdateTime 7}    Catenate    @{UpdateTime 7}
+    ${UpdateTime 7}=    Set Variable    ${UpdateTime}[3]
     ${UpdateTime 7_file}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 7}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 7_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 7}
+    ${MatchTime 7_id}    Set Variable    MatchTime-${UpdateTime 7}
     Element Attribute Should Match    ${MatchTime 7_id}    value    Live
-    ${HomeOdds 7_file}    Get Value From Json    ${result}    $[sport_events][3][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 7_file}    Catenate    @{HomeOdds 7_file}
-    ${HomeOdds 7_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 7}
-    Element Attribute Should Match    ${HomeOdds 7_id}    value    ${HomeOdds 7_file}
-    ${AwayOdds 7_file}    Get Value From Json    ${result}    $[sport_events][3][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 7_file}    Catenate    @{AwayOdds 7_file}
-    ${AwayOdds 7_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 7}
-    Element Attribute Should Match    ${AwayOdds 7_id}    value    ${AwayOdds 7_file}
-    ${DrawOdds 7_file}    Get Value From Json    ${result}    $[sport_events][3][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 7_file}    Catenate    @{DrawOdds 7_file}
-    ${DrawOdds 7_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 7}
-    Element Attribute Should Match    ${DrawOdds 7_id}    value    ${DrawOdds 7_file}
-    ${UpdateTime 7_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 7}
-    Element Attribute Should Match    ${UpdateTime 7_id}    value    ${UpdateTime 7_file}
+    ${HomeOdds 7_id}    ${AwayOdds 7_id}    ${DrawOdds 7_id}    ${UpdateTime 7_id}=    Set Variable    HomeOdds-${UpdateTime 7}    AwayOdds-${UpdateTime 7}
+    ...    DrawOdds-${UpdateTime 7}    UpdateTime-${UpdateTime 7}
+    Element Attribute Should Match    ${HomeOdds 7_id}    value    @{odds_value}[9]
+    Element Attribute Should Match    ${AwayOdds 7_id}    value    @{odds_value}[10]
+    Element Attribute Should Match    ${DrawOdds 7_id}    value    @{odds_value}[11]
     ##Check values of row 8
-    ${UpdateTime 8}    Get Value From Json    ${result}    $[sport_events][2][markets_last_updated]
-    ${UpdateTime 8}    Catenate    @{UpdateTime 8}
+    ${UpdateTime 8}=    Set Variable    ${UpdateTime}[2]
     ${UpdateTime 8_file}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 8}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 8_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 8}
+    ${MatchTime 8_id}    Set Variable    MatchTime-${UpdateTime 8}
     Element Attribute Should Match    ${MatchTime 8_id}    value    Live
-    ${HomeOdds 8_file}    Get Value From Json    ${result}    $[sport_events][2][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 8_file}    Catenate    @{HomeOdds 8_file}
-    ${HomeOdds 8_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 8}
-    Element Attribute Should Match    ${HomeOdds 8_id}    value    ${HomeOdds 8_file}
-    ${AwayOdds 8_file}    Get Value From Json    ${result}    $[sport_events][2][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 8_file}    Catenate    @{AwayOdds 8_file}
-    ${AwayOdds 8_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 8}
-    Element Attribute Should Match    ${AwayOdds 8_id}    value    ${AwayOdds 8_file}
-    ${DrawOdds 8_file}    Get Value From Json    ${result}    $[sport_events][2][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 8_file}    Catenate    @{DrawOdds 8_file}
-    ${DrawOdds 8_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 8}
-    Element Attribute Should Match    ${DrawOdds 8_id}    value    ${DrawOdds 8_file}
-    ${UpdateTime 8_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 8}
-    Element Attribute Should Match    ${UpdateTime 8_id}    value    ${UpdateTime 8_file}
+    ${HomeOdds 8_id}    ${AwayOdds 8_id}    ${DrawOdds 8_id}    ${UpdateTime 8_id}=    Set Variable    HomeOdds-${UpdateTime 8}    AwayOdds-${UpdateTime 8}
+    ...    DrawOdds-${UpdateTime 8}    UpdateTime-${UpdateTime 8}
+    Element Attribute Should Match    ${HomeOdds 8_id}    value    @{odds_value}[6]
+    Element Attribute Should Match    ${AwayOdds 8_id}    value    @{odds_value}[7]
+    Element Attribute Should Match    ${DrawOdds 8_id}    value    @{odds_value}[8]
     ##Check values of row 9
-    ${UpdateTime 9}    Get Value From Json    ${result}    $[sport_events][1][markets_last_updated]
-    ${UpdateTime 9}    Catenate    @{UpdateTime 9}
+    ${UpdateTime 9}=    Set Variable    ${UpdateTime}[1]
     ${UpdateTime 9_file}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 9}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 9_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 9}
+    ${MatchTime 9_id}    Set Variable    MatchTime-${UpdateTime 9}
     Element Attribute Should Match    ${MatchTime 9_id}    value    Live
-    ${HomeOdds 9_file}    Get Value From Json    ${result}    $[sport_events][1][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 9_file}    Catenate    @{HomeOdds 9_file}
-    ${HomeOdds 9_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 9}
-    Element Attribute Should Match    ${HomeOdds 9_id}    value    ${HomeOdds 9_file}
-    ${AwayOdds 9_file}    Get Value From Json    ${result}    $[sport_events][1][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 9_file}    Catenate    @{AwayOdds 9_file}
-    ${AwayOdds 9_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 9}
-    Element Attribute Should Match    ${AwayOdds 9_id}    value    ${AwayOdds 9_file}
-    ${DrawOdds 9_file}    Get Value From Json    ${result}    $[sport_events][1][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 9_file}    Catenate    @{DrawOdds 9_file}
-    ${DrawOdds 9_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 9}
-    Element Attribute Should Match    ${DrawOdds 9_id}    value    ${DrawOdds 9_file}
-    ${UpdateTime 9_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 9}
-    Element Attribute Should Match    ${UpdateTime 9_id}    value    ${UpdateTime 9_file}
+    ${HomeOdds 9_id}    ${AwayOdds 9_id}    ${DrawOdds 9_id}    ${UpdateTime 9_id}=    Set Variable    HomeOdds-${UpdateTime 9}    AwayOdds-${UpdateTime 9}
+    ...    DrawOdds-${UpdateTime 9}    UpdateTime-${UpdateTime 9}
+    Element Attribute Should Match    ${HomeOdds 9_id}    value    @{odds_value}[3]
+    Element Attribute Should Match    ${AwayOdds 9_id}    value    @{odds_value}[4]
+    Element Attribute Should Match    ${DrawOdds 9_id}    value    @{odds_value}[5]
     ##Check values of row 10
-    ${UpdateTime 10}    Get Value From Json    ${result}    $[sport_events][0][markets_last_updated]
-    ${UpdateTime 10}    Catenate    @{UpdateTime 10}
+    ${UpdateTime 10}=    Set Variable    ${UpdateTime}[0]
     ${UpdateTime 10_file}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 10}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    ${MatchTime 10_id}    Catenate    SEPARATOR=    MatchTime-    ${UpdateTime 10}
+    ${MatchTime 10_id}    Set Variable    MatchTime-${UpdateTime 10}
     Element Attribute Should Match    ${MatchTime 10_id}    value    Opening
-    ${HomeOdds 10_file}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][outcomes][0][odds]
-    ${HomeOdds 10_file}    Catenate    @{HomeOdds 10_file}
-    ${HomeOdds 10_id}    Catenate    SEPARATOR=    HomeOdds-    ${UpdateTime 10}
-    Element Attribute Should Match    ${HomeOdds 10_id}    value    ${HomeOdds 10_file}
-    ${AwayOdds 10_file}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][outcomes][1][odds]
-    ${AwayOdds 10_file}    Catenate    @{AwayOdds 10_file}
-    ${AwayOdds 10_id}    Catenate    SEPARATOR=    AwayOdds-    ${UpdateTime 10}
-    Element Attribute Should Match    ${AwayOdds 10_id}    value    ${AwayOdds 10_file}
-    ${DrawOdds 10_file}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][outcomes][2][odds]
-    ${DrawOdds 10_file}    Catenate    @{DrawOdds 10_file}
-    ${DrawOdds 10_id}    Catenate    SEPARATOR=    DrawOdds-    ${UpdateTime 10}
-    Element Attribute Should Match    ${DrawOdds 10_id}    value    ${DrawOdds 10_file}
-    ${UpdateTime 10_id}    Catenate    SEPARATOR=    UpdateTime-    ${UpdateTime 10}
-    Element Attribute Should Match    ${UpdateTime 10_id}    value    ${UpdateTime 10_file}
+    ${HomeOdds 10_id}    ${AwayOdds 10_id}    ${DrawOdds 10_id}    ${UpdateTime 10_id}=    Set Variable    HomeOdds-${UpdateTime 10}    AwayOdds-${UpdateTime 10}
+    ...    DrawOdds-${UpdateTime 10}    UpdateTime-${UpdateTime 10}
+    Element Attribute Should Match    ${HomeOdds 10_id}    value    @{opening_odds_value}[0]
+    Element Attribute Should Match    ${AwayOdds 10_id}    value    @{opening_odds_value}[1]
+    Element Attribute Should Match    ${DrawOdds 10_id}    value    @{opening_odds_value}[2]
     Remove File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
 
 SP5_Odds_1x2_Post_Match
