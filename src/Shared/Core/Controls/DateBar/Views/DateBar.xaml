@@ -48,6 +48,7 @@
                                     <Frame Rotation="90" Style="{StaticResource DateBarBox}">
                                         <StackLayout Style="{StaticResource StacklayoutVerticalCenter}">
                                             <Label
+                                                AutomationId="{Binding Date.Day, StringFormat='DateBar-{0}'}"
                                                 Style="{StaticResource DateBarDate}"
                                                 Text="{Binding Date.Day}"
                                                 TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
