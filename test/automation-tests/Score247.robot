@@ -110,13 +110,13 @@ SP1_Scores_Date_Bar
     ${date5}    Convert To Integer    @{date5}[0]
     ${date6}    Convert To Integer    @{date6}[0]
     ${date7}    Convert To Integer    @{date7}[0]
-    Page Should Contain Element    accessibility_id=${date1}
-    Page Should Contain Element    accessibility_id=${date2}
-    Page Should Contain Element    accessibility_id=${date3}
-    Page Should Contain Element    accessibility_id=${date4}
-    Page Should Contain Element    accessibility_id=${date5}
-    Page Should Contain Element    accessibility_id=${date6}
-    Page Should Contain Element    accessibility_id=${date7}
+    Page Should Contain Element    accessibility_id=DateBar-${date1}
+    Page Should Contain Element    accessibility_id=DateBar-${date2}
+    Page Should Contain Element    accessibility_id=DateBar-${date3}
+    Page Should Contain Element    accessibility_id=DateBar-${date4}
+    Page Should Contain Element    accessibility_id=DateBar-${date5}
+    Page Should Contain Element    accessibility_id=DateBar-${date6}
+    Page Should Contain Element    accessibility_id=DateBar-${date7}
 
 SP1_Scores_Match_Leagues
     [Documentation]    Verify Score page should be default screen of the app when user opens app (S001)
@@ -159,7 +159,7 @@ SP2_Score_Post_Pre_Match_Date1
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date1_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date1_dd}"]
+    Click Element    DateBar-${date1_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test01
@@ -203,7 +203,7 @@ SP2_Score_Post_Pre_Match_Date2
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date2_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date2_dd}"]
+    Click Element    DateBar-${date2_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test03
@@ -247,7 +247,7 @@ SP2_Score_Post_Pre_Match_Date3
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date3_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date3_dd}"]
+    Click Element    DateBar-${date3_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test05
@@ -291,7 +291,7 @@ SP2_Score_Post_Pre_Match_Date5
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date5_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date5_dd}"]
+    click control    DateBar-${date5_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test07
@@ -323,7 +323,7 @@ SP2_Score_Post_Pre_Match_Date6
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date6_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date6_dd}"]
+    Click Element    DateBar-${date6_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test09
@@ -347,7 +347,7 @@ SP2_Score_Post_Pre_Match_Date7
     ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
     #Get data from app for match 1
     ${date7_dd}    Convert to Integer    ${ac_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${date7_dd}"]
+    Click Element    DateBar-${date7_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test10
@@ -364,23 +364,23 @@ SP2_Score_Post_Pre_Match_Date7
     Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test10    value    ${match1_away_name}
 
 SP3_SP4_List_Event_Of_Match1
-    Update_Template_List_Event_Of_Match1
-    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
-    #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    Comment    Update_Template_List_Event_Of_Match1
+    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${file}
+    Comment    Integer    response status    200
+    Comment    Output
     ${result}=    Load JSON From File    Template_Files/Run/List_event_data_template1.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
-    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
+    click control    ${btn_Scores}
+    click control    DateBar-${current_date}
     #Go to Match Info page from Scores page
-    Click Element    accessibility_id=HomeTeamName-sr:match:test11
-    Sleep    3
-    Click Element    accessibility_id=INFO
-    Sleep    3
+    click control    accessibility_id=HomeTeamName-sr:match:test11
+    click control    accessibility_id=INFO
+    Sleep    3s
+    swipe down    accessibility_id=MatchInfoHeaderTitle
     #Event1_Yellowcard_1st
     Element Attribute Should Match    accessibility_id=MatchTime-3-yellow_card    value    10'
     Element Attribute Should Match    accessibility_id=HomePlayerName-3-yellow_card    value    @{player_name}[0]
@@ -402,6 +402,7 @@ SP3_SP4_List_Event_Of_Match1
     Element Attribute Should Match    accessibility_id=HomeImage-6-score_change    name    HomeImage-6-score_change
     #Event5_yellowredcard
     Element Attribute Should Match    accessibility_id=MatchTime-8-yellow_red_card    value    45+2'
+    log    AwayPlayerName-8-yellow_red_card
     Element Attribute Should Match    accessibility_id=HomePlayerName-8-yellow_red_card    value    @{player_name}[5]
     Element Attribute Should Match    accessibility_id=HomeImage-8-yellow_red_card    name    HomeImage-8-yellow_red_card
     #Event6_halftime
@@ -414,16 +415,18 @@ SP3_SP4_List_Event_Of_Match1
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match2
-    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template2.txt
-    #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template2.txt
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${file}
+    Comment    Integer    response status    200
+    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template2.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    click element    ${btn_Scores}
+    Sleep    3
+    Click Element    DateBar-${current_date}
     Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test12
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test12
@@ -460,16 +463,18 @@ SP3_SP4_List_Event_Of_Match2
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match3
-    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template3.txt
-    #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template3.txt
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${file}
+    Comment    Integer    response status    200
+    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template3.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    click element    ${btn_Scores}
+    Sleep    3
+    Click Element    DateBar-${current_date}
     Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test13
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test13
@@ -497,16 +502,18 @@ SP3_SP4_List_Event_Of_Match3
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match4
-    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template4.txt
-    #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template4.txt
+    Comment    #Push events
+    Comment    Post    ${Push_File}    ${file}
+    Comment    Integer    response status    200
+    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template4.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    click element    ${btn_Scores}
+    Sleep    3
+    Click Element    DateBar-${current_date}
     Sleep    3
     ${Kick_Of_Time}=    Get Element Attribute    accessibility_id=LeagueEventDate-sr:tournament:25839    value
     Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test14
@@ -574,7 +581,9 @@ SP3_SP4_List_Event_Of_Match4
 SP6_Odd_Movement_Of_Bettype_1x2
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    click element    ${btn_Scores}
+    Sleep    3
+    Click Element    DateBar-${current_date}
     Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
     #Go to Match Info page at ODDS tab from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test11
@@ -596,6 +605,7 @@ SP6_Odd_Movement_Of_Bettype_1x2
     ${UpdateTime 1}=    Set Variable    ${UpdateTime}[9]
     ${UpdateTime 1_file}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 1}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    swipe down    accessibility_id=X
     ${MatchTime 1_id}    Set Variable    MatchTime-${UpdateTime 1}
     Element Attribute Should Match    ${MatchTime 1_id}    value    HT
     ${MatchScore 1_id}    Set Variable    MatchScore-${UpdateTime 1}
@@ -721,7 +731,7 @@ SP5_Odds_1x2_Post_Match
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    ${btn_Scores}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    Click Element    DateBar-${current_date}
     Sleep    3
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test14
@@ -815,7 +825,7 @@ SP6_Odds_HDP_PostMatch
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    ${btn_Scores}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    Click Element    DateBar-${current_date}
     Sleep    3
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test14
@@ -918,7 +928,7 @@ SP6_Odds_Over_Under_PostMatch
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     Click Element    ${btn_Scores}
-    Click Element    //XCUIElementTypeStaticText[@name="${current_date}"]
+    Click Element    DateBar-${current_date}
     Sleep    3
     #Go to Match Info page from Scores page
     Click Element    accessibility_id=HomeTeamName-sr:match:test14

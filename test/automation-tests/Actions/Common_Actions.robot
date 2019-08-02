@@ -8,6 +8,7 @@ Library           OperatingSystem
 Library           String
 Library           DatabaseLibrary
 Library           PostgreSQLDB
+Library           REST
 
 *** Variables ***
 ${database}       Score247.AutomationTest
@@ -17,6 +18,7 @@ ${host}           10.18.200.110
 ${port}           5444
 ${Push_File}      https://api.nexdev.net/V4/api/Mock/PushMatchEvents
 ${Push_odds}      https://api.nexdev.net/V4/api/Mock/InsertOdds?forceInsert=true
+${cf_timeout}     10s
 
 *** Keywords ***
 Start Appium Server
@@ -26,9 +28,8 @@ Start Appium Server
 Open Application On Real Ios Device
     [Arguments]    ${deviceName}    ${udid}
     Open Application    http://0.0.0.0:4723/wd/hub    platformName=iOS    platformVersion=12.2    deviceName=${deviceName}    bundleId=Score247.LiveScore    udid=${udid}
-    ...    xcodeOrgId=FFHZ4F8L88    xcodeSigningId=iPhone Developer    newCommandTimeout=1500    usePrebuiltWDA=false    newCommandTimeout=120    #
-    ...    # ${EMPTY}    # FFHZ4F8L88    iPhone Developer"    updatedWDABundleId=WebDriverAgentRunner.WebDriverAgentRunner
-    sleep    3s    \    #    deviceName=Iphone6    udid=34a775db8a3839d4651f0f066d28675b6756623a
+    ...    xcodeOrgId=FFHZ4F8L88    xcodeSigningId=iPhone Developer    newCommandTimeout=1500    usePrebuiltWDA=false    newCommandTimeout=120
+    sleep    3s
 
 Open Application On Simulator
     [Arguments]    ${deviceName}
@@ -39,8 +40,14 @@ Init_Simulator
     [Arguments]    ${simulator_name}
     Comment    Start Appium Server
     Insert_Matches
-    Push_Event_PostMatch
     Push_Odds_For_PostMatch
+    ###    Post data for tcs SP3-SP4
+    Update_Template_List_Event_Of_Match1
+    Push_Event    ${EXECDIR}/Template_Files/Run/List_event_data_template1.txt
+    Push_Event    ${EXECDIR}/Template_Files/List_event_data_template2.txt
+    Push_Event    ${EXECDIR}/Template_Files/List_event_data_template3.txt
+    Push_Event    ${EXECDIR}/Template_Files/List_event_data_template4.txt
+    ###    Complete push data test
     Open Application On Simulator    ${simulator_name}
 
 Init_Real Device
@@ -245,10 +252,25 @@ GetOdds_Over_Under
     ...    ${bk_opening_value_OU}    ${bk_opening_under}
     [Return]    ${OU_Odds_infor}
 
-Push_Event_PostMatch
-    Update_Template_List_Event_Of_Match1
-    ${file}=    Get File    Template_Files/Run/List_event_data_template1.txt
+Push_Event
+    [Arguments]    ${dir_pushfile}
+    ${file}=    Get File    ${dir_pushfile}
     #Push events
-    Post    ${Push_File}    ${file}
-    Integer    response status    200
-    Output
+    ${ac_event}    Post    ${Push_File}    ${file}
+    ${event_status}=    Run Keyword and return status    Integer    response status    200
+    run keyword if    '${event_status}' != 'True'    log    PUSH DATA IS FAILED AT THE FIRST TIME
+    run keyword if    '${event_status}' != 'True'    Post    ${Push_File}    ${file}
+
+Click Control
+    [Arguments]    ${locator}
+    [Documentation]    This action is use to click on element with waiting for element visible
+    wait until element is visible    ${locator}    ${cf_timeout}    Can not found element after timeout
+    click element    ${locator}
+
+Swipe Down
+    [Arguments]    ${locator}
+    [Documentation]    This action is use to wipe down from locator. Support for case auto test need to refresh data by pulling down
+    ${ac_element_locator_dic}    get element location    ${locator}
+    ${ac_element_locator}    get dictionary values    ${ac_element_locator_dic}
+    ${ac_element_y}    evaluate    ${ac_element_locator}[0]+30
+    swipe by percent    ${ac_element_locator}[0]    ${ac_element_locator}[1]    ${ac_element_y}    ${ac_element_locator}[1]

@@ -345,7 +345,7 @@
           "id": "sr:player:176727",
           "name": "Gershom Cox"
         },
-        "team": "away",
+        "team": "home",
         "period": 1,
         "period_type": "regular_period",
         "sport_event_id": "sr:match:test11",
