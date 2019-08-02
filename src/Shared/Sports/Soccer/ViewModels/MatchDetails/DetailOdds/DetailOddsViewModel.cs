@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             this.matchId = matchId;
 
             oddsFormat = OddsFormat.Decimal.Value;
-            SelectedBetType = BetType.OneXTwo;
+            SelectedBetType = BetType.AsianHDP;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
 
