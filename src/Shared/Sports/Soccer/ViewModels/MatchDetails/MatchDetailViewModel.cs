@@ -186,18 +186,6 @@ namespace LiveScore.Soccer.ViewModels
             BuildScoreAndEventDate(match);
 
             BuildSecondLeg(match);
-
-            BuildPenaltyShootOut(match);
-        }
-
-        private void BuildPenaltyShootOut(IMatch match)
-        {
-            var penaltyResult = match.MatchResult?.GetPenaltyResult();
-
-            if (penaltyResult != null && match.MatchResult.EventStatus.IsClosed)
-            {
-                DisplayPenaltyShootOut = $"{AppResources.PenaltyShootOut}: {penaltyResult.HomeScore} - {penaltyResult.AwayScore}";
-            }
         }
 
         private void BuildSecondLeg(IMatch match)

@@ -27,7 +27,13 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="42" />
                 </Grid.RowDefinitions>
-
+                
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchInfoMinutes}"
+                    Text="PEN"/>
+                
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"

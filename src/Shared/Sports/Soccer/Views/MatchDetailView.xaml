@@ -148,13 +148,6 @@
                         Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
 
-                <FlexLayout IsVisible="{Binding DisplayPenaltyShootOut, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
-                    <Label
-                        AutomationId="PenaltyDetail"
-                        Style="{StaticResource MatchGeneralInfoImportantContent}"
-                        Text="{Binding DisplayPenaltyShootOut}" />
-                </FlexLayout>
-
                 <tabStrip:TabStrip x:Name="TabStrip" ItemsSource="{Binding TabViews}" />
 
                 <ActivityIndicator
