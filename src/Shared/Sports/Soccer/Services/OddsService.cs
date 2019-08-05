@@ -10,7 +10,7 @@
 
     public interface ISoccerOddsApi
     {
-        [Get("/soccer/{lang}/Odds/{matchId}/{betTypeId}/{formatType}")]
+        [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]
         Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
 
         [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]

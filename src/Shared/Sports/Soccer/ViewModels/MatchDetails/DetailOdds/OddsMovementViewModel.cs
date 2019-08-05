@@ -60,7 +60,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 oddsFormat = parameters["Format"].ToString();
 
                 Title = $"{bookmaker.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
-                HasData = betType == BetType.OneXTwo; // Load data only for 1X2 First
             }
             catch (Exception ex)
             {
@@ -82,12 +81,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         private async Task LoadOddsMovement(bool isRefresh = false)
         {
-            // Load data only for 1X2 First
-            if (betType != BetType.OneXTwo)
-            {
-                return;
-            }
-
             IsLoading = !isRefresh;
 
             var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, (int)betType, oddsFormat, bookmaker.Id, isRefresh);

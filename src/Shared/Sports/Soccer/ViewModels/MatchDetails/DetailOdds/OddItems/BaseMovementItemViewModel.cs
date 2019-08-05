@@ -16,11 +16,15 @@
         private static readonly IDictionary<BetType, Type> ViewModelMapper = new Dictionary<BetType, Type>
         {
             { BetType.OneXTwo, typeof(OneXTwoMovementItemViewModel) },
+            { BetType.AsianHDP, typeof(AsianHdpMovementItemViewModel) },
+            { BetType.OverUnder, typeof(OverUnderMovementItemViewModel) },
         };
 
         private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>
         {
             { BetType.OneXTwo, new OneXTwoMovementItemTemplate() },
+            { BetType.AsianHDP, new AsianHdpMovementItemTemplate() },
+            { BetType.OverUnder, new OverUnderMovementItemTemplate() },
         };
 
         public BaseMovementItemViewModel(

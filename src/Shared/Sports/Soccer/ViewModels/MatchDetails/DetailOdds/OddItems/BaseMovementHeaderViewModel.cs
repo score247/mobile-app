@@ -12,7 +12,9 @@
     {
         private static readonly IDictionary<BetType, DataTemplate> TemplateMapper = new Dictionary<BetType, DataTemplate>
         {
-            { BetType.OneXTwo, new OneXTwoMovementHeaderTemplate() }
+            { BetType.OneXTwo, new OneXTwoMovementHeaderTemplate() },
+            { BetType.AsianHDP, new AsianHdpMovementHeaderTemplate() },
+            { BetType.OverUnder, new OverUnderMovementHeaderTemplate() }
         };
 
         public BaseMovementHeaderViewModel(
