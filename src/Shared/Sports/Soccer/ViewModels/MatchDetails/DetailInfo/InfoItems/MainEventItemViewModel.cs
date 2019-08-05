@@ -44,6 +44,12 @@
                 return;
             }
 
+            if (TimelineEvent.IsExtraTimeHalfTimeBreak())
+            {
+                BuildExtraTimeHalfTime();
+                return;
+            }
+
             if (IsAfterExtraTime())
             {
                 BuildAfterExtraTime();
@@ -64,6 +70,16 @@
             {
                 var result = Result.MatchPeriods?.FirstOrDefault();
                 Score = $"{result?.HomeScore} - {result?.AwayScore}";
+            }
+        }
+
+        private void BuildExtraTimeHalfTime()
+        {
+            MainEventStatus = AppResources.ExtraTimeHalfTime;
+
+            if (Result != null)
+            {
+                Score = $"{Result.HomeScore} - {Result.AwayScore}";
             }
         }
 

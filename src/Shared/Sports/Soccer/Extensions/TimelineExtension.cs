@@ -12,7 +12,8 @@
             EventTypes.YellowCard,
             EventTypes.RedCard,
             EventTypes.YellowRedCard,
-            EventTypes.PenaltyShootout
+            EventTypes.PenaltyShootout,
+            EventTypes.BreakStart
         };
 
         public static bool IsHalfTimeBreak(this ITimeline timeline)
@@ -26,6 +27,9 @@
 
         public static bool IsNotExtraTimeHalfTimeBreak(this ITimeline timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType != PeriodTypes.ExtraTimeHalfTime;
+
+        public static bool IsExtraTimeHalfTimeBreak(this ITimeline timeline)
+            => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.ExtraTimeHalfTime;
 
         public static bool IsMatchEndedFullTime(this ITimeline timeline, IMatchResult matchResult)
             => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsEnded == true;
