@@ -37,16 +37,14 @@
         {
             base.BuildInfo();
 
-            if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type))
+            if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type.DisplayName))
             {
-                var eventType = Enumeration.FromDisplayName<EventTypes>(TimelineEvent.Type);
-
-                if (EventImages.ContainsKey(eventType))
+                if (EventImages.ContainsKey(TimelineEvent.Type))
                 {
-                    ImageSource = EventImages[eventType];
+                    ImageSource = EventImages[TimelineEvent.Type];
                 }
 
-                if (VisibleScoreEvents.Contains(eventType))
+                if (VisibleScoreEvents.Contains(TimelineEvent.Type))
                 {
                     VisibleScore = true;
                 }

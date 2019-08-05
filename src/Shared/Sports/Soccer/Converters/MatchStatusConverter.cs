@@ -30,7 +30,7 @@
             { MatchStatus.EndedAfterPenalties, AppResources.AP },
             { MatchStatus.EndedExtraTime, AppResources.AET },
             { MatchStatus.AwaitingExtraTime, AppResources.AwaitET },
-            { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }           
+            { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
         };
 
         private static readonly IDictionary<MatchStatus, int> PeriodEndTimes = new Dictionary<MatchStatus, int>
@@ -93,7 +93,7 @@
             var timeline = match.LatestTimeline;
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
-            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown.DisplayName || stoppageTimeHasValue))
+            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
             {
                 return BuildMatchInjuryTime(match, timeline);
             }

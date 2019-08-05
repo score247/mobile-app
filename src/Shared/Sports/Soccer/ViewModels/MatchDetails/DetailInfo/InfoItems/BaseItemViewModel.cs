@@ -78,14 +78,12 @@
 
         public bool VisibleAwayImage { get; protected set; }
 
-        public EventTypes TimelineEventType => Enumeration.FromDisplayName<EventTypes>(TimelineEvent.Type);
-
         public BaseItemViewModel CreateInstance()
         {
-            if (ViewModelMapper.ContainsKey(TimelineEventType))
+            if (ViewModelMapper.ContainsKey(TimelineEvent.Type))
             {
                 return Activator.CreateInstance(
-                    ViewModelMapper[TimelineEventType],
+                    ViewModelMapper[TimelineEvent.Type],
                     TimelineEvent, Result, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
@@ -94,9 +92,9 @@
 
         public DataTemplate CreateTemplate()
         {
-            if (TemplateMapper.ContainsKey(TimelineEventType))
+            if (TemplateMapper.ContainsKey(TimelineEvent.Type))
             {
-                return TemplateMapper[TimelineEventType];
+                return TemplateMapper[TimelineEvent.Type];
             }
 
             return new MainEventItemTemplate();
@@ -118,7 +116,7 @@
             if (matchResult.EventStatus.IsClosed())
             {
                 var timelineEvents = timelines.ToList();
-                timelineEvents.RemoveAll(t => Enumeration.FromDisplayName<EventTypes>(t.Type) == EventTypes.PenaltyShootout && t.IsFirstShoot);
+                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
 
                 return timelineEvents;
             }

@@ -6,41 +6,41 @@
 
     public static class TimelineExtension
     {
-        private static readonly string[] DetailInfoEventTypes = new[] {
-            EventTypes.ScoreChange.DisplayName,
-            EventTypes.PenaltyMissed.DisplayName,
-            EventTypes.YellowCard.DisplayName,
-            EventTypes.RedCard.DisplayName,
-            EventTypes.YellowRedCard.DisplayName,
-            EventTypes.PenaltyShootout.DisplayName
+        private static readonly EventTypes[] DetailInfoEventTypes = new[] {
+            EventTypes.ScoreChange,
+            EventTypes.PenaltyMissed,
+            EventTypes.YellowCard,
+            EventTypes.RedCard,
+            EventTypes.YellowRedCard,
+            EventTypes.PenaltyShootout
         };
 
         public static bool IsHalfTimeBreak(this ITimeline timeline)
-            => timeline?.Type == EventTypes.BreakStart.DisplayName && timeline?.PeriodType == PeriodTypes.Pause.DisplayName;
+            => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.Pause;
 
         public static bool IsAwaitingExtraTimeBreak(this ITimeline timeline)
-            => timeline?.Type == EventTypes.BreakStart.DisplayName && timeline?.PeriodType == PeriodTypes.AwaitingExtraTime.DisplayName;
+            => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.AwaitingExtraTime;
 
         public static bool IsAwaitingPenaltiesBreak(this ITimeline timeline)
-            => timeline?.Type == EventTypes.BreakStart.DisplayName && timeline?.PeriodType == PeriodTypes.AwaitingPenalties.DisplayName;
+            => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.AwaitingPenalties;
 
         public static bool IsNotExtraTimeHalfTimeBreak(this ITimeline timeline)
-            => timeline?.Type == EventTypes.BreakStart.DisplayName && timeline?.PeriodType != PeriodTypes.ExtraTimeHalfTime.DisplayName;
+            => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType != PeriodTypes.ExtraTimeHalfTime;
 
         public static bool IsMatchEndedFullTime(this ITimeline timeline, IMatchResult matchResult)
-            => timeline?.Type == EventTypes.MatchEnded.DisplayName && matchResult?.MatchStatus?.IsEnded == true;
+            => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsEnded == true;
 
         public static bool IsMatchEndedExtraTime(this ITimeline timeline, IMatchResult matchResult)
-           => timeline?.Type == EventTypes.MatchEnded.DisplayName && matchResult?.MatchStatus?.IsAfterExtraTime == true;
+           => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsAfterExtraTime == true;
 
         public static bool IsMatchEndNotAfterPenalty(this ITimeline timeline, IMatchResult matchResult)
-            => timeline.Type == EventTypes.MatchEnded.DisplayName && !matchResult.MatchStatus.IsAfterPenalties;
+            => timeline.Type == EventTypes.MatchEnded && !matchResult.MatchStatus.IsAfterPenalties;
 
         public static bool IsPenaltyShootOutStart(this ITimeline timeline)
-            => timeline?.Type == EventTypes.PeriodStart.DisplayName && timeline?.PeriodType == PeriodTypes.Penalties.DisplayName;
+            => timeline?.Type == EventTypes.PeriodStart && timeline?.PeriodType == PeriodTypes.Penalties;
 
         public static bool IsPenaltyFirstShoot(this ITimeline timeline)
-            => timeline.Type == EventTypes.PenaltyShootout.DisplayName && timeline.IsFirstShoot;
+            => timeline.Type == EventTypes.PenaltyShootout && timeline.IsFirstShoot;
 
         public static bool OfHomeTeam(this ITimeline timeline)
             => timeline?.Team == "home";

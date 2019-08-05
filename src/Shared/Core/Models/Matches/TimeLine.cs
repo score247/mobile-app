@@ -2,11 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Teams;
 
     public interface ITimeline : IEntity<string, string>
     {
-        string Type { get; }
+        EventTypes Type { get; }
 
         DateTime Time { get; }
 
@@ -20,7 +21,7 @@
 
         int Period { get; }
 
-        string PeriodType { get; }
+        PeriodTypes PeriodType { get; }
 
         int HomeScore { get; }
 
@@ -61,7 +62,7 @@
 
     public class Timeline : Entity<string, string>, ITimeline
     {
-        public string Type { get; set; }
+        public EventTypes Type { get; set; }
 
         public DateTime Time { get; set; }
 
@@ -75,7 +76,7 @@
 
         public int Period { get; set; }
 
-        public string PeriodType { get; set; }
+        public PeriodTypes PeriodType { get; set; }
 
         public int HomeScore { get; set; }
 
