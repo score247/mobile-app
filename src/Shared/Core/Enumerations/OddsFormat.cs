@@ -2,19 +2,14 @@
 {
     public class OddsFormat : Enumeration
     {
-        public static readonly OddsFormat Decimal = new OddsFormat("dec", nameof(Decimal));
+        public static readonly OddsFormat Decimal = new OddsFormat(1, "dec");
 
         public OddsFormat()
         {
         }
 
-        public OddsFormat(string value, string displayName)
+        public OddsFormat(byte value, string displayName)
             : base(value, displayName)
-        {
-        }
-
-        public OddsFormat(string value)
-            : base(value, value)
         {
         }
     }

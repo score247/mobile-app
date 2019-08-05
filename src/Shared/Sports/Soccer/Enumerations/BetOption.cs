@@ -6,25 +6,25 @@
     {
         public const string Home = "home";
 
-        public static readonly BetOption HomeType = new BetOption(Home, nameof(Home));
+        public static readonly BetOption HomeType = new BetOption(1, Home);
 
         public const string Draw = "draw";
 
-        public static readonly BetOption DrawType = new BetOption(Draw, nameof(Draw));
+        public static readonly BetOption DrawType = new BetOption(2, Draw);
 
         public const string Away = "away";
 
-        public static readonly BetOption AwayType = new BetOption(Away, nameof(Away));
+        public static readonly BetOption AwayType = new BetOption(3, Away);
 
         public const string Over = "over";
 
-        public static readonly BetOption OverType = new BetOption(Over, nameof(Over));
+        public static readonly BetOption OverType = new BetOption(4, Over);
 
         public const string Under = "under";
 
-        public static readonly BetOption UnderType = new BetOption(Under, nameof(Under));
+        public static readonly BetOption UnderType = new BetOption(5, Under);
 
-        private BetOption(string value, string displayName)
+        private BetOption(byte value, string displayName)
            : base(value, displayName)
         {
         }

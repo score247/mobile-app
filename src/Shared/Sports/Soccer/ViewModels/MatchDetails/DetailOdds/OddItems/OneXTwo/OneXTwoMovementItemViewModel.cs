@@ -57,7 +57,7 @@
             if (awayOdds != null)
             {
                 AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
-                AwayOddsTrend = awayOdds.OddsTrend.Value;
+                AwayOddsTrend = awayOdds.OddsTrend.DisplayName;
             }
         }
 
@@ -68,7 +68,7 @@
             if (drawOdds != null)
             {
                 DrawOdds = drawOdds.LiveOdds.ToOddsFormat();
-                DrawOddsTrend = drawOdds.OddsTrend.Value;
+                DrawOddsTrend = drawOdds.OddsTrend.DisplayName;
             }
         }
 
@@ -79,7 +79,7 @@
             if (homeOdds != null)
             {
                 HomeOdds = homeOdds.LiveOdds.ToOddsFormat();
-                HomeOddsTrend = homeOdds.OddsTrend.Value;
+                HomeOddsTrend = homeOdds.OddsTrend.DisplayName;
             }
         }
 

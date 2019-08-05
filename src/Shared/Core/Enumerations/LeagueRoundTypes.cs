@@ -8,17 +8,17 @@
         public const string Qualifier = "qualification";
         public const string Variable = "variable";
 
-        public static readonly LeagueRoundTypes CupRound = new LeagueRoundTypes(Cup, nameof(Cup));
-        public static readonly LeagueRoundTypes GroupRound = new LeagueRoundTypes(Group, nameof(Group));
-        public static readonly LeagueRoundTypes PlayOffRound = new LeagueRoundTypes(PlayOff, nameof(PlayOff));
-        public static readonly LeagueRoundTypes QualifierRound = new LeagueRoundTypes(Qualifier, nameof(Qualifier));
-        public static readonly LeagueRoundTypes VariableRound = new LeagueRoundTypes(Variable, nameof(Variable));
+        public static readonly LeagueRoundTypes CupRound = new LeagueRoundTypes(1, Cup);
+        public static readonly LeagueRoundTypes GroupRound = new LeagueRoundTypes(2, Group);
+        public static readonly LeagueRoundTypes PlayOffRound = new LeagueRoundTypes(3, PlayOff);
+        public static readonly LeagueRoundTypes QualifierRound = new LeagueRoundTypes(4, Qualifier);
+        public static readonly LeagueRoundTypes VariableRound = new LeagueRoundTypes(5, Variable);
 
         public LeagueRoundTypes()
         {
         }
 
-        private LeagueRoundTypes(string value, string displayName)
+        private LeagueRoundTypes(byte value, string displayName)
             : base(value, displayName)
         {
         }

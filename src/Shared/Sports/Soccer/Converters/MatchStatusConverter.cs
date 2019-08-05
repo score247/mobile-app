@@ -12,7 +12,7 @@
 
     public class MatchStatusConverter : IMatchStatusConverter
     {
-        private static readonly IDictionary<string, string> StatusMapper = new Dictionary<string, string>
+        private static readonly IDictionary<MatchStatus, string> StatusMapper = new Dictionary<MatchStatus, string>
         {
             { MatchStatus.Postponed, AppResources.Postp },
             { MatchStatus.StartDelayed, AppResources.StartDelayed },
@@ -30,15 +30,15 @@
             { MatchStatus.EndedAfterPenalties, AppResources.AP },
             { MatchStatus.EndedExtraTime, AppResources.AET },
             { MatchStatus.AwaitingExtraTime, AppResources.AwaitET },
-            { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
+            { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }           
         };
 
-        private static readonly IDictionary<string, int> PeriodEndTimes = new Dictionary<string, int>
+        private static readonly IDictionary<MatchStatus, int> PeriodEndTimes = new Dictionary<MatchStatus, int>
         {
-            { MatchStatus.FirstHaft, 45 },
-            { MatchStatus.SecondHaft, 90 },
-            { MatchStatus.FirstHaftExtra, 105 },
-            { MatchStatus.SecondHaftExtra, 120 }
+            { MatchStatus.FirstHalf, 45 },
+            { MatchStatus.SecondHalf, 90 },
+            { MatchStatus.FirstHalfExtra, 105 },
+            { MatchStatus.SecondHalfExtra, 120 }
         };
 
         private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
@@ -66,12 +66,12 @@
                 return match.EventDate.ToTimeWithoutSecond();
             }
 
-            if (match.MatchResult.EventStatus.IsLive)
+            if (match.MatchResult.EventStatus.IsLive())
             {
                 return BuildStatusForLive(match);
             }
 
-            if (match.MatchResult.EventStatus.IsClosed)
+            if (match.MatchResult.EventStatus.IsClosed())
             {
                 var status = BuildMatchStatus(match);
 
@@ -93,7 +93,7 @@
             var timeline = match.LatestTimeline;
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
-            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
+            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown.DisplayName || stoppageTimeHasValue))
             {
                 return BuildMatchInjuryTime(match, timeline);
             }
@@ -105,9 +105,9 @@
         {
             var matchStatus = match.MatchResult?.MatchStatus;
 
-            if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus.Value))
+            if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus))
             {
-                return StatusMapper[matchStatus.Value];
+                return StatusMapper[matchStatus];
             }
 
             return string.Empty;
@@ -118,9 +118,9 @@
         {
             var eventStatus = match.MatchResult?.EventStatus;
 
-            if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus.Value))
+            if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus))
             {
-                return StatusMapper[eventStatus.Value];
+                return StatusMapper[eventStatus];
             }
 
             return string.Empty;
@@ -128,7 +128,7 @@
 
         private string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
         {
-            PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus.Value, out int periodEndTime);
+            PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;
             var annoucedInjuryTime = Task.Run(() => localStorage.GetValueOrDefault(cacheKey, 0)).Result;
 

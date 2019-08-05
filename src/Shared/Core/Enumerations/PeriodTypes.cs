@@ -2,33 +2,25 @@
 {
     public class PeriodTypes : Enumeration
     {
-        public const string RegularPeriod = "regular_period";
-        public const string Overtime = "overtime";
-        public const string Penalties = "penalties";
-        public const string Pause = "pause";
-        public const string AwaitingExtraTime = "awaiting_extra";
-        public const string ExtraTimeHalfTime = "extra_time_halftime";
-        public const string AwaitingPenalties = "awaiting_penalties";
-
-        public static readonly PeriodTypes RegularPeriodType = new PeriodTypes(RegularPeriod, nameof(RegularPeriod));
-        public static readonly PeriodTypes OvertimeType = new PeriodTypes(Overtime, nameof(Overtime));
-        public static readonly PeriodTypes PenaltiesType = new PeriodTypes(Penalties, nameof(Penalties));
-        public static readonly PeriodTypes PauseType = new PeriodTypes(Pause, nameof(Pause));
-        public static readonly PeriodTypes AwaitingExtraTimeType = new PeriodTypes(AwaitingExtraTime, nameof(AwaitingExtraTime));
-        public static readonly PeriodTypes ExtraTimeHalfTimeType = new PeriodTypes(ExtraTimeHalfTime, nameof(ExtraTimeHalfTime));
-        public static readonly PeriodTypes AwaitingPenaltiesType = new PeriodTypes(AwaitingPenalties, nameof(AwaitingPenalties));
+        public static readonly PeriodTypes RegularPeriod = new PeriodTypes(1, "regular_period");
+        public static readonly PeriodTypes Overtime = new PeriodTypes(2, "overtime");
+        public static readonly PeriodTypes Penalties = new PeriodTypes(3, "penalties");
+        public static readonly PeriodTypes Pause = new PeriodTypes(4, "pause");
+        public static readonly PeriodTypes AwaitingExtraTime = new PeriodTypes(5, "awaiting_extra");
+        public static readonly PeriodTypes ExtraTimeHalfTime = new PeriodTypes(6, "extra_time_halftime");
+        public static readonly PeriodTypes AwaitingPenalties = new PeriodTypes(7, "awaiting_penalties");
 
         public PeriodTypes()
         {
         }
 
-        private PeriodTypes(string value, string displayName)
+        private PeriodTypes(byte value, string displayName)
             : base(value, displayName)
         {
         }
 
-        public bool IsOvertime => Value == Overtime;
+        public bool IsOvertime => Value == Overtime.Value;
 
-        public bool IsPenalties => Value == Penalties;
+        public bool IsPenalties => Value == Penalties.Value;
     }
 }

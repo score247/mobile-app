@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value);
+            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.DisplayName);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOddsMovement(true)));
         }
 

@@ -9,253 +9,253 @@ namespace LiveScore.Core.Tests.Enumerations
         public void NotStartedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.NotStartedStatus;
+            var actual = MatchStatus.NotStarted;
 
             // Assert
-            Assert.Equal("not_started", actual.Value);
-            Assert.Equal("NotStarted", actual.DisplayName);
+            Assert.Equal(1, actual.Value);
+            Assert.Equal("not_started", actual.DisplayName);          
         }
 
         [Fact]
         public void LiveStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.LiveStatus;
+            var actual = MatchStatus.Live;
 
             // Assert
-            Assert.Equal("live", actual.Value);
-            Assert.Equal("Live", actual.DisplayName);
+            Assert.Equal(5, actual.Value);
+            Assert.Equal("live", actual.DisplayName);
         }
 
         [Fact]
         public void FirstHaftStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.FirstHaftStatus;
+            var actual = MatchStatus.FirstHalf;
 
             // Assert
-            Assert.Equal("1st_half", actual.Value);
-            Assert.Equal("FirstHaft", actual.DisplayName);
+            Assert.Equal(6, actual.Value);
+            Assert.Equal("1st_half", actual.DisplayName);
         }
 
         [Fact]
         public void SecondHaftStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.SecondHaftStatus;
+            var actual = MatchStatus.SecondHalf;
 
             // Assert
-            Assert.Equal("2nd_half", actual.Value);
-            Assert.Equal("SecondHaft", actual.DisplayName);
+            Assert.Equal(7, actual.Value);
+            Assert.Equal("2nd_half", actual.DisplayName);
         }
 
         [Fact]
         public void OvertimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.OvertimeStatus;
+            var actual = MatchStatus.Overtime;
 
             // Assert
-            Assert.Equal("overtime", actual.Value);
-            Assert.Equal("Overtime", actual.DisplayName);
+            Assert.Equal(8, actual.Value);
+            Assert.Equal("overtime", actual.DisplayName);
         }
 
         [Fact]
         public void FirstHaftExtraStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.FirstHaftExtraStatus;
+            var actual = MatchStatus.FirstHalfExtra;
 
             // Assert
-            Assert.Equal("1st_extra", actual.Value);
-            Assert.Equal("FirstHaftExtra", actual.DisplayName);
+            Assert.Equal(9, actual.Value);
+            Assert.Equal("1st_extra", actual.DisplayName);
         }
 
         [Fact]
         public void SecondHaftExtraStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.SecondHaftExtraStatus;
+            var actual = MatchStatus.SecondHalfExtra;
 
             // Assert
-            Assert.Equal("2nd_extra", actual.Value);
-            Assert.Equal("SecondHaftExtra", actual.DisplayName);
+            Assert.Equal(10, actual.Value);
+            Assert.Equal("2nd_extra", actual.DisplayName);
         }
 
         [Fact]
         public void AwaitingPenaltiesStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.AwaitingPenaltiesStatus;
+            var actual = MatchStatus.AwaitingPenalties;
 
             // Assert
-            Assert.Equal("awaiting_penalties", actual.Value);
-            Assert.Equal("AwaitingPenalties", actual.DisplayName);
+            Assert.Equal(11, actual.Value);
+            Assert.Equal("awaiting_penalties", actual.DisplayName);
         }
 
         [Fact]
         public void PenaltiesStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.PenaltiesStatus;
+            var actual = MatchStatus.Penalties;
 
             // Assert
-            Assert.Equal("penalties", actual.Value);
-            Assert.Equal("Penalties", actual.DisplayName);
+            Assert.Equal(12, actual.Value);
+            Assert.Equal("penalties", actual.DisplayName);
         }
 
         [Fact]
         public void PauseStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.PauseStatus;
+            var actual = MatchStatus.Pause;
 
             // Assert
-            Assert.Equal("pause", actual.Value);
-            Assert.Equal("Pause", actual.DisplayName);
+            Assert.Equal(13, actual.Value);
+            Assert.Equal("pause", actual.DisplayName);
         }
 
         [Fact]
         public void AwaitingExtraTimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.AwaitingExtraTimeStatus;
+            var actual = MatchStatus.AwaitingExtraTime;
 
             // Assert
-            Assert.Equal("awaiting_extra_time", actual.Value);
-            Assert.Equal("AwaitingExtraTime", actual.DisplayName);
+            Assert.Equal(14, actual.Value);
+            Assert.Equal("awaiting_extra_time", actual.DisplayName);
         }
 
         [Fact]
         public void InterruptedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.InterruptedStatus;
+            var actual = MatchStatus.Interrupted;
 
             // Assert
-            Assert.Equal("interrupted", actual.Value);
-            Assert.Equal("Interrupted", actual.DisplayName);
+            Assert.Equal(15, actual.Value);
+            Assert.Equal("interrupted", actual.DisplayName);
         }
 
         [Fact]
         public void AbandonedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.AbandonedStatus;
+            var actual = MatchStatus.Abandoned;
 
             // Assert
-            Assert.Equal("abandoned", actual.Value);
-            Assert.Equal("Abandoned", actual.DisplayName);
+            Assert.Equal(20, actual.Value);
+            Assert.Equal("abandoned", actual.DisplayName);
         }
 
         [Fact]
         public void PostponedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.PostponedStatus;
+            var actual = MatchStatus.Postponed;
 
             // Assert
-            Assert.Equal("postponed", actual.Value);
-            Assert.Equal("Postponed", actual.DisplayName);
+            Assert.Equal(2, actual.Value);
+            Assert.Equal("postponed", actual.DisplayName);
         }
 
         [Fact]
         public void DelayedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.DelayedStatus;
+            var actual = MatchStatus.Delayed;
 
             // Assert
-            Assert.Equal("delayed", actual.Value);
-            Assert.Equal("Delayed", actual.DisplayName);
+            Assert.Equal(19, actual.Value);
+            Assert.Equal("delayed", actual.DisplayName);
         }
 
         [Fact]
         public void EndedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.EndedStatus;
+            var actual = MatchStatus.Ended;
 
             // Assert
-            Assert.Equal("ended", actual.Value);
-            Assert.Equal("Ended", actual.DisplayName);
+            Assert.Equal(22, actual.Value);
+            Assert.Equal("ended", actual.DisplayName);
         }
 
         [Fact]
         public void ClosedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.ClosedStatus;
+            var actual = MatchStatus.Closed;
 
             // Assert
-            Assert.Equal("closed", actual.Value);
-            Assert.Equal("Closed", actual.DisplayName);
+            Assert.Equal(23, actual.Value);
+            Assert.Equal("closed", actual.DisplayName);
         }
 
         [Fact]
         public void HalftimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.HalftimeStatus;
+            var actual = MatchStatus.Halftime;
 
             // Assert
-            Assert.Equal("halftime", actual.Value);
-            Assert.Equal("Halftime", actual.DisplayName);
+            Assert.Equal(16, actual.Value);
+            Assert.Equal("halftime", actual.DisplayName);
         }
 
         [Fact]
         public void FullTimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.FullTimeStatus;
+            var actual = MatchStatus.FullTime;
 
             // Assert
-            Assert.Equal("full-time", actual.Value);
-            Assert.Equal("FullTime", actual.DisplayName);
+            Assert.Equal(17, actual.Value);
+            Assert.Equal("full-time", actual.DisplayName);
         }
 
         [Fact]
         public void ExtraTimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.ExtraTimeStatus;
+            var actual = MatchStatus.ExtraTime;
 
             // Assert
-            Assert.Equal("extra_time", actual.Value);
-            Assert.Equal("ExtraTime", actual.DisplayName);
+            Assert.Equal(18, actual.Value);
+            Assert.Equal("extra_time", actual.DisplayName);
         }
 
         [Fact]
         public void EndedExtraTimeStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.EndedExtraTimeStatus;
+            var actual = MatchStatus.EndedExtraTime;
 
             // Assert
-            Assert.Equal("aet", actual.Value);
-            Assert.Equal("EndedExtraTime", actual.DisplayName);
+            Assert.Equal(24, actual.Value);
+            Assert.Equal("aet", actual.DisplayName);
         }
 
         [Fact]
         public void EndedAfterPenaltiesStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.EndedAfterPenaltiesStatus;
+            var actual = MatchStatus.EndedAfterPenalties;
 
             // Assert
-            Assert.Equal("ap", actual.Value);
-            Assert.Equal("EndedAfterPenalties", actual.DisplayName);
+            Assert.Equal(25, actual.Value);
+            Assert.Equal("ap", actual.DisplayName);
         }
 
         [Fact]
         public void StartDelayedStatus_Always_CreateCorrectType()
         {
             // Act
-            var actual = MatchStatus.StartDelayedStatus;
+            var actual = MatchStatus.StartDelayed;
 
             // Assert
-            Assert.Equal("start_delayed", actual.Value);
-            Assert.Equal("StartDelayed", actual.DisplayName);
+            Assert.Equal(3, actual.Value);
+            Assert.Equal("start_delayed", actual.DisplayName);
         }
     }
 }

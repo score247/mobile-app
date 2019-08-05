@@ -10,7 +10,7 @@
 
     public class DefaultItemViewModel : BaseItemViewModel
     {
-        private static readonly IDictionary<string, string> EventImages = new Dictionary<string, string>
+        private static readonly IDictionary<EventTypes, string> EventImages = new Dictionary<EventTypes, string>
         {
             { EventTypes.YellowCard, Images.YellowCard.Value },
             { EventTypes.YellowRedCard, Images.RedYellowCard.Value },
@@ -18,7 +18,7 @@
             { EventTypes.PenaltyMissed, Images.MissPenaltyGoal.Value },
         };
 
-        private static readonly string[] VisibleScoreEvents = new[]
+        private static readonly EventTypes[] VisibleScoreEvents = new[]
         {
             EventTypes.PenaltyMissed
         };
@@ -37,16 +37,19 @@
         {
             base.BuildInfo();
 
-            var eventType = TimelineEvent?.Type ?? string.Empty;
-
-            if (EventImages.ContainsKey(eventType))
+            if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type))
             {
-                ImageSource = EventImages[eventType];
-            }
+                var eventType = Enumeration.FromDisplayName<EventTypes>(TimelineEvent.Type);
 
-            if (VisibleScoreEvents.Contains(eventType))
-            {
-                VisibleScore = true;
+                if (EventImages.ContainsKey(eventType))
+                {
+                    ImageSource = EventImages[eventType];
+                }
+
+                if (VisibleScoreEvents.Contains(eventType))
+                {
+                    VisibleScore = true;
+                }
             }
 
             if (TimelineEvent.OfHomeTeam())

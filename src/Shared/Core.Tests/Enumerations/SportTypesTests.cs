@@ -12,7 +12,7 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = SportTypes.Soccer;
 
             // Assert
-            Assert.Equal("1", actual.Value);
+            Assert.Equal(1, actual.Value);
             Assert.Equal("Soccer", actual.DisplayName);
         }
 
@@ -23,7 +23,7 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = SportTypes.Basketball;
 
             // Assert
-            Assert.Equal("2", actual.Value);
+            Assert.Equal(2, actual.Value);
             Assert.Equal("Basketball", actual.DisplayName);
         }
 
@@ -34,7 +34,7 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = SportTypes.ESport;
 
             // Assert
-            Assert.Equal("3", actual.Value);
+            Assert.Equal(3, actual.Value);
             Assert.Equal("ESport", actual.DisplayName);
         }
 

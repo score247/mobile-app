@@ -2,21 +2,16 @@
 {
     public class OddsTrend : Enumeration
     {
-        public static readonly OddsTrend Neutral = new OddsTrend("neutral", nameof(Neutral));
-        public static readonly OddsTrend Up = new OddsTrend("up", nameof(Up));
-        public static readonly OddsTrend Down = new OddsTrend("down", nameof(Down));
+        public static readonly OddsTrend Neutral = new OddsTrend(1, "neutral");
+        public static readonly OddsTrend Up = new OddsTrend(2, "up");
+        public static readonly OddsTrend Down = new OddsTrend(3, "down");
 
         public OddsTrend()
         {
         }
 
-        public OddsTrend(string value, string displayName)
+        public OddsTrend(byte value, string displayName)
             : base(value, displayName)
-        {
-        }
-
-        public OddsTrend(string value)
-            : base(value, value)
         {
         }
     }

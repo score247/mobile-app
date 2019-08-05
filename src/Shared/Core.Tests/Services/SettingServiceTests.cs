@@ -51,8 +51,8 @@ namespace LiveScore.Core.Tests.Services
         public void CurrentLanguage_Default_ShouldReturnDefault()
         {
             // Arrange
-            var expected = Languages.English.Value;
-            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
+            var expected = Languages.English.DisplayName;
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.DisplayName);
 
             // Act
             var actual = setting.CurrentLanguage;
@@ -65,7 +65,7 @@ namespace LiveScore.Core.Tests.Services
         public void CurrentLanguage_Assigned_ShouldInjectCacheService()
         {
             // Arrange
-            var expected = Languages.Vietnamese.Value;
+            var expected = Languages.Vietnamese.DisplayName;
 
             // Act
             setting.CurrentLanguage = expected;
@@ -105,9 +105,9 @@ namespace LiveScore.Core.Tests.Services
         public void UserSettings_ShouldReturnCorrectly()
         {
             // Arrange
-            var expected = new UserSettings(SportTypes.Soccer.Value, Languages.English.Value, TimeZoneInfo.Local.BaseUtcOffset.ToString());
+            var expected = new UserSettings(SportTypes.Soccer.DisplayName, Languages.English.DisplayName, TimeZoneInfo.Local.BaseUtcOffset.ToString());
             mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentTimeZone))), Arg.Any<TimeZoneInfo>()).Returns(TimeZoneInfo.Local);
-            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.Value);
+            mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentLanguage))), Arg.Any<string>()).Returns(Languages.English.DisplayName);
             mockCache.GetValueOrDefaultFromUserAccount(Arg.Is<string>(x => x.Equals(nameof(setting.CurrentSportType))), Arg.Any<SportTypes>()).Returns(SportTypes.Soccer);
 
             // Act

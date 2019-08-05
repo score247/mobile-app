@@ -5,79 +5,58 @@ namespace LiveScore.Core.Enumerations
     public class EventTypes : Enumeration
     {
         //break_start
-        public const string BreakStart = "break_start";
+        public static readonly EventTypes BreakStart = new EventTypes(1, "break_start");
 
-        public static readonly EventTypes BreakStartType = new EventTypes(BreakStart, nameof(BreakStart));
-
-        public const string MatchEnded = "match_ended";
-
-        public static readonly EventTypes MatchEndedType = new EventTypes(MatchEnded, nameof(MatchEnded));
-
-        public const string MatchStarted = "match_started";
-
-        public static readonly EventTypes MatchStartedType = new EventTypes(MatchStarted, nameof(MatchStarted));
-
-        public const string PeriodStart = "period_start";
-
-        public static readonly EventTypes PeriodStartType = new EventTypes(PeriodStart, nameof(PeriodStart));
-
-        public const string PenaltyShootout = "penalty_shootout";
-
-        public static readonly EventTypes PenaltyShootoutType = new EventTypes(PenaltyShootout, nameof(PenaltyShootout));
-
-        public const string PenaltyMissed = "penalty_missed";
-
-        public static readonly EventTypes PenaltyMissedType = new EventTypes(PenaltyMissed, nameof(PenaltyMissed));
         //cancelled_video_assistant_referee
         //corner_kick
         //free_kick
         //goal_kick
         //injury
         //injury_return
-        //injury_time_shown
-        public const string InjuryTimeShown = "injury_time_shown";
 
-        public static readonly EventTypes InjuryTimeShownType = new EventTypes(InjuryTimeShown, nameof(InjuryTimeShown));
+        //injury_time_shown
+        public static readonly EventTypes InjuryTimeShown = new EventTypes(2, "injury_time_shown");
 
         //match_ended
+        public static readonly EventTypes MatchEnded = new EventTypes(3, "match_ended");
+
         //match_started
+        public static readonly EventTypes MatchStarted = new EventTypes(4, "match_started");
+
         //offside
         //penalty_awarded
         //penalty_missed
+        public static readonly EventTypes PenaltyMissed = new EventTypes(5, "penalty_missed");
+
         //penalty_shootout
+        public static readonly EventTypes PenaltyShootout = new EventTypes(6, "penalty_shootout");
+
         //period_score
+
         //period_start
+        public static readonly EventTypes PeriodStart = new EventTypes(7, "period_start");
+
         //possible_video_assistant_referee
         //red_card
-        public const string RedCard = "red_card";
-
-        public static readonly EventTypes RedCardType = new EventTypes(RedCard, nameof(RedCard));
+        public static readonly EventTypes RedCard = new EventTypes(8, "red_card");
 
         //score_change
-        public const string ScoreChange = "score_change";
-
-        public static readonly EventTypes ScoreChangeType = new EventTypes(ScoreChange, nameof(ScoreChange));
+        public static readonly EventTypes ScoreChange = new EventTypes(9, "score_change");
 
         //shot_off_target
         //shot_on_target
         //shot_saved
         //substitution
-        public const string Substitution = "substitution";
-
-        public static readonly EventTypes SubstitutionType = new EventTypes(Substitution, nameof(Substitution));
+        public static readonly EventTypes Substitution = new EventTypes(10, "substitution");
 
         //throw_in
         //video_assistant_referee
         //video_assistant_referee_over
         //yellow_card
-        public const string YellowCard = "yellow_card";
-
-        public static readonly EventTypes YellowCardType = new EventTypes(YellowCard, nameof(YellowCard));
+        public static readonly EventTypes YellowCard = new EventTypes(11, "yellow_card");
 
         //yellow_red_card
-        public const string YellowRedCard = "yellow_red_card";
-
-        public static readonly EventTypes YellowRedCardType = new EventTypes(YellowRedCard, nameof(YellowRedCard));
+        public static readonly EventTypes YellowRedCard = new EventTypes(12, "yellow_red_card");
 
         public EventTypes()
         {
@@ -86,21 +65,21 @@ namespace LiveScore.Core.Enumerations
         public static List<string> BasicSoccerEventTypes
            => new List<string>
            {
-                MatchStarted,
-                PeriodStart,
-                BreakStart,
-                ScoreChange,
-                YellowCard,
-                YellowRedCard,
-                RedCard,
-                PenaltyShootout
+                MatchStarted.DisplayName,
+                PeriodStart.DisplayName,
+                BreakStart.DisplayName,
+                ScoreChange.DisplayName,
+                YellowCard.DisplayName,
+                YellowRedCard.DisplayName,
+                RedCard.DisplayName,
+                PenaltyShootout.DisplayName
            };
 
-        private EventTypes(string value, string displayName)
+        private EventTypes(byte value, string displayName)
             : base(value, displayName)
         {
         }
 
-        public bool IsInjuryTimeShown => Value == InjuryTimeShown;
+        public bool IsInjuryTimeShown => this == InjuryTimeShown;
     }
 }

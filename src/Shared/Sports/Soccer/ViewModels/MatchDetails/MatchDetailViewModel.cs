@@ -59,7 +59,7 @@ namespace LiveScore.Soccer.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             matchHubConnection = hubService.BuildMatchHubConnection();
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.DisplayName);
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -158,12 +158,12 @@ namespace LiveScore.Soccer.ViewModels
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(string sportId, Dictionary<string, MatchPushEvent> payload)
+        protected internal void OnReceivingMatchEvent(byte sportId, Dictionary<string, MatchPushEvent> payload)
         {
             var match = MatchViewModel.Match;
 
@@ -192,7 +192,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var winnerId = match.MatchResult?.AggregateWinnerId;
 
-            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed)
+            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed())
             {
                 DisplaySecondLeg = $"{AppResources.SecondLeg} {match.MatchResult.AggregateHomeScore} - {match.MatchResult.AggregateAwayScore}";
             }

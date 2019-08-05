@@ -5,165 +5,120 @@
     [AddINotifyPropertyChangedInterface]
     public class MatchStatus : Enumeration
     {
-        //not_started – The match is scheduled to be played
-        public const string NotStarted = "not_started";
+        ////not_started – The match is scheduled to be played
+        public static readonly MatchStatus NotStarted = new MatchStatus(1, "not_started");
 
-        public static readonly MatchStatus NotStartedStatus = new MatchStatus(NotStarted, nameof(NotStarted));
+        ////postponed – The match has been postponed to a future date
+        public static readonly MatchStatus Postponed = new MatchStatus(2, "postponed");
 
-        //live – The match is currently in progress
-        public const string Live = "live";
+        ////start_delayed – The start of the match has been temporarily delayed
+        public static readonly MatchStatus StartDelayed = new MatchStatus(3, "start_delayed");
 
-        public static readonly MatchStatus LiveStatus = new MatchStatus(Live, nameof(Live));
+        ////cancelled – The match has been canceled and will not be played
+        public static readonly MatchStatus Cancelled = new MatchStatus(4, "cancelled");
 
-        //1st_half – The match is in the first half
-        public const string FirstHaft = "1st_half";
+        ////live – The match is currently in progress
+        public static readonly MatchStatus Live = new MatchStatus(5, "live");
 
-        public static readonly MatchStatus FirstHaftStatus = new MatchStatus(FirstHaft, nameof(FirstHaft));
+        ////1st_half – The match is in the first half
+        public static readonly MatchStatus FirstHalf = new MatchStatus(6, "1st_half");
 
-        //2nd_half – The match is in the second half
-        public const string SecondHaft = "2nd_half";
+        ////2nd_half – The match is in the second half
+        public static readonly MatchStatus SecondHalf = new MatchStatus(7, "2nd_half");
 
-        public static readonly MatchStatus SecondHaftStatus = new MatchStatus(SecondHaft, nameof(SecondHaft));
+        ////overtime – The match is in overtime
+        public static readonly MatchStatus Overtime = new MatchStatus(8, "overtime");
 
-        //overtime – The match is in overtime
-        public const string Overtime = "overtime";
+        ////1st_extra – The match is in the first extra period
+        public static readonly MatchStatus FirstHalfExtra = new MatchStatus(9, "1st_extra");
 
-        public static readonly MatchStatus OvertimeStatus = new MatchStatus(Overtime, nameof(Overtime));
+        ////2nd_extra – The match is in the second extra period
+        public static readonly MatchStatus SecondHalfExtra = new MatchStatus(10, "2nd_extra");
 
-        //1st_extra – The match is in the first extra period
-        public const string FirstHaftExtra = "1st_extra";
+        ////awaiting_penalties – Waiting for announcement of penalties
+        public static readonly MatchStatus AwaitingPenalties = new MatchStatus(11, "awaiting_penalties");
 
-        public static readonly MatchStatus FirstHaftExtraStatus = new MatchStatus(FirstHaftExtra, nameof(FirstHaftExtra));
+        ////penalties – Penalties are ongoing
+        public static readonly MatchStatus Penalties = new MatchStatus(12, "penalties");
 
-        //2nd_extra – The match is in the second extra period
-        public const string SecondHaftExtra = "2nd_extra";
+        ////pause – The match is paused
+        public static readonly MatchStatus Pause = new MatchStatus(13, "pause");
 
-        public static readonly MatchStatus SecondHaftExtraStatus = new MatchStatus(SecondHaftExtra, nameof(SecondHaftExtra));
+        ////awaiting_extra_time – Waiting on referee to announce extra time
+        public static readonly MatchStatus AwaitingExtraTime = new MatchStatus(14, "awaiting_extra_time");
 
-        //awaiting_penalties – Waiting for announcement of penalties
-        public const string AwaitingPenalties = "awaiting_penalties";
+        ////interrupted – The match has been interrupted
+        public static readonly MatchStatus Interrupted = new MatchStatus(15, "interrupted");
 
-        public static readonly MatchStatus AwaitingPenaltiesStatus = new MatchStatus(AwaitingPenalties, nameof(AwaitingPenalties));
+        ////halftime – The match is in halftime
+        public static readonly MatchStatus Halftime = new MatchStatus(16, "halftime");
 
-        //penalties – Penalties are ongoing
-        public const string Penalties = "penalties";
+        ////full-time – The match has ended
+        public static readonly MatchStatus FullTime = new MatchStatus(17, "full-time");
 
-        public static readonly MatchStatus PenaltiesStatus = new MatchStatus(Penalties, nameof(Penalties));
+        ////extra_time – Extra time has been added
+        public static readonly MatchStatus ExtraTime = new MatchStatus(18, "extra_time");
 
-        //pause – The match is paused
-        public const string Pause = "pause";
+        ////delayed – The match has been temporarily delayed and will be continued;
+        public static readonly MatchStatus Delayed = new MatchStatus(19, "delayed");
 
-        public static readonly MatchStatus PauseStatus = new MatchStatus(Pause, nameof(Pause));
+        ////abandoned – The match has been abandoned
+        public static readonly MatchStatus Abandoned = new MatchStatus(20, "abandoned");
 
-        //awaiting_extra_time – Waiting on referee to announce extra time
-        public const string AwaitingExtraTime = "awaiting_extra_time";
+        ////abandoned – The match has been abandoned
+        public static readonly MatchStatus ExtraTimeHalfTime = new MatchStatus(21, "extra_time_halftime");
 
-        public static readonly MatchStatus AwaitingExtraTimeStatus = new MatchStatus(AwaitingExtraTime, nameof(AwaitingExtraTime));
+        ////ended – The match is over
+        public static readonly MatchStatus Ended = new MatchStatus(22, "ended");
 
-        //interrupted – The match has been interrupted
-        public const string Interrupted = "interrupted";
+        ////closed – The match results have been confirmed
+        public static readonly MatchStatus Closed = new MatchStatus(23, "closed");
 
-        public static readonly MatchStatus InterruptedStatus = new MatchStatus(Interrupted, nameof(Interrupted));
+        ////aet – The match has ended after extra time
+        public static readonly MatchStatus EndedExtraTime = new MatchStatus(24, "aet");
 
-        //abandoned – The match has been abandoned
-        public const string Abandoned = "abandoned";
-
-        public static readonly MatchStatus AbandonedStatus = new MatchStatus(Abandoned, nameof(Abandoned));
-
-        //postponed – The match has been postponed to a future date
-        public const string Postponed = "postponed";
-
-        public static readonly MatchStatus PostponedStatus = new MatchStatus(Postponed, nameof(Postponed));
-
-        //delayed – The match has been temporarily delayed and will be continued
-        public const string Delayed = "delayed";
-
-        public static readonly MatchStatus DelayedStatus = new MatchStatus(Delayed, nameof(Delayed));
-
-        //ended – The match is over
-        public const string Ended = "ended";
-
-        public static readonly MatchStatus EndedStatus = new MatchStatus(Ended, nameof(Ended));
-
-        //closed – The match results have been confirmed
-        public const string Closed = "closed";
-
-        public static readonly MatchStatus ClosedStatus = new MatchStatus(Closed, nameof(Closed));
-
-        //halftime – The match is in halftime
-        public const string Halftime = "halftime";
-
-        public static readonly MatchStatus HalftimeStatus = new MatchStatus(Halftime, nameof(Halftime));
-
-        //full-time – The match has ended
-        public const string FullTime = "full-time";
-
-        public static readonly MatchStatus FullTimeStatus = new MatchStatus(FullTime, nameof(FullTime));
-
-        //extra_time – Extra time has been added
-        public const string ExtraTime = "extra_time";
-
-        public static readonly MatchStatus ExtraTimeStatus = new MatchStatus(ExtraTime, nameof(ExtraTime));
-
-        //aet – The match has ended after extra time
-        public const string EndedExtraTime = "aet";
-
-        public static readonly MatchStatus EndedExtraTimeStatus = new MatchStatus(EndedExtraTime, nameof(EndedExtraTime));
-
-        //ap – The match has ended after penalties
-        public const string EndedAfterPenalties = "ap";
-
-        public static readonly MatchStatus EndedAfterPenaltiesStatus = new MatchStatus(EndedAfterPenalties, nameof(EndedAfterPenalties));
-
-        //start_delayed – The start of the match has been temporarily delayed
-        public const string StartDelayed = "start_delayed";
-
-        public static readonly MatchStatus StartDelayedStatus = new MatchStatus(StartDelayed, nameof(StartDelayed));
-
-        //canceled – The match has been canceled and will not be played
-        public const string Cancelled = "cancelled";
-
-        public static readonly MatchStatus CancelledStatus = new MatchStatus(Cancelled, nameof(Cancelled));
-
-        //extra_time_halftime – The match is paused
-        public const string ExtraTimeHalfTime = "extra_time_halftime";
-
-        public static readonly MatchStatus ExtraTimeHalfTimeStatus = new MatchStatus(ExtraTimeHalfTime, nameof(ExtraTimeHalfTime));
+        ////ap – The match has ended after penalties
+        public static readonly MatchStatus EndedAfterPenalties = new MatchStatus(25, "ap");
 
         public MatchStatus()
         {
         }
 
-        private MatchStatus(string value, string displayName)
+        public MatchStatus(byte value, string displayName)
             : base(value, displayName)
         {
         }
 
-        public bool IsPreMatch => Value == NotStarted || Value == Postponed || Value == Cancelled || Value == StartDelayed;
+        public MatchStatus(byte value)
+            : base(value, value.ToString())
+        {
+        }
 
-        public bool IsNotStarted => Value == NotStarted;
+        public bool IsPreMatch => this == NotStarted || this == Postponed || this == Cancelled || this == StartDelayed;
 
-        public bool IsLive => Value == Live;
+        public bool IsNotStarted => this == NotStarted;
 
-        public bool IsClosed => Value == Closed;
+        public bool IsLive() => this == Live;
 
-        public bool IsEnded => Value == Ended;
+        public bool IsClosed() => this == Closed;
 
-        public bool IsFirstHalf => Value == FirstHaft;
+        public bool IsEnded => this == Ended;
 
-        public bool IsSecondHalf => Value == SecondHaft;
+        public bool IsFirstHalf => this == FirstHalf;
 
-        public bool IsAfterExtraTime => Value == EndedExtraTime;
+        public bool IsSecondHalf => this == SecondHalf;
 
-        public bool IsInPenalties => Value == Penalties;
+        public bool IsAfterExtraTime => this == EndedExtraTime;
 
-        public bool IsAfterPenalties => Value == EndedAfterPenalties;
+        public bool IsInPenalties => this == Penalties;
 
-        public bool IsFirstHalfExtra => Value == FirstHaftExtra;
+        public bool IsAfterPenalties => this == EndedAfterPenalties;
 
-        public bool IsSecondHalfExtra => Value == SecondHaftExtra;
+        public bool IsFirstHalfExtra => this == FirstHalfExtra;
 
-        public bool NotShowScore => Value == NotStarted || Value == Cancelled || Value == Postponed || Value == StartDelayed;
+        public bool IsSecondHalfExtra => this == SecondHalfExtra;
+
+        public bool NotShowScore => this == NotStarted || this == Cancelled || this == Postponed || this == StartDelayed;
 
         public bool ShowScore => !NotShowScore;
     }

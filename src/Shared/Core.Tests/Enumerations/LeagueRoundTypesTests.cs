@@ -12,8 +12,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = LeagueRoundTypes.CupRound;
 
             // Assert
-            Assert.Equal("cup", actual.Value);
-            Assert.Equal("Cup", actual.DisplayName);
+            Assert.Equal(1, actual.Value);
+            Assert.Equal("cup", actual.DisplayName);
         }
 
         [Fact]
@@ -23,8 +23,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = LeagueRoundTypes.GroupRound;
 
             // Assert
-            Assert.Equal("group", actual.Value);
-            Assert.Equal("Group", actual.DisplayName);
+            Assert.Equal(2, actual.Value);
+            Assert.Equal("group", actual.DisplayName);
         }
 
         [Fact]
@@ -34,8 +34,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = LeagueRoundTypes.PlayOffRound;
 
             // Assert
-            Assert.Equal("playoff", actual.Value);
-            Assert.Equal("PlayOff", actual.DisplayName);
+            Assert.Equal(3, actual.Value);
+            Assert.Equal("playoff", actual.DisplayName);
         }
 
         [Fact]
@@ -45,8 +45,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = LeagueRoundTypes.QualifierRound;
 
             // Assert
-            Assert.Equal("qualification", actual.Value);
-            Assert.Equal("Qualifier", actual.DisplayName);
+            Assert.Equal(4, actual.Value);
+            Assert.Equal("qualifier", actual.DisplayName);
         }
 
         [Fact]
@@ -56,8 +56,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = LeagueRoundTypes.VariableRound;
 
             // Assert
-            Assert.Equal("variable", actual.Value);
-            Assert.Equal("Variable", actual.DisplayName);
+            Assert.Equal(5, actual.Value);
+            Assert.Equal("variable", actual.DisplayName);
         }
 
         [Fact]

@@ -22,8 +22,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.English;
 
             // Assert
-            Assert.Equal("en-US", actual.Value);
-            Assert.Equal("English", actual.DisplayName);
+            Assert.Equal(1, actual.Value);
+            Assert.Equal("en-US", actual.DisplayName);
         }
 
         [Fact]
@@ -33,8 +33,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.Vietnamese;
 
             // Assert
-            Assert.Equal("vi-VN", actual.Value);
-            Assert.Equal("Vietnamese", actual.DisplayName);
+            Assert.Equal(2, actual.Value);
+            Assert.Equal("vi-VN", actual.DisplayName);
         }
 
         [Fact]
@@ -44,8 +44,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.Thailand;
 
             // Assert
-            Assert.Equal("th-TH", actual.Value);
-            Assert.Equal("Thailand", actual.DisplayName);
+            Assert.Equal(3, actual.Value);
+            Assert.Equal("th-TH", actual.DisplayName);
         }
 
         [Fact]
@@ -55,8 +55,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.Indonesia;
 
             // Assert
-            Assert.Equal("id-ID", actual.Value);
-            Assert.Equal("Indonesia", actual.DisplayName);
+            Assert.Equal(4, actual.Value);
+            Assert.Equal("id-ID", actual.DisplayName);
         }
 
         [Fact]
@@ -66,8 +66,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.TraditionalChinese;
 
             // Assert
-            Assert.Equal("zh-TW", actual.Value);
-            Assert.Equal("Traditional Chinese", actual.DisplayName);
+            Assert.Equal(5, actual.Value);
+            Assert.Equal("zh-TW", actual.DisplayName);
         }
 
         [Fact]
@@ -77,8 +77,8 @@ namespace LiveScore.Core.Tests.Enumerations
             var actual = Languages.SimplifiedChinese;
 
             // Assert
-            Assert.Equal("zh-CN", actual.Value);
-            Assert.Equal("Simplified Chinese", actual.DisplayName);
+            Assert.Equal(6, actual.Value);
+            Assert.Equal("zh-CN", actual.DisplayName);
         }
     }
 }

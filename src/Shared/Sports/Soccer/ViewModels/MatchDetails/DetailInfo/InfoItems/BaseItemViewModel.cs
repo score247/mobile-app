@@ -14,7 +14,7 @@
 
     public class BaseItemViewModel : ViewModelBase
     {
-        private static readonly IDictionary<string, Type> ViewModelMapper = new Dictionary<string, Type>
+        private static readonly IDictionary<EventTypes, Type> ViewModelMapper = new Dictionary<EventTypes, Type>
         {
             { EventTypes.YellowCard, typeof(DefaultItemViewModel) },
             { EventTypes.YellowRedCard, typeof(DefaultItemViewModel) },
@@ -27,7 +27,7 @@
             { EventTypes.PenaltyShootout, typeof(PenaltyShootOutViewModel) }
         };
 
-        private static readonly IDictionary<string, DataTemplate> TemplateMapper = new Dictionary<string, DataTemplate>
+        private static readonly IDictionary<EventTypes, DataTemplate> TemplateMapper = new Dictionary<EventTypes, DataTemplate>
         {
             { EventTypes.YellowCard, new DefaultItemTemplate() },
             { EventTypes.YellowRedCard, new DefaultItemTemplate() },
@@ -78,12 +78,14 @@
 
         public bool VisibleAwayImage { get; protected set; }
 
+        public EventTypes TimelineEventType => Enumeration.FromDisplayName<EventTypes>(TimelineEvent.Type);
+
         public BaseItemViewModel CreateInstance()
         {
-            if (ViewModelMapper.ContainsKey(TimelineEvent.Type))
+            if (ViewModelMapper.ContainsKey(TimelineEventType))
             {
                 return Activator.CreateInstance(
-                    ViewModelMapper[TimelineEvent.Type],
+                    ViewModelMapper[TimelineEventType],
                     TimelineEvent, Result, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
@@ -92,9 +94,9 @@
 
         public DataTemplate CreateTemplate()
         {
-            if (TemplateMapper.ContainsKey(TimelineEvent.Type))
+            if (TemplateMapper.ContainsKey(TimelineEventType))
             {
-                return TemplateMapper[TimelineEvent.Type];
+                return TemplateMapper[TimelineEventType];
             }
 
             return new MainEventItemTemplate();
@@ -113,15 +115,15 @@
                 return timelines;
             }
 
-            if (matchResult.EventStatus.IsClosed)
+            if (matchResult.EventStatus.IsClosed())
             {
                 var timelineEvents = timelines.ToList();
-                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
+                timelineEvents.RemoveAll(t => Enumeration.FromDisplayName<EventTypes>(t.Type) == EventTypes.PenaltyShootout && t.IsFirstShoot);
 
                 return timelineEvents;
             }
 
-            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
+            if (matchResult.EventStatus.IsLive() && matchResult.MatchStatus.IsInPenalties)
             {
                 var lastEvent = timelines.LastOrDefault();
                 var timelineEvents = timelines.ToList();

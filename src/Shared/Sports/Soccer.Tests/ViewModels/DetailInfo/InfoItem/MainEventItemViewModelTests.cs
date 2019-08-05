@@ -65,7 +65,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             timeline.Type.Returns("match_ended");
-            matchResult.MatchStatus.Returns(new MatchStatus { Value = "ended" });
+            matchResult.MatchStatus.Returns(new MatchStatus { DisplayName = "ended" });
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 }
@@ -88,7 +88,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.OvertimeType }
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.Overtime }
             });
 
             // Act
@@ -123,7 +123,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             timeline.Type.Returns("match_ended");
-            matchResult.MatchStatus.Returns(new MatchStatus { Value = "aet" });
+            matchResult.MatchStatus.Returns(new MatchStatus { DisplayName = "aet" });
             matchResult.HomeScore.Returns(3);
             matchResult.AwayScore.Returns(6);
 
@@ -146,7 +146,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.OvertimeType }
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.Overtime }
             });
 
             // Act
@@ -166,8 +166,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 0, AwayScore = 2, PeriodType = new PeriodTypes { Value = "overtime" } },
-                new MatchPeriod { HomeScore = 4, AwayScore = 3, PeriodType = new PeriodTypes { Value = "penalties" } }
+                new MatchPeriod { HomeScore = 0, AwayScore = 2, PeriodType = new PeriodTypes { DisplayName = "overtime" } },
+                new MatchPeriod { HomeScore = 4, AwayScore = 3, PeriodType = new PeriodTypes { DisplayName = "penalties" } }
             });
 
             // Act

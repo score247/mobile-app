@@ -11,13 +11,13 @@ namespace LiveScore.Core.Enumerations
 
 
     [Serializable]
-    public abstract class Enumeration : IComparable
+    public abstract class StringEnumeration : IComparable
     {
-        protected Enumeration()
+        protected StringEnumeration()
         {
         }
 
-        protected Enumeration(byte value, string displayName)
+        protected StringEnumeration(string value, string displayName)
         {
             Value = value;
             DisplayName = displayName;
@@ -25,21 +25,21 @@ namespace LiveScore.Core.Enumerations
 
         public string DisplayName { get; set; }
 
-        public byte Value { get; set; }
+        public string Value { get; set; }
 
-        public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()
+        public static T FromDisplayName<T>(string displayName) where T : StringEnumeration, new()
         {
             var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
             return matchingItem;
         }
 
-        public static T FromValue<T>(byte value) where T : Enumeration, new()
+        public static T FromValue<T>(string value) where T : StringEnumeration, new()
         {
-            var matchingItem = Parse<T, byte>(value, "value", item => item.Value == value);
+            var matchingItem = Parse<T, string>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
-        public static IEnumerable<T> GetAll<T>() where T : Enumeration, new()
+        public static IEnumerable<T> GetAll<T>() where T : StringEnumeration, new()
         {
             var type = typeof(T);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
@@ -67,7 +67,7 @@ namespace LiveScore.Core.Enumerations
             }
         }
 
-        public static bool operator ==(Enumeration left, Enumeration right)
+        public static bool operator ==(StringEnumeration left, StringEnumeration right)
         {
             if (left is null)
             {
@@ -93,7 +93,7 @@ namespace LiveScore.Core.Enumerations
             }
         }
 
-        public static bool operator !=(Enumeration left, Enumeration right)
+        public static bool operator !=(StringEnumeration left, StringEnumeration right)
         {
             return !(left == right);
         }
@@ -138,7 +138,7 @@ namespace LiveScore.Core.Enumerations
             return Value.CompareTo(((Enumeration)obj).Value);
         }
 
-        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : Enumeration, new()
+        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : StringEnumeration, new()
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 

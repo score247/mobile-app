@@ -148,7 +148,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<byte, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -173,7 +173,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             matchService.Received(1)
-                .SubscribeMatches(hubConnection, Arg.Any<Action<string, Dictionary<string, MatchPushEvent>>>());
+                .SubscribeMatches(hubConnection, Arg.Any<Action<byte, Dictionary<string, MatchPushEvent>>>());
         }
 
         [Fact]
@@ -194,7 +194,7 @@ namespace Scores.Tests.ViewModels
         public void OnMatchChanged_SportIdIsCurrent_ChangeMatchData()
         {
             // Arrange
-            const string sportId = "1";
+            const byte sportId = 1;
             InitViewModelData(
                  out IMatchResult matchResult,
                  out IEnumerable<ITimeline> matchTimelines,
@@ -216,7 +216,7 @@ namespace Scores.Tests.ViewModels
         public void OnMatchChanged_SportIdIsNotCurrent_NotChangeMatchData()
         {
             // Arrange
-            const string sportId = "2";
+            const byte sportId = 2;
             InitViewModelData(
                 out IMatchResult matchResult,
                 out IEnumerable<ITimeline> matchTimelines,

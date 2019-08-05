@@ -27,7 +27,7 @@ namespace LiveScore.Core.Tests.Views.Selectors
 
             var templateSelector = new MatchItemTemplateSelector();
             var expectedTemplate = new DataTemplate();
-            dependencyResolver.Resolve<DataTemplate>(SportTypes.Soccer.Value).Returns(expectedTemplate);
+            dependencyResolver.Resolve<DataTemplate>(SportTypes.Soccer.DisplayName).Returns(expectedTemplate);
 
             // Act
             var actualTemplate = templateSelector.SelectTemplate(1, bindableObject);

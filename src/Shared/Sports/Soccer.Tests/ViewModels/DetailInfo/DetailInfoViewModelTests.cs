@@ -33,7 +33,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             comparer = baseFixture.CommonFixture.Comparer;
             localStorage = Substitute.For<ILocalStorage>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
-                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.Value)
+                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.DisplayName)
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
@@ -63,8 +63,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 {
                     HomeScore = 5,
                     AwayScore = 1,
-                    EventStatus = MatchStatus.LiveStatus,
-                    MatchStatus = MatchStatus.FirstHaftStatus
+                    EventStatus = MatchStatus.Live,
+                    MatchStatus = MatchStatus.FirstHalf
                 },
                 Teams = new List<Team>
             {
@@ -98,8 +98,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
             {
-                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
+                MatchStatus = MatchStatus.EndedAfterPenalties,
+                EventStatus = MatchStatus.Live
             };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
@@ -134,8 +134,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
             {
-                MatchStatus = MatchStatus.EndedExtraTimeStatus,
-                EventStatus = MatchStatus.ClosedStatus
+                MatchStatus = MatchStatus.EndedExtraTime,
+                EventStatus = MatchStatus.Closed
             };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
@@ -163,8 +163,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             };
             returnMatch.MatchResult = new MatchResult
             {
-                MatchStatus = MatchStatus.EndedAfterPenaltiesStatus,
-                EventStatus = MatchStatus.ClosedStatus
+                MatchStatus = MatchStatus.EndedAfterPenalties,
+                EventStatus = MatchStatus.Closed
             };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
@@ -190,8 +190,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
             {
-                MatchStatus = MatchStatus.PenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
+                MatchStatus = MatchStatus.Penalties,
+                EventStatus = MatchStatus.Live
             };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
@@ -221,8 +221,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
             {
-                MatchStatus = MatchStatus.PenaltiesStatus,
-                EventStatus = MatchStatus.LiveStatus
+                MatchStatus = MatchStatus.Penalties,
+                EventStatus = MatchStatus.Live
             };
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(returnMatch);
 
@@ -268,7 +268,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             var matchResult = new MatchResult
             {
-                EventStatus = MatchStatus.AbandonedStatus,
+                EventStatus = MatchStatus.Abandoned,
                 HomeScore = 1,
                 AwayScore = 2
             };
@@ -284,7 +284,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             };
 
             // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
+            viewModel.OnReceivingMatchEvent(1, pushEvents);
 
             // Assert
             Assert.Equal(matchResult, viewModel.Match.MatchResult);
@@ -310,7 +310,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
+            viewModel.OnReceivingMatchEvent(1, pushEvents);
 
             // Assert
             Assert.Equal(timelines, viewModel.Match.TimeLines);
@@ -334,7 +334,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
+            viewModel.OnReceivingMatchEvent(1, pushEvents);
 
             // Assert
             Assert.Null(viewModel.Match.TimeLines);

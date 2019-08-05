@@ -9,10 +9,10 @@ namespace LiveScore.Core.Tests.Enumerations
         public void RedCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.RedCardType;
+            var actual = EventTypes.RedCard;
 
             // Assert
-            Assert.Equal("red_card", actual.Value);
+            Assert.Equal(8, actual.Value);
             Assert.Equal("RedCard", actual.DisplayName);
         }
 
@@ -20,10 +20,10 @@ namespace LiveScore.Core.Tests.Enumerations
         public void ScoreChange_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.ScoreChangeType;
+            var actual = EventTypes.ScoreChange;
 
             // Assert
-            Assert.Equal("score_change", actual.Value);
+            Assert.Equal(9, actual.Value);
             Assert.Equal("ScoreChange", actual.DisplayName);
         }
 
@@ -31,10 +31,10 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Substitution_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.SubstitutionType;
+            var actual = EventTypes.Substitution;
 
             // Assert
-            Assert.Equal("substitution", actual.Value);
+            Assert.Equal(10, actual.Value);
             Assert.Equal("Substitution", actual.DisplayName);
         }
 
@@ -42,10 +42,10 @@ namespace LiveScore.Core.Tests.Enumerations
         public void YellowCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.YellowCardType;
+            var actual = EventTypes.YellowCard;
 
             // Assert
-            Assert.Equal("yellow_card", actual.Value);
+            Assert.Equal(11, actual.Value);
             Assert.Equal("YellowCard", actual.DisplayName);
         }
 
@@ -53,10 +53,10 @@ namespace LiveScore.Core.Tests.Enumerations
         public void YellowRedCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.YellowRedCardType;
+            var actual = EventTypes.YellowRedCard;
 
             // Assert
-            Assert.Equal("yellow_red_card", actual.Value);
+            Assert.Equal(12, actual.Value);
             Assert.Equal("YellowRedCard", actual.DisplayName);
         }
 

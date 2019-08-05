@@ -33,7 +33,7 @@
 
         public string CurrentLanguage
         {
-            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentLanguage), Languages.English.Value);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentLanguage), Languages.English.DisplayName);
             set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentLanguage), value);
         }
 
@@ -43,6 +43,6 @@
             set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentTimeZone), value);
         }
 
-        public UserSettings UserSettings => new UserSettings(CurrentSportType.Value, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
+        public UserSettings UserSettings => new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
     }
 }

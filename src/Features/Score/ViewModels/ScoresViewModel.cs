@@ -39,7 +39,7 @@ namespace LiveScore.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
-            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.DisplayName);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
             matchHubConnection = hubService.BuildMatchHubConnection();
         }
@@ -156,7 +156,7 @@ namespace LiveScore.Score.ViewModels
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
-        internal void OnMatchesChanged(string sportId, Dictionary<string, MatchPushEvent> matchPayloads)
+        internal void OnMatchesChanged(byte sportId, Dictionary<string, MatchPushEvent> matchPayloads)
         {
             if (sportId != SettingsService.CurrentSportType.Value)
             {

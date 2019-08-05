@@ -16,11 +16,11 @@
             {
                 string valueAsString = value.ToString();
 
-                if (valueAsString.Equals(OddsTrend.Up.Value, StringComparison.OrdinalIgnoreCase))
+                if (valueAsString.Equals(OddsTrend.Up.DisplayName, StringComparison.OrdinalIgnoreCase))
                 {
                     color = (Color)Application.Current.Resources["UpLiveOddColor"];
                 }
-                else if (valueAsString.Equals(OddsTrend.Down.Value, StringComparison.OrdinalIgnoreCase))
+                else if (valueAsString.Equals(OddsTrend.Down.DisplayName, StringComparison.OrdinalIgnoreCase))
                 {
                     color = (Color)Application.Current.Resources["DownLiveOddColor"];
                 }

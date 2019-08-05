@@ -21,7 +21,7 @@
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value);
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.DisplayName);
             Match = match;
             BuildMatchStatus();
             SubscribeMatchTimeChangeEvent();
@@ -38,7 +38,7 @@
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            matchHubConnection.On<string, string, int>("PushMatchTime", (sportId, matchId, matchTime) =>
+            matchHubConnection.On<int, string, int>("PushMatchTime", (sportId, matchId, matchTime) =>
             {
                 if (sportId == SettingsService.CurrentSportType.Value && Match.Id == matchId)
                 {

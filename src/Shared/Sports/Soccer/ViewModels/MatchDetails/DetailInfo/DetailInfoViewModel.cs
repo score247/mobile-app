@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.matchHubConnection = matchHubConnection;
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value);
+            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.DisplayName);
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(Match.Id, true), false));
 
             TabHeaderIcon = TabDetailImages.Info;
@@ -96,12 +96,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<string, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(string sportId, Dictionary<string, MatchPushEvent> payload)
+        protected internal void OnReceivingMatchEvent(byte sportId, Dictionary<string, MatchPushEvent> payload)
         {
             if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || !payload.ContainsKey(Match.Id))
             {

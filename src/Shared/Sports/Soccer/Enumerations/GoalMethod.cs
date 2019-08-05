@@ -6,13 +6,13 @@
     {
         public const string OwnGoal = "own_goal";
 
-        public static readonly GoalMethod OwnGoalType = new GoalMethod(OwnGoal, nameof(OwnGoal));
+        public static readonly GoalMethod OwnGoalType = new GoalMethod(1, OwnGoal);
 
         public const string Penalty = "penalty";
 
-        public static readonly GoalMethod PenaltyType = new GoalMethod(Penalty, nameof(Penalty));
+        public static readonly GoalMethod PenaltyType = new GoalMethod(2, Penalty);
 
-        private GoalMethod(string value, string displayName)
+        private GoalMethod(byte value, string displayName)
            : base(value, displayName)
         {
         }

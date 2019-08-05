@@ -28,7 +28,7 @@ namespace Soccer.Tests.ViewModels
         {
             localStorage = Substitute.For<ILocalStorage>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
-                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.Value)
+                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.DisplayName)
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
@@ -56,8 +56,8 @@ namespace Soccer.Tests.ViewModels
                 {
                     HomeScore = 5,
                     AwayScore = 1,
-                    EventStatus = MatchStatus.LiveStatus,
-                    MatchStatus = MatchStatus.FirstHaftStatus
+                    EventStatus = MatchStatus.Live,
+                    MatchStatus = MatchStatus.FirstHalf
                 },
                 Teams = new List<Team>
             {
@@ -93,7 +93,7 @@ namespace Soccer.Tests.ViewModels
                 AggregateHomeScore = 2,
                 AggregateAwayScore = 5,
                 AggregateWinnerId = "home",
-                EventStatus = MatchStatus.ClosedStatus
+                EventStatus = MatchStatus.Closed
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -110,7 +110,7 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
-                EventStatus = MatchStatus.ClosedStatus,
+                EventStatus = MatchStatus.Closed,
                 AggregateWinnerId = "home",
                 WinnerId = "home"
             };
@@ -129,7 +129,7 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.MatchResult = new MatchResult
             {
-                EventStatus = MatchStatus.ClosedStatus,
+                EventStatus = MatchStatus.Closed,
                 AggregateWinnerId = "away",
                 WinnerId = "away"
             };
@@ -149,9 +149,9 @@ namespace Soccer.Tests.ViewModels
             match.MatchResult = new MatchResult
             {
                 MatchPeriods = new List<MatchPeriod> {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
+                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
                 },
-                EventStatus = MatchStatus.ClosedStatus
+                EventStatus = MatchStatus.Closed
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -171,9 +171,9 @@ namespace Soccer.Tests.ViewModels
                 WinnerId = "home",
                 MatchPeriods = new List<MatchPeriod>
                 {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
+                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
                 },
-                EventStatus = MatchStatus.ClosedStatus
+                EventStatus = MatchStatus.Closed
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -193,9 +193,9 @@ namespace Soccer.Tests.ViewModels
                 WinnerId = "away",
                 MatchPeriods = new List<MatchPeriod>
                 {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.PenaltiesType }
+                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
                 },
-                EventStatus = MatchStatus.ClosedStatus
+                EventStatus = MatchStatus.Closed
             };
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -217,7 +217,7 @@ namespace Soccer.Tests.ViewModels
 
             var matchResult = new MatchResult
             {
-                EventStatus = MatchStatus.AbandonedStatus,
+                EventStatus = MatchStatus.Abandoned,
                 HomeScore = 1,
                 AwayScore = 2
             };
@@ -233,7 +233,7 @@ namespace Soccer.Tests.ViewModels
             };
 
             // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
+            viewModel.OnReceivingMatchEvent(1, pushEvents);
 
             // Assert
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
@@ -256,7 +256,7 @@ namespace Soccer.Tests.ViewModels
             };
 
             // Act
-            viewModel.OnReceivingMatchEvent("1", pushEvents);
+            viewModel.OnReceivingMatchEvent(1, pushEvents);
 
             // Assert
             Assert.Null(viewModel.MatchViewModel.Match.TimeLines);

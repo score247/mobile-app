@@ -12,8 +12,8 @@ namespace Soccer.Tests.Enumerations
             var actual = GoalMethod.OwnGoalType;
 
             // Assert
-            Assert.Equal("own_goal", actual.Value);
-            Assert.Equal("OwnGoal", actual.DisplayName);
+            Assert.Equal(1, actual.Value);
+            Assert.Equal("own_goal", actual.DisplayName);
         }
 
         [Fact]
@@ -23,8 +23,8 @@ namespace Soccer.Tests.Enumerations
             var actual = GoalMethod.PenaltyType;
 
             // Assert
-            Assert.Equal("penalty", actual.Value);
-            Assert.Equal("Penalty", actual.DisplayName);
+            Assert.Equal(2, actual.Value);
+            Assert.Equal("penalty", actual.DisplayName);
         }
     }
 }

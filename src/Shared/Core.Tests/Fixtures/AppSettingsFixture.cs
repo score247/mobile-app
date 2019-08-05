@@ -11,7 +11,7 @@
         {
             SettingsService = Substitute.For<ISettingsService>();
             SettingsService.CurrentSportType.Returns(SportTypes.Soccer);
-            SettingsService.UserSettings.Returns(new UserSettings(SportTypes.Soccer.Value, "en-US", "7"));
+            SettingsService.UserSettings.Returns(new UserSettings(SportTypes.Soccer.DisplayName, "en-US", "7"));
         }
 
         public ISettingsService SettingsService { get; }
