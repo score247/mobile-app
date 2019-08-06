@@ -26,7 +26,7 @@ namespace Basketball.Tests
         }
 
         [Fact]
-        public void RegisterTypes_Always_RegisterTypeWithSoccer()
+        public void RegisterTypes_Always_RegisterTypeWithBasketball()
         {
             // Arrange
             var soccerModule = new BasketballModule();

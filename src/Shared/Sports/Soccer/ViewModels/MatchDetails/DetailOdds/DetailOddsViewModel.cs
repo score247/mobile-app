@@ -36,7 +36,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
 
-            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.DisplayName);
+            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, true)));
 

@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System.Linq;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;

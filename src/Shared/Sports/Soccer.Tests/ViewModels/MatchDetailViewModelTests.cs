@@ -143,26 +143,6 @@ namespace Soccer.Tests.ViewModels
         }
 
         [Fact]
-        public void OnNavigatingTo_HasPenalty_ShowPenaltyMessage()
-        {
-            // Arrange
-            match.MatchResult = new MatchResult
-            {
-                MatchPeriods = new List<MatchPeriod> {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
-                },
-                EventStatus = MatchStatus.Closed
-            };
-            var parameters = new NavigationParameters { { "Match", match } };
-
-            // Act
-            viewModel.OnNavigatingTo(parameters);
-
-            // Assert
-            Assert.Equal("Penalty Shoot-Out: 3 - 4", viewModel.DisplayPenaltyShootOut);
-        }
-
-        [Fact]
         public void OnNavigatingTo_HasPenalty_WinnerIsHome_ShowPenaltyImage()
         {
             // Arrange

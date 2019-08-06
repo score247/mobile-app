@@ -18,7 +18,6 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
-    using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
@@ -67,8 +66,6 @@ namespace LiveScore.Soccer.ViewModels
         public string DisplayEventDate { get; set; }
 
         public string DisplaySecondLeg { get; private set; }
-
-        public string DisplayPenaltyShootOut { get; private set; }
 
         public ObservableCollection<TabItemViewModelBase> TabViews { get; private set; }
 

@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.matchHubConnection = matchHubConnection;
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.DisplayName);
+            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(Match.Id, true), false));
 
             TabHeaderIcon = TabDetailImages.Info;

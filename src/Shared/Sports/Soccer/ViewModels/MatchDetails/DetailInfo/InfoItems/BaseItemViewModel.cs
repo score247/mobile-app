@@ -102,7 +102,7 @@
 
         public static bool ValidateEvent(ITimeline timeline, IMatchResult matchResult)
             => timeline.IsDetailInfoEvent()
-                || timeline.IsPenaltyShootOutStart()           
+                || timeline.IsPenaltyShootOutStart()
                 || timeline.IsMatchEndNotAfterPenalty(matchResult);
 
         public static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)

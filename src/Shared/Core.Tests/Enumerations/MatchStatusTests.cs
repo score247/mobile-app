@@ -13,7 +13,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(1, actual.Value);
-            Assert.Equal("not_started", actual.DisplayName);          
+            Assert.Equal("not_started", actual.DisplayName);
         }
 
         [Fact]

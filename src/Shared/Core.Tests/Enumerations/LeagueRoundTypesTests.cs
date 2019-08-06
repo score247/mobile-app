@@ -46,7 +46,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(4, actual.Value);
-            Assert.Equal("qualifier", actual.DisplayName);
+            Assert.Equal("qualification", actual.DisplayName);
         }
 
         [Fact]

@@ -29,10 +29,10 @@
             containerRegistry.RegisterForNavigation<OddsMovementView, OddsMovementViewModel>(
                 nameof(OddsMovementView) + SportTypes.Soccer.Value);
 
-            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.DisplayName);
-            containerRegistry.Register<IOddsService, OddsService>(SportTypes.Soccer.DisplayName);
-            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.DisplayName);
-            containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportTypes.Soccer.DisplayName);
+            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Soccer.Value.ToString());
+            containerRegistry.Register<IOddsService, OddsService>(SportTypes.Soccer.Value.ToString());
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value.ToString());
+            containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportTypes.Soccer.Value.ToString());
         }
     }
 }

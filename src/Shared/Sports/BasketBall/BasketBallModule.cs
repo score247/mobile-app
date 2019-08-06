@@ -12,13 +12,13 @@
     {
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            // OnInitialized 
+            // OnInitialized
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Basketball.DisplayName);
-            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Basketball.DisplayName);
+            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Basketball.Value.ToString());
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Basketball.Value.ToString());
         }
     }
 }

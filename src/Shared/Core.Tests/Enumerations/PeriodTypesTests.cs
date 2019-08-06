@@ -13,7 +13,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(1, actual.Value);
-            Assert.Equal("RegularPeriod", actual.DisplayName);
+            Assert.Equal("regular_period", actual.DisplayName);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(2, actual.Value);
-            Assert.Equal("Overtime", actual.DisplayName);
+            Assert.Equal("overtime", actual.DisplayName);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(3, actual.Value);
-            Assert.Equal("Penalties", actual.DisplayName);
+            Assert.Equal("penalties", actual.DisplayName);
         }
     }
 }

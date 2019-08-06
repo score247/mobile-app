@@ -14,7 +14,7 @@
         [InlineData("  ")]
         public void Convert_ValueIsNullOrWhiteSpace_ReturnNeutralAsDefault(string value)
         {
-            // Arrange            
+            // Arrange
             var converter = new OddsStatusConverter();
 
             // Act
@@ -27,7 +27,7 @@
         [Fact]
         public void Convert_ValueIsUp_ReturnRedColor()
         {
-            // Arrange            
+            // Arrange
             var converter = new OddsStatusConverter();
 
             // Act
@@ -40,7 +40,7 @@
         [Fact]
         public void Convert_ValueIsDown_ReturGreenColor()
         {
-            // Arrange            
+            // Arrange
             var converter = new OddsStatusConverter();
 
             // Act

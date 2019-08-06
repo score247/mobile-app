@@ -21,8 +21,6 @@
             HasData = !IsLoading;
         }
 
-        public bool IsLoading { get; set; }
-
         public bool HasData { get; set; }
 
         public ObservableCollection<ILeague> Leagues { get; set; }

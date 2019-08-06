@@ -13,7 +13,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(8, actual.Value);
-            Assert.Equal("RedCard", actual.DisplayName);
+            Assert.Equal("red_card", actual.DisplayName);
         }
 
         [Fact]
@@ -24,7 +24,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(9, actual.Value);
-            Assert.Equal("ScoreChange", actual.DisplayName);
+            Assert.Equal("score_change", actual.DisplayName);
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(10, actual.Value);
-            Assert.Equal("Substitution", actual.DisplayName);
+            Assert.Equal("substitution", actual.DisplayName);
         }
 
         [Fact]
@@ -46,7 +46,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(11, actual.Value);
-            Assert.Equal("YellowCard", actual.DisplayName);
+            Assert.Equal("yellow_card", actual.DisplayName);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace LiveScore.Core.Tests.Enumerations
 
             // Assert
             Assert.Equal(12, actual.Value);
-            Assert.Equal("YellowRedCard", actual.DisplayName);
+            Assert.Equal("yellow_red_card", actual.DisplayName);
         }
 
         [Fact]
