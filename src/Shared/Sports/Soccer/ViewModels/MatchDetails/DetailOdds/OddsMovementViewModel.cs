@@ -44,7 +44,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public bool HasNoData => !HasData;
 
-        public ObservableCollection<BaseMovementItemViewModel> OddsMovementItems { get; private set; }
+        public ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -89,11 +89,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             HeaderTemplate = new BaseMovementHeaderViewModel(betType, NavigationService, DependencyResolver).CreateTemplate();
 
-            OddsMovementItems = HasData
+            var OddsMovementItems = HasData
                     ? new ObservableCollection<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
                         new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
                         .CreateInstance()))
                     : new ObservableCollection<BaseMovementItemViewModel>();
+
+            GroupOddsMovementItems = HasData 
+                ? new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item
+                    => new { item.CurrentSportName }))
+                : new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>();
 
             IsRefreshing = false;
             IsLoading = false;

@@ -123,7 +123,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 { "Format",  oddsFormat}
             };
 
-            await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
+
+            if (!navigated.Success) 
+            {
+                await LoggingService.LogErrorAsync(navigated.Exception);
+            }
         }
     }
 }

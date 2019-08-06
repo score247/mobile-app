@@ -41,22 +41,15 @@
                 AutomationProperties.IsInAccessibleTree="False"
                 BackgroundColor="{StaticResource PrimaryColor}"
                 HasUnevenRows="true"
-                Header=""
-                HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
                 IsVisible="{Binding HasData}"
                 ItemTemplate="{StaticResource oddsMovementItemTemplateSelector}"
-                ItemsSource="{Binding OddsMovementItems}"
+                ItemsSource="{Binding GroupOddsMovementItems}"
                 RefreshCommand="{Binding RefreshCommand}"
-                SeparatorVisibility="None" />
-
-            <Label Text="Comming Soon"
-                   TextColor="White"
-                   FontSize="12"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand"
-                   IsVisible="{Binding HasNoData}"></Label>
+                SeparatorVisibility="None"
+                IsGroupingEnabled="true"
+                GroupHeaderTemplate="{Binding HeaderTemplate}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
