@@ -189,7 +189,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var winnerId = match.MatchResult?.AggregateWinnerId;
 
-            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed())
+            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed)
             {
                 DisplaySecondLeg = $"{AppResources.SecondLeg} {match.MatchResult.AggregateHomeScore} - {match.MatchResult.AggregateAwayScore}";
             }

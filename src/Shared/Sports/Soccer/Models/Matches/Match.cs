@@ -46,25 +46,25 @@
         public IEnumerable<MatchFunction> Functions { get; set; }
 
         public string HomePenaltyImage
-            => MatchResult.EventStatus.IsClosed()
+            => MatchResult.EventStatus.IsClosed
                     && MatchResult.GetPenaltyResult() != null
                     && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId ?
                 Images.PenaltyWinner.Value : string.Empty;
 
         public string AwayPenaltyImage
-             => MatchResult.EventStatus.IsClosed()
+             => MatchResult.EventStatus.IsClosed
                     && MatchResult.GetPenaltyResult() != null
                     && Teams.LastOrDefault()?.Id == MatchResult.WinnerId ?
                 Images.PenaltyWinner.Value : string.Empty;
 
         public string HomeSecondLegImage
-              => MatchResult.EventStatus.IsClosed()
+              => MatchResult.EventStatus.IsClosed
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
                     && Teams.FirstOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
-               => MatchResult.EventStatus.IsClosed()
+               => MatchResult.EventStatus.IsClosed
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
                     && Teams.LastOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
                 Images.SecondLeg.Value : string.Empty;

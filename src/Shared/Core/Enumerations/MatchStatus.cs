@@ -98,9 +98,9 @@
 
         public bool IsNotStarted => this == NotStarted;
 
-        public bool IsLive() => this == Live;
+        public bool IsLive => this == Live;
 
-        public bool IsClosed() => this == Closed;
+        public bool IsClosed => this == Closed;
 
         public bool IsEnded => this == Ended;
 

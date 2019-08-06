@@ -112,7 +112,7 @@
                 return timelines;
             }
 
-            if (matchResult.EventStatus.IsClosed())
+            if (matchResult.EventStatus.IsClosed)
             {
                 var timelineEvents = timelines.ToList();
                 timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
@@ -120,7 +120,7 @@
                 return timelineEvents;
             }
 
-            if (matchResult.EventStatus.IsLive() && matchResult.MatchStatus.IsInPenalties)
+            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
             {
                 var lastEvent = timelines.LastOrDefault();
                 var timelineEvents = timelines.ToList();

@@ -66,12 +66,12 @@
                 return match.EventDate.ToTimeWithoutSecond();
             }
 
-            if (match.MatchResult.EventStatus.IsLive())
+            if (match.MatchResult.EventStatus.IsLive)
             {
                 return BuildStatusForLive(match);
             }
 
-            if (match.MatchResult.EventStatus.IsClosed())
+            if (match.MatchResult.EventStatus.IsClosed)
             {
                 var status = BuildMatchStatus(match);
 
