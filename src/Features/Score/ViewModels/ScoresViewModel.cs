@@ -62,7 +62,12 @@ namespace LiveScore.Score.ViewModels
                 { "Match", matchItem.Match }
             };
 
-            await NavigationService.NavigateAsync("MatchDetailView" + SettingsService.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + SettingsService.CurrentSportType.Value, parameters);
+
+            if(!navigated.Success)
+            {
+                await LoggingService.LogErrorAsync(navigated.Exception);
+            }
         }
 
         public DelegateAsyncCommand ClickSearchCommand => new DelegateAsyncCommand(OnClickSearchCommandExecuted);
