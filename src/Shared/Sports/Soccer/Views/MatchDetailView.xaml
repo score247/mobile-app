@@ -81,9 +81,12 @@
                             Style="{StaticResource MatchStatusContainer}">
                             <Image
                                 AutomationId="LiveIndicator"
-                                IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}"
+                                IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                 Style="{StaticResource LiveIcon}" />
-                            <Image IsVisible="False" Style="{StaticResource ExtraTimeIcon}" />
+                            <Image 
+                                AutomationId="ExtraTimeIndicator"
+                                IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
+                                Style="{StaticResource ExtraTimeIcon}" />
                             <Label
                                 AutomationId="MatchStatus"
                                 Style="{StaticResource MatchStatus}"

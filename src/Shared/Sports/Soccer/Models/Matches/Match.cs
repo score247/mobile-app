@@ -68,5 +68,9 @@
                     && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
                     && Teams.LastOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
                 Images.SecondLeg.Value : string.Empty;
+
+        public bool IsInExtraTime => MatchResult.IsInExtraTime();
+
+        public bool IsInLiveAndNotExtraTime => MatchResult.IsLiveAndNotExtraTime();
     }
 }

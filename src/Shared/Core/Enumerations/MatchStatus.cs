@@ -98,7 +98,7 @@
 
         public bool IsNotStarted => this == NotStarted;
 
-        public bool IsLive => this == Live && !IsInExtraTime;
+        public bool IsLive => this == Live;
 
         public bool IsClosed => this == Closed;
 

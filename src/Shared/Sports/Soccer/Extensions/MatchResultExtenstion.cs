@@ -15,5 +15,11 @@
 
         public static bool HasFullTimeResult(this IMatchResult matchResult)
             => matchResult?.MatchPeriods != null && matchResult.MatchPeriods.Count() >= NumberOfFullTimePeriodsResult;
+
+        public static bool IsInExtraTime(this IMatchResult matchResult)
+            => matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInExtraTime;
+
+        public static bool IsLiveAndNotExtraTime(this IMatchResult matchResult)
+            => matchResult.EventStatus.IsLive && !matchResult.MatchStatus.IsInExtraTime;
     }
 }
