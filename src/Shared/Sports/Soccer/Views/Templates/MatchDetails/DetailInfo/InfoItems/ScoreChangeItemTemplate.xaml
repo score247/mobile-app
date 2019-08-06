@@ -31,61 +31,102 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
+                    AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
                     Style="{StaticResource MatchInfoMinutes}"
-                    Text="{Binding MatchTime}"
-                    AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}" />
-                <StackLayout
+                    Text="{Binding MatchTime}" />
+
+                <Grid
                     Grid.Row="0"
                     Grid.Column="1"
-                    Style="{StaticResource MatchInfoPlayerGroup}">
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}"
                         HorizontalTextAlignment="End"
                         Style="{StaticResource MatchInfoMainPlayer}"
-                        Text="{Binding HomePlayerName}"
-                        AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}" />
-                    <Label
-                        HorizontalTextAlignment="End"
-                        Style="{StaticResource MatchInfoAssistedPlayer}"
-                        Text="{Binding HomeAssistName}"
-                        AutomationId="{Binding ItemAutomationId, StringFormat='HomeAssistPlayerName-{0}'}" />
-                </StackLayout>
-                <FlexLayout
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    Style="{StaticResource FlexLayoutAlignCenter}">
+                        Text="{Binding HomePlayerName}" />
                     <Image
-                        HorizontalOptions="EndAndExpand"
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
                         IsVisible="{Binding VisibleHomeImage}"
                         Source="{Binding ImageSource}"
-                        Style="{StaticResource MatchInfoImage}"
-                        AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}" />
-                </FlexLayout>
+                        Style="{StaticResource MatchInfoImage}" />
+
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='HomeAssistPlayerName-{0}'}"
+                        HorizontalTextAlignment="End"
+                        Style="{StaticResource MatchInfoAssistedPlayer}"
+                        Text="{Binding HomeAssistName}" />
+                    <Image
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Source="images/common/assist_goal.png"
+                        Style="{StaticResource MatchInfoAssistedImage}" />
+
+                </Grid>
+
                 <StackLayout
                     Grid.Row="0"
                     Grid.Column="3"
                     Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}"
-                            AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}" />
+                    <Button
+                        AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                        Style="{StaticResource MatchInfoScoreBox}"
+                        Text="{Binding Score}" />
                 </StackLayout>
-                <FlexLayout
+                <Grid
                     Grid.Row="0"
                     Grid.Column="4"
-                    Style="{StaticResource FlexLayoutAlignCenter}">
+                    Grid.ColumnSpan="2"
+                    VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
                     <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
                         IsVisible="{Binding VisibleAwayImage}"
                         Source="{Binding ImageSource}"
-                        Style="{StaticResource MatchInfoImage}"
-                        AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}" />
-                </FlexLayout>
-                <StackLayout
-                    Grid.Row="0"
-                    Grid.Column="5"
-                    Style="{StaticResource MatchInfoPlayerGroup}">
-                    <Label Style="{StaticResource MatchInfoMainPlayer}" Text="{Binding AwayPlayerName}"
-                           AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}" />
-                    <Label Style="{StaticResource MatchInfoAssistedPlayer}" Text="{Binding AwayAssistName}"
-                           AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}" />
-                </StackLayout>
+                        Style="{StaticResource MatchInfoImage}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
+                        Style="{StaticResource MatchInfoMainPlayer}"
+                        Text="{Binding AwayPlayerName}" />
+
+                    <Image
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Source="images/common/assist_goal.png"
+                        Style="{StaticResource MatchInfoAssistedImage}" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}"
+                        Style="{StaticResource MatchInfoAssistedPlayer}"
+                        Text="{Binding AwayAssistName}" />
+                </Grid>
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
