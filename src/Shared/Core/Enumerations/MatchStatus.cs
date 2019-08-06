@@ -98,7 +98,7 @@
 
         public bool IsNotStarted => this == NotStarted;
 
-        public bool IsLive => this == Live;
+        public bool IsLive => this == Live && !IsInExtraTime;
 
         public bool IsClosed => this == Closed;
 
@@ -121,5 +121,7 @@
         public bool NotShowScore => this == NotStarted || this == Cancelled || this == Postponed || this == StartDelayed;
 
         public bool ShowScore => !NotShowScore;
+
+        public bool IsInExtraTime => this == FirstHalfExtra || this == SecondHalfExtra || this == ExtraTimeHalfTime;
     }
 }
