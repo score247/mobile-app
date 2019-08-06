@@ -30,11 +30,17 @@
 
         public string AwayAssistName { get; private set; }
 
+        public bool IsVisibleHomeAssist { get; private set; }
+
+        public bool IsVisibleAwayAssist { get; private set; }
+
         protected override void BuildInfo()
         {
             base.BuildInfo();
 
             var goalMethod = TimelineEvent?.GoalScorer?.Method ?? string.Empty;
+            IsVisibleHomeAssist = TimelineEvent?.Assist != null && TimelineEvent.OfHomeTeam();
+            IsVisibleAwayAssist = TimelineEvent?.Assist != null && !TimelineEvent.OfHomeTeam();
 
             if (GoalImages.ContainsKey(goalMethod))
             {
