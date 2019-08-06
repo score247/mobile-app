@@ -79,17 +79,18 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             Style="{StaticResource MatchStatusContainer}">
-                            <Label
+                            <!--<Label
                                 AutomationId="LiveIndicator"
                                 IsVisible="{Binding MatchViewModel.Match.MatchResult.EventStatus.IsLive}"
-                                Style="{StaticResource LiveIcon}" />
+                                Style="{StaticResource LiveIcon}" />-->
                             <Label
                                 AutomationId="MatchStatus"
                                 Style="{StaticResource MatchStatus}"
                                 Text="{Binding MatchViewModel.DisplayMatchStatus}" />
                         </FlexLayout>
 
-                        <StackLayout Grid.Row="0" Grid.Column="1">
+                        <StackLayout Grid.Row="0"
+                                     Grid.Column="1">
                             <FlexLayout Style="{StaticResource MatchHomeTeam}">
                                 <Label
                                     AutomationId="HomeTeamName"
@@ -141,14 +142,16 @@
                     </Grid>
                 </StackLayout>
 
-                <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchGeneralInfoImportant}">
+                <FlexLayout IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource textNotEmptyConverter}}"
+                            Style="{StaticResource MatchGeneralInfoImportant}">
                     <Label
                         AutomationId="SecondLegDetai"
                         Style="{StaticResource MatchGeneralInfoImportantContent}"
                         Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
 
-                <tabStrip:TabStrip x:Name="TabStrip" ItemsSource="{Binding TabViews}" />
+                <tabStrip:TabStrip x:Name="TabStrip"
+                                   ItemsSource="{Binding TabViews}" />
 
                 <ActivityIndicator
                     IsEnabled="{Binding IsLoading}"
