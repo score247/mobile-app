@@ -14,7 +14,10 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
     BarBackgroundColor="{StaticResource FunctionBarBgColor}"
-    BarTextColor="{StaticResource TabColor}">
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+    android:TabbedPage.ToolbarPlacement="Bottom"
+    android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
+    android:TabbedPage.BarItemColor="{StaticResource TabColor}">
     <TabbedPage.Children>
         <NavigationPage
             x:Name="ScoresBar"

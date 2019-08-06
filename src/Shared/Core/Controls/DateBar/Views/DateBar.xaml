@@ -46,7 +46,7 @@
                             <ViewCell>
                                 <ViewCell.View>
                                     <Frame Rotation="90" Style="{StaticResource DateBarBox}">
-                                        <StackLayout Style="{StaticResource StacklayoutVerticalCenter}">
+                                        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
                                             <Label
                                                 AutomationId="{Binding Date.Day, StringFormat='DateBar-{0}'}"
                                                 Style="{StaticResource DateBarDate}"
@@ -56,7 +56,7 @@
                                                 Style="{StaticResource DateBarDay}"
                                                 Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
                                                 TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
-                                        </StackLayout>
+                                        </FlexLayout>
                                     </Frame>
                                 </ViewCell.View>
                             </ViewCell>

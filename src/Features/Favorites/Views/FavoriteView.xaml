@@ -8,9 +8,14 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Icon="images/add.png" />
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
-
     <StackLayout Spacing="0">
         <FlexLayout Style="{StaticResource NavTabs}">
             <StackLayout Style="{StaticResource Tab}">

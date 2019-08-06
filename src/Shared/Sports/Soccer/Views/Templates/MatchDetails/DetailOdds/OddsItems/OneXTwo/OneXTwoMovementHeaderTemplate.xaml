@@ -59,5 +59,6 @@
                 Style="{StaticResource TableHeaderText}"
                 Text="Last Updated" />
         </Grid>
+        <BoxView Style="{StaticResource TableLine}" />
     </StackLayout>
 </DataTemplate>

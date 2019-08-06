@@ -7,10 +7,13 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Name="Search"
-            Icon="images/common/icon_transparent.png"
-            Priority="1" />
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="Favourites is comming soon"

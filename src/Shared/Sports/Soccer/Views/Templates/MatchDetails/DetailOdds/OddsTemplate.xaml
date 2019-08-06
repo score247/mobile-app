@@ -28,18 +28,44 @@
                 <BoxView Style="{StaticResource SubTabLine}" />
                 <Button BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}" Command="{Binding OnOddsTabClicked}" CommandParameter="1" Style="{StaticResource SubTab}" Text="{langs:Translate OneXTwo}" TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
             </FlexLayout>
-            <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Horizontal" Style="{StaticResource MatchDetailOddsDropdownContainer}">
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="1"
+                Orientation="Horizontal"
+                Style="{StaticResource MatchDetailOddsDropdownContainer}">
                 <Label Style="{StaticResource MatchDetailOddsDropdownText}" Text="{langs:Translate OddsTypeDecimal}" />
                 <Image Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
         <BoxView Style="{StaticResource SubTabHorizontalLine}" />
-        <ActivityIndicator Margin="20" IsEnabled="{Binding IsLoading}" IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" Style="{StaticResource CenterActivityIndicator}" VerticalOptions="StartAndExpand" />
+        <ActivityIndicator
+            Margin="20"
+            IsEnabled="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            Style="{StaticResource CenterActivityIndicator}"
+            VerticalOptions="StartAndExpand" />
         <StackLayout Style="{StaticResource TableContainer}">
-            <tabStrip:TabITemListView AutomationId="{Binding SelectedBetType, StringFormat='MatchOdds-BetType{0}'}" AutomationProperties.IsInAccessibleTree="False" BackgroundColor="{StaticResource PrimaryColor}" HasUnevenRows="true" Header="{Binding}" HeaderTemplate="{Binding HeaderTemplate}" IsPullToRefreshEnabled="true" IsRefreshing="{Binding IsRefreshing}" IsVisible="{Binding IsNotLoading}" ItemTemplate="{StaticResource oddsItemTemplateSelector}"
-                ItemsSource="{Binding BetTypeOdds}" MinimumHeightRequest="1000" RefreshCommand="{Binding RefreshCommand}" SeparatorVisibility="None">
+            <tabStrip:TabITemListView
+                AutomationId="{Binding SelectedBetType, StringFormat='MatchOdds-BetType{0}'}"
+                AutomationProperties.IsInAccessibleTree="False"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                HasUnevenRows="true"
+                Header="{Binding}"
+                HeaderTemplate="{Binding HeaderTemplate}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsRefreshing}"
+                IsVisible="{Binding IsNotLoading}"
+                ItemTemplate="{StaticResource oddsItemTemplateSelector}"
+                ItemsSource="{Binding BetTypeOdds}"
+                MinimumHeightRequest="1000"
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None">
                 <tabStrip:TabITemListView.Behaviors>
-                    <b:EventToCommandBehavior Command="{Binding TappedOddsItemCommand}" EventArgsParameterPath="Item" EventName="ItemTapped" />
+                    <b:EventToCommandBehavior
+                        Command="{Binding TappedOddsItemCommand}"
+                        EventArgsParameterPath="Item"
+                        EventName="ItemTapped" />
                 </tabStrip:TabITemListView.Behaviors>
             </tabStrip:TabITemListView>
         </StackLayout>

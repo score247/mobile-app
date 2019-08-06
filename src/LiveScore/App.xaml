@@ -8,7 +8,7 @@
         <!--  Application resource dictionary  -->
         <ResourceDictionary>
             <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
-                <On Platform="Android" Value="livescore.ttf#livescore" />
+                <On Platform="Android" Value="fonts/livescore.ttf#livescore" />
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
 
@@ -86,7 +86,6 @@
             <!--  Date bar  -->
             <x:Double x:Key="DateBarDateFontSize">18</x:Double>
             <x:Double x:Key="DateBarDayFontSize">10</x:Double>
-
             <!--  Calendar Page  -->
             <Color x:Key="DateColor">#fff</Color>
             <Color x:Key="DisabledDateColor">#636886</Color>
@@ -198,7 +197,7 @@
             </Style>
             <Style x:Key="FlexLayoutVerticalCenter" TargetType="FlexLayout">
                 <Setter Property="Direction" Value="Column" />
-                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="JustifyContent" Value="SpaceBetween" />
                 <Setter Property="AlignItems" Value="Center" />
             </Style>
 
@@ -416,8 +415,12 @@
 
             <Style x:Key="GridTableContainer" TargetType="Grid">
                 <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
-                <Setter Property="RowSpacing" Value="1" />
                 <Setter Property="ColumnSpacing" Value="1" />
+            </Style>
+            <Style x:Key="GridTableHeaderContainer" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
+                <Setter Property="ColumnSpacing" Value="1" />
+                <Setter Property="RowSpacing" Value="1" />
             </Style>
 
             <Style x:Key="TableLine" TargetType="BoxView">

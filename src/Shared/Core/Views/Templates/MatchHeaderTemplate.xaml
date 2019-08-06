@@ -22,7 +22,7 @@
                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="52" />
+                    <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
@@ -36,16 +36,16 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
+                    AutomationId="{Binding Key.Id, StringFormat='LeagueName-{0}'}"
                     LineBreakMode="TailTruncation"
                     Style="{StaticResource LeagueName}"
-                    Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}"
-                    AutomationId="{Binding Key.Id, StringFormat='LeagueName-{0}'}" />
+                    Text="{Binding Key.Name, Converter={StaticResource upperCaseConverter}}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="2"
+                    AutomationId="{Binding Key.Id, StringFormat='LeagueEventDate-{0}'}"
                     Style="{StaticResource MatchDate}"
-                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}"
-                    AutomationId="{Binding Key.Id, StringFormat='LeagueEventDate-{0}'}" />
+                    Text="{Binding Key, Converter={StaticResource matchHeaderEventDayConverter}}" />
 
                 <StackLayout
                     Grid.Row="0"

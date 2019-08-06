@@ -4,7 +4,6 @@ using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: ExportRenderer(typeof(DetailScrollView), typeof(DetailScrollViewRenderer))]
-
 namespace LiveScore.iOS.Renderers
 {
     public class DetailScrollViewRenderer : ScrollViewRenderer
