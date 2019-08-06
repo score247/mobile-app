@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.DisplayName);
+            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOddsMovement(true)));
         }
 
@@ -95,7 +95,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                         .CreateInstance()))
                     : new ObservableCollection<BaseMovementItemViewModel>();
 
-            GroupOddsMovementItems = HasData 
+            GroupOddsMovementItems = HasData
                 ? new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item
                     => new { item.CurrentSportName }))
                 : new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>();

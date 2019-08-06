@@ -58,7 +58,7 @@ namespace LiveScore.Soccer.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             matchHubConnection = hubService.BuildMatchHubConnection();
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.DisplayName);
+            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }

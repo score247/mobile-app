@@ -21,7 +21,7 @@
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.DisplayName);
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value.ToString());
             Match = match;
             BuildMatchStatus();
             SubscribeMatchTimeChangeEvent();
