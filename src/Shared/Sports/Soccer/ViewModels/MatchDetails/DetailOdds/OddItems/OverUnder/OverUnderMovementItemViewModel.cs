@@ -53,7 +53,7 @@
 
             if (homeOdds != null)
             {
-                OptionValue = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
+                OptionValue = homeOdds.OptionValue.ToOddsOptionFormat();
             }
         }
 
