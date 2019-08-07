@@ -135,678 +135,1124 @@
     <AndroidResource Include="Resources\values\colors.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\soccer.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\drawable-hdpi\" />
     <Folder Include="Resources\drawable-mdpi\" />
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\add.png">
+      <Link>Resources\drawable\add.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\add.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\arrow_down.png">
+      <Link>Resources\drawable\arrow_down.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\arrow_down.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\asia_cup.png">
+      <Link>Resources\drawable\asia_cup.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ball.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\assist_goal.png">
+      <Link>Resources\drawable\assist_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\bookmarker_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\ball.png">
+      <Link>Resources\drawable\ball.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\card_yellow.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\bookmarker_detail.png">
+      <Link>Resources\drawable\bookmarker_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\edit.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\card_yellow.png">
+      <Link>Resources\drawable\card_yellow.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\favorite.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\champion_league.png">
+      <Link>Resources\drawable\champion_league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\favorite_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\copa_america_centenario.png">
+      <Link>Resources\drawable\copa_america_centenario.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\favorite_function_bar.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\edit.png">
+      <Link>Resources\drawable\edit.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_cn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\europa_league.png">
+      <Link>Resources\drawable\europa_league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_en.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\favorite.png">
+      <Link>Resources\drawable\favorite.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\favorite_active.png">
+      <Link>Resources\drawable\favorite_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_my.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\favorite_function_bar.png">
+      <Link>Resources\drawable\favorite_function_bar.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_th.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_cn.png">
+      <Link>Resources\drawable\flag_cn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_vn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_en.png">
+      <Link>Resources\drawable\flag_en.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\H2H.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_england.png">
+      <Link>Resources\drawable\flag_england.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\H2H_2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_in.png">
+      <Link>Resources\drawable\flag_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\hamburger.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_my.png">
+      <Link>Resources\drawable\flag_my.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_netherlands.png">
+      <Link>Resources\drawable\flag_netherlands.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\line_ups.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_th.png">
+      <Link>Resources\drawable\flag_th.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo_splash_screen.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\flag_vn.png">
+      <Link>Resources\drawable\flag_vn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\missed_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\H2H.png">
+      <Link>Resources\drawable\H2H.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\missed_penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\H2H_2.png">
+      <Link>Resources\drawable\H2H_2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\more.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\hamburger.png">
+      <Link>Resources\drawable\hamburger.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\icon_transparent.png">
+      <Link>Resources\drawable\icon_transparent.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\odd_asc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\league.png">
+      <Link>Resources\drawable\league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\odd_desc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\league_detail.png">
+      <Link>Resources\drawable\league_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\odd_movement_chart.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\line_ups.png">
+      <Link>Resources\drawable\line_ups.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\own_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\live.png">
+      <Link>Resources\drawable\live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\logo_1.png">
+      <Link>Resources\drawable\logo_1.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\penalty_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\logo_2.png">
+      <Link>Resources\drawable\logo_2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\red_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\logo_splash_screen.png">
+      <Link>Resources\drawable\logo_splash_screen.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\red_yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\match_extra_time.png">
+      <Link>Resources\drawable\match_extra_time.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\scores.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\match_live.png">
+      <Link>Resources\drawable\match_live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\search.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\missed_goal.png">
+      <Link>Resources\drawable\missed_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\second_leg_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\missed_penalty_goal.png">
+      <Link>Resources\drawable\missed_penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\star.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\more.png">
+      <Link>Resources\drawable\more.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\substitution_away_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news.png">
+      <Link>Resources\drawable\news.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\substitution_away_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news_1.png">
+      <Link>Resources\drawable\news_1.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\substitution_home_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news_2.png">
+      <Link>Resources\drawable\news_2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\substitution_home_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news_3.png">
+      <Link>Resources\drawable\news_3.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_feed.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news_4.png">
+      <Link>Resources\drawable\news_4.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_icon.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\news_5.png">
+      <Link>Resources\drawable\news_5.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tracker.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_asc.png">
+      <Link>Resources\drawable\odd_asc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_desc.png">
+      <Link>Resources\drawable\odd_desc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\user1.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_movement_chart.png">
+      <Link>Resources\drawable\odd_movement_chart.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\user2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\own_goal.png">
+      <Link>Resources\drawable\own_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\user3.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\penalty_goal.png">
+      <Link>Resources\drawable\penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\user4.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\penalty_winner.png">
+      <Link>Resources\drawable\penalty_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\red_card.png">
+      <Link>Resources\drawable\red_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\add.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\red_yellow_card.png">
+      <Link>Resources\drawable\red_yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\arrow_down.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\scores.png">
+      <Link>Resources\drawable\scores.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\ball.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\search.png">
+      <Link>Resources\drawable\search.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\bookmarker_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\second_leg_winner.png">
+      <Link>Resources\drawable\second_leg_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\edit.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\soccer.png">
+      <Link>Resources\drawable\soccer.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\favorite.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\splash_screen.xml">
+      <Link>Resources\drawable\splash_screen.xml</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\favorite_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\star.png">
+      <Link>Resources\drawable\star.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\favorite_function_bar.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\substitution_away_in.png">
+      <Link>Resources\drawable\substitution_away_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\flag_cn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\substitution_away_out.png">
+      <Link>Resources\drawable\substitution_away_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\flag_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\substitution_home_in.png">
+      <Link>Resources\drawable\substitution_home_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\flag_my.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\substitution_home_out.png">
+      <Link>Resources\drawable\substitution_home_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\flag_th.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_feed.png">
+      <Link>Resources\drawable\tab_feed.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\flag_vn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_h2h.png">
+      <Link>Resources\drawable\tab_h2h.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\H2H.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_h2h_active.png">
+      <Link>Resources\drawable\tab_h2h_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\H2H_2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_icon.png">
+      <Link>Resources\drawable\tab_icon.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\hamburger.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_info.png">
+      <Link>Resources\drawable\tab_info.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\icon_transparent.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_info_active.png">
+      <Link>Resources\drawable\tab_info_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_lineup.png">
+      <Link>Resources\drawable\tab_lineup.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\league_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_lineup_active.png">
+      <Link>Resources\drawable\tab_lineup_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_odds.png">
+      <Link>Resources\drawable\tab_odds.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\logo_splash_screen.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_odds_active.png">
+      <Link>Resources\drawable\tab_odds_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\missed_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_social.png">
+      <Link>Resources\drawable\tab_social.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\missed_penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_social_active.png">
+      <Link>Resources\drawable\tab_social_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\more.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_stats.png">
+      <Link>Resources\drawable\tab_stats.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\news.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_stats_active.png">
+      <Link>Resources\drawable\tab_stats_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\odd_asc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_table.png">
+      <Link>Resources\drawable\tab_table.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\odd_desc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_table_active.png">
+      <Link>Resources\drawable\tab_table_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\odd_movement_chart.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_tracker.png">
+      <Link>Resources\drawable\tab_tracker.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\own_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_tracker_active.png">
+      <Link>Resources\drawable\tab_tracker_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_tv.png">
+      <Link>Resources\drawable\tab_tv.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\penalty_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tab_tv_active.png">
+      <Link>Resources\drawable\tab_tv_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\red_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tracker.png">
+      <Link>Resources\drawable\tracker.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\red_yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\tv.png">
+      <Link>Resources\drawable\tv.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\search.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\uefa_nation_league.png">
+      <Link>Resources\drawable\uefa_nation_league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\second_leg_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\uefa_woman_champion_league.png">
+      <Link>Resources\drawable\uefa_woman_champion_league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\soccer.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\uefa_youth_league.png">
+      <Link>Resources\drawable\uefa_youth_league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\substitution_away_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\user1.png">
+      <Link>Resources\drawable\user1.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\substitution_away_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\user2.png">
+      <Link>Resources\drawable\user2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\substitution_home_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\user3.png">
+      <Link>Resources\drawable\user3.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\substitution_home_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\user4.png">
+      <Link>Resources\drawable\user4.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_feed.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\world_cup.png">
+      <Link>Resources\drawable\world_cup.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_icon.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\yellow_card.png">
+      <Link>Resources\drawable\yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\add.png">
+      <Link>Resources\drawable-xhdpi\add.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\arrow_down.png">
+      <Link>Resources\drawable-xhdpi\arrow_down.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\add.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\assist_goal.png">
+      <Link>Resources\drawable-xhdpi\assist_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\arrow_down.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\ball.png">
+      <Link>Resources\drawable-xhdpi\ball.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\ball.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\bookmarker_detail.png">
+      <Link>Resources\drawable-xhdpi\bookmarker_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\bookmarker_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\edit.png">
+      <Link>Resources\drawable-xhdpi\edit.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\edit.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\favorite.png">
+      <Link>Resources\drawable-xhdpi\favorite.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\favorite.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\favorite_active.png">
+      <Link>Resources\drawable-xhdpi\favorite_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\favorite_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\favorite_function_bar.png">
+      <Link>Resources\drawable-xhdpi\favorite_function_bar.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\favorite_function_bar.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\flag_cn.png">
+      <Link>Resources\drawable-xhdpi\flag_cn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\flag_cn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\flag_in.png">
+      <Link>Resources\drawable-xhdpi\flag_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\flag_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\flag_my.png">
+      <Link>Resources\drawable-xhdpi\flag_my.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\flag_my.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\flag_th.png">
+      <Link>Resources\drawable-xhdpi\flag_th.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\flag_th.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\flag_vn.png">
+      <Link>Resources\drawable-xhdpi\flag_vn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\flag_vn.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\H2H.png">
+      <Link>Resources\drawable-xhdpi\H2H.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\H2H.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\H2H_2.png">
+      <Link>Resources\drawable-xhdpi\H2H_2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\H2H_2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\hamburger.png">
+      <Link>Resources\drawable-xhdpi\hamburger.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\hamburger.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\icon_transparent.png">
+      <Link>Resources\drawable-xhdpi\icon_transparent.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon_transparent.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\league.png">
+      <Link>Resources\drawable-xhdpi\league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\league_detail.png">
+      <Link>Resources\drawable-xhdpi\league_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\league_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\live.png">
+      <Link>Resources\drawable-xhdpi\live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\logo_splash_screen.png">
+      <Link>Resources\drawable-xhdpi\logo_splash_screen.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\logo_splash_screen.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\match_extra_time.png">
+      <Link>Resources\drawable-xhdpi\match_extra_time.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\missed_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\match_live.png">
+      <Link>Resources\drawable-xhdpi\match_live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\missed_penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\missed_goal.png">
+      <Link>Resources\drawable-xhdpi\missed_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\more.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\missed_penalty_goal.png">
+      <Link>Resources\drawable-xhdpi\missed_penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\news.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\more.png">
+      <Link>Resources\drawable-xhdpi\more.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\odd_asc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\news.png">
+      <Link>Resources\drawable-xhdpi\news.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\odd_desc.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_asc.png">
+      <Link>Resources\drawable-xhdpi\odd_asc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\odd_movement_chart.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_desc.png">
+      <Link>Resources\drawable-xhdpi\odd_desc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\own_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_movement_chart.png">
+      <Link>Resources\drawable-xhdpi\odd_movement_chart.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\penalty_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\own_goal.png">
+      <Link>Resources\drawable-xhdpi\own_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\penalty_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\penalty_goal.png">
+      <Link>Resources\drawable-xhdpi\penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\red_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\penalty_winner.png">
+      <Link>Resources\drawable-xhdpi\penalty_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\red_yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\red_card.png">
+      <Link>Resources\drawable-xhdpi\red_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\search.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\red_yellow_card.png">
+      <Link>Resources\drawable-xhdpi\red_yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\second_leg_winner.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\search.png">
+      <Link>Resources\drawable-xhdpi\search.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\soccer.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\second_leg_winner.png">
+      <Link>Resources\drawable-xhdpi\second_leg_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\substitution_away_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\soccer.png">
+      <Link>Resources\drawable-xhdpi\soccer.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\substitution_away_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\substitution_away_in.png">
+      <Link>Resources\drawable-xhdpi\substitution_away_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\substitution_home_in.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\substitution_away_out.png">
+      <Link>Resources\drawable-xhdpi\substitution_away_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\substitution_home_out.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\substitution_home_in.png">
+      <Link>Resources\drawable-xhdpi\substitution_home_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_feed.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\substitution_home_out.png">
+      <Link>Resources\drawable-xhdpi\substitution_home_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_icon.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_feed.png">
+      <Link>Resources\drawable-xhdpi\tab_feed.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_h2h.png">
+      <Link>Resources\drawable-xhdpi\tab_h2h.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\yellow_card.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_h2h_active.png">
+      <Link>Resources\drawable-xhdpi\tab_h2h_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\asia_cup.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_icon.png">
+      <Link>Resources\drawable-xhdpi\tab_icon.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\champion_league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_info.png">
+      <Link>Resources\drawable-xhdpi\tab_info.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\copa_america_centenario.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_info_active.png">
+      <Link>Resources\drawable-xhdpi\tab_info_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\europa_league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_lineup.png">
+      <Link>Resources\drawable-xhdpi\tab_lineup.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_england.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_lineup_active.png">
+      <Link>Resources\drawable-xhdpi\tab_lineup_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\flag_netherlands.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_odds.png">
+      <Link>Resources\drawable-xhdpi\tab_odds.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\uefa_nation_league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_odds_active.png">
+      <Link>Resources\drawable-xhdpi\tab_odds_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\uefa_woman_champion_league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_social.png">
+      <Link>Resources\drawable-xhdpi\tab_social.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\uefa_youth_league.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_social_active.png">
+      <Link>Resources\drawable-xhdpi\tab_social_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\world_cup.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_stats.png">
+      <Link>Resources\drawable-xhdpi\tab_stats.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo_1.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_stats_active.png">
+      <Link>Resources\drawable-xhdpi\tab_stats_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\logo_2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_table.png">
+      <Link>Resources\drawable-xhdpi\tab_table.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news_1.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_table_active.png">
+      <Link>Resources\drawable-xhdpi\tab_table_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news_2.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_tracker.png">
+      <Link>Resources\drawable-xhdpi\tab_tracker.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news_3.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_tracker_active.png">
+      <Link>Resources\drawable-xhdpi\tab_tracker_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news_4.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_tv.png">
+      <Link>Resources\drawable-xhdpi\tab_tv.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\news_5.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tab_tv_active.png">
+      <Link>Resources\drawable-xhdpi\tab_tv_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_h2h.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\tv.png">
+      <Link>Resources\drawable-xhdpi\tv.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_h2h_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\yellow_card.png">
+      <Link>Resources\drawable-xhdpi\yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_info.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\add.png">
+      <Link>Resources\drawable-xxhdpi\add.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_info_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\arrow_down.png">
+      <Link>Resources\drawable-xxhdpi\arrow_down.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_lineup.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\assist_goal.png">
+      <Link>Resources\drawable-xxhdpi\assist_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_lineup_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\ball.png">
+      <Link>Resources\drawable-xxhdpi\ball.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_odds.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\bookmarker_detail.png">
+      <Link>Resources\drawable-xxhdpi\bookmarker_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_odds_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\edit.png">
+      <Link>Resources\drawable-xxhdpi\edit.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_social.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\favorite.png">
+      <Link>Resources\drawable-xxhdpi\favorite.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_social_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\favorite_active.png">
+      <Link>Resources\drawable-xxhdpi\favorite_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_stats.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\favorite_function_bar.png">
+      <Link>Resources\drawable-xxhdpi\favorite_function_bar.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_stats_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\flag_cn.png">
+      <Link>Resources\drawable-xxhdpi\flag_cn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_table.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\flag_in.png">
+      <Link>Resources\drawable-xxhdpi\flag_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_table_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\flag_my.png">
+      <Link>Resources\drawable-xxhdpi\flag_my.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_tracker.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\flag_th.png">
+      <Link>Resources\drawable-xxhdpi\flag_th.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_tracker_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\flag_vn.png">
+      <Link>Resources\drawable-xxhdpi\flag_vn.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\H2H.png">
+      <Link>Resources\drawable-xxhdpi\H2H.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\tab_tv_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\H2H_2.png">
+      <Link>Resources\drawable-xxhdpi\H2H_2.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_h2h.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\hamburger.png">
+      <Link>Resources\drawable-xxhdpi\hamburger.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_h2h_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\icon_transparent.png">
+      <Link>Resources\drawable-xxhdpi\icon_transparent.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_info.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\league.png">
+      <Link>Resources\drawable-xxhdpi\league.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_info_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\league_detail.png">
+      <Link>Resources\drawable-xxhdpi\league_detail.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_lineup.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\live.png">
+      <Link>Resources\drawable-xxhdpi\live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_lineup_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\logo_splash_screen.png">
+      <Link>Resources\drawable-xxhdpi\logo_splash_screen.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_odds.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\match_extra_time.png">
+      <Link>Resources\drawable-xxhdpi\match_extra_time.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_odds_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\match_live.png">
+      <Link>Resources\drawable-xxhdpi\match_live.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_social.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\missed_goal.png">
+      <Link>Resources\drawable-xxhdpi\missed_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_social_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\missed_penalty_goal.png">
+      <Link>Resources\drawable-xxhdpi\missed_penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_stats.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\more.png">
+      <Link>Resources\drawable-xxhdpi\more.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_stats_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\news.png">
+      <Link>Resources\drawable-xxhdpi\news.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_table.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\odd_asc.png">
+      <Link>Resources\drawable-xxhdpi\odd_asc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_table_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\odd_desc.png">
+      <Link>Resources\drawable-xxhdpi\odd_desc.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_tracker.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\odd_movement_chart.png">
+      <Link>Resources\drawable-xxhdpi\odd_movement_chart.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_tracker_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\own_goal.png">
+      <Link>Resources\drawable-xxhdpi\own_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\penalty_goal.png">
+      <Link>Resources\drawable-xxhdpi\penalty_goal.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\tab_tv_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\penalty_winner.png">
+      <Link>Resources\drawable-xxhdpi\penalty_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_h2h.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\red_card.png">
+      <Link>Resources\drawable-xxhdpi\red_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_h2h_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\red_yellow_card.png">
+      <Link>Resources\drawable-xxhdpi\red_yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_info.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\search.png">
+      <Link>Resources\drawable-xxhdpi\search.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_info_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\second_leg_winner.png">
+      <Link>Resources\drawable-xxhdpi\second_leg_winner.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_lineup.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\soccer.png">
+      <Link>Resources\drawable-xxhdpi\soccer.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_lineup_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\substitution_away_in.png">
+      <Link>Resources\drawable-xxhdpi\substitution_away_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_odds.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\substitution_away_out.png">
+      <Link>Resources\drawable-xxhdpi\substitution_away_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_odds_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\substitution_home_in.png">
+      <Link>Resources\drawable-xxhdpi\substitution_home_in.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_social.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\substitution_home_out.png">
+      <Link>Resources\drawable-xxhdpi\substitution_home_out.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_social_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_feed.png">
+      <Link>Resources\drawable-xxhdpi\tab_feed.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_stats.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_h2h.png">
+      <Link>Resources\drawable-xxhdpi\tab_h2h.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_stats_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_h2h_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_h2h_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_table.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_icon.png">
+      <Link>Resources\drawable-xxhdpi\tab_icon.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_table_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_info.png">
+      <Link>Resources\drawable-xxhdpi\tab_info.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_tracker.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_info_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_info_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_tracker_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_lineup.png">
+      <Link>Resources\drawable-xxhdpi\tab_lineup.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_tv.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_lineup_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_lineup_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\tab_tv_active.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_odds.png">
+      <Link>Resources\drawable-xxhdpi\tab_odds.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_transparent.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_odds_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_odds_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_social.png">
+      <Link>Resources\drawable-xxhdpi\tab_social.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\league_detail.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_social_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_social_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\assist_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_stats.png">
+      <Link>Resources\drawable-xxhdpi\tab_stats.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\match_extra_time.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_stats_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_stats_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\match_live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_table.png">
+      <Link>Resources\drawable-xxhdpi\tab_table.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\assist_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_table_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_table_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\match_extra_time.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_tracker.png">
+      <Link>Resources\drawable-xxhdpi\tab_tracker.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\match_live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_tracker_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_tracker_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\assist_goal.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_tv.png">
+      <Link>Resources\drawable-xxhdpi\tab_tv.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\match_extra_time.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tab_tv_active.png">
+      <Link>Resources\drawable-xxhdpi\tab_tv_active.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\match_live.png" />
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\tv.png">
+      <Link>Resources\drawable-xxhdpi\tv.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\yellow_card.png">
+      <Link>Resources\drawable-xxhdpi\yellow_card.png</Link>
+    </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

@@ -232,57 +232,6 @@
     <Compile Include="Renderers\TabItemListViewRenderer.cs" />
     <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
     <None Include="LiveScoreApp.iOS.ruleset" />
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\asia_cup.png">
-      <Link>Resources\images\flag_league\asia_cup.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\champion_league.png">
-      <Link>Resources\images\flag_league\champion_league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\copa_america_centenario.png">
-      <Link>Resources\images\flag_league\copa_america_centenario.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\europa_league.png">
-      <Link>Resources\images\flag_league\europa_league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\flag_england.png">
-      <Link>Resources\images\flag_league\flag_england.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\flag_netherlands.png">
-      <Link>Resources\images\flag_league\flag_netherlands.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\uefa_nation_league.png">
-      <Link>Resources\images\flag_league\uefa_nation_league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\uefa_woman_champion_league.png">
-      <Link>Resources\images\flag_league\uefa_woman_champion_league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\uefa_youth_league.png">
-      <Link>Resources\images\flag_league\uefa_youth_league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\flag_league\world_cup.png">
-      <Link>Resources\images\flag_league\world_cup.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\logos\logo_1.png">
-      <Link>Resources\images\logos\logo_1.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\logos\logo_2.png">
-      <Link>Resources\images\logos\logo_2.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\news\news_1.png">
-      <Link>Resources\images\news\news_1.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\news\news_2.png">
-      <Link>Resources\images\news\news_2.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\news\news_3.png">
-      <Link>Resources\images\news\news_3.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\news\news_4.png">
-      <Link>Resources\images\news\news_4.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\news\news_5.png">
-      <Link>Resources\images\news\news_5.png</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.eot">
       <Link>Resources\fonts\livescore.eot</Link>
     </BundleResource>
@@ -295,413 +244,8 @@
     <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.woff">
       <Link>Resources\fonts\livescore.woff</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\add.png">
-      <Link>Resources\images\common\add.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\add%402x.png">
-      <Link>Resources\images\common\add%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\add%403x.png">
-      <Link>Resources\images\common\add%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\ball.png">
-      <Link>Resources\images\common\ball.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\ball%402x.png">
-      <Link>Resources\images\common\ball%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\ball%403x.png">
-      <Link>Resources\images\common\ball%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\edit.png">
-      <Link>Resources\images\common\edit.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\edit%402x.png">
-      <Link>Resources\images\common\edit%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\edit%403x.png">
-      <Link>Resources\images\common\edit%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_cn.png">
-      <Link>Resources\images\common\flag_cn.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_cn%402x.png">
-      <Link>Resources\images\common\flag_cn%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_cn%403x.png">
-      <Link>Resources\images\common\flag_cn%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_en.png">
-      <Link>Resources\images\common\flag_en.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_in.png">
-      <Link>Resources\images\common\flag_in.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_in%402x.png">
-      <Link>Resources\images\common\flag_in%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_in%403x.png">
-      <Link>Resources\images\common\flag_in%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_my.png">
-      <Link>Resources\images\common\flag_my.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_my%402x.png">
-      <Link>Resources\images\common\flag_my%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_my%403x.png">
-      <Link>Resources\images\common\flag_my%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_th.png">
-      <Link>Resources\images\common\flag_th.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_th%402x.png">
-      <Link>Resources\images\common\flag_th%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_th%403x.png">
-      <Link>Resources\images\common\flag_th%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_vn.png">
-      <Link>Resources\images\common\flag_vn.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_vn%402x.png">
-      <Link>Resources\images\common\flag_vn%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\flag_vn%403x.png">
-      <Link>Resources\images\common\flag_vn%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H_2.png">
-      <Link>Resources\images\common\H2H_2.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H_2%402x.png">
-      <Link>Resources\images\common\H2H_2%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H_2%403x.png">
-      <Link>Resources\images\common\H2H_2%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H.png">
-      <Link>Resources\images\common\H2H.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H%402x.png">
-      <Link>Resources\images\common\H2H%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\H2H%403x.png">
-      <Link>Resources\images\common\H2H%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\hamburger.png">
-      <Link>Resources\images\common\hamburger.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\hamburger%402x.png">
-      <Link>Resources\images\common\hamburger%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\hamburger%403x.png">
-      <Link>Resources\images\common\hamburger%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\icon_transparent.png">
-      <Link>Resources\images\common\icon_transparent.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\icon_transparent%402x.png">
-      <Link>Resources\images\common\icon_transparent%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\icon_transparent%403x.png">
-      <Link>Resources\images\common\icon_transparent%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\league.png">
-      <Link>Resources\images\common\league.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\league%402x.png">
-      <Link>Resources\images\common\league%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\league%403x.png">
-      <Link>Resources\images\common\league%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\line_ups.png">
-      <Link>Resources\images\common\line_ups.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\live.png">
-      <Link>Resources\images\common\live.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\live%402x.png">
-      <Link>Resources\images\common\live%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\live%403x.png">
-      <Link>Resources\images\common\live%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\more.png">
-      <Link>Resources\images\common\more.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\more%402x.png">
-      <Link>Resources\images\common\more%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\more%403x.png">
-      <Link>Resources\images\common\more%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\news.png">
-      <Link>Resources\images\common\news.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\news%402x.png">
-      <Link>Resources\images\common\news%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\news%403x.png">
-      <Link>Resources\images\common\news%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\scores.png">
-      <Link>Resources\images\common\scores.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\soccer.png">
-      <Link>Resources\images\common\soccer.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\soccer%402x.png">
-      <Link>Resources\images\common\soccer%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\soccer%403x.png">
-      <Link>Resources\images\common\soccer%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\star.png">
-      <Link>Resources\images\common\star.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_in.png">
-      <Link>Resources\images\common\substitution_away_in.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_in%402x.png">
-      <Link>Resources\images\common\substitution_away_in%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_in%403x.png">
-      <Link>Resources\images\common\substitution_away_in%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_out.png">
-      <Link>Resources\images\common\substitution_away_out.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_out%402x.png">
-      <Link>Resources\images\common\substitution_away_out%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_away_out%403x.png">
-      <Link>Resources\images\common\substitution_away_out%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_in.png">
-      <Link>Resources\images\common\substitution_home_in.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_in%402x.png">
-      <Link>Resources\images\common\substitution_home_in%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_in%403x.png">
-      <Link>Resources\images\common\substitution_home_in%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_out.png">
-      <Link>Resources\images\common\substitution_home_out.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_out%402x.png">
-      <Link>Resources\images\common\substitution_home_out%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\substitution_home_out%403x.png">
-      <Link>Resources\images\common\substitution_home_out%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tab_feed.png">
-      <Link>Resources\images\common\tab_feed.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tab_feed%402x.png">
-      <Link>Resources\images\common\tab_feed%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tab_feed%403x.png">
-      <Link>Resources\images\common\tab_feed%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tracker.png">
-      <Link>Resources\images\common\tracker.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tv.png">
-      <Link>Resources\images\common\tv.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tv%402x.png">
-      <Link>Resources\images\common\tv%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\tv%403x.png">
-      <Link>Resources\images\common\tv%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\user1.png">
-      <Link>Resources\images\common\user1.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\user2.png">
-      <Link>Resources\images\common\user2.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\user3.png">
-      <Link>Resources\images\common\user3.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\user4.png">
-      <Link>Resources\images\common\user4.png</Link>
-    </BundleResource>
     <Compile Include="Services\BackgroundService.cs" />
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
-    <BundleResource Include="..\..\CommonResources\Image\common\penalty_goal.png">
-      <Link>Resources\images\common\penalty_goal.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\penalty_goal%402x.png">
-      <Link>Resources\images\common\penalty_goal%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\common\penalty_goal%403x.png">
-      <Link>Resources\images\common\penalty_goal%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_h2h_active.png">
-      <Link>Resources\images\tabstrip\active\tab_h2h_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_h2h_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_h2h_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_h2h_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_h2h_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_info_active.png">
-      <Link>Resources\images\tabstrip\active\tab_info_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_info_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_info_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_info_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_info_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_lineup_active.png">
-      <Link>Resources\images\tabstrip\active\tab_lineup_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_lineup_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_lineup_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_lineup_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_lineup_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_odds_active.png">
-      <Link>Resources\images\tabstrip\active\tab_odds_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_odds_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_odds_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_odds_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_odds_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_social_active.png">
-      <Link>Resources\images\tabstrip\active\tab_social_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_social_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_social_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_social_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_social_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_stats_active.png">
-      <Link>Resources\images\tabstrip\active\tab_stats_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_stats_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_stats_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_stats_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_stats_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_table_active.png">
-      <Link>Resources\images\tabstrip\active\tab_table_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_table_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_table_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_table_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_table_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tracker_active.png">
-      <Link>Resources\images\tabstrip\active\tab_tracker_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tracker_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_tracker_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tracker_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_tracker_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tv_active.png">
-      <Link>Resources\images\tabstrip\active\tab_tv_active.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tv_active%402x.png">
-      <Link>Resources\images\tabstrip\active\tab_tv_active%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\active\tab_tv_active%403x.png">
-      <Link>Resources\images\tabstrip\active\tab_tv_active%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_h2h.png">
-      <Link>Resources\images\tabstrip\inactive\tab_h2h.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_h2h%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_h2h%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_h2h%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_h2h%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_info.png">
-      <Link>Resources\images\tabstrip\inactive\tab_info.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_info%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_info%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_info%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_info%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_lineup.png">
-      <Link>Resources\images\tabstrip\inactive\tab_lineup.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_lineup%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_lineup%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_lineup%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_lineup%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_odds.png">
-      <Link>Resources\images\tabstrip\inactive\tab_odds.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_odds%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_odds%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_odds%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_odds%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_social.png">
-      <Link>Resources\images\tabstrip\inactive\tab_social.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_social%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_social%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_social%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_social%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_stats.png">
-      <Link>Resources\images\tabstrip\inactive\tab_stats.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_stats%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_stats%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_stats%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_stats%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_table.png">
-      <Link>Resources\images\tabstrip\inactive\tab_table.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_table%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_table%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_table%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_table%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tracker.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tracker.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tracker%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tracker%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tracker%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tracker%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tv.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tv.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tv%402x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tv%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\tabstrip\inactive\tab_tv%403x.png">
-      <Link>Resources\images\tabstrip\inactive\tab_tv%403x.png</Link>
-    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -791,9 +335,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\missed_penalty_goal.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\LiveScore\LiveScore.csproj">
       <Project>{DFE8CEFD-58E2-4A3F-A920-C0487C223602}</Project>
       <Name>LiveScore</Name>
@@ -812,199 +353,1115 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\missed_penalty_goal%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\add.png">
+      <Link>Resources\images\common\add.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\missed_penalty_goal%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\add%402x.png">
+      <Link>Resources\images\common\add%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_yellow_card.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\add%403x.png">
+      <Link>Resources\images\common\add%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_yellow_card%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down.png">
+      <Link>Resources\images\common\arrow_down.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_yellow_card%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down%402x.png">
+      <Link>Resources\images\common\arrow_down%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\own_goal.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down%403x.png">
+      <Link>Resources\images\common\arrow_down%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\own_goal%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\assist_goal.png">
+      <Link>Resources\images\common\assist_goal.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\own_goal%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\assist_goal%402x.png">
+      <Link>Resources\images\common\assist_goal%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_card.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\assist_goal%403x.png">
+      <Link>Resources\images\common\assist_goal%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_card%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\ball.png">
+      <Link>Resources\images\common\ball.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\red_card%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\ball%402x.png">
+      <Link>Resources\images\common\ball%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\yellow_card.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\ball%403x.png">
+      <Link>Resources\images\common\ball%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\yellow_card%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail.png">
+      <Link>Resources\images\common\bookmarker_detail.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\yellow_card%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail%402x.png">
+      <Link>Resources\images\common\bookmarker_detail%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\search.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail%403x.png">
+      <Link>Resources\images\common\bookmarker_detail%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\search%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\card_yellow.png">
+      <Link>Resources\images\common\card_yellow.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\search%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\edit.png">
+      <Link>Resources\images\common\edit.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_asc.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\edit%402x.png">
+      <Link>Resources\images\common\edit%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_asc%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\edit%403x.png">
+      <Link>Resources\images\common\edit%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_asc%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite.png">
+      <Link>Resources\images\common\favorite.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_desc.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite%402x.png">
+      <Link>Resources\images\common\favorite%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_desc%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite%403x.png">
+      <Link>Resources\images\common\favorite%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_desc%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active.png">
+      <Link>Resources\images\common\favorite_active.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\logo_splash_screen.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active%402x.png">
+      <Link>Resources\images\common\favorite_active%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\logo_splash_screen%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active%403x.png">
+      <Link>Resources\images\common\favorite_active%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\logo_splash_screen%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_function_bar.png">
+      <Link>Resources\images\common\favorite_function_bar.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_function_bar%402x.png">
+      <Link>Resources\images\common\favorite_function_bar%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_function_bar%403x.png">
+      <Link>Resources\images\common\favorite_function_bar%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_cn.png">
+      <Link>Resources\images\common\flag_cn.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_active.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_cn%402x.png">
+      <Link>Resources\images\common\flag_cn%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_active%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_cn%403x.png">
+      <Link>Resources\images\common\flag_cn%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_active%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_en.png">
+      <Link>Resources\images\common\flag_en.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_in.png">
+      <Link>Resources\images\common\flag_in.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_in%402x.png">
+      <Link>Resources\images\common\flag_in%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\penalty_winner%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_in%403x.png">
+      <Link>Resources\images\common\flag_in%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_my.png">
+      <Link>Resources\images\common\flag_my.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_my%402x.png">
+      <Link>Resources\images\common\flag_my%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\second_leg_winner%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_my%403x.png">
+      <Link>Resources\images\common\flag_my%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_th.png">
+      <Link>Resources\images\common\flag_th.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_th%402x.png">
+      <Link>Resources\images\common\flag_th%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\bookmarker_detail%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_th%403x.png">
+      <Link>Resources\images\common\flag_th%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\tab_icon.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_vn.png">
+      <Link>Resources\images\common\flag_vn.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\tab_icon%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_vn%402x.png">
+      <Link>Resources\images\common\flag_vn%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\tab_icon%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\flag_vn%403x.png">
+      <Link>Resources\images\common\flag_vn%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_movement_chart.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H.png">
+      <Link>Resources\images\common\H2H.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_movement_chart%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H%402x.png">
+      <Link>Resources\images\common\H2H%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\odd_movement_chart%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H%403x.png">
+      <Link>Resources\images\common\H2H%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H_2.png">
+      <Link>Resources\images\common\H2H_2.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H_2%402x.png">
+      <Link>Resources\images\common\H2H_2%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\arrow_down%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\H2H_2%403x.png">
+      <Link>Resources\images\common\H2H_2%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_function_bar.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\hamburger.png">
+      <Link>Resources\images\common\hamburger.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_function_bar%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\hamburger%402x.png">
+      <Link>Resources\images\common\hamburger%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\favorite_function_bar%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\hamburger%403x.png">
+      <Link>Resources\images\common\hamburger%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\league_detail.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\icon_transparent.png">
+      <Link>Resources\images\common\icon_transparent.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\league_detail%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\icon_transparent%402x.png">
+      <Link>Resources\images\common\icon_transparent%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\league_detail%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\icon_transparent%403x.png">
+      <Link>Resources\images\common\icon_transparent%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_extra_time.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league.png">
+      <Link>Resources\images\common\league.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_extra_time%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league%402x.png">
+      <Link>Resources\images\common\league%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_extra_time%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league%403x.png">
+      <Link>Resources\images\common\league%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_live.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail.png">
+      <Link>Resources\images\common\league_detail.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_live%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail%402x.png">
+      <Link>Resources\images\common\league_detail%402x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\match_live%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail%403x.png">
+      <Link>Resources\images\common\league_detail%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\assist_goal.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\line_ups.png">
+      <Link>Resources\images\common\line_ups.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\assist_goal%402x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live.png">
+      <Link>Resources\images\common\live.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\images\common\assist_goal%403x.png" />
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live%402x.png">
+      <Link>Resources\images\common\live%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live%403x.png">
+      <Link>Resources\images\common\live%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen.png">
+      <Link>Resources\images\common\logo_splash_screen.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%402x.png">
+      <Link>Resources\images\common\logo_splash_screen%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%403x.png">
+      <Link>Resources\images\common\logo_splash_screen%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time.png">
+      <Link>Resources\images\common\match_extra_time.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time%402x.png">
+      <Link>Resources\images\common\match_extra_time%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time%403x.png">
+      <Link>Resources\images\common\match_extra_time%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live.png">
+      <Link>Resources\images\common\match_live.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live%402x.png">
+      <Link>Resources\images\common\match_live%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live%403x.png">
+      <Link>Resources\images\common\match_live%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_goal.png">
+      <Link>Resources\images\common\missed_goal.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_goal%402x.png">
+      <Link>Resources\images\common\missed_goal%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_goal%403x.png">
+      <Link>Resources\images\common\missed_goal%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal.png">
+      <Link>Resources\images\common\missed_penalty_goal.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal%402x.png">
+      <Link>Resources\images\common\missed_penalty_goal%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal%403x.png">
+      <Link>Resources\images\common\missed_penalty_goal%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more.png">
+      <Link>Resources\images\common\more.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more%402x.png">
+      <Link>Resources\images\common\more%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more%403x.png">
+      <Link>Resources\images\common\more%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\news.png">
+      <Link>Resources\images\common\news.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\news%402x.png">
+      <Link>Resources\images\common\news%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\news%403x.png">
+      <Link>Resources\images\common\news%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc.png">
+      <Link>Resources\images\common\odd_asc.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc%402x.png">
+      <Link>Resources\images\common\odd_asc%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc%403x.png">
+      <Link>Resources\images\common\odd_asc%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc.png">
+      <Link>Resources\images\common\odd_desc.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc%402x.png">
+      <Link>Resources\images\common\odd_desc%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc%403x.png">
+      <Link>Resources\images\common\odd_desc%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart.png">
+      <Link>Resources\images\common\odd_movement_chart.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart%402x.png">
+      <Link>Resources\images\common\odd_movement_chart%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart%403x.png">
+      <Link>Resources\images\common\odd_movement_chart%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\own_goal.png">
+      <Link>Resources\images\common\own_goal.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\own_goal%402x.png">
+      <Link>Resources\images\common\own_goal%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\own_goal%403x.png">
+      <Link>Resources\images\common\own_goal%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal.png">
+      <Link>Resources\images\common\penalty_goal.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%402x.png">
+      <Link>Resources\images\common\penalty_goal%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%403x.png">
+      <Link>Resources\images\common\penalty_goal%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner.png">
+      <Link>Resources\images\common\penalty_winner.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner%402x.png">
+      <Link>Resources\images\common\penalty_winner%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner%403x.png">
+      <Link>Resources\images\common\penalty_winner%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_card.png">
+      <Link>Resources\images\common\red_card.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_card%402x.png">
+      <Link>Resources\images\common\red_card%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_card%403x.png">
+      <Link>Resources\images\common\red_card%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_yellow_card.png">
+      <Link>Resources\images\common\red_yellow_card.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_yellow_card%402x.png">
+      <Link>Resources\images\common\red_yellow_card%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_yellow_card%403x.png">
+      <Link>Resources\images\common\red_yellow_card%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\scores.png">
+      <Link>Resources\images\common\scores.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\search.png">
+      <Link>Resources\images\common\search.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\search%402x.png">
+      <Link>Resources\images\common\search%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\search%403x.png">
+      <Link>Resources\images\common\search%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner.png">
+      <Link>Resources\images\common\second_leg_winner.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner%402x.png">
+      <Link>Resources\images\common\second_leg_winner%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner%403x.png">
+      <Link>Resources\images\common\second_leg_winner%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\soccer.png">
+      <Link>Resources\images\common\soccer.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\soccer%402x.png">
+      <Link>Resources\images\common\soccer%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\soccer%403x.png">
+      <Link>Resources\images\common\soccer%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\star.png">
+      <Link>Resources\images\common\star.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_in.png">
+      <Link>Resources\images\common\substitution_away_in.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_in%402x.png">
+      <Link>Resources\images\common\substitution_away_in%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_in%403x.png">
+      <Link>Resources\images\common\substitution_away_in%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_out.png">
+      <Link>Resources\images\common\substitution_away_out.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_out%402x.png">
+      <Link>Resources\images\common\substitution_away_out%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_away_out%403x.png">
+      <Link>Resources\images\common\substitution_away_out%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_in.png">
+      <Link>Resources\images\common\substitution_home_in.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_in%402x.png">
+      <Link>Resources\images\common\substitution_home_in%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_in%403x.png">
+      <Link>Resources\images\common\substitution_home_in%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_out.png">
+      <Link>Resources\images\common\substitution_home_out.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_out%402x.png">
+      <Link>Resources\images\common\substitution_home_out%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution_home_out%403x.png">
+      <Link>Resources\images\common\substitution_home_out%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_feed.png">
+      <Link>Resources\images\common\tab_feed.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_feed%402x.png">
+      <Link>Resources\images\common\tab_feed%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_feed%403x.png">
+      <Link>Resources\images\common\tab_feed%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_icon.png">
+      <Link>Resources\images\common\tab_icon.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_icon%402x.png">
+      <Link>Resources\images\common\tab_icon%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tab_icon%403x.png">
+      <Link>Resources\images\common\tab_icon%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tracker.png">
+      <Link>Resources\images\common\tracker.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tv.png">
+      <Link>Resources\images\common\tv.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tv%402x.png">
+      <Link>Resources\images\common\tv%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tv%403x.png">
+      <Link>Resources\images\common\tv%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user1.png">
+      <Link>Resources\images\common\user1.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user2.png">
+      <Link>Resources\images\common\user2.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user3.png">
+      <Link>Resources\images\common\user3.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\user4.png">
+      <Link>Resources\images\common\user4.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\yellow_card.png">
+      <Link>Resources\images\common\yellow_card.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\yellow_card%402x.png">
+      <Link>Resources\images\common\yellow_card%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\yellow_card%403x.png">
+      <Link>Resources\images\common\yellow_card%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\asia_cup.png">
+      <Link>Resources\images\flag_league\asia_cup.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\champion_league.png">
+      <Link>Resources\images\flag_league\champion_league.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\copa_america_centenario.png">
+      <Link>Resources\images\flag_league\copa_america_centenario.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\europa_league.png">
+      <Link>Resources\images\flag_league\europa_league.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\flag_england.png">
+      <Link>Resources\images\flag_league\flag_england.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\flag_netherlands.png">
+      <Link>Resources\images\flag_league\flag_netherlands.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_nation_league.png">
+      <Link>Resources\images\flag_league\uefa_nation_league.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_woman_champion_league.png">
+      <Link>Resources\images\flag_league\uefa_woman_champion_league.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_youth_league.png">
+      <Link>Resources\images\flag_league\uefa_youth_league.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\world_cup.png">
+      <Link>Resources\images\flag_league\world_cup.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\logos\logo_1.png">
+      <Link>Resources\images\logos\logo_1.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\logos\logo_2.png">
+      <Link>Resources\images\logos\logo_2.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_1.png">
+      <Link>Resources\images\news\news_1.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_2.png">
+      <Link>Resources\images\news\news_2.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_3.png">
+      <Link>Resources\images\news\news_3.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_4.png">
+      <Link>Resources\images\news\news_4.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\news\news_5.png">
+      <Link>Resources\images\news\news_5.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_h2h_active.png">
+      <Link>Resources\images\tabstrip\active\tab_h2h_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_h2h_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_h2h_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_h2h_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_h2h_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_info_active.png">
+      <Link>Resources\images\tabstrip\active\tab_info_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_info_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_info_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_info_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_info_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_lineup_active.png">
+      <Link>Resources\images\tabstrip\active\tab_lineup_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_lineup_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_lineup_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_lineup_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_lineup_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_odds_active.png">
+      <Link>Resources\images\tabstrip\active\tab_odds_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_odds_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_odds_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_odds_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_odds_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_social_active.png">
+      <Link>Resources\images\tabstrip\active\tab_social_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_social_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_social_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_social_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_social_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_stats_active.png">
+      <Link>Resources\images\tabstrip\active\tab_stats_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_stats_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_stats_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_stats_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_stats_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_table_active.png">
+      <Link>Resources\images\tabstrip\active\tab_table_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_table_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_table_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_table_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_table_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tracker_active.png">
+      <Link>Resources\images\tabstrip\active\tab_tracker_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tracker_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_tracker_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tracker_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_tracker_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tv_active.png">
+      <Link>Resources\images\tabstrip\active\tab_tv_active.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tv_active%402x.png">
+      <Link>Resources\images\tabstrip\active\tab_tv_active%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\active\tab_tv_active%403x.png">
+      <Link>Resources\images\tabstrip\active\tab_tv_active%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_h2h.png">
+      <Link>Resources\images\tabstrip\inactive\tab_h2h.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_h2h%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_h2h%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_h2h%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_h2h%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_info.png">
+      <Link>Resources\images\tabstrip\inactive\tab_info.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_info%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_info%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_info%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_info%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_lineup.png">
+      <Link>Resources\images\tabstrip\inactive\tab_lineup.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_lineup%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_lineup%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_lineup%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_lineup%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_odds.png">
+      <Link>Resources\images\tabstrip\inactive\tab_odds.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_odds%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_odds%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_odds%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_odds%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_social.png">
+      <Link>Resources\images\tabstrip\inactive\tab_social.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_social%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_social%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_social%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_social%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_stats.png">
+      <Link>Resources\images\tabstrip\inactive\tab_stats.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_stats%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_stats%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_stats%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_stats%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_table.png">
+      <Link>Resources\images\tabstrip\inactive\tab_table.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_table%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_table%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_table%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_table%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tracker.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tracker.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tracker%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tracker%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tracker%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tracker%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tv.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tv.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tv%402x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tv%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\tabstrip\inactive\tab_tv%403x.png">
+      <Link>Resources\images\tabstrip\inactive\tab_tv%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
