@@ -38,17 +38,8 @@
         public static bool IsMatchEndedExtraTime(this ITimeline timeline, IMatchResult matchResult)
            => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsAfterExtraTime == true;
 
-        public static bool IsMatchEndNotAfterPenalty(this ITimeline timeline, IMatchResult matchResult)
-            => timeline.Type == EventTypes.MatchEnded && !matchResult.MatchStatus.IsAfterPenalties;
-
         public static bool IsMatchEndAfterPenalty(this ITimeline timeline, IMatchResult matchResult)
-           => timeline?.Type == EventTypes.MatchEnded && matchResult.MatchStatus.IsAfterPenalties;
-
-        public static bool IsPenaltyShootOutStart(this ITimeline timeline)
-            => timeline?.Type == EventTypes.PeriodStart && timeline?.PeriodType == PeriodTypes.Penalties;
-
-        public static bool IsPenaltyFirstShoot(this ITimeline timeline)
-            => timeline.Type == EventTypes.PenaltyShootout && timeline.IsFirstShoot;
+           => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsAfterPenalties == true;
 
         public static bool OfHomeTeam(this ITimeline timeline)
             => timeline?.Team == "home";

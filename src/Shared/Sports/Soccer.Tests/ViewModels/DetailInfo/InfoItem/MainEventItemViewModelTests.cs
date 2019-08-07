@@ -158,11 +158,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         }
 
         [Fact]
-        public void BuildMainEventStatus_PeriodStart_Penalties_ShowPenaltyShootOut()
+        public void BuildMainEventStatus_MatchEndAfterPenalties_ShowPenaltyShootOut()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.PeriodStart);
+            timeline.Type.Returns(EventTypes.MatchEnded);
             timeline.PeriodType.Returns(PeriodTypes.Penalties);
+            matchResult.MatchStatus.Returns(MatchStatus.EndedAfterPenalties);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },

@@ -90,7 +90,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new Timeline { Id = "6", Type = EventTypes.PenaltyMissed, Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
                 new Timeline { Id = "7", Type = EventTypes.ScoreChange, Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
                 new Timeline { Id = "8", Type = EventTypes.BreakStart, PeriodType = PeriodTypes.ExtraTimeHalfTime, Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
-                new Timeline { Id = "9", Type = EventTypes.PeriodStart, PeriodType = PeriodTypes.Penalties, Time = new DateTime(2019, 01, 01, 18, 55, 00 )},
                 new Timeline { Id = "10", Type = EventTypes.PenaltyShootout, Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
                 new Timeline { Id = "11", Type = EventTypes.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
@@ -109,15 +108,15 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Expected not include substition and match_ended
             var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
             {
-                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),                
-                new BaseItemViewModel(returnTimelines[3], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[4], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[5], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[7], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[9], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
                 new BaseItemViewModel(returnTimelines[8], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[9], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),                
+                new BaseItemViewModel(returnTimelines[7], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[5], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[4], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[3], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
             };
             var actualInfoItemViewModels = viewModel.InfoItemViewModels;
             Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);

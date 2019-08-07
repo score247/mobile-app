@@ -16,6 +16,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Navigation;
@@ -129,12 +130,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildInfoItems(IMatch match)
         {
-            match.TimeLines = BaseItemViewModel
-                .FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)
-                .OrderByDescending(t => t.Time);
+            match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
+
             var timelines = match.TimeLines?
-                .Where(t => BaseItemViewModel.ValidateEvent(t, match.MatchResult))
-                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimeline>();
+                .Where(t => t.IsDetailInfoEvent())
+                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimeline>(); // TODO: Replace TimelineComparer
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
@@ -169,6 +169,38 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        private static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
+        {
+            if (matchResult == null)
+            {
+                return timelines;
+            }
+
+            if (matchResult.EventStatus.IsClosed)
+            {
+                var timelineEvents = timelines.ToList();
+                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
+
+                return timelineEvents;
+            }
+
+            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
+            {
+                var lastEvent = timelines.LastOrDefault();
+                var timelineEvents = timelines.ToList();
+                timelineEvents.RemoveAll(t => t.IsFirstShoot);
+
+                if (lastEvent?.IsFirstShoot == true)
+                {
+                    timelineEvents.Add(lastEvent);
+                }
+
+                return timelineEvents;
+            }
+
+            return timelines;
         }
     }
 }

@@ -7,7 +7,6 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -98,41 +97,6 @@
             }
 
             return new MainEventItemTemplate();
-        }
-
-        public static bool ValidateEvent(ITimeline timeline, IMatchResult matchResult)
-            => timeline.IsDetailInfoEvent();
-
-        public static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
-        {
-            if (matchResult == null)
-            {
-                return timelines;
-            }
-
-            if (matchResult.EventStatus.IsClosed)
-            {
-                var timelineEvents = timelines.ToList();
-                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
-
-                return timelineEvents;
-            }
-
-            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
-            {
-                var lastEvent = timelines.LastOrDefault();
-                var timelineEvents = timelines.ToList();
-                timelineEvents.RemoveAll(t => t.IsFirstShoot);
-
-                if (lastEvent?.IsFirstShoot == true)
-                {
-                    timelineEvents.Add(lastEvent);
-                }
-
-                return timelineEvents;
-            }
-
-            return timelines;
         }
 
         protected virtual void BuildInfo()
