@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
-    <ViewCell Height="40">
+    <ViewCell Height="{StaticResource TableRowHeight}">
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>

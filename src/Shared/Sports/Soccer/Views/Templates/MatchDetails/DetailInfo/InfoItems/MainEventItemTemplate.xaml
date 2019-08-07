@@ -16,8 +16,8 @@
             </StackLayout.Resources>
             <Grid BackgroundColor="{Binding RowColor}" Style="{StaticResource MatchDetailInfoRow}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="30" />
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="30" />
@@ -29,16 +29,19 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    AutomationId="{Binding ItemAutomationId, StringFormat='MainEventStatus-{0}'}"
                     Style="{StaticResource MatchInfoHalfTimeText}"
-                    Text="{Binding MainEventStatus}"
-                    AutomationId="{Binding ItemAutomationId, StringFormat='MainEventStatus-{0}'}" />
+                    Text="{Binding MainEventStatus}" />
 
                 <StackLayout
                     Grid.Row="0"
                     Grid.Column="3"
                     Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button Style="{StaticResource MatchInfoScoreBox}" Text="{Binding Score}"
-                             AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}" />
+                    <Button
+                        AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                        Style="{StaticResource MatchInfoScoreBox}"
+                        Text="{Binding Score}" />
                 </StackLayout>
             </Grid>
             <BoxView BackgroundColor="{StaticResource SecondColor}" Style="{StaticResource HorizontalLine}" />
