@@ -77,7 +77,7 @@
             oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             var expectedViewModels = new ObservableCollection<BaseItemViewModel>
             {
-                new BaseItemViewModel(BetType.OneXTwo, CreateBetTypeOdds(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+                new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
 
             // Act
@@ -113,7 +113,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), true);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(3), Arg.Any<string>(), true);
         }
 
         [Fact]
