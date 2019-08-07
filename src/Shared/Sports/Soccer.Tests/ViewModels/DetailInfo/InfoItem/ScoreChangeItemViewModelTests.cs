@@ -9,14 +9,14 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
     public class ScoreChangeItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly ITimeline timeline;
+        private readonly ITimelineEvent timeline;
         private readonly IMatchResult matchResult;
         private readonly ViewModelBaseFixture baseFixture;
 
         public ScoreChangeItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
-            timeline = Substitute.For<ITimeline>();
+            timeline = Substitute.For<ITimelineEvent>();
             matchResult = Substitute.For<IMatchResult>();
         }
 

@@ -24,8 +24,8 @@
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchResult>))]
         public IMatchResult MatchResult { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Timeline>>))]
-        public IEnumerable<ITimeline> TimeLines { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimelineEvent>>))]
+        public IEnumerable<ITimelineEvent> TimeLines { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<MatchCondition>))]
         public IMatchCondition MatchCondition { get; set; }
@@ -40,8 +40,8 @@
 
         public string Referee { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Timeline>))]
-        public ITimeline LatestTimeline { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<TimelineEvent>))]
+        public ITimelineEvent LatestTimeline { get; set; }
 
         public IEnumerable<MatchFunction> Functions { get; set; }
 

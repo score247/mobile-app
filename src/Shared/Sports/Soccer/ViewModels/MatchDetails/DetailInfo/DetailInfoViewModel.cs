@@ -97,27 +97,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<byte, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, MatchEvent>("PushMatchEvent", OnReceivingMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, Dictionary<string, MatchPushEvent> payload)
+        protected internal void OnReceivingMatchEvent(byte sportId, MatchEvent matchEvent)
         {
-            if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || !payload.ContainsKey(Match.Id))
+            if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || matchEvent.MatchId != Match.Id)
             {
                 return;
             }
 
-            var matchPayload = payload[Match.Id];
-            Match.MatchResult = matchPayload.MatchResult;
+            Match.MatchResult = matchEvent.MatchResult;
 
             if (Match.TimeLines == null)
             {
-                Match.TimeLines = new List<Timeline>();
+                Match.TimeLines = new List<TimelineEvent>();
             }
 
-            Match.TimeLines = Match.TimeLines.Concat(matchPayload.TimeLines);
+            Match.TimeLines = Match.TimeLines.Concat(new[] { matchEvent.Timeline });
 
             BuildDetailInfo(Match);
         }
@@ -134,7 +133,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
             var timelines = match.TimeLines?
                 .Where(t => t.IsDetailInfoEvent())
-                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimeline>(); // TODO: Replace TimelineComparer
+                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimelineEvent>(); // TODO: Replace TimelineComparer
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
@@ -171,7 +170,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             GC.SuppressFinalize(this);
         }
 
-        private static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
+        private static IEnumerable<ITimelineEvent> FilterPenaltyEvents(IEnumerable<ITimelineEvent> timelines, IMatchResult matchResult)
         {
             if (matchResult == null)
             {

@@ -1,7 +1,9 @@
 namespace Soccer.Tests
 {
+    using LiveScore.Core.Converters;
     using LiveScore.Core.Services;
     using LiveScore.Soccer;
+    using LiveScore.Soccer.Converters;
     using LiveScore.Soccer.Services;
     using LiveScore.Soccer.Views.Templates;
     using NSubstitute;
@@ -37,6 +39,9 @@ namespace Soccer.Tests
 
             // Assert
             container.Received(1).Register<IMatchService, MatchService>("1");
+            container.Received(1).Register<IOddsService, OddsService>("1");
+            container.Received(1).Register<IHubService, HubService>("1");
+            container.Received(1).Register<IMatchStatusConverter, MatchStatusConverter>("1");
             container.Received(1).Register<DataTemplate, MatchDataTemplate>("1");
         }
     }

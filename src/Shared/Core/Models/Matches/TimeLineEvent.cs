@@ -5,7 +5,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Teams;
 
-    public interface ITimeline : IEntity<string, string>
+    public interface ITimelineEvent : IEntity<string, string>
     {
         EventTypes Type { get; }
 
@@ -60,7 +60,7 @@
         bool IsFirstShoot { get; }
     }
 
-    public class Timeline : Entity<string, string>, ITimeline
+    public class TimelineEvent : Entity<string, string>, ITimelineEvent
     {
         public EventTypes Type { get; set; }
 

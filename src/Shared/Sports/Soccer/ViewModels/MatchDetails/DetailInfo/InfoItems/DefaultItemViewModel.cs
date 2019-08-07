@@ -25,7 +25,7 @@
 
         public DefaultItemViewModel(
 
-            ITimeline timelineEvent,
+            ITimelineEvent timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)

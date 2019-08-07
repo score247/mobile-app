@@ -6,10 +6,8 @@ namespace LiveScore.Basketball.Services
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
-    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using Microsoft.AspNetCore.SignalR.Client;
 
@@ -25,7 +23,7 @@ namespace LiveScore.Basketball.Services
             return null;
         }
 
-        public void SubscribeMatches(HubConnection hubConnection, Action<byte, Dictionary<string, MatchPushEvent>> handler)
+        public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
         {
             throw new NotImplementedException();
         }

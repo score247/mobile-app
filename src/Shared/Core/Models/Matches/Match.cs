@@ -13,7 +13,7 @@
 
         IMatchResult MatchResult { get; set; }
 
-        IEnumerable<ITimeline> TimeLines { get; set; }
+        IEnumerable<ITimelineEvent> TimeLines { get; set; }
 
         IMatchCondition MatchCondition { get; set; }
 
@@ -25,7 +25,7 @@
 
         string Referee { get; set; }
 
-        ITimeline LatestTimeline { get; set; }
+        ITimelineEvent LatestTimeline { get; set; }
 
         IEnumerable<MatchFunction> Functions { get; set; }
     }

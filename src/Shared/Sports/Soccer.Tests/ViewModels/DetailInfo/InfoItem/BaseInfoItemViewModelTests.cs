@@ -12,13 +12,13 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
     public class BaseInfoItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly ITimeline timeline;
+        private readonly ITimelineEvent timeline;
         private readonly IMatchResult matchResult;
         private readonly BaseItemViewModel viewModel;
 
         public BaseInfoItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            timeline = Substitute.For<ITimeline>();
+            timeline = Substitute.For<ITimelineEvent>();
             matchResult = Substitute.For<IMatchResult>();
 
             timeline.HomeScore.Returns(1);

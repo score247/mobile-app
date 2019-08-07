@@ -17,34 +17,34 @@
             EventTypes.MatchEnded
         };
 
-        public static bool IsHalfTimeBreak(this ITimeline timeline)
+        public static bool IsHalfTimeBreak(this ITimelineEvent timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.Pause;
 
-        public static bool IsAwaitingExtraTimeBreak(this ITimeline timeline)
+        public static bool IsAwaitingExtraTimeBreak(this ITimelineEvent timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.AwaitingExtraTime;
 
-        public static bool IsAwaitingPenaltiesBreak(this ITimeline timeline)
+        public static bool IsAwaitingPenaltiesBreak(this ITimelineEvent timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.AwaitingPenalties;
 
-        public static bool IsNotExtraTimeHalfTimeBreak(this ITimeline timeline)
+        public static bool IsNotExtraTimeHalfTimeBreak(this ITimelineEvent timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType != PeriodTypes.ExtraTimeHalfTime;
 
-        public static bool IsExtraTimeHalfTimeBreak(this ITimeline timeline)
+        public static bool IsExtraTimeHalfTimeBreak(this ITimelineEvent timeline)
             => timeline?.Type == EventTypes.BreakStart && timeline?.PeriodType == PeriodTypes.ExtraTimeHalfTime;
 
-        public static bool IsMatchEndedFullTime(this ITimeline timeline, IMatchResult matchResult)
+        public static bool IsMatchEndedFullTime(this ITimelineEvent timeline, IMatchResult matchResult)
             => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsEnded == true;
 
-        public static bool IsMatchEndedExtraTime(this ITimeline timeline, IMatchResult matchResult)
+        public static bool IsMatchEndedExtraTime(this ITimelineEvent timeline, IMatchResult matchResult)
            => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsAfterExtraTime == true;
 
-        public static bool IsMatchEndAfterPenalty(this ITimeline timeline, IMatchResult matchResult)
+        public static bool IsMatchEndAfterPenalty(this ITimelineEvent timeline, IMatchResult matchResult)
            => timeline?.Type == EventTypes.MatchEnded && matchResult?.MatchStatus?.IsAfterPenalties == true;
 
-        public static bool OfHomeTeam(this ITimeline timeline)
+        public static bool OfHomeTeam(this ITimelineEvent timeline)
             => timeline?.Team == "home";
 
-        public static bool IsDetailInfoEvent(this ITimeline timeline)
+        public static bool IsDetailInfoEvent(this ITimelineEvent timeline)
             => DetailInfoEventTypes.Contains(timeline.Type);
     }
 }

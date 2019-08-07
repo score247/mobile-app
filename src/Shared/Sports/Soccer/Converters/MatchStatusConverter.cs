@@ -126,7 +126,7 @@
             return string.Empty;
         }
 
-        private string BuildMatchInjuryTime(IMatch match, ITimeline timeline)
+        private string BuildMatchInjuryTime(IMatch match, ITimelineEvent timeline)
         {
             PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;

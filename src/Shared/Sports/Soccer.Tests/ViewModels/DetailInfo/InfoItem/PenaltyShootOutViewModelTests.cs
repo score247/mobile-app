@@ -9,14 +9,14 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
     public class PenaltyShootOutViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly Timeline timeline;
+        private readonly TimelineEvent timeline;
         private readonly IMatchResult matchResult;
         private readonly ViewModelBaseFixture baseFixture;
 
         public PenaltyShootOutViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
-            timeline = new Timeline();
+            timeline = new TimelineEvent();
             matchResult = Substitute.For<IMatchResult>();
         }
 

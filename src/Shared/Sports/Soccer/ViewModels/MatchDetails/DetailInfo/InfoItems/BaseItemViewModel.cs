@@ -40,7 +40,7 @@
         };
 
         public BaseItemViewModel(
-            ITimeline timelineEvent,
+            ITimelineEvent timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
@@ -55,7 +55,7 @@
 
         public string ItemAutomationId { get; }
 
-        public ITimeline TimelineEvent { get; }
+        public ITimelineEvent TimelineEvent { get; }
 
         public IMatchResult Result { get; }
 

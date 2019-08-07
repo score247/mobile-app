@@ -34,14 +34,15 @@ namespace LiveScore.Score.ViewModels
         public ScoresViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator,
-            IHubService hubService)
+            IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
             MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
+            matchHubConnection = DependencyResolver
+                .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
+                .BuildMatchEventHubConnection();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
-            matchHubConnection = hubService.BuildMatchHubConnection();
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -64,7 +65,7 @@ namespace LiveScore.Score.ViewModels
 
             var navigated = await NavigationService.NavigateAsync("MatchDetailView" + SettingsService.CurrentSportType.Value, parameters);
 
-            if(!navigated.Success)
+            if (!navigated.Success)
             {
                 await LoggingService.LogErrorAsync(navigated.Exception);
             }
@@ -105,7 +106,7 @@ namespace LiveScore.Score.ViewModels
                   .GetEvent<DateBarItemSelectedEvent>()
                   .Subscribe(OnDateBarItemSelected);
 
-                MatchService.SubscribeMatches(matchHubConnection, OnMatchesChanged);
+                MatchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
 
                 await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
             }
@@ -161,25 +162,22 @@ namespace LiveScore.Score.ViewModels
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.Day, item.Match.EventDate.Month, item.Match.EventDate.Year }));
         }
 
-        internal void OnMatchesChanged(byte sportId, Dictionary<string, MatchPushEvent> matchPayloads)
+        internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)
         {
             if (sportId != SettingsService.CurrentSportType.Value)
             {
                 return;
             }
 
-            foreach (var matchPayload in matchPayloads)
-            {
-                var matchItem = MatchItemSource
-                   .SelectMany(group => group)
-                   .FirstOrDefault(m => m.Match.Id == matchPayload.Key);
+            var matchItem = MatchItemSource
+               .SelectMany(group => group)
+               .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId);
 
-                if (matchItem?.Match != null)
-                {
-                    matchItem.Match.MatchResult = matchPayload.Value.MatchResult;
-                    matchItem.Match.LatestTimeline = matchPayload.Value.TimeLines.LastOrDefault();
-                    matchItem.BuildMatchStatus();
-                }
+            if (matchItem?.Match != null)
+            {
+                matchItem.Match.MatchResult = matchEvent.MatchResult;
+                matchItem.Match.LatestTimeline = matchEvent.Timeline;
+                matchItem.BuildMatchStatus();
             }
         }
     }

@@ -9,7 +9,7 @@
     {
         public PenaltyShootOutViewModel(
 
-            ITimeline timelineEvent,
+            ITimelineEvent timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)

@@ -120,7 +120,7 @@ namespace Soccer.Tests.Converters
                     MatchStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatus),
                     MatchTime = currentMatchTime
                 },
-                LatestTimeline = new Timeline
+                LatestTimeline = new TimelineEvent
                 {
                     Type = EventTypes.InjuryTimeShown,
                     InjuryTimeAnnounced = 5
@@ -195,7 +195,7 @@ namespace Soccer.Tests.Converters
                     EventStatus = MatchStatus.Live,
                     MatchTime = 106
                 },
-                LatestTimeline = new Timeline
+                LatestTimeline = new TimelineEvent
                 {
                     Type = Enumeration.FromDisplayName<EventTypes>("injury_time_shown"),
                     StoppageTime = "1",
@@ -226,7 +226,7 @@ namespace Soccer.Tests.Converters
                     EventStatus = MatchStatus.Live,
                     MatchTime = matchTime
                 },
-                LatestTimeline = new Timeline
+                LatestTimeline = new TimelineEvent
                 {
                     Type = Enumeration.FromDisplayName<EventTypes>("yellow_card"),
                     StoppageTime = "2",

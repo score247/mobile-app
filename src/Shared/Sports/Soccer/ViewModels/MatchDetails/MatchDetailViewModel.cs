@@ -18,6 +18,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
@@ -53,17 +54,18 @@ namespace LiveScore.Soccer.ViewModels
         public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator,
-            IHubService hubService)
+            IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            matchHubConnection = hubService.BuildMatchHubConnection();
+            matchHubConnection = DependencyResolver
+                .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
+                .BuildMatchEventHubConnection();
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
 
-        public string DisplayEventDate { get; set; }
+        public string DisplayEventDate { get; private set; }
 
         public string DisplaySecondLeg { get; private set; }
 
@@ -155,23 +157,22 @@ namespace LiveScore.Soccer.ViewModels
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<byte, Dictionary<string, MatchPushEvent>>("PushMatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, MatchEvent>("MatchEvent", OnReceivingMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, Dictionary<string, MatchPushEvent> payload)
+        protected internal void OnReceivingMatchEvent(byte sportId, MatchEvent payload)
         {
             var match = MatchViewModel.Match;
 
-            if (sportId != SettingsService.CurrentSportType.Value || match?.Id == null || !payload.ContainsKey(match.Id))
+            if (sportId != SettingsService.CurrentSportType.Value || match?.Id == null || payload.MatchId != match.Id)
             {
                 return;
             }
 
-            var matchPayload = payload[match.Id];
-            match.MatchResult = matchPayload.MatchResult;
-            match.LatestTimeline = matchPayload.TimeLines.LastOrDefault();
+            match.MatchResult = payload.MatchResult;
+            match.LatestTimeline = payload.Timeline;
 
             BuildGeneralInfo(match);
         }

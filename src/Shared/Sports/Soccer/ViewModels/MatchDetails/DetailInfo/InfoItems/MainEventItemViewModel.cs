@@ -11,7 +11,7 @@
     public class MainEventItemViewModel : BaseItemViewModel
     {
         public MainEventItemViewModel(
-            ITimeline timelineEvent,
+            ITimelineEvent timelineEvent,
             IMatchResult matchResult,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)

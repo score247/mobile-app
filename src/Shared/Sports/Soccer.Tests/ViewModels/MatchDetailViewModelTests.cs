@@ -31,11 +31,18 @@ namespace Soccer.Tests.ViewModels
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
+
+            var hubConnection = Substitute.For<FakeHubConnection>();
+            var hubService = Substitute.For<IHubService>();
+            hubService.BuildMatchEventHubConnection().Returns(hubConnection);
+            baseFixture.DependencyResolver
+                .Resolve<IHubService>("1")
+                .Returns(hubService);
+
             viewModel = new MatchDetailViewModel(
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
-                baseFixture.EventAggregator,
-                baseFixture.HubService);
+                baseFixture.EventAggregator);
 
             match = CreateMatch();
             var parameters = new NavigationParameters { { "Match", match } };
@@ -72,7 +79,7 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_ParametersIsNotNull_BuildMatchStatus()
         {
             // Arrange
-            match.LatestTimeline = new Timeline { StoppageTime = "4", InjuryTimeAnnounced = 5 };
+            match.LatestTimeline = new TimelineEvent { StoppageTime = "4", InjuryTimeAnnounced = 5 };
             match.MatchResult.MatchTime = 49;
             var parameters = new NavigationParameters { { "Match", match } };
 
@@ -189,9 +196,9 @@ namespace Soccer.Tests.ViewModels
         public void OnReceivingMatchEvent_IsCurrentMatch_BuildGeneralInfo()
         {
             // Arrange
-            match.TimeLines = new List<ITimeline>
+            match.TimeLines = new List<ITimelineEvent>
             {
-                new Timeline { Type = EventTypes.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new TimelineEvent { Type = EventTypes.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var matchResult = new MatchResult
@@ -201,22 +208,15 @@ namespace Soccer.Tests.ViewModels
                 AwayScore = 2
             };
 
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
-
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                {"1234", new MatchPushEvent { MatchResult = matchResult, TimeLines = timelines } }
-            };
+            var timeline = new TimelineEvent { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+            var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, pushEvents);
+            viewModel.OnReceivingMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
-            Assert.Equal(timelines[0], viewModel.MatchViewModel.Match.LatestTimeline);
+            Assert.Equal(timeline, viewModel.MatchViewModel.Match.LatestTimeline);
             Assert.Equal("AB", viewModel.MatchViewModel.DisplayMatchStatus);
         }
 
@@ -224,18 +224,11 @@ namespace Soccer.Tests.ViewModels
         public void OnReceivingMatchEvent_IsNotCurrentMatch_Return()
         {
             // Arrange
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
-
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                { "1", new MatchPushEvent{ TimeLines = timelines } }
-            };
+            var timeline = new TimelineEvent { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+            var matchEvent = new MatchEvent("1", null, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, pushEvents);
+            viewModel.OnReceivingMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Null(viewModel.MatchViewModel.Match.TimeLines);

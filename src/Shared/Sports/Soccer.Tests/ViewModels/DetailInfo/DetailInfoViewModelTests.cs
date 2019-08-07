@@ -42,7 +42,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 match.Id,
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
-                baseFixture.HubService.BuildMatchHubConnection(),
+                baseFixture.HubService.BuildMatchEventHubConnection(),
                 null);
 
             var parameters = new NavigationParameters { { "Match", match } };
@@ -80,18 +80,18 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var returnMatch = CreateMatch();
-            var returnTimelines = new List<ITimeline>
+            var returnTimelines = new List<ITimelineEvent>
             {
-                new Timeline { Id = "1", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-                new Timeline { Id = "2", Type = EventTypes.YellowRedCard, Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
-                new Timeline { Id = "3", Type = EventTypes.Substitution, Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
-                new Timeline { Id = "4", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
-                new Timeline { Id = "5", Type = EventTypes.BreakStart, PeriodType = PeriodTypes.Pause, Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
-                new Timeline { Id = "6", Type = EventTypes.PenaltyMissed, Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
-                new Timeline { Id = "7", Type = EventTypes.ScoreChange, Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
-                new Timeline { Id = "8", Type = EventTypes.BreakStart, PeriodType = PeriodTypes.ExtraTimeHalfTime, Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
-                new Timeline { Id = "10", Type = EventTypes.PenaltyShootout, Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
-                new Timeline { Id = "11", Type = EventTypes.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "1", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new TimelineEvent { Id = "2", Type = EventTypes.YellowRedCard, Time = new DateTime(2019, 01, 01, 17, 00, 00 )},
+                new TimelineEvent { Id = "3", Type = EventTypes.Substitution, Time = new DateTime(2019, 01, 01, 17, 15, 00 )},
+                new TimelineEvent { Id = "4", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 17, 45, 00 )},
+                new TimelineEvent { Id = "5", Type = EventTypes.BreakStart, PeriodType = PeriodTypes.Pause, Time = new DateTime(2019, 01, 01, 17, 50, 00 )},
+                new TimelineEvent { Id = "6", Type = EventTypes.PenaltyMissed, Time = new DateTime(2019, 01, 01, 18, 30, 00 )},
+                new TimelineEvent { Id = "7", Type = EventTypes.ScoreChange, Time = new DateTime(2019, 01, 01, 17, 55, 00 )},
+                new TimelineEvent { Id = "8", Type = EventTypes.BreakStart, PeriodType = PeriodTypes.ExtraTimeHalfTime, Time = new DateTime(2019, 01, 01, 18, 40, 00 )},
+                new TimelineEvent { Id = "10", Type = EventTypes.PenaltyShootout, Time = new DateTime(2019, 01, 01, 19, 00, 00 )},
+                new TimelineEvent { Id = "11", Type = EventTypes.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
@@ -127,9 +127,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var returnMatch = CreateMatch();
-            var returnTimelines = new List<ITimeline>
+            var returnTimelines = new List<ITimelineEvent>
             {
-                new Timeline { Id = "1", Type = EventTypes.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "1", Type = EventTypes.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
             returnMatch.MatchResult = new MatchResult
@@ -157,9 +157,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var returnMatch = CreateMatch();
-            returnMatch.TimeLines = new List<ITimeline>
+            returnMatch.TimeLines = new List<ITimelineEvent>
             {
-                new Timeline { Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.MatchResult = new MatchResult
             {
@@ -182,10 +182,10 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var returnMatch = CreateMatch();
-            var timelines = new List<ITimeline>
+            var timelines = new List<ITimelineEvent>
             {
-                new Timeline { Id = "1", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Id = "2", Type = EventTypes.PenaltyShootout, IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "1", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "2", Type = EventTypes.PenaltyShootout, IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
@@ -212,11 +212,11 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var returnMatch = CreateMatch();
-            var timelines = new List<ITimeline>
+            var timelines = new List<ITimelineEvent>
             {
-                new Timeline { Id = "1", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Id = "2", Type = EventTypes.PenaltyShootout, IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
-                new Timeline { Id = "3", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "1", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "2", Type = EventTypes.PenaltyShootout, IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
+                new TimelineEvent { Id = "3", Type = EventTypes.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
             returnMatch.MatchResult = new MatchResult
@@ -261,9 +261,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(match);
             viewModel.OnAppearing();
 
-            match.TimeLines = new List<ITimeline>
+            match.TimeLines = new List<ITimelineEvent>
             {
-                new Timeline { Id = "1", Type = EventTypes.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new TimelineEvent { Id = "1", Type = EventTypes.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var matchResult = new MatchResult
@@ -273,22 +273,17 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 AwayScore = 2
             };
 
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Id = "2", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
+            var timeline = new TimelineEvent { Id = "2", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
 
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                {"1234", new MatchPushEvent { MatchResult = matchResult, TimeLines = timelines } }
-            };
+            var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, pushEvents);
+            viewModel.OnReceivingMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Equal(matchResult, viewModel.Match.MatchResult);
-            var expectedTimelines = match.TimeLines.Concat(timelines).Distinct();
+            match.TimeLines.ToList().Add(timeline);
+            var expectedTimelines = match.TimeLines.Distinct();
             Assert.Equal(expectedTimelines, viewModel.Match.TimeLines);
         }
 
@@ -298,22 +293,18 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(match);
             viewModel.OnAppearing();
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Id = "1", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
 
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                {"1234", new MatchPushEvent {  TimeLines = timelines } }
-            };
+            var timeline = new TimelineEvent { Id = "1", Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+
+            var matchEvent = new MatchEvent("1234", null, timeline);
+
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, pushEvents);
+            viewModel.OnReceivingMatchEvent(1, matchEvent);
 
             // Assert
-            Assert.Equal(timelines, viewModel.Match.TimeLines);
+            Assert.Contains(timeline, viewModel.Match.TimeLines);
         }
 
         [Fact]
@@ -322,19 +313,13 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             matchService.GetMatch(viewModel.SettingsService.UserSettings, match.Id, false).Returns(match);
             viewModel.OnAppearing();
-            var timelines = new List<ITimeline>
-            {
-                new Timeline { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
-            };
+            var timeline = new TimelineEvent { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+            var matchEvent = new MatchEvent("1", null, timeline);
 
-            var pushEvents = new Dictionary<string, MatchPushEvent>
-            {
-                { "1", new MatchPushEvent{ TimeLines = timelines } }
-            };
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, pushEvents);
+            viewModel.OnReceivingMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Null(viewModel.Match.TimeLines);

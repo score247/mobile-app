@@ -20,6 +20,7 @@ using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -28,6 +29,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using JsonNet.ContractResolvers;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -51,6 +53,15 @@ namespace LiveScore
 
         protected override async void OnInitialized()
         {
+            JsonConvert.DefaultSettings = () =>
+            {
+                return new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                    ContractResolver = new PrivateSetterContractResolver()
+                };
+            };
+
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
@@ -81,7 +92,7 @@ namespace LiveScore
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
 
-            containerRegistry.RegisterSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
+            containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
         }
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
@@ -93,7 +104,6 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-            containerRegistry.RegisterSingleton<IHubService, HubService>();
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
         }
 

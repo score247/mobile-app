@@ -33,6 +33,7 @@
             containerRegistry.Register<IOddsService, OddsService>(SportTypes.Soccer.Value.ToString());
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Soccer.Value.ToString());
             containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportTypes.Soccer.Value.ToString());
+            containerRegistry.Register<IHubService, HubService>(SportTypes.Soccer.Value.ToString());
         }
     }
 }

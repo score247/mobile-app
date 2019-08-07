@@ -11,6 +11,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
+    using Newtonsoft.Json;
     using Refit;
 
     public interface ISoccerMatchApi
@@ -24,7 +25,7 @@
 
     public class MatchService : BaseService, IMatchService
     {
-        private const string PushMatchesMethod = "PushMatchEvent";
+        private const string PushMatchEvent = "MatchEvent";
         private readonly ILocalStorage cacheService;
         private readonly IApiService apiService;
 
@@ -103,13 +104,13 @@
             }
         }
 
-        public void SubscribeMatches(
-            HubConnection hubConnection,
-            Action<byte, Dictionary<string, MatchPushEvent>> handler)
+        public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
         {
-            hubConnection.On<byte, Dictionary<string, MatchPushEvent>>(PushMatchesMethod, (sportId, payload) =>
+            hubConnection.On<byte, string>(PushMatchEvent, (sportId, payload) =>
             {
-                handler.Invoke(sportId, payload);
+                var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
+
+                handler.Invoke(sportId, matchEvent);
             });
         }
 
