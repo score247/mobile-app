@@ -56,7 +56,7 @@
                 return;
             }
 
-            if (TimelineEvent.IsPenaltyShootOutStart())
+            if (TimelineEvent.IsMatchEndAfterPenalty(Result))
             {
                 BuildPenaltyShootOut();
             }

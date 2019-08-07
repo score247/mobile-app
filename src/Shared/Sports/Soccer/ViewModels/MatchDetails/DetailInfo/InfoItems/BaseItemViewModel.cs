@@ -101,9 +101,7 @@
         }
 
         public static bool ValidateEvent(ITimeline timeline, IMatchResult matchResult)
-            => timeline.IsDetailInfoEvent()
-                || timeline.IsPenaltyShootOutStart()
-                || timeline.IsMatchEndNotAfterPenalty(matchResult);
+            => timeline.IsDetailInfoEvent();
 
         public static IEnumerable<ITimeline> FilterPenaltyEvents(IEnumerable<ITimeline> timelines, IMatchResult matchResult)
         {
@@ -122,7 +120,7 @@
 
             if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
             {
-                var lastEvent = timelines.LastOrDefault();
+                var lastEvent = timelines.FirstOrDefault();
                 var timelineEvents = timelines.ToList();
                 timelineEvents.RemoveAll(t => t.IsFirstShoot);
 
