@@ -120,7 +120,7 @@
 
             if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
             {
-                var lastEvent = timelines.FirstOrDefault();
+                var lastEvent = timelines.LastOrDefault();
                 var timelineEvents = timelines.ToList();
                 timelineEvents.RemoveAll(t => t.IsFirstShoot);
 
