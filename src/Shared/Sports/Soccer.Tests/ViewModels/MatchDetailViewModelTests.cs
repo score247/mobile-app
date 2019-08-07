@@ -27,8 +27,7 @@ namespace Soccer.Tests.ViewModels
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
             localStorage = Substitute.For<ILocalStorage>();
-            baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
-                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.DisplayName)
+            baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);

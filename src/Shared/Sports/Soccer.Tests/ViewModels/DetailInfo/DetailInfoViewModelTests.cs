@@ -32,8 +32,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             comparer = baseFixture.CommonFixture.Comparer;
             localStorage = Substitute.For<ILocalStorage>();
-            baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>(
-                baseFixture.AppSettingsFixture.SettingsService.CurrentSportType.DisplayName)
+            baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
@@ -107,17 +106,18 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Assert
+            // Expected not include substition and match_ended
             var expectedInfoItemViewModels = new ObservableCollection<BaseItemViewModel>
             {
-                new BaseItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[1], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),                
                 new BaseItemViewModel(returnTimelines[3], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
                 new BaseItemViewModel(returnTimelines[4], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[0], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
                 new BaseItemViewModel(returnTimelines[5], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
+                new BaseItemViewModel(returnTimelines[6], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
                 new BaseItemViewModel(returnTimelines[7], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
                 new BaseItemViewModel(returnTimelines[8], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseItemViewModel(returnTimelines[9], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+                new BaseItemViewModel(returnTimelines[9], returnMatch.MatchResult, viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),                
             };
             var actualInfoItemViewModels = viewModel.InfoItemViewModels;
             Assert.True(comparer.Compare(expectedInfoItemViewModels, actualInfoItemViewModels).AreEqual);
