@@ -64,7 +64,7 @@
             if (homeOdds != null)
             {
                 OverOdds = homeOdds.LiveOdds.ToOddsFormat();
-                OverOddsTrend = homeOdds.OddsTrend.DisplayName;
+                OverOddsTrend = homeOdds.OddsTrend.Value.ToString();
             }
         }
 
@@ -75,7 +75,7 @@
             if (awayOdds != null)
             {
                 UnderOdds = awayOdds.LiveOdds.ToOddsFormat();
-                UnderOddsTrend = awayOdds.OddsTrend.DisplayName;
+                UnderOddsTrend = awayOdds.OddsTrend.Value.ToString();
             }
         }
 

@@ -55,7 +55,7 @@
             {
                 UnderOpeningOdds = underOdds.OpeningOdds.ToOddsFormat();
                 UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
-                UnderOddsTrend = underOdds.OddsTrend.DisplayName;
+                UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
             }
         }
 
@@ -78,7 +78,7 @@
             {
                 OverLiveOdds = overOdds.LiveOdds.ToOddsFormat();
                 OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();
-                OverOddsTrend = overOdds.OddsTrend.DisplayName;
+                OverOddsTrend = overOdds.OddsTrend.Value.ToString();
             }
         }
 

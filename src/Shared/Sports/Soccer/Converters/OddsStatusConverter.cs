@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
-
     using System;
     using System.Globalization;
     using LiveScore.Core.Enumerations;
@@ -16,11 +15,11 @@
             {
                 string valueAsString = value.ToString();
 
-                if (valueAsString.Equals(OddsTrend.Up.DisplayName, StringComparison.OrdinalIgnoreCase))
+                if (valueAsString.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     color = (Color)Application.Current.Resources["UpLiveOddColor"];
                 }
-                else if (valueAsString.Equals(OddsTrend.Down.DisplayName, StringComparison.OrdinalIgnoreCase))
+                else if (valueAsString.Equals(OddsTrend.Down.Value.ToString(), StringComparison.OrdinalIgnoreCase))
                 {
                     color = (Color)Application.Current.Resources["DownLiveOddColor"];
                 }

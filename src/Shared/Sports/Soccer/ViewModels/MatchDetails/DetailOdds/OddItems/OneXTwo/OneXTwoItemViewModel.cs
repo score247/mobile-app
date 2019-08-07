@@ -57,7 +57,7 @@
             {
                 AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
                 AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
-                AwayOddsTrend = awayOdds.OddsTrend.DisplayName;
+                AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
             }
         }
 
@@ -69,7 +69,7 @@
             {
                 DrawOpeningOdds = drawOdds.OpeningOdds.ToOddsFormat();
                 DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();
-                DrawOddsTrend = drawOdds.OddsTrend.DisplayName;
+                DrawOddsTrend = drawOdds.OddsTrend.Value.ToString();
             }
         }
 
@@ -81,7 +81,7 @@
             {
                 HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
                 HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
-                HomeOddsTrend = homeOdds.OddsTrend.DisplayName;
+                HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
             }
         }
 
