@@ -28,7 +28,7 @@
     </Style>
     <Style x:Key="MatchInfoAssistedImage" TargetType="Image">
         <Setter Property="Aspect" Value="AspectFit" />
-        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Margin" Value="0,2,0,0" />
     </Style>
 
     <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
@@ -65,7 +65,7 @@
     <Style x:Key="MatchInfoAssistedPlayer" TargetType="Label">
         <Setter Property="FontSize" Value="11" />
         <Setter Property="TextColor" Value="#666" />
-        <Setter Property="Margin" Value="0,5,0,0" />
+        <Setter Property="Margin" Value="0,2,0,0" />
     </Style>
 
     <Style

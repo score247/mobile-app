@@ -64,17 +64,17 @@
                         Style="{StaticResource MatchInfoImage}" />
 
                     <Label
-                        IsVisible="{Binding IsVisibleHomeAssist}"
                         Grid.Row="1"
                         Grid.Column="0"
                         AutomationId="{Binding ItemAutomationId, StringFormat='HomeAssistPlayerName-{0}'}"
                         HorizontalTextAlignment="End"
+                        IsVisible="{Binding IsVisibleHomeAssist}"
                         Style="{StaticResource MatchInfoAssistedPlayer}"
                         Text="{Binding HomeAssistName}" />
                     <Image
-                        IsVisible="{Binding IsVisibleHomeAssist}"
                         Grid.Row="1"
                         Grid.Column="1"
+                        IsVisible="{Binding IsVisibleHomeAssist}"
                         Source="images/common/assist_goal.png"
                         Style="{StaticResource MatchInfoAssistedImage}" />
 
@@ -118,16 +118,16 @@
                         Text="{Binding AwayPlayerName}" />
 
                     <Image
-                        IsVisible="{Binding IsVisibleAwayAssist}"
                         Grid.Row="1"
                         Grid.Column="0"
+                        IsVisible="{Binding IsVisibleAwayAssist}"
                         Source="images/common/assist_goal.png"
                         Style="{StaticResource MatchInfoAssistedImage}" />
                     <Label
-                        IsVisible="{Binding IsVisibleAwayAssist}"
                         Grid.Row="1"
                         Grid.Column="1"
                         AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}"
+                        IsVisible="{Binding IsVisibleAwayAssist}"
                         Style="{StaticResource MatchInfoAssistedPlayer}"
                         Text="{Binding AwayAssistName}" />
                 </Grid>
