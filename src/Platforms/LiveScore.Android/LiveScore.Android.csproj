@@ -360,16 +360,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_asc.png">
-      <Link>Resources\drawable\odd_asc.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_desc.png">
-      <Link>Resources\drawable\odd_desc.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\odd_movement_chart.png">
       <Link>Resources\drawable\odd_movement_chart.png</Link>
     </AndroidResource>
@@ -745,16 +735,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_asc.png">
-      <Link>Resources\drawable-xhdpi\odd_asc.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_desc.png">
-      <Link>Resources\drawable-xhdpi\odd_desc.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\odd_movement_chart.png">
       <Link>Resources\drawable-xhdpi\odd_movement_chart.png</Link>
     </AndroidResource>
@@ -1067,16 +1047,6 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\news.png">
       <Link>Resources\drawable-xxhdpi\news.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\odd_asc.png">
-      <Link>Resources\drawable-xxhdpi\odd_asc.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\odd_desc.png">
-      <Link>Resources\drawable-xxhdpi\odd_desc.png</Link>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>

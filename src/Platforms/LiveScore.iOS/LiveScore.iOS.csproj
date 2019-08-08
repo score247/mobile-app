@@ -788,36 +788,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc.png">
-      <Link>Resources\images\common\odd_asc.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc%402x.png">
-      <Link>Resources\images\common\odd_asc%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_asc%403x.png">
-      <Link>Resources\images\common\odd_asc%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc.png">
-      <Link>Resources\images\common\odd_desc.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc%402x.png">
-      <Link>Resources\images\common\odd_desc%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_desc%403x.png">
-      <Link>Resources\images\common\odd_desc%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\odd_movement_chart.png">
       <Link>Resources\images\common\odd_movement_chart.png</Link>
     </BundleResource>
