@@ -235,7 +235,7 @@
     <value>Awaiting Penalties</value>
   </data>
   <data name="Pen" xml:space="preserve">
-    <value>Pen.</value>
+    <value>Pen</value>
   </data>
   <data name="Penalties" xml:space="preserve">
     <value>Penalties</value>
@@ -253,7 +253,7 @@
     <value>2nd Leg, Aggregate Score:</value>
   </data>
   <data name="ETHT" xml:space="preserve">
-    <value>ETHT</value>
+    <value>ET.HT</value>
   </data>
   <data name="ExtraTimeHalfTime" xml:space="preserve">
     <value>Extra Time Half Time</value>
