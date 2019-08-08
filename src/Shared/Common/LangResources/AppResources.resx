@@ -217,7 +217,7 @@
     <value>After Extra Time</value>
   </data>
   <data name="AwaitET" xml:space="preserve">
-    <value>Await ET.</value>
+    <value>Await ET</value>
   </data>
   <data name="AwaitExtraTime" xml:space="preserve">
     <value>Awaiting Extra Time</value>
@@ -229,7 +229,7 @@
     <value>After Penalties</value>
   </data>
   <data name="AwaitPen" xml:space="preserve">
-    <value>Await Pen.</value>
+    <value>Await Pen</value>
   </data>
   <data name="AwaitPenalties" xml:space="preserve">
     <value>Awaiting Penalties</value>
@@ -253,7 +253,7 @@
     <value>2nd Leg, Aggregate Score:</value>
   </data>
   <data name="ETHT" xml:space="preserve">
-    <value>ET.HT</value>
+    <value>ETHT</value>
   </data>
   <data name="ExtraTimeHalfTime" xml:space="preserve">
     <value>Extra Time Half Time</value>
