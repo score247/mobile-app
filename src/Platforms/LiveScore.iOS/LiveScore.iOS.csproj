@@ -743,21 +743,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal.png">
-      <Link>Resources\images\common\missed_penalty_goal.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal%402x.png">
-      <Link>Resources\images\common\missed_penalty_goal%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal%403x.png">
-      <Link>Resources\images\common\missed_penalty_goal%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\more.png">
       <Link>Resources\images\common\more.png</Link>
     </BundleResource>
@@ -815,21 +800,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\own_goal%403x.png">
       <Link>Resources\images\common\own_goal%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal.png">
-      <Link>Resources\images\common\penalty_goal.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%402x.png">
-      <Link>Resources\images\common\penalty_goal%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%403x.png">
-      <Link>Resources\images\common\penalty_goal%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>

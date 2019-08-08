@@ -320,11 +320,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\missed_penalty_goal.png">
-      <Link>Resources\drawable\missed_penalty_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\more.png">
       <Link>Resources\drawable\more.png</Link>
     </AndroidResource>
@@ -367,11 +362,6 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\own_goal.png">
       <Link>Resources\drawable\own_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\penalty_goal.png">
-      <Link>Resources\drawable\penalty_goal.png</Link>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -720,11 +710,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\missed_penalty_goal.png">
-      <Link>Resources\drawable-xhdpi\missed_penalty_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\more.png">
       <Link>Resources\drawable-xhdpi\more.png</Link>
     </AndroidResource>
@@ -742,11 +727,6 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\own_goal.png">
       <Link>Resources\drawable-xhdpi\own_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\penalty_goal.png">
-      <Link>Resources\drawable-xhdpi\penalty_goal.png</Link>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
@@ -1035,11 +1015,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\missed_penalty_goal.png">
-      <Link>Resources\drawable-xxhdpi\missed_penalty_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\more.png">
       <Link>Resources\drawable-xxhdpi\more.png</Link>
     </AndroidResource>
@@ -1057,11 +1032,6 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\own_goal.png">
       <Link>Resources\drawable-xxhdpi\own_goal.png</Link>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\penalty_goal.png">
-      <Link>Resources\drawable-xxhdpi\penalty_goal.png</Link>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
