@@ -37,8 +37,8 @@
             OddsMovement = oddsMovement;
             BetType = betType;
 
-            UpdateTime = oddsMovement.UpdateTime.ToDateAndTime(); //TODO convert to gmt+7
-            FullUpdateTime = oddsMovement.UpdateTime.ToFullDateAndTime();
+            UpdateTime = oddsMovement.UpdateTime.LocalDateTime.ToDateAndTime(); 
+            FullUpdateTime = oddsMovement.UpdateTime.LocalDateTime.ToFullDateAndTime();
         }
 
         public IOddsMovement OddsMovement { get; }

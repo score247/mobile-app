@@ -13,13 +13,13 @@
 
         int AwayScore { get; }
 
-        DateTime UpdateTime { get; }
+        DateTimeOffset UpdateTime { get; }
 
         bool IsMatchStarted { get; }
     }
 
     public class OddsMovement : Entity<int, string>, IOddsMovement
-    {
+    {       
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }
 
         public string MatchTime { get; set; }
@@ -28,7 +28,7 @@
 
         public int AwayScore { get; set; }
 
-        public DateTime UpdateTime { get; set; }
+        public DateTimeOffset UpdateTime { get; set; }
 
         public bool IsMatchStarted { get; set; }
     }
