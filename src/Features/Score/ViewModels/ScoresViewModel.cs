@@ -39,9 +39,11 @@ namespace LiveScore.Score.ViewModels
         {
             SelectedDate = DateTime.Today;
             MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
+
             matchHubConnection = DependencyResolver
                 .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
                 .BuildMatchEventHubConnection();
+
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
         }
 

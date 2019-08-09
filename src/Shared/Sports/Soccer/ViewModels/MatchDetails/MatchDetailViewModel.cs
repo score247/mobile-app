@@ -18,7 +18,6 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
-    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
@@ -60,6 +59,7 @@ namespace LiveScore.Soccer.ViewModels
             matchHubConnection = DependencyResolver
                 .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
                 .BuildMatchEventHubConnection();
+
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
         }
 
@@ -111,7 +111,9 @@ namespace LiveScore.Soccer.ViewModels
 
                 cancellationTokenSource = new CancellationTokenSource();
 
-                await StartListeningMatchHubEvent();
+                matchService.SubscribeMatchEvent(matchHubConnection, OnReceivingMatchEvent);
+
+                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {
@@ -155,14 +157,7 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private async Task StartListeningMatchHubEvent()
-        {
-            matchHubConnection.On<byte, MatchEvent>("MatchEvent", OnReceivingMatchEvent);
-
-            await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
-        }
-
-        protected internal void OnReceivingMatchEvent(byte sportId, MatchEvent payload)
+        protected internal void OnReceivingMatchEvent(byte sportId, IMatchEvent payload)
         {
             var match = MatchViewModel.Match;
 

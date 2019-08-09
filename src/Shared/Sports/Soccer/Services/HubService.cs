@@ -8,8 +8,10 @@ namespace LiveScore.Soccer.Services
 
     public class HubService : IHubService
     {
+        //TODO disconnect hubConnection after using?
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private HubConnection matchHubConnection;
+        private HubConnection oddsHubConnection;
 
         public HubService(IHubConnectionBuilder hubConnectionBuilder)
         {
@@ -20,6 +22,12 @@ namespace LiveScore.Soccer.Services
         {
             return matchHubConnection ??
                 (matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/MatchEventHub").Build());
+        }
+
+        public HubConnection BuildOddsEventHubConnection()
+        {
+            return oddsHubConnection ??
+                (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/OddsEventHub").Build());
         }
     }
 }
