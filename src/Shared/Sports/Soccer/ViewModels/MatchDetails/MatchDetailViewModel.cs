@@ -206,7 +206,7 @@ namespace LiveScore.Soccer.ViewModels
         }
 
         private void BuildViewModel(IMatch match) 
-            => MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, matchStatusConverter);
+            => MatchViewModel = new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
         {

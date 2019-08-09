@@ -32,8 +32,7 @@
         public MatchService(
             ILocalStorage cacheService,
             ILoggingService loggingService,
-            IApiService apiService
-            ) : base(loggingService)
+            IApiService apiService) : base(loggingService)
         {
             this.cacheService = cacheService;
             this.apiService = apiService;
@@ -46,6 +45,7 @@
                 var cacheExpiration = dateRange.ToDate <= DateTime.Today
                    ? cacheService.CacheDuration(CacheDurationTerm.Long)
                    : cacheService.CacheDuration(CacheDurationTerm.Short);
+
                 var fromDateText = dateRange.FromDate.ToApiFormat();
                 var toDateText = dateRange.ToDate.ToApiFormat();
                 var cacheKey = $"Scores-{settings}-{fromDateText}-{toDateText}";
