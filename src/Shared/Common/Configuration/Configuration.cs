@@ -3,11 +3,9 @@
     public static class Configuration
     {
 #if DEBUG
+        public static string LocalEndPoint => "https://score247-api1.nexdev.net/dev/api/";
 
-        //TODO change to dev
-        public static string LocalEndPoint => "https://score247-api1.nexdev.net/test/api/";
-
-        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/test/hubs/";
+        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
 #elif TEST
         public static string LocalEndPoint => "https://score247-api1.nexdev.net/test/api/";
 
