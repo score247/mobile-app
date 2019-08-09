@@ -5,5 +5,7 @@
     public interface IHubService
     {
         HubConnection BuildMatchEventHubConnection();
+
+        HubConnection BuildOddsEventHubConnection();
     }
 }

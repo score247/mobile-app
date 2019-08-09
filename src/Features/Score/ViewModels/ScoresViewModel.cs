@@ -40,10 +40,16 @@ namespace LiveScore.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
+<<<<<<< HEAD
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
+=======
+            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
+
+>>>>>>> 117855-Sprint7-ChangeRequest
             matchHubConnection = DependencyResolver
                 .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildMatchEventHubConnection();
+
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
 
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
