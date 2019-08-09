@@ -60,7 +60,7 @@
                         Grid.Column="1"
                         AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
                         IsVisible="{Binding VisibleHomeImage}"
-                        Source="{Binding ImageSource}"
+                        Source="{Binding GoalScorerImageSource}"
                         Style="{StaticResource MatchInfoImage}" />
 
                     <Label
@@ -108,7 +108,7 @@
                         Grid.Column="0"
                         AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
                         IsVisible="{Binding VisibleAwayImage}"
-                        Source="{Binding ImageSource}"
+                        Source="{Binding GoalScorerImageSource}"
                         Style="{StaticResource MatchInfoImage}" />
                     <Label
                         Grid.Row="0"

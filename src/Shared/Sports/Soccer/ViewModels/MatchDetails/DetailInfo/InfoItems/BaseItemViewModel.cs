@@ -71,7 +71,7 @@
 
         public string AwayPlayerName { get; protected set; }
 
-        public string ImageSource { get; protected set; }
+        public string GoalScorerImageSource { get; protected set; }
 
         public bool VisibleHomeImage { get; protected set; }
 

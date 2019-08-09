@@ -36,7 +36,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/yellow_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -54,7 +54,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/red_yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_yellow_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -72,7 +72,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/red_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -90,7 +90,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/yellow_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -108,7 +108,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/red_yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_yellow_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -126,7 +126,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/red_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_card.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -144,7 +144,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.True(viewModel.VisibleScore);
         }
@@ -162,7 +162,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.GoalScorerImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.True(viewModel.VisibleScore);
         }

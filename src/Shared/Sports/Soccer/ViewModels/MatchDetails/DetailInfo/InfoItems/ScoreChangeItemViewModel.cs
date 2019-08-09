@@ -34,6 +34,8 @@
 
         public bool IsVisibleAwayAssist { get; private set; }
 
+        public string GoalAssitImageSource { get; private set; }
+
         protected override void BuildInfo()
         {
             base.BuildInfo();
@@ -44,7 +46,7 @@
 
             if (GoalImages.ContainsKey(goalMethod))
             {
-                ImageSource = GoalImages[goalMethod];
+                GoalScorerImageSource = GoalImages[goalMethod];
             }
 
             if (TimelineEvent.OfHomeTeam())
@@ -60,14 +62,26 @@
         private void BuildAwayInfo()
         {
             AwayPlayerName = TimelineEvent?.GoalScorer?.Name;
-            AwayAssistName = TimelineEvent.Assist?.Name;
+
+            if(TimelineEvent.Assist!= null)
+            {
+                AwayAssistName = TimelineEvent.Assist.Name;
+                GoalAssitImageSource = Images.GoalAssist.Value;
+            }
+           
             VisibleAwayImage = true;
         }
 
         private void BuildHomeInfo()
         {
             HomePlayerName = TimelineEvent?.GoalScorer?.Name;
-            HomeAssistName = TimelineEvent.Assist?.Name;
+
+            if (TimelineEvent.Assist != null)
+            {
+                HomeAssistName = TimelineEvent.Assist.Name;
+                GoalAssitImageSource = Images.GoalAssist.Value;
+            }
+
             VisibleHomeImage = true;
         }
     }

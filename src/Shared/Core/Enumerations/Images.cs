@@ -11,6 +11,7 @@
         public static readonly Images PenaltyGoal = new Images("images/common/ball.png", nameof(PenaltyGoal));
         public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
         public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
+        public static readonly Images GoalAssist = new Images("images/common/assist_goal.png", nameof(GoalAssist));
 
         public static readonly Images TabIcon = new Images("images/common/tab_icon.png", nameof(TabIcon));
 
