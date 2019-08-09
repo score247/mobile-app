@@ -46,7 +46,7 @@
 
             if (GoalImages.ContainsKey(goalMethod))
             {
-                GoalScorerImageSource = GoalImages[goalMethod];
+                ImageSource = GoalImages[goalMethod];
             }
 
             if (TimelineEvent.OfHomeTeam())

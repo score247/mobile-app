@@ -131,18 +131,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
 
-            var timelines = match.TimeLines?
-                .Where(t => t.IsDetailInfoEvent())
-                .Distinct(new TimelineComparer()).ToList() ?? new List<ITimelineEvent>(); // TODO: Replace TimelineComparer
+            if(match.TimeLines != null)
+            {
+                var timelines = match.TimeLines
+                    .Where(t => t.IsDetailInfoEvent())
+                    .Distinct(new TimelineComparer()).ToList() ?? new List<ITimelineEvent>(); // TODO: Replace TimelineComparer
 
-            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
-                   new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
-                   .CreateInstance()));
+                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
+                       new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+                       .CreateInstance()));
+            }
         }
 
         private void BuildFooterInfo(IMatch match)
         {
-            DisplayEventDate = match.EventDate.LocalDateTime.ToFullDateTime();
+            DisplayEventDate = match.EventDate.ToFullLocalDateTime();
 
             if (match.Attendance > 0)
             {

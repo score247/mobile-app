@@ -41,7 +41,7 @@
             {
                 if (EventImages.ContainsKey(TimelineEvent.Type))
                 {
-                    GoalScorerImageSource = EventImages[TimelineEvent.Type];
+                    ImageSource = EventImages[TimelineEvent.Type];
                 }
 
                 if (VisibleScoreEvents.Contains(TimelineEvent.Type))

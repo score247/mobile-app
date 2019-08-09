@@ -14,9 +14,9 @@
             int eventDay = System.Convert.ToInt32(valueType.GetProperty("Day").GetValue(value));
             int eventMonth = System.Convert.ToInt32(valueType.GetProperty("Month").GetValue(value));
             int eventYear = System.Convert.ToInt32(valueType.GetProperty("Year").GetValue(value));
-            var eventDate = new DateTime(eventYear, eventMonth, eventDay);
+            var eventDate = new DateTimeOffset(new DateTime(eventYear, eventMonth, eventDay));
 
-            return eventDate.ToShortDayMonth();
+            return eventDate.ToLocalShortDayMonth();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

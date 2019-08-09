@@ -37,8 +37,8 @@
             OddsMovement = oddsMovement;
             BetType = betType;
 
-            UpdateTime = oddsMovement.UpdateTime.LocalDateTime.ToDateAndTime(); 
-            FullUpdateTime = oddsMovement.UpdateTime.LocalDateTime.ToFullDateAndTime();
+            UpdateTime = oddsMovement.UpdateTime.ToLocalDateAndTime(); 
+            FullUpdateTime = oddsMovement.UpdateTime.ToFullLocalDateAndTime();
         }
 
         public IOddsMovement OddsMovement { get; }

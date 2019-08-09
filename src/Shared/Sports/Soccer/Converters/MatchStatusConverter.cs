@@ -63,7 +63,7 @@
 
             if (match.MatchResult.EventStatus.IsNotStarted)
             {
-                return match.EventDate.LocalDateTime.ToTimeWithoutSecond();
+                return match.EventDate.ToLocalTimeWithoutSecond();
             }
 
             if (match.MatchResult.EventStatus.IsLive)
