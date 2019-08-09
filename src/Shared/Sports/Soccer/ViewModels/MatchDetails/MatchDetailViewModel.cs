@@ -4,17 +4,12 @@
 
 namespace LiveScore.Soccer.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Core.ViewModels;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
+    using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
@@ -40,6 +35,12 @@ namespace LiveScore.Soccer.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public class MatchDetailViewModel : ViewModelBase, IDisposable
@@ -50,6 +51,7 @@ namespace LiveScore.Soccer.ViewModels
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private Dictionary<string, TabItemViewModelBase> tabItemViewModels;
+        private readonly IMatchStatusConverter matchStatusConverter;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -58,9 +60,11 @@ namespace LiveScore.Soccer.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             matchHubConnection = DependencyResolver
-                .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
+                .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildMatchEventHubConnection();
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
+            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
+
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -166,7 +170,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             var match = MatchViewModel.Match;
 
-            if (sportId != SettingsService.CurrentSportType.Value || match?.Id == null || payload.MatchId != match.Id)
+            if (sportId != CurrentSportId || match?.Id == null || payload.MatchId != match.Id)
             {
                 return;
             }
@@ -201,11 +205,8 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
-        private void BuildViewModel(IMatch match)
-        {
-            MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection);
-            MatchViewModel.BuildMatchStatus();
-        }
+        private void BuildViewModel(IMatch match) 
+            => MatchViewModel = new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, matchStatusConverter);
 
         protected virtual void Dispose(bool disposing)
         {

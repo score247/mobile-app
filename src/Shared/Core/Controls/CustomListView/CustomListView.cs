@@ -4,7 +4,7 @@
 
     public class CustomListView : ListView
     {
-#if TEST || AUTOTEST || DEBUG
+#if TEST || AUTOTEST 
 
         public CustomListView() : base(ListViewCachingStrategy.RetainElement)
         {

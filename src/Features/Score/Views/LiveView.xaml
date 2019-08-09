@@ -10,15 +10,17 @@
         <ToolbarItem Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="Live is comming soon"
-               TextColor="{StaticResource SecondTextColor}"
-               HorizontalOptions="Center" 
-               VerticalOptions="Center" FontSize="13" />
+        <Label
+            FontSize="13"
+            HorizontalOptions="Center"
+            Text="Live is comming soon"
+            TextColor="{StaticResource SecondTextColor}"
+            VerticalOptions="Center" />
     </ContentPage.Content>
 </ContentPage>

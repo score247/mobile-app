@@ -17,33 +17,30 @@
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver,
             IEventAggregator eventAggregator,
-            HubConnection matchHubConnection)
+            HubConnection matchHubConnection,
+            IMatchStatusConverter matchStatusConverter)
             : base(navigationService, depdendencyResolver, eventAggregator)
         {
             this.matchHubConnection = matchHubConnection;
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(SettingsService.CurrentSportType.Value.ToString());
+            this.matchStatusConverter = matchStatusConverter;
             Match = match;
-            BuildMatchStatus();
+
             SubscribeMatchTimeChangeEvent();
         }
 
         public IMatch Match { get; protected set; }
 
-        public string DisplayMatchStatus { get; private set; }
+        public string DisplayMatchStatus => matchStatusConverter.BuildStatus(Match);
 
-        public void BuildMatchStatus()
-        {
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
-        }
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            matchHubConnection.On<int, string, int>("PushMatchTime", (sportId, matchId, matchTime) =>
+            matchHubConnection.On<byte, string, int>("PushMatchTime", (sportId, matchId, matchTime) =>
             {
-                if (sportId == SettingsService.CurrentSportType.Value && Match.Id == matchId)
+                if (sportId == CurrentSportId && Match.Id == matchId)
                 {
                     Match.MatchResult.MatchTime = matchTime;
-                    BuildMatchStatus();
+
                 }
             });
         }

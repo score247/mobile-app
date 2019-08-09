@@ -34,9 +34,13 @@
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
 
             CurrentSportName = SettingsService.CurrentSportType.DisplayName;
+
+            CurrentSportId = SettingsService.CurrentSportType.Value;
         }
 
-        public string CurrentSportName { get; set; }
+        public string CurrentSportName { get; }
+
+        public byte CurrentSportId { get; }
 
         public string Title { get; set; }
 

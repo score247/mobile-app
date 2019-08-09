@@ -4,21 +4,22 @@
 
 namespace LiveScore.Score.ViewModels
 {
+    using Common.Extensions;
+    using Core.Services;
+    using Core.ViewModels;
+    using LiveScore.Core;
+    using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Converters;
+    using LiveScore.Core.Models.Matches;
+    using Microsoft.AspNetCore.SignalR.Client;
+    using Prism.Events;
+    using Prism.Navigation;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using Common.Extensions;
-    using Core.Services;
-    using Core.ViewModels;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Models.Matches;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Prism.Events;
-    using Prism.Navigation;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
 
@@ -30,6 +31,7 @@ namespace LiveScore.Score.ViewModels
         private readonly HubConnection matchHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
+        private readonly IMatchStatusConverter matchStatusConverter;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -38,18 +40,20 @@ namespace LiveScore.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = DateTime.Today;
-            MatchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
+            MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchHubConnection = DependencyResolver
-                .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
+                .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildMatchEventHubConnection();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
+
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
         }
 
         public DateTime SelectedDate { get; internal set; }
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, MatchViewModel>> MatchItemSource { get; set; }
+        public ObservableCollection<IGrouping<dynamic, MatchViewModel>> MatchItemsSource { get; set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -63,7 +67,7 @@ namespace LiveScore.Score.ViewModels
                 { "Match", matchItem.Match }
             };
 
-            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + SettingsService.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
 
             if (!navigated.Success)
             {
@@ -90,7 +94,7 @@ namespace LiveScore.Score.ViewModels
 
         public override async void OnNavigatingTo(INavigationParameters parameters)
         {
-            if (MatchItemSource == null)
+            if (MatchItemsSource == null)
             {
                 await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
             }
@@ -139,7 +143,7 @@ namespace LiveScore.Score.ViewModels
         {
             if (IsLoading)
             {
-                MatchItemSource?.Clear();
+                MatchItemsSource?.Clear();
             }
 
             var matches = await MatchService.GetMatches(
@@ -147,7 +151,7 @@ namespace LiveScore.Score.ViewModels
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
                     forceFetchNewData);
 
-            MatchItemSource = BuildMatchItemSource(matches);
+            MatchItemsSource = BuildMatchItemSource(matches);
 
             selectedDateRange = dateRange;
             IsRefreshing = false;
@@ -156,7 +160,7 @@ namespace LiveScore.Score.ViewModels
         private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection));
+                    match => new MatchViewModel(match, NavigationService, DependencyResolver, EventAggregator, matchHubConnection, matchStatusConverter));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));
@@ -164,12 +168,12 @@ namespace LiveScore.Score.ViewModels
 
         internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)
         {
-            if (sportId != SettingsService.CurrentSportType.Value)
+            if (sportId != CurrentSportId)
             {
                 return;
             }
 
-            var matchItem = MatchItemSource
+            var matchItem = MatchItemsSource
                .SelectMany(group => group)
                .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId);
 
@@ -177,7 +181,6 @@ namespace LiveScore.Score.ViewModels
             {
                 matchItem.Match.MatchResult = matchEvent.MatchResult;
                 matchItem.Match.LatestTimeline = matchEvent.Timeline;
-                matchItem.BuildMatchStatus();
             }
         }
     }

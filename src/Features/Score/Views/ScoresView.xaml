@@ -49,7 +49,7 @@
             IsRefreshing="{Binding IsRefreshing}"
             IsVisible="{Binding IsNotLoading}"
             ItemTemplate="{StaticResource matchItemTemplateSelector}"
-            ItemsSource="{Binding MatchItemSource}"
+            ItemsSource="{Binding MatchItemsSource}"
             RefreshCommand="{Binding RefreshCommand}"
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
