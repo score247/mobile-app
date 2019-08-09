@@ -142,7 +142,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildFooterInfo(IMatch match)
         {
-            DisplayEventDate = match.EventDate.ToFullDateTime();
+            DisplayEventDate = match.EventDate.LocalDateTime.ToFullDateTime();
 
             if (match.Attendance > 0)
             {

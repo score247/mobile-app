@@ -198,7 +198,7 @@ namespace LiveScore.Soccer.ViewModels
 
         private void BuildScoreAndEventDate(IMatch match)
         {
-            DisplayEventDate = match.EventDate.ToShortDayMonth();
+            DisplayEventDate = match.EventDate.LocalDateTime.ToShortDayMonth();
         }
 
         private void BuildViewModel(IMatch match)

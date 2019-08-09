@@ -7,7 +7,7 @@
 
     public interface IMatch : IEntity<string, string>
     {
-        DateTime EventDate { get; set; }
+        DateTimeOffset EventDate { get; set; }
 
         IEnumerable<ITeam> Teams { get; set; }
 

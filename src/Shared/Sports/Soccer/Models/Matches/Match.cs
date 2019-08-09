@@ -16,7 +16,7 @@
     [AddINotifyPropertyChangedInterface]
     public class Match : Entity<string, string>, IMatch
     {
-        public DateTime EventDate { get; set; }
+        public DateTimeOffset EventDate { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Team>>))]
         public IEnumerable<ITeam> Teams { get; set; }
