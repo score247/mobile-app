@@ -15,19 +15,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Models.Odds;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class OddsMovementViewModel : ViewModelBase
     {
-        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
+
 
         private readonly IOddsService oddsService;
-        private readonly HubConnection hubConnection;
 
         private string matchId;
         private Bookmaker bookmaker;
@@ -40,10 +36,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            hubConnection = DependencyResolver
-                .Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
-                .BuildOddsEventHubConnection();
-
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOddsMovement(true)));
@@ -82,14 +74,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             try
             {
-                await LoadData(() => LoadOddsMovement());
-
-                hubConnection.On<byte, string>("MatchOdds", (sportId, payload) =>
-                {
-                    //TODO update odds
-                    var oddsChangedMessage = JsonConvert.DeserializeObject<MatchOddsChangedMessage>(payload);
-
-                });
+                await LoadData(() => LoadOddsMovement());               
             }
             catch (Exception ex)
             {

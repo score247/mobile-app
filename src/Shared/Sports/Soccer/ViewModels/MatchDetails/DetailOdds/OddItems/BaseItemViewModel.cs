@@ -68,5 +68,10 @@
 
             return new BaseItemViewModel(BetType, BetTypeOdds, NavigationService, DependencyResolver);
         }
+
+        public virtual void UpdateOdds(IBetTypeOdds betTypeOdds) 
+        {
+            throw new NotImplementedException();
+        }
     }
 }

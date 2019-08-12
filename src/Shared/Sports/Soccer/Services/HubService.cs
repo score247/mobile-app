@@ -26,8 +26,10 @@ namespace LiveScore.Soccer.Services
 
         public HubConnection BuildOddsEventHubConnection()
         {
+            //https://score247-api2.nexdev.net/dev/hubs/
+            //https://score247-api2.nexdev.net/dev/hubs/Soccer/OddsEventHub
             return oddsHubConnection ??
-                (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/OddsEventHub").Build());
+                (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}Soccer/OddsEventHub").Build());
         }
     }
 }

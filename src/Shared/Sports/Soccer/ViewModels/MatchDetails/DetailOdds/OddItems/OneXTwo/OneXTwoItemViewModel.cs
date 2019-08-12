@@ -9,7 +9,7 @@
 
     public class OneXTwoItemViewModel : BaseItemViewModel
     {
-        private readonly IBetTypeOdds betTypeOdds;
+        private IBetTypeOdds betTypeOdds;
 
         public OneXTwoItemViewModel(
             IBetTypeOdds betTypeOdds,
@@ -86,5 +86,12 @@
         }
 
         private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+
+        public override void UpdateOdds(IBetTypeOdds betTypeOdds)
+        {
+            this.betTypeOdds = betTypeOdds;
+
+            Initialize();
+        }
     }
 }

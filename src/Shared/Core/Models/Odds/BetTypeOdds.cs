@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Odds
 {
+    using System;
     using System.Collections.Generic;
     public interface IBetTypeOdds : IEntity<int, string>
     {
