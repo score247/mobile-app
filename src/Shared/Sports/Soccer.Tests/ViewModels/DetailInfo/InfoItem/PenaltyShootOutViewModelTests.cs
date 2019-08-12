@@ -70,6 +70,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         }
 
         private static string GetPenaltyGoalImage(bool isScored)
-            => isScored ? "images/common/penalty_goal.png" : "images/common/missed_penalty_goal.png";
+            => isScored ? "images/common/ball.png" : "images/common/missed_goal.png";
     }
 }

@@ -57,9 +57,9 @@ namespace Soccer.Tests.Converters
         [InlineData("abandoned", "AB")]
         [InlineData("pause", "Pause")]
         [InlineData("halftime", "HT")]
-        [InlineData("awaiting_penalties", "Await Pen.")]
-        [InlineData("penalties", "Pen.")]
-        [InlineData("extra_time_halftime", "ET.HT")]
+        [InlineData("awaiting_penalties", "Await Pen")]
+        [InlineData("penalties", "Pen")]
+        [InlineData("extra_time_halftime", "ETHT")]
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
         {
             // Arrange
@@ -140,7 +140,7 @@ namespace Soccer.Tests.Converters
         [InlineData("closed", "FT")]
         [InlineData("ended", "FT")]
         [InlineData("full-time", "FT")]
-        [InlineData("awaiting_extra_time", "Await ET.")]
+        [InlineData("awaiting_extra_time", "Await ET")]
         public void BuildStatus_EventStatusIsClosed_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
@@ -164,7 +164,7 @@ namespace Soccer.Tests.Converters
         [InlineData("postponed", "Postp.")]
         [InlineData("start_delayed", "Start Delayed")]
         [InlineData("cancelled", "Canc.")]
-        [InlineData("awaiting_extra_time", "Await ET.")]
+        [InlineData("awaiting_extra_time", "Await ET")]
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange

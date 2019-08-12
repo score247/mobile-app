@@ -75,7 +75,7 @@ namespace Scores.Tests.ViewModels
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+            var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
@@ -85,7 +85,7 @@ namespace Scores.Tests.ViewModels
             // Arrange
             matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
             await viewModel.RefreshCommand.ExecuteAsync();
-            var matchViewModel = viewModel.MatchItemSource.SelectMany(group => group).FirstOrDefault();
+            var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 
             // Act
             await viewModel.TappedMatchCommand.ExecuteAsync(matchViewModel);
@@ -121,7 +121,7 @@ namespace Scores.Tests.ViewModels
             viewModel.OnNavigatingTo(null);
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+            var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
@@ -139,10 +139,11 @@ namespace Scores.Tests.ViewModels
             viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
             // Assert
-            var actualMatchData = viewModel.MatchItemSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+            var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
+        // TODO: Update unit test
         //[Fact]
         //public void OnAppearing_Always_CallMatchServiceToSubscribeChanged()
         //{
