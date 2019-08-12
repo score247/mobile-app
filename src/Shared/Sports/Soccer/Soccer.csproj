@@ -33,6 +33,9 @@
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="ViewResources\MatchDetailInfoViewResource.xaml.cs">
       <DependentUpon>MatchDetailInfoViewResource.xaml</DependentUpon>
     </Compile>

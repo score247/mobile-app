@@ -23,6 +23,7 @@
       <EmbeddedResource Remove="Triggers\**" />
       <None Remove="Animations\**" />
       <None Remove="Triggers\**" />
+      <Compile Remove="Models\Odds\OddsChangedMessage.cs" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
