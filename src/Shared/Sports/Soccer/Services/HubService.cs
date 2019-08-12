@@ -7,8 +7,7 @@ namespace LiveScore.Soccer.Services
     using Microsoft.AspNetCore.SignalR.Client;
 
     public class HubService : IHubService
-    {
-        //TODO disconnect hubConnection after using?
+    {       
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private HubConnection matchHubConnection;
         private HubConnection oddsHubConnection;
@@ -26,10 +25,8 @@ namespace LiveScore.Soccer.Services
 
         public HubConnection BuildOddsEventHubConnection()
         {
-            //https://score247-api2.nexdev.net/dev/hubs/
-            //https://score247-api2.nexdev.net/dev/hubs/Soccer/OddsEventHub
             return oddsHubConnection ??
-                (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}Soccer/OddsEventHub").Build());
+                (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/OddsEventHub").Build());
         }
     }
 }

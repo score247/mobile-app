@@ -9,7 +9,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using LiveScore.Common.Configuration;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
@@ -31,7 +30,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private readonly string oddsFormat;
 
         private readonly IOddsService oddsService;
-        private HubConnection hubConnection;
+        private readonly HubConnection hubConnection;
+
+        private CancellationTokenSource cancellationTokenSource;
 
         public DetailOddsViewModel(
             string matchId,
@@ -45,7 +46,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
 
-
+            hubConnection = DependencyResolver
+                .Resolve<IHubService>(CurrentSportId.ToString())
+                .BuildOddsEventHubConnection();
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
@@ -87,19 +90,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             {
                 await LoadData(() => LoadOdds(SelectedBetType, oddsFormat));
 
-                //hubConnection = DependencyResolver
-                    //.Resolve<IHubService>(SettingsService.CurrentSportType.Value.ToString())
-                    //.BuildOddsEventHubConnection();
-
-                hubConnection = new HubConnectionBuilder()
-                .WithUrl($"{Configuration.LocalHubEndPoint}Soccer/OddsEventHub")
-                .Build();
-
-                hubConnection.On("OddsComparison", (Action<byte, string>)((sportId, data) =>
+                hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
                 {
                     var oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(data);
 
-                    UpdateOdds(oddsComparisonMessage);
+                    await UpdateOdds(oddsComparisonMessage);
 
                 }));
 
@@ -118,7 +113,14 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        private void UpdateOdds(MatchOddsComparisonMessage oddsComparisonMessage)
+        protected override void Clean()
+        {
+            cancellationTokenSource?.Dispose();
+
+            base.Clean();
+        }
+
+        private async Task UpdateOdds(MatchOddsComparisonMessage oddsComparisonMessage)
         {
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
@@ -130,29 +132,46 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                    new BaseItemViewModel(SelectedBetType, t, NavigationService, DependencyResolver)
                    .CreateInstance()));
 
+                var needToReOrder = !BetTypeOdds.Any();
+
                 foreach (var updatedOdds in updatedOddsViewModels)
                 {
-                    if (BetTypeOdds.Any(x => x.Bookmaker.Equals(updatedOdds.Bookmaker)))
-                    {
-                        var viewModel = BetTypeOdds.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
-
-                        viewModel.UpdateOdds(updatedOdds.BetTypeOdds);
-                    }
-                    else
-                    {
-                        HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, true, NavigationService, DependencyResolver).CreateTemplate();
-                        BetTypeOdds.Add(updatedOdds);
-                    }
+                    AddOrUpdateOdds(updatedOdds);
                 }
 
+                if (needToReOrder)
+                {
+                    BetTypeOdds = new ObservableCollection<BaseItemViewModel>(BetTypeOdds.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
+                }
+
+                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)SelectedBetType, oddsFormat, true);
+            }
+        }
+
+        private void AddOrUpdateOdds(BaseItemViewModel updatedOdds)
+        {
+            if (BetTypeOdds.Any(x => x.Bookmaker.Equals(updatedOdds.Bookmaker)))
+            {
+                var viewModel = BetTypeOdds.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
+
+                viewModel.UpdateOdds(updatedOdds.BetTypeOdds);
+            }
+            else
+            {
+                if (!BetTypeOdds.Any())
+                {
+                    HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+                }
+
+                BetTypeOdds.Add(updatedOdds);
             }
         }
 
         private async Task StartOddsHubConnection()
         {
-            var cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource = new CancellationTokenSource();
 
-            await hubConnection.StartAsync(cancellationTokenSource.Token);
+            await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
         private Task HandleButtonCommand(string betTypeId)

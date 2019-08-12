@@ -17,8 +17,9 @@
                     await Task.Delay(interval, cancellationToken);
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                var msg = ex.Message;
                 await hubConnection.StopAsync();
             }
 
