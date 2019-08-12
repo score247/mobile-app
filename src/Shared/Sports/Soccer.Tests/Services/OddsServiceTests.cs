@@ -18,7 +18,7 @@
         private readonly CompareLogic comparer;
         private readonly Fixture fixture;
         private readonly IApiService mockApiService;
-        private readonly ILocalStorage mockCache;
+        private readonly ICachingService mockCache;
         private readonly ILoggingService mockLogger;
         private readonly IOddsService oddsService;
 
@@ -26,7 +26,7 @@
         {
             comparer = commonFixture.Comparer;
             fixture = commonFixture.Specimens;
-            mockCache = Substitute.For<ILocalStorage>();
+            mockCache = Substitute.For<ICachingService>();
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
 

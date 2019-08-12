@@ -20,11 +20,18 @@
             ToDate = toDate;
         }
 
-        public DateTime FromDate { get; set; }
+        public DateTime FromDate { get; }
 
-        public DateTime ToDate { get; set; }
+        public DateTime ToDate { get; }
+
+        public string FromDateString => FromDate.ToApiFormat();
+
+        public string ToDateString => ToDate.ToApiFormat();
 
         public static DateRange FromYesterdayUntilNow()
             => new DateRange(DateTime.Today.AddDays(-1), DateTime.Today.EndOfDay());
+
+        public override string ToString() => $"{FromDateString}-{ToDateString}";
+        
     }
 }

@@ -10,12 +10,12 @@ namespace LiveScore.Core.Tests.Services
 {
     public class SettingServiceTests
     {
-        private readonly ILocalStorage mockCache;
+        private readonly ICachingService mockCache;
         private readonly SettingsService setting;
 
         public SettingServiceTests()
         {
-            mockCache = Substitute.For<ILocalStorage>();
+            mockCache = Substitute.For<ICachingService>();
 
             setting = new SettingsService(mockCache);
         }

@@ -22,11 +22,11 @@ namespace Soccer.Tests.ViewModels
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;
         private readonly Match match;
-        private readonly ILocalStorage localStorage;
+        private readonly ICachingService localStorage;
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            localStorage = Substitute.For<ILocalStorage>();
+            localStorage = Substitute.For<ICachingService>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();

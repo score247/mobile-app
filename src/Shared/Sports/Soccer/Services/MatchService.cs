@@ -1,9 +1,5 @@
 ﻿namespace LiveScore.Soccer.Services
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Matches;
@@ -13,6 +9,10 @@
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Refit;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     public interface ISoccerMatchApi
     {
@@ -26,44 +26,32 @@
     public class MatchService : BaseService, IMatchService
     {
         private const string PushMatchEvent = "MatchEvent";
-        private readonly ILocalStorage cacheService;
         private readonly IApiService apiService;
+        private readonly ICachingService cacheService;
 
         public MatchService(
-            ILocalStorage cacheService,
-            ILoggingService loggingService,
-            IApiService apiService) : base(loggingService)
+            IApiService apiService,
+            ICachingService cacheService,
+            ILoggingService loggingService) : base(loggingService)
         {
-            this.cacheService = cacheService;
             this.apiService = apiService;
+            this.cacheService = cacheService;
         }
 
         public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
         {
             try
             {
-                var cacheExpiration = dateRange.ToDate <= DateTime.Today
-                   ? cacheService.CacheDuration(CacheDurationTerm.Long)
-                   : cacheService.CacheDuration(CacheDurationTerm.Short);
+                var cacheDuration = dateRange.ToDate < DateTime.Today
+                   ? (int)CacheDuration.Long
+                   : (int)CacheDuration.Short;
 
-                var fromDateText = dateRange.FromDate.ToApiFormat();
-                var toDateText = dateRange.ToDate.ToApiFormat();
-                var cacheKey = $"Scores-{settings}-{fromDateText}-{toDateText}";
+                var matchListDataCacheKey = $"Matches-{settings}-{dateRange}";
 
                 return await cacheService.GetAndFetchLatestValue(
-                        cacheKey,
-                        () => GetMatchesFromApi(settings, fromDateText, toDateText),
-                        (offset) =>
-                        {
-                            if (forceFetchNewData)
-                            {
-                                return true;
-                            }
-
-                            var elapsed = DateTimeOffset.Now - offset;
-
-                            return elapsed > cacheExpiration;
-                        });
+                        matchListDataCacheKey,
+                        () => GetMatchesFromApi(settings, dateRange.FromDateString, dateRange.ToDateString), 
+                        cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
             }
             catch (Exception ex)
             {
@@ -77,22 +65,12 @@
         {
             try
             {
-                var cacheKey = $"Match-{settings}-{matchId}";
+                var matchDataCacheKey = $"Match-{settings}-{matchId}";
 
                 var match = await cacheService.GetAndFetchLatestValue(
-                        cacheKey,
+                        matchDataCacheKey,
                         () => GetMatchFromApi(settings, matchId),
-                        (offset) =>
-                        {
-                            if (forceFetchNewData)
-                            {
-                                return true;
-                            }
-
-                            var elapsed = DateTimeOffset.Now - offset;
-
-                            return elapsed > TimeSpan.FromSeconds(30);
-                        });
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
 
                 return match;
             }

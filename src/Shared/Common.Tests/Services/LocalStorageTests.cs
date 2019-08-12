@@ -9,19 +9,19 @@
 
     public class LocalStorageTests
     {
-        private readonly IEssentialsService mockEssentials;
+        private readonly IEssential mockEssentials;
         private readonly IBlobCache mockLocalMachine;
         private readonly IBlobCache mockUserAccount;
 
-        private readonly LocalStorage cache;
+        private readonly CachingService cache;
 
         public LocalStorageTests()
         {
-            mockEssentials = Substitute.For<IEssentialsService>();
+            mockEssentials = Substitute.For<IEssential>();
             mockLocalMachine = Substitute.For<IBlobCache>();
             mockUserAccount = Substitute.For<IBlobCache>();
 
-            cache = new LocalStorage(mockEssentials, mockLocalMachine, mockUserAccount);
+            cache = new CachingService(mockEssentials, mockLocalMachine, mockUserAccount);
         }
 
         [Fact]
@@ -31,7 +31,7 @@
             var expectedDuration = new TimeSpan(0, 0, 7200);
 
             // Act
-            var actual = cache.CacheDuration(CacheDurationTerm.Long);
+            var actual = cache.CacheDuration(CacheDuration.Long);
 
             // Assert
             Assert.Equal(expectedDuration, actual);
@@ -44,7 +44,7 @@
             var expectedDuration = new TimeSpan(0, 0, 30);
 
             // Act
-            var actual = cache.CacheDuration(CacheDurationTerm.Short);
+            var actual = cache.CacheDuration(CacheDuration.Short);
 
             // Assert
             Assert.Equal(expectedDuration, actual);

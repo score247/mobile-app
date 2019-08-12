@@ -1,12 +1,12 @@
 ﻿namespace LiveScore.Soccer.Services
 {
-    using System;
-    using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using Refit;
+    using System;
+    using System.Threading.Tasks;
 
     public interface ISoccerOddsApi
     {
@@ -20,10 +20,10 @@
     public class OddsService : BaseService, IOddsService
     {
         private readonly IApiService apiService;
-        private readonly ILocalStorage cacheService;
+        private readonly ICachingService cacheService;
 
         public OddsService(
-            ILocalStorage cacheService,
+            ICachingService cacheService,
             ILoggingService loggingService,
             IApiService apiService
             ) : base(loggingService)
@@ -36,23 +36,12 @@
         {
             try
             {
-                var cacheExpiration = cacheService.CacheDuration(CacheDurationTerm.Long);
-                var cacheKey = $"Odds-{matchId}-{betTypeId}-{formatType}";
+                var oddDataCacheKey = $"Odds-{matchId}-{betTypeId}-{formatType}";
 
                 return await cacheService.GetAndFetchLatestValue(
-                        cacheKey,
+                        oddDataCacheKey,
                         () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
-                        (offset) =>
-                        {
-                            if (forceFetchNewData)
-                            {
-                                return true;
-                            }
-
-                            var elapsed = DateTimeOffset.Now - offset;
-
-                            return elapsed > cacheExpiration;
-                        });
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -72,23 +61,12 @@
         {
             try
             {
-                var cacheExpiration = cacheService.CacheDuration(CacheDurationTerm.Long);
-                var cacheKey = $"OddsMovement-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                var oddMovementCacheKey = $"OddsMovement-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
 
                 return await cacheService.GetAndFetchLatestValue(
-                        cacheKey,
+                        oddMovementCacheKey,
                         () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
-                        (offset) =>
-                        {
-                            if (forceFetchNewData)
-                            {
-                                return true;
-                            }
-
-                            var elapsed = DateTimeOffset.Now - offset;
-
-                            return elapsed > cacheExpiration;
-                        });
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -103,6 +81,5 @@
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
            );
-
     }
 }

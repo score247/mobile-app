@@ -19,11 +19,11 @@
 
     public class LoggingService : ILoggingService
     {
-        private readonly IEssentialsService deviceInfo;
+        private readonly IEssential deviceInfo;
 
         private IRavenClient ravenClient;
 
-        public LoggingService(IEssentialsService deviceInfo)
+        public LoggingService(IEssential deviceInfo)
         {
             this.deviceInfo = deviceInfo;
         }

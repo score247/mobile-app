@@ -18,11 +18,13 @@
 
     public class SettingsService : ISettingsService
     {
-        private readonly ILocalStorage cacheService;
+        private readonly ICachingService cacheService;
 
-        public SettingsService(ILocalStorage cacheService)
+        public SettingsService(ICachingService cacheService, UserSettings userSettings = null)
         {
             this.cacheService = cacheService;
+            UserSettings = userSettings 
+                ?? new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
         }
 
         public SportTypes CurrentSportType
@@ -43,6 +45,6 @@
             set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentTimeZone), value);
         }
 
-        public UserSettings UserSettings => new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
+        public UserSettings UserSettings { get; }
     }
 }

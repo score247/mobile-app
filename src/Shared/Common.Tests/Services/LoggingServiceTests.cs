@@ -10,7 +10,7 @@
 
     public class LoggingServiceTests
     {
-        private readonly IEssentialsService mockEssentials;
+        private readonly IEssential mockEssentials;
         private readonly IRavenClient mockRavenClient;
         private readonly ILoggingService loggingService;
 
@@ -106,7 +106,7 @@
         }
     }
 
-    public class MockEssentials : IEssentialsService
+    public class MockEssentials : IEssential
     {
         public string Model => "6";
 

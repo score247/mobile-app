@@ -20,20 +20,21 @@
     {
         private readonly CompareLogic comparer;
         private readonly Fixture fixture;
-        private readonly IApiService mockApiService;
-        private readonly ILocalStorage mockCache;
-        private readonly ILoggingService mockLogger;
+        private readonly IApiService apiService;
+        private readonly ICachingService cacheService;
+        private readonly ILoggingService loggingService;
         private readonly IMatchService matchService;
 
         public MatchServiceTests(CommonFixture commonFixture)
         {
             comparer = commonFixture.Comparer;
             fixture = commonFixture.Specimens;
-            mockCache = Substitute.For<ILocalStorage>();
-            mockLogger = Substitute.For<ILoggingService>();
-            mockApiService = Substitute.For<IApiService>();
+            apiService = Substitute.For<IApiService>();
+            cacheService = Substitute.For<ICachingService>();
+            loggingService = Substitute.For<ILoggingService>();
+            
 
-            matchService = new MatchService(mockCache, mockLogger, mockApiService);
+            matchService = new MatchService(apiService, cacheService, loggingService);
         }
 
         [Fact]
@@ -47,7 +48,7 @@
             await matchService.GetMatches(settings, dateRange);
 
             // Assert
-            await mockCache.Received(1)
+            await cacheService.Received(1)
                 .GetAndFetchLatestValue(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
@@ -61,7 +62,7 @@
             // Arrange
             var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
-            mockCache.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -72,7 +73,7 @@
             var matches = await matchService.GetMatches(settings, dateRange);
 
             // Assert
-            mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
+            loggingService.Received(1).LogError(Arg.Any<InvalidOperationException>());
             Assert.Empty(matches);
         }
 
@@ -82,13 +83,13 @@
             // Arrange
             var settings = new UserSettings("1", "en-US", "+07:00");
             var dateRange = new DateRange
-            {
-                FromDate = new DateTime(2019, 04, 25),
-                ToDate = new DateTime(2019, 04, 25)
-            };
+            (
+                new DateTime(2019, 04, 25),
+                new DateTime(2019, 04, 25)
+            );
             var expectedMatches = fixture.CreateMany<Match>();
 
-            mockCache.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestValue(
                 "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -108,7 +109,7 @@
             var settings = new UserSettings("1", "en-US", "+07:00");
             var expectedMatch = fixture.Create<Match>();
 
-            mockCache.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestValue(
                "Match-1-en-US-+07:00-123",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -127,7 +128,7 @@
             // Arrange
             var settings = new UserSettings("1", "en-US", "+07:00");
 
-            mockCache.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestValue(
                "Match-1-en-US-+07:00-123",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -137,7 +138,7 @@
             var actualMatch = await matchService.GetMatch(settings, "123", false);
 
             // Assert
-            mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
+            loggingService.Received(1).LogError(Arg.Any<InvalidOperationException>());
             Assert.Null(actualMatch);
         }
     }

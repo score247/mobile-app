@@ -13,11 +13,11 @@ namespace Soccer.Tests.Converters
     public class MatchStatusConverterTests
     {
         private readonly MatchStatusConverter converter;
-        private readonly ILocalStorage localStorage;
+        private readonly ICachingService localStorage;
 
         public MatchStatusConverterTests()
         {
-            localStorage = Substitute.For<ILocalStorage>();
+            localStorage = Substitute.For<ICachingService>();
             converter = new MatchStatusConverter(localStorage);
         }
 

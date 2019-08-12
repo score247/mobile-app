@@ -26,12 +26,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         private readonly IMatchService matchService;
         private readonly CompareLogic comparer;
         private readonly Match match;
-        private readonly ILocalStorage localStorage;
+        private readonly ICachingService localStorage;
 
         public DetailInfoViewModelTests(ViewModelBaseFixture baseFixture)
         {
             comparer = baseFixture.CommonFixture.Comparer;
-            localStorage = Substitute.For<ILocalStorage>();
+            localStorage = Substitute.For<ICachingService>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
                 .Returns(new MatchStatusConverter(localStorage));
             matchService = Substitute.For<IMatchService>();

@@ -42,9 +42,9 @@
         };
 
         private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
-        private readonly ILocalStorage localStorage;
+        private readonly ICachingService localStorage;
 
-        public MatchStatusConverter(ILocalStorage localStorage)
+        public MatchStatusConverter(ICachingService localStorage)
         {
             this.localStorage = localStorage;
         }
