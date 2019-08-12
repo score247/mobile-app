@@ -29,7 +29,7 @@ namespace LiveScore.Core.Tests.Services
             var httpClient = (HttpClient)mockApi.GetType().GetProperty("Client").GetValue(mockApi);
 
             // Assert
-            Assert.Equal("https://score247-api1.nexdev.net/test/api", httpClient.BaseAddress.ToString());
+            Assert.Equal("https://score247-api1.nexdev.net/dev/api", httpClient.BaseAddress.ToString());
         }
 
         [Fact]
