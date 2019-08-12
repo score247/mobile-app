@@ -40,7 +40,7 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="akavache" Version="6.7.1" />
+        <PackageReference Include="akavache" Version="6.5.9" />
         <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
         <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
         <PackageReference Include="LiveXAML" Version="2.1.72" />
