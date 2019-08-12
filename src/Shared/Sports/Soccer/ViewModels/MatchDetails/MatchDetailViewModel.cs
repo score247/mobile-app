@@ -61,14 +61,10 @@ namespace LiveScore.Soccer.ViewModels
             matchHubConnection = DependencyResolver
                 .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildMatchEventHubConnection();
-<<<<<<< HEAD
+
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
-=======
-
-            matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
->>>>>>> 117855-Sprint7-ChangeRequest
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -204,7 +200,7 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
-        private void BuildViewModel(IMatch match) 
+        private void BuildViewModel(IMatch match)
             => MatchViewModel = new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
