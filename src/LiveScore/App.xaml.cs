@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Reflection;
+﻿using JsonNet.ContractResolvers;
 using LiveScore.Basketball;
 using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
@@ -27,9 +25,11 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using System;
+using System.Diagnostics;
+using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using JsonNet.ContractResolvers;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
