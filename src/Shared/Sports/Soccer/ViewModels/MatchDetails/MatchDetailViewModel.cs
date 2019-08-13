@@ -4,6 +4,11 @@
 
 namespace LiveScore.Soccer.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
     using Core.ViewModels;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
@@ -34,17 +39,24 @@ namespace LiveScore.Soccer.ViewModels
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
+        private static readonly IList<MatchFunction> TabFunctions = new List<MatchFunction>
+                {
+                    new MatchFunction { Abbreviation = "Odds", Name = "Odds" },
+                    new MatchFunction { Abbreviation = "Info", Name = "Match Info" },
+                    new MatchFunction { Abbreviation = "Tracker", Name = "Tracker" },
+                    new MatchFunction { Abbreviation = "Stats", Name = "Statistics" },
+                    new MatchFunction { Abbreviation = "Line-ups", Name = "Line-ups" },
+                    new MatchFunction { Abbreviation = "H2H", Name = "Head to Head" },
+                    new MatchFunction { Abbreviation = "Table", Name = "Table" },
+                    new MatchFunction { Abbreviation = "Social", Name = "Social" },
+                    new MatchFunction { Abbreviation = "TV", Name = "TV Schedule" }
+                };
+
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
@@ -111,7 +123,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             try
             {
-                await LoadData(() => LoadMatchDetail(MatchViewModel.Match.Id));
+                BuildTabFunctions();
 
                 cancellationTokenSource = new CancellationTokenSource();
 
@@ -125,40 +137,28 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private async Task LoadMatchDetail(string matchId)
-        {
-            var match = await matchService.GetMatch(SettingsService.UserSettings, matchId);
-
-            BuildTabFunctions(match);
-        }
-
-        private void BuildTabFunctions(IMatch match)
+        private void BuildTabFunctions()
         {
             TabViews = new ObservableCollection<TabItemViewModelBase>();
 
-            if (match.Functions != null)
+            foreach (var tab in TabFunctions)
             {
-                TabViews = new ObservableCollection<TabItemViewModelBase>();
+                var tabName = tab.Abbreviation.Replace("-", string.Empty);
 
-                foreach (var tab in match.Functions)
+                if (tabItemViewModels.ContainsKey(tabName))
                 {
-                    var tabName = tab.Abbreviation.Replace("-", string.Empty);
+                    var tabModel = tabItemViewModels[tabName];
+                    tabModel.Title = tab.Name;
+                    tabModel.TabHeaderTitle = tab.Abbreviation;
 
-                    if (tabItemViewModels.ContainsKey(tabName))
-                    {
-                        var tabModel = tabItemViewModels[tabName];
-                        tabModel.Title = tab.Name;
-                        tabModel.TabHeaderTitle = tab.Abbreviation;
-
-                        TabViews.Add(tabModel);
-                    }
+                    TabViews.Add(tabModel);
                 }
-
-                MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-                {
-                    Title = TabViews[index].Title;
-                });
             }
+
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                Title = TabViews[index].Title;
+            });
         }
 
         protected internal void OnReceivingMatchEvent(byte sportId, IMatchEvent payload)
