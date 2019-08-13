@@ -218,7 +218,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             if (!BetTypeOddsItems.Any())
             {
-                HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+                HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, true, NavigationService, DependencyResolver).CreateTemplate();
             }
 
             BetTypeOddsItems.Add(updatedOdds);
