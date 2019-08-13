@@ -57,7 +57,7 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 IsVisible="{Binding IsNotLoading}"
                 ItemTemplate="{StaticResource oddsItemTemplateSelector}"
-                ItemsSource="{Binding BetTypeOdds}"
+                ItemsSource="{Binding BetTypeOddsItems}"
                 MinimumHeightRequest="1000"
                 RefreshCommand="{Binding RefreshCommand}"
                 SeparatorVisibility="None">
