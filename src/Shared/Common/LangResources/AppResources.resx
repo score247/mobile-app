@@ -175,7 +175,7 @@
     <value>World News</value>
   </data>
   <data name="Postp" xml:space="preserve">
-    <value>Postp.</value>
+    <value>Postp</value>
   </data>
   <data name="Postponed" xml:space="preserve">
     <value>Postponed</value>
@@ -187,7 +187,7 @@
     <value>Delayed</value>
   </data>
   <data name="Canc" xml:space="preserve">
-    <value>Canc.</value>
+    <value>Canc</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>Cancelled</value>
