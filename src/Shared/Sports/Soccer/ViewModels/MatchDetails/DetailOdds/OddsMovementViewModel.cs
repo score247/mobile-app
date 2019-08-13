@@ -90,7 +90,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
-            HeaderTemplate = new BaseMovementHeaderViewModel(betType, NavigationService, DependencyResolver).CreateTemplate();
+            HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
             var OddsMovementItems = HasData
                     ? new ObservableCollection<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>

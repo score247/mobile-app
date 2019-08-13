@@ -120,13 +120,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
                 }));
 
-                hubConnection.Closed += async (error) =>
-                {
-                    await LoggingService.LogErrorAsync(error);
-
-                    await StartOddsHubConnection();
-                };
-
                 await StartOddsHubConnection();
             }
             catch (Exception ex)

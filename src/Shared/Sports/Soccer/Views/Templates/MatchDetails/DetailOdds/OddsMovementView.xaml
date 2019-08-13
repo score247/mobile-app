@@ -27,7 +27,6 @@
             </StackLayout.Resources>
 
             <Image
-                IsVisible="{Binding HasData}"
                 Source="images/common/odd_movement_chart.png"
                 Style="{StaticResource MatchDetailOddsMovementChart}" />
 
@@ -47,7 +46,6 @@
                 IsGroupingEnabled="true"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
-                IsVisible="{Binding HasData}"
                 ItemTemplate="{StaticResource oddsMovementItemTemplateSelector}"
                 ItemsSource="{Binding GroupOddsMovementItems}"
                 RefreshCommand="{Binding RefreshCommand}"

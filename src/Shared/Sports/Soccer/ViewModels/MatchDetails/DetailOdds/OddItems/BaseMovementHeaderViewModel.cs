@@ -17,25 +17,29 @@
             { BetType.OverUnder, new OverUnderMovementHeaderTemplate() }
         };
 
+        private readonly bool HasData;
+
         public BaseMovementHeaderViewModel(
             BetType betType,
+            bool hasData,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
             : base(navigationService, depdendencyResolver)
         {
             BetType = betType;
+            HasData = hasData;
         }
 
         public BetType BetType { get; }
 
         public DataTemplate CreateTemplate()
         {
-            if (TemplateMapper.ContainsKey(BetType))
+            if (HasData && TemplateMapper.ContainsKey(BetType))
             {
                 return TemplateMapper[BetType];
             }
 
-            return new OneXTwoMovementHeaderTemplate();
+            return new NoDataTemplate();
         }
     }
 }
