@@ -9,11 +9,11 @@
     {
         public AppSettingsFixture()
         {
-            SettingsService = Substitute.For<IApplicationContext>();
-            SettingsService.SportId.Returns(SportType.Soccer);
-            //SettingsService.UserSettings.Returns(new OldUserSettings(SportTypes.Soccer.DisplayName, "en-US", "7"));
+            //SettingsService = Substitute.For<ISettingsService>();
+            //SettingsService.UserSettings.SportId.Returns(SportType.Soccer.Value);
+            ////SettingsService.UserSettings.Returns(new OldUserSettings(SportTypes.Soccer.DisplayName, "en-US", "7"));
         }
 
-        public IApplicationContext SettingsService { get; }
+        public ISettingsService SettingsService { get; }
     }
 }

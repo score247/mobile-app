@@ -62,7 +62,7 @@
             }
         }
 
-        public async Task<IMatch> GetMatch(string matchId, string language, bool forceFetchNewData = false)
+        public async Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -70,7 +70,7 @@
 
                 var match = await cacheService.GetAndFetchLatestValue(
                         matchDataCacheKey,
-                        () => GetMatchFromApi(matchId, language),
+                        () => GetMatchFromApi(matchId, language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
 
                 return match;

@@ -117,7 +117,7 @@
                null).Returns(expectedMatch);
 
             // Act
-            var actualMatch = await matchService.GetMatch("123", settings.Language, false);
+            var actualMatch = await matchService.GetMatch("123", Language.English, false);
 
             // Assert
             Assert.Equal(expectedMatch, actualMatch);
@@ -136,7 +136,7 @@
                null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var actualMatch = await matchService.GetMatch("123", settings.Language, false);
+            var actualMatch = await matchService.GetMatch("123", Language.English, false);
 
             // Assert
             loggingService.Received(1).LogError(Arg.Any<InvalidOperationException>());

@@ -94,15 +94,15 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabItemViewModels = new Dictionary<string, TabItemViewModelBase>
                 {
-                    {nameof(MatchFunction.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
-                    {nameof(MatchFunction.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
-                    {nameof(MatchFunction.H2H), new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
-                    {nameof(MatchFunction.Lineups),  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
-                    {nameof(MatchFunction.Social), new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
-                    {nameof(MatchFunction.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
-                    {nameof(MatchFunction.Table), new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
-                    {nameof(MatchFunction.TV), new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                    {nameof(MatchFunction.Tracker), new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
+                    {nameof(Core.Enumerations.MatchFunction.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.H2H), new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Lineups),  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Social), new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Table), new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.TV), new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
+                    {nameof(Core.Enumerations.MatchFunction.Tracker), new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
                 };
 
                 Title = tabItemViewModels.First().Key;
