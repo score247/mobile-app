@@ -7,6 +7,7 @@
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
@@ -45,7 +46,7 @@
             var dateRange = new DateRange();
 
             // Act
-            await matchService.GetMatches(settings, dateRange);
+            await matchService.GetMatches(dateRange, Languages.English);
 
             // Assert
             await cacheService.Received(1)
@@ -70,7 +71,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var matches = await matchService.GetMatches(settings, dateRange);
+            var matches = await matchService.GetMatches(dateRange, Languages.English);
 
             // Assert
             loggingService.Received(1).LogError(Arg.Any<InvalidOperationException>());
@@ -96,7 +97,7 @@
                 null).Returns(expectedMatches);
 
             // Act
-            var actualMatches = await matchService.GetMatches(settings, dateRange, true);
+            var actualMatches = await matchService.GetMatches(dateRange, Languages.English, true);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatches, actualMatches).AreEqual);

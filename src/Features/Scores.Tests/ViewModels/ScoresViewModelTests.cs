@@ -8,6 +8,7 @@ namespace Scores.Tests.ViewModels
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
@@ -69,7 +70,7 @@ namespace Scores.Tests.ViewModels
         public async Task RefreshCommand_OnExecuting_RefreshMatchListItemSourceData()
         {
             // Arrange
-            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
+            matchService.GetMatches(Arg.Any<DateRange>(), Languages.English, true).Returns(matchData);
 
             // Act
             viewModel.RefreshCommand.Execute();
@@ -83,7 +84,7 @@ namespace Scores.Tests.ViewModels
         public void TappedMatchCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
-            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
+            matchService.GetMatches(Arg.Any<DateRange>(), Languages.English, true).Returns(matchData);
             viewModel.RefreshCommand.Execute();
             var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 
@@ -112,9 +113,9 @@ namespace Scores.Tests.ViewModels
         public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
         {
             // Arrange
-            matchService.GetMatches(
-                viewModel.SettingsService.UserSettings,
+            matchService.GetMatches(                
                 Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+               Languages.English,
                 false).Returns(matchData);
 
             // Act
@@ -129,9 +130,9 @@ namespace Scores.Tests.ViewModels
         public void OnAppearing_PublishDateBarItemSelectedEvent_LoadDataByDateRange()
         {
             // Arrange
-            matchService.GetMatches(
-                  viewModel.SettingsService.UserSettings,
+            matchService.GetMatches(                  
                   Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+                  Languages.English,
                   false).Returns(matchData);
             viewModel.OnAppearing();
 

@@ -9,6 +9,8 @@
     {
         string CurrentLanguage { get; set; }
 
+        Languages Language { get; }
+
         SportTypes CurrentSportType { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
@@ -25,6 +27,8 @@
             this.cacheService = cacheService;
 
             UserSettings = new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
+
+            Language = Enumeration.FromDisplayName<Languages>(CurrentLanguage);
         }
 
         protected SettingsService(ICachingService cacheService, UserSettings userSettings)
@@ -49,5 +53,6 @@
         }
 
         public UserSettings UserSettings { get; }
+        public Languages Language { get; }
     }
 }

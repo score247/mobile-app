@@ -162,8 +162,8 @@ namespace LiveScore.Score.ViewModels
             }
 
             var matches = await matchService.GetMatches(
-                    SettingsService.UserSettings,
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
+                    SettingsService.Language,
                     forceFetchNewData);
 
             MatchItemsSource = BuildMatchItemSource(matches);

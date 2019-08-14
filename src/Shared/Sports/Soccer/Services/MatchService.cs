@@ -2,6 +2,7 @@
 {
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
@@ -38,7 +39,7 @@
             this.cacheService = cacheService;
         }
 
-        public async Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Languages language, bool forceFetchNewData = false)
         {
             try
             {
@@ -46,11 +47,11 @@
                    ? (int)CacheDuration.Long
                    : (int)CacheDuration.Short;
 
-                var matchListDataCacheKey = $"Matches-{settings}-{dateRange}";
+                var matchListDataCacheKey = $"Matches:{dateRange}:{language.DisplayName}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         matchListDataCacheKey,
-                        () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, settings.Language),
+                        () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
             }
             catch (Exception ex)
@@ -65,7 +66,7 @@
         {
             try
             {
-                var matchDataCacheKey = $"Match:{matchId}-Language:{language}";
+                var matchDataCacheKey = $"Match:{matchId}:{language}";
 
                 var match = await cacheService.GetAndFetchLatestValue(
                         matchDataCacheKey,
