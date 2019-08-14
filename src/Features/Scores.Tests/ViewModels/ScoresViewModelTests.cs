@@ -84,7 +84,7 @@ namespace Scores.Tests.ViewModels
         public void TappedMatchCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
-            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
+            matchService.GetMatches(Arg.Any<DateRange>(), Language.English, true).Returns(matchData);
             viewModel.RefreshCommand.Execute();
             var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 
@@ -113,7 +113,7 @@ namespace Scores.Tests.ViewModels
         public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
         {
             // Arrange
-            matchService.GetMatches(                
+            matchService.GetMatches(
                 Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
                Language.English,
                 false).Returns(matchData);
@@ -130,7 +130,7 @@ namespace Scores.Tests.ViewModels
         public void OnAppearing_PublishDateBarItemSelectedEvent_LoadDataByDateRange()
         {
             // Arrange
-            matchService.GetMatches(                  
+            matchService.GetMatches(
                   Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
                   Language.English,
                   false).Returns(matchData);

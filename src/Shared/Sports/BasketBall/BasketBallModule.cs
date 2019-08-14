@@ -17,8 +17,8 @@
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IMatchService, MatchService>(SportTypes.Basketball.Value.ToString());
-            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportTypes.Basketball.Value.ToString());
+            containerRegistry.Register<IMatchService, MatchService>(SportType.Basketball.Value.ToString());
+            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Basketball.Value.ToString());
         }
     }
 }
