@@ -161,9 +161,9 @@ namespace Soccer.Tests.Converters
         }
 
         [Theory]
-        [InlineData("postponed", "Postp.")]
+        [InlineData("postponed", "Postp")]
         [InlineData("start_delayed", "Start Delayed")]
-        [InlineData("cancelled", "Canc.")]
+        [InlineData("cancelled", "Canc")]
         [InlineData("awaiting_extra_time", "Await ET")]
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
