@@ -19,6 +19,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
+    using Newtonsoft.Json;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -97,13 +98,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<byte, MatchEvent>("PushMatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, string>("MatchEvent", OnReceivingMatchEvent);
 
-            await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
+            await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, MatchEvent matchEvent)
+        protected internal void OnReceivingMatchEvent(byte sportId, string payload)
         {
+            var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
+
             if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || matchEvent.MatchId != Match.Id)
             {
                 return;
@@ -131,7 +134,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
 
-            if(match.TimeLines != null)
+            if (match.TimeLines != null)
             {
                 var timelines = match.TimeLines
                     .Where(t => t.IsDetailInfoEvent())

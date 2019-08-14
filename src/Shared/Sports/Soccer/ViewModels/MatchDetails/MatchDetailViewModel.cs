@@ -130,7 +130,7 @@ namespace LiveScore.Soccer.ViewModels
 
                 matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
 
-                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
+                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {

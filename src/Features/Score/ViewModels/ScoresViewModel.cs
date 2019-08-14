@@ -100,28 +100,10 @@ namespace LiveScore.Score.ViewModels
             matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
 
             Device.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
-                }
-                catch (Exception ex)
-                {
-                    await LoggingService.LogErrorAsync(ex);
-                }
-            });
+                await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
 
             Device.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
-                }
-                catch (Exception ex)
-                {
-                    await LoggingService.LogErrorAsync(ex);
-                }
-            });
+                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
         }
 
         protected override void Clean()
@@ -132,7 +114,7 @@ namespace LiveScore.Score.ViewModels
                  .GetEvent<DateBarItemSelectedEvent>()
                  .Unsubscribe(OnDateBarItemSelected);
 
-            cancellationTokenSource?.Dispose();
+            cancellationTokenSource?.Cancel();
         }
 
         private void OnRefreshCommand()

@@ -117,7 +117,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     var oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(data);
 
                     await HandleOddsComparisonMessage(oddsComparisonMessage);
-
                 }));
 
                 await StartOddsHubConnection();
@@ -145,7 +144,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             cancellationTokenSource = new CancellationTokenSource();
 
-            await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
+            await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
         }
 
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
@@ -191,15 +190,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
                 foreach (var updatedOdds in updatedOddsViewModels)
                 {
-                    var existingOddsItem =  BetTypeOddsItems.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
+                    var existingOddsItem = BetTypeOddsItems.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
 
-                    if(existingOddsItem == null)
+                    if (existingOddsItem == null)
                     {
                         needToReOrder = true;
                         AddBookmakerOdds(updatedOdds);
                     }
-                    else 
-                    {                       
+                    else
+                    {
                         existingOddsItem.UpdateOdds(updatedOdds.BetTypeOdds);
                     }
                 }

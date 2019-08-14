@@ -3,11 +3,12 @@
     using System;
     using System.Threading;
     using System.Threading.Tasks;
+    using LiveScore.Common.Services;
     using Microsoft.AspNetCore.SignalR.Client;
 
     public static class HubConnectionExtension
     {
-        public static async Task<HubConnection> StartWithKeepAlive(this HubConnection hubConnection, TimeSpan interval, CancellationToken cancellationToken)
+        public static async Task<HubConnection> StartWithKeepAlive(this HubConnection hubConnection, TimeSpan interval, ILoggingService logger, CancellationToken cancellationToken)
         {
             try
             {
@@ -17,10 +18,13 @@
                     await Task.Delay(interval, cancellationToken);
                 }
             }
-            catch(Exception ex)
+            catch (OperationCanceledException)
             {
-                var msg = ex.Message;
                 await hubConnection.StopAsync();
+            }
+            catch (Exception ex)
+            {
+                await logger.LogErrorAsync(ex);
             }
 
             return hubConnection;
