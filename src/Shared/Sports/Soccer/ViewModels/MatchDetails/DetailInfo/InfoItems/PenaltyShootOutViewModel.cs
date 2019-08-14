@@ -30,8 +30,8 @@
             if (TimelineEvent.HomeShootoutPlayer != null)
             {
                 HomeImageSource = TimelineEvent.IsHomeShootoutScored ?
-                    Images.PenaltyGoal.Value :
-                    Images.MissPenaltyGoal.Value;
+                    Images.PenaltyShootoutGoal.Value :
+                    Images.MissedPenaltyShootoutGoal.Value;
 
                 HomePlayerName = TimelineEvent.HomeShootoutPlayer?.Name;
             }
@@ -39,8 +39,8 @@
             if (TimelineEvent.AwayShootoutPlayer != null)
             {
                 AwayImageSource = TimelineEvent.IsAwayShootoutScored ?
-                    Images.PenaltyGoal.Value :
-                    Images.MissPenaltyGoal.Value;
+                    Images.PenaltyShootoutGoal.Value :
+                    Images.MissedPenaltyShootoutGoal.Value;
 
                 AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
             }
