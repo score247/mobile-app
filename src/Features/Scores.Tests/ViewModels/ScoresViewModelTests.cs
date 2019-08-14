@@ -80,15 +80,15 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public async Task TappedMatchCommand_OnExecuting_CallNavigationService()
+        public void TappedMatchCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
             matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
-            await viewModel.RefreshCommand.ExecuteAsync();
+            viewModel.RefreshCommand.Execute();
             var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 
             // Act
-            await viewModel.TappedMatchCommand.ExecuteAsync(matchViewModel);
+            viewModel.TappedMatchCommand.Execute(matchViewModel);
 
             // Assert
             var navService = viewModel.NavigationService as FakeNavigationService;
@@ -97,10 +97,10 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public async Task ClickSearchCommand_OnExecuting_CallNavigationService()
+        public void ClickSearchCommand_OnExecuting_CallNavigationService()
         {
             // Act
-            await viewModel.ClickSearchCommand.ExecuteAsync();
+            viewModel.ClickSearchCommand.Execute();
 
             // Assert
             var navService = viewModel.NavigationService as FakeNavigationService;
