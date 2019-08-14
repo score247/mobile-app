@@ -1,19 +1,18 @@
 ﻿namespace LiveScore.Soccer.Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Refit;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public interface ISoccerMatchApi
     {
@@ -43,11 +42,11 @@
         {
             try
             {
-                var cacheDuration = dateRange.ToDate < DateTime.Today
+                var cacheDuration = dateRange.ToDate.Date != DateTime.Today
                    ? (int)CacheDuration.Long
                    : (int)CacheDuration.Short;
 
-                var matchListDataCacheKey = $"Matches:{dateRange}:{language.DisplayName}";
+                var matchListDataCacheKey = $"GetMatches:{dateRange}:{language.DisplayName}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         matchListDataCacheKey,
@@ -66,7 +65,7 @@
         {
             try
             {
-                var matchDataCacheKey = $"Match:{matchId}:{language}";
+                var matchDataCacheKey = $"GetMatch:{matchId}:{language}";
 
                 var match = await cacheService.GetAndFetchLatestValue(
                         matchDataCacheKey,

@@ -12,16 +12,19 @@
         public static DateTime EndOfDay(this DateTime dateTime)
             => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999);
 
-        public static DateTime EndOfDay(this DateTime date, int timeZoneOffset) 
-            => new DateTime(date.Year, date.Month, date.Day, 23, 59, 59, 999, date.Kind)
+        public static DateTime EndOfDay(this DateTime dateTime, int timeZoneOffset) 
+            => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999, dateTime.Kind)
                 .AddHours(timeZoneOffset);
 
-        public static DateTime BeginningOfDay(this DateTime date)
-            => new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0, date.Kind);
+        public static DateTime BeginningOfDay(this DateTime dateTime)
+            => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0, dateTime.Kind);
 
-        public static DateTime BeginningOfDay(this DateTime date, int timezoneOffset) 
-            => new DateTime(date.Year, date.Month, date.Day, 0, 0, 0, 0, date.Kind)
+        public static DateTime BeginningOfDay(this DateTime dateTime, int timezoneOffset) 
+            => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0, dateTime.Kind)
                 .AddHours(timezoneOffset);
+
+        //public static bool EqualsWith(this DateTime dateTime1, DateTime dateTime2)
+        //    => dateTime1.Date == dateTime2.Year && dateTime1.Month == dateTime2.Month;
     }
 
 }
