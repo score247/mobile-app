@@ -135,6 +135,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             base.Clean();
         }
 
+        public override void OnResume()
+        {
+            IsRefreshing = true;
+            base.OnResume();
+        }
+
         private async Task StartOddsHubConnection()
         {
             cancellationTokenSource = new CancellationTokenSource();
@@ -203,7 +209,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
 
-                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)SelectedBetType, oddsFormat, true);
+                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)SelectedBetType, oddsFormat, forceFetchNewData: true);
             }
         }
 
