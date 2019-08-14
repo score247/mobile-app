@@ -8,6 +8,7 @@ namespace LiveScore.Basketball.Services
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Settings;
+    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using Microsoft.AspNetCore.SignalR.Client;
 
@@ -24,6 +25,11 @@ namespace LiveScore.Basketball.Services
         }
 
         public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
         {
             throw new NotImplementedException();
         }

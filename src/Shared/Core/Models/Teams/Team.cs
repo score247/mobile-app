@@ -12,12 +12,11 @@
 
         bool IsHome { get; }
 
-        //"formation": "4-2-3-1",
         string Formation { get; }
 
         string Abbreviation { get; }
 
-        ITeamStatistic Statistic { get; }
+        ITeamStatistic Statistic { get; set; }
 
         ICoach Coach { get; }
 

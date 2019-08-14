@@ -10,6 +10,7 @@ namespace LiveScore.Soccer.Services
     {       
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private HubConnection matchHubConnection;
+        private HubConnection teamHubConnection;
         private HubConnection oddsHubConnection;
 
         public HubService(IHubConnectionBuilder hubConnectionBuilder)
@@ -17,16 +18,16 @@ namespace LiveScore.Soccer.Services
             this.hubConnectionBuilder = hubConnectionBuilder;
         }
 
-        public HubConnection BuildMatchEventHubConnection()
-        {
-            return matchHubConnection ??
-                (matchHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/MatchEventHub").Build());
-        }
+        public HubConnection BuildMatchEventHubConnection() 
+            => matchHubConnection ??
+                (matchHubConnection = new HubConnectionBuilder().WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/MatchEventHub").Build());
 
-        public HubConnection BuildOddsEventHubConnection()
-        {
-            return oddsHubConnection ??
+        public HubConnection BuildTeamStatisticHubConnection()
+            => teamHubConnection ??
+                (teamHubConnection = new HubConnectionBuilder().WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/TeamStatisticHub").Build());
+
+        public HubConnection BuildOddsEventHubConnection() 
+            => oddsHubConnection ??
                 (oddsHubConnection = hubConnectionBuilder.WithUrl($"{Configuration.LocalHubEndPoint}/Soccer/OddsEventHub").Build());
-        }
     }
 }

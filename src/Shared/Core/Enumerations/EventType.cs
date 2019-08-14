@@ -81,5 +81,7 @@
         }
 
         public bool IsInjuryTimeShown => this == InjuryTimeShown;
+
+        public bool IsRedCard() => this == RedCard || this == YellowRedCard;
     }
 }

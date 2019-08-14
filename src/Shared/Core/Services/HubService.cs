@@ -6,6 +6,8 @@
     {
         HubConnection BuildMatchEventHubConnection();
 
+        HubConnection BuildTeamStatisticHubConnection();
+
         HubConnection BuildOddsEventHubConnection();
     }
 }

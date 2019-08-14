@@ -58,6 +58,8 @@
         int ShootoutAwayScore { get; }
 
         bool IsFirstShoot { get; }
+
+        bool IsHome { get; }
     }
 
     public class TimelineEvent : Entity<string, string>, ITimelineEvent
@@ -113,6 +115,8 @@
         public int ShootoutAwayScore { get; set; }
 
         public bool IsFirstShoot { get; set; }
+
+        public bool IsHome => Team == "home";
     }
 
     public class Commentary

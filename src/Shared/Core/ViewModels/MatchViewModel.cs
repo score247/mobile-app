@@ -1,7 +1,9 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
+    using System.Linq;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
     using Microsoft.AspNetCore.SignalR.Client;
     using PropertyChanged;
 
@@ -36,6 +38,12 @@
             Match.MatchResult = matchEvent.MatchResult;
             Match.LatestTimeline = matchEvent.Timeline;
             DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+        }
+
+        public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
+        {
+            var currentTeam = Match.Teams.FirstOrDefault(t => t.IsHome == isHome);
+            currentTeam.Statistic = teamStatistic;
         }
 
         private void SubscribeMatchTimeChangeEvent()

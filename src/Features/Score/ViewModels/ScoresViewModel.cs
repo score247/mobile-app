@@ -11,6 +11,7 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Commands;
     using Prism.Events;
@@ -31,6 +32,7 @@ namespace LiveScore.Score.ViewModels
         private const int HubKeepAliveInterval = 30;
         private readonly IMatchService matchService;
         private readonly HubConnection matchHubConnection;
+        private readonly HubConnection teamHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -45,9 +47,10 @@ namespace LiveScore.Score.ViewModels
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
-            matchHubConnection = DependencyResolver
-                .Resolve<IHubService>(CurrentSportId.ToString())
-                .BuildMatchEventHubConnection();
+
+            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
+            matchHubConnection = hubService.BuildMatchEventHubConnection();
+            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             RefreshCommand = new DelegateCommand(OnRefreshCommand);
             TappedMatchCommand = new DelegateCommand<MatchViewModel>(OnTappedMatchCommand);
@@ -94,6 +97,19 @@ namespace LiveScore.Score.ViewModels
               .Subscribe(OnDateBarItemSelected);
 
             matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
+            matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
+
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
+                }
+                catch (Exception ex)
+                {
+                    await LoggingService.LogErrorAsync(ex);
+                }
+            });
 
             Device.BeginInvokeOnMainThread(async () =>
             {
@@ -196,6 +212,20 @@ namespace LiveScore.Score.ViewModels
             {
                 matchItem.OnReceivedMatchEvent(matchEvent);
             }
+        }
+
+        internal void OnTeamStatisticChanged(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
+        {
+            if (sportId != CurrentSportId)
+            {
+                return;
+            }
+
+            var matchItem = MatchItemsSource
+              .SelectMany(group => group)
+              .FirstOrDefault(m => m.Match.Id == matchId);
+
+            matchItem.OnReceivedTeamStatistic(isHome, teamStats);
         }
     }
 }

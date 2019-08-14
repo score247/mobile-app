@@ -8,8 +8,11 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Settings;
+    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
+    using LiveScore.Soccer.Models.Teams;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Refit;
@@ -26,6 +29,7 @@
     public class MatchService : BaseService, IMatchService
     {
         private const string PushMatchEvent = "MatchEvent";
+        private const string PushTeamStatistic = "TeamStatistic";
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
 
@@ -89,6 +93,16 @@
                 var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
 
                 handler.Invoke(sportId, matchEvent);
+            });
+        }
+
+        public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
+        {
+            hubConnection.On<byte, string, bool, string>(PushTeamStatistic, (sportId, matchId, isHome, payload) =>
+            {
+                var teamStats = JsonConvert.DeserializeObject<TeamStatistic>(payload);
+
+                handler.Invoke(sportId, matchId, isHome, teamStats);
             });
         }
 

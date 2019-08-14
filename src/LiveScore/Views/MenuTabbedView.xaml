@@ -27,7 +27,7 @@
             <x:Arguments>
                 <score:ScoresView Title="Scores">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </score:ScoresView>
             </x:Arguments>
@@ -41,7 +41,7 @@
             <x:Arguments>
                 <score:LiveView Title="{langs:Translate Live}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </score:LiveView>
             </x:Arguments>
@@ -55,7 +55,7 @@
             <x:Arguments>
                 <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </favorites:EmptyFavoriteView>
             </x:Arguments>
@@ -69,7 +69,7 @@
             <x:Arguments>
                 <league:LeagueView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}" CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
                 </league:LeagueView>
             </x:Arguments>

@@ -67,7 +67,7 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public async Task RefreshCommand_OnExecuting_RefreshMatchListItemSourceData()
+        public void RefreshCommand_OnExecuting_RefreshMatchListItemSourceData()
         {
             // Arrange
             matchService.GetMatches(Arg.Any<DateRange>(), Language.English, true).Returns(matchData);
@@ -84,7 +84,7 @@ namespace Scores.Tests.ViewModels
         public void TappedMatchCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
-            matchService.GetMatches(Arg.Any<DateRange>(), Language.English, true).Returns(matchData);
+            matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
             viewModel.RefreshCommand.Execute();
             var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 

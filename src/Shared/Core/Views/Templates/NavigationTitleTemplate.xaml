@@ -8,9 +8,9 @@
             <StackLayout x:Name="SportName">
                 <Label
                     x:Name="sportLabel"
-                    AutomationId="{Binding CurrentSportName, StringFormat='NavigationSportName-{0}'}"
+                    AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                     Style="{StaticResource SportName}"
-                    Text="{Binding CurrentSportName}" />
+                    Text="{Binding CurrentSport}" />
             </StackLayout>
             <Label
                 x:Name="titleLabel"

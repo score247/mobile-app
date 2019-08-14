@@ -38,7 +38,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="ViewResources\" />
-        <Folder Include="Converters\" />
         <Folder Include="Models\Settings\" />
         <Folder Include="Events\">
         </Folder>
