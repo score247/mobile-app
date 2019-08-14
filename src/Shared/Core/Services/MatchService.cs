@@ -12,7 +12,7 @@
     {
         Task<IEnumerable<IMatch>> GetMatches(UserSettings settings, DateRange dateRange, bool forceFetchNewData = false);
 
-        Task<IMatch> GetMatch(UserSettings settings, string matchId, bool forceFetchNewData = false);
+        Task<IMatch> GetMatch(string matchId, string language, bool forceFetchNewData = false);
 
         void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler);
     }

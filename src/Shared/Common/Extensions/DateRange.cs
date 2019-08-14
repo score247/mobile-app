@@ -11,13 +11,14 @@
 
         public DateRange(DateTime datetime)
         {
-            FromDate = ToDate = datetime;
+            FromDate = datetime.BeginningOfDay();
+            ToDate = datetime.EndOfDay();
         }
 
         public DateRange(DateTime fromDate, DateTime toDate)
         {
-            FromDate = fromDate;
-            ToDate = toDate;
+            FromDate = fromDate.BeginningOfDay();
+            ToDate = toDate.EndOfDay();
         }
 
         public DateTime FromDate { get; }
@@ -29,7 +30,7 @@
         public string ToDateString => ToDate.ToApiFormat();
 
         public static DateRange FromYesterdayUntilNow()
-            => new DateRange(DateTime.Today.AddDays(-1), DateTime.Today.EndOfDay());
+            => new DateRange(DateTime.Today.AddDays(-1).BeginningOfDay(), DateTime.Today.EndOfDay());
 
         public override string ToString() => $"{FromDateString}-{ToDateString}";
         

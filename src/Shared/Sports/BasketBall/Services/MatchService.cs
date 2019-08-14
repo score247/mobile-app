@@ -13,7 +13,7 @@ namespace LiveScore.Basketball.Services
 
     public class MatchService : IMatchService
     {
-        public Task<IMatch> GetMatch(UserSettings settings, string matchId, bool forceFetchNewData = false)
+        public Task<IMatch> GetMatch(string matchId, string language, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }

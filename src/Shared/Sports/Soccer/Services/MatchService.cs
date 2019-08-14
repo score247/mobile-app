@@ -16,8 +16,8 @@
 
     public interface ISoccerMatchApi
     {
-        [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}&tz={timeZone}")]
-        Task<IEnumerable<Match>> GetMatches(string language, string fromDate, string toDate, string timeZone);
+        [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
+        Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
 
         [Get("/soccer/{language}/matches/{matchId}")]
         Task<Match> GetMatch(string matchId, string language);
@@ -50,7 +50,7 @@
 
                 return await cacheService.GetAndFetchLatestValue(
                         matchListDataCacheKey,
-                        () => GetMatchesFromApi(settings, dateRange.FromDateString, dateRange.ToDateString), 
+                        () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, settings.Language),
                         cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
             }
             catch (Exception ex)
@@ -61,15 +61,15 @@
             }
         }
 
-        public async Task<IMatch> GetMatch(UserSettings settings, string matchId, bool forceFetchNewData = false)
+        public async Task<IMatch> GetMatch(string matchId, string language, bool forceFetchNewData = false)
         {
             try
             {
-                var matchDataCacheKey = $"Match-{settings}-{matchId}";
+                var matchDataCacheKey = $"Match:{matchId}-Language:{language}";
 
                 var match = await cacheService.GetAndFetchLatestValue(
                         matchDataCacheKey,
-                        () => GetMatchFromApi(settings, matchId),
+                        () => GetMatchFromApi(matchId, language),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
 
                 return match;
@@ -92,16 +92,16 @@
             });
         }
 
-        private async Task<IEnumerable<Match>> GetMatchesFromApi(UserSettings settings, string fromDateText, string toDateText)
+        private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => await apiService.Execute
             (
-                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(settings.Language, fromDateText, toDateText, settings.TimeZone)
+                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)
             );
 
-        private async Task<Match> GetMatchFromApi(UserSettings settings, string matchId)
+        private async Task<Match> GetMatchFromApi(string matchId, string language)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerMatchApi>().GetMatch(matchId, settings.Language)
+               () => apiService.GetApi<ISoccerMatchApi>().GetMatch(matchId, language)
            );
     }
 }
