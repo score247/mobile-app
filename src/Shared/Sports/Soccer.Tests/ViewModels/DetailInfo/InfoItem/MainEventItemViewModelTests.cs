@@ -46,8 +46,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_BreakStart_PausePeriod_ShowHalfTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.BreakStart);
-            timeline.PeriodType.Returns(PeriodTypes.Pause);
+            timeline.Type.Returns(EventType.BreakStart);
+            timeline.PeriodType.Returns(PeriodType.Pause);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 }
             });
@@ -64,7 +64,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_MatchEnd_MatchStatusIsEnded_ShowFullTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.MatchEnded);
+            timeline.Type.Returns(EventType.MatchEnded);
             matchResult.MatchStatus.Returns(MatchStatus.Ended);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
@@ -83,12 +83,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_BreakStart_PeriodIsAwaitExtra_ShowFullTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.BreakStart);
-            timeline.PeriodType.Returns(PeriodTypes.AwaitingExtraTime);
+            timeline.Type.Returns(EventType.BreakStart);
+            timeline.PeriodType.Returns(PeriodType.AwaitingExtraTime);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.Overtime }
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodType.Overtime }
             });
 
             // Act
@@ -103,8 +103,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_BreakStart_PeriodIsAwaitPenalty_NoOvertime_ShowFullTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.BreakStart);
-            timeline.PeriodType.Returns(PeriodTypes.AwaitingPenalties);
+            timeline.Type.Returns(EventType.BreakStart);
+            timeline.PeriodType.Returns(PeriodType.AwaitingPenalties);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 }
@@ -122,7 +122,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_MatchEnd_MatchStatusIsAET_ShowAfterExtraTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.MatchEnded);
+            timeline.Type.Returns(EventType.MatchEnded);
             matchResult.MatchStatus.Returns(MatchStatus.EndedExtraTime);
             matchResult.HomeScore.Returns(3);
             matchResult.AwayScore.Returns(6);
@@ -139,14 +139,14 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_BreakStart_PeriodIsAwaitPenalties_ShowAfterExtraTime()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.BreakStart);
-            timeline.PeriodType.Returns(PeriodTypes.AwaitingPenalties);
+            timeline.Type.Returns(EventType.BreakStart);
+            timeline.PeriodType.Returns(PeriodType.AwaitingPenalties);
             matchResult.HomeScore.Returns(3);
             matchResult.AwayScore.Returns(6);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodTypes.Overtime }
+                new MatchPeriod { HomeScore = 2, AwayScore = 3, PeriodType = PeriodType.Overtime }
             });
 
             // Act
@@ -161,14 +161,14 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildMainEventStatus_MatchEndAfterPenalties_ShowPenaltyShootOut()
         {
             // Arrange
-            timeline.Type.Returns(EventTypes.MatchEnded);
-            timeline.PeriodType.Returns(PeriodTypes.Penalties);
+            timeline.Type.Returns(EventType.MatchEnded);
+            timeline.PeriodType.Returns(PeriodType.Penalties);
             matchResult.MatchStatus.Returns(MatchStatus.EndedAfterPenalties);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },
-                new MatchPeriod { HomeScore = 0, AwayScore = 2, PeriodType = PeriodTypes.Overtime},
-                new MatchPeriod { HomeScore = 4, AwayScore = 3, PeriodType = PeriodTypes.Penalties }
+                new MatchPeriod { HomeScore = 0, AwayScore = 2, PeriodType = PeriodType.Overtime},
+                new MatchPeriod { HomeScore = 4, AwayScore = 3, PeriodType = PeriodType.Penalties }
             });
 
             // Act

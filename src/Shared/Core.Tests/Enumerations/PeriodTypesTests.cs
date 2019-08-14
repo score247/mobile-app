@@ -9,7 +9,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void RegularPeriodType_Always_CreateCorrectType()
         {
             // Act
-            var actual = PeriodTypes.RegularPeriod;
+            var actual = PeriodType.RegularPeriod;
 
             // Assert
             Assert.Equal(1, actual.Value);
@@ -20,7 +20,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void OvertimeType_Always_CreateCorrectType()
         {
             // Act
-            var actual = PeriodTypes.Overtime;
+            var actual = PeriodType.Overtime;
 
             // Assert
             Assert.Equal(2, actual.Value);
@@ -31,7 +31,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void PenaltiesType_Always_CreateCorrectType()
         {
             // Act
-            var actual = PeriodTypes.Penalties;
+            var actual = PeriodType.Penalties;
 
             // Assert
             Assert.Equal(3, actual.Value);

@@ -46,7 +46,7 @@
             var dateRange = new DateRange();
 
             // Act
-            await matchService.GetMatches(dateRange, Languages.English);
+            await matchService.GetMatches(dateRange, Language.English);
 
             // Assert
             await cacheService.Received(1)
@@ -71,7 +71,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var matches = await matchService.GetMatches(dateRange, Languages.English);
+            var matches = await matchService.GetMatches(dateRange, Language.English);
 
             // Assert
             loggingService.Received(1).LogError(Arg.Any<InvalidOperationException>());
@@ -97,7 +97,7 @@
                 null).Returns(expectedMatches);
 
             // Act
-            var actualMatches = await matchService.GetMatches(dateRange, Languages.English, true);
+            var actualMatches = await matchService.GetMatches(dateRange, Language.English, true);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatches, actualMatches).AreEqual);

@@ -4,7 +4,7 @@
 
     public interface ILeagueRound
     {
-        LeagueRoundTypes Type { get; }
+        LeagueRoundType Type { get; }
 
         string Name { get; }
 
@@ -13,7 +13,7 @@
 
     public class LeagueRound : ILeagueRound
     {
-        public LeagueRoundTypes Type { get; set; }
+        public LeagueRoundType Type { get; set; }
 
         public string Name { get; set; }
 

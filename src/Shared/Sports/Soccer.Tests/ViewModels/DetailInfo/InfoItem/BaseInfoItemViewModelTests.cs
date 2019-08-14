@@ -38,7 +38,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void CreateInstance_Always_GetExpectedViewModelInstance(string eventType, Type expectedType)
         {
             // Arrange
-            timeline.Type.Returns(Enumeration.FromDisplayName<EventTypes>(eventType));
+            timeline.Type.Returns(Enumeration.FromDisplayName<EventType>(eventType));
 
             // Act
             var actual = viewModel.CreateInstance();
@@ -58,7 +58,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void CreateTemplate_Always_GetExpectedTemplate(string eventType, Type expectedType)
         {
             // Arrange
-            timeline.Type.Returns(Enumeration.FromDisplayName<EventTypes>(eventType));
+            timeline.Type.Returns(Enumeration.FromDisplayName<EventType>(eventType));
             // Act
             var actual = viewModel.CreateTemplate();
 

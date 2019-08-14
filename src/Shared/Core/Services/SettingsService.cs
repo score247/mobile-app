@@ -9,9 +9,9 @@
     {
         string CurrentLanguage { get; set; }
 
-        Languages Language { get; }
+        Language Language { get; }
 
-        SportTypes CurrentSportType { get; set; }
+        SportType CurrentSportType { get; set; }
 
         TimeZoneInfo CurrentTimeZone { get; set; }
 
@@ -28,21 +28,21 @@
 
             UserSettings = new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
 
-            Language = Enumeration.FromDisplayName<Languages>(CurrentLanguage);
+            Language = Enumeration.FromDisplayName<Language>(CurrentLanguage);
         }
 
         protected SettingsService(ICachingService cacheService, UserSettings userSettings)
             : this(cacheService) => UserSettings = userSettings;
 
-        public SportTypes CurrentSportType
+        public SportType CurrentSportType
         {
-            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentSportType), SportTypes.Soccer);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentSportType), SportType.Soccer);
             set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentSportType), value);
         }
 
         public string CurrentLanguage
         {
-            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentLanguage), Languages.English.DisplayName);
+            get => cacheService.GetValueOrDefaultFromUserAccount(nameof(CurrentLanguage), Language.English.DisplayName);
             set => cacheService.AddOrUpdateValueToUserAccount(nameof(CurrentLanguage), value);
         }
 
@@ -53,6 +53,6 @@
         }
 
         public UserSettings UserSettings { get; }
-        public Languages Language { get; }
+        public Language Language { get; }
     }
 }

@@ -22,8 +22,8 @@ namespace LiveScore.Core.Tests.Services
             // Assert
             var expectedSportItem = new List<SportItem>
             {
-                new SportItem { Type = SportTypes.Soccer },
-                new SportItem { Type = SportTypes.Basketball  }
+                new SportItem { Type = SportType.Soccer },
+                new SportItem { Type = SportType.Basketball  }
             };
             Assert.True(comparer.Compare(expectedSportItem, actual).AreEqual);
         }

@@ -4,7 +4,7 @@
 
     public class SportItem
     {
-        public SportTypes Type { get; set; }
+        public SportType Type { get; set; }
 
         public int NumberOfEvent { get; set; }
 

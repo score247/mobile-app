@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
-    public enum MatchFunctions
+    public enum MatchFunction
     {
         Odds,
         Info,

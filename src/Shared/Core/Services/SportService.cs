@@ -15,8 +15,8 @@
         {
             return new List<SportItem>
            {
-               new SportItem { Type = SportTypes.Soccer },
-               new SportItem { Type = SportTypes.Basketball  }
+               new SportItem { Type = SportType.Soccer },
+               new SportItem { Type = SportType.Basketball  }
            };
         }
     }

@@ -7,7 +7,7 @@
 
     public interface ITimelineEvent : IEntity<string, string>
     {
-        EventTypes Type { get; }
+        EventType Type { get; }
 
         DateTime Time { get; }
 
@@ -21,7 +21,7 @@
 
         int Period { get; }
 
-        PeriodTypes PeriodType { get; }
+        PeriodType PeriodType { get; }
 
         int HomeScore { get; }
 
@@ -62,7 +62,7 @@
 
     public class TimelineEvent : Entity<string, string>, ITimelineEvent
     {
-        public EventTypes Type { get; set; }
+        public EventType Type { get; set; }
 
         public DateTime Time { get; set; }
 
@@ -76,7 +76,7 @@
 
         public int Period { get; set; }
 
-        public PeriodTypes PeriodType { get; set; }
+        public PeriodType PeriodType { get; set; }
 
         public int HomeScore { get; set; }
 

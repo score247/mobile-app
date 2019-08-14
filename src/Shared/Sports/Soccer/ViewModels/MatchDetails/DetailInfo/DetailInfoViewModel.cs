@@ -183,7 +183,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             if (matchResult.EventStatus.IsClosed)
             {
                 var timelineEvents = timelines.ToList();
-                timelineEvents.RemoveAll(t => t.Type == EventTypes.PenaltyShootout && t.IsFirstShoot);
+                timelineEvents.RemoveAll(t => t.Type == EventType.PenaltyShootout && t.IsFirstShoot);
 
                 return timelineEvents;
             }

@@ -29,7 +29,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("home");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.YellowCard);
+            timeline.Type.Returns(EventType.YellowCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -47,7 +47,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("home");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.YellowRedCard);
+            timeline.Type.Returns(EventType.YellowRedCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -65,7 +65,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("home");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.RedCard);
+            timeline.Type.Returns(EventType.RedCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -83,7 +83,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("away");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.YellowCard);
+            timeline.Type.Returns(EventType.YellowCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -101,7 +101,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("away");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.YellowRedCard);
+            timeline.Type.Returns(EventType.YellowRedCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -119,7 +119,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("away");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.RedCard);
+            timeline.Type.Returns(EventType.RedCard);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -137,7 +137,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("home");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.PenaltyMissed);
+            timeline.Type.Returns(EventType.PenaltyMissed);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -155,7 +155,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Team.Returns("away");
             timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventTypes.PenaltyMissed);
+            timeline.Type.Returns(EventType.PenaltyMissed);
 
             // Act
             var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);

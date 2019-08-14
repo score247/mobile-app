@@ -159,7 +159,7 @@ namespace Soccer.Tests.ViewModels
                 WinnerId = "home",
                 MatchPeriods = new List<MatchPeriod>
                 {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
+                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
                 },
                 EventStatus = MatchStatus.Closed
             };
@@ -181,7 +181,7 @@ namespace Soccer.Tests.ViewModels
                 WinnerId = "away",
                 MatchPeriods = new List<MatchPeriod>
                 {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodTypes.Penalties }
+                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
                 },
                 EventStatus = MatchStatus.Closed
             };
@@ -200,7 +200,7 @@ namespace Soccer.Tests.ViewModels
             // Arrange
             match.TimeLines = new List<ITimelineEvent>
             {
-                new TimelineEvent { Type = EventTypes.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
+                new TimelineEvent { Type = EventType.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
             var matchResult = new MatchResult
@@ -210,7 +210,7 @@ namespace Soccer.Tests.ViewModels
                 AwayScore = 2
             };
 
-            var timeline = new TimelineEvent { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+            var timeline = new TimelineEvent { Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
@@ -226,7 +226,7 @@ namespace Soccer.Tests.ViewModels
         public void OnReceivingMatchEvent_IsNotCurrentMatch_Return()
         {
             // Arrange
-            var timeline = new TimelineEvent { Type = EventTypes.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
+            var timeline = new TimelineEvent { Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
             var matchEvent = new MatchEvent("1", null, timeline);
 
             // Act

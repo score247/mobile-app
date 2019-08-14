@@ -9,7 +9,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void CupRound_Always_CreateCorrectType()
         {
             // Act
-            var actual = LeagueRoundTypes.CupRound;
+            var actual = LeagueRoundType.CupRound;
 
             // Assert
             Assert.Equal(1, actual.Value);
@@ -20,7 +20,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void GroupRound_Always_CreateCorrectType()
         {
             // Act
-            var actual = LeagueRoundTypes.GroupRound;
+            var actual = LeagueRoundType.GroupRound;
 
             // Assert
             Assert.Equal(2, actual.Value);
@@ -31,7 +31,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void PlayOffRound_Always_CreateCorrectType()
         {
             // Act
-            var actual = LeagueRoundTypes.PlayOffRound;
+            var actual = LeagueRoundType.PlayOffRound;
 
             // Assert
             Assert.Equal(3, actual.Value);
@@ -42,7 +42,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void QualifierRound_Always_CreateCorrectType()
         {
             // Act
-            var actual = LeagueRoundTypes.QualifierRound;
+            var actual = LeagueRoundType.QualifierRound;
 
             // Assert
             Assert.Equal(4, actual.Value);
@@ -53,7 +53,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void VariableRound_Always_CreateCorrectType()
         {
             // Act
-            var actual = LeagueRoundTypes.VariableRound;
+            var actual = LeagueRoundType.VariableRound;
 
             // Assert
             Assert.Equal(5, actual.Value);
@@ -64,7 +64,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Constructor_DoNothing()
         {
             // Act
-            new LeagueRoundTypes();
+            new LeagueRoundType();
 
             // Assert
             Assert.True(true);

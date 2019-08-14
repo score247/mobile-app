@@ -11,17 +11,17 @@
 
     public class DefaultItemViewModel : BaseItemViewModel
     {
-        private static readonly IDictionary<EventTypes, string> EventImages = new Dictionary<EventTypes, string>
+        private static readonly IDictionary<EventType, string> EventImages = new Dictionary<EventType, string>
         {
-            { EventTypes.YellowCard, Enumerations.Images.YellowCard.Value },
-            { EventTypes.YellowRedCard, Enumerations.Images.RedYellowCard.Value },
-            { EventTypes.RedCard, Enumerations.Images.RedCard.Value },
-            { EventTypes.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
+            { EventType.YellowCard, Enumerations.Images.YellowCard.Value },
+            { EventType.YellowRedCard, Enumerations.Images.RedYellowCard.Value },
+            { EventType.RedCard, Enumerations.Images.RedCard.Value },
+            { EventType.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
         };
 
-        private static readonly EventTypes[] VisibleScoreEvents = new[]
+        private static readonly EventType[] VisibleScoreEvents = new[]
         {
-            EventTypes.PenaltyMissed
+            EventType.PenaltyMissed
         };
 
         public DefaultItemViewModel(

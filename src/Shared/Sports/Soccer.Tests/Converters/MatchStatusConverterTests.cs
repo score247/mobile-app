@@ -122,7 +122,7 @@ namespace Soccer.Tests.Converters
                 },
                 LatestTimeline = new TimelineEvent
                 {
-                    Type = EventTypes.InjuryTimeShown,
+                    Type = EventType.InjuryTimeShown,
                     InjuryTimeAnnounced = 5
                 }
             };
@@ -197,7 +197,7 @@ namespace Soccer.Tests.Converters
                 },
                 LatestTimeline = new TimelineEvent
                 {
-                    Type = Enumeration.FromDisplayName<EventTypes>("injury_time_shown"),
+                    Type = Enumeration.FromDisplayName<EventType>("injury_time_shown"),
                     StoppageTime = "1",
                     InjuryTimeAnnounced = 3
                 }
@@ -228,7 +228,7 @@ namespace Soccer.Tests.Converters
                 },
                 LatestTimeline = new TimelineEvent
                 {
-                    Type = Enumeration.FromDisplayName<EventTypes>("yellow_card"),
+                    Type = Enumeration.FromDisplayName<EventType>("yellow_card"),
                     StoppageTime = "2",
                 }
             };

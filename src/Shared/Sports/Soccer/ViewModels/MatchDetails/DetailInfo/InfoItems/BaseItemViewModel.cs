@@ -13,30 +13,30 @@
 
     public class BaseItemViewModel : ViewModelBase
     {
-        private static readonly IDictionary<EventTypes, Type> ViewModelMapper = new Dictionary<EventTypes, Type>
+        private static readonly IDictionary<EventType, Type> ViewModelMapper = new Dictionary<EventType, Type>
         {
-            { EventTypes.YellowCard, typeof(DefaultItemViewModel) },
-            { EventTypes.YellowRedCard, typeof(DefaultItemViewModel) },
-            { EventTypes.RedCard, typeof(DefaultItemViewModel) },
-            { EventTypes.PenaltyMissed, typeof(DefaultItemViewModel) },
-            { EventTypes.ScoreChange, typeof(ScoreChangeItemViewModel) },
-            { EventTypes.BreakStart, typeof(MainEventItemViewModel) },
-            { EventTypes.PeriodStart, typeof(MainEventItemViewModel) },
-            { EventTypes.MatchEnded, typeof(MainEventItemViewModel) },
-            { EventTypes.PenaltyShootout, typeof(PenaltyShootOutViewModel) }
+            { EventType.YellowCard, typeof(DefaultItemViewModel) },
+            { EventType.YellowRedCard, typeof(DefaultItemViewModel) },
+            { EventType.RedCard, typeof(DefaultItemViewModel) },
+            { EventType.PenaltyMissed, typeof(DefaultItemViewModel) },
+            { EventType.ScoreChange, typeof(ScoreChangeItemViewModel) },
+            { EventType.BreakStart, typeof(MainEventItemViewModel) },
+            { EventType.PeriodStart, typeof(MainEventItemViewModel) },
+            { EventType.MatchEnded, typeof(MainEventItemViewModel) },
+            { EventType.PenaltyShootout, typeof(PenaltyShootOutViewModel) }
         };
 
-        private static readonly IDictionary<EventTypes, DataTemplate> TemplateMapper = new Dictionary<EventTypes, DataTemplate>
+        private static readonly IDictionary<EventType, DataTemplate> TemplateMapper = new Dictionary<EventType, DataTemplate>
         {
-            { EventTypes.YellowCard, new DefaultItemTemplate() },
-            { EventTypes.YellowRedCard, new DefaultItemTemplate() },
-            { EventTypes.RedCard, new DefaultItemTemplate() },
-            { EventTypes.PenaltyMissed, new DefaultItemTemplate() },
-            { EventTypes.BreakStart, new MainEventItemTemplate() },
-            { EventTypes.PeriodStart, new MainEventItemTemplate() },
-            { EventTypes.MatchEnded, new MainEventItemTemplate() },
-            { EventTypes.ScoreChange, new ScoreChangeItemTemplate() },
-            { EventTypes.PenaltyShootout, new PenaltyShootOutTemplate() }
+            { EventType.YellowCard, new DefaultItemTemplate() },
+            { EventType.YellowRedCard, new DefaultItemTemplate() },
+            { EventType.RedCard, new DefaultItemTemplate() },
+            { EventType.PenaltyMissed, new DefaultItemTemplate() },
+            { EventType.BreakStart, new MainEventItemTemplate() },
+            { EventType.PeriodStart, new MainEventItemTemplate() },
+            { EventType.MatchEnded, new MainEventItemTemplate() },
+            { EventType.ScoreChange, new ScoreChangeItemTemplate() },
+            { EventType.PenaltyShootout, new PenaltyShootOutTemplate() }
         };
 
         public BaseItemViewModel(

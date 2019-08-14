@@ -9,7 +9,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Soccer_Always_CreateCorrectType()
         {
             // Act
-            var actual = SportTypes.Soccer;
+            var actual = SportType.Soccer;
 
             // Assert
             Assert.Equal(1, actual.Value);
@@ -20,7 +20,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Basketball_Always_CreateCorrectType()
         {
             // Act
-            var actual = SportTypes.Basketball;
+            var actual = SportType.Basketball;
 
             // Assert
             Assert.Equal(2, actual.Value);
@@ -31,7 +31,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void ESport_Always_CreateCorrectType()
         {
             // Act
-            var actual = SportTypes.ESport;
+            var actual = SportType.ESport;
 
             // Assert
             Assert.Equal(3, actual.Value);
@@ -42,7 +42,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Constructor_DoNothing()
         {
             // Act
-            new SportTypes();
+            new SportType();
 
             // Assert
             Assert.True(true);

@@ -45,17 +45,17 @@ namespace LiveScore.Soccer.ViewModels
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
-        private static readonly IList<MatchFunction> TabFunctions = new List<MatchFunction>
+        private static readonly IList<Core.Models.Matches.MatchFunction> TabFunctions = new List<Core.Models.Matches.MatchFunction>
                 {
-                    new MatchFunction { Abbreviation = "Odds", Name = "Odds" },
-                    new MatchFunction { Abbreviation = "Info", Name = "Match Info" },
-                    new MatchFunction { Abbreviation = "Tracker", Name = "Tracker" },
-                    new MatchFunction { Abbreviation = "Stats", Name = "Statistics" },
-                    new MatchFunction { Abbreviation = "Line-ups", Name = "Line-ups" },
-                    new MatchFunction { Abbreviation = "H2H", Name = "Head to Head" },
-                    new MatchFunction { Abbreviation = "Table", Name = "Table" },
-                    new MatchFunction { Abbreviation = "Social", Name = "Social" },
-                    new MatchFunction { Abbreviation = "TV", Name = "TV Schedule" }
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Odds", Name = "Odds" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Info", Name = "Match Info" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Tracker", Name = "Tracker" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Stats", Name = "Statistics" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Line-ups", Name = "Line-ups" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "H2H", Name = "Head to Head" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Table", Name = "Table" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "Social", Name = "Social" },
+                    new Core.Models.Matches.MatchFunction { Abbreviation = "TV", Name = "TV Schedule" }
                 };
 
         private readonly HubConnection matchHubConnection;
@@ -94,15 +94,15 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabItemViewModels = new Dictionary<string, TabItemViewModelBase>
                 {
-                    {nameof(MatchFunctions.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
-                    {nameof(MatchFunctions.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
-                    {nameof(MatchFunctions.H2H), new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
-                    {nameof(MatchFunctions.Lineups),  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
-                    {nameof(MatchFunctions.Social), new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
-                    {nameof(MatchFunctions.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
-                    {nameof(MatchFunctions.Table), new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
-                    {nameof(MatchFunctions.TV), new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                    {nameof(MatchFunctions.Tracker), new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
+                    {nameof(MatchFunction.Odds), new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
+                    {nameof(MatchFunction.Info), new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
+                    {nameof(MatchFunction.H2H), new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
+                    {nameof(MatchFunction.Lineups),  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
+                    {nameof(MatchFunction.Social), new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
+                    {nameof(MatchFunction.Stats), new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
+                    {nameof(MatchFunction.Table), new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
+                    {nameof(MatchFunction.TV), new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
+                    {nameof(MatchFunction.Tracker), new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
                 };
 
                 Title = tabItemViewModels.First().Key;

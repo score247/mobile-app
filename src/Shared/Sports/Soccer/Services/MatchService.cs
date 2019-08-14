@@ -39,7 +39,7 @@
             this.cacheService = cacheService;
         }
 
-        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Languages language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             try
             {

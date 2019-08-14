@@ -93,7 +93,7 @@
             var timeline = match.LatestTimeline;
             var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
 
-            if (timeline != null && (timeline.Type == EventTypes.InjuryTimeShown || stoppageTimeHasValue))
+            if (timeline != null && (timeline.Type == EventType.InjuryTimeShown || stoppageTimeHasValue))
             {
                 return BuildMatchInjuryTime(match, timeline);
             }

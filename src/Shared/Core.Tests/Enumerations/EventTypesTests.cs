@@ -9,7 +9,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void RedCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.RedCard;
+            var actual = EventType.RedCard;
 
             // Assert
             Assert.Equal(8, actual.Value);
@@ -20,7 +20,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void ScoreChange_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.ScoreChange;
+            var actual = EventType.ScoreChange;
 
             // Assert
             Assert.Equal(9, actual.Value);
@@ -31,7 +31,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Substitution_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.Substitution;
+            var actual = EventType.Substitution;
 
             // Assert
             Assert.Equal(10, actual.Value);
@@ -42,7 +42,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void YellowCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.YellowCard;
+            var actual = EventType.YellowCard;
 
             // Assert
             Assert.Equal(11, actual.Value);
@@ -53,7 +53,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void YellowRedCard_Always_CreateCorrectEventType()
         {
             // Act
-            var actual = EventTypes.YellowRedCard;
+            var actual = EventType.YellowRedCard;
 
             // Assert
             Assert.Equal(12, actual.Value);
@@ -64,7 +64,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Constructor_DoNothing()
         {
             // Act
-            new EventTypes();
+            new EventType();
 
             // Assert
             Assert.True(true);

@@ -8,7 +8,7 @@
 
         public int AwayScore { get; set; }
 
-        public PeriodTypes PeriodType { get; set; }
+        public PeriodType PeriodType { get; set; }
 
         public int Number { get; set; }
     }

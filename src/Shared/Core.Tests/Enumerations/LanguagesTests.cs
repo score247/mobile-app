@@ -9,7 +9,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Constructor_DoNothing()
         {
             // Act
-            new Languages();
+            new Language();
 
             // Assert
             Assert.True(true);
@@ -19,7 +19,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void English_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.English;
+            var actual = Language.English;
 
             // Assert
             Assert.Equal(1, actual.Value);
@@ -30,7 +30,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Vietnamese_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.Vietnamese;
+            var actual = Language.Vietnamese;
 
             // Assert
             Assert.Equal(2, actual.Value);
@@ -41,7 +41,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Thailand_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.Thailand;
+            var actual = Language.Thailand;
 
             // Assert
             Assert.Equal(3, actual.Value);
@@ -52,7 +52,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void Indonesia_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.Indonesia;
+            var actual = Language.Indonesia;
 
             // Assert
             Assert.Equal(4, actual.Value);
@@ -63,7 +63,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void TraditionalChinese_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.TraditionalChinese;
+            var actual = Language.TraditionalChinese;
 
             // Assert
             Assert.Equal(5, actual.Value);
@@ -74,7 +74,7 @@ namespace LiveScore.Core.Tests.Enumerations
         public void SimplifiedChinese_Always_CreateCorrectType()
         {
             // Act
-            var actual = Languages.SimplifiedChinese;
+            var actual = Language.SimplifiedChinese;
 
             // Assert
             Assert.Equal(6, actual.Value);
