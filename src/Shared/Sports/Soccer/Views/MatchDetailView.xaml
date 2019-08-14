@@ -3,6 +3,7 @@
     x:Class="LiveScore.Soccer.Views.MatchDetailView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
     xmlns:controls="clr-namespace:LiveScore.Core.Controls;assembly=LiveScore.Core"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
@@ -83,7 +84,7 @@
                                 AutomationId="LiveIndicator"
                                 IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                 Style="{StaticResource LiveIcon}" />
-                            <Image 
+                            <Image
                                 AutomationId="ExtraTimeIndicator"
                                 IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
                                 Style="{StaticResource ExtraTimeIcon}" />
@@ -99,6 +100,7 @@
                                     AutomationId="HomeTeamName"
                                     Style="{StaticResource MatchGeneralInfoTeam}"
                                     Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
+                                <templates:RedCardTemplate RedCardCount="{Binding MatchViewModel.Match.Teams[0].Statistic.RedCards}" />
                                 <Image
                                     AutomationId="HomeTeamPenalty"
                                     IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
@@ -116,6 +118,7 @@
                                     AutomationId="AwayTeamName"
                                     Style="{StaticResource MatchGeneralInfoTeam}"
                                     Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
+                                <templates:RedCardTemplate RedCardCount="{Binding MatchViewModel.Match.Teams[1].Statistic.RedCards}" />
                                 <Image
                                     AutomationId="AwayTeamPenalty"
                                     IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"

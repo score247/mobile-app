@@ -280,7 +280,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Equal(matchResult, viewModel.Match.MatchResult);
@@ -303,7 +303,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Contains(timeline, viewModel.Match.TimeLines);
@@ -321,7 +321,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Null(viewModel.Match.TimeLines);

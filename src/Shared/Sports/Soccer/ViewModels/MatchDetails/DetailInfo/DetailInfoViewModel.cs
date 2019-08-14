@@ -97,12 +97,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<byte, MatchEvent>("PushMatchEvent", OnReceivingMatchEvent);
+            matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, MatchEvent matchEvent)
+        protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
             if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || matchEvent.MatchId != Match.Id)
             {
@@ -131,7 +131,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
 
-            if(match.TimeLines != null)
+            if (match.TimeLines != null)
             {
                 var timelines = match.TimeLines
                     .Where(t => t.IsDetailInfoEvent())
