@@ -56,7 +56,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Shared\Sports\Basketball\Basketball.csproj" />
     <ProjectReference Include="..\Features\Favorites\Favorites.csproj" />
     <ProjectReference Include="..\Features\League\League.csproj" />
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />

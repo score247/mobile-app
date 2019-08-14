@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -55,7 +55,6 @@
     <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />
-    <ProjectReference Include="..\..\Shared\Sports\BasketBall\Basketball.csproj" />
   </ItemGroup>
 
   <ItemGroup>

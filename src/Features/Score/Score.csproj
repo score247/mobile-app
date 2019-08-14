@@ -78,7 +78,6 @@
       <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
       <ProjectReference Include="..\..\Shared\Core\LiveScore.Core.csproj" />
       <ProjectReference Include="..\..\Shared\Sports\Soccer\Soccer.csproj" />
-      <ProjectReference Include="..\..\Shared\Sports\BasketBall\Basketball.csproj" />
     </ItemGroup>
     <ItemGroup>
       <Folder Include="ViewResources\" />

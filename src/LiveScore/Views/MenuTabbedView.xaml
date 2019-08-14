@@ -3,6 +3,7 @@
     x:Class="LiveScore.Views.MenuTabbedView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:favorites="clr-namespace:LiveScore.Favorites.Views;assembly=LiveScore.Favorites"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
@@ -11,13 +12,12 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Score.Views;assembly=LiveScore.Score"
     x:Name="self"
+    android:TabbedPage.BarItemColor="{StaticResource TabColor}"
+    android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
+    android:TabbedPage.ToolbarPlacement="Bottom"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
-    BarBackgroundColor="{StaticResource FunctionBarBgColor}"
-    xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-    android:TabbedPage.ToolbarPlacement="Bottom"
-    android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
-    android:TabbedPage.BarItemColor="{StaticResource TabColor}">
+    BarBackgroundColor="{StaticResource FunctionBarBgColor}">
     <TabbedPage.Children>
         <NavigationPage
             x:Name="ScoresBar"

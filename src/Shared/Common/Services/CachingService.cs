@@ -1,11 +1,10 @@
 ﻿namespace LiveScore.Common.Services
 {
-    using Akavache;
-    using Ardalis.GuardClauses;
-    using Splat;
     using System;
     using System.Reactive.Linq;
     using System.Threading.Tasks;
+    using Akavache;
+    using Ardalis.GuardClauses;
 
     public enum CacheDuration
     {
@@ -30,10 +29,6 @@
         void Shutdown();
 
         Task Invalidate(string key);
-
-        Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null);
-
-        TimeSpan CacheDuration(CacheDuration cacheDuration);
 
         Task CleanAllExpired();
 
@@ -74,12 +69,6 @@
         }
 
         public async Task Invalidate(string key) => await localMachineCache.Invalidate(key);
-
-        public async Task<IBitmap> LoadImageFromUrl(string imageLink, float? desiredWidth = null, float? desiredHeight = null)
-            => await localMachineCache.LoadImageFromUrl(imageLink, desiredWidth: desiredWidth, desiredHeight: desiredHeight);
-
-        public TimeSpan CacheDuration(CacheDuration cacheKind)
-            => new TimeSpan(0, 0, (int)cacheKind);
 
         public async Task CleanAllExpired() => await localMachineCache.Vacuum();
 

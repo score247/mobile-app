@@ -1,5 +1,4 @@
 ﻿using JsonNet.ContractResolvers;
-using LiveScore.Basketball;
 using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -120,8 +119,7 @@ namespace LiveScore
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<SoccerModule>();
-            moduleCatalog.AddModule<BasketballModule>();
+            moduleCatalog.AddModule<SoccerModule>();            
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<FavoritesModule>();

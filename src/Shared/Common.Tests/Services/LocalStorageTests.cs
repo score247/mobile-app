@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Common.Tests.Services
 {
-    using System;
     using System.Threading.Tasks;
     using Akavache;
     using LiveScore.Common.Services;
@@ -22,32 +21,6 @@
             mockUserAccount = Substitute.For<IBlobCache>();
 
             cache = new CachingService(mockEssentials, mockLocalMachine, mockUserAccount);
-        }
-
-        [Fact]
-        public void CacheDuration_LongTerm_ReturnCorrectValue()
-        {
-            // Arrange
-            var expectedDuration = new TimeSpan(0, 0, 7200);
-
-            // Act
-            var actual = cache.CacheDuration(CacheDuration.Long);
-
-            // Assert
-            Assert.Equal(expectedDuration, actual);
-        }
-
-        [Fact]
-        public void CacheDuration_ShortTerm_ReturnCorrectValue()
-        {
-            // Arrange
-            var expectedDuration = new TimeSpan(0, 0, 30);
-
-            // Act
-            var actual = cache.CacheDuration(CacheDuration.Short);
-
-            // Assert
-            Assert.Equal(expectedDuration, actual);
         }
 
         [Fact]
