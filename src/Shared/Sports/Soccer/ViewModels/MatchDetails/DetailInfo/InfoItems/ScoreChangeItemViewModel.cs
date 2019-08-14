@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
@@ -63,12 +62,12 @@
         {
             AwayPlayerName = TimelineEvent?.GoalScorer?.Name;
 
-            if(TimelineEvent.Assist!= null)
+            if (TimelineEvent.Assist != null)
             {
                 AwayAssistName = TimelineEvent.Assist.Name;
                 GoalAssitImageSource = Images.GoalAssist.Value;
             }
-           
+
             VisibleAwayImage = true;
         }
 

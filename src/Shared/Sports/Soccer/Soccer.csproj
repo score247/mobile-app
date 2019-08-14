@@ -24,7 +24,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Teams\" />
     <Folder Include="Converters\">
     </Folder>
     <Folder Include="Models\Odds\" />

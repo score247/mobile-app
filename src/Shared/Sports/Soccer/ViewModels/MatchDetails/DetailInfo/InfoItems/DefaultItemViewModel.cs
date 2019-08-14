@@ -5,6 +5,7 @@
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
@@ -12,10 +13,10 @@
     {
         private static readonly IDictionary<EventTypes, string> EventImages = new Dictionary<EventTypes, string>
         {
-            { EventTypes.YellowCard, Images.YellowCard.Value },
-            { EventTypes.YellowRedCard, Images.RedYellowCard.Value },
-            { EventTypes.RedCard, Images.RedCard.Value },
-            { EventTypes.PenaltyMissed, Images.MissPenaltyGoal.Value },
+            { EventTypes.YellowCard, Enumerations.Images.YellowCard.Value },
+            { EventTypes.YellowRedCard, Enumerations.Images.RedYellowCard.Value },
+            { EventTypes.RedCard, Enumerations.Images.RedCard.Value },
+            { EventTypes.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
         };
 
         private static readonly EventTypes[] VisibleScoreEvents = new[]

@@ -11,7 +11,9 @@ namespace Soccer.Tests.ViewModels
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Converters;
+    using LiveScore.Soccer.Models.Leagues;
     using LiveScore.Soccer.Models.Matches;
+    using LiveScore.Soccer.Models.Teams;
     using LiveScore.Soccer.ViewModels;
     using NSubstitute;
     using Prism.Navigation;
@@ -212,7 +214,7 @@ namespace Soccer.Tests.ViewModels
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
@@ -228,7 +230,7 @@ namespace Soccer.Tests.ViewModels
             var matchEvent = new MatchEvent("1", null, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Null(viewModel.MatchViewModel.Match.TimeLines);

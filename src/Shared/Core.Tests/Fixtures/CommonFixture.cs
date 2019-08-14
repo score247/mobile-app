@@ -6,6 +6,7 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Models.Teams;
+    using LiveScore.Soccer.Models.Leagues;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.Models.Teams;

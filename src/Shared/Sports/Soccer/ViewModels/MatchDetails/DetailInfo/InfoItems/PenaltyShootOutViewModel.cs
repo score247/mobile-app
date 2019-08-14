@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Enumerations;
     using Prism.Navigation;
 
     public class PenaltyShootOutViewModel : BaseItemViewModel

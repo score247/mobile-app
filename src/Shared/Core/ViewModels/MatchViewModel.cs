@@ -3,8 +3,10 @@
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
+    using PropertyChanged;
 
-    public class MatchViewModel 
+    [AddINotifyPropertyChangedInterface]
+    public class MatchViewModel
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly HubConnection matchHubConnection;
@@ -20,17 +22,25 @@
             this.matchStatusConverter = matchStatusConverter;
             this.currentSportId = currentSportId;
 
-            Match = match;            
+            Match = match;
+            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
             SubscribeMatchTimeChangeEvent();
         }
 
         public IMatch Match { get; protected set; }
 
-        public string DisplayMatchStatus => matchStatusConverter.BuildStatus(Match);
+        public string DisplayMatchStatus { get; private set; }
+
+        public void OnReceivedMatchEvent(IMatchEvent matchEvent)
+        {
+            Match.MatchResult = matchEvent.MatchResult;
+            Match.LatestTimeline = matchEvent.Timeline;
+            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+        }
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            matchHubConnection.On<byte, string, int>("PushMatchTime", 
+            matchHubConnection.On<byte, string, int>("PushMatchTime",
                 (sportId, matchId, matchTime) =>
                 {
                     if (currentSportId == sportId && Match.Id == matchId)

@@ -1,7 +1,9 @@
 ﻿namespace LiveScore.Soccer.Models.Teams
 {
     using LiveScore.Core.Models.Teams;
+    using PropertyChanged;
 
+    [AddINotifyPropertyChangedInterface]
     public class TeamStatistic : ITeamStatistic
     {
         public int Possession { get; set; }
@@ -27,6 +29,8 @@
         public int Offsides { get; set; }
 
         public int YellowCards { get; set; }
+
+        public int RedCards { get; set; }
 
         public int Injuries { get; set; }
     }

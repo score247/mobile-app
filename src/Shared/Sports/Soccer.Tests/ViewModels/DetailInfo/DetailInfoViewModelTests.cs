@@ -14,7 +14,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Converters;
+    using LiveScore.Soccer.Models.Leagues;
     using LiveScore.Soccer.Models.Matches;
+    using LiveScore.Soccer.Models.Teams;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using NSubstitute;
     using Prism.Navigation;

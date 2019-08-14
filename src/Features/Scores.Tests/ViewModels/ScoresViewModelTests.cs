@@ -72,7 +72,7 @@ namespace Scores.Tests.ViewModels
             matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), true).Returns(matchData);
 
             // Act
-            await viewModel.RefreshCommand.ExecuteAsync();
+            viewModel.RefreshCommand.Execute();
 
             // Assert
             var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();

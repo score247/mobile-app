@@ -3,8 +3,9 @@
     x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
-    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core;">
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core">
     <ViewCell>
         <StackLayout>
             <StackLayout.Resources>
@@ -33,9 +34,9 @@
                         AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}'}"
                         IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
                         Style="{StaticResource LiveIcon}" />
-                    <Image  
+                    <Image
                         AutomationId="{Binding Match.Id, StringFormat='ExtraTimeIndicator-{0}'}"
-                        IsVisible="{Binding Match.IsInExtraTime}"   
+                        IsVisible="{Binding Match.IsInExtraTime}"
                         Style="{StaticResource ExtraTimeIcon}" />
                     <Label
                         AutomationId="{Binding Match.Id, StringFormat='MatchStatus-{0}'}"
@@ -49,7 +50,7 @@
                             AutomationId="{Binding Match.Id, StringFormat='HomeTeamName-{0}'}"
                             Style="{StaticResource Team}"
                             Text="{Binding Match.Teams[0].Name}" />
-
+                        <templates:RedCardTemplate RedCardCount="{Binding Match.Teams[0].Statistic.RedCards}" />
                         <Image
                             AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
                             IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
@@ -67,6 +68,7 @@
                             AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
                             Style="{StaticResource Team}"
                             Text="{Binding Match.Teams[1].Name}" />
+                        <templates:RedCardTemplate RedCardCount="{Binding Match.Teams[1].Statistic.RedCards}" />
                         <Image
                             AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
                             IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"

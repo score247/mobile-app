@@ -4,12 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models;
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.Models.Leagues;
+    using LiveScore.Soccer.Models.Teams;
     using Newtonsoft.Json;
     using PropertyChanged;
 

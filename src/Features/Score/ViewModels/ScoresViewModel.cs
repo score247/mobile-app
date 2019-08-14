@@ -12,6 +12,7 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using Microsoft.AspNetCore.SignalR.Client;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
     using System;
@@ -20,6 +21,7 @@ namespace LiveScore.Score.ViewModels
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using Xamarin.Forms;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
 
@@ -42,14 +44,14 @@ namespace LiveScore.Score.ViewModels
             SelectedDate = DateTime.Today;
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchHubConnection = DependencyResolver
                 .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildMatchEventHubConnection();
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatches(selectedDateRange, true), false));
-
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
+            RefreshCommand = new DelegateCommand(OnRefreshCommand);
+            TappedMatchCommand = new DelegateCommand<MatchViewModel>(OnTappedMatchCommand);
+            ClickSearchCommand = new DelegateCommand(OnClickSearchCommandExecuted);
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -58,69 +60,52 @@ namespace LiveScore.Score.ViewModels
 
         public ObservableCollection<IGrouping<dynamic, MatchViewModel>> MatchItemsSource { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand
-            => new DelegateAsyncCommand<MatchViewModel>(OnTappedMatchCommand);
+        public DelegateCommand<MatchViewModel> TappedMatchCommand { get; }
 
-        private async Task OnTappedMatchCommand(MatchViewModel matchItem)
-        {
-            var parameters = new NavigationParameters
-            {
-                { "Match", matchItem.Match }
-            };
+        public DelegateCommand ClickSearchCommand { get; }
 
-            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
-
-            if (!navigated.Success)
-            {
-                await LoggingService.LogErrorAsync(navigated.Exception);
-            }
-        }
-
-        public DelegateAsyncCommand ClickSearchCommand => new DelegateAsyncCommand(OnClickSearchCommandExecuted);
-
-        private async Task OnClickSearchCommandExecuted()
-        {
-            await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
-        }
-
-        public override async void OnResume()
+        public override void OnResume()
         {
             if (SelectedDate != DateTime.Today)
             {
-                await NavigateToHome();
+                Device.BeginInvokeOnMainThread(async () => await NavigateToHome());
             }
 
             Initialize();
         }
 
-        public override async void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatingTo(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
             {
-                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
+                Device.BeginInvokeOnMainThread(async ()
+                    => await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())));
             }
         }
 
-        protected override async void Initialize()
+        protected override void Initialize()
         {
-            try
+            cancellationTokenSource = new CancellationTokenSource();
+
+            EventAggregator
+              .GetEvent<DateBarItemSelectedEvent>()
+              .Subscribe(OnDateBarItemSelected);
+
+            matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
+
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                cancellationTokenSource = new CancellationTokenSource();
-
-                EventAggregator
-                  .GetEvent<DateBarItemSelectedEvent>()
-                  .Subscribe(OnDateBarItemSelected);
-
-                matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
-
-                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
-            }
+                try
+                {
+                    await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), cancellationTokenSource.Token);
+                }
+                catch (Exception ex)
+                {
+                    await LoggingService.LogErrorAsync(ex);
+                }
+            });
         }
 
         protected override void Clean()
@@ -134,11 +119,38 @@ namespace LiveScore.Score.ViewModels
             cancellationTokenSource?.Dispose();
         }
 
-#pragma warning disable S3168 // "async" methods should not return "void"
+        private void OnRefreshCommand()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+        }
 
-        private async void OnDateBarItemSelected(DateRange dateRange) => await LoadData(() => LoadMatches(dateRange));
+        private void OnTappedMatchCommand(MatchViewModel matchItem)
+        {
+            var parameters = new NavigationParameters
+            {
+                { "Match", matchItem.Match }
+            };
 
-#pragma warning restore S3168 // "async" methods should not return "void"
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
+
+                if (!navigated.Success)
+                {
+                    await LoggingService.LogErrorAsync(navigated.Exception);
+                }
+            });
+        }
+
+        private void OnClickSearchCommandExecuted()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+                await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true));
+        }
+
+        private void OnDateBarItemSelected(DateRange dateRange)
+            => Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
 
         private async Task LoadMatches(
             DateRange dateRange,
@@ -182,8 +194,7 @@ namespace LiveScore.Score.ViewModels
 
             if (matchItem?.Match != null)
             {
-                matchItem.Match.MatchResult = matchEvent.MatchResult;
-                matchItem.Match.LatestTimeline = matchEvent.Timeline;
+                matchItem.OnReceivedMatchEvent(matchEvent);
             }
         }
     }

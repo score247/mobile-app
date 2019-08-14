@@ -44,6 +44,7 @@ namespace LiveScore.Soccer.ViewModels
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
+
         private static readonly IList<MatchFunction> TabFunctions = new List<MatchFunction>
                 {
                     new MatchFunction { Abbreviation = "Odds", Name = "Odds" },
@@ -127,7 +128,7 @@ namespace LiveScore.Soccer.ViewModels
 
                 cancellationTokenSource = new CancellationTokenSource();
 
-                matchService.SubscribeMatchEvent(matchHubConnection, OnReceivingMatchEvent);
+                matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
 
                 await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, cancellationTokenSource.Token);
             }
@@ -161,17 +162,17 @@ namespace LiveScore.Soccer.ViewModels
             });
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, IMatchEvent payload)
+        protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
             var match = MatchViewModel.Match;
 
-            if (sportId != CurrentSportId || match?.Id == null || payload.MatchId != match.Id)
+            if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
             {
                 return;
             }
 
-            match.MatchResult = payload.MatchResult;
-            match.LatestTimeline = payload.Timeline;
+            match.MatchResult = matchEvent.MatchResult;
+            match.LatestTimeline = matchEvent.Timeline;
 
             BuildGeneralInfo(match);
         }
