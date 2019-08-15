@@ -75,11 +75,13 @@
                    : (int)CacheDuration.Short;
 
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
-                var dateRange = new DateRange(dateTime);
 
                 return await cacheService.GetAndFetchLatestValue(
                        cacheKey,
-                       () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, language.DisplayName),
+                       () => GetMatchesFromApi(
+                           dateTime.BeginningOfDay().ToApiFormat(), 
+                           dateTime.EndOfDay().ToApiFormat(), 
+                           language.DisplayName),
                        cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
             }
             catch (Exception ex)
