@@ -45,6 +45,8 @@
             control.Content = stackLayout;
         }
 
+#pragma warning disable S109 // Magic numbers should not be used
+
         private static Image BuildRedCardImage()
         {
             return new Image
@@ -53,5 +55,7 @@
                 Margin = new Thickness(4, 0, 0, 0)
             };
         }
+
+#pragma warning restore S109 // Magic numbers should not be used
     }
 }

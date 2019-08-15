@@ -2,6 +2,8 @@
 {
     using System;
 
+#pragma warning disable S109 // Magic numbers should not be used
+
     public static class DateTimeExtension
     {
         public static string ToApiFormat(this DateTime value)
@@ -23,4 +25,6 @@
             => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0, dateTime.Kind)
                 .AddHours(timezoneOffset);
     }
+
+#pragma warning restore S109 // Magic numbers should not be used
 }
