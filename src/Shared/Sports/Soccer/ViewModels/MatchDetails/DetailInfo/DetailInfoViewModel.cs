@@ -83,7 +83,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 {
                     cancellationTokenSource = new CancellationTokenSource();
 
-                    await LoadData(() => LoadMatchDetail(matchId, refreshData), !refreshData);
+                    await LoadData(() => LoadMatchDetail(matchId, refreshData), refreshData);
 
                     await StartListeningMatchHubEvent();
                 }
