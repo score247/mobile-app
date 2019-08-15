@@ -76,6 +76,9 @@ namespace LiveScore.Score.ViewModels
                 Device.BeginInvokeOnMainThread(async () => await NavigateToHome());
             }
 
+            Device.BeginInvokeOnMainThread(async () =>
+                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+
             Initialize();
         }
 
