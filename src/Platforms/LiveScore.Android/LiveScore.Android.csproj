@@ -60,6 +60,8 @@
     <AndroidSupportedAbis>armeabi-v7a;x86</AndroidSupportedAbis>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <MandroidI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -1196,6 +1198,36 @@
   <ItemGroup>
     <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\yellow_card.png">
       <Link>Resources\drawable-xxhdpi\yellow_card.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\missed_penalty_goal.png">
+      <Link>Resources\drawable\missed_penalty_goal.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable\penalty_goal.png">
+      <Link>Resources\drawable\penalty_goal.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\missed_penalty_goal.png">
+      <Link>Resources\drawable-xhdpi\missed_penalty_goal.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xhdpi\penalty_goal.png">
+      <Link>Resources\drawable-xhdpi\penalty_goal.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\missed_penalty_goal.png">
+      <Link>Resources\drawable-xxhdpi\missed_penalty_goal.png</Link>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="..\..\CommonResources\Image\Android\drawable-xxhdpi\penalty_goal.png">
+      <Link>Resources\drawable-xxhdpi\penalty_goal.png</Link>
     </AndroidResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
