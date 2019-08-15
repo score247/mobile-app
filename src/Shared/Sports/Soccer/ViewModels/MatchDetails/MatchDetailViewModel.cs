@@ -17,6 +17,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
@@ -59,6 +60,7 @@ namespace LiveScore.Soccer.ViewModels
                 };
 
         private readonly HubConnection matchHubConnection;
+        private readonly HubConnection teamHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
@@ -71,9 +73,9 @@ namespace LiveScore.Soccer.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            matchHubConnection = DependencyResolver
-                .Resolve<IHubService>(CurrentSportId.ToString())
-                .BuildMatchEventHubConnection();
+            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
+            matchHubConnection = hubService.BuildMatchEventHubConnection();
+            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
@@ -120,22 +122,20 @@ namespace LiveScore.Soccer.ViewModels
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
-        protected override async void Initialize()
+        protected override void Initialize()
         {
-            try
-            {
-                BuildTabFunctions();
+            BuildTabFunctions();
 
-                cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource = new CancellationTokenSource();
 
-                matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
+            matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
+            matchService.SubscribeTeamStatistic(teamHubConnection, OnReceivedTeamStatistic);
 
-                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
-            }
+            Device.BeginInvokeOnMainThread(async () =>
+                await teamHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
+
+            Device.BeginInvokeOnMainThread(async () =>
+                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
         }
 
         private void BuildTabFunctions()
@@ -175,6 +175,16 @@ namespace LiveScore.Soccer.ViewModels
             match.LatestTimeline = matchEvent.Timeline;
 
             BuildGeneralInfo(match);
+        }
+
+        protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
+        {
+            if (sportId != CurrentSportId || MatchViewModel.Match?.Id == null || MatchViewModel.Match.Id != matchId)
+            {
+                return;
+            }
+
+            MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
         private void BuildGeneralInfo(IMatch match)

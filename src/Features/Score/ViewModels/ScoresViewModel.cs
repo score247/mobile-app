@@ -79,21 +79,23 @@ namespace LiveScore.Score.ViewModels
             Initialize();
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
             {
                 Device.BeginInvokeOnMainThread(async ()
                     => await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())));
             }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                    await LoadData(() => LoadMatches(selectedDateRange, true), false));
+            }
         }
 
         protected override void Initialize()
         {
             cancellationTokenSource = new CancellationTokenSource();
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await LoadData(() => LoadMatches(selectedDateRange, true), false));
 
             EventAggregator
               .GetEvent<DateBarItemSelectedEvent>()
