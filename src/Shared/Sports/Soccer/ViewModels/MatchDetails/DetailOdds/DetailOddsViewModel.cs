@@ -177,6 +177,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
+            //support only for 1X2 bet type at the moment
+            if (SelectedBetType != BetType.OneXTwo)
+            {
+                return;
+            }
+
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
                 oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == (int)SelectedBetType))
