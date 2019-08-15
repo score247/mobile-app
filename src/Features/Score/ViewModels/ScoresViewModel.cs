@@ -4,6 +4,12 @@
 
 namespace LiveScore.Score.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
@@ -16,12 +22,6 @@ namespace LiveScore.Score.ViewModels
     using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
@@ -76,24 +76,29 @@ namespace LiveScore.Score.ViewModels
                 Device.BeginInvokeOnMainThread(async () => await NavigateToHome());
             }
 
+            Device.BeginInvokeOnMainThread(async () =>
+                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+
             Initialize();
         }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
             {
                 Device.BeginInvokeOnMainThread(async ()
                     => await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())));
             }
+            else
+            {
+                Device.BeginInvokeOnMainThread(async () =>
+                    await LoadData(() => LoadMatches(selectedDateRange, true), false));
+            }
         }
 
         protected override void Initialize()
         {
             cancellationTokenSource = new CancellationTokenSource();
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await LoadData(() => LoadMatches(selectedDateRange, true), false));
 
             EventAggregator
               .GetEvent<DateBarItemSelectedEvent>()

@@ -144,7 +144,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/missed_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.True(viewModel.VisibleScore);
         }
@@ -162,7 +162,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/missed_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.True(viewModel.VisibleScore);
         }

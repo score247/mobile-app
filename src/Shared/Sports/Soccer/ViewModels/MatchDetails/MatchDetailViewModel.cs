@@ -15,8 +15,8 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
@@ -45,25 +45,27 @@ namespace LiveScore.Soccer.ViewModels
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
-        private static readonly IList<Core.Models.Matches.MatchFunction> TabFunctions = new List<Core.Models.Matches.MatchFunction>
+        private static readonly IList<MatchFunction> TabFunctions = new List<MatchFunction>
                 {
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Odds", Name = "Odds" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Info", Name = "Match Info" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Tracker", Name = "Tracker" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Stats", Name = "Statistics" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Line-ups", Name = "Line-ups" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "H2H", Name = "Head to Head" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Table", Name = "Table" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "Social", Name = "Social" },
-                    new Core.Models.Matches.MatchFunction { Abbreviation = "TV", Name = "TV Schedule" }
+                    new MatchFunction { Abbreviation = "Odds", Name = "Odds" },
+                    new MatchFunction { Abbreviation = "Info", Name = "Match Info" },
+                    new MatchFunction { Abbreviation = "Tracker", Name = "Tracker" },
+                    new MatchFunction { Abbreviation = "Stats", Name = "Statistics" },
+                    new MatchFunction { Abbreviation = "Line-ups", Name = "Line-ups" },
+                    new MatchFunction { Abbreviation = "H2H", Name = "Head to Head" },
+                    new MatchFunction { Abbreviation = "Table", Name = "Table" },
+                    new MatchFunction { Abbreviation = "Social", Name = "Social" },
+                    new MatchFunction { Abbreviation = "TV", Name = "TV Schedule" }
                 };
 
         private readonly HubConnection matchHubConnection;
+        private readonly HubConnection teamHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private Dictionary<string, TabItemViewModelBase> tabItemViewModels;
         private readonly IMatchStatusConverter matchStatusConverter;
+        private string CurrentTabView;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -71,9 +73,9 @@ namespace LiveScore.Soccer.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            matchHubConnection = DependencyResolver
-                .Resolve<IHubService>(CurrentSportId.ToString())
-                .BuildMatchEventHubConnection();
+            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
+            matchHubConnection = hubService.BuildMatchEventHubConnection();
+            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
@@ -106,6 +108,7 @@ namespace LiveScore.Soccer.ViewModels
                 };
 
                 Title = tabItemViewModels.First().Key;
+                CurrentTabView = tabItemViewModels.First().Key;
 
                 BuildGeneralInfo(match);
             }
@@ -120,22 +123,34 @@ namespace LiveScore.Soccer.ViewModels
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
-        protected override async void Initialize()
+        protected override void Initialize()
         {
-            try
-            {
-                BuildTabFunctions();
+            BuildTabFunctions();
 
-                cancellationTokenSource = new CancellationTokenSource();
+            cancellationTokenSource = new CancellationTokenSource();
 
-                matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
+            matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
+            matchService.SubscribeTeamStatistic(teamHubConnection, OnReceivedTeamStatistic);
 
-                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
-            }
+            Device.BeginInvokeOnMainThread(async () =>
+                await teamHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
+
+            Device.BeginInvokeOnMainThread(async () =>
+                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
+        }
+
+        public override void OnResume()
+        {
+            tabItemViewModels[CurrentTabView].OnResume();
+
+            base.OnResume();
+        }
+
+        public override void OnSleep()
+        {
+            tabItemViewModels[CurrentTabView].OnSleep();
+
+            base.OnSleep();
         }
 
         private void BuildTabFunctions()
@@ -159,6 +174,7 @@ namespace LiveScore.Soccer.ViewModels
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
                 Title = TabViews[index].Title;
+                CurrentTabView = TabViews[index].TabHeaderTitle;
             });
         }
 
@@ -175,6 +191,16 @@ namespace LiveScore.Soccer.ViewModels
             match.LatestTimeline = matchEvent.Timeline;
 
             BuildGeneralInfo(match);
+        }
+
+        protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
+        {
+            if (sportId != CurrentSportId || MatchViewModel.Match?.Id == null || MatchViewModel.Match.Id != matchId)
+            {
+                return;
+            }
+
+            MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
         private void BuildGeneralInfo(IMatch match)

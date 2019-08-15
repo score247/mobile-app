@@ -53,6 +53,7 @@
         }
 
         public UserSettings UserSettings { get; }
+
         public Language Language { get; }
     }
 }

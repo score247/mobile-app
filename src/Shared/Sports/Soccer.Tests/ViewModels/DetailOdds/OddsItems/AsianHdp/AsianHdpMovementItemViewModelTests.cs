@@ -1,11 +1,11 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems.AsianHdp
 {
+    using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
-    using System.Collections.Generic;
     using Xunit;
 
     public class AsianHdpMovementItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
@@ -23,7 +23,7 @@
             oddsMovement.UpdateTime.Returns(new System.DateTime(2018, 7, 20, 12, 55, 00));
             oddsMovement.BetOptions.Returns(new List<BetOptionOdds>
             {
-                new BetOptionOdds{ Type = "home", LiveOdds = 5.000m, OpeningOdds = 4.900m, OptionValue = "1", OddsTrend = OddsTrend.Up },               
+                new BetOptionOdds{ Type = "home", LiveOdds = 5.000m, OpeningOdds = 4.900m, OptionValue = "1", OddsTrend = OddsTrend.Up },
                 new BetOptionOdds{ Type = "away", LiveOdds = 2.500m, OpeningOdds = 2.800m, OptionValue = "1", OddsTrend = OddsTrend.Down }
             });
 

@@ -1,11 +1,11 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems.OverUnder
 {
+    using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
-    using System.Collections.Generic;
     using Xunit;
 
     public class OverUnderMovementItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
@@ -24,7 +24,7 @@
             oddsMovement.BetOptions.Returns(new List<BetOptionOdds>
             {
                 new BetOptionOdds{ Type = "over", LiveOdds = 5.000m, OpeningOdds = 4.900m, OptionValue="2.5", OddsTrend = OddsTrend.Up },
-                new BetOptionOdds{ Type = "under", LiveOdds = 3.200m, OpeningOdds = 3.200m, OptionValue="2.5", OddsTrend = OddsTrend.Neutral },                
+                new BetOptionOdds{ Type = "under", LiveOdds = 3.200m, OpeningOdds = 3.200m, OptionValue="2.5", OddsTrend = OddsTrend.Neutral },
             });
 
             this.baseFixture = baseFixture;

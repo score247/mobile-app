@@ -8,7 +8,6 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Models.Matches;
@@ -42,7 +41,6 @@
         public async Task GetMatches_WhenCall_InjectCacheService()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
 
             // Act
@@ -61,7 +59,6 @@
         public async Task GetMatches_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
             cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
@@ -126,10 +123,8 @@
         public async Task GetMatch_Exception_WriteLog()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
-
             cacheService.GetAndFetchLatestValue(
-               "Match-1-en-US-+07:00-123",
+               "GetMatch:123:en-US",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));

@@ -46,6 +46,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
+            IsRefreshing = false;
 
             hubConnection = DependencyResolver
                 .Resolve<IHubService>(CurrentSportId.ToString())
@@ -110,7 +111,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
-                await LoadData(() => LoadOdds(SelectedBetType, oddsFormat));
+                await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, IsRefreshing));
 
                 hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
                 {
@@ -137,7 +138,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public override void OnResume()
         {
             IsRefreshing = true;
-            base.OnResume();
         }
 
         private async Task StartOddsHubConnection()
@@ -177,6 +177,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
+            //support only for 1X2 bet type at the moment
+            if (SelectedBetType != BetType.OneXTwo)
+            {
+                return;
+            }
+
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
                 oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == (int)SelectedBetType))

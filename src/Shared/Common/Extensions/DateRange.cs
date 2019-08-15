@@ -35,6 +35,6 @@
             => new DateRange(DateTime.Today.AddDays(-1).BeginningOfDay(), DateTime.Today.EndOfDay());
 
         public override string ToString() => $"{FromDateString}-{ToDateString}";
-        
+
     }
 }
