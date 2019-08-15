@@ -67,30 +67,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         protected override void Clean()
         {
             base.Clean();
-            isDisposed = true;
 
             cancellationTokenSource?.Dispose();
         }
 
         protected override async void Initialize()
         {
-            if (isDisposed)
+            try
             {
-                var refreshData = isDisposed;
-                isDisposed = false;
+                cancellationTokenSource = new CancellationTokenSource();
 
-                try
-                {
-                    cancellationTokenSource = new CancellationTokenSource();
+                // TODO: Check when need to reload data later
+                await LoadData(() => LoadMatchDetail(matchId, true));
 
-                    await LoadData(() => LoadMatchDetail(matchId, refreshData), refreshData);
-
-                    await StartListeningMatchHubEvent();
-                }
-                catch (Exception ex)
-                {
-                    await LoggingService.LogErrorAsync(ex);
-                }
+                await StartListeningMatchHubEvent();
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
             }
         }
 
@@ -105,12 +99,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private async Task StartListeningMatchHubEvent()
         {
-            matchHubConnection.On<byte, string>("MatchEvent", OnReceivingMatchEvent);
+            matchHubConnection.On<byte, string>("MatchEvent", OnReceivedMatchEvent);
 
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
         }
 
-        protected internal void OnReceivingMatchEvent(byte sportId, string payload)
+        protected internal void OnReceivedMatchEvent(byte sportId, string payload)
         {
             var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
 

@@ -216,7 +216,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_InEventHasStoppageTime_ShowExpectedStatus(int matchTime, string expectedStatus)
         {
             // Arrange
-            localStorage.GetValueOrDefault("InjuryTimeAnnouced123", 0).Returns(4);
+            localStorage.GetValueOrDefaultInMemory("InjuryTimeAnnouced123", 0).Returns(4);
             var match = new Match
             {
                 Id = "123",

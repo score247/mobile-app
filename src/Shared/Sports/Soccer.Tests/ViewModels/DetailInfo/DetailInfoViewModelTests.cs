@@ -100,7 +100,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 MatchStatus = MatchStatus.EndedAfterPenalties,
                 EventStatus = MatchStatus.Live
             };
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(returnMatch);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
             viewModel.OnAppearing();
@@ -138,7 +138,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 MatchStatus = MatchStatus.EndedExtraTime,
                 EventStatus = MatchStatus.Closed
             };
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(returnMatch);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
             viewModel.OnAppearing();
@@ -167,7 +167,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 MatchStatus = MatchStatus.EndedAfterPenalties,
                 EventStatus = MatchStatus.Closed
             };
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(returnMatch);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
             viewModel.OnAppearing();
@@ -194,7 +194,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 MatchStatus = MatchStatus.Penalties,
                 EventStatus = MatchStatus.Live
             };
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(returnMatch);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
             viewModel.OnAppearing();
@@ -225,7 +225,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 MatchStatus = MatchStatus.Penalties,
                 EventStatus = MatchStatus.Live
             };
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(returnMatch);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
             viewModel.OnAppearing();
@@ -244,7 +244,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void OnAppearing_Always_LoadFooterInfo()
         {
             // Arrange
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(match);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(match);
 
             // Act
             viewModel.OnAppearing();
@@ -259,7 +259,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void OnReceivingMatchEvent_IsCurrentMatch_BuildDetailInfo()
         {
             // Arrange
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(match);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(match);
             viewModel.OnAppearing();
 
             match.TimeLines = new List<ITimelineEvent>
@@ -279,10 +279,10 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            viewModel.OnReceivingMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
+            viewModel.OnReceivedMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
-            Assert.Equal(matchResult, viewModel.Match.MatchResult);
+            Assert.True(comparer.Compare(matchResult, viewModel.Match.MatchResult).AreEqual);
             match.TimeLines.ToList().Add(timeline);
             var expectedTimelines = match.TimeLines.Distinct();
             Assert.Equal(expectedTimelines, viewModel.Match.TimeLines);
@@ -292,27 +292,25 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void OnReceivingMatchEvent_IsCurrentMatch_CurrentTimelinesIsNull_BuildGeneralInfo()
         {
             // Arrange
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(match);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(match);
             viewModel.OnAppearing();
-
             var timeline = new TimelineEvent { Id = "1", Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
-
             var matchEvent = new MatchEvent("1234", null, timeline);
-
             viewModel.OnAppearing();
 
             // Act
-            //viewModel.OnReceivedMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
-            Assert.Contains(timeline, viewModel.Match.TimeLines);
+            match.TimeLines.ToList().Add(timeline);
+            Assert.True(comparer.Compare(match.TimeLines, viewModel.Match.TimeLines).AreEqual);
         }
 
         [Fact]
         public void OnReceivingMatchEvent_IsNotCurrentMatch_Return()
         {
             // Arrange
-            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, false).Returns(match);
+            matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(match);
             viewModel.OnAppearing();
             var timeline = new TimelineEvent { Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
             var matchEvent = new MatchEvent("1", null, timeline);
@@ -320,7 +318,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-            // viewModel.OnReceivedMatchEvent(1, matchEvent);
+            viewModel.OnReceivedMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
             Assert.Null(viewModel.Match.TimeLines);

@@ -12,6 +12,7 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Score.ViewModels;
+    using LiveScore.Soccer.Models.Matches;
     using NSubstitute;
     using Xunit;
 
@@ -159,108 +160,100 @@ namespace Scores.Tests.ViewModels
             Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         }
 
-        // TODO: Update unit test
-        //[Fact]
-        //public void OnAppearing_Always_CallMatchServiceToSubscribeChanged()
-        //{
-        //    // Act
-        //    viewModel.OnAppearing();
+        [Fact]
+        public void OnAppearing_Always_CallMatchServiceToSubscribeChanged()
+        {
+            // Act
+            viewModel.OnAppearing();
 
-        //    // Assert
-        //    matchService.Received(1)
-        //        .SubscribeMatches(hubConnection, Arg.Any<Action<byte, Dictionary<string, MatchPushEvent>>>());
-        //}
+            // Assert
+            matchService.Received(1)
+                .SubscribeMatchEvent(hubConnection, Arg.Any<Action<byte, IMatchEvent>>());
+        }
 
-        //[Fact]
-        //public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
-        //{
-        //    // Arrange
-        //    viewModel.OnAppearing();
+        [Fact]
+        public void OnDisappearing_PublishEvent_NotCallMatchServiceToGetMatches()
+        {
+            // Arrange
+            viewModel.OnAppearing();
 
-        //    // Act
-        //    viewModel.OnDisappearing();
-        //    viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+            // Act
+            viewModel.OnDisappearing();
+            viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
-        //    // Assert
-        //    matchService.DidNotReceive().GetMatches(Arg.Any<UserSettings>(), Arg.Any<DateRange>(), Arg.Any<bool>());
-        //}
+            // Assert
+            matchService.DidNotReceive().GetMatches(Arg.Any<DateRange>(), Arg.Any<Language>(), Arg.Any<bool>());
+        }
 
-        //[Fact]
-        //public void OnResume_Always_CallMatchServiceToSubscribeChanged()
-        //{
-        //    // Act
-        //    viewModel.OnResume();
+        [Fact]
+        public void OnResume_Always_CallMatchServiceToSubscribeChanged()
+        {
+            // Act
+            viewModel.OnResume();
 
-        //    // Assert
-        //    matchService.Received(1)
-        //        .SubscribeMatches(hubConnection, Arg.Any<Action<byte, Dictionary<string, MatchPushEvent>>>());
-        //}
+            // Assert
+            matchService.Received(1)
+                  .SubscribeMatchEvent(hubConnection, Arg.Any<Action<byte, IMatchEvent>>());
+        }
 
-        //[Fact]
-        //public void OnResume_SelectedDateIsNotToday_NavigateToHome()
-        //{
-        //    // Arrange
-        //    viewModel.SelectedDate = DateTime.Today.AddDays(10);
-        //    var navigationService = viewModel.NavigationService as FakeNavigationService;
+        [Fact]
+        public void OnResume_SelectedDateIsNotToday_NavigateToHome()
+        {
+            // Arrange
+            viewModel.SelectedDate = DateTime.Today.AddDays(10);
+            var navigationService = viewModel.NavigationService as FakeNavigationService;
 
-        //    // Act
-        //    viewModel.OnResume();
+            // Act
+            viewModel.OnResume();
 
-        //    // Assert
-        //    Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
-        //}
+            // Assert
+            Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
+        }
 
-        //[Fact]
-        //public void OnMatchChanged_SportIdIsCurrent_ChangeMatchData()
-        //{
-        //    // Arrange
-        //    const byte sportId = 1;
-        //    InitViewModelData(
-        //         out IMatchResult matchResult,
-        //         out IEnumerable<ITimelineEvent> matchTimelines,
-        //         out Dictionary<string, MatchPushEvent> matchPayloads);
+        [Fact]
+        public void OnMatchChanged_SportIdIsCurrent_ChangeMatchData()
+        {
+            // Arrange
+            const byte sportId = 1;
+            InitViewModelData(out IMatchEvent matchEvent);
 
-        //    // Act
-        //    viewModel.OnMatchesChanged(sportId, matchPayloads);
+            // Act
+            viewModel.OnMatchesChanged(sportId, matchEvent);
 
-        //    // Assert
-        //    var expectedMatch = viewModel.MatchItemSource
-        //        .SelectMany(g => g)
-        //        .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
+            // Assert
+            var expectedMatch = viewModel.MatchItemsSource
+                .SelectMany(g => g)
+                .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId)?.Match;
 
-        //    Assert.Equal(expectedMatch.MatchResult, matchResult);
-        //    Assert.Equal(expectedMatch.LatestTimeline, matchTimelines.LastOrDefault());
-        //}
+            Assert.Equal(expectedMatch.MatchResult, matchEvent.MatchResult);
+            Assert.Equal(expectedMatch.LatestTimeline, matchEvent.Timeline);
+        }
 
-        //[Fact]
-        //public void OnMatchChanged_SportIdIsNotCurrent_NotChangeMatchData()
-        //{
-        //    // Arrange
-        //    const byte sportId = 2;
-        //    InitViewModelData(
-        //        out IMatchResult matchResult,
-        //        out IEnumerable<ITimelineEvent> matchTimelines,
-        //        out IMatchEvent matchPayloads);
+        [Fact]
+        public void OnMatchChanged_SportIdIsNotCurrent_NotChangeMatchData()
+        {
+            // Arrange
+            const byte sportId = 2;
+            InitViewModelData(out IMatchEvent matchEvent);
 
-        //    // Act
-        //    viewModel.OnMatchesChanged(sportId, matchPayloads);
+            // Act
+            viewModel.OnMatchesChanged(sportId, matchEvent);
 
-        //    // Assert
-        //    var expectedMatch = viewModel.MatchItemSource
-        //        .SelectMany(g => g)
-        //        .FirstOrDefault(m => m.Match.Id == matchPayloads.FirstOrDefault().Key)?.Match;
+            // Assert
+            var expectedMatch = viewModel.MatchItemsSource
+                .SelectMany(g => g)
+                .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId)?.Match;
 
-        //    Assert.NotEqual(expectedMatch.MatchResult, matchResult);
-        //    Assert.NotEqual(expectedMatch.TimeLines, matchTimelines);
-        //}
+            Assert.NotEqual(expectedMatch?.MatchResult, matchEvent.MatchResult);
+            Assert.NotEqual(expectedMatch?.LatestTimeline, matchEvent.Timeline);
+        }
 
-        //private void InitViewModelData(out IMatchResult matchResult, out IEnumerable<ITimelineEvent> matchTimelines,
-        //    out IMatchEvent matchPayloads)
-        //{
-        //    matchPayloads = specimens.Create<IMatchEvent>();
+        private void InitViewModelData(out IMatchEvent matchEvent)
+        {
+            matchService.GetMatches(Arg.Any<DateRange>(), Language.English, false).Returns(matchData);
+            matchEvent = new MatchEvent(matchData.FirstOrDefault().Id, specimens.Create<MatchResult>(), specimens.Create<TimelineEvent>());
 
-        //    matchService.GetMatches(viewModel.SettingsService.UserSettings, Arg.Any<DateRange>(), false).Returns(matchData);
-        //    viewModel.OnNavigatingTo(null);
-        //}
+            viewModel.OnNavigatedTo(null);
+        }
     }
 }
