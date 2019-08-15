@@ -1,12 +1,12 @@
 ﻿namespace LiveScore.Soccer.Services
 {
+    using System;
+    using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using Refit;
-    using System;
-    using System.Threading.Tasks;
 
     public interface ISoccerOddsApi
     {

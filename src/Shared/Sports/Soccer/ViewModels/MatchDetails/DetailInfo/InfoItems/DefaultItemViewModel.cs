@@ -5,7 +5,6 @@
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 

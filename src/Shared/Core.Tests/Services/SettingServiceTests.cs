@@ -1,12 +1,4 @@
-﻿using System;
-using LiveScore.Common.Services;
-using LiveScore.Core.Enumerations;
-using LiveScore.Core.Models.Settings;
-using LiveScore.Core.Services;
-using NSubstitute;
-using Xunit;
-
-namespace LiveScore.Core.Tests.Services
+﻿namespace LiveScore.Core.Tests.Services
 {
     public class SettingServiceTests
     {

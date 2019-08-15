@@ -19,7 +19,7 @@
     }
 
     public class OddsMovement : Entity<int, string>, IOddsMovement
-    {       
+    {
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }
 
         public string MatchTime { get; set; }

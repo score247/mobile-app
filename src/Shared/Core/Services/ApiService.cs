@@ -25,4 +25,4 @@
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }
-}   
+}

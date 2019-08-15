@@ -1,4 +1,7 @@
-﻿using JsonNet.ContractResolvers;
+﻿using System;
+using System.Diagnostics;
+using System.Reflection;
+using JsonNet.ContractResolvers;
 using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -24,9 +27,6 @@ using Prism.DryIoc;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
-using System;
-using System.Diagnostics;
-using System.Reflection;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -119,7 +119,7 @@ namespace LiveScore
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<SoccerModule>();            
+            moduleCatalog.AddModule<SoccerModule>();
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<FavoritesModule>();

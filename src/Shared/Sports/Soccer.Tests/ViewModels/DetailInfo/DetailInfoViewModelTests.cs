@@ -1,5 +1,9 @@
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
@@ -14,10 +18,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using NSubstitute;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
     using Xunit;
 
     public class DetailInfoViewModelTests : IClassFixture<ViewModelBaseFixture>
@@ -319,7 +319,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnAppearing();
 
             // Act
-           // viewModel.OnReceivedMatchEvent(1, matchEvent);
+            // viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
             Assert.Null(viewModel.Match.TimeLines);

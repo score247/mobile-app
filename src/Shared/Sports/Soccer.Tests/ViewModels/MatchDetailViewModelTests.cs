@@ -5,9 +5,7 @@ namespace Soccer.Tests.ViewModels
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Converters;

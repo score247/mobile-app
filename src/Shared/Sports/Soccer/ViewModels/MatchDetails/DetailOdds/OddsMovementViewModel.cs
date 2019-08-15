@@ -74,7 +74,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             try
             {
-                await LoadData(() => LoadOddsMovement());               
+                await LoadData(() => LoadOddsMovement());
             }
             catch (Exception ex)
             {

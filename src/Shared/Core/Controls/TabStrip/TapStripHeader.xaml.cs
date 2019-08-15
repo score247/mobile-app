@@ -67,7 +67,7 @@
                         ? (Style)control.Resources["TabActiveLine"]
                         : (Style)control.Resources["TabInactiveLine"];
                 }
-                
+
                 control.scrollView.ScrollToAsync(tabHeaders[index], ScrollToPosition.Center, true);
             });
         }

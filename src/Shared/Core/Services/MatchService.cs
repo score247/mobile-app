@@ -6,7 +6,6 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Models.Teams;
     using Microsoft.AspNetCore.SignalR.Client;
 

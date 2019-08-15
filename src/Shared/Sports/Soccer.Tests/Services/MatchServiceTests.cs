@@ -33,7 +33,7 @@
             apiService = Substitute.For<IApiService>();
             cacheService = Substitute.For<ICachingService>();
             loggingService = Substitute.For<ILoggingService>();
-            
+
 
             matchService = new MatchService(apiService, cacheService, loggingService);
         }

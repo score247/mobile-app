@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Tests.Fixtures
 {
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using NSubstitute;
 

@@ -4,6 +4,12 @@
 
 namespace LiveScore.Score.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Common.Extensions;
     using Core.Services;
     using Core.ViewModels;
@@ -16,12 +22,6 @@ namespace LiveScore.Score.ViewModels
     using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
 #pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"

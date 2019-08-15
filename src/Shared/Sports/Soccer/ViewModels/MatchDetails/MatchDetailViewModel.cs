@@ -15,7 +15,6 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;

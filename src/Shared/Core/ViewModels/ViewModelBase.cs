@@ -1,13 +1,13 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
+    using System;
+    using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Events;
     using Prism.Navigation;
     using PropertyChanged;
-    using System;
-    using System.Threading.Tasks;
 
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware

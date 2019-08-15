@@ -8,7 +8,6 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
