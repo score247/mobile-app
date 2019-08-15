@@ -29,6 +29,8 @@
 
         public string ToDateString => ToDate.ToApiFormat();
 
+        public bool IsOneDay => FromDate.Day == ToDate.Day;
+
         public static DateRange FromYesterdayUntilNow()
             => new DateRange(DateTime.Today.AddDays(-1).BeginningOfDay(), DateTime.Today.EndOfDay());
 

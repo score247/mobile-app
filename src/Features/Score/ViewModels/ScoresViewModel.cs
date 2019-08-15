@@ -167,7 +167,7 @@ namespace LiveScore.Score.ViewModels
                     SettingsService.Language,
                     forceFetchNewData);
 
-            MatchItemsSource = BuildMatchItemSource(matches);
+            MatchItemsSource = BuildMatchItemSource(matches.ToList());
 
             selectedDateRange = dateRange;
             IsRefreshing = false;

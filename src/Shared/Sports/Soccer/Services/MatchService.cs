@@ -8,7 +8,6 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
@@ -46,16 +45,42 @@
         {
             try
             {
-                var cacheDuration = dateRange.ToDate.Date != DateTime.Today
+                var dataFromDate = await GetMatchesByDate(dateRange.FromDate, language, forceFetchNewData);
+
+                if (dateRange.IsOneDay)
+                {
+                    return dataFromDate;
+                }
+                else
+                {
+                    var dataToDate = await GetMatchesByDate(dateRange.ToDate, language, forceFetchNewData);
+
+                    return dataFromDate.Concat(dataToDate);
+                }
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<IMatch>();
+            }
+        }
+
+        private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        {
+            try
+            {
+                var cacheDuration = dateTime.Date != DateTime.Today
                    ? (int)CacheDuration.Long
                    : (int)CacheDuration.Short;
 
-                var matchListDataCacheKey = $"GetMatches:{dateRange}:{language.DisplayName}";
+                var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
+                var dateRange = new DateRange(dateTime);
 
                 return await cacheService.GetAndFetchLatestValue(
-                        matchListDataCacheKey,
-                        () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, language.DisplayName),
-                        cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
+                       cacheKey,
+                       () => GetMatchesFromApi(dateRange.FromDateString, dateRange.ToDateString, language.DisplayName),
+                       cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
             }
             catch (Exception ex)
             {
@@ -69,10 +94,10 @@
         {
             try
             {
-                var matchDataCacheKey = $"GetMatch:{matchId}:{language}";
+                var cacheKey = $"Match:{matchId}:{language}";
 
                 var match = await cacheService.GetAndFetchLatestValue(
-                        matchDataCacheKey,
+                        cacheKey,
                         () => GetMatchFromApi(matchId, language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
 

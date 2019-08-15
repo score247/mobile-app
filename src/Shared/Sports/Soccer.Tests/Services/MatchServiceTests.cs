@@ -33,7 +33,7 @@
             apiService = Substitute.For<IApiService>();
             cacheService = Substitute.For<ICachingService>();
             loggingService = Substitute.For<ILoggingService>();
-            
+
 
             matchService = new MatchService(apiService, cacheService, loggingService);
         }
@@ -82,16 +82,14 @@
         public async Task GetMatches_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
-            var dateRange = new DateRange
-            (
-                new DateTime(2019, 04, 25),
-                new DateTime(2019, 04, 25)
-            );
+            var dateTime = DateTime.Now;
+            var dateRange = new DateRange(dateTime);
+            var cacheKey = $"Matches:{dateTime.Date}:en-US";
+
             var expectedMatches = fixture.CreateMany<Match>();
 
             cacheService.GetAndFetchLatestValue(
-                "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
+                cacheKey,
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
                 null).Returns(expectedMatches);
@@ -107,17 +105,18 @@
         public async Task GetMatch_CacheHasValue_ReturnDataFromCache()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
+            var matchId = new Fixture().Create<string>();
+            var cacheKey = $"Match:{matchId}:en-US";
             var expectedMatch = fixture.Create<Match>();
 
             cacheService.GetAndFetchLatestValue(
-               "Match-1-en-US-+07:00-123",
+               cacheKey,
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).Returns(expectedMatch);
 
             // Act
-            var actualMatch = await matchService.GetMatch("123", Language.English, false);
+            var actualMatch = await matchService.GetMatch(matchId, Language.English, false);
 
             // Assert
             Assert.Equal(expectedMatch, actualMatch);

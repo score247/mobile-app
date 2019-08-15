@@ -4,19 +4,20 @@
     using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Akavache;
-    using Ardalis.GuardClauses;
 
     public enum CacheDuration
     {
-        Short = 30, // 30 seconds
+        Short = 120, // 120 seconds
         Long = 7200
     }
 
     public interface ICachingService
     {
-        Task<T> GetOrFetchValue<T>(string key, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null);
+        Task<T> GetOrFetchValue<T>(string key, Func<Task<T>> fetchFunc, DateTimeOffset? absoluteExpiration = null);
 
-        Task<T> GetAndFetchLatestValue<T>(string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null);
+        Task<T> GetAndFetchLatestValue<T>(
+            string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null,
+            DateTimeOffset? absoluteExpiration = null);
 
         Task InsertValue<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
 
@@ -42,21 +43,30 @@
 
         public CachingService(IEssential essential, IBlobCache localMachine = null, IBlobCache userAccount = null)
         {
-            Guard.Against.Null(essential, nameof(essential));
+            if (essential ==  null)
+            {
+                throw new ArgumentNullException(nameof(essential));
+            }
 
-            Registrations.Start(essential.AppName);
+            
             localMachineCache = localMachine ?? BlobCache.LocalMachine;
             localMachineCache.ForcedDateTimeKind = DateTimeKind.Local;
             userAccountCache = userAccount ?? BlobCache.UserAccount;
         }
 
-        public async Task<T> GetOrFetchValue<T>(string key, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
+        public async Task<T> GetOrFetchValue<T>(
+            string key,
+            Func<Task<T>> fetchFunc,
+            DateTimeOffset? absoluteExpiration = null)
             => await localMachineCache.GetOrFetchObject(key, fetchFunc, absoluteExpiration);
 
-        public async Task<T> GetAndFetchLatestValue<T>(string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null, DateTimeOffset? absoluteExpiration = null)
+        public async Task<T> GetAndFetchLatestValue<T>(
+            string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null,
+            DateTimeOffset? absoluteExpiration = null)
             => await localMachineCache.GetAndFetchLatest(key, fetchFunc, fetchPredicate, absoluteExpiration);
 
-        public async Task<T> GetValueOrDefault<T>(string key, T defaultValue)
+        public async Task<T> GetValueOrDefault<T>(string key,
+            T defaultValue)
             => await localMachineCache.GetOrCreateObject(key, () => defaultValue);
 
         public async Task InsertValue<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)

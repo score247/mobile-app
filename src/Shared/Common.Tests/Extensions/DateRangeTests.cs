@@ -21,5 +21,32 @@
             // Assert
             Assert.Equal(expected, $"{actual.FromDate.ToString()} - {actual.ToDate.ToString()}");
         }
+
+        [Fact]
+        public void FromDate_Aways_Return_BeginingOfDay()
+        {
+            // Arrange
+            var dateTime = DateTime.Now;
+
+            // Act
+            var dateRange = new DateRange(dateTime);
+
+            // Assset
+            Assert.Equal(dateRange.FromDate, dateTime.BeginningOfDay());
+        }
+
+        [Fact]
+        public void ToDate_Always_Return_EndOfDay()
+        {
+            // Arrange
+            var dateTime = DateTime.Now;
+
+            // Act
+            var dateRange = new DateRange(dateTime);
+
+            // Assset
+            Assert.Equal(dateRange.ToDate, dateTime.EndOfDay());
+        }
+
     }
 }
