@@ -8,7 +8,6 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Settings;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Models.Matches;
@@ -34,7 +33,6 @@
             cacheService = Substitute.For<ICachingService>();
             loggingService = Substitute.For<ILoggingService>();
 
-
             matchService = new MatchService(apiService, cacheService, loggingService);
         }
 
@@ -42,7 +40,6 @@
         public async Task GetMatches_WhenCall_InjectCacheService()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
 
             // Act
@@ -61,7 +58,6 @@
         public async Task GetMatches_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            var settings = new UserSettings("1", "en", "+07:00");
             var dateRange = new DateRange();
             cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
@@ -82,7 +78,6 @@
         public async Task GetMatches_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
             var dateRange = new DateRange
             (
                 new DateTime(2019, 04, 25),
@@ -91,7 +86,7 @@
             var expectedMatches = fixture.CreateMany<Match>();
 
             cacheService.GetAndFetchLatestValue(
-                "Scores-1-en-US-+07:00-2019-04-25T00:00:00+07:00-2019-04-25T00:00:00+07:00",
+                "GetMatches:2019-04-25T00:00:00+07:00-2019-04-25T23:59:59+07:00:en-US",
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
                 null).Returns(expectedMatches);
@@ -107,11 +102,10 @@
         public async Task GetMatch_CacheHasValue_ReturnDataFromCache()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
             var expectedMatch = fixture.Create<Match>();
 
             cacheService.GetAndFetchLatestValue(
-               "Match-1-en-US-+07:00-123",
+               "GetMatch:123:en-US",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).Returns(expectedMatch);
@@ -127,10 +121,8 @@
         public async Task GetMatch_Exception_WriteLog()
         {
             // Arrange
-            var settings = new UserSettings("1", "en-US", "+07:00");
-
             cacheService.GetAndFetchLatestValue(
-               "Match-1-en-US-+07:00-123",
+               "GetMatch:123:en-US",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));

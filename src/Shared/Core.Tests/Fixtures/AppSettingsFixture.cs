@@ -10,6 +10,7 @@
         {
             SettingsService = Substitute.For<ISettingsService>();
             SettingsService.CurrentSportType.Returns(SportType.Soccer);
+            SettingsService.Language.Returns(Language.English);
         }
 
         public ISettingsService SettingsService { get; }

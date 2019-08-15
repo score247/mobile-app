@@ -22,6 +22,10 @@
 
         Task<T> GetValueOrDefault<T>(string key, T defaultValue);
 
+        Task InsertValueInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
+
+        Task<T> GetValueOrDefaultInMemory<T>(string key, T defaultValue);
+
         void AddOrUpdateValueToUserAccount<T>(string key, T value);
 
         T GetValueOrDefaultFromUserAccount<T>(string key, T defaultValue);
@@ -39,8 +43,9 @@
     {
         private readonly IBlobCache localMachineCache;
         private readonly IBlobCache userAccountCache;
+        private readonly IBlobCache inMemoryCache;
 
-        public CachingService(IEssential essential, IBlobCache localMachine = null, IBlobCache userAccount = null)
+        public CachingService(IEssential essential, IBlobCache localMachine = null, IBlobCache userAccount = null, IBlobCache inMemory = null)
         {
             Guard.Against.Null(essential, nameof(essential));
 
@@ -48,6 +53,7 @@
             localMachineCache = localMachine ?? BlobCache.LocalMachine;
             localMachineCache.ForcedDateTimeKind = DateTimeKind.Local;
             userAccountCache = userAccount ?? BlobCache.UserAccount;
+            inMemoryCache = inMemory ?? BlobCache.InMemory;
         }
 
         public async Task<T> GetOrFetchValue<T>(string key, Func<Task<T>> fetchFunc, DateTime? absoluteExpiration = null)
@@ -61,6 +67,12 @@
 
         public async Task InsertValue<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
             => await localMachineCache.InsertObject(key, value, absoluteExpiration);
+
+        public async Task<T> GetValueOrDefaultInMemory<T>(string key, T defaultValue)
+          => await inMemoryCache.GetOrCreateObject(key, () => defaultValue);
+
+        public async Task InsertValueInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
+            => await inMemoryCache.InsertObject(key, value, absoluteExpiration);
 
         public void Shutdown()
         {

@@ -16,6 +16,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+    using Newtonsoft.Json;
     using NSubstitute;
     using Prism.Navigation;
     using Xunit;
@@ -278,7 +279,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
 
             // Act
-            //viewModel.OnReceivedMatchEvent(1, matchEvent);
+            viewModel.OnReceivingMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
             Assert.Equal(matchResult, viewModel.Match.MatchResult);

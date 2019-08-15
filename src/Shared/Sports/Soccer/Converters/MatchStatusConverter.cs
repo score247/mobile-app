@@ -42,11 +42,11 @@
         };
 
         private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
-        private readonly ICachingService localStorage;
+        private readonly ICachingService cacheService;
 
         public MatchStatusConverter(ICachingService localStorage)
         {
-            this.localStorage = localStorage;
+            this.cacheService = localStorage;
         }
 
         public string BuildStatus(IMatch match)
@@ -130,11 +130,11 @@
         {
             PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;
-            var annoucedInjuryTime = Task.Run(() => localStorage.GetValueOrDefault(cacheKey, 0)).Result;
+            var annoucedInjuryTime = Task.Run(() => cacheService.GetValueOrDefaultInMemory(cacheKey, 0)).Result;
 
             if (timeline.InjuryTimeAnnounced > 0)
             {
-                Task.Run(() => localStorage.InsertValue(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
+                Task.Run(() => cacheService.InsertValueInMemory(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
                 annoucedInjuryTime = timeline.InjuryTimeAnnounced;
             }
 

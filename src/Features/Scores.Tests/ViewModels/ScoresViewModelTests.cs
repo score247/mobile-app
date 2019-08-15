@@ -15,7 +15,7 @@ namespace Scores.Tests.ViewModels
     using NSubstitute;
     using Xunit;
 
-    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class ScoresViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
@@ -107,16 +107,34 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void OnNavigatingTo_MatchItemSourceIsNull_LoadDataFromService()
+        public void OnNavigatedTo_MatchItemSourceIsNull_LoadDataFromService()
         {
             // Arrange
             matchService.GetMatches(
                 Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
-               Language.English,
+                Language.English,
                 false).Returns(matchData);
 
             // Act
-            viewModel.OnNavigatingTo(null);
+            viewModel.OnNavigatedTo(null);
+
+            // Assert
+            var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+            Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
+        }
+
+        [Fact]
+        public void OnNavigatedTo_MatchItemSourceIsNotNull_LoadDataFromService()
+        {
+            // Arrange
+            viewModel.OnNavigatedTo(null);
+            matchService.GetMatches(
+                Arg.Any<DateRange>(),
+                Language.English,
+                true).Returns(matchData);
+
+            // Act
+            viewModel.OnNavigatedTo(null);
 
             // Assert
             var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
