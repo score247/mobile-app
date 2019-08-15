@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.Views.Templates
 {
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Models.Teams;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -12,16 +13,16 @@
             InitializeComponent();
         }
 
-        public static readonly BindableProperty RedCardCountProperty = BindableProperty.Create(
-          nameof(RedCardCount),
-          typeof(int),
+        public static readonly BindableProperty StatisticProperty = BindableProperty.Create(
+          nameof(Statistic),
+          typeof(TeamStatistic),
           typeof(RedCardTemplate),
           propertyChanged: OnRedCardCountChanged);
 
-        public int RedCardCount
+        public TeamStatistic Statistic
         {
-            get { return (int)GetValue(RedCardCountProperty); }
-            set { SetValue(RedCardCountProperty, value); }
+            get { return (TeamStatistic)GetValue(StatisticProperty); }
+            set { SetValue(StatisticProperty, value); }
         }
 
         private static void OnRedCardCountChanged(BindableObject bindable, object oldValue, object newValue)
@@ -33,12 +34,15 @@
                 return;
             }
 
-            var redCardCount = (int)newValue;
+            var statistics = (TeamStatistic)newValue;
+            var stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
 
-            for (int i = 0; i < redCardCount; i++)
+            for (int i = 0; i < statistics.RedCards + statistics.YellowRedCards; i++)
             {
-                control.RedCardContainer.Children.Add(BuildRedCardImage());
+                stackLayout.Children.Add(BuildRedCardImage());
             }
+
+            control.Content = stackLayout;
         }
 
         private static Image BuildRedCardImage()

@@ -30,6 +30,8 @@
 
         public int YellowCards { get; set; }
 
+        public int YellowRedCards { get; set; }
+
         public int RedCards { get; set; }
 
         public int Injuries { get; set; }

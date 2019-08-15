@@ -100,7 +100,7 @@
                                     AutomationId="HomeTeamName"
                                     Style="{StaticResource MatchGeneralInfoTeam}"
                                     Text="{Binding MatchViewModel.Match.Teams[0].Name}" />
-                                <templates:RedCardTemplate RedCardCount="{Binding MatchViewModel.Match.Teams[0].Statistic.RedCards}" />
+                                <templates:RedCardTemplate Statistic="{Binding MatchViewModel.Match.Teams[0].Statistic}" />
                                 <Image
                                     AutomationId="HomeTeamPenalty"
                                     IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
@@ -118,7 +118,7 @@
                                     AutomationId="AwayTeamName"
                                     Style="{StaticResource MatchGeneralInfoTeam}"
                                     Text="{Binding MatchViewModel.Match.Teams[1].Name}" />
-                                <templates:RedCardTemplate RedCardCount="{Binding MatchViewModel.Match.Teams[1].Statistic.RedCards}" />
+                                <templates:RedCardTemplate Statistic="{Binding MatchViewModel.Match.Teams[1].Statistic}" />
                                 <Image
                                     AutomationId="AwayTeamPenalty"
                                     IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"

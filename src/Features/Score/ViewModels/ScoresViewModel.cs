@@ -92,6 +92,9 @@ namespace LiveScore.Score.ViewModels
         {
             cancellationTokenSource = new CancellationTokenSource();
 
+            Device.BeginInvokeOnMainThread(async () =>
+                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+
             EventAggregator
               .GetEvent<DateBarItemSelectedEvent>()
               .Subscribe(OnDateBarItemSelected);

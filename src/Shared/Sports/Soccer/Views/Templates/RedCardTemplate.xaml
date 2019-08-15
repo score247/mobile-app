@@ -5,8 +5,4 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.RedCardTemplate">
-    <ContentView.Content>
-        <StackLayout x:Name="RedCardContainer" Orientation="Horizontal">
-        </StackLayout>
-    </ContentView.Content>
 </ContentView>
