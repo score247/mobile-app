@@ -146,6 +146,13 @@ namespace LiveScore.Soccer.ViewModels
             base.OnResume();
         }
 
+        public override void OnSleep()
+        {
+            tabItemViewModels[CurrentTabView].OnSleep();
+
+            base.OnSleep();
+        }
+
         private void BuildTabFunctions()
         {
             TabViews = new ObservableCollection<TabItemViewModelBase>();

@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
-        private bool disposedValue;
+        private bool isDisposed = true;
         private readonly string matchId;
 
         public DetailInfoViewModel(
@@ -67,23 +67,30 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         protected override void Clean()
         {
             base.Clean();
+            isDisposed = true;
 
             cancellationTokenSource?.Dispose();
         }
 
         protected override async void Initialize()
         {
-            try
+            if (isDisposed)
             {
-                cancellationTokenSource = new CancellationTokenSource();
+                var refreshData = isDisposed;
+                isDisposed = false;
 
-                await LoadData(() => LoadMatchDetail(matchId));
+                try
+                {
+                    cancellationTokenSource = new CancellationTokenSource();
 
-                await StartListeningMatchHubEvent();
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync(ex);
+                    await LoadData(() => LoadMatchDetail(matchId, refreshData), !refreshData);
+
+                    await StartListeningMatchHubEvent();
+                }
+                catch (Exception ex)
+                {
+                    await LoggingService.LogErrorAsync(ex);
+                }
             }
         }
 
@@ -163,10 +170,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!isDisposed)
             {
                 // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
-                disposedValue = true;
+                isDisposed = true;
             }
         }
 
