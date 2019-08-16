@@ -26,6 +26,7 @@
       <Compile Remove="Models\Odds\OddsChangedMessage.cs" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="MethodTimer.Fody" Version="2.3.3" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
