@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using LiveScore.Common.Services;
+    using Refit;
 
     public class BaseService
     {
@@ -15,7 +16,10 @@
 
         protected virtual void HandleException(Exception ex)
         {
-            loggingService.LogError(ex);
+            var apiException = (ApiException)ex;
+            var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
+
+            loggingService.LogError(message, apiException);            
             Debug.WriteLine(ex.Message);
         }
     }
