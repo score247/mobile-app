@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="LiveScore.Score.ViewResources.MatchSocialViewResource">
+    <Style x:Key="SocialContainer" TargetType="ScrollView">
+        <Setter Property="Padding" Value="16,0,16,16" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+    </Style>
+    <Style x:Key="CommentContainer" BasedOn="{StaticResource StacklayoutHorizontalCenter}" TargetType="StackLayout">
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+    <Style x:Key="ProfilePicture" TargetType="StackLayout">
+        <Setter Property="WidthRequest" Value="28" />
+        <Setter Property="Margin" Value="0,0,16,0" />
+    </Style>
+    <Style x:Key="Username" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource UsernameColor}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style x:Key="CommentContent" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="13" />
+    </Style>
+    <Style x:Key="MainContent" TargetType="Label">
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+    <Style x:Key="BottomComment" TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Margin" Value="0,8,0,0" />
+    </Style>
+    <Style x:Key="CommentDate" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,16,0" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    </Style>
+    <Style x:Key="CommentReply" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    </Style>
+</ResourceDictionary>

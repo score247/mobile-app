@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LiveScore.Score.Views.ScoresView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
+    xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+    x:Name="this"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Name="Search"
+            Command="{Binding ClickSearchCommand}"
+            Icon="images/common/search.png"
+            Priority="1" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <coreResources:MatchViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <templateSelectors:MatchItemTemplateSelector x:Key="matchItemTemplateSelector" />
+            <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <dateBar:DateBar NumberDisplayDays="3" />
+        <ActivityIndicator
+            x:Name="activity"
+            IsEnabled="{Binding IsLoading}"
+            IsRunning="{Binding IsLoading}"
+            IsVisible="{Binding IsLoading}"
+            Style="{StaticResource CenterActivityIndicator}" />
+        <customListView:CustomListView
+            x:Name="LeagueTable"
+            AutomationId="LeagueTableId"
+            AutomationProperties.IsInAccessibleTree="False"
+            Footer=""
+            GroupDisplayBinding="{Binding Key}"
+            GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
+            HasUnevenRows="true"
+            IsGroupingEnabled="True"
+            IsPullToRefreshEnabled="true"
+            IsRefreshing="{Binding IsRefreshing}"
+            IsVisible="{Binding IsNotLoading}"
+            ItemTemplate="{StaticResource matchItemTemplateSelector}"
+            ItemsSource="{Binding MatchItemsSource}"
+            RefreshCommand="{Binding RefreshCommand}"
+            SelectionMode="None"
+            SeparatorColor="{StaticResource LineColor}"
+            Style="{StaticResource ListViewHasBackground}"
+            VerticalOptions="FillAndExpand">
+            <customListView:CustomListView.Behaviors>
+                <b:EventToCommandBehavior
+                    Command="{Binding TappedMatchCommand}"
+                    EventArgsParameterPath="Item"
+                    EventName="ItemTapped" />
+            </customListView:CustomListView.Behaviors>
+        </customListView:CustomListView>
+    </StackLayout>
+</ContentPage>

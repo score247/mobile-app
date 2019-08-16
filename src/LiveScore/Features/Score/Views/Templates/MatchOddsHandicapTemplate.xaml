@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchOddsHandicapTemplate"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchDetailViewResource />
+                <resources:MatchOddsViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <StackLayout>
+        <FlexLayout Style="{StaticResource TopInfo}">
+            <StackLayout FlexLayout.Grow="1">
+                <Frame Style="{StaticResource SubTabContainer}">
+                    <FlexLayout Style="{StaticResource SubTabBox}">
+                        <Label Style="{StaticResource SubTab}" Text="1x2" />
+                        <Label Style="{StaticResource SubTabActive}" Text="Handicap" />
+                        <Label Style="{StaticResource SubTab}" Text="Over/Under" />
+                    </FlexLayout>
+                </Frame>
+            </StackLayout>
+            <AbsoluteLayout Style="{StaticResource MatchOddsDropdownListBox}">
+                <Picker Title="Decimal" Style="{StaticResource DropdownList}">
+                    <Picker.Items>
+                        <x:String>Decimal</x:String>
+                        <x:String>Malay</x:String>
+                        <x:String>HongKong</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Label Style="{StaticResource DropdownIcon}" />
+            </AbsoluteLayout>
+        </FlexLayout>
+        <ScrollView>
+            <StackLayout Style="{StaticResource TableContainer}">
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <Label Style="{StaticResource TableHeaderText}" Text="Bookmarker" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <Label Style="{StaticResource TableHeaderText}" Text="Live Odds" />
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <Label Style="{StaticResource TableHeaderText}" Text="Opening Odds" />
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableSubHeaderText}" Text="" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <StackLayout Style="{StaticResource TableCol}">
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="Home" />
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="(-2.5)" />
+                        </StackLayout>
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <StackLayout Style="{StaticResource TableCol}">
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="Away" />
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="(2.5)" />
+                        </StackLayout>
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <StackLayout Style="{StaticResource TableCol}">
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="Home" />
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="(-2.5)" />
+                        </StackLayout>
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <StackLayout Style="{StaticResource TableCol}">
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="Away" />
+                            <Label Style="{StaticResource TableSubHeaderText}" Text="(2.5)" />
+                        </StackLayout>
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="Macauslot" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.87" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.94" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.81" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.85" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="Bet365" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.81" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.76" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.70" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.80" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="Easybet" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.88" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.86" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.78" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.86" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="Pinnacle" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource DESCLiveOddText}" Text="0.87" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.92" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.90" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.92" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="12Bet" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource DESCLiveOddText}" Text="0.84" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource DESCLiveOddText}" Text="0.90" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.85" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.91" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+
+                <FlexLayout Style="{StaticResource TableRow}">
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource BookmarkerName}" Text="ibcbet" />
+                        <Label Style="{StaticResource ChartIcon}" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource DESCLiveOddText}" Text="0.70" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource ASCLiveOddText}" Text="0.96" />
+                    </FlexLayout>
+                    <ContentView>
+                        <BoxView Style="{StaticResource VerticalLine}" />
+                    </ContentView>
+                    <FlexLayout Style="{StaticResource TableFlexlayoutCol}">
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.81" />
+                        <ContentView>
+                            <BoxView Style="{StaticResource VerticalLine}" />
+                        </ContentView>
+                        <Label Style="{StaticResource TableBodyOddsText}" Text="0.87" />
+                    </FlexLayout>
+                </FlexLayout>
+                <ContentView>
+                    <BoxView Style="{StaticResource HorizontalLine}" />
+                </ContentView>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentView>

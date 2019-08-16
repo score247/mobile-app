@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    x:Class="LiveScore.Score.Views.Templates.MatchOddsBookmarker1x2Template"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:resources="clr-namespace:LiveScore.Score.ViewResources"
+    x:Name="view"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:MatchDetailViewResource />
+                <resources:MatchOddsViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ScrollView>
+        <StackLayout Style="{StaticResource TableContainer}">
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeHeaderText}" Text="Time" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreHeaderText}" Text="Score" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableHeaderText}" Text="1" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableHeaderText}" Text="X" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableHeaderText}" Text="2" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateHeaderText}" Text="Last Update" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource LiveTimeText}" Text="Live" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-1" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="4.90" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="4.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="1.44" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:48" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="17'" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-1" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="5.00" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="1.44" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:48" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="15'" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-0" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="5.41" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="1.45" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:47" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="10'" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-0" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="5.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="4.43" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="1.5" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:47" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="5'" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-0" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="5.20" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="1.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:46" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="KO" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="0-0" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="5.41" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.39" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ASCLiveOddText}" Text="1.42" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:46" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="Today" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="5.20" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="1.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:45" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource TableRow}">
+                <Label Style="{StaticResource TimeText}" Text="Opening" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource ScoreText}" Text="" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="5.41" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource TableBodyOddsText}" Text="4.39" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource DESCLiveOddText}" Text="1.40" />
+                <ContentView>
+                    <BoxView Style="{StaticResource VerticalLine}" />
+                </ContentView>
+                <Label Style="{StaticResource LastUpdateText}" Text="02-20 14:45" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+        </StackLayout>
+    </ScrollView>
+</ContentView>

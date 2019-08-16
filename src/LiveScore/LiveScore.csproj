@@ -20,6 +20,14 @@
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Features\Score\ViewResources\**" />
+    <Compile Remove="Features\Score\Views\Templates\**" />
+    <EmbeddedResource Remove="Features\Score\ViewResources\**" />
+    <EmbeddedResource Remove="Features\Score\Views\Templates\**" />
+    <None Remove="Features\Score\ViewResources\**" />
+    <None Remove="Features\Score\Views\Templates\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
     <PackageReference Include="MethodTimer.Fody" Version="2.3.3" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
@@ -72,6 +80,12 @@
     <Compile Update="Features\News\Views\NewsView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="Features\Score\Views\LiveView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Score\Views\ScoresView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Features\TVSchedule\ViewResources\TVScheduleViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -104,7 +118,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Features\Score\Score.csproj" />
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
@@ -141,8 +154,5 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Features\Score\" />
   </ItemGroup>
 </Project>
