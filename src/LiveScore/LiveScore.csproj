@@ -104,9 +104,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Features\Score\Score.csproj" />
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
-    <ProjectReference Include="..\Features\Score\Score.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +133,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Features\Score\" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Update="Features\Favorites\Views\EmptyFavoriteView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -144,5 +141,8 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Features\Score\" />
   </ItemGroup>
 </Project>
