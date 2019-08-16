@@ -15,6 +15,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
+    using MethodTimer;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -82,6 +83,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             }
         }
 
+        [Time]
         private async Task LoadOddsMovement(bool isRefresh = false)
         {
             IsLoading = !isRefresh;

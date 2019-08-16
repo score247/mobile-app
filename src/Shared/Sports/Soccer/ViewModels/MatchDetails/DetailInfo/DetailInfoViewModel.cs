@@ -7,7 +7,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
+    using System.Reflection;
     using System.Threading;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
@@ -18,6 +20,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Prism.Navigation;
@@ -88,6 +91,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
         }
 
+        [Time]
         private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
         {
             Match = await matchService.GetMatch(matchId, SettingsService.Language, isRefresh);
@@ -104,6 +108,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
         }
 
+        [Time]
         protected internal void OnReceivedMatchEvent(byte sportId, string payload)
         {
             var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);

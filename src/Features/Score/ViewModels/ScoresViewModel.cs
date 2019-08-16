@@ -18,6 +18,7 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Commands;
     using Prism.Events;
@@ -37,6 +38,7 @@ namespace LiveScore.Score.ViewModels
         private CancellationTokenSource cancellationTokenSource;
         private readonly IMatchStatusConverter matchStatusConverter;
 
+        [Time]
         public ScoresViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -69,6 +71,7 @@ namespace LiveScore.Score.ViewModels
 
         public DelegateCommand ClickSearchCommand { get; }
 
+        [Time]
         public override void OnResume()
         {
             if (SelectedDate != DateTime.Today)
@@ -82,6 +85,7 @@ namespace LiveScore.Score.ViewModels
             Initialize();
         }
 
+        [Time]
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
@@ -96,6 +100,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
+        [Time]
         protected override void Initialize()
         {
             cancellationTokenSource = new CancellationTokenSource();
@@ -114,6 +119,7 @@ namespace LiveScore.Score.ViewModels
                 await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
         }
 
+        [Time]
         protected override void Clean()
         {
             base.Clean();
@@ -125,12 +131,14 @@ namespace LiveScore.Score.ViewModels
             cancellationTokenSource?.Cancel();
         }
 
+        [Time]
         private void OnRefreshCommand()
         {
             Device.BeginInvokeOnMainThread(async () =>
                 await LoadData(() => LoadMatches(selectedDateRange, true), false));
         }
 
+        [Time]
         private void OnTappedMatchCommand(MatchViewModel matchItem)
         {
             var parameters = new NavigationParameters
@@ -149,15 +157,18 @@ namespace LiveScore.Score.ViewModels
             });
         }
 
+        [Time]
         private void OnClickSearchCommandExecuted()
         {
             Device.BeginInvokeOnMainThread(async () =>
                 await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true));
         }
 
+        [Time]
         private void OnDateBarItemSelected(DateRange dateRange)
             => Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
 
+        [Time]
         private async Task LoadMatches(
             DateRange dateRange,
             bool forceFetchNewData = false)
@@ -178,6 +189,7 @@ namespace LiveScore.Score.ViewModels
             IsRefreshing = false;
         }
 
+        [Time]
         private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
@@ -187,6 +199,7 @@ namespace LiveScore.Score.ViewModels
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));
         }
 
+        [Time]
         internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)
         {
             if (sportId != CurrentSportId)
@@ -204,6 +217,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
+        [Time]
         internal void OnTeamStatisticChanged(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
         {
             if (sportId != CurrentSportId)

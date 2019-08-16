@@ -36,6 +36,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.Views.Templates.DetailTable;
     using LiveScore.Soccer.Views.Templates.DetailTracker;
     using LiveScore.Soccer.Views.Templates.DetailTV;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
@@ -123,6 +124,7 @@ namespace LiveScore.Soccer.ViewModels
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
+        [Time]
         protected override void Initialize()
         {
             BuildTabFunctions();
@@ -178,6 +180,7 @@ namespace LiveScore.Soccer.ViewModels
             });
         }
 
+        [Time]
         protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
             var match = MatchViewModel.Match;
