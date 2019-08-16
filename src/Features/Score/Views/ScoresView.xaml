@@ -4,9 +4,9 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
     xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
@@ -41,6 +41,7 @@
             x:Name="LeagueTable"
             AutomationId="LeagueTableId"
             AutomationProperties.IsInAccessibleTree="False"
+            Footer=""
             GroupDisplayBinding="{Binding Key}"
             GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
             HasUnevenRows="true"
@@ -51,10 +52,9 @@
             ItemTemplate="{StaticResource matchItemTemplateSelector}"
             ItemsSource="{Binding MatchItemsSource}"
             RefreshCommand="{Binding RefreshCommand}"
+            SelectionMode="None"
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
-            Footer=""
-            SelectionMode="None"
             VerticalOptions="FillAndExpand">
             <customListView:CustomListView.Behaviors>
                 <b:EventToCommandBehavior
