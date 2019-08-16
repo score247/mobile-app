@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LiveScore.Menu.Views.DefaultSportView"
+             Title="Default Sport"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.ToolbarItems x:Uid="toolbarItem">
+        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="Soccer" Text="Soccer" Style="{StaticResource NavName}" />
+            <Label Style="{StaticResource CheckIcon}" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource NavName}" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+
+        <FlexLayout Style="{StaticResource SettingMenuRow}">
+            <Label x:Name="ESport" Text="E-Sport" Style="{StaticResource NavName}" />
+        </FlexLayout>
+    </StackLayout>
+</ContentPage>

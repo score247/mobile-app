@@ -9,10 +9,10 @@
             Icon = icon;
         }
 
-        public string Name { get; set; }
+        public string Name { get; }
 
-        public string View { get; set; }
+        public string View { get; }
 
-        public string Icon { get; set; }
+        public string Icon { get; }
     }
 }
