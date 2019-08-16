@@ -14,7 +14,7 @@
     x:Name="self"
     BackgroundColor="{StaticResource PrimaryColor}">
     <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
         <ToolbarItem Icon="images/common/favorite.png" />
