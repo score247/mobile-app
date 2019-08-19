@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;
     using LiveScore.Core.Controls.DateBar.Models;
@@ -57,7 +56,7 @@
                 dateItems.Add(new DateBarItem(DateTime.Today.AddDays(i)));
             }
 
-            CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
+            CalendarItems = new List<DateBarItem>(dateItems);
         }
 
         private void OnSelectDate(DateBarItem dateBarItem)
@@ -66,7 +65,8 @@
             {
                 currentDateBarItem = dateBarItem;
                 HomeIsSelected = false;
-                ReloadCalendarItems(dateBarItem);
+                SetSelectedCalendarItems(dateBarItem);
+
                 EventAggregator
                     .GetEvent<DateBarItemSelectedEvent>()
                     .Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndOfDay()));
@@ -79,21 +79,22 @@
             {
                 currentDateBarItem = null;
                 HomeIsSelected = true;
-                ReloadCalendarItems();
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
+                SetSelectedCalendarItems();
+
+                EventAggregator
+                    .GetEvent<DateBarItemSelectedEvent>()
+                    .Publish(DateRange.FromYesterdayUntilNow());
             }
         }
 
-        private void ReloadCalendarItems(DateBarItem dateBarItem = null)
+        // TODo: do we really need it
+        private void SetSelectedCalendarItems(DateBarItem dateBarItem = null)
         {
             var calendarItems = CalendarItems;
 
-            foreach (var item in calendarItems)
+            foreach (var item in CalendarItems)
             {
-                item.IsSelected = dateBarItem != null
-                        && dateBarItem.Date.Day == item.Date.Day
-                        && dateBarItem.Date.Month == item.Date.Month
-                        && dateBarItem.Date.Year == item.Date.Year;
+                item.IsSelected = dateBarItem != null && item == dateBarItem;
             }
 
             CalendarItems = new List<DateBarItem>(calendarItems);

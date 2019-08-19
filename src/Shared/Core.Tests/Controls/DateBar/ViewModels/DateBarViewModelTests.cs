@@ -77,18 +77,7 @@
             Assert.True(comparer.Compare(expectedCalendarItems, viewModel.CalendarItems).AreEqual);
         }
 
-        [Fact]
-        public void OnSelectHome_HomeIsSelected_NotFireDateBarItemSelectedEvent()
-        {
-            // Arrange
-            viewModel.HomeIsSelected = true;
-
-            // Act
-            viewModel.SelectHomeCommand.Execute();
-
-            // Assert
-            Assert.Null(currentDateRange);
-        }
+       
 
         [Fact]
         public void OnSelectHome_NotSelectingHome_FireDateBarItemSelectedEvent()

@@ -1,34 +1,31 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Core;
+using LiveScore.Core.Controls.DateBar.Events;
+using LiveScore.Core.Converters;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
+using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using MethodTimer;
+using Microsoft.AspNetCore.SignalR.Client;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Navigation;
+using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Common.Extensions;
-    using Core.Services;
-    using Core.ViewModels;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
-    using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Prism.Commands;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Xamarin.Forms;
-
-#pragma warning disable S2931 // Classes with "IDisposable" members should implement "IDisposable"
-
     public class ScoresViewModel : ViewModelBase
-#pragma warning restore S2931 // Classes with "IDisposable" members should implement "IDisposable"
+
     {
         private const int HubKeepAliveInterval = 30;
         private readonly IMatchService matchService;
