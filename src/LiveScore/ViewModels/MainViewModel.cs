@@ -6,24 +6,52 @@ namespace LiveScore.ViewModels
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
+    using LiveScore.Common.Services;
     using LiveScore.Core;
+    using LiveScore.Core.Services;
+    using LiveScore.Views;
     using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class MainViewModel : ViewModelBase
     {
-        public MainViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)
+        private readonly ICachingService cachingService;
+        private readonly ISettingsService settingsService;
+
+        public MainViewModel(
+            ICachingService cachingService,
+            ISettingsService settingsService,
+            INavigationService navigationService,
+            IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
-        {
+        {   
+            this.cachingService = cachingService;
+            this.settingsService = settingsService;
+
+            IsDemo = settingsService.IsDemo;
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
         }
 
-        public DelegateAsyncCommand<string> NavigateCommand { get; set; }
+        public bool IsDemo { get; set; }
+
+        public DelegateAsyncCommand<string> NavigateCommand { get; set; } 
+
+        public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toogle);
 
         private async Task Navigate(string page)
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+        }
+
+        private async Task Toogle()
+        {   
+            await cachingService.InvalidateAll();
+
+            //TODO change settings api
+            settingsService.IsDemo = !settingsService.IsDemo;
+
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
     }
 }

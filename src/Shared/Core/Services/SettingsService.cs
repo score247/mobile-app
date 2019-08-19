@@ -7,6 +7,8 @@
 
     public interface ISettingsService
     {
+        bool IsDemo { get; set; }
+
         string CurrentLanguage { get; set; }
 
         Language Language { get; }
@@ -55,5 +57,7 @@
         public UserSettings UserSettings { get; }
 
         public Language Language { get; }
+
+        public bool IsDemo { get; set; }
     }
 }

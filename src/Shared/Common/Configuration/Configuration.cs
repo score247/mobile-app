@@ -3,9 +3,9 @@
     public static class Configuration
     {
 #if DEBUG
-        public static string LocalEndPoint => "https://score247-api1.nexdev.net/dev/api/";
+        public static string LocalEndPoint => "https://score247-api1.nexdev.net/main/api/";
 
-        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
+        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
 #elif TEST
         public static string LocalEndPoint => "https://score247-api1.nexdev.net/test/api/";
 
@@ -14,9 +14,9 @@
         public static string LocalEndPoint => "https://api.nexdev.net/V4/api/";
 
         public static string LocalHubEndPoint => "https://api.nexdev.net/V4/hubs/";
-#else       
+#else
 
-        public static string LocalEndPoint => "https://score247-api1.nexdev.net/main/api/";
+		public static string LocalEndPoint => "https://score247-api1.nexdev.net/main/api/";
 
         public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
 

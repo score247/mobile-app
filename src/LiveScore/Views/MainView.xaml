@@ -31,6 +31,23 @@
           <FlexLayout Style="{StaticResource NavGroup}">
             <Label Style="{StaticResource NavGroupName}" Text="SETTINGS" />
           </FlexLayout>
+
+          <FlexLayout x:Name="Demo" Style="{StaticResource SettingMenuRow}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
+              <Label Style="{StaticResource NavIcon}" Text="&#xe903;" />
+              <Label Style="{StaticResource NavName}" Text="Demo" />
+            </StackLayout>
+            <Switch IsToggled="{Binding IsDemo}">
+                <Switch.Behaviors>                    
+                    <behavior:EventToCommandBehavior EventName="Toggled" 
+                                      Command="{Binding ToggledCommand}" />
+                </Switch.Behaviors>                
+            </Switch>
+          </FlexLayout>
+          <ContentView>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+          </ContentView>
+
           <FlexLayout x:Name="Refresh" Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
               <Label Style="{StaticResource NavIcon}" Text="&#xe90d;" />
@@ -116,6 +133,8 @@
           <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
           </ContentView>
+
+       
 
           <FlexLayout x:Name="InfoAlert" Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">

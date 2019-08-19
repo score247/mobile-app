@@ -38,6 +38,8 @@
         Task CleanAllExpired();
 
         Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFecth, int seconds);
+
+        Task InvalidateAll();
     }
 
     public class CachingService : ICachingService
@@ -114,5 +116,7 @@
                 return elapsed > new TimeSpan(0, 0, seconds);
             };
         }
+
+        public async Task InvalidateAll() => await localMachineCache.InvalidateAll();
     }
 }
