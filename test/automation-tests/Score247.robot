@@ -2,6 +2,7 @@
 Suite Setup       Init_Simulator    iPhone 8
 Suite Teardown    Suite TearDown
 Library           AppiumLibrary
+Library           RequestsLibrary
 Library           Process
 Resource          Actions/Common_Actions.robot
 Resource          UI/Main_Function_Bar.robot
@@ -10,8 +11,6 @@ Library           DateTime
 Library           JSONLibrary
 Library           OperatingSystem
 Library           String
-Library           DatabaseLibrary
-Library           PostgreSQLDB
 Library           REST
 Resource          UI/Date_Bar.robot
 Resource          UI/Leagues_Content.robot
@@ -156,220 +155,172 @@ SP2_Score_Post_Pre_Match_Date1
     ${ac_date}    ${ac_month}=    Get date from value    -3
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_post_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
+    ${home_score}=    Get Value From Json    ${result}    $..home_score
+    ${away_score}=    Get Value From Json    ${result}    $..away_score
     #Get data from app for match 1
     ${date1_dd}    Convert to Integer    ${ac_date}
-    Click Element    DateBar-${date1_dd}
+    Click Element    accessibility_id=DateBar-${date1_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test01
-    ${league_name}    Get Value From Json    ${result}    $[0][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    @{name}[0]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:38    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test01    value    AB
-    ${match1_home_name}    Get Value From Json    ${result}    $[0][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test01    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[0][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test01    value    ${match1_away_name}
-    ${match1_home_score}    Get Value From Json    ${result}    $[0][MatchResult][HomeScore]
-    ${match1_home_score}    Catenate    @{match1_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test01    value    ${match1_home_score}
-    ${match1_away_score}    Get Value From Json    ${result}    $[0][MatchResult][AwayScore]
-    ${match1_away_score}    Catenate    @{match1_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test01    value    ${match1_away_score}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test01    value
+    Should Be Equal As Strings    '${match1_status}'    'AB'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test01    value    @{name}[4]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test01    value    @{name}[5]
+    ${match1_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test01    value
+    Should Be Equal As Integers    ${match1_home_score}    @{home_score}[0]
+    ${match1_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test01    value
+    Should Be Equal As Integers    ${match1_away_score}    @{away_score}[0]
     #Get data from app for match 2
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test02    value    FT
-    ${match2_home_name}    Get Value From Json    ${result}    $[1][Teams][0][Name]
-    ${match2_home_name}    Catenate    @{match2_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test02    value    ${match2_home_name}
-    ${match2_away_name}    Get Value From Json    ${result}    $[1][Teams][1][Name]
-    ${match2_away_name}    Catenate    @{match2_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test02    value    ${match2_away_name}
-    ${match2_home_score}    Get Value From Json    ${result}    $[1][MatchResult][HomeScore]
-    ${match2_home_score}    Catenate    @{match2_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test02    value    ${match2_home_score}
-    ${match2_away_score}    Get Value From Json    ${result}    $[1][MatchResult][AwayScore]
-    ${match2_away_score}    Catenate    @{match2_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test02    value    ${match2_away_score}
+    ${match2_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test02    value
+    Should Be Equal As Strings    '${match2_status}'    'FT'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test02    value    @{name}[10]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test02    value    @{name}[11]
+    ${match2_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test02    value
+    Should Be Equal As Integers    ${match2_home_score}    @{home_score}[3]
+    ${match2_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test02    value
+    Should Be Equal As Integers    ${match2_away_score}    @{away_score}[3]
 
 SP2_Score_Post_Pre_Match_Date2
     [Documentation]    Verify data of Post-Match in the day that happend 2 days before current day
     ${ac_date}    ${ac_month}=    Get date from value    -2
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_post_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
+    ${home_score}=    Get Value From Json    ${result}    $..home_score
+    ${away_score}=    Get Value From Json    ${result}    $..away_score
     #Get data from app for match 1
     ${date2_dd}    Convert to Integer    ${ac_date}
-    Click Element    DateBar-${date2_dd}
+    Click Element    accessibility_id=DateBar-${date2_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test03
-    ${league_name}    Get Value From Json    ${result}    $[2][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    @{name}[12]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:38    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test03    value    FT
-    ${match1_home_name}    Get Value From Json    ${result}    $[2][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test03    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[2][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test03    value    ${match1_away_name}
-    ${match1_home_score}    Get Value From Json    ${result}    $[2][MatchResult][HomeScore]
-    ${match1_home_score}    Catenate    @{match1_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test03    value    ${match1_home_score}
-    ${match1_away_score}    Get Value From Json    ${result}    $[2][MatchResult][AwayScore]
-    ${match1_away_score}    Catenate    @{match1_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test03    value    ${match1_away_score}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test03    value
+    Should Be Equal As Strings    '${match1_status}'    'FT'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test03    value    @{name}[16]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test03    value    @{name}[17]
+    ${match1_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test03    value
+    Should Be Equal As Integers    ${match1_home_score}    @{home_score}[6]
+    ${match1_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test03    value
+    Should Be Equal As Integers    ${match1_away_score}    @{away_score}[6]
     #Get data from app for match 2
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test04    value    FT
-    ${match2_home_name}    Get Value From Json    ${result}    $[3][Teams][0][Name]
-    ${match2_home_name}    Catenate    @{match2_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test04    value    ${match2_home_name}
-    ${match2_away_name}    Get Value From Json    ${result}    $[3][Teams][1][Name]
-    ${match2_away_name}    Catenate    @{match2_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test04    value    ${match2_away_name}
-    ${match2_home_score}    Get Value From Json    ${result}    $[3][MatchResult][HomeScore]
-    ${match2_home_score}    Catenate    @{match2_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test04    value    ${match2_home_score}
-    ${match2_away_score}    Get Value From Json    ${result}    $[3][MatchResult][AwayScore]
-    ${match2_away_score}    Catenate    @{match2_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test04    value    ${match2_away_score}
+    ${match2_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test04    value
+    Should Be Equal As Strings    '${match2_status}'    'FT'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test04    value    @{name}[22]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test04    value    @{name}[23]
+    ${match2_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test04    value
+    Should Be Equal As Integers    ${match2_home_score}    @{home_score}[9]
+    ${match2_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test04    value
+    Should Be Equal As Integers    ${match2_away_score}    @{away_score}[9]
 
 SP2_Score_Post_Pre_Match_Date3
     [Documentation]    Verify data of Post-Match in the day that happend 1 days before current day
     ${ac_date}    ${ac_month}=    Get date from value    -1
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_post_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
+    ${home_score}=    Get Value From Json    ${result}    $..home_score
+    ${away_score}=    Get Value From Json    ${result}    $..away_score
     #Get data from app for match 1
     ${date3_dd}    Convert to Integer    ${ac_date}
-    Click Element    DateBar-${date3_dd}
+    Click Element    accessibility_id=DateBar-${date3_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test05
-    ${league_name}    Get Value From Json    ${result}    $[4][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    @{name}[24]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:38    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test05    value    AET
-    ${match1_home_name}    Get Value From Json    ${result}    $[4][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test05    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[4][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test05    value    ${match1_away_name}
-    ${match1_home_score}    Get Value From Json    ${result}    $[4][MatchResult][HomeScore]
-    ${match1_home_score}    Catenate    @{match1_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test05    value    ${match1_home_score}
-    ${match1_away_score}    Get Value From Json    ${result}    $[4][MatchResult][AwayScore]
-    ${match1_away_score}    Catenate    @{match1_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test05    value    ${match1_away_score}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test05    value
+    Should Be Equal As Strings    '${match1_status}'    'AET'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test05    value    @{name}[28]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test05    value    @{name}[29]
+    ${match1_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test05    value
+    Should Be Equal As Integers    ${match1_home_score}    @{home_score}[12]
+    ${match1_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test05    value
+    Should Be Equal As Integers    ${match1_away_score}    @{away_score}[12]
     #Get data from app for match 2
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test06    value    AP
-    ${match2_home_name}    Get Value From Json    ${result}    $[5][Teams][0][Name]
-    ${match2_home_name}    Catenate    @{match2_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test06    value    ${match2_home_name}
-    ${match2_away_name}    Get Value From Json    ${result}    $[5][Teams][1][Name]
-    ${match2_away_name}    Catenate    @{match2_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test06    value    ${match2_away_name}
-    ${match2_home_score}    Get Value From Json    ${result}    $[5][MatchResult][HomeScore]
-    ${match2_home_score}    Catenate    @{match2_home_score}
-    Element Attribute Should Match    accessibility_id=HomeScore-sr:match:test06    value    ${match2_home_score}
-    ${match2_away_score}    Get Value From Json    ${result}    $[5][MatchResult][AwayScore]
-    ${match2_away_score}    Catenate    @{match2_away_score}
-    Element Attribute Should Match    accessibility_id=AwayScore-sr:match:test06    value    ${match2_away_score}
+    ${match2_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test06    value
+    Should Be Equal As Strings    '${match2_status}'    'AP'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test06    value    @{name}[34]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test06    value    @{name}[35]
+    ${match2_home_score}=    Get Element Attribute    accessibility_id=HomeScore-sr:match:test06    value
+    Should Be Equal As Integers    ${match2_home_score}    @{home_score}[15]
+    ${match2_away_score}=    Get Element Attribute    accessibility_id=AwayScore-sr:match:test06    value
+    Should Be Equal As Integers    ${match2_away_score}    @{away_score}[15]
 
 SP2_Score_Post_Pre_Match_Date5
     [Documentation]    Verify data of Post-Match in the day that happend 1 days after current day
     ${ac_date}    ${ac_month}=    Get date from value    1
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_pre_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
     #Get data from app for match 1
     ${date5_dd}    Convert to Integer    ${ac_date}
-    click control    DateBar-${date5_dd}
+    Click Element    accessibility_id=DateBar-${date5_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test07
-    ${league_name}    Get Value From Json    ${result}    $[6][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:38    value    @{name}[0]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:38    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test07    value    17:00
-    ${match1_home_name}    Get Value From Json    ${result}    $[6][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test07    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[6][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test07    value    ${match1_away_name}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test07    value
+    Should Be Equal As Strings    '${match1_status}'    '17:00'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test07    value    @{name}[4]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test07    value    @{name}[5]
     #Get data from app for match 2
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test08    value    Postp.
-    ${match2_home_name}    Get Value From Json    ${result}    $[7][Teams][0][Name]
-    ${match2_home_name}    Catenate    @{match2_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test08    value    ${match2_home_name}
-    ${match2_away_name}    Get Value From Json    ${result}    $[7][Teams][1][Name]
-    ${match2_away_name}    Catenate    @{match2_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test08    value    ${match2_away_name}
+    ${match2_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test08    value
+    Should Be Equal As Strings    '${match2_status}'    'Postp.'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test08    value    @{name}[10]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test08    value    @{name}[11]
 
 SP2_Score_Post_Pre_Match_Date6
     [Documentation]    Verify data of Post-Match in the day that happend 2 days after current day
     ${ac_date}    ${ac_month}=    Get date from value    2
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_pre_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
     #Get data from app for match 1
     ${date6_dd}    Convert to Integer    ${ac_date}
-    Click Element    DateBar-${date6_dd}
+    Click Element    accessibility_id=DateBar-${date6_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test09
-    ${league_name}    Get Value From Json    ${result}    $[8][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:892    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:892    value    @{name}[12]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:892    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test09    value    Start Delayed
-    ${match1_home_name}    Get Value From Json    ${result}    $[8][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test09    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[8][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test09    value    ${match1_away_name}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test09    value
+    Should Be Equal As Strings    '${match1_status}'    'Start Delayed'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test09    value    @{name}[16]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test09    value    @{name}[17]
 
 SP2_Score_Post_Pre_Match_Date7
     [Documentation]    Verify data of Post-Match in the day that happend 3 days after current day
     ${ac_date}    ${ac_month}=    Get date from value    3
     ${day_monthname}=    Return day month    ${ac_date}    ${ac_month}
     ${league_date_db}    Catenate    ${day_monthname}
-    ${result}=    Load JSON From File    Template_Files/template_post_pre_match.txt
+    ${result}=    Load JSON From File    Template_Files/Template_pre_match_final.txt
+    ${name}=    Get Value From Json    ${result}    $..name
     #Get data from app for match 1
     ${date7_dd}    Convert to Integer    ${ac_date}
-    Click Element    DateBar-${date7_dd}
+    Click Element    accessibility_id=DateBar-${date7_dd}
     Sleep    5
     Capture Page Screenshot
     Wait Until Page Contains Element    accessibility_id=MatchStatus-sr:match:test10
-    ${league_name}    Get Value From Json    ${result}    $[9][League][Name]
-    ${league_name}    Catenate    @{league_name}
-    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:892    value    ${league_name}
+    Element Attribute Should Match    accessibility_id=LeagueName-sr:tournament:892    value    @{name}[18]
     Element Attribute Should Match    accessibility_id=LeagueEventDate-sr:tournament:892    value    ${league_date_db}
-    Element Attribute Should Match    accessibility_id=MatchStatus-sr:match:test10    value    Canc.
-    ${match1_home_name}    Get Value From Json    ${result}    $[9][Teams][0][Name]
-    ${match1_home_name}    Catenate    @{match1_home_name}
-    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test10    value    ${match1_home_name}
-    ${match1_away_name}    Get Value From Json    ${result}    $[9][Teams][1][Name]
-    ${match1_away_name}    Catenate    @{match1_away_name}
-    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test10    value    ${match1_away_name}
+    ${match1_status}=    Get Element Attribute    accessibility_id=MatchStatus-sr:match:test10    value
+    Should Be Equal As Strings    '${match1_status}'    'Canc.'
+    Element Attribute Should Match    accessibility_id=HomeTeamName-sr:match:test10    value    @{name}[22]
+    Element Attribute Should Match    accessibility_id=AwayTeamName-sr:match:test10    value    @{name}[23]
 
 SP3_SP4_List_Event_Of_Match1
-    Comment    Update_Template_List_Event_Of_Match1
-    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/Run/List_event_data_template1.txt
-    Comment    #Push events
-    Comment    Post    ${Push_File}    ${file}
-    Comment    Integer    response status    200
-    Comment    Output
     ${result}=    Load JSON From File    Template_Files/Run/List_event_data_template1.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
@@ -415,11 +366,6 @@ SP3_SP4_List_Event_Of_Match1
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match2
-    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template2.txt
-    Comment    #Push events
-    Comment    Post    ${Push_File}    ${file}
-    Comment    Integer    response status    200
-    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template2.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
@@ -439,22 +385,16 @@ SP3_SP4_List_Event_Of_Match2
     #Event2_score_change_for_home_2nd
     Element Attribute Should Match    accessibility_id=MatchTime-11-score_change    value    55'
     Element Attribute Should Match    accessibility_id=Score-11-score_change    label    1 - 0
-    Comment    ${player_name_1}    Get Value From Json    ${result}    $[4][payload][event][goal_scorer][name]
-    Comment    ${player_name_1}    Catenate    @{player_name_1}
     Element Attribute Should Match    accessibility_id=HomePlayerName-11-score_change    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-11-score_change    name    HomeImage-11-score_change
     #Event3_score_change_for_away_2nd_by_own_goal
     Element Attribute Should Match    accessibility_id=MatchTime-12-score_change    value    75'
     Element Attribute Should Match    accessibility_id=Score-12-score_change    label    1 - 1
-    Comment    ${player_name_2}    Get Value From Json    ${result}    $[5][payload][event][goal_scorer][name]
-    Comment    ${player_name_2}    Catenate    @{player_name_2}
     Element Attribute Should Match    accessibility_id=AwayPlayerName-12-score_change    value    @{player_name}[1]
     Element Attribute Should Match    accessibility_id=AwayImage-12-score_change    name    AwayImage-12-score_change
     #Event4_score_change_for_home_2nd
     Element Attribute Should Match    accessibility_id=MatchTime-13-penalty_missed    value    80'
     Element Attribute Should Match    accessibility_id=Score-13-penalty_missed    label    1 - 1
-    Comment    ${player_name_3}    Get Value From Json    ${result}    $[6][payload][event][player][name]
-    Comment    ${player_name_3}    Catenate    @{player_name_3}
     Element Attribute Should Match    accessibility_id=HomePlayerName-13-penalty_missed    value    @{player_name}[2]
     Element Attribute Should Match    accessibility_id=HomeImage-13-penalty_missed    name    HomeImage-13-penalty_missed
     #Event5_fulltime
@@ -463,11 +403,6 @@ SP3_SP4_List_Event_Of_Match2
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match3
-    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template3.txt
-    Comment    #Push events
-    Comment    Post    ${Push_File}    ${file}
-    Comment    Integer    response status    200
-    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template3.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
@@ -502,11 +437,6 @@ SP3_SP4_List_Event_Of_Match3
     Click Element    ${btn_Scores}
 
 SP3_SP4_List_Event_Of_Match4
-    Comment    ${file}=    Get File    ${CURDIR}/Template_Files/List_event_data_template4.txt
-    Comment    #Push events
-    Comment    Post    ${Push_File}    ${file}
-    Comment    Integer    response status    200
-    Comment    Output
     ${result}=    Load JSON From File    Template_Files/List_event_data_template4.txt
     ${player_name}    Get Value From Json    ${result}    $..name
     ${current_date}=    Get Current Date    result_format=%d    #current date
@@ -532,8 +462,8 @@ SP3_SP4_List_Event_Of_Match4
     Element Attribute Should Match    accessibility_id=MainEventStatus-25-break_start    value    After Extra Time
     Element Attribute Should Match    accessibility_id=Score-25-break_start    label    0 - 0
     #Event4_penalty_shoot_out
-    Element Attribute Should Match    accessibility_id=MainEventStatus-26-period_start    value    Penalty Shoot-Out
-    Element Attribute Should Match    accessibility_id=Score-26-period_start    label    3 - 2
+    Element Attribute Should Match    accessibility_id=MainEventStatus-37-match_ended    value    Penalty Shoot-Out
+    Element Attribute Should Match    accessibility_id=Score-37-match_ended    label    3 - 2
     #Event5_penalty_shoot_out_round1
     Element Attribute Should Match    accessibility_id=HomePlayerName-28-penalty_shootout    value    @{player_name}[0]
     Element Attribute Should Match    accessibility_id=HomeImage-28-penalty_shootout    name    HomeImage-28-penalty_shootout
@@ -567,10 +497,7 @@ SP3_SP4_List_Event_Of_Match4
     Page Should Contain Element    accessibility_id=HomeTeamPenalty
     Page Should Contain Element    accessibility_id=HomeTeamSecondLeg
     Page Should Contain Element    accessibility_id=SecondLegDetai
-    Page Should Contain Element    accessibility_id=PenaltyDetail
-    Element Attribute Should Match    accessibility_id=RefereeName    value    Anthony Taylor
-    Element Attribute Should Match    accessibility_id=VenueName    value    ${space}Emirates
-    Element Attribute Should Match    accessibility_id=Attendance    value    1,653,490
+    Element Attribute Should Match    accessibility_id=VenueName    value    Emirates
     ${Kick_Of_Time}=    Catenate    17:00    ${Kick_Of_Time}
     ${Kick_Of_Time}=    Catenate    SEPARATOR=    ${Kick_Of_Time}    ,
     ${current_date}=    Get Current Date    result_format=%Y
@@ -578,7 +505,7 @@ SP3_SP4_List_Event_Of_Match4
     Element Attribute Should Match    accessibility_id=EventDate    value    ${Kick_Of_Time}
     Click Element    ${btn_Scores}
 
-SP6_Odd_Movement_Of_Bettype_1x2
+SP6_Odd_Movement_Of_Bettype_1x2_PostMatch
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
     click element    ${btn_Scores}
@@ -590,8 +517,9 @@ SP6_Odd_Movement_Of_Bettype_1x2
     ${result}=    Load JSON From File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
     ${BookmakerName}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][name]
     ${BookmakerName_id}    ${Title}=    Set Variable    BookmakerName-${BookmakerName}[0]    ${BookmakerName}[0] - 1X2 Odds
-    Wait Until Element Is Visible    accessibility_id=${BookmakerName_id}
-    Page Should Contain Element    accessibility_id=MatchOdds-BetTypeOneXTwo
+    Wait Until Element Is Visible    accessibility_id=MatchOdds-BetTypeAsianHDP
+    Click Element    accessibility_id=1X2
+    Comment    Page Should Contain Element    accessibility_id=MatchOdds-BetTypeOneXTwo
     #Go to Odds Movement
     Click Element    accessibility_id=${BookmakerName_id}
     Element Attribute Should Match    accessibility_id=NavigationTitle-    value    ${Title}
@@ -601,11 +529,11 @@ SP6_Odd_Movement_Of_Bettype_1x2
     ${odds_value}=    Get Value From Json    ${result}    $..odds
     ${opening_odds_value}=    Get Value From Json    ${result}    $..opening_odds
     ${UpdateTime}    Get Value From Json    ${result}    $..markets_last_updated
+    Swipe Down    accessibility_id=1X2
     ##Check values of row 1
     ${UpdateTime 1}=    Set Variable    ${UpdateTime}[9]
     ${UpdateTime 1_file}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
     ${UpdateTime 1}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
-    swipe down    accessibility_id=X
     ${MatchTime 1_id}    Set Variable    MatchTime-${UpdateTime 1}
     Element Attribute Should Match    ${MatchTime 1_id}    value    HT
     ${MatchScore 1_id}    Set Variable    MatchScore-${UpdateTime 1}
@@ -726,7 +654,7 @@ SP6_Odd_Movement_Of_Bettype_1x2
     Element Attribute Should Match    ${DrawOdds 10_id}    value    @{opening_odds_value}[2]
     Remove File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_1x2.txt
 
-SP5_Odds_1x2_Post_Match
+SP5_Odd_Comparison_1x2_PostMatch
     #Go to current date to view data
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
@@ -820,7 +748,7 @@ SP5_Odds_1x2_Post_Match
     Lists Should Be Equal    ${list_name_app}    ${list_name}
     Remove Files    Template_Files/Run/Data_Odds_1x2_auto.json
 
-SP6_Odds_HDP_PostMatch
+SP6_Odd_Comparison_HDP_PostMatch
     #Go to current date to view data
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
@@ -923,7 +851,7 @@ SP6_Odds_HDP_PostMatch
     Lists Should Be Equal    ${list_name_app}    ${list_name}
     Remove Files    Template_Files/Run/Data_Odds_AsianHDP.json    Template_Files/Run/Data_Odds_AsianHDP_live.json
 
-SP6_Odds_Over_Under_PostMatch
+SP6_Odd_Comparison_Over_Under_PostMatch
     #Go to current date to view data
     ${current_date}=    Get Current Date    result_format=%d    #current date
     ${current_date}=    Convert To Integer    ${current_date}
@@ -1018,5 +946,305 @@ SP6_Odds_Over_Under_PostMatch
     ${list_value_app}=    Create List    ${Bookmaker_OU_1}    ${Bookmaker_OU_2}    ${Bookmaker_OU_3}    ${Bookmaker_OU_4}
     Lists Should Be Equal    ${list_value_app}    ${list_name}
     Remove Files    Template_Files/Run/Data_Odds_Over_Under_auto.json
+
+SP7_Odd_Movement_Of_Bettype_asian_handicap_PostMatch
+    ${current_date}=    Get Current Date    result_format=%d    #current date
+    ${current_date}=    Convert To Integer    ${current_date}
+    click element    ${btn_Scores}
+    Sleep    3
+    #Go to Match Info page at ODDS tab from Scores page
+    Click Element    accessibility_id=DateBar-${current_date}
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
+    Click Element    accessibility_id=HomeTeamName-sr:match:test11
+    ${result}=    Load JSON From File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_asian_handicap.txt
+    ${BookmakerName}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][name]
+    ${BookmakerName_id}    ${Title}=    Set Variable    BookmakerName-${BookmakerName}[0]    ${BookmakerName}[0] - Asian HDP Odds
+    Wait Until Element Is Visible    accessibility_id=${BookmakerName_id}
+    Page Should Contain Element    accessibility_id=MatchOdds-BetTypeAsianHDP
+    #Go to Odds Movement
+    Click Element    accessibility_id=${BookmakerName_id}
+    Element Attribute Should Match    accessibility_id=NavigationTitle-    value    ${Title}
+    Page Should Contain Element    accessibility_id=images/common/odd_movement_chart.png
+    Page Should Contain Element    accessibility_id=MatchOddsMovement
+    #Check values of Odds Movement
+    ${odds_value}=    Get Value From Json    ${result}    $..odds
+    ${handicap_value}=    Get Value From Json    ${result}    $..handicap
+    ${UpdateTime}    Get Value From Json    ${result}    $..markets_last_updated
+    swipe down    accessibility_id=Asian HDP
+    ##Check values of row 1
+    ${UpdateTime 1}=    Set Variable    ${UpdateTime}[9]
+    ${UpdateTime 1_file}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 1}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 1_id}    Set Variable    MatchTime-${UpdateTime 1}
+    Element Attribute Should Match    ${MatchTime 1_id}    value    HT
+    ${MatchScore 1_id}    Set Variable    MatchScore-${UpdateTime 1}
+    Element Attribute Should Match    ${MatchScore 1_id}    value    1 - 1
+    ${HomeOdds 1_id}    ${AwayOdds 1_id}    ${HandicapValue 1_id}    ${UpdateTime 1_id}=    Set Variable    HomeOdds-${UpdateTime 1}    AwayOdds-${UpdateTime 1}
+    ...    Hdp-${UpdateTime 1}    UpdateTime-${UpdateTime 1}
+    Element Attribute Should Match    ${HomeOdds 1_id}    value    @{odds_value}[18]
+    Element Attribute Should Match    ${AwayOdds 1_id}    value    @{odds_value}[19]
+    Element Attribute Should Match    ${HandicapValue 1_id}    value    @{handicap_value}[18]
+    ##Check values of row 2
+    ${UpdateTime 2}=    Set Variable    ${UpdateTime}[8]
+    ${UpdateTime 2_file}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 2}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 2_id}    Set Variable    MatchTime-${UpdateTime 2}
+    Element Attribute Should Match    ${MatchTime 2_id}    value    HT
+    ${MatchScore 2_id}    Set Variable    MatchScore-${UpdateTime 2}
+    Element Attribute Should Match    ${MatchScore 2_id}    value    1 - 1
+    ${HomeOdds 2_id}    ${AwayOdds 2_id}    ${HandicapValue 2_id}    ${UpdateTime 2_id}=    Set Variable    HomeOdds-${UpdateTime 2}    AwayOdds-${UpdateTime 2}
+    ...    Hdp-${UpdateTime 2}    UpdateTime-${UpdateTime 2}
+    Element Attribute Should Match    ${HomeOdds 2_id}    value    @{odds_value}[16]
+    Element Attribute Should Match    ${AwayOdds 2_id}    value    @{odds_value}[17]
+    Element Attribute Should Match    ${HandicapValue 2_id}    value    @{handicap_value}[16]
+    ##Check values of row 3
+    ${UpdateTime 3}=    Set Variable    ${UpdateTime}[7]
+    ${UpdateTime 3_file}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 3}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 3_id}    Set Variable    MatchTime-${UpdateTime 3}
+    Element Attribute Should Match    ${MatchTime 3_id}    value    35'
+    ${MatchScore 3_id}    Set Variable    MatchScore-${UpdateTime 3}
+    Element Attribute Should Match    ${MatchScore 3_id}    value    1 - 1
+    ${HomeOdds 3_id}    ${AwayOdds 3_id}    ${HandicapValue 3_id}    ${UpdateTime 3_id}=    Set Variable    HomeOdds-${UpdateTime 3}    AwayOdds-${UpdateTime 3}
+    ...    Hdp-${UpdateTime 3}    UpdateTime-${UpdateTime 3}
+    Element Attribute Should Match    ${HomeOdds 3_id}    value    @{odds_value}[14]
+    Element Attribute Should Match    ${AwayOdds 3_id}    value    @{odds_value}[15]
+    Element Attribute Should Match    ${HandicapValue 3_id}    value    @{handicap_value}[14]
+    ##Check values of row 4
+    ${UpdateTime 4}=    Set Variable    ${UpdateTime}[6]
+    ${UpdateTime 4_file}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 4}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 4_id}    Set Variable    MatchTime-${UpdateTime 4}
+    Element Attribute Should Match    ${MatchTime 4_id}    value    30'
+    ${MatchScore 4_id}    Set Variable    MatchScore-${UpdateTime 4}
+    Element Attribute Should Match    ${MatchScore 4_id}    value    0 - 1
+    ${HomeOdds 4_id}    ${AwayOdds 4_id}    ${HandicapValue 4_id}    ${UpdateTime 4_id}=    Set Variable    HomeOdds-${UpdateTime 4}    AwayOdds-${UpdateTime 4}
+    ...    Hdp-${UpdateTime 4}    UpdateTime-${UpdateTime 4}
+    Element Attribute Should Match    ${HomeOdds 4_id}    value    @{odds_value}[12]
+    Element Attribute Should Match    ${AwayOdds 4_id}    value    @{odds_value}[13]
+    Element Attribute Should Match    ${HandicapValue 4_id}    value    @{handicap_value}[12]
+    ##Check values of row 5
+    ${UpdateTime 5}=    Set Variable    ${UpdateTime}[5]
+    ${UpdateTime 5_file}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 5}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 5_id}    Set Variable    MatchTime-${UpdateTime 5}
+    Element Attribute Should Match    ${MatchTime 5_id}    value    20'
+    ${MatchScore 5_id}    Set Variable    MatchScore-${UpdateTime 5}
+    Element Attribute Should Match    ${MatchScore 5_id}    value    0 - 0
+    ${HomeOdds 5_id}    ${AwayOdds 5_id}    ${HandicapValue 5_id}    ${UpdateTime 5_id}=    Set Variable    HomeOdds-${UpdateTime 5}    AwayOdds-${UpdateTime 5}
+    ...    Hdp-${UpdateTime 5}    UpdateTime-${UpdateTime 5}
+    Element Attribute Should Match    ${HomeOdds 5_id}    value    @{odds_value}[10]
+    Element Attribute Should Match    ${AwayOdds 5_id}    value    @{odds_value}[11]
+    Element Attribute Should Match    ${HandicapValue 5_id}    value    @{handicap_value}[10]
+    ##Check values of row 6
+    ${UpdateTime 6}=    Set Variable    ${UpdateTime}[4]
+    ${UpdateTime 6_file}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 6}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 6_id}    Set Variable    MatchTime-${UpdateTime 6}
+    Element Attribute Should Match    ${MatchTime 6_id}    value    KO
+    ${MatchScore 6_id}    Set Variable    MatchScore-${UpdateTime 6}
+    Element Attribute Should Match    ${MatchScore 6_id}    value    0 - 0
+    ${HomeOdds 6_id}    ${AwayOdds 6_id}    ${HandicapValue 6_id}    ${UpdateTime 6_id}=    Set Variable    HomeOdds-${UpdateTime 6}    AwayOdds-${UpdateTime 6}
+    ...    Hdp-${UpdateTime 6}    UpdateTime-${UpdateTime 6}
+    Element Attribute Should Match    ${HomeOdds 6_id}    value    @{odds_value}[8]
+    Element Attribute Should Match    ${AwayOdds 6_id}    value    @{odds_value}[9]
+    Element Attribute Should Match    ${HandicapValue 6_id}    value    @{handicap_value}[8]
+    ##Check values of row 7
+    ${UpdateTime 7}=    Set Variable    ${UpdateTime}[3]
+    ${UpdateTime 7_file}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 7}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 7_id}    Set Variable    MatchTime-${UpdateTime 7}
+    Element Attribute Should Match    ${MatchTime 7_id}    value    Live
+    ${HomeOdds 7_id}    ${AwayOdds 7_id}    ${HandicapValue 7_id}    ${UpdateTime 7_id}=    Set Variable    HomeOdds-${UpdateTime 7}    AwayOdds-${UpdateTime 7}
+    ...    Hdp-${UpdateTime 7}    UpdateTime-${UpdateTime 7}
+    Element Attribute Should Match    ${HomeOdds 7_id}    value    @{odds_value}[6]
+    Element Attribute Should Match    ${AwayOdds 7_id}    value    @{odds_value}[7]
+    Element Attribute Should Match    ${HandicapValue 7_id}    value    @{handicap_value}[6]
+    ##Check values of row 8
+    ${UpdateTime 8}=    Set Variable    ${UpdateTime}[2]
+    ${UpdateTime 8_file}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 8}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 8_id}    Set Variable    MatchTime-${UpdateTime 8}
+    Element Attribute Should Match    ${MatchTime 8_id}    value    Live
+    ${HomeOdds 8_id}    ${AwayOdds 8_id}    ${HandicapValue 8_id}    ${UpdateTime 8_id}=    Set Variable    HomeOdds-${UpdateTime 8}    AwayOdds-${UpdateTime 8}
+    ...    Hdp-${UpdateTime 8}    UpdateTime-${UpdateTime 8}
+    Element Attribute Should Match    ${HomeOdds 8_id}    value    @{odds_value}[4]
+    Element Attribute Should Match    ${AwayOdds 8_id}    value    @{odds_value}[5]
+    Element Attribute Should Match    ${HandicapValue 8_id}    value    @{handicap_value}[4]
+    ##Check values of row 9
+    ${UpdateTime 9}=    Set Variable    ${UpdateTime}[1]
+    ${UpdateTime 9_file}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 9}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 9_id}    Set Variable    MatchTime-${UpdateTime 9}
+    Element Attribute Should Match    ${MatchTime 9_id}    value    Live
+    ${HomeOdds 9_id}    ${AwayOdds 9_id}    ${HandicapValue 9_id}    ${UpdateTime 9_id}=    Set Variable    HomeOdds-${UpdateTime 9}    AwayOdds-${UpdateTime 9}
+    ...    Hdp-${UpdateTime 9}    UpdateTime-${UpdateTime 9}
+    Element Attribute Should Match    ${HomeOdds 9_id}    value    @{odds_value}[2]
+    Element Attribute Should Match    ${AwayOdds 9_id}    value    @{odds_value}[3]
+    Element Attribute Should Match    ${HandicapValue 9_id}    value    @{handicap_value}[2]
+    ##Check values of row 10
+    ${UpdateTime 10}=    Set Variable    ${UpdateTime}[0]
+    ${UpdateTime 10_file}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 10}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 10_id}    Set Variable    MatchTime-${UpdateTime 10}
+    Element Attribute Should Match    ${MatchTime 10_id}    value    Opening
+    ${HomeOdds 10_id}    ${AwayOdds 10_id}    ${HandicapValue 10_id}    ${UpdateTime 10_id}=    Set Variable    HomeOdds-${UpdateTime 10}    AwayOdds-${UpdateTime 10}
+    ...    Hdp-${UpdateTime 10}    UpdateTime-${UpdateTime 10}
+    Element Attribute Should Match    ${HomeOdds 10_id}    value    @{odds_value}[0]
+    Element Attribute Should Match    ${AwayOdds 10_id}    value    @{odds_value}[1]
+    Element Attribute Should Match    ${HandicapValue 10_id}    value    @{handicap_value}[0]
+    Remove File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_asian_handicap.txt
+
+SP7_Odd_Movement_Of_Bettype_over_under_PostMatch
+    ${current_date}=    Get Current Date    result_format=%d    #current date
+    ${current_date}=    Convert To Integer    ${current_date}
+    #Go to Match Info page at ODDS tab from Scores page
+    Click Element    accessibility_id=DateBar-${current_date}
+    Wait Until Element Is Visible    accessibility_id=HomeTeamName-sr:match:test11
+    Click Element    accessibility_id=HomeTeamName-sr:match:test11
+    Sleep    3
+    ${result}=    Load JSON From File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_over_under.txt
+    ${BookmakerName}    Get Value From Json    ${result}    $[sport_events][0][markets][0][books][0][name]
+    ${BookmakerName_id}    ${Title}=    Set Variable    BookmakerName-${BookmakerName}[0]    ${BookmakerName}[0] - Over/Under Odds
+    Click Element    accessibility_id=Over/Under
+    Wait Until Element Is Visible    accessibility_id=${BookmakerName_id}
+    Comment    Page Should Contain Element    accessibility_id=MatchOdds-BetTypeOneXTwo
+    #Go to Odds Movement
+    Click Element    accessibility_id=${BookmakerName_id}
+    Element Attribute Should Match    accessibility_id=NavigationTitle-    value    ${Title}
+    Page Should Contain Element    accessibility_id=images/common/odd_movement_chart.png
+    Page Should Contain Element    accessibility_id=MatchOddsMovement
+    #Check values of Odds Movement
+    ${odds_value}=    Get Value From Json    ${result}    $..odds
+    ${o/u_value}=    Get Value From Json    ${result}    $..total
+    ${opening_odds_value}=    Get Value From Json    ${result}    $..opening_odds
+    ${opening_o/u_value}=    Get Value From Json    ${result}    $..opening_total
+    ${opening_o/u_value}=    Set Variable    ${opening_o/u_value}[0]
+    ${UpdateTime}    Get Value From Json    ${result}    $..markets_last_updated
+    swipe down    accessibility_id=Over/Under
+    ##Check values of row 1
+    ${UpdateTime 1}=    Set Variable    ${UpdateTime}[9]
+    ${UpdateTime 1_file}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 1}    Add Time To Date    ${UpdateTime 1}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 1_id}    Set Variable    MatchTime-${UpdateTime 1}
+    Element Attribute Should Match    ${MatchTime 1_id}    value    HT
+    ${MatchScore 1_id}    Set Variable    MatchScore-${UpdateTime 1}
+    Element Attribute Should Match    ${MatchScore 1_id}    value    1 - 1
+    ${OverOdds 1_id}    ${UnderOdds 1_id}    ${o/u_value 1_id}    ${UpdateTime 1_id}=    Set Variable    OverOdds-${UpdateTime 1}    UnderOdds-${UpdateTime 1}
+    ...    OptionValue-${UpdateTime 1}    UpdateTime-${UpdateTime 1}
+    Element Attribute Should Match    ${OverOdds 1_id}    value    @{odds_value}[18]
+    Element Attribute Should Match    ${UnderOdds 1_id}    value    @{odds_value}[19]
+    Element Attribute Should Match    ${o/u_value 1_id}    value    @{o/u_value}[18]
+    ##Check values of row 2
+    ${UpdateTime 2}=    Set Variable    ${UpdateTime}[8]
+    ${UpdateTime 2_file}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 2}    Add Time To Date    ${UpdateTime 2}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 2_id}    Set Variable    MatchTime-${UpdateTime 2}
+    Element Attribute Should Match    ${MatchTime 2_id}    value    HT
+    ${MatchScore 2_id}    Set Variable    MatchScore-${UpdateTime 2}
+    Element Attribute Should Match    ${MatchScore 2_id}    value    1 - 1
+    ${OverOdds 2_id}    ${UnderOdds 2_id}    ${o/u_value 2_id}    ${UpdateTime 2_id}=    Set Variable    OverOdds-${UpdateTime 2}    UnderOdds-${UpdateTime 2}
+    ...    OptionValue-${UpdateTime 2}    UpdateTime-${UpdateTime 2}
+    Element Attribute Should Match    ${OverOdds 2_id}    value    @{odds_value}[16]
+    Element Attribute Should Match    ${UnderOdds 2_id}    value    @{odds_value}[17]
+    Element Attribute Should Match    ${o/u_value 2_id}    value    @{o/u_value}[16]
+    ##Check values of row 3
+    ${UpdateTime 3}=    Set Variable    ${UpdateTime}[7]
+    ${UpdateTime 3_file}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 3}    Add Time To Date    ${UpdateTime 3}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 3_id}    Set Variable    MatchTime-${UpdateTime 3}
+    Element Attribute Should Match    ${MatchTime 3_id}    value    35'
+    ${MatchScore 3_id}    Set Variable    MatchScore-${UpdateTime 3}
+    Element Attribute Should Match    ${MatchScore 3_id}    value    1 - 1
+    ${OverOdds 3_id}    ${UnderOdds 3_id}    ${o/u_value 3_id}    ${UpdateTime 3_id}=    Set Variable    OverOdds-${UpdateTime 3}    UnderOdds-${UpdateTime 3}
+    ...    OptionValue-${UpdateTime 3}    UpdateTime-${UpdateTime 3}
+    Element Attribute Should Match    ${OverOdds 3_id}    value    @{odds_value}[14]
+    Element Attribute Should Match    ${UnderOdds 3_id}    value    @{odds_value}[15]
+    Element Attribute Should Match    ${o/u_value 3_id}    value    @{o/u_value}[14]
+    ##Check values of row 4
+    ${UpdateTime 4}=    Set Variable    ${UpdateTime}[6]
+    ${UpdateTime 4_file}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 4}    Add Time To Date    ${UpdateTime 4}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 4_id}    Set Variable    MatchTime-${UpdateTime 4}
+    Element Attribute Should Match    ${MatchTime 4_id}    value    30'
+    ${MatchScore 4_id}    Set Variable    MatchScore-${UpdateTime 4}
+    Element Attribute Should Match    ${MatchScore 4_id}    value    0 - 1
+    ${OverOdds 4_id}    ${UnderOdds 4_id}    ${o/u_value 4_id}    ${UpdateTime 4_id}=    Set Variable    OverOdds-${UpdateTime 4}    UnderOdds-${UpdateTime 4}
+    ...    OptionValue-${UpdateTime 4}    UpdateTime-${UpdateTime 4}
+    Element Attribute Should Match    ${OverOdds 4_id}    value    @{odds_value}[12]
+    Element Attribute Should Match    ${UnderOdds 4_id}    value    @{odds_value}[13]
+    Element Attribute Should Match    ${o/u_value 4_id}    value    @{o/u_value}[12]
+    ##Check values of row 5
+    ${UpdateTime 5}=    Set Variable    ${UpdateTime}[5]
+    ${UpdateTime 5_file}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 5}    Add Time To Date    ${UpdateTime 5}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 5_id}    Set Variable    MatchTime-${UpdateTime 5}
+    Element Attribute Should Match    ${MatchTime 5_id}    value    20'
+    ${MatchScore 5_id}    Set Variable    MatchScore-${UpdateTime 5}
+    Element Attribute Should Match    ${MatchScore 5_id}    value    0 - 0
+    ${OverOdds 5_id}    ${UnderOdds 5_id}    ${o/u_value 5_id}    ${UpdateTime 5_id}=    Set Variable    OverOdds-${UpdateTime 5}    UnderOdds-${UpdateTime 5}
+    ...    OptionValue-${UpdateTime 5}    UpdateTime-${UpdateTime 5}
+    Element Attribute Should Match    ${OverOdds 5_id}    value    @{odds_value}[10]
+    Element Attribute Should Match    ${UnderOdds 5_id}    value    @{odds_value}[11]
+    Element Attribute Should Match    ${o/u_value 5_id}    value    @{o/u_value}[10]
+    ##Check values of row 6
+    ${UpdateTime 6}=    Set Variable    ${UpdateTime}[4]
+    ${UpdateTime 6_file}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 6}    Add Time To Date    ${UpdateTime 6}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 6_id}    Set Variable    MatchTime-${UpdateTime 6}
+    Element Attribute Should Match    ${MatchTime 6_id}    value    KO
+    ${MatchScore 6_id}    Set Variable    MatchScore-${UpdateTime 6}
+    Element Attribute Should Match    ${MatchScore 6_id}    value    0 - 0
+    ${OverOdds 6_id}    ${UnderOdds 6_id}    ${o/u_value 6_id}    ${UpdateTime 6_id}=    Set Variable    OverOdds-${UpdateTime 6}    UnderOdds-${UpdateTime 6}
+    ...    OptionValue-${UpdateTime 6}    UpdateTime-${UpdateTime 6}
+    Element Attribute Should Match    ${OverOdds 6_id}    value    @{odds_value}[8]
+    Element Attribute Should Match    ${UnderOdds 6_id}    value    @{odds_value}[9]
+    Element Attribute Should Match    ${o/u_value 6_id}    value    @{o/u_value}[8]
+    ##Check values of row 7
+    ${UpdateTime 7}=    Set Variable    ${UpdateTime}[3]
+    ${UpdateTime 7_file}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 7}    Add Time To Date    ${UpdateTime 7}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 7_id}    Set Variable    MatchTime-${UpdateTime 7}
+    Element Attribute Should Match    ${MatchTime 7_id}    value    Live
+    ${OverOdds 7_id}    ${UnderOdds 7_id}    ${o/u_value 7_id}    ${UpdateTime 7_id}=    Set Variable    OverOdds-${UpdateTime 7}    UnderOdds-${UpdateTime 7}
+    ...    OptionValue-${UpdateTime 7}    UpdateTime-${UpdateTime 7}
+    Element Attribute Should Match    ${OverOdds 7_id}    value    @{odds_value}[6]
+    Element Attribute Should Match    ${UnderOdds 7_id}    value    @{odds_value}[7]
+    Element Attribute Should Match    ${o/u_value 7_id}    value    @{o/u_value}[6]
+    ##Check values of row 8
+    ${UpdateTime 8}=    Set Variable    ${UpdateTime}[2]
+    ${UpdateTime 8_file}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 8}    Add Time To Date    ${UpdateTime 8}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 8_id}    Set Variable    MatchTime-${UpdateTime 8}
+    Element Attribute Should Match    ${MatchTime 8_id}    value    Live
+    ${OverOdds 8_id}    ${UnderOdds 8_id}    ${o/u_value 8_id}    ${UpdateTime 8_id}=    Set Variable    OverOdds-${UpdateTime 8}    UnderOdds-${UpdateTime 8}
+    ...    OptionValue-${UpdateTime 8}    UpdateTime-${UpdateTime 8}
+    Element Attribute Should Match    ${OverOdds 8_id}    value    @{odds_value}[4]
+    Element Attribute Should Match    ${UnderOdds 8_id}    value    @{odds_value}[5]
+    Element Attribute Should Match    ${o/u_value 8_id}    value    @{o/u_value}[4]
+    ##Check values of row 9
+    ${UpdateTime 9}=    Set Variable    ${UpdateTime}[1]
+    ${UpdateTime 9_file}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 9}    Add Time To Date    ${UpdateTime 9}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 9_id}    Set Variable    MatchTime-${UpdateTime 9}
+    Element Attribute Should Match    ${MatchTime 9_id}    value    Live
+    ${OverOdds 9_id}    ${UnderOdds 9_id}    ${o/u_value 9_id}    ${UpdateTime 9_id}=    Set Variable    OverOdds-${UpdateTime 9}    UnderOdds-${UpdateTime 9}
+    ...    OptionValue-${UpdateTime 9}    UpdateTime-${UpdateTime 9}
+    Element Attribute Should Match    ${OverOdds 9_id}    value    @{odds_value}[2]
+    Element Attribute Should Match    ${UnderOdds 9_id}    value    @{odds_value}[3]
+    Element Attribute Should Match    ${o/u_value 9_id}    value    @{o/u_value}[2]
+    ##Check values of row 10
+    ${UpdateTime 10}=    Set Variable    ${UpdateTime}[0]
+    ${UpdateTime 10_file}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%d-%m %H:%M    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${UpdateTime 10}    Add Time To Date    ${UpdateTime 10}    7 hours    result_format=%Y-%d-%m %H:%M:%S    date_format=%Y-%m-%dT%H:%M:%S+00:00
+    ${MatchTime 10_id}    Set Variable    MatchTime-${UpdateTime 10}
+    Element Attribute Should Match    ${MatchTime 10_id}    value    Opening
+    ${OverOdds 10_id}    ${UnderOdds 10_id}    ${o/u_value 10_id}    ${UpdateTime 10_id}=    Set Variable    OverOdds-${UpdateTime 10}    UnderOdds-${UpdateTime 10}
+    ...    OptionValue-${UpdateTime 10}    UpdateTime-${UpdateTime 10}
+    Element Attribute Should Match    ${OverOdds 10_id}    value    @{opening_odds_value}[0]
+    Element Attribute Should Match    ${UnderOdds 10_id}    value    @{opening_odds_value}[1]
+    ${opening_o/u_value_app}=    Get Element Attribute    ${o/u_value 10_id}    value
+    Should Be Equal As Strings    '${opening_o/u_value_app}'    '${opening_o/u_value}'
+    Comment    Remove File    Template_Files/Run/Template_Odds_Movement_Of_Match1_Bettype_over_under.txt
 
 *** Keywords ***
