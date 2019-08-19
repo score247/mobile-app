@@ -121,9 +121,6 @@
   </ItemGroup>
   <ItemGroup>
 
-
-    <ProjectReference Include="..\Features\Score\Score.csproj" />
-
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
