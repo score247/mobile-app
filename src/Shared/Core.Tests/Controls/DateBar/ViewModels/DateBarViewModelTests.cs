@@ -48,7 +48,7 @@
         protected virtual void Dispose(bool disposing)
         {
             viewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>()?.Unsubscribe(OnSelectDateBarItem);
-            currentDateRange = null;
+            //currentDateRange = null;
         }
 
         private void OnSelectDateBarItem(DateRange dateRange)
@@ -67,12 +67,13 @@
 
             // Assert
             var expectedCalendarItems = new ObservableCollection<DateBarItem>(new List<DateBarItem> {
-                new DateBarItem { Date = DateTime.Today.AddDays(-2) },
-                new DateBarItem { Date = DateTime.Today.AddDays(-1) },
-                new DateBarItem { Date = DateTime.Today },
-                new DateBarItem { Date = DateTime.Today.AddDays(1) },
-                new DateBarItem { Date = DateTime.Today.AddDays(2) }
+                new DateBarItem (DateTime.Today.AddDays(-2) ),
+                new DateBarItem(DateTime.Today.AddDays(-1) ),
+                new DateBarItem(DateTime.Today ),
+                new DateBarItem(DateTime.Today.AddDays(1) ),
+                new DateBarItem(DateTime.Today.AddDays(2) )
             });
+
             Assert.True(comparer.Compare(expectedCalendarItems, viewModel.CalendarItems).AreEqual);
         }
 
@@ -99,8 +100,8 @@
             viewModel.SelectHomeCommand.Execute();
 
             // Assert
-            Assert.Equal(DateRange.FromYesterdayUntilNow().FromDate, currentDateRange.FromDate);
-            Assert.Equal(DateRange.FromYesterdayUntilNow().ToDate, currentDateRange.ToDate);
+            Assert.Equal(DateRange.FromYesterdayUntilNow().From, currentDateRange.From);
+            Assert.Equal(DateRange.FromYesterdayUntilNow().To, currentDateRange.To);
         }
 
         [Fact]
@@ -120,18 +121,18 @@
         public void SelectDateCommand_DifferentCurrentDate_FireDateBarItemSelectedEvent()
         {
             // Act
-            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Today });
+            viewModel.SelectDateCommand.Execute(new DateBarItem(DateTime.Today));
 
             // Assert
-            Assert.Equal(DateTime.Today, currentDateRange.FromDate);
-            Assert.Equal(DateTime.Today.EndOfDay(), currentDateRange.ToDate);
+            Assert.Equal(DateTime.Today, currentDateRange.From);
+            Assert.Equal(DateTime.Today.EndOfDay(), currentDateRange.To);
         }
 
         [Fact]
         public void SelectDateCommand_DifferentCurrentDate_HasExpectedSelectedItem()
         {
             // Act
-            viewModel.SelectDateCommand.Execute(new DateBarItem { Date = DateTime.Today });
+            viewModel.SelectDateCommand.Execute(new DateBarItem(DateTime.Today));
 
             // Assert
             Assert.Contains(viewModel.CalendarItems, item => item.IsSelected && item.Date == DateTime.Today);

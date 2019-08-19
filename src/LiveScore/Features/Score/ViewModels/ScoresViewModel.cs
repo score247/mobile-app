@@ -1,6 +1,6 @@
 ﻿using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Scores.Tests")]
+[assembly: InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
@@ -179,7 +179,7 @@ namespace LiveScore.Score.ViewModels
             }
 
             var matches = await matchService.GetMatches(
-                    dateRange ?? DateRange.FromYesterdayUntilNow(),
+                    dateRange,
                     SettingsService.Language,
                     forceFetchNewData);
 

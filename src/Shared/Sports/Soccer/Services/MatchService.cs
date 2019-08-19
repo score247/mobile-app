@@ -45,7 +45,7 @@
         {
             try
             {
-                var dataFromDate = await GetMatchesByDate(dateRange.FromDate, language, forceFetchNewData);
+                var dataFromDate = await GetMatchesByDate(dateRange.From, language, forceFetchNewData);
 
                 if (dateRange.IsOneDay)
                 {
@@ -53,7 +53,7 @@
                 }
                 else
                 {
-                    var dataToDate = await GetMatchesByDate(dateRange.ToDate, language, forceFetchNewData);
+                    var dataToDate = await GetMatchesByDate(dateRange.To, language, forceFetchNewData);
 
                     return dataFromDate.Concat(dataToDate);
                 }

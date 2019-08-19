@@ -33,7 +33,7 @@
 
         public bool HomeIsSelected { get; set; }
 
-        public ObservableCollection<DateBarItem> CalendarItems { get; private set; }
+        public IList<DateBarItem> CalendarItems { get; private set; }
 
         public DelegateCommand<DateBarItem> SelectDateCommand { get; }
 
@@ -54,7 +54,7 @@
 
             for (var i = -NumberOfDisplayDays; i <= NumberOfDisplayDays; i++)
             {
-                dateItems.Add(new DateBarItem { Date = DateTime.Today.AddDays(i) });
+                dateItems.Add(new DateBarItem(DateTime.Today.AddDays(i)));
             }
 
             CalendarItems = new ObservableCollection<DateBarItem>(dateItems);
@@ -67,7 +67,9 @@
                 currentDateBarItem = dateBarItem;
                 HomeIsSelected = false;
                 ReloadCalendarItems(dateBarItem);
-                EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndOfDay()));
+                EventAggregator
+                    .GetEvent<DateBarItemSelectedEvent>()
+                    .Publish(new DateRange(dateBarItem.Date, dateBarItem.Date.EndOfDay()));
             }
         }
 
@@ -94,7 +96,7 @@
                         && dateBarItem.Date.Year == item.Date.Year;
             }
 
-            CalendarItems = new ObservableCollection<DateBarItem>(calendarItems);
+            CalendarItems = new List<DateBarItem>(calendarItems);
         }
     }
 }

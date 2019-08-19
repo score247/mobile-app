@@ -19,7 +19,7 @@
             var actual = DateRange.FromYesterdayUntilNow();
 
             // Assert
-            Assert.Equal(expected, $"{actual.FromDate.ToString()} - {actual.ToDate.ToString()}");
+            Assert.Equal(expected, $"{actual.From.ToString()} - {actual.To.ToString()}");
         }
 
         [Fact]
@@ -32,7 +32,7 @@
             var dateRange = new DateRange(dateTime);
 
             // Assset
-            Assert.Equal(dateRange.FromDate, dateTime.BeginningOfDay());
+            Assert.Equal(dateRange.From, dateTime.BeginningOfDay());
         }
 
         [Fact]
@@ -45,7 +45,7 @@
             var dateRange = new DateRange(dateTime);
 
             // Assset
-            Assert.Equal(dateRange.ToDate, dateTime.EndOfDay());
+            Assert.Equal(dateRange.To, dateTime.EndOfDay());
         }
 
     }

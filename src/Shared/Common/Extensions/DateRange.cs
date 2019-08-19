@@ -2,39 +2,38 @@
 {
     using System;
 
-    public class DateRange
+    public struct DateRange : IEquatable<DateRange>
     {
-        public DateRange()
-            : this(DateTime.Today)
-        {
-        }
-
         public DateRange(DateTime datetime)
         {
-            FromDate = datetime.BeginningOfDay();
-            ToDate = datetime.EndOfDay();
+            From = datetime.BeginningOfDay();
+            To = datetime.EndOfDay();
         }
 
         public DateRange(DateTime fromDate, DateTime toDate)
         {
-            FromDate = fromDate.BeginningOfDay();
-            ToDate = toDate.EndOfDay();
+            From = fromDate.BeginningOfDay();
+            To = toDate.EndOfDay();
         }
 
-        public DateTime FromDate { get; }
+        public DateTime From { get; }
 
-        public DateTime ToDate { get; }
+        public DateTime To { get; }
 
-        public string FromDateString => FromDate.ToApiFormat();
+        public string FromDateString => From.ToApiFormat();
 
-        public string ToDateString => ToDate.ToApiFormat();
+        public string ToDateString => To.ToApiFormat();
 
-        public bool IsOneDay => FromDate.Day == ToDate.Day;
+        public bool IsOneDay => Days == 1;
+
+        public int Days => (From - To).Days + 1;
 
         public static DateRange FromYesterdayUntilNow()
             => new DateRange(DateTime.Today.AddDays(-1).BeginningOfDay(), DateTime.Today.EndOfDay());
 
-        public override string ToString() => $"{FromDateString}-{ToDateString}";
+        public bool Equals(DateRange other)
+            => other.From.Date == From.Date && other.To.Date == To.Date;
 
+        public override string ToString() => $"{FromDateString}-{ToDateString}";
     }
 }
