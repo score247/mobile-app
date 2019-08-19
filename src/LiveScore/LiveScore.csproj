@@ -80,15 +80,14 @@
     <Compile Update="Features\News\Views\NewsView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-<<<<<<< HEAD
+
     <Compile Update="Features\Score\Views\LiveView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Update="Features\Score\Views\ScoresView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-=======
->>>>>>> 117855-PerformanceEnhancement
+
     <Compile Update="Features\TVSchedule\ViewResources\TVScheduleViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -121,10 +120,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
+
+
     <ProjectReference Include="..\Features\Score\Score.csproj" />
->>>>>>> 117855-PerformanceEnhancement
+
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
@@ -162,10 +161,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-<<<<<<< HEAD
-=======
+
   <ItemGroup>
     <Folder Include="Features\Score\" />
   </ItemGroup>
->>>>>>> 117855-PerformanceEnhancement
+
 </Project>
