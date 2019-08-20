@@ -26,6 +26,7 @@
       <Compile Remove="Models\Odds\OddsChangedMessage.cs" />
     </ItemGroup>
     <ItemGroup>
+        <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -34,7 +35,7 @@
         <PackageReference Include="Refit" Version="4.7.9" />
         <PackageReference Include="Prism.Forms" Version="7.1.0.431" />
         <PackageReference Include="Polly" Version="7.1.0" />
-        <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+        <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
     </ItemGroup>
     <ItemGroup>
         <Folder Include="ViewResources\" />

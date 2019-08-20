@@ -4,6 +4,7 @@
     using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Akavache;
+    using MethodTimer;
 
     public enum CacheDuration
     {
@@ -48,6 +49,7 @@
         private readonly IBlobCache userAccountCache;
         private readonly IBlobCache inMemoryCache;
 
+        [Time]
         public CachingService(IEssential essential, IBlobCache localMachine = null, IBlobCache userAccount = null, IBlobCache inMemory = null)
         {
             if (essential ==  null)
@@ -62,12 +64,14 @@
             inMemoryCache = inMemory ?? BlobCache.InMemory;
         }
 
+        [Time]
         public async Task<T> GetOrFetchValue<T>(
             string key,
             Func<Task<T>> fetchFunc,
             DateTimeOffset? absoluteExpiration = null)
             => await localMachineCache.GetOrFetchObject(key, fetchFunc, absoluteExpiration);
 
+        [Time]
         public async Task<T> GetAndFetchLatestValue<T>(
             string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null,
             DateTimeOffset? absoluteExpiration = null)

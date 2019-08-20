@@ -12,6 +12,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Refit;
@@ -41,11 +42,12 @@
             this.cacheService = cacheService;
         }
 
+        [Time]
         public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             try
             {
-                var dataFromDate = await GetMatchesByDate(dateRange.FromDate, language, forceFetchNewData);
+                var dataFromDate = await GetMatchesByDate(dateRange.From, language, forceFetchNewData);
 
                 if (dateRange.IsOneDay)
                 {
@@ -53,7 +55,7 @@
                 }
                 else
                 {
-                    var dataToDate = await GetMatchesByDate(dateRange.ToDate, language, forceFetchNewData);
+                    var dataToDate = await GetMatchesByDate(dateRange.To, language, forceFetchNewData);
 
                     return dataFromDate.Concat(dataToDate);
                 }
@@ -66,23 +68,31 @@
             }
         }
 
+        [Time]
         private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
             {
-                var cacheDuration = dateTime.Date != DateTime.Today
-                   ? (int)CacheDuration.Long
-                   : (int)CacheDuration.Short;
-
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (dateTime.Date == DateTime.Today
+                    || dateTime.Date == DateTimeExtension.Yesterday().Date)
+                {
+                    return await cacheService.GetAndFetchLatestValue(
+                      cacheKey,
+                      () => GetMatchesFromApi(
+                          dateTime.BeginningOfDay().ToApiFormat(),
+                          dateTime.EndOfDay().ToApiFormat(),
+                          language.DisplayName),
+                      cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
+                }
+
+                return await cacheService.GetOrFetchValue(
                        cacheKey,
                        () => GetMatchesFromApi(
-                           dateTime.BeginningOfDay().ToApiFormat(), 
-                           dateTime.EndOfDay().ToApiFormat(), 
-                           language.DisplayName),
-                       cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
+                           dateTime.BeginningOfDay().ToApiFormat(),
+                           dateTime.EndOfDay().ToApiFormat(),
+                           language.DisplayName), DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -92,6 +102,7 @@
             }
         }
 
+        [Time]
         public async Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
@@ -113,6 +124,7 @@
             }
         }
 
+        [Time]
         public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
         {
             hubConnection.On<byte, string>(PushMatchEvent, (sportId, payload) =>
@@ -123,6 +135,7 @@
             });
         }
 
+        [Time]
         public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
         {
             hubConnection.On<byte, string, bool, string>(PushTeamStatistic, (sportId, matchId, isHome, payload) =>
@@ -133,12 +146,14 @@
             });
         }
 
+        [Time]
         private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => await apiService.Execute
             (
                 () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)
             );
 
+        [Time]
         private async Task<Match> GetMatchFromApi(string matchId, string language)
            => await apiService.Execute
            (

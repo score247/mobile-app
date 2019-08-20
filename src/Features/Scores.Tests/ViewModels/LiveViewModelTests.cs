@@ -6,11 +6,8 @@ namespace Scores.Tests.ViewModels
 
     public class LiveViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
-        private readonly LiveViewModel viewModel;
-
         public LiveViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            viewModel = new LiveViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 
         [Fact]

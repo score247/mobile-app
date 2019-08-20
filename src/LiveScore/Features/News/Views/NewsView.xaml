@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="LiveScore.News.Views.NewsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:resources="clr-namespace:LiveScore.News.ViewResources"
+    x:Name="self"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:NewsViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <FlexLayout Style="{StaticResource NavTabs}">
+            <StackLayout Style="{StaticResource Tab}">
+                <Label
+                    x:Name="Favorites"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Favorites}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label
+                    x:Name="WorldNews"
+                    Style="{StaticResource TabActiveText}"
+                    Text="{langs:Translate WorldNews}" />
+                <ContentView>
+                    <BoxView Style="{StaticResource TabActiveLine}" />
+                </ContentView>
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label
+                    x:Name="Transfers"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Transfers}" />
+            </StackLayout>
+            <StackLayout Style="{StaticResource Tab}">
+                <Label
+                    x:Name="Videos"
+                    Style="{StaticResource TabText}"
+                    Text="{langs:Translate Videos}" />
+            </StackLayout>
+        </FlexLayout>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFit" Source="images/news/news_1.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Luis Enrique casts doubt over Isco's Spain place" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFit" Source="images/news/news_2.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_2.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Carvaja wishes Morata well at Atletico" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_1.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="United States 3 Panama 0: Berhalter enjoys winning debut" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_4.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Vinicius happy with Real Madrid role" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+
+                <StackLayout Style="{StaticResource NewsBlock}">
+                    <StackLayout Style="{StaticResource NewsImage}">
+                        <Image Aspect="AspectFill" Source="images/news/news_5.png" />
+                    </StackLayout>
+                    <AbsoluteLayout Style="{StaticResource NewsContent}">
+                        <Label Style="{StaticResource NewsTitle}" Text="Alba : United and Juve? My dream is to retire at Barca" />
+                        <Label Style="{StaticResource NewsDate}" Text="28 Jan 2019, 15:04" />
+                    </AbsoluteLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </StackLayout>
+</ContentPage>

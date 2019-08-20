@@ -17,6 +17,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Prism.Navigation;
@@ -107,6 +108,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
+        [Time]
         protected override async void Initialize()
         {
             try
@@ -147,6 +149,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
         }
 
+        [Time]
         private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
         {
             if (CanLoadOdds(betType, isRefresh))
@@ -175,6 +178,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private bool CanLoadOdds(BetType betType, bool isRefresh)
             => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
 
+        [Time]
         private async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
             //support only for 1X2 bet type at the moment

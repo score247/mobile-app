@@ -34,9 +34,7 @@
             return value;
         }
 
-        private static bool IsToday(DateBarItem calendarDate)
-        {
-            return calendarDate.Date.Day == DateTime.Today.Day && calendarDate.Date.Month == DateTime.Today.Month && calendarDate.Date.Year == DateTime.Today.Year;
-        }
+        private static bool IsToday(DateBarItem dateBarItem) 
+            => dateBarItem.Date.Date == DateTime.Now.Date;
     }
 }

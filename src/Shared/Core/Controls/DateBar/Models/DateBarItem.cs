@@ -2,10 +2,23 @@
 {
     using System;
 
-    public class DateBarItem
+    public class DateBarItem : IEquatable<DateBarItem>
     {
-        public DateTime Date { get; set; }
+        public DateBarItem(DateTime date) : this(date, false)
+        {
+        }
+
+        public DateBarItem(DateTime date, bool isSelected) 
+        {
+            Date = date.Date;
+            IsSelected = isSelected;
+        }
+
+        public DateTime Date { get; }
 
         public bool IsSelected { get; set; }
+
+        public bool Equals(DateBarItem other)
+            => Date.Date == other.Date.Date;
     }
 }

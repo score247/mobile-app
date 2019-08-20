@@ -20,19 +20,83 @@
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Features\Score\ViewResources\**" />
+    <Compile Remove="Features\Score\Views\Templates\**" />
+    <EmbeddedResource Remove="Features\Score\ViewResources\**" />
+    <EmbeddedResource Remove="Features\Score\Views\Templates\**" />
+    <None Remove="Features\Score\ViewResources\**" />
+    <None Remove="Features\Score\Views\Templates\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
+    <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
-    <PackageReference Include="PropertyChanged.Fody" Version="2.6.1" />
+    <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
     <PackageReference Include="LiveXAML" Version="2.1.72" />
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.539721" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Features\Favorites\Views\EmptyFavoriteView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Features\Favorites\Views\FavoriteView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Features\League\Views\LeagueDetailView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\League\Views\LeagueView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Menu\Views\DefaultLanguageView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Menu\Views\DefaultSportView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Menu\Views\FAQView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Menu\Views\InfoAlertView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Menu\Views\RefreshView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\News\ViewResources\NewsViewResource.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\News\Views\EmptyNewsView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\News\Views\NewsView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+
+    <Compile Update="Features\Score\Views\LiveView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\Score\Views\ScoresView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+
+    <Compile Update="Features\TVSchedule\ViewResources\TVScheduleViewResource.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\TVSchedule\Views\EmptyTVScheduleView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Features\TVSchedule\Views\TVScheduleView.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MainViewResource.xaml.cs">
       <DependentUpon>MainViewResource.xaml</DependentUpon>
     </Compile>
@@ -56,15 +120,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Features\Favorites\Favorites.csproj" />
-    <ProjectReference Include="..\Features\League\League.csproj" />
+
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
-    <ProjectReference Include="..\Features\News\News.csproj" />
-    <ProjectReference Include="..\Features\Score\Score.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
-    <ProjectReference Include="..\Features\TVSchedule\TVSchedule.csproj" />
-    <ProjectReference Include="..\Features\Menu\Menu.csproj" />
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">
@@ -89,4 +148,15 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Features\Favorites\Views\EmptyFavoriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Features\Favorites\Views\FavoriteView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>
