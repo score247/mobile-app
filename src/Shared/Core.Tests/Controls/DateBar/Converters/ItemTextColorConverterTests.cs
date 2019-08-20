@@ -36,7 +36,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         {
             // Arrange
             var unitUnderTest = CreateItemTextColorConverter();
-            var value = new DateBarItem { IsSelected = true };
+            var value = new DateBarItem(DateTime.Today, true);
 
             // Act
             var result = unitUnderTest.Convert(
@@ -54,7 +54,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         {
             // Arrange
             var unitUnderTest = CreateItemTextColorConverter();
-            var value = new DateBarItem { Date = DateTime.Now };
+            var value = new DateBarItem(DateTime.Today);
 
             // Act
             var result = unitUnderTest.Convert(
@@ -72,7 +72,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
         {
             // Arrange
             var unitUnderTest = CreateItemTextColorConverter();
-            var value = new DateBarItem { Date = DateTime.Today.AddDays(1) };
+            var value = new DateBarItem(DateTime.Today.AddDays(1));
 
             // Act
             var result = unitUnderTest.Convert(
@@ -93,7 +93,7 @@ namespace LiveScore.Core.Tests.Controls.DateBar.Converters
 
             // Act
             var result = unitUnderTest.ConvertBack(
-                new DateBarItem { IsSelected = true },
+                new DateBarItem(DateTime.Today, true),
                 null,
                 null,
                 null

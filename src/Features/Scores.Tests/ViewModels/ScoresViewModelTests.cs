@@ -112,7 +112,7 @@ namespace Scores.Tests.ViewModels
         {
             // Arrange
             matchService.GetMatches(
-                Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+                Arg.Is<DateRange>(dr => dr.From == DateTime.Today.AddDays(-1) && dr.To == DateTime.Today.EndOfDay()),
                 Language.English,
                 false).Returns(matchData);
 
@@ -147,7 +147,7 @@ namespace Scores.Tests.ViewModels
         {
             // Arrange
             matchService.GetMatches(
-                  Arg.Is<DateRange>(dr => dr.FromDate == DateTime.Today.AddDays(-1) && dr.ToDate == DateTime.Today.EndOfDay()),
+                  Arg.Is<DateRange>(dr => dr.From == DateTime.Today.AddDays(-1) && dr.To == DateTime.Today.EndOfDay()),
                   Language.English,
                   false).Returns(matchData);
             viewModel.OnAppearing();

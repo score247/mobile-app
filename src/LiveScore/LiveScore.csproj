@@ -159,8 +159,4 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Score\" />
-  </ItemGroup>
-
 </Project>

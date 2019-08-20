@@ -5,6 +5,7 @@ namespace Scores.Tests
     using LiveScore.Score.Views;
     using NSubstitute;
     using Prism.Ioc;
+
     using Xunit;
 
     public class ScoreModuleTests
