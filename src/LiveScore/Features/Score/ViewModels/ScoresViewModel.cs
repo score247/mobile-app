@@ -60,7 +60,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<dynamic, MatchViewModel>> MatchItemsSource { get; private set; }
+        public IList<IGrouping<dynamic, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateCommand RefreshCommand { get; }
 
@@ -187,7 +187,7 @@ namespace LiveScore.Score.ViewModels
         }
 
         [Time]
-        private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
+        private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
                     match => new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId));

@@ -20,6 +20,7 @@ using LiveScore.Soccer;
 using LiveScore.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
 using Plugin.Multilingual;
@@ -47,12 +48,19 @@ namespace LiveScore
         {
         }
 
+
+        [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
         }
 
+        [Time]
+
         protected override async void OnInitialized()
         {
+
+            Debug.WriteLine($"OnInitialized: {DateTime.Now.ToString("HH:mm:ss:ffff")}");
+
             Registrations.Start("Score247.App");
 
             JsonConvert.DefaultSettings = () =>

@@ -12,6 +12,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Models.Teams;
+    using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Refit;
@@ -41,6 +42,7 @@
             this.cacheService = cacheService;
         }
 
+        [Time]
         public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             try
@@ -66,6 +68,7 @@
             }
         }
 
+        [Time]
         private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
@@ -92,6 +95,7 @@
             }
         }
 
+        [Time]
         public async Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
@@ -113,6 +117,7 @@
             }
         }
 
+        [Time]
         public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
         {
             hubConnection.On<byte, string>(PushMatchEvent, (sportId, payload) =>
@@ -123,6 +128,7 @@
             });
         }
 
+        [Time]
         public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
         {
             hubConnection.On<byte, string, bool, string>(PushTeamStatistic, (sportId, matchId, isHome, payload) =>
@@ -133,12 +139,14 @@
             });
         }
 
+        [Time]
         private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => await apiService.Execute
             (
                 () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)
             );
 
+        [Time]
         private async Task<Match> GetMatchFromApi(string matchId, string language)
            => await apiService.Execute
            (
