@@ -6,8 +6,8 @@
 
     public static class DateTimeExtension
     {
-        public static string ToApiFormat(this DateTime value)
-            => value.ToString("yyyy-MM-ddTHH:mm:sszzz");
+        public static string ToApiFormat(this DateTime dateTime)
+            => dateTime.ToString("yyyy-MM-ddTHH:mm:sszzz");
 
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 

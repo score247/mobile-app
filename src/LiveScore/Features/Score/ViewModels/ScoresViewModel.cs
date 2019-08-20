@@ -154,14 +154,12 @@ namespace LiveScore.Score.ViewModels
             });
         }
 
-        [Time]
         private void OnClickSearchCommandExecuted()
         {
             Device.BeginInvokeOnMainThread(async () =>
                 await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true));
         }
 
-        [Time]
         private void OnDateBarItemSelected(DateRange dateRange)
             => Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
 

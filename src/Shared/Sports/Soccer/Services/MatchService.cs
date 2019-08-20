@@ -73,19 +73,26 @@
         {
             try
             {
-                var cacheDuration = dateTime.Date != DateTime.Today
-                   ? (int)CacheDuration.Long
-                   : (int)CacheDuration.Short;
-
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (dateTime.Date == DateTime.Today
+                    || dateTime.Date == DateTimeExtension.Yesterday().Date)
+                {
+                    return await cacheService.GetAndFetchLatestValue(
+                      cacheKey,
+                      () => GetMatchesFromApi(
+                          dateTime.BeginningOfDay().ToApiFormat(),
+                          dateTime.EndOfDay().ToApiFormat(),
+                          language.DisplayName),
+                      cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
+                }
+
+                return await cacheService.GetOrFetchValue(
                        cacheKey,
                        () => GetMatchesFromApi(
-                           dateTime.BeginningOfDay().ToApiFormat(), 
-                           dateTime.EndOfDay().ToApiFormat(), 
-                           language.DisplayName),
-                       cacheService.GetFetchPredicate(forceFetchNewData, cacheDuration));
+                           dateTime.BeginningOfDay().ToApiFormat(),
+                           dateTime.EndOfDay().ToApiFormat(),
+                           language.DisplayName), DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
