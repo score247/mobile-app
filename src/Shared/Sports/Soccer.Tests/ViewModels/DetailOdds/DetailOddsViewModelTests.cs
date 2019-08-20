@@ -1,5 +1,6 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
@@ -20,28 +21,30 @@
 
     public class DetailOddsViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
+        private const string matchId = "sr:match:1";
+
         private readonly DetailOddsViewModel viewModel;
         private readonly IOddsService oddsService;
         private readonly CompareLogic comparer;
-        private readonly ILoggingService loggingService;
-        private readonly IDependencyResolver dependencyResolver;
+        private readonly ILoggingService mockLogService;
         private readonly INavigationService navigationService;
-        private const string matchId = "sr:match:1";
+        private readonly IDependencyResolver dependencyResolver;
 
         public DetailOddsViewModelTests(ViewModelBaseFixture baseFixture)
         {
             comparer = baseFixture.CommonFixture.Comparer;
-            loggingService = Substitute.For<ILoggingService>();
+            mockLogService = Substitute.For<ILoggingService>();
             oddsService = Substitute.For<IOddsService>();
 
-            baseFixture.DependencyResolver.Resolve<IOddsService>("1").Returns(oddsService);
-            baseFixture.DependencyResolver.Resolve<ILoggingService>("1").Returns(loggingService);
             navigationService = baseFixture.NavigationService;
             dependencyResolver = baseFixture.DependencyResolver;
 
+            baseFixture.DependencyResolver.Resolve<IOddsService>("1").Returns(oddsService);
+            baseFixture.DependencyResolver.Resolve<ILoggingService>().Returns(mockLogService);
+
             viewModel = new DetailOddsViewModel(
                 matchId,
-                baseFixture.NavigationService,
+                navigationService,
                 baseFixture.DependencyResolver,
                 null);
 
@@ -55,13 +58,14 @@
                 MatchId = matchId,
                 BetTypeOddsList = new List<BetTypeOdds>
                 {
-                    CreateBetTypeOdds()
+                    CreateBetTypeOdds((int)BetType.AsianHDP)
                 }
             };
 
-        private BetTypeOdds CreateBetTypeOdds() => new BetTypeOdds
+        private BetTypeOdds CreateBetTypeOdds(int betTypeId) => new BetTypeOdds
         {
-            Bookmaker = new Bookmaker { Id = "sr:book:1", Name = "Bet188Com" },
+            Id = betTypeId,
+            Bookmaker = new Bookmaker { Id = "sr:book:1", Name = "Bet188Com" },            
             BetOptions = new List<BetOptionOdds>
             {
                 new BetOptionOdds{ Type = "home", LiveOdds = 5.0m, OpeningOdds = 4.9m, OddsTrend = OddsTrend.Up },
@@ -69,27 +73,6 @@
                 new BetOptionOdds{ Type = "away", LiveOdds = 2.5m, OpeningOdds = 2.8m, OddsTrend = OddsTrend.Down }
             }
         };
-
-        [Fact]
-        public void OnAppearing_Always_LoadOdds()
-        {
-            // Arrange
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
-            var expectedViewModels = new ObservableCollection<BaseItemViewModel>
-            {
-                new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            Assert.True(viewModel.HasData);
-            Assert.True(viewModel.IsNotLoading);
-            Assert.False(viewModel.IsRefreshing);
-            Assert.False(viewModel.IsLoading);
-            Assert.True(comparer.Compare(expectedViewModels, viewModel.BetTypeOddsItems).AreEqual);
-        }
 
         [Fact]
         public void OnAppearing_NoData()
@@ -104,6 +87,27 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
+        }
+
+        [Fact]
+        public void OnAppearing_Always_LoadOdds()
+        {
+            // Arrange
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+            var expectedViewModels = new ObservableCollection<BaseItemViewModel>
+            {
+                new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds((int)BetType.AsianHDP), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+            };
+
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            Assert.True(viewModel.HasData);
+            Assert.True(viewModel.IsNotLoading);
+            Assert.False(viewModel.IsRefreshing);
+            Assert.False(viewModel.IsLoading);
+            Assert.True(comparer.Compare(expectedViewModels, viewModel.BetTypeOddsItems).AreEqual);
         }
 
         [Fact]
@@ -164,7 +168,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.OneXTwo,
-                CreateBetTypeOdds(),
+                CreateBetTypeOdds((int)BetType.OneXTwo),
                 navigationService,
                 dependencyResolver);
 
@@ -175,5 +179,125 @@
             var navService = viewModel.NavigationService as FakeNavigationService;
             Assert.Equal("OddsMovementView" + viewModel.SettingsService.CurrentSportType.Value, navService.NavigationPath);
         }
+
+        [Fact]
+        public async Task TappedOddsItemCommand_NavigatedFailed_LogException()
+        {
+            // Arrange
+            var mockNavigationService = Substitute.For<INavigationService>();
+            mockNavigationService.NavigateAsync(Arg.Any<string>(), Arg.Any<INavigationParameters>())
+                .Returns(new NavigationResult { Success = false, Exception = new InvalidOperationException("Cannot navigated") });
+
+            var oddsViewModel = new DetailOddsViewModel(
+                matchId,
+                mockNavigationService,
+                dependencyResolver,
+                null);
+
+            var parameters = new NavigationParameters { { "MatchId", matchId } };
+            oddsViewModel.OnNavigatingTo(parameters);
+
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+
+            var oddsItemViewModel = new BaseItemViewModel(
+                BetType.AsianHDP,
+                CreateBetTypeOdds((int)BetType.AsianHDP),
+                navigationService,
+                dependencyResolver);
+
+            // Act
+            await oddsViewModel.TappedOddsItemCommand.ExecuteAsync(oddsItemViewModel);
+
+            // Assert
+            await mockLogService.Received(1).LogErrorAsync(Arg.Any<InvalidOperationException>());
+        }
+
+        [Fact]
+        public async Task DeserializeComparisonMessage_Null_LogException()
+        {
+            // Act
+            await viewModel.DeserializeComparisonMessage(null);
+
+            // Assert
+            await mockLogService.Received(1).LogErrorAsync(Arg.Any<string>(), Arg.Any<Exception>());
+        }
+
+        [Fact]
+        public async Task DeserializeComparisonMessage_NotNull_NotLogException()
+        {
+            // Act
+            await viewModel.DeserializeComparisonMessage("");
+
+            // Assert
+            await mockLogService.DidNotReceive().LogErrorAsync(Arg.Any<string>(), Arg.Any<Exception>());
+        }
+
+        [Fact]
+        public async Task HandleOddsComparisonMessage_NotCurentMatch_NotLoadOdds()
+        {
+            // Arrange 
+            var oddsComparison = new MatchOddsComparisonMessage
+            {
+                MatchId = "sr:match:2",
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int) BetType.AsianHDP) }
+            };
+
+            // Act
+            await viewModel.HandleOddsComparisonMessage(oddsComparison);
+
+            // Assert
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+        }
+
+        [Fact]
+        public async Task HandleOddsComparisonMessage_BetTypeOddsListIsNull_NotLoadOdds()
+        {
+            // Arrange 
+            var oddsComparison = new MatchOddsComparisonMessage
+            {
+                MatchId = matchId,
+                BetTypeOddsList = null
+            };
+
+            // Act
+            await viewModel.HandleOddsComparisonMessage(oddsComparison);
+
+            // Assert
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+        }
+
+        [Fact]
+        public async Task HandleOddsComparisonMessage_NotSelectedBetType_NotLoadOdds()
+        {
+            // Arrange 
+            var oddsComparison = new MatchOddsComparisonMessage
+            {
+                MatchId = matchId,
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.OneXTwo) }
+            };
+
+            // Act
+            await viewModel.HandleOddsComparisonMessage(oddsComparison);
+
+            // Assert
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+        }
+
+        //[Fact]
+        //public async Task HandleOddsComparisonMessage_LoadOdds_AddNew()
+        //{
+        //    // Arrange 
+        //    var oddsComparison = new MatchOddsComparisonMessage
+        //    {
+        //        MatchId = matchId,
+        //        BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.AsianHDP) }
+        //    };
+
+        //    // Act
+        //    await viewModel.HandleOddsComparisonMessage(oddsComparison);
+
+        //    // Assert
+        //    await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+        //}
     }
 }

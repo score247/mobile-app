@@ -13,6 +13,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Models.Odds;
@@ -117,7 +118,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
                 hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
                 {
-                    var oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(data);
+                    var oddsComparisonMessage = await DeserializeComparisonMessage(data);
+
+                    if (oddsComparisonMessage == null)
+                    {
+                        return;
+                    }
 
                     await HandleOddsComparisonMessage(oddsComparisonMessage);
                 }));
@@ -178,15 +184,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private bool CanLoadOdds(BetType betType, bool isRefresh)
             => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
 
-        [Time]
-        private async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
+        internal async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
-            //support only for 1X2 bet type at the moment
-            if (SelectedBetType != BetType.OneXTwo)
-            {
-                return;
-            }
-
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
                 oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == (int)SelectedBetType))
@@ -194,22 +193,19 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 var needToReOrder = false;
                 var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == (int)SelectedBetType);
 
-                var updatedOddsViewModels = new ObservableCollection<BaseItemViewModel>(updatedBetTypeOdds.Select(t =>
-                   new BaseItemViewModel(SelectedBetType, t, NavigationService, DependencyResolver)
-                   .CreateInstance()));
-
-                foreach (var updatedOdds in updatedOddsViewModels)
+                foreach (var updatedOdds in updatedBetTypeOdds)
                 {
                     var existingOddsItem = BetTypeOddsItems.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
 
                     if (existingOddsItem == null)
-                    {
-                        needToReOrder = true;
+                    {                       
                         AddBookmakerOdds(updatedOdds);
+
+                        needToReOrder = true;
                     }
                     else
                     {
-                        existingOddsItem.UpdateOdds(updatedOdds.BetTypeOdds);
+                        existingOddsItem.UpdateOdds(updatedOdds);
                     }
                 }
 
@@ -222,14 +218,32 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        private void AddBookmakerOdds(BaseItemViewModel updatedOdds)
+        internal async Task<MatchOddsComparisonMessage> DeserializeComparisonMessage(string message)
         {
+            MatchOddsComparisonMessage oddsComparisonMessage = null;
+
+            try
+            {
+                oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(message);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsComparisonMessage", ex);
+            }
+
+            return oddsComparisonMessage;
+        }
+
+        private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
+        {
+            var newOddsItemViewModel = new BaseItemViewModel(SelectedBetType, updatedOdds, NavigationService, DependencyResolver).CreateInstance();
+
             if (!BetTypeOddsItems.Any())
             {
                 HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, true, NavigationService, DependencyResolver).CreateTemplate();
             }
 
-            BetTypeOddsItems.Add(updatedOdds);
+            BetTypeOddsItems.Add(newOddsItemViewModel);
         }
 
         protected virtual void Dispose(bool disposing)
