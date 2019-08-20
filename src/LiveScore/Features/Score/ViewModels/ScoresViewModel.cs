@@ -43,7 +43,7 @@ namespace LiveScore.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            
+            Profiler.Start(this.GetType().Name + ".LoadMatches.Home");
 
             SelectedDate = DateTime.Today;
 
@@ -186,9 +186,10 @@ namespace LiveScore.Score.ViewModels
             IsRefreshing = false;
 
             Debug.WriteLine($"{this.GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
+            Profiler.Stop(this.GetType().Name + ".LoadMatches.Home");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
-            
+
         }
 
         private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
