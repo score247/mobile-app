@@ -94,7 +94,7 @@
 
             foreach (var item in CalendarItems)
             {
-                item.IsSelected = dateBarItem != null && item == dateBarItem;
+                item.IsSelected = dateBarItem != null && item.Equals(dateBarItem);
             }
 
             CalendarItems = new List<DateBarItem>(calendarItems);

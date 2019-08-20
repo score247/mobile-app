@@ -66,10 +66,10 @@
             viewModel.RenderCalendarItems();
 
             // Assert
-            var expectedCalendarItems = new ObservableCollection<DateBarItem>(new List<DateBarItem> {
+            var expectedCalendarItems = new List<DateBarItem>(new List<DateBarItem> {
                 new DateBarItem (DateTime.Today.AddDays(-2) ),
                 new DateBarItem(DateTime.Today.AddDays(-1) ),
-                new DateBarItem(DateTime.Today ),
+                new DateBarItem(DateTime.Today),
                 new DateBarItem(DateTime.Today.AddDays(1) ),
                 new DateBarItem(DateTime.Today.AddDays(2) )
             });
