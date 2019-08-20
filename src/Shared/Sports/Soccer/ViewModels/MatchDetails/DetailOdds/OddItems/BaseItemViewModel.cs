@@ -41,7 +41,7 @@
 
         public string Bookmaker { get; }
 
-        public IBetTypeOdds BetTypeOdds { get; }
+        public IBetTypeOdds BetTypeOdds { get; protected set; }
 
         public BetType BetType { get; }
 
@@ -71,7 +71,9 @@
 
         public virtual void UpdateOdds(IBetTypeOdds betTypeOdds)
         {
-            throw new NotImplementedException();
+            BetTypeOdds = betTypeOdds;
+
+            Initialize();
         }
     }
 }

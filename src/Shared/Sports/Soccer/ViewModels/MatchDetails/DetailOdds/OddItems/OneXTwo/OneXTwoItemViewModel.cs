@@ -9,15 +9,13 @@
 
     public class OneXTwoItemViewModel : BaseItemViewModel
     {
-        private IBetTypeOdds betTypeOdds;
-
         public OneXTwoItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.OneXTwo, betTypeOdds, navigationService, depdendencyResolver)
         {
-            this.betTypeOdds = betTypeOdds;
+            BetTypeOdds = betTypeOdds;
 
             Initialize();
         }
@@ -85,13 +83,6 @@
             }
         }
 
-        private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
-
-        public override void UpdateOdds(IBetTypeOdds betTypeOdds)
-        {
-            this.betTypeOdds = betTypeOdds;
-
-            Initialize();
-        }
+        private BetOptionOdds GetOddsInfo(string option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }

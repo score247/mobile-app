@@ -9,15 +9,13 @@
 
     public class OverUnderItemViewModel : BaseItemViewModel
     {
-        private readonly IBetTypeOdds betTypeOdds;
-
         public OverUnderItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.OverUnder, betTypeOdds, navigationService, depdendencyResolver)
         {
-            this.betTypeOdds = betTypeOdds;
+            this.BetTypeOdds = betTypeOdds;
 
             Initialize();
         }
@@ -82,6 +80,6 @@
             }
         }
 
-        private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+        private BetOptionOdds GetOddsInfo(string option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }

@@ -8,16 +8,14 @@
     using Prism.Navigation;
 
     public class AsianHdpItemViewModel : BaseItemViewModel
-    {
-        private readonly IBetTypeOdds betTypeOdds;
-
+    {       
         public AsianHdpItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.AsianHDP, betTypeOdds, navigationService, depdendencyResolver)
         {
-            this.betTypeOdds = betTypeOdds;
+            BetTypeOdds = betTypeOdds;
 
             Initialize();
         }
@@ -82,6 +80,6 @@
             }
         }
 
-        private BetOptionOdds GetOddsInfo(string option) => betTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+        private BetOptionOdds GetOddsInfo(string option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }
