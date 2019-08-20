@@ -22,7 +22,8 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var apiPolicy = Substitute.For<IApiPolicy>();
-            var apiService = new ApiService(apiPolicy);
+            var settings = Substitute.For<ISettingsService>();
+            var apiService = new ApiService(apiPolicy, settings);
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act
@@ -37,7 +38,8 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var apiPolicy = Substitute.For<IApiPolicy>();
-            var apiService = new ApiService(apiPolicy);
+            var settings = Substitute.For<ISettingsService>();
+            var apiService = new ApiService(apiPolicy, settings);
             Task<MockModel> func() => Task.FromResult(new MockModel());
 
             // Act

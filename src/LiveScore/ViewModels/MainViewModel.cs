@@ -37,6 +37,7 @@ namespace LiveScore.ViewModels
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; } 
 
+        //TODO remove this command when ready to release
         public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toogle);
 
         private async Task Navigate(string page)
@@ -47,9 +48,25 @@ namespace LiveScore.ViewModels
         private async Task Toogle()
         {   
             await cachingService.InvalidateAll();
-
-            //TODO change settings api
+            
             settingsService.IsDemo = !settingsService.IsDemo;
+
+            if (settingsService.IsDemo)
+            {
+                settingsService.ApiEndpoint = "https://score247-api1.nexdev.net/test/api/";
+                settingsService.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs";
+            }
+            else
+            {
+#if DEBUG
+
+                settingsService.ApiEndpoint = "https://score247-api1.nexdev.net/dev/api/";
+                settingsService.HubEndpoint = "https://score247-api2.nexdev.net/dev/hubs/";
+#else
+                settingsService.ApiEndpoint = "https://score247-api1.nexdev.net/main/api/";
+                settingsService.HubEndpoint = "https://score247-api2.nexdev.net/main/hubs/";
+#endif
+            }
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }

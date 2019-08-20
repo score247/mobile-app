@@ -11,6 +11,10 @@
 
         string CurrentLanguage { get; set; }
 
+        string ApiEndpoint { get; set; }
+
+        string HubEndpoint { get; set; }
+
         Language Language { get; }
 
         SportType CurrentSportType { get; set; }
@@ -59,5 +63,9 @@
         public Language Language { get; }
 
         public bool IsDemo { get; set; }
+
+        public string ApiEndpoint { get; set; }
+
+        public string HubEndpoint { get; set; }
     }
 }

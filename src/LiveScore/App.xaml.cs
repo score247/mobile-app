@@ -71,6 +71,11 @@ namespace LiveScore
             var logService = Container.Resolve<ILoggingService>();
             logService.Init(Configuration.SentryDsn);
 
+            var settingsService = Container.Resolve<ISettingsService>();
+            settingsService.ApiEndpoint = Configuration.LocalEndPoint;
+            settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
+
+
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 

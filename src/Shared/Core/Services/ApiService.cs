@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using LiveScore.Common.Configuration;
     using Refit;
 
     public interface IApiService
@@ -15,13 +14,15 @@
     public class ApiService : IApiService
     {
         private readonly IApiPolicy apiPolicy;
+        private readonly ISettingsService settingsService;
 
-        public ApiService(IApiPolicy apiPolicy)
+        public ApiService(IApiPolicy apiPolicy, ISettingsService settingsService)
         {
             this.apiPolicy = apiPolicy;
+            this.settingsService = settingsService;
         }
 
-        public T GetApi<T>() => RestService.For<T>(Configuration.LocalEndPoint);
+        public T GetApi<T>() => RestService.For<T>(settingsService.ApiEndpoint);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }
