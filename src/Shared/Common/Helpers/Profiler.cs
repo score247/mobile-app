@@ -14,7 +14,7 @@
 
         public static void Start(string tag)
         {
-            Debug.WriteLine($"Starting Stopwatch {tag}");
+            Debug.WriteLine($"Profiler: Starting {tag}");
 
             var watch = watches[tag] = new Stopwatch();
 
@@ -25,7 +25,7 @@
         {
             if (watches.TryGetValue(tag, out Stopwatch watch))
             {
-                Debug.WriteLine($"Stopwatch {tag} took {watch.Elapsed}");
+                Debug.WriteLine($"Profiler: {tag} took {watch.Elapsed.TotalMilliseconds}ms");
             }
         }
     }
