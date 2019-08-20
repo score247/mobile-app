@@ -23,7 +23,7 @@
 
         public static void Stop(string tag)
         {
-            if (watches.TryGetValue(tag, out Stopwatch watch))
+            if (watches.TryRemove(tag, out Stopwatch watch))
             {
                 Debug.WriteLine($"Profiler: {tag} took {watch.Elapsed.TotalMilliseconds}ms");
             }
