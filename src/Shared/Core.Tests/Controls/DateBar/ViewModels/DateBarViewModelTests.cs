@@ -77,8 +77,6 @@
             Assert.True(comparer.Compare(expectedCalendarItems, viewModel.CalendarItems).AreEqual);
         }
 
-       
-
         [Fact]
         public void OnSelectHome_NotSelectingHome_FireDateBarItemSelectedEvent()
         {
@@ -124,7 +122,7 @@
             viewModel.SelectDateCommand.Execute(new DateBarItem(DateTime.Today));
 
             // Assert
-            Assert.Contains(viewModel.CalendarItems, item => item.IsSelected && item.Date == DateTime.Today);
+            Assert.Contains(viewModel.CalendarItems, item => item.IsSelected && item.Date.Equals(DateTime.Today));
         }
 
         [Fact]

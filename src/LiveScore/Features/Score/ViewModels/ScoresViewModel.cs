@@ -20,7 +20,7 @@ using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-[assembly: InternalsVisibleTo("Scores.Tests")]
+[assembly: InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
