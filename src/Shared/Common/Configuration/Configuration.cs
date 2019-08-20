@@ -9,14 +9,14 @@
 #elif TEST
         public static string LocalEndPoint => "https://score247-api1.nexdev.net/test/api/";
 
-        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/test/hubs";
+        public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/test/hubs/";
 #elif AUTOTEST
         public static string LocalEndPoint => "https://api.nexdev.net/V4/api/";
 
         public static string LocalHubEndPoint => "https://api.nexdev.net/V4/hubs/";
 #else
 
-		public static string LocalEndPoint => "https://score247-api1.nexdev.net/main/api/";
+        public static string LocalEndPoint => "https://score247-api1.nexdev.net/main/api/";
 
         public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
 

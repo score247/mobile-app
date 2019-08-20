@@ -51,7 +51,7 @@
             if (settingsService.IsDemo)
             {
                 settingsService.ApiEndpoint = "https://score247-api1.nexdev.net/test/api/";
-                settingsService.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs";
+                settingsService.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs/";
             }
             else
             {
