@@ -23,6 +23,8 @@ namespace LiveScore.Core.Tests.Services
             // Arrange
             var apiPolicy = Substitute.For<IApiPolicy>();
             var settings = Substitute.For<ISettingsService>();
+            settings.ApiEndpoint.Returns("https://score247-api1.nexdev.net/dev/api");
+
             var apiService = new ApiService(apiPolicy, settings);
             var mockApi = apiService.GetApi<IMockApi>();
 

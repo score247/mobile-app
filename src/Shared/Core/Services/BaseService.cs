@@ -16,11 +16,18 @@
 
         protected virtual void HandleException(Exception ex)
         {
-            var apiException = (ApiException)ex;
-            var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
+            var apiException = ex as ApiException;
 
-            loggingService.LogError(message, apiException);            
-            Debug.WriteLine(ex.Message);
+            if (apiException != null)
+            {               
+                var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
+
+                loggingService.LogError(message, apiException);
+            }
+            else
+            {
+                loggingService.LogError(ex);
+            }           
         }
     }
 }
