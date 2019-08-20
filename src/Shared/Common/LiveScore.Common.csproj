@@ -62,6 +62,9 @@
         <Folder Include="Converters\" />
         <Folder Include="Controls\Calendar\" />
         <Folder Include="Configuration\" />
+        <Folder Include="Helpers\">
+          <DependentUpon>Helpers</DependentUpon>
+        </Folder>
     </ItemGroup>
     <ItemGroup>
       <Compile Update="LangResources\AppResources.Designer.cs">

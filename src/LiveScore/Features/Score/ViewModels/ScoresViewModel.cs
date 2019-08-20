@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.Helpers;
 using LiveScore.Core;
 using LiveScore.Core.Controls.DateBar.Events;
 using LiveScore.Core.Converters;
@@ -42,6 +44,8 @@ namespace LiveScore.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
+            Profiler.Start(this.GetType().Name + ".Init");
+
             SelectedDate = DateTime.Today;
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
@@ -114,6 +118,7 @@ namespace LiveScore.Score.ViewModels
 
             Device.BeginInvokeOnMainThread(async () =>
                 await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+
         }
 
         [Time]
@@ -131,6 +136,8 @@ namespace LiveScore.Score.ViewModels
         [Time]
         private void OnRefreshCommand()
         {
+            Profiler.Start(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
+
             Device.BeginInvokeOnMainThread(async () =>
                 await LoadData(() => LoadMatches(selectedDateRange, true), false));
         }
@@ -161,7 +168,10 @@ namespace LiveScore.Score.ViewModels
         }
 
         private void OnDateBarItemSelected(DateRange dateRange)
-            => Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
+        {
+            Profiler.Start(this.GetType().Name + ".LoadMatches.SelectDate");
+            Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
+        }
 
         [Time]
         private async Task LoadMatches(
@@ -182,6 +192,11 @@ namespace LiveScore.Score.ViewModels
 
             selectedDateRange = dateRange;
             IsRefreshing = false;
+
+            Debug.WriteLine($"{this.GetType().Name}.Matches: {matches.Count()}");
+            Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
+            Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
+            Profiler.Stop(this.GetType().Name + ".Init");
         }
 
         [Time]

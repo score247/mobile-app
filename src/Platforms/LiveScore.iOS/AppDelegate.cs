@@ -4,6 +4,7 @@ namespace LiveScore.iOS
     using CarouselView.FormsPlugin.iOS;
     using Common.Services;
     using Foundation;
+    using LiveScore.Common.Helpers;
     using ObjCRuntime;
     using Prism;
     using Prism.Ioc;
@@ -14,6 +15,8 @@ namespace LiveScore.iOS
     {
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
+            Profiler.Start("IOS Application");
+
             Xamarin.Forms.Forms.Init();
             CarouselViewRenderer.Init();
 
@@ -26,6 +29,8 @@ namespace LiveScore.iOS
 
             Runtime.MarshalObjectiveCException += (_, args)
                 => loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
+
+            Profiler.Stop("IOS Application");
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
