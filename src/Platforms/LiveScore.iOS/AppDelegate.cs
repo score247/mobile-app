@@ -30,8 +30,6 @@ namespace LiveScore.iOS
             Runtime.MarshalObjectiveCException += (_, args)
                 => loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
 
-            Profiler.Stop("IOS Application");
-
             return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }

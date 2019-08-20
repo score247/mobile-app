@@ -48,19 +48,14 @@ namespace LiveScore
         {
         }
 
-
         [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
         }
 
         [Time]
-
         protected override async void OnInitialized()
         {
-
-            Debug.WriteLine($"OnInitialized: {DateTime.Now.ToString("HH:mm:ss:ffff")}");
-
             Registrations.Start("Score247.App");
 
             JsonConvert.DefaultSettings = () =>
@@ -83,8 +78,9 @@ namespace LiveScore
             settingsService.ApiEndpoint = Configuration.LocalEndPoint;
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
 
-
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
+
+            
         }
 
         protected override void ConfigureViewModelLocator()
