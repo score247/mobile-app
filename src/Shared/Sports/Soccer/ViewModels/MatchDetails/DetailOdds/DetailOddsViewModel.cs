@@ -64,6 +64,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             TabHeaderIcon = TabDetailImages.Odds;
             TabHeaderActiveIcon = TabDetailImages.OddsActive;
+
+            BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>();
         }
 
         public ObservableCollection<BaseItemViewModel> BetTypeOddsItems { get; private set; }
@@ -184,6 +186,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private bool CanLoadOdds(BetType betType, bool isRefresh)
             => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
 
+        [Time]
         internal async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
@@ -194,8 +197,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == (int)SelectedBetType);
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
-                {
-                    var existingOddsItem = BetTypeOddsItems.FirstOrDefault(x => x.Bookmaker.Equals(updatedOdds.Bookmaker));
+                {                   
+                    var existingOddsItem = BetTypeOddsItems.FirstOrDefault(x => x.BetTypeOdds.Bookmaker == updatedOdds.Bookmaker);
 
                     if (existingOddsItem == null)
                     {                       
@@ -236,11 +239,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
         {
+            HasData = true;
             var newOddsItemViewModel = new BaseItemViewModel(SelectedBetType, updatedOdds, NavigationService, DependencyResolver).CreateInstance();
 
             if (!BetTypeOddsItems.Any())
             {
-                HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, true, NavigationService, DependencyResolver).CreateTemplate();
+                HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
             }
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
