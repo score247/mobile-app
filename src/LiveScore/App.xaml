@@ -41,8 +41,8 @@
             <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>
 
             <!--  Odds  -->
-            <Color x:Key="UpLiveOddColor">#FF222C</Color>
-            <Color x:Key="DownLiveOddColor">#66FF59</Color>
+            <Color x:Key="UpLiveOddColor">#66FF59</Color>
+            <Color x:Key="DownLiveOddColor">#FF222C</Color>
 
             <!--  Tabs  -->
             <Color x:Key="TabColor">#999</Color>
