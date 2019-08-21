@@ -12,7 +12,13 @@
         [Time]
         public ScoresView()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+            }
 
 #if DEBUG
             this.Appearing += ScoresView_Appearing;

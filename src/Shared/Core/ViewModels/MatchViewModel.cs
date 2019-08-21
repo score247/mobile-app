@@ -16,11 +16,11 @@
 
         public MatchViewModel(
             IMatchSummary match,
-            HubConnection matchHubConnection,
+            //HubConnection matchHubConnection,
             IMatchStatusConverter matchStatusConverter,
             byte currentSportId)
         {
-            this.matchHubConnection = matchHubConnection;
+            //this.matchHubConnection = matchHubConnection;
             this.matchStatusConverter = matchStatusConverter;
             this.currentSportId = currentSportId;
 
