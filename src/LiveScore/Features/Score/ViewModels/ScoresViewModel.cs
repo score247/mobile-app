@@ -50,9 +50,9 @@ namespace LiveScore.Score.ViewModels
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
 
-            //var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
-            //matchHubConnection = hubService.BuildMatchEventHubConnection();
-            //teamHubConnection = hubService.BuildTeamStatisticHubConnection();
+            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
+            matchHubConnection = hubService.BuildMatchEventHubConnection();
+            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             RefreshCommand = new DelegateCommand(OnRefreshCommand);
             TappedMatchCommand = new DelegateCommand<MatchViewModel>(OnTappedMatchCommand);
@@ -105,14 +105,14 @@ namespace LiveScore.Score.ViewModels
               .GetEvent<DateBarItemSelectedEvent>()
               .Subscribe(OnDateBarItemSelected);
 
-            //matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
-            //matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
+            matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
+            matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
 
-            //Device.BeginInvokeOnMainThread(async () =>
-            //    await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+            Device.BeginInvokeOnMainThread(async () =>
+                await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
 
-            //Device.BeginInvokeOnMainThread(async () =>
-            //    await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+            Device.BeginInvokeOnMainThread(async () =>
+                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
         }
 
         protected override void Clean()

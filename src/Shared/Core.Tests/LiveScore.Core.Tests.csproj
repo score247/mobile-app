@@ -25,4 +25,7 @@
     <ProjectReference Include="..\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\" />
+  </ItemGroup>
 </Project>

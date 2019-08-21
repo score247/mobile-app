@@ -23,9 +23,6 @@
     <Compile Remove="UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Common\LiveScore.Common.csproj" />
   </ItemGroup>
 </Project>

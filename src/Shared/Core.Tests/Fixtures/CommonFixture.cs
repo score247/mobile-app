@@ -17,7 +17,7 @@
         {
             Comparer = new CompareLogic();
             Specimens = new Fixture();
-
+            Specimens.Register<IMatch>(() => Specimens.Create<Match>());
             Specimens.Register<IMatchOld>(() => Specimens.Create<MatchOld>());
             Specimens.Register<ITeam>(() => Specimens.Create<Team>());
             Specimens.Register<ITeamStatistic>(() => Specimens.Create<TeamStatistic>());

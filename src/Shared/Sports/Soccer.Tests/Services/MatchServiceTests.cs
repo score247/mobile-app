@@ -19,7 +19,7 @@
     public class MatchServiceTests : IClassFixture<CommonFixture>
     {
         private readonly CompareLogic comparer;
-        private readonly Fixture fixture;
+        private readonly IFixture fixture;
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
         private readonly ILoggingService loggingService;
@@ -33,7 +33,6 @@
             cacheService = Substitute.For<ICachingService>();
             loggingService = Substitute.For<ILoggingService>();
 
-
             matchService = new MatchService(apiService, cacheService, loggingService);
         }
 
@@ -41,16 +40,15 @@
         public async Task GetMatches_WhenCall_InjectCacheService()
         {
             // Arrange
-            var dateRange = new DateRange();
+            var dateRange = new DateRange(DateTime.Today);
 
             // Act
             await matchService.GetMatches(dateRange, Language.English);
 
             // Assert
-            await cacheService.Received(1)
-                .GetAndFetchLatestValue(
+            await cacheService.Received(1).GetAndFetchLatestValue(
                     Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
+                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     null);
         }
@@ -59,10 +57,10 @@
         public async Task GetMatches_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            var dateRange = new DateRange();
+            var dateRange = new DateRange(DateTime.Today);
             cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
+                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     Arg.Any<DateTimeOffset>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
@@ -83,11 +81,11 @@
             var dateRange = new DateRange(dateTime);
             var cacheKey = $"Matches:{dateTime.Date}:en-US";
 
-            var expectedMatches = fixture.CreateMany<MatchOld>();
+            var expectedMatches = fixture.CreateMany<Match>();
 
             cacheService.GetAndFetchLatestValue(
                 cacheKey,
-                Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
+                Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
                 null).Returns(expectedMatches);
 

@@ -1,10 +1,11 @@
 namespace Soccer.Tests.Converters
 {
     using System;
+    using AutoFixture;
     using LiveScore.Common.LangResources;
     using LiveScore.Common.Services;
+    using LiveScore.Common.Tests.Extensions;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Converters;
     using LiveScore.Soccer.Models.Matches;
     using NSubstitute;
@@ -12,6 +13,7 @@ namespace Soccer.Tests.Converters
 
     public class MatchStatusConverterTests
     {
+        private Fixture specimens;
         private readonly MatchStatusConverter converter;
         private readonly ICachingService localStorage;
 
@@ -35,14 +37,11 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsNotStarted_ReturnEventTime()
         {
             // Arrange
-            var match = new MatchOld
-            {
-                EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
-                MatchResult = new MatchResult
-                {
-                    EventStatus = MatchStatus.NotStarted
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                .With(x => x.EventDate, new DateTime(2019, 01, 01, 12, 20, 00))
+                .With(x => x.EventStatus, MatchStatus.NotStarted)
+                .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -60,18 +59,16 @@ namespace Soccer.Tests.Converters
         [InlineData("awaiting_penalties", "Await Pen")]
         [InlineData("penalties", "Pen")]
         [InlineData("extra_time_halftime", "ETHT")]
-        public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
+        public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatusValue, string expectedStatus)
         {
             // Arrange
-            var match = new MatchOld
-            {
-                EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
-                MatchResult = new MatchResult
-                {
-                    EventStatus = MatchStatus.Live,
-                    MatchStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatus),
-                }
-            };
+            specimens = new Fixture();
+            var matchStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatusValue);
+
+            var match = specimens.For<Match>()
+                .With(x => x.EventStatus, MatchStatus.Live)
+                .With(x => x.MatchStatus, matchStatus)
+                .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -84,15 +81,12 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsLive_ShowMatchMinute()
         {
             // Arrange
-            var match = new MatchOld
-            {
-                EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
-                MatchResult = new MatchResult
-                {
-                    EventStatus = MatchStatus.Live,
-                    MatchTime = 30
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.EventStatus, MatchStatus.Live)
+                  .With(x => x.MatchTime, (byte)30)
+                  .With(x => x.StoppageTime, null)
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -108,24 +102,17 @@ namespace Soccer.Tests.Converters
         [InlineData("2nd_extra", 120, 125, 5)]
         [InlineData("2nd_extra", 120, 100, 5)]
         public void BuildStatus_EventStatusIsLive_InjuryTimeShown_ShowMatchMinuteWithInjuryTime(
-            string matchStatus, int periodEndTime, int currentMatchTime, int expectedInjuryTime)
+                string matchStatus, int periodEndTime, int currentMatchTime, int expectedInjuryTime)
         {
             // Arrange
-            var match = new MatchOld
-            {
-                EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
-                MatchResult = new MatchResult
-                {
-                    EventStatus = MatchStatus.Live,
-                    MatchStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatus),
-                    MatchTime = currentMatchTime
-                },
-                LatestTimeline = new TimelineEvent
-                {
-                    Type = EventType.InjuryTimeShown,
-                    InjuryTimeAnnounced = 5
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.EventStatus, MatchStatus.Live)
+                  .With(x => x.MatchStatus, Enumeration.FromDisplayName<MatchStatus>(matchStatus))
+                  .With(x => x.MatchTime, (byte)currentMatchTime)
+                  .With(x => x.LastTimelineType, EventType.InjuryTimeShown)
+                  .With(x => x.InjuryTimeAnnounced, (byte)5)
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -144,14 +131,11 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsClosed_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new MatchOld
-            {
-                MatchResult = new MatchResult
-                {
-                    EventStatus = MatchStatus.Closed,
-                    MatchStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatus)
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.EventStatus, MatchStatus.Closed)
+                  .With(x => x.MatchStatus, Enumeration.FromDisplayName<MatchStatus>(matchStatus))
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -168,13 +152,10 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new MatchOld
-            {
-                MatchResult = new MatchResult
-                {
-                    EventStatus = Enumeration.FromDisplayName<MatchStatus>(matchStatus)
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.EventStatus, Enumeration.FromDisplayName<MatchStatus>(matchStatus))
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -187,21 +168,15 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_InInjuryTimeShown_ShowExpectedStatus()
         {
             // Arrange
-            var match = new MatchOld
-            {
-                MatchResult = new MatchResult
-                {
-                    MatchStatus = MatchStatus.FirstHalfExtra,
-                    EventStatus = MatchStatus.Live,
-                    MatchTime = 106
-                },
-                LatestTimeline = new TimelineEvent
-                {
-                    Type = Enumeration.FromDisplayName<EventType>("injury_time_shown"),
-                    StoppageTime = "1",
-                    InjuryTimeAnnounced = 3
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.EventStatus, MatchStatus.Live)
+                  .With(x => x.MatchStatus, MatchStatus.FirstHalfExtra)
+                  .With(x => x.MatchTime, (byte)106)
+                  .With(x => x.LastTimelineType, EventType.InjuryTimeShown)
+                  .With(x => x.StoppageTime, "1")
+                  .With(x => x.InjuryTimeAnnounced, (byte)3)
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);
@@ -213,25 +188,20 @@ namespace Soccer.Tests.Converters
         [Theory]
         [InlineData(107, "105+2'")]
         [InlineData(110, "105+4'")]
-        public void BuildStatus_InEventHasStoppageTime_ShowExpectedStatus(int matchTime, string expectedStatus)
+        public void BuildStatus_InEventHasStoppageTime_ShowExpectedStatus(byte matchTime, string expectedStatus)
         {
             // Arrange
             localStorage.GetValueOrDefaultInMemory("InjuryTimeAnnouced123", 0).Returns(4);
-            var match = new MatchOld
-            {
-                Id = "123",
-                MatchResult = new MatchResult
-                {
-                    MatchStatus = MatchStatus.FirstHalfExtra,
-                    EventStatus = MatchStatus.Live,
-                    MatchTime = matchTime
-                },
-                LatestTimeline = new TimelineEvent
-                {
-                    Type = Enumeration.FromDisplayName<EventType>("yellow_card"),
-                    StoppageTime = "2",
-                }
-            };
+            specimens = new Fixture();
+            var match = specimens.For<Match>()
+                  .With(x => x.Id, "123")
+                  .With(x => x.EventStatus, MatchStatus.Live)
+                  .With(x => x.MatchStatus, MatchStatus.FirstHalfExtra)
+                  .With(x => x.MatchTime, matchTime)
+                  .With(x => x.LastTimelineType, EventType.YellowCard)
+                  .With(x => x.StoppageTime, "2")
+                  .With(x => x.InjuryTimeAnnounced, (byte)0)
+                  .Create();
 
             // Act
             var status = converter.BuildStatus(match);

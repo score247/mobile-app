@@ -12,6 +12,60 @@
     {
         private const int NumberOfFullTimePeriodsResult = 2;
 
+#pragma warning disable S107 // Methods should not have too many parameters
+
+        public Match(
+            string id,
+            DateTimeOffset eventDate,
+            string leagueId,
+            string leagueName,
+            string homeTeamId,
+            string homeTeamName,
+            string awayTeamId,
+            string awayTeamName,
+            MatchStatus matchStatus,
+            MatchStatus eventStatus,
+            byte homeScore,
+            byte awayScore,
+            string winnerId,
+            string aggregateWinnerId,
+            byte homeRedCards,
+            byte homeYellowRedCards,
+            byte awayRedCards,
+            byte awayYellowRedCards,
+            byte matchTime,
+            string stoppageTime,
+            byte injuryTimeAnnounced,
+            EventType lastTimelineType,
+            IEnumerable<MatchPeriod> matchPeriods)
+        {
+            Id = id;
+            EventDate = eventDate;
+            LeagueId = leagueId;
+            LeagueName = leagueName;
+            HomeTeamId = homeTeamId;
+            HomeTeamName = homeTeamName;
+            AwayTeamId = awayTeamId;
+            AwayTeamName = awayTeamName;
+            MatchStatus = matchStatus;
+            EventStatus = eventStatus;
+            HomeScore = homeScore;
+            AwayScore = awayScore;
+            WinnerId = winnerId;
+            AggregateWinnerId = aggregateWinnerId;
+            HomeRedCards = homeRedCards;
+            HomeYellowRedCards = homeYellowRedCards;
+            AwayRedCards = awayRedCards;
+            AwayYellowRedCards = awayYellowRedCards;
+            MatchTime = matchTime;
+            StoppageTime = stoppageTime;
+            InjuryTimeAnnounced = injuryTimeAnnounced;
+            LastTimelineType = lastTimelineType;
+            MatchPeriods = matchPeriods;
+        }
+
+#pragma warning restore S107 // Methods should not have too many parameters
+
         /// <summary>
         /// Keep private setter for Json Serializer
         /// </summary>
