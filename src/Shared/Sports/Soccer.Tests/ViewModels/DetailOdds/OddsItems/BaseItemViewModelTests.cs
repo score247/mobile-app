@@ -1,6 +1,7 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
 {
     using System;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Enumerations;
@@ -24,12 +25,13 @@
         }
 
         [Theory]
-        [InlineData(BetType.OneXTwo, typeof(OneXTwoItemViewModel))]
-        [InlineData(BetType.AsianHDP, typeof(AsianHdpItemViewModel))]
-        [InlineData(BetType.OverUnder, typeof(OverUnderItemViewModel))]
-        public void CreateInstance_Always_GetExpectedViewModelInstance(BetType betType, Type expectedType)
+        [InlineData(1, typeof(OneXTwoItemViewModel))]
+        [InlineData(2, typeof(AsianHdpItemViewModel))]
+        [InlineData(3, typeof(OverUnderItemViewModel))]
+        public void CreateInstance_Always_GetExpectedViewModelInstance(byte betTypeId, Type expectedType)
         {
             // Arrange               
+            var betType = Enumeration.FromValue<BetType>(betTypeId);
             var viewModel = new BaseItemViewModel(betType, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
@@ -40,12 +42,13 @@
         }
 
         [Theory]
-        [InlineData(BetType.OneXTwo, typeof(OneXTwoItemTemplate))]
-        [InlineData(BetType.AsianHDP, typeof(AsianHdpItemTemplate))]
-        [InlineData(BetType.OverUnder, typeof(OverUnderItemTemplate))]
-        public void CreateTemplate_Always_GetExpectedTemplate(BetType betType, Type expectedType)
+        [InlineData(1, typeof(OneXTwoItemTemplate))]
+        [InlineData(2, typeof(AsianHdpItemTemplate))]
+        [InlineData(3, typeof(OverUnderItemTemplate))]
+        public void CreateTemplate_Always_GetExpectedTemplate(byte betTypeId, Type expectedType)
         {
             // Arrange
+            var betType = Enumeration.FromValue<BetType>(betTypeId);
             var viewModel = new BaseItemViewModel(betType, betTypeOdds, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act

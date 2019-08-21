@@ -204,7 +204,7 @@
 
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.AsianHDP,
-                CreateBetTypeOdds((int)BetType.AsianHDP),
+                CreateBetTypeOdds(BetType.AsianHDP.Value),
                 navigationService,
                 dependencyResolver);
 
