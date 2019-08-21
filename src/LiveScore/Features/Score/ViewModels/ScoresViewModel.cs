@@ -84,12 +84,11 @@ namespace LiveScore.Score.ViewModels
             Initialize();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
             {
-                Device.BeginInvokeOnMainThread(async ()
-                    => await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())));
+                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
             }
             else
             {
@@ -114,7 +113,6 @@ namespace LiveScore.Score.ViewModels
 
             Device.BeginInvokeOnMainThread(async () =>
                 await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
-
         }
 
         protected override void Clean()
@@ -180,7 +178,7 @@ namespace LiveScore.Score.ViewModels
                     SettingsService.Language,
                     forceFetchNewData);
 
-            MatchItemsSource = BuildMatchItemSource(matches.ToList());
+            MatchItemsSource = BuildMatchItemSource(matches);
 
             selectedDateRange = dateRange;
             IsRefreshing = false;
@@ -189,16 +187,15 @@ namespace LiveScore.Score.ViewModels
             Profiler.Stop(this.GetType().Name + ".LoadMatches.Home");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
-
         }
 
-        private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
+        private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatchSummary> matches)
         {
             var matchItemViewModels = matches.Select(
                     match => new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
-                => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));
+                => new { item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));
         }
 
         internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)

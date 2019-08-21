@@ -11,7 +11,7 @@
 
     public interface IMatchService
     {
-        Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false);
+        Task<IEnumerable<IMatchSummary>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false);
 
         Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
 
