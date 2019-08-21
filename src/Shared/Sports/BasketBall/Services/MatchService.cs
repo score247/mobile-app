@@ -19,7 +19,7 @@ namespace LiveScore.Basketball.Services
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
+        public Task<IEnumerable<IMatchSummary>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }

@@ -15,7 +15,7 @@
         private readonly byte currentSportId;
 
         public MatchViewModel(
-            IMatch match,
+            IMatchSummary match,
             HubConnection matchHubConnection,
             IMatchStatusConverter matchStatusConverter,
             byte currentSportId)
@@ -29,33 +29,33 @@
             SubscribeMatchTimeChangeEvent();
         }
 
-        public IMatch Match { get; protected set; }
+        public IMatchSummary Match { get; protected set; }
 
         public string DisplayMatchStatus { get; private set; }
 
         public void OnReceivedMatchEvent(IMatchEvent matchEvent)
         {
-            Match.MatchResult = matchEvent.MatchResult;
-            Match.LatestTimeline = matchEvent.Timeline;
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+            //Match.EventStatus = matchEvent.MatchResult;
+            //Match.LatestTimeline = matchEvent.Timeline;
+            //DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
         }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
-            var currentTeam = Match.Teams.FirstOrDefault(t => t.IsHome == isHome);
-            currentTeam.Statistic = teamStatistic;
+            //var currentTeam = Match.Teams.FirstOrDefault(t => t.IsHome == isHome);
+            //currentTeam.Statistic = teamStatistic;
         }
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            matchHubConnection.On<byte, string, int>("PushMatchTime",
-                (sportId, matchId, matchTime) =>
-                {
-                    if (currentSportId == sportId && Match.Id == matchId)
-                    {
-                        Match.MatchResult.MatchTime = matchTime;
-                    }
-                });
+            //matchHubConnection.On<byte, string, int>("PushMatchTime",
+            //    (sportId, matchId, matchTime) =>
+            //    {
+            //        if (currentSportId == sportId && Match.Id == matchId)
+            //        {
+            //            Match.MatchResult.MatchTime = matchTime;
+            //        }
+            //    });
         }
     }
 }

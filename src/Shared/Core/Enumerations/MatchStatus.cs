@@ -2,7 +2,6 @@
 {
     using PropertyChanged;
 
-    [AddINotifyPropertyChangedInterface]
     public class MatchStatus : Enumeration
     {
         ////not_started – The match is scheduled to be played

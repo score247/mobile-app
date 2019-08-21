@@ -9,6 +9,7 @@
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Models.Matches;
 
     public class MatchStatusConverter : IMatchStatusConverter
     {
@@ -49,39 +50,41 @@
             this.cacheService = localStorage;
         }
 
-        public string BuildStatus(IMatch match)
+        public string BuildStatus(IMatchSummary match)
         {
             if (match == null)
             {
                 return AppResources.FT;
             }
 
-            if (match.MatchResult == null || match.MatchResult.EventStatus == null)
+            var soccerMatch = match as MatchSummary;
+
+            if (soccerMatch.EventStatus == null)
             {
                 return AppResources.FT;
             }
 
-            if (match.MatchResult.EventStatus.IsNotStarted)
+            if (soccerMatch.EventStatus.IsNotStarted)
             {
                 return match.EventDate.ToLocalTimeWithoutSecond();
             }
 
-            if (match.MatchResult.EventStatus.IsLive)
+            if (soccerMatch.EventStatus.IsLive)
             {
-                return BuildStatusForLive(match);
+                return BuildStatusForLive(soccerMatch);
             }
 
-            if (match.MatchResult.EventStatus.IsClosed)
+            if (soccerMatch.EventStatus.IsClosed)
             {
-                var status = BuildMatchStatus(match);
+                var status = BuildMatchStatus(soccerMatch);
 
                 return string.IsNullOrEmpty(status) ? AppResources.FT : status;
             }
 
-            return BuildEventStatus(match);
+            return BuildEventStatus(soccerMatch);
         }
 
-        private string BuildStatusForLive(IMatch match)
+        private string BuildStatusForLive(MatchSummary match)
         {
             var status = BuildMatchStatus(match);
 
@@ -90,20 +93,19 @@
                 return status;
             }
 
-            var timeline = match.LatestTimeline;
-            var stoppageTimeHasValue = !string.IsNullOrEmpty(timeline?.StoppageTime) && timeline?.StoppageTime != "0";
+            var stoppageTimeHasValue = !string.IsNullOrEmpty(match.StoppageTime) && match.StoppageTime != "0";
 
-            if (timeline != null && (timeline.Type == EventType.InjuryTimeShown || stoppageTimeHasValue))
+            if (match.LastTimelineType != null && (match.LastTimelineType == EventType.InjuryTimeShown || stoppageTimeHasValue))
             {
-                return BuildMatchInjuryTime(match, timeline);
+                return BuildMatchInjuryTime(match);
             }
 
-            return match.MatchResult.MatchTime + "'";
+            return match.MatchTime + "'";
         }
 
-        private static string BuildMatchStatus(IMatch match)
+        private static string BuildMatchStatus(MatchSummary match)
         {
-            var matchStatus = match.MatchResult?.MatchStatus;
+            var matchStatus = match.MatchStatus;
 
             if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus))
             {
@@ -113,10 +115,10 @@
             return string.Empty;
         }
 
-        private static string BuildEventStatus(IMatch match)
+        private static string BuildEventStatus(MatchSummary match)
 
         {
-            var eventStatus = match.MatchResult?.EventStatus;
+            var eventStatus = match.EventStatus;
 
             if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus))
             {
@@ -126,19 +128,19 @@
             return string.Empty;
         }
 
-        private string BuildMatchInjuryTime(IMatch match, ITimelineEvent timeline)
+        private string BuildMatchInjuryTime(MatchSummary match)
         {
-            PeriodEndTimes.TryGetValue(match.MatchResult.MatchStatus, out int periodEndTime);
+            PeriodEndTimes.TryGetValue(match.MatchStatus, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;
             var annoucedInjuryTime = Task.Run(() => cacheService.GetValueOrDefaultInMemory(cacheKey, 0)).Result;
 
-            if (timeline.InjuryTimeAnnounced > 0)
+            if (match.InjuryTimeAnnounced > 0)
             {
-                Task.Run(() => cacheService.InsertValueInMemory(cacheKey, timeline.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
-                annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+                Task.Run(() => cacheService.InsertValueInMemory(cacheKey, match.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
+                annoucedInjuryTime = match.InjuryTimeAnnounced;
             }
 
-            var currentInjuryTime = match.MatchResult.MatchTime - periodEndTime;
+            var currentInjuryTime = match.MatchTime - periodEndTime;
             var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
 
             if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)

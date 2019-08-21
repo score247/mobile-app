@@ -20,7 +20,7 @@
     public interface ISoccerMatchApi
     {
         [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
-        Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
+        Task<IEnumerable<MatchSummary>> GetMatches(string fromDate, string toDate, string language);
 
         [Get("/soccer/{language}/matches/{matchId}")]
         Task<Match> GetMatch(string matchId, string language);
@@ -43,7 +43,7 @@
         }
 
         [Time]
-        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatchSummary>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -64,12 +64,12 @@
             {
                 HandleException(ex);
 
-                return Enumerable.Empty<IMatch>();
+                return Enumerable.Empty<IMatchSummary>();
             }
         }
 
         [Time]
-        private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        private async Task<IEnumerable<IMatchSummary>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -79,12 +79,12 @@
                     || dateTime.Date == DateTimeExtension.Yesterday().Date)
                 {
                     return await cacheService.GetAndFetchLatestValue(
-                      cacheKey,
-                      () => GetMatchesFromApi(
-                          dateTime.BeginningOfDay().ToApiFormat(),
-                          dateTime.EndOfDay().ToApiFormat(),
-                          language.DisplayName),
-                      cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
+                        cacheKey,
+                        () => GetMatchesFromApi(
+                            dateTime.BeginningOfDay().ToApiFormat(),
+                            dateTime.EndOfDay().ToApiFormat(),
+                            language.DisplayName),
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
                 }
 
                 return await cacheService.GetOrFetchValue(
@@ -98,7 +98,7 @@
             {
                 HandleException(ex);
 
-                return Enumerable.Empty<IMatch>();
+                return Enumerable.Empty<IMatchSummary>();
             }
         }
 
@@ -147,7 +147,7 @@
         }
 
         [Time]
-        private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
+        private async Task<IEnumerable<MatchSummary>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => await apiService.Execute
             (
                 () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)

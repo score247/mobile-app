@@ -183,17 +183,17 @@ namespace LiveScore.Soccer.ViewModels
         [Time]
         protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
-            var match = MatchViewModel.Match;
+            //var match = MatchViewModel.Match;
 
-            if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
-            {
-                return;
-            }
+            //if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
+            //{
+            //    return;
+            //}
 
-            match.MatchResult = matchEvent.MatchResult;
-            match.LatestTimeline = matchEvent.Timeline;
+            //match.MatchResult = matchEvent.MatchResult;
+            //match.LatestTimeline = matchEvent.Timeline;
 
-            BuildGeneralInfo(match);
+            //BuildGeneralInfo(match);
         }
 
         protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
@@ -230,8 +230,9 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
+        // TODO: update here
         private void BuildViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId);
+            => MatchViewModel = new MatchViewModel(null, matchHubConnection, matchStatusConverter, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
         {
