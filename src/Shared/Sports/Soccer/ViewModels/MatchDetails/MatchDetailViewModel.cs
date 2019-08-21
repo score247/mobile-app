@@ -232,7 +232,7 @@ namespace LiveScore.Soccer.ViewModels
 
         // TODO: update here
         private void BuildViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(null, matchHubConnection, matchStatusConverter, CurrentSportId);
+            => MatchViewModel = new MatchViewModel(null, matchStatusConverter, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
         {
