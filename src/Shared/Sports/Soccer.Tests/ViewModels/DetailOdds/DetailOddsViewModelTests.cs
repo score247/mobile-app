@@ -1,10 +1,5 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core;
@@ -18,6 +13,10 @@
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
     using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class DetailOddsViewModelTests : IClassFixture<ViewModelBaseFixture>
@@ -97,7 +96,7 @@
         {
             // Arrange
             oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
-            var expectedViewModels = new ObservableCollection<BaseItemViewModel>
+            var expectedViewModels = new List<BaseItemViewModel>
             {
                 new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds(BetType.AsianHDP.Value), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
@@ -332,6 +331,22 @@
 
             var itemViewModel = viewModel.BetTypeOddsItems.First() as OneXTwoItemViewModel;
             Assert.Equal("5.60", itemViewModel.HomeLiveOdds);
+        }
+
+        [Fact]
+        public async Task OnResume_Always_LoadOdds()
+        {
+            // Arrange 
+            oddsService
+                .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
+                .Returns(CreateOdds(BetType.OneXTwo.Value));
+
+            // Act            
+            viewModel.OnResume();
+
+            // Assert            
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), matchId, 3, Arg.Any<string>(), Arg.Any<bool>());
+            Assert.Single(viewModel.BetTypeOddsItems);
         }
     }
 }
