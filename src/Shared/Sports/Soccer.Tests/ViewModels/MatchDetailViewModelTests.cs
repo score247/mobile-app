@@ -21,7 +21,7 @@ namespace Soccer.Tests.ViewModels
     {
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;
-        private readonly Match match;
+        private readonly MatchOld match;
         private readonly ICachingService localStorage;
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
@@ -49,9 +49,9 @@ namespace Soccer.Tests.ViewModels
             viewModel.OnNavigatingTo(parameters);
         }
 
-        private Match CreateMatch()
+        private MatchOld CreateMatch()
         {
-            var matchData = new Match
+            var matchData = new MatchOld
             {
                 Id = "1234",
                 League = new League { Name = "Laliga" },

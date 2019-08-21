@@ -20,10 +20,10 @@
     public interface ISoccerMatchApi
     {
         [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
-        Task<IEnumerable<MatchSummary>> GetMatches(string fromDate, string toDate, string language);
+        Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
 
         [Get("/soccer/{language}/matches/{matchId}")]
-        Task<Match> GetMatch(string matchId, string language);
+        Task<MatchOld> GetMatch(string matchId, string language);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -43,7 +43,7 @@
         }
 
         [Time]
-        public async Task<IEnumerable<IMatchSummary>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -64,12 +64,12 @@
             {
                 HandleException(ex);
 
-                return Enumerable.Empty<IMatchSummary>();
+                return Enumerable.Empty<IMatch>();
             }
         }
 
         [Time]
-        private async Task<IEnumerable<IMatchSummary>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -98,12 +98,12 @@
             {
                 HandleException(ex);
 
-                return Enumerable.Empty<IMatchSummary>();
+                return Enumerable.Empty<IMatch>();
             }
         }
 
         [Time]
-        public async Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<IMatchOld> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -147,14 +147,14 @@
         }
 
         [Time]
-        private async Task<IEnumerable<MatchSummary>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
+        private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => await apiService.Execute
             (
                 () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)
             );
 
         [Time]
-        private async Task<Match> GetMatchFromApi(string matchId, string language)
+        private async Task<MatchOld> GetMatchFromApi(string matchId, string language)
            => await apiService.Execute
            (
                () => apiService.GetApi<ISoccerMatchApi>().GetMatch(matchId, language)

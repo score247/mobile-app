@@ -50,14 +50,14 @@
             this.cacheService = localStorage;
         }
 
-        public string BuildStatus(IMatchSummary match)
+        public string BuildStatus(IMatch match)
         {
             if (match == null)
             {
                 return AppResources.FT;
             }
 
-            var soccerMatch = match as MatchSummary;
+            var soccerMatch = match as Match;
 
             if (soccerMatch.EventStatus == null)
             {
@@ -84,7 +84,7 @@
             return BuildEventStatus(soccerMatch);
         }
 
-        private string BuildStatusForLive(MatchSummary match)
+        private string BuildStatusForLive(Match match)
         {
             var status = BuildMatchStatus(match);
 
@@ -103,7 +103,7 @@
             return match.MatchTime + "'";
         }
 
-        private static string BuildMatchStatus(MatchSummary match)
+        private static string BuildMatchStatus(Match match)
         {
             var matchStatus = match.MatchStatus;
 
@@ -115,7 +115,7 @@
             return string.Empty;
         }
 
-        private static string BuildEventStatus(MatchSummary match)
+        private static string BuildEventStatus(Match match)
 
         {
             var eventStatus = match.EventStatus;
@@ -128,7 +128,7 @@
             return string.Empty;
         }
 
-        private string BuildMatchInjuryTime(MatchSummary match)
+        private string BuildMatchInjuryTime(Match match)
         {
             PeriodEndTimes.TryGetValue(match.MatchStatus, out int periodEndTime);
             var cacheKey = "InjuryTimeAnnouced" + match.Id;

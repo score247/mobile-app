@@ -3,7 +3,7 @@ using LiveScore.Core.Enumerations;
 
 namespace LiveScore.Core.Models.Matches
 {
-    public interface IMatchSummary
+    public interface IMatch
     {
         string Id { get; }
 

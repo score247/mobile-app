@@ -3,7 +3,7 @@
     using LiveScore.Core.Models.Matches;
     using Prism.Events;
 
-    public class MatchUpdateEvent : PubSubEvent<IMatch>
+    public class MatchUpdateEvent : PubSubEvent<IMatchOld>
     {
     }
 }

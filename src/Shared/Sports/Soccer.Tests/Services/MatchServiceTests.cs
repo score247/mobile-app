@@ -50,7 +50,7 @@
             await cacheService.Received(1)
                 .GetAndFetchLatestValue(
                     Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                    Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     null);
         }
@@ -62,7 +62,7 @@
             var dateRange = new DateRange();
             cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                    Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     Arg.Any<DateTimeOffset>())
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
@@ -83,11 +83,11 @@
             var dateRange = new DateRange(dateTime);
             var cacheKey = $"Matches:{dateTime.Date}:en-US";
 
-            var expectedMatches = fixture.CreateMany<Match>();
+            var expectedMatches = fixture.CreateMany<MatchOld>();
 
             cacheService.GetAndFetchLatestValue(
                 cacheKey,
-                Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+                Arg.Any<Func<Task<IEnumerable<MatchOld>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
                 null).Returns(expectedMatches);
 
@@ -104,11 +104,11 @@
             // Arrange
             var matchId = new Fixture().Create<string>();
             var cacheKey = $"Match:{matchId}:en-US";
-            var expectedMatch = fixture.Create<Match>();
+            var expectedMatch = fixture.Create<MatchOld>();
 
             cacheService.GetAndFetchLatestValue(
                cacheKey,
-               Arg.Any<Func<Task<Match>>>(),
+               Arg.Any<Func<Task<MatchOld>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).Returns(expectedMatch);
 
@@ -125,7 +125,7 @@
             // Arrange
             cacheService.GetAndFetchLatestValue(
                "GetMatch:123:en-US",
-               Arg.Any<Func<Task<Match>>>(),
+               Arg.Any<Func<Task<MatchOld>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 

@@ -5,7 +5,7 @@
     using LiveScore.Core.Models.Leagues;
     using LiveScore.Core.Models.Teams;
 
-    public interface IMatch : IEntity<string, string>
+    public interface IMatchOld : IEntity<string, string>
     {
         DateTimeOffset EventDate { get; set; }
 

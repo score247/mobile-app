@@ -15,7 +15,7 @@
         private readonly byte currentSportId;
 
         public MatchViewModel(
-            IMatchSummary match,
+            IMatch match,
             //HubConnection matchHubConnection,
             IMatchStatusConverter matchStatusConverter,
             byte currentSportId)
@@ -29,7 +29,7 @@
             SubscribeMatchTimeChangeEvent();
         }
 
-        public IMatchSummary Match { get; protected set; }
+        public IMatch Match { get; protected set; }
 
         public string DisplayMatchStatus { get; private set; }
 

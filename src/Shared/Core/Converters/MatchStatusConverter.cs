@@ -4,6 +4,6 @@
 
     public interface IMatchStatusConverter
     {
-        string BuildStatus(IMatchSummary match);
+        string BuildStatus(IMatch match);
     }
 }
