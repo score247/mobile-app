@@ -24,9 +24,9 @@
         }
 
         [Theory]
-        [InlineData(1, typeof(OneXTwoMovementItemViewModel))]
-        [InlineData(2, typeof(AsianHdpMovementItemViewModel))]
-        [InlineData(3, typeof(OverUnderMovementItemViewModel))]
+        [InlineData(1, typeof(OneXTwoMovementItemViewModel))]        
+        [InlineData(2, typeof(OverUnderMovementItemViewModel))]
+        [InlineData(3, typeof(AsianHdpMovementItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(byte betTypeId, Type expectedType)
         {
             // Arrange         
@@ -42,8 +42,8 @@
 
         [Theory]
         [InlineData(1, typeof(OneXTwoMovementItemTemplate))]
-        [InlineData(2, typeof(AsianHdpMovementItemTemplate))]
-        [InlineData(3, typeof(OverUnderMovementItemTemplate))]
+        [InlineData(2, typeof(OverUnderMovementItemTemplate))]
+        [InlineData(3, typeof(AsianHdpMovementItemTemplate))]
         public void CreateTemplate_Always_GetExpectedTemplate(byte betTypeId, Type expectedType)
         {
             // Arrange

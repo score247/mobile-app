@@ -96,7 +96,7 @@
         public void OnAppearing_Always_LoadOdds()
         {
             // Arrange
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             var expectedViewModels = new ObservableCollection<BaseItemViewModel>
             {
                 new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds(BetType.AsianHDP.Value), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
@@ -120,7 +120,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(3), Arg.Any<string>(), true);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), 3, Arg.Any<string>(), true);
         }
 
         [Fact]
@@ -130,7 +130,7 @@
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), false);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), false);
         }
 
         [Fact]
@@ -167,7 +167,7 @@
         public async Task TappedOddsItemCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             await viewModel.RefreshCommand.ExecuteAsync();
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.OneXTwo,
@@ -200,7 +200,7 @@
             var parameters = new NavigationParameters { { "MatchId", matchId } };
             oddsViewModel.OnNavigatingTo(parameters);
 
-            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
+            oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
 
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.AsianHDP,
@@ -249,7 +249,7 @@
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), Arg.Any<bool>());
         }
 
         [Fact]
@@ -266,7 +266,7 @@
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), Arg.Any<bool>());
         }
 
         [Fact]
@@ -283,7 +283,7 @@
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(1), Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), Arg.Any<bool>());
         }
 
         [Fact]
@@ -300,7 +300,7 @@
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(BetType.AsianHDP.Value), Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), matchId, 3, Arg.Any<string>(), Arg.Any<bool>());
             Assert.True(viewModel.HasData);
             Assert.Single(viewModel.BetTypeOddsItems);
         }
@@ -310,7 +310,7 @@
         {
             // Arrange 
             oddsService
-                .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>())
+                .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
                 .Returns(CreateOdds(BetType.OneXTwo.Value));
 
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
