@@ -53,8 +53,7 @@
             viewModel.OnNavigatingTo(parameters);
         }
 
-        private MatchOdds CreateOdds()
-            => CreateOdds((int)BetType.AsianHDP);
+        private MatchOdds CreateOdds() => CreateOdds(BetType.AsianHDP.Value);
 
         private MatchOdds CreateOdds(int betTypeId)
             => new MatchOdds
@@ -100,7 +99,7 @@
             oddsService.GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(CreateOdds());
             var expectedViewModels = new ObservableCollection<BaseItemViewModel>
             {
-                new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds((int)BetType.AsianHDP), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
+                new BaseItemViewModel(BetType.AsianHDP, CreateBetTypeOdds(BetType.AsianHDP.Value), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
 
             // Act
@@ -172,7 +171,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.OneXTwo,
-                CreateBetTypeOdds((int)BetType.OneXTwo),
+                CreateBetTypeOdds(BetType.OneXTwo.Value),
                 navigationService,
                 dependencyResolver);
 
@@ -243,7 +242,7 @@
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = "sr:match:2",
-                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.AsianHDP) }
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.AsianHDP.Value) }
             };
 
             // Act
@@ -277,7 +276,7 @@
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
-                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.OneXTwo) }
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.OneXTwo.Value) }
             };
 
             // Act
@@ -294,14 +293,14 @@
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
-                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.AsianHDP) }
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.AsianHDP.Value) }
             };
 
             // Act            
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is((int)BetType.AsianHDP), Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), Arg.Is(BetType.AsianHDP.Value), Arg.Any<string>(), Arg.Any<bool>());
             Assert.True(viewModel.HasData);
             Assert.Single(viewModel.BetTypeOddsItems);
         }
@@ -312,14 +311,14 @@
             // Arrange 
             oddsService
                 .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<bool>())
-                .Returns(CreateOdds((int)BetType.OneXTwo));
+                .Returns(CreateOdds(BetType.OneXTwo.Value));
 
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
-                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds((int)BetType.OneXTwo) }
+                BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.OneXTwo.Value) }
             };
 
             oddsComparison.BetTypeOddsList.First().BetOptions.First(x=>x.Type == "home").LiveOdds = 5.6m;
