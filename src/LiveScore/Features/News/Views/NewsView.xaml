@@ -20,7 +20,7 @@
         <ToolbarItem Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
