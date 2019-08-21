@@ -88,7 +88,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             IsLoading = !isRefresh;
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, (int)betType, oddsFormat, bookmaker.Id, isRefresh);
+            var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, isRefresh);
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 

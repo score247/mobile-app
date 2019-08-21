@@ -272,6 +272,15 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%403x.png">
       <Link>Resources\images\common\penalty_goal%403x.png</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\default_flag.png">
+      <Link>Resources\images\common\default_flag.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\default_flag%402x.png">
+      <Link>Resources\images\common\default_flag%402x.png</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\default_flag%403x.png">
+      <Link>Resources\images\common\default_flag%403x.png</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

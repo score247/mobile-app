@@ -14,10 +14,7 @@
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.OneXTwo, betTypeOdds, navigationService, depdendencyResolver)
-        {
-            BetTypeOdds = betTypeOdds;
-
-            Initialize();
+        {            
         }
 
         public string HomeLiveOdds { get; private set; }

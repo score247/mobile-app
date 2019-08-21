@@ -91,7 +91,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
         private Task HandleButtonCommand(string betTypeId)
-            => LoadData(() => LoadOdds((BetType)(int.Parse(betTypeId)), oddsFormat));
+            => LoadData(() => LoadOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)) , oddsFormat));
 
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
@@ -166,7 +166,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
                 SelectedBetType = betType;
 
-                var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)betType, formatType, isRefresh);
+                var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betType.Value, formatType, isRefresh);
 
                 HasData = odds.BetTypeOddsList?.Any() == true;
 
@@ -191,10 +191,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
-                oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == (int)SelectedBetType))
+                oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == SelectedBetType.Value))
             {
                 var needToReOrder = false;
-                var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == (int)SelectedBetType);
+                var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {                   
@@ -217,7 +217,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
 
-                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (int)SelectedBetType, oddsFormat, forceFetchNewData: true);
+                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, oddsFormat, forceFetchNewData: true);
             }
         }
 

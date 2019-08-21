@@ -25,8 +25,8 @@
 
         private const string matchId = "sr:match:1";
         private readonly Bookmaker bookmaker;
-        private const BetType betType = BetType.OneXTwo;
-        private const string oddsFormat = "dec";
+        private readonly BetType betType = BetType.OneXTwo;
+        private readonly string oddsFormat = "dec";
 
         public OddsMovementViewModelTests(ViewModelBaseFixture baseFixture)
         {

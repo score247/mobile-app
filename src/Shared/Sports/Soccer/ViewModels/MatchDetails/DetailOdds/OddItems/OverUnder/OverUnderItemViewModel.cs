@@ -14,10 +14,7 @@
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.OverUnder, betTypeOdds, navigationService, depdendencyResolver)
-        {
-            this.BetTypeOdds = betTypeOdds;
-
-            Initialize();
+        {            
         }
 
         public string OverLiveOdds { get; private set; }

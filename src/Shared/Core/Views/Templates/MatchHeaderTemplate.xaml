@@ -31,7 +31,7 @@
                     Grid.Row="0"
                     Grid.Column="0"
                     Style="{StaticResource LeagueFlagContainer}">
-                    <Image Source="images/flag_league/flag_england.png" Style="{StaticResource LeagueFlag}" />
+                    <Image Source="images/common/default_flag.png" Style="{StaticResource LeagueFlag}" />
                 </StackLayout>
                 <Label
                     Grid.Row="0"
