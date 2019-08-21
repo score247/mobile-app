@@ -3,74 +3,103 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models;
-    using LiveScore.Core.Models.Leagues;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Extensions;
-    using LiveScore.Soccer.Models.Leagues;
-    using LiveScore.Soccer.Models.Teams;
-    using Newtonsoft.Json;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class Match : Entity<string, string>, IMatch
+    public class Match : IMatch
     {
-        public DateTimeOffset EventDate { get; set; }
+        private const int NumberOfFullTimePeriodsResult = 2;
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Team>>))]
-        public IEnumerable<ITeam> Teams { get; set; }
+        /// <summary>
+        /// Keep private setter for Json Serializer
+        /// </summary>
+        public string Id { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<MatchResult>))]
-        public IMatchResult MatchResult { get; set; }
+        public DateTimeOffset EventDate { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimelineEvent>>))]
-        public IEnumerable<ITimelineEvent> TimeLines { get; set; }
+        public string LeagueId { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<MatchCondition>))]
-        public IMatchCondition MatchCondition { get; set; }
+        public string LeagueName { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<League>))]
-        public ILeague League { get; set; }
+        public string HomeTeamId { get; private set; }
 
-        public int Attendance { get; set; }
+        public string HomeTeamName { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Venue>))]
-        public IVenue Venue { get; set; }
+        public string AwayTeamId { get; private set; }
 
-        public string Referee { get; set; }
+        public string AwayTeamName { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<TimelineEvent>))]
-        public ITimelineEvent LatestTimeline { get; set; }
+        public MatchStatus MatchStatus { get; private set; }
+
+        public MatchStatus EventStatus { get; private set; }
+
+        public byte HomeScore { get; private set; }
+
+        public byte AwayScore { get; private set; }
+
+        public string WinnerId { get; private set; }
+
+        public string AggregateWinnerId { get; private set; }
+
+        public byte HomeRedCards { get; private set; }
+
+        public byte HomeYellowRedCards { get; private set; }
+
+        public byte AwayRedCards { get; private set; }
+
+        public byte AwayYellowRedCards { get; private set; }
+
+        public byte MatchTime { get; private set; }
+
+        public string StoppageTime { get; private set; }
+
+        public byte InjuryTimeAnnounced { get; private set; }
+
+        public EventType LastTimelineType { get; private set; }
+
+        public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
 
         public string HomePenaltyImage
-            => MatchResult.EventStatus.IsClosed
-                    && MatchResult.GetPenaltyResult() != null
-                    && Teams.FirstOrDefault()?.Id == MatchResult.WinnerId ?
-                Images.PenaltyWinner.Value : string.Empty;
+            => EventStatus.IsClosed
+                    && GetPenaltyResult() != null
+                    && HomeTeamId == WinnerId ?
+                    Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
         public string AwayPenaltyImage
-             => MatchResult.EventStatus.IsClosed
-                    && MatchResult.GetPenaltyResult() != null
-                    && Teams.LastOrDefault()?.Id == MatchResult.WinnerId ?
-                Images.PenaltyWinner.Value : string.Empty;
+             => EventStatus.IsClosed
+                    && GetPenaltyResult() != null
+                    && AwayTeamId == WinnerId ?
+                    Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
         public string HomeSecondLegImage
-              => MatchResult.EventStatus.IsClosed
-                    && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
-                    && Teams.FirstOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
-                Images.SecondLeg.Value : string.Empty;
+              => EventStatus.IsClosed
+                    && (!string.IsNullOrEmpty(AggregateWinnerId)
+                    && HomeTeamId == AggregateWinnerId) ?
+                    Enumerations.Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
-               => MatchResult.EventStatus.IsClosed
-                    && (!string.IsNullOrEmpty(MatchResult.AggregateWinnerId)
-                    && Teams.LastOrDefault()?.Id == MatchResult.AggregateWinnerId) ?
-                Images.SecondLeg.Value : string.Empty;
+               => EventStatus.IsClosed
+                    && (!string.IsNullOrEmpty(AggregateWinnerId)
+                    && AwayTeamId == AggregateWinnerId) ?
+                    Enumerations.Images.SecondLeg.Value : string.Empty;
 
-        public bool IsInExtraTime => MatchResult.IsInExtraTime();
+        public bool IsInExtraTime => EventStatus.IsLive && MatchStatus.IsInExtraTime;
 
-        public bool IsInLiveAndNotExtraTime => MatchResult.IsLiveAndNotExtraTime();
+        public bool IsInLiveAndNotExtraTime => EventStatus.IsLive && !MatchStatus.IsInExtraTime;
+
+        public byte TotalHomeRedCards => (byte)(HomeRedCards + HomeYellowRedCards);
+
+        public byte TotalAwayRedCards => (byte)(AwayRedCards + AwayYellowRedCards);
+
+        public MatchPeriod GetPenaltyResult()
+            => MatchPeriods?.FirstOrDefault(p => p.PeriodType?.IsPenalties == true);
+
+        public MatchPeriod GetOvertimeResult()
+            => MatchPeriods?.FirstOrDefault(p => p.PeriodType?.IsOvertime == true);
+
+        public bool HasFullTimeResult()
+            => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
     }
 }

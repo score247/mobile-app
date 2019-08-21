@@ -21,7 +21,7 @@ namespace Scores.Tests.ViewModels
         private readonly ScoresViewModel viewModel;
         private readonly IMatchService matchService;
         private readonly IHubService hubService;
-        private readonly IList<IMatch> matchData;
+        private readonly IList<IMatchOld> matchData;
         private readonly CompareLogic comparer;
         private readonly Fixture specimens;
         private readonly FakeHubConnection hubConnection;
@@ -31,7 +31,7 @@ namespace Scores.Tests.ViewModels
             specimens = baseFixture.CommonFixture.Specimens;
             comparer = baseFixture.CommonFixture.Comparer;
             matchData = baseFixture.CommonFixture.Specimens
-                .CreateMany<IMatch>().ToList();
+                .CreateMany<IMatchOld>().ToList();
 
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver

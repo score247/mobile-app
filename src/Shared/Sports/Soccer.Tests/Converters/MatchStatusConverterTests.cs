@@ -35,7 +35,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsNotStarted_ReturnEventTime()
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
                 MatchResult = new MatchResult
@@ -63,7 +63,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
                 MatchResult = new MatchResult
@@ -84,7 +84,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsLive_ShowMatchMinute()
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
                 MatchResult = new MatchResult
@@ -111,7 +111,7 @@ namespace Soccer.Tests.Converters
             string matchStatus, int periodEndTime, int currentMatchTime, int expectedInjuryTime)
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
                 MatchResult = new MatchResult
@@ -144,7 +144,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsClosed_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 MatchResult = new MatchResult
                 {
@@ -168,7 +168,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 MatchResult = new MatchResult
                 {
@@ -187,7 +187,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_InInjuryTimeShown_ShowExpectedStatus()
         {
             // Arrange
-            var match = new Match
+            var match = new MatchOld
             {
                 MatchResult = new MatchResult
                 {
@@ -217,7 +217,7 @@ namespace Soccer.Tests.Converters
         {
             // Arrange
             localStorage.GetValueOrDefaultInMemory("InjuryTimeAnnouced123", 0).Returns(4);
-            var match = new Match
+            var match = new MatchOld
             {
                 Id = "123",
                 MatchResult = new MatchResult

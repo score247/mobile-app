@@ -57,7 +57,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public bool IsRefreshing { get; set; }
 
-        public IMatch Match { get; private set; }
+        public IMatchOld Match { get; private set; }
 
         public string DisplayEventDate { get; private set; }
 
@@ -130,13 +130,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             BuildDetailInfo(Match);
         }
 
-        private void BuildDetailInfo(IMatch match)
+        private void BuildDetailInfo(IMatchOld match)
         {
             BuildInfoItems(match);
             BuildFooterInfo(match);
         }
 
-        private void BuildInfoItems(IMatch match)
+        private void BuildInfoItems(IMatchOld match)
         {
             match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
 
@@ -152,7 +152,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
         }
 
-        private void BuildFooterInfo(IMatch match)
+        private void BuildFooterInfo(IMatchOld match)
         {
             DisplayEventDate = match.EventDate.ToFullLocalDateTime();
 

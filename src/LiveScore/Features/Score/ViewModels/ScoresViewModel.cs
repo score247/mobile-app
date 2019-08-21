@@ -63,7 +63,7 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public IList<IGrouping<dynamic, MatchViewModel>> MatchItemsSource { get; private set; }
+        public IList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateCommand RefreshCommand { get; }
 
@@ -189,13 +189,13 @@ namespace LiveScore.Score.ViewModels
             Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
         }
 
-        private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatchSummary> matches)
+        private IList<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
                     match => new MatchViewModel(match, matchStatusConverter, CurrentSportId));
 
-            return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
-                => new { item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));
+            return new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItemViewModels.GroupBy(item
+                => new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate)));
         }
 
         internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)

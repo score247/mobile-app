@@ -14,12 +14,12 @@ namespace LiveScore.Basketball.Services
 
     public class MatchService : IMatchService
     {
-        public Task<IMatch> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public Task<IMatchOld> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<IMatchSummary>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
+        public Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
         {
             throw new NotImplementedException();
         }

@@ -93,7 +93,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
-            if (parameters?["Match"] is IMatch match)
+            if (parameters?["Match"] is IMatchOld match)
             {
                 tabItemViewModels = new Dictionary<string, TabItemViewModelBase>
                 {
@@ -206,7 +206,7 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
-        private void BuildGeneralInfo(IMatch match)
+        private void BuildGeneralInfo(IMatchOld match)
         {
             BuildViewModel(match);
 
@@ -215,7 +215,7 @@ namespace LiveScore.Soccer.ViewModels
             BuildSecondLeg(match);
         }
 
-        private void BuildSecondLeg(IMatch match)
+        private void BuildSecondLeg(IMatchOld match)
         {
             var winnerId = match.MatchResult?.AggregateWinnerId;
 
@@ -225,13 +225,13 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private void BuildScoreAndEventDate(IMatch match)
+        private void BuildScoreAndEventDate(IMatchOld match)
         {
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
         // TODO: update here
-        private void BuildViewModel(IMatch match)
+        private void BuildViewModel(IMatchOld match)
             => MatchViewModel = new MatchViewModel(null, matchStatusConverter, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
