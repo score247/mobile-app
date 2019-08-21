@@ -149,7 +149,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public override async void OnResume()
         {
             //TODO not re-load odds when match is closed
-            await LoadOddsByBetType(SelectedBetType, oddsFormat, isRefresh: true);
+            await LoadOddsByBetType(oddsFormat, isRefresh: true);
         }
 
         private async Task StartOddsHubConnection()
@@ -167,24 +167,24 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 IsLoading = !isRefresh;
 
                 SelectedBetType = betType;
-                await LoadOddsByBetType(betType, formatType, isRefresh);
+                await LoadOddsByBetType(formatType, isRefresh);
 
                 IsRefreshing = false;
                 IsLoading = false;
             }
         }
 
-        private async Task LoadOddsByBetType(BetType betType, string formatType, bool isRefresh)
+        private async Task LoadOddsByBetType(string formatType, bool isRefresh)
         {
-            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betType.Value, formatType, isRefresh);
+            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, formatType, isRefresh);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 
-            HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+            HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
             BetTypeOddsItems = HasData
                 ? new List<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                    new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
+                    new BaseItemViewModel(SelectedBetType, t, NavigationService, DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();
         }
