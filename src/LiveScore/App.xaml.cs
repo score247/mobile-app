@@ -11,13 +11,14 @@ using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
-using LiveScore.Favorites;
-using LiveScore.League;
-using LiveScore.Menu;
-using LiveScore.News;
+using LiveScore.Features.Favorites;
+using LiveScore.Features.Favorites;
+using LiveScore.Features.League;
+using LiveScore.Features.Menu;
+using LiveScore.Features.News;
 using LiveScore.Score;
 using LiveScore.Soccer;
-using LiveScore.TVSchedule;
+using LiveScore.Features.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MethodTimer;
@@ -79,8 +80,6 @@ namespace LiveScore
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
-
-            
         }
 
         protected override void ConfigureViewModelLocator()

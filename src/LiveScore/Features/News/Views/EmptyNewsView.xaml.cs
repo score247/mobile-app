@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace LiveScore.News.Views
+namespace LiveScore.Features.News.Views
 {
     public partial class EmptyNewsView : ContentPage
     {

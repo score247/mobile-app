@@ -1,4 +1,4 @@
-﻿namespace LiveScore.News.Views
+﻿namespace LiveScore.Features.News.Views
 {
     using Xamarin.Forms;
 

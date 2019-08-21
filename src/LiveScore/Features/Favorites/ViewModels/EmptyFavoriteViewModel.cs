@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Favorites.ViewModels
+﻿namespace LiveScore.Features.Favorites.ViewModels
 {
     using LiveScore.Core;
     using LiveScore.Core.ViewModels;

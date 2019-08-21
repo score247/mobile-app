@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="LiveScore.TVSchedule.Views.TVScheduleView"
+    x:Class="LiveScore.Features.TVSchedule.Views.TVScheduleView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:resources="clr-namespace:LiveScore.TVSchedule.ViewResources"
+    xmlns:resources="clr-namespace:LiveScore.Features.TVSchedule.ViewResources"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>

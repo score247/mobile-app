@@ -1,4 +1,4 @@
-﻿namespace LiveScore.News.ViewModels
+﻿namespace LiveScore.Features.News.ViewModels
 {
     using Core.ViewModels;
     using LiveScore.Core;

@@ -1,7 +1,7 @@
-﻿namespace LiveScore.TVSchedule
+﻿namespace LiveScore.Features.TVSchedule
 {
-    using LiveScore.TVSchedule.ViewModels;
-    using LiveScore.TVSchedule.Views;
+    using LiveScore.Features.TVSchedule.ViewModels;
+    using LiveScore.Features.TVSchedule.Views;
     using Prism.Ioc;
     using Prism.Modularity;
 

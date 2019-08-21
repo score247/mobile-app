@@ -1,4 +1,4 @@
-﻿namespace LiveScore.TVSchedule.ViewModels
+﻿namespace LiveScore.Features.TVSchedule.ViewModels
 {
     using LiveScore.Core;
     using LiveScore.Core.ViewModels;

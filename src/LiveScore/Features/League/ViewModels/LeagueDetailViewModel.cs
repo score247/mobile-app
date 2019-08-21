@@ -1,4 +1,4 @@
-﻿namespace LiveScore.League.ViewModels
+﻿namespace LiveScore.Features.League.ViewModels
 {
     using Core.ViewModels;
     using LiveScore.Core;

@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace LiveScore.Favorites.Views
+namespace LiveScore.Features.Favorites.Views
 {
     public partial class EmptyFavoriteView : ContentPage
     {

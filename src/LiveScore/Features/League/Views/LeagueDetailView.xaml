@@ -4,7 +4,7 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-             x:Class="LiveScore.League.Views.LeagueDetailView"
+             x:Class="LiveScore.Features.League.Views.LeagueDetailView"
              Title="{Binding Title}">
     <ContentPage.Resources>
         <ResourceDictionary>

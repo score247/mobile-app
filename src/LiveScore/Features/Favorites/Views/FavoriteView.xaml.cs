@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Favorites.Views
+﻿namespace LiveScore.Features.Favorites.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

@@ -1,7 +1,7 @@
 ﻿
 using Xamarin.Forms;
 
-namespace LiveScore.TVSchedule.Views
+namespace LiveScore.Features.TVSchedule.Views
 {
     public partial class EmptyTVScheduleView : ContentPage
     {

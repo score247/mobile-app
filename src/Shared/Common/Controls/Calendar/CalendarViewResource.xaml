@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                    x:Class="LiveScore.Common.ViewResources.CalendarViewResource">
-    <Style x:Key="ActionButton" BasedOn="{StaticResource ButtonIcon}" TargetType="Button">        
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LiveScore.Common.ViewResources.CalendarViewResource"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style
+        x:Key="ActionButton"
+        BasedOn="{StaticResource ButtonIcon}"
+        TargetType="Button">
         <Setter Property="BorderRadius" Value="2" />
         <Setter Property="WidthRequest" Value="24" />
         <Setter Property="HeightRequest" Value="24" />
@@ -12,10 +16,16 @@
         <Setter Property="TextColor" Value="{StaticResource DisabledDateColor}" />
         <Setter Property="FontSize" Value="10" />
     </Style>
-    <Style x:Key="PrevButton" BasedOn="{StaticResource ActionButton}" TargetType="Button">
+    <Style
+        x:Key="PrevButton"
+        BasedOn="{StaticResource ActionButton}"
+        TargetType="Button">
         <Setter Property="Text" Value="&#xe912;" />
     </Style>
-    <Style x:Key="NextButton" BasedOn="{StaticResource ActionButton}" TargetType="Button">
+    <Style
+        x:Key="NextButton"
+        BasedOn="{StaticResource ActionButton}"
+        TargetType="Button">
         <Setter Property="Text" Value="&#xe913;" />
     </Style>
 
@@ -28,7 +38,7 @@
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource DisabledDateColor}" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />        
+        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
     </Style>
 
     <Style x:Key="Date" TargetType="Button">
@@ -40,10 +50,16 @@
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
     </Style>
-    <Style x:Key="DisabledDate" BasedOn="{StaticResource Date}" TargetType="Button">
+    <Style
+        x:Key="DisabledDate"
+        BasedOn="{StaticResource Date}"
+        TargetType="Button">
         <Setter Property="TextColor" Value="{StaticResource DisabledDateColor}" />
     </Style>
-    <Style x:Key="CurrentDate" BasedOn="{StaticResource Date}" TargetType="Button">
+    <Style
+        x:Key="CurrentDate"
+        BasedOn="{StaticResource Date}"
+        TargetType="Button">
         <Setter Property="BackgroundColor" Value="{StaticResource SecondAccentColor}" />
         <Setter Property="BorderRadius" Value="16" />
     </Style>

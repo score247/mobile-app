@@ -1,4 +1,4 @@
-﻿namespace LiveScore.TVSchedule.Views
+﻿namespace LiveScore.Features.TVSchedule.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

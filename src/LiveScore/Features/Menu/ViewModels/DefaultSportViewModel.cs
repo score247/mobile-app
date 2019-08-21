@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Menu.ViewModels
+﻿namespace LiveScore.Features.Menu.ViewModels
 {
     using LiveScore.Core;
     using Prism.Navigation;
