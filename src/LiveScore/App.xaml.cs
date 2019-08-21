@@ -12,7 +12,9 @@ using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
+
 using LiveScore.Features.Favorites;
+
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
@@ -59,14 +61,14 @@ namespace LiveScore
         {
             Registrations.Start("Score247.App");
 
-            JsonConvert.DefaultSettings = () =>
+            var jsonSettings = new JsonSerializerSettings
             {
-                return new JsonSerializerSettings
-                {
-                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                    ContractResolver = new PrivateSetterContractResolver()
-                };
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                ContractResolver = new PrivateSetterContractResolver()
             };
+
+            Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
+            JsonConvert.DefaultSettings = () => jsonSettings;
 
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 

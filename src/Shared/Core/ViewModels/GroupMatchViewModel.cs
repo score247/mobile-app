@@ -8,7 +8,7 @@
         public GroupMatchViewModel(string leagueId, string leagueName, DateTimeOffset eventDate)
         {
             LeagueId = leagueId;
-            LeagueName = leagueName.ToUpperInvariant();
+            LeagueName = leagueName?.ToUpperInvariant();
             EventDate = eventDate.ToLocalShortDayMonth();
         }
 
@@ -30,6 +30,6 @@
             return LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
         }
 
-        public override int GetHashCode() => LeagueId.GetHashCode();
+        public override int GetHashCode() => LeagueId?.GetHashCode() ?? 0;
     }
 }

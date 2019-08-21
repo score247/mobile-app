@@ -62,32 +62,24 @@
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
 
         public string HomePenaltyImage
-            => EventStatus.IsClosed
-                    && GetPenaltyResult() != null
-                    && HomeTeamId == WinnerId ?
-                    Enumerations.Images.PenaltyWinner.Value : string.Empty;
+            => HomeWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
         public string AwayPenaltyImage
-             => EventStatus.IsClosed
-                    && GetPenaltyResult() != null
-                    && AwayTeamId == WinnerId ?
-                    Enumerations.Images.PenaltyWinner.Value : string.Empty;
+             => AwayWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
         public string HomeSecondLegImage
-              => EventStatus.IsClosed
-                    && (!string.IsNullOrEmpty(AggregateWinnerId)
-                    && HomeTeamId == AggregateWinnerId) ?
-                    Enumerations.Images.SecondLeg.Value : string.Empty;
+              => HomeWinSecondLeg ? Enumerations.Images.SecondLeg.Value : string.Empty;
 
         public string AwaySecondLegImage
-               => EventStatus.IsClosed
-                    && (!string.IsNullOrEmpty(AggregateWinnerId)
-                    && AwayTeamId == AggregateWinnerId) ?
-                    Enumerations.Images.SecondLeg.Value : string.Empty;
+               => AwayWinSecondLeg ? Enumerations.Images.SecondLeg.Value : string.Empty;
 
-        public bool IsInExtraTime => EventStatus.IsLive && MatchStatus.IsInExtraTime;
+        public bool IsInExtraTime
+            => EventStatus != null && EventStatus.IsLive
+            && MatchStatus != null && MatchStatus.IsInExtraTime;
 
-        public bool IsInLiveAndNotExtraTime => EventStatus.IsLive && !MatchStatus.IsInExtraTime;
+        public bool IsInLiveAndNotExtraTime
+            => EventStatus != null && EventStatus.IsLive
+            && MatchStatus != null && !MatchStatus.IsInExtraTime;
 
         public byte TotalHomeRedCards => (byte)(HomeRedCards + HomeYellowRedCards);
 
@@ -101,5 +93,17 @@
 
         public bool HasFullTimeResult()
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
+
+        private bool HomeWinPenalty
+           => EventStatus != null && EventStatus.IsClosed && GetPenaltyResult() != null && HomeTeamId == WinnerId;
+
+        private bool AwayWinPenalty
+            => EventStatus != null && EventStatus.IsClosed && GetPenaltyResult() != null && AwayTeamId == WinnerId;
+
+        private bool HomeWinSecondLeg
+          => EventStatus != null && EventStatus.IsClosed && (!string.IsNullOrEmpty(AggregateWinnerId) && HomeTeamId == AggregateWinnerId);
+
+        private bool AwayWinSecondLeg
+          => EventStatus != null && EventStatus.IsClosed && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
     }
 }

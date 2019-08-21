@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Soccer.Views.Templates
 {
+    using System;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -8,7 +9,13 @@
     {
         public MatchDataTemplate()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+            }
+            catch (Exception ex)
+            {
+            }
         }
     }
 }

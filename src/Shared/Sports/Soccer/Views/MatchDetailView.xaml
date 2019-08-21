@@ -26,7 +26,6 @@
         <coreResources:MatchViewResource />
       </ResourceDictionary.MergedDictionaries>
       <commonConverters:UpperCaseConverter x:Key="upperCaseConverter" />
-      <coreConverters:MatchHeaderEventDayConverter x:Key="matchHeaderEventDayConverter" />
       <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
     </ResourceDictionary>
   </ContentPage.Resources>
