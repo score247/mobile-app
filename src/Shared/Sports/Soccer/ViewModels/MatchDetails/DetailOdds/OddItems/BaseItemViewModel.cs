@@ -36,10 +36,12 @@
             BetTypeOdds = betTypeOdds;
             BetType = betType;
 
-            Bookmaker = betTypeOdds.Bookmaker?.Name;
+            BookmakerName = betTypeOdds.Bookmaker?.Name;
+
+            Initialize();
         }
 
-        public string Bookmaker { get; }
+        public string BookmakerName { get; }
 
         public IBetTypeOdds BetTypeOdds { get; protected set; }
 
@@ -54,7 +56,7 @@
                 return TemplateMapper[BetType];
             }
 
-            return new OneXTwoItemTemplate();
+            throw new NotImplementedException($"Not implemented {BetType} yet");
         }
 
         public BaseItemViewModel CreateInstance()
@@ -66,7 +68,7 @@
                     BetTypeOdds, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
-            return new BaseItemViewModel(BetType, BetTypeOdds, NavigationService, DependencyResolver);
+            throw new NotImplementedException($"Not implemented {BetType} yet");
         }
 
         public virtual void UpdateOdds(IBetTypeOdds betTypeOdds)
