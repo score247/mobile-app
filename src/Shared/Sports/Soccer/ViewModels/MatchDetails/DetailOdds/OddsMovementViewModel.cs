@@ -5,7 +5,7 @@
 namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System;
-    using System.Collections.ObjectModel;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
@@ -22,8 +22,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
     public class OddsMovementViewModel : ViewModelBase
     {
-
-
         private readonly IOddsService oddsService;
 
         private string matchId;
@@ -48,7 +46,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public bool HasNoData => !HasData;
 
-        public ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
+        public IList<IGrouping<string, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -95,15 +93,14 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
             var OddsMovementItems = HasData
-                    ? new ObservableCollection<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
+                    ? new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
                         new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
                         .CreateInstance()))
-                    : new ObservableCollection<BaseMovementItemViewModel>();
+                    : new List<BaseMovementItemViewModel>();
 
             GroupOddsMovementItems = HasData
-                ? new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item
-                    => new { item.CurrentSportName }))
-                : new ObservableCollection<IGrouping<dynamic, BaseMovementItemViewModel>>();
+                ? new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName))
+                : new List<IGrouping<string, BaseMovementItemViewModel>>();
 
             IsRefreshing = false;
             IsLoading = false;

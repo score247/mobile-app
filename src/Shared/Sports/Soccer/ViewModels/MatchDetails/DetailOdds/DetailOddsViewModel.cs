@@ -5,6 +5,7 @@
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading;
@@ -65,10 +66,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             TabHeaderIcon = TabDetailImages.Odds;
             TabHeaderActiveIcon = TabDetailImages.OddsActive;
 
-            BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>();
+            BetTypeOddsItems = new List<BaseItemViewModel>();
         }
 
-        public ObservableCollection<BaseItemViewModel> BetTypeOddsItems { get; private set; }
+        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
 
         public DataTemplate HeaderTemplate { get; private set; }
 
@@ -173,10 +174,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
                 BetTypeOddsItems = HasData
-                    ? new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
+                    ? new List<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
                         new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
                         .CreateInstance()))
-                    : new ObservableCollection<BaseItemViewModel>();
+                    : new List<BaseItemViewModel>();
 
                 IsRefreshing = false;
                 IsLoading = false;
