@@ -1,7 +1,15 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
-    public class MatchFunction : Entity<string, string>
+    public class MatchFunction
     {
-        public string Abbreviation { get; set; }
+        public MatchFunction(string abbreviation, string name)
+        {
+            Abbreviation = abbreviation;
+            Name = name;
+        }
+
+        public string Abbreviation { get; }
+
+        public string Name { get; }
     }
 }
