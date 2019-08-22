@@ -4,11 +4,6 @@
 
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
@@ -22,6 +17,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     internal class DetailOddsViewModel : TabItemViewModelBase, IDisposable
@@ -65,10 +66,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             TabHeaderIcon = TabDetailImages.Odds;
             TabHeaderActiveIcon = TabDetailImages.OddsActive;
 
-            BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>();
+            BetTypeOddsItems = new List<BaseItemViewModel>();
         }
 
-        public ObservableCollection<BaseItemViewModel> BetTypeOddsItems { get; private set; }
+        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
 
         public DataTemplate HeaderTemplate { get; private set; }
 
@@ -145,9 +146,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             base.Clean();
         }
 
-        public override void OnResume()
+        public override async void OnResume()
         {
-            IsRefreshing = true;
+            //TODO not re-load odds when match is closed
+            await LoadOddsByBetType(oddsFormat, isRefresh: true);
         }
 
         private async Task StartOddsHubConnection()
@@ -165,22 +167,26 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 IsLoading = !isRefresh;
 
                 SelectedBetType = betType;
-
-                var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betType.Value, formatType, isRefresh);
-
-                HasData = odds.BetTypeOddsList?.Any() == true;
-
-                HeaderTemplate = new BaseHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
-
-                BetTypeOddsItems = HasData
-                    ? new ObservableCollection<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
-                        new BaseItemViewModel(betType, t, NavigationService, DependencyResolver)
-                        .CreateInstance()))
-                    : new ObservableCollection<BaseItemViewModel>();
+                await LoadOddsByBetType(formatType, isRefresh);
 
                 IsRefreshing = false;
                 IsLoading = false;
             }
+        }
+
+        private async Task LoadOddsByBetType(string formatType, bool isRefresh)
+        {
+            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, formatType, isRefresh);
+
+            HasData = odds.BetTypeOddsList?.Any() == true;
+
+            HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+
+            BetTypeOddsItems = HasData
+                ? new List<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
+                    new BaseItemViewModel(SelectedBetType, t, NavigationService, DependencyResolver)
+                    .CreateInstance()))
+                : new List<BaseItemViewModel>();
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)

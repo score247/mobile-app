@@ -40,7 +40,8 @@
         public async Task GetMatches_WhenCall_InjectCacheService()
         {
             // Arrange
-            var dateRange = new DateRange(DateTime.Today);
+            var dateTime = DateTime.Now;
+            var dateRange = new DateRange(dateTime);
 
             // Act
             await matchService.GetMatches(dateRange, Language.English);
@@ -57,7 +58,8 @@
         public async Task GetMatches_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            var dateRange = new DateRange(DateTime.Today);
+            var dateTime = DateTime.Now;
+            var dateRange = new DateRange(dateTime);
             cacheService.GetAndFetchLatestValue(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),

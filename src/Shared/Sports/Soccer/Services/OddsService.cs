@@ -32,7 +32,7 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType, bool forceFetchNewData = false)
+        public async Task<IMatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNewData = false)
         {
             try
             {
@@ -51,13 +51,13 @@
             }
         }
 
-        private async Task<MatchOdds> GetOddsFromApi(string lang, string matchId, int betTypeId, string formatType)
+        private async Task<MatchOdds> GetOddsFromApi(string lang, string matchId, byte betTypeId, string formatType)
            => await apiService.Execute
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
            );
 
-        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false)
+        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false)
         {
             try
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        private async Task<MatchOddsMovement> GetOddsMovementFromApi(string lang, string matchId, int betTypeId, string formatType, string bookmakerId)
+        private async Task<MatchOddsMovement> GetOddsMovementFromApi(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId)
            => await apiService.Execute
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)

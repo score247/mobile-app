@@ -79,7 +79,7 @@
         public void OnAppearing_Always_LoadOddsMovement()
         {
             // Arrange
-            oddsService.GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>())
+            oddsService.GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>())
                 .Returns(CreateMatchOddsMovement());
             var expectedViewModels = new ObservableCollection<BaseMovementItemViewModel>
             {
@@ -119,7 +119,7 @@
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<int>(), Arg.Any<string>(), Arg.Any<string>(), true);
+            await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<string>(), true);
         }
     }
 }

@@ -11,7 +11,7 @@
     BackgroundColor="{StaticResource PrimaryColor}"
     mc:Ignorable="d">
     <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" />
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
