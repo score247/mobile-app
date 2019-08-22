@@ -57,13 +57,7 @@ namespace LiveScore
         protected override async void OnInitialized()
         {
             Registrations.Start("Score247.App");
-
-            var jsonSettings = new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ContractResolver = new PrivateSetterContractResolver()
-            };
-
+            
             Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
 
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;

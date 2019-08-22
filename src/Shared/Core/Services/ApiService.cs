@@ -17,19 +17,20 @@
     {
         private readonly IApiPolicy apiPolicy;
         private readonly ISettingsService settingsService;
-        private static readonly RefitSettings refitSettings = new RefitSettings
-        {
-            ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ContractResolver = new PrivateSetterContractResolver()
-            })
-        };
+        private readonly RefitSettings refitSettings;
 
-        public ApiService(IApiPolicy apiPolicy, ISettingsService settingsService)
+        public ApiService(IApiPolicy apiPolicy, ISettingsService settingsService, RefitSettings refitSettings)
         {
             this.apiPolicy = apiPolicy;
             this.settingsService = settingsService;
+            this.refitSettings = refitSettings ?? new RefitSettings
+            {
+                ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
+                {
+                    DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                    ContractResolver = new PrivateSetterContractResolver()
+                })
+            };
         }
 
         public T GetApi<T>()
