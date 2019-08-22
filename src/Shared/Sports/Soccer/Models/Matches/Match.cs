@@ -136,6 +136,8 @@
             InjuryTimeAnnounced = timelineEvent.InjuryTimeAnnounced;
         }
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+
         public void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome)
         {
             var soccerTeamStats = teamStatistic as TeamStatistic;
@@ -151,6 +153,8 @@
                 AwayYellowRedCards = soccerTeamStats.YellowRedCards;
             }
         }
+
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
         public string HomePenaltyImage
             => HomeWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;

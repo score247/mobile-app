@@ -120,7 +120,7 @@ namespace LiveScore.Score.ViewModels
 
         private async Task OnRefreshCommand()
         {
-            Profiler.Start(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
+            Profiler.Start(GetType().Name + ".LoadMatches.PullDownToRefresh");
 
             await LoadData(() => LoadMatches(selectedDateRange, true), false);
         }
@@ -169,7 +169,7 @@ namespace LiveScore.Score.ViewModels
                     SettingsService.Language,
                     forceFetchNewData);
 
-            MatchItemsSource = BuildMatchItemSource(matches);
+            Device.BeginInvokeOnMainThread(() => MatchItemsSource = BuildMatchItemSource(matches));
 
             selectedDateRange = dateRange;
             IsRefreshing = false;
