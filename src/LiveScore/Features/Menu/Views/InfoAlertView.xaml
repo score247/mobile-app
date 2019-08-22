@@ -1,60 +1,84 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Features.Menu.Views.InfoAlertView"
-             BackgroundColor="{StaticResource PrimaryColor}"
-             Title="Info Alert">
+<ContentPage
+    x:Class="LiveScore.Features.Menu.Views.InfoAlertView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Info Alert"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem
+            Name="Done"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Done" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
         <StackLayout>
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoriteTeamAlert" Text="Favorite Team Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
-            </FlexLayout>
-            <ContentView>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-            </ContentView>            
-
-            <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoritePlayerAlert" Text="Favorite Player Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
+                <Label
+                    x:Name="FavoriteTeamAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite Team Alert" />
+                <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </ContentView>
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoriteMatchAlert" Text="Favorite Match Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
+                <Label
+                    x:Name="FavoritePlayerAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite Player Alert" />
+                <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </ContentView>
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoriteLeagueAlert" Text="Favorite League Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
+                <Label
+                    x:Name="FavoriteMatchAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite Match Alert" />
+                <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </ContentView>
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoriteNationAlert" Text="Favorite Nation Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
+                <Label
+                    x:Name="FavoriteLeagueAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite League Alert" />
+                <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </ContentView>
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="FavoriteClubAlert" Text="Favorite Club Alert" Style="{StaticResource NavName}" />
-                <Switch  IsToggled="True" />
+                <Label
+                    x:Name="FavoriteNationAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite Nation Alert" />
+                <Switch IsToggled="True" />
+            </FlexLayout>
+            <ContentView>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </ContentView>
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <Label
+                    x:Name="FavoriteClubAlert"
+                    Style="{StaticResource NavName}"
+                    Text="Favorite Club Alert" />
+                <Switch IsToggled="True" />
             </FlexLayout>
         </StackLayout>
     </ContentPage.Content>

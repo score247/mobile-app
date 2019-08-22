@@ -12,9 +12,6 @@ using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
-
-using LiveScore.Features.Favorites;
-
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
@@ -67,8 +64,7 @@ namespace LiveScore
                 ContractResolver = new PrivateSetterContractResolver()
             };
 
-            Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
-            JsonConvert.DefaultSettings = () => jsonSettings;
+            
 
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 

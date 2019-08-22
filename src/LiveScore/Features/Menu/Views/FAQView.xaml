@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Features.Menu.Views.FAQView"
-             Title="Frequently Asked Questions"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Features.Menu.Views.FAQView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Frequently Asked Questions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem
+            Name="Done"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Done" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style TargetType="Label">
@@ -18,7 +24,7 @@
             <Setter Property="VerticalOptions" Value="Start" />
             <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
             <Setter Property="Margin" Value="0,0,0,16" />
-            <Setter Property="Padding" Value="16,0"/>
+            <Setter Property="Padding" Value="16,0" />
         </Style>
         <Style x:Key="Question" TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -27,21 +33,21 @@
             <Setter Property="FontSize" Value="{StaticResource SidebarFontSize}" />
         </Style>
         <Style x:Key="Answer" TargetType="StackLayout">
-            <Setter Property="Padding" Value="0,0,0,16"/>
+            <Setter Property="Padding" Value="0,0,0,16" />
         </Style>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Which sports do your scoreboards cover?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Which sports do your scoreboards cover?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Do you have a free version?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Do you have a free version?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
                 <StackLayout Style="{StaticResource Answer}">
@@ -52,28 +58,28 @@
 
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Another frequently asked question?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Another frequently asked question?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Another frequently asked question?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>
 
             <StackLayout Style="{StaticResource FAQ}">
                 <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
-                    <Label Text="Another frequently asked question?" Style="{StaticResource Question}" />
+                    <Label Style="{StaticResource Question}" Text="Another frequently asked question?" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </FlexLayout>
             </StackLayout>

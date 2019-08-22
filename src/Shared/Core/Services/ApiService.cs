@@ -24,14 +24,17 @@
             this.settingsService = settingsService;
         }
 
-        public T GetApi<T>() => RestService.For<T>(settingsService.ApiEndpoint, new RefitSettings
-        {
-            ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ContractResolver = new PrivateSetterContractResolver()
-            })
-        });
+        public T GetApi<T>()
+            => RestService.For<T>(
+                settingsService.ApiEndpoint,
+                new RefitSettings
+                {
+                    ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
+                    {
+                        DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                        ContractResolver = new PrivateSetterContractResolver()
+                    })
+                });
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }

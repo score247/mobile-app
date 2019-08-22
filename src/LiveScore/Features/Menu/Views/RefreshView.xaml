@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Features.Menu.Views.RefreshView"
-             Title="Automatic Refresh"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Features.Menu.Views.RefreshView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Automatic Refresh"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem
+            Name="Done"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Done" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <Style x:Key="RefreshTime" TargetType="Label">
@@ -15,21 +21,27 @@
             <Setter Property="VerticalOptions" Value="Center" />
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
         <StackLayout>
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="AutomaticRefresh" Text="Automatic Refresh" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="AutomaticRefresh"
+                    Style="{StaticResource NavName}"
+                    Text="Automatic Refresh" />
                 <Switch IsToggled="True" />
             </FlexLayout>
             <ContentView>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </ContentView>
-            
+
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label x:Name="RefreshInterval" Text="Refresh Interval" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="RefreshInterval"
+                    Style="{StaticResource NavName}"
+                    Text="Refresh Interval" />
                 <StackLayout Style="{StaticResource StacklayoutHorizontal}">
-                    <Label Text="30 seconds" Style="{StaticResource RefreshTime}" />
+                    <Label Style="{StaticResource RefreshTime}" Text="30 seconds" />
                     <Label Style="{StaticResource ArrowRightIcon}" />
                 </StackLayout>
             </FlexLayout>

@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="LiveScore.Features.Menu.Views.DefaultLanguageView"
-             Title="Default Language"
-             BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage
+    x:Class="LiveScore.Features.Menu.Views.DefaultLanguageView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    Title="Default Language"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem Name="Done" Order="Primary" Text="Done" Priority="1" Command="{Binding DoneCommand}" />
+        <ToolbarItem
+            Name="Done"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            Text="Done" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
@@ -18,7 +24,7 @@
             <Setter Property="Margin" Value="0,0,8,0" />
         </Style>
         <Style x:Key="Flag" TargetType="Image">
-            <Setter Property="Aspect" Value="AspectFit" />            
+            <Setter Property="Aspect" Value="AspectFit" />
         </Style>
     </ContentPage.Resources>
     <StackLayout>
@@ -27,7 +33,10 @@
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_en.png" Style="{StaticResource Flag}" />
                 </StackLayout>
-                <Label x:Name="English" Text="English" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="English"
+                    Style="{StaticResource NavName}"
+                    Text="English" />
             </StackLayout>
             <Label Style="{StaticResource CheckIcon}" />
         </FlexLayout>
@@ -40,9 +49,12 @@
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_in.png" Style="{StaticResource Flag}" />
                 </StackLayout>
-                <Label x:Name="Indonesian" Text="Indonesian" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="Indonesian"
+                    Style="{StaticResource NavName}"
+                    Text="Indonesian" />
             </StackLayout>
-           
+
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -53,9 +65,12 @@
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
                 </StackLayout>
-                <Label x:Name="SimplifiedChinese" Text="Simplified Chinese" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="SimplifiedChinese"
+                    Style="{StaticResource NavName}"
+                    Text="Simplified Chinese" />
             </StackLayout>
-            
+
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -66,9 +81,12 @@
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
                 </StackLayout>
-                <Label x:Name="TraditionalChinese" Text="Traditional Chinese" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="TraditionalChinese"
+                    Style="{StaticResource NavName}"
+                    Text="Traditional Chinese" />
             </StackLayout>
-            
+
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -79,9 +97,12 @@
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_th.png" Style="{StaticResource Flag}" />
                 </StackLayout>
-                <Label x:Name="Thai" Text="Thai" Style="{StaticResource NavName}" />
+                <Label
+                    x:Name="Thai"
+                    Style="{StaticResource NavName}"
+                    Text="Thai" />
             </StackLayout>
-            
+
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -90,11 +111,14 @@
         <FlexLayout Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
                 <StackLayout Style="{StaticResource FlagBox}">
-                  <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
-                </StackLayout>                
-                <Label x:Name="Vietnamese" Text="Vietnamese" Style="{StaticResource NavName}" />
+                    <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
+                </StackLayout>
+                <Label
+                    x:Name="Vietnamese"
+                    Style="{StaticResource NavName}"
+                    Text="Vietnamese" />
             </StackLayout>
-            
+
         </FlexLayout>
     </StackLayout>
 </ContentPage>
