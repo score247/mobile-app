@@ -4,8 +4,10 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
+    using LiveScore.Common.Tests.Extensions;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -28,9 +30,11 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         private readonly CompareLogic comparer;
         private readonly MatchOld match;
         private readonly ICachingService localStorage;
+        private Fixture specimens;
 
         public DetailInfoViewModelTests(ViewModelBaseFixture baseFixture)
         {
+            specimens = new Fixture();
             comparer = baseFixture.CommonFixture.Comparer;
             localStorage = Substitute.For<ICachingService>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
@@ -52,34 +56,33 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
         private MatchOld CreateMatch()
         {
-            var matchData = new MatchOld
+            return new MatchOld
             {
                 Id = "1234",
                 League = new League { Name = "Laliga" },
                 EventDate = new DateTime(2019, 01, 01, 18, 00, 00),
                 Attendance = 2034,
                 Venue = new Venue { Name = "My Dinh" },
-                MatchResult = new MatchResult
-                {
-                    HomeScore = 5,
-                    AwayScore = 1,
-                    EventStatus = MatchStatus.Live,
-                    MatchStatus = MatchStatus.FirstHalf
-                },
+                MatchResult = specimens
+                    .For<MatchResult>()
+                    .With(x => x.HomeScore, (byte)5)
+                    .With(x => x.AwayScore, (byte)1)
+                    .With(x => x.EventStatus, MatchStatus.Live)
+                    .With(x => x.MatchStatus, MatchStatus.FirstHalf)
+                    .Create(),
                 Teams = new List<Team>
-            {
-                new Team { Id = "home", Name = "Barcelona" },
-                new Team { Id = "away", Name = "Real Marid"}
-            }
+                {
+                    new Team { Id = "home", Name = "Barcelona" },
+                    new Team { Id = "away", Name = "Real Marid"}
+                }
             };
-
-            return matchData;
         }
 
         [Fact]
         public void OnAppearing_Always_LoadMatchDetail()
         {
             // Arrange
+            specimens = new Fixture();
             var returnMatch = CreateMatch();
             var returnTimelines = new List<ITimelineEvent>
             {
@@ -95,11 +98,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new TimelineEvent { Id = "11", Type = EventType.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedAfterPenalties,
-                EventStatus = MatchStatus.Live
-            };
+            returnMatch.MatchResult = specimens
+                .For<MatchResult>()
+                .With(x => x.MatchStatus, MatchStatus.EndedAfterPenalties)
+                .With(x => x.EventStatus, MatchStatus.Live)
+                .Create();
+
             matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
@@ -133,11 +137,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new TimelineEvent { Id = "1", Type = EventType.MatchEnded, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = returnTimelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedExtraTime,
-                EventStatus = MatchStatus.Closed
-            };
+            returnMatch.MatchResult = specimens
+               .For<MatchResult>()
+               .With(x => x.MatchStatus, MatchStatus.EndedExtraTime)
+               .With(x => x.EventStatus, MatchStatus.Closed)
+               .Create();
+
             matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
@@ -162,11 +167,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             {
                 new TimelineEvent { Type = EventType.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.EndedAfterPenalties,
-                EventStatus = MatchStatus.Closed
-            };
+            returnMatch.MatchResult = specimens
+               .For<MatchResult>()
+               .With(x => x.MatchStatus, MatchStatus.EndedAfterPenalties)
+               .With(x => x.EventStatus, MatchStatus.Closed)
+               .Create();
+
             matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
@@ -189,11 +195,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new TimelineEvent { Id = "2", Type = EventType.PenaltyShootout, IsFirstShoot = false, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.Penalties,
-                EventStatus = MatchStatus.Live
-            };
+            returnMatch.MatchResult = specimens
+                .For<MatchResult>()
+                .With(x => x.MatchStatus, MatchStatus.Penalties)
+                .With(x => x.EventStatus, MatchStatus.Live)
+                .Create();
+
             matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
@@ -220,11 +227,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new TimelineEvent { Id = "3", Type = EventType.PenaltyShootout, IsFirstShoot = true, Time = new DateTime(2019, 01, 01, 19, 50, 00 )},
             };
             returnMatch.TimeLines = timelines;
-            returnMatch.MatchResult = new MatchResult
-            {
-                MatchStatus = MatchStatus.Penalties,
-                EventStatus = MatchStatus.Live
-            };
+            returnMatch.MatchResult = specimens
+              .For<MatchResult>()
+              .With(x => x.MatchStatus, MatchStatus.Penalties)
+              .With(x => x.EventStatus, MatchStatus.Live)
+              .Create();
+
             matchService.GetMatch(match.Id, viewModel.SettingsService.Language, Arg.Any<bool>()).Returns(returnMatch);
 
             // Act
@@ -267,12 +275,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 new TimelineEvent { Id = "1", Type = EventType.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
 
-            var matchResult = new MatchResult
-            {
-                EventStatus = MatchStatus.Abandoned,
-                HomeScore = 1,
-                AwayScore = 2
-            };
+            var matchResult = specimens
+                .For<MatchResult>()
+                .With(x => x.MatchStatus, MatchStatus.Abandoned)
+                .With(x => x.HomeScore, (byte)1)
+                .With(x => x.AwayScore, (byte)2)
+                .Create();
 
             var timeline = new TimelineEvent { Id = "2", Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
 

@@ -124,8 +124,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Type.Returns(EventType.MatchEnded);
             matchResult.MatchStatus.Returns(MatchStatus.EndedExtraTime);
-            matchResult.HomeScore.Returns(3);
-            matchResult.AwayScore.Returns(6);
+            matchResult.HomeScore.Returns((byte)3);
+            matchResult.AwayScore.Returns((byte)6);
 
             // Act
             var viewModel = new MainEventItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
@@ -141,8 +141,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             // Arrange
             timeline.Type.Returns(EventType.BreakStart);
             timeline.PeriodType.Returns(PeriodType.AwaitingPenalties);
-            matchResult.HomeScore.Returns(3);
-            matchResult.AwayScore.Returns(6);
+            matchResult.HomeScore.Returns((byte)3);
+            matchResult.AwayScore.Returns((byte)6);
             matchResult.MatchPeriods.Returns(new List<MatchPeriod> {
                 new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                 new MatchPeriod { HomeScore = 2, AwayScore = 3 },

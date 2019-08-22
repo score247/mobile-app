@@ -27,7 +27,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         [InlineData(false, 2, false, 2, "2 - 2")]
         [InlineData(true, 3, true, 3, "3 - 3")]
         public void BuildInfo_Always_ShowCorrectHomeAndAwayTeamScore(
-            bool isHomeScored, int homeScore, bool isAwayScored, int awayScore, string expectedScore)
+            bool isHomeScored, byte homeScore, bool isAwayScored, byte awayScore, string expectedScore)
         {
             // Arrange
             timeline.HomeShootoutPlayer = new Player { Name = "Ronaldo" };

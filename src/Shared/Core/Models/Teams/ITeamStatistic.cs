@@ -2,10 +2,10 @@
 {
     public interface ITeamStatistic
     {
-        int Possession { get; }
+        byte Possession { get; }
 
-        int Fouls { get; }
+        byte Fouls { get; }
 
-        int Injuries { get; }
+        byte Injuries { get; }
     }
 }

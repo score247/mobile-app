@@ -21,9 +21,9 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             timeline = Substitute.For<ITimelineEvent>();
             matchResult = Substitute.For<IMatchResult>();
 
-            timeline.HomeScore.Returns(1);
-            timeline.AwayScore.Returns(2);
-            timeline.MatchTime.Returns(20);
+            timeline.HomeScore.Returns((byte)1);
+            timeline.AwayScore.Returns((byte)2);
+            timeline.MatchTime.Returns((byte)20);
             viewModel = new BaseItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
         }
 

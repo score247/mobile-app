@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -10,12 +9,10 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
 using LiveScore.Core;
 using LiveScore.Core.Controls.DateBar.Events;
-using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Commands;
 using Prism.Events;
@@ -35,7 +32,6 @@ namespace LiveScore.Score.ViewModels
         private readonly HubConnection teamHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
-        private readonly IMatchStatusConverter matchStatusConverter;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -43,12 +39,11 @@ namespace LiveScore.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            Profiler.Start(this.GetType().Name + ".LoadMatches.Home");
+            Profiler.Start(GetType().Name + ".LoadMatches.Home");
 
             SelectedDate = DateTime.Today;
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
 
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
             matchHubConnection = hubService.BuildMatchEventHubConnection();
@@ -183,19 +178,19 @@ namespace LiveScore.Score.ViewModels
             selectedDateRange = dateRange;
             IsRefreshing = false;
 
-            Debug.WriteLine($"{this.GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.Home");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
+            Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
+            Profiler.Stop(GetType().Name + ".LoadMatches.Home");
+            Profiler.Stop(GetType().Name + ".LoadMatches.PullDownToRefresh");
+            Profiler.Stop(GetType().Name + ".LoadMatches.SelectDate");
         }
 
         private IList<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(
-                    match => new MatchViewModel(match, matchStatusConverter, CurrentSportId));
+            var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
 
-            return new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItemViewModels.GroupBy(item
-                => new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate)));
+            return matchItemViewModels
+                .GroupBy(item => new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate))
+                .ToList();
         }
 
         internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)

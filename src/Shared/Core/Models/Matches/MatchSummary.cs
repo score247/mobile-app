@@ -1,5 +1,6 @@
 ﻿using System;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
 
 namespace LiveScore.Core.Models.Matches
 {
@@ -16,5 +17,11 @@ namespace LiveScore.Core.Models.Matches
         MatchStatus MatchStatus { get; }
 
         MatchStatus EventStatus { get; }
+
+        void UpdateResult(IMatchResult matchResult);
+
+        void UpdateLastTimeline(ITimelineEvent timelineEvent);
+
+        void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome);
     }
 }

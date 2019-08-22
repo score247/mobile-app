@@ -5,6 +5,8 @@
     using System.Linq;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
+    using LiveScore.Soccer.Models.Teams;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
@@ -114,6 +116,41 @@
         public EventType LastTimelineType { get; private set; }
 
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
+
+        public void UpdateResult(IMatchResult matchResult)
+        {
+            EventStatus = matchResult.EventStatus;
+            MatchStatus = matchResult.MatchStatus;
+            MatchTime = matchResult.MatchTime;
+            MatchPeriods = matchResult.MatchPeriods;
+            HomeScore = matchResult.HomeScore;
+            AwayScore = matchResult.AwayScore;
+            WinnerId = matchResult.WinnerId;
+            AggregateWinnerId = matchResult.WinnerId;
+        }
+
+        public void UpdateLastTimeline(ITimelineEvent timelineEvent)
+        {
+            LastTimelineType = timelineEvent.Type;
+            StoppageTime = timelineEvent.StoppageTime;
+            InjuryTimeAnnounced = timelineEvent.InjuryTimeAnnounced;
+        }
+
+        public void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome)
+        {
+            var soccerTeamStats = teamStatistic as TeamStatistic;
+
+            if (isHome)
+            {
+                HomeRedCards = soccerTeamStats.RedCards;
+                HomeYellowRedCards = soccerTeamStats.YellowRedCards;
+            }
+            else
+            {
+                AwayRedCards = soccerTeamStats.RedCards;
+                AwayYellowRedCards = soccerTeamStats.YellowRedCards;
+            }
+        }
 
         public string HomePenaltyImage
             => HomeWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;

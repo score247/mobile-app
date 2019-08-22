@@ -6,34 +6,34 @@
     [AddINotifyPropertyChangedInterface]
     public class TeamStatistic : ITeamStatistic
     {
-        public int Possession { get; set; }
+        public byte Possession { get; set; }
 
-        public int FreeKicks { get; set; }
+        public byte FreeKicks { get; set; }
 
-        public int ThrowIns { get; set; }
+        public byte ThrowIns { get; set; }
 
-        public int GoalKicks { get; set; }
+        public byte GoalKicks { get; set; }
 
-        public int ShotsBlocked { get; set; }
+        public byte ShotsBlocked { get; set; }
 
-        public int ShotsOnTarget { get; set; }
+        public byte ShotsOnTarget { get; set; }
 
-        public int ShotsOffTarget { get; set; }
+        public byte ShotsOffTarget { get; set; }
 
-        public int CornerKicks { get; set; }
+        public byte CornerKicks { get; set; }
 
-        public int Fouls { get; set; }
+        public byte Fouls { get; set; }
 
-        public int ShotsSaved { get; set; }
+        public byte ShotsSaved { get; set; }
 
-        public int Offsides { get; set; }
+        public byte Offsides { get; set; }
 
-        public int YellowCards { get; set; }
+        public byte YellowCards { get; set; }
 
-        public int YellowRedCards { get; set; }
+        public byte YellowRedCards { get; set; }
 
-        public int RedCards { get; set; }
+        public byte RedCards { get; set; }
 
-        public int Injuries { get; set; }
+        public byte Injuries { get; set; }
     }
 }

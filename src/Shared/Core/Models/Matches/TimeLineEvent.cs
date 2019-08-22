@@ -11,7 +11,7 @@
 
         DateTime Time { get; }
 
-        int MatchTime { get; }
+        byte MatchTime { get; }
 
         string StoppageTime { get; }
 
@@ -19,13 +19,13 @@
 
         string Team { get; }
 
-        int Period { get; }
+        byte Period { get; }
 
         PeriodType PeriodType { get; }
 
-        int HomeScore { get; }
+        byte HomeScore { get; }
 
-        int AwayScore { get; }
+        byte AwayScore { get; }
 
         GoalScorer GoalScorer { get; }
 
@@ -37,7 +37,7 @@
 
         Player Player { get; }
 
-        int InjuryTimeAnnounced { get; }
+        byte InjuryTimeAnnounced { get; }
 
         string Description { get; }
 
@@ -53,9 +53,9 @@
 
         bool IsAwayShootoutScored { get; }
 
-        int ShootoutHomeScore { get; }
+        byte ShootoutHomeScore { get; }
 
-        int ShootoutAwayScore { get; }
+        byte ShootoutAwayScore { get; }
 
         bool IsFirstShoot { get; }
 
@@ -68,7 +68,7 @@
 
         public DateTime Time { get; set; }
 
-        public int MatchTime { get; set; }
+        public byte MatchTime { get; set; }
 
         public string StoppageTime { get; set; }
 
@@ -76,13 +76,13 @@
 
         public string Team { get; set; }
 
-        public int Period { get; set; }
+        public byte Period { get; set; }
 
         public PeriodType PeriodType { get; set; }
 
-        public int HomeScore { get; set; }
+        public byte HomeScore { get; set; }
 
-        public int AwayScore { get; set; }
+        public byte AwayScore { get; set; }
 
         public GoalScorer GoalScorer { get; set; }
 
@@ -96,7 +96,7 @@
 
         public Player Player { get; set; }
 
-        public int InjuryTimeAnnounced { get; set; }
+        public byte InjuryTimeAnnounced { get; set; }
 
         public string Description { get; set; }
 
@@ -110,9 +110,9 @@
 
         public bool IsAwayShootoutScored { get; set; }
 
-        public int ShootoutHomeScore { get; set; }
+        public byte ShootoutHomeScore { get; set; }
 
-        public int ShootoutAwayScore { get; set; }
+        public byte ShootoutAwayScore { get; set; }
 
         public bool IsFirstShoot { get; set; }
 

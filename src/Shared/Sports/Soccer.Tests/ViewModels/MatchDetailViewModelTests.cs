@@ -2,7 +2,9 @@ namespace Soccer.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using AutoFixture;
     using LiveScore.Common.Services;
+    using LiveScore.Common.Tests.Extensions;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -23,9 +25,11 @@ namespace Soccer.Tests.ViewModels
         private readonly IMatchService matchService;
         private readonly MatchOld match;
         private readonly ICachingService localStorage;
+        private Fixture specimens;
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
+            specimens = new Fixture();
             localStorage = Substitute.For<ICachingService>();
             baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
                 .Returns(new MatchStatusConverter(localStorage));
@@ -58,18 +62,18 @@ namespace Soccer.Tests.ViewModels
                 EventDate = new DateTime(2019, 01, 01, 18, 00, 00),
                 Attendance = 2034,
                 Venue = new Venue { Name = "My Dinh" },
-                MatchResult = new MatchResult
-                {
-                    HomeScore = 5,
-                    AwayScore = 1,
-                    EventStatus = MatchStatus.Live,
-                    MatchStatus = MatchStatus.FirstHalf
-                },
+                MatchResult = specimens
+                    .For<MatchResult>()
+                    .With(x => x.EventStatus, MatchStatus.Live)
+                    .With(x => x.MatchStatus, MatchStatus.FirstHalf)
+                    .With(x => x.HomeScore, (byte)5)
+                    .With(x => x.AwayScore, (byte)1)
+                    .Create(),
                 Teams = new List<Team>
-            {
-                new Team { Id = "home", Name = "Barcelona" },
-                new Team { Id = "away", Name = "Real Marid"}
-            }
+                {
+                    new Team { Id = "home", Name = "Barcelona" },
+                    new Team { Id = "away", Name = "Real Marid"}
+                }
             };
 
             return matchData;
@@ -80,7 +84,7 @@ namespace Soccer.Tests.ViewModels
         {
             // Arrange
             match.LatestTimeline = new TimelineEvent { StoppageTime = "4", InjuryTimeAnnounced = 5 };
-            match.MatchResult.MatchTime = 49;
+            match.MatchResult.UpdateMatchTime(49);
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -94,13 +98,15 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_HasSecondLeg_ShowSecondLegMessage()
         {
             // Arrange
-            match.MatchResult = new MatchResult
-            {
-                AggregateHomeScore = 2,
-                AggregateAwayScore = 5,
-                AggregateWinnerId = "home",
-                EventStatus = MatchStatus.Closed
-            };
+            specimens = new Fixture();
+            match.MatchResult = specimens
+                   .For<MatchResult>()
+                   .With(x => x.EventStatus, MatchStatus.Closed)
+                   .With(x => x.AggregateHomeScore, (byte)2)
+                   .With(x => x.AggregateAwayScore, (byte)5)
+                   .With(x => x.AggregateWinnerId, "home")
+                   .Create();
+
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -114,12 +120,14 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_HasSecondLeg_HomeTeamWin_ShowSecondLegImageInHome()
         {
             // Arrange
-            match.MatchResult = new MatchResult
-            {
-                EventStatus = MatchStatus.Closed,
-                AggregateWinnerId = "home",
-                WinnerId = "home"
-            };
+            specimens = new Fixture();
+            match.MatchResult = specimens
+                 .For<MatchResult>()
+                 .With(x => x.EventStatus, MatchStatus.Closed)
+                 .With(x => x.AggregateHomeScore, (byte)2)
+                 .With(x => x.WinnerId, "home")
+                 .With(x => x.AggregateWinnerId, "home")
+                 .Create();
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -133,12 +141,14 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_HasSecondLeg_AwayTeamWin_ShowSecondLegImageInAway()
         {
             // Arrange
-            match.MatchResult = new MatchResult
-            {
-                EventStatus = MatchStatus.Closed,
-                AggregateWinnerId = "away",
-                WinnerId = "away"
-            };
+            specimens = new Fixture();
+            match.MatchResult = specimens
+               .For<MatchResult>()
+               .With(x => x.EventStatus, MatchStatus.Closed)
+               .With(x => x.WinnerId, "away")
+               .With(x => x.AggregateWinnerId, "away")
+               .Create();
+
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -152,15 +162,17 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_HasPenalty_WinnerIsHome_ShowPenaltyImage()
         {
             // Arrange
-            match.MatchResult = new MatchResult
-            {
-                WinnerId = "home",
-                MatchPeriods = new List<MatchPeriod>
-                {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
-                },
-                EventStatus = MatchStatus.Closed
-            };
+            specimens = new Fixture();
+            match.MatchResult = specimens
+                 .For<MatchResult>()
+                 .With(x => x.EventStatus, MatchStatus.Closed)
+                 .With(x => x.MatchPeriods, new List<MatchPeriod>
+                    {
+                        new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
+                    })
+                 .With(x => x.WinnerId, "home")
+                 .Create();
+
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -174,15 +186,17 @@ namespace Soccer.Tests.ViewModels
         public void OnNavigatingTo_HasPenalty_WinnerIsAway_ShowPenaltyImage()
         {
             // Arrange
-            match.MatchResult = new MatchResult
-            {
-                WinnerId = "away",
-                MatchPeriods = new List<MatchPeriod>
-                {
-                    new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
-                },
-                EventStatus = MatchStatus.Closed
-            };
+            specimens = new Fixture();
+            match.MatchResult = specimens
+                 .For<MatchResult>()
+                 .With(x => x.EventStatus, MatchStatus.Closed)
+                 .With(x => x.MatchPeriods, new List<MatchPeriod>
+                    {
+                        new MatchPeriod { HomeScore = 3, AwayScore = 4, PeriodType = PeriodType.Penalties }
+                    })
+                 .With(x => x.WinnerId, "away")
+                 .Create();
+
             var parameters = new NavigationParameters { { "Match", match } };
 
             // Act
@@ -200,13 +214,14 @@ namespace Soccer.Tests.ViewModels
             {
                 new TimelineEvent { Type = EventType.YellowCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) },
             };
+            specimens = new Fixture();
 
-            var matchResult = new MatchResult
-            {
-                EventStatus = MatchStatus.Abandoned,
-                HomeScore = 1,
-                AwayScore = 2
-            };
+            var matchResult = specimens
+                .For<MatchResult>()
+                .With(x => x.EventStatus, MatchStatus.Abandoned)
+                .With(x => x.HomeScore, (byte)1)
+                .With(x => x.AwayScore, (byte)2)
+                .Create();
 
             var timeline = new TimelineEvent { Type = EventType.RedCard, Time = new DateTime(2019, 01, 01, 18, 00, 00) };
             var matchEvent = new MatchEvent("1234", matchResult, timeline);
@@ -215,8 +230,9 @@ namespace Soccer.Tests.ViewModels
             viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             //// Assert
-            //Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
-            //Assert.Equal(timeline, viewModel.MatchViewModel.Match.LatestTimeline);
+            // TODO: update later
+            // Assert.Equal(matchResult, viewModel.MatchViewModel.Match.MatchResult);
+            // Assert.Equal(timeline, viewModel.MatchViewModel.Match.LatestTimeline);
             Assert.Equal("AB", viewModel.MatchViewModel.DisplayMatchStatus);
         }
 
@@ -231,6 +247,7 @@ namespace Soccer.Tests.ViewModels
             viewModel.OnReceivedMatchEvent(1, matchEvent);
 
             // Assert
+            // TODO: update later
             //Assert.Null(viewModel.MatchViewModel.Match.TimeLines);
         }
 

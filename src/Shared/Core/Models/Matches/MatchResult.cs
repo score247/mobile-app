@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
-    using PropertyChanged;
 
     public interface IMatchResult
     {
@@ -10,48 +9,24 @@
 
         MatchStatus EventStatus { get; }
 
-        int HomeScore { get; }
+        byte HomeScore { get; }
 
-        int AwayScore { get; }
+        byte AwayScore { get; }
 
-        int Period { get; }
+        byte Period { get; }
 
-        int MatchTime { get; set; }
+        byte MatchTime { get; }
 
         IEnumerable<MatchPeriod> MatchPeriods { get; }
 
         string WinnerId { get; }
 
-        int AggregateHomeScore { get; }
+        byte AggregateHomeScore { get; }
 
-        int AggregateAwayScore { get; }
+        byte AggregateAwayScore { get; }
 
         string AggregateWinnerId { get; }
-    }
 
-    [AddINotifyPropertyChangedInterface]
-    public class MatchResult : IMatchResult
-    {
-        public MatchStatus MatchStatus { get; set; }
-
-        public MatchStatus EventStatus { get; set; }
-
-        public int Period { get; set; }
-
-        public IEnumerable<MatchPeriod> MatchPeriods { get; set; }
-
-        public int MatchTime { get; set; }
-
-        public string WinnerId { get; set; }
-
-        public int HomeScore { get; set; }
-
-        public int AwayScore { get; set; }
-
-        public int AggregateHomeScore { get; set; }
-
-        public int AggregateAwayScore { get; set; }
-
-        public string AggregateWinnerId { get; set; }
+        void UpdateMatchTime(byte matchTime);
     }
 }
