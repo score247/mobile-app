@@ -37,6 +37,8 @@
         //TODO remove this command when ready to release
         public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toogle);
 
+        public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
+
         private async Task Navigate(string page)
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
@@ -44,7 +46,6 @@
 
         private async Task Toogle()
         {   
-            await cachingService.InvalidateAll();
             
             settingsService.IsDemo = !settingsService.IsDemo;
 
@@ -65,6 +66,12 @@
 #endif
             }
 
+            await CleanCacheAndRefreshCommand.ExecuteAsync();
+        }
+
+        private async Task CleanCacheAndRefresh()
+        {
+            await cachingService.InvalidateAll();
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
     }

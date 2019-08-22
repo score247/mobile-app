@@ -64,10 +64,13 @@
 
           <FlexLayout x:Name="ClearCache" Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">
-              <Label Style="{StaticResource NavIcon}" Text="&#xe904;" />
+              <Label Style="{StaticResource NavIcon}"  Text="&#xe904;" />
               <Label Style="{StaticResource NavName}" Text="Clear Cache" />
             </StackLayout>
             <Label Style="{StaticResource ArrowRightIcon}" />
+            <FlexLayout.GestureRecognizers>
+              <TapGestureRecognizer Command="{Binding CleanCacheAndRefreshCommand}"/>
+            </FlexLayout.GestureRecognizers>
           </FlexLayout>
           <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
