@@ -127,6 +127,8 @@ namespace LiveScore.Score.ViewModels
 
         private async Task OnTappedMatchCommand(MatchViewModel matchItem)
         {
+            // TODO: Change to use IAutoInitialize for parameters followed by new release of prism
+            // https://github.com/PrismLibrary/Prism/releases
             var parameters = new NavigationParameters
             {
                 { "Match", matchItem.Match }

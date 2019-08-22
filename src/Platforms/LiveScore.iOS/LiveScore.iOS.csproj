@@ -341,11 +341,11 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>7.14.0.8411</Version>
+      <Version>7.16.0.8981</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="Prism.DryIoc.Forms" Version="7.1.0.431" />
+    <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
     <PackageReference Include="System.Reflection.Emit">
       <Version>4.3.0</Version>
       <ExcludeAssets>all</ExcludeAssets>
@@ -357,7 +357,7 @@
       <Version>2.1.72</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>3.6.0.539721</Version>
+      <Version>4.2.0.709249</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
