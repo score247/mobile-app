@@ -64,7 +64,7 @@ namespace LiveScore
                 ContractResolver = new PrivateSetterContractResolver()
             };
 
-            
+            Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
 
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
