@@ -31,6 +31,8 @@
             byte awayScore,
             string winnerId,
             string aggregateWinnerId,
+            byte aggregateHomeScore,
+            byte aggregateAwayScore,
             byte homeRedCards,
             byte homeYellowRedCards,
             byte awayRedCards,
@@ -55,6 +57,8 @@
             AwayScore = awayScore;
             WinnerId = winnerId;
             AggregateWinnerId = aggregateWinnerId;
+            AggregateHomeScore = aggregateHomeScore;
+            AggregateAwayScore = aggregateAwayScore;
             HomeRedCards = homeRedCards;
             HomeYellowRedCards = homeYellowRedCards;
             AwayRedCards = awayRedCards;
@@ -98,6 +102,10 @@
         public string WinnerId { get; private set; }
 
         public string AggregateWinnerId { get; private set; }
+
+        public byte AggregateHomeScore { get; private set; }
+
+        public byte AggregateAwayScore { get; private set; }
 
         public byte HomeRedCards { get; private set; }
 

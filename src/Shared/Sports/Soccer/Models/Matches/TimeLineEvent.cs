@@ -30,6 +30,8 @@
 
         public Player Assist { get; set; }
 
+        public Player Player { get; set; }
+
         public byte InjuryTimeAnnounced { get; set; }
 
         public Player HomeShootoutPlayer { get; set; }

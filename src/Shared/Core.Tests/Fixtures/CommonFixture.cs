@@ -18,16 +18,13 @@
             Comparer = new CompareLogic();
             Specimens = new Fixture();
             Specimens.Register<IMatch>(() => Specimens.Create<Match>());
-            Specimens.Register<IMatchOld>(() => Specimens.Create<MatchOld>());
             Specimens.Register<ITeam>(() => Specimens.Create<Team>());
             Specimens.Register<ITeamStatistic>(() => Specimens.Create<TeamStatistic>());
             Specimens.Register<ICoach>(() => Specimens.Create<Coach>());
             Specimens.Register<IPlayer>(() => Specimens.Create<Player>());
             Specimens.Register<ITimelineEvent>(() => Specimens.Create<TimelineEvent>());
             Specimens.Register<IMatchResult>(() => Specimens.Create<MatchResult>());
-            Specimens.Register<IMatchCondition>(() => Specimens.Create<MatchCondition>());
             Specimens.Register<ILeague>(() => Specimens.Create<League>());
-            Specimens.Register<IVenue>(() => Specimens.Create<Venue>());
             Specimens.Register<ILeagueCategory>(() => Specimens.Create<LeagueCategory>());
             Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());
             Specimens.Register<IMatchOdds>(() => Specimens.Create<MatchOdds>());

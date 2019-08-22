@@ -14,11 +14,11 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
-    using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
@@ -66,7 +66,6 @@ namespace LiveScore.Soccer.ViewModels
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private Dictionary<TabFunction, TabItemViewModelBase> tabItemViewModels;
-        private readonly IMatchStatusConverter matchStatusConverter;
         private TabFunction CurrentTabView;
 
         public MatchDetailViewModel(
@@ -78,10 +77,7 @@ namespace LiveScore.Soccer.ViewModels
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
             matchHubConnection = hubService.BuildMatchEventHubConnection();
             teamHubConnection = hubService.BuildTeamStatisticHubConnection();
-
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -112,7 +108,8 @@ namespace LiveScore.Soccer.ViewModels
                 Title = tabItemViewModels.First().Key.DisplayName;
                 CurrentTabView = tabItemViewModels.First().Key;
 
-                BuildGeneralInfo(match);
+                var soccerMatch = match as Match;
+                BuildGeneralInfo(soccerMatch);
             }
         }
 
@@ -184,17 +181,17 @@ namespace LiveScore.Soccer.ViewModels
         [Time]
         protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
-            //var match = MatchViewModel.Match;
+            var match = MatchViewModel.Match as Match;
 
-            //if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
-            //{
-            //    return;
-            //}
+            if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
+            {
+                return;
+            }
 
-            //match.MatchResult = matchEvent.MatchResult;
-            //match.LatestTimeline = matchEvent.Timeline;
+            match.UpdateResult(matchEvent.MatchResult);
+            match.UpdateLastTimeline(matchEvent.Timeline);
 
-            //BuildGeneralInfo(match);
+            BuildGeneralInfo(match);
         }
 
         protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
@@ -207,7 +204,7 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
-        private void BuildGeneralInfo(IMatch match)
+        private void BuildGeneralInfo(Match match)
         {
             BuildViewModel(match);
 
@@ -216,24 +213,22 @@ namespace LiveScore.Soccer.ViewModels
             BuildSecondLeg(match);
         }
 
-        private void BuildSecondLeg(IMatch match)
+        private void BuildSecondLeg(Match match)
         {
-            var winnerId = match?.AggregateWinnerId;
+            var winnerId = match.AggregateWinnerId;
 
-            if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed)
+            if (!string.IsNullOrEmpty(winnerId) && match.EventStatus.IsClosed)
             {
-                DisplaySecondLeg = $"{AppResources.SecondLeg} {match.MatchResult.AggregateHomeScore} - {match.MatchResult.AggregateAwayScore}";
+                DisplaySecondLeg = $"{AppResources.SecondLeg} {match.AggregateHomeScore} - {match.AggregateAwayScore}";
             }
         }
 
-        private void BuildScoreAndEventDate(IMatch match)
+        private void BuildScoreAndEventDate(Match match)
         {
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
-        // TODO: update here
-        private void BuildViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
+        private void BuildViewModel(Match match) => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
         {

@@ -1,9 +1,10 @@
-﻿using System;
-using LiveScore.Core.Enumerations;
-using LiveScore.Core.Models.Teams;
-
-namespace LiveScore.Core.Models.Matches
+﻿namespace LiveScore.Core.Models.Matches
 {
+    using System;
+    using System.Collections.Generic;
+    using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Teams;
+
     public interface IMatch
     {
         string Id { get; }
@@ -17,6 +18,8 @@ namespace LiveScore.Core.Models.Matches
         MatchStatus MatchStatus { get; }
 
         MatchStatus EventStatus { get; }
+
+        IEnumerable<MatchPeriod> MatchPeriods { get; }
 
         void UpdateResult(IMatchResult matchResult);
 

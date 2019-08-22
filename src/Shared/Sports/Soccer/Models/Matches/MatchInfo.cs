@@ -5,21 +5,23 @@
     using LiveScore.Core.Models.Matches;
     using Newtonsoft.Json;
 
-    public class MatchDetail : IMatchDetail
+    public class MatchInfo : IMatchInfo
     {
         [JsonConverter(typeof(JsonConcreteTypeConverter<Match>))]
         public IMatch Match { get; private set; }
 
-        public byte AggregateHomeScore { get; private set; }
-
-        public byte AggregateAwayScore { get; private set; }
-
-        public IEnumerable<TimelineEvent> TimelineEvents { get; private set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimelineEvent>>))]
+        public IEnumerable<ITimelineEvent> TimelineEvents { get; private set; }
 
         public int Attendance { get; private set; }
 
         public Venue Venue { get; private set; }
 
         public string Referee { get; private set; }
+
+        public void UpdateTimelineEvents(IEnumerable<ITimelineEvent> timelineEvents)
+        {
+            TimelineEvents = timelineEvents;
+        }
     }
 }

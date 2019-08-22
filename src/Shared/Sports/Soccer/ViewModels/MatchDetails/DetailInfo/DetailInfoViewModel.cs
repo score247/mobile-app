@@ -45,8 +45,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.matchId = matchId;
             this.matchHubConnection = matchHubConnection;
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(Match.Id, true), false));
-
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
             TabHeaderIcon = TabDetailImages.Info;
             TabHeaderActiveIcon = TabDetailImages.InfoActive;
         }
@@ -55,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public bool IsRefreshing { get; set; }
 
-        public IMatchOld Match { get; private set; }
+        public MatchInfo MatchInfo { get; private set; }
 
         public string DisplayEventDate { get; private set; }
 
@@ -92,9 +91,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
         {
-            Match = await matchService.GetMatch(matchId, SettingsService.Language, isRefresh);
+            MatchInfo = await matchService.GetMatch(matchId, SettingsService.Language, isRefresh) as MatchInfo;
 
-            BuildDetailInfo(Match);
+            BuildDetailInfo(MatchInfo);
 
             IsRefreshing = false;
         }
@@ -111,57 +110,58 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
 
-            if (sportId != SettingsService.CurrentSportType.Value || Match?.Id == null || matchEvent.MatchId != Match.Id)
+            if (sportId != SettingsService.CurrentSportType.Value || matchId == null || matchEvent.MatchId != matchId)
             {
                 return;
             }
 
-            Match.MatchResult = matchEvent.MatchResult;
+            MatchInfo.Match.UpdateResult(matchEvent.MatchResult);
 
-            if (Match.TimeLines == null)
+            if (MatchInfo.TimelineEvents == null)
             {
-                Match.TimeLines = new List<TimelineEvent>();
+                MatchInfo.UpdateTimelineEvents(new List<TimelineEvent>());
             }
 
-            Match.TimeLines = Match.TimeLines.Concat(new[] { matchEvent.Timeline });
+            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new[] { matchEvent.Timeline }));
 
-            BuildDetailInfo(Match);
+            BuildDetailInfo(MatchInfo);
         }
 
-        private void BuildDetailInfo(IMatchOld match)
+        private void BuildDetailInfo(MatchInfo matchInfo)
         {
-            BuildInfoItems(match);
-            BuildFooterInfo(match);
+            BuildInfoItems(matchInfo);
+            BuildFooterInfo(matchInfo);
         }
 
-        private void BuildInfoItems(IMatchOld match)
+        private void BuildInfoItems(MatchInfo matchInfo)
         {
-            match.TimeLines = FilterPenaltyEvents(match?.TimeLines, match?.MatchResult)?.OrderByDescending(t => t.Time);
+            matchInfo.UpdateTimelineEvents(FilterPenaltyEvents(matchInfo)?.OrderByDescending(t => t.Time));
 
-            if (match.TimeLines != null)
+            if (matchInfo.TimelineEvents != null)
             {
-                var timelines = match.TimeLines
-                    .Where(t => t.IsDetailInfoEvent())
-                    .Distinct(new TimelineComparer()).ToList() ?? new List<ITimelineEvent>(); // TODO: Replace TimelineComparer
+                var soccerTimelines = matchInfo.TimelineEvents as IEnumerable<TimelineEvent>;
+                soccerTimelines = soccerTimelines
+                    .Where(t => (t).IsDetailInfoEvent())
+                    .Distinct().ToList() ?? new List<TimelineEvent>();
 
-                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
-                       new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(soccerTimelines.Select(t =>
+                       new BaseItemViewModel(t, matchInfo, NavigationService, DependencyResolver)
                        .CreateInstance()));
             }
         }
 
-        private void BuildFooterInfo(IMatchOld match)
+        private void BuildFooterInfo(MatchInfo matchInfo)
         {
-            DisplayEventDate = match.EventDate.ToFullLocalDateTime();
+            DisplayEventDate = matchInfo.Match.EventDate.ToFullLocalDateTime();
 
-            if (match.Attendance > 0)
+            if (matchInfo.Attendance > 0)
             {
-                DisplayAttendance = match.Attendance.ToString(SpectatorNumberFormat);
+                DisplayAttendance = matchInfo.Attendance.ToString(SpectatorNumberFormat);
             }
 
-            if (match.Venue != null)
+            if (matchInfo.Venue != null)
             {
-                DisplayVenue = match.Venue.Name;
+                DisplayVenue = matchInfo.Venue.Name;
             }
         }
 
@@ -180,25 +180,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             GC.SuppressFinalize(this);
         }
 
-        private static IEnumerable<ITimelineEvent> FilterPenaltyEvents(IEnumerable<ITimelineEvent> timelines, IMatchResult matchResult)
+        private static IEnumerable<ITimelineEvent> FilterPenaltyEvents(MatchInfo matchInfo)
         {
-            if (matchResult == null)
-            {
-                return timelines;
-            }
+            var match = matchInfo.Match;
+            var timelineEvents = (matchInfo.TimelineEvents as IEnumerable<TimelineEvent>).ToList();
 
-            if (matchResult.EventStatus.IsClosed)
+            if (match.EventStatus.IsClosed)
             {
-                var timelineEvents = timelines.ToList();
                 timelineEvents.RemoveAll(t => t.Type == EventType.PenaltyShootout && t.IsFirstShoot);
 
                 return timelineEvents;
             }
 
-            if (matchResult.EventStatus.IsLive && matchResult.MatchStatus.IsInPenalties)
+            if (match.EventStatus.IsLive && match.MatchStatus.IsInPenalties)
             {
-                var lastEvent = timelines.LastOrDefault();
-                var timelineEvents = timelines.ToList();
+                var lastEvent = timelineEvents.LastOrDefault();
                 timelineEvents.RemoveAll(t => t.IsFirstShoot);
 
                 if (lastEvent?.IsFirstShoot == true)
@@ -209,7 +205,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 return timelineEvents;
             }
 
-            return timelines;
+            return timelineEvents;
         }
     }
 }

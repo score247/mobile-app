@@ -290,10 +290,10 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnReceivedMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
-            Assert.True(comparer.Compare(matchResult, viewModel.Match.MatchResult).AreEqual);
+            Assert.True(comparer.Compare(matchResult, viewModel.MatchInfo.MatchResult).AreEqual);
             match.TimeLines.ToList().Add(timeline);
             var expectedTimelines = match.TimeLines.Distinct();
-            Assert.Equal(expectedTimelines, viewModel.Match.TimeLines);
+            Assert.Equal(expectedTimelines, viewModel.MatchInfo.TimeLines);
         }
 
         [Fact]
@@ -311,7 +311,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Assert
             match.TimeLines.ToList().Add(timeline);
-            Assert.True(comparer.Compare(match.TimeLines, viewModel.Match.TimeLines).AreEqual);
+            Assert.True(comparer.Compare(match.TimeLines, viewModel.MatchInfo.TimeLines).AreEqual);
         }
 
         [Fact]
@@ -329,7 +329,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             viewModel.OnReceivedMatchEvent(1, JsonConvert.SerializeObject(matchEvent));
 
             // Assert
-            Assert.Null(viewModel.Match.TimeLines);
+            Assert.Null(viewModel.MatchInfo.TimeLines);
         }
     }
 }

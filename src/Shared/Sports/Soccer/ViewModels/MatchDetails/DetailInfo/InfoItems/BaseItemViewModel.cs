@@ -6,6 +6,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -39,24 +40,26 @@
         };
 
         public BaseItemViewModel(
-            ITimelineEvent timelineEvent,
-            IMatchResult matchResult,
+            TimelineEvent timelineEvent,
+            MatchInfo matchInfo,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
             : base(navigationService, depdendencyResolver)
         {
             TimelineEvent = timelineEvent;
-            Result = matchResult;
-
+            MatchInfo = matchInfo;
+            Match = matchInfo.Match as Match;
             BuildData();
             ItemAutomationId = $"{TimelineEvent.Id}-{TimelineEvent.Type}";
         }
 
         public string ItemAutomationId { get; }
 
-        public ITimelineEvent TimelineEvent { get; }
+        public TimelineEvent TimelineEvent { get; }
 
-        public IMatchResult Result { get; }
+        public MatchInfo MatchInfo { get; }
+
+        public Match Match { get; }
 
         public Color RowColor { get; protected set; }
 
@@ -82,10 +85,10 @@
             {
                 return Activator.CreateInstance(
                     ViewModelMapper[TimelineEvent.Type],
-                    TimelineEvent, Result, NavigationService, DependencyResolver) as BaseItemViewModel;
+                    TimelineEvent, MatchInfo, NavigationService, DependencyResolver) as BaseItemViewModel;
             }
 
-            return new BaseItemViewModel(TimelineEvent, Result, NavigationService, DependencyResolver);
+            return new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
         }
 
         public DataTemplate CreateTemplate()

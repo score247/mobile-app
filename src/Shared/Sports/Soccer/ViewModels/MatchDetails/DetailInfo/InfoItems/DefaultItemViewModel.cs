@@ -6,6 +6,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.Models.Matches;
     using Prism.Navigation;
 
     public class DefaultItemViewModel : BaseItemViewModel
@@ -24,12 +25,11 @@
         };
 
         public DefaultItemViewModel(
-
-            ITimelineEvent timelineEvent,
-            IMatchResult matchResult,
+            TimelineEvent timelineEvent,
+            MatchInfo matchInfo,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
-             : base(timelineEvent, matchResult, navigationService, depdendencyResolver)
+             : base(timelineEvent, matchInfo, navigationService, depdendencyResolver)
         {
         }
 

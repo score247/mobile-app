@@ -3,7 +3,7 @@
     using System;
     using LiveScore.Core.Enumerations;
 
-    public interface ITimelineEvent
+    public interface ITimelineEvent : IEntity<string, string>
     {
         EventType Type { get; }
 

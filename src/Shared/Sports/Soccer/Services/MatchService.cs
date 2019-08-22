@@ -23,7 +23,7 @@
         Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
 
         [Get("/soccer/{language}/matches/{matchId}")]
-        Task<MatchOld> GetMatch(string matchId, string language);
+        Task<MatchInfo> GetMatchInfo(string matchId, string language);
     }
 
     public class MatchService : BaseService, IMatchService
@@ -104,7 +104,7 @@
         }
 
         [Time]
-        public async Task<IMatchOld> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -155,10 +155,10 @@
             );
 
         [Time]
-        private async Task<MatchOld> GetMatchFromApi(string matchId, string language)
+        private async Task<MatchInfo> GetMatchFromApi(string matchId, string language)
            => await apiService.Execute
            (
-               () => apiService.GetApi<ISoccerMatchApi>().GetMatch(matchId, language)
+               () => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)
            );
     }
 }

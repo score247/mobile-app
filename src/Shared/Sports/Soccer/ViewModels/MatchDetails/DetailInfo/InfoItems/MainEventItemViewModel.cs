@@ -5,17 +5,18 @@
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Extensions;
+    using LiveScore.Soccer.Models.Matches;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class MainEventItemViewModel : BaseItemViewModel
     {
         public MainEventItemViewModel(
-            ITimelineEvent timelineEvent,
-            IMatchResult matchResult,
+            TimelineEvent timelineEvent,
+            MatchInfo matchInfo,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
-             : base(timelineEvent, matchResult, navigationService, dependencyResolver)
+             : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
         }
 
@@ -56,7 +57,7 @@
                 return;
             }
 
-            if (TimelineEvent.IsMatchEndAfterPenalty(Result))
+            if (TimelineEvent.IsMatchEndAfterPenalty(MatchInfo.Match))
             {
                 BuildPenaltyShootOut();
             }
@@ -66,9 +67,9 @@
         {
             MainEventStatus = AppResources.HalfTime;
 
-            if (Result?.MatchPeriods != null)
+            if (Match?.MatchPeriods != null)
             {
-                var result = Result.MatchPeriods?.FirstOrDefault();
+                var result = Match.MatchPeriods?.FirstOrDefault();
                 Score = $"{result?.HomeScore} - {result?.AwayScore}";
             }
         }
@@ -77,9 +78,9 @@
         {
             MainEventStatus = AppResources.ExtraTimeHalfTime;
 
-            if (Result != null)
+            if (MatchInfo != null)
             {
-                Score = $"{Result.HomeScore} - {Result.AwayScore}";
+                Score = $"{Match.HomeScore} - {Match.AwayScore}";
             }
         }
 
@@ -87,10 +88,10 @@
         {
             MainEventStatus = AppResources.FullTime;
 
-            if (Result.HasFullTimeResult())
+            if (Match.HasFullTimeResult())
             {
-                var firstHalfResult = Result.MatchPeriods.ToList()[0];
-                var secondHalfResult = Result.MatchPeriods.ToList()[1];
+                var firstHalfResult = Match.MatchPeriods.ToList()[0];
+                var secondHalfResult = Match.MatchPeriods.ToList()[1];
                 var totalHomeScore = firstHalfResult?.HomeScore + secondHalfResult?.HomeScore;
                 var totalAwayScore = firstHalfResult?.AwayScore + secondHalfResult?.AwayScore;
                 Score = $"{totalHomeScore} - {totalAwayScore}";
@@ -100,23 +101,23 @@
         private void BuildAfterExtraTime()
         {
             MainEventStatus = AppResources.AfterExtraTime;
-            Score = $"{Result?.HomeScore} - {Result?.AwayScore}";
+            Score = $"{Match?.HomeScore} - {Match?.AwayScore}";
         }
 
         private void BuildPenaltyShootOut()
         {
             MainEventStatus = AppResources.PenaltyShootOut;
-            var penaltyScore = Result?.GetPenaltyResult();
+            var penaltyScore = Match?.GetPenaltyResult();
             Score = $"{penaltyScore?.HomeScore} - {penaltyScore?.AwayScore}";
         }
 
         private bool IsFullTime()
             => TimelineEvent.IsAwaitingExtraTimeBreak()
-                || (TimelineEvent.IsAwaitingPenaltiesBreak() && Result.GetOvertimeResult() == null)
-                || (TimelineEvent.IsMatchEndedFullTime(Result));
+                || (TimelineEvent.IsAwaitingPenaltiesBreak() && Match.GetOvertimeResult() == null)
+                || (TimelineEvent.IsMatchEndedFullTime(Match));
 
         private bool IsAfterExtraTime()
-            => (TimelineEvent.IsAwaitingPenaltiesBreak() && Result.GetOvertimeResult() != null)
-                || TimelineEvent.IsMatchEndedExtraTime(Result);
+            => (TimelineEvent.IsAwaitingPenaltiesBreak() && Match.GetOvertimeResult() != null)
+                || TimelineEvent.IsMatchEndedExtraTime(Match);
     }
 }

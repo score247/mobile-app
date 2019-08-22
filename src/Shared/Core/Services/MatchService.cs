@@ -13,7 +13,7 @@
     {
         Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false);
 
-        Task<IMatchOld> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
+        Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
 
         void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler);
 
