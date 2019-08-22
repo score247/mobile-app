@@ -15,9 +15,9 @@ using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
+using LiveScore.Features.TVSchedule;
 using LiveScore.Score;
 using LiveScore.Soccer;
-using LiveScore.Features.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MethodTimer;
@@ -56,8 +56,6 @@ namespace LiveScore
         [Time]
         protected override async void OnInitialized()
         {
-            Registrations.Start("Score247.App");
-
             Registrations.Start("Score247.App");
 
             var jsonSettings = new JsonSerializerSettings
