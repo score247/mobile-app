@@ -4,15 +4,19 @@
 
     public class CustomListView : ListView
     {
+        public CustomListView() : base(ListViewCachingStrategy.RecycleElement)
+        {
+        }
+
 #if  AUTOTEST
 
-        public CustomListView() : base(ListViewCachingStrategy.RetainElement)
+        public CustomListView(ListViewCachingStrategy cachingStrategy) : base(ListViewCachingStrategy.RetainElement)
         {
         }
 
 #else
 
-        public CustomListView() : base(ListViewCachingStrategy.RecycleElement)
+        public CustomListView(ListViewCachingStrategy cachingStrategy) : base(cachingStrategy)
         {
         }
 

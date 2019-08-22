@@ -56,6 +56,9 @@
             SeparatorColor="{StaticResource LineColor}"
             Style="{StaticResource ListViewHasBackground}"
             VerticalOptions="FillAndExpand">
+            <x:Arguments>
+                <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+            </x:Arguments>
             <customListView:CustomListView.Behaviors>
                 <b:EventToCommandBehavior
                     Command="{Binding TappedMatchCommand}"

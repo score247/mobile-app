@@ -7,7 +7,7 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MatchDataTemplate : DataTemplate
     {
-        public MatchDataTemplate()
+        public MatchDataTemplate() : base(typeof(MatchDataTemplate))
         {
             InitializeComponent();
         }
