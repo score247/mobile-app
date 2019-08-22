@@ -1,11 +1,9 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
     using System;
-    using System.Collections.Generic;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Teams;
 
-    public interface ITimelineEvent : IEntity<string, string>
+    public interface ITimelineEvent
     {
         EventType Type { get; }
 
@@ -13,124 +11,6 @@
 
         byte MatchTime { get; }
 
-        string StoppageTime { get; }
-
-        string MatchClock { get; }
-
-        string Team { get; }
-
-        byte Period { get; }
-
         PeriodType PeriodType { get; }
-
-        byte HomeScore { get; }
-
-        byte AwayScore { get; }
-
-        GoalScorer GoalScorer { get; }
-
-        Player Assist { get; }
-
-        Player PlayerOut { get; }
-
-        Player PlayerIn { get; }
-
-        Player Player { get; }
-
-        byte InjuryTimeAnnounced { get; }
-
-        string Description { get; }
-
-        string Outcome { get; }
-
-        IEnumerable<Commentary> Commentaries { get; }
-
-        Player HomeShootoutPlayer { get; }
-
-        bool IsHomeShootoutScored { get; }
-
-        Player AwayShootoutPlayer { get; }
-
-        bool IsAwayShootoutScored { get; }
-
-        byte ShootoutHomeScore { get; }
-
-        byte ShootoutAwayScore { get; }
-
-        bool IsFirstShoot { get; }
-
-        bool IsHome { get; }
-    }
-
-    public class TimelineEvent : Entity<string, string>, ITimelineEvent
-    {
-        public EventType Type { get; set; }
-
-        public DateTime Time { get; set; }
-
-        public byte MatchTime { get; set; }
-
-        public string StoppageTime { get; set; }
-
-        public string MatchClock { get; set; }
-
-        public string Team { get; set; }
-
-        public byte Period { get; set; }
-
-        public PeriodType PeriodType { get; set; }
-
-        public byte HomeScore { get; set; }
-
-        public byte AwayScore { get; set; }
-
-        public GoalScorer GoalScorer { get; set; }
-
-        public IEnumerable<Commentary> Commentaries { get; set; }
-
-        public Player Assist { get; set; }
-
-        public Player PlayerOut { get; set; }
-
-        public Player PlayerIn { get; set; }
-
-        public Player Player { get; set; }
-
-        public byte InjuryTimeAnnounced { get; set; }
-
-        public string Description { get; set; }
-
-        public string Outcome { get; set; }
-
-        public Player HomeShootoutPlayer { get; set; }
-
-        public bool IsHomeShootoutScored { get; set; }
-
-        public Player AwayShootoutPlayer { get; set; }
-
-        public bool IsAwayShootoutScored { get; set; }
-
-        public byte ShootoutHomeScore { get; set; }
-
-        public byte ShootoutAwayScore { get; set; }
-
-        public bool IsFirstShoot { get; set; }
-
-        public bool IsHome => Team == "home";
-    }
-
-    public class Commentary
-    {
-        public string Text { get; set; }
-    }
-
-    public interface IGoalScorer : IEntity<string, string>
-    {
-        string Method { get; }
-    }
-
-    public class GoalScorer : Entity<string, string>, IGoalScorer
-    {
-        public string Method { get; set; }
     }
 }

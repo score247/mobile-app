@@ -1,30 +1,27 @@
-﻿namespace LiveScore.Core.Models.Matches
+﻿using System;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
+
+namespace LiveScore.Core.Models.Matches
 {
-    using System;
-    using System.Collections.Generic;
-    using LiveScore.Core.Models.Leagues;
-    using LiveScore.Core.Models.Teams;
-
-    public interface IMatchOld : IEntity<string, string>
+    public interface IMatch
     {
-        DateTimeOffset EventDate { get; set; }
+        string Id { get; }
 
-        IEnumerable<ITeam> Teams { get; set; }
+        DateTimeOffset EventDate { get; }
 
-        IMatchResult MatchResult { get; set; }
+        string LeagueId { get; }
 
-        IEnumerable<ITimelineEvent> TimeLines { get; set; }
+        string LeagueName { get; }
 
-        IMatchCondition MatchCondition { get; set; }
+        MatchStatus MatchStatus { get; }
 
-        ILeague League { get; set; }
+        MatchStatus EventStatus { get; }
 
-        int Attendance { get; set; }
+        void UpdateResult(IMatchResult matchResult);
 
-        IVenue Venue { get; set; }
+        void UpdateLastTimeline(ITimelineEvent timelineEvent);
 
-        string Referee { get; set; }
-
-        ITimelineEvent LatestTimeline { get; set; }
+        void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome);
     }
 }

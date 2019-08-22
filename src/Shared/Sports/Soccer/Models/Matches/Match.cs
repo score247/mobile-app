@@ -117,26 +117,30 @@
 
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+
         public void UpdateResult(IMatchResult matchResult)
         {
-            EventStatus = matchResult.EventStatus;
-            MatchStatus = matchResult.MatchStatus;
-            MatchTime = matchResult.MatchTime;
-            MatchPeriods = matchResult.MatchPeriods;
-            HomeScore = matchResult.HomeScore;
-            AwayScore = matchResult.AwayScore;
-            WinnerId = matchResult.WinnerId;
-            AggregateWinnerId = matchResult.WinnerId;
+            var soccerMatchResult = matchResult as MatchResult;
+
+            EventStatus = soccerMatchResult.EventStatus;
+            MatchStatus = soccerMatchResult.MatchStatus;
+            MatchTime = soccerMatchResult.MatchTime;
+            MatchPeriods = soccerMatchResult.MatchPeriods;
+            HomeScore = soccerMatchResult.HomeScore;
+            AwayScore = soccerMatchResult.AwayScore;
+            WinnerId = soccerMatchResult.WinnerId;
+            AggregateWinnerId = soccerMatchResult.WinnerId;
         }
 
         public void UpdateLastTimeline(ITimelineEvent timelineEvent)
         {
-            LastTimelineType = timelineEvent.Type;
-            StoppageTime = timelineEvent.StoppageTime;
-            InjuryTimeAnnounced = timelineEvent.InjuryTimeAnnounced;
-        }
+            var soccerTimeline = timelineEvent as TimelineEvent;
 
-#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+            LastTimelineType = soccerTimeline.Type;
+            StoppageTime = soccerTimeline.StoppageTime;
+            InjuryTimeAnnounced = soccerTimeline.InjuryTimeAnnounced;
+        }
 
         public void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome)
         {
