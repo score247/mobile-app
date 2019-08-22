@@ -22,9 +22,6 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <coreResources:MatchViewResource />
-            </ResourceDictionary.MergedDictionaries>
             <templateSelectors:MatchItemTemplateSelector x:Key="matchItemTemplateSelector" />
             <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
         </ResourceDictionary>

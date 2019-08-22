@@ -76,7 +76,8 @@
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
                 if (dateTime.Date == DateTime.Today
-                    || dateTime.Date == DateTimeExtension.Yesterday().Date)
+                    || dateTime.Date == DateTimeExtension.Yesterday().Date
+                    || forceFetchNewData)
                 {
                     return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
