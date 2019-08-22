@@ -14,7 +14,6 @@ using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using Microsoft.AspNetCore.SignalR.Client;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -49,9 +48,9 @@ namespace LiveScore.Score.ViewModels
             matchHubConnection = hubService.BuildMatchEventHubConnection();
             teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
-            RefreshCommand = new DelegateCommand(OnRefreshCommand);
-            TappedMatchCommand = new DelegateCommand<MatchViewModel>(OnTappedMatchCommand);
-            ClickSearchCommand = new DelegateCommand(OnClickSearchCommandExecuted);
+            RefreshCommand = new DelegateAsyncCommand(OnRefreshCommand);
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTappedMatchCommand);
+            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchCommandExecuted);
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -60,21 +59,20 @@ namespace LiveScore.Score.ViewModels
 
         public IList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
-        public DelegateCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateCommand<MatchViewModel> TappedMatchCommand { get; }
+        public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; }
 
-        public DelegateCommand ClickSearchCommand { get; }
+        public DelegateAsyncCommand ClickSearchCommand { get; }
 
-        public override void OnResume()
+        public override async void OnResume()
         {
             if (SelectedDate != DateTime.Today)
             {
-                Device.BeginInvokeOnMainThread(async () => await NavigateToHome());
+                await NavigateToHome();
             }
 
-            Device.BeginInvokeOnMainThread(async () =>
-                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+            await LoadData(() => LoadMatches(selectedDateRange, true), false);
 
             Initialize();
         }
@@ -87,8 +85,7 @@ namespace LiveScore.Score.ViewModels
             }
             else
             {
-                Device.BeginInvokeOnMainThread(async () =>
-                    await LoadData(() => LoadMatches(selectedDateRange, true), false));
+                await LoadData(() => LoadMatches(selectedDateRange, true), false);
             }
         }
 
@@ -121,43 +118,42 @@ namespace LiveScore.Score.ViewModels
             cancellationTokenSource?.Cancel();
         }
 
-        private void OnRefreshCommand()
+        private async Task OnRefreshCommand()
         {
             Profiler.Start(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
 
-            Device.BeginInvokeOnMainThread(async () =>
-                await LoadData(() => LoadMatches(selectedDateRange, true), false));
+            await LoadData(() => LoadMatches(selectedDateRange, true), false);
         }
 
-        private void OnTappedMatchCommand(MatchViewModel matchItem)
+        private async Task OnTappedMatchCommand(MatchViewModel matchItem)
         {
             var parameters = new NavigationParameters
             {
                 { "Match", matchItem.Match }
             };
 
-            Device.BeginInvokeOnMainThread(async () =>
+            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
+
+            if (!navigated.Success)
             {
-                var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
-
-                if (!navigated.Success)
-                {
-                    await LoggingService.LogErrorAsync(navigated.Exception);
-                }
-            });
+                await LoggingService.LogErrorAsync(navigated.Exception);
+            }
         }
 
-        private void OnClickSearchCommandExecuted()
+        private async Task OnClickSearchCommandExecuted()
         {
-            Device.BeginInvokeOnMainThread(async () =>
-                await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true));
+            await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
         }
 
-        private void OnDateBarItemSelected(DateRange dateRange)
+#pragma warning disable S3168 // "async" methods should not return "void"
+
+        private async void OnDateBarItemSelected(DateRange dateRange)
         {
-            Profiler.Start(this.GetType().Name + ".LoadMatches.SelectDate");
-            Device.BeginInvokeOnMainThread(async () => await LoadData(() => LoadMatches(dateRange)));
+            Profiler.Start(GetType().Name + ".LoadMatches.SelectDate");
+            await LoadData(() => LoadMatches(dateRange));
         }
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadMatches(
             DateRange dateRange,
