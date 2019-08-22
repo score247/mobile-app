@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Common.Services
-{
-    using System;
-    using System.Reactive.Linq;
-    using System.Threading.Tasks;
-    using Akavache;
-    using MethodTimer;
+﻿using System;
+using System.Reactive.Linq;
+using System.Threading.Tasks;
+using Akavache;
+using MethodTimer;
 
+namespace LiveScore.Common.Services
+{
     public enum CacheDuration
     {
         Short = 120, // 120 seconds

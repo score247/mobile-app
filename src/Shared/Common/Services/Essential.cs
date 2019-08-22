@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Common.Services
-{
-    using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 
+namespace LiveScore.Common.Services
+{
     public interface IEssential
     {
         string Model { get; }

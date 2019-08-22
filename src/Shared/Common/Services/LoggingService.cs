@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Common.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using SharpRaven;
-    using SharpRaven.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using SharpRaven;
+using SharpRaven.Data;
 
+namespace LiveScore.Common.Services
+{
     public interface ILoggingService
     {
         Task LogErrorAsync(Exception exception);
