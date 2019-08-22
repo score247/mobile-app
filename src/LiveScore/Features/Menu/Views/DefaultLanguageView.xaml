@@ -54,7 +54,6 @@
                     Style="{StaticResource NavName}"
                     Text="Indonesian" />
             </StackLayout>
-
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -70,7 +69,6 @@
                     Style="{StaticResource NavName}"
                     Text="Simplified Chinese" />
             </StackLayout>
-
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -86,7 +84,6 @@
                     Style="{StaticResource NavName}"
                     Text="Traditional Chinese" />
             </StackLayout>
-
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -102,7 +99,6 @@
                     Style="{StaticResource NavName}"
                     Text="Thai" />
             </StackLayout>
-
         </FlexLayout>
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
@@ -118,7 +114,6 @@
                     Style="{StaticResource NavName}"
                     Text="Vietnamese" />
             </StackLayout>
-
         </FlexLayout>
     </StackLayout>
 </ContentPage>

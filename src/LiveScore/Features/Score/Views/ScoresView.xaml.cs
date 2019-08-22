@@ -1,7 +1,5 @@
 ﻿namespace LiveScore.Score.Views
 {
-    using System;
-    using LiveScore.Common.Helpers;
     using MethodTimer;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -13,14 +11,6 @@
         public ScoresView()
         {
             InitializeComponent();
-#if DEBUG
-            this.Appearing += ScoresView_Appearing;
-#endif
-        }
-
-        private void ScoresView_Appearing(object sender, EventArgs e)
-        {
-            Profiler.Stop("IOS Application");
         }
     }
 }

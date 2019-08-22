@@ -11,15 +11,15 @@
         <ToolbarItem Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Label Text="Leagues is comming soon"
-               TextColor="{StaticResource SecondTextColor}" 
-               HorizontalOptions="Center" 
+               TextColor="{StaticResource SecondTextColor}"
+               HorizontalOptions="Center"
                VerticalOptions="Center" FontSize="13" />
     </ContentPage.Content>
 </ContentPage>

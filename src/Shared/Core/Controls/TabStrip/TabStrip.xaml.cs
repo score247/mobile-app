@@ -56,7 +56,6 @@
             {
                 control.SelectedTabIndex = index;
             });
-
         }
 
         public static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)

@@ -8,7 +8,7 @@
         {
         }
 
-        public DateBarItem(DateTime date, bool isSelected) 
+        public DateBarItem(DateTime date, bool isSelected)
         {
             Date = date.Date;
             IsSelected = isSelected;

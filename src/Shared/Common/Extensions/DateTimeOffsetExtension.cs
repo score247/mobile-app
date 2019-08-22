@@ -1,5 +1,4 @@
-﻿
-namespace LiveScore.Common.Extensions
+﻿namespace LiveScore.Common.Extensions
 {
     using System;
 

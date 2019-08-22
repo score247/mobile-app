@@ -52,7 +52,7 @@ namespace LiveScore.Common.Services
             if (!string.IsNullOrWhiteSpace(message))
             {
                 evt.Message = new SentryMessage(message);
-            }            
+            }
 
             evt.Contexts.Device.Model = deviceInfo.Model;
             evt.Contexts.Device.Name = deviceInfo.Name;

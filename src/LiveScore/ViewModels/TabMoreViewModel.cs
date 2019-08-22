@@ -5,9 +5,9 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Models;
     using LiveScore.Features.News.Views;
     using LiveScore.Features.TVSchedule.Views;
+    using LiveScore.Models;
     using Prism.Navigation;
 
     public class TabMoreViewModel : ViewModelBase

@@ -71,6 +71,5 @@
                 </Frame>
             </FlexLayout>
         </StackLayout>
-
     </ContentView.Content>
 </ContentView>

@@ -22,7 +22,7 @@
         <ToolbarItem Priority="1">
             <ToolbarItem.Icon>
                 <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png"/>
+                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
                 </OnPlatform>
             </ToolbarItem.Icon>
         </ToolbarItem>
@@ -32,9 +32,9 @@
             <Frame Style="{StaticResource DateBarBox}">
                 <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <Label Text="24"
-                        Style="{StaticResource DateBarDate}"/>
+                        Style="{StaticResource DateBarDate}" />
                     <Label Text="THU"
-                        Style="{StaticResource DateBarDay}"/>
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
             <Frame Style="{StaticResource DateBarBox}">
@@ -98,7 +98,7 @@
                     <Label Text="31"
                         Style="{StaticResource DateBarDate}" />
                     <Label Text="THU"
-                        Style="{StaticResource DateBarDay}"/>
+                        Style="{StaticResource DateBarDay}" />
                 </StackLayout>
             </Frame>
         </FlexLayout>        -->
@@ -170,6 +170,5 @@
         <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </ContentView>
-
     </StackLayout>
 </ContentPage>

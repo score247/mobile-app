@@ -44,7 +44,6 @@
                 return Object.Equals(bookmaker1, bookmaker2);
             }
 
-
             return bookmaker1.Equals(bookmaker2);
         }
 

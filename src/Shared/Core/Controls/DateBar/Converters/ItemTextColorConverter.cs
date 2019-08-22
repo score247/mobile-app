@@ -34,7 +34,7 @@
             return value;
         }
 
-        private static bool IsToday(DateBarItem dateBarItem) 
+        private static bool IsToday(DateBarItem dateBarItem)
             => dateBarItem.Date.Date == DateTime.Now.Date;
     }
 }

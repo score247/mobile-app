@@ -38,10 +38,10 @@
               <Label Style="{StaticResource NavName}" Text="Demo" />
             </StackLayout>
             <Switch IsToggled="{Binding IsDemo}">
-                <Switch.Behaviors>                    
-                    <behavior:EventToCommandBehavior EventName="Toggled" 
+                <Switch.Behaviors>
+                    <behavior:EventToCommandBehavior EventName="Toggled"
                                       Command="{Binding ToggledCommand}" />
-                </Switch.Behaviors>                
+                </Switch.Behaviors>
             </Switch>
           </FlexLayout>
           <ContentView>
@@ -69,7 +69,7 @@
             </StackLayout>
             <Label Style="{StaticResource ArrowRightIcon}" />
             <FlexLayout.GestureRecognizers>
-              <TapGestureRecognizer Command="{Binding CleanCacheAndRefreshCommand}"/>
+              <TapGestureRecognizer Command="{Binding CleanCacheAndRefreshCommand}" />
             </FlexLayout.GestureRecognizers>
           </FlexLayout>
           <ContentView>
@@ -136,8 +136,6 @@
           <ContentView>
             <BoxView Style="{StaticResource HorizontalLine}" />
           </ContentView>
-
-       
 
           <FlexLayout x:Name="InfoAlert" Style="{StaticResource SettingMenuRow}">
             <StackLayout Style="{StaticResource StacklayoutHorizontalCenter}">

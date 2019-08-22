@@ -7,7 +7,6 @@
     using LiveScore.Core;
     using LiveScore.Core.Services;
     using LiveScore.Views;
-    using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -22,7 +21,7 @@
             INavigationService navigationService,
             IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
-        {   
+        {
             this.cachingService = cachingService;
             this.settingsService = settingsService;
 
@@ -32,7 +31,7 @@
 
         public bool IsDemo { get; set; }
 
-        public DelegateAsyncCommand<string> NavigateCommand { get; set; } 
+        public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         //TODO remove this command when ready to release
         public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toogle);
@@ -45,8 +44,7 @@
         }
 
         private async Task Toogle()
-        {   
-            
+        {
             settingsService.IsDemo = !settingsService.IsDemo;
 
             if (settingsService.IsDemo)

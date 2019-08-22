@@ -13,7 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <StackLayout Padding="16" Orientation="Vertical">
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
             <Button Style="{StaticResource PrevButton}" />

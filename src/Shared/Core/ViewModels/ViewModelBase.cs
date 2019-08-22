@@ -1,8 +1,6 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
     using System;
-    using System.Diagnostics;
-    using System.Reflection;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Services;
