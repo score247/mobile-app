@@ -3,6 +3,7 @@ namespace Scores.Tests.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
@@ -65,13 +66,13 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void RefreshCommand_OnExecuting_RefreshMatchListItemSourceData()
+        public async Task RefreshCommand_OnExecuting_RefreshMatchListItemSourceData()
         {
             // Arrange
             matchService.GetMatches(Arg.Any<DateRange>(), Language.English, true).Returns(matchData);
 
             // Act
-            viewModel.RefreshCommand.Execute();
+            await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
             var actualMatchData = viewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
@@ -79,15 +80,15 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void TappedMatchCommand_OnExecuting_CallNavigationService()
+        public async Task TappedMatchCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
             matchService.GetMatches(Arg.Any<DateRange>(), Language.English, true).Returns(matchData);
-            viewModel.RefreshCommand.Execute();
+            await viewModel.RefreshCommand.ExecuteAsync();
             var matchViewModel = viewModel.MatchItemsSource.SelectMany(group => group).FirstOrDefault();
 
             // Act
-            viewModel.TappedMatchCommand.Execute(matchViewModel);
+            await viewModel.TappedMatchCommand.ExecuteAsync(matchViewModel);
 
             // Assert
             var navService = viewModel.NavigationService as FakeNavigationService;
@@ -96,10 +97,10 @@ namespace Scores.Tests.ViewModels
         }
 
         [Fact]
-        public void ClickSearchCommand_OnExecuting_CallNavigationService()
+        public async Task ClickSearchCommand_OnExecuting_CallNavigationService()
         {
             // Act
-            viewModel.ClickSearchCommand.Execute();
+            await viewModel.ClickSearchCommand.ExecuteAsync();
 
             // Assert
             var navService = viewModel.NavigationService as FakeNavigationService;
