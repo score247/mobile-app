@@ -92,7 +92,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
         private Task HandleButtonCommand(string betTypeId)
-            => LoadData(() => LoadOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)) , oddsFormat));
+        => LoadOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat);
+               
 
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
@@ -192,7 +193,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)
-            => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
+            => isRefresh ||
+            SelectedBetType != betType ||
+            BetTypeOddsItems == null ||
+            !BetTypeOddsItems.Any();
 
         [Time]
         internal async Task<MatchOddsComparisonMessage> DeserializeComparisonMessage(string message)
@@ -243,13 +247,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 }
             }
 
-            //TODO only update cache when receiving new odds change message, run in background
-            var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
-
-            foreach (var betTypeId in betTypes)
+            //TODO only update cache when receiving new odds change message, run in background                       
+            if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
-                await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, oddsFormat, forceFetchNewData: true);
-            }            
+                var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+
+                foreach (var betTypeId in betTypes)
+                {
+                    await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                }
+            }
+            //otherwise -> invalidate cache key?
         }
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
