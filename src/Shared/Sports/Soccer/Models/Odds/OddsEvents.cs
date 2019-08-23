@@ -4,9 +4,9 @@
     using LiveScore.Core.Models.Odds;
     using Newtonsoft.Json;
 
-    public class OddsEvent : IOddsEvent
+    public class OddsMovementEvent : IOddsMovementEvent
     {
-        public OddsEvent(
+        public OddsMovementEvent(
             int betTypeId,
             Bookmaker bookmaker,
             OddsMovement oddsMovement)

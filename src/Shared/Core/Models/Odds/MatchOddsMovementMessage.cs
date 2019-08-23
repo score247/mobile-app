@@ -2,10 +2,10 @@
 
 namespace LiveScore.Core.Models.Odds
 {
-    public interface IMatchOddsChangedMessage
+    public interface IOddsMovementMessage
     {
         string MatchId { get; }
 
-        IEnumerable<IOddsEvent> OddsEvents { get; }
+        IEnumerable<IOddsMovementEvent> OddsEvents { get; }
     }
 }
