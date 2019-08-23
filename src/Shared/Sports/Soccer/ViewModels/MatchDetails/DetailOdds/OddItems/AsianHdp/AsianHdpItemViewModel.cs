@@ -8,13 +8,13 @@
     using Prism.Navigation;
 
     public class AsianHdpItemViewModel : BaseItemViewModel
-    {       
+    {
         public AsianHdpItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver depdendencyResolver)
              : base(BetType.AsianHDP, betTypeOdds, navigationService, depdendencyResolver)
-        {           
+        {
         }
 
         public string HomeLiveOdds { get; private set; }
@@ -33,7 +33,7 @@
 
         public string OpeningHdp { get; private set; }
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
             BuildHomeOdds();
 

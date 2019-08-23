@@ -59,7 +59,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        protected override async void Initialize()
+        protected override async void OnInitialized()
         {
             try
             {

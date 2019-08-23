@@ -15,7 +15,7 @@
     using Newtonsoft.Json;
     using Prism.Events;
 
-    public class HubService : IHubService
+    public class SoccerHubService : IHubService
     {
         public const string MatchEvent = "MatchEvent";
         public const string OddsComparison = "OddsComparison";
@@ -41,7 +41,7 @@
 
         public byte SportId => SportType.Soccer.Value;
 
-        public HubService(
+        public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
             ILoggingService logger,
             ISettingsService settingsService,
@@ -55,7 +55,8 @@
 
         public async Task Start()
         {
-            hubConnection = hubConnectionBuilder.WithUrl($"{settingsService.HubEndpoint}Soccer/MatchEventHub").Build();
+            // TODO: Change to use only 1 hub for 1 sport
+            hubConnection = hubConnectionBuilder.WithUrl($"{settingsService.HubEndpoint}/SoccerHub").Build();
 
             foreach (var hubEvent in hubEvents)
             {

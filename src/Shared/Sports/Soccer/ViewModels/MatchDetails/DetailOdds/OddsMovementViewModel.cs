@@ -52,7 +52,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public DataTemplate HeaderTemplate { get; private set; }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             try
             {
@@ -69,7 +69,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             }
         }
 
-        protected override async void Initialize()
+        protected override async void OnInitialized()
         {
             try
             {

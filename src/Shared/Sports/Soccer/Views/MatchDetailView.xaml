@@ -132,7 +132,7 @@
                            Text="{Binding DisplaySecondLeg}" />
                 </FlexLayout>
                 <tabStrip:TabStrip x:Name="TabStrip"
-                                   ItemsSource="{Binding TabViews}" />
+                                   ItemsSource="{Binding TabItems}" />
                 <ActivityIndicator IsEnabled="{Binding IsLoading}"
                                    IsRunning="{Binding IsLoading}"
                                    IsVisible="{Binding IsLoading}"

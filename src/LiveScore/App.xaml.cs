@@ -60,16 +60,14 @@ namespace LiveScore
         [Time]
         protected override async void OnInitialized()
         {
-            Registrations.Start("Score247.App");
-
             var jsonSettings = new JsonSerializerSettings
             {
                 DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                 ContractResolver = new PrivateSetterContractResolver()
             };
 
+            Registrations.Start("Score247.App");
             Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
-
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
@@ -145,7 +143,7 @@ namespace LiveScore
 
         private async void RegisterAndStartEventHubs(IContainerProvider container)
         {
-            var soccerHubService = new HubService(
+            var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),
                 container.Resolve<ILoggingService>(),
                 container.Resolve<ISettingsService>(),

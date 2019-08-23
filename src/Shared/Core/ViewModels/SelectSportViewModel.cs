@@ -35,7 +35,7 @@ namespace LiveScore.Core.ViewModels
 
         public DelegateAsyncCommand DoneCommand { get; }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             var sportItems = sportService.GetSportItems();
 

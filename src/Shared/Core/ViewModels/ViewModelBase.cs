@@ -10,7 +10,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitializeAsync
+    public class ViewModelBase : IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
         public ViewModelBase()
         {
@@ -58,21 +58,8 @@
 
         public bool IsNotLoading => !IsLoading;
 
-        public virtual void OnNavigatedFrom(INavigationParameters parameters)
+        public virtual void Initialize(INavigationParameters parameters)
         {
-        }
-
-        public virtual void OnNavigatedTo(INavigationParameters parameters)
-        {
-        }
-
-        public virtual void OnNavigatingTo(INavigationParameters parameters)
-        {
-        }
-
-        public virtual Task InitializeAsync(INavigationParameters parameters)
-        {
-            return Task.CompletedTask;
         }
 
         public virtual void Destroy()
@@ -81,29 +68,29 @@
 
         public virtual void OnResume()
         {
-            Initialize();
+            OnInitialized();
         }
 
         public virtual void OnSleep()
         {
-            Clean();
+            OnDisposed();
         }
 
         public virtual void OnAppearing()
         {
-            Initialize();
+            OnInitialized();
         }
 
         public virtual void OnDisappearing()
         {
-            Clean();
+            OnDisposed();
         }
 
-        protected virtual void Initialize()
+        protected virtual void OnInitialized()
         {
         }
 
-        protected virtual void Clean()
+        protected virtual void OnDisposed()
         {
         }
 

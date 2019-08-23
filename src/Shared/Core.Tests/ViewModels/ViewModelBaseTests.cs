@@ -37,36 +37,6 @@ namespace LiveScore.Core.Tests.ViewModels
         }
 
         [Fact]
-        public void OnNavigatedFrom_DoNothing()
-        {
-            // Act
-            viewModel.OnNavigatedFrom(null);
-
-            // Assert
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void OnNavigatedTo_StateUnderTest_ExpectedBehavior()
-        {
-            // Act
-            viewModel.OnNavigatedTo(null);
-
-            // Assert
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void OnNavigatingTo_StateUnderTest_ExpectedBehavior()
-        {
-            // Act
-            viewModel.OnNavigatingTo(null);
-
-            // Assert
-            Assert.True(true);
-        }
-
-        [Fact]
         public void Destroy_StateUnderTest_ExpectedBehavior()
         {
             // Act

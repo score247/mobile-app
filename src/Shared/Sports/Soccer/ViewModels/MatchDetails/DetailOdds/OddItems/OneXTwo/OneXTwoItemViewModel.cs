@@ -35,7 +35,7 @@
 
         public string DrawOddsTrend { get; private set; }
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
             BuildHomeOdds();
 

@@ -8,8 +8,6 @@ namespace LiveScore.Soccer.ViewModels
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Core.ViewModels;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
@@ -27,6 +25,9 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.ViewModels.DetailStats;
     using LiveScore.Soccer.ViewModels.DetailTable;
     using LiveScore.Soccer.ViewModels.DetailTracker;
+
+    using LiveScore.Soccer.ViewModels.DetailTracker;
+
     using LiveScore.Soccer.ViewModels.DetailTV;
     using LiveScore.Soccer.ViewModels.MatchDetailInfo;
     using LiveScore.Soccer.Views.Templates.DetailH2H;
@@ -60,8 +61,8 @@ namespace LiveScore.Soccer.ViewModels
 
         private readonly IMatchService matchService;
         private bool disposedValue;
-        private Dictionary<TabFunction, TabItemViewModelBase> tabItemViewModels;
-        private TabFunction CurrentTabView;
+        private IDictionary<TabDetailFunction, TabItemViewModelBase> tabItemViewModels;
+        private TabDetailFunction CurrentTabItem;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -78,79 +79,76 @@ namespace LiveScore.Soccer.ViewModels
 
         public string DisplaySecondLeg { get; private set; }
 
-        public ObservableCollection<TabItemViewModelBase> TabViews { get; private set; }
+        public IList<TabItemViewModelBase> TabItems { get; private set; }
 
-        public override Task InitializeAsync(INavigationParameters parameters)
+        public override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
-                tabItemViewModels = new Dictionary<TabFunction, TabItemViewModelBase>
-                {
-                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
-                    {TabFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()) },
-                    {TabFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
-                    {TabFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
-                    {TabFunction.Social, new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
-                    {TabFunction.Stats, new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
-                    {TabFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
-                    {TabFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                    {TabFunction.Tracker, new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
-                };
-
-                Title = tabItemViewModels.First().Key.DisplayName;
-                CurrentTabView = tabItemViewModels.First().Key;
-
-                BuildTabFunctions();
+                BuildTabItems(match);
 
                 var soccerMatch = match as Match;
                 BuildGeneralInfo(soccerMatch);
             }
-
-            return Task.CompletedTask;
         }
 
-        protected override void Clean()
+        protected override void OnDisposed()
         {
-            base.Clean();
+            base.OnDisposed();
 
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
-            TabViews = new ObservableCollection<TabItemViewModelBase>(TabViews);
+            TabItems = new ObservableCollection<TabItemViewModelBase>(TabItems);
 
             matchService.SubscribeMatchEvent(OnReceivedMatchEvent);
             matchService.SubscribeTeamStatistic(OnReceivedTeamStatistic);
 
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
-                Title = TabViews[index].Title;
-                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
+                Title = TabItems[index].Title;
+                CurrentTabItem = Enumeration.FromDisplayName<TabDetailFunction>(TabItems[index].TabHeaderTitle);
             });
         }
 
         public override void OnResume()
         {
-            tabItemViewModels[CurrentTabView].OnResume();
+            tabItemViewModels[CurrentTabItem].OnResume();
 
             base.OnResume();
         }
 
         public override void OnSleep()
         {
-            tabItemViewModels[CurrentTabView].OnSleep();
+            tabItemViewModels[CurrentTabItem].OnSleep();
 
             base.OnSleep();
         }
 
-        private void BuildTabFunctions()
+        private void BuildTabItems(IMatch match)
         {
-            TabViews = new ObservableCollection<TabItemViewModelBase>();
+            tabItemViewModels = new Dictionary<TabDetailFunction, TabItemViewModelBase>
+            {
+                {TabDetailFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
+                {TabDetailFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()) },
+                {TabDetailFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
+                {TabDetailFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
+                {TabDetailFunction.Social, new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
+                {TabDetailFunction.Stats, new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
+                {TabDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
+                {TabDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
+                {TabDetailFunction.Tracker, new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
+            };
+
+            Title = tabItemViewModels.First().Key.DisplayName;
+            CurrentTabItem = tabItemViewModels.First().Key;
+            TabItems = new List<TabItemViewModelBase>();
 
             foreach (var tab in TabFunctions)
             {
-                var tabFunction = Enumeration.FromDisplayName<TabFunction>(tab.Abbreviation);
+                var tabFunction = Enumeration.FromDisplayName<TabDetailFunction>(tab.Abbreviation);
 
                 if (tabItemViewModels.ContainsKey(tabFunction))
                 {
@@ -158,7 +156,7 @@ namespace LiveScore.Soccer.ViewModels
                     tabModel.Title = tab.Name;
                     tabModel.TabHeaderTitle = tab.Abbreviation;
 
-                    TabViews.Add(tabModel);
+                    TabItems.Add(tabModel);
                 }
             }
         }

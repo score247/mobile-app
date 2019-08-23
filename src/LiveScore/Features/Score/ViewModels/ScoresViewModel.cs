@@ -4,7 +4,6 @@ namespace LiveScore.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading;
@@ -13,12 +12,10 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Common.Helpers;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
-    using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -67,10 +64,10 @@ namespace LiveScore.Score.ViewModels
 
             await LoadData(() => LoadMatches(selectedDateRange, true), false);
 
-            Initialize();
+            OnInitialized();
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             if (MatchItemsSource == null)
             {
@@ -82,7 +79,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
             cancellationTokenSource = new CancellationTokenSource();
 
@@ -94,9 +91,9 @@ namespace LiveScore.Score.ViewModels
             matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
         }
 
-        protected override void Clean()
+        protected override void OnDisposed()
         {
-            base.Clean();
+            base.OnDisposed();
 
             EventAggregator
                  .GetEvent<DateBarItemSelectedEvent>()
@@ -130,9 +127,7 @@ namespace LiveScore.Score.ViewModels
         }
 
         private async Task OnClickSearchCommandExecuted()
-        {
-            await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
-        }
+            => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 

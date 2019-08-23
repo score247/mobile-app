@@ -12,13 +12,9 @@
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Models.Teams;
     using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
     using Prism.Events;
     using Refit;
-    using Xamarin.Forms;
 
     public interface ISoccerMatchApi
     {
@@ -31,7 +27,6 @@
 
     public class MatchService : BaseService, IMatchService
     {
-        private const string PushTeamStatistic = "TeamStatistic";
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
         private readonly IEventAggregator eventAggregator;
@@ -84,13 +79,15 @@
                     || dateTime.Date == DateTimeExtension.Yesterday().Date
                     || forceFetchNewData)
                 {
-                    return await cacheService.GetAndFetchLatestValue(
+                    var matches = await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
                             language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
+
+                    return matches;
                 }
 
                 return await cacheService.GetOrFetchValue(
@@ -130,14 +127,11 @@
             }
         }
 
-        [Time]
         public void SubscribeMatchEvent(Action<byte, IMatchEvent> handler)
         {
-            // TODO: need review UIThread here
             eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe((timelineEvent) =>
             {
-                if (timelineEvent != null
-                    && timelineEvent.SportId == SportType.Soccer.Value)
+                if (timelineEvent?.SportId == SportType.Soccer.Value)
                 {
                     handler.Invoke(SportType.Soccer.Value, timelineEvent.MatchEvent);
                 }
@@ -146,16 +140,17 @@
             true);
         }
 
-        [Time]
         public void SubscribeTeamStatistic(Action<byte, string, bool, ITeamStatistic> handler)
         {
-            // TODO: need review UIThread here
             eventAggregator.GetEvent<TeamStatisticPubSubEvent>().Subscribe((teamStatisticEvent) =>
             {
-                if (teamStatisticEvent != null
-                   && teamStatisticEvent.SportId == SportType.Soccer.Value)
+                if (teamStatisticEvent?.SportId == SportType.Soccer.Value)
                 {
-                    handler.Invoke(teamStatisticEvent.SportId, teamStatisticEvent.MatchId, teamStatisticEvent.IsHome, teamStatisticEvent.TeamStatistic);
+                    handler.Invoke(
+                        teamStatisticEvent.SportId,
+                        teamStatisticEvent.MatchId,
+                        teamStatisticEvent.IsHome,
+                        teamStatisticEvent.TeamStatistic);
                 }
             },
             ThreadOption.UIThread,
@@ -164,16 +159,10 @@
 
         [Time]
         private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
-            => await apiService.Execute
-            (
-                () => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)
-            );
+            => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language));
 
         [Time]
         private async Task<MatchInfo> GetMatchFromApi(string matchId, string language)
-           => await apiService.Execute
-           (
-               () => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)
-           );
+           => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
     }
 }
