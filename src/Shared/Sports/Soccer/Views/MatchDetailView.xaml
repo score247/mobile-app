@@ -49,7 +49,7 @@
                             Style="{StaticResource LeagueFlagContainer}">
                             <Image
                                 AutomationId="LeagueFlag"
-                                Source="images/flag_league/flag_england.png"
+                                Source="images/flag_league/default_flag.png"
                                 Style="{StaticResource LeagueFlag}" />
                         </StackLayout>
                         <Label
