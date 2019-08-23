@@ -6,6 +6,7 @@ namespace LiveScore.iOS
     using Foundation;
     using LiveScore.Common.Helpers;
     using ObjCRuntime;
+    using PanCardView.iOS;
     using Prism;
     using Prism.Ioc;
     using UIKit;
@@ -16,9 +17,8 @@ namespace LiveScore.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Profiler.Start("IOS Application");
-
             Xamarin.Forms.Forms.Init();
-            CarouselViewRenderer.Init();
+            CardsViewRenderer.Preserve();
 
             var application = new App(new iOSInitializer());
             LoadApplication(application);

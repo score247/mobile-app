@@ -10,7 +10,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware
+    public class ViewModelBase : INavigationAware, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitializeAsync
     {
         public ViewModelBase()
         {
@@ -70,6 +70,11 @@
         {
         }
 
+        public virtual Task InitializeAsync(INavigationParameters parameters)
+        {
+            return Task.CompletedTask;
+        }
+
         public virtual void Destroy()
         {
         }
@@ -94,6 +99,14 @@
             Clean();
         }
 
+        protected virtual void Initialize()
+        {
+        }
+
+        protected virtual void Clean()
+        {
+        }
+
         protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
         {
             IsLoading = showLoading;
@@ -105,13 +118,5 @@
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
-
-        protected virtual void Initialize()
-        {
-        }
-
-        protected virtual void Clean()
-        {
-        }
     }
 }

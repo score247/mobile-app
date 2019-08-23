@@ -12,19 +12,16 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
 
     public class TabStripTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly ViewModelBaseFixture baseFixture;
         private readonly TabStrip tabStrip;
 
         public TabStripTests(ViewModelBaseFixture baseFixture)
         {
-            this.baseFixture = baseFixture;
             tabStrip = new TabStrip
             {
-                SelectedTabIndex = 0,
                 ItemsSource = new List<TabItemViewModelBase> {
-                Substitute.For<TabItemViewModelBase>(),
-                Substitute.For<TabItemViewModelBase>()
-            }
+                    Substitute.For<TabItemViewModelBase>(),
+                    Substitute.For<TabItemViewModelBase>()
+                }
             };
         }
 
@@ -38,6 +35,7 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
             TabStrip.TabContent_ItemAppearing(tabCarouselView, new ItemAppearingEventArgs(InteractionType.User, true, 1, tabStrip.ItemsSource.ToList()[1]));
 
             // Assert
+            Assert.Equal(1, tabStrip.SelectedTabIndex);
             tabStrip.ItemsSource.ToList()[1].Received(1).OnAppearing();
         }
 
@@ -52,19 +50,6 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
 
             // Assert
             tabStrip.ItemsSource.ToList()[1].Received(1).OnDisappearing();
-        }
-
-        [Fact]
-        public void OnItemsSourceChanged_ItemBeforeAppearing_ChangeSelectedTab()
-        {
-            // Arrange
-            var tabCarouselView = ((tabStrip.Content as StackLayout)?.Children[1] as PanCardView.CarouselView);
-
-            // Act
-            TabStrip.TabContent_ItemBeforeAppearing(tabCarouselView, new ItemBeforeAppearingEventArgs(InteractionType.User, true, 1, tabStrip.ItemsSource.ToList()[1]));
-
-            // Assert
-            Assert.Equal(1, tabStrip.SelectedTabIndex);
         }
     }
 }

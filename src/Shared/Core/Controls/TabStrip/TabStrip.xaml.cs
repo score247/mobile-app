@@ -33,44 +33,44 @@
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public int SelectedTabIndex { get; set; }
+        public int SelectedTabIndex { get; private set; }
 
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStrip)bindable;
+            var tabItems = newValue as IEnumerable<TabItemViewModelBase>;
 
-            if (control == null || newValue == null)
+            if (control == null || tabItems == null || !tabItems.Any())
             {
                 MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), TabChangeEvent);
                 return;
             }
 
-            control.TabContent.ItemBeforeAppearing += TabContent_ItemBeforeAppearing;
             control.TabContent.ItemAppearing += TabContent_ItemAppearing;
             control.TabContent.ItemDisappearing += TabContent_ItemDisappearing;
 
-            var tabItems = newValue as IEnumerable<TabItemViewModelBase>;
             tabItems.ToArray()[control.SelectedTabIndex]?.OnAppearing();
 
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                control.SelectedTabIndex = index;
-            });
-        }
-
-        public static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)
-        {
-            MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
+            MessagingCenter.Subscribe<string, int>(
+                nameof(TabStrip), TabChangeEvent, (_, index) => control.SelectedTabIndex = index);
         }
 
         public static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
-            (args.Item as TabItemViewModelBase)?.OnAppearing();
+            if (args.Item != null)
+            {
+                MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
+
+                (args.Item as TabItemViewModelBase)?.OnAppearing();
+            }
         }
 
         public static void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
         {
-            (args.Item as TabItemViewModelBase)?.OnDisappearing();
+            if (args.Item != null)
+            {
+                (args.Item as TabItemViewModelBase)?.OnDisappearing();
+            }
         }
     }
 }

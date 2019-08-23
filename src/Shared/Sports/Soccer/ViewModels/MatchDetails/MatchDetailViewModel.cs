@@ -9,6 +9,7 @@ namespace LiveScore.Soccer.ViewModels
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Threading;
+    using System.Threading.Tasks;
     using Core.ViewModels;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
@@ -58,7 +59,6 @@ namespace LiveScore.Soccer.ViewModels
         };
 
         private readonly IMatchService matchService;
-        private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private Dictionary<TabFunction, TabItemViewModelBase> tabItemViewModels;
         private TabFunction CurrentTabView;
@@ -69,7 +69,6 @@ namespace LiveScore.Soccer.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
         }
 
@@ -81,7 +80,7 @@ namespace LiveScore.Soccer.ViewModels
 
         public ObservableCollection<TabItemViewModelBase> TabViews { get; private set; }
 
-        public override void OnNavigatingTo(INavigationParameters parameters)
+        public override Task InitializeAsync(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {
@@ -101,29 +100,34 @@ namespace LiveScore.Soccer.ViewModels
                 Title = tabItemViewModels.First().Key.DisplayName;
                 CurrentTabView = tabItemViewModels.First().Key;
 
+                BuildTabFunctions();
+
                 var soccerMatch = match as Match;
                 BuildGeneralInfo(soccerMatch);
             }
+
+            return Task.CompletedTask;
         }
 
         protected override void Clean()
         {
             base.Clean();
 
-            cancellationTokenSource?.Dispose();
-
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
-        [Time]
         protected override void Initialize()
         {
-            BuildTabFunctions();
-
-            cancellationTokenSource = new CancellationTokenSource();
+            TabViews = new ObservableCollection<TabItemViewModelBase>(TabViews);
 
             matchService.SubscribeMatchEvent(OnReceivedMatchEvent);
             matchService.SubscribeTeamStatistic(OnReceivedTeamStatistic);
+
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                Title = TabViews[index].Title;
+                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
+            });
         }
 
         public override void OnResume()
@@ -157,12 +161,6 @@ namespace LiveScore.Soccer.ViewModels
                     TabViews.Add(tabModel);
                 }
             }
-
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                Title = TabViews[index].Title;
-                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
-            });
         }
 
         [Time]
