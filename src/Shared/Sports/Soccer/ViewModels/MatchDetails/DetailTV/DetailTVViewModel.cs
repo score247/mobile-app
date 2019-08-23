@@ -14,8 +14,8 @@
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            TabHeaderIcon = TabDetailImages.TV;
-            TabHeaderActiveIcon = TabDetailImages.TVActive;
+            TabHeaderIcon = TabDetailImage.TV;
+            TabHeaderActiveIcon = TabDetailImage.TVActive;
         }
     }
 }

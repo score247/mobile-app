@@ -14,8 +14,8 @@
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            TabHeaderIcon = TabDetailImages.Social;
-            TabHeaderActiveIcon = TabDetailImages.SocialActive;
+            TabHeaderIcon = TabDetailImage.Social;
+            TabHeaderActiveIcon = TabDetailImage.SocialActive;
         }
     }
 }

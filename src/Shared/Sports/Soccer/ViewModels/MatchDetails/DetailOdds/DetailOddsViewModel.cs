@@ -53,8 +53,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
 
-            TabHeaderIcon = TabDetailImages.Odds;
-            TabHeaderActiveIcon = TabDetailImages.OddsActive;
+            TabHeaderIcon = TabDetailImage.Odds;
+            TabHeaderActiveIcon = TabDetailImage.OddsActive;
 
             BetTypeOddsItems = new List<BaseItemViewModel>();
         }

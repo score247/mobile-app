@@ -39,9 +39,9 @@ namespace LiveScore.Score.ViewModels
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(OnRefreshCommand);
-            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTappedMatchCommand);
-            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchCommandExecuted);
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
+            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearch);
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -108,14 +108,14 @@ namespace LiveScore.Score.ViewModels
             cancellationTokenSource?.Cancel();
         }
 
-        private async Task OnRefreshCommand()
+        private async Task OnRefresh()
         {
             Profiler.Start("ScoresViewModel.LoadMatches.PullDownToRefresh");
 
             await LoadData(() => LoadMatches(selectedDateRange, true), false);
         }
 
-        private async Task OnTappedMatchCommand(MatchViewModel matchItem)
+        private async Task OnTapMatch(MatchViewModel matchItem)
         {
             // TODO: Change to use IAutoInitialize for parameters followed by new release of prism
             // https://github.com/PrismLibrary/Prism/releases
@@ -132,7 +132,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        private async Task OnClickSearchCommandExecuted()
+        private async Task OnClickSearch()
             => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
 
         private async void OnDateBarItemSelected(DateRange dateRange)

@@ -35,7 +35,6 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.Views.Templates.DetailTable;
     using LiveScore.Soccer.Views.Templates.DetailTracker;
     using LiveScore.Soccer.Views.Templates.DetailTV;
-    using MethodTimer;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
