@@ -66,7 +66,7 @@
                         Command="{Binding TappedOddsItemCommand}"
                         EventArgsParameterPath="Item"
                         EventName="ItemTapped" />
-                </tabStrip:TabITemListView.Behaviors>
+                </tabStrip:TabITemListView.Behaviors>                
             </tabStrip:TabITemListView>
         </StackLayout>
     </StackLayout>

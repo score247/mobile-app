@@ -7,6 +7,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
@@ -15,19 +16,26 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Models.Odds;
     using MethodTimer;
+    using Microsoft.AspNetCore.SignalR.Client;
+    using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class OddsMovementViewModel : ViewModelBase
     {
-        private readonly IOddsService oddsService;
+        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
-        private string matchId;
+        private string matchId;      
+        private string oddsFormat;
         private Bookmaker bookmaker;
         private BetType betType;
-        private string oddsFormat;
+        private CancellationTokenSource cancellationTokenSource;
+
+        private readonly IOddsService oddsService;
+        private readonly HubConnection hubConnection;
 
         public OddsMovementViewModel(
             INavigationService navigationService,
@@ -35,6 +43,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
+            hubConnection = DependencyResolver
+                .Resolve<IHubService>(CurrentSportId.ToString())
+                .BuildOddsEventHubConnection();
+
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOddsMovement(true)));
@@ -44,7 +56,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public bool HasData { get; private set; }
 
-        public bool HasNoData => !HasData;
+        public List<BaseMovementItemViewModel> OddsMovementItems { get; private set; }
 
         public IList<IGrouping<string, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
 
@@ -74,6 +86,22 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             try
             {
                 await LoadData(() => LoadOddsMovement());
+
+                hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
+                {
+                    var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
+
+                    if (oddsMovementMessage == null)
+                    {
+                        return;
+                    }
+
+                    await HandleOddsMovementMessage(oddsMovementMessage);
+                }));
+
+                cancellationTokenSource = new CancellationTokenSource();
+
+                await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
             }
             catch (Exception ex)
             {
@@ -84,26 +112,72 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         [Time]
         private async Task LoadOddsMovement(bool isRefresh = false)
         {
-            IsLoading = !isRefresh;
+            if (isRefresh || GroupOddsMovementItems == null || !GroupOddsMovementItems.Any())
+            {
+                IsLoading = !isRefresh;
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, isRefresh);
+                var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, isRefresh);
 
-            HasData = matchOddsMovement.OddsMovements?.Any() == true;
+                HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
-            HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+                HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
-            var OddsMovementItems = HasData
-                    ? new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements.Select(t =>
-                        new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
-                        .CreateInstance()))
+                OddsMovementItems = HasData
+                    ? new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements
+                        .Select(t => new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver).CreateInstance()))                        
                     : new List<BaseMovementItemViewModel>();
 
-            GroupOddsMovementItems = HasData
-                ? new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName))
-                : new List<IGrouping<string, BaseMovementItemViewModel>>();
+                GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
 
-            IsRefreshing = false;
-            IsLoading = false;
+                IsRefreshing = false;
+                IsLoading = false;
+            }            
+        }
+
+        [Time]
+        internal async Task<MatchOddsMovementMessage> DeserializeOddsMovementMessage(string message)
+        {
+            MatchOddsMovementMessage oddsMovementMessage = null;
+
+            try
+            {
+                oddsMovementMessage = JsonConvert.DeserializeObject<MatchOddsMovementMessage>(message);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsComparisonMessage", ex);
+            }
+
+            return oddsMovementMessage;
+        }
+
+        [Time]
+        private async Task HandleOddsMovementMessage(MatchOddsMovementMessage oddsMovementMessage)
+        {
+            if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)) 
+            {
+                var updatedOddsMovements = oddsMovementMessage.OddsEvents
+                    .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
+                    .Select(x => x.OddsMovement);
+
+                if (!HasData)                
+                {
+                    HasData = updatedOddsMovements.Any();
+
+                    HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+                }
+
+                var newOddsMovementViews = updatedOddsMovements.Select(t =>
+                            new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
+                            .CreateInstance());
+
+                OddsMovementItems.AddRange(newOddsMovementViews);
+                OddsMovementItems = OddsMovementItems.OrderByDescending(x => x.UpdateTime).ToList();
+
+                GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
+
+                await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, (byte)betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
+            }
         }
     }
 }

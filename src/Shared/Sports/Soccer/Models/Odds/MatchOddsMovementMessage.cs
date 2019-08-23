@@ -7,9 +7,9 @@
 
     public class MatchOddsMovementMessage : IOddsMovementMessage
     {
-        public string MatchId { get; }
+        public string MatchId { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<IOddsMovementEvent>>))]
-        public IEnumerable<IOddsMovementEvent> OddsEvents { get; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<OddsMovementEvent>>))]
+        public IEnumerable<IOddsMovementEvent> OddsEvents { get; set; }
     }
 }

@@ -16,11 +16,11 @@
             OddsMovement = oddsMovement;
         }
 
-        public int BetTypeId { get; }
+        public int BetTypeId { get; set; }
 
-        public Bookmaker Bookmaker { get; }
+        public Bookmaker Bookmaker { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<OddsMovement>))]
-        public IOddsMovement OddsMovement { get; }
+        public IOddsMovement OddsMovement { get; set; }
     }
 }
