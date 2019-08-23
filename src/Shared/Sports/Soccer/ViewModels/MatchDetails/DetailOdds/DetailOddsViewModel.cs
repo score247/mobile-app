@@ -24,7 +24,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Threading.Tasks;
     using Xamarin.Forms;
 
-    internal class DetailOddsViewModel : TabItemViewModelBase, IDisposable
+    internal class DetailOddsViewModel : TabItemViewModel, IDisposable
     {
         private readonly string matchId;
         private readonly string oddsFormat;

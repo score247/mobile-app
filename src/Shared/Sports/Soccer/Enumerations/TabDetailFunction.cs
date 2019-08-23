@@ -1,22 +1,22 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
-    public class TabDetailFunction : Enumeration
+    public class MatchDetailFunction : TextEnumeration
     {
-        public static readonly TabDetailFunction Odds = new TabDetailFunction(1, "Odds");
-        public static readonly TabDetailFunction Info = new TabDetailFunction(2, "Info");
-        public static readonly TabDetailFunction Tracker = new TabDetailFunction(3, "Tracker");
-        public static readonly TabDetailFunction Stats = new TabDetailFunction(4, "Stats");
-        public static readonly TabDetailFunction Lineups = new TabDetailFunction(5, "Line-ups");
-        public static readonly TabDetailFunction H2H = new TabDetailFunction(6, "H2H");
-        public static readonly TabDetailFunction Table = new TabDetailFunction(7, "Table");
-        public static readonly TabDetailFunction Social = new TabDetailFunction(8, "Social");
-        public static readonly TabDetailFunction TV = new TabDetailFunction(9, "TV");
+        public static readonly MatchDetailFunction Odds = new MatchDetailFunction("Odds", "Odds");
+        public static readonly MatchDetailFunction Info = new MatchDetailFunction("Info", "Match Info");
+        public static readonly MatchDetailFunction Tracker = new MatchDetailFunction("Tracker", "Tracker");
+        public static readonly MatchDetailFunction Stats = new MatchDetailFunction("Stats", "Statistics");
+        public static readonly MatchDetailFunction Lineups = new MatchDetailFunction("Line-ups", "Line -ups");
+        public static readonly MatchDetailFunction H2H = new MatchDetailFunction("H2H", "Head to Head");
+        public static readonly MatchDetailFunction Table = new MatchDetailFunction("Table", "Table");
+        public static readonly MatchDetailFunction Social = new MatchDetailFunction("Social", "Social");
+        public static readonly MatchDetailFunction TV = new MatchDetailFunction("TV", "TV Schedule");
 
-        public TabDetailFunction()
+        public MatchDetailFunction()
         {
         }
 
-        private TabDetailFunction(byte value, string displayName)
+        private MatchDetailFunction(string value, string displayName)
             : base(value, displayName)
         {
         }

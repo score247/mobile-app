@@ -6,7 +6,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailTrackerViewModel : TabItemViewModelBase
+    internal class DetailTrackerViewModel : TabItemViewModel
     {
         public DetailTrackerViewModel(
             INavigationService navigationService,

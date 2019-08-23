@@ -6,7 +6,7 @@
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            var tabItem = item as TabItemViewModelBase;
+            var tabItem = item as TabItemViewModel;
 
             return tabItem.Template;
         }

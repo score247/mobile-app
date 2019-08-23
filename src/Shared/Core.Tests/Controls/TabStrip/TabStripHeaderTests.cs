@@ -8,14 +8,14 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
 
     public class TabStripHeaderTests : IClassFixture<ResourcesFixture>
     {
-        private readonly List<TabItemViewModelBase> tabs;
+        private readonly List<TabItemViewModel> tabs;
 
         public TabStripHeaderTests()
         {
-            tabs = new List<TabItemViewModelBase>
+            tabs = new List<TabItemViewModel>
             {
-                new TabItemViewModelBase() { TabHeaderTitle = "Info" },
-                new TabItemViewModelBase() { TabHeaderTitle = "Tracker" },
+                new TabItemViewModel() { TabHeaderTitle = "Info" },
+                new TabItemViewModel() { TabHeaderTitle = "Tracker" },
             };
         }
 

@@ -21,7 +21,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class DetailInfoViewModel : TabItemViewModelBase, IDisposable
+    public class DetailInfoViewModel : TabItemViewModel, IDisposable
     {
         private const string SpectatorNumberFormat = "0,0";
         private readonly IMatchService matchService;

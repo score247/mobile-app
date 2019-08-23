@@ -16,11 +16,11 @@
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-              nameof(ItemsSource), typeof(IEnumerable<TabItemViewModelBase>), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
+              nameof(ItemsSource), typeof(IEnumerable<TabItemViewModel>), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable<TabItemViewModelBase> ItemsSource
+        public IEnumerable<TabItemViewModel> ItemsSource
         {
-            get { return (IEnumerable<TabItemViewModelBase>)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable<TabItemViewModel>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -34,7 +34,7 @@
                 return;
             }
 
-            var tabs = (IList<TabItemViewModelBase>)newValue;
+            var tabs = (IList<TabItemViewModel>)newValue;
 
             if (control.scrollLayOut.Children.Count == 0)
             {
@@ -72,7 +72,7 @@
             });
         }
 
-        private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModelBase> tabs)
+        private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModel> tabs)
         {
             for (int index = 0; index < tabs.Count; index++)
             {

@@ -6,7 +6,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailLineupsViewModel : TabItemViewModelBase
+    internal class DetailLineupsViewModel : TabItemViewModel
     {
         public DetailLineupsViewModel(
             INavigationService navigationService,

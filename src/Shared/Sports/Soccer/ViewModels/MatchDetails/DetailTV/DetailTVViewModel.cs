@@ -6,7 +6,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailTVViewModel : TabItemViewModelBase
+    internal class DetailTVViewModel : TabItemViewModel
     {
         public DetailTVViewModel(
             INavigationService navigationService,

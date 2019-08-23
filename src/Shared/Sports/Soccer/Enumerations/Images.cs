@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Enumerations;
 
-    public class Images : StringEnumeration
+    public class Images : TextEnumeration
     {
         public static readonly Images YellowCard = new Images("images/common/yellow_card.png", nameof(YellowCard));
         public static readonly Images RedYellowCard = new Images("images/common/red_yellow_card.png", nameof(RedYellowCard));

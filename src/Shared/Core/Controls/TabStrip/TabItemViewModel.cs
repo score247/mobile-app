@@ -8,15 +8,15 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class TabItemViewModelBase : ViewModelBase
+    public class TabItemViewModel : ViewModelBase
     {
-        public TabItemViewModelBase()
+        public TabItemViewModel()
         {
         }
 
-        public TabItemViewModelBase(
-            INavigationService navigationService, 
-            IDependencyResolver depdendencyResolver, 
+        public TabItemViewModel(
+            INavigationService navigationService,
+            IDependencyResolver depdendencyResolver,
             DataTemplate dataTemplate,
             IEventAggregator eventAggregator = null)
             : base(navigationService, depdendencyResolver, eventAggregator)

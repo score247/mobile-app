@@ -6,7 +6,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailH2HViewModel : TabItemViewModelBase
+    internal class DetailH2HViewModel : TabItemViewModel
     {
         public DetailH2HViewModel(
             INavigationService navigationService,

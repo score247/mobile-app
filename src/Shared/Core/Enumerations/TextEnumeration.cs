@@ -11,13 +11,13 @@ namespace LiveScore.Core.Enumerations
 
 
     [Serializable]
-    public abstract class StringEnumeration : IComparable
+    public abstract class TextEnumeration : IComparable
     {
-        protected StringEnumeration()
+        protected TextEnumeration()
         {
         }
 
-        protected StringEnumeration(string value, string displayName)
+        protected TextEnumeration(string value, string displayName)
         {
             Value = value;
             DisplayName = displayName;
@@ -27,19 +27,19 @@ namespace LiveScore.Core.Enumerations
 
         public string Value { get; set; }
 
-        public static T FromDisplayName<T>(string displayName) where T : StringEnumeration, new()
+        public static T FromDisplayName<T>(string displayName) where T : TextEnumeration, new()
         {
             var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
             return matchingItem;
         }
 
-        public static T FromValue<T>(string value) where T : StringEnumeration, new()
+        public static T FromValue<T>(string value) where T : TextEnumeration, new()
         {
             var matchingItem = Parse<T, string>(value, "value", item => item.Value == value);
             return matchingItem;
         }
 
-        public static IEnumerable<T> GetAll<T>() where T : StringEnumeration, new()
+        public static IEnumerable<T> GetAll<T>() where T : TextEnumeration, new()
         {
             var type = typeof(T);
             var fields = type.GetFields(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly);
@@ -67,7 +67,7 @@ namespace LiveScore.Core.Enumerations
             }
         }
 
-        public static bool operator ==(StringEnumeration left, StringEnumeration right)
+        public static bool operator ==(TextEnumeration left, TextEnumeration right)
         {
             if (left is null)
             {
@@ -93,7 +93,7 @@ namespace LiveScore.Core.Enumerations
             }
         }
 
-        public static bool operator !=(StringEnumeration left, StringEnumeration right)
+        public static bool operator !=(TextEnumeration left, TextEnumeration right)
         {
             return !(left == right);
         }
@@ -105,7 +105,7 @@ namespace LiveScore.Core.Enumerations
                 return false;
             }
 
-            var otherValue = obj as Enumeration;
+            var otherValue = obj as TextEnumeration;
 
             if (otherValue == null)
             {
@@ -135,10 +135,10 @@ namespace LiveScore.Core.Enumerations
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            return Value.CompareTo(((Enumeration)obj).Value);
+            return Value.CompareTo(((TextEnumeration)obj).Value);
         }
 
-        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : StringEnumeration, new()
+        private static T Parse<T, K>(K value, string description, Func<T, bool> predicate) where T : TextEnumeration, new()
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 

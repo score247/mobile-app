@@ -23,13 +23,13 @@
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             nameof(ItemsSource),
-            typeof(IEnumerable<TabItemViewModelBase>),
+            typeof(IEnumerable<TabItemViewModel>),
             typeof(TabStrip),
             propertyChanged: OnItemsSourceChanged);
 
-        public IEnumerable<TabItemViewModelBase> ItemsSource
+        public IEnumerable<TabItemViewModel> ItemsSource
         {
-            get { return (IEnumerable<TabItemViewModelBase>)GetValue(ItemsSourceProperty); }
+            get { return (IEnumerable<TabItemViewModel>)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
 
@@ -38,7 +38,7 @@
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStrip)bindable;
-            var tabItems = newValue as IEnumerable<TabItemViewModelBase>;
+            var tabItems = newValue as IEnumerable<TabItemViewModel>;
 
             if (control == null || tabItems == null || !tabItems.Any())
             {
@@ -61,7 +61,7 @@
             {
                 MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
 
-                (args.Item as TabItemViewModelBase)?.OnAppearing();
+                (args.Item as TabItemViewModel)?.OnAppearing();
             }
         }
 
@@ -69,7 +69,7 @@
         {
             if (args.Item != null)
             {
-                (args.Item as TabItemViewModelBase)?.OnDisappearing();
+                (args.Item as TabItemViewModel)?.OnDisappearing();
             }
         }
     }

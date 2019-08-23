@@ -6,7 +6,7 @@
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailSocialViewModel : TabItemViewModelBase
+    internal class DetailSocialViewModel : TabItemViewModel
     {
         public DetailSocialViewModel(
             INavigationService navigationService,

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
-    public class Images : StringEnumeration
+    public class Images : TextEnumeration
     {
         public static readonly Images TabIcon = new Images("images/common/tab_icon.png", nameof(TabIcon));
 

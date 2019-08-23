@@ -18,9 +18,9 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
         {
             tabStrip = new TabStrip
             {
-                ItemsSource = new List<TabItemViewModelBase> {
-                    Substitute.For<TabItemViewModelBase>(),
-                    Substitute.For<TabItemViewModelBase>()
+                ItemsSource = new List<TabItemViewModel> {
+                    Substitute.For<TabItemViewModel>(),
+                    Substitute.For<TabItemViewModel>()
                 }
             };
         }
