@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOddsMovement(true)));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadOddsMovement(true));
         }
 
         public bool IsRefreshing { get; set; }
@@ -85,7 +85,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             try
             {
-                await LoadData(() => LoadOddsMovement());
+                await LoadOddsMovement();
 
                 hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
                 {
@@ -145,7 +145,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             }
             catch (Exception ex)
             {
-                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsComparisonMessage", ex);
+                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsMovementMessage", ex);
             }
 
             return oddsMovementMessage;
@@ -159,20 +159,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 var updatedOddsMovements = oddsMovementMessage.OddsEvents
                     .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
                     .Select(x => x.OddsMovement);
-
-                if (!HasData)                
-                {
-                    HasData = updatedOddsMovements.Any();
-
-                    HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
-                }
-
+                
                 var newOddsMovementViews = updatedOddsMovements.Select(t =>
                             new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
                             .CreateInstance());
 
                 OddsMovementItems.AddRange(newOddsMovementViews);
                 OddsMovementItems = OddsMovementItems.OrderByDescending(x => x.UpdateTime).ToList();
+
+                //var selectedGroupValues = GroupOddsMovementItems.Select(x=>x.Key == CurrentSportName).SelectMany(x => x);
 
                 GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
 
