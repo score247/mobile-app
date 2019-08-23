@@ -251,12 +251,12 @@ namespace Scores.Tests.ViewModels
         //    Assert.NotEqual(expectedMatch?.LatestTimeline, matchEvent.Timeline);
         //}
 
-        private void InitViewModelData(out IMatchEvent matchEvent)
-        {
-            matchService.GetMatches(Arg.Any<DateRange>(), Language.English, false).Returns(matchData);
-            matchEvent = new MatchEvent(matchData.FirstOrDefault().Id, specimens.Create<MatchResult>(), specimens.Create<TimelineEvent>());
+        //private void InitViewModelData(out IMatchEvent matchEvent)
+        //{
+        //    matchService.GetMatches(Arg.Any<DateRange>(), Language.English, false).Returns(matchData);
+        //    matchEvent = new MatchEvent(matchData.FirstOrDefault().Id, specimens.Create<MatchResult>(), specimens.Create<TimelineEvent>());
 
-            viewModel.OnNavigatedTo(null);
-        }
+        //    viewModel.OnNavigatedTo(null);
+        //}
     }
 }
