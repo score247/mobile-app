@@ -118,7 +118,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                             return;
                         }
 
-                        await HandleOddsComparisonMessage(oddsComparisonMessage);
+                        await HandleOddsComparisonMessage(oddsComparisonMessage.OddsComparison);
                     },
                     ThreadOption.UIThread,
                     true);

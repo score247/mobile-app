@@ -152,10 +152,10 @@ namespace LiveScore
             hubServices.Add(soccerHubService);
 
             // TODO: Ricky: temporary comment here
-            ////foreach (var hubService in hubServices)
-            ////{
-            ////    await hubService.Start();
-            ////}
+            foreach (var hubService in hubServices)
+            {
+                await hubService.Start();
+            }
         }
 
         protected override void OnSleep()
@@ -173,10 +173,10 @@ namespace LiveScore
             Debug.WriteLine("OnResume");
 
             // TODO: Ricky: temporary comment here
-            ////foreach (var hubService in hubServices)
-            ////{
-            ////    await hubService.Reconnect();
-            ////}
+            foreach (var hubService in hubServices)
+            {
+                await hubService.Reconnect();
+            }
 
             base.OnResume();
         }

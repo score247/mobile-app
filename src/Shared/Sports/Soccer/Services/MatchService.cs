@@ -147,10 +147,10 @@
                 if (teamStatisticEvent?.SportId == SportType.Soccer.Value)
                 {
                     handler.Invoke(
-                        teamStatisticEvent.SportId,
-                        teamStatisticEvent.MatchId,
-                        teamStatisticEvent.IsHome,
-                        teamStatisticEvent.TeamStatistic);
+                        teamStatisticEvent.SportId, 
+                        teamStatisticEvent.TeamStatistic.MatchId, 
+                        teamStatisticEvent.TeamStatistic.IsHome, 
+                        teamStatisticEvent.TeamStatistic.TeamStatistic);
                 }
             },
             ThreadOption.UIThread,
