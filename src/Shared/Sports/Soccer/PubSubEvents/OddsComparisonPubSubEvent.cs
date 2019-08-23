@@ -1,8 +1,10 @@
 ﻿namespace LiveScore.Soccer.Events
 {
     using System.Collections.Generic;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Events;
     using LiveScore.Core.Models.Odds;
+    using Newtonsoft.Json;
     using Prism.Events;
 
     public class OddsComparisonMessage : IOddsComparisonMessage
@@ -23,6 +25,7 @@
 
         public string MatchId { get; private set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<BetTypeOdds>>))]
         public IEnumerable<IBetTypeOdds> BetTypeOddsList { get; private set; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)

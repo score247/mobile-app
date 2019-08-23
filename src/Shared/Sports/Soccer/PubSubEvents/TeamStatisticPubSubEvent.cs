@@ -1,7 +1,10 @@
 ﻿namespace LiveScore.Soccer.Events
 {
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.Events;
     using LiveScore.Core.Models.Teams;
+    using LiveScore.Soccer.Models.Teams;
+    using Newtonsoft.Json;
     using Prism.Events;
 
     public class TeamStatisticsMessage : ITeamStatisticsMessage
@@ -26,6 +29,7 @@
 
         public bool IsHome { get; private set; }
 
+        [JsonConverter(typeof(JsonConcreteTypeConverter<TeamStatistic>))]
         public ITeamStatistic TeamStatistic { get; private set; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)
