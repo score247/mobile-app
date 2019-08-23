@@ -41,8 +41,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.eventAggregator = eventAggregator;
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
-            TabHeaderIcon = TabDetailImage.Info;
-            TabHeaderActiveIcon = TabDetailImage.InfoActive;
+            TabHeaderIcon = MatchDetailTabImage.Info;
+            TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
