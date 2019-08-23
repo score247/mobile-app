@@ -9,6 +9,7 @@
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchHeaderViewResource />
                         <resources:MatchViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
@@ -23,12 +24,12 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
-                <StackLayout
+
+                <Image
                     Grid.Row="0"
                     Grid.Column="0"
-                    Style="{StaticResource LeagueFlagContainer}">
-                    <Image Source="images/flag_league/default_flag.png" Style="{StaticResource LeagueFlag}" />
-                </StackLayout>
+                    Source="images/flag_league/default_flag.png"
+                    Style="{StaticResource LeagueFlag}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
@@ -43,16 +44,13 @@
                     Style="{StaticResource MatchDate}"
                     Text="{Binding Key.EventDate}" />
 
-                <StackLayout
+                <Image
+                    x:Name="DetailIcon"
                     Grid.Row="0"
                     Grid.Column="3"
-                    Padding="10,0,0,0"
-                    Style="{StaticResource StacklayoutHorizontalCenter}">
-                    <Image
-                        x:Name="DetailIcon"
-                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
-                        Style="{StaticResource DetailIcon}" />
-                </StackLayout>
+                    AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
+                    Style="{StaticResource MatchDetailIcon}" />
+
             </Grid>
         </StackLayout>
     </ViewCell>

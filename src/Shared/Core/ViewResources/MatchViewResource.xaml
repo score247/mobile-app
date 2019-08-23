@@ -3,93 +3,66 @@
     x:Class="LiveScore.Core.ViewResources.MatchViewResource"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-  <!--  Scores Styles  -->
-  <Style x:Key="LeagueBox" TargetType="Grid">
-    <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
-    <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
-  </Style>
-  <Style x:Key="LeagueFlagContainer" TargetType="StackLayout">
-    <Setter Property="VerticalOptions" Value="Center" />
-  </Style>
-  <Style x:Key="LeagueFlag" TargetType="Image">
-    <Setter Property="Aspect" Value="AspectFit" />
-  </Style>
-  <Style x:Key="LeagueName" TargetType="Label">
-    <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-    <Setter Property="FontSize" Value="{StaticResource FunctionGroupFontSize}" />
-    <Setter Property="FontAttributes" Value="Bold" />
-    <Setter Property="VerticalTextAlignment" Value="Center" />
-  </Style>
-  <Style x:Key="MatchDate" TargetType="Label">
-    <Setter Property="VerticalTextAlignment" Value="Center" />
-    <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-    <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
-  </Style>
 
-  <Style x:Key="MatchStatusContainer" TargetType="FlexLayout">
-    <Setter Property="AlignItems" Value="Center" />
-    <Setter Property="Direction" Value="Column" />
-    <Setter Property="JustifyContent" Value="Center" />
-    <Setter Property="Padding" Value="4,0" />
-  </Style>
-  <Style x:Key="MatchStatus" TargetType="Label">
-    <Setter Property="VerticalTextAlignment" Value="Center" />
-    <Setter Property="HorizontalTextAlignment" Value="Center" />
-    <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
-    <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-    <Setter Property="FontAttributes" Value="Bold" />
-  </Style>
+    <Style
+        x:Key="MatchStatusContainer"
+        BasedOn="{StaticResource FlexLayoutVerticalCenter}"
+        TargetType="FlexLayout">
+        <Setter Property="Padding" Value="4" />
+    </Style>
+    <Style x:Key="MatchStatus" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
 
-  <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
-    <Setter Property="Direction" Value="Column" />
-    <Setter Property="AlignItems" Value="Stretch" />
-    <Setter Property="JustifyContent" Value="Center" />
-  </Style>
-  <Style
-      x:Key="Score"
-      BasedOn="{StaticResource Team}"
-      TargetType="Label">
-    <Setter Property="HorizontalTextAlignment" Value="End" />
-    <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-    <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
-    <Setter Property="FontAttributes" Value="Bold" />
-  </Style>
-  <Style
-      x:Key="HomeScore"
-      BasedOn="{StaticResource Score}"
-      TargetType="Label">
-    <Setter Property="Margin" Value="0,6,0,3" />
-  </Style>
-  <Style
-      x:Key="AwayScore"
-      BasedOn="{StaticResource Score}"
-      TargetType="Label">
-    <Setter Property="Margin" Value="0,3,0,6" />
-  </Style>
-  <Style
-      x:Key="MatchFavoriteIcon"
-      BasedOn="{StaticResource FavoriteIcon}"
-      TargetType="Label">
-    <Setter Property="HorizontalTextAlignment" Value="Center" />
-  </Style>
-  <Style
-      x:Key="MatchHomeTeam"
-      BasedOn="{StaticResource FlexLayoutAlignLeft}"
-      TargetType="FlexLayout">
-    <Setter Property="Padding" Value="0,6,0,3" />
-  </Style>
-  <Style
-      x:Key="MatchAwayTeam"
-      BasedOn="{StaticResource FlexLayoutAlignLeft}"
-      TargetType="FlexLayout">
-    <Setter Property="Padding" Value="0,3,0,6" />
-  </Style>
+    <Style x:Key="MatchScoreContainer" TargetType="FlexLayout">
+        <Setter Property="Direction" Value="Column" />
+        <Setter Property="AlignItems" Value="Stretch" />
+        <Setter Property="JustifyContent" Value="Center" />
+    </Style>
+    <Style
+        x:Key="Score"
+        BasedOn="{StaticResource Team}"
+        TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+    </Style>
+    <Style
+        x:Key="HomeScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,6,0,3" />
+    </Style>
+    <Style
+        x:Key="AwayScore"
+        BasedOn="{StaticResource Score}"
+        TargetType="Label">
+        <Setter Property="Margin" Value="0,3,0,6" />
+    </Style>
+    <Style
+        x:Key="MatchFavoriteIcon"
+        BasedOn="{StaticResource FavoriteIcon}"
+        TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="MatchHomeTeam" TargetType="FlexLayout">
+        <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Padding" Value="0,6,0,3" />
+    </Style>
+    <Style x:Key="MatchAwayTeam" TargetType="FlexLayout">
+        <Setter Property="AlignItems" Value="Center" />
+        <Setter Property="Padding" Value="0,3,0,6" />
+    </Style>
 
-  <Style
-      x:Key="MatchWinnerInfoIcon"
-      BasedOn="{StaticResource WinnerInfoIcon}"
-      TargetType="Image">
-    <Setter Property="FlexLayout.Shrink" Value="0" />
-    <Setter Property="Margin" Value="4,0,0,0" />
-  </Style>
+    <Style
+        x:Key="MatchWinnerInfoIcon"
+        BasedOn="{StaticResource WinnerInfoIcon}"
+        TargetType="Image">
+        <Setter Property="FlexLayout.Shrink" Value="0" />
+        <Setter Property="Margin" Value="4,0,0,0" />
+    </Style>
 </ResourceDictionary>

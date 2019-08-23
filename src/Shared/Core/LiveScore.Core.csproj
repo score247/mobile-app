@@ -38,7 +38,6 @@
         <PackageReference Include="PropertyChanged.Fody" Version="3.0.1" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="ViewResources\" />
         <Folder Include="Models\Settings\" />
         <Folder Include="Jobs\">
         </Folder>
@@ -57,6 +56,9 @@
       </Compile>
       <Compile Update="Controls\TabStrip\TapStripHeader.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
+      </Compile>
+      <Compile Update="ViewResources\MatchHeaderViewResource.xaml.cs">
+        <DependentUpon>MatchHeaderViewResource.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
 </Project>

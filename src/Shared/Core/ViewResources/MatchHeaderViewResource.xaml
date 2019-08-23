@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LiveScore.Core.ViewResources.MatchHeaderViewResource"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="LeagueBox" TargetType="Grid">
+        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
+    </Style>
+    <Style x:Key="LeagueFlag" TargetType="Image">
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="LeagueName" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="FontSize" Value="{StaticResource FunctionGroupFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="MatchDate" TargetType="Label">
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+    </Style>
+    <Style
+        x:Key="MatchDetailIcon"
+        BasedOn="{StaticResource DetailIcon}"
+        TargetType="Image">
+        <Setter Property="Aspect" Value="AspectFit" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+</ResourceDictionary>

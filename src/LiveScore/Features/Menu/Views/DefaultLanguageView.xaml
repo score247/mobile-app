@@ -29,7 +29,7 @@
     </ContentPage.Resources>
     <StackLayout>
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_en.png" Style="{StaticResource Flag}" />
                 </StackLayout>
@@ -45,7 +45,7 @@
         </ContentView>
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_in.png" Style="{StaticResource Flag}" />
                 </StackLayout>
@@ -60,7 +60,7 @@
         </ContentView>
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
                 </StackLayout>
@@ -75,7 +75,7 @@
         </ContentView>
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_cn.png" Style="{StaticResource Flag}" />
                 </StackLayout>
@@ -90,7 +90,7 @@
         </ContentView>
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_th.png" Style="{StaticResource Flag}" />
                 </StackLayout>
@@ -105,7 +105,7 @@
         </ContentView>
 
         <FlexLayout Style="{StaticResource SettingMenuRow}">
-            <StackLayout Style="{StaticResource StacklayoutAlignLeft}">
+            <StackLayout Style="{StaticResource StacklayoutHorizontal}">
                 <StackLayout Style="{StaticResource FlagBox}">
                     <Image Source="images/common/flag_vn.png" Style="{StaticResource Flag}" />
                 </StackLayout>

@@ -33,18 +33,14 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style
-        x:Key="MatchGeneralInfoImportant"
-        BasedOn="{StaticResource FlexLayoutAlignCenter}"
-        TargetType="FlexLayout">
-        <Setter Property="Margin" Value="8,0" />
-        <Setter Property="HeightRequest" Value="23" />
-        <Setter Property="BackgroundColor" Value="#2D2F3F" />
-    </Style>
-
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="BackgroundColor" Value="#2D2F3F" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="HeightRequest" Value="23" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
     <Style
