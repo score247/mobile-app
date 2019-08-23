@@ -16,6 +16,7 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
+    using MethodTimer;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -32,7 +33,7 @@ namespace LiveScore.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            Profiler.Start(GetType().Name + ".LoadMatches.Home");
+            Profiler.Start("ScoresViewModel.LoadMatches.Home");
 
             SelectedDate = DateTime.Today;
 
@@ -57,6 +58,7 @@ namespace LiveScore.Score.ViewModels
 
         public override async void OnResume()
         {
+            Profiler.Start("ScoresViewModel.OnResume");
             if (SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
@@ -67,8 +69,10 @@ namespace LiveScore.Score.ViewModels
             OnInitialized();
         }
 
-        public override async void Initialize(INavigationParameters parameters)
+        [Time]
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
+            Profiler.Start("ScoresViewModel.OnNavigatedTo");
             if (MatchItemsSource == null)
             {
                 await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
@@ -79,7 +83,8 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        protected override void OnInitialized()
+        [Time]
+        protected override void Initialize()
         {
             cancellationTokenSource = new CancellationTokenSource();
 
@@ -91,7 +96,8 @@ namespace LiveScore.Score.ViewModels
             matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
         }
 
-        protected override void OnDisposed()
+        [Time]
+        protected override void Clean()
         {
             base.OnDisposed();
 
@@ -104,7 +110,7 @@ namespace LiveScore.Score.ViewModels
 
         private async Task OnRefreshCommand()
         {
-            Profiler.Start(GetType().Name + ".LoadMatches.PullDownToRefresh");
+            Profiler.Start("ScoresViewModel.LoadMatches.PullDownToRefresh");
 
             await LoadData(() => LoadMatches(selectedDateRange, true), false);
         }
@@ -129,16 +135,13 @@ namespace LiveScore.Score.ViewModels
         private async Task OnClickSearchCommandExecuted()
             => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
 
-#pragma warning disable S3168 // "async" methods should not return "void"
-
         private async void OnDateBarItemSelected(DateRange dateRange)
         {
-            Profiler.Start(GetType().Name + ".LoadMatches.SelectDate");
+            Profiler.Start("ScoresViewModel.LoadMatches.SelectDate");
             await LoadData(() => LoadMatches(dateRange));
         }
 
-#pragma warning restore S3168 // "async" methods should not return "void"
-
+        [Time]
         private async Task LoadMatches(
             DateRange dateRange,
             bool forceFetchNewData = false)
@@ -159,11 +162,9 @@ namespace LiveScore.Score.ViewModels
             IsRefreshing = false;
 
             Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
-            Profiler.Stop(GetType().Name + ".LoadMatches.Home");
-            Profiler.Stop(GetType().Name + ".LoadMatches.PullDownToRefresh");
-            Profiler.Stop(GetType().Name + ".LoadMatches.SelectDate");
         }
 
+        
         private IList<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
