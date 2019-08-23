@@ -141,6 +141,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         protected override void Clean()
         {
+            Console.WriteLine("OddsViewModel Clean");
+
             cancellationTokenSource?.Dispose();
 
             base.Clean();
@@ -193,6 +195,23 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
 
         [Time]
+        internal async Task<MatchOddsComparisonMessage> DeserializeComparisonMessage(string message)
+        {
+            MatchOddsComparisonMessage oddsComparisonMessage = null;
+
+            try
+            {
+                oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(message);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsComparisonMessage", ex);
+            }
+
+            return oddsComparisonMessage;
+        }
+
+        [Time]
         internal async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
         {
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
@@ -222,25 +241,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 {
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
+            }
 
+            //TODO only update cache when receiving new odds change message, run in background
+            var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+
+            foreach (var betTypeId in betTypes)
+            {
                 await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, oddsFormat, forceFetchNewData: true);
-            }
-        }
-
-        internal async Task<MatchOddsComparisonMessage> DeserializeComparisonMessage(string message)
-        {
-            MatchOddsComparisonMessage oddsComparisonMessage = null;
-
-            try
-            {
-                oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(message);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsComparisonMessage", ex);
-            }
-
-            return oddsComparisonMessage;
+            }            
         }
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
