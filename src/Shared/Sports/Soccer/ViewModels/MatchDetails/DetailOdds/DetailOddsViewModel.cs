@@ -10,6 +10,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
+    using LiveScore.Soccer.Events;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using MethodTimer;
@@ -118,7 +119,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                             return;
                         }
 
-                        await HandleOddsComparisonMessage(oddsComparisonMessage.OddsComparison);
+                        await HandleOddsComparisonMessage(oddsComparisonMessage);
                     },
                     ThreadOption.UIThread,
                     true);
@@ -169,7 +170,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             => isRefresh || SelectedBetType != betType || BetTypeOddsItems == null || !BetTypeOddsItems.Any();
 
         [Time]
-        internal async Task HandleOddsComparisonMessage(MatchOddsComparisonMessage oddsComparisonMessage)
+        internal async Task HandleOddsComparisonMessage(IOddsComparisonMessage oddsComparisonMessage)
         {
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
                 oddsComparisonMessage.BetTypeOddsList != null &&
@@ -203,13 +204,13 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        internal async Task<MatchOddsComparisonMessage> DeserializeComparisonMessage(string message)
+        internal async Task<OddsComparisonMessage> DeserializeComparisonMessage(string message)
         {
-            MatchOddsComparisonMessage oddsComparisonMessage = null;
+            OddsComparisonMessage oddsComparisonMessage = null;
 
             try
             {
-                oddsComparisonMessage = JsonConvert.DeserializeObject<MatchOddsComparisonMessage>(message);
+                oddsComparisonMessage = JsonConvert.DeserializeObject<OddsComparisonMessage>(message);
             }
             catch (Exception ex)
             {

@@ -12,6 +12,8 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Common.Helpers;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
@@ -90,11 +92,16 @@ namespace LiveScore.Score.ViewModels
             cancellationTokenSource = new CancellationTokenSource();
 
             EventAggregator
-              .GetEvent<DateBarItemSelectedEvent>()
-              .Subscribe(OnDateBarItemSelected);
+                .GetEvent<DateBarItemSelectedEvent>()
+                .Subscribe(OnDateBarItemSelected, true);
 
-            matchService.SubscribeMatchEvent(OnMatchesChanged);
-            matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
+            EventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Subscribe(OnTeamStatisticChanged, true);
         }
 
         protected override void OnDisposed()
@@ -102,8 +109,12 @@ namespace LiveScore.Score.ViewModels
             base.OnDisposed();
 
             EventAggregator
-                 .GetEvent<DateBarItemSelectedEvent>()
-                 .Unsubscribe(OnDateBarItemSelected);
+                .GetEvent<DateBarItemSelectedEvent>()
+                .Unsubscribe(OnDateBarItemSelected);
+
+            EventAggregator
+               .GetEvent<MatchEventPubSubEvent>()
+               .Unsubscribe(OnReceivedMatchEvent);
 
             cancellationTokenSource?.Cancel();
         }
@@ -173,35 +184,31 @@ namespace LiveScore.Score.ViewModels
                 .ToList();
         }
 
-        internal void OnMatchesChanged(byte sportId, IMatchEvent matchEvent)
+        internal void OnReceivedMatchEvent(IMatchEventMessage payload)
         {
-            if (sportId != CurrentSportId)
+            if (payload?.SportId == CurrentSportId)
             {
-                return;
-            }
+                var matchItem = MatchItemsSource
+                  .SelectMany(group => group)
+                  .FirstOrDefault(m => m.Match.Id == payload.MatchEvent.MatchId);
 
-            var matchItem = MatchItemsSource
-               .SelectMany(group => group)
-               .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId);
-
-            if (matchItem?.Match != null)
-            {
-                matchItem.OnReceivedMatchEvent(matchEvent);
+                if (matchItem?.Match != null)
+                {
+                    matchItem.OnReceivedMatchEvent(payload.MatchEvent);
+                }
             }
         }
 
-        internal void OnTeamStatisticChanged(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
+        internal void OnTeamStatisticChanged(ITeamStatisticsMessage payload)
         {
-            if (sportId != CurrentSportId)
+            if (payload.SportId == CurrentSportId)
             {
-                return;
+                var matchItem = MatchItemsSource
+                     .SelectMany(group => group)
+                     .FirstOrDefault(m => m.Match.Id == payload.MatchId);
+
+                matchItem.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
             }
-
-            var matchItem = MatchItemsSource
-              .SelectMany(group => group)
-              .FirstOrDefault(m => m.Match.Id == matchId);
-
-            matchItem.OnReceivedTeamStatistic(isHome, teamStats);
         }
     }
 }

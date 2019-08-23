@@ -3,10 +3,7 @@
     using LiveScore.Core.Converters;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
-    using Newtonsoft.Json;
     using PropertyChanged;
-    using System.Linq;
-    using Xamarin.Forms;
 
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel
@@ -34,20 +31,6 @@
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
             Match.UpdateTeamStatistic(teamStatistic, isHome);
-            ////MessagingCenter.Subscribe<string>(
-            ////    nameof(MatchViewModel),
-            ////    "PushMatchTime",
-            ////    (data) =>
-            //////        {
-            ////        if (!string.IsNullOrWhiteSpace(data))
-            //////        }
-            ////            var matchTimeEvent = JsonConvert.DeserializeObject<MatchTimeEvent>(data);
-            ////            if (currentSportId == matchTimeEvent.SportId && Match.Id == matchTimeEvent.MatchId)
-            ////            {
-            ////                Match.MatchResult.MatchTime = matchTimeEvent.MatchTime;
-            ////            }
-            ////        }
-            ////    });
         }
     }
 }

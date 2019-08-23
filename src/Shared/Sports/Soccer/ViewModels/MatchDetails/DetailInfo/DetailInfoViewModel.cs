@@ -86,22 +86,22 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         }
 
         [Time]
-        protected internal void OnReceivedMatchEvent(MatchTimelineEvent matchTimelineEvent)
+        protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
-            if (matchTimelineEvent.SportId != SettingsService.CurrentSportType.Value
-                || matchTimelineEvent.MatchEvent.MatchId != matchId)
+            if (matchEventMessage.SportId != SettingsService.CurrentSportType.Value
+                || matchEventMessage.MatchEvent.MatchId != matchId)
             {
                 return;
             }
 
-            MatchInfo.Match.UpdateResult(matchTimelineEvent.MatchEvent.MatchResult);
+            MatchInfo.Match.UpdateResult(matchEventMessage.MatchEvent.MatchResult);
 
             if (MatchInfo.TimelineEvents == null)
             {
                 MatchInfo.UpdateTimelineEvents(new List<TimelineEvent>());
             }
 
-            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new[] { matchTimelineEvent.MatchEvent.Timeline }));
+            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new[] { matchEventMessage.MatchEvent.Timeline }));
 
             BuildDetailInfo(MatchInfo);
         }

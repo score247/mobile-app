@@ -29,15 +29,12 @@
     {
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
-        private readonly IEventAggregator eventAggregator;
 
         public MatchService(
             IApiService apiService,
             ICachingService cacheService,
-            IEventAggregator eventAggregator,
             ILoggingService loggingService) : base(loggingService)
         {
-            this.eventAggregator = eventAggregator;
             this.apiService = apiService;
             this.cacheService = cacheService;
         }
@@ -125,36 +122,6 @@
 
                 return null;
             }
-        }
-
-        public void SubscribeMatchEvent(Action<byte, IMatchEvent> handler)
-        {
-            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe((timelineEvent) =>
-            {
-                if (timelineEvent?.SportId == SportType.Soccer.Value)
-                {
-                    handler.Invoke(SportType.Soccer.Value, timelineEvent.MatchEvent);
-                }
-            },
-            ThreadOption.UIThread,
-            true);
-        }
-
-        public void SubscribeTeamStatistic(Action<byte, string, bool, ITeamStatistic> handler)
-        {
-            eventAggregator.GetEvent<TeamStatisticPubSubEvent>().Subscribe((teamStatisticEvent) =>
-            {
-                if (teamStatisticEvent?.SportId == SportType.Soccer.Value)
-                {
-                    handler.Invoke(
-                        teamStatisticEvent.SportId, 
-                        teamStatisticEvent.TeamStatistic.MatchId, 
-                        teamStatisticEvent.TeamStatistic.IsHome, 
-                        teamStatisticEvent.TeamStatistic.TeamStatistic);
-                }
-            },
-            ThreadOption.UIThread,
-            true);
         }
 
         [Time]

@@ -83,8 +83,8 @@ namespace LiveScore.Soccer.ViewModels
         protected override void OnInitialized()
         {
             TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
-            matchService.SubscribeMatchEvent(OnReceivedMatchEvent);
-            matchService.SubscribeTeamStatistic(OnReceivedTeamStatistic);
+
+            // TODO: Add subscribe signalR here
 
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {

@@ -4,12 +4,15 @@
 
     public class MatchEvent : IMatchEvent
     {
-        public MatchEvent(string matchId, MatchResult matchResult, TimelineEvent timeline)
+        public MatchEvent(byte sportId, string matchId, MatchResult matchResult, TimelineEvent timeline)
         {
+            SportId = sportId;
             MatchId = matchId;
             MatchResult = matchResult;
             Timeline = timeline;
         }
+
+        public byte SportId { get; }
 
         public string MatchId { get; }
 
