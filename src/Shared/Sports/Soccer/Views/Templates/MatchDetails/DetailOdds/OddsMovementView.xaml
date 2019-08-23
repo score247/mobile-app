@@ -39,7 +39,8 @@
 
             <ListView
                 AutomationId="MatchOddsMovement"
-                AutomationProperties.IsInAccessibleTree="False"
+                AutomationProperties.IsInAccessibleTree="False"                
+                CachingStrategy="RecycleElement"
                 BackgroundColor="{StaticResource PrimaryColor}"
                 GroupHeaderTemplate="{Binding HeaderTemplate}"
                 HasUnevenRows="true"

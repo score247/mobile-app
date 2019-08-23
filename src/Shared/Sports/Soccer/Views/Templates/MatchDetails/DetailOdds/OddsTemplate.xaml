@@ -22,11 +22,11 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <FlexLayout Grid.Row="0" Grid.Column="0" Style="{StaticResource SubTabBox}">
-                <Button BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}}" Command="{Binding OnOddsTabClicked}" CommandParameter="3" Style="{StaticResource SubTab}" Text="{langs:Translate AsianHDP}" TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+                <Button BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="3" Style="{StaticResource SubTab}" Text="{langs:Translate AsianHDP}" TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource SubTabLine}" />
-                <Button BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}}" Command="{Binding OnOddsTabClicked}" CommandParameter="2" Style="{StaticResource SubTab}" Text="{langs:Translate OverUnder}" TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+                <Button BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="2" Style="{StaticResource SubTab}" Text="{langs:Translate OverUnder}" TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}" />
                 <BoxView Style="{StaticResource SubTabLine}" />
-                <Button BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}}" Command="{Binding OnOddsTabClicked}" CommandParameter="1" Style="{StaticResource SubTab}" Text="{langs:Translate OneXTwo}" TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+                <Button BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="1" Style="{StaticResource SubTab}" Text="{langs:Translate OneXTwo}" TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
             </FlexLayout>
             <StackLayout
                 Grid.Row="0"
