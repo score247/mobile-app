@@ -1,34 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
-using LiveScore.Common.Extensions;
-using LiveScore.Common.Helpers;
-using LiveScore.Core;
-using LiveScore.Core.Controls.DateBar.Events;
-using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Models.Teams;
-using LiveScore.Core.Services;
-using LiveScore.Core.ViewModels;
-using Microsoft.AspNetCore.SignalR.Client;
-using Prism.Events;
-using Prism.Navigation;
-using Xamarin.Forms;
-
-[assembly: InternalsVisibleTo("LiveScore.Tests")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
-    public class ScoresViewModel : ViewModelBase
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using LiveScore.Common.Extensions;
+    using LiveScore.Common.Helpers;
+    using LiveScore.Core;
+    using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Converters;
+    using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Models.Teams;
+    using LiveScore.Core.Services;
+    using LiveScore.Core.ViewModels;
+    using Prism.Commands;
+    using Prism.Events;
+    using Prism.Navigation;
+    using Xamarin.Forms;
 
+    public class ScoresViewModel : ViewModelBase
     {
-        private const int HubKeepAliveInterval = 30;
         private readonly IMatchService matchService;
-        private readonly HubConnection matchHubConnection;
-        private readonly HubConnection teamHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
 
@@ -43,10 +40,6 @@ namespace LiveScore.Score.ViewModels
             SelectedDate = DateTime.Today;
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-
-            var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
-            matchHubConnection = hubService.BuildMatchEventHubConnection();
-            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             RefreshCommand = new DelegateAsyncCommand(OnRefreshCommand);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTappedMatchCommand);
@@ -97,14 +90,8 @@ namespace LiveScore.Score.ViewModels
               .GetEvent<DateBarItemSelectedEvent>()
               .Subscribe(OnDateBarItemSelected);
 
-            matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
-            matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+            matchService.SubscribeMatchEvent(OnMatchesChanged);
+            matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
         }
 
         protected override void Clean()

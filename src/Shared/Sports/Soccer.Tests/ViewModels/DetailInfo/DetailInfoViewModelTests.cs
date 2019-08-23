@@ -47,7 +47,8 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 match.Id,
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
-                baseFixture.HubService.BuildMatchEventHubConnection(),
+                new FakeHubConnection(),
+                //baseFixture.HubService.BuildMatchEventHubConnection(),
                 null);
 
             var parameters = new NavigationParameters { { "Match", match } };

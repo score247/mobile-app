@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-[assembly: InternalsVisibleTo("Soccer.Tests")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
 namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
@@ -8,29 +6,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;
     using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
+    using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class DetailInfoViewModel : TabItemViewModelBase, IDisposable
     {
         private const string SpectatorNumberFormat = "0,0";
-        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-        private readonly HubConnection matchHubConnection;
         private readonly IMatchService matchService;
-        private CancellationTokenSource cancellationTokenSource;
+        private readonly IEventAggregator eventAggregator;
         private bool isDisposed = true;
         private readonly string matchId;
 
@@ -38,12 +33,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             string matchId,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            HubConnection matchHubConnection,
+            IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
             : base(navigationService, dependencyResolver, dataTemplate)
         {
             this.matchId = matchId;
-            this.matchHubConnection = matchHubConnection;
+            this.eventAggregator = eventAggregator;
             matchService = DependencyResolver.Resolve<IMatchService>(SettingsService.CurrentSportType.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
             TabHeaderIcon = TabDetailImages.Info;
@@ -64,23 +59,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        protected override void Clean()
-        {
-            base.Clean();
-
-            cancellationTokenSource?.Dispose();
-        }
-
         protected override async void Initialize()
         {
             try
             {
-                cancellationTokenSource = new CancellationTokenSource();
-
                 // TODO: Check when need to reload data later
                 await LoadData(() => LoadMatchDetail(matchId, true));
 
-                await StartListeningMatchHubEvent();
+                // TODO: need review UIThread here
+                eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
             }
             catch (Exception ex)
             {
@@ -98,31 +85,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IsRefreshing = false;
         }
 
-        private async Task StartListeningMatchHubEvent()
-        {
-            matchHubConnection.On<byte, string>("MatchEvent", OnReceivedMatchEvent);
-
-            await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
-        }
-
         [Time]
-        protected internal void OnReceivedMatchEvent(byte sportId, string payload)
+        protected internal void OnReceivedMatchEvent(MatchTimelineEvent matchTimelineEvent)
         {
-            var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
-
-            if (sportId != SettingsService.CurrentSportType.Value || matchId == null || matchEvent.MatchId != matchId)
+            if (matchTimelineEvent.SportId != SettingsService.CurrentSportType.Value
+                || matchTimelineEvent.MatchEvent.MatchId != matchId)
             {
                 return;
             }
 
-            MatchInfo.Match.UpdateResult(matchEvent.MatchResult);
+            MatchInfo.Match.UpdateResult(matchTimelineEvent.MatchEvent.MatchResult);
 
             if (MatchInfo.TimelineEvents == null)
             {
                 MatchInfo.UpdateTimelineEvents(new List<TimelineEvent>());
             }
 
-            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new[] { matchEvent.Timeline }));
+            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new[] { matchTimelineEvent.MatchEvent.Timeline }));
 
             BuildDetailInfo(MatchInfo);
         }

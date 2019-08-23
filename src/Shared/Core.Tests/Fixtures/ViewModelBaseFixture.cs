@@ -26,7 +26,7 @@
             NavigationService = new FakeNavigationService();
             HubService = Substitute.For<IHubService>();
             HubConnection = Substitute.For<FakeHubConnection>();
-            HubService.BuildMatchEventHubConnection().Returns(HubConnection);
+            //HubService.BuildMatchEventHubConnection().Returns(HubConnection);
         }
 
         public IDependencyResolver DependencyResolver { get; }

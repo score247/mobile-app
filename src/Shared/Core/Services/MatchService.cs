@@ -15,8 +15,8 @@
 
         Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
 
-        void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler);
+        void SubscribeMatchEvent(Action<byte, IMatchEvent> handler);
 
-        void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler);
+        void SubscribeTeamStatistic(Action<byte, string, bool, ITeamStatistic> handler);
     }
 }

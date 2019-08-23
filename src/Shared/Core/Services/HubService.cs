@@ -1,13 +1,13 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using Microsoft.AspNetCore.SignalR.Client;
+    using System.Threading.Tasks;
 
     public interface IHubService
     {
-        HubConnection BuildMatchEventHubConnection();
+        byte SportId { get; }
 
-        HubConnection BuildTeamStatisticHubConnection();
+        Task Start();
 
-        HubConnection BuildOddsEventHubConnection();
+        Task Reconnect();
     }
 }

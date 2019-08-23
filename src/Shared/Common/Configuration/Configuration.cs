@@ -6,6 +6,7 @@
         public static string LocalEndPoint => "https://score247-api1.nexdev.net/dev1/api/";
 
         public static string LocalHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
+        //public static string LocalHubEndPoint => "http://10.19.10.52:55454/hubs/";
 #elif TEST
         public static string LocalEndPoint => "https://score247-api1.nexdev.net/test/api/";
 

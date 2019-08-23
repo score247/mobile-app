@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.ViewModels;
+    using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -13,8 +14,12 @@
         {
         }
 
-        public TabItemViewModelBase(INavigationService navigationService, IDependencyResolver depdendencyResolver, DataTemplate dataTemplate)
-            : base(navigationService, depdendencyResolver)
+        public TabItemViewModelBase(
+            INavigationService navigationService, 
+            IDependencyResolver depdendencyResolver, 
+            DataTemplate dataTemplate,
+            IEventAggregator eventAggregator = null)
+            : base(navigationService, depdendencyResolver, eventAggregator)
         {
             Template = dataTemplate;
         }

@@ -24,12 +24,12 @@ namespace LiveScore.Basketball.Services
             throw new NotImplementedException();
         }
 
-        public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
+        public void SubscribeMatchEvent(Action<byte, IMatchEvent> handler)
         {
             throw new NotImplementedException();
         }
 
-        public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
+        public void SubscribeTeamStatistic(Action<byte, string, bool, ITeamStatistic> handler)
         {
             throw new NotImplementedException();
         }

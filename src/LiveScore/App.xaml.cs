@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using Akavache;
@@ -18,6 +19,7 @@ using LiveScore.Features.News;
 using LiveScore.Features.TVSchedule;
 using LiveScore.Score;
 using LiveScore.Soccer;
+using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MethodTimer;
@@ -26,6 +28,7 @@ using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -43,6 +46,7 @@ namespace LiveScore
          * This imposes a limitation in which the App class must have a default constructor.
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
+        private readonly List<IHubService> hubServices = new List<IHubService>();
 
         public App() : this(null)
         {
@@ -76,6 +80,8 @@ namespace LiveScore
             var settingsService = Container.Resolve<ISettingsService>();
             settingsService.ApiEndpoint = Configuration.LocalEndPoint;
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
+
+            RegisterAndStartEventHubs(Container);
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
@@ -137,6 +143,23 @@ namespace LiveScore
             moduleCatalog.AddModule<MenuModule>();
         }
 
+        private async void RegisterAndStartEventHubs(IContainerProvider container)
+        {
+            var soccerHubService = new HubService(
+                container.Resolve<IHubConnectionBuilder>(),
+                container.Resolve<ILoggingService>(),
+                container.Resolve<ISettingsService>(),
+                container.Resolve<IEventAggregator>());
+
+            hubServices.Add(soccerHubService);
+
+            // TODO: Ricky: temporary comment here
+            ////foreach (var hubService in hubServices)
+            ////{
+            ////    await hubService.Start();
+            ////}
+        }
+
         protected override void OnSleep()
         {
             Debug.WriteLine("OnSleep");
@@ -147,9 +170,15 @@ namespace LiveScore
             base.OnSleep();
         }
 
-        protected override void OnResume()
+        protected override async void OnResume()
         {
             Debug.WriteLine("OnResume");
+
+            // TODO: Ricky: temporary comment here
+            ////foreach (var hubService in hubServices)
+            ////{
+            ////    await hubService.Reconnect();
+            ////}
 
             base.OnResume();
         }

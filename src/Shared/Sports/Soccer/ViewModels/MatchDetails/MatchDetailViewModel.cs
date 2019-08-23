@@ -38,15 +38,12 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Soccer.Views.Templates.DetailTracker;
     using LiveScore.Soccer.Views.Templates.DetailTV;
     using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class MatchDetailViewModel : ViewModelBase, IDisposable
     {
-        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-
         private static readonly IList<MatchFunction> TabFunctions = new List<MatchFunction>
         {
             new MatchFunction("Odds", "Odds"),
@@ -60,8 +57,6 @@ namespace LiveScore.Soccer.ViewModels
             new MatchFunction("TV", "TV Schedule")
         };
 
-        private readonly HubConnection matchHubConnection;
-        private readonly HubConnection teamHubConnection;
         private readonly IMatchService matchService;
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
@@ -75,8 +70,6 @@ namespace LiveScore.Soccer.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
-            matchHubConnection = hubService.BuildMatchEventHubConnection();
-            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
         }
 
@@ -94,8 +87,8 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabItemViewModels = new Dictionary<TabFunction, TabItemViewModelBase>
                 {
-                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
-                    {TabFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
+                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
+                    {TabFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()) },
                     {TabFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
                     {TabFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
                     {TabFunction.Social, new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
@@ -129,14 +122,8 @@ namespace LiveScore.Soccer.ViewModels
 
             cancellationTokenSource = new CancellationTokenSource();
 
-            matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
-            matchService.SubscribeTeamStatistic(teamHubConnection, OnReceivedTeamStatistic);
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await teamHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
-
-            Device.BeginInvokeOnMainThread(async () =>
-                await matchHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
+            matchService.SubscribeMatchEvent(OnReceivedMatchEvent);
+            matchService.SubscribeTeamStatistic(OnReceivedTeamStatistic);
         }
 
         public override void OnResume()

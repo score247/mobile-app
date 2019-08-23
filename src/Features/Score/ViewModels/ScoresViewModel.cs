@@ -7,6 +7,7 @@ namespace LiveScore.Score.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -30,10 +31,7 @@ namespace LiveScore.Score.ViewModels
     public class ScoresViewModel : ViewModelBase
 #pragma warning restore S2931 // Classes with "IDisposable" members should implement "IDisposable"
     {
-        private const int HubKeepAliveInterval = 30;
         private readonly IMatchService matchService;
-        private readonly HubConnection matchHubConnection;
-        private readonly HubConnection teamHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -51,8 +49,6 @@ namespace LiveScore.Score.ViewModels
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
 
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
-            matchHubConnection = hubService.BuildMatchEventHubConnection();
-            teamHubConnection = hubService.BuildTeamStatisticHubConnection();
 
             RefreshCommand = new DelegateCommand(OnRefreshCommand);
             TappedMatchCommand = new DelegateCommand<MatchViewModel>(OnTappedMatchCommand);
@@ -109,14 +105,14 @@ namespace LiveScore.Score.ViewModels
               .GetEvent<DateBarItemSelectedEvent>()
               .Subscribe(OnDateBarItemSelected);
 
-            matchService.SubscribeMatchEvent(matchHubConnection, OnMatchesChanged);
-            matchService.SubscribeTeamStatistic(teamHubConnection, OnTeamStatisticChanged);
+            matchService.SubscribeMatchEvent(OnMatchesChanged);
+            matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
 
-            Device.BeginInvokeOnMainThread(async () =>
-                await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+            ////Device.BeginInvokeOnMainThread(async () =>
+            ////    await teamHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
 
-            Device.BeginInvokeOnMainThread(async () =>
-                await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
+            ////Device.BeginInvokeOnMainThread(async () =>
+            ////    await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
         }
 
         [Time]
@@ -177,7 +173,7 @@ namespace LiveScore.Score.ViewModels
             {
                 MatchItemsSource?.Clear();
             }
-
+            
             var matches = await matchService.GetMatches(
                     dateRange ?? DateRange.FromYesterdayUntilNow(),
                     SettingsService.Language,
@@ -193,7 +189,7 @@ namespace LiveScore.Score.ViewModels
         private ObservableCollection<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId));
+                    match => new MatchViewModel(match, matchStatusConverter, CurrentSportId));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));

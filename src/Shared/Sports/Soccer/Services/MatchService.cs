@@ -7,6 +7,7 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
@@ -15,7 +16,9 @@
     using MethodTimer;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
+    using Prism.Events;
     using Refit;
+    using Xamarin.Forms;
 
     public interface ISoccerMatchApi
     {
@@ -28,16 +31,18 @@
 
     public class MatchService : BaseService, IMatchService
     {
-        private const string PushMatchEvent = "MatchEvent";
         private const string PushTeamStatistic = "TeamStatistic";
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
+        private readonly IEventAggregator eventAggregator;
 
         public MatchService(
             IApiService apiService,
             ICachingService cacheService,
+            IEventAggregator eventAggregator,
             ILoggingService loggingService) : base(loggingService)
         {
+            this.eventAggregator = eventAggregator;
             this.apiService = apiService;
             this.cacheService = cacheService;
         }
@@ -126,25 +131,35 @@
         }
 
         [Time]
-        public void SubscribeMatchEvent(HubConnection hubConnection, Action<byte, IMatchEvent> handler)
+        public void SubscribeMatchEvent(Action<byte, IMatchEvent> handler)
         {
-            hubConnection.On<byte, string>(PushMatchEvent, (sportId, payload) =>
+            // TODO: need review UIThread here
+            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe((timelineEvent) =>
             {
-                var matchEvent = JsonConvert.DeserializeObject<MatchEvent>(payload);
-
-                handler.Invoke(sportId, matchEvent);
-            });
+                if (timelineEvent != null
+                    && timelineEvent.SportId == SportType.Soccer.Value)
+                {
+                    handler.Invoke(SportType.Soccer.Value, timelineEvent.MatchEvent);
+                }
+            },
+            ThreadOption.UIThread,
+            true);
         }
 
         [Time]
-        public void SubscribeTeamStatistic(HubConnection hubConnection, Action<byte, string, bool, ITeamStatistic> handler)
+        public void SubscribeTeamStatistic(Action<byte, string, bool, ITeamStatistic> handler)
         {
-            hubConnection.On<byte, string, bool, string>(PushTeamStatistic, (sportId, matchId, isHome, payload) =>
+            // TODO: need review UIThread here
+            eventAggregator.GetEvent<TeamStatisticPubSubEvent>().Subscribe((teamStatisticEvent) =>
             {
-                var teamStats = JsonConvert.DeserializeObject<TeamStatistic>(payload);
-
-                handler.Invoke(sportId, matchId, isHome, teamStats);
-            });
+                if (teamStatisticEvent != null
+                   && teamStatisticEvent.SportId == SportType.Soccer.Value)
+                {
+                    handler.Invoke(teamStatisticEvent.SportId, teamStatisticEvent.MatchId, teamStatisticEvent.IsHome, teamStatisticEvent.TeamStatistic);
+                }
+            },
+            ThreadOption.UIThread,
+            true);
         }
 
         [Time]

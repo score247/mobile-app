@@ -40,8 +40,6 @@
     <ItemGroup>
         <Folder Include="ViewResources\" />
         <Folder Include="Models\Settings\" />
-        <Folder Include="Events\">
-        </Folder>
         <Folder Include="Jobs\">
         </Folder>
         <Folder Include="Controls\SearchPage\">
