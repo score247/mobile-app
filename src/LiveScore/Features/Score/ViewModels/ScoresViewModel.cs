@@ -56,9 +56,11 @@ namespace LiveScore.Score.ViewModels
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
 
+        [Time]
         public override async void OnResume()
         {
             Profiler.Start("ScoresViewModel.OnResume");
+
             if (SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
@@ -70,9 +72,8 @@ namespace LiveScore.Score.ViewModels
         }
 
         [Time]
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
-            Profiler.Start("ScoresViewModel.OnNavigatedTo");
             if (MatchItemsSource == null)
             {
                 await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
@@ -84,7 +85,7 @@ namespace LiveScore.Score.ViewModels
         }
 
         [Time]
-        protected override void Initialize()
+        protected override void OnInitialized()
         {
             cancellationTokenSource = new CancellationTokenSource();
 
@@ -96,8 +97,7 @@ namespace LiveScore.Score.ViewModels
             matchService.SubscribeTeamStatistic(OnTeamStatisticChanged);
         }
 
-        [Time]
-        protected override void Clean()
+        protected override void OnDisposed()
         {
             base.OnDisposed();
 
@@ -164,7 +164,6 @@ namespace LiveScore.Score.ViewModels
             Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
         }
 
-        
         private IList<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
