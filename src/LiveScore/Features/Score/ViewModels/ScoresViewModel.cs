@@ -1,27 +1,26 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.Helpers;
+using LiveScore.Core;
+using LiveScore.Core.Controls.DateBar.Events;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Core.PubSubEvents.Teams;
+using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using MethodTimer;
+using Prism.Events;
+using Prism.Navigation;
+using Xamarin.Forms;
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.Helpers;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.PubSubEvents.Matches;
-    using LiveScore.Core.PubSubEvents.Teams;
-    using LiveScore.Core.Services;
-    using LiveScore.Core.ViewModels;
-    using MethodTimer;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Xamarin.Forms;
-
     public class ScoresViewModel : ViewModelBase
     {
         private readonly IMatchService matchService;
@@ -64,10 +63,10 @@ namespace LiveScore.Score.ViewModels
 
             if (SelectedDate != DateTime.Today)
             {
-                await NavigateToHome();
+                await NavigateToHome().ConfigureAwait(false);
             }
 
-            await LoadData(() => LoadMatches(selectedDateRange, true), false);
+            await LoadData(() => LoadMatches(selectedDateRange, true), false).ConfigureAwait(false);
 
             OnInitialized();
         }
@@ -125,7 +124,7 @@ namespace LiveScore.Score.ViewModels
         {
             Profiler.Start("ScoresViewModel.LoadMatches.PullDownToRefresh");
 
-            await LoadData(() => LoadMatches(selectedDateRange, true), false);
+            await LoadData(() => LoadMatches(selectedDateRange, true), false).ConfigureAwait(false);
         }
 
         private async Task OnTapMatch(MatchViewModel matchItem)
@@ -137,21 +136,22 @@ namespace LiveScore.Score.ViewModels
                 { "Match", matchItem.Match }
             };
 
-            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters);
+            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters)
+                .ConfigureAwait(false);
 
             if (!navigated.Success)
             {
-                await LoggingService.LogErrorAsync(navigated.Exception);
+                await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
 
         private async Task OnClickSearch()
-            => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true);
+            => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true).ConfigureAwait(false);
 
         private async void OnDateBarItemSelected(DateRange dateRange)
         {
             Profiler.Start("ScoresViewModel.LoadMatches.SelectDate");
-            await LoadData(() => LoadMatches(dateRange));
+            await LoadData(() => LoadMatches(dateRange)).ConfigureAwait(false);
         }
 
         [Time]
@@ -167,7 +167,7 @@ namespace LiveScore.Score.ViewModels
             var matches = await matchService.GetMatches(
                     dateRange,
                     SettingsService.Language,
-                    forceFetchNewData);
+                    forceFetchNewData).ConfigureAwait(false);
 
             Device.BeginInvokeOnMainThread(() => MatchItemsSource = BuildMatchItemSource(matches));
 

@@ -41,7 +41,7 @@
         {
             try
             {
-                var dataFromDate = await GetMatchesByDate(dateRange.From, language, forceFetchNewData);
+                var dataFromDate = await GetMatchesByDate(dateRange.From, language, forceFetchNewData).ConfigureAwait(false);
 
                 if (dateRange.IsOneDay)
                 {
@@ -73,15 +73,13 @@
                     || dateTime.Date == DateTimeExtension.Yesterday().Date
                     || forceFetchNewData)
                 {
-                    var matches = await cacheService.GetAndFetchLatestValue(
+                    return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
                             language.DisplayName),
-                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
-
-                    return matches;
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short)).ConfigureAwait(false);
                 }
 
                 return await cacheService.GetOrFetchValue(
@@ -89,7 +87,8 @@
                        () => GetMatchesFromApi(
                            dateTime.BeginningOfDay().ToApiFormat(),
                            dateTime.EndOfDay().ToApiFormat(),
-                           language.DisplayName), DateTime.Now.AddSeconds((int)CacheDuration.Long));
+                           language.DisplayName), DateTime.Now.AddSeconds((int)CacheDuration.Long))
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -106,12 +105,11 @@
             {
                 var cacheKey = $"Match:{matchId}:{language}";
 
-                var match = await cacheService.GetAndFetchLatestValue(
+                return await cacheService.GetAndFetchLatestValue(
                         cacheKey,
                         () => GetMatchFromApi(matchId, language.DisplayName),
-                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short));
-
-                return match;
+                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short))
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -123,10 +121,11 @@
 
         [Time]
         private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
-            => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language));
+            => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language))
+            .ConfigureAwait(false);
 
         [Time]
         private async Task<MatchInfo> GetMatchFromApi(string matchId, string language)
-           => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
+           => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)).ConfigureAwait(false);
     }
 }

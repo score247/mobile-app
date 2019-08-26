@@ -5,4 +5,8 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Blocker Bug", "S2931:Classes with \"IDisposable\" members should implement \"IDisposable\"", Justification = "<Pending>", Scope = "type", Target = "~T:LiveScore.Score.ViewModels.ScoresViewModel")]
+[assembly: SuppressMessage("Blocker Bug",
+    "S2931:Classes with \"IDisposable\" members should implement \"IDisposable\"",
+    Justification = "<Pending>",
+    Scope = "type",
+    Target = "~T:LiveScore.Score.ViewModels.ScoresViewModel")]
