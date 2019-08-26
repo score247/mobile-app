@@ -1,11 +1,6 @@
-﻿namespace LiveScore.Core.Events
+﻿namespace LiveScore.Core.PubSubEvents.Teams
 {
     using LiveScore.Core.Models.Teams;
-    using Prism.Events;
-
-    public class TeamStatisticPubSubEvent : PubSubEvent<ITeamStatisticsMessage>
-    {
-    }
 
     public interface ITeamStatisticsMessage
     {

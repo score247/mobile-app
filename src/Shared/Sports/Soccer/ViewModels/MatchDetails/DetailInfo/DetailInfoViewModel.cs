@@ -11,8 +11,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.PubSubEvents.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;

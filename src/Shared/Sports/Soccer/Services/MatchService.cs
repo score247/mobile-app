@@ -7,13 +7,10 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Matches;
     using MethodTimer;
-    using Prism.Events;
     using Refit;
 
     public interface ISoccerMatchApi

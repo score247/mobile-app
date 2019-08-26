@@ -2,27 +2,25 @@
 
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Odds;
+    using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Events;
-    using LiveScore.Soccer.Models.Odds;
+    using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using MethodTimer;
     using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     internal class DetailOddsViewModel : TabItemViewModel, IDisposable

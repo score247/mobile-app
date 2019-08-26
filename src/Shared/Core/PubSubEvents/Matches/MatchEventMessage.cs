@@ -1,11 +1,6 @@
-﻿namespace LiveScore.Core.Events
+﻿namespace LiveScore.Core.PubSubEvents.Matches
 {
     using LiveScore.Core.Models.Matches;
-    using Prism.Events;
-
-    public class MatchEventPubSubEvent : PubSubEvent<IMatchEventMessage>
-    {
-    }
 
     public interface IMatchEventMessage
     {

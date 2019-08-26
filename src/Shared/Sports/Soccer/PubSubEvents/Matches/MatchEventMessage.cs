@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Soccer.Events
+﻿namespace LiveScore.Soccer.PubSubEvents.Matches
 {
     using LiveScore.Common.Extensions;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.PubSubEvents.Matches;
     using LiveScore.Soccer.Models.Matches;
     using Newtonsoft.Json;
     using Prism.Events;

@@ -12,10 +12,9 @@ namespace LiveScore.Score.ViewModels
     using LiveScore.Common.Helpers;
     using LiveScore.Core;
     using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
+    using LiveScore.Core.PubSubEvents.Matches;
+    using LiveScore.Core.PubSubEvents.Teams;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using MethodTimer;
@@ -86,7 +85,6 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        [Time]
         protected override void OnInitialized()
         {
             cancellationTokenSource = new CancellationTokenSource();
@@ -101,7 +99,7 @@ namespace LiveScore.Score.ViewModels
 
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnTeamStatisticChanged, true);
+                .Subscribe(OnReceivedTeamStatistic, true);
         }
 
         protected override void OnDisposed()
@@ -115,6 +113,10 @@ namespace LiveScore.Score.ViewModels
             EventAggregator
                .GetEvent<MatchEventPubSubEvent>()
                .Unsubscribe(OnReceivedMatchEvent);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Unsubscribe(OnReceivedTeamStatistic);
 
             cancellationTokenSource?.Cancel();
         }
@@ -199,7 +201,7 @@ namespace LiveScore.Score.ViewModels
             }
         }
 
-        internal void OnTeamStatisticChanged(ITeamStatisticsMessage payload)
+        internal void OnReceivedTeamStatistic(ITeamStatisticsMessage payload)
         {
             if (payload.SportId == CurrentSportId)
             {

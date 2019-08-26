@@ -6,7 +6,9 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
-    using LiveScore.Soccer.Events;
+    using LiveScore.Soccer.PubSubEvents.Matches;
+    using LiveScore.Soccer.PubSubEvents.Odds;
+    using LiveScore.Soccer.PubSubEvents.Teams;
     using Microsoft.AspNetCore.SignalR.Client;
     using Newtonsoft.Json;
     using Prism.Events;
