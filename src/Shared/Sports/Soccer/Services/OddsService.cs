@@ -3,8 +3,10 @@
     using System;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Models.Odds;
     using Refit;
 
@@ -19,6 +21,9 @@
 
     public class OddsService : BaseService, IOddsService
     {
+        private const string OddsComparisonKey = "OddsComparison";
+        private const string OddsMovementKey = "OddsMovement";
+
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
 
@@ -36,7 +41,7 @@
         {
             try
             {
-                var oddDataCacheKey = $"Odds-{matchId}-{betTypeId}-{formatType}";
+                var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         oddDataCacheKey,
@@ -61,7 +66,7 @@
         {
             try
             {
-                var oddMovementCacheKey = $"OddsMovement-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
 
                 return await cacheService.GetAndFetchLatestValue(
                         oddMovementCacheKey,
@@ -81,5 +86,46 @@
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
            );
+
+        public void InvalidateAllOddsComparisonCache(string matchId)
+        {
+            foreach (var betType in Enumeration.GetAll<BetType>())
+            {
+                Parallel.ForEach(
+                    Enumeration.GetAll<OddsFormat>(),
+                    async (format) =>
+                    {
+                        await InvalidateOddsComparisonCache(matchId, betType.Value, format.DisplayName);
+                    });                             
+            }
+        }
+
+        public async Task InvalidateOddsComparisonCache(string matchId, byte betTypeId, string formatType)
+        {
+            try
+            {
+                var cacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
+
+                await cacheService.Invalidate(cacheKey);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+        }
+
+        public async Task InvalidateOddsMovementCache(string matchId, byte betTypeId, string formatType, string bookmakerId)
+        {
+            try
+            {
+                var cacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+
+                await cacheService.Invalidate(cacheKey);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+            }
+        }
     }
 }

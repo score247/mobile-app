@@ -93,7 +93,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 await FirstLoadOrRefreshOddsMovement();
 
                 hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
-                {
+                {                    
                     var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
 
                     if (oddsMovementMessage == null)
@@ -116,7 +116,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         protected override void Clean()
         {            
-            cancellationTokenSource?.Dispose();
+            cancellationTokenSource?.Cancel();
 
             base.Clean();
         }
@@ -178,6 +178,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)) 
             {
+                //TODO check existing odds movement
                 var updatedOddsMovements = oddsMovementMessage.OddsEvents
                     .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
                     .Select(x => x.OddsMovement).ToList();

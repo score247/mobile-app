@@ -120,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels
         {
             base.Clean();
 
-            cancellationTokenSource?.Dispose();
+            cancellationTokenSource?.Cancel();
 
             MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
@@ -154,6 +154,13 @@ namespace LiveScore.Soccer.ViewModels
             tabItemViewModels[CurrentTabView].OnSleep();
 
             base.OnSleep();
+        }
+
+        public override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            tabItemViewModels[CurrentTabView].OnDisappearing();
         }
 
         private void BuildTabFunctions()

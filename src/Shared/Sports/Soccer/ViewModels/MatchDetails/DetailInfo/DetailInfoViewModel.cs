@@ -65,12 +65,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        protected override void Clean()
+        public override void OnDisappearing()
         {
-            base.Clean();
-
-            cancellationTokenSource?.Dispose();
-        }
+            cancellationTokenSource?.Cancel();
+        }       
 
         protected override async void Initialize()
         {

@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Common.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Reactive.Linq;
     using System.Threading.Tasks;
     using Akavache;
@@ -35,6 +36,8 @@
         void Shutdown();
 
         Task Invalidate(string key);
+
+        Task Invalidate(IEnumerable<string> keys);
 
         Task CleanAllExpired();
 
@@ -97,6 +100,8 @@
         }
 
         public async Task Invalidate(string key) => await localMachineCache.Invalidate(key);
+
+        public async Task Invalidate(IEnumerable<string> keys) => await localMachineCache.Invalidate(keys);
 
         public async Task CleanAllExpired() => await localMachineCache.Vacuum();
 

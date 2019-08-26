@@ -140,13 +140,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
-        protected override void Clean()
+        public override void OnDisappearing()
         {
-            Console.WriteLine("OddsViewModel Clean");
-
-            cancellationTokenSource?.Dispose();
-
-            base.Clean();
+            cancellationTokenSource?.Cancel();
         }
 
         public override async void OnResume()
@@ -254,20 +250,28 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task UpdateOddsCache(MatchOddsComparisonMessage oddsComparisonMessage)
         {
-            //TODO only update cache when receiving new odds change message, run in background      
+            
             if (oddsComparisonMessage.BetTypeOddsList != null &&
-                oddsComparisonMessage.BetTypeOddsList.Any() &&
-                oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
+                oddsComparisonMessage.BetTypeOddsList.Any())
             {
-                var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
-
-                foreach (var betTypeId in betTypes)
+                if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
                 {
-                    //invalidate cache then update?
-                    await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                    var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+
+                    foreach (var betTypeId in betTypes)
+                    {
+                        //TODO only update cache when receiving new odds change message, run in background
+                        //invalidate cache then update?
+                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                    }
+                }
+                else
+                {
+                    //otherwise -> invalidate cache key?
+                    oddsService.InvalidateAllOddsComparisonCache(oddsComparisonMessage.MatchId);
                 }
             }
-            //otherwise -> invalidate cache key?
+           
         }
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
