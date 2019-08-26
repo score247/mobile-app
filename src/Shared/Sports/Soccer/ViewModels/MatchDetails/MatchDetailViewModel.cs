@@ -62,10 +62,8 @@ namespace LiveScore.Soccer.ViewModels
         {
             if (parameters?["Match"] is IMatch match)
             {
-                var soccerMatch = match as Match;
-
-                BuildTabItems(soccerMatch);
-                BuildGeneralInfo(soccerMatch);
+                BuildTabItems(match);
+                BuildGeneralInfo(match);
             }
         }
 
@@ -105,7 +103,7 @@ namespace LiveScore.Soccer.ViewModels
 
         protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
         {
-            var match = MatchViewModel.Match as Match;
+            var match = MatchViewModel.Match;
 
             if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
             {
@@ -128,7 +126,7 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
-        private void BuildGeneralInfo(Match match)
+        private void BuildGeneralInfo(IMatch match)
         {
             BuildViewModel(match);
             BuildSecondLeg(match);
@@ -136,17 +134,20 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
-        private void BuildSecondLeg(Match match)
+        private void BuildSecondLeg(IMatch match)
         {
-            var winnerId = match.AggregateWinnerId;
-
-            if (!string.IsNullOrEmpty(winnerId) && match.EventStatus.IsClosed)
+            if (match is Match soccerMatch)
             {
-                DisplaySecondLeg = $"{AppResources.SecondLeg} {match.AggregateHomeScore} - {match.AggregateAwayScore}";
+                var winnerId = soccerMatch.AggregateWinnerId;
+
+                if (!string.IsNullOrWhiteSpace(winnerId) && soccerMatch.EventStatus.IsClosed)
+                {
+                    DisplaySecondLeg = $"{AppResources.SecondLeg} {soccerMatch.AggregateHomeScore} - {soccerMatch.AggregateAwayScore}";
+                }
             }
         }
 
-        private void BuildViewModel(Match match) => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
+        private void BuildViewModel(IMatch match) => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
 
         private void BuildTabItems(IMatch match)
         {
