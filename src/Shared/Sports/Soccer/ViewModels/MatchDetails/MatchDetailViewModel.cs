@@ -9,6 +9,8 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
+using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.DetailH2H;
@@ -67,26 +69,6 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        protected override void OnDisposed()
-        {
-            base.OnDisposed();
-
-            MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
-        }
-
-        protected override void OnInitialized()
-        {
-            TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
-
-            // TODO: Add subscribe signalR here
-
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                Title = TabItems[index].Title;
-                selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
-            });
-        }
-
         public override void OnResume()
         {
             tabItemViewModels[selectedTabItem].OnResume();
@@ -101,29 +83,63 @@ namespace LiveScore.Soccer.ViewModels
             base.OnSleep();
         }
 
-        protected internal void OnReceivedMatchEvent(byte sportId, IMatchEvent matchEvent)
+        protected override void OnInitialized()
+        {
+            TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
+
+            EventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Subscribe(OnReceivedTeamStatistic, true);
+
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                Title = TabItems[index].Title;
+                selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
+            });
+        }
+
+        protected override void OnDisposed()
+        {
+            base.OnDisposed();
+
+            EventAggregator
+              .GetEvent<MatchEventPubSubEvent>()
+              .Unsubscribe(OnReceivedMatchEvent);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Unsubscribe(OnReceivedTeamStatistic);
+
+            MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
+        }
+
+        protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
         {
             var match = MatchViewModel.Match;
 
-            if (sportId != CurrentSportId || match?.Id == null || matchEvent.MatchId != match.Id)
+            if (payload.SportId != CurrentSportId || payload.MatchEvent.MatchId != match.Id)
             {
                 return;
             }
 
-            match.UpdateResult(matchEvent.MatchResult);
-            match.UpdateLastTimeline(matchEvent.Timeline);
+            match.UpdateResult(payload.MatchEvent.MatchResult);
+            match.UpdateLastTimeline(payload.MatchEvent.Timeline);
 
             BuildGeneralInfo(match);
         }
 
-        protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
+        protected internal void OnReceivedTeamStatistic(ITeamStatisticsMessage payload)
         {
-            if (sportId != CurrentSportId || MatchViewModel.Match?.Id == null || MatchViewModel.Match.Id != matchId)
+            if (payload.SportId != CurrentSportId || MatchViewModel.Match.Id != payload.MatchId)
             {
                 return;
             }
 
-            MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
+            MatchViewModel.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
         }
 
         private void BuildGeneralInfo(IMatch match)
