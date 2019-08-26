@@ -7,6 +7,14 @@
 
     public class MatchInfo : IMatchInfo
     {
+        public MatchInfo(Match match, IEnumerable<TimelineEvent> timelineEvents, Venue venue, string referee)
+        {
+            Match = match;
+            TimelineEvents = timelineEvents;
+            Venue = venue;
+            Referee = referee;
+        }
+
         [JsonConverter(typeof(JsonConcreteTypeConverter<Match>))]
         public IMatch Match { get; private set; }
 

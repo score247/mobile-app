@@ -33,8 +33,7 @@
             };
         }
 
-        public T GetApi<T>()
-            => RestService.For<T>(settingsService.ApiEndpoint, refitSettings);
+        public T GetApi<T>() => RestService.For<T>(settingsService.ApiEndpoint, refitSettings);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }

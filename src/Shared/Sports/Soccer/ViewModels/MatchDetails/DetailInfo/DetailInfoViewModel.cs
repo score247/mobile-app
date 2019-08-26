@@ -118,7 +118,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
             if (matchInfo.TimelineEvents != null)
             {
-                var soccerTimelines = matchInfo.TimelineEvents as IEnumerable<TimelineEvent>;
+                var soccerTimelines = matchInfo.TimelineEvents.OfType<TimelineEvent>();
                 soccerTimelines = soccerTimelines
                     .Where(t => (t).IsDetailInfoEvent())
                     .Distinct().ToList() ?? new List<TimelineEvent>();
@@ -162,7 +162,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private static IEnumerable<ITimelineEvent> FilterPenaltyEvents(MatchInfo matchInfo)
         {
             var match = matchInfo.Match;
-            var timelineEvents = (matchInfo.TimelineEvents as IEnumerable<TimelineEvent>).ToList();
+            var timelineEvents = matchInfo.TimelineEvents.OfType<TimelineEvent>().ToList();
 
             if (match.EventStatus.IsClosed)
             {
