@@ -250,12 +250,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             //TODO only update cache when receiving new odds change message, run in background                       
             if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
-                var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
-
-                foreach (var betTypeId in betTypes)
+                if (oddsComparisonMessage.BetTypeOddsList != null && oddsComparisonMessage.BetTypeOddsList.Any())
                 {
-                    await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                    var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+
+                    foreach (var betTypeId in betTypes)
+                    {
+                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                    }
                 }
+                
             }
             //otherwise -> invalidate cache key?
         }

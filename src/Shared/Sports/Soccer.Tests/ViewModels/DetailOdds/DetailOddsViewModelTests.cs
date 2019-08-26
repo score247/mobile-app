@@ -269,7 +269,7 @@
         }
 
         [Fact]
-        public async Task HandleOddsComparisonMessage_NotSelectedBetType_NotLoadOdds()
+        public async Task HandleOddsComparisonMessage_NotSelectedBetTypeButSameMatch_StillLoadOdds()
         {
             // Arrange 
             var oddsComparison = new MatchOddsComparisonMessage
@@ -282,7 +282,7 @@
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
-            await oddsService.DidNotReceive().GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), true);
         }
 
         [Fact]
