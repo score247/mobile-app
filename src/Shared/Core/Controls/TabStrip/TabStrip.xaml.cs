@@ -33,7 +33,7 @@
             set { SetValue(ItemsSourceProperty, value); }
         }
 
-        public int SelectedTabIndex { get; private set; }
+        public int SelectedTabIndex { get; set; }
 
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {

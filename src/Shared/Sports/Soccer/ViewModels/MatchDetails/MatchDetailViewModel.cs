@@ -89,7 +89,7 @@ namespace LiveScore.Soccer.ViewModels
             MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
             {
                 Title = TabItems[index].Title;
-                selectedTabItem = TextEnumeration.FromDisplayName<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
+                selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
             });
         }
 
