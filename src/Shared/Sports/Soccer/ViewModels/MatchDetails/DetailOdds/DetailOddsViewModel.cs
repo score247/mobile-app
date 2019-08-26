@@ -93,7 +93,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private Task HandleButtonCommand(string betTypeId)
         => LoadOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat);
-               
+
 
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
@@ -226,11 +226,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
-                {                   
+                {
                     var existingOddsItem = BetTypeOddsItems.FirstOrDefault(x => x.BetTypeOdds.Bookmaker == updatedOdds.Bookmaker);
 
                     if (existingOddsItem == null)
-                    {                       
+                    {
                         AddBookmakerOdds(updatedOdds);
 
                         needToReOrder = true;
@@ -247,19 +247,24 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 }
             }
 
-            //TODO only update cache when receiving new odds change message, run in background                       
-            if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
-            {
-                if (oddsComparisonMessage.BetTypeOddsList != null && oddsComparisonMessage.BetTypeOddsList.Any())
-                {
-                    var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+                             
+            await UpdateOddsCache(oddsComparisonMessage);
+            
+        }
 
-                    foreach (var betTypeId in betTypes)
-                    {
-                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
-                    }
+        private async Task UpdateOddsCache(MatchOddsComparisonMessage oddsComparisonMessage)
+        {
+            //TODO only update cache when receiving new odds change message, run in background      
+            if (oddsComparisonMessage.BetTypeOddsList != null &&
+                oddsComparisonMessage.BetTypeOddsList.Any() &&
+                oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
+            {
+                var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+
+                foreach (var betTypeId in betTypes)
+                {
+                    await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
                 }
-                
             }
             //otherwise -> invalidate cache key?
         }
