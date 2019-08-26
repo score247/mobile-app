@@ -64,24 +64,16 @@
 
     <!--  SubTab  -->
 
-    <Style x:Key="SubTabBox" TargetType="FlexLayout">
+    <Style x:Key="BetTypeContainer" TargetType="Grid">
         <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
-        <Setter Property="JustifyContent" Value="SpaceBetween" />
-        <Setter Property="AlignItems" Value="Stretch" />
-        <Setter Property="HeightRequest" Value="{StaticResource SubTabsHeight}" />
         <Setter Property="Padding" Value="1,1,1,0" />
+        <Setter Property="ColumnSpacing" Value="1" />
     </Style>
     <Style x:Key="SubTab" TargetType="Button">
         <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FlexLayout.Grow" Value="1" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SubTabBgColor}" />
-    </Style>
-    <Style x:Key="SubTabLine" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
-        <Setter Property="WidthRequest" Value="1" />
     </Style>
     <Style x:Key="SubTabHorizontalLine" TargetType="BoxView">
         <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}" />
