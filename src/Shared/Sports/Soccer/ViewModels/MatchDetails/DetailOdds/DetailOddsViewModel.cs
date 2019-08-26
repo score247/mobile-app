@@ -263,6 +263,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
                 foreach (var betTypeId in betTypes)
                 {
+                    //invalidate cache then update?
                     await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
                 }
             }
