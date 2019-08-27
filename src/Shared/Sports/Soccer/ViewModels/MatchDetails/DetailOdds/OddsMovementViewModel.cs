@@ -203,8 +203,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             {                
                 await InvalidateOddsMovementCache(oddsMovementMessage);
             }
-
-            //oddsService.InvalidateAllOddsComparisonCache(oddsMovementMessage.MatchId);
         }
 
         private async Task InvalidateOddsMovementCache(MatchOddsMovementMessage oddsMovementMessage)
