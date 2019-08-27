@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
@@ -17,6 +18,7 @@ using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
+
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
@@ -48,13 +50,26 @@ namespace LiveScore.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public IList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
+        public ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; }
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
+
+        [Time]
+        public override async void Initialize(INavigationParameters parameters)
+        {
+            if (MatchItemsSource == null)
+            {
+                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())).ConfigureAwait(false);
+            }
+            else
+            {
+                await LoadData(() => LoadMatches(selectedDateRange, true)).ConfigureAwait(false);
+            }
+        }
 
         [Time]
         public override async void OnResume()
@@ -66,28 +81,19 @@ namespace LiveScore.Score.ViewModels
                 await NavigateToHome().ConfigureAwait(false);
             }
 
-            await LoadData(() => LoadMatches(selectedDateRange, true), false).ConfigureAwait(false);
+            await LoadData(() => LoadMatches(selectedDateRange, true)).ConfigureAwait(false);
 
             OnInitialized();
-        }
-
-        [Time]
-        public override async void Initialize(INavigationParameters parameters)
-        {
-            if (MatchItemsSource == null)
-            {
-                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow()));
-            }
-            else
-            {
-                await LoadData(() => LoadMatches(selectedDateRange, true), false);
-            }
         }
 
         protected override void OnInitialized()
         {
             cancellationTokenSource = new CancellationTokenSource();
+            SubscribeEvents();
+        }
 
+        private void SubscribeEvents()
+        {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
                 .Subscribe(OnDateBarItemSelected, true);
@@ -105,6 +111,13 @@ namespace LiveScore.Score.ViewModels
         {
             base.OnDisposed();
 
+            UnsubscribeAllEvents();
+
+            cancellationTokenSource?.Cancel();
+        }
+
+        private void UnsubscribeAllEvents()
+        {
             EventAggregator
                 .GetEvent<DateBarItemSelectedEvent>()
                 .Unsubscribe(OnDateBarItemSelected);
@@ -116,15 +129,14 @@ namespace LiveScore.Score.ViewModels
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
-
-            cancellationTokenSource?.Cancel();
         }
 
         private async Task OnRefresh()
         {
             Profiler.Start("ScoresViewModel.LoadMatches.PullDownToRefresh");
 
-            await LoadData(() => LoadMatches(selectedDateRange, true), false).ConfigureAwait(false);
+            await LoadData(() => LoadMatches(selectedDateRange, true), false)
+                .ConfigureAwait(false);
         }
 
         private async Task OnTapMatch(MatchViewModel matchItem)
@@ -161,7 +173,9 @@ namespace LiveScore.Score.ViewModels
         {
             if (IsLoading)
             {
-                MatchItemsSource?.Clear();
+                MatchItemsSource
+                    = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                        new List<IGrouping<GroupMatchViewModel, MatchViewModel>>());
             }
 
             var matches = await matchService.GetMatches(
@@ -177,13 +191,15 @@ namespace LiveScore.Score.ViewModels
             Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
         }
 
-        private IList<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
+        private ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
 
-            return matchItemViewModels
-                .GroupBy(item => new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate))
-                .ToList();
+            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                matchItemViewModels.GroupBy(item
+                => new GroupMatchViewModel(item.Match.LeagueId,
+                                           item.Match.LeagueName,
+                                           item.Match.EventDate)).ToList());
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)

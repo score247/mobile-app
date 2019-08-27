@@ -98,12 +98,12 @@
         {
             IsLoading = showLoading;
 
-            await loadDataFunc.Invoke();
+            await loadDataFunc.Invoke().ConfigureAwait(false);
 
             IsLoading = false;
         }
 
         protected async Task NavigateToHome()
-            => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView");
+            => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
     }
 }

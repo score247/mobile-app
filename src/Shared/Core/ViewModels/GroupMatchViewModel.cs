@@ -18,17 +18,8 @@
 
         public string EventDate { get; }
 
-        public override bool Equals(object obj)
-        {
-            var actualObj = obj as GroupMatchViewModel;
-
-            if (actualObj == null)
-            {
-                return false;
-            }
-
-            return LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
-        }
+        public override bool Equals(object obj) 
+            => (obj is GroupMatchViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
 
         public override int GetHashCode() => LeagueId?.GetHashCode() ?? 0;
     }
