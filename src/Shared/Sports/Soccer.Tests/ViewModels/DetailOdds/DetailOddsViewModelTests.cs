@@ -54,7 +54,7 @@
 
         private MatchOdds CreateOdds() => CreateOdds(BetType.AsianHDP.Value);
 
-        private MatchOdds CreateOdds(int betTypeId)
+        private MatchOdds CreateOdds(byte betTypeId)
             => new MatchOdds
             {
                 MatchId = matchId,
@@ -64,7 +64,7 @@
                 }
             };
 
-        private BetTypeOdds CreateBetTypeOdds(int betTypeId) => new BetTypeOdds
+        private BetTypeOdds CreateBetTypeOdds(byte betTypeId) => new BetTypeOdds
         {
             Id = betTypeId,
             Bookmaker = new Bookmaker { Id = "sr:book:1", Name = "Bet188Com" },
@@ -237,7 +237,7 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_NotCurentMatch_NotLoadOdds()
         {
-            // Arrange 
+            // Arrange
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = "sr:match:2",
@@ -254,7 +254,7 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_BetTypeOddsListIsNull_NotLoadOdds()
         {
-            // Arrange 
+            // Arrange
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
@@ -271,7 +271,7 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_NotSelectedBetTypeButSameMatch_StillLoadOdds()
         {
-            // Arrange 
+            // Arrange
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
@@ -288,14 +288,14 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_LoadOdds_AddNew()
         {
-            // Arrange 
+            // Arrange
             var oddsComparison = new MatchOddsComparisonMessage
             {
                 MatchId = matchId,
                 BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.AsianHDP.Value) }
             };
 
-            // Act            
+            // Act
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
             // Assert
@@ -307,7 +307,7 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_LoadOdds_UpdateExisting()
         {
-            // Arrange 
+            // Arrange
             oddsService
                 .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
                 .Returns(CreateOdds(BetType.OneXTwo.Value));
@@ -320,12 +320,12 @@
                 BetTypeOddsList = new List<BetTypeOdds> { CreateBetTypeOdds(BetType.OneXTwo.Value) }
             };
 
-            oddsComparison.BetTypeOddsList.First().BetOptions.First(x=>x.Type == "home").LiveOdds = 5.6m;
+            oddsComparison.BetTypeOddsList.First().BetOptions.First(x => x.Type == "home").LiveOdds = 5.6m;
 
-            // Act            
+            // Act
             await viewModel.HandleOddsComparisonMessage(oddsComparison);
 
-            // Assert            
+            // Assert
             Assert.True(viewModel.HasData);
             Assert.Single(viewModel.BetTypeOddsItems);
 
@@ -336,15 +336,15 @@
         [Fact]
         public async Task OnResume_Always_LoadOdds()
         {
-            // Arrange 
+            // Arrange
             oddsService
                 .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
                 .Returns(CreateOdds(BetType.OneXTwo.Value));
 
-            // Act            
+            // Act
             viewModel.OnResume();
 
-            // Assert            
+            // Assert
             await oddsService.Received(1).GetOdds(Arg.Any<string>(), matchId, 3, Arg.Any<string>(), Arg.Any<bool>());
             Assert.Single(viewModel.BetTypeOddsItems);
         }
