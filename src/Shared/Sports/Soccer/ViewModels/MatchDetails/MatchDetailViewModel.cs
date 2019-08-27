@@ -7,6 +7,7 @@ namespace LiveScore.Soccer.ViewModels
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using Core.ViewModels;
@@ -158,9 +159,26 @@ namespace LiveScore.Soccer.ViewModels
 
         public override void OnDisappearing()
         {
+            Debug.WriteLine("MatchDetailViewModel OnDisappearing");
+
             base.OnDisappearing();
 
-            tabItemViewModels[CurrentTabView].OnDisappearing();
+            foreach (var tab in tabItemViewModels)
+            {
+                tab.Value.OnDisappearing();
+            }            
+        }
+
+        public override void Destroy()
+        {
+            Debug.WriteLine("MatchDetailViewModel Destroy");
+
+            base.Destroy();
+
+            foreach (var tab in tabItemViewModels)
+            {
+                tab.Value.Destroy();
+            }
         }
 
         private void BuildTabFunctions()

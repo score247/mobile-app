@@ -20,6 +20,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -118,21 +119,27 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         {
             try
             {
+                Debug.WriteLine("DetailOddsViewModel Initialize");
+
                 await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, IsRefreshing));
 
-                hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
+                if (cancellationTokenSource == null)
                 {
-                    var oddsComparisonMessage = await DeserializeComparisonMessage(data);
-
-                    if (oddsComparisonMessage == null)
+                    hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
                     {
-                        return;
-                    }
+                        Debug.WriteLine($"OddsComparison received {data}");
+                        var oddsComparisonMessage = await DeserializeComparisonMessage(data);
 
-                    await HandleOddsComparisonMessage(oddsComparisonMessage);
-                }));
+                        if (oddsComparisonMessage == null)
+                        {
+                            return;
+                        }
 
-                await StartOddsHubConnection();
+                        await HandleOddsComparisonMessage(oddsComparisonMessage);
+                    }));
+
+                    await StartOddsHubConnection();
+                }                
             }
             catch (Exception ex)
             {
@@ -142,17 +149,41 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public override void OnDisappearing()
         {
-            cancellationTokenSource?.Cancel();
+            Debug.WriteLine("DetailOddsViewModel OnDisappearing");
         }
 
         public override async void OnResume()
         {
+            Debug.WriteLine("DetailOddsViewModel OnResume");
+
             //TODO not re-load odds when match is closed
             await LoadOddsByBetType(oddsFormat, isRefresh: true);
         }
 
+        public override void OnSleep()
+        {
+            Debug.WriteLine("DetailOddsViewModel OnSleep");
+            cancellationTokenSource?.Cancel();
+            cancellationTokenSource = null;
+        }
+
+        public override void Destroy()
+        {
+            Debug.WriteLine("DetailOddsViewModel Destroy");
+            cancellationTokenSource?.Cancel();
+            cancellationTokenSource = null;
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            Debug.WriteLine("DetailOddsViewModel OnNavigatedFrom");
+            base.OnNavigatedFrom(parameters);
+        }
+
         private async Task StartOddsHubConnection()
         {
+            Debug.WriteLine("DetailOddsViewModel StartOddsHubConnection");
+
             cancellationTokenSource = new CancellationTokenSource();
 
             await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
@@ -242,15 +273,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
             }
-
                              
-            await UpdateOddsCache(oddsComparisonMessage);
-            
+            await UpdateOddsCache(oddsComparisonMessage);            
         }
 
         private async Task UpdateOddsCache(MatchOddsComparisonMessage oddsComparisonMessage)
-        {
-            
+        {            
             if (oddsComparisonMessage.BetTypeOddsList != null &&
                 oddsComparisonMessage.BetTypeOddsList.Any())
             {
@@ -262,16 +290,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     {
                         //TODO only update cache when receiving new odds change message, run in background
                         //invalidate cache then update?
-                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, (byte)betTypeId, oddsFormat, forceFetchNewData: true);
+                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betTypeId, oddsFormat, forceFetchNewData: true);
                     }
                 }
                 else
-                {
-                    //otherwise -> invalidate cache key?
+                {                    
                     oddsService.InvalidateAllOddsComparisonCache(oddsComparisonMessage.MatchId);
                 }
             }
-           
+
+            await InvalidateOddsMovementCache(oddsComparisonMessage);
         }
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
@@ -285,6 +313,19 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
+        }  
+
+        [Time]
+        internal async Task InvalidateOddsMovementCache(MatchOddsComparisonMessage oddsComparisonMessage)
+        {            
+            var betTypeBookmakers = oddsComparisonMessage.BetTypeOddsList
+                     .Select(x => new KeyValuePair<byte, string>(x.Id, x.Bookmaker.Id));
+
+            foreach (var betTypeBookmaker in betTypeBookmakers)
+            {
+                await oddsService.InvalidateOddsMovementCache(oddsComparisonMessage.MatchId, betTypeBookmaker.Key, oddsFormat, betTypeBookmaker.Value);
+            }
+            
         }
 
         protected virtual void Dispose(bool disposing)

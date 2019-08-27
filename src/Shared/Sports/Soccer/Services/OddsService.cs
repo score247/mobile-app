@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.Services
 {
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -8,6 +9,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Models.Odds;
+    using MethodTimer;
     using Refit;
 
     public interface ISoccerOddsApi
@@ -87,8 +89,10 @@
                () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
            );
 
+        [Time]
         public void InvalidateAllOddsComparisonCache(string matchId)
         {
+            Debug.WriteLine($"InvalidateAllOddsComparisonCache {matchId}");
             foreach (var betType in Enumeration.GetAll<BetType>())
             {
                 Parallel.ForEach(
@@ -105,6 +109,7 @@
             try
             {
                 var cacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
+                Debug.WriteLine($"InvalidateOddsComparisonCache {cacheKey}");
 
                 await cacheService.Invalidate(cacheKey);
             }
@@ -119,6 +124,7 @@
             try
             {
                 var cacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                Debug.WriteLine($"InvalidateOddsMovementCache {cacheKey}");
 
                 await cacheService.Invalidate(cacheKey);
             }

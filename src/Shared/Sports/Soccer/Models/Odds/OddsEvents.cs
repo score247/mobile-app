@@ -7,7 +7,7 @@
     public class OddsMovementEvent : IOddsMovementEvent
     {
         public OddsMovementEvent(
-            int betTypeId,
+            byte betTypeId,
             Bookmaker bookmaker,
             OddsMovement oddsMovement)
         {
@@ -16,7 +16,7 @@
             OddsMovement = oddsMovement;
         }
 
-        public int BetTypeId { get; set; }
+        public byte BetTypeId { get; set; }
 
         public Bookmaker Bookmaker { get; set; }
 

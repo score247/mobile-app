@@ -6,6 +6,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
@@ -93,7 +94,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 await FirstLoadOrRefreshOddsMovement();
 
                 hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
-                {                    
+                {
+                    Debug.WriteLine($"OddsMovement received {data}");
                     var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
 
                     if (oddsMovementMessage == null)
@@ -176,7 +178,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         [Time]
         internal async Task HandleOddsMovementMessage(MatchOddsMovementMessage oddsMovementMessage)
         {
-            if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)) 
+            if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
                 //TODO check existing odds movement
                 var updatedOddsMovements = oddsMovementMessage.OddsEvents
@@ -195,7 +197,24 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                     GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
 
                     await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
-                }                
+                }
+            }
+            else
+            {                
+                await InvalidateOddsMovementCache(oddsMovementMessage);
+            }
+
+            //oddsService.InvalidateAllOddsComparisonCache(oddsMovementMessage.MatchId);
+        }
+
+        private async Task InvalidateOddsMovementCache(MatchOddsMovementMessage oddsMovementMessage)
+        {
+            var betTypeBookmakers = oddsMovementMessage.OddsEvents
+                                .Select(x => new KeyValuePair<byte, string>(x.BetTypeId, x.Bookmaker.Id));
+
+            foreach (var betTypeBookmaker in betTypeBookmakers)
+            {
+                await oddsService.InvalidateOddsMovementCache(oddsMovementMessage.MatchId, betTypeBookmaker.Key, oddsFormat, betTypeBookmaker.Value);
             }
         }
 

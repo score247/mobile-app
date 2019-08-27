@@ -46,6 +46,7 @@
                 HasUnevenRows="true"
                 IsGroupingEnabled="true"
                 IsPullToRefreshEnabled="true"
+                IsVisible="{Binding IsNotLoading}"
                 IsRefreshing="{Binding IsRefreshing}"
                 ItemTemplate="{StaticResource oddsMovementItemTemplateSelector}"
                 ItemsSource="{Binding GroupOddsMovementItems}"
