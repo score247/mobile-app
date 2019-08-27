@@ -34,15 +34,12 @@
                     Style="{StaticResource MatchInfoHalfTimeText}"
                     Text="{Binding MainEventStatus}" />
 
-                <StackLayout
+                <Label
                     Grid.Row="0"
                     Grid.Column="3"
-                    Style="{StaticResource MatchInfoScoreContainer}">
-                    <Button
-                        AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
-                        Style="{StaticResource MatchInfoScoreBox}"
-                        Text="{Binding Score}" />
-                </StackLayout>
+                    AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                    Style="{StaticResource MatchInfoScore}"
+                    Text="{Binding Score}" />
             </Grid>
             <BoxView BackgroundColor="{StaticResource SecondColor}" Style="{StaticResource HorizontalLine}" />
         </StackLayout>
