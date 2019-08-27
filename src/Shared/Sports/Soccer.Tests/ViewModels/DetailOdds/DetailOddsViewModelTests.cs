@@ -44,6 +44,7 @@
 
             viewModel = new DetailOddsViewModel(
                 matchId,
+                MatchStatus.NotStarted,
                 navigationService,
                 baseFixture.DependencyResolver,
                 null);
@@ -129,7 +130,7 @@
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             // Assert
-            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), false);
+            await oddsService.Received(1).GetOdds(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), true);
         }
 
         [Fact]
@@ -192,6 +193,7 @@
 
             var oddsViewModel = new DetailOddsViewModel(
                 matchId,
+                MatchStatus.Closed,
                 mockNavigationService,
                 dependencyResolver,
                 null);
@@ -340,6 +342,7 @@
             oddsService
                 .GetOdds(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
                 .Returns(CreateOdds(BetType.OneXTwo.Value));
+            
 
             // Act
             viewModel.OnResume();

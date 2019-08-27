@@ -50,6 +50,7 @@
 
             var parameters = new NavigationParameters {
                 { "MatchId", matchId },
+                { "EventStatus", MatchStatus.NotStarted },
                 { "Bookmaker", bookmaker },
                 { "BetType", betType },
                 { "Format", format },
@@ -80,8 +81,32 @@
         }
 
         [Fact]
-        public void OnAppearing_Always_GetOddsMovement()
+        public void OnAppearing_NotStarted_ForceFetchNewOddsMovement()
         {
+            // Act
+            viewModel.OnAppearing();
+
+            // Assert
+            Assert.False(viewModel.IsRefreshing);
+            Assert.False(viewModel.IsLoading);
+
+            oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
+        }
+
+        [Fact]
+        public void OnAppearing_Closed_AlwaysGetOddsMovementButNotForce()
+        {
+            // Arrange
+            var parameters = new NavigationParameters {
+                { "MatchId", matchId },
+                { "EventStatus", MatchStatus.Closed },
+                { "Bookmaker", bookmaker },
+                { "BetType", BetType.OneXTwo },
+                { "Format", "dec" },
+            };
+
+            viewModel.OnNavigatingTo(parameters);
+
             // Act
             viewModel.OnAppearing();
 
@@ -97,7 +122,7 @@
         {
             // Arrange
             oddsService
-                .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id)
+                .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true)
                 .Returns(CreateMatchOddsMovement());
 
             var expectedViewModels = new List<BaseMovementItemViewModel>
@@ -219,7 +244,7 @@
             var message = CreateMatchOddsMovementMessage();
 
             oddsService
-                .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id)
+                .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true)
                 .Returns(CreateMatchOddsMovement());
 
             viewModel.OnAppearing();
@@ -228,7 +253,7 @@
             await viewModel.HandleOddsMovementMessage(message);
 
             // Assert
-            await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id);
+            await oddsService.Received(2).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
             Assert.Equal(3, viewModel.OddsMovementItems.Count);
         }
 
@@ -250,7 +275,7 @@
            };
 
         [Fact]
-        public async Task OnResume_Always_LoadOdds()
+        public async Task OnResume_NotStarted_ForceGetNewOddsMovement()
         {
             // Arrange 
             oddsService
@@ -263,6 +288,27 @@
             // Assert            
             await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
             Assert.Equal(2, viewModel.OddsMovementItems.Count);
+        }
+
+        [Fact]
+        public async Task OnResume_Closed_GetOddsMovementButNotForce()
+        {
+            // Arrange 
+            var parameters = new NavigationParameters {
+                { "MatchId", matchId },
+                { "EventStatus", MatchStatus.Closed },
+                { "Bookmaker", bookmaker },
+                { "BetType", BetType.OneXTwo },
+                { "Format", "dec" },
+            };
+
+            viewModel.OnNavigatingTo(parameters);
+
+            // Act            
+            viewModel.OnResume();
+
+            // Assert            
+            await oddsService.DidNotReceive().GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
         }
     }
 }
