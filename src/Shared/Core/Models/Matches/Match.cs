@@ -9,6 +9,8 @@
     {
         DateTimeOffset EventDate { get; set; }
 
+        DateTimeOffset CurrentPeriodStartTime { get; set; }
+
         IEnumerable<ITeam> Teams { get; set; }
 
         IMatchResult MatchResult { get; set; }

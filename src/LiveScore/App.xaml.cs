@@ -12,7 +12,9 @@ using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
+
 using LiveScore.Features.Favorites;
+
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
@@ -32,6 +34,8 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Prism.Events;
+using LiveScore.Core.Events;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -79,6 +83,8 @@ namespace LiveScore
             settingsService.ApiEndpoint = Configuration.LocalEndPoint;
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
 
+            StartGlobalTimer();
+
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
 
@@ -103,6 +109,23 @@ namespace LiveScore
             RegisterForNavigation(containerRegistry);
 
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
+        }
+
+        protected override void OnSleep()
+        {
+            Debug.WriteLine("OnSleep");
+
+            var localStorage = Container.Resolve<ICachingService>();
+            localStorage.Shutdown();
+
+            base.OnSleep();
+        }
+
+        protected override void OnResume()
+        {
+            Debug.WriteLine("OnResume");
+
+            base.OnResume();
         }
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
@@ -139,21 +162,15 @@ namespace LiveScore
             moduleCatalog.AddModule<MenuModule>();
         }
 
-        protected override void OnSleep()
+        private void StartGlobalTimer()
         {
-            Debug.WriteLine("OnSleep");
+            Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+            {
+                var eventAggregator = Container.Resolve<IEventAggregator>();
+                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();
 
-            var localStorage = Container.Resolve<ICachingService>();
-            localStorage.Shutdown();
-
-            base.OnSleep();
-        }
-
-        protected override void OnResume()
-        {
-            Debug.WriteLine("OnResume");
-
-            base.OnResume();
+                return true;
+            });
         }
     }
 }

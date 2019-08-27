@@ -2,43 +2,36 @@
 {
     using System.Linq;
     using LiveScore.Core.Converters;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
-    using Microsoft.AspNetCore.SignalR.Client;
+    using Prism.Events;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel
     {
         private readonly IMatchStatusConverter matchStatusConverter;
-        private readonly HubConnection matchHubConnection;
-        private readonly byte currentSportId;
+        private readonly IMatchMinuteConverter matchMinuteConverter;
+        private readonly IEventAggregator eventAggregator;
+        private bool isSubscribingTimer;
 
         public MatchViewModel(
             IMatch match,
-            HubConnection matchHubConnection,
-            IMatchStatusConverter matchStatusConverter,
+            IDependencyResolver dependencyResolver,
             byte currentSportId)
         {
-            this.matchHubConnection = matchHubConnection;
-            this.matchStatusConverter = matchStatusConverter;
-            this.currentSportId = currentSportId;
+            matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(currentSportId.ToString());
+            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(currentSportId.ToString());
+            eventAggregator = dependencyResolver.Resolve<IEventAggregator>();
 
             Match = match;
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
-            SubscribeMatchTimeChangeEvent();
+            BuildDisplayMatchStatus();
         }
 
-        public IMatch Match { get; protected set; }
+        public IMatch Match { get; }
 
         public string DisplayMatchStatus { get; private set; }
-
-        public void OnReceivedMatchEvent(IMatchEvent matchEvent)
-        {
-            Match.MatchResult = matchEvent.MatchResult;
-            Match.LatestTimeline = matchEvent.Timeline;
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
-        }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
@@ -46,16 +39,48 @@
             currentTeam.Statistic = teamStatistic;
         }
 
+        public void OnReceivedMatchEvent(IMatchEvent matchEvent)
+        {
+            Match.MatchResult = matchEvent.MatchResult;
+            Match.LatestTimeline = matchEvent.Timeline;
+
+            BuildDisplayMatchStatus();
+        }
+
+        private void BuildDisplayMatchStatus()
+        {
+            var matchStatus = matchStatusConverter.BuildStatus(Match);
+
+            if (!string.IsNullOrEmpty(matchStatus))
+            {
+                DisplayMatchStatus = matchStatus;
+                UnsubscribeMatchTimeChangeEvent();
+            }
+            else
+            {
+                BuildMatchTime();
+                SubscribeMatchTimeChangeEvent();
+            }
+        }
+
+        private void BuildMatchTime()
+        {
+            DisplayMatchStatus = matchMinuteConverter.BuildMatchMinute(Match);
+        }
+
         private void SubscribeMatchTimeChangeEvent()
         {
-            matchHubConnection.On<byte, string, int>("PushMatchTime",
-                (sportId, matchId, matchTime) =>
-                {
-                    if (currentSportId == sportId && Match.Id == matchId)
-                    {
-                        Match.MatchResult.MatchTime = matchTime;
-                    }
-                });
+            if (Match.MatchResult.EventStatus.IsLive && !isSubscribingTimer)
+            {
+                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Subscribe(BuildMatchTime);
+                isSubscribingTimer = true;
+            }
+        }
+
+        private void UnsubscribeMatchTimeChangeEvent()
+        {
+            eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Unsubscribe(BuildMatchTime);
+            isSubscribingTimer = false;
         }
     }
 }

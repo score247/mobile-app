@@ -83,5 +83,9 @@
         public bool IsInjuryTimeShown => this == InjuryTimeShown;
 
         public bool IsRedCard() => this == RedCard || this == YellowRedCard;
+
+        public bool IsMatchStarted => this == MatchStarted;
+
+        public bool IsMatchEnded => this == MatchEnded;
     }
 }

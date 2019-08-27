@@ -20,6 +20,8 @@
     {
         public DateTimeOffset EventDate { get; set; }
 
+        public DateTimeOffset CurrentPeriodStartTime { get; set; }
+
         [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Team>>))]
         public IEnumerable<ITeam> Teams { get; set; }
 

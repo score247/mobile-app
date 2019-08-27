@@ -22,13 +22,12 @@ namespace Soccer.Tests.ViewModels
         private readonly MatchDetailViewModel viewModel;
         private readonly IMatchService matchService;
         private readonly Match match;
-        private readonly ICachingService localStorage;
 
         public MatchDetailViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            localStorage = Substitute.For<ICachingService>();
-            baseFixture.DependencyResolver.Resolve<IMatchStatusConverter>("1")
-                .Returns(new MatchStatusConverter(localStorage));
+            baseFixture.DependencyResolver
+                .Resolve<IMatchStatusConverter>("1")
+                .Returns(new MatchStatusConverter());
             matchService = Substitute.For<IMatchService>();
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
 
@@ -73,21 +72,6 @@ namespace Soccer.Tests.ViewModels
             };
 
             return matchData;
-        }
-
-        [Fact]
-        public void OnNavigatingTo_ParametersIsNotNull_BuildMatchStatus()
-        {
-            // Arrange
-            match.LatestTimeline = new TimelineEvent { StoppageTime = "4", InjuryTimeAnnounced = 5 };
-            match.MatchResult.MatchTime = 49;
-            var parameters = new NavigationParameters { { "Match", match } };
-
-            // Act
-            viewModel.OnNavigatingTo(parameters);
-
-            // Assert
-            Assert.Equal("45+4'", viewModel.MatchViewModel.DisplayMatchStatus);
         }
 
         [Fact]

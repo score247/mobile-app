@@ -11,6 +11,7 @@
         private readonly IEssential mockEssentials;
         private readonly IBlobCache mockLocalMachine;
         private readonly IBlobCache mockUserAccount;
+        private readonly IBlobCache mockInMemory;
 
         private readonly CachingService cache;
 
@@ -19,8 +20,9 @@
             mockEssentials = Substitute.For<IEssential>();
             mockLocalMachine = Substitute.For<IBlobCache>();
             mockUserAccount = Substitute.For<IBlobCache>();
+            mockInMemory = Substitute.For<IBlobCache>();
 
-            cache = new CachingService(mockEssentials, mockLocalMachine, mockUserAccount);
+            cache = new CachingService(mockEssentials, mockLocalMachine, mockUserAccount, mockInMemory);
         }
 
         [Fact]

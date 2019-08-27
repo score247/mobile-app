@@ -114,7 +114,6 @@ namespace LiveScore.Score.ViewModels
 
             Device.BeginInvokeOnMainThread(async () =>
                 await matchHubConnection.StartWithKeepAlive(TimeSpan.FromSeconds(HubKeepAliveInterval), LoggingService, cancellationTokenSource.Token));
-
         }
 
         protected override void Clean()
@@ -189,13 +188,12 @@ namespace LiveScore.Score.ViewModels
             Profiler.Stop(this.GetType().Name + ".LoadMatches.Home");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
             Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
-
         }
 
         private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(
-                    match => new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId));
+                    match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
 
             return new ObservableCollection<IGrouping<dynamic, MatchViewModel>>(matchItemViewModels.GroupBy(item
                 => new { item.Match.League.Id, item.Match.League.Name, item.Match.EventDate.LocalDateTime.Day, item.Match.EventDate.LocalDateTime.Month, item.Match.EventDate.LocalDateTime.Year }));

@@ -67,7 +67,6 @@ namespace LiveScore.Soccer.ViewModels
         private CancellationTokenSource cancellationTokenSource;
         private bool disposedValue;
         private Dictionary<TabFunction, TabItemViewModelBase> tabItemViewModels;
-        private readonly IMatchStatusConverter matchStatusConverter;
         private TabFunction CurrentTabView;
 
         public MatchDetailViewModel(
@@ -79,10 +78,7 @@ namespace LiveScore.Soccer.ViewModels
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
             matchHubConnection = hubService.BuildMatchEventHubConnection();
             teamHubConnection = hubService.BuildTeamStatisticHubConnection();
-
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -257,7 +253,7 @@ namespace LiveScore.Soccer.ViewModels
         }
 
         private void BuildViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(match, matchHubConnection, matchStatusConverter, CurrentSportId);
+            => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)
         {
