@@ -95,7 +95,7 @@ namespace LiveScore.Soccer.ViewModels
             {
                 tabItemViewModels = new Dictionary<TabFunction, TabItemViewModelBase>
                 {
-                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, new OddsTemplate()) },
+                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, match.MatchResult.EventStatus, NavigationService, DependencyResolver, new OddsTemplate()) },
                     {TabFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, matchHubConnection, new InfoTemplate()) },
                     {TabFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
                     {TabFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },

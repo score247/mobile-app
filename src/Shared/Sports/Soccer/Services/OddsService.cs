@@ -45,10 +45,18 @@
             {
                 var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (forceFetchNewData)
+                {
+                    return await cacheService.GetAndFetchLatestValue(
                         oddDataCacheKey,
                         () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
+                }
+
+                return await cacheService.GetOrFetchValue(
+                        oddDataCacheKey,
+                        () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
+                        DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -70,10 +78,18 @@
             {
                 var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (forceFetchNewData)
+                {
+                    return await cacheService.GetAndFetchLatestValue(
                         oddMovementCacheKey,
                         () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
+                }
+
+                return await cacheService.GetOrFetchValue(
+                        oddMovementCacheKey,
+                        () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
+                        DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -100,7 +116,7 @@
                     async (format) =>
                     {
                         await InvalidateOddsComparisonCache(matchId, betType.Value, format.DisplayName);
-                    });                             
+                    });
             }
         }
 

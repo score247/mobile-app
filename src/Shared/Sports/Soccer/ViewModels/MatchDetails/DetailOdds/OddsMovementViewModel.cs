@@ -13,6 +13,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
@@ -33,9 +34,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         private string oddsFormat;
         private bool disposedValue;
 
+        private MatchStatus eventStatus;
         private Bookmaker bookmaker;
         private BetType betType;
         private CancellationTokenSource cancellationTokenSource;
+
 
         private readonly IOddsService oddsService;
         private readonly HubConnection hubConnection;
@@ -75,6 +78,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             try
             {
                 matchId = parameters["MatchId"].ToString();
+                eventStatus = parameters["EventStatus"] as MatchStatus;
                 bookmaker = parameters["Bookmaker"] as Bookmaker;
                 betType = (BetType)parameters["BetType"];
                 oddsFormat = parameters["Format"].ToString();
@@ -125,8 +129,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         public override async void OnResume()
         {
-            //TODO not re-load odds when match is closed
-            await GetOddsMovement(isRefresh: true);
+            if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
+            {
+                await GetOddsMovement(isRefresh: true);
+            }
         }
 
         [Time]
@@ -144,7 +150,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
         private async Task GetOddsMovement(bool isRefresh)
         {
-            var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, isRefresh);
+            var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
+
+            var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew);
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
@@ -198,22 +206,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
                     await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
                 }
-            }
-            else
-            {                
-                await InvalidateOddsMovementCache(oddsMovementMessage);
-            }
-        }
-
-        private async Task InvalidateOddsMovementCache(MatchOddsMovementMessage oddsMovementMessage)
-        {
-            var betTypeBookmakers = oddsMovementMessage.OddsEvents
-                                .Select(x => new KeyValuePair<byte, string>(x.BetTypeId, x.Bookmaker.Id));
-
-            foreach (var betTypeBookmaker in betTypeBookmakers)
-            {
-                await oddsService.InvalidateOddsMovementCache(oddsMovementMessage.MatchId, betTypeBookmaker.Key, oddsFormat, betTypeBookmaker.Value);
-            }
+            }            
         }
 
         protected virtual void Dispose(bool disposing)

@@ -32,6 +32,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private readonly string matchId;
         private readonly string oddsFormat;
+        private readonly MatchStatus eventStatus;
 
         private readonly IOddsService oddsService;
         private readonly HubConnection hubConnection;
@@ -41,12 +42,14 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public DetailOddsViewModel(
             string matchId,
+            MatchStatus eventStatus,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
             this.matchId = matchId;
+            this.eventStatus = eventStatus;
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
@@ -101,6 +104,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             var parameters = new NavigationParameters
             {
                 { "MatchId", matchId },
+                { "EventStatus", eventStatus },
                 { "Bookmaker", item.BetTypeOdds.Bookmaker},
                 { "BetType", SelectedBetType },
                 { "Format",  oddsFormat}
@@ -155,9 +159,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public override async void OnResume()
         {
             Debug.WriteLine("DetailOddsViewModel OnResume");
-
-            //TODO not re-load odds when match is closed
-            await LoadOddsByBetType(oddsFormat, isRefresh: true);
+            
+            if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
+            {
+                await LoadOddsByBetType(oddsFormat, isRefresh: true);
+            }            
         }
 
         public override void OnSleep()
@@ -206,7 +212,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task LoadOddsByBetType(string formatType, bool isRefresh)
         {
-            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, formatType, isRefresh);
+            var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
+
+            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, formatType, forceFetchNew);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 
@@ -287,19 +295,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
 
                     foreach (var betTypeId in betTypes)
-                    {
-                        //TODO only update cache when receiving new odds change message, run in background
-                        //invalidate cache then update?
+                    {                        
                         await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betTypeId, oddsFormat, forceFetchNewData: true);
                     }
-                }
-                else
-                {                    
-                    oddsService.InvalidateAllOddsComparisonCache(oddsComparisonMessage.MatchId);
-                }
+                }                
             }
-
-            await InvalidateOddsMovementCache(oddsComparisonMessage);
         }
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
@@ -314,20 +314,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
         }  
-
-        [Time]
-        internal async Task InvalidateOddsMovementCache(MatchOddsComparisonMessage oddsComparisonMessage)
-        {            
-            var betTypeBookmakers = oddsComparisonMessage.BetTypeOddsList
-                     .Select(x => new KeyValuePair<byte, string>(x.Id, x.Bookmaker.Id));
-
-            foreach (var betTypeBookmaker in betTypeBookmakers)
-            {
-                await oddsService.InvalidateOddsMovementCache(oddsComparisonMessage.MatchId, betTypeBookmaker.Key, oddsFormat, betTypeBookmaker.Value);
-            }
-            
-        }
-
+       
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
