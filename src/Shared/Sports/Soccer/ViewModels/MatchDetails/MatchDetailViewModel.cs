@@ -141,6 +141,8 @@ namespace LiveScore.Soccer.ViewModels
 
         public override void OnResume()
         {
+            Debug.WriteLine("MatchDetailViewModel OnResume");
+
             tabItemViewModels[CurrentTabView].OnResume();
 
             base.OnResume();

@@ -53,6 +53,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildOddsEventHubConnection();
 
+            hubConnection.On("OddsMovement", OddsMovementMessageHandler());
+
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
@@ -72,6 +74,22 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public DataTemplate HeaderTemplate { get; private set; }
+
+        private Action<byte, string> OddsMovementMessageHandler()
+        {
+            return async (sportId, data) =>
+            {
+                Debug.WriteLine($"OddsMovement received {data}");
+                var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
+
+                if (oddsMovementMessage == null)
+                {
+                    return;
+                }
+
+                await HandleOddsMovementMessage(oddsMovementMessage);
+            };
+        }
 
         public override void OnNavigatingTo(INavigationParameters parameters)
         {
@@ -101,19 +119,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
                 await FirstLoadOrRefreshOddsMovement();
 
-                hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
-                {
-                    Debug.WriteLine($"OddsMovement received {data}");
-                    var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
-
-                    if (oddsMovementMessage == null)
-                    {
-                        return;
-                    }
-
-                    await HandleOddsMovementMessage(oddsMovementMessage);
-                }));
-
                 await StartOddsHubConnection();
             }
             catch (Exception ex)
@@ -138,13 +143,23 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             Debug.WriteLine("OddsMovementViewModel Clean");
 
+            StopOddsHubConnection();
+
+            if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
+            {
+                OddsMovementItems.Clear();
+            }
+
+            base.Clean();
+        }
+
+        private void StopOddsHubConnection()
+        {
             if (cancellationTokenSource != null)
             {
                 cancellationTokenSource.Cancel();
                 cancellationTokenSource = null;
-            }            
-
-            base.Clean();
+            }
         }
 
         public override async void OnResume()

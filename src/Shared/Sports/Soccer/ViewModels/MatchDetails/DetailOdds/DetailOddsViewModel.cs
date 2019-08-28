@@ -59,11 +59,13 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                 .Resolve<IHubService>(CurrentSportId.ToString())
                 .BuildOddsEventHubConnection();
 
+            hubConnection.On("OddsComparison", OddsComparisonHandler());
+
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)));
 
-            OnOddsTabClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
+            OnOddsTabClicked = new DelegateAsyncCommand<string>(async (betTypeId) => await FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat));
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
 
@@ -95,10 +97,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
-        private Task HandleButtonCommand(string betTypeId)
-        => FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat);
-
-
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
             var parameters = new NavigationParameters
@@ -118,6 +116,22 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
         }
 
+        private Action<byte, string> OddsComparisonHandler()
+        {
+            return async (sportId, data) =>
+            {
+                Debug.WriteLine($"OddsComparison received {data}");
+                var oddsComparisonMessage = await DeserializeComparisonMessage(data);
+
+                if (oddsComparisonMessage == null)
+                {
+                    return;
+                }
+
+                await HandleOddsComparisonMessage(oddsComparisonMessage);
+            };
+        }
+
         [Time]
         protected override async void Initialize()
         {
@@ -125,25 +139,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             {
                 Debug.WriteLine("DetailOddsViewModel Initialize");
 
-                await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, IsRefreshing));
+                await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, IsRefreshing));                
 
-                if (cancellationTokenSource == null)
-                {
-                    hubConnection.On("OddsComparison", (Action<byte, string>)(async (sportId, data) =>
-                    {
-                        Debug.WriteLine($"OddsComparison received {data}");
-                        var oddsComparisonMessage = await DeserializeComparisonMessage(data);
+                await StartOddsHubConnection();
 
-                        if (oddsComparisonMessage == null)
-                        {
-                            return;
-                        }
-
-                        await HandleOddsComparisonMessage(oddsComparisonMessage);
-                    }));
-
-                    await StartOddsHubConnection();
-                }
             }
             catch (Exception ex)
             {
@@ -169,15 +168,22 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public override void OnSleep()
         {
             Debug.WriteLine("DetailOddsViewModel OnSleep");
-            cancellationTokenSource?.Cancel();
-            cancellationTokenSource = null;
+            StopOddsHubConnection();
         }
 
         public override void Destroy()
         {
             Debug.WriteLine("DetailOddsViewModel Destroy");
-            cancellationTokenSource?.Cancel();
-            cancellationTokenSource = null;
+            StopOddsHubConnection();
+        }
+
+        private void StopOddsHubConnection()
+        {
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource?.Cancel();
+                cancellationTokenSource = null;
+            }
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)
@@ -188,11 +194,14 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
         private async Task StartOddsHubConnection()
         {
-            Debug.WriteLine("DetailOddsViewModel StartOddsHubConnection");
+            if (cancellationTokenSource == null)
+            {
+                Debug.WriteLine("DetailOddsViewModel StartOddsHubConnection");
 
-            cancellationTokenSource = new CancellationTokenSource();
+                cancellationTokenSource = new CancellationTokenSource();
 
-            await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
+                await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
+            }
         }
 
         [Time]
