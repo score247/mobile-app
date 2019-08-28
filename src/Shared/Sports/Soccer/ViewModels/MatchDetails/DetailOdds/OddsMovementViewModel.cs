@@ -4,12 +4,6 @@
 
 namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
@@ -24,6 +18,12 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     public class OddsMovementViewModel : ViewModelBase, IDisposable
@@ -57,17 +57,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
 
-            OddsMovementItems = new List<BaseMovementItemViewModel>();
-            GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>();
+            OddsMovementItems = new OddsMovementItemViews(CurrentSportName);
+            GroupOddsMovementItems = new List<OddsMovementItemViews> { OddsMovementItems };
         }
 
         public bool IsRefreshing { get; set; }
 
         public bool HasData { get; private set; }
 
-        public List<BaseMovementItemViewModel> OddsMovementItems { get; private set; }
+        public OddsMovementItemViews OddsMovementItems { get; private set; }
 
-        public IList<IGrouping<string, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
+        public List<OddsMovementItemViews> GroupOddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -138,7 +138,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         [Time]
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
-            if (isRefresh || GroupOddsMovementItems == null || !GroupOddsMovementItems.Any())
+            if (isRefresh || !OddsMovementItems.Any())
             {
                 IsLoading = !isRefresh;
                 await GetOddsMovement(isRefresh);
@@ -158,12 +158,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
-            OddsMovementItems = HasData
-                ? new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements
-                    .Select(t => new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver).CreateInstance()))
-                : new List<BaseMovementItemViewModel>();
-
-            GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
+            if (HasData)
+            {
+                OddsMovementItems.AddRange(new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements
+                    .Select(t => new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver).CreateInstance())));
+            }           
         }
 
         [Time]
@@ -199,10 +198,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                             new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
                             .CreateInstance());
 
-                    OddsMovementItems.AddRange(newOddsMovementViews);
-                    OddsMovementItems = OddsMovementItems.OrderByDescending(x => x.UpdateTime).ToList();
-
-                    GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
+                    OddsMovementItems.AddRange(newOddsMovementViews);                    
 
                     await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
                 }
@@ -223,5 +219,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+    }
+
+    public class OddsMovementItemViews : List<BaseMovementItemViewModel>
+    {
+        public OddsMovementItemViews(string heading)
+        {
+            Heading = heading;
+        }
+
+        public string Heading { get; private set; }
+        public List<BaseMovementItemViewModel> Items => this;
     }
 }
