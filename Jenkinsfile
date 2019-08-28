@@ -83,7 +83,7 @@ pipeline{
 
                 stage("Deploy App"){
                     agent {
-                        label 'slaveMAC'
+                        label 'slaveNewMAC'
                     }
                     steps{
                         withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
