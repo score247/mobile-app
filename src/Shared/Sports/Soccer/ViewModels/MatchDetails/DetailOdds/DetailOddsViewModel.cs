@@ -61,7 +61,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, true)));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)));
 
             OnOddsTabClicked = new DelegateAsyncCommand<string>(HandleButtonCommand);
 
@@ -96,7 +96,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
         private Task HandleButtonCommand(string betTypeId)
-        => LoadOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat);
+        => FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat);
 
 
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
@@ -125,7 +125,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             {
                 Debug.WriteLine("DetailOddsViewModel Initialize");
 
-                await LoadData(() => LoadOdds(SelectedBetType, oddsFormat, IsRefreshing));
+                await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, IsRefreshing));
 
                 if (cancellationTokenSource == null)
                 {
@@ -143,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     }));
 
                     await StartOddsHubConnection();
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -159,11 +159,11 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         public override async void OnResume()
         {
             Debug.WriteLine("DetailOddsViewModel OnResume");
-            
+
             if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
             {
                 await LoadOddsByBetType(oddsFormat, isRefresh: true);
-            }            
+            }
         }
 
         public override void OnSleep()
@@ -196,7 +196,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         }
 
         [Time]
-        private async Task LoadOdds(BetType betType, string formatType, bool isRefresh = false)
+        private async Task FirstLoadOrRefreshOdds(BetType betType, string formatType, bool isRefresh = false)
         {
             if (CanLoadOdds(betType, isRefresh))
             {
@@ -281,24 +281,22 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
             }
-                             
-            await UpdateOddsCache(oddsComparisonMessage);            
+
+            await UpdateOddsCache(oddsComparisonMessage);
         }
 
         private async Task UpdateOddsCache(MatchOddsComparisonMessage oddsComparisonMessage)
-        {            
+        {
             if (oddsComparisonMessage.BetTypeOddsList != null &&
-                oddsComparisonMessage.BetTypeOddsList.Any())
+                oddsComparisonMessage.BetTypeOddsList.Any() &&
+                oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
-                if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
-                {
-                    var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
+                var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
 
-                    foreach (var betTypeId in betTypes)
-                    {                        
-                        await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betTypeId, oddsFormat, forceFetchNewData: true);
-                    }
-                }                
+                foreach (var betTypeId in betTypes)
+                {
+                    await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betTypeId, oddsFormat, forceFetchNewData: true);
+                }
             }
         }
 
@@ -313,8 +311,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             }
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
-        }  
-       
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)

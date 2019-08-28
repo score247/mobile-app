@@ -15,6 +15,7 @@
     using Prism.Navigation;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Xunit;
 
@@ -125,12 +126,6 @@
                 .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true)
                 .Returns(CreateMatchOddsMovement());
 
-            var expectedViewModels = new List<BaseMovementItemViewModel>
-            {
-                new BaseMovementItemViewModel(betType, CreateOddsMovement(true), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance(),
-                new BaseMovementItemViewModel(betType, CreateOddsMovement(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
-
             // Act
             viewModel.OnAppearing();
 
@@ -139,8 +134,7 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
-            Assert.Equal(2, viewModel.OddsMovementItems.Count);
-            Assert.True(comparer.Compare(expectedViewModels, viewModel.OddsMovementItems).AreEqual);
+            Assert.Equal(2, viewModel.OddsMovementItems.Count);            
         }
 
         [Fact]
@@ -241,20 +235,14 @@
         public async Task HandleOddsMovementMessage_HasMovementEvents_ShouldAddNew()
         {
             // Arrange
-            var message = CreateMatchOddsMovementMessage();
-
-            oddsService
-                .GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true)
-                .Returns(CreateMatchOddsMovement());
-
-            viewModel.OnAppearing();
+            var message = CreateMatchOddsMovementMessage();            
 
             // Act
             await viewModel.HandleOddsMovementMessage(message);
 
             // Assert
-            await oddsService.Received(2).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
-            Assert.Equal(3, viewModel.OddsMovementItems.Count);
+            await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
+            Assert.Single(viewModel.OddsMovementItems);
         }
 
         private MatchOddsMovementMessage CreateMatchOddsMovementEmptyEventMessage() 
@@ -287,7 +275,7 @@
 
             // Assert            
             await oddsService.Received(1).GetOddsMovement(Arg.Any<string>(), matchId, betType.Value, format, bookmaker.Id, true);
-            Assert.Equal(2, viewModel.OddsMovementItems.Count);
+            Assert.Equal(2, viewModel.OddsMovementItems.Count);            
         }
 
         [Fact]

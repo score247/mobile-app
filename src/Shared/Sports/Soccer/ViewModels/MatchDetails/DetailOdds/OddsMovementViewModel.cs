@@ -5,7 +5,7 @@
 namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 {
     using System;
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading;
@@ -24,13 +24,14 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
+    using PropertyChanged;
     using Xamarin.Forms;
-
+    
     public class OddsMovementViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
 
-        private string matchId;      
+        private string matchId;
         private string oddsFormat;
         private bool disposedValue;
 
@@ -57,17 +58,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
 
-            OddsMovementItems = new List<BaseMovementItemViewModel>();
-            GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>();
+            OddsMovementItems = new OddsMovementItemViews(CurrentSportName);
+            GroupOddsMovementItems = new ObservableCollection<OddsMovementItemViews> { OddsMovementItems };
         }
 
         public bool IsRefreshing { get; set; }
 
         public bool HasData { get; private set; }
 
-        public List<BaseMovementItemViewModel> OddsMovementItems { get; private set; }
+        public OddsMovementItemViews OddsMovementItems { get; private set; }
 
-        public IList<IGrouping<string, BaseMovementItemViewModel>> GroupOddsMovementItems { get; private set; }
+        public ObservableCollection<OddsMovementItemViews> GroupOddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -84,6 +85,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 oddsFormat = parameters["Format"].ToString();
 
                 Title = $"{bookmaker.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
+
+                HeaderTemplate = new BaseMovementHeaderViewModel(betType, true, NavigationService, DependencyResolver).CreateTemplate();
             }
             catch (Exception ex)
             {
@@ -95,6 +98,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         {
             try
             {
+                Debug.WriteLine("OddsMovementViewModel Initialize");
+
                 await FirstLoadOrRefreshOddsMovement();
 
                 hubConnection.On("OddsMovement", (Action<byte, string>)(async (sportId, data) =>
@@ -110,9 +115,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                     await HandleOddsMovementMessage(oddsMovementMessage);
                 }));
 
-                cancellationTokenSource = new CancellationTokenSource();
-
-                await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
+                await StartOddsHubConnection();
             }
             catch (Exception ex)
             {
@@ -120,50 +123,75 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             }
         }
 
+        private async Task StartOddsHubConnection()
+        {
+            if (cancellationTokenSource == null)
+            {
+                Debug.WriteLine("OddsMovementViewModel StartOddsHubConnection");
+
+                cancellationTokenSource = new CancellationTokenSource();
+
+                await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
+            }            
+        }
+
         protected override void Clean()
-        {            
-            cancellationTokenSource?.Cancel();
+        {
+            Debug.WriteLine("OddsMovementViewModel Clean");
+
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+                cancellationTokenSource = null;
+            }            
 
             base.Clean();
         }
 
         public override async void OnResume()
         {
+            Debug.WriteLine("OddsMovementViewModel OnResume");
+
             if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
             {
                 await GetOddsMovement(isRefresh: true);
             }
+
+            await StartOddsHubConnection();
         }
 
         [Time]
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
-            if (isRefresh || GroupOddsMovementItems == null || !GroupOddsMovementItems.Any())
-            {
-                IsLoading = !isRefresh;
-                await GetOddsMovement(isRefresh);
+            IsLoading = !isRefresh;
+            await GetOddsMovement(true);
 
-                IsRefreshing = false;
-                IsLoading = false;
-            }
+            IsRefreshing = false;
+            IsLoading = false;
         }
 
         private async Task GetOddsMovement(bool isRefresh)
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
+            if (forceFetchNew)
+            {
+                OddsMovementItems.Clear();
+            }
+
             var matchOddsMovement = await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew);
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
-            HeaderTemplate = new BaseMovementHeaderViewModel(betType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+            if (HasData)
+            {
+                foreach (var oddsMovement in matchOddsMovement.OddsMovements)
+                {
+                    var viewModel = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver).CreateInstance();
 
-            OddsMovementItems = HasData
-                ? new List<BaseMovementItemViewModel>(matchOddsMovement.OddsMovements
-                    .Select(t => new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver).CreateInstance()))
-                : new List<BaseMovementItemViewModel>();
-
-            GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
+                    OddsMovementItems.Add(viewModel);
+                }
+            }
         }
 
         [Time]
@@ -191,22 +219,23 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 //TODO check existing odds movement
                 var updatedOddsMovements = oddsMovementMessage.OddsEvents
                     .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
-                    .Select(x => x.OddsMovement).ToList();
+                    .Select(x => x.OddsMovement)
+                    .OrderBy(x => x.UpdateTime)
+                    .ToList();
 
                 if (updatedOddsMovements.Count > 0)
                 {
-                    var newOddsMovementViews = updatedOddsMovements.Select(t =>
-                            new BaseMovementItemViewModel(betType, t, NavigationService, DependencyResolver)
-                            .CreateInstance());
+                    foreach (var oddsMovement in updatedOddsMovements)
+                    {
+                        var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
+                            .CreateInstance();
 
-                    OddsMovementItems.AddRange(newOddsMovementViews);
-                    OddsMovementItems = OddsMovementItems.OrderByDescending(x => x.UpdateTime).ToList();
-
-                    GroupOddsMovementItems = new List<IGrouping<string, BaseMovementItemViewModel>>(OddsMovementItems.GroupBy(item => item.CurrentSportName));
+                        OddsMovementItems.Insert(0, newOddsMovementView);
+                    }
 
                     await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
                 }
-            }            
+            }
         }
 
         protected virtual void Dispose(bool disposing)
@@ -223,5 +252,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+    }
+
+    public class OddsMovementItemViews : ObservableCollection<BaseMovementItemViewModel>
+    {
+        public OddsMovementItemViews(string heading)
+        {
+            Heading = heading;
+        }
+
+        public string Heading { get; private set; }
+
+        public ObservableCollection<BaseMovementItemViewModel> ItemViews => this;
     }
 }
