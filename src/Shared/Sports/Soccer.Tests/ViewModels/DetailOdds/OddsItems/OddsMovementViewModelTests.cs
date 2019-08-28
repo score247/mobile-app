@@ -1,8 +1,5 @@
 ﻿namespace Soccer.Tests.ViewModels.DetailOdds.OddsItems
 {
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Threading.Tasks;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -14,6 +11,8 @@
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
     using Prism.Navigation;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class OddsMovementViewModelTests : IClassFixture<ViewModelBaseFixture>
@@ -81,11 +80,7 @@
         {
             // Arrange
             oddsService.GetOddsMovement(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<string>(), Arg.Any<bool>())
-                .Returns(CreateMatchOddsMovement());
-            var expectedViewModels = new ObservableCollection<BaseMovementItemViewModel>
-            {
-                new BaseMovementItemViewModel(BetType.OneXTwo, CreateOddsMovements(), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
-            };
+                .Returns(CreateMatchOddsMovement());          
 
             // Act
             viewModel.OnAppearing();
@@ -95,7 +90,6 @@
             Assert.True(viewModel.IsNotLoading);
             Assert.False(viewModel.IsRefreshing);
             Assert.False(viewModel.IsLoading);
-            //Assert.True(comparer.Compare(expectedViewModels, viewModel).AreEqual);
         }
 
         [Fact]
