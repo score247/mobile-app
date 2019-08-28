@@ -104,50 +104,5 @@
            (
                () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
            );
-
-        [Time]
-        public void InvalidateAllOddsComparisonCache(string matchId)
-        {
-            Debug.WriteLine($"InvalidateAllOddsComparisonCache {matchId}");
-            foreach (var betType in Enumeration.GetAll<BetType>())
-            {
-                Parallel.ForEach(
-                    Enumeration.GetAll<OddsFormat>(),
-                    async (format) =>
-                    {
-                        await InvalidateOddsComparisonCache(matchId, betType.Value, format.DisplayName);
-                    });
-            }
-        }
-
-        public async Task InvalidateOddsComparisonCache(string matchId, byte betTypeId, string formatType)
-        {
-            try
-            {
-                var cacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
-                Debug.WriteLine($"InvalidateOddsComparisonCache {cacheKey}");
-
-                await cacheService.Invalidate(cacheKey);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-        }
-
-        public async Task InvalidateOddsMovementCache(string matchId, byte betTypeId, string formatType, string bookmakerId)
-        {
-            try
-            {
-                var cacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
-                Debug.WriteLine($"InvalidateOddsMovementCache {cacheKey}");
-
-                await cacheService.Invalidate(cacheKey);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-            }
-        }
     }
 }

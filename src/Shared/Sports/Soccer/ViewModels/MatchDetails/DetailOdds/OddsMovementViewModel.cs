@@ -163,7 +163,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
             IsLoading = !isRefresh;
-            await GetOddsMovement(true);
+            await GetOddsMovement(isRefresh);
 
             IsRefreshing = false;
             IsLoading = false;
