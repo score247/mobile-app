@@ -34,12 +34,12 @@
         }
 
         [Fact]
-        public async Task GetOdds_WhenCall_InjectCacheService()
+        public async Task GetOdds_ForceFetchNew_GetAndFetchLatestValue()
         {
             // Arrange
 
             // Act
-            await oddsService.GetOdds("en", "sr:match:1", 1, "decimal");
+            await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: true);
 
             // Assert
             await mockCache.Received(1)
@@ -48,6 +48,22 @@
                     Arg.Any<Func<Task<MatchOdds>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     null);
+        }
+
+        [Fact]
+        public async Task GetOdds_NotForceFetchNew_InjectCacheService()
+        {
+            // Arrange
+
+            // Act
+            await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: false);
+
+            // Assert
+            await mockCache.Received(1)
+                .GetOrFetchValue(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOdds>>>(),
+                    Arg.Any<DateTimeOffset>());
         }
 
         [Fact]
@@ -62,7 +78,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var odds = await oddsService.GetOdds("en", "sr:match:1", 1, "decimal");
+            var odds = await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: true);
 
             // Assert
             mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
@@ -75,11 +91,10 @@
             // Arrange
             var expectedMatchOdds = fixture.Create<MatchOdds>();
 
-            mockCache.GetAndFetchLatestValue(
-                "Odds-sr:match:1-1-decimal",
+            mockCache.GetOrFetchValue(
+                "OddsComparison-sr:match:1-1-decimal",
                 Arg.Any<Func<Task<MatchOdds>>>(),
-                Arg.Any<Func<DateTimeOffset, bool>>(),
-                null).Returns(expectedMatchOdds);
+                Arg.Any<DateTimeOffset>()).Returns(expectedMatchOdds);
 
             // Act
             var actualOdds = await oddsService.GetOdds("en", "sr:match:1", 1, "decimal");
@@ -89,12 +104,12 @@
         }
 
         [Fact]
-        public async Task GetOddsMovement_WhenCall_InjectCacheService()
+        public async Task GetOddsMovement_ForceFetchNew_GetAndFetchLatestValue()
         {
             // Arrange
 
             // Act
-            await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1");
+            await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", forceFetchNewData: true);
 
             // Assert
             await mockCache.Received(1)
@@ -103,6 +118,22 @@
                     Arg.Any<Func<Task<MatchOddsMovement>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
                     null);
+        }
+
+        [Fact]
+        public async Task GetOddsMovement_ForceFetchNew_GetOrFetchValue()
+        {
+            // Arrange
+
+            // Act
+            await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", forceFetchNewData: false);
+
+            // Assert
+            await mockCache.Received(1)
+                .GetOrFetchValue(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
+                    Arg.Any<DateTimeOffset>());
         }
 
         [Fact]
@@ -117,7 +148,7 @@
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
             // Act
-            var odds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1");
+            var odds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", true);
 
             // Assert
             mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
@@ -137,7 +168,7 @@
                 null).Returns(expectedMatchOdds);
 
             // Act
-            var actualOdds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1");
+            var actualOdds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", true);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);

@@ -38,6 +38,7 @@
 
             baseFixture.DependencyResolver.Resolve<IOddsService>("1").Returns(oddsService);
             baseFixture.DependencyResolver.Resolve<ILoggingService>("1").Returns(loggingService);
+            baseFixture.DependencyResolver.Resolve<IHubService>("1").Returns(baseFixture.HubService);
 
             viewModel = new OddsMovementViewModel(
                 baseFixture.NavigationService,
