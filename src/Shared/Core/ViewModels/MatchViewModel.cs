@@ -44,6 +44,11 @@
             Match.MatchResult = matchEvent.MatchResult;
             Match.LatestTimeline = matchEvent.Timeline;
 
+            if (matchEvent.Timeline.Type.IsPeriodStart)
+            {
+                Match.CurrentPeriodStartTime = matchEvent.Timeline.Time;
+            }
+
             BuildDisplayMatchStatus();
         }
 

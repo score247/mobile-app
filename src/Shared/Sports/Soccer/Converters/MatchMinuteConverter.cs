@@ -80,9 +80,9 @@
             }
 
             var currentInjuryTime = matchMinute - periodEndMinute;
-            var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
+            var displayInjuryTime = currentInjuryTime <= 0 ? 1 : currentInjuryTime;
 
-            if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
+            if (currentInjuryTime > annoucedInjuryTime)
             {
                 displayInjuryTime = annoucedInjuryTime;
             }
@@ -92,7 +92,7 @@
 
         private int GetAnnouncedInjuryTime()
         {
-            var cacheKey = "InjuryTimeAnnouced" + match.Id;
+            var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
             var annoucedInjuryTime = Task.Run(() => cachingService.GetValueOrDefaultInMemory(cacheKey, 0)).Result;
 
             return annoucedInjuryTime;
@@ -100,7 +100,7 @@
 
         public void UpdateAnnouncedInjuryTime(int injuryTime)
         {
-            var cacheKey = "InjuryTimeAnnouced" + match.Id;
+            var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
 
             Task.Run(() => cachingService.InsertValueInMemory(cacheKey, injuryTime, InjuryTimeCacheExpiration)).Wait();
         }

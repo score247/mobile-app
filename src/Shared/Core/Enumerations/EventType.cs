@@ -87,5 +87,7 @@
         public bool IsMatchStarted => this == MatchStarted;
 
         public bool IsMatchEnded => this == MatchEnded;
+
+        public bool IsPeriodStart => this == PeriodStart;
     }
 }
