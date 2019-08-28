@@ -55,12 +55,12 @@
         [Time]
         public CachingService(IEssential essential, IBlobCache localMachine = null, IBlobCache userAccount = null, IBlobCache inMemory = null)
         {
-            if (essential ==  null)
+            if (essential == null)
             {
                 throw new ArgumentNullException(nameof(essential));
             }
 
-            
+
             localMachineCache = localMachine ?? BlobCache.LocalMachine;
             localMachineCache.ForcedDateTimeKind = DateTimeKind.Local;
             userAccountCache = userAccount ?? BlobCache.UserAccount;

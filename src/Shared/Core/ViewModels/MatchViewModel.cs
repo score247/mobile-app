@@ -87,5 +87,10 @@
             eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Unsubscribe(BuildMatchTime);
             isSubscribingTimer = false;
         }
+
+        public void Dispose()
+        {
+            UnsubscribeMatchTimeChangeEvent();
+        }
     }
 }

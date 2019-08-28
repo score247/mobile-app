@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
@@ -27,8 +28,6 @@
             { MatchStatus.SecondHalfExtra, 120 }
         };
 
-        private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
-
         private readonly ICachingService cachingService;
         private IMatch match;
 
@@ -48,7 +47,7 @@
                     : this.match.CurrentPeriodStartTime;
 
             // TODO: What if CurrentPeriodStartTime does not have data?
-            var matchMinute = (int)(periodStartMinute + (DateTime.Now - periodStartTime).TotalMinutes);
+            var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
             var lastTimeline = match.LatestTimeline;
 
             if (lastTimeline?.Type == EventType.InjuryTimeShown || GetAnnouncedInjuryTime() > 0)
@@ -66,6 +65,7 @@
                 matchMinute = periodStartMinute;
             }
 
+            Debug.WriteLine($"{match.Id}-{matchMinute}");
             return $"{matchMinute}'";
         }
 
@@ -87,13 +87,16 @@
                 displayInjuryTime = annoucedInjuryTime;
             }
 
+            Debug.WriteLine($"{match.Id}-{periodEndMinute}+{displayInjuryTime}'");
             return $"{periodEndMinute}+{displayInjuryTime}'";
         }
 
         private int GetAnnouncedInjuryTime()
         {
             var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
-            var annoucedInjuryTime = Task.Run(() => cachingService.GetValueOrDefaultInMemory(cacheKey, 0)).Result;
+
+            // TODO: Move InjuryTimeAnnouced to backend for storing
+            var annoucedInjuryTime = Task.Run(() => cachingService.GetValueOrDefaultFromUserAccount(cacheKey, 0)).Result;
 
             return annoucedInjuryTime;
         }
@@ -102,7 +105,7 @@
         {
             var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
 
-            Task.Run(() => cachingService.InsertValueInMemory(cacheKey, injuryTime, InjuryTimeCacheExpiration)).Wait();
+            Task.Run(() => cachingService.AddOrUpdateValueToUserAccount(cacheKey, injuryTime)).Wait();
         }
     }
 }

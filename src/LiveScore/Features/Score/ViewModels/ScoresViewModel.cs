@@ -10,12 +10,10 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
 using LiveScore.Core;
 using LiveScore.Core.Controls.DateBar.Events;
-using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Commands;
 using Prism.Events;
@@ -35,7 +33,6 @@ namespace LiveScore.Score.ViewModels
         private readonly HubConnection teamHubConnection;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
-        private readonly IMatchStatusConverter matchStatusConverter;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -48,8 +45,6 @@ namespace LiveScore.Score.ViewModels
             SelectedDate = DateTime.Today;
 
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
-
             var hubService = DependencyResolver.Resolve<IHubService>(CurrentSportId.ToString());
             matchHubConnection = hubService.BuildMatchEventHubConnection();
             teamHubConnection = hubService.BuildTeamStatisticHubConnection();
@@ -192,6 +187,13 @@ namespace LiveScore.Score.ViewModels
 
         private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
+            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event 
+            if (MatchItemsSource?.Any() == true)
+            {
+                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.MatchResult.EventStatus.IsLive);
+                liveMatchViewModels.ToList().ForEach(m => m.Dispose());
+            }
+
             var matchItemViewModels = matches.Select(
                     match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
 

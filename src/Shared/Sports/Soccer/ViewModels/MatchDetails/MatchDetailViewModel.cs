@@ -20,6 +20,7 @@ namespace LiveScore.Soccer.ViewModels
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.ViewModels.DetailH2H;
     using LiveScore.Soccer.ViewModels.DetailLineups;
     using LiveScore.Soccer.ViewModels.DetailOdds;
@@ -109,7 +110,8 @@ namespace LiveScore.Soccer.ViewModels
                 Title = tabItemViewModels.First().Key.DisplayName;
                 CurrentTabView = tabItemViewModels.First().Key;
 
-                BuildGeneralInfo(match);
+                BuildViewModel(match);
+                BuildGeneralInfo();
             }
         }
 
@@ -164,7 +166,7 @@ namespace LiveScore.Soccer.ViewModels
             foreach (var tab in tabItemViewModels)
             {
                 tab.Value.OnDisappearing();
-            }            
+            }
         }
 
         public override void Destroy()
@@ -214,10 +216,9 @@ namespace LiveScore.Soccer.ViewModels
                 return;
             }
 
-            match.MatchResult = matchEvent.MatchResult;
-            match.LatestTimeline = matchEvent.Timeline;
+            MatchViewModel.OnReceivedMatchEvent(matchEvent);
 
-            BuildGeneralInfo(match);
+            BuildGeneralInfo();
         }
 
         protected internal void OnReceivedTeamStatistic(byte sportId, string matchId, bool isHome, ITeamStatistic teamStats)
@@ -230,17 +231,16 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
-        private void BuildGeneralInfo(IMatch match)
+        private void BuildGeneralInfo()
         {
-            BuildViewModel(match);
+            BuildScoreAndEventDate();
 
-            BuildScoreAndEventDate(match);
-
-            BuildSecondLeg(match);
+            BuildSecondLeg();
         }
 
-        private void BuildSecondLeg(IMatch match)
+        private void BuildSecondLeg()
         {
+            var match = MatchViewModel.Match;
             var winnerId = match.MatchResult?.AggregateWinnerId;
 
             if (!string.IsNullOrEmpty(winnerId) && match.MatchResult.EventStatus.IsClosed)
@@ -249,9 +249,9 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private void BuildScoreAndEventDate(IMatch match)
+        private void BuildScoreAndEventDate()
         {
-            DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
+            DisplayEventDate = MatchViewModel.Match.EventDate.ToLocalShortDayMonth();
         }
 
         private void BuildViewModel(IMatch match)
