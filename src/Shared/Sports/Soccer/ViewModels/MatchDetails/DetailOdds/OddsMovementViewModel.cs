@@ -24,9 +24,8 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
-    using PropertyChanged;
     using Xamarin.Forms;
-    
+
     public class OddsMovementViewModel : ViewModelBase, IDisposable
     {
         private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
@@ -58,17 +57,17 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
 
-            OddsMovementItems = new OddsMovementItemViews(CurrentSportName);
-            GroupOddsMovementItems = new ObservableCollection<OddsMovementItemViews> { OddsMovementItems };
+            OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
+            GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
         }
 
         public bool IsRefreshing { get; set; }
 
         public bool HasData { get; private set; }
 
-        public OddsMovementItemViews OddsMovementItems { get; private set; }
+        public OddsMovementObservableCollection OddsMovementItems { get; private set; }
 
-        public ObservableCollection<OddsMovementItemViews> GroupOddsMovementItems { get; private set; }
+        public ObservableCollection<OddsMovementObservableCollection> GroupOddsMovementItems { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -252,17 +251,5 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             Dispose(true);
             GC.SuppressFinalize(this);
         }
-    }
-
-    public class OddsMovementItemViews : ObservableCollection<BaseMovementItemViewModel>
-    {
-        public OddsMovementItemViews(string heading)
-        {
-            Heading = heading;
-        }
-
-        public string Heading { get; private set; }
-
-        public ObservableCollection<BaseMovementItemViewModel> ItemViews => this;
     }
 }
