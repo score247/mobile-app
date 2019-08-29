@@ -25,17 +25,17 @@
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(currentSportId.ToString());
             eventAggregator = dependencyResolver.Resolve<IEventAggregator>();
 
-            Match = match;
-            BuildDisplayMatchStatus();
+            BuildMatch(match);
         }
 
         public IMatch Match { get; private set; }
 
         public string DisplayMatchStatus { get; private set; }
 
-        public void UpdateMatch(IMatch match)
+        public void BuildMatch(IMatch match)
         {
             Match = match;
+            BuildDisplayMatchStatus();
         }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)

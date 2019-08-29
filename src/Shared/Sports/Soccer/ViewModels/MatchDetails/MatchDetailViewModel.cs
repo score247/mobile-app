@@ -135,7 +135,7 @@ namespace LiveScore.Soccer.ViewModels
             matchService.SubscribeTeamStatistic(teamHubConnection, OnReceivedTeamStatistic);
 
             var match = await matchService.GetMatch(MatchViewModel.Match.Id, CurrentLanguage, true);
-            MatchViewModel.UpdateMatch(match);
+            MatchViewModel.BuildMatch(match);
 
             Device.BeginInvokeOnMainThread(async () =>
                 await teamHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
