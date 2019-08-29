@@ -183,7 +183,8 @@ namespace LiveScore.Score.ViewModels
 
             if (IsLoading)
             {
-                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(null);
+                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                        new List<IGrouping<GroupMatchViewModel, MatchViewModel>>());
             }
 
             var matches = await matchService.GetMatches(
