@@ -11,19 +11,17 @@
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel
     {
+        private bool isSubscribingTimer;
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
         private readonly IEventAggregator eventAggregator;
-        private bool isSubscribingTimer;
 
         public MatchViewModel(
-            IMatch match,
-            IDependencyResolver dependencyResolver,
-            byte currentSportId)
+            IMatch match, IMatchStatusConverter matchStatusConverter, IMatchMinuteConverter matchMinuteConverter, IEventAggregator eventAggregator)
         {
-            matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(currentSportId.ToString());
-            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(currentSportId.ToString());
-            eventAggregator = dependencyResolver.Resolve<IEventAggregator>();
+            this.matchStatusConverter = matchStatusConverter;
+            this.matchMinuteConverter = matchMinuteConverter;
+            this.eventAggregator = eventAggregator;
 
             BuildMatch(match);
         }

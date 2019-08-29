@@ -6,6 +6,7 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
@@ -41,6 +42,8 @@ namespace LiveScore.Soccer.ViewModels
 {
     public class MatchDetailViewModel : ViewModelBase
     {
+        private readonly IMatchStatusConverter matchStatusConverter;
+        private readonly IMatchMinuteConverter matchMinuteConverter;
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
 
@@ -50,6 +53,8 @@ namespace LiveScore.Soccer.ViewModels
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
+            matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
+            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -185,7 +190,7 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private void BuildViewModel(IMatch match) => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
+        private void BuildViewModel(IMatch match) => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
 
         private void BuildTabItems(IMatch match)
         {

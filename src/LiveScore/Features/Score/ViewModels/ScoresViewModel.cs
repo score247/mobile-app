@@ -1,31 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using LiveScore.Common.Extensions;
-using LiveScore.Common.Helpers;
-using LiveScore.Core;
-using LiveScore.Core.Controls.DateBar.Events;
-using LiveScore.Core.Models.Matches;
-using LiveScore.Core.PubSubEvents.Matches;
-using LiveScore.Core.PubSubEvents.Teams;
-using LiveScore.Core.Services;
-using LiveScore.Core.ViewModels;
-using MethodTimer;
-using Prism.Events;
-using Prism.Navigation;
-using Xamarin.Forms;
-
-[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Score.ViewModels
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using LiveScore.Common.Extensions;
+    using LiveScore.Common.Helpers;
+    using LiveScore.Core;
+    using LiveScore.Core.Controls.DateBar.Events;
+    using LiveScore.Core.Converters;
+    using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.PubSubEvents.Matches;
+    using LiveScore.Core.PubSubEvents.Teams;
+    using LiveScore.Core.Services;
+    using LiveScore.Core.ViewModels;
+    using MethodTimer;
+    using Prism.Events;
+    using Prism.Navigation;
+    using Xamarin.Forms;
+
     public class ScoresViewModel : ViewModelBase
     {
         private readonly IMatchService matchService;
+        private readonly IMatchStatusConverter matchStatusConverter;
+        private readonly IMatchMinuteConverter matchMinuteConverter;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
 
@@ -36,9 +39,10 @@ namespace LiveScore.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             Profiler.Start("ScoresViewModel.LoadMatches.Home");
-
             SelectedDate = DateTime.Today;
 
+            matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
+            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
@@ -170,11 +174,16 @@ namespace LiveScore.Score.ViewModels
             DateRange dateRange,
             bool forceFetchNewData = false)
         {
+            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
+            if (MatchItemsSource?.Any() == true)
+            {
+                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.EventStatus.IsLive);
+                liveMatchViewModels.ToList().ForEach(m => m.Dispose());
+            }
+
             if (IsLoading)
             {
-                MatchItemsSource
-                    = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                        new List<IGrouping<GroupMatchViewModel, MatchViewModel>>());
+                MatchItemsSource = null;
             }
 
             var matches = await matchService.GetMatches(
@@ -190,22 +199,14 @@ namespace LiveScore.Score.ViewModels
             Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
         }
 
+        [Time]
         private ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
+            var matchItemViewModels = matches.Select(match
+                    => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
-            if (MatchItemsSource?.Any() == true)
-            {
-                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.EventStatus.IsLive);
-                liveMatchViewModels.ToList().ForEach(m => m.Dispose());
-            }
-
-            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItemViewModels.GroupBy(item
-                => new GroupMatchViewModel(item.Match.LeagueId,
-                                           item.Match.LeagueName,
-                                           item.Match.EventDate)).ToList());
+            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItemViewModels.GroupBy(item =>
+                  new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate)).ToList());
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
