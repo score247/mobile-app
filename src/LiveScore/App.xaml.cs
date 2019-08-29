@@ -109,23 +109,6 @@ namespace LiveScore
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
         }
 
-        protected override void OnSleep()
-        {
-            Debug.WriteLine("OnSleep");
-
-            var localStorage = Container.Resolve<ICachingService>();
-            localStorage.FlushAll();
-
-            base.OnSleep();
-        }
-
-        protected override void OnResume()
-        {
-            Debug.WriteLine("OnResume");
-
-            base.OnResume();
-        }
-
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
@@ -182,26 +165,23 @@ namespace LiveScore
             Debug.WriteLine("OnSleep");
 
             var localStorage = Container.Resolve<ICachingService>();
-            localStorage.Shutdown();
+            localStorage.FlushAll();
 
             base.OnSleep();
         }
 
         protected override async void OnResume()
-            {
-                var eventAggregator = Container.Resolve<IEventAggregator>();
+        {
+            Debug.WriteLine("OnResume");
 
-            // TODO: Ricky: temporary comment here
             foreach (var hubService in hubServices)
             {
                 await hubService.Reconnect();
             }
 
-                return true;
-            });
+            base.OnResume();
         }
-        
-        
+
         private void StartGlobalTimer()
         {
             Device.StartTimer(TimeSpan.FromMinutes(1), () =>

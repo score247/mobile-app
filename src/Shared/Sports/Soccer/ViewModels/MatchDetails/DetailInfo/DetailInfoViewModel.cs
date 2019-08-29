@@ -59,17 +59,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        public override void OnDisappearing()
-        {
-            cancellationTokenSource?.Cancel();
-        }
-
-        protected override async void Initialize()
+        protected override async void OnInitialized()
         {
             try
             {
-                cancellationTokenSource = new CancellationTokenSource();
-
                 // TODO: Check when need to reload data later
                 await LoadData(() => LoadMatchDetail(matchId, true));
 
@@ -131,7 +124,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                     .Distinct().ToList() ?? new List<TimelineEvent>();
 
                 InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(soccerTimelines.Select(t =>
-                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+                    new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
                     .CreateInstance()));
             }
         }

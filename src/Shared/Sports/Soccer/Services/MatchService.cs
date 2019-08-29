@@ -110,6 +110,8 @@
                         () => GetMatchFromApi(matchId, language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short))
                     .ConfigureAwait(false);
+
+                return match;
             }
             catch (Exception ex)
             {

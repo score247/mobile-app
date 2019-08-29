@@ -39,7 +39,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         private BetType betType;
         private CancellationTokenSource cancellationTokenSource;
 
-
         private readonly IOddsService oddsService;
         private readonly HubConnection hubConnection;
 
@@ -49,10 +48,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            hubConnection = DependencyResolver
-                .Resolve<IHubService>(CurrentSportId.ToString())
-                .BuildOddsEventHubConnection();
-
             hubConnection.On("OddsMovement", OddsMovementMessageHandler());
 
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
@@ -91,6 +86,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             };
         }
 
+        public override void Initialize(INavigationParameters parameters)
         {
             try
             {
@@ -135,10 +131,10 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 cancellationTokenSource = new CancellationTokenSource();
 
                 await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
-            }            
+            }
         }
 
-        protected override void Clean()
+        protected override void OnDisposed()
         {
             Debug.WriteLine("OddsMovementViewModel Clean");
 
@@ -148,8 +144,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             {
                 OddsMovementItems.Clear();
             }
-
-            base.Clean();
         }
 
         private void StopOddsHubConnection()

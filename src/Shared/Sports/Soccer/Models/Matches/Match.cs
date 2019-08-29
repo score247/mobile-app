@@ -14,12 +14,12 @@
     {
         private const int NumberOfFullTimePeriodsResult = 2;
 
-        public DateTimeOffset CurrentPeriodStartTime { get; set; }
-
+#pragma warning disable S107 // Methods should not have too many parameters
 
         public Match(
             string id,
             DateTimeOffset eventDate,
+            DateTimeOffset currentPeriodStartTime,
             string leagueId,
             string leagueName,
             string homeTeamId,
@@ -43,9 +43,11 @@
             byte injuryTimeAnnounced,
             EventType lastTimelineType,
             IEnumerable<MatchPeriod> matchPeriods)
+#pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
             EventDate = eventDate;
+            CurrentPeriodStartTime = currentPeriodStartTime;
             LeagueId = leagueId;
             LeagueName = leagueName;
             HomeTeamId = homeTeamId;
@@ -71,14 +73,14 @@
             MatchPeriods = matchPeriods;
         }
 
-#pragma warning restore S107 // Methods should not have too many parameters
-
         /// <summary>
         /// Keep private setter for Json Serializer
         /// </summary>
         public string Id { get; private set; }
 
         public DateTimeOffset EventDate { get; private set; }
+
+        public DateTimeOffset CurrentPeriodStartTime { get; private set; }
 
         public string LeagueId { get; private set; }
 
@@ -127,6 +129,11 @@
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+
+        public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)
+        {
+            CurrentPeriodStartTime = currentPeriodStartTime;
+        }
 
         public void UpdateResult(IMatchResult matchResult)
         {

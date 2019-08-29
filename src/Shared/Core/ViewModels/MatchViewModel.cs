@@ -1,36 +1,100 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
+    using System.Linq;
     using LiveScore.Core.Converters;
+    using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
+    using Prism.Events;
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel
     {
         private readonly IMatchStatusConverter matchStatusConverter;
+        private readonly IMatchMinuteConverter matchMinuteConverter;
+        private readonly IEventAggregator eventAggregator;
+        private bool isSubscribingTimer;
 
-        public MatchViewModel(IMatch match, IDependencyResolver dependencyResolver, byte currentSportId)
+        public MatchViewModel(
+            IMatch match,
+            IDependencyResolver dependencyResolver,
+            byte currentSportId)
         {
-            Match = match;
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(currentSportId.ToString());
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(currentSportId.ToString());
+            eventAggregator = dependencyResolver.Resolve<IEventAggregator>();
+
+            BuildMatch(match);
         }
 
-        public IMatch Match { get; protected set; }
+        public IMatch Match { get; private set; }
 
         public string DisplayMatchStatus { get; private set; }
 
-        public void OnReceivedMatchEvent(IMatchEvent matchEvent)
+        public void BuildMatch(IMatch match)
         {
-            Match.UpdateResult(matchEvent.MatchResult);
-            Match.UpdateLastTimeline(matchEvent.Timeline);
-            DisplayMatchStatus = matchStatusConverter.BuildStatus(Match);
+            Match = match;
+            BuildDisplayMatchStatus();
         }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
             Match.UpdateTeamStatistic(teamStatistic, isHome);
+        }
+
+        public void OnReceivedMatchEvent(IMatchEvent matchEvent)
+        {
+            Match.UpdateLastTimeline(matchEvent.Timeline);
+            Match.UpdateResult(matchEvent.MatchResult);
+
+            if (matchEvent.Timeline.Type.IsPeriodStart)
+            {
+                Match.UpdateCurrentPeriodStartTime(matchEvent.Timeline.Time);
+            }
+
+            BuildDisplayMatchStatus();
+        }
+
+        private void BuildDisplayMatchStatus()
+        {
+            var matchStatus = matchStatusConverter.BuildStatus(Match);
+
+            if (!string.IsNullOrEmpty(matchStatus))
+            {
+                DisplayMatchStatus = matchStatus;
+                UnsubscribeMatchTimeChangeEvent();
+            }
+            else
+            {
+                BuildMatchTime();
+                SubscribeMatchTimeChangeEvent();
+            }
+        }
+
+        private void BuildMatchTime()
+        {
+            DisplayMatchStatus = matchMinuteConverter.BuildMatchMinute(Match);
+        }
+
+        private void SubscribeMatchTimeChangeEvent()
+        {
+            if (Match.EventStatus.IsLive && !isSubscribingTimer)
+            {
+                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Subscribe(BuildMatchTime);
+                isSubscribingTimer = true;
+            }
+        }
+
+        private void UnsubscribeMatchTimeChangeEvent()
+        {
+            eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Unsubscribe(BuildMatchTime);
+            isSubscribingTimer = false;
+        }
+
+        public void Dispose()
+        {
+            UnsubscribeMatchTimeChangeEvent();
         }
     }
 }

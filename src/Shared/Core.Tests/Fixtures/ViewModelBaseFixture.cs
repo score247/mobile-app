@@ -30,7 +30,7 @@
             HubService = Substitute.For<IHubService>();
             HubConnection = Substitute.For<FakeHubConnection>();
             //HubService.BuildMatchEventHubConnection().Returns(HubConnection);
-            HubService.BuildOddsEventHubConnection().Returns(HubConnection);
+            //HubService.BuildOddsEventHubConnection().Returns(HubConnection);
         }
 
         public IDependencyResolver DependencyResolver { get; }

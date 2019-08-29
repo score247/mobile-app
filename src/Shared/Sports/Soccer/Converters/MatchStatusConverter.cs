@@ -52,7 +52,7 @@
 
             if (soccerMatch.EventStatus.IsLive)
             {
-                return BuildMatchStatus(match);
+                return BuildMatchStatus(soccerMatch);
             }
 
             if (soccerMatch.EventStatus.IsClosed)

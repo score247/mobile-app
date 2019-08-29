@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-    using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using LiveScore.Common.Extensions;
@@ -11,7 +10,6 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.PubSubEvents.Matches;
-    using LiveScore.Soccer.Models.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Models.Matches;
@@ -67,21 +65,13 @@ namespace LiveScore.Soccer.ViewModels
             if (parameters?["Match"] is IMatch match)
             {
                 BuildTabItems(match);
-                    {TabFunction.Odds, new DetailOddsViewModel(match.Id, match.MatchResult.EventStatus, NavigationService, DependencyResolver, new OddsTemplate()) },
-                InitViewModel(match);
-                BuildGeneralInfo();
+                BuildGeneralInfo(match);
             }
         }
 
-            cancellationTokenSource?.Cancel();
-        protected override async void Initialize()
-            var match = await matchService.GetMatch(MatchViewModel.Match.Id, CurrentLanguage, true);
-            MatchViewModel.BuildMatch(match);
-
         public override void OnResume()
         {
-            Debug.WriteLine("MatchDetailViewModel OnResume");
-
+            tabItemViewModels[selectedTabItem].OnResume();
 
             base.OnResume();
         }
@@ -113,6 +103,28 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
+        protected override void OnInitialized()
+        {
+            TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
+            // TODO
+            //var match = await matchService.GetMatch(MatchViewModel.Match.Id, CurrentLanguage, true);
+            //MatchViewModel.BuildMatch(match);
+
+            EventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Subscribe(OnReceivedTeamStatistic, true);
+
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                Title = TabItems[index].Title;
+                selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
+            });
+        }
+
         protected override void OnDisposed()
         {
             base.OnDisposed();
@@ -137,9 +149,9 @@ namespace LiveScore.Soccer.ViewModels
                 return;
             }
 
-            MatchViewModel.OnReceivedMatchEvent(matchEvent);
+            MatchViewModel.OnReceivedMatchEvent(payload.MatchEvent);
 
-            BuildGeneralInfo();
+            BuildGeneralInfo(match);
         }
 
         protected internal void OnReceivedTeamStatistic(ITeamStatisticsMessage payload)
@@ -152,40 +164,19 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
         }
 
-        private void BuildTabFunctions()
+        private void BuildGeneralInfo(IMatch match)
         {
-            TabViews = new ObservableCollection<TabItemViewModelBase>();
-            foreach (var tab in TabFunctions)
-            {
-                var tabFunction = Enumeration.FromDisplayName<TabFunction>(tab.Abbreviation);
-                if (tabItemViewModels.ContainsKey(tabFunction))
-                {
-                    var tabModel = tabItemViewModels[tabFunction];
-                    tabModel.Title = tab.Name;
-                    tabModel.TabHeaderTitle = tab.Abbreviation;
+            BuildViewModel(match);
+            BuildSecondLeg(match);
 
-                    TabViews.Add(tabModel);
-                }
-            }
-
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                Title = TabViews[index].Title;
-                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
-            });
+            DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
-
-        private void BuildGeneralInfo()
+        private void BuildSecondLeg(IMatch match)
         {
-            BuildScoreAndEventDate();
-
-            BuildSecondLeg();
-        }
-
-        private void BuildSecondLeg()
-        {
-            var match = MatchViewModel.Match;
+            if (match is Match soccerMatch)
+            {
+                var winnerId = soccerMatch.AggregateWinnerId;
 
                 if (!string.IsNullOrWhiteSpace(winnerId) && soccerMatch.EventStatus.IsClosed)
                 {
@@ -194,13 +185,13 @@ namespace LiveScore.Soccer.ViewModels
             }
         }
 
-        private void BuildScoreAndEventDate()
+        private void BuildViewModel(IMatch match) => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
 
         private void BuildTabItems(IMatch match)
         {
-            DisplayEventDate = MatchViewModel.Match.EventDate.ToLocalShortDayMonth();
+            tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
-                {MatchDetailFunction.Odds, new DetailOddsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
+                {MatchDetailFunction.Odds, new DetailOddsViewModel(match.Id, match.EventStatus,  NavigationService, DependencyResolver, new OddsTemplate()) },
                 {MatchDetailFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()) },
                 {MatchDetailFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
                 {MatchDetailFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
@@ -211,8 +202,8 @@ namespace LiveScore.Soccer.ViewModels
                 {MatchDetailFunction.Tracker, new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
             };
 
-        private void InitViewModel(IMatch match)
-            => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
+            Title = tabItemViewModels.First().Key.DisplayName;
+            selectedTabItem = tabItemViewModels.First().Key;
             TabItems = new List<TabItemViewModel>();
 
             // Temporary show all functions

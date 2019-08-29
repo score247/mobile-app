@@ -8,6 +8,7 @@
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Soccer.Models.Matches;
 
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteConverter
@@ -29,7 +30,7 @@
         };
 
         private readonly ICachingService cachingService;
-        private IMatch match;
+        private Match soccerMatch;
 
         public MatchMinuteConverter(ICachingService cachingService)
         {
@@ -38,21 +39,20 @@
 
         public string BuildMatchMinute(IMatch match)
         {
-            this.match = match;
-            PeriodStartMinute.TryGetValue(match.MatchResult?.MatchStatus, out int periodStartMinute);
-            PeriodEndMinute.TryGetValue(match.MatchResult?.MatchStatus, out int periodEndMinute);
+            soccerMatch = match as Match;
+            PeriodStartMinute.TryGetValue(match?.MatchStatus, out int periodStartMinute);
+            PeriodEndMinute.TryGetValue(match?.MatchStatus, out int periodEndMinute);
 
-            var periodStartTime = this.match.CurrentPeriodStartTime == DateTimeOffset.MinValue
-                    ? this.match.EventDate
-                    : this.match.CurrentPeriodStartTime;
+            var periodStartTime = soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
+                    ? soccerMatch.EventDate
+                    : soccerMatch.CurrentPeriodStartTime;
 
             // TODO: What if CurrentPeriodStartTime does not have data?
             var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
-            var lastTimeline = match.LatestTimeline;
 
-            if (lastTimeline?.Type == EventType.InjuryTimeShown || GetAnnouncedInjuryTime() > 0)
+            if (soccerMatch.LastTimelineType.IsInjuryTimeShown || GetAnnouncedInjuryTime() > 0)
             {
-                return BuildMinuteWithInjuryTime(lastTimeline, matchMinute, periodEndMinute);
+                return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute);
             }
 
             if (matchMinute >= periodEndMinute)
@@ -69,14 +69,14 @@
             return $"{matchMinute}'";
         }
 
-        private string BuildMinuteWithInjuryTime(ITimelineEvent timeline, int matchMinute, int periodEndMinute)
+        private string BuildMinuteWithInjuryTime(int matchMinute, int periodEndMinute)
         {
             var annoucedInjuryTime = GetAnnouncedInjuryTime();
 
-            if (timeline.InjuryTimeAnnounced > 0)
+            if (soccerMatch.InjuryTimeAnnounced > 0)
             {
-                UpdateAnnouncedInjuryTime(timeline.InjuryTimeAnnounced);
-                annoucedInjuryTime = timeline.InjuryTimeAnnounced;
+                UpdateAnnouncedInjuryTime(soccerMatch.InjuryTimeAnnounced);
+                annoucedInjuryTime = soccerMatch.InjuryTimeAnnounced;
             }
 
             var currentInjuryTime = matchMinute - periodEndMinute;
@@ -87,13 +87,13 @@
                 displayInjuryTime = annoucedInjuryTime;
             }
 
-            Debug.WriteLine($"{match.Id}-{periodEndMinute}+{displayInjuryTime}'");
+            Debug.WriteLine($"{soccerMatch.Id}-{periodEndMinute}+{displayInjuryTime}'");
             return $"{periodEndMinute}+{displayInjuryTime}'";
         }
 
         private int GetAnnouncedInjuryTime()
         {
-            var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
+            var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
 
             // TODO: Should move InjuryTimeAnnouced to backend for storing?
             var annoucedInjuryTime = Task.Run(() => cachingService.GetOrCreateLocalMachine(cacheKey, 0)).Result;
@@ -103,7 +103,7 @@
 
         public void UpdateAnnouncedInjuryTime(int injuryTime)
         {
-            var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
+            var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
 
             Task.Run(() => cachingService.InsertLocalMachine(cacheKey, injuryTime)).Wait();
         }

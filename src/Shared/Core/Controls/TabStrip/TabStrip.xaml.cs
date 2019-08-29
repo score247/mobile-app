@@ -21,7 +21,6 @@
             TabHeader.BindingContext = currentInstance;
             TabContent.BindingContext = currentInstance;
 
-            TabContent.ItemBeforeAppearing += TabContent_ItemBeforeAppearing;
             TabContent.ItemAppearing += TabContent_ItemAppearing;
             TabContent.ItemDisappearing += TabContent_ItemDisappearing;
         }

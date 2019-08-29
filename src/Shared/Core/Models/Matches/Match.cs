@@ -10,8 +10,8 @@
         string Id { get; }
 
         DateTimeOffset EventDate { get; }
-        DateTimeOffset CurrentPeriodStartTime { get; set; }
 
+        DateTimeOffset CurrentPeriodStartTime { get; }
 
         string LeagueId { get; }
 
@@ -22,6 +22,8 @@
         MatchStatus EventStatus { get; }
 
         IEnumerable<MatchPeriod> MatchPeriods { get; }
+
+        void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);
 
