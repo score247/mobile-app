@@ -177,14 +177,13 @@ namespace LiveScore.Score.ViewModels
             // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
             if (MatchItemsSource?.Any() == true)
             {
-                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.EventStatus.IsLive);
+                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.EventStatus?.IsLive == true);
                 liveMatchViewModels.ToList().ForEach(m => m.Dispose());
             }
 
             if (IsLoading)
             {
-                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                        new List<IGrouping<GroupMatchViewModel, MatchViewModel>>());
+                MatchItemsSource = null;
             }
 
             var matches = await matchService.GetMatches(

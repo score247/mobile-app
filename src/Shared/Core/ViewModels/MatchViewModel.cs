@@ -33,7 +33,7 @@
         public void BuildMatch(IMatch match)
         {
             Match = match;
-            //BuildDisplayMatchStatus();
+            BuildDisplayMatchStatus();
         }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
