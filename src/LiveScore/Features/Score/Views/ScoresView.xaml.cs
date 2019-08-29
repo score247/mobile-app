@@ -22,11 +22,6 @@
 #if DEBUG
             if (e.ItemIndex == LastMatchItemIndexShowedOnTheScreen)
             {
-                Profiler.Stop("ScoresViewModel.LoadMatches.Home");
-                Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
-                Profiler.Stop("ScoresViewModel.LoadMatches.SelectDate");
-                Profiler.Stop("ScoresViewModel.OnNavigatedTo");
-                Profiler.Stop("ScoresViewModel.OnResume");
             }
 #endif
         }

@@ -183,7 +183,7 @@ namespace LiveScore.Score.ViewModels
 
             if (IsLoading)
             {
-                MatchItemsSource = null;
+                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(null);
             }
 
             var matches = await matchService.GetMatches(
@@ -196,6 +196,11 @@ namespace LiveScore.Score.ViewModels
             selectedDateRange = dateRange;
             IsRefreshing = false;
 
+            Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
+            Profiler.Stop("ScoresViewModel.LoadMatches.SelectDate");
+            Profiler.Stop("ScoresViewModel.LoadMatches.Home");
+            Profiler.Stop("ScoresViewModel.OnNavigatedTo");
+            Profiler.Stop("ScoresViewModel.OnResume");
             Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
         }
 
