@@ -10,6 +10,8 @@
         string Id { get; }
 
         DateTimeOffset EventDate { get; }
+        DateTimeOffset CurrentPeriodStartTime { get; set; }
+
 
         string LeagueId { get; }
 

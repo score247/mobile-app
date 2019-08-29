@@ -5,11 +5,11 @@
     using LiveScore.Core.Models.Odds;
     using Newtonsoft.Json;
 
-    public class MatchOddsChangedMessage : IMatchOddsChangedMessage
+    public class MatchOddsMovementMessage : IOddsMovementMessage
     {
-        public string MatchId { get; }
+        public string MatchId { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<IOddsEvent>>))]
-        public IEnumerable<IOddsEvent> OddsEvents { get; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<OddsMovementEvent>>))]
+        public IEnumerable<IOddsMovementEvent> OddsEvents { get; set; }
     }
 }

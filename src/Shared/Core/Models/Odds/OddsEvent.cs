@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Core.Models.Odds
 {
-    public interface IOddsEvent
+    public interface IOddsMovementEvent
     {
-        int BetTypeId { get; }
+        byte BetTypeId { get; }
 
         Bookmaker Bookmaker { get; }
 

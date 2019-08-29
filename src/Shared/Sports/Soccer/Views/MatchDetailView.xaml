@@ -45,7 +45,7 @@
                             Grid.Row="0"
                             Grid.Column="0"
                             AutomationId="LeagueFlag"
-                            Source="images/flag_league/flag_england.png"
+                                Source="images/flag_league/default_flag.png"
                             Style="{StaticResource LeagueFlag}" />
                         <Label
                             Grid.Row="0"

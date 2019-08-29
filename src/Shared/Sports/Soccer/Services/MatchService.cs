@@ -73,7 +73,7 @@
                     || dateTime.Date == DateTimeExtension.Yesterday().Date
                     || forceFetchNewData)
                 {
-                    return await cacheService.GetAndFetchLatestValue(
+                    return await cacheService.GetAndFetchLatestLocalMachine(
                         cacheKey,
                         () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
@@ -82,7 +82,7 @@
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short)).ConfigureAwait(false);
                 }
 
-                return await cacheService.GetOrFetchValue(
+                return await cacheService.GetOrFetchLocalMachine(
                        cacheKey,
                        () => GetMatchesFromApi(
                            dateTime.BeginningOfDay().ToApiFormat(),
@@ -105,7 +105,7 @@
             {
                 var cacheKey = $"Match:{matchId}:{language}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                var match = await cacheService.GetAndFetchLatestLocalMachine(
                         cacheKey,
                         () => GetMatchFromApi(matchId, language.DisplayName),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short))

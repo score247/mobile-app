@@ -32,7 +32,13 @@
                 <ColumnDefinition Width="256" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
+  		<FlexLayout Grid.Row="0" Grid.Column="0" Style="{StaticResource SubTabBox}">
+                <Button BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="3" Style="{StaticResource SubTab}" Text="{langs:Translate AsianHDP}" TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+                <BoxView Style="{StaticResource SubTabLine}" />
+                <Button BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="2" Style="{StaticResource SubTab}" Text="{langs:Translate OverUnder}" TextColor="{Binding IsOverUnderSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+                <BoxView Style="{StaticResource SubTabLine}" />
+                <Button BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabBgColorConverter}}" Command="{Binding OnOddsTabClicked}" CommandParameter="1" Style="{StaticResource SubTab}" Text="{langs:Translate OneXTwo}" TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource selectedTabColorConverter}}}" />
+            </FlexLayout>
             <Grid
                 Grid.Row="0"
                 Grid.Column="0"
@@ -100,10 +106,10 @@
                 Header="{Binding}"
                 HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
-                IsRefreshing="{Binding IsRefreshing}"
-                IsVisible="{Binding IsNotLoading}"
+                IsRefreshing="{Binding IsRefreshing}"                
                 ItemTemplate="{StaticResource oddsItemTemplateSelector}"
                 ItemsSource="{Binding BetTypeOddsItems}"
+                IsVisible="{Binding IsNotLoading}"
                 MinimumHeightRequest="1000"
                 RefreshCommand="{Binding RefreshCommand}"
                 SeparatorVisibility="None">
@@ -113,6 +119,13 @@
                         EventArgsParameterPath="Item"
                         EventName="ItemTapped" />
                 </tabStrip:TabITemListView.Behaviors>
+                <tabStrip:TabITemListView.Footer>
+                    <StackLayout
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        HeightRequest="350">
+                        <Label Text=" " />
+                    </StackLayout>
+                </tabStrip:TabITemListView.Footer>
             </tabStrip:TabITemListView>
         </StackLayout>
     </StackLayout>

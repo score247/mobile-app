@@ -1,11 +1,8 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
-    using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
-    using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -34,22 +31,6 @@
             { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
         };
 
-        private static readonly IDictionary<MatchStatus, int> PeriodEndTimes = new Dictionary<MatchStatus, int>
-        {
-            { MatchStatus.FirstHalf, 45 },
-            { MatchStatus.SecondHalf, 90 },
-            { MatchStatus.FirstHalfExtra, 105 },
-            { MatchStatus.SecondHalfExtra, 120 }
-        };
-
-        private static readonly DateTime InjuryTimeCacheExpiration = DateTime.Now.AddMinutes(15);
-        private readonly ICachingService cacheService;
-
-        public MatchStatusConverter(ICachingService localStorage)
-        {
-            this.cacheService = localStorage;
-        }
-
         public string BuildStatus(IMatch match)
         {
             if (match == null)
@@ -71,7 +52,7 @@
 
             if (soccerMatch.EventStatus.IsLive)
             {
-                return BuildStatusForLive(soccerMatch);
+                return BuildMatchStatus(match);
             }
 
             if (soccerMatch.EventStatus.IsClosed)
@@ -82,25 +63,6 @@
             }
 
             return BuildEventStatus(soccerMatch);
-        }
-
-        private string BuildStatusForLive(Match match)
-        {
-            var status = BuildMatchStatus(match);
-
-            if (!string.IsNullOrEmpty(status))
-            {
-                return status;
-            }
-
-            var stoppageTimeHasValue = !string.IsNullOrEmpty(match.StoppageTime) && match.StoppageTime != "0";
-
-            if (match.LastTimelineType != null && (match.LastTimelineType == EventType.InjuryTimeShown || stoppageTimeHasValue))
-            {
-                return BuildMatchInjuryTime(match);
-            }
-
-            return match.MatchTime + "'";
         }
 
         private static string BuildMatchStatus(Match match)
@@ -126,29 +88,6 @@
             }
 
             return string.Empty;
-        }
-
-        private string BuildMatchInjuryTime(Match match)
-        {
-            PeriodEndTimes.TryGetValue(match.MatchStatus, out int periodEndTime);
-            var cacheKey = "InjuryTimeAnnouced" + match.Id;
-            var annoucedInjuryTime = Task.Run(() => cacheService.GetValueOrDefaultInMemory(cacheKey, 0)).Result;
-
-            if (match.InjuryTimeAnnounced > 0)
-            {
-                Task.Run(() => cacheService.InsertValueInMemory(cacheKey, match.InjuryTimeAnnounced, InjuryTimeCacheExpiration)).Wait();
-                annoucedInjuryTime = match.InjuryTimeAnnounced;
-            }
-
-            var currentInjuryTime = match.MatchTime - periodEndTime;
-            var displayInjuryTime = currentInjuryTime == 0 ? 1 : currentInjuryTime;
-
-            if (currentInjuryTime < 0 || currentInjuryTime > annoucedInjuryTime)
-            {
-                displayInjuryTime = annoucedInjuryTime;
-            }
-
-            return $"{periodEndTime}+{displayInjuryTime}'";
         }
     }
 }

@@ -21,12 +21,16 @@
             AppSettingsFixture = new AppSettingsFixture();
             CommonFixture = new CommonFixture();
             EventAggregator = new EventAggregator();
+
             DependencyResolver = Substitute.For<IDependencyResolver>();
             DependencyResolver.Resolve<ISettingsService>().Returns(AppSettingsFixture.SettingsService);
+            DependencyResolver.Resolve<IEventAggregator>().Returns(EventAggregator);
+
             NavigationService = new FakeNavigationService();
             HubService = Substitute.For<IHubService>();
             HubConnection = Substitute.For<FakeHubConnection>();
             //HubService.BuildMatchEventHubConnection().Returns(HubConnection);
+            HubService.BuildOddsEventHubConnection().Returns(HubConnection);
         }
 
         public IDependencyResolver DependencyResolver { get; }

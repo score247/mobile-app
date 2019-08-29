@@ -14,7 +14,6 @@ using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -110,7 +109,6 @@ namespace LiveScore.Score.ViewModels
         protected override void OnDisposed()
         {
             base.OnDisposed();
-
             UnsubscribeAllEvents();
 
             cancellationTokenSource?.Cancel();
@@ -194,6 +192,13 @@ namespace LiveScore.Score.ViewModels
         private ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(match, DependencyResolver, CurrentSportId));
+            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event 
+            if (MatchItemsSource?.Any() == true)
+            {
+                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.MatchResult.EventStatus.IsLive);
+                liveMatchViewModels.ToList().ForEach(m => m.Dispose());
+            }
+
 
             return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
                 matchItemViewModels.GroupBy(item

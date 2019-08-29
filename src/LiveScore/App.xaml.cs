@@ -9,6 +9,7 @@ using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
@@ -80,6 +81,7 @@ namespace LiveScore
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
 
             RegisterAndStartEventHubs(Container);
+            StartGlobalTimer();
 
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
@@ -105,6 +107,23 @@ namespace LiveScore
             RegisterForNavigation(containerRegistry);
 
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
+        }
+
+        protected override void OnSleep()
+        {
+            Debug.WriteLine("OnSleep");
+
+            var localStorage = Container.Resolve<ICachingService>();
+            localStorage.FlushAll();
+
+            base.OnSleep();
+        }
+
+        protected override void OnResume()
+        {
+            Debug.WriteLine("OnResume");
+
+            base.OnResume();
         }
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
@@ -169,8 +188,8 @@ namespace LiveScore
         }
 
         protected override async void OnResume()
-        {
-            Debug.WriteLine("OnResume");
+            {
+                var eventAggregator = Container.Resolve<IEventAggregator>();
 
             // TODO: Ricky: temporary comment here
             foreach (var hubService in hubServices)
@@ -178,7 +197,20 @@ namespace LiveScore
                 await hubService.Reconnect();
             }
 
-            base.OnResume();
+                return true;
+            });
+        }
+        
+        
+        private void StartGlobalTimer()
+        {
+            Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+            {
+                var eventAggregator = Container.Resolve<IEventAggregator>();
+                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();
+
+                return true;
+            });
         }
     }
 }

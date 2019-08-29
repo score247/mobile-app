@@ -7,7 +7,7 @@
     {
         EventType Type { get; }
 
-        DateTime Time { get; }
+        DateTimeOffset Time { get; }
 
         byte MatchTime { get; }
 

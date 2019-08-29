@@ -19,7 +19,7 @@
     public class MatchServiceTests : IClassFixture<CommonFixture>
     {
         private readonly CompareLogic comparer;
-        private readonly IFixture fixture;
+        private readonly Fixture fixture;
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
         private readonly ILoggingService loggingService;
@@ -32,6 +32,7 @@
             apiService = Substitute.For<IApiService>();
             cacheService = Substitute.For<ICachingService>();
             loggingService = Substitute.For<ILoggingService>();
+
 
             matchService = new MatchService(apiService, cacheService, loggingService);
         }
@@ -47,7 +48,8 @@
             await matchService.GetMatches(dateRange, Language.English);
 
             // Assert
-            await cacheService.Received(1).GetAndFetchLatestValue(
+            await cacheService.Received(1)
+                .GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -60,7 +62,7 @@
             // Arrange
             var dateTime = DateTime.Now;
             var dateRange = new DateRange(dateTime);
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -85,7 +87,7 @@
 
             var expectedMatches = fixture.CreateMany<Match>();
 
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                 cacheKey,
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -104,11 +106,11 @@
             // Arrange
             var matchId = new Fixture().Create<string>();
             var cacheKey = $"Match:{matchId}:en-US";
-            var expectedMatch = fixture.Create<MatchOld>();
+            var expectedMatch = fixture.Create<Match>();
 
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                cacheKey,
-               Arg.Any<Func<Task<MatchOld>>>(),
+               Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).Returns(expectedMatch);
 
@@ -123,9 +125,9 @@
         public async Task GetMatch_Exception_WriteLog()
         {
             // Arrange
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                "GetMatch:123:en-US",
-               Arg.Any<Func<Task<MatchOld>>>(),
+               Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
                null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 

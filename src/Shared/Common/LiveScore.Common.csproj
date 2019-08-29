@@ -1,81 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
-        <NeutralLanguage>
-        </NeutralLanguage>
-        <AssemblyName>LiveScore.Common</AssemblyName>
-        <RootNamespace>LiveScore.Common</RootNamespace>
-        <Configurations>Debug;Release;Test;AutoTest</Configurations>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
-        <DebugType></DebugType>
-       <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
-      <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
-      <DebugType />
-      <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
-      <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
-    <ItemGroup>
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <NeutralLanguage>
+    </NeutralLanguage>
+    <AssemblyName>LiveScore.Common</AssemblyName>
+    <RootNamespace>LiveScore.Common</RootNamespace>
+    <Configurations>Debug;Release;Test;AutoTest</Configurations>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+    <DebugType></DebugType>
+    <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+    <DebugType />
+    <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Common.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
       <Compile Remove="Controls\Calendar\**" />
       <EmbeddedResource Remove="Controls\Calendar\**" />
       <None Remove="Controls\Calendar\**" />
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Ardalis.GuardClauses" Version="1.2.9" />
+    <PackageReference Include="Ardalis.GuardClauses" Version="1.2.9" />
         <PackageReference Include="CardsView" Version="2.2.0" />
-        <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
-        <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
-        <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
-        <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
-        <PackageReference Include="Refit" Version="4.7.51" />
+    <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
+    <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />
+    <PackageReference Include="Refit" Version="4.7.9" />
         <PackageReference Include="Utf8Json" Version="1.3.7" />
-        <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
         <PackageReference Include="Xamarin.Forms" Version="3.6.0.709228" />
         <PackageReference Include="Prism.Forms" Version="7.2.0.1367" />
-        <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
-        <PackageReference Include="SharpRaven" Version="2.4.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.2.0" />
+       <PackageReference Include="akavache" Version="6.5.20" />
+    <PackageReference Include="SharpRaven" Version="2.4.0" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.16.0.8981">
-          <PrivateAssets>all</PrivateAssets>
-          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="akavache" Version="6.5.9" />
-        <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
-        <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Remove="Converters\InverseBoolConverter.cs" />
-      <Compile Remove="Converters\SelectedTabBackgroundColorConverter.cs" />
-      <Compile Remove="Converters\SelectedTabColorConverter.cs" />
-    </ItemGroup>
-    <ItemGroup>
-        <EmbeddedResource Update="LangResources\AppResources.resx">
-            <Generator>PublicResXFileCodeGenerator</Generator>
-            <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-        </EmbeddedResource>
-    </ItemGroup>
-    <ItemGroup>
-        <Folder Include="Controls\" />
-        <Folder Include="Converters\" />
-        <Folder Include="Configuration\" />
-        <Folder Include="Helpers\">
-          <DependentUpon>Helpers</DependentUpon>
-        </Folder>
-    </ItemGroup>
-    <ItemGroup>
-      <Compile Update="LangResources\AppResources.Designer.cs">
-        <DesignTime>True</DesignTime>
-        <AutoGen>True</AutoGen>
-        <DependentUpon>AppResources.resx</DependentUpon>
-      </Compile>
-    </ItemGroup>
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="CarouselView.FormsPlugin" Version="5.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
+    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Converters\InverseBoolConverter.cs" />
+    <Compile Remove="Converters\SelectedTabBackgroundColorConverter.cs" />
+    <Compile Remove="Converters\SelectedTabColorConverter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="LangResources\AppResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+    <Folder Include="Converters\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Helpers\">
+      <DependentUpon>Helpers</DependentUpon>
+    </Folder>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="LangResources\AppResources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 </Project>

@@ -14,7 +14,8 @@
     {
         private const int NumberOfFullTimePeriodsResult = 2;
 
-#pragma warning disable S107 // Methods should not have too many parameters
+        public DateTimeOffset CurrentPeriodStartTime { get; set; }
+
 
         public Match(
             string id,

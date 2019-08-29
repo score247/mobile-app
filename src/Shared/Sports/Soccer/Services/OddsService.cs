@@ -1,12 +1,12 @@
 ﻿namespace LiveScore.Soccer.Services
 {
-    using System;
-    using System.Threading.Tasks;
     using LiveScore.Common.Services;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using Refit;
+    using System;
+    using System.Threading.Tasks;
 
     public interface ISoccerOddsApi
     {
@@ -19,6 +19,9 @@
 
     public class OddsService : BaseService, IOddsService
     {
+        private const string OddsComparisonKey = "OddsComparison";
+        private const string OddsMovementKey = "OddsMovement";
+
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
 
@@ -36,12 +39,20 @@
         {
             try
             {
-                var oddDataCacheKey = $"Odds-{matchId}-{betTypeId}-{formatType}";
+                var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (forceFetchNewData)
+                {
+                    return await cacheService.GetAndFetchLatestLocalMachine(
                         oddDataCacheKey,
                         () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
+                }
+
+                return await cacheService.GetOrFetchLocalMachine(
+                        oddDataCacheKey,
+                        () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
+                        DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {
@@ -61,12 +72,20 @@
         {
             try
             {
-                var oddMovementCacheKey = $"OddsMovement-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
 
-                return await cacheService.GetAndFetchLatestValue(
+                if (forceFetchNewData)
+                {
+                    return await cacheService.GetAndFetchLatestLocalMachine(
                         oddMovementCacheKey,
                         () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
+                }
+
+                return await cacheService.GetOrFetchLocalMachine(
+                        oddMovementCacheKey,
+                        () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
+                        DateTime.Now.AddSeconds((int)CacheDuration.Long));
             }
             catch (Exception ex)
             {

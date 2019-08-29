@@ -4,10 +4,10 @@
     using LiveScore.Core.Models.Odds;
     using Newtonsoft.Json;
 
-    public class OddsEvent : IOddsEvent
+    public class OddsMovementEvent : IOddsMovementEvent
     {
-        public OddsEvent(
-            int betTypeId,
+        public OddsMovementEvent(
+            byte betTypeId,
             Bookmaker bookmaker,
             OddsMovement oddsMovement)
         {
@@ -16,11 +16,11 @@
             OddsMovement = oddsMovement;
         }
 
-        public int BetTypeId { get; }
+        public byte BetTypeId { get; set; }
 
-        public Bookmaker Bookmaker { get; }
+        public Bookmaker Bookmaker { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<OddsMovement>))]
-        public IOddsMovement OddsMovement { get; }
+        public IOddsMovement OddsMovement { get; set; }
     }
 }
