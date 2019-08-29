@@ -68,7 +68,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         public override void OnDisappearing()
         {
             cancellationTokenSource?.Cancel();
-        }       
+        }
 
         protected override async void Initialize()
         {
@@ -143,8 +143,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                     .Distinct(new TimelineComparer()).ToList() ?? new List<ITimelineEvent>(); // TODO: Replace TimelineComparer
 
                 InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(timelines.Select(t =>
-                       new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
-                       .CreateInstance()));
+                    new BaseItemViewModel(t, match.MatchResult, NavigationService, DependencyResolver)
+                    .CreateInstance()));
             }
         }
 

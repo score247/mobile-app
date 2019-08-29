@@ -110,7 +110,7 @@ namespace LiveScore.Soccer.ViewModels
                 Title = tabItemViewModels.First().Key.DisplayName;
                 CurrentTabView = tabItemViewModels.First().Key;
 
-                BuildViewModel(match);
+                InitViewModel(match);
                 BuildGeneralInfo();
             }
         }
@@ -125,7 +125,7 @@ namespace LiveScore.Soccer.ViewModels
         }
 
         [Time]
-        protected override void Initialize()
+        protected override async void Initialize()
         {
             BuildTabFunctions();
 
@@ -133,6 +133,9 @@ namespace LiveScore.Soccer.ViewModels
 
             matchService.SubscribeMatchEvent(matchHubConnection, OnReceivedMatchEvent);
             matchService.SubscribeTeamStatistic(teamHubConnection, OnReceivedTeamStatistic);
+
+            var match = await matchService.GetMatch(MatchViewModel.Match.Id, CurrentLanguage);
+            MatchViewModel.UpdateMatch(match);
 
             Device.BeginInvokeOnMainThread(async () =>
                 await teamHubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token));
@@ -159,8 +162,6 @@ namespace LiveScore.Soccer.ViewModels
 
         public override void OnDisappearing()
         {
-            Debug.WriteLine("MatchDetailViewModel OnDisappearing");
-
             base.OnDisappearing();
 
             foreach (var tab in tabItemViewModels)
@@ -171,39 +172,12 @@ namespace LiveScore.Soccer.ViewModels
 
         public override void Destroy()
         {
-            Debug.WriteLine("MatchDetailViewModel Destroy");
-
             base.Destroy();
 
             foreach (var tab in tabItemViewModels)
             {
                 tab.Value.Destroy();
             }
-        }
-
-        private void BuildTabFunctions()
-        {
-            TabViews = new ObservableCollection<TabItemViewModelBase>();
-
-            foreach (var tab in TabFunctions)
-            {
-                var tabFunction = Enumeration.FromDisplayName<TabFunction>(tab.Abbreviation);
-
-                if (tabItemViewModels.ContainsKey(tabFunction))
-                {
-                    var tabModel = tabItemViewModels[tabFunction];
-                    tabModel.Title = tab.Name;
-                    tabModel.TabHeaderTitle = tab.Abbreviation;
-
-                    TabViews.Add(tabModel);
-                }
-            }
-
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                Title = TabViews[index].Title;
-                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
-            });
         }
 
         [Time]
@@ -231,6 +205,32 @@ namespace LiveScore.Soccer.ViewModels
             MatchViewModel.OnReceivedTeamStatistic(isHome, teamStats);
         }
 
+        private void BuildTabFunctions()
+        {
+            TabViews = new ObservableCollection<TabItemViewModelBase>();
+
+            foreach (var tab in TabFunctions)
+            {
+                var tabFunction = Enumeration.FromDisplayName<TabFunction>(tab.Abbreviation);
+
+                if (tabItemViewModels.ContainsKey(tabFunction))
+                {
+                    var tabModel = tabItemViewModels[tabFunction];
+                    tabModel.Title = tab.Name;
+                    tabModel.TabHeaderTitle = tab.Abbreviation;
+
+                    TabViews.Add(tabModel);
+                }
+            }
+
+            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            {
+                Title = TabViews[index].Title;
+                CurrentTabView = Enumeration.FromDisplayName<TabFunction>(TabViews[index].TabHeaderTitle);
+            });
+        }
+
+
         private void BuildGeneralInfo()
         {
             BuildScoreAndEventDate();
@@ -254,7 +254,7 @@ namespace LiveScore.Soccer.ViewModels
             DisplayEventDate = MatchViewModel.Match.EventDate.ToLocalShortDayMonth();
         }
 
-        private void BuildViewModel(IMatch match)
+        private void InitViewModel(IMatch match)
             => MatchViewModel = new MatchViewModel(match, DependencyResolver, CurrentSportId);
 
         protected virtual void Dispose(bool disposing)

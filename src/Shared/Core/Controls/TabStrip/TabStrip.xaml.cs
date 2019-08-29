@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using MethodTimer;
     using PanCardView;
     using PanCardView.EventArgs;
     using Xamarin.Forms;
@@ -19,6 +20,10 @@
             InitializeComponent();
             TabHeader.BindingContext = currentInstance;
             TabContent.BindingContext = currentInstance;
+
+            TabContent.ItemBeforeAppearing += TabContent_ItemBeforeAppearing;
+            TabContent.ItemAppearing += TabContent_ItemAppearing;
+            TabContent.ItemDisappearing += TabContent_ItemDisappearing;
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -45,10 +50,6 @@
                 return;
             }
 
-            control.TabContent.ItemBeforeAppearing += TabContent_ItemBeforeAppearing;
-            control.TabContent.ItemAppearing += TabContent_ItemAppearing;
-            control.TabContent.ItemDisappearing += TabContent_ItemDisappearing;
-
             var tabItems = newValue as IEnumerable<TabItemViewModelBase>;
             tabItems.ToArray()[control.SelectedTabIndex]?.OnAppearing();
 
@@ -56,7 +57,6 @@
             {
                 control.SelectedTabIndex = index;
             });
-
         }
 
         public static void TabContent_ItemBeforeAppearing(CardsView view, ItemBeforeAppearingEventArgs args)
@@ -64,6 +64,7 @@
             MessagingCenter.Send(nameof(TabStrip), TabChangeEvent, args.Index);
         }
 
+        [Time]
         public static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
             (args.Item as TabItemViewModelBase)?.OnAppearing();

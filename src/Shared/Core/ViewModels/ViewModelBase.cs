@@ -5,6 +5,7 @@
     using System.Reflection;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
     using Prism.AppModel;
     using Prism.Events;
@@ -38,7 +39,10 @@
 
             CurrentSportName = SettingsService.CurrentSportType.DisplayName;
             CurrentSportId = SettingsService.CurrentSportType.Value;
+            CurrentLanguage = Enumeration.FromDisplayName<Language>(SettingsService.CurrentLanguage);
         }
+
+        public Language CurrentLanguage { get; }
 
         public string CurrentSportName { get; }
 

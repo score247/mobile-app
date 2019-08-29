@@ -29,9 +29,14 @@
             BuildDisplayMatchStatus();
         }
 
-        public IMatch Match { get; }
+        public IMatch Match { get; private set; }
 
         public string DisplayMatchStatus { get; private set; }
+
+        public void UpdateMatch(IMatch match)
+        {
+            Match = match;
+        }
 
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
