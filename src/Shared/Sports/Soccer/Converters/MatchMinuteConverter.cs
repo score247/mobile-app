@@ -60,7 +60,7 @@
                 matchMinute = periodEndMinute;
             }
 
-            if (matchMinute <= 0)
+            if (matchMinute < periodStartMinute)
             {
                 matchMinute = periodStartMinute;
             }
