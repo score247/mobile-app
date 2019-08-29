@@ -15,35 +15,35 @@
 
     public interface ICachingService
     {
-        Task<T> GetOrFetchValue<T>(string key, Func<Task<T>> fetchFunc, DateTimeOffset? absoluteExpiration = null);
+        Task<T> GetOrFetchLocalMachine<T>(string key, Func<Task<T>> fetchFunc, DateTimeOffset? absoluteExpiration = null);
 
-        Task<T> GetAndFetchLatestValue<T>(
+        Task<T> GetAndFetchLatestLocalMachine<T>(
             string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null,
             DateTimeOffset? absoluteExpiration = null);
 
-        Task InsertValue<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
+        Task<T> GetOrCreateLocalMachine<T>(string key, T defaultValue);
 
-        Task<T> GetValueOrDefault<T>(string key, T defaultValue);
+        Task InsertLocalMachine<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
 
-        Task InsertValueInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
+        Task<T> GetOrCreateInMemory<T>(string key, T defaultValue);
 
-        Task<T> GetValueOrDefaultInMemory<T>(string key, T defaultValue);
+        Task InsertInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null);
 
-        void AddOrUpdateValueToUserAccount<T>(string key, T value);
+        T GetOrCreateUserAccount<T>(string key, T defaultValue);
 
-        T GetValueOrDefaultFromUserAccount<T>(string key, T defaultValue);
+        void InsertUserAccount<T>(string key, T value);
 
-        void Shutdown();
+        Task InvalidateLocalMachine(string key);
 
-        Task Invalidate(string key);
+        Task InvalidateLocalMachine(IEnumerable<string> keys);
 
-        Task Invalidate(IEnumerable<string> keys);
-
-        Task CleanAllExpired();
+        Task VacuumLocalMachine();
 
         Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFecth, int seconds);
 
         Task InvalidateAll();
+
+        void FlushAll();
     }
 
     public class CachingService : ICachingService
@@ -60,56 +60,51 @@
                 throw new ArgumentNullException(nameof(essential));
             }
 
-
             localMachineCache = localMachine ?? BlobCache.LocalMachine;
-            localMachineCache.ForcedDateTimeKind = DateTimeKind.Local;
             userAccountCache = userAccount ?? BlobCache.UserAccount;
             inMemoryCache = inMemory ?? BlobCache.InMemory;
+
+            BlobCache.ForcedDateTimeKind = DateTimeKind.Local;
         }
 
         [Time]
-        public async Task<T> GetOrFetchValue<T>(
+        public async Task<T> GetOrFetchLocalMachine<T>(
             string key,
             Func<Task<T>> fetchFunc,
             DateTimeOffset? absoluteExpiration = null)
-            => await localMachineCache.GetOrFetchObject(key, fetchFunc, absoluteExpiration);
+                => await localMachineCache.GetOrFetchObject(key, fetchFunc, absoluteExpiration);
 
         [Time]
-        public async Task<T> GetAndFetchLatestValue<T>(
-            string key, Func<Task<T>> fetchFunc, Func<DateTimeOffset, bool> fetchPredicate = null,
+        public async Task<T> GetAndFetchLatestLocalMachine<T>(
+            string key,
+            Func<Task<T>> fetchFunc,
+            Func<DateTimeOffset, bool> fetchPredicate = null,
             DateTimeOffset? absoluteExpiration = null)
-            => await localMachineCache.GetAndFetchLatest(key, fetchFunc, fetchPredicate, absoluteExpiration);
+                => await localMachineCache.GetAndFetchLatest(key, fetchFunc, fetchPredicate, absoluteExpiration);
 
-        public async Task<T> GetValueOrDefault<T>(string key,
-            T defaultValue)
+        public async Task<T> GetOrCreateLocalMachine<T>(string key, T defaultValue)
             => await localMachineCache.GetOrCreateObject(key, () => defaultValue);
 
-        public async Task InsertValue<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
+        public async Task InsertLocalMachine<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
             => await localMachineCache.InsertObject(key, value, absoluteExpiration);
 
-        public async Task<T> GetValueOrDefaultInMemory<T>(string key, T defaultValue)
+        public async Task<T> GetOrCreateInMemory<T>(string key, T defaultValue)
           => await inMemoryCache.GetOrCreateObject(key, () => defaultValue);
 
-        public async Task InsertValueInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
+        public async Task InsertInMemory<T>(string key, T value, DateTimeOffset? absoluteExpiration = null)
             => await inMemoryCache.InsertObject(key, value, absoluteExpiration);
 
-        public void Shutdown()
-        {
-            userAccountCache.Flush().Wait();
-            localMachineCache.Flush().Wait();
-        }
+        public T GetOrCreateUserAccount<T>(string key, T defaultValue)
+            => userAccountCache.GetOrCreateObject(key, () => defaultValue).Wait();
 
-        public async Task Invalidate(string key) => await localMachineCache.Invalidate(key);
-
-        public async Task Invalidate(IEnumerable<string> keys) => await localMachineCache.Invalidate(keys);
-
-        public async Task CleanAllExpired() => await localMachineCache.Vacuum();
-
-        public void AddOrUpdateValueToUserAccount<T>(string key, T value)
+        public void InsertUserAccount<T>(string key, T value)
             => userAccountCache.InsertObject(key, value).Wait();
 
-        public T GetValueOrDefaultFromUserAccount<T>(string key, T defaultValue)
-            => userAccountCache.GetOrCreateObject(key, () => defaultValue).Wait();
+        public async Task InvalidateLocalMachine(string key) => await localMachineCache.Invalidate(key);
+
+        public async Task InvalidateLocalMachine(IEnumerable<string> keys) => await localMachineCache.Invalidate(keys);
+
+        public async Task VacuumLocalMachine() => await localMachineCache.Vacuum();
 
         public Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFecth, int seconds)
         {
@@ -126,6 +121,18 @@
             };
         }
 
-        public async Task InvalidateAll() => await localMachineCache.InvalidateAll();
+        public async Task InvalidateAll()
+        {
+            await inMemoryCache.InvalidateAll();
+            await userAccountCache.InvalidateAll();
+            await localMachineCache.InvalidateAll();
+        }
+
+        public void FlushAll()
+        {
+            inMemoryCache.Flush().Wait();
+            userAccountCache.Flush().Wait();
+            localMachineCache.Flush().Wait();
+        }
     }
 }

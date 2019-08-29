@@ -8,19 +8,17 @@ using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
-
-using LiveScore.Features.Favorites;
-
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
+using LiveScore.Features.TVSchedule;
 using LiveScore.Score;
 using LiveScore.Soccer;
-using LiveScore.Features.TVSchedule;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MethodTimer;
@@ -29,13 +27,12 @@ using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
+using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Prism.Events;
-using LiveScore.Core.Events;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -116,7 +113,7 @@ namespace LiveScore
             Debug.WriteLine("OnSleep");
 
             var localStorage = Container.Resolve<ICachingService>();
-            localStorage.Shutdown();
+            localStorage.FlushAll();
 
             base.OnSleep();
         }

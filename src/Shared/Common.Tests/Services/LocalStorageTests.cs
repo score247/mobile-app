@@ -31,7 +31,7 @@
             // Arrange
 
             // Act
-            await cache.CleanAllExpired();
+            await cache.VacuumLocalMachine();
 
             // Assert
             mockLocalMachine.Received(1).Vacuum();
@@ -44,7 +44,7 @@
             const string imageLink = "https://country.flags";
 
             // Act
-            await cache.Invalidate(imageLink);
+            await cache.InvalidateLocalMachine(imageLink);
 
             // Assert
             mockLocalMachine.Received(1).Invalidate(Arg.Any<string>());
@@ -56,7 +56,7 @@
             // Arrange
 
             // Act
-            cache.Shutdown();
+            cache.FlushAll();
 
             // Assert
             mockLocalMachine.Received(1).Flush();
@@ -68,7 +68,7 @@
             // Arrange
 
             // Act
-            cache.Shutdown();
+            cache.FlushAll();
 
             // Assert
             mockUserAccount.Received(1).Flush();
@@ -81,7 +81,7 @@
             Task<MockModel> fetchFunc() => Task.FromResult(new MockModel());
 
             // Act
-            await cache.GetAndFetchLatestValue("cacheKey", fetchFunc);
+            await cache.GetAndFetchLatestLocalMachine("cacheKey", fetchFunc);
 
             // Assert
             mockLocalMachine.Received(1).GetAndFetchLatest("cacheKey", fetchFunc);
@@ -94,7 +94,7 @@
             Task<MockModel> fetchFunc() => Task.FromResult(new MockModel());
 
             // Act
-            await cache.GetOrFetchValue("cacheKey", fetchFunc);
+            await cache.GetOrFetchLocalMachine("cacheKey", fetchFunc);
 
             // Assert
             mockLocalMachine.Received(1).GetOrFetchObject("cacheKey", fetchFunc);
@@ -106,7 +106,7 @@
             // Arrange
 
             // Act
-            cache.AddOrUpdateValueToUserAccount("cacheKey", 1);
+            cache.InsertUserAccount("cacheKey", 1);
 
             // Assert
             mockUserAccount.ReceivedWithAnyArgs(1).InsertObject("cacheKey", 1);
@@ -118,7 +118,7 @@
             // Arrange
 
             // Act
-            cache.GetValueOrDefaultFromUserAccount("cacheKey", 1);
+            cache.GetOrCreateUserAccount("cacheKey", 1);
 
             // Assert
             mockUserAccount.ReceivedWithAnyArgs(1).GetOrCreateObject("cacheKey", () => 1);

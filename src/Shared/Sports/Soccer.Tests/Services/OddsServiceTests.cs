@@ -43,7 +43,7 @@
 
             // Assert
             await mockCache.Received(1)
-                .GetAndFetchLatestValue(
+                .GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOdds>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -60,7 +60,7 @@
 
             // Assert
             await mockCache.Received(1)
-                .GetOrFetchValue(
+                .GetOrFetchLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOdds>>>(),
                     Arg.Any<DateTimeOffset>());
@@ -70,7 +70,7 @@
         public async Task GetOdds_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            mockCache.GetAndFetchLatestValue(
+            mockCache.GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOdds>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -91,7 +91,7 @@
             // Arrange
             var expectedMatchOdds = fixture.Create<MatchOdds>();
 
-            mockCache.GetOrFetchValue(
+            mockCache.GetOrFetchLocalMachine(
                 "OddsComparison-sr:match:1-1-decimal",
                 Arg.Any<Func<Task<MatchOdds>>>(),
                 Arg.Any<DateTimeOffset>()).Returns(expectedMatchOdds);
@@ -113,7 +113,7 @@
 
             // Assert
             await mockCache.Received(1)
-                .GetAndFetchLatestValue(
+                .GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOddsMovement>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -130,7 +130,7 @@
 
             // Assert
             await mockCache.Received(1)
-                .GetOrFetchValue(
+                .GetOrFetchLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOddsMovement>>>(),
                     Arg.Any<DateTimeOffset>());
@@ -140,7 +140,7 @@
         public async Task GetOddsMovement_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            mockCache.GetAndFetchLatestValue(
+            mockCache.GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<MatchOddsMovement>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -161,7 +161,7 @@
             // Arrange
             var expectedMatchOdds = fixture.Create<MatchOddsMovement>();
 
-            mockCache.GetAndFetchLatestValue(
+            mockCache.GetAndFetchLatestLocalMachine(
                 "OddsMovement-sr:match:1-1-dec-sr:book:1",
                 Arg.Any<Func<Task<MatchOddsMovement>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),

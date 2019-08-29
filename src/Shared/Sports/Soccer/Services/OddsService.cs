@@ -43,13 +43,13 @@
 
                 if (forceFetchNewData)
                 {
-                    return await cacheService.GetAndFetchLatestValue(
+                    return await cacheService.GetAndFetchLatestLocalMachine(
                         oddDataCacheKey,
                         () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
                 }
 
-                return await cacheService.GetOrFetchValue(
+                return await cacheService.GetOrFetchLocalMachine(
                         oddDataCacheKey,
                         () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
                         DateTime.Now.AddSeconds((int)CacheDuration.Long));
@@ -76,13 +76,13 @@
 
                 if (forceFetchNewData)
                 {
-                    return await cacheService.GetAndFetchLatestValue(
+                    return await cacheService.GetAndFetchLatestLocalMachine(
                         oddMovementCacheKey,
                         () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
                         cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Long));
                 }
 
-                return await cacheService.GetOrFetchValue(
+                return await cacheService.GetOrFetchLocalMachine(
                         oddMovementCacheKey,
                         () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
                         DateTime.Now.AddSeconds((int)CacheDuration.Long));

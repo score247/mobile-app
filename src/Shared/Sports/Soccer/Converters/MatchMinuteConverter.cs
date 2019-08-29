@@ -95,8 +95,8 @@
         {
             var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
 
-            // TODO: Move InjuryTimeAnnouced to backend for storing
-            var annoucedInjuryTime = Task.Run(() => cachingService.GetValueOrDefaultFromUserAccount(cacheKey, 0)).Result;
+            // TODO: Should move InjuryTimeAnnouced to backend for storing?
+            var annoucedInjuryTime = Task.Run(() => cachingService.GetOrCreateLocalMachine(cacheKey, 0)).Result;
 
             return annoucedInjuryTime;
         }
@@ -105,7 +105,7 @@
         {
             var cacheKey = $"InjuryTimeAnnouced_{match.Id}_{match.MatchResult.MatchStatus.DisplayName}";
 
-            Task.Run(() => cachingService.AddOrUpdateValueToUserAccount(cacheKey, injuryTime)).Wait();
+            Task.Run(() => cachingService.InsertLocalMachine(cacheKey, injuryTime)).Wait();
         }
     }
 }

@@ -49,7 +49,7 @@
 
             // Assert
             await cacheService.Received(1)
-                .GetAndFetchLatestValue(
+                .GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -62,7 +62,7 @@
             // Arrange
             var dateTime = DateTime.Now;
             var dateRange = new DateRange(dateTime);
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                     Arg.Any<string>(),
                     Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                     Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -87,7 +87,7 @@
 
             var expectedMatches = fixture.CreateMany<Match>();
 
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                 cacheKey,
                 Arg.Any<Func<Task<IEnumerable<Match>>>>(),
                 Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -108,7 +108,7 @@
             var cacheKey = $"Match:{matchId}:en-US";
             var expectedMatch = fixture.Create<Match>();
 
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                cacheKey,
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
@@ -125,7 +125,7 @@
         public async Task GetMatch_Exception_WriteLog()
         {
             // Arrange
-            cacheService.GetAndFetchLatestValue(
+            cacheService.GetAndFetchLatestLocalMachine(
                "GetMatch:123:en-US",
                Arg.Any<Func<Task<Match>>>(),
                Arg.Any<Func<DateTimeOffset, bool>>(),
