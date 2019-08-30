@@ -8,28 +8,23 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
-    using System.Threading;
     using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
+    using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Models.Odds;
     using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
 
     public class OddsMovementViewModel : ViewModelBase, IDisposable
     {
-        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-
         private string matchId;
         private string oddsFormat;
         private bool disposedValue;
@@ -37,10 +32,9 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         private MatchStatus eventStatus;
         private Bookmaker bookmaker;
         private BetType betType;
-        private CancellationTokenSource cancellationTokenSource;
 
         private readonly IOddsService oddsService;
-        private readonly HubConnection hubConnection;
+        private readonly IEventAggregator eventAggregator;
 
         public OddsMovementViewModel(
             INavigationService navigationService,
@@ -48,14 +42,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            hubConnection.On("OddsMovement", OddsMovementMessageHandler());
-
+            this.eventAggregator = eventAggregator;
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
 
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
+
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
         }
 
         public bool IsRefreshing { get; set; }
@@ -69,22 +64,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public DataTemplate HeaderTemplate { get; private set; }
-
-        private Action<byte, string> OddsMovementMessageHandler()
-        {
-            return async (sportId, data) =>
-            {
-                Debug.WriteLine($"OddsMovement received {data}");
-                var oddsMovementMessage = await DeserializeOddsMovementMessage(data);
-
-                if (oddsMovementMessage == null)
-                {
-                    return;
-                }
-
-                await HandleOddsMovementMessage(oddsMovementMessage);
-            };
-        }
 
         public override void Initialize(INavigationParameters parameters)
         {
@@ -113,8 +92,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 Debug.WriteLine("OddsMovementViewModel Initialize");
 
                 await FirstLoadOrRefreshOddsMovement();
-
-                await StartOddsHubConnection();
             }
             catch (Exception ex)
             {
@@ -122,36 +99,15 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
             }
         }
 
-        private async Task StartOddsHubConnection()
-        {
-            if (cancellationTokenSource == null)
-            {
-                Debug.WriteLine("OddsMovementViewModel StartOddsHubConnection");
-
-                cancellationTokenSource = new CancellationTokenSource();
-
-                await hubConnection.StartWithKeepAlive(HubKeepAliveInterval, LoggingService, cancellationTokenSource.Token);
-            }
-        }
-
         protected override void OnDisposed()
         {
             Debug.WriteLine("OddsMovementViewModel Clean");
 
-            StopOddsHubConnection();
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
 
             if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
             {
                 OddsMovementItems.Clear();
-            }
-        }
-
-        private void StopOddsHubConnection()
-        {
-            if (cancellationTokenSource != null)
-            {
-                cancellationTokenSource.Cancel();
-                cancellationTokenSource = null;
             }
         }
 
@@ -164,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                 await GetOddsMovement(isRefresh: true);
             }
 
-            await StartOddsHubConnection();
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
         }
 
         [Time]
@@ -202,24 +158,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
         }
 
         [Time]
-        internal async Task<MatchOddsMovementMessage> DeserializeOddsMovementMessage(string message)
-        {
-            MatchOddsMovementMessage oddsMovementMessage = null;
-
-            try
-            {
-                oddsMovementMessage = JsonConvert.DeserializeObject<MatchOddsMovementMessage>(message);
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogErrorAsync("Errors while deserialize MatchOddsMovementMessage", ex);
-            }
-
-            return oddsMovementMessage;
-        }
-
-        [Time]
-        internal async Task HandleOddsMovementMessage(MatchOddsMovementMessage oddsMovementMessage)
+        internal void HandleOddsMovementMessage(IOddsMovementMessage oddsMovementMessage)
         {
             if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
@@ -240,7 +179,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
                         OddsMovementItems.Insert(0, newOddsMovementView);
                     }
 
-                    await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
+                    //await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
                 }
             }
         }

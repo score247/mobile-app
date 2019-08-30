@@ -3,9 +3,10 @@
     using System.Collections.Generic;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Odds;
+    using LiveScore.Core.PubSubEvents.Odds;
     using Newtonsoft.Json;
 
-    public class MatchOddsMovementMessage : IOddsMovementMessage
+    public class OddsMovementMessage : IOddsMovementMessage
     {
         public string MatchId { get; set; }
 
