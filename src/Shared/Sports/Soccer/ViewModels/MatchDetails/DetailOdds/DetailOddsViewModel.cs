@@ -4,6 +4,12 @@
 
 namespace LiveScore.Soccer.ViewModels.DetailOdds
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading.Tasks;
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
@@ -12,34 +18,21 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Models.Odds;
-    using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using MethodTimer;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
     using Prism.Events;
     using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading;
-    using System.Threading.Tasks;
     using Xamarin.Forms;
 
     internal class DetailOddsViewModel : TabItemViewModel, IDisposable
     {
-        private static readonly TimeSpan HubKeepAliveInterval = TimeSpan.FromSeconds(30);
-
         private readonly string matchId;
         private readonly string oddsFormat;
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
+        private readonly IEventAggregator eventAggregator;
 
         private bool disposedValue;
-        private CancellationTokenSource cancellationTokenSource;
 
         public DetailOddsViewModel(
             string matchId,
@@ -61,6 +54,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             TabHeaderIcon = MatchDetailTabImage.Odds;
             TabHeaderActiveIcon = MatchDetailTabImage.OddsActive;
 
+            this.eventAggregator = eventAggregator;
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)));
@@ -142,16 +136,21 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             {
                 await LoadOddsByBetType(oddsFormat, isRefresh: true);
             }
+
+            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
         }
 
         public override void OnSleep()
         {
             Debug.WriteLine("DetailOddsViewModel OnSleep");
+            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
         }
 
         public override void Destroy()
         {
             Debug.WriteLine("DetailOddsViewModel Destroy");
+
+            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
         }
 
         [Time]
