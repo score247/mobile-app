@@ -179,10 +179,8 @@ namespace LiveScore.Score.ViewModels
             selectedDateRange = dateRange;
             IsRefreshing = false;
 
+            Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
             Debug.WriteLine($"{this.GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.Home");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.PullDownToRefresh");
-            Profiler.Stop(this.GetType().Name + ".LoadMatches.SelectDate");
         }
 
         private IList<IGrouping<dynamic, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
@@ -190,7 +188,7 @@ namespace LiveScore.Score.ViewModels
             // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event 
             if (MatchItemsSource?.Any() == true)
             {
-                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.MatchResult.EventStatus.IsLive);
+                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.MatchResult.EventStatus?.IsLive == true);
                 liveMatchViewModels.ToList().ForEach(m => m.Dispose());
             }
 

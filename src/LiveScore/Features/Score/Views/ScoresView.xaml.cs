@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Score.Views
 {
-    using System;
     using LiveScore.Common.Helpers;
     using MethodTimer;
     using Xamarin.Forms;
@@ -15,13 +14,24 @@
             InitializeComponent();
 
 #if DEBUG
-            this.Appearing += ScoresView_Appearing;
+            LeagueTable.ItemAppearing += LeagueTable_ItemAppearing;
 #endif
         }
 
-        private void ScoresView_Appearing(object sender, EventArgs e)
+        private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            Profiler.Stop("IOS Application");
+#if DEBUG
+            const int lastMatchItemIndexShowedOnTheScreen = 9;
+
+            if (e.ItemIndex == lastMatchItemIndexShowedOnTheScreen)
+            {
+                Profiler.Stop("IOS Application");
+                Profiler.Stop("ScoresViewModel.LoadMatches.SelectDate");
+                Profiler.Stop("ScoresViewModel.LoadMatches.Home");
+                Profiler.Stop("ScoresViewModel.OnNavigatedTo");
+                Profiler.Stop("ScoresViewModel.OnResume");
+            }
+#endif
         }
     }
 }
