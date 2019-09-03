@@ -1,12 +1,12 @@
-﻿using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using LiveScore.Core.Services;
-using Refit;
-using Xunit;
-
-namespace LiveScore.Core.Tests.Services
+﻿namespace LiveScore.Core.Tests.Services
 {
+    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using LiveScore.Common.Services;
+    using Refit;
+    using Xunit;
+
     public class ApiPolicyTests
     {
         private readonly IApiPolicy apiPolicy;
@@ -19,13 +19,12 @@ namespace LiveScore.Core.Tests.Services
         [Fact]
         public async Task RetryAndTimeout_ExcuteWithoutError()
         {
-            // Arrange            
+            // Arrange
 
-            // Act            
+            // Act
             await apiPolicy.RetryAndTimeout(() => SumFunc(1, 2));
 
             // Assert
-
         }
 
         [Theory]
@@ -36,9 +35,9 @@ namespace LiveScore.Core.Tests.Services
         [InlineData(HttpStatusCode.GatewayTimeout)]
         public async Task RetryAndTimeout_ExcuteFuncThatThrowsException(HttpStatusCode statusCode)
         {
-            // Arrange            
+            // Arrange
 
-            // Act            
+            // Act
             var exception = await Assert.ThrowsAsync<ApiException>
                 (
                     async () => await apiPolicy.RetryAndTimeout(() => FuncThrowsException(statusCode))

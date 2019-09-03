@@ -1,8 +1,9 @@
 namespace LiveScore.Core.Tests.Services
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
-    using LiveScore.Core.Services;
+    using LiveScore.Common.Services;
     using NSubstitute;
     using Refit;
     using Xunit;
@@ -22,10 +23,13 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var apiPolicy = Substitute.For<IApiPolicy>();
-            var settings = Substitute.For<ISettingsService>();
-            settings.ApiEndpoint.Returns("https://score247-api1.nexdev.net/dev/api");
+            var httpService = Substitute.For<IHttpService>();
+            httpService.HttpClient.Returns(new HttpClient()
+            {
+                BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
+            });
 
-            var apiService = new ApiService(apiPolicy, settings, new RefitSettings());
+            var apiService = new ApiService(apiPolicy, httpService, new RefitSettings());
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act
@@ -40,8 +44,12 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var apiPolicy = Substitute.For<IApiPolicy>();
-            var settings = Substitute.For<ISettingsService>();
-            var apiService = new ApiService(apiPolicy, settings, new RefitSettings());
+            var httpService = Substitute.For<IHttpService>();
+            httpService.HttpClient.Returns(new HttpClient()
+            {
+                BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
+            });
+            var apiService = new ApiService(apiPolicy, httpService, new RefitSettings());
             Task<MockModel> func() => Task.FromResult(new MockModel());
 
             // Act

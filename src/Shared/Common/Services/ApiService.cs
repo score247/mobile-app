@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Core.Services
+﻿namespace LiveScore.Common.Services
 {
     using System;
     using System.Threading.Tasks;
@@ -16,24 +16,24 @@
     public class ApiService : IApiService
     {
         private readonly IApiPolicy apiPolicy;
-        private readonly ISettingsService settingsService;
+        private readonly IHttpService httpService;
         private readonly RefitSettings refitSettings;
 
-        public ApiService(IApiPolicy apiPolicy, ISettingsService settingsService, RefitSettings refitSettings)
+        public ApiService(IApiPolicy apiPolicy, IHttpService httpService, RefitSettings refitSettings)
         {
             this.apiPolicy = apiPolicy;
-            this.settingsService = settingsService;
+            this.httpService = httpService;
             this.refitSettings = refitSettings ?? new RefitSettings
             {
                 ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
                 {
                     DateTimeZoneHandling = DateTimeZoneHandling.Utc,
                     ContractResolver = new PrivateSetterContractResolver()
-                })
+                }),
             };
         }
 
-        public T GetApi<T>() => RestService.For<T>(settingsService.ApiEndpoint, refitSettings);
+        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }

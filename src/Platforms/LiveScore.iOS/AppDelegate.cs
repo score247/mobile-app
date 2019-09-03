@@ -1,7 +1,7 @@
 namespace LiveScore.iOS
 {
     using System;
-    using CarouselView.FormsPlugin.iOS;
+    using System.Net.Http;
     using Common.Services;
     using Foundation;
     using LiveScore.Common.Helpers;

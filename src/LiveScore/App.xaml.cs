@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Net;
 using System.Reflection;
 using Akavache;
 using JsonNet.ContractResolvers;
@@ -111,6 +112,7 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.LocalEndPoint)));
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.RegisterSingleton<ISportService, SportService>();
