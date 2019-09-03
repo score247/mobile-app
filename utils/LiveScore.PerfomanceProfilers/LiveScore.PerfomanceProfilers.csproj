@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.11.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\LiveScore\LiveScore.csproj" />
+    <ProjectReference Include="..\..\src\Shared\Common\LiveScore.Common.csproj" />
+    <ProjectReference Include="..\..\src\Shared\Core\LiveScore.Core.csproj" />
+    <ProjectReference Include="..\..\src\Shared\Sports\Soccer\Soccer.csproj" />
+  </ItemGroup>
+
+</Project>
