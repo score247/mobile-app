@@ -33,6 +33,7 @@
             };
         }
 
+        // TODO: Need to make it be singleton instance
         public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
