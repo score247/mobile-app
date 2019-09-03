@@ -91,6 +91,7 @@
     <CodesignProvision>Score247</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <MtouchFastDev>true</MtouchFastDev>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -198,6 +199,7 @@
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchFloat32>false</MtouchFloat32>
     <MtouchEnableSGenConc>false</MtouchEnableSGenConc>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Test|AnyCPU'">
     <OutputPath>bin\Test\</OutputPath>
@@ -228,6 +230,7 @@
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchFastDev>true</MtouchFastDev>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'AutoTest|AnyCPU'">
     <OutputPath>bin\AutoTest\</OutputPath>
