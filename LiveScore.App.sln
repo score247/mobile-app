@@ -31,7 +31,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Android", "src\Pl
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utils", "utils", "{50A77883-8167-496D-AA8F-BC8B136903BD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.PerfomanceProfilers", "utils\LiveScore.PerfomanceProfilers\LiveScore.PerfomanceProfilers.csproj", "{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.PerformanceProfilers", "utils\LiveScore.PerfomanceProfilers\LiveScore.PerformanceProfilers.csproj", "{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

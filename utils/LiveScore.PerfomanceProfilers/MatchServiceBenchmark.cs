@@ -1,4 +1,4 @@
-﻿namespace LiveScore.PerfomanceProfilers
+﻿namespace LiveScore.PerformanceProfilers
 {
     using System;
     using System.Collections.Generic;

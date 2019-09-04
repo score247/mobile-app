@@ -1,4 +1,4 @@
-﻿namespace LiveScore.PerfomanceProfilers
+﻿namespace LiveScore.PerformanceProfilers
 {
     using BenchmarkDotNet.Configs;
     using BenchmarkDotNet.Running;
