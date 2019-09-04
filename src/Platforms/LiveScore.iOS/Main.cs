@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.iOS
 {
-    using LiveScore.Common.Helpers;
     using UIKit;
 
     public static class Application

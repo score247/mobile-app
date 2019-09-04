@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.DateBar.Events;

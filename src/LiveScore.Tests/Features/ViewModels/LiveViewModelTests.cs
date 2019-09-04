@@ -1,7 +1,8 @@
+using LiveScore.Features.Score.ViewModels;
+
 namespace Scores.Tests.ViewModels
 {
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Score.ViewModels;
     using Xunit;
 
     public class LiveViewModelTests : IClassFixture<ViewModelBaseFixture>

@@ -1,8 +1,9 @@
+using LiveScore.Features.Score;
+using LiveScore.Features.Score.ViewModels;
+using LiveScore.Features.Score.Views;
+
 namespace Scores.Tests
 {
-    using LiveScore.Score;
-    using LiveScore.Score.ViewModels;
-    using LiveScore.Score.Views;
     using NSubstitute;
     using Prism.Ioc;
     using Xunit;

@@ -10,7 +10,7 @@
     xmlns:league="clr-namespace:LiveScore.Features.League.Views;assembly=LiveScore"
     xmlns:localViews="clr-namespace:LiveScore.Views"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:score="clr-namespace:LiveScore.Score.Views"
+    xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore"
     x:Name="self"
     android:TabbedPage.BarItemColor="{StaticResource TabColor}"
     android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"

@@ -1,3 +1,5 @@
+using LiveScore.Features.Score.ViewModels;
+
 namespace Scores.Tests.ViewModels
 {
     using System;
@@ -12,8 +14,6 @@ namespace Scores.Tests.ViewModels
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Score.ViewModels;
-    using LiveScore.Soccer.Models.Matches;
     using NSubstitute;
     using Xunit;
 
