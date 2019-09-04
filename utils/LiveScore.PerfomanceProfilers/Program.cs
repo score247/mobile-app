@@ -1,15 +1,17 @@
 ﻿namespace LiveScore.PerfomanceProfilers
 {
-    using System;
+    using BenchmarkDotNet.Configs;
     using BenchmarkDotNet.Running;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Enumerations;
 
+#pragma warning disable S1118 // Utility classes should not have public constructors
     public class Program
+#pragma warning restore S1118 // Utility classes should not have public constructors
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            BenchmarkRunner.Run<MatchServiceBenchmark>();
+            BenchmarkRunner.Run<MatchServiceBenchmark>(ManualConfig
+                        .Create(DefaultConfig.Instance)
+                        .With(ConfigOptions.DisableOptimizationsValidator));
         }
     }
 }
