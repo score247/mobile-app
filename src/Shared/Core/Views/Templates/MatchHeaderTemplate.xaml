@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<DataTemplate
-    x:Class="LiveScore.Core.Views.Templates.MatchHeaderTemplate"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:resources="clr-namespace:LiveScore.Core.ViewResources">
+<DataTemplate x:Class="LiveScore.Core.Views.Templates.MatchHeaderTemplate"
+              xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <StackLayout>
             <StackLayout.Resources>
@@ -24,32 +24,27 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
-
-                <Image
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Source="images/flag_league/default_flag.png"
-                    Style="{StaticResource LeagueFlag}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}'}"
-                    LineBreakMode="TailTruncation"
-                    Style="{StaticResource LeagueName}"
-                    Text="{Binding Key.LeagueName}" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    AutomationId="{Binding Key.LeagueId, StringFormat='LeagueEventDate-{0}'}"
-                    Style="{StaticResource MatchDate}"
-                    Text="{Binding Key.EventDate}" />
-
-                <Image
-                    x:Name="DetailIcon"
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
-                    Style="{StaticResource MatchDetailIcon}" />
+                <ffImageLoading:CachedImage Grid.Row="0"
+                                            Grid.Column="0"
+                                            DownsampleToViewSize="True"
+                                            Source="images/flag_league/default_flag.png"
+                                            Style="{StaticResource LeagueFlag}" />
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}'}"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="{Binding Key.LeagueName}" />
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueEventDate-{0}'}"
+                       Style="{StaticResource MatchDate}"
+                       Text="{Binding Key.EventDate}" />
+                <ffImageLoading:CachedImage x:Name="DetailIcon"
+                                            Grid.Row="0"
+                                            Grid.Column="3"
+                                            AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
+                                            Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
         </StackLayout>
     </ViewCell>

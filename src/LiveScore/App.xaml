@@ -2,6 +2,7 @@
 <prism:PrismApplication x:Class="LiveScore.App"
                         xmlns="http://xamarin.com/schemas/2014/forms"
                         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                        xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                         xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms">
     <Application.Resources>
         <!--  Application resource dictionary  -->
@@ -323,7 +324,7 @@
                         Value="{StaticResource PrimaryAccentColor}" />
             </Style>
             <Style x:Key="DetailIcon"
-                   TargetType="Image">
+                   TargetType="{x:Type ffImageLoading:CachedImage}">
                 <Setter Property="Source"
                         Value="images/common/league_detail.png" />
                 <Setter Property="WidthRequest"
@@ -332,7 +333,7 @@
                         Value="14" />
             </Style>
             <Style x:Key="LiveIcon"
-                   TargetType="Image">
+                   TargetType="{x:Type ffImageLoading:CachedImage}">
                 <Setter Property="Source"
                         Value="images/common/match_live.png" />
                 <Setter Property="WidthRequest"
@@ -343,7 +344,7 @@
                         Value="0,0,0,4" />
             </Style>
             <Style x:Key="ExtraTimeIcon"
-                   TargetType="Image">
+                   TargetType="{x:Type ffImageLoading:CachedImage}">
                 <Setter Property="Source"
                         Value="images/common/match_extra_time.png" />
                 <Setter Property="WidthRequest"
@@ -419,7 +420,7 @@
                         Value="{StaticResource PrimaryTextColor}" />
             </Style>
             <Style x:Key="WinnerInfoIcon"
-                   TargetType="Image">
+                   TargetType="{x:Type ffImageLoading:CachedImage}">
                 <Setter Property="Aspect"
                         Value="AspectFit" />
                 <Setter Property="WidthRequest"

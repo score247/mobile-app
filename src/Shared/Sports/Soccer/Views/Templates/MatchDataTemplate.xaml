@@ -2,6 +2,7 @@
 <DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDataTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates">
@@ -12,7 +13,7 @@
                     <ResourceDictionary.MergedDictionaries>
                         <coreResources:MatchViewResource />
                     </ResourceDictionary.MergedDictionaries>
-                    <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
+                    <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
                 </ResourceDictionary>
             </StackLayout.Resources>
             <Grid>
@@ -28,12 +29,14 @@
                 <FlexLayout Grid.Row="0"
                             Grid.Column="0"
                             Style="{StaticResource MatchStatusContainer}">
-                    <Image AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}'}"
-                           IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
-                           Style="{StaticResource LiveIcon}" />
-                    <Image AutomationId="{Binding Match.Id, StringFormat='ExtraTimeIndicator-{0}'}"
-                           IsVisible="{Binding Match.IsInExtraTime}"
-                           Style="{StaticResource ExtraTimeIcon}" />
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}'}"
+                                                IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
+                                                DownsampleToViewSize="True"
+                                                Style="{StaticResource LiveIcon}" />
+                    <ffImageLoading:CachedImage  AutomationId="{Binding Match.Id, StringFormat='ExtraTimeIndicator-{0}'}"
+                                                 IsVisible="{Binding Match.IsInExtraTime}"
+                                                 Style="{StaticResource ExtraTimeIcon}"
+                                                 DownsampleToViewSize="True" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='MatchStatus-{0}'}"
                            Style="{StaticResource MatchStatus}"
                            Text="{Binding DisplayMatchStatus}" />
@@ -45,28 +48,32 @@
                                Style="{StaticResource Team}"
                                Text="{Binding Match.HomeTeamName}" />
                         <templates:RedCardTemplate RedCards="{Binding Match.TotalHomeRedCards}" />
-                        <Image AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
-                               IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                               Source="{Binding Match.HomePenaltyImage}"
-                               Style="{StaticResource MatchWinnerInfoIcon}" />
-                        <Image AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}'}"
-                               IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
-                               Source="{Binding Match.HomeSecondLegImage}"
-                               Style="{StaticResource MatchWinnerInfoIcon}" />
+                        <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
+                                                    IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                    Source="{Binding Match.HomePenaltyImage}"
+                                                    Style="{StaticResource MatchWinnerInfoIcon}"
+                                                    DownsampleToViewSize="True" />
+                        <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}'}"
+                                                    IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                    Source="{Binding Match.HomeSecondLegImage}"
+                                                    Style="{StaticResource MatchWinnerInfoIcon}"
+                                                    DownsampleToViewSize="True" />
                     </FlexLayout>
                     <FlexLayout Style="{StaticResource MatchAwayTeam}">
                         <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
                                Style="{StaticResource Team}"
                                Text="{Binding Match.AwayTeamName}" />
                         <templates:RedCardTemplate RedCards="{Binding Match.TotalAwayRedCards}" />
-                        <Image AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
-                               IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource textNotEmptyConverter}}"
-                               Source="{Binding Match.AwayPenaltyImage}"
-                               Style="{StaticResource MatchWinnerInfoIcon}" />
-                        <Image AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}'}"
-                               IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource textNotEmptyConverter}}"
-                               Source="{Binding Match.AwaySecondLegImage}"
-                               Style="{StaticResource MatchWinnerInfoIcon}" />
+                        <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
+                                                    IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                    Source="{Binding Match.AwayPenaltyImage}"
+                                                    Style="{StaticResource MatchWinnerInfoIcon}"
+                                                    DownsampleToViewSize="True" />
+                        <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}'}"
+                                                    IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                    Source="{Binding Match.AwaySecondLegImage}"
+                                                    Style="{StaticResource MatchWinnerInfoIcon}"
+                                                    DownsampleToViewSize="True" />
                     </FlexLayout>
                 </StackLayout>
                 <FlexLayout Grid.Row="0"

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Score.Views
 {
-    using LiveScore.Common.Helpers;
+    using Common.Helpers;
     using MethodTimer;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -8,8 +8,6 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScoresView : ContentPage
     {
-        private const int LastMatchItemIndexShowedOnTheScreen = 9;
-
         [Time]
         public ScoresView()
         {

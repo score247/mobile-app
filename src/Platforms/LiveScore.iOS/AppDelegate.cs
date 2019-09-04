@@ -1,10 +1,10 @@
 namespace LiveScore.iOS
 {
     using System;
-    using System.Net.Http;
+    using Common.Helpers;
     using Common.Services;
+    using FFImageLoading.Forms.Platform;
     using Foundation;
-    using LiveScore.Common.Helpers;
     using ObjCRuntime;
     using PanCardView.iOS;
     using Prism;
@@ -18,6 +18,7 @@ namespace LiveScore.iOS
         {
             Profiler.Start("IOS Application");
             Xamarin.Forms.Forms.Init();
+            CachedImageRenderer.Init();
             CardsViewRenderer.Preserve();
 
             var application = new App(new iOSInitializer());

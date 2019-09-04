@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.Views.Templates
 {
-    using LiveScore.Soccer.Enumerations;
+    using Enumerations;
+    using FFImageLoading.Forms;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -20,8 +21,8 @@
 
         public byte RedCards
         {
-            get { return (byte)GetValue(RedCardsProperty); }
-            set { SetValue(RedCardsProperty, value); }
+            get => (byte)GetValue(RedCardsProperty);
+            set => SetValue(RedCardsProperty, value);
         }
 
         private static void OnRedCardCountChanged(BindableObject bindable, object oldValue, object newValue)
@@ -46,11 +47,12 @@
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        private static Image BuildRedCardImage()
+        private static CachedImage BuildRedCardImage()
         {
-            return new Image
+            return new CachedImage
             {
                 Source = Images.RedCard.Value,
+                DownsampleToViewSize = true,
                 Margin = new Thickness(4, 0, 0, 0)
             };
         }
