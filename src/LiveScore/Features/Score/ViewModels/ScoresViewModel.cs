@@ -1,6 +1,6 @@
 ﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
-namespace LiveScore.Score.ViewModels
+namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -213,29 +213,33 @@ namespace LiveScore.Score.ViewModels
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
         {
-            if (payload?.SportId == CurrentSportId)
+            if (payload?.SportId != CurrentSportId)
             {
-                var matchItem = MatchItemsSource
-                  .SelectMany(group => group)
-                  .FirstOrDefault(m => m.Match.Id == payload.MatchEvent.MatchId);
+                return;
+            }
 
-                if (matchItem?.Match != null)
-                {
-                    matchItem.OnReceivedMatchEvent(payload.MatchEvent);
-                }
+            var matchItem = MatchItemsSource
+                .SelectMany(group => @group)
+                .FirstOrDefault(m => m.Match.Id == payload.MatchEvent.MatchId);
+
+            if (matchItem?.Match != null)
+            {
+                matchItem.OnReceivedMatchEvent(payload.MatchEvent);
             }
         }
 
         internal void OnReceivedTeamStatistic(ITeamStatisticsMessage payload)
         {
-            if (payload.SportId == CurrentSportId)
+            if (payload.SportId != CurrentSportId)
             {
-                var matchItem = MatchItemsSource
-                     .SelectMany(group => group)
-                     .FirstOrDefault(m => m.Match.Id == payload.MatchId);
-
-                matchItem.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
+                return;
             }
+
+            var matchItem = MatchItemsSource
+                .SelectMany(group => @group)
+                .FirstOrDefault(m => m.Match.Id == payload.MatchId);
+
+            matchItem?.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
         }
     }
 }

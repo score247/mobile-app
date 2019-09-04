@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="LiveScore.Score.Views.LiveView"
+    x:Class="LiveScore.Features.Score.Views.LiveView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
@@ -19,7 +19,7 @@
         <Label
             FontSize="13"
             HorizontalOptions="Center"
-            Text="Live is comming soon"
+            Text="Live is coming soon"
             TextColor="{StaticResource SecondTextColor}"
             VerticalOptions="Center" />
     </ContentPage.Content>

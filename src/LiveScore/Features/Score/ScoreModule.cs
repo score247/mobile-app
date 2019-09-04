@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Score
+﻿namespace LiveScore.Features.Score
 {
     using ViewModels;
     using Views;
