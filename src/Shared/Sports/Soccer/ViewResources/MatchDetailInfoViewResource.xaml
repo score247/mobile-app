@@ -2,7 +2,8 @@
 <ResourceDictionary
     x:Class="LiveScore.Soccer.ViewResources.MatchDetailInfoViewResource"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 
     <!--  Tab content  -->
     <Style x:Key="MatchDetailInfoRow" TargetType="Grid">
@@ -19,11 +20,11 @@
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
 
-    <Style x:Key="MatchInfoImage" TargetType="Image">
+    <Style x:Key="MatchInfoImage" TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Aspect" Value="AspectFit" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
-    <Style x:Key="MatchInfoAssistedImage" TargetType="Image">
+    <Style x:Key="MatchInfoAssistedImage" TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Aspect" Value="AspectFit" />
         <Setter Property="Margin" Value="0,2,0,0" />
         <Setter Property="HorizontalOptions" Value="Center" />

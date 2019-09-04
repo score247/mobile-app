@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<prism:PrismApplication x:Class="LiveScore.App"
-                        xmlns="http://xamarin.com/schemas/2014/forms"
-                        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                        xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-                        xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms">
+<prism:PrismApplication
+    x:Class="LiveScore.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:prism="clr-namespace:Prism.DryIoc;assembly=Prism.DryIoc.Forms">
     <Application.Resources>
         <!--  Application resource dictionary  -->
         <ResourceDictionary>
-            <OnPlatform x:Key="LiveScore"
-                        x:TypeArguments="x:String">
-                <On Platform="Android"
-                    Value="fonts/livescore.ttf#livescore" />
-                <On Platform="iOS"
-                    Value="livescore" />
+            <OnPlatform x:Key="LiveScore" x:TypeArguments="x:String">
+                <On Platform="Android" Value="fonts/livescore.ttf#livescore" />
+                <On Platform="iOS" Value="livescore" />
             </OnPlatform>
             <Color x:Key="PrimaryColor">#0B0D14</Color>
             <Color x:Key="SecondColor">#2D2F3F</Color>
@@ -98,467 +96,290 @@
             <x:Double x:Key="SportNameFontSize">15</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor"
-                        Value="{StaticResource NavigationPageBgColor}" />
-                <Setter Property="BarTextColor"
-                        Value="{StaticResource NavigationPageColor}" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPageBgColor}" />
+                <Setter Property="BarTextColor" Value="{StaticResource NavigationPageColor}" />
             </Style>
-            <Style x:Key="NavigationName"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="{StaticResource NavigationPageColor}" />
-                <Setter Property="HorizontalOptions"
-                        Value="Center" />
+            <Style x:Key="NavigationName" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource NavigationPageColor}" />
+                <Setter Property="HorizontalOptions" Value="Center" />
             </Style>
-            <Style x:Key="SportName"
-                   BasedOn="{StaticResource NavigationName}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="{StaticResource SportNameFontSize}" />
-                <Setter Property="FontAttributes"
-                        Value="Bold" />
+            <Style
+                x:Key="SportName"
+                BasedOn="{StaticResource NavigationName}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource SportNameFontSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>
-            <Style x:Key="PageTitle"
-                   BasedOn="{StaticResource NavigationName}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="{StaticResource TitlePageFontSize}" />
+            <Style
+                x:Key="PageTitle"
+                BasedOn="{StaticResource NavigationName}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource TitlePageFontSize}" />
             </Style>
-            <Style x:Key="ListViewHasBackground"
-                   TargetType="ListView">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource PrimaryColor}" />
+            <Style x:Key="ListViewHasBackground" TargetType="ListView">
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
             </Style>
-            <Style x:Key="Team"
-                   TargetType="Label">
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="FontSize"
-                        Value="{StaticResource GeneralFontSize}" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource TeamColor}" />
+            <Style x:Key="Team" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource TeamColor}" />
             </Style>
             <Style TargetType="Image">
-                <Setter Property="IsOpaque"
-                        Value="True" />
+                <Setter Property="IsOpaque" Value="True" />
             </Style>
             <!--  Layout  -->
             <Style TargetType="StackLayout">
-                <Setter Property="Spacing"
-                        Value="0" />
+                <Setter Property="Spacing" Value="0" />
             </Style>
-            <Style x:Key="StacklayoutHorizontal"
-                   TargetType="StackLayout">
-                <Setter Property="Orientation"
-                        Value="Horizontal" />
+            <Style x:Key="StacklayoutHorizontal" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
             </Style>
-            <Style x:Key="StacklayoutStretchHorizontalCenterVertical"
-                   TargetType="StackLayout">
-                <Setter Property="Orientation"
-                        Value="Horizontal" />
-                <Setter Property="HorizontalOptions"
-                        Value="FillAndExpand" />
-                <Setter Property="VerticalOptions"
-                        Value="Center" />
+            <Style x:Key="StacklayoutStretchHorizontalCenterVertical" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
-            <Style x:Key="StacklayoutAlignRight"
-                   TargetType="StackLayout">
-                <Setter Property="Orientation"
-                        Value="Horizontal" />
-                <Setter Property="HorizontalOptions"
-                        Value="End" />
-                <Setter Property="VerticalOptions"
-                        Value="Center" />
+            <Style x:Key="StacklayoutAlignRight" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="HorizontalOptions" Value="End" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
-            <Style x:Key="StacklayoutVerticalCenter"
-                   TargetType="StackLayout">
-                <Setter Property="HorizontalOptions"
-                        Value="FillAndExpand" />
-                <Setter Property="VerticalOptions"
-                        Value="Center" />
+            <Style x:Key="StacklayoutVerticalCenter" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
             <Style TargetType="Grid">
-                <Setter Property="RowSpacing"
-                        Value="0" />
-                <Setter Property="ColumnSpacing"
-                        Value="0" />
+                <Setter Property="RowSpacing" Value="0" />
+                <Setter Property="ColumnSpacing" Value="0" />
             </Style>
-            <Style x:Key="FlexLayoutHorizontalCenter"
-                   TargetType="FlexLayout">
-                <Setter Property="JustifyContent"
-                        Value="SpaceBetween" />
-                <Setter Property="AlignItems"
-                        Value="Center" />
+            <Style x:Key="FlexLayoutHorizontalCenter" TargetType="FlexLayout">
+                <Setter Property="JustifyContent" Value="SpaceBetween" />
+                <Setter Property="AlignItems" Value="Center" />
             </Style>
-            <Style x:Key="FlexLayoutAlignLeft"
-                   TargetType="FlexLayout">
-                <Setter Property="AlignItems"
-                        Value="Center" />
+            <Style x:Key="FlexLayoutAlignLeft" TargetType="FlexLayout">
+                <Setter Property="AlignItems" Value="Center" />
             </Style>
-            <Style x:Key="FlexLayoutAlignRight"
-                   TargetType="FlexLayout">
-                <Setter Property="JustifyContent"
-                        Value="End" />
-                <Setter Property="AlignItems"
-                        Value="Center" />
+            <Style x:Key="FlexLayoutAlignRight" TargetType="FlexLayout">
+                <Setter Property="JustifyContent" Value="End" />
+                <Setter Property="AlignItems" Value="Center" />
             </Style>
-            <Style x:Key="FlexLayoutAlignCenter"
-                   TargetType="FlexLayout">
-                <Setter Property="JustifyContent"
-                        Value="Center" />
-                <Setter Property="AlignItems"
-                        Value="Center" />
+            <Style x:Key="FlexLayoutAlignCenter" TargetType="FlexLayout">
+                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="AlignItems" Value="Center" />
             </Style>
-            <Style x:Key="FlexLayoutVerticalCenter"
-                   TargetType="FlexLayout">
-                <Setter Property="Direction"
-                        Value="Column" />
-                <Setter Property="JustifyContent"
-                        Value="Center" />
-                <Setter Property="AlignItems"
-                        Value="Center" />
+            <Style x:Key="FlexLayoutVerticalCenter" TargetType="FlexLayout">
+                <Setter Property="Direction" Value="Column" />
+                <Setter Property="JustifyContent" Value="Center" />
+                <Setter Property="AlignItems" Value="Center" />
             </Style>
             <Style TargetType="Frame">
-                <Setter Property="Padding"
-                        Value="0" />
-                <Setter Property="HasShadow"
-                        Value="False" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="HasShadow" Value="False" />
             </Style>
-            <Style x:Key="VerticalLine"
-                   TargetType="BoxView">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource LineColor}" />
-                <Setter Property="WidthRequest"
-                        Value="1" />
+            <Style x:Key="VerticalLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+                <Setter Property="WidthRequest" Value="1" />
             </Style>
-            <Style x:Key="HorizontalLine"
-                   TargetType="BoxView">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource LineColor}" />
-                <Setter Property="HeightRequest"
-                        Value="1" />
+            <Style x:Key="HorizontalLine" TargetType="BoxView">
+                <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+                <Setter Property="HeightRequest" Value="1" />
             </Style>
             <!--  Sidebar  -->
-            <Style x:Key="SettingMenuRow"
-                   TargetType="FlexLayout">
-                <Setter Property="HeightRequest"
-                        Value="{StaticResource SettingMenuHeight}" />
-                <Setter Property="AlignItems"
-                        Value="Center" />
-                <Setter Property="JustifyContent"
-                        Value="SpaceBetween" />
-                <Setter Property="Padding"
-                        Value="16,0" />
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource SecondColor}" />
+            <Style x:Key="SettingMenuRow" TargetType="FlexLayout">
+                <Setter Property="HeightRequest" Value="{StaticResource SettingMenuHeight}" />
+                <Setter Property="AlignItems" Value="Center" />
+                <Setter Property="JustifyContent" Value="SpaceBetween" />
+                <Setter Property="Padding" Value="16,0" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
             </Style>
-            <Style x:Key="NavName"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="{StaticResource SidebarFontSize}" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
+            <Style x:Key="NavName" TargetType="Label">
+                <Setter Property="FontSize" Value="{StaticResource SidebarFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
             </Style>
-            <Style x:Key="NavValue"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="{StaticResource ThirdTextColor}" />
-                <Setter Property="FontSize"
-                        Value="{StaticResource SidebarFontSize}" />
+            <Style x:Key="NavValue" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource ThirdTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource SidebarFontSize}" />
             </Style>
             <!--  Icons  -->
-            <Style x:Key="Icons"
-                   TargetType="Label">
-                <Setter Property="FontFamily"
-                        Value="{StaticResource LiveScore}" />
+            <Style x:Key="Icons" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource LiveScore}" />
             </Style>
-            <Style x:Key="ButtonIcon"
-                   TargetType="Button">
-                <Setter Property="FontFamily"
-                        Value="{StaticResource LiveScore}" />
+            <Style x:Key="ButtonIcon" TargetType="Button">
+                <Setter Property="FontFamily" Value="{StaticResource LiveScore}" />
             </Style>
-            <Style x:Key="ArrowRightIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource ThirdTextColor}" />
-                <Setter Property="FontSize"
-                        Value="12" />
-                <Setter Property="Text"
-                        Value="&#xe913;" />
-                <Setter Property="Margin"
-                        Value="6,0,0,0" />
+            <Style
+                x:Key="ArrowRightIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource ThirdTextColor}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Text" Value="&#xe913;" />
+                <Setter Property="Margin" Value="6,0,0,0" />
             </Style>
-            <Style x:Key="CheckIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="Text"
-                        Value="&#xe913;" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource SecondAccentColor}" />
-                <Setter Property="FontSize"
-                        Value="14" />
-                <Setter Property="Text"
-                        Value="&#xe914;" />
+            <Style
+                x:Key="CheckIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="Text" Value="&#xe913;" />
+                <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Text" Value="&#xe914;" />
             </Style>
-            <Style x:Key="FavoriteIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="Text"
-                        Value="&#xe90f;" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource FourthTextColor}" />
-                <Setter Property="FontSize"
-                        Value="15" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="HorizontalTextAlignment"
-                        Value="Start" />
+            <Style
+                x:Key="FavoriteIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="Text" Value="&#xe90f;" />
+                <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>
-            <Style x:Key="ActiveFavoriteIcon"
-                   BasedOn="{StaticResource FavoriteIcon}"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryAccentColor}" />
+            <Style
+                x:Key="ActiveFavoriteIcon"
+                BasedOn="{StaticResource FavoriteIcon}"
+                TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
             </Style>
-            <Style x:Key="DetailIcon"
-                   TargetType="{x:Type ffImageLoading:CachedImage}">
-                <Setter Property="Source"
-                        Value="images/common/league_detail.png" />
-                <Setter Property="WidthRequest"
-                        Value="14" />
-                <Setter Property="HeightRequest"
-                        Value="14" />
+            <Style x:Key="DetailIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Source" Value="images/common/league_detail.png" />
+                <Setter Property="WidthRequest" Value="14" />
+                <Setter Property="HeightRequest" Value="14" />
             </Style>
-            <Style x:Key="LiveIcon"
-                   TargetType="{x:Type ffImageLoading:CachedImage}">
-                <Setter Property="Source"
-                        Value="images/common/match_live.png" />
-                <Setter Property="WidthRequest"
-                        Value="16" />
-                <Setter Property="HeightRequest"
-                        Value="16" />
-                <Setter Property="Margin"
-                        Value="0,0,0,4" />
+            <Style x:Key="LiveIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Source" Value="images/common/match_live.png" />
+                <Setter Property="WidthRequest" Value="16" />
+                <Setter Property="HeightRequest" Value="16" />
+                <Setter Property="Margin" Value="0,0,0,4" />
             </Style>
-            <Style x:Key="ExtraTimeIcon"
-                   TargetType="{x:Type ffImageLoading:CachedImage}">
-                <Setter Property="Source"
-                        Value="images/common/match_extra_time.png" />
-                <Setter Property="WidthRequest"
-                        Value="14" />
-                <Setter Property="HeightRequest"
-                        Value="16" />
-                <Setter Property="Margin"
-                        Value="0,0,0,4" />
+            <Style x:Key="ExtraTimeIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Source" Value="images/common/match_extra_time.png" />
+                <Setter Property="WidthRequest" Value="14" />
+                <Setter Property="HeightRequest" Value="16" />
+                <Setter Property="Margin" Value="0,0,0,4" />
             </Style>
-            <Style x:Key="AssistGoalIcon"
-                   TargetType="Image">
-                <Setter Property="Source"
-                        Value="images/common/assist_goal.png" />
-                <Setter Property="WidthRequest"
-                        Value="16" />
-                <Setter Property="HeightRequest"
-                        Value="16" />
+            <Style
+                x:Key="CalendarIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource FourthTextColor}" />
+                <Setter Property="Text" Value="&#xe91f;" />
             </Style>
-            <Style x:Key="CalendarIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="20" />
-                <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource FourthTextColor}" />
-                <Setter Property="Text"
-                        Value="&#xe91f;" />
+            <Style
+                x:Key="HomeIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+                <Setter Property="Text" Value="&#xe91e;" />
             </Style>
-            <Style x:Key="HomeIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="18" />
-                <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryAccentColor}" />
-                <Setter Property="Text"
-                        Value="&#xe91e;" />
+            <Style
+                x:Key="ArrowDownIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="Label">
+                <Setter Property="FontSize" Value="4" />
+                <Setter Property="Margin" Value="2,0,0,0" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="Text" Value="&#xe91c;" />
             </Style>
-            <Style x:Key="ArrowDownIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="FontSize"
-                        Value="4" />
-                <Setter Property="Margin"
-                        Value="2,0,0,0" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="Text"
-                        Value="&#xe91c;" />
+            <Style
+                x:Key="BookmakerDetailIcon"
+                BasedOn="{StaticResource Icons}"
+                TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Source" Value="images/common/bookmarker_detail.png" />
             </Style>
-            <Style x:Key="ChartIcon"
-                   BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-                <Setter Property="WidthRequest"
-                        Value="16" />
-                <Setter Property="HorizontalOptions"
-                        Value="EndAndExpand" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="FontSize"
-                        Value="12" />
-                <Setter Property="Text"
-                        Value="&#xe920;" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
-            </Style>
-            <Style x:Key="WinnerInfoIcon"
-                   TargetType="{x:Type ffImageLoading:CachedImage}">
-                <Setter Property="Aspect"
-                        Value="AspectFit" />
-                <Setter Property="WidthRequest"
-                        Value="13" />
+            <Style x:Key="WinnerInfoIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="WidthRequest" Value="13" />
             </Style>
             <!--  League Group  -->
-            <Style x:Key="LeagueGroup"
-                   BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
-                   TargetType="FlexLayout">
-                <Setter Property="HeightRequest"
-                        Value="{StaticResource LeagueHeight}" />
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource SecondColor}" />
-                <Setter Property="Padding"
-                        Value="16,0" />
+            <Style
+                x:Key="LeagueGroup"
+                BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+                TargetType="FlexLayout">
+                <Setter Property="HeightRequest" Value="{StaticResource LeagueHeight}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+                <Setter Property="Padding" Value="16,0" />
             </Style>
-            <Style x:Key="LeagueLogo"
-                   TargetType="Image">
-                <Setter Property="Aspect"
-                        Value="AspectFit" />
-                <Setter Property="WidthRequest"
-                        Value="21" />
-                <Setter Property="Margin"
-                        Value="0,0,12,0" />
+            <Style x:Key="LeagueLogo" TargetType="Image">
+                <Setter Property="Aspect" Value="AspectFit" />
+                <Setter Property="WidthRequest" Value="21" />
+                <Setter Property="Margin" Value="0,0,12,0" />
             </Style>
-            <Style x:Key="LeagueName"
-                   TargetType="Label">
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryTextColor}" />
-                <Setter Property="FontSize"
-                        Value="{StaticResource GeneralFontSize}" />
-                <Setter Property="FontAttributes"
-                        Value="Bold" />
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
+            <Style x:Key="LeagueName" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
             </Style>
-            <Style x:Key="LeagueArrowRightIcon"
-                   BasedOn="{StaticResource ArrowRightIcon}"
-                   TargetType="Label">
-                <Setter Property="Margin"
-                        Value="10,0,0,0" />
+            <Style
+                x:Key="LeagueArrowRightIcon"
+                BasedOn="{StaticResource ArrowRightIcon}"
+                TargetType="Label">
+                <Setter Property="Margin" Value="10,0,0,0" />
             </Style>
-            <Style x:Key="CenterActivityIndicator"
-                   TargetType="ActivityIndicator">
-                <Setter Property="Color"
-                        Value="White" />
-                <Setter Property="HorizontalOptions"
-                        Value="CenterAndExpand" />
-                <Setter Property="VerticalOptions"
-                        Value="CenterAndExpand" />
+            <Style x:Key="CenterActivityIndicator" TargetType="ActivityIndicator">
+                <Setter Property="Color" Value="White" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
             </Style>
             <!--  Define the basic table  -->
-            <Style x:Key="TableContainer"
-                   TargetType="StackLayout">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableLineColor}" />
-                <Setter Property="Margin"
-                        Value="0,4" />
+            <Style x:Key="TableContainer" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
+                <Setter Property="Margin" Value="0,4" />
             </Style>
-            <Style x:Key="TableText"
-                   TargetType="Label">
-                <Setter Property="VerticalTextAlignment"
-                        Value="Center" />
-                <Setter Property="FontSize"
-                        Value="{StaticResource TableRowFontSize}" />
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableBgColor}" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource TableRowColor}" />
+            <Style x:Key="TableText" TargetType="Label">
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource TableRowFontSize}" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableBgColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TableRowColor}" />
             </Style>
-            <Style x:Key="TableHeaderText"
-                   BasedOn="{StaticResource TableText}"
-                   TargetType="Label">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableHeaderBgColor}" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource TableHeaderColor}" />
-                <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
-                <Setter Property="FontAttributes"
-                        Value="Bold" />
+            <Style
+                x:Key="TableHeaderText"
+                BasedOn="{StaticResource TableText}"
+                TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableHeaderBgColor}" />
+                <Setter Property="TextColor" Value="{StaticResource TableHeaderColor}" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontAttributes" Value="Bold" />
             </Style>
-            <Style x:Key="GridTableContainer"
-                   TargetType="Grid">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableLineColor}" />
-                <Setter Property="ColumnSpacing"
-                        Value="1" />
+            <Style x:Key="GridTableContainer" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
+                <Setter Property="ColumnSpacing" Value="1" />
             </Style>
-            <Style x:Key="GridTableHeaderContainer"
-                   TargetType="Grid">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableLineColor}" />
-                <Setter Property="ColumnSpacing"
-                        Value="1" />
-                <Setter Property="RowSpacing"
-                        Value="1" />
+            <Style x:Key="GridTableHeaderContainer" TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
+                <Setter Property="ColumnSpacing" Value="1" />
+                <Setter Property="RowSpacing" Value="1" />
             </Style>
-            <Style x:Key="TableLine"
-                   TargetType="BoxView">
-                <Setter Property="HeightRequest"
-                        Value="1" />
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource TableLineColor}" />
+            <Style x:Key="TableLine" TargetType="BoxView">
+                <Setter Property="HeightRequest" Value="1" />
+                <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
             </Style>
             <!--  Dropdown List  -->
-            <Style x:Key="DropdownListBox"
-                   TargetType="AbsoluteLayout">
-                <Setter Property="FlexLayout.Shrink"
-                        Value="0" />
+            <Style x:Key="DropdownListBox" TargetType="AbsoluteLayout">
+                <Setter Property="FlexLayout.Shrink" Value="0" />
             </Style>
-            <Style x:Key="DropdownList"
-                   TargetType="Picker">
-                <Setter Property="AbsoluteLayout.LayoutBounds"
-                        Value="1,1,1,1" />
-                <Setter Property="AbsoluteLayout.LayoutFlags"
-                        Value="All" />
-                <Setter Property="HorizontalOptions"
-                        Value="FillAndExpand" />
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource PrimaryColor}" />
-                <Setter Property="FontSize"
-                        Value="{StaticResource SmallTextFontSize}" />
-                <Setter Property="TextColor"
-                        Value="{StaticResource PrimaryAccentColor}" />
-                <Setter Property="TitleColor"
-                        Value="{StaticResource PrimaryAccentColor}" />
+            <Style x:Key="DropdownList" TargetType="Picker">
+                <Setter Property="AbsoluteLayout.LayoutBounds" Value="1,1,1,1" />
+                <Setter Property="AbsoluteLayout.LayoutFlags" Value="All" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+                <Setter Property="TitleColor" Value="{StaticResource PrimaryAccentColor}" />
             </Style>
-            <Style x:Key="DropdownIcon"
-                   TargetType="Image">
-                <Setter Property="Source"
-                        Value="images/common/arrow_down.png" />
-                <Setter Property="WidthRequest"
-                        Value="5" />
-                <Setter Property="HeightRequest"
-                        Value="3" />
-                <Setter Property="Margin"
-                        Value="4,0,8,0" />
+            <Style x:Key="DropdownIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
+                <Setter Property="Source" Value="images/common/arrow_down.png" />
+                <Setter Property="WidthRequest" Value="5" />
+                <Setter Property="HeightRequest" Value="3" />
+                <Setter Property="Margin" Value="4,0,8,0" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

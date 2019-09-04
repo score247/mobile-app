@@ -3,54 +3,56 @@
     x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsMovementView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
     BackgroundColor="{StaticResource PrimaryColor}"
     mc:Ignorable="d">
-  <NavigationPage.TitleView>
-    <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" CurrentSport="{Binding CurrentSportName}" />
-  </NavigationPage.TitleView>
+    <NavigationPage.TitleView>
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" CurrentSport="{Binding CurrentSportName}" />
+    </NavigationPage.TitleView>
 
-  <ContentPage.Content>
-    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-      <StackLayout.Resources>
-        <ResourceDictionary>
-          <ResourceDictionary.MergedDictionaries>
-            <resources:MatchDetailViewResource />
-            <resources:MatchDetailOddsViewResource />
-          </ResourceDictionary.MergedDictionaries>
-          <templateSelectors:OddsMovementItemTemplateSelector x:Key="OddsMovementItemTemplateSelector" />
-        </ResourceDictionary>
-      </StackLayout.Resources>
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailOddsViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                    <templateSelectors:OddsMovementItemTemplateSelector x:Key="OddsMovementItemTemplateSelector" />
+                </ResourceDictionary>
+            </StackLayout.Resources>
 
-      <Image
-          Source="images/common/odd_movement_chart.png"
-          Style="{StaticResource MatchDetailOddsMovementChart}" />
+            <ffImageLoading:CachedImage
+                DownsampleToViewSize="True"
+                Source="images/common/odd_movement_chart.png"
+                Style="{StaticResource MatchDetailOddsMovementChart}" />
 
-      <ActivityIndicator
-          IsEnabled="{Binding IsLoading}"
-          IsRunning="{Binding IsLoading}"
-          IsVisible="{Binding IsLoading}"
-          Style="{StaticResource CenterActivityIndicator}"
-          VerticalOptions="Center" />
+            <ActivityIndicator
+                IsEnabled="{Binding IsLoading}"
+                IsRunning="{Binding IsLoading}"
+                IsVisible="{Binding IsLoading}"
+                Style="{StaticResource CenterActivityIndicator}"
+                VerticalOptions="Center" />
 
-      <ListView
-          AutomationId="MatchOddsMovement"
-          AutomationProperties.IsInAccessibleTree="False"
-          CachingStrategy="RecycleElement"
-          BackgroundColor="{StaticResource PrimaryColor}"
-          GroupHeaderTemplate="{Binding HeaderTemplate}"
-          HasUnevenRows="true"
-          IsGroupingEnabled="true"
-          IsPullToRefreshEnabled="true"
-          IsRefreshing="{Binding IsRefreshing}"
-          ItemTemplate="{StaticResource OddsMovementItemTemplateSelector}"
-          ItemsSource="{Binding GroupOddsMovementItems}"
-          RefreshCommand="{Binding RefreshCommand}"
-          SeparatorVisibility="None" />
-    </StackLayout>
-  </ContentPage.Content>
+            <ListView
+                AutomationId="MatchOddsMovement"
+                AutomationProperties.IsInAccessibleTree="False"
+                BackgroundColor="{StaticResource PrimaryColor}"
+                CachingStrategy="RecycleElement"
+                GroupHeaderTemplate="{Binding HeaderTemplate}"
+                HasUnevenRows="true"
+                IsGroupingEnabled="true"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsRefreshing}"
+                ItemTemplate="{StaticResource OddsMovementItemTemplateSelector}"
+                ItemsSource="{Binding GroupOddsMovementItems}"
+                RefreshCommand="{Binding RefreshCommand}"
+                SeparatorVisibility="None" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

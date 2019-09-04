@@ -3,6 +3,7 @@
     x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.ScoreChangeItemTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell>
         <StackLayout>
@@ -55,10 +56,11 @@
                         HorizontalTextAlignment="End"
                         Style="{StaticResource MatchInfoMainPlayer}"
                         Text="{Binding HomePlayerName}" />
-                    <Image
+                    <ffImageLoading:CachedImage
                         Grid.Row="0"
                         Grid.Column="1"
                         AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
+                        DownsampleToViewSize="True"
                         IsVisible="{Binding VisibleHomeImage}"
                         Source="{Binding ImageSource}"
                         Style="{StaticResource MatchInfoImage}" />
@@ -71,11 +73,12 @@
                         IsVisible="{Binding IsVisibleHomeAssist}"
                         Style="{StaticResource MatchInfoAssistedPlayer}"
                         Text="{Binding HomeAssistName}" />
-                    <Image
+                    <ffImageLoading:CachedImage
                         Grid.Row="1"
                         Grid.Column="1"
+                        DownsampleToViewSize="True"
                         IsVisible="{Binding IsVisibleHomeAssist}"
-                        Source="images/common/assist_goal.png"
+                        Source="{Binding GoalAssitImageSource}"
                         Style="{StaticResource MatchInfoAssistedImage}" />
 
                 </Grid>
@@ -99,10 +102,11 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <Image
+                    <ffImageLoading:CachedImage
                         Grid.Row="0"
                         Grid.Column="0"
                         AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
+                        DownsampleToViewSize="True"
                         IsVisible="{Binding VisibleAwayImage}"
                         Source="{Binding ImageSource}"
                         Style="{StaticResource MatchInfoImage}" />
@@ -113,11 +117,12 @@
                         Style="{StaticResource MatchInfoMainPlayer}"
                         Text="{Binding AwayPlayerName}" />
 
-                    <Image
+                    <ffImageLoading:CachedImage
                         Grid.Row="1"
                         Grid.Column="0"
+                        DownsampleToViewSize="True"
                         IsVisible="{Binding IsVisibleAwayAssist}"
-                        Source="images/common/assist_goal.png"
+                        Source="{Binding GoalAssitImageSource}"
                         Style="{StaticResource MatchInfoAssistedImage}" />
                     <Label
                         Grid.Row="1"

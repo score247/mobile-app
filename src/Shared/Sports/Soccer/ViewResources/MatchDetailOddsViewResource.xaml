@@ -2,7 +2,8 @@
 <ResourceDictionary
     x:Class="LiveScore.Soccer.ViewResources.MatchDetailOddsViewResource"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <Style
         x:Key="MatchOddsDropdownListBox"
         BasedOn="{StaticResource DropdownListBox}"
@@ -50,7 +51,7 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="MatchDetailOddsMovementChart" TargetType="Image">
+    <Style x:Key="MatchDetailOddsMovementChart" TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Margin" Value="0,20,0,0" />
         <Setter Property="HeightRequest" Value="91" />
         <Setter Property="WidthRequest" Value="371" />

@@ -3,6 +3,7 @@
     x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.PenaltyShootOutTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell>
         <StackLayout>
@@ -41,10 +42,11 @@
                     HorizontalTextAlignment="End"
                     Style="{StaticResource MatchInfoMainPlayerDarkColor}"
                     Text="{Binding HomePlayerName}" />
-                <Image
+                <ffImageLoading:CachedImage
                     Grid.Row="0"
                     Grid.Column="2"
                     AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
+                    DownsampleToViewSize="True"
                     Source="{Binding HomeImageSource}"
                     Style="{StaticResource MatchInfoImage}" />
 
@@ -55,10 +57,11 @@
                     Style="{StaticResource MatchInfoScore}"
                     Text="{Binding Score}" />
 
-                <Image
+                <ffImageLoading:CachedImage
                     Grid.Row="0"
                     Grid.Column="4"
                     AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
+                    DownsampleToViewSize="True"
                     Source="{Binding AwayImageSource}"
                     Style="{StaticResource MatchInfoImage}" />
                 <Label
