@@ -12,24 +12,24 @@
         x:Name="self"
         prism:ViewModelLocator.AutowireViewModel="True"
         BackgroundColor="{StaticResource PrimaryColor}">
-    <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate
-                        Title="{langs:Translate TV}"
-                        mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-    </NavigationPage.TitleView>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <Label Text="TV Schedule is comming soon"
-               TextColor="{StaticResource SecondTextColor}"
-               HorizontalOptions="Center"
-               VerticalOptions="Center" FontSize="13" />
-    </ContentPage.Content>
+  <NavigationPage.TitleView>
+    <coreTemplates:NavigationTitleTemplate
+                    Title="{langs:Translate TV}"
+                    mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+  </NavigationPage.TitleView>
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Priority="1">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource">
+          <On Platform="IOS" Value="images/common/icon_transparent.png" />
+        </OnPlatform>
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+  <ContentPage.Content>
+    <Label Text="TV Schedule is comming soon"
+           TextColor="{StaticResource SecondTextColor}"
+           HorizontalOptions="Center"
+           VerticalOptions="Center" FontSize="13" />
+  </ContentPage.Content>
 </ContentPage>

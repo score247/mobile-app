@@ -11,24 +11,24 @@
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
-    <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-    </NavigationPage.TitleView>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Priority="1">
-            <ToolbarItem.Icon>
-                <OnPlatform x:TypeArguments="FileImageSource">
-                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
-                </OnPlatform>
-            </ToolbarItem.Icon>
-        </ToolbarItem>
-    </ContentPage.ToolbarItems>
-    <ContentPage.Content>
-        <Label
-            FontSize="13"
-            HorizontalOptions="Center"
-            Text="News is comming soon"
-            TextColor="{StaticResource SecondTextColor}"
-            VerticalOptions="Center" />
-    </ContentPage.Content>
+  <NavigationPage.TitleView>
+    <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+  </NavigationPage.TitleView>
+  <ContentPage.ToolbarItems>
+    <ToolbarItem Priority="1">
+      <ToolbarItem.Icon>
+        <OnPlatform x:TypeArguments="FileImageSource">
+          <On Platform="IOS" Value="images/common/icon_transparent.png" />
+        </OnPlatform>
+      </ToolbarItem.Icon>
+    </ToolbarItem>
+  </ContentPage.ToolbarItems>
+  <ContentPage.Content>
+    <Label
+        FontSize="13"
+        HorizontalOptions="Center"
+        Text="News is comming soon"
+        TextColor="{StaticResource SecondTextColor}"
+        VerticalOptions="Center" />
+  </ContentPage.Content>
 </ContentPage>
