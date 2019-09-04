@@ -19,8 +19,8 @@
 
         public string Title
         {
-            get { return (string)GetValue(TitleProperty); }
-            set { SetValue(TitleProperty, value); }
+            get => (string)GetValue(TitleProperty);
+            set => SetValue(TitleProperty, value);
         }
 
         public static readonly BindableProperty CurrentSportProperty
@@ -28,8 +28,8 @@
 
         public string CurrentSport
         {
-            get { return (string)GetValue(CurrentSportProperty); }
-            set { SetValue(CurrentSportProperty, value); }
+            get => (string)GetValue(CurrentSportProperty);
+            set => SetValue(CurrentSportProperty, value);
         }
     }
 }

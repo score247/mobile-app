@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Score
 {
-    using LiveScore.Score.ViewModels;
-    using LiveScore.Score.Views;
+    using ViewModels;
+    using Views;
     using Prism.Ioc;
     using Prism.Modularity;
 

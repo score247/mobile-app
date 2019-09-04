@@ -3,7 +3,7 @@
     using System.Collections.ObjectModel;
     using Core.Models.Leagues;
     using Core.ViewModels;
-    using LiveScore.Core;
+    using Core;
     using Prism.Navigation;
 
     public class LeagueViewModel : ViewModelBase

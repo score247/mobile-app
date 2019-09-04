@@ -12,8 +12,8 @@
         public AsianHdpItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-             : base(BetType.AsianHDP, betTypeOdds, navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+             : base(BetType.AsianHDP, betTypeOdds, navigationService, dependencyResolver)
         {
         }
 
@@ -46,35 +46,41 @@
         {
             var awayOdds = GetOddsInfo(BetOption.Away);
 
-            if (awayOdds != null)
+            if (awayOdds == null)
             {
-                AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
-                AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
-                AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
+            AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
+            AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
         }
 
         private void BuildBetOptionsValue()
         {
             var homeOdds = GetOddsInfo(BetOption.Home);
 
-            if (homeOdds != null)
+            if (homeOdds == null)
             {
-                OpeningHdp = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
-                LiveHdp = homeOdds.OptionValue.ToOddsOptionFormat();
+                return;
             }
+
+            OpeningHdp = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
+            LiveHdp = homeOdds.OptionValue.ToOddsOptionFormat();
         }
 
         private void BuildHomeOdds()
         {
             var homeOdds = GetOddsInfo(BetOption.Home);
 
-            if (homeOdds != null)
+            if (homeOdds == null)
             {
-                HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
-                HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
-                HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
+            HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
+            HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
         }
 
         private BetOptionOdds GetOddsInfo(string option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));

@@ -30,8 +30,8 @@
 
         public int NumberDisplayDays
         {
-            get { return (int)GetValue(NumberDisplayDaysProperty); }
-            set { SetValue(NumberDisplayDaysProperty, value); }
+            get => (int)GetValue(NumberDisplayDaysProperty);
+            set => SetValue(NumberDisplayDaysProperty, value);
         }
 
         private static void OnNumberDisplayDaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)

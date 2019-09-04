@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Features.Menu
 {
-    using LiveScore.Features.Menu.ViewModels;
-    using LiveScore.Features.Menu.Views;
+    using ViewModels;
+    using Views;
     using Prism.Ioc;
     using Prism.Modularity;
 

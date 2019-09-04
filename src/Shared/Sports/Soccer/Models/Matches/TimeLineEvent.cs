@@ -52,9 +52,7 @@
 
         public override bool Equals(object obj)
         {
-            var actualObj = obj as TimelineEvent;
-
-            if (actualObj == null)
+            if (!(obj is TimelineEvent actualObj))
             {
                 return false;
             }

@@ -56,9 +56,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             this.eventAggregator = eventAggregator;
             oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)));
+            RefreshCommand = new DelegateAsyncCommand(async () =>
+                await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)).ConfigureAwait(false));
 
-            OnOddsTabClicked = new DelegateAsyncCommand<string>(async (betTypeId) => await FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(Byte.Parse(betTypeId)), oddsFormat));
+            OnOddsTabClicked = new DelegateAsyncCommand<string>(async (betTypeId) =>
+                await FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat).ConfigureAwait(false));
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
 
@@ -103,7 +105,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             if (!navigated.Success)
             {
-                await LoggingService.LogErrorAsync(navigated.Exception);
+                await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
 
@@ -160,7 +162,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 IsLoading = !isRefresh;
 
                 SelectedBetType = betType;
-                await LoadOddsByBetType(formatType, isRefresh);
+                await LoadOddsByBetType(formatType, isRefresh).ConfigureAwait(false);
 
                 IsRefreshing = false;
                 IsLoading = false;
@@ -185,20 +187,22 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)
-            => isRefresh ||
-            SelectedBetType != betType ||
-            BetTypeOddsItems == null ||
-            !BetTypeOddsItems.Any();
+            => isRefresh
+            || SelectedBetType != betType
+            || BetTypeOddsItems?.Any() != true;
 
         [Time]
         internal void HandleOddsComparisonMessage(IOddsComparisonMessage oddsComparisonMessage)
         {
-            if (oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase) &&
-                oddsComparisonMessage.BetTypeOddsList != null &&
-                oddsComparisonMessage.BetTypeOddsList.Any(x => x.Id == SelectedBetType.Value))
+            if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
+                || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)
+            {
+                return;
+            }
+
+            var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
             {
                 var needToReOrder = false;
-                var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {

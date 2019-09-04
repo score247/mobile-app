@@ -32,8 +32,8 @@
 
         public IEnumerable<TabItemViewModel> ItemsSource
         {
-            get { return (IEnumerable<TabItemViewModel>)GetValue(ItemsSourceProperty); }
-            set { SetValue(ItemsSourceProperty, value); }
+            get => (IEnumerable<TabItemViewModel>)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
 
         public int SelectedTabIndex { get; set; }

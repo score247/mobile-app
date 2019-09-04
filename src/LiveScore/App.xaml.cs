@@ -92,9 +92,9 @@ namespace LiveScore
 
             ViewModelLocationProvider.SetDefaultViewTypeToViewModelTypeResolver((viewType) =>
             {
-                var viewName = viewType.FullName.Replace(".ViewModels.", ".Views.");
+                var viewName = viewType.FullName?.Replace(".ViewModels.", ".Views.");
                 var viewAssemblyName = viewType.GetTypeInfo().Assembly.FullName;
-                var viewModelName = $"{viewName.Replace("View", string.Empty)}ViewModel, {viewAssemblyName}";
+                var viewModelName = $"{viewName?.Replace("View", string.Empty)}ViewModel, {viewAssemblyName}";
 
                 return Type.GetType(viewModelName);
             });

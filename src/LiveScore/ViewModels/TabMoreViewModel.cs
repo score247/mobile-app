@@ -2,12 +2,12 @@
 {
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core;
+    using Common.Extensions;
+    using Core;
     using LiveScore.Core.ViewModels;
     using LiveScore.Features.News.Views;
     using LiveScore.Features.TVSchedule.Views;
-    using LiveScore.Models;
+    using Models;
     using Prism.Navigation;
 
     public class TabMoreViewModel : ViewModelBase

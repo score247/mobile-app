@@ -13,7 +13,7 @@
 
             if (value != null)
             {
-                string valueAsString = value.ToString();
+                var valueAsString = value.ToString();
 
                 if (valueAsString.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
                 {

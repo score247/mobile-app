@@ -40,7 +40,7 @@
 
             var soccerMatch = match as Match;
 
-            if (soccerMatch.EventStatus == null)
+            if (soccerMatch?.EventStatus == null)
             {
                 return AppResources.FT;
             }

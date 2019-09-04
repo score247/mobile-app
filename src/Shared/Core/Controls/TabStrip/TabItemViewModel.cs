@@ -16,10 +16,10 @@
 
         public TabItemViewModel(
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver,
+            IDependencyResolver dependencyResolver,
             DataTemplate dataTemplate,
             IEventAggregator eventAggregator = null)
-            : base(navigationService, depdendencyResolver, eventAggregator)
+            : base(navigationService, dependencyResolver, eventAggregator)
         {
             Template = dataTemplate;
         }

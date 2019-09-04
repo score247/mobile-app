@@ -14,9 +14,9 @@
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Name="Search"
+            Text="Search"
             Command="{Binding ClickSearchCommand}"
-            Icon="images/common/search.png"
+            IconImageSource="images/common/search.png"
             Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>

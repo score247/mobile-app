@@ -21,8 +21,8 @@
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-             : base(timelineEvent, matchInfo, navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+             : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
         }
 
@@ -34,7 +34,7 @@
 
         public bool IsVisibleAwayAssist { get; private set; }
 
-        public string GoalAssitImageSource { get; private set; }
+        public string GoalAssistImageSource { get; private set; }
 
         protected override void BuildInfo()
         {
@@ -63,10 +63,10 @@
         {
             AwayPlayerName = TimelineEvent?.GoalScorer?.Name;
 
-            if (TimelineEvent.Assist != null)
+            if (TimelineEvent?.Assist != null)
             {
                 AwayAssistName = TimelineEvent.Assist.Name;
-                GoalAssitImageSource = Images.GoalAssist.Value;
+                GoalAssistImageSource = Images.GoalAssist.Value;
             }
 
             VisibleAwayImage = true;
@@ -76,10 +76,10 @@
         {
             HomePlayerName = TimelineEvent?.GoalScorer?.Name;
 
-            if (TimelineEvent.Assist != null)
+            if (TimelineEvent?.Assist != null)
             {
                 HomeAssistName = TimelineEvent.Assist.Name;
-                GoalAssitImageSource = Images.GoalAssist.Value;
+                GoalAssistImageSource = Images.GoalAssist.Value;
             }
 
             VisibleHomeImage = true;

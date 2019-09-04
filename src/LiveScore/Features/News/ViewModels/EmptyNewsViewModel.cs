@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Features.News.ViewModels
 {
-    using LiveScore.Core;
+    using Core;
     using LiveScore.Core.ViewModels;
     using Prism.Navigation;
 

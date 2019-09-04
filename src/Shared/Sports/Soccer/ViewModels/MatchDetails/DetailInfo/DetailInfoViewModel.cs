@@ -116,20 +116,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             matchInfo.UpdateTimelineEvents(FilterPenaltyEvents(matchInfo)?.OrderByDescending(t => t.Time));
 
-            if (matchInfo.TimelineEvents != null)
+            if (matchInfo.TimelineEvents == null)
             {
-                var soccerTimelines = matchInfo.TimelineEvents.OfType<TimelineEvent>();
-                soccerTimelines = soccerTimelines
+                return;
+            }
+
+            {
+                var soccerTimeline = matchInfo.TimelineEvents.OfType<TimelineEvent>();
+                soccerTimeline = soccerTimeline
                     .Where(t => (t).IsDetailInfoEvent())
                     .Distinct().ToList();
 
-                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(soccerTimelines.Select(t =>
-                    new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
-                    .CreateInstance()));
+                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
+                    soccerTimeline.Select(t => new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
+                        .CreateInstance()));
             }
         }
 
-        private void BuildFooterInfo(MatchInfo matchInfo)
+        private void BuildFooterInfo(IMatchInfo matchInfo)
         {
             DisplayEventDate = matchInfo.Match.EventDate.ToFullLocalDateTime();
 

@@ -70,10 +70,7 @@ namespace LiveScore.Core.Tests.Mocks
                     throw new NotImplementedException();
             }
 
-            public bool IsInvokeRequired
-            {
-                get { return false; }
-            }
+            public bool IsInvokeRequired => false;
 
             public string RuntimePlatform { get; set; }
 

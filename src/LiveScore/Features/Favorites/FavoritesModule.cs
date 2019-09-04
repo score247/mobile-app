@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Features.Favorites
 {
-    using LiveScore.Features.Favorites.ViewModels;
-    using LiveScore.Features.Favorites.Views;
+    using ViewModels;
+    using Views;
     using Prism.Ioc;
     using Prism.Modularity;
 

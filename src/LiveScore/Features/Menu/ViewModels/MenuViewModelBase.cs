@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Core;
+    using Core;
     using Prism.Navigation;
 
     public class MenuViewModelBase : ViewModelBase

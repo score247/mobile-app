@@ -25,9 +25,9 @@
             set => SetValue(RedCardsProperty, value);
         }
 
-        private static void OnRedCardCountChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnRedCardCountChanged(BindableObject bindableObject, object oldValue, object newValue)
         {
-            var control = (RedCardTemplate)bindable;
+            var control = (RedCardTemplate)bindableObject;
 
             if (control == null || newValue == null)
             {
@@ -37,7 +37,7 @@
             var redCards = (byte)newValue;
             var stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
 
-            for (int i = 0; i < redCards; i++)
+            for (var i = 0; i < redCards; i++)
             {
                 stackLayout.Children.Add(BuildRedCardImage());
             }

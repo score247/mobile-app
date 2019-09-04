@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Views
+﻿using Prism;
+
+namespace LiveScore.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
@@ -14,12 +16,12 @@
             {
                 SetUpBarTextColor();
             }
-            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+            On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
         }
 
         private void SetUpBarTextColor()
         {
-            var color = App.Current.Resources["FunctionBarActiveColor"];
+            var color = PrismApplicationBase.Current.Resources["FunctionBarActiveColor"];
             if (color != null)
             {
                 BarTextColor = (Color)color;

@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Features.News.ViewModels
 {
     using Core.ViewModels;
-    using LiveScore.Core;
+    using Core;
     using Prism.Navigation;
 
     public class NewsViewModel : ViewModelBase

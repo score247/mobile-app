@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Features.TVSchedule.ViewModels
 {
-    using LiveScore.Core;
+    using Core;
     using LiveScore.Core.ViewModels;
     using Prism.Navigation;
 

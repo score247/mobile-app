@@ -12,8 +12,8 @@
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-             : base(timelineEvent, matchInfo, navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+             : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
         }
 

@@ -3,10 +3,10 @@
     using System.Threading.Tasks;
     using Common.Extensions;
     using Core.ViewModels;
-    using LiveScore.Common.Services;
-    using LiveScore.Core;
-    using LiveScore.Core.Services;
-    using LiveScore.Views;
+    using Common.Services;
+    using Core;
+    using Core.Services;
+    using Views;
     using Prism.Navigation;
     using Xamarin.Forms;
 

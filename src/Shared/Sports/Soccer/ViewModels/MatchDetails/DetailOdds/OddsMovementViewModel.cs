@@ -76,7 +76,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 betType = (BetType)parameters["BetType"];
                 oddsFormat = parameters["Format"].ToString();
 
-                Title = $"{bookmaker.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
+                Title = $"{bookmaker?.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
 
                 HeaderTemplate = new BaseMovementHeaderViewModel(betType, true, NavigationService, DependencyResolver).CreateTemplate();
             }
@@ -147,11 +147,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
-            if (HasData)
+            if (HasData && matchOddsMovement.OddsMovements != null)
             {
                 foreach (var oddsMovement in matchOddsMovement.OddsMovements)
                 {
-                    var viewModel = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver).CreateInstance();
+                    var viewModel =
+                        new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
+                            .CreateInstance();
 
                     OddsMovementItems.Add(viewModel);
                 }
@@ -161,28 +163,32 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         internal void HandleOddsMovementMessage(IOddsMovementMessage oddsMovementMessage)
         {
-            if (oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
+            if (!oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
-                //TODO check existing odds movement
-                var updatedOddsMovements = oddsMovementMessage.OddsEvents
-                    .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
-                    .Select(x => x.OddsMovement)
-                    .OrderBy(x => x.UpdateTime)
-                    .ToList();
-
-                if (updatedOddsMovements.Count > 0)
-                {
-                    foreach (var oddsMovement in updatedOddsMovements)
-                    {
-                        var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
-                            .CreateInstance();
-
-                        OddsMovementItems.Insert(0, newOddsMovementView);
-                    }
-
-                    //await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
-                }
+                return;
             }
+
+            //TODO check existing odds movement
+            var updatedOddsMovements = oddsMovementMessage.OddsEvents
+                .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
+                .Select(x => x.OddsMovement)
+                .OrderBy(x => x.UpdateTime)
+                .ToList();
+
+            if (updatedOddsMovements.Count <= 0)
+            {
+                return;
+            }
+
+            foreach (var oddsMovement in updatedOddsMovements)
+            {
+                var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
+                    .CreateInstance();
+
+                OddsMovementItems.Insert(0, newOddsMovementView);
+            }
+
+            //await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
         }
 
         protected virtual void Dispose(bool disposing)

@@ -9,7 +9,7 @@
 
     public class Entity<TId, TName>
     {
-        public TId Id { get; set; }
+        public TId Id { get; }
 
         public TName Name { get; set; }
     }

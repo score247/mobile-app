@@ -67,11 +67,11 @@
 
                 hubConnection.Closed += HubConnection_Closed;
 
-                await hubConnection.StartAsync();
+                await hubConnection.StartAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                await logger.LogErrorAsync(ex);
+                await logger.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
 
@@ -81,19 +81,19 @@
             {
                 if (hubConnection.State == HubConnectionState.Disconnected)
                 {
-                    await hubConnection.StartAsync();
+                    await hubConnection.StartAsync().ConfigureAwait(false);
                 }
             }
             catch (Exception ex)
             {
-                await logger.LogErrorAsync(ex);
+                await logger.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
 
         private async Task HubConnection_Closed(Exception arg)
         {
-            await logger.LogErrorAsync(arg);
-            await hubConnection.StartAsync();
+            await logger.LogErrorAsync(arg).ConfigureAwait(false);
+            await hubConnection.StartAsync().ConfigureAwait(false);
         }
     }
 }

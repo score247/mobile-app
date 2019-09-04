@@ -10,8 +10,8 @@ namespace LiveScore.Core.Tests.ViewModels
     {
         public MockViewModel(
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-            : base(navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+            : base(navigationService, dependencyResolver)
         {
             Title = "Title";
         }

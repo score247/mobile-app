@@ -137,7 +137,10 @@
 
         public void UpdateResult(IMatchResult matchResult)
         {
-            var soccerMatchResult = matchResult as MatchResult;
+            if (!(matchResult is MatchResult soccerMatchResult))
+            {
+                return;
+            }
 
             EventStatus = soccerMatchResult.EventStatus;
             MatchStatus = soccerMatchResult.MatchStatus;
@@ -151,7 +154,10 @@
 
         public void UpdateLastTimeline(ITimelineEvent timelineEvent)
         {
-            var soccerTimeline = timelineEvent as TimelineEvent;
+            if (!(timelineEvent is TimelineEvent soccerTimeline))
+            {
+                return;
+            }
 
             LastTimelineType = soccerTimeline.Type;
             StoppageTime = soccerTimeline.StoppageTime;
@@ -160,7 +166,10 @@
 
         public void UpdateTeamStatistic(ITeamStatistic teamStatistic, bool isHome)
         {
-            var soccerTeamStats = teamStatistic as TeamStatistic;
+            if (!(teamStatistic is TeamStatistic soccerTeamStats))
+            {
+                return;
+            }
 
             if (isHome)
             {
@@ -189,12 +198,12 @@
                => AwayWinSecondLeg ? Enumerations.Images.SecondLeg.Value : string.Empty;
 
         public bool IsInExtraTime
-            => EventStatus != null && EventStatus.IsLive
-            && MatchStatus != null && MatchStatus.IsInExtraTime;
+            => EventStatus?.IsLive == true
+            && MatchStatus?.IsInExtraTime == true;
 
         public bool IsInLiveAndNotExtraTime
             => EventStatus != null && EventStatus.IsLive
-            && MatchStatus != null && !MatchStatus.IsInExtraTime;
+            && MatchStatus?.IsInExtraTime == false;
 
         public byte TotalHomeRedCards => (byte)(HomeRedCards + HomeYellowRedCards);
 
@@ -210,15 +219,15 @@
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
         private bool HomeWinPenalty
-           => EventStatus != null && EventStatus.IsClosed && GetPenaltyResult() != null && HomeTeamId == WinnerId;
+           => EventStatus?.IsClosed == true && GetPenaltyResult() != null && HomeTeamId == WinnerId;
 
         private bool AwayWinPenalty
-            => EventStatus != null && EventStatus.IsClosed && GetPenaltyResult() != null && AwayTeamId == WinnerId;
+            => EventStatus?.IsClosed == true && GetPenaltyResult() != null && AwayTeamId == WinnerId;
 
         private bool HomeWinSecondLeg
-          => EventStatus != null && EventStatus.IsClosed && (!string.IsNullOrEmpty(AggregateWinnerId) && HomeTeamId == AggregateWinnerId);
+          => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && HomeTeamId == AggregateWinnerId);
 
         private bool AwayWinSecondLeg
-          => EventStatus != null && EventStatus.IsClosed && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
+          => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Features.Menu.ViewModels
 {
-    using LiveScore.Core;
+    using Core;
     using Prism.Navigation;
 
     public class RefreshViewModel : MenuViewModelBase

@@ -27,10 +27,10 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IDependencyResolver depdendencyResolver)
+           IDependencyResolver dependencyResolver)
         {
             NavigationService = navigationService;
-            DependencyResolver = depdendencyResolver;
+            DependencyResolver = dependencyResolver;
 
             SettingsService = DependencyResolver.Resolve<ISettingsService>();
             LoggingService = DependencyResolver.Resolve<ILoggingService>();

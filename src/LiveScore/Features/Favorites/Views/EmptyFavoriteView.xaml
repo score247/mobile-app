@@ -16,7 +16,7 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="Favourites is comming soon"
+        <Label Text="Favourite is coming soon"
                TextColor="{StaticResource SecondTextColor}"
                HorizontalOptions="Center"
                VerticalOptions="Center" FontSize="13" />

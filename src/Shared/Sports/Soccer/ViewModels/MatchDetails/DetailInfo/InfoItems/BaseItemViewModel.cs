@@ -43,8 +43,8 @@
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-            : base(navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+            : base(navigationService, dependencyResolver)
         {
             TimelineEvent = timelineEvent;
             MatchInfo = matchInfo;
@@ -79,27 +79,15 @@
 
         public bool VisibleAwayImage { get; protected set; }
 
-        public BaseItemViewModel CreateInstance()
-        {
-            if (ViewModelMapper.ContainsKey(TimelineEvent.Type))
-            {
-                return Activator.CreateInstance(
+        public BaseItemViewModel CreateInstance() =>
+            ViewModelMapper.ContainsKey(TimelineEvent.Type)
+                ? Activator.CreateInstance(
                     ViewModelMapper[TimelineEvent.Type],
-                    TimelineEvent, MatchInfo, NavigationService, DependencyResolver) as BaseItemViewModel;
-            }
+                    TimelineEvent, MatchInfo, NavigationService, DependencyResolver) as BaseItemViewModel
+                : new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
 
-            return new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
-        }
-
-        public DataTemplate CreateTemplate()
-        {
-            if (TemplateMapper.ContainsKey(TimelineEvent.Type))
-            {
-                return TemplateMapper[TimelineEvent.Type];
-            }
-
-            return new MainEventItemTemplate();
-        }
+        public DataTemplate CreateTemplate() 
+            => TemplateMapper.ContainsKey(TimelineEvent.Type) ? TemplateMapper[TimelineEvent.Type] : new MainEventItemTemplate();
 
         protected virtual void BuildInfo()
         {
@@ -115,9 +103,6 @@
                 : TimelineEvent.MatchTime + "+" + TimelineEvent.StoppageTime + "'";
         }
 
-        private void BuildData()
-        {
-            BuildInfo();
-        }
+        private void BuildData() => BuildInfo();
     }
 }
