@@ -28,13 +28,13 @@
 
         [Benchmark]
         [ArgumentsSource(nameof(GetMatchesBenchmarkParams))]
-        public void BenchmarkGetMatches(string apiName, DateRange dateRange, Language language, bool forceFetchNewData = false)
+        public void BenchmarkGetMatches(string apiName, DateTime date, Language language, bool forceFetchNewData = false)
         {
             var httpService = new HttpService(new Uri(ApiUrls[apiName]));
             var apiService = new ApiService(new ApiPolicy(), httpService, new Refit.RefitSettings());
             var matchService = new MatchService(apiService, cachingService, loggingService);
 
-            var matches = matchService.GetMatches(dateRange, language, forceFetchNewData).GetAwaiter().GetResult();
+            var matches = matchService.GetMatches(new DateRange(date), language, forceFetchNewData).GetAwaiter().GetResult();
 
             Console.WriteLine($"Total Match: {matches.Count()}");
         }
@@ -47,18 +47,18 @@
 
         public IEnumerable<object[]> GetMatchesBenchmarkParams()
         {
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 28, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 28, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 29, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 29, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 30, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 30, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 31, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 08, 31, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 09, 01, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 09, 01, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 09, 02, 0, 0, 0, DateTimeKind.Utc)), Language.English, true };
-            yield return new object[] { V2Api, new DateRange(new DateTime(2019, 09, 02, 0, 0, 0, DateTimeKind.Utc)), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 28, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 28, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 29, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 29, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 30, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 30, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 31, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 08, 31, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 09, 01, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 09, 01, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
+            yield return new object[] { V2Api, new DateTime(2019, 09, 02, 0, 0, 0, DateTimeKind.Utc), Language.English, true };
+            yield return new object[] { V2Api, new DateTime(2019, 09, 02, 0, 0, 0, DateTimeKind.Utc), Language.English, false };
         }
     }
 

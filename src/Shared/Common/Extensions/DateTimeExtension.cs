@@ -12,7 +12,7 @@
         public static DateTime Yesterday() => DateTime.Today.AddDays(-1);
 
         public static DateTime EndOfDay(this DateTime dateTime)
-            => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999);
+            => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999, dateTime.Kind);
 
         public static DateTime EndOfDay(this DateTime dateTime, int timeZoneOffset)
             => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 23, 59, 59, 999, dateTime.Kind)
