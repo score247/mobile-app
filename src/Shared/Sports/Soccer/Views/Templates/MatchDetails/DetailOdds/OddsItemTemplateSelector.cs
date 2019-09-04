@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Views.Templates.DetailOdds
+﻿namespace LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds
 {
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using Xamarin.Forms;
+    using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems;
 
     public class OddsItemTemplateSelector : DataTemplateSelector
     {

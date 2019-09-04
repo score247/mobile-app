@@ -121,7 +121,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 var soccerTimelines = matchInfo.TimelineEvents.OfType<TimelineEvent>();
                 soccerTimelines = soccerTimelines
                     .Where(t => (t).IsDetailInfoEvent())
-                    .Distinct().ToList() ?? new List<TimelineEvent>();
+                    .Distinct().ToList();
 
                 InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(soccerTimelines.Select(t =>
                     new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)

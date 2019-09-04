@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailOdds
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
     using System.Collections.ObjectModel;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
+    using OddItems;
 
     public class OddsMovementObservableCollection : ObservableCollection<BaseMovementItemViewModel>
     {
@@ -10,7 +10,7 @@
             Heading = heading;
         }
 
-        public string Heading { get; private set; }
+        public string Heading { get; }
 
         public ObservableCollection<BaseMovementItemViewModel> ItemViews => this;
     }

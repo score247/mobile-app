@@ -2,23 +2,24 @@
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
 
-namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
+namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
     using System;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using Common.LangResources;
+    using Core;
+    using Enumerations;
     using LiveScore.Common.Extensions;
-    using LiveScore.Common.LangResources;
-    using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Enumerations;
     using MethodTimer;
+    using OddItems;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;

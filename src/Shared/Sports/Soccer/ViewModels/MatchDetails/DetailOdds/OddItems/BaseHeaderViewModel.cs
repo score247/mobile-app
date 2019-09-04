@@ -1,11 +1,14 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
     using System.Collections.Generic;
-    using LiveScore.Core;
+    using Core;
+    using Enumerations;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.AsianHdp;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OverUnder;
     using Prism.Navigation;
+    using Views.Templates.MatchDetails.DetailOdds.OddsItems;
     using Xamarin.Forms;
 
     public class BaseHeaderViewModel : ViewModelBase
@@ -17,24 +20,24 @@
             { BetType.OverUnder, new OverUnderHeaderTemplate() },
         };
 
-        private readonly bool HasData;
+        private readonly bool hasData;
 
         public BaseHeaderViewModel(
             BetType betType,
             bool hasData,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-            : base(navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+            : base(navigationService, dependencyResolver)
         {
             BetType = betType;
-            HasData = hasData;
+            this.hasData = hasData;
         }
 
         public BetType BetType { get; }
 
         public DataTemplate CreateTemplate()
         {
-            if (HasData && TemplateMapper.ContainsKey(BetType))
+            if (hasData && TemplateMapper.ContainsKey(BetType))
             {
                 return TemplateMapper[BetType];
             }

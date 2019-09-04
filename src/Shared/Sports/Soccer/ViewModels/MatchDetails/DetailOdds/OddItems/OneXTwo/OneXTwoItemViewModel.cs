@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
     using System.Linq;
-    using LiveScore.Core;
+    using Core;
+    using Enumerations;
+    using Extensions;
     using LiveScore.Core.Models.Odds;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Extensions;
     using Prism.Navigation;
 
     public class OneXTwoItemViewModel : BaseItemViewModel
@@ -12,9 +12,9 @@
         public OneXTwoItemViewModel(
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-             : base(BetType.OneXTwo, betTypeOdds, navigationService, depdendencyResolver)
-        {            
+            IDependencyResolver dependencyResolver)
+             : base(BetType.OneXTwo, betTypeOdds, navigationService, dependencyResolver)
+        {
         }
 
         public string HomeLiveOdds { get; private set; }
@@ -80,6 +80,7 @@
             }
         }
 
-        private BetOptionOdds GetOddsInfo(string option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+        private BetOptionOdds GetOddsInfo(string option)
+            => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
     }
 }

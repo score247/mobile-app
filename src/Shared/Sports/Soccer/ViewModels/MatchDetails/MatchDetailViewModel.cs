@@ -1,45 +1,43 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using LiveScore.Common.Extensions;
-using LiveScore.Common.LangResources;
-using LiveScore.Core;
-using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Converters;
-using LiveScore.Core.Enumerations;
-using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Models.Teams;
-using LiveScore.Core.PubSubEvents.Matches;
-using LiveScore.Core.PubSubEvents.Teams;
-using LiveScore.Core.ViewModels;
-using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.DetailH2H;
-using LiveScore.Soccer.ViewModels.DetailLineups;
-using LiveScore.Soccer.ViewModels.DetailOdds;
-using LiveScore.Soccer.ViewModels.DetailSocial;
-using LiveScore.Soccer.ViewModels.DetailStats;
-using LiveScore.Soccer.ViewModels.DetailTable;
-using LiveScore.Soccer.ViewModels.DetailTracker;
-using LiveScore.Soccer.ViewModels.DetailTV;
-using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-using LiveScore.Soccer.Views.Templates.DetailH2H;
-using LiveScore.Soccer.Views.Templates.DetailInfo;
-using LiveScore.Soccer.Views.Templates.DetailLinesUp;
-using LiveScore.Soccer.Views.Templates.DetailOdds;
-using LiveScore.Soccer.Views.Templates.DetailSocial;
-using LiveScore.Soccer.Views.Templates.DetailStatistics;
-using LiveScore.Soccer.Views.Templates.DetailTable;
-using LiveScore.Soccer.Views.Templates.DetailTracker;
-using LiveScore.Soccer.Views.Templates.DetailTV;
-using Prism.Events;
-using Prism.Navigation;
-using Xamarin.Forms;
+﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
-[assembly: InternalsVisibleTo("Soccer.Tests")]
-
-namespace LiveScore.Soccer.ViewModels
+namespace LiveScore.Soccer.ViewModels.MatchDetails
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using Common.LangResources;
+    using Core;
+    using Core.Controls.TabStrip;
+    using DetailH2H;
+    using DetailLineups;
+    using DetailOdds;
+    using DetailSocial;
+    using DetailStats;
+    using DetailTable;
+    using DetailTracker;
+    using DetailTV;
+    using LiveScore.Common.Extensions;
+    using LiveScore.Core.Converters;
+    using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.PubSubEvents.Matches;
+    using LiveScore.Core.PubSubEvents.Teams;
+    using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Views.Templates.DetailH2H;
+    using LiveScore.Soccer.Views.Templates.DetailSocial;
+    using LiveScore.Soccer.Views.Templates.DetailTable;
+    using LiveScore.Soccer.Views.Templates.DetailTracker;
+    using LiveScore.Soccer.Views.Templates.DetailTV;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
+    using MatchDetailInfo;
+    using Models.Matches;
+    using Prism.Events;
+    using Prism.Navigation;
+    using Views.Templates.DetailInfo;
+    using Views.Templates.DetailLinesUp;
+    using Views.Templates.DetailStatistics;
+    using Xamarin.Forms;
+
     public class MatchDetailViewModel : ViewModelBase
     {
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -111,9 +109,7 @@ namespace LiveScore.Soccer.ViewModels
         protected override void OnInitialized()
         {
             TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
-            // TODO
-            //var match = await matchService.GetMatch(MatchViewModel.Match.Id, CurrentLanguage, true);
-            //MatchViewModel.BuildMatch(match);
+            // TODO: Call match service to get match detail
 
             EventAggregator
                 .GetEvent<MatchEventPubSubEvent>()

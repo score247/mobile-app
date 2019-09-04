@@ -39,7 +39,7 @@ namespace LiveScore.iOS.Renderers
 
         private void UpdateAllTabBarItems()
         {
-            float.TryParse(App.Current.Resources["FunctionBarFontSize"].ToString(), out float tabbedPageFont);
+            float.TryParse(App.Current.Resources["FunctionBarFontSize"].ToString(), out var tabbedPageFont);
 
             foreach (var controller in ViewControllers)
             {

@@ -1,17 +1,17 @@
 ﻿namespace LiveScore.Soccer
 {
+    using Converters;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
-    using LiveScore.Soccer.Converters;
-    using LiveScore.Soccer.Services;
-    using LiveScore.Soccer.ViewModels;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
-    using LiveScore.Soccer.Views;
-    using LiveScore.Soccer.Views.Templates;
-    using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
     using Prism.Ioc;
     using Prism.Modularity;
+    using Services;
+    using ViewModels.MatchDetails;
+    using ViewModels.MatchDetails.DetailOdds;
+    using Views;
+    using Views.Templates;
+    using Views.Templates.MatchDetails.DetailOdds;
     using Xamarin.Forms;
 
     public class SoccerModule : IModule

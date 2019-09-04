@@ -5,71 +5,71 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters"
-    xmlns:resources="clr-namespace:LiveScore.Core.Controls.DateBar.Views"
-    x:Name="view">
-    <ContentView.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <resources:DateBarResource />
-            </ResourceDictionary.MergedDictionaries>
-            <converters:ItemTextColorConverter x:Key="itemTextColorConverter" />
-            <converters:ShortDayOfWeekConverter x:Key="dayOfWeekConverter" />
-            <converters:HomeTextColorConverter x:Key="homeTextColorConverter" />
-        </ResourceDictionary>
-    </ContentView.Resources>
-    <ContentView.Content>
-        <StackLayout>
-            <FlexLayout Style="{StaticResource DateBarContainer}">
-                <Frame
-                    x:Name="HomeButton"
-                    AutomationId="DateBar_HomeBtn"
-                    Style="{StaticResource DateBarBox}">
-                    <Label Style="{StaticResource HomeIcon}" TextColor="{Binding HomeIsSelected, Converter={StaticResource homeTextColorConverter}}" />
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-                <ListView
-                    x:Name="CalendarListView"
-                    AutomationId="DateBar"
-                    AutomationProperties.IsInAccessibleTree="False"
-                    ItemsSource="{Binding CalendarItems}"
-                    Style="{StaticResource DateBarListView}">
-                    <ListView.Behaviors>
-                        <b:EventToCommandBehavior
-                            Command="{Binding SelectDateCommand}"
-                            EventArgsParameterPath="Item"
-                            EventName="ItemTapped" />
-                    </ListView.Behaviors>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <Frame Rotation="90" Style="{StaticResource DateBarBox}">
-                                        <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
-                                            <Label
-                                                AutomationId="{Binding Date.Day, StringFormat='DateBar-{0}'}"
-                                                Style="{StaticResource DateBarDate}"
-                                                Text="{Binding Date.Day}"
-                                                TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
-                                            <Label
-                                                Style="{StaticResource DateBarDay}"
-                                                Text="{Binding Date.DayOfWeek, Converter={StaticResource dayOfWeekConverter}}"
-                                                TextColor="{Binding ., Converter={StaticResource itemTextColorConverter}}" />
-                                        </FlexLayout>
-                                    </Frame>
-                                </ViewCell.View>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <Frame
-                    x:Name="CalendarIcon"
-                    AutomationId="DateBar_CalendarBtn"
-                    Style="{StaticResource DateBarBox}">
-                    <Label Style="{StaticResource CalendarIcon}" />
-                </Frame>
-            </FlexLayout>
-        </StackLayout>
-    </ContentView.Content>
+    xmlns:resources="clr-namespace:LiveScore.Core.Controls.DateBar.Views">
+  <ContentView.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <resources:DateBarResource />
+      </ResourceDictionary.MergedDictionaries>
+      <converters:ItemTextColorConverter x:Key="ItemTextColorConverter" />
+      <converters:ShortDayOfWeekConverter x:Key="DayOfWeekConverter" />
+      <converters:HomeTextColorConverter x:Key="HomeTextColorConverter" />
+    </ResourceDictionary>
+  </ContentView.Resources>
+  <ContentView.Content>
+    <StackLayout>
+      <FlexLayout Style="{StaticResource DateBarContainer}">
+        <Frame
+            x:Name="HomeButton"
+            AutomationId="DateBar_HomeBtn"
+            Style="{StaticResource DateBarBox}">
+          <Label Style="{StaticResource HomeIcon}"
+                 TextColor="{Binding HomeIsSelected, Converter={StaticResource HomeTextColorConverter}}" />
+          <Frame.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding SelectHomeCommand}" />
+          </Frame.GestureRecognizers>
+        </Frame>
+        <ListView
+            x:Name="CalendarListView"
+            AutomationId="DateBar"
+            AutomationProperties.IsInAccessibleTree="False"
+            ItemsSource="{Binding CalendarItems}"
+            Style="{StaticResource DateBarListView}">
+          <ListView.Behaviors>
+            <b:EventToCommandBehavior
+                Command="{Binding SelectDateCommand}"
+                EventArgsParameterPath="Item"
+                EventName="ItemTapped" />
+          </ListView.Behaviors>
+          <ListView.ItemTemplate>
+            <DataTemplate>
+              <ViewCell>
+                <ViewCell.View>
+                  <Frame Rotation="90" Style="{StaticResource DateBarBox}">
+                    <FlexLayout Style="{StaticResource FlexLayoutVerticalCenter}">
+                      <Label
+                          AutomationId="{Binding Date.Day, StringFormat='DateBar-{0}'}"
+                          Style="{StaticResource DateBarDate}"
+                          Text="{Binding Date.Day}"
+                          TextColor="{Binding ., Converter={StaticResource ItemTextColorConverter}}" />
+                      <Label
+                          Style="{StaticResource DateBarDay}"
+                          Text="{Binding Date.DayOfWeek, Converter={StaticResource DayOfWeekConverter}}"
+                          TextColor="{Binding ., Converter={StaticResource ItemTextColorConverter}}" />
+                    </FlexLayout>
+                  </Frame>
+                </ViewCell.View>
+              </ViewCell>
+            </DataTemplate>
+          </ListView.ItemTemplate>
+        </ListView>
+        <Frame
+            x:Name="CalendarIcon"
+            AutomationId="DateBar_CalendarBtn"
+            Style="{StaticResource DateBarBox}">
+          <Label Style="{StaticResource CalendarIcon}" />
+        </Frame>
+      </FlexLayout>
+    </StackLayout>
+  </ContentView.Content>
 </ContentView>

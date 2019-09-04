@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
     using System.Linq;
     using LiveScore.Core;

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
-    using LiveScore.Core.Controls.DateBar.ViewModels;
+    using ViewModels;
     using Xamarin.Forms;
 
     public partial class DateBar : ContentView

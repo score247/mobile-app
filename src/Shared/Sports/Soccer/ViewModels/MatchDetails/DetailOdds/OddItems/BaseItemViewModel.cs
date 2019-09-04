@@ -1,12 +1,14 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailOdds.OddItems
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Core;
+    using Core;
+    using Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Views.Templates.DetailOdds.OddsItems;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.AsianHdp;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OverUnder;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -30,8 +32,8 @@
             BetType betType,
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
-            IDependencyResolver depdendencyResolver)
-            : base(navigationService, depdendencyResolver)
+            IDependencyResolver dependencyResolver)
+            : base(navigationService, dependencyResolver)
         {
             BetTypeOdds = betTypeOdds;
             BetType = betType;

@@ -2,7 +2,7 @@
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
 
-namespace LiveScore.Soccer.ViewModels.DetailOdds
+namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
     using System;
     using System.Collections.Generic;
@@ -10,16 +10,16 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core;
+    using Core.Controls.TabStrip;
+    using Enumerations;
     using LiveScore.Common.Extensions;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.TabStrip;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using MethodTimer;
+    using OddItems;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -31,7 +31,6 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
         private readonly IEventAggregator eventAggregator;
-
         private bool disposedValue;
 
         public DetailOddsViewModel(
@@ -64,7 +63,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
 
             //TODO verify keepSubscriberReferenceAlive
-            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);            
+            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
         }
 
         public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
@@ -189,7 +188,7 @@ namespace LiveScore.Soccer.ViewModels.DetailOdds
             => isRefresh ||
             SelectedBetType != betType ||
             BetTypeOddsItems == null ||
-            !BetTypeOddsItems.Any();   
+            !BetTypeOddsItems.Any();
 
         [Time]
         internal void HandleOddsComparisonMessage(IOddsComparisonMessage oddsComparisonMessage)
