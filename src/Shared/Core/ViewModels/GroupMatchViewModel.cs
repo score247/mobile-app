@@ -18,7 +18,7 @@
 
         public string EventDate { get; }
 
-        public override bool Equals(object obj) 
+        public override bool Equals(object obj)
             => (obj is GroupMatchViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
 
         public override int GetHashCode() => LeagueId?.GetHashCode() ?? 0;

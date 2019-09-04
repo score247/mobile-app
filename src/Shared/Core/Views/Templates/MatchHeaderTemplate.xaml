@@ -50,7 +50,6 @@
                     Grid.Column="3"
                     AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
                     Style="{StaticResource MatchDetailIcon}" />
-
             </Grid>
         </StackLayout>
     </ViewCell>

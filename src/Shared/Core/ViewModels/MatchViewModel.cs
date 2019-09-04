@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
-    using System.Linq;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Events;
     using LiveScore.Core.Models.Matches;

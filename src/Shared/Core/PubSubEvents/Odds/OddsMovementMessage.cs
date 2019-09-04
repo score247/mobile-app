@@ -1,5 +1,4 @@
-﻿
-namespace LiveScore.Core.PubSubEvents.Odds
+﻿namespace LiveScore.Core.PubSubEvents.Odds
 {
     using System.Collections.Generic;
     using LiveScore.Core.Models.Odds;
