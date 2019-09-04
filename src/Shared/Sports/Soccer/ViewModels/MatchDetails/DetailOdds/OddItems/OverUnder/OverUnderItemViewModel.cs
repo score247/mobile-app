@@ -77,7 +77,6 @@
             }
         }
 
-        private BetOptionOdds GetOddsInfo(string option)
-            => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option));
+        private BetOptionOdds GetOddsInfo(BetOption option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option.DisplayName));
     }
 }

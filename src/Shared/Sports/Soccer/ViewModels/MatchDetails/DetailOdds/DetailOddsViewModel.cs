@@ -42,6 +42,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
+            Debug.WriteLine($"MatchId {matchId}");
             this.matchId = matchId;
             this.eventStatus = eventStatus;
 

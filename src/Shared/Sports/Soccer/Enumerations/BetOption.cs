@@ -4,25 +4,25 @@
 
     public class BetOption : Enumeration
     {
-        public const string Home = "home";
+        private const string HomeType = "home";
 
-        public static readonly BetOption HomeType = new BetOption(1, Home);
+        public static readonly BetOption Home = new BetOption(1, HomeType);
 
-        public const string Draw = "draw";
+        private const string DrawType = "draw";
 
-        public static readonly BetOption DrawType = new BetOption(2, Draw);
+        public static readonly BetOption Draw = new BetOption(2, DrawType);
 
-        public const string Away = "away";
+        private const string AwayType = "away";
 
-        public static readonly BetOption AwayType = new BetOption(3, Away);
+        public static readonly BetOption Away= new BetOption(3, AwayType);
 
-        public const string Over = "over";
+        private const string  OverType = "over";
 
-        public static readonly BetOption OverType = new BetOption(4, Over);
+        public static readonly BetOption Over = new BetOption(4, OverType);
 
-        public const string Under = "under";
+        private const string  UnderType = "under";
 
-        public static readonly BetOption UnderType = new BetOption(5, Under);
+        public static readonly BetOption Under = new BetOption(5, UnderType);
 
         private BetOption(byte value, string displayName)
            : base(value, displayName)
