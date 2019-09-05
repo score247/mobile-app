@@ -1,4 +1,7 @@
-﻿namespace LiveScore.Features.Score.Views
+﻿using System;
+using System.Diagnostics;
+
+namespace LiveScore.Features.Score.Views
 {
     using Common.Helpers;
     using MethodTimer;
@@ -30,6 +33,10 @@
             Profiler.Stop("ScoresViewModel.LoadMatches.Home");
             Profiler.Stop("ScoresViewModel.OnNavigatedTo");
             Profiler.Stop("ScoresViewModel.OnResume");
+
+            Debug.WriteLine("");
+            Debug.WriteLine("=======================================");
+            Debug.WriteLine("");
 #endif
         }
     }

@@ -1,15 +1,16 @@
-﻿namespace LiveScore.Core.ViewModels
+﻿using LiveScore.Core.Models.Matches;
+
+namespace LiveScore.Core.ViewModels
 {
-    using System;
     using LiveScore.Common.Extensions;
 
     public class GroupMatchViewModel
     {
-        public GroupMatchViewModel(string leagueId, string leagueName, DateTimeOffset eventDate)
+        public GroupMatchViewModel(IMatch match)
         {
-            LeagueId = leagueId;
-            LeagueName = leagueName?.ToUpperInvariant();
-            EventDate = eventDate.ToLocalShortDayMonth();
+            LeagueId = match.LeagueId;
+            LeagueName = match.LeagueName;
+            EventDate = match.EventDate.ToLocalShortDayMonth();
         }
 
         public string LeagueId { get; }

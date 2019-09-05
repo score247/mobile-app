@@ -76,22 +76,19 @@
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            if (Match.EventStatus.IsLive && !isSubscribingTimer)
+            if (!Match.EventStatus.IsLive || isSubscribingTimer)
             {
-                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Subscribe(BuildMatchTime);
-                isSubscribingTimer = true;
+                return;
             }
+
+            eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Subscribe(BuildMatchTime);
+            isSubscribingTimer = true;
         }
 
-        private void UnsubscribeMatchTimeChangeEvent()
+        public void UnsubscribeMatchTimeChangeEvent()
         {
             eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Unsubscribe(BuildMatchTime);
             isSubscribingTimer = false;
-        }
-
-        public void Dispose()
-        {
-            UnsubscribeMatchTimeChangeEvent();
         }
     }
 }

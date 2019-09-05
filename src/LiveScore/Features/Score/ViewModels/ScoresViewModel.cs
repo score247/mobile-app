@@ -14,10 +14,10 @@ namespace LiveScore.Features.Score.ViewModels
     using Core;
     using Core.Controls.DateBar.Events;
     using Core.Converters;
-    using LiveScore.Core.Models.Matches;
     using Core.PubSubEvents.Matches;
     using Core.PubSubEvents.Teams;
     using Core.Services;
+    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.ViewModels;
     using MethodTimer;
     using Prism.Events;
@@ -31,6 +31,9 @@ namespace LiveScore.Features.Score.ViewModels
         private readonly IMatchMinuteConverter matchMinuteConverter;
         private DateRange selectedDateRange;
         private CancellationTokenSource cancellationTokenSource;
+
+        private static readonly ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
+            new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -151,17 +154,21 @@ namespace LiveScore.Features.Score.ViewModels
                 { "Match", matchItem.Match }
             };
 
-            var navigated = await NavigationService.NavigateAsync("MatchDetailView" + CurrentSportId, parameters)
+            var navigated = await NavigationService
+                .NavigateAsync("MatchDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
 
             if (!navigated.Success)
             {
-                await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
+                await LoggingService.LogErrorAsync(navigated.Exception)
+                    .ConfigureAwait(false);
             }
         }
 
         private async Task OnClickSearch()
-            => await NavigationService.NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true).ConfigureAwait(false);
+            => await NavigationService
+                .NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true)
+                .ConfigureAwait(false);
 
         private async void OnDateBarItemSelected(DateRange dateRange)
         {
@@ -170,20 +177,13 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         [Time]
-        private async Task LoadMatches(
-            DateRange dateRange,
-            bool forceFetchNewData = false)
+        private async Task LoadMatches(DateRange dateRange, bool forceFetchNewData = false)
         {
-            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
-            if (MatchItemsSource?.Any() == true)
-            {
-                var liveMatchViewModels = MatchItemsSource.SelectMany(g => g).Where(m => m.Match.EventStatus?.IsLive == true);
-                liveMatchViewModels.ToList().ForEach(m => m.Dispose());
-            }
+            await Task.Run(() => UnsubscribeLiveMatchTimeChangeEvent(dateRange));
 
             if (IsLoading)
             {
-                MatchItemsSource = null;
+                MatchItemsSource = EmptyMatchDataSource;
             }
 
             var matches = await matchService.GetMatches(
@@ -198,17 +198,39 @@ namespace LiveScore.Features.Score.ViewModels
 
             Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
 
-            Debug.WriteLine($"{GetType().Name}.Matches-DateRange:{dateRange.ToString()}: {matches.Count()}");
+            Debug.WriteLine($"Number of matches: {matches.Count()}");
         }
 
-        [Time]
+        private void UnsubscribeLiveMatchTimeChangeEvent(DateRange dateRange)
+        {
+            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
+
+            if ((dateRange.From == DateTime.Today
+                 || dateRange.From == DateTimeExtension.Yesterday().Date)
+                && MatchItemsSource?.Count > 0)
+            {
+                var liveMatchViewModels
+                    = MatchItemsSource
+                        .SelectMany(group => @group)
+                        .Where(matchItem => matchItem.Match.EventStatus?.IsLive == true);
+
+                // experiment parallel
+                _ = Parallel.ForEach(liveMatchViewModels, (viewModel, _)
+                    => viewModel.UnsubscribeMatchTimeChangeEvent());
+
+                //liveMatchViewModels.ToList().ForEach(m => m.UnsubscribeMatchTimeChangeEvent());
+            }
+        }
+
         private ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(match
-                    => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
+            var matchItemViewModels
+                = matches.Select(
+                    match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItemViewModels.GroupBy(item =>
-                  new GroupMatchViewModel(item.Match.LeagueId, item.Match.LeagueName, item.Match.EventDate)).ToList());
+            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                matchItemViewModels
+                    .GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
