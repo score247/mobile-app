@@ -226,25 +226,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
             }
-
-            //TODO need to update cache for other bettype
-            //await UpdateOddsCache(oddsComparisonMessage);
         }
-
-        //internal void UpdateOddsCache(IOddsComparisonMessage oddsComparisonMessage)
-        //{
-        //    if (oddsComparisonMessage.BetTypeOddsList != null &&
-        //        oddsComparisonMessage.BetTypeOddsList.Any() &&
-        //        oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
-        //    {
-        //        var betTypes = oddsComparisonMessage.BetTypeOddsList.Select(x => x.Id);
-
-        //        foreach (var betTypeId in betTypes)
-        //        {
-        //            await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, betTypeId, oddsFormat, forceFetchNewData: true);
-        //        }
-        //    }
-        //}
 
         private void AddBookmakerOdds(IBetTypeOdds updatedOdds)
         {

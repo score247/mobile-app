@@ -187,8 +187,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
                 OddsMovementItems.Insert(0, newOddsMovementView);
             }
-
-            //await oddsService.GetOddsMovement(SettingsService.CurrentLanguage, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNewData: true);
         }
 
         protected virtual void Dispose(bool disposing)
