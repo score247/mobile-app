@@ -211,11 +211,11 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 var liveMatchViewModels
                     = MatchItemsSource
-                        .SelectMany(group => @group)
+                        .SelectMany(group => group)
                         .Where(matchItem => matchItem.Match.EventStatus?.IsLive == true);
 
                 // experiment parallel
-                _ = Parallel.ForEach(liveMatchViewModels, (viewModel, _)
+                Parallel.ForEach(liveMatchViewModels, (viewModel, _)
                     => viewModel.UnsubscribeMatchTimeChangeEvent());
 
                 //liveMatchViewModels.ToList().ForEach(m => m.UnsubscribeMatchTimeChangeEvent());
@@ -241,7 +241,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             var matchItem = MatchItemsSource
-                .SelectMany(group => @group)
+                .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match.Id == payload.MatchEvent.MatchId);
 
             if (matchItem?.Match != null)
@@ -258,7 +258,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             var matchItem = MatchItemsSource
-                .SelectMany(group => @group)
+                .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match.Id == payload.MatchId);
 
             matchItem?.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);

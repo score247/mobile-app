@@ -22,7 +22,6 @@
   </Style>
   <Style x:Key="TVScheduleMatchTitle" BasedOn="{StaticResource TVScheduleTitle}" TargetType="Label">
     <Setter Property="FlexLayout.Grow" Value="1" />
-    <Setter Property="VerticalTextAlignment" Value="Center" />
   </Style>
   <Style x:Key="TVScheduleChannelTitle" BasedOn="{StaticResource TVScheduleTitle}" TargetType="Label">
     <Setter Property="WidthRequest" Value="54" />
