@@ -56,4 +56,15 @@
         <Setter Property="HeightRequest" Value="91" />
         <Setter Property="WidthRequest" Value="371" />
     </Style>
+    <Style x:Key="BookmakerDetailIcon"
+           TargetType="{x:Type ffImageLoading:CachedImage}">
+        <Setter Property="Aspect"
+                Value="AspectFit" />
+        <Setter Property="WidthRequest"
+                Value="19" />
+        <Setter Property="HeightRequest"
+                Value="10" />
+        <Setter Property="Source"
+                Value="images/common/bookmarker_detail.png" />
+    </Style>
 </ResourceDictionary>

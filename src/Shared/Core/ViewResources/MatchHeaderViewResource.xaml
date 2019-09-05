@@ -22,8 +22,14 @@
     <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
     <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
   </Style>
-  <Style x:Key="LeagueDetailIcon" BasedOn="{StaticResource DetailIcon}" TargetType="{x:Type ffImageLoading:CachedImage}">
+  <Style x:Key="LeagueDetailIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
     <Setter Property="Aspect" Value="AspectFit" />
     <Setter Property="HorizontalOptions" Value="Center" />
-  </Style>
+        <Setter Property="Source"
+                Value="images/common/league_detail.png" />
+        <Setter Property="WidthRequest"
+                Value="14" />
+        <Setter Property="HeightRequest"
+                Value="14" />
+    </Style>
 </ResourceDictionary>
