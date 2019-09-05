@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 using Akavache;
+using Fanex.Caching;
 using JsonNet.ContractResolvers;
 using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
@@ -113,6 +114,7 @@ namespace LiveScore
         {
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.LocalEndPoint)));
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
+            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettingsService, SettingsService>();
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IEssential, Essential>();

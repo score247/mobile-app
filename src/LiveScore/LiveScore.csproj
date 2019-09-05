@@ -28,6 +28,7 @@
     <None Remove="Features\Score\Views\Templates\**" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
     <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
     <PackageReference Include="Plugin.Multilingual" Version="1.1.6-beta" />

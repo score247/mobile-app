@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using BenchmarkDotNet.Attributes;
+    using Fanex.Caching;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -16,13 +17,13 @@
     {
         public const string V1Api = nameof(V1Api);
         public const string V2Api = nameof(V2Api);
-        private readonly CachingService cachingService;
+        private readonly CacheService cachingService;
         private readonly MockLoggingService loggingService;
 
         public MatchServiceBenchmark()
         {
             Akavache.Registrations.Start(nameof(MatchServiceBenchmark));
-            cachingService = new CachingService(new MockEssential());
+            cachingService = new CacheService();
             loggingService = new MockLoggingService();
         }
 

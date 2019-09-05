@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Fanex.Caching;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -25,11 +26,11 @@
     public class MatchService : BaseService, IMatchService
     {
         private readonly IApiService apiService;
-        private readonly ICachingService cacheService;
+        private readonly ICacheService cacheService;
 
         public MatchService(
             IApiService apiService,
-            ICachingService cacheService,
+            ICacheService cacheService,
             ILoggingService loggingService) : base(loggingService)
         {
             this.apiService = apiService;
@@ -69,26 +70,23 @@
             {
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
-                if (dateTime.Date == DateTime.Today
-                    || dateTime.Date == DateTimeExtension.Yesterday().Date
-                    || forceFetchNewData)
+                if(forceFetchNewData)
                 {
-                    return await cacheService.GetAndFetchLatestLocalMachine(
-                        cacheKey,
-                        () => GetMatchesFromApi(
+                    await cacheService.RemoveAsync(cacheKey);
+                }
+
+                var cacheDuration = dateTime.Date == DateTime.Today
+                    || dateTime.Date == DateTimeExtension.Yesterday().Date
+                    ? CacheDuration.Short
+                    : CacheDuration.Long;
+
+                return await cacheService.GetOrSetAsync(
+                    cacheKey,
+                    () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
                             language.DisplayName),
-                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short)).ConfigureAwait(false);
-                }
-
-                return await cacheService.GetOrFetchLocalMachine(
-                       cacheKey,
-                       () => GetMatchesFromApi(
-                           dateTime.BeginningOfDay().ToApiFormat(),
-                           dateTime.EndOfDay().ToApiFormat(),
-                           language.DisplayName), DateTime.Now.AddSeconds((int)CacheDuration.Long))
-                    .ConfigureAwait(false);
+                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)cacheDuration)));
             }
             catch (Exception ex)
             {
@@ -105,13 +103,15 @@
             {
                 var cacheKey = $"Match:{matchId}:{language}";
 
-                var match = await cacheService.GetAndFetchLatestLocalMachine(
-                        cacheKey,
-                        () => GetMatchFromApi(matchId, language.DisplayName),
-                        cacheService.GetFetchPredicate(forceFetchNewData, (int)CacheDuration.Short))
-                    .ConfigureAwait(false);
+                if (forceFetchNewData)
+                {
+                    await cacheService.RemoveAsync(cacheKey);
+                }
 
-                return match;
+                return await cacheService.GetOrSetAsync(
+                    cacheKey,
+                    () => GetMatchFromApi(matchId, language.DisplayName),
+                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Short)));
             }
             catch (Exception ex)
             {
@@ -122,12 +122,11 @@
         }
 
         [Time]
-        private async Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
-            => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language))
-            .ConfigureAwait(false);
+        private IEnumerable<Match> GetMatchesFromApi(string fromDateText, string toDateText, string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)).GetAwaiter().GetResult();
 
         [Time]
-        private async Task<MatchInfo> GetMatchFromApi(string matchId, string language)
-           => await apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)).ConfigureAwait(false);
+        private MatchInfo GetMatchFromApi(string matchId, string language)
+           => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)).GetAwaiter().GetResult();
     }
 }

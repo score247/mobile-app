@@ -85,6 +85,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.16.0.8981">
