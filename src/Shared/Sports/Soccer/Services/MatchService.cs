@@ -48,12 +48,10 @@
                 {
                     return dataFromDate;
                 }
-                else
-                {
-                    var dataToDate = await GetMatchesByDate(dateRange.To, language, forceFetchNewData);
 
-                    return dataFromDate.Concat(dataToDate);
-                }
+                var dataToDate = await GetMatchesByDate(dateRange.To, language, forceFetchNewData).ConfigureAwait(false);
+
+                return dataFromDate.Concat(dataToDate);
             }
             catch (Exception ex)
             {

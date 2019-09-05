@@ -35,13 +35,13 @@ namespace LiveScore.Features.Score.ViewModels
         private static readonly ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
             new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
 
+        [Time]
         public ScoresViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            Profiler.Start("ScoresViewModel.LoadMatches.Home");
             SelectedDate = DateTime.Today;
 
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
@@ -57,7 +57,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public IReadOnlyList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
+        public ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -179,7 +179,7 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatches(DateRange dateRange, bool forceFetchNewData = false)
         {
-            await Task.Run(() => UnsubscribeLiveMatchTimeChangeEvent(dateRange));
+            await Task.Run(() => UnsubscribeLiveMatchTimeChangeEvent(dateRange)).ConfigureAwait(false);
 
             if (IsLoading)
             {
@@ -197,6 +197,7 @@ namespace LiveScore.Features.Score.ViewModels
             IsRefreshing = false;
 
             Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
+            Profiler.Start("ScoresView.Render");
 
             Debug.WriteLine($"Number of matches: {matches.Count()}");
         }

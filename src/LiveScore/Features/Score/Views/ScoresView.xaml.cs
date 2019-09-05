@@ -29,9 +29,9 @@ namespace LiveScore.Features.Score.Views
 
             Profiler.Stop("IOS Application");
             Profiler.Stop("ScoresViewModel.LoadMatches.SelectDate");
-            Profiler.Stop("ScoresViewModel.LoadMatches.Home");
             Profiler.Stop("ScoresViewModel.OnNavigatedTo");
             Profiler.Stop("ScoresViewModel.OnResume");
+            Profiler.Stop("ScoresView.Render");
 
             Debug.WriteLine("");
             Debug.WriteLine("=======================================");
