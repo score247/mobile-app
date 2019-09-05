@@ -24,10 +24,8 @@
         <Setter Property="Aspect" Value="AspectFit" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
-    <Style x:Key="MatchInfoAssistedImage" TargetType="{x:Type ffImageLoading:CachedImage}">
-        <Setter Property="Aspect" Value="AspectFit" />
+    <Style x:Key="MatchInfoAssistedImage" BasedOn="{StaticResource MatchInfoImage}" TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Margin" Value="0,2,0,0" />
-        <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
 
     <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
