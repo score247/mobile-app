@@ -47,12 +47,11 @@
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        private static CachedImage BuildRedCardImage()
+        private static Image BuildRedCardImage()
         {
-            return new CachedImage
+            return new Image
             {
                 Source = Images.RedCard.Value,
-                DownsampleToViewSize = true,
                 Margin = new Thickness(4, 0, 0, 0)
             };
         }

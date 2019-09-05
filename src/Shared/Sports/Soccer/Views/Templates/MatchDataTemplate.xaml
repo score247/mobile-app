@@ -19,7 +19,8 @@
             </StackLayout.Resources>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60" />
@@ -27,8 +28,9 @@
                     <ColumnDefinition Width="20" />
                     <ColumnDefinition Width="38" />
                 </Grid.ColumnDefinitions>
-                <FlexLayout
+                <StackLayout
                     Grid.Row="0"
+                    Grid.RowSpan="2"
                     Grid.Column="0"
                     Style="{StaticResource MatchStatusContainer}">
                     <ffImageLoading:CachedImage
@@ -45,64 +47,59 @@
                         AutomationId="{Binding Match.Id, StringFormat='MatchStatus-{0}'}"
                         Style="{StaticResource MatchStatus}"
                         Text="{Binding DisplayMatchStatus}" />
-                </FlexLayout>
-                <StackLayout Grid.Row="0" Grid.Column="1">
-                    <FlexLayout Style="{StaticResource MatchHomeTeam}">
-                        <Label
-                            AutomationId="{Binding Match.Id, StringFormat='HomeTeamName-{0}'}"
-                            Style="{StaticResource Team}"
-                            Text="{Binding Match.HomeTeamName}" />
-                        <templates:RedCardTemplate RedCards="{Binding Match.TotalHomeRedCards}" />
-                        <ffImageLoading:CachedImage
-                            AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
-                            DownsampleToViewSize="True"
-                            IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                            Source="{Binding Match.HomePenaltyImage}"
-                            Style="{StaticResource MatchWinnerInfoIcon}" />
-                        <ffImageLoading:CachedImage
-                            AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}'}"
-                            DownsampleToViewSize="True"
-                            IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                            Source="{Binding Match.HomeSecondLegImage}"
-                            Style="{StaticResource MatchWinnerInfoIcon}" />
-                    </FlexLayout>
-                    <FlexLayout Style="{StaticResource MatchAwayTeam}">
-                        <Label
-                            AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                            Style="{StaticResource Team}"
-                            Text="{Binding Match.AwayTeamName}" />
-                        <templates:RedCardTemplate RedCards="{Binding Match.TotalAwayRedCards}" />
-                        <ffImageLoading:CachedImage
-                            AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
-                            DownsampleToViewSize="True"
-                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                            Source="{Binding Match.AwayPenaltyImage}"
-                            Style="{StaticResource MatchWinnerInfoIcon}" />
-                        <ffImageLoading:CachedImage
-                            AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}'}"
-                            DownsampleToViewSize="True"
-                            IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                            Source="{Binding Match.AwaySecondLegImage}"
-                            Style="{StaticResource MatchWinnerInfoIcon}" />
-                    </FlexLayout>
                 </StackLayout>
-                <FlexLayout
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
-                    Style="{StaticResource MatchScoreContainer}">
-                    <Label
-                        AutomationId="{Binding Match.Id, StringFormat='HomeScore-{0}'}"
-                        Style="{StaticResource HomeScore}"
-                        Text="{Binding Match.HomeScore}" />
-                    <Label
-                        AutomationId="{Binding Match.Id, StringFormat='AwayScore-{0}'}"
-                        Style="{StaticResource AwayScore}"
-                        Text="{Binding Match.AwayScore}" />
-                </FlexLayout>
+                <StackLayout Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource MatchHomeTeam}">
+                    <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamName-{0}'}"
+                           Style="{StaticResource Team}"
+                           Text="{Binding Match.HomeTeamName}" />
+                    <templates:RedCardTemplate RedCards="{Binding Match.TotalHomeRedCards}" />
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                Source="{Binding Match.HomePenaltyImage}"
+                                                Style="{StaticResource MatchWinnerInfoIcon}" />
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}'}"
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                Source="{Binding Match.HomeSecondLegImage}"
+                                                Style="{StaticResource MatchWinnerInfoIcon}" />
+                </StackLayout>
+                <StackLayout  Grid.Row="1"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchAwayTeam}">
+                    <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
+                           Style="{StaticResource Team}"
+                           Text="{Binding Match.AwayTeamName}" />
+                    <templates:RedCardTemplate RedCards="{Binding Match.TotalAwayRedCards}" />
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                Source="{Binding Match.AwayPenaltyImage}"
+                                                Style="{StaticResource MatchWinnerInfoIcon}" />
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}'}"
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                Source="{Binding Match.AwaySecondLegImage}"
+                                                Style="{StaticResource MatchWinnerInfoIcon}" />
+                </StackLayout>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
+                       AutomationId="{Binding Match.Id, StringFormat='HomeScore-{0}'}"
+                       Style="{StaticResource HomeScore}"
+                       Text="{Binding Match.HomeScore}" />
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
+                       AutomationId="{Binding Match.Id, StringFormat='AwayScore-{0}'}"
+                       Style="{StaticResource AwayScore}"
+                       Text="{Binding Match.AwayScore}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="3"
+                    Grid.RowSpan="2"
                     AutomationId="{Binding Match.Id, StringFormat='FavoriteBtn-{0}'}"
                     Style="{StaticResource MatchFavoriteIcon}" />
             </Grid>
