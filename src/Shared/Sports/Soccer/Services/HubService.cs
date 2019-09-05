@@ -6,6 +6,7 @@
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.PubSubEvents.Matches;
     using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.PubSubEvents.Teams;
@@ -27,6 +28,7 @@
             {
                 { MatchEventMessage.HubMethod, (typeof(MatchEventMessage), MatchEventMessage.Publish) },
                 { OddsComparisonMessage.HubMethod, (typeof(OddsComparisonMessage), OddsComparisonMessage.Publish) },
+                { OddsMovementMessage.HubMethod, (typeof(OddsMovementMessage), OddsMovementMessage.Publish) },
                 { TeamStatisticsMessage.HubMethod, (typeof(TeamStatisticsMessage), TeamStatisticsMessage.Publish) }
             };
 
