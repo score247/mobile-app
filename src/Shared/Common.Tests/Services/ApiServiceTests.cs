@@ -29,7 +29,7 @@ namespace LiveScore.Core.Tests.Services
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
 
-            var apiService = new ApiService(apiPolicy, httpService, new RefitSettings());
+            var apiService = new ApiService(apiPolicy, httpService);
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act
@@ -49,7 +49,7 @@ namespace LiveScore.Core.Tests.Services
             {
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
-            var apiService = new ApiService(apiPolicy, httpService, new RefitSettings());
+            var apiService = new ApiService(apiPolicy, httpService);
             Task<MockModel> func() => Task.FromResult(new MockModel());
 
             // Act
