@@ -37,7 +37,7 @@
         }
 
         public int SelectedTabIndex { get; set; }
-
+        
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStrip)bindable;
@@ -49,12 +49,10 @@
                 return;
             }
 
-            tabItems.ToArray()[control.SelectedTabIndex]?.OnAppearing();
-
             MessagingCenter.Subscribe<string, int>(
                 nameof(TabStrip), TabChangeEvent, (_, index) => control.SelectedTabIndex = index);
         }
-
+   
         public static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
             if (args.Item != null)

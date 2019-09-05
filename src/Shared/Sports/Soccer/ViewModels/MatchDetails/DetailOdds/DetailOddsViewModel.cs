@@ -66,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
 
             //TODO verify keepSubscriberReferenceAlive
-            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
+            this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
         }
 
         public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
@@ -115,7 +115,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             try
             {
-                Debug.WriteLine("DetailOddsViewModel Initialize");
+                Debug.WriteLine("DetailOddsViewModel OnInitialized");
 
                 await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, IsRefreshing));
             }
@@ -123,11 +123,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 await LoggingService.LogErrorAsync(ex);
             }
-        }
-
-        public override void OnDisappearing()
-        {
-            Debug.WriteLine("DetailOddsViewModel OnDisappearing");
         }
 
         public override async void OnResume()
