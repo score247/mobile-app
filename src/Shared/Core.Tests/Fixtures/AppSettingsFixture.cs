@@ -8,11 +8,11 @@
     {
         public AppSettingsFixture()
         {
-            SettingsService = Substitute.For<ISettingsService>();
-            SettingsService.CurrentSportType.Returns(SportType.Soccer);
-            SettingsService.Language.Returns(Language.English);
+            Settings = Substitute.For<ISettings>();
+            Settings.CurrentSportType.Returns(SportType.Soccer);
+            Settings.CurrentLanguage.Returns(Language.English);
         }
 
-        public ISettingsService SettingsService { get; }
+        public ISettings Settings { get; }
     }
 }

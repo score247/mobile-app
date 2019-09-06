@@ -32,12 +32,12 @@
             NavigationService = navigationService;
             DependencyResolver = dependencyResolver;
 
-            SettingsService = DependencyResolver.Resolve<ISettingsService>();
+            Settings = DependencyResolver.Resolve<ISettings>();
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
 
-            CurrentSportName = SettingsService.CurrentSportType.DisplayName;
-            CurrentSportId = SettingsService.CurrentSportType.Value;
-            CurrentLanguage = Enumeration.FromDisplayName<Language>(SettingsService.CurrentLanguage);
+            CurrentSportName = Settings.CurrentSportType.DisplayName;
+            CurrentSportId = Settings.CurrentSportType.Value;
+            CurrentLanguage = Settings.CurrentLanguage;
         }
 
         public Language CurrentLanguage { get; }
@@ -54,7 +54,7 @@
 
         public INavigationService NavigationService { get; protected set; }
 
-        public ISettingsService SettingsService { get; protected set; }
+        public ISettings Settings { get; protected set; }
 
         public ILoggingService LoggingService { get; protected set; }
 

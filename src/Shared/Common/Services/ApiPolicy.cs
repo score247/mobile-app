@@ -54,7 +54,7 @@
             return httpStatusCodesWorthRetrying.Contains(ex.StatusCode);
         }
 
-        public Func<int, TimeSpan> SleepDurationProvider 
+        public Func<int, TimeSpan> SleepDurationProvider
             => retryAttempt => TimeSpan.FromSeconds(Math.Pow(DefaultPow, retryAttempt));
     }
 }

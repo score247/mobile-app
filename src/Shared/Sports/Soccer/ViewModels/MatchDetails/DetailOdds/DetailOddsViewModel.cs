@@ -55,7 +55,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             TabHeaderActiveIcon = MatchDetailTabImage.OddsActive;
 
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(SettingsService.CurrentSportType.Value.ToString());
+            oddsService = DependencyResolver.Resolve<IOddsService>(Settings.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () =>
                 await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)).ConfigureAwait(false));
@@ -102,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 { "Format",  oddsFormat}
             };
 
-            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + SettingsService.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + Settings.CurrentSportType.Value, parameters);
 
             if (!navigated.Success)
             {
@@ -169,7 +169,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var odds = await oddsService.GetOdds(SettingsService.CurrentLanguage, matchId, SelectedBetType.Value, formatType, forceFetchNew);
+            var odds = await oddsService.GetOdds(Settings.LanguageCode, matchId, SelectedBetType.Value, formatType, forceFetchNew);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 

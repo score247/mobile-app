@@ -4,8 +4,6 @@
 
     public interface IHubService
     {
-        byte SportId { get; }
-
         Task Start();
 
         Task Reconnect();

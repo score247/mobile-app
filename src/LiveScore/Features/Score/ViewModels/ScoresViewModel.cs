@@ -188,7 +188,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             var matches = await matchService.GetMatches(
                     dateRange,
-                    SettingsService.Language,
+                    Settings.CurrentLanguage,
                     forceFetchNewData).ConfigureAwait(false);
 
             Device.BeginInvokeOnMainThread(() => MatchItemsSource = BuildMatchItemSource(matches));

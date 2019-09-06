@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.PubSubEvents.Matches;
@@ -16,7 +15,7 @@
 
     public class SoccerHubService : IHubService
     {
-        private readonly ISettingsService settingsService;
+        private readonly ISettings settings;
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
@@ -32,15 +31,13 @@
                 { TeamStatisticsMessage.HubMethod, (typeof(TeamStatisticsMessage), TeamStatisticsMessage.Publish) }
             };
 
-        public byte SportId => SportType.Soccer.Value;
-
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
             ILoggingService logger,
-            ISettingsService settingsService,
+            ISettings settings,
             IEventAggregator eventAggregator)
         {
-            this.settingsService = settingsService;
+            this.settings = settings;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
             this.hubConnectionBuilder = hubConnectionBuilder;
@@ -50,7 +47,7 @@
         {
             try
             {
-                hubConnection = hubConnectionBuilder.WithUrl($"{settingsService.HubEndpoint}/soccerhub").Build();
+                hubConnection = hubConnectionBuilder.WithUrl($"{settings.HubEndpoint}/soccerhub").Build();
 
                 foreach (var hubEvent in hubEvents)
                 {

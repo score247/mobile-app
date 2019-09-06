@@ -41,7 +41,7 @@ namespace LiveScore.Core.ViewModels
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Type.Value == SettingsService.CurrentSportType.Value;
+                sportItem.IsVisible = sportItem.Type.Value == Settings.CurrentSportType.Value;
             }
 
             SportItems = new ObservableCollection<SportItem>(sportItems);
@@ -51,12 +51,12 @@ namespace LiveScore.Core.ViewModels
         {
             if (SelectedSportItem.Type != null)
             {
-                var isSportChanged = SettingsService.CurrentSportType.Value != SelectedSportItem.Type.Value;
-                SettingsService.CurrentSportType = SelectedSportItem.Type;
+                var isSportChanged = Settings.CurrentSportType.Value != SelectedSportItem.Type.Value;
+                Settings.SportId = SelectedSportItem.Type.Value;
 
                 if (isSportChanged)
                 {
-                    await NavigateToHome();
+                    await NavigateToHome().ConfigureAwait(false);
                 }
             }
         }

@@ -1,71 +1,52 @@
 ﻿namespace LiveScore.Core.Services
 {
-    using System;
-    using LiveScore.Common.Services;
     using Enumerations;
-    using Models.Settings;
+    using Xamarin.Essentials;
 
-    public interface ISettingsService
+    public interface ISettings
     {
         bool IsDemo { get; set; }
+        byte SportId { get; set; }
+        SportType CurrentSportType { get; }
+        string LanguageCode { get; set; }
 
-        string CurrentLanguage { get; set; }
+        Language CurrentLanguage { get; }
 
         string ApiEndpoint { get; set; }
 
         string HubEndpoint { get; set; }
-
-        Language Language { get; }
-
-        SportType CurrentSportType { get; set; }
-
-        TimeZoneInfo CurrentTimeZone { get; set; }
-
-        UserSettings UserSettings { get; }
     }
 
-    public class SettingsService : ISettingsService
+    public class Settings : ISettings
     {
-        private readonly ICachingService cacheService;
+        public SportType CurrentSportType => Enumeration.FromValue<SportType>(SportId);
 
-        public SettingsService(ICachingService cacheService)
+        public byte SportId
         {
-            this.cacheService = cacheService;
-
-            UserSettings = new UserSettings(CurrentSportType.DisplayName, CurrentLanguage, CurrentTimeZone.BaseUtcOffset.ToString());
-
-            Language = Enumeration.FromDisplayName<Language>(CurrentLanguage);
+            get => (byte) Preferences.Get(nameof(SportId), SportType.Soccer.Value);
+            set => Preferences.Set(nameof(SportId), value);
         }
 
-        protected SettingsService(ICachingService cacheService, UserSettings userSettings)
-            : this(cacheService) => UserSettings = userSettings;
-
-        public SportType CurrentSportType
+        public string LanguageCode
         {
-            get => cacheService.GetOrCreateUserAccount(nameof(CurrentSportType), SportType.Soccer);
-            set => cacheService.InsertUserAccount(nameof(CurrentSportType), value);
+            get => Preferences.Get(nameof(LanguageCode), Language.English.DisplayName);
+            set => Preferences.Set(nameof(LanguageCode), value);
         }
 
-        public string CurrentLanguage
-        {
-            get => cacheService.GetOrCreateUserAccount(nameof(CurrentLanguage), Language.English.DisplayName);
-            set => cacheService.InsertUserAccount(nameof(CurrentLanguage), value);
-        }
-
-        public TimeZoneInfo CurrentTimeZone
-        {
-            get => cacheService.GetOrCreateUserAccount(nameof(CurrentTimeZone), TimeZoneInfo.Local);
-            set => cacheService.InsertUserAccount(nameof(CurrentTimeZone), value);
-        }
-
-        public UserSettings UserSettings { get; }
-
-        public Language Language { get; }
+        public Language CurrentLanguage => Enumeration.FromDisplayName<Language>(LanguageCode);
 
         public bool IsDemo { get; set; }
 
-        public string ApiEndpoint { get; set; }
+        public string ApiEndpoint
+        {
+            get => Preferences.Get(nameof(ApiEndpoint), string.Empty);
+            set => Preferences.Set(nameof(ApiEndpoint), value);
+        }
 
-        public string HubEndpoint { get; set; }
+        public string HubEndpoint
+        {
+            get => Preferences.Get(nameof(HubEndpoint), string.Empty);
+            set => Preferences.Set(nameof(HubEndpoint), value);
+        }
     }
 }

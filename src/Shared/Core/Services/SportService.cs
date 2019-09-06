@@ -11,13 +11,11 @@
 
     public class SportService : ISportService
     {
-        public IEnumerable<SportItem> GetSportItems()
-        {
-            return new List<SportItem>
-           {
-               new SportItem { Type = SportType.Soccer },
-               new SportItem { Type = SportType.Basketball  }
-           };
-        }
+        public IEnumerable<SportItem> GetSportItems() =>
+            new List<SportItem>
+            {
+                new SportItem { Type = SportType.Soccer },
+                new SportItem { Type = SportType.Basketball  }
+            };
     }
 }
