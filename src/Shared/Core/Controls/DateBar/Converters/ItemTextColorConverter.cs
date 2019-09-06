@@ -2,7 +2,7 @@
 {
     using System;
     using System.Globalization;
-    using LiveScore.Core.Controls.DateBar.Models;
+    using Models;
     using Xamarin.Forms;
 
     public class ItemTextColorConverter : IValueConverter

@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
+    using Common.Extensions;
+    using Enumerations;
+    using Models.Matches;
 
     public interface IMatchService
     {

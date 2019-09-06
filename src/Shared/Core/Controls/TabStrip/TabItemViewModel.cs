@@ -2,8 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.ViewModels;
+    using Enumerations;
+    using ViewModels;
     using Prism.Events;
     using Prism.Navigation;
     using Xamarin.Forms;
@@ -38,7 +38,10 @@
         {
             IsLoading = showLoading && IsFirstLoad;
 
-            await loadDataFunc.Invoke();
+            if (loadDataFunc != null)
+            {
+                await loadDataFunc.Invoke().ConfigureAwait(false);
+            }
 
             IsLoading = false;
             IsFirstLoad = false;

@@ -39,7 +39,7 @@ namespace LiveScore.Common.Services
 
         Task VacuumLocalMachine();
 
-        Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFecth, int seconds);
+        Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFetch, int seconds);
 
         Task InvalidateAll();
 
@@ -106,11 +106,11 @@ namespace LiveScore.Common.Services
 
         public async Task VacuumLocalMachine() => await localMachineCache.Vacuum();
 
-        public Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFecth, int seconds)
+        public Func<DateTimeOffset, bool> GetFetchPredicate(bool forceFetch, int seconds)
         {
-            if (forceFecth)
+            if (forceFetch)
             {
-                return _ => forceFecth;
+                return _ => true;
             }
 
             return (offset) =>

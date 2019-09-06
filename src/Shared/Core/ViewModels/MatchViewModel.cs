@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Core.ViewModels
 {
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Events;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
+    using Converters;
+    using Events;
+    using Models.Matches;
+    using Models.Teams;
     using Prism.Events;
     using PropertyChanged;
 
@@ -57,7 +57,7 @@
         {
             var matchStatus = matchStatusConverter.BuildStatus(Match);
 
-            if (!string.IsNullOrEmpty(matchStatus))
+            if (!string.IsNullOrWhiteSpace(matchStatus))
             {
                 DisplayMatchStatus = matchStatus;
                 UnsubscribeMatchTimeChangeEvent();

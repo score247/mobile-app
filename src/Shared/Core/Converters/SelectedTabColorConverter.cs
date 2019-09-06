@@ -10,12 +10,14 @@
         {
             var color = (Color)Application.Current.Resources["SubTabColor"];
 
-            if (value != null)
+            if (value == null)
             {
-                bool isSelected = (bool)value;
-
-                color = isSelected ? (Color)Application.Current.Resources["ActiveSubTabColor"] : (Color)Application.Current.Resources["SubTabColor"];
+                return color;
             }
+
+            var isSelected = (bool)value;
+
+            color = isSelected ? (Color)Application.Current.Resources["ActiveSubTabColor"] : (Color)Application.Current.Resources["SubTabColor"];
 
             return color;
         }

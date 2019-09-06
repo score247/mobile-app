@@ -2,7 +2,7 @@
 
 namespace LiveScore.Core.ViewModels
 {
-    using LiveScore.Common.Extensions;
+    using Common.Extensions;
 
     public class GroupMatchViewModel
     {

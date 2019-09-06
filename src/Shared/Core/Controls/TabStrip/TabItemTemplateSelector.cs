@@ -8,7 +8,7 @@
         {
             var tabItem = item as TabItemViewModel;
 
-            return tabItem.Template;
+            return tabItem?.Template;
         }
     }
 }

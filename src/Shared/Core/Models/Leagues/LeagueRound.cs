@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Leagues
 {
-    using LiveScore.Core.Enumerations;
+    using Enumerations;
 
     public interface ILeagueRound
     {

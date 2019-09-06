@@ -50,7 +50,7 @@
             {
                 var tabHeaders = control.scrollLayOut.Children;
 
-                for (int i = 0; i < tabHeaders.Count; i++)
+                for (var i = 0; i < tabHeaders.Count; i++)
                 {
                     var tabHeader = (StackLayout)tabHeaders[i];
                     var tabModel = control.ItemsSource.ToList()[i];
@@ -74,7 +74,7 @@
 
         private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModel> tabs)
         {
-            for (int index = 0; index < tabs.Count; index++)
+            for (var index = 0; index < tabs.Count; index++)
             {
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);

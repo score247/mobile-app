@@ -6,26 +6,24 @@
 
     public class BaseService
     {
-        protected readonly ILoggingService loggingService;
+        protected readonly ILoggingService LoggingService;
 
         public BaseService(ILoggingService loggingService)
         {
-            this.loggingService = loggingService;
+            LoggingService = loggingService;
         }
 
         protected virtual void HandleException(Exception ex)
         {
-            var apiException = ex as ApiException;
-
-            if (apiException != null)
+            if (ex is ApiException apiException)
             {
                 var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
 
-                loggingService.LogError(message, apiException);
+                LoggingService.LogErrorAsync(message, apiException);
             }
             else
             {
-                loggingService.LogError(ex);
+                LoggingService.LogErrorAsync(ex);
             }
         }
     }

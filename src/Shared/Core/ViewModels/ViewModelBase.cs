@@ -3,8 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Services;
+    using Enumerations;
+    using Services;
     using Prism.AppModel;
     using Prism.Events;
     using Prism.Navigation;
@@ -59,8 +59,6 @@
         public ILoggingService LoggingService { get; protected set; }
 
         public bool IsLoading { get; protected set; }
-
-        public bool IsNotLoading => !IsLoading;
 
         public virtual void Initialize(INavigationParameters parameters)
         {

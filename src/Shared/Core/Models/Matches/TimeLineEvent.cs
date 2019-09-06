@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
     using System;
-    using LiveScore.Core.Enumerations;
+    using Enumerations;
 
     public interface ITimelineEvent : IEntity<string, string>
     {

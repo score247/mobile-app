@@ -18,9 +18,9 @@
 
     public class ApiPolicy : IApiPolicy
     {
-        private const int DEFAULT_COUNT = 2;
-        private const int TIMEOUT_SECONDS = 2;
-        private const int DEFAULT_POW = 2;
+        private const int DefaultCount = 2;
+        private const int TimeoutSeconds = 2;
+        private const int DefaultPow = 2;
 
         // Handle both exceptions and return values in one policy
         private readonly HttpStatusCode[] httpStatusCodesWorthRetrying =
@@ -33,16 +33,15 @@
         };
 
         private AsyncRetryPolicy WaitAndRetryPolicy()
-        => Policy
-            .Handle<WebException>()
-            .Or<ApiException>(ex => HandleApiException(ex))
-            .WaitAndRetryAsync(DEFAULT_COUNT, SleepDurationProvider);
+            => Policy
+                .Handle<WebException>()
+                .Or<ApiException>(HandleApiException)
+                .WaitAndRetryAsync(DefaultCount, SleepDurationProvider);
 
         public Task<T> RetryAndTimeout<T>(Func<Task<T>> func)
         {
             var retryPolicy = WaitAndRetryPolicy();
-            var timeoutPolicy = Policy.TimeoutAsync(TIMEOUT_SECONDS);
-
+            var timeoutPolicy = Policy.TimeoutAsync(TimeoutSeconds);
             var commonResilience = Policy.WrapAsync(retryPolicy, timeoutPolicy);
 
             return commonResilience.ExecuteAsync(func);
@@ -55,6 +54,7 @@
             return httpStatusCodesWorthRetrying.Contains(ex.StatusCode);
         }
 
-        public Func<int, TimeSpan> SleepDurationProvider => retryAttempt => TimeSpan.FromSeconds(Math.Pow(DEFAULT_POW, retryAttempt));
+        public Func<int, TimeSpan> SleepDurationProvider 
+            => retryAttempt => TimeSpan.FromSeconds(Math.Pow(DefaultPow, retryAttempt));
     }
 }

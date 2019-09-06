@@ -22,7 +22,7 @@
                 return false;
             }
 
-            Bookmaker bookmakerObject = obj as Bookmaker;
+            var bookmakerObject = obj as Bookmaker;
 
             if (bookmakerObject == null)
             {

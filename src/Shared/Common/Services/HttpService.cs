@@ -11,7 +11,7 @@
     public class HttpService : IHttpService
     {
         public HttpService(Uri baseUri)
-        {   
+        {
             HttpClient = new HttpClient
             {
                 BaseAddress = baseUri

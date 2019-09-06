@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Teams;
+    using Enumerations;
+    using Teams;
 
     public interface IMatch
     {

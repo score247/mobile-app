@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using Akavache;
 using Fanex.Caching;
@@ -43,6 +44,12 @@ namespace LiveScore
 {
     public partial class App : PrismApplication
     {
+        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
+        {
+            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+            ContractResolver = new PrivateSetterContractResolver()
+        };
+
         /*
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor.
@@ -62,14 +69,8 @@ namespace LiveScore
         [Time]
         protected override async void OnInitialized()
         {
-            var jsonSettings = new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ContractResolver = new PrivateSetterContractResolver()
-            };
-
             Registrations.Start("Score247.App");
-            Splat.Locator.CurrentMutable.Register(() => jsonSettings, typeof(JsonSerializerSettings));
+            Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
@@ -84,7 +85,7 @@ namespace LiveScore
             RegisterAndStartEventHubs(Container);
             StartGlobalTimer();
 
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()
@@ -157,9 +158,9 @@ namespace LiveScore
             hubServices.Add(soccerHubService);
 
             // TODO: Ricky: temporary comment here
-            foreach (var hubService in hubServices)
+            foreach (var hubService in hubServices.Where(hubService => hubService != null))
             {
-                await hubService.Start();
+                await hubService.Start().ConfigureAwait(false);
             }
         }
 
@@ -177,9 +178,9 @@ namespace LiveScore
         {
             Debug.WriteLine("OnResume");
 
-            foreach (var hubService in hubServices)
+            foreach (var hubService in hubServices.Where(hubService => hubService != null))
             {
-                await hubService.Reconnect();
+                await hubService.Reconnect().ConfigureAwait(false);
             }
 
             base.OnResume();

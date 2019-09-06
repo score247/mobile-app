@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Models
 {
-    using LiveScore.Core.Enumerations;
+    using Enumerations;
 
     public class SportItem
     {

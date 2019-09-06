@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
     using System.Collections.Generic;
-    using LiveScore.Core.Models.Odds;
+    using Odds;
 
     public interface IMatchOddsMovement
     {

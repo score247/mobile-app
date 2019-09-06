@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Matches
 {
-    using LiveScore.Core.Enumerations;
+    using Enumerations;
 
     public class MatchPeriod
     {

@@ -38,8 +38,6 @@
     </ItemGroup>
     <ItemGroup>
         <Folder Include="Models\Settings\" />
-        <Folder Include="Jobs\">
-        </Folder>
         <Folder Include="Controls\SearchPage\">
         </Folder>
     </ItemGroup>

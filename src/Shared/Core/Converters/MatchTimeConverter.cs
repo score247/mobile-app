@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Converters
 {
-    using LiveScore.Core.Models.Matches;
+    using Models.Matches;
 
     public interface IMatchMinuteConverter
     {

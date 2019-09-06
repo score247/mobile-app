@@ -2,8 +2,8 @@
 {
     using System;
     using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Settings;
+    using Enumerations;
+    using Models.Settings;
 
     public interface ISettingsService
     {

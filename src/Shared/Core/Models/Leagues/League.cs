@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Core.Models.Leagues
 {
     using System.Collections.Generic;
-    using LiveScore.Core.Models;
-    using LiveScore.Core.Models.Teams;
+    using Models;
+    using Teams;
 
     public interface ILeague : IEntity<string, string>
     {

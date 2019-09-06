@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Models.Odds
 {
-    using LiveScore.Core.Enumerations;
+    using Enumerations;
 
     public class BetOptionOdds : Entity<int, string>
     {

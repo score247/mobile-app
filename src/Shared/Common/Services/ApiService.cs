@@ -18,7 +18,7 @@
         private readonly IApiPolicy apiPolicy;
         private readonly IHttpService httpService;
 
-        private static readonly RefitSettings DefaultRefitSettings = new RefitSettings
+        private static readonly RefitSettings RefitSettings = new RefitSettings
         {
             ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
             {
@@ -34,7 +34,7 @@
         }
 
         // TODO: Need to make it be singleton instance
-        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, DefaultRefitSettings);
+        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, RefitSettings);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }

@@ -1,6 +1,6 @@
 ﻿namespace LiveScore.Core.Views.Selectors
 {
-    using LiveScore.Core.ViewModels;
+    using ViewModels;
     using Xamarin.Forms;
 
     public class MatchItemTemplateSelector : DataTemplateSelector
@@ -9,13 +9,14 @@
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (matchItemTemplate == null)
+            if (matchItemTemplate != null || !(container.BindingContext is ViewModelBase viewModel))
             {
-                var viewModel = container.BindingContext as ViewModelBase;
-                var sportType = viewModel.SettingsService.CurrentSportType;
-
-                matchItemTemplate = viewModel.DependencyResolver.Resolve<DataTemplate>(sportType.Value.ToString());
+                return matchItemTemplate;
             }
+
+            var sportType = viewModel.SettingsService.CurrentSportType;
+
+            matchItemTemplate = viewModel.DependencyResolver.Resolve<DataTemplate>(sportType.Value.ToString());
 
             return matchItemTemplate;
         }

@@ -2,7 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using LiveScore.Core.Models.Leagues;
+    using Models.Leagues;
 
     public interface ILeagueService
     {

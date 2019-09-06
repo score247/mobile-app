@@ -1,8 +1,8 @@
 ﻿namespace LiveScore.Core.Services
 {
     using System.Collections.Generic;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models;
+    using Enumerations;
+    using Models;
 
     public interface ISportService
     {

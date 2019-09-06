@@ -2,10 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Controls.DateBar.Models;
-    using LiveScore.Core.Services;
+    using Common.Extensions;
+    using Events;
+    using Models;
+    using Services;
     using LiveScore.Core.ViewModels;
     using Prism.Commands;
     using Prism.Events;
