@@ -34,33 +34,34 @@
                     Grid.Column="0"
                     Style="{StaticResource MatchStatusContainer}">
                     <ffImageLoading:CachedImage
-                        AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}'}"
+                        AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}', Mode=OneTime}"
                         DownsampleToViewSize="True"
                         IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
                         Style="{StaticResource LiveIcon}" />
                     <ffImageLoading:CachedImage
-                        AutomationId="{Binding Match.Id, StringFormat='ExtraTimeIndicator-{0}'}"
+                        AutomationId="{Binding Match.Id, StringFormat='ExtraTimeIndicator-{0}', Mode=OneTime}"
                         DownsampleToViewSize="True"
                         IsVisible="{Binding Match.IsInExtraTime}"
                         Style="{StaticResource ExtraTimeIcon}" />
                     <Label
-                        AutomationId="{Binding Match.Id, StringFormat='MatchStatus-{0}'}"
+                        AutomationId="{Binding Match.Id, StringFormat='MatchStatus-{0}', Mode=OneTime}"
+                        LineBreakMode="NoWrap"
                         Style="{StaticResource MatchStatus}"
                         Text="{Binding DisplayMatchStatus}" />
                 </StackLayout>
                 <StackLayout Grid.Row="0"
                             Grid.Column="1"
                             Style="{StaticResource MatchHomeTeam}">
-                    <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamName-{0}'}"
+                    <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamName-{0}', Mode=OneTime}"
                            Style="{StaticResource Team}"
-                           Text="{Binding Match.HomeTeamName}" />
+                           Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
                     <templates:RedCardTemplate RedCards="{Binding Match.TotalHomeRedCards}" />
-                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}'}"
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}, Mode=OneTime'}"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                                 Source="{Binding Match.HomePenaltyImage}"
                                                 Style="{StaticResource MatchWinnerInfoIcon}" />
-                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}'}"
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}', Mode=OneTime}"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                                                 Source="{Binding Match.HomeSecondLegImage}"
@@ -71,14 +72,14 @@
                              Style="{StaticResource MatchAwayTeam}">
                     <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
                            Style="{StaticResource Team}"
-                           Text="{Binding Match.AwayTeamName}" />
+                           Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
                     <templates:RedCardTemplate RedCards="{Binding Match.TotalAwayRedCards}" />
-                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}'}"
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}', Mode=OneTime}"
                                                 DownsampleToViewSize="True"
-                                                IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                                IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
                                                 Source="{Binding Match.AwayPenaltyImage}"
                                                 Style="{StaticResource MatchWinnerInfoIcon}" />
-                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}'}"
+                    <ffImageLoading:CachedImage AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}', Mode=OneTime}"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                                                 Source="{Binding Match.AwaySecondLegImage}"
@@ -86,21 +87,24 @@
                 </StackLayout>
                 <Label Grid.Row="0"
                        Grid.Column="2"
-                       IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
-                       AutomationId="{Binding Match.Id, StringFormat='HomeScore-{0}'}"
+                       IsVisible="{Binding Match.EventStatus.ShowScore}"
+                       AutomationId="{Binding Match.Id, StringFormat='HomeScore-{0}', Mode=OneTime}"
                        Style="{StaticResource HomeScore}"
+                       LineBreakMode="NoWrap"
                        Text="{Binding Match.HomeScore}" />
                 <Label Grid.Row="1"
                        Grid.Column="2"
-                       IsVisible="{Binding Match.MatchResult.EventStatus.ShowScore}"
-                       AutomationId="{Binding Match.Id, StringFormat='AwayScore-{0}'}"
+                       IsVisible="{Binding Match.EventStatus.ShowScore}"
+                       AutomationId="{Binding Match.Id, StringFormat='AwayScore-{0}', Mode=OneTime}"
                        Style="{StaticResource AwayScore}"
+                       LineBreakMode="NoWrap"
                        Text="{Binding Match.AwayScore}" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="3"
                     Grid.RowSpan="2"
-                    AutomationId="{Binding Match.Id, StringFormat='FavoriteBtn-{0}'}"
+                    LineBreakMode="NoWrap"
+                    AutomationId="{Binding Match.Id, StringFormat='FavoriteBtn-{0}', Mode=OneTime}"
                     Style="{StaticResource MatchFavoriteIcon}" />
             </Grid>
         </StackLayout>

@@ -32,7 +32,7 @@
         public void BenchmarkGetMatches(string apiName, DateTime date, Language language, bool forceFetchNewData = false)
         {
             var httpService = new HttpService(new Uri(ApiUrls[apiName]));
-            var apiService = new ApiService(new ApiPolicy(), httpService, new Refit.RefitSettings());
+            var apiService = new ApiService(new ApiPolicy(), httpService);
             var matchService = new MatchService(apiService, cachingService, loggingService);
 
             var matches = matchService.GetMatches(new DateRange(date), language, forceFetchNewData).GetAwaiter().GetResult();
@@ -81,6 +81,7 @@
     public class MockLoggingService : ILoggingService
     {
 #pragma warning disable S1186 // Methods should not be empty
+
         public void Init(string Dsn, IRavenClient ravenClient = null)
         {
         }
@@ -102,6 +103,7 @@
         public void TrackEvent(string trackIdentifier, string key, string value)
         {
         }
+
 #pragma warning restore S1186 // Methods should not be empty
     }
 }

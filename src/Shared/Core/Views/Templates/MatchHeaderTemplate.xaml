@@ -31,19 +31,20 @@
                                             Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
-                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}'}"
-                       LineBreakMode="TailTruncation"
+                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}', Mode=OneTime}"
+                       LineBreakMode="NoWrap"
                        Style="{StaticResource LeagueName}"
-                       Text="{Binding Key.LeagueName}" />
+                       Text="{Binding Key.LeagueName, Mode=OneTime}" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
-                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueEventDate-{0}'}"
+                       LineBreakMode="NoWrap"
+                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueEventDate-{0}', Mode=OneTime}"
                        Style="{StaticResource MatchDate}"
-                       Text="{Binding Key.EventDate}" />
+                       Text="{Binding Key.EventDate, Mode=OneTime}" />
                 <ffImageLoading:CachedImage x:Name="DetailIcon"
                                             Grid.Row="0"
                                             Grid.Column="3"
-                                            AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}'}"
+                                            AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}', Mode=OneTime}"
                                             Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
         </StackLayout>
