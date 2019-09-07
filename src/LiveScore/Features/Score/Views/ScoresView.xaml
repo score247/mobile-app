@@ -21,14 +21,13 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
-            <templateSelectors:MatchItemTemplateSelector x:Key="matchItemTemplateSelector" />
-            <coreTemplates:MatchHeaderTemplate x:Key="matchHeaderTemplate" />
+            <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
+            <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
         <dateBar:DateBar NumberDisplayDays="3" />
         <ActivityIndicator
-            x:Name="activity"
             IsEnabled="{Binding IsLoading}"
             IsRunning="{Binding IsLoading}"
             IsVisible="{Binding IsLoading}"
@@ -39,13 +38,13 @@
             AutomationProperties.IsInAccessibleTree="False"
             Footer=""
             GroupDisplayBinding="{Binding Key}"
-            GroupHeaderTemplate="{StaticResource matchHeaderTemplate}"
+            GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
             HasUnevenRows="true"
             IsGroupingEnabled="True"
             IsPullToRefreshEnabled="true"
             IsRefreshing="{Binding IsRefreshing}"
             IsVisible="{Binding IsNotLoading}"
-            ItemTemplate="{StaticResource matchItemTemplateSelector}"
+            ItemTemplate="{StaticResource MatchItemTemplateSelector}"
             ItemsSource="{Binding MatchItemsSource}"
             RefreshCommand="{Binding RefreshCommand}"
             SelectionMode="None"

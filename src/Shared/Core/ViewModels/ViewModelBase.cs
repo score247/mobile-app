@@ -60,6 +60,8 @@
 
         public bool IsLoading { get; protected set; }
 
+        public bool IsNotLoading => !IsLoading;
+
         public virtual void Initialize(INavigationParameters parameters)
         {
         }

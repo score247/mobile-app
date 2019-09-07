@@ -3,7 +3,6 @@
 namespace LiveScore.Features.Score.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -17,7 +16,6 @@ namespace LiveScore.Features.Score.ViewModels
     using Core.PubSubEvents.Matches;
     using Core.PubSubEvents.Teams;
     using Core.Services;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.ViewModels;
     using MethodTimer;
     using Prism.Events;
@@ -30,7 +28,6 @@ namespace LiveScore.Features.Score.ViewModels
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
         private DateRange selectedDateRange;
-        private CancellationTokenSource cancellationTokenSource;
 
         private static readonly ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
             new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
@@ -51,6 +48,8 @@ namespace LiveScore.Features.Score.ViewModels
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearch);
+
+            Task.Run(() => LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())).ConfigureAwait(false));
         }
 
         public DateTime SelectedDate { get; internal set; }
@@ -64,19 +63,6 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; }
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
-
-        [Time]
-        public override async void Initialize(INavigationParameters parameters)
-        {
-            if (MatchItemsSource == null)
-            {
-                await LoadData(() => LoadMatches(DateRange.FromYesterdayUntilNow())).ConfigureAwait(false);
-            }
-            else
-            {
-                await LoadData(() => LoadMatches(selectedDateRange, true)).ConfigureAwait(false);
-            }
-        }
 
         [Time]
         public override async void OnResume()
@@ -93,9 +79,14 @@ namespace LiveScore.Features.Score.ViewModels
             OnInitialized();
         }
 
-        protected override void OnInitialized()
+        [Time]
+        protected override async void OnInitialized()
         {
-            cancellationTokenSource = new CancellationTokenSource();
+            if (MatchItemsSource != null)
+            {
+                await LoadData(() => LoadMatches(selectedDateRange, true), false).ConfigureAwait(false);
+            }
+
             SubscribeEvents();
         }
 
@@ -118,8 +109,6 @@ namespace LiveScore.Features.Score.ViewModels
         {
             base.OnDisposed();
             UnsubscribeAllEvents();
-
-            cancellationTokenSource?.Cancel();
         }
 
         private void UnsubscribeAllEvents()
@@ -186,52 +175,49 @@ namespace LiveScore.Features.Score.ViewModels
                 MatchItemsSource = EmptyMatchDataSource;
             }
 
+            await Task.Run(() => GetMatches(dateRange, forceFetchNewData));
+
+            selectedDateRange = dateRange;
+
+            Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
+        }
+
+        private async Task GetMatches(DateRange dateRange, bool forceFetchNewData)
+        {
             var matches = await matchService.GetMatches(
                     dateRange,
                     Settings.CurrentLanguage,
                     forceFetchNewData).ConfigureAwait(false);
 
-            Device.BeginInvokeOnMainThread(() => MatchItemsSource = BuildMatchItemSource(matches));
+            var matchItemViewModels = matches.Select(
+                match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            selectedDateRange = dateRange;
-            IsRefreshing = false;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                    matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
 
-            Profiler.Stop("ScoresViewModel.LoadMatches.PullDownToRefresh");
+                IsRefreshing = false;
+            });
+
             Profiler.Start("ScoresView.Render");
-
             Debug.WriteLine($"Number of matches: {matches.Count()}");
         }
 
         private void UnsubscribeLiveMatchTimeChangeEvent(DateRange dateRange)
         {
             // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
-
-            if ((dateRange.From == DateTime.Today
-                 || dateRange.From == DateTimeExtension.Yesterday().Date)
-                && MatchItemsSource?.Count > 0)
+            if ((dateRange.From == DateTime.Today || dateRange.From == DateTimeExtension.Yesterday().Date)
+                    && MatchItemsSource?.Count > 0)
             {
-                var liveMatchViewModels
-                    = MatchItemsSource
+                var liveMatchViewModels = MatchItemsSource
                         .SelectMany(group => group)
                         .Where(matchItem => matchItem.Match.EventStatus?.IsLive == true);
 
                 // experiment parallel
                 Parallel.ForEach(liveMatchViewModels, (viewModel, _)
                     => viewModel.UnsubscribeMatchTimeChangeEvent());
-
-                //liveMatchViewModels.ToList().ForEach(m => m.UnsubscribeMatchTimeChangeEvent());
             }
-        }
-
-        private ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> BuildMatchItemSource(IEnumerable<IMatch> matches)
-        {
-            var matchItemViewModels
-                = matches.Select(
-                    match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
-
-            return new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItemViewModels
-                    .GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
