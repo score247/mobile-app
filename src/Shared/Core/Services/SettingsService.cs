@@ -6,8 +6,11 @@
     public interface ISettings
     {
         bool IsDemo { get; set; }
+
         byte SportId { get; set; }
+
         SportType CurrentSportType { get; }
+
         string LanguageCode { get; set; }
 
         Language CurrentLanguage { get; }
@@ -23,7 +26,7 @@
 
         public byte SportId
         {
-            get => (byte) Preferences.Get(nameof(SportId), SportType.Soccer.Value);
+            get => (byte)Preferences.Get(nameof(SportId), SportType.Soccer.Value);
             set => Preferences.Set(nameof(SportId), value);
         }
 
