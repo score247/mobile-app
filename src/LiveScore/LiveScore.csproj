@@ -20,14 +20,6 @@
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Features\Score\ViewResources\**" />
-    <Compile Remove="Features\Score\Views\Templates\**" />
-    <EmbeddedResource Remove="Features\Score\ViewResources\**" />
-    <EmbeddedResource Remove="Features\Score\Views\Templates\**" />
-    <None Remove="Features\Score\ViewResources\**" />
-    <None Remove="Features\Score\Views\Templates\**" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
     <PackageReference Include="MethodTimer.Fody" Version="3.0.0" />
@@ -42,61 +34,6 @@
     <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Features\Favorites\Views\EmptyFavoriteView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Features\Favorites\Views\FavoriteView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Features\League\Views\LeagueDetailView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\League\Views\LeagueView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Menu\Views\DefaultLanguageView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Menu\Views\DefaultSportView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Menu\Views\FAQView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Menu\Views\InfoAlertView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Menu\Views\RefreshView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\News\ViewResources\NewsViewResource.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\News\Views\EmptyNewsView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\News\Views\NewsView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-
-    <Compile Update="Features\Score\Views\LiveView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\Score\Views\ScoresView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-
-    <Compile Update="Features\TVSchedule\ViewResources\TVScheduleViewResource.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\TVSchedule\Views\EmptyTVScheduleView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Features\TVSchedule\Views\TVScheduleView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="ViewResources\MainViewResource.xaml.cs">
       <DependentUpon>MainViewResource.xaml</DependentUpon>
     </Compile>
@@ -120,6 +57,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+
+    <ProjectReference Include="..\LiveScore.Featues\LiveScore.Featues.csproj" />
 
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
@@ -147,16 +86,6 @@
     <None Update="Views\TabMoreView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Update="Features\Favorites\Views\EmptyFavoriteView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Features\Favorites\Views\FavoriteView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

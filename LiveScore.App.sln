@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utils", "utils", "{50A77883
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.PerformanceProfilers", "utils\LiveScore.PerfomanceProfilers\LiveScore.PerformanceProfilers.csproj", "{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Featues", "src\LiveScore.Featues\LiveScore.Featues.csproj", "{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Ad-Hoc|Any CPU = Ad-Hoc|Any CPU
@@ -426,6 +428,42 @@ Global
 		{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}.Test|iPhone.Build.0 = Debug|Any CPU
 		{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}.Test|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}.Test|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|Any CPU.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Ad-Hoc|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|Any CPU.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|iPhone.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AppStore|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|Any CPU.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|iPhone.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|iPhone.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.AutoTest|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|iPhone.Build.0 = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|Any CPU.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|Any CPU.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|iPhone.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|iPhone.Build.0 = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}.Test|iPhoneSimulator.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -444,6 +482,7 @@ Global
 		{5D75D1B4-E39B-4F50-A3A4-DF2528FCCC56} = {234B3DA3-4C56-4D6C-BFD7-F7A2985982F2}
 		{74EEA90A-96D6-4E2E-BBE5-D9552EA7EC16} = {F96F1E34-EC23-4EE5-8089-EC572468DB5A}
 		{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5} = {50A77883-8167-496D-AA8F-BC8B136903BD}
+		{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D} = {234B3DA3-4C56-4D6C-BFD7-F7A2985982F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7804EB8-35A6-4838-B2DD-A9CFB9231817}
