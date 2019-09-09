@@ -26,7 +26,7 @@
             viewModel = new DateBarViewModel
             {
                 EventAggregator = viewModelBaseFixture.EventAggregator,
-                Settings = viewModelBaseFixture.AppSettingsFixture.Settings,
+                AppSettings = viewModelBaseFixture.AppSettingsFixture.AppSettings,
                 NumberOfDisplayDays = 3
             };
 

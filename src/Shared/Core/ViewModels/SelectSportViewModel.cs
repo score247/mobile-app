@@ -41,7 +41,7 @@ namespace LiveScore.Core.ViewModels
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Type.Value == Settings.CurrentSportType.Value;
+                sportItem.IsVisible = sportItem.Type.Value == AppSettings.CurrentSportType.Value;
             }
 
             SportItems = new ObservableCollection<SportItem>(sportItems);
@@ -51,8 +51,8 @@ namespace LiveScore.Core.ViewModels
         {
             if (SelectedSportItem.Type != null)
             {
-                var isSportChanged = Settings.CurrentSportType.Value != SelectedSportItem.Type.Value;
-                Settings.SportId = SelectedSportItem.Type.Value;
+                var isSportChanged = AppSettings.CurrentSportType.Value != SelectedSportItem.Type.Value;
+                AppSettings.SportId = SelectedSportItem.Type.Value;
 
                 if (isSportChanged)
                 {

@@ -15,7 +15,7 @@
 
     public class SoccerHubService : IHubService
     {
-        private readonly ISettings settings;
+        private readonly IAppSettings appSettings;
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
@@ -34,10 +34,10 @@
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
             ILoggingService logger,
-            ISettings settings,
+            IAppSettings appSettings,
             IEventAggregator eventAggregator)
         {
-            this.settings = settings;
+            this.appSettings = appSettings;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
             this.hubConnectionBuilder = hubConnectionBuilder;
@@ -47,7 +47,7 @@
         {
             try
             {
-                hubConnection = hubConnectionBuilder.WithUrl($"{settings.HubEndpoint}/soccerhub").Build();
+                hubConnection = hubConnectionBuilder.WithUrl($"{appSettings.HubEndpoint}/soccerhub").Build();
 
                 foreach (var hubEvent in hubEvents)
                 {
