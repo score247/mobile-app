@@ -58,7 +58,9 @@
   </ItemGroup>
   <ItemGroup>
 
-    <ProjectReference Include="..\LiveScore.Featues\LiveScore.Featues.csproj" />
+    <ProjectReference Include="..\LiveScore.Featues\LiveScore.Features.csproj" />
+
+    <ProjectReference Include="..\LiveScore.Features\LiveScore.Features.csproj" />
 
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />

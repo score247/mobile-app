@@ -33,7 +33,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utils", "utils", "{50A77883
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.PerformanceProfilers", "utils\LiveScore.PerfomanceProfilers\LiveScore.PerformanceProfilers.csproj", "{CB56C7C5-0C3D-4171-9B0F-0E0AF695FEC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Featues", "src\LiveScore.Featues\LiveScore.Featues.csproj", "{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Features", "src\LiveScore.Features\LiveScore.Features.csproj", "{C45FE61A-3F05-4F40-B6EB-2D714C3FEE8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

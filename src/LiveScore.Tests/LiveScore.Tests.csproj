@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LiveScore.Features\LiveScore.Features.csproj" />
     <ProjectReference Include="..\LiveScore\LiveScore.csproj" />
     <ProjectReference Include="..\Shared\Core.Tests\LiveScore.Core.Tests.csproj" />
   </ItemGroup>
