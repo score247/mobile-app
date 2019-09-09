@@ -39,7 +39,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
-            matchService = DependencyResolver.Resolve<IMatchService>(Settings.CurrentSportType.Value.ToString());
+            matchService = DependencyResolver.Resolve<IMatchService>(AppSettings.CurrentSportType.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
             TabHeaderIcon = MatchDetailTabImage.Info;
             TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
@@ -80,7 +80,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
         {
-            MatchInfo = await matchService.GetMatch(matchId, Settings.CurrentLanguage, isRefresh) as MatchInfo;
+            MatchInfo = await matchService.GetMatch(matchId, AppSettings.CurrentLanguage, isRefresh) as MatchInfo;
 
             BuildDetailInfo(MatchInfo);
 
@@ -90,7 +90,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
-            if (matchEventMessage.SportId != Settings.CurrentSportType.Value
+            if (matchEventMessage.SportId != AppSettings.CurrentSportType.Value
                 || matchEventMessage.MatchEvent.MatchId != matchId)
             {
                 return;

@@ -24,7 +24,7 @@
 
         public IEventAggregator EventAggregator { get; set; }
 
-        public ISettings Settings { get; set; }
+        public IAppSettings AppSettings { get; set; }
 
         public int NumberOfDisplayDays { get; set; }
 
@@ -42,7 +42,7 @@
         {
             var baseViewModel = (ViewModelBase)bindingContext;
             EventAggregator = baseViewModel.EventAggregator;
-            Settings = baseViewModel.Settings;
+            AppSettings = baseViewModel.AppSettings;
             RenderCalendarItems();
             SelectHomeCommand?.Execute();
         }

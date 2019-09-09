@@ -3,13 +3,13 @@
     public class SettingServiceTests
     {
         //private readonly ICachingService mockCache;
-        //private readonly Settings setting;
+        //private readonly AppSettings setting;
 
         //public SettingServiceTests()
         //{
         //    mockCache = Substitute.For<ICachingService>();
 
-        //    setting = new Settings(mockCache);
+        //    setting = new AppSettings(mockCache);
         //}
 
         //[Fact]

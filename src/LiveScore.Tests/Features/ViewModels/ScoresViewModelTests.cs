@@ -92,7 +92,7 @@ namespace Scores.Tests.ViewModels
 
             // Assert
             var navService = viewModel.NavigationService as FakeNavigationService;
-            Assert.Equal("MatchDetailView" + viewModel.Settings.CurrentSportType.Value, navService.NavigationPath);
+            Assert.Equal("MatchDetailView" + viewModel.AppSettings.CurrentSportType.Value, navService.NavigationPath);
             Assert.Equal(matchViewModel.Match, navService.Parameters["Match"]);
         }
 

@@ -78,7 +78,7 @@ namespace LiveScore
             var logService = Container.Resolve<ILoggingService>();
             logService.Init(Configuration.SentryDsn);
 
-            var settingsService = Container.Resolve<ISettings>();
+            var settingsService = Container.Resolve<IAppSettings>();
             settingsService.ApiEndpoint = Configuration.LocalEndPoint;
             settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
 
@@ -116,7 +116,7 @@ namespace LiveScore
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.LocalEndPoint)));
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
-            containerRegistry.RegisterSingleton<ISettings, Settings>();
+            containerRegistry.RegisterSingleton<IAppSettings, AppSettings>();
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
@@ -152,7 +152,7 @@ namespace LiveScore
             var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),
                 container.Resolve<ILoggingService>(),
-                container.Resolve<ISettings>(),
+                container.Resolve<IAppSettings>(),
                 container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);

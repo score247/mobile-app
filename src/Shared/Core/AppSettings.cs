@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Services
+﻿namespace LiveScore.Core
 {
     using Enumerations;
     using Xamarin.Essentials;
 
-    public interface ISettings
+    public interface IAppSettings
     {
         bool IsDemo { get; set; }
 
@@ -20,7 +20,7 @@
         string HubEndpoint { get; set; }
     }
 
-    public class Settings : ISettings
+    public class AppSettings : IAppSettings
     {
         public SportType CurrentSportType => Enumeration.FromValue<SportType>(SportId);
 
@@ -38,7 +38,11 @@
 
         public Language CurrentLanguage => Enumeration.FromDisplayName<Language>(LanguageCode);
 
-        public bool IsDemo { get; set; }
+        public bool IsDemo
+        {
+            get => Preferences.Get(nameof(IsDemo), false);
+            set => Preferences.Set(nameof(IsDemo), value);
+        }
 
         public string ApiEndpoint
         {

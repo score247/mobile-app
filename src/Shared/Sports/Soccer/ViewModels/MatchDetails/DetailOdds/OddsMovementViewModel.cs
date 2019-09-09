@@ -45,7 +45,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(Settings.CurrentSportType.Value.ToString());
+            oddsService = DependencyResolver.Resolve<IOddsService>(AppSettings.CurrentSportType.Value.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
 
@@ -140,7 +140,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(Settings.LanguageCode, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
+            var matchOddsMovement = await oddsService.GetOddsMovement(AppSettings.LanguageCode, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
