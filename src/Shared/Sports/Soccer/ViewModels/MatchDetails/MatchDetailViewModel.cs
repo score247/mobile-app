@@ -106,7 +106,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
         }
 
-        protected override void OnInitialized()
+        protected void OnInitialized()
         {
             TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
             // TODO: Call match service to get match detail
@@ -126,10 +126,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             });
         }
 
-        protected override void OnDisposed()
+        protected void OnDisposed()
         {
-            base.OnDisposed();
-
             EventAggregator
               .GetEvent<MatchEventPubSubEvent>()
               .Unsubscribe(OnReceivedMatchEvent);

@@ -14,7 +14,7 @@ namespace LiveScore.Features.Score.Views
         public ScoresView()
         {
             InitializeComponent();
-            LeagueTable.ItemAppearing += LeagueTable_ItemAppearing;
+            //LeagueTable.ItemAppearing += LeagueTable_ItemAppearing;
         }
 
         private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)
@@ -28,9 +28,9 @@ namespace LiveScore.Features.Score.Views
             }
 
             Profiler.Stop("IOS Application");
-            Profiler.Stop("ScoresViewModel.LoadMatches.SelectDate");
-            Profiler.Stop("ScoresViewModel.OnNavigatedTo");
-            Profiler.Stop("ScoresViewModel.OnResume");
+            Profiler.Stop("ScoreItemViewModel.LoadMatches.SelectDate");
+            Profiler.Stop("ScoreItemViewModel.OnNavigatedTo");
+            Profiler.Stop("ScoreItemViewModel.OnResume");
             Profiler.Stop("ScoresView.Render");
 
             Debug.WriteLine("");

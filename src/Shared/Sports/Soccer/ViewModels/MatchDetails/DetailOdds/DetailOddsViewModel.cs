@@ -111,7 +111,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         }
 
         [Time]
-        protected override async void OnInitialized()
+        protected async void OnInitialized()
         {
             try
             {

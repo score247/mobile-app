@@ -35,7 +35,7 @@ namespace Scores.Tests
             soccerModule.RegisterTypes(container);
 
             // Assert
-            container.Received(1).RegisterForNavigation<ScoresView, ScoresViewModel>();
+            container.Received(1).RegisterForNavigation<ScoresView, ScoreItemViewModel>();
             container.Received(1).RegisterForNavigation<LiveView, LiveViewModel>();
         }
     }

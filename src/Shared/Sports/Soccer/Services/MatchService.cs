@@ -62,13 +62,13 @@
         }
 
         [Time]
-        private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
             {
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
-                if(forceFetchNewData)
+                if (forceFetchNewData)
                 {
                     await cacheService.RemoveAsync(cacheKey);
                 }
