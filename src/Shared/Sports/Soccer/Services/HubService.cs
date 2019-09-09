@@ -17,7 +17,7 @@ namespace LiveScore.Soccer.Services
 
     public class SoccerHubService : IHubService
     {
-        private readonly IAppSettings appSettings;
+        private readonly ISettings settings;
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
@@ -36,10 +36,10 @@ namespace LiveScore.Soccer.Services
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
             ILoggingService logger,
-            IAppSettings appSettings,
+            ISettings settings,
             IEventAggregator eventAggregator)
         {
-            this.appSettings = appSettings;
+            this.settings = settings;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
             this.hubConnectionBuilder = hubConnectionBuilder;
@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                hubConnection = hubConnectionBuilder.WithUrl($"{appSettings.HubEndpoint}/soccerhub").Build();
+                hubConnection = hubConnectionBuilder.WithUrl($"{settings.HubEndpoint}/soccerhub").Build();
 
                 foreach (var hubEvent in hubEvents)
                 {

@@ -55,7 +55,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             TabHeaderActiveIcon = MatchDetailTabImage.OddsActive;
 
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(AppSettings.CurrentSportType.Value.ToString());
+            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
 
             RefreshCommand = new DelegateAsyncCommand(async () =>
                 await LoadData(() => FirstLoadOrRefreshOdds(SelectedBetType, oddsFormat, true)).ConfigureAwait(false));
@@ -102,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 { "Format",  oddsFormat}
             };
 
-            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + AppSettings.CurrentSportType.Value, parameters);
+            var navigated = await NavigationService.NavigateAsync("OddsMovementView" + CurrentSportId, parameters);
 
             if (!navigated.Success)
             {
@@ -169,14 +169,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var odds = await oddsService.GetOdds(AppSettings.LanguageCode, matchId, SelectedBetType.Value, formatType, forceFetchNew);
+            var odds = await oddsService.GetOdds(CurrentLanguage.DisplayName, matchId, SelectedBetType.Value, formatType, forceFetchNew).ConfigureAwait(false);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 
             HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
 
             BetTypeOddsItems = HasData
-                ? new List<BaseItemViewModel>(odds.BetTypeOddsList.Select(t =>
+                ? new List<BaseItemViewModel>((odds.BetTypeOddsList ?? throw new InvalidOperationException()).Select(t =>
                     new BaseItemViewModel(SelectedBetType, t, NavigationService, DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();

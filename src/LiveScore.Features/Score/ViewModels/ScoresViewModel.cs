@@ -186,7 +186,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var matches = await matchService.GetMatches(
                     dateRange,
-                    AppSettings.CurrentLanguage,
+                    CurrentLanguage,
                     forceFetchNewData).ConfigureAwait(false);
 
             var matchItemViewModels = matches.Select(

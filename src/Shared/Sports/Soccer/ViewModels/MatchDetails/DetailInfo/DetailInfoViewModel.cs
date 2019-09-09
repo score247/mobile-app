@@ -39,7 +39,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
-            matchService = DependencyResolver.Resolve<IMatchService>(AppSettings.CurrentSportType.Value.ToString());
+            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
             TabHeaderIcon = MatchDetailTabImage.Info;
             TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
@@ -64,7 +64,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             try
             {
                 // TODO: Check when need to reload data later
-                await LoadData(() => LoadMatchDetail(matchId, true));
+                await LoadData(() => LoadMatchDetail(matchId, true)).ConfigureAwait(false);
 
                 // TODO: need review UIThread here
                 eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
@@ -78,7 +78,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
         {
-            MatchInfo = await matchService.GetMatch(matchId, AppSettings.CurrentLanguage, isRefresh) as MatchInfo;
+            MatchInfo =
+                await matchService.GetMatch(matchId, CurrentLanguage, isRefresh).ConfigureAwait(false) as MatchInfo;
 
             BuildDetailInfo(MatchInfo);
 
@@ -88,7 +89,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
-            if (matchEventMessage.SportId != AppSettings.CurrentSportType.Value
+            if (matchEventMessage.SportId != CurrentSportId
                 || matchEventMessage.MatchEvent.MatchId != matchId)
             {
                 return;
@@ -175,17 +176,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 return timelineEvents;
             }
 
-            if (match.EventStatus.IsLive && match.MatchStatus.IsInPenalties)
+            if (!match.EventStatus.IsLive || !match.MatchStatus.IsInPenalties)
             {
-                var lastEvent = timelineEvents.LastOrDefault();
-                timelineEvents.RemoveAll(t => t.IsFirstShoot);
-
-                if (lastEvent?.IsFirstShoot == true)
-                {
-                    timelineEvents.Add(lastEvent);
-                }
-
                 return timelineEvents;
+            }
+
+            var lastEvent = timelineEvents.LastOrDefault();
+            timelineEvents.RemoveAll(t => t.IsFirstShoot);
+
+            if (lastEvent?.IsFirstShoot == true)
+            {
+                timelineEvents.Add(lastEvent);
             }
 
             return timelineEvents;

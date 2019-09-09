@@ -6,7 +6,6 @@ using System.Reflection;
 using Akavache;
 using Fanex.Caching;
 using JsonNet.ContractResolvers;
-using LiveScore.Common.Configuration;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -59,6 +58,7 @@ namespace LiveScore
 
         public App() : this(null)
         {
+
         }
 
         [Time]
@@ -70,17 +70,14 @@ namespace LiveScore
         protected override async void OnInitialized()
         {
             Registrations.Start("Score247.App");
+          
             Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init(Configuration.SentryDsn);
-
-            var settingsService = Container.Resolve<IAppSettings>();
-            settingsService.ApiEndpoint = Configuration.LocalEndPoint;
-            settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
+            logService.Init(AppSettings.Current.LoggingDns);
 
             RegisterAndStartEventHubs(Container);
             StartGlobalTimer();
@@ -104,6 +101,8 @@ namespace LiveScore
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            AppSettings.Current.Start();
+
             containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
@@ -113,10 +112,10 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.LocalEndPoint)));
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(AppSettings.Current.ApiEndpoint)));
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
-            containerRegistry.RegisterSingleton<IAppSettings, AppSettings>();
+            containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
@@ -153,7 +152,7 @@ namespace LiveScore
             var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),
                 container.Resolve<ILoggingService>(),
-                container.Resolve<IAppSettings>(),
+                container.Resolve<ISettings>(),
                 container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);
