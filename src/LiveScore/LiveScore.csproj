@@ -58,8 +58,6 @@
   </ItemGroup>
   <ItemGroup>
 
-    <ProjectReference Include="..\LiveScore.Featues\LiveScore.Features.csproj" />
-
     <ProjectReference Include="..\LiveScore.Features\LiveScore.Features.csproj" />
 
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
@@ -89,5 +87,4 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
-
 </Project>
