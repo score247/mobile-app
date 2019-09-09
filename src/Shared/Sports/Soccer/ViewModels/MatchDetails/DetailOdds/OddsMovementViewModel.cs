@@ -87,7 +87,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        protected override async void OnInitialized()
+        protected async void OnInitialized()
         {
             try
             {
@@ -101,7 +101,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        protected override void OnDisposed()
+        protected void OnDisposed()
         {
             Debug.WriteLine("OddsMovementViewModel Clean");
 

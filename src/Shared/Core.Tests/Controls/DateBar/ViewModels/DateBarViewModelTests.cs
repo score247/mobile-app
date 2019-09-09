@@ -151,8 +151,8 @@
     {
         public MockViewModelBase(
             INavigationService navigationService,
-            IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator) : base(navigationService, serviceLocator, eventAggregator)
+            IDependencyResolver dependencyResolver,
+            IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
         {
         }
     }

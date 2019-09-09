@@ -18,8 +18,8 @@
 
         public ViewModelBase(
            INavigationService navigationService,
-           IDependencyResolver serviceLocator,
-           IEventAggregator eventAggregator) : this(navigationService, serviceLocator)
+           IDependencyResolver dependencyResolver,
+           IEventAggregator eventAggregator) : this(navigationService, dependencyResolver)
         {
             EventAggregator = eventAggregator;
         }
@@ -68,29 +68,17 @@
 
         public virtual void OnResume()
         {
-            OnInitialized();
         }
 
         public virtual void OnSleep()
         {
-            OnDisposed();
         }
 
         public virtual void OnAppearing()
         {
-            OnInitialized();
         }
 
         public virtual void OnDisappearing()
-        {
-            OnDisposed();
-        }
-
-        protected virtual void OnInitialized()
-        {
-        }
-
-        protected virtual void OnDisposed()
         {
         }
 

@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Features.Score.Views.ScoresView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
-    xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
-    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
-    x:Name="this"
-    mvvm:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
+<ContentPage x:Class="LiveScore.Features.Score.Views.ScoresView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
+             xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             mvvm:ViewModelLocator.AutowireViewModel="True"
+             BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Text="Search"
-            Command="{Binding ClickSearchCommand}"
-            IconImageSource="images/common/search.png"
-            Priority="1" />
+        <ToolbarItem Text="Search"
+                     Command="{Binding ClickSearchCommand}"
+                     IconImageSource="images/common/search.png"
+                     Priority="1" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -26,40 +24,45 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <dateBar:DateBar NumberDisplayDays="3" />
-        <ActivityIndicator
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
-            Style="{StaticResource CenterActivityIndicator}" />
-        <customListView:CustomListView
-            x:Name="LeagueTable"
-            AutomationId="LeagueTableId"
-            AutomationProperties.IsInAccessibleTree="False"
-            Footer=""
-            GroupDisplayBinding="{Binding Key}"
-            GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-            HasUnevenRows="true"
-            IsGroupingEnabled="True"
-            IsPullToRefreshEnabled="true"
-            IsRefreshing="{Binding IsRefreshing}"
-            IsVisible="{Binding IsNotLoading}"
-            ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-            ItemsSource="{Binding MatchItemsSource}"
-            RefreshCommand="{Binding RefreshCommand}"
-            SelectionMode="None"
-            SeparatorColor="{StaticResource LineColor}"
-            Style="{StaticResource ListViewHasBackground}"
-            VerticalOptions="FillAndExpand">
-            <x:Arguments>
-                <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
-            </x:Arguments>
-            <customListView:CustomListView.Behaviors>
-                <b:EventToCommandBehavior
-                    Command="{Binding TappedMatchCommand}"
-                    EventArgsParameterPath="Item"
-                    EventName="ItemTapped" />
-            </customListView:CustomListView.Behaviors>
-        </customListView:CustomListView>
+        <!--<dateBar:DateBar NumberDisplayDays="3" />-->
+        <ActivityIndicator IsEnabled="{Binding IsLoading}"
+                           IsRunning="{Binding IsLoading}"
+                           IsVisible="{Binding IsLoading}"
+                           Style="{StaticResource CenterActivityIndicator}" />
+        <cards:CarouselView ItemsSource="{Binding ScoreItemSources, Mode=OneTime}"
+                            SelectedItem="{Binding SelectedScoreItem}"
+                            IsCyclical="False">
+            <cards:CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <customListView:CustomListView x:Name="LeagueTable"
+                                                   AutomationId="LeagueTableId"
+                                                   AutomationProperties.IsInAccessibleTree="False"
+                                                   Footer=""
+                                                   GroupDisplayBinding="{Binding Key}"
+                                                   GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                                                   HasUnevenRows="true"
+                                                   IsGroupingEnabled="True"
+                                                   IsPullToRefreshEnabled="true"
+                                                   IsRefreshing="{Binding IsRefreshing}"
+                                                   IsVisible="{Binding IsNotLoading}"
+                                                   ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                                   ItemsSource="{Binding MatchItemsSource}"
+                                                   RefreshCommand="{Binding RefreshCommand}"
+                                                   SelectionMode="None"
+                                                   SeparatorColor="{StaticResource LineColor}"
+                                                   Style="{StaticResource ListViewHasBackground}"
+                                                   VerticalOptions="FillAndExpand">
+                        <x:Arguments>
+                            <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                        </x:Arguments>
+                        <customListView:CustomListView.Behaviors>
+                            <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
+                                                      EventArgsParameterPath="Item"
+                                                      EventName="ItemTapped" />
+                        </customListView:CustomListView.Behaviors>
+                    </customListView:CustomListView>
+                </DataTemplate>
+            </cards:CarouselView.ItemTemplate>
+        </cards:CarouselView>
     </StackLayout>
 </ContentPage>

@@ -33,8 +33,8 @@
             "Bayern Munchen"
         };
 
-        public SearchViewModel(INavigationService navigationService, IDependencyResolver serviceLocator, IEventAggregator eventAggregator)
-             : base(navigationService, serviceLocator, eventAggregator)
+        public SearchViewModel(INavigationService navigationService, IDependencyResolver dependencyResolver, IEventAggregator eventAggregator)
+             : base(navigationService, dependencyResolver, eventAggregator)
         {
             CancelCommand = new DelegateAsyncCommand(OnCancelCommandExecuted);
             TextChangeCommand = new DelegateCommand(OnTextChangeCommandExecuted);
