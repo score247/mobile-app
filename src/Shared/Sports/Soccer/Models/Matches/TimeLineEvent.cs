@@ -8,7 +8,7 @@
     {
         public EventType Type { get; set; }
 
-        public DateTimeOffset Time { get; }
+        public DateTimeOffset Time { get; set; }
 
         public byte MatchTime { get; set; }
 

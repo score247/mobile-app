@@ -121,16 +121,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 return;
             }
 
-            {
-                var soccerTimeline = matchInfo.TimelineEvents.OfType<TimelineEvent>();
-                soccerTimeline = soccerTimeline
-                    .Where(t => (t).IsDetailInfoEvent())
-                    .Distinct().ToList();
+            var soccerTimeline = matchInfo.TimelineEvents.OfType<TimelineEvent>();
+            soccerTimeline = soccerTimeline
+                .Where(t => (t).IsDetailInfoEvent())
+                .Distinct()
+                .ToList();
 
-                InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
-                    soccerTimeline.Select(t => new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
-                        .CreateInstance()));
-            }
+            InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
+                soccerTimeline.Select(t => new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
+                    .CreateInstance()));
         }
 
         private void BuildFooterInfo(IMatchInfo matchInfo)
