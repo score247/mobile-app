@@ -5,6 +5,7 @@
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -138,25 +139,30 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            if (forceFetchNew)
-            {
-                OddsMovementItems.Clear();
-            }
-
             var matchOddsMovement = await oddsService.GetOddsMovement(Settings.LanguageCode, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
-            HasData = matchOddsMovement.OddsMovements?.Any() == true;
-
-            if (HasData && matchOddsMovement.OddsMovements != null)
-            {
-                foreach (var oddsMovement in matchOddsMovement.OddsMovements)
+            if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
+            {               
+                if (forceFetchNew)
                 {
-                    var viewModel =
-                        new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
-                            .CreateInstance();
-
-                    OddsMovementItems.Add(viewModel);
+                    InsertOddsMovementItems(matchOddsMovement.OddsMovements);                    
                 }
+                else
+                {
+                    var updatedOddsMovements = matchOddsMovement.OddsMovements                    
+                        .OrderByDescending(x => x.UpdateTime)
+                        .ToList();
+
+                    foreach (var oddsMovement in updatedOddsMovements)
+                    {
+                        var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
+                        .CreateInstance();
+
+                        OddsMovementItems.Add(newOddsMovementView);
+                    }
+                }
+
+                HasData = true;
             }
         }
 
@@ -168,20 +174,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 return;
             }
 
-            //TODO check existing odds movement
-            var updatedOddsMovements = oddsMovementMessage.OddsEvents
-                .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
-                .Select(x => x.OddsMovement)
+            InsertOddsMovementItems(oddsMovementMessage.OddsEvents
+                            .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
+                            .Select(x => x.OddsMovement));
+        }
+
+        private void InsertOddsMovementItems(IEnumerable<IOddsMovement> updatedOddsMovements)
+        {
+            var exsitingOddsMovements = OddsMovementItems.Select(x => x.OddsMovement);
+
+            var distinctOddsMovements = updatedOddsMovements
+                .Except(exsitingOddsMovements)
                 .OrderBy(x => x.UpdateTime)
                 .ToList();
 
-            if (updatedOddsMovements.Count <= 0)
+            foreach (var oddsMovement in distinctOddsMovements)
             {
-                return;
-            }
 
-            foreach (var oddsMovement in updatedOddsMovements)
-            {
                 var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
                     .CreateInstance();
 
