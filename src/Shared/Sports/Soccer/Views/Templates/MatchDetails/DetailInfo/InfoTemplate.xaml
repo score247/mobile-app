@@ -55,7 +55,7 @@
                             Text="MATCH INFO" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <FlexLayout IsVisible="{Binding DisplayReferee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
                         <Label
                             AutomationId="RefereeTitle"
                             Style="{StaticResource MatchInfoTitle}"
@@ -63,7 +63,7 @@
                         <Label
                             AutomationId="RefereeName"
                             Style="{StaticResource MatchInfoValue}"
-                            Text="{Binding Match.Referee}" />
+                            Text="{Binding DisplayReferee}" />
                     </FlexLayout>
                     <BoxView IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">

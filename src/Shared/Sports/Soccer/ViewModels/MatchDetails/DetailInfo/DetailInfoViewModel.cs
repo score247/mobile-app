@@ -57,6 +57,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public string DisplayVenue { get; private set; }
 
+        public string DisplayReferee { get; private set; }
+
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
         protected override async void OnInitialized()
@@ -144,6 +146,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             if (matchInfo.Venue != null)
             {
                 DisplayVenue = matchInfo.Venue.Name;
+            }
+
+            if (!string.IsNullOrWhiteSpace(matchInfo.Referee))
+            {
+                DisplayReferee = matchInfo.Referee;
             }
         }
 
