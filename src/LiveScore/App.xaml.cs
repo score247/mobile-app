@@ -139,11 +139,12 @@ namespace LiveScore
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<SoccerModule>();
-            moduleCatalog.AddModule<LeagueModule>();
+
             moduleCatalog.AddModule<ScoreModule>();
-            moduleCatalog.AddModule<FavoritesModule>();
-            moduleCatalog.AddModule<NewsModule>();
-            moduleCatalog.AddModule<TVScheduleModule>();
+            moduleCatalog.AddModule<LeagueModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<FavoritesModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<MenuModule>();
         }
 
