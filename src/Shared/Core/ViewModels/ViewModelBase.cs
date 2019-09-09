@@ -103,6 +103,8 @@
             IsLoading = false;
         }
 
+        public bool IsNotLoading => !IsLoading;
+
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
     }
