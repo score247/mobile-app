@@ -1,35 +1,53 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary
-    x:Class="LiveScore.Core.ViewResources.MatchHeaderViewResource"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-  <Style x:Key="LeagueBox" TargetType="Grid">
-    <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
-  </Style>
-  <Style x:Key="LeagueFlag" TargetType="{x:Type ffImageLoading:CachedImage}">
-    <Setter Property="Aspect" Value="AspectFit" />
-    <Setter Property="HorizontalOptions" Value="Center" />
-  </Style>
-  <Style x:Key="LeagueName" TargetType="Label">
-    <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-    <Setter Property="FontSize" Value="{StaticResource FunctionGroupFontSize}" />
-    <Setter Property="FontAttributes" Value="Bold" />
-    <Setter Property="VerticalTextAlignment" Value="Center" />
-  </Style>
-  <Style x:Key="MatchDate" TargetType="Label">
-    <Setter Property="VerticalTextAlignment" Value="Center" />
-    <Setter Property="TextColor" Value="{StaticResource FunctionGroupColor}" />
-    <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
-  </Style>
-  <Style x:Key="LeagueDetailIcon" TargetType="{x:Type ffImageLoading:CachedImage}">
-    <Setter Property="Aspect" Value="AspectFit" />
-    <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="Source"
-                Value="images/common/league_detail.png" />
-        <Setter Property="WidthRequest"
-                Value="14" />
-        <Setter Property="HeightRequest"
-                Value="14" />
+<ResourceDictionary x:Class="LiveScore.Core.ViewResources.MatchHeaderViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style x:Key="LeagueBox"
+           TargetType="Grid">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
+    </Style>
+    <Style x:Key="LeagueFlag"
+           TargetType="{x:Type ffImageLoading:CachedImage}">
+        <Setter Property="Aspect"
+                Value="AspectFit" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+    </Style>
+    <Style x:Key="LeagueName"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource FunctionGroupFontSize}" />
+        <Setter Property="FontAttributes"
+                Value="Bold" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+    </Style>
+    <Style x:Key="MatchDate"
+           TargetType="Label">
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="TextColor"
+                Value="{StaticResource FunctionGroupColor}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource MediumTextFontSize}" />
+    </Style>
+    <Style x:Key="LeagueDetailIcon"
+           BasedOn="{StaticResource Icons}"
+           TargetType="Label">
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="Text"
+                Value="&#xe913;" />
+
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

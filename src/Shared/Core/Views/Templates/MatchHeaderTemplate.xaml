@@ -41,11 +41,11 @@
                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueEventDate-{0}', Mode=OneTime}"
                        Style="{StaticResource MatchDate}"
                        Text="{Binding Key.EventDate, Mode=OneTime}" />
-                <ffImageLoading:CachedImage x:Name="DetailIcon"
-                                            Grid.Row="0"
-                                            Grid.Column="3"
-                                            AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}', Mode=OneTime}"
-                                            Style="{StaticResource LeagueDetailIcon}" />
+                <Label x:Name="DetailIcon"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}', Mode=OneTime}"
+                       Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
         </StackLayout>
     </ViewCell>
