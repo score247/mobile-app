@@ -13,19 +13,19 @@
     public class MainViewModel : ViewModelBase
     {
         private readonly ICachingService cachingService;
-        private readonly IAppSettings appSettings;
+        private readonly ISettings settings;
 
         public MainViewModel(
             ICachingService cachingService,
-            IAppSettings appSettings,
+            ISettings settings,
             INavigationService navigationService,
             IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             this.cachingService = cachingService;
-            this.appSettings = appSettings;
+            this.settings = settings;
 
-            IsDemo = appSettings.IsDemo;
+            IsDemo = settings.IsDemo;
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
         }
 
@@ -45,22 +45,22 @@
 
         private async Task Toogle()
         {
-            appSettings.IsDemo = !appSettings.IsDemo;
+            settings.IsDemo = !settings.IsDemo;
 
-            if (appSettings.IsDemo)
+            if (settings.IsDemo)
             {
-                appSettings.ApiEndpoint = "https://score247-api1.nexdev.net/test/api/";
-                appSettings.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs/";
+                settings.ApiEndpoint = "https://score247-api1.nexdev.net/test/api/";
+                settings.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs/";
             }
             else
             {
 #if DEBUG
 
-                appSettings.ApiEndpoint = "https://score247-api1.nexdev.net/dev/api/";
-                appSettings.HubEndpoint = "https://score247-api2.nexdev.net/dev/hubs/";
+                settings.ApiEndpoint = "https://score247-api1.nexdev.net/dev/api/";
+                settings.HubEndpoint = "https://score247-api2.nexdev.net/dev/hubs/";
 #else
-                appSettings.ApiEndpoint = "https://score247-api1.nexdev.net/main/api/";
-                appSettings.HubEndpoint = "https://score247-api2.nexdev.net/main/hubs/";
+                settings.ApiEndpoint = "https://score247-api1.nexdev.net/main/api/";
+                settings.HubEndpoint = "https://score247-api2.nexdev.net/main/hubs/";
 #endif
             }
 

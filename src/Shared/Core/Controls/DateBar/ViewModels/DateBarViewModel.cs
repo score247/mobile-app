@@ -4,9 +4,8 @@
     using System.Collections.Generic;
     using Common.Extensions;
     using Events;
-    using Models;
-    using Services;
     using LiveScore.Core.ViewModels;
+    using Models;
     using Prism.Commands;
     using Prism.Events;
     using PropertyChanged;
@@ -24,8 +23,6 @@
 
         public IEventAggregator EventAggregator { get; set; }
 
-        public IAppSettings AppSettings { get; set; }
-
         public int NumberOfDisplayDays { get; set; }
 
         public DateTime CurrentTodayDate { get; } = DateTime.Today;
@@ -42,7 +39,7 @@
         {
             var baseViewModel = (ViewModelBase)bindingContext;
             EventAggregator = baseViewModel.EventAggregator;
-            AppSettings = baseViewModel.AppSettings;
+
             RenderCalendarItems();
             SelectHomeCommand?.Execute();
         }

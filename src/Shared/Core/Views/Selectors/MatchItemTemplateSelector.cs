@@ -14,9 +14,9 @@
                 return matchItemTemplate;
             }
 
-            var sportType = viewModel.AppSettings.CurrentSportType;
+            var sportType = AppSettings.Current.SportId.ToString();
 
-            matchItemTemplate = viewModel.DependencyResolver.Resolve<DataTemplate>(sportType.Value.ToString());
+            matchItemTemplate = viewModel.DependencyResolver.Resolve<DataTemplate>(sportType);
 
             return matchItemTemplate;
         }

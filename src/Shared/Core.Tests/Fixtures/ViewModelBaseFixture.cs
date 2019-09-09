@@ -23,7 +23,7 @@
             EventAggregator = new EventAggregator();
 
             DependencyResolver = Substitute.For<IDependencyResolver>();
-            DependencyResolver.Resolve<IAppSettings>().Returns(AppSettingsFixture.AppSettings);
+            DependencyResolver.Resolve<ISettings>().Returns(AppSettingsFixture.Settings);
             DependencyResolver.Resolve<IEventAggregator>().Returns(EventAggregator);
 
             NavigationService = new FakeNavigationService();

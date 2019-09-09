@@ -2,9 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
-    using LiveScore.Common.Services;
     using Enumerations;
-    using Services;
+    using LiveScore.Common.Services;
     using Prism.AppModel;
     using Prism.Events;
     using Prism.Navigation;
@@ -32,12 +31,13 @@
             NavigationService = navigationService;
             DependencyResolver = dependencyResolver;
 
-            AppSettings = DependencyResolver.Resolve<IAppSettings>();
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
 
-            CurrentSportName = AppSettings.CurrentSportType.DisplayName;
-            CurrentSportId = AppSettings.CurrentSportType.Value;
-            CurrentLanguage = AppSettings.CurrentLanguage;
+            var settings = AppSettings.Current;
+
+            CurrentSportName = settings.CurrentSportType.DisplayName;
+            CurrentSportId = settings.CurrentSportType.Value;
+            CurrentLanguage = settings.CurrentLanguage;
         }
 
         public Language CurrentLanguage { get; }
@@ -54,13 +54,9 @@
 
         public INavigationService NavigationService { get; protected set; }
 
-        public IAppSettings AppSettings { get; protected set; }
-
         public ILoggingService LoggingService { get; protected set; }
 
         public bool IsLoading { get; protected set; }
-
-        public bool IsNotLoading => !IsLoading;
 
         public virtual void Initialize(INavigationParameters parameters)
         {

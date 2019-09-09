@@ -45,9 +45,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(AppSettings.CurrentSportType.Value.ToString());
+            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
+            RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true).ConfigureAwait(false));
 
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
@@ -93,11 +93,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 Debug.WriteLine("OddsMovementViewModel Initialize");
 
-                await FirstLoadOrRefreshOddsMovement();
+                await FirstLoadOrRefreshOddsMovement().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
-                await LoggingService.LogErrorAsync(ex);
+                await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
 
@@ -119,7 +119,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
             {
-                await GetOddsMovement(isRefresh: true);
+                await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
             }
 
             eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
@@ -129,7 +129,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
             IsLoading = !isRefresh;
-            await GetOddsMovement(isRefresh);
+            await GetOddsMovement(isRefresh).ConfigureAwait(false);
 
             IsRefreshing = false;
             IsLoading = false;
@@ -140,7 +140,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(AppSettings.LanguageCode, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
+            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.Value.ToString(), matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
@@ -180,8 +180,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             foreach (var oddsMovement in distinctOddsMovements)
             {
-                var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
-                    .CreateInstance();
+                var newOddsMovementView 
+                    = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
+                        .CreateInstance();
 
                 OddsMovementItems.Insert(0, newOddsMovementView);
             }
