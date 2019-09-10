@@ -26,7 +26,8 @@
     </ContentPage.Resources>
     <StackLayout>
         <views:DateBar NumberDisplayDays="2"
-                       SelectedIndex="2" />
+                       SelectedIndex="2"
+                       ItemTappedCommand="{Binding DateBarItemTapCommand}" />
 
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
