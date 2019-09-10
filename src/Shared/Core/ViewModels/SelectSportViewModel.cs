@@ -65,9 +65,9 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        private async Task OnDone()
+        private Task OnDone()
         {
-            await NavigationService.GoBackAsync(useModalNavigation: true);
+            return NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }
 }
