@@ -18,6 +18,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Models.Odds;
+    using LiveScore.Soccer.Services;
     using MethodTimer;
     using OddItems;
     using Prism.Events;
@@ -143,7 +145,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 OddsMovementItems.Clear();
             }
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.Value.ToString(), matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
+            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
             HasData = matchOddsMovement.OddsMovements?.Any() == true;
 
@@ -161,7 +163,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         }
 
         [Time]
-        internal void HandleOddsMovementMessage(IOddsMovementMessage oddsMovementMessage)
+        internal void HandleOddsMovementMessage(OddsMovementMessage oddsMovementMessage)
         {
             if (!oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {

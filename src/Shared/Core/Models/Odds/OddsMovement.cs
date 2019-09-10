@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using MessagePack;
 
-    public interface IOddsMovement : IEntity<int, string>
+    public interface IOddsMovement
     {
         IEnumerable<BetOptionOdds> BetOptions { get; }
 
@@ -18,18 +19,19 @@
         bool IsMatchStarted { get; }
     }
 
-    public class OddsMovement : Entity<int, string>, IOddsMovement
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class OddsMovement : IOddsMovement
     {
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }
 
         public string MatchTime { get; set; }
 
-        public int HomeScore { get; set; }
-
-        public int AwayScore { get; set; }
-
         public DateTimeOffset UpdateTime { get; set; }
 
         public bool IsMatchStarted { get; set; }
+
+        public int HomeScore { get; set; }
+
+        public int AwayScore { get; set; }
     }
 }

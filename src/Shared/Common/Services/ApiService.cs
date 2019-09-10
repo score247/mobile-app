@@ -17,6 +17,7 @@
     {
         private readonly IApiPolicy apiPolicy;
         private readonly IHttpService httpService;
+        private readonly RefitSettings refitSettings;
 
         private static readonly RefitSettings RefitSettings = new RefitSettings
         {
@@ -27,14 +28,15 @@
             }),
         };
 
-        public ApiService(IApiPolicy apiPolicy, IHttpService httpService)
+        public ApiService(IApiPolicy apiPolicy, IHttpService httpService, RefitSettings refitSettings = null)
         {
             this.apiPolicy = apiPolicy;
             this.httpService = httpService;
+            this.refitSettings = refitSettings ?? RefitSettings;
         }
 
         // TODO: Need to make it be singleton instance
-        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, RefitSettings);
+        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }

@@ -9,7 +9,5 @@
     public interface IMatchService
     {
         Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false);
-
-        Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
     }
 }

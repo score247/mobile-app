@@ -23,7 +23,12 @@
         Task<MatchInfo> GetMatchInfo(string matchId, string language);
     }
 
-    public class MatchService : BaseService, IMatchService
+    public interface IMatchInfoService
+    {
+        Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
+    }
+
+    public class MatchService : BaseService, IMatchService, IMatchInfoService
     {
         private readonly IApiService apiService;
         private readonly ICacheService cacheService;
@@ -71,7 +76,7 @@
         }
 
         [Time]
-        public async Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {

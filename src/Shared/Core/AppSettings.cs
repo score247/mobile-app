@@ -55,7 +55,7 @@
     public class Settings : ISettings
     {
 #if DEBUG
-        public static string ApiEndPoint => "https://score247-api1.nexdev.net/dev2/api/";
+        public static string ApiEndPoint => "http://10.19.10.52:51145/api/";
 
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev2/hubs/";
 #elif TEST

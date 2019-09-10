@@ -27,6 +27,8 @@
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="MethodTimer.Fody" Version="3.1.0" />
+        <PackageReference Include="MessagePack" Version="1.7.3.7" />
+        <PackageReference Include="MessagePackAnalyzer" Version="1.7.3.7" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.16.0.8981">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -40,6 +42,7 @@
         <Folder Include="Models\Settings\" />
         <Folder Include="Controls\SearchPage\">
         </Folder>
+        <Folder Include="PubSubEvents\Odds\" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />

@@ -1,18 +1,18 @@
-﻿namespace LiveScore.Soccer.Models.Odds
+﻿using MessagePack;
+
+namespace LiveScore.Soccer.Models.Odds
 {
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Odds;
-    using Newtonsoft.Json;
+    using MessagePack;
 
-    public class MatchOddsMovement : IMatchOddsMovement
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class MatchOddsMovement
     {
         public string MatchId { get; set; }
 
         public Bookmaker Bookmaker { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<OddsMovement>>))]
-        public IEnumerable<IOddsMovement> OddsMovements { get; set; }
+        public IEnumerable<OddsMovement> OddsMovements { get; set; }
     }
 }

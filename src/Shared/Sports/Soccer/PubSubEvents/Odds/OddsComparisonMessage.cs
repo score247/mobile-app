@@ -7,14 +7,14 @@
     using Newtonsoft.Json;
     using Prism.Events;
 
-    public class OddsComparisonMessage : IOddsComparisonMessage
+    public class OddsComparisonMessage
     {
         public const string HubMethod = "OddsComparison";
 
         public OddsComparisonMessage(
             byte sportId,
             string matchId,
-            IEnumerable<IBetTypeOdds> betTypeOddsList)
+            IEnumerable<BetTypeOdds> betTypeOddsList)
         {
             SportId = sportId;
             MatchId = matchId;
@@ -25,8 +25,7 @@
 
         public string MatchId { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<BetTypeOdds>>))]
-        public IEnumerable<IBetTypeOdds> BetTypeOddsList { get; private set; }
+        public IEnumerable<BetTypeOdds> BetTypeOddsList { get; private set; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)
             => eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Publish(data as OddsComparisonMessage);

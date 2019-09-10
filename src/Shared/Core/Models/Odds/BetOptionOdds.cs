@@ -1,8 +1,10 @@
 ﻿namespace LiveScore.Core.Models.Odds
 {
     using Enumerations;
+    using MessagePack;
 
-    public class BetOptionOdds : Entity<int, string>
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class BetOptionOdds
     {
         public string Type { get; set; }
 

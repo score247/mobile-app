@@ -1,7 +1,9 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
     using System.Collections.Generic;
+    using MessagePack;
 
+    [MessagePackObject]
     public class EventType : Enumeration
     {
         //break_start
@@ -80,14 +82,18 @@
         {
         }
 
+        [IgnoreMember]
         public bool IsInjuryTimeShown => this == InjuryTimeShown;
 
         public bool IsRedCard() => this == RedCard || this == YellowRedCard;
 
+        [IgnoreMember]
         public bool IsMatchStarted => this == MatchStarted;
 
+        [IgnoreMember]
         public bool IsMatchEnded => this == MatchEnded;
 
+        [IgnoreMember]
         public bool IsPeriodStart => this == PeriodStart;
     }
 }
