@@ -1,4 +1,10 @@
-﻿namespace LiveScore.Features.Score.ViewModels
+﻿using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using PanCardView.EventArgs;
+using Prism.Commands;
+
+namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -15,13 +21,18 @@
 
         {
             InitScoreItemSources();
+            ScoreItemAppearingCommand = new DelegateCommand<ItemAppearingEventArgs>(OnItemAppearing);
         }
 
         public byte RangeOfDays { get; } = 2;
 
-        public IList<ScoreItemViewModel> ScoreItemSources { get; private set; }
+        public IReadOnlyList<ScoreItemViewModel> ScoreItemSources { get; private set; }
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
+
+        public DelegateCommand<ItemAppearingEventArgs> ScoreItemAppearingCommand { get; private set; }
+
+        public int SelectedScoreItemIndex { get; set; }
 
         public override void OnResume()
         {
@@ -43,17 +54,22 @@
             SelectedScoreItem.OnDisappearing();
         }
 
+        private static void OnItemAppearing(ItemAppearingEventArgs args)
+        {
+            (args?.Item as ScoreItemViewModel)?.OnAppearing();
+        }
+
         private void InitScoreItemSources()
         {
-            ScoreItemSources = new List<ScoreItemViewModel>();
+            var itemViewModels = new List<ScoreItemViewModel>();
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
             {
-                ScoreItemSources.Add(
+                itemViewModels.Add(
                     new ScoreItemViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
             }
 
-            SelectedScoreItem = ScoreItemSources[RangeOfDays];
+            ScoreItemSources = itemViewModels;
         }
     }
 }

@@ -96,6 +96,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
         }
 
+        public override void OnAppearing()
+        {
+            OnInitialized();
+        }
+
         public override void Destroy()
         {
             base.Destroy();
