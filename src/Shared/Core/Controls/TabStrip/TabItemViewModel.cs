@@ -10,10 +10,6 @@
 
     public class TabItemViewModel : ViewModelBase
     {
-        public TabItemViewModel()
-        {
-        }
-
         public TabItemViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,

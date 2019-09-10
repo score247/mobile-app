@@ -28,6 +28,7 @@ namespace LiveScore.Features.Score.ViewModels
         private readonly IMatchService matchService;
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
+        private bool firstLoad = true;
 
         [Time]
         public ScoreItemViewModel(
@@ -42,8 +43,6 @@ namespace LiveScore.Features.Score.ViewModels
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-
-            Task.Run(() => InitializeData().ConfigureAwait(false));
 
             InitializeCommand();
             SubscribeEvents();
@@ -66,11 +65,6 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
-            if (SelectedDate != DateTime.Today)
-            {
-                await NavigateToHome().ConfigureAwait(false);
-            }
-
             SubscribeEvents();
             await InitializeData();
         }
@@ -78,6 +72,15 @@ namespace LiveScore.Features.Score.ViewModels
         public override void OnSleep()
         {
             UnsubscribeAllEvents();
+        }
+
+        public override async void OnAppearing()
+        {
+            if (firstLoad)
+            {
+                await InitializeData();
+                firstLoad = false;
+            }
         }
 
         private void InitializeCommand()
@@ -90,7 +93,7 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task InitializeData()
         {
-            await LoadData(() => LoadMatches(SelectedDate, true), false).ConfigureAwait(false);
+            await LoadData(() => LoadMatches(SelectedDate, true)).ConfigureAwait(false);
         }
 
         private void SubscribeEvents()
@@ -157,7 +160,7 @@ namespace LiveScore.Features.Score.ViewModels
                 MatchItemsSource = EmptyMatchDataSource;
             }
 
-            await Task.Run(() => GetMatches(date, forceFetchNewData));
+            await GetMatches(date, forceFetchNewData);
 
             Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
         }
@@ -172,13 +175,11 @@ namespace LiveScore.Features.Score.ViewModels
             var matchItemViewModels = matches.Select(
                 match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                    matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
+            MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
 
-                IsRefreshing = false;
-            });
+            IsRefreshing = false;
+            IsLoading = false;
 
             Profiler.Start("ScoresView.Render");
             Debug.WriteLine($"Number of matches: {matches.Count()}");
