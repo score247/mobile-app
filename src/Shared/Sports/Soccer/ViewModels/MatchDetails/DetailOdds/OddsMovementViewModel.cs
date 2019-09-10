@@ -86,7 +86,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        protected async void OnInitialized()
+        protected async Task OnInitialized()
         {
             try
             {
@@ -175,7 +175,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 .OrderBy(x => x.UpdateTime)
                 .ToList();
 
-            if (updatedOddsMovements.Count <= 0)
+            if (updatedOddsMovements.Count == 0)
             {
                 return;
             }
