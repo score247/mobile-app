@@ -21,8 +21,8 @@ namespace LiveScore.Features.Score.ViewModels
 
     public class ScoreItemViewModel : ViewModelBase
     {
-        private static readonly ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
-            new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
+        private static readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
+            new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
 
         private readonly IMatchService matchService;
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -51,7 +51,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
+        public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
@@ -176,7 +176,7 @@ namespace LiveScore.Features.Score.ViewModels
             var matchItemViewModels = matches.Select(
                 match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            MatchItemsSource = new ReadOnlyCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+            MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
                 matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
 
             IsRefreshing = false;
