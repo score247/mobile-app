@@ -35,16 +35,14 @@
 
         protected override void OnInitialized()
         {
-            BuildHomeOdds();
-
-            BuildBetOptionsValue();
+            BuildHomeOddsAndOptionValue();
 
             BuildAwayOdds();
         }
 
         private void BuildAwayOdds()
-        {
-            var awayOdds = GetOddsInfo(BetOption.Away);
+        {            
+            var awayOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
 
             if (awayOdds == null)
             {
@@ -54,24 +52,11 @@
             AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
             AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
             AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
-        }
+        }      
 
-        private void BuildBetOptionsValue()
+        private void BuildHomeOddsAndOptionValue()
         {
-            var homeOdds = GetOddsInfo(BetOption.Home);
-
-            if (homeOdds == null)
-            {
-                return;
-            }
-
-            OpeningHdp = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
-            LiveHdp = homeOdds.OptionValue.ToOddsOptionFormat();
-        }
-
-        private void BuildHomeOdds()
-        {
-            var homeOdds = GetOddsInfo(BetOption.Home);
+            var homeOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName)); 
 
             if (homeOdds == null)
             {
@@ -81,8 +66,9 @@
             HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
             HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
             HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
-        }
 
-        private BetOptionOdds GetOddsInfo(BetOption option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option.DisplayName));
+            OpeningHdp = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
+            LiveHdp = homeOdds.OptionValue.ToOddsOptionFormat();
+        }
     }
 }

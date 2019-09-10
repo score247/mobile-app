@@ -4,16 +4,28 @@
 
     public class BetOptionOdds : Entity<int, string>
     {
-        public string Type { get; set; }
+        public BetOptionOdds(int id, string name, string type, decimal liveOdds, decimal openingOdds, string optionValue, string openingOptionValue, OddsTrend oddsTrend)
+        {
+            Id = id;
+            Name = name;
+            Type = type;
+            LiveOdds = liveOdds;
+            OpeningOdds = openingOdds;
+            OptionValue = optionValue;
+            OpeningOptionValue = openingOptionValue;
+            OddsTrend = oddsTrend;
+        }
 
-        public decimal LiveOdds { get; set; }
+        public string Type { get; }
 
-        public decimal OpeningOdds { get; set; }
+        public decimal LiveOdds { get; }
 
-        public string OptionValue { get; set; }
+        public decimal OpeningOdds { get; }
 
-        public string OpeningOptionValue { get; set; }
+        public string OptionValue { get; }
 
-        public OddsTrend OddsTrend { get; set; }
+        public string OpeningOptionValue { get; }
+
+        public OddsTrend OddsTrend { get; }
     }
 }

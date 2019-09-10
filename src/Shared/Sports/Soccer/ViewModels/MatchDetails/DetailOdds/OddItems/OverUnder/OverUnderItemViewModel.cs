@@ -35,48 +35,41 @@
 
         protected override void OnInitialized()
         {
-            BuildOverOdds();
-
-            BuildBetOptionsValue();
+            BuildOverOddsAndOptionValue();
 
             BuildUnderOdds();
         }
 
         private void BuildUnderOdds()
         {
-            var underOdds = GetOddsInfo(BetOption.Under);
+            var underOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
 
-            if (underOdds != null)
+            if (underOdds == null)
             {
-                UnderOpeningOdds = underOdds.OpeningOdds.ToOddsFormat();
-                UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
-                UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            UnderOpeningOdds = underOdds.OpeningOdds.ToOddsFormat();
+            UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
+            UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
         }
 
-        private void BuildBetOptionsValue()
+
+        private void BuildOverOddsAndOptionValue()
         {
-            var overOdds = GetOddsInfo(BetOption.Over);
+            var overOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
 
-            if (overOdds != null)
+            if (overOdds == null)
             {
-                OpeningOverOptionValue = overOdds.OpeningOptionValue.ToOddsOptionFormat();
-                LiveOverOptionValue = overOdds.OptionValue.ToOddsOptionFormat();
+                return;
             }
+
+            OverLiveOdds = overOdds.LiveOdds.ToOddsFormat();
+            OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();
+            OverOddsTrend = overOdds.OddsTrend.Value.ToString();
+
+            OpeningOverOptionValue = overOdds.OpeningOptionValue.ToOddsOptionFormat();
+            LiveOverOptionValue = overOdds.OptionValue.ToOddsOptionFormat();
         }
-
-        private void BuildOverOdds()
-        {
-            var overOdds = GetOddsInfo(BetOption.Over);
-
-            if (overOdds != null)
-            {
-                OverLiveOdds = overOdds.LiveOdds.ToOddsFormat();
-                OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();
-                OverOddsTrend = overOdds.OddsTrend.Value.ToString();
-            }
-        }
-
-        private BetOptionOdds GetOddsInfo(BetOption option) => BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(option.DisplayName));
     }
 }

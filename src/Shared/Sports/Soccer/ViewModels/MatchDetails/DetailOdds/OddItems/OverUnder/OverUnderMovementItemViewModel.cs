@@ -15,8 +15,10 @@
             IDependencyResolver dependencyResolver)
             : base(BetType.OverUnder, oddsMovement, navigationService, dependencyResolver)
         {
-            Initialize(oddsMovement);
-        }       
+            BuildOverOddsAndOptionValue();
+
+            BuildUnderOdds();
+        }
 
         public string OverOdds { get; private set; }
 
@@ -26,49 +28,34 @@
 
         public string UnderOdds { get; private set; }
 
-        public string UnderOddsTrend { get; private set; }
+        public string UnderOddsTrend { get; private set; }       
 
-        private void Initialize(IOddsMovement oddsMovement)
-        {           
-            BuildOverOdds(oddsMovement);
-
-            BuildBetOptionsValue(oddsMovement);
-
-            BuildUnderOdds(oddsMovement);
-        }
-
-        private void BuildBetOptionsValue(IOddsMovement oddsMovement)
+        private void BuildOverOddsAndOptionValue()
         {
-            var homeOdds = GetOddsInfo(BetOption.Over, oddsMovement);
+            var overOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
 
-            if (homeOdds != null)
+            if (overOdds == null)
             {
-                OptionValue = homeOdds.OptionValue.ToOddsOptionFormat();
+                return;
             }
+
+            OverOdds = overOdds.LiveOdds.ToOddsFormat();
+            OverOddsTrend = overOdds.OddsTrend.Value.ToString();
+
+            OptionValue = overOdds.OptionValue.ToOddsOptionFormat();
         }
 
-        private void BuildOverOdds(IOddsMovement oddsMovement)
+        private void BuildUnderOdds()
         {
-            var homeOdds = GetOddsInfo(BetOption.Over, oddsMovement);
+            var underOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
 
-            if (homeOdds != null)
+            if (underOdds == null)
             {
-                OverOdds = homeOdds.LiveOdds.ToOddsFormat();
-                OverOddsTrend = homeOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            UnderOdds = underOdds.LiveOdds.ToOddsFormat();
+            UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
         }
-
-        private void BuildUnderOdds(IOddsMovement oddsMovement)
-        {
-            var awayOdds = GetOddsInfo(BetOption.Under, oddsMovement);
-
-            if (awayOdds != null)
-            {
-                UnderOdds = awayOdds.LiveOdds.ToOddsFormat();
-                UnderOddsTrend = awayOdds.OddsTrend.Value.ToString();
-            }
-        }
-
-        private static BetOptionOdds GetOddsInfo(BetOption option, IOddsMovement oddsMovement) => oddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(option.DisplayName));
     }
 }

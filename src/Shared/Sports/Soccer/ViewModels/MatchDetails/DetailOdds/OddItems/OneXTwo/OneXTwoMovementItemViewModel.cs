@@ -15,8 +15,12 @@
             IDependencyResolver dependencyResolver)
             : base(BetType.OneXTwo, oddsMovement, navigationService, dependencyResolver)
         {
-            Initialize(oddsMovement);
-        }       
+            BuildHomeOdds();
+
+            BuildDrawOdds();
+
+            BuildAwayOdds();
+        }
 
         public string HomeOdds { get; private set; }
 
@@ -30,48 +34,43 @@
 
         public string AwayOddsTrend { get; private set; }
 
-        private void Initialize(IOddsMovement oddsMovement)
+        private void BuildAwayOdds()
         {
-            BuildHomeOdds(oddsMovement);
+            var awayOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
 
-            BuildDrawOdds(oddsMovement);
-
-            BuildAwayOdds(oddsMovement);
-        }
-
-        private void BuildAwayOdds(IOddsMovement oddsMovement)
-        {
-            var awayOdds = GetOddsInfo(BetOption.Away, oddsMovement);
-
-            if (awayOdds != null)
+            if (awayOdds == null)
             {
-                AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
-                AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
+            AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
         }
 
-        private void BuildDrawOdds(IOddsMovement oddsMovement)
+        private void BuildDrawOdds()
         {
-            var drawOdds = GetOddsInfo(BetOption.Draw, oddsMovement);
+            var drawOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Draw.DisplayName));
 
-            if (drawOdds != null)
+            if (drawOdds == null)
             {
-                DrawOdds = drawOdds.LiveOdds.ToOddsFormat();
-                DrawOddsTrend = drawOdds.OddsTrend.Value.ToString();
+                return;
             }
+
+            DrawOdds = drawOdds.LiveOdds.ToOddsFormat();
+            DrawOddsTrend = drawOdds.OddsTrend.Value.ToString();
         }
 
-        private void BuildHomeOdds(IOddsMovement oddsMovement)
+        private void BuildHomeOdds()
         {
-            var homeOdds = GetOddsInfo(BetOption.Home, oddsMovement);
+            var homeOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName));
 
-            if (homeOdds != null)
+            if (homeOdds == null)
             {
-                HomeOdds = homeOdds.LiveOdds.ToOddsFormat();
-                HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
+                return;
             }
-        }
 
-        private static BetOptionOdds GetOddsInfo(BetOption option, IOddsMovement oddsMovement) => oddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(option.DisplayName));
+            HomeOdds = homeOdds.LiveOdds.ToOddsFormat();
+            HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
+        }
     }
 }
