@@ -21,6 +21,13 @@ namespace LiveScore.Core.Controls.DateBar.Views
         {
             base.OnBindingContextChanged();
 
+            BuildDateBar();
+        }
+
+        private void BuildDateBar()
+        {
+            DateBarLayout.Children.Clear();
+
             AddLiveBox();
 
             AddDateBoxes();
@@ -44,7 +51,8 @@ namespace LiveScore.Core.Controls.DateBar.Views
             = BindableProperty.Create(
                 nameof(SelectedIndexProperty),
                 typeof(int),
-                typeof(DateBar));
+                typeof(DateBar),
+                propertyChanged: OnSelectedIndexChanged);
 
         public int SelectedIndex
         {
@@ -59,6 +67,16 @@ namespace LiveScore.Core.Controls.DateBar.Views
         {
             get => GetValue(ItemTappedCommandProperty) as ICommand;
             set => SetValue(ItemTappedCommandProperty, value);
+        }
+
+        private static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var control = (DateBar)bindable;
+
+            if (control != null)
+            {
+                control.BuildDateBar();
+            }
         }
 
         private void AddLiveBox()
@@ -126,6 +144,8 @@ namespace LiveScore.Core.Controls.DateBar.Views
                 {
                     var args = new DateBarItemTappedEventArgs(index, date);
                     ItemTappedCommand?.Execute(args);
+                    SelectedIndex = index;
+                    BuildDateBar();
                 })
             });
 

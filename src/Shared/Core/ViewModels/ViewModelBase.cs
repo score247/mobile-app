@@ -88,7 +88,7 @@
 
             await loadDataFunc.Invoke().ConfigureAwait(false);
 
-            IsLoading = false;
+            //  IsLoading = false;
         }
 
         public bool IsNotLoading => !IsLoading;

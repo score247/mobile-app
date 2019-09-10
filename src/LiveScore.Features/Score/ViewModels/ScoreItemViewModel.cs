@@ -42,6 +42,7 @@ namespace LiveScore.Features.Score.ViewModels
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
+            IsLoading = true;
 
             InitializeCommand();
             SubscribeEvents();
