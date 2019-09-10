@@ -12,11 +12,11 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
 
         public TabStripHeaderTests()
         {
-            //tabs = new List<TabItemViewModel>
-            //{
-            //    new TabItemViewModel() { TabHeaderTitle = "Info" },
-            //    new TabItemViewModel() { TabHeaderTitle = "Tracker" },
-            //};
+            tabs = new List<TabItemViewModel>
+            {
+                new TabItemViewModel(null, null, null) { TabHeaderTitle = "Info" },
+                new TabItemViewModel(null, null, null)  { TabHeaderTitle = "Tracker" },
+            };
         }
 
         [Fact]

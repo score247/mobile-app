@@ -1,27 +1,25 @@
-﻿using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using LiveScore.Common.Extensions;
-using PanCardView.EventArgs;
-using Prism.Commands;
-
-namespace LiveScore.Features.Score.ViewModels
+﻿namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using Core;
     using LiveScore.Core.ViewModels;
+    using PanCardView.EventArgs;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
 
     public class ScoresViewModel : ViewModelBase
     {
+        private bool isFirstLoad = true;
+
         public ScoresViewModel(INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
 
         {
             InitScoreItemSources();
-            ScoreItemAppearingCommand = new DelegateCommand<ItemAppearingEventArgs>(OnItemAppearing);
+            ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -30,33 +28,40 @@ namespace LiveScore.Features.Score.ViewModels
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
 
-        public DelegateCommand<ItemAppearingEventArgs> ScoreItemAppearingCommand { get; private set; }
-
         public int SelectedScoreItemIndex { get; set; }
+
+        public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; private set; }
 
         public override void OnResume()
         {
-            SelectedScoreItem.OnResume();
+            SelectedScoreItem?.OnResume();
         }
 
         public override void OnSleep()
         {
-            SelectedScoreItem.OnSleep();
+            SelectedScoreItem?.OnSleep();
         }
 
         public override void OnAppearing()
         {
-            SelectedScoreItem.OnAppearing();
+            if (isFirstLoad)
+            {
+                SelectedScoreItem?.OnAppearing();
+                isFirstLoad = false;
+            }
         }
 
         public override void OnDisappearing()
         {
-            SelectedScoreItem.OnDisappearing();
+            SelectedScoreItem?.OnDisappearing();
         }
 
-        private static void OnItemAppearing(ItemAppearingEventArgs args)
+        private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
-            (args?.Item as ScoreItemViewModel)?.OnAppearing();
+            if (!isFirstLoad)
+            {
+                (args?.Item as ScoreItemViewModel)?.OnAppearing();
+            }
         }
 
         private void InitScoreItemSources()

@@ -9,6 +9,7 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -24,14 +25,23 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <!--<dateBar:DateBar NumberDisplayDays="3" />-->
+        <views:DateBar NumberDisplayDays="2"
+                       SelectedIndex="2" />
 
-        <cards:CarouselView ItemsSource="{Binding ScoreItemSources}"
+        <cards:CarouselView x:Name="ScoresCarouselView"
+                            ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"
                             SelectedIndex="{Binding SelectedScoreItemIndex}"
-                            ItemAppearingCommand="{Binding ScoreItemAppearingCommand}"
-                            IsClippedToBounds="True"
+                            ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
+                            IsViewReusingEnabled="False"
                             IsCyclical="False">
+            <x:Arguments>
+                <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
+                                                            AnimationLength="250"
+                                                            NoItemMaxPanDistance="500" />
+                <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
+                                                            AnimationLength="250" />
+            </x:Arguments>
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout>

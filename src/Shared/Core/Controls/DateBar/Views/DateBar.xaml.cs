@@ -2,31 +2,33 @@
 {
     using ViewModels;
     using Xamarin.Forms;
+    using System;
 
     public partial class DateBar : ContentView
     {
         public DateBar()
         {
             InitializeComponent();
-            ViewModel = new DateBarViewModel();
-
-            CalendarListView.BindingContext = ViewModel;
-            HomeButton.BindingContext = ViewModel;
-        }
-
-        protected override void OnBindingContextChanged()
-        {
-            ViewModel.InitializeBindingContext(BindingContext);
         }
 
         public DateBarViewModel ViewModel { get; set; }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            AddLiveBox();
+
+            AddDateBoxes();
+
+            AddCalendarBox();
+        }
 
         public static readonly BindableProperty NumberDisplayDaysProperty
           = BindableProperty.Create(
               nameof(NumberDisplayDays),
               typeof(int),
-              typeof(DateBar),
-              propertyChanged: OnNumberDisplayDaysPropertyChanged);
+              typeof(DateBar));
 
         public int NumberDisplayDays
         {
@@ -34,14 +36,78 @@
             set => SetValue(NumberDisplayDaysProperty, value);
         }
 
-        private static void OnNumberDisplayDaysPropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (DateBar)bindable;
+        public static readonly BindableProperty SelectedIndexProperty
+            = BindableProperty.Create(
+                nameof(SelectedIndexProperty),
+                typeof(int),
+                typeof(DateBar));
 
-            if (control != null)
+        public int SelectedIndex
+        {
+            get => (int)GetValue(SelectedIndexProperty);
+            set => SetValue(SelectedIndexProperty, value);
+        }
+
+        private void AddLiveBox()
+        {
+            var liveBox = new StackLayout { Style = (Style)Resources["DateBarBox"] };
+            liveBox.Children.Add(new Label
             {
-                control.ViewModel.NumberOfDisplayDays = (int)newValue;
+                Style = (Style)Resources["HomeIcon"]
+            });
+
+            DateBarLayout.Children.Add(liveBox);
+        }
+
+        private void AddDateBoxes()
+        {
+            var currentIndex = 0;
+
+            for (int i = -NumberDisplayDays; i <= NumberDisplayDays; i++)
+            {
+                var dateBarItem = BuildDateBarItem(DateTime.Today.AddDays(i), currentIndex);
+
+                DateBarLayout.Children.Add(dateBarItem);
+                currentIndex++;
             }
+        }
+
+        private void AddCalendarBox()
+        {
+            var calendarBox = new StackLayout { Style = (Style)Resources["DateBarBox"] };
+            calendarBox.Children.Add(new Label
+            {
+                Style = (Style)Resources["CalendarIcon"]
+            });
+
+            DateBarLayout.Children.Add(calendarBox);
+        }
+
+        private StackLayout BuildDateBarItem(DateTime date, int index)
+        {
+            var dateBarItemLayout = new StackLayout { Style = (Style)Resources["DateBarBox"] };
+            var dayNumber = new Label
+            {
+                Text = date.Day.ToString(),
+                Style = (Style)Resources["DateBarDayNumberLabel"],
+            };
+
+            var dayName = new Label
+            {
+                Text = date.Date.DayOfWeek.ToString().Substring(0, 3).ToUpperInvariant(),
+                Style = (Style)Resources["DateBarDayNameLabel"]
+            };
+
+            if (index == SelectedIndex)
+            {
+                dayNumber.TextColor = (Color)Resources["DateBarSelectedColor"];
+                dayName.TextColor = (Color)Resources["DateBarSelectedColor"];
+            }
+
+            dateBarItemLayout.Children.Add(dayNumber);
+            dateBarItemLayout.Children.Add(dayName);
+
+            return dateBarItemLayout;
         }
     }
 }
