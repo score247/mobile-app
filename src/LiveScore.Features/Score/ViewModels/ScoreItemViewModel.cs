@@ -81,6 +81,7 @@ namespace LiveScore.Features.Score.ViewModels
                 await InitializeData();
                 firstLoad = false;
             }
+            // TODO: Handle load data in background for 2nd load
         }
 
         private void InitializeCommand()
@@ -122,6 +123,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
+            // TODO: handle refresh data without setting all items to item source
             await LoadData(() => LoadMatches(SelectedDate, true), false)
                 .ConfigureAwait(false);
         }
