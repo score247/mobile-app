@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Core.Controls.DateBar.Views
+﻿using System.Windows.Input;
+using LiveScore.Core.Controls.DateBar.EventArgs;
+using PanCardView;
+
+namespace LiveScore.Core.Controls.DateBar.Views
 {
     using ViewModels;
     using Xamarin.Forms;
@@ -46,6 +50,15 @@
         {
             get => (int)GetValue(SelectedIndexProperty);
             set => SetValue(SelectedIndexProperty, value);
+        }
+
+        public static readonly BindableProperty ItemTappedCommandProperty
+            = BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(DateBar), null);
+
+        public ICommand ItemTappedCommand
+        {
+            get => GetValue(ItemTappedCommandProperty) as ICommand;
+            set => SetValue(ItemTappedCommandProperty, value);
         }
 
         private void AddLiveBox()
@@ -106,6 +119,15 @@
 
             dateBarItemLayout.Children.Add(dayNumber);
             dateBarItemLayout.Children.Add(dayName);
+
+            dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = new Command(() =>
+                {
+                    var args = new DateBarItemTappedEventArgs(index, date);
+                    ItemTappedCommand?.Execute(args);
+                })
+            });
 
             return dateBarItemLayout;
         }

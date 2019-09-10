@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Features.Score.ViewModels
+﻿using LiveScore.Core.Controls.DateBar.EventArgs;
+
+namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
@@ -20,6 +22,7 @@
         {
             InitScoreItemSources();
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
+            DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -31,6 +34,8 @@
         public int SelectedScoreItemIndex { get; set; }
 
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; private set; }
+
+        public DelegateCommand<DateBarItemTappedEventArgs> DateBarItemTapCommand { get; private set; }
 
         public override void OnResume()
         {
@@ -62,6 +67,11 @@
             {
                 (args?.Item as ScoreItemViewModel)?.OnAppearing();
             }
+        }
+
+        private void OnDateBarItemTapped(DateBarItemTappedEventArgs args)
+        {
+            SelectedScoreItemIndex = args.Index;
         }
 
         private void InitScoreItemSources()
