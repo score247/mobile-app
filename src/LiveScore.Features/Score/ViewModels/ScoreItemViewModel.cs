@@ -18,7 +18,6 @@ namespace LiveScore.Features.Score.ViewModels
     using MethodTimer;
     using Prism.Events;
     using Prism.Navigation;
-    using Xamarin.Forms;
 
     public class ScoreItemViewModel : ViewModelBase
     {
@@ -61,12 +60,13 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateAsyncCommand ClickSearchCommand { get; private set; }
 
         [Time]
-        public override async void OnResume()
+        public override void OnResume()
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
             SubscribeEvents();
-            await InitializeData();
+
+            InitializeData();
         }
 
         public override void OnSleep()
@@ -78,7 +78,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (firstLoad)
             {
-                await InitializeData();
+                await InitializeData().ConfigureAwait(false);
                 firstLoad = false;
             }
             // TODO: Handle load data in background for 2nd load
@@ -92,9 +92,9 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         [Time]
-        private async Task InitializeData()
+        private Task InitializeData()
         {
-            await LoadData(() => LoadMatches(SelectedDate, true)).ConfigureAwait(false);
+            return LoadData(() => LoadMatches(SelectedDate, true));
         }
 
         private void SubscribeEvents()
@@ -119,13 +119,12 @@ namespace LiveScore.Features.Score.ViewModels
                 .Unsubscribe(OnReceivedTeamStatistic);
         }
 
-        private async Task OnRefresh()
+        private Task OnRefresh()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
             // TODO: handle refresh data without setting all items to item source
-            await LoadData(() => LoadMatches(SelectedDate, true), false)
-                .ConfigureAwait(false);
+            return LoadData(() => LoadMatches(SelectedDate, true), false);
         }
 
         private async Task OnTapMatch(MatchViewModel matchItem)
@@ -162,7 +161,7 @@ namespace LiveScore.Features.Score.ViewModels
                 MatchItemsSource = EmptyMatchDataSource;
             }
 
-            await GetMatches(date, forceFetchNewData);
+            await GetMatches(date, forceFetchNewData).ConfigureAwait(false);
 
             Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
         }
@@ -184,7 +183,7 @@ namespace LiveScore.Features.Score.ViewModels
             IsLoading = false;
 
             Profiler.Start("ScoresView.Render");
-            Debug.WriteLine($"Number of matches: {matches.Count()}");
+            Debug.WriteLine($"Number of matches: {MatchItemsSource.Count}");
         }
 
         private void UnsubscribeLiveMatchTimeChangeEvent(DateTime date)
