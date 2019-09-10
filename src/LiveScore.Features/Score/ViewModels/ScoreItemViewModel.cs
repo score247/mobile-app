@@ -154,7 +154,7 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatches(DateTime date, bool forceFetchNewData = false)
         {
-            await Task.Run(() => UnsubscribeLiveMatchTimeChangeEvent(date)).ConfigureAwait(false);
+            UnsubscribeLiveMatchTimeChangeEvent(date);
 
             if (IsLoading)
             {
