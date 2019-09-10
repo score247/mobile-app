@@ -16,11 +16,7 @@
             : base(BetType.OverUnder, oddsMovement, navigationService, dependencyResolver)
         {
             Initialize(oddsMovement);
-        }
-
-        public string MatchTime { get; private set; }
-
-        public string MatchScore { get; private set; }
+        }       
 
         public string OverOdds { get; private set; }
 
@@ -33,13 +29,7 @@
         public string UnderOddsTrend { get; private set; }
 
         private void Initialize(IOddsMovement oddsMovement)
-        {
-            MatchScore = oddsMovement.IsMatchStarted
-                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"
-                : string.Empty;
-
-            MatchTime = oddsMovement.MatchTime;
-
+        {           
             BuildOverOdds(oddsMovement);
 
             BuildBetOptionsValue(oddsMovement);

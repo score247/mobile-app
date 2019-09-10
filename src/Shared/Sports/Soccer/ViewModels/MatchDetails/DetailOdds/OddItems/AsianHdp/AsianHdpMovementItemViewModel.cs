@@ -16,11 +16,7 @@
             : base(BetType.AsianHDP, oddsMovement, navigationService, dependencyResolver)
         {
             Initialize(oddsMovement);
-        }
-
-        public string MatchTime { get; private set; }
-
-        public string MatchScore { get; private set; }
+        }        
 
         public string HomeOdds { get; private set; }
 
@@ -34,12 +30,6 @@
 
         private void Initialize(IOddsMovement oddsMovement)
         {
-            MatchScore = oddsMovement.IsMatchStarted
-                ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"
-                : string.Empty;
-
-            MatchTime = oddsMovement.MatchTime;
-
             BuildHomeOdds(oddsMovement);
 
             BuildBetOptionsValue(oddsMovement);

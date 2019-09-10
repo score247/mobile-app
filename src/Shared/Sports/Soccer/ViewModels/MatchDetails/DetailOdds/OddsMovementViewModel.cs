@@ -142,14 +142,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var matchOddsMovement = await oddsService.GetOddsMovement(Settings.LanguageCode, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
-            {               
+            {
                 if (forceFetchNew)
                 {
-                    InsertOddsMovementItems(matchOddsMovement.OddsMovements);                    
+                    InsertOddsMovementItems(matchOddsMovement.OddsMovements);
                 }
                 else
                 {
-                    var updatedOddsMovements = matchOddsMovement.OddsMovements                    
+                    var updatedOddsMovements = matchOddsMovement.OddsMovements
                         .OrderByDescending(x => x.UpdateTime)
                         .ToList();
 
@@ -188,13 +188,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 .OrderBy(x => x.UpdateTime)
                 .ToList();
 
+            var views = new List<BaseMovementItemViewModel>();
+
             foreach (var oddsMovement in distinctOddsMovements)
             {
 
                 var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
                     .CreateInstance();
 
-                OddsMovementItems.Insert(0, newOddsMovementView);
+                views.Add(newOddsMovementView);                
+            }
+
+            foreach (var view in views)
+            {
+                OddsMovementItems.Insert(0, view);
             }
         }
 

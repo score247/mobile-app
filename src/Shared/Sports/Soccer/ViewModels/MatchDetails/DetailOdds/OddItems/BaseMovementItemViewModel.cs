@@ -41,6 +41,13 @@
 
             UpdateTime = oddsMovement.UpdateTime.ToLocalDateAndTime();
             FullUpdateTime = oddsMovement.UpdateTime.ToFullLocalDateAndTime();
+
+            MatchScore = oddsMovement.IsMatchStarted
+               ? $"{oddsMovement.HomeScore} - {oddsMovement.AwayScore}"
+               : string.Empty;
+
+            MatchTime = oddsMovement.MatchTime;
+
         }
 
         public IOddsMovement OddsMovement { get; }
@@ -50,6 +57,11 @@
         public string UpdateTime { get; }
 
         public string FullUpdateTime { get; }
+
+        public string MatchTime { get;}
+
+        public string MatchScore { get;}
+    
 
         public DataTemplate CreateTemplate()
         {
