@@ -70,6 +70,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             ScoreItemSources = itemViewModels;
+            SelectedScoreItemIndex = 2;
         }
     }
 }

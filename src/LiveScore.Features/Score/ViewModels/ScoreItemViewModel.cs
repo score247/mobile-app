@@ -169,7 +169,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var matches = await matchService.GetMatchesByDate(
                     date,
-                    AppSettings.CurrentLanguage,
+                    CurrentLanguage,
                     forceFetchNewData).ConfigureAwait(false);
 
             var matchItemViewModels = matches.Select(
