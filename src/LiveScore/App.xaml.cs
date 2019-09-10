@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Akavache;
 using Fanex.Caching;
 using JsonNet.ContractResolvers;
@@ -58,19 +59,24 @@ namespace LiveScore
 
         public App() : this(null)
         {
-
         }
 
         [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
+            this.PageAppearing += App_PageAppearing;
+        }
+
+        private void App_PageAppearing(object sender, Page e)
+        {
+            Debug.Write($"Page {e.Title} (id:{e.Id}) appears at {DateTime.Now:HH:mm:ss.fff}");
         }
 
         [Time]
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             Registrations.Start("Score247.App");
-          
+
             Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
@@ -79,10 +85,11 @@ namespace LiveScore
             var logService = Container.Resolve<ILoggingService>();
             logService.Init(AppSettings.Current.LoggingDns);
 
-            RegisterAndStartEventHubs(Container);
+            _ = RegisterAndStartEventHubs(Container);
+
             StartGlobalTimer();
 
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
+            NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()
@@ -147,7 +154,7 @@ namespace LiveScore
             moduleCatalog.AddModule<MenuModule>();
         }
 
-        private async void RegisterAndStartEventHubs(IContainerProvider container)
+        private async Task RegisterAndStartEventHubs(IContainerProvider container)
         {
             var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),
