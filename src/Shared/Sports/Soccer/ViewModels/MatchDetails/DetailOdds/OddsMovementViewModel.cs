@@ -135,6 +135,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsLoading = false;
         }
 
+        [Time]
         private async Task GetOddsMovement(bool isRefresh)
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
@@ -143,24 +144,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
-                if (forceFetchNew)
-                {
-                    InsertOddsMovementItems(matchOddsMovement.OddsMovements);
-                }
-                else
-                {
-                    var updatedOddsMovements = matchOddsMovement.OddsMovements
-                        .OrderByDescending(x => x.UpdateTime)
-                        .ToList();
+                var updatedOddsMovements = matchOddsMovement.OddsMovements
+                    .OrderByDescending(x => x.UpdateTime)
+                    .ToList();
 
-                    foreach (var oddsMovement in updatedOddsMovements)
-                    {
-                        var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
-                        .CreateInstance();
+                var views = updatedOddsMovements.Select(x => new BaseMovementItemViewModel(betType, x, NavigationService, DependencyResolver)
+                    .CreateInstance());
 
-                        OddsMovementItems.Add(newOddsMovementView);
-                    }
-                }
+                OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName, views);
+                GroupOddsMovementItems[0] = OddsMovementItems;
 
                 HasData = true;
             }
@@ -174,9 +166,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 return;
             }
 
-            InsertOddsMovementItems(oddsMovementMessage.OddsEvents
-                            .Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value)
-                            .Select(x => x.OddsMovement));
+            InsertOddsMovementItems(oddsMovementMessage.OddsEvents.Where(x => x.Bookmaker == bookmaker && x.BetTypeId == betType.Value).Select(x => x.OddsMovement));
         }
 
         private void InsertOddsMovementItems(IEnumerable<IOddsMovement> updatedOddsMovements)
@@ -188,20 +178,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 .OrderBy(x => x.UpdateTime)
                 .ToList();
 
-            var views = new List<BaseMovementItemViewModel>();
-
             foreach (var oddsMovement in distinctOddsMovements)
             {
-
                 var newOddsMovementView = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
                     .CreateInstance();
 
-                views.Add(newOddsMovementView);                
-            }
-
-            foreach (var view in views)
-            {
-                OddsMovementItems.Insert(0, view);
+                OddsMovementItems.Insert(0, newOddsMovementView);
             }
         }
 
