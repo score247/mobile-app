@@ -30,7 +30,7 @@
             <Color x:Key="LineColor">#2D2F3F</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
             <!--  Match  -->
-            <Color x:Key="TeamColor">#DADBDC</Color>
+            <Color x:Key="TeamColor">#E7E7E7</Color>
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
             <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
