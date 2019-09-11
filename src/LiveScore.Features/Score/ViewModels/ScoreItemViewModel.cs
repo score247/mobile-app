@@ -179,17 +179,18 @@ namespace LiveScore.Features.Score.ViewModels
                     CurrentLanguage,
                     forceFetchNewData).ConfigureAwait(false);
 
-            var matchItemViewModels = matches.Select(
-                match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
+            var matchItemViewModels = matches
+                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
+                .ToList();
 
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)).ToList());
+                matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)));
 
             IsRefreshing = false;
             IsLoading = false;
 
             Profiler.Start("ScoresView.Render");
-            Debug.WriteLine($"Number of matches: {MatchItemsSource.Count}");
+            Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");
         }
 
         private void UnsubscribeLiveMatchTimeChangeEvent(DateTime date)

@@ -19,6 +19,6 @@
         public bool IsSelected { get; set; }
 
         public bool Equals(DateBarItem other)
-            => Date.Date == other.Date.Date;
+            => other != null && Date.Date == other.Date.Date;
     }
 }
