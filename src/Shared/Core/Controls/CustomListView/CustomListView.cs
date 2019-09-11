@@ -4,7 +4,7 @@
 
     public class CustomListView : ListView
     {
-        public CustomListView() : base(ListViewCachingStrategy.RecycleElement)
+        public CustomListView() : base(ListViewCachingStrategy.RecycleElementAndDataTemplate)
         {
         }
 

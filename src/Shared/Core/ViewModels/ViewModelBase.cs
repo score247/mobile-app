@@ -82,13 +82,11 @@
         {
         }
 
-        protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
+        protected virtual Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
         {
             IsLoading = showLoading;
 
-            await loadDataFunc.Invoke().ConfigureAwait(false);
-
-            //  IsLoading = false;
+            return loadDataFunc();
         }
 
         public bool IsNotLoading => !IsLoading;
