@@ -76,8 +76,8 @@ namespace LiveScore
 
         [Time]
         protected override void OnInitialized()
-        {            
-
+        {
+            JsonConvert.DefaultSettings = () => JsonSerializerSettings;
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();

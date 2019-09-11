@@ -50,14 +50,18 @@
         string LoggingDns { get; set; }
 
         void Start();
+
+        void Set(string key, string value);
+
+        string Get(string key);
     }
 
     public class Settings : ISettings
     {
 #if DEBUG
-        public static string ApiEndPoint => "https://score247-api1.nexdev.net/dev2/api/";
+        public static string ApiEndPoint => "https://score247-api1.nexdev.net/dev/api/";
 
-        public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev2/hubs/";
+        public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
 #elif TEST
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/test/api/";
 
@@ -115,6 +119,10 @@
             get => Preferences.Get(nameof(LoggingDns), string.Empty);
             set => Preferences.Set(nameof(LoggingDns), value);
         }
+
+        public string Get(string key) => Preferences.Get(key, string.Empty);
+
+        public void Set(string key, string value) => Preferences.Set(key, value);       
 
         public void Start()
         {

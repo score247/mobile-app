@@ -57,12 +57,20 @@ namespace LiveScore.Soccer.Services
                         hubEvent.Key,
                         (Action<string>)((jsonString) =>
                         {
-                            var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
-
-                            if (data != null)
+                            try
                             {
-                                hubEvent.Value.Item2(eventAggregator, data);
+                                var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
+
+                                if (data != null)
+                                {
+                                    hubEvent.Value.Item2(eventAggregator, data);
+                                }
                             }
+                            catch (Exception e)
+                            {
+                                logger.LogError(e);
+                            }
+                            
                         }));
                 }
 
