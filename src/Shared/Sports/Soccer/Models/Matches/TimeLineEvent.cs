@@ -1,11 +1,19 @@
-﻿namespace LiveScore.Core.Models.Matches
+﻿using MessagePack;
+
+namespace LiveScore.Core.Models.Matches
 {
     using System;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Teams;
+    using MessagePack;
 
-    public class TimelineEvent : Entity<string, string>, ITimelineEvent
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class TimelineEvent : ITimelineEvent
     {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
         public EventType Type { get; set; }
 
         public DateTimeOffset Time { get; set; }
@@ -48,7 +56,7 @@
 
         public bool IsFirstShoot { get; set; }
 
-        public bool IsHome => Team == "home";
+        public bool IsHome { get; set; }
 
         public override bool Equals(object obj)
         {
@@ -63,13 +71,16 @@
         public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
 
-    public interface IGoalScorer : IEntity<string, string>
+    [MessagePackObject]
+    public class GoalScorer
     {
-        string Method { get; }
-    }
+        [Key(0)]
+        public string Id { get; set; }
 
-    public class GoalScorer : Entity<string, string>, IGoalScorer
-    {
+        [Key(1)]
+        public string Name { get; set; }
+
+        [Key(2)]
         public string Method { get; set; }
     }
 }

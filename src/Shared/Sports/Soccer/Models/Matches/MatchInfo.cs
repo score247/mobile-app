@@ -1,11 +1,13 @@
-﻿namespace LiveScore.Soccer.Models.Matches
+﻿using MessagePack;
+
+namespace LiveScore.Soccer.Models.Matches
 {
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Matches;
-    using Newtonsoft.Json;
+    using MessagePack;
 
-    public class MatchInfo : IMatchInfo
+    [MessagePackObject]
+    public class MatchInfo
     {
         public MatchInfo(Match match, IEnumerable<TimelineEvent> timelineEvents, Venue venue, string referee, int attendance)
         {
@@ -16,19 +18,23 @@
             Attendance = attendance;
         }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Match>))]
-        public IMatch Match { get; private set; }
+        [Key(0)]
+        public Match Match { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<TimelineEvent>>))]
-        public IEnumerable<ITimelineEvent> TimelineEvents { get; private set; }
-
-        public int Attendance { get; private set; }
-
+        [Key(1)]
+        public IEnumerable<TimelineEvent> TimelineEvents { get; private set; }
+       
+        [Key(2)]
         public Venue Venue { get; private set; }
 
+        [Key(3)]
         public string Referee { get; private set; }
 
-        public void UpdateTimelineEvents(IEnumerable<ITimelineEvent> timelineEvents)
+        [Key(4)]
+        public int Attendance { get; private set; }
+
+
+        public void UpdateTimelineEvents(IEnumerable<TimelineEvent> timelineEvents)
         {
             TimelineEvents = timelineEvents;
         }

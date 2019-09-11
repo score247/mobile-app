@@ -1,5 +1,8 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
+    using MessagePack;
+
+    [MessagePackObject]
     public class PeriodType : Enumeration
     {
         public static readonly PeriodType RegularPeriod = new PeriodType(1, "regular_period");
@@ -19,8 +22,10 @@
         {
         }
 
+        [IgnoreMember]
         public bool IsOvertime => Value == Overtime.Value;
 
+        [IgnoreMember]
         public bool IsPenalties => Value == Penalties.Value;
     }
 }

@@ -9,4 +9,4 @@ using System.Diagnostics.CodeAnalysis;
     "S2931:Classes with \"IDisposable\" members should implement \"IDisposable\"",
     Justification = "<Pending>",
     Scope = "type",
-    Target = "~T:LiveScore.Score.ViewModels.ScoresViewModel")]
+    Target = "~T:LiveScore.Score.ViewModels.ScoreItemViewModel")]

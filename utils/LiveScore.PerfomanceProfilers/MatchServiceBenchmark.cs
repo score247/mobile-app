@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using BenchmarkDotNet.Attributes;
     using Fanex.Caching;
-    using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Soccer.Services;
@@ -34,7 +33,7 @@
             var apiService = new ApiService(new ApiPolicy(), httpService);
             var matchService = new MatchService(apiService, cachingService, loggingService);
 
-            var matches = matchService.GetMatches(new DateRange(date), language, forceFetchNewData).GetAwaiter().GetResult();
+            var matches = matchService.GetMatchesByDate(date, language, forceFetchNewData).GetAwaiter().GetResult();
 
             Console.WriteLine($"Total Match: {matches.Count()}");
         }

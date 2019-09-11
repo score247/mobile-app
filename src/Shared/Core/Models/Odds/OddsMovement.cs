@@ -2,8 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using MessagePack;
 
-    public interface IOddsMovement : IEntity<int, string>
+    public interface IOddsMovement
     {
         IEnumerable<BetOptionOdds> BetOptions { get; }
 
@@ -18,20 +19,21 @@
         bool IsMatchStarted { get; }
     }
 
-    public class OddsMovement : Entity<int, string>, IOddsMovement, IEquatable<OddsMovement>
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class OddsMovement : IOddsMovement, IEquatable<OddsMovement>
     {
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }
 
         public string MatchTime { get; set; }
 
-        public int HomeScore { get; set; }
-
-        public int AwayScore { get; set; }
-
         public DateTimeOffset UpdateTime { get; set; }
 
         public bool IsMatchStarted { get; set; }
 
+        public int HomeScore { get; set; }
+
+        public int AwayScore { get; set; }
+        
         public bool Equals(OddsMovement other)
         {
             if (other == null)
@@ -61,9 +63,7 @@
         }
 
         public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
+            => (int)UpdateTime.Ticks;
 
         public static bool operator ==(OddsMovement oddMovement1, OddsMovement oddMovement2)
         {

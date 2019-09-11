@@ -23,7 +23,12 @@
         Task<MatchInfo> GetMatchInfo(string matchId, string language);
     }
 
-    public class MatchService : BaseService, IMatchService
+    public interface IMatchInfoService
+    {
+        Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
+    }
+
+    public class MatchService : BaseService, IMatchService, IMatchInfoService
     {
         private readonly IApiService apiService;
         private readonly ICachingService cacheService;
@@ -38,31 +43,7 @@
         }
 
         [Time]
-        public async Task<IEnumerable<IMatch>> GetMatches(DateRange dateRange, Language language, bool forceFetchNewData = false)
-        {
-            try
-            {
-                var dataFromDate = await GetMatchesByDate(dateRange.From, language, forceFetchNewData).ConfigureAwait(false);
-
-                if (dateRange.IsOneDay)
-                {
-                    return dataFromDate;
-                }
-
-                var dataToDate = await GetMatchesByDate(dateRange.To, language, forceFetchNewData).ConfigureAwait(false);
-
-                return dataFromDate.Concat(dataToDate);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return Enumerable.Empty<IMatch>();
-            }
-        }
-
-        [Time]
-        private async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
         {
             try
             {
@@ -91,7 +72,7 @@
         }
 
         [Time]
-        public async Task<IMatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {

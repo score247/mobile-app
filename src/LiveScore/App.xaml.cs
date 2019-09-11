@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Fanex.Caching;
 using JsonNet.ContractResolvers;
-using LiveScore.Common.Configuration;
+using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -24,6 +25,7 @@ using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using MessagePack.Resolvers;
 using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
@@ -34,6 +36,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Refit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -63,26 +66,30 @@ namespace LiveScore
         [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
+            this.PageAppearing += App_PageAppearing;
+        }
+
+        private void App_PageAppearing(object sender, Page e)
+        {
+            Debug.Write($"Page {e.Title} (id:{e.Id}) appears at {DateTime.Now:HH:mm:ss.fff}");
         }
 
         [Time]
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {            
+
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init(Configuration.SentryDsn);
+            logService.Init(AppSettings.Current.LoggingDns);
 
-            var settingsService = Container.Resolve<ISettings>();
-            settingsService.ApiEndpoint = Configuration.LocalEndPoint;
-            settingsService.HubEndpoint = Configuration.LocalHubEndPoint;
+            _ = RegisterAndStartEventHubs(Container);
 
-            RegisterAndStartEventHubs(Container);
             StartGlobalTimer();
 
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
+            NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()
@@ -101,6 +108,8 @@ namespace LiveScore
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            AppSettings.Current.Start();
+
             containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
@@ -110,7 +119,7 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.LocalEndPoint)));
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(AppSettings.Current.ApiEndpoint)));
             containerRegistry.RegisterSingleton<ICachingService, CachingService>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettings, Settings>();
@@ -119,7 +128,17 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+            containerRegistry.RegisterInstance(new RefitSettings
+            {
+                ContentSerializer = new MessagePackContentSerializer()
+            });
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
+
+            CompositeResolver.RegisterAndSetAsDefault(
+                SoccerModelResolver.Instance,
+                CoreModelResolver.Instance,
+                BuiltinResolver.Instance,
+                PrimitiveObjectResolver.Instance);
         }
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)
@@ -136,15 +155,16 @@ namespace LiveScore
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
             moduleCatalog.AddModule<SoccerModule>();
-            moduleCatalog.AddModule<LeagueModule>();
+
             moduleCatalog.AddModule<ScoreModule>();
-            moduleCatalog.AddModule<FavoritesModule>();
-            moduleCatalog.AddModule<NewsModule>();
-            moduleCatalog.AddModule<TVScheduleModule>();
+            moduleCatalog.AddModule<LeagueModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<FavoritesModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<MenuModule>();
         }
 
-        private async void RegisterAndStartEventHubs(IContainerProvider container)
+        private async Task RegisterAndStartEventHubs(IContainerProvider container)
         {
             var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),

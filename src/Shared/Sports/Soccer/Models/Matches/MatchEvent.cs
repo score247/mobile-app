@@ -2,7 +2,7 @@
 {
     using LiveScore.Core.Models.Matches;
 
-    public class MatchEvent : IMatchEvent
+    public class MatchEvent
     {
         public MatchEvent(byte sportId, string matchId, MatchResult matchResult, TimelineEvent timeline)
         {
@@ -16,8 +16,8 @@
 
         public string MatchId { get; }
 
-        public IMatchResult MatchResult { get; }
+        public MatchResult MatchResult { get; }
 
-        public ITimelineEvent Timeline { get; }
+        public TimelineEvent Timeline { get; }
     }
 }

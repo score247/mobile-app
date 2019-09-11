@@ -40,7 +40,7 @@
 
             BookmakerName = betTypeOdds.Bookmaker?.Name;
 
-            OnInitialized();
+            //OnInitialized();
         }
 
         public string BookmakerName { get; }
@@ -77,7 +77,7 @@
         {
             BetTypeOdds = betTypeOdds;
 
-            OnInitialized();
+            //OnInitialized();
         }
     }
 }

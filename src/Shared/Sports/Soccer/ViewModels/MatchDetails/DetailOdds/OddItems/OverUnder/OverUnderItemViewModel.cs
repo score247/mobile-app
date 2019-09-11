@@ -33,7 +33,7 @@
 
         public string OpeningOverOptionValue { get; private set; }
 
-        protected override void OnInitialized()
+        protected void OnInitialized()
         {
             BuildOverOddsAndOptionValue();
 

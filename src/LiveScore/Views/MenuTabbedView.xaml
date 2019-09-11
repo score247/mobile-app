@@ -11,78 +11,77 @@
     xmlns:localViews="clr-namespace:LiveScore.Views"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore.Features"
-    x:Name="self"
     android:TabbedPage.BarItemColor="{StaticResource TabColor}"
     android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
     android:TabbedPage.ToolbarPlacement="Bottom"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}"
     BarBackgroundColor="{StaticResource FunctionBarBgColor}">
-    <TabbedPage.Children>
-        <NavigationPage
-            x:Name="ScoresBar"
-            Title="{langs:Translate Scores}"
-            AutomationId="ScoresBar"
-            Icon="images/common/soccer.png">
-            <x:Arguments>
-                <score:ScoresView Title="Scores">
-                    <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" CurrentSport="{Binding CurrentSportName}" />
-                    </NavigationPage.TitleView>
-                </score:ScoresView>
-            </x:Arguments>
-        </NavigationPage>
+  <TabbedPage.Children>
+    <NavigationPage
+        x:Name="ScoresBar"
+        Title="{langs:Translate Scores}"
+        AutomationId="ScoresBar"
+        Icon="images/common/soccer.png">
+      <x:Arguments>
+        <score:ScoresView Title="Scores">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </score:ScoresView>
+      </x:Arguments>
+    </NavigationPage>
 
-        <NavigationPage
-            x:Name="LiveBar"
-            Title="{langs:Translate Live}"
-            AutomationId="LiveBar"
-            Icon="images/common/live.png">
-            <x:Arguments>
-                <score:LiveView Title="{langs:Translate Live}">
-                    <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" CurrentSport="{Binding CurrentSportName}" />
-                    </NavigationPage.TitleView>
-                </score:LiveView>
-            </x:Arguments>
-        </NavigationPage>
+    <NavigationPage
+        x:Name="LiveBar"
+        Title="{langs:Translate Live}"
+        AutomationId="LiveBar"
+        Icon="images/common/live.png">
+      <x:Arguments>
+        <score:LiveView Title="{langs:Translate Live}">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </score:LiveView>
+      </x:Arguments>
+    </NavigationPage>
 
-        <NavigationPage
-            x:Name="FavoritesBar"
-            Title="{langs:Translate Favorites}"
-            AutomationId="FavoritesBar"
-            Icon="images/common/favorite_function_bar.png">
-            <x:Arguments>
-                <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
-                    <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" CurrentSport="{Binding CurrentSportName}" />
-                    </NavigationPage.TitleView>
-                </favorites:EmptyFavoriteView>
-            </x:Arguments>
-        </NavigationPage>
+    <NavigationPage
+        x:Name="FavoritesBar"
+        Title="{langs:Translate Favorites}"
+        AutomationId="FavoritesBar"
+        Icon="images/common/favorite_function_bar.png">
+      <x:Arguments>
+        <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </favorites:EmptyFavoriteView>
+      </x:Arguments>
+    </NavigationPage>
 
-        <NavigationPage
-            x:Name="LeaguesBar"
-            Title="{langs:Translate Leagues}"
-            AutomationId="LeaguesBar"
-            Icon="images/common/league.png">
-            <x:Arguments>
-                <league:LeagueView Title="{langs:Translate Leagues}">
-                    <NavigationPage.TitleView>
-                        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}" CurrentSport="{Binding CurrentSportName}" />
-                    </NavigationPage.TitleView>
-                </league:LeagueView>
-            </x:Arguments>
-        </NavigationPage>
+    <NavigationPage
+        x:Name="LeaguesBar"
+        Title="{langs:Translate Leagues}"
+        AutomationId="LeaguesBar"
+        Icon="images/common/league.png">
+      <x:Arguments>
+        <league:LeagueView Title="{langs:Translate Leagues}">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </league:LeagueView>
+      </x:Arguments>
+    </NavigationPage>
 
-        <NavigationPage
-            x:Name="MoreBar"
-            Title="More"
-            AutomationId="MoreBar"
-            Icon="images/common/more.png">
-            <x:Arguments>
-                <localViews:TabMoreView Title="More" />
-            </x:Arguments>
-        </NavigationPage>
-    </TabbedPage.Children>
+    <NavigationPage
+        x:Name="MoreBar"
+        Title="More"
+        AutomationId="MoreBar"
+        Icon="images/common/more.png">
+      <x:Arguments>
+        <localViews:TabMoreView Title="More" />
+      </x:Arguments>
+    </NavigationPage>
+  </TabbedPage.Children>
 </TabbedPage>

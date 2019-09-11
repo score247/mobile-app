@@ -15,16 +15,19 @@ namespace LiveScore.Core.ViewModels
     public class SelectSportViewModel : ViewModelBase
     {
         private readonly ISportService sportService;
+        private readonly ISettings settings;
 
         public SelectSportViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            ISportService sportService)
+            ISportService sportService,
+            ISettings settings)
                 : base(navigationService, dependencyResolver)
         {
             this.sportService = sportService;
             SelectSportItemCommand = new DelegateAsyncCommand(OnSelectSportItem);
             DoneCommand = new DelegateAsyncCommand(OnDone);
+            this.settings = settings ?? AppSettings.Current;
         }
 
         public SportItem SelectedSportItem { get; set; }
@@ -41,7 +44,7 @@ namespace LiveScore.Core.ViewModels
 
             foreach (var sportItem in sportItems)
             {
-                sportItem.IsVisible = sportItem.Type.Value == Settings.CurrentSportType.Value;
+                sportItem.IsVisible = sportItem.Type.Value == CurrentSportId;
             }
 
             SportItems = new ObservableCollection<SportItem>(sportItems);
@@ -51,8 +54,9 @@ namespace LiveScore.Core.ViewModels
         {
             if (SelectedSportItem.Type != null)
             {
-                var isSportChanged = Settings.CurrentSportType.Value != SelectedSportItem.Type.Value;
-                Settings.SportId = SelectedSportItem.Type.Value;
+                var isSportChanged = CurrentSportId != SelectedSportItem.Type.Value;
+
+                settings.SportId = SelectedSportItem.Type.Value;
 
                 if (isSportChanged)
                 {
@@ -61,9 +65,9 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        private async Task OnDone()
+        private Task OnDone()
         {
-            await NavigationService.GoBackAsync(useModalNavigation: true);
+            return NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }
 }

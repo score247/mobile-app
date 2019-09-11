@@ -18,6 +18,13 @@
         Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
     }
 
+    public interface IOddsService
+    {
+        Task<MatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNewData = false);
+
+        Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false);
+    }
+
     public class OddsService : BaseService, IOddsService
     {
         private const string OddsComparisonKey = "OddsComparison";
@@ -36,7 +43,7 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNew = false)
+        public async Task<MatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNew = false)
         {
             try
             {
@@ -62,7 +69,7 @@
                () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
            );
 
-        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNew = false)
+        public async Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNew = false)
         {
             try
             {

@@ -74,9 +74,6 @@
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
             <x:Double x:Key="TabbedPageFontSize">12</x:Double>
-            <!--  Date bar  -->
-            <x:Double x:Key="DateBarDateFontSize">18</x:Double>
-            <x:Double x:Key="DateBarDayFontSize">10</x:Double>
             <!--  Calendar Page  -->
             <Color x:Key="DateColor">#fff</Color>
             <Color x:Key="DisabledDateColor">#636886</Color>
@@ -499,6 +496,12 @@
                         Value="&#xe902;" />
                 <Setter Property="Margin"
                         Value="4,0,8,0" />
+            </Style>
+
+            <Style x:Key="ComingSoon" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+                <Setter Property="TextColor" Value="#fff" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

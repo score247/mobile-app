@@ -1,5 +1,8 @@
-﻿namespace LiveScore.Core.Enumerations
+﻿using MessagePack;
+
+namespace LiveScore.Core.Enumerations
 {
+    [MessagePackObject]
     public class MatchStatus : Enumeration
     {
         ////not_started – The match is scheduled to be played
@@ -91,34 +94,49 @@
         {
         }
 
+        [IgnoreMember]
         public bool IsPreMatch => this == NotStarted || this == Postponed || this == Cancelled || this == StartDelayed;
 
+        [IgnoreMember]
         public bool IsNotStarted => this == NotStarted;
 
+        [IgnoreMember]
         public bool IsLive => this == Live;
 
+        [IgnoreMember]
         public bool IsClosed => this == Closed;
 
+        [IgnoreMember]
         public bool IsEnded => this == Ended;
 
+        [IgnoreMember]
         public bool IsFirstHalf => this == FirstHalf;
 
+        [IgnoreMember]
         public bool IsSecondHalf => this == SecondHalf;
 
+        [IgnoreMember]
         public bool IsAfterExtraTime => this == EndedExtraTime;
 
+        [IgnoreMember]
         public bool IsInPenalties => this == Penalties;
 
+        [IgnoreMember]
         public bool IsAfterPenalties => this == EndedAfterPenalties;
 
+        [IgnoreMember]
         public bool IsFirstHalfExtra => this == FirstHalfExtra;
 
+        [IgnoreMember]
         public bool IsSecondHalfExtra => this == SecondHalfExtra;
 
+        [IgnoreMember]
         public bool NotShowScore => this == NotStarted || this == Cancelled || this == Postponed || this == StartDelayed;
 
+        [IgnoreMember]
         public bool ShowScore => !NotShowScore;
 
+        [IgnoreMember]
         public bool IsInExtraTime => this == FirstHalfExtra || this == SecondHalfExtra || this == ExtraTimeHalfTime;
     }
 }

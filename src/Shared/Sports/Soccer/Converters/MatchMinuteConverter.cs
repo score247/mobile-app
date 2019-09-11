@@ -1,13 +1,13 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+    using LiveScore.Core;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Services;
     using Models.Matches;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
 
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteConverter
