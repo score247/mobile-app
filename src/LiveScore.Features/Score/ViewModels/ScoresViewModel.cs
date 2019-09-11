@@ -76,7 +76,10 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void InitScoreItemSources()
         {
-            var itemViewModels = new List<ScoreItemViewModel>();
+            var itemViewModels = new List<ScoreItemViewModel>
+            {
+                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, true)
+            };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
             {
@@ -85,7 +88,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             ScoreItemSources = itemViewModels;
-            SelectedScoreItemIndex = 2;
+            SelectedScoreItemIndex = 3;
         }
     }
 }

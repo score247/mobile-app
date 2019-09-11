@@ -1,15 +1,15 @@
-﻿using System.Windows.Input;
-using LiveScore.Core.Controls.DateBar.EventArgs;
-using PanCardView;
-
-namespace LiveScore.Core.Controls.DateBar.Views
+﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
     using ViewModels;
     using Xamarin.Forms;
     using System;
+    using System.Windows.Input;
+    using EventArgs;
 
     public partial class DateBar : ContentView
     {
+        private const string SelectedIndexChangedEvent = "SelectedIndexChanged";
+
         public DateBar()
         {
             InitializeComponent();
@@ -71,11 +71,9 @@ namespace LiveScore.Core.Controls.DateBar.Views
 
         private static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = (DateBar)bindable;
-
-            if (control != null)
+            if (newValue != null)
             {
-                control.BuildDateBar();
+                MessagingCenter.Send(nameof(DateBar), SelectedIndexChangedEvent, (int)newValue);
             }
         }
 
@@ -92,7 +90,7 @@ namespace LiveScore.Core.Controls.DateBar.Views
 
         private void AddDateBoxes()
         {
-            var currentIndex = 0;
+            var currentIndex = 1;
 
             for (int i = -NumberDisplayDays; i <= NumberDisplayDays; i++)
             {
@@ -117,26 +115,34 @@ namespace LiveScore.Core.Controls.DateBar.Views
         private StackLayout BuildDateBarItem(DateTime date, int index)
         {
             var dateBarItemLayout = new StackLayout { Style = (Style)Resources["DateBarBox"] };
-            var dayNumber = new Label
+            var currentDayNumber = new Label
             {
                 Text = date.Day.ToString(),
                 Style = (Style)Resources["DateBarDayNumberLabel"],
             };
 
-            var dayName = new Label
+            var currentDayName = new Label
             {
                 Text = date.Date.DayOfWeek.ToString().Substring(0, 3).ToUpperInvariant(),
                 Style = (Style)Resources["DateBarDayNameLabel"]
             };
 
-            if (index == SelectedIndex)
-            {
-                dayNumber.TextColor = (Color)Resources["DateBarSelectedColor"];
-                dayName.TextColor = (Color)Resources["DateBarSelectedColor"];
-            }
+            dateBarItemLayout.Children.Add(currentDayNumber);
+            dateBarItemLayout.Children.Add(currentDayName);
 
-            dateBarItemLayout.Children.Add(dayNumber);
-            dateBarItemLayout.Children.Add(dayName);
+            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
+            {
+                if (index == SelectedIndex)
+                {
+                    currentDayNumber.TextColor = (Color)Resources["DateBarSelectedTextColor"];
+                    currentDayName.TextColor = (Color)Resources["DateBarSelectedTextColor"];
+                }
+                else
+                {
+                    currentDayNumber.TextColor = (Color)Resources["DateBarTextColor"];
+                    currentDayName.TextColor = (Color)Resources["DateBarTextColor"];
+                }
+            });
 
             dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
             {
@@ -144,8 +150,10 @@ namespace LiveScore.Core.Controls.DateBar.Views
                 {
                     var args = new DateBarItemTappedEventArgs(index, date);
                     ItemTappedCommand?.Execute(args);
+
+                    currentDayNumber.TextColor = (Color)Resources["DateBarSelectedTextColor"];
+                    currentDayName.TextColor = (Color)Resources["DateBarSelectedTextColor"];
                     SelectedIndex = index;
-                    BuildDateBar();
                 })
             });
 
