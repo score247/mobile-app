@@ -43,7 +43,7 @@
         <Setter Property="JustifyContent"
                 Value="SpaceAround" />
         <Setter Property="Padding"
-                Value="2,15,2,12" />
+                Value="2,15,2,15" />
     </Style>
 
     <Style x:Key="DateBarDayNumberLabel"
@@ -55,7 +55,7 @@
         <Setter Property="FontAttributes"
                 Value="Bold" />
         <Setter Property="FontSize"
-                Value="13" />
+                Value="14" />
     </Style>
 
     <Style x:Key="DateBarDayNameLabel"
@@ -67,6 +67,6 @@
         <Setter Property="FontAttributes"
                 Value="Bold" />
         <Setter Property="FontSize"
-                Value="10" />
+                Value="11" />
     </Style>
 </ResourceDictionary>
