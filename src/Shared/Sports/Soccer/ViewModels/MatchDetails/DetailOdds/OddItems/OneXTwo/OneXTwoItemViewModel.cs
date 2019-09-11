@@ -15,6 +15,11 @@
             IDependencyResolver dependencyResolver)
              : base(BetType.OneXTwo, betTypeOdds, navigationService, dependencyResolver)
         {
+            BuildHomeOdds();
+
+            BuildDrawOdds();
+
+            BuildAwayOdds();
         }
 
         public string HomeLiveOdds { get; private set; }
@@ -34,15 +39,6 @@
         public string DrawOpeningOdds { get; private set; }
 
         public string DrawOddsTrend { get; private set; }
-
-        protected void OnInitialized()
-        {
-            BuildHomeOdds();
-
-            BuildDrawOdds();
-
-            BuildAwayOdds();
-        }
 
         private void BuildAwayOdds()
         {

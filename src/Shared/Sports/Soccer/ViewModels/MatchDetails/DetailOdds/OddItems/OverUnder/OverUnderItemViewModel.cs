@@ -15,6 +15,9 @@
             IDependencyResolver dependencyResolver)
              : base(BetType.OverUnder, betTypeOdds, navigationService, dependencyResolver)
         {
+            BuildOverOddsAndOptionValue();
+
+            BuildUnderOdds();
         }
 
         public string OverLiveOdds { get; private set; }
@@ -32,14 +35,7 @@
         public string LiveOverOptionValue { get; private set; }
 
         public string OpeningOverOptionValue { get; private set; }
-
-        protected void OnInitialized()
-        {
-            BuildOverOddsAndOptionValue();
-
-            BuildUnderOdds();
-        }
-
+     
         private void BuildUnderOdds()
         {
             var underOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
@@ -53,7 +49,6 @@
             UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
             UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
         }
-
 
         private void BuildOverOddsAndOptionValue()
         {

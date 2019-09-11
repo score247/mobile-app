@@ -15,6 +15,9 @@
             IDependencyResolver dependencyResolver)
              : base(BetType.AsianHDP, betTypeOdds, navigationService, dependencyResolver)
         {
+            BuildHomeOddsAndOptionValue();
+
+            BuildAwayOdds();
         }
 
         public string HomeLiveOdds { get; private set; }
@@ -32,14 +35,7 @@
         public string LiveHdp { get; private set; }
 
         public string OpeningHdp { get; private set; }
-
-        protected void OnInitialized()
-        {
-            BuildHomeOddsAndOptionValue();
-
-            BuildAwayOdds();
-        }
-
+       
         private void BuildAwayOdds()
         {            
             var awayOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
