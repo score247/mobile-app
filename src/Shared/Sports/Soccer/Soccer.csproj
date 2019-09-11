@@ -102,4 +102,7 @@
     <ProjectReference Include="..\..\..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\..\Core\LiveScore.Core.csproj" />
   </ItemGroup>
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)SoccerModelResolver.cs&quot; -r &quot;SoccerModelResolver&quot;" />
+  </Target>
 </Project>

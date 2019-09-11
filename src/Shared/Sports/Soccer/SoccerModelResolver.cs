@@ -528,7 +528,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 { "ShootoutAwayScore", 21},
                 { "IsFirstShoot", 22},
                 { "IsHome", 23},
-                { "TestString", 24},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -557,7 +556,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShootoutAwayScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsFirstShoot"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsHome"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TestString"),
                 
             };
         }
@@ -571,7 +569,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 25);
+            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 24);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -620,8 +618,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsFirstShoot);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[23]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsHome);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[24]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.TestString, formatterResolver);
             return offset - startOffset;
         }
 
@@ -661,7 +657,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             var __ShootoutAwayScore__ = default(byte);
             var __IsFirstShoot__ = default(bool);
             var __IsHome__ = default(bool);
-            var __TestString__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -748,9 +743,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                     case 23:
                         __IsHome__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
-                    case 24:
-                        __TestString__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -787,7 +779,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             ____result.ShootoutAwayScore = __ShootoutAwayScore__;
             ____result.IsFirstShoot = __IsFirstShoot__;
             ____result.IsHome = __IsHome__;
-            ____result.TestString = __TestString__;
             return ____result;
         }
     }
