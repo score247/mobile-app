@@ -1,19 +1,14 @@
-using LiveScore.Features.Score.ViewModels;
-
 namespace Scores.Tests.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using AutoFixture;
     using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Controls.DateBar.Events;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Services;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Features.Score.ViewModels;
     using NSubstitute;
     using Xunit;
 

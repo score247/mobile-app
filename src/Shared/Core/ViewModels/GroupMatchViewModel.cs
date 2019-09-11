@@ -10,7 +10,7 @@ namespace LiveScore.Core.ViewModels
         {
             LeagueId = match.LeagueId;
             LeagueName = match.LeagueName;
-            EventDate = match.EventDate.ToLocalShortDayMonth();
+            EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
         }
 
         public string LeagueId { get; }

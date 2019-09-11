@@ -26,6 +26,7 @@
     <ProjectReference Include="..\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Controls\DateBar\" />
     <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

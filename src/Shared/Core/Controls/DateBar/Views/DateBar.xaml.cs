@@ -1,11 +1,10 @@
 ﻿namespace LiveScore.Core.Controls.DateBar.Views
 {
-    using ViewModels;
-    using Xamarin.Forms;
     using System;
     using System.Windows.Input;
     using EventArgs;
     using MethodTimer;
+    using Xamarin.Forms;
 
     public partial class DateBar : ContentView
     {
@@ -15,8 +14,6 @@
         {
             InitializeComponent();
         }
-
-        public DateBarViewModel ViewModel { get; set; }
 
         [Time]
         protected override void OnBindingContextChanged()
