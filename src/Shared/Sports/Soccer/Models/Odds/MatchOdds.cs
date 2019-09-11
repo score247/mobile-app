@@ -1,16 +1,16 @@
-﻿namespace LiveScore.Soccer.Models.Odds
+﻿using MessagePack;
+
+namespace LiveScore.Soccer.Models.Odds
 {
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Odds;
-    using Newtonsoft.Json;
+    using MessagePack;
 
-    public class MatchOdds : IMatchOdds
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class MatchOdds
     {
         public string MatchId { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<BetTypeOdds>>))]
-        public IEnumerable<IBetTypeOdds> BetTypeOddsList { get; set; }
+        public IEnumerable<BetTypeOdds> BetTypeOddsList { get; set; }
     }
 }

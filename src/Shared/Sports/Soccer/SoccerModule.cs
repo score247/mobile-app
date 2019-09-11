@@ -30,6 +30,7 @@
                 nameof(OddsMovementView) + SportType.Soccer.Value);
 
             containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
+            containerRegistry.Register<IMatchInfoService, MatchService>();
             containerRegistry.Register<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportType.Soccer.Value.ToString());

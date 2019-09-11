@@ -1,20 +1,17 @@
 ﻿namespace LiveScore.Soccer.Models.Odds
 {
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
-    using Newtonsoft.Json;
     using Prism.Events;
 
-    public class OddsMovementMessage : IOddsMovementMessage
+    public class OddsMovementMessage
     {
         public const string HubMethod = "OddsMovement";
 
         public OddsMovementMessage(
            byte sportId,
            string matchId,
-           IEnumerable<IOddsMovementEvent> oddsEvents)
+           IEnumerable<OddsMovementEvent> oddsEvents)
         {
             SportId = sportId;
             MatchId = matchId;
@@ -25,8 +22,7 @@
 
         public string MatchId { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<OddsMovementEvent>>))]
-        public IEnumerable<IOddsMovementEvent> OddsEvents { get; private set; }
+        public IEnumerable<OddsMovementEvent> OddsEvents { get; private set; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)
            => eventAggregator.GetEvent<OddsMovementPubSubEvent>().Publish(data as OddsMovementMessage);

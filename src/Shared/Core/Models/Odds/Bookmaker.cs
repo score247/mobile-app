@@ -1,9 +1,17 @@
-﻿namespace LiveScore.Core.Models.Odds
+﻿using MessagePack;
+
+namespace LiveScore.Core.Models.Odds
 {
     using System;
+    using MessagePack;
 
-    public class Bookmaker : Entity<string, string>, IEquatable<Bookmaker>
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class Bookmaker : IEquatable<Bookmaker>
     {
+        public string Id { get; set; }
+
+        public string Name { get; set; }
+
         public bool Equals(Bookmaker other)
         {
             if (other == null)

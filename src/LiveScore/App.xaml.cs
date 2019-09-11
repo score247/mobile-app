@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Akavache;
 using Fanex.Caching;
 using JsonNet.ContractResolvers;
+using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -25,6 +26,7 @@ using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
+using MessagePack.Resolvers;
 using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Newtonsoft.Json;
@@ -35,6 +37,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Refit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -128,7 +131,17 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+            containerRegistry.RegisterInstance(new RefitSettings
+            {
+                ContentSerializer = new MessagePackContentSerializer()
+            });
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
+
+            CompositeResolver.RegisterAndSetAsDefault(
+                SoccerModelResolver.Instance,
+                CoreModelResolver.Instance,
+                BuiltinResolver.Instance,
+                PrimitiveObjectResolver.Instance);
         }
 
         private static void RegisterForNavigation(IContainerRegistry containerRegistry)

@@ -1,5 +1,8 @@
 ﻿namespace LiveScore.Core.Enumerations
 {
+    using MessagePack;
+
+    [MessagePackObject(keyAsPropertyName: true)]
     public class OddsTrend : Enumeration
     {
         public static readonly OddsTrend Neutral = new OddsTrend(1, "neutral");

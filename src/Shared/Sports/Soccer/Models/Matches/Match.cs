@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Soccer.Models.Matches
+﻿using MessagePack;
+
+namespace LiveScore.Soccer.Models.Matches
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +9,11 @@
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
     using LiveScore.Soccer.Models.Teams;
+    using MessagePack;
     using PropertyChanged;
 
-    [AddINotifyPropertyChangedInterface]
+
+    [AddINotifyPropertyChangedInterface, MessagePackObject]
     public class Match : IMatch
     {
         private const int NumberOfFullTimePeriodsResult = 2;
@@ -73,59 +77,82 @@
             MatchPeriods = matchPeriods;
         }
 
-        /// <summary>
-        /// Keep private setter for Json Serializer
-        /// </summary>
+        [Key(0)]
         public string Id { get; private set; }
 
+        [Key(1)]
         public DateTimeOffset EventDate { get; private set; }
 
+        [Key(2)]
         public DateTimeOffset CurrentPeriodStartTime { get; private set; }
 
+        [Key(3)]
         public string LeagueId { get; private set; }
 
+        [Key(4)]
         public string LeagueName { get; private set; }
 
+        [Key(5)]
         public string HomeTeamId { get; private set; }
 
+        [Key(6)]
         public string HomeTeamName { get; private set; }
 
+        [Key(7)]
         public string AwayTeamId { get; private set; }
 
+        [Key(8)]
         public string AwayTeamName { get; private set; }
 
+        [Key(9)]
         public MatchStatus MatchStatus { get; private set; }
 
+        [Key(10)]
         public MatchStatus EventStatus { get; private set; }
 
+        [Key(11)]
         public byte HomeScore { get; private set; }
 
+        [Key(12)]
         public byte AwayScore { get; private set; }
 
+        [Key(13)]
         public string WinnerId { get; private set; }
 
+        [Key(14)]
         public string AggregateWinnerId { get; private set; }
 
+        [Key(15)]
         public byte AggregateHomeScore { get; private set; }
 
+        [Key(16)]
         public byte AggregateAwayScore { get; private set; }
 
+        [Key(17)]
         public byte HomeRedCards { get; private set; }
 
+        [Key(18)]
         public byte HomeYellowRedCards { get; private set; }
 
+        [Key(19)]
         public byte AwayRedCards { get; private set; }
 
+        [Key(20)]
         public byte AwayYellowRedCards { get; private set; }
 
+        [Key(21)]
         public byte MatchTime { get; private set; }
 
+        [Key(22)]
         public string StoppageTime { get; private set; }
 
+        [Key(23)]
         public byte InjuryTimeAnnounced { get; private set; }
 
+        [Key(24)]
         public EventType LastTimelineType { get; private set; }
 
+        [Key(25)]
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
@@ -185,28 +212,36 @@
 
 #pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
+        [IgnoreMember]
         public string HomePenaltyImage
             => HomeWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
+        [IgnoreMember]
         public string AwayPenaltyImage
              => AwayWinPenalty ? Enumerations.Images.PenaltyWinner.Value : string.Empty;
 
+        [IgnoreMember]
         public string HomeSecondLegImage
               => HomeWinSecondLeg ? Enumerations.Images.SecondLeg.Value : string.Empty;
 
+        [IgnoreMember]
         public string AwaySecondLegImage
                => AwayWinSecondLeg ? Enumerations.Images.SecondLeg.Value : string.Empty;
 
+        [IgnoreMember]
         public bool IsInExtraTime
             => EventStatus?.IsLive == true
             && MatchStatus?.IsInExtraTime == true;
 
+        [IgnoreMember]
         public bool IsInLiveAndNotExtraTime
             => EventStatus != null && EventStatus.IsLive
             && MatchStatus?.IsInExtraTime == false;
 
+        [IgnoreMember]
         public byte TotalHomeRedCards => (byte)(HomeRedCards + HomeYellowRedCards);
 
+        [IgnoreMember]
         public byte TotalAwayRedCards => (byte)(AwayRedCards + AwayYellowRedCards);
 
         public MatchPeriod GetPenaltyResult()
@@ -218,16 +253,30 @@
         public bool HasFullTimeResult()
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
+        [IgnoreMember]
         private bool HomeWinPenalty
            => EventStatus?.IsClosed == true && GetPenaltyResult() != null && HomeTeamId == WinnerId;
 
+        [IgnoreMember]
         private bool AwayWinPenalty
             => EventStatus?.IsClosed == true && GetPenaltyResult() != null && AwayTeamId == WinnerId;
 
+        [IgnoreMember]
         private bool HomeWinSecondLeg
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && HomeTeamId == AggregateWinnerId);
 
+        [IgnoreMember]
         private bool AwayWinSecondLeg
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
+    }
+
+    /// <summary>
+    /// Temp class for Message Pack generate AOT class
+    /// </summary>
+    [MessagePackObject]
+    public class MatchList
+    {
+        [Key(0)]
+        public IEnumerable<Match> Matches { get; set; }
     }
 }

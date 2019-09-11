@@ -18,6 +18,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
+    using LiveScore.Soccer.PubSubEvents.Odds;
+    using LiveScore.Soccer.Services;
     using MethodTimer;
     using OddItems;
     using Prism.Events;
@@ -188,7 +190,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             || BetTypeOddsItems?.Any() != true;
 
         [Time]
-        internal void HandleOddsComparisonMessage(IOddsComparisonMessage oddsComparisonMessage)
+        internal void HandleOddsComparisonMessage(OddsComparisonMessage oddsComparisonMessage)
         {
             if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
                 || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)

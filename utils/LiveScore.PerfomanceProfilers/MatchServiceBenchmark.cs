@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using BenchmarkDotNet.Attributes;
     using Fanex.Caching;
-    using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Soccer.Services;

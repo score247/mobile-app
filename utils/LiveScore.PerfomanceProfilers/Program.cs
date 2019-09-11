@@ -9,9 +9,11 @@
     {
         private static void Main(string[] args)
         {
-            BenchmarkRunner.Run<MatchServiceBenchmark>(ManualConfig
-                        .Create(DefaultConfig.Instance)
-                        .With(ConfigOptions.DisableOptimizationsValidator));
+            //BenchmarkRunner.Run<MatchServiceBenchmark>(ManualConfig
+            //            .Create(DefaultConfig.Instance)
+            //            .With(ConfigOptions.DisableOptimizationsValidator));
+
+            TestMatchMessagePack.GetMatchByDate();
         }
     }
 }

@@ -27,9 +27,9 @@
             Specimens.Register<ILeague>(() => Specimens.Create<League>());
             Specimens.Register<ILeagueCategory>(() => Specimens.Create<LeagueCategory>());
             Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());
-            Specimens.Register<IMatchOdds>(() => Specimens.Create<MatchOdds>());
+            Specimens.Register<MatchOdds>(() => Specimens.Create<MatchOdds>());
             Specimens.Register<IBetTypeOdds>(() => Specimens.Create<BetTypeOdds>());
-            Specimens.Register<IMatchOddsMovement>(() => Specimens.Create<MatchOddsMovement>());
+            Specimens.Register<MatchOddsMovement>(() => Specimens.Create<MatchOddsMovement>());
             Specimens.Register<IOddsMovement>(() => Specimens.Create<OddsMovement>());
         }
 

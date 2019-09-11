@@ -1,6 +1,9 @@
-﻿namespace LiveScore.Core.Models.Odds
+﻿using MessagePack;
+
+namespace LiveScore.Core.Models.Odds
 {
     using System.Collections.Generic;
+    using MessagePack;
 
     public interface IBetTypeOdds : IEntity<byte, string>
     {
@@ -9,8 +12,13 @@
         IEnumerable<BetOptionOdds> BetOptions { get; set; }
     }
 
-    public class BetTypeOdds : Entity<byte, string>, IBetTypeOdds
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class BetTypeOdds : IBetTypeOdds
     {
+        public byte Id { get; set; }
+
+        public string Name { get; set; }
+
         public Bookmaker Bookmaker { get; set; }
 
         public IEnumerable<BetOptionOdds> BetOptions { get; set; }

@@ -19,6 +19,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Models.Odds;
+    using LiveScore.Soccer.Services;
     using MethodTimer;
     using OddItems;
     using Prism.Events;
@@ -140,8 +142,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.Value.ToString(), matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
+
+            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
+            
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
                 var updatedOddsMovements = matchOddsMovement.OddsMovements
@@ -159,7 +163,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         }
 
         [Time]
-        internal void HandleOddsMovementMessage(IOddsMovementMessage oddsMovementMessage)
+        internal void HandleOddsMovementMessage(OddsMovementMessage oddsMovementMessage)
         {
             if (!oddsMovementMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase))
             {
