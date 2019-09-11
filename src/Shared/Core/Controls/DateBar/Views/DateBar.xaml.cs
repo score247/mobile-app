@@ -78,9 +78,10 @@
 
         private void AddLiveBox()
         {
-            var liveBox = new StackLayout();
-            var liveIcon = new Label { Style = (Style)Resources["LiveIcon"] };
-            liveBox.Children.Add(liveIcon);
+            var liveIcon = new Label
+            {
+                Style = (Style)Resources["LiveIcon"]
+            };
 
             MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
             {
@@ -90,11 +91,11 @@
                 }
                 else
                 {
-                    SetTextColor(liveIcon);
+                    liveIcon.TextColor = (Color)Resources["DateBarLiveColor"];
                 }
             });
 
-            DateBarLayout.Children.Add(liveBox);
+            DateBarLayout.Children.Add(liveIcon);
         }
 
         private void AddDateBoxes()
@@ -112,13 +113,12 @@
 
         private void AddCalendarBox()
         {
-            var calendarBox = new StackLayout();
-            calendarBox.Children.Add(new Label
+            var labelIcon = new Label
             {
                 Style = (Style)Resources["CalendarIcon"]
-            });
+            };
 
-            DateBarLayout.Children.Add(calendarBox);
+            DateBarLayout.Children.Add(labelIcon);
         }
 
         private StackLayout BuildDateBarItem(DateTime date, int index)

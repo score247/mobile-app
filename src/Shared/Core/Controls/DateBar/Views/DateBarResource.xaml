@@ -5,6 +5,7 @@
 
     <Color x:Key="DateBarSelectedTextColor">#FF2F00</Color>
     <Color x:Key="DateBarTextColor">#FFF</Color>
+    <Color x:Key="DateBarLiveColor">#30C2FF</Color>
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
