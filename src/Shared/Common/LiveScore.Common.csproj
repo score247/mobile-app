@@ -68,7 +68,6 @@
     <Folder Include="Controls\" />
     <Folder Include="Converters\" />
     <Folder Include="Helpers\">
-      <DependentUpon>Helpers</DependentUpon>
     </Folder>
   </ItemGroup>
   <ItemGroup>
