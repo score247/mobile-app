@@ -5,6 +5,7 @@
     using System;
     using System.Windows.Input;
     using EventArgs;
+    using MethodTimer;
 
     public partial class DateBar : ContentView
     {
@@ -17,6 +18,7 @@
 
         public DateBarViewModel ViewModel { get; set; }
 
+        [Time]
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
@@ -80,9 +82,19 @@
         private void AddLiveBox()
         {
             var liveBox = new StackLayout { Style = (Style)Resources["DateBarBox"] };
-            liveBox.Children.Add(new Label
+            var liveIcon = new Label { Style = (Style)Resources["HomeIcon"] };
+            liveBox.Children.Add(liveIcon);
+
+            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
             {
-                Style = (Style)Resources["HomeIcon"]
+                if (selectedIndex == 0)
+                {
+                    SetSelectedTextColor(liveIcon);
+                }
+                else
+                {
+                    SetTextColor(liveIcon);
+                }
             });
 
             DateBarLayout.Children.Add(liveBox);
@@ -115,49 +127,73 @@
         private StackLayout BuildDateBarItem(DateTime date, int index)
         {
             var dateBarItemLayout = new StackLayout { Style = (Style)Resources["DateBarBox"] };
-            var currentDayNumber = new Label
+            var dayNumberLbl = new Label
             {
                 Text = date.Day.ToString(),
                 Style = (Style)Resources["DateBarDayNumberLabel"],
             };
 
-            var currentDayName = new Label
+            var dayNameLbl = new Label
             {
                 Text = date.Date.DayOfWeek.ToString().Substring(0, 3).ToUpperInvariant(),
                 Style = (Style)Resources["DateBarDayNameLabel"]
             };
 
-            dateBarItemLayout.Children.Add(currentDayNumber);
-            dateBarItemLayout.Children.Add(currentDayName);
-
-            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
+            if (index == SelectedIndex)
             {
-                if (index == SelectedIndex)
-                {
-                    currentDayNumber.TextColor = (Color)Resources["DateBarSelectedTextColor"];
-                    currentDayName.TextColor = (Color)Resources["DateBarSelectedTextColor"];
-                }
-                else
-                {
-                    currentDayNumber.TextColor = (Color)Resources["DateBarTextColor"];
-                    currentDayName.TextColor = (Color)Resources["DateBarTextColor"];
-                }
-            });
+                SetSelectedTextColor(dayNumberLbl);
+                SetSelectedTextColor(dayNameLbl);
+            }
+
+            dateBarItemLayout.Children.Add(dayNumberLbl);
+            dateBarItemLayout.Children.Add(dayNameLbl);
+
+            SubsribeSelectedIndexChanged(index, dayNumberLbl, dayNameLbl);
 
             dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
             {
-                Command = new Command(() =>
-                {
-                    var args = new DateBarItemTappedEventArgs(index, date);
-                    ItemTappedCommand?.Execute(args);
-
-                    currentDayNumber.TextColor = (Color)Resources["DateBarSelectedTextColor"];
-                    currentDayName.TextColor = (Color)Resources["DateBarSelectedTextColor"];
-                    SelectedIndex = index;
-                })
+                Command = BuildTapDateBarItemCommand(date, index, dayNumberLbl, dayNameLbl)
             });
 
             return dateBarItemLayout;
+        }
+
+        private void SubsribeSelectedIndexChanged(int index, Label dayNumberLbl, Label dayNameLbl)
+        {
+            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
+            {
+                if (index == selectedIndex)
+                {
+                    SetSelectedTextColor(dayNumberLbl);
+                    SetSelectedTextColor(dayNameLbl);
+                }
+                else
+                {
+                    SetTextColor(dayNumberLbl);
+                    SetTextColor(dayNameLbl);
+                }
+            });
+        }
+
+        private Command BuildTapDateBarItemCommand(DateTime date, int index, Label dayNumberLbl, Label dayNameLbl)
+        {
+            return new Command(() =>
+            {
+                var args = new DateBarItemTappedEventArgs(index, date);
+                ItemTappedCommand?.Execute(args);
+
+                SelectedIndex = index;
+            });
+        }
+
+        private void SetTextColor(Label item)
+        {
+            item.TextColor = (Color)Resources["DateBarTextColor"];
+        }
+
+        private void SetSelectedTextColor(Label item)
+        {
+            item.TextColor = (Color)Resources["DateBarSelectedTextColor"];
         }
     }
 }
