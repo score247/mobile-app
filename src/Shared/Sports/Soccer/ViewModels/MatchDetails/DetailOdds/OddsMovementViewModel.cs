@@ -17,7 +17,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
-    using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.Services;
@@ -27,11 +26,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class OddsMovementViewModel : ViewModelBase, IDisposable
+    public class OddsMovementViewModel : ViewModelBase
     {
         private string matchId;
         private string oddsFormat;
-        private bool disposedValue;
 
         private MatchStatus eventStatus;
         private Bookmaker bookmaker;
@@ -142,8 +140,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-
-
             var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
             
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
@@ -190,21 +186,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
                 OddsMovementItems.Insert(0, newOddsMovementView);
             }
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
-                disposedValue = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

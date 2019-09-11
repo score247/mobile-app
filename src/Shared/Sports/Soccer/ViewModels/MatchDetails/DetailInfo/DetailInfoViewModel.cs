@@ -22,13 +22,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    public class DetailInfoViewModel : TabItemViewModel, IDisposable
+    public class DetailInfoViewModel : TabItemViewModel
     {
         private const string SpectatorNumberFormat = "0,0";
         private readonly IMatchService matchService;
         private readonly IMatchInfoService matchInfoService;
-        private readonly IEventAggregator eventAggregator;
-        private bool isDisposed = true;
+        private readonly IEventAggregator eventAggregator;        
         private readonly string matchId;
 
         public DetailInfoViewModel(
@@ -156,22 +155,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             {
                 DisplayReferee = matchInfo.Referee;
             }
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!isDisposed)
-            {
-                // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
-                isDisposed = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        }       
 
         private static IEnumerable<TimelineEvent> FilterPenaltyEvents(MatchInfo matchInfo)
         {

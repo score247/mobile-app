@@ -26,14 +26,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using Prism.Navigation;
     using Xamarin.Forms;
 
-    internal class DetailOddsViewModel : TabItemViewModel, IDisposable
+    internal class DetailOddsViewModel : TabItemViewModel
     {
         private readonly string matchId;
         private readonly string oddsFormat;
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
         private readonly IEventAggregator eventAggregator;
-        private bool disposedValue;
 
         public DetailOddsViewModel(
             string matchId,
@@ -236,21 +235,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                // Not use dispose method because of keeping long using object, handling object is implemented in Clean()
-                disposedValue = true;
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
+        }       
     }
 }
