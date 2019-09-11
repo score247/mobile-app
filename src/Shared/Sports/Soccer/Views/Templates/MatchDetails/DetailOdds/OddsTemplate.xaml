@@ -76,10 +76,9 @@
             <StackLayout
                 Grid.Row="0"
                 Grid.Column="1"
-                Orientation="Horizontal"
                 Style="{StaticResource MatchDetailOddsDropdownContainer}">
                 <Label Style="{StaticResource MatchDetailOddsDropdownText}" Text="{languageResources:Translate OddsTypeDecimal}" />
-                <ffImageLoading:CachedImage DownsampleToViewSize="True" Style="{StaticResource DropdownIcon}" />
+                <Label Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
         <BoxView Style="{StaticResource SubTabHorizontalLine}" />

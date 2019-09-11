@@ -416,21 +416,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down.png">
-      <Link>Resources\images\common\arrow_down.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down%402x.png">
-      <Link>Resources\images\common\arrow_down%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\arrow_down%403x.png">
-      <Link>Resources\images\common\arrow_down%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\assist_goal.png">
       <Link>Resources\images\common\assist_goal.png</Link>
     </BundleResource>
@@ -461,21 +446,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail.png">
-      <Link>Resources\images\common\bookmarker_detail.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail%402x.png">
-      <Link>Resources\images\common\bookmarker_detail%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\bookmarker_detail%403x.png">
-      <Link>Resources\images\common\bookmarker_detail%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\card_yellow.png">
       <Link>Resources\images\common\card_yellow.png</Link>
     </BundleResource>
@@ -493,36 +463,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\edit%403x.png">
       <Link>Resources\images\common\edit%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite.png">
-      <Link>Resources\images\common\favorite.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite%402x.png">
-      <Link>Resources\images\common\favorite%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite%403x.png">
-      <Link>Resources\images\common\favorite%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active.png">
-      <Link>Resources\images\common\favorite_active.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active%402x.png">
-      <Link>Resources\images\common\favorite_active%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_active%403x.png">
-      <Link>Resources\images\common\favorite_active%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
@@ -696,21 +636,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail.png">
-      <Link>Resources\images\common\league_detail.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail%402x.png">
-      <Link>Resources\images\common\league_detail%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\league_detail%403x.png">
-      <Link>Resources\images\common\league_detail%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\line_ups.png">
       <Link>Resources\images\common\line_ups.png</Link>
     </BundleResource>
@@ -743,36 +668,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%403x.png">
       <Link>Resources\images\common\logo_splash_screen%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time.png">
-      <Link>Resources\images\common\match_extra_time.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time%402x.png">
-      <Link>Resources\images\common\match_extra_time%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_extra_time%403x.png">
-      <Link>Resources\images\common\match_extra_time%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live.png">
-      <Link>Resources\images\common\match_live.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live%402x.png">
-      <Link>Resources\images\common\match_live%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\match_live%403x.png">
-      <Link>Resources\images\common\match_live%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
@@ -851,21 +746,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner.png">
-      <Link>Resources\images\common\penalty_winner.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner%402x.png">
-      <Link>Resources\images\common\penalty_winner%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_winner%403x.png">
-      <Link>Resources\images\common\penalty_winner%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\red_card.png">
       <Link>Resources\images\common\red_card.png</Link>
     </BundleResource>
@@ -913,21 +793,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\search%403x.png">
       <Link>Resources\images\common\search%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner.png">
-      <Link>Resources\images\common\second_leg_winner.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner%402x.png">
-      <Link>Resources\images\common\second_leg_winner%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\second_leg_winner%403x.png">
-      <Link>Resources\images\common\second_leg_winner%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>

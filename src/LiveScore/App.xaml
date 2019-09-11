@@ -487,13 +487,16 @@
                         Value="{StaticResource PrimaryAccentColor}" />
             </Style>
             <Style x:Key="DropdownIcon"
-                   TargetType="{x:Type ffImageLoading:CachedImage}">
-                <Setter Property="Source"
-                        Value="images/common/arrow_down.png" />
-                <Setter Property="WidthRequest"
-                        Value="5" />
-                <Setter Property="HeightRequest"
+                   BasedOn="{StaticResource Icons}"
+                   TargetType="Label">
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+                <Setter Property="FontSize"
                         Value="3" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource PrimaryAccentColor}" />
+                <Setter Property="Text"
+                        Value="&#xe902;" />
                 <Setter Property="Margin"
                         Value="4,0,8,0" />
             </Style>

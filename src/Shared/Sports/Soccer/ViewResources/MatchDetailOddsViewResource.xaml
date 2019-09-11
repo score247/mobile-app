@@ -40,6 +40,7 @@
     </Style>
 
     <Style x:Key="MatchDetailOddsDropdownContainer" TargetType="StackLayout">
+        <Setter Property="Orientation" Value="Horizontal" />
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
@@ -57,14 +58,13 @@
         <Setter Property="WidthRequest" Value="371" />
     </Style>
     <Style x:Key="BookmakerDetailIcon"
-           TargetType="{x:Type ffImageLoading:CachedImage}">
-        <Setter Property="Aspect"
-                Value="AspectFit" />
-        <Setter Property="WidthRequest"
-                Value="19" />
-        <Setter Property="HeightRequest"
-                Value="10" />
-        <Setter Property="Source"
-                Value="images/common/bookmarker_detail.png" />
+           BasedOn="{StaticResource Icons}"
+           TargetType="Label">
+        <Setter Property="FontSize"
+                        Value="10" />
+        <Setter Property="TextColor"
+                        Value="#30C2FF" />
+        <Setter Property="Text"
+                        Value="&#xe922;" />
     </Style>
 </ResourceDictionary>

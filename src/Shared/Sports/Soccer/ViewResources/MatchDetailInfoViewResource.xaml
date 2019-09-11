@@ -5,77 +5,77 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 
-    <!--  Tab content  -->
-    <Style x:Key="MatchDetailInfoRow" TargetType="Grid">
-        <Setter Property="Padding" Value="8,0" />
-    </Style>
+  <!--  Tab content  -->
+  <Style x:Key="MatchDetailInfoRow" TargetType="Grid">
+    <Setter Property="Padding" Value="8,0" />
+  </Style>
 
-    <Style x:Key="MatchInfoScore" TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="HeightRequest" Value="20" />
-        <Setter Property="WidthRequest" Value="48" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-    </Style>
+  <Style x:Key="MatchInfoScore" TargetType="Label">
+    <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Setter Property="HorizontalTextAlignment" Value="Center" />
+    <Setter Property="HeightRequest" Value="20" />
+    <Setter Property="WidthRequest" Value="48" />
+    <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    <Setter Property="FontAttributes" Value="Bold" />
+  </Style>
 
-    <Style x:Key="MatchInfoImage" TargetType="{x:Type ffImageLoading:CachedImage}">
-        <Setter Property="Aspect" Value="AspectFit" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-    </Style>
-    <Style x:Key="MatchInfoAssistedImage" BasedOn="{StaticResource MatchInfoImage}" TargetType="{x:Type ffImageLoading:CachedImage}">
-        <Setter Property="Margin" Value="0,2,0,0" />
-    </Style>
+  <Style x:Key="MatchInfoImage" TargetType="{x:Type ffImageLoading:CachedImage}">
+    <Setter Property="Aspect" Value="AspectFit" />
+    <Setter Property="HorizontalOptions" Value="Center" />
+  </Style>
+  <Style x:Key="MatchInfoAssistedImage" BasedOn="{StaticResource MatchInfoImage}" TargetType="{x:Type ffImageLoading:CachedImage}">
+    <Setter Property="Margin" Value="0,2,0,0" />
+  </Style>
 
-    <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Start" />
-        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
-    </Style>
+  <Style x:Key="MatchInfoHalfTimeText" TargetType="Label">
+    <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+    <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Setter Property="HorizontalTextAlignment" Value="Start" />
+    <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+  </Style>
 
-    <Style x:Key="MatchInfoMinutes" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
-    </Style>
+  <Style x:Key="MatchInfoMinutes" TargetType="Label">
+    <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+    <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
+  </Style>
 
-    <Style x:Key="MatchInfoMainPlayer" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-    </Style>
+  <Style x:Key="MatchInfoMainPlayer" TargetType="Label">
+    <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+    <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+  </Style>
 
-    <Style
-        x:Key="MatchInfoMainPlayerDarkColor"
-        BasedOn="{StaticResource MatchInfoMainPlayer}"
-        TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-    </Style>
+  <Style
+      x:Key="MatchInfoMainPlayerDarkColor"
+      BasedOn="{StaticResource MatchInfoMainPlayer}"
+      TargetType="Label">
+    <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+  </Style>
 
-    <Style x:Key="MatchInfoAssistedPlayer" TargetType="Label">
-        <Setter Property="FontSize" Value="11" />
-        <Setter Property="TextColor" Value="#666" />
-        <Setter Property="Margin" Value="0,2,0,0" />
-    </Style>
+  <Style x:Key="MatchInfoAssistedPlayer" TargetType="Label">
+    <Setter Property="FontSize" Value="11" />
+    <Setter Property="TextColor" Value="#666" />
+    <Setter Property="Margin" Value="0,2,0,0" />
+  </Style>
 
-    <Style x:Key="MatchInfoDetailRow" TargetType="FlexLayout">
-        <Setter Property="Padding" Value="16,0" />
-        <Setter Property="HeightRequest" Value="36" />
-        <Setter Property="AlignItems" Value="Center" />
-    </Style>
+  <Style x:Key="MatchInfoDetailRow" TargetType="FlexLayout">
+    <Setter Property="Padding" Value="16,0" />
+    <Setter Property="HeightRequest" Value="36" />
+    <Setter Property="AlignItems" Value="Center" />
+  </Style>
 
-    <Style x:Key="MatchInfoTitle" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="FlexLayout.Basis" Value="120" />
-        <Setter Property="FlexLayout.Shrink" Value="0" />
-    </Style>
-    <Style x:Key="MatchInfoValue" TargetType="Label">
-        <Setter Property="FlexLayout.Grow" Value="1" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-    </Style>
+  <Style x:Key="MatchInfoTitle" TargetType="Label">
+    <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
+    <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    <Setter Property="FlexLayout.Basis" Value="120" />
+    <Setter Property="FlexLayout.Shrink" Value="0" />
+  </Style>
+  <Style x:Key="MatchInfoValue" TargetType="Label">
+    <Setter Property="FlexLayout.Grow" Value="1" />
+    <Setter Property="FontAttributes" Value="Bold" />
+    <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+  </Style>
 </ResourceDictionary>
