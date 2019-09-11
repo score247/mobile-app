@@ -11,9 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sports", "Sports", "{9CEA91
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Platforms", "Platforms", "{F96F1E34-EC23-4EE5-8089-EC572468DB5A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Soccer", "src\Shared\Sports\Soccer\Soccer.csproj", "{1337FDBC-9BD3-4862-8F53-6001EEB0EAF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Soccer", "src\Shared\Sports\Soccer\Soccer.csproj", "{1337FDBC-9BD3-4862-8F53-6001EEB0EAF3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Core", "src\Shared\Core\LiveScore.Core.csproj", "{68150DDE-7169-4682-BDC6-91927456D04F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LiveScore.Core", "src\Shared\Core\LiveScore.Core.csproj", "{68150DDE-7169-4682-BDC6-91927456D04F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LiveScore.Common", "src\Shared\Common\LiveScore.Common.csproj", "{7E317128-A40E-459E-BF15-F586A0C3BB30}"
 EndProject

@@ -297,6 +297,18 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag%403x.png">
       <Link>Resources\images\flag_league\default_flag%403x.png</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Medium.ttf">
+      <Link>Resources\fonts\Roboto-Medium.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Light.ttf">
+      <Link>Resources\fonts\Roboto-Light.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Regular.ttf">
+      <Link>Resources\fonts\Roboto-Regular.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Thin.ttf">
+      <Link>Resources\fonts\Roboto-Thin.ttf</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

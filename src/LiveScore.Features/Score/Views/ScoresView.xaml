@@ -35,12 +35,11 @@
                             SelectedIndex="{Binding SelectedScoreItemIndex}"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             IsViewReusingEnabled="False"
-                            IsClippedToBounds="True"
                             IsCyclical="False">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
                                                             AnimationLength="250"
-                                                            NoItemMaxPanDistance="500" />
+                                                            NoItemMaxPanDistance="1000" />
                 <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
                                                             AnimationLength="250" />
             </x:Arguments>
@@ -48,9 +47,11 @@
                 <DataTemplate>
                     <StackLayout>
                         <!--TODO: Temporarily add live page here-->
-                        <Label IsVisible="{Binding IsLive}" Style="{StaticResource ComingSoon}"
-                                   Text="Live is coming soon"></Label>
-                        <StackLayout IsVisible="{Binding IsNotLive}">
+                        <Label IsVisible="{Binding IsLive}"
+                               Text="Live is comming soon"
+                               Style="{StaticResource ComingSoonLabel}" />
+                        <StackLayout IsVisible="{Binding IsNotLive}"
+                                     VerticalOptions="CenterAndExpand">
                             <ActivityIndicator IsEnabled="{Binding IsLoading}"
                                                IsRunning="{Binding IsLoading}"
                                                IsVisible="{Binding IsLoading}"
