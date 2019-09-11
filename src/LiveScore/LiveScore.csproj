@@ -38,9 +38,6 @@
     <Compile Update="ViewResources\MainViewResource.xaml.cs">
       <DependentUpon>MainViewResource.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\TabMoreView.xaml.cs">
-      <DependentUpon>TabMoreView.xaml</DependentUpon>
-    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -82,9 +79,6 @@
       <Generator>MSBuild:Compile</Generator>
     </None>
     <None Update="Views\MenuTabbedView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\TabMoreView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

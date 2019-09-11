@@ -147,8 +147,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
-            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
-            containerRegistry.RegisterForNavigation<TabMoreView, TabMoreViewModel>();
+            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();            
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
         }
 

@@ -8,6 +8,8 @@
     xmlns:favorites="clr-namespace:LiveScore.Features.Favorites.Views;assembly=LiveScore.Features"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:league="clr-namespace:LiveScore.Features.League.Views;assembly=LiveScore.Features"
+    xmlns:news="clr-namespace:LiveScore.Features.News.Views;assembly=LiveScore.Features"
+    xmlns:tv="clr-namespace:LiveScore.Features.TVSchedule.Views;assembly=LiveScore.Features"
     xmlns:localViews="clr-namespace:LiveScore.Views"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore.Features"
@@ -29,20 +31,6 @@
             <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Scores}" CurrentSport="{Binding CurrentSportName}" />
           </NavigationPage.TitleView>
         </score:ScoresView>
-      </x:Arguments>
-    </NavigationPage>
-
-    <NavigationPage
-        x:Name="LiveBar"
-        Title="{langs:Translate Live}"
-        AutomationId="LiveBar"
-        Icon="images/common/live.png">
-      <x:Arguments>
-        <score:LiveView Title="{langs:Translate Live}">
-          <NavigationPage.TitleView>
-            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Live}" CurrentSport="{Binding CurrentSportName}" />
-          </NavigationPage.TitleView>
-        </score:LiveView>
       </x:Arguments>
     </NavigationPage>
 
@@ -75,13 +63,32 @@
     </NavigationPage>
 
     <NavigationPage
-        x:Name="MoreBar"
-        Title="More"
-        AutomationId="MoreBar"
-        Icon="images/common/more.png">
+        x:Name="TVBar"
+        Title="TV"
+        AutomationId="TVBar"
+        Icon="images/common/tv.png">
       <x:Arguments>
-        <localViews:TabMoreView Title="More" />
+        <tv:EmptyTVScheduleView  Title="{langs:Translate TV}">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate TV}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </tv:EmptyTVScheduleView>
       </x:Arguments>
     </NavigationPage>
+
+    <NavigationPage
+        x:Name="NewsBar"
+        Title="News"
+        AutomationId="NewsBar"
+        Icon="images/common/news.png">
+      <x:Arguments>
+        <news:EmptyNewsView  Title="{langs:Translate News}">
+          <NavigationPage.TitleView>
+            <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" CurrentSport="{Binding CurrentSportName}" />
+          </NavigationPage.TitleView>
+        </news:EmptyNewsView>
+      </x:Arguments>
+    </NavigationPage>
+
   </TabbedPage.Children>
 </TabbedPage>
