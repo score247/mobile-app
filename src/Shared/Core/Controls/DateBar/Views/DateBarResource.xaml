@@ -3,7 +3,8 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="DateBarSelectedColor">#F24822</Color>
+    <Color x:Key="DateBarSelectedTextColor">#F24822</Color>
+    <Color x:Key="DateBarTextColor">#999</Color>
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
@@ -79,7 +80,7 @@
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
-                Value="{StaticResource FourthTextColor}" />
+                Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontSize"
                 Value="18" />
     </Style>
@@ -89,7 +90,7 @@
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
-                Value="{StaticResource FourthTextColor}" />
+                Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontAttributes"
                 Value="Bold" />
         <Setter Property="FontSize"

@@ -34,11 +34,12 @@ namespace LiveScore.Features.Score.ViewModels
             DateTime selectedDate,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            bool isLive = false)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             SelectedDate = selectedDate;
-
+            IsLive = isLive;
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
@@ -49,6 +50,10 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         public DateTime SelectedDate { get; internal set; }
+
+        public bool IsLive { get; }
+
+        public bool IsNotLive => !IsLive;
 
         public bool IsRefreshing { get; set; }
 
