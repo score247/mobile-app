@@ -3,6 +3,7 @@
     using System;
     using System.Windows.Input;
     using EventArgs;
+    using LiveScore.Common.LangResources;
     using MethodTimer;
     using Xamarin.Forms;
 
@@ -124,15 +125,16 @@
         private StackLayout BuildDateBarItem(DateTime date, int index)
         {
             var dateBarItemLayout = new StackLayout();
+
             var dayNumberLbl = new Label
             {
-                Text = date.Day.ToString(),
+                Text = (date == DateTime.Today ? AppResources.Today : date.Date.ToString("ddd")).ToUpperInvariant(),
                 Style = (Style)Resources["DateBarDayNumberLabel"],
             };
 
             var dayNameLbl = new Label
             {
-                Text = date.Date.DayOfWeek.ToString().Substring(0, 3).ToUpperInvariant(),
+                Text = date.ToString("dd MMM").ToUpperInvariant(),
                 Style = (Style)Resources["DateBarDayNameLabel"]
             };
 

@@ -400,5 +400,11 @@ namespace LiveScore.Common.LangResources {
                 return ResourceManager.GetString("Under", resourceCulture);
             }
         }
+        
+        public static string Today {
+            get {
+                return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
     }
 }
