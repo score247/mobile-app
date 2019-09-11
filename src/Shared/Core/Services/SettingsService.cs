@@ -18,6 +18,10 @@
         string ApiEndpoint { get; set; }
 
         string HubEndpoint { get; set; }
+
+        void Set(string key, string value);
+
+        string Get(string key);
     }
 
     public class Settings : ISettings
@@ -51,5 +55,9 @@
             get => Preferences.Get(nameof(HubEndpoint), string.Empty);
             set => Preferences.Set(nameof(HubEndpoint), value);
         }
+
+        public string Get(string key) => Preferences.Get(key, string.Empty);
+
+        public void Set(string key, string value) => Preferences.Set(key, value);
     }
 }

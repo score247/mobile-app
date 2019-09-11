@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using Akavache;
 using Fanex.Caching;
 using JsonNet.ContractResolvers;
 using LiveScore.Common.Configuration;
@@ -69,8 +68,8 @@ namespace LiveScore
         [Time]
         protected override async void OnInitialized()
         {
-            Registrations.Start("Score247.App");
-            Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
+            //Registrations.Start("Score247.App");
+            //Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
@@ -166,10 +165,7 @@ namespace LiveScore
 
         protected override void OnSleep()
         {
-            Debug.WriteLine("OnSleep");
-
-            var localStorage = Container.Resolve<ICachingService>();
-            localStorage.FlushAll();
+            Debug.WriteLine("OnSleep");     
 
             base.OnSleep();
         }

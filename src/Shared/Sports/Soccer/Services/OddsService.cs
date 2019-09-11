@@ -24,10 +24,10 @@
         private const string OddsMovementKey = "OddsMovement";
 
         private readonly IApiService apiService;
-        private readonly ICacheService cacheService;
+        private readonly ICachingService cacheService;
 
         public OddsService(
-            ICacheService cacheService,
+            ICachingService cacheService,
             ILoggingService loggingService,
             IApiService apiService
             ) : base(loggingService)
@@ -36,29 +36,17 @@
             this.apiService = apiService;
         }
 
-        public async Task<IMatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNewData = false)
+        public async Task<IMatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNew = false)
         {
             try
             {
                 var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
-
-                if (forceFetchNewData)
-                {
-                    await cacheService.RemoveAsync(oddDataCacheKey);                   
-                }
-
-                var matchOdds = await GetOddsFromApi(lang, matchId, betTypeId, formatType);
-
-                if (matchOdds == null)
-                {
-                    matchOdds = await cacheService.GetAsync<MatchOdds>(oddDataCacheKey);
-                }
-                else
-                {
-                    await cacheService.SetAsync(oddDataCacheKey, matchOdds, new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)));
-                }              
-
-                return matchOdds;
+               
+                return await cacheService.GetOrSetAsync(
+                    oddDataCacheKey,
+                    () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
+                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)),
+                    forceFetchNew);
             }
             catch (Exception ex)
             {
@@ -74,29 +62,17 @@
                () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
            );
 
-        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false)
+        public async Task<IMatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNew = false)
         {
             try
             {
-                var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";                
 
-                if (forceFetchNewData)
-                {
-                    await cacheService.RemoveAsync(oddMovementCacheKey);
-                }
-
-                var matchOddsMovement = await GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId);
-
-                if (matchOddsMovement == null)
-                {
-                    matchOddsMovement = await cacheService.GetAsync<MatchOddsMovement>(oddMovementCacheKey);                    
-                }
-                else
-                {
-                    await cacheService.SetAsync(oddMovementCacheKey, matchOddsMovement, new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)));
-                }
-
-                return matchOddsMovement;                
+                return await cacheService.GetOrSetAsync(
+                   oddMovementCacheKey,
+                   () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
+                   new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)),
+                   forceFetchNew);
             }
             catch (Exception ex)
             {

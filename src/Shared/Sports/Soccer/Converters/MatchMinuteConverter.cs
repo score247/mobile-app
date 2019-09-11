@@ -3,11 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Services;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
+    using LiveScore.Core.Services;
     using Models.Matches;
 
     // TODO: Unit test will be written in Performance Enhancement branch
@@ -29,12 +28,12 @@
             { MatchStatus.SecondHalfExtra, 120 }
         };
 
-        private readonly ICachingService cachingService;
+        private readonly ISettings settings;
         private Match soccerMatch;
 
-        public MatchMinuteConverter(ICachingService cachingService)
+        public MatchMinuteConverter(ISettings settings)
         {
-            this.cachingService = cachingService;
+            this.settings = settings;
         }
 
         public string BuildMatchMinute(IMatch match)
@@ -104,7 +103,9 @@
             var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
 
             // TODO: Should move InjuryTimeAnnouced to backend for storing?
-            var annoucedInjuryTime = Task.Run(() => cachingService.GetOrCreateLocalMachine(cacheKey, 0)).Result;
+            var cachedInjuryTime = settings.Get(cacheKey);
+
+            var annoucedInjuryTime = string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : Int32.Parse(cachedInjuryTime);
 
             return annoucedInjuryTime;
         }
@@ -113,7 +114,7 @@
         {
             var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
 
-            Task.Run(() => cachingService.InsertLocalMachine(cacheKey, injuryTime)).Wait();
+            settings.Set(cacheKey, injuryTime.ToString());
         }
     }
 }

@@ -26,11 +26,11 @@
     public class MatchService : BaseService, IMatchService
     {
         private readonly IApiService apiService;
-        private readonly ICacheService cacheService;
+        private readonly ICachingService cacheService;
 
         public MatchService(
             IApiService apiService,
-            ICacheService cacheService,
+            ICachingService cacheService,
             ILoggingService loggingService) : base(loggingService)
         {
             this.apiService = apiService;
@@ -68,11 +68,6 @@
             {
                 var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
 
-                if(forceFetchNewData)
-                {
-                    await cacheService.RemoveAsync(cacheKey);
-                }
-
                 var cacheDuration = dateTime.Date == DateTime.Today
                     || dateTime.Date == DateTimeExtension.Yesterday().Date
                     ? CacheDuration.Short
@@ -84,7 +79,8 @@
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
                             language.DisplayName),
-                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)cacheDuration)));
+                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)cacheDuration)),
+                    forceFetchNewData);
             }
             catch (Exception ex)
             {
@@ -101,15 +97,11 @@
             {
                 var cacheKey = $"Match:{matchId}:{language}";
 
-                if (forceFetchNewData)
-                {
-                    await cacheService.RemoveAsync(cacheKey);
-                }
-
                 return await cacheService.GetOrSetAsync(
                     cacheKey,
                     () => GetMatchFromApi(matchId, language.DisplayName),
-                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Short)));
+                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Short)),
+                    forceFetchNewData);
             }
             catch (Exception ex)
             {
@@ -120,11 +112,11 @@
         }
 
         [Time]
-        private IEnumerable<Match> GetMatchesFromApi(string fromDateText, string toDateText, string language)
-            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language)).GetAwaiter().GetResult();
+        private Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language));
 
         [Time]
-        private MatchInfo GetMatchFromApi(string matchId, string language)
-           => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language)).GetAwaiter().GetResult();
+        private Task<MatchInfo> GetMatchFromApi(string matchId, string language)
+           => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
     }
 }

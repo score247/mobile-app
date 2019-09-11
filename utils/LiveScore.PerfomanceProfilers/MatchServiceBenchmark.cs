@@ -16,14 +16,13 @@
     public class MatchServiceBenchmark
     {
         public const string V1Api = nameof(V1Api);
-        public const string V2Api = nameof(V2Api);
-        private readonly CacheService cachingService;
+        public const string V2Api = nameof(V2Api);        
+        private readonly CachingService cachingService;
         private readonly MockLoggingService loggingService;
 
         public MatchServiceBenchmark()
-        {
-            Akavache.Registrations.Start(nameof(MatchServiceBenchmark));
-            cachingService = new CacheService();
+        {           
+            cachingService = new CachingService(new CacheService());
             loggingService = new MockLoggingService();
         }
 

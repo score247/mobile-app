@@ -69,7 +69,8 @@
 
         private async Task CleanCacheAndRefresh()
         {
-            await cachingService.InvalidateAll();
+            //TODO implement clean cache with fanex caching
+            //await cachingService.InvalidateAll();
             await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
     }
