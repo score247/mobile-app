@@ -9,8 +9,6 @@
 
     public partial class DateBar : ContentView
     {
-        private const string SelectedIndexChangedEvent = "SelectedIndexChanged";
-
         public DateBar()
         {
             InitializeComponent();
@@ -71,9 +69,48 @@
 
         private static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            if (newValue != null)
+            var control = (DateBar)bindable;
+            var selectedIndex = (int)newValue;
+            var oldIndex = (int)oldValue;
+
+            if (control != null)
             {
-                MessagingCenter.Send(nameof(DateBar), SelectedIndexChangedEvent, (int)newValue);
+                var dateBarLayout = control.Content as FlexLayout;
+
+                if (dateBarLayout.Children?.Count == 0)
+                {
+                    return;
+                }
+
+                if (oldIndex == 0)
+                {
+                    var liveItem = dateBarLayout.Children[oldIndex] as Label;
+
+                    liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
+                }
+                else
+                {
+                    var oldItemLayout = dateBarLayout.Children[oldIndex] as StackLayout;
+                    var dayNameLabel = oldItemLayout.Children[0] as Label;
+                    var dayLabel = oldItemLayout.Children[1] as Label;
+                    control.SetTextColor(dayNameLabel);
+                    control.SetTextColor(dayLabel);
+                }
+
+                if (selectedIndex == 0)
+                {
+                    var liveItem = dateBarLayout.Children[selectedIndex] as Label;
+
+                    control.SetSelectedTextColor(liveItem);
+                }
+                else
+                {
+                    var newItemLayout = dateBarLayout.Children[selectedIndex] as StackLayout;
+                    var dayNameLabel = newItemLayout.Children[0] as Label;
+                    var dayLabel = newItemLayout.Children[1] as Label;
+                    control.SetSelectedTextColor(dayNameLabel);
+                    control.SetSelectedTextColor(dayLabel);
+                }
             }
         }
 
@@ -83,18 +120,6 @@
             {
                 Style = (Style)Resources["LiveIcon"]
             };
-
-            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
-            {
-                if (selectedIndex == 0)
-                {
-                    SetSelectedTextColor(liveIcon);
-                }
-                else
-                {
-                    liveIcon.TextColor = (Color)Resources["DateBarLiveColor"];
-                }
-            });
 
             DateBarLayout.Children.Add(liveIcon);
         }
@@ -147,31 +172,12 @@
             dateBarItemLayout.Children.Add(dayNumberLbl);
             dateBarItemLayout.Children.Add(dayNameLbl);
 
-            SubsribeSelectedIndexChanged(index, dayNumberLbl, dayNameLbl);
-
             dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
             {
                 Command = BuildTapDateBarItemCommand(date, index, dayNumberLbl, dayNameLbl)
             });
 
             return dateBarItemLayout;
-        }
-
-        private void SubsribeSelectedIndexChanged(int index, Label dayNumberLbl, Label dayNameLbl)
-        {
-            MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
-            {
-                if (index == selectedIndex)
-                {
-                    SetSelectedTextColor(dayNumberLbl);
-                    SetSelectedTextColor(dayNameLbl);
-                }
-                else
-                {
-                    SetTextColor(dayNumberLbl);
-                    SetTextColor(dayNameLbl);
-                }
-            });
         }
 
         private Command BuildTapDateBarItemCommand(DateTime date, int index, Label dayNumberLbl, Label dayNameLbl)

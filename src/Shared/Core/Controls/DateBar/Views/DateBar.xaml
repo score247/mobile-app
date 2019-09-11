@@ -11,10 +11,8 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout>
-            <FlexLayout x:Name="DateBarLayout"
-                        Style="{StaticResource DateBarLayout}">
-            </FlexLayout>
-        </StackLayout>
+        <FlexLayout x:Name="DateBarLayout"
+                    Style="{StaticResource DateBarLayout}">
+        </FlexLayout>
     </ContentView.Content>
 </ContentView>
