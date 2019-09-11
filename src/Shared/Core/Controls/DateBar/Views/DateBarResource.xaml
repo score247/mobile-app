@@ -3,7 +3,7 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="DateBarSelectedTextColor">#F24822</Color>
+    <Color x:Key="DateBarSelectedTextColor">#FF2F00</Color>
     <Color x:Key="DateBarTextColor">#FFF</Color>
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
