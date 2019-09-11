@@ -35,6 +35,7 @@
                             SelectedIndex="{Binding SelectedScoreItemIndex}"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             IsViewReusingEnabled="False"
+                            IsClippedToBounds="True"
                             IsCyclical="False">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
@@ -48,9 +49,10 @@
                     <StackLayout>
                         <!--TODO: Temporarily add live page here-->
                         <StackLayout IsVisible="{Binding IsLive}"
-                                     VerticalOptions="Center"
-                                     HorizontalOptions="Center">
-                            <Label Text="Live is coming soon"></Label>
+                                     VerticalOptions="CenterAndExpand"
+                                     HorizontalOptions="CenterAndExpand">
+                            <Label TextColor="White"
+                                   Text="Live is coming soon"></Label>
                         </StackLayout>
                         <StackLayout IsVisible="{Binding IsNotLive}">
                             <ActivityIndicator IsEnabled="{Binding IsLoading}"
