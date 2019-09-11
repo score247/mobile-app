@@ -497,6 +497,12 @@
                 <Setter Property="Margin"
                         Value="4,0,8,0" />
             </Style>
+
+            <Style x:Key="ComingSoon" TargetType="Label">
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+                <Setter Property="TextColor" Value="#fff" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

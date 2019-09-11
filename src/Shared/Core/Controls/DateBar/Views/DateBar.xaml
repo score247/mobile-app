@@ -11,8 +11,34 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <FlexLayout x:Name="DateBarLayout"
+        <StackLayout>
+            <FlexLayout x:Name="DateBarLayout"
                     Style="{StaticResource DateBarLayout}">
-        </FlexLayout>
+            </FlexLayout>
+            <FlexLayout Style="{StaticResource DateBarLayout}">
+                <Label Style="{StaticResource LiveIcon}" />
+                <StackLayout>
+                    <Label Style="{StaticResource DateBarDayNumberLabel}" Text="9" />
+                    <Label Style="{StaticResource DateBarDayNameLabel}" Text="MON" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource DateBarDayNumberLabel}" Text="9" />
+                    <Label Style="{StaticResource DateBarDayNameLabel}" Text="MON" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource DateBarDayNumberLabel}" Text="9" />
+                    <Label Style="{StaticResource DateBarDayNameLabel}" Text="MON" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource DateBarDayNumberLabel}" Text="9" />
+                    <Label Style="{StaticResource DateBarDayNameLabel}" Text="MON" />
+                </StackLayout>
+                <StackLayout>
+                    <Label Style="{StaticResource DateBarDayNumberLabel}" Text="9" />
+                    <Label Style="{StaticResource DateBarDayNameLabel}" Text="MON" />
+                </StackLayout>
+                <Label Style="{StaticResource CalendarIcon}" />
+            </FlexLayout>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

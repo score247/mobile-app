@@ -78,8 +78,8 @@
 
         private void AddLiveBox()
         {
-            var liveBox = new StackLayout { Style = (Style)Resources["DateBarBox"] };
-            var liveIcon = new Label { Style = (Style)Resources["HomeIcon"] };
+            var liveBox = new StackLayout();
+            var liveIcon = new Label { Style = (Style)Resources["LiveIcon"] };
             liveBox.Children.Add(liveIcon);
 
             MessagingCenter.Subscribe<string, int>(nameof(DateBar), SelectedIndexChangedEvent, (_, selectedIndex) =>
@@ -112,7 +112,7 @@
 
         private void AddCalendarBox()
         {
-            var calendarBox = new StackLayout { Style = (Style)Resources["DateBarBox"] };
+            var calendarBox = new StackLayout();
             calendarBox.Children.Add(new Label
             {
                 Style = (Style)Resources["CalendarIcon"]
@@ -123,7 +123,7 @@
 
         private StackLayout BuildDateBarItem(DateTime date, int index)
         {
-            var dateBarItemLayout = new StackLayout { Style = (Style)Resources["DateBarBox"] };
+            var dateBarItemLayout = new StackLayout();
             var dayNumberLbl = new Label
             {
                 Text = date.Day.ToString(),

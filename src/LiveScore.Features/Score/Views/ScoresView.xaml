@@ -48,12 +48,8 @@
                 <DataTemplate>
                     <StackLayout>
                         <!--TODO: Temporarily add live page here-->
-                        <StackLayout IsVisible="{Binding IsLive}"
-                                     VerticalOptions="CenterAndExpand"
-                                     HorizontalOptions="CenterAndExpand">
-                            <Label TextColor="White"
+                        <Label IsVisible="{Binding IsLive}" Style="{StaticResource ComingSoon}"
                                    Text="Live is coming soon"></Label>
-                        </StackLayout>
                         <StackLayout IsVisible="{Binding IsNotLive}">
                             <ActivityIndicator IsEnabled="{Binding IsLoading}"
                                                IsRunning="{Binding IsLoading}"

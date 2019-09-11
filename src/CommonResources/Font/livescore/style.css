@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'livescore';
-  src:  url('fonts/livescore.eot?bn6dms');
-  src:  url('fonts/livescore.eot?bn6dms#iefix') format('embedded-opentype'),
-    url('fonts/livescore.ttf?bn6dms') format('truetype'),
-    url('fonts/livescore.woff?bn6dms') format('woff'),
-    url('fonts/livescore.svg?bn6dms#livescore') format('svg');
+  src:  url('fonts/livescore.eot?vnolio');
+  src:  url('fonts/livescore.eot?vnolio#iefix') format('embedded-opentype'),
+    url('fonts/livescore.ttf?vnolio') format('truetype'),
+    url('fonts/livescore.woff?vnolio') format('woff'),
+    url('fonts/livescore.svg?vnolio#livescore') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
