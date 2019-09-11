@@ -67,9 +67,7 @@ namespace LiveScore
 
         [Time]
         protected override async void OnInitialized()
-        {
-            //Registrations.Start("Score247.App");
-            //Splat.Locator.CurrentMutable.Register(() => JsonSerializerSettings, typeof(JsonSerializerSettings));
+        {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
