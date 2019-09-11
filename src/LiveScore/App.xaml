@@ -500,8 +500,10 @@
 
             <Style x:Key="ComingSoonLabel"
                    TargetType="Label">
-                <Setter Property="HorizontalTextAlignment"
-                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions"
+                        Value="CenterAndExpand" />
                 <Setter Property="FontSize"
                         Value="{StaticResource GeneralFontSize}" />
                 <Setter Property="TextColor"
