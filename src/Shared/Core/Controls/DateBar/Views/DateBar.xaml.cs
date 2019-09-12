@@ -9,6 +9,8 @@
 
     public partial class DateBar : ContentView
     {
+        private const int LiveIndex = 0;
+
         public DateBar()
         {
             InitializeComponent();
@@ -26,11 +28,13 @@
         {
             DateBarLayout.Children.Clear();
 
-            AddLiveBox();
+            CalendarIndex = NumberDisplayDays * 2 + 2;
 
-            AddDateBoxes();
+            AddLiveItem();
 
-            AddCalendarBox();
+            AddDateItems();
+
+            AddCalendarItem();
         }
 
         public static readonly BindableProperty NumberDisplayDaysProperty
@@ -67,6 +71,8 @@
             set => SetValue(ItemTappedCommandProperty, value);
         }
 
+        public int CalendarIndex { get; private set; }
+
         private static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (DateBar)bindable;
@@ -82,39 +88,13 @@
                     return;
                 }
 
-                if (oldIndex == 0)
-                {
-                    var liveItem = dateBarLayout.Children[oldIndex] as Label;
+                RemoveSelectedColor(control, oldIndex, dateBarLayout);
 
-                    liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
-                }
-                else
-                {
-                    var oldItemLayout = dateBarLayout.Children[oldIndex] as StackLayout;
-                    var dayNameLabel = oldItemLayout.Children[0] as Label;
-                    var dayLabel = oldItemLayout.Children[1] as Label;
-                    control.SetTextColor(dayNameLabel);
-                    control.SetTextColor(dayLabel);
-                }
-
-                if (selectedIndex == 0)
-                {
-                    var liveItem = dateBarLayout.Children[selectedIndex] as Label;
-
-                    control.SetSelectedTextColor(liveItem, true);
-                }
-                else
-                {
-                    var newItemLayout = dateBarLayout.Children[selectedIndex] as StackLayout;
-                    var dayNameLabel = newItemLayout.Children[0] as Label;
-                    var dayLabel = newItemLayout.Children[1] as Label;
-                    control.SetSelectedTextColor(dayNameLabel);
-                    control.SetSelectedTextColor(dayLabel);
-                }
+                AddSelectedColor(control, selectedIndex, dateBarLayout);
             }
         }
 
-        private void AddLiveBox()
+        private void AddLiveItem()
         {
             var liveIcon = new Label
             {
@@ -129,7 +109,22 @@
             DateBarLayout.Children.Add(liveIcon);
         }
 
-        private void AddDateBoxes()
+        private void AddCalendarItem()
+        {
+            var calendarIcon = new Label
+            {
+                Style = (Style)Resources["CalendarIcon"]
+            };
+
+            calendarIcon.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = BuildTapDateBarItemCommand(DateTime.Today, CalendarIndex)
+            });
+
+            DateBarLayout.Children.Add(calendarIcon);
+        }
+
+        private void AddDateItems()
         {
             var currentIndex = 1;
 
@@ -140,16 +135,6 @@
                 DateBarLayout.Children.Add(dateBarItem);
                 currentIndex++;
             }
-        }
-
-        private void AddCalendarBox()
-        {
-            var labelIcon = new Label
-            {
-                Style = (Style)Resources["CalendarIcon"]
-            };
-
-            DateBarLayout.Children.Add(labelIcon);
         }
 
         private StackLayout BuildDateBarItem(DateTime date, int index)
@@ -196,6 +181,54 @@
             });
         }
 
+        private static void AddSelectedColor(DateBar control, int selectedIndex, FlexLayout dateBarLayout)
+        {
+            if (selectedIndex == LiveIndex)
+            {
+                var liveItem = dateBarLayout.Children[selectedIndex] as Label;
+
+                control.SetSelectedTextColor(liveItem, true);
+            }
+            else if (selectedIndex == control.CalendarIndex)
+            {
+                var calendarItem = dateBarLayout.Children[selectedIndex] as Label;
+
+                control.SetSelectedTextColor(calendarItem, true);
+            }
+            else
+            {
+                var newItemLayout = dateBarLayout.Children[selectedIndex] as StackLayout;
+                var dayNameLabel = newItemLayout.Children[0] as Label;
+                var dayLabel = newItemLayout.Children[1] as Label;
+                control.SetSelectedTextColor(dayNameLabel);
+                control.SetSelectedTextColor(dayLabel);
+            }
+        }
+
+        private static void RemoveSelectedColor(DateBar control, int oldIndex, FlexLayout dateBarLayout)
+        {
+            if (oldIndex == LiveIndex)
+            {
+                var liveItem = dateBarLayout.Children[oldIndex] as Label;
+
+                liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
+            }
+            else if (oldIndex == control.CalendarIndex)
+            {
+                var calendarItem = dateBarLayout.Children[oldIndex] as Label;
+
+                control.SetTextColor(calendarItem, true);
+            }
+            else
+            {
+                var oldItemLayout = dateBarLayout.Children[oldIndex] as StackLayout;
+                var dayNameLabel = oldItemLayout.Children[0] as Label;
+                var dayLabel = oldItemLayout.Children[1] as Label;
+                control.SetTextColor(dayNameLabel);
+                control.SetTextColor(dayLabel);
+            }
+        }
+
         private void SetTextColor(Label item, bool isIcon = false)
         {
             item.TextColor = (Color)Resources["DateBarTextColor"];
@@ -215,5 +248,6 @@
                 item.FontFamily = Application.Current.Resources["RobotoBold"].ToString();
             }
         }
+
     }
 }

@@ -97,8 +97,8 @@ namespace LiveScore.Features.Score.ViewModels
                     new ScoreItemViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
             }
 
-            //itemViewModels.Add(
-            //    new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
+            itemViewModels.Add(
+                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
 
             ScoreItemSources = itemViewModels;
             SelectedScoreItemIndex = TodayIndex;

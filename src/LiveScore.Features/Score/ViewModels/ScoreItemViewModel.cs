@@ -55,11 +55,9 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsLive { get; }
 
-        public bool IsNotLive => !IsLive;
-
         public bool IsCalendar { get; }
 
-        public bool IsNotCalendar => !IsCalendar;
+        public bool IsNormalDate => !IsLive && !IsCalendar;
 
         public bool IsRefreshing { get; set; }
 

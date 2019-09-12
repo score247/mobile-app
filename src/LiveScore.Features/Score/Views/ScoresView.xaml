@@ -51,7 +51,10 @@
                             <Label IsVisible="{Binding IsLive}"
                                    Text="Live is comming soon"
                                    Style="{StaticResource ComingSoonLabel}" />
-                            <StackLayout IsVisible="{Binding IsNotLive}"
+                            <Label IsVisible="{Binding IsCalendar}"
+                                   Text="Calendar is comming soon"
+                                   Style="{StaticResource ComingSoonLabel}" />
+                            <StackLayout IsVisible="{Binding IsNormalDate}"
                                          VerticalOptions="CenterAndExpand">
                                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                                    IsVisible="{Binding IsBusy}"
