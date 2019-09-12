@@ -1,0 +1,2 @@
+"mpctools\win-x64\mpc.exe" -i "..\src\Shared\Core\LiveScore.Core.csproj" -o "..\src\Shared\Core\CoreModelResolver.cs" -r "CoreModelResolver"
+"mpctools\win-x64\mpc.exe" -i "..\src\Shared\Sports\Soccer\Soccer.csproj" -o "..\src\Shared\Sports\Soccer\SoccerModelResolver.cs" -r "SoccerModelResolver"
