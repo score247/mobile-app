@@ -49,7 +49,7 @@ namespace LiveScore.Features.Score.ViewModels
             SubscribeEvents();
         }
 
-        public DateTime SelectedDate { get; internal set; }
+        public DateTime SelectedDate { get; }
 
         public bool IsLive { get; }
 

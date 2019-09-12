@@ -4,6 +4,7 @@ namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
+    using System.Threading.Tasks;
     using Core;
     using LiveScore.Core.ViewModels;
     using PanCardView.EventArgs;
@@ -13,6 +14,7 @@ namespace LiveScore.Features.Score.ViewModels
 
     public class ScoresViewModel : ViewModelBase
     {
+        private const byte TodayIndex = 3;
         private bool isFirstLoad = true;
 
         public ScoresViewModel(INavigationService navigationService,
@@ -37,9 +39,18 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateCommand<DateBarItemTappedEventArgs> DateBarItemTapCommand { get; private set; }
 
-        public override void OnResume()
+        public override async void OnResume()
         {
-            SelectedScoreItem?.OnResume();
+            var todayItem = ScoreItemSources[TodayIndex];
+
+            if (todayItem.SelectedDate != DateTime.Today)
+            {
+                await NavigateToHome();
+            }
+            else
+            {
+                SelectedScoreItem?.OnResume();
+            }
         }
 
         public override void OnSleep()
@@ -88,7 +99,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             ScoreItemSources = itemViewModels;
-            SelectedScoreItemIndex = 3;
+            SelectedScoreItemIndex = TodayIndex;
         }
     }
 }
