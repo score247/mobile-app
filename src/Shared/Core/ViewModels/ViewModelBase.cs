@@ -10,7 +10,7 @@
     using PropertyChanged;
 
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
+    public class ViewModelBase : MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
         public ViewModelBase()
         {
@@ -46,8 +46,6 @@
 
         public byte CurrentSportId { get; }
 
-        public string Title { get; set; }
-
         public IDependencyResolver DependencyResolver { get; protected set; }
 
         public IEventAggregator EventAggregator { get; protected set; }
@@ -82,14 +80,14 @@
         {
         }
 
-        protected virtual Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
+        protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showBusy = true)
         {
-            IsLoading = showLoading;
+            IsBusy = showBusy;
 
-            return loadDataFunc();
+            await loadDataFunc();
+
+            IsBusy = false;
         }
-
-        public bool IsNotLoading => !IsLoading;
 
         protected async Task NavigateToHome()
             => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
