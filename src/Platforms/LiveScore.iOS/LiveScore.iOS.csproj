@@ -311,6 +311,12 @@
     <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Thin.ttf">
       <Link>Resources\fonts\Roboto-Thin.ttf</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Bold.ttf">
+      <Link>Resources\fonts\Roboto-Bold.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Black.ttf">
+      <Link>Resources\fonts\Roboto-Black.ttf</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

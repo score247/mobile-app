@@ -35,6 +35,13 @@
                 <On Platform="iOS"
                     Value="livescore" />
             </OnPlatform>
+            <OnPlatform x:Key="RobotoBold"
+                        x:TypeArguments="x:String">
+                <On Platform="Android"
+                    Value="fonts/Roboto-Bold.ttf" />
+                <On Platform="iOS"
+                    Value="livescore" />
+            </OnPlatform>
 
             <Color x:Key="PrimaryColor">#0B0D14</Color>
             <Color x:Key="SecondColor">#2D2F3F</Color>
@@ -163,7 +170,8 @@
             </Style>
             <!--  Layout  -->
             <Style TargetType="Label">
-                <Setter Property="FontFamily" Value="{StaticResource RobotoRegular}" />
+                <Setter Property="FontFamily"
+                        Value="{StaticResource RobotoRegular}" />
             </Style>
             <Style TargetType="StackLayout">
                 <Setter Property="Spacing"

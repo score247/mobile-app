@@ -101,7 +101,7 @@
                 {
                     var liveItem = dateBarLayout.Children[selectedIndex] as Label;
 
-                    control.SetSelectedTextColor(liveItem);
+                    control.SetSelectedTextColor(liveItem, true);
                 }
                 else
                 {
@@ -156,26 +156,26 @@
         {
             var dateBarItemLayout = new StackLayout();
 
-            var dayNumberLbl = new Label
+            var dayNameLabel = new Label
             {
                 Text = (date == DateTime.Today ? AppResources.Today : date.Date.ToString("ddd")).ToUpperInvariant(),
                 Style = (Style)Resources["DateBarDayNameLabel"],
             };
 
-            var dayNameLbl = new Label
+            var dayMonthLabel = new Label
             {
                 Text = date.ToString("dd MMM").ToUpperInvariant(),
-                Style = (Style)Resources["DateBarDayNumberLabel"]
+                Style = (Style)Resources["DateBarDayMonthLabel"]
             };
 
             if (index == SelectedIndex)
             {
-                SetSelectedTextColor(dayNumberLbl);
-                SetSelectedTextColor(dayNameLbl);
+                SetSelectedTextColor(dayNameLabel);
+                SetSelectedTextColor(dayMonthLabel);
             }
 
-            dateBarItemLayout.Children.Add(dayNumberLbl);
-            dateBarItemLayout.Children.Add(dayNameLbl);
+            dateBarItemLayout.Children.Add(dayNameLabel);
+            dateBarItemLayout.Children.Add(dayMonthLabel);
 
             dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
             {
@@ -196,14 +196,24 @@
             });
         }
 
-        private void SetTextColor(Label item)
+        private void SetTextColor(Label item, bool isIcon = false)
         {
             item.TextColor = (Color)Resources["DateBarTextColor"];
+
+            if (!isIcon)
+            {
+                item.FontFamily = Application.Current.Resources["RobotoMedium"].ToString();
+            }
         }
 
-        private void SetSelectedTextColor(Label item)
+        private void SetSelectedTextColor(Label item, bool isIcon = false)
         {
             item.TextColor = (Color)Resources["DateBarSelectedTextColor"];
+
+            if (!isIcon)
+            {
+                item.FontFamily = Application.Current.Resources["RobotoBold"].ToString();
+            }
         }
     }
 }
