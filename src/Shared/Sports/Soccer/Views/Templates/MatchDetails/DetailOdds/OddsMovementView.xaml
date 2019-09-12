@@ -12,11 +12,13 @@
     BackgroundColor="{StaticResource PrimaryColor}"
     mc:Ignorable="d">
     <NavigationPage.TitleView>
-        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}" CurrentSport="{Binding CurrentSportName}" />
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
+                                               CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -33,9 +35,8 @@
                 Style="{StaticResource MatchDetailOddsMovementChart}" />
 
             <ActivityIndicator
-                IsEnabled="{Binding IsLoading}"
-                IsRunning="{Binding IsLoading}"
-                IsVisible="{Binding IsLoading}"
+                IsRunning="{Binding IsBusy}"
+                IsVisible="{Binding IsBusy}"
                 Style="{StaticResource CenterActivityIndicator}"
                 VerticalOptions="Center" />
 

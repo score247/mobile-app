@@ -32,14 +32,14 @@
 
         protected override async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
         {
-            IsLoading = showLoading && IsFirstLoad;
+            IsBusy = showLoading && IsFirstLoad;
 
             if (loadDataFunc != null)
             {
                 await loadDataFunc.Invoke().ConfigureAwait(false);
             }
 
-            IsLoading = false;
+            IsBusy = false;
             IsFirstLoad = false;
         }
     }

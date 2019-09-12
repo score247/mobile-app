@@ -17,8 +17,8 @@
 
             Leagues = new ObservableCollection<ILeague>();
 
-            IsLoading = false;
-            HasData = !IsLoading;
+            IsBusy = false;
+            HasData = IsNotBusy;
         }
 
         public bool HasData { get; set; }

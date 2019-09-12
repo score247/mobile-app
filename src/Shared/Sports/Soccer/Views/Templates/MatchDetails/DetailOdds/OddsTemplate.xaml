@@ -6,7 +6,6 @@
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
     xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
@@ -77,16 +76,16 @@
                 Grid.Row="0"
                 Grid.Column="1"
                 Style="{StaticResource MatchDetailOddsDropdownContainer}">
-                <Label Style="{StaticResource MatchDetailOddsDropdownText}" Text="{languageResources:Translate OddsTypeDecimal}" />
+                <Label Style="{StaticResource MatchDetailOddsDropdownText}"
+                       Text="{languageResources:Translate OddsTypeDecimal}" />
                 <Label Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
         <BoxView Style="{StaticResource SubTabHorizontalLine}" />
         <ActivityIndicator
             Margin="20"
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
             Style="{StaticResource CenterActivityIndicator}"
             VerticalOptions="StartAndExpand" />
         <StackLayout Style="{StaticResource TableContainer}">
@@ -99,7 +98,7 @@
                 HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"
-                IsVisible="{Binding IsNotLoading}"
+                IsVisible="{Binding IsNotBusy}"
                 ItemTemplate="{StaticResource OddsItemTemplateSelector}"
                 ItemsSource="{Binding BetTypeOddsItems}"
                 MinimumHeightRequest="1000"
@@ -112,7 +111,8 @@
                         EventName="ItemTapped" />
                 </tabStrip:TabITemListView.Behaviors>
                 <tabStrip:TabITemListView.Footer>
-                    <StackLayout BackgroundColor="{StaticResource PrimaryColor}" HeightRequest="350">
+                    <StackLayout BackgroundColor="{StaticResource PrimaryColor}"
+                                 HeightRequest="350">
                         <Label Text=" " />
                     </StackLayout>
                 </tabStrip:TabITemListView.Footer>

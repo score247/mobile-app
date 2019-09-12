@@ -156,13 +156,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             if (CanLoadOdds(betType, isRefresh))
             {
-                IsLoading = !isRefresh;
+                IsBusy = !isRefresh;
 
                 SelectedBetType = betType;
                 await LoadOddsByBetType(formatType, isRefresh).ConfigureAwait(false);
 
                 IsRefreshing = false;
-                IsLoading = false;
+                IsBusy = false;
             }
         }
 
@@ -235,6 +235,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
 
             BetTypeOddsItems.Add(newOddsItemViewModel);
-        }       
+        }
     }
 }

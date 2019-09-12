@@ -54,8 +54,6 @@
 
         public ILoggingService LoggingService { get; protected set; }
 
-        public bool IsLoading { get; protected set; }
-
         public virtual void Initialize(INavigationParameters parameters)
         {
         }

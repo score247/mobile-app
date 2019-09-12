@@ -93,11 +93,11 @@
                                    Text="{Binding MatchViewModel.Match.HomeTeamName}" />
                             <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
                             <Label AutomationId="HomeTeamPenalty"
-                                                        IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                        Style="{StaticResource MatchPenaltyIcon}" />
+                                   IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                   Style="{StaticResource MatchPenaltyIcon}" />
                             <Label AutomationId="HomeTeamSecondLeg"
-                                                        IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                        Style="{StaticResource MatchSecondLegIcon}" />
+                                   IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                   Style="{StaticResource MatchSecondLegIcon}" />
                         </StackLayout>
                         <StackLayout Grid.Row="1"
                                      Grid.Column="1"
@@ -107,11 +107,11 @@
                                    Text="{Binding MatchViewModel.Match.AwayTeamName}" />
                             <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
                             <Label AutomationId="AwayTeamPenalty"
-                                                        IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                        Style="{StaticResource MatchPenaltyIcon}" />
+                                   IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                   Style="{StaticResource MatchPenaltyIcon}" />
                             <Label AutomationId="AwayTeamSecondLeg"
-                                                        IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                        Style="{StaticResource MatchSecondLegIcon}" />
+                                   IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                   Style="{StaticResource MatchSecondLegIcon}" />
                         </StackLayout>
                         <Label Grid.Row="0"
                                Grid.Column="2"
@@ -131,9 +131,8 @@
                        Text="{Binding DisplaySecondLeg}" />
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemsSource="{Binding TabItems}" />
-                <ActivityIndicator IsEnabled="{Binding IsLoading}"
-                                   IsRunning="{Binding IsLoading}"
-                                   IsVisible="{Binding IsLoading}"
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"
                                    VerticalOptions="StartAndExpand" />
             </StackLayout>

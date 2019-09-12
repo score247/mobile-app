@@ -24,9 +24,8 @@
 
         <ActivityIndicator
             Margin="20"
-            IsEnabled="{Binding IsLoading}"
-            IsRunning="{Binding IsLoading}"
-            IsVisible="{Binding IsLoading}"
+            IsRunning="{Binding IsBusy}"
+            IsVisible="{Binding IsBusy}"
             Style="{StaticResource CenterActivityIndicator}"
             VerticalOptions="StartAndExpand" />
 
@@ -37,7 +36,7 @@
             HasUnevenRows="True"
             IsPullToRefreshEnabled="true"
             IsRefreshing="{Binding IsRefreshing}"
-            IsVisible="{Binding IsNotLoading}"
+            IsVisible="{Binding IsNotBusy}"
             ItemTemplate="{StaticResource infoItemTemplateSelector}"
             ItemsSource="{Binding InfoItemViewModels}"
             RefreshCommand="{Binding RefreshCommand}"
@@ -55,7 +54,8 @@
                             Text="MATCH INFO" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout IsVisible="{Binding DisplayReferee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <FlexLayout IsVisible="{Binding DisplayReferee, Converter={StaticResource textNotEmptyConverter}}"
+                                Style="{StaticResource MatchInfoDetailRow}">
                         <Label
                             AutomationId="RefereeTitle"
                             Style="{StaticResource MatchInfoTitle}"
@@ -65,8 +65,10 @@
                             Style="{StaticResource MatchInfoValue}"
                             Text="{Binding DisplayReferee}" />
                     </FlexLayout>
-                    <BoxView IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <BoxView IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}"
+                             Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}"
+                                Style="{StaticResource MatchInfoDetailRow}">
                         <Label
                             AutomationId="VenueTitle"
                             Style="{StaticResource MatchInfoTitle}"
@@ -76,8 +78,10 @@
                             Style="{StaticResource MatchInfoValue}"
                             Text="{Binding DisplayVenue}" />
                     </FlexLayout>
-                    <BoxView IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <BoxView IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}"
+                             Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}"
+                                Style="{StaticResource MatchInfoDetailRow}">
                         <Label
                             AutomationId="AttendanceTitle"
                             Style="{StaticResource MatchInfoTitle}"
@@ -87,8 +91,10 @@
                             Style="{StaticResource MatchInfoValue}"
                             Text="{Binding DisplayAttendance}" />
                     </FlexLayout>
-                    <BoxView IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource HorizontalLine}" />
-                    <FlexLayout IsVisible="{Binding DisplayEventDate, Converter={StaticResource textNotEmptyConverter}}" Style="{StaticResource MatchInfoDetailRow}">
+                    <BoxView IsVisible="{Binding DisplayAttendance, Converter={StaticResource textNotEmptyConverter}}"
+                             Style="{StaticResource HorizontalLine}" />
+                    <FlexLayout IsVisible="{Binding DisplayEventDate, Converter={StaticResource textNotEmptyConverter}}"
+                                Style="{StaticResource MatchInfoDetailRow}">
                         <Label
                             AutomationId="EventDateTitle"
                             Style="{StaticResource MatchInfoTitle}"

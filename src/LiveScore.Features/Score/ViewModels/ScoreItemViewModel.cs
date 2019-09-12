@@ -3,6 +3,7 @@
 namespace LiveScore.Features.Score.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
@@ -21,8 +22,8 @@ namespace LiveScore.Features.Score.ViewModels
 
     public class ScoreItemViewModel : ViewModelBase
     {
-        private static readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
-            new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
+        private static readonly IReadOnlyList<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
+            new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
 
         private readonly IMatchService matchService;
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -43,7 +44,6 @@ namespace LiveScore.Features.Score.ViewModels
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-            IsLoading = true;
 
             InitializeCommand();
             SubscribeEvents();
@@ -57,7 +57,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
+        public IReadOnlyList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
@@ -162,7 +162,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             UnsubscribeLiveMatchTimeChangeEvent(date);
 
-            if (IsLoading)
+            if (IsBusy)
             {
                 MatchItemsSource = EmptyMatchDataSource;
             }
@@ -187,7 +187,6 @@ namespace LiveScore.Features.Score.ViewModels
                 matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)));
 
             IsRefreshing = false;
-            IsLoading = false;
 
             Profiler.Start("ScoresView.Render");
             Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");

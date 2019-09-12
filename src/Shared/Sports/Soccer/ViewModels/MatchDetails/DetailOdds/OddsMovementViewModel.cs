@@ -128,11 +128,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
-            IsLoading = !isRefresh;
+            IsBusy = !isRefresh;
             await GetOddsMovement(isRefresh).ConfigureAwait(false);
 
             IsRefreshing = false;
-            IsLoading = false;
+            IsBusy = false;
         }
 
         [Time]
@@ -141,7 +141,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
             var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
-            
+
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
                 var updatedOddsMovements = matchOddsMovement.OddsMovements
@@ -180,7 +180,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             foreach (var oddsMovement in distinctOddsMovements)
             {
-                var newOddsMovementView 
+                var newOddsMovementView
                     = new BaseMovementItemViewModel(betType, oddsMovement, NavigationService, DependencyResolver)
                         .CreateInstance();
 
