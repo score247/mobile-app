@@ -17,6 +17,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using DetailTracker;
     using DetailTV;
     using LiveScore.Common.Extensions;
+    using LiveScore.Core.Controls.TabStrip.EventArgs;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
@@ -32,6 +33,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using MatchDetailInfo;
     using MethodTimer;
     using Models.Matches;
+    using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
     using Views.Templates.DetailInfo;
@@ -54,6 +56,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
+
+            FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFuctionTabTapped);
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -64,11 +68,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public ObservableCollection<TabItemViewModel> TabItems { get; private set; }
 
+        public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; private set; }
+
         public override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
             {                     
                 BuildGeneralInfo(match);
+                TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
             }
         }
 
@@ -99,7 +106,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         public override void OnAppearing()
         {
             // TODO: Call match service to get match detail (missing aggregate score from score page)
-            TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
+           
 
             EventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
@@ -109,11 +116,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Subscribe(OnReceivedTeamStatistic, true);
 
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-                Title = TabItems[index].Title;
-                selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
-            });
+            //MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
+            //{
+            //    Title = TabItems[index].Title;
+            //    selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
+            //});
         }
 
         public override void Destroy()
@@ -136,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
 
-            MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
+            //MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -221,6 +228,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             return viewModels;
+        }
+
+        private void OnFuctionTabTapped(TabStripItemTappedEventArgs args)
+        {
+            Title = TabItems[args.Index].Title;
+            selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[args.Index].TabHeaderTitle);
         }
     }
 }

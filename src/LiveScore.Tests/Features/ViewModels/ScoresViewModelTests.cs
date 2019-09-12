@@ -194,19 +194,19 @@ namespace Scores.Tests.ViewModels
         ////          .SubscribeMatchEvent(hubConnection, Arg.Any<Action<byte, IMatchEvent>>());
         ////}
 
-        [Fact]
-        public void OnResume_SelectedDateIsNotToday_NavigateToHome()
-        {
-            // Arrange
-            itemViewModel.SelectedDate = DateTime.Today.AddDays(10);
-            var navigationService = itemViewModel.NavigationService as FakeNavigationService;
+        //[Fact]
+        //public void OnResume_SelectedDateIsNotToday_NavigateToHome()
+        //{
+        //    // Arrange
+        //    itemViewModel.SelectedDate = DateTime.Today.AddDays(10);
+        //    var navigationService = itemViewModel.NavigationService as FakeNavigationService;
 
-            // Act
-            itemViewModel.OnResume();
+        //    // Act
+        //    itemViewModel.OnResume();
 
-            // Assert
-            Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
-        }
+        //    // Assert
+        //    Assert.Equal("app:///MainView/MenuTabbedView", navigationService.NavigationPath);
+        //}
 
         // TODO
         //[Fact]

@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
     using Xamarin.Forms;
@@ -10,11 +9,9 @@
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStripHeader : ContentView
     {
-        private const int TabLineIndex = 2;
-
         public TabStripHeader()
         {
-            InitializeComponent();
+            InitializeComponent();          
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -24,15 +21,22 @@
         {
             get => (IEnumerable<TabItemViewModel>)GetValue(ItemsSourceProperty);
             set => SetValue(ItemsSourceProperty, value);
-        }     
-       
-        private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        }
+
+        public static readonly BindableProperty ItemTappedCommandProperty = BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(TabItemViewModel), null);
+
+        public ICommand ItemTappedCommand
         {
+            get => GetValue(ItemTappedCommandProperty) as ICommand;
+            set => SetValue(ItemTappedCommandProperty, value);
+        }
+
+        private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
+        {   
             var control = (TabStripHeader)bindable;
 
             if (control == null || newValue == null)
-            {
-                MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
+            {                
                 return;
             }
 
@@ -42,20 +46,7 @@
             {
                 InitTabHeader(control, tabs);
             }
-
-            SubscribeTabChange(control);
-        }
-
-		private void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue) { }
-
-        private static void SubscribeTabChange(TabStripHeader control)
-        {
-            MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            {
-				SetCurrentTab(index, control);
-
-			});
-        }
+        }       
 
         private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModel> tabs)
         {
@@ -71,11 +62,6 @@
 					WidthRequest = 16,
 					HeightRequest = 16
 				};
-
-				//var itemIcon = new Label
-				//{
-				//    Style = index == 0 ? (Style)control.Resources[$"TabActive{item.TabHeaderTitle}Icon"] : (Style)control.Resources[$"Tab{item.TabHeaderTitle}Icon"]
-				//};
 
 				var itemLabel = new Label
                 {
@@ -99,12 +85,10 @@
             };
 
             var tapGestureRecognizer = new TapGestureRecognizer();
-
-            tapGestureRecognizer.Tapped += (sender, e) =>
+            tapGestureRecognizer.Command = new Command(() =>
             {
-                //ItemTappedCommand?.Execute(index);
-                MessagingCenter.Send("Tab", "TabChange", index);
-            };
+                control.ItemTappedCommand?.Execute(index);
+            }); 
 
             itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
 
@@ -121,38 +105,24 @@
                 }
             };
         }
-
-		private static void SetCurrentTab(int index, TabStripHeader control)
-		{
-			var tabHeaders = control.scrollLayOut.Children;
-
-			for (var i = 0; i < tabHeaders.Count; i++)
-			{
-				var tabHeader = (StackLayout)tabHeaders[i];
-				var tabModel = control.ItemsSource.ToList()[i];
-
-				(tabHeader.Children[0] as Image).Source = i == index
-					? tabModel.TabHeaderActiveIcon?.Value
-					: tabModel.TabHeaderIcon?.Value;
-
-				tabHeader.Children[1].Style = i == index
-					? (Style)control.Resources["TabActiveText"]
-					: (Style)control.Resources["TabText"];
-
-				((ContentView)tabHeader.Children[TabLineIndex]).Content.Style = i == index
-					? (Style)control.Resources["TabActiveLine"]
-					: (Style)control.Resources["TabInactiveLine"];
-			}
-
-			control.scrollView.ScrollToAsync(tabHeaders[index], ScrollToPosition.Center, true);
-		}
-      
-        public static readonly BindableProperty ItemTappedCommandProperty = BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(TabItemViewModel), null);
-
-        public ICommand ItemTappedCommand
+		
+        public void SetSelectedTab(int oldIndex, int newIndex)
         {
-            get => GetValue(ItemTappedCommandProperty) as ICommand;
-            set => SetValue(ItemTappedCommandProperty, value);
+            var tabHeaders = scrollLayOut.Children;
+
+            var oldTabModel = ItemsSource.ToList()[oldIndex];
+            var oldTab = tabHeaders[oldIndex] as StackLayout;
+            (oldTab.Children[0] as Image).Source = oldTabModel.TabHeaderIcon.Value;
+            oldTab.Children[1].Style =(Style)Resources["TabText"];
+            ((ContentView)oldTab.Children[2]).Content.Style = (Style)Resources["TabInactiveLine"];
+
+            var newTabModel = ItemsSource.ToList()[newIndex];
+            var newTab = tabHeaders[newIndex] as StackLayout;
+            (newTab.Children[0] as Image).Source = newTabModel.TabHeaderActiveIcon.Value;
+            newTab.Children[1].Style = (Style)Resources["TabActiveText"];
+            ((ContentView)newTab.Children[2]).Content.Style = (Style)Resources["TabActiveLine"];
+           
+            scrollView.ScrollToAsync(tabHeaders[newIndex], ScrollToPosition.Center, true);
         }
     }
 }

@@ -130,7 +130,8 @@
                        Style="{StaticResource MatchGeneralInfoImportantContent}"
                        Text="{Binding DisplaySecondLeg}" />
                 <tabStrip:TabStrip x:Name="TabStrip"
-                                   ItemsSource="{Binding TabItems}" />
+                                   ItemsSource="{Binding TabItems}"
+                                   ItemTappedCommand="{Binding FunctionTabTappedCommand}"/>
                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"

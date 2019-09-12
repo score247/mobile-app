@@ -14,12 +14,14 @@
             </StackLayout.Resources>
             <local:TabStripHeader x:Name="TabHeader"
                                   ItemsSource="{Binding ItemsSource}" />
+
+
             <cards:CarouselView x:Name="TabContent"
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
-                                SelectedIndex="{Binding SelectedTabIndex}"
+                                SelectedIndex="{Binding SelectedIndex}"
                                 VerticalOptions="FillAndExpand" />
         </StackLayout>
     </ContentView.Content>
