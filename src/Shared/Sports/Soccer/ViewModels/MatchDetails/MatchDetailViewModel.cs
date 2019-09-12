@@ -104,23 +104,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         }
 
         public override void OnAppearing()
-        {
-            // TODO: Call match service to get match detail (missing aggregate score from score page)
-           
-
+        {            
             EventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
                 .Subscribe(OnReceivedMatchEvent, true);
 
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnReceivedTeamStatistic, true);
-
-            //MessagingCenter.Subscribe<string, int>(nameof(TabStrip), "TabChange", (_, index) =>
-            //{
-            //    Title = TabItems[index].Title;
-            //    selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
-            //});
+                .Subscribe(OnReceivedTeamStatistic, true);          
         }
 
         public override void Destroy()
@@ -142,8 +133,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
-
-            //MessagingCenter.Unsubscribe<string, int>(nameof(TabStrip), "TabChange");
         }
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
