@@ -79,12 +79,17 @@
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
 
-                var itemIcon = new Image
+                //var itemIcon = new Image
+                //{
+                //    Source = index == 0 ? item.TabHeaderActiveIcon?.Value : item.TabHeaderIcon?.Value,
+                //    Style = (Style)control.Resources["TabIcon"],
+                //    WidthRequest = 16,
+                //    HeightRequest = 16
+                //};
+
+                var itemIcon = new Label
                 {
-                    Source = index == 0 ? item.TabHeaderActiveIcon?.Value : item.TabHeaderIcon?.Value,
-                    Style = (Style)control.Resources["TabIcon"],
-                    WidthRequest = 16,
-                    HeightRequest = 16
+                    Style = index == 0 ? (Style)control.Resources[$"TabActive{item.TabHeaderTitle}Icon"] : (Style)control.Resources[$"Tab{item.TabHeaderTitle}Icon"]
                 };
 
                 var itemLabel = new Label
