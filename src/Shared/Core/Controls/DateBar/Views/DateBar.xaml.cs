@@ -154,13 +154,13 @@
             var dayNumberLbl = new Label
             {
                 Text = (date == DateTime.Today ? AppResources.Today : date.Date.ToString("ddd")).ToUpperInvariant(),
-                Style = (Style)Resources["DateBarDayNumberLabel"],
+                Style = (Style)Resources["DateBarDayNameLabel"],
             };
 
             var dayNameLbl = new Label
             {
                 Text = date.ToString("dd MMM").ToUpperInvariant(),
-                Style = (Style)Resources["DateBarDayNameLabel"]
+                Style = (Style)Resources["DateBarDayNumberLabel"]
             };
 
             if (index == SelectedIndex)

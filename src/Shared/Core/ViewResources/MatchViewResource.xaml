@@ -19,7 +19,7 @@
         <Setter Property="TextColor"
                 Value="{StaticResource FourthTextColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource SmallTextFontSize}" />
+                Value="11" />
         <Setter Property="FontAttributes"
                 Value="Bold" />
     </Style>
@@ -32,9 +32,9 @@
         <Setter Property="TextColor"
                 Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource GeneralFontSize}" />
-        <Setter Property="FontAttributes"
-                Value="Bold" />
+                Value="14" />
+        <Setter Property="FontFamily"
+                Value="RobotoMedium" />
     </Style>
     <Style x:Key="HomeScore"
            BasedOn="{StaticResource Score}"
