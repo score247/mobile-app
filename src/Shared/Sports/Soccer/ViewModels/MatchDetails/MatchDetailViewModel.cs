@@ -30,6 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using LiveScore.Soccer.Views.Templates.DetailTV;
     using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
     using MatchDetailInfo;
+    using MethodTimer;
     using Models.Matches;
     using Prism.Events;
     using Prism.Navigation;
@@ -61,13 +62,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public string DisplaySecondLeg { get; private set; }
 
-        public IList<TabItemViewModel> TabItems { get; private set; }
+        public ObservableCollection<TabItemViewModel> TabItems { get; private set; }
 
         public override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
-            {
-                BuildTabItems(match);
+            {                     
                 BuildGeneralInfo(match);
             }
         }
@@ -98,23 +98,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override void OnAppearing()
         {
-            OnInitialized();
-        }
-
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            foreach (var tab in tabItemViewModels)
-            {
-                tab.Value.Destroy();
-            }
-        }
-
-        protected void OnInitialized()
-        {
-            TabItems = new ObservableCollection<TabItemViewModel>(TabItems);
-            // TODO: Call match service to get match detail
+            // TODO: Call match service to get match detail (missing aggregate score from score page)
+            TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
 
             EventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
@@ -129,6 +114,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 Title = TabItems[index].Title;
                 selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[index].TabHeaderTitle);
             });
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            foreach (var tab in tabItemViewModels)
+            {
+                tab.Value.Destroy();
+            }
         }
 
         protected void OnDisposed()
@@ -191,8 +186,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         private void BuildViewModel(IMatch match) => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
 
-        private void BuildTabItems(IMatch match)
+        [Time]
+        private List<TabItemViewModel> GenerateTabItemViewModels(IMatch match)
         {
+            var viewModels = new List<TabItemViewModel>();
+
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
                 {MatchDetailFunction.Odds, new DetailOddsViewModel(match.Id, match.EventStatus,  NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
@@ -208,8 +206,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             Title = tabItemViewModels.First().Key.DisplayName;
             selectedTabItem = tabItemViewModels.First().Key;
-            TabItems = new List<TabItemViewModel>();
-
+            
             // Temporary show all functions
             foreach (var function in TextEnumeration.GetAll<MatchDetailFunction>())
             {
@@ -219,9 +216,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                     tabModel.Title = function.DisplayName;
                     tabModel.TabHeaderTitle = function.Value;
 
-                    TabItems.Add(tabModel);
+                    viewModels.Add(tabModel);
                 }
             }
+
+            return viewModels;
         }
     }
 }

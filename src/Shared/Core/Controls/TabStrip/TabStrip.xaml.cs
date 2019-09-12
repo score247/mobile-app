@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using MethodTimer;
     using PanCardView;
     using PanCardView.EventArgs;
     using Xamarin.Forms;
@@ -37,7 +38,8 @@
         }
 
         public int SelectedTabIndex { get; set; }
-        
+
+        [Time]
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var control = (TabStrip)bindable;
@@ -49,10 +51,14 @@
                 return;
             }
 
+            //TODO use SelectedIndex instead of First
+            tabItems.First().OnAppearing();
+
             MessagingCenter.Subscribe<string, int>(
                 nameof(TabStrip), TabChangeEvent, (_, index) => control.SelectedTabIndex = index);
         }
-   
+
+        [Time]
         public static void TabContent_ItemAppearing(CardsView view, ItemAppearingEventArgs args)
         {
             if (args.Item != null)

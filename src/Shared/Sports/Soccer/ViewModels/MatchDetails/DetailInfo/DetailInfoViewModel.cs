@@ -42,7 +42,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.eventAggregator = eventAggregator;
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(matchId, true), false));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(true), false));
             TabHeaderIcon = MatchDetailTabImage.Info;
             TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
         }
@@ -63,12 +63,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        protected async void OnInitialized()
+        [Time]
+        public override async void OnAppearing()
         {
             try
             {
                 // TODO: Check when need to reload data later
-                await LoadData(() => LoadMatchDetail(matchId, true)).ConfigureAwait(false);
+                await LoadData(() => LoadMatchDetail(true)).ConfigureAwait(false);
 
                 // TODO: need review UIThread here
                 eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
@@ -80,7 +81,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         }
 
         [Time]
-        private async Task LoadMatchDetail(string matchId, bool isRefresh = false)
+        private async Task LoadMatchDetail(bool isRefresh = false)
         {
             MatchInfo =
                 await matchInfoService.GetMatch(matchId, CurrentLanguage, isRefresh).ConfigureAwait(false) as MatchInfo;

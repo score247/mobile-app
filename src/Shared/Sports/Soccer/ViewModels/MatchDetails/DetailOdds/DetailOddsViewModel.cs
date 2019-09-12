@@ -17,7 +17,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
-    using LiveScore.Core.Services;
     using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.Services;
     using MethodTimer;
@@ -111,9 +110,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        [Time]
-        protected async void OnInitialized()
+      
+        public override async void OnAppearing()
         {
+            Debug.WriteLine("DetailOddsViewModel OnAppearing");
+
             try
             {
                 Debug.WriteLine("DetailOddsViewModel OnInitialized");
