@@ -4,7 +4,6 @@ namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading.Tasks;
     using Core;
     using LiveScore.Core.ViewModels;
     using PanCardView.EventArgs;
@@ -89,7 +88,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var itemViewModels = new List<ScoreItemViewModel>
             {
-                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, true)
+                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isLive: true)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
@@ -97,6 +96,9 @@ namespace LiveScore.Features.Score.ViewModels
                 itemViewModels.Add(
                     new ScoreItemViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
             }
+
+            //itemViewModels.Add(
+            //    new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
 
             ScoreItemSources = itemViewModels;
             SelectedScoreItemIndex = TodayIndex;

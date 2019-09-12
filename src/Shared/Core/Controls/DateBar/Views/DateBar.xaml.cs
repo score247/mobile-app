@@ -121,6 +121,11 @@
                 Style = (Style)Resources["LiveIcon"]
             };
 
+            liveIcon.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = BuildTapDateBarItemCommand(DateTime.Today, 0)
+            });
+
             DateBarLayout.Children.Add(liveIcon);
         }
 
@@ -174,13 +179,13 @@
 
             dateBarItemLayout.GestureRecognizers.Add(new TapGestureRecognizer
             {
-                Command = BuildTapDateBarItemCommand(date, index, dayNumberLbl, dayNameLbl)
+                Command = BuildTapDateBarItemCommand(date, index)
             });
 
             return dateBarItemLayout;
         }
 
-        private Command BuildTapDateBarItemCommand(DateTime date, int index, Label dayNumberLbl, Label dayNameLbl)
+        private Command BuildTapDateBarItemCommand(DateTime date, int index)
         {
             return new Command(() =>
             {
