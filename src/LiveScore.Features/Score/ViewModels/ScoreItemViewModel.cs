@@ -47,8 +47,8 @@ namespace LiveScore.Features.Score.ViewModels
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
 
-            InitializeCommand();
             SubscribeEvents();
+            InitializeCommand();
         }
 
         public DateTime SelectedDate { get; }
@@ -187,7 +187,7 @@ namespace LiveScore.Features.Score.ViewModels
                 .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
                 .ToList();
 
-            MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+            MatchItemsSource = new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(
                 matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)));
 
             IsRefreshing = false;
@@ -219,7 +219,7 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            var matchItem = MatchItemsSource
+            var matchItem = MatchItemsSource?
                 .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match.Id == payload.MatchEvent.MatchId);
 
