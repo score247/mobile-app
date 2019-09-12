@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Fanex.Caching;
     using LiveScore.Common.Extensions;
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
@@ -19,6 +18,9 @@
         [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
         Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
 
+        [Get("/soccer/{language}/matches/live?lq=lastUpdateMatchStatusTime")]
+        Task<IEnumerable<Match>> GetLiveMatches(Language language, DateTime lastUpdateMatchStatusTime);
+
         [Get("/soccer/{language}/matches/{matchId}")]
         Task<MatchInfo> GetMatchInfo(string matchId, string language);
     }
@@ -31,19 +33,19 @@
     public class MatchService : BaseService, IMatchService, IMatchInfoService
     {
         private readonly IApiService apiService;
-        private readonly ICachingService cacheService;
+        private readonly ICacheManager cacheManager;
 
         public MatchService(
             IApiService apiService,
-            ICachingService cacheService,
+            ICacheManager cacheManager,
             ILoggingService loggingService) : base(loggingService)
         {
             this.apiService = apiService;
-            this.cacheService = cacheService;
+            this.cacheManager = cacheManager;
         }
 
         [Time]
-        public async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool getLatestData = false)
         {
             try
             {
@@ -54,14 +56,13 @@
                     ? CacheDuration.Short
                     : CacheDuration.Long;
 
-                return await cacheService.GetOrSetAsync(
+                return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
-                            language.DisplayName),
-                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)cacheDuration)),
-                    forceFetchNewData);
+                            language.DisplayName), (int)cacheDuration,
+                    getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -78,11 +79,11 @@
             {
                 var cacheKey = $"Match:{matchId}:{language}";
 
-                return await cacheService.GetOrSetAsync(
+                return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => GetMatchFromApi(matchId, language.DisplayName),
-                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Short)),
-                    forceFetchNewData);
+                    (int)CacheDuration.Short, forceFetchNewData)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -99,5 +100,14 @@
         [Time]
         private Task<MatchInfo> GetMatchFromApi(string matchId, string language)
            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
+
+        public Task<IEnumerable<IMatch>> GetLiveMatches(Language language, DateTime lastUpdateMatchStatusTime, bool getLatestData = false)
+        {
+            // TODO: add impl later
+
+            //var cacheKey = $"LiveMatches::{language.DisplayName}";
+
+            return GetMatchesByDate(DateTime.Now, language, getLatestData);
+        }
     }
 }

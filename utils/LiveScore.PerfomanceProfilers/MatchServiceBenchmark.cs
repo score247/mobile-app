@@ -16,12 +16,12 @@
     {
         public const string V1Api = nameof(V1Api);
         public const string V2Api = nameof(V2Api);        
-        private readonly CachingService cachingService;
+        private readonly CacheManager cacheManager;
         private readonly MockLoggingService loggingService;
 
         public MatchServiceBenchmark()
         {           
-            cachingService = new CachingService(new CacheService());
+            cacheManager = new CacheManager(new CacheService());
             loggingService = new MockLoggingService();
         }
 
@@ -31,7 +31,7 @@
         {
             var httpService = new HttpService(new Uri(ApiUrls[apiName]));
             var apiService = new ApiService(new ApiPolicy(), httpService);
-            var matchService = new MatchService(apiService, cachingService, loggingService);
+            var matchService = new MatchService(apiService, cacheManager, loggingService);
 
             var matches = matchService.GetMatchesByDate(date, language, forceFetchNewData).GetAwaiter().GetResult();
 

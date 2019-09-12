@@ -120,7 +120,7 @@ namespace LiveScore
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(AppSettings.Current.ApiEndpoint)));
-            containerRegistry.RegisterSingleton<ICachingService, CachingService>();
+            containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ISportService, SportService>();

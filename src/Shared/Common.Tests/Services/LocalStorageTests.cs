@@ -7,7 +7,7 @@
         //private readonly IBlobCache mockUserAccount;
         //private readonly IBlobCache mockInMemory;
 
-        //private readonly CachingService cache;
+        //private readonly CacheManager cache;
 
         //public LocalStorageTests()
         //{
@@ -16,7 +16,7 @@
         //    mockUserAccount = Substitute.For<IBlobCache>();
         //    mockInMemory = Substitute.For<IBlobCache>();
 
-        //    cache = new CachingService(mockEssentials, mockLocalMachine, mockUserAccount, mockInMemory);
+        //    cache = new CacheManager(mockEssentials, mockLocalMachine, mockUserAccount, mockInMemory);
         //}
 
         //[Fact]

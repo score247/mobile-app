@@ -8,6 +8,8 @@
 
     public interface IMatchService
     {
-        Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool forceFetchNewData = false);
+        Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool getLatestData = false);
+
+        Task<IEnumerable<IMatch>> GetLiveMatches(Language language, DateTime lastUpdateMatchStatusTime, bool getLatestData = false);
     }
 }

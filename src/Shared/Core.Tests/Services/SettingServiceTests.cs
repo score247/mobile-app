@@ -2,12 +2,12 @@
 {
     public class SettingServiceTests
     {
-        //private readonly ICachingService mockCache;
+        //private readonly ICacheManager mockCache;
         //private readonly Settings setting;
 
         //public SettingServiceTests()
         //{
-        //    mockCache = Substitute.For<ICachingService>();
+        //    mockCache = Substitute.For<ICacheManager>();
 
         //    setting = new Settings(mockCache);
         //}
