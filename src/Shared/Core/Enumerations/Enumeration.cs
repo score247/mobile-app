@@ -37,8 +37,7 @@ namespace LiveScore.Core.Enumerations
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()
         {
-            var matchingItem = Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
-            return matchingItem;
+            return Parse<T, string>(displayName, "display name", item => item.DisplayName == displayName);
         }
 
         public static T FromValue<T>(byte value) where T : Enumeration, new()
@@ -77,28 +76,7 @@ namespace LiveScore.Core.Enumerations
 
         public static bool operator ==(Enumeration left, Enumeration right)
         {
-            if (left is null)
-            {
-                if (right is null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if (right is null)
-                {
-                    return false;
-                }
-                else
-                {
-                    return left.Value == right.Value;
-                }
-            }
+            return left is null ? right is null : !(right is null) && left.Value == right.Value;
         }
 
         public static bool operator !=(Enumeration left, Enumeration right)
@@ -120,7 +98,7 @@ namespace LiveScore.Core.Enumerations
                 return false;
             }
 
-            var typeMatches = GetType().Equals(obj.GetType());
+            var typeMatches = GetType() == obj.GetType();
             var valueMatches = Value.Equals(otherValue.Value);
 
             return typeMatches && valueMatches;
@@ -150,13 +128,14 @@ namespace LiveScore.Core.Enumerations
         {
             var matchingItem = GetAll<T>().FirstOrDefault(predicate);
 
-            if (matchingItem == null)
+            if (matchingItem != null)
             {
-                var message = string.Format("'{0}' is not a valid {1} in {2}", value, description, typeof(T));
-                throw new ArgumentOutOfRangeException(message);
+                return matchingItem;
             }
 
-            return matchingItem;
+            var message = $"'{value}' is not a valid {description} in {typeof(T)}";
+            throw new ArgumentOutOfRangeException(message);
+
         }
     }
 }
