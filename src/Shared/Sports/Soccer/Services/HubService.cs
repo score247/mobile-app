@@ -66,9 +66,9 @@ namespace LiveScore.Soccer.Services
                                     hubEvent.Value.Item2(eventAggregator, data);
                                 }
                             }
-                            catch (Exception e)
+                            catch(Exception ex)
                             {
-                                logger.LogError(e);
+                                logger.LogError(ex);
                             }
                             
                         }));

@@ -11,16 +11,15 @@
     {
         public const string HubMethod = "MatchEvent";
 
-        public MatchEventMessage(byte sportId, IMatchEvent matchEvent)
+        public MatchEventMessage(byte sportId, MatchEvent matchEvent)
         {
             SportId = sportId;
             MatchEvent = matchEvent;
         }
 
-        public byte SportId { get; private set; }
+        public byte SportId { get; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<MatchEvent>))]
-        public IMatchEvent MatchEvent { get; private set; }
+        public IMatchEvent MatchEvent { get; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)
             => eventAggregator.GetEvent<MatchEventPubSubEvent>().Publish(data as MatchEventMessage);
