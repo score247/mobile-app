@@ -25,10 +25,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
+        <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
         <views:DateBar NumberDisplayDays="2"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
                        ItemTappedCommand="{Binding DateBarItemTapCommand}" />
-
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 Color="{StaticResource ThirdAccentColor}"></BoxView>
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"
@@ -49,10 +51,10 @@
                         <StackLayout>
                             <!--TODO: Temporarily add live page here-->
                             <Label IsVisible="{Binding IsLive}"
-                                   Text="Live is comming soon"
+                                   Text="Live is coming soon"
                                    Style="{StaticResource ComingSoonLabel}" />
                             <Label IsVisible="{Binding IsCalendar}"
-                                   Text="Calendar is comming soon"
+                                   Text="Calendar is coming soon"
                                    Style="{StaticResource ComingSoonLabel}" />
                             <StackLayout IsVisible="{Binding IsNormalDate}"
                                          VerticalOptions="CenterAndExpand">

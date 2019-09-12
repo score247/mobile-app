@@ -1,10 +1,9 @@
-﻿using LiveScore.Core.Controls.DateBar.EventArgs;
-
-namespace LiveScore.Features.Score.ViewModels
+﻿namespace LiveScore.Features.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;
     using Core;
+    using Core.Controls.DateBar.EventArgs;
     using LiveScore.Core.ViewModels;
     using PanCardView.EventArgs;
     using Prism.Commands;
