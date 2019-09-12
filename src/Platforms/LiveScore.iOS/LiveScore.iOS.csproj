@@ -50,6 +50,7 @@
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DISABLE_XAMARINFORMSLIVE</DefineConstants>
     <MtouchFastDev>true</MtouchFastDev>
+    <CodesignKey>iPhone Developer</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -86,12 +87,12 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Developer: Doan Nhat Phuong (8SX3QLS2R5)</CodesignKey>
+    <CodesignKey>iPhone Distribution: Doan Nhat Phuong (D6D3U376DF)</CodesignKey>
     <CodesignEntitlements>
     </CodesignEntitlements>
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DISABLE_XAMARINFORMSLIVE</DefineConstants>
-    <CodesignProvision>score247</CodesignProvision>
+    <CodesignProvision>Score247</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
