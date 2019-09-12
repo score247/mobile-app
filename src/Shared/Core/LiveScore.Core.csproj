@@ -61,6 +61,9 @@
         <DependentUpon>MatchHeaderViewResource.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
+    <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+      <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)CoreModelResolver.cs&quot; -r &quot;CoreModelResolver&quot;" />
+    </Target>
    <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
       <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)CoreModelResolver.cs&quot; -r &quot;CoreModelResolver&quot;" />
     </Target>-->

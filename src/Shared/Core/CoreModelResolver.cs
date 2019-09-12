@@ -295,8 +295,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Core.Enumerations.EventType();
-            ____result.DisplayName = __DisplayName__;
-            ____result.Value = __Value__;
             return ____result;
         }
     }
@@ -356,8 +354,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Core.Enumerations.MatchStatus();
-            ____result.DisplayName = __DisplayName__;
-            ____result.Value = __Value__;
             return ____result;
         }
     }
@@ -448,8 +444,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Core.Enumerations.OddsTrend();
-            ____result.DisplayName = __DisplayName__;
-            ____result.Value = __Value__;
             return ____result;
         }
     }
@@ -509,8 +503,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Core.Enumerations.PeriodType();
-            ____result.DisplayName = __DisplayName__;
-            ____result.Value = __Value__;
             return ____result;
         }
     }

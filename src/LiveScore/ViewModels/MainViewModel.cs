@@ -2,27 +2,22 @@
 {
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.ViewModels;
-    using Common.Services;
     using Core;
-    using Core.Services;
-    using Views;
+    using Core.ViewModels;
     using Prism.Navigation;
+    using Views;
     using Xamarin.Forms;
 
     public class MainViewModel : ViewModelBase
     {
-        private readonly ICachingService cachingService;
         private readonly ISettings settings;
 
         public MainViewModel(
-            ICachingService cachingService,
             ISettings settings,
             INavigationService navigationService,
             IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
-            this.cachingService = cachingService;
             this.settings = settings;
 
             IsDemo = settings.IsDemo;
@@ -34,16 +29,16 @@
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         //TODO remove this command when ready to release
-        public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toogle);
+        public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toggle);
 
         public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
 
-        private async Task Navigate(string page)
+        private Task Navigate(string page)
         {
-            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+            return NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }
 
-        private async Task Toogle()
+        private Task Toggle()
         {
             settings.IsDemo = !settings.IsDemo;
 
@@ -64,14 +59,14 @@
 #endif
             }
 
-            await CleanCacheAndRefreshCommand.ExecuteAsync();
+            return CleanCacheAndRefreshCommand.ExecuteAsync();
         }
 
-        private async Task CleanCacheAndRefresh()
+        private Task CleanCacheAndRefresh()
         {
             //TODO implement clean cache with fanex caching
-            //await cachingService.InvalidateAll();
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
+
+            return NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
         }
     }
 }
