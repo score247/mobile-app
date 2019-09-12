@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Common.Services
+﻿using MethodTimer;
+
+namespace LiveScore.Common.Services
 {
     using System;
     using System.Threading.Tasks;
@@ -36,8 +38,11 @@
         }
 
         // TODO: Need to make it be singleton instance
+
+        
         public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
+        [Time]
         public Task<T> Execute<T>(Func<Task<T>> func) => apiPolicy.RetryAndTimeout(func);
     }
 }

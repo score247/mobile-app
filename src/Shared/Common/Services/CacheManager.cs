@@ -4,10 +4,10 @@
     using System.Threading.Tasks;
     using Fanex.Caching;
 
-    public enum CacheDuration
+    public static class CacheDuration
     {
-        Short = 120, // 120 seconds
-        Long = 7200
+        public const int Short = 120; // 120 seconds
+        public const int Long = 7200;
     }
 
     public interface ICacheManager

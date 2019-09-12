@@ -61,7 +61,7 @@
                     () => GetMatchesFromApi(
                             dateTime.BeginningOfDay().ToApiFormat(),
                             dateTime.EndOfDay().ToApiFormat(),
-                            language.DisplayName), (int)cacheDuration,
+                            language.DisplayName), cacheDuration,
                     getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -82,7 +82,7 @@
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => GetMatchFromApi(matchId, language.DisplayName),
-                    (int)CacheDuration.Short, forceFetchNewData)
+                    CacheDuration.Short, forceFetchNewData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
