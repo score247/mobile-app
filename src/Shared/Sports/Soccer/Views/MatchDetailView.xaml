@@ -89,7 +89,7 @@
                                      Grid.Column="1"
                                      Style="{StaticResource MatchHomeTeam}">
                             <Label AutomationId="HomeTeamName"
-                                   Style="{StaticResource MatchGeneralInfoTeam}"
+                                   Style="{StaticResource Team}"
                                    Text="{Binding MatchViewModel.Match.HomeTeamName}" />
                             <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
                             <Label AutomationId="HomeTeamPenalty"
@@ -103,7 +103,7 @@
                                      Grid.Column="1"
                                      Style="{StaticResource MatchAwayTeam}">
                             <Label AutomationId="AwayTeamName"
-                                   Style="{StaticResource MatchGeneralInfoTeam}"
+                                   Style="{StaticResource Team}"
                                    Text="{Binding MatchViewModel.Match.AwayTeamName}" />
                             <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
                             <Label AutomationId="AwayTeamPenalty"

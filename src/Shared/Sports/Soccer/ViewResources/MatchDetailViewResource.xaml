@@ -26,13 +26,6 @@
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
-    <Style
-        x:Key="MatchGeneralInfoTeam"
-        BasedOn="{StaticResource Team}"
-        TargetType="Label">
-        <Setter Property="FontAttributes" Value="Bold" />
-    </Style>
-
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
@@ -53,7 +46,7 @@
     </Style>
     <Style x:Key="GroupName" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
         <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
     <Style x:Key="TopInfo" TargetType="FlexLayout">
@@ -71,7 +64,7 @@
     </Style>
     <Style x:Key="SubTab" TargetType="Button">
         <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
-        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
     </Style>

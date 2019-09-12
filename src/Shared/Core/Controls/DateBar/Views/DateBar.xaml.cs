@@ -187,13 +187,13 @@
             {
                 var liveItem = dateBarLayout.Children[selectedIndex] as Label;
 
-                control.SetSelectedTextColor(liveItem, true);
+                control.SetSelectedTextColor(liveItem);
             }
             else if (selectedIndex == control.CalendarIndex)
             {
                 var calendarItem = dateBarLayout.Children[selectedIndex] as Label;
 
-                control.SetSelectedTextColor(calendarItem, true);
+                control.SetSelectedTextColor(calendarItem);
             }
             else
             {
@@ -217,7 +217,7 @@
             {
                 var calendarItem = dateBarLayout.Children[oldIndex] as Label;
 
-                control.SetTextColor(calendarItem, true);
+                control.SetTextColor(calendarItem);
             }
             else
             {
@@ -229,25 +229,14 @@
             }
         }
 
-        private void SetTextColor(Label item, bool isIcon = false)
+        private void SetTextColor(Label item)
         {
             item.TextColor = (Color)Resources["DateBarTextColor"];
-
-            if (!isIcon)
-            {
-                item.FontFamily = Application.Current.Resources["RobotoMedium"].ToString();
-            }
         }
 
-        private void SetSelectedTextColor(Label item, bool isIcon = false)
+        private void SetSelectedTextColor(Label item)
         {
             item.TextColor = (Color)Resources["DateBarSelectedTextColor"];
-
-            if (!isIcon)
-            {
-                item.FontFamily = Application.Current.Resources["RobotoBold"].ToString();
-            }
         }
-
     }
 }

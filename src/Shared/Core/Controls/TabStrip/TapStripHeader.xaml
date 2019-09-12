@@ -55,7 +55,7 @@
         <Style x:Key="TabFontIcon" BasedOn="{StaticResource Icons}"
                    TargetType="Label">
             <Setter Property="FontSize"
-                        Value="16" />
+                        Value="14" />
             <Setter Property="TextColor"
                         Value="#999" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />

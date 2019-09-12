@@ -3,14 +3,14 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="DateBarSelectedTextColor">#FF8A00</Color>
+    <Color x:Key="DateBarSelectedTextColor">#F24822</Color>
     <Color x:Key="DateBarTextColor">#AAA8A5</Color>
     <Color x:Key="DateBarLiveColor">#30C2FF</Color>
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
         <Setter Property="FontSize"
-                Value="20" />
+                Value="18" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
@@ -23,7 +23,7 @@
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
         <Setter Property="FontSize"
-                Value="32" />
+                Value="20" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
@@ -43,7 +43,7 @@
         <Setter Property="JustifyContent"
                 Value="SpaceAround" />
         <Setter Property="Padding"
-                Value="2,15,2,15" />
+                Value="8,15,8,15" />
     </Style>
 
     <Style x:Key="DateBarLabel"
@@ -53,7 +53,7 @@
         <Setter Property="TextColor"
                 Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontFamily"
-                Value="{StaticResource RobotoMedium}" />
+                Value="{StaticResource RobotoBold}" />
     </Style>
 
     <Style x:Key="DateBarDayNameLabel"
@@ -69,6 +69,6 @@
         <Setter Property="FontSize"
                 Value="9" />
         <Setter Property="Margin"
-                Value="0,4,0,0" />
+                Value="0,2,0,0" />
     </Style>
 </ResourceDictionary>

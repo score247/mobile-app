@@ -114,7 +114,7 @@
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
             <x:Double x:Key="LeagueHeight">44</x:Double>
             <!--  Function bar  -->
-            <Color x:Key="FunctionBarBgColor">#212431</Color>
+            <Color x:Key="FunctionBarBgColor">#070915</Color>
             <Color x:Key="FunctionBarColor">#999</Color>
             <Color x:Key="FunctionBarActiveColor">#3EC28F</Color>
             <x:Double x:Key="FunctionBarFontSize">12</x:Double>
@@ -510,9 +510,9 @@
                 <Setter Property="HorizontalOptions"
                         Value="CenterAndExpand" />
                 <Setter Property="FontSize"
-                        Value="{StaticResource GeneralFontSize}" />
+                        Value="{StaticResource MediumTextFontSize}" />
                 <Setter Property="TextColor"
-                        Value="#fff" />
+                        Value="{StaticResource SecondTextColor}" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

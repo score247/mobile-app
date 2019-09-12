@@ -21,8 +21,8 @@
                 Value="{StaticResource FunctionGroupColor}" />
         <Setter Property="FontSize"
                 Value="{StaticResource FunctionGroupFontSize}" />
-        <Setter Property="FontAttributes"
-                Value="Bold" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoRegular}" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
     </Style>

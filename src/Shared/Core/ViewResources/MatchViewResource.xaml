@@ -34,7 +34,7 @@
         <Setter Property="FontSize"
                 Value="14" />
         <Setter Property="FontFamily"
-                Value="RobotoMedium" />
+                Value="{StaticResource RobotoBold}" />
     </Style>
     <Style x:Key="HomeScore"
            BasedOn="{StaticResource Score}"
