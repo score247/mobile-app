@@ -49,7 +49,7 @@
         {
             return new Label
             {
-                Style = (Style)control.Resources[Images.RedCard.Value]
+                Style = (Style)control.Resources["RedCardIcon"]
             };
         }
     }

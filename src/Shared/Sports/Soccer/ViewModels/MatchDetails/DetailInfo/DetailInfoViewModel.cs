@@ -27,7 +27,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private const string SpectatorNumberFormat = "0,0";
         private readonly IMatchService matchService;
         private readonly IMatchInfoService matchInfoService;
-        private readonly IEventAggregator eventAggregator;        
+        private readonly IEventAggregator eventAggregator;
         private readonly string matchId;
 
         public DetailInfoViewModel(
@@ -63,6 +63,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
+        public override void OnResume()
+        {
+            base.OnResume();
+        }
+
         [Time]
         public override async void OnAppearing()
         {
@@ -83,8 +88,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         private async Task LoadMatchDetail(bool isRefresh = false)
         {
-            MatchInfo =
-                await matchInfoService.GetMatch(matchId, CurrentLanguage, isRefresh).ConfigureAwait(false) as MatchInfo;
+            MatchInfo = await matchInfoService.GetMatch(matchId, CurrentLanguage, isRefresh).ConfigureAwait(false) as MatchInfo;
 
             BuildDetailInfo(MatchInfo);
 
@@ -156,7 +160,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             {
                 DisplayReferee = matchInfo.Referee;
             }
-        }       
+        }
 
         private static IEnumerable<TimelineEvent> FilterPenaltyEvents(MatchInfo matchInfo)
         {

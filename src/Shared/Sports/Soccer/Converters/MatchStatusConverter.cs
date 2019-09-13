@@ -13,7 +13,7 @@
         private static readonly IDictionary<MatchStatus, string> StatusMapper = new Dictionary<MatchStatus, string>
         {
             { MatchStatus.Postponed, AppResources.Postp },
-            { MatchStatus.StartDelayed, AppResources.StartDelayed },
+            { MatchStatus.StartDelayed, AppResources.Delayed },
             { MatchStatus.Cancelled, AppResources.Canc },
             { MatchStatus.AwaitingPenalties, AppResources.AwaitPen },
             { MatchStatus.Penalties, AppResources.Pen },

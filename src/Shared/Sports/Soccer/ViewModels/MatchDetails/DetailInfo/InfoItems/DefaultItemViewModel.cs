@@ -19,7 +19,7 @@
             { EventType.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
         };
 
-        private static readonly EventType[] VisibleScoreEvents = new[]
+        private static readonly EventType[] VisibleScoreEvents =
         {
             EventType.PenaltyMissed
         };
