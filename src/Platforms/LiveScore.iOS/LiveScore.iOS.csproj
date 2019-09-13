@@ -94,7 +94,6 @@
     <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;DISABLE_XAMARINFORMSLIVE</DefineConstants>
     <CodesignProvision>Score247</CodesignProvision>
     <BuildIpa>true</BuildIpa>
-    <MtouchFastDev>true</MtouchFastDev>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchDebug>true</MtouchDebug>
     <MtouchProfiling>false</MtouchProfiling>

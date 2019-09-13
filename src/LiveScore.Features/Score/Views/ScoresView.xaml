@@ -47,50 +47,48 @@
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <ContentView>
-                        <StackLayout>
-                            <!--TODO: Temporarily add live page here-->
-                            <Label IsVisible="{Binding IsLive}"
-                                   Text="Live is coming soon"
-                                   Style="{StaticResource ComingSoonLabel}" />
-                            <Label IsVisible="{Binding IsCalendar}"
-                                   Text="Calendar is coming soon"
-                                   Style="{StaticResource ComingSoonLabel}" />
-                            <StackLayout IsVisible="{Binding IsNormalDate}"
-                                         VerticalOptions="CenterAndExpand">
-                                <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                                   IsVisible="{Binding IsBusy}"
-                                                   Style="{StaticResource CenterActivityIndicator}" />
-                                <customListView:CustomListView x:Name="LeagueTable"
-                                                               AutomationId="LeagueTableId"
-                                                               AutomationProperties.IsInAccessibleTree="False"
-                                                               Footer=""
-                                                               GroupDisplayBinding="{Binding Key}"
-                                                               GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-                                                               HasUnevenRows="true"
-                                                               IsGroupingEnabled="True"
-                                                               IsPullToRefreshEnabled="true"
-                                                               IsRefreshing="{Binding IsRefreshing}"
-                                                               IsVisible="{Binding IsNotBusy}"
-                                                               ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                               ItemsSource="{Binding MatchItemsSource}"
-                                                               RefreshCommand="{Binding RefreshCommand}"
-                                                               SelectionMode="None"
-                                                               SeparatorColor="{StaticResource LineColor}"
-                                                               Style="{StaticResource ListViewHasBackground}"
-                                                               VerticalOptions="FillAndExpand">
-                                    <x:Arguments>
-                                        <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
-                                    </x:Arguments>
-                                    <customListView:CustomListView.Behaviors>
-                                        <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
-                                                                  EventArgsParameterPath="Item"
-                                                                  EventName="ItemTapped" />
-                                    </customListView:CustomListView.Behaviors>
-                                </customListView:CustomListView>
-                            </StackLayout>
+                    <StackLayout>
+                        <!--TODO: Temporarily add live page here-->
+                        <Label IsVisible="{Binding IsLive}"
+                               Text="Live is coming soon"
+                               Style="{StaticResource ComingSoonLabel}" />
+                        <Label IsVisible="{Binding IsCalendar}"
+                               Text="Calendar is coming soon"
+                               Style="{StaticResource ComingSoonLabel}" />
+                        <StackLayout IsVisible="{Binding IsNormalDate}"
+                                     VerticalOptions="CenterAndExpand">
+                            <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                               IsVisible="{Binding IsBusy}"
+                                               Style="{StaticResource CenterActivityIndicator}" />
+                            <customListView:CustomListView x:Name="LeagueTable"
+                                                           AutomationId="LeagueTableId"
+                                                           AutomationProperties.IsInAccessibleTree="False"
+                                                           Footer=""
+                                                           GroupDisplayBinding="{Binding Key}"
+                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                                                           HasUnevenRows="true"
+                                                           IsGroupingEnabled="True"
+                                                           IsPullToRefreshEnabled="true"
+                                                           IsRefreshing="{Binding IsRefreshing}"
+                                                           IsVisible="{Binding IsNotBusy}"
+                                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                                           ItemsSource="{Binding MatchItemsSource}"
+                                                           RefreshCommand="{Binding RefreshCommand}"
+                                                           SelectionMode="None"
+                                                           SeparatorColor="{StaticResource LineColor}"
+                                                           Style="{StaticResource ListViewHasBackground}"
+                                                           VerticalOptions="FillAndExpand">
+                                <x:Arguments>
+                                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                                </x:Arguments>
+                                <customListView:CustomListView.Behaviors>
+                                    <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
+                                                              EventArgsParameterPath="Item"
+                                                              EventName="ItemTapped" />
+                                </customListView:CustomListView.Behaviors>
+                            </customListView:CustomListView>
                         </StackLayout>
-                    </ContentView>
+                    </StackLayout>
                 </DataTemplate>
             </cards:CarouselView.ItemTemplate>
         </cards:CarouselView>

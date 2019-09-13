@@ -139,7 +139,7 @@
 
         private StackLayout BuildDateBarItem(DateTime date, int index)
         {
-            var dateBarItemLayout = new StackLayout();
+            var dateBarItemLayout = new StackLayout { Style = (Style)Resources["DateBarItemLayout"] };
 
             var dayNameLabel = new Label
             {
