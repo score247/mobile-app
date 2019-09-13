@@ -100,18 +100,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
-      
-        protected void OnDisposed()
-        {
-            Debug.WriteLine("OddsMovementViewModel Clean");
-
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
-
-            if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
-            {
-                OddsMovementItems.Clear();
-            }
-        }
 
         public override async void OnResume()
         {
@@ -123,6 +111,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
 
             eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
+        }
+
+        public override void Destroy()
+        {
+            Debug.WriteLine("OddsMovementViewModel Destroy");
+
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
         }
 
         [Time]
