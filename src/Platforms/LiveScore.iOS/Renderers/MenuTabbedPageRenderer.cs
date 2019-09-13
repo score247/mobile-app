@@ -10,15 +10,6 @@ namespace LiveScore.iOS.Renderers
 {
     public class MenuTabbedPageRenderer : TabbedRenderer
     {
-        private readonly UIOffset titlePositionOffset = new UIOffset(0, -5);
-        private readonly UIEdgeInsets iconInsets = new UIEdgeInsets(-3, 0, 2, 0);
-        private const float TabBarHeight = 50f;
-        private readonly UITextAttributes uiTextAttributes 
-            = new UITextAttributes
-            {
-                Font = FontManager.GetFont(nfloat.Parse(App.Current.Resources["FunctionBarFontSize"].ToString()))
-            };
-
         public override void ViewWillAppear(bool animated)
         {
             SetSelectedTabColor();
@@ -26,50 +17,35 @@ namespace LiveScore.iOS.Renderers
             base.ViewWillAppear(animated);
         }
 
-        private static void SetSelectedTabColor()
+        private void SetSelectedTabColor()
         {
             var color = App.Current.Resources["FunctionBarActiveColor"];
 
-            if (color == null)
+            if (color != null)
             {
-                return;
+                var selectedColor = (Color)color;
+                UIColor selectedTabColor = UIColor.FromRGB((nfloat)selectedColor.R, (nfloat)selectedColor.G, (nfloat)selectedColor.B);
+
+                UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
+
+                UITabBarItem.Appearance.SetTitleTextAttributes(
+                    new UITextAttributes
+                    {
+                        TextColor = selectedTabColor,
+                    },
+                    UIControlState.Selected);
             }
-
-            var selectedColor = (Color)color;
-            var selectedTabColor = UIColor.FromRGB((nfloat)selectedColor.R, (nfloat)selectedColor.G, (nfloat)selectedColor.B);
-
-            UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
-
-            UITabBarItem.Appearance.SetTitleTextAttributes(
-                new UITextAttributes
-                {
-                    TextColor = selectedTabColor
-                },
-                UIControlState.Selected);
         }
 
         private void UpdateAllTabBarItems()
         {
+            float.TryParse(App.Current.Resources["FunctionBarFontSize"].ToString(), out var tabbedPageFont);
+
             foreach (var controller in ViewControllers)
             {
-                controller.TabBarItem.SetTitleTextAttributes(uiTextAttributes, UIControlState.Normal);
-            }
-        }
-
-        public override void ViewWillLayoutSubviews()
-        {
-            base.ViewWillLayoutSubviews();
-
-            var tabFrame = TabBar.Frame;
-            tabFrame.Height = TabBarHeight;
-            tabFrame.Y = View.Frame.Height - TabBarHeight;
-
-            TabBar.Frame = tabFrame;
-
-            foreach (var vc in ViewControllers)
-            {
-                vc.TabBarItem.TitlePositionAdjustment = titlePositionOffset;
-                vc.TabBarItem.ImageInsets = iconInsets;
+                controller.TabBarItem.SetTitleTextAttributes(
+                    new UITextAttributes { Font = FontManager.GetFont(tabbedPageFont) },
+                    UIControlState.Normal);
             }
         }
     }
