@@ -25,6 +25,8 @@
 
         string CountryCode { get; }
 
+        string LeagueGroupName { get; }
+
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);

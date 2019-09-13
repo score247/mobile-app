@@ -258,6 +258,9 @@ namespace LiveScore.Soccer.Models.Matches
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
         [IgnoreMember]
+        public string LeagueGroupName => $"{CountryCode} {LeagueName.ToUpperInvariant()}";
+
+        [IgnoreMember]
         private bool HomeWinPenalty
            => EventStatus?.IsClosed == true && GetPenaltyResult() != null && HomeTeamId == WinnerId;
 

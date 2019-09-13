@@ -9,7 +9,7 @@ namespace LiveScore.Core.ViewModels
         public GroupMatchViewModel(IMatch match)
         {
             LeagueId = match.LeagueId;
-            LeagueName = $"{match.CountryCode} {match.LeagueName.ToUpperInvariant()}";
+            LeagueName = match.LeagueGroupName;
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
         }
 
