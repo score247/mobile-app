@@ -23,6 +23,8 @@
 
         IEnumerable<MatchPeriod> MatchPeriods { get; }
 
+        string CountryCode { get; }
+
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);

@@ -8,10 +8,9 @@ namespace LiveScore.Soccer.Models.Matches
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
-    using LiveScore.Soccer.Models.Teams;
+    using Teams;
     using MessagePack;
     using PropertyChanged;
-
 
     [AddINotifyPropertyChangedInterface, MessagePackObject]
     public class Match : IMatch
@@ -46,7 +45,8 @@ namespace LiveScore.Soccer.Models.Matches
             string stoppageTime,
             byte injuryTimeAnnounced,
             EventType lastTimelineType,
-            IEnumerable<MatchPeriod> matchPeriods)
+            IEnumerable<MatchPeriod> matchPeriods,
+            string countryCode)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -75,6 +75,7 @@ namespace LiveScore.Soccer.Models.Matches
             InjuryTimeAnnounced = injuryTimeAnnounced;
             LastTimelineType = lastTimelineType;
             MatchPeriods = matchPeriods;
+            CountryCode = countryCode;
         }
 
         [Key(0)]
@@ -154,6 +155,9 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(25)]
         public IEnumerable<MatchPeriod> MatchPeriods { get; private set; }
+
+        [Key(26)]
+        public string CountryCode { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
