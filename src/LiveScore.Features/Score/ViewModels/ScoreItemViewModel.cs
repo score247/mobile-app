@@ -187,12 +187,14 @@ namespace LiveScore.Features.Score.ViewModels
                 .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
                 .ToList();
 
-            MatchItemsSource = new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match)));
+            var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
+
+            MatchItemsSource = new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
 
             IsRefreshing = false;
 
             Profiler.Start("ScoresView.Render");
+            Debug.WriteLine($"Number of groups: {groups.Count()}");
             Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");
         }
 
