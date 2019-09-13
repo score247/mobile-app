@@ -193,7 +193,7 @@
             {
                 var calendarItem = dateBarLayout.Children[selectedIndex] as Label;
 
-                control.SetSelectedTextColor(calendarItem);
+                control.SetSelectedTextColor(calendarItem, true);
             }
             else
             {
@@ -209,9 +209,10 @@
         {
             if (oldIndex == LiveIndex)
             {
-                var liveItem = dateBarLayout.Children[oldIndex] as Label;
-
-                liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
+                if (dateBarLayout.Children[oldIndex] is Label liveItem)
+                {
+                    liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
+                }
             }
             else if (oldIndex == control.CalendarIndex)
             {
@@ -221,11 +222,13 @@
             }
             else
             {
-                var oldItemLayout = dateBarLayout.Children[oldIndex] as StackLayout;
-                var dayNameLabel = oldItemLayout.Children[0] as Label;
-                var dayLabel = oldItemLayout.Children[1] as Label;
-                control.SetTextColor(dayNameLabel);
-                control.SetTextColor(dayLabel);
+                if (dateBarLayout.Children[oldIndex] is StackLayout oldItemLayout)
+                {
+                    var dayNameLabel = oldItemLayout.Children[0] as Label;
+                    var dayLabel = oldItemLayout.Children[1] as Label;
+                    control.SetTextColor(dayNameLabel);
+                    control.SetTextColor(dayLabel);
+                }
             }
         }
 

@@ -46,7 +46,7 @@
 
             ImageSource = GoalImages.ContainsKey(goalMethod)
                 ? GoalImages[goalMethod]
-                : Images.Goal.Value;
+                : Images.Goal.Value; // Have case header
 
             if (TimelineEvent.OfHomeTeam())
             {
