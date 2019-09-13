@@ -39,23 +39,18 @@
 
             for (var i = 0; i < redCards; i++)
             {
-                stackLayout.Children.Add(BuildRedCardImage());
+                stackLayout.Children.Add(BuildRedCardImage(control));
             }
 
             control.Content = stackLayout;
         }
 
-#pragma warning disable S109 // Magic numbers should not be used
-
-        private static Image BuildRedCardImage()
+        private static Label BuildRedCardImage(RedCardTemplate control)
         {
-            return new Image
+            return new Label
             {
-                Source = Images.RedCard.Value,
-                Margin = new Thickness(4, 0, 0, 0)
+                Style = (Style)control.Resources[Images.RedCard.Value]
             };
         }
-
-#pragma warning restore S109 // Magic numbers should not be used
     }
 }
