@@ -95,8 +95,9 @@
     <CodesignProvision>Score247</CodesignProvision>
     <BuildIpa>true</BuildIpa>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <MtouchDebug>true</MtouchDebug>
     <MtouchProfiling>false</MtouchProfiling>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
+    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
