@@ -38,41 +38,48 @@
 
         public string BuildMatchMinute(IMatch match)
         {
-            soccerMatch = match as Match;
+            try
+            {
+                soccerMatch = match as Match;
 
 
-            if (soccerMatch == null)
+                if (soccerMatch == null)
+                {
+                    return string.Empty;
+                }
+
+                PeriodStartMinute.TryGetValue(match.MatchStatus, out var periodStartMinute);
+                PeriodEndMinute.TryGetValue(match.MatchStatus, out var periodEndMinute);
+
+                var periodStartTime = soccerMatch != null && soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
+                    ? soccerMatch.EventDate
+                    : soccerMatch.CurrentPeriodStartTime;
+
+                // TODO: What if CurrentPeriodStartTime does not have data?
+                var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
+
+                if ((soccerMatch.LastTimelineType != null && soccerMatch.LastTimelineType.IsInjuryTimeShown) || GetAnnouncedInjuryTime() > 0)
+                {
+                    return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute);
+                }
+
+                if (matchMinute >= periodEndMinute)
+                {
+                    matchMinute = periodEndMinute;
+                }
+
+                if (matchMinute < periodStartMinute)
+                {
+                    matchMinute = periodStartMinute;
+                }
+
+                Debug.WriteLine($"{match.Id}-{matchMinute}");
+                return $"{matchMinute}'";
+            }
+            catch(Exception ex)
             {
                 return string.Empty;
             }
-
-            PeriodStartMinute.TryGetValue(match.MatchStatus, out var periodStartMinute);
-            PeriodEndMinute.TryGetValue(match.MatchStatus, out var periodEndMinute);
-
-            var periodStartTime = soccerMatch != null && soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
-                ? soccerMatch.EventDate
-                : soccerMatch.CurrentPeriodStartTime;
-
-            // TODO: What if CurrentPeriodStartTime does not have data?
-            var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
-
-            if (soccerMatch.LastTimelineType.IsInjuryTimeShown || GetAnnouncedInjuryTime() > 0)
-            {
-                return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute);
-            }
-
-            if (matchMinute >= periodEndMinute)
-            {
-                matchMinute = periodEndMinute;
-            }
-
-            if (matchMinute < periodStartMinute)
-            {
-                matchMinute = periodStartMinute;
-            }
-
-            Debug.WriteLine($"{match.Id}-{matchMinute}");
-            return $"{matchMinute}'";
 
         }
 
