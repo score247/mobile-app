@@ -20,6 +20,7 @@
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="2.7.1" />
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
     <PackageReference Include="MethodTimer.Fody" Version="3.1.0" />
@@ -61,6 +62,11 @@
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\SplashScreen.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">

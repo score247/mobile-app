@@ -270,6 +270,9 @@
     <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoThin.ttf">
       <Link>Resources\fonts\RobotoThin.ttf</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\SplashScreen\splashScreen.json">
+      <Link>Resources\splashScreen.json</Link>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -385,6 +388,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
+      <Version>2.7.1</Version>
+    </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
       <Version>7.16.0.8981</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

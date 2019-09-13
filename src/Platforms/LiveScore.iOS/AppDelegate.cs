@@ -5,6 +5,7 @@ namespace LiveScore.iOS
     using Common.Services;
     using FFImageLoading.Forms.Platform;
     using Foundation;
+    using Lottie.Forms.iOS.Renderers;
     using ObjCRuntime;
     using PanCardView.iOS;
     using Prism;
@@ -23,6 +24,7 @@ namespace LiveScore.iOS
 
             var application = new App(new iOSInitializer());
             LoadApplication(application);
+            AnimationViewRenderer.Init();
 
             var loggingService = application.Container.Resolve<ILoggingService>();
 
