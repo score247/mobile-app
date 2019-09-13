@@ -63,12 +63,6 @@ namespace LiveScore.iOS.Renderers
         {
             base.ViewWillLayoutSubviews();
 
-            var tabFrame = TabBar.Frame;
-            tabFrame.Height = TabBarHeight;
-            tabFrame.Y = View.Frame.Height - TabBarHeight;
-
-            TabBar.Frame = tabFrame;
-
             foreach (var vc in ViewControllers)
             {
                 vc.TabBarItem.TitlePositionAdjustment = titlePositionOffset;
