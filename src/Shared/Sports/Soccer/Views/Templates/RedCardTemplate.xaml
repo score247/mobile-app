@@ -5,4 +5,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.RedCardTemplate">
+    <ContentView.Resources>
+        <Style x:Key="RedCardIcon"
+           BasedOn="{StaticResource Icons}"
+           TargetType="Label">
+            <Setter Property="FontSize"
+                Value="12" />
+            <Setter Property="TextColor"
+                Value="#FF3030" />
+            <Setter Property="Text"
+                Value="&#xe923;" />
+            <Setter Property="Margin"
+                Value="4,0,0,0" />
+            <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        </Style>
+    </ContentView.Resources>
 </ContentView>

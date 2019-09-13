@@ -494,7 +494,7 @@
                 <Setter Property="VerticalTextAlignment"
                         Value="Center" />
                 <Setter Property="FontSize"
-                        Value="3" />
+                        Value="4" />
                 <Setter Property="TextColor"
                         Value="{StaticResource PrimaryAccentColor}" />
                 <Setter Property="Text"
