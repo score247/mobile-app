@@ -116,11 +116,13 @@
                         <Label Grid.Row="0"
                                Grid.Column="2"
                                AutomationId="HomeScore"
+                               IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
                                Style="{StaticResource HomeScore}"
                                Text="{Binding MatchViewModel.Match.HomeScore}" />
                         <Label Grid.Row="1"
                                Grid.Column="2"
                                AutomationId="AwayScore"
+                               IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
                                Style="{StaticResource AwayScore}"
                                Text="{Binding MatchViewModel.Match.AwayScore}" />
                     </Grid>
@@ -131,7 +133,7 @@
                        Text="{Binding DisplaySecondLeg}" />
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemsSource="{Binding TabItems}"
-                                   ItemTappedCommand="{Binding FunctionTabTappedCommand}"/>
+                                   ItemTappedCommand="{Binding FunctionTabTappedCommand}" />
                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"

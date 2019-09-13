@@ -190,7 +190,6 @@ namespace LiveScore.Features.Score.ViewModels
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
 
             MatchItemsSource = new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
-
             IsRefreshing = false;
 
             Profiler.Start("ScoresView.Render");
