@@ -87,7 +87,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        protected async Task OnInitialized()
+        public override async void OnAppearing()
         {
             try
             {
@@ -100,7 +100,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
-
+      
         protected void OnDisposed()
         {
             Debug.WriteLine("OddsMovementViewModel Clean");
