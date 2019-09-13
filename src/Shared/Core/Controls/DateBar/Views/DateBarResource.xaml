@@ -67,9 +67,7 @@
         <Setter Property="TextColor"
                 Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontFamily"
-                Value="{StaticResource RobotoBold}" />
-        <Setter Property="FontAttributes"
-                Value="Bold" />
+                Value="{StaticResource RobotoLight}" />
     </Style>
 
     <Style x:Key="DateBarDayNameLabel"

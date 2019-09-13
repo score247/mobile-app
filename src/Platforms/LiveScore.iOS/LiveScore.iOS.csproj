@@ -252,9 +252,6 @@
     </Compile>
     <Compile Include="Renderers\DetailScrollViewRenderer.cs" />
     <Compile Include="Renderers\DisableSelectionStyleViewCellRenderer.cs" />
-    <BundleResource Include="..\..\CommonResources\Font\roboto\SFUIDisplayRegular.otf">
-      <Link>Resources\fonts\SFUIDisplayRegular.otf</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoBlack.ttf">
       <Link>Resources\fonts\RobotoBlack.ttf</Link>
     </BundleResource>
