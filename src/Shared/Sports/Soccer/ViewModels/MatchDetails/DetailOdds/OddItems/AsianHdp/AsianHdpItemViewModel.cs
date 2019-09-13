@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using LiveScore.Core;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Extensions;
@@ -38,7 +39,7 @@
        
         private void BuildAwayOdds()
         {            
-            var awayOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
+            var awayOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
 
             if (awayOdds == null)
             {
@@ -47,12 +48,12 @@
 
             AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
             AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
-            AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
+            AwayOddsTrend = awayOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : awayOdds.OddsTrend.Value.ToString();
         }      
 
         private void BuildHomeOddsAndOptionValue()
         {
-            var homeOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName)); 
+            var homeOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName)); 
 
             if (homeOdds == null)
             {
@@ -61,7 +62,7 @@
 
             HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
             HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
-            HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
+            HomeOddsTrend = homeOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : homeOdds.OddsTrend.Value.ToString();
 
             OpeningHdp = homeOdds.OpeningOptionValue.ToOddsOptionFormat();
             LiveHdp = homeOdds.OptionValue.ToOddsOptionFormat();

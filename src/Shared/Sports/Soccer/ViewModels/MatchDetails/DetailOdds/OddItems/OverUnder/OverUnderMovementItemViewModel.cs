@@ -6,6 +6,7 @@
     using Enumerations;
     using Extensions;
     using Prism.Navigation;
+    using LiveScore.Core.Enumerations;
 
     public class OverUnderMovementItemViewModel : BaseMovementItemViewModel
     {
@@ -32,30 +33,29 @@
 
         private void BuildOverOddsAndOptionValue()
         {
-            var overOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
+            var overOdds = OddsMovement.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
 
             if (overOdds == null)
             {
                 return;
             }
 
-            OverOdds = overOdds.LiveOdds.ToOddsFormat();
-            OverOddsTrend = overOdds.OddsTrend.Value.ToString();
-
+            OverOdds = overOdds.LiveOdds.ToOddsFormat();            
+            OverOddsTrend = overOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : overOdds.OddsTrend.Value.ToString();
             OptionValue = overOdds.OptionValue.ToOddsOptionFormat();
         }
 
         private void BuildUnderOdds()
         {
-            var underOdds = OddsMovement.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
+            var underOdds = OddsMovement.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
 
             if (underOdds == null)
             {
                 return;
             }
 
-            UnderOdds = underOdds.LiveOdds.ToOddsFormat();
-            UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
+            UnderOdds = underOdds.LiveOdds.ToOddsFormat();            
+            UnderOddsTrend = underOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : underOdds.OddsTrend.Value.ToString();
         }
     }
 }

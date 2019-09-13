@@ -4,6 +4,7 @@
     using Core;
     using Enumerations;
     using Extensions;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using Prism.Navigation;
 
@@ -38,7 +39,7 @@
      
         private void BuildUnderOdds()
         {
-            var underOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
+            var underOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
 
             if (underOdds == null)
             {
@@ -46,13 +47,13 @@
             }
 
             UnderOpeningOdds = underOdds.OpeningOdds.ToOddsFormat();
-            UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();
-            UnderOddsTrend = underOdds.OddsTrend.Value.ToString();
+            UnderLiveOdds = underOdds.LiveOdds.ToOddsFormat();            
+            UnderOddsTrend = underOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : underOdds.OddsTrend.Value.ToString();
         }
 
         private void BuildOverOddsAndOptionValue()
         {
-            var overOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
+            var overOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Over.DisplayName));
 
             if (overOdds == null)
             {
@@ -60,8 +61,8 @@
             }
 
             OverLiveOdds = overOdds.LiveOdds.ToOddsFormat();
-            OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();
-            OverOddsTrend = overOdds.OddsTrend.Value.ToString();
+            OverOpeningOdds = overOdds.OpeningOdds.ToOddsFormat();            
+            OverOddsTrend = overOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : overOdds.OddsTrend.Value.ToString();
 
             OpeningOverOptionValue = overOdds.OpeningOptionValue.ToOddsOptionFormat();
             LiveOverOptionValue = overOdds.OptionValue.ToOddsOptionFormat();

@@ -4,6 +4,7 @@
     using Core;
     using Enumerations;
     using Extensions;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using Prism.Navigation;
 
@@ -50,14 +51,13 @@
             }
 
             AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
-            AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
-            AwayOddsTrend = awayOdds.OddsTrend.Value.ToString();
-
+            AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();            
+            AwayOddsTrend = awayOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : awayOdds.OddsTrend.Value.ToString();
         }
 
         private void BuildDrawOdds()
         {
-            var drawOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Draw.DisplayName));
+            var drawOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Draw.DisplayName));
 
             if (drawOdds == null)
             {
@@ -65,14 +65,13 @@
             }
 
             DrawOpeningOdds = drawOdds.OpeningOdds.ToOddsFormat();
-            DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();
-            DrawOddsTrend = drawOdds.OddsTrend.Value.ToString();
-
+            DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();            
+            DrawOddsTrend = drawOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : drawOdds.OddsTrend.Value.ToString(); 
         }
 
         private void BuildHomeOdds()
         {
-            var homeOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName));
+            var homeOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName));
 
             if (homeOdds == null)
             {
@@ -81,8 +80,7 @@
 
             HomeLiveOdds = homeOdds.LiveOdds.ToOddsFormat();
             HomeOpeningOdds = homeOdds.OpeningOdds.ToOddsFormat();
-            HomeOddsTrend = homeOdds.OddsTrend.Value.ToString();
-
+            HomeOddsTrend = homeOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : homeOdds.OddsTrend.Value.ToString();
         }
     }
 }
