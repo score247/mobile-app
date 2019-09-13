@@ -10,9 +10,11 @@
         /// </summary>
         /// <returns>UIFont object for use.</returns>
         /// <param name="fontSize">Font size.</param>
-        public static UIFont GetFont(nfloat fontSize)
+        public static UIFont GetFont(nfloat fontSize) => GetFont(StandardFontName, fontSize);
+
+        public static UIFont GetFont(string fontFamily, nfloat fontSize)
         {
-            return UIFont.FromName(StandardFontName, fontSize);
+            return UIFont.FromName(fontFamily, fontSize);
         }
 
         /// <summary>

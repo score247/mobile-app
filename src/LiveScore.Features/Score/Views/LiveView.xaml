@@ -18,7 +18,9 @@
     <ContentPage.Content>
         <Label
             FontSize="13"
+            HeightRequest="100"
             HorizontalOptions="Center"
+            LineHeight="50"
             Text="Live is coming soon"
             TextColor="{StaticResource SecondTextColor}"
             VerticalOptions="Center" />
