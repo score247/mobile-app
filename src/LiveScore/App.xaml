@@ -17,30 +17,30 @@
             <OnPlatform x:Key="RobotoLight"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/Roboto-Light.ttf" />
+                    Value="fonts/RobotoLight.ttf" />
                 <On Platform="iOS"
-                    Value="livescore" />
+                    Value="RobotoLight" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoRegular"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/Roboto-Regular.ttf" />
+                    Value="fonts/RobotoRegular.ttf" />
                 <On Platform="iOS"
-                    Value="livescore" />
+                    Value="RobotoRegular" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoMedium"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/Roboto-Medium.ttf" />
+                    Value="fonts/RobotoMedium.ttf" />
                 <On Platform="iOS"
-                    Value="livescore" />
+                    Value="RobotoMedium" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoBold"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/Roboto-Bold.ttf" />
+                    Value="fonts/RobotoBold.ttf" />
                 <On Platform="iOS"
-                    Value="livescore" />
+                    Value="RobotoBold" />
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#070915</Color>

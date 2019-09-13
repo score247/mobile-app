@@ -252,6 +252,27 @@
     </Compile>
     <Compile Include="Renderers\DetailScrollViewRenderer.cs" />
     <Compile Include="Renderers\DisableSelectionStyleViewCellRenderer.cs" />
+    <BundleResource Include="..\..\CommonResources\Font\roboto\SFUIDisplayRegular.otf">
+      <Link>Resources\fonts\SFUIDisplayRegular.otf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoBlack.ttf">
+      <Link>Resources\fonts\RobotoBlack.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoBold.ttf">
+      <Link>Resources\fonts\RobotoBold.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoLight.ttf">
+      <Link>Resources\fonts\RobotoLight.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoMedium.ttf">
+      <Link>Resources\fonts\RobotoMedium.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoRegular.ttf">
+      <Link>Resources\fonts\RobotoRegular.ttf</Link>
+    </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoThin.ttf">
+      <Link>Resources\fonts\RobotoThin.ttf</Link>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -298,24 +319,6 @@
     </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag%403x.png">
       <Link>Resources\images\flag_league\default_flag%403x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Medium.ttf">
-      <Link>Resources\fonts\Roboto-Medium.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Light.ttf">
-      <Link>Resources\fonts\Roboto-Light.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Regular.ttf">
-      <Link>Resources\fonts\Roboto-Regular.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Thin.ttf">
-      <Link>Resources\fonts\Roboto-Thin.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Bold.ttf">
-      <Link>Resources\fonts\Roboto-Bold.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\roboto\Roboto-Black.ttf">
-      <Link>Resources\fonts\Roboto-Black.ttf</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
