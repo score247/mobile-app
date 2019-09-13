@@ -58,6 +58,7 @@ namespace LiveScore.iOS.Renderers
             }
         }
 
+        // TODO: iphone Xr will get wrong UI issue
         public override void ViewWillLayoutSubviews()
         {
             base.ViewWillLayoutSubviews();

@@ -13,7 +13,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.PubSubEvents.Matches;
-    using LiveScore.Core.Services;
     using LiveScore.Soccer.Extensions;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Services;
@@ -25,7 +24,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     public class DetailInfoViewModel : TabItemViewModel
     {
         private const string SpectatorNumberFormat = "0,0";
-        private readonly IMatchService matchService;
         private readonly IMatchInfoService matchInfoService;
         private readonly IEventAggregator eventAggregator;
         private readonly string matchId;
@@ -40,11 +38,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
-            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(true), false));
             TabHeaderIcon = MatchDetailTabImage.Info;
             TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
+
+            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -63,11 +62,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        public override void OnResume()
-        {
-            base.OnResume();
-        }
-
         [Time]
         public override async void OnAppearing()
         {
@@ -75,14 +69,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             {
                 // TODO: Check when need to reload data later
                 await LoadData(() => LoadMatchDetail(true)).ConfigureAwait(false);
-
-                // TODO: need review UIThread here
-                eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
             }
             catch (Exception ex)
             {
                 await LoggingService.LogErrorAsync(ex);
             }
+        }
+
+        public override void Destroy()
+        {
+            eventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Unsubscribe(OnReceivedMatchEvent);
         }
 
         [Time]

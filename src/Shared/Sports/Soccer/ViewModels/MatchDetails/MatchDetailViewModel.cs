@@ -76,13 +76,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
             }
 
-            EventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
-
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnReceivedTeamStatistic, true);
+            SubscribeEvents();
         }
 
         public override void OnResume()
@@ -103,20 +97,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             base.OnDisappearing();
 
-            foreach (var tab in tabItemViewModels)
-            {
-                tab.Value.OnDisappearing();
-            }
+            tabItemViewModels[selectedTabItem].OnDisappearing();
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
 
-            foreach (var tab in tabItemViewModels)
-            {
-                tab.Value.OnAppearing();
-            }
+            tabItemViewModels[selectedTabItem].OnAppearing();
         }
 
         public override void Destroy()
@@ -128,6 +116,22 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 tab.Value.Destroy();
             }
 
+            UnSubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
+            EventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Subscribe(OnReceivedTeamStatistic, true);
+        }
+
+        private void UnSubscribeEvents()
+        {
             EventAggregator
               .GetEvent<MatchEventPubSubEvent>()
               .Unsubscribe(OnReceivedMatchEvent);

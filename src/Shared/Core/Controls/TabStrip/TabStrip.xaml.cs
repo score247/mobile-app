@@ -27,7 +27,7 @@
                 Debug.WriteLine($"TabHeader tapped {index}");
                 SelectedIndex = (int)index;
             });
-          
+
             TabContent.ItemDisappearing += TabContent_ItemDisappearing;
             TabContent.ItemAppeared += TabContent_ItemAppeared;
         }
@@ -48,8 +48,9 @@
               nameof(SelectedIndex),
               typeof(int),
               typeof(TabItemViewModel),
-              0,             
-              propertyChanged: (bindable, oldValue, newValue) => {
+              0,
+              propertyChanged: (bindable, oldValue, newValue) =>
+              {
 
                   var newIndex = (int)newValue;
                   var oldIndex = (int)oldValue;
@@ -65,7 +66,7 @@
 
                   control.ItemTappedCommand?.Execute(new TabStripItemTappedEventArgs(newIndex));
               });
-      
+
 
         public int SelectedIndex
         {
@@ -88,14 +89,10 @@
             var tabItems = newValue as IEnumerable<TabItemViewModel>;
 
             if (control == null || tabItems == null || !tabItems.Any())
-            {           
+            {
                 return;
             }
-
-            //TODO use SelectedIndex instead of First
-            tabItems.First().OnAppearing();
-        }     
-        
+        }
 
         [Time]
         public void TabContent_ItemAppeared(CardsView view, ItemAppearedEventArgs args)
@@ -113,6 +110,6 @@
             {
                 (args.Item as TabItemViewModel)?.OnDisappearing();
             }
-        }      
+        }
     }
 }

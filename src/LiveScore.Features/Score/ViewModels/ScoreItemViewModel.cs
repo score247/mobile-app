@@ -69,19 +69,19 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateAsyncCommand ClickSearchCommand { get; private set; }
 
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            UnsubscribeAllEvents();
+        }
+
         [Time]
         public override void OnResume()
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
-            SubscribeEvents();
-
-            InitializeData();
-        }
-
-        public override void OnSleep()
-        {
-            UnsubscribeAllEvents();
+            // TODO: Handle load data in background
         }
 
         public override async void OnAppearing()
