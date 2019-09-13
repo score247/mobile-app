@@ -41,6 +41,17 @@
 
         public string DrawOddsTrend { get; private set; }
 
+        public override void UpdateOdds(IBetTypeOdds betTypeOdds)
+        {
+            base.UpdateOdds(betTypeOdds);
+
+            BuildHomeOdds();
+
+            BuildDrawOdds();
+
+            BuildAwayOdds();
+        }
+
         private void BuildAwayOdds()
         {
             var awayOdds = BetTypeOdds.BetOptions.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));

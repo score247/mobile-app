@@ -36,7 +36,15 @@
         public string LiveHdp { get; private set; }
 
         public string OpeningHdp { get; private set; }
-       
+
+        public override void UpdateOdds(IBetTypeOdds betTypeOdds)
+        {
+            base.UpdateOdds(betTypeOdds);
+
+            BuildHomeOddsAndOptionValue();
+            BuildAwayOdds();
+        }
+
         private void BuildAwayOdds()
         {            
             var awayOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));

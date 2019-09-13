@@ -39,8 +39,6 @@
             BetType = betType;
 
             BookmakerName = betTypeOdds.Bookmaker?.Name;
-
-            //OnInitialized();
         }
 
         public string BookmakerName { get; }
@@ -76,8 +74,6 @@
         public virtual void UpdateOdds(IBetTypeOdds betTypeOdds)
         {
             BetTypeOdds = betTypeOdds;
-
-            //OnInitialized();
         }
     }
 }

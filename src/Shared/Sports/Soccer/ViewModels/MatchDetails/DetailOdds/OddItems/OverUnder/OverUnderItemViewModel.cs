@@ -36,7 +36,14 @@
         public string LiveOverOptionValue { get; private set; }
 
         public string OpeningOverOptionValue { get; private set; }
-     
+
+        public override void UpdateOdds(IBetTypeOdds betTypeOdds)
+        {
+            BuildOverOddsAndOptionValue();
+
+            BuildUnderOdds();
+        }
+
         private void BuildUnderOdds()
         {
             var underOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Under.DisplayName));
