@@ -44,10 +44,9 @@
             IsVisibleHomeAssist = TimelineEvent?.Assist != null && TimelineEvent.OfHomeTeam();
             IsVisibleAwayAssist = TimelineEvent?.Assist != null && !TimelineEvent.OfHomeTeam();
 
-            if (GoalImages.ContainsKey(goalMethod))
-            {
-                ImageSource = GoalImages[goalMethod];
-            }
+            ImageSource = GoalImages.ContainsKey(goalMethod)
+                ? GoalImages[goalMethod]
+                : Images.Goal.Value;
 
             if (TimelineEvent.OfHomeTeam())
             {
