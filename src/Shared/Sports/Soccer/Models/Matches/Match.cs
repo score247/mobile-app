@@ -44,7 +44,8 @@
             byte injuryTimeAnnounced,
             EventType lastTimelineType,
             IEnumerable<MatchPeriod> matchPeriods,
-            string countryCode)
+            string countryCode,
+            string countryName)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -74,6 +75,7 @@
             LastTimelineType = lastTimelineType;
             MatchPeriods = matchPeriods;
             CountryCode = countryCode;
+            CountryName = countryName;
         }
 
         [Key(0)]
@@ -156,6 +158,9 @@
 
         [Key(26)]
         public string CountryCode { get; private set; }
+
+        [Key(27)]
+        public string CountryName { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
@@ -275,7 +280,7 @@
         [IgnoreMember]
         private bool AwayWinSecondLeg
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
-    }
+    }`
 
     /// <summary>
     /// Temp class for Message Pack generate AOT class
