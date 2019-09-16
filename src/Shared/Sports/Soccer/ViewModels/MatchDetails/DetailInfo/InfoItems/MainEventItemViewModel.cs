@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
-    using System.Linq;
     using LiveScore.Common.LangResources;
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
@@ -67,41 +66,28 @@
         {
             MainEventStatus = AppResources.HalfTime;
 
-            if (Match?.MatchPeriods != null)
-            {
-                var result = Match.MatchPeriods?.FirstOrDefault();
-                Score = $"{result?.HomeScore} - {result?.AwayScore}";
-            }
+            Score = $"{TimelineEvent?.HomeScore} - {TimelineEvent?.AwayScore}";
         }
 
         private void BuildExtraTimeHalfTime()
         {
             MainEventStatus = AppResources.ExtraTimeHalfTime;
 
-            if (MatchInfo != null)
-            {
-                Score = $"{Match.HomeScore} - {Match.AwayScore}";
-            }
+            Score = $"{TimelineEvent.HomeScore} - {TimelineEvent.AwayScore}";
         }
 
         private void BuildFullTime()
         {
             MainEventStatus = AppResources.FullTime;
 
-            if (Match.HasFullTimeResult())
-            {
-                var firstHalfResult = Match.MatchPeriods.ToList()[0];
-                var secondHalfResult = Match.MatchPeriods.ToList()[1];
-                var totalHomeScore = firstHalfResult?.HomeScore + secondHalfResult?.HomeScore;
-                var totalAwayScore = firstHalfResult?.AwayScore + secondHalfResult?.AwayScore;
-                Score = $"{totalHomeScore} - {totalAwayScore}";
-            }
+            Score = $"{TimelineEvent.HomeScore} - {TimelineEvent.AwayScore}";
         }
 
         private void BuildAfterExtraTime()
         {
             MainEventStatus = AppResources.AfterExtraTime;
-            Score = $"{Match?.HomeScore} - {Match?.AwayScore}";
+
+            Score = $"{TimelineEvent?.HomeScore} - {TimelineEvent?.AwayScore}";
         }
 
         private void BuildPenaltyShootOut()
