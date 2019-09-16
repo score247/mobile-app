@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Features.Score.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Core;
     using Core.Controls.DateBar.EventArgs;
@@ -42,7 +41,7 @@
         {
             var todayItem = ScoreItemSources[TodayIndex];
 
-            if (todayItem.SelectedDate != DateTime.Today)
+            if (todayItem?.SelectedDate != DateTime.Today)
             {
                 await NavigateToHome();
             }

@@ -42,7 +42,6 @@
             {
                 soccerMatch = match as Match;
 
-
                 if (soccerMatch == null)
                 {
                     return string.Empty;
@@ -76,7 +75,7 @@
                 Debug.WriteLine($"{match.Id}-{matchMinute}");
                 return $"{matchMinute}'";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return string.Empty;
             }

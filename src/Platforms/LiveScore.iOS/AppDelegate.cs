@@ -29,7 +29,6 @@ namespace LiveScore.iOS
             var loggingService = application.Container.Resolve<ILoggingService>();
 
             Runtime.MarshalManagedException += (_, args) => loggingService.LogError(args.Exception);
-
             Runtime.MarshalObjectiveCException += (_, args)
                 => loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
 

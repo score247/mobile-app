@@ -237,7 +237,7 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            var matchItem = MatchItemsSource
+            var matchItem = MatchItemsSource?
                 .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match.Id == payload.MatchId);
 

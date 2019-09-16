@@ -43,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             TabHeaderIcon = MatchDetailTabImage.Info;
             TabHeaderActiveIcon = MatchDetailTabImage.InfoActive;
 
-            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, true);
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -97,7 +97,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
             if (matchEventMessage.SportId != CurrentSportId
-                || matchEventMessage.MatchEvent.MatchId != matchId)
+                || matchEventMessage.MatchEvent.MatchId != matchId
+                || MatchInfo == null)
             {
                 return;
             }
