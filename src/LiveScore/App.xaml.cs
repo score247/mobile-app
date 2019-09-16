@@ -84,7 +84,7 @@ namespace LiveScore
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init(Configuration.SentryDsn);
+            logService.Init(Configuration.SentryDsn, ravenClient: null, Configuration.Environment);
 
             _ = RegisterAndStartEventHubs(Container);
 

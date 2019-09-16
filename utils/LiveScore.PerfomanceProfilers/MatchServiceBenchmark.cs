@@ -80,7 +80,7 @@
     {
 #pragma warning disable S1186 // Methods should not be empty
 
-        public void Init(string Dsn, IRavenClient ravenClient = null)
+        public void Init(string Dsn, IRavenClient ravenClient = null, string env = "")
         {
         }
 
@@ -97,6 +97,9 @@
 
         public Task LogErrorAsync(string message, Exception exception)
             => Task.FromResult(0);
+
+        public Task LogInfoAsync(string message)
+        => Task.FromResult(0);
 
         public void TrackEvent(string trackIdentifier, string key, string value)
         {

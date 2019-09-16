@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using SharpRaven;
 using SharpRaven.Data;
@@ -18,7 +19,9 @@ namespace LiveScore.Common.Services
 
         void TrackEvent(string trackIdentifier, string key, string value);
 
-        void Init(string Dsn, IRavenClient ravenClient = null);
+        Task LogInfoAsync(string message);
+
+        void Init(string Dsn, IRavenClient ravenClient = null, string env = "");
     }
 
     public class LoggingService : ILoggingService
@@ -32,18 +35,25 @@ namespace LiveScore.Common.Services
             this.deviceInfo = deviceInfo;
         }
 
-        public void Init(string Dsn, IRavenClient ravenClient = null)
+        public void Init(string Dsn, IRavenClient ravenClient = null, string env = "")
         {
-            this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion };
+            this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion, Environment = env };
+
+            LogInfoAsync($"Init Logging Service with DSN {Dsn}");
         }
 
-        public void LogError(Exception exception) => ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
+        public void LogError(Exception exception)
+        {
+            ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
+        }        
 
         public void LogError(string message, Exception exception) => ravenClient?.Capture(CreateSentryEvent(message, exception));
 
         public Task LogErrorAsync(Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(string.Empty, exception));
 
         public Task LogErrorAsync(string message, Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
+
+        public Task LogInfoAsync(string message) => ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
 
         private SentryEvent CreateSentryEvent(string message, Exception exception)
         {
@@ -53,6 +63,21 @@ namespace LiveScore.Common.Services
             {
                 evt.Message = new SentryMessage(message);
             }
+            
+            evt.Contexts.Device.Model = deviceInfo.Model;
+            evt.Contexts.Device.Name = deviceInfo.Name;
+            evt.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;
+            evt.Contexts.OperatingSystem.Version = deviceInfo.OperatingSystemVersion;
+
+            return evt;
+        }
+
+        private SentryEvent CreateSentryInfoEvent(string message)
+        {
+            var evt = new SentryEvent(message)
+            {
+                Level = ErrorLevel.Info
+            };
 
             evt.Contexts.Device.Model = deviceInfo.Model;
             evt.Contexts.Device.Name = deviceInfo.Name;
