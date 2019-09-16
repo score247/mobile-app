@@ -32,7 +32,7 @@
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}', Mode=OneTime}"
-                       LineBreakMode="NoWrap"
+                       LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
                        Text="{Binding Key.LeagueName, Mode=OneTime}" />
                 <Label Grid.Row="0"

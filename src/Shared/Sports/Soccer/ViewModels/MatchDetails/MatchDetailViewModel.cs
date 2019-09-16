@@ -170,7 +170,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             BuildViewModel(match);
             BuildSecondLeg(match);
 
-            DisplayEventDate = match.EventDate.ToLocalShortDayMonth();
+            DisplayEventDate = match.EventDate.ToLocalShortDayMonth().ToUpper();
         }
 
         private void BuildSecondLeg(IMatch match)
