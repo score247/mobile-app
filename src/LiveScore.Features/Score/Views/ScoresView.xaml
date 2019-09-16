@@ -24,7 +24,7 @@
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout>
+    <StackLayout CompressedLayout.IsHeadless="True">
         <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
         <views:DateBar NumberDisplayDays="2"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
@@ -37,6 +37,8 @@
                             SelectedIndex="{Binding SelectedScoreItemIndex}"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             IsViewReusingEnabled="False"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
                             IsCyclical="False">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
@@ -47,16 +49,17 @@
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout>
+                    <FlexLayout JustifyContent="Center">
                         <!--TODO: Temporarily add live page here-->
                         <Label IsVisible="{Binding IsLive}"
                                Text="Live is coming soon"
-                               Style="{StaticResource ComingSoonLabel}" />
+                               Style="{StaticResource ComingSoonLabel}"
+                               FlexLayout.AlignSelf="Center" />
                         <Label IsVisible="{Binding IsCalendar}"
                                Text="Calendar is coming soon"
-                               Style="{StaticResource ComingSoonLabel}" />
-                        <StackLayout IsVisible="{Binding IsNormalDate}"
-                                     VerticalOptions="CenterAndExpand">
+                               Style="{StaticResource ComingSoonLabel}"
+                               FlexLayout.AlignSelf="Center" />
+                        <StackLayout IsVisible="{Binding IsNormalDate}">
                             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                                IsVisible="{Binding IsBusy}"
                                                Style="{StaticResource CenterActivityIndicator}" />
@@ -88,7 +91,7 @@
                                 </customListView:CustomListView.Behaviors>
                             </customListView:CustomListView>
                         </StackLayout>
-                    </StackLayout>
+                    </FlexLayout>
                 </DataTemplate>
             </cards:CarouselView.ItemTemplate>
         </cards:CarouselView>

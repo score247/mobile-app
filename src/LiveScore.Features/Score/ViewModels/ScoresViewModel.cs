@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Core;
     using Core.Controls.DateBar.EventArgs;
     using LiveScore.Core.ViewModels;
@@ -27,7 +28,7 @@
 
         public byte RangeOfDays { get; } = 2;
 
-        public IReadOnlyList<ScoreItemViewModel> ScoreItemSources { get; private set; }
+        public ObservableCollection<ScoreItemViewModel> ScoreItemSources { get; private set; }
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
 
@@ -85,21 +86,20 @@
 
         private void InitScoreItemSources()
         {
-            var itemViewModels = new List<ScoreItemViewModel>
+            ScoreItemSources = new ObservableCollection<ScoreItemViewModel>
             {
                 new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isLive: true)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
             {
-                itemViewModels.Add(
+                ScoreItemSources.Add(
                     new ScoreItemViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
             }
 
-            itemViewModels.Add(
+            ScoreItemSources.Add(
                 new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
 
-            ScoreItemSources = itemViewModels;
             SelectedScoreItemIndex = TodayIndex;
         }
     }
