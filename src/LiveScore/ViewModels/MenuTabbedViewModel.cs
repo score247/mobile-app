@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.ViewModels
 {
-    using Core.ViewModels;
     using Core;
+    using Core.ViewModels;
     using Prism.Navigation;
 
     public class MenuTabbedViewModel : ViewModelBase

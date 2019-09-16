@@ -21,6 +21,7 @@ namespace LiveScore.Soccer.Services
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
+        private readonly string hubEndpoint;
 
         private HubConnection hubConnection;
 
@@ -35,21 +36,23 @@ namespace LiveScore.Soccer.Services
 
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
+            string hubEndpoint,
             ILoggingService logger,
-            ISettings settings,
             IEventAggregator eventAggregator)
         {
-            this.settings = settings;
+
+            this.hubConnectionBuilder = hubConnectionBuilder;
+            this.hubEndpoint = hubEndpoint;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
-            this.hubConnectionBuilder = hubConnectionBuilder;
+
         }
 
         public async Task Start()
         {
             try
             {
-                hubConnection = hubConnectionBuilder.WithUrl($"{settings.HubEndpoint}/soccerhub").Build();
+                hubConnection = hubConnectionBuilder.WithUrl($"{hubEndpoint}/soccerhub").Build();
 
                 foreach (var hubEvent in hubEvents)
                 {
@@ -66,11 +69,11 @@ namespace LiveScore.Soccer.Services
                                     hubEvent.Value.Item2(eventAggregator, data);
                                 }
                             }
-                            catch(Exception ex)
+                            catch (Exception ex)
                             {
                                 logger.LogError(ex);
                             }
-                            
+
                         }));
                 }
 

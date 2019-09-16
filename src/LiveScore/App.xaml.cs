@@ -9,6 +9,7 @@ using JsonNet.ContractResolvers;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
+using LiveScore.Configurations;
 using LiveScore.Core;
 using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Events;
@@ -83,7 +84,7 @@ namespace LiveScore
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init(AppSettings.Current.LoggingDns);
+            logService.Init(Configuration.SentryDsn);
 
             _ = RegisterAndStartEventHubs(Container);
 
@@ -108,8 +109,6 @@ namespace LiveScore
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            AppSettings.Current.Start();
-
             containerRegistry.RegisterInstance(Container);
             RegisterServices(containerRegistry);
             RegisterForNavigation(containerRegistry);
@@ -119,7 +118,7 @@ namespace LiveScore
 
         private static void RegisterServices(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(AppSettings.Current.ApiEndpoint)));
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
             containerRegistry.RegisterSingleton<ISettings, Settings>();
@@ -147,7 +146,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
-            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();            
+            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
         }
 
@@ -167,8 +166,8 @@ namespace LiveScore
         {
             var soccerHubService = new SoccerHubService(
                 container.Resolve<IHubConnectionBuilder>(),
+                Configuration.SignalRHubEndPoint,
                 container.Resolve<ILoggingService>(),
-                container.Resolve<ISettings>(),
                 container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);
@@ -182,7 +181,7 @@ namespace LiveScore
 
         protected override void OnSleep()
         {
-            Debug.WriteLine("OnSleep");     
+            Debug.WriteLine("OnSleep");
 
             base.OnSleep();
         }

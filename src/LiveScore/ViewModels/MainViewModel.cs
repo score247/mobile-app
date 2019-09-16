@@ -42,23 +42,6 @@
         {
             settings.IsDemo = !settings.IsDemo;
 
-            if (settings.IsDemo)
-            {
-                settings.ApiEndpoint = "https://score247-api1.nexdev.net/test/api/";
-                settings.HubEndpoint = "https://score247-api2.nexdev.net/test/hubs/";
-            }
-            else
-            {
-#if DEBUG
-
-                settings.ApiEndpoint = "https://score247-api1.nexdev.net/dev/api/";
-                settings.HubEndpoint = "https://score247-api2.nexdev.net/dev/hubs/";
-#else
-                settings.ApiEndpoint = "https://score247-api1.nexdev.net/main/api/";
-                settings.HubEndpoint = "https://score247-api2.nexdev.net/main/hubs/";
-#endif
-            }
-
             return CleanCacheAndRefreshCommand.ExecuteAsync();
         }
 

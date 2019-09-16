@@ -89,6 +89,5 @@
         </news:EmptyNewsView>
       </x:Arguments>
     </NavigationPage>
-
   </TabbedPage.Children>
 </TabbedPage>

@@ -14,7 +14,6 @@ namespace LiveScore.Features.Score.Views
         public ScoresView()
         {
             InitializeComponent();
-            //LeagueTable.ItemAppearing += LeagueTable_ItemAppearing;
         }
 
         private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)
