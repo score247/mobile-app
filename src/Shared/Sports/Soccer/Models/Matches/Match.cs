@@ -263,7 +263,7 @@
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
         [IgnoreMember]
-        public string LeagueGroupName => $"{CountryCode} {LeagueName.ToUpperInvariant()}";
+        public string LeagueGroupName => $"{CountryName} {LeagueName}".ToUpperInvariant();
 
         [IgnoreMember]
         private bool HomeWinPenalty
@@ -280,7 +280,7 @@
         [IgnoreMember]
         private bool AwayWinSecondLeg
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
-    }`
+    }
 
     /// <summary>
     /// Temp class for Message Pack generate AOT class
