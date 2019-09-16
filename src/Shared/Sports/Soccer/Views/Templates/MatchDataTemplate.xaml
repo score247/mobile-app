@@ -49,12 +49,12 @@
                            Style="{StaticResource Team}"
                            Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
                     <templates:RedCardTemplate RedCards="{Binding Match.TotalHomeRedCards}" />
-                    <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}, Mode=OneTime'}"
-                                                IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                Style="{StaticResource MatchPenaltyIcon}" />
+                    <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}', Mode=OneTime}"
+                           IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                           Style="{StaticResource MatchPenaltyIcon}" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}', Mode=OneTime}"
-                                                IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                Style="{StaticResource MatchSecondLegIcon}" />
+                           IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                           Style="{StaticResource MatchSecondLegIcon}" />
                 </StackLayout>
                 <StackLayout  Grid.Row="1"
                               Grid.Column="1"
@@ -64,11 +64,11 @@
                            Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
                     <templates:RedCardTemplate RedCards="{Binding Match.TotalAwayRedCards}" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}', Mode=OneTime}"
-                                                IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
-                                                Style="{StaticResource MatchPenaltyIcon}" />
+                           IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
+                           Style="{StaticResource MatchPenaltyIcon}" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}', Mode=OneTime}"
-                                                IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                                Style="{StaticResource MatchSecondLegIcon}" />
+                           IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                           Style="{StaticResource MatchSecondLegIcon}" />
                 </StackLayout>
                 <Label Grid.Row="0"
                        Grid.Column="2"

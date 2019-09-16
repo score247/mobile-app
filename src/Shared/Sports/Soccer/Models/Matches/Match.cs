@@ -183,7 +183,7 @@
             HomeScore = soccerMatchResult.HomeScore;
             AwayScore = soccerMatchResult.AwayScore;
             WinnerId = soccerMatchResult.WinnerId;
-            AggregateWinnerId = soccerMatchResult.WinnerId;
+            AggregateWinnerId = soccerMatchResult.AggregateWinnerId;
             AggregateHomeScore = soccerMatchResult.AggregateHomeScore;
             AggregateAwayScore = soccerMatchResult.AggregateAwayScore;
         }
