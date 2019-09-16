@@ -1,6 +1,4 @@
-﻿using MessagePack;
-
-namespace LiveScore.Soccer.Models.Matches
+﻿namespace LiveScore.Soccer.Models.Matches
 {
     using System;
     using System.Collections.Generic;
@@ -181,6 +179,8 @@ namespace LiveScore.Soccer.Models.Matches
             AwayScore = soccerMatchResult.AwayScore;
             WinnerId = soccerMatchResult.WinnerId;
             AggregateWinnerId = soccerMatchResult.WinnerId;
+            AggregateHomeScore = soccerMatchResult.AggregateHomeScore;
+            AggregateAwayScore = soccerMatchResult.AggregateAwayScore;
         }
 
         public void UpdateLastTimeline(ITimelineEvent timelineEvent)
