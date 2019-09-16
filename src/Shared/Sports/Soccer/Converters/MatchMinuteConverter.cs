@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Soccer.Converters
 {
+    using LiveScore.Common.Services;
     using LiveScore.Core;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
@@ -29,9 +30,11 @@
         };
 
         private readonly ISettings settings;
+        private readonly ILoggingService loggingService;
+
         private Match soccerMatch;
 
-        public MatchMinuteConverter(ISettings settings)
+        public MatchMinuteConverter(ISettings settings, ILoggingService loggingService)
         {
             this.settings = settings;
         }
@@ -77,9 +80,10 @@
             }
             catch (Exception ex)
             {
-                return string.Empty;
-            }
+                loggingService.LogError(ex.Message, ex);
 
+                return string.Empty;
+            }            
         }
 
         private string BuildMinuteWithInjuryTime(int matchMinute, int periodEndMinute)
