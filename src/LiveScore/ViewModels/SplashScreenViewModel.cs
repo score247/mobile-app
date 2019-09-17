@@ -5,11 +5,12 @@
     using LiveScore.Core;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
+    using LiveScore.Core.ViewModels;
     using LiveScore.Views;
     using Prism.Mvvm;
     using Prism.Navigation;
 
-    public class SplashScreenViewModel : BindableBase, INavigationAware
+    public class SplashScreenViewModel : ViewModelBase
     {
         private INavigationService NavigationService { get; }
         private IMatchService MatchService { get; }
@@ -20,21 +21,21 @@
             NavigationService = navigationService;
             MatchService = dependencyResolver.Resolve<IMatchService>();
             CurrentLanguage = AppSettings.Current.CurrentLanguage;
-            MatchService.GetLiveMatches(CurrentLanguage, DateTime.Now);
         }
 
-        public void OnNavigatedFrom(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
-            // Method intentionally left empty. (Requied by INavigationAware)
-        }
+            var matches = await MatchService.GetMatchesByDate(
+                  DateTime.Today,
+                  CurrentLanguage,
+                  true).ConfigureAwait(false);
 
-        public async void OnNavigatedTo(INavigationParameters parameters)
-        {
-            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
-            {
-                await Task.Delay(2000);
-                await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
-            });
+            var navigationParams = new NavigationParameters();
+            navigationParams.Add("Matches", matches);
+
+            await Task.Delay(2000);
+
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), navigationParams, animated: false).ConfigureAwait(true);
         }
     }
 }
