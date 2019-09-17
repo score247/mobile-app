@@ -6,16 +6,40 @@
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mc:Ignorable="d"
              x:Class="LiveScore.Views.SplashScreen"
              BackgroundColor="#0F111C">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <forms:AnimationView x:Name="animationView"
+        <!--<forms:AnimationView x:Name="animationView"
                                  VerticalOptions="CenterAndExpand"
                              Animation="splashScreen.json"
                              AutoPlay="true"
                              HeightRequest="500"
                              Loop="False"
-                             BackgroundColor="Transparent" />
+                             BackgroundColor="Transparent" />-->
+
+        <Grid Padding="0"
+              Margin="0"
+              ColumnSpacing="0"
+              RowSpacing="0">
+            <Image x:Name="SplashIcon"
+                   HorizontalOptions="Center"
+                   Aspect="AspectFill"
+                   VerticalOptions="Center">
+                <Image.Source>
+                    <OnPlatform x:TypeArguments="ImageSource">
+                        <On Platform="Android, iOS">
+                            <FileImageSource File="images/common/logo_splash_screen.png" />
+                        </On>
+                    </OnPlatform>
+                </Image.Source>
+            </Image>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

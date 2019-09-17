@@ -28,7 +28,7 @@
                   CurrentLanguage,
                   true).ConfigureAwait(false);
 
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
+            var result = await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
         }
     }
 }

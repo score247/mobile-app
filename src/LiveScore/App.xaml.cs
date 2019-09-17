@@ -36,6 +36,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Refit;
+using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -72,7 +73,7 @@ namespace LiveScore
         {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-            //NavigationService.NavigateAsync(nameof(SplashScreen)).ConfigureAwait(true);
+            MainPage = new SplashScreen(NavigationService);
 
             InitializeComponent();
 
@@ -82,8 +83,7 @@ namespace LiveScore
             _ = RegisterAndStartEventHubs(Container);
 
             StartGlobalTimer();
-
-            NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
+            // NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()
