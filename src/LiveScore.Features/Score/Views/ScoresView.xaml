@@ -10,6 +10,8 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:lottie="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -22,78 +24,124 @@
         <ResourceDictionary>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
+
+            <xamanimation:StoryBoard
+                x:Key="ScoreOutAnimation"
+                Target="{x:Reference scoreView}">
+                <xamanimation:FadeOutAnimation
+                    Duration="250" />
+            </xamanimation:StoryBoard>
+
+            <xamanimation:StoryBoard
+                x:Key="ScoreInAnimation"
+                Target="{x:Reference scoreView}">
+                <xamanimation:FadeInAnimation
+                    Duration="250" />
+            </xamanimation:StoryBoard>
+
+            <xamanimation:StoryBoard
+                x:Key="LogoAnimation"
+                Target="{x:Reference animationView}">
+                <xamanimation:FadeInAnimation
+                    Duration="250" />
+                <xamanimation:TranslateToAnimation TranslateY="0"
+                                                   Duration="2000" />
+                <xamanimation:FadeOutAnimation
+                    Duration="250" />
+
+            </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout CompressedLayout.IsHeadless="True">
-        <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
-        <views:DateBar NumberDisplayDays="2"
-                       SelectedIndex="{Binding SelectedScoreItemIndex}"
-                       ItemTappedCommand="{Binding DateBarItemTapCommand}" />
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 Color="{StaticResource ThirdAccentColor}"></BoxView>
-        <cards:CarouselView x:Name="ScoresCarouselView"
-                            ItemsSource="{Binding ScoreItemSources}"
-                            SelectedItem="{Binding SelectedScoreItem}"
-                            SelectedIndex="{Binding SelectedScoreItemIndex}"
-                            ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
-                            IsViewReusingEnabled="False"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
-                            IsCyclical="False">
-            <x:Arguments>
-                <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
-                                                            AnimationLength="250"
-                                                            NoItemMaxPanDistance="1000" />
-                <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
-                                                            AnimationLength="250" />
-            </x:Arguments>
-            <cards:CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <FlexLayout JustifyContent="Center">
-                        <!--TODO: Temporarily add live page here-->
-                        <Label IsVisible="{Binding IsLive}"
-                               Text="Live is coming soon"
-                               Style="{StaticResource ComingSoonLabel}"
-                               FlexLayout.AlignSelf="Center" />
-                        <Label IsVisible="{Binding IsCalendar}"
-                               Text="Calendar is coming soon"
-                               Style="{StaticResource ComingSoonLabel}"
-                               FlexLayout.AlignSelf="Center" />
-                        <StackLayout IsVisible="{Binding IsNormalDate}">
-                            <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                               IsVisible="{Binding IsBusy}"
-                                               Style="{StaticResource CenterActivityIndicator}" />
-                            <customListView:CustomListView x:Name="LeagueTable"
-                                                           AutomationId="LeagueTableId"
-                                                           AutomationProperties.IsInAccessibleTree="False"
-                                                           Footer=""
-                                                           GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-                                                           HasUnevenRows="true"
-                                                           IsGroupingEnabled="True"
-                                                           IsPullToRefreshEnabled="true"
-                                                           IsRefreshing="{Binding IsRefreshing}"
-                                                           IsVisible="{Binding IsNotBusy}"
-                                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                           ItemsSource="{Binding MatchItemsSource}"
-                                                           RefreshCommand="{Binding RefreshCommand}"
-                                                           SelectionMode="None"
-                                                           SeparatorColor="{StaticResource LineColor}"
-                                                           Style="{StaticResource ListViewHasBackground}"
-                                                           VerticalOptions="FillAndExpand">
-                                <x:Arguments>
-                                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
-                                </x:Arguments>
-                                <customListView:CustomListView.Behaviors>
-                                    <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
-                                                              EventArgsParameterPath="Item"
-                                                              EventName="ItemTapped" />
-                                </customListView:CustomListView.Behaviors>
-                            </customListView:CustomListView>
-                        </StackLayout>
-                    </FlexLayout>
-                </DataTemplate>
-            </cards:CarouselView.ItemTemplate>
-        </cards:CarouselView>
-    </StackLayout>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation
+                Animation="{StaticResource ScoreOutAnimation}" />
+            <xamanimation:BeginAnimation
+                Animation="{StaticResource LogoAnimation}" />
+            <xamanimation:BeginAnimation
+                Animation="{StaticResource ScoreInAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+    <AbsoluteLayout CompressedLayout.IsHeadless="True">
+        <StackLayout x:Name="scoreView"
+                     AbsoluteLayout.LayoutFlags="All"
+                     AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
+            <views:DateBar NumberDisplayDays="2"
+                           SelectedIndex="{Binding SelectedScoreItemIndex}"
+                           ItemTappedCommand="{Binding DateBarItemTapCommand}" />
+            <BoxView Style="{StaticResource HorizontalLine}"
+                     Color="{StaticResource ThirdAccentColor}"></BoxView>
+            <cards:CarouselView x:Name="ScoresCarouselView"
+                                ItemsSource="{Binding ScoreItemSources}"
+                                SelectedItem="{Binding SelectedScoreItem}"
+                                SelectedIndex="{Binding SelectedScoreItemIndex}"
+                                ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
+                                IsViewReusingEnabled="False"
+                                HorizontalOptions="FillAndExpand"
+                                VerticalOptions="FillAndExpand"
+                                IsCyclical="False">
+                <x:Arguments>
+                    <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
+                                                                AnimationLength="250"
+                                                                NoItemMaxPanDistance="1000" />
+                    <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
+                                                                AnimationLength="250" />
+                </x:Arguments>
+                <cards:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <FlexLayout JustifyContent="Center">
+                            <Label IsVisible="{Binding IsLive}"
+                                   Text="Live is coming soon"
+                                   Style="{StaticResource ComingSoonLabel}"
+                                   FlexLayout.AlignSelf="Center" />
+                            <Label IsVisible="{Binding IsCalendar}"
+                                   Text="Calendar is coming soon"
+                                   Style="{StaticResource ComingSoonLabel}"
+                                   FlexLayout.AlignSelf="Center" />
+                            <StackLayout IsVisible="{Binding IsNormalDate}">
+                                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                                   IsVisible="{Binding IsBusy}"
+                                                   Style="{StaticResource CenterActivityIndicator}" />
+                                <customListView:CustomListView x:Name="LeagueTable"
+                                                               AutomationId="LeagueTableId"
+                                                               AutomationProperties.IsInAccessibleTree="False"
+                                                               Footer=""
+                                                               GroupDisplayBinding="{Binding Key}"
+                                                               GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                                                               HasUnevenRows="true"
+                                                               IsGroupingEnabled="True"
+                                                               IsPullToRefreshEnabled="true"
+                                                               IsRefreshing="{Binding IsRefreshing}"
+                                                               IsVisible="{Binding IsNotBusy}"
+                                                               ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                                               ItemsSource="{Binding MatchItemsSource}"
+                                                               RefreshCommand="{Binding RefreshCommand}"
+                                                               SelectionMode="None"
+                                                               SeparatorColor="{StaticResource LineColor}"
+                                                               Style="{StaticResource ListViewHasBackground}"
+                                                               VerticalOptions="FillAndExpand">
+                                    <x:Arguments>
+                                        <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
+                                    </x:Arguments>
+                                    <customListView:CustomListView.Behaviors>
+                                        <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
+                                                                  EventArgsParameterPath="Item"
+                                                                  EventName="ItemTapped" />
+                                    </customListView:CustomListView.Behaviors>
+                                </customListView:CustomListView>
+                            </StackLayout>
+                        </FlexLayout>
+                    </DataTemplate>
+                </cards:CarouselView.ItemTemplate>
+            </cards:CarouselView>
+        </StackLayout>
+        <lottie:AnimationView x:Name="animationView"
+                              AbsoluteLayout.LayoutFlags="All"
+                              AbsoluteLayout.LayoutBounds="0,0,1,1"
+                              Animation="splashScreen.json"
+                              AutoPlay="true"
+                              Loop="False"
+                              BackgroundColor="Transparent" />
+    </AbsoluteLayout>
 </ContentPage>

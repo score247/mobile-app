@@ -13,32 +13,22 @@
 
     public class SplashScreenViewModel : ViewModelBase
     {
-        private INavigationService NavigationService { get; }
-        private IMatchService MatchService { get; }
-        private Language CurrentLanguage { get; }
+        private readonly IMatchService matchService;
 
         public SplashScreenViewModel(INavigationService navigationService, IDependencyResolver dependencyResolver)
+            : base(navigationService, dependencyResolver)
         {
-            NavigationService = navigationService;
-            MatchService = dependencyResolver.Resolve<IMatchService>();
-            CurrentLanguage = AppSettings.Current.CurrentLanguage;
+            matchService = dependencyResolver.Resolve<IMatchService>();
         }
 
         public override async void Initialize(INavigationParameters parameters)
         {
-            var matches = await MatchService.GetMatchesByDate(
+            var matches = await matchService.GetMatchesByDate(
                   DateTime.Today,
                   CurrentLanguage,
                   true).ConfigureAwait(false);
 
-            var navigationParams = new NavigationParameters();
-            navigationParams.Add("Matches", matches);
-
-            Device.BeginInvokeOnMainThread(async () =>
-            {
-                await Task.Delay(2000);
-                await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), navigationParams, animated: false).ConfigureAwait(true);
-            });
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
         }
     }
 }

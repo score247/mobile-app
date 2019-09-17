@@ -72,7 +72,7 @@ namespace LiveScore
         {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-            NavigationService.NavigateAsync(nameof(SplashScreen)).ConfigureAwait(true);
+            //NavigationService.NavigateAsync(nameof(SplashScreen)).ConfigureAwait(true);
 
             InitializeComponent();
 
@@ -83,7 +83,7 @@ namespace LiveScore
 
             StartGlobalTimer();
 
-            //NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
+            NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()

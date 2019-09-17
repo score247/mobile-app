@@ -380,7 +380,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
-      <Version>2.7.1</Version>
+      <Version>3.0.1</Version>
     </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
       <Version>7.16.0.8981</Version>
