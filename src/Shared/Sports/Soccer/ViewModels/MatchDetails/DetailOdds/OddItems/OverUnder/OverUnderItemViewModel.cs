@@ -39,6 +39,8 @@
 
         public override void UpdateOdds(IBetTypeOdds betTypeOdds)
         {
+            base.UpdateOdds(betTypeOdds);
+
             BuildOverOddsAndOptionValue();
 
             BuildUnderOdds();
