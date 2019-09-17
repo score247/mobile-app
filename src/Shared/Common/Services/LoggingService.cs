@@ -20,6 +20,8 @@ namespace LiveScore.Common.Services
 
         Task LogInfoAsync(string message);
 
+        void LogInfo(string message);
+
         void Init(string Dsn, IRavenClient ravenClient = null, string env = "");
     }
 
@@ -38,7 +40,7 @@ namespace LiveScore.Common.Services
         {
             this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion, Environment = env };
 
-            LogInfoAsync($"Init Logging Service with DSN {Dsn}");
+            LogInfoAsync($"Init Logging Service with DSN {Dsn} env {env}");
         }
 
         public void LogError(Exception exception)
@@ -53,6 +55,8 @@ namespace LiveScore.Common.Services
         public Task LogErrorAsync(string message, Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
 
         public Task LogInfoAsync(string message) => ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
+
+        public void LogInfo(string message) => ravenClient?.Capture(CreateSentryInfoEvent(message));
 
         private SentryEvent CreateSentryEvent(string message, Exception exception)
         {

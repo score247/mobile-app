@@ -92,6 +92,10 @@
         {
         }
 
+        public void LogInfo(string message)
+        {
+        }
+
         public Task LogErrorAsync(Exception exception)
             => Task.FromResult(0);
 

@@ -62,6 +62,8 @@ namespace LiveScore.Soccer.Services
                         {
                             try
                             {
+                                logger.LogInfo($"HubService receiving {jsonString}");
+
                                 var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
 
                                 if (data != null)
@@ -98,13 +100,13 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                await logger.LogErrorAsync(ex).ConfigureAwait(false);
+                await logger.LogErrorAsync($"HubService Reconnect exception {ex.Message}", ex).ConfigureAwait(false);
             }
         }
 
         private async Task HubConnection_Closed(Exception arg)
         {
-            await logger.LogErrorAsync(arg).ConfigureAwait(false);
+            await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", arg).ConfigureAwait(false);
             await hubConnection.StartAsync().ConfigureAwait(false);
         }
     }
