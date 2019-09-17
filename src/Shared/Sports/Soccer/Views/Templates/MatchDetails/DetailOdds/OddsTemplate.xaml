@@ -94,7 +94,7 @@
                 AutomationProperties.IsInAccessibleTree="False"
                 BackgroundColor="{StaticResource PrimaryColor}"
                 HasUnevenRows="true"
-                Header="{Binding .}"
+                Header="{Binding HeaderTitle}"
                 HeaderTemplate="{Binding HeaderTemplate}"
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsRefreshing}"

@@ -29,6 +29,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     {
         private readonly string matchId;
         private readonly string oddsFormat;
+
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
         private readonly IEventAggregator eventAggregator;
@@ -69,19 +70,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
         }
 
-        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
-
-        public DataTemplate HeaderTemplate { get; private set; }
-
-        public DelegateAsyncCommand RefreshCommand { get; }
-
-        public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
-
-        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
-
         public bool IsRefreshing { get; set; }
 
         public bool HasData { get; private set; }
+
+        public string HeaderTitle => string.Empty;
 
         public BetType SelectedBetType { get; private set; }
 
@@ -91,6 +84,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
+        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }        
+
+        public DataTemplate HeaderTemplate { get; private set; }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
+
+        public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
+
+        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
+        
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
             var parameters = new NavigationParameters
@@ -192,6 +195,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         internal void HandleOddsComparisonMessage(OddsComparisonMessage oddsComparisonMessage)
         {
+            Debug.WriteLine($"Selected BetType {SelectedBetType}");
+
             if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
                 || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)
             {
