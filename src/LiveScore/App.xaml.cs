@@ -74,6 +74,8 @@ namespace LiveScore
 
             InitializeComponent();
 
+            MainPage = new SplashScreen(NavigationService);
+
             var logService = Container.Resolve<ILoggingService>();
             logService.Init(Configuration.SentryDsn, Configuration.Environment);
 
@@ -81,7 +83,7 @@ namespace LiveScore
 
             StartGlobalTimer();
 
-            NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
+            //NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView)).ConfigureAwait(false);
         }
 
         protected override void ConfigureViewModelLocator()

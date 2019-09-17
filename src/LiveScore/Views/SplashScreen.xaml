@@ -6,7 +6,7 @@
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              mc:Ignorable="d"
              x:Class="LiveScore.Views.SplashScreen"
-             BackgroundColor="{StaticResource SiteBackgroundColor}">
+             BackgroundColor="#0F111C">
     <ContentPage.Content>
         <forms:AnimationView x:Name="animationView"
                                  VerticalOptions="CenterAndExpand"

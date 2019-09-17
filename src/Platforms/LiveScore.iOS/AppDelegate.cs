@@ -19,12 +19,12 @@ namespace LiveScore.iOS
         {
             Profiler.Start("IOS Application");
             Xamarin.Forms.Forms.Init();
+            AnimationViewRenderer.Init();
             CachedImageRenderer.Init();
             CardsViewRenderer.Preserve();
 
             var application = new App(new iOSInitializer());
             LoadApplication(application);
-            AnimationViewRenderer.Init();
 
             var loggingService = application.Container.Resolve<ILoggingService>();
 
