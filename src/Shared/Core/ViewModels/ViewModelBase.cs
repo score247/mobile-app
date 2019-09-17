@@ -88,6 +88,13 @@
         }
 
         protected async Task NavigateToHome()
-            => await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
+        {
+            var navigated = await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception);
+            }
+        }        
     }
 }

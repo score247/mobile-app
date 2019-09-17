@@ -5,7 +5,6 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Fanex.Caching;
-using JsonNet.ContractResolvers;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -29,7 +28,6 @@ using LiveScore.Views;
 using MessagePack.Resolvers;
 using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -46,13 +44,7 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore
 {
     public partial class App : PrismApplication
-    {
-        private static readonly JsonSerializerSettings JsonSerializerSettings = new JsonSerializerSettings
-        {
-            DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-            ContractResolver = new PrivateSetterContractResolver()
-        };
-
+    {        
         /*
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor.
@@ -77,14 +69,13 @@ namespace LiveScore
 
         [Time]
         protected override void OnInitialized()
-        {
-            JsonConvert.DefaultSettings = () => JsonSerializerSettings;
+        {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
             InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
-            logService.Init(Configuration.SentryDsn, ravenClient: null, Configuration.Environment);
+            logService.Init(Configuration.SentryDsn, Configuration.Environment);
 
             _ = RegisterAndStartEventHubs(Container);
 
@@ -147,7 +138,7 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
-            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
+            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();            
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -171,8 +162,7 @@ namespace LiveScore
                 container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);
-
-            // TODO: Ricky: temporary comment here
+            
             foreach (var hubService in hubServices.Where(hubService => hubService != null))
             {
                 await hubService.Start().ConfigureAwait(false);

@@ -80,7 +80,7 @@
     {
 #pragma warning disable S1186 // Methods should not be empty
 
-        public void Init(string Dsn, IRavenClient ravenClient = null, string env = "")
+        public void Init(string Dsn, string env = "",IRavenClient ravenClient = null)
         {
         }
 

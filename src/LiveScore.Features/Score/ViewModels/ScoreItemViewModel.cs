@@ -67,8 +67,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; private set; }
 
-        public DelegateAsyncCommand ClickSearchCommand { get; private set; }
-
         public override void Destroy()
         {
             base.Destroy();
@@ -97,8 +95,7 @@ namespace LiveScore.Features.Score.ViewModels
         private void InitializeCommand()
         {
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
-            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearch);
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);            
         }
 
         [Time]
@@ -155,11 +152,6 @@ namespace LiveScore.Features.Score.ViewModels
                 await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
-
-        private async Task OnClickSearch()
-            => await NavigationService
-                .NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true)
-                .ConfigureAwait(false);
 
         [Time]
         private async Task LoadMatches(DateTime date, bool forceFetchNewData = false)

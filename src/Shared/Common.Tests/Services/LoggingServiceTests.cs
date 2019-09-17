@@ -20,7 +20,7 @@
             mockRavenClient = Substitute.For<IRavenClient>();
 
             loggingService = new LoggingService(mockEssentials);
-            loggingService.Init("", mockRavenClient);
+            loggingService.Init("", "", mockRavenClient);
         }
 
         [Fact]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using SharpRaven;
 using SharpRaven.Data;
@@ -22,7 +23,7 @@ namespace LiveScore.Common.Services
 
         void LogInfo(string message);
 
-        void Init(string Dsn, IRavenClient ravenClient = null, string env = "");
+        void Init(string Dsn, string env = "", IRavenClient ravenClient = null);
     }
 
     public class LoggingService : ILoggingService
@@ -36,7 +37,7 @@ namespace LiveScore.Common.Services
             this.deviceInfo = deviceInfo;
         }
 
-        public void Init(string Dsn, IRavenClient ravenClient = null, string env = "")
+        public void Init(string Dsn, string env = "", IRavenClient ravenClient = null)
         {
             this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion, Environment = env };
 
@@ -45,6 +46,7 @@ namespace LiveScore.Common.Services
 
         public void LogError(Exception exception)
         {
+            Debug.WriteLine("LogError");
             ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
         }        
 

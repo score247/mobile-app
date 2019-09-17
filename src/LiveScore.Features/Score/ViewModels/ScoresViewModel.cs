@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using Core;
     using Core.Controls.DateBar.EventArgs;
+    using LiveScore.Common.Extensions;
     using LiveScore.Core.ViewModels;
     using PanCardView.EventArgs;
     using Prism.Commands;
@@ -23,6 +25,7 @@
             InitScoreItemSources();
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
+            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearch);
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -36,6 +39,8 @@
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; private set; }
 
         public DelegateCommand<DateBarItemTappedEventArgs> DateBarItemTapCommand { get; private set; }
+
+        public DelegateAsyncCommand ClickSearchCommand { get; private set; }
 
         public override async void OnResume()
         {
@@ -100,6 +105,18 @@
                 new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
 
             SelectedScoreItemIndex = TodayIndex;
+        }
+
+        private async Task OnClickSearch()
+        {
+            var navigated = await NavigationService
+                .NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true)
+                .ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
+            }
         }
     }
 }

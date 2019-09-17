@@ -4,6 +4,7 @@
     using Common.Extensions;
     using Core;
     using Core.ViewModels;
+    using LiveScore.Common.Services;
     using Prism.Navigation;
     using Views;
     using Xamarin.Forms;
@@ -11,14 +12,17 @@
     public class MainViewModel : ViewModelBase
     {
         private readonly ISettings settings;
+        private readonly ICacheManager cacheManager;
 
         public MainViewModel(
             ISettings settings,
+            ICacheManager cacheManager,
             INavigationService navigationService,
             IDependencyResolver serviceLocator)
             : base(navigationService, serviceLocator)
         {
             this.settings = settings;
+            this.cacheManager = cacheManager;
 
             IsDemo = settings.IsDemo;
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
@@ -45,11 +49,11 @@
             return CleanCacheAndRefreshCommand.ExecuteAsync();
         }
 
-        private Task CleanCacheAndRefresh()
+        private async Task CleanCacheAndRefresh()
         {
-            //TODO implement clean cache with fanex caching
+            await cacheManager.InvalidateAll();
 
-            return NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView));
+            await NavigateToHome();
         }
     }
 }
