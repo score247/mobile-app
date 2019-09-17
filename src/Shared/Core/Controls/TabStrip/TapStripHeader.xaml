@@ -69,7 +69,7 @@
         </Style>
         <Style x:Key="TabActiveOddsIcon" BasedOn="{StaticResource TabOddsIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabInfoIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -79,7 +79,7 @@
         </Style>
         <Style x:Key="TabActiveInfoIcon" BasedOn="{StaticResource TabInfoIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabTrackerIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -89,7 +89,7 @@
         </Style>
         <Style x:Key="TabActiveTrackerIcon" BasedOn="{StaticResource TabTrackerIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabStatsIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -99,7 +99,7 @@
         </Style>
         <Style x:Key="TabActiveStatsIcon" BasedOn="{StaticResource TabStatsIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabLine-upsIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -109,7 +109,7 @@
         </Style>
         <Style x:Key="TabActiveLinesupsIcon" BasedOn="{StaticResource TabLine-upsIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabH2HIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -119,7 +119,7 @@
         </Style>
         <Style x:Key="TabActiveH2HIcon" BasedOn="{StaticResource TabH2HIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabTableIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -129,7 +129,7 @@
         </Style>
         <Style x:Key="TabActiveTableIcon" BasedOn="{StaticResource TabTableIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabSocialIcon" BasedOn="{StaticResource TabFontIcon}"
@@ -139,17 +139,17 @@
         </Style>
         <Style x:Key="TabActiveSocialIcon" BasedOn="{StaticResource TabSocialIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
 
         <Style x:Key="TabTVIcon" BasedOn="{StaticResource TabFontIcon}"
                    TargetType="Label">
             <Setter Property="Text"
-                        Value="&#xe90c;" />
+                        Value="&#xe925;" />
         </Style>
         <Style x:Key="TabActiveTVIcon" BasedOn="{StaticResource TabTVIcon}"
                    TargetType="Label">
-            <Setter Property="TextColor" Value="#F24822" />
+            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
     </ContentView.Resources>
     <ContentView.Content>

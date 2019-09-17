@@ -273,6 +273,9 @@
     <BundleResource Include="..\..\CommonResources\SplashScreen\splashScreen.json">
       <Link>Resources\splashScreen.json</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.ttf">
+      <Link>Resources\fonts\livescore.ttf</Link>
+    </BundleResource>
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -280,18 +283,6 @@
     <Compile Include="Renderers\TabItemListViewRenderer.cs" />
     <Compile Include="Renderers\MenuTabbedPageRenderer.cs" />
     <None Include="LiveScoreApp.iOS.ruleset" />
-    <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.eot">
-      <Link>Resources\fonts\livescore.eot</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.svg">
-      <Link>Resources\fonts\livescore.svg</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.ttf">
-      <Link>Resources\fonts\livescore.ttf</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Font\livescore\fonts\livescore.woff">
-      <Link>Resources\fonts\livescore.woff</Link>
-    </BundleResource>
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_penalty_goal.png">
       <Link>Resources\images\common\missed_penalty_goal.png</Link>

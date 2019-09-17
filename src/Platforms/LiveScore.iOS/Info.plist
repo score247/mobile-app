@@ -21,6 +21,10 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>fonts/livescore.ttf</string>
+		<string>fonts/RobotoLight.ttf</string>
+		<string>fonts/RobotoRegular.ttf</string>
+		<string>fonts/RobotoMedium.ttf</string>
+		<string>fonts/RobotoBold.ttf</string>
 	</array>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
