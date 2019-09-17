@@ -30,6 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     {
         private string matchId;
         private string oddsFormat;
+        private bool isFirstLoad = true;
 
         private MatchStatus eventStatus;
         private Bookmaker bookmaker;
@@ -38,6 +39,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         private readonly IOddsService oddsService;
         private readonly IEventAggregator eventAggregator;
 
+        [Time]
         public OddsMovementViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -67,10 +69,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public DataTemplate HeaderTemplate { get; private set; }
 
+        [Time]
         public override void Initialize(INavigationParameters parameters)
         {
             try
             {
+                Debug.WriteLine("OddsMovementViewModel Initialize");
+
                 matchId = parameters["MatchId"].ToString();
                 eventStatus = parameters["EventStatus"] as MatchStatus;
                 bookmaker = parameters["Bookmaker"] as Bookmaker;
@@ -93,7 +98,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 Debug.WriteLine("OddsMovementViewModel Initialize");
 
-                await LoadData(async() => await FirstLoadOrRefreshOddsMovement());
+                if (isFirstLoad)
+                {
+                    await LoadData(async () => await FirstLoadOrRefreshOddsMovement());
+                    isFirstLoad = false;
+                }                
             }
             catch (Exception ex)
             {
@@ -111,6 +120,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
 
             eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
+        }
+
+        public override void OnSleep()
+        {
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
         }
 
         public override void Destroy()
