@@ -72,9 +72,9 @@ namespace LiveScore
         {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-            InitializeComponent();
+            NavigationService.NavigateAsync(nameof(SplashScreen)).ConfigureAwait(true);
 
-            MainPage = new SplashScreen(NavigationService);
+            InitializeComponent();
 
             var logService = Container.Resolve<ILoggingService>();
             logService.Init(Configuration.SentryDsn, Configuration.Environment);
@@ -120,6 +120,7 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+            containerRegistry.RegisterSingleton<IMatchService, MatchService>();
             containerRegistry.RegisterInstance(new RefitSettings
             {
                 ContentSerializer = new MessagePackContentSerializer()
@@ -140,7 +141,8 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
-            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();            
+            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
+            containerRegistry.RegisterForNavigation<SplashScreen, SplashScreenViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
