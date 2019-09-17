@@ -101,7 +101,7 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private Task InitializeData()
         {
-            return LoadData(() => LoadMatches(SelectedDate, true));
+            return LoadData(() => LoadMatches(SelectedDate));
         }
 
         private void SubscribeEvents()

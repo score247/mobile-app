@@ -73,7 +73,7 @@ namespace LiveScore
         {            
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-            MainPage = new SplashScreen(NavigationService);
+            MainPage = new SplashScreen(NavigationService, Container.Resolve<IDependencyResolver>());
 
             InitializeComponent();
 

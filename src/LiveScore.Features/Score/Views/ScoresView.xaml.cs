@@ -2,7 +2,9 @@
 
 namespace LiveScore.Features.Score.Views
 {
+    using System.Threading.Tasks;
     using Common.Helpers;
+    using LiveScore.Features.Score.ViewModels;
     using MethodTimer;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
