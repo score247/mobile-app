@@ -9,6 +9,7 @@
     using LiveScore.Views;
     using Prism.Mvvm;
     using Prism.Navigation;
+    using Xamarin.Forms;
 
     public class SplashScreenViewModel : ViewModelBase
     {
@@ -33,9 +34,11 @@
             var navigationParams = new NavigationParameters();
             navigationParams.Add("Matches", matches);
 
-            await Task.Delay(2000);
-
-            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), navigationParams, animated: false).ConfigureAwait(true);
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Task.Delay(2000);
+                await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), navigationParams, animated: false).ConfigureAwait(true);
+            });
         }
     }
 }
