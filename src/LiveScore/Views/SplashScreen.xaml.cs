@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using Prism.Common;
+    using Xamanimation;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -20,7 +21,7 @@
             base.OnAppearing();
 
             // wait until the UI is present
-            await Task.Delay(500);
+            await Task.Delay(300);
 
             await LoadMainPage();
 
@@ -32,6 +33,10 @@
             await PageUtilities.OnInitializedAsync(mainPage, null);
 
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
+
+            await Task.WhenAll(
+                SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),
+                SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
 
             await Navigation.PopToRootAsync(false);
         }

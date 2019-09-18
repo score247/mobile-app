@@ -25,9 +25,10 @@
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
-                <xamanimation:BounceInAnimation
-                    Duration="300"
-                    Easing="BounceIn" />
+                <xamanimation:ScaleToAnimation
+                    Scale="1"
+                    Duration="500"
+                    Easing="Linear" />
                 <xamanimation:FadeToAnimation
                     Opacity="1"
                     Duration="300"
@@ -41,7 +42,8 @@
         </EventTrigger>
     </ContentPage.Triggers>
     <StackLayout x:Name="ScoreView"
-                 Opacity="0">
+                 Opacity="0.5"
+                 Scale="2">
         <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
         <views:DateBar NumberDisplayDays="2"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"

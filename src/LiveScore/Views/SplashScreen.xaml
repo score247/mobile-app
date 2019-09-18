@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              x:Class="LiveScore.Views.SplashScreen"
              BackgroundColor="#0F111C">
     <ContentPage.Content>
@@ -11,6 +12,7 @@
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
                 Aspect="AspectFit"
+                FadeAnimationEnabled="True"
                 Source="images/common/logo_splash_screen.png" />
         </Grid>
     </ContentPage.Content>
