@@ -53,18 +53,21 @@
 
         <Style x:Key="TabFontIcon" BasedOn="{StaticResource Icons}"
                    TargetType="Label">
-            <Setter Property="FontSize"
-                        Value="14" />
             <Setter Property="TextColor"
                         Value="#999" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
+            <Setter Property="VerticalTextAlignment" Value="Center" />
             <Setter Property="Margin" Value="0,0,0,4" />
+            <Setter Property="HeightRequest" Value="16" />
         </Style>
 
         <Style x:Key="TabOddsIcon" BasedOn="{StaticResource TabFontIcon}"
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe911;" />
+
+            <Setter Property="FontSize"
+                        Value="13" />
         </Style>
         <Style x:Key="TabActiveOddsIcon" BasedOn="{StaticResource TabOddsIcon}"
                    TargetType="Label">
@@ -75,6 +78,9 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe905;" />
+
+            <Setter Property="FontSize"
+                        Value="13" />
         </Style>
         <Style x:Key="TabActiveInfoIcon" BasedOn="{StaticResource TabInfoIcon}"
                    TargetType="Label">
@@ -85,6 +91,9 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe90e;" />
+
+            <Setter Property="FontSize"
+                        Value="13" />
         </Style>
         <Style x:Key="TabActiveTrackerIcon" BasedOn="{StaticResource TabTrackerIcon}"
                    TargetType="Label">
@@ -95,6 +104,7 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe915;" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
         <Style x:Key="TabActiveStatsIcon" BasedOn="{StaticResource TabStatsIcon}"
                    TargetType="Label">
@@ -105,6 +115,9 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe910;" />
+
+            <Setter Property="FontSize"
+                        Value="13" />
         </Style>
         <Style x:Key="TabActiveLine-upsIcon" BasedOn="{StaticResource TabLine-upsIcon}"
                    TargetType="Label">
@@ -115,6 +128,7 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe918;" />
+            <Setter Property="FontSize" Value="17" />
         </Style>
         <Style x:Key="TabActiveH2HIcon" BasedOn="{StaticResource TabH2HIcon}"
                    TargetType="Label">
@@ -125,6 +139,7 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe90b;" />
+            <Setter Property="FontSize" Value="11" />
         </Style>
         <Style x:Key="TabActiveTableIcon" BasedOn="{StaticResource TabTableIcon}"
                    TargetType="Label">
@@ -135,6 +150,9 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe90f;" />
+
+            <Setter Property="FontSize"
+                        Value="14" />
         </Style>
         <Style x:Key="TabActiveSocialIcon" BasedOn="{StaticResource TabSocialIcon}"
                    TargetType="Label">
@@ -145,6 +163,7 @@
                    TargetType="Label">
             <Setter Property="Text"
                         Value="&#xe925;" />
+            <Setter Property="FontSize" Value="16" />
         </Style>
         <Style x:Key="TabActiveTVIcon" BasedOn="{StaticResource TabTVIcon}"
                    TargetType="Label">
