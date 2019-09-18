@@ -16,6 +16,17 @@ namespace LiveScore.Features.Score.Views
         public ScoresView()
         {
             InitializeComponent();
+            (BindingContext as ScoresViewModel)?.OnAppearing();
+        }
+
+        protected override void OnAppearing()
+        {
+            //  (BindingContext as ScoresViewModel)?.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            (BindingContext as ScoresViewModel)?.OnDisappearing();
         }
 
         private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)

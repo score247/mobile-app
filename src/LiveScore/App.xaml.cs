@@ -45,7 +45,7 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore
 {
     public partial class App : PrismApplication
-    {        
+    {
         /*
          * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
          * This imposes a limitation in which the App class must have a default constructor.
@@ -70,10 +70,10 @@ namespace LiveScore
 
         [Time]
         protected override void OnInitialized()
-        {            
+        {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
 
-            MainPage = new SplashScreen(NavigationService, Container.Resolve<IDependencyResolver>());
+            MainPage = new NavigationPage(new SplashScreen());
 
             InitializeComponent();
 
@@ -166,7 +166,7 @@ namespace LiveScore
                 container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);
-            
+
             foreach (var hubService in hubServices.Where(hubService => hubService != null))
             {
                 await hubService.Start().ConfigureAwait(false);

@@ -311,6 +311,9 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag%403x.png">
       <Link>Resources\images\flag_league\default_flag%403x.png</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\sport.gif">
+      <Link>Resources\images\sport.gif</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">

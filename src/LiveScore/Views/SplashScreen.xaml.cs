@@ -1,29 +1,16 @@
-﻿using System;
-using System.Net.NetworkInformation;
-using System.Threading.Tasks;
-using LiveScore.Core;
-using LiveScore.Core.Services;
-using LiveScore.Features.Score.Views;
-using LiveScore.Soccer.Models.Matches;
-using Prism.Navigation;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-
-namespace LiveScore.Views
+﻿namespace LiveScore.Views
 {
+    using System.Threading.Tasks;
+    using Prism.Common;
+    using Xamarin.Forms;
+    using Xamarin.Forms.Xaml;
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
-        private readonly INavigationService navigationService;
-        private readonly IMatchService matchService;
-        private readonly ISettings settings;
-
-        public SplashScreen(INavigationService navigationService, IDependencyResolver dependencyResolver)
+        public SplashScreen()
         {
             InitializeComponent();
-            this.navigationService = navigationService;
-            settings = dependencyResolver.Resolve<ISettings>();
-            matchService = dependencyResolver.Resolve<IMatchService>(settings.CurrentSportType.Value.ToString());
 
             NavigationPage.SetHasNavigationBar(this, false);
         }
@@ -32,31 +19,20 @@ namespace LiveScore.Views
         {
             base.OnAppearing();
 
-            var task = matchService.GetMatchesByDate(
-                      DateTime.Today,
-                      settings.CurrentLanguage,
-                      true);
+            // wait until the UI is present
+            await Task.Delay(500);
 
-            await Task.WhenAll(task, ScaleIcon());
+            await LoadMainPage();
         }
 
-        private async Task ScaleIcon()
+        private async Task LoadMainPage()
         {
-            // wait until the UI is present
-            await Task.Delay(300);
+            var mainPage = new MainView { Detail = new MenuTabbedView() };
 
-            // animate the splash logo
-            await SplashIcon.ScaleTo(0.5, 500, Easing.CubicInOut);
+            await PageUtilities.OnInitializedAsync(mainPage, null);
+            Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
-            var animationTasks = new[]{
-                SplashIcon.ScaleTo(100.0, 1000, Easing.CubicInOut),
-                SplashIcon.FadeTo(0, 700, Easing.CubicInOut)
-            };
-
-            await Task.WhenAll(animationTasks);
-            //// navigate to main page
-            ///
-            await navigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false);
+            await Navigation.PopToRootAsync(false);
         }
     }
 }

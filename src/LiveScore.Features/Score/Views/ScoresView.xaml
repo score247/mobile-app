@@ -10,6 +10,7 @@
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -22,9 +23,25 @@
         <ResourceDictionary>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
+            <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
+                                     Target="{x:Reference ScoreView}">
+                <xamanimation:BounceInAnimation
+                    Duration="300"
+                    Easing="BounceIn" />
+                <xamanimation:FadeToAnimation
+                    Opacity="1"
+                    Duration="300"
+                    Easing="Linear" />
+            </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout>
+    <ContentPage.Triggers>
+        <EventTrigger Event="Appearing">
+            <xamanimation:BeginAnimation Animation="{StaticResource ScoreViewFadeInAnimation}" />
+        </EventTrigger>
+    </ContentPage.Triggers>
+    <StackLayout x:Name="ScoreView"
+                 Opacity="0">
         <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
         <views:DateBar NumberDisplayDays="2"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
