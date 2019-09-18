@@ -47,7 +47,8 @@
                  Opacity="0.5"
                  Scale="2">
         <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
-        <views:DateBar NumberDisplayDays="2"
+        <views:DateBar x:DataType="{x:Null}"
+                       NumberDisplayDays="2"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
                        ItemTappedCommand="{Binding DateBarItemTapCommand}" />
         <BoxView Style="{StaticResource HorizontalLine}"
