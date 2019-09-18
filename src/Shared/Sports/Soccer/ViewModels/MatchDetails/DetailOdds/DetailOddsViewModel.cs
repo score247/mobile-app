@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, serviceLocator, dataTemplate)
+            : base(navigationService, serviceLocator, dataTemplate, eventAggregator)
         {
             Debug.WriteLine($"MatchId {matchId}");
             this.matchId = matchId;
@@ -62,7 +62,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 await FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat).ConfigureAwait(false));
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
-            
+
             this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread, true);
         }
 
@@ -80,7 +80,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public bool IsOverUnderSelected => SelectedBetType == BetType.OverUnder;
 
-        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }        
+        public IList<BaseItemViewModel> BetTypeOddsItems { get; private set; }
 
         public DataTemplate HeaderTemplate { get; private set; }
 
@@ -89,7 +89,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
 
         public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
-        
+
         private async Task HandleOddsItemTapCommand(BaseItemViewModel item)
         {
             var parameters = new NavigationParameters
@@ -109,7 +109,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-      
         public override async void OnAppearing()
         {
             Debug.WriteLine("DetailOddsViewModel OnAppearing");

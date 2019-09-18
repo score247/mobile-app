@@ -34,12 +34,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator)
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(true), false));            
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(true), false));
 
             eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, true);
         }

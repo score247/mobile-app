@@ -23,18 +23,12 @@
 
         public DataTemplate Template { get; }
 
-        public string TabHeaderTitle { get; set; }    
+        public string TabHeaderTitle { get; set; }
 
-        protected override async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
+        protected override async Task LoadData(Func<Task> loadDataFunc, bool showBusy = true)
         {
-            IsBusy = showLoading && IsFirstLoad;
+            await base.LoadData(loadDataFunc, showBusy && IsFirstLoad);
 
-            if (loadDataFunc != null)
-            {
-                await loadDataFunc.Invoke().ConfigureAwait(false);
-            }
-
-            IsBusy = false;
             IsFirstLoad = false;
         }
     }
