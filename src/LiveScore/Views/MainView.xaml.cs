@@ -10,6 +10,7 @@
         public MainView()
         {
             InitializeComponent();
+            NavigationPage.SetHasNavigationBar(this, false);
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;

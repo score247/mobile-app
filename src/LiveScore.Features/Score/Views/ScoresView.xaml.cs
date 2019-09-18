@@ -16,6 +16,7 @@ namespace LiveScore.Features.Score.Views
         public ScoresView()
         {
             InitializeComponent();
+
             (BindingContext as ScoresViewModel)?.OnAppearing();
         }
 
