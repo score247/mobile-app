@@ -48,10 +48,9 @@
             BasedOn="{StaticResource TabLine}"
             TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="#1D2133" />
-        </Style>
-        <Style x:Key="TabIcon" TargetType="Image">
-            <Setter Property="Margin" Value="0,0,0,4" />
-        </Style>
+        </Style>        
+        <!--Font Icon Resources-->
+
         <Style x:Key="TabFontIcon" BasedOn="{StaticResource Icons}"
                    TargetType="Label">
             <Setter Property="FontSize"
@@ -107,7 +106,7 @@
             <Setter Property="Text"
                         Value="&#xe910;" />
         </Style>
-        <Style x:Key="TabActiveLinesupsIcon" BasedOn="{StaticResource TabLine-upsIcon}"
+        <Style x:Key="TabActiveLine-upsIcon" BasedOn="{StaticResource TabLine-upsIcon}"
                    TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
@@ -151,6 +150,8 @@
                    TargetType="Label">
             <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
         </Style>
+
+        <!--Font Icon Resources-->
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">

@@ -2,7 +2,6 @@
 {
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
-    using LiveScore.Core.Enumerations;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -13,9 +12,7 @@
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
-        {
-            TabHeaderIcon = MatchDetailTabImage.TV;
-            TabHeaderActiveIcon = MatchDetailTabImage.TVActive;
+        {           
         }
     }
 }

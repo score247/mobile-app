@@ -2,10 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Enumerations;
-    using ViewModels;
     using Prism.Events;
     using Prism.Navigation;
+    using ViewModels;
     using Xamarin.Forms;
 
     public class TabItemViewModel : ViewModelBase
@@ -24,11 +23,7 @@
 
         public DataTemplate Template { get; }
 
-        public string TabHeaderTitle { get; set; }
-
-        public Images TabHeaderIcon { get; set; }
-
-        public Images TabHeaderActiveIcon { get; set; }
+        public string TabHeaderTitle { get; set; }    
 
         protected override async Task LoadData(Func<Task> loadDataFunc, bool showLoading = true)
         {

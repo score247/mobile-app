@@ -52,9 +52,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsRefreshing = false;
             BetTypeOddsItems = new List<BaseItemViewModel>();
 
-            TabHeaderIcon = MatchDetailTabImage.Odds;
-            TabHeaderActiveIcon = MatchDetailTabImage.OddsActive;
-
             this.eventAggregator = eventAggregator;
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
 

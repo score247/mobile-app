@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Core.Controls.TabStrip
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using System.Windows.Input;
     using Xamarin.Forms;
@@ -54,23 +55,22 @@
             {
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
+                
+                var itemFontIcon = new Label
+                {                    
+                    Style = index == 0 ? (Style)control.Resources[$"TabActive{item.TabHeaderTitle}Icon"] : (Style)control.Resources[$"Tab{item.TabHeaderTitle}Icon"]
+                };
 
-				var itemIcon = new Image
-				{
-					Source = index == 0 ? item.TabHeaderActiveIcon?.Value : item.TabHeaderIcon?.Value,
-					Style = (Style)control.Resources["TabIcon"],
-					WidthRequest = 16,
-					HeightRequest = 16
-				};
+                Debug.WriteLine($"TabStrip Header {item.TabHeaderTitle}");
 
-				var itemLabel = new Label
-                {
-                    Text = item.TabHeaderTitle.ToUpperInvariant(),
+                var itemLabel = new Label
+                {                    
+                    Text = item.TabHeaderTitle.ToUpperInvariant(),                    
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
 
-                itemLayout.Children.Add(itemIcon);
+                itemLayout.Children.Add(itemFontIcon);
                 itemLayout.Children.Add(itemLabel);
                 itemLayout.Children.Add(activeTabIndicator);
                 control.scrollLayOut.Children.Add(itemLayout);
@@ -112,13 +112,13 @@
 
             var oldTabModel = ItemsSource.ToList()[oldIndex];
             var oldTab = tabHeaders[oldIndex] as StackLayout;
-            (oldTab.Children[0] as Image).Source = oldTabModel.TabHeaderIcon.Value;
+            oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
             oldTab.Children[1].Style =(Style)Resources["TabText"];
             ((ContentView)oldTab.Children[2]).Content.Style = (Style)Resources["TabInactiveLine"];
 
             var newTabModel = ItemsSource.ToList()[newIndex];
             var newTab = tabHeaders[newIndex] as StackLayout;
-            (newTab.Children[0] as Image).Source = newTabModel.TabHeaderActiveIcon.Value;
+            newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
             newTab.Children[1].Style = (Style)Resources["TabActiveText"];
             ((ContentView)newTab.Children[2]).Content.Style = (Style)Resources["TabActiveLine"];
            
