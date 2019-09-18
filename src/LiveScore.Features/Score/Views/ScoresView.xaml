@@ -11,7 +11,9 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
              mvvm:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search"
@@ -67,7 +69,7 @@
                                                             AnimationLength="250" />
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="viewModels:ScoreItemViewModel">
                     <FlexLayout JustifyContent="Center">
                         <Label IsVisible="{Binding IsLive}"
                                Text="Live is coming soon"
