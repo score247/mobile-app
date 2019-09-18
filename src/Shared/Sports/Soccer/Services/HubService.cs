@@ -106,7 +106,9 @@ namespace LiveScore.Soccer.Services
 
         private async Task HubConnection_Closed(Exception arg)
         {
-            await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", arg).ConfigureAwait(false);
+            var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
+
+            await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", ex).ConfigureAwait(false);
             await hubConnection.StartAsync().ConfigureAwait(false);
         }
     }
