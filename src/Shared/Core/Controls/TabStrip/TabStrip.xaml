@@ -4,6 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
+             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
              x:Name="this"
              HorizontalOptions="FillAndExpand"
              VerticalOptions="FillAndExpand">
@@ -15,14 +16,21 @@
             <local:TabStripHeader x:Name="TabHeader"
                                   ItemsSource="{Binding ItemsSource}" />
 
-
             <cards:CarouselView x:Name="TabContent"
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}"
-                                VerticalOptions="FillAndExpand" />
+                                VerticalOptions="FillAndExpand">
+                <x:Arguments>
+                    <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
+                                                                AnimationLength="250"
+                                                                NoItemMaxPanDistance="1000" />
+                    <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
+                                                                AnimationLength="250" />
+                </x:Arguments>
+            </cards:CarouselView>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

@@ -12,7 +12,7 @@
     {
         public TabStripHeader()
         {
-            InitializeComponent();          
+            InitializeComponent();
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
@@ -33,11 +33,11 @@
         }
 
         private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
-        {   
+        {
             var control = (TabStripHeader)bindable;
 
             if (control == null || newValue == null)
-            {                
+            {
                 return;
             }
 
@@ -47,7 +47,7 @@
             {
                 InitTabHeader(control, tabs);
             }
-        }       
+        }
 
         private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModel> tabs)
         {
@@ -55,17 +55,17 @@
             {
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
-                
+
                 var itemFontIcon = new Label
-                {                    
+                {
                     Style = index == 0 ? (Style)control.Resources[$"TabActive{item.TabHeaderTitle}Icon"] : (Style)control.Resources[$"Tab{item.TabHeaderTitle}Icon"]
                 };
 
                 Debug.WriteLine($"TabStrip Header {item.TabHeaderTitle}");
 
                 var itemLabel = new Label
-                {                    
-                    Text = item.TabHeaderTitle.ToUpperInvariant(),                    
+                {
+                    Text = item.TabHeaderTitle.ToUpperInvariant(),
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
@@ -84,11 +84,10 @@
                 Style = (Style)control.Resources["Tab"]
             };
 
-            var tapGestureRecognizer = new TapGestureRecognizer();
-            tapGestureRecognizer.Command = new Command(() =>
+            var tapGestureRecognizer = new TapGestureRecognizer
             {
-                control.ItemTappedCommand?.Execute(index);
-            }); 
+                Command = new Command(() => { control.ItemTappedCommand?.Execute(index); })
+            };
 
             itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
 
@@ -105,23 +104,28 @@
                 }
             };
         }
-		
+
         public void SetSelectedTab(int oldIndex, int newIndex)
         {
             var tabHeaders = scrollLayOut.Children;
-
             var oldTabModel = ItemsSource.ToList()[oldIndex];
-            var oldTab = tabHeaders[oldIndex] as StackLayout;
-            oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
-            oldTab.Children[1].Style =(Style)Resources["TabText"];
-            ((ContentView)oldTab.Children[2]).Content.Style = (Style)Resources["TabInactiveLine"];
+
+            if (tabHeaders[oldIndex] is StackLayout oldTab)
+            {
+                oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
+                oldTab.Children[1].Style = (Style)Resources["TabText"];
+                ((ContentView)oldTab.Children[2]).Content.Style = (Style)Resources["TabInactiveLine"];
+            }
 
             var newTabModel = ItemsSource.ToList()[newIndex];
-            var newTab = tabHeaders[newIndex] as StackLayout;
-            newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
-            newTab.Children[1].Style = (Style)Resources["TabActiveText"];
-            ((ContentView)newTab.Children[2]).Content.Style = (Style)Resources["TabActiveLine"];
-           
+
+            if (tabHeaders[newIndex] is StackLayout newTab)
+            {
+                newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
+                newTab.Children[1].Style = (Style)Resources["TabActiveText"];
+                ((ContentView)newTab.Children[2]).Content.Style = (Style)Resources["TabActiveLine"];
+            }
+
             scrollView.ScrollToAsync(tabHeaders[newIndex], ScrollToPosition.Center, true);
         }
     }
