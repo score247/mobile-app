@@ -54,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
 
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread, true);
         }
 
         public bool IsRefreshing { get; set; }

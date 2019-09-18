@@ -16,8 +16,7 @@ namespace LiveScore.Soccer.Services
     using Prism.Events;
 
     public class SoccerHubService : IHubService
-    {
-        private readonly ISettings settings;
+    {        
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
@@ -52,6 +51,8 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
+                await logger.LogInfoAsync($"{DateTime.Now} HubService start").ConfigureAwait(false);
+
                 hubConnection = hubConnectionBuilder.WithUrl($"{hubEndpoint}/soccerhub").Build();
 
                 foreach (var hubEvent in hubEvents)
@@ -92,7 +93,7 @@ namespace LiveScore.Soccer.Services
         public async Task Reconnect()
         {
             try
-            {
+            {                
                 if (hubConnection.State == HubConnectionState.Disconnected)
                 {
                     await hubConnection.StartAsync().ConfigureAwait(false);
@@ -109,6 +110,7 @@ namespace LiveScore.Soccer.Services
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
 
             await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", ex).ConfigureAwait(false);
+
             await hubConnection.StartAsync().ConfigureAwait(false);
         }
     }

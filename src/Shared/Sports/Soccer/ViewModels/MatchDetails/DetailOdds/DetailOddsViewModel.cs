@@ -62,9 +62,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 await FirstLoadOrRefreshOdds(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat).ConfigureAwait(false));
 
             TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommand);
-
-            //TODO verify keepSubscriberReferenceAlive
-            this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
+            
+            this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread, true);
         }
 
         public bool IsRefreshing { get; set; }
