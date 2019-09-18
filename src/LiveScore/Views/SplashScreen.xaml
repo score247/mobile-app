@@ -5,14 +5,13 @@
              x:Class="LiveScore.Views.SplashScreen"
              BackgroundColor="#0F111C">
     <ContentPage.Content>
-        <Grid Padding="0"
-              Margin="0"
-              ColumnSpacing="0"
-              RowSpacing="0">
-            <ffImageLoading:CachedImage Grid.Row="0"
-                                        Grid.Column="0"
-                                        DownsampleToViewSize="True"
-                                        Source="images/sport.gif" />
+        <Grid>
+            <ffImageLoading:CachedImage
+                x:Name="SplashIcon"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Aspect="AspectFit"
+                Source="images/common/logo_splash_screen.png" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

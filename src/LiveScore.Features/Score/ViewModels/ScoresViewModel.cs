@@ -15,7 +15,6 @@
     public class ScoresViewModel : ViewModelBase
     {
         private const byte TodayIndex = 3;
-        private bool isFirstLoad = true;
 
         public ScoresViewModel(INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -63,11 +62,7 @@
 
         public override void OnAppearing()
         {
-            if (isFirstLoad)
-            {
-                SelectedScoreItem?.OnAppearing();
-                isFirstLoad = false;
-            }
+            SelectedScoreItem?.OnAppearing();
         }
 
         public override void OnDisappearing()
@@ -77,10 +72,7 @@
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
-            if (!isFirstLoad)
-            {
-                (args?.Item as ScoreItemViewModel)?.OnAppearing();
-            }
+            SelectedScoreItem?.OnAppearing();
         }
 
         private void OnDateBarItemTapped(DateBarItemTappedEventArgs args)

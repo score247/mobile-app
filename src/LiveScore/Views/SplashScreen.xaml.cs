@@ -23,13 +23,14 @@
             await Task.Delay(500);
 
             await LoadMainPage();
+
         }
 
         private async Task LoadMainPage()
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
-
             await PageUtilities.OnInitializedAsync(mainPage, null);
+
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
             await Navigation.PopToRootAsync(false);

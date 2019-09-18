@@ -28,7 +28,6 @@ namespace LiveScore.Features.Score.ViewModels
         private readonly IMatchService matchService;
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
-        private bool firstLoad = true;
 
         [Time]
         public ScoreItemViewModel(
@@ -50,6 +49,8 @@ namespace LiveScore.Features.Score.ViewModels
             SubscribeEvents();
             InitializeCommand();
         }
+
+        public bool FirstLoad { get; private set; } = true;
 
         public DateTime SelectedDate { get; }
 
@@ -84,10 +85,11 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override async void OnAppearing()
         {
-            if (firstLoad)
+            if (FirstLoad)
             {
+                FirstLoad = false;
+
                 await InitializeData().ConfigureAwait(false);
-                firstLoad = false;
             }
             // TODO: Handle load data in background for 2nd load
         }
@@ -95,7 +97,7 @@ namespace LiveScore.Features.Score.ViewModels
         private void InitializeCommand()
         {
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);            
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
         }
 
         [Time]
