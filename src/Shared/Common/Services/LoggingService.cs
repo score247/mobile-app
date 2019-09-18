@@ -66,7 +66,7 @@ namespace LiveScore.Common.Services
 
             if (!string.IsNullOrWhiteSpace(message))
             {
-                evt.Message = new SentryMessage(deviceInfo?.Name + message);
+                evt.Message = new SentryMessage(deviceInfo?.Name + " " + message);
             }
             
             evt.Contexts.Device.Model = deviceInfo.Model;
@@ -79,7 +79,7 @@ namespace LiveScore.Common.Services
 
         private SentryEvent CreateSentryInfoEvent(string message)
         {
-            var evt = new SentryEvent(deviceInfo?.Name + message)
+            var evt = new SentryEvent(deviceInfo?.Name + " " + message)
             {
                 Level = ErrorLevel.Info
             };
