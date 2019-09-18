@@ -263,7 +263,8 @@
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
         [IgnoreMember]
-        public string LeagueGroupName => $"{CountryName} {LeagueName}".ToUpperInvariant();
+        public string LeagueGroupName
+            => $"{(string.IsNullOrEmpty(CountryCode) ? string.Empty : CountryName)} {LeagueName}".ToUpperInvariant();
 
         [IgnoreMember]
         private bool HomeWinPenalty
