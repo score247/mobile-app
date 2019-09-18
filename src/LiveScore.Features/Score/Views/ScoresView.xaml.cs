@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-
-namespace LiveScore.Features.Score.Views
+﻿namespace LiveScore.Features.Score.Views
 {
-    using System.Threading.Tasks;
+    using System.Diagnostics;
     using Common.Helpers;
     using LiveScore.Features.Score.ViewModels;
     using MethodTimer;
@@ -22,12 +20,15 @@ namespace LiveScore.Features.Score.Views
 
         protected override void OnAppearing()
         {
-            //  (BindingContext as ScoresViewModel)?.OnAppearing();
+            (BindingContext as ScoresViewModel)?.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
             (BindingContext as ScoresViewModel)?.OnDisappearing();
+
+            // Remove first load event triggers
+            Triggers.Clear();
         }
 
         private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)
