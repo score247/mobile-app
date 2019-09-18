@@ -75,6 +75,8 @@
         /// </summary>
         bool IsInLiveAndNotExtraTime { get; }
 
+        DateTimeOffset ModifiedTime { get; }
+
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);

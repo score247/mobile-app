@@ -1,3 +1,6 @@
+using LiveScore.Core.Events;
+using Prism.Events;
+
 namespace LiveScore.iOS
 {
     using System;
@@ -31,6 +34,17 @@ namespace LiveScore.iOS
             Runtime.MarshalManagedException += (_, args) => loggingService.LogError(args.Exception);
             Runtime.MarshalObjectiveCException += (_, args)
                 => loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
+
+            var eventAggregator = application.Container.Resolve<IEventAggregator>();
+            eventAggregator.GetEvent<StartLoadDataEvent>().Subscribe(() =>
+            {
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
+            });
+
+            eventAggregator.GetEvent<StopLoadDataEvent>().Subscribe(() =>
+            {
+                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
+            });
 
             return base.FinishedLaunching(uiApplication, launchOptions);
         }

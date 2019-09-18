@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Core.ViewModels
+﻿using LiveScore.Core.Events;
+
+namespace LiveScore.Core.ViewModels
 {
     using System;
     using System.Threading.Tasks;
@@ -80,11 +82,13 @@
 
         protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showBusy = true)
         {
+            EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
             IsBusy = showBusy;
 
             await loadDataFunc();
 
             IsBusy = false;
+            EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
         }
 
         protected async Task NavigateToHome()
@@ -95,6 +99,6 @@
             {
                 await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception);
             }
-        }        
+        }
     }
 }

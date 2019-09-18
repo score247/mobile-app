@@ -45,7 +45,8 @@
             EventType lastTimelineType,
             IEnumerable<MatchPeriod> matchPeriods,
             string countryCode,
-            string countryName)
+            string countryName,
+            DateTimeOffset modifiedTime)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -76,6 +77,7 @@
             MatchPeriods = matchPeriods;
             CountryCode = countryCode;
             CountryName = countryName;
+            ModifiedTime = modifiedTime;
         }
 
         [Key(0)]
@@ -161,6 +163,9 @@
 
         [Key(27)]
         public string CountryName { get; private set; }
+
+        [Key(28)]
+        public DateTimeOffset ModifiedTime { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 

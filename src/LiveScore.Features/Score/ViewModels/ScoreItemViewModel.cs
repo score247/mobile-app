@@ -1,4 +1,11 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
+﻿using System.Text.RegularExpressions;
+using ImTools;
+using LiveScore.Core.Models.Matches;
+using SharpRaven.Data.Context;
+using Xamarin.Forms.Internals;
+using Device = Xamarin.Forms.Device;
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
 
 namespace LiveScore.Features.Score.ViewModels
 {
@@ -22,8 +29,8 @@ namespace LiveScore.Features.Score.ViewModels
 
     public class ScoreItemViewModel : ViewModelBase
     {
-        private static readonly IReadOnlyList<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
-            new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
+        private static readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
+            new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(Enumerable.Empty<IGrouping<GroupMatchViewModel, MatchViewModel>>().ToList());
 
         private readonly IMatchService matchService;
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -62,7 +69,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsRefreshing { get; set; }
 
-        public IReadOnlyList<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
+        public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; private set; }
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
@@ -80,30 +87,29 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
-            // TODO: Handle load data in background
+            Task.Run(async ()
+                => await LoadData(() => UpdateMatches(true), false));
         }
 
+        [Time]
         public override async void OnAppearing()
         {
             if (FirstLoad)
             {
                 FirstLoad = false;
 
-                await InitializeData().ConfigureAwait(false);
+                await LoadData(() => LoadMatches(SelectedDate));
             }
-            // TODO: Handle load data in background for 2nd load
+            else
+            {
+                await Task.Run(async () => await LoadData(() => UpdateMatches(), false));
+            }
         }
 
         private void InitializeCommand()
         {
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
-        }
-
-        [Time]
-        private Task InitializeData()
-        {
-            return LoadData(() => LoadMatches(SelectedDate));
         }
 
         private void SubscribeEvents()
@@ -128,18 +134,15 @@ namespace LiveScore.Features.Score.ViewModels
                 .Unsubscribe(OnReceivedTeamStatistic);
         }
 
-        private Task OnRefresh()
+        private async Task OnRefresh()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
-            // TODO: handle refresh data without setting all items to item source
-            return LoadData(() => LoadMatches(SelectedDate, true), false);
+            await Task.Run(async () => await LoadData(() => UpdateMatches(true), false));
         }
 
         private async Task OnTapMatch(MatchViewModel matchItem)
         {
-            // TODO: Change to use IAutoInitialize for parameters followed by new release of prism
-            // https://github.com/PrismLibrary/Prism/releases
             var parameters = new NavigationParameters
             {
                 { "Match", matchItem.Match }
@@ -152,58 +155,6 @@ namespace LiveScore.Features.Score.ViewModels
             if (!navigated.Success)
             {
                 await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
-            }
-        }
-
-        [Time]
-        private async Task LoadMatches(DateTime date, bool forceFetchNewData = false)
-        {
-            UnsubscribeLiveMatchTimeChangeEvent(date);
-
-            if (IsBusy)
-            {
-                MatchItemsSource = EmptyMatchDataSource;
-            }
-
-            await GetMatches(date, forceFetchNewData).ConfigureAwait(false);
-
-            Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
-        }
-
-        private async Task GetMatches(DateTime date, bool forceFetchNewData)
-        {
-            var matches = await matchService.GetMatchesByDate(
-                    date,
-                    CurrentLanguage,
-                    forceFetchNewData).ConfigureAwait(false);
-
-            var matchItemViewModels = matches
-                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
-                .ToList();
-
-            var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
-
-            MatchItemsSource = new List<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
-            IsRefreshing = false;
-
-            Profiler.Start("ScoresView.Render");
-            Debug.WriteLine($"Number of groups: {groups.Count()}");
-            Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");
-        }
-
-        private void UnsubscribeLiveMatchTimeChangeEvent(DateTime date)
-        {
-            // TODO: Enhance later - Call Dispose() for closing Subscriber Match Time Event
-            if ((date == DateTime.Today || date == DateTimeExtension.Yesterday().Date)
-                    && MatchItemsSource?.Count > 0)
-            {
-                var liveMatchViewModels = MatchItemsSource
-                        .SelectMany(group => group)
-                        .Where(matchItem => matchItem.Match.EventStatus?.IsLive == true);
-
-                // experiment parallel
-                Parallel.ForEach(liveMatchViewModels, (viewModel, _)
-                    => viewModel.UnsubscribeMatchTimeChangeEvent());
             }
         }
 
@@ -236,6 +187,77 @@ namespace LiveScore.Features.Score.ViewModels
                 .FirstOrDefault(m => m.Match.Id == payload.MatchId);
 
             matchItem?.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
+        }
+
+        [Time]
+        private async Task LoadMatches(DateTime date, bool forceFetchNewData = false)
+        {
+            if (IsBusy)
+            {
+                MatchItemsSource = EmptyMatchDataSource;
+            }
+
+            var matches = await matchService.GetMatchesByDate(
+                date,
+                CurrentLanguage,
+                forceFetchNewData).ConfigureAwait(false);
+
+            var matchItemViewModels = matches
+                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
+                .ToList();
+
+            var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
+
+            MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
+            IsRefreshing = false;
+
+            Profiler.Start("ScoresView.Render");
+            Debug.WriteLine($"Number of groups: {groups.Count()}");
+            Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");
+
+            Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
+        }
+
+        private async Task UpdateMatches(bool forceFetchNewData = false)
+        {
+            var matches = await matchService.GetMatchesByDate(
+                SelectedDate,
+                CurrentLanguage,
+                forceFetchNewData);
+
+            var matchViewModels = MatchItemsSource?.SelectMany(g => g);
+
+            foreach (var match in matches)
+            {
+                var matchViewModel = matchViewModels?.FirstOrDefault(m => m.Match.Id == match.Id);
+
+                if (matchViewModel == null)
+                {
+                    AddNewMatchToItemSource(match);
+
+                    continue;
+                }
+
+                if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
+                {
+                    matchViewModel.BuildMatch(match);
+                }
+            }
+
+            Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+        }
+
+        private void AddNewMatchToItemSource(IMatch match)
+        {
+            var newMatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
+            var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == match.LeagueId);
+            var currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
+            currentMatchViewModels.Add(newMatchViewModel);
+
+            MatchItemsSource[currentGroupIndex] = currentMatchViewModels
+                .OrderBy(m => m.Match.EventDate)
+                .GroupBy(item => new GroupMatchViewModel(item.Match))
+                .FirstOrDefault();
         }
     }
 }
