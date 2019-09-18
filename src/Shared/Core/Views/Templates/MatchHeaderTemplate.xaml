@@ -14,6 +14,7 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
+            <BoxView Style="{StaticResource HorizontalLine}" />
             <Grid Style="{StaticResource LeagueBox}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
@@ -47,6 +48,7 @@
                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}', Mode=OneTime}"
                        Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>
