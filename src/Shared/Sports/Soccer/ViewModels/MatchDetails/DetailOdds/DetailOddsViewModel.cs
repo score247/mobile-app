@@ -129,7 +129,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public override async void OnResume()
         {
-            Debug.WriteLine("DetailOddsViewModel OnResume");
+            LoggingService.LogInfo($"OddsComparison  {DateTime.Now} - OnResume - Selected BetType {SelectedBetType}");
 
             if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
             {
@@ -192,7 +192,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         internal void HandleOddsComparisonMessage(OddsComparisonMessage oddsComparisonMessage)
         {
-            Debug.WriteLine($"Selected BetType {SelectedBetType}");
+            LoggingService.LogInfo($"HandleOddsComparisonMessage {DateTime.Now} - Match {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType}");
 
             if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
                 || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)
@@ -203,6 +203,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
             {
                 var needToReOrder = false;
+
+                LoggingService.LogInfo($"HandleOddsComparisonMessage {DateTime.Now} - Match {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {
