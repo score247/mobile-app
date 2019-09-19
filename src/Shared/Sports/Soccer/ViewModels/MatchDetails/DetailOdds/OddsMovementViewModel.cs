@@ -153,21 +153,27 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {
-                if (isRefresh)
-                {
-                    InsertOddsMovementItems(matchOddsMovement.OddsMovements);
-                }
-                else
-                {
-                    var views = matchOddsMovement.OddsMovements
+                //if (isRefresh)
+                //{
+                //    InsertOddsMovementItems(matchOddsMovement.OddsMovements);
+                //}
+                //else
+                //{
+                
+                var views = matchOddsMovement.OddsMovements
                     .Select(x => new BaseMovementItemViewModel(betType, x, NavigationService, DependencyResolver)
                     .CreateInstance());
 
-                    foreach (var view in views)
+                if (isRefresh)
+                {
+                    OddsMovementItems.Clear();
+                }
+
+                foreach (var view in views)
                     {
                         OddsMovementItems.Add(view);
                     }
-                }
+                //}
             }
 
             HasData = true;
