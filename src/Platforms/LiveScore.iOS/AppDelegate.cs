@@ -1,14 +1,15 @@
-using LiveScore.Core.Events;
-using Prism.Events;
 using System;
-using LiveScore.Common.Helpers;
-using LiveScore.Common.Services;
+using System.Threading.Tasks;
 using FFImageLoading.Forms.Platform;
 using Foundation;
+using LiveScore.Common.Helpers;
+using LiveScore.Common.Services;
+using LiveScore.Core.Events;
 using Lottie.Forms.iOS.Renderers;
 using ObjCRuntime;
 using PanCardView.iOS;
 using Prism;
+using Prism.Events;
 using Prism.Ioc;
 using UIKit;
 
@@ -17,6 +18,8 @@ namespace LiveScore.iOS
     [Register("AppDelegate")]
     public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {
+        private ILoggingService loggingService;
+
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Profiler.Start("IOS Application");
@@ -27,14 +30,16 @@ namespace LiveScore.iOS
 
             var application = new App(new iOSInitializer());
             LoadApplication(application);
+            SubscribeEvents(application);
+            HandleGlobalExceptions(application);
 
-            var loggingService = application.Container.Resolve<ILoggingService>();
+            return base.FinishedLaunching(uiApplication, launchOptions);
+        }
 
-            Runtime.MarshalManagedException += (_, args) => loggingService.LogError(args.Exception);
-            Runtime.MarshalObjectiveCException += (_, args)
-                => loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
-
+        private static void SubscribeEvents(App application)
+        {
             var eventAggregator = application.Container.Resolve<IEventAggregator>();
+
             eventAggregator.GetEvent<StartLoadDataEvent>().Subscribe(() =>
             {
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
@@ -44,8 +49,36 @@ namespace LiveScore.iOS
             {
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
             });
+        }
 
-            return base.FinishedLaunching(uiApplication, launchOptions);
+        private void HandleGlobalExceptions(App application)
+        {
+            loggingService = application.Container.Resolve<ILoggingService>();
+
+            Runtime.MarshalManagedException += HandleMarshalException;
+            Runtime.MarshalObjectiveCException += HandleMarshalObjectCException;
+            AppDomain.CurrentDomain.UnhandledException += UnhandledException;
+            TaskScheduler.UnobservedTaskException += UnobservedTaskException;
+        }
+
+        private void HandleMarshalException(object sender, MarshalManagedExceptionEventArgs args)
+        {
+            loggingService.LogError(args.Exception);
+        }
+
+        private void HandleMarshalObjectCException(object sender, MarshalObjectiveCExceptionEventArgs args)
+        {
+            loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
+        }
+
+        private void UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+        {
+            loggingService.LogError(e.Exception);
+        }
+
+        private void UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            loggingService.LogError(e.ExceptionObject as Exception);
         }
     }
 

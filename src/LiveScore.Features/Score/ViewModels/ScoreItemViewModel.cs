@@ -132,7 +132,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
-            await UpdateMatchesForTodayAndLiveMatches(true);
+            await Task.Run(async () => await LoadData(() => UpdateMatches(true), false));
         }
 
         private async Task OnTapMatch(MatchViewModel matchItem)
