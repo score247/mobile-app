@@ -255,22 +255,22 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
                 currentMatchViewModels.Add(newMatchViewModel);
-
-                Device.BeginInvokeOnMainThread(() =>
-                    MatchItemsSource[currentGroupIndex] = currentMatchViewModels
+                var group = currentMatchViewModels
                         .OrderBy(m => m.Match.EventDate)
                         .GroupBy(item => new GroupMatchViewModel(item.Match))
-                        .FirstOrDefault());
+                        .FirstOrDefault();
+
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
             }
             else
             {
                 currentMatchViewModels.Add(newMatchViewModel);
-
-                Device.BeginInvokeOnMainThread(() =>
-                   MatchItemsSource.Add(currentMatchViewModels
+                var group = currentMatchViewModels
                        .OrderBy(m => m.Match.EventDate)
                        .GroupBy(item => new GroupMatchViewModel(item.Match))
-                       .FirstOrDefault()));
+                       .FirstOrDefault();
+
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
         }
     }
