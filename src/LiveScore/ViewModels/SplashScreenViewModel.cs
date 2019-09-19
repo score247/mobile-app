@@ -1,12 +1,12 @@
-﻿namespace LiveScore.ViewModels
-{
-    using System;
-    using LiveScore.Core;
-    using LiveScore.Core.Services;
-    using LiveScore.Core.ViewModels;
-    using LiveScore.Views;
-    using Prism.Navigation;
+﻿using System;
+using LiveScore.Core;
+using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using LiveScore.Views;
+using Prism.Navigation;
 
+namespace LiveScore.ViewModels
+{
     public class SplashScreenViewModel : ViewModelBase
     {
         private readonly IMatchService matchService;
@@ -19,12 +19,12 @@
 
         public override async void Initialize(INavigationParameters parameters)
         {
-            var matches = await matchService.GetMatchesByDate(
+            await matchService.GetMatchesByDate(
                   DateTime.Today,
                   CurrentLanguage,
                   true).ConfigureAwait(false);
 
-            var result = await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
+            await NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(true);
         }
     }
 }

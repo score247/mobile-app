@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Features.Score
-{
-    using Prism.Ioc;
-    using Prism.Modularity;
-    using ViewModels;
-    using Views;
+﻿using Prism.Ioc;
+using Prism.Modularity;
+using LiveScore.Features.Score.ViewModels;
+using LiveScore.Features.Score.Views;
 
+namespace LiveScore.Features.Score
+{
     public class ScoreModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Features.League.ViewModels
-{
-    using System.Collections.ObjectModel;
-    using Core;
-    using Core.Models.Leagues;
-    using Core.ViewModels;
-    using Prism.Navigation;
+﻿using System.Collections.ObjectModel;
+using LiveScore.Core;
+using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.ViewModels;
+using Prism.Navigation;
 
+namespace LiveScore.Features.League.ViewModels
+{
     public class LeagueViewModel : ViewModelBase
     {
         public LeagueViewModel(

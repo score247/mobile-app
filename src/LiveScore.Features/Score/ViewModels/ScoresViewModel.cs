@@ -1,17 +1,17 @@
-﻿namespace LiveScore.Features.Score.ViewModels
-{
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Threading.Tasks;
-    using Core;
-    using Core.Controls.DateBar.EventArgs;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.ViewModels;
-    using PanCardView.EventArgs;
-    using Prism.Commands;
-    using Prism.Events;
-    using Prism.Navigation;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using LiveScore.Core;
+using LiveScore.Core.Controls.DateBar.EventArgs;
+using LiveScore.Common.Extensions;
+using LiveScore.Core.ViewModels;
+using PanCardView.EventArgs;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Navigation;
 
+namespace LiveScore.Features.Score.ViewModels
+{
     public class ScoresViewModel : ViewModelBase
     {
         private const byte TodayIndex = 3;

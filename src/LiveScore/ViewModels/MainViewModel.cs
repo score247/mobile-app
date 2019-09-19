@@ -1,13 +1,13 @@
-﻿namespace LiveScore.ViewModels
-{
-    using System.Threading.Tasks;
-    using Common.Extensions;
-    using Core;
-    using Core.ViewModels;
-    using LiveScore.Common.Services;
-    using Prism.Navigation;
-    using Xamarin.Forms;
+﻿using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.Services;
+using LiveScore.Core;
+using LiveScore.Core.ViewModels;
+using Prism.Navigation;
+using Xamarin.Forms;
 
+namespace LiveScore.ViewModels
+{
     public class MainViewModel : ViewModelBase
     {
         private readonly ISettings settings;

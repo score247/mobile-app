@@ -1,20 +1,19 @@
 using LiveScore.Core.Events;
 using Prism.Events;
+using System;
+using LiveScore.Common.Helpers;
+using LiveScore.Common.Services;
+using FFImageLoading.Forms.Platform;
+using Foundation;
+using Lottie.Forms.iOS.Renderers;
+using ObjCRuntime;
+using PanCardView.iOS;
+using Prism;
+using Prism.Ioc;
+using UIKit;
 
 namespace LiveScore.iOS
 {
-    using System;
-    using Common.Helpers;
-    using Common.Services;
-    using FFImageLoading.Forms.Platform;
-    using Foundation;
-    using Lottie.Forms.iOS.Renderers;
-    using ObjCRuntime;
-    using PanCardView.iOS;
-    using Prism;
-    using Prism.Ioc;
-    using UIKit;
-
     [Register("AppDelegate")]
     public class AppDelegate : Xamarin.Forms.Platform.iOS.FormsApplicationDelegate
     {

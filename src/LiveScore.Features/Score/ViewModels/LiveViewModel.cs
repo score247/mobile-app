@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Features.Score.ViewModels
-{
-    using Core;
-    using Core.ViewModels;
-    using LiveScore.Common.Helpers;
-    using Prism.Navigation;
+﻿using LiveScore.Core;
+using LiveScore.Core.ViewModels;
+using LiveScore.Common.Helpers;
+using Prism.Navigation;
 
+namespace LiveScore.Features.Score.ViewModels
+{
     public class LiveViewModel : ViewModelBase
     {
         public LiveViewModel(INavigationService navigationService, IDependencyResolver serviceLocator)

@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Views
-{
-    using Prism.Navigation;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+﻿using Prism.Navigation;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+namespace LiveScore.Views
+{
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainView : IMasterDetailPageOptions
     {

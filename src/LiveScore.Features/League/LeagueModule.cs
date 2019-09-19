@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Features.League
-{
-    using Prism.Ioc;
-    using Prism.Modularity;
-    using ViewModels;
-    using Views;
+﻿using Prism.Ioc;
+using Prism.Modularity;
+using LiveScore.Features.League.ViewModels;
+using LiveScore.Features.League.Views;
 
+namespace LiveScore.Features.League
+{
     public class LeagueModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)

@@ -1,5 +1,22 @@
-﻿using ImTools;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using ImTools;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.Helpers;
+using LiveScore.Core;
+using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Core.PubSubEvents.Teams;
+using LiveScore.Core.Services;
+using LiveScore.Core.ViewModels;
+using MethodTimer;
+using Prism.Events;
+using Prism.Navigation;
 using Xamarin.Forms.Internals;
 using Device = Xamarin.Forms.Device;
 
@@ -7,23 +24,6 @@ using Device = Xamarin.Forms.Device;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Common.Extensions;
-    using Common.Helpers;
-    using Core;
-    using Core.Converters;
-    using Core.PubSubEvents.Matches;
-    using Core.PubSubEvents.Teams;
-    using Core.Services;
-    using LiveScore.Core.ViewModels;
-    using MethodTimer;
-    using Prism.Events;
-    using Prism.Navigation;
-
     public class ScoreItemViewModel : ViewModelBase
     {
         private static readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> EmptyMatchDataSource =
@@ -269,8 +269,6 @@ namespace LiveScore.Features.Score.ViewModels
                    .GroupBy(item => new GroupMatchViewModel(item.Match))
                    .FirstOrDefault());
             }
-
-
         }
     }
 }
