@@ -231,7 +231,7 @@ namespace LiveScore.Features.Score.ViewModels
 
                 if (matchViewModel == null)
                 {
-                    Device.BeginInvokeOnMainThread(() => AddNewMatchToItemSource(match));
+                    AddNewMatchToItemSource(match);
 
                     continue;
                 }
@@ -256,19 +256,21 @@ namespace LiveScore.Features.Score.ViewModels
                 currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
                 currentMatchViewModels.Add(newMatchViewModel);
 
-                MatchItemsSource[currentGroupIndex] = currentMatchViewModels
-                    .OrderBy(m => m.Match.EventDate)
-                    .GroupBy(item => new GroupMatchViewModel(item.Match))
-                    .FirstOrDefault();
+                Device.BeginInvokeOnMainThread(() =>
+                    MatchItemsSource[currentGroupIndex] = currentMatchViewModels
+                        .OrderBy(m => m.Match.EventDate)
+                        .GroupBy(item => new GroupMatchViewModel(item.Match))
+                        .FirstOrDefault());
             }
             else
             {
                 currentMatchViewModels.Add(newMatchViewModel);
 
-                MatchItemsSource.Add(currentMatchViewModels
-                   .OrderBy(m => m.Match.EventDate)
-                   .GroupBy(item => new GroupMatchViewModel(item.Match))
-                   .FirstOrDefault());
+                Device.BeginInvokeOnMainThread(() =>
+                   MatchItemsSource.Add(currentMatchViewModels
+                       .OrderBy(m => m.Match.EventDate)
+                       .GroupBy(item => new GroupMatchViewModel(item.Match))
+                       .FirstOrDefault()));
             }
         }
     }
