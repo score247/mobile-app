@@ -51,7 +51,6 @@
               0,
               propertyChanged: (bindable, oldValue, newValue) =>
               {
-
                   var newIndex = (int)newValue;
                   var oldIndex = (int)oldValue;
 
@@ -66,7 +65,6 @@
 
                   control.ItemTappedCommand?.Execute(new TabStripItemTappedEventArgs(newIndex));
               });
-
 
         public int SelectedIndex
         {

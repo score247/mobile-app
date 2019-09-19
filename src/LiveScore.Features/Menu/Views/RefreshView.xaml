@@ -9,7 +9,7 @@
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem
-            
+
             Command="{Binding DoneCommand}"
             Order="Primary"
             Priority="1"

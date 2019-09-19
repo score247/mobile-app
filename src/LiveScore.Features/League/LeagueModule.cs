@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Features.League
 {
-    using ViewModels;
-    using Views;
     using Prism.Ioc;
     using Prism.Modularity;
+    using ViewModels;
+    using Views;
 
     public class LeagueModule : IModule
     {

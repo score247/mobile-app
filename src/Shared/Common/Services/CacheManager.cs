@@ -72,12 +72,12 @@
             }
 
             return cacheService.SetAsync(key, data, options);
-        } 
+        }
 
         public async Task InvalidateAll()
         {
             foreach (var key in cachedKeys)
-            {               
+            {
                 await cacheService.RemoveAsync(key);
             }
 

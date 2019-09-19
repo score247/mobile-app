@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Features.TVSchedule
 {
-    using ViewModels;
-    using Views;
     using Prism.Ioc;
     using Prism.Modularity;
+    using ViewModels;
+    using Views;
 
     public class TVScheduleModule : IModule
     {

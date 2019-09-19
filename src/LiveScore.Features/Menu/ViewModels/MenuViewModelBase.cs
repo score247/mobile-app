@@ -2,8 +2,8 @@
 {
     using System.Threading.Tasks;
     using Common.Extensions;
-    using Core.ViewModels;
     using Core;
+    using Core.ViewModels;
     using Prism.Navigation;
 
     public class MenuViewModelBase : ViewModelBase

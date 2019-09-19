@@ -24,7 +24,6 @@
             await Task.Delay(300);
 
             await LoadMainPage();
-
         }
 
         private async Task LoadMainPage()

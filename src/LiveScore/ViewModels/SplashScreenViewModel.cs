@@ -1,15 +1,11 @@
 ﻿namespace LiveScore.ViewModels
 {
     using System;
-    using System.Threading.Tasks;
     using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
     using LiveScore.Core.Services;
     using LiveScore.Core.ViewModels;
     using LiveScore.Views;
-    using Prism.Mvvm;
     using Prism.Navigation;
-    using Xamarin.Forms;
 
     public class SplashScreenViewModel : ViewModelBase
     {

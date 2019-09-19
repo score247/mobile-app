@@ -48,7 +48,7 @@ namespace LiveScore.Common.Services
         {
             Debug.WriteLine("LogError");
             ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
-        }        
+        }
 
         public void LogError(string message, Exception exception) => ravenClient?.Capture(CreateSentryEvent(message, exception));
 
@@ -68,7 +68,7 @@ namespace LiveScore.Common.Services
             {
                 evt.Message = new SentryMessage(deviceInfo?.Name + " " + message);
             }
-            
+
             evt.Contexts.Device.Model = deviceInfo.Model;
             evt.Contexts.Device.Name = deviceInfo.Name;
             evt.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;

@@ -1,6 +1,4 @@
-﻿using MessagePack;
-
-namespace LiveScore.Core.Models.Teams
+﻿namespace LiveScore.Core.Models.Teams
 {
     using MessagePack;
 

@@ -6,15 +6,13 @@
 namespace MessagePack.Resolvers
 {
     using System;
-    using MessagePack;
 
     public class CoreModelResolver : global::MessagePack.IFormatterResolver
     {
         public static readonly global::MessagePack.IFormatterResolver Instance = new CoreModelResolver();
 
-        CoreModelResolver()
+        private CoreModelResolver()
         {
-
         }
 
         public global::MessagePack.Formatters.IMessagePackFormatter<T> GetFormatter<T>()
@@ -22,7 +20,7 @@ namespace MessagePack.Resolvers
             return FormatterCache<T>.formatter;
         }
 
-        static class FormatterCache<T>
+        private static class FormatterCache<T>
         {
             public static readonly global::MessagePack.Formatters.IMessagePackFormatter<T> formatter;
 
@@ -39,7 +37,7 @@ namespace MessagePack.Resolvers
 
     internal static class CoreModelResolverGetFormatterHelper
     {
-        static readonly global::System.Collections.Generic.Dictionary<Type, int> lookup;
+        private static readonly global::System.Collections.Generic.Dictionary<Type, int> lookup;
 
         static CoreModelResolverGetFormatterHelper()
         {
@@ -92,7 +90,6 @@ namespace MessagePack.Resolvers
 #pragma warning restore 618
 #pragma warning restore 612
 
-
 #pragma warning disable 618
 #pragma warning disable 612
 #pragma warning disable 414
@@ -106,8 +103,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
     public sealed class EnumerationFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Enumerations.Enumeration>
     {
-        readonly Dictionary<RuntimeTypeHandle, KeyValuePair<int, int>> typeToKeyAndJumpMap;
-        readonly Dictionary<int, int> keyToJumpMap;
+        private readonly Dictionary<RuntimeTypeHandle, KeyValuePair<int, int>> typeToKeyAndJumpMap;
+        private readonly Dictionary<int, int> keyToJumpMap;
 
         public EnumerationFormatter()
         {
@@ -142,18 +139,23 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     case 0:
                         offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Serialize(ref bytes, offset, (global::LiveScore.Core.Enumerations.EventType)value, formatterResolver);
                         break;
+
                     case 1:
                         offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.Language>().Serialize(ref bytes, offset, (global::LiveScore.Core.Enumerations.Language)value, formatterResolver);
                         break;
+
                     case 2:
                         offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.LeagueRoundType>().Serialize(ref bytes, offset, (global::LiveScore.Core.Enumerations.LeagueRoundType)value, formatterResolver);
                         break;
+
                     case 3:
                         offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.PeriodType>().Serialize(ref bytes, offset, (global::LiveScore.Core.Enumerations.PeriodType)value, formatterResolver);
                         break;
+
                     case 4:
                         offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, (global::LiveScore.Core.Enumerations.MatchStatus)value, formatterResolver);
                         break;
+
                     default:
                         break;
                 }
@@ -163,7 +165,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
             return MessagePackBinary.WriteNil(ref bytes, offset);
         }
-        
+
         public global::LiveScore.Core.Enumerations.Enumeration Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
         {
             if (MessagePackBinary.IsNil(bytes, offset))
@@ -173,7 +175,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             }
 
             var startOffset = offset;
-            
+
             if (MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize) != 2)
             {
                 throw new InvalidOperationException("Invalid Union data was detected. Type:global::LiveScore.Core.Enumerations.Enumeration");
@@ -195,34 +197,37 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     result = (global::LiveScore.Core.Enumerations.Enumeration)formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Deserialize(bytes, offset, formatterResolver, out readSize);
                     offset += readSize;
                     break;
+
                 case 1:
                     result = (global::LiveScore.Core.Enumerations.Enumeration)formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.Language>().Deserialize(bytes, offset, formatterResolver, out readSize);
                     offset += readSize;
                     break;
+
                 case 2:
                     result = (global::LiveScore.Core.Enumerations.Enumeration)formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.LeagueRoundType>().Deserialize(bytes, offset, formatterResolver, out readSize);
                     offset += readSize;
                     break;
+
                 case 3:
                     result = (global::LiveScore.Core.Enumerations.Enumeration)formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.PeriodType>().Deserialize(bytes, offset, formatterResolver, out readSize);
                     offset += readSize;
                     break;
+
                 case 4:
                     result = (global::LiveScore.Core.Enumerations.Enumeration)formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Deserialize(bytes, offset, formatterResolver, out readSize);
                     offset += readSize;
                     break;
+
                 default:
                     offset += MessagePackBinary.ReadNextBlock(bytes, offset);
                     break;
             }
-            
+
             readSize = offset - startOffset;
-            
+
             return result;
         }
     }
-
-
 }
 
 #pragma warning restore 168
@@ -237,20 +242,17 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
 namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 {
-    using System;
     using MessagePack;
-
 
     public sealed class EventTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Enumerations.EventType>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Enumerations.EventType value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -282,9 +284,11 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     case 0:
                         __DisplayName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Value__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -301,17 +305,15 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
         }
     }
 
-
     public sealed class MatchStatusFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Enumerations.MatchStatus>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Enumerations.MatchStatus value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -343,9 +345,11 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     case 0:
                         __DisplayName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Value__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -362,12 +366,10 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
         }
     }
 
-
     public sealed class OddsTrendFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Enumerations.OddsTrend>
     {
-
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
+        private readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        private readonly byte[][] ____stringByteKeys;
 
         public OddsTrendFormatter()
         {
@@ -381,10 +383,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DisplayName"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Value"),
-                
             };
         }
-
 
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Enumerations.OddsTrend value, global::MessagePack.IFormatterResolver formatterResolver)
         {
@@ -392,7 +392,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -433,14 +433,16 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     case 0:
                         __DisplayName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Value__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -454,17 +456,15 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
         }
     }
 
-
     public sealed class PeriodTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Enumerations.PeriodType>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Enumerations.PeriodType value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -496,9 +496,11 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     case 0:
                         __DisplayName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Value__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -514,7 +516,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             return ____result;
         }
     }
-
 }
 
 #pragma warning restore 168
@@ -528,20 +529,17 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
 {
-    using System;
     using MessagePack;
-
 
     public sealed class MatchPeriodFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Matches.MatchPeriod>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Matches.MatchPeriod value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.HomeScore);
@@ -577,15 +575,19 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                     case 0:
                         __HomeScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     case 1:
                         __AwayScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     case 2:
                         __PeriodType__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.PeriodType>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 3:
                         __Number__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -604,17 +606,15 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
         }
     }
 
-
     public sealed class VenueFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Matches.Venue>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Matches.Venue value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 5);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
@@ -652,18 +652,23 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                     case 0:
                         __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 2:
                         __Capacity__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     case 3:
                         __CityName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 4:
                         __CountryName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -682,7 +687,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             return ____result;
         }
     }
-
 }
 
 #pragma warning restore 168
@@ -696,15 +700,12 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 {
-    using System;
     using MessagePack;
-
 
     public sealed class BetOptionOddsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Odds.BetOptionOdds>
     {
-
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
+        private readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        private readonly byte[][] ____stringByteKeys;
 
         public BetOptionOddsFormatter()
         {
@@ -726,10 +727,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OptionValue"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OpeningOptionValue"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OddsTrend"),
-                
             };
         }
-
 
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Odds.BetOptionOdds value, global::MessagePack.IFormatterResolver formatterResolver)
         {
@@ -737,7 +736,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -790,26 +789,32 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                     case 0:
                         __Type__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __LiveOdds__ = formatterResolver.GetFormatterWithVerify<decimal>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 2:
                         __OpeningOdds__ = formatterResolver.GetFormatterWithVerify<decimal>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 3:
                         __OptionValue__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 4:
                         __OpeningOptionValue__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 5:
                         __OddsTrend__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.OddsTrend>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -821,12 +826,10 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
         }
     }
 
-
     public sealed class BookmakerFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Odds.Bookmaker>
     {
-
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
+        private readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        private readonly byte[][] ____stringByteKeys;
 
         public BookmakerFormatter()
         {
@@ -840,10 +843,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
-                
             };
         }
-
 
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Odds.Bookmaker value, global::MessagePack.IFormatterResolver formatterResolver)
         {
@@ -851,7 +852,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -892,14 +893,16 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                     case 0:
                         __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -913,12 +916,10 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
         }
     }
 
-
     public sealed class BetTypeOddsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Odds.BetTypeOdds>
     {
-
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
+        private readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        private readonly byte[][] ____stringByteKeys;
 
         public BetTypeOddsFormatter()
         {
@@ -936,10 +937,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Bookmaker"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("BetOptions"),
-                
             };
         }
-
 
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Odds.BetTypeOdds value, global::MessagePack.IFormatterResolver formatterResolver)
         {
@@ -947,7 +946,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 4);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -994,20 +993,24 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                     case 0:
                         __Id__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
+
                     case 1:
                         __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 2:
                         __Bookmaker__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Odds.Bookmaker>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 3:
                         __BetOptions__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -1023,12 +1026,10 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
         }
     }
 
-
     public sealed class OddsMovementFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Odds.OddsMovement>
     {
-
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
+        private readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        private readonly byte[][] ____stringByteKeys;
 
         public OddsMovementFormatter()
         {
@@ -1050,10 +1051,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsMatchStarted"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayScore"),
-                
             };
         }
-
 
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Odds.OddsMovement value, global::MessagePack.IFormatterResolver formatterResolver)
         {
@@ -1061,7 +1060,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -1114,26 +1113,32 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                     case 0:
                         __BetOptions__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __MatchTime__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 2:
                         __UpdateTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 3:
                         __IsMatchStarted__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
+
                     case 4:
                         __HomeScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     case 5:
                         __AwayScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -1150,7 +1155,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             return ____result;
         }
     }
-
 }
 
 #pragma warning restore 168
@@ -1164,20 +1168,17 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Teams
 {
-    using System;
     using MessagePack;
-
 
     public sealed class PlayerFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Core.Models.Teams.Player>
     {
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Core.Models.Teams.Player value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 6);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
@@ -1217,21 +1218,27 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Teams
                     case 0:
                         __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 1:
                         __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 2:
                         __Type__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 3:
                         __JerseyNumber__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     case 4:
                         __Position__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+
                     case 5:
                         __Order__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
+
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1251,7 +1258,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Teams
             return ____result;
         }
     }
-
 }
 
 #pragma warning restore 168

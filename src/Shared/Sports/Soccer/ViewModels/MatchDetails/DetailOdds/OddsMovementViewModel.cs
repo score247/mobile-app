@@ -102,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 {
                     await LoadData(async () => await FirstLoadOrRefreshOddsMovement());
                     isFirstLoad = false;
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -152,9 +152,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
-            {   
+            {
                 if (isRefresh)
-                {                    
+                {
                     InsertOddsMovementItems(matchOddsMovement.OddsMovements);
                 }
                 else

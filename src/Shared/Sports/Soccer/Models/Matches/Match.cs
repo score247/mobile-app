@@ -6,9 +6,9 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Core.Models.Teams;
-    using Teams;
     using MessagePack;
     using PropertyChanged;
+    using Teams;
 
     [AddINotifyPropertyChangedInterface, MessagePackObject]
     public class Match : IMatch

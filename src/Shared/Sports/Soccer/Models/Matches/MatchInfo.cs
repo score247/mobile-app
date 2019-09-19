@@ -1,6 +1,4 @@
-﻿using MessagePack;
-
-namespace LiveScore.Soccer.Models.Matches
+﻿namespace LiveScore.Soccer.Models.Matches
 {
     using System.Collections.Generic;
     using LiveScore.Core.Models.Matches;
@@ -23,7 +21,7 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(1)]
         public IEnumerable<TimelineEvent> TimelineEvents { get; private set; }
-       
+
         [Key(2)]
         public Venue Venue { get; private set; }
 
@@ -32,7 +30,6 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(4)]
         public int Attendance { get; private set; }
-
 
         public void UpdateTimelineEvents(IEnumerable<TimelineEvent> timelineEvents)
         {

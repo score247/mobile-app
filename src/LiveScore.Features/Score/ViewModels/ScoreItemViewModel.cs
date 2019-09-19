@@ -1,7 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using ImTools;
+﻿using ImTools;
 using LiveScore.Core.Models.Matches;
-using SharpRaven.Data.Context;
 using Xamarin.Forms.Internals;
 using Device = Xamarin.Forms.Device;
 
@@ -10,7 +8,6 @@ using Device = Xamarin.Forms.Device;
 namespace LiveScore.Features.Score.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;

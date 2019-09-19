@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Features.Favorites.ViewModels
 {
-    using Core.ViewModels;
     using Core;
+    using Core.ViewModels;
     using Prism.Navigation;
 
     public class FavoriteViewModel : ViewModelBase

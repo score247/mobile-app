@@ -47,7 +47,6 @@
                : string.Empty;
 
             MatchTime = oddsMovement.MatchTime;
-
         }
 
         public IOddsMovement OddsMovement { get; }
@@ -58,10 +57,9 @@
 
         public string FullUpdateTime { get; }
 
-        public string MatchTime { get;}
+        public string MatchTime { get; }
 
-        public string MatchScore { get;}
-    
+        public string MatchScore { get; }
 
         public DataTemplate CreateTemplate()
         {

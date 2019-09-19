@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Features.League.ViewModels
 {
     using System.Collections.ObjectModel;
+    using Core;
     using Core.Models.Leagues;
     using Core.ViewModels;
-    using Core;
     using Prism.Navigation;
 
     public class LeagueViewModel : ViewModelBase

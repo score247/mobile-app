@@ -86,7 +86,7 @@
                     TimelineEvent, MatchInfo, NavigationService, DependencyResolver) as BaseItemViewModel
                 : new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
 
-        public DataTemplate CreateTemplate() 
+        public DataTemplate CreateTemplate()
             => TemplateMapper.ContainsKey(TimelineEvent.Type) ? TemplateMapper[TimelineEvent.Type] : new MainEventItemTemplate();
 
         protected virtual void BuildInfo()

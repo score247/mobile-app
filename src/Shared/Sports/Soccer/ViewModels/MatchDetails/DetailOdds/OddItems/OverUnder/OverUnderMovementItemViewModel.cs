@@ -2,11 +2,11 @@
 {
     using System.Linq;
     using Core;
-    using LiveScore.Core.Models.Odds;
     using Enumerations;
     using Extensions;
-    using Prism.Navigation;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Odds;
+    using Prism.Navigation;
 
     public class OverUnderMovementItemViewModel : BaseMovementItemViewModel
     {
@@ -29,7 +29,7 @@
 
         public string UnderOdds { get; private set; }
 
-        public string UnderOddsTrend { get; private set; }       
+        public string UnderOddsTrend { get; private set; }
 
         private void BuildOverOddsAndOptionValue()
         {
@@ -40,7 +40,7 @@
                 return;
             }
 
-            OverOdds = overOdds.LiveOdds.ToOddsFormat();            
+            OverOdds = overOdds.LiveOdds.ToOddsFormat();
             OverOddsTrend = overOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : overOdds.OddsTrend.Value.ToString();
             OptionValue = overOdds.OptionValue.ToOddsOptionFormat();
         }
@@ -54,7 +54,7 @@
                 return;
             }
 
-            UnderOdds = underOdds.LiveOdds.ToOddsFormat();            
+            UnderOdds = underOdds.LiveOdds.ToOddsFormat();
             UnderOddsTrend = underOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : underOdds.OddsTrend.Value.ToString();
         }
     }

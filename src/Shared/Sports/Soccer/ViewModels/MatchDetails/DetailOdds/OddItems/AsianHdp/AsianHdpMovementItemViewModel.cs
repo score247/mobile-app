@@ -1,6 +1,5 @@
 ﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
-    using System;
     using System.Linq;
     using Core;
     using Enumerations;
@@ -48,7 +47,6 @@
 
         private void BuildAwayOdds()
         {
-
             var awayOdds = OddsMovement.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
 
             if (awayOdds == null)

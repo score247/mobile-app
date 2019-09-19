@@ -8,11 +8,11 @@
     xmlns:favorites="clr-namespace:LiveScore.Features.Favorites.Views;assembly=LiveScore.Features"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:league="clr-namespace:LiveScore.Features.League.Views;assembly=LiveScore.Features"
-    xmlns:news="clr-namespace:LiveScore.Features.News.Views;assembly=LiveScore.Features"
-    xmlns:tv="clr-namespace:LiveScore.Features.TVSchedule.Views;assembly=LiveScore.Features"
     xmlns:localViews="clr-namespace:LiveScore.Views"
+    xmlns:news="clr-namespace:LiveScore.Features.News.Views;assembly=LiveScore.Features"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore.Features"
+    xmlns:tv="clr-namespace:LiveScore.Features.TVSchedule.Views;assembly=LiveScore.Features"
     android:TabbedPage.BarItemColor="{StaticResource TabColor}"
     android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
     android:TabbedPage.ToolbarPlacement="Bottom"
@@ -68,7 +68,7 @@
         AutomationId="TVBar"
         Icon="images/common/tv.png">
       <x:Arguments>
-        <tv:EmptyTVScheduleView  Title="{langs:Translate TV}">
+        <tv:EmptyTVScheduleView Title="{langs:Translate TV}">
           <NavigationPage.TitleView>
             <coreTemplates:NavigationTitleTemplate Title="{langs:Translate TV}" CurrentSport="{Binding CurrentSportName}" />
           </NavigationPage.TitleView>
@@ -82,7 +82,7 @@
         AutomationId="NewsBar"
         Icon="images/common/news.png">
       <x:Arguments>
-        <news:EmptyNewsView  Title="{langs:Translate News}">
+        <news:EmptyNewsView Title="{langs:Translate News}">
           <NavigationPage.TitleView>
             <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" CurrentSport="{Binding CurrentSportName}" />
           </NavigationPage.TitleView>

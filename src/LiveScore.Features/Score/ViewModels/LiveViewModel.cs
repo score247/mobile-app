@@ -1,9 +1,9 @@
 ﻿namespace LiveScore.Features.Score.ViewModels
 {
-    using Core.ViewModels;
     using Core;
-    using Prism.Navigation;
+    using Core.ViewModels;
     using LiveScore.Common.Helpers;
+    using Prism.Navigation;
 
     public class LiveViewModel : ViewModelBase
     {

@@ -6,7 +6,6 @@
     using Core.ViewModels;
     using LiveScore.Common.Services;
     using Prism.Navigation;
-    using Views;
     using Xamarin.Forms;
 
     public class MainViewModel : ViewModelBase

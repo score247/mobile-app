@@ -14,13 +14,13 @@
 
         private const string AwayType = "away";
 
-        public static readonly BetOption Away= new BetOption(3, AwayType);
+        public static readonly BetOption Away = new BetOption(3, AwayType);
 
-        private const string  OverType = "over";
+        private const string OverType = "over";
 
         public static readonly BetOption Over = new BetOption(4, OverType);
 
-        private const string  UnderType = "under";
+        private const string UnderType = "under";
 
         public static readonly BetOption Under = new BetOption(5, UnderType);
 

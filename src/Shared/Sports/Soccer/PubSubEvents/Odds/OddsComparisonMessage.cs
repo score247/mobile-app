@@ -1,10 +1,8 @@
 ﻿namespace LiveScore.Soccer.PubSubEvents.Odds
 {
     using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
-    using Newtonsoft.Json;
     using Prism.Events;
 
     public class OddsComparisonMessage

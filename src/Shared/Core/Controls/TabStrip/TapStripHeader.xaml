@@ -48,7 +48,7 @@
             BasedOn="{StaticResource TabLine}"
             TargetType="BoxView">
             <Setter Property="BackgroundColor" Value="#1D2133" />
-        </Style>        
+        </Style>
         <!--Font Icon Resources-->
 
         <Style x:Key="TabFontIcon" BasedOn="{StaticResource Icons}"

@@ -5,10 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Common.Extensions;
-    using ViewModels;
     using Prism.Commands;
     using Prism.Events;
     using Prism.Navigation;
+    using ViewModels;
 
     public class SearchViewModel : ViewModelBase
     {

@@ -2,11 +2,11 @@
 {
     using System.Linq;
     using Core;
-    using LiveScore.Core.Models.Odds;
     using Enumerations;
     using Extensions;
-    using Prism.Navigation;
     using LiveScore.Core.Enumerations;
+    using LiveScore.Core.Models.Odds;
+    using Prism.Navigation;
 
     public class OneXTwoMovementItemViewModel : BaseMovementItemViewModel
     {
@@ -44,7 +44,7 @@
                 return;
             }
 
-            AwayOdds = awayOdds.LiveOdds.ToOddsFormat();            
+            AwayOdds = awayOdds.LiveOdds.ToOddsFormat();
             AwayOddsTrend = awayOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : awayOdds.OddsTrend.Value.ToString();
         }
 
@@ -57,7 +57,7 @@
                 return;
             }
 
-            DrawOdds = drawOdds.LiveOdds.ToOddsFormat();            
+            DrawOdds = drawOdds.LiveOdds.ToOddsFormat();
             DrawOddsTrend = drawOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : drawOdds.OddsTrend.Value.ToString();
         }
 

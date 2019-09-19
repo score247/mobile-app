@@ -39,7 +39,6 @@ namespace LiveScore.Common.Services
 
         // TODO: Need to make it be singleton instance
 
-        
         public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
         [Time]

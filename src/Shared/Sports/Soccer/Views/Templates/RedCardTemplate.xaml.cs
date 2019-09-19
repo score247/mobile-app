@@ -1,7 +1,5 @@
 ﻿namespace LiveScore.Soccer.Views.Templates
 {
-    using Enumerations;
-    using FFImageLoading.Forms;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 

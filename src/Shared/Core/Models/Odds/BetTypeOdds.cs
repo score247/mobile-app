@@ -1,6 +1,4 @@
-﻿using MessagePack;
-
-namespace LiveScore.Core.Models.Odds
+﻿namespace LiveScore.Core.Models.Odds
 {
     using System.Collections.Generic;
     using MessagePack;

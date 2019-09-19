@@ -62,7 +62,7 @@
             }
 
             AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
-            AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();            
+            AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
             AwayOddsTrend = awayOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : awayOdds.OddsTrend.Value.ToString();
         }
 
@@ -76,8 +76,8 @@
             }
 
             DrawOpeningOdds = drawOdds.OpeningOdds.ToOddsFormat();
-            DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();            
-            DrawOddsTrend = drawOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : drawOdds.OddsTrend.Value.ToString(); 
+            DrawLiveOdds = drawOdds.LiveOdds.ToOddsFormat();
+            DrawOddsTrend = drawOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : drawOdds.OddsTrend.Value.ToString();
         }
 
         private void BuildHomeOdds()

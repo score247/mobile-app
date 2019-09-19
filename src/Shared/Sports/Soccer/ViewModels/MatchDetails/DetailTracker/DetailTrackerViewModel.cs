@@ -12,7 +12,7 @@
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
-        {          
+        {
         }
     }
 }

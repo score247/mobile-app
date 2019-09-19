@@ -1,6 +1,4 @@
-﻿using LiveScore.Core;
-
-namespace LiveScore.Soccer.Services
+﻿namespace LiveScore.Soccer.Services
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +14,7 @@ namespace LiveScore.Soccer.Services
     using Prism.Events;
 
     public class SoccerHubService : IHubService
-    {        
+    {
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
@@ -39,12 +37,10 @@ namespace LiveScore.Soccer.Services
             ILoggingService logger,
             IEventAggregator eventAggregator)
         {
-
             this.hubConnectionBuilder = hubConnectionBuilder;
             this.hubEndpoint = hubEndpoint;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
-
         }
 
         public async Task Start()
@@ -76,7 +72,6 @@ namespace LiveScore.Soccer.Services
                             {
                                 logger.LogError(ex);
                             }
-
                         }));
                 }
 
@@ -93,7 +88,7 @@ namespace LiveScore.Soccer.Services
         public async Task Reconnect()
         {
             try
-            {                
+            {
                 if (hubConnection.State == HubConnectionState.Disconnected)
                 {
                     await hubConnection.StartAsync().ConfigureAwait(false);

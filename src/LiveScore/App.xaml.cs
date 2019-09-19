@@ -36,7 +36,6 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Refit;
-using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

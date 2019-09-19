@@ -46,7 +46,7 @@
         }
 
         private void BuildAwayOdds()
-        {            
+        {
             var awayOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Away.DisplayName));
 
             if (awayOdds == null)
@@ -57,11 +57,11 @@
             AwayOpeningOdds = awayOdds.OpeningOdds.ToOddsFormat();
             AwayLiveOdds = awayOdds.LiveOdds.ToOddsFormat();
             AwayOddsTrend = awayOdds.OddsTrend == null ? OddsTrend.Neutral.DisplayName : awayOdds.OddsTrend.Value.ToString();
-        }      
+        }
 
         private void BuildHomeOddsAndOptionValue()
         {
-            var homeOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName)); 
+            var homeOdds = BetTypeOdds.BetOptions?.FirstOrDefault(x => x.Type.Equals(BetOption.Home.DisplayName));
 
             if (homeOdds == null)
             {

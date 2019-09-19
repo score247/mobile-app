@@ -1,19 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
-             x:Class="LiveScore.Views.SplashScreen"
-             BackgroundColor="#0F111C">
+<ContentPage
+    x:Class="LiveScore.Views.SplashScreen"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+    BackgroundColor="#0F111C">
     <ContentPage.Content>
         <Grid>
             <ffImageLoading:CachedImage
                 x:Name="SplashIcon"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
                 Aspect="AspectFit"
                 FadeAnimationEnabled="True"
-                Source="images/common/logo_splash_screen.png" />
+                HorizontalOptions="Center"
+                Source="images/common/logo_splash_screen.png"
+                VerticalOptions="Center" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
