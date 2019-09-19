@@ -218,28 +218,35 @@ namespace LiveScore.Features.Score.ViewModels
 
         private async Task UpdateMatches(bool forceFetchNewData = false)
         {
-            var matches = await matchService.GetMatchesByDate(
-                SelectedDate,
-                CurrentLanguage,
-                forceFetchNewData);
-
-            var matchViewModels = MatchItemsSource?.SelectMany(g => g);
-
-            foreach (var match in matches)
+            try
             {
-                var matchViewModel = matchViewModels?.FirstOrDefault(m => m.Match.Id == match.Id);
+                var matches = await matchService.GetMatchesByDate(
+              SelectedDate,
+              CurrentLanguage,
+              forceFetchNewData);
 
-                if (matchViewModel == null)
+                var matchViewModels = MatchItemsSource?.SelectMany(g => g);
+
+                foreach (var match in matches)
                 {
-                    AddNewMatchToItemSource(match);
+                    var matchViewModel = matchViewModels?.FirstOrDefault(m => m.Match.Id == match.Id);
 
-                    continue;
-                }
+                    if (matchViewModel == null)
+                    {
+                        AddNewMatchToItemSource(match);
 
-                if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
-                {
-                    Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
+                        continue;
+                    }
+
+                    if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
+                    {
+                        Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogErrorAsync(ex);
             }
 
             Device.BeginInvokeOnMainThread(() => IsRefreshing = false);

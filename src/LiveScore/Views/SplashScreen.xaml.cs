@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using LiveScore.Common.Services;
 using Prism.Common;
 using Xamanimation;
 using Xamarin.Forms;
@@ -10,11 +12,12 @@ namespace LiveScore.Views
     public partial class SplashScreen : ContentPage
     {
         private const int milisecondsDelay = 300;
+        private readonly ILoggingService loggingService;
 
-        public SplashScreen()
+        public SplashScreen(ILoggingService loggingService)
         {
             InitializeComponent();
-
+            this.loggingService = loggingService;
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
@@ -24,11 +27,19 @@ namespace LiveScore.Views
 
             await Task.Delay(milisecondsDelay);
 
-            await LoadMainPage();
+            try
+            {
+                await LoadMainPage();
+            }
+            catch (Exception ex)
+            {
+                await loggingService.LogErrorAsync(ex);
+            }
         }
 
         private async Task LoadMainPage()
         {
+
             var mainPage = new MainView { Detail = new MenuTabbedView() };
             await PageUtilities.OnInitializedAsync(mainPage, null);
 

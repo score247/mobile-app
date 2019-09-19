@@ -71,12 +71,12 @@ namespace LiveScore
         protected override void OnInitialized()
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
+            var logService = Container.Resolve<ILoggingService>();
 
-            MainPage = new NavigationPage(new SplashScreen());
+            MainPage = new NavigationPage(new SplashScreen(logService));
 
             InitializeComponent();
 
-            var logService = Container.Resolve<ILoggingService>();
             logService.Init(Configuration.SentryDsn, Configuration.Environment);
 
             _ = RegisterAndStartEventHubs(Container);
@@ -141,7 +141,6 @@ namespace LiveScore
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
-            containerRegistry.RegisterForNavigation<SplashScreen, SplashScreenViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
