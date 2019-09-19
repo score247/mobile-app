@@ -251,13 +251,29 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var newMatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
             var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == match.LeagueId);
-            var currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
-            currentMatchViewModels.Add(newMatchViewModel);
+            var currentMatchViewModels = new List<MatchViewModel>();
 
-            MatchItemsSource[currentGroupIndex] = currentMatchViewModels
-                .OrderBy(m => m.Match.EventDate)
-                .GroupBy(item => new GroupMatchViewModel(item.Match))
-                .FirstOrDefault();
+            if (currentGroupIndex >= 0)
+            {
+                currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
+                currentMatchViewModels.Add(newMatchViewModel);
+
+                MatchItemsSource[currentGroupIndex] = currentMatchViewModels
+                    .OrderBy(m => m.Match.EventDate)
+                    .GroupBy(item => new GroupMatchViewModel(item.Match))
+                    .FirstOrDefault();
+            }
+            else
+            {
+                currentMatchViewModels.Add(newMatchViewModel);
+
+                MatchItemsSource.Add(currentMatchViewModels
+                   .OrderBy(m => m.Match.EventDate)
+                   .GroupBy(item => new GroupMatchViewModel(item.Match))
+                   .FirstOrDefault());
+            }
+
+
         }
     }
 }
