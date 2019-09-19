@@ -100,34 +100,6 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void InitializeCommand()
-        {
-            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
-        }
-
-        private void SubscribeEvents()
-        {
-            EventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
-
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnReceivedTeamStatistic, true);
-        }
-
-        private void UnsubscribeAllEvents()
-        {
-            EventAggregator
-               .GetEvent<MatchEventPubSubEvent>()
-               .Unsubscribe(OnReceivedMatchEvent);
-
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Unsubscribe(OnReceivedTeamStatistic);
-        }
-
         private async Task OnRefresh()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
@@ -150,6 +122,12 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        private void InitializeCommand()
+        {
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -181,6 +159,28 @@ namespace LiveScore.Features.Score.ViewModels
                 .FirstOrDefault(m => m.Match.Id == payload.MatchId);
 
             matchItem?.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
+        }
+
+        private void SubscribeEvents()
+        {
+            EventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Subscribe(OnReceivedTeamStatistic, true);
+        }
+
+        private void UnsubscribeAllEvents()
+        {
+            EventAggregator
+               .GetEvent<MatchEventPubSubEvent>()
+               .Unsubscribe(OnReceivedMatchEvent);
+
+            EventAggregator
+                .GetEvent<TeamStatisticPubSubEvent>()
+                .Unsubscribe(OnReceivedTeamStatistic);
         }
 
         [Time]
