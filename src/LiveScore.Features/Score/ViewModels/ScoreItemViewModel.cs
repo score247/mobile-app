@@ -197,7 +197,10 @@ namespace LiveScore.Features.Score.ViewModels
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
 
-            MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
+            });
 
             Profiler.Start("ScoresView.Render");
             Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");

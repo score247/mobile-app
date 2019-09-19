@@ -60,10 +60,10 @@ namespace LiveScore.Features.Score.ViewModels
             SelectedScoreItem?.OnSleep();
         }
 
-        public override void OnAppearing()
-        {
-            SelectedScoreItem?.OnAppearing();
-        }
+        //public override void OnAppearing()
+        //{
+        //    SelectedScoreItem?.OnAppearing();
+        //}
 
         public override void OnDisappearing()
         {

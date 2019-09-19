@@ -22,24 +22,23 @@ namespace LiveScore.Views
         {
             base.OnAppearing();
 
-            await Task.Delay(milisecondsDelay).ConfigureAwait(false);
+            await Task.Delay(milisecondsDelay);
 
-            await LoadMainPage().ConfigureAwait(false);
+            await LoadMainPage();
         }
 
         private async Task LoadMainPage()
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
-            await PageUtilities.OnInitializedAsync(mainPage, null).ConfigureAwait(false);
+            await PageUtilities.OnInitializedAsync(mainPage, null);
 
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
             await Task.WhenAll(
                 SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),
-                SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }))
-                .ConfigureAwait(false);
+                SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
 
-            await Navigation.PopToRootAsync(false).ConfigureAwait(false);
+            await Navigation.PopToRootAsync(false);
         }
     }
 }
