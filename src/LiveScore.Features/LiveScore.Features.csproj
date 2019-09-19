@@ -2,9 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Configurations>Debug;Release;DevRelease</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.Features.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevRelease|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScore.Features.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 

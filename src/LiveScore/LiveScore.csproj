@@ -5,9 +5,12 @@
     <NeutralLanguage>
     </NeutralLanguage>
     <SonarQubeTestProject>False</SonarQubeTestProject>
-    <Configurations>Debug;Release;Test;AutoTest</Configurations>
+    <Configurations>Debug;Release;Test;AutoTest;DevRelease</Configurations>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevRelease|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='AutoTest|AnyCPU'">

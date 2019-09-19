@@ -5,9 +5,14 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>LiveScore.PerformanceProfilers</AssemblyName>
     <RootNamespace>LiveScore.PerformanceProfilers</RootNamespace>
+    <Configurations>Debug;Release;DevRelease</Configurations>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.PerformanceProfilers-1.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DevRelease|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScore.PerformanceProfilers-1.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
