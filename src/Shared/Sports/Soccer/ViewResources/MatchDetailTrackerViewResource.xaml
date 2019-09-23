@@ -6,6 +6,8 @@
     xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 
     <Color x:Key="YellowCardColor">#D9B600</Color>
+    <Color x:Key="RedCardColor">#FF3030</Color>
+    
     <Style x:Key="MatchTrackerEndIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Grid.Column" Value="0" />
         <Setter Property="Grid.Row" Value="0" />
@@ -14,14 +16,14 @@
         <Setter Property="Margin" Value="0,7" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="Text" Value="&#xe91e;" />
-        <Setter Property="FontSize" Value="18" />
+        <Setter Property="FontSize" Value="16" />
     </Style>
 
     <Style x:Key="MatchTrackerCommentariesText" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,7" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchTrackerTimeBg" TargetType="Frame">
@@ -36,8 +38,9 @@
 
     <Style x:Key="MatchTrackerMinutes" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="FontSize" Value="{StaticResource MediumTextFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
         <Setter Property="TextColor" Value="#fff" />
     </Style>
 
@@ -55,12 +58,12 @@
     <Style x:Key="MatchTrackerCommentariesContentGoal" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
         <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchTrackerCommentariesDetailGoal" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
 
     <Style x:Key="MatchTrackerCommentariesYellowCard" TargetType="Frame" BasedOn="{StaticResource MatchTrackerTimeBg}">
@@ -73,6 +76,19 @@
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="Margin" Value="0,7" />
-        <Setter Property="FontSize" Value="{StaticResource UppercaseTextFontSize}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+    </Style>
+
+    <Style x:Key="MatchTrackerCommentariesRedCard" TargetType="Frame" BasedOn="{StaticResource MatchTrackerTimeBg}">
+        <Setter Property="BorderColor" Value="{StaticResource RedCardColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource RedCardColor}" />
+        <Setter Property="Margin" Value="0,7" />
+    </Style>
+    <Style x:Key="MatchTrackerCommentariesContentRedCard" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource RedCardColor}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,7" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
     </Style>
 </ResourceDictionary>
