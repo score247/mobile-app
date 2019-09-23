@@ -72,12 +72,13 @@
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <MtouchExtraArgs>--time --time </MtouchExtraArgs>
     <MtouchProfiling>true</MtouchProfiling>
-    <MtouchFastDev>true</MtouchFastDev>
+    <MtouchFastDev>false</MtouchFastDev>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <CodesignExtraArgs />
     <CodesignResourceRules />
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchFloat32>true</MtouchFloat32>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

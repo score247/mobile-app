@@ -24,7 +24,7 @@ namespace LiveScore.Features.Score.ViewModels
             InitScoreItemSources();
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
-            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearch);
+            ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -99,7 +99,7 @@ namespace LiveScore.Features.Score.ViewModels
             SelectedScoreItemIndex = TodayIndex;
         }
 
-        private async Task OnClickSearch()
+        private async Task OnClickSearchAsync()
         {
             var navigated = await NavigationService
                 .NavigateAsync("SearchNavigationPage/SearchView", useModalNavigation: true)

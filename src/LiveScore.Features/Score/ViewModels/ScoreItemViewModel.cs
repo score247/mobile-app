@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using ImTools;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
 using LiveScore.Core;
@@ -82,7 +81,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
-            await UpdateMatchesForTodayAndLiveMatches(true);
+            await UpdateMatchesForTodayAndLiveMatchesAsync(true).ConfigureAwait(false);
         }
 
         [Time]
@@ -92,22 +91,22 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 FirstLoad = false;
 
-                await LoadData(() => LoadMatches(SelectedDate));
+                await LoadData(() => LoadMatchesAsync(SelectedDate)).ConfigureAwait(false);
             }
             else
             {
-                await UpdateMatchesForTodayAndLiveMatches();
+                await UpdateMatchesForTodayAndLiveMatchesAsync().ConfigureAwait(false);
             }
         }
 
-        private async Task OnRefresh()
+        private Task OnRefreshAsync()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
-            await Task.Run(async () => await LoadData(() => UpdateMatches(true), false));
+            return Task.Run(() => LoadData(() => UpdateMatchesAsync(true), false));
         }
 
-        private async Task OnTapMatch(MatchViewModel matchItem)
+        private async Task OnTapMatchAsync(MatchViewModel matchItem)
         {
             var parameters = new NavigationParameters
             {
@@ -126,8 +125,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void InitializeCommand()
         {
-            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
-            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatch);
+            RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
+            TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatchAsync);
         }
 
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -184,7 +183,7 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         [Time]
-        private async Task LoadMatches(DateTime date, bool forceFetchNewData = false)
+        private async Task LoadMatchesAsync(DateTime date, bool forceFetchNewData = false)
         {
             var matches = await matchService.GetMatchesByDate(
                     date,
@@ -208,24 +207,23 @@ namespace LiveScore.Features.Score.ViewModels
             Debug.WriteLine($"Number of matches: {matchItemViewModels.Count}");
         }
 
-        private async Task UpdateMatchesForTodayAndLiveMatches(bool forceFetchNewData = false)
+        private async Task UpdateMatchesForTodayAndLiveMatchesAsync(bool forceFetchNewData = false)
         {
             if (IsLive || SelectedDate == DateTime.Today || SelectedDate == DateTime.Today.AddDays(-1))
             {
-                await Task.Run(async () => await LoadData(() => UpdateMatches(forceFetchNewData), false));
+                await Task.Run(() => LoadData(() => UpdateMatchesAsync(forceFetchNewData), false)).ConfigureAwait(false);
             }
         }
 
-        private async Task UpdateMatches(bool forceFetchNewData = false)
+        private async Task UpdateMatchesAsync(bool forceFetchNewData = false)
         {
             try
             {
-                var matches = await matchService.GetMatchesByDate(
-              SelectedDate,
-              CurrentLanguage,
-              forceFetchNewData);
+                var matches
+                    = await matchService.GetMatchesByDate(SelectedDate, CurrentLanguage, forceFetchNewData)
+                        .ConfigureAwait(false);
 
-                var matchViewModels = MatchItemsSource?.SelectMany(g => g);
+                var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
                 foreach (var match in matches)
                 {
@@ -246,7 +244,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
             catch (Exception ex)
             {
-                await LoggingService.LogErrorAsync(ex);
+                await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
             }
 
             Device.BeginInvokeOnMainThread(() => IsRefreshing = false);

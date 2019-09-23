@@ -45,10 +45,7 @@ namespace LiveScore.iOS
                 UIApplication.SharedApplication.NetworkActivityIndicatorVisible = true;
             });
 
-            eventAggregator.GetEvent<StopLoadDataEvent>().Subscribe(() =>
-            {
-                UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false;
-            });
+            eventAggregator.GetEvent<StopLoadDataEvent>().Subscribe(() => UIApplication.SharedApplication.NetworkActivityIndicatorVisible = false);
         }
 
         private void HandleGlobalExceptions(App application)
