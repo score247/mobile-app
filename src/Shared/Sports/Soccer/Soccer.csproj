@@ -36,6 +36,9 @@
     <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewResources\MatchDetailTrackerViewResource.xaml.cs">
+      <DependentUpon>MatchDetailTrackerViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchDetailInfoViewResource.xaml.cs">
       <DependentUpon>MatchDetailInfoViewResource.xaml</DependentUpon>
     </Compile>

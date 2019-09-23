@@ -1100,5 +1100,10 @@
       <Link>Resources\images\news\news_5.png</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag.svg">
+      <Link>Resources\images\flag_league\default_flag.svg</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

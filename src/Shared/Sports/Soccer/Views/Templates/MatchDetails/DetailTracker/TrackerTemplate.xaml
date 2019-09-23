@@ -2,13 +2,104 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
-    <Label
-        Margin="16,12"
-        FontSize="12"
-        HorizontalTextAlignment="Center"
-        Text="This is Tracker page"
-        TextColor="White" />
+
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailTrackerViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
+            <StackLayout Padding="7">
+                <Image Aspect="AspectFill" Source="images/common/tracker.png" />
+            </StackLayout>
+            <!--  COMMENTARIES  -->
+            <FlexLayout Style="{StaticResource Group}">
+                <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
+                <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
+                    <CheckBox IsChecked="true" Color="#666" />
+                    <Label Style="{StaticResource GroupName}" Text="Highlight" />
+                </StackLayout>
+            </FlexLayout>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <!--  Match ends  -->
+
+                <Label Style="{StaticResource MatchTrackerEndIcon}" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Match ends, Verona 2, Cosenza 1." />
+                <!--  Time  -->
+                <Frame
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesTime}">
+                    <Label Style="{StaticResource MatchTrackerMinutes}" Text="90'" />
+                </Frame>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Second Half ends, Verona 2, Cosenza 1." />
+                <!--  Goal!  -->
+                <Frame
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesGoal}">
+                    <Label Style="{StaticResource MatchTrackerMinutes}" Text="88'" />
+                </Frame>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,7">
+                    <Label Style="{StaticResource MatchTrackerCommentariesContentGoal}" Text="GOAL!" />
+                    <Label Style="{StaticResource MatchTrackerCommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                </StackLayout>
+                <!--  Time  -->
+                <Frame
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesTime}">
+                    <Label Style="{StaticResource MatchTrackerMinutes}" Text="82'" />
+                </Frame>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Goal kick for Verona at Carlo Castellani" />
+                <!--  Yellow card  -->
+                <Frame
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesYellowCard}">
+                    <Label Style="{StaticResource MatchTrackerMinutes}" Text="63'" />
+                </Frame>
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesContentYellowCard}"
+                    Text="YELLOW CARD!" />
+            </Grid>
+        </StackLayout>
+    </ViewCell>
 </DataTemplate>
