@@ -32,8 +32,6 @@
                 Value="{StaticResource DateBarLiveColor}" />
         <Setter Property="Text"
                 Value="&#xe91a;" />
-        <Setter Property="FlexLayout.Grow"
-                Value="1" />
     </Style>
 
     <Style x:Key="DateBarItemLayout"
@@ -97,5 +95,10 @@
         <Setter Property="TextColor" Value="#fff" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="LiveLayout" TargetType="StackLayout">
+         <Setter Property="FlexLayout.Grow" Value="1" />
+        <Setter Property="HorizontalOptions" Value="Center"/>
+         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
 </ResourceDictionary>

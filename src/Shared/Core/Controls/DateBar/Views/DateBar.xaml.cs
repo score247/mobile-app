@@ -96,7 +96,7 @@
 
         private void AddLiveItem()
         {
-            var layout = new AbsoluteLayout();
+            var layout = new AbsoluteLayout { WidthRequest = 60 };
 
             var liveIcon = new Label
             {
@@ -118,7 +118,11 @@
 
             layout.Children.Add(liveIcon);
             layout.Children.Add(defaultFrame);
-            DateBarLayout.Children.Add(layout);
+
+            var liveLayout = new StackLayout { Style = (Style)Resources["LiveLayout"] };
+            liveLayout.Children.Add(layout);
+
+            DateBarLayout.Children.Add(liveLayout);
         }
 
         private void AddCalendarItem()
