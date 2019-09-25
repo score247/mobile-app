@@ -10,7 +10,7 @@
         public static string Environment => "DEV";
 #elif TEST
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/test/api/";
-
+        chư vay
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/test/hubs/";
 
         public static string Environment => "TEST";
