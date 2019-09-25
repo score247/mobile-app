@@ -96,12 +96,15 @@
 
         private void AddLiveItem()
         {
-            var layout = new AbsoluteLayout { WidthRequest = 60 };
+            var layout = new AbsoluteLayout { Style = (Style)Resources["LiveLayout"] };
 
             var liveIcon = new Label
             {
                 Style = (Style)Resources["LiveIcon"]
             };
+
+            AbsoluteLayout.SetLayoutBounds(liveIcon, new Rectangle(0.5, 0.5, 22, 20));
+            AbsoluteLayout.SetLayoutFlags(liveIcon, AbsoluteLayoutFlags.PositionProportional);
 
             liveIcon.GestureRecognizers.Add(new TapGestureRecognizer
             {
@@ -113,16 +116,13 @@
                 Style = (Style)Resources["MatchLiveNumberBox"],
                 Content = new Label { Text = "12", Style = (Style)Resources["MatchLiveNumberLabel"] }
             };
-            AbsoluteLayout.SetLayoutBounds(defaultFrame, new Rectangle(1, 0, 16, 16));
+            AbsoluteLayout.SetLayoutBounds(defaultFrame, new Rectangle(0.5, 0.5, 16, 16));
             AbsoluteLayout.SetLayoutFlags(defaultFrame, AbsoluteLayoutFlags.PositionProportional);
 
             layout.Children.Add(liveIcon);
             layout.Children.Add(defaultFrame);
 
-            var liveLayout = new StackLayout { Style = (Style)Resources["LiveLayout"] };
-            liveLayout.Children.Add(layout);
-
-            DateBarLayout.Children.Add(liveLayout);
+            DateBarLayout.Children.Add(layout);
         }
 
         private void AddCalendarItem()
