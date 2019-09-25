@@ -96,6 +96,8 @@
 
         private void AddLiveItem()
         {
+            var layout = new AbsoluteLayout();
+
             var liveIcon = new Label
             {
                 Style = (Style)Resources["LiveIcon"]
@@ -106,7 +108,17 @@
                 Command = BuildTapDateBarItemCommand(DateTime.Today, 0)
             });
 
-            DateBarLayout.Children.Add(liveIcon);
+            Frame defaultFrame = new Frame
+            {
+                Style = (Style)Resources["MatchLiveNumberBox"],
+                Content = new Label { Text = "12", Style = (Style)Resources["MatchLiveNumberLabel"] }
+            };
+            AbsoluteLayout.SetLayoutBounds(defaultFrame, new Rectangle(1, 0, 16, 16));
+            AbsoluteLayout.SetLayoutFlags(defaultFrame, AbsoluteLayoutFlags.PositionProportional);
+
+            layout.Children.Add(liveIcon);
+            layout.Children.Add(defaultFrame);
+            DateBarLayout.Children.Add(layout);
         }
 
         private void AddCalendarItem()
