@@ -21,7 +21,8 @@ namespace LiveScore.Core.ViewModels
         public ViewModelBase(
            INavigationService navigationService,
            IDependencyResolver dependencyResolver,
-           IEventAggregator eventAggregator) : this(navigationService, dependencyResolver)
+           IEventAggregator eventAggregator) 
+            : this(navigationService, dependencyResolver)
         {
             EventAggregator = eventAggregator;
         }
@@ -80,7 +81,7 @@ namespace LiveScore.Core.ViewModels
         {
         }
 
-        protected virtual async Task LoadData(Func<Task> loadDataFunc, bool showBusy = true)
+        protected virtual async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {
             EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
             IsBusy = showBusy;

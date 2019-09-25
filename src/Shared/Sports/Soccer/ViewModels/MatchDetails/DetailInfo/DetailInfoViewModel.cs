@@ -39,7 +39,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadData(() => LoadMatchDetail(true), false));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
 
             eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, true);
         }
@@ -66,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             try
             {
                 // TODO: Check when need to reload data later
-                await LoadData(() => LoadMatchDetail(true)).ConfigureAwait(false);
+                await LoadDataAsync(() => LoadMatchDetail(true)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

@@ -14,9 +14,10 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoresViewModel : ViewModelBase
     {
-        private const byte TodayIndex = 3;
+        private const byte TodayDateBarItemIndex = 3;
 
-        public ScoresViewModel(INavigationService navigationService,
+        public ScoresViewModel(
+            INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
 
@@ -43,11 +44,11 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override async void OnResume()
         {
-            var todayItem = ScoreItemSources[TodayIndex];
+            var todayItem = ScoreItemSources[TodayDateBarItemIndex];
 
             if (todayItem?.SelectedDate != DateTime.Today)
             {
-                await NavigateToHome();
+                await NavigateToHome().ConfigureAwait(false);
             }
             else
             {
@@ -96,7 +97,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemSources.Add(
                 new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
 
-            SelectedScoreItemIndex = TodayIndex;
+            SelectedScoreItemIndex = TodayDateBarItemIndex;
         }
 
         private async Task OnClickSearchAsync()

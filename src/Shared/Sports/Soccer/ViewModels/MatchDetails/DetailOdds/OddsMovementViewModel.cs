@@ -100,7 +100,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
                 if (isFirstLoad)
                 {
-                    await LoadData(async () => await FirstLoadOrRefreshOddsMovement());
+                    await LoadDataAsync(async () => await FirstLoadOrRefreshOddsMovement());
                     isFirstLoad = false;
                 }
             }

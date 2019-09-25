@@ -25,9 +25,9 @@
 
         public string TabHeaderTitle { get; set; }
 
-        protected override async Task LoadData(Func<Task> loadDataFunc, bool showBusy = true)
+        protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {
-            await base.LoadData(loadDataFunc, showBusy && IsFirstLoad);
+            await base.LoadDataAsync(loadDataFunc, showBusy && IsFirstLoad);
 
             IsFirstLoad = false;
         }

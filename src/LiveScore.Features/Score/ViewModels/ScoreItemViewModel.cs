@@ -42,9 +42,11 @@ namespace LiveScore.Features.Score.ViewModels
             SelectedDate = selectedDate;
             IsLive = isLive;
             IsCalendar = isCalendar;
+
+            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
-            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
+
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
             SubscribeEvents();
@@ -91,7 +93,7 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 FirstLoad = false;
 
-                await LoadData(() => LoadMatchesAsync(SelectedDate)).ConfigureAwait(false);
+                await LoadDataAsync(() => LoadMatchesAsync(SelectedDate)).ConfigureAwait(false);
             }
             else
             {
@@ -103,7 +105,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
-            return Task.Run(() => LoadData(() => UpdateMatchesAsync(true), false));
+            return Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
         }
 
         private async Task OnTapMatchAsync(MatchViewModel matchItem)
@@ -196,10 +198,11 @@ namespace LiveScore.Features.Score.ViewModels
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
-            });
+            Device
+                .BeginInvokeOnMainThread(() =>
+                {
+                    MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
+                });
 
             Profiler.Start("ScoresView.Render");
             Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
@@ -211,7 +214,9 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (IsLive || SelectedDate == DateTime.Today || SelectedDate == DateTime.Today.AddDays(-1))
             {
-                await Task.Run(() => LoadData(() => UpdateMatchesAsync(forceFetchNewData), false)).ConfigureAwait(false);
+                await Task
+                    .Run(() => LoadDataAsync(() => UpdateMatchesAsync(forceFetchNewData), false))
+                    .ConfigureAwait(false);
             }
         }
 
@@ -220,14 +225,16 @@ namespace LiveScore.Features.Score.ViewModels
             try
             {
                 var matches
-                    = await matchService.GetMatchesByDate(SelectedDate, CurrentLanguage, forceFetchNewData)
+                    = await matchService
+                        .GetMatchesByDate(SelectedDate, CurrentLanguage, forceFetchNewData)
                         .ConfigureAwait(false);
 
                 var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
                 foreach (var match in matches)
                 {
-                    var matchViewModel = matchViewModels?.FirstOrDefault(m => m.Match.Id == match.Id);
+                    var matchViewModel
+                        = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
 
                     if (matchViewModel == null)
                     {
@@ -238,7 +245,8 @@ namespace LiveScore.Features.Score.ViewModels
 
                     if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
                     {
-                        Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
+                        Device
+                            .BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
                     }
                 }
             }
@@ -246,8 +254,11 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
             }
-
-            Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+            finally
+            {
+                Device
+                    .BeginInvokeOnMainThread(() => IsRefreshing = false);
+            }
         }
 
         private void AddNewMatchToItemSource(IMatch match)
@@ -260,22 +271,26 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
                 currentMatchViewModels.Add(newMatchViewModel);
+
                 var group = currentMatchViewModels
                         .OrderBy(m => m.Match.EventDate)
                         .GroupBy(item => new GroupMatchViewModel(item.Match))
                         .FirstOrDefault();
 
-                Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
+                Device
+                    .BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
             }
             else
             {
                 currentMatchViewModels.Add(newMatchViewModel);
+
                 var group = currentMatchViewModels
                        .OrderBy(m => m.Match.EventDate)
                        .GroupBy(item => new GroupMatchViewModel(item.Match))
                        .FirstOrDefault();
 
-                Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
+                Device
+                    .BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
         }
     }
