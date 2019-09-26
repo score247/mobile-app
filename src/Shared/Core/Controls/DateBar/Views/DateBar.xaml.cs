@@ -99,10 +99,20 @@
                     var control = (DateBar)bindObject;
                     var dateBarLayout = control?.Content as FlexLayout;
                     var liveLayout = dateBarLayout?.Children[0] as AbsoluteLayout;
-                    var liveCountFrame = liveLayout?.Children[1] as Frame;
 
-                    if (liveCountFrame?.Children[0] is Label liveCountLabel)
+                    if (!(liveLayout?.Children[1] is Frame liveCountFrame
+                          && liveCountFrame.Children[0] is Label liveCountLabel))
                     {
+                        return;
+                    }
+
+                    if (newValue?.ToString() == "0")
+                    {
+                        liveCountFrame.IsVisible = false;
+                    }
+                    else
+                    {
+                        liveCountFrame.IsVisible = true;
                         liveCountLabel.Text = newValue?.ToString() ?? "0";
                     }
                 });
@@ -135,8 +145,12 @@
 
             var liveCountFrame = new Frame
             {
+                IsVisible = false,
                 Style = (Style)Resources["MatchLiveNumberBox"],
-                Content = new Label { Text = LiveCount.ToString(), Style = (Style)Resources["MatchLiveNumberLabel"] }
+                Content = new Label
+                {
+                    Style = (Style)Resources["MatchLiveNumberLabel"],
+                }
             };
 
             AbsoluteLayout.SetLayoutBounds(liveCountFrame, new Rectangle(0.5, 0.5, 16, 16));
