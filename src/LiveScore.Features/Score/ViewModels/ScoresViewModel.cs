@@ -16,6 +16,7 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoresViewModel : ViewModelBase
     {
+        private const byte LiveIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
         private readonly IMatchService matchService;
 
@@ -60,6 +61,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
+                await Task.Run(() => GetLiveMatchCount());
                 SelectedScoreItem?.OnResume();
             }
         }
@@ -71,6 +73,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnAppearing()
         {
+            Task.Run(() => GetLiveMatchCount());
             SelectedScoreItem?.OnAppearing();
         }
 
@@ -81,6 +84,11 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
+            if (args?.Index == LiveIndex)
+            {
+                Task.Run(() => GetLiveMatchCount());
+            }
+
             SelectedScoreItem?.OnAppearing();
         }
 
