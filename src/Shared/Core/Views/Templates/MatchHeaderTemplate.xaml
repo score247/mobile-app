@@ -5,7 +5,8 @@
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels"
               x:DataType="viewModels:GroupMatchViewModel"
-              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources">
+              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <StackLayout>
             <StackLayout.Resources>
@@ -27,11 +28,14 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
-                <ffImageLoading:CachedImage Grid.Row="0"
+
+                <ffimageloadingsvg:SvgCachedImage 
+                                            Grid.Row="0"
                                             Grid.Column="0"
-                                            DownsampleToViewSize="True"
-                                            Source="images/flag_league/default_flag.png"
-                                            Style="{StaticResource LeagueFlag}" />
+                                            LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                            Source="{Binding Key.CountryFlag, Mode=OneTime}" 
+                                            Style="{StaticResource LeagueFlag}"/>
+
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueName-{0}', Mode=OneTime}"

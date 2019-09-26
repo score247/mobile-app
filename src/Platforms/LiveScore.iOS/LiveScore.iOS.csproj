@@ -410,6 +410,7 @@
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="Xamarin.iOS">
       <Private>True</Private>
     </Reference>
@@ -1063,7 +1064,6 @@
       <Link>Resources\images\flag_league\world_cup.png</Link>
     </BundleResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\logos\logo_1.png">
       <Link>Resources\images\logos\logo_1.png</Link>

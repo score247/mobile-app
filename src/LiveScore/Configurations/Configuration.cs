@@ -7,16 +7,20 @@
 
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
 
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
+
         public static string Environment => "DEV";
 #elif TEST
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/test/api/";
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/test/hubs/";
-
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
         public static string Environment => "TEST";
 #elif AUTOTEST
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/V4/api/";
 
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/V4/hubs/";
+
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
 
         public static string Environment => "AUTOTEST";
 #elif DEVRELEASE
@@ -24,12 +28,16 @@
 
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
 
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
+
         public static string Environment => "DEV-RELEASE";
 #else
 
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/main/api/";
 
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
+
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/main/";
 
         public static string Environment => "MAIN";
 #endif

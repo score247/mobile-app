@@ -52,6 +52,7 @@ namespace LiveScore
          */
         private readonly List<IHubService> hubServices = new List<IHubService>();
 
+
         public App() : this(null)
         {
         }
@@ -125,6 +126,7 @@ namespace LiveScore
                 ContentSerializer = new MessagePackContentSerializer()
             });
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
+            containerRegistry.RegisterInstance(Configuration.AssetsEndPoint, "AssetsEndPoint");
 
             CompositeResolver.RegisterAndSetAsDefault(
                 SoccerModelResolver.Instance,

@@ -24,8 +24,10 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoreItemViewModel : ViewModelBase
     {
+        private const string AssetsEndPointResolveName = "AssetsEndPoint";
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
+        private readonly string assetsEndPoint;
 
         [Time]
         public ScoreItemViewModel(
@@ -40,6 +42,7 @@ namespace LiveScore.Features.Score.ViewModels
             MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
+            assetsEndPoint = DependencyResolver.Resolve<string>(AssetsEndPointResolveName);
 
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
@@ -201,7 +204,7 @@ namespace LiveScore.Features.Score.ViewModels
             var matchItemViewModels = matches
                 .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
-            var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
+            var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, assetsEndPoint));
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
@@ -289,7 +292,7 @@ namespace LiveScore.Features.Score.ViewModels
 
                 var group = currentMatchViewModels
                         .OrderBy(m => m.Match.EventDate)
-                        .GroupBy(item => new GroupMatchViewModel(item.Match))
+                        .GroupBy(item => new GroupMatchViewModel(item.Match, assetsEndPoint))
                         .FirstOrDefault();
 
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
@@ -300,7 +303,7 @@ namespace LiveScore.Features.Score.ViewModels
 
                 var group = currentMatchViewModels
                        .OrderBy(m => m.Match.EventDate)
-                       .GroupBy(item => new GroupMatchViewModel(item.Match))
+                       .GroupBy(item => new GroupMatchViewModel(item.Match, assetsEndPoint))
                        .FirstOrDefault();
 
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));

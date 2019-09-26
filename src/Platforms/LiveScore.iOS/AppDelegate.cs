@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using FFImageLoading.Forms.Platform;
+using FFImageLoading.Svg.Forms;
 using Foundation;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
@@ -26,6 +27,7 @@ namespace LiveScore.iOS
             Xamarin.Forms.Forms.Init();
             AnimationViewRenderer.Init();
             CachedImageRenderer.Init();
+            SvgCachedImage.Init();
             CardsViewRenderer.Preserve();
 
             var application = new App(new iOSInitializer());

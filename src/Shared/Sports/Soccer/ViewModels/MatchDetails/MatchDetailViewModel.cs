@@ -42,11 +42,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
     public class MatchDetailViewModel : ViewModelBase
     {
+        private const string AssetsEndPointResolveName = "AssetsEndPoint";
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
+        private readonly string assetsEndPoint;
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
-
+ 
         public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -55,10 +57,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
+            assetsEndPoint = DependencyResolver.Resolve<string>(AssetsEndPointResolveName);
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFuctionTabTapped);
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
+
+        public string CountryFlag { get; private set; }
 
         public string DisplayEventDate { get; private set; }
 
@@ -74,6 +79,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             {
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
+                // TODO: Ricky Should be reusable here
+                CountryFlag = $"{assetsEndPoint}flags/{MatchViewModel.Match.CountryCode}.svg";
             }
 
             SubscribeEvents();
