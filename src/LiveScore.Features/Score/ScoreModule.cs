@@ -15,7 +15,7 @@ namespace LiveScore.Features.Score
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<ScoresView, ScoresViewModel>();
-            containerRegistry.RegisterForNavigation<LiveView, LiveViewModel>();
+            containerRegistry.RegisterForNavigation<LiveView, LiveItemViewModel>();
         }
     }
 }

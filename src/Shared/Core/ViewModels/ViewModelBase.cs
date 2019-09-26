@@ -57,6 +57,13 @@ namespace LiveScore.Core.ViewModels
 
         public ILoggingService LoggingService { get; protected set; }
 
+        /// <summary>
+        /// Used for not implemented page
+        /// </summary>
+        public bool IsComingSoon { get; protected set; }
+
+        public bool IsNotComingSoon => !IsComingSoon;
+
         public virtual void Initialize(INavigationParameters parameters)
         {
         }

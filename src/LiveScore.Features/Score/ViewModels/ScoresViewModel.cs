@@ -108,7 +108,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             ScoreItemSources = new ObservableCollection<ScoreItemViewModel>
             {
-                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isLive: true)
+                new LiveItemViewModel( NavigationService, DependencyResolver, EventAggregator)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
@@ -118,7 +118,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             ScoreItemSources.Add(
-                new ScoreItemViewModel(DateTime.Today, NavigationService, DependencyResolver, EventAggregator, isCalendar: true));
+                new CalendarItemViewModel(NavigationService, DependencyResolver, EventAggregator));
 
             SelectedScoreItemIndex = TodayDateBarItemIndex;
         }

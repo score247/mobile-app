@@ -71,11 +71,11 @@
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:ScoreItemViewModel">
                     <FlexLayout JustifyContent="Center">
-                        <Label IsVisible="{Binding IsCalendar}"
-                               Text="Calendar is coming soon"
+                        <Label IsVisible="{Binding IsComingSoon}"
+                               Text="Coming Soon"
                                Style="{StaticResource NotificationLabel}"
                                FlexLayout.AlignSelf="Center" />
-                        <StackLayout IsVisible="{Binding IsNormalDate}">
+                        <StackLayout IsVisible="{Binding IsNotComingSoon}">
                             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                                IsVisible="{Binding IsBusy}"
                                                Style="{StaticResource CenterActivityIndicator}" />

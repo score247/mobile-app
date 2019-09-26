@@ -36,7 +36,7 @@ namespace Scores.Tests
 
             // Assert
             container.Received(1).RegisterForNavigation<ScoresView, ScoreItemViewModel>();
-            container.Received(1).RegisterForNavigation<LiveView, LiveViewModel>();
+            container.Received(1).RegisterForNavigation<LiveView, LiveItemViewModel>();
         }
     }
 }
