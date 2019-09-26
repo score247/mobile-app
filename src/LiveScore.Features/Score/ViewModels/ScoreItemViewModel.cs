@@ -97,7 +97,9 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
 
-            await UpdateMatchesInBackgroundAsync().ConfigureAwait(false);
+            await Task
+                .Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false))
+                .ConfigureAwait(false);
         }
 
         private async Task OnTapMatchAsync(MatchViewModel matchItem)
@@ -194,11 +196,10 @@ namespace LiveScore.Features.Score.ViewModels
             InitMatchItemSource(matches);
         }
 
-        private void InitMatchItemSource(List<IMatch> matches)
+        private void InitMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches
-                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
-                .ToList();
+                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
 
@@ -224,6 +225,8 @@ namespace LiveScore.Features.Score.ViewModels
 
                 if (HasNoMatchData(matches))
                 {
+                    MatchItemsSource.Clear();
+                    Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
                     return;
                 }
 
@@ -239,7 +242,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private bool HasNoMatchData(List<IMatch> matches)
+        private bool HasNoMatchData(IEnumerable<IMatch> matches)
         {
             if (matches?.Any() != true)
             {
@@ -251,9 +254,9 @@ namespace LiveScore.Features.Score.ViewModels
             return false;
         }
 
-        private void UpdateMatchItemSource(List<IMatch> matches)
+        protected virtual void UpdateMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
+            var matchViewModels = MatchItemsSource?.SelectMany(g => g);
 
             foreach (var match in matches)
             {

@@ -296,6 +296,11 @@
         [IgnoreMember]
         private bool AwayWinSecondLeg
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
+
+        public override bool Equals(object obj)
+            => (obj is Match actualObj) && Id == actualObj.Id;
+
+        public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
 
     /// <summary>

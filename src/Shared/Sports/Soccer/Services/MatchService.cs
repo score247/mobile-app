@@ -125,7 +125,7 @@ namespace LiveScore.Soccer.Services
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
                         () => GetLiveMatchCountFromApi(language.DisplayName),
-                        CacheDuration.Short, getLatestData)
+                        10, getLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)

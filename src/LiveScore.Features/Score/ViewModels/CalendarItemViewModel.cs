@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using LiveScore.Core;
-using LiveScore.Core.Models.Matches;
 using Prism.Events;
 using Prism.Navigation;
 
