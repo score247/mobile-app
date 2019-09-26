@@ -4,7 +4,6 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
     using NSubstitute;
     using Xunit;
 

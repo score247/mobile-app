@@ -80,6 +80,16 @@
             ModifiedTime = modifiedTime;
         }
 
+        internal Match(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
+        {
+            EventDate = eventDate;
+        }
+
+        internal Match(IMatchResult matchResult)
+        {
+            UpdateResult(matchResult);
+        }
+
         [Key(0)]
         public string Id { get; private set; }
 

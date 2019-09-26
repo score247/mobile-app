@@ -36,6 +36,21 @@
             AggregateWinnerId = aggregateWinnerId;
         }
 
+        private MatchResult()
+        {
+        }
+
+        internal MatchResult(MatchStatus eventStatus, MatchStatus matchStatus)
+        {
+            this.EventStatus = eventStatus;
+            this.MatchStatus = matchStatus;
+        }
+
+        internal static MatchResult MatchResult_EventNotStarted => new MatchResult
+        {
+            EventStatus = MatchStatus.NotStarted
+        };
+
 #pragma warning restore S107 // Methods should not have too many parameters
 
         public MatchStatus MatchStatus { get; private set; }

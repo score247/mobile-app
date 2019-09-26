@@ -1,24 +1,24 @@
-﻿namespace Soccer.Tests.ViewModels.DetailOdds
-{
-    using KellermanSoftware.CompareNetObjects;
-    using LiveScore.Common.Services;
-    using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Odds;
-    using LiveScore.Core.Services;
-    using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Models.Odds;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
-    using Newtonsoft.Json;
-    using NSubstitute;
-    using Prism.Navigation;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Xunit;
+﻿using KellermanSoftware.CompareNetObjects;
+using LiveScore.Common.Services;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Odds;
+using LiveScore.Core.Services;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Enumerations;
+using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.Services;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
+using Newtonsoft.Json;
+using NSubstitute;
+using Prism.Navigation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Xunit;
 
+namespace Soccer.Tests.ViewModels.DetailOdds
+{
     public class OddsMovementViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
         private const string matchId = "sr:match:1";

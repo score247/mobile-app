@@ -1,22 +1,21 @@
+using System;
+using System.Collections.Generic;
+using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Services;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Converters;
+using LiveScore.Soccer.Models.Leagues;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.Teams;
+using LiveScore.Soccer.ViewModels.MatchDetails;
+using NSubstitute;
+using Prism.Navigation;
+using Xunit;
+
 namespace Soccer.Tests.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Services;
-    using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.Converters;
-    using LiveScore.Soccer.Models.Leagues;
-    using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Models.Teams;
-    using LiveScore.Soccer.ViewModels;
-    using NSubstitute;
-    using Prism.Navigation;
-    using Xunit;
-
     public class MatchDetailViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly MatchDetailViewModel viewModel;

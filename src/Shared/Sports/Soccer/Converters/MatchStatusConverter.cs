@@ -1,16 +1,16 @@
-﻿namespace LiveScore.Soccer.Converters
-{
-    using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.LangResources;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Models.Matches;
+﻿using System.Collections.Generic;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
+using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Models.Matches;
 
+namespace LiveScore.Soccer.Converters
+{
     public class MatchStatusConverter : IMatchStatusConverter
     {
-        private static readonly IDictionary<MatchStatus, string> StatusMapper = new Dictionary<MatchStatus, string>
+        private static readonly IDictionary<MatchStatus, string> StatusResourceMapper = new Dictionary<MatchStatus, string>
         {
             { MatchStatus.Postponed, AppResources.Postp },
             { MatchStatus.StartDelayed, AppResources.Delayed },
@@ -35,7 +35,7 @@
         {
             if (match == null)
             {
-                return AppResources.FT;
+                return string.Empty;
             }
 
             var soccerMatch = match as Match;
@@ -69,9 +69,9 @@
         {
             var matchStatus = match.MatchStatus;
 
-            if (matchStatus?.Value != null && StatusMapper.ContainsKey(matchStatus))
+            if (matchStatus?.Value != null && StatusResourceMapper.ContainsKey(matchStatus))
             {
-                return StatusMapper[matchStatus];
+                return StatusResourceMapper[matchStatus];
             }
 
             return string.Empty;
@@ -82,9 +82,9 @@
         {
             var eventStatus = match.EventStatus;
 
-            if (eventStatus?.Value != null && StatusMapper.ContainsKey(eventStatus))
+            if (eventStatus?.Value != null && StatusResourceMapper.ContainsKey(eventStatus))
             {
-                return StatusMapper[eventStatus];
+                return StatusResourceMapper[eventStatus];
             }
 
             return string.Empty;
