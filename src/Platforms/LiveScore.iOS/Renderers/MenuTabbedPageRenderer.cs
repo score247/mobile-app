@@ -12,7 +12,6 @@ namespace LiveScore.iOS.Renderers
     {
         private readonly UIOffset titlePositionOffset = new UIOffset(0, -4);
         private readonly UIEdgeInsets iconInsets = new UIEdgeInsets(-2, 0, 2, 0);
-        private const float TabBarHeight = 50f;
 
         private readonly UITextAttributes uiTextAttributes
             = new UITextAttributes

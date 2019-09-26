@@ -1,6 +1,6 @@
-﻿using LiveScore.Core;
+﻿using LiveScore.Common.Helpers;
+using LiveScore.Core;
 using LiveScore.Core.ViewModels;
-using LiveScore.Common.Helpers;
 using Prism.Navigation;
 
 namespace LiveScore.Features.Score.ViewModels

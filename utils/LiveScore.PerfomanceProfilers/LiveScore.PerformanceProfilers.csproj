@@ -6,6 +6,7 @@
     <AssemblyName>LiveScore.PerformanceProfilers</AssemblyName>
     <RootNamespace>LiveScore.PerformanceProfilers</RootNamespace>
     <Configurations>Debug;Release;DevRelease</Configurations>
+    <SonarQubeExclude>True</SonarQubeExclude>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -33,5 +34,4 @@
     <ProjectReference Include="..\..\src\Shared\Core\LiveScore.Core.csproj" />
     <ProjectReference Include="..\..\src\Shared\Sports\Soccer\Soccer.csproj" />
   </ItemGroup>
-
 </Project>

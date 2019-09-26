@@ -1,7 +1,7 @@
-﻿using Prism.Ioc;
-using Prism.Modularity;
-using LiveScore.Features.Score.ViewModels;
+﻿using LiveScore.Features.Score.ViewModels;
 using LiveScore.Features.Score.Views;
+using Prism.Ioc;
+using Prism.Modularity;
 
 namespace LiveScore.Features.Score
 {

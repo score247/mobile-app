@@ -1,28 +1,31 @@
-﻿namespace LiveScore.Soccer.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Services;
-    using LiveScore.Soccer.Models.Matches;
-    using MethodTimer;
-    using Refit;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.Services;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Matches;
+using MethodTimer;
+using Refit;
 
+namespace LiveScore.Soccer.Services
+{
     public interface ISoccerMatchApi
     {
         [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
         Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
 
-        [Get("/soccer/{language}/matches/live?lq=lastUpdateMatchStatusTime")]
-        Task<IEnumerable<Match>> GetLiveMatches(Language language, DateTime lastUpdateMatchStatusTime);
-
         [Get("/soccer/{language}/matches/{matchId}")]
         Task<MatchInfo> GetMatchInfo(string matchId, string language);
+
+        [Get("/soccer/{language}/matches/live")]
+        Task<IEnumerable<Match>> GetLiveMatches(string language);
+
+        [Get("/soccer/{language}/matches/live/count")]
+        Task<byte> GetLiveMatchCount(string language);
     }
 
     public interface IMatchInfoService
@@ -93,21 +96,60 @@
             }
         }
 
+        public async Task<IEnumerable<IMatch>> GetLiveMatches(Language language, bool getLatestData = false)
+        {
+            try
+            {
+                var cacheKey = $"LiveMatches::{language.DisplayName}";
+
+                return await cacheManager.GetOrSetAsync(
+                        cacheKey,
+                        () => GetLiveMatchesFromApi(language.DisplayName),
+                        CacheDuration.Short, getLatestData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<IMatch>();
+            }
+        }
+
+        public async Task<byte> GetLiveMatchCount(Language language, bool getLatestData = false)
+        {
+            try
+            {
+                var cacheKey = $"LiveMatchCount::{language.DisplayName}";
+
+                return await cacheManager.GetOrSetAsync(
+                        cacheKey,
+                        () => GetLiveMatchCountFromApi(language.DisplayName),
+                        CacheDuration.Short, getLatestData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return 0;
+            }
+        }
+
         [Time]
         private Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language));
 
         [Time]
         private Task<MatchInfo> GetMatchFromApi(string matchId, string language)
-           => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
 
-        public Task<IEnumerable<IMatch>> GetLiveMatches(Language language, DateTime lastUpdateMatchStatusTime, bool getLatestData = false)
-        {
-            // TODO: add impl later
+        [Time]
+        private Task<IEnumerable<Match>> GetLiveMatchesFromApi(string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatches(language));
 
-            //var cacheKey = $"LiveMatches::{language.DisplayName}";
-
-            return GetMatchesByDate(DateTime.Now, language, getLatestData);
-        }
+        [Time]
+        private Task<byte> GetLiveMatchCountFromApi(string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatchCount(language));
     }
 }

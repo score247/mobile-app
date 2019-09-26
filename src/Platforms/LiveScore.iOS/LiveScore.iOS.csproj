@@ -1063,9 +1063,7 @@
       <Link>Resources\images\flag_league\world_cup.png</Link>
     </BundleResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\logos\logo_1.png">
       <Link>Resources\images\logos\logo_1.png</Link>

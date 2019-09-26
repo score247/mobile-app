@@ -25,8 +25,7 @@
     public class CacheManager : ICacheManager
     {
         private readonly ICacheService cacheService;
-
-        private IList<string> cachedKeys;
+        private readonly IList<string> cachedKeys;
 
         public CacheManager(ICacheService cacheService)
         {

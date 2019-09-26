@@ -1,13 +1,9 @@
 namespace LiveScore.Core.Tests.Controls.TabStrip
 {
     using System.Collections.Generic;
-    using System.Linq;
     using Core.Controls.TabStrip;
     using LiveScore.Core.Tests.Fixtures;
     using NSubstitute;
-    using PanCardView.Enums;
-    using PanCardView.EventArgs;
-    using Xamarin.Forms;
     using Xunit;
 
     public class TabStripTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>

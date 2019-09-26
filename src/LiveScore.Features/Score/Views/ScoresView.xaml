@@ -11,8 +11,8 @@
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
-             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
              mvvm:ViewModelLocator.AutowireViewModel="True"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -27,14 +27,12 @@
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
-                <xamanimation:ScaleToAnimation
-                    Scale="1"
-                    Duration="500"
-                    Easing="Linear" />
-                <xamanimation:FadeToAnimation
-                    Opacity="1"
-                    Duration="300"
-                    Easing="Linear" />
+                <xamanimation:ScaleToAnimation Scale="1"
+                                               Duration="500"
+                                               Easing="Linear" />
+                <xamanimation:FadeToAnimation Opacity="1"
+                                              Duration="300"
+                                              Easing="Linear" />
             </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -49,6 +47,7 @@
         <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
         <views:DateBar x:DataType="{x:Null}"
                        NumberDisplayDays="2"
+                       LiveCount="{Binding LiveMatchCount}"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
                        ItemTappedCommand="{Binding DateBarItemTapCommand}" />
         <BoxView Style="{StaticResource HorizontalLine}"
@@ -72,10 +71,6 @@
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:ScoreItemViewModel">
                     <FlexLayout JustifyContent="Center">
-                        <Label IsVisible="{Binding IsLive}"
-                               Text="Live is coming soon"
-                               Style="{StaticResource ComingSoonLabel}"
-                               FlexLayout.AlignSelf="Center" />
                         <Label IsVisible="{Binding IsCalendar}"
                                Text="Calendar is coming soon"
                                Style="{StaticResource ComingSoonLabel}"
@@ -99,6 +94,7 @@
                                                            ItemsSource="{Binding MatchItemsSource}"
                                                            RefreshCommand="{Binding RefreshCommand}"
                                                            SelectionMode="None"
+                                                           RefreshControlColor="White"
                                                            SeparatorColor="{StaticResource LineColor}"
                                                            Style="{StaticResource ListViewHasBackground}"
                                                            VerticalOptions="FillAndExpand">

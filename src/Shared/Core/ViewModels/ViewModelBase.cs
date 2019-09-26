@@ -21,7 +21,7 @@ namespace LiveScore.Core.ViewModels
         public ViewModelBase(
            INavigationService navigationService,
            IDependencyResolver dependencyResolver,
-           IEventAggregator eventAggregator) 
+           IEventAggregator eventAggregator)
             : this(navigationService, dependencyResolver)
         {
             EventAggregator = eventAggregator;

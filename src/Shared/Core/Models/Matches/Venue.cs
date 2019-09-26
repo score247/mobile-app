@@ -2,6 +2,8 @@
 {
     using MessagePack;
 
+#pragma warning disable S109 // Magic numbers should not be used
+
     [MessagePackObject]
     public class Venue
     {
@@ -20,4 +22,6 @@
         [Key(4)]
         public string CountryName { get; set; }
     }
+
+#pragma warning restore S109 // Magic numbers should not be used
 }

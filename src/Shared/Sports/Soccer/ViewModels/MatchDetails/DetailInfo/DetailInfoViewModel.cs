@@ -84,7 +84,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         [Time]
         private async Task LoadMatchDetail(bool isRefresh = false)
         {
-            MatchInfo = await matchInfoService.GetMatch(matchId, CurrentLanguage, isRefresh).ConfigureAwait(false) as MatchInfo;
+            MatchInfo = await matchInfoService
+                .GetMatch(matchId, CurrentLanguage, isRefresh)
+                .ConfigureAwait(false);
 
             BuildDetailInfo(MatchInfo);
 

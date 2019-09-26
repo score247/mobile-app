@@ -7,9 +7,12 @@
     using MethodTimer;
     using Xamarin.Forms;
 
+#pragma warning disable S109 // Magic numbers should not be used
+
     public partial class DateBar : ContentView
     {
         private const int LiveIndex = 0;
+        private int calendarIndex;
 
         public DateBar()
         {
@@ -28,7 +31,7 @@
         {
             DateBarLayout.Children.Clear();
 
-            CalendarIndex = NumberDisplayDays * 2 + 2;
+            calendarIndex = NumberDisplayDays * 2 + 2;
 
             AddLiveItem();
 
@@ -38,10 +41,10 @@
         }
 
         public static readonly BindableProperty NumberDisplayDaysProperty
-          = BindableProperty.Create(
-              nameof(NumberDisplayDays),
-              typeof(int),
-              typeof(DateBar));
+            = BindableProperty.Create(
+                nameof(NumberDisplayDays),
+                typeof(int),
+                typeof(DateBar));
 
         public int NumberDisplayDays
         {
@@ -54,7 +57,22 @@
                 nameof(SelectedIndexProperty),
                 typeof(int),
                 typeof(DateBar),
-                propertyChanged: OnSelectedIndexChanged);
+                propertyChanged: (bindObject, oldValue, newValue) =>
+                    {
+                        var control = (DateBar)bindObject;
+                        var selectedIndex = (int)newValue;
+                        var oldIndex = (int)oldValue;
+                        var dateBarLayout = control?.Content as FlexLayout;
+
+                        if (dateBarLayout?.Children?.Count == 0)
+                        {
+                            return;
+                        }
+
+                        RemoveSelectedColor(control, oldIndex, dateBarLayout);
+
+                        AddSelectedColor(control, selectedIndex, dateBarLayout);
+                    });
 
         public int SelectedIndex
         {
@@ -71,32 +89,41 @@
             set => SetValue(ItemTappedCommandProperty, value);
         }
 
-        public int CalendarIndex { get; private set; }
-
-        private static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (DateBar)bindable;
-            var selectedIndex = (int)newValue;
-            var oldIndex = (int)oldValue;
-
-            if (control != null)
-            {
-                var dateBarLayout = control.Content as FlexLayout;
-
-                if (dateBarLayout.Children?.Count == 0)
+        public static readonly BindableProperty LiveCountProperty
+            = BindableProperty.Create(
+                nameof(LiveCountProperty),
+                typeof(int),
+                typeof(DateBar),
+                propertyChanged: (bindObject, oldValue, newValue) =>
                 {
-                    return;
-                }
+                    var control = (DateBar)bindObject;
+                    var dateBarLayout = control?.Content as FlexLayout;
+                    var liveLayout = dateBarLayout?.Children[0] as AbsoluteLayout;
+                    var liveCountFrame = liveLayout?.Children[1] as Frame;
 
-                RemoveSelectedColor(control, oldIndex, dateBarLayout);
+                    if (liveCountFrame?.Children[0] is Label liveCountLabel)
+                    {
+                        liveCountLabel.Text = newValue?.ToString() ?? "0";
+                    }
+                });
 
-                AddSelectedColor(control, selectedIndex, dateBarLayout);
-            }
+        public int LiveCount
+        {
+            get => (int)GetValue(LiveCountProperty);
+            set => SetValue(LiveCountProperty, value);
         }
 
         private void AddLiveItem()
         {
-            var layout = new AbsoluteLayout { Style = (Style)Resources["LiveLayout"] };
+            var liveLayout = new AbsoluteLayout
+            {
+                Style = (Style)Resources["LiveLayout"]
+            };
+
+            liveLayout.GestureRecognizers.Add(new TapGestureRecognizer
+            {
+                Command = BuildTapDateBarItemCommand(DateTime.Today, 0)
+            });
 
             var liveIcon = new Label
             {
@@ -106,23 +133,18 @@
             AbsoluteLayout.SetLayoutBounds(liveIcon, new Rectangle(0.5, 0.5, 22, 20));
             AbsoluteLayout.SetLayoutFlags(liveIcon, AbsoluteLayoutFlags.PositionProportional);
 
-            liveIcon.GestureRecognizers.Add(new TapGestureRecognizer
-            {
-                Command = BuildTapDateBarItemCommand(DateTime.Today, 0)
-            });
-
-            Frame defaultFrame = new Frame
+            var liveCountFrame = new Frame
             {
                 Style = (Style)Resources["MatchLiveNumberBox"],
-                Content = new Label { Text = "12", Style = (Style)Resources["MatchLiveNumberLabel"] }
+                Content = new Label { Text = LiveCount.ToString(), Style = (Style)Resources["MatchLiveNumberLabel"] }
             };
-            AbsoluteLayout.SetLayoutBounds(defaultFrame, new Rectangle(0.5, 0.5, 16, 16));
-            AbsoluteLayout.SetLayoutFlags(defaultFrame, AbsoluteLayoutFlags.PositionProportional);
 
-            layout.Children.Add(liveIcon);
-            layout.Children.Add(defaultFrame);
+            AbsoluteLayout.SetLayoutBounds(liveCountFrame, new Rectangle(0.5, 0.5, 16, 16));
+            AbsoluteLayout.SetLayoutFlags(liveCountFrame, AbsoluteLayoutFlags.PositionProportional);
 
-            DateBarLayout.Children.Add(layout);
+            liveLayout.Children.Add(liveIcon);
+            liveLayout.Children.Add(liveCountFrame);
+            DateBarLayout.Children.Add(liveLayout);
         }
 
         private void AddCalendarItem()
@@ -134,7 +156,7 @@
 
             calendarIcon.GestureRecognizers.Add(new TapGestureRecognizer
             {
-                Command = BuildTapDateBarItemCommand(DateTime.Today, CalendarIndex)
+                Command = BuildTapDateBarItemCommand(DateTime.Today, calendarIndex)
             });
 
             DateBarLayout.Children.Add(calendarIcon);
@@ -206,7 +228,7 @@
 
                 control.SetSelectedTextColor(liveItem, true);
             }
-            else if (selectedIndex == control.CalendarIndex)
+            else if (selectedIndex == control.calendarIndex)
             {
                 var calendarItem = dateBarLayout.Children[selectedIndex] as Label;
 
@@ -226,12 +248,14 @@
         {
             if (oldIndex == LiveIndex)
             {
-                if (dateBarLayout.Children[oldIndex] is Label liveItem)
+                var liveLayout = dateBarLayout.Children[oldIndex] as AbsoluteLayout;
+
+                if (liveLayout?.Children[0] is Label liveItem)
                 {
                     liveItem.TextColor = (Color)control.Resources["DateBarLiveColor"];
                 }
             }
-            else if (oldIndex == control.CalendarIndex)
+            else if (oldIndex == control.calendarIndex)
             {
                 var calendarItem = dateBarLayout.Children[oldIndex] as Label;
 
@@ -270,3 +294,5 @@
         }
     }
 }
+
+#pragma warning restore S109 // Magic numbers should not be used

@@ -24,7 +24,11 @@
             set => SetValue(ItemsSourceProperty, value);
         }
 
-        public static readonly BindableProperty ItemTappedCommandProperty = BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(TabItemViewModel), null);
+        public static readonly BindableProperty ItemTappedCommandProperty
+            = BindableProperty.Create(
+                nameof(ItemTappedCommand),
+                typeof(ICommand),
+                typeof(TabItemViewModel));
 
         public ICommand ItemTappedCommand
         {

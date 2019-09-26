@@ -35,8 +35,7 @@
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
             nameof(ItemsSource),
             typeof(IEnumerable<TabItemViewModel>),
-            typeof(TabStrip),
-            propertyChanged: OnItemsSourceChanged);
+            typeof(TabStrip));
 
         public IEnumerable<TabItemViewModel> ItemsSource
         {
@@ -72,24 +71,16 @@
             set => SetValue(SelectedIndexProperty, value);
         }
 
-        public static readonly BindableProperty ItemTappedCommandProperty = BindableProperty.Create(nameof(ItemTappedCommand), typeof(ICommand), typeof(TabItemViewModel), null);
+        public static readonly BindableProperty ItemTappedCommandProperty
+            = BindableProperty.Create(
+                nameof(ItemTappedCommand),
+        typeof(ICommand),
+        typeof(TabItemViewModel));
 
         public ICommand ItemTappedCommand
         {
             get => GetValue(ItemTappedCommandProperty) as ICommand;
             set => SetValue(ItemTappedCommandProperty, value);
-        }
-
-        [Time]
-        private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var control = (TabStrip)bindable;
-            var tabItems = newValue as IEnumerable<TabItemViewModel>;
-
-            if (control == null || tabItems == null || !tabItems.Any())
-            {
-                return;
-            }
         }
 
         [Time]

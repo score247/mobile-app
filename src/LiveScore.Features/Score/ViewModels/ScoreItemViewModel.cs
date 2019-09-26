@@ -61,7 +61,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsCalendar { get; }
 
-        public bool IsNormalDate => !IsLive && !IsCalendar;
+        public bool IsNormalDate => !IsCalendar;
 
         public bool IsRefreshing { get; set; }
 
@@ -104,7 +104,6 @@ namespace LiveScore.Features.Score.ViewModels
         private Task OnRefreshAsync()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
-
             return Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
         }
 
@@ -187,10 +186,13 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatchesAsync(DateTime date, bool getLatestData = false)
         {
-            var matches = await matchService.GetMatchesByDate(
-                    date,
-                    CurrentLanguage,
-                    getLatestData).ConfigureAwait(false);
+            var matches = IsLive
+                ? await matchService
+                    .GetLiveMatches(CurrentLanguage, getLatestData)
+                    .ConfigureAwait(false)
+                : await matchService
+                    .GetMatchesByDate(date, CurrentLanguage, getLatestData)
+                    .ConfigureAwait(false);
 
             var matchItemViewModels = matches
                     .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
@@ -224,10 +226,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                var matches
-                    = await matchService
-                        .GetMatchesByDate(SelectedDate, CurrentLanguage, getLatestData)
-                        .ConfigureAwait(false);
+                var matches = IsLive
+                        ? await matchService
+                            .GetLiveMatches(CurrentLanguage, getLatestData)
+                            .ConfigureAwait(false)
+                        : await matchService
+                            .GetMatchesByDate(SelectedDate, CurrentLanguage, getLatestData)
+                            .ConfigureAwait(false);
 
                 var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
@@ -245,8 +250,7 @@ namespace LiveScore.Features.Score.ViewModels
 
                     if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
                     {
-                        Device
-                            .BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
+                        Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
                     }
                 }
             }
@@ -256,8 +260,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
             finally
             {
-                Device
-                    .BeginInvokeOnMainThread(() => IsRefreshing = false);
+                Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
             }
         }
 
