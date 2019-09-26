@@ -12,6 +12,6 @@
             return UIFont.FromName(fontFamily, fontSize);
         }
 
-        public static string StandardFontName => new UIKit.UITextField().Font.Name;
+        public static string StandardFontName => App.Current.Resources["RobotoRegular"].ToString();
     }
 }
