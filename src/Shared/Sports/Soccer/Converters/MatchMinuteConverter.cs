@@ -1,33 +1,35 @@
-﻿namespace LiveScore.Soccer.Converters
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using LiveScore.Common.Services;
-    using LiveScore.Core;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using Models.Matches;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using LiveScore.Common.Services;
+using LiveScore.Core;
+using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Models.Matches;
 
+namespace LiveScore.Soccer.Converters
+{
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteConverter
     {
-        private static readonly IDictionary<MatchStatus, int> PeriodStartMinute = new Dictionary<MatchStatus, int>
-        {
-            { MatchStatus.FirstHalf, 1 },
-            { MatchStatus.SecondHalf, 46 },
-            { MatchStatus.FirstHalfExtra, 91 },
-            { MatchStatus.SecondHalfExtra, 106 }
-        };
+        private static readonly IDictionary<MatchStatus, int> PeriodStartMinutes
+            = new Dictionary<MatchStatus, int>
+            {
+                { MatchStatus.FirstHalf, 1 },
+                { MatchStatus.SecondHalf, 46 },
+                { MatchStatus.FirstHalfExtra, 91 },
+                { MatchStatus.SecondHalfExtra, 106 }
+            };
 
-        private static readonly IDictionary<MatchStatus, int> PeriodEndMinute = new Dictionary<MatchStatus, int>
-        {
-            { MatchStatus.FirstHalf, 45 },
-            { MatchStatus.SecondHalf, 90 },
-            { MatchStatus.FirstHalfExtra, 105 },
-            { MatchStatus.SecondHalfExtra, 120 }
-        };
+        private static readonly IDictionary<MatchStatus, int> PeriodEndMinutes
+            = new Dictionary<MatchStatus, int>
+            {
+                { MatchStatus.FirstHalf, 45 },
+                { MatchStatus.SecondHalf, 90 },
+                { MatchStatus.FirstHalfExtra, 105 },
+                { MatchStatus.SecondHalfExtra, 120 }
+            };
 
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
@@ -37,6 +39,7 @@
         public MatchMinuteConverter(ISettings settings, ILoggingService loggingService)
         {
             this.settings = settings;
+            this.loggingService = loggingService;
         }
 
         public string BuildMatchMinute(IMatch match)
@@ -50,8 +53,8 @@
                     return string.Empty;
                 }
 
-                PeriodStartMinute.TryGetValue(match.MatchStatus, out var periodStartMinute);
-                PeriodEndMinute.TryGetValue(match.MatchStatus, out var periodEndMinute);
+                PeriodStartMinutes.TryGetValue(match.MatchStatus, out var periodStartMinute);
+                PeriodEndMinutes.TryGetValue(match.MatchStatus, out var periodEndMinute);
 
                 var periodStartTime = soccerMatch != null && soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
                     ? soccerMatch.EventDate
@@ -60,7 +63,7 @@
                 // TODO: What if CurrentPeriodStartTime does not have data?
                 var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
 
-                if ((soccerMatch.LastTimelineType != null && soccerMatch.LastTimelineType.IsInjuryTimeShown) || GetAnnouncedInjuryTime() > 0)
+                if ((soccerMatch.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime() > 0)
                 {
                     return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute);
                 }
@@ -76,6 +79,7 @@
                 }
 
                 Debug.WriteLine($"{match.Id}-{matchMinute}");
+
                 return $"{matchMinute}'";
             }
             catch (Exception ex)
@@ -115,9 +119,7 @@
             // TODO: Should move InjuryTimeAnnouced to backend for storing?
             var cachedInjuryTime = settings.Get(cacheKey);
 
-            var annoucedInjuryTime = string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : Int32.Parse(cachedInjuryTime);
-
-            return annoucedInjuryTime;
+            return string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : int.Parse(cachedInjuryTime);
         }
 
         public void UpdateAnnouncedInjuryTime(int injuryTime)
