@@ -201,7 +201,8 @@
         {
             if (selectedIndex == LiveIndex)
             {
-                var liveItem = dateBarLayout.Children[selectedIndex] as Label;
+                var liveLayout = dateBarLayout.Children[selectedIndex] as AbsoluteLayout;
+                var liveItem = liveLayout.Children[0] as Label;
 
                 control.SetSelectedTextColor(liveItem, true);
             }
