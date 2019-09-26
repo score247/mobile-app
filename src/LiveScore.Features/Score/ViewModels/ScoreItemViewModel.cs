@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using ImTools;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
 using LiveScore.Core;
@@ -62,6 +63,8 @@ namespace LiveScore.Features.Score.ViewModels
         public bool IsCalendar { get; }
 
         public bool IsNormalDate => !IsCalendar;
+
+        public bool HasNoData { get; private set; }
 
         public bool IsRefreshing { get; set; }
 
@@ -186,13 +189,21 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatchesAsync(DateTime date, bool getLatestData = false)
         {
-            var matches = IsLive
+            var matches = (IsLive
                 ? await matchService
                     .GetLiveMatches(CurrentLanguage, getLatestData)
                     .ConfigureAwait(false)
                 : await matchService
                     .GetMatchesByDate(date, CurrentLanguage, getLatestData)
-                    .ConfigureAwait(false);
+                    .ConfigureAwait(false))?.ToList();
+
+            if (matches?.Any() != true)
+            {
+                HasNoData = true;
+                return;
+            }
+
+            HasNoData = false;
 
             var matchItemViewModels = matches
                     .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator))
@@ -200,11 +211,8 @@ namespace LiveScore.Features.Score.ViewModels
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match));
 
-            Device
-                .BeginInvokeOnMainThread(() =>
-                {
-                    MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups);
-                });
+            Device.BeginInvokeOnMainThread(()
+               => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
 
             Profiler.Start("ScoresView.Render");
             Profiler.Stop("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
@@ -226,20 +234,26 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                var matches = IsLive
+                var matches = (IsLive
                         ? await matchService
                             .GetLiveMatches(CurrentLanguage, getLatestData)
                             .ConfigureAwait(false)
                         : await matchService
                             .GetMatchesByDate(SelectedDate, CurrentLanguage, getLatestData)
-                            .ConfigureAwait(false);
+                            .ConfigureAwait(false))?.ToList();
 
+                if (matches?.Any() != true)
+                {
+                    HasNoData = true;
+                    return;
+                }
+
+                HasNoData = false;
                 var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
                 foreach (var match in matches)
                 {
-                    var matchViewModel
-                        = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
+                    var matchViewModel = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
 
                     if (matchViewModel == null)
                     {
@@ -280,8 +294,7 @@ namespace LiveScore.Features.Score.ViewModels
                         .GroupBy(item => new GroupMatchViewModel(item.Match))
                         .FirstOrDefault();
 
-                Device
-                    .BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
             }
             else
             {
@@ -292,8 +305,7 @@ namespace LiveScore.Features.Score.ViewModels
                        .GroupBy(item => new GroupMatchViewModel(item.Match))
                        .FirstOrDefault();
 
-                Device
-                    .BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
         }
     }

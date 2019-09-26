@@ -73,12 +73,15 @@
                     <FlexLayout JustifyContent="Center">
                         <Label IsVisible="{Binding IsCalendar}"
                                Text="Calendar is coming soon"
-                               Style="{StaticResource ComingSoonLabel}"
+                               Style="{StaticResource NotificationLabel}"
                                FlexLayout.AlignSelf="Center" />
                         <StackLayout IsVisible="{Binding IsNormalDate}">
                             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                                IsVisible="{Binding IsBusy}"
                                                Style="{StaticResource CenterActivityIndicator}" />
+                            <Label IsVisible="{Binding HasNoData}"
+                                   Text="There is no matches"
+                                   Style="{StaticResource NotificationLabel}" />
                             <customListView:CustomListView x:Name="LeagueTable"
                                                            AutomationId="LeagueTableId"
                                                            AutomationProperties.IsInAccessibleTree="False"
