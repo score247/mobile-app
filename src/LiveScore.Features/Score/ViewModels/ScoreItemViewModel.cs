@@ -261,7 +261,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual void UpdateMatchItemSource(IEnumerable<IMatch> matches)
         {
-            var matchViewModels = MatchItemsSource?.SelectMany(g => g);
+            var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
             foreach (var match in matches)
             {
@@ -298,15 +298,14 @@ namespace LiveScore.Features.Score.ViewModels
                         .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                         .FirstOrDefault();
 
-                Device
-                    .BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
             }
             else
             {
-                currentMatchViewModels = new List<MatchViewModel>();
-
-                currentMatchViewModels
-                   .Add(new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, EventAggregator));
+                currentMatchViewModels = new List<MatchViewModel>
+                {
+                    new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, EventAggregator)
+                };
 
                 var group = currentMatchViewModels
                        .OrderBy(m => m.Match.EventDate)
@@ -314,8 +313,7 @@ namespace LiveScore.Features.Score.ViewModels
                        .FirstOrDefault();
 
                 // TODO: Should fix: This code does not move favorite/major leagues to top
-                Device
-                    .BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
         }
     }
