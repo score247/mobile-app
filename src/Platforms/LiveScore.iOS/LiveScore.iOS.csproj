@@ -335,15 +335,6 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\penalty_goal%403x.png">
       <Link>Resources\images\common\penalty_goal%403x.png</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag.png">
-      <Link>Resources\images\flag_league\default_flag.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag%402x.png">
-      <Link>Resources\images\flag_league\default_flag%402x.png</Link>
-    </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag%403x.png">
-      <Link>Resources\images\flag_league\default_flag%403x.png</Link>
-    </BundleResource>
     <BundleResource Include="..\..\CommonResources\Image\iOS\sport.gif">
       <Link>Resources\images\sport.gif</Link>
     </BundleResource>
@@ -1012,56 +1003,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\yellow_card%403x.png">
       <Link>Resources\images\common\yellow_card%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\asia_cup.png">
-      <Link>Resources\images\flag_league\asia_cup.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\champion_league.png">
-      <Link>Resources\images\flag_league\champion_league.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\copa_america_centenario.png">
-      <Link>Resources\images\flag_league\copa_america_centenario.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\europa_league.png">
-      <Link>Resources\images\flag_league\europa_league.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\flag_england.png">
-      <Link>Resources\images\flag_league\flag_england.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\flag_netherlands.png">
-      <Link>Resources\images\flag_league\flag_netherlands.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_nation_league.png">
-      <Link>Resources\images\flag_league\uefa_nation_league.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_woman_champion_league.png">
-      <Link>Resources\images\flag_league\uefa_woman_champion_league.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\uefa_youth_league.png">
-      <Link>Resources\images\flag_league\uefa_youth_league.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\world_cup.png">
-      <Link>Resources\images\flag_league\world_cup.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
