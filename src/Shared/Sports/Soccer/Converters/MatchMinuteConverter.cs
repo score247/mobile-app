@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.Converters
         {
             try
             {
-                if (soccerMatch == null || !(match is Match))
+                if (!(match is Match))
                 {
                     return string.Empty;
                 }
