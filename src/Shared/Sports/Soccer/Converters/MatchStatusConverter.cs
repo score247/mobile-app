@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
@@ -10,37 +12,38 @@ namespace LiveScore.Soccer.Converters
 {
     public class MatchStatusConverter : IMatchStatusConverter
     {
-        private static readonly IDictionary<MatchStatus, string> StatusResourceMapper = new Dictionary<MatchStatus, string>
-        {
-            { MatchStatus.Postponed, AppResources.Postp },
-            { MatchStatus.StartDelayed, AppResources.Delayed },
-            { MatchStatus.Cancelled, AppResources.Canc },
-            { MatchStatus.AwaitingPenalties, AppResources.AwaitPen },
-            { MatchStatus.Penalties, AppResources.Pen },
-            { MatchStatus.Pause, AppResources.Pause },
-            { MatchStatus.Interrupted, AppResources.INT },
-            { MatchStatus.Halftime, AppResources.HT },
-            { MatchStatus.Delayed, AppResources.Delayed },
-            { MatchStatus.Abandoned, AppResources.AB },
-            { MatchStatus.FullTime, AppResources.FT },
-            { MatchStatus.Ended, AppResources.FT },
-            { MatchStatus.Closed, AppResources.FT },
-            { MatchStatus.EndedAfterPenalties, AppResources.AP },
-            { MatchStatus.EndedExtraTime, AppResources.AET },
-            { MatchStatus.AwaitingExtraTime, AppResources.AwaitET },
-            { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
-        };
+        private static readonly ReadOnlyDictionary<MatchStatus, string> StatusResourceMapper =
+            new ReadOnlyDictionary<MatchStatus, string>(new Dictionary<MatchStatus, string>
+            {
+                { MatchStatus.Postponed, AppResources.Postp },
+                { MatchStatus.StartDelayed, AppResources.Delayed },
+                { MatchStatus.Cancelled, AppResources.Canc },
+                { MatchStatus.AwaitingPenalties, AppResources.AwaitPen },
+                { MatchStatus.Penalties, AppResources.Pen },
+                { MatchStatus.Pause, AppResources.Pause },
+                { MatchStatus.Interrupted, AppResources.INT },
+                { MatchStatus.Halftime, AppResources.HT },
+                { MatchStatus.Delayed, AppResources.Delayed },
+                { MatchStatus.Abandoned, AppResources.AB },
+                { MatchStatus.FullTime, AppResources.FT },
+                { MatchStatus.Ended, AppResources.FT },
+                { MatchStatus.Closed, AppResources.FT },
+                { MatchStatus.EndedAfterPenalties, AppResources.AP },
+                { MatchStatus.EndedExtraTime, AppResources.AET },
+                { MatchStatus.AwaitingExtraTime, AppResources.AwaitET },
+                { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
+            });
 
         public string BuildStatus(IMatch match)
         {
-            if (match == null)
+            if (match == null || !(match is Match))
             {
                 return string.Empty;
             }
 
             var soccerMatch = match as Match;
 
-            if (soccerMatch?.EventStatus == null)
+            if (soccerMatch.EventStatus == null)
             {
                 return AppResources.FT;
             }
@@ -52,39 +55,26 @@ namespace LiveScore.Soccer.Converters
 
             if (soccerMatch.EventStatus.IsLive)
             {
-                return BuildMatchStatus(soccerMatch);
+                return BuildStatus(() => soccerMatch.MatchStatus);
             }
 
             if (soccerMatch.EventStatus.IsClosed)
             {
-                var status = BuildMatchStatus(soccerMatch);
+                var status = BuildStatus(() => soccerMatch.MatchStatus);
 
                 return string.IsNullOrEmpty(status) ? AppResources.FT : status;
             }
 
-            return BuildEventStatus(soccerMatch);
+            return BuildStatus(() => soccerMatch.EventStatus);
         }
 
-        private static string BuildMatchStatus(Match match)
+        private static string BuildStatus(Func<MatchStatus> statusGetter)
         {
-            var matchStatus = match.MatchStatus;
+            var status = statusGetter();
 
-            if (matchStatus?.Value != null && StatusResourceMapper.ContainsKey(matchStatus))
+            if (status?.Value != null && StatusResourceMapper.ContainsKey(status))
             {
-                return StatusResourceMapper[matchStatus];
-            }
-
-            return string.Empty;
-        }
-
-        private static string BuildEventStatus(Match match)
-
-        {
-            var eventStatus = match.EventStatus;
-
-            if (eventStatus?.Value != null && StatusResourceMapper.ContainsKey(eventStatus))
-            {
-                return StatusResourceMapper[eventStatus];
+                return StatusResourceMapper[status];
             }
 
             return string.Empty;

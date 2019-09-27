@@ -93,7 +93,7 @@ namespace LiveScore.Core.ViewModels
             EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
             IsBusy = showBusy;
 
-            await loadDataFunc();
+            await loadDataFunc().ConfigureAwait(false);
 
             IsBusy = false;
             EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
@@ -105,7 +105,7 @@ namespace LiveScore.Core.ViewModels
 
             if (!navigated.Success)
             {
-                await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception);
+                await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception).ConfigureAwait(false);
             }
         }
     }

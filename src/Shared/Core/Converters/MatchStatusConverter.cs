@@ -6,4 +6,4 @@
     {
         string BuildStatus(IMatch match);
     }
-}
+}   

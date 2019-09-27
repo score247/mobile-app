@@ -28,6 +28,7 @@ namespace LiveScore.Features.Score.ViewModels
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
         protected readonly Func<string, string> buildFlagUrlFunc;
+        protected readonly IMatchService MatchService;
 
         [Time]
         public ScoreItemViewModel(
@@ -63,8 +64,6 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
         public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; private set; }
-
-        protected IMatchService MatchService { get; }
 
         public override void Destroy()
         {
@@ -189,7 +188,7 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatchesAsync(bool getLatestData = false)
         {
-            var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)).ToList();
+            var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false)).ToList();
 
             if (HasNoMatchData(matches))
             {
@@ -206,8 +205,8 @@ namespace LiveScore.Features.Score.ViewModels
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
-            Device.BeginInvokeOnMainThread(()
-                => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
+            Device
+                .BeginInvokeOnMainThread(() => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
         }
 
         private async Task UpdateMatchesInBackgroundAsync()
@@ -224,12 +223,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)).ToList();
+                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false)).ToList();
 
                 if (HasNoMatchData(matches))
                 {
                     MatchItemsSource.Clear();
                     Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+
                     return;
                 }
 
@@ -250,10 +250,12 @@ namespace LiveScore.Features.Score.ViewModels
             if (matches?.Any() != true)
             {
                 HasNoData = true;
+
                 return true;
             }
 
             HasNoData = false;
+
             return false;
         }
 
@@ -279,34 +281,41 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        protected virtual void AddNewMatchToItemSource(IMatch match)
+        private void AddNewMatchToItemSource(IMatch newMatch)
         {
-            var newMatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
-            var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == match.LeagueId);
-            var currentMatchViewModels = new List<MatchViewModel>();
+            var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
+            List<MatchViewModel> currentMatchViewModels;
 
             if (currentGroupIndex >= 0)
             {
                 currentMatchViewModels = MatchItemsSource[currentGroupIndex].ToList();
-                currentMatchViewModels.Add(newMatchViewModel);
+
+                currentMatchViewModels
+                    .Add(new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
                 var group = currentMatchViewModels
                         .OrderBy(m => m.Match.EventDate)
                         .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                         .FirstOrDefault();
 
-                Device.BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
+                Device
+                    .BeginInvokeOnMainThread(() => MatchItemsSource[currentGroupIndex] = group);
             }
             else
             {
-                currentMatchViewModels.Add(newMatchViewModel);
+                currentMatchViewModels = new List<MatchViewModel>();
+
+                currentMatchViewModels
+                   .Add(new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
                 var group = currentMatchViewModels
                        .OrderBy(m => m.Match.EventDate)
                        .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                        .FirstOrDefault();
 
-                Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
+                // TODO: Should fix: This code does not move favorite/major leagues to top
+                Device
+                    .BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
         }
     }
