@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Fanex.Caching;
+using LiveScore.Common;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -126,7 +127,11 @@ namespace LiveScore
                 ContentSerializer = new MessagePackContentSerializer()
             });
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
-            containerRegistry.RegisterInstance(Configuration.AssetsEndPoint, "AssetsEndPoint");
+            containerRegistry.RegisterInstance<Func<string,string>>((countryCode) 
+                => string.IsNullOrWhiteSpace(countryCode) 
+                    ? "images/flag_league/default_flag.svg"
+                    : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg", 
+                Constants.BuildFlagUrlFunctionName);
 
             CompositeResolver.RegisterAndSetAsDefault(
                 SoccerModelResolver.Instance,

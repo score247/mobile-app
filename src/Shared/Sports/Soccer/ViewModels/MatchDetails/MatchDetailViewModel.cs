@@ -2,6 +2,7 @@
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
@@ -16,6 +17,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using DetailTable;
     using DetailTracker;
     using DetailTV;
+    using LiveScore.Common;
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Controls.TabStrip.EventArgs;
     using LiveScore.Core.Converters;
@@ -42,10 +44,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
     public class MatchDetailViewModel : ViewModelBase
     {
-        private const string AssetsEndPointResolveName = "AssetsEndPoint";
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
-        private readonly string assetsEndPoint;
+        private readonly Func<string,string> buildFlagUrlFunc;
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
  
@@ -57,7 +58,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
-            assetsEndPoint = DependencyResolver.Resolve<string>(AssetsEndPointResolveName);
+            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(Constants.BuildFlagUrlFunctionName);
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFuctionTabTapped);
         }
 
@@ -79,8 +80,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             {
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
-                // TODO: Ricky Should be reusable here
-                CountryFlag = $"{assetsEndPoint}flags/{MatchViewModel.Match.CountryCode}.svg";
+                CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
             }
 
             SubscribeEvents();

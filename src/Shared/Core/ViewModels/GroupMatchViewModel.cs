@@ -1,18 +1,17 @@
-﻿using LiveScore.Core.Models.Matches;
+﻿using System;
+using LiveScore.Common.Extensions;
+using LiveScore.Core.Models.Matches;
 
 namespace LiveScore.Core.ViewModels
 {
-    using Common.Extensions;
-
     public class GroupMatchViewModel
     {
-        public GroupMatchViewModel(IMatch match, string assetsEndPoint)
+        public GroupMatchViewModel(IMatch match, Func<string,string> buildFlagUrl)
         {
             LeagueId = match.LeagueId;
             LeagueName = match.LeagueGroupName;
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
-            // TODO: Ricky Should be reusable here
-            CountryFlag = $"{assetsEndPoint}flags/{match.CountryCode}.svg";
+            CountryFlag = buildFlagUrl(match.CountryCode);
         }
 
         public string LeagueId { get; }
