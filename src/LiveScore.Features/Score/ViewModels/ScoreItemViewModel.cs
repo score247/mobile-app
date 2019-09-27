@@ -281,7 +281,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void AddNewMatchToItemSource(IMatch newMatch)
+        protected virtual void AddNewMatchToItemSource(IMatch newMatch)
         {
             var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
             List<MatchViewModel> currentMatchViewModels;
