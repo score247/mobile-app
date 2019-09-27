@@ -1,5 +1,7 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailTracker
 {
+    using System.IO;
+    using LiveScore.Common.PlatformDependency;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
     using Prism.Navigation;
@@ -7,12 +9,30 @@
 
     internal class DetailTrackerViewModel : TabItemViewModel
     {
+        private readonly string matchId;
+
         public DetailTrackerViewModel(
+            string matchId,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
+            this.matchId = matchId;            
+        }
+
+        public HtmlWebViewSource WidgetContent { get; set; }
+
+        public async override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            var formatMatchId = matchId.Replace("sr:match:", string.Empty);
+
+            var content  = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");            
+
+            WidgetContent = new HtmlWebViewSource();
+            WidgetContent.Html = content.Replace("input-match-id", formatMatchId);       
         }
     }
 }

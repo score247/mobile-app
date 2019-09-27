@@ -211,7 +211,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 {MatchDetailFunction.Stats, new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
                 {MatchDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
                 {MatchDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(NavigationService, DependencyResolver, new TrackerTemplate()) }
+                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(match.Id, NavigationService, DependencyResolver, new TrackerTemplate()) }
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

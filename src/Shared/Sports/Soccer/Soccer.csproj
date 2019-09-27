@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Models\Odds\" />
+    <Folder Include="Views\Templates\MatchDetails\DetailTracker\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Views\SoccerMatchListViewTemplate.xaml" />
@@ -112,4 +113,7 @@
  <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)SoccerModelResolver.cs&quot; -r &quot;SoccerModelResolver&quot;" />
   </Target>-->
+  <ItemGroup>
+    <EmbeddedResource Remove="..\..\..\CommonResources\Html\theme.css" />
+  </ItemGroup>
 </Project>

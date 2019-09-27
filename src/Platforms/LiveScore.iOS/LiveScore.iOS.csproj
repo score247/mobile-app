@@ -338,6 +338,10 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\sport.gif">
       <Link>Resources\images\sport.gif</Link>
     </BundleResource>
+    <BundleResource Include="..\..\CommonResources\Html\TrackerWidget.html">
+      <Link>Resources\html\TrackerWidget.html</Link>
+    </BundleResource>
+    <Compile Include="PlatformDependency\BaseUrl.cs" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json">
@@ -1044,6 +1048,15 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag.svg">
       <Link>Resources\images\flag_league\default_flag.svg</Link>
     </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\html\" />
+    <Folder Include="PlatformDependency\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\CommonResources\Html\theme.css">
+      <Link>Resources\html\theme.css</Link>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
