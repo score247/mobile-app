@@ -27,7 +27,7 @@ namespace LiveScore.Features.Score.ViewModels
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
-        protected readonly Func<string,string> buildFlagUrlFunc;
+        protected readonly Func<string, string> buildFlagUrlFunc;
 
         [Time]
         public ScoreItemViewModel(
@@ -279,7 +279,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void AddNewMatchToItemSource(IMatch match)
+        protected virtual void AddNewMatchToItemSource(IMatch match)
         {
             var newMatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
             var currentGroupIndex = MatchItemsSource.IndexOf(g => g.Key.LeagueId == match.LeagueId);

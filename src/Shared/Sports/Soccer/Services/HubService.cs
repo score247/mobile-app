@@ -1,18 +1,18 @@
-﻿namespace LiveScore.Soccer.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Services;
-    using LiveScore.Soccer.Models.Odds;
-    using LiveScore.Soccer.PubSubEvents.Matches;
-    using LiveScore.Soccer.PubSubEvents.Odds;
-    using LiveScore.Soccer.PubSubEvents.Teams;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Newtonsoft.Json;
-    using Prism.Events;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using LiveScore.Common.Services;
+using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.PubSubEvents.Matches;
+using LiveScore.Soccer.PubSubEvents.Odds;
+using LiveScore.Soccer.PubSubEvents.Teams;
+using Microsoft.AspNetCore.SignalR.Client;
+using Newtonsoft.Json;
+using Prism.Events;
 
+namespace LiveScore.Soccer.Services
+{
     public class SoccerHubService : IHubService
     {
         private readonly IEventAggregator eventAggregator;
@@ -28,7 +28,8 @@
                 { MatchEventMessage.HubMethod, (typeof(MatchEventMessage), MatchEventMessage.Publish) },
                 { OddsComparisonMessage.HubMethod, (typeof(OddsComparisonMessage), OddsComparisonMessage.Publish) },
                 { OddsMovementMessage.HubMethod, (typeof(OddsMovementMessage), OddsMovementMessage.Publish) },
-                { TeamStatisticsMessage.HubMethod, (typeof(TeamStatisticsMessage), TeamStatisticsMessage.Publish) }
+                { TeamStatisticsMessage.HubMethod, (typeof(TeamStatisticsMessage), TeamStatisticsMessage.Publish) },
+                { LiveMatchMessage.HubMethod, (typeof(LiveMatchMessage), LiveMatchMessage.Publish) }
             };
 
         public SoccerHubService(

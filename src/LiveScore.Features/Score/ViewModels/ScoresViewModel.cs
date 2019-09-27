@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.DateBar.EventArgs;
+using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
@@ -30,6 +32,10 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
+
+            EventAggregator
+                .GetEvent<LiveMatchPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
 
             InitScoreItemSources();
             Task.Run(() => GetLiveMatchCount());
@@ -80,6 +86,13 @@ namespace LiveScore.Features.Score.ViewModels
         public override void OnDisappearing()
         {
             SelectedScoreItem?.OnDisappearing();
+        }
+
+        public override void Destroy()
+        {
+            EventAggregator
+                .GetEvent<LiveMatchPubSubEvent>()
+                .Unsubscribe(OnReceivedMatchEvent);
         }
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
@@ -133,6 +146,19 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        private void OnReceivedMatchEvent(ILiveMatchMessage message)
+        {
+            if (message?.SportId != CurrentSportId)
+            {
+                return;
+            }
+
+            var newMatches = message.NewMatches;
+            var removeMatchIds = message.RemoveMatchIds;
+
+            LiveMatchCount = (byte)(LiveMatchCount + newMatches.Count() - removeMatchIds.Length);
         }
     }
 }
