@@ -35,7 +35,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
+                .Subscribe(OnReceivedLiveMatches, true);
 
             InitScoreItemSources();
             Task.Run(() => GetLiveMatchCount());
@@ -92,7 +92,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
-                .Unsubscribe(OnReceivedMatchEvent);
+                .Unsubscribe(OnReceivedLiveMatches);
         }
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
@@ -148,7 +148,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void OnReceivedMatchEvent(ILiveMatchMessage message)
+        private void OnReceivedLiveMatches(ILiveMatchMessage message)
         {
             if (message?.SportId != CurrentSportId)
             {

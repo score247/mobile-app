@@ -21,7 +21,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
+                .Subscribe(OnReceivedLiveMatches, true);
         }
 
         public override void Destroy()
@@ -30,7 +30,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
-                .Unsubscribe(OnReceivedMatchEvent);
+                .Unsubscribe(OnReceivedLiveMatches);
         }
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(DateTime date, bool getLatestData)
@@ -55,7 +55,7 @@ namespace LiveScore.Features.Score.ViewModels
             base.UpdateMatchItemSource(newMatches);
         }
 
-        private void OnReceivedMatchEvent(ILiveMatchMessage message)
+        private void OnReceivedLiveMatches(ILiveMatchMessage message)
         {
             if (message?.SportId != CurrentSportId)
             {
