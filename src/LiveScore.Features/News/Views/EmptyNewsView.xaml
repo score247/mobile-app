@@ -10,25 +10,30 @@
     x:Name="self"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
+    xmlns:viewModels="clr-namespace:LiveScore.Features.News.ViewModels;"
     BackgroundColor="{StaticResource PrimaryColor}">
-  <NavigationPage.TitleView>
-    <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
-  </NavigationPage.TitleView>
-  <ContentPage.ToolbarItems>
-    <ToolbarItem Priority="1">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource">
-          <On Platform="IOS" Value="images/common/icon_transparent.png" />
-        </OnPlatform>
-      </ToolbarItem.Icon>
-    </ToolbarItem>
-  </ContentPage.ToolbarItems>
-  <ContentPage.Content>
-    <Label
-        FontSize="13"
-        HorizontalOptions="Center"
-        Text="News is comming soon"
-        TextColor="{StaticResource SecondTextColor}"
-        VerticalOptions="Center" />
-  </ContentPage.Content>
+    <NavigationPage.TitleView>
+        <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Priority="1">
+            <ToolbarItem.Icon>
+                <OnPlatform x:TypeArguments="FileImageSource">
+                    <On Platform="IOS" Value="images/common/icon_transparent.png" />
+                </OnPlatform>
+            </ToolbarItem.Icon>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                FontSize="13"
+                HorizontalOptions="Center"
+                Text="News is comming soon 111"
+                TextColor="{StaticResource SecondTextColor}"
+                VerticalOptions="Center" /> 
+            <Button Text="Show Popup" Command="{Binding ShowPopUpCommand}" />
+        </StackLayout>
+
+    </ContentPage.Content>
 </ContentPage>

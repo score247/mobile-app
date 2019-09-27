@@ -157,7 +157,7 @@ namespace LiveScore
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<LeagueModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<FavoritesModule>(InitializationMode.OnDemand);
-            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<NewsModule>();
             moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<MenuModule>();
         }

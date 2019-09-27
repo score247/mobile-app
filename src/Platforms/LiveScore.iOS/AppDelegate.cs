@@ -24,6 +24,7 @@ namespace LiveScore.iOS
         public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             Profiler.Start("IOS Application");
+            Rg.Plugins.Popup.Popup.Init();
             Xamarin.Forms.Forms.Init();
             AnimationViewRenderer.Init();
             CachedImageRenderer.Init();

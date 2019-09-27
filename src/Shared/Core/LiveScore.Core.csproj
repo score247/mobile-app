@@ -66,6 +66,11 @@
         <DependentUpon>MatchHeaderViewResource.xaml</DependentUpon>
       </Compile>
     </ItemGroup>
+    <ItemGroup>
+      <EmbeddedResource Update="Views\NetworkConnectionError.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+    </ItemGroup>
    <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
       <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)CoreModelResolver.cs&quot; -r &quot;CoreModelResolver&quot;" />
     </Target>-->

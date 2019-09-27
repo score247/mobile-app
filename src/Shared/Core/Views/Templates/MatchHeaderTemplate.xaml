@@ -32,6 +32,7 @@
                 <ffimageloadingsvg:SvgCachedImage 
                                             Grid.Row="0"
                                             Grid.Column="0"
+                                            DownsampleToViewSize="True"
                                             LoadingPlaceholder="images/flag_league/default_flag.svg"
                                             Source="{Binding Key.CountryFlag, Mode=OneTime}" 
                                             Style="{StaticResource LeagueFlag}"/>
