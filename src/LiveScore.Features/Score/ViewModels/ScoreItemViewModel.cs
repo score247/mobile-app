@@ -27,7 +27,7 @@ namespace LiveScore.Features.Score.ViewModels
         private const string AssetsEndPointResolveName = "AssetsEndPoint";
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
-        private readonly string assetsEndPoint;
+        protected readonly string assetsEndPoint;
 
         [Time]
         public ScoreItemViewModel(

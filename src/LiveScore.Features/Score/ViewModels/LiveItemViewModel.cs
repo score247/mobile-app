@@ -49,7 +49,7 @@ namespace LiveScore.Features.Score.ViewModels
                     }
 
                     MatchItemsSource[index] = groupMatches
-                        .GroupBy(item => new GroupMatchViewModel(item.Match))
+                        .GroupBy(item => new GroupMatchViewModel(item.Match, assetsEndPoint))
                         .FirstOrDefault();
                 }
             }
