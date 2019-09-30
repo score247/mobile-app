@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-    <!-- 
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,242 +59,245 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-        <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-        <xsd:element name="root" msdata:IsDataSet="true">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
             <xsd:complexType>
-                <xsd:choice maxOccurs="unbounded">
-                    <xsd:element name="metadata">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" use="required" type="xsd:string" />
-                            <xsd:attribute name="type" type="xsd:string" />
-                            <xsd:attribute name="mimetype" type="xsd:string" />
-                            <xsd:attribute ref="xml:space" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="assembly">
-                        <xsd:complexType>
-                            <xsd:attribute name="alias" type="xsd:string" />
-                            <xsd:attribute name="name" type="xsd:string" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="data">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-                            <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-                            <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-                            <xsd:attribute ref="xml:space" />
-                        </xsd:complexType>
-                    </xsd:element>
-                    <xsd:element name="resheader">
-                        <xsd:complexType>
-                            <xsd:sequence>
-                                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                            </xsd:sequence>
-                            <xsd:attribute name="name" type="xsd:string" use="required" />
-                        </xsd:complexType>
-                    </xsd:element>
-                </xsd:choice>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
-        </xsd:element>
-    </xsd:schema>
-    <resheader name="resmimetype">
-        <value>text/microsoft-resx</value>
-    </resheader>
-    <resheader name="version">
-        <value>2.0</value>
-    </resheader>
-    <resheader name="reader">
-        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <resheader name="writer">
-        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-    </resheader>
-    <data name="Scores" xml:space="preserve">
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Scores" xml:space="preserve">
     <value>Scores</value>
   </data>
-    <data name="Live" xml:space="preserve">
+  <data name="Live" xml:space="preserve">
     <value>Live</value>
   </data>
-    <data name="Leagues" xml:space="preserve">
+  <data name="Leagues" xml:space="preserve">
     <value>Leagues</value>
   </data>
-    <data name="Favorites" xml:space="preserve">
+  <data name="Favorites" xml:space="preserve">
     <value>Favorites</value>
   </data>
-    <data name="TVSchedule" xml:space="preserve">
+  <data name="TVSchedule" xml:space="preserve">
     <value>TV Schedule</value>
   </data>
-    <data name="TV" xml:space="preserve">
+  <data name="TV" xml:space="preserve">
     <value>TV</value>
   </data>
-    <data name="News" xml:space="preserve">
+  <data name="News" xml:space="preserve">
     <value>News</value>
   </data>
-    <data name="FT" xml:space="preserve">
+  <data name="FT" xml:space="preserve">
     <value>FT</value>
   </data>
-    <data name="FullTime" xml:space="preserve">
+  <data name="FullTime" xml:space="preserve">
     <value>Full Time</value>
   </data>
-    <data name="Channel" xml:space="preserve">
+  <data name="Channel" xml:space="preserve">
     <value>Channel</value>
   </data>
-    <data name="EditChannel" xml:space="preserve">
+  <data name="EditChannel" xml:space="preserve">
     <value>Edit Channel</value>
   </data>
-    <data name="Match" xml:space="preserve">
+  <data name="Match" xml:space="preserve">
     <value>Match</value>
   </data>
-    <data name="Matches" xml:space="preserve">
+  <data name="Matches" xml:space="preserve">
     <value>Matches</value>
   </data>
-    <data name="Nations" xml:space="preserve">
+  <data name="Nations" xml:space="preserve">
     <value>Nations</value>
   </data>
-    <data name="Teams" xml:space="preserve">
+  <data name="Teams" xml:space="preserve">
     <value>Teams</value>
   </data>
-    <data name="Time" xml:space="preserve">
+  <data name="Time" xml:space="preserve">
     <value>Time</value>
   </data>
-    <data name="Transfers" xml:space="preserve">
+  <data name="Transfers" xml:space="preserve">
     <value>Transfers</value>
   </data>
-    <data name="Videos" xml:space="preserve">
+  <data name="Videos" xml:space="preserve">
     <value>Videos</value>
   </data>
-    <data name="WorldNews" xml:space="preserve">
+  <data name="WorldNews" xml:space="preserve">
     <value>World News</value>
   </data>
-    <data name="Postp" xml:space="preserve">
+  <data name="Postp" xml:space="preserve">
     <value>Postp</value>
   </data>
-    <data name="Postponed" xml:space="preserve">
+  <data name="Postponed" xml:space="preserve">
     <value>Postponed</value>
   </data>
-    <data name="StartDelayed" xml:space="preserve">
+  <data name="StartDelayed" xml:space="preserve">
     <value>Start Delayed</value>
   </data>
-    <data name="Delayed" xml:space="preserve">
+  <data name="Delayed" xml:space="preserve">
     <value>Delayed</value>
   </data>
-    <data name="Canc" xml:space="preserve">
+  <data name="Canc" xml:space="preserve">
     <value>Canc</value>
   </data>
-    <data name="Cancelled" xml:space="preserve">
+  <data name="Cancelled" xml:space="preserve">
     <value>Cancelled</value>
   </data>
-    <data name="INT" xml:space="preserve">
+  <data name="INT" xml:space="preserve">
     <value>INT</value>
   </data>
-    <data name="Interrupted" xml:space="preserve">
+  <data name="Interrupted" xml:space="preserve">
     <value>Interrupted</value>
   </data>
-    <data name="HT" xml:space="preserve">
+  <data name="HT" xml:space="preserve">
     <value>HT</value>
   </data>
-    <data name="HalfTime" xml:space="preserve">
+  <data name="HalfTime" xml:space="preserve">
     <value>Half Time</value>
   </data>
-    <data name="AB" xml:space="preserve">
+  <data name="AB" xml:space="preserve">
     <value>AB</value>
   </data>
-    <data name="Abandoned" xml:space="preserve">
+  <data name="Abandoned" xml:space="preserve">
     <value>Abandoned</value>
   </data>
-    <data name="AET" xml:space="preserve">
+  <data name="AET" xml:space="preserve">
     <value>AET</value>
   </data>
-    <data name="AfterExtraTime" xml:space="preserve">
+  <data name="AfterExtraTime" xml:space="preserve">
     <value>After Extra Time</value>
   </data>
-    <data name="AwaitET" xml:space="preserve">
+  <data name="AwaitET" xml:space="preserve">
     <value>Await ET</value>
   </data>
-    <data name="AwaitExtraTime" xml:space="preserve">
+  <data name="AwaitExtraTime" xml:space="preserve">
     <value>Awaiting Extra Time</value>
   </data>
-    <data name="AP" xml:space="preserve">
+  <data name="AP" xml:space="preserve">
     <value>AP</value>
   </data>
-    <data name="AfterPenalties" xml:space="preserve">
+  <data name="AfterPenalties" xml:space="preserve">
     <value>After Penalties</value>
   </data>
-    <data name="AwaitPen" xml:space="preserve">
+  <data name="AwaitPen" xml:space="preserve">
     <value>Await Pen</value>
   </data>
-    <data name="AwaitPenalties" xml:space="preserve">
+  <data name="AwaitPenalties" xml:space="preserve">
     <value>Awaiting Penalties</value>
   </data>
-    <data name="Pen" xml:space="preserve">
+  <data name="Pen" xml:space="preserve">
     <value>Pen</value>
   </data>
-    <data name="Penalties" xml:space="preserve">
+  <data name="Penalties" xml:space="preserve">
     <value>Penalties</value>
   </data>
-    <data name="Pause" xml:space="preserve">
+  <data name="Pause" xml:space="preserve">
     <value>Pause</value>
   </data>
-    <data name="Cancel" xml:space="preserve">
+  <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
-    <data name="PenaltyShootOut" xml:space="preserve">
+  <data name="PenaltyShootOut" xml:space="preserve">
     <value>Penalty Shoot-Out</value>
   </data>
-    <data name="SecondLeg" xml:space="preserve">
+  <data name="SecondLeg" xml:space="preserve">
     <value>2nd Leg, Aggregate Score:</value>
   </data>
-    <data name="ETHT" xml:space="preserve">
+  <data name="ETHT" xml:space="preserve">
     <value>ETHT</value>
   </data>
-    <data name="ExtraTimeHalfTime" xml:space="preserve">
+  <data name="ExtraTimeHalfTime" xml:space="preserve">
     <value>Extra Time Half Time</value>
   </data>
-    <data name="NoData" xml:space="preserve">
+  <data name="NoData" xml:space="preserve">
     <value>No data yet ...</value>
   </data>
-    <data name="OneXTwo" xml:space="preserve">
+  <data name="OneXTwo" xml:space="preserve">
     <value>1X2</value>
   </data>
-    <data name="AsianHDP" xml:space="preserve">
+  <data name="AsianHDP" xml:space="preserve">
     <value>Asian HDP</value>
   </data>
-    <data name="OverUnder" xml:space="preserve">
+  <data name="OverUnder" xml:space="preserve">
     <value>Over/Under</value>
   </data>
-    <data name="OddsTypeDecimal" xml:space="preserve">
+  <data name="OddsTypeDecimal" xml:space="preserve">
     <value>Decimal</value>
   </data>
-    <data name="Bookmaker" xml:space="preserve">
+  <data name="Bookmaker" xml:space="preserve">
     <value>Bookmaker</value>
   </data>
-    <data name="LiveOdds" xml:space="preserve">
+  <data name="LiveOdds" xml:space="preserve">
     <value>Live Odds</value>
   </data>
-    <data name="OpeningOdds" xml:space="preserve">
+  <data name="OpeningOdds" xml:space="preserve">
     <value>Opening Odds</value>
   </data>
-    <data name="Home" xml:space="preserve">
+  <data name="Home" xml:space="preserve">
     <value>Home</value>
   </data>
-    <data name="Away" xml:space="preserve">
+  <data name="Away" xml:space="preserve">
     <value>Away</value>
   </data>
-    <data name="Over" xml:space="preserve">
+  <data name="Over" xml:space="preserve">
     <value>Over</value>
   </data>
-    <data name="Under" xml:space="preserve">
+  <data name="Under" xml:space="preserve">
     <value>Under</value>
   </data>
-    <data name="Today" xml:space="preserve">
+  <data name="Today" xml:space="preserve">
     <value>Today</value>
+  </data>
+  <data name="ConnectionLostMessage" xml:space="preserve">
+    <value>The network connection is lost. Please try again later.</value>
   </data>
 </root>

@@ -5,16 +5,20 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              mc:Ignorable="d"
+             
              x:Class="LiveScore.Core.Views.NetworkConnectionError">
     <ContentPage.Content>
         <StackLayout 
             VerticalOptions="EndAndExpand" 
             HorizontalOptions="FillAndExpand" 
-            Margin="0,0,0,50">
+            Margin="0,0,0,50" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnTapped"/>
+            </StackLayout.GestureRecognizers>
             <Frame BackgroundColor="Silver">
                 <StackLayout Spacing="20">
                     <Label HorizontalOptions="Center" 
-                           Text="The network connection is lost. Please try again later." 
+                           Text="{Binding ErrorMessage}" 
                            FontSize="16">
                     </Label>
                 </StackLayout>
