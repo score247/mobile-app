@@ -13,11 +13,13 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
         public LiveMatchMessage(
             byte sportId,
             IEnumerable<Match> newMatches,
-            string[] removeMatchIds)
+            string[] removeMatchIds,
+            int liveMatchCount)
         {
             SportId = sportId;
             NewMatches = newMatches;
             RemoveMatchIds = removeMatchIds;
+            LiveMatchCount = liveMatchCount;
         }
 
         public byte SportId { get; }
@@ -25,6 +27,8 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
         public IEnumerable<IMatch> NewMatches { get; }
 
         public string[] RemoveMatchIds { get; }
+
+        public int LiveMatchCount { get; }
 
         public static void Publish(IEventAggregator eventAggregator, object data)
             => eventAggregator.GetEvent<LiveMatchPubSubEvent>().Publish(data as LiveMatchMessage);

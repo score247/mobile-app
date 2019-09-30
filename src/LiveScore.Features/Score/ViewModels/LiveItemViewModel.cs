@@ -68,19 +68,27 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void RemoveMatchesFromItemSource(string[] removedMatchIds)
         {
-            for (var index = 0; index < MatchItemsSource.Count; index++)
+            foreach (var removedMatchId in removedMatchIds)
             {
-                var league = MatchItemsSource[index];
-                var leagueMatches = league.ToList();
-                leagueMatches.RemoveAll(m => removedMatchIds.Contains(m.Match.Id));
+                var league = MatchItemsSource
+                        .FirstOrDefault(l => l.Any(match => match.Match.Id == removedMatchId));
 
-                if (leagueMatches.Count == 0)
+                if (league == null)
                 {
-                    MatchItemsSource.RemoveAt(index);
                     continue;
                 }
 
-                MatchItemsSource[index] = leagueMatches
+                var leagueMatches = league.ToList();
+                leagueMatches.RemoveAll(m => m.Match.Id == removedMatchId);
+
+                if (leagueMatches.Count == 0)
+                {
+                    MatchItemsSource.Remove(league);
+                    continue;
+                }
+
+                var indexOfLeague = MatchItemsSource.IndexOf(league);
+                MatchItemsSource[indexOfLeague] = leagueMatches
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
             }

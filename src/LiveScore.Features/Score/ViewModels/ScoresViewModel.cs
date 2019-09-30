@@ -155,10 +155,7 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            var newMatches = message.NewMatches;
-            var removeMatchIds = message.RemoveMatchIds;
-
-            LiveMatchCount = (byte)(LiveMatchCount + newMatches.Count() - removeMatchIds.Length);
+            LiveMatchCount = message.LiveMatchCount;
         }
     }
 }
