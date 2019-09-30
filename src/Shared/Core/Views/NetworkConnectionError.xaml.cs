@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Common.LangResources;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
@@ -10,14 +11,38 @@ namespace LiveScore.Core.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NetworkConnectionError : PopupPage
     {
+        private const byte timeoutSeconds = 5;
+
         public NetworkConnectionError()
         {
             InitializeComponent();
+            InitConnectionLostMessage();
+        }
 
+        private void InitConnectionLostMessage()
+        {
             BackgroundInputTransparent = true;
             BackgroundColor = Color.Transparent;
             CloseWhenBackgroundIsClicked = true;
             BindingContext = this;
+            AutoCloseMessageWhenTimeoutExpired();
+        }
+
+        private void AutoCloseMessageWhenTimeoutExpired()
+        {
+            var self = this;
+            Device.StartTimer(TimeSpan.FromSeconds(timeoutSeconds), () =>
+            {
+                Task.Factory.StartNew(async () =>
+                {
+                    await Device.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await PopupNavigation.Instance.PopAsync();
+                    });
+                });
+
+                return false;
+            });
         }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
@@ -26,7 +51,10 @@ namespace LiveScore.Core.Views
         public async void OnTapped(object sender, EventArgs e)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
-            await PopupNavigation.Instance.PopAsync();
+            if (PopupNavigation.Instance.PopupStack.Count > 0)
+            {
+                await PopupNavigation.Instance.RemovePageAsync(this);
+            }
         }
     }
 }

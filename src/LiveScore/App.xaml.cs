@@ -85,6 +85,8 @@ namespace LiveScore
 
             StartGlobalTimer();
             // NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(false);
+
+            Container.Resolve<IConnectionStatusManager>().StartListen();
         }
 
         protected override void ConfigureViewModelLocator()
@@ -121,6 +123,7 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+            containerRegistry.RegisterSingleton<IConnectionStatusManager, ConnectionStatusManager>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
             containerRegistry.RegisterInstance(new RefitSettings
             {

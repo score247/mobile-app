@@ -3,7 +3,10 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
+using LiveScore.Core.Views;
+using Prism.Events;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 
 namespace LiveScore.ViewModels
@@ -17,14 +20,17 @@ namespace LiveScore.ViewModels
             ISettings settings,
             ICacheManager cacheManager,
             INavigationService navigationService,
-            IDependencyResolver serviceLocator)
-            : base(navigationService, serviceLocator)
+            IDependencyResolver serviceLocator,
+            IEventAggregator eventAggregator)
+            : base(navigationService, serviceLocator, eventAggregator)
         {
             this.settings = settings;
             this.cacheManager = cacheManager;
 
             IsDemo = settings.IsDemo;
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
+
+            EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
         }
 
         public bool IsDemo { get; set; }
@@ -36,9 +42,11 @@ namespace LiveScore.ViewModels
 
         public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
 
-        private Task Navigate(string page)
+        private async Task Navigate(string page)
         {
-            return NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+            await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+
+            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }
 
         private Task Toggle()
@@ -53,6 +61,25 @@ namespace LiveScore.ViewModels
             await cacheManager.InvalidateAll();
 
             await NavigateToHome();
+        }
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+        private async void OnConnectionChanged(bool isConnected)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            if(!isConnected)
+            {
+                await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+            }
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Subscribe(OnConnectionChanged);
         }
     }
 }
