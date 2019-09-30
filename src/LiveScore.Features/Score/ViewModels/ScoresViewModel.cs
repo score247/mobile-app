@@ -45,7 +45,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public ObservableCollection<ScoreItemViewModel> ScoreItemSources { get; private set; }
 
-        public byte LiveMatchCount { get; private set; }
+        public int LiveMatchCount { get; private set; }
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
 

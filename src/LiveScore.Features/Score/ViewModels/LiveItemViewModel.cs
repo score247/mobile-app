@@ -63,11 +63,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             RemoveMatchesFromItemSource(message.RemoveMatchIds);
-
-            foreach (var newMatch in message.NewMatches)
-            {
-                AddNewMatchToItemSource(newMatch);
-            }
+            base.UpdateMatchItemSource(message.NewMatches);
         }
 
         private void RemoveMatchesFromItemSource(string[] removedMatchIds)

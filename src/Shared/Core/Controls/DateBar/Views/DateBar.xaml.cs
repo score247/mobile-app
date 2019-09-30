@@ -112,8 +112,9 @@
                     }
                     else
                     {
+                        var liveCount = (int)(newValue ?? 0);
                         liveCountFrame.IsVisible = true;
-                        liveCountLabel.Text = newValue?.ToString() ?? "0";
+                        liveCountLabel.Text = liveCount > 99 ? "99+" : liveCount.ToString();
                     }
                 });
 

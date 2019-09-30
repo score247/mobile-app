@@ -25,7 +25,7 @@ namespace LiveScore.Soccer.Services
         Task<IEnumerable<Match>> GetLiveMatches(string language);
 
         [Get("/soccer/{language}/matches/live/count")]
-        Task<byte> GetLiveMatchCount(string language);
+        Task<int> GetLiveMatchCount(string language);
     }
 
     public interface IMatchInfoService
@@ -116,7 +116,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<byte> GetLiveMatchCount(Language language, bool getLatestData = false)
+        public async Task<int> GetLiveMatchCount(Language language, bool getLatestData = false)
         {
             try
             {
@@ -149,7 +149,7 @@ namespace LiveScore.Soccer.Services
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatches(language));
 
         [Time]
-        private Task<byte> GetLiveMatchCountFromApi(string language)
+        private Task<int> GetLiveMatchCountFromApi(string language)
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatchCount(language));
     }
 }

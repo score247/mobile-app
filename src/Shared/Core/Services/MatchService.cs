@@ -12,6 +12,6 @@
 
         Task<IEnumerable<IMatch>> GetLiveMatches(Language language, bool getLatestData = false);
 
-        Task<byte> GetLiveMatchCount(Language language, bool getLatestData = false);
+        Task<int> GetLiveMatchCount(Language language, bool getLatestData = false);
     }
 }

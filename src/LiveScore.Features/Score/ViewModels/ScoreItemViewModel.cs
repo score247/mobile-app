@@ -245,20 +245,6 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private bool HasNoMatchData(IEnumerable<IMatch> matches)
-        {
-            if (matches?.Any() != true)
-            {
-                HasNoData = true;
-
-                return true;
-            }
-
-            HasNoData = false;
-
-            return false;
-        }
-
         protected virtual void UpdateMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
@@ -315,6 +301,20 @@ namespace LiveScore.Features.Score.ViewModels
                 // TODO: Should fix: This code does not move favorite/major leagues to top
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
+        }
+
+        private bool HasNoMatchData(IEnumerable<IMatch> matches)
+        {
+            if (matches?.Any() != true)
+            {
+                HasNoData = true;
+
+                return true;
+            }
+
+            HasNoData = false;
+
+            return false;
         }
     }
 }
