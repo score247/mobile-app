@@ -19,18 +19,26 @@
                     </ResourceDictionary>
                 </StackLayout.Resources>
 
-                <StackLayout BackgroundColor="{StaticResource PrimaryColor}">
-                    <WebView                        
+                <RelativeLayout Style="{StaticResource MatchBallTrackerContentLayout}">
+                    <WebView
                         BackgroundColor="{StaticResource PrimaryColor}"
                         Source="{Binding WidgetContent}"
                         HeightRequest="1000"
                         WidthRequest="400"
-                        VerticalOptions="FillAndExpand"
-                        />
-                </StackLayout>
-             
+                        VerticalOptions="FillAndExpand" />
+                    
+                    <!--<FlexLayout Style="{StaticResource Group}">
+                        <Label Text="View Ball Tracker" Style="{StaticResource GroupName}" />
+                        <Frame Style="{StaticResource MatchBallTrackerExpandBox}">
+                            <Label Style="{StaticResource MatchBallTrackerExpandIcon}" />
+                        </Frame>
+                    </FlexLayout>-->
+                    <Frame Style="{StaticResource MatchBallTrackerCollapseBox}">
+                        <Label Style="{StaticResource MatchBallTrackerExpandIcon}" />
+                    </Frame>
+
+                </RelativeLayout>
             </StackLayout>
         </ScrollView>
-        
     </ViewCell>
 </DataTemplate>

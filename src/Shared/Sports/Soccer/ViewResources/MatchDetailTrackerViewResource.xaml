@@ -7,7 +7,45 @@
 
     <Color x:Key="YellowCardColor">#D9B600</Color>
     <Color x:Key="RedCardColor">#FF3030</Color>
-    
+
+    <Style x:Key="MatchBallTrackerContentLayout" TargetType="RelativeLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+    </Style>
+    <Style x:Key="MatchBallTrackerExpandBox" TargetType="Frame">
+        <Setter Property="HeightRequest" Value="22" />
+        <Setter Property="WidthRequest" Value="22" />
+        <Setter Property="BackgroundColor" Value="#fff" />
+        <Setter Property="CornerRadius" Value="4" />
+    </Style>
+    <Style x:Key="MatchBallTrackerCollapseBox" BasedOn="{StaticResource MatchBallTrackerExpandBox}" TargetType="Frame">
+        <Setter Property="RelativeLayout.XConstraint" Value="{ConstraintExpression
+                        Type=RelativeToParent,
+                        Property=Width,
+                        Factor=0.84,
+                        Constant=26
+                        }" />
+        <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression
+                        Type=RelativeToParent,
+                        Property=Height,
+                        Factor=0,
+                        Constant=18
+                        }" />
+    </Style>
+    <Style x:Key="MatchBallTrackerGroupIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#0F111C" />
+    </Style>
+    <Style x:Key="MatchBallTrackerCollapseIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Label">
+        <Setter Property="Text" Value="&#xe90c;" />
+    </Style>
+    <Style x:Key="MatchBallTrackerExpandIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Label">
+        <Setter Property="Text" Value="&#xe926;" />
+    </Style>
+
+    <!-- commentaries -->
     <Style x:Key="MatchTrackerEndIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="Grid.Column" Value="0" />
         <Setter Property="Grid.Row" Value="0" />
