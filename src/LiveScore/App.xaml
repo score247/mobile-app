@@ -509,6 +509,8 @@
                         Value="CenterAndExpand" />
                 <Setter Property="HorizontalOptions"
                         Value="CenterAndExpand" />
+                <Setter Property="Margin"
+                        Value="0,12" />
                 <Setter Property="FontSize"
                         Value="{StaticResource MediumTextFontSize}" />
                 <Setter Property="TextColor"
