@@ -1,18 +1,15 @@
-﻿using LiveScore.Core.Events;
+﻿using System;
+using System.Threading.Tasks;
+using LiveScore.Common.Services;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Events;
+using Prism.AppModel;
+using Prism.Events;
+using Prism.Navigation;
+using PropertyChanged;
 
 namespace LiveScore.Core.ViewModels
 {
-    using System;
-    using System.Threading.Tasks;
-    using Enumerations;
-    using LiveScore.Common;
-    using LiveScore.Common.Services;
-    using Prism.AppModel;
-    using Prism.Events;
-    using Prism.Navigation;
-    using PropertyChanged;
-    using Xamarin.Essentials;
-
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
@@ -79,7 +76,7 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnResume()
         {
-            if(networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsConnectionOK())
             {
                 OnResumeWhenNetworkOK();
             }

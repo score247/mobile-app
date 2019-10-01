@@ -21,7 +21,7 @@ namespace LiveScore.Features.Score.ViewModels
         private const byte LiveIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
         private readonly IMatchService matchService;
-        private bool secondLoad = false;
+        private bool secondLoad;
 
         public ScoresViewModel(
             INavigationService navigationService,
