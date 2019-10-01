@@ -21,9 +21,9 @@
 
                 <RelativeLayout Style="{StaticResource MatchBallTrackerContentLayout}">
                     <WebView
-                        BackgroundColor="{StaticResource PrimaryColor}"
+                        IsVisible="{Binding TrackerVisible}"                        
                         Source="{Binding WidgetContent}"
-                        HeightRequest="1000"
+                        HeightRequest="500"
                         WidthRequest="400"
                         VerticalOptions="FillAndExpand" />
                     
@@ -34,7 +34,9 @@
                         </Frame>
                     </FlexLayout>-->
                     <Frame Style="{StaticResource MatchBallTrackerCollapseBox}">
-                        <Label Style="{StaticResource MatchBallTrackerExpandIcon}" />
+                        <Button
+                            Style="{StaticResource MatchBallTrackerExpandIcon}"
+                            Command="{Binding OnCollapseTapped}" />
                     </Frame>
 
                 </RelativeLayout>

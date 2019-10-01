@@ -4,6 +4,7 @@
     using LiveScore.Common.PlatformDependency;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
+    using Prism.Commands;
     using Prism.Navigation;
     using Xamarin.Forms;
 
@@ -18,10 +19,15 @@
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate)
         {
-            this.matchId = matchId;            
+            this.matchId = matchId;
+            TrackerVisible = true;
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
+
+        public bool TrackerVisible { get; set; }
+
+        public DelegateCommand OnCollapseTapped => new DelegateCommand(() => { TrackerVisible = !TrackerVisible; });
 
         public async override void OnAppearing()
         {
