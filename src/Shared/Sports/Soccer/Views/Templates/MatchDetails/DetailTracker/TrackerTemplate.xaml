@@ -27,15 +27,18 @@
                         Style="{StaticResource MatchBallTrackerWebView}" />                       
                     </FlexLayout>
 
-                    <!--<FlexLayout Style="{StaticResource Group}">
+                    <FlexLayout
+                        Style="{StaticResource Group}"
+                        IsVisible="{Binding TrackerHidden}">                        
                         <Label Text="View Ball Tracker" Style="{StaticResource GroupName}" />
-                        <Frame Style="{StaticResource MatchBallTrackerExpandBox}">
-                            <Label Style="{StaticResource MatchBallTrackerExpandIcon}" />
-                        </Frame>
-                    </FlexLayout>-->
-                    <Button
+                        <Button
                             Style="{StaticResource MatchBallTrackerExpandIcon}"
-                            Command="{Binding OnCollapseTapped}" />
+                            Command="{Binding OnExpandTracker}"/>
+                    </FlexLayout>
+
+                    <Button IsVisible="{Binding TrackerVisible}"
+                            Style="{StaticResource MatchBallTrackerCollapseIcon}"
+                            Command="{Binding OnCollapseTracker}" />
                 </RelativeLayout>
             </StackLayout>
         </ScrollView>

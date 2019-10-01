@@ -15,7 +15,7 @@
     <Style x:Key="MatchBallTrackerWebViewContainer" TargetType="FlexLayout">
         <Setter Property="JustifyContent" Value="Center" />
     </Style>
-    <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">
+    <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">             
         <Setter Property="WidthRequest" Value="370" />
         <Setter Property="HeightRequest" Value="500" />
     </Style>

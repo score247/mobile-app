@@ -10,6 +10,9 @@
 
     internal class DetailTrackerViewModel : TabItemViewModel
     {
+        private const string RemoveMatchPrefix = "sr:match:";
+        private const string ReplacePrefix = "input-match-id";
+
         private readonly string matchId;
 
         public DetailTrackerViewModel(
@@ -21,24 +24,43 @@
         {
             this.matchId = matchId;
             TrackerVisible = true;
+            TrackerHidden = false;
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
 
         public bool TrackerVisible { get; set; }
 
-        public DelegateCommand OnCollapseTapped => new DelegateCommand(() => { TrackerVisible = !TrackerVisible; });
+        public bool TrackerHidden { get; set; }
+
+        public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);        
+
+        public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);        
 
         public async override void OnAppearing()
         {
             base.OnAppearing();
 
-            var formatMatchId = matchId.Replace("sr:match:", string.Empty);
+            var formatMatchId = matchId.Replace(RemoveMatchPrefix, string.Empty);
 
-            var content  = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");            
+            var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");
 
-            WidgetContent = new HtmlWebViewSource();
-            WidgetContent.Html = content.Replace("input-match-id", formatMatchId);       
+            WidgetContent = new HtmlWebViewSource
+            {
+                Html = content.Replace(ReplacePrefix, formatMatchId)
+            };
+        }
+
+        private void CollapseTracker()
+        {
+            TrackerVisible = false;
+            TrackerHidden = true;
+        }
+
+        private void ExpandTracker()
+        {
+            TrackerVisible = true;
+            TrackerHidden = false;
         }
     }
 }
