@@ -223,15 +223,8 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false)).ToList();
-
-                if (HasNoMatchData(matches))
-                {
-                    MatchItemsSource.Clear();
-                    Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
-
-                    return;
-                }
+                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false))
+                    .ToList();
 
                 UpdateMatchItemSource(matches);
             }
@@ -245,8 +238,16 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        protected virtual void UpdateMatchItemSource(IEnumerable<IMatch> matches)
+        protected virtual void UpdateMatchItemSource(List<IMatch> matches)
         {
+            if (HasNoMatchData(matches))
+            {
+                MatchItemsSource.Clear();
+                Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+
+                return;
+            }
+
             var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
             foreach (var match in matches)
@@ -305,16 +306,9 @@ namespace LiveScore.Features.Score.ViewModels
 
         private bool HasNoMatchData(IEnumerable<IMatch> matches)
         {
-            if (matches?.Any() != true)
-            {
-                HasNoData = true;
+            HasNoData = matches?.Any() != true;
 
-                return true;
-            }
-
-            HasNoData = false;
-
-            return false;
+            return HasNoData;
         }
     }
 }

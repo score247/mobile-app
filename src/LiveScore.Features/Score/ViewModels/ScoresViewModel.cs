@@ -21,6 +21,7 @@ namespace LiveScore.Features.Score.ViewModels
         private const byte LiveIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
         private readonly IMatchService matchService;
+        private bool secondLoad = false;
 
         public ScoresViewModel(
             INavigationService navigationService,
@@ -79,8 +80,13 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnAppearing()
         {
-            Task.Run(() => GetLiveMatchCount());
-            SelectedScoreItem?.OnAppearing();
+            if (secondLoad)
+            {
+                Task.Run(() => GetLiveMatchCount());
+                SelectedScoreItem?.OnAppearing();
+            }
+
+            secondLoad = true;
         }
 
         public override void OnDisappearing()
