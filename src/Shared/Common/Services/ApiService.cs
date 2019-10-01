@@ -50,29 +50,31 @@ namespace LiveScore.Common.Services
         public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
 
         [Time]
-        public async Task<T> Execute<T>(Func<Task<T>> func)
+        public Task<T> Execute<T>(Func<Task<T>> func)
         {
             try
             {
-                return await func();
+                return func.Invoke();
             }
             catch (Exception ex)
             {
-                if(ex is HttpRequestException)
+                if (ex is HttpRequestException)
                 {
-                    await cacheManager.InvalidateAll();
+                    // TODO : Fix later
+                    cacheManager.InvalidateAll().GetAwaiter().GetResult();
                     networkConnectionManager.PublishNetworkConnectionEvent();
                 }
-                
-                if(ex is TaskCanceledException)
+
+                if (ex is TaskCanceledException)
                 {
                     networkConnectionManager.PublishConnectionTimeoutEvent();
                 }
 
-                await loggingService.LogErrorAsync(ex);
+                // TODO : Fix later
+                loggingService.LogErrorAsync(ex).GetAwaiter().GetResult();
             }
 
-            return default(T);
+            return Task.FromResult(default(T));
         }
     }
 }

@@ -54,7 +54,26 @@ namespace LiveScore.Soccer.Services
 
                 foreach (var hubEvent in hubEvents)
                 {
-                    hubConnection.On(hubEvent.Key, (Action<string>)(jsonString => HandleEvents(jsonString, hubEvent)));
+                    hubConnection.On(
+                        hubEvent.Key,
+                        (Action<string>)((jsonString) =>
+                        {
+                            try
+                            {
+                                logger.LogInfo($"HubService receiving {jsonString}");
+
+                                var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
+
+                                if (data != null)
+                                {
+                                    hubEvent.Value.Item2(eventAggregator, data);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                logger.LogError(ex);
+                            }
+                        }));
                 }
 
                 hubConnection.Closed += HubConnection_Closed;
@@ -67,47 +86,25 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        private void HandleEvents(string jsonString, KeyValuePair<string, (Type, Action<IEventAggregator, object>)> hubEvent)
-        {
-            try
-            {
-                logger.LogInfo($"HubService receiving {jsonString}");
-
-                var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
-
-                if (data != null)
-                {
-                    hubEvent.Value.Item2(eventAggregator, data);
-                }
-            }
-            catch (Exception ex)
-            {
-                logger.LogError(ex);
-            }
-        }
-
-        public async Task Reconnect()
-        {
-            try
-            {
-                if (hubConnection.State == HubConnectionState.Disconnected)
-                {
-                    await hubConnection.StartAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception ex)
-            {
-                await logger.LogErrorAsync($"HubService Reconnect exception {ex.Message}", ex).ConfigureAwait(false);
-            }
-        }
-
         private async Task HubConnection_Closed(Exception arg)
         {
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
 
             await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", ex).ConfigureAwait(false);
+            await StopCurrentConnection();
+            await Start();
+        }
 
-            await hubConnection.StartAsync().ConfigureAwait(false);
+        private async Task StopCurrentConnection()
+        {
+            try
+            {
+                await hubConnection.StopAsync();
+            }
+            catch (Exception disposeException)
+            {
+                await logger.LogErrorAsync(disposeException).ConfigureAwait(false);
+            }
         }
     }
 }
