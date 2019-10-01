@@ -188,7 +188,9 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         private async Task LoadMatchesAsync(bool getLatestData = false)
         {
-            var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false)).ToList();
+            var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)
+                    .ConfigureAwait(false))
+                    ?.ToList();
 
             if (HasNoMatchData(matches))
             {
@@ -223,8 +225,9 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData).ConfigureAwait(false))
-                    .ToList();
+                var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)
+                        .ConfigureAwait(false))
+                        ?.ToList();
 
                 UpdateMatchItemSource(matches);
             }
