@@ -11,7 +11,6 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
             this.BackgroundColor = UIColor.Clear;
-            this.ScalesPageToFit = true;
         }
     }
 }

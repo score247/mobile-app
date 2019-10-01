@@ -19,8 +19,8 @@
                     </ResourceDictionary>
                 </StackLayout.Resources>
 
-                <RelativeLayout Style="{StaticResource MatchBallTrackerContentLayout}">
-                    <FlexLayout Style="{StaticResource MatchBallTrackerWebViewContainer}">
+                <RelativeLayout Style="{StaticResource MatchBallTrackerContentLayout}" BackgroundColor="Black">
+                    <FlexLayout Style="{StaticResource MatchBallTrackerWebViewContainer}" BackgroundColor="Black">
                         <WebView
                         IsVisible="{Binding TrackerVisible}"
                         Source="{Binding WidgetContent}"
@@ -30,7 +30,7 @@
                     <FlexLayout
                         Style="{StaticResource Group}"
                         IsVisible="{Binding TrackerHidden}">                        
-                        <Label Text="View Ball Tracker" Style="{StaticResource GroupName}" />
+                        <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
                         <Button
                             Style="{StaticResource MatchBallTrackerExpandIcon}"
                             Command="{Binding OnExpandTracker}"/>
