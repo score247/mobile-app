@@ -37,7 +37,7 @@
         public bool HasTrackerData { get; set; }
 
         public bool NoData { get; set; }
-
+        
         public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);        
 
         public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);        
@@ -50,7 +50,7 @@
             {
                 var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
 
-                var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");
+                var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");                
 
                 WidgetContent = new HtmlWebViewSource
                 {

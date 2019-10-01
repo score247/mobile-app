@@ -205,7 +205,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage);
+            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage, forceFetchNewData:true);
 
             var viewModels = new List<TabItemViewModel>();
 

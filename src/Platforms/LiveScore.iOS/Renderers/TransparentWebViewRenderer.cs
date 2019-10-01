@@ -11,7 +11,9 @@ namespace LiveScore.iOS.Renderers
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
-            this.BackgroundColor = UIColor.Clear;
+
+            Opaque = false;
+            BackgroundColor = UIColor.Clear;            
         }
     }
 }
