@@ -86,7 +86,11 @@ namespace LiveScore.ViewModels
 
             EventAggregator
                 .GetEvent<ConnectionChangePubSubEvent>()
-                .Subscribe(OnConnectionChanged);
+                .Unsubscribe(OnConnectionChanged);
+
+            EventAggregator
+                .GetEvent<ConnectionTimeoutPubSubEvent>()
+                .Unsubscribe(OnConnectionTimeout);
         }
     }
 }
