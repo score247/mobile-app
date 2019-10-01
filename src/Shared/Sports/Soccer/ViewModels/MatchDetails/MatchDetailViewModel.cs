@@ -26,6 +26,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using LiveScore.Core.PubSubEvents.Matches;
     using LiveScore.Core.PubSubEvents.Teams;
     using LiveScore.Core.ViewModels;
+    using LiveScore.Soccer.Services;
     using LiveScore.Soccer.Views.Templates.DetailH2H;
     using LiveScore.Soccer.Views.Templates.DetailSocial;
     using LiveScore.Soccer.Views.Templates.DetailTable;
@@ -49,13 +50,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private readonly Func<string,string> buildFlagUrlFunc;
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
- 
-        public MatchDetailViewModel(
+
+        private readonly IMatchInfoService matchInfoService;
+
+        public MatchDetailViewModel(           
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
+            matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
+
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(Constants.BuildFlagUrlFunctionName);
@@ -74,13 +79,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; private set; }
 
-        public override void Initialize(INavigationParameters parameters)
+        public async override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
-            {
+            {               
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
+
+                var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage);
             }
 
             SubscribeEvents();

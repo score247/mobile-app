@@ -26,11 +26,16 @@ namespace LiveScore.Soccer.Services
 
         [Get("/soccer/{language}/matches/live/count")]
         Task<int> GetLiveMatchCount(string language);
+
+        [Get("/soccer/{language}/matches/{matchId}/coverage")]
+        Task<MatchCoverage> GetMatchCoverage(string matchId, string language);
     }
 
     public interface IMatchInfoService
     {
         Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
+
+        Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false);
     }
 
     public class MatchService : BaseService, IMatchService, IMatchInfoService
@@ -151,5 +156,29 @@ namespace LiveScore.Soccer.Services
         [Time]
         private Task<int> GetLiveMatchCountFromApi(string language)
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatchCount(language));
+
+        public async Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false)
+        {
+            try
+            {
+                var cacheKey = $"Match:{matchId}:{language}:coverage";
+
+                return await cacheManager.GetOrSetAsync(
+                    cacheKey,
+                    () => GetMatchCoverageFromApi(matchId, language.DisplayName),
+                    CacheDuration.Short, forceFetchNewData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return new MatchCoverage { MatchId = matchId };
+            }
+        }
+
+        [Time]
+        private Task<MatchCoverage> GetMatchCoverageFromApi(string matchId, string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCoverage(matchId, language));
     }
 }
