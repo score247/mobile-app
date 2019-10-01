@@ -19,7 +19,7 @@
     public class ApiPolicy : IApiPolicy
     {
         private const int DefaultCount = 2;
-        private const int TimeoutSeconds = 2;
+        private const int TimeoutSeconds = 10;
         private const int DefaultPow = 2;
 
         // Handle both exceptions and return values in one policy

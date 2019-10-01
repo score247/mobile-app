@@ -37,6 +37,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Refit;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -52,6 +53,7 @@ namespace LiveScore
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
         private readonly List<IHubService> hubServices = new List<IHubService>();
+        private INetworkConnectionManager networkConnectionManager;
 
 
         public App() : this(null)
@@ -81,12 +83,12 @@ namespace LiveScore
 
             logService.Init(Configuration.SentryDsn, Configuration.Environment);
 
-            _ = RegisterAndStartEventHubs(Container);
+            _ = StartEventHubs();
 
             StartGlobalTimer();
-            // NavigationService.NavigateAsync(nameof(MainView) + "/" + nameof(MenuTabbedView), animated: false).ConfigureAwait(false);
 
-            Container.Resolve<IConnectionStatusManager>().StartListen();
+            networkConnectionManager = Container.Resolve<INetworkConnectionManager>();
+            networkConnectionManager.StartListen();
         }
 
         protected override void ConfigureViewModelLocator()
@@ -123,7 +125,7 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-            containerRegistry.RegisterSingleton<IConnectionStatusManager, ConnectionStatusManager>();
+            containerRegistry.RegisterSingleton<INetworkConnectionManager, NetworkConnectionManager>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
             containerRegistry.RegisterInstance(new RefitSettings
             {
@@ -134,7 +136,7 @@ namespace LiveScore
                 => string.IsNullOrWhiteSpace(countryCode) 
                     ? "images/flag_league/default_flag.svg"
                     : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg", 
-                Constants.BuildFlagUrlFunctionName);
+                FuncNameConstants.BuildFlagUrlFuncName);
 
             CompositeResolver.RegisterAndSetAsDefault(
                 SoccerModelResolver.Instance,
@@ -165,20 +167,20 @@ namespace LiveScore
             moduleCatalog.AddModule<MenuModule>();
         }
 
-        private async Task RegisterAndStartEventHubs(IContainerProvider container)
+        private async Task StartEventHubs()
         {
+            hubServices.Clear();
             var soccerHubService = new SoccerHubService(
-                container.Resolve<IHubConnectionBuilder>(),
+                Container.Resolve<IHubConnectionBuilder>(),
                 Configuration.SignalRHubEndPoint,
-                container.Resolve<ILoggingService>(),
-                container.Resolve<IEventAggregator>());
+                Container.Resolve<ILoggingService>(),
+                Container.Resolve<IEventAggregator>());
 
             hubServices.Add(soccerHubService);
 
-            foreach (var hubService in hubServices.Where(hubService => hubService != null))
-            {
-                await hubService.Start().ConfigureAwait(false);
-            }
+            await Task
+                .WhenAll(hubServices.Select(hubService => hubService.Start()))
+                .ConfigureAwait(false);
         }
 
         protected override void OnSleep()
@@ -192,10 +194,7 @@ namespace LiveScore
         {
             Debug.WriteLine("OnResume");
 
-            foreach (var hubService in hubServices.Where(hubService => hubService != null))
-            {
-                await hubService.Reconnect().ConfigureAwait(false);
-            }
+            await StartEventHubs();
 
             base.OnResume();
         }
@@ -204,8 +203,11 @@ namespace LiveScore
         {
             Device.StartTimer(TimeSpan.FromMinutes(1), () =>
             {
-                var eventAggregator = Container.Resolve<IEventAggregator>();
-                eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();
+                if (networkConnectionManager.IsConnectionOK())
+                {
+                    var eventAggregator = Container.Resolve<IEventAggregator>();
+                    eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();
+                }
 
                 return true;
             });

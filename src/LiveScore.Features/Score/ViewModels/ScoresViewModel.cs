@@ -58,7 +58,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
 
-        public override async void OnResume()
+        public override async void OnResumeWhenNetworkOK()
         {
             var todayItem = ScoreItemSources[TodayDateBarItemIndex];
 
@@ -69,7 +69,7 @@ namespace LiveScore.Features.Score.ViewModels
             else
             {
                 await Task.Run(() => GetLiveMatchCount());
-                SelectedScoreItem?.OnResume();
+                SelectedScoreItem?.OnResumeWhenNetworkOK();
             }
         }
 

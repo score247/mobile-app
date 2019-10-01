@@ -86,28 +86,25 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task Reconnect()
-        {
-            try
-            {
-                if (hubConnection.State == HubConnectionState.Disconnected)
-                {
-                    await hubConnection.StartAsync().ConfigureAwait(false);
-                }
-            }
-            catch (Exception ex)
-            {
-                await logger.LogErrorAsync($"HubService Reconnect exception {ex.Message}", ex).ConfigureAwait(false);
-            }
-        }
-
         private async Task HubConnection_Closed(Exception arg)
         {
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
 
             await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", ex).ConfigureAwait(false);
+            await StopCurrentConnection();
+            await Start();
+        }
 
-            await hubConnection.StartAsync().ConfigureAwait(false);
+        private async Task StopCurrentConnection()
+        {
+            try
+            {
+                await hubConnection.StopAsync();
+            }
+            catch (Exception disposeException)
+            {
+                await logger.LogErrorAsync(disposeException).ConfigureAwait(false);
+            }
         }
     }
 }

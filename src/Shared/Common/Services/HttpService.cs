@@ -10,11 +10,14 @@
 
     public class HttpService : IHttpService
     {
+        private const int RequestTimeoutSeconds = 10;
+
         public HttpService(Uri baseUri)
         {
             HttpClient = new HttpClient
             {
-                BaseAddress = baseUri
+                BaseAddress = baseUri,
+                Timeout = TimeSpan.FromSeconds(RequestTimeoutSeconds)
             };
         }
 

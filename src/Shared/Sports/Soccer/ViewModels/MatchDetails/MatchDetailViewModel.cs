@@ -63,7 +63,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
-            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(Constants.BuildFlagUrlFunctionName);
+            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFuctionTabTapped);
         }
 
@@ -93,11 +93,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             SubscribeEvents();
         }
 
-        public override void OnResume()
+        public override void OnResumeWhenNetworkOK()
         {
-            tabItemViewModels[selectedTabItem].OnResume();
+            tabItemViewModels[selectedTabItem].OnResumeWhenNetworkOK();
 
-            base.OnResume();
+            base.OnResumeWhenNetworkOK();
         }
 
         public override void OnSleep()

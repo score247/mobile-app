@@ -50,7 +50,7 @@ namespace LiveScore.Core.Tests.ViewModels
         public void OnResume_StateUnderTest_ExpectedBehavior()
         {
             // Act
-            viewModel.OnResume();
+            viewModel.OnResumeWhenNetworkOK();
 
             // Assert
             Assert.True(true);

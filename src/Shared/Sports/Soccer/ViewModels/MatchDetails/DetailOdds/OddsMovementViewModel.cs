@@ -110,7 +110,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        public override async void OnResume()
+        public override async void OnResumeWhenNetworkOK()
         {
             Debug.WriteLine("OddsMovementViewModel OnResume");
 

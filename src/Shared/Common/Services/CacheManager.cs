@@ -26,31 +26,43 @@
     {
         private readonly ICacheService cacheService;
         private readonly IList<string> cachedKeys;
+        private readonly INetworkConnectionManager networkConnectionManager;
 
-        public CacheManager(ICacheService cacheService)
+        public CacheManager(
+            ICacheService cacheService, 
+            INetworkConnectionManager networkConnectionManager)
         {
             this.cacheService = cacheService;
+            this.networkConnectionManager = networkConnectionManager;
             cachedKeys = new List<string>();
         }
 
         // TODO: refactor later
         public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options, bool getLatestData = false)
         {
-            if (getLatestData)
+            if (networkConnectionManager.IsConnectionOK())
             {
-                var data = await factory.Invoke().ConfigureAwait(false);
+                if (getLatestData)
+                {
+                    var data = await factory.Invoke().ConfigureAwait(false);
 
-                await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                    await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                }
+
+                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
+
+                if (Equals(dataFromCache, default(T)))
+                {
+                    var data = await factory.Invoke().ConfigureAwait(false);
+
+                    await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                }
+            }
+            else
+            {
+                networkConnectionManager.PublishNetworkConnectionEvent();
             }
 
-            var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
-
-            if (Equals(dataFromCache, default(T)))
-            {
-                var data = await factory.Invoke().ConfigureAwait(false);
-
-                await SetCacheAsync(key, data, options).ConfigureAwait(false);
-            }
 
             return await cacheService.GetAsync<T>(key).ConfigureAwait(false);
         }

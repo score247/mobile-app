@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Common
 {
-    public static class Constants
+    public static class FuncNameConstants
     {
-        public const string BuildFlagUrlFunctionName = "BuildFlagUrl";
+        public const string BuildFlagUrlFuncName = "BuildFlagUrl";
     }
 }

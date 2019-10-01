@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
@@ -31,6 +32,7 @@ namespace LiveScore.ViewModels
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
 
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
+            eventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
         }
 
         public bool IsDemo { get; set; }
@@ -44,8 +46,6 @@ namespace LiveScore.ViewModels
 
         private async Task Navigate(string page)
         {
-            await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
-
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
         }
 
@@ -71,6 +71,13 @@ namespace LiveScore.ViewModels
             {
                 await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
             }
+        }
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+        private async void OnConnectionTimeout()
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            await PopupNavigation.Instance.PushAsync(new NetworkConnectionError(AppResources.ConnectionTimeoutMessage));
         }
 
         public override void Destroy()

@@ -43,7 +43,7 @@ namespace LiveScore.Features.Score.ViewModels
             MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
-            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(Constants.BuildFlagUrlFunctionName);
+            buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
@@ -73,7 +73,7 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         [Time]
-        public override void OnResume()
+        public override void OnResumeWhenNetworkOK()
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
@@ -83,25 +83,45 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         public override void OnAppearing()
         {
-            if (FirstLoad)
+            CheckNetworkAndRunAction(() =>
             {
-                FirstLoad = false;
+                if (FirstLoad)
+                {
+                    FirstLoad = false;
 
-                LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
+                    LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
+                }
+                else
+                {
+                    UpdateMatchesInBackgroundAsync().ConfigureAwait(false);
+                }
+            });
+        }
+
+        private void CheckNetworkAndRunAction(Action action)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                action();
             }
             else
             {
-                UpdateMatchesInBackgroundAsync().ConfigureAwait(false);
+                IsRefreshing = false;
+                networkConnectionManager.PublishNetworkConnectionEvent();
             }
         }
 
         private async Task OnRefreshAsync()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
+            if (networkConnectionManager.IsConnectionNotOK())
+            {
+                IsRefreshing = false;
+                networkConnectionManager.PublishNetworkConnectionEvent();
+                return;
+            }
 
-            await Task
-                .Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false))
-                .ConfigureAwait(false);
+            await Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false)).ConfigureAwait(false);
         }
 
         private async Task OnTapMatchAsync(MatchViewModel matchItem)

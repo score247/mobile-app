@@ -223,6 +223,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry, the request timed out. Please refresh the page..
+        /// </summary>
+        public static string ConnectionTimeoutMessage {
+            get {
+                return ResourceManager.GetString("ConnectionTimeoutMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delayed.
         /// </summary>
         public static string Delayed {

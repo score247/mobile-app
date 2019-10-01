@@ -12,7 +12,7 @@ namespace LiveScore.PerformanceProfilers
             //            .Create(DefaultConfig.Instance)
             //            .With(ConfigOptions.DisableOptimizationsValidator));
 
-            TestMatchMessagePack.GetMatchByDate();
+            //TestMatchMessagePack.GetMatchByDate();
         }
     }
 }

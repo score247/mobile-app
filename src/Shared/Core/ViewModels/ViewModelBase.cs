@@ -5,15 +5,19 @@ namespace LiveScore.Core.ViewModels
     using System;
     using System.Threading.Tasks;
     using Enumerations;
+    using LiveScore.Common;
     using LiveScore.Common.Services;
     using Prism.AppModel;
     using Prism.Events;
     using Prism.Navigation;
     using PropertyChanged;
+    using Xamarin.Essentials;
 
     [AddINotifyPropertyChangedInterface]
     public class ViewModelBase : MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
+        protected readonly INetworkConnectionManager networkConnectionManager;
+
         public ViewModelBase()
         {
         }
@@ -35,6 +39,7 @@ namespace LiveScore.Core.ViewModels
             DependencyResolver = dependencyResolver;
 
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
+            networkConnectionManager = DependencyResolver.Resolve<INetworkConnectionManager>();
 
             var settings = AppSettings.Current;
 
@@ -74,7 +79,14 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnResume()
         {
+            if(networkConnectionManager.IsConnectionOK())
+            {
+                OnResumeWhenNetworkOK();
+            }
         }
+
+        public virtual void OnResumeWhenNetworkOK()
+        { }
 
         public virtual void OnSleep()
         {
@@ -90,13 +102,21 @@ namespace LiveScore.Core.ViewModels
 
         protected virtual async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {
-            EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
-            IsBusy = showBusy;
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
+                IsBusy = showBusy;
 
-            await loadDataFunc().ConfigureAwait(false);
+                await loadDataFunc().ConfigureAwait(false);
+
+                EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
+            }
+            else
+            {
+                networkConnectionManager.PublishNetworkConnectionEvent();
+            }
 
             IsBusy = false;
-            EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
         }
 
         protected async Task NavigateToHome()
