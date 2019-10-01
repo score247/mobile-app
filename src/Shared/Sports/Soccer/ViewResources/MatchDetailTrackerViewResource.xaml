@@ -12,29 +12,32 @@
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
-    <Style x:Key="MatchBallTrackerExpandBox" TargetType="Frame">
+    <Style x:Key="MatchBallTrackerWebViewContainer" TargetType="FlexLayout">
+        <Setter Property="JustifyContent" Value="Center" />
+    </Style>
+    <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">
+        <Setter Property="WidthRequest" Value="370" />
+        <Setter Property="HeightRequest" Value="500" />
+    </Style>
+    <Style x:Key="MatchBallTrackerGroupIcon" BasedOn="{StaticResource ButtonIcon}" TargetType="Button">
         <Setter Property="HeightRequest" Value="22" />
         <Setter Property="WidthRequest" Value="22" />
         <Setter Property="BackgroundColor" Value="#fff" />
         <Setter Property="CornerRadius" Value="4" />
-    </Style>
-    <Style x:Key="MatchBallTrackerCollapseBox" BasedOn="{StaticResource MatchBallTrackerExpandBox}" TargetType="Frame">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="#0F111C" />
         <Setter Property="RelativeLayout.XConstraint" Value="{ConstraintExpression
                         Type=RelativeToParent,
                         Property=Width,
-                        Factor=0.84,
-                        Constant=26
+                        Factor=1,
+                        Constant=-30
                         }" />
         <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression
                         Type=RelativeToParent,
                         Property=Height,
                         Factor=0,
-                        Constant=18
+                        Constant=10
                         }" />
-    </Style>
-    <Style x:Key="MatchBallTrackerGroupIcon" TargetType="Button">               
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#0F111C" />
     </Style>
     <Style x:Key="MatchBallTrackerCollapseIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Button">
         <Setter Property="Text" Value="&#xe90c;" />
