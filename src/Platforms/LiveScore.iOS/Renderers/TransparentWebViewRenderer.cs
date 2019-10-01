@@ -2,6 +2,7 @@
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+
 [assembly: ExportRenderer(typeof(WebView), typeof(TransparentWebViewRenderer))]
 namespace LiveScore.iOS.Renderers
 {

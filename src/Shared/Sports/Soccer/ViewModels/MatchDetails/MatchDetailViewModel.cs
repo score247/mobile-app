@@ -6,6 +6,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Threading.Tasks;
     using Common.LangResources;
     using Core;
     using Core.Controls.TabStrip;
@@ -84,10 +85,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             if (parameters?["Match"] is IMatch match)
             {               
                 BuildGeneralInfo(match);
-                TabItems = new ObservableCollection<TabItemViewModel>(GenerateTabItemViewModels(MatchViewModel.Match));
+                TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
-
-                var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage);
             }
 
             SubscribeEvents();
@@ -204,8 +203,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             => MatchViewModel = new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator);
 
         [Time]
-        private List<TabItemViewModel> GenerateTabItemViewModels(IMatch match)
+        private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
+            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage);
+
             var viewModels = new List<TabItemViewModel>();
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
@@ -218,7 +219,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 {MatchDetailFunction.Stats, new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
                 {MatchDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
                 {MatchDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(match.Id, NavigationService, DependencyResolver, new TrackerTemplate()) }
+                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, new TrackerTemplate()) }
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;
