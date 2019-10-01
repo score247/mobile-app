@@ -29,10 +29,9 @@
             <Label
                 FontSize="13"
                 HorizontalOptions="Center"
-                Text="News is comming soon 111"
+                Text="News is comming soon"
                 TextColor="{StaticResource SecondTextColor}"
                 VerticalOptions="Center" /> 
-            <Button Text="Show Popup" Command="{Binding ShowPopUpCommand}" />
         </StackLayout>
 
     </ContentPage.Content>

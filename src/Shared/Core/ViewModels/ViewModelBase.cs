@@ -76,6 +76,9 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void Destroy()
         {
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Unsubscribe(OnConnectionChangedBase);
         }
 
         public virtual void OnResume()

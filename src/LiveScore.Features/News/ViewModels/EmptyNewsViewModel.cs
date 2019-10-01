@@ -17,15 +17,6 @@
             : base(navigationService, serviceLocator)
         {
             Title = "News";
-
-            ShowPopUpCommand = new DelegateAsyncCommand(OnShowPopup);
-        }
-
-        public DelegateAsyncCommand ShowPopUpCommand { get; }
-
-        private async Task OnShowPopup()
-        {
-            await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
         }
     }
 }

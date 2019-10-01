@@ -32,7 +32,7 @@ namespace LiveScore.ViewModels
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
 
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
-            eventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
+            EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
         }
 
         public bool IsDemo { get; set; }
