@@ -1,11 +1,18 @@
-﻿namespace LiveScore.Soccer.Models.Teams
-{
-    using LiveScore.Core.Models.Teams;
-    using PropertyChanged;
+﻿using LiveScore.Soccer.Models.Matches;
+using LiveScore.Core.Models.Teams;
+using PropertyChanged;
 
+namespace LiveScore.Soccer.Models.Teams
+{
     [AddINotifyPropertyChangedInterface]
     public class TeamStatistic : ITeamStatistic
     {
+        public TeamStatistic(byte redCards, byte yellowRedCards)
+        {
+            RedCards = redCards;
+            YellowRedCards = yellowRedCards;
+        }
+
         public byte Possession { get; set; }
 
         public byte FreeKicks { get; set; }

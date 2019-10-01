@@ -35,6 +35,12 @@
             BuildDisplayMatchStatus();
         }
 
+        public void UpdateMatch(IMatch match)
+        {
+            Match.UpdateMatch(match);
+            BuildDisplayMatchStatus();
+        }
+
         public void OnReceivedTeamStatistic(bool isHome, ITeamStatistic teamStatistic)
         {
             Match.UpdateTeamStatistic(teamStatistic, isHome);

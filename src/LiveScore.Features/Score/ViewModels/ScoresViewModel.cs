@@ -127,7 +127,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             ScoreItemSources = new ObservableCollection<ScoreItemViewModel>
             {
-                new LiveItemViewModel( NavigationService, DependencyResolver, EventAggregator)
+                new LiveItemViewModel(NavigationService, DependencyResolver, EventAggregator, ChangeLiveMatchCount)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
@@ -163,5 +163,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             LiveMatchCount = message.LiveMatchCount;
         }
+
+        private void ChangeLiveMatchCount(int liveMatchCount) => LiveMatchCount = liveMatchCount;
     }
 }

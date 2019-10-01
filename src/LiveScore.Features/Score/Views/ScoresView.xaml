@@ -80,7 +80,7 @@
                             <ActivityIndicator IsRunning="{Binding IsBusy}"
                                                IsVisible="{Binding IsBusy}"
                                                Style="{StaticResource CenterActivityIndicator}" />
-                            <Label IsVisible="{Binding HasNoData}"
+                            <Label IsVisible="{Binding NoData}"
                                    Text="{langs:Translate NoGames}"
                                    Style="{StaticResource NotificationLabel}" />
                             <customListView:CustomListView x:Name="LeagueTable"
@@ -101,6 +101,8 @@
                                                            RefreshControlColor="White"
                                                            SeparatorColor="{StaticResource LineColor}"
                                                            Style="{StaticResource ListViewHasBackground}"
+                                                           LoadMoreCommand="{Binding LoadMoreCommand}"
+                                                           TriggerLoadMoreIndex="4"
                                                            VerticalOptions="FillAndExpand">
                                 <x:Arguments>
                                     <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>

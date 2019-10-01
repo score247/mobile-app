@@ -1,10 +1,11 @@
-﻿namespace LiveScore.Core.Models.Matches
-{
-    using System;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Teams;
-    using MessagePack;
+﻿using LiveScore.Soccer.Models.Matches;
+using System;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
+using MessagePack;
 
+namespace LiveScore.Core.Models.Matches
+{
     [MessagePackObject(keyAsPropertyName: true)]
     public class TimelineEvent : ITimelineEvent
     {

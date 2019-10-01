@@ -179,6 +179,32 @@
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
+        public void UpdateMatch(IMatch match)
+        {
+            if (!(match is Match soccerMatch))
+            {
+                return;
+            }
+
+            EventStatus = soccerMatch.EventStatus;
+            MatchStatus = soccerMatch.MatchStatus;
+            MatchTime = soccerMatch.MatchTime;
+            MatchPeriods = soccerMatch.MatchPeriods;
+            HomeScore = soccerMatch.HomeScore;
+            AwayScore = soccerMatch.AwayScore;
+            WinnerId = soccerMatch.WinnerId;
+            AggregateWinnerId = soccerMatch.AggregateWinnerId;
+            AggregateHomeScore = soccerMatch.AggregateHomeScore;
+            AggregateAwayScore = soccerMatch.AggregateAwayScore;
+            LastTimelineType = soccerMatch.LastTimelineType;
+            StoppageTime = soccerMatch.StoppageTime;
+            InjuryTimeAnnounced = soccerMatch.InjuryTimeAnnounced;
+            HomeRedCards = soccerMatch.HomeRedCards;
+            HomeYellowRedCards = soccerMatch.HomeYellowRedCards;
+            AwayRedCards = soccerMatch.AwayRedCards;
+            AwayYellowRedCards = soccerMatch.AwayYellowRedCards;
+        }
+
         public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)
         {
             CurrentPeriodStartTime = currentPeriodStartTime;

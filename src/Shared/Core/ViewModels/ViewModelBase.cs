@@ -66,6 +66,10 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsNotComingSoon => !IsComingSoon;
 
+        public bool HasData { get; protected set; } = true;
+
+        public bool NoData => !HasData;
+
         public virtual void Initialize(INavigationParameters parameters)
         {
         }
@@ -107,13 +111,12 @@ namespace LiveScore.Core.ViewModels
                 await loadDataFunc().ConfigureAwait(false);
 
                 EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
+                IsBusy = false;
             }
             else
             {
                 networkConnectionManager.PublishNetworkConnectionEvent();
             }
-
-            IsBusy = false;
         }
 
         protected async Task NavigateToHome()

@@ -77,6 +77,8 @@
 
         DateTimeOffset ModifiedTime { get; }
 
+        void UpdateMatch(IMatch match);
+
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);

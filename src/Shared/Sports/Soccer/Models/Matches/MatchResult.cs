@@ -42,8 +42,8 @@
 
         internal MatchResult(MatchStatus eventStatus, MatchStatus matchStatus)
         {
-            this.EventStatus = eventStatus;
-            this.MatchStatus = matchStatus;
+            EventStatus = eventStatus;
+            MatchStatus = matchStatus;
         }
 
         internal static MatchResult MatchResult_EventNotStarted => new MatchResult
