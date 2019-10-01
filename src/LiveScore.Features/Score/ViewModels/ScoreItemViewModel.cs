@@ -55,7 +55,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DateTime SelectedDate { get; }
 
-        public bool HasNoData { get; private set; }
+        public bool HasNoData { get; protected set; }
 
         public bool IsRefreshing { get; set; }
 
@@ -229,6 +229,14 @@ namespace LiveScore.Features.Score.ViewModels
                         .ConfigureAwait(false))
                         ?.ToList();
 
+                if (HasNoMatchData(matches))
+                {
+                    MatchItemsSource.Clear();
+                    Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+
+                    return;
+                }
+
                 UpdateMatchItemSource(matches);
             }
             catch (Exception ex)
@@ -243,14 +251,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual void UpdateMatchItemSource(List<IMatch> matches)
         {
-            if (HasNoMatchData(matches))
-            {
-                MatchItemsSource.Clear();
-                Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
-
-                return;
-            }
-
             var matchViewModels = MatchItemsSource?.SelectMany(g => g).ToList();
 
             foreach (var match in matches)

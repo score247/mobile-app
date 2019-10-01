@@ -41,16 +41,14 @@ namespace LiveScore.Features.Score.ViewModels
         protected override void UpdateMatchItemSource(List<IMatch> matches)
         {
             var currentMatches = MatchItemsSource
-                .SelectMany(g => g)
-                .Select(vm => vm.Match).ToList();
+                    .SelectMany(g => g)
+                    .Select(vm => vm.Match)
+                    .ToList();
 
-            if (matches.Count < currentMatches.Count)
-            {
-                var removedMatchIds = currentMatches.Except(matches).Select(m => m.Id);
+            var modifiedMatches = currentMatches.Intersect(matches).ToList();
+            var removedMatchIds = currentMatches.Except(modifiedMatches).Select(m => m.Id);
 
-                RemoveMatchesFromItemSource(removedMatchIds.ToArray());
-            }
-
+            RemoveMatchesFromItemSource(removedMatchIds.ToArray());
             base.UpdateMatchItemSource(matches);
         }
 
@@ -64,6 +62,8 @@ namespace LiveScore.Features.Score.ViewModels
             RemoveMatchesFromItemSource(message.RemoveMatchIds);
 
             base.UpdateMatchItemSource(message.NewMatches.ToList());
+
+            HasNoData = !MatchItemsSource.Any();
         }
 
         private void RemoveMatchesFromItemSource(string[] removedMatchIds)

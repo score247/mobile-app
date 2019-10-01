@@ -12,6 +12,7 @@
              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mvvm:ViewModelLocator.AutowireViewModel="True"
+             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
@@ -80,7 +81,7 @@
                                                IsVisible="{Binding IsBusy}"
                                                Style="{StaticResource CenterActivityIndicator}" />
                             <Label IsVisible="{Binding HasNoData}"
-                                   Text="There is no matches"
+                                   Text="{langs:Translate NoGames}"
                                    Style="{StaticResource NotificationLabel}" />
                             <customListView:CustomListView x:Name="LeagueTable"
                                                            AutomationId="LeagueTableId"

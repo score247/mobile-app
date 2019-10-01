@@ -403,6 +403,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no live games currently in progress.
+        /// </summary>
+        public static string NoGames {
+            get {
+                return ResourceManager.GetString("NoGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decimal.
         /// </summary>
         public static string OddsTypeDecimal {

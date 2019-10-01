@@ -300,4 +300,7 @@
   <data name="ConnectionLostMessage" xml:space="preserve">
     <value>The network connection is lost. Please try again later.</value>
   </data>
+  <data name="NoGames" xml:space="preserve">
+    <value>There are no live games currently in progress</value>
+  </data>
 </root>
