@@ -10,7 +10,7 @@
 
     <ContentPage.Content>
 
-        <StackLayout>
+        <StackLayout VerticalOptions="EndAndExpand">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -22,23 +22,11 @@
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <Grid Style="{StaticResource NetworkConnectionErrorLayout}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="52" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
                 <BoxView Style="{StaticResource NetworkConnectionErrorLine}" />
-                <StackLayout Style="{StaticResource NetworkConnectionErrorContentLayout}">
-                    <Button Style="{StaticResource NetworkConnectionErrorSorryIcon}"  />
-                    <FlexLayout Style="{StaticResource NetworkConnectionErrorMainContentLayout}">
-                        <Label Text="Sorry!!!" Style="{StaticResource NetworkConnectionErrorHeaderLabel}" />
-                        <Label Text="{Binding ErrorMessage}" Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
-                    </FlexLayout>
-                </StackLayout>
-            </Grid>
+                <Button Style="{StaticResource NetworkConnectionIcon}" />
+                <Label Text="{Binding ErrorMessage}" Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
+            </FlexLayout>
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>
