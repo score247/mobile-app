@@ -65,6 +65,9 @@
       <Compile Update="ViewResources\MatchHeaderViewResource.xaml.cs">
         <DependentUpon>MatchHeaderViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
+        <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Update="Views\NetworkConnectionError.xaml">

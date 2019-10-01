@@ -5,24 +5,40 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              mc:Ignorable="d"
-             
+             xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
              x:Class="LiveScore.Core.Views.NetworkConnectionError">
+
     <ContentPage.Content>
-        <StackLayout 
-            VerticalOptions="EndAndExpand" 
-            HorizontalOptions="FillAndExpand" 
-            Margin="0,0,0,50" >
+
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:NetworkConnectionErrorViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
             <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Tapped="OnTapped"/>
+                <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <Frame BackgroundColor="Silver">
-                <StackLayout Spacing="20">
-                    <Label HorizontalOptions="Center" 
-                           Text="{Binding ErrorMessage}" 
-                           FontSize="16">
-                    </Label>
+            <Grid Style="{StaticResource NetworkConnectionErrorLayout}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <BoxView Style="{StaticResource NetworkConnectionErrorLine}" />
+                <StackLayout Style="{StaticResource NetworkConnectionErrorContentLayout}">
+                    <Button Style="{StaticResource NetworkConnectionErrorSorryIcon}"  />
+                    <FlexLayout Style="{StaticResource NetworkConnectionErrorMainContentLayout}">
+                        <Label Text="Sorry!!!" Style="{StaticResource NetworkConnectionErrorHeaderLabel}" />
+                        <Label Text="{Binding ErrorMessage}" Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
+                    </FlexLayout>
                 </StackLayout>
-            </Frame>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>
