@@ -16,7 +16,7 @@
         <Setter Property="JustifyContent" Value="Center" />
     </Style>
     <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">
-        <Setter Property="HorizontalOptions" Value="Fill"/>
+        <Setter Property="HorizontalOptions" Value="Fill" />
         <Setter Property="WidthRequest" Value="1000" />
         <Setter Property="HeightRequest" Value="500" />
     </Style>
@@ -31,7 +31,7 @@
                         Type=RelativeToParent,
                         Property=Width,
                         Factor=1,
-                        Constant=-30
+                        Constant=-35
                         }" />
         <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression
                         Type=RelativeToParent,
