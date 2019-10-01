@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ImTools;
 using LiveScore.Core;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
@@ -62,8 +63,6 @@ namespace LiveScore.Features.Score.ViewModels
             RemoveMatchesFromItemSource(message.RemoveMatchIds);
 
             base.UpdateMatchItemSource(message.NewMatches.ToList());
-
-            HasNoData = !MatchItemsSource.Any();
         }
 
         private void RemoveMatchesFromItemSource(string[] removedMatchIds)

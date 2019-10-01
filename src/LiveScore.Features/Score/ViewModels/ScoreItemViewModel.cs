@@ -212,12 +212,8 @@ namespace LiveScore.Features.Score.ViewModels
                     .ConfigureAwait(false))
                     ?.ToList();
 
-            if (HasNoMatchData(matches))
-            {
-                return;
-            }
-
             InitMatchItemSource(matches);
+            Device.BeginInvokeOnMainThread(() => HasNoData = MatchItemsSource?.Any() != true);
         }
 
         private void InitMatchItemSource(IEnumerable<IMatch> matches)
@@ -227,8 +223,8 @@ namespace LiveScore.Features.Score.ViewModels
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
-            Device
-                .BeginInvokeOnMainThread(() => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
+            Device.BeginInvokeOnMainThread(()
+                => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(groups));
         }
 
         private async Task UpdateMatchesInBackgroundAsync()
@@ -248,14 +244,6 @@ namespace LiveScore.Features.Score.ViewModels
                 var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)
                         .ConfigureAwait(false))
                         ?.ToList();
-
-                if (HasNoMatchData(matches))
-                {
-                    MatchItemsSource.Clear();
-                    Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
-
-                    return;
-                }
 
                 UpdateMatchItemSource(matches);
             }
@@ -289,6 +277,8 @@ namespace LiveScore.Features.Score.ViewModels
                     Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
                 }
             }
+
+            Device.BeginInvokeOnMainThread(() => HasNoData = MatchItemsSource?.Any() != true);
         }
 
         protected virtual void AddNewMatchToItemSource(IMatch newMatch)
@@ -325,13 +315,6 @@ namespace LiveScore.Features.Score.ViewModels
                 // TODO: Should fix: This code does not move favorite/major leagues to top
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource.Add(group));
             }
-        }
-
-        private bool HasNoMatchData(IEnumerable<IMatch> matches)
-        {
-            HasNoData = matches?.Any() != true;
-
-            return HasNoData;
         }
     }
 }
