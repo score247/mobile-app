@@ -212,6 +212,13 @@ namespace LiveScore.Features.Score.ViewModels
                     .ConfigureAwait(false))
                     ?.ToList();
 
+            HasNoData = matches?.Any() != true;
+
+            if (HasNoData)
+            {
+                return;
+            }
+
             InitMatchItemSource(matches);
             Device.BeginInvokeOnMainThread(() => HasNoData = MatchItemsSource?.Any() != true);
         }
@@ -219,7 +226,8 @@ namespace LiveScore.Features.Score.ViewModels
         private void InitMatchItemSource(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches
-                .Select(match => new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
+                .Select(match =>
+                    new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
             var groups = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
@@ -244,6 +252,14 @@ namespace LiveScore.Features.Score.ViewModels
                 var matches = (await LoadMatchesFromServiceAsync(SelectedDate, getLatestData)
                         .ConfigureAwait(false))
                         ?.ToList();
+
+                HasNoData = matches?.Any() != true;
+
+                if (HasNoData)
+                {
+                    Device.BeginInvokeOnMainThread(() => IsRefreshing = false);
+                    return;
+                }
 
                 UpdateMatchItemSource(matches);
             }
@@ -277,8 +293,6 @@ namespace LiveScore.Features.Score.ViewModels
                     Device.BeginInvokeOnMainThread(() => matchViewModel.BuildMatch(match));
                 }
             }
-
-            Device.BeginInvokeOnMainThread(() => HasNoData = MatchItemsSource?.Any() != true);
         }
 
         protected virtual void AddNewMatchToItemSource(IMatch newMatch)

@@ -62,6 +62,13 @@ namespace LiveScore.Features.Score.ViewModels
 
             RemoveMatchesFromItemSource(message.RemoveMatchIds);
 
+            HasNoData = !message.NewMatches.Any() && !MatchItemsSource.Any();
+
+            if (HasNoData)
+            {
+                return;
+            }
+
             base.UpdateMatchItemSource(message.NewMatches.ToList());
         }
 
