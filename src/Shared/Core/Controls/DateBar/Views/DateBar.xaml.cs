@@ -154,7 +154,7 @@
                 }
             };
 
-            AbsoluteLayout.SetLayoutBounds(liveCountFrame, new Rectangle(0.5, 0.5, 16, 16));
+            AbsoluteLayout.SetLayoutBounds(liveCountFrame, new Rectangle(0.5, 0.5, 22, 22));
             AbsoluteLayout.SetLayoutFlags(liveCountFrame, AbsoluteLayoutFlags.PositionProportional);
 
             liveLayout.Children.Add(liveIcon);

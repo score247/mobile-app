@@ -7,7 +7,12 @@
 
     <Color x:Key="YellowCardColor">#D9B600</Color>
     <Color x:Key="RedCardColor">#FF3030</Color>
-
+    <Style x:Key="MatchBallTrackerGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource FourthAccentColor}" />
+        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+    </Style>
     <Style x:Key="MatchBallTrackerContentLayout" TargetType="RelativeLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="HorizontalOptions" Value="Center" />
@@ -31,7 +36,7 @@
                         Type=RelativeToParent,
                         Property=Width,
                         Factor=1,
-                        Constant=-35
+                        Constant=-31
                         }" />
         <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression
                         Type=RelativeToParent,

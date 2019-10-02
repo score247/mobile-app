@@ -36,7 +36,7 @@
                     </FlexLayout>
 
                     <FlexLayout
-                        Style="{StaticResource Group}"
+                        Style="{StaticResource MatchBallTrackerGroup}"
                         IsVisible="{Binding TrackerHidden}">                        
                         <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
                         <Button
