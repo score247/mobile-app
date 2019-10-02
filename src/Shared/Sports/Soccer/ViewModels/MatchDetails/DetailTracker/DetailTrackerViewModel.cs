@@ -5,6 +5,7 @@
     using LiveScore.Common.PlatformDependency;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
+    using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Models.Matches;
     using Prism.Commands;
     using Prism.Navigation;
@@ -16,8 +17,7 @@
         private const string ReplacePrefix = "input-match-id";
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
-
-        private const string Widget = "https://widgets.sir.sportradar.com/sportradar/widgetloader";
+        
         private const string LanguageCode = "en";
 
         private readonly MatchCoverage matchCoverage;
@@ -61,7 +61,7 @@
             {
                 WidgetContent = new HtmlWebViewSource
                 {
-                    Html = await GenerateTrackerWidget()
+                    Html = await GenerateTrackerWidget(matchCoverage.Coverage)
                 };
 
                 HasTrackerData = true;
@@ -73,14 +73,14 @@
             }
         }
 
-        private async Task<string> GenerateTrackerWidget()
+        private async Task<string> GenerateTrackerWidget(Coverage coverage)
         {
             var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
 
             var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");
 
             content = content.Replace(ReplacePrefix, formatMatchId);
-            content = content.Replace(WidgetPrefix, Widget);
+            content = content.Replace(WidgetPrefix, coverage.TrackerWidgetLink);
             content = content.Replace(LanguagePrefix, LanguageCode);
 
             return content;
