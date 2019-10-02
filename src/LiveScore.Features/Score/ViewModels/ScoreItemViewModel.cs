@@ -237,7 +237,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var matches = (await LoadMatchesFromServiceAsync(getLatestData))?.ToList();
 
-            if (matches?.Any() != true)
+            if (matches?.Any() != true && MatchItemsSource?.Any() != true)
             {
                 HasData = false;
                 return;
