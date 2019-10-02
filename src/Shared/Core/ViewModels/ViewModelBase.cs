@@ -78,7 +78,7 @@ namespace LiveScore.Core.ViewModels
         {
         }
 
-        public virtual void OnResume()
+        public void OnResume()
         {
             if (networkConnectionManager.IsConnectionOK())
             {
@@ -99,7 +99,6 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnDisappearing()
         {
-            
         }
 
         protected virtual async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
@@ -128,6 +127,11 @@ namespace LiveScore.Core.ViewModels
             {
                 await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        public virtual Task OnNetworkReconnected()
+        {
+            return Task.CompletedTask;
         }
     }
 }

@@ -77,6 +77,11 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
+        public override Task OnNetworkReconnected()
+        {
+            return SelectedScoreItem?.OnNetworkReconnected();
+        }
+
         public override void OnSleep()
         {
             SelectedScoreItem?.OnSleep();
@@ -198,7 +203,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (isConnected)
             {
-                OnResumeWhenNetworkOK();
+                OnNetworkReconnected();
             }
         }
     }
