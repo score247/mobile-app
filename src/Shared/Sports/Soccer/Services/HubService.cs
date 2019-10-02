@@ -116,8 +116,16 @@ namespace LiveScore.Soccer.Services
             {
                 try
                 {
-                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
-                    await hubConnection.StartAsync();
+                    if (hubConnection.State == HubConnectionState.Disconnected)
+                    {
+                        await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
+                        await hubConnection.StartAsync();
+
+                        if (hubConnection.State == HubConnectionState.Connected)
+                        {
+                            break;
+                        }
+                    }
                 }
                 catch (Exception startException)
                 {

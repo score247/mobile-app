@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.DateBar.EventArgs;
 using LiveScore.Core.PubSubEvents.Matches;
@@ -92,6 +93,11 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             secondLoad = true;
+
+            if (EventAggregator != null)
+            {
+                EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
+            }
         }
 
         public override void OnDisappearing()
@@ -99,6 +105,13 @@ namespace LiveScore.Features.Score.ViewModels
             base.OnDisappearing();
 
             SelectedScoreItem?.OnDisappearing();
+
+            if (EventAggregator != null)
+            {
+                EventAggregator
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
+            }
         }
 
         public override void Destroy()
@@ -177,5 +190,16 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         private void ChangeLiveMatchCount(int liveMatchCount) => LiveMatchCount = liveMatchCount;
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
+        private void OnConnectionChangedBase(bool isConnected)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            if (isConnected)
+            {
+                OnResumeWhenNetworkOK();
+            }
+        }
     }
 }
