@@ -60,8 +60,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
+        public override async Task OnNetworkReconnected()
+        {
+            await LoadMatchInfoData();
+        }
+
         [Time]
         public override async void OnAppearing()
+        {
+            await LoadMatchInfoData();
+        }
+
+        private async Task LoadMatchInfoData()
         {
             try
             {

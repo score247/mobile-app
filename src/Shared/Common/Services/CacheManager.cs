@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Fanex.Caching;
 
@@ -44,18 +45,42 @@
             {
                 if (getLatestData)
                 {
-                    var data = await factory.Invoke().ConfigureAwait(false);
+                    try
+                    {
+                        var data = await factory.Invoke().ConfigureAwait(false);
 
-                    await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                        await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                    }
+                    catch(Exception ex)
+                    {
+                        if (ex is TaskCanceledException)
+                        {
+                            networkConnectionManager.PublishConnectionTimeoutEvent();
+                        }
+
+                        throw;
+                    }
                 }
 
                 var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
 
                 if (Equals(dataFromCache, default(T)))
                 {
-                    var data = await factory.Invoke().ConfigureAwait(false);
+                    try
+                    {
+                        var data = await factory.Invoke().ConfigureAwait(false);
 
-                    await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                        await SetCacheAsync(key, data, options).ConfigureAwait(false);
+                    }
+                    catch (Exception ex)
+                    {
+                        if (ex is TaskCanceledException)
+                        {
+                            networkConnectionManager.PublishConnectionTimeoutEvent();
+                        }
+
+                        throw;
+                    }
                 }
             }
             else

@@ -14,6 +14,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using Core;
     using Enumerations;
     using LiveScore.Common.Extensions;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.PubSubEvents.Odds;
@@ -83,6 +84,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 Title = $"{bookmaker?.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
 
                 HeaderTemplate = new BaseMovementHeaderViewModel(betType, true, NavigationService, DependencyResolver).CreateTemplate();
+
+                if (EventAggregator != null)
+                {
+                    EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
+                }
             }
             catch (Exception ex)
             {
@@ -110,6 +116,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public override async void OnResumeWhenNetworkOK()
         {
+            await ReloadPage();
+        }
+
+        private async Task ReloadPage()
+        {
             Debug.WriteLine("OddsMovementViewModel OnResume");
 
             if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
@@ -130,6 +141,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             Debug.WriteLine("OddsMovementViewModel Destroy");
 
             eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
+
+            if (EventAggregator != null)
+            {
+                EventAggregator
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
+            }
         }
 
         [Time]
@@ -199,6 +217,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                         .CreateInstance();
 
                 OddsMovementItems.Insert(0, newOddsMovementView);
+            }
+        }
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
+        private async void OnConnectionChangedBase(bool isConnected)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            if (isConnected)
+            {
+                await RefreshCommand.ExecuteAsync();
             }
         }
     }

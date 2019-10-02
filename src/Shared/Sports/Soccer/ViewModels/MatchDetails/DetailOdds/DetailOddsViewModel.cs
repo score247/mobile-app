@@ -124,7 +124,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
+        public override async Task OnNetworkReconnected()
+        {
+            await RefreshCommand.ExecuteAsync();
+        }
+
         public override async void OnResumeWhenNetworkOK()
+        {
+            await ReloadPage();
+        }
+
+        private async Task ReloadPage()
         {
             await LoggingService.LogInfoAsync($"OddsComparison  {DateTime.Now} - OnResume - Selected BetType {SelectedBetType}").ConfigureAwait(false);
 

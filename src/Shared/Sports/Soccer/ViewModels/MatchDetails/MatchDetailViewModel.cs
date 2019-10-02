@@ -20,6 +20,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using DetailTV;
     using LiveScore.Common;
     using LiveScore.Common.Extensions;
+    using LiveScore.Common.Services;
     using LiveScore.Core.Controls.TabStrip.EventArgs;
     using LiveScore.Core.Converters;
     using LiveScore.Core.Enumerations;
@@ -111,6 +112,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             base.OnDisappearing();
 
             tabItemViewModels[selectedTabItem].OnDisappearing();
+
+            if (EventAggregator != null)
+            {
+                EventAggregator
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
+            }
         }
 
         public override void OnAppearing()
@@ -118,6 +126,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             base.OnAppearing();
 
             tabItemViewModels[selectedTabItem].OnAppearing();
+
+            if (EventAggregator != null)
+            {
+                EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
+            }
         }
 
         public override void Destroy()
@@ -245,6 +258,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             Title = TabItems[args.Index].Title;
             selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[args.Index].TabHeaderTitle);
+        }
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
+        private void OnConnectionChangedBase(bool isConnected)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            if (isConnected)
+            {
+                OnNetworkReconnected();
+            }
+        }
+
+        public override Task OnNetworkReconnected()
+        {
+            tabItemViewModels[selectedTabItem].OnNetworkReconnected();
+
+            return Task.CompletedTask;
         }
     }
 }

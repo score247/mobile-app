@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
@@ -16,17 +17,20 @@ namespace LiveScore.ViewModels
     {
         private readonly ISettings settings;
         private readonly ICacheManager cacheManager;
+        private readonly ILoggingService loggingService;
 
         public MainViewModel(
             ISettings settings,
             ICacheManager cacheManager,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            ILoggingService loggingService)
             : base(navigationService, serviceLocator, eventAggregator)
         {
             this.settings = settings;
             this.cacheManager = cacheManager;
+            this.loggingService = loggingService;
 
             IsDemo = settings.IsDemo;
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
@@ -67,9 +71,23 @@ namespace LiveScore.ViewModels
         private async void OnConnectionChanged(bool isConnected)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
-            if(!isConnected)
+            try
             {
-                await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+                if (!isConnected)
+                {
+                    await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+                }
+                else
+                {
+                    if (PopupNavigation.Instance.PopupStack.Count > 0)
+                    {
+                        await PopupNavigation.Instance.PopAllAsync();
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                await loggingService.LogErrorAsync($"Error when receive OnConnectionChanged at {DateTime.Now}", ex);
             }
         }
 
