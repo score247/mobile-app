@@ -16,5 +16,7 @@
         public bool Lineups { get; set; }
 
         public bool Commentary { get; set; }
+
+        public string TrackerWidgetLink { get; set; }
     }
 }
