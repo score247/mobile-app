@@ -41,7 +41,6 @@ namespace LiveScore.Features.Score.ViewModels
                 .Subscribe(OnReceivedLiveMatches, true);
 
             InitScoreItemSources();
-            Task.Run(() => GetLiveMatchCount());
         }
 
         public byte RangeOfDays { get; } = 2;
@@ -91,18 +90,17 @@ namespace LiveScore.Features.Score.ViewModels
         {
             base.OnAppearing();
 
+            Task.Run(() => GetLiveMatchCount());
+            EventAggregator?
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Subscribe(OnConnectionChangedBase);
+
             if (secondLoad)
             {
-                Task.Run(() => GetLiveMatchCount());
                 SelectedScoreItem?.OnAppearing();
             }
 
             secondLoad = true;
-
-            if (EventAggregator != null)
-            {
-                EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
-            }
         }
 
         public override void OnDisappearing()
@@ -111,12 +109,9 @@ namespace LiveScore.Features.Score.ViewModels
 
             SelectedScoreItem?.OnDisappearing();
 
-            if (EventAggregator != null)
-            {
-                EventAggregator
-                    .GetEvent<ConnectionChangePubSubEvent>()
-                    .Unsubscribe(OnConnectionChangedBase);
-            }
+            EventAggregator?
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Unsubscribe(OnConnectionChangedBase);
         }
 
         public override void Destroy()
@@ -194,17 +189,14 @@ namespace LiveScore.Features.Score.ViewModels
             LiveMatchCount = message.LiveMatchCount;
         }
 
-        private void ChangeLiveMatchCount(int liveMatchCount) => LiveMatchCount = liveMatchCount;
-
-#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-
         private void OnConnectionChangedBase(bool isConnected)
-#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
             if (isConnected)
             {
                 OnNetworkReconnected();
             }
         }
+
+        private void ChangeLiveMatchCount(int liveMatchCount) => LiveMatchCount = liveMatchCount;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
+using MethodTimer;
 using Prism.Common;
 using Xamanimation;
 using Xamarin.Forms;
@@ -37,9 +38,9 @@ namespace LiveScore.Views
             }
         }
 
+        [Time]
         private async Task LoadMainPage()
         {
-
             var mainPage = new MainView { Detail = new MenuTabbedView() };
             await PageUtilities.OnInitializedAsync(mainPage, null);
 

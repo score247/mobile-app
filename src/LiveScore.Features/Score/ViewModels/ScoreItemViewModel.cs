@@ -93,7 +93,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override Task OnNetworkReconnected()
         {
-            return Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
+            return Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
         }
 
         public override void OnAppearing()
