@@ -1,26 +1,48 @@
-﻿namespace LiveScore.Soccer.Models.Leagues
+﻿using LiveScore.Core.Models.Leagues;
+using MessagePack;
+
+namespace LiveScore.Soccer.Models.Leagues
 {
-    using System.Collections.Generic;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models;
-    using LiveScore.Core.Models.Leagues;
-    using LiveScore.Core.Models.Teams;
-    using LiveScore.Soccer.Models.Teams;
-    using Newtonsoft.Json;
-
-    public class League : Entity<string, string>, ILeague
+    [MessagePackObject]
+    public class League : ILeague
     {
-        public int Order { get; set; }
+        public League(
+            string id,
+            string name,
+            int order,
+            string categoryId,
+            string countryName,
+            string countryCode,
+            bool isInternational)
+        {
+            Id = id;
+            Name = name;
+            Order = order;
+            CategoryId = categoryId;
+            CountryName = countryName;
+            CountryCode = countryCode;
+            IsInternational = isInternational;
+        }
 
-        public string Flag { get; set; }
+        [Key(0)]
+        public string Id { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<LeagueCategory>))]
-        public ILeagueCategory Category { get; set; }
+        [Key(1)]
+        public string Name { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<LeagueRound>>))]
-        public IEnumerable<ILeagueRound> Rounds { get; set; }
+        [Key(2)]
+        public int Order { get; private set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Team>>))]
-        public IEnumerable<ITeam> Teams { get; set; }
+        [Key(3)]
+        public string CategoryId { get; private set; }
+
+        [Key(4)]
+        public string CountryName { get; private set; }
+
+        [Key(5)]
+        public string CountryCode { get; private set; }
+
+        [Key(6)]
+        public bool IsInternational { get; private set; }
     }
 }

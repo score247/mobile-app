@@ -1,19 +1,19 @@
 ﻿namespace LiveScore.Core.Models.Leagues
 {
-    using System.Collections.Generic;
-    using Models;
-    using Teams;
-
-    public interface ILeague : IEntity<string, string>
+    public interface ILeague
     {
+        string Id { get; }
+
+        string Name { get; }
+
         int Order { get; }
 
-        string Flag { get; }
+        string CategoryId { get; }
 
-        ILeagueCategory Category { get; }
+        string CountryName { get; }
 
-        IEnumerable<ILeagueRound> Rounds { get; }
+        string CountryCode { get; }
 
-        IEnumerable<ITeam> Teams { get; }
+        bool IsInternational { get; }
     }
 }

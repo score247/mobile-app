@@ -46,7 +46,8 @@
             IEnumerable<MatchPeriod> matchPeriods,
             string countryCode,
             string countryName,
-            DateTimeOffset modifiedTime)
+            DateTimeOffset modifiedTime,
+            bool isInternationalLeague)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -78,6 +79,7 @@
             CountryCode = countryCode;
             CountryName = countryName;
             ModifiedTime = modifiedTime;
+            IsInternationalLeague = isInternationalLeague;
         }
 
         internal Match(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
@@ -176,6 +178,9 @@
 
         [Key(28)]
         public DateTimeOffset ModifiedTime { get; private set; }
+
+        [Key(29)]
+        public bool IsInternationalLeague { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
@@ -305,7 +310,7 @@
 
         [IgnoreMember]
         public string LeagueGroupName
-            => $"{(string.IsNullOrEmpty(CountryCode) ? string.Empty : CountryName)} {LeagueName}".ToUpperInvariant();
+            => $"{(IsInternationalLeague ? string.Empty : CountryName + " ")}{LeagueName}".ToUpperInvariant();
 
         [IgnoreMember]
         private bool HomeWinPenalty
