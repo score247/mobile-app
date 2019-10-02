@@ -93,6 +93,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnAppearing()
         {
+            base.OnAppearing();
+
             CheckNetworkAndRunAction(() =>
             {
                 if (FirstLoad)

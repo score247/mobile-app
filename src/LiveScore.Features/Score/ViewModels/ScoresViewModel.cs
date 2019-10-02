@@ -80,6 +80,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnAppearing()
         {
+            base.OnAppearing();
+
             if (secondLoad)
             {
                 Task.Run(() => GetLiveMatchCount());
@@ -91,6 +93,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnDisappearing()
         {
+            base.OnDisappearing();
+
             SelectedScoreItem?.OnDisappearing();
         }
 

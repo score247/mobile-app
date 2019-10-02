@@ -5,5 +5,7 @@
     public interface IHubService
     {
         Task Start();
+
+        Task ReConnect();
     }
 }

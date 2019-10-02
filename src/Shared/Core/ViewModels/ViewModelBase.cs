@@ -76,9 +76,6 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void Destroy()
         {
-            EventAggregator
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Unsubscribe(OnConnectionChangedBase);
         }
 
         public virtual void OnResume()
@@ -98,10 +95,20 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnAppearing()
         {
+            if (EventAggregator != null)
+            {
+                EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
+            }
         }
 
         public virtual void OnDisappearing()
         {
+            if (EventAggregator != null)
+            {
+                EventAggregator
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
+            }
         }
 
         protected virtual async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
@@ -129,6 +136,17 @@ namespace LiveScore.Core.ViewModels
             if (!navigated.Success)
             {
                 await LoggingService.LogErrorAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception).ConfigureAwait(false);
+            }
+        }
+
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
+        private void OnConnectionChangedBase(bool isConnected)
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        {
+            if (isConnected)
+            {
+                //OnResumeWhenNetworkOK();
             }
         }
     }

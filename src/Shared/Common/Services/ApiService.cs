@@ -54,7 +54,10 @@ namespace LiveScore.Common.Services
         {
             try
             {
-                return func.Invoke();
+                if (networkConnectionManager.IsConnectionOK())
+                {
+                    return func.Invoke();
+                }
             }
             catch (Exception ex)
             {

@@ -52,7 +52,7 @@ namespace LiveScore
          * This imposes a limitation in which the App class must have a default constructor.
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
-        private readonly List<IHubService> hubServices = new List<IHubService>();
+        private IHubService soccerHub;
         private INetworkConnectionManager networkConnectionManager;
 
 
@@ -169,18 +169,14 @@ namespace LiveScore
 
         private async Task StartEventHubs()
         {
-            hubServices.Clear();
-            var soccerHubService = new SoccerHubService(
+            soccerHub = new SoccerHubService(
                 Container.Resolve<IHubConnectionBuilder>(),
                 Configuration.SignalRHubEndPoint,
                 Container.Resolve<ILoggingService>(),
-                Container.Resolve<IEventAggregator>());
+                Container.Resolve<IEventAggregator>(),
+                Container.Resolve<INetworkConnectionManager>());
 
-            hubServices.Add(soccerHubService);
-
-            await Task
-                .WhenAll(hubServices.Select(hubService => hubService.Start()))
-                .ConfigureAwait(false);
+            await soccerHub.Start();
         }
 
         protected override void OnSleep()
@@ -194,7 +190,7 @@ namespace LiveScore
         {
             Debug.WriteLine("OnResume");
 
-            await StartEventHubs();
+            await Task.Run(async () => await soccerHub.ReConnect());
 
             base.OnResume();
         }

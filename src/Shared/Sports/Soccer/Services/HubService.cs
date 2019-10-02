@@ -15,9 +15,12 @@ namespace LiveScore.Soccer.Services
 {
     public class SoccerHubService : IHubService
     {
+        private readonly byte totalRetry = 3;
+        private readonly int NumOfDelayMillisecondsBeforeReConnect = 3 * 1000;
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
+        private readonly INetworkConnectionManager networkConnectionManager;
         private readonly string hubEndpoint;
 
         private HubConnection hubConnection;
@@ -36,12 +39,14 @@ namespace LiveScore.Soccer.Services
             IHubConnectionBuilder hubConnectionBuilder,
             string hubEndpoint,
             ILoggingService logger,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            INetworkConnectionManager networkConnectionManager)
         {
             this.hubConnectionBuilder = hubConnectionBuilder;
             this.hubEndpoint = hubEndpoint;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
+            this.networkConnectionManager = networkConnectionManager;
         }
 
         public async Task Start()
@@ -50,7 +55,9 @@ namespace LiveScore.Soccer.Services
             {
                 await logger.LogInfoAsync($"{DateTime.Now} HubService start").ConfigureAwait(false);
 
-                hubConnection = hubConnectionBuilder.WithUrl($"{hubEndpoint}/soccerhub").Build();
+                hubConnection = hubConnectionBuilder
+                    .WithUrl($"{hubEndpoint}/soccerhub")
+                    .Build();
 
                 foreach (var hubEvent in hubEvents)
                 {
@@ -78,7 +85,7 @@ namespace LiveScore.Soccer.Services
 
                 hubConnection.Closed += HubConnection_Closed;
 
-                await hubConnection.StartAsync().ConfigureAwait(false);
+                await hubConnection.StartAsync();
             }
             catch (Exception ex)
             {
@@ -88,11 +95,37 @@ namespace LiveScore.Soccer.Services
 
         private async Task HubConnection_Closed(Exception arg)
         {
+            if (networkConnectionManager.IsConnectionNotOK())
+            {
+                return;
+            }
+
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
 
             await logger.LogErrorAsync($"HubConnection_Closed {arg.Message}", ex).ConfigureAwait(false);
+
+            await ReConnect();
+        }
+
+        public async Task ReConnect()
+        {
             await StopCurrentConnection();
-            await Start();
+            var retryCount = 0;
+
+            while (retryCount < totalRetry)
+            {
+                try
+                {
+                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
+                    await hubConnection.StartAsync();
+                }
+                catch (Exception startException)
+                {
+                    await logger.LogErrorAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException).ConfigureAwait(false);
+                }
+
+                retryCount++;
+            }
         }
 
         private async Task StopCurrentConnection()

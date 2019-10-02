@@ -29,12 +29,14 @@ namespace LiveScore.Common.Services
     public class LoggingService : ILoggingService
     {
         private readonly IEssential deviceInfo;
+        private readonly INetworkConnectionManager networkConnectionManager;
 
         private IRavenClient ravenClient;
 
-        public LoggingService(IEssential deviceInfo)
+        public LoggingService(IEssential deviceInfo, INetworkConnectionManager networkConnectionManager)
         {
             this.deviceInfo = deviceInfo;
+            this.networkConnectionManager = networkConnectionManager;
         }
 
         public void Init(string Dsn, string env = "", IRavenClient ravenClient = null)
@@ -47,18 +49,58 @@ namespace LiveScore.Common.Services
         public void LogError(Exception exception)
         {
             Debug.WriteLine("LogError");
-            ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
+            }
         }
 
-        public void LogError(string message, Exception exception) => ravenClient?.Capture(CreateSentryEvent(message, exception));
+        public void LogError(string message, Exception exception)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                ravenClient?.Capture(CreateSentryEvent(message, exception));
+            }
+        }
 
-        public Task LogErrorAsync(Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(string.Empty, exception));
+        public Task LogErrorAsync(Exception exception)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                return ravenClient?.CaptureAsync(CreateSentryEvent(string.Empty, exception));
+            }
 
-        public Task LogErrorAsync(string message, Exception exception) => ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
+            return Task.CompletedTask;
+        }
 
-        public Task LogInfoAsync(string message) => ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
+        public Task LogErrorAsync(string message, Exception exception)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                return ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
+            }
 
-        public void LogInfo(string message) => ravenClient?.Capture(CreateSentryInfoEvent(message));
+            return Task.CompletedTask;
+        }
+
+        public Task LogInfoAsync(string message)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                return ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
+            }
+
+            return Task.CompletedTask;
+        }
+
+
+        public void LogInfo(string message)
+        {
+            if (networkConnectionManager.IsConnectionOK())
+            {
+                ravenClient?.Capture(CreateSentryInfoEvent(message));
+            }
+        }
 
         private SentryEvent CreateSentryEvent(string message, Exception exception)
         {
