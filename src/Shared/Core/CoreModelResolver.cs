@@ -550,6 +550,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 { "DetailedEvents", 3},
                 { "Lineups", 4},
                 { "Commentary", 5},
+                { "TrackerWidgetLink", 6},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -560,6 +561,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DetailedEvents"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Lineups"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Commentary"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TrackerWidgetLink"),
                 
             };
         }
@@ -573,7 +575,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.Live);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -586,6 +588,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.Lineups);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.Commentary);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.TrackerWidgetLink, formatterResolver);
             return offset - startOffset;
         }
 
@@ -607,6 +611,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             var __DetailedEvents__ = default(bool);
             var __Lineups__ = default(bool);
             var __Commentary__ = default(bool);
+            var __TrackerWidgetLink__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -639,6 +644,9 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                     case 5:
                         __Commentary__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
+                    case 6:
+                        __TrackerWidgetLink__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -657,6 +665,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             ____result.DetailedEvents = __DetailedEvents__;
             ____result.Lineups = __Lineups__;
             ____result.Commentary = __Commentary__;
+            ____result.TrackerWidgetLink = __TrackerWidgetLink__;
             return ____result;
         }
     }
