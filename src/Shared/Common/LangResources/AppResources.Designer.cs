@@ -412,7 +412,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no live games currently in progress.
+        ///   Looks up a localized string similar to There are no games available.
         /// </summary>
         public static string NoGames {
             get {

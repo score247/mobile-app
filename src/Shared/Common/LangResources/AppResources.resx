@@ -301,8 +301,8 @@
     <value>The network connection is lost. Please try again later.</value>
   </data>
   <data name="NoGames" xml:space="preserve">
-    <value>There are no live games currently in progress</value>
-    </data>
+    <value>There are no games available</value>
+  </data>
   <data name="ConnectionTimeoutMessage" xml:space="preserve">
     <value>Sorry, the request timed out. Please refresh the page.</value>
   </data>
