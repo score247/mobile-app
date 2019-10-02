@@ -13,13 +13,15 @@
         private readonly IEssential mockEssentials;
         private readonly IRavenClient mockRavenClient;
         private readonly ILoggingService loggingService;
+        private readonly INetworkConnectionManager mockNetworkManager;
 
         public LoggingServiceTests()
         {
             mockEssentials = new MockEssentials();
             mockRavenClient = Substitute.For<IRavenClient>();
+            mockNetworkManager = Substitute.For<INetworkConnectionManager>();
 
-            loggingService = new LoggingService(mockEssentials);
+            loggingService = new LoggingService(mockEssentials, mockNetworkManager);
             loggingService.Init("", "", mockRavenClient);
         }
 

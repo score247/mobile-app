@@ -49,17 +49,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             this.eventAggregator = eventAggregator;
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
-            SelectedBetType = BetType.AsianHDP;
-            IsRefreshing = false;
+            SelectedBetType = BetType.AsianHDP;            
             BetTypeOddsItems = new List<BaseItemViewModel>();
-            
+
+            HasData = true;
+            IsRefreshing = false;
+
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());          
             this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread, true);
         }
 
-        public bool IsRefreshing { get; set; }
-
-        public bool HasData { get; private set; }
+        public bool IsRefreshing { get; set; }        
 
         public string HeaderTitle => string.Empty;
 

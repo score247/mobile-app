@@ -47,25 +47,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
+            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());            
 
-            RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true).ConfigureAwait(false));
-
+            HasData = false;
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
 
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
         }
 
         public bool IsRefreshing { get; set; }
-
-        public bool HasData { get; private set; }
 
         public OddsMovementObservableCollection OddsMovementItems { get; private set; }
 
         public ObservableCollection<OddsMovementObservableCollection> GroupOddsMovementItems { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand
+            => new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true).ConfigureAwait(false));
 
         public DataTemplate HeaderTemplate { get; private set; }
 

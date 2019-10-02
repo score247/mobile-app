@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Soccer.ViewModels.DetailTracker
 {
     using System.IO;
+    using System.Threading.Tasks;
     using LiveScore.Common.PlatformDependency;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
@@ -13,6 +14,11 @@
     {
         private const string RemoveMatchPrefix = "sr:match:";
         private const string ReplacePrefix = "input-match-id";
+        private const string WidgetPrefix = "widget-url";
+        private const string LanguagePrefix = "input-language";
+
+        private const string Widget = "https://widgets.sir.sportradar.com/sportradar/widgetloader";
+
 
         private readonly MatchCoverage matchCoverage;
 
@@ -35,8 +41,6 @@
         public bool TrackerHidden { get; set; }
 
         public bool HasTrackerData { get; set; }
-
-        public bool NoData { get; set; }
         
         public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);        
 
@@ -48,21 +52,31 @@
 
             if (matchCoverage.Coverage != null && matchCoverage.Coverage.Live)
             {
-                var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
-
-                var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");                
-
                 WidgetContent = new HtmlWebViewSource
                 {
-                    Html = content.Replace(ReplacePrefix, formatMatchId)
+                    Html = await GenerateTrackerWidget()
                 };
 
                 HasTrackerData = true;
+                HasData = true;
             }
             else
             {
-                NoData = true;
+                HasData = false;
             }
+        }
+
+        private async Task<string> GenerateTrackerWidget()
+        {
+            var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
+
+            var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");
+
+            content = content.Replace(ReplacePrefix, formatMatchId);
+            content = content.Replace(WidgetPrefix, Widget);
+            content = content.Replace(LanguagePrefix, "en");
+
+            return content;
         }
 
         private void CollapseTracker()
