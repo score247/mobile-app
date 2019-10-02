@@ -18,7 +18,7 @@
         private const string LanguagePrefix = "input-language";
 
         private const string Widget = "https://widgets.sir.sportradar.com/sportradar/widgetloader";
-
+        private const string LanguageCode = "en";
 
         private readonly MatchCoverage matchCoverage;
 
@@ -81,7 +81,7 @@
 
             content = content.Replace(ReplacePrefix, formatMatchId);
             content = content.Replace(WidgetPrefix, Widget);
-            content = content.Replace(LanguagePrefix, "en");
+            content = content.Replace(LanguagePrefix, LanguageCode);
 
             return content;
         }
