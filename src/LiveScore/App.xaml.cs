@@ -169,14 +169,25 @@ namespace LiveScore
 
         private async Task StartEventHubs()
         {
+            var eventAggregator = Container.Resolve<IEventAggregator>();
             soccerHub = new SoccerHubService(
                 Container.Resolve<IHubConnectionBuilder>(),
                 Configuration.SignalRHubEndPoint,
                 Container.Resolve<ILoggingService>(),
-                Container.Resolve<IEventAggregator>(),
+                eventAggregator,
                 Container.Resolve<INetworkConnectionManager>());
 
             await soccerHub.Start();
+
+            eventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Subscribe(async (isConnected) =>
+                {
+                    if(isConnected)
+                    {
+                        await soccerHub.ReConnect();
+                    }
+                });
         }
 
         protected override void OnSleep()

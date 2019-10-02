@@ -15,7 +15,7 @@ namespace LiveScore.Soccer.Services
 {
     public class SoccerHubService : IHubService
     {
-        private readonly byte totalRetry = 3;
+        private readonly byte totalRetry = 5;
         private readonly int NumOfDelayMillisecondsBeforeReConnect = 3 * 1000;
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
@@ -109,23 +109,16 @@ namespace LiveScore.Soccer.Services
 
         public async Task ReConnect()
         {
-            await StopCurrentConnection();
             var retryCount = 0;
 
-            while (retryCount < totalRetry)
+            while (retryCount < totalRetry
+                && hubConnection.State == HubConnectionState.Disconnected)
             {
                 try
                 {
-                    if (hubConnection.State == HubConnectionState.Disconnected)
-                    {
-                        await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
-                        await hubConnection.StartAsync();
-
-                        if (hubConnection.State == HubConnectionState.Connected)
-                        {
-                            break;
-                        }
-                    }
+                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
+                    await hubConnection.StartAsync();
+                    await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}");
                 }
                 catch (Exception startException)
                 {
@@ -133,18 +126,6 @@ namespace LiveScore.Soccer.Services
                 }
 
                 retryCount++;
-            }
-        }
-
-        private async Task StopCurrentConnection()
-        {
-            try
-            {
-                await hubConnection.StopAsync();
-            }
-            catch (Exception disposeException)
-            {
-                await logger.LogErrorAsync(disposeException).ConfigureAwait(false);
             }
         }
     }

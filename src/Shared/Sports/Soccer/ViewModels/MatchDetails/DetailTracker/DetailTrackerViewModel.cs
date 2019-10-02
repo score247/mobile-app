@@ -44,7 +44,14 @@
         
         public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);        
 
-        public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);        
+        public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);
+
+        public override Task OnNetworkReconnected()
+        {
+            OnAppearing();
+
+            return Task.CompletedTask;
+        }
 
         public async override void OnAppearing()
         {
