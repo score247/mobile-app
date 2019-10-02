@@ -50,7 +50,7 @@
         {
             base.OnAppearing();
 
-            if (matchCoverage.Coverage != null && matchCoverage.Coverage.Live)
+            if (matchCoverage != null && matchCoverage.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
                 {
