@@ -1,31 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
-             mc:Ignorable="d"
-             xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-             x:Class="LiveScore.Core.Views.NetworkConnectionError">
-
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 mc:Ignorable="d"
+                 xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
+                 x:Class="LiveScore.Core.Views.NetworkConnectionError">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:NetworkConnectionErrorViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-
-        <StackLayout VerticalOptions="EndAndExpand">
-            <StackLayout.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <resources:NetworkConnectionErrorViewResource />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </StackLayout.Resources>
-
+        <StackLayout VerticalOptions="EndAndExpand"
+                     Margin="0,0,0,50">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
             <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
                 <BoxView Style="{StaticResource NetworkConnectionErrorLine}" />
                 <Button Style="{StaticResource NetworkConnectionIcon}" />
-                <Label Text="{Binding ErrorMessage}" Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
+                <Label Text="{Binding ErrorMessage}"
+                       Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
             </FlexLayout>
         </StackLayout>
     </ContentPage.Content>

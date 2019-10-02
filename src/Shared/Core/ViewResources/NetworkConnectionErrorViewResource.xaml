@@ -2,35 +2,60 @@
 <ResourceDictionary x:Class="LiveScore.Core.ViewResources.NetworkConnectionErrorViewResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    
-    
-    <Style x:Key="NetworkConnectionErrorLayout" TargetType="FlexLayout">
-        <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Grid.Column" Value="1" />
-        <Setter Property="AlignItems" Value="Center" />
-        <Setter Property="BackgroundColor" Value="#23252B" />
+
+    <Style x:Key="NetworkConnectionErrorLayout"
+           TargetType="FlexLayout">
+        <Setter Property="HeightRequest"
+                Value="60" />
+        <Setter Property="Grid.Row"
+                Value="0" />
+        <Setter Property="Grid.Column"
+                Value="1" />
+        <Setter Property="AlignItems"
+                Value="Center" />
+        <Setter Property="BackgroundColor"
+                Value="#23252B" />
     </Style>
-    <Style x:Key="NetworkConnectionErrorLine" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="#FF0000" />
-        <Setter Property="WidthRequest" Value="2" />
-        <Setter Property="HeightRequest" Value="60" />
-        <Setter Property="Grid.Row" Value="0" />
-        <Setter Property="Grid.Column" Value="0" />
+    <Style x:Key="NetworkConnectionErrorLine"
+           TargetType="BoxView">
+        <Setter Property="BackgroundColor"
+                Value="#FF0000" />
+        <Setter Property="WidthRequest"
+                Value="2" />
+        <Setter Property="HeightRequest"
+                Value="60" />
+        <Setter Property="Grid.Row"
+                Value="0" />
+        <Setter Property="Grid.Column"
+                Value="0" />
     </Style>
-    <Style x:Key="NetworkConnectionIcon" BasedOn="{StaticResource ButtonIcon}" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#FF0000" />
-        <Setter Property="HeightRequest" Value="26" />
-        <Setter Property="WidthRequest" Value="26" />
-        <Setter Property="CornerRadius" Value="13" />
-        <Setter Property="Margin" Value="8,0,8,0" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="Text" Value="&#xe927;" />
+    <Style x:Key="NetworkConnectionIcon"
+           BasedOn="{StaticResource ButtonIcon}"
+           TargetType="Button">
+        <Setter Property="BackgroundColor"
+                Value="#FF0000" />
+        <Setter Property="HeightRequest"
+                Value="26" />
+        <Setter Property="WidthRequest"
+                Value="26" />
+        <Setter Property="CornerRadius"
+                Value="13" />
+        <Setter Property="Margin"
+                Value="8,0,8,0" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="Text"
+                Value="&#xe927;" />
     </Style>
-    <Style x:Key="NetworkConnectionErrorMainContentLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="FontSize" Value="13" />
+    <Style x:Key="NetworkConnectionErrorMainContentLabel"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="FontSize"
+                Value="13" />
     </Style>
 </ResourceDictionary>
