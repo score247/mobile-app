@@ -114,8 +114,11 @@ namespace LiveScore.Soccer.Services
             while (retryCount < totalRetry
                 && hubConnection.State == HubConnectionState.Disconnected)
             {
+                retryCount++;
+
                 try
                 {
+                    await StopCurrentConnection();
                     await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
                     await hubConnection.StartAsync();
                     await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}");
@@ -124,8 +127,18 @@ namespace LiveScore.Soccer.Services
                 {
                     await logger.LogErrorAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException).ConfigureAwait(false);
                 }
+            }
+        }
 
-                retryCount++;
+        private async Task StopCurrentConnection()
+        {
+            try
+            {
+                await hubConnection.StopAsync();
+            }
+            catch (Exception disposeException)
+            {
+                await logger.LogErrorAsync(disposeException).ConfigureAwait(false);
             }
         }
     }
