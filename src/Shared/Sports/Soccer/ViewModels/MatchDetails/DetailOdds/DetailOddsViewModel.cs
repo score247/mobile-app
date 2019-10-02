@@ -46,23 +46,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             this.matchId = matchId;
             this.eventStatus = eventStatus;
+            this.eventAggregator = eventAggregator;
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
             IsRefreshing = false;
             BetTypeOddsItems = new List<BaseItemViewModel>();
-
-            this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
-
-            RefreshCommand = new DelegateAsyncCommand(() =>
-                LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
-
-            OnOddsTabClicked = new DelegateAsyncCommand<string>((betTypeId) =>
-                FirstLoadOrRefreshOddsAsync(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat));
-
-            TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommandAsync);
-
+            
+            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());          
             this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread, true);
         }
 
@@ -84,11 +75,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public DataTemplate HeaderTemplate { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
+        public DelegateAsyncCommand RefreshCommand => new DelegateAsyncCommand(() =>
+                LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
 
-        public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
+        public DelegateAsyncCommand<string> OnOddsTabClicked => new DelegateAsyncCommand<string>((betTypeId) =>
+                FirstLoadOrRefreshOddsAsync(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat));
 
-        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
+        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand => new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommandAsync);
 
         private async Task HandleOddsItemTapCommandAsync(BaseItemViewModel item)
         {
