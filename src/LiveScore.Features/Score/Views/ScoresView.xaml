@@ -58,6 +58,7 @@
                             SelectedItem="{Binding SelectedScoreItem}"
                             SelectedIndex="{Binding SelectedScoreItemIndex}"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
+                            ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             IsViewReusingEnabled="False"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"

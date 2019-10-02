@@ -31,6 +31,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
+            ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
 
@@ -53,6 +54,8 @@ namespace LiveScore.Features.Score.ViewModels
         public int SelectedScoreItemIndex { get; set; }
 
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; }
+
+        public DelegateCommand<ItemDisappearingEventArgs> ScoreItemDisappearingCommand { get; }
 
         public DelegateCommand<DateBarItemTappedEventArgs> DateBarItemTapCommand { get; }
 
@@ -113,6 +116,11 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             SelectedScoreItem?.OnAppearing();
+        }
+
+        private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
+        {
+            SelectedScoreItem?.OnDisappearing();
         }
 
         private void OnDateBarItemTapped(DateBarItemTappedEventArgs args)
