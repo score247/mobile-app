@@ -6,6 +6,6 @@
 
     public interface ILeagueService
     {
-        Task<IEnumerable<ILeague>> GetLeagues();
+        Task<IEnumerable<ILeague>> GetMajorLeagues(bool getLatestData = false);
     }
 }

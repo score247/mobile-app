@@ -27,7 +27,7 @@
         public async Task GetLeagues_WhenCall_ReturnEmptyList()
         {
             // Act
-            var actual = await leagueService.GetLeagues();
+            var actual = await leagueService.GetMajorLeagues();
 
             // Assert
             Assert.Empty(actual);
