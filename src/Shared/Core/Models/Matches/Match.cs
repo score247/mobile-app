@@ -77,6 +77,8 @@
 
         DateTimeOffset ModifiedTime { get; }
 
+        bool IsInternationalLeague { get; }
+
         void UpdateMatch(IMatch match);
 
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
