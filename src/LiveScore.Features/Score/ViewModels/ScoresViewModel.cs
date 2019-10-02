@@ -78,6 +78,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override Task OnNetworkReconnected()
         {
+            Task.Run(() => GetLiveMatchCount());
+
             return SelectedScoreItem?.OnNetworkReconnected();
         }
 
