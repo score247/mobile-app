@@ -30,7 +30,7 @@
         private readonly INetworkConnectionManager networkConnectionManager;
 
         public CacheManager(
-            ICacheService cacheService, 
+            ICacheService cacheService,
             INetworkConnectionManager networkConnectionManager)
         {
             this.cacheService = cacheService;
@@ -43,6 +43,8 @@
         {
             if (networkConnectionManager.IsConnectionOK())
             {
+                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
+
                 if (getLatestData)
                 {
                     try
@@ -51,18 +53,17 @@
 
                         await SetCacheAsync(key, data, options).ConfigureAwait(false);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         if (ex is TaskCanceledException)
                         {
                             networkConnectionManager.PublishConnectionTimeoutEvent();
+                            return dataFromCache;
                         }
 
                         throw;
                     }
                 }
-
-                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
 
                 if (Equals(dataFromCache, default(T)))
                 {
@@ -77,6 +78,7 @@
                         if (ex is TaskCanceledException)
                         {
                             networkConnectionManager.PublishConnectionTimeoutEvent();
+                            return dataFromCache;
                         }
 
                         throw;
