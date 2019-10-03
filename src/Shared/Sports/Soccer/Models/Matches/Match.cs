@@ -191,6 +191,7 @@
                 return;
             }
 
+            EventDate = soccerMatch.EventDate;
             EventStatus = soccerMatch.EventStatus;
             MatchStatus = soccerMatch.MatchStatus;
             MatchTime = soccerMatch.MatchTime;
@@ -208,6 +209,8 @@
             HomeYellowRedCards = soccerMatch.HomeYellowRedCards;
             AwayRedCards = soccerMatch.AwayRedCards;
             AwayYellowRedCards = soccerMatch.AwayYellowRedCards;
+            CurrentPeriodStartTime = soccerMatch.CurrentPeriodStartTime;
+            ModifiedTime = soccerMatch.ModifiedTime;
         }
 
         public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using ImTools;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
@@ -20,7 +18,6 @@ using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Xamarin.Forms.Internals;
 using Device = Xamarin.Forms.Device;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("LiveScore.Tests")]
@@ -33,6 +30,7 @@ namespace LiveScore.Features.Score.ViewModels
         protected readonly IMatchMinuteConverter matchMinuteConverter;
         protected readonly Func<string, string> buildFlagUrlFunc;
         protected readonly IMatchService MatchService;
+        private const int DefaultFirstLoadMatchItemCount = 5;
         private const int DefaultLoadingMatchItemCountOnScrolling = 8;
         private readonly bool isTodayOrYesterday;
 
@@ -237,9 +235,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var matches = (await LoadMatchesFromServiceAsync(getLatestData))?.ToList();
 
-            if (matches?.Any() != true && MatchItemsSource?.Any() != true)
+            if (matches?.Any() != true)
             {
-                HasData = false;
+                if (MatchItemsSource?.Any() != true)
+                {
+                    HasData = false;
+                }
+
                 return;
             }
 
@@ -274,13 +276,26 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual void UpdateMatchItems(List<IMatch> matches)
         {
-            var loadedMatches = matches.Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match.Id == m.Id))).ToList();
-            MatchItemsSource.UpdateMatchItems(
-                loadedMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+            try
+            {
+                if (MatchItemsSource.Count == 0 && matches.Count > 0)
+                {
+                    InitializeMatchItems(matches);
+                    return;
+                }
 
-            var remainingMatches = matches.Except(loadedMatches);
-            RemainingMatchItemSource.UpdateMatchItems(
-                remainingMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+                var loadedMatches = matches.Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match.Id == m.Id))).ToList();
+                MatchItemsSource.UpdateMatchItems(
+                    loadedMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+
+                var remainingMatches = matches.Except(loadedMatches);
+                RemainingMatchItemSource.UpdateMatchItems(
+                    remainingMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogError(ex);
+            }
         }
 
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
@@ -289,9 +304,9 @@ namespace LiveScore.Features.Score.ViewModels
                 new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
 
             var matchItems = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc)).ToList();
-            var loadItems = matchItems.Take(DefaultLoadingMatchItemCountOnScrolling);
+            var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItems.Skip(DefaultLoadingMatchItemCountOnScrolling));
+                matchItems.Skip(DefaultFirstLoadMatchItemCount));
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems));

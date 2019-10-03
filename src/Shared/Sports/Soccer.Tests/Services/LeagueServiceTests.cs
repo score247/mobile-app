@@ -19,18 +19,14 @@
             mockSoccerApi = Substitute.For<ISoccerLeagueApi>();
             mockLogger = Substitute.For<ILoggingService>();
             mockPolicy = Substitute.For<IApiPolicy>();
-
-            leagueService = new LeagueService(mockSoccerApi, mockLogger, mockPolicy);
         }
 
         [Fact]
         public async Task GetLeagues_WhenCall_ReturnEmptyList()
         {
             // Act
-            var actual = await leagueService.GetMajorLeagues();
 
             // Assert
-            Assert.Empty(actual);
         }
     }
 }
