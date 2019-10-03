@@ -70,14 +70,14 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
-                await Task.Run(() => GetLiveMatchCount());
+                await Task.Run(GetLiveMatchCount);
                 SelectedScoreItem?.OnResumeWhenNetworkOK();
             }
         }
 
         public override Task OnNetworkReconnected()
         {
-            Task.Run(() => GetLiveMatchCount());
+            Task.Run(GetLiveMatchCount);
 
             return SelectedScoreItem?.OnNetworkReconnected();
         }
@@ -91,17 +91,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             base.OnAppearing();
 
-            Task.Run(() => GetLiveMatchCount());
+            Task.Run(GetLiveMatchCount);
+
             EventAggregator?
                 .GetEvent<ConnectionChangePubSubEvent>()
                 .Subscribe(OnConnectionChangedBase);
 
-            if (secondLoad)
-            {
-                SelectedScoreItem?.OnAppearing();
-            }
-
-            secondLoad = true;
+            SelectedScoreItem?.OnAppearing();
         }
 
         public override void OnDisappearing()
@@ -126,10 +122,15 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (args?.Index == LiveIndex)
             {
-                Task.Run(() => GetLiveMatchCount());
+                Task.Run(GetLiveMatchCount);
             }
 
-            SelectedScoreItem?.OnAppearing();
+            if (secondLoad)
+            {
+                SelectedScoreItem?.OnAppearing();
+            }
+
+            secondLoad = true;
         }
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
@@ -142,9 +143,9 @@ namespace LiveScore.Features.Score.ViewModels
             SelectedScoreItemIndex = args.Index;
         }
 
-        private async Task GetLiveMatchCount(bool getLatestData = true)
+        private async Task GetLiveMatchCount()
         {
-            var liveMatchCount = await matchService.GetLiveMatchCount(CurrentLanguage, getLatestData);
+            var liveMatchCount = await matchService.GetLiveMatchCount(CurrentLanguage);
 
             Device.BeginInvokeOnMainThread(() => LiveMatchCount = liveMatchCount);
         }

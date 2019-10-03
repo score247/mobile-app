@@ -42,9 +42,11 @@ namespace LiveScore.Views
         private async Task LoadMainPage()
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
-            await PageUtilities.OnInitializedAsync(mainPage, null);
 
+            await PageUtilities.OnInitializedAsync(mainPage, null);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
+
+            await Task.Delay(milisecondsDelay);
 
             await Task.WhenAll(
                 SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),

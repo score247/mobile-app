@@ -10,15 +10,24 @@ namespace LiveScore.Features.Score.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ScoresView
     {
+        private bool secondLoad;
+
         [Time]
         public ScoresView()
         {
             InitializeComponent();
+
+            (BindingContext as ScoresViewModel)?.OnAppearing();
         }
 
         protected override void OnAppearing()
         {
-            (BindingContext as ScoresViewModel)?.OnAppearing();
+            if (secondLoad)
+            {
+                (BindingContext as ScoresViewModel)?.OnAppearing();
+            }
+
+            secondLoad = true;
         }
 
         protected override void OnDisappearing()

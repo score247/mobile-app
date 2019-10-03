@@ -94,6 +94,7 @@ namespace LiveScore.Features.Score.ViewModels
             return Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
         }
 
+        [Time]
         public override void OnAppearing()
         {
             base.OnAppearing();
@@ -299,6 +300,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
+        [Time]
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels = matches.Select(match =>
