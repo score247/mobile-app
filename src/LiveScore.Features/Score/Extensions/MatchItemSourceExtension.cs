@@ -23,8 +23,9 @@ namespace LiveScore.Features.Score.Extensions
             Func<string, string> buildFlagUrlFunc)
         {
             var matchViewModels = matchItems?.SelectMany(g => g).ToList();
+            var orderedMatches = matches.OrderBy(m => m.LeagueOrder);
 
-            foreach (var match in matches)
+            foreach (var match in orderedMatches)
             {
                 var matchViewModel = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
 
@@ -37,7 +38,7 @@ namespace LiveScore.Features.Score.Extensions
 
                 if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
                 {
-                    Device.BeginInvokeOnMainThread(() => matchViewModel.UpdateMatch(match));
+                    matchViewModel.UpdateMatch(match);
                 }
             }
         }
@@ -65,7 +66,7 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                Device.BeginInvokeOnMainThread(() => matchItems[currentGroupIndex] = group);
+                matchItems[currentGroupIndex] = group;
             }
             else
             {
@@ -82,7 +83,45 @@ namespace LiveScore.Features.Score.Extensions
                 var leagueOrders = matchItems.Select(i => i.Key.LeagueOrder).ToList();
                 var newLeagueIndex = CalculateLeagueIndexByOrder(group?.Key.LeagueOrder ?? 0, leagueOrders);
 
-                Device.BeginInvokeOnMainThread(() => matchItems.Insert(newLeagueIndex, group));
+                if (newLeagueIndex >= matchItems.Count)
+                {
+                    matchItems.Add(group);
+                }
+                else
+                {
+                    matchItems.Insert(newLeagueIndex, group);
+                }
+            }
+        }
+
+        public static void RemoveMatches(
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            string[] removedMatchIds,
+            Func<string, string> buildFlagUrlFunc)
+        {
+            foreach (var removedMatchId in removedMatchIds)
+            {
+                var league = matchItems
+                    .FirstOrDefault(l => l.Any(match => match.Match.Id == removedMatchId));
+
+                if (league == null)
+                {
+                    continue;
+                }
+
+                var leagueMatches = league.ToList();
+                leagueMatches.RemoveAll(m => m.Match.Id == removedMatchId);
+
+                if (leagueMatches.Count == 0)
+                {
+                    matchItems.Remove(league);
+                    continue;
+                }
+
+                var indexOfLeague = matchItems.IndexOf(league);
+                matchItems[indexOfLeague] = leagueMatches
+                    .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                    .FirstOrDefault();
             }
         }
 

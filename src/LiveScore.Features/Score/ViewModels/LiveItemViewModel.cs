@@ -64,8 +64,13 @@ namespace LiveScore.Features.Score.ViewModels
             var modifiedMatches = currentMatches.Intersect(matches).ToList();
             var removedMatchIds = currentMatches.Except(modifiedMatches).Select(m => m.Id);
 
-            RemoveMatchesFromItemSource(removedMatchIds.ToArray());
-            MatchItemsSource.UpdateMatchItems(matches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                MatchItemsSource.RemoveMatches(removedMatchIds.ToArray(), buildFlagUrlFunc);
+
+                MatchItemsSource.UpdateMatchItems(
+                    matches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+            });
         }
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
@@ -80,42 +85,15 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            RemoveMatchesFromItemSource(message.RemoveMatchIds);
+            Device.BeginInvokeOnMainThread(() =>
+                MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc));
 
             HasData = message.NewMatches.Any() || MatchItemsSource.Any();
 
             if (HasData)
             {
-                MatchItemsSource.UpdateMatchItems(
-                    message.NewMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
-            }
-        }
-
-        private void RemoveMatchesFromItemSource(string[] removedMatchIds)
-        {
-            foreach (var removedMatchId in removedMatchIds)
-            {
-                var league = MatchItemsSource
-                        .FirstOrDefault(l => l.Any(match => match.Match.Id == removedMatchId));
-
-                if (league == null)
-                {
-                    continue;
-                }
-
-                var leagueMatches = league.ToList();
-                leagueMatches.RemoveAll(m => m.Match.Id == removedMatchId);
-
-                if (leagueMatches.Count == 0)
-                {
-                    MatchItemsSource.Remove(league);
-                    continue;
-                }
-
-                var indexOfLeague = MatchItemsSource.IndexOf(league);
-                MatchItemsSource[indexOfLeague] = leagueMatches
-                    .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
-                    .FirstOrDefault();
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource.UpdateMatchItems(
+                        message.NewMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc));
             }
         }
     }

@@ -285,8 +285,9 @@ namespace LiveScore.Features.Score.ViewModels
                 }
 
                 var loadedMatches = matches.Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match.Id == m.Id))).ToList();
-                MatchItemsSource.UpdateMatchItems(
-                    loadedMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+                Device.BeginInvokeOnMainThread(() =>
+                    MatchItemsSource.UpdateMatchItems(
+                        loadedMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc));
 
                 var remainingMatches = matches.Except(loadedMatches);
                 RemainingMatchItemSource.UpdateMatchItems(
