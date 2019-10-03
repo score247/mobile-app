@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.ViewModels;
-using PanCardView.Extensions;
 using Prism.Events;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -39,7 +37,7 @@ namespace LiveScore.Features.Score.Extensions
 
                 if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
                 {
-                    Device.BeginInvokeOnMainThread(() => matchViewModel?.UpdateMatch(match));
+                    Device.BeginInvokeOnMainThread(() => matchViewModel.UpdateMatch(match));
                 }
             }
         }
