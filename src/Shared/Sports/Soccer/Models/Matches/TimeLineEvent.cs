@@ -1,5 +1,4 @@
-﻿using LiveScore.Soccer.Models.Matches;
-using System;
+﻿using System;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Teams;
 using MessagePack;

@@ -125,13 +125,6 @@ namespace LiveScore.Features.Score.Extensions
             }
         }
 
-        private static int CalculateLeagueIndexByOrder(int leagueOrder, IList<int> leagueOrders)
-        {
-            leagueOrders.Add(leagueOrder);
-
-            return leagueOrders.OrderBy(order => order).IndexOf(leagueOrder);
-        }
-
         public static void UpdateMatchItemEvent(
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
             IMatchEvent matchEvent)
@@ -157,6 +150,13 @@ namespace LiveScore.Features.Score.Extensions
                 .FirstOrDefault(m => m.Match.Id == matchId);
 
             matchItem?.OnReceivedTeamStatistic(isHome, statistic);
+        }
+
+        private static int CalculateLeagueIndexByOrder(int leagueOrder, IList<int> leagueOrders)
+        {
+            leagueOrders.Add(leagueOrder);
+
+            return leagueOrders.OrderBy(order => order).IndexOf(leagueOrder);
         }
     }
 }

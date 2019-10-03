@@ -85,7 +85,7 @@ namespace LiveScore.ViewModels
                     }
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 await loggingService.LogErrorAsync($"Error when receive OnConnectionChanged at {DateTime.Now}", ex);
             }

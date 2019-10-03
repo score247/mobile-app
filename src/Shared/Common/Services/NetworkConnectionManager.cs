@@ -57,7 +57,7 @@ namespace LiveScore.Common.Services
 
         public void StartListen()
         {
-            if(Connectivity.NetworkAccess == NetworkAccess.None)
+            if (Connectivity.NetworkAccess == NetworkAccess.None)
             {
                 eventAggregator.GetEvent<ConnectionChangePubSubEvent>().Publish(false);
             }

@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.PubSubEvents.Matches
 {
-    using LiveScore.Core.Models.Matches;
     using System.Collections.Generic;
+    using LiveScore.Core.Models.Matches;
 
     public interface ILiveMatchMessage
     {

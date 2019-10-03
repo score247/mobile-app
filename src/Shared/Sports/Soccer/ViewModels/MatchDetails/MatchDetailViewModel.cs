@@ -49,13 +49,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     {
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
-        private readonly Func<string,string> buildFlagUrlFunc;
+        private readonly Func<string, string> buildFlagUrlFunc;
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
 
         private readonly IMatchInfoService matchInfoService;
 
-        public MatchDetailViewModel(           
+        public MatchDetailViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
@@ -84,7 +84,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         public async override void Initialize(INavigationParameters parameters)
         {
             if (parameters?["Match"] is IMatch match)
-            {               
+            {
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
@@ -218,7 +218,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage, forceFetchNewData:true);
+            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage, forceFetchNewData: true);
 
             var viewModels = new List<TabItemViewModel>();
 

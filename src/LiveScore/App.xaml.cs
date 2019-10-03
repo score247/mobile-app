@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Fanex.Caching;
@@ -37,7 +35,6 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Refit;
-using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -132,10 +129,10 @@ namespace LiveScore
                 ContentSerializer = new MessagePackContentSerializer()
             });
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
-            containerRegistry.RegisterInstance<Func<string,string>>((countryCode) 
-                => string.IsNullOrWhiteSpace(countryCode) 
-                    ? "images/flag_league/default_flag.svg"
-                    : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg", 
+            containerRegistry.RegisterInstance<Func<string, string>>((countryCode)
+                 => string.IsNullOrWhiteSpace(countryCode)
+                     ? "images/flag_league/default_flag.svg"
+                     : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
 
             CompositeResolver.RegisterAndSetAsDefault(
@@ -183,7 +180,7 @@ namespace LiveScore
                 .GetEvent<ConnectionChangePubSubEvent>()
                 .Subscribe(async (isConnected) =>
                 {
-                    if(isConnected)
+                    if (isConnected)
                     {
                         await soccerHub.ReConnect();
                     }

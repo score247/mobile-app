@@ -9,7 +9,6 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.Score.Extensions;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;

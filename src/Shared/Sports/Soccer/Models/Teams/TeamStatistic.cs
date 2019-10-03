@@ -1,5 +1,4 @@
-﻿using LiveScore.Soccer.Models.Matches;
-using LiveScore.Core.Models.Teams;
+﻿using LiveScore.Core.Models.Teams;
 using PropertyChanged;
 
 namespace LiveScore.Soccer.Models.Teams

@@ -48,7 +48,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             this.eventAggregator = eventAggregator;
-            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());            
+            oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
 
             HasData = false;
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);

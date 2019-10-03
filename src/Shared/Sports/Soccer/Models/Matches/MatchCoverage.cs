@@ -3,7 +3,7 @@
     using LiveScore.Core.Models.Matches;
     using MessagePack;
 
-    [MessagePackObject]    
+    [MessagePackObject]
     public class MatchCoverage
     {
         [Key(0)]

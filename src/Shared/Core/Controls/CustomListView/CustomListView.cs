@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Windows.Input;
-using LiveScore.Common.Controls;
 
 namespace LiveScore.Core.Controls.CustomListView
 {

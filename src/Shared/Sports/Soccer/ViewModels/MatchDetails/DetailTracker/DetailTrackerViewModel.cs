@@ -17,12 +17,12 @@
         private const string ReplacePrefix = "input-match-id";
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
-        
+
         private const string LanguageCode = "en";
 
         private readonly MatchCoverage matchCoverage;
 
-        public DetailTrackerViewModel(           
+        public DetailTrackerViewModel(
             MatchCoverage coverage,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
@@ -41,8 +41,8 @@
         public bool TrackerHidden { get; set; }
 
         public bool HasTrackerData { get; set; }
-        
-        public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);        
+
+        public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);
 
         public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);
 

@@ -6,7 +6,6 @@
 namespace MessagePack.Resolvers
 {
     using System;
-    using MessagePack;
 
     public class CoreModelResolver : global::MessagePack.IFormatterResolver
     {
@@ -165,7 +164,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
             return MessagePackBinary.WriteNil(ref bytes, offset);
         }
-        
+
         public global::LiveScore.Core.Enumerations.Enumeration Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
         {
             if (MessagePackBinary.IsNil(bytes, offset))
@@ -175,7 +174,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             }
 
             var startOffset = offset;
-            
+
             if (MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize) != 2)
             {
                 throw new InvalidOperationException("Invalid Union data was detected. Type:global::LiveScore.Core.Enumerations.Enumeration");
@@ -217,9 +216,9 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                     offset += MessagePackBinary.ReadNextBlock(bytes, offset);
                     break;
             }
-            
+
             readSize = offset - startOffset;
-            
+
             return result;
         }
     }
@@ -239,7 +238,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
 namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 {
-    using System;
     using MessagePack;
 
 
@@ -252,7 +250,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -313,7 +311,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -383,7 +381,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DisplayName"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Value"),
-                
+
             };
         }
 
@@ -394,7 +392,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -442,7 +440,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -466,7 +464,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
@@ -530,7 +528,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Enumerations
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
 {
-    using System;
     using MessagePack;
 
 
@@ -562,7 +559,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Lineups"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Commentary"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TrackerWidgetLink"),
-                
+
             };
         }
 
@@ -573,7 +570,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -651,7 +648,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -680,7 +677,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.HomeScore);
@@ -753,7 +750,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 5);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
@@ -835,7 +832,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 {
-    using System;
     using MessagePack;
 
 
@@ -865,7 +861,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OptionValue"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OpeningOptionValue"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OddsTrend"),
-                
+
             };
         }
 
@@ -876,7 +872,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -948,7 +944,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -979,7 +975,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
-                
+
             };
         }
 
@@ -990,7 +986,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -1038,7 +1034,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -1075,7 +1071,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Bookmaker"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("BetOptions"),
-                
+
             };
         }
 
@@ -1086,7 +1082,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 4);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -1146,7 +1142,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -1189,7 +1185,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsMatchStarted"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayScore"),
-                
+
             };
         }
 
@@ -1200,7 +1196,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
@@ -1272,7 +1268,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
+
                 NEXT_LOOP:
                 offset += readSize;
             }
@@ -1303,7 +1299,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 
 namespace MessagePack.Formatters.LiveScore.Core.Models.Teams
 {
-    using System;
     using MessagePack;
 
 
@@ -1316,7 +1311,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Teams
             {
                 return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
             }
-            
+
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 6);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);

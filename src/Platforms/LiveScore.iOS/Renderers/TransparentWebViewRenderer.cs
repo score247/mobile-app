@@ -13,7 +13,7 @@ namespace LiveScore.iOS.Renderers
             base.OnElementChanged(e);
 
             Opaque = false;
-            BackgroundColor = UIColor.Clear;            
+            BackgroundColor = UIColor.Clear;
         }
     }
 }
