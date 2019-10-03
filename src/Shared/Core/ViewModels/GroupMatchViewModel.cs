@@ -7,13 +7,14 @@ namespace LiveScore.Core.ViewModels
 {
     public class GroupMatchViewModel
     {
-        public GroupMatchViewModel(IMatch match, Func<string,string> buildFlagUrl)
+        public GroupMatchViewModel(IMatch match, Func<string, string> buildFlagUrl)
         {
             LeagueId = match.LeagueId;
             LeagueName = match.LeagueGroupName;
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
             CountryFlag = buildFlagUrl(match.CountryCode);
-
+            CountryCode = match.CountryCode;
+            LeagueOrder = match.LeagueOrder;
             Match = match;
         }
 
@@ -28,6 +29,8 @@ namespace LiveScore.Core.ViewModels
         public string CountryCode { get; }
 
         public string CountryFlag { get; }
+
+        public int LeagueOrder { get; }
 
         public override bool Equals(object obj)
             => (obj is GroupMatchViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;

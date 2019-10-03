@@ -79,6 +79,8 @@
 
         bool IsInternationalLeague { get; }
 
+        int LeagueOrder { get; }
+
         void UpdateMatch(IMatch match);
 
         void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);

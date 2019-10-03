@@ -7,6 +7,7 @@ using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.ViewModels;
+using PanCardView.Extensions;
 using Prism.Events;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -80,9 +81,18 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                // TODO: Should fix: This code does not move favorite/major leagues to top
-                Device.BeginInvokeOnMainThread(() => matchItems.Add(group));
+                var leagueOrders = matchItems.Select(i => i.Key.LeagueOrder).ToList();
+                var newLeagueIndex = CalculateLeagueIndexByOrder(group?.Key.LeagueOrder ?? 0, leagueOrders);
+
+                Device.BeginInvokeOnMainThread(() => matchItems.Insert(newLeagueIndex, group));
             }
+        }
+
+        private static int CalculateLeagueIndexByOrder(int leagueOrder, IList<int> leagueOrders)
+        {
+            leagueOrders.Add(leagueOrder);
+
+            return leagueOrders.OrderBy(order => order).IndexOf(leagueOrder);
         }
 
         public static void UpdateMatchItemEvent(

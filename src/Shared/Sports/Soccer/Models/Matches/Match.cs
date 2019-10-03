@@ -47,7 +47,8 @@
             string countryCode,
             string countryName,
             DateTimeOffset modifiedTime,
-            bool isInternationalLeague)
+            bool isInternationalLeague,
+            int leagueOrder)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -80,6 +81,7 @@
             CountryName = countryName;
             ModifiedTime = modifiedTime;
             IsInternationalLeague = isInternationalLeague;
+            LeagueOrder = leagueOrder;
         }
 
         internal Match(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
@@ -181,6 +183,9 @@
 
         [Key(29)]
         public bool IsInternationalLeague { get; private set; }
+
+        [Key(30)]
+        public int LeagueOrder { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
