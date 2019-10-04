@@ -1,16 +1,16 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
-{
-    using System;
-    using System.Collections.Generic;
-    using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
-    using Prism.Navigation;
-    using Xamarin.Forms;
+﻿using System;
+using System.Collections.Generic;
+using LiveScore.Core;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
+using Prism.Navigation;
+using Xamarin.Forms;
 
+namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+{
     public class BaseItemViewModel : ViewModelBase
     {
         private static readonly IDictionary<EventType, Type> ViewModelMapper = new Dictionary<EventType, Type>
@@ -48,7 +48,7 @@
         {
             TimelineEvent = timelineEvent;
             MatchInfo = matchInfo;
-            Match = matchInfo.Match as Match;
+            Match = matchInfo.Match;
             BuildData();
             ItemAutomationId = $"{TimelineEvent.Id}-{TimelineEvent.Type}";
         }
@@ -87,7 +87,9 @@
                 : new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
 
         public DataTemplate CreateTemplate()
-            => TemplateMapper.ContainsKey(TimelineEvent.Type) ? TemplateMapper[TimelineEvent.Type] : new MainEventItemTemplate();
+            => TemplateMapper.ContainsKey(TimelineEvent.Type)
+            ? TemplateMapper[TimelineEvent.Type]
+            : new MainEventItemTemplate();
 
         protected virtual void BuildInfo()
         {
@@ -99,8 +101,8 @@
             }
 
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
-                ? TimelineEvent.MatchTime + "'"
-                : TimelineEvent.MatchTime + "+" + TimelineEvent.StoppageTime + "'";
+                ? $"{TimelineEvent.MatchTime}'"
+                : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}";
         }
 
         private void BuildData() => BuildInfo();

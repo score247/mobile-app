@@ -15,13 +15,13 @@ namespace LiveScore.Soccer.Services
 {
     public class SoccerHubService : IHubService
     {
-        private readonly byte totalRetry = 5;
-        private readonly int NumOfDelayMillisecondsBeforeReConnect = 3 * 1000;
+        private const int NumOfDelayMillisecondsBeforeReConnect = 3_000;
+        private readonly string hubEndpoint;
+
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
         private readonly INetworkConnectionManager networkConnectionManager;
-        private readonly string hubEndpoint;
 
         private HubConnection hubConnection;
 
@@ -85,7 +85,7 @@ namespace LiveScore.Soccer.Services
 
                 hubConnection.Closed += HubConnection_Closed;
 
-                await hubConnection.StartAsync();
+                await hubConnection.StartAsync().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -107,25 +107,27 @@ namespace LiveScore.Soccer.Services
             await ReConnect().ConfigureAwait(false);
         }
 
-        public async Task ReConnect()
+        public async Task ReConnect(byte retryTimes = 5)
         {
             var retryCount = 0;
 
-            while (retryCount < totalRetry
+            while (retryCount < retryTimes
                 && hubConnection.State == HubConnectionState.Disconnected)
             {
                 retryCount++;
 
                 try
                 {
-                    await StopCurrentConnection();
+                    await StopCurrentConnection().ConfigureAwait(false);
                     await Task.Delay(NumOfDelayMillisecondsBeforeReConnect).ConfigureAwait(false);
-                    await hubConnection.StartAsync();
+                    await hubConnection.StartAsync().ConfigureAwait(false);
                     await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}").ConfigureAwait(false);
                 }
                 catch (Exception startException)
                 {
-                    await logger.LogErrorAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException).ConfigureAwait(false);
+                    await logger
+                        .LogErrorAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException)
+                        .ConfigureAwait(false);
                 }
             }
         }

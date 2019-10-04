@@ -14,10 +14,10 @@ namespace LiveScore.Soccer.Models.Odds
             OddsMovement = oddsMovement;
         }
 
-        public byte BetTypeId { get; set; }
+        public byte BetTypeId { get; private set; }
 
-        public Bookmaker Bookmaker { get; set; }
+        public Bookmaker Bookmaker { get; private set; }
 
-        public OddsMovement OddsMovement { get; set; }
+        public OddsMovement OddsMovement { get; private set; }
     }
 }

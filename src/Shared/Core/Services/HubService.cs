@@ -6,6 +6,6 @@
     {
         Task Start();
 
-        Task ReConnect();
+        Task ReConnect(byte retryTimes = 5);
     }
 }
