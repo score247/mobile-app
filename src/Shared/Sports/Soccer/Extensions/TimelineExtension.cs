@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Soccer.Extensions
-{
-    using System.Linq;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
+﻿using System.Linq;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
 
+namespace LiveScore.Soccer.Extensions
+{
     public static class TimelineExtension
     {
         private static readonly EventType[] DetailInfoEventTypes = new[] {
@@ -44,6 +44,7 @@
         public static bool OfHomeTeam(this TimelineEvent timeline)
             => timeline?.Team == "home";
 
-        public static bool IsDetailInfoEvent(this TimelineEvent timeline) => DetailInfoEventTypes.Contains(timeline.Type);
+        public static bool IsDetailInfoEvent(this TimelineEvent timeline) 
+            => DetailInfoEventTypes.Contains(timeline.Type);
     }
 }

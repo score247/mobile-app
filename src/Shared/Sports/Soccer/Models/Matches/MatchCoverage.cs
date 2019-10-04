@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Soccer.Models.Matches
-{
-    using LiveScore.Core.Models.Matches;
-    using MessagePack;
+﻿using LiveScore.Core.Models.Matches;
+using MessagePack;
 
+namespace LiveScore.Soccer.Models.Matches
+{
     [MessagePackObject]
     public class MatchCoverage
     {

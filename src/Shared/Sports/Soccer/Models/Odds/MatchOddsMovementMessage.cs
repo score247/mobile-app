@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Soccer.Models.Odds
-{
-    using System.Collections.Generic;
-    using LiveScore.Core.PubSubEvents.Odds;
-    using Prism.Events;
+﻿using System.Collections.Generic;
+using LiveScore.Core.PubSubEvents.Odds;
+using Prism.Events;
 
+namespace LiveScore.Soccer.Models.Odds
+{
     public class OddsMovementMessage
     {
         public const string HubMethod = "OddsMovement";

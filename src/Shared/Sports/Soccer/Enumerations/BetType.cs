@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Enumerations
-{
-    using LiveScore.Core.Enumerations;
+﻿using LiveScore.Core.Enumerations;
 
+namespace LiveScore.Soccer.Enumerations
+{
     public class BetType : Enumeration
     {
         public static readonly BetType OneXTwo = new BetType(1, "OneXTwo");

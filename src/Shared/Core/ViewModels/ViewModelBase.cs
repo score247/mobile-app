@@ -87,7 +87,8 @@ namespace LiveScore.Core.ViewModels
         }
 
         public virtual void OnResumeWhenNetworkOK()
-        { }
+        { 
+        }
 
         public virtual void OnSleep()
         {

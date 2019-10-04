@@ -52,7 +52,6 @@ namespace LiveScore
         private IHubService soccerHub;
         private INetworkConnectionManager networkConnectionManager;
 
-
         public App() : this(null)
         {
         }

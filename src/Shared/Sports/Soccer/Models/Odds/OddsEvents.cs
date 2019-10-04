@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Models.Odds
-{
-    using LiveScore.Core.Models.Odds;
+﻿using LiveScore.Core.Models.Odds;
 
+namespace LiveScore.Soccer.Models.Odds
+{
     public class OddsMovementEvent
     {
         public OddsMovementEvent(

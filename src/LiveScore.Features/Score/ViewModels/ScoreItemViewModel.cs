@@ -191,7 +191,9 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            await Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false)).ConfigureAwait(false);
+            await Task.Run(
+                () => LoadDataAsync(() => UpdateMatchesAsync(true), false))
+                .ConfigureAwait(false);
         }
 
         private async Task OnTapMatchAsync(MatchViewModel matchItem)
@@ -234,7 +236,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual async Task LoadMatchesAsync(bool getLatestData = false)
         {
-            var matches = (await LoadMatchesFromServiceAsync(getLatestData))?.ToList();
+            var matches = (await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false))?.ToList();
 
             if (matches?.Any() != true)
             {
@@ -268,11 +270,11 @@ namespace LiveScore.Features.Score.ViewModels
             HasData = true;
         }
 
-        protected virtual async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
+        protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
         {
-            return await MatchService
+            return MatchService
                 .GetMatchesByDate(SelectedDate, CurrentLanguage, getLatestData)
-                .ConfigureAwait(false);
+;
         }
 
         protected virtual void UpdateMatchItems(List<IMatch> matches)

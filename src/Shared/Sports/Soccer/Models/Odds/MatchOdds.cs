@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Soccer.Models.Odds
-{
-    using System.Collections.Generic;
-    using LiveScore.Core.Models.Odds;
-    using MessagePack;
+﻿using System.Collections.Generic;
+using LiveScore.Core.Models.Odds;
+using MessagePack;
 
+namespace LiveScore.Soccer.Models.Odds
+{
     [MessagePackObject(keyAsPropertyName: true)]
     public class MatchOdds
     {

@@ -68,6 +68,7 @@ namespace LiveScore.ViewModels
         }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
         private async void OnConnectionChanged(bool isConnected)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {
@@ -92,6 +93,7 @@ namespace LiveScore.ViewModels
         }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
         private async void OnConnectionTimeout()
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static
         {

@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Soccer.Converters
-{
-    using System;
-    using System.Globalization;
-    using LiveScore.Core.Enumerations;
-    using Xamarin.Forms;
+﻿using System;
+using System.Globalization;
+using LiveScore.Core.Enumerations;
+using Xamarin.Forms;
 
+namespace LiveScore.Soccer.Converters
+{
     public class OddsStatusConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

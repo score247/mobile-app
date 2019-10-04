@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Extensions
-{
-    using System.Globalization;
+﻿using System.Globalization;
 
+namespace LiveScore.Soccer.Extensions
+{
     public static class BetOptionOddsExtension
     {
         private const string OddsNumberFormat = "0.00";

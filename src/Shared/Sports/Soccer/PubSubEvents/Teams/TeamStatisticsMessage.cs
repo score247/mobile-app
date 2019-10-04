@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Soccer.PubSubEvents.Teams
-{
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core.Models.Teams;
-    using LiveScore.Core.PubSubEvents.Teams;
-    using LiveScore.Soccer.Models.Teams;
-    using Newtonsoft.Json;
-    using Prism.Events;
+﻿using LiveScore.Common.Extensions;
+using LiveScore.Core.Models.Teams;
+using LiveScore.Core.PubSubEvents.Teams;
+using LiveScore.Soccer.Models.Teams;
+using Newtonsoft.Json;
+using Prism.Events;
 
+namespace LiveScore.Soccer.PubSubEvents.Teams
+{
     public class TeamStatisticsMessage : ITeamStatisticsMessage
     {
         public const string HubMethod = "TeamStatistic";

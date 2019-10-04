@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Soccer.Extensions
-{
-    using System.Linq;
-    using LiveScore.Core.Models.Matches;
+﻿using System.Linq;
+using LiveScore.Core.Models.Matches;
 
+namespace LiveScore.Soccer.Extensions
+{
     public static class MatchResultExtenstion
     {
         private const int NumberOfFullTimePeriodsResult = 2;

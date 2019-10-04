@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Soccer.Models.Matches
-{
-    using System.Collections.Generic;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using PropertyChanged;
+﻿using System.Collections.Generic;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using PropertyChanged;
 
+namespace LiveScore.Soccer.Models.Matches
+{
     [AddINotifyPropertyChangedInterface]
     public class MatchResult : IMatchResult
     {

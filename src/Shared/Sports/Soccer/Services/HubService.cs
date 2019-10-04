@@ -67,7 +67,7 @@ namespace LiveScore.Soccer.Services
                         {
                             try
                             {
-                                logger.LogInfo($"HubService receiving {jsonString}");
+                                logger.LogInfoAsync($"HubService receiving {jsonString}");
 
                                 var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
 
@@ -78,7 +78,7 @@ namespace LiveScore.Soccer.Services
                             }
                             catch (Exception ex)
                             {
-                                logger.LogError(ex);
+                                logger.LogErrorAsync(ex);
                             }
                         }));
                 }
@@ -104,7 +104,7 @@ namespace LiveScore.Soccer.Services
 
             await logger.LogInfoAsync($"HubConnection_Closed {ex}").ConfigureAwait(false);
 
-            await ReConnect();
+            await ReConnect().ConfigureAwait(false);
         }
 
         public async Task ReConnect()
@@ -119,9 +119,9 @@ namespace LiveScore.Soccer.Services
                 try
                 {
                     await StopCurrentConnection();
-                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
+                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect).ConfigureAwait(false);
                     await hubConnection.StartAsync();
-                    await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}");
+                    await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}").ConfigureAwait(false);
                 }
                 catch (Exception startException)
                 {
@@ -134,7 +134,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                await hubConnection.StopAsync();
+                await hubConnection.StopAsync().ConfigureAwait(false);
             }
             catch (Exception disposeException)
             {

@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Soccer.Enumerations
-{
-    using LiveScore.Core.Enumerations;
+﻿using LiveScore.Core.Enumerations;
 
-    public class GoalMethod : Enumeration
+namespace LiveScore.Soccer.Enumerations
+{
+    public sealed class GoalMethod : Enumeration
     {
         public const string OwnGoal = "own_goal";
 

@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Models.Matches
-{
-    using LiveScore.Core.Models.Matches;
+﻿using LiveScore.Core.Models.Matches;
 
+namespace LiveScore.Soccer.Models.Matches
+{
     public class MatchEvent : IMatchEvent
     {
         public MatchEvent(string matchId, MatchResult matchResult, TimelineEvent timeline)

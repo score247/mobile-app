@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Soccer.Enumerations
-{
-    using LiveScore.Core.Enumerations;
+﻿using LiveScore.Core.Enumerations;
 
+namespace LiveScore.Soccer.Enumerations
+{
     /// <summary>
     /// Keep using image for dynamic loading
     /// </summary>
