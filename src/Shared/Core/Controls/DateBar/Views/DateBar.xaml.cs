@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Core.Controls.DateBar.Views
+﻿using System.Threading.Tasks;
+using Xamanimation;
+using XamEffects;
+
+namespace LiveScore.Core.Controls.DateBar.Views
 {
     using System;
     using System.Windows.Input;

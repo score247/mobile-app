@@ -6,9 +6,10 @@
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels;assembly=LiveScore.Core"
               x:DataType="viewModels:MatchViewModel"
-              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates">
+              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
+              xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects">
     <ViewCell>
-        <StackLayout>
+        <StackLayout xamEffects:TouchEffect.Color="Gray">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

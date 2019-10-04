@@ -14,6 +14,7 @@
              mvvm:ViewModelLocator.AutowireViewModel="True"
              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
+             xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>

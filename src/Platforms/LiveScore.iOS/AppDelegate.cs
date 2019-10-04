@@ -30,6 +30,7 @@ namespace LiveScore.iOS
             CachedImageRenderer.Init();
             SvgCachedImage.Init();
             CardsViewRenderer.Preserve();
+            XamEffects.iOS.Effects.Init();
 
             var application = new App(new iOSInitializer());
             LoadApplication(application);
