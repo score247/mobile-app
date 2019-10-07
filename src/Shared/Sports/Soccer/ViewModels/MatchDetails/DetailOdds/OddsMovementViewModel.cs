@@ -17,9 +17,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     using LiveScore.Common.Services;
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
-    using LiveScore.Core.PubSubEvents.Odds;
     using LiveScore.Core.ViewModels;
     using LiveScore.Soccer.Models.Odds;
+    using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.Services;
     using MethodTimer;
     using OddItems;

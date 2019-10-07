@@ -10,7 +10,6 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Odds;
-using LiveScore.Core.PubSubEvents.Odds;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.PubSubEvents.Odds;
 using LiveScore.Soccer.Services;

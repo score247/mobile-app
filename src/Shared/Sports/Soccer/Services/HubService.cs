@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.PubSubEvents;
 using LiveScore.Soccer.PubSubEvents.Matches;
 using LiveScore.Soccer.PubSubEvents.Odds;
 using LiveScore.Soccer.PubSubEvents.Teams;
@@ -24,16 +25,6 @@ namespace LiveScore.Soccer.Services
         private readonly INetworkConnectionManager networkConnectionManager;
 
         private HubConnection hubConnection;
-
-        private static readonly IDictionary<string, (Type, Action<IEventAggregator, object>)> hubEvents
-            = new Dictionary<string, (Type, Action<IEventAggregator, object>)>
-            {
-                { MatchEventMessage.HubMethod, (typeof(MatchEventMessage), MatchEventMessage.Publish) },
-                { OddsComparisonMessage.HubMethod, (typeof(OddsComparisonMessage), OddsComparisonMessage.Publish) },
-                { OddsMovementMessage.HubMethod, (typeof(OddsMovementMessage), OddsMovementMessage.Publish) },
-                { TeamStatisticsMessage.HubMethod, (typeof(TeamStatisticsMessage), TeamStatisticsMessage.Publish) },
-                { LiveMatchMessage.HubMethod, (typeof(LiveMatchMessage), LiveMatchMessage.Publish) }
-            };
 
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
@@ -59,22 +50,19 @@ namespace LiveScore.Soccer.Services
                     .WithUrl($"{hubEndpoint}/soccerhub")
                     .Build();
 
-                foreach (var hubEvent in hubEvents)
+                var handlers = BuildHandlers();
+
+                foreach (var handler in handlers)
                 {
                     hubConnection.On(
-                        hubEvent.Key,
+                        handler.HubMethod,
                         (Action<string>)((jsonString) =>
                         {
                             try
                             {
                                 logger.LogInfoAsync($"HubService receiving {jsonString}");
 
-                                var data = JsonConvert.DeserializeObject(jsonString, hubEvent.Value.Item1);
-
-                                if (data != null)
-                                {
-                                    hubEvent.Value.Item2(eventAggregator, data);
-                                }
+                                handler.Handle(jsonString);
                             }
                             catch (Exception ex)
                             {
@@ -92,6 +80,16 @@ namespace LiveScore.Soccer.Services
                 await logger.LogErrorAsync(ex).ConfigureAwait(false);
             }
         }
+
+        private IEnumerable<IPubSubEventHandler> BuildHandlers()
+            => new List<IPubSubEventHandler>
+            {
+                new MatchEventPubSubEventHandler(eventAggregator),
+                new LiveMatchPubSubEventHandler(eventAggregator),
+                new OddsComparisonPubSubEventHandler(eventAggregator),
+                new OddsMovementPubSubEventHandler(eventAggregator),
+                new TeamStatisticPubSubEventHandler(eventAggregator)
+            };
 
         private async Task HubConnection_Closed(Exception arg)
         {
