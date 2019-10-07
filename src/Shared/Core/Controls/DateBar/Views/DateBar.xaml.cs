@@ -66,7 +66,7 @@ namespace LiveScore.Core.Controls.DateBar.Views
                         var control = (DateBar)bindObject;
                         var selectedIndex = (int)newValue;
                         var oldIndex = (int)oldValue;
-                        var dateBarLayout = control?.Content as FlexLayout;
+                        var dateBarLayout = (control?.Content as Frame).Children[0] as FlexLayout;
 
                         if (dateBarLayout?.Children?.Count == 0)
                         {
