@@ -11,7 +11,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <Frame>
+        <Frame Margin="0,0,0,10">
             <FlexLayout x:Name="DateBarLayout"
                         Style="{StaticResource DateBarLayout}" />
         </Frame>

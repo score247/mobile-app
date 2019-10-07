@@ -46,14 +46,12 @@
     <StackLayout x:Name="ScoreView"
                  Opacity="0.5"
                  Scale="2">
-        <BoxView Style="{StaticResource HorizontalLine}"></BoxView>
+        <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
         <views:DateBar x:DataType="{x:Null}"
                        NumberDisplayDays="2"
                        LiveCount="{Binding LiveMatchCount}"
                        SelectedIndex="{Binding SelectedScoreItemIndex}"
                        ItemTappedCommand="{Binding DateBarItemTapCommand}" />
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 Color="{StaticResource ThirdAccentColor}"></BoxView>
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"
