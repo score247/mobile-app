@@ -5,11 +5,16 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView">
 
-    <Style x:Key="DatebarLayout" TargetType="Frame">
-        <Setter Property="HasShadow" Value="True" />
-        <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="Margin" Value="0,0,0,10" />
-        <Setter Property="BackgroundColor" Value="{StaticResource DateBarLayoutBackgroundColor}" />
+    <Style x:Key="DatebarLayout"
+           TargetType="Frame">
+        <Setter Property="HasShadow"
+                Value="True" />
+        <Setter Property="CornerRadius"
+                Value="0" />
+        <Setter Property="Margin"
+                Value="0,0,0,10" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource DateBarLayoutBackgroundColor}" />
     </Style>
     <!--<Style x:Key="ScoresTabsControl" TargetType="{x:Type controls:TabControl}">
         <Setter Property="StripeColor" Value="{StaticResource DateBarStripeColor}" />

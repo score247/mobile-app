@@ -54,15 +54,16 @@
                  Scale="2">
         <BoxView Style="{StaticResource HorizontalLine}"
                  BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
-        <Frame x:DataType="{x:Null}"
-               Style="{StaticResource DatebarLayout}">
-            <controls:TabsControl StripeColor="#FF7246"
-                                  StripeHeight="1"
-                                  HeightRequest="70"
-                                  HorizontalOptions="FillAndExpand"
-                                  ItemTemplate="{StaticResource DateBarTemplateSelector}"
-                                  BindingContext="{x:Reference ScoresCarouselView}">
-            </controls:TabsControl>
+        <Frame Style="{StaticResource DatebarLayout}">
+            <ContentView HorizontalOptions="FillAndExpand"
+                         HeightRequest="50">
+                <controls:TabsControl StripeColor="#FF7246"
+                                      StripeHeight="1"
+                                      HeightRequest="50"
+                                      ItemTemplate="{StaticResource DateBarTemplateSelector}"
+                                      BindingContext="{x:Reference ScoresCarouselView}">
+                </controls:TabsControl>
+            </ContentView>
         </Frame>
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
