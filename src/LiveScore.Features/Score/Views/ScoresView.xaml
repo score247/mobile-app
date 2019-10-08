@@ -67,6 +67,7 @@
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             IsViewReusingEnabled="False"
+                            IsCyclical="False"
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand">
             <x:Arguments>
