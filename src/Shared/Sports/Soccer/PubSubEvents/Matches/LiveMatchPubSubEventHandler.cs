@@ -1,10 +1,9 @@
 ﻿using LiveScore.Core.PubSubEvents.Matches;
-using Newtonsoft.Json;
 using Prism.Events;
 
 namespace LiveScore.Soccer.PubSubEvents.Matches
 {
-    public class LiveMatchPubSubEventHandler 
+    public class LiveMatchPubSubEventHandler
         : BasePubSubEventHandler<LiveMatchMessage, LiveMatchPubSubEvent>
     {
         public LiveMatchPubSubEventHandler(IEventAggregator eventAggregator)

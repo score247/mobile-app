@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.PubSubEvents
             if (message != null)
             {
                 var pubSubEvent = eventAggregator.GetEvent<U>();
-                
+
                 Publish(message, pubSubEvent);
             }
         }

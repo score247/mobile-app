@@ -3,7 +3,7 @@ using Prism.Events;
 
 namespace LiveScore.Soccer.PubSubEvents.Matches
 {
-    public class MatchEventPubSubEventHandler 
+    public class MatchEventPubSubEventHandler
         : BasePubSubEventHandler<MatchEventMessage, MatchEventPubSubEvent>
     {
         public MatchEventPubSubEventHandler(IEventAggregator eventAggregator)

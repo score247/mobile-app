@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Odds;
 using LiveScore.Soccer.PubSubEvents;
 using LiveScore.Soccer.PubSubEvents.Matches;
 using LiveScore.Soccer.PubSubEvents.Odds;
 using LiveScore.Soccer.PubSubEvents.Teams;
 using Microsoft.AspNetCore.SignalR.Client;
-using Newtonsoft.Json;
 using Prism.Events;
 
 namespace LiveScore.Soccer.Services
