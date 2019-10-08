@@ -14,7 +14,6 @@
              mvvm:ViewModelLocator.AutowireViewModel="True"
              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
-             xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
              xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
              x:DataType="viewModels:ScoresViewModel"

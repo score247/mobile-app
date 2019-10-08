@@ -6,16 +6,16 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
     using Xamarin.Forms;
     using Xunit;
 
-    public class TabStripHeaderTests : IClassFixture<ResourcesFixture>
+    public class TabStripHeaderTests : IClassFixture<ResourcesFixture>, IClassFixture<ViewModelBaseFixture>
     {
         private readonly List<TabItemViewModel> tabs;
 
-        public TabStripHeaderTests()
+        public TabStripHeaderTests(ViewModelBaseFixture baseFixture)
         {
             tabs = new List<TabItemViewModel>
             {
-                new TabItemViewModel(null, null, null) { TabHeaderTitle = "Info" },
-                new TabItemViewModel(null, null, null)  { TabHeaderTitle = "Tracker" },
+                new TabItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, null) { TabHeaderTitle = "Info" },
+                new TabItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, null)  { TabHeaderTitle = "Tracker" },
             };
         }
 

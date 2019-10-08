@@ -29,18 +29,37 @@
         public void LogError_WhenCall_InjectCaptureEvent()
         {
             // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
+            var exception = new InvalidOperationException("");
 
             // Act
-            loggingService.LogError(new InvalidOperationException(""));
+            loggingService.LogError(exception);
 
             // Assert
-            mockRavenClient.Received(1).Capture(Arg.Any<SentryEvent>());
+            mockRavenClient.Received(1).Capture(
+                Arg.Is<SentryEvent>(s => s.Exception == exception));
+        }
+
+        [Fact]
+        public void LogErrorWithMessage_WhenCall_InjectCaptureEvent()
+        {
+            // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
+            var exception = new InvalidOperationException("");
+
+            // Act
+            loggingService.LogError("message", exception);
+
+            // Assert
+            mockRavenClient.Received(1).Capture(
+                Arg.Is<SentryEvent>(s => s.Message == "iPhone message" && s.Exception == exception));
         }
 
         [Fact]
         public void LogError_WhenCall_CorrectDeviceName()
         {
             // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -53,6 +72,7 @@
         public void LogError_WhenCall_CorrectDeviceModel()
         {
             // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -64,6 +84,9 @@
         [Fact]
         public void LogError_WhenCall_CorrectOperatingSystemName()
         {
+            // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
+
             // Act
             loggingService.LogError(new InvalidOperationException(""));
 
@@ -75,6 +98,7 @@
         public void LogError_WhenCall_CorrectOperatingSystemVersion()
         {
             // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -87,6 +111,7 @@
         public async Task LogErrorAsync_WhenCall_InjectCaptureEventAsync()
         {
             // Arrange
+            mockNetworkManager.IsConnectionOK().Returns(true);
 
             // Act
             await loggingService.LogErrorAsync(new InvalidOperationException(""));

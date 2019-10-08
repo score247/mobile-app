@@ -44,7 +44,7 @@
             app.Resources["ActiveSubTabColor"] = Color.FromHex("#3EC28F");
             app.Resources["UpLiveOddColor"] = Color.FromHex("#FF222C");
             app.Resources["DownLiveOddColor"] = Color.FromHex("#66FF59");
-
+            app.Resources["Icons"] = new Style(typeof(Label));
             app.Resources["LiveIcon"] = new Style(typeof(Label));
             app.Resources["DropdownIcon"] = new Style(typeof(Label));
             app.Resources["WinnerInfoIcon"] = new Style(typeof(Image));

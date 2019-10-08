@@ -49,6 +49,7 @@ namespace LiveScore.Common.Services
         public void LogError(Exception exception)
         {
             Debug.WriteLine("LogError");
+
             if (networkConnectionManager.IsConnectionOK())
             {
                 ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
@@ -92,7 +93,6 @@ namespace LiveScore.Common.Services
 
             return Task.CompletedTask;
         }
-
 
         public void LogInfo(string message)
         {

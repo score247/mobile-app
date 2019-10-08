@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Core.Tests.Fixtures
+﻿using LiveScore.Common.Services;
+
+namespace LiveScore.Core.Tests.Fixtures
 {
     using System;
     using System.Threading.Tasks;
@@ -21,16 +23,15 @@
             AppSettingsFixture = new AppSettingsFixture();
             CommonFixture = new CommonFixture();
             EventAggregator = new EventAggregator();
+            LoggingService = Substitute.For<ILoggingService>();
 
             DependencyResolver = Substitute.For<IDependencyResolver>();
             DependencyResolver.Resolve<ISettings>().Returns(AppSettingsFixture.Settings);
             DependencyResolver.Resolve<IEventAggregator>().Returns(EventAggregator);
-
+            DependencyResolver.Resolve<ILoggingService>().Returns(LoggingService);
             NavigationService = new FakeNavigationService();
             HubService = Substitute.For<IHubService>();
             HubConnection = Substitute.For<FakeHubConnection>();
-            //HubService.BuildMatchEventHubConnection().Returns(HubConnection);
-            //HubService.BuildOddsEventHubConnection().Returns(HubConnection);
         }
 
         public IDependencyResolver DependencyResolver { get; }
@@ -38,6 +39,8 @@
         public INavigationService NavigationService { get; }
 
         public IEventAggregator EventAggregator { get; }
+
+        public ILoggingService LoggingService { get; }
 
         public AppSettingsFixture AppSettingsFixture { get; }
 

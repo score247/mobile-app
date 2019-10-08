@@ -38,7 +38,7 @@ namespace LiveScore.Core.ViewModels
             LoggingService = DependencyResolver.Resolve<ILoggingService>();
             networkConnectionManager = DependencyResolver.Resolve<INetworkConnectionManager>();
 
-            var settings = AppSettings.Current;
+            var settings = DependencyResolver.Resolve<ISettings>();
 
             CurrentSportName = settings.CurrentSportType.DisplayName;
             CurrentSportId = settings.CurrentSportType.Value;
@@ -87,7 +87,7 @@ namespace LiveScore.Core.ViewModels
         }
 
         public virtual void OnResumeWhenNetworkOK()
-        { 
+        {
         }
 
         public virtual void OnSleep()

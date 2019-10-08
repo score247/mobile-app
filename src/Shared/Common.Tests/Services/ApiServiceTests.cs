@@ -10,8 +10,8 @@ namespace LiveScore.Core.Tests.Services
 
     public interface IMockApi
     {
-        [Get("/Match/GetMatcheIds?sportId={sportId}")]
-        Task<string> GetMatcheIds(string sportId);
+        [Get("/Match/GetMatchIds?sportId={sportId}")]
+        Task<string> GetMatchIds(string sportId);
     }
 
     public class MockModel { }
@@ -22,7 +22,6 @@ namespace LiveScore.Core.Tests.Services
         public void GetApi_Always_GetFromRefitRestService()
         {
             // Arrange
-            var apiPolicy = Substitute.For<IApiPolicy>();
             var httpService = Substitute.For<IHttpService>();
             var loggingService = Substitute.For<ILoggingService>();
             var networkConnectionManager = Substitute.For<INetworkConnectionManager>();
@@ -40,29 +39,6 @@ namespace LiveScore.Core.Tests.Services
 
             // Assert
             Assert.Equal("https://score247-api1.nexdev.net/dev/api", httpClient.BaseAddress.ToString());
-        }
-
-        [Fact]
-        public void Execute_Always_CallApiPolicyRetryAndTimeout()
-        {
-            // Arrange
-            var apiPolicy = Substitute.For<IApiPolicy>();
-            var httpService = Substitute.For<IHttpService>();
-            var loggingService = Substitute.For<ILoggingService>();
-            var networkConnectionManager = Substitute.For<INetworkConnectionManager>();
-            var cacheManager = Substitute.For<ICacheManager>();
-            httpService.HttpClient.Returns(new HttpClient()
-            {
-                BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
-            });
-            var apiService = new ApiService(httpService, loggingService, networkConnectionManager, cacheManager);
-            Task<MockModel> func() => Task.FromResult(new MockModel());
-
-            // Act
-            apiService.Execute(func);
-
-            // Assert
-            apiPolicy.Received(1).RetryAndTimeout(func);
         }
     }
 }
