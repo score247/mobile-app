@@ -9,12 +9,14 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+             xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views.Templates;assembly=LiveScore.Core"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              xmlns:xamEffects="clr-namespace:XamEffects;assembly=XamEffects"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -26,6 +28,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
+            <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
+            <dateBar:DateTemplate x:Key="DateTemplate" />
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
@@ -46,12 +50,16 @@
     <StackLayout x:Name="ScoreView"
                  Opacity="0.5"
                  Scale="2">
-        <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
-        <views:DateBar x:DataType="{x:Null}"
-                       NumberDisplayDays="2"
-                       LiveCount="{Binding LiveMatchCount}"
-                       SelectedIndex="{Binding SelectedScoreItemIndex}"
-                       ItemTappedCommand="{Binding DateBarItemTapCommand}" />
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
+        <ContentView x:DataType="{x:Null}">
+            <controls:TabsControl StripeColor="#FF7246"
+                                  HeightRequest="70"
+                                  HorizontalOptions="FillAndExpand"
+                                  ItemTemplate="{StaticResource DateBarTemplateSelector}"
+                                  BindingContext="{x:Reference ScoresCarouselView}">
+            </controls:TabsControl>
+        </ContentView>
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"
@@ -60,8 +68,8 @@
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             IsViewReusingEnabled="False"
                             HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand"
-                            IsCyclical="False">
+                            IsCyclical="False"
+                            VerticalOptions="FillAndExpand">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
                                                             AnimationLength="250"

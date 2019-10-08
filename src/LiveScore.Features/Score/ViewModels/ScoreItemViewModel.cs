@@ -60,6 +60,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DateTime SelectedDate { get; }
 
+        public bool IsActive { get; set; }
+
         public bool IsRefreshing { get; set; }
 
         public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; protected set; }

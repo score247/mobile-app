@@ -38,7 +38,6 @@ namespace LiveScore.Features.Score.ViewModels
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
                 .Subscribe(OnReceivedLiveMatches, true);
-
             InitScoreItemSources();
         }
 
@@ -127,7 +126,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (secondLoad)
             {
-                SelectedScoreItem?.OnAppearing();
+                SelectedScoreItem.OnAppearing();
             }
 
             secondLoad = true;
@@ -135,7 +134,15 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
         {
-            SelectedScoreItem?.OnDisappearing();
+            SelectedScoreItem.IsActive = true;
+
+            if (args.Index >= 0)
+            {
+                var oldItemSource = ScoreItemSources[args.Index];
+
+                oldItemSource.IsActive = false;
+                oldItemSource.OnDisappearing();
+            }
         }
 
         private void OnDateBarItemTapped(DateBarItemTappedEventArgs args)

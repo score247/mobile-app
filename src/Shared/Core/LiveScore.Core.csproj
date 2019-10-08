@@ -56,6 +56,12 @@
       <Compile Remove="Converters\MatchMinuteConverter.cs" />
     </ItemGroup>
     <ItemGroup>
+      <Compile Update="Controls\DateBar\Views\Templates\CalendarTemplate.xaml.cs">
+        <DependentUpon>CalendarTemplate.xaml</DependentUpon>
+      </Compile>
+      <Compile Update="Controls\DateBar\Views\Templates\LiveTemplate.xaml.cs">
+        <DependentUpon>LiveTemplate.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Controls\TabStrip\TabStrip.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
       </Compile>
@@ -70,6 +76,9 @@
       </Compile>
     </ItemGroup>
     <ItemGroup>
+      <EmbeddedResource Update="Controls\DateBar\Views\Templates\DateTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Views\NetworkConnectionError.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>

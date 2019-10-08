@@ -15,12 +15,12 @@
                 Value="18" />
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
-        <Setter Property="TextColor"
-                Value="{StaticResource DateBarTextColor}" />
         <Setter Property="Text"
                 Value="&#xe919;" />
-        <Setter Property="FlexLayout.Shrink" Value="0" />
-        <Setter Property="FlexLayout.Basis" Value="60" />
+        <Setter Property="FlexLayout.Shrink"
+                Value="0" />
+        <Setter Property="FlexLayout.Basis"
+                Value="60" />
     </Style>
 
     <Style x:Key="LiveIcon"
@@ -30,39 +30,15 @@
                 Value="20" />
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
-        <Setter Property="TextColor"
-                Value="{StaticResource DateBarLiveColor}" />
         <Setter Property="Text"
                 Value="&#xe91a;" />
-    </Style>
-
-    <Style x:Key="DateBarItemLayout"
-           TargetType="StackLayout">
-        <Setter Property="HorizontalOptions"
-                Value="FillAndExpand" />
-        <Setter Property="VerticalOptions"
-                Value="FillAndExpand" />
-        <Setter Property="FlexLayout.Grow"
-                Value="1" />
-    </Style>
-
-    <Style x:Key="DateBarLayout"
-           TargetType="FlexLayout">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource DateBarLayoutBackgroundColor}" />
-        <Setter Property="Direction"
-                Value="Row" />
-        <Setter Property="AlignItems"
-                Value="Center" />
-        <Setter Property="JustifyContent"
-                Value="SpaceAround" />
-        <Setter Property="Padding"
-                Value="0,10,0,10" />
     </Style>
 
     <Style x:Key="DateBarLabel"
            TargetType="Label">
         <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+        <Setter Property="VerticalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
                 Value="{StaticResource DateBarTextColor}" />
@@ -84,22 +60,5 @@
                 Value="9" />
         <Setter Property="Margin"
                 Value="0,2,0,0" />
-    </Style>
-
-    <Style x:Key="MatchLiveNumberBox" TargetType="Frame">
-        <Setter Property="CornerRadius" Value="11" />
-        <Setter Property="BackgroundColor" Value="#FC1923" />
-        <Setter Property="Margin" Value="14,-12,-14,12" />
-    </Style>
-
-    <Style x:Key="MatchLiveNumberLabel" TargetType="Label">
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="LiveLayout" TargetType="AbsoluteLayout">
-        <Setter Property="FlexLayout.Shrink" Value="0" />
-        <Setter Property="FlexLayout.Basis" Value="60" />
     </Style>
 </ResourceDictionary>

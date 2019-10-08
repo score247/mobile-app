@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
+              xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.CalendarTemplate">
+
+    <StackLayout HorizontalOptions="FillAndExpand"
+                 VerticalOptions="CenterAndExpand">
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <views:DateBarResource />
+                </ResourceDictionary.MergedDictionaries>
+                <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        <Label Style="{StaticResource CalendarIcon}"
+               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}" />
+    </StackLayout>
+</DataTemplate>
