@@ -32,7 +32,6 @@
             </ResourceDictionary.MergedDictionaries>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
-            <dateBar:DateTemplate x:Key="DateTemplate" />
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
@@ -55,7 +54,8 @@
                  Scale="2">
         <BoxView Style="{StaticResource HorizontalLine}"
                  BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
-        <Frame x:DataType="{x:Null}" Style="{StaticResource DatebarLayout}">
+        <Frame x:DataType="{x:Null}"
+               Style="{StaticResource DatebarLayout}">
             <controls:TabsControl StripeColor="#FF7246"
                                   StripeHeight="1"
                                   HeightRequest="70"

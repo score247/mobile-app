@@ -1,4 +1,5 @@
 ﻿using System;
+using CoreGraphics;
 using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
@@ -19,25 +20,45 @@ namespace LiveScore.iOS.Renderers
                 Font = FontManager.GetFont(nfloat.Parse(App.Current.Resources["FunctionBarFontSize"].ToString()))
             };
 
+        public override void ViewWillLayoutSubviews()
+        {
+            base.ViewWillLayoutSubviews();
+
+            foreach (var vc in ViewControllers)
+            {
+                vc.TabBarItem.TitlePositionAdjustment = titlePositionOffset;
+                vc.TabBarItem.ImageInsets = iconInsets;
+            }
+        }
+
         public override void ViewWillAppear(bool animated)
         {
+            AddShadow();
             SetSelectedTabColor();
             UpdateAllTabBarItems();
+
             base.ViewWillAppear(animated);
         }
 
-        private static void SetSelectedTabColor()
+        private void AddShadow()
         {
-            var color = App.Current.Resources["FunctionBarActiveColor"];
+            var control = ViewController as UITabBarController;
 
-            if (color == null)
+            if (control == null)
             {
                 return;
             }
 
-            var selectedColor = (Color)color;
-            var selectedTabColor = UIColor.FromRGB((nfloat)selectedColor.R, (nfloat)selectedColor.G,
-                (nfloat)selectedColor.B);
+            var layer = control.TabBar.Layer;
+            layer.ShadowColor = UIColor.Black.CGColor;
+            layer.ShadowOffset = new CGSize(0.0, 1);
+            layer.ShadowRadius = 8;
+            layer.ShadowOpacity = (float)0.9;
+        }
+
+        private static void SetSelectedTabColor()
+        {
+            var selectedTabColor = GetColorFromResource("FunctionBarActiveColor");
 
             UITabBar.Appearance.SelectedImageTintColor = selectedTabColor;
 
@@ -57,16 +78,16 @@ namespace LiveScore.iOS.Renderers
             }
         }
 
-        // TODO: iphone Xr will get wrong UI issue
-        public override void ViewWillLayoutSubviews()
+        private static UIColor GetColorFromResource(string resourceName)
         {
-            base.ViewWillLayoutSubviews();
+            var color = (Color)App.Current.Resources[resourceName];
 
-            foreach (var vc in ViewControllers)
+            if (color == default)
             {
-                vc.TabBarItem.TitlePositionAdjustment = titlePositionOffset;
-                vc.TabBarItem.ImageInsets = iconInsets;
+                return UIColor.Black;
             }
+
+            return UIColor.FromRGB((nfloat)color.R, (nfloat)color.G, (nfloat)color.B);
         }
     }
 }
