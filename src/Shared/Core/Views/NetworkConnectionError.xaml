@@ -15,13 +15,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="EndAndExpand"
-                     Margin="0,0,0,50">
+        <StackLayout Style="{StaticResource NetworkConnectionErrorContainer}">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
             <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
-                <BoxView Style="{StaticResource NetworkConnectionErrorLine}" />
                 <Button Style="{StaticResource NetworkConnectionIcon}" />
                 <Label Text="{Binding ErrorMessage}"
                        Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />

@@ -104,6 +104,11 @@
             <x:Double x:Key="SmallerTextFontSize">11</x:Double>
             <x:Double x:Key="SmalleastTextFontSize">10</x:Double>
             <x:Double x:Key="TabbedPageFontSize">12</x:Double>
+
+            <!--  Network Connection  -->
+            <Color x:Key="NetworkConnectionBgColor">#EBC8C4</Color>
+            <Color x:Key="NetworkConnectionIconColor">#FB0F00</Color>
+            <Color x:Key="NetworkConnectionContentColor">#982B31</Color>
             <!--  Calendar Page  -->
             <Color x:Key="DateColor">#fff</Color>
             <Color x:Key="DisabledDateColor">#636886</Color>

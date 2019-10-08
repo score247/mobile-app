@@ -3,6 +3,12 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
+    <Style x:Key="NetworkConnectionErrorContainer" TargetType="StackLayout">
+        <Setter Property="VerticalOptions"
+                Value="Center" />
+        <Setter Property="Margin"
+                Value="0,0,0,50" />
+    </Style>
     <Style x:Key="NetworkConnectionErrorLayout"
            TargetType="FlexLayout">
         <Setter Property="HeightRequest"
@@ -14,26 +20,13 @@
         <Setter Property="AlignItems"
                 Value="Center" />
         <Setter Property="BackgroundColor"
-                Value="#23252B" />
-    </Style>
-    <Style x:Key="NetworkConnectionErrorLine"
-           TargetType="BoxView">
-        <Setter Property="BackgroundColor"
-                Value="#FF0000" />
-        <Setter Property="WidthRequest"
-                Value="2" />
-        <Setter Property="HeightRequest"
-                Value="60" />
-        <Setter Property="Grid.Row"
-                Value="0" />
-        <Setter Property="Grid.Column"
-                Value="0" />
+                Value="{StaticResource NetworkConnectionBgColor}" />
     </Style>
     <Style x:Key="NetworkConnectionIcon"
            BasedOn="{StaticResource ButtonIcon}"
            TargetType="Button">
         <Setter Property="BackgroundColor"
-                Value="#FF0000" />
+                Value="{StaticResource NetworkConnectionIconColor}" />
         <Setter Property="HeightRequest"
                 Value="26" />
         <Setter Property="WidthRequest"
@@ -54,7 +47,7 @@
     <Style x:Key="NetworkConnectionErrorMainContentLabel"
            TargetType="Label">
         <Setter Property="TextColor"
-                Value="#fff" />
+                Value="{StaticResource NetworkConnectionContentColor}" />
         <Setter Property="FontSize"
                 Value="13" />
     </Style>
