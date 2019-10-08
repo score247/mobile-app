@@ -10,7 +10,7 @@
         {
             InitializeComponent();
             var navigationTitleTemplate = this;
-            titleLabel.BindingContext = navigationTitleTemplate;
+            //titleLabel.BindingContext = navigationTitleTemplate;
             sportLabel.BindingContext = navigationTitleTemplate;
         }
 

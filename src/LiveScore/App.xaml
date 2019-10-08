@@ -56,8 +56,8 @@
             <Color x:Key="SecondAccentColor">#3EC28F</Color>
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
-            <Color x:Key="LineColor">#3A3942</Color>
-            <Color x:Key="DateBarLineColor">#474749</Color>
+            <Color x:Key="LineColor">#1D1F28</Color>
+            <Color x:Key="DateBarLineColor">#3B3C43</Color>
             <Color x:Key="UsernameColor">#30C2FF</Color>
             <!--  Match  -->
             <Color x:Key="TeamColor">#AAA8A5</Color>
@@ -113,20 +113,21 @@
             <Color x:Key="DateColor">#fff</Color>
             <Color x:Key="DisabledDateColor">#636886</Color>
             <!--  Function Group  -->
-            <x:Double x:Key="FunctionGroupHeight">37</x:Double>
+            <x:Double x:Key="FunctionGroupHeight">46</x:Double>
             <x:Double x:Key="FunctionGroupFontSize">11</x:Double>
             <Color x:Key="FunctionGroupBgColor">#272830</Color>
             <Color x:Key="FunctionGroupColor">#fff</Color>
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
             <x:Double x:Key="LeagueHeight">50</x:Double>
             <!--  Function bar  -->
-            <Color x:Key="FunctionBarBgColor">#2D2E30</Color>
-            <Color x:Key="FunctionBarColor">#969697</Color>
-            <Color x:Key="FunctionBarActiveColor">#FF7246</Color>
+            <Color x:Key="FunctionBarBgColor">#272830</Color>
+            <Color x:Key="FunctionBarColor">#FFFFFF</Color>
+            <Color x:Key="FunctionBarActiveColor">#F24822</Color>
             <x:Double x:Key="FunctionBarFontSize">12</x:Double>
             <!--  Header bar  -->
-            <Color x:Key="NavigationPageBgColor">#2D2E30</Color>
+            <Color x:Key="NavigationPageBgColor">#272830</Color>
             <Color x:Key="NavigationPageColor">#fff</Color>
+            <Color x:Key="SportNameColor">#FF7246</Color>
             <x:Double x:Key="SportNameFontSize">14</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
             <Style TargetType="NavigationPage">
@@ -138,7 +139,7 @@
             <Style x:Key="NavigationName"
                    TargetType="Label">
                 <Setter Property="TextColor"
-                        Value="{StaticResource NavigationPageColor}" />
+                        Value="{StaticResource SportNameColor}" />
                 <Setter Property="HorizontalOptions"
                         Value="Center" />
             </Style>

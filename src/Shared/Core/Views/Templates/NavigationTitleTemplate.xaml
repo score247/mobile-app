@@ -12,11 +12,6 @@
                     Style="{StaticResource SportName}"
                     Text="{Binding CurrentSport}" />
             </StackLayout>
-            <Label
-                x:Name="titleLabel"
-                AutomationId="{Binding Title, StringFormat='NavigationTitle-{0}'}"
-                Style="{StaticResource PageTitle}"
-                Text="{Binding Title}" />
         </FlexLayout>
     </ContentView.Content>
 </ContentView>
