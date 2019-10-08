@@ -3,11 +3,6 @@
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="DateBarLayoutBackgroundColor">#2D2E30</Color>
-    <Color x:Key="DateBarSelectedTextColor">#FF7246</Color>
-    <Color x:Key="DateBarTextColor">#969697</Color>
-    <Color x:Key="DateBarLiveColor">#969697</Color>
-
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
@@ -43,21 +38,21 @@
         <Setter Property="TextColor"
                 Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontFamily"
-                Value="{StaticResource RobotoLight}" />
+                Value="{StaticResource RobotoMedium}" />
     </Style>
 
     <Style x:Key="DateBarDayNameLabel"
            BasedOn="{StaticResource DateBarLabel}"
            TargetType="Label">
         <Setter Property="FontSize"
-                Value="11" />
+                Value="{StaticResource DateBarDayNameFontSize}" />
     </Style>
 
     <Style x:Key="DateBarDayMonthLabel"
            BasedOn="{StaticResource DateBarLabel}"
            TargetType="Label">
         <Setter Property="FontSize"
-                Value="9" />
+                Value="{StaticResource DateBarDayMonthFontSize}" />
         <Setter Property="Margin"
                 Value="0,2,0,0" />
     </Style>

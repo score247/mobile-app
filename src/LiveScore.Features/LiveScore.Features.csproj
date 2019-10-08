@@ -18,12 +18,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Score\ViewResources\**" />
     <Compile Remove="Score\Views\Templates\**" />
-    <EmbeddedResource Remove="Score\ViewResources\**" />
     <EmbeddedResource Remove="Score\Views\Templates\**" />
-    <None Remove="Score\ViewResources\**" />
     <None Remove="Score\Views\Templates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Score\ViewResources\MatchH2HViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchInfoViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchLineUpsViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchOddsViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchSocialViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchStatsViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchTableViewResource.xaml.cs" />
+    <Compile Remove="Score\ViewResources\MatchTrackerViewResource.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Score\ViewResources\MatchH2HViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchInfoViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchLineUpsViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchOddsViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchSocialViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchStatsViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchTableViewResource.xaml" />
+    <EmbeddedResource Remove="Score\ViewResources\MatchTrackerViewResource.xaml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -78,6 +97,9 @@
     </Compile>
     <Compile Update="News\Views\NewsView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="Score\ViewResources\ScoreViewResource.xaml.cs">
+      <DependentUpon>ScoreViewResource.xaml</DependentUpon>
     </Compile>
     <Compile Update="Score\Views\LiveView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>

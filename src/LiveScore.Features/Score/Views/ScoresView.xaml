@@ -16,6 +16,7 @@
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems>
@@ -26,6 +27,9 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:ScoreViewResource />
+            </ResourceDictionary.MergedDictionaries>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
             <dateBar:DateTemplate x:Key="DateTemplate" />
@@ -51,15 +55,15 @@
                  Scale="2">
         <BoxView Style="{StaticResource HorizontalLine}"
                  BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
-        <ContentView x:DataType="{x:Null}">
+        <Frame x:DataType="{x:Null}" Style="{StaticResource DatebarLayout}">
             <controls:TabsControl StripeColor="#FF7246"
-                                  StripeHeight="2"
-                                  HeightRequest="60"
+                                  StripeHeight="1"
+                                  HeightRequest="70"
                                   HorizontalOptions="FillAndExpand"
                                   ItemTemplate="{StaticResource DateBarTemplateSelector}"
                                   BindingContext="{x:Reference ScoresCarouselView}">
             </controls:TabsControl>
-        </ContentView>
+        </Frame>
         <cards:CarouselView x:Name="ScoresCarouselView"
                             ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"

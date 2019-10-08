@@ -4,14 +4,14 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <ContentView.Content>
-        <FlexLayout AutomationProperties.IsInAccessibleTree="False" Style="{StaticResource FlexLayoutVerticalCenter}">
-            <StackLayout x:Name="SportName">
-                <Label
+        <FlexLayout AutomationProperties.IsInAccessibleTree="False" Style="{StaticResource FlexLayoutAlignCenter}">
+            <Label Style="{StaticResource Icons}" Text="&#xe912;" TextColor="#FF7246" FontSize="12" />
+            <Label
                     x:Name="sportLabel"
                     AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                     Style="{StaticResource SportName}"
                     Text="{Binding CurrentSport}" />
-            </StackLayout>
+            <Label Style="{StaticResource Icons}" Text="&#xe913;" TextColor="#FF7246" FontSize="12" />
         </FlexLayout>
     </ContentView.Content>
 </ContentView>
