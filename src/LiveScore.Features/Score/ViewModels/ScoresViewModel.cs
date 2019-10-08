@@ -4,23 +4,17 @@ using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Services;
 using LiveScore.Core;
-using LiveScore.Core.Controls.DateBar.EventArgs;
-using LiveScore.Core.PubSubEvents.Matches;
-using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
-using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoresViewModel : ViewModelBase
     {
-        private const byte LiveIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
-        private readonly IMatchService matchService;
         private bool secondLoad;
 
         public ScoresViewModel(
@@ -29,23 +23,16 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
 
         {
-            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
-            DateBarItemTapCommand = new DelegateCommand<DateBarItemTappedEventArgs>(OnDateBarItemTapped);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
 
-            EventAggregator
-                .GetEvent<LiveMatchPubSubEvent>()
-                .Subscribe(OnReceivedLiveMatches, true);
             InitScoreItemSources();
         }
 
         public byte RangeOfDays { get; } = 2;
 
         public ObservableCollection<ScoreItemViewModel> ScoreItemSources { get; private set; }
-
-        public int LiveMatchCount { get; private set; }
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
 
@@ -54,8 +41,6 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; }
 
         public DelegateCommand<ItemDisappearingEventArgs> ScoreItemDisappearingCommand { get; }
-
-        public DelegateCommand<DateBarItemTappedEventArgs> DateBarItemTapCommand { get; }
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
 
@@ -69,15 +54,12 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
-                await Task.Run(GetLiveMatchCount);
                 SelectedScoreItem?.OnResumeWhenNetworkOK();
             }
         }
 
         public override Task OnNetworkReconnected()
         {
-            Task.Run(GetLiveMatchCount);
-
             return SelectedScoreItem?.OnNetworkReconnected();
         }
 
@@ -89,8 +71,6 @@ namespace LiveScore.Features.Score.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-
-            Task.Run(GetLiveMatchCount);
 
             EventAggregator?
                 .GetEvent<ConnectionChangePubSubEvent>()
@@ -110,19 +90,9 @@ namespace LiveScore.Features.Score.ViewModels
                 .Unsubscribe(OnConnectionChangedBase);
         }
 
-        public override void Destroy()
-        {
-            EventAggregator
-                .GetEvent<LiveMatchPubSubEvent>()
-                .Unsubscribe(OnReceivedLiveMatches);
-        }
-
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
-            if (args?.Index == LiveIndex)
-            {
-                Task.Run(GetLiveMatchCount);
-            }
+            SelectedScoreItem.IsActive = true;
 
             if (secondLoad)
             {
@@ -134,8 +104,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
         {
-            SelectedScoreItem.IsActive = true;
-
             if (args.Index >= 0)
             {
                 var oldItemSource = ScoreItemSources[args.Index];
@@ -145,23 +113,11 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void OnDateBarItemTapped(DateBarItemTappedEventArgs args)
-        {
-            SelectedScoreItemIndex = args.Index;
-        }
-
-        private async Task GetLiveMatchCount()
-        {
-            var liveMatchCount = await matchService.GetLiveMatchCount(CurrentLanguage);
-
-            Device.BeginInvokeOnMainThread(() => LiveMatchCount = liveMatchCount);
-        }
-
         private void InitScoreItemSources()
         {
             ScoreItemSources = new ObservableCollection<ScoreItemViewModel>
             {
-                new LiveItemViewModel(NavigationService, DependencyResolver, EventAggregator, ChangeLiveMatchCount)
+                new LiveItemViewModel(NavigationService, DependencyResolver, EventAggregator)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
@@ -188,16 +144,6 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        private void OnReceivedLiveMatches(ILiveMatchMessage message)
-        {
-            if (message?.SportId != CurrentSportId)
-            {
-                return;
-            }
-
-            LiveMatchCount = message.LiveMatchCount;
-        }
-
         private void OnConnectionChangedBase(bool isConnected)
         {
             if (isConnected)
@@ -205,7 +151,5 @@ namespace LiveScore.Features.Score.ViewModels
                 OnNetworkReconnected();
             }
         }
-
-        private void ChangeLiveMatchCount(int liveMatchCount) => LiveMatchCount = liveMatchCount;
     }
 }

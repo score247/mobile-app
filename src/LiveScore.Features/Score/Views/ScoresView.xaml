@@ -54,7 +54,8 @@
                  BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
         <ContentView x:DataType="{x:Null}">
             <controls:TabsControl StripeColor="#FF7246"
-                                  HeightRequest="70"
+                                  StripeHeight="2"
+                                  HeightRequest="60"
                                   HorizontalOptions="FillAndExpand"
                                   ItemTemplate="{StaticResource DateBarTemplateSelector}"
                                   BindingContext="{x:Reference ScoresCarouselView}">
@@ -68,7 +69,6 @@
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             IsViewReusingEnabled="False"
                             HorizontalOptions="FillAndExpand"
-                            IsCyclical="False"
                             VerticalOptions="FillAndExpand">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"

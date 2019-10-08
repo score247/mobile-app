@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using ImTools;
 using LiveScore.Core;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
@@ -17,16 +16,12 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class LiveItemViewModel : ScoreItemViewModel
     {
-        private readonly Action<int> changeLiveMatchCountAction;
-
         public LiveItemViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator,
-            Action<int> changeLiveMatchCountAction)
+            IEventAggregator eventAggregator)
             : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
-            this.changeLiveMatchCountAction = changeLiveMatchCountAction;
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
                 .Subscribe(OnReceivedLiveMatches, true);
@@ -54,8 +49,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override void UpdateMatchItems(List<IMatch> matches)
         {
-            changeLiveMatchCountAction.Invoke(matches.Count);
-
             var currentMatches = MatchItemsSource
                 .SelectMany(g => g)
                 .Select(vm => vm.Match)
