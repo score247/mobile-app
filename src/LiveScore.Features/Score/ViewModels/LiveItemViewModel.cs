@@ -77,8 +77,7 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            Device.BeginInvokeOnMainThread(() =>
-                MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc));
+            MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc);
 
             HasData = message.NewMatches.Any() || MatchItemsSource.Any();
 

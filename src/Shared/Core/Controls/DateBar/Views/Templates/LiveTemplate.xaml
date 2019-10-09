@@ -5,22 +5,60 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:views="clr-namespace:LiveScore.Core.Controls.DateBar.Views;assembly=LiveScore.Core"
               xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
+              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
-
     <AbsoluteLayout HorizontalOptions="Center"
-                 VerticalOptions="Center" WidthRequest="50" HeightRequest="70">
+                    VerticalOptions="Center"
+                    WidthRequest="50"
+                    HeightRequest="70">
+
         <AbsoluteLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
                 </ResourceDictionary.MergedDictionaries>
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
+                <xamanimation:StoryBoard x:Key="LiveIndicatorAnimation"
+                                         RepeatForever="True"
+                                         Target="{x:Reference LiveIndicator}">
+                    <xamanimation:ScaleToAnimation Scale="1.5"
+                                                   Duration="700"
+                                                   Easing="Linear" />
+                    <xamanimation:FadeToAnimation Opacity="0"
+                                                  Duration="700"
+                                                  Easing="Linear" />
+                    <xamanimation:ScaleToAnimation Scale="0"
+                                                   Duration="10"
+                                                   Easing="Linear" />
+                    <xamanimation:FadeToAnimation Opacity="0.4"
+                                                  Duration="10"
+                                                  Easing="Linear" />
+                </xamanimation:StoryBoard>
             </ResourceDictionary>
         </AbsoluteLayout.Resources>
+
         <Label Style="{StaticResource LiveIcon}"
-               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}" />
-        <Grid Style="{StaticResource LiveIndicatorContainer}">
+               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}">
+        </Label>
+        <Grid Style="{StaticResource LiveIndicatorContainer}"
+              IsVisible="{Binding HasData}">
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding HasData}"
+                             Value="True">
+                    <DataTrigger.EnterActions>
+                        <xamanimation:BeginAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding HasData}"
+                             Value="False">
+                    <DataTrigger.EnterActions>
+                        <xamanimation:EndAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Grid.Triggers>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="18" />
             </Grid.ColumnDefinitions>
@@ -28,7 +66,9 @@
                 <RowDefinition Height="18" />
             </Grid.RowDefinitions>
             <Frame Style="{StaticResource LiveIndicatorCircle1}" />
-            <Frame Style="{StaticResource LiveIndicatorCircle2}" />
+            <Frame Style="{StaticResource LiveIndicatorCircle2}"
+                   x:Name="LiveIndicator">
+            </Frame>
         </Grid>
     </AbsoluteLayout>
 </DataTemplate>

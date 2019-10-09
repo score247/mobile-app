@@ -2,7 +2,6 @@
 <ResourceDictionary x:Class="LiveScore.Core.Controls.DateBar.Views.DateBarResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-
     <Style x:Key="CalendarIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
@@ -29,17 +28,20 @@
                 Value="&#xe91a;" />
     </Style>
 
-    <Style x:Key="LiveIndicatorContainer" TargetType="Grid">
+    <Style x:Key="LiveIndicatorContainer"
+           TargetType="Grid">
         <Setter Property="AbsoluteLayout.LayoutBounds"
                 Value="1,0,20,20" />
         <Setter Property="AbsoluteLayout.LayoutFlags"
                 Value="PositionProportional" />
         <Setter Property="VerticalOptions"
                 Value="CenterAndExpand" />
-        <Setter Property="Margin" Value="0,8,0,0" />
+        <Setter Property="Margin"
+                Value="0,8,0,0" />
     </Style>
 
-    <Style x:Key="LiveIndicatorCircle" TargetType="Frame">
+    <Style x:Key="LiveIndicatorCircle"
+           TargetType="Frame">
         <Setter Property="Grid.Row"
                 Value="0" />
         <Setter Property="Grid.Column"
@@ -52,7 +54,9 @@
                 Value="#FC1923" />
     </Style>
 
-    <Style x:Key="LiveIndicatorCircle1" BasedOn="{StaticResource LiveIndicatorCircle}" TargetType="Frame">
+    <Style x:Key="LiveIndicatorCircle1"
+           BasedOn="{StaticResource LiveIndicatorCircle}"
+           TargetType="Frame">
         <Setter Property="HeightRequest"
                 Value="8" />
         <Setter Property="WidthRequest"
@@ -61,7 +65,9 @@
                 Value="4" />
     </Style>
 
-    <Style x:Key="LiveIndicatorCircle2" BasedOn="{StaticResource LiveIndicatorCircle}" TargetType="Frame">
+    <Style x:Key="LiveIndicatorCircle2"
+           BasedOn="{StaticResource LiveIndicatorCircle}"
+           TargetType="Frame">
         <Setter Property="Opacity"
                 Value="0.3" />
         <Setter Property="HeightRequest"

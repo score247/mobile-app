@@ -14,6 +14,7 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoresViewModel : ViewModelBase
     {
+        private const byte LiveDateBarItemIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
         private bool secondLoad;
 
@@ -130,6 +131,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemSources.Add(
                 new CalendarItemViewModel(NavigationService, DependencyResolver, EventAggregator));
 
+            ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
             SelectedScoreItem = ScoreItemSources[TodayDateBarItemIndex];
         }
 
