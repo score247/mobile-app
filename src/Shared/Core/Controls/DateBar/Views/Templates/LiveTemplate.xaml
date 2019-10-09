@@ -21,13 +21,13 @@
                 <xamanimation:StoryBoard x:Key="LiveIndicatorAnimation"
                                          RepeatForever="True"
                                          Target="{x:Reference LiveIndicator}">
-                    <xamanimation:ScaleToAnimation Scale="1.5"
+                    <xamanimation:ScaleToAnimation Scale="2.75"
                                                    Duration="700"
                                                    Easing="Linear" />
                     <xamanimation:FadeToAnimation Opacity="0"
                                                   Duration="700"
                                                   Easing="Linear" />
-                    <xamanimation:ScaleToAnimation Scale="0"
+                    <xamanimation:ScaleToAnimation Scale="1"
                                                    Duration="10"
                                                    Easing="Linear" />
                     <xamanimation:FadeToAnimation Opacity="0.4"
@@ -64,10 +64,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="18" />
             </Grid.RowDefinitions>
-            <Frame Style="{StaticResource LiveIndicatorCircle1}" />
-            <Frame Style="{StaticResource LiveIndicatorCircle2}"
-                   x:Name="LiveIndicator">
-            </Frame>
+            <Frame Style="{StaticResource LiveIndicatorCircle}" />
+            <Frame Style="{StaticResource LiveIndicatorCircle}"
+                   x:Name="LiveIndicator" />
         </Grid>
     </AbsoluteLayout>
 </DataTemplate>
