@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
 
-    <ViewCell Height="600">
-        <ScrollView  HeightRequest="600">
+    <ViewCell Height="900">
+        <ScrollView  HeightRequest="900">
             <StackLayout>
                 <StackLayout.Resources>
                     <ResourceDictionary>
@@ -28,26 +28,139 @@
                     IsVisible="{Binding HasTrackerData}"
                     Style="{StaticResource MatchBallTrackerContentLayout}">
                     <FlexLayout
-                        Style="{StaticResource MatchBallTrackerWebViewContainer}"                        
+                        Style="{StaticResource MatchBallTrackerWebViewContainer}"
                         IsVisible="{Binding TrackerVisible}">
-                        <WebView                            
+                        <WebView
                             Source="{Binding WidgetContent}"
-                            Style="{StaticResource MatchBallTrackerWebView}" />                       
+                            Style="{StaticResource MatchBallTrackerWebView}" />
                     </FlexLayout>
 
                     <FlexLayout
                         Style="{StaticResource MatchBallTrackerGroup}"
-                        IsVisible="{Binding TrackerHidden}">                        
+                        IsVisible="{Binding TrackerHidden}">
                         <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
                         <Button
                             Style="{StaticResource MatchBallTrackerExpandIcon}"
-                            Command="{Binding OnExpandTracker}"/>
+                            Command="{Binding OnExpandTracker}" />
                     </FlexLayout>
 
                     <Button IsVisible="{Binding TrackerVisible}"
                             Style="{StaticResource MatchBallTrackerCollapseIcon}"
                             Command="{Binding OnCollapseTracker}" />
                 </RelativeLayout>
+                <!--  COMMENTARIES  -->
+                <FlexLayout Style="{StaticResource Group}">
+                    <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
+                </FlexLayout>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Match ends  -->
+                    <Label Grid.Row="0"
+                    Grid.Column="0" Style="{StaticResource MatchTrackerEndIcon}" />
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Match ends, Verona 2, Cosenza 1." />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <!--  Time  -->
+                    <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesTime}">
+                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="90'" />
+                    </Frame>
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Second Half ends, Verona 2, Cosenza 1." />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <!--  Goal!  -->
+                    <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesGoal}">
+                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="88'" />
+                    </Frame>
+                    <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="0,7">
+                        <Label Style="{StaticResource MatchTrackerCommentariesContentGoal}" Text="GOAL!" />
+                        <Label Style="{StaticResource MatchTrackerCommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
+                    </StackLayout>
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <!--  Time  -->
+                    <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesTime}">
+                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="82'" />
+                    </Frame>
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesText}"
+                    Text="Goal kick for Verona at Carlo Castellani" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <!--  Yellow card  -->
+                    <Frame
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Style="{StaticResource MatchTrackerCommentariesYellowCard}">
+                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="63'" />
+                    </Frame>
+                    <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Style="{StaticResource MatchTrackerCommentariesContentYellowCard}"
+                    Text="YELLOW CARD!" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
         </ScrollView>
     </ViewCell>

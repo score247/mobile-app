@@ -56,7 +56,7 @@
         <Frame Style="{StaticResource DatebarLayout}">
             <controls:TabsControl BindingContext="{x:Reference ScoresCarouselView}"
                                   ItemTemplate="{StaticResource DateBarTemplateSelector}"
-                                  StripeColor="#FF7246"
+                                  StripeColor="{StaticResource DateBarStripeColor}"
                                   StripeHeight="1" />
         </Frame>
         <cards:CarouselView x:Name="ScoresCarouselView"
