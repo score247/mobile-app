@@ -10,13 +10,11 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
         public LiveMatchMessage(
             byte sportId,
             IEnumerable<Match> newMatches,
-            string[] removeMatchIds,
-            int liveMatchCount)
+            string[] removeMatchIds)
         {
             SportId = sportId;
             NewMatches = newMatches;
             RemoveMatchIds = removeMatchIds;
-            LiveMatchCount = liveMatchCount;
         }
 
         public byte SportId { get; }
@@ -24,7 +22,5 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
         public IEnumerable<IMatch> NewMatches { get; }
 
         public string[] RemoveMatchIds { get; }
-
-        public int LiveMatchCount { get; }
     }
 }

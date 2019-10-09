@@ -10,7 +10,5 @@
         IEnumerable<IMatch> NewMatches { get; }
 
         string[] RemoveMatchIds { get; }
-
-        int LiveMatchCount { get; }
     }
 }
