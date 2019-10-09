@@ -65,7 +65,7 @@
                                Style="{StaticResource MatchDate}"
                                Text="{Binding DisplayEventDate}" />
                         </Grid>
-
+                        <BoxView Style="{StaticResource HorizontalLine}" />
                         <Grid Style="{StaticResource MatchGeneralInfoTeams}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="*" />
@@ -132,12 +132,13 @@
                                Style="{StaticResource AwayScore}"
                                Text="{Binding MatchViewModel.Match.AwayScore}" />
                         </Grid>
-                        <Label AutomationId="SecondLegDetail"
+                        <BoxView Style="{StaticResource HorizontalLine}" />
+                    </StackLayout>
+                </Frame>
+                <Label AutomationId="SecondLegDetail"
                        IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource TextNotEmptyConverter}}"
                        Style="{StaticResource MatchGeneralInfoImportantContent}"
                        Text="{Binding DisplaySecondLeg}" />
-                    </StackLayout>
-                </Frame>
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemsSource="{Binding TabItems}"
                                    ItemTappedCommand="{Binding FunctionTabTappedCommand}" />

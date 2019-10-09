@@ -97,7 +97,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
             if (Application.Current != null)
             {
-                RowColor = (Color)Application.Current.Resources["PrimaryColor"];
+                RowColor = (Color)Application.Current.Resources["ListViewBgColor"];
             }
 
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)

@@ -27,7 +27,7 @@
 
             if (Application.Current != null)
             {
-                RowColor = (Color)Application.Current.Resources["FourthAccentColor"];
+                RowColor = (Color)Application.Current.Resources["FunctionGroupBgColor"];
             }
 
             Score = "-";

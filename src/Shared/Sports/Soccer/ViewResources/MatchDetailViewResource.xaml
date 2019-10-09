@@ -17,17 +17,15 @@
     </Style>
 
     <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SiteBackgroundColor}" />
         <Setter Property="Padding" Value="0,0,12,0" />
     </Style>
 
     <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
         <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="BackgroundColor" Value="#2D2F3F" />
-        <Setter Property="Margin" Value="8,0" />
-        <Setter Property="HeightRequest" Value="23" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="{StaticResource TeamColor}" />
+        <Setter Property="Margin" Value="60,0,0,0" />
+        <Setter Property="HeightRequest" Value="28" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 

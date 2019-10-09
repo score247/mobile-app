@@ -92,7 +92,7 @@
             <tabStrip:TabITemListView
                 AutomationId="{Binding SelectedBetType, StringFormat='MatchOdds-BetType{0}'}"
                 AutomationProperties.IsInAccessibleTree="False"
-                BackgroundColor="{StaticResource SiteBackgroundColor}"
+                BackgroundColor="{StaticResource ListViewBgColor}"
                 HasUnevenRows="true"
                 Header="{Binding HeaderTitle}"
                 HeaderTemplate="{Binding HeaderTemplate}"
@@ -111,7 +111,7 @@
                         EventName="ItemTapped" />
                 </tabStrip:TabITemListView.Behaviors>
                 <tabStrip:TabITemListView.Footer>
-                    <StackLayout BackgroundColor="{StaticResource SiteBackgroundColor}"
+                    <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
                                  HeightRequest="350">
                         <Label Text=" " />
                     </StackLayout>

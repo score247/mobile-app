@@ -54,8 +54,11 @@
             <Color x:Key="DateBarLineColor">#6E707B</Color>
 
             <Color x:Key="UsernameColor">#30C2FF</Color>
+
+            <Color x:Key="ListViewBgColor">#202124</Color>
             <!--  Match  -->
             <Color x:Key="TeamColor">#AAA8A5</Color>
+
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
             <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
@@ -72,16 +75,17 @@
             <x:Double x:Key="TabFontSize">11</x:Double>
             <Color x:Key="InactiveLineColor">#0B0D14</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
-            <Color x:Key="SubTabContainerBgColor">#1A1C28</Color>
+
+            <Color x:Key="SubTabContainerBgColor">#272830</Color>
             <Color x:Key="SubTabColor">#fff</Color>
-            <Color x:Key="SubTabBgColor">#06070A</Color>
-            <Color x:Key="ActiveSubTabBgColor">#2D2F3F</Color>
-            <Color x:Key="ActiveSubTabColor">#F24822</Color>
-            <x:Double x:Key="SubTabsHeight">42</x:Double>
+            <Color x:Key="SubTabBgColor">#272830</Color>
+            <Color x:Key="ActiveSubTabBgColor">#3A3942</Color>
+            <Color x:Key="ActiveSubTabColor">#FF7246</Color>
+            <x:Double x:Key="SubTabsHeight">38</x:Double>
             <x:Double x:Key="SubTabsFontSize">11</x:Double>
             <!--  Table  -->
-            <Color x:Key="TableBgColor">#06070A</Color>
-            <Color x:Key="TableHeaderBgColor">#2D2F3F</Color>
+            <Color x:Key="TableBgColor">#202124</Color>
+            <Color x:Key="TableHeaderBgColor">#272830</Color>
             <Color x:Key="TableHeaderColor">#fff</Color>
             <x:Double x:Key="TableHeaderFontSize">12</x:Double>
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
@@ -149,7 +153,7 @@
                 <Setter Property="FontSize" Value="{StaticResource TitlePageFontSize}" />
             </Style>
             <Style x:Key="ListViewHasBackground" TargetType="ListView">
-                <Setter Property="BackgroundColor" Value="#202124" />
+                <Setter Property="BackgroundColor" Value="{StaticResource ListViewBgColor}" />
             </Style>
             <Style x:Key="Team" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
