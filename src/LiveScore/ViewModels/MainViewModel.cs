@@ -31,34 +31,21 @@ namespace LiveScore.ViewModels
             this.settings = settings;
             this.cacheManager = cacheManager;
             this.loggingService = loggingService;
-
-            IsDemo = settings.IsDemo;
+        
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
 
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
-        }
-
-        public bool IsDemo { get; set; }
+        }       
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
-
-        //TODO remove this command when ready to release
-        public DelegateAsyncCommand ToggledCommand => new DelegateAsyncCommand(Toggle);
 
         public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
 
         private async Task Navigate(string page)
         {
             await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
-        }
-
-        private Task Toggle()
-        {
-            settings.IsDemo = !settings.IsDemo;
-
-            return CleanCacheAndRefreshCommand.ExecuteAsync();
-        }
+        }    
 
         private async Task CleanCacheAndRefresh()
         {

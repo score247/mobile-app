@@ -29,11 +29,6 @@
                 </ResourceDictionary>
             </StackLayout.Resources>
 
-            <ffImageLoading:CachedImage
-                DownsampleToViewSize="True"
-                Source="images/common/odd_movement_chart.png"
-                Style="{StaticResource MatchDetailOddsMovementChart}" />
-
             <ActivityIndicator
                 IsRunning="{Binding IsBusy}"
                 IsVisible="{Binding IsBusy}"
