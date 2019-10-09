@@ -9,10 +9,9 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
     <AbsoluteLayout HorizontalOptions="Center"
+                    Padding="0,10,0,10"
                     VerticalOptions="Center"
-                    WidthRequest="50"
-                    HeightRequest="70">
-
+                    WidthRequest="50">
         <AbsoluteLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

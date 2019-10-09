@@ -36,8 +36,6 @@
                 Value="PositionProportional" />
         <Setter Property="VerticalOptions"
                 Value="CenterAndExpand" />
-        <Setter Property="Margin"
-                Value="0,8,0,0" />
     </Style>
 
     <Style x:Key="LiveIndicatorCircle"
