@@ -131,7 +131,7 @@
             <!--  Function bar  -->
             <Color x:Key="FunctionBarBgColor">#272830</Color>
             <Color x:Key="FunctionBarColor">#FFFFFF</Color>
-            <Color x:Key="FunctionBarActiveColor">#F24822</Color>
+            <Color x:Key="FunctionBarActiveColor">#FF7246</Color>
             <x:Double x:Key="FunctionBarFontSize">12</x:Double>
             <!--  Header bar  -->
             <Color x:Key="NavigationPageBgColor">#272830</Color>
@@ -159,7 +159,8 @@
                         Value="{StaticResource SportNameFontSize}" />
                 <Setter Property="FontAttributes"
                         Value="Bold" />
-                <Setter Property="Margin" Value="15,0,15,0" />
+                <Setter Property="Margin"
+                        Value="15,0,15,0" />
             </Style>
             <Style x:Key="PageTitle"
                    BasedOn="{StaticResource NavigationName}"

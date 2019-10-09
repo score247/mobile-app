@@ -8,8 +8,6 @@
            TargetType="Label">
         <Setter Property="FontSize"
                 Value="18" />
-        <Setter Property="HorizontalTextAlignment"
-                Value="Center" />
         <Setter Property="Text"
                 Value="&#xe919;" />
     </Style>
@@ -19,18 +17,12 @@
            TargetType="Label">
         <Setter Property="FontSize"
                 Value="19" />
-        <Setter Property="HorizontalTextAlignment"
-                Value="Center" />
         <Setter Property="Text"
                 Value="&#xe91a;" />
     </Style>
 
     <Style x:Key="DateBarLabel"
            TargetType="Label">
-        <Setter Property="HorizontalTextAlignment"
-                Value="Center" />
-        <Setter Property="VerticalTextAlignment"
-                Value="Center" />
         <Setter Property="TextColor"
                 Value="{StaticResource DateBarTextColor}" />
         <Setter Property="FontFamily"

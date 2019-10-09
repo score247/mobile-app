@@ -36,7 +36,6 @@ namespace LiveScore.iOS.Renderers
             AddShadow();
             SetSelectedTabColor();
             UpdateAllTabBarItems();
-
             base.ViewWillAppear(animated);
         }
 
@@ -49,6 +48,7 @@ namespace LiveScore.iOS.Renderers
                 return;
             }
 
+            control.TabBar.Translucent = false;
             var layer = control.TabBar.Layer;
             layer.ShadowColor = UIColor.Black.CGColor;
             layer.ShadowOffset = new CGSize(0.0, 1);

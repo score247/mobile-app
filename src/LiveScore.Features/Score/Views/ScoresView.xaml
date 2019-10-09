@@ -56,10 +56,10 @@
                  BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
         <Frame Style="{StaticResource DatebarLayout}">
             <ContentView HorizontalOptions="FillAndExpand"
-                         HeightRequest="50">
+                         HeightRequest="70">
                 <controls:TabsControl StripeColor="#FF7246"
                                       StripeHeight="1"
-                                      HeightRequest="50"
+                                      HeightRequest="70"
                                       ItemTemplate="{StaticResource DateBarTemplateSelector}"
                                       BindingContext="{x:Reference ScoresCarouselView}">
                 </controls:TabsControl>

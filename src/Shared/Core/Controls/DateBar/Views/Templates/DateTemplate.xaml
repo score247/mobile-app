@@ -8,9 +8,11 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.DateTemplate">
 
-    <StackLayout HorizontalOptions="FillAndExpand"
-                 VerticalOptions="CenterAndExpand">
-        <StackLayout.Resources>
+    <FlexLayout HorizontalOptions="FillAndExpand"
+                Direction="Column"
+                AlignItems="Center"
+                JustifyContent="Center">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
@@ -19,12 +21,12 @@
                 <converters:DayMonthConverter x:Key="DayMonthConverter" />
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
         <Label Text="{Binding SelectedDate, Converter={StaticResource DayNameConverter}}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
                Style="{StaticResource DateBarDayNameLabel}" />
         <Label Text="{Binding SelectedDate, Converter={StaticResource DayMonthConverter}}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
                Style="{StaticResource DateBarDayMonthLabel}" />
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>

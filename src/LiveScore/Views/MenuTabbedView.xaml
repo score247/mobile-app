@@ -16,7 +16,7 @@
             android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
             android:TabbedPage.ToolbarPlacement="Bottom"
             prism:ViewModelLocator.AutowireViewModel="True"
-            BackgroundColor="{StaticResource PrimaryColor}"
+            BackgroundColor="{StaticResource FunctionBarBgColor}"
             BarBackgroundColor="{StaticResource FunctionBarBgColor}">
     <TabbedPage.Children>
         <NavigationPage x:Name="ScoresBar"

@@ -8,17 +8,19 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.CalendarTemplate">
 
-    <StackLayout HorizontalOptions="FillAndExpand"
-                 VerticalOptions="CenterAndExpand">
-        <StackLayout.Resources>
+    <FlexLayout HorizontalOptions="FillAndExpand"
+                Direction="Column"
+                AlignItems="Center"
+                JustifyContent="Center">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
                 </ResourceDictionary.MergedDictionaries>
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
         <Label Style="{StaticResource CalendarIcon}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}" />
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>
