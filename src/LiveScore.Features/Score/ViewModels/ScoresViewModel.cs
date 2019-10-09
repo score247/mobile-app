@@ -90,14 +90,17 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
-            SelectedScoreItem.IsActive = true;
-
-            if (secondLoad)
+            if (SelectedScoreItem != null)
             {
-                SelectedScoreItem.OnAppearing();
-            }
+                SelectedScoreItem.IsActive = true;
 
-            secondLoad = true;
+                if (secondLoad)
+                {
+                    SelectedScoreItem.OnAppearing();
+                }
+
+                secondLoad = true;
+            }
         }
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
