@@ -36,8 +36,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         public ScoreItemViewModel SelectedScoreItem { get; set; }
 
-        public int SelectedScoreItemIndex { get; set; }
-
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; }
 
         public DelegateCommand<ItemDisappearingEventArgs> ScoreItemDisappearingCommand { get; }
@@ -129,7 +127,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemSources.Add(
                 new CalendarItemViewModel(NavigationService, DependencyResolver, EventAggregator));
 
-            SelectedScoreItemIndex = TodayDateBarItemIndex;
+            SelectedScoreItem = ScoreItemSources[TodayDateBarItemIndex];
         }
 
         private async Task OnClickSearchAsync()

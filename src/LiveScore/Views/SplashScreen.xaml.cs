@@ -12,7 +12,6 @@ namespace LiveScore.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
-        private const int milisecondsDelay = 300;
         private readonly ILoggingService loggingService;
 
         public SplashScreen(ILoggingService loggingService)
@@ -25,8 +24,6 @@ namespace LiveScore.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-
-            //await Task.Delay(milisecondsDelay);
 
             try
             {
@@ -45,8 +42,6 @@ namespace LiveScore.Views
 
             await PageUtilities.OnInitializedAsync(mainPage, null).ConfigureAwait(false);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
-
-           // await Task.Delay(milisecondsDelay);
 
             await Task.WhenAll(
                 SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),

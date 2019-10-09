@@ -66,11 +66,10 @@
             </ContentView>
         </Frame>
         <cards:CarouselView x:Name="ScoresCarouselView"
-                            ItemsSource="{Binding ScoreItemSources}"
-                            SelectedItem="{Binding SelectedScoreItem}"
-                            SelectedIndex="{Binding SelectedScoreItemIndex}"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
+                            ItemsSource="{Binding ScoreItemSources}"
+                            SelectedItem="{Binding SelectedScoreItem}"
                             IsViewReusingEnabled="False"
                             IsCyclical="False"
                             HorizontalOptions="FillAndExpand"
