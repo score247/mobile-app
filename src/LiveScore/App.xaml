@@ -29,9 +29,9 @@
                 <On Platform="iOS" Value="RobotoBold" />
             </OnPlatform>
 
-            <Color x:Key="PrimaryColor">#202124</Color>
-            <Color x:Key="SecondColor">#2D2F3F</Color>
-            <Color x:Key="SiteBackgroundColor">#070915</Color>
+            <Color x:Key="PrimaryColor">#272830</Color>
+            <Color x:Key="SecondColor">#202124</Color>
+            <Color x:Key="SiteBackgroundColor">#202124</Color>
             <Color x:Key="PrimaryTextColor">#fff</Color>
             <Color x:Key="SecondTextColor">#C6C6C9</Color>
             <Color x:Key="ThirdTextColor">#676C8B</Color>

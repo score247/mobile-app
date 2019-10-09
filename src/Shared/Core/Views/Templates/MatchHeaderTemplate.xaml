@@ -54,7 +54,7 @@
                        AutomationId="{Binding Key.LeagueId, StringFormat='LeagueDetailBtn-{0}', Mode=OneTime}"
                        Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
-            <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="#2E2E37" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>

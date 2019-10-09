@@ -111,7 +111,7 @@
                                                            RefreshCommand="{Binding RefreshCommand}"
                                                            SelectionMode="None"
                                                            RefreshControlColor="White"
-                                                           SeparatorColor="{StaticResource LineColor}"
+                                                           SeparatorVisibility="None"
                                                            Style="{StaticResource ListViewHasBackground}"
                                                            LoadMoreCommand="{Binding LoadMoreCommand}"
                                                            TriggerLoadMoreIndex="4"

@@ -93,6 +93,7 @@
                        AutomationId="{Binding Match.Id, StringFormat='FavoriteBtn-{0}', Mode=OneTime}"
                        Style="{StaticResource MatchFavoriteIcon}" />
             </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>

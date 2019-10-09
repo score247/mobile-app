@@ -5,7 +5,7 @@
 
     <Style x:Key="NetworkConnectionErrorContainer" TargetType="StackLayout">
         <Setter Property="VerticalOptions"
-                Value="Center" />
+                Value="EndAndExpand" />
         <Setter Property="Margin"
                 Value="0,0,0,50" />
     </Style>

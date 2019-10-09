@@ -694,21 +694,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live.png">
-      <Link>Resources\images\common\live.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live%402x.png">
-      <Link>Resources\images\common\live%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\live%403x.png">
-      <Link>Resources\images\common\live%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen.png">
       <Link>Resources\images\common\logo_splash_screen.png</Link>
     </BundleResource>
@@ -736,21 +721,6 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\missed_goal%403x.png">
       <Link>Resources\images\common\missed_goal%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more.png">
-      <Link>Resources\images\common\more.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more%402x.png">
-      <Link>Resources\images\common\more%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\more%403x.png">
-      <Link>Resources\images\common\more%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
@@ -959,11 +929,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\tracker.png">
-      <Link>Resources\images\common\tracker.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\tv.png">
       <Link>Resources\images\common\tv.png</Link>
     </BundleResource>
@@ -1052,10 +1017,6 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\flag_league\default_flag.svg">
       <Link>Resources\images\flag_league\default_flag.svg</Link>
     </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\html\" />
-    <Folder Include="PlatformDependency\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="..\..\CommonResources\Html\theme.css">
