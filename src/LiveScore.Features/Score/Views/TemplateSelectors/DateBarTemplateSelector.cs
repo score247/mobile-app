@@ -8,17 +8,13 @@ namespace LiveScore.Features.Score.Views.TemplateSelectors
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (item is LiveItemViewModel)
+            return item switch
             {
-                return new LiveTemplate();
-            }
+                LiveItemViewModel _ => new LiveTemplate(),
+                CalendarItemViewModel _ => new CalendarTemplate(),
 
-            if (item is CalendarItemViewModel)
-            {
-                return new CalendarTemplate();
-            }
-
-            return new DateTemplate();
+                _ => new DateTemplate(),
+            };
         }
     }
 }

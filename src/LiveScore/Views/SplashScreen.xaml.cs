@@ -26,11 +26,11 @@ namespace LiveScore.Views
         {
             base.OnAppearing();
 
-            await Task.Delay(milisecondsDelay);
+            //await Task.Delay(milisecondsDelay);
 
             try
             {
-                await LoadMainPage();
+                await LoadMainPage().ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -43,16 +43,16 @@ namespace LiveScore.Views
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
 
-            await PageUtilities.OnInitializedAsync(mainPage, null);
+            await PageUtilities.OnInitializedAsync(mainPage, null).ConfigureAwait(false);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
-            await Task.Delay(milisecondsDelay);
+           // await Task.Delay(milisecondsDelay);
 
             await Task.WhenAll(
                 SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),
                 SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
 
-            await Navigation.PopToRootAsync(false);
+            await Navigation.PopToRootAsync(false).ConfigureAwait(false);
         }
     }
 }
