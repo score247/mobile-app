@@ -22,10 +22,10 @@
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
         </FlexLayout.Resources>
-        <Label Text="{Binding SelectedDate, Converter={StaticResource DayNameConverter}}"
+        <Label Text="{Binding ViewDate, Converter={StaticResource DayNameConverter}}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
                Style="{StaticResource DateBarDayNameLabel}" />
-        <Label Text="{Binding SelectedDate, Converter={StaticResource DayMonthConverter}}"
+        <Label Text="{Binding ViewDate, Converter={StaticResource DayMonthConverter}}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
                Style="{StaticResource DateBarDayMonthLabel}" />
     </FlexLayout>

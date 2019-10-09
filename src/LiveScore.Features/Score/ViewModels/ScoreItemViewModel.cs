@@ -32,23 +32,23 @@ namespace LiveScore.Features.Score.ViewModels
         protected readonly IMatchService MatchService;
         private const int DefaultFirstLoadMatchItemCount = 5;
         private const int DefaultLoadingMatchItemCountOnScrolling = 8;
-        private readonly bool isTodayOrYesterday;
+        
 
         [Time]
         public ScoreItemViewModel(
-            DateTime selectedDate,
+            DateTime viewDate,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            SelectedDate = selectedDate;
+            ViewDate = viewDate;
 
             MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            isTodayOrYesterday = SelectedDate == DateTime.Today || SelectedDate == DateTime.Today.AddDays(-1);
+
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
@@ -58,7 +58,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool FirstLoad { get; private set; } = true;
 
-        public DateTime SelectedDate { get; }
+        public DateTime ViewDate { get; }
 
         public bool IsActive { get; set; }
 
@@ -85,7 +85,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             Profiler.Start("ScoreItemViewModel.OnResume");
 
-            if (isTodayOrYesterday)
+            if (ViewDate.IsTodayOrYesterday())
             {
                 Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
             }
@@ -111,7 +111,7 @@ namespace LiveScore.Features.Score.ViewModels
                 }
                 else
                 {
-                    if (isTodayOrYesterday)
+                    if (ViewDate.IsTodayOrYesterday())
                     {
                         Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
                     }
@@ -275,7 +275,7 @@ namespace LiveScore.Features.Score.ViewModels
         protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
         {
             return MatchService
-                .GetMatchesByDate(SelectedDate, CurrentLanguage, getLatestData)
+                .GetMatchesByDate(ViewDate, CurrentLanguage, getLatestData)
 ;
         }
 

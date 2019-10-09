@@ -24,6 +24,9 @@
         public static DateTime BeginningOfDay(this DateTime dateTime, int timezoneOffset)
             => new DateTime(dateTime.Year, dateTime.Month, dateTime.Day, 0, 0, 0, 0, dateTime.Kind)
                 .AddHours(timezoneOffset);
+
+        public static bool IsTodayOrYesterday(this DateTime dateTime)
+            => dateTime == DateTime.Today || dateTime == Yesterday();
     }
 
 #pragma warning restore S109 // Magic numbers should not be used

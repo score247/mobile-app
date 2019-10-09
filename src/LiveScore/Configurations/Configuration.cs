@@ -3,9 +3,9 @@
     public static class Configuration
     {
 #if DEBUG
-        public static string ApiEndPoint => "https://score247-api1.nexdev.net/dev/api";
+        public static string ApiEndPoint => "https://score247-api1.nexdev.net/dev1/api";
 
-        public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev/hubs/";
+        public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/dev1/hubs/";
 
         public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
 

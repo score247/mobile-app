@@ -46,7 +46,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var todayItem = ScoreItemSources[TodayDateBarItemIndex];
 
-            if (todayItem?.SelectedDate != DateTime.Today)
+            if (todayItem?.ViewDate != DateTime.Today)
             {
                 await NavigateToHome().ConfigureAwait(false);
             }

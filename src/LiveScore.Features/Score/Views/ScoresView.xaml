@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage x:Class="LiveScore.Features.Score.Views.ScoresView"
-             xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
-             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:dateBar="clr-namespace:LiveScore.Core.Controls.DateBar.Views.Templates;assembly=LiveScore.Core"
-             xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
-             mvvm:ViewModelLocator.AutowireViewModel="True"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
-             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
-             xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
-             xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
-             x:DataType="viewModels:ScoresViewModel"
-             BackgroundColor="{StaticResource SiteBackgroundColor}">
+<ContentPage
+    x:Class="LiveScore.Features.Score.Views.ScoresView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
+    xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+    xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
+    xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+    xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
+    xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
+    xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+    mvvm:ViewModelLocator.AutowireViewModel="True"
+    x:DataType="viewModels:ScoresViewModel"
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Search"
-                     Command="{Binding ClickSearchCommand}"
-                     IconImageSource="images/common/search.png"
-                     Priority="1" />
+        <ToolbarItem
+            Command="{Binding ClickSearchCommand}"
+            IconImageSource="images/common/search.png"
+            Priority="1"
+            Text="Search" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -33,14 +34,15 @@
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
             <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
-            <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
-                                     Target="{x:Reference ScoreView}">
-                <xamanimation:ScaleToAnimation Scale="1"
-                                               Duration="500"
-                                               Easing="Linear" />
-                <xamanimation:FadeToAnimation Opacity="1"
-                                              Duration="300"
-                                              Easing="Linear" />
+            <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation" Target="{x:Reference ScoreView}">
+                <xamanimation:ScaleToAnimation
+                    Easing="Linear"
+                    Scale="1"
+                    Duration="500" />
+                <xamanimation:FadeToAnimation
+                    Easing="Linear"
+                    Opacity="1"
+                    Duration="300" />
             </xamanimation:StoryBoard>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -49,80 +51,85 @@
             <xamanimation:BeginAnimation Animation="{StaticResource ScoreViewFadeInAnimation}" />
         </EventTrigger>
     </ContentPage.Triggers>
-    <StackLayout x:Name="ScoreView"
-                 Opacity="0.5"
-                 Scale="2">
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 BackgroundColor="{StaticResource DateBarLineColor}"></BoxView>
+    <StackLayout
+        x:Name="ScoreView"
+        Opacity="0.5"
+        Scale="2">
+        <BoxView BackgroundColor="{StaticResource DateBarLineColor}" Style="{StaticResource HorizontalLine}" />
         <Frame Style="{StaticResource DatebarLayout}">
-            <ContentView HorizontalOptions="FillAndExpand"
-                         HeightRequest="70">
-                <controls:TabsControl StripeColor="#FF7246"
-                                      StripeHeight="1"
-                                      HeightRequest="70"
-                                      ItemTemplate="{StaticResource DateBarTemplateSelector}"
-                                      BindingContext="{x:Reference ScoresCarouselView}">
-                </controls:TabsControl>
+            <ContentView HeightRequest="70" HorizontalOptions="FillAndExpand">
+                <controls:TabsControl
+                    BindingContext="{x:Reference ScoresCarouselView}"
+                    HeightRequest="70"
+                    ItemTemplate="{StaticResource DateBarTemplateSelector}"
+                    StripeColor="#FF7246"
+                    StripeHeight="1"  />
             </ContentView>
         </Frame>
-        <cards:CarouselView x:Name="ScoresCarouselView"
-                            ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
-                            ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
-                            ItemsSource="{Binding ScoreItemSources}"
-                            SelectedItem="{Binding SelectedScoreItem}"
-                            IsViewReusingEnabled="False"
-                            IsCyclical="False"
-                            HorizontalOptions="FillAndExpand"
-                            VerticalOptions="FillAndExpand">
+        <cards:CarouselView
+            x:Name="ScoresCarouselView"
+            HorizontalOptions="FillAndExpand"
+            IsCyclical="False"
+            IsViewReusingEnabled="False"
+            ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
+            ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
+            ItemsSource="{Binding ScoreItemSources}"
+            SelectedItem="{Binding SelectedScoreItem}"
+            VerticalOptions="FillAndExpand">
             <x:Arguments>
-                <processors:BaseCarouselFrontViewProcessor  OpacityFactor="0.25"
-                                                            AnimationLength="250"
-                                                            NoItemMaxPanDistance="1000" />
-                <processors:BaseCarouselBackViewProcessor   OpacityFactor="0.25"
-                                                            AnimationLength="250" />
+                <processors:BaseCarouselFrontViewProcessor
+                    AnimationLength="250"
+                    NoItemMaxPanDistance="1000"
+                    OpacityFactor="0.25" />
+                <processors:BaseCarouselBackViewProcessor AnimationLength="250" OpacityFactor="0.25" />
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:ScoreItemViewModel">
                     <FlexLayout JustifyContent="Center">
-                        <Label IsVisible="{Binding IsComingSoon}"
-                               Text="Coming Soon"
-                               Style="{StaticResource NotificationLabel}"
-                               FlexLayout.AlignSelf="Center" />
+                        <Label
+                            FlexLayout.AlignSelf="Center"
+                            IsVisible="{Binding IsComingSoon}"
+                            Style="{StaticResource NotificationLabel}"
+                            Text="Coming Soon" />
                         <StackLayout IsVisible="{Binding IsNotComingSoon}">
-                            <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                               IsVisible="{Binding IsBusy}"
-                                               Style="{StaticResource CenterActivityIndicator}" />
-                            <Label IsVisible="{Binding NoData}"
-                                   Text="{langs:Translate NoGames}"
-                                   Style="{StaticResource NotificationLabel}" />
-                            <customListView:CustomListView x:Name="LeagueTable"
-                                                           AutomationId="LeagueTableId"
-                                                           AutomationProperties.IsInAccessibleTree="False"
-                                                           Footer=""
-                                                           GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-                                                           HasUnevenRows="true"
-                                                           IsGroupingEnabled="True"
-                                                           IsPullToRefreshEnabled="true"
-                                                           IsRefreshing="{Binding IsRefreshing}"
-                                                           IsVisible="{Binding IsNotBusy}"
-                                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                           ItemsSource="{Binding MatchItemsSource}"
-                                                           RefreshCommand="{Binding RefreshCommand}"
-                                                           SelectionMode="None"
-                                                           RefreshControlColor="White"
-                                                           SeparatorVisibility="None"
-                                                           Style="{StaticResource ListViewHasBackground}"
-                                                           LoadMoreCommand="{Binding LoadMoreCommand}"
-                                                           TriggerLoadMoreIndex="4"
-                                                           VerticalOptions="FillAndExpand">
+                            <ActivityIndicator
+                                IsRunning="{Binding IsBusy}"
+                                IsVisible="{Binding IsBusy}"
+                                Style="{StaticResource CenterActivityIndicator}" />
+                            <Label
+                                IsVisible="{Binding NoData}"
+                                Style="{StaticResource NotificationLabel}"
+                                Text="{langs:Translate NoGames}" />
+                            <customListView:CustomListView
+                                x:Name="LeagueTable"
+                                AutomationId="LeagueTableId"
+                                AutomationProperties.IsInAccessibleTree="False"
+                                Footer=""
+                                GroupDisplayBinding="{Binding Key}"
+                                GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                                HasUnevenRows="true"
+                                IsGroupingEnabled="True"
+                                IsPullToRefreshEnabled="true"
+                                IsRefreshing="{Binding IsRefreshing}"
+                                IsVisible="{Binding IsNotBusy}"
+                                ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                ItemsSource="{Binding MatchItemsSource}"
+                                LoadMoreCommand="{Binding LoadMoreCommand}"
+                                RefreshCommand="{Binding RefreshCommand}"
+                                RefreshControlColor="White"
+                                SelectionMode="None"
+                                SeparatorVisibility="None"
+                                Style="{StaticResource ListViewHasBackground}"
+                                TriggerLoadMoreIndex="4"
+                                VerticalOptions="FillAndExpand">
                                 <x:Arguments>
                                     <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
                                 </x:Arguments>
                                 <customListView:CustomListView.Behaviors>
-                                    <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
-                                                              EventArgsParameterPath="Item"
-                                                              EventName="ItemTapped" />
+                                    <b:EventToCommandBehavior
+                                        Command="{Binding TappedMatchCommand}"
+                                        EventArgsParameterPath="Item"
+                                        EventName="ItemTapped" />
                                 </customListView:CustomListView.Behaviors>
                             </customListView:CustomListView>
                         </StackLayout>
