@@ -65,6 +65,7 @@
             <Color x:Key="UpLiveOddColor">#66FF59</Color>
             <Color x:Key="DownLiveOddColor">#FF222C</Color>
             <!--  Tabs  -->
+            <Color x:Key="TabLayoutBgColor">#202124</Color>
             <Color x:Key="TabColor">#999</Color>
             <Color x:Key="ActiveTabColor">#fff</Color>
             <Color x:Key="ActiveLineColor">#F24822</Color>
@@ -86,7 +87,7 @@
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
             <Color x:Key="TableEvenRowBgColor">#131724</Color>
             <Color x:Key="TableRowColor">#fff</Color>
-            <Color x:Key="TableLineColor">#393B4D</Color>
+            <Color x:Key="TableLineColor">#3A3942</Color>
             <x:Double x:Key="TableRowFontSize">11</x:Double>
             <x:Double x:Key="TableRowHeight">40</x:Double>
             <!--  Font-size  -->
@@ -265,7 +266,7 @@
                 TargetType="Label">
                 <Setter Property="Text" Value="&#xe91f;" />
                 <Setter Property="TextColor" Value="#AAA8A5" />
-                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontSize" Value="16" />
                 <Setter Property="VerticalTextAlignment" Value="Center" />
                 <Setter Property="HorizontalTextAlignment" Value="Start" />
             </Style>

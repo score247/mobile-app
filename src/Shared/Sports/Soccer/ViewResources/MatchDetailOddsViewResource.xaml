@@ -41,7 +41,7 @@
 
     <Style x:Key="MatchDetailOddsDropdownContainer" TargetType="StackLayout">
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 

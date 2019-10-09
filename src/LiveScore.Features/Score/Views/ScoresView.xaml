@@ -18,7 +18,7 @@
              xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              x:DataType="viewModels:ScoresViewModel"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Search"
                      Command="{Binding ClickSearchCommand}"

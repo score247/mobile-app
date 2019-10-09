@@ -8,7 +8,7 @@
         <Style x:Key="ScrollTab" TargetType="ScrollView">
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
-            <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource TabLayoutBgColor}" />
             <Setter Property="Margin" Value="0,16,0,0" />
         </Style>
         <Style
@@ -34,7 +34,7 @@
             <Setter Property="TextColor" Value="{StaticResource ActiveLineColor}" />
         </Style>
         <Style x:Key="TabLine" TargetType="BoxView">
-            <Setter Property="HeightRequest" Value="1" />
+            <Setter Property="HeightRequest" Value="1" />            
             <!--<Setter Property="AbsoluteLayout.LayoutFlags" Value="HeightProportional" />-->
         </Style>
         <Style
@@ -47,7 +47,7 @@
             x:Key="TabInactiveLine"
             BasedOn="{StaticResource TabLine}"
             TargetType="BoxView">
-            <Setter Property="BackgroundColor" Value="#1D2133" />
+            <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
         </Style>
         <!--Font Icon Resources-->
 

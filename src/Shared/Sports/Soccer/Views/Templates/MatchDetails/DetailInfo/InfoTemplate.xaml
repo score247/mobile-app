@@ -32,7 +32,7 @@
         <tabStrip:TabITemListView
             AutomationId="MatchDetailInfo"
             AutomationProperties.IsInAccessibleTree="False"
-            BackgroundColor="{StaticResource PrimaryColor}"
+            BackgroundColor="{StaticResource SiteBackgroundColor}"
             HasUnevenRows="True"
             IsPullToRefreshEnabled="true"
             IsRefreshing="{Binding IsRefreshing}"
@@ -44,7 +44,7 @@
             SeparatorColor="Transparent">
             <tabStrip:TabITemListView.Footer>
                 <StackLayout
-                    BackgroundColor="{StaticResource PrimaryColor}"
+                    BackgroundColor="{StaticResource SiteBackgroundColor}"
                     HeightRequest="500"
                     IsVisible="{Binding IsNotLoading}">
                     <FlexLayout Style="{StaticResource Group}">

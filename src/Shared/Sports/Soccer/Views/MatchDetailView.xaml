@@ -10,7 +10,7 @@
              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
              xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             BackgroundColor="{StaticResource PrimaryColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}" />
@@ -32,108 +32,112 @@
     <ContentPage.Content>
         <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
-                <StackLayout Style="{StaticResource MatchGeneralInfoContainer}">
-                    <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
+                <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="{StaticResource DateBarLineColor}" />
+                <Frame HasShadow="True" CornerRadius="0">
+                    <StackLayout>
+                        <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
 
-                        <ffimageloadingsvg:SvgCachedImage 
+                            <ffimageloadingsvg:SvgCachedImage
                                             Grid.Row="0"
                                             Grid.Column="0"
                                             DownsampleToViewSize="True"
                                             LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                            Source="{Binding CountryFlag}" 
-                                            Style="{StaticResource LeagueFlag}"/>
-                        
-                        <Label Grid.Row="0"
+                                            Source="{Binding CountryFlag}"
+                                            Style="{StaticResource LeagueFlag}" />
+
+                            <Label Grid.Row="0"
                                Grid.Column="1"
                                AutomationId="LeagueName"
                                LineBreakMode="TailTruncation"
                                Style="{StaticResource LeagueName}"
                                Text="{Binding MatchViewModel.Match.LeagueGroupName, Converter={StaticResource UpperCaseConverter}}" />
-                        <Label Grid.Row="0"
+                            <Label Grid.Row="0"
                                Grid.Column="2"
                                AutomationId="LeagueDate"
                                Style="{StaticResource MatchDate}"
                                Text="{Binding DisplayEventDate}" />
-                    </Grid>
-                    <Grid Style="{StaticResource MatchGeneralInfoTeams}">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="20" />
-                        </Grid.ColumnDefinitions>
-                        <StackLayout Grid.Row="0"
+                        </Grid>
+
+                        <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="20" />
+                            </Grid.ColumnDefinitions>
+                            <StackLayout Grid.Row="0"
                                      Grid.RowSpan="2"
                                      Grid.Column="0"
                                      Style="{StaticResource MatchStatusContainer}">
-                            <Label AutomationId="LiveIndicator"
+                                <Label AutomationId="LiveIndicator"
                                    IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
                                    Style="{StaticResource LiveIcon}" />
 
-                            <Label AutomationId="ExtraTimeIndicator"
+                                <Label AutomationId="ExtraTimeIndicator"
                                    IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
                                    Style="{StaticResource ExtraTimeIcon}" />
-                            <Label AutomationId="MatchStatus"
+                                <Label AutomationId="MatchStatus"
                                    Style="{StaticResource MatchStatus}"
                                    Text="{Binding MatchViewModel.DisplayMatchStatus}" />
-                        </StackLayout>
-                        <StackLayout Grid.Row="0"
+                            </StackLayout>
+                            <StackLayout Grid.Row="0"
                                      Grid.Column="1"
                                      Style="{StaticResource MatchHomeTeam}">
-                            <Label AutomationId="HomeTeamName"
+                                <Label AutomationId="HomeTeamName"
                                    Style="{StaticResource Team}"
                                    Text="{Binding MatchViewModel.Match.HomeTeamName}" />
-                            <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
-                            <Label AutomationId="HomeTeamPenalty"
+                                <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
+                                <Label AutomationId="HomeTeamPenalty"
                                    IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                    Style="{StaticResource MatchPenaltyIcon}" />
-                            <Label AutomationId="HomeTeamSecondLeg"
+                                <Label AutomationId="HomeTeamSecondLeg"
                                    IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                                    Style="{StaticResource MatchSecondLegIcon}" />
-                        </StackLayout>
-                        <StackLayout Grid.Row="1"
+                            </StackLayout>
+                            <StackLayout Grid.Row="1"
                                      Grid.Column="1"
                                      Style="{StaticResource MatchAwayTeam}">
-                            <Label AutomationId="AwayTeamName"
+                                <Label AutomationId="AwayTeamName"
                                    Style="{StaticResource Team}"
                                    Text="{Binding MatchViewModel.Match.AwayTeamName}" />
-                            <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
-                            <Label AutomationId="AwayTeamPenalty"
+                                <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
+                                <Label AutomationId="AwayTeamPenalty"
                                    IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                                    Style="{StaticResource MatchPenaltyIcon}" />
-                            <Label AutomationId="AwayTeamSecondLeg"
+                                <Label AutomationId="AwayTeamSecondLeg"
                                    IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                                    Style="{StaticResource MatchSecondLegIcon}" />
-                        </StackLayout>
-                        <Label Grid.Row="0"
+                            </StackLayout>
+                            <Label Grid.Row="0"
                                Grid.Column="2"
                                AutomationId="HomeScore"
                                IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
                                Style="{StaticResource HomeScore}"
                                Text="{Binding MatchViewModel.Match.HomeScore}" />
-                        <Label Grid.Row="1"
+                            <Label Grid.Row="1"
                                Grid.Column="2"
                                AutomationId="AwayScore"
                                IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
                                Style="{StaticResource AwayScore}"
                                Text="{Binding MatchViewModel.Match.AwayScore}" />
-                    </Grid>
-                </StackLayout>
-                <Label AutomationId="SecondLegDetail"
+                        </Grid>
+                        <Label AutomationId="SecondLegDetail"
                        IsVisible="{Binding DisplaySecondLeg, Converter={StaticResource TextNotEmptyConverter}}"
                        Style="{StaticResource MatchGeneralInfoImportantContent}"
                        Text="{Binding DisplaySecondLeg}" />
+                    </StackLayout>
+                </Frame>
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemsSource="{Binding TabItems}"
                                    ItemTappedCommand="{Binding FunctionTabTappedCommand}" />
