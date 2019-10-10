@@ -42,8 +42,6 @@
         {
             if (networkConnectionManager.IsSuccessfulConnection())
             {
-                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
-
                 if (getLatestData)
                 {
                     try
@@ -52,17 +50,14 @@
 
                         await SetCacheAsync(key, data, options).ConfigureAwait(false);
                     }
-                    catch (Exception ex)
+                    catch (TaskCanceledException)
                     {
-                        if (ex is TaskCanceledException)
-                        {
-                            networkConnectionManager.PublishConnectionTimeoutEvent();
-                            return dataFromCache;
-                        }
-
-                        throw;
+                        networkConnectionManager.PublishConnectionTimeoutEvent();
+                        return await cacheService.GetAsync<T>(key);
                     }
                 }
+
+                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
 
                 if (Equals(dataFromCache, default(T)))
                 {
@@ -72,15 +67,10 @@
 
                         await SetCacheAsync(key, data, options).ConfigureAwait(false);
                     }
-                    catch (Exception ex)
+                    catch (TaskCanceledException)
                     {
-                        if (ex is TaskCanceledException)
-                        {
-                            networkConnectionManager.PublishConnectionTimeoutEvent();
-                            return dataFromCache;
-                        }
-
-                        throw;
+                        networkConnectionManager.PublishConnectionTimeoutEvent();
+                        return await cacheService.GetAsync<T>(key);
                     }
                 }
             }
@@ -88,7 +78,6 @@
             {
                 networkConnectionManager.PublishNetworkConnectionEvent();
             }
-
 
             return await cacheService.GetAsync<T>(key).ConfigureAwait(false);
         }
@@ -103,6 +92,11 @@
 
         private Task SetCacheAsync<T>(string key, T data, CacheItemOptions options)
         {
+            if (Equals(data, default(T)))
+            {
+                return Task.CompletedTask;
+            }
+
             if (!cachedKeys.Contains(key))
             {
                 cachedKeys.Add(key);

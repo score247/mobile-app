@@ -13,6 +13,7 @@ using Refit;
 
 namespace LiveScore.Soccer.Services
 {
+    [Headers("Accept: application/x-msgpack")]
     public interface ISoccerMatchApi
     {
         [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
@@ -24,11 +25,11 @@ namespace LiveScore.Soccer.Services
         [Get("/soccer/{language}/matches/live")]
         Task<IEnumerable<Match>> GetLiveMatches(string language);
 
-        [Get("/soccer/{language}/matches/live/count")]
-        Task<int> GetLiveMatchCount(string language);
-
         [Get("/soccer/{language}/matches/{matchId}/coverage")]
         Task<MatchCoverage> GetMatchCoverage(string matchId, string language);
+
+        [Get("/soccer/{language}/matches/{matchId}/commentary")]
+        Task<MatchCommentary> GetMatchCommentary(string matchId, string language);
     }
 
     public interface IMatchInfoService
@@ -36,6 +37,8 @@ namespace LiveScore.Soccer.Services
         Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
 
         Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false);
+
+        Task<MatchCommentary> GetMatchCommentary(string matchId, Language language, bool forceFetchNewData = false);
     }
 
     public class MatchService : BaseService, IMatchService, IMatchInfoService
@@ -121,23 +124,43 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<int> GetLiveMatchCount(Language language, bool getLatestData = false)
+        public async Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {
-                var cacheKey = $"LiveMatchCount::{language.DisplayName}";
+                var cacheKey = $"Match:{matchId}:{language}:coverage";
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
-                        () => GetLiveMatchCountFromApi(language.DisplayName),
-                        absoluteExpiredTime: 10, getLatestData)
+                        () => GetMatchCoverageFromApi(matchId, language.DisplayName),
+                        CacheDuration.Short, forceFetchNewData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
                 HandleException(ex);
 
-                return 0;
+                return new MatchCoverage { MatchId = matchId };
+            }
+        }
+
+        public async Task<MatchCommentary> GetMatchCommentary(string matchId, Language language, bool forceFetchNewData = false)
+        {
+            try
+            {
+                var cacheKey = $"Match:{matchId}:{language}:Commentary";
+
+                return await cacheManager.GetOrSetAsync(
+                        cacheKey,
+                        () => GetMatchCommentaryFromApi(matchId, language.DisplayName),
+                        CacheDuration.Short, forceFetchNewData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return new MatchCommentary();
             }
         }
 
@@ -154,31 +177,11 @@ namespace LiveScore.Soccer.Services
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatches(language));
 
         [Time]
-        private Task<int> GetLiveMatchCountFromApi(string language)
-            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatchCount(language));
-
-        public async Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false)
-        {
-            try
-            {
-                var cacheKey = $"Match:{matchId}:{language}:coverage";
-
-                return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                    () => GetMatchCoverageFromApi(matchId, language.DisplayName),
-                    CacheDuration.Short, forceFetchNewData)
-                    .ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                HandleException(ex);
-
-                return new MatchCoverage { MatchId = matchId };
-            }
-        }
-
-        [Time]
         private Task<MatchCoverage> GetMatchCoverageFromApi(string matchId, string language)
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCoverage(matchId, language));
+
+        [Time]
+        private Task<MatchCommentary> GetMatchCommentaryFromApi(string matchId, string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCommentary(matchId, language));
     }
 }

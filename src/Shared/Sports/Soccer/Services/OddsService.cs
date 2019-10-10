@@ -8,6 +8,7 @@
     using LiveScore.Soccer.Models.Odds;
     using Refit;
 
+    [Headers("Accept: application/x-msgpack")]
     public interface ISoccerOddsApi
     {
         [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]

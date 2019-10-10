@@ -23,15 +23,13 @@ namespace LiveScore.Core.Tests.Services
         {
             // Arrange
             var httpService = Substitute.For<IHttpService>();
-            var loggingService = Substitute.For<ILoggingService>();
             var networkConnectionManager = Substitute.For<INetworkConnection>();
-            var cacheManager = Substitute.For<ICacheManager>();
             httpService.HttpClient.Returns(new HttpClient()
             {
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
 
-            var apiService = new ApiService(httpService, loggingService, networkConnectionManager, cacheManager);
+            var apiService = new ApiService(httpService, networkConnectionManager);
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act

@@ -53,7 +53,7 @@
             return Task.CompletedTask;
         }
 
-        public async override void OnAppearing()
+        public override async void OnAppearing()
         {
             base.OnAppearing();
 

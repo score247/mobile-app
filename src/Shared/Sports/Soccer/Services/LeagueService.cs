@@ -11,6 +11,7 @@ using Refit;
 
 namespace LiveScore.Soccer.Services
 {
+    [Headers("Accept: application/x-msgpack")]
     public interface ISoccerLeagueApi
     {
         [Get("/soccer/{language}/leagues/major")]

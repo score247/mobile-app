@@ -275,11 +275,7 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
-        {
-            return MatchService
-                .GetMatchesByDate(ViewDate, CurrentLanguage, getLatestData)
-;
-        }
+            => MatchService.GetMatchesByDate(ViewDate, CurrentLanguage, getLatestData);
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
