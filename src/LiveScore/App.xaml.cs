@@ -50,7 +50,7 @@ namespace LiveScore
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
         private IHubService soccerHub;
-        private INetworkConnectionManager networkConnectionManager;
+        private INetworkConnection networkConnectionManager;
 
         public App() : this(null)
         {
@@ -83,7 +83,7 @@ namespace LiveScore
 
             StartGlobalTimer();
 
-            networkConnectionManager = Container.Resolve<INetworkConnectionManager>();
+            networkConnectionManager = Container.Resolve<INetworkConnection>();
             networkConnectionManager.StartListen();
         }
 
@@ -121,7 +121,7 @@ namespace LiveScore
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-            containerRegistry.RegisterSingleton<INetworkConnectionManager, NetworkConnectionManager>();
+            containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
             containerRegistry.RegisterInstance(new RefitSettings
             {
@@ -171,7 +171,7 @@ namespace LiveScore
                 Configuration.SignalRHubEndPoint,
                 Container.Resolve<ILoggingService>(),
                 eventAggregator,
-                Container.Resolve<INetworkConnectionManager>());
+                Container.Resolve<INetworkConnection>());
 
             await soccerHub.Start();
 
@@ -206,7 +206,7 @@ namespace LiveScore
         {
             Device.StartTimer(TimeSpan.FromMinutes(1), () =>
             {
-                if (networkConnectionManager.IsConnectionOK())
+                if (networkConnectionManager.IsSuccessfulConnection())
                 {
                     var eventAggregator = Container.Resolve<IEventAggregator>();
                     eventAggregator.GetEvent<OneMinuteTimerCountUpEvent>().Publish();

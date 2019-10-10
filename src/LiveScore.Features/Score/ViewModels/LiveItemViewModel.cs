@@ -38,22 +38,28 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(match =>
-                new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
+            var matchItemViewModels
+                = matches.Select(match => new MatchViewModel(
+                    match,
+                    matchStatusConverter,
+                    matchMinuteConverter,
+                    EventAggregator));
 
-            var matchItems = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc)).ToList();
+            var matchItems
+                = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems));
         }
 
-        protected override void UpdateMatchItems(List<IMatch> matches)
+        protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
             var currentMatches = MatchItemsSource
                 .SelectMany(g => g)
-                .Select(vm => vm.Match)
-                .ToList();
-            var modifiedMatches = currentMatches.Intersect(matches).ToList();
+                .Select(vm => vm.Match);
+
+            var modifiedMatches = currentMatches.Intersect(matches);
+
             var removedMatchIds = currentMatches.Except(modifiedMatches).Select(m => m.Id);
 
             Device.BeginInvokeOnMainThread(() =>
@@ -61,7 +67,11 @@ namespace LiveScore.Features.Score.ViewModels
                 MatchItemsSource.RemoveMatches(removedMatchIds.ToArray(), buildFlagUrlFunc);
 
                 MatchItemsSource.UpdateMatchItems(
-                    matches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+                    matches,
+                    matchStatusConverter,
+                    matchMinuteConverter,
+                    EventAggregator,
+                    buildFlagUrlFunc);
             });
         }
 
@@ -84,7 +94,11 @@ namespace LiveScore.Features.Score.ViewModels
             if (HasData)
             {
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource.UpdateMatchItems(
-                        message.NewMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc));
+                    message.NewMatches,
+                    matchStatusConverter,
+                    matchMinuteConverter,
+                    EventAggregator,
+                    buildFlagUrlFunc));
             }
         }
     }

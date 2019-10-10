@@ -20,7 +20,7 @@ namespace LiveScore.Soccer.Services
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
-        private readonly INetworkConnectionManager networkConnectionManager;
+        private readonly INetworkConnection networkConnectionManager;
 
         private HubConnection hubConnection;
 
@@ -29,7 +29,7 @@ namespace LiveScore.Soccer.Services
             string hubEndpoint,
             ILoggingService logger,
             IEventAggregator eventAggregator,
-            INetworkConnectionManager networkConnectionManager)
+            INetworkConnection networkConnectionManager)
         {
             this.hubConnectionBuilder = hubConnectionBuilder;
             this.hubEndpoint = hubEndpoint;
@@ -91,7 +91,7 @@ namespace LiveScore.Soccer.Services
 
         private async Task HubConnection_Closed(Exception arg)
         {
-            if (networkConnectionManager.IsConnectionNotOK())
+            if (networkConnectionManager.IsFailureConnection())
             {
                 return;
             }

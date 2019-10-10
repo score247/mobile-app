@@ -29,11 +29,11 @@ namespace LiveScore.Common.Services
     public class LoggingService : ILoggingService
     {
         private readonly IEssential deviceInfo;
-        private readonly INetworkConnectionManager networkConnectionManager;
+        private readonly INetworkConnection networkConnectionManager;
 
         private IRavenClient ravenClient;
 
-        public LoggingService(IEssential deviceInfo, INetworkConnectionManager networkConnectionManager)
+        public LoggingService(IEssential deviceInfo, INetworkConnection networkConnectionManager)
         {
             this.deviceInfo = deviceInfo;
             this.networkConnectionManager = networkConnectionManager;
@@ -50,7 +50,7 @@ namespace LiveScore.Common.Services
         {
             Debug.WriteLine("LogError");
 
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
             }
@@ -58,7 +58,7 @@ namespace LiveScore.Common.Services
 
         public void LogError(string message, Exception exception)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 ravenClient?.Capture(CreateSentryEvent(message, exception));
             }
@@ -66,7 +66,7 @@ namespace LiveScore.Common.Services
 
         public Task LogErrorAsync(Exception exception)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 return ravenClient?.CaptureAsync(CreateSentryEvent(string.Empty, exception));
             }
@@ -76,7 +76,7 @@ namespace LiveScore.Common.Services
 
         public Task LogErrorAsync(string message, Exception exception)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 return ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
             }
@@ -86,7 +86,7 @@ namespace LiveScore.Common.Services
 
         public Task LogInfoAsync(string message)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 return ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
             }
@@ -96,7 +96,7 @@ namespace LiveScore.Common.Services
 
         public void LogInfo(string message)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 ravenClient?.Capture(CreateSentryInfoEvent(message));
             }

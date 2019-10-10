@@ -13,13 +13,13 @@
         private readonly IEssential mockEssentials;
         private readonly IRavenClient mockRavenClient;
         private readonly ILoggingService loggingService;
-        private readonly INetworkConnectionManager mockNetworkManager;
+        private readonly INetworkConnection mockNetworkManager;
 
         public LoggingServiceTests()
         {
             mockEssentials = new MockEssentials();
             mockRavenClient = Substitute.For<IRavenClient>();
-            mockNetworkManager = Substitute.For<INetworkConnectionManager>();
+            mockNetworkManager = Substitute.For<INetworkConnection>();
 
             loggingService = new LoggingService(mockEssentials, mockNetworkManager);
             loggingService.Init("", "", mockRavenClient);
@@ -29,7 +29,7 @@
         public void LogError_WhenCall_InjectCaptureEvent()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
             var exception = new InvalidOperationException("");
 
             // Act
@@ -44,7 +44,7 @@
         public void LogErrorWithMessage_WhenCall_InjectCaptureEvent()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
             var exception = new InvalidOperationException("");
 
             // Act
@@ -59,7 +59,7 @@
         public void LogError_WhenCall_CorrectDeviceName()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -72,7 +72,7 @@
         public void LogError_WhenCall_CorrectDeviceModel()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -85,7 +85,7 @@
         public void LogError_WhenCall_CorrectOperatingSystemName()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -98,7 +98,7 @@
         public void LogError_WhenCall_CorrectOperatingSystemVersion()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
             loggingService.LogError(new InvalidOperationException(""));
@@ -111,7 +111,7 @@
         public async Task LogErrorAsync_WhenCall_InjectCaptureEventAsync()
         {
             // Arrange
-            mockNetworkManager.IsConnectionOK().Returns(true);
+            mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
             await loggingService.LogErrorAsync(new InvalidOperationException(""));

@@ -21,7 +21,7 @@ namespace LiveScore.Common.Services
         private readonly IHttpService httpService;
         private readonly RefitSettings refitSettings;
         private readonly ILoggingService loggingService;
-        private readonly INetworkConnectionManager networkConnectionManager;
+        private readonly INetworkConnection networkConnectionManager;
 
         private static readonly RefitSettings RefitSettings = new RefitSettings
         {
@@ -35,7 +35,7 @@ namespace LiveScore.Common.Services
         public ApiService(
             IHttpService httpService,
             ILoggingService loggingService,
-            INetworkConnectionManager networkConnectionManager,
+            INetworkConnection networkConnectionManager,
             ICacheManager cacheManager,
             RefitSettings refitSettings = null)
         {
@@ -54,7 +54,7 @@ namespace LiveScore.Common.Services
         {
             try
             {
-                if (networkConnectionManager.IsConnectionOK())
+                if (networkConnectionManager.IsSuccessfulConnection())
                 {
                     return func.Invoke();
                 }

@@ -26,11 +26,11 @@
     {
         private readonly ICacheService cacheService;
         private readonly IList<string> cachedKeys;
-        private readonly INetworkConnectionManager networkConnectionManager;
+        private readonly INetworkConnection networkConnectionManager;
 
         public CacheManager(
             ICacheService cacheService,
-            INetworkConnectionManager networkConnectionManager)
+            INetworkConnection networkConnectionManager)
         {
             this.cacheService = cacheService;
             this.networkConnectionManager = networkConnectionManager;
@@ -40,7 +40,7 @@
         // TODO: refactor later
         public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options, bool getLatestData = false)
         {
-            if (networkConnectionManager.IsConnectionOK())
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
                 var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
 

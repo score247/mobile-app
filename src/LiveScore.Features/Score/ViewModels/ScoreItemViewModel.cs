@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
+using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
@@ -26,13 +27,13 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoreItemViewModel : ViewModelBase
     {
-        protected readonly IMatchStatusConverter matchStatusConverter;
-        protected readonly IMatchMinuteConverter matchMinuteConverter;
-        protected readonly Func<string, string> buildFlagUrlFunc;
-        protected readonly IMatchService MatchService;
         private const int DefaultFirstLoadMatchItemCount = 5;
         private const int DefaultLoadingMatchItemCountOnScrolling = 8;
-        
+
+        protected readonly IMatchStatusConverter matchStatusConverter;
+        protected readonly IMatchMinuteConverter matchMinuteConverter;
+        protected readonly IMatchService MatchService;
+        protected readonly Func<string, string> buildFlagUrlFunc;
 
         [Time]
         public ScoreItemViewModel(
@@ -101,35 +102,28 @@ namespace LiveScore.Features.Score.ViewModels
         {
             base.OnAppearing();
 
-            CheckNetworkAndRunAction(() =>
-            {
-                if (FirstLoad)
+            networkConnectionManager
+                .OnSuccessfulConnection(() =>
                 {
-                    FirstLoad = false;
-
-                    LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
-                }
-                else
-                {
-                    if (ViewDate.IsTodayOrYesterday())
+                    if (FirstLoad)
                     {
-                        Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
-                    }
-                }
-            });
-        }
+                        FirstLoad = false;
 
-        private void CheckNetworkAndRunAction(Action action)
-        {
-            if (networkConnectionManager.IsConnectionOK())
-            {
-                action();
-            }
-            else
-            {
-                IsRefreshing = false;
-                networkConnectionManager.PublishNetworkConnectionEvent();
-            }
+                        LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        if (ViewDate.IsTodayOrYesterday())
+                        {
+                            Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
+                        }
+                    }
+                })
+                .OnFailedConnection(() =>
+                {
+                    IsRefreshing = false;
+                    networkConnectionManager.PublishNetworkConnectionEvent();
+                });
         }
 
         private void SubscribeEvents()
@@ -172,8 +166,15 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            MatchItemsSource?.UpdateMatchItemStatistics(payload.MatchId, payload.IsHome, payload.TeamStatistic);
-            RemainingMatchItemSource?.UpdateMatchItemStatistics(payload.MatchId, payload.IsHome, payload.TeamStatistic);
+            MatchItemsSource?.UpdateMatchItemStatistics(
+                payload.MatchId,
+                payload.IsHome,
+                payload.TeamStatistic);
+
+            RemainingMatchItemSource?.UpdateMatchItemStatistics(
+                payload.MatchId,
+                payload.IsHome,
+                payload.TeamStatistic);
         }
 
         private void InitializeCommand()
@@ -186,7 +187,7 @@ namespace LiveScore.Features.Score.ViewModels
         private async Task OnRefreshAsync()
         {
             Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
-            if (networkConnectionManager.IsConnectionNotOK())
+            if (networkConnectionManager.IsFailureConnection())
             {
                 IsRefreshing = false;
                 networkConnectionManager.PublishNetworkConnectionEvent();
@@ -224,8 +225,9 @@ namespace LiveScore.Features.Score.ViewModels
 
             var matchItems = RemainingMatchItemSource.Take(DefaultLoadingMatchItemCountOnScrolling);
 
-            RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                RemainingMatchItemSource.Skip(DefaultLoadingMatchItemCountOnScrolling));
+            RemainingMatchItemSource
+                = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                    RemainingMatchItemSource.Skip(DefaultLoadingMatchItemCountOnScrolling));
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -238,7 +240,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual async Task LoadMatchesAsync(bool getLatestData = false)
         {
-            var matches = (await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false))?.ToList();
+            var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
 
             if (matches?.Any() != true)
             {
@@ -256,7 +258,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual async Task UpdateMatchesAsync(bool getLatestData = false)
         {
-            var matches = (await LoadMatchesFromServiceAsync(getLatestData))?.ToList();
+            var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
 
             if (matches?.Any() != true)
             {
@@ -279,24 +281,36 @@ namespace LiveScore.Features.Score.ViewModels
 ;
         }
 
-        protected virtual void UpdateMatchItems(List<IMatch> matches)
+        protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
             try
             {
-                if (MatchItemsSource.Count == 0 && matches.Count > 0)
+                if (MatchItemsSource.Count == 0 && matches?.Any() == true)
                 {
                     InitializeMatchItems(matches);
                     return;
                 }
 
-                var loadedMatches = matches.Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match.Id == m.Id))).ToList();
+                var loadedMatches = matches
+                    .Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match.Id == m.Id)));
+
                 Device.BeginInvokeOnMainThread(() =>
                     MatchItemsSource.UpdateMatchItems(
-                        loadedMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc));
+                        loadedMatches,
+                        matchStatusConverter,
+                        matchMinuteConverter,
+                        EventAggregator,
+                        buildFlagUrlFunc));
 
                 var remainingMatches = matches.Except(loadedMatches);
-                RemainingMatchItemSource.UpdateMatchItems(
-                    remainingMatches, matchStatusConverter, matchMinuteConverter, EventAggregator, buildFlagUrlFunc);
+
+                RemainingMatchItemSource
+                    .UpdateMatchItems(
+                        remainingMatches,
+                        matchStatusConverter,
+                        matchMinuteConverter,
+                        EventAggregator,
+                        buildFlagUrlFunc);
             }
             catch (Exception ex)
             {
@@ -307,13 +321,19 @@ namespace LiveScore.Features.Score.ViewModels
         [Time]
         protected virtual void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
-            var matchItemViewModels = matches.Select(match =>
-                new MatchViewModel(match, matchStatusConverter, matchMinuteConverter, EventAggregator));
+            var matchItemViewModels = matches.Select(match => new MatchViewModel(
+                match,
+                matchStatusConverter,
+                matchMinuteConverter,
+                EventAggregator));
 
-            var matchItems = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc)).ToList();
+            var matchItems
+                = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
+
             var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
-            RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
-                matchItems.Skip(DefaultFirstLoadMatchItemCount));
+
+            RemainingMatchItemSource
+                = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems));

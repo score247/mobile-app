@@ -24,7 +24,7 @@ namespace LiveScore.Core.Tests.Services
             // Arrange
             var httpService = Substitute.For<IHttpService>();
             var loggingService = Substitute.For<ILoggingService>();
-            var networkConnectionManager = Substitute.For<INetworkConnectionManager>();
+            var networkConnectionManager = Substitute.For<INetworkConnection>();
             var cacheManager = Substitute.For<ICacheManager>();
             httpService.HttpClient.Returns(new HttpClient()
             {

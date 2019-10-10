@@ -54,13 +54,11 @@ namespace LiveScore.Core.Controls.CustomListView
 
         private void InfiniteListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
         {
-            if (ItemsSource is IList items && (items.Count < TriggerLoadMoreIndex
-                                               || e.Item == items[^TriggerLoadMoreIndex]))
+            if (ItemsSource is IList items
+                && (items.Count < TriggerLoadMoreIndex || e.Item == items[^TriggerLoadMoreIndex])
+                && LoadMoreCommand?.CanExecute(null) == true)
             {
-                if (LoadMoreCommand?.CanExecute(null) == true)
-                {
-                    LoadMoreCommand.Execute(null);
-                }
+                LoadMoreCommand.Execute(null);
             }
         }
     }
