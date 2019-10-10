@@ -1,45 +1,99 @@
 ﻿using LiveScore.Core.Models.Teams;
+using MessagePack;
 using PropertyChanged;
 
 namespace LiveScore.Soccer.Models.Teams
 {
-    [AddINotifyPropertyChangedInterface]
+    [AddINotifyPropertyChangedInterface, MessagePackObject]
     public class TeamStatistic : ITeamStatistic
     {
-        public TeamStatistic(byte redCards, byte yellowRedCards)
+        [SerializationConstructor]
+        public TeamStatistic(
+             byte possession,
+             byte freeKicks,
+             byte throwIns,
+             byte goalKicks,
+             byte shotsBlocked,
+             byte shotsOnTarget,
+             byte shotsOffTarget,
+             byte cornerKicks,
+             byte fouls,
+             byte shotsSaved,
+             byte offsides,
+             byte yellowCards,
+             byte injuries,
+             byte redCards,
+             byte yellowRedCards)
+#pragma warning restore S107 // Methods should not have too many parameters
         {
+            Possession = possession;
+            FreeKicks = freeKicks;
+            ThrowIns = throwIns;
+            GoalKicks = goalKicks;
+            ShotsBlocked = shotsBlocked;
+            ShotsOnTarget = shotsOnTarget;
+            ShotsOffTarget = shotsOffTarget;
+            CornerKicks = cornerKicks;
+            Fouls = fouls;
+            ShotsSaved = shotsSaved;
+            Offsides = offsides;
+            YellowCards = yellowCards;
+            Injuries = injuries;
             RedCards = redCards;
             YellowRedCards = yellowRedCards;
         }
 
-        public byte Possession { get; set; }
+        [Key(0)]
+        public byte Possession { get; }
 
-        public byte FreeKicks { get; set; }
+        [Key(1)]
+        public byte FreeKicks { get; }
 
-        public byte ThrowIns { get; set; }
+        [Key(2)]
+        public byte ThrowIns { get; }
 
-        public byte GoalKicks { get; set; }
+        [Key(3)]
+        public byte GoalKicks { get; }
 
-        public byte ShotsBlocked { get; set; }
+        [Key(4)]
+        public byte ShotsBlocked { get; }
 
-        public byte ShotsOnTarget { get; set; }
+        [Key(5)]
+        public byte ShotsOnTarget { get; }
 
-        public byte ShotsOffTarget { get; set; }
+        [Key(6)]
+        public byte ShotsOffTarget { get; }
 
-        public byte CornerKicks { get; set; }
 
-        public byte Fouls { get; set; }
+        [Key(7)]
+        public byte CornerKicks { get; }
 
-        public byte ShotsSaved { get; set; }
 
-        public byte Offsides { get; set; }
+        [Key(8)]
+        public byte Fouls { get; }
 
-        public byte YellowCards { get; set; }
 
-        public byte YellowRedCards { get; set; }
+        [Key(9)]
+        public byte ShotsSaved { get; }
 
-        public byte RedCards { get; set; }
 
-        public byte Injuries { get; set; }
+        [Key(10)]
+        public byte Offsides { get; }
+
+
+        [Key(11)]
+        public byte YellowCards { get; }
+
+
+        [Key(12)]
+        public byte Injuries { get; }
+
+
+        [Key(13)]
+        public byte RedCards { get; }
+
+
+        [Key(14)]
+        public byte YellowRedCards { get; }
     }
 }

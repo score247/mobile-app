@@ -229,7 +229,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 {MatchDetailFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
                 {MatchDetailFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
                 {MatchDetailFunction.Social, new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
-                {MatchDetailFunction.Stats, new DetailStatsViewModel(NavigationService, DependencyResolver, new StatisticsTemplate()) },
+                {MatchDetailFunction.Stats, new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()) },
                 {MatchDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
                 {MatchDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
                 {MatchDetailFunction.Tracker, new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, new TrackerTemplate()) }

@@ -169,6 +169,24 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ball possession.
+        /// </summary>
+        public static string BallPossession {
+            get {
+                return ResourceManager.GetString("BallPossession", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blocked shots.
+        /// </summary>
+        public static string BlockedShots {
+            get {
+                return ResourceManager.GetString("BlockedShots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bookmaker.
         /// </summary>
         public static string Bookmaker {
@@ -232,6 +250,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Corner kicks.
+        /// </summary>
+        public static string CornerKicks {
+            get {
+                return ResourceManager.GetString("CornerKicks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delayed.
         /// </summary>
         public static string Delayed {
@@ -277,6 +304,24 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fouls.
+        /// </summary>
+        public static string Fouls {
+            get {
+                return ResourceManager.GetString("Fouls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free kicks.
+        /// </summary>
+        public static string FreeKicks {
+            get {
+                return ResourceManager.GetString("FreeKicks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FT.
         /// </summary>
         public static string FT {
@@ -291,6 +336,15 @@ namespace LiveScore.Common.LangResources {
         public static string FullTime {
             get {
                 return ResourceManager.GetString("FullTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goal kicks.
+        /// </summary>
+        public static string GoalKicks {
+            get {
+                return ResourceManager.GetString("GoalKicks", resourceCulture);
             }
         }
         
@@ -430,6 +484,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offside.
+        /// </summary>
+        public static string Offside {
+            get {
+                return ResourceManager.GetString("Offside", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1X2.
         /// </summary>
         public static string OneXTwo {
@@ -520,6 +583,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Red cards.
+        /// </summary>
+        public static string RedCards {
+            get {
+                return ResourceManager.GetString("RedCards", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scores.
         /// </summary>
         public static string Scores {
@@ -534,6 +606,24 @@ namespace LiveScore.Common.LangResources {
         public static string SecondLeg {
             get {
                 return ResourceManager.GetString("SecondLeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots off target.
+        /// </summary>
+        public static string ShotsOffTarget {
+            get {
+                return ResourceManager.GetString("ShotsOffTarget", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots on target.
+        /// </summary>
+        public static string ShotsOnTarget {
+            get {
+                return ResourceManager.GetString("ShotsOnTarget", resourceCulture);
             }
         }
         
@@ -556,6 +646,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Throw-ins.
+        /// </summary>
+        public static string ThrowIns {
+            get {
+                return ResourceManager.GetString("ThrowIns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time.
         /// </summary>
         public static string Time {
@@ -570,6 +669,15 @@ namespace LiveScore.Common.LangResources {
         public static string Today {
             get {
                 return ResourceManager.GetString("Today", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total shots.
+        /// </summary>
+        public static string TotalShots {
+            get {
+                return ResourceManager.GetString("TotalShots", resourceCulture);
             }
         }
         
@@ -624,6 +732,15 @@ namespace LiveScore.Common.LangResources {
         public static string WorldNews {
             get {
                 return ResourceManager.GetString("WorldNews", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yellow cards.
+        /// </summary>
+        public static string YellowCards {
+            get {
+                return ResourceManager.GetString("YellowCards", resourceCulture);
             }
         }
     }

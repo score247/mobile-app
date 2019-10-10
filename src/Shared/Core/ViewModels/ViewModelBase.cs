@@ -135,8 +135,6 @@ namespace LiveScore.Core.ViewModels
         }
 
         public virtual Task OnNetworkReconnected()
-        {
-            return Task.CompletedTask;
-        }
+            => Task.CompletedTask;
     }
 }

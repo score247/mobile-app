@@ -306,4 +306,43 @@
   <data name="ConnectionTimeoutMessage" xml:space="preserve">
     <value>Sorry, the request timed out. Please refresh the page.</value>
   </data>
+  <data name="BallPossession" xml:space="preserve">
+    <value>Ball possession</value>
+  </data>
+  <data name="ShotsOnTarget" xml:space="preserve">
+    <value>Shots on target</value>
+  </data>
+  <data name="ShotsOffTarget" xml:space="preserve">
+    <value>Shots off target</value>
+  </data>
+  <data name="BlockedShots" xml:space="preserve">
+    <value>Blocked shots</value>
+  </data>
+  <data name="GoalKicks" xml:space="preserve">
+    <value>Goal kicks</value>
+  </data>
+  <data name="CornerKicks" xml:space="preserve">
+    <value>Corner kicks</value>
+  </data>
+  <data name="Offside" xml:space="preserve">
+    <value>Offside</value>
+  </data>
+  <data name="ThrowIns" xml:space="preserve">
+    <value>Throw-ins</value>
+  </data>
+  <data name="FreeKicks" xml:space="preserve">
+    <value>Free kicks</value>
+  </data>
+  <data name="Fouls" xml:space="preserve">
+    <value>Fouls</value>
+  </data>
+  <data name="YellowCards" xml:space="preserve">
+    <value>Yellow cards</value>
+  </data>
+  <data name="RedCards" xml:space="preserve">
+    <value>Red cards</value>
+  </data>
+  <data name="TotalShots" xml:space="preserve">
+    <value>Total shots</value>
+  </data>
 </root>

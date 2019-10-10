@@ -30,6 +30,9 @@ namespace LiveScore.Soccer.Services
 
         [Get("/soccer/{language}/matches/{matchId}/commentary")]
         Task<MatchCommentary> GetMatchCommentary(string matchId, string language);
+        
+        [Get("/soccer/{language}/matches/{matchId}/statistic")]
+        Task<MatchStatistic> GetMatchStatistic(string matchId, string language);
     }
 
     public interface IMatchInfoService
@@ -39,6 +42,8 @@ namespace LiveScore.Soccer.Services
         Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false);
 
         Task<MatchCommentary> GetMatchCommentary(string matchId, Language language, bool forceFetchNewData = false);
+        
+        Task<MatchStatistic> GetMatchStatistic(string matchId, bool forceFetchNewData = false);
     }
 
     public class MatchService : BaseService, IMatchService, IMatchInfoService
@@ -183,5 +188,30 @@ namespace LiveScore.Soccer.Services
         [Time]
         private Task<MatchCommentary> GetMatchCommentaryFromApi(string matchId, string language)
             => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCommentary(matchId, language));
+            
+        public async Task<MatchStatistic> GetMatchStatistic(string matchId, bool forceFetchNewData = false)
+        {
+            try
+            {
+                var cacheKey = $"Match:{matchId}:statistic";
+
+                return await cacheManager.GetOrSetAsync(
+                    cacheKey,
+                    () => GetMatchStatisticFromApi(matchId),
+                    CacheDuration.Short, 
+                    forceFetchNewData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return new MatchStatistic(matchId);
+            }
+        }
+
+        [Time]
+        private Task<MatchStatistic> GetMatchStatisticFromApi(string matchId)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchStatistic(matchId, Language.English.DisplayName));
     }
 }
