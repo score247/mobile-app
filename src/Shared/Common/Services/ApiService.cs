@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using JsonNet.ContractResolvers;
 using MethodTimer;
@@ -17,10 +16,9 @@ namespace LiveScore.Common.Services
 
     public class ApiService : IApiService
     {
-        private readonly ICacheManager cacheManager;
         private readonly IHttpService httpService;
         private readonly RefitSettings refitSettings;
-        private readonly ILoggingService loggingService;
+
         private readonly INetworkConnection networkConnectionManager;
 
         private static readonly RefitSettings RefitSettings = new RefitSettings
@@ -34,14 +32,10 @@ namespace LiveScore.Common.Services
 
         public ApiService(
             IHttpService httpService,
-            ILoggingService loggingService,
             INetworkConnection networkConnectionManager,
-            ICacheManager cacheManager,
             RefitSettings refitSettings = null)
         {
-            this.cacheManager = cacheManager;
             this.httpService = httpService;
-            this.loggingService = loggingService;
             this.networkConnectionManager = networkConnectionManager;
             this.refitSettings = refitSettings ?? RefitSettings;
         }
@@ -52,29 +46,9 @@ namespace LiveScore.Common.Services
         [Time]
         public Task<T> Execute<T>(Func<Task<T>> func)
         {
-            try
+            if (networkConnectionManager.IsSuccessfulConnection())
             {
-                if (networkConnectionManager.IsSuccessfulConnection())
-                {
-                    return func.Invoke();
-                }
-            }
-            catch (Exception ex)
-            {
-                if (ex is HttpRequestException)
-                {
-                    // TODO : Fix later
-                    cacheManager.InvalidateAll().GetAwaiter().GetResult();
-                    networkConnectionManager.PublishNetworkConnectionEvent();
-                }
-
-                if (ex is TaskCanceledException)
-                {
-                    networkConnectionManager.PublishConnectionTimeoutEvent();
-                }
-
-                // TODO : Fix later
-                loggingService.LogErrorAsync(ex).GetAwaiter().GetResult();
+                return func.Invoke();
             }
 
             return Task.FromResult(default(T));

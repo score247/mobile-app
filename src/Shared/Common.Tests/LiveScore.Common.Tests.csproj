@@ -25,4 +25,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Common\LiveScore.Common.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
 </Project>
