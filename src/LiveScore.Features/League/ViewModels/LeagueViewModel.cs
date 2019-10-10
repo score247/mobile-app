@@ -21,8 +21,6 @@ namespace LiveScore.Features.League.ViewModels
             HasData = IsNotBusy;
         }
 
-        public bool HasData { get; set; }
-
         public ObservableCollection<ILeague> Leagues { get; set; }
     }
 }

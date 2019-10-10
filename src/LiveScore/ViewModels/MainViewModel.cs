@@ -15,12 +15,10 @@ namespace LiveScore.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly ISettings settings;
         private readonly ICacheManager cacheManager;
         private readonly ILoggingService loggingService;
 
         public MainViewModel(
-            ISettings settings,
             ICacheManager cacheManager,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
@@ -28,24 +26,23 @@ namespace LiveScore.ViewModels
             ILoggingService loggingService)
             : base(navigationService, serviceLocator, eventAggregator)
         {
-            this.settings = settings;
             this.cacheManager = cacheManager;
             this.loggingService = loggingService;
-        
+
             NavigateCommand = new DelegateAsyncCommand<string>(Navigate);
 
             EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChanged);
             EventAggregator.GetEvent<ConnectionTimeoutPubSubEvent>().Subscribe(OnConnectionTimeout);
-        }       
+        }
 
         public DelegateAsyncCommand<string> NavigateCommand { get; set; }
 
         public DelegateAsyncCommand CleanCacheAndRefreshCommand => new DelegateAsyncCommand(CleanCacheAndRefresh);
 
-        private async Task Navigate(string page)
+        private Task Navigate(string page)
         {
-            await NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
-        }    
+            return NavigationService.NavigateAsync(nameof(NavigationPage) + "/" + page, useModalNavigation: true);
+        }
 
         private async Task CleanCacheAndRefresh()
         {
@@ -54,38 +51,30 @@ namespace LiveScore.ViewModels
             await NavigateToHome();
         }
 
-#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-
-        private async void OnConnectionChanged(bool isConnected)
-#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
+        private void OnConnectionChanged(bool isConnected)
         {
             try
             {
                 if (!isConnected)
                 {
-                    await PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+                    PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
                 }
                 else
                 {
                     if (PopupNavigation.Instance.PopupStack.Count > 0)
                     {
-                        await PopupNavigation.Instance.PopAllAsync();
+                        PopupNavigation.Instance.PopAllAsync();
                     }
                 }
             }
             catch (Exception ex)
             {
-                await loggingService.LogErrorAsync($"Error when receive OnConnectionChanged at {DateTime.Now}", ex);
+                loggingService.LogErrorAsync($"Error when receive OnConnectionChanged at {DateTime.Now}", ex);
             }
         }
 
-#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-
-        private async void OnConnectionTimeout()
-#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
-        {
-            await PopupNavigation.Instance.PushAsync(new NetworkConnectionError(AppResources.ConnectionTimeoutMessage));
-        }
+        private static void OnConnectionTimeout()
+            => PopupNavigation.Instance.PushAsync(new NetworkConnectionError(AppResources.ConnectionTimeoutMessage));
 
         public override void Destroy()
         {
