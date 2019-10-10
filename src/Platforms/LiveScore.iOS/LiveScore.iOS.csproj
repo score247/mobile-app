@@ -1023,5 +1023,20 @@
       <Link>Resources\html\theme.css</Link>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution.png">
+      <Link>Resources\images\common\substitution.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution%402x.png">
+      <Link>Resources\images\common\substitution%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\substitution%403x.png">
+      <Link>Resources\images\common\substitution%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

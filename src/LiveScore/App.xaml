@@ -42,7 +42,15 @@
             <Color x:Key="SecondAccentColor">#3EC28F</Color>
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
-            <Color x:Key="LineColor">#3E3D46</Color>
+            <Color x:Key="LineColor">#3A3942</Color>
+
+            <!--  Commentary  -->
+            <Color x:Key="YellowCardColor">#FFE600</Color>
+            <Color x:Key="RedCardColor">#FF3030</Color>
+            <Color x:Key="HighlightCommentaryColor">#ffffff</Color>
+            <Color x:Key="CommentaryColor">#CBCBCB</Color>
+            <x:Double x:Key="CommentaryMinuteWidthSize">45</x:Double>
+            <x:Double x:Key="CommentaryIconWidthSize">30</x:Double>
 
             <!--  Datebar  -->
             <Color x:Key="DateBarLayoutBackgroundColor">#272830</Color>
@@ -56,7 +64,7 @@
 
             <Color x:Key="UsernameColor">#CBCBCB</Color>
 
-            <Color x:Key="ListViewBgColor">#202124</Color>
+            <Color x:Key="ListViewBgColor">#161719</Color>
             <!--  Match  -->
             <Color x:Key="TeamColor">#AAAAAB</Color>
 
@@ -70,7 +78,7 @@
             <Color x:Key="DownLiveOddColor">#FF222C</Color>
             <!--  Tabs  -->
             <Color x:Key="TabLayoutBgColor">#202124</Color>
-            <Color x:Key="TabColor">#94949D</Color>
+            <Color x:Key="TabColor">#CBCBCB</Color>
             <Color x:Key="ActiveTabColor">#FF7246</Color>
             <Color x:Key="ActiveLineColor">#FF7246</Color>
             <x:Double x:Key="TabFontSize">11</x:Double>

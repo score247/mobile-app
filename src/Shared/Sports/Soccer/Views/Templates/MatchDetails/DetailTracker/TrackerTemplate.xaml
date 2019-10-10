@@ -7,8 +7,8 @@
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
 
-    <ViewCell Height="900">
-        <ScrollView  HeightRequest="900">
+    <ViewCell Height="1000">
+        <ScrollView  HeightRequest="1000">
             <StackLayout>
                 <StackLayout.Resources>
                     <ResourceDictionary>
@@ -43,122 +43,156 @@
                             Style="{StaticResource MatchBallTrackerExpandIcon}"
                             Command="{Binding OnExpandTracker}" />
                     </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}" IsVisible="{Binding TrackerVisible}" />
 
                     <Button IsVisible="{Binding TrackerVisible}"
                             Style="{StaticResource MatchBallTrackerCollapseIcon}"
                             Command="{Binding OnCollapseTracker}" />
                 </RelativeLayout>
+
                 <!--  COMMENTARIES  -->
+
                 <FlexLayout Style="{StaticResource Group}">
                     <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
                 </FlexLayout>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="42" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
+                <BoxView Style="{StaticResource HorizontalLine}" />
 
-                    <!--  Match ends  -->
+                <!--  Time 90' -->
+
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <Label Grid.Row="0"
-                    Grid.Column="0" Style="{StaticResource MatchTrackerEndIcon}" />
+                           Grid.Column="0"
+                           Style="{StaticResource MatchTrackerMinutes}" Text="120'+20'" />
                     <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource MatchTrackerCommentariesText}"
-                    Text="Match ends, Verona 2, Cosenza 1." />
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Style="{StaticResource MatchTrackerCommentariesText}"
+                        Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card " />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
-                <Grid>
+
+                <!--  Time 88' -->
+
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <!--  Time  -->
-                    <Frame
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource MatchTrackerCommentariesTime}">
-                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="90'" />
-                    </Frame>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource MatchTrackerMinutes}" Text="88'" />
                     <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource MatchTrackerCommentariesText}"
-                    Text="Second Half ends, Verona 2, Cosenza 1." />
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Style="{StaticResource MatchTrackerCommentariesText}"
+                        Text="Steve Cook (AFC Bournemouth) gets a yellow card" />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
-                <Grid>
+
+                <!--  Time 79' -->
+
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <!--  Goal!  -->
-                    <Frame
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource MatchTrackerCommentariesGoal}">
-                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="88'" />
-                    </Frame>
-                    <StackLayout
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Margin="0,7">
-                        <Label Style="{StaticResource MatchTrackerCommentariesContentGoal}" Text="GOAL!" />
-                        <Label Style="{StaticResource MatchTrackerCommentariesDetailGoal}" Text="Verona 2, Cosenza 1. Darko Lazovic (Cosenza) right footed shot from very close range to bottom left corner. Assissted by Daniel Bessa with a cross" />
-                    </StackLayout>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           Style="{StaticResource MatchTrackerMinutes}" Text="79'" />
+                    <Image  Grid.Row="0"
+                        Grid.Column="1" Source="images/common/substitution.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Style="{StaticResource MatchTrackerCommentariesText}"
+                        Text="Issa Diop (West Ham United) gets a yellow card" />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
-                <Grid>
+
+                <!--  Goal!  -->
+
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <!--  Time  -->
-                    <Frame
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource MatchTrackerCommentariesTime}">
-                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="82'" />
-                    </Frame>
-                    <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource MatchTrackerCommentariesText}"
-                    Text="Goal kick for Verona at Carlo Castellani" />
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="74'" />
+                    <Image  Grid.Row="0"
+                        Grid.Column="1" Source="images/common/ball.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                    <Label Grid.Row="0"
+                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Arron Cresswell scores with assist from Felipe Anderson for West Ham United. The score is now 2 - 2" />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
-                <Grid>
+
+                <!--  Goal  -->
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="42" />
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
-                    <!--  Yellow card  -->
-                    <Frame
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Style="{StaticResource MatchTrackerCommentariesYellowCard}">
-                        <Label Style="{StaticResource MatchTrackerMinutes}" Text="63'" />
-                    </Frame>
-                    <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    Style="{StaticResource MatchTrackerCommentariesContentYellowCard}"
-                    Text="YELLOW CARD!" />
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="46'" />
+                    <Image  Grid.Row="0"
+                        Grid.Column="1" Source="images/common/ball.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                    <Label Grid.Row="0"
+                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Callum Wilson scores with assist from Joshua King for AFC Bournemouth. The score is now 2 - 1" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <!--  Yellow card  -->
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="40'" />
+                    <Image  Grid.Row="0"
+                        Grid.Column="1" Source="images/common/yellow_card.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                    <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card " />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <!--  Red card  -->
+                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="35'" />
+                    <Image  Grid.Row="0"
+                        Grid.Column="1" Source="images/common/red_card.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                    <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Steve Cook (AFC Bournemouth) gets a red card " />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>

@@ -10,7 +10,7 @@
 
     <FlexLayout HorizontalOptions="FillAndExpand"
                 Direction="Column"
-                Padding="0,10,0,10"
+                Padding="0,12,0,12"
                 AlignItems="Center"
                 JustifyContent="Center">
         <FlexLayout.Resources>
