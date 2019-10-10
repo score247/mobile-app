@@ -48,7 +48,7 @@
     <Style x:Key="MatchDetailOddsDropdownText" TargetType="Label">
         <Setter Property="Margin" Value="16,0,0,0" />
         <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 

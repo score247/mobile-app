@@ -31,7 +31,7 @@
             x:Key="TabActiveText"
             BasedOn="{StaticResource TabText}"
             TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource ActiveLineColor}" />
+            <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
         </Style>
         <Style x:Key="TabLine" TargetType="BoxView">
             <Setter Property="HeightRequest" Value="1" />            
