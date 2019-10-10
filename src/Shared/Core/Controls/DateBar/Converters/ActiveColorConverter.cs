@@ -11,8 +11,8 @@ namespace LiveScore.Core.Controls.DateBar.Converters
             var isActive = System.Convert.ToBoolean(value);
 
             return isActive
-                ? Color.FromHex("#FF7246")
-                : Color.FromHex("#969697");
+                ? (Color)Application.Current.Resources["DateBarSelectedTextColor"]
+                : (Color)Application.Current.Resources["DateBarTextColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -29,15 +29,15 @@
                 <On Platform="iOS" Value="RobotoBold" />
             </OnPlatform>
 
-            <Color x:Key="PrimaryColor">#272B35</Color>
-            <Color x:Key="SecondColor">#202126</Color>
-            <Color x:Key="SiteBackgroundColor">#202126</Color>
+            <Color x:Key="PrimaryColor">#212A3D</Color>
+            <Color x:Key="SecondColor">#1A1E26</Color>
+            <Color x:Key="SiteBackgroundColor">#1A1E26</Color>
             <Color x:Key="PrimaryTextColor">#fff</Color>
-            <Color x:Key="SecondTextColor">#C6C6C9</Color>
+            <Color x:Key="SecondTextColor">#DDE2E5</Color>
             <Color x:Key="ThirdTextColor">#676C8B</Color>
             <Color x:Key="FourthTextColor">#AAA8A5</Color>
             <!--  Orange Color  -->
-            <Color x:Key="PrimaryAccentColor">#FF7246</Color>
+            <Color x:Key="PrimaryAccentColor">#FC9B6E</Color>
             <!--  GreenColor  -->
             <Color x:Key="SecondAccentColor">#3EC28F</Color>
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
@@ -45,18 +45,18 @@
             <Color x:Key="LineColor">#3E3D46</Color>
 
             <!--  Datebar  -->
-            <Color x:Key="DateBarLayoutBackgroundColor">#272B35</Color>
-            <Color x:Key="DateBarSelectedTextColor">#FF7246</Color>
-            <Color x:Key="DateBarTextColor">#94949D</Color>
+            <Color x:Key="DateBarLayoutBackgroundColor">#212A3D</Color>
+            <Color x:Key="DateBarSelectedTextColor">#FC9B6E</Color>
+            <Color x:Key="DateBarTextColor">#DDE2E5</Color>
             <x:Double x:Key="DateBarDayNameFontSize">11</x:Double>
             <x:Double x:Key="DateBarDayMonthFontSize">9</x:Double>
-            <Color x:Key="DateBarLiveColor">#94949D</Color>
-            <Color x:Key="DateBarStripeColor">#FF7246</Color>
-            <Color x:Key="DateBarLineColor">#6E707B</Color>
+            <Color x:Key="DateBarLiveColor">#DDE2E5</Color>
+            <Color x:Key="DateBarStripeColor">#FC9B6E</Color>
+            <Color x:Key="DateBarLineColor">#878E9E</Color>
 
             <Color x:Key="UsernameColor">#30C2FF</Color>
 
-            <Color x:Key="ListViewBgColor">#212226</Color>
+            <Color x:Key="ListViewBgColor">#1A1E26</Color>
             <!--  Match  -->
             <Color x:Key="TeamColor">#AAAAAB</Color>
 
@@ -69,24 +69,24 @@
             <Color x:Key="UpLiveOddColor">#66FF59</Color>
             <Color x:Key="DownLiveOddColor">#FF222C</Color>
             <!--  Tabs  -->
-            <Color x:Key="TabLayoutBgColor">#202124</Color>
+            <Color x:Key="TabLayoutBgColor">#1A1E26</Color>
             <Color x:Key="TabColor">#94949D</Color>
-            <Color x:Key="ActiveTabColor">#fff</Color>
-            <Color x:Key="ActiveLineColor">#FF7246</Color>
+            <Color x:Key="ActiveTabColor">#FC9B6E</Color>
+            <Color x:Key="ActiveLineColor">#FC9B6E</Color>
             <x:Double x:Key="TabFontSize">11</x:Double>
             <Color x:Key="InactiveLineColor">#0B0D14</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
 
-            <Color x:Key="SubTabContainerBgColor">#272B35</Color>
+            <Color x:Key="SubTabContainerBgColor">#1A1E26</Color>
             <Color x:Key="SubTabColor">#fff</Color>
             <Color x:Key="SubTabBgColor">#202126</Color>
             <Color x:Key="ActiveSubTabBgColor">#3A3942</Color>
-            <Color x:Key="ActiveSubTabColor">#FF7246</Color>
+            <Color x:Key="ActiveSubTabColor">#FC9B6E</Color>
             <x:Double x:Key="SubTabsHeight">38</x:Double>
             <x:Double x:Key="SubTabsFontSize">11</x:Double>
             <!--  Table  -->
-            <Color x:Key="TableBgColor">#212226</Color>
-            <Color x:Key="TableHeaderBgColor">#272B35</Color>
+            <Color x:Key="TableBgColor">#1A1E26</Color>
+            <Color x:Key="TableHeaderBgColor">#212A3D</Color>
             <Color x:Key="TableHeaderColor">#fff</Color>
             <x:Double x:Key="TableHeaderFontSize">12</x:Double>
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
@@ -116,17 +116,17 @@
             <!--  Function Group  -->
             <x:Double x:Key="FunctionGroupHeight">46</x:Double>
             <x:Double x:Key="FunctionGroupFontSize">11</x:Double>
-            <Color x:Key="FunctionGroupBgColor">#272B35</Color>
+            <Color x:Key="FunctionGroupBgColor">#212A3D</Color>
             <Color x:Key="FunctionGroupColor">#fff</Color>
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
             <x:Double x:Key="LeagueHeight">50</x:Double>
             <!--  Function bar  -->
-            <Color x:Key="FunctionBarBgColor">#272B35</Color>
+            <Color x:Key="FunctionBarBgColor">#212A3D</Color>
             <Color x:Key="FunctionBarColor">#FFFFFF</Color>
-            <Color x:Key="FunctionBarActiveColor">#FF7246</Color>
+            <Color x:Key="FunctionBarActiveColor">#FC9B6E</Color>
             <x:Double x:Key="FunctionBarFontSize">12</x:Double>
             <!--  Header bar  -->
-            <Color x:Key="NavigationPageBgColor">#272B35</Color>
+            <Color x:Key="NavigationPageBgColor">#212A3D</Color>
             <Color x:Key="NavigationPageColor">#fff</Color>
             <Color x:Key="SportNameColor">#fff</Color>
             <x:Double x:Key="SportNameFontSize">14</x:Double>
@@ -145,7 +145,7 @@
                 TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource SportNameFontSize}" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Margin" Value="15,0,15,0" />
+                <Setter Property="Margin" Value="0,0,4,0" />
             </Style>
             <Style
                 x:Key="PageTitle"
