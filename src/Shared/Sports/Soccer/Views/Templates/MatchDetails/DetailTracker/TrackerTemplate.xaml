@@ -75,7 +75,7 @@
                         Grid.Row="0"
                         Grid.Column="2"
                         Style="{StaticResource MatchTrackerCommentariesText}"
-                        Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card " />
+                        Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card" />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
@@ -140,7 +140,7 @@
                     <Image  Grid.Row="0"
                         Grid.Column="1" Source="images/common/ball.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
                     <Label Grid.Row="0"
-                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Arron Cresswell scores with assist from Felipe Anderson for West Ham United. The score is now 2 - 2" />
+                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Goal! The home team take a 1-0 lead through Serge Gnabry. &#10; That's a fine assist from Lukas Klostermann." />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 

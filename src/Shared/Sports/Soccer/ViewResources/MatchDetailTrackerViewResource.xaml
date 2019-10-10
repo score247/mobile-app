@@ -59,7 +59,7 @@
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
     </Style>
-    
+
     <Style x:Key="MatchTrackerCommentariesText" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="TextColor" Value="{StaticResource CommentaryColor}" />
@@ -75,27 +75,5 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-    </Style>
-
-    <Style x:Key="MatchTrackerCommentariesContentGoal" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource SecondAccentColor}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-    </Style>
-
-    <Style x:Key="MatchTrackerCommentariesContentYellowCard" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource YellowCardColor}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-    </Style>
-    <Style x:Key="MatchTrackerCommentariesContentRedCard" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource RedCardColor}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
-        <Setter Property="FontAttributes" Value="Bold" />        
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
     </Style>
 </ResourceDictionary>
