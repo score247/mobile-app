@@ -22,7 +22,7 @@ namespace LiveScore.Configurations
     {
         private static IContainerProvider Container;
 
-        public static IContainerRegistry RegisterContainer(this IContainerRegistry containerRegistry, IContainerProvider container)
+        public static IContainerRegistry UseContainerInstance(this IContainerRegistry containerRegistry, IContainerProvider container)
         {
             containerRegistry.RegisterInstance(container);
             Container = container;

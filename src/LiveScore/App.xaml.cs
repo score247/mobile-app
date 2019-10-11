@@ -85,11 +85,9 @@ namespace LiveScore
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry
-                .RegisterContainer(Container)
+                .UseContainerInstance(Container)
                 .RegisterServices()
                 .RegisterNavigation();
-
-            containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
@@ -107,6 +105,7 @@ namespace LiveScore
         private async Task StartEventHubs()
         {
             var eventAggregator = Container.Resolve<IEventAggregator>();
+
             soccerHub = new SoccerHubService(
                 Container.Resolve<IHubConnectionBuilder>(),
                 Configuration.SignalRHubEndPoint,
@@ -143,9 +142,9 @@ namespace LiveScore
             base.OnResume();
         }
 
-        private void StartGlobalTimer()
+        private void StartGlobalTimer(int intervalMinutes = 1)
         {
-            Device.StartTimer(TimeSpan.FromMinutes(1), () =>
+            Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
             {
                 if (networkConnectionManager.IsSuccessfulConnection())
                 {
