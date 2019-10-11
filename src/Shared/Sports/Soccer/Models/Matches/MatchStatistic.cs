@@ -71,7 +71,7 @@
 
         public MatchStatisticItem(string statisticName, byte? homeValue, byte? awayValue)
         {
-            StatisticName = statisticName;
+            StatisticName = statisticName.ToUpperInvariant();
             HomeValue = homeValue.HasValue ? homeValue.Value : (byte)0;
             AwayValue = awayValue.HasValue ? awayValue.Value : (byte)0;
             IsHidden = HomeValue == 0 && AwayValue == 0; 

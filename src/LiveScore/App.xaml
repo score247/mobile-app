@@ -43,25 +43,7 @@
             <Color x:Key="ThirdAccentColor">#FC1923</Color>
             <Color x:Key="FourthAccentColor">#171920</Color>
             <Color x:Key="LineColor">#3A3942</Color>
-
-            <!--  Commentary  -->
-            <Color x:Key="YellowCardColor">#FFE600</Color>
-            <Color x:Key="RedCardColor">#FF3030</Color>
-            <Color x:Key="HighlightCommentaryColor">#ffffff</Color>
-            <Color x:Key="CommentaryColor">#CBCBCB</Color>
-            <x:Double x:Key="CommentaryMinuteWidthSize">45</x:Double>
-            <x:Double x:Key="CommentaryIconWidthSize">30</x:Double>
-
-            <!--  Datebar  -->
-            <Color x:Key="DateBarLayoutBackgroundColor">#272830</Color>
-            <Color x:Key="DateBarSelectedTextColor">#FF7246</Color>
-            <Color x:Key="DateBarTextColor">#CBCBCB</Color>
-            <x:Double x:Key="DateBarDayNameFontSize">11</x:Double>
-            <x:Double x:Key="DateBarDayMonthFontSize">9</x:Double>
-            <Color x:Key="DateBarLiveColor">#DDE2E5</Color>
-            <Color x:Key="DateBarStripeColor">#FF7246</Color>
-            <Color x:Key="DateBarLineColor">#7E7C8F</Color>
-
+            
             <Color x:Key="UsernameColor">#CBCBCB</Color>
 
             <Color x:Key="ListViewBgColor">#161719</Color>
@@ -72,37 +54,8 @@
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
             <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
             <Color x:Key="SixthTeamOnLeagueColor">#D9B600</Color>
-            <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>
-            <!--  Odds  -->
-            <Color x:Key="UpLiveOddColor">#66FF59</Color>
-            <Color x:Key="DownLiveOddColor">#FF222C</Color>
-            <!--  Tabs  -->
-            <Color x:Key="TabLayoutBgColor">#161719</Color>
-            <Color x:Key="TabColor">#CBCBCB</Color>
-            <Color x:Key="ActiveTabColor">#FF7246</Color>
-            <Color x:Key="ActiveLineColor">#FF7246</Color>
-            <x:Double x:Key="TabFontSize">11</x:Double>
-            <Color x:Key="InactiveLineColor">#0B0D14</Color>
-            <x:Double x:Key="TabsHeight">40</x:Double>
-
-            <Color x:Key="SubTabContainerBgColor">#272830</Color>
-            <Color x:Key="SubTabColor">#fff</Color>
-            <Color x:Key="SubTabBgColor">#202126</Color>
-            <Color x:Key="ActiveSubTabBgColor">#3A3942</Color>
-            <Color x:Key="ActiveSubTabColor">#FF7246</Color>
-            <x:Double x:Key="SubTabsHeight">38</x:Double>
-            <x:Double x:Key="SubTabsFontSize">11</x:Double>
-            <!--  Table  -->
-            <Color x:Key="TableBgColor">#202124</Color>
-            <Color x:Key="TableHeaderBgColor">#272830</Color>
-            <Color x:Key="TableHeaderColor">#fff</Color>
-            <x:Double x:Key="TableHeaderFontSize">12</x:Double>
-            <Color x:Key="TableOddRowBgColor">#06070A</Color>
-            <Color x:Key="TableEvenRowBgColor">#131724</Color>
-            <Color x:Key="TableRowColor">#fff</Color>
-            <Color x:Key="TableLineColor">#3A3942</Color>
-            <x:Double x:Key="TableRowFontSize">11</x:Double>
-            <x:Double x:Key="TableRowHeight">40</x:Double>
+            <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>            
+            
             <!--  Font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
             <x:Double x:Key="SidebarFontSize">14</x:Double>
@@ -128,17 +81,71 @@
             <Color x:Key="FunctionGroupColor">#fff</Color>
             <x:Double x:Key="SettingMenuHeight">44</x:Double>
             <x:Double x:Key="LeagueHeight">50</x:Double>
-            <!--  Function bar  -->
-            <Color x:Key="FunctionBarBgColor">#272830</Color>
-            <Color x:Key="FunctionBarColor">#FFFFFF</Color>
-            <Color x:Key="FunctionBarActiveColor">#FF7246</Color>
-            <x:Double x:Key="FunctionBarFontSize">12</x:Double>
+            
             <!--  Header bar  -->
             <Color x:Key="NavigationPageBgColor">#272830</Color>
             <Color x:Key="NavigationPageColor">#fff</Color>
             <Color x:Key="SportNameColor">#fff</Color>
             <x:Double x:Key="SportNameFontSize">14</x:Double>
             <x:Double x:Key="TitlePageFontSize">12</x:Double>
+
+            <!--  Datebar  -->
+            <Color x:Key="DateBarLayoutBackgroundColor">#272830</Color>
+            <Color x:Key="DateBarSelectedTextColor">#FF7246</Color>
+            <Color x:Key="DateBarTextColor">#CBCBCB</Color>
+            <x:Double x:Key="DateBarDayNameFontSize">11</x:Double>
+            <x:Double x:Key="DateBarDayMonthFontSize">9</x:Double>
+            <Color x:Key="DateBarLiveColor">#DDE2E5</Color>
+            <Color x:Key="DateBarStripeColor">#FF7246</Color>
+            <Color x:Key="DateBarLineColor">#7E7C8F</Color>
+
+            <!--  Function bar  -->
+            <Color x:Key="FunctionBarBgColor">#272830</Color>
+            <Color x:Key="FunctionBarColor">#FFFFFF</Color>
+            <Color x:Key="FunctionBarActiveColor">#FF7246</Color>
+            <x:Double x:Key="FunctionBarFontSize">12</x:Double>
+
+            <!--  Tabs  -->
+            <Color x:Key="TabLayoutBgColor">#161719</Color>
+            <Color x:Key="TabColor">#CBCBCB</Color>
+            <Color x:Key="ActiveTabColor">#FF7246</Color>
+            <Color x:Key="ActiveLineColor">#FF7246</Color>
+            <x:Double x:Key="TabFontSize">11</x:Double>
+            <Color x:Key="InactiveLineColor">#0B0D14</Color>
+            <x:Double x:Key="TabsHeight">40</x:Double>
+
+            <Color x:Key="SubTabContainerBgColor">#272830</Color>
+            <Color x:Key="SubTabColor">#fff</Color>
+            <Color x:Key="SubTabBgColor">#202126</Color>
+            <Color x:Key="ActiveSubTabBgColor">#3A3942</Color>
+            <Color x:Key="ActiveSubTabColor">#FF7246</Color>
+            <x:Double x:Key="SubTabsHeight">38</x:Double>
+            <x:Double x:Key="SubTabsFontSize">11</x:Double>
+
+            <!--  Table  -->
+            <Color x:Key="TableBgColor">#202124</Color>
+            <Color x:Key="TableHeaderBgColor">#272830</Color>
+            <Color x:Key="TableHeaderColor">#fff</Color>
+            <x:Double x:Key="TableHeaderFontSize">12</x:Double>
+            <Color x:Key="TableOddRowBgColor">#06070A</Color>
+            <Color x:Key="TableEvenRowBgColor">#131724</Color>
+            <Color x:Key="TableRowColor">#fff</Color>
+            <Color x:Key="TableLineColor">#3A3942</Color>
+            <x:Double x:Key="TableRowFontSize">11</x:Double>
+            <x:Double x:Key="TableRowHeight">40</x:Double>
+
+            <!--  Odds  -->
+            <Color x:Key="UpLiveOddColor">#66FF59</Color>
+            <Color x:Key="DownLiveOddColor">#FF222C</Color>
+
+            <!--  Commentary  -->
+            <Color x:Key="YellowCardColor">#FFE600</Color>
+            <Color x:Key="RedCardColor">#FF3030</Color>
+            <Color x:Key="HighlightCommentaryColor">#ffffff</Color>
+            <Color x:Key="CommentaryColor">#CBCBCB</Color>
+            <x:Double x:Key="CommentaryMinuteWidthSize">45</x:Double>
+            <x:Double x:Key="CommentaryIconWidthSize">30</x:Double>
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPageBgColor}" />
                 <Setter Property="BarTextColor" Value="{StaticResource NavigationPageColor}" />
@@ -160,7 +167,7 @@
                 BasedOn="{StaticResource NavigationName}"
                 TargetType="Label">
                 <Setter Property="FontSize" Value="{StaticResource TitlePageFontSize}" />
-            </Style>
+            </Style>            
             <Style x:Key="ListViewHasBackground" TargetType="ListView">
                 <Setter Property="BackgroundColor" Value="{StaticResource ListViewBgColor}" />
             </Style>
