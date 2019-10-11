@@ -29,7 +29,7 @@ namespace LiveScore.Core.Tests.Services
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
 
-            var apiService = new ApiService(httpService, networkConnectionManager);
+            var apiService = new ApiService(httpService, networkConnectionManager, new RefitSettings());
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act

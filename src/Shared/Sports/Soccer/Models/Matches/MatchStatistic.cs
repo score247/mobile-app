@@ -67,8 +67,6 @@
 
     public class MatchStatisticItem
     {
-        private const int OneHundredPercent = 100;
-
         public MatchStatisticItem(string statisticName, byte? homeValue, byte? awayValue)
         {
             StatisticName = statisticName.ToUpperInvariant();
@@ -79,8 +77,8 @@
             if(IsVisibled)
             {
                 var total = HomeValue + AwayValue;
-                HomePercent = HomeValue / total * OneHundredPercent;
-                AwayPercent = AwayValue / total * OneHundredPercent;
+                HomePercent = (float)HomeValue / total;
+                AwayPercent = 1 - HomePercent;
             }
         }
 
@@ -94,9 +92,9 @@
 
         public bool IsVisibled => !IsHidden;
 
-        public int HomePercent { get; }
+        public float HomePercent { get; }
 
-        public int AwayPercent { get; }
+        public float AwayPercent { get; }
     }
         
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using JsonNet.ContractResolvers;
 using MethodTimer;
-using Newtonsoft.Json;
 using Refit;
 
 namespace LiveScore.Common.Services
@@ -21,23 +19,14 @@ namespace LiveScore.Common.Services
 
         private readonly INetworkConnection networkConnectionManager;
 
-        private static readonly RefitSettings RefitSettings = new RefitSettings
-        {
-            ContentSerializer = new JsonContentSerializer(new JsonSerializerSettings
-            {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
-                ContractResolver = new PrivateSetterContractResolver()
-            }),
-        };
-
         public ApiService(
             IHttpService httpService,
             INetworkConnection networkConnectionManager,
-            RefitSettings refitSettings = null)
+            RefitSettings refitSettings)
         {
             this.httpService = httpService;
             this.networkConnectionManager = networkConnectionManager;
-            this.refitSettings = refitSettings ?? RefitSettings;
+            this.refitSettings = refitSettings;
         }
 
         // TODO: Need to make it be singleton instance
