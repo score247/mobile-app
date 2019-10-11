@@ -125,7 +125,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             base.OnAppearing();
 
-            tabItemViewModels[selectedTabItem].OnAppearing();
+            if (selectedTabItem != null)
+            {
+                tabItemViewModels[selectedTabItem].OnAppearing();
+            }
 
             if (EventAggregator != null)
             {
