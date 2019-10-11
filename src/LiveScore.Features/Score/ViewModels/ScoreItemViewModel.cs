@@ -53,7 +53,6 @@ namespace LiveScore.Features.Score.ViewModels
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
-            SubscribeEvents();
             InitializeCommand();
         }
 
@@ -88,8 +87,14 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (ViewDate.IsTodayOrYesterday())
             {
+                SubscribeEvents();
                 Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
             }
+        }
+
+        public override void OnSleep()
+        {
+            UnsubscribeAllEvents();
         }
 
         public override Task OnNetworkReconnected()
@@ -101,6 +106,7 @@ namespace LiveScore.Features.Score.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
+            SubscribeEvents();
 
             networkConnectionManager
                 .OnSuccessfulConnection(() =>
@@ -126,28 +132,40 @@ namespace LiveScore.Features.Score.ViewModels
                 });
         }
 
+        public override void OnDisappearing()
+        {
+            UnsubscribeAllEvents();
+        }
+
         private void SubscribeEvents()
         {
-            EventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
+            if (ViewDate.IsTodayOrYesterday())
+            {
+                EventAggregator
+                    .GetEvent<MatchEventPubSubEvent>()
+                    .Subscribe(OnReceivedMatchEvent, true);
 
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnReceivedTeamStatistic, true);
+                EventAggregator
+                    .GetEvent<TeamStatisticPubSubEvent>()
+                    .Subscribe(OnReceivedTeamStatistic, true);
+            }
         }
 
         private void UnsubscribeAllEvents()
         {
-            EventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Unsubscribe(OnReceivedMatchEvent);
+            if (ViewDate.IsTodayOrYesterday())
+            {
+                EventAggregator
+                    .GetEvent<MatchEventPubSubEvent>()
+                    .Unsubscribe(OnReceivedMatchEvent);
 
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Unsubscribe(OnReceivedTeamStatistic);
+                EventAggregator
+                    .GetEvent<TeamStatisticPubSubEvent>()
+                    .Unsubscribe(OnReceivedTeamStatistic);
+            }
         }
 
+        [Time]
         internal void OnReceivedMatchEvent(IMatchEventMessage payload)
         {
             if (payload?.SportId != CurrentSportId)
