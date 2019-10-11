@@ -50,14 +50,14 @@
                             Command="{Binding OnCollapseTracker}" />
                 </RelativeLayout>
 
-                <!--  COMMENTARIES  -->
+                <!--  COMMENTARIES  --><!--
 
                 <FlexLayout Style="{StaticResource Group}">
                     <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
                 </FlexLayout>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Time 90' -->
+                --><!--  Time 90' --><!--
 
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
@@ -79,7 +79,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Time 88' -->
+                --><!--  Time 88' --><!--
 
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
@@ -101,7 +101,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Time 79' -->
+                --><!--  Time 79' --><!--
 
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
@@ -125,7 +125,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Goal!  -->
+                --><!--  Goal!  --><!--
 
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
@@ -144,7 +144,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Goal  -->
+                --><!--  Goal  --><!--
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -162,7 +162,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Yellow card  -->
+                --><!--  Yellow card  --><!--
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -179,7 +179,7 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
 
-                <!--  Red card  -->
+                --><!--  Red card  --><!--
                 <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -194,7 +194,7 @@
                         Grid.Column="1" Source="images/common/red_card.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
                     <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Steve Cook (AFC Bournemouth) gets a red card " />
                 </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
+                <BoxView Style="{StaticResource HorizontalLine}" />-->
             </StackLayout>
         </ScrollView>
     </ViewCell>
