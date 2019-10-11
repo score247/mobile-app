@@ -67,7 +67,7 @@
                 {
                     // TODO: Temporary comment code here to find another solution
                     // networkConnectionManager.PublishConnectionTimeoutEvent();
-                    await loggingService.LogErrorAsync(ex);
+                    await loggingService.LogExceptionAsync(ex);
                     return await cacheService.GetAsync<T>(key);
                 }
             }
