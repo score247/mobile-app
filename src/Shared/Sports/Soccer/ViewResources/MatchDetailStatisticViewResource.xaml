@@ -4,38 +4,41 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="HomeProgressBar">#30C2FF</Color>
-    <Color x:Key="AwayProgressBar">#FA2E58</Color>
-    <Color x:Key="BasicProgressBar">#272830</Color>
+    <Color x:Key="StatisticHomeColor">#30C2FF</Color>
+    <Color x:Key="StatisticAwayColor">#FA2E58</Color>
+    <Color x:Key="StatisticBasicColor">#272830</Color>
     
-    <Style x:Key="MatchDetailStatisticBallPossessionLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#FFFFFF" />
+    <Style x:Key="MatchDetailStatisticTitleLabel" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="End" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticHomeLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#30C2FF" />
+        <Setter Property="TextColor" Value="{StaticResource StatisticHomeColor}" />
         <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticAwayLabel" BasedOn="{StaticResource MatchDetailStatisticHomeLabel}" TargetType="Label">
-        <Setter Property="TextColor" Value="#FA2E58" />
+        <Setter Property="TextColor" Value="{StaticResource StatisticAwayColor}" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticHomeProgressBar" TargetType="ProgressBar">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="BackgroundColor" Value="{StaticResource HomeProgressBar}" />
-        <Setter Property="ProgressColor" Value="{StaticResource BasicProgressBar}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource StatisticBasicColor}" />
+        <Setter Property="ProgressColor" Value="{StaticResource StatisticHomeColor}" />
+        <Setter Property="Rotation" Value="180" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticAwayProgressBar" TargetType="ProgressBar">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="BackgroundColor" Value="{StaticResource BasicProgressBar}" />
-        <Setter Property="ProgressColor" Value="{StaticResource AwayProgressBar}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource StatisticBasicColor}" />
+        <Setter Property="ProgressColor" Value="{StaticResource StatisticAwayColor}" />
     </Style>
 </ResourceDictionary>
