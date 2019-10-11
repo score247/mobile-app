@@ -286,6 +286,7 @@
     <Compile Include="AppDelegate.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Renderers\PossessionProgressBarRenderer.cs" />
     <Compile Include="Renderers\DetailScrollViewRenderer.cs" />
     <Compile Include="Renderers\DisableSelectionStyleViewCellRenderer.cs" />
     <BundleResource Include="..\..\CommonResources\Font\roboto\RobotoBlack.ttf">

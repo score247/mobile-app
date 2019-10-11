@@ -2,6 +2,7 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:ctpgb="clr-namespace:LiveScore.Core.Controls.ProgressBars;assembly=LiveScore.Core"
              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -54,8 +55,8 @@
                             </Grid.ColumnDefinitions>
                             <Label Text="{Binding StatisticName}" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Style="{StaticResource MatchDetailStatisticTitleLabel}" />
                             <Label Text="{Binding HomePercentText}" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource MatchDetailStatisticHomeLabel}" />
-                            <ProgressBar Progress="{Binding HomePercent}" Grid.Column="1" Grid.Row="1" Style="{StaticResource MatchDetailStatisticHomeProgressBar}" />
-                            <ProgressBar Progress="{Binding AwayPercent}" Grid.Column="2" Grid.Row="1" Style="{StaticResource MatchDetailStatisticAwayProgressBar}" />
+                            <ctpgb:PossessionProgressBar Progress="{Binding HomePercent}" Grid.Column="1" Grid.Row="1" Style="{StaticResource MatchDetailStatisticHomeProgressBar}" />
+                            <ctpgb:PossessionProgressBar Progress="{Binding AwayPercent}" Grid.Column="2" Grid.Row="1" Style="{StaticResource MatchDetailStatisticAwayProgressBar}" />
                             <Label Text="{Binding AwayPercentText}" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" Style="{StaticResource MatchDetailStatisticAwayLabel}" />
                         </Grid>
                         <BoxView Style="{StaticResource HorizontalLine}" />
