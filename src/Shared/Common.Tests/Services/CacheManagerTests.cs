@@ -12,12 +12,14 @@ namespace LiveScore.Common.Tests.Services
         private readonly INetworkConnection subNetworkConnectionManager;
         private readonly ICacheService cacheService;
         private ICacheManager cacheManager;
+        private ILoggingService loggingService;
 
         public CacheManagerTests()
         {
             subNetworkConnectionManager = Substitute.For<INetworkConnection>();
+            loggingService = Substitute.For<ILoggingService>();
             cacheService = new CacheService();
-            cacheManager = new CacheManager(cacheService, subNetworkConnectionManager);
+            cacheManager = new CacheManager(cacheService, subNetworkConnectionManager, loggingService);
         }
 
         [Fact]

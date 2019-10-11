@@ -12,6 +12,7 @@ using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MessagePack.Resolvers;
+using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Refit;
 using Xamarin.Forms;
@@ -52,7 +53,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-            
+            containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
