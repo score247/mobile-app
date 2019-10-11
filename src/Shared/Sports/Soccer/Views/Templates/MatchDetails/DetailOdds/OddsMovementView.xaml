@@ -9,7 +9,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
-    BackgroundColor="{StaticResource SiteBackgroundColor}"
+    BackgroundColor="{StaticResource PrimaryColor}"
     mc:Ignorable="d">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
@@ -18,7 +18,7 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand" Padding="8,0,8,8">
+                     VerticalOptions="FillAndExpand" Padding="0">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -31,8 +31,8 @@
 
             <BoxView Style="{StaticResource HorizontalLine}" />
 
-            <Frame BorderColor="#3A3942" CornerRadius="0" BackgroundColor="Transparent" Margin="0,8,0,8">
-                <Label TextColor="#fff" FontSize="11" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HeightRequest="42" Text="12Bet - Asian HDP Odds" />
+            <Frame Style="{StaticResource MatchDetailOddsMovementTitleLayout}">
+                <Label Style="{StaticResource MatchDetailOddsMovementTitleLable}" Text="12Bet - Asian HDP Odds" />
             </Frame>
             <ActivityIndicator
                 IsRunning="{Binding IsBusy}"

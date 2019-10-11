@@ -41,7 +41,7 @@
 
     <Style x:Key="MatchDetailOddsDropdownContainer" TargetType="StackLayout">
         <Setter Property="Orientation" Value="Horizontal" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SecondColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="HorizontalOptions" Value="EndAndExpand" />
     </Style>
 
@@ -66,5 +66,23 @@
                         Value="#30C2FF" />
         <Setter Property="Text"
                         Value="&#xe922;" />
+    </Style>
+
+    <Style x:Key="MatchDetailOddsMovementTitleLayout" TargetType="Frame">
+        <Setter Property="BorderColor" Value="#3A3942" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BackgroundColor" Value="#202124" />
+        <Setter Property="Margin" Value="0,8,0,8" />
+        <Setter Property="Padding" Value="1" />
+    </Style>
+    <Style x:Key="MatchDetailOddsMovementTitleLable" TargetType="Label">       
+        <Setter Property="HorizontalOptions" Value="Fill" />
+        <Setter Property="BackgroundColor" Value="#3A3942" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="1" />        
+        <Setter Property="HeightRequest" Value="42" />
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="FontSize" Value="11" />
     </Style>
 </ResourceDictionary>

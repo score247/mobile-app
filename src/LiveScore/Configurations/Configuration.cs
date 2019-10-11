@@ -3,13 +3,13 @@
     public static class Configuration
     {
 #if DEBUG
-        public static string ApiEndPoint => "https://score247-api3.nexdev.net/dev/api";
+        public static string ApiEndPoint => "https://score247-api1.nexdev.net/main/api/";
 
-        public static string SignalRHubEndPoint => "https://score247-api4.nexdev.net/dev/hubs";
+        public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/main/hubs/";
 
-        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
+        public static string AssetsEndPoint => "https://assets-dev.nexdev.net/main/";
 
-        public static string Environment => "DEV";
+        public static string Environment => "MAIN";
 #elif TEST
         public static string ApiEndPoint => "https://score247-api1.nexdev.net/test/api/";
         public static string SignalRHubEndPoint => "https://score247-api2.nexdev.net/test/hubs/";
