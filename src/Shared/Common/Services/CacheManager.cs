@@ -27,12 +27,15 @@
         private readonly ICacheService cacheService;
         private readonly IList<string> cachedKeys;
         private readonly INetworkConnection networkConnectionManager;
+        private readonly ILoggingService loggingService;
 
         public CacheManager(
             ICacheService cacheService,
-            INetworkConnection networkConnectionManager)
+            INetworkConnection networkConnectionManager,
+            ILoggingService loggingService)
         {
             this.cacheService = cacheService;
+            this.loggingService = loggingService;
             this.networkConnectionManager = networkConnectionManager;
             cachedKeys = new List<string>();
         }
@@ -42,36 +45,30 @@
         {
             if (networkConnectionManager.IsSuccessfulConnection())
             {
-                if (getLatestData)
+                try
                 {
-                    try
+                    if (getLatestData)
                     {
                         var data = await factory.Invoke().ConfigureAwait(false);
 
                         await SetCacheAsync(key, data, options).ConfigureAwait(false);
                     }
-                    catch (TaskCanceledException)
+
+                    var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
+
+                    if (Equals(dataFromCache, default(T)))
                     {
-                        networkConnectionManager.PublishConnectionTimeoutEvent();
-                        return await cacheService.GetAsync<T>(key);
+                        var data = await factory.Invoke().ConfigureAwait(false);
+
+                        await SetCacheAsync(key, data, options).ConfigureAwait(false);
                     }
                 }
-
-                var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
-
-                if (Equals(dataFromCache, default(T)))
+                catch (TaskCanceledException ex)
                 {
-                    try
-                    {
-                        var data = await factory.Invoke().ConfigureAwait(false);
-
-                        await SetCacheAsync(key, data, options).ConfigureAwait(false);
-                    }
-                    catch (TaskCanceledException)
-                    {
-                        networkConnectionManager.PublishConnectionTimeoutEvent();
-                        return await cacheService.GetAsync<T>(key);
-                    }
+                    // TODO: Temporary comment code here to find another solution
+                    // networkConnectionManager.PublishConnectionTimeoutEvent();
+                    await loggingService.LogErrorAsync(ex);
+                    return await cacheService.GetAsync<T>(key);
                 }
             }
             else

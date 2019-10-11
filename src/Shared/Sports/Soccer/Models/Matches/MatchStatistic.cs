@@ -50,7 +50,9 @@
                 new MatchStatisticItem(AppResources.CornerKicks, HomeStatistic?.CornerKicks, AwayStatistic?.CornerKicks),
                 new MatchStatisticItem(AppResources.Offside, HomeStatistic?.Offsides, AwayStatistic?.Offsides),
                 new MatchStatisticItem(AppResources.YellowCards, HomeStatistic?.YellowCards, AwayStatistic?.YellowCards),
-                new MatchStatisticItem(AppResources.RedCards, HomeStatistic?.RedCards, AwayStatistic?.RedCards),
+                new MatchStatisticItem(AppResources.RedCards, 
+                    (byte?)(HomeStatistic?.RedCards + HomeStatistic?.YellowRedCards), 
+                    (byte?)(AwayStatistic?.RedCards + AwayStatistic?.YellowRedCards)),
                 new MatchStatisticItem(AppResources.ThrowIns, HomeStatistic?.ThrowIns, AwayStatistic?.ThrowIns),
                 new MatchStatisticItem(AppResources.FreeKicks, HomeStatistic?.FreeKicks, AwayStatistic?.FreeKicks),
                 new MatchStatisticItem(AppResources.Fouls, HomeStatistic?.Fouls, AwayStatistic?.Fouls),
@@ -61,7 +63,7 @@
                 return Enumerable.Empty<MatchStatisticItem>();
             }
 
-            return subItems;
+            return subItems.Where(item => item.IsVisibled);
         }
     }
 
@@ -72,9 +74,9 @@
             StatisticName = statisticName.ToUpperInvariant();
             HomeValue = homeValue.HasValue ? homeValue.Value : (byte)0;
             AwayValue = awayValue.HasValue ? awayValue.Value : (byte)0;
-            IsHidden = HomeValue == 0 && AwayValue == 0; 
+            IsHidden = HomeValue == 0 && AwayValue == 0;
 
-            if(IsVisibled)
+            if (IsVisibled)
             {
                 var total = HomeValue + AwayValue;
                 HomePercent = (float)HomeValue / total;
@@ -95,6 +97,13 @@
         public float HomePercent { get; }
 
         public float AwayPercent { get; }
+
+        public string HomePercentText => FormatPercent(HomePercent);
+
+        public string AwayPercentText => FormatPercent(AwayPercent);
+
+        private static string FormatPercent(float value)
+            => value.ToString("P0", System.Globalization.CultureInfo.InvariantCulture).Replace(" ", string.Empty);
     }
-        
+
 }
