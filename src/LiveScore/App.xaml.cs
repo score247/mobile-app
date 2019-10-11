@@ -2,18 +2,11 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
-using Fanex.Caching;
-using LiveScore.Common;
-using LiveScore.Common.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Configurations;
-using LiveScore.Core;
-using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Events;
 using LiveScore.Core.Services;
-using LiveScore.Core.ViewModels;
-using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
 using LiveScore.Features.Menu;
@@ -22,9 +15,7 @@ using LiveScore.Features.Score;
 using LiveScore.Features.TVSchedule;
 using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
-using LiveScore.ViewModels;
 using LiveScore.Views;
-using MessagePack.Resolvers;
 using MethodTimer;
 using Microsoft.AspNetCore.SignalR.Client;
 using Plugin.Multilingual;
@@ -34,7 +25,6 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Mvvm;
-using Refit;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -59,25 +49,16 @@ namespace LiveScore
         [Time]
         public App(IPlatformInitializer initializer) : base(initializer)
         {
-            this.PageAppearing += App_PageAppearing;
-        }
-
-        private void App_PageAppearing(object sender, Page e)
-        {
-            Debug.Write($"Page {e.Title} (id:{e.Id}) appears at {DateTime.Now:HH:mm:ss.fff}");
         }
 
         [Time]
         protected override void OnInitialized()
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
-            var logService = Container.Resolve<ILoggingService>();
 
-            MainPage = new NavigationPage(new SplashScreen(logService));
+            MainPage = new NavigationPage(new SplashScreen());
 
             InitializeComponent();
-
-            logService.Init(Configuration.SentryDsn, Configuration.Environment);
 
             _ = StartEventHubs();
 
@@ -103,52 +84,12 @@ namespace LiveScore
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance(Container);
-            RegisterServices(containerRegistry);
-            RegisterForNavigation(containerRegistry);
+            containerRegistry
+                .RegisterContainer(Container)
+                .RegisterServices()
+                .RegisterNavigation();
 
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
-        }
-
-        private static void RegisterServices(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
-            containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
-            containerRegistry.RegisterSingleton<ICacheService, CacheService>();
-            containerRegistry.RegisterSingleton<ISettings, Settings>();
-            containerRegistry.RegisterSingleton<ISportService, SportService>();
-            containerRegistry.RegisterSingleton<IEssential, Essential>();
-            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
-            containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
-            containerRegistry.RegisterSingleton<IApiService, ApiService>();
-            containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
-            containerRegistry.RegisterSingleton<IMatchService, MatchService>();
-            containerRegistry.RegisterInstance(new RefitSettings
-            {
-                ContentSerializer = new MessagePackContentSerializer()
-            });
-            containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
-            containerRegistry.RegisterInstance<Func<string, string>>((countryCode)
-                 => string.IsNullOrWhiteSpace(countryCode)
-                     ? "images/flag_league/default_flag.svg"
-                     : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
-                FuncNameConstants.BuildFlagUrlFuncName);
-
-            CompositeResolver.RegisterAndSetAsDefault(
-                SoccerModelResolver.Instance,
-                CoreModelResolver.Instance,
-                BuiltinResolver.Instance,
-                PrimitiveObjectResolver.Instance);
-        }
-
-        private static void RegisterForNavigation(IContainerRegistry containerRegistry)
-        {
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<SearchNavigationPage>();
-            containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
-            containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
-            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
-            containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
         }
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

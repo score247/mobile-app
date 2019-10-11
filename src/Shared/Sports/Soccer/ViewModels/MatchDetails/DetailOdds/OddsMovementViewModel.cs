@@ -92,7 +92,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
             catch (Exception ex)
             {
-                LoggingService.LogError(ex);
+                LoggingService.LogException(ex);
             }
         }
 
@@ -110,7 +110,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
             catch (Exception ex)
             {
-                await LoggingService.LogErrorAsync(ex).ConfigureAwait(false);
+                await LoggingService.LogExceptionAsync(ex).ConfigureAwait(false);
             }
         }
 

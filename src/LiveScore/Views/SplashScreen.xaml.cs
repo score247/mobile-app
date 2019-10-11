@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using LiveScore.Common.Services;
+﻿using System.Threading.Tasks;
 using MethodTimer;
 using Prism.Common;
 using Xamanimation;
@@ -12,31 +10,24 @@ namespace LiveScore.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
-        private readonly ILoggingService loggingService;
+        
 
-        public SplashScreen(ILoggingService loggingService)
+        public SplashScreen()
         {
             InitializeComponent();
-            this.loggingService = loggingService;
+            
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        protected override async void OnAppearing()
+        protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            try
-            {
-                await LoadMainPage().ConfigureAwait(false);
-            }
-            catch (Exception ex)
-            {
-                await loggingService.LogErrorAsync(ex);
-            }
+            LoadMainPageAsync();
         }
 
         [Time]
-        private async Task LoadMainPage()
+        private async Task LoadMainPageAsync()
         {
             var mainPage = new MainView { Detail = new MenuTabbedView() };
 

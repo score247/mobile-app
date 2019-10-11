@@ -87,7 +87,7 @@ namespace LiveScore.Soccer.Converters
             }
             catch (Exception ex)
             {
-                loggingService.LogError(ex.Message, ex);
+                loggingService.LogException(ex);
 
                 return string.Empty;
             }

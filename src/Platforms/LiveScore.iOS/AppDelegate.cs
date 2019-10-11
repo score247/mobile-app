@@ -64,22 +64,22 @@ namespace LiveScore.iOS
 
         private void HandleMarshalException(object sender, MarshalManagedExceptionEventArgs args)
         {
-            loggingService.LogError(args.Exception);
+            loggingService.LogException(args.Exception);
         }
 
         private void HandleMarshalObjectCException(object sender, MarshalObjectiveCExceptionEventArgs args)
         {
-            loggingService.LogError(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
+            loggingService.LogException(new InvalidOperationException($"Marshaling Objective-C exception. {args.Exception.DebugDescription}"));
         }
 
         private void UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-            loggingService.LogError(e.Exception);
+            loggingService.LogException(e.Exception);
         }
 
         private void UnhandledException(object sender, UnhandledExceptionEventArgs e)
         {
-            loggingService.LogError(e.ExceptionObject as Exception);
+            loggingService.LogException(e.ExceptionObject as Exception);
         }
     }
 

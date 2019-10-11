@@ -80,7 +80,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
             catch (Exception ex)
             {
-                await LoggingService.LogErrorAsync(ex);
+                await LoggingService.LogExceptionAsync(ex);
             }
         }
 

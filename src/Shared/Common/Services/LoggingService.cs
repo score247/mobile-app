@@ -1,137 +1,114 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using SharpRaven;
 using SharpRaven.Data;
+using Xamarin.Essentials;
 
 namespace LiveScore.Common.Services
 {
     public interface ILoggingService
     {
-        Task LogErrorAsync(Exception exception);
+        Task LogExceptionAsync(Exception exception);
 
-        Task LogErrorAsync(string message, Exception exception);
+        Task LogExceptionAsync(string message, Exception exception);
 
-        void LogError(Exception exception);
+        void LogException(Exception exception);
 
-        void LogError(string message, Exception exception);
-
-        void TrackEvent(string trackIdentifier, string key, string value);
+        void LogException(string message, Exception exception);
 
         Task LogInfoAsync(string message);
 
         void LogInfo(string message);
 
-        void Init(string Dsn, string env = "", IRavenClient ravenClient = null);
+        void TrackEvent(string trackIdentifier, string key, string value);
     }
 
     public class LoggingService : ILoggingService
     {
         private readonly IEssential deviceInfo;
         private readonly INetworkConnection networkConnectionManager;
+        private readonly IRavenClient ravenClient;
 
-        private IRavenClient ravenClient;
-
-        public LoggingService(IEssential deviceInfo, INetworkConnection networkConnectionManager)
+        public LoggingService(
+            IEssential deviceInfo,
+            INetworkConnection networkConnectionManager,
+            IRavenClient ravenClient,
+            string dns,
+            string env)
         {
             this.deviceInfo = deviceInfo;
             this.networkConnectionManager = networkConnectionManager;
-        }
-
-        public void Init(string Dsn, string env = "", IRavenClient ravenClient = null)
-        {
-            this.ravenClient = ravenClient ?? new RavenClient(Dsn) { Release = deviceInfo.AppVersion, Environment = env };
-
-            LogInfoAsync($"Init Logging Service with DSN {Dsn} env {env}");
-        }
-
-        public void LogError(Exception exception)
-        {
-            Debug.WriteLine("LogError");
-
-            if (networkConnectionManager.IsSuccessfulConnection())
+            this.ravenClient = ravenClient?? new RavenClient(dns)
             {
-                ravenClient?.Capture(CreateSentryEvent(string.Empty, exception));
-            }
+                Release = AppInfo.VersionString,
+                Environment = env
+            };
         }
 
-        public void LogError(string message, Exception exception)
-        {
-            if (networkConnectionManager.IsSuccessfulConnection())
-            {
-                ravenClient?.Capture(CreateSentryEvent(message, exception));
-            }
-        }
+        public Task LogExceptionAsync(Exception exception)
+            => CaptureAsync(CreateSentryEvent(exception));
 
-        public Task LogErrorAsync(Exception exception)
-        {
-            if (networkConnectionManager.IsSuccessfulConnection())
-            {
-                return ravenClient?.CaptureAsync(CreateSentryEvent(string.Empty, exception));
-            }
+        public Task LogExceptionAsync(string message, Exception exception)
+            => CaptureAsync(CreateSentryEvent(message, exception));
 
-            return Task.CompletedTask;
-        }
+        public void LogException(Exception exception)
+            => Capture(CreateSentryEvent(exception));
 
-        public Task LogErrorAsync(string message, Exception exception)
-        {
-            if (networkConnectionManager.IsSuccessfulConnection())
-            {
-                return ravenClient?.CaptureAsync(CreateSentryEvent(message, exception));
-            }
-
-            return Task.CompletedTask;
-        }
+        public void LogException(string message, Exception exception)
+            => Capture(CreateSentryEvent(exception));
 
         public Task LogInfoAsync(string message)
+            => CaptureAsync(CreateSentryEvent(message, ErrorLevel.Info));
+
+        public void LogInfo(string message)
+            => Capture(CreateSentryEvent(message, ErrorLevel.Info));
+
+        private SentryEvent CreateSentryEvent(Exception exception)
+           => CreateSentryEvent(string.Empty, exception);
+
+        private SentryEvent CreateSentryEvent(string message, Exception exception)
+         => CreateSentryEvent(() => new SentryEvent(exception)
+         {
+             Message = new SentryMessage((message ?? string.Empty) + exception.Message),
+             Level = ErrorLevel.Error
+         });
+
+        private SentryEvent CreateSentryEvent(string message, ErrorLevel errorLevel)
+            => CreateSentryEvent(() => new SentryEvent(deviceInfo?.Name + " " + message)
+            {
+                Level = errorLevel
+            });
+
+        private SentryEvent CreateSentryEvent(Func<SentryEvent> sentryEventCreator)
+        {
+            var sentryEvent = sentryEventCreator.Invoke();
+
+            sentryEvent.Contexts.Device.Model = deviceInfo.Model;
+            sentryEvent.Contexts.Device.Name = deviceInfo.Name;
+            sentryEvent.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;
+            sentryEvent.Contexts.OperatingSystem.Version = deviceInfo.OperatingSystemVersion;
+
+            return sentryEvent;
+        }
+
+        private void Capture(SentryEvent sentryEvent)
+        {
+            // TODO: when network is down, record event
+            if (networkConnectionManager.IsSuccessfulConnection())
+            {
+                ravenClient?.Capture(sentryEvent);
+            }
+        }
+
+        private Task CaptureAsync(SentryEvent sentryEvent)
         {
             if (networkConnectionManager.IsSuccessfulConnection())
             {
-                return ravenClient?.CaptureAsync(CreateSentryInfoEvent(message));
+                return ravenClient?.CaptureAsync(sentryEvent);
             }
 
             return Task.CompletedTask;
-        }
-
-        public void LogInfo(string message)
-        {
-            if (networkConnectionManager.IsSuccessfulConnection())
-            {
-                ravenClient?.Capture(CreateSentryInfoEvent(message));
-            }
-        }
-
-        private SentryEvent CreateSentryEvent(string message, Exception exception)
-        {
-            var evt = new SentryEvent(exception);
-
-            if (!string.IsNullOrWhiteSpace(message))
-            {
-                evt.Message = new SentryMessage(deviceInfo?.Name + " " + message);
-            }
-
-            evt.Contexts.Device.Model = deviceInfo.Model;
-            evt.Contexts.Device.Name = deviceInfo.Name;
-            evt.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;
-            evt.Contexts.OperatingSystem.Version = deviceInfo.OperatingSystemVersion;
-
-            return evt;
-        }
-
-        private SentryEvent CreateSentryInfoEvent(string message)
-        {
-            var evt = new SentryEvent(deviceInfo?.Name + " " + message)
-            {
-                Level = ErrorLevel.Info
-            };
-
-            evt.Contexts.Device.Model = deviceInfo.Model;
-            evt.Contexts.Device.Name = deviceInfo.Name;
-            evt.Contexts.OperatingSystem.Name = deviceInfo.OperatingSystemName;
-            evt.Contexts.OperatingSystem.Version = deviceInfo.OperatingSystemVersion;
-
-            return evt;
         }
 
         private void TrackEvent(string trackIdentifier, IDictionary<string, string> table)
@@ -142,6 +119,9 @@ namespace LiveScore.Common.Services
                 });
 
         public void TrackEvent(string trackIdentifier, string key, string value)
-            => TrackEvent(trackIdentifier, new Dictionary<string, string> { { key, value } });
+            => TrackEvent(trackIdentifier, new Dictionary<string, string>
+            {
+                { key, value }
+            });
     }
 }

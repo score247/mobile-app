@@ -230,7 +230,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (!navigated.Success)
             {
-                await LoggingService.LogErrorAsync(navigated.Exception).ConfigureAwait(false);
+                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
 
@@ -328,7 +328,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
             catch (Exception ex)
             {
-                LoggingService.LogError(ex);
+                LoggingService.LogException(ex);
             }
         }
 

@@ -19,11 +19,11 @@
             {
                 var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
 
-                LoggingService.LogErrorAsync(message, apiException);
+                LoggingService.LogExceptionAsync(apiException);
             }
             else
             {
-                LoggingService.LogErrorAsync(ex);
+                LoggingService.LogExceptionAsync(ex);
             }
         }
     }

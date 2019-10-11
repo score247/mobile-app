@@ -21,8 +21,7 @@
             mockRavenClient = Substitute.For<IRavenClient>();
             mockNetworkManager = Substitute.For<INetworkConnection>();
 
-            loggingService = new LoggingService(mockEssentials, mockNetworkManager);
-            loggingService.Init("", "", mockRavenClient);
+            loggingService = new LoggingService(mockEssentials, mockNetworkManager, mockRavenClient, "dns", "env");
         }
 
         [Fact]
@@ -33,26 +32,11 @@
             var exception = new InvalidOperationException("");
 
             // Act
-            loggingService.LogError(exception);
+            loggingService.LogException(exception);
 
             // Assert
             mockRavenClient.Received(1).Capture(
                 Arg.Is<SentryEvent>(s => s.Exception == exception));
-        }
-
-        [Fact]
-        public void LogErrorWithMessage_WhenCall_InjectCaptureEvent()
-        {
-            // Arrange
-            mockNetworkManager.IsSuccessfulConnection().Returns(true);
-            var exception = new InvalidOperationException("");
-
-            // Act
-            loggingService.LogError("message", exception);
-
-            // Assert
-            mockRavenClient.Received(1).Capture(
-                Arg.Is<SentryEvent>(s => s.Message == "iPhone message" && s.Exception == exception));
         }
 
         [Fact]
@@ -62,7 +46,7 @@
             mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
-            loggingService.LogError(new InvalidOperationException(""));
+            loggingService.LogException(new InvalidOperationException(""));
 
             // Assert
             mockRavenClient.Received(1).Capture(Arg.Is<SentryEvent>(x => x.Contexts.Device.Name.Equals("iPhone")));
@@ -75,7 +59,7 @@
             mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
-            loggingService.LogError(new InvalidOperationException(""));
+            loggingService.LogException(new InvalidOperationException(""));
 
             // Assert
             mockRavenClient.Received(1).Capture(Arg.Is<SentryEvent>(x => x.Contexts.Device.Model.Equals("6")));
@@ -88,7 +72,7 @@
             mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
-            loggingService.LogError(new InvalidOperationException(""));
+            loggingService.LogException(new InvalidOperationException(""));
 
             // Assert
             mockRavenClient.Received(1).Capture(Arg.Is<SentryEvent>(x => x.Contexts.OperatingSystem.Name.Equals("iOS")));
@@ -101,7 +85,7 @@
             mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
-            loggingService.LogError(new InvalidOperationException(""));
+            loggingService.LogException(new InvalidOperationException(""));
 
             // Assert
             mockRavenClient.Received(1).Capture(Arg.Is<SentryEvent>(x => x.Contexts.OperatingSystem.Version.Equals("11.2")));
@@ -114,7 +98,7 @@
             mockNetworkManager.IsSuccessfulConnection().Returns(true);
 
             // Act
-            await loggingService.LogErrorAsync(new InvalidOperationException(""));
+            await loggingService.LogExceptionAsync(new InvalidOperationException(""));
 
             // Assert
             await mockRavenClient.Received(1).CaptureAsync(Arg.Any<SentryEvent>());

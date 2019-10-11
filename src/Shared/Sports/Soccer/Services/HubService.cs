@@ -64,7 +64,7 @@ namespace LiveScore.Soccer.Services
                             }
                             catch (Exception ex)
                             {
-                                logger.LogErrorAsync(ex);
+                                logger.LogExceptionAsync(ex);
                             }
                         }));
                 }
@@ -75,7 +75,7 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception ex)
             {
-                await logger.LogErrorAsync(ex).ConfigureAwait(false);
+                await logger.LogExceptionAsync(ex).ConfigureAwait(false);
             }
         }
 
@@ -122,7 +122,7 @@ namespace LiveScore.Soccer.Services
                 catch (Exception startException)
                 {
                     await logger
-                        .LogErrorAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException)
+                        .LogExceptionAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException)
                         .ConfigureAwait(false);
                 }
             }
@@ -136,7 +136,7 @@ namespace LiveScore.Soccer.Services
             }
             catch (Exception disposeException)
             {
-                await logger.LogErrorAsync(disposeException).ConfigureAwait(false);
+                await logger.LogExceptionAsync(disposeException).ConfigureAwait(false);
             }
         }
     }
