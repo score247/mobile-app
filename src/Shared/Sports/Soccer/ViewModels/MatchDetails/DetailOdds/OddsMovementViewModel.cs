@@ -100,7 +100,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             try
             {
-                Debug.WriteLine("OddsMovementViewModel Initialize");
+                Debug.WriteLine("OddsMovementViewModel OnAppearing");
 
                 if (isFirstLoad)
                 {
@@ -121,7 +121,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         private async Task ReloadPage()
         {
-            Debug.WriteLine("OddsMovementViewModel OnResume");
+            Debug.WriteLine("OddsMovementViewModel OnResumeWhenNetworkOK");
 
             if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
             {
@@ -133,6 +133,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public override void OnSleep()
         {
+            Debug.WriteLine("OddsMovementViewModel OnSleep");
+
             eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
         }
 
@@ -227,6 +229,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             if (isConnected)
             {
+                Debug.WriteLine("OddsMovementViewModel OnConnectionChangedBase");
+
                 await RefreshCommand.ExecuteAsync();
             }
         }

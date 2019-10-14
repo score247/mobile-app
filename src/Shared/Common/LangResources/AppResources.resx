@@ -292,7 +292,7 @@
     <value>OVER</value>
   </data>
   <data name="Under" xml:space="preserve">
-    <value>Under</value>
+    <value>UNDER</value>
   </data>
   <data name="Today" xml:space="preserve">
     <value>Today</value>
@@ -344,5 +344,17 @@
   </data>
   <data name="TotalShots" xml:space="preserve">
     <value>Total shots</value>
+  </data>
+  <data name="OddsHeaderLastUpdated" xml:space="preserve">
+    <value>LAST UPDATED</value>
+  </data>
+    <data name="OddsHeaderHdp" xml:space="preserve">
+    <value>HDP</value>
+  </data>
+    <data name="OddsHeaderTime" xml:space="preserve">
+    <value>TIME</value>
+  </data>
+    <data name="OddsHeaderScore" xml:space="preserve">
+    <value>SCORE</value>
   </data>
 </root>

@@ -3,7 +3,7 @@
         x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo.OneXTwoMovementHeaderTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell Height="{StaticResource TableRowHeight}">
         <StackLayout>
@@ -31,11 +31,11 @@
                 <Label Grid.Row="0"
                        Grid.Column="0"
                        Style="{StaticResource TableHeaderText}"
-                       Text="TIME" />
+                       Text="{languageResources:Translate OddsHeaderTime}"/>
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        Style="{StaticResource TableHeaderText}"
-                       Text="SCORE" />
+                       Text="{languageResources:Translate OddsHeaderScore}"/>              
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource TableHeaderText}"
@@ -51,7 +51,7 @@
                 <Label Grid.Row="0"
                        Grid.Column="5"
                        Style="{StaticResource TableHeaderText}"
-                       Text="LAST UPDATED" />
+                       Text="{languageResources:Translate OddsHeaderLastUpdated}" />
             </Grid>
         </StackLayout>
     </ViewCell>
