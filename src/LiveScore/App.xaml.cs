@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Configurations;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Events;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Services;
 using LiveScore.Views;
 using MethodTimer;
-using Microsoft.AspNetCore.SignalR.Client;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -32,8 +31,8 @@ namespace LiveScore
          * This imposes a limitation in which the App class must have a default constructor.
          * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
          */
-        private IHubService soccerHub;
         private INetworkConnection networkConnectionManager;
+        private IHubService soccerHub;
 
         public App() : this(null)
         {
@@ -75,14 +74,14 @@ namespace LiveScore
             });
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry) 
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
             => containerRegistry
                 .UseContainerInstance(Container)
                 .RegisterServices()
                 .RegisterNavigation()
                 .Verify();
 
-        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) 
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
             => moduleCatalog
                 .AddProductModules()
                 .AddFeatureModules()
@@ -90,26 +89,11 @@ namespace LiveScore
 
         private async Task StartEventHubs()
         {
-            var eventAggregator = Container.Resolve<IEventAggregator>();
+            // Setup hub for soccer and other sports
 
-            soccerHub = new SoccerHubService(
-                Container.Resolve<IHubConnectionBuilder>(),
-                Configuration.SignalRHubEndPoint,
-                Container.Resolve<ILoggingService>(),
-                eventAggregator,
-                Container.Resolve<INetworkConnection>());
+            soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
 
             await soccerHub.Start();
-
-            eventAggregator
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Subscribe(async (isConnected) =>
-                {
-                    if (isConnected)
-                    {
-                        await soccerHub.ReConnect();
-                    }
-                });
         }
 
         protected override void OnSleep()

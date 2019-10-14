@@ -41,7 +41,10 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
+            var config = new Configuration();
+            containerRegistry.RegisterInstance<IConfiguration>(config);
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(config.ApiEndPoint)));
+
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
 
@@ -52,8 +55,8 @@ namespace LiveScore.Configurations
                 Container.Resolve<IEssential>(),
                 Container.Resolve<INetworkConnection>(),
                 null,
-                Configuration.SentryDsn,
-                Configuration.Environment);
+                config.SentryDsn,
+                config.Environment);
 
             containerRegistry.RegisterInstance<ILoggingService>(logService);
 
@@ -73,7 +76,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterInstance<Func<string, string>>((countryCode)
                  => string.IsNullOrWhiteSpace(countryCode)
                      ? "images/flag_league/default_flag.svg"
-                     : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
+                     : $"{config.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
 
             CompositeResolver.RegisterAndSetAsDefault(

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
+using LiveScore.Core;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.PubSubEvents;
 using LiveScore.Soccer.PubSubEvents.Matches;
@@ -15,24 +16,24 @@ namespace LiveScore.Soccer.Services
     public class SoccerHubService : IHubService
     {
         private const int NumOfDelayMillisecondsBeforeReConnect = 3_000;
-        private readonly string hubEndpoint;
 
         private readonly IEventAggregator eventAggregator;
         private readonly IHubConnectionBuilder hubConnectionBuilder;
         private readonly ILoggingService logger;
         private readonly INetworkConnection networkConnectionManager;
+        private readonly IConfiguration configuration;
 
         private HubConnection hubConnection;
 
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
-            string hubEndpoint,
+            IConfiguration configuration,
             ILoggingService logger,
             IEventAggregator eventAggregator,
             INetworkConnection networkConnectionManager)
         {
             this.hubConnectionBuilder = hubConnectionBuilder;
-            this.hubEndpoint = hubEndpoint;
+            this.configuration = configuration;
             this.logger = logger;
             this.eventAggregator = eventAggregator;
             this.networkConnectionManager = networkConnectionManager;
@@ -42,36 +43,17 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                await logger.LogInfoAsync($"{DateTime.Now} HubService start").ConfigureAwait(false);
+                await logger.LogInfoAsync($"HubService start at {DateTime.Now}").ConfigureAwait(false);
 
                 hubConnection = hubConnectionBuilder
-                    .WithUrl($"{hubEndpoint}/soccerhub")
+                    .WithUrl($"{configuration.SignalRHubEndPoint}/soccerhub")
                     .Build();
 
-                var handlers = BuildHandlers();
-
-                foreach (var handler in handlers)
-                {
-                    hubConnection.On(
-                        handler.HubMethod,
-                        (Action<string>)((jsonString) =>
-                        {
-                            try
-                            {
-                                logger.LogInfoAsync($"HubService receiving {jsonString}");
-
-                                handler.Handle(jsonString);
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.LogExceptionAsync(ex);
-                            }
-                        }));
-                }
-
-                hubConnection.Closed += HubConnection_Closed;
+                RegisterHubEvents();
 
                 await hubConnection.StartAsync().ConfigureAwait(false);
+
+                SubscribeReConnectEvent();
             }
             catch (Exception ex)
             {
@@ -79,7 +61,43 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        private IEnumerable<IPubSubEventHandler> BuildHandlers()
+        private void RegisterHubEvents()
+        {
+            var handlers = BuildHubEventHandlers();
+
+            foreach (var handler in handlers)
+            {
+                hubConnection.On(
+                    handler.HubMethod,
+                    (Action<string>)((jsonString) =>
+                    {
+                        try
+                        {
+                            logger.LogInfoAsync($"HubService receiving {jsonString}");
+
+                            handler.Handle(jsonString);
+                        }
+                        catch (Exception ex)
+                        {
+                            logger.LogExceptionAsync(ex);
+                        }
+                    }));
+            }
+
+            hubConnection.Closed += HubConnection_Closed;
+        }
+
+        private void SubscribeReConnectEvent()
+            => eventAggregator.GetEvent<ConnectionChangePubSubEvent>()
+                            .Subscribe(async (isConnected) =>
+                            {
+                                if (isConnected)
+                                {
+                                    await ReConnect();
+                                }
+                            });
+
+        private IEnumerable<IPubSubEventHandler> BuildHubEventHandlers()
             => new List<IPubSubEventHandler>
             {
                 new MatchEventPubSubEventHandler(eventAggregator),
@@ -117,7 +135,7 @@ namespace LiveScore.Soccer.Services
                     await StopCurrentConnection().ConfigureAwait(false);
                     await Task.Delay(NumOfDelayMillisecondsBeforeReConnect).ConfigureAwait(false);
                     await hubConnection.StartAsync().ConfigureAwait(false);
-                    await logger.LogInfoAsync($"Reconnect {retryCount} times, at {DateTime.Now}").ConfigureAwait(false);
+                    await logger.LogInfoAsync($"Reconnect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}").ConfigureAwait(false);
                 }
                 catch (Exception startException)
                 {

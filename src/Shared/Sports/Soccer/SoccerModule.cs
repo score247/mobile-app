@@ -29,6 +29,7 @@
             containerRegistry.RegisterForNavigation<OddsMovementView, OddsMovementViewModel>(
                 nameof(OddsMovementView) + SportType.Soccer.Value);
 
+            containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<IMatchInfoService, MatchService>();
             containerRegistry.Register<IOddsService, OddsService>(SportType.Soccer.Value.ToString());

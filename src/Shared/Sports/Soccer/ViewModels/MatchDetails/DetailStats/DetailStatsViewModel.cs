@@ -36,8 +36,6 @@
 
         public IEnumerable<MatchStatisticItem> SubStatisticItems { get; private set; }
 
-
-
         public bool IsNoData { get; private set; }
 
         public bool IsVisible => !IsNoData;
