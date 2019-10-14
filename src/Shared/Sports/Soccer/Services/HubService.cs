@@ -24,6 +24,7 @@ namespace LiveScore.Soccer.Services
         private readonly IConfiguration configuration;
 
         private HubConnection hubConnection;
+        private bool isConnecting = false;
 
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
@@ -126,10 +127,11 @@ namespace LiveScore.Soccer.Services
             var retryCount = 0;
 
             while (retryCount < retryTimes
-                && hubConnection.State == HubConnectionState.Disconnected)
+                && hubConnection.State == HubConnectionState.Disconnected
+                && !isConnecting)
             {
                 retryCount++;
-
+                isConnecting = true;
                 try
                 {
                     await StopCurrentConnection().ConfigureAwait(false);
@@ -144,6 +146,7 @@ namespace LiveScore.Soccer.Services
                         .LogExceptionAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException)
                         .ConfigureAwait(false);
                 }
+                isConnecting = false;
             }
         }
 

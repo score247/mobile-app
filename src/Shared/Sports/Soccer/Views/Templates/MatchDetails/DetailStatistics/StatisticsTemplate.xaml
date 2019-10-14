@@ -21,13 +21,13 @@
 
         <Label Style="{StaticResource NoInfo}"
                Text="{languageResources:Translate NoData}"
-               IsVisible="{Binding IsNoData}"
+               IsVisible="{Binding NoData}"
                AutomationId="NoDataLabel" />
 
         <tabStrip:TabITemListView BackgroundColor="#272830"
                                   SeparatorVisibility="None"
                                   ItemsSource="{Binding SubStatisticItems}"
-                                  IsVisible="{Binding IsVisible}"
+            IsVisible="{Binding HasData}"
                                   Header="{Binding MainStatistic}"
                                   IsPullToRefreshEnabled="true"
                                   RefreshCommand="{Binding RefreshCommand}"

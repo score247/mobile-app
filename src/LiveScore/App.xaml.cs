@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
+using FFImageLoading;
+using FFImageLoading.Helpers;
 using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Configurations;
@@ -50,7 +52,7 @@ namespace LiveScore
         protected override void OnInitialized()
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
-
+            ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
             MainPage = new NavigationPage(new SplashScreen());
 
             InitializeComponent();
@@ -117,6 +119,7 @@ namespace LiveScore
             Debug.WriteLine("OnSleep");
 
             base.OnSleep();
+            ImageService.Instance.SetExitTasksEarly(true);
 
             Analytics.TrackEvent("Application OnSleep");
         }
@@ -127,9 +130,11 @@ namespace LiveScore
 
             Analytics.TrackEvent("Application OnResume");
 
+            base.OnResume();
+
             await Task.Run(async () => await soccerHub.ReConnect());
 
-            base.OnResume();
+            ImageService.Instance.SetExitTasksEarly(false);
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)

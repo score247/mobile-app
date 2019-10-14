@@ -56,7 +56,7 @@ namespace LiveScore.Common.Services
             => Capture(CreateSentryEvent(exception));
 
         public void LogException(string message, Exception exception)
-            => Capture(CreateSentryEvent(exception));
+            => Capture(CreateSentryEvent(message, exception));
 
         public Task LogInfoAsync(string message)
             => CaptureAsync(CreateSentryEvent(message, ErrorLevel.Info));

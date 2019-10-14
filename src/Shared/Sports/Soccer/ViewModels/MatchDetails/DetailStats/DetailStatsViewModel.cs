@@ -39,21 +39,24 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
         public IEnumerable<MatchStatisticItem> SubStatisticItems { get; private set; }
 
         public bool IsRefreshing { get; set; }
-        public bool IsNoData { get; private set; }
-
-        public bool IsVisible => !IsNoData;
-
         private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
-            var matchStatisticData = await soccerMatchService
+            var matchStatistic = await soccerMatchService
                     .GetMatchStatistic(matchId, Language.English, isRefresh)
                     .ConfigureAwait(false);
 
-            MainStatistic = matchStatisticData.GetMainStatistic();
-            SubStatisticItems = matchStatisticData.GetSubStatisticItems();
-
+            if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))
+            {
+                MainStatistic = matchStatistic.GetMainStatistic();
+                SubStatisticItems = matchStatistic.GetSubStatisticItems();
+                HasData = MainStatistic.IsVisibled || SubStatisticItems.Any();
+            }
+            else
+            {
+                HasData = false;
+            }
+            
             SetFooterHeight(SubStatisticItems.Count());
-            IsNoData = MainStatistic.IsHidden && !SubStatisticItems.Any();
             IsRefreshing = false;
         }
 

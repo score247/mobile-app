@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using Fanex.Caching;
+using FFImageLoading.Helpers;
 using LiveScore.Common;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
@@ -92,6 +93,7 @@ namespace LiveScore.Configurations
                      ? "images/flag_league/default_flag.svg"
                      : $"{config.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
+            containerRegistry.RegisterSingleton<IMiniLogger, FFLoadingImageLogger>();
 
             CompositeResolver.RegisterAndSetAsDefault(
                 SoccerModelResolver.Instance,
