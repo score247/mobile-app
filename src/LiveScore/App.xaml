@@ -127,7 +127,7 @@
             <Color x:Key="TableBgColor">#161719</Color>
             <Color x:Key="TableHeaderBgColor">#272830</Color>
             <Color x:Key="TableHeaderColor">#fff</Color>
-            <x:Double x:Key="TableHeaderFontSize">12</x:Double>
+            <x:Double x:Key="TableHeaderFontSize">10</x:Double>
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
             <Color x:Key="TableEvenRowBgColor">#131724</Color>
             <Color x:Key="TableRowColor">#fff</Color>
@@ -355,6 +355,8 @@
                 BasedOn="{StaticResource TableText}"
                 TargetType="Label">
                 <Setter Property="BackgroundColor" Value="{StaticResource TableHeaderBgColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+                <Setter Property="FontSize" Value="{StaticResource TableHeaderFontSize}" />
                 <Setter Property="TextColor" Value="{StaticResource TableHeaderColor}" />
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontAttributes" Value="Bold" />

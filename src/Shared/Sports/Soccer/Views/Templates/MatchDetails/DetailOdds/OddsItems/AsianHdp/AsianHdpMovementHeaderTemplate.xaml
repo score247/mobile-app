@@ -31,15 +31,15 @@
                 <Label Grid.Row="0"
                        Grid.Column="0"
                        Style="{StaticResource TableHeaderText}"
-                       Text="Time" />
+                       Text="TIME" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        Style="{StaticResource TableHeaderText}"
-                       Text="Score" />
+                       Text="SCORE" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource TableHeaderText}"
-                       Text="Home" />
+                       Text="HOME" />
                 <Label Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource TableHeaderText}"
@@ -47,11 +47,11 @@
                 <Label Grid.Row="0"
                        Grid.Column="4"
                        Style="{StaticResource TableHeaderText}"
-                       Text="Away" />
+                       Text="AWAY" />
                 <Label Grid.Row="0"
                        Grid.Column="5"
                        Style="{StaticResource TableHeaderText}"
-                       Text="Last Updated" />
+                       Text="LAST UPDATED" />
             </Grid>
         </StackLayout>
     </ViewCell>

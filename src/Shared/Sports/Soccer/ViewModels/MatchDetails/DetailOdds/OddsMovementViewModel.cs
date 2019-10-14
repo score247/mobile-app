@@ -81,7 +81,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 betType = (BetType)parameters["BetType"];
                 oddsFormat = parameters["Format"].ToString();
 
-                Title = $"{bookmaker?.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds";
+                Title = $"{bookmaker?.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds".ToUpperInvariant();
 
                 HeaderTemplate = new BaseMovementHeaderViewModel(betType, true, NavigationService, DependencyResolver).CreateTemplate();
 

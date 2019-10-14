@@ -57,7 +57,7 @@
     </Style>
     <Style x:Key="SubTab" TargetType="Button">
         <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
         <Setter Property="Margin" Value="1" />

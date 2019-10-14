@@ -163,7 +163,7 @@
     <value>Teams</value>
   </data>
   <data name="Time" xml:space="preserve">
-    <value>Time</value>
+    <value>TIME</value>
   </data>
   <data name="Transfers" xml:space="preserve">
     <value>Transfers</value>
@@ -265,31 +265,31 @@
     <value>1X2</value>
   </data>
   <data name="AsianHDP" xml:space="preserve">
-    <value>Asian HDP</value>
+    <value>ASIAN HDP</value>
   </data>
   <data name="OverUnder" xml:space="preserve">
-    <value>Over/Under</value>
+    <value>OVER/UNDER</value>
   </data>
   <data name="OddsTypeDecimal" xml:space="preserve">
-    <value>Decimal</value>
+    <value>DECIMAL</value>
   </data>
   <data name="Bookmaker" xml:space="preserve">
-    <value>Bookmaker</value>
+    <value>BOOKMAKER</value>
   </data>
   <data name="LiveOdds" xml:space="preserve">
-    <value>Live Odds</value>
+    <value>LIVE ODDS</value>
   </data>
   <data name="OpeningOdds" xml:space="preserve">
-    <value>Opening Odds</value>
+    <value>OPENING ODDS</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Home</value>
+    <value>HOME</value>
   </data>
   <data name="Away" xml:space="preserve">
-    <value>Away</value>
+    <value>AWAY</value>
   </data>
   <data name="Over" xml:space="preserve">
-    <value>Over</value>
+    <value>OVER</value>
   </data>
   <data name="Under" xml:space="preserve">
     <value>Under</value>

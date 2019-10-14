@@ -115,7 +115,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Asian HDP.
+        ///   Looks up a localized string similar to ASIAN HDP.
         /// </summary>
         public static string AsianHDP {
             get {
@@ -160,7 +160,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Away.
+        ///   Looks up a localized string similar to AWAY.
         /// </summary>
         public static string Away {
             get {
@@ -187,7 +187,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bookmaker.
+        ///   Looks up a localized string similar to BOOKMAKER.
         /// </summary>
         public static string Bookmaker {
             get {
@@ -358,7 +358,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Home.
+        ///   Looks up a localized string similar to HOME.
         /// </summary>
         public static string Home {
             get {
@@ -412,7 +412,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Live Odds.
+        ///   Looks up a localized string similar to LIVE ODDS.
         /// </summary>
         public static string LiveOdds {
             get {
@@ -475,7 +475,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decimal.
+        ///   Looks up a localized string similar to DECIMAL.
         /// </summary>
         public static string OddsTypeDecimal {
             get {
@@ -502,7 +502,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opening Odds.
+        ///   Looks up a localized string similar to OPENING ODDS.
         /// </summary>
         public static string OpeningOdds {
             get {
@@ -511,7 +511,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Over.
+        ///   Looks up a localized string similar to OVER.
         /// </summary>
         public static string Over {
             get {
@@ -520,7 +520,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Over/Under.
+        ///   Looks up a localized string similar to OVER/UNDER.
         /// </summary>
         public static string OverUnder {
             get {
@@ -655,7 +655,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time.
+        ///   Looks up a localized string similar to TIME.
         /// </summary>
         public static string Time {
             get {
