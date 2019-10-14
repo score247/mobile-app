@@ -65,7 +65,7 @@
                             Style="{StaticResource MatchInfoValue}"
                             Text="{Binding DisplayReferee}" />
                     </FlexLayout>
-                    <BoxView IsVisible="{Binding Match.Referee, Converter={StaticResource textNotEmptyConverter}}"
+                    <BoxView IsVisible="{Binding DisplayReferee, Converter={StaticResource textNotEmptyConverter}}"
                              Style="{StaticResource HorizontalLine}" />
                     <FlexLayout IsVisible="{Binding DisplayVenue, Converter={StaticResource textNotEmptyConverter}}"
                                 Style="{StaticResource MatchInfoDetailRow}">
