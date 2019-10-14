@@ -10,6 +10,9 @@ using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Views;
 using MethodTimer;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -19,9 +22,6 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Microsoft.AppCenter;
-using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -60,12 +60,12 @@ namespace LiveScore
             StartGlobalTimer();
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
-            networkConnectionManager.StartListen();            
+            networkConnectionManager.StartListen();
         }
 
         [Time]
         protected override void OnStart()
-        {   
+        {
             base.OnStart();
 
             Debug.WriteLine("Application OnStart");
@@ -73,7 +73,9 @@ namespace LiveScore
             AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
                   typeof(Analytics), typeof(Crashes));
 
+          
         }
+
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();

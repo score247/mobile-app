@@ -37,7 +37,7 @@ namespace LiveScore.Soccer.Services
             try
             {
                 const string cacheKey = "MajorLeagues";
-
+                    
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     GetMajorLeaguesFromApi,

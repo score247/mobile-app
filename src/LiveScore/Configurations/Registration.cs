@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using Fanex.Caching;
 using LiveScore.Common;
 using LiveScore.Common.Helpers;
@@ -39,8 +40,17 @@ namespace LiveScore.Configurations
             return containerRegistry;
         }
 
+        private static void SetupServicePointManager()
+        {
+            ServicePointManager.UseNagleAlgorithm = false;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+        }
+
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
+            SetupServicePointManager();
+
             var config = new Configuration();
             containerRegistry.RegisterInstance<IConfiguration>(config);
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(config.ApiEndPoint)));
@@ -62,6 +72,10 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
+
+            //var apiService = Container.Resolve<IApiService>();
+            //containerRegistry.RegisterInstance(apiService.GetApi<ISoccerMatchApi>());
+
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 
             containerRegistry.RegisterSingleton<ISportService, SportService>();

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net.Http;
 
 namespace LiveScore.Common.Services
@@ -11,16 +12,24 @@ namespace LiveScore.Common.Services
     public class HttpService : IHttpService
     {
         private const int RequestTimeoutSeconds = 10;
+        private readonly HttpClient httpClient;
 
         public HttpService(Uri baseUri)
         {
-            HttpClient = new HttpClient
+            httpClient = new HttpClient
             {
                 BaseAddress = baseUri,
                 Timeout = TimeSpan.FromSeconds(RequestTimeoutSeconds)
             };
         }
 
-        public HttpClient HttpClient { get; }
+        public HttpClient HttpClient
+        {
+            get
+            {
+                Debug.WriteLine(httpClient.GetHashCode());
+                return httpClient;
+            }
+        }
     }
 }

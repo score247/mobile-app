@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using MethodTimer;
 using Refit;
@@ -30,7 +31,14 @@ namespace LiveScore.Common.Services
         }
 
         // TODO: Need to make it be singleton instance
-        public T GetApi<T>() => RestService.For<T>(httpService.HttpClient, refitSettings);
+        public T GetApi<T>()
+        {
+            var service = RestService.For<T>(httpService.HttpClient, refitSettings);
+
+            Debug.WriteLine(nameof(service) + typeof(T) + "service hashcode:" + service.GetHashCode());
+
+            return service;
+        }
 
         [Time]
         public Task<T> Execute<T>(Func<Task<T>> func)
