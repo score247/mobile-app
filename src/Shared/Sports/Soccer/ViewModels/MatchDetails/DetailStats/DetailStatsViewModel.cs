@@ -30,6 +30,8 @@
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchStatistic(true), false));
         }
 
+        public bool IsRefreshing { get; set; }
+
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public MatchStatisticItem MainStatistic { get; private set; }
@@ -48,6 +50,7 @@
             SubStatisticItems = matchStatistic.GetSubStatisticItems();
 
             IsNoData = MainStatistic.IsHidden && !SubStatisticItems.Any();
+            IsRefreshing = false;
         }
 
         public override async void OnAppearing() => await LoadMatchStatistic();

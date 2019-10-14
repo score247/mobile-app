@@ -30,6 +30,9 @@
             ItemsSource="{Binding SubStatisticItems}"
             IsVisible="{Binding IsVisible}"
             Header="{Binding MainStatistic}"
+            IsPullToRefreshEnabled="true"
+            RefreshCommand="{Binding RefreshCommand}"
+            IsRefreshing="{Binding IsRefreshing}"
             Footer=""
             VerticalOptions="FillAndExpand">
             <ListView.FooterTemplate>
