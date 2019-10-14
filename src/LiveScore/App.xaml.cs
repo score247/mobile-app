@@ -7,13 +7,6 @@ using LiveScore.Common.Services;
 using LiveScore.Configurations;
 using LiveScore.Core.Events;
 using LiveScore.Core.Services;
-using LiveScore.Features.Favorites;
-using LiveScore.Features.League;
-using LiveScore.Features.Menu;
-using LiveScore.Features.News;
-using LiveScore.Features.Score;
-using LiveScore.Features.TVSchedule;
-using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
 using LiveScore.Views;
 using MethodTimer;
@@ -82,25 +75,18 @@ namespace LiveScore
             });
         }
 
-        protected override void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            containerRegistry
+        protected override void RegisterTypes(IContainerRegistry containerRegistry) 
+            => containerRegistry
                 .UseContainerInstance(Container)
                 .RegisterServices()
-                .RegisterNavigation();
-        }
+                .RegisterNavigation()
+                .Verify();
 
-        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
-        {
-            moduleCatalog.AddModule<SoccerModule>();
-
-            moduleCatalog.AddModule<ScoreModule>();
-            moduleCatalog.AddModule<LeagueModule>(InitializationMode.OnDemand);
-            moduleCatalog.AddModule<FavoritesModule>(InitializationMode.OnDemand);
-            moduleCatalog.AddModule<NewsModule>();
-            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
-            moduleCatalog.AddModule<MenuModule>();
-        }
+        protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog) 
+            => moduleCatalog
+                .AddProductModules()
+                .AddFeatureModules()
+                .Verify();
 
         private async Task StartEventHubs()
         {

@@ -8,12 +8,20 @@ using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
+using LiveScore.Features.Favorites;
+using LiveScore.Features.League;
+using LiveScore.Features.Menu;
+using LiveScore.Features.News;
+using LiveScore.Features.Score;
+using LiveScore.Features.TVSchedule;
+using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MessagePack.Resolvers;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
+using Prism.Modularity;
 using Refit;
 using Xamarin.Forms;
 
@@ -48,8 +56,6 @@ namespace LiveScore.Configurations
                 Configuration.Environment);
 
             containerRegistry.RegisterInstance<ILoggingService>(logService);
-
-
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
@@ -89,6 +95,51 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
 
             return containerRegistry;
+        }
+
+        public static void Verify(this IContainerRegistry containerRegistry)
+        {
+            if (Container == null || containerRegistry == null)
+            {
+                throw new InvalidOperationException(nameof(Container));
+            }
+        }
+
+        public static IModuleCatalog AddFeatureModules(this IModuleCatalog moduleCatalog)
+        {
+            if (moduleCatalog == null)
+            {
+                throw new ArgumentNullException(nameof(moduleCatalog));
+            }
+
+            moduleCatalog.AddModule<ScoreModule>();
+            moduleCatalog.AddModule<LeagueModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<FavoritesModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<MenuModule>();
+
+            return moduleCatalog;
+        }
+
+        public static IModuleCatalog AddProductModules(this IModuleCatalog moduleCatalog)
+        {
+            if (moduleCatalog == null)
+            {
+                throw new ArgumentNullException(nameof(moduleCatalog));
+            }
+
+            moduleCatalog.AddModule<SoccerModule>(nameof(SoccerModule));
+
+            return moduleCatalog;
+        }
+
+        public static void Verify(this IModuleCatalog moduleCatalog)
+        {
+            if (!moduleCatalog.Exists(nameof(SoccerModule)))
+            {
+                throw new InvalidOperationException($"Module {nameof(SoccerModule)} doest not exist");
+            }
         }
     }
 }
