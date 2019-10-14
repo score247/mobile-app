@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Common.Services
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using Fanex.Caching;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Fanex.Caching;
 
+namespace LiveScore.Common.Services
+{
     public static class CacheDuration
     {
         public const int Short = 120; // 120 seconds

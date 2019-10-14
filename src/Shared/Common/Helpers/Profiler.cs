@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Common.Helpers
-{
-    using System.Collections.Concurrent;
-    using System.Diagnostics;
+﻿using System.Collections.Concurrent;
+using System.Diagnostics;
 
+namespace LiveScore.Common.Helpers
+{
     public static class Profiler
     {
         private static readonly ConcurrentDictionary<string, Stopwatch> watches = new ConcurrentDictionary<string, Stopwatch>();

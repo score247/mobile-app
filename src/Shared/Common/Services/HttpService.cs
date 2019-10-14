@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Common.Services
-{
-    using System;
-    using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 
+namespace LiveScore.Common.Services
+{
     public interface IHttpService
     {
         HttpClient HttpClient { get; }

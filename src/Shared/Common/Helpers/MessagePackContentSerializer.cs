@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Common.Helpers
-{
-    using System.Net.Http;
-    using System.Threading.Tasks;
-    using MessagePack;
-    using Refit;
+﻿using System.Net.Http;
+using System.Threading.Tasks;
+using MessagePack;
+using Refit;
 
+namespace LiveScore.Common.Helpers
+{
     public class MessagePackContentSerializer : IContentSerializer
     {
         public async Task<T> DeserializeAsync<T>(HttpContent content)

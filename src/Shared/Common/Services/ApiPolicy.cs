@@ -1,14 +1,14 @@
-﻿namespace LiveScore.Common.Services
-{
-    using System;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Net;
-    using System.Threading.Tasks;
-    using Polly;
-    using Polly.Retry;
-    using Refit;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Polly;
+using Polly.Retry;
+using Refit;
 
+namespace LiveScore.Common.Services
+{
     public interface IApiPolicy
     {
         Func<int, TimeSpan> SleepDurationProvider { get; }
