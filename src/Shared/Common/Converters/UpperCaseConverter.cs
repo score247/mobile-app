@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Common.Converters
+namespace LiveScore.Common.Converters
 {
     using System;
     using System.Globalization;
@@ -8,12 +8,12 @@
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.ToString().ToUpperInvariant();
+            return value?.ToString().ToUpperInvariant();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value.ToString();
+            return value?.ToString();
         }
     }
 }
