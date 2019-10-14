@@ -111,8 +111,8 @@
             <Color x:Key="TabColor">#CBCBCB</Color>
             <Color x:Key="ActiveTabColor">#FF7246</Color>
             <Color x:Key="ActiveLineColor">#FF7246</Color>
-            <x:Double x:Key="TabFontSize">11</x:Double>
-            <Color x:Key="InactiveLineColor">#0B0D14</Color>
+            <x:Double x:Key="TabFontSize">13</x:Double>
+            <Color x:Key="InactiveLineColor">#121315</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
 
             <Color x:Key="SubTabContainerBgColor">#272830</Color>

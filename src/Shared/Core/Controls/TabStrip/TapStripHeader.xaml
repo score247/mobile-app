@@ -9,7 +9,7 @@
             <Setter Property="Orientation" Value="Horizontal" />
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
             <Setter Property="BackgroundColor" Value="{StaticResource TabLayoutBgColor}" />
-            <Setter Property="Margin" Value="0,25,0,0" />
+            <Setter Property="Margin" Value="0,8,0,0" />
         </Style>
         <Style
             x:Key="NavTabs"
@@ -18,10 +18,13 @@
             <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
         </Style>
         <Style x:Key="Tab" TargetType="StackLayout">
+            <Setter Property="VerticalOptions" Value="Fill" />
             <Setter Property="WidthRequest" Value="72" />
             <Setter Property="FlexLayout.Grow" Value="1" />
+            <Setter Property="Padding" Value="0,18,0,0" />
         </Style>
         <Style x:Key="TabText" TargetType="Label">
+            <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
             <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
             <Setter Property="TextColor" Value="{StaticResource TabColor}" />
             <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -34,8 +37,7 @@
             <Setter Property="TextColor" Value="{StaticResource ActiveTabColor}" />
         </Style>
         <Style x:Key="TabLine" TargetType="BoxView">
-            <Setter Property="HeightRequest" Value="1" />            
-            <!--<Setter Property="AbsoluteLayout.LayoutFlags" Value="HeightProportional" />-->
+            <Setter Property="HeightRequest" Value="1" />
         </Style>
         <Style
             x:Key="TabActiveLine"
@@ -47,130 +49,8 @@
             x:Key="TabInactiveLine"
             BasedOn="{StaticResource TabLine}"
             TargetType="BoxView">
-            <Setter Property="BackgroundColor" Value="{StaticResource LineColor}" />
+            <Setter Property="BackgroundColor" Value="{StaticResource InactiveLineColor}" />
         </Style>
-        <!--Font Icon Resources-->
-
-        <Style x:Key="TabFontIcon" BasedOn="{StaticResource Icons}"
-                   TargetType="Label">
-            <Setter Property="TextColor"
-                        Value="#999" />
-            <Setter Property="HorizontalTextAlignment" Value="Center" />
-            <Setter Property="VerticalTextAlignment" Value="Center" />
-            <Setter Property="Margin" Value="0,0,0,4" />
-            <Setter Property="HeightRequest" Value="16" />
-        </Style>
-
-        <Style x:Key="TabOddsIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe911;" />
-
-            <Setter Property="FontSize"
-                        Value="13" />
-        </Style>
-        <Style x:Key="TabActiveOddsIcon" BasedOn="{StaticResource TabOddsIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabInfoIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe905;" />
-
-            <Setter Property="FontSize"
-                        Value="13" />
-        </Style>
-        <Style x:Key="TabActiveInfoIcon" BasedOn="{StaticResource TabInfoIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabTrackerIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe90e;" />
-
-            <Setter Property="FontSize"
-                        Value="13" />
-        </Style>
-        <Style x:Key="TabActiveTrackerIcon" BasedOn="{StaticResource TabTrackerIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabStatsIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe915;" />
-            <Setter Property="FontSize" Value="17" />
-        </Style>
-        <Style x:Key="TabActiveStatsIcon" BasedOn="{StaticResource TabStatsIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabLine-upsIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe910;" />
-
-            <Setter Property="FontSize"
-                        Value="13" />
-        </Style>
-        <Style x:Key="TabActiveLine-upsIcon" BasedOn="{StaticResource TabLine-upsIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabH2HIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe918;" />
-            <Setter Property="FontSize" Value="17" />
-        </Style>
-        <Style x:Key="TabActiveH2HIcon" BasedOn="{StaticResource TabH2HIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabTableIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe90b;" />
-            <Setter Property="FontSize" Value="12" />
-        </Style>
-        <Style x:Key="TabActiveTableIcon" BasedOn="{StaticResource TabTableIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabSocialIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe90f;" />
-
-            <Setter Property="FontSize"
-                        Value="14" />
-        </Style>
-        <Style x:Key="TabActiveSocialIcon" BasedOn="{StaticResource TabSocialIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <Style x:Key="TabTVIcon" BasedOn="{StaticResource TabFontIcon}"
-                   TargetType="Label">
-            <Setter Property="Text"
-                        Value="&#xe925;" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-        <Style x:Key="TabActiveTVIcon" BasedOn="{StaticResource TabTVIcon}"
-                   TargetType="Label">
-            <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
-        </Style>
-
-        <!--Font Icon Resources-->
     </ContentView.Resources>
     <ContentView.Content>
         <ScrollView x:Name="scrollView" Style="{StaticResource ScrollTab}">

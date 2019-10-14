@@ -60,21 +60,15 @@
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
 
-                var itemFontIcon = new Label
-                {
-                    Style = index == 0 ? (Style)control.Resources[$"TabActive{item.TabHeaderTitle}Icon"] : (Style)control.Resources[$"Tab{item.TabHeaderTitle}Icon"]
-                };
-
                 Debug.WriteLine($"TabStrip Header {item.TabHeaderTitle}");
 
                 var itemLabel = new Label
                 {
-                    Text = item.TabHeaderTitle.ToUpperInvariant(),
+                    Text = item.TabHeaderTitle,
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
                 var activeTabIndicator = CreateTabIndicator(control, index);
 
-                itemLayout.Children.Add(itemFontIcon);
                 itemLayout.Children.Add(itemLabel);
                 itemLayout.Children.Add(activeTabIndicator);
                 control.scrollLayOut.Children.Add(itemLayout);
@@ -112,22 +106,22 @@
         public void SetSelectedTab(int oldIndex, int newIndex)
         {
             var tabHeaders = scrollLayOut.Children;
-            var oldTabModel = ItemsSource.ToList()[oldIndex];
+            //var oldTabModel = ItemsSource.ToList()[oldIndex];
 
             if (tabHeaders[oldIndex] is StackLayout oldTab)
             {
-                oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
-                oldTab.Children[1].Style = (Style)Resources["TabText"];
-                ((ContentView)oldTab.Children[2]).Content.Style = (Style)Resources["TabInactiveLine"];
+                //oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
+                oldTab.Children[0].Style = (Style)Resources["TabText"];
+                ((ContentView)oldTab.Children[1]).Content.Style = (Style)Resources["TabInactiveLine"];
             }
 
-            var newTabModel = ItemsSource.ToList()[newIndex];
+            //var newTabModel = ItemsSource.ToList()[newIndex];
 
             if (tabHeaders[newIndex] is StackLayout newTab)
             {
-                newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
-                newTab.Children[1].Style = (Style)Resources["TabActiveText"];
-                ((ContentView)newTab.Children[2]).Content.Style = (Style)Resources["TabActiveLine"];
+                //newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
+                newTab.Children[0].Style = (Style)Resources["TabActiveText"];
+                ((ContentView)newTab.Children[1]).Content.Style = (Style)Resources["TabActiveLine"];
             }
 
             scrollView.ScrollToAsync(tabHeaders[newIndex], ScrollToPosition.Center, true);
