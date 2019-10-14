@@ -9,45 +9,35 @@
         <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
         <Setter Property="Padding" Value="8,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
-        <Setter Property="Margin" Value="0,2,0,0" />
     </Style>
     <Style x:Key="MatchBallTrackerContentLayout" TargetType="RelativeLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
         <Setter Property="HorizontalOptions" Value="Center" />
     </Style>
-    <Style x:Key="MatchBallTrackerWebViewContainer" TargetType="FlexLayout">
-        <Setter Property="JustifyContent" Value="Center" />
-    </Style>
     <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">
         <Setter Property="HorizontalOptions" Value="Fill" />
         <Setter Property="WidthRequest" Value="1000" />
         <Setter Property="HeightRequest" Value="500" />
+        <Setter Property="Margin" Value="0" />
     </Style>
     <Style x:Key="MatchBallTrackerGroupIcon" BasedOn="{StaticResource ButtonIcon}" TargetType="Button">
-        <Setter Property="HeightRequest" Value="22" />
-        <Setter Property="WidthRequest" Value="22" />
-        <Setter Property="BackgroundColor" Value="#fff" />
-        <Setter Property="CornerRadius" Value="4" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="TextColor" Value="#0F111C" />
-        <Setter Property="RelativeLayout.XConstraint" Value="{ConstraintExpression
-                        Type=RelativeToParent,
-                        Property=Width,
-                        Factor=1,
-                        Constant=-31
-                        }" />
-        <Setter Property="RelativeLayout.YConstraint" Value="{ConstraintExpression
-                        Type=RelativeToParent,
-                        Property=Height,
-                        Factor=0,
-                        Constant=10
-                        }" />
+        <Setter Property="HeightRequest" Value="15" />
+        <Setter Property="WidthRequest" Value="15" />
+        <Setter Property="CornerRadius" Value="3" />
+        <Setter Property="FontSize" Value="10" />        
+        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
+        <Setter Property="VerticalOptions" Value="Start" />
     </Style>
     <Style x:Key="MatchBallTrackerCollapseIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Button">
         <Setter Property="Text" Value="&#xe90c;" />
+        <Setter Property="BackgroundColor" Value="#fff" />
+        <Setter Property="TextColor" Value="#0F111C" />
+        <Setter Property="Margin" Value="0,4,4,0" />
     </Style>
     <Style x:Key="MatchBallTrackerExpandIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Button">
         <Setter Property="Text" Value="&#xe926;" />
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
     <!-- commentaries -->

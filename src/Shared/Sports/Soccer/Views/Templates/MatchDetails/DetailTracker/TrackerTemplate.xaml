@@ -24,31 +24,35 @@
                     IsVisible="{Binding NoData}"
                     Text="There is no data" />
 
-                <RelativeLayout
-                    IsVisible="{Binding HasTrackerData}"
-                    Style="{StaticResource MatchBallTrackerContentLayout}">
+                <Grid IsVisible="{Binding HasTrackerData}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
                     <FlexLayout
-                        Style="{StaticResource MatchBallTrackerWebViewContainer}"
+                        Grid.Column="0"
+                        Grid.Row="0"
                         IsVisible="{Binding TrackerVisible}">
                         <WebView
                             Source="{Binding WidgetContent}"
                             Style="{StaticResource MatchBallTrackerWebView}" />
                     </FlexLayout>
-
-                    <FlexLayout
-                        Style="{StaticResource MatchBallTrackerGroup}"
-                        IsVisible="{Binding TrackerHidden}">
-                        <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
-                        <Button
-                            Style="{StaticResource MatchBallTrackerExpandIcon}"
-                            Command="{Binding OnExpandTracker}" />
-                    </FlexLayout>
-                    <BoxView Style="{StaticResource HorizontalLine}" IsVisible="{Binding TrackerVisible}" />
-
-                    <Button IsVisible="{Binding TrackerVisible}"
+                    <Button  Grid.Column="0"
+                        Grid.Row="0" IsVisible="{Binding TrackerVisible}"
                             Style="{StaticResource MatchBallTrackerCollapseIcon}"
                             Command="{Binding OnCollapseTracker}" />
-                </RelativeLayout>
+                </Grid>
+                <FlexLayout
+                        Style="{StaticResource MatchBallTrackerGroup}"
+                        IsVisible="{Binding TrackerHidden}">
+                    <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
+                    <Button
+                            Style="{StaticResource MatchBallTrackerExpandIcon}"
+                            Command="{Binding OnExpandTracker}" />
+                </FlexLayout>
+                <BoxView Style="{StaticResource HorizontalLine}" IsVisible="{Binding TrackerHidden}" />
 
                 <!--  COMMENTARIES  --><!--
 
