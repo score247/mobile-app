@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Matches;
 
@@ -37,12 +36,22 @@ namespace LiveScore.Core.ViewModels
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrWhiteSpace(Match.LeagueId))
+            if (string.IsNullOrWhiteSpace(LeagueId))
             {
-                Debug.WriteLine($"Match has empty Leguage Id:{Match.Id} {Match.HomeTeamName} vs {Match.AwayTeamName}");
+                if (string.IsNullOrWhiteSpace(LeagueName))
+                {
+                    if (string.IsNullOrWhiteSpace(CountryCode))
+                    {
+                        return Match.GetHashCode();
+                    }
+
+                    return CountryCode.GetHashCode();
+                }
+
+                return LeagueName.GetHashCode();
             }
 
-            return LeagueId?.GetHashCode() ?? 0;
+            return LeagueId.GetHashCode();
         }
     }
 }

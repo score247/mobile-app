@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.Services
-{
-    using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
+namespace LiveScore.Core.Services
+{
     public interface IHubService
     {
         Task Start();

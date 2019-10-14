@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Services
-{
-    using System;
-    using LiveScore.Common.Services;
-    using Refit;
+﻿using System;
+using LiveScore.Common.Services;
+using Refit;
 
+namespace LiveScore.Core.Services
+{
     public class BaseService
     {
         protected readonly ILoggingService LoggingService;
@@ -19,7 +19,7 @@
             {
                 var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
 
-                LoggingService.LogExceptionAsync(apiException);
+                LoggingService.LogExceptionAsync(message, apiException);
             }
             else
             {

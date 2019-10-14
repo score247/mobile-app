@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Services
-{
-    using System.Collections.Generic;
-    using Enumerations;
-    using Models;
+﻿using System.Collections.Generic;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models;
 
+namespace LiveScore.Core.Services
+{
     public interface ISportService
     {
         IEnumerable<SportItem> GetSportItems();

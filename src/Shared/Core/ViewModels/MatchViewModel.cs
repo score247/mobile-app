@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Core.ViewModels
-{
-    using Converters;
-    using Events;
-    using Models.Matches;
-    using Models.Teams;
-    using Prism.Events;
-    using PropertyChanged;
+﻿using LiveScore.Core.Converters;
+using LiveScore.Core.Events;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
+using Prism.Events;
+using PropertyChanged;
 
+namespace LiveScore.Core.ViewModels
+{
     [AddINotifyPropertyChangedInterface]
     public class MatchViewModel
     {
