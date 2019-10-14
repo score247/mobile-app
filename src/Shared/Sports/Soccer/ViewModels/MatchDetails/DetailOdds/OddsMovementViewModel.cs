@@ -38,7 +38,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         private BetType betType;
 
         private readonly IOddsService oddsService;
-        private readonly IEventAggregator eventAggregator;
 
         [Time]
         public OddsMovementViewModel(
@@ -46,15 +45,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
-        {
-            this.eventAggregator = eventAggregator;
+        {      
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
-
-            HasData = false;
+            
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
-
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
         }
 
         public bool IsRefreshing { get; set; }
@@ -84,11 +79,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 Title = $"{bookmaker?.Name} - {AppResources.ResourceManager.GetString(betType.ToString())} Odds".ToUpperInvariant();
 
                 HeaderTemplate = new BaseMovementHeaderViewModel(betType, true, NavigationService, DependencyResolver).CreateTemplate();
-
-                if (EventAggregator != null)
-                {
-                    EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
-                }
             }
             catch (Exception ex)
             {
@@ -107,6 +97,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                     await LoadDataAsync(async () => await FirstLoadOrRefreshOddsMovement());
                     isFirstLoad = false;
                 }
+
+                SubscribeEvents();
             }
             catch (Exception ex)
             {
@@ -117,6 +109,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         public override async void OnResumeWhenNetworkOK()
         {
             await ReloadPage();
+
+            SubscribeEvents();
         }
 
         private async Task ReloadPage()
@@ -127,29 +121,54 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
             }
-
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Subscribe(HandleOddsMovementMessage, ThreadOption.UIThread);
         }
 
         public override void OnSleep()
         {
             Debug.WriteLine("OddsMovementViewModel OnSleep");
 
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
+            UnsubscribeEvents();
         }
 
-        public override void Destroy()
+        public override void OnDisappearing()
         {
-            Debug.WriteLine("OddsMovementViewModel Destroy");
+            base.OnDisappearing();
 
-            eventAggregator.GetEvent<OddsMovementPubSubEvent>().Unsubscribe(HandleOddsMovementMessage);
+            Debug.WriteLine("OddsMovementViewModel OnDisappearing");
 
+            UnsubscribeEvents();
+        }
+
+        private void SubscribeEvents()
+        {
             if (EventAggregator != null)
             {
-                EventAggregator
-                    .GetEvent<ConnectionChangePubSubEvent>()
-                    .Unsubscribe(OnConnectionChangedBase);
+                return;
             }
+
+            EventAggregator
+                .GetEvent<OddsMovementPubSubEvent>()
+                .Subscribe(HandleOddsMovementMessage);
+
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Subscribe(OnConnectionChangedBase);
+        }
+
+        private void UnsubscribeEvents()
+        {
+            if (EventAggregator != null)
+            {
+                return;
+            }
+
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Unsubscribe(OnConnectionChangedBase);
+
+            EventAggregator
+                .GetEvent<OddsMovementPubSubEvent>()
+                .Unsubscribe(HandleOddsMovementMessage);
         }
 
         [Time]
@@ -167,7 +186,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var matchOddsMovement = await oddsService.GetOddsMovement(base.CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew).ConfigureAwait(false);
+            var matchOddsMovement = await oddsService
+                .GetOddsMovement(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew)
+                .ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {

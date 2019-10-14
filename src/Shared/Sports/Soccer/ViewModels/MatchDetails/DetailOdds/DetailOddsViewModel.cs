@@ -30,7 +30,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
-        private readonly IEventAggregator eventAggregator;
 
         public DetailOddsViewModel(
             string matchId,
@@ -44,8 +43,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             Debug.WriteLine($"MatchId {matchId}");
 
             this.matchId = matchId;
-            this.eventStatus = eventStatus;
-            this.eventAggregator = eventAggregator;
+            this.eventStatus = eventStatus;         
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
@@ -55,7 +53,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsRefreshing = false;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
-            this.eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread, true);
         }
 
         public bool IsRefreshing { get; set; }
@@ -107,15 +104,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public override async void OnAppearing()
         {
-            Debug.WriteLine("DetailOddsViewModel OnAppearing");
-
             try
             {
-                Debug.WriteLine("DetailOddsViewModel OnInitialized");
+                Debug.WriteLine("DetailOddsViewModel OnAppearing");
 
                 await LoadDataAsync(
                         () => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing))
                     .ConfigureAwait(false);
+
+                SubscribeEvents();
             }
             catch (Exception ex)
             {
@@ -131,6 +128,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         public override async void OnResumeWhenNetworkOK()
         {
             await ReloadPage();
+
+            SubscribeEvents();
         }
 
         private async Task ReloadPage()
@@ -141,22 +140,32 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 await LoadOddsByBetTypeAsync(oddsFormat, isRefresh: true).ConfigureAwait(false);
             }
-
-            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage, ThreadOption.UIThread);
         }
 
         public override void OnSleep()
         {
+            base.OnSleep();
+
             Debug.WriteLine("DetailOddsViewModel OnSleep");
-            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
+
+            UnsubscribeEvents();
         }
 
-        public override void Destroy()
+        public override void OnDisappearing()
         {
-            Debug.WriteLine("DetailOddsViewModel Destroy");
+            base.OnDisappearing();
 
-            eventAggregator.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
+            Debug.WriteLine("DetailOddsViewModel OnDisappearing");
+
+            UnsubscribeEvents();
         }
+
+        private void SubscribeEvents()
+            => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
+        
+        private void UnsubscribeEvents()
+            => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
+
 
         [Time]
         private async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType, bool isRefresh = false)
@@ -198,8 +207,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         internal void HandleOddsComparisonMessage(OddsComparisonMessage oddsComparisonMessage)
         {
-            LoggingService.LogInfo($"HandleOddsComparisonMessage {DateTime.Now} - Match {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType}");
-
             if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
                 || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)
             {

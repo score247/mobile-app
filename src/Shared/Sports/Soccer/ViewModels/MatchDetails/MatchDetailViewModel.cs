@@ -5,6 +5,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Common.LangResources;
@@ -83,73 +84,70 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public async override void Initialize(INavigationParameters parameters)
         {
+            Debug.WriteLine("MatchDetail Initialize");
+
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
             }
-
-            SubscribeEvents();
         }
 
         public override void OnResumeWhenNetworkOK()
         {
-            tabItemViewModels[selectedTabItem].OnResumeWhenNetworkOK();
+            Debug.WriteLine("MatchDetail OnResumeWhenNetworkOK");
 
             base.OnResumeWhenNetworkOK();
+
+            tabItemViewModels[selectedTabItem].OnResumeWhenNetworkOK();            
+
+            SubscribeEvents();
         }
 
         public override void OnSleep()
         {
+            base.OnSleep();
+
+            Debug.WriteLine("MatchDetail OnResumeWhenNetworkOK");
+
             tabItemViewModels[selectedTabItem].OnSleep();
 
-            base.OnSleep();
+            UnSubscribeEvents();
         }
 
         public override void OnDisappearing()
         {
             base.OnDisappearing();
 
-            tabItemViewModels[selectedTabItem].OnDisappearing();
+            Debug.WriteLine("MatchDetail OnDisappearing");
 
-            if (EventAggregator != null)
-            {
-                EventAggregator
-                    .GetEvent<ConnectionChangePubSubEvent>()
-                    .Unsubscribe(OnConnectionChangedBase);
-            }
+            tabItemViewModels[selectedTabItem].OnDisappearing();           
+
+            UnSubscribeEvents();
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
 
+            Debug.WriteLine("MatchDetail OnAppearing");
+
             if (selectedTabItem != null)
             {
                 tabItemViewModels[selectedTabItem].OnAppearing();
             }
 
-            if (EventAggregator != null)
-            {
-                EventAggregator.GetEvent<ConnectionChangePubSubEvent>().Subscribe(OnConnectionChangedBase);
-            }
+            SubscribeEvents();
         }
-
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            foreach (var tab in tabItemViewModels)
-            {
-                tab.Value.Destroy();
-            }
-
-            UnSubscribeEvents();
-        }
-
+  
         private void SubscribeEvents()
         {
+            if (EventAggregator != null)
+            {
+                return;
+            }
+
             EventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
                 .Subscribe(OnReceivedMatchEvent, true);
@@ -157,10 +155,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Subscribe(OnReceivedTeamStatistic, true);
+
+            EventAggregator
+                .GetEvent<ConnectionChangePubSubEvent>()
+                .Subscribe(OnConnectionChangedBase);
         }
 
         private void UnSubscribeEvents()
         {
+            if (EventAggregator != null)
+            {
+                return;
+            }
+
             EventAggregator
               .GetEvent<MatchEventPubSubEvent>()
               .Unsubscribe(OnReceivedMatchEvent);
@@ -168,6 +175,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
+
+            EventAggregator
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
         }
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
