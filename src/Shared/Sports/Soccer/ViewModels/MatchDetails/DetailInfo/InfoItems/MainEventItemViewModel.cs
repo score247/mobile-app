@@ -1,13 +1,13 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
-{
-    using LiveScore.Common.LangResources;
-    using LiveScore.Core;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Extensions;
-    using LiveScore.Soccer.Models.Matches;
-    using Prism.Navigation;
-    using Xamarin.Forms;
+﻿using LiveScore.Common.LangResources;
+using LiveScore.Core;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Extensions;
+using LiveScore.Soccer.Models.Matches;
+using Prism.Navigation;
+using Xamarin.Forms;
 
+namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+{
     public class MainEventItemViewModel : BaseItemViewModel
     {
         public MainEventItemViewModel(
@@ -21,9 +21,9 @@
 
         public string MainEventStatus { get; protected set; }
 
-        protected override void BuildInfo()
+        public override BaseItemViewModel BuildData()
         {
-            base.BuildInfo();
+            base.BuildData();
 
             if (Application.Current != null)
             {
@@ -35,31 +35,33 @@
             if (TimelineEvent.IsHalfTimeBreak())
             {
                 BuildHalfTime();
-                return;
+                return this;
             }
 
             if (IsFullTime())
             {
                 BuildFullTime();
-                return;
+                return this;
             }
 
             if (TimelineEvent.IsExtraTimeHalfTimeBreak())
             {
                 BuildExtraTimeHalfTime();
-                return;
+                return this;
             }
 
             if (IsAfterExtraTime())
             {
                 BuildAfterExtraTime();
-                return;
+                return this;
             }
 
             if (TimelineEvent.IsMatchEndAfterPenalty(MatchInfo.Match))
             {
                 BuildPenaltyShootOut();
             }
+
+            return this;
         }
 
         private void BuildHalfTime()

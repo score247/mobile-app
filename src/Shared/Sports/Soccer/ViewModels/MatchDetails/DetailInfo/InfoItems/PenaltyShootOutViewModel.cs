@@ -21,9 +21,9 @@
 
         public string AwayImageSource { get; private set; }
 
-        protected override void BuildInfo()
+        public override BaseItemViewModel BuildData()
         {
-            base.BuildInfo();
+            base.BuildData();
             var homeScore = TimelineEvent.ShootoutHomeScore;
             var awayScore = TimelineEvent.ShootoutAwayScore;
 
@@ -46,6 +46,8 @@
             }
 
             Score = $"{homeScore} - {awayScore}";
+
+            return this;
         }
     }
 }

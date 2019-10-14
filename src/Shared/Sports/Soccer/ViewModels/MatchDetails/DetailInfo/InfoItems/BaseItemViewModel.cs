@@ -49,7 +49,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             TimelineEvent = timelineEvent;
             MatchInfo = matchInfo;
             Match = matchInfo.Match;
-            BuildData();
             ItemAutomationId = $"{TimelineEvent.Id}-{TimelineEvent.Type}";
         }
 
@@ -79,19 +78,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public bool VisibleAwayImage { get; protected set; }
 
-        public BaseItemViewModel CreateInstance() =>
-            ViewModelMapper.ContainsKey(TimelineEvent.Type)
+        public static BaseItemViewModel CreateInstance(
+            TimelineEvent timelineEvent,
+            MatchInfo matchInfo,
+            INavigationService navigationService,
+            IDependencyResolver dependencyResolver) =>
+            ViewModelMapper.ContainsKey(timelineEvent.Type)
                 ? Activator.CreateInstance(
-                    ViewModelMapper[TimelineEvent.Type],
-                    TimelineEvent, MatchInfo, NavigationService, DependencyResolver) as BaseItemViewModel
-                : new BaseItemViewModel(TimelineEvent, MatchInfo, NavigationService, DependencyResolver);
+                    ViewModelMapper[timelineEvent.Type],
+                    timelineEvent, matchInfo, navigationService, dependencyResolver) as BaseItemViewModel
+                : new BaseItemViewModel(timelineEvent, matchInfo, navigationService, dependencyResolver);
 
         public DataTemplate CreateTemplate()
             => TemplateMapper.ContainsKey(TimelineEvent.Type)
             ? TemplateMapper[TimelineEvent.Type]
             : new MainEventItemTemplate();
 
-        protected virtual void BuildInfo()
+        public virtual BaseItemViewModel BuildData()
         {
             Score = $"{TimelineEvent.HomeScore} - {TimelineEvent.AwayScore}";
 
@@ -103,8 +106,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
                 ? $"{TimelineEvent.MatchTime}'"
                 : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}";
-        }
 
-        private void BuildData() => BuildInfo();
+            return this;
+        }
     }
 }

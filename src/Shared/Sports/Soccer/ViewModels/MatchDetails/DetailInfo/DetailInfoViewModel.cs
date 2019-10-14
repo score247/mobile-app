@@ -1,26 +1,26 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Soccer.Extensions;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Services;
+using MethodTimer;
+using Prism.Events;
+using Prism.Navigation;
+using Xamarin.Forms;
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
 namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.TabStrip;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.PubSubEvents.Matches;
-    using LiveScore.Soccer.Extensions;
-    using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Services;
-    using MethodTimer;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Xamarin.Forms;
-
     public class DetailInfoViewModel : TabItemViewModel
     {
         private const string SpectatorNumberFormat = "0,0";
@@ -120,7 +120,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 MatchInfo.UpdateTimelineEvents(new List<TimelineEvent>());
             }
 
-            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(new List<TimelineEvent> { matchEventMessage.MatchEvent.Timeline as TimelineEvent }));
+            MatchInfo.UpdateTimelineEvents(MatchInfo.TimelineEvents.Concat(
+                new List<TimelineEvent> { matchEventMessage.MatchEvent.Timeline as TimelineEvent }));
 
             BuildDetailInfo(MatchInfo);
         }
@@ -147,8 +148,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 .ToList();
 
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
-                soccerTimeline.Select(t => new BaseItemViewModel(t, MatchInfo, NavigationService, DependencyResolver)
-                    .CreateInstance()));
+                soccerTimeline.Select(t =>
+                    BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
         }
 
         private void BuildFooterInfo(MatchInfo matchInfo)

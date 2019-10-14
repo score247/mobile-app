@@ -14,11 +14,13 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly Images Goal = new Images("images/common/ball.png", nameof(Goal));
         public static readonly Images PenaltyShootoutGoal = new Images("images/common/ball.png", nameof(PenaltyShootoutGoal));
         public static readonly Images MissedPenaltyShootoutGoal = new Images("images/common/missed_goal.png", nameof(MissedPenaltyShootoutGoal));
-        public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
-        public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
         public static readonly Images GoalAssist = new Images("images/common/assist_goal.png", nameof(GoalAssist));
         public static readonly Images PenaltyGoal = new Images("images/common/penalty_goal.png", nameof(PenaltyGoal));
         public static readonly Images MissPenaltyGoal = new Images("images/common/missed_penalty_goal.png", nameof(PenaltyGoal));
+        public static readonly Images Substitution = new Images("images/common/substitution.png", nameof(Substitution));
+
+        public static readonly Images SecondLeg = new Images("images/common/second_leg_winner.png", nameof(SecondLeg));
+        public static readonly Images PenaltyWinner = new Images("images/common/penalty_winner.png", nameof(PenaltyWinner));
 
         public Images()
         {

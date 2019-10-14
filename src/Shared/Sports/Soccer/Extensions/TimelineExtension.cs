@@ -6,7 +6,7 @@ namespace LiveScore.Soccer.Extensions
 {
     public static class TimelineExtension
     {
-        private static readonly EventType[] DetailInfoEventTypes = new[] {
+        private static readonly EventType[] DetailInfoEventTypes = {
             EventType.ScoreChange,
             EventType.PenaltyMissed,
             EventType.YellowCard,
@@ -44,7 +44,7 @@ namespace LiveScore.Soccer.Extensions
         public static bool OfHomeTeam(this TimelineEvent timeline)
             => timeline?.Team == "home";
 
-        public static bool IsDetailInfoEvent(this TimelineEvent timeline) 
+        public static bool IsDetailInfoEvent(this TimelineEvent timeline)
             => DetailInfoEventTypes.Contains(timeline.Type);
     }
 }

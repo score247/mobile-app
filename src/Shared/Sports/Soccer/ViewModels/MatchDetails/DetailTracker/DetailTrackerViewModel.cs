@@ -1,50 +1,60 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailTracker
-{
-    using System.IO;
-    using System.Threading.Tasks;
-    using LiveScore.Common.PlatformDependency;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.TabStrip;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Models.Matches;
-    using Prism.Commands;
-    using Prism.Navigation;
-    using Xamarin.Forms;
+﻿using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using LiveScore.Common.PlatformDependency;
+using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Services;
+using Prism.Commands;
+using Prism.Navigation;
+using Xamarin.Forms;
 
+namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
+{
     internal class DetailTrackerViewModel : TabItemViewModel
     {
         private const string RemoveMatchPrefix = "sr:match:";
         private const string ReplacePrefix = "input-match-id";
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
-
         private const string LanguageCode = "en";
 
         private readonly MatchCoverage matchCoverage;
+        private readonly IMatchInfoService matchInfoService;
 
         public DetailTrackerViewModel(
             MatchCoverage coverage,
             INavigationService navigationService,
-            IDependencyResolver serviceLocator,
+            IDependencyResolver dependencyResolver,
             DataTemplate dataTemplate)
-            : base(navigationService, serviceLocator, dataTemplate)
+            : base(navigationService, dependencyResolver, dataTemplate)
         {
             matchCoverage = coverage;
-            TrackerVisible = true;
-            TrackerHidden = false;
+            matchInfoService = dependencyResolver.Resolve<IMatchInfoService>();
+            OnCollapseTracker = new DelegateCommand(CollapseTracker);
+            OnExpandTracker = new DelegateCommand(ExpandTracker);
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
 
-        public bool TrackerVisible { get; set; }
+        public ObservableCollection<CommentaryItemViewModel> MatchCommentaries { get; set; }
 
-        public bool TrackerHidden { get; set; }
+        public ObservableCollection<CommentaryItemViewModel> RemainingMatchCommentaries { get; set; }
 
-        public bool HasTrackerData { get; set; }
+        public bool TrackerVisible { get; private set; } = true;
 
-        public DelegateCommand OnCollapseTracker => new DelegateCommand(CollapseTracker);
+        public bool TrackerHidden => !TrackerVisible;
 
-        public DelegateCommand OnExpandTracker => new DelegateCommand(ExpandTracker);
+        public bool HasTrackerData { get; private set; }
+
+        public bool HasCommentariesData { get; private set; }
+
+        public DelegateCommand OnCollapseTracker { get; }
+
+        public DelegateCommand OnExpandTracker { get; }
 
         public override Task OnNetworkReconnected()
         {
@@ -57,7 +67,9 @@
         {
             base.OnAppearing();
 
-            if (matchCoverage != null && matchCoverage.Coverage != null && matchCoverage.Coverage.Live)
+            await LoadMatchCommentaries(true);
+
+            if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
                 {
@@ -66,6 +78,11 @@
 
                 HasTrackerData = true;
                 HasData = true;
+            }
+
+            if (matchCoverage?.Coverage?.Commentary == true)
+            {
+                await LoadMatchCommentaries(true);
             }
             else
             {
@@ -86,16 +103,16 @@
             return content;
         }
 
-        private void CollapseTracker()
-        {
-            TrackerVisible = false;
-            TrackerHidden = true;
-        }
+        private void CollapseTracker() => TrackerVisible = false;
 
-        private void ExpandTracker()
+        private void ExpandTracker() => TrackerVisible = true;
+
+        private async Task LoadMatchCommentaries(bool getLatestData = false)
         {
-            TrackerVisible = true;
-            TrackerHidden = false;
+            var commentaries = await matchInfoService.GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData);
+            var commentaryViewModels = commentaries.Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+
+            MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
         }
     }
 }

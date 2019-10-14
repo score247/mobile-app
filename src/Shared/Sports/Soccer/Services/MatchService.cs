@@ -28,8 +28,8 @@ namespace LiveScore.Soccer.Services
         [Get("/soccer/{language}/matches/{matchId}/coverage")]
         Task<MatchCoverage> GetMatchCoverage(string matchId, string language);
 
-        [Get("/soccer/{language}/matches/{matchId}/commentary")]
-        Task<MatchCommentary> GetMatchCommentary(string matchId, string language);
+        [Get("/soccer/{language}/matches/{matchId}/commentaries")]
+        Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, string language);
 
         [Get("/soccer/{language}/matches/{matchId}/statistic")]
         Task<MatchStatistic> GetMatchStatistic(string matchId, string language);
@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.Services
 
         Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false);
 
-        Task<MatchCommentary> GetMatchCommentary(string matchId, Language language, bool forceFetchNewData = false);
+        Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, Language language, bool forceFetchNewData = false);
 
         Task<MatchStatistic> GetMatchStatistic(string matchId, bool forceFetchNewData = false);
     }
@@ -50,17 +50,14 @@ namespace LiveScore.Soccer.Services
     {
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
-        private readonly ISoccerMatchApi soccerMatchApi;
 
         public MatchService(
             IApiService apiService,
             ICacheManager cacheManager,
-            ILoggingService loggingService,
-            ISoccerMatchApi soccerMatchApi = null) : base(loggingService)
+            ILoggingService loggingService) : base(loggingService)
         {
             this.apiService = apiService;
             this.cacheManager = cacheManager;
-            this.soccerMatchApi = soccerMatchApi ?? apiService.GetApi<ISoccerMatchApi>();
         }
 
         [Time]
@@ -76,12 +73,12 @@ namespace LiveScore.Soccer.Services
                     : CacheDuration.Long;
 
                 return await cacheManager.GetOrSetAsync(
-                   cacheKey,
-                   () => apiService.Execute(() => soccerMatchApi.GetMatches(
-                       dateTime.BeginningOfDay().ToApiFormat(),
-                       dateTime.EndOfDay().ToApiFormat(),
-                       language.DisplayName)), cacheDuration,
-                   getLatestData).ConfigureAwait(false);
+                    cacheKey,
+                    () => GetMatchesFromApi(
+                            dateTime.BeginningOfDay().ToApiFormat(),
+                            dateTime.EndOfDay().ToApiFormat(),
+                            language.DisplayName), cacheDuration,
+                    getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -152,15 +149,15 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchCommentary> GetMatchCommentary(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, Language language, bool forceFetchNewData = false)
         {
             try
             {
-                var cacheKey = $"Match:{matchId}:{language}:Commentary";
+                var cacheKey = $"Match:{matchId}:{language}:Commentaries";
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
-                        () => GetMatchCommentaryFromApi(matchId, language.DisplayName),
+                        () => GetMatchCommentariesFromApi(matchId, language.DisplayName),
                         CacheDuration.Short, forceFetchNewData)
                     .ConfigureAwait(false);
             }
@@ -168,29 +165,29 @@ namespace LiveScore.Soccer.Services
             {
                 HandleException(ex);
 
-                return new MatchCommentary();
+                return Enumerable.Empty<MatchCommentary>();
             }
         }
 
         [Time]
         private Task<IEnumerable<Match>> GetMatchesFromApi(string fromDateText, string toDateText, string language)
-            => apiService.Execute(() => soccerMatchApi.GetMatches(fromDateText, toDateText, language));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatches(fromDateText, toDateText, language));
 
         [Time]
         private Task<MatchInfo> GetMatchFromApi(string matchId, string language)
-            => apiService.Execute(() => soccerMatchApi.GetMatchInfo(matchId, language));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchInfo(matchId, language));
 
         [Time]
         private Task<IEnumerable<Match>> GetLiveMatchesFromApi(string language)
-            => apiService.Execute(() => soccerMatchApi.GetLiveMatches(language));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetLiveMatches(language));
 
         [Time]
         private Task<MatchCoverage> GetMatchCoverageFromApi(string matchId, string language)
-            => apiService.Execute(() => soccerMatchApi.GetMatchCoverage(matchId, language));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCoverage(matchId, language));
 
         [Time]
-        private Task<MatchCommentary> GetMatchCommentaryFromApi(string matchId, string language)
-            => apiService.Execute(() => soccerMatchApi.GetMatchCommentary(matchId, language));
+        private Task<IEnumerable<MatchCommentary>> GetMatchCommentariesFromApi(string matchId, string language)
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchCommentaries(matchId, language));
 
         public async Task<MatchStatistic> GetMatchStatistic(string matchId, bool forceFetchNewData = false)
         {
@@ -215,6 +212,6 @@ namespace LiveScore.Soccer.Services
 
         [Time]
         private Task<MatchStatistic> GetMatchStatisticFromApi(string matchId)
-            => apiService.Execute(() => soccerMatchApi.GetMatchStatistic(matchId, Language.English.DisplayName));
+            => apiService.Execute(() => apiService.GetApi<ISoccerMatchApi>().GetMatchStatistic(matchId, Language.English.DisplayName));
     }
 }

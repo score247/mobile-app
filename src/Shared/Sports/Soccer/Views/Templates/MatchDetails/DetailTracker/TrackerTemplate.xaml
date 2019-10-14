@@ -1,205 +1,98 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailTrackerViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
 
-    <ViewCell Height="1000">
-        <ScrollView  HeightRequest="1000">
-            <StackLayout>
-                <StackLayout.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.MergedDictionaries>
-                            <resources:MatchDetailViewResource />
-                            <resources:MatchDetailTrackerViewResource />
-                        </ResourceDictionary.MergedDictionaries>
-                    </ResourceDictionary>
-                </StackLayout.Resources>
-
-                <Label
-                    Style="{StaticResource NoInfo}"
-                    IsVisible="{Binding NoData}"
-                    Text="There is no data" />
-
-                <Grid IsVisible="{Binding HasTrackerData}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <FlexLayout
-                        Grid.Column="0"
-                        Grid.Row="0"
-                        IsVisible="{Binding TrackerVisible}">
-                        <WebView
-                            Source="{Binding WidgetContent}"
-                            Style="{StaticResource MatchBallTrackerWebView}" />
+        <Label Style="{StaticResource NoInfo}"
+               IsVisible="{Binding NoData}"
+               Text="There is no data" />
+        <tabStrip:TabITemListView BackgroundColor="{StaticResource ListViewBgColor}"
+                                  HasUnevenRows="True"
+                                  VerticalOptions="FillAndExpand"
+                                  ItemsSource="{Binding MatchCommentaries}"
+                                  SeparatorVisibility="None">
+            <tabStrip:TabITemListView.Header>
+                <StackLayout>
+                    <Grid IsVisible="{Binding HasTrackerData}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <FlexLayout Grid.Column="0"
+                                    Grid.Row="0"
+                                    IsVisible="{Binding TrackerVisible}">
+                            <WebView Source="{Binding WidgetContent}"
+                                     Style="{StaticResource MatchBallTrackerWebView}" />
+                        </FlexLayout>
+                        <Button  Grid.Column="0"
+                                 Grid.Row="0"
+                                 IsVisible="{Binding TrackerVisible}"
+                                 Style="{StaticResource MatchBallTrackerCollapseIcon}"
+                                 Command="{Binding OnCollapseTracker}" />
+                    </Grid>
+                    <FlexLayout Style="{StaticResource MatchBallTrackerGroup}"
+                                IsVisible="{Binding TrackerHidden}">
+                        <Label Text="VIEW BALL TRACKER"
+                               Style="{StaticResource GroupName}" />
+                        <Button Style="{StaticResource MatchBallTrackerExpandIcon}"
+                                Command="{Binding OnExpandTracker}" />
                     </FlexLayout>
-                    <Button  Grid.Column="0"
-                        Grid.Row="0" IsVisible="{Binding TrackerVisible}"
-                            Style="{StaticResource MatchBallTrackerCollapseIcon}"
-                            Command="{Binding OnCollapseTracker}" />
-                </Grid>
-                <FlexLayout
-                        Style="{StaticResource MatchBallTrackerGroup}"
-                        IsVisible="{Binding TrackerHidden}">
-                    <Label Text="VIEW BALL TRACKER" Style="{StaticResource GroupName}" />
-                    <Button
-                            Style="{StaticResource MatchBallTrackerExpandIcon}"
-                            Command="{Binding OnExpandTracker}" />
-                </FlexLayout>
-                <BoxView Style="{StaticResource HorizontalLine}" IsVisible="{Binding TrackerHidden}" />
+                    <BoxView Style="{StaticResource HorizontalLine}"
+                             IsVisible="{Binding TrackerHidden}" />
+                    <FlexLayout Style="{StaticResource Group}">
+                        <Label Style="{StaticResource GroupName}"
+                               Text="COMMENTARIES" />
+                    </FlexLayout>
+                </StackLayout>
+            </tabStrip:TabITemListView.Header>
+            <tabStrip:TabITemListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                </Grid.RowDefinitions>
 
-                <!--  COMMENTARIES  --><!--
-
-                <FlexLayout Style="{StaticResource Group}">
-                    <Label Style="{StaticResource GroupName}" Text="COMMENTARIES" />
-                </FlexLayout>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Time 90' --><!--
-
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Style="{StaticResource MatchTrackerMinutes}" Text="120'+20'" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Style="{StaticResource MatchTrackerCommentariesText}"
-                        Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Time 88' --><!--
-
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Style="{StaticResource MatchTrackerMinutes}" Text="88'" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Style="{StaticResource MatchTrackerCommentariesText}"
-                        Text="Steve Cook (AFC Bournemouth) gets a yellow card" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Time 79' --><!--
-
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0"
-                           Grid.Column="0"
-                           Style="{StaticResource MatchTrackerMinutes}" Text="79'" />
-                    <Image  Grid.Row="0"
-                        Grid.Column="1" Source="images/common/substitution.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                    <Label
-                        Grid.Row="0"
-                        Grid.Column="2"
-                        Style="{StaticResource MatchTrackerCommentariesText}"
-                        Text="Issa Diop (West Ham United) gets a yellow card" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Goal!  --><!--
-
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="74'" />
-                    <Image  Grid.Row="0"
-                        Grid.Column="1" Source="images/common/ball.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                    <Label Grid.Row="0"
-                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Goal! The home team take a 1-0 lead through Serge Gnabry. &#10; That's a fine assist from Lukas Klostermann." />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Goal  --><!--
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="46'" />
-                    <Image  Grid.Row="0"
-                        Grid.Column="1" Source="images/common/ball.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                    <Label Grid.Row="0"
-                        Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Callum Wilson scores with assist from Joshua King for AFC Bournemouth. The score is now 2 - 1" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Yellow card  --><!--
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="40'" />
-                    <Image  Grid.Row="0"
-                        Grid.Column="1" Source="images/common/yellow_card.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                    <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Jefferson Lerma (AFC Bournemouth) gets a yellow card " />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                --><!--  Red card  --><!--
-                <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
-                        <ColumnDefinition Width="{StaticResource CommentaryIconWidthSize}" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto" />
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource MatchTrackerMinutes}" Text="35'" />
-                    <Image  Grid.Row="0"
-                        Grid.Column="1" Source="images/common/red_card.png" Style="{StaticResource MatchTrackerCommentariesIcons}" />
-                    <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource MatchTrackerHighlightCommentariesText}" Text="Steve Cook (AFC Bournemouth) gets a red card " />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />-->
-            </StackLayout>
-        </ScrollView>
-    </ViewCell>
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Style="{StaticResource MatchTrackerMinutes}"
+                                       Text="{Binding MatchTime}" />
+                                <Image  Grid.Row="0"
+                                        Grid.Column="1"
+                                        Source="{Binding ImageSource}"
+                                        Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Style="{StaticResource MatchTrackerCommentariesText}"
+                                       Text="{Binding CommentaryText}" />
+                            </Grid>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </tabStrip:TabITemListView.ItemTemplate>
+        </tabStrip:TabITemListView>
+    </StackLayout>
 </DataTemplate>

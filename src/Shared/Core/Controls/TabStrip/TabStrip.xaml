@@ -19,6 +19,7 @@
             <cards:CarouselView x:Name="TabContent"
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
+                                IsClippedToBounds="True"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}"

@@ -1,4 +1,7 @@
-﻿namespace LiveScore.Soccer
+﻿using ImTools;
+using LiveScore.Soccer.Converters.TimelineImages;
+
+namespace LiveScore.Soccer
 {
     using Converters;
     using LiveScore.Core.Converters;
@@ -36,6 +39,10 @@
             containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportType.Soccer.Value.ToString());
             containerRegistry.Register<IMatchMinuteConverter, MatchMinuteConverter>(SportType.Soccer.Value.ToString());
+
+            containerRegistry.Register<ITimelineEventImageConverter, DefaultEventImageConverter>();
+            containerRegistry.Register<ITimelineEventImageConverter, ScoreChangeImageConverter>(
+                EventType.ScoreChange.Value.ToString());
         }
     }
 }

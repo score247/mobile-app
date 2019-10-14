@@ -1,28 +1,22 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using LiveScore.Core;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Extensions;
-    using LiveScore.Soccer.Models.Matches;
-    using Prism.Navigation;
+﻿using System.Linq;
+using LiveScore.Core;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Extensions;
+using LiveScore.Soccer.Models.Matches;
+using Prism.Navigation;
 
+namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+{
     public class DefaultItemViewModel : BaseItemViewModel
     {
-        private static readonly IDictionary<EventType, string> EventImages = new Dictionary<EventType, string>
-        {
-            { EventType.YellowCard, Enumerations.Images.YellowCard.Value },
-            { EventType.YellowRedCard, Enumerations.Images.RedYellowCard.Value },
-            { EventType.RedCard, Enumerations.Images.RedCard.Value },
-            { EventType.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
-        };
-
         private static readonly EventType[] VisibleScoreEvents =
         {
             EventType.PenaltyMissed
         };
+
+        private readonly ITimelineEventImageConverter imageConverter;
 
         public DefaultItemViewModel(
             TimelineEvent timelineEvent,
@@ -31,17 +25,20 @@
             IDependencyResolver dependencyResolver)
              : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
+            imageConverter = DependencyResolver.Resolve<ITimelineEventImageConverter>();
         }
 
-        protected override void BuildInfo()
+        public override BaseItemViewModel BuildData()
         {
-            base.BuildInfo();
+            base.BuildData();
 
             if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type.DisplayName))
             {
-                if (EventImages.ContainsKey(TimelineEvent.Type))
+                var imageSource = imageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent.Type));
+
+                if (!string.IsNullOrEmpty(imageSource))
                 {
-                    ImageSource = EventImages[TimelineEvent.Type];
+                    ImageSource = imageSource;
                 }
 
                 if (VisibleScoreEvents.Contains(TimelineEvent.Type))
@@ -60,6 +57,8 @@
                 AwayPlayerName = TimelineEvent?.Player?.Name;
                 VisibleAwayImage = true;
             }
+
+            return this;
         }
     }
 }

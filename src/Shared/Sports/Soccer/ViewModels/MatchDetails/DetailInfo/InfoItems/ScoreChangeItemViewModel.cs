@@ -1,21 +1,16 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
-{
-    using System.Collections.Generic;
-    using LiveScore.Core;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.Extensions;
-    using LiveScore.Soccer.Models.Matches;
-    using Prism.Navigation;
+﻿using LiveScore.Core;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Enumerations;
+using LiveScore.Soccer.Extensions;
+using LiveScore.Soccer.Models.Matches;
+using Prism.Navigation;
 
+namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+{
     public class ScoreChangeItemViewModel : BaseItemViewModel
     {
-        private static readonly IDictionary<string, string> GoalImages = new Dictionary<string, string>
-        {
-            { GoalMethod.OwnGoal, Images.OwnGoal.Value },
-            { GoalMethod.Penalty, Images.PenaltyGoal.Value },
-            { string.Empty, Images.Goal.Value },
-        };
+        private readonly ITimelineEventImageConverter imageConverter;
 
         public ScoreChangeItemViewModel(
             TimelineEvent timelineEvent,
@@ -24,6 +19,7 @@
             IDependencyResolver dependencyResolver)
              : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
+            imageConverter = DependencyResolver.Resolve<ITimelineEventImageConverter>(timelineEvent.Type.Value.ToString());
         }
 
         public string HomeAssistName { get; private set; }
@@ -36,17 +32,15 @@
 
         public string GoalAssistImageSource { get; private set; }
 
-        protected override void BuildInfo()
+        public override BaseItemViewModel BuildData()
         {
-            base.BuildInfo();
+            base.BuildData();
 
-            var goalMethod = TimelineEvent?.GoalScorer?.Method ?? string.Empty;
             IsVisibleHomeAssist = TimelineEvent?.Assist != null && TimelineEvent.OfHomeTeam();
             IsVisibleAwayAssist = TimelineEvent?.Assist != null && !TimelineEvent.OfHomeTeam();
 
-            ImageSource = GoalImages.ContainsKey(goalMethod)
-                ? GoalImages[goalMethod]
-                : Images.Goal.Value; // Have case header
+            ImageSource = imageConverter.BuildImageSource(
+                new TimelineEventImage(TimelineEvent?.Type, TimelineEvent?.GoalScorer));
 
             if (TimelineEvent.OfHomeTeam())
             {
@@ -56,6 +50,8 @@
             {
                 BuildAwayInfo();
             }
+
+            return this;
         }
 
         private void BuildAwayInfo()

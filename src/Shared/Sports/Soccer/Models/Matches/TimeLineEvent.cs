@@ -1,6 +1,7 @@
 ﻿using System;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Teams;
+using LiveScore.Soccer.Models.Matches;
 using MessagePack;
 
 namespace LiveScore.Core.Models.Matches
