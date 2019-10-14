@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
-    BackgroundColor="{StaticResource PrimaryColor}"
+    BackgroundColor="#202124"
     mc:Ignorable="d">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate CurrentSport="{Binding CurrentSportName}" />
@@ -16,7 +16,7 @@
 
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand" Padding="0">
+                     VerticalOptions="FillAndExpand" Margin="0,12,0,0" BackgroundColor="{StaticResource PrimaryColor}">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -26,8 +26,6 @@
                     <templateSelectors:OddsMovementItemTemplateSelector x:Key="OddsMovementItemTemplateSelector" />
                 </ResourceDictionary>
             </StackLayout.Resources>
-
-            <BoxView Style="{StaticResource HorizontalLine}" />
 
             <Frame Style="{StaticResource MatchDetailOddsMovementTitleLayout}">
                 <Label Style="{StaticResource MatchDetailOddsMovementTitleLable}" Text="{Binding Title}" />
