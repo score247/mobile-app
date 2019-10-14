@@ -41,7 +41,7 @@
             <ListView
                 AutomationId="MatchOddsMovement"
                 AutomationProperties.IsInAccessibleTree="False"
-                BackgroundColor="{StaticResource ListViewBgColor}"
+                BackgroundColor="{StaticResource ListViewLightBgColor}"
                 CachingStrategy="RecycleElement"
                 GroupHeaderTemplate="{Binding HeaderTemplate}"
                 HasUnevenRows="true"

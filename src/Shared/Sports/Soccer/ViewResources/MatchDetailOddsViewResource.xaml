@@ -18,7 +18,12 @@
         <Setter Property="Padding" Value="8,0" />
         <Setter Property="BackgroundColor" Value="{StaticResource TableBgColor}" />
     </Style>
-
+    <Style
+        x:Key="MatchDetailOddsBookmakerLabel"
+        BasedOn="{StaticResource TableText}"
+        TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+    </Style>
     <Style
         x:Key="MatchDetailOddsOddsText"
         BasedOn="{StaticResource TableText}"
@@ -47,15 +52,10 @@
 
     <Style x:Key="MatchDetailOddsDropdownText" TargetType="Label">
         <Setter Property="Margin" Value="16,0,0,0" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style x:Key="MatchDetailOddsMovementChart" TargetType="{x:Type ffImageLoading:CachedImage}">
-        <Setter Property="Margin" Value="0,20,0,0" />
-        <Setter Property="HeightRequest" Value="91" />
-        <Setter Property="WidthRequest" Value="371" />
     </Style>
     <Style x:Key="BookmakerDetailIcon"
            BasedOn="{StaticResource Icons}"
@@ -75,12 +75,12 @@
         <Setter Property="Margin" Value="0,8,0,8" />
         <Setter Property="Padding" Value="1" />
     </Style>
-    <Style x:Key="MatchDetailOddsMovementTitleLable" TargetType="Label">       
+    <Style x:Key="MatchDetailOddsMovementTitleLable" TargetType="Label">
         <Setter Property="HorizontalOptions" Value="Fill" />
         <Setter Property="BackgroundColor" Value="#3A3942" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="Margin" Value="1" />        
+        <Setter Property="Margin" Value="1" />
         <Setter Property="HeightRequest" Value="42" />
         <Setter Property="TextColor" Value="#fff" />
         <Setter Property="FontSize" Value="11" />

@@ -62,7 +62,6 @@
                        Style="{StaticResource MatchDetailOddsOddsText}"
                        Text="{Binding UpdateTime}" />
             </Grid>
-            <BoxView Style="{StaticResource TableLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>

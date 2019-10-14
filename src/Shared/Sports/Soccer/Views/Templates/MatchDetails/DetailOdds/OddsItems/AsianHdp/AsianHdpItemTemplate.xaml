@@ -35,7 +35,7 @@
                     Style="{StaticResource MatchDetailOddsBookmaker}">
                     <Label
                         AutomationId="{Binding BookmakerName, StringFormat='BookmakerName-{0}'}"
-                        Style="{StaticResource TableText}"
+                        Style="{StaticResource MatchDetailOddsBookmakerLabel}"
                         Text="{Binding BookmakerName}" />
                     <Label
                         AutomationId="{Binding BookmakerName, StringFormat='BookmakerDetailIcon-{0}'}"
@@ -80,7 +80,6 @@
                     Style="{StaticResource MatchDetailOddsOddsText}"
                     Text="{Binding AwayOpeningOdds}" />
             </Grid>
-            <BoxView Style="{StaticResource TableLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>
