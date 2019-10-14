@@ -19,6 +19,9 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
@@ -57,9 +60,20 @@ namespace LiveScore
             StartGlobalTimer();
 
             networkConnectionManager = Container.Resolve<INetworkConnection>();
-            networkConnectionManager.StartListen();
+            networkConnectionManager.StartListen();            
         }
 
+        [Time]
+        protected override void OnStart()
+        {   
+            base.OnStart();
+
+            Debug.WriteLine("Application OnStart");
+
+            AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
+                  typeof(Analytics), typeof(Crashes));
+
+        }
         protected override void ConfigureViewModelLocator()
         {
             base.ConfigureViewModelLocator();
@@ -101,11 +115,15 @@ namespace LiveScore
             Debug.WriteLine("OnSleep");
 
             base.OnSleep();
+
+            Analytics.TrackEvent("Application OnSleep");
         }
 
         protected override async void OnResume()
         {
             Debug.WriteLine("OnResume");
+
+            Analytics.TrackEvent("Application OnResume");
 
             await Task.Run(async () => await soccerHub.ReConnect());
 
@@ -114,7 +132,7 @@ namespace LiveScore
 
         private void StartGlobalTimer(int intervalMinutes = 1)
         {
-            Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
             {
                 if (networkConnectionManager.IsSuccessfulConnection())
                 {
