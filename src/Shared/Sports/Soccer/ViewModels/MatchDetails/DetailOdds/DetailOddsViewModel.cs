@@ -53,6 +53,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsRefreshing = false;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
+            RefreshCommand = new DelegateAsyncCommand(()
+                => LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
+
+            OnOddsTabClicked = new DelegateAsyncCommand<string>(betTypeId
+                => FirstLoadOrRefreshOddsAsync(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat));
+
+            TappedOddsItemCommand = new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommandAsync);
         }
 
         public bool IsRefreshing { get; set; }
@@ -71,46 +78,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public DataTemplate HeaderTemplate { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand => new DelegateAsyncCommand(() =>
-                LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
+        public DelegateAsyncCommand RefreshCommand { get; }
 
-        public DelegateAsyncCommand<string> OnOddsTabClicked => new DelegateAsyncCommand<string>((betTypeId) =>
-                FirstLoadOrRefreshOddsAsync(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat));
+        public DelegateAsyncCommand<string> OnOddsTabClicked { get; }
 
-        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand => new DelegateAsyncCommand<BaseItemViewModel>(HandleOddsItemTapCommandAsync);
+        public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
 
-        private async Task HandleOddsItemTapCommandAsync(BaseItemViewModel item)
+        public override async void OnResumeWhenNetworkOK()
         {
-            var parameters = new NavigationParameters
-            {
-                { "MatchId", matchId },
-                { "EventStatus", eventStatus },
-                { "Bookmaker", item.BetTypeOdds.Bookmaker},
-                { "BetType", SelectedBetType },
-                { "Format",  oddsFormat}
-            };
+            await UpdateOddsByBetTypeAsync();
 
-            var navigated
-                = await NavigationService
-                    .NavigateAsync("OddsMovementView" + CurrentSportId, parameters)
-                    .ConfigureAwait(false);
-
-            if (!navigated.Success)
-            {
-                await LoggingService.LogExceptionAsync(navigated.Exception)
-                    .ConfigureAwait(false);
-            }
+            SubscribeEvents();
         }
 
         public override async void OnAppearing()
         {
+            base.OnAppearing();
+
             try
             {
-                Debug.WriteLine("DetailOddsViewModel OnAppearing");
-
-                await LoadDataAsync(
-                        () => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing))
-                    .ConfigureAwait(false);
+                await LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing));
 
                 SubscribeEvents();
             }
@@ -120,33 +107,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        public override async Task OnNetworkReconnected()
-        {
-            await RefreshCommand.ExecuteAsync();
-        }
-
-        public override async void OnResumeWhenNetworkOK()
-        {
-            await ReloadPage();
-
-            SubscribeEvents();
-        }
-
-        private async Task ReloadPage()
-        {
-            await LoggingService.LogInfoAsync($"OddsComparison  {DateTime.Now} - OnResume - Selected BetType {SelectedBetType}").ConfigureAwait(false);
-
-            if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
-            {
-                await LoadOddsByBetTypeAsync(oddsFormat, isRefresh: true).ConfigureAwait(false);
-            }
-        }
-
         public override void OnSleep()
         {
             base.OnSleep();
-
-            Debug.WriteLine("DetailOddsViewModel OnSleep");
 
             UnsubscribeEvents();
         }
@@ -155,10 +118,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             base.OnDisappearing();
 
-            Debug.WriteLine("DetailOddsViewModel OnDisappearing");
-
             UnsubscribeEvents();
         }
+
+        public override Task OnNetworkReconnected() => RefreshCommand.ExecuteAsync();
 
         private void SubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
@@ -181,6 +144,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
+        private async Task UpdateOddsByBetTypeAsync()
+        {
+            if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
+            {
+                await LoadOddsByBetTypeAsync(oddsFormat, isRefresh: true).ConfigureAwait(false);
+            }
+        }
+
         private async Task LoadOddsByBetTypeAsync(string formatType, bool isRefresh)
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
@@ -193,7 +164,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             BetTypeOddsItems = HasData
                 ? new List<BaseItemViewModel>((odds.BetTypeOddsList ?? throw new InvalidOperationException())
-                    .Select(bettypeOdds => new BaseItemViewModel(SelectedBetType, bettypeOdds, NavigationService, DependencyResolver)
+                    .Select(betTypeOdds => new BaseItemViewModel(SelectedBetType, betTypeOdds, NavigationService, DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();
         }
@@ -239,6 +210,29 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 {
                     BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
                 }
+            }
+        }
+
+        private async Task HandleOddsItemTapCommandAsync(BaseItemViewModel item)
+        {
+            var parameters = new NavigationParameters
+            {
+                { "MatchId", matchId },
+                { "EventStatus", eventStatus },
+                { "Bookmaker", item.BetTypeOdds.Bookmaker},
+                { "BetType", SelectedBetType },
+                { "Format",  oddsFormat}
+            };
+
+            var navigated
+                = await NavigationService
+                    .NavigateAsync("OddsMovementView" + CurrentSportId, parameters)
+                    .ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogExceptionAsync(navigated.Exception)
+                    .ConfigureAwait(false);
             }
         }
 

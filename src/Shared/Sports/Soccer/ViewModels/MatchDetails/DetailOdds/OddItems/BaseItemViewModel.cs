@@ -33,7 +33,7 @@
             IBetTypeOdds betTypeOdds,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
-            : base(navigationService, dependencyResolver)
+            : base(navigationService, dependencyResolver, false)
         {
             BetTypeOdds = betTypeOdds;
             BetType = betType;

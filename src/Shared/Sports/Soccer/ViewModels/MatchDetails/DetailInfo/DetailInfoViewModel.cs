@@ -40,8 +40,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
-
-            eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, true);
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -60,16 +58,31 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        public override async Task OnNetworkReconnected()
+        public override Task OnNetworkReconnected() => LoadMatchInfoData();
+
+        public override async void OnResumeWhenNetworkOK()
         {
+            SubscribeEvents();
             await LoadMatchInfoData();
         }
 
         [Time]
         public override async void OnAppearing()
         {
+            base.OnAppearing();
+
+            SubscribeEvents();
             await LoadMatchInfoData();
         }
+
+        public override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            UnsubscribeEvents();
+        }
+
+        public override void OnSleep() => UnsubscribeEvents();
 
         private async Task LoadMatchInfoData()
         {
@@ -84,23 +97,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
         }
 
-        public override void Destroy()
+        private void SubscribeEvents()
+        {
+            eventAggregator
+                .GetEvent<MatchEventPubSubEvent>()
+                .Subscribe(OnReceivedMatchEvent, true);
+        }
+
+        private void UnsubscribeEvents()
         {
             eventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
                 .Unsubscribe(OnReceivedMatchEvent);
-        }
-
-        [Time]
-        private async Task LoadMatchDetail(bool isRefresh = false)
-        {
-            MatchInfo = await matchInfoService
-                .GetMatch(matchId, CurrentLanguage, isRefresh)
-                .ConfigureAwait(false);
-
-            BuildDetailInfo(MatchInfo);
-
-            IsRefreshing = false;
         }
 
         [Time]
@@ -124,6 +132,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 new List<TimelineEvent> { matchEventMessage.MatchEvent.Timeline as TimelineEvent }));
 
             BuildDetailInfo(MatchInfo);
+        }
+
+        [Time]
+        private async Task LoadMatchDetail(bool isRefresh = false)
+        {
+            MatchInfo = await matchInfoService
+                .GetMatch(matchId, CurrentLanguage, isRefresh)
+                .ConfigureAwait(false);
+
+            BuildDetailInfo(MatchInfo);
+
+            IsRefreshing = false;
         }
 
         private void BuildDetailInfo(MatchInfo matchInfo)

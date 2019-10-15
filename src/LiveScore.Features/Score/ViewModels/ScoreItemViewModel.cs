@@ -74,33 +74,21 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateCommand LoadMoreCommand { get; private set; }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            UnsubscribeAllEvents();
-        }
+        public override Task OnNetworkReconnected()
+            => Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
 
         public override void OnResumeWhenNetworkOK()
         {
-            Profiler.Start("ScoreItemViewModel.OnResume");
+            base.OnResumeWhenNetworkOK();
+            SubscribeEvents();
 
             if (ViewDate.IsTodayOrYesterday())
             {
-                SubscribeEvents();
                 Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
             }
         }
 
-        public override void OnSleep()
-        {
-            UnsubscribeAllEvents();
-        }
-
-        public override Task OnNetworkReconnected()
-        {
-            return Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
-        }
+        public override void OnSleep() => UnsubscribeAllEvents();
 
         [Time]
         public override void OnAppearing()
@@ -134,6 +122,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnDisappearing()
         {
+            base.OnDisappearing();
+
             UnsubscribeAllEvents();
         }
 

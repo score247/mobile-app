@@ -14,6 +14,7 @@ namespace LiveScore.Core.ViewModels
     public class ViewModelBase : MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
         protected readonly INetworkConnection networkConnectionManager;
+        private readonly bool isNetworkingViewModel = true;
 
         public ViewModelBase()
         {
@@ -22,15 +23,17 @@ namespace LiveScore.Core.ViewModels
         public ViewModelBase(
            INavigationService navigationService,
            IDependencyResolver dependencyResolver,
-           IEventAggregator eventAggregator)
-            : this(navigationService, dependencyResolver)
+           IEventAggregator eventAggregator,
+           bool isNetworkingViewModel = true)
+            : this(navigationService, dependencyResolver, isNetworkingViewModel)
         {
             EventAggregator = eventAggregator;
         }
 
         public ViewModelBase(
            INavigationService navigationService,
-           IDependencyResolver dependencyResolver)
+           IDependencyResolver dependencyResolver,
+           bool isNetworkingViewModel = true)
         {
             NavigationService = navigationService;
             DependencyResolver = dependencyResolver;
@@ -43,6 +46,7 @@ namespace LiveScore.Core.ViewModels
             CurrentSportName = settings.CurrentSportType.DisplayName;
             CurrentSportId = settings.CurrentSportType.Value;
             CurrentLanguage = settings.CurrentLanguage;
+            this.isNetworkingViewModel = isNetworkingViewModel;
         }
 
         public Language CurrentLanguage { get; }
@@ -96,10 +100,22 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnAppearing()
         {
+            if (isNetworkingViewModel)
+            {
+                EventAggregator?
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Subscribe(OnConnectionChangedBase, true);
+            }
         }
 
         public virtual void OnDisappearing()
         {
+            if (isNetworkingViewModel)
+            {
+                EventAggregator?
+                    .GetEvent<ConnectionChangePubSubEvent>()
+                    .Unsubscribe(OnConnectionChangedBase);
+            }
         }
 
         protected virtual async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
@@ -109,12 +125,12 @@ namespace LiveScore.Core.ViewModels
                 networkConnectionManager
                  .OnSuccessfulConnection(async () =>
                  {
-                     EventAggregator.GetEvent<StartLoadDataEvent>().Publish();
+                     EventAggregator?.GetEvent<StartLoadDataEvent>().Publish();
                      IsBusy = showBusy;
 
                      await loadDataFunc().ConfigureAwait(false);
 
-                     EventAggregator.GetEvent<StopLoadDataEvent>().Publish();
+                     EventAggregator?.GetEvent<StopLoadDataEvent>().Publish();
                      IsBusy = false;
                  })
                  .OnFailedConnection(() =>
@@ -136,5 +152,13 @@ namespace LiveScore.Core.ViewModels
 
         public virtual Task OnNetworkReconnected()
             => Task.CompletedTask;
+
+        private void OnConnectionChangedBase(bool isConnected)
+        {
+            if (isConnected)
+            {
+                OnNetworkReconnected();
+            }
+        }
     }
 }

@@ -1,32 +1,31 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
+using LiveScore.Common.Services;
+using LiveScore.Core;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Odds;
+using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Enumerations;
+using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.PubSubEvents.Odds;
+using LiveScore.Soccer.Services;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems;
+using MethodTimer;
+using Prism.Events;
+using Prism.Navigation;
+using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Common.LangResources;
-    using Core;
-    using Enumerations;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Odds;
-    using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Models.Odds;
-    using LiveScore.Soccer.PubSubEvents.Odds;
-    using LiveScore.Soccer.Services;
-    using MethodTimer;
-    using OddItems;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Xamarin.Forms;
-
     public class OddsMovementViewModel : ViewModelBase
     {
         private string matchId;
@@ -45,21 +44,22 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
-        {      
+        {
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
-            
+
             OddsMovementItems = new OddsMovementObservableCollection(CurrentSportName);
             GroupOddsMovementItems = new ObservableCollection<OddsMovementObservableCollection> { OddsMovementItems };
+
+            RefreshCommand = new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true));
         }
 
         public bool IsRefreshing { get; set; }
 
-        public OddsMovementObservableCollection OddsMovementItems { get; private set; }
+        public OddsMovementObservableCollection OddsMovementItems { get; }
 
-        public ObservableCollection<OddsMovementObservableCollection> GroupOddsMovementItems { get; private set; }
+        public ObservableCollection<OddsMovementObservableCollection> GroupOddsMovementItems { get; }
 
-        public DelegateAsyncCommand RefreshCommand
-            => new DelegateAsyncCommand(async () => await FirstLoadOrRefreshOddsMovement(true).ConfigureAwait(false));
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public DataTemplate HeaderTemplate { get; private set; }
 
@@ -86,12 +86,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
+        public override async void OnResumeWhenNetworkOK()
+        {
+            await ReloadPage();
+
+            SubscribeEvents();
+        }
+
         public override async void OnAppearing()
         {
+            base.OnAppearing();
+
             try
             {
-                Debug.WriteLine("OddsMovementViewModel OnAppearing");
-
                 if (isFirstLoad)
                 {
                     await LoadDataAsync(async () => await FirstLoadOrRefreshOddsMovement());
@@ -106,12 +113,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        public override async void OnResumeWhenNetworkOK()
-        {
-            await ReloadPage();
+        public override void OnSleep() => UnsubscribeEvents();
 
-            SubscribeEvents();
+        public override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            UnsubscribeEvents();
         }
+
+        public override Task OnNetworkReconnected() => RefreshCommand.ExecuteAsync();
 
         private async Task ReloadPage()
         {
@@ -123,50 +134,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
-        public override void OnSleep()
-        {
-            Debug.WriteLine("OddsMovementViewModel OnSleep");
-
-            UnsubscribeEvents();
-        }
-
-        public override void OnDisappearing()
-        {
-            base.OnDisappearing();
-
-            Debug.WriteLine("OddsMovementViewModel OnDisappearing");
-
-            UnsubscribeEvents();
-        }
-
         private void SubscribeEvents()
         {
-            if (EventAggregator != null)
-            {
-                return;
-            }
-
-            EventAggregator
+            EventAggregator?
                 .GetEvent<OddsMovementPubSubEvent>()
                 .Subscribe(HandleOddsMovementMessage);
-
-            EventAggregator
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Subscribe(OnConnectionChangedBase);
         }
 
         private void UnsubscribeEvents()
         {
-            if (EventAggregator != null)
-            {
-                return;
-            }
-
-            EventAggregator
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Unsubscribe(OnConnectionChangedBase);
-
-            EventAggregator
+            EventAggregator?
                 .GetEvent<OddsMovementPubSubEvent>()
                 .Unsubscribe(HandleOddsMovementMessage);
         }
@@ -227,10 +204,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         private void InsertOddsMovementItems(IEnumerable<IOddsMovement> updatedOddsMovements)
         {
-            var exsitingOddsMovements = OddsMovementItems.Select(x => x.OddsMovement);
+            var existingOddsMovements = OddsMovementItems.Select(x => x.OddsMovement);
 
             var distinctOddsMovements = updatedOddsMovements
-                .Except(exsitingOddsMovements)
+                .Except(existingOddsMovements)
                 .OrderBy(x => x.UpdateTime)
                 .ToList();
 
@@ -244,16 +221,5 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-
-        private async void OnConnectionChangedBase(bool isConnected)
-#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
-        {
-            if (isConnected)
-            {
-                Debug.WriteLine("OddsMovementViewModel OnConnectionChangedBase");
-
-                await RefreshCommand.ExecuteAsync();
-            }
-        }
     }
 }

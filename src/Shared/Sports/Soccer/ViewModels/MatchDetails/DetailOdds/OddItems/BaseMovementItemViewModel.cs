@@ -34,7 +34,7 @@
             IOddsMovement oddsMovement,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
-            : base(navigationService, dependencyResolver)
+            : base(navigationService, dependencyResolver, false)
         {
             OddsMovement = oddsMovement;
             BetType = betType;

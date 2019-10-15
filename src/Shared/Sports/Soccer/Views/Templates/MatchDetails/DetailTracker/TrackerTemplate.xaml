@@ -16,16 +16,24 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
+        <ActivityIndicator Margin="20"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}"
+                           VerticalOptions="StartAndExpand" />
 
-        <Label Style="{StaticResource NoInfo}"
-               IsVisible="{Binding NoData}"
-               Text="There is no data" />
         <tabStrip:TabITemListView BackgroundColor="{StaticResource ListViewBgColor}"
                                   ItemsSource="{Binding MatchCommentaries}"
                                   HasUnevenRows="True"
+                                  IsPullToRefreshEnabled="True"
+                                  IsRefreshing="{Binding IsRefreshing}"
+                                  RefreshCommand="{Binding RefreshCommand}"
                                   SeparatorVisibility="None">
             <tabStrip:TabITemListView.Header>
                 <StackLayout>
+                    <Label Style="{StaticResource NoInfo}"
+                           IsVisible="{Binding NoData}"
+                           Text="There is no data" />
                     <Grid IsVisible="{Binding HasTrackerData}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -54,7 +62,8 @@
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}"
                              IsVisible="{Binding TrackerHidden}" />
-                    <FlexLayout Style="{StaticResource Group}">
+                    <FlexLayout Style="{StaticResource Group}"
+                                IsVisible="{Binding HasCommentariesData}">
                         <Label Style="{StaticResource GroupName}"
                                Text="COMMENTARIES" />
                     </FlexLayout>

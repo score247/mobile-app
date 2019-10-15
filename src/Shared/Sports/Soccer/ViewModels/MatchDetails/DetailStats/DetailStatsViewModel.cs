@@ -1,18 +1,17 @@
-﻿namespace LiveScore.Soccer.ViewModels.DetailStats
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Core;
-    using LiveScore.Core.Controls.TabStrip;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Services;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Xamarin.Forms;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Services;
+using Prism.Events;
+using Prism.Navigation;
+using Xamarin.Forms;
 
+namespace LiveScore.Soccer.ViewModels.DetailStats
+{
     internal class DetailStatsViewModel : TabItemViewModel
     {
         private readonly ISoccerMatchService soccerMatchService;
@@ -56,6 +55,11 @@
             IsRefreshing = false;
         }
 
-        public override async void OnAppearing() => await LoadMatchStatisticDataAsync().ConfigureAwait(false);
+        public override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await LoadMatchStatistic();
+        }
     }
 }

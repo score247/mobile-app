@@ -57,36 +57,18 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        public override Task OnNetworkReconnected()
-        {
-            return SelectedScoreItem?.OnNetworkReconnected();
-        }
+        public override Task OnNetworkReconnected() => SelectedScoreItem?.OnNetworkReconnected();
 
-        public override void OnSleep()
-        {
-            SelectedScoreItem?.OnSleep();
-        }
+        public override void OnSleep() => SelectedScoreItem?.OnSleep();
 
         public override void OnAppearing()
         {
-            base.OnAppearing();
-
-            EventAggregator?
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Subscribe(OnConnectionChangedBase);
-
             SelectedScoreItem?.OnAppearing();
         }
 
         public override void OnDisappearing()
         {
-            base.OnDisappearing();
-
             SelectedScoreItem?.OnDisappearing();
-
-            EventAggregator?
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Unsubscribe(OnConnectionChangedBase);
         }
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
@@ -144,14 +126,6 @@ namespace LiveScore.Features.Score.ViewModels
             if (!navigated.Success)
             {
                 await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
-            }
-        }
-
-        private void OnConnectionChangedBase(bool isConnected)
-        {
-            if (isConnected)
-            {
-                OnNetworkReconnected();
             }
         }
     }

@@ -1,51 +1,51 @@
-﻿[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using LiveScore.Common;
+using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
+using LiveScore.Common.Services;
+using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Controls.TabStrip.EventArgs;
+using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.PubSubEvents.Matches;
+using LiveScore.Core.PubSubEvents.Teams;
+using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Services;
+using LiveScore.Soccer.ViewModels.DetailH2H;
+using LiveScore.Soccer.ViewModels.DetailLineups;
+using LiveScore.Soccer.ViewModels.DetailSocial;
+using LiveScore.Soccer.ViewModels.DetailStats;
+using LiveScore.Soccer.ViewModels.DetailTable;
+using LiveScore.Soccer.ViewModels.DetailTV;
+using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker;
+using LiveScore.Soccer.Views.Templates.DetailH2H;
+using LiveScore.Soccer.Views.Templates.DetailInfo;
+using LiveScore.Soccer.Views.Templates.DetailLinesUp;
+using LiveScore.Soccer.Views.Templates.DetailSocial;
+using LiveScore.Soccer.Views.Templates.DetailStatistics;
+using LiveScore.Soccer.Views.Templates.DetailTable;
+using LiveScore.Soccer.Views.Templates.DetailTracker;
+using LiveScore.Soccer.Views.Templates.DetailTV;
+using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
+using MethodTimer;
+using Prism.Commands;
+using Prism.Events;
+using Prism.Navigation;
+
+[assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Common.LangResources;
-    using Core;
-    using Core.Controls.TabStrip;
-    using DetailH2H;
-    using DetailLineups;
-    using DetailOdds;
-    using DetailSocial;
-    using DetailStats;
-    using DetailTable;
-    using DetailTracker;
-    using DetailTV;
-    using LiveScore.Common;
-    using LiveScore.Common.Extensions;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Controls.TabStrip.EventArgs;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.PubSubEvents.Matches;
-    using LiveScore.Core.PubSubEvents.Teams;
-    using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Services;
-    using LiveScore.Soccer.Views.Templates.DetailH2H;
-    using LiveScore.Soccer.Views.Templates.DetailSocial;
-    using LiveScore.Soccer.Views.Templates.DetailTable;
-    using LiveScore.Soccer.Views.Templates.DetailTracker;
-    using LiveScore.Soccer.Views.Templates.DetailTV;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
-    using MatchDetailInfo;
-    using MethodTimer;
-    using Models.Matches;
-    using Prism.Commands;
-    using Prism.Events;
-    using Prism.Navigation;
-    using Views.Templates.DetailInfo;
-    using Views.Templates.DetailLinesUp;
-    using Views.Templates.DetailStatistics;
-
     public class MatchDetailViewModel : ViewModelBase
     {
         private readonly IMatchStatusConverter matchStatusConverter;
@@ -67,7 +67,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFuctionTabTapped);
+            FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
         }
 
         public MatchViewModel MatchViewModel { get; private set; }
@@ -82,10 +82,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; private set; }
 
-        public async override void Initialize(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
-            Debug.WriteLine("MatchDetail Initialize");
-
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
@@ -96,21 +94,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override void OnResumeWhenNetworkOK()
         {
-            Debug.WriteLine("MatchDetail OnResumeWhenNetworkOK");
-
-            base.OnResumeWhenNetworkOK();
-
-            tabItemViewModels[selectedTabItem].OnResumeWhenNetworkOK();            
+            tabItemViewModels[selectedTabItem].OnResumeWhenNetworkOK();
 
             SubscribeEvents();
         }
 
         public override void OnSleep()
         {
-            base.OnSleep();
-
-            Debug.WriteLine("MatchDetail OnResumeWhenNetworkOK");
-
             tabItemViewModels[selectedTabItem].OnSleep();
 
             UnSubscribeEvents();
@@ -118,21 +108,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override void OnDisappearing()
         {
-            base.OnDisappearing();
-
-            Debug.WriteLine("MatchDetail OnDisappearing");
-
-            tabItemViewModels[selectedTabItem].OnDisappearing();           
+            tabItemViewModels[selectedTabItem].OnDisappearing();
 
             UnSubscribeEvents();
         }
 
         public override void OnAppearing()
         {
-            base.OnAppearing();
-
-            Debug.WriteLine("MatchDetail OnAppearing");
-
             if (selectedTabItem != null)
             {
                 tabItemViewModels[selectedTabItem].OnAppearing();
@@ -140,10 +122,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             SubscribeEvents();
         }
-  
+
+        public override Task OnNetworkReconnected()
+            => tabItemViewModels[selectedTabItem].OnNetworkReconnected();
+
         private void SubscribeEvents()
         {
-            if (EventAggregator != null)
+            if (EventAggregator == null)
             {
                 return;
             }
@@ -155,15 +140,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Subscribe(OnReceivedTeamStatistic, true);
-
-            EventAggregator
-                .GetEvent<ConnectionChangePubSubEvent>()
-                .Subscribe(OnConnectionChangedBase);
         }
 
         private void UnSubscribeEvents()
         {
-            if (EventAggregator != null)
+            if (EventAggregator == null)
             {
                 return;
             }
@@ -175,10 +156,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
-
-            EventAggregator
-                    .GetEvent<ConnectionChangePubSubEvent>()
-                    .Unsubscribe(OnConnectionChangedBase);
         }
 
         protected internal void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -246,7 +223,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 {MatchDetailFunction.Stats, new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()) },
                 {MatchDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
                 {MatchDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, new TrackerTemplate()) }
+                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerTemplate()) }
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;
@@ -268,28 +245,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             return viewModels;
         }
 
-        private void OnFuctionTabTapped(TabStripItemTappedEventArgs args)
+        private void OnFunctionTabTapped(TabStripItemTappedEventArgs args)
         {
             Title = TabItems[args.Index].Title;
             selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[args.Index].TabHeaderTitle);
-        }
-
-#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-
-        private void OnConnectionChangedBase(bool isConnected)
-#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
-        {
-            if (isConnected)
-            {
-                OnNetworkReconnected();
-            }
-        }
-
-        public override Task OnNetworkReconnected()
-        {
-            tabItemViewModels[selectedTabItem].OnNetworkReconnected();
-
-            return Task.CompletedTask;
         }
     }
 }

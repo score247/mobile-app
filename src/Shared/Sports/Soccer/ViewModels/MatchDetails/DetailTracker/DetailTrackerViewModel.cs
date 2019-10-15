@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using LiveScore.Common.PlatformDependency;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
@@ -9,6 +10,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -29,13 +31,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             MatchCoverage coverage,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
+            IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator)
         {
             matchCoverage = coverage;
             matchInfoService = dependencyResolver.Resolve<ISoccerMatchService>();
             OnCollapseTracker = new DelegateCommand(CollapseTracker);
             OnExpandTracker = new DelegateCommand(ExpandTracker);
+            RefreshCommand = new DelegateAsyncCommand(OnRefresh);
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
@@ -52,21 +56,33 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         public bool HasCommentariesData { get; private set; }
 
+        public DelegateAsyncCommand RefreshCommand { get; }
+
+        public bool IsRefreshing { get; set; }
+
         public DelegateCommand OnCollapseTracker { get; }
 
         public DelegateCommand OnExpandTracker { get; }
 
         public override Task OnNetworkReconnected()
-        {
-            OnAppearing();
-
-            return Task.CompletedTask;
-        }
+            => LoadDataAsync(() => LoadMatchCommentaries(true));
 
         public override async void OnAppearing()
         {
             base.OnAppearing();
 
+            await LoadTracker();
+            await LoadDataAsync(() => LoadMatchCommentaries(true));
+        }
+
+        private void CollapseTracker() => TrackerVisible = false;
+
+        private void ExpandTracker() => TrackerVisible = true;
+
+        private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentaries(true), false);
+
+        private async Task LoadTracker()
+        {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
@@ -75,15 +91,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 };
 
                 HasTrackerData = true;
-                HasData = true;
-            }
-            else if (matchCoverage?.Coverage?.Commentary == true)
-            {
-                await LoadMatchCommentaries(true);
-            }
-            else
-            {
-                HasData = false;
             }
         }
 
@@ -100,17 +107,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             return content;
         }
 
-        private void CollapseTracker() => TrackerVisible = false;
-
-        private void ExpandTracker() => TrackerVisible = true;
-
         private async Task LoadMatchCommentaries(bool getLatestData = false)
         {
-            var commentaries = await matchInfoService.GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData);
-            var commentaryViewModels = commentaries.Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+            var commentaries = (await matchInfoService
+                    .GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData)).ToList();
 
-            MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
-            SetFooterHeight(MatchCommentaries.Count);
+            if (commentaries.Count > 0)
+            {
+                var commentaryViewModels = commentaries.Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+
+                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
+                SetFooterHeight(MatchCommentaries.Count);
+                HasCommentariesData = true;
+            }
+
+            IsRefreshing = false;
         }
     }
 }

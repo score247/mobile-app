@@ -27,15 +27,6 @@ namespace LiveScore.Features.Score.ViewModels
                 .Subscribe(OnReceivedLiveMatches, true);
         }
 
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            EventAggregator
-                .GetEvent<LiveMatchPubSubEvent>()
-                .Unsubscribe(OnReceivedLiveMatches);
-        }
-
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
             var matchItemViewModels

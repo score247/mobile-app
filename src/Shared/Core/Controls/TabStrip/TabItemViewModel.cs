@@ -13,7 +13,7 @@
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             DataTemplate dataTemplate,
-            IEventAggregator eventAggregator = null)
+            IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             Template = dataTemplate;

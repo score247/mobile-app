@@ -6,6 +6,7 @@
     {
         public TabITemListView() : base(ListViewCachingStrategy.RecycleElement)
         {
+            RefreshControlColor = Color.White;
         }
 
         public static void OnScrolling(double offset)

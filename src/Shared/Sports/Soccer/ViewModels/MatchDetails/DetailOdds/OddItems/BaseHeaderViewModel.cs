@@ -27,7 +27,7 @@
             bool hasData,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
-            : base(navigationService, dependencyResolver)
+            : base(navigationService, dependencyResolver, false)
         {
             BetType = betType;
             this.hasData = hasData;
