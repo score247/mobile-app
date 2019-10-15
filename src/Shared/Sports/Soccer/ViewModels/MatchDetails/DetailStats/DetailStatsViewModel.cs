@@ -39,6 +39,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
         public IEnumerable<MatchStatisticItem> SubStatisticItems { get; private set; }
 
         public bool IsRefreshing { get; set; }
+
         private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
             var matchStatistic = await soccerMatchService
@@ -55,7 +56,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
             {
                 HasData = false;
             }
-            
+
             SetFooterHeight(SubStatisticItems.Count());
             IsRefreshing = false;
         }

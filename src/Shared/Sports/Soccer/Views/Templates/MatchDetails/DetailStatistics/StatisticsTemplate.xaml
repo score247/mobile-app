@@ -27,15 +27,13 @@
         <tabStrip:TabITemListView BackgroundColor="#272830"
                                   SeparatorVisibility="None"
                                   ItemsSource="{Binding SubStatisticItems}"
-            IsVisible="{Binding HasData}"
+                                  IsVisible="{Binding HasData}"
                                   Header="{Binding MainStatistic}"
                                   IsPullToRefreshEnabled="true"
                                   RefreshCommand="{Binding RefreshCommand}"
                                   IsRefreshing="{Binding IsRefreshing}"
-                                  Footer=""
                                   VerticalOptions="FillAndExpand">
-
-            <ListView.HeaderTemplate>
+            <tabStrip:TabITemListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
                         <Grid IsVisible="{Binding IsVisibled}">
@@ -76,8 +74,8 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </StackLayout>
                 </DataTemplate>
-            </ListView.HeaderTemplate>
-            <ListView.ItemTemplate>
+            </tabStrip:TabITemListView.HeaderTemplate>
+            <tabStrip:TabITemListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
@@ -120,13 +118,11 @@
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.FooterTemplate>
-                <DataTemplate>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="{Binding FooterHeight}" />
-                </DataTemplate>
-            </ListView.FooterTemplate>
+            </tabStrip:TabITemListView.ItemTemplate>
+            <tabStrip:TabITemListView.Footer>
+                <StackLayout BackgroundColor="Transparent"
+                             HeightRequest="{Binding FooterHeight}" />
+            </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </StackLayout>
 </DataTemplate>
