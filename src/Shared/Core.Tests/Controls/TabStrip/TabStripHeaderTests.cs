@@ -1,3 +1,5 @@
+using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+
 namespace LiveScore.Core.Tests.Controls.TabStrip
 {
     using System.Collections.Generic;
@@ -14,8 +16,8 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
         {
             tabs = new List<TabItemViewModel>
             {
-                new TabItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, null) { TabHeaderTitle = "Info" },
-                new TabItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, null)  { TabHeaderTitle = "Tracker" },
+                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) { TabHeaderTitle = "Info" },
+                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null)  { TabHeaderTitle = "Tracker" },
             };
         }
 

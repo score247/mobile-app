@@ -9,7 +9,7 @@
 
     public class TabItemViewModel : ViewModelBase
     {
-        public TabItemViewModel(
+        protected TabItemViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             DataTemplate dataTemplate,
@@ -24,6 +24,18 @@
         public DataTemplate Template { get; }
 
         public string TabHeaderTitle { get; set; }
+
+        /// <summary>
+        /// Temporary fix for not scrolling well issue of list view
+        /// </summary>
+        public int FooterHeight { get; private set; }
+
+        protected int DefaultListViewItemHeight { get; set; } = 50;
+
+        public void SetFooterHeight(int listViewCount)
+        {
+            FooterHeight = listViewCount * DefaultListViewItemHeight;
+        }
 
         protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {

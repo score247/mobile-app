@@ -67,8 +67,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             base.OnAppearing();
 
-            await LoadMatchCommentaries(true);
-
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
@@ -79,8 +77,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 HasTrackerData = true;
                 HasData = true;
             }
-
-            if (matchCoverage?.Coverage?.Commentary == true)
+            else if (matchCoverage?.Coverage?.Commentary == true)
             {
                 await LoadMatchCommentaries(true);
             }
@@ -113,6 +110,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             var commentaryViewModels = commentaries.Select(c => new CommentaryItemViewModel(c, DependencyResolver));
 
             MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
+            SetFooterHeight(MatchCommentaries.Count);
         }
     }
 }

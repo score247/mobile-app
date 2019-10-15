@@ -7,7 +7,7 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
-    <StackLayout>
+    <StackLayout   VerticalOptions="FillAndExpand">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -21,9 +21,8 @@
                IsVisible="{Binding NoData}"
                Text="There is no data" />
         <tabStrip:TabITemListView BackgroundColor="{StaticResource ListViewBgColor}"
-                                  HasUnevenRows="True"
-                                  VerticalOptions="FillAndExpand"
                                   ItemsSource="{Binding MatchCommentaries}"
+                                  HasUnevenRows="True"
                                   SeparatorVisibility="None">
             <tabStrip:TabITemListView.Header>
                 <StackLayout>
@@ -93,6 +92,10 @@
                     </ViewCell>
                 </DataTemplate>
             </tabStrip:TabITemListView.ItemTemplate>
+            <tabStrip:TabITemListView.Footer>
+                <StackLayout BackgroundColor="Transparent"
+                             HeightRequest="{Binding FooterHeight}" />
+            </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </StackLayout>
 </DataTemplate>

@@ -32,8 +32,10 @@
     <ContentPage.Content>
         <controls:DetailScrollView x:Name="ScrollView">
             <StackLayout>
-                <BoxView Style="{StaticResource HorizontalLine}" BackgroundColor="{StaticResource DateBarLineColor}" />
-                <Frame HasShadow="True" CornerRadius="0">
+                <BoxView Style="{StaticResource HorizontalLine}"
+                         BackgroundColor="{StaticResource DateBarLineColor}" />
+                <Frame HasShadow="True"
+                       CornerRadius="0">
                     <StackLayout>
                         <Grid Style="{StaticResource MatchGeneralInfoLeagueBox}">
                             <Grid.RowDefinitions>
@@ -45,25 +47,24 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
 
-                            <ffimageloadingsvg:SvgCachedImage
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            DownsampleToViewSize="True"
-                                            LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                            Source="{Binding CountryFlag}"
-                                            Style="{StaticResource LeagueFlag}" />
+                            <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                              Grid.Column="0"
+                                                              DownsampleToViewSize="True"
+                                                              LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                              Source="{Binding CountryFlag}"
+                                                              Style="{StaticResource LeagueFlag}" />
 
                             <Label Grid.Row="0"
-                               Grid.Column="1"
-                               AutomationId="LeagueName"
-                               LineBreakMode="TailTruncation"
-                               Style="{StaticResource LeagueName}"
-                               Text="{Binding MatchViewModel.Match.LeagueGroupName, Converter={StaticResource UpperCaseConverter}}" />
+                                   Grid.Column="1"
+                                   AutomationId="LeagueName"
+                                   LineBreakMode="TailTruncation"
+                                   Style="{StaticResource LeagueName}"
+                                   Text="{Binding MatchViewModel.Match.LeagueGroupName, Converter={StaticResource UpperCaseConverter}}" />
                             <Label Grid.Row="0"
-                               Grid.Column="2"
-                               AutomationId="LeagueDate"
-                               Style="{StaticResource MatchDate}"
-                               Text="{Binding DisplayEventDate}" />
+                                   Grid.Column="2"
+                                   AutomationId="LeagueDate"
+                                   Style="{StaticResource MatchDate}"
+                                   Text="{Binding DisplayEventDate}" />
                         </Grid>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                         <Grid Style="{StaticResource MatchGeneralInfoTeams}">
@@ -77,60 +78,60 @@
                                 <ColumnDefinition Width="20" />
                             </Grid.ColumnDefinitions>
                             <StackLayout Grid.Row="0"
-                                     Grid.RowSpan="2"
-                                     Grid.Column="0"
-                                     Style="{StaticResource MatchStatusContainer}">
+                                         Grid.RowSpan="2"
+                                         Grid.Column="0"
+                                         Style="{StaticResource MatchStatusContainer}">
                                 <Label AutomationId="LiveIndicator"
-                                   IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
-                                   Style="{StaticResource LiveIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.IsInLiveAndNotExtraTime}"
+                                       Style="{StaticResource LiveIcon}" />
 
                                 <Label AutomationId="ExtraTimeIndicator"
-                                   IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
-                                   Style="{StaticResource ExtraTimeIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.IsInExtraTime}"
+                                       Style="{StaticResource ExtraTimeIcon}" />
                                 <Label AutomationId="MatchStatus"
-                                   Style="{StaticResource MatchStatus}"
-                                   Text="{Binding MatchViewModel.DisplayMatchStatus}" />
+                                       Style="{StaticResource MatchStatus}"
+                                       Text="{Binding MatchViewModel.DisplayMatchStatus}" />
                             </StackLayout>
                             <StackLayout Grid.Row="0"
-                                     Grid.Column="1"
-                                     Style="{StaticResource MatchHomeTeam}">
+                                         Grid.Column="1"
+                                         Style="{StaticResource MatchHomeTeam}">
                                 <Label AutomationId="HomeTeamName"
-                                   Style="{StaticResource Team}"
-                                   Text="{Binding MatchViewModel.Match.HomeTeamName}" />
+                                       Style="{StaticResource Team}"
+                                       Text="{Binding MatchViewModel.Match.HomeTeamName}" />
                                 <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalHomeRedCards}" />
                                 <Label AutomationId="HomeTeamPenalty"
-                                   IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                   Style="{StaticResource MatchPenaltyIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                       Style="{StaticResource MatchPenaltyIcon}" />
                                 <Label AutomationId="HomeTeamSecondLeg"
-                                   IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                   Style="{StaticResource MatchSecondLegIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                       Style="{StaticResource MatchSecondLegIcon}" />
                             </StackLayout>
                             <StackLayout Grid.Row="1"
-                                     Grid.Column="1"
-                                     Style="{StaticResource MatchAwayTeam}">
+                                         Grid.Column="1"
+                                         Style="{StaticResource MatchAwayTeam}">
                                 <Label AutomationId="AwayTeamName"
-                                   Style="{StaticResource Team}"
-                                   Text="{Binding MatchViewModel.Match.AwayTeamName}" />
+                                       Style="{StaticResource Team}"
+                                       Text="{Binding MatchViewModel.Match.AwayTeamName}" />
                                 <templates:RedCardTemplate RedCards="{Binding MatchViewModel.Match.TotalAwayRedCards}" />
                                 <Label AutomationId="AwayTeamPenalty"
-                                   IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                   Style="{StaticResource MatchPenaltyIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                       Style="{StaticResource MatchPenaltyIcon}" />
                                 <Label AutomationId="AwayTeamSecondLeg"
-                                   IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
-                                   Style="{StaticResource MatchSecondLegIcon}" />
+                                       IsVisible="{Binding MatchViewModel.Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
+                                       Style="{StaticResource MatchSecondLegIcon}" />
                             </StackLayout>
                             <Label Grid.Row="0"
-                               Grid.Column="2"
-                               AutomationId="HomeScore"
-                               IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
-                               Style="{StaticResource HomeScore}"
-                               Text="{Binding MatchViewModel.Match.HomeScore}" />
+                                   Grid.Column="2"
+                                   AutomationId="HomeScore"
+                                   IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
+                                   Style="{StaticResource HomeScore}"
+                                   Text="{Binding MatchViewModel.Match.HomeScore}" />
                             <Label Grid.Row="1"
-                               Grid.Column="2"
-                               AutomationId="AwayScore"
-                               IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
-                               Style="{StaticResource AwayScore}"
-                               Text="{Binding MatchViewModel.Match.AwayScore}" />
+                                   Grid.Column="2"
+                                   AutomationId="AwayScore"
+                                   IsVisible="{Binding MatchViewModel.Match.EventStatus.ShowScore}"
+                                   Style="{StaticResource AwayScore}"
+                                   Text="{Binding MatchViewModel.Match.AwayScore}" />
                         </Grid>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </StackLayout>

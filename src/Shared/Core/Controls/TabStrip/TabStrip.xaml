@@ -9,7 +9,7 @@
              HorizontalOptions="FillAndExpand"
              VerticalOptions="FillAndExpand">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout VerticalOptions="FillAndExpand" >
             <StackLayout.Resources>
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>

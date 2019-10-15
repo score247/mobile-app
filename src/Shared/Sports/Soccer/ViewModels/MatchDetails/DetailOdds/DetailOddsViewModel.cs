@@ -43,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             Debug.WriteLine($"MatchId {matchId}");
 
             this.matchId = matchId;
-            this.eventStatus = eventStatus;         
+            this.eventStatus = eventStatus;
 
             oddsFormat = OddsFormat.Decimal.DisplayName;
             SelectedBetType = BetType.AsianHDP;
@@ -162,10 +162,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         private void SubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
-        
+
         private void UnsubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
-
 
         [Time]
         private async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType, bool isRefresh = false)
