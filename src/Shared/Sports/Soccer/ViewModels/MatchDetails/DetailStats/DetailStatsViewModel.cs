@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using Prism.Events;
@@ -44,7 +45,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
 
         private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
-            var matchStatisticData 
+            var matchStatisticData
                 = await soccerMatchService
                 .GetMatchStatistic(this.matchId, Language.English, isRefresh).ConfigureAwait(false);
 
@@ -59,7 +60,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
         {
             base.OnAppearing();
 
-            await LoadMatchStatistic();
+            await LoadMatchStatisticDataAsync();
         }
     }
 }
