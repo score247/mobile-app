@@ -2,27 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Fanex.Caching;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
-using MethodTimer;
 using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
     public class LeagueService : BaseService, ILeagueService
     {
+        private const int CacheDuration = 86_400;
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
+        private readonly LeagueApi leagueApi;
 
         public LeagueService(
             IApiService apiService,
             ICacheManager cacheManager,
-            ILoggingService loggingService) : base(loggingService)
+            ILoggingService loggingService,
+            LeagueApi leagueApi) : base(loggingService)
         {
             this.apiService = apiService;
             this.cacheManager = cacheManager;
+            this.leagueApi = leagueApi ?? apiService.GetApi<LeagueApi>();
         }
 
         public async Task<IEnumerable<ILeague>> GetMajorLeagues(bool getLatestData = false)
@@ -33,8 +35,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
-                    GetMajorLeaguesFromApi,
-                    new CacheItemOptions().SetAbsoluteExpiration(TimeSpan.FromDays(1)),
+                     () => apiService.Execute(() => leagueApi.GetMajorLeagues()),
+                     CacheDuration,
                     getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -44,9 +46,5 @@ namespace LiveScore.Soccer.Services
                 return Enumerable.Empty<ILeague>();
             }
         }
-
-        [Time]
-        private Task<IEnumerable<ILeague>> GetMajorLeaguesFromApi()
-            => apiService.Execute(() => apiService.GetApi<LeagueApi>().GetMajorLeagues());
     }
 }

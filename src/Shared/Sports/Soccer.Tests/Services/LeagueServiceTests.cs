@@ -7,26 +7,26 @@
     using NSubstitute;
     using Xunit;
 
-    public class LeagueServiceTests
-    {
-        private readonly ISoccerLeagueApi mockSoccerApi;
-        private readonly ILoggingService mockLogger;
-        private readonly IApiPolicy mockPolicy;
-        private readonly ILeagueService leagueService;
+    //public class LeagueServiceTests
+    //{
+    //    private readonly ISoccerLeagueApi mockSoccerApi;
+    //    private readonly ILoggingService mockLogger;
+    //    private readonly IApiPolicy mockPolicy;
+    //    private readonly ILeagueService leagueService;
 
-        public LeagueServiceTests()
-        {
-            mockSoccerApi = Substitute.For<ISoccerLeagueApi>();
-            mockLogger = Substitute.For<ILoggingService>();
-            mockPolicy = Substitute.For<IApiPolicy>();
-        }
+    //    public LeagueServiceTests()
+    //    {
+    //        mockSoccerApi = Substitute.For<ISoccerLeagueApi>();
+    //        mockLogger = Substitute.For<ILoggingService>();
+    //        mockPolicy = Substitute.For<IApiPolicy>();
+    //    }
 
-        [Fact]
-        public async Task GetLeagues_WhenCall_ReturnEmptyList()
-        {
-            // Act
+    //    [Fact]
+    //    public async Task GetLeagues_WhenCall_ReturnEmptyList()
+    //    {
+    //        // Act
 
-            // Assert
-        }
-    }
+    //        // Assert
+    //    }
+    //}
 }

@@ -87,6 +87,16 @@ namespace LiveScore.Common.Services
         public async Task<T> GetOrSetAsync<T>(string key, Func<T> factory, CacheItemOptions options, bool getLatestData = false)
             => await cacheService.GetOrSetAsync(key, factory, options).ConfigureAwait(false);
 
+        public async Task InvalidateAll()
+        {
+            foreach (var key in cachedKeys)
+            {
+                await cacheService.RemoveAsync(key);
+            }
+
+            cachedKeys.Clear();
+        }
+
         private Task SetCacheAsync<T>(string key, T data, CacheItemOptions options)
         {
             if (Equals(data, default(T)))
@@ -100,16 +110,6 @@ namespace LiveScore.Common.Services
             }
 
             return cacheService.SetAsync(key, data, options);
-        }
-
-        public async Task InvalidateAll()
-        {
-            foreach (var key in cachedKeys)
-            {
-                await cacheService.RemoveAsync(key);
-            }
-
-            cachedKeys.Clear();
         }
     }
 }

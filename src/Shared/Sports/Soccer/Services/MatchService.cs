@@ -29,19 +29,22 @@ namespace LiveScore.Soccer.Services
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
     {
+        private const int ShortDuration = 120;
+        private const int LongDuration = 7_200;
+
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
-        private readonly MatchApi soccerMatchApi;
+        private readonly MatchApi matchApi;
 
         public MatchService(
             IApiService apiService,
             ICacheManager cacheManager,
             ILoggingService loggingService,
-            MatchApi soccerMatchApi = null) : base(loggingService)
+            MatchApi matchApi = null) : base(loggingService)
         {
             this.apiService = apiService;
             this.cacheManager = cacheManager;
-            this.soccerMatchApi = soccerMatchApi ?? apiService.GetApi<MatchApi>();
+            this.matchApi = matchApi ?? apiService.GetApi<MatchApi>();
         }
 
         [Time]
@@ -53,12 +56,12 @@ namespace LiveScore.Soccer.Services
 
                 var cacheDuration = dateTime.Date == DateTime.Today
                     || dateTime.Date == DateTimeExtension.Yesterday().Date
-                    ? CacheDuration.Short
-                    : CacheDuration.Long;
+                    ? ShortDuration
+                    : LongDuration;
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
-                    () => apiService.Execute(() => soccerMatchApi.GetMatches(
+                    () => apiService.Execute(() => matchApi.GetMatches(
                         dateTime.BeginningOfDay().ToApiFormat(),
                         dateTime.EndOfDay().ToApiFormat(),
                         language.DisplayName)), cacheDuration,
@@ -81,8 +84,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
-                    () => apiService.Execute(() => soccerMatchApi.GetMatchInfo(matchId, language.DisplayName)),
-                    CacheDuration.Short, forceFetchNewData)
+                    () => apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName)),
+                    ShortDuration, forceFetchNewData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -101,8 +104,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
-                        () => apiService.Execute(() => soccerMatchApi.GetLiveMatches(language.DisplayName)),
-                        CacheDuration.Short, getLatestData)
+                        () => apiService.Execute(() => matchApi.GetLiveMatches(language.DisplayName)),
+                        ShortDuration, getLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -121,8 +124,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
-                        () => apiService.Execute(() => soccerMatchApi.GetMatchCoverage(matchId, language.DisplayName)),
-                        CacheDuration.Short, forceFetchNewData)
+                        () => apiService.Execute(() => matchApi.GetMatchCoverage(matchId, language.DisplayName)),
+                        ShortDuration, forceFetchNewData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -141,8 +144,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
-                        () => apiService.Execute(() => soccerMatchApi.GetMatchCommentaries(matchId, language.DisplayName)),
-                        CacheDuration.Short, forceFetchNewData)
+                        () => apiService.Execute(() => matchApi.GetMatchCommentaries(matchId, language.DisplayName)),
+                        ShortDuration, forceFetchNewData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -161,8 +164,8 @@ namespace LiveScore.Soccer.Services
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
-                    () => apiService.Execute(() => soccerMatchApi.GetMatchStatistic(matchId, language.DisplayName)),
-                    CacheDuration.Short,
+                    () => apiService.Execute(() => matchApi.GetMatchStatistic(matchId, language.DisplayName)),
+                    ShortDuration,
                     forceFetchNewData)
                     .ConfigureAwait(false);
             }

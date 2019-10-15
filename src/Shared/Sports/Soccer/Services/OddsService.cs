@@ -2,11 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Fanex.Caching;
     using LiveScore.Common.Services;
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
-    using Refit;
     using static LiveScore.Soccer.Services.SoccerApi;
 
     public interface IOddsService
@@ -62,8 +60,7 @@
                 return await cacheManager
                     .GetOrSetAsync(
                         oddDataCacheKey,
-                        () => apiService.Execute(() => oddsApi.GetOdds(lang, matchId, betTypeId, formatType)),
-                        new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(CacheDuration)),
+                        () => apiService.Execute(() => oddsApi.GetOdds(lang, matchId, betTypeId, formatType)), CacheDuration,
                         getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -93,8 +90,7 @@
                        matchId,
                        betTypeId,
                        formatType,
-                       bookmakerId)),
-                   new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(CacheDuration)),
+                       bookmakerId)), CacheDuration,
                    getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
