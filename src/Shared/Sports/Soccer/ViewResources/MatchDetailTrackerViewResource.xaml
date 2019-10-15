@@ -106,7 +106,7 @@
     <Style x:Key="MatchTrackerMinutes"
            TargetType="Label">
         <Setter Property="HorizontalTextAlignment"
-                Value="Center" />
+                Value="End" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
         <Setter Property="FontSize"

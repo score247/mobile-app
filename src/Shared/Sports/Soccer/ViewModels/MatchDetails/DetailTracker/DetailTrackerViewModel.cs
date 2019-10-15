@@ -113,7 +113,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private async Task LoadMatchCommentaries(bool getLatestData = false)
         {
             var commentaries = (await matchInfoService
-                    .GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData)).ToList();
+                    .GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData))
+                    .OrderByDescending(c => c.Time).ToList();
 
             if (commentaries.Count > 0)
             {
