@@ -45,13 +45,14 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
 
         private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
-            var matchStatisticData
-                = await soccerMatchService
-                .GetMatchStatistic(this.matchId, Language.English, isRefresh).ConfigureAwait(false);
+            var matchStatisticData = await soccerMatchService
+                    .GetMatchStatistic(matchId, Language.English, isRefresh)
+                    .ConfigureAwait(false);
 
             MainStatistic = matchStatisticData.GetMainStatistic();
             SubStatisticItems = matchStatisticData.GetSubStatisticItems();
 
+            SetFooterHeight(SubStatisticItems.Count());
             IsNoData = MainStatistic.IsHidden && !SubStatisticItems.Any();
             IsRefreshing = false;
         }

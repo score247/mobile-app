@@ -167,6 +167,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                     .Select(betTypeOdds => new BaseItemViewModel(SelectedBetType, betTypeOdds, NavigationService, DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();
+
+            SetFooterHeight(BetTypeOddsItems.Count);
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)
