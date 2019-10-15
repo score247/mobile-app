@@ -40,7 +40,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
-            DefaultListViewItemHeight = 100;
+            DefaultListViewItemHeight = 70;
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
