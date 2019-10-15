@@ -33,7 +33,7 @@
         BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
-        <Setter Property="Padding" Value="8,0" />
+        <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="GroupName" TargetType="Label">

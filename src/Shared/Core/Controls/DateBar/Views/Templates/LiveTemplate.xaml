@@ -11,7 +11,7 @@
     <AbsoluteLayout HorizontalOptions="Center"
                     Padding="0,12,0,12"
                     VerticalOptions="Center"
-                    WidthRequest="50">
+                    WidthRequest="60">
         <AbsoluteLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

@@ -10,6 +10,10 @@
         <Setter Property="Padding" Value="8,0" />
     </Style>
 
+    <Style x:Key="MatchDetailInfoMainEventRow" TargetType="Grid">
+        <Setter Property="Padding" Value="16,0" />
+    </Style>
+
     <Style x:Key="MatchInfoScore" TargetType="Label">
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
@@ -37,6 +41,7 @@
     <Style x:Key="MatchInfoMinutes" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource SecondTextColor}" />
         <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
     </Style>
 
