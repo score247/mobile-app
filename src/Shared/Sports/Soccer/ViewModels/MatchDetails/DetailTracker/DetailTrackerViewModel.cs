@@ -93,11 +93,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                     Html = await GenerateTrackerWidget(matchCoverage.Coverage)
                 };
 
-                HasTrackerData = HasData = true;
-            }
-            else
-            {
-                HasData = false;
+                HasTrackerData = true;
             }
         }
 
@@ -125,14 +121,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
                 MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
                 SetFooterHeight(MatchCommentaries.Count);
-                HasCommentariesData = HasData = true;
-            }
-            else
-            {
-                HasData = false;
+                HasCommentariesData = true;
             }
 
+            SetHasData();
             IsRefreshing = false;
+        }
+
+        private void SetHasData()
+        {
+            HasData = HasTrackerData || HasCommentariesData;
         }
     }
 }

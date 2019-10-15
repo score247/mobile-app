@@ -7,7 +7,7 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
-    <StackLayout   VerticalOptions="FillAndExpand">
+    <StackLayout>
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -26,6 +26,7 @@
                                   ItemsSource="{Binding MatchCommentaries}"
                                   HasUnevenRows="True"
                                   IsPullToRefreshEnabled="True"
+                                  IsVisible="{Binding IsNotBusy}"
                                   IsRefreshing="{Binding IsRefreshing}"
                                   RefreshCommand="{Binding RefreshCommand}"
                                   SeparatorVisibility="None">
@@ -59,6 +60,9 @@
                                Style="{StaticResource GroupName}" />
                         <Button Style="{StaticResource MatchBallTrackerExpandIcon}"
                                 Command="{Binding OnExpandTracker}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding OnExpandTracker}" />
+                        </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}"
                              IsVisible="{Binding TrackerHidden}" />

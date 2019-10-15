@@ -31,7 +31,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             MatchTime = string.IsNullOrEmpty(commentary.StoppageTime)
                 ? $"{commentary.MatchTime}'"
-                : $"{commentary.MatchTime}+{commentary.StoppageTime}";
+                : $"{commentary.MatchTime}+{commentary.StoppageTime}'";
         }
 
         private void BuildImageSource()

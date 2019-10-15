@@ -1,69 +1,117 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary
-    x:Class="LiveScore.Soccer.ViewResources.MatchDetailTrackerViewResource"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+<ResourceDictionary x:Class="LiveScore.Soccer.ViewResources.MatchDetailTrackerViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
 
-    <Style x:Key="MatchBallTrackerGroup" BasedOn="{StaticResource FlexLayoutHorizontalCenter}" TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
-        <Setter Property="Padding" Value="8,0" />
-        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
+    <Style x:Key="MatchBallTrackerGroup"
+           BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+           TargetType="FlexLayout">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
+        <Setter Property="Padding"
+                Value="8,0" />
+        <Setter Property="HeightRequest"
+                Value="{StaticResource FunctionGroupHeight}" />
     </Style>
-    <Style x:Key="MatchBallTrackerContentLayout" TargetType="RelativeLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
+    <Style x:Key="MatchBallTrackerContentLayout"
+           TargetType="RelativeLayout">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource PrimaryColor}" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
     </Style>
-    <Style x:Key="MatchBallTrackerWebView" TargetType="WebView">
-        <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="WidthRequest" Value="1000" />
-        <Setter Property="HeightRequest" Value="500" />
-        <Setter Property="Margin" Value="0" />
+    <Style x:Key="MatchBallTrackerWebView"
+           TargetType="WebView">
+        <Setter Property="HorizontalOptions"
+                Value="Fill" />
+        <Setter Property="WidthRequest"
+                Value="1000" />
+        <Setter Property="HeightRequest"
+                Value="300" />
+        <Setter Property="Margin"
+                Value="0" />
     </Style>
-    <Style x:Key="MatchBallTrackerGroupIcon" BasedOn="{StaticResource ButtonIcon}" TargetType="Button">
-        <Setter Property="HeightRequest" Value="15" />
-        <Setter Property="WidthRequest" Value="15" />
-        <Setter Property="CornerRadius" Value="3" />
-        <Setter Property="FontSize" Value="10" />        
-        <Setter Property="HorizontalOptions" Value="EndAndExpand" />
-        <Setter Property="VerticalOptions" Value="Start" />
+    <Style x:Key="MatchBallTrackerGroupIcon"
+           BasedOn="{StaticResource ButtonIcon}"
+           TargetType="Button">
+        <Setter Property="HeightRequest"
+                Value="15" />
+        <Setter Property="WidthRequest"
+                Value="15" />
+        <Setter Property="CornerRadius"
+                Value="3" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="HorizontalOptions"
+                Value="EndAndExpand" />
+        <Setter Property="VerticalOptions"
+                Value="Start" />
     </Style>
-    <Style x:Key="MatchBallTrackerCollapseIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Button">
-        <Setter Property="Text" Value="&#xe90c;" />
-        <Setter Property="BackgroundColor" Value="#fff" />
-        <Setter Property="TextColor" Value="#0F111C" />
-        <Setter Property="Margin" Value="0,4,4,0" />
+    <Style x:Key="MatchBallTrackerCollapseIcon"
+           BasedOn="{StaticResource MatchBallTrackerGroupIcon}"
+           TargetType="Button">
+        <Setter Property="Text"
+                Value="&#xe90c;" />
+        <Setter Property="BackgroundColor"
+                Value="#fff" />
+        <Setter Property="TextColor"
+                Value="#0F111C" />
+        <Setter Property="Margin"
+                Value="0,4,4,0" />
     </Style>
-    <Style x:Key="MatchBallTrackerExpandIcon" BasedOn="{StaticResource MatchBallTrackerGroupIcon}" TargetType="Button">
-        <Setter Property="Text" Value="&#xe926;" />
-        <Setter Property="BackgroundColor" Value="Transparent" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    <Style x:Key="MatchBallTrackerExpandIcon"
+           BasedOn="{StaticResource MatchBallTrackerGroupIcon}"
+           TargetType="Button">
+        <Setter Property="Text"
+                Value="&#xe926;" />
+        <Setter Property="BackgroundColor"
+                Value="Transparent" />
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryTextColor}" />
     </Style>
 
     <!-- commentaries -->
-    <Style x:Key="MatchTrackerCommentariesRow" TargetType="Grid">
-        <Setter Property="Padding" Value="0,14" />
+    <Style x:Key="MatchTrackerCommentariesRow"
+           TargetType="Grid">
+        <Setter Property="Padding"
+                Value="0,14" />
     </Style>
 
-    <Style x:Key="MatchTrackerCommentariesIcons" TargetType="Image">
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="VerticalOptions" Value="Center" />
+    <Style x:Key="MatchTrackerCommentariesIcons"
+           TargetType="Image">
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="VerticalOptions"
+                Value="Center" />
     </Style>
 
-    <Style x:Key="MatchTrackerCommentariesText" TargetType="Label">
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource CommentaryColor}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
+    <Style x:Key="MatchTrackerCommentariesText"
+           TargetType="Label">
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="TextColor"
+                Value="{StaticResource CommentaryColor}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource SmallTextFontSize}" />
     </Style>
 
-    <Style x:Key="MatchTrackerHighlightCommentariesText" BasedOn="{StaticResource MatchTrackerCommentariesText}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource HighlightCommentaryColor}" />
+    <Style x:Key="MatchTrackerHighlightCommentariesText"
+           BasedOn="{StaticResource MatchTrackerCommentariesText}"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource HighlightCommentaryColor}" />
     </Style>
 
-    <Style x:Key="MatchTrackerMinutes" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmalleastTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    <Style x:Key="MatchTrackerMinutes"
+           TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="FontSize"
+                Value="{StaticResource SmalleastTextFontSize}" />
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryTextColor}" />
     </Style>
 </ResourceDictionary>
