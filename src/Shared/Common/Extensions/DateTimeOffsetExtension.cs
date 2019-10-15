@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Common.Extensions
-{
-    using System;
+﻿using System;
 
+namespace LiveScore.Common.Extensions
+{
     public static class DateTimeOffsetExtension
     {
         public static string ToLocalShortDayMonth(this DateTimeOffset value)

@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Common.Converters
-{
-    using System;
-    using System.Globalization;
-    using Xamarin.Forms;
+﻿using System;
+using System.Globalization;
+using Xamarin.Forms;
 
+namespace LiveScore.Common.Converters
+{
     public class TextNotEmptyConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -18,7 +18,7 @@
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return value;
+            return value?.ToString();
         }
     }
 }

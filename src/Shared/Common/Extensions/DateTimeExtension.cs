@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Common.Extensions
-{
-    using System;
+﻿using System;
 
+namespace LiveScore.Common.Extensions
+{
 #pragma warning disable S109 // Magic numbers should not be used
 
     public static class DateTimeExtension

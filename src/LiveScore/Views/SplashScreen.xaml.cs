@@ -10,20 +10,18 @@ namespace LiveScore.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
-        
-
         public SplashScreen()
         {
             InitializeComponent();
-            
+
             NavigationPage.SetHasNavigationBar(this, false);
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
 
-            LoadMainPageAsync();
+            await LoadMainPageAsync();
         }
 
         [Time]
@@ -33,6 +31,8 @@ namespace LiveScore.Views
 
             await PageUtilities.OnInitializedAsync(mainPage, null).ConfigureAwait(false);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
+
+            await Task.Delay(300);
 
             await Task.WhenAll(
                 SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),

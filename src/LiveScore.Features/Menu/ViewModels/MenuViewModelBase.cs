@@ -16,9 +16,9 @@ namespace LiveScore.Features.Menu.ViewModels
 
         public DelegateAsyncCommand DoneCommand { get; }
 
-        protected virtual async Task OnDone()
+        protected virtual Task OnDone()
         {
-            await NavigationService.GoBackAsync(useModalNavigation: true);
+            return NavigationService.GoBackAsync(useModalNavigation: true);
         }
     }
 }
