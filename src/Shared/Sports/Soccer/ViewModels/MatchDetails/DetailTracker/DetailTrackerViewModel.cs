@@ -64,6 +64,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         public DelegateCommand OnExpandTracker { get; }
 
+        public override async void OnResumeWhenNetworkOK()
+            => await LoadDataAsync(() => LoadMatchCommentaries(true));
+
         public override Task OnNetworkReconnected()
             => LoadDataAsync(() => LoadMatchCommentaries(true));
 
@@ -90,7 +93,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                     Html = await GenerateTrackerWidget(matchCoverage.Coverage)
                 };
 
-                HasTrackerData = true;
+                HasTrackerData = HasData = true;
+            }
+            else
+            {
+                HasData = false;
             }
         }
 
@@ -118,7 +125,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
                 MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
                 SetFooterHeight(MatchCommentaries.Count);
-                HasCommentariesData = true;
+                HasCommentariesData = HasData = true;
+            }
+            else
+            {
+                HasData = false;
             }
 
             IsRefreshing = false;
