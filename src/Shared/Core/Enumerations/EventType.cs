@@ -64,19 +64,6 @@
         {
         }
 
-        public static List<string> BasicSoccerEventTypes
-           => new List<string>
-           {
-                MatchStarted.DisplayName,
-                PeriodStart.DisplayName,
-                BreakStart.DisplayName,
-                ScoreChange.DisplayName,
-                YellowCard.DisplayName,
-                YellowRedCard.DisplayName,
-                RedCard.DisplayName,
-                PenaltyShootout.DisplayName
-           };
-
         private EventType(byte value, string displayName)
             : base(value, displayName)
         {

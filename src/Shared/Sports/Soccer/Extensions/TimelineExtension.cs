@@ -17,6 +17,15 @@ namespace LiveScore.Soccer.Extensions
             EventType.MatchEnded
         };
 
+        public static readonly EventType[] HighlightSoccerEventTypes = {
+                EventType.ScoreChange,
+                EventType.PenaltyMissed,
+                EventType.YellowCard,
+                EventType.RedCard,
+                EventType.YellowRedCard,
+                EventType.Substitution
+            };
+
         public static bool IsHalfTimeBreak(this TimelineEvent timeline)
             => timeline?.Type == EventType.BreakStart && timeline?.PeriodType == PeriodType.Pause;
 
@@ -46,5 +55,8 @@ namespace LiveScore.Soccer.Extensions
 
         public static bool IsDetailInfoEvent(this TimelineEvent timeline)
             => DetailInfoEventTypes.Contains(timeline.Type);
+
+        public static bool IsHighlightEvent(this EventType type)
+            => HighlightSoccerEventTypes.Contains(type);
     }
 }

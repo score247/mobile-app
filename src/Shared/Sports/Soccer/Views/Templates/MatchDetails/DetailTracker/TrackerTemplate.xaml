@@ -98,6 +98,7 @@
                                 <Label Grid.Row="0"
                                        Grid.Column="2"
                                        Style="{StaticResource MatchTrackerCommentariesText}"
+                                       TextColor="{Binding CommentaryTextColor}"
                                        Text="{Binding CommentaryText}" />
                             </Grid>
                             <BoxView Style="{StaticResource HorizontalLine}" />

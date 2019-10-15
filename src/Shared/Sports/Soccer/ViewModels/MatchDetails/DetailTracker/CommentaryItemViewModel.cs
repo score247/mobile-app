@@ -1,7 +1,9 @@
 ﻿using System.Linq;
 using LiveScore.Core;
 using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
+using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 {
@@ -14,9 +16,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             Commentary = commentary;
             this.dependencyResolver = dependencyResolver;
 
-            BuildMatchTime(commentary);
+            BuildMatchTime();
             BuildImageSource();
-            BuildCommentaryText(commentary);
+            BuildCommentaryText();
+            BuildHighlightColor();
         }
 
         public MatchCommentary Commentary { get; }
@@ -27,11 +30,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         public string CommentaryText { get; private set; }
 
-        private void BuildMatchTime(MatchCommentary commentary)
+        public Color CommentaryTextColor { get; private set; }
+
+        private void BuildMatchTime()
         {
-            MatchTime = string.IsNullOrEmpty(commentary.StoppageTime)
-                ? $"{commentary.MatchTime}'"
-                : $"{commentary.MatchTime}+{commentary.StoppageTime}'";
+            if (Commentary == null)
+            {
+                return;
+            }
+
+            MatchTime = string.IsNullOrEmpty(Commentary.StoppageTime)
+                ? $"{Commentary.MatchTime}'"
+                : $"{Commentary.MatchTime}+{Commentary.StoppageTime}'";
         }
 
         private void BuildImageSource()
@@ -52,9 +62,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 imageConverter.BuildImageSource(new TimelineEventImage(Commentary.TimelineType, Commentary.GoalScorer));
         }
 
-        private void BuildCommentaryText(MatchCommentary commentary)
+        private void BuildCommentaryText()
         {
-            CommentaryText = string.Join("\r\n", commentary.Commentaries.Select(c => c.Text));
+            if (Commentary == null)
+            {
+                return;
+            }
+
+            CommentaryText = string.Join("\r\n", Commentary.Commentaries.Select(c => c.Text));
+        }
+
+        private void BuildHighlightColor()
+        {
+            CommentaryTextColor = Commentary.TimelineType.IsHighlightEvent()
+                ? (Color)Application.Current.Resources["HighlightCommentaryColor"]
+                : (Color)Application.Current.Resources["CommentaryColor"];
         }
     }
 }
