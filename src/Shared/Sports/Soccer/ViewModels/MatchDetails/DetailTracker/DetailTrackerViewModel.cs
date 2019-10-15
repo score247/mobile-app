@@ -9,6 +9,7 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
+using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -23,9 +24,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
-
+        private const int DefaultLoadingCommentaryItemCount = 30;
         private readonly MatchCoverage matchCoverage;
         private readonly ISoccerMatchService matchInfoService;
+        private bool isFirstLoad = true;
 
         public DetailTrackerViewModel(
             MatchCoverage coverage,
@@ -74,8 +76,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             base.OnAppearing();
 
-            await LoadTracker();
-            await LoadDataAsync(() => LoadMatchCommentaries(true));
+            if (isFirstLoad)
+            {
+                await LoadTracker();
+
+                await LoadDataAsync(() => LoadMatchCommentaries(true), true);
+            }
+
+            isFirstLoad = false;
         }
 
         private void CollapseTracker() => TrackerVisible = false;
@@ -110,6 +118,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             return content;
         }
 
+        [Time]
         private async Task LoadMatchCommentaries(bool getLatestData = false)
         {
             var commentaries = (await matchInfoService
@@ -118,7 +127,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (commentaries.Count > 0)
             {
-                var commentaryViewModels = commentaries.Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+                var commentaryViewModels = commentaries
+                    .Select(c => new CommentaryItemViewModel(c, DependencyResolver));
 
                 MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
                 SetFooterHeight(MatchCommentaries.Count);
