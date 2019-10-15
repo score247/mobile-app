@@ -29,6 +29,7 @@
                                   IsVisible="{Binding IsNotBusy}"
                                   IsRefreshing="{Binding IsRefreshing}"
                                   RefreshCommand="{Binding RefreshCommand}"
+                                  VerticalOptions="FillAndExpand"
                                   SeparatorVisibility="None">
             <tabStrip:TabITemListView.Header>
                 <StackLayout>
