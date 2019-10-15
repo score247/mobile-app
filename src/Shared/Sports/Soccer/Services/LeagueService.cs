@@ -7,17 +7,10 @@ using LiveScore.Common.Services;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using MethodTimer;
-using Refit;
+using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
-    [Headers("Accept: application/x-msgpack")]
-    public interface ISoccerLeagueApi
-    {
-        [Get("/soccer/{language}/leagues/major")]
-        Task<IEnumerable<ILeague>> GetMajorLeagues();
-    }
-
     public class LeagueService : BaseService, ILeagueService
     {
         private readonly IApiService apiService;
@@ -36,8 +29,8 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                const string cacheKey = "MajorLeagues";
-                    
+                const string cacheKey = "LiveScore.Soccer.Services.LeagueService.MajorLeagues";
+
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     GetMajorLeaguesFromApi,
@@ -54,6 +47,6 @@ namespace LiveScore.Soccer.Services
 
         [Time]
         private Task<IEnumerable<ILeague>> GetMajorLeaguesFromApi()
-            => apiService.Execute(() => apiService.GetApi<ISoccerLeagueApi>().GetMajorLeagues());
+            => apiService.Execute(() => apiService.GetApi<LeagueApi>().GetMajorLeagues());
     }
 }

@@ -10,30 +10,11 @@ using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
 using MethodTimer;
 using Refit;
+using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
-    [Headers("Accept: application/x-msgpack")]
-    public interface ISoccerMatchApi
-    {
-        [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
-        Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
-
-        [Get("/soccer/{language}/matches/{matchId}")]
-        Task<MatchInfo> GetMatchInfo(string matchId, string language);
-
-        [Get("/soccer/{language}/matches/live")]
-        Task<IEnumerable<Match>> GetLiveMatches(string language);
-
-        [Get("/soccer/{language}/matches/{matchId}/coverage")]
-        Task<MatchCoverage> GetMatchCoverage(string matchId, string language);
-
-        [Get("/soccer/{language}/matches/{matchId}/commentaries")]
-        Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, string language);
-
-        [Get("/soccer/{language}/matches/{matchId}/statistic")]
-        Task<MatchStatistic> GetMatchStatistic(string matchId, string language);
-    }
+   
 
     public interface ISoccerMatchService
     {
@@ -50,17 +31,17 @@ namespace LiveScore.Soccer.Services
     {
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
-        private readonly ISoccerMatchApi soccerMatchApi;
+        private readonly MatchApi soccerMatchApi;
 
         public MatchService(
             IApiService apiService,
             ICacheManager cacheManager,
             ILoggingService loggingService,
-            ISoccerMatchApi soccerMatchApi = null) : base(loggingService)
+            MatchApi soccerMatchApi = null) : base(loggingService)
         {
             this.apiService = apiService;
             this.cacheManager = cacheManager;
-            this.soccerMatchApi = soccerMatchApi ?? apiService.GetApi<ISoccerMatchApi>();
+            this.soccerMatchApi = soccerMatchApi ?? apiService.GetApi<MatchApi>();
         }
 
         [Time]

@@ -7,25 +7,7 @@
     using LiveScore.Core.Services;
     using LiveScore.Soccer.Models.Odds;
     using Refit;
-
-    [Headers("Accept: application/x-msgpack")]
-    public interface ISoccerOddsApi
-    {
-        [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]
-        Task<MatchOdds> GetOdds(
-            string lang,
-            string matchId,
-            int betTypeId,
-            string formatType);
-
-        [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
-        Task<MatchOddsMovement> GetOddsMovement(
-            string lang,
-            string matchId,
-            int betTypeId,
-            string formatType,
-            string bookmakerId);
-    }
+    using static LiveScore.Soccer.Services.SoccerApi;
 
     public interface IOddsService
     {
@@ -47,23 +29,23 @@
 
     public class OddsService : BaseService, IOddsService
     {
-        private const string OddsComparisonKey = "OddsComparison";
-        private const string OddsMovementKey = "OddsMovement";
+        private const string OddsComparisonKey = "LiveScore.Soccer.Services.OddsComparison";
+        private const string OddsMovementKey = "LiveScore.Soccer.Services.OddsMovement";
         private const int CacheDuration = 7_200;
 
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
-        private readonly ISoccerOddsApi soccerOddsApi;
+        private readonly OddsApi oddsApi;
 
         public OddsService(
             ICacheManager cacheManager,
             ILoggingService loggingService,
             IApiService apiService,
-            ISoccerOddsApi soccerOddsApi = null) : base(loggingService)
+            OddsApi oddsApi = null) : base(loggingService)
         {
             this.cacheManager = cacheManager;
             this.apiService = apiService;
-            this.soccerOddsApi = soccerOddsApi ?? apiService.GetApi<ISoccerOddsApi>();
+            this.oddsApi = oddsApi ?? apiService.GetApi<OddsApi>();
         }
 
         public async Task<MatchOdds> GetOddsAsync(
@@ -80,7 +62,7 @@
                 return await cacheManager
                     .GetOrSetAsync(
                         oddDataCacheKey,
-                        () => apiService.Execute(() => soccerOddsApi.GetOdds(lang, matchId, betTypeId, formatType)),
+                        () => apiService.Execute(() => oddsApi.GetOdds(lang, matchId, betTypeId, formatType)),
                         new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(CacheDuration)),
                         getLatestData).ConfigureAwait(false);
             }
@@ -106,7 +88,7 @@
 
                 return await cacheManager.GetOrSetAsync(
                    oddMovementCacheKey,
-                   () => apiService.Execute(() => soccerOddsApi.GetOddsMovement(
+                   () => apiService.Execute(() => oddsApi.GetOddsMovement(
                        lang,
                        matchId,
                        betTypeId,
