@@ -24,7 +24,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
     public class DetailInfoViewModel : TabItemViewModel
     {
         private const string SpectatorNumberFormat = "0,0";
-        private readonly IMatchInfoService matchInfoService;
+        private readonly ISoccerMatchService matchInfoService;
         private readonly IEventAggregator eventAggregator;
         private readonly string matchId;
 
@@ -38,7 +38,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
-            matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
+            matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
 
             eventAggregator.GetEvent<MatchEventPubSubEvent>().Subscribe(OnReceivedMatchEvent, true);

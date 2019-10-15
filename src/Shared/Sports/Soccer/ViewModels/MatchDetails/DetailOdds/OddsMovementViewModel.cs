@@ -187,7 +187,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
             var matchOddsMovement = await oddsService
-                .GetOddsMovement(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew)
+                .GetOddsMovementAsync(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew)
                 .ConfigureAwait(false);
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)

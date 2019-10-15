@@ -39,8 +39,7 @@ namespace Soccer.Tests
 
             // Assert
             container.Received(1).Register<IMatchService, MatchService>("1");
-            container.Received(1).Register<IOddsService, OddsService>("1");
-            //container.Received(1).Register<IHubService, HubService>("1");
+            container.Received(1).Register<IOddsService, OddsService>("1");            
             container.Received(1).Register<IMatchStatusConverter, MatchStatusConverter>("1");
             container.Received(1).Register<DataTemplate, MatchDataTemplate>("1");
         }

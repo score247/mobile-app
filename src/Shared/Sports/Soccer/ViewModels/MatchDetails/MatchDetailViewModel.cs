@@ -54,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private MatchDetailFunction selectedTabItem;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
 
-        private readonly IMatchInfoService matchInfoService;
+        private readonly ISoccerMatchService matchInfoService;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -62,7 +62,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
+            matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
 
             matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
             matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());

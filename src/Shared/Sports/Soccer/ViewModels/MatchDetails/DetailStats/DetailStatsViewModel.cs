@@ -6,6 +6,7 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core;
     using LiveScore.Core.Controls.TabStrip;
+    using LiveScore.Core.Enumerations;
     using LiveScore.Soccer.Models.Matches;
     using LiveScore.Soccer.Services;
     using Prism.Events;
@@ -14,7 +15,7 @@
 
     internal class DetailStatsViewModel : TabItemViewModel
     {
-        private readonly IMatchInfoService matchInfoService;
+        private readonly ISoccerMatchService soccerMatchService;
         private readonly string matchId;
 
         public DetailStatsViewModel(
@@ -26,11 +27,10 @@
             : base(navigationService, serviceLocator, dataTemplate, eventAggregator)
         {
             this.matchId = matchId;
-            matchInfoService = DependencyResolver.Resolve<IMatchInfoService>();
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchStatistic(true), false));
+            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            RefreshCommand = new DelegateAsyncCommand(
+                async () => await LoadDataAsync(() => LoadMatchStatisticDataAsync(true), false));
         }
-
-        public bool IsRefreshing { get; set; }
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
@@ -38,21 +38,24 @@
 
         public IEnumerable<MatchStatisticItem> SubStatisticItems { get; private set; }
 
+        public bool IsRefreshing { get; set; }
         public bool IsNoData { get; private set; }
 
         public bool IsVisible => !IsNoData;
 
-        private async Task LoadMatchStatistic(bool isRefresh = false)
+        private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
-            var matchStatistic = await matchInfoService.GetMatchStatistic(matchId, isRefresh).ConfigureAwait(false);
+            var matchStatisticData 
+                = await soccerMatchService
+                .GetMatchStatistic(this.matchId, Language.English, isRefresh).ConfigureAwait(false);
 
-            MainStatistic = matchStatistic.GetMainStatistic();
-            SubStatisticItems = matchStatistic.GetSubStatisticItems();
+            MainStatistic = matchStatisticData.GetMainStatistic();
+            SubStatisticItems = matchStatisticData.GetSubStatisticItems();
 
             IsNoData = MainStatistic.IsHidden && !SubStatisticItems.Any();
             IsRefreshing = false;
         }
 
-        public override async void OnAppearing() => await LoadMatchStatistic();
+        public override async void OnAppearing() => await LoadMatchStatisticDataAsync().ConfigureAwait(false);
     }
 }

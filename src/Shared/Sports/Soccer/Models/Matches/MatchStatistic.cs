@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Soccer.Models.Matches
-{
-    using System.Collections.Generic;
-    using System.Linq;
-    using LiveScore.Common.LangResources;
-    using LiveScore.Soccer.Models.Teams;
-    using MessagePack;
+﻿using System.Collections.Generic;
+using System.Linq;
+using LiveScore.Common.LangResources;
+using LiveScore.Soccer.Models.Teams;
+using MessagePack;
 
+namespace LiveScore.Soccer.Models.Matches
+{
     [MessagePackObject]
     public class MatchStatistic
     {
@@ -75,8 +75,8 @@
         public MatchStatisticItem(string statisticName, byte? homeValue, byte? awayValue)
         {
             StatisticName = statisticName.ToUpperInvariant();
-            HomeValue = homeValue.HasValue ? homeValue.Value : (byte)0;
-            AwayValue = awayValue.HasValue ? awayValue.Value : (byte)0;
+            HomeValue = homeValue ?? 0;
+            AwayValue = awayValue ?? 0;
             IsHidden = HomeValue == 0 && AwayValue == 0;
 
             if (IsVisibled)

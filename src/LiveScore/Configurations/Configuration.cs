@@ -9,11 +9,14 @@ namespace LiveScore.Configurations
         public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/dev/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
         public string Environment => "DEV";
+
+        //DataGenerator: http://ha.nexdev.net:7208/dev
 #elif TEST
         public string ApiEndPoint => "https://score247-api3.nexdev.net/test/api";
         public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/test/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
         public string Environment => "TEST";
+        //DataGenerator: http://ha.nexdev.net:7208/test
 #elif DEVRELEASE
         public string ApiEndPoint => "https://score247-api3.nexdev.net/main/api";
         public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/main/hubs";

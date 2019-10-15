@@ -23,7 +23,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private const string LanguageCode = "en";
 
         private readonly MatchCoverage matchCoverage;
-        private readonly IMatchInfoService matchInfoService;
+        private readonly ISoccerMatchService matchInfoService;
 
         public DetailTrackerViewModel(
             MatchCoverage coverage,
@@ -33,7 +33,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             : base(navigationService, dependencyResolver, dataTemplate)
         {
             matchCoverage = coverage;
-            matchInfoService = dependencyResolver.Resolve<IMatchInfoService>();
+            matchInfoService = dependencyResolver.Resolve<ISoccerMatchService>();
             OnCollapseTracker = new DelegateCommand(CollapseTracker);
             OnExpandTracker = new DelegateCommand(ExpandTracker);
         }

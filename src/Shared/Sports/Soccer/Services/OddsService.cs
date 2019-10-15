@@ -12,48 +12,77 @@
     public interface ISoccerOddsApi
     {
         [Get("/soccer/{lang}/odds/{matchId}/{betTypeId}/{formatType}")]
-        Task<MatchOdds> GetOdds(string lang, string matchId, int betTypeId, string formatType);
+        Task<MatchOdds> GetOdds(
+            string lang,
+            string matchId,
+            int betTypeId,
+            string formatType);
 
         [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
-        Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
+        Task<MatchOddsMovement> GetOddsMovement(
+            string lang,
+            string matchId,
+            int betTypeId,
+            string formatType,
+            string bookmakerId);
     }
 
     public interface IOddsService
     {
-        Task<MatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool forceFetchNewData = false);
+        Task<MatchOdds> GetOddsAsync(
+            string lang,
+            string matchId,
+            byte betTypeId,
+            string formatType,
+            bool getLatestData = false);
 
-        Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool forceFetchNewData = false);
+        Task<MatchOddsMovement> GetOddsMovementAsync(
+            string lang,
+            string matchId,
+            byte betTypeId,
+            string formatType,
+            string bookmakerId,
+            bool getLatestData = false);
     }
 
     public class OddsService : BaseService, IOddsService
     {
         private const string OddsComparisonKey = "OddsComparison";
         private const string OddsMovementKey = "OddsMovement";
+        private const int CacheDuration = 7_200;
 
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
+        private readonly ISoccerOddsApi soccerOddsApi;
 
         public OddsService(
             ICacheManager cacheManager,
             ILoggingService loggingService,
-            IApiService apiService
-            ) : base(loggingService)
+            IApiService apiService,
+            ISoccerOddsApi soccerOddsApi = null) : base(loggingService)
         {
             this.cacheManager = cacheManager;
             this.apiService = apiService;
+            this.soccerOddsApi = soccerOddsApi ?? apiService.GetApi<ISoccerOddsApi>();
         }
 
-        public async Task<MatchOdds> GetOdds(string lang, string matchId, byte betTypeId, string formatType, bool getLatestData = false)
+        public async Task<MatchOdds> GetOddsAsync(
+            string lang,
+            string matchId,
+            byte betTypeId,
+            string formatType,
+            bool getLatestData = false)
         {
             try
             {
                 var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
 
-                return await cacheManager.GetOrSetAsync(
-                    oddDataCacheKey,
-                    () => GetOddsFromApi(lang, matchId, betTypeId, formatType),
-                    new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)),
-                    getLatestData).ConfigureAwait(false);
+                return await cacheManager
+                    .GetOrSetAsync(
+                        oddDataCacheKey,
+                        () => apiService.Execute(() => soccerOddsApi.GetOdds(lang, matchId, betTypeId, formatType)),
+                        new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(CacheDuration)),
+                        getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -63,13 +92,13 @@
             }
         }
 
-        private Task<MatchOdds> GetOddsFromApi(string lang, string matchId, byte betTypeId, string formatType)
-           => apiService.Execute
-           (
-               () => apiService.GetApi<ISoccerOddsApi>().GetOdds(lang, matchId, betTypeId, formatType)
-           );
-
-        public async Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId, bool getLatestData = false)
+        public async Task<MatchOddsMovement> GetOddsMovementAsync(
+            string lang,
+            string matchId,
+            byte betTypeId,
+            string formatType,
+            string bookmakerId,
+            bool getLatestData = false)
         {
             try
             {
@@ -77,8 +106,13 @@
 
                 return await cacheManager.GetOrSetAsync(
                    oddMovementCacheKey,
-                   () => GetOddsMovementFromApi(lang, matchId, betTypeId, formatType, bookmakerId),
-                   new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds((double)CacheDuration.Long)),
+                   () => apiService.Execute(() => soccerOddsApi.GetOddsMovement(
+                       lang,
+                       matchId,
+                       betTypeId,
+                       formatType,
+                       bookmakerId)),
+                   new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(CacheDuration)),
                    getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -88,11 +122,5 @@
                 return new MatchOddsMovement();
             }
         }
-
-        private Task<MatchOddsMovement> GetOddsMovementFromApi(string lang, string matchId, byte betTypeId, string formatType, string bookmakerId)
-           => apiService.Execute
-           (
-               () => apiService.GetApi<ISoccerOddsApi>().GetOddsMovement(lang, matchId, betTypeId, formatType, bookmakerId)
-           );
     }
 }

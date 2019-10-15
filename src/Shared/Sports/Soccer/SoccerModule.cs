@@ -1,22 +1,20 @@
-﻿using ImTools;
+﻿using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Services;
+using LiveScore.Soccer.Converters;
 using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Services;
+using LiveScore.Soccer.ViewModels.MatchDetails;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
+using LiveScore.Soccer.Views;
+using LiveScore.Soccer.Views.Templates;
+using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
+using Prism.Ioc;
+using Prism.Modularity;
+using Xamarin.Forms;
 
 namespace LiveScore.Soccer
 {
-    using Converters;
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Services;
-    using Prism.Ioc;
-    using Prism.Modularity;
-    using Services;
-    using ViewModels.MatchDetails;
-    using ViewModels.MatchDetails.DetailOdds;
-    using Views;
-    using Views.Templates;
-    using Views.Templates.MatchDetails.DetailOdds;
-    using Xamarin.Forms;
-
     public class SoccerModule : IModule
     {
         public void OnInitialized(IContainerProvider containerProvider)
@@ -33,15 +31,15 @@ namespace LiveScore.Soccer
                 nameof(OddsMovementView) + SportType.Soccer.Value);
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
-            containerRegistry.Register<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
-            containerRegistry.Register<IMatchInfoService, MatchService>();
-            containerRegistry.Register<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
-            containerRegistry.Register<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
-            containerRegistry.Register<IMatchStatusConverter, MatchStatusConverter>(SportType.Soccer.Value.ToString());
-            containerRegistry.Register<IMatchMinuteConverter, MatchMinuteConverter>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
+            containerRegistry.RegisterSingleton<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IMatchStatusConverter, MatchStatusConverter>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IMatchMinuteConverter, MatchMinuteConverter>(SportType.Soccer.Value.ToString());
 
-            containerRegistry.Register<ITimelineEventImageConverter, DefaultEventImageConverter>();
-            containerRegistry.Register<ITimelineEventImageConverter, ScoreChangeImageConverter>(
+            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, DefaultEventImageConverter>();
+            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, ScoreChangeImageConverter>(
                 EventType.ScoreChange.Value.ToString());
         }
     }

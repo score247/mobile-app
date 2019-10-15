@@ -185,7 +185,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var odds = await oddsService.GetOdds(CurrentLanguage.DisplayName, matchId, SelectedBetType.Value, formatType, forceFetchNew).ConfigureAwait(false);
+            var odds = await oddsService.GetOddsAsync(CurrentLanguage.DisplayName, matchId, SelectedBetType.Value, formatType, forceFetchNew).ConfigureAwait(false);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 
