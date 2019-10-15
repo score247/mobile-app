@@ -1,11 +1,11 @@
-﻿namespace LiveScore.Features.Menu.ViewModels
-{
-    using System.Threading.Tasks;
-    using Common.Extensions;
-    using Core;
-    using Core.ViewModels;
-    using Prism.Navigation;
+﻿using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
+using LiveScore.Core;
+using LiveScore.Core.ViewModels;
+using Prism.Navigation;
 
+namespace LiveScore.Features.Menu.ViewModels
+{
     public class MenuViewModelBase : ViewModelBase
     {
         public MenuViewModelBase(INavigationService navigationService, IDependencyResolver serviceLocator)

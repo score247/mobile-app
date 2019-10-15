@@ -17,14 +17,14 @@
 
             var isSelected = (bool)value;
 
-            color = isSelected ? (Color)Application.Current.Resources["ActiveSubTabColor"] : (Color)Application.Current.Resources["SubTabColor"];
-
-            return color;
+            return isSelected
+                ? (Color)Application.Current.Resources["ActiveSubTabColor"]
+                : (Color)Application.Current.Resources["SubTabColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return value?.ToString();
         }
     }
 }
