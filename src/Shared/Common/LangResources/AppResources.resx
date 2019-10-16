@@ -348,13 +348,19 @@
   <data name="OddsHeaderLastUpdated" xml:space="preserve">
     <value>LAST UPDATED</value>
   </data>
-    <data name="OddsHeaderHdp" xml:space="preserve">
+  <data name="OddsHeaderHdp" xml:space="preserve">
     <value>HDP</value>
   </data>
-    <data name="OddsHeaderTime" xml:space="preserve">
+  <data name="OddsHeaderTime" xml:space="preserve">
     <value>TIME</value>
   </data>
-    <data name="OddsHeaderScore" xml:space="preserve">
+  <data name="OddsHeaderScore" xml:space="preserve">
     <value>SCORE</value>
+  </data>
+  <data name="ShowLess" xml:space="preserve">
+    <value>Show Less</value>
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value>Show More</value>
   </data>
 </root>

@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
@@ -18,6 +19,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 {
     internal class DetailTrackerViewModel : TabItemViewModel
     {
+        private const int DefaultLoadingCommentaryItemCount = 30;
         private const string RemoveMatchPrefix = "sr:match:";
         private const string ReplacePrefix = "input-match-id";
         private const string WidgetPrefix = "widget-url";
@@ -41,13 +43,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             OnCollapseTracker = new DelegateCommand(CollapseTracker);
             OnExpandTracker = new DelegateCommand(ExpandTracker);
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
+            IsBusy = true;
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
 
         public ObservableCollection<CommentaryItemViewModel> MatchCommentaries { get; set; }
 
-        public ObservableCollection<CommentaryItemViewModel> RemainingMatchCommentaries { get; set; }
+        public IEnumerable<CommentaryItemViewModel> DefaultMatchCommentaries { get; set; }
+
+        public IEnumerable<CommentaryItemViewModel> RemainingMatchCommentaries { get; set; }
 
         public bool TrackerVisible { get; private set; } = true;
 
@@ -57,13 +63,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         public bool HasCommentariesData { get; private set; }
 
-        public DelegateAsyncCommand RefreshCommand { get; }
-
         public bool IsRefreshing { get; set; }
+
+        public bool IsShowMore { get; private set; } = true;
+
+        public bool IsShowLess => !IsShowMore;
+
+        public string ShowLessMoreButtonText { get; private set; } = AppResources.ShowMore;
+
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public DelegateCommand OnCollapseTracker { get; }
 
         public DelegateCommand OnExpandTracker { get; }
+
+        public DelegateCommand ShowMoreCommentariesCommand { get; }
 
         public override async void OnResumeWhenNetworkOK()
             => await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
@@ -91,6 +105,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentariesAsync(true), false);
 
+        private void ShowMoreCommentaries()
+        {
+            if (IsShowMore)
+            {
+                foreach (var commentary in RemainingMatchCommentaries)
+                {
+                    MatchCommentaries.Add(commentary);
+                }
+
+                ShowLessMoreButtonText = AppResources.ShowLess;
+                IsShowMore = false;
+            }
+            else
+            {
+                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
+                ShowLessMoreButtonText = AppResources.ShowMore;
+                IsShowMore = true;
+            }
+        }
+
         private void LoadTracker()
         {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
@@ -114,7 +148,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 { WidgetPrefix, coverage.TrackerWidgetLink },
                 { LanguagePrefix, LanguageCode },
             });
-
         }
 
         [Time]
@@ -122,14 +155,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             var commentaries = (await soccerMatchService
                     .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
-                    .OrderByDescending(c => c.Time);
+                    .OrderByDescending(c => c.Time)
+                    .ToList();
 
-            if (commentaries.Any())
+            if (commentaries.Count > 0)
             {
                 var commentaryViewModels = commentaries
-                    .Select(c => new CommentaryItemViewModel(c, DependencyResolver));
+                    .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
+                    .ToList();
 
-                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
+                DefaultMatchCommentaries = commentaryViewModels.Take(DefaultLoadingCommentaryItemCount);
+                RemainingMatchCommentaries = commentaryViewModels.Skip(DefaultLoadingCommentaryItemCount);
+                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
+
                 HasCommentariesData = true;
             }
 

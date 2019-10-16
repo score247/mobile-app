@@ -109,7 +109,13 @@
             </tabStrip:TabITemListView.ItemTemplate>
             <tabStrip:TabITemListView.Footer>
                 <StackLayout BackgroundColor="Transparent"
-                             HeightRequest="300" />
+                             HorizontalOptions="Center"
+                             HeightRequest="300">
+                    <Button Text="{Binding ShowLessMoreButtonText}"
+                            IsVisible="{Binding IsNotBusy}"
+                            TextColor="White"
+                            Command="{Binding ShowMoreCommentariesCommand}"></Button>
+                </StackLayout>
             </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </StackLayout>
