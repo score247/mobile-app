@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
@@ -26,7 +27,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
     {
         private readonly string matchId;
         private readonly string oddsFormat;
-
         private readonly MatchStatus eventStatus;
         private readonly IOddsService oddsService;
 
@@ -37,7 +37,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, serviceLocator, dataTemplate, eventAggregator, 0)
+            : base(navigationService, serviceLocator, dataTemplate, eventAggregator, AppResources.Odds)
         {
             this.matchId = matchId;
             this.eventStatus = eventStatus;
@@ -50,7 +50,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsRefreshing = false;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
-
 
             RefreshCommand = new DelegateAsyncCommand(()
                 => LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));

@@ -363,4 +363,28 @@
   <data name="ShowMore" xml:space="preserve">
     <value>Show More</value>
   </data>
+  <data name="H2H" xml:space="preserve">
+    <value>H2H</value>
+  </data>
+  <data name="Info" xml:space="preserve">
+    <value>Info</value>
+  </data>
+  <data name="Lineups" xml:space="preserve">
+    <value>Line-ups</value>
+  </data>
+  <data name="Odds" xml:space="preserve">
+    <value>Odds</value>
+  </data>
+  <data name="Social" xml:space="preserve">
+    <value>Social</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Stats</value>
+  </data>
+  <data name="Table" xml:space="preserve">
+    <value>Table</value>
+  </data>
+  <data name="Tracker" xml:space="preserve">
+    <value>Tracker</value>
+  </data>
 </root>

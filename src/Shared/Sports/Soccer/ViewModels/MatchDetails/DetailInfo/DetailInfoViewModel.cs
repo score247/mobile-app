@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
@@ -34,7 +35,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, 1)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Info)
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;

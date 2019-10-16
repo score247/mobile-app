@@ -349,6 +349,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to H2H.
+        /// </summary>
+        public static string H2H {
+            get {
+                return ResourceManager.GetString("H2H", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Half Time.
         /// </summary>
         public static string HalfTime {
@@ -376,6 +385,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Info.
+        /// </summary>
+        public static string Info {
+            get {
+                return ResourceManager.GetString("Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INT.
         /// </summary>
         public static string INT {
@@ -399,6 +417,15 @@ namespace LiveScore.Common.LangResources {
         public static string Leagues {
             get {
                 return ResourceManager.GetString("Leagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Line-ups.
+        /// </summary>
+        public static string Lineups {
+            get {
+                return ResourceManager.GetString("Lineups", resourceCulture);
             }
         }
         
@@ -471,6 +498,15 @@ namespace LiveScore.Common.LangResources {
         public static string NoGames {
             get {
                 return ResourceManager.GetString("NoGames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Odds.
+        /// </summary>
+        public static string Odds {
+            get {
+                return ResourceManager.GetString("Odds", resourceCulture);
             }
         }
         
@@ -682,11 +718,38 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Social.
+        /// </summary>
+        public static string Social {
+            get {
+                return ResourceManager.GetString("Social", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Delayed.
         /// </summary>
         public static string StartDelayed {
             get {
                 return ResourceManager.GetString("StartDelayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stats.
+        /// </summary>
+        public static string Stats {
+            get {
+                return ResourceManager.GetString("Stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table.
+        /// </summary>
+        public static string Table {
+            get {
+                return ResourceManager.GetString("Table", resourceCulture);
             }
         }
         
@@ -732,6 +795,15 @@ namespace LiveScore.Common.LangResources {
         public static string TotalShots {
             get {
                 return ResourceManager.GetString("TotalShots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tracker.
+        /// </summary>
+        public static string Tracker {
+            get {
+                return ResourceManager.GetString("Tracker", resourceCulture);
             }
         }
         

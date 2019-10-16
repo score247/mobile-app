@@ -25,7 +25,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
-
         private readonly MatchCoverage matchCoverage;
         private readonly ISoccerMatchService soccerMatchService;
         private bool isFirstLoad = true;
@@ -36,7 +35,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, 9)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Tracker)
         {
             matchCoverage = coverage;
             soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();

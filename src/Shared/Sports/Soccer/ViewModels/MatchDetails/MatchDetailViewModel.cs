@@ -18,14 +18,14 @@ using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.DetailH2H;
-using LiveScore.Soccer.ViewModels.DetailLineups;
-using LiveScore.Soccer.ViewModels.DetailSocial;
 using LiveScore.Soccer.ViewModels.DetailStats;
 using LiveScore.Soccer.ViewModels.DetailTable;
-using LiveScore.Soccer.ViewModels.DetailTV;
 using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailSocial;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailTV;
 using LiveScore.Soccer.Views.Templates.DetailH2H;
 using LiveScore.Soccer.Views.Templates.DetailInfo;
 using LiveScore.Soccer.Views.Templates.DetailLinesUp;
@@ -207,8 +207,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage
-                = await soccerMatchService.GetMatchCoverageAsync(
+            var coverage = await soccerMatchService.GetMatchCoverageAsync(
                     MatchViewModel.Match.Id,
                     CurrentLanguage,
                     forceFetchLatestData: true).ConfigureAwait(false);
@@ -237,7 +236,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 if (tabItemViewModels.ContainsKey(function))
                 {
                     var tabModel = tabItemViewModels[function];
-                    tabModel.Title = function.DisplayName;
 
                     viewModels.Add(tabModel);
                 }
@@ -250,7 +248,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             if (args != null)
             {
-                Title = TabItems[args.Index].Title;
                 selectedTabItem = Enumeration.FromValue<MatchDetailFunction>(args.Index);
             }
         }

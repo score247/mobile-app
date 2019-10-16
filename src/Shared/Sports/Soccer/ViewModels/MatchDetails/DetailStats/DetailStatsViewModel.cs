@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
+using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
@@ -24,7 +25,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, serviceLocator, dataTemplate, eventAggregator, 6)
+            : base(navigationService, serviceLocator, dataTemplate, eventAggregator, AppResources.Stats)
         {
             this.matchId = matchId;
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();

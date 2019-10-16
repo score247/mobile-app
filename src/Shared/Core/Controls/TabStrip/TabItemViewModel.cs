@@ -13,22 +13,20 @@
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             DataTemplate dataTemplate,
-            IEventAggregator eventAggregator, 
-            byte index)
+            IEventAggregator eventAggregator,
+            string tabHeaderName)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             Template = dataTemplate;
-
-            TabHeaderTitle = index.ToString();  // Get from resource if the text is multi language.
+            TabHeaderName = tabHeaderName;
         }
 
         public bool IsFirstLoad { get; protected set; } = true;
 
         public DataTemplate Template { get; }
 
-        public string TabHeaderTitle { get; }
+        public string TabHeaderName { get; }
 
-        public byte Index { get; }
         protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {
             await base.LoadDataAsync(loadDataFunc, showBusy && IsFirstLoad);
