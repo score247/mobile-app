@@ -43,7 +43,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             OnExpandTracker = new DelegateCommand(ExpandTracker);
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
-            IsBusy = true;
         }
 
         public HtmlWebViewSource WidgetContent { get; set; }
