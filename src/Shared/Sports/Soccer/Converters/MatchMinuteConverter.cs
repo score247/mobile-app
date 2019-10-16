@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Converters;
@@ -45,11 +44,13 @@ namespace LiveScore.Soccer.Converters
             this.loggingService = loggingService;
         }
 
-        public string BuildMatchMinute(IMatch match)
+        public string BuildMatchMinute(IMatch match) => BuildMatchMinute(match, DateTimeOffset.UtcNow);
+
+        internal string BuildMatchMinute(IMatch match, DateTimeOffset queryTime)
         {
             try
             {
-                if (!(match is Match))
+                if (!(match is Match) || match == null)
                 {
                     return string.Empty;
                 }
@@ -64,7 +65,7 @@ namespace LiveScore.Soccer.Converters
                     : soccerMatch.CurrentPeriodStartTime;
 
                 // TODO: What if CurrentPeriodStartTime does not have data?
-                var matchMinute = (int)(periodStartMinute + (DateTimeOffset.UtcNow - periodStartTime).TotalMinutes);
+                var matchMinute = (int)(periodStartMinute + (queryTime - periodStartTime).TotalMinutes);
 
                 if ((soccerMatch.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime() > 0)
                 {
@@ -80,8 +81,6 @@ namespace LiveScore.Soccer.Converters
                 {
                     matchMinute = periodStartMinute;
                 }
-
-                Debug.WriteLine($"{match.Id}-{matchMinute}");
 
                 return $"{matchMinute}'";
             }

@@ -1,15 +1,18 @@
-﻿namespace LiveScore.Soccer.Models.Matches
-{
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
-    using MessagePack;
-    using PropertyChanged;
-    using Teams;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Models.Teams;
+using MessagePack;
+using PropertyChanged;
+using LiveScore.Soccer.Models.Teams;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("Soccer.Tests")]
+
+namespace LiveScore.Soccer.Models.Matches
+{
     [AddINotifyPropertyChangedInterface, MessagePackObject]
     public class Match : IMatch
     {

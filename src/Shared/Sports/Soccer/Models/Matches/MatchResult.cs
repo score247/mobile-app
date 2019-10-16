@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using PropertyChanged;
 
+[assembly: InternalsVisibleToAttribute("Soccer.Tests")]
 namespace LiveScore.Soccer.Models.Matches
 {
     [AddINotifyPropertyChangedInterface]
