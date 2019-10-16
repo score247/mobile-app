@@ -106,7 +106,7 @@
                 </tabStrip:TabITemListView.Behaviors>
                 <tabStrip:TabITemListView.Footer>
                     <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="{Binding FooterHeight}" />
+                                 HeightRequest="300" />
                 </tabStrip:TabITemListView.Footer>
             </tabStrip:TabITemListView>
         </StackLayout>

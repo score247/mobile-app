@@ -179,8 +179,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                         DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();
-
-            SetFooterHeight(BetTypeOddsItems.Count);
         }
 
         private bool CanLoadOdds(BetType betType, bool isRefresh)

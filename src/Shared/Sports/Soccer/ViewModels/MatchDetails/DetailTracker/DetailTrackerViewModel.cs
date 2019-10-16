@@ -130,7 +130,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                     .Select(c => new CommentaryItemViewModel(c, DependencyResolver));
 
                 MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(commentaryViewModels);
-                SetFooterHeight(MatchCommentaries.Count);
                 HasCommentariesData = true;
             }
 

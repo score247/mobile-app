@@ -17,8 +17,8 @@ namespace LiveScore.iOS.Renderers
 
             if (Control != null)
             {
-                Control.MultipleTouchEnabled = true;
                 var tvDelegate = new TableViewDelegate();
+
                 Control.Delegate = tvDelegate;
                 tvDelegate.OnScrolled += TvDelegate_OnScrolled;
             }

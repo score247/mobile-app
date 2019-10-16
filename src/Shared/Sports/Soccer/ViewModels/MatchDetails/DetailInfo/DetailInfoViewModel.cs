@@ -40,7 +40,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
-            DefaultListViewItemHeight = 70;
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -171,8 +170,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
                 soccerTimeline.Select(t =>
                     BaseItemViewModel.CreateInstance(t, MatchInfo, NavigationService, DependencyResolver).BuildData()));
-
-            SetFooterHeight(InfoItemViewModels.Count);
         }
 
         private void BuildFooterInfo(MatchInfo matchInfo)

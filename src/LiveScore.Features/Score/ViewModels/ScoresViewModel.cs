@@ -73,17 +73,23 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void OnScoreItemAppeared(ItemAppearedEventArgs args)
         {
-            if (SelectedScoreItem != null)
+            if (SelectedScoreItem == null)
             {
-                SelectedScoreItem.IsActive = true;
-
-                if (secondLoad)
-                {
-                    SelectedScoreItem.OnAppearing();
-                }
-
-                secondLoad = true;
+                return;
             }
+
+            SelectedScoreItem.IsActive = true;
+
+            if (secondLoad)
+            {
+                SelectedScoreItem.OnAppearing();
+            }
+            else
+            {
+                ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
+            }
+
+            secondLoad = true;
         }
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)
@@ -113,7 +119,6 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemSources.Add(
                 new CalendarItemViewModel(NavigationService, DependencyResolver, EventAggregator));
 
-            ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
             SelectedScoreItem = ScoreItemSources[TodayDateBarItemIndex];
         }
 

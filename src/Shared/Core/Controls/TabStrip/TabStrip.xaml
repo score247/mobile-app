@@ -9,7 +9,7 @@
              HorizontalOptions="FillAndExpand"
              VerticalOptions="FillAndExpand">
     <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand" >
+        <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout.Resources>
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>
@@ -19,7 +19,6 @@
             <cards:CarouselView x:Name="TabContent"
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
-                                IsClippedToBounds="True"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}"

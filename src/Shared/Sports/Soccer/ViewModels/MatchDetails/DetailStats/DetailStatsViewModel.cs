@@ -36,7 +36,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
 
         public MatchStatisticItem MainStatistic { get; private set; }
 
-        public IEnumerable<MatchStatisticItem> SubStatisticItems { get; private set; }
+        public IReadOnlyList<MatchStatisticItem> SubStatisticItems { get; private set; }
 
         public bool IsRefreshing { get; set; }
 
@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
             if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))
             {
                 MainStatistic = matchStatistic.GetMainStatistic();
-                SubStatisticItems = matchStatistic.GetSubStatisticItems();
+                SubStatisticItems = matchStatistic.GetSubStatisticItems().ToList();
                 HasData = MainStatistic.IsVisibled || SubStatisticItems.Any();
             }
             else
@@ -57,7 +57,6 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
                 HasData = false;
             }
 
-            SetFooterHeight(SubStatisticItems.Count());
             IsRefreshing = false;
         }
 

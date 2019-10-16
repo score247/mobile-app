@@ -7,7 +7,7 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
-    <StackLayout>
+    <StackLayout VerticalOptions="FillAndExpand">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -109,7 +109,7 @@
             </tabStrip:TabITemListView.ItemTemplate>
             <tabStrip:TabITemListView.Footer>
                 <StackLayout BackgroundColor="Transparent"
-                             HeightRequest="{Binding FooterHeight}" />
+                             HeightRequest="300" />
             </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </StackLayout>

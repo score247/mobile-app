@@ -41,7 +41,7 @@
                                   SeparatorColor="Transparent">
             <tabStrip:TabITemListView.Footer>
                 <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
-                             HeightRequest="{Binding FooterHeight}"
+                             HeightRequest="500"
                              IsVisible="{Binding IsNotLoading}">
                     <FlexLayout Style="{StaticResource Group}">
                         <Label AutomationId="MatchInfoHeaderTitle"
