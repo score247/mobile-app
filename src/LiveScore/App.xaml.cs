@@ -74,8 +74,6 @@ namespace LiveScore
 
             AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
                   typeof(Analytics), typeof(Crashes));
-
-          
         }
 
         protected override void ConfigureViewModelLocator()
@@ -119,7 +117,6 @@ namespace LiveScore
             Debug.WriteLine("OnSleep");
 
             base.OnSleep();
-            ImageService.Instance.SetExitTasksEarly(true);
 
             Analytics.TrackEvent("Application OnSleep");
         }
@@ -133,8 +130,6 @@ namespace LiveScore
             base.OnResume();
 
             await Task.Run(async () => await soccerHub.ReConnect());
-
-            ImageService.Instance.SetExitTasksEarly(false);
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)
