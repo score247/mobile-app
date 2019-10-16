@@ -16,8 +16,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             EventType.PenaltyMissed
         };
 
-        private readonly ITimelineEventImageConverter imageConverter;
-
         public DefaultItemViewModel(
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
@@ -25,7 +23,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver)
              : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
-            imageConverter = DependencyResolver.Resolve<ITimelineEventImageConverter>();
         }
 
         public override BaseItemViewModel BuildData()
@@ -34,7 +31,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
             if (TimelineEvent != null && !string.IsNullOrWhiteSpace(TimelineEvent.Type.DisplayName))
             {
-                var imageSource = imageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent.Type));
+                var imageSource = ImageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent.Type));
 
                 if (!string.IsNullOrEmpty(imageSource))
                 {

@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+﻿using LiveScore.Soccer.Converters.TimelineImages;
+
+namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
@@ -29,18 +31,16 @@
 
             if (TimelineEvent.HomeShootoutPlayer != null)
             {
-                HomeImageSource = TimelineEvent.IsHomeShootoutScored ?
-                    Images.PenaltyShootoutGoal.Value :
-                    Images.MissedPenaltyShootoutGoal.Value;
+                HomeImageSource = ImageConverter.BuildImageSource(
+                    new TimelineEventImage(TimelineEvent.Type, isPenaltyScored: TimelineEvent.IsHomeShootoutScored));
 
                 HomePlayerName = TimelineEvent.HomeShootoutPlayer?.Name;
             }
 
             if (TimelineEvent.AwayShootoutPlayer != null)
             {
-                AwayImageSource = TimelineEvent.IsAwayShootoutScored ?
-                    Images.PenaltyShootoutGoal.Value :
-                    Images.MissedPenaltyShootoutGoal.Value;
+                AwayImageSource = ImageConverter.BuildImageSource(
+                    new TimelineEventImage(TimelineEvent.Type, isPenaltyScored: TimelineEvent.IsAwayShootoutScored));
 
                 AwayPlayerName = TimelineEvent.AwayShootoutPlayer?.Name;
             }

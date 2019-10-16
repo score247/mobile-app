@@ -89,7 +89,7 @@ namespace LiveScore.Soccer.Services
             {
                 HandleException(ex);
 
-                return null;
+                return new MatchInfo();
             }
         }
 

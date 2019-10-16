@@ -41,6 +41,8 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterSingleton<ITimelineEventImageConverter, DefaultEventImageConverter>();
             containerRegistry.RegisterSingleton<ITimelineEventImageConverter, ScoreChangeImageConverter>(
                 EventType.ScoreChange.Value.ToString());
+            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, PenaltyShootOutImageConverter>(
+                EventType.PenaltyShootout.Value.ToString());
         }
     }
 }

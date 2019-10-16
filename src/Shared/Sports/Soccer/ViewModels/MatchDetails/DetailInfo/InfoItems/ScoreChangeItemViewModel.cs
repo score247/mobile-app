@@ -10,8 +10,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     public class ScoreChangeItemViewModel : BaseItemViewModel
     {
-        private readonly ITimelineEventImageConverter imageConverter;
-
         public ScoreChangeItemViewModel(
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
@@ -19,7 +17,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver)
              : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
-            imageConverter = DependencyResolver.Resolve<ITimelineEventImageConverter>(timelineEvent.Type.Value.ToString());
         }
 
         public string HomeAssistName { get; private set; }
@@ -39,7 +36,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IsVisibleHomeAssist = TimelineEvent?.Assist != null && TimelineEvent.OfHomeTeam();
             IsVisibleAwayAssist = TimelineEvent?.Assist != null && !TimelineEvent.OfHomeTeam();
 
-            ImageSource = imageConverter.BuildImageSource(
+            ImageSource = ImageConverter.BuildImageSource(
                 new TimelineEventImage(TimelineEvent?.Type, TimelineEvent?.GoalScorer));
 
             if (TimelineEvent.OfHomeTeam())

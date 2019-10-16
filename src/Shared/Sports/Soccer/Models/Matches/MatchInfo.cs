@@ -7,6 +7,10 @@ namespace LiveScore.Soccer.Models.Matches
     [MessagePackObject]
     public class MatchInfo
     {
+        public MatchInfo()
+        {
+        }
+
         public MatchInfo(Match match, IEnumerable<TimelineEvent> timelineEvents, Venue venue, string referee, int attendance)
         {
             Match = match;

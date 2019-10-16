@@ -195,6 +195,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private static IEnumerable<TimelineEvent> FilterPenaltyEvents(MatchInfo matchInfo)
         {
+            if (matchInfo?.Match == null || matchInfo.TimelineEvents == null)
+            {
+                return Enumerable.Empty<TimelineEvent>();
+            }
+
             var match = matchInfo.Match;
             var timelineEvents = matchInfo.TimelineEvents.ToList();
 

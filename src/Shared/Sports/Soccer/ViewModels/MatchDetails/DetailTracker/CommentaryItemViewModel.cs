@@ -58,8 +58,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 imageConverter = new DefaultEventImageConverter();
             }
 
-            ImageSource =
-                imageConverter.BuildImageSource(new TimelineEventImage(Commentary.TimelineType, Commentary.GoalScorer));
+            ImageSource = imageConverter.BuildImageSource(
+                    new TimelineEventImage(Commentary.TimelineType, Commentary.GoalScorer, Commentary.IsPenaltyShootOutScored));
         }
 
         private void BuildCommentaryText()

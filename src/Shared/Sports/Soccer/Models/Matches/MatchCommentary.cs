@@ -17,7 +17,8 @@ namespace LiveScore.Soccer.Models.Matches
             byte matchTime,
             string stoppageTime,
             IEnumerable<Commentary> commentaries,
-            GoalScorer goalScorer)
+            GoalScorer goalScorer,
+            bool isPenaltyShootOutScored)
         {
             TimelineId = timelineId;
             TimelineType = timelineType;
@@ -26,6 +27,7 @@ namespace LiveScore.Soccer.Models.Matches
             StoppageTime = stoppageTime;
             Commentaries = commentaries;
             GoalScorer = goalScorer;
+            IsPenaltyShootOutScored = isPenaltyShootOutScored;
         }
 
         [Key(0)]
@@ -48,6 +50,9 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(6)]
         public GoalScorer GoalScorer { get; }
+
+        [Key(7)]
+        public bool IsPenaltyShootOutScored { get; }
     }
 
     [MessagePackObject]

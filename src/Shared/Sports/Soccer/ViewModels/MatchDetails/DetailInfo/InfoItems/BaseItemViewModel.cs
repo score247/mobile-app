@@ -4,6 +4,7 @@ using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
 using Prism.Navigation;
@@ -50,6 +51,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             MatchInfo = matchInfo;
             Match = matchInfo.Match;
             ItemAutomationId = $"{TimelineEvent.Id}-{TimelineEvent.Type}";
+            ResolveImageConverter(TimelineEvent.Type);
         }
 
         public string ItemAutomationId { get; }
@@ -77,6 +79,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         public bool VisibleHomeImage { get; protected set; }
 
         public bool VisibleAwayImage { get; protected set; }
+
+        protected ITimelineEventImageConverter ImageConverter { get; set; }
 
         public static BaseItemViewModel CreateInstance(
             TimelineEvent timelineEvent,
@@ -108,6 +112,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
                 : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}'";
 
             return this;
+        }
+
+        private void ResolveImageConverter(EventType eventType)
+        {
+            try
+            {
+                ImageConverter =
+                    DependencyResolver.Resolve<ITimelineEventImageConverter>(eventType.Value.ToString());
+            }
+            catch
+            {
+                ImageConverter = new DefaultEventImageConverter();
+            }
         }
     }
 }
