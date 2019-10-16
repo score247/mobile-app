@@ -2,9 +2,15 @@
 <ContentView x:Class="LiveScore.Core.Views.Templates.NavigationTitleTemplate"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
              xmlns:converters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common">
     <ContentView.Resources>
         <converters:UpperCaseConverter x:Key="UpperCaseConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:NavigationTitleViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
         <FlexLayout AutomationProperties.IsInAccessibleTree="False"
@@ -13,10 +19,7 @@
                    AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                    Style="{StaticResource SportName}"
                    Text="{Binding CurrentSport, Converter={StaticResource UpperCaseConverter}}" />
-            <Label Style="{StaticResource Icons}"
-                   Text="&#xe902;"
-                   TextColor="{StaticResource PrimaryAccentColor}"
-                   FontSize="6" />
+            <Label Style="{StaticResource SportDropdownIcon}" />
         </FlexLayout>
     </ContentView.Content>
 </ContentView>

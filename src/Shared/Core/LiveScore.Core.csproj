@@ -74,6 +74,9 @@
       <Compile Update="ViewResources\MatchHeaderViewResource.xaml.cs">
         <DependentUpon>MatchHeaderViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="ViewResources\NavigationTitleViewResource.xaml.cs">
+        <DependentUpon>NavigationTitleViewResource.xaml</DependentUpon>
+      </Compile>
       <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
         <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
       </Compile>

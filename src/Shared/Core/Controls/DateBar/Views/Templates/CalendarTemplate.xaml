@@ -8,11 +8,9 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.CalendarTemplate">
 
-    <FlexLayout HorizontalOptions="FillAndExpand"
-                Direction="Column"
-                Padding="0,12,0,12"
-                AlignItems="Center"
-                JustifyContent="Center">
+    <FlexLayout AlignItems="Center"
+                JustifyContent="Center"
+                WidthRequest="60">
         <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

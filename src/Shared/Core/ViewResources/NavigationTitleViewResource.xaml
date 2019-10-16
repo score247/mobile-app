@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary x:Class="LiveScore.Core.ViewResources.NavigationTitleViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Style x:Key="SportName" BasedOn="{StaticResource NavigationName}" TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource SportNameFontSize}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="Margin" Value="0,0,4,0" />
+    </Style>
+    <Style x:Key="SportDropdownIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+        <Setter Property="Margin" Value="0,-1,0,1" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Text" Value="&#xe902;" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+</ResourceDictionary>

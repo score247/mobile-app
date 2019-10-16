@@ -9,6 +9,10 @@
                 Value="18" />
         <Setter Property="Text"
                 Value="&#xe919;" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
     </Style>
 
     <Style x:Key="LiveIcon"

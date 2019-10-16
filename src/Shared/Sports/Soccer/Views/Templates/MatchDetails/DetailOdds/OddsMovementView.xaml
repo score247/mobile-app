@@ -10,6 +10,11 @@
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
     BackgroundColor="#202124"
     mc:Ignorable="d">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
