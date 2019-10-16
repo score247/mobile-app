@@ -5,9 +5,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 {
     public static class TrackerWidgetHtml
     {
-        private static string FirstContent = GenerateFirstContent();
-        private static string SecondContent = GenerateSecondContent();
-
         public static string Generate(IDictionary<string, string> replaceValues)
         {
             var secondContent = SecondContent;
@@ -19,9 +16,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             return FirstContent + secondContent;
         }
 
-        private static string GenerateFirstContent()
-        {
-            var firstContent = "<!DOCTYPE HTML>"
+        private static string FirstContent = "<!DOCTYPE HTML>"
             + "<html>"
             + "    <head>"
             + "        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />"
@@ -1849,10 +1844,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             + "            (function(a,b,c,d,e,f,g,h,i){a[e]||(i=a[e]=function(){(a[e].q=a[e].q||[]).push(arguments)},i.l=1*new Date,i.o=f,"
             + "g=b.createElement(c),h=b.getElementsByTagName(c)[0],g.async=1,g.src=d,g.setAttribute(\"n\",e),h.parentNode.insertBefore(g,h)";
 
-            return firstContent;
-        }
-        private static string GenerateSecondContent()
-            => ")})(window,document,\"script\", \"widget-url\", \"SIR\", {"
+        private static string SecondContent
+            = ")})(window,document,\"script\", \"widget-url\", \"SIR\", {"
             + "    theme: false,"
             + "language: 'input-language',"
             + "	matchId: 'input-match-id'"
