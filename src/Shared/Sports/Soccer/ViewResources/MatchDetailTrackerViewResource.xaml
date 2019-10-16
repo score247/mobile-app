@@ -114,4 +114,14 @@
         <Setter Property="TextColor"
                 Value="{StaticResource PrimaryTextColor}" />
     </Style>
+    <Style x:Key="MatchTrackerShowMoreButton" TargetType="Button">
+        <Setter Property="WidthRequest" Value="156" />
+        <Setter Property="HeightRequest" Value="36" />
+        <Setter Property="CornerRadius" Value="18" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Margin" Value="0,4,0,0" />
+        <Setter Property="BackgroundColor" Value="#3A3942" />
+        <Setter Property="TextColor" Value="#CBCBCB" />
+    </Style>
 </ResourceDictionary>

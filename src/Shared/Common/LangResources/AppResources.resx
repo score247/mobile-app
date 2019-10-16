@@ -358,10 +358,10 @@
     <value>SCORE</value>
   </data>
   <data name="ShowLess" xml:space="preserve">
-    <value>Show Less</value>
+    <value>SHOW LESS</value>
   </data>
   <data name="ShowMore" xml:space="preserve">
-    <value>Show More</value>
+    <value>SHOW MORE</value>
   </data>
   <data name="H2H" xml:space="preserve">
     <value>H2H</value>

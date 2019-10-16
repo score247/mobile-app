@@ -700,7 +700,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show Less.
+        ///   Looks up a localized string similar to SHOW LESS.
         /// </summary>
         public static string ShowLess {
             get {
@@ -709,7 +709,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show More.
+        ///   Looks up a localized string similar to SHOW MORE.
         /// </summary>
         public static string ShowMore {
             get {

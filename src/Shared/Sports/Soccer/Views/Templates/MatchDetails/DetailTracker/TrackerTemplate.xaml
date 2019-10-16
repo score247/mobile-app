@@ -78,6 +78,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                             <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -101,8 +102,7 @@
                                        Style="{StaticResource MatchTrackerCommentariesText}"
                                        TextColor="{Binding CommentaryTextColor}"
                                        Text="{Binding CommentaryText}" />
-                            </Grid>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
+                            </Grid>                            
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -113,7 +113,7 @@
                              HeightRequest="300">
                     <Button Text="{Binding ShowLessMoreButtonText}"
                             IsVisible="{Binding IsNotBusy}"
-                            TextColor="White"
+                            Style="{StaticResource MatchTrackerShowMoreButton}"
                             Command="{Binding ShowMoreCommentariesCommand}"></Button>
                 </StackLayout>
             </tabStrip:TabITemListView.Footer>
