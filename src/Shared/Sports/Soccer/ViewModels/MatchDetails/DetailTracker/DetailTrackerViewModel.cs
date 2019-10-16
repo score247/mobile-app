@@ -24,9 +24,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
-        private const int DefaultLoadingCommentaryItemCount = 30;
+
         private readonly MatchCoverage matchCoverage;
-        private readonly ISoccerMatchService matchInfoService;
+        private readonly ISoccerMatchService soccerMatchService;
         private bool isFirstLoad = true;
 
         public DetailTrackerViewModel(
@@ -38,7 +38,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator)
         {
             matchCoverage = coverage;
-            matchInfoService = dependencyResolver.Resolve<ISoccerMatchService>();
+            soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();
             OnCollapseTracker = new DelegateCommand(CollapseTracker);
             OnExpandTracker = new DelegateCommand(ExpandTracker);
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
@@ -78,9 +78,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (isFirstLoad)
             {
-                await LoadTracker();
+                await LoadTrackerAsync();
 
-                await LoadDataAsync(() => LoadMatchCommentaries(true), true);
+                await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
             }
 
             isFirstLoad = false;
@@ -120,10 +120,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         }
 
         [Time]
-        private async Task LoadMatchCommentaries(bool getLatestData = false)
+        private async Task LoadMatchCommentariesAsync(bool forceFetchLatestData = false)
         {
-            var commentaries = (await matchInfoService
-                    .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, getLatestData))
+            var commentaries = (await soccerMatchService
+                    .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
                     .OrderByDescending(c => c.Time);
 
             if (commentaries.Any())
