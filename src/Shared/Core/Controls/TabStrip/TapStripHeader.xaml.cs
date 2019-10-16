@@ -56,7 +56,7 @@ namespace LiveScore.Core.Controls.TabStrip
 
         private static void InitTabHeader(TabStripHeader control, IList<TabItemViewModel> tabs)
         {
-            for (var index = 0; index < tabs.Count; index++)
+            for (byte index = 0; index < tabs.Count; index++)
             {
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
@@ -75,7 +75,7 @@ namespace LiveScore.Core.Controls.TabStrip
             }
         }
 
-        private static StackLayout CreateItemLayout(TabStripHeader control, int index)
+        private static StackLayout CreateItemLayout(TabStripHeader control, byte index)
         {
             var itemLayout = new StackLayout
             {

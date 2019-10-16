@@ -24,7 +24,7 @@ namespace LiveScore.Core.Controls.TabStrip
             TabHeader.ItemTappedCommand = new Command((index) =>
             {
                 Debug.WriteLine($"TabHeader tapped {index}");
-                SelectedIndex = (int)index;
+                SelectedIndex = (byte)index;
             });
 
             TabContent.ItemDisappearing += TabContent_ItemDisappearing;
@@ -46,12 +46,11 @@ namespace LiveScore.Core.Controls.TabStrip
               nameof(SelectedIndex),
               typeof(byte),
               typeof(TabItemViewModel),
-              0,
+              (byte)0,
               propertyChanged: (bindable, oldValue, newValue) =>
               {
                   var newIndex = (byte)newValue;
                   var oldIndex = (byte)oldValue;
-
 
                   if (!(bindable is TabStrip control))
                   {
@@ -63,9 +62,9 @@ namespace LiveScore.Core.Controls.TabStrip
                   control.ItemTappedCommand?.Execute(new TabStripItemTappedEventArgs(newIndex));
               });
 
-        public int SelectedIndex
+        public byte SelectedIndex
         {
-            get => (int)GetValue(SelectedIndexProperty);
+            get => (byte)GetValue(SelectedIndexProperty);
             set => SetValue(SelectedIndexProperty, value);
         }
 

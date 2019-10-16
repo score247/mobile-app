@@ -51,6 +51,7 @@
                            Grid.Column="0"
                            AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}"
                            HorizontalTextAlignment="End"
+                           LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoMainPlayer}"
                            Text="{Binding HomePlayerName}" />
                     <ffImageLoading:CachedImage Grid.Row="0"
@@ -67,6 +68,7 @@
                            HorizontalTextAlignment="End"
                            IsVisible="{Binding IsVisibleHomeAssist}"
                            Style="{StaticResource MatchInfoAssistedPlayer}"
+                           LineBreakMode="TailTruncation"
                            Text="{Binding HomeAssistName}" />
                     <ffImageLoading:CachedImage Grid.Row="1"
                                                 Grid.Column="1"
@@ -104,6 +106,7 @@
                            Grid.Column="1"
                            AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
                            Style="{StaticResource MatchInfoMainPlayer}"
+                           LineBreakMode="TailTruncation"
                            Text="{Binding AwayPlayerName}" />
 
                     <ffImageLoading:CachedImage Grid.Row="1"
@@ -116,6 +119,7 @@
                            Grid.Column="1"
                            AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}"
                            IsVisible="{Binding IsVisibleAwayAssist}"
+                           LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoAssistedPlayer}"
                            Text="{Binding AwayAssistName}" />
                 </Grid>
