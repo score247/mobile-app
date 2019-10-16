@@ -30,7 +30,7 @@
                                   IsRefreshing="{Binding IsRefreshing}"
                                   RefreshCommand="{Binding RefreshCommand}"
                                   VerticalOptions="FillAndExpand"
-                                  SeparatorVisibility="None">
+                                  SeparatorColor="Transparent">
             <tabStrip:TabITemListView.Header>
                 <StackLayout>
                     <Label Style="{StaticResource NoInfo}"
@@ -78,7 +78,6 @@
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
                             <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -103,6 +102,7 @@
                                        TextColor="{Binding CommentaryTextColor}"
                                        Text="{Binding CommentaryText}" />
                             </Grid>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
