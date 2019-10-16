@@ -6,21 +6,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 {
     public static class TrackerWidgetHtml
     {
-        private static readonly string FirstContent = BuildFirstContent();
-        private static readonly string SecondContent = BuildSecondContent();
+        private static readonly string StaticContent = BuildStaticContent();
+        private static readonly string DynamicContent = BuildDynamicContent();
 
         public static string Generate(IDictionary<string, string> replaceValues)
         {
-            var secondContent = SecondContent;
+            var secondContent = DynamicContent;
             foreach (var keyValue in replaceValues)
             {
                 secondContent = secondContent.Replace(keyValue.Key, keyValue.Value);
             }
 
-            return FirstContent + secondContent;
+            return StaticContent + secondContent;
         }
 
-        private static string BuildFirstContent()
+        private static string BuildStaticContent()
         {
             var builder = new StringBuilder();
             builder.Append("<!DOCTYPE HTML>");
@@ -1862,7 +1862,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             return builder.ToString();
         }
 
-        private static string BuildSecondContent()
+        private static string BuildDynamicContent()
         {
             var builder = new StringBuilder();
             builder.Append(")})(window,document,\"script\", \"widget-url\", \"SIR\", {");
