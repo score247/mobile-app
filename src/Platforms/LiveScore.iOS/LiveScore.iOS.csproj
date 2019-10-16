@@ -342,10 +342,6 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\sport.gif">
       <Link>Resources\images\sport.gif</Link>
     </BundleResource>
-    <BundleResource Include="..\..\CommonResources\Html\TrackerWidget.html">
-      <Link>Resources\html\TrackerWidget.html</Link>
-    </BundleResource>
-    <Compile Include="PlatformDependency\BaseUrl.cs" />
     <Compile Include="Renderers\TransparentWebViewRenderer.cs" />
   </ItemGroup>
   <ItemGroup>

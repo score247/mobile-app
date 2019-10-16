@@ -1,9 +1,8 @@
-﻿using System.Collections.ObjectModel;
-using System.IO;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
-using LiveScore.Common.PlatformDependency;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
@@ -78,7 +77,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (isFirstLoad)
             {
-                await LoadTrackerAsync();
+                LoadTracker();
 
                 await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
             }
@@ -92,31 +91,30 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentariesAsync(true), false);
 
-        private async Task LoadTrackerAsync()
+        private void LoadTracker()
         {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
                 {
-                    Html = await GenerateTrackerWidgetAsync(matchCoverage.Coverage)
+                    Html = GenerateTrackerWidget(matchCoverage.Coverage)
                 };
 
                 HasTrackerData = true;
             }
         }
 
-        private async Task<string> GenerateTrackerWidgetAsync(Coverage coverage)
+        private string GenerateTrackerWidget(Coverage coverage)
         {
             var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
 
-            var content = await File
-                .ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html")
-                .ConfigureAwait(false);
+            return TrackerWidgetHtml.Generate(new Dictionary<string, string>
+            {
+                { ReplacePrefix, formatMatchId },
+                { WidgetPrefix, coverage.TrackerWidgetLink },
+                { LanguagePrefix, LanguageCode },
+            });
 
-            return content
-                .Replace(ReplacePrefix, formatMatchId)
-                .Replace(WidgetPrefix, coverage.TrackerWidgetLink)
-                .Replace(LanguagePrefix, LanguageCode);
         }
 
         [Time]
