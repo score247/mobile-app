@@ -31,7 +31,7 @@
         public void ConvertBack_ReturnString()
         {
             // Arrange
-            const string expected = "UPPER";
+            const string expected = null;
 
             // Act
             var result = converter.ConvertBack("UPPER", null, null, null);

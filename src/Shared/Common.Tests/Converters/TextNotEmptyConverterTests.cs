@@ -12,7 +12,7 @@ namespace LiveScore.Common.Tests.Converters
             var textNotEmtpyConverter = new TextNotEmptyConverter();
 
             // Act
-            var actual = (bool)textNotEmtpyConverter.Convert("test", null, null, null);
+            var actual = textNotEmtpyConverter.Convert("test", null, null, null);
 
             // Assert
             Assert.True(actual);
@@ -25,7 +25,7 @@ namespace LiveScore.Common.Tests.Converters
             var textNotEmtpyConverter = new TextNotEmptyConverter();
 
             // Act
-            var actual = (bool)textNotEmtpyConverter.Convert(null, null, null, null);
+            var actual = textNotEmtpyConverter.Convert(null, null, null, null);
 
             // Assert
             Assert.False(actual);

@@ -1,19 +1,11 @@
 using System;
 using System.Globalization;
-using Xamarin.Forms;
 
 namespace LiveScore.Common.Converters
 {
-    public class UpperCaseConverter : IValueConverter
+    public class UpperCaseConverter : ValueConverter<string, string>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value?.ToString().ToUpperInvariant();
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value?.ToString();
-        }
+        public override string Convert(string value, Type targetType, object parameter, CultureInfo culture)
+            => value?.ToString().ToUpperInvariant();
     }
 }

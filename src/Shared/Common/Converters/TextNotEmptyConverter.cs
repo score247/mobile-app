@@ -1,24 +1,11 @@
 ﻿using System;
 using System.Globalization;
-using Xamarin.Forms;
 
 namespace LiveScore.Common.Converters
 {
-    public class TextNotEmptyConverter : IValueConverter
+    public class TextNotEmptyConverter : ValueConverter<string, bool>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value == null)
-            {
-                return false;
-            }
-
-            return !string.IsNullOrEmpty(value.ToString());
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value?.ToString();
-        }
+        public override bool Convert(string value, Type targetType, object parameter, CultureInfo culture)
+            => !string.IsNullOrWhiteSpace(value);
     }
 }

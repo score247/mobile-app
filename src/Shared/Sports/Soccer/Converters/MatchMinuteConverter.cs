@@ -11,14 +11,6 @@ using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Converters
 {
-    public class BullshitMinuteConverter : IMatchMinuteConverter<Match>
-    {
-        public string BuildMatchMinute(Match match)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteConverter
     {
@@ -119,25 +111,22 @@ namespace LiveScore.Soccer.Converters
                 displayInjuryTime = annoucedInjuryTime;
             }
 
-            
             return $"{periodEndMinute}+{displayInjuryTime}'";
         }
 
         private int GetAnnouncedInjuryTime()
         {
-            var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
-
             // TODO: Should move InjuryTimeAnnouced to backend for storing?
-            var cachedInjuryTime = settings.Get(cacheKey);
+            var cachedInjuryTime = settings.Get(CacheKey);
 
             return string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : int.Parse(cachedInjuryTime);
         }
 
         public void UpdateAnnouncedInjuryTime(int injuryTime)
         {
-            var cacheKey = $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
-
-            settings.Set(cacheKey, injuryTime.ToString());
+            settings.Set(CacheKey, injuryTime.ToString());
         }
+
+        private string CacheKey => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
     }
 }
