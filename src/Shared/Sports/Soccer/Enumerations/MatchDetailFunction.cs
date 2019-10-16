@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Core.Enumerations
+﻿using LiveScore.Core.Enumerations;
+
+namespace LiveScore.Soccer.Enumerations
 {
     public class MatchDetailFunction : Enumeration
     {

@@ -15,6 +15,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.DetailH2H;
