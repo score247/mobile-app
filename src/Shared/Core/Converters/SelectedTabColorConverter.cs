@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Converters
-{
-    using System;
-    using System.Globalization;
-    using Xamarin.Forms;
+﻿using System;
+using System.Globalization;
+using Xamarin.Forms;
 
+namespace LiveScore.Core.Converters
+{
     public class SelectedTabColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

@@ -1,12 +1,10 @@
-﻿namespace LiveScore.Core.Controls.TabStrip
-{
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
-    using System.Windows.Input;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+namespace LiveScore.Core.Controls.TabStrip
+{
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStripHeader : ContentView
     {
@@ -16,7 +14,10 @@
         }
 
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(
-              nameof(ItemsSource), typeof(IEnumerable<TabItemViewModel>), typeof(TabStripHeader), propertyChanged: OnItemsSourceChanged);
+            nameof(ItemsSource),
+            typeof(IEnumerable<TabItemViewModel>),
+            typeof(TabStripHeader),
+            propertyChanged: OnItemsSourceChanged);
 
         public IEnumerable<TabItemViewModel> ItemsSource
         {
@@ -60,13 +61,12 @@
                 var item = tabs[index];
                 var itemLayout = CreateItemLayout(control, index);
 
-                Debug.WriteLine($"TabStrip Header {item.TabHeaderTitle}");
-
                 var itemLabel = new Label
                 {
                     Text = item.TabHeaderTitle,
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
+
                 var activeTabIndicator = CreateTabIndicator(control, index);
 
                 itemLayout.Children.Add(itemLabel);
@@ -84,7 +84,7 @@
 
             var tapGestureRecognizer = new TapGestureRecognizer
             {
-                Command = new Command(() => { control.ItemTappedCommand?.Execute(index); })
+                Command = new Command(() => control.ItemTappedCommand?.Execute(index))
             };
 
             itemLayout.GestureRecognizers.Add(tapGestureRecognizer);
@@ -92,34 +92,28 @@
             return itemLayout;
         }
 
-        private static ContentView CreateTabIndicator(TabStripHeader control, int index)
+        private static ContentView CreateTabIndicator(TabStripHeader control, int index) => new ContentView
         {
-            return new ContentView
+            Content = new BoxView
             {
-                Content = new BoxView
-                {
-                    Style = index == 0 ? (Style)control.Resources["TabActiveLine"] : (Style)control.Resources["TabInactiveLine"]
-                }
-            };
-        }
+                Style = index == 0
+                ? (Style)control.Resources["TabActiveLine"]
+                : (Style)control.Resources["TabInactiveLine"]
+            }
+        };
 
         public void SetSelectedTab(int oldIndex, int newIndex)
         {
             var tabHeaders = scrollLayOut.Children;
-            //var oldTabModel = ItemsSource.ToList()[oldIndex];
 
             if (tabHeaders[oldIndex] is StackLayout oldTab)
             {
-                //oldTab.Children[0].Style = (Style)Resources[$"Tab{oldTabModel.TabHeaderTitle}Icon"];
                 oldTab.Children[0].Style = (Style)Resources["TabText"];
                 ((ContentView)oldTab.Children[1]).Content.Style = (Style)Resources["TabInactiveLine"];
             }
 
-            //var newTabModel = ItemsSource.ToList()[newIndex];
-
             if (tabHeaders[newIndex] is StackLayout newTab)
             {
-                //newTab.Children[0].Style = (Style)Resources[$"TabActive{newTabModel.TabHeaderTitle}Icon"];
                 newTab.Children[0].Style = (Style)Resources["TabActiveText"];
                 ((ContentView)newTab.Children[1]).Content.Style = (Style)Resources["TabActiveLine"];
             }

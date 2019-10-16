@@ -16,8 +16,8 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
         {
             tabs = new List<TabItemViewModel>
             {
-                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) { TabHeaderTitle = "Info" },
-                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null)  { TabHeaderTitle = "Tracker" },
+                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
             };
         }
 

@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, 1)
         {
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;

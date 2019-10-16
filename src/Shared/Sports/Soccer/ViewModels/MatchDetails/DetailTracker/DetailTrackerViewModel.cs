@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
-            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator)
+            : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, 9)
         {
             matchCoverage = coverage;
             soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();

@@ -2,11 +2,11 @@
 {
     public class TabStripItemTappedEventArgs
     {
-        public TabStripItemTappedEventArgs(int index)
+        public TabStripItemTappedEventArgs(byte index)
         {
             Index = index;
         }
 
-        public int Index { get; }
+        public byte Index { get; }
     }
 }

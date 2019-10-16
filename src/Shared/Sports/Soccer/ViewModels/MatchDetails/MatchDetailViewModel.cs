@@ -49,10 +49,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private readonly IMatchStatusConverter matchStatusConverter;
         private readonly IMatchMinuteConverter matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
-        private MatchDetailFunction selectedTabItem;
-        private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
 
-        private readonly ISoccerMatchService matchInfoService;
+        private MatchDetailFunction selectedTabItem;
+        private readonly ISoccerMatchService soccerMatchService;
+        private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -60,11 +60,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
-            matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
-
-            matchStatusConverter = dependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
-            matchMinuteConverter = dependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
+            soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
+            matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
         }
 
@@ -85,7 +85,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
-                TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match));
+                TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match).ConfigureAwait(false));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
             }
         }
@@ -207,7 +207,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage = await matchInfoService.GetMatchCoverageAsync(MatchViewModel.Match.Id, CurrentLanguage, forceFetchLatestData: true);
+            var coverage
+                = await soccerMatchService.GetMatchCoverageAsync(
+                    MatchViewModel.Match.Id,
+                    CurrentLanguage,
+                    forceFetchLatestData: true).ConfigureAwait(false);
 
             var viewModels = new List<TabItemViewModel>();
 
@@ -228,13 +232,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             selectedTabItem = tabItemViewModels.First().Key;
 
             // Temporary show all functions
-            foreach (var function in TextEnumeration.GetAll<MatchDetailFunction>())
+            foreach (var function in Enumeration.GetAll<MatchDetailFunction>())
             {
                 if (tabItemViewModels.ContainsKey(function))
                 {
                     var tabModel = tabItemViewModels[function];
                     tabModel.Title = function.DisplayName;
-                    tabModel.TabHeaderTitle = function.Value;
 
                     viewModels.Add(tabModel);
                 }
@@ -245,8 +248,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         private void OnFunctionTabTapped(TabStripItemTappedEventArgs args)
         {
-            Title = TabItems[args.Index].Title;
-            selectedTabItem = TextEnumeration.FromValue<MatchDetailFunction>(TabItems[args.Index].TabHeaderTitle);
+            if (args != null)
+            {
+                Title = TabItems[args.Index].Title;
+                selectedTabItem = Enumeration.FromValue<MatchDetailFunction>(args.Index);
+            }
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Converters
-{
-    using System;
-    using System.Globalization;
-    using Xamarin.Forms;
+﻿using System;
+using System.Globalization;
+using Xamarin.Forms;
 
+namespace LiveScore.Core.Converters
+{
     public class SelectedTabBackgroundColorConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -17,14 +17,14 @@
 
             var isSelected = (bool)value;
 
-            color = isSelected ? (Color)Application.Current.Resources["ActiveSubTabBgColor"] : (Color)Application.Current.Resources["SubTabBgColor"];
-
-            return color;
+            return isSelected 
+                ? (Color)Application.Current.Resources["ActiveSubTabBgColor"] 
+                : (Color)Application.Current.Resources["SubTabBgColor"];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return null;
+            return value?.ToString();
         }
     }
 }

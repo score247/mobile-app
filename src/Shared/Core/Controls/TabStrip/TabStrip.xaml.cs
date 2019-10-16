@@ -1,15 +1,15 @@
-﻿namespace LiveScore.Core.Controls.TabStrip
-{
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Windows.Input;
-    using LiveScore.Core.Controls.TabStrip.EventArgs;
-    using MethodTimer;
-    using PanCardView;
-    using PanCardView.EventArgs;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Input;
+using LiveScore.Core.Controls.TabStrip.EventArgs;
+using MethodTimer;
+using PanCardView;
+using PanCardView.EventArgs;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+namespace LiveScore.Core.Controls.TabStrip
+{
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TabStrip : ContentView
     {
@@ -44,17 +44,16 @@
 
         public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create(
               nameof(SelectedIndex),
-              typeof(int),
+              typeof(byte),
               typeof(TabItemViewModel),
               0,
               propertyChanged: (bindable, oldValue, newValue) =>
               {
-                  var newIndex = (int)newValue;
-                  var oldIndex = (int)oldValue;
+                  var newIndex = (byte)newValue;
+                  var oldIndex = (byte)oldValue;
 
-                  var control = bindable as TabStrip;
 
-                  if (control == null || newIndex < 0 || oldIndex < 0)
+                  if (!(bindable is TabStrip control))
                   {
                       return;
                   }
