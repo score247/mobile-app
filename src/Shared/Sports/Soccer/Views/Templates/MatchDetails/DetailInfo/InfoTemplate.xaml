@@ -9,8 +9,8 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetailInfo"
               mc:Ignorable="d">
-    <StackLayout>
-        <StackLayout.Resources>
+    <FlexLayout Direction="Column">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -19,7 +19,7 @@
                 <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
                 <templateSelectors:InfoItemTemplateSelector x:Key="infoItemTemplateSelector" />
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
 
         <ActivityIndicator Margin="20"
                            IsRunning="{Binding IsBusy}"
@@ -94,5 +94,5 @@
                 </StackLayout>
             </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>

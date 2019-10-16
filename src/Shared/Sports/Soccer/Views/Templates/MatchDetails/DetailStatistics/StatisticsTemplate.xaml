@@ -9,15 +9,15 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailStatistics.StatisticsTemplate">
-    <StackLayout>
-        <StackLayout.Resources>
+    <FlexLayout Direction="Column">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailStatisticViewResource />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
 
         <Label Style="{StaticResource NoInfo}"
                Text="{languageResources:Translate NoData}"
@@ -125,5 +125,5 @@
                              HeightRequest="300" />
             </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>

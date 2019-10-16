@@ -7,15 +7,15 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
-    <StackLayout VerticalOptions="FillAndExpand">
-        <StackLayout.Resources>
+    <FlexLayout Direction="Column">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailTrackerViewResource />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
         <ActivityIndicator Margin="20"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
@@ -102,7 +102,7 @@
                                        Style="{StaticResource MatchTrackerCommentariesText}"
                                        TextColor="{Binding CommentaryTextColor}"
                                        Text="{Binding CommentaryText}" />
-                            </Grid>                            
+                            </Grid>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -118,5 +118,5 @@
                 </StackLayout>
             </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>

@@ -11,9 +11,10 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
               mc:Ignorable="d">
-    <StackLayout Padding="0,8"
-                 BackgroundColor="#272830">
-        <StackLayout.Resources>
+    <FlexLayout Direction="Column"
+                Padding="0,8"
+                BackgroundColor="#272830">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -23,7 +24,7 @@
                 <coreConverters:SelectedTabColorConverter x:Key="SelectedTabColorConverter" />
                 <coreConverters:SelectedTabBackgroundColorConverter x:Key="SelectedTabBgColorConverter" />
             </ResourceDictionary>
-        </StackLayout.Resources>
+        </FlexLayout.Resources>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -110,5 +111,5 @@
                 </tabStrip:TabITemListView.Footer>
             </tabStrip:TabITemListView>
         </StackLayout>
-    </StackLayout>
+    </FlexLayout>
 </DataTemplate>
