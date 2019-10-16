@@ -105,7 +105,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
             MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
                 ? $"{TimelineEvent.MatchTime}'"
-                : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}";
+                : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}'";
 
             return this;
         }
