@@ -10,7 +10,7 @@ namespace Soccer.Tests.Models.Matches
     public class MatchStatisticTests
     {
         [Fact]
-        public void GetMainStatistic_BallPossessionHasInfo_ReturnBallPossessionStatistic()
+        public void GetMainStatistic_BallPossessionHasData_ReturnBallPossessionStatistic()
         {
             var homeStatistic = new TeamStatistic(2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -25,7 +25,7 @@ namespace Soccer.Tests.Models.Matches
         }
 
         [Fact]
-        public void GetMainStatistic_BallPossessionHasNoInfo_BallPossessionStatisticIsHidden()
+        public void GetMainStatistic_BallPossessionHasNoData_BallPossessionStatisticIsHidden()
         {
             var homeStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -36,7 +36,7 @@ namespace Soccer.Tests.Models.Matches
         }
 
         [Fact]
-        public void GetMainStatistic_BallPossessionHasNoInfo_SubStatisticItemsAreEmpty()
+        public void GetSubStatisticItems_StatisticHasNoData_SubStatisticItemsAreEmpty()
         {
             var homeStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
             var awayStatistic = new TeamStatistic(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
@@ -47,7 +47,7 @@ namespace Soccer.Tests.Models.Matches
         }
 
         [Fact]
-        public void GetMainStatistic_SubStatisticHasData_ReturnOrderedSubStatistic()
+        public void GetSubStatisticItems_SubStatisticHasData_ReturnOrderedSubStatistic()
         {
             var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
             var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
