@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
-using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Controls.TabStrip.EventArgs;
@@ -123,8 +121,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             SubscribeEvents();
         }
 
-        public override Task OnNetworkReconnected()
-            => tabItemViewModels[selectedTabItem].OnNetworkReconnected();
+        public override Task OnNetworkReconnectedAsync()
+            => tabItemViewModels[selectedTabItem].OnNetworkReconnectedAsync();
 
         private void SubscribeEvents()
         {
@@ -209,21 +207,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         [Time]
         private async Task<List<TabItemViewModel>> GenerateTabItemViewModels(IMatch match)
         {
-            var coverage = await matchInfoService.GetMatchCoverage(MatchViewModel.Match.Id, CurrentLanguage, forceFetchNewData: true);
+            var coverage = await matchInfoService.GetMatchCoverageAsync(MatchViewModel.Match.Id, CurrentLanguage, forceFetchLatestData: true);
 
             var viewModels = new List<TabItemViewModel>();
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
-                {MatchDetailFunction.Odds, new DetailOddsViewModel(match.Id, match.EventStatus,  NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()) },
-                {MatchDetailFunction.Info, new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()) },
-                {MatchDetailFunction.H2H, new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()) },
-                {MatchDetailFunction.Lineups,  new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()) },
-                {MatchDetailFunction.Social, new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()) },
-                {MatchDetailFunction.Stats, new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()) },
-                {MatchDetailFunction.Table, new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()) },
-                {MatchDetailFunction.TV, new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()) },
-                {MatchDetailFunction.Tracker, new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerTemplate()) }
+                [MatchDetailFunction.Odds] = new DetailOddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
+                [MatchDetailFunction.Info] = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()),
+                [MatchDetailFunction.H2H] = new DetailH2HViewModel(NavigationService, DependencyResolver, new H2HTemplate()),
+                [MatchDetailFunction.Lineups] = new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()),
+                [MatchDetailFunction.Social] = new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
+                [MatchDetailFunction.Stats] = new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),
+                [MatchDetailFunction.Table] = new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()),
+                [MatchDetailFunction.TV] = new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()),
+                [MatchDetailFunction.Tracker] = new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerTemplate())
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

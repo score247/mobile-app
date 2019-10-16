@@ -9,13 +9,13 @@ namespace LiveScore.Common.Services
 {
     public interface ICacheManager
     {
-        Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options, bool getLatestData = false);
+        Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options, bool forceFetchLatestData = false);
 
-        Task<T> GetOrSetAsync<T>(string key, Func<T> factory, CacheItemOptions options, bool getLatestData = false);
+        Task<T> GetOrSetAsync<T>(string key, Func<T> factory, CacheItemOptions options, bool forceFetchLatestData = false);
 
-        Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool getLatestData = false);
+        Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool forceFetchLatestData = false);
 
-        Task InvalidateAll();
+        Task InvalidateAllAsync();
     }
 
     public class CacheManager : ICacheManager
@@ -33,26 +33,32 @@ namespace LiveScore.Common.Services
             this.cacheService = cacheService;
             this.loggingService = loggingService;
             this.networkConnectionManager = networkConnectionManager;
+
+            //TODO : thread-safe???
             cachedKeys = new List<string>();
         }
 
         // TODO: refactor later
-        public async Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options, bool getLatestData = false)
+        public async Task<T> GetOrSetAsync<T>(
+            string key,
+            Func<Task<T>> factory,
+            CacheItemOptions options,
+            bool forceFetchLatestData = false)
         {
             if (networkConnectionManager.IsSuccessfulConnection())
             {
                 try
                 {
-                    if (getLatestData)
+                    if (forceFetchLatestData)
                     {
-                        await GetFromApiAndSetToCacheAsync(key, factory, options);
+                        await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
                     }
 
                     var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
 
                     if (Equals(dataFromCache, default(T)))
                     {
-                        await GetFromApiAndSetToCacheAsync(key, factory, options);
+                        await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
                     }
                 }
                 catch (TaskCanceledException ex)
@@ -72,25 +78,37 @@ namespace LiveScore.Common.Services
             return await cacheService.GetAsync<T>(key).ConfigureAwait(false);
         }
 
-        private async Task GetFromApiAndSetToCacheAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options)
+        private async Task GetFromRemoteApiAndSetToCacheAsync<T>(
+            string key,
+            Func<Task<T>> factory,
+            CacheItemOptions options)
         {
-            Profiler.Start($"getLatestData method:{factory.Method.Name} key:{key}");
+            Profiler.Start($"{factory.Method.Name} key:{key}");
 
             var data = await factory.Invoke().ConfigureAwait(false);
-
             await SetCacheAsync(key, data, options).ConfigureAwait(false);
-            Profiler.Stop($"getLatestData method:{factory.Method.Name} key:{key}");
+
+            Profiler.Stop($"{factory.Method.Name} key:{key}");
         }
 
-        public Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool getLatestData = false)
-            => GetOrSetAsync(key, factory,
+        public Task<T> GetOrSetAsync<T>(
+            string key,
+            Func<Task<T>> factory,
+            int absoluteExpiredTime,
+            bool forceFetchLatestData = false) => GetOrSetAsync(
+                key,
+                factory,
                 new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(absoluteExpiredTime)),
-                    getLatestData);
+                forceFetchLatestData);
 
-        public async Task<T> GetOrSetAsync<T>(string key, Func<T> factory, CacheItemOptions options, bool getLatestData = false)
-            => await cacheService.GetOrSetAsync(key, factory, options).ConfigureAwait(false);
+        public async Task<T> GetOrSetAsync<T>(
+            string key,
+            Func<T> factory,
+            CacheItemOptions options,
+            bool forceFetchLatestData = false) =>
+            await cacheService.GetOrSetAsync(key, factory, options).ConfigureAwait(false);
 
-        public async Task InvalidateAll()
+        public async Task InvalidateAllAsync()
         {
             foreach (var key in cachedKeys)
             {

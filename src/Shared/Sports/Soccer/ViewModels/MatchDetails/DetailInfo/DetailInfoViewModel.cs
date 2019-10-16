@@ -59,7 +59,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public ObservableCollection<BaseItemViewModel> InfoItemViewModels { get; private set; }
 
-        public override Task OnNetworkReconnected() => LoadMatchInfoData();
+        public override Task OnNetworkReconnectedAsync() => LoadMatchInfoData();
 
         public override async void OnResumeWhenNetworkOK()
         {
@@ -139,7 +139,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private async Task LoadMatchDetail(bool isRefresh = false)
         {
             MatchInfo = await matchInfoService
-                .GetMatch(matchId, CurrentLanguage, isRefresh)
+                .GetMatchAsync(matchId, CurrentLanguage, isRefresh)
                 .ConfigureAwait(false);
 
             BuildDetailInfo(MatchInfo);

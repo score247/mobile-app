@@ -16,7 +16,10 @@ namespace LiveScore.Core.ViewModels
         private readonly IEventAggregator eventAggregator;
 
         public MatchViewModel(
-            IMatch match, IMatchStatusConverter matchStatusConverter, IMatchMinuteConverter matchMinuteConverter, IEventAggregator eventAggregator)
+            IMatch match,
+            IMatchStatusConverter matchStatusConverter,
+            IMatchMinuteConverter matchMinuteConverter,
+            IEventAggregator eventAggregator)
         {
             this.matchStatusConverter = matchStatusConverter;
             this.matchMinuteConverter = matchMinuteConverter;

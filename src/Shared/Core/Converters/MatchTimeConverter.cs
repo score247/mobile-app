@@ -6,4 +6,9 @@
     {
         string BuildMatchMinute(IMatch match);
     }
+
+    public interface IMatchMinuteConverter<in T>
+    {
+        string BuildMatchMinute(T match);
+    }
 }

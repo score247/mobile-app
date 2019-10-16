@@ -74,7 +74,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateCommand LoadMoreCommand { get; private set; }
 
-        public override Task OnNetworkReconnected()
+        public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
 
         public override void OnResumeWhenNetworkOK()
@@ -283,7 +283,7 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
-            => MatchService.GetMatchesByDate(ViewDate, CurrentLanguage, getLatestData);
+            => MatchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage, getLatestData);
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches)
         {

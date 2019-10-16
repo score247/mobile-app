@@ -11,6 +11,14 @@ using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Converters
 {
+    public class BullshitMinuteConverter : IMatchMinuteConverter<Match>
+    {
+        public string BuildMatchMinute(Match match)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteConverter
     {
@@ -111,7 +119,7 @@ namespace LiveScore.Soccer.Converters
                 displayInjuryTime = annoucedInjuryTime;
             }
 
-            Debug.WriteLine($"{soccerMatch.Id}-{periodEndMinute}+{displayInjuryTime}'");
+            
             return $"{periodEndMinute}+{displayInjuryTime}'";
         }
 

@@ -68,7 +68,7 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
             => await MatchService
-                .GetLiveMatches(CurrentLanguage, getLatestData)
+                .GetLiveMatchesAsync(CurrentLanguage, getLatestData)
                 .ConfigureAwait(false);
 
         private void OnReceivedLiveMatches(ILiveMatchMessage message)

@@ -49,7 +49,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (todayItem?.ViewDate != DateTime.Today)
             {
-                await NavigateToHome().ConfigureAwait(false);
+                await NavigateToHomeAsync().ConfigureAwait(false);
             }
             else
             {
@@ -57,7 +57,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
-        public override Task OnNetworkReconnected() => SelectedScoreItem?.OnNetworkReconnected();
+        public override Task OnNetworkReconnectedAsync() => SelectedScoreItem?.OnNetworkReconnectedAsync();
 
         public override void OnSleep() => SelectedScoreItem?.OnSleep();
 

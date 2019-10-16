@@ -67,10 +67,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         public DelegateCommand OnExpandTracker { get; }
 
         public override async void OnResumeWhenNetworkOK()
-            => await LoadDataAsync(() => LoadMatchCommentaries(true));
+            => await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
 
-        public override Task OnNetworkReconnected()
-            => LoadDataAsync(() => LoadMatchCommentaries(true));
+        public override Task OnNetworkReconnectedAsync()
+            => LoadDataAsync(() => LoadMatchCommentariesAsync(true));
 
         public override async void OnAppearing()
         {
@@ -90,42 +90,43 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         private void ExpandTracker() => TrackerVisible = true;
 
-        private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentaries(true), false);
+        private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentariesAsync(true), false);
 
-        private async Task LoadTracker()
+        private async Task LoadTrackerAsync()
         {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
             {
                 WidgetContent = new HtmlWebViewSource
                 {
-                    Html = await GenerateTrackerWidget(matchCoverage.Coverage)
+                    Html = await GenerateTrackerWidgetAsync(matchCoverage.Coverage)
                 };
 
                 HasTrackerData = true;
             }
         }
 
-        private async Task<string> GenerateTrackerWidget(Coverage coverage)
+        private async Task<string> GenerateTrackerWidgetAsync(Coverage coverage)
         {
             var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
 
-            var content = await File.ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html");
+            var content = await File
+                .ReadAllTextAsync(DependencyService.Get<IBaseUrl>().Get() + "/html/TrackerWidget.html")
+                .ConfigureAwait(false);
 
-            content = content.Replace(ReplacePrefix, formatMatchId);
-            content = content.Replace(WidgetPrefix, coverage.TrackerWidgetLink);
-            content = content.Replace(LanguagePrefix, LanguageCode);
-
-            return content;
+            return content
+                .Replace(ReplacePrefix, formatMatchId)
+                .Replace(WidgetPrefix, coverage.TrackerWidgetLink)
+                .Replace(LanguagePrefix, LanguageCode);
         }
 
         [Time]
         private async Task LoadMatchCommentaries(bool getLatestData = false)
         {
             var commentaries = (await matchInfoService
-                    .GetMatchCommentaries(matchCoverage.MatchId, CurrentLanguage, getLatestData))
-                    .OrderByDescending(c => c.Time).ToList();
+                    .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, getLatestData))
+                    .OrderByDescending(c => c.Time);
 
-            if (commentaries.Count > 0)
+            if (commentaries.Any())
             {
                 var commentaryViewModels = commentaries
                     .Select(c => new CommentaryItemViewModel(c, DependencyResolver));

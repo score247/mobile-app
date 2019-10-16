@@ -9,22 +9,19 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
 using MethodTimer;
-using Refit;
 using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
-   
-
     public interface ISoccerMatchService
     {
-        Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false);
+        Task<MatchInfo> GetMatchAsync(string matchId, Language language, bool forceFetchLatestData = false);
 
-        Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false);
+        Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, bool forceFetchLatestData = false);
 
-        Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, Language language, bool forceFetchNewData = false);
+        Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, bool forceFetchLatestData = false);
 
-        Task<MatchStatistic> GetMatchStatistic(string matchId, Language language, bool forceFetchNewData = false);
+        Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, bool forceFetchLatestData = false);
     }
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
@@ -48,7 +45,7 @@ namespace LiveScore.Soccer.Services
         }
 
         [Time]
-        public async Task<IEnumerable<IMatch>> GetMatchesByDate(DateTime dateTime, Language language, bool getLatestData = false)
+        public async Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -65,7 +62,7 @@ namespace LiveScore.Soccer.Services
                         dateTime.BeginningOfDay().ToApiFormat(),
                         dateTime.EndOfDay().ToApiFormat(),
                         language.DisplayName)), cacheDuration,
-                    getLatestData).ConfigureAwait(false);
+                    forceFetchLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -76,7 +73,7 @@ namespace LiveScore.Soccer.Services
         }
 
         [Time]
-        public async Task<MatchInfo> GetMatch(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<MatchInfo> GetMatchAsync(string matchId, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -85,7 +82,7 @@ namespace LiveScore.Soccer.Services
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName)),
-                    ShortDuration, forceFetchNewData)
+                    ShortDuration, forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -96,7 +93,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<IMatch>> GetLiveMatches(Language language, bool getLatestData = false)
+        public async Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -105,7 +102,7 @@ namespace LiveScore.Soccer.Services
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
                         () => apiService.Execute(() => matchApi.GetLiveMatches(language.DisplayName)),
-                        ShortDuration, getLatestData)
+                        ShortDuration, forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -116,7 +113,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchCoverage> GetMatchCoverage(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -125,7 +122,7 @@ namespace LiveScore.Soccer.Services
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
                         () => apiService.Execute(() => matchApi.GetMatchCoverage(matchId, language.DisplayName)),
-                        ShortDuration, forceFetchNewData)
+                        ShortDuration, forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -136,7 +133,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -145,7 +142,7 @@ namespace LiveScore.Soccer.Services
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
                         () => apiService.Execute(() => matchApi.GetMatchCommentaries(matchId, language.DisplayName)),
-                        ShortDuration, forceFetchNewData)
+                        ShortDuration, forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -156,7 +153,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchStatistic> GetMatchStatistic(string matchId, Language language, bool forceFetchNewData = false)
+        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -166,7 +163,7 @@ namespace LiveScore.Soccer.Services
                     cacheKey,
                     () => apiService.Execute(() => matchApi.GetMatchStatistic(matchId, language.DisplayName)),
                     ShortDuration,
-                    forceFetchNewData)
+                    forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)

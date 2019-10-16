@@ -46,9 +46,9 @@ namespace LiveScore.ViewModels
 
         private async Task CleanCacheAndRefresh()
         {
-            await cacheManager.InvalidateAll();
+            await cacheManager.InvalidateAllAsync();
 
-            await NavigateToHome();
+            await NavigateToHomeAsync();
         }
 
         private void OnConnectionChanged(bool isConnected)

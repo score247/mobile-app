@@ -140,7 +140,7 @@ namespace LiveScore.Core.ViewModels
             }).ConfigureAwait(false);
         }
 
-        protected async Task NavigateToHome()
+        protected async Task NavigateToHomeAsync()
         {
             var navigated = await NavigationService.NavigateAsync("app:///MainView/MenuTabbedView").ConfigureAwait(false);
 
@@ -150,14 +150,14 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        public virtual Task OnNetworkReconnected()
+        public virtual Task OnNetworkReconnectedAsync()
             => Task.CompletedTask;
 
         private void OnConnectionChangedBase(bool isConnected)
         {
             if (isConnected)
             {
-                OnNetworkReconnected();
+                OnNetworkReconnectedAsync();
             }
         }
     }

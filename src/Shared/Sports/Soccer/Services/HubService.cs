@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -24,7 +25,7 @@ namespace LiveScore.Soccer.Services
         private readonly IConfiguration configuration;
 
         private HubConnection hubConnection;
-        private bool isConnecting = false;
+        private bool isConnecting;
 
         public SoccerHubService(
             IHubConnectionBuilder hubConnectionBuilder,
@@ -99,7 +100,9 @@ namespace LiveScore.Soccer.Services
                             });
 
         private IEnumerable<IPubSubEventHandler> BuildHubEventHandlers()
-            => new List<IPubSubEventHandler>
+        {
+            Debug.WriteLine($"BuildHubEventHandlers at {DateTime.Now.ToString("hh:mm:tt zzz")}");
+            return new List<IPubSubEventHandler>
             {
                 new MatchEventPubSubEventHandler(eventAggregator),
                 new LiveMatchPubSubEventHandler(eventAggregator),
@@ -107,6 +110,7 @@ namespace LiveScore.Soccer.Services
                 new OddsMovementPubSubEventHandler(eventAggregator),
                 new TeamStatisticPubSubEventHandler(eventAggregator)
             };
+        }
 
         private async Task HubConnection_Closed(Exception arg)
         {

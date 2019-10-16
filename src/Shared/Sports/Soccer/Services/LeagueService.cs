@@ -27,7 +27,7 @@ namespace LiveScore.Soccer.Services
             this.leagueApi = leagueApi ?? apiService.GetApi<LeagueApi>();
         }
 
-        public async Task<IEnumerable<ILeague>> GetMajorLeagues(bool getLatestData = false)
+        public async Task<IEnumerable<ILeague>> GetMajorLeaguesAsync(bool getLatestData = false)
         {
             try
             {

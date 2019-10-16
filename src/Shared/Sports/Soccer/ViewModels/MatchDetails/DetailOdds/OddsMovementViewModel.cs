@@ -121,7 +121,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             UnsubscribeEvents();
         }
 
-        public override Task OnNetworkReconnected() => RefreshCommand.ExecuteAsync();
+        public override Task OnNetworkReconnectedAsync() => RefreshCommand.ExecuteAsync();
 
         private async Task ReloadPage()
         {

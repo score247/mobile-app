@@ -6,6 +6,6 @@ namespace LiveScore.Core.Services
 {
     public interface ILeagueService
     {
-        Task<IEnumerable<ILeague>> GetMajorLeagues(bool getLatestData = false);
+        Task<IEnumerable<ILeague>> GetMajorLeaguesAsync(bool forceFetchLatestData = false);
     }
 }

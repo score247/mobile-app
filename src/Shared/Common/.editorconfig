@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# S2931: Classes with "IDisposable" members should implement "IDisposable"
+dotnet_diagnostic.S2931.severity = none

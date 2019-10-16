@@ -194,7 +194,7 @@ namespace LiveScore.Common.Tests.Services
             await cacheManager.GetOrSetAsync("key13", factory, new CacheItemOptions(), true);
 
             // Act
-            await cacheManager.InvalidateAll();
+            await cacheManager.InvalidateAllAsync();
 
             // Assert
             Assert.Null(cacheService.Get<string>("key12"));

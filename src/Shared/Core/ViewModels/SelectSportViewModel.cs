@@ -60,7 +60,7 @@ namespace LiveScore.Core.ViewModels
 
                 if (isSportChanged)
                 {
-                    await NavigateToHome().ConfigureAwait(false);
+                    await NavigateToHomeAsync().ConfigureAwait(false);
                 }
             }
         }

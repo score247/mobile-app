@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -40,8 +39,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             DataTemplate dataTemplate)
             : base(navigationService, serviceLocator, dataTemplate, eventAggregator)
         {
-            Debug.WriteLine($"MatchId {matchId}");
-
             this.matchId = matchId;
             this.eventStatus = eventStatus;
 
@@ -53,6 +50,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             IsRefreshing = false;
 
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
+
+
             RefreshCommand = new DelegateAsyncCommand(()
                 => LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
 
@@ -121,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             UnsubscribeEvents();
         }
 
-        public override Task OnNetworkReconnected() => RefreshCommand.ExecuteAsync();
+        public override Task OnNetworkReconnectedAsync() => RefreshCommand.ExecuteAsync();
 
         private void SubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
@@ -156,15 +155,28 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
 
-            var odds = await oddsService.GetOddsAsync(CurrentLanguage.DisplayName, matchId, SelectedBetType.Value, formatType, forceFetchNew).ConfigureAwait(false);
+            var odds = await oddsService.GetOddsAsync(
+                CurrentLanguage.DisplayName,
+                matchId,
+                SelectedBetType.Value,
+                formatType,
+                forceFetchNew).ConfigureAwait(false);
 
             HasData = odds.BetTypeOddsList?.Any() == true;
 
-            HeaderTemplate = new BaseHeaderViewModel(SelectedBetType, HasData, NavigationService, DependencyResolver).CreateTemplate();
+            HeaderTemplate = new BaseHeaderViewModel(
+                SelectedBetType,
+                HasData,
+                NavigationService,
+                DependencyResolver).CreateTemplate();
 
             BetTypeOddsItems = HasData
                 ? new List<BaseItemViewModel>((odds.BetTypeOddsList ?? throw new InvalidOperationException())
-                    .Select(betTypeOdds => new BaseItemViewModel(SelectedBetType, betTypeOdds, NavigationService, DependencyResolver)
+                    .Select(betTypeOdds => new BaseItemViewModel(
+                        SelectedBetType,
+                        betTypeOdds,
+                        NavigationService,
+                        DependencyResolver)
                     .CreateInstance()))
                 : new List<BaseItemViewModel>();
 
@@ -179,13 +191,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         internal void HandleOddsComparisonMessage(OddsComparisonMessage oddsComparisonMessage)
         {
-            if (!oddsComparisonMessage.MatchId.Equals(matchId, StringComparison.OrdinalIgnoreCase)
-                || oddsComparisonMessage.BetTypeOddsList?.All(x => x.Id != SelectedBetType.Value) != false)
+            if (!oddsComparisonMessage
+                .MatchId
+                .Equals(matchId, StringComparison.OrdinalIgnoreCase)
+                || oddsComparisonMessage
+                    .BetTypeOddsList?
+                    .All(x => x.Id != SelectedBetType.Value) != false)
             {
                 return;
             }
 
-            var updatedBetTypeOdds = oddsComparisonMessage.BetTypeOddsList.Where(x => x.Id == SelectedBetType.Value);
+            var updatedBetTypeOdds = oddsComparisonMessage
+                .BetTypeOddsList
+                .Where(x => x.Id == SelectedBetType.Value);
             {
                 var needToReOrder = false;
 
@@ -210,7 +228,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
                 if (needToReOrder)
                 {
-                    BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x.BetTypeOdds.Bookmaker.Name));
+                    BetTypeOddsItems = new ObservableCollection<BaseItemViewModel>(BetTypeOddsItems.OrderBy(x => x
+                        .BetTypeOdds
+                        .Bookmaker
+                        .Name));
                 }
             }
         }
@@ -242,7 +263,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         {
             HasData = true;
             var newOddsItemViewModel
-                = new BaseItemViewModel(SelectedBetType, updatedOdds, NavigationService, DependencyResolver)
+                = new BaseItemViewModel(
+                    SelectedBetType,
+                    updatedOdds,
+                    NavigationService,
+                    DependencyResolver)
                     .CreateInstance();
 
             if (BetTypeOddsItems.Count == 0)

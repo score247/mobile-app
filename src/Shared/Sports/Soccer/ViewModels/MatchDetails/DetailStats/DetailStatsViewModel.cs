@@ -43,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
         private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
         {
             var matchStatistic = await soccerMatchService
-                    .GetMatchStatistic(matchId, Language.English, isRefresh)
+                    .GetMatchStatisticAsync(matchId, Language.English, isRefresh)
                     .ConfigureAwait(false);
 
             if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))
