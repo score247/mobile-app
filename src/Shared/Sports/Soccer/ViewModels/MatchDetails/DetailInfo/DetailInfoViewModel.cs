@@ -175,6 +175,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildFooterInfo(MatchInfo matchInfo)
         {
+            if (matchInfo?.Match == null)
+            {
+                return;
+            }
+
             DisplayEventDate = matchInfo.Match.EventDate.ToFullLocalDateTime();
 
             if (matchInfo.Attendance > 0)
