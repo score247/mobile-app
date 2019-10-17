@@ -112,7 +112,9 @@
             </tabStrip:TabITemListView.ItemTemplate>
             <tabStrip:TabITemListView.Footer>
                 <StackLayout BackgroundColor="Transparent"
+                             HorizontalOptions="Center"
                              HeightRequest="300">
+                    <!--Work arround for scrolling issue-->
                     <Label Text=" "></Label>
                     <Button Text="{Binding ShowLessMoreButtonText}"
                             IsVisible="{Binding VisibleShowMore}"
