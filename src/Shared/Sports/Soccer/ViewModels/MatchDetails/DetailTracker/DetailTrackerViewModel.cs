@@ -69,6 +69,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         public string ShowLessMoreButtonText { get; private set; } = AppResources.ShowMore;
 
+        public bool VisibleShowMore { get; private set; }
+
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public DelegateCommand OnCollapseTracker { get; }
@@ -167,6 +169,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
 
                 HasCommentariesData = true;
+                VisibleShowMore = HasCommentariesData && RemainingMatchCommentaries.Any();
             }
 
             SetHasData();

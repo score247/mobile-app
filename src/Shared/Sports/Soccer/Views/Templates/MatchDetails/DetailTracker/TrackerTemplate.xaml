@@ -112,7 +112,7 @@
                              HorizontalOptions="Center"
                              HeightRequest="300">
                     <Button Text="{Binding ShowLessMoreButtonText}"
-                            IsVisible="{Binding HasCommentariesData}"
+                            IsVisible="{Binding VisibleShowMore}"
                             Style="{StaticResource MatchTrackerShowMoreButton}"
                             Command="{Binding ShowMoreCommentariesCommand}"></Button>
                 </StackLayout>
