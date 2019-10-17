@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System.Diagnostics;
+using System.Linq;
 using LiveScore.Core;
+using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
@@ -69,7 +71,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
                 return;
             }
 
-            CommentaryText = string.Join("\r\n", Commentary.Commentaries.Select(c => c.Text));
+            CommentaryText = Commentary.Commentaries?.Any() != true
+                ? EventType.EventTypeNames[Commentary.TimelineType]
+                : string.Join("\r\n", Commentary.Commentaries.Select(c => c.Text));
         }
 
         private void BuildHighlightColor()
