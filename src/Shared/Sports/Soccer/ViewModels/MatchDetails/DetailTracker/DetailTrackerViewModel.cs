@@ -7,6 +7,7 @@ using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using MethodTimer;
@@ -155,12 +156,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             var commentaries = (await soccerMatchService
                     .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
-                    .OrderByDescending(c => c.Time)
+                    .OrderByDescending(t => t.MatchTime)
+                    .ThenByDescending(t => t.Time)
                     .ToList();
 
             if (commentaries.Count > 0)
             {
                 var commentaryViewModels = commentaries
+                    .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
                     .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
                     .ToList();
 

@@ -5,6 +5,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailTracker.TrackerTemplate">
     <FlexLayout Direction="Column">
@@ -92,15 +93,17 @@
                                 <Label Grid.Row="0"
                                        Grid.Column="0"
                                        Style="{StaticResource MatchTrackerMinutes}"
-                                       Text="{Binding MatchTime}" />
-                                <Image  Grid.Row="0"
-                                        Grid.Column="1"
-                                        Source="{Binding ImageSource}"
-                                        Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                                       Text="{Binding MatchTime, Mode=OneTime}" />
+                                <ffImageLoading:CachedImage Grid.Row="0"
+                                                            Grid.Column="1"
+                                                            DownsampleToViewSize="True"
+                                                            Source="{Binding ImageSource}"
+                                                            HeightRequest="21"
+                                                            Style="{StaticResource MatchTrackerCommentariesIcons}" />
                                 <Label Grid.Row="0"
                                        Grid.Column="2"
                                        Style="{StaticResource MatchTrackerCommentariesText}"
-                                       TextColor="{Binding CommentaryTextColor}"
+                                       TextColor="{Binding CommentaryTextColor, Mode=OneTime}"
                                        Text="{Binding CommentaryText}" />
                             </Grid>
                         </StackLayout>
@@ -109,8 +112,8 @@
             </tabStrip:TabITemListView.ItemTemplate>
             <tabStrip:TabITemListView.Footer>
                 <StackLayout BackgroundColor="Transparent"
-                             HorizontalOptions="Center"
                              HeightRequest="300">
+                    <Label Text=" "></Label>
                     <Button Text="{Binding ShowLessMoreButtonText}"
                             IsVisible="{Binding VisibleShowMore}"
                             Style="{StaticResource MatchTrackerShowMoreButton}"
