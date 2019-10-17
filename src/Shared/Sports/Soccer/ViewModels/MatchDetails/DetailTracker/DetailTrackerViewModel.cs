@@ -92,9 +92,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (isFirstLoad)
             {
-                LoadTracker();
-
-                await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
+                await LoadData();
             }
 
             isFirstLoad = false;
@@ -126,17 +124,32 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             }
         }
 
+        private async Task LoadData()
+        {
+            if (matchCoverage?.Coverage == null)
+            {
+                HasData = false;
+                return;
+            }
+
+            LoadTracker();
+
+            await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
+        }
+
         private void LoadTracker()
         {
-            if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Live)
+            if (matchCoverage?.Coverage == null || !matchCoverage.Coverage.Live)
             {
-                WidgetContent = new HtmlWebViewSource
-                {
-                    Html = GenerateTrackerWidget(matchCoverage.Coverage)
-                };
-
-                HasTrackerData = true;
+                return;
             }
+
+            WidgetContent = new HtmlWebViewSource
+            {
+                Html = GenerateTrackerWidget(matchCoverage.Coverage)
+            };
+
+            HasTrackerData = true;
         }
 
         private string GenerateTrackerWidget(Coverage coverage)
@@ -154,25 +167,27 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         [Time]
         private async Task LoadMatchCommentariesAsync(bool forceFetchLatestData = false)
         {
-            var commentaries = (await soccerMatchService
-                    .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
-                    .OrderByDescending(t => t.MatchTime)
-                    .ThenByDescending(t => t.Time)
-                    .ToList();
-
-            if (commentaries.Count > 0)
+            if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Commentary)
             {
-                var commentaryViewModels = commentaries
+                var commentaries = (await soccerMatchService
+                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
                     .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
-                    .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
+                    .OrderByDescending(t => t.Time)
                     .ToList();
 
-                DefaultMatchCommentaries = commentaryViewModels.Take(DefaultLoadingCommentaryItemCount);
-                RemainingMatchCommentaries = commentaryViewModels.Skip(DefaultLoadingCommentaryItemCount);
-                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
+                if (commentaries.Count > 0)
+                {
+                    var commentaryViewModels = commentaries
+                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
+                        .ToList();
 
-                HasCommentariesData = true;
-                VisibleShowMore = HasCommentariesData && RemainingMatchCommentaries.Any();
+                    DefaultMatchCommentaries = commentaryViewModels.Take(DefaultLoadingCommentaryItemCount);
+                    RemainingMatchCommentaries = commentaryViewModels.Skip(DefaultLoadingCommentaryItemCount);
+                    MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
+
+                    HasCommentariesData = true;
+                    VisibleShowMore = HasCommentariesData && RemainingMatchCommentaries.Any();
+                }
             }
 
             SetHasData();
