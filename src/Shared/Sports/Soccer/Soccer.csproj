@@ -11,6 +11,7 @@
   <PropertyGroup>
     <DebugType>pdbonly</DebugType>
     <DesignTimeBuild Condition="'$(NCrunch)' == '1'">true</DesignTimeBuild>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>Soccer.ruleset</CodeAnalysisRuleSet>
