@@ -66,7 +66,7 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                matchItems[currentGroupIndex] = group;
+                 matchItems[currentGroupIndex] = group;
             }
             else
             {

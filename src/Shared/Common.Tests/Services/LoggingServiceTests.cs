@@ -103,18 +103,6 @@
             // Assert
             await mockRavenClient.Received(1).CaptureAsync(Arg.Any<SentryEvent>());
         }
-
-        [Fact]
-        public void TrackEvent_WhenCall_InjectAddTrail()
-        {
-            // Arrange
-
-            // Act
-            loggingService.TrackEvent("", "", "");
-
-            // Assert
-            mockRavenClient.Received(1).AddTrail(Arg.Any<Breadcrumb>());
-        }
     }
 
     public class MockEssentials : IEssential

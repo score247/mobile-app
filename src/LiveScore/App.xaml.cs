@@ -72,8 +72,7 @@ namespace LiveScore
 
             Debug.WriteLine("Application OnStart");
 
-            AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
-                  typeof(Analytics), typeof(Crashes));
+          
         }
 
         protected override void ConfigureViewModelLocator()

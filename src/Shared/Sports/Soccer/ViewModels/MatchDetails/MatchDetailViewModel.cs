@@ -83,7 +83,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override async void Initialize(INavigationParameters parameters)
         {
-            if (parameters?["SoccerMatch"] is IMatch match)
+            if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match).ConfigureAwait(false));

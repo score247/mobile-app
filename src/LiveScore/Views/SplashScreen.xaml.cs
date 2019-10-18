@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
+using LiveScore.Common.Services;
 using MethodTimer;
+using Microsoft.AppCenter.Crashes;
 using Prism.Common;
 using Xamanimation;
 using Xamarin.Forms;
@@ -10,11 +12,14 @@ namespace LiveScore.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
+
         public SplashScreen()
         {
             InitializeComponent();
 
             NavigationPage.SetHasNavigationBar(this, false);
+
+            Crashes.GenerateTestCrash();
         }
 
         protected override async void OnAppearing()

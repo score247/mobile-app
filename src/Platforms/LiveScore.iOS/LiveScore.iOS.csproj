@@ -432,6 +432,9 @@
     <PackageReference Include="Xamarin.Forms">
       <Version>4.2.0.709249</Version>
     </PackageReference>
+    <PackageReference Include="XamEffects">
+      <Version>1.6.3</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\LiveScore\LiveScore.csproj">

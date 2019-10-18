@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using Fanex.Caching;
 using FFImageLoading.Helpers;
@@ -35,6 +36,7 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry UseContainerInstance(this IContainerRegistry containerRegistry, IContainerProvider container)
         {
+            Debug.WriteLine($"UseContainerInstance {DateTime.Now.ToString("hh:mm:ss")}");
             containerRegistry.RegisterInstance(container);
             Container = container;
 
@@ -62,20 +64,16 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
 
-            var logService = new LoggingService(
-                Container.Resolve<IEssential>(),
-                Container.Resolve<INetworkConnection>(),
-                null,
-                config.SentryDsn,
-                config.Environment);
-
-            containerRegistry.RegisterInstance<ILoggingService>(logService);
+            containerRegistry.RegisterSingleton<ILoggingService, AppCenterLoggingService>();
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
 
             //var apiService = Container.Resolve<IApiService>();
             //containerRegistry.RegisterInstance(apiService.GetApi<ISoccerMatchApi>());
+
+            
+            
 
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 

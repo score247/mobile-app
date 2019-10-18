@@ -4,24 +4,28 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-    xmlns:d="http://xamarin.com/schemas/2014/forms/design"    
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
     BackgroundColor="#202124"
     mc:Ignorable="d">
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
-                     Priority="1"
-                     Text="Search" />
+        <ToolbarItem
+            IconImageSource="images/common/icon_transparent.png"
+            Priority="1"
+            Text="Search" />
     </ContentPage.ToolbarItems>
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
 
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand" Margin="0,12,0,0" BackgroundColor="{StaticResource PrimaryColor}">
+        <StackLayout
+            Margin="0,12,0,0"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>

@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using SharpRaven;
 using SharpRaven.Data;
 using Xamarin.Essentials;
@@ -21,7 +25,76 @@ namespace LiveScore.Common.Services
 
         void LogInfo(string message);
 
-        void TrackEvent(string trackIdentifier, string key, string value);
+        void TrackEvent(string trackIdentifier, IDictionary<string, string> properties);
+    }
+
+    public class AppCenterLoggingService : ILoggingService
+    {
+        private Dictionary<string, string> ClientInformation;
+
+        public AppCenterLoggingService(IEssential essential)
+        {
+            AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
+                typeof(Analytics), typeof(Crashes));
+
+            ClientInformation = new Dictionary<string, string>
+            {
+                ["AppName"] = essential.AppName,
+                ["AppVersion"] = essential.AppVersion,
+                ["Device.Model"] = essential.Model,
+                ["Device.Name"] = essential.Name,
+                ["OperatingSystem.Name"] = essential.OperatingSystemName,
+                ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
+                ["Message"] = string.Empty
+            };
+        }
+
+        public void LogException(Exception exception)
+        {
+            Crashes.TrackError(exception, ClientInformation);
+        }
+
+        public void LogException(string message, Exception exception)
+        {
+            ClientInformation["Message"] = message;
+            LogException(exception);
+        }
+
+        public Task LogExceptionAsync(Exception exception)
+        {
+            return Task.Run(() => LogException(exception));
+        }
+
+        public Task LogExceptionAsync(string message, Exception exception)
+        {
+            return Task.Run(() => LogException(message, exception));
+        }
+
+        public void LogInfo(string message)
+        {
+            Analytics.TrackEvent(message, ClientInformation);
+        }
+
+        public Task LogInfoAsync(string message)
+        {
+            return Task.Run(() => LogInfo(message));
+        }
+
+        public void TrackEvent(string trackIdentifier, string key, string value)
+        {
+            ClientInformation.Add(key, value);
+            Analytics.TrackEvent(trackIdentifier, ClientInformation);
+        }
+
+        public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
+        {
+            properties?.ToList().ForEach(item =>
+            {
+                ClientInformation.Add(item.Key, item.Value);
+            });
+
+            Analytics.TrackEvent(trackIdentifier, ClientInformation);
+        }
     }
 
     public class LoggingService : ILoggingService
@@ -39,7 +112,7 @@ namespace LiveScore.Common.Services
         {
             this.deviceInfo = deviceInfo;
             this.networkConnectionManager = networkConnectionManager;
-            this.ravenClient = ravenClient?? new RavenClient(dns)
+            this.ravenClient = ravenClient ?? new RavenClient(dns)
             {
                 Release = AppInfo.VersionString,
                 Environment = env
@@ -123,5 +196,8 @@ namespace LiveScore.Common.Services
             {
                 { key, value }
             });
+
+        void ILoggingService.TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
+         => TrackEvent(trackIdentifier, properties);
     }
 }
