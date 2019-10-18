@@ -71,8 +71,6 @@ namespace LiveScore
             base.OnStart();
 
             Debug.WriteLine("Application OnStart");
-
-          
         }
 
         protected override void ConfigureViewModelLocator()

@@ -72,9 +72,6 @@ namespace LiveScore.Configurations
             //var apiService = Container.Resolve<IApiService>();
             //containerRegistry.RegisterInstance(apiService.GetApi<ISoccerMatchApi>());
 
-            
-            
-
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 
             containerRegistry.RegisterSingleton<ISportService, SportService>();

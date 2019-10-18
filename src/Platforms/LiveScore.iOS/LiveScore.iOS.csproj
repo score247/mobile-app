@@ -413,9 +413,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie">
-      <Version>3.0.1</Version>
-    </PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp">
       <Version>7.16.0.8981</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

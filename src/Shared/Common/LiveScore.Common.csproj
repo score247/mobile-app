@@ -33,7 +33,7 @@
   </PropertyGroup>
     <ItemGroup>
     <PackageReference Include="Ardalis.GuardClauses" Version="1.2.9" />
-        <PackageReference Include="CardsView" Version="2.3.3" />
+        <PackageReference Include="CardsView" Version="2.3.4" />
     <PackageReference Include="JsonNet.ContractResolvers" Version="1.1.0" />
     <PackageReference Include="MethodTimer.Fody" Version="3.1.0" />
     <PackageReference Include="MessagePack" Version="1.7.3.7" />
@@ -51,13 +51,11 @@
         <PackageReference Include="Xamarin.Forms" Version="4.2.0.709249" />
         <PackageReference Include="Prism.Forms" Version="7.2.0.1367" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.0" />
-    <PackageReference Include="SharpRaven" Version="2.4.0" />
         <PackageReference Include="SonarAnalyzer.CSharp" Version="7.16.0.8981">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="1.1.0" />
-    <PackageReference Include="Fanex.Logging.Sentry.RavenClient" Version="1.0.1" />
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="Refractored.MvvmHelpers" Version="1.3.0" />
     <PackageReference Include="Xamanimation" Version="1.3.0" />

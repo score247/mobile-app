@@ -1,19 +1,16 @@
 using System;
 using System.Threading.Tasks;
-using FFImageLoading;
 using FFImageLoading.Forms.Platform;
 using FFImageLoading.Svg.Forms;
 using Foundation;
 using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core.Events;
-using Lottie.Forms.iOS.Renderers;
 using ObjCRuntime;
 using PanCardView.iOS;
 using Prism;
 using Prism.Events;
 using Prism.Ioc;
-using SharpRaven.Data.Context;
 using UIKit;
 using Runtime = ObjCRuntime.Runtime;
 
@@ -29,7 +26,6 @@ namespace LiveScore.iOS
             Profiler.Start("IOS Application");
             Rg.Plugins.Popup.Popup.Init();
             Xamarin.Forms.Forms.Init();
-            AnimationViewRenderer.Init();
             CachedImageRenderer.Init();
             SvgCachedImage.Init();
             CardsViewRenderer.Preserve();
