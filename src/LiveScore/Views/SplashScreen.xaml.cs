@@ -19,7 +19,7 @@ namespace LiveScore.Views
 
             NavigationPage.SetHasNavigationBar(this, false);
 
-            Crashes.GenerateTestCrash();
+            
         }
 
         protected override async void OnAppearing()

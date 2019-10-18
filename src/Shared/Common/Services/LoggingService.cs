@@ -30,24 +30,29 @@ namespace LiveScore.Common.Services
 
     public class AppCenterLoggingService : ILoggingService
     {
-        private Dictionary<string, string> ClientInformation;
+        private readonly Dictionary<string, string> ClientInformation;
+        private readonly IEssential essential;
 
         public AppCenterLoggingService(IEssential essential)
         {
             AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
                 typeof(Analytics), typeof(Crashes));
 
-            ClientInformation = new Dictionary<string, string>
-            {
-                ["AppName"] = essential.AppName,
-                ["AppVersion"] = essential.AppVersion,
-                ["Device.Model"] = essential.Model,
-                ["Device.Name"] = essential.Name,
-                ["OperatingSystem.Name"] = essential.OperatingSystemName,
-                ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
-                ["Message"] = string.Empty
-            };
+            this.essential = essential;
+
+            ClientInformation = GenerateClientInfo();
         }
+
+        private Dictionary<string, string> GenerateClientInfo()=> new Dictionary<string, string>
+        {
+            ["AppName"] = essential.AppName,
+            ["AppVersion"] = essential.AppVersion,
+            ["Device.Model"] = essential.Model,
+            ["Device.Name"] = essential.Name,
+            ["OperatingSystem.Name"] = essential.OperatingSystemName,
+            ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
+            ["Message"] = string.Empty
+        };
 
         public void LogException(Exception exception)
         {
@@ -57,6 +62,7 @@ namespace LiveScore.Common.Services
         public void LogException(string message, Exception exception)
         {
             ClientInformation["Message"] = message;
+
             LogException(exception);
         }
 
@@ -88,9 +94,11 @@ namespace LiveScore.Common.Services
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
         {
+            var clientInfo = GenerateClientInfo();
+
             properties?.ToList().ForEach(item =>
             {
-                ClientInformation.Add(item.Key, item.Value);
+                clientInfo.Add(item.Key, item.Value);
             });
 
             Analytics.TrackEvent(trackIdentifier, ClientInformation);
