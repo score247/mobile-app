@@ -60,7 +60,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public MatchInfo MatchInfo { get; }
 
-        public Match Match { get; }
+        public SoccerMatch Match { get; }
 
         public Color RowColor { get; protected set; }
 

@@ -25,7 +25,10 @@ namespace LiveScore.iOS.Renderers
             var txSearchField = (UITextField)Control.ValueForKey(new Foundation.NSString("searchField"));
             var primaryColor = (Color)App.Current.Resources["PrimaryColor"];
 
-            txSearchField.BackgroundColor = UIColor.FromRGB((nfloat)primaryColor.R, (nfloat)primaryColor.G, (nfloat)primaryColor.B);
+            txSearchField.BackgroundColor = UIColor.FromRGB(
+                (nfloat)primaryColor.R,
+                (nfloat)primaryColor.G,
+                (nfloat)primaryColor.B);
             txSearchField.ClipsToBounds = true;
         }
     }

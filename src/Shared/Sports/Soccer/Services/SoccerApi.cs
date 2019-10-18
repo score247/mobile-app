@@ -19,10 +19,10 @@ namespace LiveScore.Soccer.Services
         public interface MatchApi
         {
             [Get("/soccer/{language}/matches/live")]
-            Task<IEnumerable<Match>> GetLiveMatches(string language);
+            Task<IEnumerable<SoccerMatch>> GetLiveMatches(string language);
 
             [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
-            Task<IEnumerable<Match>> GetMatches(string fromDate, string toDate, string language);
+            Task<IEnumerable<SoccerMatch>> GetMatches(string fromDate, string toDate, string language);
 
             [Get("/soccer/{language}/matches/{matchId}")]
             Task<MatchInfo> GetMatchInfo(string matchId, string language);

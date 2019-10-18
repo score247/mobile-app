@@ -191,7 +191,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         private void BuildSecondLeg(IMatch match)
         {
-            if (match is Match soccerMatch)
+            if (match is SoccerMatch soccerMatch)
             {
                 var winnerId = soccerMatch.AggregateWinnerId;
 

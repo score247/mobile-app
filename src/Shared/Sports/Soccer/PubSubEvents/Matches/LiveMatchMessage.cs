@@ -9,7 +9,7 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
     {
         public LiveMatchMessage(
             byte sportId,
-            IEnumerable<Match> newMatches,
+            IEnumerable<SoccerMatch> newMatches,
             string[] removeMatchIds)
         {
             SportId = sportId;

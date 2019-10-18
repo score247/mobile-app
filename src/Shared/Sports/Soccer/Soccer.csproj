@@ -96,6 +96,11 @@
     <Compile Update="Views\Templates\MatchDetails\DetailOdds\OddsMovementView.xaml.cs">
       <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SoccerModelResolver.cs">
+      <!-- Exclude the file from analysis -->
+      <SonarQubeExclude>true</SonarQubeExclude>
+    </Compile>
+
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />

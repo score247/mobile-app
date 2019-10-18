@@ -4,6 +4,7 @@ using LiveScore.iOS.Renderers;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Prism;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MenuTabbedPageRenderer))]
 
@@ -80,14 +81,11 @@ namespace LiveScore.iOS.Renderers
 
         private static UIColor GetColorFromResource(string resourceName)
         {
-            var color = (Color)App.Current.Resources[resourceName];
+            var color = (Color)PrismApplicationBase
+                .Current
+                .Resources[resourceName];
 
-            if (color == default)
-            {
-                return UIColor.Black;
-            }
-
-            return UIColor.FromRGB((nfloat)color.R, (nfloat)color.G, (nfloat)color.B);
+            return color == default ? UIColor.Black : UIColor.FromRGB((nfloat)color.R, (nfloat)color.G, (nfloat)color.B);
         }
     }
 }

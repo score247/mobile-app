@@ -36,7 +36,7 @@ namespace LiveScore.Soccer.Converters
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
 
-        private Match soccerMatch;
+        private SoccerMatch soccerMatch;
 
         public MatchMinuteConverter(ISettings settings, ILoggingService loggingService)
         {
@@ -50,12 +50,12 @@ namespace LiveScore.Soccer.Converters
         {
             try
             {
-                if (!(match is Match) || match == null)
+                if (!(match is SoccerMatch) || match == null)
                 {
                     return string.Empty;
                 }
 
-                soccerMatch = match as Match;
+                soccerMatch = match as SoccerMatch;
 
                 PeriodStartMinutes.TryGetValue(match.MatchStatus, out var periodStartMinute);
                 PeriodEndMinutes.TryGetValue(match.MatchStatus, out var periodEndMinute);
