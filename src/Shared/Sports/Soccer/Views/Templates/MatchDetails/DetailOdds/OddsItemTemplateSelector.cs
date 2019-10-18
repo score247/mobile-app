@@ -5,11 +5,9 @@
 
     public class OddsItemTemplateSelector : DataTemplateSelector
     {
-        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
-        {
-            var itemViewModel = (BaseItemViewModel)item;
-
-            return itemViewModel.CreateTemplate();
-        }
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)        
+        => (item is BaseItemViewModel itemViewModel)
+                        ? itemViewModel.CreateTemplate()
+                        : null;
     }
 }
