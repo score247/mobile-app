@@ -52,9 +52,7 @@ namespace LiveScore.Common.Services
         };
 
         public void LogException(Exception exception)
-        {
-            Crashes.TrackError(exception, ClientInformation);
-        }
+            => Crashes.TrackError(exception, ClientInformation);
 
         public void LogException(string message, Exception exception)
         {
@@ -64,24 +62,16 @@ namespace LiveScore.Common.Services
         }
 
         public Task LogExceptionAsync(Exception exception)
-        {
-            return Task.Run(() => LogException(exception));
-        }
+            => Task.Run(() => LogException(exception));
 
         public Task LogExceptionAsync(string message, Exception exception)
-        {
-            return Task.Run(() => LogException(message, exception));
-        }
+            => Task.Run(() => LogException(message, exception));
 
         public void LogInfo(string message)
-        {
-            Analytics.TrackEvent(message, ClientInformation);
-        }
+            => Analytics.TrackEvent(message, ClientInformation);
 
         public Task LogInfoAsync(string message)
-        {
-            return Task.Run(() => LogInfo(message));
-        }
+            => Task.Run(() => LogInfo(message));
 
         public void TrackEvent(string trackIdentifier, string key, string value)
         {

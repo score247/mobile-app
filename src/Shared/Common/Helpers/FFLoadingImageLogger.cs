@@ -17,7 +17,7 @@ namespace LiveScore.Common.Helpers
             => System.Diagnostics.Debug.WriteLine(message);
 
         public void Error(string errorMessage)
-            => loggingService.LogException(new InvalidOperationException(errorMessage));
+            => loggingService.LogException(new Exception(errorMessage));
 
         public void Error(string errorMessage, Exception ex)
             => loggingService.LogException(errorMessage, ex);
