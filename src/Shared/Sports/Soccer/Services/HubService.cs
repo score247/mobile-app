@@ -75,8 +75,6 @@ namespace LiveScore.Soccer.Services
                     {
                         try
                         {
-                            logger.LogInfoAsync($"HubService receiving {jsonString}");
-
                             handler.Handle(jsonString);
                         }
                         catch (Exception ex)
