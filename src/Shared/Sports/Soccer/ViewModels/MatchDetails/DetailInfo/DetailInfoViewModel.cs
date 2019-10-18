@@ -156,8 +156,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private void BuildInfoItems(MatchInfo matchInfo)
         {
             matchInfo.UpdateTimelineEvents(FilterPenaltyEvents(matchInfo)?
-                .OrderByDescending(t => t.MatchTime)
-                .ThenByDescending(t => t.Time));
+                .OrderByDescending(t => t.Time));
 
             if (matchInfo.TimelineEvents == null)
             {
