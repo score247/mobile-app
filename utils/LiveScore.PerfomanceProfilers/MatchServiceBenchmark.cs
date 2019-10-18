@@ -37,7 +37,7 @@
 
 ////            var matches = matchService.GetMatchesByDate(date, language, forceFetchNewData).GetAwaiter().GetResult();
 
-////            Console.WriteLine($"Total Match: {matches.Count()}");
+////            Console.WriteLine($"Total SoccerMatch: {matches.Count()}");
 ////        }
 
 ////        private static readonly Dictionary<string, string> ApiUrls = new Dictionary<string, string>

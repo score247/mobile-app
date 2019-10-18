@@ -80,7 +80,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"Match:{matchId}:{language}";
+                var cacheKey = $"SoccerMatch:{matchId}:{language}";
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
@@ -120,7 +120,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"Match:{matchId}:{language}:coverage";
+                var cacheKey = $"SoccerMatch:{matchId}:{language}:coverage";
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
@@ -140,7 +140,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"Match:{matchId}:{language}:Commentaries";
+                var cacheKey = $"SoccerMatch:{matchId}:{language}:Commentaries";
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
@@ -160,7 +160,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"Match:{matchId}:statistic";
+                var cacheKey = $"SoccerMatch:{matchId}:statistic";
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,

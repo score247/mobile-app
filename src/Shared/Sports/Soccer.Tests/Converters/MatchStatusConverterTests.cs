@@ -35,7 +35,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_Match_EventStatusIsNull_ReturnFT()
         {
             // Arrange & Act
-            var status = converter.BuildDisplayStatus(new Match(null));
+            var status = converter.BuildDisplayStatus(new SoccerMatch(null));
 
             // Assert
             Assert.Equal(AppResources.FT, status);
@@ -46,7 +46,7 @@ namespace Soccer.Tests.Converters
         {
             // Arrange
             var matchTime = new DateTime(2019, 01, 01, random.Next(0, 24), random.Next(0, 60), 00);
-            var match = new Match
+            var match = new SoccerMatch
             (
                 matchTime,
                 new MatchResult(MatchStatus.NotStarted, fixture.Create<MatchStatus>())
@@ -71,7 +71,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
         {
             // Arrange
-            var match = new Match(
+            var match = new SoccerMatch(
                 new MatchResult(MatchStatus.Live, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
@@ -92,7 +92,7 @@ namespace Soccer.Tests.Converters
         {
             // Arrange
 
-            var match = new Match(
+            var match = new SoccerMatch(
                 new MatchResult(MatchStatus.Closed, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
@@ -110,7 +110,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string eventStatus, string expectedStatus)
         {
             // Arrange
-            var match = new Match(
+            var match = new SoccerMatch(
                new MatchResult(Enumeration.FromDisplayName<MatchStatus>(eventStatus), fixture.Create<MatchStatus>()));
 
             // Act
@@ -125,7 +125,7 @@ namespace Soccer.Tests.Converters
         //public void BuildStatus_EventStatusIsLive_ShowMatchMinute()
         //{
         //    // Arrange
-        //    var match = new Match
+        //    var match = new SoccerMatch
         //    {
         //        EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
         //        MatchResult = new MatchResult
@@ -152,7 +152,7 @@ namespace Soccer.Tests.Converters
         //    string matchStatus, int periodEndTime, int currentMatchTime, int expectedInjuryTime)
         //{
         //    // Arrange
-        //    var match = new Match
+        //    var match = new SoccerMatch
         //    {
         //        EventDate = new DateTime(2019, 01, 01, 12, 20, 00),
         //        MatchResult = new MatchResult
@@ -179,7 +179,7 @@ namespace Soccer.Tests.Converters
         //public void BuildStatus_InInjuryTimeShown_ShowExpectedStatus()
         //{
         //    // Arrange
-        //    var match = new Match
+        //    var match = new SoccerMatch
         //    {
         //        MatchResult = new MatchResult
         //        {
@@ -209,7 +209,7 @@ namespace Soccer.Tests.Converters
         //{
         //    // Arrange
         //    localStorage.GetValueOrDefaultInMemory("InjuryTimeAnnouced123", 0).Returns(4);
-        //    var match = new Match
+        //    var match = new SoccerMatch
         //    {
         //        Id = "123",
         //        MatchResult = new MatchResult

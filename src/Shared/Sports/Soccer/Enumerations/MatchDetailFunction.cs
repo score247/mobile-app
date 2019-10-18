@@ -5,7 +5,7 @@ namespace LiveScore.Soccer.Enumerations
     public class MatchDetailFunction : Enumeration
     {
         public static readonly MatchDetailFunction Odds = new MatchDetailFunction(0, "Odds");
-        public static readonly MatchDetailFunction Info = new MatchDetailFunction(1, "Match Info");
+        public static readonly MatchDetailFunction Info = new MatchDetailFunction(1, "SoccerMatch Info");
         public static readonly MatchDetailFunction Tracker = new MatchDetailFunction(2, "Tracker");
         public static readonly MatchDetailFunction Stats = new MatchDetailFunction(3, "Statistics");
         public static readonly MatchDetailFunction Lineups = new MatchDetailFunction(4, "Line - ups");

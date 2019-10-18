@@ -38,7 +38,7 @@
         //        await cacheService.Received(1)
         //            .GetAndFetchLatestLocalMachine(
         //                Arg.Any<string>(),
-        //                Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+        //                Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
         //                Arg.Any<Func<DateTimeOffset, bool>>(),
         //                null);
         //    }
@@ -51,7 +51,7 @@
         //        var dateRange = new DateRange(dateTime);
         //        cacheService.GetAndFetchLatestLocalMachine(
         //                Arg.Any<string>(),
-        //                Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+        //                Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
         //                Arg.Any<Func<DateTimeOffset, bool>>(),
         //                Arg.Any<DateTimeOffset>())
         //            .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
@@ -72,11 +72,11 @@
         //        var dateRange = new DateRange(dateTime);
         //        var cacheKey = $"Matches:{dateTime.Date}:en-US";
 
-        //        var expectedMatches = fixture.CreateMany<Match>();
+        //        var expectedMatches = fixture.CreateMany<SoccerMatch>();
 
         //        cacheService.GetAndFetchLatestLocalMachine(
         //            cacheKey,
-        //            Arg.Any<Func<Task<IEnumerable<Match>>>>(),
+        //            Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
         //            Arg.Any<Func<DateTimeOffset, bool>>(),
         //            null).Returns(expectedMatches);
 
@@ -92,12 +92,12 @@
         //    {
         //        // Arrange
         //        var matchId = new Fixture().Create<string>();
-        //        var cacheKey = $"Match:{matchId}:en-US";
-        //        var expectedMatch = fixture.Create<Match>();
+        //        var cacheKey = $"SoccerMatch:{matchId}:en-US";
+        //        var expectedMatch = fixture.Create<SoccerMatch>();
 
         //        cacheService.GetAndFetchLatestLocalMachine(
         //           cacheKey,
-        //           Arg.Any<Func<Task<Match>>>(),
+        //           Arg.Any<Func<Task<SoccerMatch>>>(),
         //           Arg.Any<Func<DateTimeOffset, bool>>(),
         //           null).Returns(expectedMatch);
 
@@ -114,7 +114,7 @@
         //        // Arrange
         //        cacheService.GetAndFetchLatestLocalMachine(
         //           "GetMatch:123:en-US",
-        //           Arg.Any<Func<Task<Match>>>(),
+        //           Arg.Any<Func<Task<SoccerMatch>>>(),
         //           Arg.Any<Func<DateTimeOffset, bool>>(),
         //           null).ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 

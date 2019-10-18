@@ -11,7 +11,7 @@ namespace LiveScore.Soccer.Models.Matches
         {
         }
 
-        public MatchInfo(Match match, IEnumerable<TimelineEvent> timelineEvents, Venue venue, string referee, int attendance)
+        public MatchInfo(SoccerMatch match, IEnumerable<TimelineEvent> timelineEvents, Venue venue, string referee, int attendance)
         {
             Match = match;
             TimelineEvents = timelineEvents;
@@ -21,7 +21,7 @@ namespace LiveScore.Soccer.Models.Matches
         }
 
         [Key(0)]
-        public Match Match { get; private set; }
+        public SoccerMatch Match { get; private set; }
 
         [Key(1)]
         public IEnumerable<TimelineEvent> TimelineEvents { get; private set; }

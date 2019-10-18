@@ -71,7 +71,7 @@ namespace Scores.Tests.ViewModels
         //    await itemViewModel.RefreshCommand.ExecuteAsync();
 
         //    // Assert
-        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.SoccerMatch).ToList();
         //    Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         //}
 
@@ -89,7 +89,7 @@ namespace Scores.Tests.ViewModels
         //    // Assert
         //    var navService = itemViewModel.NavigationService as FakeNavigationService;
         //    Assert.Equal("MatchDetailView" + itemViewModel.AppSettings.CurrentSportType.Value, navService.NavigationPath);
-        //    Assert.Equal(matchViewModel.Match, navService.Parameters["Match"]);
+        //    Assert.Equal(matchViewModel.SoccerMatch, navService.Parameters["SoccerMatch"]);
         //}
 
         //[Fact]
@@ -118,7 +118,7 @@ namespace Scores.Tests.ViewModels
         //    itemViewModel.OnNavigatedTo(null);
 
         //    // Assert
-        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.SoccerMatch).ToList();
         //    Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         //}
 
@@ -136,7 +136,7 @@ namespace Scores.Tests.ViewModels
         //    itemViewModel.OnNavigatedTo(null);
 
         //    // Assert
-        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.SoccerMatch).ToList();
         //    Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         //}
 
@@ -154,7 +154,7 @@ namespace Scores.Tests.ViewModels
         //    itemViewModel.EventAggregator.GetEvent<DateBarItemSelectedEvent>().Publish(DateRange.FromYesterdayUntilNow());
 
         //    // Assert
-        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.Match).ToList();
+        //    var actualMatchData = itemViewModel.MatchItemsSource.SelectMany(group => group).Select(vm => vm.SoccerMatch).ToList();
         //    Assert.True(comparer.Compare(matchData, actualMatchData).AreEqual);
         //}
 
@@ -222,7 +222,7 @@ namespace Scores.Tests.ViewModels
         //    // Assert
         //    var expectedMatch = itemViewModel.MatchItemsSource
         //        .SelectMany(g => g)
-        //        .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId)?.Match;
+        //        .FirstOrDefault(m => m.SoccerMatch.Id == matchEvent.MatchId)?.SoccerMatch;
 
         //    Assert.Equal(expectedMatch.MatchResult, matchEvent.MatchResult);
         //    Assert.Equal(expectedMatch.LatestTimeline, matchEvent.Timeline);
@@ -241,7 +241,7 @@ namespace Scores.Tests.ViewModels
         //    // Assert
         //    var expectedMatch = itemViewModel.MatchItemsSource
         //        .SelectMany(g => g)
-        //        .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId)?.Match;
+        //        .FirstOrDefault(m => m.SoccerMatch.Id == matchEvent.MatchId)?.SoccerMatch;
 
         //    Assert.NotEqual(expectedMatch?.MatchResult, matchEvent.MatchResult);
         //    Assert.NotEqual(expectedMatch?.LatestTimeline, matchEvent.Timeline);

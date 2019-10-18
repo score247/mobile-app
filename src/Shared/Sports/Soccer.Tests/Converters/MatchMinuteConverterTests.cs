@@ -44,7 +44,7 @@ namespace Soccer.Tests.Converters
             var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
             var eventDate = fixture.Create<DateTime>();
             var timeToViewMatch = eventDate.AddMinutes(expectedMatchMinuteToSee);
-            var match = new Match(eventDate, matchResult);
+            var match = new SoccerMatch(eventDate, matchResult);
 
             // Act
             var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);
@@ -66,7 +66,7 @@ namespace Soccer.Tests.Converters
             var eventDate = fixture.Create<DateTime>();
 
             var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee);
-            var match = new Match(eventDate, matchResult);
+            var match = new SoccerMatch(eventDate, matchResult);
 
             // Act
             var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);

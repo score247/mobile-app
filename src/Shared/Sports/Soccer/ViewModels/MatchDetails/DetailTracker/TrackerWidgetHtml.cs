@@ -28,7 +28,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             builder.Append("    <head>");
             builder.Append("        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />");
             builder.Append("        <title>");
-            builder.Append("            Live Match Tracker");
+            builder.Append("            Live SoccerMatch Tracker");
             builder.Append("        </title>");
             builder.Append("       ");
             builder.Append("        <style>");

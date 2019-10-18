@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Soccer.Tests.Models.Matches
 {
-    [Collection("Match Details - Statistic")]
+    [Collection("SoccerMatch Details - Statistic")]
     public class MatchStatisticTests
     {
         [Fact]

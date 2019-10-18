@@ -14,13 +14,13 @@ using System.Runtime.CompilerServices;
 namespace LiveScore.Soccer.Models.Matches
 {
     [AddINotifyPropertyChangedInterface, MessagePackObject]
-    public class Match : IMatch
+    public class SoccerMatch : IMatch
     {
         private const int NumberOfFullTimePeriodsResult = 2;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
-        public Match(
+        public SoccerMatch(
             string id,
             DateTimeOffset eventDate,
             DateTimeOffset currentPeriodStartTime,
@@ -87,12 +87,12 @@ namespace LiveScore.Soccer.Models.Matches
             LeagueOrder = leagueOrder;
         }
 
-        internal Match(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
+        internal SoccerMatch(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
         {
             EventDate = eventDate;
         }
 
-        internal Match(IMatchResult matchResult)
+        internal SoccerMatch(IMatchResult matchResult)
         {
             UpdateResult(matchResult);
         }
@@ -194,7 +194,7 @@ namespace LiveScore.Soccer.Models.Matches
 
         public void UpdateMatch(IMatch match)
         {
-            if (!(match is Match soccerMatch))
+            if (!(match is SoccerMatch soccerMatch))
             {
                 return;
             }
@@ -340,7 +340,7 @@ namespace LiveScore.Soccer.Models.Matches
           => EventStatus?.IsClosed == true && (!string.IsNullOrEmpty(AggregateWinnerId) && AwayTeamId == AggregateWinnerId);
 
         public override bool Equals(object obj)
-            => (obj is Match actualObj) && Id == actualObj.Id;
+            => (obj is SoccerMatch actualObj) && Id == actualObj.Id;
 
         public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
@@ -352,6 +352,6 @@ namespace LiveScore.Soccer.Models.Matches
     public class MatchList
     {
         [Key(0)]
-        public IEnumerable<Match> Matches { get; set; }
+        public IEnumerable<SoccerMatch> Matches { get; set; }
     }
 }
