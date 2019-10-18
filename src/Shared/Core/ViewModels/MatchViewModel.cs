@@ -11,18 +11,18 @@ namespace LiveScore.Core.ViewModels
     public class MatchViewModel
     {
         private bool isSubscribingTimer;
-        private readonly IMatchStatusConverter matchStatusConverter;
-        private readonly IMatchMinuteConverter matchMinuteConverter;
+        private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
+        private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly IEventAggregator eventAggregator;
 
         public MatchViewModel(
             IMatch match,
-            IMatchStatusConverter matchStatusConverter,
-            IMatchMinuteConverter matchMinuteConverter,
+            IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
+            IMatchMinuteBuilder matchMinuteBuilder,
             IEventAggregator eventAggregator)
         {
-            this.matchStatusConverter = matchStatusConverter;
-            this.matchMinuteConverter = matchMinuteConverter;
+            this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
+            this.matchMinuteConverter = matchMinuteBuilder;
             this.eventAggregator = eventAggregator;
 
             BuildMatch(match);
@@ -56,7 +56,7 @@ namespace LiveScore.Core.ViewModels
 
             if (matchEvent.Timeline.Type.IsPeriodStart)
             {
-                Match.UpdateCurrentPeriodStartTime(matchEvent.Timeline.Time);
+                Match.CurrentPeriodStartTime = matchEvent.Timeline.Time;
             }
 
             BuildDisplayMatchStatus();
@@ -64,7 +64,7 @@ namespace LiveScore.Core.ViewModels
 
         private void BuildDisplayMatchStatus()
         {
-            var matchStatus = matchStatusConverter.BuildStatus(Match);
+            var matchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
 
             if (!string.IsNullOrWhiteSpace(matchStatus))
             {

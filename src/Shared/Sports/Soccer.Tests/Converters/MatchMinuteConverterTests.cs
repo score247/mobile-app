@@ -3,10 +3,10 @@ using AutoFixture;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
-using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Converters;
 using LiveScore.Soccer.Models.Matches;
 using NSubstitute;
+using Soccer.Tests.Services.Utils;
 using Xunit;
 
 namespace Soccer.Tests.Converters
@@ -38,16 +38,44 @@ namespace Soccer.Tests.Converters
         [Fact]
         public void BuildMatchMinute_MatchSatusIsFirstHalf_ReturnMatchTimeMinute()
         {
+            // Arrange
+            var matchResult = new MatchResult(Arg.Any<MatchStatus>(), MatchStatus.FirstHalf);
+            var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
+            var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
             var eventDate = fixture.Create<DateTime>();
-            var queryTime = new DateTimeOffset(eventDate);
-            byte timeShow = 35;
-            
-            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), MatchStatus.FirstHalf);
-            
+            var timeToViewMatch = eventDate.AddMinutes(expectedMatchMinuteToSee);
             var match = new Match(eventDate, matchResult);
-            var actual = matchMinuteConverter.BuildMatchMinute(match, queryTime.AddMinutes(timeShow));
 
-            Assert.Equal($"{timeShow+1}'", actual);
+            // Act
+            var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);
+
+            // Assert
+            var result = actualMatchMinuteToDisplay.Equals($"{acceptableMinuteToSee}'", StringComparison.OrdinalIgnoreCase)
+                || actualMatchMinuteToDisplay.Equals($"{expectedMatchMinuteToSee}'", StringComparison.OrdinalIgnoreCase);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void BuildMatchMinute_MatchSatusIsSecondHalf_ReturnMatchTimeMinute()
+        {
+            // Arrange            
+            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), MatchStatus.SecondHalf);
+            var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
+            var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
+            var eventDate = fixture.Create<DateTime>();
+
+            var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee);
+            var match = new Match(eventDate, matchResult);
+
+            // Act
+            var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);
+
+            // Assert
+            var result = actualMatchMinuteToDisplay.Equals($"{acceptableMinuteToSee}'", StringComparison.OrdinalIgnoreCase)
+                || actualMatchMinuteToDisplay.Equals($"{expectedMatchMinuteToSee}'", StringComparison.OrdinalIgnoreCase);
+
+            Assert.True(result);
         }
     }
 }

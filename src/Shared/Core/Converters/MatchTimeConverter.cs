@@ -2,13 +2,8 @@
 
 namespace LiveScore.Core.Converters
 {
-    public interface IMatchMinuteConverter
+    public interface IMatchMinuteBuilder
     {
         string BuildMatchMinute(IMatch match);
-    }
-
-    public interface IMatchMinuteConverter<in T>
-    {
-        string BuildMatchMinute(T match);
     }
 }

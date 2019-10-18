@@ -1,17 +1,17 @@
-﻿namespace LiveScore.Core.Models.Matches
-{
-    using System;
-    using System.Collections.Generic;
-    using Enumerations;
-    using Teams;
+﻿using System;
+using System.Collections.Generic;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
 
+namespace LiveScore.Core.Models.Matches
+{
     public interface IMatch
     {
         string Id { get; }
 
         DateTimeOffset EventDate { get; }
 
-        DateTimeOffset CurrentPeriodStartTime { get; }
+        DateTimeOffset CurrentPeriodStartTime { get; set; }
 
         string LeagueId { get; }
 
@@ -82,8 +82,6 @@
         int LeagueOrder { get; }
 
         void UpdateMatch(IMatch match);
-
-        void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime);
 
         void UpdateResult(IMatchResult matchResult);
 

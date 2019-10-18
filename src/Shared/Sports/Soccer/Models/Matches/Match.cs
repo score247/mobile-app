@@ -104,7 +104,7 @@ namespace LiveScore.Soccer.Models.Matches
         public DateTimeOffset EventDate { get; private set; }
 
         [Key(2)]
-        public DateTimeOffset CurrentPeriodStartTime { get; private set; }
+        public DateTimeOffset CurrentPeriodStartTime { get; set; }
 
         [Key(3)]
         public string LeagueId { get; private set; }
@@ -221,10 +221,10 @@ namespace LiveScore.Soccer.Models.Matches
             ModifiedTime = soccerMatch.ModifiedTime;
         }
 
-        public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)
-        {
-            CurrentPeriodStartTime = currentPeriodStartTime;
-        }
+        //public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)
+        //{
+        //    CurrentPeriodStartTime = currentPeriodStartTime;
+        //}
 
         public void UpdateResult(IMatchResult matchResult)
         {

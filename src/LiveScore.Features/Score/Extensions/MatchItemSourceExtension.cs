@@ -17,8 +17,8 @@ namespace LiveScore.Features.Score.Extensions
         public static void UpdateMatchItems(
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
             IEnumerable<IMatch> matches,
-            IMatchStatusConverter matchStatusConverter,
-            IMatchMinuteConverter matchMinuteConverter,
+            IMatchDisplayStatusBuilder matchStatusConverter,
+            IMatchMinuteBuilder matchMinuteConverter,
             IEventAggregator eventAggregator,
             Func<string, string> buildFlagUrlFunc)
         {
@@ -46,8 +46,8 @@ namespace LiveScore.Features.Score.Extensions
         public static void AddNewMatch(
                 this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
                 IMatch newMatch,
-                IMatchStatusConverter matchStatusConverter,
-                IMatchMinuteConverter matchMinuteConverter,
+                IMatchDisplayStatusBuilder matchStatusConverter,
+                IMatchMinuteBuilder matchMinuteConverter,
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {

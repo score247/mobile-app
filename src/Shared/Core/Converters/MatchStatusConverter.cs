@@ -2,8 +2,10 @@
 
 namespace LiveScore.Core.Converters
 {
-    public interface IMatchStatusConverter
+    public interface IMatchDisplayStatusBuilder
     {
-        string BuildStatus(IMatch match);
+        string BuildDisplayStatus(IMatch match);
     }
+
+
 }

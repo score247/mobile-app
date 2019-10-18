@@ -25,7 +25,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_MatchIsNull_ReturnFT()
         {
             // Act
-            var status = converter.BuildStatus(null);
+            var status = converter.BuildDisplayStatus(null);
 
             // Assert
             Assert.Equal(string.Empty, status);
@@ -35,7 +35,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_Match_EventStatusIsNull_ReturnFT()
         {
             // Arrange & Act
-            var status = converter.BuildStatus(new Match(null));
+            var status = converter.BuildDisplayStatus(new Match(null));
 
             // Assert
             Assert.Equal(AppResources.FT, status);
@@ -53,7 +53,7 @@ namespace Soccer.Tests.Converters
             );
 
             // Act
-            var status = converter.BuildStatus(match);
+            var status = converter.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(matchTime.ToString("HH:mm"), status);
@@ -75,7 +75,7 @@ namespace Soccer.Tests.Converters
                 new MatchResult(MatchStatus.Live, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
-            var status = converter.BuildStatus(match);
+            var status = converter.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);
@@ -96,7 +96,7 @@ namespace Soccer.Tests.Converters
                 new MatchResult(MatchStatus.Closed, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
-            var status = converter.BuildStatus(match);
+            var status = converter.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);
@@ -114,7 +114,7 @@ namespace Soccer.Tests.Converters
                new MatchResult(Enumeration.FromDisplayName<MatchStatus>(eventStatus), fixture.Create<MatchStatus>()));
 
             // Act
-            var status = converter.BuildStatus(match);
+            var status = converter.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);

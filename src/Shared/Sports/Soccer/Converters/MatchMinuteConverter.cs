@@ -11,7 +11,7 @@ using LiveScore.Soccer.Models.Matches;
 namespace LiveScore.Soccer.Converters
 {
     // TODO: Unit test will be written in Performance Enhancement branch
-    public class MatchMinuteConverter : IMatchMinuteConverter
+    public class MatchMinuteConverter : IMatchMinuteBuilder
     {
         private static readonly ReadOnlyDictionary<MatchStatus, int> PeriodStartMinutes
             = new ReadOnlyDictionary<MatchStatus, int>(

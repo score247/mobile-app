@@ -30,8 +30,8 @@ namespace LiveScore.Features.Score.ViewModels
         private const int DefaultFirstLoadMatchItemCount = 5;
         private const int DefaultLoadingMatchItemCountOnScrolling = 8;
 
-        protected readonly IMatchStatusConverter matchStatusConverter;
-        protected readonly IMatchMinuteConverter matchMinuteConverter;
+        protected readonly IMatchDisplayStatusBuilder matchStatusConverter;
+        protected readonly IMatchMinuteBuilder matchMinuteConverter;
         protected readonly IMatchService MatchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
 
@@ -46,8 +46,8 @@ namespace LiveScore.Features.Score.ViewModels
             ViewDate = viewDate;
 
             MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-            matchStatusConverter = DependencyResolver.Resolve<IMatchStatusConverter>(CurrentSportId.ToString());
-            matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteConverter>(CurrentSportId.ToString());
+            matchStatusConverter = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
+            matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();

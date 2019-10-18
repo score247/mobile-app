@@ -10,7 +10,7 @@ using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Converters
 {
-    public class MatchStatusConverter : IMatchStatusConverter
+    public class MatchStatusConverter : IMatchDisplayStatusBuilder
     {
         private static readonly ReadOnlyDictionary<MatchStatus, string> StatusResourceMapper =
             new ReadOnlyDictionary<MatchStatus, string>(new Dictionary<MatchStatus, string>
@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.Converters
                 { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
             });
 
-        public string BuildStatus(IMatch match)
+        public string BuildDisplayStatus(IMatch match)
         {
             if (match == null || !(match is Match))
             {
