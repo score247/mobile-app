@@ -32,11 +32,12 @@ namespace LiveScore.Soccer
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());
-            containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
             containerRegistry.RegisterSingleton<IOddsService, OddsService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusConverter>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchMinuteBuilder, MatchMinuteConverter>(SportType.Soccer.Value.ToString());
+
+            containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
 
             containerRegistry.RegisterSingleton<ITimelineEventImageConverter, DefaultEventImageConverter>();
             containerRegistry.RegisterSingleton<ITimelineEventImageConverter, ScoreChangeImageConverter>(

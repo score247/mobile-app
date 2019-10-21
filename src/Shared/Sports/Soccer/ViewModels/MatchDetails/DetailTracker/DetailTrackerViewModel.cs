@@ -18,7 +18,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 {
-    internal class DetailTrackerViewModel : TabItemViewModel
+    public class DetailTrackerViewModel : TabItemViewModel
     {
         private const int DefaultLoadingCommentaryItemCount = 30;
         private const string RemoveMatchPrefix = "sr:match:";

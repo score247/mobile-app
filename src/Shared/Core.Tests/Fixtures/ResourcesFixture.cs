@@ -20,7 +20,7 @@
             app.Resources["FunctionGroupHeight"] = 10;
             app.Resources["TabsHeight"] = 12;
             app.Resources["SubTabsHeight"] = 12;
-
+            app.Resources["TabLayoutBgColor"] = Color.FromHex("#F24822");
             app.Resources["FunctionGroupColor"] = Color.FromHex("#F24822");
             app.Resources["PrimaryColor"] = Color.FromHex("#1D2133");
             app.Resources["PrimaryAccentColor"] = Color.FromHex("#F24822");
@@ -50,6 +50,7 @@
             app.Resources["WinnerInfoIcon"] = new Style(typeof(Image));
             app.Resources["TableText"] = new Style(typeof(Label));
             app.Resources["TableHeaderText"] = new Style(typeof(Label));
+            app.Resources["RobotoMedium"] = new Style(typeof(Label));
 
             app.Resources["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout));
             app.Resources["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout));

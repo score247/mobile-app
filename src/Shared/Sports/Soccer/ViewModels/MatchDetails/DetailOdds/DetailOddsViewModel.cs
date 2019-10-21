@@ -23,7 +23,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 {
-    internal class DetailOddsViewModel : TabItemViewModel
+    public class DetailOddsViewModel : TabItemViewModel
     {
         private readonly string matchId;
         private readonly string oddsFormat;

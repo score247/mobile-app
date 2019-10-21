@@ -14,7 +14,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.DetailStats
 {
-    internal class DetailStatsViewModel : TabItemViewModel
+    public class DetailStatsViewModel : TabItemViewModel
     {
         private readonly ISoccerMatchService soccerMatchService;
         private readonly string matchId;
