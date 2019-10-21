@@ -12,9 +12,7 @@ using LiveScore.Core.Events;
 using LiveScore.Core.Services;
 using LiveScore.Views;
 using MethodTimer;
-using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
-using Microsoft.AppCenter.Crashes;
 using Plugin.Multilingual;
 using Prism;
 using Prism.DryIoc;
@@ -52,7 +50,10 @@ namespace LiveScore
         protected override void OnInitialized()
         {
             AppResources.Culture = CrossMultilingual.Current.DeviceCultureInfo;
-            ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
+            ImageService
+                .Instance
+                .Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
+
             MainPage = new NavigationPage(new SplashScreen());
 
             InitializeComponent();

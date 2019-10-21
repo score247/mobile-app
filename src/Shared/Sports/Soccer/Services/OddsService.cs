@@ -1,12 +1,12 @@
-﻿namespace LiveScore.Soccer.Services
-{
-    using System;
-    using System.Threading.Tasks;
-    using LiveScore.Common.Services;
-    using LiveScore.Core.Services;
-    using LiveScore.Soccer.Models.Odds;
-    using static LiveScore.Soccer.Services.SoccerApi;
+﻿using System;
+using System.Threading.Tasks;
+using LiveScore.Common.Services;
+using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Odds;
+using static LiveScore.Soccer.Services.SoccerApi;
 
+namespace LiveScore.Soccer.Services
+{
     public interface IOddsService
     {
         Task<MatchOdds> GetOddsAsync(

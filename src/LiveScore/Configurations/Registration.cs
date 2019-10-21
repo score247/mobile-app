@@ -22,6 +22,9 @@ using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
 using LiveScore.Views;
 using MessagePack.Resolvers;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
@@ -64,7 +67,9 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
 
-            containerRegistry.RegisterSingleton<ILoggingService, AppCenterLoggingService>();
+            AppCenter.Start(config.AppCenterSecret, typeof(Analytics), typeof(Crashes));
+
+            containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();

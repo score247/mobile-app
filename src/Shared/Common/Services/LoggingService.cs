@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 
@@ -25,22 +24,24 @@ namespace LiveScore.Common.Services
         void TrackEvent(string trackIdentifier, IDictionary<string, string> properties);
     }
 
-    public class AppCenterLoggingService : ILoggingService
+    public class LoggingService : ILoggingService
     {
         private readonly Dictionary<string, string> ClientInformation;
-        private readonly IEssential essential;
+        private readonly Action<Exception, IDictionary<string, string>> trackError;
+        private readonly Action<string, IDictionary<string, string>> trackEvent;
 
-        public AppCenterLoggingService(IEssential essential)
+        public LoggingService(
+            IEssential essential,
+            Action<Exception, IDictionary<string, string>> trackError = null,
+            Action<string, IDictionary<string, string>> trackEvent = null)
         {
-            AppCenter.Start("ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;",
-                typeof(Analytics), typeof(Crashes));
+            this.trackError = trackError ?? Crashes.TrackError;
+            this.trackEvent = trackEvent ?? Analytics.TrackEvent;
 
-            this.essential = essential;
-
-            ClientInformation = GenerateClientInfo();
+            ClientInformation = GenerateClientInfo(essential);
         }
 
-        private Dictionary<string, string> GenerateClientInfo() => new Dictionary<string, string>
+        private static Dictionary<string, string> GenerateClientInfo(IEssential essential) => new Dictionary<string, string>
         {
             ["AppName"] = essential.AppName,
             ["AppVersion"] = essential.AppVersion,
@@ -52,7 +53,7 @@ namespace LiveScore.Common.Services
         };
 
         public void LogException(Exception exception)
-            => Crashes.TrackError(exception, ClientInformation);
+            => trackError(exception, ClientInformation);
 
         public void LogException(string message, Exception exception)
         {
@@ -68,7 +69,7 @@ namespace LiveScore.Common.Services
             => Task.Run(() => LogException(message, exception));
 
         public void LogInfo(string message)
-            => Analytics.TrackEvent(message, ClientInformation);
+            => trackEvent(message, ClientInformation);
 
         public Task LogInfoAsync(string message)
             => Task.Run(() => LogInfo(message));
@@ -76,19 +77,19 @@ namespace LiveScore.Common.Services
         public void TrackEvent(string trackIdentifier, string key, string value)
         {
             ClientInformation.Add(key, value);
-            Analytics.TrackEvent(trackIdentifier, ClientInformation);
+            trackEvent(trackIdentifier, ClientInformation);
         }
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
         {
-            var clientInfo = GenerateClientInfo();
+            var clientInfo = ClientInformation;
 
             properties?.ToList().ForEach(item =>
             {
                 clientInfo.Add(item.Key, item.Value);
             });
 
-            Analytics.TrackEvent(trackIdentifier, ClientInformation);
+            trackEvent(trackIdentifier, clientInfo);
         }
     }
 }

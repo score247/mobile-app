@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace LiveScore.Core
+﻿namespace LiveScore.Core
 {
     public interface IConfiguration
     {
@@ -12,8 +8,8 @@ namespace LiveScore.Core
 
         string AssetsEndPoint { get; }
 
-        string Environment { get; }
+        string AppCenterSecret { get; }
 
-        string SentryDsn { get; }
+        string Environment { get; }
     }
 }

@@ -31,17 +31,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         private bool isFirstLoad = true;
 
         public DetailTrackerViewModel(
-            MatchCoverage coverage,
+            MatchCoverage matchCoverage,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Tracker)
         {
-            matchCoverage = coverage;
+            this.matchCoverage = matchCoverage;
             soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();
-            OnCollapseTracker = new DelegateCommand(CollapseTracker);
-            OnExpandTracker = new DelegateCommand(ExpandTracker);
+            OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
+            OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             ShowMoreCommentariesCommand = new DelegateCommand(ShowMoreCommentaries);
         }
@@ -92,15 +92,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (isFirstLoad)
             {
-                await LoadData();
+                await LoadDataAsync();
             }
 
             isFirstLoad = false;
         }
-
-        private void CollapseTracker() => TrackerVisible = false;
-
-        private void ExpandTracker() => TrackerVisible = true;
 
         private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentariesAsync(true), false);
 
@@ -124,7 +120,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
             }
         }
 
-        private async Task LoadData()
+        private async Task LoadDataAsync()
         {
             if (matchCoverage?.Coverage == null)
             {
@@ -154,7 +150,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         private string GenerateTrackerWidget(Coverage coverage)
         {
-            var formatMatchId = matchCoverage.MatchId.Replace(RemoveMatchPrefix, string.Empty);
+            var formatMatchId = matchCoverage?.MatchId.Replace(RemoveMatchPrefix, string.Empty);
 
             return TrackerWidgetHtml.Generate(new Dictionary<string, string>
             {
@@ -169,15 +165,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
         {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Commentary)
             {
-                var commentaries = (await soccerMatchService
+                var matchCommentaries = (await soccerMatchService
                         .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
                     .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
-                    .OrderByDescending(t => t.Time)
-                    .ToList();
+                    .OrderByDescending(t => t.Time);
 
-                if (commentaries.Count > 0)
+                if (matchCommentaries.Any())
                 {
-                    var commentaryViewModels = commentaries
+                    var commentaryViewModels = matchCommentaries
                         .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
                         .ToList();
 
