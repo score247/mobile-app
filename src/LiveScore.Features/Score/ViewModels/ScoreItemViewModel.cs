@@ -253,6 +253,11 @@ namespace LiveScore.Features.Score.ViewModels
                         {
                             MatchItemsSource.Insert(MatchItemsSource.Count - skeletonItems.Count, matchItem);
                         }
+
+                        if (RemainingMatchItemSource.Count == 0)
+                        {
+                            MatchItemsSource.RemoveItems(skeletonItems);
+                        }
                     });
                 });
         }
