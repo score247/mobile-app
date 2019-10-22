@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.SubstitutionItemTemplate"
+              xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailInfoViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+
+            <Grid BackgroundColor="{Binding RowColor}"
+                  Style="{StaticResource MatchDetailInfoRow}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="42" />
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
+                       Style="{StaticResource MatchInfoMinutes}"
+                       Text="{Binding MatchTime}" />
+
+                <Grid Grid.Row="0"
+                      Grid.Column="1"
+                      Grid.ColumnSpan="2"
+                      VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"                           
+                           HorizontalTextAlignment="End"
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource MatchInfoMainPlayer}"
+                           Text="{Binding HomePlayerInName}" />
+                    <ffImageLoading:CachedImage Grid.Row="0"
+                                                Grid.Column="1"                                                
+                                                DownsampleToViewSize="True"                                             
+                                                Source="{Binding PlayerInImageSource}"
+                                                Style="{StaticResource MatchInfoImage}" />
+
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalTextAlignment="End"                           
+                           Style="{StaticResource MatchInfoAssistedPlayer}"
+                           LineBreakMode="TailTruncation"
+                           Text="{Binding HomePlayerOutName}" />
+                    <ffImageLoading:CachedImage Grid.Row="1"
+                                                Grid.Column="1"
+                                                DownsampleToViewSize="True"                                               
+                                                Source="{Binding PlayerOutImageSource}"
+                                                Style="{StaticResource MatchInfoImage}" />
+                </Grid>               
+                <Grid Grid.Row="0"
+                      Grid.Column="4"
+                      Grid.ColumnSpan="2"
+                      VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="30" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+
+                    <ffImageLoading:CachedImage Grid.Row="0"
+                                                Grid.Column="0"                                                
+                                                DownsampleToViewSize="True"                                              
+                                                Source="{Binding PlayerInImageSource}"
+                                                Style="{StaticResource MatchInfoImage}" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"                           
+                           Style="{StaticResource MatchInfoMainPlayer}"
+                           LineBreakMode="TailTruncation"
+                           Text="{Binding AwayPlayerInName}" />
+
+                    <ffImageLoading:CachedImage Grid.Row="1"
+                                                Grid.Column="0"
+                                                DownsampleToViewSize="True"                                               
+                                                Source="{Binding PlayerOutImageSource}"
+                                                Style="{StaticResource MatchInfoImage}" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"                                                      
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource MatchInfoAssistedPlayer}"
+                           Text="{Binding AwayPlayerOutName}" />
+                </Grid>
+            </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

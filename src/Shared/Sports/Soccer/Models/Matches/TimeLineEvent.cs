@@ -60,6 +60,10 @@ namespace LiveScore.Core.Models.Matches
 
         public bool IsHome { get; set; }
 
+        public Player PlayerIn { get; set; }
+
+        public Player PlayerOut { get; set; }
+
         public override bool Equals(object obj)
         {
             if (!(obj is TimelineEvent actualObj))

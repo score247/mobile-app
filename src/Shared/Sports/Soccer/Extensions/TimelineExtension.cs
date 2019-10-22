@@ -14,7 +14,8 @@ namespace LiveScore.Soccer.Extensions
             EventType.YellowRedCard,
             EventType.PenaltyShootout,
             EventType.BreakStart,
-            EventType.MatchEnded
+            EventType.MatchEnded,
+            EventType.Substitution
         };
 
         public static readonly EventType[] HighlightSoccerEventTypes = {
