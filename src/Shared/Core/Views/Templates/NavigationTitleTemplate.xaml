@@ -13,13 +13,12 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <FlexLayout AutomationProperties.IsInAccessibleTree="False"
-                    Style="{StaticResource FlexLayoutAlignCenter}">
+        <Grid AutomationProperties.IsInAccessibleTree="False">
             <Label x:Name="sportLabel"
                    AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                    Style="{StaticResource SportName}"
                    Text="{Binding CurrentSport, Converter={StaticResource UpperCaseConverter}}" />
             <Label Style="{StaticResource SportDropdownIcon}" />
-        </FlexLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>
