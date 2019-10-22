@@ -45,25 +45,25 @@ namespace MessagePack.Resolvers
         {
             lookup = new global::System.Collections.Generic.Dictionary<Type, int>(21)
             {
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>), 0 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>), 1 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.Commentary>), 2 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>), 3 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.TimelineEvent>), 4 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.Commentary>), 0 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>), 1 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>), 2 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.TimelineEvent>), 3 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>), 4 },
                 {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetTypeOdds>), 5 },
                 {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.OddsMovement>), 6 },
                 {typeof(global::LiveScore.Soccer.Models.Leagues.League), 7 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.SoccerMatch), 8 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchList), 9 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.Commentary), 10 },
-                {typeof(global::LiveScore.Core.Models.Matches.GoalScorer), 11 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentary), 12 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentaryList), 13 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCoverage), 14 },
-                {typeof(global::LiveScore.Core.Models.Matches.TimelineEvent), 15 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchInfo), 16 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStatistic), 17 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchStatistic), 18 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.Commentary), 8 },
+                {typeof(global::LiveScore.Core.Models.Matches.GoalScorer), 9 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentary), 10 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentaryList), 11 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCoverage), 12 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.SoccerMatch), 13 },
+                {typeof(global::LiveScore.Core.Models.Matches.TimelineEvent), 14 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchInfo), 15 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStatistic), 16 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchStatistic), 17 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchList), 18 },
                 {typeof(global::LiveScore.Soccer.Models.Odds.MatchOdds), 19 },
                 {typeof(global::LiveScore.Soccer.Models.Odds.MatchOddsMovement), 20 },
             };
@@ -76,25 +76,25 @@ namespace MessagePack.Resolvers
 
             switch (key)
             {
-                case 0: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.MatchPeriod>();
-                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>();
-                case 2: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>();
-                case 3: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentary>();
-                case 4: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.TimelineEvent>();
+                case 0: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>();
+                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentary>();
+                case 2: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.MatchPeriod>();
+                case 3: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.TimelineEvent>();
+                case 4: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>();
                 case 5: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.BetTypeOdds>();
                 case 6: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.OddsMovement>();
                 case 7: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueFormatter();
-                case 8: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchFormatter();
-                case 9: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchListFormatter();
-                case 10: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.CommentaryFormatter();
-                case 11: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.GoalScorerFormatter();
-                case 12: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryFormatter();
-                case 13: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryListFormatter();
-                case 14: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCoverageFormatter();
-                case 15: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.TimelineEventFormatter();
-                case 16: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchInfoFormatter();
-                case 17: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStatisticFormatter();
-                case 18: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchStatisticFormatter();
+                case 8: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.CommentaryFormatter();
+                case 9: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.GoalScorerFormatter();
+                case 10: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryFormatter();
+                case 11: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryListFormatter();
+                case 12: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCoverageFormatter();
+                case 13: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.SoccerMatchFormatter();
+                case 14: return new MessagePack.Formatters.LiveScore.Core.Models.Matches.TimelineEventFormatter();
+                case 15: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchInfoFormatter();
+                case 16: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStatisticFormatter();
+                case 17: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchStatisticFormatter();
+                case 18: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchListFormatter();
                 case 19: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsFormatter();
                 case 20: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsMovementFormatter();
                 default: return null;
@@ -219,265 +219,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 {
     using System;
     using MessagePack;
-
-
-    public sealed class MatchFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>
-    {
-
-        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.SoccerMatch value, global::MessagePack.IFormatterResolver formatterResolver)
-        {
-            if (value == null)
-            {
-                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
-            }
-            
-            var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 31);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EventDate, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.CurrentPeriodStartTime, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueId, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueName, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamId, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamName, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamId, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamName, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.MatchStatus, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.EventStatus, formatterResolver);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeScore);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayScore);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.WinnerId, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AggregateWinnerId, formatterResolver);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateHomeScore);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateAwayScore);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeRedCards);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeYellowRedCards);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayRedCards);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayYellowRedCards);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.MatchTime);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.StoppageTime, formatterResolver);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.InjuryTimeAnnounced);
-            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Serialize(ref bytes, offset, value.LastTimelineType, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>>().Serialize(ref bytes, offset, value.MatchPeriods, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryName, formatterResolver);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.ModifiedTime, formatterResolver);
-            offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsInternationalLeague);
-            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.LeagueOrder);
-            return offset - startOffset;
-        }
-
-        public global::LiveScore.Soccer.Models.Matches.SoccerMatch Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
-        {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
-                readSize = 1;
-                return null;
-            }
-
-            var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
-            offset += readSize;
-
-            var __Id__ = default(string);
-            var __EventDate__ = default(global::System.DateTimeOffset);
-            var __CurrentPeriodStartTime__ = default(global::System.DateTimeOffset);
-            var __LeagueId__ = default(string);
-            var __LeagueName__ = default(string);
-            var __HomeTeamId__ = default(string);
-            var __HomeTeamName__ = default(string);
-            var __AwayTeamId__ = default(string);
-            var __AwayTeamName__ = default(string);
-            var __MatchStatus__ = default(global::LiveScore.Core.Enumerations.MatchStatus);
-            var __EventStatus__ = default(global::LiveScore.Core.Enumerations.MatchStatus);
-            var __HomeScore__ = default(byte);
-            var __AwayScore__ = default(byte);
-            var __WinnerId__ = default(string);
-            var __AggregateWinnerId__ = default(string);
-            var __AggregateHomeScore__ = default(byte);
-            var __AggregateAwayScore__ = default(byte);
-            var __HomeRedCards__ = default(byte);
-            var __HomeYellowRedCards__ = default(byte);
-            var __AwayRedCards__ = default(byte);
-            var __AwayYellowRedCards__ = default(byte);
-            var __MatchTime__ = default(byte);
-            var __StoppageTime__ = default(string);
-            var __InjuryTimeAnnounced__ = default(byte);
-            var __LastTimelineType__ = default(global::LiveScore.Core.Enumerations.EventType);
-            var __MatchPeriods__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>);
-            var __CountryCode__ = default(string);
-            var __CountryName__ = default(string);
-            var __ModifiedTime__ = default(global::System.DateTimeOffset);
-            var __IsInternationalLeague__ = default(bool);
-            var __LeagueOrder__ = default(int);
-
-            for (int i = 0; i < length; i++)
-            {
-                var key = i;
-
-                switch (key)
-                {
-                    case 0:
-                        __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 1:
-                        __EventDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 2:
-                        __CurrentPeriodStartTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 3:
-                        __LeagueId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 4:
-                        __LeagueName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 5:
-                        __HomeTeamId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 6:
-                        __HomeTeamName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 7:
-                        __AwayTeamId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 8:
-                        __AwayTeamName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 9:
-                        __MatchStatus__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 10:
-                        __EventStatus__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 11:
-                        __HomeScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 12:
-                        __AwayScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 13:
-                        __WinnerId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 14:
-                        __AggregateWinnerId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 15:
-                        __AggregateHomeScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 16:
-                        __AggregateAwayScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 17:
-                        __HomeRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 18:
-                        __HomeYellowRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 19:
-                        __AwayRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 20:
-                        __AwayYellowRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 21:
-                        __MatchTime__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 22:
-                        __StoppageTime__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 23:
-                        __InjuryTimeAnnounced__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
-                        break;
-                    case 24:
-                        __LastTimelineType__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 25:
-                        __MatchPeriods__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 26:
-                        __CountryCode__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 27:
-                        __CountryName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 28:
-                        __ModifiedTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 29:
-                        __IsInternationalLeague__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
-                        break;
-                    case 30:
-                        __LeagueOrder__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
-                        break;
-                    default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
-                        break;
-                }
-                offset += readSize;
-            }
-
-            readSize = offset - startOffset;
-
-            var ____result = new global::LiveScore.Soccer.Models.Matches.SoccerMatch(__Id__, __EventDate__, __CurrentPeriodStartTime__, __LeagueId__, __LeagueName__, __HomeTeamId__, __HomeTeamName__, __AwayTeamId__, __AwayTeamName__, __MatchStatus__, __EventStatus__, __HomeScore__, __AwayScore__, __WinnerId__, __AggregateWinnerId__, __AggregateHomeScore__, __AggregateAwayScore__, __HomeRedCards__, __HomeYellowRedCards__, __AwayRedCards__, __AwayYellowRedCards__, __MatchTime__, __StoppageTime__, __InjuryTimeAnnounced__, __LastTimelineType__, __MatchPeriods__, __CountryCode__, __CountryName__, __ModifiedTime__, __IsInternationalLeague__, __LeagueOrder__);
-            return ____result;
-        }
-    }
-
-
-    public sealed class MatchListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchList>
-    {
-
-        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchList value, global::MessagePack.IFormatterResolver formatterResolver)
-        {
-            if (value == null)
-            {
-                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
-            }
-            
-            var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>>().Serialize(ref bytes, offset, value.Matches, formatterResolver);
-            return offset - startOffset;
-        }
-
-        public global::LiveScore.Soccer.Models.Matches.MatchList Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
-        {
-            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
-            {
-                readSize = 1;
-                return null;
-            }
-
-            var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
-            offset += readSize;
-
-            var __Matches__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>);
-
-            for (int i = 0; i < length; i++)
-            {
-                var key = i;
-
-                switch (key)
-                {
-                    case 0:
-                        __Matches__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    default:
-                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
-                        break;
-                }
-                offset += readSize;
-            }
-
-            readSize = offset - startOffset;
-
-            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchList();
-            ____result.Matches = __Matches__;
-            return ____result;
-        }
-    }
 
 
     public sealed class CommentaryFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>
@@ -740,6 +481,211 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     }
 
 
+    public sealed class SoccerMatchFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>
+    {
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.SoccerMatch value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 31);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EventDate, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.CurrentPeriodStartTime, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueId, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueName, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamId, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamName, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamId, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamName, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.MatchStatus, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.EventStatus, formatterResolver);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeScore);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayScore);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.WinnerId, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AggregateWinnerId, formatterResolver);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateHomeScore);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateAwayScore);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeRedCards);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeYellowRedCards);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayRedCards);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayYellowRedCards);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.MatchTime);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.StoppageTime, formatterResolver);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.InjuryTimeAnnounced);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Serialize(ref bytes, offset, value.LastTimelineType, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>>().Serialize(ref bytes, offset, value.MatchPeriods, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryName, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.ModifiedTime, formatterResolver);
+            offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsInternationalLeague);
+            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.LeagueOrder);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Soccer.Models.Matches.SoccerMatch Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __Id__ = default(string);
+            var __EventDate__ = default(global::System.DateTimeOffset);
+            var __CurrentPeriodStartTime__ = default(global::System.DateTimeOffset);
+            var __LeagueId__ = default(string);
+            var __LeagueName__ = default(string);
+            var __HomeTeamId__ = default(string);
+            var __HomeTeamName__ = default(string);
+            var __AwayTeamId__ = default(string);
+            var __AwayTeamName__ = default(string);
+            var __MatchStatus__ = default(global::LiveScore.Core.Enumerations.MatchStatus);
+            var __EventStatus__ = default(global::LiveScore.Core.Enumerations.MatchStatus);
+            var __HomeScore__ = default(byte);
+            var __AwayScore__ = default(byte);
+            var __WinnerId__ = default(string);
+            var __AggregateWinnerId__ = default(string);
+            var __AggregateHomeScore__ = default(byte);
+            var __AggregateAwayScore__ = default(byte);
+            var __HomeRedCards__ = default(byte);
+            var __HomeYellowRedCards__ = default(byte);
+            var __AwayRedCards__ = default(byte);
+            var __AwayYellowRedCards__ = default(byte);
+            var __MatchTime__ = default(byte);
+            var __StoppageTime__ = default(string);
+            var __InjuryTimeAnnounced__ = default(byte);
+            var __LastTimelineType__ = default(global::LiveScore.Core.Enumerations.EventType);
+            var __MatchPeriods__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>);
+            var __CountryCode__ = default(string);
+            var __CountryName__ = default(string);
+            var __ModifiedTime__ = default(global::System.DateTimeOffset);
+            var __IsInternationalLeague__ = default(bool);
+            var __LeagueOrder__ = default(int);
+
+            for (int i = 0; i < length; i++)
+            {
+                var key = i;
+
+                switch (key)
+                {
+                    case 0:
+                        __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 1:
+                        __EventDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 2:
+                        __CurrentPeriodStartTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 3:
+                        __LeagueId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 4:
+                        __LeagueName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 5:
+                        __HomeTeamId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 6:
+                        __HomeTeamName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 7:
+                        __AwayTeamId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 8:
+                        __AwayTeamName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 9:
+                        __MatchStatus__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 10:
+                        __EventStatus__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 11:
+                        __HomeScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 12:
+                        __AwayScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 13:
+                        __WinnerId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 14:
+                        __AggregateWinnerId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 15:
+                        __AggregateHomeScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 16:
+                        __AggregateAwayScore__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 17:
+                        __HomeRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 18:
+                        __HomeYellowRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 19:
+                        __AwayRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 20:
+                        __AwayYellowRedCards__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 21:
+                        __MatchTime__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 22:
+                        __StoppageTime__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 23:
+                        __InjuryTimeAnnounced__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
+                        break;
+                    case 24:
+                        __LastTimelineType__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 25:
+                        __MatchPeriods__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 26:
+                        __CountryCode__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 27:
+                        __CountryName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 28:
+                        __ModifiedTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 29:
+                        __IsInternationalLeague__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
+                        break;
+                    case 30:
+                        __LeagueOrder__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Soccer.Models.Matches.SoccerMatch(__Id__, __EventDate__, __CurrentPeriodStartTime__, __LeagueId__, __LeagueName__, __HomeTeamId__, __HomeTeamName__, __AwayTeamId__, __AwayTeamName__, __MatchStatus__, __EventStatus__, __HomeScore__, __AwayScore__, __WinnerId__, __AggregateWinnerId__, __AggregateHomeScore__, __AggregateAwayScore__, __HomeRedCards__, __HomeYellowRedCards__, __AwayRedCards__, __AwayYellowRedCards__, __MatchTime__, __StoppageTime__, __InjuryTimeAnnounced__, __LastTimelineType__, __MatchPeriods__, __CountryCode__, __CountryName__, __ModifiedTime__, __IsInternationalLeague__, __LeagueOrder__);
+            ____result.CurrentPeriodStartTime = __CurrentPeriodStartTime__;
+            return ____result;
+        }
+    }
+
+
     public sealed class MatchInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchInfo>
     {
 
@@ -808,7 +754,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchInfo(__Match__, __TimelineEvents__, __Venue__, __Referee__, __Attendance__);
+            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchInfo();
             return ____result;
         }
     }
@@ -873,6 +819,61 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Soccer.Models.Matches.MatchStatistic(__MatchId__, __HomeStatistic__, __AwayStatistic__);
+            return ____result;
+        }
+    }
+
+
+    public sealed class MatchListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchList>
+    {
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchList value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>>().Serialize(ref bytes, offset, value.Matches, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Soccer.Models.Matches.MatchList Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __Matches__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>);
+
+            for (int i = 0; i < length; i++)
+            {
+                var key = i;
+
+                switch (key)
+                {
+                    case 0:
+                        __Matches__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchList();
+            ____result.Matches = __Matches__;
             return ____result;
         }
     }
@@ -995,6 +996,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 { "ShootoutAwayScore", 21},
                 { "IsFirstShoot", 22},
                 { "IsHome", 23},
+                { "PlayerIn", 24},
+                { "PlayerOut", 25},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -1023,6 +1026,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShootoutAwayScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsFirstShoot"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsHome"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PlayerIn"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PlayerOut"),
                 
             };
         }
@@ -1036,7 +1041,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 24);
+            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 26);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -1085,6 +1090,10 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsFirstShoot);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[23]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsHome);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[24]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.Player>().Serialize(ref bytes, offset, value.PlayerIn, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[25]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.Player>().Serialize(ref bytes, offset, value.PlayerOut, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1124,6 +1133,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             var __ShootoutAwayScore__ = default(byte);
             var __IsFirstShoot__ = default(bool);
             var __IsHome__ = default(bool);
+            var __PlayerIn__ = default(global::LiveScore.Core.Models.Teams.Player);
+            var __PlayerOut__ = default(global::LiveScore.Core.Models.Teams.Player);
 
             for (int i = 0; i < length; i++)
             {
@@ -1210,6 +1221,12 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
                     case 23:
                         __IsHome__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
+                    case 24:
+                        __PlayerIn__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.Player>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 25:
+                        __PlayerOut__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.Player>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1246,6 +1263,8 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Matches
             ____result.ShootoutAwayScore = __ShootoutAwayScore__;
             ____result.IsFirstShoot = __IsFirstShoot__;
             ____result.IsHome = __IsHome__;
+            ____result.PlayerIn = __PlayerIn__;
+            ____result.PlayerOut = __PlayerOut__;
             return ____result;
         }
     }
