@@ -13,6 +13,7 @@ namespace LiveScore.Soccer.Models.Matches
         {
         }
 
+        [SerializationConstructor]
         public MatchInfo(
             SoccerMatch match,
             IEnumerable<TimelineEvent> timelineEvents,

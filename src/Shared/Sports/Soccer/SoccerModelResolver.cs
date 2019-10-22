@@ -754,7 +754,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchInfo();
+            var ____result = new global::LiveScore.Soccer.Models.Matches.MatchInfo(__Match__, __TimelineEvents__, __Venue__, __Referee__, __Attendance__);
             return ____result;
         }
     }
