@@ -30,8 +30,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0"
-                       Grid.Column="0"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
+                       Grid.Column="0"                       
                        Style="{StaticResource MatchInfoMinutes}"
                        Text="{Binding MatchTime}" />
 
@@ -55,7 +54,8 @@
                            Text="{Binding HomePlayerInName}" />
                     <ffImageLoading:CachedImage Grid.Row="0"
                                                 Grid.Column="1"                                                
-                                                DownsampleToViewSize="True"                                             
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding VisibleHomeImage}"
                                                 Source="{Binding PlayerInImageSource}"
                                                 Style="{StaticResource MatchInfoImage}" />
 
@@ -67,7 +67,8 @@
                            Text="{Binding HomePlayerOutName}" />
                     <ffImageLoading:CachedImage Grid.Row="1"
                                                 Grid.Column="1"
-                                                DownsampleToViewSize="True"                                               
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding VisibleHomeImage}"
                                                 Source="{Binding PlayerOutImageSource}"
                                                 Style="{StaticResource MatchInfoImage}" />
                 </Grid>               
@@ -86,7 +87,8 @@
 
                     <ffImageLoading:CachedImage Grid.Row="0"
                                                 Grid.Column="0"                                                
-                                                DownsampleToViewSize="True"                                              
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding VisibleAwayImage}"
                                                 Source="{Binding PlayerInImageSource}"
                                                 Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="0"
@@ -97,7 +99,8 @@
 
                     <ffImageLoading:CachedImage Grid.Row="1"
                                                 Grid.Column="0"
-                                                DownsampleToViewSize="True"                                               
+                                                DownsampleToViewSize="True"
+                                                IsVisible="{Binding VisibleAwayImage}"
                                                 Source="{Binding PlayerOutImageSource}"
                                                 Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="1"
