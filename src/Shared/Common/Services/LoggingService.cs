@@ -11,17 +11,23 @@ namespace LiveScore.Common.Services
     {
         Task LogExceptionAsync(Exception exception);
 
-        Task LogExceptionAsync(string message, Exception exception);
+        Task LogExceptionAsync(Exception exception, string message);
+
+        Task LogExceptionAsync(Exception exception, IDictionary<string, string> properties);
 
         void LogException(Exception exception);
 
-        void LogException(string message, Exception exception);
+        void LogException(Exception exception, string message);
 
-        Task LogInfoAsync(string message);
+        void LogException(Exception exception, IDictionary<string, string> properties);
 
-        void LogInfo(string message);
+        void TrackEvent(string trackIdentifier, string message);
+
+        Task TrackEventAsync(string trackIdentifier, string message);
 
         void TrackEvent(string trackIdentifier, IDictionary<string, string> properties);
+
+        Task TrackEventAsync(string trackIdentifier, IDictionary<string, string> properties);
     }
 
     public class LoggingService : ILoggingService
@@ -41,6 +47,58 @@ namespace LiveScore.Common.Services
             ClientInformation = GenerateClientInfo(essential);
         }
 
+        public void LogException(Exception exception)
+            => trackError(exception, ClientInformation);
+
+        public void LogException(Exception exception, string message)
+        {
+            var properties = new Dictionary<string, string>
+            {
+                ["Message"] = message
+            };
+
+            LogException(exception, properties);
+        }
+
+        public void LogException(Exception exception, IDictionary<string, string> properties)
+        {
+            AddClientInformation(properties);
+
+            trackError(exception, properties);
+        }
+
+        public Task LogExceptionAsync(Exception exception)
+            => Task.Run(() => LogException(exception));
+
+        public Task LogExceptionAsync(Exception exception, string message)
+            => Task.Run(() => LogException(exception, message));
+
+        public Task LogExceptionAsync(Exception exception, IDictionary<string, string> properties)
+            => Task.Run(() => LogException(exception, properties));
+
+        public void TrackEvent(string trackIdentifier, string message)
+        {
+            var properties = new Dictionary<string, string>
+            {
+                ["Message"] = message
+            };
+
+            TrackEvent(trackIdentifier, properties);
+        }
+
+        public Task TrackEventAsync(string trackIdentifier, string message)
+            => Task.Run(() => TrackEvent(trackIdentifier, message));
+
+        public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
+        {
+            AddClientInformation(properties);
+
+            trackEvent(trackIdentifier, properties);
+        }
+
+        public Task TrackEventAsync(string trackIdentifier, IDictionary<string, string> properties)
+             => Task.Run(() => TrackEvent(trackIdentifier, properties));
+
         private static Dictionary<string, string> GenerateClientInfo(IEssential essential) => new Dictionary<string, string>
         {
             ["AppName"] = essential.AppName,
@@ -49,47 +107,14 @@ namespace LiveScore.Common.Services
             ["Device.Name"] = essential.Name,
             ["OperatingSystem.Name"] = essential.OperatingSystemName,
             ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
-            ["Message"] = string.Empty
         };
 
-        public void LogException(Exception exception)
-            => trackError(exception, ClientInformation);
-
-        public void LogException(string message, Exception exception)
+        private void AddClientInformation(IDictionary<string, string> properties)
         {
-            ClientInformation["Message"] = message;
-
-            LogException(exception);
-        }
-
-        public Task LogExceptionAsync(Exception exception)
-            => Task.Run(() => LogException(exception));
-
-        public Task LogExceptionAsync(string message, Exception exception)
-            => Task.Run(() => LogException(message, exception));
-
-        public void LogInfo(string message)
-            => trackEvent(message, ClientInformation);
-
-        public Task LogInfoAsync(string message)
-            => Task.Run(() => LogInfo(message));
-
-        public void TrackEvent(string trackIdentifier, string key, string value)
-        {
-            ClientInformation.Add(key, value);
-            trackEvent(trackIdentifier, ClientInformation);
-        }
-
-        public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
-        {
-            var clientInfo = ClientInformation;
-
-            properties?.ToList().ForEach(item =>
+            ClientInformation?.ToList().ForEach(item =>
             {
-                clientInfo.Add(item.Key, item.Value);
+                properties.Add(item.Key, item.Value);
             });
-
-            trackEvent(trackIdentifier, clientInfo);
         }
     }
 }

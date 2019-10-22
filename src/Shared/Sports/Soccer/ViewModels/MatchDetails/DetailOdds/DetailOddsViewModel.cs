@@ -204,7 +204,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             {
                 var needToReOrder = false;
 
-                LoggingService.LogInfo($"HandleOddsComparisonMessage {DateTime.Now} - SoccerMatch {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
+                LoggingService
+                    .TrackEvent("DetailOddsViewModel", $"HandleOddsComparisonMessage {DateTime.Now} - SoccerMatch {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {

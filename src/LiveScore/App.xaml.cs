@@ -58,7 +58,7 @@ namespace LiveScore
 
             InitializeComponent();
 
-            _ = StartEventHubs();
+            StartEventHubs();
 
             StartGlobalTimer();
 
@@ -91,9 +91,9 @@ namespace LiveScore
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
             => containerRegistry
                 .UseContainerInstance(Container)
+                .UseConfiguration(new Configuration())
                 .RegisterServices()
-                .RegisterNavigation()
-                .Verify();
+                .RegisterNavigation();
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
             => moduleCatalog
@@ -101,13 +101,13 @@ namespace LiveScore
                 .AddFeatureModules()
                 .Verify();
 
-        private async Task StartEventHubs()
+        private Task StartEventHubs()
         {
             // Setup hub for soccer and other sports
 
             soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
 
-            await soccerHub.Start();
+            return soccerHub.Start();
         }
 
         protected override void OnSleep()
@@ -132,7 +132,7 @@ namespace LiveScore
 
         private void StartGlobalTimer(int intervalMinutes = 1)
         {
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
+            Device.StartTimer(TimeSpan.FromMinutes(intervalMinutes), () =>
             {
                 if (networkConnectionManager.IsSuccessfulConnection())
                 {

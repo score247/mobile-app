@@ -69,7 +69,7 @@ namespace LiveScore.ViewModels
             }
             catch (Exception ex)
             {
-                loggingService.LogExceptionAsync($"Error when receive OnConnectionChanged at {DateTime.Now}", ex);
+                loggingService.LogExceptionAsync(ex, $"Error when receive OnConnectionChanged at {DateTime.Now}");
             }
         }
 

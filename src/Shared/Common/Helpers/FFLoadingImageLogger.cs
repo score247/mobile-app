@@ -20,6 +20,6 @@ namespace LiveScore.Common.Helpers
             => loggingService.LogException(new Exception(errorMessage));
 
         public void Error(string errorMessage, Exception ex)
-            => loggingService.LogException(errorMessage, ex);
+            => loggingService.LogException(ex, errorMessage);
     }
 }

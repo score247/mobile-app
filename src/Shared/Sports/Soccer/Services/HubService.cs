@@ -45,7 +45,9 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                await logger.LogInfoAsync($"HubService start at {DateTime.Now}").ConfigureAwait(false);
+                await logger
+                    .TrackEventAsync("SoccerHubService", $"HubService start at {DateTime.Now}")
+                    .ConfigureAwait(false);
 
                 hubConnection = hubConnectionBuilder
                     .WithUrl($"{configuration.SignalRHubEndPoint}/soccerhub")
@@ -119,7 +121,11 @@ namespace LiveScore.Soccer.Services
 
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
 
-            await logger.LogInfoAsync($"HubConnection_Closed {ex}").ConfigureAwait(false);
+            await logger
+                .TrackEventAsync(
+                    "SoccerHubService",
+                    $"HubConnection_Closed {ex}")
+                .ConfigureAwait(false);
 
             await ReConnect().ConfigureAwait(false);
         }
@@ -140,12 +146,16 @@ namespace LiveScore.Soccer.Services
                     await Task.Delay(NumOfDelayMillisecondsBeforeReConnect).ConfigureAwait(false);
                     await hubConnection.StartAsync().ConfigureAwait(false);
 
-                    await logger.LogInfoAsync($"Reconnect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}").ConfigureAwait(false);
+                    await logger
+                        .TrackEventAsync(
+                            "SoccerHubService",
+                            $"Reconnect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}")
+                        .ConfigureAwait(false);
                 }
-                catch (Exception startException)
+                catch (Exception exception)
                 {
                     await logger
-                        .LogExceptionAsync($"Reconnect Failed {retryCount} times, at {DateTime.Now}", startException)
+                        .LogExceptionAsync(exception, $"Reconnect Failed {retryCount} times, at {DateTime.Now}")
                         .ConfigureAwait(false);
                 }
                 isConnecting = false;

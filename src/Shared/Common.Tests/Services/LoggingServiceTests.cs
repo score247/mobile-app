@@ -26,7 +26,7 @@ namespace LiveScore.Common.Tests.Services
 
             properties = GenerateClientInfo(essentials);
 
-             fixture = new Fixture();
+            fixture = new Fixture();
         }
 
         private static Dictionary<string, string> GenerateClientInfo(IEssential essential) => new Dictionary<string, string>
@@ -36,12 +36,11 @@ namespace LiveScore.Common.Tests.Services
             ["Device.Model"] = essential.Model,
             ["Device.Name"] = essential.Name,
             ["OperatingSystem.Name"] = essential.OperatingSystemName,
-            ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
-            ["Message"] = string.Empty
+            ["OperatingSystem.Version"] = essential.OperatingSystemVersion
         };
 
         [Fact]
-        public void LogException_Always_Call_Tracker_Error_With_ClientInformation()
+        public void LogException_Always_Invoke_TrackerErrorAction_With_ClientInformation()
         {
             // Arrange
             var exception = fixture.Create<Exception>();
@@ -53,13 +52,7 @@ namespace LiveScore.Common.Tests.Services
             trackError
                 .Received()
                 .Invoke(exception, Arg.Is<Dictionary<string, string>>(
-                    arg => arg["AppName"] == properties["AppName"]
-                    && arg["AppVersion"] == properties["AppVersion"]
-                    && arg["Device.Model"] == properties["Device.Model"]
-                    && arg["Device.Name"] == properties["Device.Name"]
-                    && arg["OperatingSystem.Name"] == properties["OperatingSystem.Name"]
-                    && arg["OperatingSystem.Version"] == properties["OperatingSystem.Version"]
-                    && arg["Message"] == string.Empty));
+                    arg => IsExpectedArgument(arg)));
         }
 
         [Fact]
@@ -70,19 +63,42 @@ namespace LiveScore.Common.Tests.Services
             var exception = fixture.Create<Exception>();
 
             // Act
-            loggingService.LogException(message, exception);
+            loggingService.LogException(exception, message);
 
             // Assert
             trackError
                 .Received()
                 .Invoke(exception, Arg.Is<Dictionary<string, string>>(
-                    arg => arg["AppName"] == properties["AppName"]
-                    && arg["AppVersion"] == properties["AppVersion"]
-                    && arg["Device.Model"] == properties["Device.Model"]
-                    && arg["Device.Name"] == properties["Device.Name"]
-                    && arg["OperatingSystem.Name"] == properties["OperatingSystem.Name"]
-                    && arg["OperatingSystem.Version"] == properties["OperatingSystem.Version"]
+                    arg => IsExpectedArgument(arg)
                     && arg["Message"] == message));
+        }
+
+        [Fact]
+        public void TrackEvent_Always_Invoke_TrackEventAction_Function_With_ClientInformation()
+        {
+            // Arrange
+            var message = fixture.Create<string>();
+            var trackIndentifier = fixture.Create<string>();
+
+            // Act
+            loggingService.TrackEvent(trackIndentifier, message);
+
+            // Assert
+            trackEvent
+                .Received()
+                .Invoke(trackIndentifier, Arg.Is<Dictionary<string, string>>(
+                    arg => IsExpectedArgument(arg)
+                    && arg["Message"] == message));
+        }
+
+        private bool IsExpectedArgument(Dictionary<string, string> arg)
+        {
+            return arg["AppName"] == properties["AppName"]
+                                && arg["AppVersion"] == properties["AppVersion"]
+                                && arg["Device.Model"] == properties["Device.Model"]
+                                && arg["Device.Name"] == properties["Device.Name"]
+                                && arg["OperatingSystem.Name"] == properties["OperatingSystem.Name"]
+                                && arg["OperatingSystem.Version"] == properties["OperatingSystem.Version"];
         }
     }
 }

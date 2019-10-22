@@ -146,7 +146,10 @@ namespace LiveScore.Core.ViewModels
 
             if (!navigated.Success)
             {
-                await LoggingService.LogExceptionAsync($"Cannot navigate to home. Exception {navigated.Exception.Message}", navigated.Exception).ConfigureAwait(false);
+                await LoggingService.LogExceptionAsync(
+                    navigated.Exception,
+                    $"Cannot navigate to home. Exception {navigated.Exception.Message}"
+                    ).ConfigureAwait(false);
             }
         }
 

@@ -19,7 +19,7 @@ namespace LiveScore.Core.Services
             {
                 var message = $"Response: {apiException?.Content} \r\nRequest URL: {apiException?.RequestMessage?.RequestUri}";
 
-                LoggingService.LogExceptionAsync(message, apiException);
+                LoggingService.LogExceptionAsync(apiException, message);
             }
             else
             {

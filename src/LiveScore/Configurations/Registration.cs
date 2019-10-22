@@ -35,13 +35,26 @@ namespace LiveScore.Configurations
 {
     public static class Registration
     {
-        private static IContainerProvider Container;
+        private static IConfiguration Configuration;
 
         public static IContainerRegistry UseContainerInstance(this IContainerRegistry containerRegistry, IContainerProvider container)
         {
             Debug.WriteLine($"UseContainerInstance {DateTime.Now.ToString("hh:mm:ss")}");
+            if (container == null)
+            {
+                throw new ArgumentNullException(nameof(container));
+            }
+
             containerRegistry.RegisterInstance(container);
-            Container = container;
+
+            return containerRegistry;
+        }
+
+        public static IContainerRegistry UseConfiguration(this IContainerRegistry containerRegistry, IConfiguration configuration)
+        {
+            Configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+
+            containerRegistry.RegisterInstance(Configuration);
 
             return containerRegistry;
         }
@@ -53,13 +66,20 @@ namespace LiveScore.Configurations
             ServicePointManager.DefaultConnectionLimit = int.MaxValue;
         }
 
+        
+
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
-            SetupServicePointManager();
+            //SetupServicePointManager();
 
-            var config = new Configuration();
-            containerRegistry.RegisterInstance<IConfiguration>(config);
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(config.ApiEndPoint)));
+            if (Configuration ==  null)
+            {
+                throw new ArgumentNullException($"{nameof(Configuration)} is null. Please call {nameof(UseConfiguration)}");
+            }
+
+            AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
+
+            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
 
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
@@ -67,15 +87,10 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
 
-            AppCenter.Start(config.AppCenterSecret, typeof(Analytics), typeof(Crashes));
-
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
 
             containerRegistry.RegisterSingleton<IApiPolicy, ApiPolicy>();
             containerRegistry.RegisterSingleton<IApiService, ApiService>();
-
-            //var apiService = Container.Resolve<IApiService>();
-            //containerRegistry.RegisterInstance(apiService.GetApi<ISoccerMatchApi>());
 
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 
@@ -87,12 +102,15 @@ namespace LiveScore.Configurations
             {
                 ContentSerializer = new MessagePackContentSerializer()
             });
+
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();
+
             containerRegistry.RegisterInstance<Func<string, string>>((countryCode)
                  => string.IsNullOrWhiteSpace(countryCode)
                      ? "images/flag_league/default_flag.svg"
-                     : $"{config.AssetsEndPoint}flags/{countryCode}.svg",
+                     : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
+
             containerRegistry.RegisterSingleton<IMiniLogger, FFLoadingImageLogger>();
 
             CompositeResolver.RegisterAndSetAsDefault(
@@ -114,14 +132,6 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
 
             return containerRegistry;
-        }
-
-        public static void Verify(this IContainerRegistry containerRegistry)
-        {
-            if (Container == null || containerRegistry == null)
-            {
-                throw new InvalidOperationException(nameof(Container));
-            }
         }
 
         public static IModuleCatalog AddFeatureModules(this IModuleCatalog moduleCatalog)
