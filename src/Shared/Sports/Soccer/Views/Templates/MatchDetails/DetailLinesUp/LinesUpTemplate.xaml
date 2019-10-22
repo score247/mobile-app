@@ -2,13 +2,24 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
-    <Label
-        Margin="16,12"
-        FontSize="12"
-        HorizontalTextAlignment="Center"
-        Text="This is Line-ups page"
-        TextColor="White" />
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailLinesUpViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        <Label
+            Margin="16,12"
+            FontSize="12"
+            HorizontalTextAlignment="Center"
+            Text="This is Line-ups page"
+            TextColor="White" />
+    </StackLayout>
 </DataTemplate>

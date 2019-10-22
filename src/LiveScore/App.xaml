@@ -112,7 +112,7 @@
             <Color x:Key="ActiveTabColor">#FF7D00</Color>
             <Color x:Key="ActiveLineColor">#FF7D00</Color>
             <x:Double x:Key="TabFontSize">13</x:Double>
-            <Color x:Key="InactiveLineColor">#121315</Color>
+            <Color x:Key="InactiveLineColor">Transparent</Color>
             <x:Double x:Key="TabsHeight">40</x:Double>
 
             <Color x:Key="SubTabContainerBgColor">#272830</Color>
@@ -329,7 +329,7 @@
             <!--  Define the basic table  -->
             <Style x:Key="TableContainer" TargetType="StackLayout">
                 <Setter Property="BackgroundColor" Value="{StaticResource TableLineColor}" />
-                <Setter Property="Margin" Value="0,4" />
+                <Setter Property="Margin" Value="0,8" />
             </Style>
             <Style x:Key="TableText" TargetType="Label">
                 <Setter Property="VerticalTextAlignment" Value="Center" />
