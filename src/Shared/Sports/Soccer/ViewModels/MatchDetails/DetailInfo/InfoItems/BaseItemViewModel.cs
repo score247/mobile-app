@@ -20,7 +20,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             { EventType.YellowRedCard, typeof(DefaultItemViewModel) },
             { EventType.RedCard, typeof(DefaultItemViewModel) },
             { EventType.PenaltyMissed, typeof(DefaultItemViewModel) },
-            { EventType.ScoreChange, typeof(SubstitutionItemViewModel) },
+            { EventType.ScoreChange, typeof(ScoreChangeItemViewModel) },
             { EventType.BreakStart, typeof(MainEventItemViewModel) },
             { EventType.PeriodStart, typeof(MainEventItemViewModel) },
             { EventType.MatchEnded, typeof(MainEventItemViewModel) },
