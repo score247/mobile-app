@@ -14,13 +14,33 @@ namespace LiveScore.Features.Score.Extensions
 {
     public static class MatchItemSourceExtension
     {
-        public static void UpdateMatchItems(
+        public static void AddItems(
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
-            IEnumerable<IMatch> matches,
-            IMatchDisplayStatusBuilder matchStatusConverter,
-            IMatchMinuteBuilder matchMinuteConverter,
-            IEventAggregator eventAggregator,
-            Func<string, string> buildFlagUrlFunc)
+            ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+        {
+            foreach (var item in newItems)
+            {
+                matchItems.Add(item);
+            }
+        }
+
+        public static void RemoveItems(
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+        {
+            foreach (var item in newItems)
+            {
+                matchItems.Remove(item);
+            }
+        }
+
+        public static void UpdateMatchItems(
+                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+                IEnumerable<IMatch> matches,
+                IMatchDisplayStatusBuilder matchStatusConverter,
+                IMatchMinuteBuilder matchMinuteConverter,
+                IEventAggregator eventAggregator,
+                Func<string, string> buildFlagUrlFunc)
         {
             var matchViewModels = matchItems?.SelectMany(g => g).ToList();
             var orderedMatches = matches.OrderBy(m => m.LeagueOrder);
@@ -66,7 +86,7 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                 matchItems[currentGroupIndex] = group;
+                matchItems[currentGroupIndex] = group;
             }
             else
             {

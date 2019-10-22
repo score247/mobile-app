@@ -51,7 +51,7 @@ namespace LiveScore.Core.ViewModels
                 {
                     if (string.IsNullOrWhiteSpace(CountryCode))
                     {
-                        return Match?.GetHashCode() ?? random.Next(1, 3);
+                        return Match?.GetHashCode() ?? random.Next(0, 9);
                     }
 
                     return CountryCode.GetHashCode();
