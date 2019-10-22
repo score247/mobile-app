@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
@@ -32,40 +31,29 @@ namespace LiveScore.Common.Services
 
     public class LoggingService : ILoggingService
     {
-        private readonly Dictionary<string, string> ClientInformation;
         private readonly Action<Exception, IDictionary<string, string>> trackError;
         private readonly Action<string, IDictionary<string, string>> trackEvent;
 
         public LoggingService(
-            IEssential essential,
+
             Action<Exception, IDictionary<string, string>> trackError = null,
             Action<string, IDictionary<string, string>> trackEvent = null)
         {
             this.trackError = trackError ?? Crashes.TrackError;
             this.trackEvent = trackEvent ?? Analytics.TrackEvent;
-
-            ClientInformation = GenerateClientInfo(essential);
         }
 
         public void LogException(Exception exception)
-            => trackError(exception, ClientInformation);
+            => trackError(exception, null);
 
         public void LogException(Exception exception, string message)
-        {
-            var properties = new Dictionary<string, string>
+            => LogException(exception, new Dictionary<string, string>
             {
-                ["Message"] = message
-            };
-
-            LogException(exception, properties);
-        }
+                ["message"] = message
+            });
 
         public void LogException(Exception exception, IDictionary<string, string> properties)
-        {
-            AddClientInformation(properties);
-
-            trackError(exception, properties);
-        }
+            => trackError(exception, properties);
 
         public Task LogExceptionAsync(Exception exception)
             => Task.Run(() => LogException(exception));
@@ -77,44 +65,18 @@ namespace LiveScore.Common.Services
             => Task.Run(() => LogException(exception, properties));
 
         public void TrackEvent(string trackIdentifier, string message)
-        {
-            var properties = new Dictionary<string, string>
+            => TrackEvent(trackIdentifier, new Dictionary<string, string>
             {
-                ["Message"] = message
-            };
-
-            TrackEvent(trackIdentifier, properties);
-        }
+                ["message"] = message
+            });
 
         public Task TrackEventAsync(string trackIdentifier, string message)
             => Task.Run(() => TrackEvent(trackIdentifier, message));
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
-        {
-            AddClientInformation(properties);
-
-            trackEvent(trackIdentifier, properties);
-        }
+            => trackEvent(trackIdentifier, properties);
 
         public Task TrackEventAsync(string trackIdentifier, IDictionary<string, string> properties)
              => Task.Run(() => TrackEvent(trackIdentifier, properties));
-
-        private static Dictionary<string, string> GenerateClientInfo(IEssential essential) => new Dictionary<string, string>
-        {
-            ["AppName"] = essential.AppName,
-            ["AppVersion"] = essential.AppVersion,
-            ["Device.Model"] = essential.Model,
-            ["Device.Name"] = essential.Name,
-            ["OperatingSystem.Name"] = essential.OperatingSystemName,
-            ["OperatingSystem.Version"] = essential.OperatingSystemVersion,
-        };
-
-        private void AddClientInformation(IDictionary<string, string> properties)
-        {
-            ClientInformation?.ToList().ForEach(item =>
-            {
-                properties.Add(item.Key, item.Value);
-            });
-        }
     }
 }

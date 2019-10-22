@@ -10,34 +10,20 @@ namespace LiveScore.Common.Tests.Services
     public class LoggingServiceTests
     {
         private readonly ILoggingService loggingService;
-        private readonly IEssential essentials;
+
         private readonly Action<Exception, IDictionary<string, string>> trackError;
         private readonly Action<string, IDictionary<string, string>> trackEvent;
-        private readonly IDictionary<string, string> properties;
         private readonly Fixture fixture;
 
         public LoggingServiceTests()
         {
-            essentials = Substitute.For<IEssential>();
+            fixture = new Fixture();
+
             trackError = Substitute.For<Action<Exception, IDictionary<string, string>>>();
             trackEvent = Substitute.For<Action<string, IDictionary<string, string>>>();
 
-            loggingService = new LoggingService(essentials, trackError, trackEvent);
-
-            properties = GenerateClientInfo(essentials);
-
-            fixture = new Fixture();
+            loggingService = new LoggingService(trackError, trackEvent);
         }
-
-        private static Dictionary<string, string> GenerateClientInfo(IEssential essential) => new Dictionary<string, string>
-        {
-            ["AppName"] = essential.AppName,
-            ["AppVersion"] = essential.AppVersion,
-            ["Device.Model"] = essential.Model,
-            ["Device.Name"] = essential.Name,
-            ["OperatingSystem.Name"] = essential.OperatingSystemName,
-            ["OperatingSystem.Version"] = essential.OperatingSystemVersion
-        };
 
         [Fact]
         public void LogException_Always_Invoke_TrackerErrorAction_With_ClientInformation()
@@ -51,8 +37,7 @@ namespace LiveScore.Common.Tests.Services
             // Assert
             trackError
                 .Received()
-                .Invoke(exception, Arg.Is<Dictionary<string, string>>(
-                    arg => IsExpectedArgument(arg)));
+                .Invoke(exception, null);
         }
 
         [Fact]
@@ -69,8 +54,7 @@ namespace LiveScore.Common.Tests.Services
             trackError
                 .Received()
                 .Invoke(exception, Arg.Is<Dictionary<string, string>>(
-                    arg => IsExpectedArgument(arg)
-                    && arg["Message"] == message));
+                    arg => arg["message"] == message));
         }
 
         [Fact]
@@ -87,18 +71,7 @@ namespace LiveScore.Common.Tests.Services
             trackEvent
                 .Received()
                 .Invoke(trackIndentifier, Arg.Is<Dictionary<string, string>>(
-                    arg => IsExpectedArgument(arg)
-                    && arg["Message"] == message));
-        }
-
-        private bool IsExpectedArgument(Dictionary<string, string> arg)
-        {
-            return arg["AppName"] == properties["AppName"]
-                                && arg["AppVersion"] == properties["AppVersion"]
-                                && arg["Device.Model"] == properties["Device.Model"]
-                                && arg["Device.Name"] == properties["Device.Name"]
-                                && arg["OperatingSystem.Name"] == properties["OperatingSystem.Name"]
-                                && arg["OperatingSystem.Version"] == properties["OperatingSystem.Version"];
+                    arg => arg["message"] == message));
         }
     }
 }

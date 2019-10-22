@@ -66,13 +66,11 @@ namespace LiveScore.Configurations
             ServicePointManager.DefaultConnectionLimit = int.MaxValue;
         }
 
-        
-
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
             //SetupServicePointManager();
 
-            if (Configuration ==  null)
+            if (Configuration == null)
             {
                 throw new ArgumentNullException($"{nameof(Configuration)} is null. Please call {nameof(UseConfiguration)}");
             }
@@ -84,7 +82,6 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
 
-            containerRegistry.RegisterSingleton<IEssential, Essential>();
             containerRegistry.RegisterSingleton<INetworkConnection, NetworkConnection>();
 
             containerRegistry.RegisterSingleton<ILoggingService, LoggingService>();
