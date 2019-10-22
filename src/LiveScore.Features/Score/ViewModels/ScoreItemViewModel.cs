@@ -53,7 +53,6 @@ namespace LiveScore.Features.Score.ViewModels
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             InitializeSkeletonMatchItems();
-
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
             InitializeCommand();
@@ -105,9 +104,7 @@ namespace LiveScore.Features.Score.ViewModels
                     if (FirstLoad)
                     {
                         FirstLoad = false;
-
-                        MatchItemsSource = skeletonItems;
-
+                        Device.BeginInvokeOnMainThread(() => MatchItemsSource = skeletonItems);
                         LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
                     }
                     else
