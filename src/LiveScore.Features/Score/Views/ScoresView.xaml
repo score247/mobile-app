@@ -15,6 +15,7 @@
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:skeleton="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -83,9 +84,6 @@
                                Style="{StaticResource NotificationLabel}"
                                Text="Coming Soon" />
                         <StackLayout IsVisible="{Binding IsNotComingSoon}">
-                            <ActivityIndicator IsRunning="{Binding IsBusy}"
-                                               IsVisible="{Binding IsBusy}"
-                                               Style="{StaticResource CenterActivityIndicator}" />
                             <Label IsVisible="{Binding NoData}"
                                    Style="{StaticResource NotificationLabel}"
                                    Text="{langs:Translate NoGames}" />
@@ -99,7 +97,9 @@
                                                            IsGroupingEnabled="True"
                                                            IsPullToRefreshEnabled="true"
                                                            IsRefreshing="{Binding IsRefreshing}"
-                                                           IsVisible="{Binding IsNotBusy}"
+                                                           skeleton:Skeleton.IsParent="True"
+                                                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                                                           skeleton:Skeleton.Animation="Fade"
                                                            ItemTemplate="{StaticResource MatchItemTemplateSelector}"
                                                            ItemsSource="{Binding MatchItemsSource}"
                                                            LoadMoreCommand="{Binding LoadMoreCommand}"

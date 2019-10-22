@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoFixture;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.Helpers;
@@ -15,6 +16,7 @@ using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.Score.Extensions;
+using LiveScore.Soccer.Models.Matches;
 using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
@@ -248,15 +250,14 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual async Task LoadMatchesAsync(bool getLatestData = false)
         {
+            MatchItemsSource = InitializeSkeletonMatchItems();
+
             var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
 
             if (matches?.Any() != true)
             {
-                if (MatchItemsSource?.Any() != true)
-                {
-                    HasData = false;
-                }
-
+                HasData = false;
+                MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
                 return;
             }
 
@@ -341,6 +342,19 @@ namespace LiveScore.Features.Score.ViewModels
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems));
+        }
+
+        private ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> InitializeSkeletonMatchItems()
+        {
+            var skeletonViewModels = new List<MatchViewModel>();
+
+            for (var i = 0; i < 10; i++)
+            {
+                skeletonViewModels.Add(new MatchViewModel(null, matchStatusConverter, matchMinuteConverter, EventAggregator, true));
+            }
+
+            return new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                skeletonViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc)));
         }
     }
 }

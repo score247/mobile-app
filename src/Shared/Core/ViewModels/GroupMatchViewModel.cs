@@ -1,13 +1,22 @@
 ﻿using System;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Matches;
+using MvvmHelpers;
 
 namespace LiveScore.Core.ViewModels
 {
-    public class GroupMatchViewModel
+    public class GroupMatchViewModel : BaseViewModel
     {
+        private static readonly Random random = new Random();
+
         public GroupMatchViewModel(IMatch match, Func<string, string> buildFlagUrl)
         {
+            if (match == null)
+            {
+                IsBusy = true;
+                return;
+            }
+
             LeagueId = match.LeagueId;
             LeagueName = match.LeagueGroupName;
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
@@ -42,7 +51,7 @@ namespace LiveScore.Core.ViewModels
                 {
                     if (string.IsNullOrWhiteSpace(CountryCode))
                     {
-                        return Match.GetHashCode();
+                        return Match?.GetHashCode() ?? random.Next(1, 3);
                     }
 
                     return CountryCode.GetHashCode();

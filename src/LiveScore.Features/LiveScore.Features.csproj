@@ -60,6 +60,13 @@
   <ItemGroup>
     <ProjectReference Include="..\Shared\Common\LiveScore.Common.csproj" />
     <ProjectReference Include="..\Shared\Core\LiveScore.Core.csproj" />
+    <ProjectReference Include="..\Shared\Sports\Soccer\Soccer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Xamarin.Forms.Skeleton">
+      <HintPath>C:\Users\harrison.nguyen\.nuget\packages\xamarin.forms.skeleton\1.0.0\lib\netstandard1.0\Xamarin.Forms.Skeleton.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

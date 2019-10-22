@@ -2,13 +2,14 @@
 using LiveScore.Core.Events;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
+using MvvmHelpers;
 using Prism.Events;
 using PropertyChanged;
 
 namespace LiveScore.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class MatchViewModel
+    public class MatchViewModel : BaseViewModel
     {
         private bool isSubscribingTimer;
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
@@ -19,11 +20,13 @@ namespace LiveScore.Core.ViewModels
             IMatch match,
             IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
             IMatchMinuteBuilder matchMinuteBuilder,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            bool isBusy = false)
         {
             this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
             this.matchMinuteConverter = matchMinuteBuilder;
             this.eventAggregator = eventAggregator;
+            IsBusy = isBusy;
 
             BuildMatch(match);
         }
@@ -85,7 +88,7 @@ namespace LiveScore.Core.ViewModels
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            if (!Match.EventStatus.IsLive || isSubscribingTimer)
+            if (Match == null || !Match.EventStatus.IsLive || isSubscribingTimer)
             {
                 return;
             }
