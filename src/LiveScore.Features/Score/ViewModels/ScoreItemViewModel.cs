@@ -52,7 +52,8 @@ namespace LiveScore.Features.Score.ViewModels
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
-            MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
+            MatchItemsSource = InitializeSkeletonMatchItems();
+
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
             InitializeCommand();
@@ -250,8 +251,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected virtual async Task LoadMatchesAsync(bool getLatestData = false)
         {
-            MatchItemsSource = InitializeSkeletonMatchItems();
-
             var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
 
             if (matches?.Any() != true)

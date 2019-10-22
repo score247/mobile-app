@@ -36,7 +36,7 @@
                              Style="{StaticResource MatchStatusContainer}"
                              skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                              skeleton:Skeleton.Animation="Fade"
-                             skeleton:Skeleton.BackgroundColor="#363636">
+                             skeleton:Skeleton.BackgroundColor="#2D2E30">
                     <Label AutomationId="{Binding Match.Id, StringFormat='LiveIndicator-{0}', Mode=OneTime}"
                            IsVisible="{Binding Match.IsInLiveAndNotExtraTime}"
                            Style="{StaticResource LiveIcon}" />
@@ -61,7 +61,7 @@
                            IsVisible="{Binding IsBusy}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                     <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"
                                                RedCards="{Binding Match.TotalHomeRedCards}" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamPenalty-{0}', Mode=OneTime}"
@@ -69,13 +69,13 @@
                            Style="{StaticResource MatchPenaltyIcon}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='HomeTeamSecondLeg-{0}', Mode=OneTime}"
                            IsVisible="{Binding Match.HomeSecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                            Style="{StaticResource MatchSecondLegIcon}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 </StackLayout>
                 <StackLayout Grid.Row="1"
                              Grid.Column="1"
@@ -90,7 +90,7 @@
                            IsVisible="{Binding IsBusy}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                     <templates:RedCardTemplate IsVisible="{Binding IsNotBusy}"
                                                RedCards="{Binding Match.TotalAwayRedCards}" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamPenalty-{0}', Mode=OneTime}"
@@ -98,13 +98,13 @@
                            Style="{StaticResource MatchPenaltyIcon}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                     <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamSecondLeg-{0}', Mode=OneTime}"
                            IsVisible="{Binding Match.AwaySecondLegImage, Converter={StaticResource TextNotEmptyConverter}}"
                            Style="{StaticResource MatchSecondLegIcon}"
                            skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                            skeleton:Skeleton.Animation="Fade"
-                           skeleton:Skeleton.BackgroundColor="#363636" />
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 </StackLayout>
                 <Label Grid.Row="0"
                        Grid.Column="2"
@@ -115,7 +115,7 @@
                        Text="{Binding Match.HomeScore}"
                        skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.Animation="Fade"
-                       skeleton:Skeleton.BackgroundColor="#363636" />
+                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 <Label Grid.Row="1"
                        Grid.Column="2"
                        AutomationId="{Binding Match.Id, StringFormat='AwayScore-{0}', Mode=OneTime}"
@@ -125,7 +125,7 @@
                        Text="{Binding Match.AwayScore}"
                        skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.Animation="Fade"
-                       skeleton:Skeleton.BackgroundColor="#363636" />
+                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
                 <Label Grid.Row="0"
                        Grid.RowSpan="2"
                        Grid.Column="3"
