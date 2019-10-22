@@ -1,6 +1,7 @@
 ﻿using LiveScore.Core;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using Prism.Navigation;
@@ -35,8 +36,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             base.BuildData();
 
             //TODO binding in/out icons
-            PlayerOutImageSource = ImageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent?.Type));
-            PlayerInImageSource = ImageConverter.BuildImageSource(new TimelineEventImage(TimelineEvent?.Type));
+            PlayerOutImageSource = Images.SubstitutionOut.Value;
+            PlayerInImageSource = Images.SubstitutionIn.Value;
 
             if (TimelineEvent.OfHomeTeam())
             {

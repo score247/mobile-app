@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.SubstitutionItemTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"              
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell>
         <StackLayout>
             <StackLayout.Resources>
@@ -52,8 +52,9 @@
                            LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoMainPlayer}"
                            Text="{Binding HomePlayerInName}" />
-                    <ffImageLoading:CachedImage Grid.Row="0"
-                                                Grid.Column="1"                                                
+                    <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                                Grid.Column="1"
+                                                HeightRequest="10"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding VisibleHomeImage}"
                                                 Source="{Binding PlayerInImageSource}"
@@ -65,8 +66,9 @@
                            Style="{StaticResource MatchInfoAssistedPlayer}"
                            LineBreakMode="TailTruncation"
                            Text="{Binding HomePlayerOutName}" />
-                    <ffImageLoading:CachedImage Grid.Row="1"
+                    <ffImageLoading:SvgCachedImage Grid.Row="1"
                                                 Grid.Column="1"
+                                                HeightRequest="10"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding VisibleHomeImage}"
                                                 Source="{Binding PlayerOutImageSource}"
@@ -85,8 +87,9 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <ffImageLoading:CachedImage Grid.Row="0"
-                                                Grid.Column="0"                                                
+                    <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                                Grid.Column="0"
+                                                HeightRequest="10"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding VisibleAwayImage}"
                                                 Source="{Binding PlayerInImageSource}"
@@ -97,8 +100,9 @@
                            LineBreakMode="TailTruncation"
                            Text="{Binding AwayPlayerInName}" />
 
-                    <ffImageLoading:CachedImage Grid.Row="1"
+                    <ffImageLoading:SvgCachedImage Grid.Row="1"
                                                 Grid.Column="0"
+                                                HeightRequest="10"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding VisibleAwayImage}"
                                                 Source="{Binding PlayerOutImageSource}"
