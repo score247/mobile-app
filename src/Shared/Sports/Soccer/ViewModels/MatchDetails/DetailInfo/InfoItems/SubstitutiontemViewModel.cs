@@ -8,7 +8,7 @@ using Prism.Navigation;
 namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     public class SubstitutionItemViewModel : BaseItemViewModel
-    {
+    {    
         public SubstitutionItemViewModel(
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
@@ -16,6 +16,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             IDependencyResolver dependencyResolver)
              : base(timelineEvent, matchInfo, navigationService, dependencyResolver)
         {
+            PlayerOutImageSource = Images.SubstitutionOut.Value;
+            PlayerInImageSource = Images.SubstitutionIn.Value;
         }
 
         public string HomePlayerOutName { get; private set; }
@@ -32,11 +34,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public override BaseItemViewModel BuildData()
         {
-            base.BuildData();
-            
-            PlayerOutImageSource = Images.SubstitutionOut.Value;
-            PlayerInImageSource = Images.SubstitutionIn.Value;
-
+            base.BuildData();            
+           
             if (TimelineEvent.OfHomeTeam())
             {
                 BuildHomeInfo();
