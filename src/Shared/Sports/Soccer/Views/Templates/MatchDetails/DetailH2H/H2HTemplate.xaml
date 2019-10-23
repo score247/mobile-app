@@ -46,7 +46,7 @@
                 <Button Grid.Row="0"
                             Grid.Column="2"
                             Style="{StaticResource SubTab}"
-                            Text="WESTHAM UNITED}" />
+                            Text="WESTHAM UNITED" />
             </Grid>
         </Frame>
 
@@ -149,8 +149,6 @@
                         <Label Style="{StaticResource MatchStatus}" Text="19 JAN" />
                         <Label Style="{StaticResource MatchStatus}" Text="FT" />
 
-                        <Label Style="{StaticResource MatchPenaltyIcon}" />
-                        <Label Style="{StaticResource MatchSecondLegIcon}" />
                     </StackLayout>
                     <StackLayout
                                 Grid.Row="0"
@@ -159,6 +157,9 @@
                         <Label AutomationId="HomeTeamName"
                                 Style="{StaticResource Team}"
                                 Text="West Ham United" />
+
+                        <Label Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label Style="{StaticResource MatchSecondLegIcon}" />
                     </StackLayout>
                     <StackLayout
                                 Grid.Row="1"

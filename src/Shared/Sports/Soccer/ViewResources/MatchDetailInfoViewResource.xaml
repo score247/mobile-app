@@ -64,6 +64,10 @@
         <Setter Property="Margin" Value="0,2,0,0" />
     </Style>
 
+    <Style x:Key="MatchInfoImagePlayerOut" BasedOn="{StaticResource MatchInfoImage}" TargetType="{x:Type ffImageLoading:CachedImage}">
+        <Setter Property="Margin" Value="0,2,0,0" />
+    </Style>
+
     <Style x:Key="MatchInfoDetailRow" TargetType="FlexLayout">
         <Setter Property="Padding" Value="16,0" />
         <Setter Property="HeightRequest" Value="36" />

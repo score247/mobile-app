@@ -2,7 +2,7 @@
 <DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.ScoreChangeItemTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+              xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <ViewCell>
         <StackLayout>
@@ -54,7 +54,7 @@
                            LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoMainPlayer}"
                            Text="{Binding HomePlayerName}" />
-                    <ffImageLoading:CachedImage Grid.Row="0"
+                    <ffImageLoading:SvgCachedImage Grid.Row="0"
                                                 Grid.Column="1"
                                                 AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
                                                 DownsampleToViewSize="True"
@@ -70,7 +70,7 @@
                            Style="{StaticResource MatchInfoAssistedPlayer}"
                            LineBreakMode="TailTruncation"
                            Text="{Binding HomeAssistName}" />
-                    <ffImageLoading:CachedImage Grid.Row="1"
+                    <ffImageLoading:SvgCachedImage Grid.Row="1"
                                                 Grid.Column="1"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding IsVisibleHomeAssist}"
@@ -95,7 +95,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
 
-                    <ffImageLoading:CachedImage Grid.Row="0"
+                    <ffImageLoading:SvgCachedImage Grid.Row="0"
                                                 Grid.Column="0"
                                                 AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
                                                 DownsampleToViewSize="True"
@@ -109,7 +109,7 @@
                            LineBreakMode="TailTruncation"
                            Text="{Binding AwayPlayerName}" />
 
-                    <ffImageLoading:CachedImage Grid.Row="1"
+                    <ffImageLoading:SvgCachedImage Grid.Row="1"
                                                 Grid.Column="0"
                                                 DownsampleToViewSize="True"
                                                 IsVisible="{Binding IsVisibleAwayAssist}"

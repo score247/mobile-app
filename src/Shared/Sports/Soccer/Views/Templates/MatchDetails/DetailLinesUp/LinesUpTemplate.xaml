@@ -15,11 +15,69 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <Label
-            Margin="16,12"
-            FontSize="12"
-            HorizontalTextAlignment="Center"
-            Text="This is Line-ups page"
-            TextColor="White" />
+        <FlexLayout Style="{StaticResource Group}">
+            <Label Style="{StaticResource GroupName}" Text="SUBSTITUTE PLAYER" />
+        </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="2" Text="2. Danis Amel" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}"  />
+            <Label Grid.Column="5" Text="5. Grigol Chabradze" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+        </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="2" Text="6. Jakub Brabec" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="5" Text="13. M. Mady Camara" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+        </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="45" />
+                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="2" Text="18. Tomas Chory" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="5" Text="22. A. Papadopoilous" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+        </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        
+        <FlexLayout Style="{StaticResource Group}">
+            <Label Style="{StaticResource GroupName}" Text="COACHES" />
+        </FlexLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Thomas Tuchel" Style="{StaticResource MatchDetailLinesUpCoaches}" />
+            <Label Grid.Column="1" Text="Ole Gunnar Solskjear" Style="{StaticResource MatchDetailLinesUpCoaches}" />
+        </Grid>
     </StackLayout>
 </DataTemplate>
