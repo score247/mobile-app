@@ -1,6 +1,5 @@
 ﻿using LiveScore.Core;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
@@ -34,8 +33,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         public override BaseItemViewModel BuildData()
         {
             base.BuildData();
-
-            //TODO binding in/out icons
+            
             PlayerOutImageSource = Images.SubstitutionOut.Value;
             PlayerInImageSource = Images.SubstitutionIn.Value;
 
@@ -51,20 +49,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             return this;
         }
 
-        private void BuildAwayInfo()
-        {
-            AwayPlayerOutName = TimelineEvent.PlayerOut?.Name;
-            AwayPlayerInName = TimelineEvent.PlayerIn?.Name;
-
-            VisibleAwayImage = true;
-        }
-
         private void BuildHomeInfo()
         {
             HomePlayerOutName = TimelineEvent.PlayerOut?.Name;
             HomePlayerInName = TimelineEvent.PlayerIn?.Name;
 
             VisibleHomeImage = true;
+        }
+
+        private void BuildAwayInfo()
+        {
+            AwayPlayerOutName = TimelineEvent.PlayerOut?.Name;
+            AwayPlayerInName = TimelineEvent.PlayerIn?.Name;
+
+            VisibleAwayImage = true;
         }
     }
 }
