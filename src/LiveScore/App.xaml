@@ -13,27 +13,27 @@
                 <On Platform="iOS" Value="livescore" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoLight" x:TypeArguments="x:String">
-                <On Platform="Android" Value="fonts/RobotoLight.ttf" />
-                <On Platform="iOS" Value="RobotoLight" />
+                <On Platform="Android" Value="fonts/Roboto-Light.ttf#Roboto Light" />
+                <On Platform="iOS" Value="Roboto-Light" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoRegular" x:TypeArguments="x:String">
-                <On Platform="Android" Value="fonts/RobotoRegular.ttf" />
-                <On Platform="iOS" Value="RobotoRegular" />
+                <On Platform="Android" Value="fonts/RobotoRegular.ttf#Roboto Regular" />
+                <On Platform="iOS" Value="Roboto-Regular" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoMedium" x:TypeArguments="x:String">
-                <On Platform="Android" Value="fonts/RobotoMedium.ttf" />
-                <On Platform="iOS" Value="RobotoMedium" />
+                <On Platform="Android" Value="fonts/RobotoMedium.ttf#Roboto Medium" />
+                <On Platform="iOS" Value="Roboto-Medium" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoBold" x:TypeArguments="x:String">
-                <On Platform="Android" Value="fonts/RobotoBold.ttf" />
-                <On Platform="iOS" Value="RobotoBold" />
+                <On Platform="Android" Value="fonts/RobotoBold.ttf#Roboto Bold" />
+                <On Platform="iOS" Value="Roboto-Bold" />
             </OnPlatform>
 
             <Color x:Key="PrimaryColor">#272830</Color>
             <Color x:Key="SecondColor">#202124</Color>
             <Color x:Key="SiteBackgroundColor">#161719</Color>
             <Color x:Key="PrimaryTextColor">#fff</Color>
-            <Color x:Key="SecondTextColor">#DDE2E5</Color>
+            <Color x:Key="SecondTextColor">#CBCBCB</Color>
             <Color x:Key="ThirdTextColor">#676C8B</Color>
             <Color x:Key="FourthTextColor">#AAA8A5</Color>
             <!--  Orange Color  -->

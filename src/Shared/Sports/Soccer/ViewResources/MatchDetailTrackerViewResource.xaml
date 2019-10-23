@@ -101,6 +101,8 @@
     <Style x:Key="MatchTrackerHighlightCommentariesText"
            BasedOn="{StaticResource MatchTrackerCommentariesText}"
            TargetType="Label">
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
         <Setter Property="TextColor"
                 Value="{StaticResource HighlightCommentaryColor}" />
     </Style>

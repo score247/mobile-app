@@ -24,7 +24,7 @@
         <Setter Property="FontSize"
                 Value="{StaticResource FunctionGroupFontSize}" />
         <Setter Property="FontFamily"
-                Value="{StaticResource RobotoRegular}" />
+                Value="{StaticResource RobotoMedium}" />
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
     </Style>
