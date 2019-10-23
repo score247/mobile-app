@@ -24,7 +24,7 @@ pipeline{
         stage('Build') {
             steps {
                 script{
-                    pipelineLib.beginSonarQubeForMsBuild("livescore", "LiveScores / LiveScore", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
+                    pipelineLib.beginSonarQubeForMsBuild("Score247-App", "Score247 / Score247 App", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
 
                     pipelineLib.restoreNuget()
 
