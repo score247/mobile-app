@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LiveScore.Tests": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
