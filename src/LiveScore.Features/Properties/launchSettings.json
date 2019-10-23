@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "LiveScore.Features": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}
