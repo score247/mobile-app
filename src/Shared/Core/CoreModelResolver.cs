@@ -1046,7 +1046,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Odds.Bookmaker();
+            var ____result = new global::LiveScore.Core.Models.Odds.Bookmaker(__Id__, __Name__);
             ____result.Id = __Id__;
             ____result.Name = __Name__;
             return ____result;
@@ -1065,7 +1065,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
             {
                 { "Id", 0},
-                { "Name", 1},
+                { "MatchId", 1},
                 { "Bookmaker", 2},
                 { "BetOptions", 3},
             };
@@ -1073,7 +1073,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             this.____stringByteKeys = new byte[][]
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchId"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Bookmaker"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("BetOptions"),
                 
@@ -1093,7 +1093,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Id);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.MatchId, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Odds.Bookmaker>().Serialize(ref bytes, offset, value.Bookmaker, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
@@ -1114,7 +1114,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             offset += readSize;
 
             var __Id__ = default(byte);
-            var __Name__ = default(string);
+            var __MatchId__ = default(string);
             var __Bookmaker__ = default(global::LiveScore.Core.Models.Odds.Bookmaker);
             var __BetOptions__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>);
 
@@ -1135,7 +1135,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                         __Id__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
                     case 1:
-                        __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __MatchId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 2:
                         __Bookmaker__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Odds.Bookmaker>().Deserialize(bytes, offset, formatterResolver, out readSize);
@@ -1154,11 +1154,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Odds.BetTypeOdds();
-            ____result.Id = __Id__;
-            ____result.Name = __Name__;
-            ____result.Bookmaker = __Bookmaker__;
-            ____result.BetOptions = __BetOptions__;
+            var ____result = new global::LiveScore.Core.Models.Odds.BetTypeOdds(__Id__, __MatchId__, __Bookmaker__, __BetOptions__);
             return ____result;
         }
     }
@@ -1174,22 +1170,22 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
         {
             this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
             {
-                { "BetOptions", 0},
-                { "MatchTime", 1},
-                { "UpdateTime", 2},
+                { "MatchTime", 0},
+                { "HomeScore", 1},
+                { "AwayScore", 2},
                 { "IsMatchStarted", 3},
-                { "HomeScore", 4},
-                { "AwayScore", 5},
+                { "BetOptions", 4},
+                { "UpdateTime", 5},
             };
 
             this.____stringByteKeys = new byte[][]
             {
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("BetOptions"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchTime"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("UpdateTime"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsMatchStarted"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeScore"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayScore"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsMatchStarted"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("BetOptions"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("UpdateTime"),
                 
             };
         }
@@ -1205,17 +1201,17 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             var startOffset = offset;
             offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 6);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Serialize(ref bytes, offset, value.BetOptions, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.MatchTime, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
+            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.HomeScore);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
-            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.UpdateTime, formatterResolver);
+            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.AwayScore);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsMatchStarted);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
-            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.HomeScore);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Serialize(ref bytes, offset, value.BetOptions, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
-            offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.AwayScore);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.UpdateTime, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1231,12 +1227,12 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
             var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __BetOptions__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>);
             var __MatchTime__ = default(string);
-            var __UpdateTime__ = default(global::System.DateTimeOffset);
-            var __IsMatchStarted__ = default(bool);
             var __HomeScore__ = default(int);
             var __AwayScore__ = default(int);
+            var __IsMatchStarted__ = default(bool);
+            var __BetOptions__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>);
+            var __UpdateTime__ = default(global::System.DateTimeOffset);
 
             for (int i = 0; i < length; i++)
             {
@@ -1252,22 +1248,22 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
                 switch (key)
                 {
                     case 0:
-                        __BetOptions__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 1:
                         __MatchTime__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 1:
+                        __HomeScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+                        break;
                     case 2:
-                        __UpdateTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        __AwayScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
                         break;
                     case 3:
                         __IsMatchStarted__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
                     case 4:
-                        __HomeScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+                        __BetOptions__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetOptionOdds>>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     case 5:
-                        __AwayScore__ = MessagePackBinary.ReadInt32(bytes, offset, out readSize);
+                        __UpdateTime__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
@@ -1280,13 +1276,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Odds
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Odds.OddsMovement();
-            ____result.BetOptions = __BetOptions__;
-            ____result.MatchTime = __MatchTime__;
-            ____result.UpdateTime = __UpdateTime__;
-            ____result.IsMatchStarted = __IsMatchStarted__;
-            ____result.HomeScore = __HomeScore__;
-            ____result.AwayScore = __AwayScore__;
+            var ____result = new global::LiveScore.Core.Models.Odds.OddsMovement(__MatchTime__, __HomeScore__, __AwayScore__, __IsMatchStarted__, __BetOptions__, __UpdateTime__);
             return ____result;
         }
     }

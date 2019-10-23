@@ -1512,8 +1512,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Odds
             readSize = offset - startOffset;
 
             var ____result = new global::LiveScore.Soccer.Models.Odds.MatchOdds();
-            ____result.MatchId = __MatchId__;
-            ____result.BetTypeOddsList = __BetTypeOddsList__;
             return ____result;
         }
     }
@@ -1611,10 +1609,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Odds
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Odds.MatchOddsMovement();
-            ____result.MatchId = __MatchId__;
-            ____result.Bookmaker = __Bookmaker__;
-            ____result.OddsMovements = __OddsMovements__;
+            var ____result = new global::LiveScore.Soccer.Models.Odds.MatchOddsMovement(__MatchId__, __Bookmaker__, __OddsMovements__);
             return ____result;
         }
     }
