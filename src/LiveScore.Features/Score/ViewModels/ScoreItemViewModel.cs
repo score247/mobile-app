@@ -29,7 +29,7 @@ namespace LiveScore.Features.Score.ViewModels
     public class ScoreItemViewModel : ViewModelBase
     {
         private const int DefaultFirstLoadMatchItemCount = 5;
-        private const int DefaultLoadingMatchItemCountOnScrolling = 8;
+        private const int DefaultLoadingMatchItemCountOnScrolling = 16;
 
         protected readonly IMatchDisplayStatusBuilder matchStatusConverter;
         protected readonly IMatchMinuteBuilder matchMinuteConverter;
@@ -264,7 +264,7 @@ namespace LiveScore.Features.Score.ViewModels
             if (matches?.Any() != true)
             {
                 HasData = false;
-                MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource?.Clear());
                 return;
             }
 
