@@ -22,17 +22,33 @@
     [MessagePackObject(keyAsPropertyName: true)]
     public class OddsMovement : IOddsMovement, IEquatable<OddsMovement>
     {
-        public IEnumerable<BetOptionOdds> BetOptions { get; set; }
+        public OddsMovement(
+            string matchTime,
+            int homeScore,
+            int awayScore,
+            bool isMatchStarted,
+            IEnumerable<BetOptionOdds> betOptions,
+            DateTimeOffset updateTime)
+        {
+            MatchTime = matchTime;
+            HomeScore = homeScore;
+            AwayScore = awayScore;
+            IsMatchStarted = isMatchStarted;
+            BetOptions = betOptions;
+            UpdateTime = updateTime;
+        }       
 
-        public string MatchTime { get; set; }
+        public string MatchTime { get; private set; }
 
-        public DateTimeOffset UpdateTime { get; set; }
+        public int HomeScore { get; private set; }
 
-        public bool IsMatchStarted { get; set; }
+        public int AwayScore { get; private set; }
 
-        public int HomeScore { get; set; }
+        public bool IsMatchStarted { get; private set; }
 
-        public int AwayScore { get; set; }
+        public IEnumerable<BetOptionOdds> BetOptions { get; private set; }
+
+        public DateTimeOffset UpdateTime { get; private set; }        
 
         public bool Equals(OddsMovement other)
         {

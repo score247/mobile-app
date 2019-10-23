@@ -7,8 +7,17 @@ namespace LiveScore.Soccer.Models.Odds
     [MessagePackObject(keyAsPropertyName: true)]
     public class MatchOdds
     {
-        public string MatchId { get; set; }
+        public MatchOdds()
+        {}
+        
+        public MatchOdds(string matchId, IEnumerable<BetTypeOdds> betTypeOddsList)
+        {
+            MatchId = matchId;
+            BetTypeOddsList = betTypeOddsList;
+        }
 
-        public IEnumerable<BetTypeOdds> BetTypeOddsList { get; set; }
+        public string MatchId { get; }
+
+        public IEnumerable<BetTypeOdds> BetTypeOddsList { get; }
     }
 }

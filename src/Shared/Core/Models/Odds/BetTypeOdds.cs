@@ -3,22 +3,29 @@
     using System.Collections.Generic;
     using MessagePack;
 
-    public interface IBetTypeOdds : IEntity<byte, string>
+    public interface IBetTypeOdds 
     {
+        string MatchId { get; }
+
         Bookmaker Bookmaker { get; }
 
-        IEnumerable<BetOptionOdds> BetOptions { get; set; }
+        IEnumerable<BetOptionOdds> BetOptions { get; }
     }
 
     [MessagePackObject(keyAsPropertyName: true)]
     public class BetTypeOdds : IBetTypeOdds
-    {
-        public byte Id { get; set; }
+    {      
+        public BetTypeOdds(string matchId, Bookmaker bookmaker, IEnumerable<BetOptionOdds> betOptions)
+        {
+            MatchId = matchId;
+            Bookmaker = bookmaker;
+            BetOptions = betOptions;
+        }
 
-        public string Name { get; set; }
+        public string MatchId { get; }
 
-        public Bookmaker Bookmaker { get; set; }
+        public Bookmaker Bookmaker { get; }
 
-        public IEnumerable<BetOptionOdds> BetOptions { get; set; }
+        public IEnumerable<BetOptionOdds> BetOptions { get; }
     }
 }

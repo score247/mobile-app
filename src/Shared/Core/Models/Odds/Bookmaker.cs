@@ -4,11 +4,13 @@
     using MessagePack;
 
     [MessagePackObject(keyAsPropertyName: true)]
-    public class Bookmaker : IEquatable<Bookmaker>
+    public class Bookmaker : Entity<string, string>, IEquatable<Bookmaker>
     {
-        public string Id { get; set; }
-
-        public string Name { get; set; }
+        public Bookmaker(string id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
 
         public bool Equals(Bookmaker other)
         {
