@@ -24,7 +24,7 @@ pipeline{
         stage('Build') {
             steps {
                 script{
-                    pipelineLib.beginSonarQubeForMsBuild("Score247-App", "Score247 / Score247 App", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
+                    pipelineLib.beginSonarQubeForMsBuild("livescore", "Score247 / Score247 App", "/d:sonar.cs.opencover.reportsPaths=\"${WORKSPACE}\\CoverageReports\\*.xml\" /d:sonar.cs.vstest.reportsPaths=\"${WORKSPACE}\\TestResults\\*.trx\"")
 
                     pipelineLib.msBuild16("LiveScore.App.sln")
                 }
@@ -131,7 +131,7 @@ pipeline{
     }
     post{
         unsuccessful{
-            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'james.nguyen@starixsoft.com, maia.le@starixsoft.com,vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com, larry.tran@starixsoft.com'
+            emailext body: '$DEFAULT_CONTENT', subject: '$DEFAULT_SUBJECT', to: 'vivian.nguyen@starixsoft.com, harrison.nguyen@starixsoft.com, anders.le@starixsoft.com, ricky.nguyen@starixsoft.com, larry.tran@starixsoft.com'
         }
     }
 }
