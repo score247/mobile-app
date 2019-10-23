@@ -1,4 +1,4 @@
-namespace Scores.Tests.ViewModels
+namespace LiveScore.Features.Tests.Score.ViewModels
 {
     using LiveScore.Core.Tests.Fixtures;
     using Xunit;

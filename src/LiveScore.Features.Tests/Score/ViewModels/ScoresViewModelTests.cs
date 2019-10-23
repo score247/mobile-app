@@ -1,4 +1,4 @@
-namespace Scores.Tests.ViewModels
+namespace LiveScore.Features.Tests.Score.ViewModels
 {
     using System;
     using System.Collections.Generic;

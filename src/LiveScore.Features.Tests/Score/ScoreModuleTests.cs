@@ -2,7 +2,7 @@ using LiveScore.Features.Score;
 using LiveScore.Features.Score.ViewModels;
 using LiveScore.Features.Score.Views;
 
-namespace Scores.Tests
+namespace LiveScore.Features.Tests
 {
     using NSubstitute;
     using Prism.Ioc;

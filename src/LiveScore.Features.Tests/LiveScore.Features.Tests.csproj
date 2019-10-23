@@ -8,19 +8,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Favorites\**" />
+    <Compile Remove="League\**" />
+    <Compile Remove="Menu\**" />
+    <Compile Remove="News\**" />
+    <Compile Remove="TVSchedule\**" />
+    <EmbeddedResource Remove="Favorites\**" />
+    <EmbeddedResource Remove="League\**" />
+    <EmbeddedResource Remove="Menu\**" />
+    <EmbeddedResource Remove="News\**" />
+    <EmbeddedResource Remove="TVSchedule\**" />
+    <None Remove="Favorites\**" />
+    <None Remove="League\**" />
+    <None Remove="Menu\**" />
+    <None Remove="News\**" />
+    <None Remove="TVSchedule\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Menu\" />
-    <Folder Include="Favorites\" />
-    <Folder Include="League\" />
-    <Folder Include="TVSchedule\" />
-    <Folder Include="News\" />
-    <Folder Include="Score\" />
   </ItemGroup>
 
   <ItemGroup>
