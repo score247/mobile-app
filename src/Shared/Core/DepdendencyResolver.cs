@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core
-{
-    using System;
-    using Prism.Ioc;
+﻿using System;
+using Prism.Ioc;
 
+namespace LiveScore.Core
+{
     public interface IDependencyResolver
     {
         T Resolve<T>();

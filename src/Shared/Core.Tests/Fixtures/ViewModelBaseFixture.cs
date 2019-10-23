@@ -5,6 +5,7 @@ namespace LiveScore.Core.Tests.Fixtures
     using System;
     using System.Threading.Tasks;
     using LiveScore.Core.Services;
+    using Microsoft.AspNetCore.Connections;
     using Microsoft.AspNetCore.SignalR.Client;
     using Microsoft.AspNetCore.SignalR.Protocol;
     using Microsoft.Extensions.Logging;

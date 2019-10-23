@@ -13,7 +13,8 @@
     <AssemblyName>LiveScoreApp.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <SonarQubeExclude>True</SonarQubeExclude>
+    <SonarQubeExclude>
+    </SonarQubeExclude>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -393,14 +394,15 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="SonarAnalyzer.CSharp">
-      <Version>7.16.0.8981</Version>
+      <Version>8.0.0.9566</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Prism.DryIoc.Forms" Version="7.2.0.1367" />
     <PackageReference Include="System.Reflection.Emit">
-      <Version>4.3.0</Version>
+      <Version>4.6.0</Version>
       <ExcludeAssets>all</ExcludeAssets>
+      <IncludeAssets>none</IncludeAssets>
     </PackageReference>
     <PackageReference Include="LiveXAML">
       <Version>2.1.72</Version>

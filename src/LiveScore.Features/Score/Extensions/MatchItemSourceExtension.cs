@@ -20,6 +20,12 @@ namespace LiveScore.Features.Score.Extensions
         {
             foreach (var item in newItems)
             {
+                // TODO: temporarily check to avoid crash app exception, Harrison please check
+                if (matchItems.Contains(item))
+                {
+                    matchItems.Remove(item);
+                }
+
                 matchItems.Add(item);
             }
         }
@@ -119,10 +125,10 @@ namespace LiveScore.Features.Score.Extensions
             string[] removedMatchIds,
             Func<string, string> buildFlagUrlFunc)
         {
-            foreach (var removedMatchId in removedMatchIds)
+            foreach (var matchId in removedMatchIds)
             {
                 var league = matchItems
-                    .FirstOrDefault(l => l.Any(match => match.Match.Id == removedMatchId));
+                    .FirstOrDefault(group => group.Any(item => item.Match.Id == matchId));
 
                 if (league == null)
                 {
@@ -130,7 +136,7 @@ namespace LiveScore.Features.Score.Extensions
                 }
 
                 var leagueMatches = league.ToList();
-                leagueMatches.RemoveAll(m => m.Match.Id == removedMatchId);
+                leagueMatches.RemoveAll(m => m.Match.Id == matchId);
 
                 if (leagueMatches.Count == 0)
                 {
