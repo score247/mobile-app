@@ -15,12 +15,15 @@
     [MessagePackObject(keyAsPropertyName: true)]
     public class BetTypeOdds : IBetTypeOdds
     {      
-        public BetTypeOdds(string matchId, Bookmaker bookmaker, IEnumerable<BetOptionOdds> betOptions)
+        public BetTypeOdds(byte id, string matchId, Bookmaker bookmaker, IEnumerable<BetOptionOdds> betOptions)
         {
+            Id = id;
             MatchId = matchId;
             Bookmaker = bookmaker;
             BetOptions = betOptions;
         }
+
+        public byte Id { get; }
 
         public string MatchId { get; }
 
