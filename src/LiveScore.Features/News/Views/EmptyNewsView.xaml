@@ -21,13 +21,11 @@
                      Text="Search" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label
+        <Label
                 FontSize="13"
                 HorizontalOptions="Center"
                 Text="News is comming soon"
                 TextColor="{StaticResource SecondTextColor}"
                 VerticalOptions="Center" />
-        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
