@@ -35,7 +35,7 @@
             </Grid.ColumnDefinitions>
             <Frame Grid.Row="0"
                    Grid.Column="0"
-                   Style="{StaticResource BetTypeContainer}">
+                   Style="{StaticResource SubTabContainer}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />

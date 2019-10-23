@@ -23,7 +23,7 @@
         <Frame Grid.Row="0"
                    Grid.Column="0"
                     Margin="8"
-                   Style="{StaticResource BetTypeContainer}">
+                   Style="{StaticResource SubTabContainer}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -148,7 +148,6 @@
                                 Style="{StaticResource MatchStatusContainer}">
                         <Label Style="{StaticResource MatchStatus}" Text="19 JAN" />
                         <Label Style="{StaticResource MatchStatus}" Text="FT" />
-
                     </StackLayout>
                     <StackLayout
                                 Grid.Row="0"

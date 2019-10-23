@@ -7,11 +7,8 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
-    <Style x:Key="MatchDetailLinesUpCoaches" TargetType="Label">
-        <Setter Property="Margin" Value="16,0" />
-        <Setter Property="HeightRequest" Value="42" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
+    <Style x:Key="MatchDetailLinesUpShirtNumber" BasedOn="{StaticResource MatchDetailLinesUpSubstitutePlayer}" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+        <Setter Property="Margin" Value="0,0,4,0" />
     </Style>
 </ResourceDictionary>

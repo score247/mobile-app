@@ -614,21 +614,6 @@
     </BundleResource>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen.png">
-      <Link>Resources\images\common\logo_splash_screen.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%402x.png">
-      <Link>Resources\images\common\logo_splash_screen%402x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%403x.png">
-      <Link>Resources\images\common\logo_splash_screen%403x.png</Link>
-    </BundleResource>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\news.png">
       <Link>Resources\images\common\news.png</Link>
     </BundleResource>
@@ -866,6 +851,21 @@
   <ItemGroup>
     <BundleResource Include="..\..\CommonResources\Image\iOS\common\yellow_card.svg">
       <Link>Resources\images\common\yellow_card.svg</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen.png">
+      <Link>Resources\images\common\logo_splash_screen.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%402x.png">
+      <Link>Resources\images\common\logo_splash_screen%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\logo_splash_screen%403x.png">
+      <Link>Resources\images\common\logo_splash_screen%403x.png</Link>
     </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

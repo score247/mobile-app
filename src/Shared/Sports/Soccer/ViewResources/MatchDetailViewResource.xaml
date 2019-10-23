@@ -49,7 +49,7 @@
 
     <!--  SubTab  -->
 
-    <Style x:Key="BetTypeContainer" TargetType="Frame">
+    <Style x:Key="SubTabContainer" TargetType="Frame">
         <Setter Property="BorderColor" Value="{StaticResource LineColor}" />
         <Setter Property="CornerRadius" Value="0" />
         <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />

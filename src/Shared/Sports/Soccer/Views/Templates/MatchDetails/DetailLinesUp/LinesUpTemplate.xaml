@@ -6,7 +6,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
-    <StackLayout>
+    <StackLayout HeightRequest="2000">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -15,69 +15,93 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
+        <!-- SUBSTITUTE PLAYERS -->
         <FlexLayout Style="{StaticResource Group}">
-            <Label Style="{StaticResource GroupName}" Text="SUBSTITUTE PLAYER" />
+            <Label Style="{StaticResource GroupName}" Text="SUBSTITUTE PLAYERS" />
         </FlexLayout>
         <BoxView Style="{StaticResource HorizontalLine}" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="42" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="2. Danis Amel" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}"  />
-            <Label Grid.Column="5" Text="5. Grigol Chabradze" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="2" Text="2" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="3" Text="H. Wilson" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="6" Text="9" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="7" Text="L. Fabianski" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
         </Grid>
         <BoxView Style="{StaticResource HorizontalLine}" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="42" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="6. Jakub Brabec" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="5" Text="13. M. Mady Camara" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="2" Text="8" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="3" Text="J. Stacey" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="6" Text="7" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="7" Text="P. Fornals" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
         </Grid>
         <BoxView Style="{StaticResource HorizontalLine}" />
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="45" />
-                <ColumnDefinition Width="12" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="42" />
             </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="18. Tomas Chory" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="5" Text="22. A. Papadopoilous" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="2" Text="3" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="3" Text="P . Billing" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="6" Text="911" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+            <Label Grid.Column="7" Text="M. Noble" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
         </Grid>
         <BoxView Style="{StaticResource HorizontalLine}" />
-        
+
+        <!-- COACHES -->
         <FlexLayout Style="{StaticResource Group}">
             <Label Style="{StaticResource GroupName}" Text="COACHES" />
         </FlexLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
         <Grid>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Text="Thomas Tuchel" Style="{StaticResource MatchDetailLinesUpCoaches}" />
-            <Label Grid.Column="1" Text="Ole Gunnar Solskjear" Style="{StaticResource MatchDetailLinesUpCoaches}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="3" Text="Thomas Tuchel" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="7" Text="Ole Gunnar" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
         </Grid>
     </StackLayout>
 </DataTemplate>

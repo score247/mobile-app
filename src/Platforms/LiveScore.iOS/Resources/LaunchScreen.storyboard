@@ -18,11 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="images/common/logo_splash_screen.png" translatesAutoresizingMaskIntoConstraints="NO" id="23">
-                                <rect key="frame" x="138.5" y="280.5" width="137" height="175"/>
+                                <rect key="frame" x="143" y="304" width="128" height="128"/>
                                 <rect key="contentStretch" x="0.0" y="0.0" width="0.0" height="0.0"/>
                             </imageView>
                         </subviews>
-                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.12549019607843137" green="0.12941176470588237" blue="0.14117647058823529" alpha="1"/>
+                        <color key="backgroundColor" colorSpace="calibratedRGB" red="0.13333333333333333" green="0.14117647058823529" blue="0.19215686274509805" alpha="1"/>
                         <color key="tintColor" red="0.067187093198299408" green="0.57955509424209595" blue="0.96572107076644897" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="23" firstAttribute="centerY" secondItem="yd7-JS-zBw" secondAttribute="centerY" priority="1" id="39"/>
@@ -36,6 +36,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="images/common/logo_splash_screen.png" width="137" height="175"/>
+        <image name="images/common/logo_splash_screen.png" width="128" height="128"/>
     </resources>
 </document>
