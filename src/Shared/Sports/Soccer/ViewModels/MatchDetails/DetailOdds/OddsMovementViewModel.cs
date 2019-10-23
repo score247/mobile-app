@@ -85,6 +85,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             }
         }
 
+        [Time]
         public override async void OnResumeWhenNetworkOK()
         {
             await ReloadPage();
@@ -125,12 +126,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         private async Task ReloadPage()
         {
-            Debug.WriteLine("OddsMovementViewModel OnResumeWhenNetworkOK");
+            Debug.WriteLine("OddsMovementViewModel ReloadPage");
 
-            if (eventStatus == MatchStatus.Live || eventStatus == MatchStatus.NotStarted)
-            {
-                await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
-            }
+            await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
+
         }
 
         private void SubscribeEvents()
@@ -165,6 +164,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             var matchOddsMovement = await oddsService
                 .GetOddsMovementAsync(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew)
                 .ConfigureAwait(false);
+
+            if (matchOddsMovement == null)
+            {
+                return;
+            }
 
             if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
             {

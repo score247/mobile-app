@@ -82,8 +82,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public DelegateAsyncCommand<BaseItemViewModel> TappedOddsItemCommand { get; }
 
+        [Time]
         public override async void OnResumeWhenNetworkOK()
-        {
+        {            
+            LoggingService
+                  .TrackEvent(
+                  $"Odds - {matchId}",
+                  $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK");
+
             await UpdateOddsByBetTypeAsync();
 
             SubscribeEvents();
@@ -108,6 +114,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         public override void OnSleep()
         {
             base.OnSleep();
+
+            LoggingService
+                    .TrackEvent(
+                    $"Odds - {matchId}",
+                    $"{DateTime.Now} Selected BetType {SelectedBetType} - OnSleep");
 
             UnsubscribeEvents();
         }
@@ -161,7 +172,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 formatType,
                 forceFetchNew).ConfigureAwait(false);
 
-            HasData = odds.BetTypeOddsList?.Any() == true;
+           
+            HasData = odds?.BetTypeOddsList?.Any() == true;
+           
+            LoggingService
+                    ?.TrackEvent(
+                    $"Odds - {matchId}",
+                    $"{DateTime.Now} LoadOddsByBetTypeAsync - Selected BetType {SelectedBetType} - Has Data {HasData}");
 
             HeaderTemplate = new BaseHeaderViewModel(
                 SelectedBetType,
@@ -205,7 +222,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 var needToReOrder = false;
 
                 LoggingService
-                    .TrackEvent("DetailOddsViewModel", $"HandleOddsComparisonMessage {DateTime.Now} - SoccerMatch {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
+                    .TrackEvent(
+                    "DetailOddsViewModel",
+                    $"HandleOddsComparisonMessage {DateTime.Now} - SoccerMatch {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
 
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {
