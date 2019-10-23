@@ -1,8 +1,8 @@
-﻿using LiveScore.Core.Enumerations;
-using Xamarin.Essentials;
-
-namespace LiveScore.Core
+﻿namespace LiveScore.Core
 {
+    using Enumerations;
+    using Xamarin.Essentials;
+
     public static class AppSettings
     {
         private static volatile ISettings instance;
