@@ -14,14 +14,14 @@ namespace LiveScore.Core.Models.Odds
     public class BetTypeOdds : Entity<byte, string>, IBetTypeOdds
     {
         public BetTypeOdds(
-            int id,
+            byte id,
             string name,
             Bookmaker bookmaker,
             IEnumerable<BetOptionOdds> betOptions)
         {
-            Id = (byte)id;
+            Id = id;
             Name = name;
-            Bookmaker = bookmaker;         
+            Bookmaker = bookmaker;
             BetOptions = betOptions;
         }
 
