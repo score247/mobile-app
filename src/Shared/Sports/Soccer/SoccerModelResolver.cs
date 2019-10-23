@@ -1511,7 +1511,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Odds
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Odds.MatchOdds();
+            var ____result = new global::LiveScore.Soccer.Models.Odds.MatchOdds(__MatchId__, __BetTypeOddsList__);
             return ____result;
         }
     }
