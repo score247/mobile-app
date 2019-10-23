@@ -24,8 +24,6 @@ namespace LiveScore.Core.Models.Odds
             Bookmaker = bookmaker;         
             BetOptions = betOptions;
         }
- 
-        public string MatchId { get; }
 
         public Bookmaker Bookmaker { get; }
 
