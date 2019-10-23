@@ -5,6 +5,8 @@
     <LangVersion>8.0</LangVersion>
    
     <IsPackable>false</IsPackable>
+   
+    <Configurations>Debug;Release;Test</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
