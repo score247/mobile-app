@@ -155,7 +155,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
         private void BuildDetailInfo(MatchInfo matchInfo)
         {
             BuildInfoItems(matchInfo);
-          
+
         }
 
         private void BuildInfoItems(MatchInfo matchInfo)
@@ -182,6 +182,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             }
         }
 
-       
+
     }
 }

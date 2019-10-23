@@ -46,7 +46,6 @@
         <PackageReference Include="AsyncErrorHandler.Fody" Version="1.3.0" />
     </ItemGroup>
     <ItemGroup>
-        <Folder Include="Models\Settings\" />
         <Folder Include="Controls\SearchPage\">
         </Folder>
         <Folder Include="PubSubEvents\Odds\" />

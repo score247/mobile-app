@@ -88,7 +88,7 @@ namespace LiveScore.Core.ViewModels
 
         private void SubscribeMatchTimeChangeEvent()
         {
-            if (Match == null || !Match.EventStatus.IsLive || isSubscribingTimer)
+            if (Match?.EventStatus.IsLive != true || isSubscribingTimer)
             {
                 return;
             }

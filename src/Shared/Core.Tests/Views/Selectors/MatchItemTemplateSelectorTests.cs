@@ -24,10 +24,11 @@ namespace LiveScore.Core.Tests.Views.Selectors
         public void OnSelectTemplate_MatchItemTemplateIsNull_ReturnExpectedTemplate()
         {
             // Arrange
-
             var templateSelector = new MatchItemTemplateSelector();
             var expectedTemplate = new DataTemplate();
-            dependencyResolver.Resolve<DataTemplate>(SportType.Soccer.Value.ToString()).Returns(expectedTemplate);
+            dependencyResolver
+                .Resolve<DataTemplate>(SportType.Soccer.Value.ToString())
+                .Returns(expectedTemplate);
 
             // Act
             var actualTemplate = templateSelector.SelectTemplate(1, bindableObject);

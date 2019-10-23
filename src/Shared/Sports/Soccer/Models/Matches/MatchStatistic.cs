@@ -53,15 +53,15 @@ namespace LiveScore.Soccer.Models.Matches
                 new MatchStatisticItem(AppResources.CornerKicks, HomeStatistic?.CornerKicks, AwayStatistic?.CornerKicks),
                 new MatchStatisticItem(AppResources.Offside, HomeStatistic?.Offsides, AwayStatistic?.Offsides),
                 new MatchStatisticItem(AppResources.YellowCards, HomeStatistic?.YellowCards, AwayStatistic?.YellowCards),
-                new MatchStatisticItem(AppResources.RedCards, 
-                    (byte?)(HomeStatistic?.RedCards + HomeStatistic?.YellowRedCards), 
+                new MatchStatisticItem(AppResources.RedCards,
+                    (byte?)(HomeStatistic?.RedCards + HomeStatistic?.YellowRedCards),
                     (byte?)(AwayStatistic?.RedCards + AwayStatistic?.YellowRedCards)),
                 new MatchStatisticItem(AppResources.ThrowIns, HomeStatistic?.ThrowIns, AwayStatistic?.ThrowIns),
                 new MatchStatisticItem(AppResources.FreeKicks, HomeStatistic?.FreeKicks, AwayStatistic?.FreeKicks),
                 new MatchStatisticItem(AppResources.Fouls, HomeStatistic?.Fouls, AwayStatistic?.Fouls),
             };
 
-            if(subItems.All(item => item.IsHidden))
+            if (subItems.All(item => item.IsHidden))
             {
                 return Enumerable.Empty<MatchStatisticItem>();
             }

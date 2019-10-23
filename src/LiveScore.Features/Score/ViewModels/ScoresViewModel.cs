@@ -2,7 +2,6 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
-using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;

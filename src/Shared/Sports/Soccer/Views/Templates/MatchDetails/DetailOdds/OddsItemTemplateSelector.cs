@@ -6,7 +6,7 @@
 
     public class OddsItemTemplateSelector : DataTemplateSelector
     {
-        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)        
+        protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         => (item is BaseItemViewModel itemViewModel)
                         ? itemViewModel.CreateTemplate()
                         : new AsianHdpItemTemplate();

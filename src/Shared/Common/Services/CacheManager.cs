@@ -64,7 +64,6 @@ namespace LiveScore.Common.Services
                 catch (TaskCanceledException ex)
                 {
                     // TODO: Temporary comment code here to find another solution
-                    // networkConnectionManager.PublishConnectionTimeoutEvent();
 
                     await loggingService.LogExceptionAsync(ex);
                     return await cacheService.GetAsync<T>(key);

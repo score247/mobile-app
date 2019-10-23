@@ -68,7 +68,7 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
         {
-            //SetupServicePointManager();
+            SetupServicePointManager();
 
             if (Configuration == null)
             {

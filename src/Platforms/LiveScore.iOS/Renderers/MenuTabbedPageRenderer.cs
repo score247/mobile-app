@@ -1,10 +1,10 @@
 ﻿using System;
 using CoreGraphics;
 using LiveScore.iOS.Renderers;
+using Prism;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
-using Prism;
 
 [assembly: ExportRenderer(typeof(TabbedPage), typeof(MenuTabbedPageRenderer))]
 

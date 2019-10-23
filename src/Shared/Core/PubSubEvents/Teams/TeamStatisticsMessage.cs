@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.PubSubEvents.Teams
-{
-    using LiveScore.Core.Models.Teams;
+﻿using LiveScore.Core.Models.Teams;
 
+namespace LiveScore.Core.PubSubEvents.Teams
+{
     public interface ITeamStatisticsMessage
     {
         byte SportId { get; }

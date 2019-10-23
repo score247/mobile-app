@@ -7,8 +7,6 @@ namespace LiveScore.Core.ViewModels
 {
     public class GroupMatchViewModel : BaseViewModel
     {
-        private static readonly Random random = new Random();
-
         public GroupMatchViewModel(IMatch match, Func<string, string> buildFlagUrl)
         {
             if (match == null)
@@ -51,7 +49,7 @@ namespace LiveScore.Core.ViewModels
                 {
                     if (string.IsNullOrWhiteSpace(CountryCode))
                     {
-                        return Match?.GetHashCode() ?? random.Next(0, 9);
+                        return Match?.GetHashCode() ?? 0;
                     }
 
                     return CountryCode.GetHashCode();

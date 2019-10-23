@@ -4,7 +4,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
-    using LiveScore.Soccer.Enumerations;
     using LiveScore.Soccer.Models.Matches;
     using Prism.Navigation;
 

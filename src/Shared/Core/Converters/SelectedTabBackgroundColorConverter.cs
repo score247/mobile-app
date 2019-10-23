@@ -17,8 +17,8 @@ namespace LiveScore.Core.Converters
 
             var isSelected = (bool)value;
 
-            return isSelected 
-                ? (Color)Application.Current.Resources["ActiveSubTabBgColor"] 
+            return isSelected
+                ? (Color)Application.Current.Resources["ActiveSubTabBgColor"]
                 : (Color)Application.Current.Resources["SubTabBgColor"];
         }
 

@@ -101,13 +101,11 @@ namespace LiveScore
                 .AddFeatureModules()
                 .Verify();
 
-        private Task StartEventHubs()
+        private void StartEventHubs()
         {
-            // Setup hub for soccer and other sports
-
             soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
 
-            return soccerHub.Start();
+            soccerHub.Start();
         }
 
         protected override void OnSleep()
