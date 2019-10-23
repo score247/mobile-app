@@ -16,7 +16,7 @@ namespace LiveScore.Features.Score.Extensions
     {
         public static void AddItems(
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
-            ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+            IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {
@@ -26,7 +26,7 @@ namespace LiveScore.Features.Score.Extensions
 
         public static void RemoveItems(
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
-            ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+            IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {

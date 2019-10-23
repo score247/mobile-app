@@ -34,7 +34,7 @@ namespace LiveScore.Features.Score.ViewModels
         protected readonly IMatchMinuteBuilder matchMinuteConverter;
         protected readonly IMatchService MatchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
-        private ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> skeletonItems;
+        private readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> skeletonItems;
 
         [Time]
         public ScoreItemViewModel(
@@ -51,7 +51,7 @@ namespace LiveScore.Features.Score.ViewModels
             matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
-            InitializeSkeletonMatchItems();
+            skeletonItems = InitializeSkeletonMatchItems();
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
 
             InitializeCommand();
@@ -243,14 +243,13 @@ namespace LiveScore.Features.Score.ViewModels
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        foreach (var matchItem in matchItems)
-                        {
-                            MatchItemsSource.Insert(MatchItemsSource.Count - skeletonItems.Count, matchItem);
-                        }
+                        MatchItemsSource.RemoveItems(skeletonItems);
 
-                        if (RemainingMatchItemSource.Count == 0)
+                        MatchItemsSource.AddItems(matchItems);
+
+                        if (RemainingMatchItemSource.Count > 0)
                         {
-                            MatchItemsSource.RemoveItems(skeletonItems);
+                            MatchItemsSource.AddItems(skeletonItems);
                         }
                     });
                 });
@@ -346,15 +345,18 @@ namespace LiveScore.Features.Score.ViewModels
             RemainingMatchItemSource
                 = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
 
-            Device.BeginInvokeOnMainThread(()
-                =>
+            Device.BeginInvokeOnMainThread(() =>
             {
                 MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems);
-                MatchItemsSource.AddItems(skeletonItems);
+
+                if (RemainingMatchItemSource.Count > 0)
+                {
+                    MatchItemsSource.AddItems(skeletonItems);
+                }
             });
         }
 
-        private void InitializeSkeletonMatchItems()
+        private ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> InitializeSkeletonMatchItems()
         {
             var skeletonViewModels = new List<MatchViewModel>();
 
@@ -363,7 +365,7 @@ namespace LiveScore.Features.Score.ViewModels
                 skeletonViewModels.Add(new MatchViewModel(null, matchStatusConverter, matchMinuteConverter, EventAggregator, true));
             }
 
-            skeletonItems = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+            return new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
                 skeletonViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc)));
         }
     }
