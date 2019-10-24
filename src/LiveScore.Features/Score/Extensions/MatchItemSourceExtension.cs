@@ -151,7 +151,7 @@ namespace LiveScore.Features.Score.Extensions
         {
             var matchItem = matchItems?
                 .SelectMany(group => group)
-                .FirstOrDefault(m => m.Match.Id == matchEvent.MatchId);
+                .FirstOrDefault(m => m.Match?.Id == matchEvent.MatchId);
 
             if (matchItem?.Match != null)
             {
@@ -167,7 +167,7 @@ namespace LiveScore.Features.Score.Extensions
         {
             var matchItem = matchItems?
                 .SelectMany(group => group)
-                .FirstOrDefault(m => m.Match.Id == matchId);
+                .FirstOrDefault(m => m.Match?.Id == matchId);
 
             matchItem?.OnReceivedTeamStatistic(isHome, statistic);
         }
