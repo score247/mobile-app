@@ -4,10 +4,11 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models;
     using LiveScore.Core.Models.Teams;
+    using MessagePack;
     using Newtonsoft.Json;
     using PropertyChanged;
 
-    [AddINotifyPropertyChangedInterface]
+    [AddINotifyPropertyChangedInterface, MessagePackObject(keyAsPropertyName: true)]
     public class Team : Entity<string, string>, ITeam
     {
         public string Country { get; set; }
