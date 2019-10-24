@@ -19,20 +19,20 @@
 
         public bool IsHome { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
-        public IEnumerable<IPlayer> Players { get; set; }
+       // [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
+        //public IEnumerable<IPlayer> Players { get; set; }
 
         [JsonConverter(typeof(JsonConcreteTypeConverter<TeamStatistic>))]
         public ITeamStatistic Statistic { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<Coach>))]
-        public ICoach Coach { get; set; }
+        //[JsonConverter(typeof(JsonConcreteTypeConverter<Coach>))]
+        //public ICoach Coach { get; set; }
 
-        public string Formation { get; set; }
+        //public string Formation { get; set; }
 
         public string Abbreviation { get; set; }
 
-        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
-        public IEnumerable<IPlayer> Substitutions { get; set; }
+        //[JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
+        //public IEnumerable<IPlayer> Substitutions { get; set; }
     }
 }

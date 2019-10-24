@@ -12,16 +12,16 @@
 
         bool IsHome { get; }
 
-        string Formation { get; }
+        //string Formation { get; }
 
         string Abbreviation { get; }
 
         ITeamStatistic Statistic { get; set; }
 
-        ICoach Coach { get; }
+        //ICoach Coach { get; }
 
-        IEnumerable<IPlayer> Players { get; }
+        //IEnumerable<IPlayer> Players { get; }
 
-        IEnumerable<IPlayer> Substitutions { get; }
+        //IEnumerable<IPlayer> Substitutions { get; }
     }
 }
