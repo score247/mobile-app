@@ -20,7 +20,10 @@ namespace LiveScore.Features.Score.Extensions
         {
             foreach (var item in newItems)
             {
-                matchItems.Add(item);
+                if (!matchItems.Contains(item))
+                {
+                    matchItems.Add(item);
+                }
             }
         }
 

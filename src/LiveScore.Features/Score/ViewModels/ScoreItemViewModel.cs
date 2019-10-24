@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -195,7 +196,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         private async Task OnRefreshAsync()
         {
-            Profiler.Start("ScoreItemViewModel.LoadMatches.PullDownToRefresh");
             if (networkConnectionManager.IsFailureConnection())
             {
                 IsRefreshing = false;
@@ -225,12 +225,16 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
+        [Time]
         private void OnLoadMore()
         {
-            if (RemainingMatchItemSource?.Any() != true)
+            if (RemainingMatchItemSource?.Any() != true || MatchItemsSource == skeletonItems)
             {
                 return;
             }
+
+            Debug.WriteLine(MatchItemsSource.Count);
+            Debug.WriteLine(RemainingMatchItemSource.Count);
 
             Task.Delay(1000)
                 .ContinueWith(t =>
@@ -243,9 +247,8 @@ namespace LiveScore.Features.Score.ViewModels
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        MatchItemsSource.RemoveItems(skeletonItems);
-
                         MatchItemsSource.AddItems(matchItems);
+                        MatchItemsSource.RemoveItems(skeletonItems);
 
                         if (RemainingMatchItemSource.Count > 0)
                         {
