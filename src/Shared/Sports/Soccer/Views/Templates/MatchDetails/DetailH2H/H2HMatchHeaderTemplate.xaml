@@ -6,32 +6,47 @@
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H.H2HMatchHeaderTemplate"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels;assembly=LiveScore.Core"
               x:DataType="viewModels:GroupMatchViewModel"
-             mc:Ignorable="d"
-             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
-    <StackLayout>
-        <Grid Style="{StaticResource LeagueBox}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+              mc:Ignorable="d"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core">
+    <ViewCell>
+        <StackLayout>            
+             <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <coreResources:MatchHeaderViewResource />
+                        <coreResources:MatchViewResource />
+                        <resources:MatchDetailViewResource />
+                        <resources:MatchDetailLinesUpViewResource />
+                    </ResourceDictionary.MergedDictionaries>               
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <Grid Style="{StaticResource LeagueBox}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ffimageloadingsvg:SvgCachedImage
-                Grid.Row="0"
-                Grid.Column="0"
-                DownsampleToViewSize="True"
-                LoadingPlaceholder="images/flag_league/default_flag.svg"
-                Source="images/flag_league/default_flag.svg"
-                Style="{StaticResource LeagueFlag}" />
+                <ffimageloadingsvg:SvgCachedImage
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    DownsampleToViewSize="True"
+                    LoadingPlaceholder="images/flag_league/default_flag.svg"
+                    Source="images/flag_league/default_flag.svg"
+                    Style="{StaticResource LeagueFlag}" />
 
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                LineBreakMode="TailTruncation"
-                Style="{StaticResource LeagueName}" Text="HOME Results" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-    </StackLayout>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    LineBreakMode="TailTruncation"
+                    Style="{StaticResource LeagueName}"
+                    Text="{Binding Key.LeagueName, Mode=OneTime}"/>
+            </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+        </StackLayout>
+    </ViewCell>    
 </DataTemplate>

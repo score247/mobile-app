@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ViewCell
+<DataTemplate
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H.H2HMatchItemTemplate"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core">
-    <ViewCell.View>
-        <StackLayout>
+    <ViewCell>
+         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
                     <ResourceDictionary.MergedDictionaries>
@@ -42,7 +42,7 @@
                     <Label
                                     AutomationId="HomeTeamName"
                                     Style="{StaticResource Team}"
-                                    Text="West Ham United" />
+                                     Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
                 </StackLayout>
                 <StackLayout
                                 Grid.Row="1"
@@ -51,7 +51,7 @@
                     <Label
                                     AutomationId="AwayTeamName"
                                     Style="{StaticResource Team}"
-                                    Text="AFC Bournemouth" />
+                                    Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
                 </StackLayout>
                 <Label
                                 Grid.Row="0"
@@ -68,5 +68,5 @@
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
-    </ViewCell.View>
-</ViewCell>
+    </ViewCell> 
+</DataTemplate>
