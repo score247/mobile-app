@@ -236,8 +236,8 @@ namespace LiveScore.Features.Score.ViewModels
             Debug.WriteLine(MatchItemsSource.Count);
             Debug.WriteLine(RemainingMatchItemSource.Count);
 
-            Task.Delay(1000)
-                .ContinueWith(t =>
+            Task.Delay(800)
+                .ContinueWith(_ =>
                 {
                     var matchItems = RemainingMatchItemSource.Take(DefaultLoadingMatchItemCountOnScrolling);
 
@@ -247,8 +247,9 @@ namespace LiveScore.Features.Score.ViewModels
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        MatchItemsSource.AddItems(matchItems);
                         MatchItemsSource.RemoveItems(skeletonItems);
+
+                        MatchItemsSource.AddItems(matchItems);
 
                         if (RemainingMatchItemSource.Count > 0)
                         {

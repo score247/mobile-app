@@ -95,11 +95,11 @@
                                        Style="{StaticResource MatchTrackerMinutes}"
                                        Text="{Binding MatchTime, Mode=OneTime}" />
                                 <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                            Grid.Column="1"
-                                                            DownsampleToViewSize="True"
-                                                            Source="{Binding ImageSource}"
-                                                            HeightRequest="21"
-                                                            Style="{StaticResource MatchTrackerCommentariesIcons}" />
+                                                               Grid.Column="1"
+                                                               DownsampleToViewSize="True"
+                                                               Source="{Binding ImageSource}"
+                                                               HeightRequest="13"
+                                                               Style="{StaticResource MatchTrackerCommentariesIcons}" />
                                 <Label Grid.Row="0"
                                        Grid.Column="2"
                                        Style="{StaticResource MatchTrackerCommentariesText}"

@@ -53,12 +53,11 @@
                            Style="{StaticResource MatchInfoMainPlayer}"
                            Text="{Binding HomePlayerInName}" />
                     <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                Grid.Column="1"
-                                                HeightRequest="10"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleHomeImage}"
-                                                Source="{Binding PlayerInImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="1"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleHomeImage}"
+                                                   Source="{Binding PlayerInImageSource}"
+                                                   Style="{StaticResource MatchInfoImage}" />
 
                     <Label Grid.Row="1"
                            Grid.Column="0"
@@ -67,12 +66,11 @@
                            LineBreakMode="TailTruncation"
                            Text="{Binding HomePlayerOutName}" />
                     <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                                Grid.Column="1"
-                                                HeightRequest="10"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleHomeImage}"
-                                                Source="{Binding PlayerOutImageSource}"
-                                                Style="{StaticResource MatchInfoImagePlayerOut}" />
+                                                   Grid.Column="1"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleHomeImage}"
+                                                   Source="{Binding PlayerOutImageSource}"
+                                                   Style="{StaticResource MatchInfoImagePlayerOut}" />
                 </Grid>
                 <Grid Grid.Row="0"
                       Grid.Column="4"
@@ -88,12 +86,11 @@
                     </Grid.RowDefinitions>
 
                     <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                Grid.Column="0"
-                                                HeightRequest="10"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleAwayImage}"
-                                                Source="{Binding PlayerInImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="0"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleAwayImage}"
+                                                   Source="{Binding PlayerInImageSource}"
+                                                   Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="0"
                            Grid.Column="1"
                            Style="{StaticResource MatchInfoMainPlayer}"
@@ -101,12 +98,11 @@
                            Text="{Binding AwayPlayerInName}" />
 
                     <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                                Grid.Column="0"
-                                                HeightRequest="10"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleAwayImage}"
-                                                Source="{Binding PlayerOutImageSource}"
-                                                Style="{StaticResource MatchInfoImagePlayerOut}" />
+                                                   Grid.Column="0"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleAwayImage}"
+                                                   Source="{Binding PlayerOutImageSource}"
+                                                   Style="{StaticResource MatchInfoImagePlayerOut}" />
                     <Label Grid.Row="1"
                            Grid.Column="1"
                            LineBreakMode="TailTruncation"

@@ -55,12 +55,12 @@
                            Style="{StaticResource MatchInfoMainPlayer}"
                            Text="{Binding HomePlayerName}" />
                     <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                Grid.Column="1"
-                                                AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleHomeImage}"
-                                                Source="{Binding ImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="1"
+                                                   AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleHomeImage}"
+                                                   Source="{Binding ImageSource}"
+                                                   Style="{StaticResource MatchInfoImage}" />
 
                     <Label Grid.Row="1"
                            Grid.Column="0"
@@ -71,11 +71,12 @@
                            LineBreakMode="TailTruncation"
                            Text="{Binding HomeAssistName}" />
                     <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                                Grid.Column="1"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding IsVisibleHomeAssist}"
-                                                Source="{Binding GoalAssistImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="1"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding IsVisibleHomeAssist}"
+                                                   Source="{Binding GoalAssistImageSource}"
+                                                   HeightRequest="12"
+                                                   Style="{StaticResource MatchInfoImage}" />
                 </Grid>
                 <Label Grid.Row="0"
                        Grid.Column="3"
@@ -96,12 +97,12 @@
                     </Grid.RowDefinitions>
 
                     <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                                Grid.Column="0"
-                                                AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding VisibleAwayImage}"
-                                                Source="{Binding ImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="0"
+                                                   AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding VisibleAwayImage}"
+                                                   Source="{Binding ImageSource}"
+                                                   Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="0"
                            Grid.Column="1"
                            AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
@@ -110,11 +111,12 @@
                            Text="{Binding AwayPlayerName}" />
 
                     <ffImageLoading:SvgCachedImage Grid.Row="1"
-                                                Grid.Column="0"
-                                                DownsampleToViewSize="True"
-                                                IsVisible="{Binding IsVisibleAwayAssist}"
-                                                Source="{Binding GoalAssistImageSource}"
-                                                Style="{StaticResource MatchInfoImage}" />
+                                                   Grid.Column="0"
+                                                   DownsampleToViewSize="True"
+                                                   IsVisible="{Binding IsVisibleAwayAssist}"
+                                                   Source="{Binding GoalAssistImageSource}"
+                                                   HeightRequest="12"
+                                                   Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="1"
                            Grid.Column="1"
                            AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}"
