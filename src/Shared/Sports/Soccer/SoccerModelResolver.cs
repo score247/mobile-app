@@ -1517,38 +1517,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class TeamFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.Team>
     {
 
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
-
-        public TeamFormatter()
-        {
-            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
-            {
-                { "Country", 0},
-                { "CountryCode", 1},
-                { "Flag", 2},
-                { "IsHome", 3},
-                { "Statistic", 4},
-                { "Abbreviation", 5},
-                { "Id", 6},
-                { "Name", 7},
-            };
-
-            this.____stringByteKeys = new byte[][]
-            {
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Country"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryCode"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Flag"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsHome"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Statistic"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Abbreviation"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
-                
-            };
-        }
-
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.Team value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1557,22 +1525,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 8);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Country, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Flag, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
-            offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsHome);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
-            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.ITeamStatistic>().Serialize(ref bytes, offset, value.Statistic, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Abbreviation, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
             return offset - startOffset;
         }
@@ -1586,75 +1540,34 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
-            var __Country__ = default(string);
-            var __CountryCode__ = default(string);
-            var __Flag__ = default(string);
-            var __IsHome__ = default(bool);
-            var __Statistic__ = default(global::LiveScore.Core.Models.Teams.ITeamStatistic);
-            var __Abbreviation__ = default(string);
             var __Id__ = default(string);
             var __Name__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
-                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
-                offset += readSize;
-                int key;
-                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
-                {
-                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
-                    goto NEXT_LOOP;
-                }
+                var key = i;
 
                 switch (key)
                 {
                     case 0:
-                        __Country__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 1:
-                        __CountryCode__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 2:
-                        __Flag__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 3:
-                        __IsHome__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
-                        break;
-                    case 4:
-                        __Statistic__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Teams.ITeamStatistic>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 5:
-                        __Abbreviation__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
-                    case 6:
                         __Id__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
-                    case 7:
+                    case 1:
                         __Name__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
-                NEXT_LOOP:
                 offset += readSize;
             }
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Teams.Team();
-            ____result.Country = __Country__;
-            ____result.CountryCode = __CountryCode__;
-            ____result.Flag = __Flag__;
-            ____result.IsHome = __IsHome__;
-            ____result.Statistic = __Statistic__;
-            ____result.Abbreviation = __Abbreviation__;
-            ____result.Id = __Id__;
-            ____result.Name = __Name__;
+            var ____result = new global::LiveScore.Soccer.Models.Teams.Team(__Id__, __Name__);
             return ____result;
         }
     }

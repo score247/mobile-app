@@ -61,8 +61,8 @@ namespace LiveScore.Soccer.Services
                 (
                     new List<Team>
                     {
-                        new Team{ Id = teamId1, IsHome = true },
-                        new Team{ Id = teamId2, IsHome = false }
+                        //new Team{ Id = teamId1, IsHome = true },
+                        //new Team{ Id = teamId2, IsHome = false }
                     },
                     new List<SoccerMatch>
                     {
