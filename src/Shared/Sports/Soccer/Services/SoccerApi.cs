@@ -53,7 +53,7 @@ namespace LiveScore.Soccer.Services
         {
             ///soccer/en-US/teams/sr%3Acompetitor%3A22474/versus/sr%3Acompetitor%3A22595
             [Get("/soccer/{lang}/teams/{teamId1}/versus/{teamId2}")]
-            Task<HeadToHeads> GetHeadToHeads(string lang, string teamId1, string teamId2);
+            Task<IEnumerable<SoccerMatch>> GetHeadToHeads(string lang, string teamId1, string teamId2);
         }
     }
 }

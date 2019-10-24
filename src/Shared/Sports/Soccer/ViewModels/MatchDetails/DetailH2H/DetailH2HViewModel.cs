@@ -122,7 +122,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                 return;
             }
 
-            var matchItemViewModels = headToHeads.Matches.Select(match => new MatchViewModel(
+            var matchItemViewModels = headToHeads.Select(match => new MatchViewModel(
                 match,
                 matchStatusConverter,
                 matchMinuteConverter, //TODO can pass null?

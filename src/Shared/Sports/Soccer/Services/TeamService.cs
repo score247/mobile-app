@@ -34,7 +34,7 @@ namespace LiveScore.Soccer.Services
             this.teamApi = teamApi ?? apiService.GetApi<TeamApi>();
         }
 
-        public async Task<IHeadToHeads> GetHeadToHeadsAsync(string teamId1, string teamId2, Language language, bool forceFetchLatestData = false)
+        public async Task<IEnumerable<IMatch>> GetHeadToHeadsAsync(string teamId1, string teamId2, Language language, bool forceFetchLatestData = false)
         {
             try
             {
@@ -44,7 +44,8 @@ namespace LiveScore.Soccer.Services
                     cacheKey,
                     () => apiService.Execute(() => teamApi.GetHeadToHeads(language.DisplayName, teamId1, teamId2)),
                     LongDuration,
-                    forceFetchLatestData).ConfigureAwait(false);
+                    forceFetchLatestData)
+                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
