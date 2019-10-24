@@ -1427,26 +1427,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class HeadToHeadsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.HeadToHeads>
     {
 
-        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
-        readonly byte[][] ____stringByteKeys;
-
-        public HeadToHeadsFormatter()
-        {
-            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
-            {
-                { "Teams", 0},
-                { "Matches", 1},
-            };
-
-            this.____stringByteKeys = new byte[][]
-            {
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Teams"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Matches"),
-                
-            };
-        }
-
-
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.HeadToHeads value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1455,10 +1435,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Teams.ITeam>>().Serialize(ref bytes, offset, value.Teams, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.IMatch>>().Serialize(ref bytes, offset, value.Matches, formatterResolver);
             return offset - startOffset;
         }
@@ -1472,7 +1450,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Teams__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Teams.ITeam>);
@@ -1480,14 +1458,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
-                offset += readSize;
-                int key;
-                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
-                {
-                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
-                    goto NEXT_LOOP;
-                }
+                var key = i;
 
                 switch (key)
                 {
@@ -1501,8 +1472,6 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
-                
-                NEXT_LOOP:
                 offset += readSize;
             }
 
