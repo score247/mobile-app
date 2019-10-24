@@ -4,49 +4,34 @@
     using LiveScore.Common.Extensions;
     using LiveScore.Core.Models;
     using LiveScore.Core.Models.Teams;
-    using MessagePack;
     using Newtonsoft.Json;
     using PropertyChanged;
 
-    [AddINotifyPropertyChangedInterface, MessagePackObject]
-    public class Team : ITeam
+    [AddINotifyPropertyChangedInterface]
+    public class Team : Entity<string, string>, ITeam
     {
-        public Team(string id, string name) 
-        {
-            Id = id;
-            Name = name;
-        }
+        public string Country { get; set; }
 
-        [Key(0)]
-        public string Id { get; }
+        public string CountryCode { get; set; }
 
-        [Key(1)]
-        public string Name { get; }
+        public string Flag { get; set; }
 
-        //public string Country { get; set; }
+        public bool IsHome { get; set; }
 
-        //public string CountryCode { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
+        public IEnumerable<IPlayer> Players { get; set; }
 
-        //public string Flag { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<TeamStatistic>))]
+        public ITeamStatistic Statistic { get; set; }
 
-        //public bool IsHome { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<Coach>))]
+        public ICoach Coach { get; set; }
 
-       // [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
-        //public IEnumerable<IPlayer> Players { get; set; }
+        public string Formation { get; set; }
 
-        //[JsonConverter(typeof(JsonConcreteTypeConverter<TeamStatistic>))]
-        //public ITeamStatistic Statistic { get; set; }
+        public string Abbreviation { get; set; }
 
-        //[JsonConverter(typeof(JsonConcreteTypeConverter<Coach>))]
-        //public ICoach Coach { get; set; }
-
-        //public string Formation { get; set; }
-
-        //public string Abbreviation { get; set; }
-
-       
-
-        //[JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
-        //public IEnumerable<IPlayer> Substitutions { get; set; }
+        [JsonConverter(typeof(JsonConcreteTypeConverter<IEnumerable<Player>>))]
+        public IEnumerable<IPlayer> Substitutions { get; set; }
     }
 }

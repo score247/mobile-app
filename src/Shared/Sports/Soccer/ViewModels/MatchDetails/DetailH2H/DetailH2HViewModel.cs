@@ -115,7 +115,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private async Task LoadHeadToHead(bool forceFetchLatestData = false)
         {
-            var headToHeads = await teamService.GetHeadToHeadsAsync("sr:competitor:22474", "sr:competitor:22595", CurrentLanguage, forceFetchLatestData);
+            var headToHeads = await teamService.GetHeadToHeadsAsync("sr:competitor:22474", "sr:competitor:22595", CurrentLanguage.DisplayName, forceFetchLatestData);
 
             if (headToHeads == null)
             {

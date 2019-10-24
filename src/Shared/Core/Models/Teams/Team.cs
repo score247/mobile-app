@@ -1,29 +1,27 @@
-﻿namespace LiveScore.Core.Models.Teams
+﻿using System.Collections.Generic;
+
+namespace LiveScore.Core.Models.Teams
 {
-    public interface ITeam
-    {
-        string Id { get; }
+    public interface ITeam : IEntity<string, string>
+    { 
+        string Country { get; }
 
-        string Name { get; }
+        string CountryCode { get; }
 
-        //string Country { get; }
+        string Flag { get; }
 
-        //string CountryCode { get; }
+        bool IsHome { get; }
 
-        //string Flag { get; }
+        string Formation { get; }
 
-        //bool IsHome { get; }
+        string Abbreviation { get; }
 
-        //string Formation { get; }
+        ITeamStatistic Statistic { get; set; }
 
-        //string Abbreviation { get; }
+        ICoach Coach { get; }
 
-        //ITeamStatistic Statistic { get; set; }
+        IEnumerable<IPlayer> Players { get; }
 
-        //ICoach Coach { get; }
-
-        //IEnumerable<IPlayer> Players { get; }
-
-        //IEnumerable<IPlayer> Substitutions { get; }
+        IEnumerable<IPlayer> Substitutions { get; }
     }
 }
