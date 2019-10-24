@@ -27,7 +27,7 @@ namespace LiveScore.Soccer.Services
             this.leagueApi = leagueApi ?? apiService.GetApi<LeagueApi>();
         }
 
-        public async Task<IEnumerable<ILeague>> GetMajorLeaguesAsync(bool getLatestData = false)
+        public async Task<IEnumerable<ILeague>> GetMajorLeaguesAsync(bool forceFetchLatestData = false)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace LiveScore.Soccer.Services
                     cacheKey,
                      () => apiService.Execute(() => leagueApi.GetMajorLeagues()),
                      CacheDuration,
-                    getLatestData).ConfigureAwait(false);
+                    forceFetchLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
