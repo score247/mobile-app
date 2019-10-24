@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H.H2HMatchHeaderTemplate"           
+             mc:Ignorable="d"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
+    <StackLayout>
+        <Grid Style="{StaticResource LeagueBox}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ffimageloadingsvg:SvgCachedImage
+                Grid.Row="0"
+                Grid.Column="0"
+                DownsampleToViewSize="True"
+                LoadingPlaceholder="images/flag_league/default_flag.svg"
+                Source="images/flag_league/default_flag.svg"
+                Style="{StaticResource LeagueFlag}" />
+
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource LeagueName}" Text="HOME Results" />
+        </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+    </StackLayout>
+</DataTemplate>

@@ -27,7 +27,11 @@ namespace LiveScore.Core.Models.Matches
 
         byte AwayScore { get; }
 
+        string HomeTeamId { get; }       
+
         string HomeTeamName { get; }
+
+        string AwayTeamId { get; }
 
         string AwayTeamName { get; }
 
