@@ -67,7 +67,7 @@ namespace LiveScore.Common.Services
             return await fanexCacheService.GetAsync<T>(key).ConfigureAwait(false);
         }
 
-        public Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool forceFetchLatestData = false) 
+        public Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool forceFetchLatestData = false)
             => GetOrSetAsync(
                 key,
                 factory,
