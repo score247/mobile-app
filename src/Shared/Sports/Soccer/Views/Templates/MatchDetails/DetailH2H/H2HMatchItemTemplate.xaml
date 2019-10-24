@@ -9,64 +9,64 @@
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>                        
+                    <ResourceDictionary.MergedDictionaries>
                         <coreResources:MatchViewResource />
-                        <resources:MatchDetailViewResource />                        
+                        <resources:MatchDetailViewResource />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
             <Grid Style="{StaticResource MatchGeneralInfoTeams}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="20" />
-                    </Grid.ColumnDefinitions>
-                    <StackLayout
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
                                 Grid.Row="0"
                                 Grid.RowSpan="2"
                                 Grid.Column="0"
                                 Style="{StaticResource MatchStatusContainer}">
-                        <Label Style="{StaticResource MatchStatus}"
+                    <Label Style="{StaticResource MatchStatus}"
                        Text="1 JAN" />
-                        <Label Style="{StaticResource MatchStatus}"
+                    <Label Style="{StaticResource MatchStatus}"
                        Text="22:00" />
-                    </StackLayout>
-                    <StackLayout
+                </StackLayout>
+                <StackLayout
                                 Grid.Row="0"
                                 Grid.Column="1"
                                 Style="{StaticResource MatchHomeTeam}">
-                        <Label
+                    <Label
                                     AutomationId="HomeTeamName"
                                     Style="{StaticResource Team}"
                                     Text="West Ham United" />
-                    </StackLayout>
-                    <StackLayout
+                </StackLayout>
+                <StackLayout
                                 Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource MatchAwayTeam}">
-                        <Label
+                    <Label
                                     AutomationId="AwayTeamName"
                                     Style="{StaticResource Team}"
                                     Text="AFC Bournemouth" />
-                    </StackLayout>
-                    <Label
+                </StackLayout>
+                <Label
                                 Grid.Row="0"
                                 Grid.Column="2"
                                 AutomationId="HomeScore"
                                 Style="{StaticResource HomeScore}"
                                 Text="" />
-                    <Label
+                <Label
                                 Grid.Row="1"
                                 Grid.Column="2"
                                 AutomationId="AwayScore"
                                 Style="{StaticResource AwayScore}"
                                 Text="" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
+            </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell.View>
 </ViewCell>

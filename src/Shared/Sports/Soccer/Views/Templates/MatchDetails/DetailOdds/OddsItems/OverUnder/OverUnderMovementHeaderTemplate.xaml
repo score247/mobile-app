@@ -31,15 +31,15 @@
                 <Label Grid.Row="0"
                        Grid.Column="0"
                        Style="{StaticResource TableHeaderText}"
-                       Text="{languageResources:Translate OddsHeaderTime}"/>                
+                       Text="{languageResources:Translate OddsHeaderTime}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        Style="{StaticResource TableHeaderText}"
-                       Text="{languageResources:Translate OddsHeaderScore}"/>              
+                       Text="{languageResources:Translate OddsHeaderScore}" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource TableHeaderText}"
-                       Text="{languageResources:Translate Over}"/>              
+                       Text="{languageResources:Translate Over}" />
                 <Label Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource TableHeaderText}"
@@ -47,7 +47,7 @@
                 <Label Grid.Row="0"
                        Grid.Column="4"
                        Style="{StaticResource TableHeaderText}"
-                       Text="{languageResources:Translate Under}"/>              
+                       Text="{languageResources:Translate Under}" />
                 <Label Grid.Row="0"
                        Grid.Column="5"
                        Style="{StaticResource TableHeaderText}"

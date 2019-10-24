@@ -84,7 +84,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         [Time]
         public override async void OnResumeWhenNetworkOK()
-        {            
+        {
             LoggingService
                   .TrackEvent(
                   $"Odds - {matchId}",
@@ -172,9 +172,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 formatType,
                 forceFetchNew).ConfigureAwait(false);
 
-           
             HasData = odds?.BetTypeOddsList?.Any() == true;
-           
+
             LoggingService
                     ?.TrackEvent(
                     $"Odds - {matchId}",

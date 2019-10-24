@@ -64,34 +64,26 @@ namespace LiveScore.Soccer.Models.Teams
         [Key(6)]
         public byte ShotsOffTarget { get; }
 
-
         [Key(7)]
         public byte CornerKicks { get; }
-
 
         [Key(8)]
         public byte Fouls { get; }
 
-
         [Key(9)]
         public byte ShotsSaved { get; }
-
 
         [Key(10)]
         public byte Offsides { get; }
 
-
         [Key(11)]
         public byte YellowCards { get; }
-
 
         [Key(12)]
         public byte Injuries { get; }
 
-
         [Key(13)]
         public byte RedCards { get; }
-
 
         [Key(14)]
         public byte YellowRedCards { get; }

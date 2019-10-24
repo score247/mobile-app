@@ -2,7 +2,7 @@
 <DataTemplate
     x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo.OneXTwoItemTemplate"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
     xmlns:soccerConverters="clr-namespace:LiveScore.Soccer.Converters;assembly=LiveScore.Soccer">
     <ViewCell>

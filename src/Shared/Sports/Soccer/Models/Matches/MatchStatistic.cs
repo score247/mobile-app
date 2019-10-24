@@ -38,6 +38,7 @@ namespace LiveScore.Soccer.Models.Matches
             => new MatchStatisticItem(AppResources.BallPossession, HomeStatistic?.Possession, AwayStatistic?.Possession);
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
+
         public IEnumerable<MatchStatisticItem> GetSubStatisticItems()
 #pragma warning restore S1541 // Methods and properties should not be too complex
         {
@@ -108,5 +109,4 @@ namespace LiveScore.Soccer.Models.Matches
         private static string FormatPercent(float value)
             => value.ToString("P0", System.Globalization.CultureInfo.InvariantCulture).Replace(" ", string.Empty);
     }
-
 }

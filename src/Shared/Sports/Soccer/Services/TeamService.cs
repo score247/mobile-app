@@ -39,7 +39,7 @@ namespace LiveScore.Soccer.Services
             try
             {
                 var cacheKey = $"HeadToHead:{teamId1}:{teamId2}:{language.DisplayName}";
-               
+
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => apiService.Execute(() => teamApi.GetHeadToHeads(language.DisplayName, teamId1, teamId2)),
@@ -77,8 +77,6 @@ namespace LiveScore.Soccer.Services
                             StubLeague("league:1", "Champions League", 1, "", "", true))
                     }
                 ));
-
-
 
         private SoccerMatch StubNotStartedMatch(
             string matchId,

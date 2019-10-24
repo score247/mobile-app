@@ -21,7 +21,7 @@ namespace LiveScore.Soccer.Models.Leagues
             CategoryId = categoryId;
             CountryName = countryName;
             CountryCode = countryCode;
-            IsInternational = isInternational;         
+            IsInternational = isInternational;
         }
 
         [Key(0)]

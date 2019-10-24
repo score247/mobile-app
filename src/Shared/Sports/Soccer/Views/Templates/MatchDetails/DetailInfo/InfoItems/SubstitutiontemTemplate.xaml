@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <DataTemplate x:Class="LiveScore.Soccer.Views.Templates.MatchDetailInfo.SubstitutionItemTemplate"
               xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"              
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell>
@@ -30,7 +30,7 @@
                 </Grid.RowDefinitions>
 
                 <Label Grid.Row="0"
-                       Grid.Column="0"                       
+                       Grid.Column="0"
                        Style="{StaticResource MatchInfoMinutes}"
                        Text="{Binding MatchTime}" />
 
@@ -47,7 +47,7 @@
                         <RowDefinition Height="auto" />
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0"
-                           Grid.Column="0"                           
+                           Grid.Column="0"
                            HorizontalTextAlignment="End"
                            LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoMainPlayer}"
@@ -62,7 +62,7 @@
 
                     <Label Grid.Row="1"
                            Grid.Column="0"
-                           HorizontalTextAlignment="End"                           
+                           HorizontalTextAlignment="End"
                            Style="{StaticResource MatchInfoAssistedPlayer}"
                            LineBreakMode="TailTruncation"
                            Text="{Binding HomePlayerOutName}" />
@@ -73,7 +73,7 @@
                                                 IsVisible="{Binding VisibleHomeImage}"
                                                 Source="{Binding PlayerOutImageSource}"
                                                 Style="{StaticResource MatchInfoImagePlayerOut}" />
-                </Grid>               
+                </Grid>
                 <Grid Grid.Row="0"
                       Grid.Column="4"
                       Grid.ColumnSpan="2"
@@ -95,7 +95,7 @@
                                                 Source="{Binding PlayerInImageSource}"
                                                 Style="{StaticResource MatchInfoImage}" />
                     <Label Grid.Row="0"
-                           Grid.Column="1"                           
+                           Grid.Column="1"
                            Style="{StaticResource MatchInfoMainPlayer}"
                            LineBreakMode="TailTruncation"
                            Text="{Binding AwayPlayerInName}" />
@@ -108,7 +108,7 @@
                                                 Source="{Binding PlayerOutImageSource}"
                                                 Style="{StaticResource MatchInfoImagePlayerOut}" />
                     <Label Grid.Row="1"
-                           Grid.Column="1"                                                      
+                           Grid.Column="1"
                            LineBreakMode="TailTruncation"
                            Style="{StaticResource MatchInfoAssistedPlayer}"
                            Text="{Binding AwayPlayerOutName}" />

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using LiveScore.Soccer.Models.Matches;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -56,7 +54,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
             OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
 
-            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHead(forceFetchLatestData : true));
+            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHead(forceFetchLatestData: true));
             RefreshCommand = new DelegateAsyncCommand(() => LoadHeadToHead(forceFetchLatestData: true));
         }
 
@@ -98,7 +96,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             base.Destroy();
         }
-   
+
         private void LoadTeamResult(string teamIdentifier)
         {
             if (teamIdentifier == "home")
@@ -136,7 +134,6 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             var matchItems
                 = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
-            
             Matches = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems);
 
             VisibleHeadToHead = true;

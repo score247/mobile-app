@@ -5,6 +5,7 @@ using LiveScore.Core.Models.Matches;
 using PropertyChanged;
 
 [assembly: InternalsVisibleToAttribute("Soccer.Tests")]
+
 namespace LiveScore.Soccer.Models.Matches
 {
     [AddINotifyPropertyChangedInterface]

@@ -8,7 +8,7 @@ namespace LiveScore.Soccer.Models.Odds
     public class MatchOdds
     {
         public MatchOdds()
-        {}
+        { }
 
         [SerializationConstructor]
         public MatchOdds(string matchId, IEnumerable<BetTypeOdds> betTypeOddsList)

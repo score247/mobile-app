@@ -67,8 +67,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             FunctionTabTappedCommand = new DelegateCommand<TabStripItemTappedEventArgs>(OnFunctionTabTapped);
-
-
         }
 
         public MatchViewModel MatchViewModel { get; private set; }

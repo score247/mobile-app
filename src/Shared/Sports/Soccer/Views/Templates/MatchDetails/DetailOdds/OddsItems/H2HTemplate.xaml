@@ -17,10 +17,10 @@
                     <coreResources:MatchHeaderViewResource />
                     <coreResources:MatchViewResource />
                     <resources:MatchDetailViewResource />
-                    <resources:MatchDetailLinesUpViewResource />                    
+                    <resources:MatchDetailLinesUpViewResource />
                 </ResourceDictionary.MergedDictionaries>
-                <templates:H2HMatchHeaderTemplate x:Key="MatchHeaderTemplate"/>
-                <templates:H2HMatchItemTemplate x:Key="MatchItemTemplate"/>
+                <templates:H2HMatchHeaderTemplate x:Key="MatchHeaderTemplate" />
+                <templates:H2HMatchItemTemplate x:Key="MatchItemTemplate" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
@@ -157,7 +157,7 @@
                     SelectionMode="None"
                     SeparatorVisibility="None"
                     Style="{StaticResource ListViewHasBackground}"
-                    VerticalOptions="FillAndExpand"                    
+                    VerticalOptions="FillAndExpand"
                     MinimumHeightRequest="1000">
                 </tabStrip:TabITemListView>
             </StackLayout>

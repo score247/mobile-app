@@ -129,7 +129,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             Debug.WriteLine("OddsMovementViewModel ReloadPage");
 
             await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
-
         }
 
         private void SubscribeEvents()
