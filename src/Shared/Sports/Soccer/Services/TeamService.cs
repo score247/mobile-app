@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
@@ -9,6 +10,7 @@ using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
+using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
@@ -19,18 +21,17 @@ namespace LiveScore.Soccer.Services
 
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
-        //private readonly TeamApi teamApi;
+        private readonly TeamApi teamApi;
 
         public TeamService(
         IApiService apiService,
         ICacheManager cacheManager,
-        ILoggingService loggingService
-        //MatchApi matchApi = null
-            ) : base(loggingService)
+        ILoggingService loggingService,
+        TeamApi teamApi = null) : base(loggingService)
         {
-            this.apiService = apiService;
             this.cacheManager = cacheManager;
-            //this.matchApi = matchApi ?? apiService.GetApi<MatchApi>();
+            this.apiService = apiService;
+            this.teamApi = teamApi ?? apiService.GetApi<TeamApi>();
         }
 
         public async Task<IHeadToHeads> GetHeadToHeadsAsync(string teamId1, string teamId2, Language language, bool forceFetchLatestData = false)
@@ -41,12 +42,13 @@ namespace LiveScore.Soccer.Services
                
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
-                    () => StubApi(teamId1, teamId2, language, forceFetchLatestData),
+                    () => apiService.Execute(() => teamApi.GetHeadToHeads(language.DisplayName, teamId1, teamId2)),
                     LongDuration,
                     forceFetchLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
+                Debug.WriteLine("Got Exception");
                 HandleException(ex);
 
                 return null;
@@ -64,13 +66,13 @@ namespace LiveScore.Soccer.Services
                     },
                     new List<SoccerMatch>
                     {
-                        StubNotStartedMatch("match:1", teamId1, teamId2, StubLeague("league:1", "English Premier League", 1, "England", "UK", false)),
+                        StubNotStartedMatch("match:1", teamId1, teamId2, "season:1", StubLeague("league:1", "English Premier League", 1, "England", "UK", false)),
 
-                        StubClosedMatch("match:2", teamId1, teamId2,
+                        StubClosedMatch("match:2", teamId1, teamId2, "season:1",
                             StubMatchResult(teamId1, 2, 1),
                             StubLeague("league:1", "English Premier League", 1, "England", "UK", false)),
 
-                        StubClosedMatch("match:3", teamId1, teamId2,
+                        StubClosedMatch("match:3", teamId1, teamId2, "season:2",
                             StubMatchResult(teamId2, 2, 3),
                             StubLeague("league:1", "Champions League", 1, "", "", true))
                     }
@@ -81,7 +83,8 @@ namespace LiveScore.Soccer.Services
         private SoccerMatch StubNotStartedMatch(
             string matchId,
             string teamId1,
-            string teamId2,  
+            string teamId2,
+            string seasonId,
             League league)
         => new SoccerMatch
             (
@@ -115,13 +118,15 @@ namespace LiveScore.Soccer.Services
                 countryName: league.CountryName,
                 modifiedTime: DateTimeOffset.Now,
                 isInternationalLeague: league.IsInternational,
-                leagueOrder: league.Order
+                leagueOrder: league.Order,
+                seasonId: seasonId
             );
 
         private SoccerMatch StubClosedMatch(
             string matchId,
             string teamId1,
             string teamId2,
+            string seasonId,
             MatchResult matchResult,
             League league)
         => new SoccerMatch
@@ -156,7 +161,8 @@ namespace LiveScore.Soccer.Services
                 countryName: league.CountryName,
                 modifiedTime: DateTimeOffset.Now.AddDays(-3),
                 isInternationalLeague: league.IsInternational,
-                leagueOrder: league.Order
+                leagueOrder: league.Order,
+                seasonId: seasonId
             );
 
         private League StubLeague(

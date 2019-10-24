@@ -104,6 +104,10 @@
     </Compile>
    
 
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetails\DetailOdds\OddsItems\H2HTemplate.xaml.cs">
+      <DependentUpon>H2HTemplate.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />

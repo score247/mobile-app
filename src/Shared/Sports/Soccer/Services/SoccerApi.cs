@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Odds;
+using LiveScore.Soccer.Models.Teams;
 using Refit;
 
 namespace LiveScore.Soccer.Services
@@ -45,6 +46,14 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{lang}/odds-movement/{matchId}/{betTypeId}/{formatType}/{bookmakerId}")]
             Task<MatchOddsMovement> GetOddsMovement(string lang, string matchId, int betTypeId, string formatType, string bookmakerId);
+        }
+
+        [Headers("Accept: application/x-msgpack")]
+        public interface TeamApi
+        {
+            ///soccer/en-US/teams/sr%3Acompetitor%3A22474/versus/sr%3Acompetitor%3A22595
+            [Get("/soccer/{lang}/teams/{teamId1}/versus/{teamId2}")]
+            Task<HeadToHeads> GetHeadToHeads(string lang, string teamId1, string teamId2);
         }
     }
 }

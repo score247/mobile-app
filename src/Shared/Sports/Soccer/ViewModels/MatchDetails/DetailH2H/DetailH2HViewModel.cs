@@ -57,6 +57,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
 
             OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHead(forceFetchLatestData : true));
+            RefreshCommand = new DelegateAsyncCommand(() => LoadHeadToHead(forceFetchLatestData: true));
         }
 
         public bool VisibleHomeResults { get; private set; }
@@ -68,6 +69,8 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         public DelegateCommand<string> OnTeamResultTapped { get; }
 
         public DelegateAsyncCommand OnHeadToHeadTapped { get; }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
 
         public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> Matches { get; set; }
 
@@ -95,7 +98,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             base.Destroy();
         }
-
+   
         private void LoadTeamResult(string teamIdentifier)
         {
             if (teamIdentifier == "home")
@@ -114,7 +117,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private async Task LoadHeadToHead(bool forceFetchLatestData = false)
         {
-            var headToHeads = await teamService.GetHeadToHeadsAsync(homeTeamId, awayTeamId, CurrentLanguage, forceFetchLatestData);
+            var headToHeads = await teamService.GetHeadToHeadsAsync("sr:competitor:22474", "sr:competitor:22595", CurrentLanguage, forceFetchLatestData);
 
             if (headToHeads == null)
             {
@@ -127,9 +130,13 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                 matchMinuteConverter, //TODO can pass null?
                 EventAggregator));
 
+            //TODO group by league, season
+            //TODO mapping season model
+            //TODO sort by event date and league order
             var matchItems
                 = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
+            
             Matches = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems);
 
             VisibleHeadToHead = true;

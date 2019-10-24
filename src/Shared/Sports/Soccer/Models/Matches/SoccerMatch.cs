@@ -51,7 +51,8 @@ namespace LiveScore.Soccer.Models.Matches
             string countryName,
             DateTimeOffset modifiedTime,
             bool isInternationalLeague,
-            int leagueOrder)
+            int leagueOrder,
+            string seasonId = null)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -85,6 +86,7 @@ namespace LiveScore.Soccer.Models.Matches
             ModifiedTime = modifiedTime;
             IsInternationalLeague = isInternationalLeague;
             LeagueOrder = leagueOrder;
+            LeagueSeasonId = seasonId;
         }
 
         internal SoccerMatch(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
@@ -189,6 +191,9 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(30)]
         public int LeagueOrder { get; private set; }
+
+        [Key(31)]
+        public string LeagueSeasonId { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
