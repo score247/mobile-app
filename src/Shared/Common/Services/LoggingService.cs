@@ -22,11 +22,11 @@ namespace LiveScore.Common.Services
 
         void TrackEvent(string trackIdentifier, string message);
 
-        Task TrackEventAsync(string trackIdentifier, string message);
-
         void TrackEvent(string trackIdentifier, IDictionary<string, string> properties);
 
         Task TrackEventAsync(string trackIdentifier, IDictionary<string, string> properties);
+
+        Task TrackEventAsync(string trackIdentifier, string message);
     }
 
     public class LoggingService : ILoggingService
@@ -64,6 +64,9 @@ namespace LiveScore.Common.Services
         public Task LogExceptionAsync(Exception exception, IDictionary<string, string> properties)
             => Task.Run(() => LogException(exception, properties));
 
+        public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
+           => trackEvent(trackIdentifier, properties);
+
         public void TrackEvent(string trackIdentifier, string message)
             => TrackEvent(trackIdentifier, new Dictionary<string, string>
             {
@@ -72,9 +75,6 @@ namespace LiveScore.Common.Services
 
         public Task TrackEventAsync(string trackIdentifier, string message)
             => Task.Run(() => TrackEvent(trackIdentifier, message));
-
-        public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
-            => trackEvent(trackIdentifier, properties);
 
         public Task TrackEventAsync(string trackIdentifier, IDictionary<string, string> properties)
              => Task.Run(() => TrackEvent(trackIdentifier, properties));

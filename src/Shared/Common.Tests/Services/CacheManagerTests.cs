@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using AutoFixture;
 using Fanex.Caching;
 using LiveScore.Common.Services;
 using NSubstitute;
@@ -9,199 +10,119 @@ namespace LiveScore.Common.Tests.Services
 {
     public class CacheManagerTests
     {
-        private readonly INetworkConnection subNetworkConnectionManager;
         private readonly ICacheService cacheService;
-        private ICacheManager cacheManager;
-        private ILoggingService loggingService;
+        private readonly ICacheManager cacheManager;
+        private readonly ILoggingService loggingService;
+        private readonly Fixture Any;
+        private readonly CacheItemOptions cacheItemOptions;
+        private readonly string CacheKey;
 
         public CacheManagerTests()
         {
-            subNetworkConnectionManager = Substitute.For<INetworkConnection>();
             loggingService = Substitute.For<ILoggingService>();
-            cacheService = new CacheService();
-            cacheManager = new CacheManager(cacheService, subNetworkConnectionManager, loggingService);
+            cacheService = Substitute.For<ICacheService>();
+            cacheManager = new CacheManager(cacheService, loggingService);
+            Any = new Fixture();
+
+            cacheItemOptions = Any.Create<CacheItemOptions>();
+            CacheKey = Any.Create<string>();
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_GetLatestData_CallFactoryMethodAndSetDataToCache()
+        public async Task GetOrSetAsync_CacheKeyIsNullOrWhiteSpace_ReturnsDefault()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<int>>(() => Task.FromResult(1));
+            var factory = Substitute.For<Func<Task<object>>>();
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key1", factory, new CacheItemOptions(), true);
+            var actual = await cacheManager.GetOrSetAsync(key: string.Empty, factory, cacheItemOptions, true);
 
             // Assert
-            Assert.Equal(1, result);
-            Assert.Equal(1, cacheService.Get<int>("key1"));
+            Assert.Null(actual);
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_NotGetLatestData_NotHaveCachedData_CallFactoryMethodAndSetDataToCache()
+        public async Task GetOrSetAsync_ForceFetchLatestDataIsTrue_AlwaysInvokeFactory()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<int>>(() => Task.FromResult(1));
+            var factory = Substitute.For<Func<Task<object>>>();
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key2", factory, new CacheItemOptions(), false);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
 
             // Assert
-            Assert.Equal(1, result);
-            Assert.Equal(1, cacheService.Get<int>("key2"));
+            await factory.Received().Invoke();
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_NotGetLatestData_HaveCachedData_ReturnDataFromCache()
+        public async Task GetOrSetAsync_ForceFetchLatestDataIsTrue_AlwaysInvokeCachingSetAsync()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<int>>(() => Task.FromResult(1));
-            cacheService.Set("key3", 1);
+            var value = Any.Create<int>();
+            Task<int> factory() => Task.FromResult(value);
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key3", factory, new CacheItemOptions(), false);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
 
             // Assert
-            Assert.Equal(1, result);
+            await cacheService.Received().SetAsync(CacheKey, value, cacheItemOptions);
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_GetLatestData_GetTimeOutException_ReturnDataFromCacheAndPublishConnectionTimeoutEvent()
+        public async Task GetOrSetAsync_ForceFetchLatestDataIsFalse_FanexServiceInvokesGetAsync()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = Substitute.For<Func<Task<int>>>();
-            factory.When(x => x.Invoke()).Throw(new TaskCanceledException());
-            cacheService.Set("key4", 2);
+            Task<int> factory() => Task.FromResult(Any.Create<int>());
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key4", factory, new CacheItemOptions(), true);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
 
             // Assert
-            Assert.Equal(2, result);
-
-            // TODO: Temporary remove
-            // subNetworkConnectionManager.Received(1).PublishConnectionTimeoutEvent();
+            await cacheService.Received().GetAsync<int>(CacheKey);
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_GetLatestData_GetOtherException_ThrowException()
+        public async Task GetOrSetAsync_DataFromCacheIsNull_InvokeFactory()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = Substitute.For<Func<Task<int>>>();
-            factory.When(x => x.Invoke()).Throw(new Exception());
-            cacheService.Set("key5", 2);
-
-            // Assert
-            await Assert.ThrowsAsync<Exception>(() => cacheManager.GetOrSetAsync("key5", factory, new CacheItemOptions(), true));
-        }
-
-        [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_NotGetLatestData_NotHaveCachedData_GetTimeOutException_ReturnDefaultValueAndPublishConnectionTimeoutEvent()
-        {
-            // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = Substitute.For<Func<Task<int>>>();
-            factory.When(x => x.Invoke()).Throw(new TaskCanceledException());
+            var factory = Substitute.For<Func<Task<object>>>();
+            object dataFromCache = null;
+            cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(dataFromCache));
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key6", factory, new CacheItemOptions(), false);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
 
             // Assert
-            Assert.Equal(0, result);
-            // TODO: Temporary remove
-            // subNetworkConnectionManager.Received(1).PublishConnectionTimeoutEvent();
+            await factory.Received().Invoke();
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ConnectionIsOk_NotGetLatestData_NotHaveCachedData_GetOtherException_ThrowException()
+        public async Task GetOrSetAsync_DataIsInCache_ReturnTheData()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = Substitute.For<Func<Task<int>>>();
-            factory.When(x => x.Invoke()).Throw(new Exception());
-
-            // Assert
-            await Assert.ThrowsAsync<Exception>(() => cacheManager.GetOrSetAsync("key7", factory, new CacheItemOptions(), false));
-        }
-
-        [Fact]
-        public async Task GetOrSetAsync_ConnectionIsNotOk_PublishNetworkConnectionEventAndReturnDataFromCache()
-        {
-            // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(false);
-            var factory = new Func<Task<int>>(() => Task.FromResult(1));
-            cacheService.Set("key8", 2);
+            var value = Any.Create<object>();
+            var factory = Substitute.For<Func<Task<object>>>();
+            cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(value));
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key8", factory, new CacheItemOptions(), false);
+            var actual = await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
 
             // Assert
-            Assert.Equal(2, result);
+            Assert.Equal(value, actual);
         }
 
         [Fact]
-        public async Task GetOrSetAsync_FactoryReturnNull_NotSetToCache()
+        public async Task GetOrSetAsync_TaskCanceledExceptionIsThrown_InvokeLogExceptionAsync()
         {
             // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<string>>(() => Task.FromResult<string>(null));
-            cacheService.Set("key9", 2);
-            var cacheOptions = new CacheItemOptions();
+            var exception = new TaskCanceledException();
+            Task<int> factory() => throw exception;
 
             // Act
-            var result = await cacheManager.GetOrSetAsync("key9", factory, cacheOptions, true);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
 
             // Assert
-            Assert.Null(result);
-        }
-
-        [Fact]
-        public async Task GetOrSetAsync_SetAbsoluteExpiredTime_ExpectDataFromCache()
-        {
-            // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<int>>(() => Task.FromResult(2));
-
-            // Act
-            await cacheManager.GetOrSetAsync("key10", factory, 120, true);
-
-            // Assert
-            Assert.Equal(2, cacheService.Get<int>("key10"));
-        }
-
-        [Fact]
-        public async Task GetOrSetAsync_WithFuncNotReturnTask_ExpectDataFromCache()
-        {
-            // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<int>(() => 2);
-
-            // Act
-            await cacheManager.GetOrSetAsync("key11", factory, new CacheItemOptions(), true);
-
-            // Assert
-            Assert.Equal(2, cacheService.Get<int>("key11"));
-        }
-
-        [Fact]
-        public async Task InvalidateAll_RemoveAllCache()
-        {
-            // Arrange
-            subNetworkConnectionManager.IsSuccessfulConnection().Returns(true);
-            var factory = new Func<Task<string>>(() => Task.FromResult("2"));
-            await cacheManager.GetOrSetAsync("key12", factory, new CacheItemOptions(), true);
-            await cacheManager.GetOrSetAsync("key13", factory, new CacheItemOptions(), true);
-
-            // Act
-            await cacheManager.InvalidateAllAsync();
-
-            // Assert
-            Assert.Null(cacheService.Get<string>("key12"));
-            Assert.Null(cacheService.Get<string>("key13"));
+            await loggingService.Received().LogExceptionAsync(exception);
         }
     }
 }

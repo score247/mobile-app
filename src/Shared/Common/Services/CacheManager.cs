@@ -20,19 +20,14 @@ namespace LiveScore.Common.Services
 
     public class CacheManager : ICacheManager
     {
-        private readonly ICacheService cacheService;
-        private readonly IList<string> cachedKeys;
-        private readonly INetworkConnection networkConnectionManager;
+        private readonly ICacheService fanexCacheService;
         private readonly ILoggingService loggingService;
+        private readonly List<string> cachedKeys;
 
-        public CacheManager(
-            ICacheService cacheService,
-            INetworkConnection networkConnectionManager,
-            ILoggingService loggingService)
+        public CacheManager(ICacheService fanexCacheService, ILoggingService loggingService)
         {
-            this.cacheService = cacheService;
+            this.fanexCacheService = fanexCacheService;
             this.loggingService = loggingService;
-            this.networkConnectionManager = networkConnectionManager;
 
             //TODO : thread-safe???
             cachedKeys = new List<string>();
@@ -45,56 +40,35 @@ namespace LiveScore.Common.Services
             CacheItemOptions options,
             bool forceFetchLatestData = false)
         {
-            if (networkConnectionManager.IsSuccessfulConnection())
+            try
             {
-                try
+                if (string.IsNullOrWhiteSpace(key))
                 {
-                    if (forceFetchLatestData)
-                    {
-                        await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
-                    }
-
-                    var dataFromCache = await cacheService.GetAsync<T>(key).ConfigureAwait(false);
-
-                    if (Equals(dataFromCache, default(T)))
-                    {
-                        await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
-                    }
+                    return default;
                 }
-                catch (TaskCanceledException ex)
-                {
-                    // TODO: Temporary comment code here to find another solution
 
-                    await loggingService.LogExceptionAsync(ex);
-                    return await cacheService.GetAsync<T>(key);
+                if (forceFetchLatestData)
+                {
+                    await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
+                }
+
+                var dataFromCache = await fanexCacheService.GetAsync<T>(key).ConfigureAwait(false);
+
+                if (Equals(dataFromCache, default(T)))
+                {
+                    await GetFromRemoteApiAndSetToCacheAsync(key, factory, options);
                 }
             }
-            else
+            catch (TaskCanceledException ex)
             {
-                networkConnectionManager.PublishNetworkConnectionEvent();
+                await loggingService.LogExceptionAsync(ex);
             }
 
-            return await cacheService.GetAsync<T>(key).ConfigureAwait(false);
+            return await fanexCacheService.GetAsync<T>(key).ConfigureAwait(false);
         }
 
-        private async Task GetFromRemoteApiAndSetToCacheAsync<T>(
-            string key,
-            Func<Task<T>> factory,
-            CacheItemOptions options)
-        {
-            Profiler.Start($"{factory.Method.Name} key:{key}");
-
-            var data = await factory.Invoke().ConfigureAwait(false);
-            await SetCacheAsync(key, data, options).ConfigureAwait(false);
-
-            Profiler.Stop($"{factory.Method.Name} key:{key}");
-        }
-
-        public Task<T> GetOrSetAsync<T>(
-            string key,
-            Func<Task<T>> factory,
-            int absoluteExpiredTime,
-            bool forceFetchLatestData = false) => GetOrSetAsync(
+        public Task<T> GetOrSetAsync<T>(string key, Func<Task<T>> factory, int absoluteExpiredTime, bool forceFetchLatestData = false) 
+            => GetOrSetAsync(
                 key,
                 factory,
                 new CacheItemOptions().SetAbsoluteExpiration(DateTimeOffset.Now.AddSeconds(absoluteExpiredTime)),
@@ -104,14 +78,15 @@ namespace LiveScore.Common.Services
             string key,
             Func<T> factory,
             CacheItemOptions options,
-            bool forceFetchLatestData = false) =>
-            await cacheService.GetOrSetAsync(key, factory, options).ConfigureAwait(false);
+            bool forceFetchLatestData = false)
+            =>
+            await fanexCacheService.GetOrSetAsync(key, factory, options).ConfigureAwait(false);
 
         public async Task InvalidateAllAsync()
         {
             foreach (var key in cachedKeys)
             {
-                await cacheService.RemoveAsync(key).ConfigureAwait(false);
+                await fanexCacheService.RemoveAsync(key).ConfigureAwait(false);
             }
 
             cachedKeys.Clear();
@@ -130,7 +105,17 @@ namespace LiveScore.Common.Services
                 cachedKeys.Add(key);
             }
 
-            return cacheService.SetAsync(key, data, options);
+            return fanexCacheService.SetAsync(key, data, options);
+        }
+
+        private async Task GetFromRemoteApiAndSetToCacheAsync<T>(string key, Func<Task<T>> factory, CacheItemOptions options)
+        {
+            Profiler.Start($"{factory.Method.Name} key:{key}");
+
+            var data = await factory.Invoke().ConfigureAwait(false);
+            await SetCacheAsync(key, data, options).ConfigureAwait(false);
+
+            Profiler.Stop($"{factory.Method.Name} key:{key}");
         }
     }
 }

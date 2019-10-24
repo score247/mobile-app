@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using AutoFixture;
-using LiveScore.Common.Services;
-using NSubstitute;
-using Xunit;
-
-namespace LiveScore.Common.Tests.Services
+﻿namespace LiveScore.Common.Tests.Services
 {
     public class LoggingServiceTests
     {

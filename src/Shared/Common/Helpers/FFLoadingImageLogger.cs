@@ -8,10 +8,8 @@ namespace LiveScore.Common.Helpers
     {
         private readonly ILoggingService loggingService;
 
-        public FFLoadingImageLogger(ILoggingService loggingService)
-        {
-            this.loggingService = loggingService;
-        }
+        public FFLoadingImageLogger(ILoggingService loggingService) 
+            => this.loggingService = loggingService;
 
         public void Debug(string message)
             => System.Diagnostics.Debug.WriteLine(message);
