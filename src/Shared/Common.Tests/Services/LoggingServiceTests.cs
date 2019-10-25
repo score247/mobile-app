@@ -66,7 +66,9 @@ namespace LiveScore.Common.Tests.Services
             Action<Exception> logExceptionTask = (ex) => trackError(ex, null);
 
             // Act
-            await loggingService.LogExceptionAsync(exception);
+            await loggingService
+                .LogExceptionAsync(exception)
+                .ConfigureAwait(false);
 
             // Assert
             logExceptionTask.Invoke(exception);
@@ -83,7 +85,9 @@ namespace LiveScore.Common.Tests.Services
                 new Dictionary<string, string> { ["Message"] = msg });
 
             // Act
-            await loggingService.LogExceptionAsync(exception, message);
+            await loggingService
+                .LogExceptionAsync(exception, message)
+                .ConfigureAwait(false);
 
             // Assert
             logExceptionTask.Invoke(exception, message);

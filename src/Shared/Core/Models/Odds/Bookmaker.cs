@@ -30,9 +30,7 @@
                 return false;
             }
 
-            var bookmakerObject = obj as Bookmaker;
-
-            if (bookmakerObject == null)
+            if (!(obj is Bookmaker bookmakerObject))
             {
                 return false;
             }
@@ -62,7 +60,7 @@
                 return !Object.Equals(bookmaker1, bookmaker2);
             }
 
-            return !(bookmaker1.Equals(bookmaker2));
+            return !bookmaker1.Equals(bookmaker2);
         }
     }
 }

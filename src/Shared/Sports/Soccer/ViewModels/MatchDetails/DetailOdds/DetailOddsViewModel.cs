@@ -88,9 +88,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             await LoggingService
                   .TrackEventAsync(
                   $"Odds - {matchId}",
-                  $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK");
+                  $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK").ConfigureAwait(false);
 
-            await UpdateOddsByBetTypeAsync();
+            await UpdateOddsByBetTypeAsync().ConfigureAwait(false);
 
             SubscribeEvents();
         }
@@ -101,7 +101,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
             try
             {
-                await LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing));
+                await LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing)).ConfigureAwait(false);
 
                 SubscribeEvents();
             }

@@ -35,7 +35,7 @@ namespace LiveScore.Common.Tests.Services
             var factory = Substitute.For<Func<Task<object>>>();
 
             // Act
-            var actual = await cacheManager.GetOrSetAsync(key: string.Empty, factory, cacheItemOptions, true);
+            var actual = await cacheManager.GetOrSetAsync(key: string.Empty, factory, cacheItemOptions, true).ConfigureAwait(false);
 
             // Assert
             Assert.Null(actual);
@@ -48,11 +48,10 @@ namespace LiveScore.Common.Tests.Services
             var factory = Substitute.For<Func<Task<object>>>();
 
             // Act
-            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true).ConfigureAwait(false);
 
             // Assert
-            await factory.Received().Invoke();
-
+            await factory.Received().Invoke().ConfigureAwait(false);
         }
 
         [Fact]
@@ -63,10 +62,10 @@ namespace LiveScore.Common.Tests.Services
             Task<int> factory() => Task.FromResult(dataReturnFromFactory);
 
             // Act
-            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true).ConfigureAwait(false);
 
             // Assert
-            await cacheService.Received().SetAsync(CacheKey, dataReturnFromFactory, cacheItemOptions);
+            await cacheService.Received().SetAsync(CacheKey, dataReturnFromFactory, cacheItemOptions).ConfigureAwait(false);
         }
 
         [Fact]
@@ -76,10 +75,13 @@ namespace LiveScore.Common.Tests.Services
             Task<int> factory() => Task.FromResult(Random.Create<int>());
 
             // Act
-            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
+            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false).ConfigureAwait(false);
 
             // Assert
-            await cacheService.Received().GetAsync<int>(CacheKey);
+            await cacheService
+                .Received()
+                .GetAsync<int>(CacheKey)
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -91,10 +93,15 @@ namespace LiveScore.Common.Tests.Services
             cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(cacheData));
 
             // Act
-            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
+            await cacheManager
+                .GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false)
+                .ConfigureAwait(false);
 
             // Assert
-            await factory.Received().Invoke();
+            await factory
+                .Received()
+                .Invoke()
+                .ConfigureAwait(false);
         }
 
         [Fact]
@@ -106,7 +113,9 @@ namespace LiveScore.Common.Tests.Services
             cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(value));
 
             // Act
-            var actual = await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
+            var actual = await cacheManager
+                .GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false)
+                .ConfigureAwait(false);
 
             // Assert
             Assert.Equal(value, actual);
@@ -120,10 +129,15 @@ namespace LiveScore.Common.Tests.Services
             Task<int> factory() => throw exception;
 
             // Act
-            await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
+            await cacheManager
+                .GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true)
+                .ConfigureAwait(false);
 
             // Assert
-            await loggingService.Received().LogExceptionAsync(exception);
+            await loggingService
+                .Received()
+                .LogExceptionAsync(exception)
+                .ConfigureAwait(false);
         }
     }
 }

@@ -133,10 +133,7 @@ namespace LiveScore.Core.ViewModels
                      EventAggregator?.GetEvent<StopLoadDataEvent>().Publish();
                      IsBusy = false;
                  })
-                 .OnFailedConnection(() =>
-                 {
-                     networkConnectionManager.PublishNetworkConnectionEvent();
-                 });
+                 .OnFailedConnection(() => networkConnectionManager.PublishNetworkConnectionEvent());
             }).ConfigureAwait(false);
         }
 

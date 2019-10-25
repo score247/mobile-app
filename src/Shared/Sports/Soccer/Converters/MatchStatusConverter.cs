@@ -36,7 +36,7 @@ namespace LiveScore.Soccer.Converters
 
         public string BuildDisplayStatus(IMatch match)
         {
-            if (match == null || !(match is SoccerMatch))
+            if (!(match is SoccerMatch) || match == null)
             {
                 return string.Empty;
             }

@@ -301,8 +301,7 @@ namespace LiveScore.Soccer.Models.Matches
 
         [IgnoreMember]
         public bool IsInLiveAndNotExtraTime
-            => EventStatus != null && EventStatus.IsLive
-            && MatchStatus?.IsInExtraTime == false;
+            => EventStatus?.IsLive == true && MatchStatus?.IsInExtraTime == false;
 
         [IgnoreMember]
         public byte TotalHomeRedCards => (byte)(HomeRedCards + HomeYellowRedCards);
@@ -343,8 +342,6 @@ namespace LiveScore.Soccer.Models.Matches
             => (obj is SoccerMatch actualObj) && Id == actualObj.Id;
 
         public override int GetHashCode() => Id?.GetHashCode() ?? 0;
-
-       
     }
 
     /// <summary>
