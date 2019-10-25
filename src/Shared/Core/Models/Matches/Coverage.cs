@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.Models.Matches
-{
-    using MessagePack;
+﻿using MessagePack;
 
+namespace LiveScore.Core.Models.Matches
+{
     [MessagePackObject(keyAsPropertyName: true)]
     public class Coverage
     {

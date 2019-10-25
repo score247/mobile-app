@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.Models.Teams
-{
-    using MessagePack;
+﻿using MessagePack;
 
+namespace LiveScore.Core.Models.Teams
+{
     public interface IPlayer
     {
         string Type { get; }

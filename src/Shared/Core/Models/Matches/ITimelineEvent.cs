@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core.Models.Matches
-{
-    using System;
-    using Enumerations;
+﻿using System;
+using LiveScore.Core.Enumerations;
 
+namespace LiveScore.Core.Models.Matches
+{
     public interface ITimelineEvent : IEntity<string, string>
     {
         EventType Type { get; }

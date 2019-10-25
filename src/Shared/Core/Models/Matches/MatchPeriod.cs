@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core.Models.Matches
-{
-    using Enumerations;
-    using MessagePack;
+﻿using LiveScore.Core.Enumerations;
+using MessagePack;
 
+namespace LiveScore.Core.Models.Matches
+{
     [MessagePackObject]
     public class MatchPeriod
     {

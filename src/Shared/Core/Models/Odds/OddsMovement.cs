@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Core.Models.Odds
-{
-    using System;
-    using System.Collections.Generic;
-    using MessagePack;
+﻿using System;
+using System.Collections.Generic;
+using MessagePack;
 
+namespace LiveScore.Core.Models.Odds
+{
     public interface IOddsMovement
     {
         IEnumerable<BetOptionOdds> BetOptions { get; }

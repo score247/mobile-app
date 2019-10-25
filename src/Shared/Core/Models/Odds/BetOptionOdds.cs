@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core.Models.Odds
-{
-    using Enumerations;
-    using MessagePack;
+﻿using LiveScore.Core.Enumerations;
+using MessagePack;
 
+namespace LiveScore.Core.Models.Odds
+{
     [MessagePackObject(keyAsPropertyName: true)]
     public class BetOptionOdds
     {

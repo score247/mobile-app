@@ -1,8 +1,8 @@
-﻿namespace LiveScore.Core.Models.Odds
-{
-    using System;
-    using MessagePack;
+﻿using System;
+using MessagePack;
 
+namespace LiveScore.Core.Models.Odds
+{
     [MessagePackObject(keyAsPropertyName: true)]
     public class Bookmaker : Entity<string, string>, IEquatable<Bookmaker>
     {
