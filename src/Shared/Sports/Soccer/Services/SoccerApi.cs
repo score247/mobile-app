@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Odds;
-using LiveScore.Soccer.Models.Teams;
 using Refit;
 
 namespace LiveScore.Soccer.Services

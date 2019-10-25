@@ -1,14 +1,12 @@
 ﻿using Images = LiveScore.Soccer.Enumerations.Images;
 
-namespace LiveScore.Soccer.Converters.TimelineImages
+namespace LiveScore.Soccer.Models.TimelineImages
 {
-    public class PenaltyShootOutImageConverter : ITimelineEventImageConverter
+    public class PenaltyShootOutImageBuilder : ITimelineEventImageBuilder
     {
         public string BuildImageSource(TimelineEventImage timelineEvent)
-        {
-            return timelineEvent.IsPenaltyScored
+            => timelineEvent.IsPenaltyScored
                 ? Images.PenaltyShootoutGoal.Value
                 : Images.MissedPenaltyShootoutGoal.Value;
-        }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 
-namespace LiveScore.Soccer.Converters.TimelineImages
+namespace LiveScore.Soccer.Models.TimelineImages
 {
-    public interface ITimelineEventImageConverter
+    public interface ITimelineEventImageBuilder
     {
         string BuildImageSource(TimelineEventImage timelineEvent);
     }

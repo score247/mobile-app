@@ -1,22 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
-using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Core.Models.Teams;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Leagues;
-using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.Models.Teams;
 using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
 {
     public class TeamService : BaseService, ITeamService
     {
-        private const int ShortDuration = 120;
         private const int LongDuration = 7_200;
 
         private readonly IApiService apiService;
@@ -38,7 +31,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"HeadToHead:{teamId1}:{teamId2}:{language}";
+                var cacheKey = $"TeamService.GetHeadToHeadsAsync:{teamId1}:{teamId2}:{language}";
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,

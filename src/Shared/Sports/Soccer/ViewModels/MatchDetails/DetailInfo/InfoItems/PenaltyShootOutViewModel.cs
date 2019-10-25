@@ -1,10 +1,9 @@
-﻿using LiveScore.Soccer.Converters.TimelineImages;
-
-namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
+﻿namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     using LiveScore.Core;
     using LiveScore.Core.Models.Matches;
     using LiveScore.Soccer.Models.Matches;
+    using LiveScore.Soccer.Models.TimelineImages;
     using Prism.Navigation;
 
     public class PenaltyShootOutViewModel : BaseItemViewModel

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using LiveScore.Core.Enumerations;
 
-namespace LiveScore.Soccer.Converters.TimelineImages
+namespace LiveScore.Soccer.Models.TimelineImages
 {
-    public class DefaultEventImageConverter : ITimelineEventImageConverter
+    public class DefaultEventImageBuilder : ITimelineEventImageBuilder
     {
         private static readonly IDictionary<EventType, string> EventImages = new Dictionary<EventType, string>
         {

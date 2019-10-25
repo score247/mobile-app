@@ -4,8 +4,8 @@ using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.ViewModels;
-using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -82,7 +82,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         public bool VisibleAwayImage { get; protected set; }
 
-        protected ITimelineEventImageConverter ImageConverter { get; set; }
+        protected ITimelineEventImageBuilder ImageConverter { get; set; }
 
         public static BaseItemViewModel CreateInstance(
             TimelineEvent timelineEvent,
@@ -121,11 +121,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
             try
             {
                 ImageConverter =
-                    DependencyResolver.Resolve<ITimelineEventImageConverter>(eventType.Value.ToString());
+                    DependencyResolver.Resolve<ITimelineEventImageBuilder>(eventType.Value.ToString());
             }
             catch
             {
-                ImageConverter = new DefaultEventImageConverter();
+                ImageConverter = new DefaultEventImageBuilder();
             }
         }
     }

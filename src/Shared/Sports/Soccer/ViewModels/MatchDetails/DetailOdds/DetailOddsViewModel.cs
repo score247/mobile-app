@@ -62,7 +62,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public bool IsRefreshing { get; set; }
 
-        public string HeaderTitle => string.Empty;
+        public static string HeaderTitle => string.Empty;
 
         public BetType SelectedBetType { get; private set; }
 
@@ -175,7 +175,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             HasData = odds?.BetTypeOddsList?.Any() == true;
 
             LoggingService
-                    ?.TrackEvent(
+                    ?.TrackEventAsync(
                     $"Odds - {matchId}",
                     $"{DateTime.Now} LoadOddsByBetTypeAsync - Selected BetType {SelectedBetType} - Has Data {HasData}");
 

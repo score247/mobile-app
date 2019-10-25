@@ -3,7 +3,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
 using LiveScore.Soccer;
 using LiveScore.Soccer.Converters;
-using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.Views.Templates;
 using NSubstitute;
@@ -32,9 +32,9 @@ namespace Soccer.Tests
             container.Received(1).RegisterSingleton<DataTemplate, MatchDataTemplate>("1");
             container.Received(1).RegisterSingleton<IHubService, SoccerHubService>("1");
             container.Received(1).RegisterSingleton<ISoccerMatchService, MatchService>();
-            container.Received(1).RegisterSingleton<ITimelineEventImageConverter, DefaultEventImageConverter>();
-            container.Received(1).RegisterSingleton<ITimelineEventImageConverter, ScoreChangeImageConverter>(EventType.ScoreChange.Value.ToString());
-            container.Received(1).RegisterSingleton<ITimelineEventImageConverter, PenaltyShootOutImageConverter>(EventType.PenaltyShootout.Value.ToString());
+            container.Received(1).RegisterSingleton<ITimelineEventImageBuilder, DefaultEventImageBuilder>();
+            container.Received(1).RegisterSingleton<ITimelineEventImageBuilder, ScoreChangeImageBuilder>(EventType.ScoreChange.Value.ToString());
+            container.Received(1).RegisterSingleton<ITimelineEventImageBuilder, PenaltyShootOutImageBuilder>(EventType.PenaltyShootout.Value.ToString());
         }
     }
 }

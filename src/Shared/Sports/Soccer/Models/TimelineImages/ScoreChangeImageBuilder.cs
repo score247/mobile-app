@@ -2,9 +2,9 @@
 using LiveScore.Soccer.Enumerations;
 using Images = LiveScore.Soccer.Enumerations.Images;
 
-namespace LiveScore.Soccer.Converters.TimelineImages
+namespace LiveScore.Soccer.Models.TimelineImages
 {
-    public class ScoreChangeImageConverter : ITimelineEventImageConverter
+    public class ScoreChangeImageBuilder : ITimelineEventImageBuilder
     {
         private static readonly IDictionary<string, string> GoalImages = new Dictionary<string, string>
         {

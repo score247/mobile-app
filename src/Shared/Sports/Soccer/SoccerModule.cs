@@ -2,7 +2,7 @@
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
 using LiveScore.Soccer.Converters;
-using LiveScore.Soccer.Converters.TimelineImages;
+using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
@@ -41,10 +41,10 @@ namespace LiveScore.Soccer
 
             containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
 
-            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, DefaultEventImageConverter>();
-            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, ScoreChangeImageConverter>(
+            containerRegistry.RegisterSingleton<ITimelineEventImageBuilder, DefaultEventImageBuilder>();
+            containerRegistry.RegisterSingleton<ITimelineEventImageBuilder, ScoreChangeImageBuilder>(
                 EventType.ScoreChange.Value.ToString());
-            containerRegistry.RegisterSingleton<ITimelineEventImageConverter, PenaltyShootOutImageConverter>(
+            containerRegistry.RegisterSingleton<ITimelineEventImageBuilder, PenaltyShootOutImageBuilder>(
                 EventType.PenaltyShootout.Value.ToString());
         }
     }

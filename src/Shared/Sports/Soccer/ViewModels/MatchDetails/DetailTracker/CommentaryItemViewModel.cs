@@ -1,9 +1,9 @@
 ﻿using System.Linq;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
-using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.TimelineImages;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
@@ -47,16 +47,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
         private void BuildImageSource()
         {
-            ITimelineEventImageConverter imageConverter;
+            ITimelineEventImageBuilder imageConverter;
 
             try
             {
                 imageConverter =
-                    dependencyResolver.Resolve<ITimelineEventImageConverter>(Commentary.TimelineType.Value.ToString());
+                    dependencyResolver.Resolve<ITimelineEventImageBuilder>(Commentary.TimelineType.Value.ToString());
             }
             catch
             {
-                imageConverter = new DefaultEventImageConverter();
+                imageConverter = new DefaultEventImageBuilder();
             }
 
             ImageSource = imageConverter.BuildImageSource(

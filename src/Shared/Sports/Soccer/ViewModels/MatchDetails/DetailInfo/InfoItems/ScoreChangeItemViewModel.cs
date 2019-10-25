@@ -1,9 +1,9 @@
 ﻿using LiveScore.Core;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Soccer.Converters.TimelineImages;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.TimelineImages;
 using Prism.Navigation;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
