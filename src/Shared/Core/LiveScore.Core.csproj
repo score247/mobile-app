@@ -53,6 +53,7 @@
         </Folder>
         <Folder Include="PubSubEvents\Odds\" />
         <Folder Include="Controls\TabStrip\EventArgs\" />
+        <Folder Include="Controls\CircleProgressBar\" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
