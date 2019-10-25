@@ -85,8 +85,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         [Time]
         public override async void OnResumeWhenNetworkOK()
         {
-            LoggingService
-                  .TrackEvent(
+            await LoggingService
+                  .TrackEventAsync(
                   $"Odds - {matchId}",
                   $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK");
 

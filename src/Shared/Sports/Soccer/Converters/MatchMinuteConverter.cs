@@ -13,30 +13,18 @@ namespace LiveScore.Soccer.Converters
     // TODO: Unit test will be written in Performance Enhancement branch
     public class MatchMinuteConverter : IMatchMinuteBuilder
     {
-        private static readonly ReadOnlyDictionary<MatchStatus, int> PeriodStartMinutes
-            = new ReadOnlyDictionary<MatchStatus, int>(
-                new Dictionary<MatchStatus, int>
-                {
-                    { MatchStatus.FirstHalf, 1 },
-                    { MatchStatus.SecondHalf, 46 },
-                    { MatchStatus.FirstHalfExtra, 91 },
-                    { MatchStatus.SecondHalfExtra, 106 }
-                });
-
-        private static readonly ReadOnlyDictionary<MatchStatus, int> PeriodEndMinutes
-            = new ReadOnlyDictionary<MatchStatus, int>(
-                new Dictionary<MatchStatus, int>
-                {
-                    { MatchStatus.FirstHalf, 45 },
-                    { MatchStatus.SecondHalf, 90 },
-                    { MatchStatus.FirstHalfExtra, 105 },
-                    { MatchStatus.SecondHalfExtra, 120 }
-                });
+        private static readonly ReadOnlyDictionary<MatchStatus, Tuple<byte, byte>> PeriodTimes
+          = new ReadOnlyDictionary<MatchStatus, Tuple<byte, byte>>(
+              new Dictionary<MatchStatus, Tuple<byte, byte>>
+              {
+                  [MatchStatus.FirstHalf] = new Tuple<byte, byte>(1, 45),
+                  [MatchStatus.SecondHalf] = new Tuple<byte, byte>(46, 90),
+                  [MatchStatus.FirstHalfExtra] = new Tuple<byte, byte>(91, 105),
+                  [MatchStatus.SecondHalfExtra] = new Tuple<byte, byte>(106, 120)
+              });
 
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
-
-        private SoccerMatch soccerMatch;
 
         public MatchMinuteConverter(ISettings settings, ILoggingService loggingService)
         {
@@ -44,21 +32,19 @@ namespace LiveScore.Soccer.Converters
             this.loggingService = loggingService;
         }
 
-        public string BuildMatchMinute(IMatch match) => BuildMatchMinute(match, DateTimeOffset.UtcNow);
+        // TODO: Remove casting
+        public string BuildMatchMinute(IMatch match) => BuildMatchMinute(match as SoccerMatch, DateTimeOffset.UtcNow);
 
-        internal string BuildMatchMinute(IMatch match, DateTimeOffset queryTime)
+        internal string BuildMatchMinute(SoccerMatch soccerMatch, DateTimeOffset queryTime)
         {
             try
             {
-                if (!(match is SoccerMatch) || match == null)
+                if (soccerMatch == null)
                 {
                     return string.Empty;
                 }
 
-                soccerMatch = match as SoccerMatch;
-
-                PeriodStartMinutes.TryGetValue(match.MatchStatus, out var periodStartMinute);
-                PeriodEndMinutes.TryGetValue(match.MatchStatus, out var periodEndMinute);
+                var (periodStartMinute, periodEndMinute) = PeriodTimes[soccerMatch.MatchStatus];
 
                 var periodStartTime = soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
                     ? soccerMatch.EventDate
@@ -67,9 +53,9 @@ namespace LiveScore.Soccer.Converters
                 // TODO: What if CurrentPeriodStartTime does not have data?
                 var matchMinute = (int)(periodStartMinute + (queryTime - periodStartTime).TotalMinutes);
 
-                if ((soccerMatch.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime() > 0)
+                if ((soccerMatch.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime(soccerMatch) > 0)
                 {
-                    return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute);
+                    return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute, soccerMatch);
                 }
 
                 if (matchMinute >= periodEndMinute)
@@ -92,13 +78,13 @@ namespace LiveScore.Soccer.Converters
             }
         }
 
-        private string BuildMinuteWithInjuryTime(int matchMinute, int periodEndMinute)
+        private string BuildMinuteWithInjuryTime(int matchMinute, int periodEndMinute, SoccerMatch soccerMatch)
         {
-            var annoucedInjuryTime = GetAnnouncedInjuryTime();
+            var annoucedInjuryTime = GetAnnouncedInjuryTime(soccerMatch);
 
             if (soccerMatch.InjuryTimeAnnounced > 0)
             {
-                UpdateAnnouncedInjuryTime(soccerMatch.InjuryTimeAnnounced);
+                UpdateAnnouncedInjuryTime(soccerMatch);
                 annoucedInjuryTime = soccerMatch.InjuryTimeAnnounced;
             }
 
@@ -113,19 +99,19 @@ namespace LiveScore.Soccer.Converters
             return $"{periodEndMinute}+{displayInjuryTime}'";
         }
 
-        private int GetAnnouncedInjuryTime()
+        private int GetAnnouncedInjuryTime(SoccerMatch soccerMatch)
         {
             // TODO: Should move InjuryTimeAnnouced to backend for storing?
-            var cachedInjuryTime = settings.Get(CacheKey);
+            var cachedInjuryTime = settings.Get(GetCacheKey(soccerMatch));
 
             return string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : int.Parse(cachedInjuryTime);
         }
 
-        public void UpdateAnnouncedInjuryTime(int injuryTime)
+        public void UpdateAnnouncedInjuryTime(SoccerMatch soccerMatch)
         {
-            settings.Set(CacheKey, injuryTime.ToString());
+            settings.Set(GetCacheKey(soccerMatch), soccerMatch.InjuryTimeAnnounced.ToString());
         }
 
-        private string CacheKey => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
+        private static string GetCacheKey(SoccerMatch soccerMatch) => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
     }
 }

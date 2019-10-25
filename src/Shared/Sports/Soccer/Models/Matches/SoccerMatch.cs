@@ -226,11 +226,6 @@ namespace LiveScore.Soccer.Models.Matches
             ModifiedTime = soccerMatch.ModifiedTime;
         }
 
-        //public void UpdateCurrentPeriodStartTime(DateTimeOffset currentPeriodStartTime)
-        //{
-        //    CurrentPeriodStartTime = currentPeriodStartTime;
-        //}
-
         public void UpdateResult(IMatchResult matchResult)
         {
             if (!(matchResult is MatchResult soccerMatchResult))
@@ -348,6 +343,8 @@ namespace LiveScore.Soccer.Models.Matches
             => (obj is SoccerMatch actualObj) && Id == actualObj.Id;
 
         public override int GetHashCode() => Id?.GetHashCode() ?? 0;
+
+       
     }
 
     /// <summary>

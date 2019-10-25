@@ -16,7 +16,7 @@ namespace Soccer.Tests.Converters
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
         private readonly MatchMinuteConverter matchMinuteConverter;
-        private readonly Fixture fixture;
+        private readonly Fixture Random;
 
         public MatchMinuteConverterTests()
         {
@@ -24,7 +24,7 @@ namespace Soccer.Tests.Converters
             loggingService = Substitute.For<ILoggingService>();
             matchMinuteConverter = new MatchMinuteConverter(settings, loggingService);
 
-            fixture = new Fixture();
+            Random = new Fixture();
         }
 
         [Fact]
@@ -39,32 +39,10 @@ namespace Soccer.Tests.Converters
         public void BuildMatchMinute_MatchSatusIsFirstHalf_ReturnMatchTimeMinute()
         {
             // Arrange
-            var matchResult = new MatchResult(Arg.Any<MatchStatus>(), MatchStatus.FirstHalf);
+            var matchResult = new MatchResult(Random.Create<MatchStatus>(), MatchStatus.FirstHalf);
             var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
             var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
-            var eventDate = fixture.Create<DateTime>();
-            var timeToViewMatch = eventDate.AddMinutes(expectedMatchMinuteToSee);
-            var match = new SoccerMatch(eventDate, matchResult);
-
-            // Act
-            var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);
-
-            // Assert
-            var result = actualMatchMinuteToDisplay.Equals($"{acceptableMinuteToSee}'", StringComparison.OrdinalIgnoreCase)
-                || actualMatchMinuteToDisplay.Equals($"{expectedMatchMinuteToSee}'", StringComparison.OrdinalIgnoreCase);
-
-            Assert.True(result);
-        }
-
-        [Fact]
-        public void BuildMatchMinute_MatchSatusIsSecondHalf_ReturnMatchTimeMinute()
-        {
-            // Arrange            
-            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), MatchStatus.SecondHalf);
-            var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
-            var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
-            var eventDate = fixture.Create<DateTime>();
-
+            var eventDate = Random.Create<DateTime>();
             var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee);
             var match = new SoccerMatch(eventDate, matchResult);
 

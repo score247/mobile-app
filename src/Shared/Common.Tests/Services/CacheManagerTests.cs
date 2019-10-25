@@ -13,7 +13,7 @@ namespace LiveScore.Common.Tests.Services
         private readonly ICacheService cacheService;
         private readonly ICacheManager cacheManager;
         private readonly ILoggingService loggingService;
-        private readonly Fixture Any;
+        private readonly Fixture Random;
         private readonly CacheItemOptions cacheItemOptions;
         private readonly string CacheKey;
 
@@ -22,10 +22,10 @@ namespace LiveScore.Common.Tests.Services
             loggingService = Substitute.For<ILoggingService>();
             cacheService = Substitute.For<ICacheService>();
             cacheManager = new CacheManager(cacheService, loggingService);
-            Any = new Fixture();
+            Random = new Fixture();
 
-            cacheItemOptions = Any.Create<CacheItemOptions>();
-            CacheKey = Any.Create<string>();
+            cacheItemOptions = Random.Create<CacheItemOptions>();
+            CacheKey = Random.Create<string>();
         }
 
         [Fact]
@@ -52,27 +52,28 @@ namespace LiveScore.Common.Tests.Services
 
             // Assert
             await factory.Received().Invoke();
+
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ForceFetchLatestDataIsTrue_AlwaysInvokeCachingSetAsync()
+        public async Task GetOrSetAsync_ForceFetchLatestDataIsTrue_AlwaysInvokeCachingSetAsyncWithValueGetFromFactory()
         {
             // Arrange
-            var value = Any.Create<int>();
-            Task<int> factory() => Task.FromResult(value);
+            var dataReturnFromFactory = Random.Create<int>();
+            Task<int> factory() => Task.FromResult(dataReturnFromFactory);
 
             // Act
             await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: true);
 
             // Assert
-            await cacheService.Received().SetAsync(CacheKey, value, cacheItemOptions);
+            await cacheService.Received().SetAsync(CacheKey, dataReturnFromFactory, cacheItemOptions);
         }
 
         [Fact]
-        public async Task GetOrSetAsync_ForceFetchLatestDataIsFalse_FanexServiceInvokesGetAsync()
+        public async Task GetOrSetAsync_ForceFetchLatestDataIsFalse_CacheServiceInvokesGetAsync()
         {
             // Arrange
-            Task<int> factory() => Task.FromResult(Any.Create<int>());
+            Task<int> factory() => Task.FromResult(Random.Create<int>());
 
             // Act
             await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
@@ -82,12 +83,12 @@ namespace LiveScore.Common.Tests.Services
         }
 
         [Fact]
-        public async Task GetOrSetAsync_DataFromCacheIsNull_InvokeFactory()
+        public async Task GetOrSetAsync_DataGetFromCacheIsNull_InvokeFactory()
         {
             // Arrange
             var factory = Substitute.For<Func<Task<object>>>();
-            object dataFromCache = null;
-            cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(dataFromCache));
+            object cacheData = null;
+            cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(cacheData));
 
             // Act
             await cacheManager.GetOrSetAsync(CacheKey, factory, cacheItemOptions, forceFetchLatestData: false);
@@ -97,10 +98,10 @@ namespace LiveScore.Common.Tests.Services
         }
 
         [Fact]
-        public async Task GetOrSetAsync_DataIsInCache_ReturnTheData()
+        public async Task GetOrSetAsync_DataIsInCache_ReturnDataGetFromCache()
         {
             // Arrange
-            var value = Any.Create<object>();
+            var value = Random.Create<object>();
             var factory = Substitute.For<Func<Task<object>>>();
             cacheService.GetAsync<object>(CacheKey).Returns(Task.FromResult(value));
 
