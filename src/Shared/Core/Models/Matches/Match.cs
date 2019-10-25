@@ -79,6 +79,10 @@ namespace LiveScore.Core.Models.Matches
         /// </summary>
         bool IsInLiveAndNotExtraTime { get; }
 
+        string LeagueSeasonId { get; }
+
+        string WinnerId { get; }
+
         DateTimeOffset ModifiedTime { get; }
 
         bool IsInternationalLeague { get; }

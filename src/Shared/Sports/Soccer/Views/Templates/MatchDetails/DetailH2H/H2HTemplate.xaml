@@ -34,14 +34,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource SubTab}" Text="HOME" Command="{Binding OnTeamResultTapped}" CommandParameter="home" />
+                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource SubTab}" Text="{Binding HomeTeamName}" Command="{Binding OnTeamResultTapped}" CommandParameter="home" />
                 <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource SubTab}" BackgroundColor="{StaticResource ActiveSubTabBgColor}" TextColor="{StaticResource ActiveSubTabColor}" Text="HEAD TO HEAD" Command="{Binding OnHeadToHeadTapped}" />
-                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubTab}" Text="AWAY" Command="{Binding OnTeamResultTapped}" CommandParameter="away" />
+                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubTab}" Text="{Binding AwayTeamName}" Command="{Binding OnTeamResultTapped}" CommandParameter="away" />
             </Grid>
         </Frame>
 
         <Frame BorderColor="#3A3942" Margin="8,0" CornerRadius="0" IsVisible="{Binding VisibleHomeResults}">
-            <StackLayout>
+            
+            <StackLayout>                
                 <!-- League -->
                 <Grid Style="{StaticResource LeagueBox}">
                     <Grid.RowDefinitions>
@@ -138,49 +139,52 @@
             </StackLayout>
         </Frame>
 
-        <Frame BorderColor="#3A3942" Margin="8,0" CornerRadius="0" IsVisible="{Binding VisibleHeadToHead}">
-            <StackLayout>
-                <tabStrip:TabITemListView
+        <Frame
+            BorderColor="#3A3942"
+            Margin="8,0"
+            CornerRadius="0"
+            IsVisible="{Binding VisibleHeadToHead}">
+            <StackLayout Orientation="Vertical"
+                         IsVisible="{Binding HasData}">
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayHomeWin}"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource Team}" Text="{Binding HomeTeamName}"></Label>
+
+                    <Label Grid.Row="0" Grid.Column="1"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayDraw}"></Label>
+                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Team}" Text="Draw"></Label>
+
+                    <Label Grid.Row="0" Grid.Column="2"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayAwayWin}"></Label>
+                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Team}" Text="{Binding AwayTeamName}"></Label>
+                    
+                </Grid>
+
+                <ListView
                     x:Name="H2HMatches"
                     Footer=""
-                                                           GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-                                                           HasUnevenRows="true"
-                                                           IsGroupingEnabled="True"
-                                                           IsPullToRefreshEnabled="true"
-                                                           IsRefreshing="{Binding IsRefreshing}"                                                           
-                                                           ItemTemplate="{StaticResource MatchItemTemplate}"
-                                                           ItemsSource="{Binding Matches}"                                                           
-                                                           RefreshCommand="{Binding RefreshCommand}"
-                                                           RefreshControlColor="White"
-                                                           SelectionMode="None"
-                                                           SeparatorVisibility="None"
-                                                           Style="{StaticResource ListViewHasBackground}"                                                           
-                                                           VerticalOptions="FillAndExpand"/>
+                    GroupDisplayBinding="{Binding Key}"
+                    GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                    HasUnevenRows="true"
+                    IsGroupingEnabled="True"
+                    IsPullToRefreshEnabled="true"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    ItemTemplate="{StaticResource MatchItemTemplate}"
+                    ItemsSource="{Binding Matches}"
+                    RefreshCommand="{Binding RefreshCommand}"
+                    RefreshControlColor="White"
+                    SelectionMode="None"
+                    SeparatorVisibility="None"
+                    Style="{StaticResource ListViewHasBackground}" VerticalOptions="FillAndExpand" />
 
-                <!--<customListView:CustomListView x:Name="LeagueTable"
-                                                           AutomationId="LeagueTableId"
-                                                           AutomationProperties.IsInAccessibleTree="False"
-                                                           Footer=""
-                                                           GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
-                                                           HasUnevenRows="true"
-                                                           IsGroupingEnabled="True"
-                                                           IsPullToRefreshEnabled="true"
-                                                           IsRefreshing="{Binding IsRefreshing}"
-                                                           skeleton:Skeleton.IsParent="True"
-                                                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
-                                                           skeleton:Skeleton.Animation="Fade"
-                                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                           ItemsSource="{Binding MatchItemsSource}"
-                                                           LoadMoreCommand="{Binding LoadMoreCommand}"
-                                                           RefreshCommand="{Binding RefreshCommand}"
-                                                           RefreshControlColor="White"
-                                                           SelectionMode="None"
-                                                           SeparatorVisibility="None"
-                                                           Style="{StaticResource ListViewHasBackground}"
-                                                           TriggerLoadMoreIndex="4"
-                                                           VerticalOptions="FillAndExpand">-->
             </StackLayout>
         </Frame>
 

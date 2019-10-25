@@ -21,5 +21,8 @@ namespace LiveScore.Common.Extensions
 
         public static string ToFullLocalDateAndTime(this DateTimeOffset value)
            => value.LocalDateTime.ToString("yyyy-dd-MM HH:mm:ss");
+
+        public static string ToLocalYear(this DateTimeOffset value)
+           => value.LocalDateTime.Year.ToString();
     }
 }
