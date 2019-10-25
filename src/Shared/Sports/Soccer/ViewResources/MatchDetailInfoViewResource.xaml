@@ -43,8 +43,8 @@
                 Value="Center" />
         <Setter Property="VerticalOptions"
                 Value="Center" />
-        <Setter Property="HeightRequest"
-                Value="11" />
+        <Setter Property="WidthRequest"
+                Value="16" />
     </Style>
 
     <Style x:Key="MatchInfoHalfTimeText"
@@ -105,6 +105,13 @@
     </Style>
 
     <Style x:Key="MatchInfoImagePlayerOut"
+           BasedOn="{StaticResource MatchInfoImage}"
+           TargetType="{x:Type ffImageLoading:CachedImage}">
+        <Setter Property="Margin"
+                Value="0,2,0,0" />
+    </Style>
+
+    <Style x:Key="MatchInfoImageAssistedPlayer"
            BasedOn="{StaticResource MatchInfoImage}"
            TargetType="{x:Type ffImageLoading:CachedImage}">
         <Setter Property="Margin"

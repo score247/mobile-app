@@ -86,6 +86,8 @@
                 Value="Center" />
         <Setter Property="VerticalOptions"
                 Value="Center" />
+        <Setter Property="WidthRequest"
+                Value="16" />
     </Style>
 
     <Style x:Key="MatchTrackerCommentariesText"

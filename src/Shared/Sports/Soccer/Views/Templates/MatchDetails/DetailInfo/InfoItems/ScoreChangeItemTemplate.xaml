@@ -76,7 +76,7 @@
                                                    IsVisible="{Binding IsVisibleHomeAssist}"
                                                    Source="{Binding GoalAssistImageSource}"
                                                    HeightRequest="12"
-                                                   Style="{StaticResource MatchInfoImage}" />
+                                                   Style="{StaticResource MatchInfoImageAssistedPlayer}" />
                 </Grid>
                 <Label Grid.Row="0"
                        Grid.Column="3"
@@ -116,7 +116,7 @@
                                                    IsVisible="{Binding IsVisibleAwayAssist}"
                                                    Source="{Binding GoalAssistImageSource}"
                                                    HeightRequest="12"
-                                                   Style="{StaticResource MatchInfoImage}" />
+                                                   Style="{StaticResource MatchInfoImageAssistedPlayer}" />
                     <Label Grid.Row="1"
                            Grid.Column="1"
                            AutomationId="{Binding ItemAutomationId, StringFormat='AwayAssistPlayerName-{0}'}"
