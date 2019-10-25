@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -42,7 +43,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             AwayTeamName = match.AwayTeamName;
 
             VisibleHeadToHead = true;
-            HasData = false;
+            HasData = true;
 
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
@@ -110,26 +111,34 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private async Task LoadHeadToHeadAsync(bool forceFetchLatestData = false)
         {
-            var headToHeads = await teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
-
-            if (headToHeads == null)
+            try
             {
-                return;
+                var headToHeads = await teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
+
+                if (headToHeads == null)
+                {
+                    return;
+                }
+
+                HasData = headToHeads != null && headToHeads.Any();
+
+                if (HasData)
+                {
+                    Debug.WriteLine($"H2H HasData {HasData}");
+                    Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+
+                    Matches = new ObservableCollection<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>>(GroupMatches(headToHeads));
+                }
+
+                VisibleHeadToHead = true;
+
+                VisibleHomeResults = false;
+                VisibleAwayResults = false;
             }
-
-            HasData = headToHeads != null && headToHeads.Any();
-
-            if (HasData)
+            catch (Exception ex)
             {
-                Stats = GenerateStatsViewModel(headToHeads.Where(match => match.MatchStatus.IsClosed));
-
-                Matches = new ObservableCollection<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>>(GroupMatches(headToHeads));
-            }
-
-            VisibleHeadToHead = true;
-
-            VisibleHomeResults = false;
-            VisibleAwayResults = false;
+                await LoggingService.LogExceptionAsync(ex);
+            }            
         }
 
         private IEnumerable<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>> GroupMatches(IEnumerable<IMatch> headToHeads)
@@ -146,14 +155,15 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                 .GroupBy(item => new GroupHeaderMatchViewModel(item.Match, buildFlagUrlFunc));
         }
 
-        private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> matches)
+        private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
         {
-            var closedMatches = matches.Where(match => match.MatchStatus.IsClosed);
-
             HasStats = closedMatches != null && closedMatches.Any();
 
             return HasStats
-                ? GenerateStatsViewModel(closedMatches)
+                ? new H2HStatisticViewModel(
+                    closedMatches.Count(x => x.WinnerId == match.HomeTeamId),
+                    closedMatches.Count(x => x.WinnerId == match.AwayTeamId),
+                    closedMatches.Count())
                 : null;
         }
 

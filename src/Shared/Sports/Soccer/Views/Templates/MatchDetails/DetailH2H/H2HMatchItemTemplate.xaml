@@ -30,8 +30,17 @@
                 <StackLayout Grid.Row="1" Grid.Column="1" Style="{StaticResource MatchAwayTeam}">
                     <Label AutomationId="AwayTeamName" Style="{StaticResource Team}" Text="{Binding Match.AwayTeamName, Mode=OneTime}" />
                 </StackLayout>
-                <Label Grid.Row="0" Grid.Column="2" AutomationId="HomeScore" Style="{StaticResource HomeScore}" Text="{Binding Match.HomeScore, Mode=OneTime}" />
-                <Label Grid.Row="1" Grid.Column="2" AutomationId="AwayScore" Style="{StaticResource AwayScore}" Text="{Binding Match.AwayScore, Mode=OneTime}" />
+                <Label Grid.Row="0" Grid.Column="2"
+                       AutomationId="HomeScore"
+                       Style="{StaticResource HomeScore}"
+                       Text="{Binding Match.HomeScore, Mode=OneTime}"
+                       IsVisible="{Binding Match.EventStatus.ShowScore}"/>
+
+                <Label Grid.Row="1" Grid.Column="2"
+                       AutomationId="AwayScore"
+                       Style="{StaticResource AwayScore}"
+                       Text="{Binding Match.AwayScore, Mode=OneTime}"
+                       IsVisible="{Binding Match.EventStatus.ShowScore}"/>
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>

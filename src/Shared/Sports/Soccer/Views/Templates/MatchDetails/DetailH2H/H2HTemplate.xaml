@@ -173,11 +173,12 @@
             <StackLayout Orientation="Vertical">
 
                 <StackLayout BackgroundColor="Black">
-                    <Label Style="{StaticResource NoInfo}"
-                    Text="{languageResources:Translate NoData}"
-                    AutomationId="NoDataLabel" />
+                    <Label
+                        IsVisible="{Binding NoData}"
+                        Style="{StaticResource NoInfo}"
+                        Text="{languageResources:Translate NoData}"
+                        AutomationId="NoDataLabel" />
                 </StackLayout>
-               
 
                 <Grid Style="{StaticResource MatchGeneralInfoTeams}" IsVisible="{Binding HasStats}" >
                     <Grid.RowDefinitions>
@@ -217,7 +218,9 @@
                     RefreshControlColor="White"
                     SelectionMode="None"
                     SeparatorVisibility="None"
-                    Style="{StaticResource ListViewHasBackground}" VerticalOptions="FillAndExpand" />
+                    Style="{StaticResource ListViewHasBackground}"
+                    VerticalOptions="FillAndExpand"
+                    MinimumWidthRequest="1000"/>
 
             </StackLayout>
         </Frame>
