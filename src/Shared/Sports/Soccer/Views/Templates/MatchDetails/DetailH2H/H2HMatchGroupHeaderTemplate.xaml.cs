@@ -2,9 +2,9 @@
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H
 {
-    public partial class H2HMatchHeaderTemplate : DataTemplate
+    public partial class H2HMatchGroupHeaderTemplate : DataTemplate
     {
-        public H2HMatchHeaderTemplate()
+        public H2HMatchGroupHeaderTemplate()
         {
             InitializeComponent();
         }

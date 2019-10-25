@@ -9,6 +9,8 @@
     mc:Ignorable="d" x:Class="LiveScore.Soccer.Views.Templates.DetailH2H.H2HTemplate"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
     xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+    xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H;assembly=LiveScore.Soccer">
     <StackLayout>
         <StackLayout.Resources>
@@ -19,8 +21,10 @@
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailLinesUpViewResource />
                 </ResourceDictionary.MergedDictionaries>
-                <templates:H2HMatchHeaderTemplate x:Key="MatchHeaderTemplate" />
+                <templates:H2HMatchGroupHeaderTemplate x:Key="MatchGroupHeaderTemplate" />
                 <templates:H2HMatchItemTemplate x:Key="MatchItemTemplate" />
+                <coreConverters:SelectedTabColorConverter x:Key="SelectedTabColorConverter" />
+                <coreConverters:SelectedTabBackgroundColorConverter x:Key="SelectedTabBgColorConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
@@ -34,9 +38,31 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Style="{StaticResource SubTab}" Text="{Binding HomeTeamName}" Command="{Binding OnTeamResultTapped}" CommandParameter="home" />
-                <Button Grid.Row="0" Grid.Column="1" Style="{StaticResource SubTab}" BackgroundColor="{StaticResource ActiveSubTabBgColor}" TextColor="{StaticResource ActiveSubTabColor}" Text="HEAD TO HEAD" Command="{Binding OnHeadToHeadTapped}" />
-                <Button Grid.Row="0" Grid.Column="2" Style="{StaticResource SubTab}" Text="{Binding AwayTeamName}" Command="{Binding OnTeamResultTapped}" CommandParameter="away" />
+                <Button
+                    Grid.Row="0" Grid.Column="0"
+                    Style="{StaticResource SubTab}"
+                    Text="{Binding HomeTeamName}"
+                    BackgroundColor="{Binding VisibleHomeResults, Converter={StaticResource SelectedTabBgColorConverter}}"
+                    TextColor="{Binding VisibleHomeResults, Converter={StaticResource SelectedTabColorConverter}}" 
+                    Command="{Binding OnTeamResultTapped}"
+                    CommandParameter="home" />
+
+                <Button
+                    Grid.Row="0" Grid.Column="1"
+                    Style="{StaticResource SubTab}"
+                    BackgroundColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabBgColorConverter}}"
+                    TextColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabColorConverter}}" 
+                    Text="{languageResources:Translate HeadToHead}"
+                    Command="{Binding OnHeadToHeadTapped}" />
+
+                <Button
+                    Grid.Row="0" Grid.Column="2"
+                    Style="{StaticResource SubTab}"
+                    BackgroundColor="{Binding VisibleAwayResults, Converter={StaticResource SelectedTabBgColorConverter}}"
+                    TextColor="{Binding VisibleAwayResults, Converter={StaticResource SelectedTabColorConverter}}" 
+                    Text="{Binding AwayTeamName}"
+                    Command="{Binding OnTeamResultTapped}"
+                    CommandParameter="away" />
             </Grid>
         </Frame>
 
@@ -144,9 +170,16 @@
             Margin="8,0"
             CornerRadius="0"
             IsVisible="{Binding VisibleHeadToHead}">
-            <StackLayout Orientation="Vertical"
-                         IsVisible="{Binding HasData}">
-                <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+            <StackLayout Orientation="Vertical">
+
+                <StackLayout BackgroundColor="Black">
+                    <Label Style="{StaticResource NoInfo}"
+                    Text="{languageResources:Translate NoData}"
+                    AutomationId="NoDataLabel" />
+                </StackLayout>
+               
+
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}" IsVisible="{Binding HasStats}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60" />
                         <RowDefinition Height="20" />
@@ -169,10 +202,11 @@
                 </Grid>
 
                 <ListView
+                    IsVisible="{Binding HasData}"
                     x:Name="H2HMatches"
                     Footer=""
                     GroupDisplayBinding="{Binding Key}"
-                    GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                    GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                     HasUnevenRows="true"
                     IsGroupingEnabled="True"
                     IsPullToRefreshEnabled="true"
