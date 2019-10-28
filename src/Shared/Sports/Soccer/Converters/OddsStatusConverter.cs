@@ -1,40 +1,32 @@
 ﻿using System;
 using System.Globalization;
+using LiveScore.Common.Converters;
 using LiveScore.Core.Enumerations;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Converters
 {
-    public class OddsStatusConverter : IValueConverter
+    public class OddsStatusConverter : ValueConverter<string, Color>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public override Color Convert(string value, Type targetType, object parameter, CultureInfo culture)
         {
-            var color = (Color)Application.Current.Resources["PrimaryTextColor"];
+            Color color;
 
-            if (value != null)
+            if (value.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                var valueAsString = value.ToString();
-
-                if (valueAsString.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    color = (Color)Application.Current.Resources["UpLiveOddColor"];
-                }
-                else if (valueAsString.Equals(OddsTrend.Down.Value.ToString(), StringComparison.OrdinalIgnoreCase))
-                {
-                    color = (Color)Application.Current.Resources["DownLiveOddColor"];
-                }
-                else
-                {
-                    color = (Color)Application.Current.Resources["PrimaryTextColor"];
-                }
+                color = (Color)Application.Current.Resources["UpLiveOddColor"];
+            }
+            else if (value.Equals(OddsTrend.Down.Value.ToString(), StringComparison.OrdinalIgnoreCase))
+            {
+                color = (Color)Application.Current.Resources["DownLiveOddColor"];
+            }
+            else
+            {
+                color = (Color)Application.Current.Resources["PrimaryTextColor"];
             }
 
-            return color;
-        }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            return value?.ToString();
+            return color;
         }
     }
 }

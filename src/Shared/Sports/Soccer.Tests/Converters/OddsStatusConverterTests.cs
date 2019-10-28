@@ -31,7 +31,7 @@
             var converter = new OddsStatusConverter();
 
             // Act
-            var actual = converter.Convert(OddsTrend.Up.Value, null, null, null);
+            var actual = converter.Convert(OddsTrend.Up.Value.ToString(), null, null, null);
 
             // Assert
             Assert.Equal(Color.FromHex("#FF222C"), actual);
@@ -44,7 +44,7 @@
             var converter = new OddsStatusConverter();
 
             // Act
-            var actual = converter.Convert(OddsTrend.Down.Value, null, null, null);
+            var actual = converter.Convert(OddsTrend.Down.Value.ToString(), null, null, null);
 
             // Assert
             Assert.Equal(Color.FromHex("#66FF59"), actual);
