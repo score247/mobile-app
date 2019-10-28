@@ -139,7 +139,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                         Debug.WriteLine($"H2H HasData {HasData}");
                         Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
 
-                        Matches = new ObservableCollection<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>>(GroupMatches(headToHeads));
+                        Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                     }
                 }
                 else
