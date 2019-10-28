@@ -8,7 +8,6 @@
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
     mc:Ignorable="d" x:Class="LiveScore.Soccer.Views.Templates.DetailH2H.H2HTemplate"
     xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-    xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
     xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
     xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
@@ -50,26 +51,24 @@ namespace LiveScore.iOS.Renderers
 
             double radius = CreatePathAndReturnRadius();
 
-            if (indicatorLabelSize.Height > 0 && indicatorLabelSize.Width > 0)
-            {
-                double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-                double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
-                double ratio = 1;
-                if (heightRatio < widthRatio)
-                    ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-                else
-                    ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
+            double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
+            double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
+            double ratio = 1;
+            if (heightRatio < widthRatio)
+                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
+            else
+                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
 
-                indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
-                indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
-                indicatorLabel.InvalidateIntrinsicContentSize();
-                indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
-                indicatorLabel.Text = Element.Text?.ToString();
+            indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
+            indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
+            indicatorLabel.InvalidateIntrinsicContentSize();
+            indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
+            indicatorLabel.Text = Element.Text?.ToString();
 
-                indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
-                this.AddSubview(indicatorLabel);
-                animate();
-            }
+            indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
+            this.AddSubview(indicatorLabel);
+            animate();
+
         }
 
         private double CalculateValue()
@@ -88,7 +87,7 @@ namespace LiveScore.iOS.Renderers
             indicatorLabel = new UILabel();
             indicatorLabel.AdjustsFontSizeToFitWidth = true;
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
-            indicatorLabel.Text = Element.Text?.ToString();
+            indicatorLabel.Text = string.IsNullOrWhiteSpace(Element.Text)? " " : Element.Text;
             indicatorLabel.TextColor = Element.TextColor.ToUIColor();
             indicatorLabel.TextAlignment = UITextAlignment.Center;
             indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
