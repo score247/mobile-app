@@ -32,7 +32,10 @@
             </ResourceDictionary>
         </StackLayout.Resources>
 
-        <Frame Grid.Row="0" Grid.Column="0" Margin="8" Style="{StaticResource SubTabContainer}">
+        <Frame Grid.Row="0"
+               Grid.Column="0"
+               Margin="8"
+               Style="{StaticResource SubTabContainer}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -51,13 +54,13 @@
                     Command="{Binding OnTeamResultTapped}"
                     CommandParameter="home" />
 
-                <Button
-                    Grid.Row="0" Grid.Column="1"
-                    Style="{StaticResource SubTab}"
-                    BackgroundColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabBgColorConverter}}"
-                    TextColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabColorConverter}}" 
-                    Text="{languageResources:Translate HeadToHead}"
-                    Command="{Binding OnHeadToHeadTapped}" />
+                <Button Grid.Row="0"
+                        Grid.Column="1"
+                        Style="{StaticResource SubTab}"
+                        BackgroundColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabBgColorConverter}}"
+                        TextColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabColorConverter}}"
+                        Text="{languageResources:Translate HeadToHead}"
+                        Command="{Binding OnHeadToHeadTapped}" />
 
                 <Button
                     Grid.Row="0" Grid.Column="2"
@@ -297,35 +300,29 @@
             <StackLayout Orientation="Vertical">
 
                 <StackLayout BackgroundColor="Black">
-                    <Label
-                        IsVisible="{Binding NoData}"
-                        Style="{StaticResource NoInfo}"
-                        Text="{languageResources:Translate NoData}"
-                        AutomationId="NoDataLabel" />
+                    <Label IsVisible="{Binding NoData}"
+                           Style="{StaticResource NoInfo}"
+                           Text="{languageResources:Translate NoData}"
+                           AutomationId="NoDataLabel" />
                 </StackLayout>
 
-                <ListView                    
-                    IsVisible="{Binding HasData}"
-                    x:Name="H2HMatches"
-                    Footer=""
-                    Header="{Binding .}"
-                    HeaderTemplate="{StaticResource HeaderTemplate}"
-                    GroupDisplayBinding="{Binding Key}"
-                    GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                    HasUnevenRows="true"
-                    IsGroupingEnabled="True"
-                    IsPullToRefreshEnabled="true"
-                    IsRefreshing="{Binding IsRefreshing}"
-                    ItemTemplate="{StaticResource MatchItemTemplate}"
-                    ItemsSource="{Binding Matches}"
-                    RefreshCommand="{Binding RefreshCommand}"
-                    RefreshControlColor="White"
-                    SelectionMode="None"
-                    SeparatorVisibility="None"
-                    Style="{StaticResource ListViewHasBackground}"
-                    VerticalOptions="FillAndExpand"
-                    MinimumWidthRequest="1000"/>
-
+                <CollectionView IsVisible="{Binding HasData}"
+                                x:Name="H2HMatches"
+                                IsGrouped="True"
+                                GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                                ItemTemplate="{StaticResource MatchItemTemplate}"
+                                ItemsSource="{Binding Matches}"
+                                Header="{Binding .}"
+                                HeaderTemplate="{StaticResource HeaderTemplate}"
+                                Style="{StaticResource ListViewHasBackground}"
+                                VerticalOptions="FillAndExpand"
+                                MinimumWidthRequest="1000">
+                    <CollectionView.GroupFooterTemplate>
+                        <DataTemplate>
+                            <StackLayout></StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupFooterTemplate>
+                </CollectionView>
             </StackLayout>
         </Frame>
 

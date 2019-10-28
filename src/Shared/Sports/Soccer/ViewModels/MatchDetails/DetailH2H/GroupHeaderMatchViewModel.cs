@@ -1,12 +1,28 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using LiveScore.Core.Models.Matches;
 using MvvmHelpers;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 {
+    public class H2HMatchGroupViewModel : List<SummaryMatchViewModel>
+    {
+        public H2HMatchGroupViewModel(IEnumerable<SummaryMatchViewModel> matches, Func<string, string> buildFlagUrl) : base(matches)
+        {
+            var match = this.FirstOrDefault();
+            LeagueName = match?.Match.LeagueGroupName;
+            CountryFlag = buildFlagUrl(match?.Match.CountryCode);
+        }
+
+        public string LeagueName { get; }
+
+        public string CountryFlag { get; }
+    }
+
     public class GroupHeaderMatchViewModel : BaseViewModel
     {
-        public GroupHeaderMatchViewModel(IMatch match, Func<string, string> buildFlagUrl)
+        public GroupHeaderMatchViewModel(IMatch match)
         {
             if (match == null)
             {
@@ -16,11 +32,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 
             LeagueId = match.LeagueId;
             LeagueName = match.LeagueGroupName;
-            CountryFlag = buildFlagUrl(match.CountryCode);
-            CountryCode = match.CountryCode;
-            LeagueOrder = match.LeagueOrder;
             LeagueSeasonId = match.LeagueSeasonId;
-            
+
             Match = match;
         }
 
@@ -29,12 +42,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
         public string LeagueId { get; }
 
         public string LeagueName { get; }
-
-        public string CountryCode { get; }
-
-        public string CountryFlag { get; }
-
-        public int LeagueOrder { get; }
 
         public string LeagueSeasonId { get; }
 

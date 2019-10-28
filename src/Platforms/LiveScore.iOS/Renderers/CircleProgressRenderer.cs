@@ -7,18 +7,19 @@ using UIKit;
 using Xamarin.Forms.Platform.iOS;
 
 [assembly: Xamarin.Forms.ExportRenderer(typeof(CircularProgress), typeof(LiveScore.iOS.Renderers.CircleProgressRenderer))]
+
 namespace LiveScore.iOS.Renderers
 {
     public class CircleProgressRenderer : VisualElementRenderer<CircularProgress>
     {
-        CAShapeLayer backgroundCircle;
-        CAShapeLayer indicatorCircle;
-        UILabel indicatorLabel;
-        CGSize indicatorLabelSize;
-        int indicatorFontSize;
+        private CAShapeLayer backgroundCircle;
+        private CAShapeLayer indicatorCircle;
+        private UILabel indicatorLabel;
+        private CGSize indicatorLabelSize;
+        private int indicatorFontSize;
 
-        double startAngle = 1.5 * Math.PI;
-    
+        private double startAngle = 1.5 * Math.PI;
+
         public static void InitRender()
         {
         }
@@ -30,7 +31,7 @@ namespace LiveScore.iOS.Renderers
             if (Element == null)
             {
                 return;
-            }                
+            }
 
             indicatorFontSize = Element.TextSize;
 
@@ -49,23 +50,26 @@ namespace LiveScore.iOS.Renderers
 
             double radius = CreatePathAndReturnRadius();
 
-            double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-            double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
-            double ratio = 1;
-            if (heightRatio < widthRatio)
-                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-            else
-                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
+            if (indicatorLabelSize.Height > 0 && indicatorLabelSize.Width > 0)
+            {
+                double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
+                double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
+                double ratio = 1;
+                if (heightRatio < widthRatio)
+                    ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
+                else
+                    ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
 
-            indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
-            indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
-            indicatorLabel.InvalidateIntrinsicContentSize();
-            indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
-            indicatorLabel.Text = Element.Text?.ToString();
+                indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
+                indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
+                indicatorLabel.InvalidateIntrinsicContentSize();
+                indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
+                indicatorLabel.Text = Element.Text?.ToString();
 
-            indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
-            this.AddSubview(indicatorLabel);
-            animate();
+                indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
+                this.AddSubview(indicatorLabel);
+                animate();
+            }
         }
 
         private double CalculateValue()

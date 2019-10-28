@@ -38,7 +38,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.H2H)
         {
             this.match = match;
-            InitData();            
+            InitData();
 
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
@@ -73,7 +73,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public ObservableCollection<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>> Matches { get; set; }
+        public ObservableCollection<H2HMatchGroupViewModel> Matches { get; set; }
 
         private void InitData()
         {
@@ -105,7 +105,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
             await LoadHeadToHeadAsync(forceFetchLatestData: IsRefreshing);
 
-            IsRefreshing = false; 
+            IsRefreshing = false;
         }
 
         private void LoadTeamResult(string teamIdentifier)
@@ -155,21 +155,22 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             catch (Exception ex)
             {
                 await LoggingService.LogExceptionAsync(ex);
-            }            
+            }
         }
 
-        private IEnumerable<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>> GroupMatches(IEnumerable<IMatch> headToHeads)
+        private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
         {
-            var matchItemViewModels = headToHeads
-                                .OrderByDescending(match => match.EventDate)
-                                .Select(match => new SummaryMatchViewModel(
-                                    match,
-                                    matchStatusBuilder,
-                                    matchMinuteBuilder
-                                ));
+            var matchGroups = headToHeads
+                .OrderByDescending(match => match.EventDate)
+                .Select(match => new SummaryMatchViewModel(
+                    match,
+                    matchStatusBuilder,
+                    matchMinuteBuilder
+                ))
+                .GroupBy(item => new GroupHeaderMatchViewModel(item.Match));
 
-            return matchItemViewModels
-                .GroupBy(item => new GroupHeaderMatchViewModel(item.Match, buildFlagUrlFunc));
+            return
+                matchGroups.Select(g => new H2HMatchGroupViewModel(g.ToList(), buildFlagUrlFunc));
         }
 
         private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
@@ -183,6 +184,5 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                     closedMatches.Count())
                 : null;
         }
-
     }
 }
