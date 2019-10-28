@@ -36,12 +36,16 @@
                   Header="{Binding MatchLineups}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
-                    <StackLayout>
-                        <Label Text="{Binding Home.Name}" />
-                        <Label Text="{Binding Home.FormationFomatted}" />
-                        <Label Text="{Binding Away.Name}" />
-                        <Label Text="{Binding Away.FormationFomatted}" />
+                    <StackLayout BackgroundColor="#272830">
+                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween" >
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.Name}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.FormationFomatted}" />
+                        </FlexLayout>
                         <WebView HeightRequest="560" Source="{Binding LineupsPitchView}" />
+                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.Name}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.FormationFomatted}" />
+                        </FlexLayout>
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>
