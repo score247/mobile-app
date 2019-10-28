@@ -390,4 +390,10 @@
   <data name="HeadToHead" xml:space="preserve">
     <value>Head To Head</value>
   </data>
+  <data name="SubstitutePlayers" xml:space="preserve">
+    <value>SUBSTITUTE PLAYERS</value>
+  </data>
+  <data name="Coaches" xml:space="preserve">
+    <value>COACHES</value>
+  </data>
 </root>

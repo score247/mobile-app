@@ -220,7 +220,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 [MatchDetailFunction.Odds] = new DetailOddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
                 [MatchDetailFunction.Info] = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()),
                 [MatchDetailFunction.H2H] = new DetailH2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
-                [MatchDetailFunction.Lineups] = new DetailLineupsViewModel(NavigationService, DependencyResolver, new LinesUpTemplate()),
+                [MatchDetailFunction.Lineups] = new DetailLineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LinesUpTemplate()),
                 [MatchDetailFunction.Social] = new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
                 [MatchDetailFunction.Stats] = new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),
                 [MatchDetailFunction.Table] = new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()),

@@ -4,11 +4,15 @@ namespace LiveScore.Core.Models.Teams
 {
     public interface IPlayer
     {
-        string Type { get; }
+        string Id { get; set; }
+
+        string Name { get; set; }
+
+        PlayerType Type { get; }
 
         int JerseyNumber { get; }
 
-        string Position { get; }
+        Position Position { get; }
 
         int Order { get; }
     }
@@ -23,15 +27,18 @@ namespace LiveScore.Core.Models.Teams
         public string Name { get; set; }
 
         [Key(2)]
-        public string Type { get; set; }
+        public PlayerType Type { get; }
 
         [Key(3)]
         public int JerseyNumber { get; set; }
 
         [Key(4)]
-        public string Position { get; set; }
+        public Position Position { get; }
 
         [Key(5)]
         public int Order { get; set; }
+
+        [IgnoreMember]
+        public string JersryWithName => $"{JerseyNumber}. {Name}";
     }
 }

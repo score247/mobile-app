@@ -22,6 +22,8 @@ namespace LiveScore.Soccer.Services
         Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, bool forceFetchLatestData = false);
 
         Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, bool forceFetchLatestData = false);
+
+        Task<MatchLineups> GetMatchLineups(string matchId, Language language, bool forceFetchLatestData = false);
     }
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
@@ -171,6 +173,27 @@ namespace LiveScore.Soccer.Services
                 HandleException(ex);
 
                 return new MatchStatistic(matchId);
+            }
+        }
+
+        public async Task<MatchLineups> GetMatchLineups(string matchId, Language language, bool forceFetchLatestData = false)
+        {
+            try
+            {
+                var cacheKey = $"SoccerMatch:{matchId}:lineups";
+
+                return await cacheManager.GetOrSetAsync(
+                    cacheKey,
+                    () => apiService.Execute(() => matchApi.GetMatchLineups(matchId, language.DisplayName)),
+                    ShortDuration,
+                    forceFetchLatestData)
+                    .ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return new MatchLineups(matchId);
             }
         }
     }

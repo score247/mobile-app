@@ -35,6 +35,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{language}/matches/{matchId}/statistic")]
             Task<MatchStatistic> GetMatchStatistic(string matchId, string language);
+
+            [Get("/soccer/{language}/matches/{matchId}/lineups")]
+            Task<MatchLineups> GetMatchLineups(string matchId, string language);
         }
 
         [Headers("Accept: application/x-msgpack")]
