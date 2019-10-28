@@ -71,8 +71,8 @@ namespace LiveScore.iOS.Renderers
         private double CalculateValue()
         {
             double min = Element.Minimum;
-            double max = Element.Maximum == 0 ? 10 : Element.Maximum;
-            double current = Element.Value == 0 ? 1 : Element.Value;
+            double max = Element.Maximum;
+            double current = Element.Value;
 
             double range = max - min;
 
