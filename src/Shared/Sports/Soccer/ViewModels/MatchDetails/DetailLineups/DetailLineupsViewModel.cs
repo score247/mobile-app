@@ -42,8 +42,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
         public MatchLineups MatchLineups { get; private set; }
 
-        public HtmlWebViewSource LineupsPitchView { get; private set; } = new HtmlWebViewSource();
-
         public List<LineupsGroupViewModel> SubstitutionAndCoachGroups { get; private set; }
 
         private async Task LoadMatchLineupsDataAsync(bool isRefresh = false)
@@ -53,9 +51,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
                     .ConfigureAwait(false);
 
             SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups();
-
-            //TODO: Main Thread for rendering web view? Are there any other solution?
-            Device.BeginInvokeOnMainThread(() => { LineupsPitchView.Html = MatchLineups.PitchViewHtml; });
 
             IsRefreshing = false;
         }

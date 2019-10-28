@@ -1,10 +1,9 @@
-﻿zil<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
     <StackLayout>
@@ -30,7 +29,11 @@
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <WebView HeightRequest="526" WidthRequest="300" Source="{Binding}" />
+                        <Label Text="{Binding Home.Name}" />
+                        <Label Text="{Binding Home.FormationFomatted}" />
+                        <Label Text="{Binding Away.Name}" />
+                        <Label Text="{Binding Away.FormationFomatted}" />
+                        <WebView HeightRequest="560" Source="{Binding LineupsPitchView}" />
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>
@@ -50,10 +53,6 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                            <Label Text="{Binding HomeJerseyNumber}" />
-                            <Label Text="{Binding HomeName}" />
-                            <Label Text="{Binding AwayJerseyNumber}" />
-                            <Label Text="{Binding AwayName}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
@@ -68,10 +67,10 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="42" />
                             </Grid.RowDefinitions>
-                            <Label Grid.Column="2" Text="2" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                            <Label Grid.Column="3" Text="{Binding HomeValue}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                            <Label Grid.Column="6" Text="9" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                            <Label Grid.Column="7" Text="{Binding AwayValue}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                            <Label Grid.Column="2" Text="{Binding HomeJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                            <Label Grid.Column="3" Text="{Binding HomeName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                            <Label Grid.Column="6" Text="{Binding AwayJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                            <Label Grid.Column="7" Text="{Binding AwayName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

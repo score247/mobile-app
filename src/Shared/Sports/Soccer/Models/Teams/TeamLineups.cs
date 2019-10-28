@@ -38,5 +38,8 @@ namespace LiveScore.Soccer.Models.Teams
         public IEnumerable<Player> Players { get; }
 
         public IEnumerable<Player> Substitutions { get; }
+
+        [IgnoreMember]
+        public string FormationFomatted => Formation?.Replace("-", " - ");
     }
 }

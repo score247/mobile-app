@@ -1,6 +1,7 @@
 ﻿using System;
 using LiveScore.Soccer.Models.Teams;
 using MessagePack;
+using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Models.Matches
 {
@@ -43,6 +44,6 @@ namespace LiveScore.Soccer.Models.Matches
         public string PitchView { get; }
 
         [IgnoreMember]
-        public string PitchViewHtml => $"<html><body>{PitchView}</body></html>";
+        public HtmlWebViewSource LineupsPitchView => new HtmlWebViewSource { Html = $"<html><body>{PitchView}</body></html>" };
     }
 }
