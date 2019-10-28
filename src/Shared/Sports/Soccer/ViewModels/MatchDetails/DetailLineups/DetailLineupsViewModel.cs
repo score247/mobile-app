@@ -109,14 +109,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
             for (int index = 0; index < totalSubstitution; index++)
             {
-                var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : new Player();
-                var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : new Player();
+                var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : default(Player);
+                var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : default(Player);
 
                 lineupsItems.Add(new LineupsItemViewModel(
-                    homePlayer.Name,
-                    awayPlayer.Name,
-                    homePlayer.JerseyNumber,
-                    awayPlayer.JerseyNumber));
+                    homePlayer?.Name,
+                    awayPlayer?.Name,
+                    homePlayer?.JerseyNumber,
+                    awayPlayer?.JerseyNumber));
             }
 
             return new LineupsGroupViewModel(AppResources.SubstitutePlayers, lineupsItems);
