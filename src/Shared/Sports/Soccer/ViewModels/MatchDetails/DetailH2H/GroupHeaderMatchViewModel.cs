@@ -43,22 +43,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrWhiteSpace(LeagueId))
+            if (string.IsNullOrWhiteSpace(LeagueSeasonId))
             {
-                if (string.IsNullOrWhiteSpace(LeagueName))
+                if (string.IsNullOrWhiteSpace(LeagueId))
                 {
-                    if (string.IsNullOrWhiteSpace(CountryCode))
-                    {
-                        return Match?.GetHashCode() ?? 0;
-                    }
-
-                    return CountryCode.GetHashCode();
+                    return LeagueName?.GetHashCode() ?? 0;
                 }
 
-                return LeagueName.GetHashCode();
+                return LeagueId.GetHashCode();
             }
 
-            return LeagueId.GetHashCode();
+            return LeagueSeasonId.GetHashCode();
         }
     }
 }
