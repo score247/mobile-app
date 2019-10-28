@@ -50,7 +50,9 @@ namespace LiveScore.Soccer.Services
         [Headers("Accept: application/x-msgpack")]
         public interface TeamApi
         {
-            ///soccer/en-US/teams/sr%3Acompetitor%3A22474/versus/sr%3Acompetitor%3A22595
+            ///<example>soccer/en-US/teams/sr%3Acompetitor%3A22474/versus/sr%3Acompetitor%3A22595</example>
+            ///<summary>GetHeadToHeads</summary>
+
             [Get("/soccer/{lang}/teams/{teamId1}/versus/{teamId2}")]
             Task<IEnumerable<SoccerMatch>> GetHeadToHeads(string lang, string teamId1, string teamId2);
         }

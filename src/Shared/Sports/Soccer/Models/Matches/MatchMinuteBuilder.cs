@@ -6,7 +6,6 @@ using LiveScore.Core;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Models.Matches
 {

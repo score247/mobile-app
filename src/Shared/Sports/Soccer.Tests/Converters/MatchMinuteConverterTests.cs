@@ -3,7 +3,6 @@ using AutoFixture;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
-using LiveScore.Soccer.Converters;
 using LiveScore.Soccer.Models.Matches;
 using NSubstitute;
 using Soccer.Tests.Services.Utils;
@@ -43,7 +42,7 @@ namespace Soccer.Tests.Converters
             var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
             var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
             var eventDate = Random.Create<DateTime>();
-            var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee-45);
+            var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee);
             var match = new SoccerMatch(eventDate, matchResult);
 
             // Act
@@ -64,12 +63,12 @@ namespace Soccer.Tests.Converters
             var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
             var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
             var eventDate = Random.Create<DateTime>();
-            var match = new SoccerMatch(eventDate, matchResult);
-            match.CurrentPeriodStartTime = eventDate.AddMinutes(45).AddMinutes(16);
+            var match = new SoccerMatch(eventDate, matchResult)
+            {
+                CurrentPeriodStartTime = eventDate.AddMinutes(45).AddMinutes(16)
+            };
 
-            var timeToViewMatch = match.CurrentPeriodStartTime.AddMinutes(expectedMatchMinuteToSee-46);
-            
-          
+            var timeToViewMatch = match.CurrentPeriodStartTime.AddMinutes(expectedMatchMinuteToSee - 46);
 
             // Act
             var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);

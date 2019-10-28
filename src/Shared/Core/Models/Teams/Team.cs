@@ -3,7 +3,7 @@
 namespace LiveScore.Core.Models.Teams
 {
     public interface ITeam : IEntity<string, string>
-    { 
+    {
         string Country { get; }
 
         string CountryCode { get; }

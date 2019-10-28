@@ -6,6 +6,4 @@ namespace LiveScore.Core.Converters
     {
         string BuildDisplayStatus(IMatch match);
     }
-
-
 }

@@ -80,9 +80,10 @@ namespace LiveScore.Common.Tests.Services
             // Arrange
             var message = fixture.Create<string>();
             var exception = fixture.Create<Exception>();
-            Action<Exception, string> logExceptionTask = (ex, msg) => trackError(
-                ex,
-                new Dictionary<string, string> { ["Message"] = msg });
+            void logExceptionTask(Exception ex, string msg)
+                => trackError(
+                    ex,
+                    new Dictionary<string, string> { ["Message"] = msg });
 
             // Act
             await loggingService
@@ -90,7 +91,7 @@ namespace LiveScore.Common.Tests.Services
                 .ConfigureAwait(false);
 
             // Assert
-            logExceptionTask.Invoke(exception, message);
+            logExceptionTask(exception, message);
         }
 
         [Fact]

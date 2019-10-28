@@ -36,7 +36,7 @@ namespace LiveScore.Core.Models.Odds
             IsMatchStarted = isMatchStarted;
             BetOptions = betOptions;
             UpdateTime = updateTime;
-        }       
+        }
 
         public string MatchTime { get; private set; }
 
@@ -48,7 +48,7 @@ namespace LiveScore.Core.Models.Odds
 
         public IEnumerable<BetOptionOdds> BetOptions { get; private set; }
 
-        public DateTimeOffset UpdateTime { get; private set; }        
+        public DateTimeOffset UpdateTime { get; private set; }
 
         public bool Equals(OddsMovement other)
         {
@@ -63,14 +63,7 @@ namespace LiveScore.Core.Models.Odds
 
         public override bool Equals(Object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
-
-            var bookmakerObject = obj as OddsMovement;
-
-            if (bookmakerObject == null)
+            if (!(obj is OddsMovement bookmakerObject))
             {
                 return false;
             }

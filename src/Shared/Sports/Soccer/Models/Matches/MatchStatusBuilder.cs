@@ -35,7 +35,7 @@ namespace LiveScore.Soccer.Models.Matches
 
         public string BuildDisplayStatus(IMatch match)
         {
-            if (!(match is SoccerMatch) || match == null)
+            if (!(match is SoccerMatch))
             {
                 return string.Empty;
             }

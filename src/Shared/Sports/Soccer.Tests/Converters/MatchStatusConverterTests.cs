@@ -10,13 +10,13 @@ namespace Soccer.Tests.Converters
 {
     public class MatchStatusConverterTests
     {
-        private readonly MatchStatusConverter converter;
+        private readonly MatchStatusBuilder matchStatusBuilder;
         private readonly Fixture fixture;
         private readonly Random random;
 
         public MatchStatusConverterTests()
         {
-            converter = new MatchStatusConverter();
+            matchStatusBuilder = new MatchStatusBuilder();
             fixture = new Fixture();
             random = new Random();
         }
@@ -25,7 +25,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_MatchIsNull_ReturnFT()
         {
             // Act
-            var status = converter.BuildDisplayStatus(null);
+            var status = matchStatusBuilder.BuildDisplayStatus(null);
 
             // Assert
             Assert.Equal(string.Empty, status);
@@ -35,7 +35,7 @@ namespace Soccer.Tests.Converters
         public void BuildStatus_Match_EventStatusIsNull_ReturnFT()
         {
             // Arrange & Act
-            var status = converter.BuildDisplayStatus(new SoccerMatch(null));
+            var status = matchStatusBuilder.BuildDisplayStatus(new SoccerMatch(null));
 
             // Assert
             Assert.Equal(AppResources.FT, status);
@@ -53,7 +53,7 @@ namespace Soccer.Tests.Converters
             );
 
             // Act
-            var status = converter.BuildDisplayStatus(match);
+            var status = matchStatusBuilder.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(matchTime.ToString("HH:mm"), status);
@@ -75,7 +75,7 @@ namespace Soccer.Tests.Converters
                 new MatchResult(MatchStatus.Live, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
-            var status = converter.BuildDisplayStatus(match);
+            var status = matchStatusBuilder.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);
@@ -96,7 +96,7 @@ namespace Soccer.Tests.Converters
                 new MatchResult(MatchStatus.Closed, Enumeration.FromDisplayName<MatchStatus>(matchStatus)));
 
             // Act
-            var status = converter.BuildDisplayStatus(match);
+            var status = matchStatusBuilder.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);
@@ -114,7 +114,7 @@ namespace Soccer.Tests.Converters
                new MatchResult(Enumeration.FromDisplayName<MatchStatus>(eventStatus), fixture.Create<MatchStatus>()));
 
             // Act
-            var status = converter.BuildDisplayStatus(match);
+            var status = matchStatusBuilder.BuildDisplayStatus(match);
 
             // Assert
             Assert.Equal(expectedStatus, status);

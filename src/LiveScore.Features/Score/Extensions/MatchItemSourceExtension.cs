@@ -40,21 +40,20 @@ namespace LiveScore.Features.Score.Extensions
         public static void UpdateMatchItems(
                 this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
                 IEnumerable<IMatch> matches,
-                IMatchDisplayStatusBuilder matchStatusConverter,
-                IMatchMinuteBuilder matchMinuteConverter,
+                IMatchDisplayStatusBuilder matchStatusBuilder,
+                IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
             var matchViewModels = matchItems?.SelectMany(g => g).ToList();
-            var orderedMatches = matches.OrderBy(m => m.LeagueOrder);
 
-            foreach (var match in orderedMatches)
+            foreach (var match in matches.OrderBy(m => m.LeagueOrder))
             {
                 var matchViewModel = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
 
                 if (matchViewModel == null)
                 {
-                    matchItems.AddNewMatch(match, matchStatusConverter, matchMinuteConverter, eventAggregator, buildFlagUrlFunc);
+                    matchItems.AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc);
 
                     continue;
                 }
@@ -69,8 +68,8 @@ namespace LiveScore.Features.Score.Extensions
         public static void AddNewMatch(
                 this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
                 IMatch newMatch,
-                IMatchDisplayStatusBuilder matchStatusConverter,
-                IMatchMinuteBuilder matchMinuteConverter,
+                IMatchDisplayStatusBuilder matchStatusBuilder,
+                IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
@@ -82,7 +81,7 @@ namespace LiveScore.Features.Score.Extensions
                 currentMatchViewModels = matchItems[currentGroupIndex].ToList();
 
                 currentMatchViewModels
-                    .Add(new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, eventAggregator));
+                    .Add(new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator));
 
                 var group = currentMatchViewModels
                     .OrderBy(m => m.Match.EventDate)
@@ -95,7 +94,7 @@ namespace LiveScore.Features.Score.Extensions
             {
                 currentMatchViewModels = new List<MatchViewModel>
                 {
-                    new MatchViewModel(newMatch, matchStatusConverter, matchMinuteConverter, eventAggregator)
+                    new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator)
                 };
 
                 var group = currentMatchViewModels
