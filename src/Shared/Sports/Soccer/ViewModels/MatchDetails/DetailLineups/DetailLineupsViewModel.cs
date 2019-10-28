@@ -46,11 +46,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
         private async Task LoadMatchLineupsDataAsync(bool isRefresh = false)
         {
-            MatchLineups = await soccerMatchService
+            var matchLineups = await soccerMatchService
                     .GetMatchLineups(matchId, Language.English, isRefresh)
                     .ConfigureAwait(false);
 
-            SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups();
+            if (string.IsNullOrWhiteSpace(matchLineups?.Id))
+            {
+                HasData = false;
+            }
+            else
+            {
+                HasData = true;
+                SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups();
+                MatchLineups = matchLineups;
+            }
 
             IsRefreshing = false;
         }

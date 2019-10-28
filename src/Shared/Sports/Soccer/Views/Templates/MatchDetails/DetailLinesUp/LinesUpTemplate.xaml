@@ -2,6 +2,7 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
@@ -15,7 +16,14 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <ListView BackgroundColor="{StaticResource ListViewBgColor}"
+
+        <Label Style="{StaticResource NoInfo}"
+               Text="{languageResources:Translate NoData}"
+               IsVisible="{Binding NoData}"
+               AutomationId="NoDataLabel" />
+
+        <ListView IsVisible="{Binding HasData}"
+                  BackgroundColor="{StaticResource ListViewBgColor}"
                   IsGroupingEnabled="True"
                   ItemsSource="{Binding SubstitutionAndCoachGroups}"
                   IsPullToRefreshEnabled="true"
