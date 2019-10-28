@@ -41,7 +41,9 @@
                             <Label Style="{StaticResource GroupName}" Text="{Binding Home.Name}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Home.FormationFomatted}" />
                         </FlexLayout>
+                        <BoxView Style="{StaticResource HorizontalLine}" />
                         <WebView HeightRequest="560" Source="{Binding LineupsPitchView}" />
+                        <BoxView Style="{StaticResource HorizontalLine}" />
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
                             <Label Style="{StaticResource GroupName}" Text="{Binding Away.Name}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Away.FormationFomatted}" />
