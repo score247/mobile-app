@@ -42,6 +42,8 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             HomeTeamName = match.HomeTeamName;
             AwayTeamName = match.AwayTeamName;
 
+            Stats = new H2HStatisticViewModel(0, 0, 0);
+
             VisibleHeadToHead = true;
             HasData = true;
 

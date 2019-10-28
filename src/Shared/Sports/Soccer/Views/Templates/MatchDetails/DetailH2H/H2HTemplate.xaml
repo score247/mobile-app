@@ -193,26 +193,53 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <!--<StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" BackgroundColor="AliceBlue">
+                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Orientation="Vertical">
                         <circularProgress:CircularProgress
                             WidthRequest="80"
                             HeightRequest="80"
-                               Maximun="{Binding Stats.Total}" Minimun="0" Value="{Binding Stats.HomeWin}"
-                               BackColor="LightGray" ForeColor="Green" TextColor="DarkBlue"
-                               BarHeight="30" AnimationDuration="1000"
-                               Text="{Binding Stats.DisplayHomeWin}" TextSize="35"
+                               Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.HomeWin}"
+                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BarHeight="5" AnimationDuration="1000"
+                               Text="{Binding Stats.DisplayHomeWin}" TextSize="45"
                                VerticalOptions="CenterAndExpand"
                             HorizontalOptions="CenterAndExpand"/>
-                    </StackLayout>-->
+                         <Label Style="{StaticResource Team}" Text="{Binding HomeTeamName}" />
+                    </StackLayout>
 
-                    <Label Grid.Row="0" Grid.Column="0"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayHomeWin}"></Label>
-                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource Team}" Text="{Binding HomeTeamName}"></Label>
+                    <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical">
+                        <circularProgress:CircularProgress
+                            WidthRequest="80"
+                            HeightRequest="80"
+                               Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.Draw}"
+                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BarHeight="5" AnimationDuration="1000"
+                               Text="{Binding Stats.DisplayDraw}" TextSize="45"
+                               VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"/>
+                        <Label Style="{StaticResource Team}" Text="Draw"/>
+                    </StackLayout>
 
-                    <Label Grid.Row="0" Grid.Column="1"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayDraw}"></Label>
+                    <StackLayout Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Orientation="Vertical">
+                        <circularProgress:CircularProgress
+                            WidthRequest="80"
+                            HeightRequest="80"
+                               Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.AwayWin}"
+                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BarHeight="5" AnimationDuration="1000"
+                               Text="{Binding Stats.DisplayAwayWin}" TextSize="45"
+                               VerticalOptions="CenterAndExpand"
+                            HorizontalOptions="CenterAndExpand"/>
+                        <Label Style="{StaticResource Team}" Text="{Binding AwayTeamName}"/>
+                    </StackLayout>
+
+                    <!--<Label Grid.Row="0" Grid.Column="0"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayHomeWin}"></Label>
+                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource Team}" Text="{Binding HomeTeamName}"></Label>-->
+
+                    <!--<Label Grid.Row="0" Grid.Column="1"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayDraw}"></Label>
                     <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource Team}" Text="Draw"></Label>
 
                     <Label Grid.Row="0" Grid.Column="2"  Style="{StaticResource Team}" Text="{Binding Stats.DisplayAwayWin}"></Label>
-                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Team}" Text="{Binding AwayTeamName}"></Label>
+                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource Team}" Text="{Binding AwayTeamName}"></Label>-->
                     
                 </Grid>
 

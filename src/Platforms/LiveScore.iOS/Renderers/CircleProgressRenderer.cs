@@ -27,6 +27,9 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
 
+            //if (Element.Maximum == 0)
+            //    return;
+
             indicatorFontSize = Element.TextSize;
 
             backgroundCircle = new CAShapeLayer();
@@ -64,9 +67,9 @@ namespace LiveScore.iOS.Renderers
 
         private double CalculateValue()
         {
-            double min = Element.Minimun;
-            double max = Element.Maximun;
-            double current = Element.Value;
+            double min = Element.Minimum;
+            double max = Element.Maximum == 0 ? 10 : Element.Maximum;
+            double current = Element.Value == 0 ? 1 : Element.Value;
 
             double range = max - min;
 
@@ -78,7 +81,7 @@ namespace LiveScore.iOS.Renderers
             indicatorLabel = new UILabel();
             indicatorLabel.AdjustsFontSizeToFitWidth = true;
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
-            indicatorLabel.Text = Element.Text.ToString();
+            indicatorLabel.Text = Element.Text?.ToString();
             indicatorLabel.TextColor = Element.TextColor.ToUIColor();
             indicatorLabel.TextAlignment = UITextAlignment.Center;
             indicatorLabelSize = indicatorLabel.IntrinsicContentSize;

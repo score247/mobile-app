@@ -4,16 +4,17 @@ namespace LiveScore.Core.Controls.CircleProgressBar
 {
     public class CircularProgress : BoxView
     {
+        public static readonly BindableProperty MaximumProperty = BindableProperty.Create(nameof(Maximum), typeof(int), typeof(CircularProgress), default(int));
+        public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(int), typeof(CircularProgress), default(int));
+        public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CircularProgress), string.Empty);
+
+        public readonly BindableProperty MinimumProperty = BindableProperty.Create(nameof(Minimum), typeof(int), typeof(CircularProgress), default(int));
         public readonly BindableProperty BackColorProperty = BindableProperty.Create(nameof(BackColor), typeof(Color), typeof(CircularProgress), Color.Transparent);
         public readonly BindableProperty ForeColorProperty = BindableProperty.Create(nameof(ForeColor), typeof(Color), typeof(CircularProgress), Color.Transparent);
         public readonly BindableProperty BarHeightProperty = BindableProperty.Create(nameof(BarHeight), typeof(double), typeof(CircularProgress), default(double));
-        public readonly BindableProperty MinimunProperty = BindableProperty.Create(nameof(Minimun), typeof(int), typeof(CircularProgress), default(int));
-        public readonly BindableProperty MaximunProperty = BindableProperty.Create(nameof(Maximun), typeof(int), typeof(CircularProgress), default(int));
-        public readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(int), typeof(CircularProgress), default(int));
         public readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(nameof(AnimationDuration), typeof(int), typeof(CircularProgress), default(int));
         public readonly BindableProperty TextSizeProperty = BindableProperty.Create(nameof(TextSize), typeof(int), typeof(CircularProgress), default(int));
-        public readonly BindableProperty TextMarginProperty = BindableProperty.Create(nameof(TextMargin), typeof(int), typeof(CircularProgress), default(int));
-        public readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CircularProgress), string.Empty);
+        public readonly BindableProperty TextMarginProperty = BindableProperty.Create(nameof(TextMargin), typeof(int), typeof(CircularProgress), default(int));       
         public readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgress), Color.Black);
               
         public Color BackColor
@@ -34,16 +35,16 @@ namespace LiveScore.Core.Controls.CircleProgressBar
             set { SetValue(BarHeightProperty, value); }
         }
 
-        public int Minimun
+        public int Minimum
         {
-            get { return (int)GetValue(MinimunProperty); }
-            set { SetValue(MinimunProperty, value); }
+            get { return (int)GetValue(MinimumProperty); }
+            set { SetValue(MinimumProperty, value); }
         }
 
-        public int Maximun
+        public int Maximum
         {
-            get { return (int)GetValue(MaximunProperty); }
-            set { SetValue(MaximunProperty, value); }
+            get { return (int)GetValue(MaximumProperty); }
+            set { SetValue(MaximumProperty, value); }
         }
 
         public int Value
