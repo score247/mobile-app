@@ -15,14 +15,14 @@ namespace Soccer.Tests.Converters
     {
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
-        private readonly MatchMinuteConverter matchMinuteConverter;
+        private readonly MatchMinuteBuilder matchMinuteConverter;
         private readonly Fixture Random;
 
         public MatchMinuteConverterTests()
         {
             settings = Substitute.For<ISettings>();
             loggingService = Substitute.For<ILoggingService>();
-            matchMinuteConverter = new MatchMinuteConverter(settings, loggingService);
+            matchMinuteConverter = new MatchMinuteBuilder(settings, loggingService);
 
             Random = new Fixture();
         }
@@ -43,8 +43,33 @@ namespace Soccer.Tests.Converters
             var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
             var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
             var eventDate = Random.Create<DateTime>();
-            var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee);
+            var timeToViewMatch = new DateTimeOffset(eventDate).AddMinutes(expectedMatchMinuteToSee-45);
             var match = new SoccerMatch(eventDate, matchResult);
+
+            // Act
+            var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);
+
+            // Assert
+            var result = actualMatchMinuteToDisplay.Equals($"{acceptableMinuteToSee}'", StringComparison.OrdinalIgnoreCase)
+                || actualMatchMinuteToDisplay.Equals($"{expectedMatchMinuteToSee}'", StringComparison.OrdinalIgnoreCase);
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void BuildMatchMinute_MatchSatusIsSecondtHalf_ReturnMatchTimeMinute()
+        {
+            // Arrange
+            var matchResult = new MatchResult(Random.Create<MatchStatus>(), MatchStatus.SecondHalf);
+            var expectedMatchMinuteToSee = MatchMinuteGenerator.RandomMinuteFor(matchResult.MatchStatus);
+            var acceptableMinuteToSee = expectedMatchMinuteToSee + 1;
+            var eventDate = Random.Create<DateTime>();
+            var match = new SoccerMatch(eventDate, matchResult);
+            match.CurrentPeriodStartTime = eventDate.AddMinutes(45).AddMinutes(16);
+
+            var timeToViewMatch = match.CurrentPeriodStartTime.AddMinutes(expectedMatchMinuteToSee-46);
+            
+          
 
             // Act
             var actualMatchMinuteToDisplay = matchMinuteConverter.BuildMatchMinute(match, timeToViewMatch);

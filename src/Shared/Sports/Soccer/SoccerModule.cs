@@ -1,7 +1,7 @@
 ﻿using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Converters;
+using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails;
@@ -36,8 +36,8 @@ namespace LiveScore.Soccer
             containerRegistry.RegisterSingleton<ITeamService, TeamService>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<DataTemplate, MatchDataTemplate>(SportType.Soccer.Value.ToString());
-            containerRegistry.RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusConverter>(SportType.Soccer.Value.ToString());
-            containerRegistry.RegisterSingleton<IMatchMinuteBuilder, MatchMinuteConverter>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusBuilder>(SportType.Soccer.Value.ToString());
+            containerRegistry.RegisterSingleton<IMatchMinuteBuilder, MatchMinuteBuilder>(SportType.Soccer.Value.ToString());
 
             containerRegistry.RegisterSingleton<ISoccerMatchService, MatchService>();
 

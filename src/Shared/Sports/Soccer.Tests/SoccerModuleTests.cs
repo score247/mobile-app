@@ -2,7 +2,7 @@ using LiveScore.Core.Converters;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
 using LiveScore.Soccer;
-using LiveScore.Soccer.Converters;
+using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.Views.Templates;
@@ -28,7 +28,7 @@ namespace Soccer.Tests
             // Assert
             container.Received(1).RegisterSingleton<IMatchService, MatchService>("1");
             container.Received(1).RegisterSingleton<IOddsService, OddsService>("1");
-            container.Received(1).RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusConverter>("1");
+            container.Received(1).RegisterSingleton<IMatchDisplayStatusBuilder, MatchStatusBuilder>("1");
             container.Received(1).RegisterSingleton<DataTemplate, MatchDataTemplate>("1");
             container.Received(1).RegisterSingleton<IHubService, SoccerHubService>("1");
             container.Received(1).RegisterSingleton<ISoccerMatchService, MatchService>();

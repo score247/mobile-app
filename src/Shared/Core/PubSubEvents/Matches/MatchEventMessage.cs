@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.PubSubEvents.Matches
-{
-    using LiveScore.Core.Models.Matches;
+﻿using LiveScore.Core.Models.Matches;
 
+namespace LiveScore.Core.PubSubEvents.Matches
+{
     public interface IMatchEventMessage
     {
         byte SportId { get; }
