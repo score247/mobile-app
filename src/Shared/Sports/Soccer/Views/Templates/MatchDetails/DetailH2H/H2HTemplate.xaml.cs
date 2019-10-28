@@ -10,5 +10,10 @@ namespace LiveScore.Soccer.Views.Templates.DetailH2H
         {
             InitializeComponent();
         }
+
+        private void H2HMatches_OnScrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            MessagingCenter.Send("TabListView", "OnScrolling", e.VerticalOffset > 0 ? e.VerticalOffset : 0);
+        }
     }
 }

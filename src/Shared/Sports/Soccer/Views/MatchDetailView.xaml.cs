@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Soccer.Views
+﻿using System.Diagnostics;
+
+namespace LiveScore.Soccer.Views
 {
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -15,10 +17,10 @@
         {
             base.OnAppearing();
 
+            var tabStripOffset = TabStrip.Y;
             MessagingCenter.Subscribe<string, double>("TabListView", "OnScrolling", async (_, scrollY) =>
             {
-                MatchDetailLayout.Margin = new Thickness(0, scrollY <= TabStrip.Y ? -scrollY : -TabStrip.Y, 0, 0);
-                // await ScrollView.ScrollToAsync(0, scrollY <= TabStrip.Y ? scrollY : TabStrip.Y, false);
+                await MatchDetailLayout.TranslateTo(0, scrollY <= tabStripOffset ? -scrollY : -tabStripOffset, 0, Easing.Linear);
             });
         }
 

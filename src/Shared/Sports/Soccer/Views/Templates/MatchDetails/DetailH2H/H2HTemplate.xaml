@@ -311,9 +311,8 @@
                                 ItemsSource="{Binding Matches}"
                                 Header="{Binding .}"
                                 HeaderTemplate="{StaticResource HeaderTemplate}"
-                                Style="{StaticResource CollectionViewHasBackground}"
-                                VerticalOptions="FillAndExpand"
-                                MinimumWidthRequest="1000">
+                                Scrolled="H2HMatches_OnScrolled"
+                                Style="{StaticResource CollectionViewHasBackground}">
                     <CollectionView.GroupFooterTemplate>
                         <DataTemplate>
                             <StackLayout></StackLayout>
