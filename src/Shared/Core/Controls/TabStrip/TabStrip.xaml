@@ -1,35 +1,36 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ContentView
-    x:Class="LiveScore.Core.Controls.TabStrip.TabStrip"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-    xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
-    xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-    x:Name="this"
-    HorizontalOptions="FillAndExpand"
-    VerticalOptions="FillAndExpand">
+<ContentView x:Class="LiveScore.Core.Controls.TabStrip.TabStrip"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
+             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+             x:Name="this"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand">
     <ContentView.Content>
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout.Resources>
                 <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
             </StackLayout.Resources>
-            <local:TabStripHeader x:Name="TabHeader" ItemsSource="{Binding ItemsSource}" />
+            <local:TabStripHeader x:Name="TabHeader"
+                                  ItemsSource="{Binding ItemsSource}" />
 
-            <cards:CarouselView
-                x:Name="TabContent"
-                HorizontalOptions="FillAndExpand"
-                IsCyclical="false"
-                ItemTemplate="{StaticResource tabItemTemplateSelector}"
-                ItemsSource="{Binding ItemsSource}"
-                SelectedIndex="{Binding SelectedIndex}"
-                VerticalOptions="FillAndExpand">
+            <cards:CarouselView x:Name="TabContent"
+                                HorizontalOptions="FillAndExpand"
+                                IsCyclical="false"
+                                IsViewReusingEnabled="False"
+                                BackViewsDepth="1"
+                                ItemTemplate="{StaticResource tabItemTemplateSelector}"
+                                ItemsSource="{Binding ItemsSource}"
+                                SelectedIndex="{Binding SelectedIndex}"
+                                VerticalOptions="FillAndExpand">
                 <x:Arguments>
-                    <processors:BaseCarouselFrontViewProcessor
-                        AnimationLength="250"
-                        NoItemMaxPanDistance="1000"
-                        OpacityFactor="0.25" />
-                    <processors:BaseCarouselBackViewProcessor AnimationLength="250" OpacityFactor="0.25" />
+                    <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
+                                                               NoItemMaxPanDistance="1000"
+                                                               OpacityFactor="0.25" />
+                    <processors:BaseCarouselBackViewProcessor AnimationLength="250"
+                                                              OpacityFactor="0.25" />
                 </x:Arguments>
             </cards:CarouselView>
         </StackLayout>
