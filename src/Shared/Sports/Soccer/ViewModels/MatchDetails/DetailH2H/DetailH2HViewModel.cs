@@ -25,10 +25,9 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         private readonly IMatch match;
 
         private readonly ITeamService teamService;
-
-        protected readonly IMatchDisplayStatusBuilder matchStatusBuilder;
-        protected readonly IMatchMinuteBuilder matchMinuteBuilder;
-        protected readonly Func<string, string> buildFlagUrlFunc;
+        private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
+        private readonly IMatchMinuteBuilder matchMinuteBuilder;
+        private readonly Func<string, string> buildFlagUrlFunc;
 
         public DetailH2HViewModel(
             IMatch match,
@@ -39,13 +38,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.H2H)
         {
             this.match = match;
-            HomeTeamName = match.HomeTeamName;
-            AwayTeamName = match.AwayTeamName;
-
-            Stats = new H2HStatisticViewModel(0, 0, 0);
-
-            VisibleHeadToHead = true;
-            HasData = true;
+            InitData();            
 
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
@@ -81,6 +74,16 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public ObservableCollection<IGrouping<GroupHeaderMatchViewModel, SummaryMatchViewModel>> Matches { get; set; }
+
+        private void InitData()
+        {
+            HomeTeamName = match.HomeTeamName;
+            AwayTeamName = match.AwayTeamName;
+
+            VisibleHeadToHead = true;
+            HasData = true;
+            Stats = new H2HStatisticViewModel();
+        }
 
         public async override void OnAppearing()
         {

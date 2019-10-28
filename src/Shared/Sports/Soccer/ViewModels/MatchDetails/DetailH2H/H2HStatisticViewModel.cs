@@ -2,6 +2,10 @@
 {
     public class H2HStatisticViewModel
     {
+        public H2HStatisticViewModel()
+            : this(0, 0, 0)
+        { }
+
         public H2HStatisticViewModel(int homeWin, int awayWin, int total)
         {
             HomeWin = homeWin;
