@@ -55,9 +55,10 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
             OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
             OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHeadAsync(forceFetchLatestData: true));
-            RefreshCommand = new DelegateAsyncCommand(
-                async () => await LoadDataAsync(() => LoadHeadToHeadAsync(forceFetchLatestData: true), false));
+            RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
+
+        public bool IsRefreshing { get; set; }
 
         public bool VisibleHomeResults { get; private set; }
 
@@ -92,7 +93,16 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             base.OnResumeWhenNetworkOK();
 
-            await LoadHeadToHeadAsync(true);
+            await RefreshCommand.ExecuteAsync();
+        }
+
+        private async Task RefreshAsync()
+        {
+            IsRefreshing = true;
+
+            await LoadHeadToHeadAsync(forceFetchLatestData: IsRefreshing);
+
+            IsRefreshing = false; 
         }
 
         private void LoadTeamResult(string teamIdentifier)

@@ -243,7 +243,7 @@
                     
                 </Grid>
 
-                <ListView
+                <ListView                    
                     IsVisible="{Binding HasData}"
                     x:Name="H2HMatches"
                     Footer=""
