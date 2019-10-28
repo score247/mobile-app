@@ -1,5 +1,5 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Diagnostics;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
@@ -19,12 +19,8 @@ namespace LiveScore.iOS.Renderers
         private CGSize indicatorLabelSize;
         private int indicatorFontSize;
 
-        private double startAngle = 1.5 * Math.PI;
-
-        public static void InitRender()
-        {
-        }
-
+        private readonly double startAngle = 1.5 * Math.PI;
+      
         protected override void OnElementChanged(ElementChangedEventArgs<CircularProgress> e)
         {
             base.OnElementChanged(e);
@@ -84,6 +80,8 @@ namespace LiveScore.iOS.Renderers
 
         private void CreateIndicatorLabel()
         {
+            Debug.WriteLine($"CreateIndicatorLabel with text {Element.Text}");
+
             indicatorLabel = new UILabel();
             indicatorLabel.AdjustsFontSizeToFitWidth = true;
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
