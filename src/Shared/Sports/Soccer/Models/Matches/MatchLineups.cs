@@ -44,6 +44,6 @@ namespace LiveScore.Soccer.Models.Matches
         public string PitchView { get; }
 
         [IgnoreMember]
-        public HtmlWebViewSource LineupsPitchView => new HtmlWebViewSource { Html = $"<html><body>{PitchView}</body></html>" };
+        public HtmlWebViewSource LineupsPitchView => new HtmlWebViewSource { Html = $"<html><body style=\"padding: 0; margin: 0\">{PitchView}</body></html>" };
     }
 }
