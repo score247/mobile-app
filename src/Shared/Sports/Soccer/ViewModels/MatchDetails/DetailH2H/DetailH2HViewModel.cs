@@ -66,7 +66,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         public bool VisibleHeadToHead { get; private set; }
 
-        public bool HasStats { get; private set; }
+        public bool VisibleStats { get; private set; }
 
         public string HomeTeamName { get; private set; }
 
@@ -169,9 +169,9 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
         {
-            HasStats = closedMatches != null && closedMatches.Any();
+            VisibleStats = closedMatches != null && closedMatches.Any();
 
-            return HasStats
+            return VisibleStats
                 ? new H2HStatisticViewModel(
                     closedMatches.Count(x => x.WinnerId == match.HomeTeamId),
                     closedMatches.Count(x => x.WinnerId == match.AwayTeamId),

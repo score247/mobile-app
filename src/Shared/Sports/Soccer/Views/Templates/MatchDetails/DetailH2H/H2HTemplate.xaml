@@ -182,7 +182,7 @@
                         AutomationId="NoDataLabel" />
                 </StackLayout>
 
-                <Grid Style="{StaticResource MatchGeneralInfoTeams}" IsVisible="{Binding HasStats}" >
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}" IsVisible="{Binding VisibleStats}" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60" />
                         <RowDefinition Height="20" />
