@@ -2,14 +2,20 @@
 {
     public class LineupsItemViewModel
     {
-        public LineupsItemViewModel(string homeValue, string awayValue)
+        public LineupsItemViewModel(string homeName, string awayName, int homeJerseyNumber = 0, int awayJerseyNumber = 0)
         {
-            HomeValue = homeValue;
-            AwayValue = awayValue;
+            HomeName = homeName;
+            AwayName = awayName;
+            HomeJerseyNumber = homeJerseyNumber;
+            AwayJerseyNumber = awayJerseyNumber;
         }
 
-        public string HomeValue { get; }
+        public string HomeName { get; }
 
-        public string AwayValue { get; }
+        public string AwayName { get; }
+
+        public int HomeJerseyNumber { get; }
+
+        public int AwayJerseyNumber { get; }
     }
 }

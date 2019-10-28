@@ -120,10 +120,6 @@
                     </ViewCell>
                 </DataTemplate>
             </tabStrip:TabITemListView.ItemTemplate>
-            <tabStrip:TabITemListView.Footer>
-                <StackLayout BackgroundColor="Transparent"
-                             HeightRequest="300" />
-            </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </FlexLayout>
 </DataTemplate>

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+﻿zil<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
@@ -26,7 +26,7 @@
                   IsRefreshing="{Binding IsRefreshing}"
                   SeparatorVisibility="None"
                   VerticalOptions="FillAndExpand"
-                  Header="{Binding LineupsPitchView}">
+                  Header="{Binding MatchLineups}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
@@ -50,6 +50,10 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
+                            <Label Text="{Binding HomeJerseyNumber}" />
+                            <Label Text="{Binding HomeName}" />
+                            <Label Text="{Binding AwayJerseyNumber}" />
+                            <Label Text="{Binding AwayName}" />
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />

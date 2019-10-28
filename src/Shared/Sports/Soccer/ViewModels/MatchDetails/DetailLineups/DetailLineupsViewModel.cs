@@ -7,6 +7,7 @@ using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using LiveScore.Soccer.Services;
@@ -93,10 +94,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
             var awayCoachName = string.IsNullOrWhiteSpace(awayTeam?.Coach?.Name) ? string.Empty : awayTeam.Coach.Name;
 
             return new LineupsGroupViewModel(
-                AppResources.Coaches, 
+                AppResources.Coaches,
                 new List<LineupsItemViewModel>
                 {
-                    new LineupsItemViewModel(homeCoachName,awayCoachName)
+                    new LineupsItemViewModel(homeCoachName, awayCoachName)
                 });
         }
 
@@ -113,9 +114,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
             for (int index = 0; index < totalSubstitution; index++)
             {
+                var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : new Player();
+                var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : new Player();
+
                 lineupsItems.Add(new LineupsItemViewModel(
-                    index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index)?.JersryWithName : string.Empty,
-                    index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index)?.JersryWithName : string.Empty));
+                    homePlayer.Name,
+                    awayPlayer.Name,
+                    homePlayer.JerseyNumber,
+                    awayPlayer.JerseyNumber));
             }
 
             return new LineupsGroupViewModel(AppResources.SubstitutePlayers, lineupsItems);

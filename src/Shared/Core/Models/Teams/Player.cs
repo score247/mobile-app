@@ -37,8 +37,5 @@ namespace LiveScore.Core.Models.Teams
 
         [Key(5)]
         public int Order { get; set; }
-
-        [IgnoreMember]
-        public string JersryWithName => $"{JerseyNumber}. {Name}";
     }
 }
