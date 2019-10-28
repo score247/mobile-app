@@ -61,6 +61,7 @@ namespace LiveScore.iOS.Renderers
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
             indicatorLabel.InvalidateIntrinsicContentSize();
             indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
+            indicatorLabel.Text = Element.Text?.ToString();
 
             indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
             this.AddSubview(indicatorLabel);
@@ -118,6 +119,7 @@ namespace LiveScore.iOS.Renderers
             indicatorCircle.Path = circlePath.CGPath;
             backgroundCircle.StrokeEnd = new nfloat(1.0);
             indicatorCircle.StrokeEnd = new nfloat(CalculateValue());
+
             return radius;
         }
 
