@@ -27,8 +27,10 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            //if (Element.Maximum == 0)
-            //    return;
+            if (Element == null)
+            {
+                return;
+            }                
 
             indicatorFontSize = Element.TextSize;
 
