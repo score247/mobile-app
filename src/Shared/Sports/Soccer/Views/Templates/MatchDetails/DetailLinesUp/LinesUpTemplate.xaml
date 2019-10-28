@@ -16,16 +16,23 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <WebView HeightRequest="300" Source="{Binding LineupsPitchView}" />
         <ListView BackgroundColor="#272830"
-                                  IsGroupingEnabled="True"
-                                  ItemsSource="{Binding SubstitutionAndCoachGroups}"
-                                  IsPullToRefreshEnabled="true"
-                                  GroupDisplayBinding="{Binding Name}"
-                                  HeightRequest="{Binding FooterHeight}"
-                                  RefreshCommand="{Binding RefreshCommand}"
-                                  IsRefreshing="{Binding IsRefreshing}"
-                                  VerticalOptions="FillAndExpand">
+                  IsGroupingEnabled="True"
+                  ItemsSource="{Binding SubstitutionAndCoachGroups}"
+                  IsPullToRefreshEnabled="true"
+                  GroupDisplayBinding="{Binding Name}"
+                  HeightRequest="{Binding FooterHeight}"
+                  RefreshCommand="{Binding RefreshCommand}"
+                  IsRefreshing="{Binding IsRefreshing}"
+                  VerticalOptions="FillAndExpand"
+                  Header="{Binding LineupsPitchView}">
+            <ListView.HeaderTemplate>
+                <DataTemplate>
+                    <StackLayout>
+                        <WebView HeightRequest="300" WidthRequest="300" Source="{Binding}" />
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.HeaderTemplate>
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -33,7 +40,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
-
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -44,11 +50,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
-            <ListView.Footer>
-                <StackLayout BackgroundColor="Transparent"
-                             HeightRequest="500" />
-            </ListView.Footer>
         </ListView>
 
         <!--<FlexLayout Style="{StaticResource Group}">
