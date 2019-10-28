@@ -17,7 +17,8 @@
 
             MessagingCenter.Subscribe<string, double>("TabListView", "OnScrolling", async (_, scrollY) =>
             {
-                await ScrollView.ScrollToAsync(0, scrollY <= TabStrip.Y ? scrollY : TabStrip.Y, false);
+                MatchDetailLayout.Margin = new Thickness(0, scrollY <= TabStrip.Y ? -scrollY : -TabStrip.Y, 0, 0);
+                // await ScrollView.ScrollToAsync(0, scrollY <= TabStrip.Y ? scrollY : TabStrip.Y, false);
             });
         }
 
