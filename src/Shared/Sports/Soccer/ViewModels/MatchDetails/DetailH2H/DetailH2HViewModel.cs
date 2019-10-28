@@ -130,23 +130,16 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             {
                 var headToHeads = await teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
 
-                if (headToHeads != null)
+                if (headToHeads != null && headToHeads.Any() && Matches == null)
                 {
-                    HasData = headToHeads != null && headToHeads.Any();
+                    Debug.WriteLine($"H2H HasData {HasData}");
+                    Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
 
-                    if (HasData)
-                    {
-                        Debug.WriteLine($"H2H HasData {HasData}");
-                        Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+                    Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
+                }
 
-                        Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
-                    }
-                }
-                else
-                {
-                    HasData = false;
-                }
-                
+                HasData = Matches.Any();
+
                 VisibleHeadToHead = true;
 
                 VisibleHomeResults = false;
