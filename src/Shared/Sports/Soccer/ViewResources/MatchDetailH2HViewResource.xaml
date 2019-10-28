@@ -2,7 +2,7 @@
 <ResourceDictionary x:Class="LiveScore.Soccer.ViewResources.MatchDetailH2HViewResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
-    <Style x:Key="MatchDetailH2HResultButton" TargetType="Button">
+    <Style x:Key="MatchDetailH2HResultIcon" TargetType="Button">
         <Setter Property="HeightRequest" Value="20" />
         <Setter Property="WidthRequest" Value="20" />
         <Setter Property="Padding" Value="0" />
@@ -14,13 +14,36 @@
         <Setter Property="FontSize" Value="12" />
     </Style>
 
-    <Style x:Key="MatchDetailH2HResultDrawIcon" BasedOn="{StaticResource MatchDetailH2HResultButton}" TargetType="Button">
+    <Style x:Key="MatchDetailH2HResultDrawIcon" BasedOn="{StaticResource MatchDetailH2HResultIcon}" TargetType="Button">
         <Setter Property="BackgroundColor" Value="#FF7246" />
     </Style>
-    <Style x:Key="MatchDetailH2HResultWinIcon" BasedOn="{StaticResource MatchDetailH2HResultButton}" TargetType="Button">
+    <Style x:Key="MatchDetailH2HResultWinIcon" BasedOn="{StaticResource MatchDetailH2HResultIcon}" TargetType="Button">
         <Setter Property="BackgroundColor" Value="#00B300" />
     </Style>
-    <Style x:Key="MatchDetailH2HResultLoseIcon" BasedOn="{StaticResource MatchDetailH2HResultButton}" TargetType="Button">
+    <Style x:Key="MatchDetailH2HResultLoseIcon" BasedOn="{StaticResource MatchDetailH2HResultIcon}" TargetType="Button">
         <Setter Property="BackgroundColor" Value="#FF0000" />
+    </Style>
+
+    <Style x:Key="MatchDetailH2HContainer" TargetType="Frame">
+        <Setter Property="BorderColor" Value="#3A3942" />
+        <Setter Property="Margin" Value="8,0" />
+        <Setter Property="CornerRadius" Value="0" />
+        <Setter Property="BackgroundColor" Value="#161719" />
+    </Style>
+    <Style x:Key="MatchDetailH2HStastLabel" TargetType="Label">
+        <Setter Property="Padding" Value="0,10,0,10" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+    </Style>
+    <Style x:Key="MatchDetailH2HMatchStatus" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+        <Setter Property="TextColor"
+                Value="{StaticResource SecondTextColor}" />
+        <Setter Property="FontSize"
+                Value="11" />
+        <Setter Property="LineHeight" Value="1.25" />
     </Style>
 </ResourceDictionary>

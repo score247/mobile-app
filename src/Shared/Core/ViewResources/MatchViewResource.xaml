@@ -20,8 +20,6 @@
                 Value="{StaticResource FourthTextColor}" />
         <Setter Property="FontSize"
                 Value="11" />
-        <Setter Property="FontAttributes"
-                Value="Bold" />
     </Style>
 
     <Style x:Key="Score"

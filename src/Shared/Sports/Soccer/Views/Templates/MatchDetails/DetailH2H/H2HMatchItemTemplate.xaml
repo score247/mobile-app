@@ -12,6 +12,7 @@
                     <ResourceDictionary.MergedDictionaries>
                         <coreResources:MatchViewResource />
                         <resources:MatchDetailViewResource />
+                        <resources:MatchDetailH2HViewResource />
                     </ResourceDictionary.MergedDictionaries>
                     <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
                 </ResourceDictionary>
@@ -27,8 +28,8 @@
                     <ColumnDefinition Width="20" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Style="{StaticResource MatchStatusContainer}">
-                    <Label Style="{StaticResource MatchStatus}" Text="{Binding DisplayEventDate}" />
-                    <Label Style="{StaticResource MatchStatus}" Text="{Binding DisplayMatchStatus}" />
+                    <Label Style="{StaticResource MatchDetailH2HMatchStatus}" Text="{Binding DisplayEventDate}" />
+                    <Label Style="{StaticResource MatchDetailH2HMatchStatus}" Text="{Binding DisplayMatchStatus}" />
                 </StackLayout>
                 <StackLayout Grid.Row="0" Grid.Column="1" Style="{StaticResource MatchHomeTeam}">
                     <Label AutomationId="HomeTeamName" Style="{StaticResource Team}" Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
