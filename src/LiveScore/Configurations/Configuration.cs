@@ -16,7 +16,7 @@ namespace LiveScore.Configurations
         public string ApiEndPoint => "https://score247-api3.nexdev.net/test/api";
         public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/test/hubs";
         public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
-        public string AppCenterSecret = "ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;";
+        public string AppCenterSecret => "ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;";
         public string Environment => "TEST";
 
         //DataGenerator: http://ha.nexdev.net:7208/test
