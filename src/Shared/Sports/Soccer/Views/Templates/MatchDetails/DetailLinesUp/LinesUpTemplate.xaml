@@ -16,7 +16,7 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <ListView BackgroundColor="#272830"
+        <ListView BackgroundColor="{StaticResource ListViewBgColor}"
                   IsGroupingEnabled="True"
                   ItemsSource="{Binding SubstitutionAndCoachGroups}"
                   IsPullToRefreshEnabled="true"
@@ -24,123 +24,54 @@
                   HeightRequest="{Binding FooterHeight}"
                   RefreshCommand="{Binding RefreshCommand}"
                   IsRefreshing="{Binding IsRefreshing}"
+                  SeparatorVisibility="None"
                   VerticalOptions="FillAndExpand"
                   Header="{Binding LineupsPitchView}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout>
-                        <WebView HeightRequest="300" WidthRequest="300" Source="{Binding}" />
+                        <WebView HeightRequest="526" WidthRequest="300" Source="{Binding}" />
                     </StackLayout>
                 </DataTemplate>
             </ListView.HeaderTemplate>
             <ListView.GroupHeaderTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label Text="{Binding Name}" />
+                        <StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
+                            <FlexLayout Style="{StaticResource Group}">
+                                <Label Style="{StaticResource GroupName}" Text="{Binding Name}" />
+                            </FlexLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
+                        </StackLayout>                        
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding HomeValue}" />
-                            <Label Text="{Binding AwayValue}" />
-                        </StackLayout>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="42" />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="2" Text="2" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                            <Label Grid.Column="3" Text="{Binding HomeValue}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                            <Label Grid.Column="6" Text="9" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                            <Label Grid.Column="7" Text="{Binding AwayValue}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                        </Grid>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
-
-        <!--<FlexLayout Style="{StaticResource Group}">
-            <Label Style="{StaticResource GroupName}" Text="SUBSTITUTE PLAYERS" />
-        </FlexLayout>
-        
-        
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-            </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="2" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="3" Text="H. Wilson" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="6" Text="9" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="7" Text="L. Fabianski" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-            </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="8" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="3" Text="J. Stacey" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="6" Text="7" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="7" Text="P. Fornals" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-            </Grid.RowDefinitions>
-            <Label Grid.Column="2" Text="3" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="3" Text="P . Billing" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="6" Text="911" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-            <Label Grid.Column="7" Text="M. Noble" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-
-        --><!-- COACHES --><!--
-        <FlexLayout Style="{StaticResource Group}">
-            <Label Style="{StaticResource GroupName}" Text="COACHES" />
-        </FlexLayout>
-        <BoxView Style="{StaticResource HorizontalLine}" />
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-            </Grid.RowDefinitions>
-            <Label Grid.Column="3" Text="Thomas Tuchel" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-            <Label Grid.Column="7" Text="Ole Gunnar" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-        </Grid>-->
-        
+        </ListView>        
     </StackLayout>
 </DataTemplate>
