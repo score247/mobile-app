@@ -9,15 +9,16 @@
    <Grid Style="{StaticResource MatchGeneralInfoTeams}" IsVisible="{Binding VisibleStats}" >
        <Grid.Resources>
            <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <coreResources:MatchViewResource />
-                        <resources:MatchDetailViewResource />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <coreResources:MatchHeaderViewResource />
+                    <coreResources:MatchViewResource />
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailH2HViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
        </Grid.Resources>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="60" />
-                        <RowDefinition Height="20" />
+                       <RowDefinition Height="108" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -25,43 +26,45 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
 
-                    <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Orientation="Vertical">
+                    <StackLayout Grid.Row="0" Grid.Column="0" Orientation="Vertical">
                         <circularProgress:CircularProgress
-                            WidthRequest="60"
-                            HeightRequest="60"
+                            WidthRequest="64"
+                            HeightRequest="64"
                                Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.HomeWin}"
-                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BackColor="LightGray" ForeColor="#30C2FF" TextColor="White"
                                BarHeight="5" AnimationDuration="1000"
                                Text="{Binding Stats.DisplayHomeWin}" TextSize="45"
                                VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand"/>
-                         <Label Style="{StaticResource Team}" Text="{Binding HomeTeamName}" />
+                            HorizontalOptions="CenterAndExpand" />
+                        <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="{Binding HomeTeamName}" />
                     </StackLayout>
 
-                    <StackLayout Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Orientation="Vertical">
+                    <StackLayout Grid.Row="0" Grid.Column="1" Orientation="Vertical" HorizontalOptions="Center">
                         <circularProgress:CircularProgress
-                            WidthRequest="60"
-                            HeightRequest="60"
+                            WidthRequest="64"
+                            HeightRequest="64"
                                Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.Draw}"
-                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BackColor="LightGray" ForeColor="#FF7246" TextColor="White"
                                BarHeight="5" AnimationDuration="1000"
                                Text="{Binding Stats.DisplayDraw}" TextSize="45"
                                VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand"/>
-                        <Label Style="{StaticResource Team}" Text="Draw"/>
+                            HorizontalOptions="CenterAndExpand" />
+                        <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="Draw" />
                     </StackLayout>
 
-                    <StackLayout Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Orientation="Vertical">
+                    <StackLayout Grid.Row="0" Grid.Column="2" Orientation="Vertical" HorizontalOptions="Center">
                         <circularProgress:CircularProgress
-                             WidthRequest="60"
-                            HeightRequest="60"
+                             WidthRequest="64"
+                            HeightRequest="64"
                                Maximum="{Binding Stats.Total}" Minimum="0" Value="{Binding Stats.AwayWin}"
-                               BackColor="LightGray" ForeColor="Green" TextColor="White"
+                               BackColor="LightGray" ForeColor="#FA2E58" TextColor="White"
                                BarHeight="5" AnimationDuration="1000"
                                Text="{Binding Stats.DisplayAwayWin}" TextSize="45"
                                VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand"/>
-                        <Label Style="{StaticResource Team}" Text="{Binding AwayTeamName}"/>
+                            HorizontalOptions="CenterAndExpand" />
+                        <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="{Binding AwayTeamName}" />
                     </StackLayout>
-    </Grid>
+
+                    
+                </Grid>
 </DataTemplate>
