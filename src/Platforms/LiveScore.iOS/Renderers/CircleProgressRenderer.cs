@@ -50,18 +50,27 @@ namespace LiveScore.iOS.Renderers
             double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
             double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
             double ratio = 1;
+
             if (heightRatio < widthRatio)
                 ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
             else
                 ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
 
-            indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
+            //TODO: fontSize after re-bind is bigger than initial
+            indicatorFontSize = -16;
+
+            //indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
+                        
+            indicatorLabel.Text = Element.Text?.ToString();
+
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
             indicatorLabel.InvalidateIntrinsicContentSize();
             indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
-            indicatorLabel.Text = Element.Text?.ToString();
 
             indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
+
+            Debug.WriteLine($"LayoutSubviews indicatorLabel.Frame width {indicatorLabel.Frame.Width} height {indicatorLabel.Frame.Height}");
+
             this.AddSubview(indicatorLabel);
             animate();
 

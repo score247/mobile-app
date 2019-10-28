@@ -62,6 +62,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public bool IsRefreshing { get; set; }
 
+        //For binding header in odds comparision table
         public string HeaderTitle => string.Empty;
 
         public BetType SelectedBetType { get; private set; }
