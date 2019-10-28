@@ -62,6 +62,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public bool IsRefreshing { get; set; }
 
+        public string HeaderTitle => string.Empty;
+
         public BetType SelectedBetType { get; private set; }
 
         public bool IsOneXTwoSelected => SelectedBetType == BetType.OneXTwo;

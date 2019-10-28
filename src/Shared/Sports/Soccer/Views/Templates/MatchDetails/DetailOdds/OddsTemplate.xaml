@@ -11,10 +11,10 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds"
               mc:Ignorable="d">
-    <FlexLayout Direction="Column"
+    <StackLayout 
                 Padding="0,8"
                 BackgroundColor="#272830">
-        <FlexLayout.Resources>
+        <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -24,7 +24,7 @@
                 <coreConverters:SelectedTabColorConverter x:Key="SelectedTabColorConverter" />
                 <coreConverters:SelectedTabBackgroundColorConverter x:Key="SelectedTabBgColorConverter" />
             </ResourceDictionary>
-        </FlexLayout.Resources>
+        </StackLayout.Resources>
         <Grid Margin="8,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto" />
@@ -97,7 +97,6 @@
                                       IsVisible="{Binding IsNotBusy}"
                                       ItemTemplate="{StaticResource OddsItemTemplateSelector}"
                                       ItemsSource="{Binding BetTypeOddsItems}"
-                                      MinimumHeightRequest="1000"
                                       RefreshCommand="{Binding RefreshCommand}"
                                       SeparatorVisibility="None">
                 <tabStrip:TabITemListView.Behaviors>
@@ -105,11 +104,7 @@
                                               EventArgsParameterPath="Item"
                                               EventName="ItemTapped" />
                 </tabStrip:TabITemListView.Behaviors>
-                <tabStrip:TabITemListView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="300" />
-                </tabStrip:TabITemListView.Footer>
             </tabStrip:TabITemListView>
         </StackLayout>
-    </FlexLayout>
+    </StackLayout>
 </DataTemplate>
