@@ -55,19 +55,20 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var oddDataCacheKey = $"{OddsComparisonKey}-{matchId}-{betTypeId}-{formatType}";
+                var oddDataCacheKey = $"{OddsComparisonKey}:{matchId}:{betTypeId}:{formatType}";
 
                 return await cacheManager
                     .GetOrSetAsync(
                         oddDataCacheKey,
-                        () => apiService.Execute(() => oddsApi.GetOdds(lang, matchId, betTypeId, formatType)), CacheDuration,
+                        () => apiService.Execute(() => oddsApi.GetOdds(lang, matchId, betTypeId, formatType)), 
+                        CacheDuration,
                         getLatestData).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
                 HandleException(ex);
 
-                return new MatchOdds();
+                return null;
             }
         }
 
@@ -81,7 +82,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var oddMovementCacheKey = $"{OddsMovementKey}-{matchId}-{betTypeId}-{formatType}-{bookmakerId}";
+                var oddMovementCacheKey = $"{OddsMovementKey}:{matchId}:{betTypeId}:{formatType}:{bookmakerId}";
 
                 return await cacheManager.GetOrSetAsync(
                    oddMovementCacheKey,
@@ -97,7 +98,7 @@ namespace LiveScore.Soccer.Services
             {
                 HandleException(ex);
 
-                return new MatchOddsMovement();
+                return null;
             }
         }
     }

@@ -1,177 +1,184 @@
-﻿//namespace Soccer.Tests.Services
-//{
-//    //using System;
-//    //using System.Threading.Tasks;
-//    //using AutoFixture;
-//    //using KellermanSoftware.CompareNetObjects;
-//    //using LiveScore.Common.Services;
-//    //using LiveScore.Core.Services;
-//    //using LiveScore.Core.Tests.Fixtures;
-//    //using LiveScore.Soccer.Models.Odds;
-//    //using LiveScore.Soccer.Services;
-//    //using NSubstitute;
-//    //using NSubstitute.ExceptionExtensions;
-//    //using Xunit;
+﻿namespace Soccer.Tests.Services
+{
+    using System;
+    using System.Threading.Tasks;
+    using AutoFixture;
+    using Fanex.Caching;
+    using KellermanSoftware.CompareNetObjects;
+    using LiveScore.Common.Services;
+    using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.Models.Odds;
+    using LiveScore.Soccer.Services;
+    using NSubstitute;
+    using NSubstitute.ExceptionExtensions;
+    using Xunit;
 
-//    //public class OddsServiceTests : IClassFixture<CommonFixture>
-//    //{
-//    //    private readonly CompareLogic comparer;
-//    //    private readonly Fixture fixture;
-//    //    private readonly IApiService mockApiService;
-//    //    private readonly ICachingService mockCache;
-//    //    private readonly ILoggingService mockLogger;
-//    //    private readonly IOddsService oddsService;
+    public class OddsServiceTests : IClassFixture<CommonFixture>
+    {
+        private readonly CompareLogic comparer;
+        private readonly Fixture fixture;
+        private readonly IApiService mockApiService;
+        private readonly ICacheManager mockCache;
+        private readonly ILoggingService mockLogger;
+        private readonly IOddsService oddsService;
 
-//    //    public OddsServiceTests(CommonFixture commonFixture)
-//    //    {
-//    //        comparer = commonFixture.Comparer;
-//    //        fixture = commonFixture.Specimens;
-//    //        mockCache = Substitute.For<ICachingService>();
-//    //        mockLogger = Substitute.For<ILoggingService>();
-//    //        mockApiService = Substitute.For<IApiService>();
+        public OddsServiceTests(CommonFixture commonFixture)
+        {
+            comparer = commonFixture.Comparer;
+            fixture = commonFixture.Specimens;
+            mockCache = Substitute.For<ICacheManager>();
+            mockLogger = Substitute.For<ILoggingService>();
+            mockApiService = Substitute.For<IApiService>();
 
-//    //        oddsService = new OddsService(mockCache, mockLogger, mockApiService);
-//    //    }
+            oddsService = new OddsService(mockCache, mockLogger, mockApiService);
+        }
 
-//    //    [Fact]
-//    //    public async Task GetOdds_ForceFetchNew_GetAndFetchLatestValue()
-//    //    {
-//    //        // Arrange
+        [Fact]
+        public async Task GetOddsAsync_ForceFetchNew_GetAndFetchLatestValue()
+        {
+            // Arrange
 
-//    //        // Act
-//    //        await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: true);
+            // Act
+            var matchOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: true);
 
-//    //        // Assert
-//    //        await mockCache.Received(1)
-//    //            .GetAndFetchLatestLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOdds>>>(),
-//    //                Arg.Any<Func<DateTimeOffset, bool>>(),
-//    //                null);
-//    //    }
+            // Assert
+            await mockCache.Received(1)
+                .GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOdds>>>(),
+                    Arg.Any<int>(),
+                    true);
 
-//    //    [Fact]
-//    //    public async Task GetOdds_NotForceFetchNew_InjectCacheService()
-//    //    {
-//    //        // Arrange
+            Assert.Null(matchOdds);
+        }
 
-//    //        // Act
-//    //        await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: false);
+        [Fact]
+        public async Task GetOddsAsync_NotForceFetchNew_InjectCacheService()
+        {
+            // Arrange
 
-//    //        // Assert
-//    //        await mockCache.Received(1)
-//    //            .GetOrFetchLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOdds>>>(),
-//    //                Arg.Any<DateTimeOffset>());
-//    //    }
+            // Act
+            var matchOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: false);
 
-//    //    [Fact]
-//    //    public async Task GetOdds_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
-//    //    {
-//    //        // Arrange
-//    //        mockCache.GetAndFetchLatestLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOdds>>>(),
-//    //                Arg.Any<Func<DateTimeOffset, bool>>(),
-//    //                Arg.Any<DateTimeOffset>())
-//    //            .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+            // Assert
+            await mockCache.Received(1)
+                .GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOdds>>>(),
+                    Arg.Any<int>());
 
-//    //        // Act
-//    //        var odds = await oddsService.GetOdds("en", "sr:match:1", 1, "decimal", forceFetchNewData: true);
+            Assert.Null(matchOdds);
+        }
 
-//    //        // Assert
-//    //        mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
-//    //        Assert.NotNull(odds);
-//    //    }
+        [Fact]
+        public async Task GetOddsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
+        {
+            // Arrange
+            mockCache.GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOdds>>>(),
+                    Arg.Any<int>())
+                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
-//    //    [Fact]
-//    //    public async Task GetOdds_CacheHasValue_ShouldReturnCorrectListCountFromCache()
-//    //    {
-//    //        // Arrange
-//    //        var expectedMatchOdds = fixture.Create<MatchOdds>();
+            // Act
+            var odds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: true);
 
-//    //        mockCache.GetOrFetchLocalMachine(
-//    //            "OddsComparison-sr:match:1-1-decimal",
-//    //            Arg.Any<Func<Task<MatchOdds>>>(),
-//    //            Arg.Any<DateTimeOffset>()).Returns(expectedMatchOdds);
+            // Assert
+            await mockLogger.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
 
-//    //        // Act
-//    //        var actualOdds = await oddsService.GetOdds("en", "sr:match:1", 1, "decimal");
+            Assert.Null(odds);
+        }
 
-//    //        // Assert
-//    //        Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
-//    //    }
+        [Fact]
+        public async Task GetOddsAsync_CacheHasValue_ShouldReturnCorrectListCountFromCache()
+        {
+            // Arrange
+            var expectedMatchOdds = fixture.Create<MatchOdds>();
 
-//    //    [Fact]
-//    //    public async Task GetOddsMovement_ForceFetchNew_GetAndFetchLatestValue()
-//    //    {
-//    //        // Arrange
+            mockCache
+                .GetOrSetAsync(
+                    "OddsComparison-sr:match:1-1-decimal",
+                    Arg.Any<Func<Task<MatchOdds>>>(),
+                    Arg.Any<int>())
+                .Returns(expectedMatchOdds);
 
-//    //        // Act
-//    //        await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", forceFetchNewData: true);
+            // Act
+            var actualOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal");
 
-//    //        // Assert
-//    //        await mockCache.Received(1)
-//    //            .GetAndFetchLatestLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOddsMovement>>>(),
-//    //                Arg.Any<Func<DateTimeOffset, bool>>(),
-//    //                null);
-//    //    }
+            // Assert
+            Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
+        }
 
-//    //    [Fact]
-//    //    public async Task GetOddsMovement_ForceFetchNew_GetOrFetchValue()
-//    //    {
-//    //        // Arrange
+        [Fact]
+        public async Task GetOddsMovementAsync_ForceFetchNew_GetAndFetchLatestValue()
+        {
+            // Arrange
 
-//    //        // Act
-//    //        await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", forceFetchNewData: false);
+            // Act
+            await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", getLatestData: true);
 
-//    //        // Assert
-//    //        await mockCache.Received(1)
-//    //            .GetOrFetchLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOddsMovement>>>(),
-//    //                Arg.Any<DateTimeOffset>());
-//    //    }
+            // Assert
+            await mockCache
+                .Received(1)
+                .GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
+                    Arg.Any<int>(),
+                    true);
+        }
 
-//    //    [Fact]
-//    //    public async Task GetOddsMovement_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
-//    //    {
-//    //        // Arrange
-//    //        mockCache.GetAndFetchLatestLocalMachine(
-//    //                Arg.Any<string>(),
-//    //                Arg.Any<Func<Task<MatchOddsMovement>>>(),
-//    //                Arg.Any<Func<DateTimeOffset, bool>>(),
-//    //                Arg.Any<DateTimeOffset>())
-//    //            .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+        [Fact]
+        public async Task GetOddsMovementAsync_ForceFetchNew_GetOrFetchValue()
+        {
+            // Arrange
 
-//    //        // Act
-//    //        var odds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", true);
+            // Act
+            await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", getLatestData: false);
 
-//    //        // Assert
-//    //        mockLogger.Received(1).LogError(Arg.Any<InvalidOperationException>());
-//    //        Assert.NotNull(odds);
-//    //    }
+            // Assert
+            await mockCache.Received(1)
+                .GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
+                    Arg.Any<int>());
+        }
 
-//    //    [Fact]
-//    //    public async Task GetOddsMovement_CacheHasValue_ShouldReturnCorrectListCountFromCache()
-//    //    {
-//    //        // Arrange
-//    //        var expectedMatchOdds = fixture.Create<MatchOddsMovement>();
+        [Fact]
+        public async Task GetOddsMovementAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
+        {
+            // Arrange
+            mockCache.GetOrSetAsync(
+                    Arg.Any<string>(),
+                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
+                    Arg.Any<int>(),
+                    true)
+                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
 
-//    //        mockCache.GetAndFetchLatestLocalMachine(
-//    //            "OddsMovement-sr:match:1-1-dec-sr:book:1",
-//    //            Arg.Any<Func<Task<MatchOddsMovement>>>(),
-//    //            Arg.Any<Func<DateTimeOffset, bool>>(),
-//    //            null).Returns(expectedMatchOdds);
+            // Act
+            var odds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", true);
 
-//    //        // Act
-//    //        var actualOdds = await oddsService.GetOddsMovement("en", "sr:match:1", 1, "dec", "sr:book:1", true);
+            // Assert
+            await mockLogger.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
+            Assert.Null(odds);
+        }
 
-//    //        // Assert
-//    //        Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
-//    //    }
-//    //}
-//}
+        [Fact]
+        public async Task GetOddsMovementAsync_CacheHasValue_ShouldReturnCorrectListCountFromCache()
+        {
+            // Arrange
+            var expectedMatchOdds = fixture.Create<MatchOddsMovement>();
+
+            mockCache.GetOrSetAsync(
+                "OddsMovement-sr:match:1-1-dec-sr:book:1",
+                Arg.Any<Func<Task<MatchOddsMovement>>>(),
+                Arg.Any<int>(),
+                false).Returns(expectedMatchOdds);
+
+            // Act
+            var actualOdds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", false);
+
+            // Assert
+            Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
+        }
+    }
+}

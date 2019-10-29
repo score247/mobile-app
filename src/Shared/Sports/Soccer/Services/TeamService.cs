@@ -10,7 +10,8 @@ namespace LiveScore.Soccer.Services
 {
     public class TeamService : BaseService, ITeamService
     {
-        private const int LongDuration = 7_200;
+        private const int CacheDuration = 7_200;
+        private const string H2HCacheKey = "TeamService.GetHeadToHeadsAsync";
 
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;
@@ -31,12 +32,12 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"TeamService.GetHeadToHeadsAsync:{teamId1}:{teamId2}:{language}";
+                var cacheKey = $"{H2HCacheKey}:{teamId1}:{teamId2}:{language}";
 
                 return await cacheManager.GetOrSetAsync(
                     cacheKey,
                     () => apiService.Execute(() => teamApi.GetHeadToHeads(language, teamId1, teamId2)),
-                    LongDuration,
+                    CacheDuration,
                     forceFetchLatestData)
                     .ConfigureAwait(false);
             }
