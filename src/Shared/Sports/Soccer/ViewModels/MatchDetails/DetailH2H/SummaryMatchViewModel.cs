@@ -37,7 +37,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
             BuildDisplayMatchStatus();
         }
 
-        private string BuildDisplayEventDate(IMatch match)
+        private static string BuildDisplayEventDate(IMatch match)
         {
             var currentYear = DateTimeOffset.Now.Year;
 

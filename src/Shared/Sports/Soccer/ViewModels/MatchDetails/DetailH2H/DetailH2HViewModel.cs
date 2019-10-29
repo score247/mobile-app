@@ -135,20 +135,23 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                     Debug.WriteLine($"H2H HasData {HasData}");
                     Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
 
+                    Debug.WriteLine("H2H Set data into listview");
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
 
                 HasData = Matches.Any();
-
-                VisibleHeadToHead = true;
-
-                VisibleHomeResults = false;
-                VisibleAwayResults = false;
             }
             catch (Exception ex)
             {
                 await LoggingService.LogExceptionAsync(ex);
+
+                HasData = false;
             }
+
+            VisibleHeadToHead = true;
+
+            VisibleHomeResults = false;
+            VisibleAwayResults = false;
         }
 
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
@@ -176,6 +179,13 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                     closedMatches.Count(x => x.WinnerId == match.AwayTeamId),
                     closedMatches.Count())
                 : null;
+        }
+
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Debug.WriteLine("H2H Destroy");
         }
     }
 }
