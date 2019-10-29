@@ -293,32 +293,31 @@
 
         <!-- Head to Head -->
 
-        <Label IsVisible="{Binding NoData}"
-                   Style="{StaticResource NoInfo}"
-                   Text="{languageResources:Translate NoData}"
-                   AutomationId="NoDataLabel" />
+         
+                    <Label IsVisible="{Binding NoData}"
+                           Style="{StaticResource NoInfo}"
+                           Text="{languageResources:Translate NoData}"
+                           AutomationId="NoDataLabel" />
+          
 
         <Frame Style="{StaticResource MatchDetailH2HContainer}"
-               VerticalOptions="FillAndExpand"
                IsVisible="{Binding VisibleHeadToHead}">
-            <CollectionView IsVisible="{Binding HasData}"
-                            x:Name="H2HMatches"
-                            IsGrouped="True"
-                            GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                            ItemTemplate="{StaticResource MatchItemTemplate}"
-                            ItemsSource="{Binding Matches}"
-                            Header="{Binding .}"
-                            HeaderTemplate="{StaticResource HeaderTemplate}"
-                            Scrolled="H2HMatches_OnScrolled"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            Style="{StaticResource CollectionViewHasBackground}"
-                            VerticalOptions="FillAndExpand">
-                <CollectionView.GroupFooterTemplate>
-                    <DataTemplate>
-                        <StackLayout></StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupFooterTemplate>
-            </CollectionView>
+                <CollectionView IsVisible="{Binding HasData}"
+                                x:Name="H2HMatches"
+                                IsGrouped="True"
+                                GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                                ItemTemplate="{StaticResource MatchItemTemplate}"
+                                ItemsSource="{Binding Matches}"
+                                Header="{Binding .}"
+                                HeaderTemplate="{StaticResource HeaderTemplate}"
+                                Scrolled="H2HMatches_OnScrolled"
+                                Style="{StaticResource CollectionViewHasBackground}">
+                    <CollectionView.GroupFooterTemplate>
+                        <DataTemplate>
+                            <StackLayout></StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupFooterTemplate>
+                </CollectionView>
         </Frame>
 
         <!-- Away Team -->

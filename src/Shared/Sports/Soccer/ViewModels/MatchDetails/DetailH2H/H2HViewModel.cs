@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -12,7 +11,6 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
 using Prism.Commands;
 using Prism.Events;
@@ -120,6 +118,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             }
 
             VisibleHeadToHead = false;
+            HasData = true;
         }
 
         private async Task LoadHeadToHeadAsync(bool forceFetchLatestData = false)
