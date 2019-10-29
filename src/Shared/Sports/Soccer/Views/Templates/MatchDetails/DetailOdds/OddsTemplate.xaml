@@ -90,7 +90,7 @@
                                       AutomationProperties.IsInAccessibleTree="False"
                                       BackgroundColor="{StaticResource ListViewLightBgColor}"
                                       HasUnevenRows="true"
-                                      Header="{Binding HeaderTitle}"
+                                      Header="{Binding HasData, StringFormat=''}"
                                       HeaderTemplate="{Binding HeaderTemplate}"
                                       IsPullToRefreshEnabled="true"
                                       IsRefreshing="{Binding IsRefreshing}"
