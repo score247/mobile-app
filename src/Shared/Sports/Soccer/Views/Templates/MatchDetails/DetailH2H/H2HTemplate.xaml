@@ -293,13 +293,10 @@
 
         <!-- Head to Head -->
 
-        <StackLayout BackgroundColor="Black"
-                     IsVisible="{Binding VisibleHeadToHead}">
-            <Label IsVisible="{Binding NoData}"
+        <Label IsVisible="{Binding NoData}"
                    Style="{StaticResource NoInfo}"
                    Text="{languageResources:Translate NoData}"
                    AutomationId="NoDataLabel" />
-        </StackLayout>
 
         <Frame Style="{StaticResource MatchDetailH2HContainer}"
                VerticalOptions="FillAndExpand"
