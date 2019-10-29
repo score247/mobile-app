@@ -37,11 +37,11 @@
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout BackgroundColor="#272830">
-                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween" >
+                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
                             <Label Style="{StaticResource GroupName}" Text="{Binding Home.Name}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Home.FormationFomatted}" />
                         </FlexLayout>
-                        <WebView HeightRequest="560" Source="{Binding LineupsPitchView}" />
+                        <WebView HeightRequest="555" Source="{Binding LineupsPitchView}" />
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
                             <Label Style="{StaticResource GroupName}" Text="{Binding Away.Name}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Away.FormationFomatted}" />
@@ -58,7 +58,7 @@
                                 <Label Style="{StaticResource GroupName}" Text="{Binding Name}" />
                             </FlexLayout>
                             <BoxView Style="{StaticResource HorizontalLine}" />
-                        </StackLayout>                        
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.GroupHeaderTemplate>
@@ -87,6 +87,6 @@
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>        
+        </ListView>
     </StackLayout>
 </DataTemplate>
