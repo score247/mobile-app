@@ -9,7 +9,5 @@
         string AssetsEndPoint { get; }
 
         string AppCenterSecret { get; }
-
-        string Environment { get; }
     }
 }
