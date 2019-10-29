@@ -8,7 +8,6 @@
     using LiveScore.Core.Models.Teams;
     using LiveScore.Soccer.Models.Leagues;
     using LiveScore.Soccer.Models.Matches;
-    using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.Models.Teams;
 
     public class CommonFixture
@@ -29,9 +28,6 @@
             Specimens.Register<ILeagueRound>(() => Specimens.Create<LeagueRound>());           
             Specimens.Register<IBetTypeOdds>(() => Specimens.Create<BetTypeOdds>());
             Specimens.Register<IOddsMovement>(() => Specimens.Create<OddsMovement>());
-
-            Specimens.Register(() => Specimens.Create<MatchOdds>());
-            Specimens.Register(() => Specimens.Create<MatchOddsMovement>());
         }
 
         public CompareLogic Comparer { get; }

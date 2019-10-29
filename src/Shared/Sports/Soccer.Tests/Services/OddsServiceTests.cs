@@ -1,11 +1,11 @@
 ﻿namespace Soccer.Tests.Services
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using AutoFixture;
-    using Fanex.Caching;
     using KellermanSoftware.CompareNetObjects;
     using LiveScore.Common.Services;
+    using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.Services;
@@ -16,7 +16,6 @@
     public class OddsServiceTests : IClassFixture<CommonFixture>
     {
         private readonly CompareLogic comparer;
-        private readonly Fixture fixture;
         private readonly IApiService mockApiService;
         private readonly ICacheManager mockCache;
         private readonly ILoggingService mockLogger;
@@ -25,7 +24,6 @@
         public OddsServiceTests(CommonFixture commonFixture)
         {
             comparer = commonFixture.Comparer;
-            fixture = commonFixture.Specimens;
             mockCache = Substitute.For<ICacheManager>();
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
@@ -93,11 +91,11 @@
         public async Task GetOddsAsync_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
             // Arrange
-            var expectedMatchOdds = fixture.Create<MatchOdds>();
+            var expectedMatchOdds = StubOdds("sr:match:1", 1, "over under");
 
             mockCache
                 .GetOrSetAsync(
-                    "OddsComparison-sr:match:1-1-decimal",
+                    "LiveScore.Soccer.Services.OddsComparison:sr:match:1:1:decimal",
                     Arg.Any<Func<Task<MatchOdds>>>(),
                     Arg.Any<int>())
                 .Returns(expectedMatchOdds);
@@ -108,6 +106,8 @@
             // Assert
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
         }
+
+
 
         [Fact]
         public async Task GetOddsMovementAsync_ForceFetchNew_GetAndFetchLatestValue()
@@ -166,10 +166,11 @@
         public async Task GetOddsMovementAsync_CacheHasValue_ShouldReturnCorrectListCountFromCache()
         {
             // Arrange
-            var expectedMatchOdds = fixture.Create<MatchOddsMovement>();
+            var matchId = "sr:match:1";
+            var expectedMatchOdds = StubOddsMovement(matchId);
 
             mockCache.GetOrSetAsync(
-                "OddsMovement-sr:match:1-1-dec-sr:book:1",
+                $"LiveScore.Soccer.Services.OddsMovement:{matchId}:1:dec:sr:book:1",
                 Arg.Any<Func<Task<MatchOddsMovement>>>(),
                 Arg.Any<int>(),
                 false).Returns(expectedMatchOdds);
@@ -180,5 +181,24 @@
             // Assert
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
         }
+
+        private static MatchOdds StubOdds(string matchId, byte betTypeId, string betTypeName)
+           => new MatchOdds(
+               matchId,
+               new List<BetTypeOdds>
+               {
+                    new BetTypeOdds(betTypeId, betTypeName, new Bookmaker("1", "William"), new List<BetOptionOdds>())
+               }
+               );
+
+        private static MatchOddsMovement StubOddsMovement(string matchId)
+           => new MatchOddsMovement(
+               matchId,
+               new Bookmaker("1", "William"),
+               new List<OddsMovement>
+               {
+                    new OddsMovement("5'", 1, 0, true, new List<BetOptionOdds>(), DateTimeOffset.Now)
+               }
+               );
     }
 }

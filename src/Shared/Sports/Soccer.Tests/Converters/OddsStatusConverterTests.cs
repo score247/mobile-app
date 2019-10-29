@@ -49,5 +49,18 @@
             // Assert
             Assert.Equal(Color.FromHex("#66FF59"), actual);
         }
+
+        [Fact]
+        public void Convert_ValueIsNeutral_ReturnWhite()
+        {
+            // Arrange
+            var converter = new OddsStatusConverter();
+
+            // Act
+            var actual = converter.Convert(OddsTrend.Neutral.Value.ToString(), null, null, null);
+
+            // Assert
+            Assert.Equal(Color.FromHex("#1D2133"), actual);
+        }
     }
 }
