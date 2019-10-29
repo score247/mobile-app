@@ -18,7 +18,8 @@ namespace LiveScore.Soccer.Views
             var tabStripOffset = TabStrip.Y;
             MessagingCenter.Subscribe<string, double>("TabListView", "OnScrolling", async (_, scrollY) =>
             {
-                await MatchDetailLayout.TranslateTo(0, scrollY <= tabStripOffset ? -scrollY : -tabStripOffset, 0, Easing.Linear);
+                var newOffset = scrollY <= tabStripOffset ? scrollY : tabStripOffset;
+                await MatchDetailLayout.LayoutTo(new Rectangle(0, -newOffset, MatchDetailLayout.Width, MatchDetailLayout.Height + newOffset), 0, Easing.Linear);
             });
         }
 
