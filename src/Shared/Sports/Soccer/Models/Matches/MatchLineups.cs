@@ -8,6 +8,8 @@ namespace LiveScore.Soccer.Models.Matches
     [MessagePackObject]
     public class MatchLineups
     {
+        private const string PitchViewHtml = "<html><body style=\"padding: 0; margin: 0\">{0}</body></html>";
+
         public MatchLineups(string id)
         {
             Id = id;
@@ -44,6 +46,6 @@ namespace LiveScore.Soccer.Models.Matches
         public string PitchView { get; }
 
         [IgnoreMember]
-        public HtmlWebViewSource LineupsPitchView => new HtmlWebViewSource { Html = $"<html><body style=\"padding: 0; margin: 0\">{PitchView}</body></html>" };
+        public HtmlWebViewSource LineupsPitchView => new HtmlWebViewSource { Html = string.Format(PitchViewHtml, PitchView) };
     }
 }
