@@ -180,12 +180,5 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                     closedMatches.Count())
                 : null;
         }
-
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            Debug.WriteLine("H2H Destroy");
-        }
     }
 }
