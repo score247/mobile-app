@@ -12,6 +12,11 @@ namespace LiveScore.Soccer.Converters
         {
             Color color;
 
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return (Color)Application.Current.Resources["PrimaryTextColor"];
+            }
+
             if (value.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
             {
                 color = (Color)Application.Current.Resources["UpLiveOddColor"];
