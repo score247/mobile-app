@@ -6,7 +6,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core">
     <Grid Style="{StaticResource MatchGeneralInfoTeams}"
-          IsVisible="{Binding VisibleStats}">
+          IsVisible="{Binding VisibleStats}" Padding="0,12,0,0">
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

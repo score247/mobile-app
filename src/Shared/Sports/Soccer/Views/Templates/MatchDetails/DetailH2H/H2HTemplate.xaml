@@ -296,7 +296,7 @@
                IsVisible="{Binding VisibleHeadToHead}">
             <StackLayout Orientation="Vertical">
 
-                <StackLayout BackgroundColor="Black">
+                <StackLayout>
                     <Label IsVisible="{Binding NoData}"
                            Style="{StaticResource NoInfo}"
                            Text="{languageResources:Translate NoData}"
