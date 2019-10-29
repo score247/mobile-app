@@ -1,7 +1,7 @@
 ﻿using LiveScore.Core.Enumerations;
 using MessagePack;
 
-namespace LiveScore.Core.Models.Teams
+namespace LiveScore.Soccer.Models.Teams
 {
     [MessagePackObject]
     public class Position : Enumeration
