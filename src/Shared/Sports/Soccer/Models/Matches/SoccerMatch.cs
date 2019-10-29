@@ -109,7 +109,9 @@ namespace LiveScore.Soccer.Models.Matches
         [Key(2)]
         public DateTimeOffset CurrentPeriodStartTime
         {
-            get => this.currentPeriodStartTime == DateTimeOffset.MinValue ? EventDate : currentPeriodStartTime;
+            get => this.currentPeriodStartTime == DateTimeOffset.MinValue
+                ? EventDate
+                : currentPeriodStartTime;
             set => this.currentPeriodStartTime = value;
         }
 

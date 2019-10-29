@@ -15,45 +15,54 @@ namespace LiveScore.Features.Score.Extensions
     public static class MatchItemSourceExtension
     {
         public static void AddItems(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {
-                if (!matchItems.Contains(item))
+                if (!groupMatchViewModels.Contains(item))
                 {
-                    matchItems.Add(item);
+                    groupMatchViewModels.Add(item);
                 }
             }
         }
 
         public static void RemoveItems(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {
-                matchItems.Remove(item);
+                groupMatchViewModels.Remove(item);
             }
         }
 
         public static void UpdateMatchItems(
-                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
                 IEnumerable<IMatch> matches,
                 IMatchDisplayStatusBuilder matchStatusBuilder,
                 IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
-            var matchViewModels = matchItems?.SelectMany(g => g).ToList();
+            var groupMatchViewModel = groupMatchViewModels?
+                .SelectMany(group => group)
+                .ToList();
 
-            foreach (var match in matches.OrderBy(m => m.LeagueOrder))
+            foreach (var match in matches.OrderBy(match => match.LeagueOrder))
             {
-                var matchViewModel = matchViewModels?.FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
+                var matchViewModel = groupMatchViewModel?
+                    .FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
 
                 if (matchViewModel == null)
                 {
-                    matchItems.AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc);
+                    groupMatchViewModels
+                        .AddNewMatch(
+                            match,
+                            matchStatusBuilder,
+                            matchMinuteBuilder,
+                            eventAggregator,
+                            buildFlagUrlFunc);
 
                     continue;
                 }
@@ -66,19 +75,19 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void AddNewMatch(
-                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
                 IMatch newMatch,
                 IMatchDisplayStatusBuilder matchStatusBuilder,
                 IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
-            var currentGroupIndex = matchItems.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
+            var currentGroupIndex = groupMatchViewModels.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
             List<MatchViewModel> currentMatchViewModels;
 
             if (currentGroupIndex >= 0)
             {
-                currentMatchViewModels = matchItems[currentGroupIndex].ToList();
+                currentMatchViewModels = groupMatchViewModels[currentGroupIndex].ToList();
 
                 currentMatchViewModels
                     .Add(new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator));
@@ -88,7 +97,7 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                matchItems[currentGroupIndex] = group;
+                groupMatchViewModels[currentGroupIndex] = group;
             }
             else
             {
@@ -102,28 +111,28 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                var leagueOrders = matchItems.Select(i => i.Key.LeagueOrder).ToList();
+                var leagueOrders = groupMatchViewModels.Select(i => i.Key.LeagueOrder).ToList();
                 var newLeagueIndex = CalculateLeagueIndexByOrder(group?.Key.LeagueOrder ?? 0, leagueOrders);
 
-                if (newLeagueIndex >= matchItems.Count)
+                if (newLeagueIndex >= groupMatchViewModels.Count)
                 {
-                    matchItems.Add(group);
+                    groupMatchViewModels.Add(group);
                 }
                 else
                 {
-                    matchItems.Insert(newLeagueIndex, group);
+                    groupMatchViewModels.Insert(newLeagueIndex, group);
                 }
             }
         }
 
         public static void RemoveMatches(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             string[] removedMatchIds,
             Func<string, string> buildFlagUrlFunc)
         {
             foreach (var removedMatchId in removedMatchIds)
             {
-                var league = matchItems
+                var league = groupMatchViewModels
                     .FirstOrDefault(l => l.Any(match => match.Match.Id == removedMatchId));
 
                 if (league == null)
@@ -136,22 +145,22 @@ namespace LiveScore.Features.Score.Extensions
 
                 if (leagueMatches.Count == 0)
                 {
-                    matchItems.Remove(league);
+                    groupMatchViewModels.Remove(league);
                     continue;
                 }
 
-                var indexOfLeague = matchItems.IndexOf(league);
-                matchItems[indexOfLeague] = leagueMatches
+                var indexOfLeague = groupMatchViewModels.IndexOf(league);
+                groupMatchViewModels[indexOfLeague] = leagueMatches
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
             }
         }
 
         public static void UpdateMatchItemEvent(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             IMatchEvent matchEvent)
         {
-            var matchItem = matchItems?
+            var matchItem = groupMatchViewModels?
                 .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match != null && m.Match.Id == matchEvent.MatchId);
 
@@ -162,12 +171,12 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void UpdateMatchItemStatistics(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> matchItems,
+            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             string matchId,
             bool isHome,
             ITeamStatistic statistic)
         {
-            var matchItem = matchItems?
+            var matchItem = groupMatchViewModels?
                 .SelectMany(group => group)
                 .FirstOrDefault(m => m.Match != null && m.Match.Id == matchId);
 
