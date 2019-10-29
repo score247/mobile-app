@@ -11,9 +11,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\**" />
-    <EmbeddedResource Remove="ViewModels\**" />
-    <None Remove="ViewModels\**" />
+    <Compile Remove="ViewModels\DetailInfo\InfoItem\**" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\AsianHdp\**" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\OneXTwo\**" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\OverUnder\**" />
+    <EmbeddedResource Remove="ViewModels\DetailInfo\InfoItem\**" />
+    <EmbeddedResource Remove="ViewModels\DetailOdds\OddsItems\AsianHdp\**" />
+    <EmbeddedResource Remove="ViewModels\DetailOdds\OddsItems\OneXTwo\**" />
+    <EmbeddedResource Remove="ViewModels\DetailOdds\OddsItems\OverUnder\**" />
+    <None Remove="ViewModels\DetailInfo\InfoItem\**" />
+    <None Remove="ViewModels\DetailOdds\OddsItems\AsianHdp\**" />
+    <None Remove="ViewModels\DetailOdds\OddsItems\OneXTwo\**" />
+    <None Remove="ViewModels\DetailOdds\OddsItems\OverUnder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ViewModels\DetailInfo\DetailInfoViewModelTests.cs" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\BaseItemViewModelTests.cs" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\BaseMovementItemViewModelTests.cs" />
+    <Compile Remove="ViewModels\DetailOdds\OddsItems\OddsMovementViewModelTests.cs" />
+    <Compile Remove="ViewModels\DetailOdds\OddsMovementViewModelTests.cs" />
+    <Compile Remove="ViewModels\MatchDetailViewModelTests.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,5 +45,10 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core.Tests\LiveScore.Core.Tests.csproj" />
     <ProjectReference Include="..\Soccer\Soccer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\DetailInfo\" />
+    <Folder Include="ViewModels\DetailOdds\OddsItems\" />
   </ItemGroup>
 </Project>

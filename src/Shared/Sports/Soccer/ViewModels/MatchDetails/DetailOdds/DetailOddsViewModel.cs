@@ -84,10 +84,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
         public override async void OnResumeWhenNetworkOK()
         {
             await LoggingService
-                  .TrackEventAsync(
-                  $"Odds - {matchId}",
-                  $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK").ConfigureAwait(false);
+                              .TrackEventAsync(
+                              $"Odds - {matchId}",
+                              $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK").ConfigureAwait(false);
 
+            await Resume();
+        }
+
+        internal async Task Resume()
+        {
             await UpdateOddsByBetTypeAsync().ConfigureAwait(false);
 
             SubscribeEvents();
@@ -137,7 +142,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
 
         [Time]
-        private async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType, bool isRefresh = false)
+        internal async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType, bool isRefresh = false)
         {
             if (CanLoadOdds(betType, isRefresh))
             {
@@ -171,11 +176,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 forceFetchNew).ConfigureAwait(false);
 
             HasData = odds?.BetTypeOddsList?.Any() == true;
-
-            LoggingService
-                    ?.TrackEventAsync(
-                    $"Odds - {matchId}",
-                    $"{DateTime.Now} LoadOddsByBetTypeAsync - Selected BetType {SelectedBetType} - Has Data {HasData}");
 
             HeaderTemplate = new BaseHeaderViewModel(
                 SelectedBetType,
@@ -217,12 +217,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 .Where(x => x.Id == SelectedBetType.Value);
             {
                 var needToReOrder = false;
-
-                LoggingService
-                    .TrackEvent(
-                    "DetailOddsViewModel",
-                    $"HandleOddsComparisonMessage {DateTime.Now} - SoccerMatch {oddsComparisonMessage.MatchId} - Selected BetType {SelectedBetType} - Update odds");
-
+               
                 foreach (var updatedOdds in updatedBetTypeOdds)
                 {
                     var existingOddsItem = BetTypeOddsItems
