@@ -8,13 +8,13 @@ using Xunit;
 
 namespace Soccer.Tests.Converters
 {
-    public class MatchStatusConverterTests
+    public class MatchStatusBuilderTests
     {
         private readonly MatchStatusBuilder matchStatusBuilder;
         private readonly Fixture fixture;
         private readonly Random random;
 
-        public MatchStatusConverterTests()
+        public MatchStatusBuilderTests()
         {
             matchStatusBuilder = new MatchStatusBuilder();
             fixture = new Fixture();

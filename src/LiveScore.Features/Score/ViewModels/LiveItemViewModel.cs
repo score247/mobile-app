@@ -32,8 +32,8 @@ namespace LiveScore.Features.Score.ViewModels
             var matchItemViewModels
                 = matches.Select(match => new MatchViewModel(
                     match,
-                    matchStatusConverter,
-                    matchMinuteConverter,
+                    matchStatusBuilder,
+                    matchMinuteBuilder,
                     EventAggregator));
 
             var matchItems
@@ -59,15 +59,15 @@ namespace LiveScore.Features.Score.ViewModels
 
                 MatchItemsSource.UpdateMatchItems(
                     matches,
-                    matchStatusConverter,
-                    matchMinuteConverter,
+                    matchStatusBuilder,
+                    matchMinuteBuilder,
                     EventAggregator,
                     buildFlagUrlFunc);
             });
         }
 
         protected override async Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
-            => await MatchService
+            => await matchService
                 .GetLiveMatchesAsync(CurrentLanguage, getLatestData)
                 .ConfigureAwait(false);
 
@@ -86,8 +86,8 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource.UpdateMatchItems(
                     message.NewMatches,
-                    matchStatusConverter,
-                    matchMinuteConverter,
+                    matchStatusBuilder,
+                    matchMinuteBuilder,
                     EventAggregator,
                     buildFlagUrlFunc));
             }

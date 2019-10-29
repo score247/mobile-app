@@ -17,6 +17,7 @@ namespace LiveScore.Soccer.Models.Matches
     public class SoccerMatch : IMatch
     {
         private const int NumberOfFullTimePeriodsResult = 2;
+        private DateTimeOffset currentPeriodStartTime;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -57,7 +58,7 @@ namespace LiveScore.Soccer.Models.Matches
         {
             Id = id;
             EventDate = eventDate;
-            CurrentPeriodStartTime = currentPeriodStartTime;
+            this.currentPeriodStartTime = currentPeriodStartTime == DateTimeOffset.MinValue ? eventDate : currentPeriodStartTime;
             LeagueId = leagueId;
             LeagueName = leagueName;
             HomeTeamId = homeTeamId;
@@ -106,7 +107,11 @@ namespace LiveScore.Soccer.Models.Matches
         public DateTimeOffset EventDate { get; private set; }
 
         [Key(2)]
-        public DateTimeOffset CurrentPeriodStartTime { get; set; }
+        public DateTimeOffset CurrentPeriodStartTime
+        {
+            get => this.currentPeriodStartTime == DateTimeOffset.MinValue ? EventDate : currentPeriodStartTime;
+            set => this.currentPeriodStartTime = value;
+        }
 
         [Key(3)]
         public string LeagueId { get; private set; }
@@ -169,7 +174,7 @@ namespace LiveScore.Soccer.Models.Matches
         public string StoppageTime { get; private set; }
 
         [Key(23)]
-        public byte InjuryTimeAnnounced { get; private set; }
+        public byte InjuryTimeAnnounced { get; set; }
 
         [Key(24)]
         public EventType LastTimelineType { get; private set; }
@@ -254,6 +259,7 @@ namespace LiveScore.Soccer.Models.Matches
 
             LastTimelineType = soccerTimeline.Type;
             StoppageTime = soccerTimeline.StoppageTime;
+
             InjuryTimeAnnounced = soccerTimeline.InjuryTimeAnnounced;
         }
 

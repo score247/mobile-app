@@ -6,7 +6,7 @@ using MessagePack;
 namespace LiveScore.Core.Models.Matches
 {
     /// <summary>
-    /// TODO: Gob object, why dont we have specified TimelineEvents, eg: Score Events, Card events???
+    /// TODO: God object, why dont we have specified TimelineEvents, eg: Score Events, Card events???
     /// </summary>
     [MessagePackObject(keyAsPropertyName: true)]
     public class TimelineEvent : ITimelineEvent

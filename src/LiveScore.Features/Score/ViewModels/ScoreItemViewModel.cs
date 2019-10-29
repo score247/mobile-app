@@ -31,9 +31,9 @@ namespace LiveScore.Features.Score.ViewModels
         private const int DefaultFirstLoadMatchItemCount = 5;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
 
-        protected readonly IMatchDisplayStatusBuilder matchStatusConverter;
-        protected readonly IMatchMinuteBuilder matchMinuteConverter;
-        protected readonly IMatchService MatchService;
+        protected readonly IMatchDisplayStatusBuilder matchStatusBuilder;
+        protected readonly IMatchMinuteBuilder matchMinuteBuilder;
+        protected readonly IMatchService matchService;
         protected readonly Func<string, string> buildFlagUrlFunc;
         private readonly ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> skeletonItems;
 
@@ -47,9 +47,9 @@ namespace LiveScore.Features.Score.ViewModels
         {
             ViewDate = viewDate;
 
-            MatchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
-            matchStatusConverter = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
-            matchMinuteConverter = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
+            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
+            matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
+            matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             skeletonItems = InitializeSkeletonMatchItems();
@@ -293,7 +293,7 @@ namespace LiveScore.Features.Score.ViewModels
         }
 
         protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
-            => MatchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage, getLatestData);
+            => matchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage, getLatestData);
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
@@ -311,8 +311,8 @@ namespace LiveScore.Features.Score.ViewModels
                 Device.BeginInvokeOnMainThread(() =>
                     MatchItemsSource.UpdateMatchItems(
                         loadedMatches,
-                        matchStatusConverter,
-                        matchMinuteConverter,
+                        matchStatusBuilder,
+                        matchMinuteBuilder,
                         EventAggregator,
                         buildFlagUrlFunc));
 
@@ -321,8 +321,8 @@ namespace LiveScore.Features.Score.ViewModels
                 RemainingMatchItemSource
                     .UpdateMatchItems(
                         remainingMatches,
-                        matchStatusConverter,
-                        matchMinuteConverter,
+                        matchStatusBuilder,
+                        matchMinuteBuilder,
                         EventAggregator,
                         buildFlagUrlFunc);
             }
@@ -337,8 +337,8 @@ namespace LiveScore.Features.Score.ViewModels
         {
             var matchItemViewModels = matches.Select(match => new MatchViewModel(
                 match,
-                matchStatusConverter,
-                matchMinuteConverter,
+                matchStatusBuilder,
+                matchMinuteBuilder,
                 EventAggregator));
 
             var matchItems
@@ -366,7 +366,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             for (var i = 0; i < 8; i++)
             {
-                skeletonViewModels.Add(new MatchViewModel(null, matchStatusConverter, matchMinuteConverter, EventAggregator, true));
+                skeletonViewModels.Add(new MatchViewModel(null, matchStatusBuilder, matchMinuteBuilder, EventAggregator, true));
             }
 
             return new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(

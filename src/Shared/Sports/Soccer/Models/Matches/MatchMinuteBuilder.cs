@@ -34,27 +34,23 @@ namespace LiveScore.Soccer.Models.Matches
         // TODO: Remove casting
         public string BuildMatchMinute(IMatch match) => BuildMatchMinute(match as SoccerMatch, DateTimeOffset.UtcNow);
 
-        internal string BuildMatchMinute(SoccerMatch soccerMatch, DateTimeOffset queryTime)
+        internal string BuildMatchMinute(SoccerMatch match, DateTimeOffset timeToViewMatch)
         {
             try
             {
-                if (soccerMatch == null)
+                if (match == null)
                 {
                     return string.Empty;
                 }
 
-                var (periodStartMinute, periodEndMinute) = PeriodTimes[soccerMatch.MatchStatus];
-
-                var periodStartTime = soccerMatch.CurrentPeriodStartTime == DateTimeOffset.MinValue
-                    ? soccerMatch.EventDate
-                    : soccerMatch.CurrentPeriodStartTime;
+                var (periodStartMinute, periodEndMinute) = PeriodTimes[match.MatchStatus];
 
                 // TODO: What if CurrentPeriodStartTime does not have data?
-                var matchMinute = (int)(periodStartMinute + (queryTime - periodStartTime).TotalMinutes);
+                var matchMinute = (int)(periodStartMinute + (timeToViewMatch - match.CurrentPeriodStartTime).TotalMinutes);
 
-                if ((soccerMatch.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime(soccerMatch) > 0)
+                if ((match.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime(match) > 0)
                 {
-                    return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute, soccerMatch);
+                    return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute, match);
                 }
 
                 if (matchMinute >= periodEndMinute)
