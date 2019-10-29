@@ -12,7 +12,7 @@
               xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
               xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
               xmlns:templates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H;assembly=LiveScore.Soccer">
-    <StackLayout>
+    <StackLayout BackgroundColor="{StaticResource ListViewLightBgColor}">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

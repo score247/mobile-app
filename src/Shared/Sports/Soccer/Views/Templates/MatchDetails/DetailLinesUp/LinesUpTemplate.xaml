@@ -57,7 +57,6 @@
                             <FlexLayout Style="{StaticResource Group}">
                                 <Label Style="{StaticResource GroupName}" Text="{Binding Name}" />
                             </FlexLayout>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -65,25 +64,28 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="42" />
-                            </Grid.RowDefinitions>
-                            <Label Grid.Column="2" Text="{Binding HomeJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                            <Label Grid.Column="3" Text="{Binding HomeName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                            <Label Grid.Column="6" Text="{Binding AwayJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                            <Label Grid.Column="7" Text="{Binding AwayName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                        </Grid>
+                        <StackLayout>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="42" />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="2" Text="{Binding HomeJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                <Label Grid.Column="3" Text="{Binding HomeName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                                <Label Grid.Column="6" Text="{Binding AwayJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                <Label Grid.Column="7" Text="{Binding AwayName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                            </Grid>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
