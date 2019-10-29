@@ -11,7 +11,7 @@ namespace LiveScore.Soccer.Services
     public class TeamService : BaseService, ITeamService
     {
         private const int CacheDuration = 7_200;
-        private const string H2HCacheKey = "TeamService.GetHeadToHeadsAsync";
+        private const string H2HCacheKey = "LiveScore.Soccer.Services.TeamService.GetHeadToHeadsAsync";
 
         private readonly IApiService apiService;
         private readonly ICacheManager cacheManager;

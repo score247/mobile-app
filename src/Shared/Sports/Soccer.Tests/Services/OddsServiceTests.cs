@@ -107,8 +107,6 @@
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);
         }
 
-
-
         [Fact]
         public async Task GetOddsMovementAsync_ForceFetchNew_GetAndFetchLatestValue()
         {
