@@ -155,13 +155,12 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             var matchGroups = headToHeads
                 .OrderByDescending(m => m.EventDate)
                 .Select(m => new SummaryMatchViewModel(
-                    match,
+                    m,
                     matchStatusBuilder
                 ))
                 .GroupBy(item => new H2HMatchGrouping(item.Match));
 
-            return
-                matchGroups.Select(g => new H2HMatchGroupViewModel(g.ToList(), buildFlagUrlFunc));
+            return matchGroups.Select(g => new H2HMatchGroupViewModel(g.ToList(), buildFlagUrlFunc));
         }
 
         private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)

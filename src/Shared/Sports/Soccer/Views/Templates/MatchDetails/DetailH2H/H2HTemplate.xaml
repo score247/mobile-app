@@ -305,7 +305,7 @@
                             ItemTemplate="{StaticResource MatchItemTemplate}"
                             ItemsSource="{Binding Matches}"
                             Header="{Binding .}"
-                            ItemSizingStrategy="MeasureAllItems"
+                            ItemSizingStrategy="MeasureFirstItem"
                             HeaderTemplate="{StaticResource HeaderTemplate}"
                             Scrolled="H2HMatches_OnScrolled"
                             Style="{StaticResource CollectionViewHasBackground}">
