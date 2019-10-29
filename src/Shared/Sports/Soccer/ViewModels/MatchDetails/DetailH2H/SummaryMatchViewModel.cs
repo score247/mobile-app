@@ -11,15 +11,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
     public class SummaryMatchViewModel : BaseViewModel
     {
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
-        private readonly IMatchMinuteBuilder matchMinuteBuilder;
 
         public SummaryMatchViewModel(
             IMatch match,
-            IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
-            IMatchMinuteBuilder matchMinuteBuilder)
+            IMatchDisplayStatusBuilder matchDisplayStatusBuilder)
         {
             this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
-            this.matchMinuteBuilder = matchMinuteBuilder;
 
             BuildMatch(match);
         }
@@ -48,11 +45,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 
         private void BuildDisplayMatchStatus()
         {
-            var matchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
-
-            DisplayMatchStatus = string.IsNullOrWhiteSpace(matchStatus)
-                ? matchMinuteBuilder.BuildMatchMinute(Match)
-                : matchStatus;
+            DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
         }
     }
 }

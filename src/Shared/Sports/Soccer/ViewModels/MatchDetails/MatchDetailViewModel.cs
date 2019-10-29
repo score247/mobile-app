@@ -27,7 +27,6 @@ using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailSocial;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailTV;
-using LiveScore.Soccer.Views.Templates.DetailH2H;
 using LiveScore.Soccer.Views.Templates.DetailInfo;
 using LiveScore.Soccer.Views.Templates.DetailLinesUp;
 using LiveScore.Soccer.Views.Templates.DetailSocial;
@@ -35,6 +34,7 @@ using LiveScore.Soccer.Views.Templates.DetailStatistics;
 using LiveScore.Soccer.Views.Templates.DetailTable;
 using LiveScore.Soccer.Views.Templates.DetailTracker;
 using LiveScore.Soccer.Views.Templates.DetailTV;
+using LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H;
 using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
 using MethodTimer;
 using Prism.Commands;
@@ -219,7 +219,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             {
                 [MatchDetailFunction.Odds] = new DetailOddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
                 [MatchDetailFunction.Info] = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InfoTemplate()),
-                [MatchDetailFunction.H2H] = new DetailH2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
+                [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
                 [MatchDetailFunction.Lineups] = new DetailLineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LinesUpTemplate()),
                 [MatchDetailFunction.Social] = new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
                 [MatchDetailFunction.Stats] = new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),

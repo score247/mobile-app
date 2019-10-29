@@ -6,7 +6,7 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Templates.DetailH2H.H2HTemplate"
+              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.DetailH2H.H2HTemplate"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
@@ -293,32 +293,35 @@
 
         <!-- Head to Head -->
 
-         <StackLayout BackgroundColor="Black"
-                      IsVisible="{Binding VisibleHeadToHead}">
-                    <Label IsVisible="{Binding NoData}"
-                           Style="{StaticResource NoInfo}"
-                           Text="{languageResources:Translate NoData}"
-                           AutomationId="NoDataLabel" />
-          </StackLayout>
+        <StackLayout BackgroundColor="Black"
+                     IsVisible="{Binding VisibleHeadToHead}">
+            <Label IsVisible="{Binding NoData}"
+                   Style="{StaticResource NoInfo}"
+                   Text="{languageResources:Translate NoData}"
+                   AutomationId="NoDataLabel" />
+        </StackLayout>
 
         <Frame Style="{StaticResource MatchDetailH2HContainer}"
+               VerticalOptions="FillAndExpand"
                IsVisible="{Binding VisibleHeadToHead}">
-                <CollectionView IsVisible="{Binding HasData}"
-                                x:Name="H2HMatches"
-                                IsGrouped="True"
-                                GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                                ItemTemplate="{StaticResource MatchItemTemplate}"
-                                ItemsSource="{Binding Matches}"
-                                Header="{Binding .}"
-                                HeaderTemplate="{StaticResource HeaderTemplate}"
-                                Scrolled="H2HMatches_OnScrolled"
-                                Style="{StaticResource CollectionViewHasBackground}">
-                    <CollectionView.GroupFooterTemplate>
-                        <DataTemplate>
-                            <StackLayout></StackLayout>
-                        </DataTemplate>
-                    </CollectionView.GroupFooterTemplate>
-                </CollectionView>
+            <CollectionView IsVisible="{Binding HasData}"
+                            x:Name="H2HMatches"
+                            IsGrouped="True"
+                            GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                            ItemTemplate="{StaticResource MatchItemTemplate}"
+                            ItemsSource="{Binding Matches}"
+                            Header="{Binding .}"
+                            HeaderTemplate="{StaticResource HeaderTemplate}"
+                            Scrolled="H2HMatches_OnScrolled"
+                            ItemSizingStrategy="MeasureFirstItem"
+                            Style="{StaticResource CollectionViewHasBackground}"
+                            VerticalOptions="FillAndExpand">
+                <CollectionView.GroupFooterTemplate>
+                    <DataTemplate>
+                        <StackLayout></StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupFooterTemplate>
+            </CollectionView>
         </Frame>
 
         <!-- Away Team -->

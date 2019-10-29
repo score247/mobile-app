@@ -12,6 +12,7 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
 using Prism.Commands;
 using Prism.Events;
@@ -20,16 +21,14 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.DetailH2H
 {
-    public class DetailH2HViewModel : TabItemViewModel
+    public class H2HViewModel : TabItemViewModel
     {
         private readonly IMatch match;
-
         private readonly ITeamService teamService;
         private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
-        private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly Func<string, string> buildFlagUrlFunc;
 
-        public DetailH2HViewModel(
+        public H2HViewModel(
             IMatch match,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -38,10 +37,9 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.H2H)
         {
             this.match = match;
-            InitData();
+            Initialize();
 
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
-            matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
@@ -75,7 +73,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         public ObservableCollection<H2HMatchGroupViewModel> Matches { get; set; }
 
-        private void InitData()
+        private void Initialize()
         {
             HomeTeamName = match.HomeTeamName;
             AwayTeamName = match.AwayTeamName;
@@ -85,14 +83,14 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
             Stats = new H2HStatisticViewModel();
         }
 
-        public async override void OnAppearing()
+        public override async void OnAppearing()
         {
             base.OnAppearing();
 
             await LoadHeadToHeadAsync(true);
         }
 
-        public async override void OnResumeWhenNetworkOK()
+        public override async void OnResumeWhenNetworkOK()
         {
             base.OnResumeWhenNetworkOK();
 
@@ -128,14 +126,13 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             try
             {
-                var headToHeads = await teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
+                var headToHeads = await teamService.GetHeadToHeadsAsync(
+                    match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
 
                 if (headToHeads != null && headToHeads.Any() && Matches == null)
                 {
-                    Debug.WriteLine($"H2H HasData {HasData}");
                     Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
 
-                    Debug.WriteLine("H2H Set data into listview");
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
 
@@ -157,13 +154,12 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
         {
             var matchGroups = headToHeads
-                .OrderByDescending(match => match.EventDate)
-                .Select(match => new SummaryMatchViewModel(
+                .OrderByDescending(m => m.EventDate)
+                .Select(m => new SummaryMatchViewModel(
                     match,
-                    matchStatusBuilder,
-                    matchMinuteBuilder
+                    matchStatusBuilder
                 ))
-                .GroupBy(item => new GroupHeaderMatchViewModel(item.Match));
+                .GroupBy(item => new H2HMatchGrouping(item.Match));
 
             return
                 matchGroups.Select(g => new H2HMatchGroupViewModel(g.ToList(), buildFlagUrlFunc));
