@@ -38,12 +38,12 @@
                 <DataTemplate>
                     <StackLayout BackgroundColor="#272830">
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.Name}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.NameUppercase}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Home.FormationFomatted}" />
                         </FlexLayout>
                         <WebView HeightRequest="555" Source="{Binding LineupsPitchView}" />
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.Name}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.NameUppercase}" />
                             <Label Style="{StaticResource GroupName}" Text="{Binding Away.FormationFomatted}" />
                         </FlexLayout>
                     </StackLayout>

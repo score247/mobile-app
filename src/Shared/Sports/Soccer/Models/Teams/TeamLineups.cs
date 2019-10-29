@@ -41,5 +41,8 @@ namespace LiveScore.Soccer.Models.Teams
 
         [IgnoreMember]
         public string FormationFomatted => Formation?.Replace("-", " - ");
+
+        [IgnoreMember]
+        public string NameUppercase => Name?.ToUpperInvariant();
     }
 }
