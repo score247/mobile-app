@@ -125,10 +125,14 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             try
             {
-                var headToHeads = await teamService.GetHeadToHeadsAsync(
-                    match.HomeTeamId, match.AwayTeamId, CurrentLanguage.DisplayName, forceFetchLatestData);
+                var headToHeads 
+                    = await teamService.GetHeadToHeadsAsync(
+                        match.HomeTeamId,
+                        match.AwayTeamId,
+                        CurrentLanguage.DisplayName,
+                        forceFetchLatestData);
 
-                if (headToHeads != null && headToHeads.Any() && Matches == null)
+                if (headToHeads?.Any() == true && Matches == null)
                 {
                     Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
 
@@ -165,7 +169,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
         {
-            VisibleStats = closedMatches != null && closedMatches.Any();
+            VisibleStats = closedMatches?.Any() == true;
 
             return VisibleStats
                 ? new H2HStatisticViewModel(

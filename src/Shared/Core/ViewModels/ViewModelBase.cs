@@ -11,7 +11,8 @@ using PropertyChanged;
 namespace LiveScore.Core.ViewModels
 {
     [AddINotifyPropertyChangedInterface]
-    public class ViewModelBase : MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
+    public class ViewModelBase : 
+        MvvmHelpers.BaseViewModel, IDestructible, IApplicationLifecycleAware, IPageLifecycleAware, IInitialize
     {
         protected readonly INetworkConnection networkConnectionManager;
         private readonly bool isNetworkingViewModel = true;

@@ -124,11 +124,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
 
         public override Task OnNetworkReconnectedAsync() => RefreshCommand.ExecuteAsync();
 
-        private async Task ReloadPage()
+        private Task ReloadPage()
         {
             Debug.WriteLine("OddsMovementViewModel ReloadPage");
 
-            await GetOddsMovement(isRefresh: true).ConfigureAwait(false);
+            return GetOddsMovement(isRefresh: true);
         }
 
         private void SubscribeEvents()
@@ -221,7 +221,5 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds
                 OddsMovementItems.Insert(0, newOddsMovementView);
             }
         }
-
-#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
     }
 }

@@ -7,7 +7,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 {
     public class H2HMatchGroupViewModel : List<SummaryMatchViewModel>
     {
-        public H2HMatchGroupViewModel(IEnumerable<SummaryMatchViewModel> matches, Func<string, string> buildFlagUrl) : base(matches)
+        public H2HMatchGroupViewModel(
+            IEnumerable<SummaryMatchViewModel> matches,
+            Func<string, string> buildFlagUrl) : base(matches)
         {
             var match = this.FirstOrDefault();
             LeagueName = match?.Match.LeagueGroupName;
@@ -40,7 +42,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
         public string LeagueSeasonId { get; }
 
         public override bool Equals(object obj)
-            => (obj is H2HMatchGrouping actualObj) && LeagueId == actualObj.LeagueId && LeagueSeasonId == actualObj.LeagueSeasonId;
+            => (obj is H2HMatchGrouping actualObj)
+                && LeagueId == actualObj.LeagueId
+                && LeagueSeasonId == actualObj.LeagueSeasonId;
 
         public override int GetHashCode()
         {

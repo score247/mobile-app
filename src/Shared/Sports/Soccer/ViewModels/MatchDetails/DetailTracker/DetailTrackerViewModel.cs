@@ -92,7 +92,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker
 
             if (isFirstLoad)
             {
-                await LoadDataAsync();
+                await LoadDataAsync().ConfigureAwait(false);
             }
 
             isFirstLoad = false;

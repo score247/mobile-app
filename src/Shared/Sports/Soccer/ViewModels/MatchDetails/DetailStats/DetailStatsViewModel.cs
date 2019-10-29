@@ -51,7 +51,7 @@ namespace LiveScore.Soccer.ViewModels.DetailStats
             {
                 MainStatistic = matchStatistic.GetMainStatistic();
                 SubStatisticItems = matchStatistic.GetSubStatisticItems().ToList();
-                HasData = MainStatistic.IsVisibled || SubStatisticItems.Any();
+                HasData = MainStatistic.IsVisibled || SubStatisticItems.Count > 0;
             }
             else
             {
