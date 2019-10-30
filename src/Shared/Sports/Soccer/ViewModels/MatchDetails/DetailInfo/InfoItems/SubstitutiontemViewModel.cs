@@ -52,21 +52,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildHomeInfo()
         {
-            HomePlayerOutName = BuildPlayName(TimelineEvent.PlayerOut?.Name);
-            HomePlayerInName = BuildPlayName(TimelineEvent.PlayerIn?.Name);
+            HomePlayerOutName = BuildPlayerName(TimelineEvent.PlayerOut?.Name);
+            HomePlayerInName = BuildPlayerName(TimelineEvent.PlayerIn?.Name);
 
             VisibleHomeImage = true;
         }
 
         private void BuildAwayInfo()
         {
-            AwayPlayerOutName = BuildPlayName(TimelineEvent.PlayerOut?.Name);
-            AwayPlayerInName = BuildPlayName(TimelineEvent.PlayerIn?.Name);
+            AwayPlayerOutName = BuildPlayerName(TimelineEvent.PlayerOut?.Name);
+            AwayPlayerInName = BuildPlayerName(TimelineEvent.PlayerIn?.Name);
 
             VisibleAwayImage = true;
         }
 
-        private static string BuildPlayName(string name)
+        private static string BuildPlayerName(string name)
             => string.IsNullOrEmpty(name) ? WhiteSpace : name;
     }
 }

@@ -42,8 +42,8 @@
                     <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="21" />
+                    <RowDefinition Height="21" />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0"
                        Grid.Column="0"
@@ -80,8 +80,8 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto" />
-                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="21" />
+                    <RowDefinition Height="21" />
                 </Grid.RowDefinitions>
 
                 <ffImageLoading:SvgCachedImage Grid.Row="0"
