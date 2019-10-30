@@ -33,18 +33,18 @@
                   IsRefreshing="{Binding IsRefreshing}"
                   SeparatorVisibility="None"
                   VerticalOptions="FillAndExpand"
-                  Header="{Binding MatchLineups}">
+                  Header="{Binding LineupsHeader}">
             <ListView.HeaderTemplate>
                 <DataTemplate>
                     <StackLayout BackgroundColor="#272830">
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.NameUppercase}" />
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Home.FormationFomatted}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding HomeName}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding HomeFormation}" />
                         </FlexLayout>
-                        <WebView HeightRequest="555" Source="{Binding LineupsPitchView}" />
+                        <WebView HeightRequest="{Binding PitchViewHeight}" Source="{Binding LineupsPitchView}" />
                         <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.NameUppercase}" />
-                            <Label Style="{StaticResource GroupName}" Text="{Binding Away.FormationFomatted}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding AwayName}" />
+                            <Label Style="{StaticResource GroupName}" Text="{Binding AwayFormation}" />
                         </FlexLayout>
                     </StackLayout>
                 </DataTemplate>

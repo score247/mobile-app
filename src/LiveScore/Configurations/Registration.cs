@@ -79,6 +79,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
 
+            containerRegistry.RegisterSingleton<IDeviceInfo, DeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
 
@@ -107,6 +108,9 @@ namespace LiveScore.Configurations
                      ? "images/flag_league/default_flag.svg"
                      : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
+            containerRegistry.RegisterInstance<Action<Action>>(
+                Xamarin.Forms.Device.BeginInvokeOnMainThread, 
+                FuncNameConstants.BeginInvokeOnMainThreadFuncName);
 
             containerRegistry.RegisterSingleton<IMiniLogger, FFLoadingImageLogger>();
 

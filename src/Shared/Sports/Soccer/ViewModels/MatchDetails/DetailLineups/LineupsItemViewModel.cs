@@ -2,7 +2,11 @@
 {
     public class LineupsItemViewModel
     {
-        public LineupsItemViewModel(string homeName, string awayName, int? homeJerseyNumber = null, int? awayJerseyNumber = null)
+        public LineupsItemViewModel(
+            string homeName, 
+            string awayName, 
+            int? homeJerseyNumber = null, 
+            int? awayJerseyNumber = null)
         {
             HomeName = homeName;
             AwayName = awayName;

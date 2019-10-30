@@ -8,6 +8,7 @@ namespace LiveScore.Soccer.Models.Teams
     public class TeamStatistic : ITeamStatistic
     {
         [SerializationConstructor]
+#pragma warning disable S107 // Methods should not have too many parameters
         public TeamStatistic(
              byte possession,
              byte freeKicks,

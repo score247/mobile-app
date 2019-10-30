@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
+using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
@@ -19,7 +21,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
     internal class DetailLineupsViewModel : TabItemViewModel
     {
         private readonly ISoccerMatchService soccerMatchService;
+        private readonly IDeviceInfo deviceInfo;
         private readonly string matchId;
+        private readonly Action<Action> beginInvokeOnMainThreadFunc;
 
         public DetailLineupsViewModel(
             string matchId,
@@ -31,6 +35,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
         {
             this.matchId = matchId;
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
+            deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
+            beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
             RefreshCommand = new DelegateAsyncCommand(
                 async () => await LoadDataAsync(() => LoadMatchLineupsDataAsync(true), false));
         }
@@ -39,24 +45,36 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public MatchLineups MatchLineups { get; private set; }
+        public LineupsHeaderViewModel LineupsHeader { get; private set; }
 
         public List<LineupsGroupViewModel> SubstitutionAndCoachGroups { get; private set; }
 
         private async Task LoadMatchLineupsDataAsync(bool isRefresh = false)
         {
-            MatchLineups = await soccerMatchService
-                    .GetMatchLineups(matchId, Language.English, isRefresh)
-                    .ConfigureAwait(false);
+            var matchLineups = await soccerMatchService
+                .GetMatchLineups(matchId, Language.English, isRefresh)
+                .ConfigureAwait(false);
 
-            if (string.IsNullOrWhiteSpace(MatchLineups?.Id))
+            beginInvokeOnMainThreadFunc(() => { RenderMatchLineups(matchLineups); });
+        }
+
+        private void RenderMatchLineups(MatchLineups matchLineups)
+        {
+            if (string.IsNullOrWhiteSpace(matchLineups?.Id))
             {
                 HasData = false;
             }
             else
             {
                 HasData = true;
-                SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups();
+                LineupsHeader = new LineupsHeaderViewModel(
+                                           matchLineups.PitchView,
+                                           deviceInfo,
+                                           matchLineups.Home?.Name,
+                                           matchLineups.Home?.Formation,
+                                           matchLineups.Away?.Name,
+                                           matchLineups.Away?.Formation);
+                SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups(matchLineups);
             }
 
             IsRefreshing = false;
@@ -69,11 +87,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
             await LoadMatchLineupsDataAsync();
         }
 
-        private List<LineupsGroupViewModel> BuildSubstitutionAndCoachGroups()
+        private static List<LineupsGroupViewModel> BuildSubstitutionAndCoachGroups(MatchLineups matchLineups)
         {
             var lineupsGroups = new List<LineupsGroupViewModel>();
-            var homeTeam = MatchLineups?.Home;
-            var awayTeam = MatchLineups?.Away;
+            var homeTeam = matchLineups?.Home;
+            var awayTeam = matchLineups?.Away;
 
             if (homeTeam != null && awayTeam != null)
             {
@@ -111,8 +129,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
             for (int index = 0; index < totalSubstitution; index++)
             {
-                var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : default(Player);
-                var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : default(Player);
+                var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : default;
+                var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : default;
 
                 lineupsItems.Add(new LineupsItemViewModel(
                     homePlayer?.Name,
