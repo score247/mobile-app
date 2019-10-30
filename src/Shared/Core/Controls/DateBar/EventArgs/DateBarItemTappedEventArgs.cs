@@ -1,7 +1,7 @@
-﻿namespace LiveScore.Core.Controls.DateBar.EventArgs
-{
-    using System;
+﻿using System;
 
+namespace LiveScore.Core.Controls.DateBar.EventArgs
+{
     public class DateBarItemTappedEventArgs
     {
         public DateBarItemTappedEventArgs(int index, DateTime date)

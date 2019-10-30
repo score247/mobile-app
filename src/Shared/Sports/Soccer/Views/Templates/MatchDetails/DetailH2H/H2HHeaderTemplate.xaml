@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:circularProgress="clr-namespace:LiveScore.Core.Controls.CircleProgressBar;assembly=LiveScore.Core"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-    xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common">
+    xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
     <Grid
         Padding="0,12,0,0"
         IsVisible="{Binding VisibleStats}"
@@ -49,9 +49,10 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.HomeWin}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
-                   Text="{Binding HomeTeamName}"
-                   LineBreakMode="TailTruncation"/>
+            <Label
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource MatchDetailH2HStastLabel}"
+                Text="{Binding HomeTeamName}" />
         </StackLayout>
 
         <StackLayout
@@ -74,9 +75,10 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.Draw}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
-                   Text="{languageResources:Translate Draw}"
-                   LineBreakMode="TailTruncation"/>
+            <Label
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource MatchDetailH2HStastLabel}"
+                Text="{languageResources:Translate Draw}" />
         </StackLayout>
 
         <StackLayout
@@ -99,9 +101,10 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.AwayWin}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
-                   Text="{Binding AwayTeamName}"
-                   LineBreakMode="TailTruncation"/>
+            <Label
+                LineBreakMode="TailTruncation"
+                Style="{StaticResource MatchDetailH2HStastLabel}"
+                Text="{Binding AwayTeamName}" />
         </StackLayout>
     </Grid>
 </DataTemplate>

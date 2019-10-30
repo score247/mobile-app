@@ -6,12 +6,12 @@ namespace LiveScore.Core.Converters
 {
     public class SelectedTabBackgroundColorConverter : ResourceValueConverter<bool?, Color>
     {
-        public SelectedTabBackgroundColorConverter() 
+        public SelectedTabBackgroundColorConverter()
             : base(null)
         {
         }
 
-        protected SelectedTabBackgroundColorConverter(Func<string, Color> GetResourceValue) 
+        protected SelectedTabBackgroundColorConverter(Func<string, Color> GetResourceValue)
             : base(GetResourceValue) { }
 
         protected override string GetResourceKey(bool? source)
