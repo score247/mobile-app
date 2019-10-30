@@ -5,74 +5,72 @@
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
 
-    <ViewCell>
-        <StackLayout>
-            <StackLayout.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <resources:MatchDetailViewResource />
-                        <resources:MatchDetailInfoViewResource />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </StackLayout.Resources>
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailInfoViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
 
-            <Grid BackgroundColor="{Binding RowColor}"
-                  Style="{StaticResource MatchDetailInfoRow}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="30" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="42" />
-                </Grid.RowDefinitions>
+        <Grid BackgroundColor="{Binding RowColor}"
+              Style="{StaticResource MatchDetailInfoRow}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="48" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
 
-                <Label Grid.Row="0"
-                       Grid.Column="0"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
-                       Style="{StaticResource MatchInfoMinutes}"
-                       Text="{Binding MatchTime}" />
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='MatchTime-{0}'}"
+                   Style="{StaticResource MatchInfoMinutes}"
+                   Text="{Binding MatchTime}" />
 
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}"
-                       HorizontalTextAlignment="End"
-                       Style="{StaticResource MatchInfoMainPlayer}"
-                       Text="{Binding HomePlayerName}" />
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='HomePlayerName-{0}'}"
+                   HorizontalTextAlignment="End"
+                   Style="{StaticResource MatchInfoMainPlayer}"
+                   Text="{Binding HomePlayerName}" />
 
-                <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                               Grid.Column="2"
-                                               AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
-                                               DownsampleToViewSize="True"
-                                               IsVisible="{Binding VisibleHomeImage}"
-                                               Source="{Binding ImageSource}"
-                                               Style="{StaticResource MatchInfoImage}" />
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="2"
+                                           AutomationId="{Binding ItemAutomationId, StringFormat='HomeImage-{0}'}"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding VisibleHomeImage}"
+                                           Source="{Binding ImageSource}"
+                                           Style="{StaticResource MatchInfoImage}" />
 
-                <Label Grid.Row="0"
-                       Grid.Column="3"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
-                       IsVisible="{Binding VisibleScore}"
-                       Style="{StaticResource MatchInfoScore}"
-                       Text="{Binding Score}" />
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='Score-{0}'}"
+                   IsVisible="{Binding VisibleScore}"
+                   Style="{StaticResource MatchInfoScore}"
+                   Text="{Binding Score}" />
 
-                <ffImageLoading:SvgCachedImage Grid.Row="0"
-                                               Grid.Column="4"
-                                               AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
-                                               DownsampleToViewSize="True"
-                                               IsVisible="{Binding VisibleAwayImage}"
-                                               Source="{Binding ImageSource}"
-                                               Style="{StaticResource MatchInfoImage}" />
+            <ffImageLoading:SvgCachedImage Grid.Row="0"
+                                           Grid.Column="4"
+                                           AutomationId="{Binding ItemAutomationId, StringFormat='AwayImage-{0}'}"
+                                           DownsampleToViewSize="True"
+                                           IsVisible="{Binding VisibleAwayImage}"
+                                           Source="{Binding ImageSource}"
+                                           Style="{StaticResource MatchInfoImage}" />
 
-                <Label Grid.Row="0"
-                       Grid.Column="5"
-                       AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
-                       Style="{StaticResource MatchInfoMainPlayer}"
-                       Text="{Binding AwayPlayerName}" />
-            </Grid>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </StackLayout>
-    </ViewCell>
+            <Label Grid.Row="0"
+                   Grid.Column="5"
+                   AutomationId="{Binding ItemAutomationId, StringFormat='AwayPlayerName-{0}'}"
+                   Style="{StaticResource MatchInfoMainPlayer}"
+                   Text="{Binding AwayPlayerName}" />
+        </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+    </StackLayout>
 </DataTemplate>
