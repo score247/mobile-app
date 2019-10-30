@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using CoreAnimation;
 using CoreGraphics;
@@ -13,13 +14,22 @@ namespace LiveScore.iOS.Renderers
 {
     public class CircleProgressRenderer : VisualElementRenderer<CircularProgress>
     {
+        private const string AnimationKeyPath = "strokeEnd";
+        private const double Start = 0.0;
+        private static CAMediaTimingFunction AnimationTimingFunc = CAMediaTimingFunction.FromName(CAMediaTimingFunction.EaseOut);
+
         private CAShapeLayer backgroundCircle;
         private CAShapeLayer indicatorCircle;
         private UILabel indicatorLabel;
         private CGSize indicatorLabelSize;
         private int indicatorFontSize;
 
+        private bool isSizeChanged;
+        private nfloat ProgressRadius;
+        private double ProgressValue;
+
         private readonly double startAngle = 1.5 * Math.PI;
+
       
         protected override void OnElementChanged(ElementChangedEventArgs<CircularProgress> e)
         {
@@ -39,6 +49,21 @@ namespace LiveScore.iOS.Renderers
             CreateIndicatorCircle();
 
             CreateIndicatorLabel();
+        }
+
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+
+            if (e.PropertyName == CircularProgress.ValueProperty.PropertyName
+                || e.PropertyName == CircularProgress.MaximumProperty.PropertyName
+                )
+            {
+                isSizeChanged = true;
+                Debug.WriteLine("Need to update progress bar");
+
+                ProgressValue = CalculateValue();
+            }
         }
 
         public override void LayoutSubviews()
@@ -76,16 +101,7 @@ namespace LiveScore.iOS.Renderers
 
         }
 
-        private double CalculateValue()
-        {
-            double min = Element.Minimum;
-            double max = Element.Maximum;
-            double current = Element.Value;
-
-            double range = max - min;
-
-            return current / range;
-        }
+        private double CalculateValue() => (double)Element.Value / Element.Maximum;
 
         private void CreateIndicatorLabel()
         {
@@ -122,28 +138,62 @@ namespace LiveScore.iOS.Renderers
 
         private double CreatePathAndReturnRadius()
         {
-            var radius = (Math.Min(Frame.Size.Width, Frame.Size.Height) - backgroundCircle.LineWidth - 2) / 2;
-            var circlePath = new UIBezierPath();
-            circlePath.AddArc(new CGPoint(Frame.Size.Width / 2, Frame.Size.Height / 2), (nfloat)radius, (nfloat)startAngle, (nfloat)(startAngle + 2 * Math.PI), true);
+            ProgressRadius = CalculateRadius(new nfloat(Element.BarHeight));
+
+            var circlePath = CreateCirclePath(ProgressRadius);
             backgroundCircle.Path = circlePath.CGPath;
             indicatorCircle.Path = circlePath.CGPath;
             backgroundCircle.StrokeEnd = new nfloat(1.0);
-            indicatorCircle.StrokeEnd = new nfloat(CalculateValue());
+            indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
 
-            return radius;
+            return ProgressRadius;
+        }
+
+        private nfloat CalculateRadius(nfloat lineWidth)
+        {
+            if (isSizeChanged)
+            {
+                isSizeChanged = false;
+
+                nfloat width = Frame.Size.Width;
+                nfloat height = Frame.Size.Height;
+
+                Debug.WriteLine($"CalculateRadius width {width} - height {height}");
+
+                var size = (float)Math.Min(width, height);
+
+                ProgressRadius = (size - (float)lineWidth - 2) / 2f;
+            }
+
+            return ProgressRadius;
+        }
+
+        private UIBezierPath CreateCirclePath(double radius)
+        {
+            var circlePath = new UIBezierPath();
+            circlePath.AddArc(new CGPoint(Frame.Size.Width / 2, Frame.Size.Height / 2), (nfloat)radius, (nfloat)startAngle, (nfloat)(startAngle + 2 * Math.PI), true);
+
+            return circlePath;
         }
 
         private void animate()
         {
-            var animation = new CABasicAnimation();
-            animation.KeyPath = "strokeEnd";
-            animation.Duration = Element.AnimationDuration / 1000;
-            animation.From = new NSNumber(0.0);
-            animation.To = new NSNumber(CalculateValue());
-            animation.TimingFunction = CAMediaTimingFunction.FromName(CAMediaTimingFunction.EaseOut);
-            indicatorCircle.StrokeStart = new nfloat(0.0);
-            indicatorCircle.StrokeEnd = new nfloat(CalculateValue());
+            var animation = CreateAnimation();
+
+            indicatorCircle.StrokeStart = new nfloat(Start);
+            indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
             indicatorCircle.AddAnimation(animation, "appear");
         }
+
+        private CABasicAnimation CreateAnimation()
+            => new CABasicAnimation
+            {
+                KeyPath = AnimationKeyPath,
+                Duration = (double)Element.AnimationDuration / 1000,
+                From = new NSNumber(Start),
+                To = new NSNumber(ProgressValue),
+                TimingFunction = AnimationTimingFunc
+            };
+       
     }
 }
