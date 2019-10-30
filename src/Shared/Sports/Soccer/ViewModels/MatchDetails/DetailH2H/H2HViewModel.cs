@@ -21,6 +21,8 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 {
     public class H2HViewModel : TabItemViewModel
     {
+        private const string HomeIdentifier = "home";
+
         private readonly IMatch match;
         private readonly ITeamService teamService;
         private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
@@ -78,7 +80,6 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
             VisibleHeadToHead = true;
             HasData = true;
-            Stats = new H2HStatisticViewModel();
         }
 
         public override async void OnAppearing()
@@ -106,16 +107,8 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private void LoadTeamResult(string teamIdentifier)
         {
-            if (teamIdentifier == "home")
-            {
-                VisibleHomeResults = true;
-                VisibleAwayResults = false;
-            }
-            else
-            {
-                VisibleHomeResults = false;
-                VisibleAwayResults = true;
-            }
+            VisibleHomeResults = teamIdentifier == HomeIdentifier;
+            VisibleAwayResults = !VisibleHomeResults;
 
             VisibleHeadToHead = false;
             HasData = true;
@@ -135,6 +128,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                 if (headToHeads?.Any() == true && Matches == null)
                 {
                     Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+                    VisibleStats = Stats.Total > 0;
 
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
@@ -157,26 +151,22 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
         {
             var matchGroups = headToHeads
-                .OrderByDescending(m => m.EventDate)
-                .Select(m => new SummaryMatchViewModel(
-                    m,
+                .OrderByDescending(match => match.EventDate)
+                .Select(match => new SummaryMatchViewModel(
+                    match,
                     matchStatusBuilder
                 ))
                 .GroupBy(item => new H2HMatchGrouping(item.Match));
 
-            return matchGroups.Select(g => new H2HMatchGroupViewModel(g.ToList(), buildFlagUrlFunc));
+            return matchGroups.Select(group => new H2HMatchGroupViewModel(group.ToList(), buildFlagUrlFunc));
         }
 
         private H2HStatisticViewModel GenerateStatsViewModel(IEnumerable<IMatch> closedMatches)
-        {
-            VisibleStats = closedMatches?.Any() == true;
-
-            return VisibleStats
+        => closedMatches?.Any() == true
                 ? new H2HStatisticViewModel(
                     closedMatches.Count(x => x.WinnerId == match.HomeTeamId),
                     closedMatches.Count(x => x.WinnerId == match.AwayTeamId),
                     closedMatches.Count())
                 : null;
-        }
     }
 }
