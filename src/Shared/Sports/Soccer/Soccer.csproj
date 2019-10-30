@@ -132,4 +132,12 @@
   <ItemGroup>
     <EmbeddedResource Remove="..\..\..\CommonResources\Html\theme.css" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailStatistics\StatisticsHeaderTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\DetailStatistics\StatisticsItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
