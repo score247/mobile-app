@@ -133,7 +133,7 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
 
-                HasData = Matches.Any();
+                HasData = Matches?.Any() == true;
             }
             catch (Exception ex)
             {
