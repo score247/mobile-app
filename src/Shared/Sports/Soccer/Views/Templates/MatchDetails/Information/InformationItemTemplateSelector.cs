@@ -1,4 +1,4 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetailInfo;
+﻿using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.Information

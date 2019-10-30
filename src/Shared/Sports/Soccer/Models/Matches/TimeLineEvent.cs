@@ -1,9 +1,10 @@
 ﻿using System;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using MessagePack;
 
-namespace LiveScore.Core.Models.Matches
+namespace LiveScore.Soccer.Models.Matches
 {
     /// <summary>
     /// TODO: God object, why dont we have specified TimelineEvents, eg: Score Events, Card events???

@@ -1,4 +1,4 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems;
+﻿using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
 using Xamarin.Forms;
 

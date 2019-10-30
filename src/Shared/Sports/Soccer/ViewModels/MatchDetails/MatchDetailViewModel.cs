@@ -18,18 +18,18 @@ using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Enumerations;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.DetailH2H;
-using LiveScore.Soccer.ViewModels.DetailStats;
-using LiveScore.Soccer.ViewModels.DetailTable;
-using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailSocial;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailTV;
-using LiveScore.Soccer.Views.Templates.LineUps;
+using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
+using LiveScore.Soccer.ViewModels.MatchDetails.Information;
+using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
+using LiveScore.Soccer.ViewModels.MatchDetails.Social;
+using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
+using LiveScore.Soccer.ViewModels.MatchDetails.Table;
+using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
+using LiveScore.Soccer.ViewModels.MatchDetails.TVSchedule;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
+using LiveScore.Soccer.Views.Templates.MatchDetails.LineUps;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Odds;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Social;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
@@ -217,15 +217,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
-                [MatchDetailFunction.Odds] = new DetailOddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
-                [MatchDetailFunction.Info] = new DetailInfoViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
+                [MatchDetailFunction.Odds] = new OddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
+                [MatchDetailFunction.Info] = new InformationViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
-                [MatchDetailFunction.Lineups] = new DetailLineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LineUpsTemplate()),
-                [MatchDetailFunction.Social] = new DetailSocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
-                [MatchDetailFunction.Stats] = new DetailStatsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),
-                [MatchDetailFunction.Table] = new DetailTableViewModel(NavigationService, DependencyResolver, new TableTemplate()),
-                [MatchDetailFunction.TV] = new DetailTVViewModel(NavigationService, DependencyResolver, new TVTemplate()),
-                [MatchDetailFunction.Tracker] = new DetailTrackerViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerCommentaryTemplate())
+                [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LineUpsTemplate()),
+                [MatchDetailFunction.Social] = new SocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
+                [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),
+                [MatchDetailFunction.Table] = new TableViewModel(NavigationService, DependencyResolver, new TableTemplate()),
+                [MatchDetailFunction.TV] = new TVScheduleViewModel(NavigationService, DependencyResolver, new TVTemplate()),
+                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerCommentaryTemplate())
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

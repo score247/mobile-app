@@ -1,4 +1,8 @@
-﻿namespace Soccer.Tests.ViewModels.DetailOdds
+﻿using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
+using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
+using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
+
+namespace Soccer.Tests.ViewModels.DetailOdds
 {
     using System;
     using System.Collections.Generic;
@@ -15,8 +19,6 @@
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.Services;
-    using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
-    using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems;
     using NSubstitute;
     using Prism.Events;
     using Prism.Navigation;
@@ -26,7 +28,7 @@
     {
         private const string matchId = "sr:match:1";
 
-        private readonly DetailOddsViewModel viewModel;
+        private readonly OddsViewModel viewModel;
         private readonly IOddsService oddsService;
         private readonly CompareLogic comparer;
         private readonly ILoggingService mockLogService;
@@ -50,7 +52,7 @@
             baseFixture.DependencyResolver.Resolve<ILoggingService>().Returns(mockLogService);
             baseFixture.DependencyResolver.Resolve<IHubService>("1").Returns(baseFixture.HubService);
 
-            viewModel = new DetailOddsViewModel(
+            viewModel = new OddsViewModel(
                 matchId,
                 MatchStatus.NotStarted,
                 navigationService,
@@ -85,7 +87,7 @@
         {
             // Arrange
             oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
-                .Returns(default(MatchOdds));           
+                .Returns(default(MatchOdds));
 
             // Act
             await viewModel.FirstLoadOrRefreshOddsAsync(BetType.AsianHDP, "decimal", true);
@@ -180,13 +182,13 @@
         [Fact]
         public void HandleOddsComparisonMessage_LoadOdds_AddNew()
         {
-            // Arrange          
-           var oddsComparison = new OddsComparisonMessage
-           (
-               1,
-               "sr:match:1",
-               new List<BetTypeOdds> { StubBetTypeOdds(BetType.AsianHDP.Value, BetType.AsianHDP.DisplayName) }
-           );
+            // Arrange
+            var oddsComparison = new OddsComparisonMessage
+            (
+                1,
+                "sr:match:1",
+                new List<BetTypeOdds> { StubBetTypeOdds(BetType.AsianHDP.Value, BetType.AsianHDP.DisplayName) }
+            );
 
             // Act
             viewModel.HandleOddsComparisonMessage(oddsComparison);
@@ -199,7 +201,7 @@
         [Fact]
         public async Task HandleOddsComparisonMessage_LoadOdds_UpdateExisting()
         {
-            // Arrange     
+            // Arrange
             await FirstLoad(BetType.AsianHDP);
             var oddsComparison = new OddsComparisonMessage
            (
@@ -225,7 +227,7 @@
             // Arrange
             oddsService
                 .GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
-                .Returns(StubOdds(BetType.OneXTwo.Value, BetType.OneXTwo.DisplayName));            
+                .Returns(StubOdds(BetType.OneXTwo.Value, BetType.OneXTwo.DisplayName));
 
             // Act
             await viewModel.Resume();
@@ -235,7 +237,7 @@
             Assert.Single(viewModel.BetTypeOddsItems);
         }
 
-        private Task FirstLoad(BetType betType) 
+        private Task FirstLoad(BetType betType)
         {
             oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
                     .Returns(StubOdds());
@@ -268,7 +270,7 @@
             }
         );
 
-        private static BetTypeOdds StubBetTypeOdds(byte betTypeId, string bettypeName, decimal homeLiveOdds) 
+        private static BetTypeOdds StubBetTypeOdds(byte betTypeId, string bettypeName, decimal homeLiveOdds)
             => new BetTypeOdds
            (
                betTypeId,

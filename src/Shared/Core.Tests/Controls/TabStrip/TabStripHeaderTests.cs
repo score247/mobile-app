@@ -2,10 +2,10 @@ using System.Collections.Generic;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Tests.Fixtures;
-using LiveScore.Soccer.ViewModels.DetailStats;
-using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailTracker;
+using LiveScore.Soccer.ViewModels.MatchDetails.Information;
+using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
+using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
+using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
 using Xamarin.Forms;
 using Xunit;
 
@@ -19,10 +19,10 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
         {
             tabs = new List<TabItemViewModel>
             {
-                new DetailOddsViewModel("", MatchStatus.Closed,  baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new DetailInfoViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new DetailTrackerViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new DetailStatsViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new OddsViewModel("", MatchStatus.Closed,  baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new InformationViewModel("", baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new TrackerCommentaryViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new StatisticsViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
             };
         }
 

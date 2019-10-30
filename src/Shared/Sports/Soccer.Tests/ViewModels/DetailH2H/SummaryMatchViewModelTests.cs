@@ -1,7 +1,7 @@
 ﻿using System;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
+using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using NSubstitute;
 using Xunit;
 
@@ -9,7 +9,6 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 {
     public class SummaryMatchViewModelTests
     {
-
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatch match;
 
@@ -21,7 +20,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
         [Fact]
         public void DisplayMatchStatus_FullTime_CorrectAssignedValue()
-        {   
+        {
             matchDisplayStatusBuilder.BuildDisplayStatus(match).Returns("FT");
 
             var viewModel = new SummaryMatchViewModel(match, matchDisplayStatusBuilder);

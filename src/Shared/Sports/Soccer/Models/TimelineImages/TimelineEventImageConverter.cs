@@ -1,5 +1,6 @@
 ﻿using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.Models.TimelineImages
 {

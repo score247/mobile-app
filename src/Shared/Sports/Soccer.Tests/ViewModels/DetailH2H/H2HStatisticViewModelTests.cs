@@ -1,5 +1,5 @@
 ﻿using AutoFixture;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
+using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
@@ -8,7 +8,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
     {
         private readonly Fixture fixture;
 
-        public H2HStatisticViewModelTests() 
+        public H2HStatisticViewModelTests()
         {
             fixture = new Fixture();
         }

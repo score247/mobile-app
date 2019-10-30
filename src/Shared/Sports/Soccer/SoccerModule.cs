@@ -5,7 +5,7 @@ using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails;
-using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
+using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
 using LiveScore.Soccer.Views;
 using LiveScore.Soccer.Views.Templates;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Odds;
