@@ -32,25 +32,25 @@
                             HeightRequest="{Binding FooterHeight}"
                             VerticalOptions="FillAndExpand"
                             Scrolled="ItemsView_OnScrolled"
-                            Header="{Binding LineupsHeader}">
+                            Header="{Binding .}">
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout BackgroundColor="#272830">
                             <FlexLayout Style="{StaticResource Group}"
                                         JustifyContent="SpaceBetween">
                                 <Label Style="{StaticResource GroupName}"
-                                       Text="{Binding HomeName}" />
+                                       Text="{Binding LineupsHeader.HomeName}" />
                                 <Label Style="{StaticResource GroupName}"
-                                       Text="{Binding HomeFormation}" />
+                                       Text="{Binding LineupsHeader.HomeFormation}" />
                             </FlexLayout>
-                            <WebView HeightRequest="{Binding PitchViewHeight}"
-                                     Source="{Binding LineupsPitchView}" />
+                            <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
+                                     Source="{Binding LineupsHeader.LineupsPitchView}" />
                             <FlexLayout Style="{StaticResource Group}"
                                         JustifyContent="SpaceBetween">
                                 <Label Style="{StaticResource GroupName}"
-                                       Text="{Binding AwayName}" />
+                                       Text="{Binding LineupsHeader.AwayName}" />
                                 <Label Style="{StaticResource GroupName}"
-                                       Text="{Binding AwayFormation}" />
+                                       Text="{Binding LineupsHeader.AwayFormation}" />
                             </FlexLayout>
                         </StackLayout>
                     </DataTemplate>
