@@ -1,37 +1,35 @@
 ﻿using System;
-using System.Globalization;
 using LiveScore.Common.Converters;
 using LiveScore.Core.Enumerations;
 using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Converters
 {
-    public class OddsStatusConverter : ValueConverter<string, Color>
+    public class OddsStatusConverter : ResourceValueConverter<string, Color>
     {
-        public override Color Convert(string value, Type targetType, object parameter, CultureInfo culture)
+        public OddsStatusConverter() : base(null)
         {
-            Color color;
+        }
 
-            if (string.IsNullOrWhiteSpace(value))
+        protected override string GetResourceKey(string source)
+        {
+            if (string.IsNullOrWhiteSpace(source))
             {
-                return (Color)Application.Current.Resources["PrimaryTextColor"];
+                return "PrimaryTextColor";
             }
 
-            if (value.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
+            if (source.Equals(OddsTrend.Up.Value.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                color = (Color)Application.Current.Resources["UpLiveOddColor"];
+                return "UpLiveOddColor";
             }
-            else if (value.Equals(OddsTrend.Down.Value.ToString(), StringComparison.OrdinalIgnoreCase))
+            else if (source.Equals(OddsTrend.Down.Value.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                color = (Color)Application.Current.Resources["DownLiveOddColor"];
+                return "DownLiveOddColor";
             }
             else
             {
-                color = (Color)Application.Current.Resources["PrimaryTextColor"];
+                return "PrimaryTextColor";
             }
-
-
-            return color;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_ValueIsNull_ReturnNeutralAsDefault()
         {
-            // Arrange            
+            // Arrange
             var converter = new SelectedTabColorConverter();
 
             // Act
@@ -23,7 +23,7 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_Selected_ReturnRedColor()
         {
-            // Arrange            
+            // Arrange
             var converter = new SelectedTabColorConverter();
 
             // Act
@@ -36,7 +36,7 @@ namespace LiveScore.Core.Tests.Converters
         [Fact]
         public void Convert_Unselected_ReturGreenColor()
         {
-            // Arrange            
+            // Arrange
             var converter = new SelectedTabColorConverter();
 
             // Act
