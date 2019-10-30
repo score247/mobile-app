@@ -85,25 +85,21 @@
                            Style="{StaticResource CenterActivityIndicator}"
                            VerticalOptions="StartAndExpand" />
         <StackLayout Style="{StaticResource TableContainer}">
-            <tabStrip:TabITemListView AutomationId="{Binding SelectedBetType, StringFormat='MatchOdds-BetType{0}'}"
-                                      AutomationProperties.IsInAccessibleTree="False"
-                                      BackgroundColor="{StaticResource ListViewLightBgColor}"
-                                      HasUnevenRows="true"
-                                      Header="{Binding HasData, StringFormat=''}"
-                                      HeaderTemplate="{Binding HeaderTemplate}"
-                                      IsPullToRefreshEnabled="true"
-                                      IsRefreshing="{Binding IsRefreshing}"
-                                      IsVisible="{Binding IsNotBusy}"
-                                      ItemTemplate="{StaticResource OddsItemTemplateSelector}"
-                                      ItemsSource="{Binding BetTypeOddsItems}"
-                                      RefreshCommand="{Binding RefreshCommand}"
-                                      SeparatorVisibility="None">
-                <tabStrip:TabITemListView.Behaviors>
-                    <b:EventToCommandBehavior Command="{Binding TappedOddsItemCommand}"
-                                              EventArgsParameterPath="Item"
-                                              EventName="ItemTapped" />
-                </tabStrip:TabITemListView.Behaviors>
-            </tabStrip:TabITemListView>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}"
+                         RefreshColor="White">
+                <tabStrip:TabItemCollectionView x:Name="OddsCollectionView"
+                                                BackgroundColor="{StaticResource ListViewLightBgColor}"
+                                                Header="{Binding HasData, StringFormat=''}"
+                                                HeaderTemplate="{Binding HeaderTemplate}"
+                                                IsVisible="{Binding IsNotBusy}"
+                                                ItemTemplate="{StaticResource OddsItemTemplateSelector}"
+                                                ItemsSource="{Binding BetTypeOddsItems}"
+                                                SelectionMode="Single"
+                                                SelectionChangedCommand="{Binding TappedOddsItemCommand}"
+                                                SelectionChangedCommandParameter="{Binding Source={x:Reference OddsCollectionView}, Path=SelectedItem}">
+                </tabStrip:TabItemCollectionView>
+            </RefreshView>
         </StackLayout>
     </StackLayout>
 </DataTemplate>
