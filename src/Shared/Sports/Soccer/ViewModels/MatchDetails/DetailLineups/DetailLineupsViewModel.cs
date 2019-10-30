@@ -45,11 +45,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
 
         private async Task LoadMatchLineupsDataAsync(bool isRefresh = false)
         {
-            var matchLineups = await soccerMatchService
+            MatchLineups = await soccerMatchService
                     .GetMatchLineups(matchId, Language.English, isRefresh)
                     .ConfigureAwait(false);
 
-            if (string.IsNullOrWhiteSpace(matchLineups?.Id))
+            if (string.IsNullOrWhiteSpace(MatchLineups?.Id))
             {
                 HasData = false;
             }
@@ -57,7 +57,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
             {
                 HasData = true;
                 SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups();
-                MatchLineups = matchLineups;
             }
 
             IsRefreshing = false;
@@ -92,17 +91,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailLineups
         private static LineupsGroupViewModel BuildCouchesGroup(
             TeamLineups homeTeam,
             TeamLineups awayTeam)
-        {
-            var homeCoachName = string.IsNullOrWhiteSpace(homeTeam?.Coach?.Name) ? string.Empty : homeTeam.Coach.Name;
-            var awayCoachName = string.IsNullOrWhiteSpace(awayTeam?.Coach?.Name) ? string.Empty : awayTeam.Coach.Name;
-
-            return new LineupsGroupViewModel(
+            => new LineupsGroupViewModel(
                 AppResources.Coaches,
                 new List<LineupsItemViewModel>
                 {
-                    new LineupsItemViewModel(homeCoachName, awayCoachName)
+                    new LineupsItemViewModel(homeTeam?.Coach?.Name, awayTeam?.Coach?.Name)
                 });
-        }
 
         private static LineupsGroupViewModel BuildSubstitutionGroup(
             TeamLineups homeTeam,
