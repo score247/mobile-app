@@ -1,4 +1,8 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
+﻿using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
+using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
+using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OverUnder;
+
+namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +10,6 @@
     using Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.ViewModels;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.AsianHdp;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OverUnder;
     using Prism.Navigation;
     using Xamarin.Forms;
 

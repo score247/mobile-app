@@ -8,7 +8,7 @@ using LiveScore.Soccer.ViewModels.MatchDetails;
 using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds;
 using LiveScore.Soccer.Views;
 using LiveScore.Soccer.Views.Templates;
-using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds;
+using LiveScore.Soccer.Views.Templates.MatchDetails.Odds;
 using Prism.Ioc;
 using Prism.Modularity;
 using Xamarin.Forms;
