@@ -95,6 +95,7 @@
                                                 IsVisible="{Binding IsNotBusy}"
                                                 ItemTemplate="{StaticResource OddsItemTemplateSelector}"
                                                 ItemsSource="{Binding BetTypeOddsItems}"
+                                                ItemSizingStrategy="MeasureFirstItem"
                                                 SelectionMode="Single"
                                                 SelectionChangedCommand="{Binding TappedOddsItemCommand}"
                                                 SelectionChangedCommandParameter="{Binding Source={x:Reference OddsCollectionView}, Path=SelectedItem}">

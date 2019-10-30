@@ -33,6 +33,7 @@
             <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource ListViewBgColor}"
                                             IsVisible="{Binding IsNotBusy}"
                                             ItemTemplate="{StaticResource infoItemTemplateSelector}"
+                                            ItemSizingStrategy="MeasureFirstItem"
                                             ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"

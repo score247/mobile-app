@@ -25,6 +25,7 @@
             <tabStrip:TabItemCollectionView BackgroundColor="#272830"
                                             ItemsSource="{Binding SubStatisticItems}"
                                             Header="{Binding .}"
+                                            ItemSizingStrategy="MeasureFirstItem"
                                             HeaderTemplate="{StaticResource StatisticsHeaderTemplate}"
                                             ItemTemplate="{StaticResource StatisticsItemTemplate}">
                 <tabStrip:TabItemCollectionView.Footer>

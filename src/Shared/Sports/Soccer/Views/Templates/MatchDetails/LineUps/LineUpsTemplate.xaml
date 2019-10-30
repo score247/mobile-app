@@ -31,6 +31,7 @@
                                             BackgroundColor="{StaticResource ListViewBgColor}"
                                             ItemsSource="{Binding SubstitutionAndCoachGroups}"
                                             HeightRequest="{Binding FooterHeight}"
+                                            ItemSizingStrategy="MeasureFirstItem"
                                             VerticalOptions="FillAndExpand"
                                             Header="{Binding .}">
                 <CollectionView.HeaderTemplate>
