@@ -5,7 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:circularProgress="clr-namespace:LiveScore.Core.Controls.CircleProgressBar;assembly=LiveScore.Core"
     xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources">
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+    xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common">
     <Grid
         Padding="0,12,0,0"
         IsVisible="{Binding VisibleStats}"
@@ -48,7 +49,9 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.HomeWin}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="{Binding HomeTeamName}" />
+            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
+                   Text="{Binding HomeTeamName}"
+                   LineBreakMode="TailTruncation"/>
         </StackLayout>
 
         <StackLayout
@@ -71,7 +74,9 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.Draw}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="Draw" />
+            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
+                   Text="{languageResources:Translate Draw}"
+                   LineBreakMode="TailTruncation"/>
         </StackLayout>
 
         <StackLayout
@@ -94,7 +99,9 @@
                 VerticalOptions="CenterAndExpand"
                 WidthRequest="64"
                 Value="{Binding Stats.AwayWin}" />
-            <Label Style="{StaticResource MatchDetailH2HStastLabel}" Text="{Binding AwayTeamName}" />
+            <Label Style="{StaticResource MatchDetailH2HStastLabel}"
+                   Text="{Binding AwayTeamName}"
+                   LineBreakMode="TailTruncation"/>
         </StackLayout>
     </Grid>
 </DataTemplate>

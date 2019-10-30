@@ -604,5 +604,11 @@ namespace LiveScore.Common.LangResources {
                 return ResourceManager.GetString("Coaches", resourceCulture);
             }
         }
+        
+        public static string Draw {
+            get {
+                return ResourceManager.GetString("Draw", resourceCulture);
+            }
+        }
     }
 }
