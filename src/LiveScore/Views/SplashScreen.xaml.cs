@@ -16,7 +16,9 @@ namespace LiveScore.Views
         {
             InitializeComponent();
 
+#pragma warning disable S3366 // "this" should not be exposed from constructors
             NavigationPage.SetHasNavigationBar(this, false);
+#pragma warning restore S3366 // "this" should not be exposed from constructors
         }
 
         protected override async void OnAppearing()

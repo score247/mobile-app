@@ -5,7 +5,7 @@
 
 using System.Diagnostics.CodeAnalysis;
 
-[assembly: SuppressMessage("Major Code Smell", "S109:Magic numbers should not be used",
-    Justification = "<Pending>",
-    Scope = "member",
-    Target = "~M:LiveScore.iOS.Renderers.MenuTabbedPageRenderer.AddShadow")]
+[assembly: SuppressMessage(
+    "Major Code Smell",
+    "S109:Magic numbers should not be used",
+    Justification = "<Pending>")]
