@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
     <StackLayout>
         <StackLayout.Resources>
             <ResourceDictionary>
@@ -22,48 +22,58 @@
                IsVisible="{Binding NoData}"
                AutomationId="NoDataLabel" />
 
-        <ListView IsVisible="{Binding HasData}"
-                  BackgroundColor="{StaticResource ListViewBgColor}"
-                  IsGroupingEnabled="True"
-                  ItemsSource="{Binding SubstitutionAndCoachGroups}"
-                  IsPullToRefreshEnabled="true"
-                  GroupDisplayBinding="{Binding Name}"
-                  HeightRequest="{Binding FooterHeight}"
-                  RefreshCommand="{Binding RefreshCommand}"
-                  IsRefreshing="{Binding IsRefreshing}"
-                  SeparatorVisibility="None"
-                  VerticalOptions="FillAndExpand"
-                  Header="{Binding LineupsHeader}">
-            <ListView.HeaderTemplate>
-                <DataTemplate>
-                    <StackLayout BackgroundColor="#272830">
-                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding HomeName}" />
-                            <Label Style="{StaticResource GroupName}" Text="{Binding HomeFormation}" />
-                        </FlexLayout>
-                        <WebView HeightRequest="{Binding PitchViewHeight}" Source="{Binding LineupsPitchView}" />
-                        <FlexLayout Style="{StaticResource Group}" JustifyContent="SpaceBetween">
-                            <Label Style="{StaticResource GroupName}" Text="{Binding AwayName}" />
-                            <Label Style="{StaticResource GroupName}" Text="{Binding AwayFormation}" />
-                        </FlexLayout>
-                    </StackLayout>
-                </DataTemplate>
-            </ListView.HeaderTemplate>
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <ViewCell>
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}"
+                     RefreshColor="White">
+            <CollectionView IsVisible="{Binding HasData}"
+                            IsGrouped="True"
+                            BackgroundColor="{StaticResource ListViewBgColor}"
+                            ItemsSource="{Binding SubstitutionAndCoachGroups}"
+                            HeightRequest="{Binding FooterHeight}"
+                            VerticalOptions="FillAndExpand"
+                            Scrolled="ItemsView_OnScrolled"
+                            Header="{Binding LineupsHeader}">
+                <CollectionView.HeaderTemplate>
+                    <DataTemplate>
+                        <StackLayout BackgroundColor="#272830">
+                            <FlexLayout Style="{StaticResource Group}"
+                                        JustifyContent="SpaceBetween">
+                                <Label Style="{StaticResource GroupName}"
+                                       Text="{Binding HomeName}" />
+                                <Label Style="{StaticResource GroupName}"
+                                       Text="{Binding HomeFormation}" />
+                            </FlexLayout>
+                            <WebView HeightRequest="{Binding PitchViewHeight}"
+                                     Source="{Binding LineupsPitchView}" />
+                            <FlexLayout Style="{StaticResource Group}"
+                                        JustifyContent="SpaceBetween">
+                                <Label Style="{StaticResource GroupName}"
+                                       Text="{Binding AwayName}" />
+                                <Label Style="{StaticResource GroupName}"
+                                       Text="{Binding AwayFormation}" />
+                            </FlexLayout>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.HeaderTemplate>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
                         <StackLayout>
                             <BoxView Style="{StaticResource HorizontalLine}" />
                             <FlexLayout Style="{StaticResource Group}">
-                                <Label Style="{StaticResource GroupName}" Text="{Binding Name}" />
+                                <Label Style="{StaticResource GroupName}"
+                                       Text="{Binding Name}" />
                             </FlexLayout>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell>
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                <CollectionView.GroupFooterTemplate>
+                    <DataTemplate>
+                        <!--Work arround for not showing group footer-->
+                        <StackLayout></StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupFooterTemplate>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
                         <StackLayout>
                             <BoxView Style="{StaticResource HorizontalLine}" />
                             <Grid>
@@ -80,15 +90,30 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="42" />
                                 </Grid.RowDefinitions>
-                                <Label Grid.Column="2" Text="{Binding HomeJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                                <Label Grid.Column="3" Text="{Binding HomeName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                                <Label Grid.Column="6" Text="{Binding AwayJerseyNumber}" Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
-                                <Label Grid.Column="7" Text="{Binding AwayName}" Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                                <Label Grid.Column="2"
+                                       Text="{Binding HomeJerseyNumber}"
+                                       Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                <Label Grid.Column="3"
+                                       Text="{Binding HomeName}"
+                                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                                <Label Grid.Column="6"
+                                       Text="{Binding AwayJerseyNumber}"
+                                       Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                <Label Grid.Column="7"
+                                       Text="{Binding AwayName}"
+                                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
                             </Grid>
                         </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.Footer>
+                    <!--Work arround for scrolling up issue-->
+                    <StackLayout BackgroundColor="Transparent"
+                                 HeightRequest="400">
+                        <Label Text=" "></Label>
+                    </StackLayout>
+                </CollectionView.Footer>
+            </CollectionView>
+        </RefreshView>
     </StackLayout>
 </DataTemplate>
