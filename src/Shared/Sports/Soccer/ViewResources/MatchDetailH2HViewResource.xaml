@@ -33,7 +33,7 @@
     <Style x:Key="MatchDetailH2HStastLabel" TargetType="Label">
         <Setter Property="Padding" Value="0,10,0,10" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="#fff" />
+        <Setter Property="TextColor" Value="#CBCBCB" />
         <Setter Property="FontSize" Value="11" />
         <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
     </Style>
