@@ -20,9 +20,9 @@ namespace LiveScore.Soccer.Views
                 new Rectangle(0, 0, 1, MatchDetailLayout.Height + tabStripOffset));
             AbsoluteLayout.SetLayoutFlags(MatchDetailLayout, AbsoluteLayoutFlags.WidthProportional);
 
-            MessagingCenter.Subscribe<string, double>("TabListView", "OnScrolling", async (_, scrollY) =>
+            TabStrip.OnItemScrolling((scrollOffset) =>
             {
-                var newOffset = scrollY <= tabStripOffset ? scrollY : tabStripOffset;
+                var newOffset = scrollOffset <= tabStripOffset ? scrollOffset : tabStripOffset;
 
                 MatchDetailLayout.TranslationY = -newOffset;
             });
@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.Views
 
         protected override void OnDisappearing()
         {
-            MessagingCenter.Unsubscribe<string, double>("TabListView", "OnScrolling");
+            TabStrip.OnDisappearing();
         }
     }
 }

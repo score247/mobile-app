@@ -1,4 +1,6 @@
-﻿namespace LiveScore.Core.Controls.TabStrip
+﻿using LiveScore.Core.Controls.TabStrip.EventArgs;
+
+namespace LiveScore.Core.Controls.TabStrip
 {
     using Xamarin.Forms;
 
@@ -11,7 +13,10 @@
 
         public static void OnScrolling(double offset)
         {
-            MessagingCenter.Send("TabListView", "OnScrolling", offset);
+            MessagingCenter.Send(
+                nameof(TabStrip),
+                TabItemScrollingEventArgs.EventName,
+                new TabItemScrollingEventArgs(offset));
         }
     }
 }

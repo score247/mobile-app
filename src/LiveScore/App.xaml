@@ -185,11 +185,7 @@
                 <Setter Property="BackgroundColor"
                         Value="{StaticResource ListViewBgColor}" />
             </Style>
-            <Style x:Key="CollectionViewHasBackground"
-                   TargetType="CollectionView">
-                <Setter Property="BackgroundColor"
-                        Value="{StaticResource ListViewBgColor}" />
-            </Style>
+
             <Style x:Key="Team"
                    TargetType="Label">
                 <Setter Property="VerticalTextAlignment"

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows.Input;
 using LiveScore.Core.Controls.TabStrip.EventArgs;
@@ -83,19 +84,28 @@ namespace LiveScore.Core.Controls.TabStrip
         [Time]
         public void TabContent_ItemAppeared(CardsView view, ItemAppearedEventArgs args)
         {
-            if (args.Item != null)
-            {
-                (args.Item as TabItemViewModel)?.OnAppearing();
-            }
+            (args.Item as TabItemViewModel)?.OnAppearing();
         }
 
         [Time]
         public void TabContent_ItemDisappearing(CardsView view, ItemDisappearingEventArgs args)
         {
-            if (args.Item != null)
+            (args.Item as TabItemViewModel)?.OnDisappearing();
+        }
+
+        public void OnItemScrolling(Action<double> handler)
+        {
+            MessagingCenter.Subscribe<string, TabItemScrollingEventArgs>(nameof(TabStrip), TabItemScrollingEventArgs.EventName,
+            (_, eventArgs) =>
             {
-                (args.Item as TabItemViewModel)?.OnDisappearing();
-            }
+                var scrollOffset = eventArgs?.ScrollOffset ?? 0;
+                handler(scrollOffset);
+            });
+        }
+
+        public void OnDisappearing()
+        {
+            MessagingCenter.Unsubscribe<string, TabItemScrollingEventArgs>(nameof(TabStrip), TabItemScrollingEventArgs.EventName);
         }
     }
 }

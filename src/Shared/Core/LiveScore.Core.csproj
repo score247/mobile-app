@@ -52,7 +52,6 @@
         <Folder Include="Controls\SearchPage\">
         </Folder>
         <Folder Include="PubSubEvents\Odds\" />
-        <Folder Include="Controls\TabStrip\EventArgs\" />
         <Folder Include="Controls\CircleProgressBar\" />
     </ItemGroup>
     <ItemGroup>

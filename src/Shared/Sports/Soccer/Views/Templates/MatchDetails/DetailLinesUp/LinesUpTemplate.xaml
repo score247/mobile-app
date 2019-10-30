@@ -5,6 +5,7 @@
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.DetailLinesUp.LinesUpTemplate">
     <StackLayout>
@@ -25,14 +26,13 @@
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}"
                      RefreshColor="White">
-            <CollectionView IsVisible="{Binding HasData}"
-                            IsGrouped="True"
-                            BackgroundColor="{StaticResource ListViewBgColor}"
-                            ItemsSource="{Binding SubstitutionAndCoachGroups}"
-                            HeightRequest="{Binding FooterHeight}"
-                            VerticalOptions="FillAndExpand"
-                            Scrolled="ItemsView_OnScrolled"
-                            Header="{Binding .}">
+            <tabStrip:TabItemCollectionView IsVisible="{Binding HasData}"
+                                            IsGrouped="True"
+                                            BackgroundColor="{StaticResource ListViewBgColor}"
+                                            ItemsSource="{Binding SubstitutionAndCoachGroups}"
+                                            HeightRequest="{Binding FooterHeight}"
+                                            VerticalOptions="FillAndExpand"
+                                            Header="{Binding .}">
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout BackgroundColor="#272830">
@@ -113,7 +113,7 @@
                         <Label Text=" "></Label>
                     </StackLayout>
                 </CollectionView.Footer>
-            </CollectionView>
+            </tabStrip:TabItemCollectionView>
         </RefreshView>
     </StackLayout>
 </DataTemplate>

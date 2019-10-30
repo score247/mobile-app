@@ -10,10 +10,5 @@ namespace LiveScore.Soccer.Views.Templates.DetailLinesUp
         {
             InitializeComponent();
         }
-
-        private void ItemsView_OnScrolled(object sender, ItemsViewScrolledEventArgs e)
-        {
-            MessagingCenter.Send("TabListView", "OnScrolling", e.VerticalOffset > 0 ? e.VerticalOffset : 0);
-        }
     }
 }
