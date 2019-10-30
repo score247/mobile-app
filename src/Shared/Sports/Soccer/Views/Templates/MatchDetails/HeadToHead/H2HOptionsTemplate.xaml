@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:viewResources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
+             xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
+             xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HOptionsTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <coreViewResources:MatchHeaderViewResource />
+                <coreViewResources:MatchViewResource />
+                <viewResources:MatchDetailViewResource />
+                <viewResources:MatchDetailH2HViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <coreConverters:SelectedTabColorConverter x:Key="SelectedTabColorConverter" />
+            <coreConverters:SelectedTabBackgroundColorConverter x:Key="SelectedTabBgColorConverter" />
+            <commonConverters:UpperCaseConverter x:Key="UpperCaseConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <Frame Margin="8"
+               Style="{StaticResource SubTabContainer}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40" />
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0"
+                        Grid.Column="0"
+                        Style="{StaticResource SubTab}"
+                        Text="{Binding HomeTeamName, Converter={StaticResource UpperCaseConverter}}"
+                        BackgroundColor="{Binding VisibleHomeResults, Converter={StaticResource SelectedTabBgColorConverter}}"
+                        TextColor="{Binding VisibleHomeResults, Converter={StaticResource SelectedTabColorConverter}}"
+                        Command="{Binding OnTeamResultTapped}"
+                        CommandParameter="home" />
+
+                <Button Grid.Row="0"
+                        Grid.Column="1"
+                        Style="{StaticResource SubTab}"
+                        BackgroundColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabBgColorConverter}}"
+                        TextColor="{Binding VisibleHeadToHead, Converter={StaticResource SelectedTabColorConverter}}"
+                        Text="{langResources:Translate HeadToHead}"
+                        Command="{Binding OnHeadToHeadTapped}" />
+
+                <Button Grid.Row="0"
+                        Grid.Column="2"
+                        Style="{StaticResource SubTab}"
+                        BackgroundColor="{Binding VisibleAwayResults, Converter={StaticResource SelectedTabBgColorConverter}}"
+                        TextColor="{Binding VisibleAwayResults, Converter={StaticResource SelectedTabColorConverter}}"
+                        Text="{Binding AwayTeamName, Converter={StaticResource UpperCaseConverter}}"
+                        Command="{Binding OnTeamResultTapped}"
+                        CommandParameter="away" />
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:viewResources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
+             xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HAwayTeamTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <coreViewResources:MatchHeaderViewResource />
+                <coreViewResources:MatchViewResource />
+                <viewResources:MatchDetailViewResource />
+                <viewResources:MatchDetailH2HViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <!-- Away Team -->
+        <Frame Style="{StaticResource MatchDetailH2HContainer}"
+               IsVisible="{Binding VisibleAwayResults}">
+            <StackLayout>
+                <!-- League -->
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <forms:SvgCachedImage Grid.Row="0"
+                                          Grid.Column="0"
+                                          DownsampleToViewSize="True"
+                                          LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                          Source="images/flag_league/default_flag.svg"
+                                          Style="{StaticResource LeagueFlag}" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource LeagueName}"
+                           Text="ENGLAND PREMIER LEAGUE" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <!-- Matches -->
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Style="{StaticResource MatchStatusContainer}">
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="19 OCT" />
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="FT" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="West Ham United" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="Niort" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource HomeScore}"
+                           Text="2" />
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{StaticResource AwayScore}"
+                           Text="2" />
+                    <Button Grid.Column="3"
+                            Grid.RowSpan="2"
+                            Text="D"
+                            Style="{StaticResource MatchDetailH2HResultDrawIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Style="{StaticResource MatchStatusContainer}">
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="19 JAN" />
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="FT" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="Westham United" />
+
+                        <Label Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="Paris FC" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource HomeScore}"
+                           Text="2" />
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{StaticResource AwayScore}"
+                           Text="0" />
+                    <Button Grid.Column="3"
+                            Grid.RowSpan="2"
+                            Text="W"
+                            Style="{StaticResource MatchDetailH2HResultWinIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <!-- League -->
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <forms:SvgCachedImage Grid.Row="0"
+                                          Grid.Column="0"
+                                          DownsampleToViewSize="True"
+                                          LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                          Source="images/flag_league/default_flag.svg"
+                                          Style="{StaticResource LeagueFlag}" />
+
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource LeagueName}"
+                           Text="ENGLAND PREMIER LEAGUE" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource MatchGeneralInfoTeams}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="30" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                                 Grid.RowSpan="2"
+                                 Grid.Column="0"
+                                 Style="{StaticResource MatchStatusContainer}">
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="2018" />
+                        <Label Style="{StaticResource MatchDetailH2HMatchStatus}"
+                               Text="FT" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="AC Ajaccio" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                                 Grid.Column="1"
+                                 Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                               Text="Westham United" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchPenaltyIcon}" />
+                        <Label IsVisible="False"
+                               Style="{StaticResource MatchSecondLegIcon}" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource HomeScore}"
+                           Text="1" />
+                    <Label Grid.Row="1"
+                           Grid.Column="2"
+                           Style="{StaticResource AwayScore}"
+                           Text="0" />
+                    <Button Grid.Column="3"
+                            Grid.RowSpan="2"
+                            Text="L"
+                            Style="{StaticResource MatchDetailH2HResultLoseIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </StackLayout>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

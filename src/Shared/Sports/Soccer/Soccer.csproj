@@ -70,6 +70,9 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs">
+      <DependentUpon>H2HHomeTeamTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,15 @@
     <EmbeddedResource Remove="..\..\..\CommonResources\Html\theme.css" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HAwayTeamTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HOptionsTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\StatisticsHeaderTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
