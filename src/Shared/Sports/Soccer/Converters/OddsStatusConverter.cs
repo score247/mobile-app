@@ -7,7 +7,13 @@ namespace LiveScore.Soccer.Converters
 {
     public class OddsStatusConverter : ResourceValueConverter<string, Color>
     {
-        public OddsStatusConverter() : base(null)
+        public OddsStatusConverter()
+            : base(null)
+        {
+        }
+
+        protected OddsStatusConverter(Func<string, Color> GetResourceValue)
+            : base(GetResourceValue)
         {
         }
 

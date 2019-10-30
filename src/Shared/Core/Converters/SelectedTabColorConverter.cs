@@ -11,8 +11,8 @@ namespace LiveScore.Core.Converters
         {
         }
 
-        protected SelectedTabColorConverter(Func<string, Color> GetResource)
-            : base(GetResource) { }
+        protected SelectedTabColorConverter(Func<string, Color> GetResourceValue)
+            : base(GetResourceValue) { }
 
         protected override string GetResourceKey(bool? source)
             => source != null && source.Value
