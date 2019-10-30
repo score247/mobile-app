@@ -298,23 +298,35 @@
 
         <Frame Style="{StaticResource MatchDetailH2HContainer}"
                IsVisible="{Binding VisibleHeadToHead}">
-            <CollectionView IsVisible="{Binding HasData}"
-                            x:Name="H2HMatches"
-                            IsGrouped="True"
-                            GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                            ItemTemplate="{StaticResource MatchItemTemplate}"
-                            ItemsSource="{Binding Matches}"
-                            Header="{Binding .}"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            HeaderTemplate="{StaticResource HeaderTemplate}"
-                            Scrolled="H2HMatches_OnScrolled"
-                            Style="{StaticResource CollectionViewHasBackground}">
-                <CollectionView.GroupFooterTemplate>
-                    <DataTemplate>
-                        <StackLayout></StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupFooterTemplate>
-            </CollectionView>
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         Command="{Binding RefreshCommand}"
+                         RefreshColor="White"
+                         VerticalOptions="FillAndExpand">
+                <CollectionView IsVisible="{Binding HasData}"
+                                x:Name="H2HMatches"
+                                IsGrouped="True"
+                                GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                                ItemTemplate="{StaticResource MatchItemTemplate}"
+                                ItemsSource="{Binding Matches}"
+                                Header="{Binding .}"
+                                ItemSizingStrategy="MeasureFirstItem"
+                                HeaderTemplate="{StaticResource HeaderTemplate}"
+                                Scrolled="H2HMatches_OnScrolled"
+                                VerticalOptions="FillAndExpand"
+                                Style="{StaticResource CollectionViewHasBackground}">
+                    <CollectionView.GroupFooterTemplate>
+                        <DataTemplate>
+                            <StackLayout></StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupFooterTemplate>
+                    <CollectionView.Footer>
+                        <StackLayout BackgroundColor="Transparent"
+                                     HeightRequest="400">
+                            <Label Text=" "></Label>
+                        </StackLayout>
+                    </CollectionView.Footer>
+                </CollectionView>
+            </RefreshView>
         </Frame>
 
         <!-- Away Team -->

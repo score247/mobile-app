@@ -16,10 +16,15 @@ namespace LiveScore.Soccer.Views
             base.OnAppearing();
 
             var tabStripOffset = TabStrip.Y;
+            AbsoluteLayout.SetLayoutBounds(MatchDetailLayout,
+                new Rectangle(0, 0, 1, MatchDetailLayout.Height + tabStripOffset));
+            AbsoluteLayout.SetLayoutFlags(MatchDetailLayout, AbsoluteLayoutFlags.WidthProportional);
+
             MessagingCenter.Subscribe<string, double>("TabListView", "OnScrolling", async (_, scrollY) =>
             {
                 var newOffset = scrollY <= tabStripOffset ? scrollY : tabStripOffset;
-                await MatchDetailLayout.TranslateTo(0, -newOffset, 0, Easing.Linear);
+
+                MatchDetailLayout.TranslationY = -newOffset;
             });
         }
 

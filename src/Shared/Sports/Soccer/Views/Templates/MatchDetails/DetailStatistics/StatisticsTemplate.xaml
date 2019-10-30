@@ -30,7 +30,6 @@
                                   IsVisible="{Binding HasData}"
                                   Header="{Binding MainStatistic}"
                                   IsPullToRefreshEnabled="true"
-                                  HeightRequest="{Binding FooterHeight}"
                                   RefreshCommand="{Binding RefreshCommand}"
                                   IsRefreshing="{Binding IsRefreshing}"
                                   VerticalOptions="FillAndExpand">
@@ -120,6 +119,12 @@
                     </ViewCell>
                 </DataTemplate>
             </tabStrip:TabITemListView.ItemTemplate>
+            <tabStrip:TabITemListView.Footer>
+                <StackLayout BackgroundColor="Transparent"
+                             HeightRequest="400">
+                    <Label Text=" "></Label>
+                </StackLayout>
+            </tabStrip:TabITemListView.Footer>
         </tabStrip:TabITemListView>
     </FlexLayout>
 </DataTemplate>
