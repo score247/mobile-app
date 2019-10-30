@@ -1,32 +1,40 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
+﻿using AutoFixture;
+using LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
 {
     public class H2HStatisticViewModelTests
     {
-        private readonly H2HStatisticViewModel h2hStats;
+        private readonly Fixture fixture;
+
         public H2HStatisticViewModelTests() 
         {
-            h2hStats = new H2HStatisticViewModel(3, 5, 10);
+            fixture = new Fixture();
         }
 
         [Fact]
-        public void DisplayHomeWin_CorrectAssginedValueAndFormat() 
+        public void DisplayHomeWin_CorrectAssginedValueAndFormat()
         {
-            Assert.Equal("3/10", h2hStats.DisplayHomeWin);
+            var h2hStats = fixture.Create<H2HStatisticViewModel>();
+
+            Assert.Equal($"{h2hStats.HomeWin}/{h2hStats.Total}", h2hStats.DisplayHomeWin);
         }
 
         [Fact]
         public void DisplayAwayWin_CorrectAssginedValueAndFormat()
         {
-            Assert.Equal("5/10", h2hStats.DisplayAwayWin);
+            var h2hStats = fixture.Create<H2HStatisticViewModel>();
+
+            Assert.Equal($"{h2hStats.AwayWin}/{h2hStats.Total}", h2hStats.DisplayAwayWin);
         }
 
         [Fact]
         public void DisplayDraw_CorrectAssginedValueAndFormat()
         {
-            Assert.Equal("2/10", h2hStats.DisplayDraw);
+            var h2hStats = fixture.Create<H2HStatisticViewModel>();
+
+            Assert.Equal($"{h2hStats.Total - h2hStats.HomeWin - h2hStats.AwayWin}/{h2hStats.Total}", h2hStats.DisplayDraw);
         }
     }
 }
