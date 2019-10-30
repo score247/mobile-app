@@ -29,9 +29,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
 
         public void BuildMatch(IMatch match)
         {
+            if (match == null)
+            {
+                return;
+            }
+
             Match = match;
             DisplayEventDate = BuildDisplayEventDate(match);
-            BuildDisplayMatchStatus();
+            DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
         }
 
         private static string BuildDisplayEventDate(IMatch match)
@@ -41,11 +46,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.DetailH2H
             return match.EventDate.Year == currentYear
                 ? match.EventDate.ToLocalShortDayMonth()
                 : match.EventDate.ToLocalYear();
-        }
-
-        private void BuildDisplayMatchStatus()
-        {
-            DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
         }
     }
 }
