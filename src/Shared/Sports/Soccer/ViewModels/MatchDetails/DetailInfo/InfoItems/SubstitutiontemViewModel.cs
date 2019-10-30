@@ -9,6 +9,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 {
     public class SubstitutionItemViewModel : BaseItemViewModel
     {
+        private const string WhiteSpace = " ";
+
         public SubstitutionItemViewModel(
             TimelineEvent timelineEvent,
             MatchInfo matchInfo,
@@ -50,18 +52,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetailInfo
 
         private void BuildHomeInfo()
         {
-            HomePlayerOutName = TimelineEvent.PlayerOut?.Name;
-            HomePlayerInName = TimelineEvent.PlayerIn?.Name;
+            HomePlayerOutName = BuildPlayName(TimelineEvent.PlayerOut?.Name);
+            HomePlayerInName = BuildPlayName(TimelineEvent.PlayerIn?.Name);
 
             VisibleHomeImage = true;
         }
 
         private void BuildAwayInfo()
         {
-            AwayPlayerOutName = TimelineEvent.PlayerOut?.Name;
-            AwayPlayerInName = TimelineEvent.PlayerIn?.Name;
+            AwayPlayerOutName = BuildPlayName(TimelineEvent.PlayerOut?.Name);
+            AwayPlayerInName = BuildPlayName(TimelineEvent.PlayerIn?.Name);
 
             VisibleAwayImage = true;
         }
+
+        private static string BuildPlayName(string name)
+            => string.IsNullOrEmpty(name) ? WhiteSpace : name;
     }
 }
