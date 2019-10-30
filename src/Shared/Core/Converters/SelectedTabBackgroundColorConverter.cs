@@ -1,30 +1,33 @@
 ﻿using System;
 using System.Globalization;
+using LiveScore.Common.Converters;
 using Xamarin.Forms;
 
 namespace LiveScore.Core.Converters
 {
-    public class SelectedTabBackgroundColorConverter : IValueConverter
+    public class SelectedTabBackgroundColorConverter : ValueConverter<bool?, Color>
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        private readonly Func<string, Color> getColor;
+
+        public SelectedTabBackgroundColorConverter() : this(null)
         {
-            var color = (Color)Application.Current.Resources["SubTabBgColor"];
-
-            if (value == null)
-            {
-                return color;
-            }
-
-            var isSelected = (bool)value;
-
-            return isSelected
-                ? (Color)Application.Current.Resources["ActiveSubTabBgColor"]
-                : (Color)Application.Current.Resources["SubTabBgColor"];
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public SelectedTabBackgroundColorConverter(Func<string, Color> getColorHex)
         {
-            return value?.ToString();
+            if (getColorHex == null)
+            {
+                getColor = (resourceKey) => (Color)Application.Current.Resources[resourceKey];
+            }
+        }
+
+        public override Color Convert(bool? source, Type targetType, object parameter, CultureInfo culture)
+        {
+            string resourceKey = source != null && source.Value
+                ? "ActiveSubTabBgColor"
+                : "SubTabBgColor";
+
+            return getColor(resourceKey);
         }
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace LiveScore.Core.Tests.Converters
-{
-    using LiveScore.Core.Converters;
-    using LiveScore.Core.Tests.Fixtures;
-    using Xamarin.Forms;
-    using Xunit;
+﻿using LiveScore.Core.Converters;
+using LiveScore.Core.Tests.Fixtures;
+using Xamarin.Forms;
+using Xunit;
 
+namespace LiveScore.Core.Tests.Converters
+{
     public class SelectedTabBackgroundColorConverterTests : IClassFixture<ResourcesFixture>
     {
         [Fact]
