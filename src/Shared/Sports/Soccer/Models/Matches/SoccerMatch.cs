@@ -206,6 +206,11 @@ namespace LiveScore.Soccer.Models.Matches
 
         public void UpdateMatch(IMatch match)
         {
+            if (match == null)
+            {
+                return;
+            }
+
             if (!(match is SoccerMatch soccerMatch))
             {
                 return;

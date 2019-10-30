@@ -118,17 +118,20 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
         {
             try
             {
-                var headToHeads 
+                var headToHeads
                     = await teamService.GetHeadToHeadsAsync(
                         match.HomeTeamId,
                         match.AwayTeamId,
                         CurrentLanguage.DisplayName,
-                        forceFetchLatestData);
+                        forceFetchLatestData)
+                    .ConfigureAwait(false);
 
                 if (headToHeads?.Any() == true && Matches == null)
                 {
                     Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
                     VisibleStats = (Stats != null && Stats.Total > 0);
+
+                    VisibleStats = Stats?.Total > 0;
 
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
@@ -150,13 +153,11 @@ namespace LiveScore.Soccer.ViewModels.DetailH2H
 
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
         {
-            var matchGroups = headToHeads
-                .OrderByDescending(match => match.EventDate)
-                .Select(match => new SummaryMatchViewModel(
-                    match,
-                    matchStatusBuilder
-                ))
-                .GroupBy(item => new H2HMatchGrouping(item.Match));
+            var matchGroups
+                = headToHeads
+                    .OrderByDescending(match => match.EventDate)
+                    .Select(match => new SummaryMatchViewModel(match, matchStatusBuilder))
+                    .GroupBy(item => new H2HMatchGrouping(item.Match));
 
             return matchGroups.Select(group => new H2HMatchGroupViewModel(group.ToList(), buildFlagUrlFunc));
         }

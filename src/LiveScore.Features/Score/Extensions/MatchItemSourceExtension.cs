@@ -45,31 +45,31 @@ namespace LiveScore.Features.Score.Extensions
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
-            var groupMatchViewModel = groupMatchViewModels?
+            if (matches == null || groupMatchViewModels == null)
+            {
+                return;
+            }
+
+            var groupMatchViewModel = groupMatchViewModels
                 .SelectMany(group => group)
                 .ToList();
 
             foreach (var match in matches.OrderBy(match => match.LeagueOrder))
             {
-                var matchViewModel = groupMatchViewModel?
-                    .FirstOrDefault(viewModel => viewModel.Match.Id == match.Id);
+                var matchViewModel = groupMatchViewModel
+                    .Find(viewModel => viewModel.Match.Id == match.Id);
 
                 if (matchViewModel == null)
                 {
                     groupMatchViewModels
-                        .AddNewMatch(
-                            match,
-                            matchStatusBuilder,
-                            matchMinuteBuilder,
-                            eventAggregator,
-                            buildFlagUrlFunc);
-
-                    continue;
+                        .AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc);
                 }
-
-                if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
+                else
                 {
-                    matchViewModel.UpdateMatch(match);
+                    if (match.ModifiedTime > matchViewModel.Match.ModifiedTime)
+                    {
+                        matchViewModel.UpdateMatch(match);
+                    }
                 }
             }
         }
@@ -82,7 +82,14 @@ namespace LiveScore.Features.Score.Extensions
                 IEventAggregator eventAggregator,
                 Func<string, string> buildFlagUrlFunc)
         {
-            var currentGroupIndex = groupMatchViewModels.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
+            if (groupMatchViewModels == null || newMatch == null)
+            {
+                return;
+            }
+
+            var currentGroupIndex
+                = groupMatchViewModels.IndexOf(g => g.Key.LeagueId == newMatch.LeagueId);
+
             List<MatchViewModel> currentMatchViewModels;
 
             if (currentGroupIndex >= 0)
@@ -92,12 +99,10 @@ namespace LiveScore.Features.Score.Extensions
                 currentMatchViewModels
                     .Add(new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator));
 
-                var group = currentMatchViewModels
+                groupMatchViewModels[currentGroupIndex] = currentMatchViewModels
                     .OrderBy(m => m.Match.EventDate)
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
-
-                groupMatchViewModels[currentGroupIndex] = group;
             }
             else
             {
@@ -111,8 +116,13 @@ namespace LiveScore.Features.Score.Extensions
                     .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
                     .FirstOrDefault();
 
-                var leagueOrders = groupMatchViewModels.Select(i => i.Key.LeagueOrder).ToList();
-                var newLeagueIndex = CalculateLeagueIndexByOrder(group?.Key.LeagueOrder ?? 0, leagueOrders);
+                var leagueOrders
+                    = groupMatchViewModels
+                        .Select(i => i.Key.LeagueOrder)
+                        .ToList();
+
+                var newLeagueIndex
+                    = CalculateLeagueIndexByOrder(group?.Key.LeagueOrder ?? 0, leagueOrders);
 
                 if (newLeagueIndex >= groupMatchViewModels.Count)
                 {
@@ -130,6 +140,11 @@ namespace LiveScore.Features.Score.Extensions
             string[] removedMatchIds,
             Func<string, string> buildFlagUrlFunc)
         {
+            if (groupMatchViewModels == null)
+            {
+                return;
+            }
+
             foreach (var removedMatchId in removedMatchIds)
             {
                 var league = groupMatchViewModels
@@ -150,9 +165,11 @@ namespace LiveScore.Features.Score.Extensions
                 }
 
                 var indexOfLeague = groupMatchViewModels.IndexOf(league);
-                groupMatchViewModels[indexOfLeague] = leagueMatches
-                    .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
-                    .FirstOrDefault();
+
+                groupMatchViewModels[indexOfLeague]
+                    = leagueMatches
+                        .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                        .FirstOrDefault();
             }
         }
 
@@ -160,9 +177,10 @@ namespace LiveScore.Features.Score.Extensions
             this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
             IMatchEvent matchEvent)
         {
-            var matchItem = groupMatchViewModels?
-                .SelectMany(group => group)
-                .FirstOrDefault(m => m.Match != null && m.Match.Id == matchEvent.MatchId);
+            var matchItem
+                = groupMatchViewModels?
+                    .SelectMany(group => group)
+                    .FirstOrDefault(m => m.Match != null && m.Match.Id == matchEvent.MatchId);
 
             if (matchItem?.Match != null)
             {
@@ -176,9 +194,10 @@ namespace LiveScore.Features.Score.Extensions
             bool isHome,
             ITeamStatistic statistic)
         {
-            var matchItem = groupMatchViewModels?
-                .SelectMany(group => group)
-                .FirstOrDefault(m => m.Match != null && m.Match.Id == matchId);
+            var matchItem
+                = groupMatchViewModels?
+                    .SelectMany(group => group)
+                    .FirstOrDefault(m => m.Match != null && m.Match.Id == matchId);
 
             matchItem?.OnReceivedTeamStatistic(isHome, statistic);
         }
@@ -187,7 +206,9 @@ namespace LiveScore.Features.Score.Extensions
         {
             leagueOrders.Add(leagueOrder);
 
-            return leagueOrders.OrderBy(order => order).IndexOf(leagueOrder);
+            return leagueOrders
+                .OrderBy(order => order)
+                .IndexOf(leagueOrder);
         }
     }
 }
