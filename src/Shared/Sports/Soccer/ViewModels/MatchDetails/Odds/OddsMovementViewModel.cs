@@ -81,7 +81,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
             }
             catch (Exception ex)
             {
-                LoggingService.LogException(ex);
+                LoggingService.LogException(ex, $"Match Id: {matchId}");
             }
         }
 

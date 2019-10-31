@@ -69,7 +69,8 @@ namespace LiveScore.Soccer.Models.Matches
             }
             catch (Exception ex)
             {
-                loggingService.LogException(ex);
+                /// TODO: temporarily add custom message to log lib
+                loggingService.LogException(ex, $"Match Id:{match?.Id}");
 
                 return string.Empty;
             }
@@ -104,10 +105,10 @@ namespace LiveScore.Soccer.Models.Matches
             return string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : int.Parse(cachedInjuryTime);
         }
 
-        public void UpdateAnnouncedInjuryTime(SoccerMatch soccerMatch) 
+        public void UpdateAnnouncedInjuryTime(SoccerMatch soccerMatch)
             => settings.Set(GetCacheKey(soccerMatch), soccerMatch.InjuryTimeAnnounced.ToString());
 
-        private static string GetCacheKey(SoccerMatch soccerMatch) 
+        private static string GetCacheKey(SoccerMatch soccerMatch)
             => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
     }
 }
