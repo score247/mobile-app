@@ -162,5 +162,60 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             Assert.True(viewModel.VisibleAwayResults);
             Assert.False(viewModel.VisibleHeadToHead);
         }
+
+        [Fact]
+        public void OnTeamResultTapped_ExecuteForAway_VisibleAwayTeamResults()
+        {
+            // Arrange       
+
+            // Act
+            viewModel.OnTeamResultTapped.Execute("away");
+
+            // Assert
+            Assert.False(viewModel.VisibleHomeResults);
+            Assert.True(viewModel.VisibleAwayResults);
+            Assert.False(viewModel.VisibleHeadToHead);
+        }
+
+        [Fact]
+        public void OnTeamResultTapped_ExecuteForHome_VisibleHomeTeamResults()
+        {
+            // Arrange       
+
+            // Act
+            viewModel.OnTeamResultTapped.Execute("home");
+
+            // Assert
+            Assert.True(viewModel.VisibleHomeResults);
+            Assert.False(viewModel.VisibleAwayResults);
+            Assert.False(viewModel.VisibleHeadToHead);
+        }
+
+        [Fact]
+        public async Task OnHeadToHeadTapped_ExecuteAsync_VisibleHeadToHead()
+        {
+            // Arrange       
+
+            // Act
+            await viewModel.OnHeadToHeadTapped.ExecuteAsync();
+
+            // Assert
+            Assert.False(viewModel.VisibleHomeResults);
+            Assert.False(viewModel.VisibleAwayResults);
+            Assert.True(viewModel.VisibleHeadToHead);
+        }
+
+        [Fact]
+        public async Task RefreshCommand_ExecuteAsync_GetLatest()
+        {
+            // Arrange       
+
+            // Act
+            await viewModel.RefreshCommand.ExecuteAsync();
+
+            // Assert
+            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, true);
+            Assert.False(viewModel.IsRefreshing);
+        }
     }
 }
