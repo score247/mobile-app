@@ -2,11 +2,10 @@ using System;
 using AutoFixture;
 using LiveScore.Common.LangResources;
 using LiveScore.Core.Enumerations;
-using LiveScore.Soccer.Converters;
 using LiveScore.Soccer.Models.Matches;
 using Xunit;
 
-namespace Soccer.Tests.Converters
+namespace Soccer.Tests.Models.Matches
 {
     public class MatchStatusBuilderTests
     {

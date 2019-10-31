@@ -32,13 +32,14 @@ namespace LiveScore.Soccer.Models.Matches
         }
 
         // TODO: Remove casting
-        public string BuildMatchMinute(IMatch match) => BuildMatchMinute(match as SoccerMatch, DateTimeOffset.UtcNow);
+        public string BuildMatchMinute(IMatch match)
+            => BuildMatchMinute(match as SoccerMatch, DateTimeOffset.UtcNow);
 
         internal string BuildMatchMinute(SoccerMatch match, DateTimeOffset timeToViewMatch)
         {
             try
             {
-                if (match == null)
+                if (match == null || !PeriodTimes.ContainsKey(match.MatchStatus))
                 {
                     return string.Empty;
                 }
@@ -48,6 +49,7 @@ namespace LiveScore.Soccer.Models.Matches
                 // TODO: What if CurrentPeriodStartTime does not have data?
                 var matchMinute = (int)(periodStartMinute + (timeToViewMatch - match.CurrentPeriodStartTime).TotalMinutes);
 
+                // TODO: check InjuryTimeAnnounced > 0 for each period
                 if ((match.LastTimelineType?.IsInjuryTimeShown == true) || GetAnnouncedInjuryTime(match) > 0)
                 {
                     return BuildMinuteWithInjuryTime(matchMinute, periodEndMinute, match);
@@ -102,11 +104,10 @@ namespace LiveScore.Soccer.Models.Matches
             return string.IsNullOrWhiteSpace(cachedInjuryTime) ? 0 : int.Parse(cachedInjuryTime);
         }
 
-        public void UpdateAnnouncedInjuryTime(SoccerMatch soccerMatch)
-        {
-            settings.Set(GetCacheKey(soccerMatch), soccerMatch.InjuryTimeAnnounced.ToString());
-        }
+        public void UpdateAnnouncedInjuryTime(SoccerMatch soccerMatch) 
+            => settings.Set(GetCacheKey(soccerMatch), soccerMatch.InjuryTimeAnnounced.ToString());
 
-        private static string GetCacheKey(SoccerMatch soccerMatch) => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
+        private static string GetCacheKey(SoccerMatch soccerMatch) 
+            => $"InjuryTimeAnnouced_{soccerMatch.Id}_{soccerMatch.MatchStatus.DisplayName}";
     }
 }

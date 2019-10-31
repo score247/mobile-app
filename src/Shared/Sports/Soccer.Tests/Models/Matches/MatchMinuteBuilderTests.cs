@@ -8,14 +8,14 @@ using NSubstitute;
 using Xunit;
 using static Soccer.Tests.Services.Utils.MatchMinuteUtil;
 
-namespace Soccer.Tests.Converters
+namespace Soccer.Tests.Models.Matches
 {
     public class MatchMinuteBuilderTests
     {
         private readonly ISettings settings;
         private readonly ILoggingService loggingService;
         private readonly MatchMinuteBuilder matchMinuteBuilder;
-        private readonly Fixture Any;
+        private readonly Fixture fixture;
 
         public MatchMinuteBuilderTests()
         {
@@ -23,23 +23,38 @@ namespace Soccer.Tests.Converters
             loggingService = Substitute.For<ILoggingService>();
             matchMinuteBuilder = new MatchMinuteBuilder(settings, loggingService);
 
-            Any = new Fixture();
+            fixture = new Fixture();
         }
 
         [Fact]
-        public void BuildMatchMinute_MatchIsNullOrNotASoccerMatch_ReturnStringEmpty()
+        public void BuildMatchMinute_TimePeriodKey_DoesNotContainMatchStatus_ReturnStringEmpty()
         {
             var actual = matchMinuteBuilder.BuildMatchMinute(null);
 
             Assert.Equal(string.Empty, actual);
         }
 
+
+        [Fact]
+        public void BuildMatchMinute_MatchIsNullOrNotASoccerMatch_ReturnStringEmpty()
+        {
+            // Arrange
+            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), fixture.Create<MatchStatus>());
+            var match = new SoccerMatch(fixture.Create<DateTime>(), matchResult);
+
+            // Act
+            var actualDisplayMinute = matchMinuteBuilder.BuildMatchMinute(match, fixture.Create<DateTimeOffset>());
+
+            // Assert
+            Assert.Equal(string.Empty, actualDisplayMinute);
+        }
+
         [Fact]
         public void BuildMatchMinute_MatchSatusIsFirstHalf_ReturnMatchTimeMinute()
         {
             // Arrange
-            var matchResult = new MatchResult(Any.Create<MatchStatus>(), MatchStatus.FirstHalf);
-            var match = new SoccerMatch(Any.Create<DateTime>(), matchResult);
+            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), MatchStatus.FirstHalf);
+            var match = new SoccerMatch(fixture.Create<DateTime>(), matchResult);
             var expectedMinute = GenerateMatchMinute(matchResult.MatchStatus);
             var timeToViewMatch = match.EventDate.AddMinutes(expectedMinute);
 
@@ -54,9 +69,9 @@ namespace Soccer.Tests.Converters
         public void BuildMatchMinute_MatchSatusIsSecondHalf_ReturnMatchTimeMinute()
         {
             // Arrange
-            var matchResult = new MatchResult(Any.Create<MatchStatus>(), MatchStatus.SecondHalf);
+            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), MatchStatus.SecondHalf);
 
-            var eventDate = Any.Create<DateTime>();
+            var eventDate = fixture.Create<DateTime>();
             const byte minuteSpentForBreakTime = 15;
             const byte minutesSpentForFirstHalf = 47;
             var (_, periodEndMinute) = PeriodTimes[MatchStatus.FirstHalf];
