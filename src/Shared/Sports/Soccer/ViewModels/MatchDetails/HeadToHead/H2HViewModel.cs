@@ -127,8 +127,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
                 if (headToHeads?.Any() == true)
                 {
-                    //Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
-                    //VisibleStats = Stats?.Total > 0;
+                    Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+                    VisibleStats = Stats?.Total > 0;
 
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }
