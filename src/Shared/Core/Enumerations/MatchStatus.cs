@@ -20,22 +20,33 @@ namespace LiveScore.Core.Enumerations
         ////live – The match is currently in progress
         public static readonly MatchStatus Live = new MatchStatus(5, "live");
 
-        ////1st_half – The match is in the first half
+        /// <summary>
+        /// <para>value: 6</para>
+        /// <para>name: 1st_half</para>
+        /// </summary>
         public static readonly MatchStatus FirstHalf = new MatchStatus(6, "1st_half");
 
-        ////2nd_half – The match is in the second half
+        /// <summary>
+        /// 
+        /// </summary>
         public static readonly MatchStatus SecondHalf = new MatchStatus(7, "2nd_half");
 
         ////overtime – The match is in overtime
         public static readonly MatchStatus Overtime = new MatchStatus(8, "overtime");
 
-        ////1st_extra – The match is in the first extra period
+        /// <summary>
+        /// 1st_extra
+        /// </summary>
         public static readonly MatchStatus FirstHalfExtra = new MatchStatus(9, "1st_extra");
 
-        ////2nd_extra – The match is in the second extra period
+        /// <summary>
+        /// 2nd_extra
+        /// </summary>
         public static readonly MatchStatus SecondHalfExtra = new MatchStatus(10, "2nd_extra");
 
-        ////awaiting_penalties – Waiting for announcement of penalties
+        /// <summary>
+        /// awaiting_penalties
+        /// </summary>
         public static readonly MatchStatus AwaitingPenalties = new MatchStatus(11, "awaiting_penalties");
 
         ////penalties – Penalties are ongoing

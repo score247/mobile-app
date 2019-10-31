@@ -13,7 +13,7 @@ namespace LiveScore.Core.ViewModels
     {
         private bool isSubscribingTimer;
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
-        private readonly IMatchMinuteBuilder matchMinuteConverter;
+        private readonly IMatchMinuteBuilder matchMinuteBuilder;
         private readonly IEventAggregator eventAggregator;
 
         public MatchViewModel(
@@ -24,7 +24,7 @@ namespace LiveScore.Core.ViewModels
             bool isBusy = false)
         {
             this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
-            this.matchMinuteConverter = matchMinuteBuilder;
+            this.matchMinuteBuilder = matchMinuteBuilder;
             this.eventAggregator = eventAggregator;
             IsBusy = isBusy;
 
@@ -83,7 +83,7 @@ namespace LiveScore.Core.ViewModels
 
         private void BuildMatchTime()
         {
-            DisplayMatchStatus = matchMinuteConverter.BuildMatchMinute(Match);
+            DisplayMatchStatus = matchMinuteBuilder.BuildMatchMinute(Match);
         }
 
         private void SubscribeMatchTimeChangeEvent()
