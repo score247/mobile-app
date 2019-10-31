@@ -164,7 +164,7 @@
             <!--  Substitution  -->
             <x:Double x:Key="SubstitutionMinuteWidthSize">45</x:Double>
             <x:Double x:Key="SubstitutionIconWidthSize">12</x:Double>
-            <x:Double x:Key="SubstitutionShirtNumberWidthSize">26</x:Double>
+            <x:Double x:Key="SubstitutionShirtNumberWidthSize">30</x:Double>
 
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor"
