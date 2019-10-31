@@ -4,10 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Color x:Key="StatisticHomeColor">#30C2FF</Color>
-    <Color x:Key="StatisticAwayColor">#FA2E58</Color>
-    <Color x:Key="StatisticBasicColor">#272830</Color>
-
     <Style x:Key="MatchDetailStatisticTitleLabel" TargetType="Label">
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize" Value="11" />
@@ -17,7 +13,7 @@
     </Style>
 
     <Style x:Key="MatchDetailStatisticHomeLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource StatisticHomeColor}" />
+        <Setter Property="TextColor" Value="{StaticResource HomeColor}" />
         <Setter Property="FontSize" Value="13" />
         <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
         <Setter Property="FontAttributes" Value="Bold" />
@@ -26,19 +22,19 @@
     </Style>
 
     <Style x:Key="MatchDetailStatisticAwayLabel" BasedOn="{StaticResource MatchDetailStatisticHomeLabel}" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource StatisticAwayColor}" />
+        <Setter Property="TextColor" Value="{StaticResource AwayColor}" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticHomeProgressBar" TargetType="ProgressBar">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="BackgroundColor" Value="{StaticResource StatisticBasicColor}" />
-        <Setter Property="ProgressColor" Value="{StaticResource StatisticHomeColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="ProgressColor" Value="{StaticResource HomeColor}" />
         <Setter Property="Rotation" Value="180" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticAwayProgressBar" TargetType="ProgressBar">
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="BackgroundColor" Value="{StaticResource StatisticBasicColor}" />
-        <Setter Property="ProgressColor" Value="{StaticResource StatisticAwayColor}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+        <Setter Property="ProgressColor" Value="{StaticResource AwayColor}" />
     </Style>
 </ResourceDictionary>

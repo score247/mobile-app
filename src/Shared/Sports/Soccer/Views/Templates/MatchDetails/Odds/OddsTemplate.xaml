@@ -79,16 +79,12 @@
                 <Button Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
-        <ActivityIndicator Margin="20"
-                           IsRunning="{Binding IsBusy}"
-                           IsVisible="{Binding IsBusy}"
-                           Style="{StaticResource CenterActivityIndicator}"
-                           VerticalOptions="StartAndExpand" />
-        <StackLayout Style="{StaticResource TableContainer}">
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+        <Grid>
+            <StackLayout Style="{StaticResource TableContainer}" IsVisible="{Binding IsNotBusy}">
+                <RefreshView IsRefreshing="{Binding IsRefreshing}"
                          Command="{Binding RefreshCommand}"
                          RefreshColor="White">
-                <tabStrip:TabItemCollectionView x:Name="OddsCollectionView"
+                    <tabStrip:TabItemCollectionView x:Name="OddsCollectionView"
                                                 BackgroundColor="{StaticResource ListViewLightBgColor}"
                                                 Header="{Binding HasData, StringFormat=''}"
                                                 HeaderTemplate="{Binding HeaderTemplate}"
@@ -99,8 +95,15 @@
                                                 SelectionMode="Single"
                                                 SelectionChangedCommand="{Binding TappedOddsItemCommand}"
                                                 SelectionChangedCommandParameter="{Binding Source={x:Reference OddsCollectionView}, Path=SelectedItem}">
-                </tabStrip:TabItemCollectionView>
-            </RefreshView>
-        </StackLayout>
+                    </tabStrip:TabItemCollectionView>
+                </RefreshView>
+            </StackLayout>
+            <ActivityIndicator Margin="40"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}"
+                           VerticalOptions="Start" />
+        </Grid>
+        
     </StackLayout>
 </DataTemplate>

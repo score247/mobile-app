@@ -11,4 +11,22 @@
         <Setter Property="HorizontalTextAlignment" Value="End" />
         <Setter Property="Margin" Value="0,0,4,0" />
     </Style>
+    <Style x:Key="MatchDetailLineFormationUpLayout" BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+        TargetType="FlexLayout">
+        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
+        <Setter Property="Padding" Value="16,0" />
+        <Setter Property="HeightRequest" Value="35" />
+    </Style>
+
+    <Style x:Key="MatchDetailLineUpsFormationHomeLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource HomeColor}" />
+    </Style>
+
+    <Style x:Key="MatchDetailLineUpsFormationAwayLabel" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
+        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource AwayColor}" />
+    </Style>
 </ResourceDictionary>

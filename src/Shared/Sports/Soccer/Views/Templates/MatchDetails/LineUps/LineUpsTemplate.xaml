@@ -37,20 +37,20 @@
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout BackgroundColor="#272830">
-                            <FlexLayout Style="{StaticResource Group}"
+                            <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                         JustifyContent="SpaceBetween">
-                                <Label Style="{StaticResource GroupName}"
+                                <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
                                        Text="{Binding LineupsHeader.HomeName}" />
-                                <Label Style="{StaticResource GroupName}"
+                                <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
                                        Text="{Binding LineupsHeader.HomeFormation}" />
                             </FlexLayout>
                             <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
                                      Source="{Binding LineupsHeader.LineupsPitchView}" />
-                            <FlexLayout Style="{StaticResource Group}"
+                            <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                         JustifyContent="SpaceBetween">
-                                <Label Style="{StaticResource GroupName}"
+                                <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
                                        Text="{Binding LineupsHeader.AwayName}" />
-                                <Label Style="{StaticResource GroupName}"
+                                <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
                                        Text="{Binding LineupsHeader.AwayFormation}" />
                             </FlexLayout>
                         </StackLayout>

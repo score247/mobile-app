@@ -65,6 +65,10 @@
             <!--  Match  -->
             <Color x:Key="TeamColor">#AAAAAB</Color>
 
+            <Color x:Key="HomeColor">#30C2FF</Color>
+            <Color x:Key="AwayColor">#FA2E58</Color>
+            <Color x:Key="DrawColor">#FF7246</Color>
+
             <!--  Team rank in the TABLE tab  -->
             <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
             <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
