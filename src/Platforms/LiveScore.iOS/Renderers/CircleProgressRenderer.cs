@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Diagnostics;
 using CoreAnimation;
 using CoreGraphics;
 using Foundation;
@@ -53,8 +52,6 @@ namespace LiveScore.iOS.Renderers
             if (e.PropertyName == CircularProgress.ValueProperty.PropertyName
                 || e.PropertyName == CircularProgress.MaximumProperty.PropertyName)
             {
-                isSizeChanged = true;
-
                 ProgressValue = CalculateValue();
             }
 
@@ -78,7 +75,7 @@ namespace LiveScore.iOS.Renderers
             UpdateIndicatorLabelSize();
             AddSubview(indicatorLabel);
 
-            animate();
+            Animate();
         }
 
         private void UpdateIndicatorLabelSize()
@@ -183,7 +180,7 @@ namespace LiveScore.iOS.Renderers
             return circlePath;
         }
 
-        private void animate()
+        private void Animate()
         {
             indicatorCircle.StrokeStart = new nfloat(Start);
             indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
