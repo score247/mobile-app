@@ -27,7 +27,7 @@
                      Command="{Binding RefreshCommand}">
             <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource ListViewBgColor}"
                                             ItemsSource="{Binding MatchCommentaries}"
-                                            ItemSizingStrategy="MeasureFirstItem"
+                                            ItemSizingStrategy="MeasureAllItems"
                                             IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemCollectionView.Header>
                     <StackLayout>

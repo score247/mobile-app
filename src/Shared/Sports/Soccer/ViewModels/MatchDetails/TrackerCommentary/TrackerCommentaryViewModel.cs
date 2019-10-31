@@ -52,7 +52,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 
         public IEnumerable<CommentaryItemViewModel> DefaultMatchCommentaries { get; set; }
 
-        public IEnumerable<CommentaryItemViewModel> RemainingMatchCommentaries { get; set; }
+        public IEnumerable<CommentaryItemViewModel> FullMatchCommentaries { get; set; }
 
         public bool TrackerVisible { get; private set; } = true;
 
@@ -104,11 +104,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         {
             if (IsShowMore)
             {
-                foreach (var commentary in RemainingMatchCommentaries)
-                {
-                    MatchCommentaries.Add(commentary);
-                }
-
+                MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(FullMatchCommentaries);
                 ShowLessMoreButtonText = AppResources.ShowLess;
                 IsShowMore = false;
             }
@@ -177,11 +173,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                         .ToList();
 
                     DefaultMatchCommentaries = commentaryViewModels.Take(DefaultLoadingCommentaryItemCount);
-                    RemainingMatchCommentaries = commentaryViewModels.Skip(DefaultLoadingCommentaryItemCount);
+                    FullMatchCommentaries = commentaryViewModels;
                     MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
 
                     HasCommentariesData = true;
-                    VisibleShowMore = HasCommentariesData && RemainingMatchCommentaries.Any();
+                    VisibleShowMore = HasCommentariesData && FullMatchCommentaries.Any();
                 }
             }
 

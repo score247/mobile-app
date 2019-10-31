@@ -64,6 +64,7 @@
                             HorizontalOptions="FillAndExpand"
                             IsCyclical="False"
                             IsViewReusingEnabled="False"
+                            BackViewsDepth="1"
                             ItemAppearedCommand="{Binding ScoreItemAppearedCommand}"
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             ItemsSource="{Binding ScoreItemSources}"

@@ -125,10 +125,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                         forceFetchLatestData)
                     .ConfigureAwait(false);
 
-                if (headToHeads?.Any() == true && Matches == null)
+                if (headToHeads?.Any() == true)
                 {
-                    Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
-                    VisibleStats = Stats?.Total > 0;
+                    //Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+                    //VisibleStats = Stats?.Total > 0;
 
                     Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
                 }

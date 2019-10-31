@@ -19,7 +19,7 @@
             <cards:CarouselView x:Name="TabContent"
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
-                                IsViewReusingEnabled="False"
+                                IsViewReusingEnabled="True"
                                 BackViewsDepth="1"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
