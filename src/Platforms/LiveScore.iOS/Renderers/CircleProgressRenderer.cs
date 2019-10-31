@@ -21,15 +21,12 @@ namespace LiveScore.iOS.Renderers
         private CAShapeLayer backgroundCircle;
         private CAShapeLayer indicatorCircle;
         private UILabel indicatorLabel;
-        private CGSize indicatorLabelSize;
         private int indicatorFontSize;
 
         private bool isSizeChanged;
-        private nfloat ProgressRadius;
         private double ProgressValue;
 
         private readonly double startAngle = 1.5 * Math.PI;
-
 
         protected override void OnElementChanged(ElementChangedEventArgs<CircularProgress> e)
         {
@@ -41,8 +38,6 @@ namespace LiveScore.iOS.Renderers
             }
 
             indicatorFontSize = Element.TextSize;
-
-
 
             CreateBackgroundCircle();
 
@@ -56,64 +51,63 @@ namespace LiveScore.iOS.Renderers
             base.OnElementPropertyChanged(sender, e);
 
             if (e.PropertyName == CircularProgress.ValueProperty.PropertyName
-                || e.PropertyName == CircularProgress.MaximumProperty.PropertyName
-                )
+                || e.PropertyName == CircularProgress.MaximumProperty.PropertyName)
             {
                 isSizeChanged = true;
-                Debug.WriteLine("Need to update progress bar");
 
                 ProgressValue = CalculateValue();
             }
+
+            isSizeChanged |= (e.PropertyName == "Width"
+                || e.PropertyName == "Height"
+                || e.PropertyName == "BarHeight");
+
+            if (e.PropertyName == CircularProgress.TextProperty.PropertyName)
+            {
+                UpdateIndicatorLabelSize();
+            }
+
         }
 
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
 
-            double radius = CreatePathAndReturnRadius();
+            CreatePathAndUpdateRadius();
 
-            double heightRatio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-            double widthRatio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
-            double ratio = 1;
+            UpdateIndicatorLabelSize();
+            AddSubview(indicatorLabel);
 
+            animate();
+        }
 
-            if (heightRatio < widthRatio)
-                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Height;
-            else
-                ratio = (radius - Element.TextMargin) / indicatorLabelSize.Width;
+        private void UpdateIndicatorLabelSize()
+        {
+            if (indicatorFontSize == 0)
+            {
+                return;
+            }
 
-            //TODO: fontSize after re-bind is bigger than initial
-            indicatorFontSize = -16;
-
-            //indicatorFontSize = (int)Math.Round(indicatorFontSize * ratio, 0, MidpointRounding.ToEven);
-
-            indicatorLabel.Text = Element.Text?.ToString();
+            indicatorLabel.Text = string.IsNullOrEmpty(Element.Text) ? "  " : Element.Text;
 
             indicatorLabel.Font = UIFont.SystemFontOfSize(indicatorFontSize);
             indicatorLabel.InvalidateIntrinsicContentSize();
-            indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
 
-            indicatorLabel.Frame = new CGRect((Frame.Width / 2) - (indicatorLabelSize.Width / 2), (Frame.Height / 2) - (indicatorLabelSize.Height / 2), indicatorLabelSize.Width, indicatorLabelSize.Height);
-
-            Debug.WriteLine($"LayoutSubviews indicatorLabel.Frame width {indicatorLabel.Frame.Width} height {indicatorLabel.Frame.Height}");
-
-            this.AddSubview(indicatorLabel);
-            animate();
-
+            indicatorLabel.Frame = new CGRect(
+                    (Frame.Width / 2) - (indicatorLabel.IntrinsicContentSize.Width / 2),
+                    (Frame.Height / 2) - (indicatorLabel.IntrinsicContentSize.Height / 2),
+                    indicatorLabel.IntrinsicContentSize.Width,
+                    indicatorLabel.IntrinsicContentSize.Height);
         }
 
         private double CalculateValue() => (double)Element.Value / Element.Maximum;
 
         private void CreateIndicatorLabel()
         {
-            Debug.WriteLine($"CreateIndicatorLabel with text {Element.Text}");
 
             indicatorLabel = CreateUILabel();
 
-            indicatorLabel.Text = string.IsNullOrWhiteSpace(Element.Text) ? " " : Element.Text;
-            indicatorLabelSize = indicatorLabel.IntrinsicContentSize;
-
-            Debug.WriteLine($"LayoutSubviews indicatorLabel.Frame width {indicatorLabel.Frame.Width} height {indicatorLabel.Frame.Height}");
+            UpdateIndicatorLabelSize();
         }
 
         private UILabel CreateUILabel()
@@ -129,14 +123,14 @@ namespace LiveScore.iOS.Renderers
         {
             indicatorCircle = CreateCAShapeLayer(Element.ForeColor.ToCGColor(), true);
 
-            this.Layer.AddSublayer(indicatorCircle);
+            Layer.AddSublayer(indicatorCircle);
         }
 
         private void CreateBackgroundCircle()
         {
             backgroundCircle = CreateCAShapeLayer(Element.BackColor.ToCGColor());
 
-            this.Layer.AddSublayer(backgroundCircle);
+            Layer.AddSublayer(backgroundCircle);
         }
 
         private CAShapeLayer CreateCAShapeLayer(CGColor strokeColor, bool hasLineCap = false)
@@ -145,42 +139,40 @@ namespace LiveScore.iOS.Renderers
             StrokeColor = strokeColor,
             FillColor = UIColor.Clear.CGColor,
             LineWidth = new nfloat(Element.BarHeight),
-            Frame = this.Bounds,
+            Frame = Bounds,
             LineCap = hasLineCap ? CAShapeLayer.CapButt : CAShapeLayer.CapRound
         };
 
-        private double CreatePathAndReturnRadius()
+        private void CreatePathAndUpdateRadius()
         {
-            ProgressRadius = CalculateRadius(new nfloat(Element.BarHeight));
+            var radius = CalculateRadius(new nfloat(Element.BarHeight));
 
-            var circlePath = CreateCirclePath(ProgressRadius);
+            if (radius > 0)
+            {
+                var circlePath = CreateCirclePath(radius);
 
-            backgroundCircle.Path = circlePath.CGPath;
-            backgroundCircle.StrokeEnd = new nfloat(1.0);
+                backgroundCircle.Path = circlePath.CGPath;
+                backgroundCircle.StrokeEnd = new nfloat(1.0);
 
-            indicatorCircle.Path = circlePath.CGPath;
-            indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
-
-            return ProgressRadius;
+                indicatorCircle.Path = circlePath.CGPath;
+                indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
+            }
         }
 
         private nfloat CalculateRadius(nfloat lineWidth)
         {
+            var radius = new nfloat(0);
+
             if (isSizeChanged)
             {
                 isSizeChanged = false;
 
-                nfloat width = Frame.Size.Width;
-                nfloat height = Frame.Size.Height;
+                var size = (float)Math.Min(Frame.Size.Width, Frame.Size.Height);
 
-                Debug.WriteLine($"CalculateRadius width {width} - height {height}");
-
-                var size = (float)Math.Min(width, height);
-
-                ProgressRadius = (size - (float)lineWidth - 2) / 2f;
+                radius = (size - (float)lineWidth - 2) / 2f;
             }
 
-            return ProgressRadius;
+            return radius;
         }
 
         private UIBezierPath CreateCirclePath(double radius)
@@ -193,11 +185,10 @@ namespace LiveScore.iOS.Renderers
 
         private void animate()
         {
-            var animation = CreateAnimation();
-
             indicatorCircle.StrokeStart = new nfloat(Start);
             indicatorCircle.StrokeEnd = new nfloat(ProgressValue);
-            indicatorCircle.AddAnimation(animation, "appear");
+
+            indicatorCircle.AddAnimation(CreateAnimation(), "appear");
         }
 
         private CABasicAnimation CreateAnimation()

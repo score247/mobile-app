@@ -8,13 +8,11 @@ namespace LiveScore.Core.Controls.CircleProgressBar
         public static readonly BindableProperty ValueProperty = BindableProperty.Create(nameof(Value), typeof(int), typeof(CircularProgress), default(int));
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(CircularProgress), string.Empty);
 
-        private readonly BindableProperty MinimumProperty = BindableProperty.Create(nameof(Minimum), typeof(int), typeof(CircularProgress), default(int));
         private readonly BindableProperty BackColorProperty = BindableProperty.Create(nameof(BackColor), typeof(Color), typeof(CircularProgress), Color.Transparent);
         private readonly BindableProperty ForeColorProperty = BindableProperty.Create(nameof(ForeColor), typeof(Color), typeof(CircularProgress), Color.Transparent);
         private readonly BindableProperty BarHeightProperty = BindableProperty.Create(nameof(BarHeight), typeof(double), typeof(CircularProgress), default(double));
         private readonly BindableProperty AnimationDurationProperty = BindableProperty.Create(nameof(AnimationDuration), typeof(int), typeof(CircularProgress), default(int));
         private readonly BindableProperty TextSizeProperty = BindableProperty.Create(nameof(TextSize), typeof(int), typeof(CircularProgress), default(int));
-        private readonly BindableProperty TextMarginProperty = BindableProperty.Create(nameof(TextMargin), typeof(int), typeof(CircularProgress), default(int));
         private readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(CircularProgress), Color.Black);
 
 
@@ -34,12 +32,6 @@ namespace LiveScore.Core.Controls.CircleProgressBar
         {
             get { return (double)GetValue(BarHeightProperty); }
             set { SetValue(BarHeightProperty, value); }
-        }
-
-        public int Minimum
-        {
-            get { return (int)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
         }
 
         public int Maximum
@@ -65,13 +57,7 @@ namespace LiveScore.Core.Controls.CircleProgressBar
             get { return (int)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
         }
-
-        public int TextMargin
-        {
-            get { return (int)GetValue(TextMarginProperty); }
-            set { SetValue(TextMarginProperty, value); }
-        }
-
+        
         public string Text
         {
             get { return GetValue(TextProperty).ToString(); }
