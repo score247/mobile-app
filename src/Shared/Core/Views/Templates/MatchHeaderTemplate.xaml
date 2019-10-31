@@ -5,8 +5,7 @@
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels"
               x:DataType="viewModels:GroupMatchViewModel"
               xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              xmlns:skeleton="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton">
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <StackLayout>
             <StackLayout.Resources>
@@ -27,57 +26,26 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
-                <Label Grid.Row="0"
-                       Grid.Column="0"
-                       Text="Flag"
-                       IsVisible="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.IsBusy="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.Animation="Fade"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Center"
-                       skeleton:Skeleton.BackgroundColor="#3D3E45" />
                 <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
                                                   Source="{Binding Key.CountryFlag, Mode=OneTime}"
-                                                  Style="{StaticResource LeagueFlag}"
-                                                  IsVisible="{Binding Key.IsNotBusy}" />
+                                                  Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
-                       Text="{Binding Key.LeagueName, Mode=OneTime}"
-                       IsVisible="{Binding Key.IsNotBusy}" />
-                <Label Grid.Row="0"
-                       Grid.Column="1"
-                       VerticalOptions="Center"
-                       HorizontalOptions="Start"
-                       Text="This is league name"
-                       IsVisible="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.IsBusy="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.Animation="Fade"
-                       skeleton:Skeleton.BackgroundColor="#3D3E45" />
+                       Text="{Binding Key.LeagueName, Mode=OneTime}" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        LineBreakMode="NoWrap"
                        Style="{StaticResource MatchDate}"
-                       Text="{Binding Key.EventDate, Mode=OneTime}"
-                       IsVisible="{Binding Key.IsNotBusy}" />
-                <Label Grid.Row="0"
-                       Grid.Column="2"
-                       LineBreakMode="NoWrap"
-                       VerticalOptions="Center"
-                       Text="20 Jun"
-                       IsVisible="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.IsBusy="{Binding Key.IsBusy}"
-                       skeleton:Skeleton.Animation="Fade"
-                       skeleton:Skeleton.BackgroundColor="#3D3E45" />
+                       Text="{Binding Key.EventDate, Mode=OneTime}" />
                 <Label x:Name="DetailIcon"
                        Grid.Row="0"
                        Grid.Column="3"
-                       Style="{StaticResource LeagueDetailIcon}"
-                       IsVisible="{Binding Key.IsNotBusy}" />
+                       Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
