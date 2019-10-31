@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
@@ -16,6 +17,7 @@ using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
+[assembly: InternalsVisibleTo("Soccer.Tests")]
 namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 {
     public class H2HViewModel : TabItemViewModel
@@ -95,7 +97,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             await RefreshCommand.ExecuteAsync();
         }
 
-        private async Task RefreshAsync()
+        internal async Task RefreshAsync()
         {
             IsRefreshing = true;
 
@@ -104,7 +106,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             IsRefreshing = false;
         }
 
-        private void LoadTeamResult(string teamIdentifier)
+        internal void LoadTeamResult(string teamIdentifier)
         {
             VisibleHomeResults = teamIdentifier == HomeIdentifier;
             VisibleAwayResults = !VisibleHomeResults;
@@ -113,7 +115,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             HasData = true;
         }
 
-        private async Task LoadHeadToHeadAsync(bool forceFetchLatestData = false)
+        internal async Task LoadHeadToHeadAsync(bool forceFetchLatestData = false)
         {
             try
             {
