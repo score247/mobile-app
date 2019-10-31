@@ -5,19 +5,34 @@ namespace LiveScore.Core.Enumerations
     [MessagePackObject]
     public class MatchStatus : Enumeration
     {
-        ////not_started – The match is scheduled to be played
+        /// <summary>
+        /// <para>value: 1</para>
+        /// <para>name: not_started</para>
+        /// </summary>
         public static readonly MatchStatus NotStarted = new MatchStatus(1, "not_started");
 
-        ////postponed – The match has been postponed to a future date
+        /// <summary>
+        /// <para>value: 2</para>
+        /// <para>name: postponed</para>
+        /// </summary>
         public static readonly MatchStatus Postponed = new MatchStatus(2, "postponed");
 
-        ////start_delayed – The start of the match has been temporarily delayed
+        /// <summary>
+        /// <para>value: 3</para>
+        /// <para>name: start_delayed</para>
+        /// </summary>
         public static readonly MatchStatus StartDelayed = new MatchStatus(3, "start_delayed");
 
-        ////cancelled – The match has been canceled and will not be played
+        /// <summary>
+        /// <para>value: 4</para>
+        /// <para>name: cancelled</para>
+        /// </summary>
         public static readonly MatchStatus Cancelled = new MatchStatus(4, "cancelled");
 
-        ////live – The match is currently in progress
+        /// <summary>
+        /// <para>value: 5</para>
+        /// <para>name: live</para>
+        /// </summary>
         public static readonly MatchStatus Live = new MatchStatus(5, "live");
 
         /// <summary>
@@ -27,68 +42,117 @@ namespace LiveScore.Core.Enumerations
         public static readonly MatchStatus FirstHalf = new MatchStatus(6, "1st_half");
 
         /// <summary>
-        /// 
+        /// <para>value: 7</para>
+        /// <para>name: 2nd_half</para>
         /// </summary>
         public static readonly MatchStatus SecondHalf = new MatchStatus(7, "2nd_half");
 
-        ////overtime – The match is in overtime
+        /// <summary>
+        /// <para>value: 8</para>
+        /// <para>name: overtime</para>
+        /// </summary>
         public static readonly MatchStatus Overtime = new MatchStatus(8, "overtime");
 
         /// <summary>
-        /// 1st_extra
+        /// <para>value: 9</para>
+        /// <para>name: 1st_extra</para>
         /// </summary>
         public static readonly MatchStatus FirstHalfExtra = new MatchStatus(9, "1st_extra");
 
         /// <summary>
-        /// 2nd_extra
+        /// <para>value: 10</para>
+        /// <para>name: 2nd_extra</para>
         /// </summary>
         public static readonly MatchStatus SecondHalfExtra = new MatchStatus(10, "2nd_extra");
 
         /// <summary>
-        /// awaiting_penalties
+        /// <para>value: 11</para>
+        /// <para>name: awaiting_penalties</para>
         /// </summary>
         public static readonly MatchStatus AwaitingPenalties = new MatchStatus(11, "awaiting_penalties");
 
-        ////penalties – Penalties are ongoing
+        /// <summary>
+        /// <para>value: 12</para>
+        /// <para>name: penalties</para>
+        /// </summary>
         public static readonly MatchStatus Penalties = new MatchStatus(12, "penalties");
 
-        ////pause – The match is paused
+        /// <summary>
+        /// <para>value: 13</para>
+        /// <para>name: pause</para>
+        /// </summary>
         public static readonly MatchStatus Pause = new MatchStatus(13, "pause");
 
-        ////awaiting_extra_time – Waiting on referee to announce extra time
+        /// <summary>
+        /// <para>value: 14</para>
+        /// <para>name: awaiting_extra_time</para>
+        /// </summary>
         public static readonly MatchStatus AwaitingExtraTime = new MatchStatus(14, "awaiting_extra_time");
 
-        ////interrupted – The match has been interrupted
+        /// <summary>
+        /// <para>value: 15</para>
+        /// <para>name: interrupted</para>
+        /// </summary>
         public static readonly MatchStatus Interrupted = new MatchStatus(15, "interrupted");
 
-        ////halftime – The match is in halftime
+        /// <summary>
+        /// <para>value: 16</para>
+        /// <para>name: halftime</para>
+        /// </summary>
         public static readonly MatchStatus Halftime = new MatchStatus(16, "halftime");
 
-        ////full-time – The match has ended
+        /// <summary>
+        /// <para>value: 17</para>
+        /// <para>name: full-time</para>
+        /// </summary>
         public static readonly MatchStatus FullTime = new MatchStatus(17, "full-time");
 
-        ////extra_time – Extra time has been added
+        /// <summary>
+        /// <para>value: 18</para>
+        /// <para>name: extra_time</para>
+        /// </summary>
         public static readonly MatchStatus ExtraTime = new MatchStatus(18, "extra_time");
 
-        ////delayed – The match has been temporarily delayed and will be continued;
+        /// <summary>
+        /// <para>value: 19</para>
+        /// <para>name: delayed</para>
+        /// </summary>
         public static readonly MatchStatus Delayed = new MatchStatus(19, "delayed");
 
-        ////abandoned – The match has been abandoned
+        /// <summary>
+        /// <para>value: 20</para>
+        /// <para>name: abandoned</para>
+        /// </summary>
         public static readonly MatchStatus Abandoned = new MatchStatus(20, "abandoned");
 
-        ////abandoned – The match has been abandoned
+        /// <summary>
+        /// <para>value: 21</para>
+        /// <para>name: extra_time_halftime</para>
+        /// </summary>
         public static readonly MatchStatus ExtraTimeHalfTime = new MatchStatus(21, "extra_time_halftime");
 
-        ////ended – The match is over
+        /// <summary>
+        /// <para>value: 22</para>
+        /// <para>name: ended</para>
+        /// </summary>
         public static readonly MatchStatus Ended = new MatchStatus(22, "ended");
 
-        ////closed – The match results have been confirmed
+        /// <summary>
+        /// <para>value: 23</para>
+        /// <para>name: closed</para>
+        /// </summary>
         public static readonly MatchStatus Closed = new MatchStatus(23, "closed");
 
-        ////aet – The match has ended after extra time
+        /// <summary>
+        /// <para>value: 24</para>
+        /// <para>name: aet</para>
+        /// </summary>
         public static readonly MatchStatus EndedExtraTime = new MatchStatus(24, "aet");
 
-        ////ap – The match has ended after penalties
+        /// <summary>
+        /// <para>value: 25</para>
+        /// <para>name: ap</para>
+        /// </summary>
         public static readonly MatchStatus EndedAfterPenalties = new MatchStatus(25, "ap");
 
         public MatchStatus()
