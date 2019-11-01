@@ -30,8 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         private string matchId;
         private string oddsFormat;
         private bool isFirstLoad = true;
-
-        private MatchStatus eventStatus;
+        
         private Bookmaker bookmaker;
         private BetType betType;
 
@@ -70,7 +69,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
                 Debug.WriteLine("OddsMovementViewModel Initialize");
 
                 matchId = parameters["MatchId"].ToString();
-                eventStatus = parameters["EventStatus"] as MatchStatus;
                 bookmaker = parameters["Bookmaker"] as Bookmaker;
                 betType = (BetType)parameters["BetType"];
                 oddsFormat = parameters["Format"].ToString();
@@ -128,7 +126,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         {
             Debug.WriteLine("OddsMovementViewModel ReloadPage");
 
-            return GetOddsMovement(isRefresh: true);
+            return GetOddsMovement();
         }
 
         private void SubscribeEvents()
@@ -149,19 +147,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
             IsBusy = !isRefresh;
-            await GetOddsMovement(isRefresh).ConfigureAwait(false);
+            await GetOddsMovement().ConfigureAwait(false);
 
             IsRefreshing = false;
             IsBusy = false;
         }
 
         [Time]
-        private async Task GetOddsMovement(bool isRefresh)
+        private async Task GetOddsMovement()
         {
-            var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
-
             var matchOddsMovement = await oddsService
-                .GetOddsMovementAsync(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id, forceFetchNew)
+                .GetOddsMovementAsync(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id)
                 .ConfigureAwait(false);
 
             if (matchOddsMovement == null)
@@ -175,10 +171,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
                     .Select(x => new BaseMovementItemViewModel(betType, x, NavigationService, DependencyResolver)
                     .CreateInstance());
 
-                if (isRefresh)
-                {
-                    OddsMovementItems.Clear();
-                }
+                OddsMovementItems.Clear();
 
                 foreach (var view in views)
                 {

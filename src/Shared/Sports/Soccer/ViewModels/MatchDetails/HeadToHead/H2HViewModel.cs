@@ -47,7 +47,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
             OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
-            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHeadAsync(forceFetchLatestData: true));
+            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHeadAsync());
             RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
 
@@ -88,7 +88,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             base.OnAppearing();
 
-            await LoadHeadToHeadAsync(true);
+            await LoadHeadToHeadAsync();
         }
 
         public override async void OnResumeWhenNetworkOK()
@@ -102,7 +102,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             IsRefreshing = true;
 
-            await LoadHeadToHeadAsync(forceFetchLatestData: IsRefreshing);
+            await LoadHeadToHeadAsync();
 
             IsRefreshing = false;
         }
@@ -116,15 +116,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             HasData = true;
         }
 
-        internal async Task LoadHeadToHeadAsync(bool forceFetchLatestData = false)
+        internal async Task LoadHeadToHeadAsync()
         {
             try
             {
                 var headToHeads = (await teamService.GetHeadToHeadsAsync(
                         match.HomeTeamId,
                         match.AwayTeamId,
-                        CurrentLanguage.DisplayName,
-                        forceFetchLatestData)
+                        CurrentLanguage.DisplayName)
                     .ConfigureAwait(false))
                     ?.Except(new List<IMatch> { match });
 

@@ -51,8 +51,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
 
             oddsService = DependencyResolver.Resolve<IOddsService>(CurrentSportId.ToString());
 
-            RefreshCommand = new DelegateAsyncCommand(()
-                => LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, true)));
+            RefreshCommand = new DelegateAsyncCommand(Refresh);
 
             OnOddsTabClicked = new DelegateAsyncCommand<string>(betTypeId
                 => FirstLoadOrRefreshOddsAsync(Enumeration.FromValue<BetType>(byte.Parse(betTypeId)), oddsFormat));
@@ -104,7 +103,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
 
             try
             {
-                await LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat, IsRefreshing)).ConfigureAwait(false);
+                await LoadDataAsync(() => FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat)).ConfigureAwait(false);
 
                 SubscribeEvents();
             }
@@ -141,17 +140,25 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         private void UnsubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);
 
-        [Time]
-        internal async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType, bool isRefresh = false)
+        private async Task Refresh()
         {
-            if (CanLoadOdds(betType, isRefresh))
+            IsRefreshing = true;
+
+            await FirstLoadOrRefreshOddsAsync(SelectedBetType, oddsFormat);
+
+            IsRefreshing = false;
+        }
+
+        [Time]
+        internal async Task FirstLoadOrRefreshOddsAsync(BetType betType, string formatType)
+        {
+            if (CanLoadOdds(betType))
             {
-                IsBusy = !isRefresh;
+                IsBusy = !IsRefreshing;
 
                 SelectedBetType = betType;
-                await LoadOddsByBetTypeAsync(formatType, isRefresh).ConfigureAwait(false);
+                await LoadOddsByBetTypeAsync(formatType).ConfigureAwait(false);
 
-                IsRefreshing = false;
                 IsBusy = false;
             }
         }
@@ -160,20 +167,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         {
             if (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live)
             {
-                await LoadOddsByBetTypeAsync(oddsFormat, isRefresh: true).ConfigureAwait(false);
+                await LoadOddsByBetTypeAsync(oddsFormat).ConfigureAwait(false);
             }
         }
 
-        private async Task LoadOddsByBetTypeAsync(string formatType, bool isRefresh)
-        {
-            var forceFetchNew = isRefresh || (eventStatus == MatchStatus.NotStarted || eventStatus == MatchStatus.Live);
-
+        private async Task LoadOddsByBetTypeAsync(string formatType)
+        {            
             var odds = await oddsService.GetOddsAsync(
                 CurrentLanguage.DisplayName,
                 matchId,
                 SelectedBetType.Value,
-                formatType,
-                forceFetchNew).ConfigureAwait(false);
+                formatType).ConfigureAwait(false);
 
             HasData = odds?.BetTypeOddsList?.Any() == true;
 
@@ -194,9 +198,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
                 : Enumerable.Empty<BaseItemViewModel>().ToList();
         }
 
-        private bool CanLoadOdds(BetType betType, bool isRefresh)
-            => isRefresh
-            || SelectedBetType != betType
+        private bool CanLoadOdds(BetType betType)
+            => SelectedBetType != betType
             || BetTypeOddsItems?.Any() != true;
 
         [Time]

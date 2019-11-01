@@ -6,6 +6,6 @@ namespace LiveScore.Core.Services
 {
     public interface ITeamService
     {
-        Task<IEnumerable<IMatch>> GetHeadToHeadsAsync(string teamId1, string teamId2, string language, bool forceFetchLatestData = false);       
+        Task<IEnumerable<IMatch>> GetHeadToHeadsAsync(string teamId1, string teamId2, string language);       
     }
 }
