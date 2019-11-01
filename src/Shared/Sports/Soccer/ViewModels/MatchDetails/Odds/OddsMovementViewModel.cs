@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
-using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Odds;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.Enumerations;
@@ -30,7 +29,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         private string matchId;
         private string oddsFormat;
         private bool isFirstLoad = true;
-        
+
         private Bookmaker bookmaker;
         private BetType betType;
 

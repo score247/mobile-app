@@ -1,6 +1,4 @@
-﻿using System;
-using LiveScore.Soccer.ViewModels.MatchDetails;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Soccer.Views

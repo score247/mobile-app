@@ -15,7 +15,7 @@ namespace LiveScore.iOS.Renderers
     {
         private const string AnimationKeyPath = "strokeEnd";
         private const double Start = 0.0;
-        private static CAMediaTimingFunction AnimationTimingFunc = CAMediaTimingFunction.FromName(CAMediaTimingFunction.EaseOut);
+        private static readonly CAMediaTimingFunction AnimationTimingFunc = CAMediaTimingFunction.FromName(CAMediaTimingFunction.EaseOut);
 
         private CAShapeLayer backgroundCircle;
         private CAShapeLayer indicatorCircle;

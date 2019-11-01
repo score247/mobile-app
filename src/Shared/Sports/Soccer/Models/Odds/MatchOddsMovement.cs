@@ -6,7 +6,7 @@ namespace LiveScore.Soccer.Models.Odds
 {
     [MessagePackObject(keyAsPropertyName: true)]
     public class MatchOddsMovement
-    { 
+    {
         public MatchOddsMovement(string matchId, Bookmaker bookmaker, IEnumerable<OddsMovement> oddsMovements)
         {
             MatchId = matchId;

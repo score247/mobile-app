@@ -57,7 +57,7 @@ namespace LiveScore.Core.Controls.CircleProgressBar
             get { return (int)GetValue(TextSizeProperty); }
             set { SetValue(TextSizeProperty, value); }
         }
-        
+
         public string Text
         {
             get { return GetValue(TextProperty).ToString(); }

@@ -56,7 +56,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             var match1 = fixture.Create<SoccerMatch>()
                 .With(match => match.LeagueId, "sr:league:1")
                 .With(match => match.LeagueSeasonId, "sr:season:1");
-           
+
             var match2 = fixture.Create<SoccerMatch>()
                 .With(match => match.LeagueId, "sr:league:1")
                 .With(match => match.LeagueSeasonId, "sr:season:2");

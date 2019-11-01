@@ -9,7 +9,7 @@ using LiveScore.Core.Models.Matches;
 
 namespace LiveScore.Soccer.Models.Matches
 {
-    public class MatchStatusBuilder: IMatchDisplayStatusBuilder
+    public class MatchStatusBuilder : IMatchDisplayStatusBuilder
     {
         private static readonly ReadOnlyDictionary<MatchStatus, string> StatusResourceMapper =
             new ReadOnlyDictionary<MatchStatus, string>(new Dictionary<MatchStatus, string>

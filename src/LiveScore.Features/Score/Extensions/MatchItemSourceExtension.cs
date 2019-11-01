@@ -99,7 +99,7 @@ namespace LiveScore.Features.Score.Extensions
 
             if (currentGroupIndex >= 0)
             {
-                currentMatchViewModels 
+                currentMatchViewModels
                     = groupMatchViewModels[currentGroupIndex].ToList();
 
                 currentMatchViewModels

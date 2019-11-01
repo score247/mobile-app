@@ -63,7 +63,7 @@ namespace LiveScore.Soccer.Services
             string bookmakerId)
         {
             try
-            {                
+            {
                 return await apiService.Execute(() => oddsApi.GetOddsMovement(
                        lang,
                        matchId,

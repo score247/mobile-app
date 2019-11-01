@@ -109,7 +109,7 @@ namespace LiveScore.Configurations
                      : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
             containerRegistry.RegisterInstance<Action<Action>>(
-                Xamarin.Forms.Device.BeginInvokeOnMainThread, 
+                Xamarin.Forms.Device.BeginInvokeOnMainThread,
                 FuncNameConstants.BeginInvokeOnMainThreadFuncName);
 
             containerRegistry.RegisterSingleton<IMiniLogger, FFLoadingImageLogger>();

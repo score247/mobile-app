@@ -12,7 +12,6 @@ using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
-using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;

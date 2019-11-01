@@ -128,13 +128,13 @@ namespace LiveScore.Core.ViewModels
                 networkConnectionManager
                  .OnSuccessfulConnection(async () =>
                  {
-                     EventAggregator?.GetEvent<StartLoadDataEvent>().Publish();
+                     EventAggregator?.GetEvent<StartLoadDataEvent>()?.Publish();
                      IsBusy = showBusy;
                      IsLoadingSkeleton = IsBusy;
 
                      await loadDataFunc().ConfigureAwait(false);
 
-                     EventAggregator?.GetEvent<StopLoadDataEvent>().Publish();
+                     EventAggregator?.GetEvent<StopLoadDataEvent>()?.Publish();
                      IsBusy = false;
                      IsLoadingSkeleton = IsBusy;
                  })

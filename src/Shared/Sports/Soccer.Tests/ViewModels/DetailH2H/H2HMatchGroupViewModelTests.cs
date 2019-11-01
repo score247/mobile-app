@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoFixture;
 using LiveScore.Core.Converters;
-using LiveScore.Core.Models.Matches;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using NSubstitute;
@@ -35,7 +34,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void Init_Matches_AlwaysGetLeagueOfFirst()
         {
-            var viewModels = new List<SummaryMatchViewModel> 
+            var viewModels = new List<SummaryMatchViewModel>
             {
                 new SummaryMatchViewModel(fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder),
                 new SummaryMatchViewModel(fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder)
