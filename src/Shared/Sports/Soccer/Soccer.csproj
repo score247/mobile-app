@@ -70,9 +70,6 @@
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Templates\MatchSkeletonTemplate.xaml.cs">
-      <DependentUpon>MatchSkeletonTemplate.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs">
       <DependentUpon>H2HHomeTeamTemplate.xaml</DependentUpon>
     </Compile>

@@ -14,6 +14,7 @@ namespace LiveScore.Features.Score.ViewModels
             : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
             IsComingSoon = true;
+            IsLoadingSkeleton = false;
         }
     }
 }

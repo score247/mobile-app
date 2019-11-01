@@ -226,11 +226,11 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (RemainingMatchItemSource?.Any() != true)
             {
+                IsLoadingSkeleton = false;
                 return;
             }
 
-            Debug.WriteLine(MatchItemsSource.Count);
-            Debug.WriteLine(RemainingMatchItemSource.Count);
+            IsLoadingSkeleton = true;
 
             Task.Delay(800)
                 .ContinueWith(_ =>

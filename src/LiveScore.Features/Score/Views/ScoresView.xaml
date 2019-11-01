@@ -15,7 +15,6 @@
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
-             xmlns:skeleton="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -91,7 +90,7 @@
                             <customListView:CustomListView x:Name="LeagueTable"
                                                            AutomationId="LeagueTableId"
                                                            AutomationProperties.IsInAccessibleTree="False"
-                                                           Footer=""
+                                                           Footer="{Binding .}"
                                                            GroupDisplayBinding="{Binding Key}"
                                                            GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
                                                            HasUnevenRows="true"
@@ -116,6 +115,9 @@
                                                               EventArgsParameterPath="Item"
                                                               EventName="ItemTapped" />
                                 </customListView:CustomListView.Behaviors>
+                                <customListView:CustomListView.FooterTemplate>
+                                    <coreTemplates:MatchSkeletonTemplate />
+                                </customListView:CustomListView.FooterTemplate>
                             </customListView:CustomListView>
                         </StackLayout>
                     </FlexLayout>

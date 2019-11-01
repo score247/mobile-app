@@ -82,6 +82,9 @@
       <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
         <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Templates\MatchSkeletonTemplate.xaml.cs">
+        <DependentUpon>%(Filename)</DependentUpon>
+      </Compile>
     </ItemGroup>
     <ItemGroup>
       <EmbeddedResource Update="Controls\DateBar\Views\Templates\DateTemplate.xaml">
