@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using FakeItEasy;
+using AutoFixture;
 using LiveScore.Common;
 using LiveScore.Common.Services;
 using LiveScore.Core.Converters;
@@ -26,12 +26,14 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         private readonly ILoggingService logService;
         private readonly IEventAggregator eventAggregator;
         private readonly Func<string, string> buildFlagUrlFunc;
+        private readonly Fixture fixture;
 
         private readonly H2HViewModel viewModel;
 
         public H2HViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            match = A.Dummy<SoccerMatch>();
+            fixture = baseFixture.CommonFixture.Specimens;
+            match = fixture.Create<SoccerMatch>();
 
             teamService = Substitute.For<ITeamService>();
             matchStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
@@ -124,10 +126,10 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
                 .Returns(new List<SoccerMatch>
                 {
-                    A.Dummy<SoccerMatch>()
+                    fixture.Create<SoccerMatch>()
                         .With(match => match.Id, "sr:match:1")
                         .With(match => match.EventStatus, MatchStatus.NotStarted),
-                    A.Dummy<SoccerMatch>()
+                    fixture.Create<SoccerMatch>()
                         .With(match => match.Id, "sr:match:2")
                         .With(match => match.EventStatus, MatchStatus.Closed)
                         .With(match => match.MatchStatus, MatchStatus.Ended)
@@ -149,7 +151,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
                 .Returns(new List<SoccerMatch>
                 {
-                    A.Dummy<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.NotStarted),
+                    fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.NotStarted),
                     match
                 });
 
