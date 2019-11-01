@@ -54,6 +54,11 @@ namespace LiveScore.Features.Score.Extensions
                 .SelectMany(group => group)
                 .ToList();
 
+            if (groupMatchViewModel == null)
+            {
+                return;
+            }
+
             foreach (var match in matches.OrderBy(match => match.LeagueOrder))
             {
                 var matchViewModel = groupMatchViewModel
@@ -94,15 +99,21 @@ namespace LiveScore.Features.Score.Extensions
 
             if (currentGroupIndex >= 0)
             {
-                currentMatchViewModels = groupMatchViewModels[currentGroupIndex].ToList();
+                currentMatchViewModels 
+                    = groupMatchViewModels[currentGroupIndex].ToList();
 
                 currentMatchViewModels
-                    .Add(new MatchViewModel(newMatch, matchStatusBuilder, matchMinuteBuilder, eventAggregator));
+                    .Add(new MatchViewModel(
+                        newMatch,
+                        matchStatusBuilder,
+                        matchMinuteBuilder,
+                        eventAggregator));
 
-                groupMatchViewModels[currentGroupIndex] = currentMatchViewModels
-                    .OrderBy(m => m.Match.EventDate)
-                    .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
-                    .FirstOrDefault();
+                groupMatchViewModels[currentGroupIndex]
+                    = currentMatchViewModels
+                        .OrderBy(m => m.Match.EventDate)
+                        .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                        .FirstOrDefault();
             }
             else
             {

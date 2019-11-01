@@ -288,7 +288,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                if (MatchItemsSource.Count == 0 && matches?.Any() == true)
+                if (MatchItemsSource?.Count == 0 && matches?.Any() == true)
                 {
                     InitializeMatchItems(matches);
                     return;
@@ -307,7 +307,7 @@ namespace LiveScore.Features.Score.ViewModels
 
                 var remainingMatches = matches.Except(loadedMatches);
 
-                RemainingMatchItemSource
+                RemainingMatchItemSource?
                     .UpdateMatchItems(
                         remainingMatches,
                         matchStatusBuilder,

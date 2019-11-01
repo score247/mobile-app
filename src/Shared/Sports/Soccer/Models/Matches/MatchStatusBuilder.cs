@@ -14,23 +14,23 @@ namespace LiveScore.Soccer.Models.Matches
         private static readonly ReadOnlyDictionary<MatchStatus, string> StatusResourceMapper =
             new ReadOnlyDictionary<MatchStatus, string>(new Dictionary<MatchStatus, string>
             {
-                { MatchStatus.Postponed, AppResources.Postp },
-                { MatchStatus.StartDelayed, AppResources.Delayed },
-                { MatchStatus.Cancelled, AppResources.Canc },
-                { MatchStatus.AwaitingPenalties, AppResources.AwaitPen },
-                { MatchStatus.Penalties, AppResources.Pen },
-                { MatchStatus.Pause, AppResources.Pause },
-                { MatchStatus.Interrupted, AppResources.INT },
-                { MatchStatus.Halftime, AppResources.HT },
-                { MatchStatus.Delayed, AppResources.Delayed },
-                { MatchStatus.Abandoned, AppResources.AB },
-                { MatchStatus.FullTime, AppResources.FT },
-                { MatchStatus.Ended, AppResources.FT },
-                { MatchStatus.Closed, AppResources.FT },
-                { MatchStatus.EndedAfterPenalties, AppResources.AP },
-                { MatchStatus.EndedExtraTime, AppResources.AET },
-                { MatchStatus.AwaitingExtraTime, AppResources.AwaitET },
-                { MatchStatus.ExtraTimeHalfTime, AppResources.ETHT }
+                [MatchStatus.Postponed] = AppResources.Postp,
+                [MatchStatus.StartDelayed] = AppResources.Delayed,
+                [MatchStatus.Cancelled] = AppResources.Canc,
+                [MatchStatus.AwaitingPenalties] = AppResources.AwaitPen,
+                [MatchStatus.Penalties] = AppResources.Pen,
+                [MatchStatus.Pause] = AppResources.Pause,
+                [MatchStatus.Interrupted] = AppResources.INT,
+                [MatchStatus.Halftime] = AppResources.HT,
+                [MatchStatus.Delayed] = AppResources.Delayed,
+                [MatchStatus.Abandoned] = AppResources.AB,
+                [MatchStatus.FullTime] = AppResources.FT,
+                [MatchStatus.Ended] = AppResources.FT,
+                [MatchStatus.Closed] = AppResources.FT,
+                [MatchStatus.EndedAfterPenalties] = AppResources.AP,
+                [MatchStatus.EndedExtraTime] = AppResources.AET,
+                [MatchStatus.AwaitingExtraTime] = AppResources.AwaitET,
+                [MatchStatus.ExtraTimeHalfTime] = AppResources.ETHT
             });
 
         public string BuildDisplayStatus(IMatch match)
