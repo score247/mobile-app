@@ -46,9 +46,8 @@ using Prism.Navigation;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails
 {
-    public class MatchDetailViewModel : ViewModelBase, IDisposable
+    public class MatchDetailViewModel : ViewModelBase
     {
-        private IntPtr nativeResource = Marshal.AllocHGlobal(100);
         private readonly IMatchDisplayStatusBuilder matchStatusConverter;
         private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
@@ -252,36 +251,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             if (args != null)
             {
                 selectedTabItem = Enumeration.FromValue<MatchDetailFunction>(args.Index);
-            }
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        // NOTE: Leave out the finalizer altogether if this class doesn't
-        // own unmanaged resources, but leave the other methods
-        // exactly as they are.
-        ~MatchDetailViewModel()
-        {
-            // Finalizer calls Dispose(false)
-            Dispose(false);
-        }
-
-        // The bulk of the clean-up code is implemented in Dispose(bool)
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                tabItemViewModels.Clear();
-            }
-            // free native resources if there are any.
-            if (nativeResource != IntPtr.Zero)
-            {
-                Marshal.FreeHGlobal(nativeResource);
-                nativeResource = IntPtr.Zero;
             }
         }
     }
