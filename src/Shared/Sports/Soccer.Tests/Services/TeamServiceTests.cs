@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using AutoFixture;
 using KellermanSoftware.CompareNetObjects;
 using LiveScore.Common.Services;
-using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
@@ -23,7 +22,6 @@ namespace Soccer.Tests.Services
         private readonly CompareLogic comparer;
         private readonly Fixture fixture;
         private readonly IApiService mockApiService;
-        private readonly ICacheManager mockCache;
         private readonly ILoggingService mockLogger;
         private readonly ITeamService teamService;
 
@@ -31,11 +29,10 @@ namespace Soccer.Tests.Services
         {
             fixture = commonFixture.Specimens;
             comparer = commonFixture.Comparer;
-            mockCache = Substitute.For<ICacheManager>();
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
 
-            teamService = new TeamService(mockApiService, mockCache, mockLogger);
+            teamService = new TeamService(mockApiService, mockLogger);
         }
 
         [Fact]
@@ -44,15 +41,11 @@ namespace Soccer.Tests.Services
             // Arrange           
 
             // Act
-            var headToHeads = await teamService.GetHeadToHeadsAsync(HomeTeamId, AwayTeamId, "en_US", false);
+            var headToHeads = await teamService.GetHeadToHeadsAsync(HomeTeamId, AwayTeamId, "en_US");
 
             // Assert
-            await mockCache.Received(1)
-                .GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
-                    Arg.Any<int>(),
-                    false);
+            await mockApiService.Received(1)
+                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>());
 
             Assert.NotNull(headToHeads);
         }
@@ -61,11 +54,9 @@ namespace Soccer.Tests.Services
         public async Task GetHeadToHeadsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange            
-            mockCache.GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
-                    Arg.Any<int>())
-                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+            mockApiService
+                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
+                .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));
 
             // Act
             var headToHeads = await teamService.GetHeadToHeadsAsync(HomeTeamId, AwayTeamId, "en_US");
@@ -82,11 +73,8 @@ namespace Soccer.Tests.Services
             // Arrange
             var expectedH2H = fixture.Create<IEnumerable<SoccerMatch>>();
 
-            mockCache
-                .GetOrSetAsync(
-                    $"LiveScore.Soccer.Services.TeamService.GetHeadToHeadsAsync:{HomeTeamId}:{AwayTeamId}:en_US",
-                    Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>(),
-                    Arg.Any<int>())
+            mockApiService
+                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
                 .Returns(expectedH2H);
 
             // Act

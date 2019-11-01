@@ -17,18 +17,16 @@
     {
         private readonly CompareLogic comparer;
         private readonly IApiService mockApiService;
-        private readonly ICacheManager mockCache;
         private readonly ILoggingService mockLogger;
         private readonly IOddsService oddsService;
 
         public OddsServiceTests(CommonFixture commonFixture)
         {
             comparer = commonFixture.Comparer;
-            mockCache = Substitute.For<ICacheManager>();
             mockLogger = Substitute.For<ILoggingService>();
             mockApiService = Substitute.For<IApiService>();
 
-            oddsService = new OddsService(mockCache, mockLogger, mockApiService);
+            oddsService = new OddsService(mockLogger, mockApiService);
         }
 
         [Fact]
@@ -37,33 +35,11 @@
             // Arrange
 
             // Act
-            var matchOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: true);
+            var matchOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal");
 
             // Assert
-            await mockCache.Received(1)
-                .GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOdds>>>(),
-                    Arg.Any<int>(),
-                    true);
-
-            Assert.Null(matchOdds);
-        }
-
-        [Fact]
-        public async Task GetOddsAsync_NotForceFetchNew_InjectCacheService()
-        {
-            // Arrange
-
-            // Act
-            var matchOdds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: false);
-
-            // Assert
-            await mockCache.Received(1)
-                .GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOdds>>>(),
-                    Arg.Any<int>());
+            await mockApiService.Received(1)
+                .Execute(Arg.Any<Func<Task<MatchOdds>>>());
 
             Assert.Null(matchOdds);
         }
@@ -72,14 +48,12 @@
         public async Task GetOddsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            mockCache.GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOdds>>>(),
-                    Arg.Any<int>())
-                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+            mockApiService
+                .Execute(Arg.Any<Func<Task<MatchOdds>>>())
+                .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));
 
             // Act
-            var odds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal", getLatestData: true);
+            var odds = await oddsService.GetOddsAsync("en", "sr:match:1", 1, "decimal");
 
             // Assert
             await mockLogger.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -93,11 +67,8 @@
             // Arrange
             var expectedMatchOdds = StubOdds("sr:match:1", 1, "over under");
 
-            mockCache
-                .GetOrSetAsync(
-                    "LiveScore.Soccer.Services.OddsComparison:sr:match:1:1:decimal",
-                    Arg.Any<Func<Task<MatchOdds>>>(),
-                    Arg.Any<int>())
+            mockApiService
+                .Execute(Arg.Any<Func<Task<MatchOdds>>>())
                 .Returns(expectedMatchOdds);
 
             // Act
@@ -113,47 +84,24 @@
             // Arrange
 
             // Act
-            await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", getLatestData: true);
+            await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1");
 
             // Assert
-            await mockCache
+            await mockApiService
                 .Received(1)
-                .GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
-                    Arg.Any<int>(),
-                    true);
-        }
-
-        [Fact]
-        public async Task GetOddsMovementAsync_ForceFetchNew_GetOrFetchValue()
-        {
-            // Arrange
-
-            // Act
-            await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", getLatestData: false);
-
-            // Assert
-            await mockCache.Received(1)
-                .GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
-                    Arg.Any<int>());
+                .Execute(Arg.Any<Func<Task<MatchOddsMovement>>>());
         }
 
         [Fact]
         public async Task GetOddsMovementAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange
-            mockCache.GetOrSetAsync(
-                    Arg.Any<string>(),
-                    Arg.Any<Func<Task<MatchOddsMovement>>>(),
-                    Arg.Any<int>(),
-                    true)
-                .ThrowsForAnyArgs(new InvalidOperationException("NotFound Key"));
+            mockApiService
+                .Execute(Arg.Any<Func<Task<MatchOddsMovement>>>())
+                .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));
 
             // Act
-            var odds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", true);
+            var odds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1");
 
             // Assert
             await mockLogger.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -167,14 +115,12 @@
             var matchId = "sr:match:1";
             var expectedMatchOdds = StubOddsMovement(matchId);
 
-            mockCache.GetOrSetAsync(
-                $"LiveScore.Soccer.Services.OddsMovement:{matchId}:1:dec:sr:book:1",
-                Arg.Any<Func<Task<MatchOddsMovement>>>(),
-                Arg.Any<int>(),
-                false).Returns(expectedMatchOdds);
+            mockApiService
+               .Execute(Arg.Any<Func<Task<MatchOddsMovement>>>())
+               .Returns(expectedMatchOdds);
 
             // Act
-            var actualOdds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1", false);
+            var actualOdds = await oddsService.GetOddsMovementAsync("en", "sr:match:1", 1, "dec", "sr:book:1");
 
             // Assert
             Assert.True(comparer.Compare(expectedMatchOdds, actualOdds).AreEqual);

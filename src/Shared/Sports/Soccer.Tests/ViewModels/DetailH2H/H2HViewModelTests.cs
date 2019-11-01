@@ -60,10 +60,10 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Arrange               
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
-            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false);
+            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName);
             Assert.True(viewModel.VisibleHeadToHead);
             Assert.False(viewModel.HasData);
         }
@@ -72,11 +72,11 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task LoadHeadToHeadAsync_Exception_ShouldLogError()
         {
             // Arrange               
-            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Throws(new InvalidOperationException("Error"));
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
             await logService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -88,11 +88,11 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task LoadHeadToHeadAsync_Null_HasDataShouldBeFalse()
         {
             // Arrange               
-            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(Task.FromResult(default(IEnumerable<IMatch>)));
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
             Assert.True(viewModel.VisibleHeadToHead);
@@ -103,7 +103,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task LoadHeadToHeadAsync_NotStartMatches_ShouldHideStats()
         {
             // Arrange               
-            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
                     new SoccerMatch(new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
@@ -111,7 +111,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
                 });
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
             Assert.True(viewModel.VisibleHeadToHead);
@@ -123,7 +123,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task LoadHeadToHeadAsync_ContainsClosedMatches_ShouldVisibleStats()
         {
             // Arrange               
-            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
                     fixture.Create<SoccerMatch>()
@@ -136,7 +136,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
                 });
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
             Assert.True(viewModel.VisibleHeadToHead);
@@ -148,7 +148,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task LoadHeadToHeadAsync_HasMatches_ShouldExcludeCurrentMatch()
         {
             // Arrange               
-            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
                     fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.NotStarted),
@@ -156,7 +156,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
                 });
 
             // Act
-            await viewModel.LoadHeadToHeadAsync(false);
+            await viewModel.LoadHeadToHeadAsync();
 
             // Assert
             Assert.True(viewModel.VisibleHeadToHead);
@@ -173,7 +173,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             await viewModel.RefreshAsync();
 
             // Assert
-            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, true);
+            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName);
             Assert.False(viewModel.IsRefreshing);
         }
 
@@ -256,7 +256,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             await viewModel.RefreshCommand.ExecuteAsync();
 
             // Assert
-            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, true);
+            await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName);
             Assert.False(viewModel.IsRefreshing);
         }
     }

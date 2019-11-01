@@ -1,8 +1,4 @@
-﻿using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
-using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
-using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
-
-namespace Soccer.Tests.ViewModels.DetailOdds
+﻿namespace Soccer.Tests.ViewModels.DetailOdds
 {
     using System;
     using System.Collections.Generic;
@@ -19,6 +15,9 @@ namespace Soccer.Tests.ViewModels.DetailOdds
     using LiveScore.Soccer.Models.Odds;
     using LiveScore.Soccer.PubSubEvents.Odds;
     using LiveScore.Soccer.Services;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
     using NSubstitute;
     using Prism.Events;
     using Prism.Navigation;
@@ -65,14 +64,14 @@ namespace Soccer.Tests.ViewModels.DetailOdds
         public async Task FirstLoadOrRefreshOddsAsync_Always_GetOddsAsync()
         {
             // Arrange
-            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(StubOdds());
+            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>()).Returns(StubOdds());
             var expectedViewModels = new List<BaseItemViewModel>
             {
                 new BaseItemViewModel(BetType.AsianHDP, StubBetTypeOdds(BetType.AsianHDP.Value, BetType.AsianHDP.DisplayName), viewModel.NavigationService, viewModel.DependencyResolver).CreateInstance()
             };
 
             // Act
-            await viewModel.FirstLoadOrRefreshOddsAsync(BetType.AsianHDP, "decimal", true);
+            await viewModel.FirstLoadOrRefreshOddsAsync(BetType.AsianHDP, "decimal");
 
             // Assert
             Assert.True(viewModel.HasData);
@@ -86,11 +85,11 @@ namespace Soccer.Tests.ViewModels.DetailOdds
         public async Task FirstLoadOrRefreshOddsAsync_NoData_HasDataShouldBeFalse()
         {
             // Arrange
-            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
+            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>())
                 .Returns(default(MatchOdds));
 
             // Act
-            await viewModel.FirstLoadOrRefreshOddsAsync(BetType.AsianHDP, "decimal", true);
+            await viewModel.FirstLoadOrRefreshOddsAsync(BetType.AsianHDP, "decimal");
 
             // Assert
             Assert.False(viewModel.HasData);
@@ -103,7 +102,7 @@ namespace Soccer.Tests.ViewModels.DetailOdds
             await viewModel.OnOddsTabClicked.ExecuteAsync("1");
 
             // Assert
-            await oddsService.Received(1).GetOddsAsync(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>(), true);
+            await oddsService.Received(1).GetOddsAsync(Arg.Any<string>(), Arg.Is(matchId), 1, Arg.Any<string>());
         }
 
         [Fact]
@@ -140,7 +139,7 @@ namespace Soccer.Tests.ViewModels.DetailOdds
         public async Task TappedOddsItemCommand_OnExecuting_CallNavigationService()
         {
             // Arrange
-            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(StubOdds());
+            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>()).Returns(StubOdds());
             await viewModel.RefreshCommand.ExecuteAsync();
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.OneXTwo,
@@ -164,7 +163,7 @@ namespace Soccer.Tests.ViewModels.DetailOdds
             mockNavigationService.NavigateAsync(Arg.Any<string>(), Arg.Any<INavigationParameters>())
                 .Returns(new NavigationResult { Success = false, Exception = new InvalidOperationException("Cannot navigated") });
 
-            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>()).Returns(StubOdds());
+            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>()).Returns(StubOdds());
 
             var oddsItemViewModel = new BaseItemViewModel(
                 BetType.AsianHDP,
@@ -226,23 +225,23 @@ namespace Soccer.Tests.ViewModels.DetailOdds
         {
             // Arrange
             oddsService
-                .GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
+                .GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>())
                 .Returns(StubOdds(BetType.OneXTwo.Value, BetType.OneXTwo.DisplayName));
 
             // Act
             await viewModel.Resume();
 
             // Assert
-            await oddsService.Received(1).GetOddsAsync(Arg.Any<string>(), matchId, 3, Arg.Any<string>(), Arg.Any<bool>());
+            await oddsService.Received(1).GetOddsAsync(Arg.Any<string>(), matchId, 3, Arg.Any<string>());
             Assert.Single(viewModel.BetTypeOddsItems);
         }
 
         private Task FirstLoad(BetType betType)
         {
-            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>(), Arg.Any<bool>())
+            oddsService.GetOddsAsync(Arg.Any<string>(), Arg.Any<string>(), Arg.Any<byte>(), Arg.Any<string>())
                     .Returns(StubOdds());
 
-            return viewModel.FirstLoadOrRefreshOddsAsync(betType, "decimal", true);
+            return viewModel.FirstLoadOrRefreshOddsAsync(betType, "decimal");
         }
 
         private static MatchOdds StubOdds() => StubOdds(BetType.AsianHDP.Value, BetType.AsianHDP.DisplayName);
