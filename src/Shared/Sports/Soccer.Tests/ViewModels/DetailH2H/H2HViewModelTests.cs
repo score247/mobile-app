@@ -83,6 +83,21 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         }
 
         [Fact]
+        public async Task LoadHeadToHeadAsync_Null_HasDataShouldBeFalse()
+        {
+            // Arrange               
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+                .Returns(Task.FromResult(default(IEnumerable<IMatch>)));
+
+            // Act
+            await viewModel.LoadHeadToHeadAsync(false);
+
+            // Assert
+            Assert.True(viewModel.VisibleHeadToHead);
+            Assert.False(viewModel.HasData);
+        }
+
+        [Fact]
         public async Task LoadHeadToHeadAsync_NotStartMatches_ShouldHideStats()
         {
             // Arrange               
@@ -109,8 +124,8 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
                 .Returns(new List<SoccerMatch>
                 {
-                    new SoccerMatch(new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
-                    new SoccerMatch(new MatchResult(MatchStatus.Closed, MatchStatus.Ended))
+                    new SoccerMatch("sr:match:1", new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
+                    new SoccerMatch("sr:match:2",new MatchResult(MatchStatus.Closed, MatchStatus.Ended))
                 });
 
             // Act
@@ -120,6 +135,26 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             Assert.True(viewModel.VisibleHeadToHead);
             Assert.True(viewModel.HasData);
             Assert.True(viewModel.VisibleStats);
+        }
+
+        [Fact]
+        public async Task LoadHeadToHeadAsync_HasMatches_ShouldExcludeCurrentMatch()
+        {
+            // Arrange               
+            teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
+                .Returns(new List<SoccerMatch>
+                {
+                    new SoccerMatch("sr:match:1", new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
+                    new SoccerMatch(match.Id, new MatchResult(MatchStatus.Closed, MatchStatus.Ended))
+                });
+
+            // Act
+            await viewModel.LoadHeadToHeadAsync(false);
+
+            // Assert
+            Assert.True(viewModel.VisibleHeadToHead);
+            Assert.True(viewModel.HasData);
+            Assert.False(viewModel.VisibleStats);
         }
 
         [Fact]
