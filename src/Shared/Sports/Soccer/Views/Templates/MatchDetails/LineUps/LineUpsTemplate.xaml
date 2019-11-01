@@ -93,13 +93,13 @@
                                 </Grid.RowDefinitions>
                                 <Label Grid.Column="2"
                                        Text="{Binding HomeJerseyNumber}"
-                                       Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                       Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
                                 <Label Grid.Column="3"
                                        Text="{Binding HomeName}"
                                        Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
                                 <Label Grid.Column="6"
                                        Text="{Binding AwayJerseyNumber}"
-                                       Style="{StaticResource MatchDetailLinesUpShirtNumber}" />
+                                       Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
                                 <Label Grid.Column="7"
                                        Text="{Binding AwayName}"
                                        Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />

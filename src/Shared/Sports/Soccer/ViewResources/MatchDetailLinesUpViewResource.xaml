@@ -7,10 +7,19 @@
         <Setter Property="FontSize" Value="12" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
     </Style>
-    <Style x:Key="MatchDetailLinesUpShirtNumber" BasedOn="{StaticResource MatchDetailLinesUpSubstitutePlayer}" TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="End" />
+    <Style x:Key="MatchDetailLinesUpShirtNumber" TargetType="Label">
         <Setter Property="Margin" Value="0,0,4,0" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />        
+        <Setter Property="HorizontalTextAlignment" Value="End" />
+        <Setter Property="FontSize" Value="12" />
     </Style>
+    <Style x:Key="MatchDetailLinesUpHomeShirtNumber" BasedOn="{StaticResource MatchDetailLinesUpShirtNumber}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource HomeColor}" />
+    </Style>
+    <Style x:Key="MatchDetailLinesUpAwayShirtNumber" BasedOn="{StaticResource MatchDetailLinesUpShirtNumber}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource AwayColor}" />
+    </Style>
+    
     <Style x:Key="MatchDetailLineFormationUpLayout" BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
         TargetType="FlexLayout">
         <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
