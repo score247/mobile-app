@@ -18,15 +18,10 @@
             </ResourceDictionary>
         </StackLayout.Resources>
 
-        <Label Style="{StaticResource NoInfo}"
-               Text="{languageResources:Translate NoData}"
-               IsVisible="{Binding NoData}"
-               AutomationId="NoDataLabel" />
-
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}"
                      RefreshColor="White">
-            <tabStrip:TabItemCollectionView IsVisible="{Binding HasData}"
+            <tabStrip:TabItemCollectionView
                                             IsGrouped="True"
                                             BackgroundColor="{StaticResource ListViewBgColor}"
                                             ItemsSource="{Binding SubstitutionAndCoachGroups}"
@@ -37,6 +32,10 @@
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout BackgroundColor="#272830">
+                            <Label Style="{StaticResource NoInfo}"
+                                   Text="{languageResources:Translate NoData}"
+                                   IsVisible="{Binding NoData}"
+                                   AutomationId="NoDataLabel" />
                             <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                         JustifyContent="SpaceBetween">
                                 <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
