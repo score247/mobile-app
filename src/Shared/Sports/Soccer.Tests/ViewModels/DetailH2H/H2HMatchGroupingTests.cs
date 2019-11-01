@@ -1,9 +1,11 @@
-﻿using LiveScore.Soccer.Models.Matches;
+﻿using FakeItEasy;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
-{   
+{
     public class H2HMatchGroupingTests
     {
         [Fact]
@@ -22,8 +24,13 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public void Equals_SameLeagueIdAndSeasonId_ReturnTrue()
         {
             // Arrange
-            var match1 = new SoccerMatch("sr:league:1", "sr:season:1");
-            var match2 = new SoccerMatch("sr:league:1", "sr:season:1");
+            var match1 = A.Dummy<SoccerMatch>()
+                .With(match => match.LeagueId, "sr:league:1")
+                .With(match => match.LeagueSeasonId, "sr:season:1");
+
+            var match2 = A.Dummy<SoccerMatch>()
+                .With(match => match.LeagueId, "sr:league:1")
+                .With(match => match.LeagueSeasonId, "sr:season:1");
 
             var matchGrouping1 = new H2HMatchGrouping(match1);
             var matchGrouping2 = new H2HMatchGrouping(match2);
@@ -39,8 +46,13 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public void Equals_SameLeagueIdAndDifferentSeasonId_ReturnFalse()
         {
             // Arrange
-            var match1 = new SoccerMatch("sr:league:1", "sr:season:1");
-            var match2 = new SoccerMatch("sr:league:1", "sr:season:2");
+            var match1 = A.Dummy<SoccerMatch>()
+                .With(match => match.LeagueId, "sr:league:1")
+                .With(match => match.LeagueSeasonId, "sr:season:1");
+           
+            var match2 = A.Dummy<SoccerMatch>()
+                .With(match => match.LeagueId, "sr:league:1")
+                .With(match => match.LeagueSeasonId, "sr:season:2");
 
             var matchGrouping1 = new H2HMatchGrouping(match1);
             var matchGrouping2 = new H2HMatchGrouping(match2);

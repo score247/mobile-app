@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using AutoFixture;
+using FakeItEasy;
 using LiveScore.Common;
 using LiveScore.Common.Services;
 using LiveScore.Core.Converters;
@@ -19,8 +19,8 @@ using Xunit;
 namespace Soccer.Tests.ViewModels.DetailH2H
 {
     public class H2HViewModelTests : IClassFixture<ViewModelBaseFixture>
-    {   
-        private readonly IMatch match;
+    {
+        private readonly SoccerMatch match;
         private readonly ITeamService teamService;
         private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
         private readonly ILoggingService logService;
@@ -29,9 +29,9 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
         private readonly H2HViewModel viewModel;
 
-        public H2HViewModelTests(ViewModelBaseFixture baseFixture) 
+        public H2HViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            match = baseFixture.CommonFixture.Specimens.Create<SoccerMatch>();
+            match = A.Dummy<SoccerMatch>();
 
             teamService = Substitute.For<ITeamService>();
             matchStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
@@ -45,15 +45,15 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             baseFixture.DependencyResolver.Resolve<ILoggingService>().Returns(logService);
 
             viewModel = new H2HViewModel(
-                match, 
-                baseFixture.NavigationService, 
-                baseFixture.DependencyResolver, 
-                eventAggregator, 
+                match,
+                baseFixture.NavigationService,
+                baseFixture.DependencyResolver,
+                eventAggregator,
                 null);
         }
 
         [Fact]
-        public async Task LoadHeadToHeadAsync_Always_InjectGetHeadToHeadsAsync() 
+        public async Task LoadHeadToHeadAsync_Always_InjectGetHeadToHeadsAsync()
         {
             // Arrange               
 
@@ -102,8 +102,8 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         {
             // Arrange               
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
-                .Returns(new List<SoccerMatch> 
-                { 
+                .Returns(new List<SoccerMatch>
+                {
                     new SoccerMatch(new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
                     new SoccerMatch(new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted))
                 });
@@ -124,8 +124,13 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
                 .Returns(new List<SoccerMatch>
                 {
-                    new SoccerMatch("sr:match:1", new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
-                    new SoccerMatch("sr:match:2",new MatchResult(MatchStatus.Closed, MatchStatus.Ended))
+                    A.Dummy<SoccerMatch>()
+                        .With(match => match.Id, "sr:match:1")
+                        .With(match => match.EventStatus, MatchStatus.NotStarted),
+                    A.Dummy<SoccerMatch>()
+                        .With(match => match.Id, "sr:match:2")
+                        .With(match => match.EventStatus, MatchStatus.Closed)
+                        .With(match => match.MatchStatus, MatchStatus.Ended)
                 });
 
             // Act
@@ -144,8 +149,8 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName, false)
                 .Returns(new List<SoccerMatch>
                 {
-                    new SoccerMatch("sr:match:1", new MatchResult(MatchStatus.NotStarted, MatchStatus.NotStarted)),
-                    new SoccerMatch(match.Id, new MatchResult(MatchStatus.Closed, MatchStatus.Ended))
+                    A.Dummy<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.NotStarted),
+                    match
                 });
 
             // Act
