@@ -57,5 +57,13 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             Assert.Equal("2099", viewModel.DisplayEventDate);
         }
+
+        [Fact]
+        public void BuildMatch_MatchIsNull_ShouldReturn()
+        {
+            var viewModel = new SummaryMatchViewModel(null, matchDisplayStatusBuilder);
+
+            Assert.Null(viewModel.Match);
+        }
     }
 }

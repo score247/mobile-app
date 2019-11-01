@@ -100,6 +100,12 @@ namespace LiveScore.Soccer.Models.Matches
             UpdateResult(matchResult);
         }
 
+        internal SoccerMatch(string leagueId, string seasonId) 
+        {
+            LeagueId = leagueId;
+            LeagueSeasonId = seasonId;
+        }
+
         [Key(0)]
         public string Id { get; private set; }
 
