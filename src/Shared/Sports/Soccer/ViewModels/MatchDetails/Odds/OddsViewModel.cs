@@ -172,7 +172,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         }
 
         private async Task LoadOddsByBetTypeAsync(string formatType)
-        {            
+        {
             var odds = await oddsService.GetOddsAsync(
                 CurrentLanguage.DisplayName,
                 matchId,

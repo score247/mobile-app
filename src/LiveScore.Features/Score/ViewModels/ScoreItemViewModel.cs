@@ -74,7 +74,7 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateCommand LoadMoreCommand { get; private set; }
 
         public override Task OnNetworkReconnectedAsync()
-            => Task.Run(() => LoadDataAsync(() => LoadMatchesAsync(true)));
+            => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
 
         public override void OnResumeWhenNetworkOK()
         {
@@ -83,7 +83,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (ViewDate.IsTodayOrYesterday())
             {
-                Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
+                Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
             }
         }
 
@@ -101,13 +101,13 @@ namespace LiveScore.Features.Score.ViewModels
                     if (FirstLoad)
                     {
                         FirstLoad = false;
-                        LoadDataAsync(() => LoadMatchesAsync()).ConfigureAwait(false);
+                        LoadDataAsync(LoadMatchesAsync).ConfigureAwait(false);
                     }
                     else
                     {
                         if (ViewDate.IsTodayOrYesterday())
                         {
-                            Task.Run(() => LoadDataAsync(() => UpdateMatchesAsync(true), false));
+                            Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
                         }
                     }
                 })
@@ -200,7 +200,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             await Task.Run(
-                () => LoadDataAsync(() => UpdateMatchesAsync(true), false))
+                () => LoadDataAsync(UpdateMatchesAsync, false))
                 .ConfigureAwait(false);
         }
 
@@ -248,9 +248,9 @@ namespace LiveScore.Features.Score.ViewModels
                 });
         }
 
-        protected virtual async Task LoadMatchesAsync(bool getLatestData = false)
+        protected virtual async Task LoadMatchesAsync()
         {
-            var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
+            var matches = await LoadMatchesFromServiceAsync().ConfigureAwait(false);
 
             if (matches?.Any() != true)
             {
@@ -263,9 +263,9 @@ namespace LiveScore.Features.Score.ViewModels
             InitializeMatchItems(matches);
         }
 
-        protected virtual async Task UpdateMatchesAsync(bool getLatestData = false)
+        protected virtual async Task UpdateMatchesAsync()
         {
-            var matches = await LoadMatchesFromServiceAsync(getLatestData).ConfigureAwait(false);
+            var matches = await LoadMatchesFromServiceAsync().ConfigureAwait(false);
 
             if (matches?.Any() != true)
             {
@@ -281,8 +281,8 @@ namespace LiveScore.Features.Score.ViewModels
             HasData = true;
         }
 
-        protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync(bool getLatestData)
-            => matchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage, getLatestData);
+        protected virtual Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
+            => matchService.GetMatchesByDateAsync(ViewDate, CurrentLanguage);
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches)
         {

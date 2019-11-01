@@ -8,8 +8,8 @@ namespace LiveScore.Core.Services
 {
     public interface IMatchService
     {
-        Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language, bool forceFetchLatestData = false);
+        Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language);
 
-        Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language, bool forceFetchLatestData = false);
+        Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language);
     }
 }

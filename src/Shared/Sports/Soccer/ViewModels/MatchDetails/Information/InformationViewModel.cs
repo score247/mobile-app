@@ -39,7 +39,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
             this.matchId = matchId;
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
-            RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(() => LoadMatchDetail(true), false));
+            RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(LoadMatchDetail, false));
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -69,7 +69,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
             await LoadMatchInfoData();
         }
 
-        [Time]
         public override async void OnAppearing()
         {
             base.OnAppearing();
@@ -91,8 +90,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
         {
             try
             {
-                // TODO: Check when need to reload data later
-                await LoadDataAsync(() => LoadMatchDetail(true)).ConfigureAwait(false);
+                await LoadDataAsync(LoadMatchDetail).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -114,7 +112,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                 .Unsubscribe(OnReceivedMatchEvent);
         }
 
-        [Time]
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
             if (matchEventMessage.SportId != CurrentSportId
@@ -133,18 +130,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
 
             MatchInfo.UpdateTimelineEvents(MatchInfo
                 .TimelineEvents
-                .Concat(new List<TimelineEvent> { matchEventMessage
-                    .MatchEvent
-                    .Timeline as TimelineEvent }));
+                .Concat(new List<TimelineEvent> {
+                    matchEventMessage.MatchEvent.Timeline as TimelineEvent
+                }));
 
             BuildDetailInfo(MatchInfo);
         }
 
-        [Time]
-        private async Task LoadMatchDetail(bool isRefresh = false)
+        private async Task LoadMatchDetail()
         {
             MatchInfo = await matchInfoService
-                .GetMatchAsync(matchId, CurrentLanguage, isRefresh)
+                .GetMatchAsync(matchId, CurrentLanguage)
                 .ConfigureAwait(false);
 
             BuildDetailInfo(MatchInfo);

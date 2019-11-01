@@ -22,10 +22,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
     {
         private readonly SoccerMatch match;
         private readonly ITeamService teamService;
-        private readonly IMatchDisplayStatusBuilder matchStatusBuilder;
         private readonly ILoggingService logService;
-        private readonly IEventAggregator eventAggregator;
-        private readonly Func<string, string> buildFlagUrlFunc;
         private readonly Fixture fixture;
 
         private readonly H2HViewModel viewModel;
@@ -36,15 +33,18 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             match = fixture.Create<SoccerMatch>();
 
             teamService = Substitute.For<ITeamService>();
-            matchStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
+            var matchStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
             logService = Substitute.For<ILoggingService>();
-            buildFlagUrlFunc = Substitute.For<Func<string, string>>();
-            eventAggregator = Substitute.For<IEventAggregator>();
+            var buildFlagUrlFunc = Substitute.For<Func<string, string>>();
+            var eventAggregator = Substitute.For<IEventAggregator>();
+            var networkConnectionManager = Substitute.For<INetworkConnection>();
+            networkConnectionManager.IsSuccessfulConnection().Returns(true);
 
             baseFixture.DependencyResolver.Resolve<ITeamService>("1").Returns(teamService);
             baseFixture.DependencyResolver.Resolve<IMatchDisplayStatusBuilder>("1").Returns(matchStatusBuilder);
             baseFixture.DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName).Returns(buildFlagUrlFunc);
             baseFixture.DependencyResolver.Resolve<ILoggingService>().Returns(logService);
+            baseFixture.DependencyResolver.Resolve<INetworkConnection>().Returns(networkConnectionManager);
 
             viewModel = new H2HViewModel(
                 match,
@@ -57,7 +57,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_Always_InjectGetHeadToHeadsAsync()
         {
-            // Arrange               
+            // Arrange
 
             // Act
             await viewModel.LoadHeadToHeadAsync();
@@ -71,7 +71,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_Exception_ShouldLogError()
         {
-            // Arrange               
+            // Arrange
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Throws(new InvalidOperationException("Error"));
 
@@ -87,7 +87,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_Null_HasDataShouldBeFalse()
         {
-            // Arrange               
+            // Arrange
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(Task.FromResult(default(IEnumerable<IMatch>)));
 
@@ -102,7 +102,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_NotStartMatches_ShouldHideStats()
         {
-            // Arrange               
+            // Arrange
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
@@ -122,7 +122,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_ContainsClosedMatches_ShouldVisibleStats()
         {
-            // Arrange               
+            // Arrange
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
@@ -147,7 +147,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task LoadHeadToHeadAsync_HasMatches_ShouldExcludeCurrentMatch()
         {
-            // Arrange               
+            // Arrange
             teamService.GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
                 .Returns(new List<SoccerMatch>
                 {
@@ -167,7 +167,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task RefreshAsync_Always_GetLatest()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             await viewModel.RefreshAsync();
@@ -180,7 +180,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void LoadTeamResult_Home_VisibleHomeTeamResults()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             viewModel.LoadTeamResult("home");
@@ -194,7 +194,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void LoadTeamResult_Away_VisibleAwayTeamResults()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             viewModel.LoadTeamResult("away");
@@ -208,7 +208,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void OnTeamResultTapped_ExecuteForAway_VisibleAwayTeamResults()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             viewModel.OnTeamResultTapped.Execute("away");
@@ -222,7 +222,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void OnTeamResultTapped_ExecuteForHome_VisibleHomeTeamResults()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             viewModel.OnTeamResultTapped.Execute("home");
@@ -236,7 +236,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task OnHeadToHeadTapped_ExecuteAsync_VisibleHeadToHead()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             await viewModel.OnHeadToHeadTapped.ExecuteAsync();
@@ -250,7 +250,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public async Task RefreshCommand_ExecuteAsync_GetLatest()
         {
-            // Arrange       
+            // Arrange
 
             // Act
             await viewModel.RefreshCommand.ExecuteAsync();

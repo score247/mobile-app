@@ -15,20 +15,19 @@ namespace LiveScore.Soccer.Services
 {
     public interface ISoccerMatchService
     {
-        Task<MatchInfo> GetMatchAsync(string matchId, Language language, bool forceFetchLatestData = false);
+        Task<MatchInfo> GetMatchAsync(string matchId, Language language);
 
         Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, bool forceFetchLatestData = false);
 
-        Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, bool forceFetchLatestData = false);
+        Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language);
 
-        Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, bool forceFetchLatestData = false);
+        Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language);
 
-        Task<MatchLineups> GetMatchLineups(string matchId, Language language, bool forceFetchLatestData = false);
+        Task<MatchLineups> GetMatchLineups(string matchId, Language language);
     }
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
     {
-        private const int ShortDuration = 120;
         private const int LongDuration = 7_200;
 
         private readonly IApiService apiService;
@@ -47,24 +46,14 @@ namespace LiveScore.Soccer.Services
         }
 
         [Time]
-        public async Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language, bool forceFetchLatestData = false)
+        public async Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language)
         {
             try
             {
-                var cacheKey = $"Matches:{dateTime.Date}:{language.DisplayName}";
-
-                var cacheDuration = dateTime.Date == DateTime.Today
-                    || dateTime.Date == DateTimeExtension.Yesterday().Date
-                    ? ShortDuration
-                    : LongDuration;
-
-                return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                    () => apiService.Execute(() => matchApi.GetMatches(
-                        dateTime.BeginningOfDay().ToApiFormat(),
-                        dateTime.EndOfDay().ToApiFormat(),
-                        language.DisplayName)), cacheDuration,
-                    forceFetchLatestData).ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetMatches(
+                    dateTime.BeginningOfDay().ToApiFormat(),
+                    dateTime.EndOfDay().ToApiFormat(),
+                    language.DisplayName));
             }
             catch (Exception ex)
             {
@@ -75,17 +64,11 @@ namespace LiveScore.Soccer.Services
         }
 
         [Time]
-        public async Task<MatchInfo> GetMatchAsync(string matchId, Language language, bool forceFetchLatestData = false)
+        public async Task<MatchInfo> GetMatchAsync(string matchId, Language language)
         {
             try
             {
-                var cacheKey = $"SoccerMatch:{matchId}:{language}";
-
-                return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                    () => apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName)),
-                    ShortDuration, forceFetchLatestData)
-                    .ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName));
             }
             catch (Exception ex)
             {
@@ -95,17 +78,11 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language, bool forceFetchLatestData = false)
+        public async Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language)
         {
             try
             {
-                var cacheKey = $"LiveMatches::{language.DisplayName}";
-
-                return await cacheManager.GetOrSetAsync(
-                        cacheKey,
-                        () => apiService.Execute(() => matchApi.GetLiveMatches(language.DisplayName)),
-                        ShortDuration, forceFetchLatestData)
-                    .ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetLiveMatches(language.DisplayName));
             }
             catch (Exception ex)
             {
@@ -119,12 +96,12 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                var cacheKey = $"SoccerMatch:{matchId}:{language}:coverage";
+                var cacheKey = $"SoccerMatch:{matchId}:coverage";
 
                 return await cacheManager.GetOrSetAsync(
                         cacheKey,
                         () => apiService.Execute(() => matchApi.GetMatchCoverage(matchId, language.DisplayName)),
-                        ShortDuration, forceFetchLatestData)
+                        LongDuration, forceFetchLatestData)
                     .ConfigureAwait(false);
             }
             catch (Exception ex)
@@ -135,17 +112,11 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, bool forceFetchLatestData = false)
+        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language)
         {
             try
             {
-                var cacheKey = $"SoccerMatch:{matchId}:{language}:Commentaries";
-
-                return await cacheManager.GetOrSetAsync(
-                        cacheKey,
-                        () => apiService.Execute(() => matchApi.GetMatchCommentaries(matchId, language.DisplayName)),
-                        ShortDuration, forceFetchLatestData)
-                    .ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetMatchCommentaries(matchId, language.DisplayName));
             }
             catch (Exception ex)
             {
@@ -155,18 +126,11 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, bool forceFetchLatestData = false)
+        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language)
         {
             try
             {
-                var cacheKey = $"SoccerMatch:{matchId}:statistic";
-
-                return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                    () => apiService.Execute(() => matchApi.GetMatchStatistic(matchId, language.DisplayName)),
-                    ShortDuration,
-                    forceFetchLatestData)
-                    .ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetMatchStatistic(matchId, language.DisplayName));
             }
             catch (Exception ex)
             {
@@ -176,18 +140,11 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchLineups> GetMatchLineups(string matchId, Language language, bool forceFetchLatestData = false)
+        public async Task<MatchLineups> GetMatchLineups(string matchId, Language language)
         {
             try
             {
-                var cacheKey = $"SoccerMatch:{matchId}:lineups";
-
-                return await cacheManager.GetOrSetAsync(
-                    cacheKey,
-                    () => apiService.Execute(() => matchApi.GetMatchLineups(matchId, language.DisplayName)),
-                    ShortDuration,
-                    forceFetchLatestData)
-                    .ConfigureAwait(false);
+                return await apiService.Execute(() => matchApi.GetMatchLineups(matchId, language.DisplayName));
             }
             catch (Exception ex)
             {

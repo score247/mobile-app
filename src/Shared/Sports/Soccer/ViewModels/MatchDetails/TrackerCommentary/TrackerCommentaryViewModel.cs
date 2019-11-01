@@ -28,7 +28,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         private const string LanguageCode = "en";
         private readonly MatchCoverage matchCoverage;
         private readonly ISoccerMatchService soccerMatchService;
-        private bool isFirstLoad = true;
 
         public TrackerCommentaryViewModel(
             MatchCoverage matchCoverage,
@@ -81,24 +80,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         public DelegateCommand ShowMoreCommentariesCommand { get; }
 
         public override async void OnResumeWhenNetworkOK()
-            => await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
+            => await LoadDataAsync(LoadMatchCommentariesAsync);
 
         public override Task OnNetworkReconnectedAsync()
-            => LoadDataAsync(() => LoadMatchCommentariesAsync(true));
+            => LoadDataAsync(LoadMatchCommentariesAsync);
 
         public override async void OnAppearing()
         {
             base.OnAppearing();
 
-            if (isFirstLoad)
-            {
-                await LoadDataAsync().ConfigureAwait(false);
-            }
-
-            isFirstLoad = false;
+            await LoadTrackerAndCommentaries().ConfigureAwait(false);
         }
 
-        private Task OnRefresh() => LoadDataAsync(() => LoadMatchCommentariesAsync(true), false);
+        private Task OnRefresh()
+            => LoadDataAsync(LoadMatchCommentariesAsync, false);
 
         private void ShowMoreCommentaries()
         {
@@ -116,7 +111,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             }
         }
 
-        private async Task LoadDataAsync()
+        private async Task LoadTrackerAndCommentaries()
         {
             if (matchCoverage?.Coverage == null)
             {
@@ -124,9 +119,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                 return;
             }
 
-            LoadTracker();
+            if (IsFirstLoad)
+            {
+                LoadTracker();
+                IsFirstLoad = false;
+            }
 
-            await LoadDataAsync(() => LoadMatchCommentariesAsync(true));
+            await LoadDataAsync(LoadMatchCommentariesAsync);
         }
 
         private void LoadTracker()
@@ -157,23 +156,22 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         }
 
         [Time]
-        private async Task LoadMatchCommentariesAsync(bool forceFetchLatestData = false)
+        private async Task LoadMatchCommentariesAsync()
         {
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Commentary)
             {
                 var matchCommentaries = (await soccerMatchService
-                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, forceFetchLatestData))
+                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage))
                     .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
-                    .OrderByDescending(t => t.Time);
+                    .OrderByDescending(t => t.Time)
+                    .ToList();
 
-                if (matchCommentaries.Any())
+                if (matchCommentaries.Count > 0)
                 {
-                    var commentaryViewModels = matchCommentaries
-                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver))
-                        .ToList();
+                    FullMatchCommentaries = matchCommentaries
+                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver)); ;
+                    DefaultMatchCommentaries = FullMatchCommentaries.Take(DefaultLoadingCommentaryItemCount);
 
-                    DefaultMatchCommentaries = commentaryViewModels.Take(DefaultLoadingCommentaryItemCount);
-                    FullMatchCommentaries = commentaryViewModels;
                     MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
 
                     HasCommentariesData = true;

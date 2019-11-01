@@ -9,8 +9,8 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:information="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Information;assembly=LiveScore.Soccer"
               mc:Ignorable="d">
-    <FlexLayout Direction="Column">
-        <FlexLayout.Resources>
+    <StackLayout>
+        <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -19,9 +19,9 @@
                 <commonConverters:TextNotEmptyConverter x:Key="textNotEmptyConverter" />
                 <information:InformationItemTemplateSelector x:Key="infoItemTemplateSelector" />
             </ResourceDictionary>
-        </FlexLayout.Resources>
+        </StackLayout.Resources>
 
-        <ActivityIndicator Margin="20"
+        <ActivityIndicator Margin="40"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"
@@ -37,8 +37,7 @@
                                             ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
-                                 HeightRequest="500"
-                                 IsVisible="{Binding IsNotLoading}">
+                                 HeightRequest="500">
                         <FlexLayout Style="{StaticResource Group}">
                             <Label AutomationId="MatchInfoHeaderTitle"
                                    Style="{StaticResource GroupName}"
@@ -91,5 +90,5 @@
                 </tabStrip:TabItemCollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
-    </FlexLayout>
+    </StackLayout>
 </DataTemplate>

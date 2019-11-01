@@ -155,8 +155,7 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        public virtual Task OnNetworkReconnectedAsync()
-            => Task.CompletedTask;
+        public virtual Task OnNetworkReconnectedAsync() => Task.CompletedTask;
 
         private void OnConnectionChangedBase(bool isConnected)
         {

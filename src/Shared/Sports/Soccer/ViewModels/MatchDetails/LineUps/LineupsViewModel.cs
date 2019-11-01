@@ -38,7 +38,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
             beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
             RefreshCommand = new DelegateAsyncCommand(
-                async () => await LoadDataAsync(() => LoadMatchLineupsDataAsync(true), false));
+                async () => await LoadDataAsync(LoadLineUpsAsync, false));
         }
 
         public bool IsRefreshing { get; set; }
@@ -49,10 +49,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public List<LineupsGroupViewModel> SubstitutionAndCoachGroups { get; private set; }
 
-        private async Task LoadMatchLineupsDataAsync(bool isRefresh = false)
+        public override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await LoadDataAsync(LoadLineUpsAsync);
+        }
+
+        public override async void OnResumeWhenNetworkOK()
+        {
+            await LoadDataAsync(LoadLineUpsAsync);
+        }
+
+        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadLineUpsAsync);
+
+        private async Task LoadLineUpsAsync()
         {
             var matchLineups = await soccerMatchService
-                .GetMatchLineups(matchId, Language.English, isRefresh)
+                .GetMatchLineups(matchId, Language.English)
                 .ConfigureAwait(false);
 
             beginInvokeOnMainThreadFunc(() => { RenderMatchLineups(matchLineups); });
@@ -78,13 +92,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
 
             IsRefreshing = false;
-        }
-
-        public override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            await LoadMatchLineupsDataAsync();
         }
 
         private static List<LineupsGroupViewModel> BuildSubstitutionAndCoachGroups(MatchLineups matchLineups)
@@ -127,7 +134,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             var totalSubstitution = Math.Max(totalHomeSubstitution, totalAwaySubstitution);
             var lineupsItems = new List<LineupsItemViewModel>();
 
-            for (int index = 0; index < totalSubstitution; index++)
+            for (var index = 0; index < totalSubstitution; index++)
             {
                 var homePlayer = index < totalHomeSubstitution ? homeSubstitutions.ElementAt(index) : default;
                 var awayPlayer = index < totalAwaySubstitution ? awaySubstitutions.ElementAt(index) : default;

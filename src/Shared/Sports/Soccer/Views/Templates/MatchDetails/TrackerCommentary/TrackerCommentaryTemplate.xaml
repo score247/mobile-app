@@ -17,7 +17,7 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </FlexLayout.Resources>
-        <ActivityIndicator Margin="20"
+        <ActivityIndicator Margin="40"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"

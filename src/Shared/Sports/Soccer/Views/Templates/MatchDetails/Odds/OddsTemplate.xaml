@@ -78,31 +78,30 @@
                 <Button Style="{StaticResource DropdownIcon}" />
             </StackLayout>
         </Grid>
-        <Grid>
-            <StackLayout Style="{StaticResource TableContainer}" IsVisible="{Binding IsNotBusy}">
-                <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                         Command="{Binding RefreshCommand}"
-                         RefreshColor="White">
-                    <tabStrip:TabItemCollectionView x:Name="OddsCollectionView"
-                                                BackgroundColor="{StaticResource ListViewLightBgColor}"
-                                                Header="{Binding HasData, StringFormat=''}"
-                                                HeaderTemplate="{Binding HeaderTemplate}"
-                                                IsVisible="{Binding IsNotBusy}"
-                                                ItemTemplate="{StaticResource OddsItemTemplateSelector}"
-                                                ItemsSource="{Binding BetTypeOddsItems}"
-                                                ItemSizingStrategy="MeasureFirstItem"
-                                                SelectionMode="Single"
-                                                SelectionChangedCommand="{Binding TappedOddsItemCommand}"
-                                                SelectionChangedCommandParameter="{Binding Source={x:Reference OddsCollectionView}, Path=SelectedItem}">
-                    </tabStrip:TabItemCollectionView>
-                </RefreshView>
-            </StackLayout>
-            <ActivityIndicator Margin="40"
+        <ActivityIndicator Margin="40"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"
                            VerticalOptions="Start" />
+        <Grid>
+            <StackLayout Style="{StaticResource TableContainer}"
+                         IsVisible="{Binding IsNotBusy}">
+                <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                             Command="{Binding RefreshCommand}"
+                             RefreshColor="White">
+                    <tabStrip:TabItemCollectionView x:Name="OddsCollectionView"
+                                                    BackgroundColor="{StaticResource ListViewLightBgColor}"
+                                                    Header="{Binding HasData, StringFormat=''}"
+                                                    HeaderTemplate="{Binding HeaderTemplate}"
+                                                    ItemTemplate="{StaticResource OddsItemTemplateSelector}"
+                                                    ItemsSource="{Binding BetTypeOddsItems}"
+                                                    ItemSizingStrategy="MeasureFirstItem"
+                                                    SelectionMode="Single"
+                                                    SelectionChangedCommand="{Binding TappedOddsItemCommand}"
+                                                    SelectionChangedCommandParameter="{Binding Source={x:Reference OddsCollectionView}, Path=SelectedItem}">
+                    </tabStrip:TabItemCollectionView>
+                </RefreshView>
+            </StackLayout>
         </Grid>
-        
     </StackLayout>
 </DataTemplate>

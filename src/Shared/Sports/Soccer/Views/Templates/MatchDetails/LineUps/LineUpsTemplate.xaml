@@ -17,37 +17,41 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-
+        <ActivityIndicator Margin="40"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}"
+                           VerticalOptions="StartAndExpand" />
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      Command="{Binding RefreshCommand}"
                      RefreshColor="White">
-            <tabStrip:TabItemCollectionView
-                                            IsGrouped="True"
+            <tabStrip:TabItemCollectionView IsGrouped="True"
                                             BackgroundColor="{StaticResource ListViewBgColor}"
                                             ItemsSource="{Binding SubstitutionAndCoachGroups}"
                                             HeightRequest="{Binding FooterHeight}"
                                             ItemSizingStrategy="MeasureFirstItem"
+                                            IsVisible="{Binding IsNotBusy}"
                                             VerticalOptions="FillAndExpand"
                                             Header="{Binding .}">
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
-                        <Grid>                            
+                        <Grid IsVisible="{Binding IsNotBusy}">
                             <StackLayout IsVisible="{Binding HasData}">
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
-                                        JustifyContent="SpaceBetween">
+                                            JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                       Text="{Binding LineupsHeader.HomeName}" />
+                                           Text="{Binding LineupsHeader.HomeName}" />
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                       Text="{Binding LineupsHeader.HomeFormation}" />
+                                           Text="{Binding LineupsHeader.HomeFormation}" />
                                 </FlexLayout>
                                 <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
-                                     Source="{Binding LineupsHeader.LineupsPitchView}" />
+                                         Source="{Binding LineupsHeader.LineupsPitchView}" />
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
-                                        JustifyContent="SpaceBetween">
+                                            JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                       Text="{Binding LineupsHeader.AwayName}" />
+                                           Text="{Binding LineupsHeader.AwayName}" />
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                       Text="{Binding LineupsHeader.AwayFormation}" />
+                                           Text="{Binding LineupsHeader.AwayFormation}" />
                                 </FlexLayout>
                             </StackLayout>
                             <Label Style="{StaticResource NoInfo}"

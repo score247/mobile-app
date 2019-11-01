@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
             this.matchId = matchId;
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(
-                async () => await LoadDataAsync(() => LoadMatchStatisticDataAsync(true), false));
+                async () => await LoadDataAsync(LoadStatisticsAsync, false));
         }
 
         public DelegateAsyncCommand RefreshCommand { get; }
@@ -41,10 +41,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
 
         public bool IsRefreshing { get; set; }
 
-        private async Task LoadMatchStatisticDataAsync(bool isRefresh = false)
+        public override async void OnAppearing()
+        {
+            base.OnAppearing();
+
+            await LoadDataAsync(LoadStatisticsAsync);
+        }
+
+        public override async void OnResumeWhenNetworkOK()
+        {
+            await LoadDataAsync(LoadStatisticsAsync);
+        }
+
+        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadStatisticsAsync);
+
+        private async Task LoadStatisticsAsync()
         {
             var matchStatistic = await soccerMatchService
-                    .GetMatchStatisticAsync(matchId, Language.English, isRefresh)
+                    .GetMatchStatisticAsync(matchId, Language.English)
                     .ConfigureAwait(false);
 
             if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))
@@ -59,13 +73,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
             }
 
             IsRefreshing = false;
-        }
-
-        public override async void OnAppearing()
-        {
-            base.OnAppearing();
-
-            await LoadMatchStatisticDataAsync();
         }
     }
 }

@@ -20,6 +20,7 @@
                                 HorizontalOptions="FillAndExpand"
                                 IsCyclical="false"
                                 IsViewReusingEnabled="False"
+                                BackViewsDepth="1"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}"

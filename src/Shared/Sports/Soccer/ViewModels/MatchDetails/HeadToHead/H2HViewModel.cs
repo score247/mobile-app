@@ -19,6 +19,7 @@ using Prism.Navigation;
 using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
+
 namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 {
     public class H2HViewModel : TabItemViewModel
@@ -47,7 +48,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
             OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
-            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadHeadToHeadAsync());
+            OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadDataAsync(LoadHeadToHeadAsync));
             RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
 
@@ -88,21 +89,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             base.OnAppearing();
 
-            await LoadHeadToHeadAsync();
+            await LoadDataAsync(LoadHeadToHeadAsync);
         }
 
         public override async void OnResumeWhenNetworkOK()
         {
             base.OnResumeWhenNetworkOK();
 
-            await RefreshCommand.ExecuteAsync();
+            await LoadDataAsync(LoadHeadToHeadAsync);
         }
+
+        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadHeadToHeadAsync);
 
         internal async Task RefreshAsync()
         {
             IsRefreshing = true;
 
-            await LoadHeadToHeadAsync();
+            await LoadDataAsync(LoadHeadToHeadAsync, false);
 
             IsRefreshing = false;
         }
@@ -125,7 +128,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                         match.AwayTeamId,
                         CurrentLanguage.DisplayName)
                     .ConfigureAwait(false))
-                    ?.Except(new List<IMatch> { match });
+                    ?.Except(new List<IMatch> { match }).ToList();
 
                 if (headToHeads?.Any() == true)
                 {

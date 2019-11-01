@@ -81,9 +81,9 @@ namespace LiveScore.Common.Services
         public static INetworkConnection OnSuccessfulConnection(
             this INetworkConnection networkConnection, Action action)
         {
-            if (networkConnection.IsSuccessfulConnection() && action != null)
+            if (networkConnection.IsSuccessfulConnection())
             {
-                action();
+                action?.Invoke();
             }
 
             return networkConnection;
@@ -92,18 +92,12 @@ namespace LiveScore.Common.Services
         public static INetworkConnection OnFailedConnection(
             this INetworkConnection networkConnection, Action action)
         {
-            if (networkConnection.IsFailureConnection() && action != null)
+            if (networkConnection.IsFailureConnection())
             {
-                action();
+                action?.Invoke();
             }
 
             return networkConnection;
-        }
-
-        public static void OnBoth(
-            this INetworkConnection networkConnection, Action action)
-        {
-            action?.Invoke();
         }
     }
 }

@@ -8,8 +8,8 @@
               xmlns:statistics="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.StatisticsTemplate">
-    <FlexLayout Direction="Column">
-        <FlexLayout.Resources>
+    <StackLayout>
+        <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -18,13 +18,19 @@
             </ResourceDictionary>
             <statistics:StatisticsHeaderTemplate x:Key="StatisticsHeaderTemplate" />
             <statistics:StatisticsItemTemplate x:Key="StatisticsItemTemplate" />
-        </FlexLayout.Resources>
+        </StackLayout.Resources>
+        <ActivityIndicator Margin="40"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}"
+                           VerticalOptions="StartAndExpand" />
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="White"
                      Command="{Binding RefreshCommand}">
-            <tabStrip:TabItemCollectionView BackgroundColor="#272830"
+            <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
                                             ItemsSource="{Binding SubStatisticItems}"
                                             Header="{Binding .}"
+                                            IsVisible="{Binding IsNotBusy}"
                                             ItemSizingStrategy="MeasureFirstItem"
                                             HeaderTemplate="{StaticResource StatisticsHeaderTemplate}"
                                             ItemTemplate="{StaticResource StatisticsItemTemplate}">
@@ -36,5 +42,5 @@
                 </tabStrip:TabItemCollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
-    </FlexLayout>
+    </StackLayout>
 </DataTemplate>
