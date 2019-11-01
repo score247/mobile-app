@@ -126,7 +126,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                         CurrentLanguage.DisplayName,
                         forceFetchLatestData)
                     .ConfigureAwait(false))
-                    .Except(new List<IMatch> { match });
+                    ?.Except(new List<IMatch> { match });
 
                 if (headToHeads?.Any() == true)
                 {
