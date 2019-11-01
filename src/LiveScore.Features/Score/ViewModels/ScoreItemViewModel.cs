@@ -287,7 +287,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             try
             {
-                if (MatchItemsSource?.Count == 0 && matches?.Any() == true)
+                if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matches?.Any() == true)
                 {
                     InitializeMatchItems(matches);
                     return;

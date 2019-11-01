@@ -112,7 +112,10 @@
                    skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
         </Grid>
-
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 IsVisible="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
         <Grid IsVisible="{Binding IsLoadingSkeleton}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -172,6 +175,10 @@
                    skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
         </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 IsVisible="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
         <Grid IsVisible="{Binding IsLoadingSkeleton}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -231,6 +238,10 @@
                    skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
         </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 IsVisible="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
         <Grid IsVisible="{Binding IsLoadingSkeleton}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -290,6 +301,10 @@
                    skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
         </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 IsVisible="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
         <Grid IsVisible="{Binding IsLoadingSkeleton}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -349,5 +364,9 @@
                    skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
                    skeleton:Skeleton.BackgroundColor="#2D2E30" />
         </Grid>
+        <BoxView Style="{StaticResource HorizontalLine}"
+                 IsVisible="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
     </StackLayout>
 </DataTemplate>

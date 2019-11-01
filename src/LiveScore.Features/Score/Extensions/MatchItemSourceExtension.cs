@@ -54,11 +54,6 @@ namespace LiveScore.Features.Score.Extensions
                 .SelectMany(group => group)
                 .ToList();
 
-            if (groupMatchViewModel == null)
-            {
-                return;
-            }
-
             foreach (var match in matches.OrderBy(match => match.LeagueOrder))
             {
                 var matchViewModel = groupMatchViewModel
