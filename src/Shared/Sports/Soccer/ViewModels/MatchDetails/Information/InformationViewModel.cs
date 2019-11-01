@@ -7,6 +7,7 @@ using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
@@ -25,17 +26,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
         private const string SpectatorNumberFormat = "0,0";
         private readonly ISoccerMatchService matchInfoService;
         private readonly IEventAggregator eventAggregator;
-        private readonly string matchId;
+        private readonly IMatch match;
 
         public InformationViewModel(
-            string matchId,
+            IMatch match,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
             DataTemplate dataTemplate)
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Info)
         {
-            this.matchId = matchId;
+            this.match = match;
             this.eventAggregator = eventAggregator;
             matchInfoService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(async () => await LoadDataAsync(LoadMatchDetail, false));
@@ -99,9 +100,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
 
         private void SubscribeEvents()
         {
-            eventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
+            if (match.EventStatus.IsLive)
+            {
+                eventAggregator
+                    .GetEvent<MatchEventPubSubEvent>()
+                    .Subscribe(OnReceivedMatchEvent);
+            }
         }
 
         private void UnsubscribeEvents()
@@ -114,7 +118,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
             if (matchEventMessage.SportId != CurrentSportId
-                || matchEventMessage.MatchEvent.MatchId != matchId
+                || matchEventMessage.MatchEvent.MatchId != match.Id
                 || MatchInfo == null)
             {
                 return;
@@ -139,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
         private async Task LoadMatchDetail()
         {
             MatchInfo = await matchInfoService
-                .GetMatchAsync(matchId, CurrentLanguage)
+                .GetMatchAsync(match.Id, CurrentLanguage)
                 .ConfigureAwait(false);
 
             BuildDetailInfo(MatchInfo);

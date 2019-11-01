@@ -72,7 +72,7 @@
     <CodeAnalysisRuleSet>LiveScoreApp.iOS.ruleset</CodeAnalysisRuleSet>
     <MtouchExtraArgs>--time --time </MtouchExtraArgs>
     <MtouchProfiling>true</MtouchProfiling>
-    <MtouchFastDev>false</MtouchFastDev>
+    <MtouchFastDev>true</MtouchFastDev>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
     <CodesignExtraArgs />

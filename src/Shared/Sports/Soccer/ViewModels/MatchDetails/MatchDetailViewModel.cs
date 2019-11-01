@@ -219,7 +219,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
                 [MatchDetailFunction.Odds] = new OddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
-                [MatchDetailFunction.Info] = new InformationViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
+                [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LineUpsTemplate()),
                 [MatchDetailFunction.Social] = new SocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
