@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -119,13 +120,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             try
             {
-                var headToHeads
-                    = await teamService.GetHeadToHeadsAsync(
+                var headToHeads = (await teamService.GetHeadToHeadsAsync(
                         match.HomeTeamId,
                         match.AwayTeamId,
                         CurrentLanguage.DisplayName,
                         forceFetchLatestData)
-                    .ConfigureAwait(false);
+                    .ConfigureAwait(false))
+                    .Except(new List<IMatch> { match });
 
                 if (headToHeads?.Any() == true)
                 {
