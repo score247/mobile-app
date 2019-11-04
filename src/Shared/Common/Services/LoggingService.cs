@@ -165,13 +165,13 @@ namespace LiveScore.Common.Services
             var sentryEvent = sentryEventCreator.Invoke();
 
             sentryEvent.Contexts.Device.Model = Xamarin.Essentials.DeviceInfo.Model;
-            //sentryEvent.Contexts.Device.Name = Xamarin.Essentials.DeviceInfo.Name;
-            //sentryEvent.Contexts.Device.Manufacturer = Xamarin.Essentials.DeviceInfo.Manufacturer;
-            //sentryEvent.Contexts.Runtime.Version = Xamarin.Essentials.VersionTracking.CurrentVersion;
-            //sentryEvent.Contexts.Runtime.Build = Xamarin.Essentials.VersionTracking.CurrentBuild;
+            sentryEvent.Contexts.Device.Name = Xamarin.Essentials.DeviceInfo.Name;
+            sentryEvent.Contexts.Device.Manufacturer = Xamarin.Essentials.DeviceInfo.Manufacturer;
+            sentryEvent.Contexts.Runtime.Version = Xamarin.Essentials.VersionTracking.CurrentVersion;
+            sentryEvent.Contexts.Runtime.Build = Xamarin.Essentials.VersionTracking.CurrentBuild;
 
-            //sentryEvent.Contexts.OperatingSystem.Name = Xamarin.Essentials.DeviceInfo.Platform.ToString();
-            //sentryEvent.Contexts.OperatingSystem.Version = Xamarin.Essentials.DeviceInfo.VersionString;
+            sentryEvent.Contexts.OperatingSystem.Name = Xamarin.Essentials.DeviceInfo.Platform.ToString();
+            sentryEvent.Contexts.OperatingSystem.Version = Xamarin.Essentials.DeviceInfo.VersionString;
 
             return sentryEvent;
         }
