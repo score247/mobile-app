@@ -29,6 +29,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
 using Refit;
+using Sentry;
 using Xamarin.Forms;
 
 namespace LiveScore.Configurations
@@ -59,11 +60,11 @@ namespace LiveScore.Configurations
             return containerRegistry;
         }
 
-        private static void SetupServicePointManager()
+        public static IContainerRegistry UseSentry(this IContainerRegistry containerRegistry)
         {
-            ServicePointManager.UseNagleAlgorithm = false;
-            ServicePointManager.Expect100Continue = false;
-            ServicePointManager.DefaultConnectionLimit = int.MaxValue;
+            SentrySdk.Init(Configuration.SentryDsn);
+
+            return containerRegistry;
         }
 
         public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
@@ -108,6 +109,7 @@ namespace LiveScore.Configurations
                      ? "images/flag_league/default_flag.svg"
                      : $"{Configuration.AssetsEndPoint}flags/{countryCode}.svg",
                 FuncNameConstants.BuildFlagUrlFuncName);
+
             containerRegistry.RegisterInstance<Action<Action>>(
                 Xamarin.Forms.Device.BeginInvokeOnMainThread,
                 FuncNameConstants.BeginInvokeOnMainThreadFuncName);
@@ -170,6 +172,13 @@ namespace LiveScore.Configurations
             {
                 throw new InvalidOperationException($"Module {nameof(SoccerModule)} doest not exist");
             }
+        }
+
+        private static void SetupServicePointManager()
+        {
+            ServicePointManager.UseNagleAlgorithm = false;
+            ServicePointManager.Expect100Continue = false;
+            ServicePointManager.DefaultConnectionLimit = int.MaxValue;
         }
     }
 }

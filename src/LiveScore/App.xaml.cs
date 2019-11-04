@@ -92,6 +92,7 @@ namespace LiveScore
             => containerRegistry
                 .UseContainerInstance(Container)
                 .UseConfiguration(new Configuration())
+                .UseSentry()
                 .RegisterServices()
                 .RegisterNavigation();
 

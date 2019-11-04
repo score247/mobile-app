@@ -9,5 +9,7 @@
         string AssetsEndPoint { get; }
 
         string AppCenterSecret { get; }
+
+        string SentryDsn { get; }
     }
 }
