@@ -119,7 +119,7 @@ namespace LiveScore.Soccer.Services
                 return;
             }
 
-            var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg.Message}", arg);
+            var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg?.Message}", arg);
 
             await logger
                 .TrackEventAsync(
