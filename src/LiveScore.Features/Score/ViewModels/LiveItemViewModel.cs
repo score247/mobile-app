@@ -25,8 +25,6 @@ namespace LiveScore.Features.Score.ViewModels
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
                 .Subscribe(OnReceivedLiveMatches, true);
-
-            IsLoadingSkeleton = false;
         }
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)

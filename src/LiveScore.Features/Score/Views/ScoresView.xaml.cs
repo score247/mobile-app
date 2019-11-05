@@ -22,7 +22,6 @@ namespace LiveScore.Features.Score.Views
 
         protected override void OnAppearing()
         {
-            var stack = Navigation.NavigationStack;
             if (secondLoad)
             {
                 (BindingContext as ScoresViewModel)?.OnAppearing();

@@ -43,14 +43,13 @@ namespace LiveScore.Features.Score.ViewModels
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             ViewDate = viewDate;
-
+            IsBusy = true;
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             matchStatusBuilder = DependencyResolver.Resolve<IMatchDisplayStatusBuilder>(CurrentSportId.ToString());
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
             RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
-
             InitializeCommand();
         }
 
@@ -61,6 +60,10 @@ namespace LiveScore.Features.Score.ViewModels
         public bool IsActive { get; set; }
 
         public bool IsRefreshing { get; set; }
+
+        public bool IsLoadMore { get; private set; }
+
+        public bool IsNotLoadMore => !IsLoadMore;
 
         public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; protected set; }
 
@@ -225,13 +228,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (RemainingMatchItemSource?.Any() != true)
             {
-                IsLoadingSkeleton = false;
                 return;
             }
 
-            IsLoadingSkeleton = true;
+            IsLoadMore = true;
+            IsBusy = true;
 
-            Task.Delay(800)
+            Task.Delay(1000)
                 .ContinueWith(_ =>
                 {
                     var matchItems = RemainingMatchItemSource.Take(DefaultLoadingMatchItemCountOnScrolling);
@@ -243,6 +246,8 @@ namespace LiveScore.Features.Score.ViewModels
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         MatchItemsSource.AddItems(matchItems);
+
+                        IsBusy = false;
                     });
                 });
         }

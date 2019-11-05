@@ -75,8 +75,6 @@ namespace LiveScore.Core.ViewModels
 
         public bool NoData => !HasData;
 
-        public bool IsLoadingSkeleton { get; protected set; }
-
         public virtual void Initialize(INavigationParameters parameters)
         {
         }
@@ -130,13 +128,11 @@ namespace LiveScore.Core.ViewModels
                  {
                      EventAggregator?.GetEvent<StartLoadDataEvent>()?.Publish();
                      IsBusy = showBusy;
-                     IsLoadingSkeleton = IsBusy;
 
                      await loadDataFunc().ConfigureAwait(false);
 
                      EventAggregator?.GetEvent<StopLoadDataEvent>()?.Publish();
                      IsBusy = false;
-                     IsLoadingSkeleton = IsBusy;
                  })
                  .OnFailedConnection(() => networkConnectionManager.PublishNetworkConnectionEvent());
             }).ConfigureAwait(false);

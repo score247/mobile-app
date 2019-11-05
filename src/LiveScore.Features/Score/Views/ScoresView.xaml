@@ -105,7 +105,7 @@
                                                            SelectionMode="None"
                                                            SeparatorVisibility="None"
                                                            Style="{StaticResource ListViewHasBackground}"
-                                                           TriggerLoadMoreIndex="4"
+                                                           TriggerLoadMoreIndex="1"
                                                            VerticalOptions="FillAndExpand">
                                 <x:Arguments>
                                     <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
@@ -116,7 +116,14 @@
                                                               EventName="ItemTapped" />
                                 </customListView:CustomListView.Behaviors>
                                 <customListView:CustomListView.FooterTemplate>
-                                    <coreTemplates:MatchSkeletonTemplate />
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <coreTemplates:MatchSkeletonTemplate />
+                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                        </StackLayout>
+                                    </DataTemplate>
                                 </customListView:CustomListView.FooterTemplate>
                             </customListView:CustomListView>
                         </StackLayout>

@@ -1,372 +1,186 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<DataTemplate x:Class="LiveScore.Core.Views.Templates.MatchSkeletonTemplate"
-              xmlns="http://xamarin.com/schemas/2014/forms"
-              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
-              xmlns:skeleton="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton">
-    <StackLayout skeleton:Skeleton.IsParent="True"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.Animation="Fade"
-                 IsVisible="{Binding IsLoadingSkeleton}">
-        <StackLayout.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <coreResources:MatchViewResource />
-                    <coreResources:MatchHeaderViewResource />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </StackLayout.Resources>
-        <Grid Style="{StaticResource LeagueBox}"
-              IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="36" />
-            </Grid.ColumnDefinitions>
-            <Label Grid.Row="0"
-                   Grid.Column="0"
-                   Text="Flag"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#3D3E45"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center" />
+<ContentView x:Class="LiveScore.Core.Views.Templates.MatchSkeletonTemplate"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:skeleton="clr-namespace:Xamarin.Forms.Skeleton;assembly=Xamarin.Forms.Skeleton">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <coreResources:MatchViewResource />
+                <coreResources:MatchHeaderViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <StackLayout x:Name="MatchLayout"
+                     skeleton:Skeleton.IsParent="True"
+                     skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                     skeleton:Skeleton.Animation="Fade"
+                     IsVisible="{Binding IsBusy}">
+            <Grid Style="{StaticResource LeagueBox}"
+                  IsVisible="{Binding IsBusy}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="36" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Flag"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                       skeleton:Skeleton.BackgroundColor="#3D3E45"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center" />
 
-            <Label Grid.Row="0"
-                   Grid.Column="1"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Start"
-                   Text="This is league name"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#3D3E45" />
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   LineBreakMode="NoWrap"
-                   VerticalOptions="Center"
-                   Text="20 Jun"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#3D3E45" />
-        </Grid>
-        <Grid IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchStatusContainer}"
-                         skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                         skeleton:Skeleton.BackgroundColor="#2D2E30">
-                <Label LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchStatus}"
-                       Text="FT" />
-            </StackLayout>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchHomeTeam}">
-                <Label Style="{StaticResource Team}"
-                       Text="Home team name"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchAwayTeam}">
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Start"
+                       Text="This is league name"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                       skeleton:Skeleton.BackgroundColor="#3D3E45" />
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       VerticalOptions="Center"
+                       Text="20 Jun"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                       skeleton:Skeleton.BackgroundColor="#3D3E45" />
+            </Grid>
+            <Grid IsVisible="{Binding IsBusy}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="38" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchStatusContainer}"
+                             skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                             skeleton:Skeleton.BackgroundColor="#2D2E30">
+                    <Label LineBreakMode="NoWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="FT" />
+                </StackLayout>
+                <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchHomeTeam}">
+                    <Label Style="{StaticResource Team}"
+                           Text="Home team name"
+                           IsVisible="{Binding IsBusy}"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchAwayTeam}">
 
-                <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                       Style="{StaticResource Team}"
-                       Text="away team"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                    <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
+                           Style="{StaticResource Team}"
+                           Text="away team"
+                           IsVisible="{Binding IsBusy}"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                </StackLayout>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource HomeScore}"
+                       Text="10"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource HomeScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Style="{StaticResource AwayScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 IsVisible="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        <Grid IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchStatusContainer}"
-                         skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                         skeleton:Skeleton.BackgroundColor="#2D2E30">
-                <Label LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchStatus}"
-                       Text="FT" />
-            </StackLayout>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchHomeTeam}">
-                <Label Style="{StaticResource Team}"
-                       Text="Home team name"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       Style="{StaticResource AwayScore}"
+                       Text="10"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchAwayTeam}">
+            </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}"
+                     IsVisible="{Binding IsBusy}"
+                     skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                     skeleton:Skeleton.BackgroundColor="#2D2E30" />
+            <Grid IsVisible="{Binding IsBusy}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="38" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchStatusContainer}"
+                             skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                             skeleton:Skeleton.BackgroundColor="#2D2E30">
+                    <Label LineBreakMode="NoWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="FT" />
+                </StackLayout>
+                <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchHomeTeam}">
+                    <Label Style="{StaticResource Team}"
+                           Text="Home team name"
+                           IsVisible="{Binding IsBusy}"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                </StackLayout>
+                <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             IsVisible="{Binding IsBusy}"
+                             Style="{StaticResource MatchAwayTeam}">
 
-                <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                       Style="{StaticResource Team}"
-                       Text="away team"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                    <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
+                           Style="{StaticResource Team}"
+                           Text="away team"
+                           IsVisible="{Binding IsBusy}"
+                           skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                           skeleton:Skeleton.BackgroundColor="#2D2E30" />
+                </StackLayout>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource HomeScore}"
+                       Text="10"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource HomeScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Style="{StaticResource AwayScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 IsVisible="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        <Grid IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchStatusContainer}"
-                         skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                         skeleton:Skeleton.BackgroundColor="#2D2E30">
-                <Label LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchStatus}"
-                       Text="FT" />
-            </StackLayout>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchHomeTeam}">
-                <Label Style="{StaticResource Team}"
-                       Text="Home team name"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       Style="{StaticResource AwayScore}"
+                       Text="10"
+                       IsVisible="{Binding IsBusy}"
+                       skeleton:Skeleton.IsBusy="{Binding IsBusy}"
                        skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchAwayTeam}">
-
-                <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                       Style="{StaticResource Team}"
-                       Text="away team"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource HomeScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Style="{StaticResource AwayScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 IsVisible="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        <Grid IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchStatusContainer}"
-                         skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                         skeleton:Skeleton.BackgroundColor="#2D2E30">
-                <Label LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchStatus}"
-                       Text="FT" />
-            </StackLayout>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchHomeTeam}">
-                <Label Style="{StaticResource Team}"
-                       Text="Home team name"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchAwayTeam}">
-
-                <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                       Style="{StaticResource Team}"
-                       Text="away team"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource HomeScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Style="{StaticResource AwayScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 IsVisible="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        <Grid IsVisible="{Binding IsLoadingSkeleton}">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="20" />
-                <ColumnDefinition Width="38" />
-            </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0"
-                         Grid.RowSpan="2"
-                         Grid.Column="0"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchStatusContainer}"
-                         skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                         skeleton:Skeleton.BackgroundColor="#2D2E30">
-                <Label LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchStatus}"
-                       Text="FT" />
-            </StackLayout>
-            <StackLayout Grid.Row="0"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchHomeTeam}">
-                <Label Style="{StaticResource Team}"
-                       Text="Home team name"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <StackLayout Grid.Row="1"
-                         Grid.Column="1"
-                         IsVisible="{Binding IsLoadingSkeleton}"
-                         Style="{StaticResource MatchAwayTeam}">
-
-                <Label AutomationId="{Binding Match.Id, StringFormat='AwayTeamName-{0}'}"
-                       Style="{StaticResource Team}"
-                       Text="away team"
-                       IsVisible="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                       skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            </StackLayout>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource HomeScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Style="{StaticResource AwayScore}"
-                   Text="10"
-                   IsVisible="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                   skeleton:Skeleton.BackgroundColor="#2D2E30" />
-        </Grid>
-        <BoxView Style="{StaticResource HorizontalLine}"
-                 IsVisible="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.IsBusy="{Binding IsLoadingSkeleton}"
-                 skeleton:Skeleton.BackgroundColor="#2D2E30" />
-    </StackLayout>
-</DataTemplate>
+            </Grid>
+            <BoxView Style="{StaticResource HorizontalLine}"
+                     IsVisible="{Binding IsBusy}"
+                     skeleton:Skeleton.IsBusy="{Binding IsBusy}"
+                     skeleton:Skeleton.BackgroundColor="#2D2E30" />
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
