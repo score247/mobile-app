@@ -29,10 +29,6 @@ namespace LiveScore.Features.Score.ViewModels
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
 
             InitScoreItemSources();
-
-            LoggingService.LogExceptionAsync(new EntryPointNotFoundException(), "Testing logging service");
-
-            LoggingService.TrackEvent("testing loging service", "Testing logging service");
         }
 
         public byte RangeOfDays { get; } = 2;
