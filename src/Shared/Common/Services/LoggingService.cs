@@ -33,7 +33,7 @@ namespace LiveScore.Common.Services
 
     public class LoggingService : ILoggingService
     {
-        private const string MoreInfo = "more info";
+        private readonly string KeyEmpty = string.Empty;
         private readonly Action<Exception, IDictionary<string, string>> trackError;
         private readonly Action<string, IDictionary<string, string>> trackEvent;
 
@@ -70,7 +70,7 @@ namespace LiveScore.Common.Services
         {
             LogException(exception, new Dictionary<string, string>
             {
-                [MoreInfo] = message
+                [KeyEmpty] = message
             });
         }
 
@@ -96,7 +96,7 @@ namespace LiveScore.Common.Services
         public void TrackEvent(string trackIdentifier, string message)
             => TrackEvent(trackIdentifier, new Dictionary<string, string>
             {
-                [MoreInfo] = message
+                [KeyEmpty] = message
             });
 
         public Task TrackEventAsync(string trackIdentifier, string message)
@@ -130,48 +130,38 @@ namespace LiveScore.Common.Services
             => Capture(CreateSentryEvent(message, false));
 
         public static void LogInfo(string message, IDictionary<string, string> properties)
-           => Capture(CreateSentryEvent(message, properties, false));
+            => Capture(CreateSentryEvent(message, properties, false));
 
         private static SentryEvent CreateSentryEvent(Exception exception)
-           => CreateSentryEvent(exception, string.Empty);
+            => CreateSentryEvent(exception, string.Empty);
 
-        private static SentryEvent CreateSentryEvent(Exception exception, string message, bool isError = true)
-         => CreateSentryEvent(() => new SentryEvent(exception)
-         {
-             Message = (message ?? string.Empty) + exception.Message,
-             Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
-         });
+        private static SentryEvent CreateSentryEvent(Exception exception, string message, bool isErrorEvent = true)
+            => DecorateSentryEvent(() => new SentryEvent(exception) { Message = message }, isErrorEvent);
 
-        private static SentryEvent CreateSentryEvent(string message, bool isError = true)
-            => CreateSentryEvent(() => new SentryEvent
-            {
-                Message = message,
-                Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
-            });
+        private static SentryEvent CreateSentryEvent(string message, bool isErrorEvent = true)
+            => DecorateSentryEvent(() => new SentryEvent { Message = message }, isErrorEvent);
 
-        private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties, bool isError = true)
+        private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties, bool isErrorEvent = true)
         {
             properties.Add("message", message);
 
             var logMessage = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
 
-            return CreateSentryEvent(() => new SentryEvent
-            {
-                Message = logMessage,
-                Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
-            });
+            return DecorateSentryEvent(() => new SentryEvent { Message = logMessage }, isErrorEvent);
         }
 
         private static SentryEvent CreateSentryEvent(Exception exception, IDictionary<string, string> properties)
         {
             var message = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
 
-            return CreateSentryEvent(() => new SentryEvent(exception) { Message = message });
+            return DecorateSentryEvent(() => new SentryEvent(exception) { Message = message });
         }
 
-        private static SentryEvent CreateSentryEvent(Func<SentryEvent> sentryEventCreator)
+        private static SentryEvent DecorateSentryEvent(Func<SentryEvent> sentryEventCreator, bool isErrorEvent = true)
         {
             var sentryEvent = sentryEventCreator.Invoke();
+
+            sentryEvent.Level = isErrorEvent ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info;
 
             sentryEvent.Contexts.Device.Model = Xamarin.Essentials.DeviceInfo.Model;
             sentryEvent.Contexts.Device.Name = Xamarin.Essentials.DeviceInfo.Name;
