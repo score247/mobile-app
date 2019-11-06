@@ -45,10 +45,6 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                await logger
-                    .TrackEventAsync("SoccerHubService", $"HubService start at {DateTime.Now}")
-                    .ConfigureAwait(false);
-
                 hubConnection = hubConnectionBuilder
                     .WithUrl($"{configuration.SignalRHubEndPoint}/soccerhub")
                     .Build();
