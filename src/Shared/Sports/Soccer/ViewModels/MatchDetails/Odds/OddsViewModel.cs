@@ -82,8 +82,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         [Time]
         public override async void OnResumeWhenNetworkOK()
         {
-            await LoggingService
-                              .TrackEventAsync(
+            await LoggingService.TrackEventAsync(
                               $"Odds - {matchId}",
                               $"{DateTime.Now} Selected BetType {SelectedBetType} - OnResumeWhenNetworkOK").ConfigureAwait(false);
 
@@ -135,7 +134,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         public override Task OnNetworkReconnectedAsync() => RefreshCommand.ExecuteAsync();
 
         private void SubscribeEvents()
-            => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
+        {
+            if (eventStatus.IsNotStarted || eventStatus.IsLive)
+            {
+                EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Subscribe(HandleOddsComparisonMessage);
+            }
+        }
 
         private void UnsubscribeEvents()
             => EventAggregator?.GetEvent<OddsComparisonPubSubEvent>().Unsubscribe(HandleOddsComparisonMessage);

@@ -87,7 +87,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             if (parameters?["Match"] is IMatch match)
             {
                 BuildGeneralInfo(match);
-                TabItems = new ObservableCollection<TabItemViewModel>(await GenerateTabItemViewModels(MatchViewModel.Match).ConfigureAwait(false));
+                TabItems = new ObservableCollection<TabItemViewModel>(
+                    await GenerateTabItemViewModels(MatchViewModel.Match)
+                    .ConfigureAwait(false));
                 CountryFlag = buildFlagUrlFunc(MatchViewModel.Match.CountryCode);
             }
         }
@@ -128,18 +130,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         private void SubscribeEvents()
         {
-            if (EventAggregator == null)
+            if (EventAggregator == null || MatchViewModel?.Match == null)
             {
                 return;
             }
 
-            EventAggregator
-                .GetEvent<MatchEventPubSubEvent>()
-                .Subscribe(OnReceivedMatchEvent, true);
+            if (MatchViewModel.Match.EventStatus.IsLive || MatchViewModel.Match.EventStatus.IsNotStarted)
+            {
+                EventAggregator
+                    .GetEvent<MatchEventPubSubEvent>()
+                    .Subscribe(OnReceivedMatchEvent);
 
-            EventAggregator
-                .GetEvent<TeamStatisticPubSubEvent>()
-                .Subscribe(OnReceivedTeamStatistic, true);
+                EventAggregator
+                    .GetEvent<TeamStatisticPubSubEvent>()
+                    .Subscribe(OnReceivedTeamStatistic);
+            }
         }
 
         private void UnSubscribeEvents()

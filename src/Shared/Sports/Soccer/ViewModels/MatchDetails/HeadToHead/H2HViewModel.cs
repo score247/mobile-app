@@ -88,7 +88,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             base.OnAppearing();
 
-            await LoadDataAsync(LoadHeadToHeadAsync);
+            if (IsFirstLoad)
+            {
+                await LoadDataAsync(LoadHeadToHeadAsync);
+            }
         }
 
         public override async void OnResumeWhenNetworkOK()

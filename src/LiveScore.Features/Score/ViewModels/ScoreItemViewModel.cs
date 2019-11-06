@@ -133,11 +133,11 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 EventAggregator
                     .GetEvent<MatchEventPubSubEvent>()
-                    .Subscribe(OnReceivedMatchEvent, true);
+                    .Subscribe(OnReceivedMatchEvent);
 
                 EventAggregator
                     .GetEvent<TeamStatisticPubSubEvent>()
-                    .Subscribe(OnReceivedTeamStatistic, true);
+                    .Subscribe(OnReceivedTeamStatistic);
             }
         }
 

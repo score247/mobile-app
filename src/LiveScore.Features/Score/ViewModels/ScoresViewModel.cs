@@ -23,7 +23,6 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
 
         {
-
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
