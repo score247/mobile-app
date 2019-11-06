@@ -45,6 +45,12 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
+            if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matches?.Any() == true)
+            {
+                InitializeMatchItems(matches);
+                return;
+            }
+
             var currentMatches = MatchItemsSource
                 .SelectMany(g => g)
                 .Select(vm => vm.Match);
