@@ -46,7 +46,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
-            OnTeamResultTapped = new DelegateAsyncCommand<string>(LoadTeamResult);
+            OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
             OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadDataAsync(LoadHeadToHeadAsync));
             RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
@@ -67,7 +67,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         public H2HStatisticViewModel Stats { get; private set; }
 
-        public DelegateAsyncCommand<string> OnTeamResultTapped { get; }
+        public DelegateCommand<string> OnTeamResultTapped { get; }
 
         public DelegateAsyncCommand OnHeadToHeadTapped { get; }
 
@@ -109,24 +109,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             IsRefreshing = false;
         }
 
-        internal async Task LoadTeamResult(string teamIdentifier)
+        internal void LoadTeamResult(string teamIdentifier)
         {
             VisibleHomeResults = teamIdentifier == HomeIdentifier;
             VisibleAwayResults = !VisibleHomeResults;
-
-            var homeTeamId = "sr:competitor:7424";
-            var awayTeamId = "sr:competitor:7423";
-
-            var teamResults = Enumerable.Empty<IMatch>();
-
-            if (VisibleHomeResults)
-            {
-                teamResults = await teamService.GetTeamResultsAsync(homeTeamId, awayTeamId, CurrentLanguage.DisplayName);
-            }
-            else
-            {
-                teamResults = await teamService.GetTeamResultsAsync(awayTeamId, homeTeamId, CurrentLanguage.DisplayName);
-            }
 
             VisibleHeadToHead = false;
             HasData = true;
