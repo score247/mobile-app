@@ -5,11 +5,15 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <AssemblyName>LiveScore.PerformanceProfilers</AssemblyName>
     <RootNamespace>LiveScore.PerformanceProfilers</RootNamespace>
-    <Configurations>Debug;Release;DevRelease</Configurations>
+    <Configurations>Debug;Release;DevRelease;Test</Configurations>
     <SonarQubeExclude>True</SonarQubeExclude>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CodeAnalysisRuleSet>LiveScore.PerformanceProfilers-1.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Test|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScore.PerformanceProfilers-1.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
 
