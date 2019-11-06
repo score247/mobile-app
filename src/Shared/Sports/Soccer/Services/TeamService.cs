@@ -35,5 +35,19 @@ namespace LiveScore.Soccer.Services
                 return null;
             }
         }
+
+        public async Task<IEnumerable<IMatch>> GetTeamResultsAsync(string teamId, string opponentTeamId, string language)
+        {
+            try
+            {
+                return await apiService.Execute(() => teamApi.GetTeamResults(language, teamId, opponentTeamId)).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return null;
+            }
+        }
     }
 }

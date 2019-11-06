@@ -7,5 +7,7 @@ namespace LiveScore.Core.Services
     public interface ITeamService
     {
         Task<IEnumerable<IMatch>> GetHeadToHeadsAsync(string teamId1, string teamId2, string language);
+
+        Task<IEnumerable<IMatch>> GetTeamResultsAsync(string teamId, string opponentTeamId, string language);
     }
 }

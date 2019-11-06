@@ -58,6 +58,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{lang}/teams/{teamId1}/versus/{teamId2}")]
             Task<IEnumerable<SoccerMatch>> GetHeadToHeads(string lang, string teamId1, string teamId2);
+            
+            [Get("/soccer/{lang}/teams/{teamId}/results/?opponentTeamId={opponentTeamId}")]
+            Task<IEnumerable<SoccerMatch>> GetTeamResults(string lang, string teamId, string opponentTeamId);
         }
     }
 }
