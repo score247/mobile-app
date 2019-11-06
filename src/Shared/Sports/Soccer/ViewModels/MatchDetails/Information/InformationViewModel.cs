@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
-using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Soccer.Extensions;
@@ -170,13 +168,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
             matchInfo
                 .UpdateTimelineEvents(matchInfo.FilterPenaltyEvents()?
                 .OrderByDescending(t => t.MatchTime)
-                .ThenByDescending(t=> t.Time));
+                .ThenByDescending(t => t.Time));
 
             var timelineEvents = matchInfo.TimelineEvents
                 .Where(t => t.IsDetailInfoEvent())
                 .Distinct()
                 .ToList();
-            
+
             if (timelineEvents != null)
             {
                 InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(

@@ -55,6 +55,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private MatchDetailFunction selectedTabItem;
         private readonly ISoccerMatchService soccerMatchService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
+        private string currentMatchId;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -86,6 +87,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         {
             if (parameters?["Match"] is IMatch match)
             {
+                currentMatchId = match.Id;
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(
                     await GenerateTabItemViewModels(MatchViewModel.Match)
@@ -94,39 +96,62 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
         }
 
-        public override void OnResumeWhenNetworkOK()
-        {
-            tabItemViewModels[selectedTabItem]?.OnResumeWhenNetworkOK();
-
-            SubscribeEvents();
-        }
-
-        public override void OnSleep()
-        {
-            tabItemViewModels[selectedTabItem]?.OnSleep();
-
-            UnSubscribeEvents();
-        }
-
-        public override void OnDisappearing()
-        {
-            tabItemViewModels[selectedTabItem]?.OnDisappearing();
-
-            UnSubscribeEvents();
-        }
-
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
             if (selectedTabItem != null)
             {
                 tabItemViewModels[selectedTabItem]?.OnAppearing();
             }
 
+            var matchInfo = await GetMatch(currentMatchId);
+            BuildViewModel(matchInfo.Match);
+
             SubscribeEvents();
         }
 
-        public override Task OnNetworkReconnectedAsync()
-            => tabItemViewModels[selectedTabItem]?.OnNetworkReconnectedAsync();
+        public override async void OnResumeWhenNetworkOK()
+        {
+            if (selectedTabItem != null)
+            {
+                tabItemViewModels[selectedTabItem]?.OnResumeWhenNetworkOK();
+            }
+
+            var matchInfo = await GetMatch(currentMatchId);
+            BuildViewModel(matchInfo.Match);
+
+            SubscribeEvents();
+        }
+
+        public override void OnSleep()
+        {
+            if (selectedTabItem != null)
+            {
+                tabItemViewModels[selectedTabItem]?.OnSleep();
+            }
+
+            UnSubscribeEvents();
+        }
+
+        public override void OnDisappearing()
+        {
+            if (selectedTabItem != null)
+            {
+                tabItemViewModels[selectedTabItem]?.OnDisappearing();
+            }
+
+            UnSubscribeEvents();
+        }
+
+        public override async Task OnNetworkReconnectedAsync()
+        {
+            if (selectedTabItem != null)
+            {
+                await tabItemViewModels[selectedTabItem]?.OnNetworkReconnectedAsync();
+            }
+
+            var matchInfo = await GetMatch(currentMatchId);
+            BuildViewModel(matchInfo.Match);
+        }
 
         private void SubscribeEvents()
         {
@@ -258,5 +283,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 selectedTabItem = Enumeration.FromValue<MatchDetailFunction>(args.Index);
             }
         }
+
+        private Task<MatchInfo> GetMatch(string id)
+            => soccerMatchService.GetMatchAsync(id, CurrentLanguage);
     }
 }
