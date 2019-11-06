@@ -170,7 +170,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                 if (matchCommentaries.Count > 0)
                 {
                     FullMatchCommentaries = matchCommentaries
-                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver)); ;
+                        .Select(c => new CommentaryItemViewModel(c, DependencyResolver)); 
                     DefaultMatchCommentaries = FullMatchCommentaries.Take(DefaultLoadingCommentaryItemCount);
 
                     MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);

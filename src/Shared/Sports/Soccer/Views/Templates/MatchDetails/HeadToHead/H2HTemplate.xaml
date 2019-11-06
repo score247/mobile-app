@@ -9,7 +9,8 @@
               xmlns:headToHead="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;assembly=LiveScore.Soccer"
               xmlns:collectionViewTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate">
+              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate"
+              xmlns:h2h="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;assembly=LiveScore.Soccer">
     <StackLayout BackgroundColor="{StaticResource ListViewLightBgColor}">
         <StackLayout.Resources>
             <ResourceDictionary>
@@ -22,14 +23,13 @@
                 <collectionViewTemplates:H2HMatchGroupHeaderTemplate x:Key="MatchGroupHeaderTemplate" />
                 <collectionViewTemplates:H2HMatchItemTemplate x:Key="MatchItemTemplate" />
                 <collectionViewTemplates:H2HHeaderTemplate x:Key="HeaderTemplate" />
+                <h2h:H2HTemplateSelector x:Key="H2HItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
 
         <headToHead:H2HOptionsTemplate />
-        <!--<headToHead:H2HHomeTeamTemplate />-->
 
-        <Frame Style="{StaticResource MatchDetailH2HContainer}"
-               IsVisible="{Binding VisibleHeadToHead}">
+        <Frame Style="{StaticResource MatchDetailH2HContainer}">
             <StackLayout>
                 <ActivityIndicator Margin="40"
                                    IsRunning="{Binding IsBusy}"
@@ -42,7 +42,7 @@
                     <tabStrip:TabItemCollectionView x:Name="H2HMatches"
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                                                    ItemTemplate="{StaticResource MatchItemTemplate}"
+                                                    ItemTemplate="{StaticResource H2HItemTemplateSelector}"
                                                     ItemsSource="{Binding Matches}"
                                                     Header="{Binding .}"
                                                     IsVisible="{Binding IsNotBusy}"
@@ -64,7 +64,5 @@
                 </RefreshView>
             </StackLayout>
         </Frame>
-
-        <!--<headToHead:H2HAwayTeamTemplate />-->
     </StackLayout>
 </DataTemplate>

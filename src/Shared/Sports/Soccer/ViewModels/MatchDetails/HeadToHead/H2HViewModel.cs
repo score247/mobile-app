@@ -12,7 +12,6 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -46,7 +45,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
-            OnTeamResultTapped = new DelegateCommand<string>(LoadTeamResult);
+            OnTeamResultTapped = new DelegateAsyncCommand<string>(LoadTeamResult);
             OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadDataAsync(LoadHeadToHeadAsync));
             RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
@@ -65,9 +64,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         public string AwayTeamName { get; private set; }
 
+        public string SelectedTeamId { get; private set; }
+
         public H2HStatisticViewModel Stats { get; private set; }
 
-        public DelegateCommand<string> OnTeamResultTapped { get; }
+        public DelegateAsyncCommand<string> OnTeamResultTapped { get; }
 
         public DelegateAsyncCommand OnHeadToHeadTapped { get; }
 
@@ -112,17 +113,41 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             IsRefreshing = false;
         }
 
-        internal void LoadTeamResult(string teamIdentifier)
+        internal async Task LoadTeamResult(string teamIdentifier)
         {
             VisibleHomeResults = teamIdentifier == HomeIdentifier;
             VisibleAwayResults = !VisibleHomeResults;
-
             VisibleHeadToHead = false;
+            VisibleStats = false;
+
+            var homeTeamId = "sr:competitor:7424";
+            var awayTeamId = "sr:competitor:7423";
+
+            var teamResults = Enumerable.Empty<IMatch>();
+
+            if (VisibleHomeResults)
+            {
+                SelectedTeamId = homeTeamId;
+                teamResults = await teamService.GetTeamResultsAsync(homeTeamId, awayTeamId, CurrentLanguage.DisplayName);
+            }
+            else
+            {
+                SelectedTeamId = awayTeamId;
+                teamResults = await teamService.GetTeamResultsAsync(awayTeamId, homeTeamId, CurrentLanguage.DisplayName);
+            }
+
+            Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
+
+            
             HasData = true;
         }
 
         internal async Task LoadHeadToHeadAsync()
         {
+            VisibleHeadToHead = true;
+            VisibleHomeResults = !VisibleHeadToHead;
+            VisibleAwayResults = !VisibleHeadToHead;
+
             try
             {
                 var headToHeads = (await teamService.GetHeadToHeadsAsync(
@@ -148,11 +173,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
                 HasData = false;
             }
-
-            VisibleHeadToHead = true;
-
-            VisibleHomeResults = false;
-            VisibleAwayResults = false;
         }
 
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
@@ -160,7 +180,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             var matchGroups
                 = headToHeads
                     .OrderByDescending(match => match.EventDate)
-                    .Select(match => new SummaryMatchViewModel(match, matchStatusBuilder))
+                    .Select(match => new SummaryMatchViewModel(match, matchStatusBuilder, VisibleHeadToHead, SelectedTeamId))
                     .GroupBy(item => new H2HMatchGrouping(item.Match));
 
             return matchGroups.Select(group => new H2HMatchGroupViewModel(group.ToList(), buildFlagUrlFunc));

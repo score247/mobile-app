@@ -157,6 +157,11 @@
             <Color x:Key="UpLiveOddColor">#66FF59</Color>
             <Color x:Key="DownLiveOddColor">#FF222C</Color>
 
+            <!--  H2H  -->
+            <Color x:Key="DrawIconColor">#FF7246</Color>
+            <Color x:Key="WinIconColor">#00B300</Color>
+            <Color x:Key="LoseIconColor">#FF0000</Color>
+
             <!--  Commentary  -->
             <Color x:Key="YellowCardColor">#FFE600</Color>
             <Color x:Key="RedCardColor">#FF3030</Color>

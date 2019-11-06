@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
+    <Compile Remove="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ViewResources\MatchDetailH2HViewResource.xaml.cs">
@@ -69,9 +70,6 @@
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\SoccerMatchListViewTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs">
-      <DependentUpon>H2HHomeTeamTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
@@ -140,12 +138,6 @@
     <EmbeddedResource Remove="..\..\..\CommonResources\Html\theme.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HAwayTeamTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HOptionsTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
