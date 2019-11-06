@@ -124,33 +124,42 @@ namespace LiveScore.Common.Services
             => Capture(CreateSentryEvent(exception, message));
 
         public static Task LogInfoAsync(string message)
-            => CaptureAsync(CreateSentryEvent(message));
+            => CaptureAsync(CreateSentryEvent(message, false));
 
         public static void LogInfo(string message)
-            => Capture(CreateSentryEvent(message));
+            => Capture(CreateSentryEvent(message, false));
 
         public static void LogInfo(string message, IDictionary<string, string> properties)
-           => Capture(CreateSentryEvent(message, properties));
+           => Capture(CreateSentryEvent(message, properties, false));
 
         private static SentryEvent CreateSentryEvent(Exception exception)
            => CreateSentryEvent(exception, string.Empty);
 
-        private static SentryEvent CreateSentryEvent(Exception exception, string message)
+        private static SentryEvent CreateSentryEvent(Exception exception, string message, bool isError = true)
          => CreateSentryEvent(() => new SentryEvent(exception)
          {
-             Message = (message ?? string.Empty) + exception.Message
+             Message = (message ?? string.Empty) + exception.Message,
+             Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
          });
 
-        private static SentryEvent CreateSentryEvent(string message)
-            => CreateSentryEvent(() => new SentryEvent { Message = message });
+        private static SentryEvent CreateSentryEvent(string message, bool isError = true)
+            => CreateSentryEvent(() => new SentryEvent
+            {
+                Message = message,
+                Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
+            });
 
-        private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties)
+        private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties, bool isError = true)
         {
             properties.Add("message", message);
 
             var logMessage = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
 
-            return CreateSentryEvent(() => new SentryEvent { Message = logMessage });
+            return CreateSentryEvent(() => new SentryEvent
+            {
+                Message = logMessage,
+                Level = isError ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info
+            });
         }
 
         private static SentryEvent CreateSentryEvent(Exception exception, IDictionary<string, string> properties)
