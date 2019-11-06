@@ -11,7 +11,7 @@ namespace LiveScore.Common.Tests.Services
     public class LoggingServiceTests
     {
         private readonly ILoggingService loggingService;
-
+        private readonly string KeyEmpty = string.Empty;
         private readonly Action<Exception, IDictionary<string, string>> trackError;
         private readonly Action<string, IDictionary<string, string>> trackEvent;
         private readonly Func<bool> isSentryEnable;
@@ -28,7 +28,7 @@ namespace LiveScore.Common.Tests.Services
         }
 
         [Fact]
-        public void LogException_Always_Invoke_TrackerErrorAction_With_ClientInformation()
+        public void LogException_Always_InvokeTrackErrorWithParamIsDictionaryContainsEmptyMessage()
         {
             // Arrange
             var exception = fixture.Create<Exception>();
@@ -39,11 +39,12 @@ namespace LiveScore.Common.Tests.Services
             // Assert
             trackError
                 .Received()
-                .Invoke(exception, null);
+                .Invoke(exception, Arg.Is<Dictionary<string, string>>(
+                    arg => arg[KeyEmpty] == string.Empty));
         }
 
         [Fact]
-        public void LogException_With_CustomMessage_Call_Tracker_Error_With_TheMessage()
+        public void LogException_ParamIsMessage_InvokeTrackErrorWithParamIsTheMessage()
         {
             // Arrange
             var message = fixture.Create<string>();
@@ -55,36 +56,48 @@ namespace LiveScore.Common.Tests.Services
             // Assert
             trackError
                 .Received()
-                .Invoke(exception, Arg.Is<Dictionary<string, string>>(
-                    arg => arg["message"] == message));
+                .Invoke(exception, Arg.Is<IDictionary<string, string>>(
+                    arg => arg[KeyEmpty] == message));
         }
 
         [Fact]
-        public async Task LogExceptionAsync_ExceptionLog_Always_InvokeLogExceptionActionWithSpecifiedParams()
+        public void LogException_ParamIsDictionary_InvokeTrackErrorWithParamIsDictionaryContainsTheMessage()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var exception = fixture.Create<Exception>();
+
+            // Act
+            loggingService.LogException(exception, properties);
+
+            // Assert
+            trackError
+                .Received()
+                .Invoke(exception, properties);
+        }
+
+        [Fact]
+        public async Task LogExceptionAsync_ParamIsException_InvokeTrackErrorWithParamIsDictionaryContainsEmptyMessage()
         {
             // Arrange
             var exception = fixture.Create<Exception>();
-            Action<Exception> logExceptionTask = (ex) => trackError(ex, null);
 
             // Act
-            await loggingService
-                .LogExceptionAsync(exception)
-                .ConfigureAwait(false);
+            await loggingService.LogExceptionAsync(exception).ConfigureAwait(false);
 
             // Assert
-            logExceptionTask.Invoke(exception);
+            trackError
+               .Received()
+               .Invoke(exception, Arg.Is<Dictionary<string, string>>(
+                   arg => arg[KeyEmpty] == string.Empty));
         }
 
         [Fact]
-        public async Task LogExceptionAsync_ExceptionAndCustomMessage_Always_InvokeLogExceptionActionWithSpecifiedParams()
+        public async Task LogExceptionAsync_ParamIsMessage_InvokeTrackErrorWithParamIsDictionaryContainsTheMessage()
         {
             // Arrange
             var message = fixture.Create<string>();
             var exception = fixture.Create<Exception>();
-            void logExceptionTask(Exception ex, string msg)
-                => trackError(
-                    ex,
-                    new Dictionary<string, string> { ["Message"] = msg });
 
             // Act
             await loggingService
@@ -92,11 +105,32 @@ namespace LiveScore.Common.Tests.Services
                 .ConfigureAwait(false);
 
             // Assert
-            logExceptionTask(exception, message);
+            trackError
+                .Received()
+                .Invoke(exception, Arg.Is<Dictionary<string, string>>(
+                    arg => arg[KeyEmpty] == message));
         }
 
         [Fact]
-        public void TrackEvent_Always_Invoke_TrackEventAction_Function_With_ClientInformation()
+        public async Task LogExceptionAsync_ParamIsDictionary_InvokeTrackErrorWithParamIsTheDictionary()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var exception = fixture.Create<Exception>();
+
+            // Act
+            await loggingService
+                .LogExceptionAsync(exception, properties)
+                .ConfigureAwait(false);
+
+            // Assert
+            trackError
+                .Received()
+                .Invoke(exception, properties);
+        }
+
+        [Fact]
+        public void TrackEvent_ParamIsMessage_InvokeTrackEventWithParamIsTheMessage()
         {
             // Arrange
             var message = fixture.Create<string>();
@@ -109,7 +143,60 @@ namespace LiveScore.Common.Tests.Services
             trackEvent
                 .Received()
                 .Invoke(trackIndentifier, Arg.Is<Dictionary<string, string>>(
-                    arg => arg["message"] == message));
+                    arg => arg[KeyEmpty] == message));
+        }
+
+      
+
+        [Fact]
+        public void TrackEvent_ParamIsDictionary_InvokeTrackEventWithParamIsDictionary()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var trackIndentifier = fixture.Create<string>();
+
+            // Act
+            loggingService.TrackEvent(trackIndentifier, properties);
+
+            // Assert
+            trackEvent
+                .Received()
+                .Invoke(trackIndentifier, properties);
+        }
+
+        [Fact]
+        public async Task TrackEventAsync_ParamIsMessage_InvokeTrackEventWithParamIsTheMessage()
+        {
+            // Arrange
+            var message = fixture.Create<string>();
+            var trackIndentifier = fixture.Create<string>();
+
+            // Act
+            await loggingService.TrackEventAsync(trackIndentifier, message);
+
+            // Assert
+            trackEvent
+                .Received()
+                .Invoke(trackIndentifier, Arg.Is<Dictionary<string, string>>(
+                    arg => arg[KeyEmpty] == message));
+        }
+
+
+
+        [Fact]
+        public async Task TrackEventAsync_ParamIsDictionary_InvokeTrackEventWithParamIsDictionary()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var trackIndentifier = fixture.Create<string>();
+
+            // Act
+            await loggingService.TrackEventAsync(trackIndentifier, properties);
+
+            // Assert
+            trackEvent
+                .Received()
+                .Invoke(trackIndentifier, properties);
         }
     }
 }

@@ -67,17 +67,10 @@ namespace LiveScore.Common.Services
             => LogException(exception, string.Empty);
 
         public void LogException(Exception exception, string message)
-        {
-            LogException(exception, new Dictionary<string, string>
-            {
-                [KeyEmpty] = message
-            });
-        }
+            => LogException(exception, new Dictionary<string, string> { [KeyEmpty] = message });
 
         public void LogException(Exception exception, IDictionary<string, string> properties)
-        {
-            trackError(exception, properties);
-        }
+            => trackError(exception, properties);
 
         public Task LogExceptionAsync(Exception exception)
             => Task.Run(() => LogException(exception));
@@ -89,15 +82,10 @@ namespace LiveScore.Common.Services
             => Task.Run(() => LogException(exception, properties));
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
-        {
-            trackEvent(trackIdentifier, properties);
-        }
+            => trackEvent(trackIdentifier, properties);
 
         public void TrackEvent(string trackIdentifier, string message)
-            => TrackEvent(trackIdentifier, new Dictionary<string, string>
-            {
-                [KeyEmpty] = message
-            });
+            => TrackEvent(trackIdentifier, new Dictionary<string, string> { [KeyEmpty] = message });
 
         public Task TrackEventAsync(string trackIdentifier, string message)
             => Task.Run(() => TrackEvent(trackIdentifier, message));
@@ -152,16 +140,18 @@ namespace LiveScore.Common.Services
 
         private static SentryEvent CreateSentryEvent(Exception exception, IDictionary<string, string> properties)
         {
-            var message = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
+            var logMessage = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
 
-            return DecorateSentryEvent(() => new SentryEvent(exception) { Message = message });
+            return DecorateSentryEvent(() => new SentryEvent(exception) { Message = logMessage });
         }
 
         private static SentryEvent DecorateSentryEvent(Func<SentryEvent> sentryEventCreator, bool isErrorEvent = true)
         {
             var sentryEvent = sentryEventCreator.Invoke();
 
-            sentryEvent.Level = isErrorEvent ? Sentry.Protocol.SentryLevel.Error : Sentry.Protocol.SentryLevel.Info;
+            sentryEvent.Level = isErrorEvent
+                ? Sentry.Protocol.SentryLevel.Error
+                : Sentry.Protocol.SentryLevel.Info;
 
             sentryEvent.Contexts.Device.Model = Xamarin.Essentials.DeviceInfo.Model;
             sentryEvent.Contexts.Device.Name = Xamarin.Essentials.DeviceInfo.Name;
@@ -176,13 +166,9 @@ namespace LiveScore.Common.Services
         }
 
         private static void Capture(SentryEvent sentryEvent)
-        {
-            SentrySdk.CaptureEvent(sentryEvent);
-        }
+            => SentrySdk.CaptureEvent(sentryEvent);
 
         private static Task CaptureAsync(SentryEvent sentryEvent)
-        {
-            return Task.Run(() => Capture(sentryEvent));
-        }
+            => Task.Run(() => Capture(sentryEvent));
     }
 }
