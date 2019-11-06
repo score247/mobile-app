@@ -1,18 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -100,7 +103,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
 
         private void SubscribeEvents()
         {
-            if (match.EventStatus.IsLive)
+            if (match.EventStatus.IsNotStarted || match.EventStatus.IsLive)
             {
                 eventAggregator
                     .GetEvent<MatchEventPubSubEvent>()
@@ -115,6 +118,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                 .Unsubscribe(OnReceivedMatchEvent);
         }
 
+        [Time]
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
             if (matchEventMessage.SportId != CurrentSportId
@@ -165,13 +169,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
 
             matchInfo
                 .UpdateTimelineEvents(matchInfo.FilterPenaltyEvents()?
-                .OrderByDescending(t => t.Time));
+                .OrderByDescending(t => t.MatchTime)
+                .ThenByDescending(t=> t.Time));
 
             var timelineEvents = matchInfo.TimelineEvents
                 .Where(t => t.IsDetailInfoEvent())
                 .Distinct()
                 .ToList();
-
+            
             if (timelineEvents != null)
             {
                 InfoItemViewModels = new ObservableCollection<BaseItemViewModel>(
