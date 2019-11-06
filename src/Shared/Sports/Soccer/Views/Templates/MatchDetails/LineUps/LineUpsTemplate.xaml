@@ -35,9 +35,10 @@
                                             Header="{Binding .}">
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
-                        <Grid IsVisible="{Binding IsNotBusy}">
-                            <StackLayout IsVisible="{Binding HasData}">
+                        <StackLayout IsVisible="{Binding IsNotBusy}">
+                            <Grid IsVisible="{Binding HasData}">
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                            IsVisible="{Binding HasFormation}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
                                            Text="{Binding LineupsHeader.HomeName}" />
@@ -45,20 +46,60 @@
                                            Text="{Binding LineupsHeader.HomeFormation}" />
                                 </FlexLayout>
                                 <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
+                                         IsVisible="{Binding HasFormation}"
                                          Source="{Binding LineupsHeader.LineupsPitchView}" />
+                                <tabStrip:TabItemCollectionView ItemsSource="{Binding NoFormationLineupsPlayers}"
+                                                                    IsVisible="{Binding NoFormation}"
+                                                                    ItemsLayout="VerticalList">
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout>
+                                                <BoxView Style="{StaticResource HorizontalLine}" />
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                                        <ColumnDefinition Width="*" />
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                                                        <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                                                        <ColumnDefinition Width="*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="42" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label Grid.Column="2"
+                                                           Text="{Binding HomeJerseyNumber}"
+                                                           Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
+                                                    <Label Grid.Column="3"
+                                                           Text="{Binding HomeName}"
+                                                           Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                                                    <Label Grid.Column="6"
+                                                           Text="{Binding AwayJerseyNumber}"
+                                                           Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
+                                                    <Label Grid.Column="7"
+                                                           Text="{Binding AwayName}"
+                                                           Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                                                </Grid>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </tabStrip:TabItemCollectionView>
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                            IsVisible="{Binding HasFormation}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
                                            Text="{Binding LineupsHeader.AwayName}" />
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
                                            Text="{Binding LineupsHeader.AwayFormation}" />
                                 </FlexLayout>
-                            </StackLayout>
+                            </Grid>
                             <Label Style="{StaticResource NoInfo}"
                                    Text="{languageResources:Translate NoData}"
                                    IsVisible="{Binding NoData}"
                                    AutomationId="NoDataLabel" />
-                        </Grid>
+                        </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate>
                 <CollectionView.GroupHeaderTemplate>
