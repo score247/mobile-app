@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Extensions;
@@ -104,7 +103,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             var matchInfo = await GetMatch(currentMatchId);
-            BuildViewModel(matchInfo.Match);
+
+            if (matchInfo?.Match != null)
+            {
+                BuildViewModel(matchInfo.Match);
+            }
 
             SubscribeEvents();
         }
@@ -117,7 +120,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             var matchInfo = await GetMatch(currentMatchId);
-            BuildViewModel(matchInfo.Match);
+
+            if (matchInfo?.Match != null)
+            {
+                BuildViewModel(matchInfo.Match);
+            }
 
             SubscribeEvents();
         }
@@ -150,7 +157,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             var matchInfo = await GetMatch(currentMatchId);
-            BuildViewModel(matchInfo.Match);
+
+            if (matchInfo?.Match != null)
+            {
+                BuildViewModel(matchInfo.Match);
+            }
         }
 
         private void SubscribeEvents()
