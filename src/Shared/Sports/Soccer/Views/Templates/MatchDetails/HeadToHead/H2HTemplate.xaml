@@ -29,7 +29,7 @@
 
         <headToHead:H2HOptionsTemplate />
 
-        <Frame Style="{StaticResource MatchDetailH2HContainer}">
+        <Frame Style="{StaticResource MatchDetailH2HContainer}" IsVisible="{Binding VisibleHeadToHead}">
             <StackLayout>
                 <ActivityIndicator Margin="40"
                                    IsRunning="{Binding IsBusy}"
@@ -48,6 +48,40 @@
                                                     IsVisible="{Binding IsNotBusy}"
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     HeaderTemplate="{StaticResource HeaderTemplate}"
+                                                    BackgroundColor="{StaticResource ListViewBgColor}">
+                        <CollectionView.GroupFooterTemplate>
+                            <DataTemplate>
+                                <StackLayout></StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupFooterTemplate>
+                        <CollectionView.Footer>
+                            <StackLayout BackgroundColor="Transparent"
+                                         HeightRequest="400">
+                                <Label Text=" "></Label>
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </tabStrip:TabItemCollectionView>
+                </RefreshView>
+            </StackLayout>
+        </Frame>
+
+        <Frame Style="{StaticResource MatchDetailH2HContainer}" IsVisible="{Binding VisibleTeamResults}">
+            <StackLayout IsVisible="{Binding VisibleTeamResults}">
+                <ActivityIndicator Margin="40"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   Style="{StaticResource CenterActivityIndicator}"
+                                   VerticalOptions="StartAndExpand" />
+                <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                             Command="{Binding RefreshCommand}"
+                             RefreshColor="White">
+                    <tabStrip:TabItemCollectionView x:Name="TeamResults"
+                                                    IsGrouped="True"
+                                                    GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                                                    ItemTemplate="{StaticResource H2HItemTemplateSelector}"
+                                                    ItemsSource="{Binding Matches}"
+                                                    IsVisible="{Binding VisibleTeamResults}"
+                                                    ItemSizingStrategy="MeasureFirstItem"
                                                     BackgroundColor="{StaticResource ListViewBgColor}">
                         <CollectionView.GroupFooterTemplate>
                             <DataTemplate>

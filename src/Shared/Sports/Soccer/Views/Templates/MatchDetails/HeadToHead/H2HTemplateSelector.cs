@@ -8,9 +8,9 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead
     {
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
-            if (item is SummaryMatchViewModel)
+            if (item is H2HMatchViewModel)
             {
-                var itemViewModel = item as SummaryMatchViewModel;
+                var itemViewModel = item as H2HMatchViewModel;
 
                 if (itemViewModel.IsH2H)
                 {

@@ -4,10 +4,10 @@ using System.Linq;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 {
-    public class H2HMatchGroupViewModel : List<SummaryMatchViewModel>
+    public class H2HMatchGroupViewModel : List<H2HMatchViewModel>
     {
         public H2HMatchGroupViewModel(
-            IList<SummaryMatchViewModel> matches,
+            IList<H2HMatchViewModel> matches,
             Func<string, string> buildFlagUrl) : base(matches)
         {
             var match = this.FirstOrDefault()?.Match;

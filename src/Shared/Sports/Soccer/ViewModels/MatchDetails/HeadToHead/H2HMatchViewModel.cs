@@ -9,20 +9,22 @@ using PropertyChanged;
 namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 {
     [AddINotifyPropertyChangedInterface]
-    public class SummaryMatchViewModel : BaseViewModel
+    public class H2HMatchViewModel : BaseViewModel
     {
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
 
-        public SummaryMatchViewModel(
-            IMatch match,
-            IMatchDisplayStatusBuilder matchDisplayStatusBuilder,
+        public H2HMatchViewModel(
             bool isH2H,
-            string teamId)
+            string teamId,
+            IMatch match,
+            IMatchDisplayStatusBuilder matchDisplayStatusBuilder
+            )
         {
-            this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
             IsH2H = isH2H;
 
-            BuildMatch(match, teamId);
+            this.matchDisplayStatusBuilder = matchDisplayStatusBuilder;
+
+            BuildMatch(teamId, match);
         }
 
         public IMatch Match { get; private set; }
@@ -35,7 +37,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         public string Result { get; private set; }
 
-        public void BuildMatch(IMatch match, string teamId)
+        public void BuildMatch(string teamId, IMatch match)
         {
             if (match == null)
             {
@@ -45,7 +47,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             Match = match;
             DisplayEventDate = BuildDisplayEventDate(match);
             DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
-            Result = BuildTeamResult(match, teamId);
+            Result = BuildTeamResult(teamId, match);
         }
 
         private static string BuildDisplayEventDate(IMatch match)
@@ -57,16 +59,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                 : match.EventDate.ToLocalYear();
         }
 
-        private static string BuildTeamResult(IMatch match, string teamId)
+        private static string BuildTeamResult(string teamId, IMatch match)
         {
             if (string.IsNullOrWhiteSpace(match.WinnerId))
             {
                 return TeamResult.Draw.DisplayName;
             }
-            else
-            {
-                return match.WinnerId == teamId ? TeamResult.Win.DisplayName : TeamResult.Loose.DisplayName;
-            }
+
+            return match.WinnerId == teamId
+                ? TeamResult.Win.DisplayName
+                : TeamResult.Loose.DisplayName;
         }
     }
 }
