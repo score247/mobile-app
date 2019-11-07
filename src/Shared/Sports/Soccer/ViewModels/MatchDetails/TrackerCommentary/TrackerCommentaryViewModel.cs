@@ -162,10 +162,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             {
                 var matchCommentaries = (await soccerMatchService
                         .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage))
-                    .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
-                    .OrderByDescending(t => t.MatchTime)
-                    .ThenByDescending(t => t.Time)
-                    .ToList();
+                        .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
+                        .OrderByDescending(t => t.MatchTime)
+                        .ThenByDescending(t => t.Time)
+                        .ToList();
 
                 if (matchCommentaries.Count > 0)
                 {
