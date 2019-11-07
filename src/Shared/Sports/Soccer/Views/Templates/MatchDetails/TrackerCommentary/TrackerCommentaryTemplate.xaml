@@ -89,7 +89,8 @@
                                 <Label Grid.Row="0"
                                        Grid.Column="0"
                                        Style="{StaticResource MatchTrackerMinutes}"
-                                       Text="{Binding MatchTime, Mode=OneTime}" />
+                                       Text="{Binding MatchTime, Mode=OneTime}"
+                                       IsVisible="{Binding VisibleMatchTime}" />
                                 <ffImageLoading:SvgCachedImage Grid.Row="0"
                                                                Grid.Column="1"
                                                                DownsampleToViewSize="True"

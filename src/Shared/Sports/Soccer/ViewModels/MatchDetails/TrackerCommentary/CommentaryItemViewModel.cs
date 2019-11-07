@@ -33,6 +33,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 
         public Color CommentaryTextColor { get; private set; }
 
+        public bool VisibleMatchTime { get; private set; }
+
         private void BuildMatchTime()
         {
             if (Commentary == null)
@@ -43,6 +45,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             MatchTime = string.IsNullOrEmpty(Commentary.StoppageTime)
                 ? $"{Commentary.MatchTime}'"
                 : $"{Commentary.MatchTime}+{Commentary.StoppageTime}'";
+
+            VisibleMatchTime = Commentary.IsVisibleMatchTimeEvent();
         }
 
         private void BuildImageSource()
