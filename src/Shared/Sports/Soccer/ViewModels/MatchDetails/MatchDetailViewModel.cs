@@ -21,7 +21,6 @@ using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information;
 using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
-using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
 using LiveScore.Soccer.ViewModels.MatchDetails.Social;
 using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
 using LiveScore.Soccer.ViewModels.MatchDetails.Table;
@@ -30,7 +29,6 @@ using LiveScore.Soccer.ViewModels.MatchDetails.TVSchedule;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
 using LiveScore.Soccer.Views.Templates.MatchDetails.LineUps;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Odds;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Social;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Table;
@@ -259,7 +257,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
-                [MatchDetailFunction.Odds] = new OddsViewModel(match.Id, match.EventStatus, NavigationService, DependencyResolver, EventAggregator, new OddsTemplate()),
                 [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LineUpsTemplate()),
