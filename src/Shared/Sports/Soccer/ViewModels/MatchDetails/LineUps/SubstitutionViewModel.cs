@@ -1,12 +1,16 @@
-﻿namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
+﻿using LiveScore.Core;
+
+namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
     internal class SubstitutionViewModel : LineupsItemViewModel
     {
-        public SubstitutionViewModel(string homeName,
+        public SubstitutionViewModel(
+            IDependencyResolver dependencyResolver,
+            string homeName,
             string awayName,
             int? homeJerseyNumber = null,
             int? awayJerseyNumber = null)
-            : base(homeName, awayName, homeJerseyNumber, awayJerseyNumber, true)
+            : base(dependencyResolver, homeName, awayName, homeJerseyNumber, awayJerseyNumber, true)
         {
         }
     }
