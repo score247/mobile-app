@@ -80,7 +80,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
 
-            containerRegistry.RegisterSingleton<IDeviceInfo, DeviceInfo>();
+            containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
 

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Sentry;
+using Sentry.Protocol;
+using Xamarin.Essentials;
 
 namespace LiveScore.Common.Services
 {
@@ -150,17 +152,18 @@ namespace LiveScore.Common.Services
             var sentryEvent = sentryEventCreator.Invoke();
 
             sentryEvent.Level = isErrorEvent
-                ? Sentry.Protocol.SentryLevel.Error
-                : Sentry.Protocol.SentryLevel.Info;
+                ? SentryLevel.Error
+                : SentryLevel.Info;
 
-            sentryEvent.Contexts.Device.Model = Xamarin.Essentials.DeviceInfo.Model;
-            sentryEvent.Contexts.Device.Name = Xamarin.Essentials.DeviceInfo.Name;
-            sentryEvent.Contexts.Device.Manufacturer = Xamarin.Essentials.DeviceInfo.Manufacturer;
-            sentryEvent.Contexts.Runtime.Version = Xamarin.Essentials.VersionTracking.CurrentVersion;
-            sentryEvent.Contexts.Runtime.Build = Xamarin.Essentials.VersionTracking.CurrentBuild;
-
-            sentryEvent.Contexts.OperatingSystem.Name = Xamarin.Essentials.DeviceInfo.Platform.ToString();
-            sentryEvent.Contexts.OperatingSystem.Version = Xamarin.Essentials.DeviceInfo.VersionString;
+            sentryEvent.Contexts.Device.Model = DeviceInfo.Model;
+            sentryEvent.Contexts.Device.Name = DeviceInfo.Name;
+            sentryEvent.Contexts.Device.Simulator = (DeviceInfo.DeviceType == DeviceType.Virtual);
+            sentryEvent.Contexts.Device.Manufacturer = DeviceInfo.Manufacturer;
+            sentryEvent.Contexts.Runtime.Version = AppInfo.VersionString;
+            sentryEvent.Contexts.Runtime.Build = AppInfo.BuildString;
+            sentryEvent.Contexts.OperatingSystem.Name = DeviceInfo.Platform.ToString();
+            sentryEvent.Contexts.OperatingSystem.Version = DeviceInfo.VersionString;
+            sentryEvent.Platform = DeviceInfo.Platform.ToString();
 
             return sentryEvent;
         }

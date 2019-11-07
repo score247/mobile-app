@@ -11,7 +11,7 @@ namespace LiveScore.Common.Services
         double Density { get; }
     }
 
-    public class DeviceInfo : IDeviceInfo
+    public class UserDeviceInfo : IDeviceInfo
     {
         public double Width => DeviceDisplay.MainDisplayInfo.Width;
 
