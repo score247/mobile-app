@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
     <Compile Remove="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs" />
+    <Compile Remove="Views\Templates\MatchDetails\HeadToHead\H2HTemplateSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ViewResources\MatchDetailH2HViewResource.xaml.cs">

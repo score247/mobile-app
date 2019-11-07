@@ -133,11 +133,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                 teamOponentId = match.HomeTeamId;
             }
 
-            var teamResults = await teamService.GetTeamResultsAsync(SelectedTeamId, teamOponentId, CurrentLanguage.DisplayName);
+            try
+            {
+                var teamResults = await teamService.GetTeamResultsAsync(SelectedTeamId, teamOponentId, CurrentLanguage.DisplayName);
 
-            Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
+                Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
 
-            HasData = Matches?.Any() == true;
+                HasData = Matches?.Any() == true;
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogExceptionAsync(ex);
+
+                HasData = false;
+            }
         }
 
         internal async Task LoadHeadToHeadAsync()
