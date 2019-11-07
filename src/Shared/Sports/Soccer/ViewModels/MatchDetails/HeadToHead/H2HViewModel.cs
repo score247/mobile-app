@@ -46,7 +46,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             teamService = DependencyResolver.Resolve<ITeamService>(CurrentSportId.ToString());
 
-            OnTeamResultTapped = new DelegateAsyncCommand<string>(LoadTeamResultAsync);
+            OnTeamResultTapped = new DelegateAsyncCommand<string>((teamIdentifier) => LoadDataAsync(() => LoadTeamResultAsync(teamIdentifier)));
             OnHeadToHeadTapped = new DelegateAsyncCommand(() => LoadDataAsync(LoadHeadToHeadAsync));
             RefreshCommand = new DelegateAsyncCommand(RefreshAsync);
         }
@@ -103,23 +103,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             base.OnResumeWhenNetworkOK();
             
-            await LoadDataAsync(RefreshAsync);
+            await RefreshAsync();
         }
 
-        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(RefreshAsync);
+        public override Task OnNetworkReconnectedAsync() => RefreshAsync();
 
         internal async Task RefreshAsync()
         {
             IsRefreshing = true;
 
-            if (VisibleHeadToHead)
+            await LoadDataAsync(async () =>
             {
-                await LoadHeadToHeadAsync();
-            }
-            else
-            {
-                await LoadTeamResultAsync(SelectedTeamIdentifier);
-            }
+                if (VisibleHeadToHead)
+                {
+                    await LoadHeadToHeadAsync();
+                }
+                else
+                {
+                    await LoadTeamResultAsync(SelectedTeamIdentifier);
+                }
+            });
 
             IsRefreshing = false;
         }
