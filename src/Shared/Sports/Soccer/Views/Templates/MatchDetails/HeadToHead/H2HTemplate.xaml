@@ -31,11 +31,9 @@
 
         <Frame Style="{StaticResource MatchDetailH2HContainer}">
             <StackLayout>
-
                 <Label IsVisible="{Binding NoData}"
                    Style="{StaticResource NoInfo}"
                    Text="{languageResources:Translate NoData}" />
-
                 <ActivityIndicator Margin="40"
                                    IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
@@ -52,7 +50,7 @@
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                                     ItemTemplate="{StaticResource MatchItemTemplate}"
-                                                    ItemsSource="{Binding Matches}"
+                                                    ItemsSource="{Binding HeadToHeadMatches}"
                                                     Header="{Binding .}"
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     HeaderTemplate="{StaticResource HeaderTemplate}"
@@ -80,7 +78,7 @@
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                                     ItemTemplate="{StaticResource TeamMatchItemTemplate}"
-                                                    ItemsSource="{Binding Matches}"                                                    
+                                                    ItemsSource="{Binding TeamMatches}"                                                    
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     BackgroundColor="{StaticResource ListViewBgColor}">
                         <CollectionView.GroupFooterTemplate>

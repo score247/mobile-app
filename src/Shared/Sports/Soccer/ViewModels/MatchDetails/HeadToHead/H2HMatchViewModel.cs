@@ -47,7 +47,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             Match = match;
             DisplayEventDate = BuildDisplayEventDate(match);
             DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
-            Result = BuildTeamResult(teamId, match);
+
+            Result = IsH2H ? string.Empty : BuildTeamResult(teamId, match);
         }
 
         private static string BuildDisplayEventDate(IMatch match)
@@ -68,7 +69,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             return match.WinnerId == teamId
                 ? TeamResult.Win.DisplayName
-                : TeamResult.Loose.DisplayName;
+                : TeamResult.Lose.DisplayName;
         }
     }
 }

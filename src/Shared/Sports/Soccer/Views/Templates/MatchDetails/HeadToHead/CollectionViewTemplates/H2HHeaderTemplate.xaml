@@ -14,10 +14,6 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <Label IsVisible="{Binding NoData}"
-               Style="{StaticResource NoInfo}"
-               Text="{languageResources:Translate NoData}" />
-
         <Grid Padding="0,12,0,0"
               IsVisible="{Binding VisibleStats}"
               Style="{StaticResource MatchGeneralInfoTeams}">
