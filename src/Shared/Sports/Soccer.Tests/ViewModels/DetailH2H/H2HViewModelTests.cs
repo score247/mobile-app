@@ -178,12 +178,12 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         }
 
         [Fact]
-        public void LoadTeamResult_Home_VisibleHomeTeamResults()
+        public async Task LoadTeamResult_Home_VisibleHomeTeamResults()
         {
             // Arrange
 
             // Act
-            viewModel.LoadTeamResult("home");
+            await viewModel.LoadTeamResultAsync("home");
 
             // Assert
             Assert.True(viewModel.VisibleHomeResults);
@@ -192,12 +192,12 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         }
 
         [Fact]
-        public void LoadTeamResult_Away_VisibleAwayTeamResults()
+        public async Task LoadTeamResult_Away_VisibleAwayTeamResults()
         {
             // Arrange
 
             // Act
-            viewModel.LoadTeamResult("away");
+            await viewModel.LoadTeamResultAsync("away");
 
             // Assert
             Assert.False(viewModel.VisibleHomeResults);
@@ -206,12 +206,12 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         }
 
         [Fact]
-        public void OnTeamResultTapped_ExecuteForAway_VisibleAwayTeamResults()
+        public async Task OnTeamResultTapped_ExecuteForAway_VisibleAwayTeamResults()
         {
             // Arrange
 
             // Act
-            viewModel.OnTeamResultTapped.Execute("away");
+            await viewModel.OnTeamResultTapped.ExecuteAsync("away");
 
             // Assert
             Assert.False(viewModel.VisibleHomeResults);
@@ -220,12 +220,12 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         }
 
         [Fact]
-        public void OnTeamResultTapped_ExecuteForHome_VisibleHomeTeamResults()
+        public async Task OnTeamResultTapped_ExecuteForHome_VisibleHomeTeamResults()
         {
             // Arrange
 
             // Act
-            viewModel.OnTeamResultTapped.Execute("home");
+            await viewModel.OnTeamResultTapped.ExecuteAsync("home");
 
             // Assert
             Assert.True(viewModel.VisibleHomeResults);

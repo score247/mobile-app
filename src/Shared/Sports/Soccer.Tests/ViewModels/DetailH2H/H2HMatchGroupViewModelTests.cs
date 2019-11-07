@@ -26,7 +26,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void Init_Null_CorrectAssginedValueAndFormat()
         {
-            var viewModel = new H2HMatchGroupViewModel(new List<SummaryMatchViewModel>(), buildFlagUrl);
+            var viewModel = new H2HMatchGroupViewModel(new List<H2HMatchViewModel>(), buildFlagUrl);
 
             Assert.True(string.IsNullOrEmpty(viewModel.CountryFlag));
         }
@@ -34,10 +34,10 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         [Fact]
         public void Init_Matches_AlwaysGetLeagueOfFirst()
         {
-            var viewModels = new List<SummaryMatchViewModel>
+            var viewModels = new List<H2HMatchViewModel>
             {
-                new SummaryMatchViewModel(fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder),
-                new SummaryMatchViewModel(fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder)
+                new H2HMatchViewModel(true, string.Empty,fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder),
+                new H2HMatchViewModel(true, string.Empty,fixture.Create<SoccerMatch>(), matchDisplayStatusBuilder)
             };
 
             var viewModel = new H2HMatchGroupViewModel(viewModels.ToList(), buildFlagUrl);
