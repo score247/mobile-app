@@ -1,19 +1,27 @@
 ﻿using System;
+using AutoFixture;
 using LiveScore.Core.Converters;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using NSubstitute;
 using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
 {
-    public class H2HMatchViewModelTests
+    public class H2HMatchViewModelTests : IClassFixture<ViewModelBaseFixture>
     {
         private readonly IMatchDisplayStatusBuilder matchDisplayStatusBuilder;
         private readonly IMatch match;
 
-        public H2HMatchViewModelTests()
+        private readonly Fixture fixture;
+
+        public H2HMatchViewModelTests(ViewModelBaseFixture baseFixture)
         {
+            fixture = baseFixture.CommonFixture.Specimens;
+
             matchDisplayStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
             match = Substitute.For<IMatch>();
         }
@@ -64,6 +72,36 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             var viewModel = new H2HMatchViewModel(true, string.Empty, null, matchDisplayStatusBuilder);
 
             Assert.Null(viewModel.Match);
+        }
+
+        [Fact]
+        public void BuildMatch_TeamIsWinner_ResultShouldBeWin()
+        {
+            var matchData = fixture.Create<SoccerMatch>().With(match => match.WinnerId, "sr:team");
+
+            var viewModel = new H2HMatchViewModel(false, "sr:team", matchData, matchDisplayStatusBuilder);
+
+            Assert.Equal(TeamResult.Win.DisplayName, viewModel.Result);
+        }
+
+        [Fact]
+        public void BuildMatch_TeamIsLose_ResultShouldBeLose()
+        {
+            var matchData = fixture.Create<SoccerMatch>().With(match => match.WinnerId, "sr:team:1");
+
+            var viewModel = new H2HMatchViewModel(false, "sr:team", matchData, matchDisplayStatusBuilder);
+
+            Assert.Equal(TeamResult.Lose.DisplayName, viewModel.Result);
+        }
+
+        [Fact]
+        public void BuildMatch_Draw_ResultShouldBeDraw()
+        {
+            var matchData = fixture.Create<SoccerMatch>().With(match => match.WinnerId, "");
+
+            var viewModel = new H2HMatchViewModel(false, "sr:team", matchData, matchDisplayStatusBuilder);
+
+            Assert.Equal(TeamResult.Draw.DisplayName, viewModel.Result);
         }
     }
 }

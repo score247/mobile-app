@@ -18,7 +18,7 @@ using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailH2H
 {
-    public class H2HViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class H2HViewModelTests : IClassFixture<ViewModelBaseFixture>,IClassFixture<ResourcesFixture>
     {
         private readonly SoccerMatch match;
         private readonly ITeamService teamService;

@@ -36,21 +36,6 @@ namespace Soccer.Tests.Services
         }
 
         [Fact]
-        public async Task GetHeadToHeadsAsync_NotForceFetchNew_InjectCacheService()
-        {
-            // Arrange           
-
-            // Act
-            var headToHeads = await teamService.GetHeadToHeadsAsync(HomeTeamId, AwayTeamId, "en_US");
-
-            // Assert
-            await mockApiService.Received(1)
-                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>());
-
-            Assert.NotNull(headToHeads);
-        }
-
-        [Fact]
         public async Task GetHeadToHeadsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
         {
             // Arrange            
@@ -82,6 +67,40 @@ namespace Soccer.Tests.Services
 
             // Assert
             Assert.True(comparer.Compare(expectedH2H, headToHeads).AreEqual);
+        }
+
+        [Fact]
+        public async Task GetTeamResultsAsync_ThrowsException_InjectLoggingServiceAndReturnEmptyList()
+        {
+            // Arrange            
+            mockApiService
+                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
+                .ThrowsForAnyArgs(new InvalidOperationException("Api Exception"));
+
+            // Act
+            var teamResults = await teamService.GetTeamResultsAsync(HomeTeamId, AwayTeamId, "en_US");
+
+            // Assert
+            await mockLogger.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
+
+            Assert.Null(teamResults);
+        }
+
+        [Fact]
+        public async Task GetTeamResultsAsync_CacheHasValue_ShouldReturnCorrectListCountFromCache()
+        {
+            // Arrange
+            var expectedResults = fixture.Create<IEnumerable<SoccerMatch>>();
+
+            mockApiService
+                .Execute(Arg.Any<Func<Task<IEnumerable<SoccerMatch>>>>())
+                .Returns(expectedResults);
+
+            // Act
+            var teamResults = await teamService.GetTeamResultsAsync(HomeTeamId, AwayTeamId, "en_US");
+
+            // Assert
+            Assert.True(comparer.Compare(expectedResults, teamResults).AreEqual);
         }
     }
 }
