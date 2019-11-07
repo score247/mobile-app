@@ -10,7 +10,7 @@
               xmlns:collectionViewTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate"
-              xmlns:h2h="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;assembly=LiveScore.Soccer">
+              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common">
     <StackLayout BackgroundColor="{StaticResource ListViewLightBgColor}">
         <StackLayout.Resources>
             <ResourceDictionary>
@@ -29,23 +29,31 @@
 
         <headToHead:H2HOptionsTemplate />
 
-        <Frame Style="{StaticResource MatchDetailH2HContainer}" IsVisible="{Binding VisibleHeadToHead}">
+        <Frame Style="{StaticResource MatchDetailH2HContainer}">
             <StackLayout>
+
+                <Label IsVisible="{Binding NoData}"
+                   Style="{StaticResource NoInfo}"
+                   Text="{languageResources:Translate NoData}" />
+
                 <ActivityIndicator Margin="40"
                                    IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"
                                    VerticalOptions="StartAndExpand" />
-                <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                             Command="{Binding RefreshCommand}"
-                             RefreshColor="White">
+
+                <RefreshView
+                    IsVisible="{Binding VisibleHeadToHead}"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    Command="{Binding RefreshCommand}"
+                    RefreshColor="White">
                     <tabStrip:TabItemCollectionView x:Name="H2HMatches"
+                                                    IsVisible="{Binding VisibleHeadToHead}"
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                                     ItemTemplate="{StaticResource MatchItemTemplate}"
                                                     ItemsSource="{Binding Matches}"
                                                     Header="{Binding .}"
-                                                    IsVisible="{Binding IsNotBusy}"
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     HeaderTemplate="{StaticResource HeaderTemplate}"
                                                     BackgroundColor="{StaticResource ListViewBgColor}">
@@ -62,25 +70,17 @@
                         </CollectionView.Footer>
                     </tabStrip:TabItemCollectionView>
                 </RefreshView>
-            </StackLayout>
-        </Frame>
-
-        <Frame Style="{StaticResource MatchDetailH2HContainer}" IsVisible="{Binding VisibleTeamResults}">
-            <StackLayout IsVisible="{Binding VisibleTeamResults}">
-                <ActivityIndicator Margin="40"
-                                   IsRunning="{Binding IsBusy}"
-                                   IsVisible="{Binding IsBusy}"
-                                   Style="{StaticResource CenterActivityIndicator}"
-                                   VerticalOptions="StartAndExpand" />
-                <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                             Command="{Binding RefreshCommand}"
-                             RefreshColor="White">
+                <RefreshView
+                    IsVisible="{Binding VisibleTeamResults}"
+                    IsRefreshing="{Binding IsRefreshing}"
+                    Command="{Binding RefreshCommand}"
+                    RefreshColor="White">
                     <tabStrip:TabItemCollectionView x:Name="TeamResults"
+                                                    IsVisible="{Binding VisibleTeamResults}"
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                                     ItemTemplate="{StaticResource TeamMatchItemTemplate}"
-                                                    ItemsSource="{Binding Matches}"
-                                                    IsVisible="{Binding VisibleTeamResults}"
+                                                    ItemsSource="{Binding Matches}"                                                    
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     BackgroundColor="{StaticResource ListViewBgColor}">
                         <CollectionView.GroupFooterTemplate>

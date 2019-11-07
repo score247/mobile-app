@@ -62,8 +62,7 @@
                              Style="{StaticResource MatchAwayTeam}">
                     <Label AutomationId="AwayTeamName"
                            Style="{StaticResource Team}"
-                           Text="{Binding Match.AwayTeamName, Mode=OneTime}"
-                           FontAttributes="Bold"/>
+                           Text="{Binding Match.AwayTeamName, Mode=OneTime}"/>
                     <Label 
                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
                            Style="{StaticResource MatchPenaltyIcon}" />

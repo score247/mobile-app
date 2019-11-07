@@ -116,6 +116,38 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             IsRefreshing = false;
         }
 
+        internal async Task<IEnumerable<IMatch>> GetMatchesAsync(string teamIdentifier = null)
+        {
+            try
+            {
+                SelectedTeamId = match.HomeTeamId;
+                var teamOponentId = match.AwayTeamId;
+
+                if (teamIdentifier != HomeIdentifier)
+                {
+                    SelectedTeamId = match.AwayTeamId;
+                    teamOponentId = match.HomeTeamId;
+                }
+
+                return VisibleHeadToHead
+                                ? (await teamService.GetHeadToHeadsAsync(
+                                        match.HomeTeamId,
+                                        match.AwayTeamId,
+                                        CurrentLanguage.DisplayName)
+                                    .ConfigureAwait(false))
+                                    ?.Except(new List<IMatch> { match }).ToList()
+                                : await teamService.GetTeamResultsAsync(SelectedTeamId, teamOponentId, CurrentLanguage.DisplayName);
+            }
+            catch (Exception ex)
+            {
+                await LoggingService.LogExceptionAsync(ex);
+
+                HasData = false;
+
+                return null;
+            }
+        }
+
         internal async Task LoadTeamResult(string teamIdentifier)
         {
             VisibleTeamResults = true;
@@ -124,29 +156,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             VisibleHeadToHead = !VisibleTeamResults;
             VisibleStats = !VisibleTeamResults;
 
-            SelectedTeamId = match.HomeTeamId;
-            var teamOponentId = match.AwayTeamId;
+            Device.BeginInvokeOnMainThread(() => Matches?.Clear());
 
-            if (teamIdentifier != HomeIdentifier)
+            var teamResults = await GetMatchesAsync(teamIdentifier);
+
+            if (teamResults == null)
             {
-                SelectedTeamId = match.AwayTeamId;
-                teamOponentId = match.HomeTeamId;
+                return;
             }
 
-            try
-            {
-                var teamResults = await teamService.GetTeamResultsAsync(SelectedTeamId, teamOponentId, CurrentLanguage.DisplayName);
+            Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
 
-                Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
-
-                HasData = Matches?.Any() == true;
-            }
-            catch (Exception ex)
-            {
-                await LoggingService.LogExceptionAsync(ex);
-
-                HasData = false;
-            }
+            HasData = Matches?.Any() == true;
         }
 
         internal async Task LoadHeadToHeadAsync()
@@ -157,31 +178,24 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             VisibleHomeResults = !VisibleHeadToHead;
             VisibleAwayResults = !VisibleHeadToHead;
 
-            try
+            Device.BeginInvokeOnMainThread(() => Matches?.Clear());
+
+            var headToHeads = await GetMatchesAsync();
+
+            if (headToHeads == null)
             {
-                var headToHeads = (await teamService.GetHeadToHeadsAsync(
-                        match.HomeTeamId,
-                        match.AwayTeamId,
-                        CurrentLanguage.DisplayName)
-                    .ConfigureAwait(false))
-                    ?.Except(new List<IMatch> { match }).ToList();
-
-                if (headToHeads?.Any() == true)
-                {
-                    Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
-                    VisibleStats = Stats?.Total > 0;
-
-                    Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
-                }
-
-                HasData = Matches?.Any() == true;
+                return;
             }
-            catch (Exception ex)
+
+            if (headToHeads?.Any() == true)
             {
-                await LoggingService.LogExceptionAsync(ex);
+                Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+                VisibleStats = Stats?.Total > 0;
 
-                HasData = false;
+                Matches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
             }
+
+            HasData = Matches?.Any() == true;
         }
 
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
