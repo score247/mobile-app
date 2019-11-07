@@ -41,6 +41,7 @@
                         <Grid IsVisible="{Binding IsNotBusy}">
                             <StackLayout IsVisible="{Binding HasFormation}">
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                            IsVisible="{Binding HasData}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
                                            Text="{Binding LineupsHeader.HomeName}" />
@@ -50,6 +51,7 @@
                                 <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
                                          Source="{Binding LineupsHeader.LineupsPitchView}" />
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                            IsVisible="{Binding HasData}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
                                            Text="{Binding LineupsHeader.AwayName}" />
