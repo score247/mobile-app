@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using LiveScore.Core.Models.Teams;
+using LiveScore.Soccer.Models.Matches;
 using MessagePack;
 
 namespace LiveScore.Soccer.Models.Teams
@@ -38,5 +39,7 @@ namespace LiveScore.Soccer.Models.Teams
         public IEnumerable<Player> Players { get; }
 
         public IEnumerable<Player> Substitutions { get; }
+
+        public IEnumerable<TimelineEvent> SubstitutionEvents { get; }
     }
 }
