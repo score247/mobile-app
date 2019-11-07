@@ -396,7 +396,10 @@
   <data name="Coaches" xml:space="preserve">
     <value>COACHES</value>
   </data>
-     <data name="Draw" xml:space="preserve">
+  <data name="Draw" xml:space="preserve">
     <value>Draw</value>
+  </data>
+  <data name="LineupsPlayers" xml:space="preserve">
+    <value>LINE-UPS</value>
   </data>
 </root>

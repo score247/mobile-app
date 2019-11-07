@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.LineupsPlayerTemplate">
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailViewResource />
+                    <resources:MatchDetailLinesUpViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
+                <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="42" />
+            </Grid.RowDefinitions>
+            <Label Grid.Column="2"
+                Text="{Binding HomeJerseyNumber}"
+                Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
+            <Label Grid.Column="3"
+                Text="{Binding HomeName}"
+                Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+            <Label Grid.Column="6"
+                Text="{Binding AwayJerseyNumber}"
+                Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
+            <Label Grid.Column="7"
+                Text="{Binding AwayName}"
+                Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+        </Grid>
+    </StackLayout>
+</DataTemplate>

@@ -4,6 +4,7 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:lineups="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.LineUps"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               mc:Ignorable="d"
@@ -15,6 +16,7 @@
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailLinesUpViewResource />
                 </ResourceDictionary.MergedDictionaries>
+                <lineups:LineupsItemTemplateSelector x:Key="lineupsItemSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
         <ActivityIndicator Margin="40"
@@ -28,6 +30,7 @@
             <tabStrip:TabItemCollectionView IsGrouped="True"
                                             BackgroundColor="{StaticResource ListViewBgColor}"
                                             ItemsSource="{Binding SubstitutionAndCoachGroups}"
+                                            ItemTemplate="{StaticResource lineupsItemSelector}"
                                             HeightRequest="{Binding FooterHeight}"
                                             ItemSizingStrategy="MeasureFirstItem"
                                             IsVisible="{Binding IsNotBusy}"
@@ -36,7 +39,7 @@
                 <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <Grid IsVisible="{Binding IsNotBusy}">
-                            <StackLayout IsVisible="{Binding HasData}">
+                            <StackLayout IsVisible="{Binding HasFormation}">
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
@@ -78,40 +81,6 @@
                         <StackLayout></StackLayout>
                     </DataTemplate>
                 </CollectionView.GroupFooterTemplate>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="{StaticResource SubstitutionMinuteWidthSize}" />
-                                    <ColumnDefinition Width="{StaticResource SubstitutionIconWidthSize}" />
-                                    <ColumnDefinition Width="{StaticResource SubstitutionShirtNumberWidthSize}" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="42" />
-                                </Grid.RowDefinitions>
-                                <Label Grid.Column="2"
-                                       Text="{Binding HomeJerseyNumber}"
-                                       Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
-                                <Label Grid.Column="3"
-                                       Text="{Binding HomeName}"
-                                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                                <Label Grid.Column="6"
-                                       Text="{Binding AwayJerseyNumber}"
-                                       Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
-                                <Label Grid.Column="7"
-                                       Text="{Binding AwayName}"
-                                       Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
-                            </Grid>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
                 <CollectionView.Footer>
                     <!--Work arround for scrolling up issue-->
                     <StackLayout BackgroundColor="Transparent"
