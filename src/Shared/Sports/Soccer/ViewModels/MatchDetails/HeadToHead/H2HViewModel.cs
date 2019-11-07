@@ -133,14 +133,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             var teamResults = await GetMatchesAsync(teamIdentifier);
 
-            if (teamResults == null)
+            if (teamResults == null || !teamResults.Any())
             {
+                HasData = false;
                 return;
             }
 
             TeamMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
 
-            HasData = TeamMatches?.Any() == true;
+            HasData = true;
         }
 
         internal async Task LoadHeadToHeadAsync()
@@ -151,8 +152,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             var headToHeads = await GetMatchesAsync();
 
-            if (headToHeads == null && !headToHeads.Any())
+            if (headToHeads == null || !headToHeads.Any())
             {
+                HasData = false;
                 return;
             }
 
@@ -161,7 +163,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
 
-            HasData = HeadToHeadMatches?.Any() == true;
+            HasData = true;
         }
 
         internal async Task<IEnumerable<IMatch>> GetMatchesAsync(string teamIdentifier = null)
