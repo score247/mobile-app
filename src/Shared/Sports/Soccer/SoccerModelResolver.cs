@@ -1710,7 +1710,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Teams.TeamLineups(__Id__, __Name__, __IsHome__, __Coach__, __Formation__, __Players__, __Substitutions__);
+            var ____result = new global::LiveScore.Soccer.Models.Teams.TeamLineups(__Id__, __Name__, __IsHome__, __Coach__, __Formation__, __Players__, __Substitutions__, __SubstitutionEvents__);
             return ____result;
         }
     }

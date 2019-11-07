@@ -8,6 +8,7 @@ namespace LiveScore.Soccer.Models.Teams
     [MessagePackObject(keyAsPropertyName: true)]
     public class TeamLineups
     {
+#pragma warning disable S107 // Methods should not have too many parameters
         public TeamLineups(
             string id,
             string name,
@@ -15,7 +16,9 @@ namespace LiveScore.Soccer.Models.Teams
             Coach coach,
             string formation,
             IEnumerable<Player> players,
-            IEnumerable<Player> substitutions)
+            IEnumerable<Player> substitutions,
+            IEnumerable<TimelineEvent> substitutionEvents)
+#pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
             Name = name;
@@ -24,6 +27,7 @@ namespace LiveScore.Soccer.Models.Teams
             Formation = formation;
             Players = players;
             Substitutions = substitutions;
+            SubstitutionEvents = substitutionEvents;
         }
 
         public string Id { get; }
