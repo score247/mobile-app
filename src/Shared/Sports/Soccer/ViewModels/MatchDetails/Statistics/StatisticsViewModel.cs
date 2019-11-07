@@ -55,7 +55,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
 
         public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadStatisticsAsync);
 
-        private async Task LoadStatisticsAsync()
+        public async Task LoadStatisticsAsync()
         {
             var matchStatistic = await soccerMatchService
                     .GetMatchStatisticAsync(matchId, Language.English)

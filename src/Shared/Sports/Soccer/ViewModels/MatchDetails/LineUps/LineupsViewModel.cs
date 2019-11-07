@@ -67,10 +67,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadLineUpsAsync);
 
-        private async Task LoadLineUpsAsync()
+        public async Task LoadLineUpsAsync()
         {
             var matchLineups = await soccerMatchService
-                .GetMatchLineups(matchId, Language.English)
+                .GetMatchLineupsAsync(matchId, Language.English)
                 .ConfigureAwait(false);
 
             beginInvokeOnMainThreadFunc(() => { RenderMatchLineups(matchLineups); });

@@ -73,7 +73,10 @@ namespace LiveScore.Soccer.Models.Matches
 
     public class MatchStatisticItem
     {
-        public MatchStatisticItem(string statisticName, byte? homeValue, byte? awayValue)
+        public MatchStatisticItem(
+            string statisticName,
+            byte? homeValue, 
+            byte? awayValue)
         {
             StatisticName = statisticName.ToUpperInvariant();
             HomeValue = homeValue ?? 0;

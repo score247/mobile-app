@@ -23,7 +23,7 @@ namespace LiveScore.Soccer.Services
 
         Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language);
 
-        Task<MatchLineups> GetMatchLineups(string matchId, Language language);
+        Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language);
     }
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
@@ -140,7 +140,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchLineups> GetMatchLineups(string matchId, Language language)
+        public async Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language)
         {
             try
             {
