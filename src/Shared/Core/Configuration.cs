@@ -11,5 +11,9 @@
         string AppCenterSecret { get; }
 
         string SentryDsn { get; }
+
+        string Enviroment { get; }
+
+        bool Debug { get; }
     }
 }

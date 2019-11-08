@@ -62,7 +62,12 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry UseSentry(this IContainerRegistry containerRegistry)
         {
-            SentrySdk.Init(Configuration.SentryDsn);
+            SentrySdk.Init(o =>
+            {
+                o.Dsn = new Dsn(Configuration.SentryDsn);
+                o.Debug = Configuration.Debug;
+                o.Environment = Configuration.Enviroment;
+            });
 
             return containerRegistry;
         }

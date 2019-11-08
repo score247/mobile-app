@@ -8,6 +8,8 @@
     </NeutralLanguage>
     <SonarQubeTestProject>False</SonarQubeTestProject>
     <Configurations>Debug;Release;Test;AutoTest;DevRelease</Configurations>
+    <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+    <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <CodeAnalysisRuleSet>LiveScoreApp.ruleset</CodeAnalysisRuleSet>

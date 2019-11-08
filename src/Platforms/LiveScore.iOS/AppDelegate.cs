@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using FFImageLoading.Forms.Platform;
 using FFImageLoading.Svg.Forms;
@@ -57,8 +58,14 @@ namespace LiveScore.iOS
 
             Runtime.MarshalManagedException += HandleMarshalException;
             Runtime.MarshalObjectiveCException += HandleMarshalObjectCException;
+            AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
             AppDomain.CurrentDomain.UnhandledException += UnhandledException;
             TaskScheduler.UnobservedTaskException += UnobservedTaskException;
+        }
+
+        private void CurrentDomain_FirstChanceException(object sender, FirstChanceExceptionEventArgs e)
+        {
+            loggingService.LogException(e.Exception);
         }
 
         private void HandleMarshalException(object sender, MarshalManagedExceptionEventArgs args)
