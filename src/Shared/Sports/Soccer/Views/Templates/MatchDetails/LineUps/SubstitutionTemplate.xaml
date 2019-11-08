@@ -30,8 +30,8 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
-                <RowDefinition Height="42" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="25" />
             </Grid.RowDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
                 Text="{Binding HomeSubstitutionMinute}"
@@ -41,7 +41,7 @@
                                            IsVisible="{Binding IsHaveHomeSubsitution}"
                                            DownsampleToViewSize="True"
                                            Source="images/common/substitution_in.svg"
-                                           Style="{StaticResource MatchInfoImage}" />
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
             <Label Grid.Column="2" Grid.Row="0"
                 Text="{Binding HomePlayerInJerseyNumber}"
                 Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
@@ -54,7 +54,7 @@
                                            DownsampleToViewSize="True"
                                            IsVisible="{Binding IsHaveHomeSubsitution}"
                                            Source="images/common/substitution_out.svg"
-                                           Style="{StaticResource MatchInfoImage}" />
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
             <Label Grid.Column="2" Grid.Row="1"
                 Text="{Binding HomePlayerOutJerseyNumber}"
                 Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
@@ -70,7 +70,7 @@
                                            DownsampleToViewSize="True"
                                            IsVisible="{Binding IsHaveAwaySubsitution}"
                                            Source="images/common/substitution_in.svg"
-                                           Style="{StaticResource MatchInfoImage}" />
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
             <Label Grid.Column="6" Grid.Row="0"
                 Text="{Binding AwayPlayerInJerseyNumber}"
                 Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
@@ -83,7 +83,7 @@
                                            DownsampleToViewSize="True"
                                            IsVisible="{Binding IsHaveAwaySubsitution}"
                                            Source="images/common/substitution_out.svg"
-                                           Style="{StaticResource MatchInfoImage}" />
+                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}" />
             <Label Grid.Column="6" Grid.Row="1"
                 Text="{Binding AwayPlayerOutJerseyNumber}"
                 Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
