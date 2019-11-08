@@ -82,12 +82,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             if (allEventStatistics.Count > 0)
             {
                 AwayEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
-                AwayEventOneCount = allEventStatistics[2].Value;
+                AwayEventOneCount = allEventStatistics[0].Value;
             }
             if (allEventStatistics.Count > 1)
             {
                 AwayEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
-                AwayEventTwoCount = allEventStatistics[2].Value;
+                AwayEventTwoCount = allEventStatistics[1].Value;
             }
             if (allEventStatistics.Count > 2)
             {
