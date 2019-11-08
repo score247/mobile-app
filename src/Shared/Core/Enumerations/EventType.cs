@@ -90,9 +90,12 @@
         //period_score
         public static readonly EventType PeriodScore = new EventType(28, "period_score");
 
-        // custom event 
+        // custom event
         public static readonly EventType ScoreChangeByPenalty = new EventType(29, "score_change_by_penalty");
+
         public static readonly EventType ScoreChangeByOwnGoal = new EventType(30, "score_change_by_owngoal");
+        public static readonly EventType SubstitutionIn = new EventType(31, "substitution_in");
+        public static readonly EventType SubstitutionOut = new EventType(32, "substitution_out");
 
         public EventType()
         {

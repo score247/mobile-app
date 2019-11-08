@@ -217,6 +217,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             var totalAwayPlayers = awayPlayers.Count();
             var totalSubstitution = Math.Max(totalHomePlayers, totalAwayPlayers);
             var lineupsItems = new List<LineupsPlayerViewModel>();
+            var isSubstitute = groupName == AppResources.SubstitutePlayers;
 
             for (var index = 0; index < totalSubstitution; index++)
             {
@@ -230,7 +231,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                     homePlayer?.JerseyNumber,
                     awayPlayer?.JerseyNumber,
                     homePlayer?.EventStatistic,
-                    awayPlayer?.EventStatistic));
+                    awayPlayer?.EventStatistic,
+                    isSubstitute));
             }
 
             return new LineupsGroupViewModel(groupName, lineupsItems);

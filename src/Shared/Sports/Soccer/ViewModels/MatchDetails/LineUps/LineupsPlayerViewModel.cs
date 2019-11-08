@@ -45,6 +45,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         public int AwayEventThreeCount { get; private set; }
         public bool AwayEventThreeVisible { get => AwayEventThreeCount > 1; }
         protected ITimelineEventImageBuilder ImageConverter { get; set; }
+        public bool IsSubstitute { get; private set; }
+
+#pragma warning disable S107 // Methods should not have too many parameters
 
         public LineupsPlayerViewModel(
             IDependencyResolver dependencyResolver,
@@ -53,13 +56,16 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             int? homeJerseyNumber = null,
             int? awayJerseyNumber = null,
             IDictionary<EventType, int> homeEventStatistics = null,
-            IDictionary<EventType, int> awayEventStatistics = null)
+            IDictionary<EventType, int> awayEventStatistics = null,
+            bool isSubstitute = false)
+#pragma warning restore S107 // Methods should not have too many parameters
             : base(dependencyResolver)
         {
             HomeName = homeName;
             AwayName = awayName;
             HomeJerseyNumber = homeJerseyNumber;
             AwayJerseyNumber = awayJerseyNumber;
+            IsSubstitute = isSubstitute;
 
             BuildHomeEventImages(homeEventStatistics);
             BuildAwayEventImages(awayEventStatistics);
@@ -160,16 +166,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         private string BuildEventTimelineImage(EventType eventType)
         {
+            var displayEventType = eventType;
+
+            if (eventType == EventType.Substitution)
+            {
+                displayEventType = IsSubstitute ? EventType.SubstitutionIn : EventType.SubstitutionOut;
+            }
+
             try
             {
-                ImageConverter = DependencyResolver.Resolve<ITimelineEventImageBuilder>(eventType.Value.ToString());
+                ImageConverter = DependencyResolver.Resolve<ITimelineEventImageBuilder>(displayEventType.Value.ToString());
             }
             catch
             {
                 ImageConverter = new DefaultEventImageBuilder();
             }
 
-            return ImageConverter.BuildImageSource(new TimelineEventImage(eventType));
+            return ImageConverter.BuildImageSource(new TimelineEventImage(displayEventType));
         }
     }
 }
