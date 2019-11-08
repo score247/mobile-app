@@ -22,16 +22,29 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         public int? AwayJerseyNumber { get; }
 
         public string HomeEventOneImageSource { get; private set; }
+        public int HomeEventOneCount { get; private set; }
+        public bool HomeEventOneVisible { get => HomeEventOneCount > 1; }
 
         public string HomeEventTwoImageSource { get; private set; }
+        public int HomeEventTwoCount { get; private set; }
+        public bool HomeEventTwoVisible { get => HomeEventTwoCount > 1; }
 
         public string HomeEventThreeImageSource { get; private set; }
+        public int HomeEventThreeCount { get; private set; }
+        public bool HomeEventThreeVisible { get => HomeEventThreeCount > 1; }
 
         public string AwayEventOneImageSource { get; private set; }
+        public int AwayEventOneCount { get; private set; }
+        public bool AwayEventOneVisible { get => AwayEventOneCount > 1; }
 
         public string AwayEventTwoImageSource { get; private set; }
+        public int AwayEventTwoCount { get; private set; }
+        public bool AwayEventTwoVisible { get => AwayEventTwoCount > 1; }
 
         public string AwayEventThreeImageSource { get; private set; }
+        public int AwayEventThreeCount { get; private set; }
+        public bool AwayEventThreeVisible { get => AwayEventThreeCount > 1; }
+        protected ITimelineEventImageBuilder ImageConverter { get; set; }
 
         public LineupsPlayerViewModel(
             IDependencyResolver dependencyResolver,
@@ -55,7 +68,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         private void BuildAwayEventImages(IDictionary<EventType, int> awayEventStatistics)
         {
             var eventStatistics = InitEventStatistics();
-            if (awayEventStatistics != null)
+            if (awayEventStatistics?.Any() == true)
             {
                 var filteredEventStatistics = UpdateEventStatistics(eventStatistics, awayEventStatistics);
 
@@ -68,15 +81,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             var allEventStatistics = eventStatistics.ToList();
             if (allEventStatistics.Count > 0)
             {
-                AwayEventOneImageSource = BuildEventImage(allEventStatistics[0].Key);
+                AwayEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
+                AwayEventOneCount = allEventStatistics[2].Value;
             }
             if (allEventStatistics.Count > 1)
             {
-                AwayEventTwoImageSource = BuildEventImage(allEventStatistics[1].Key);
+                AwayEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
+                AwayEventTwoCount = allEventStatistics[2].Value;
             }
             if (allEventStatistics.Count > 2)
             {
-                AwayEventThreeImageSource = BuildEventImage(allEventStatistics[2].Key);
+                AwayEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
+                AwayEventThreeCount = allEventStatistics[2].Value;
             }
         }
 
@@ -96,22 +112,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             var allEventStatistics = eventStatistics.ToList();
             if (allEventStatistics.Count > 0)
             {
-                HomeEventOneImageSource = BuildEventImage(allEventStatistics[0].Key);
+                HomeEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
+                HomeEventOneCount = allEventStatistics[0].Value;
             }
             if (allEventStatistics.Count > 1)
             {
-                HomeEventTwoImageSource = BuildEventImage(allEventStatistics[1].Key);
+                HomeEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
+                HomeEventTwoCount = allEventStatistics[1].Value;
             }
             if (allEventStatistics.Count > 2)
             {
-                HomeEventThreeImageSource = BuildEventImage(allEventStatistics[2].Key);
+                HomeEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
+                HomeEventThreeCount = allEventStatistics[2].Value;
             }
-        }
-
-        private string BuildEventImage(EventType eventType)
-        {
-            var imageConverter = DependencyResolver.Resolve<ITimelineEventImageBuilder>(eventType.Value.ToString());
-            return imageConverter.BuildImageSource(new TimelineEventImage(eventType));
         }
 
         private static IDictionary<EventType, int> UpdateEventStatistics(IDictionary<EventType, int> eventStatistics, IDictionary<EventType, int> playerEventStatistics)
@@ -143,6 +156,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
 
             return eventStatistics;
+        }
+
+        private string BuildEventTimelineImage(EventType eventType)
+        {
+            try
+            {
+                ImageConverter = DependencyResolver.Resolve<ITimelineEventImageBuilder>(eventType.Value.ToString());
+            }
+            catch
+            {
+                ImageConverter = new DefaultEventImageBuilder();
+            }
+
+            return ImageConverter.BuildImageSource(new TimelineEventImage(eventType));
         }
     }
 }

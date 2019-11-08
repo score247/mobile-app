@@ -12,6 +12,7 @@ namespace LiveScore.Soccer.Models.TimelineImages
             { EventType.RedCard, Enumerations.Images.RedCard.Value },
             { EventType.PenaltyMissed, Enumerations.Images.MissPenaltyGoal.Value },
             { EventType.Substitution, Enumerations.Images.Substitution.Value },
+            { EventType.ScoreChangeByOwnGoal, Enumerations.Images.ScoreChangeByOwnGoal.Value }
         };
 
         public string BuildImageSource(TimelineEventImage timelineEvent)
