@@ -109,6 +109,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         {
             SubstitutionAndCoachGroups = BuildNoFormationLineupsGroup(matchLineups);
 
+            var substitutions = BuildSubstitutions(matchLineups);
+            SubstitutionAndCoachGroups.AddRange(substitutions);
+
             var substitutionAndCoachGroup = BuildSubstitutionAndCoachGroups(matchLineups);
             SubstitutionAndCoachGroups.AddRange(substitutionAndCoachGroup);
         }
@@ -123,7 +126,44 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                                                        matchLineups.Away?.Name,
                                                        matchLineups.Away?.Formation);
 
-            SubstitutionAndCoachGroups = BuildSubstitutionAndCoachGroups(matchLineups);
+            SubstitutionAndCoachGroups = BuildSubstitutions(matchLineups);
+
+            var substitutionAndCoachGroups = BuildSubstitutionAndCoachGroups(matchLineups);
+            SubstitutionAndCoachGroups.AddRange(substitutionAndCoachGroups);
+        }
+
+        private List<LineupsGroupViewModel> BuildSubstitutions(MatchLineups matchLineups)
+        {
+            var lineupsGroups = new List<LineupsGroupViewModel>();
+            var homeSubstitutionEvents = matchLineups?.Home?.SubstitutionEvents;
+            var awaySubstitutionEvents = matchLineups?.Away?.SubstitutionEvents;
+            if (homeSubstitutionEvents?.Any() == true || awaySubstitutionEvents?.Any() == true)
+            {
+                lineupsGroups.Add(BuildSubstitutionsGroup(homeSubstitutionEvents, awaySubstitutionEvents, AppResources.Substitutions));
+            }
+
+            return lineupsGroups;
+        }
+
+        private LineupsGroupViewModel BuildSubstitutionsGroup(IEnumerable<TimelineEvent> homeSubstitutions, IEnumerable<TimelineEvent> awaySubstitutions, string substituionHeader)
+        {
+            var totalHomeSubstitutions = homeSubstitutions.Count();
+            var totalAwaySubstitutions = awaySubstitutions.Count();
+            var totalSubstitutions = Math.Max(totalHomeSubstitutions, totalAwaySubstitutions);
+            var substitutionsItems = new List<SubstitutionViewModel>();
+
+            for (var index = 0; index < totalSubstitutions; index++)
+            {
+                var homeSubstitution = index < totalHomeSubstitutions ? homeSubstitutions.ElementAt(index) : default;
+                var awaySubstitution = index < totalAwaySubstitutions ? awaySubstitutions.ElementAt(index) : default;
+
+                substitutionsItems.Add(new SubstitutionViewModel(
+                    DependencyResolver,
+                    homeSubstitution,
+                    awaySubstitution));
+            }
+
+            return new LineupsGroupViewModel(substituionHeader, substitutionsItems);
         }
 
         private List<LineupsGroupViewModel> BuildNoFormationLineupsGroup(MatchLineups matchLineups)

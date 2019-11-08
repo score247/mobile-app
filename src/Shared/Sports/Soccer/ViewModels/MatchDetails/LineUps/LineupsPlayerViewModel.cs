@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
@@ -13,6 +12,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             new List<EventType> { EventType.Substitution,
                 EventType.ScoreChange,
                 EventType.ScoreChangeByOwnGoal};
+
+        public string HomeName { get; }
+
+        public string AwayName { get; }
+
+        public int? HomeJerseyNumber { get; }
+
+        public int? AwayJerseyNumber { get; }
 
         public string HomeEventOneImageSource { get; private set; }
 
@@ -34,8 +41,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             int? awayJerseyNumber = null,
             IDictionary<EventType, int> homeEventStatistics = null,
             IDictionary<EventType, int> awayEventStatistics = null)
-            : base(dependencyResolver, homeName, awayName, homeJerseyNumber, awayJerseyNumber)
+            : base(dependencyResolver)
         {
+            HomeName = homeName;
+            AwayName = awayName;
+            HomeJerseyNumber = homeJerseyNumber;
+            AwayJerseyNumber = awayJerseyNumber;
+
             BuildHomeEventImages(homeEventStatistics);
             BuildAwayEventImages(awayEventStatistics);
         }

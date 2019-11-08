@@ -790,6 +790,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SUBSTITUTIONS.
+        /// </summary>
+        public static string Substitutions {
+            get {
+                return ResourceManager.GetString("Substitutions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Table.
         /// </summary>
         public static string Table {

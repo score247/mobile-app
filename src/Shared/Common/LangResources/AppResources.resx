@@ -402,4 +402,7 @@
   <data name="LineupsPlayers" xml:space="preserve">
     <value>LINE-UPS</value>
   </data>
+  <data name="Substitutions" xml:space="preserve">
+    <value>SUBSTITUTIONS</value>
+  </data>
 </root>
