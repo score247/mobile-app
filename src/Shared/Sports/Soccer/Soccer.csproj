@@ -106,6 +106,9 @@
     <Compile Update="Views\Templates\MatchDetails\Odds\OddsMovementView.xaml.cs">
       <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Templates\MatchDetails\Statistics\PossessionTemplate.xaml.cs">
+      <DependentUpon>PossessionTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Templates\MatchDetails\TrackerCommentary\TrackerCommentaryTemplate.xaml.cs">
       <DependentUpon>TrackerCommentaryTemplate.xaml</DependentUpon>
     </Compile>
@@ -148,7 +151,7 @@
     <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\SubstitutionTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\StatisticsHeaderTemplate.xaml">
+    <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\PossessionTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\StatisticsItemTemplate.xaml">

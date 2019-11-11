@@ -76,10 +76,10 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
 
             await statisticViewModel.LoadStatisticsAsync();
 
-            Assert.Equal(homeStatistic.Possession, statisticViewModel.MainStatistic.HomeValue);
-            Assert.Equal(awayStatistic.Possession, statisticViewModel.MainStatistic.AwayValue);
-            Assert.Equal(homeStatistic.ShotsOnTarget, statisticViewModel.SubStatisticItems.First().HomeValue);
-            Assert.Equal(awayStatistic.ShotsOnTarget, statisticViewModel.SubStatisticItems.First().AwayValue);
+            Assert.Equal(homeStatistic.Possession, statisticViewModel.StatisticItems.FirstOrDefault().HomeValue);
+            Assert.Equal(awayStatistic.Possession, statisticViewModel.StatisticItems.FirstOrDefault().AwayValue);
+            Assert.Equal(homeStatistic.ShotsOnTarget, statisticViewModel.StatisticItems.ElementAt(1).HomeValue);
+            Assert.Equal(awayStatistic.ShotsOnTarget, statisticViewModel.StatisticItems.ElementAt(1).AwayValue);
         }
     }
 }

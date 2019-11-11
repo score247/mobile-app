@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
@@ -35,9 +34,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public MatchStatisticItem MainStatistic { get; private set; }
-
-        public IReadOnlyList<MatchStatisticItem> SubStatisticItems { get; private set; }
+        public List<MatchStatisticItem> StatisticItems { get; private set; }
 
         public bool IsRefreshing { get; set; }
 
@@ -49,11 +46,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
         }
 
         public override async void OnResumeWhenNetworkOK()
-        {
-            await LoadDataAsync(LoadStatisticsAsync);
-        }
+            => await LoadDataAsync(LoadStatisticsAsync);
 
-        public override Task OnNetworkReconnectedAsync() => LoadDataAsync(LoadStatisticsAsync);
+        public override Task OnNetworkReconnectedAsync()
+            => LoadDataAsync(LoadStatisticsAsync);
 
         public async Task LoadStatisticsAsync()
         {
@@ -63,9 +59,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
 
             if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))
             {
-                MainStatistic = matchStatistic.GetMainStatistic();
-                SubStatisticItems = matchStatistic.GetSubStatisticItems().ToList();
-                HasData = MainStatistic.IsVisibled || SubStatisticItems.Count > 0;
+                var statisticItems = new List<MatchStatisticItem>();
+                var mainStatistic = matchStatistic.GetMainStatistic();
+
+                if (mainStatistic.IsVisibled)
+                {
+                    statisticItems.Add(mainStatistic);
+                }
+
+                statisticItems.AddRange(matchStatistic.GetSubStatisticItems());
+
+                HasData = statisticItems.Count > 0;
+                StatisticItems = statisticItems;
             }
             else
             {

@@ -35,7 +35,7 @@ namespace LiveScore.Soccer.Models.Matches
         public TeamStatistic AwayStatistic { get; }
 
         public MatchStatisticItem GetMainStatistic()
-            => new MatchStatisticItem(AppResources.BallPossession, HomeStatistic?.Possession, AwayStatistic?.Possession);
+            => new MatchStatisticItem(AppResources.BallPossession, HomeStatistic?.Possession, AwayStatistic?.Possession, true);
 
 #pragma warning disable S1541 // Methods and properties should not be too complex
 
@@ -76,12 +76,14 @@ namespace LiveScore.Soccer.Models.Matches
         public MatchStatisticItem(
             string statisticName,
             byte? homeValue, 
-            byte? awayValue)
+            byte? awayValue,
+            bool isPossessionStatistic = false)
         {
             StatisticName = statisticName.ToUpperInvariant();
             HomeValue = homeValue ?? 0;
             AwayValue = awayValue ?? 0;
             IsHidden = HomeValue == 0 && AwayValue == 0;
+            IsPossessionStatistic = isPossessionStatistic;
 
             if (IsVisibled)
             {
@@ -104,6 +106,8 @@ namespace LiveScore.Soccer.Models.Matches
         public float HomePercent { get; }
 
         public float AwayPercent { get; }
+
+        public bool IsPossessionStatistic { get; }
 
         public string HomePercentText => FormatPercent(HomePercent);
 

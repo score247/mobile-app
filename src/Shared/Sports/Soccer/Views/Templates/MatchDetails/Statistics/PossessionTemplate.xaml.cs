@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class StatisticsHeaderTemplate : DataTemplate
+    public partial class PossessionTemplate : DataTemplate
     {
-        public StatisticsHeaderTemplate()
+        public PossessionTemplate()
         {
             InitializeComponent();
         }
