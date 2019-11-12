@@ -53,7 +53,7 @@
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding IsHomeSelected}" Value="True">
                                 <Setter Property="TextColor" Value="White" />
-                                <Setter Property="FontAttributes" Value="Bold"/>
+                                <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
                             </DataTrigger>
                         </Label.Triggers>
                      </Label>
@@ -73,7 +73,7 @@
                         <Label.Triggers>
                             <DataTrigger TargetType="Label" Binding="{Binding IsAwaySelected}" Value="True">
                                 <Setter Property="TextColor" Value="White" />
-                                <Setter Property="FontAttributes" Value="Bold"/>
+                                <Setter Property="FontFamily" Value="{StaticResource RobotoBold}"/>
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
