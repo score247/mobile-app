@@ -81,8 +81,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         public ObservableCollection<H2HMatchGroupViewModel> HeadToHeadMatches { get; set; }
 
-        public ObservableCollection<H2HMatchGroupViewModel> TeamMatches { get; set; }
-
         private void Initialize()
         {
             HomeTeamName = match.HomeTeamName;
@@ -138,7 +136,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             VisibleHeadToHead = false;
             Stats = null;
 
-            Device.BeginInvokeOnMainThread(() => HeadToHeadMatches?.Clear());
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                HeadToHeadMatches?.Clear();
+            });
 
             var teamResults = await GetMatchesAsync(teamIdentifier);
 
@@ -148,7 +149,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                 return;
             }
 
-            HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
+            var matches = BuildMatchGroups(teamResults);
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(matches);
+            });
 
             HasData = true;
         }
@@ -158,7 +164,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             VisibleHeadToHead = true;
 
-            Device.BeginInvokeOnMainThread(() => HeadToHeadMatches?.Clear());
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                HeadToHeadMatches?.Clear();
+            });
 
             var headToHeads = await GetMatchesAsync();
 
@@ -172,7 +181,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
             VisibleStats = Stats?.Total > 0;
 
-            HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(headToHeads));
+            var matches = BuildMatchGroups(headToHeads);
+
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(matches);
+            });
 
             HasData = true;
         }
