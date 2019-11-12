@@ -6,7 +6,6 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
-              xmlns:coreConverters="clr-namespace:LiveScore.Core.Converters;assembly=LiveScore.Core"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:odds="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Odds;assembly=LiveScore.Soccer"
               mc:Ignorable="d">
@@ -19,8 +18,6 @@
                     <resources:MatchDetailOddsViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <odds:OddsItemTemplateSelector x:Key="OddsItemTemplateSelector" />
-                <coreConverters:SelectedTabColorConverter x:Key="SelectedTabColorConverter" />
-                <coreConverters:SelectedTabBackgroundColorConverter x:Key="SelectedTabBgColorConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
         <Grid Margin="8,0">

@@ -35,5 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controls\DateBar\" />
+    <Folder Include="Converters\" />
   </ItemGroup>
 </Project>
