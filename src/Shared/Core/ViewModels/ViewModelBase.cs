@@ -71,7 +71,7 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsNotComingSoon => !IsComingSoon;
 
-        public bool HasData { get; protected set; } = true;
+        public bool HasData { get; protected set; }
 
         public bool NoData => !HasData;
 
@@ -134,7 +134,11 @@ namespace LiveScore.Core.ViewModels
                      EventAggregator?.GetEvent<StopLoadDataEvent>()?.Publish();
                      IsBusy = false;
                  })
-                 .OnFailedConnection(() => networkConnectionManager.PublishNetworkConnectionEvent());
+                 .OnFailedConnection(() =>
+                 {
+                     networkConnectionManager.PublishNetworkConnectionEvent();
+                     IsBusy = false;
+                 });
             }).ConfigureAwait(false);
         }
 

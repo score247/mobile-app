@@ -4,7 +4,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
     public class LineupsItemViewModel
     {
-        public LineupsItemViewModel(
+        protected LineupsItemViewModel(
             IDependencyResolver dependencyResolver,
             bool isSubstitution = false)
         {

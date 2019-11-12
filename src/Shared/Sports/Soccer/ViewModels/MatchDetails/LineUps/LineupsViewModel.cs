@@ -45,9 +45,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
-        public LineupsHeaderViewModel LineupsHeader { get; private set; }
+        public LineupsPicthViewModel LineupsPitch { get; private set; }
 
-        public List<LineupsGroupViewModel> SubstitutionAndCoachGroups { get; private set; }
+        public List<LineupsGroupViewModel> LineupsItemGroups { get; private set; }
 
         public bool HasFormation { get; protected set; } = true;
 
@@ -73,7 +73,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                 .GetMatchLineupsAsync(matchId, Language.English)
                 .ConfigureAwait(false);
 
-            beginInvokeOnMainThreadFunc(() => { RenderMatchLineups(matchLineups); });
+            RenderMatchLineups(matchLineups);
         }
 
         private void RenderMatchLineups(MatchLineups matchLineups)
@@ -85,77 +85,111 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             else
             {
                 HasData = true;
-                BuildStartingLineups(matchLineups);
+                HasFormation = (matchLineups.Home?.Formation != null);
+
+                if (HasFormation)
+                {
+                    var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
+                    beginInvokeOnMainThreadFunc(() =>
+                    {
+                        LineupsPitch = new LineupsPicthViewModel(
+                          matchLineups.PitchView,
+                          deviceInfo,
+                          matchLineups.Home?.Name,
+                          matchLineups.Home?.Formation,
+                          matchLineups.Away?.Name,
+                          matchLineups.Away?.Formation);
+                        LineupsItemGroups = otherLineupsInfo;
+                    });
+                }
+                else
+                {
+                    var noFormationLineups = BuildNoFormationLineupsGroup(matchLineups);
+
+                    if (noFormationLineups != null)
+                    {
+                        beginInvokeOnMainThreadFunc(() =>
+                        {
+                            LineupsItemGroups = new List<LineupsGroupViewModel>
+                            {
+                                noFormationLineups
+                            };
+                        });
+                    }
+
+                    var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
+                    beginInvokeOnMainThreadFunc(() => LineupsItemGroups.AddRange(otherLineupsInfo));
+                }
             }
 
             IsRefreshing = false;
         }
 
-        private void BuildStartingLineups(MatchLineups matchLineups)
+        private List<LineupsGroupViewModel> BuildOtherLineupsInfo(MatchLineups matchLineups)
         {
-            HasFormation = (matchLineups.Home?.Formation != null);
-
-            if (HasFormation)
-            {
-                BuildFormationLineups(matchLineups);
-            }
-            else
-            {
-                BuildNonFormationLineups(matchLineups);
-            }
-        }
-
-        private void BuildNonFormationLineups(MatchLineups matchLineups)
-        {
-            SubstitutionAndCoachGroups = BuildNoFormationLineupsGroup(matchLineups);
+            var lineupsItemGroups = new List<LineupsGroupViewModel>();
 
             var substitutions = BuildSubstitutions(matchLineups);
-            SubstitutionAndCoachGroups.AddRange(substitutions);
 
-            var substitutionAndCoachGroup = BuildSubstitutionAndCoachGroups(matchLineups);
-            SubstitutionAndCoachGroups.AddRange(substitutionAndCoachGroup);
+            if (substitutions != null)
+            {
+                lineupsItemGroups.Add(substitutions);
+            }
+
+            var subtitutePlayers = BuildSubstitutePlayers(matchLineups);
+
+            if (subtitutePlayers != null)
+            {
+                lineupsItemGroups.Add(subtitutePlayers);
+            }
+
+            var coaches = BuildCoaches(matchLineups.Home, matchLineups.Away);
+
+            if (coaches != null)
+            {
+                lineupsItemGroups.Add(coaches);
+            }
+
+            return lineupsItemGroups;
         }
 
-        private void BuildFormationLineups(MatchLineups matchLineups)
+        private LineupsGroupViewModel BuildSubstitutions(MatchLineups matchLineups)
         {
-            LineupsHeader = new LineupsHeaderViewModel(
-                                                       matchLineups.PitchView,
-                                                       deviceInfo,
-                                                       matchLineups.Home?.Name,
-                                                       matchLineups.Home?.Formation,
-                                                       matchLineups.Away?.Name,
-                                                       matchLineups.Away?.Formation);
-
-            SubstitutionAndCoachGroups = BuildSubstitutions(matchLineups);
-
-            var substitutionAndCoachGroups = BuildSubstitutionAndCoachGroups(matchLineups);
-            SubstitutionAndCoachGroups.AddRange(substitutionAndCoachGroups);
-        }
-
-        private List<LineupsGroupViewModel> BuildSubstitutions(MatchLineups matchLineups)
-        {
-            var lineupsGroups = new List<LineupsGroupViewModel>();
+            LineupsGroupViewModel lineupsGroups = null;
             var homeSubstitutionEvents = matchLineups?.Home?.SubstitutionEvents;
             var awaySubstitutionEvents = matchLineups?.Away?.SubstitutionEvents;
+
             if (homeSubstitutionEvents?.Any() == true || awaySubstitutionEvents?.Any() == true)
             {
-                lineupsGroups.Add(BuildSubstitutionsGroup(homeSubstitutionEvents, awaySubstitutionEvents, AppResources.Substitutions));
+                var totalHomeSubstitutions = homeSubstitutionEvents.Count();
+                var totalAwaySubstitutions = awaySubstitutionEvents.Count();
+                var totalSubstitutions = Math.Max(totalHomeSubstitutions, totalAwaySubstitutions);
+                var substitutionsItems = BuildSubstitutionItems(
+                        homeSubstitutionEvents,
+                        awaySubstitutionEvents,
+                        totalHomeSubstitutions,
+                        totalAwaySubstitutions,
+                        totalSubstitutions);
+
+                lineupsGroups = new LineupsGroupViewModel(AppResources.Substitutions, substitutionsItems);
             }
 
             return lineupsGroups;
         }
 
-        private LineupsGroupViewModel BuildSubstitutionsGroup(IEnumerable<TimelineEvent> homeSubstitutions, IEnumerable<TimelineEvent> awaySubstitutions, string substituionHeader)
+        private List<SubstitutionViewModel> BuildSubstitutionItems(
+            IEnumerable<TimelineEvent> homeSubstitutionEvents,
+            IEnumerable<TimelineEvent> awaySubstitutionEvents,
+            int totalHomeSubstitutions,
+            int totalAwaySubstitutions,
+            int totalSubstitutions)
         {
-            var totalHomeSubstitutions = homeSubstitutions.Count();
-            var totalAwaySubstitutions = awaySubstitutions.Count();
-            var totalSubstitutions = Math.Max(totalHomeSubstitutions, totalAwaySubstitutions);
             var substitutionsItems = new List<SubstitutionViewModel>();
 
             for (var index = 0; index < totalSubstitutions; index++)
             {
-                var homeSubstitution = index < totalHomeSubstitutions ? homeSubstitutions.ElementAt(index) : default;
-                var awaySubstitution = index < totalAwaySubstitutions ? awaySubstitutions.ElementAt(index) : default;
+                var homeSubstitution = index < totalHomeSubstitutions ? homeSubstitutionEvents.ElementAt(index) : default;
+                var awaySubstitution = index < totalAwaySubstitutions ? awaySubstitutionEvents.ElementAt(index) : default;
 
                 substitutionsItems.Add(new SubstitutionViewModel(
                     DependencyResolver,
@@ -163,55 +197,41 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                     awaySubstitution));
             }
 
-            return new LineupsGroupViewModel(substituionHeader, substitutionsItems);
+            return substitutionsItems;
         }
 
-        private List<LineupsGroupViewModel> BuildNoFormationLineupsGroup(MatchLineups matchLineups)
+        private LineupsGroupViewModel BuildNoFormationLineupsGroup(MatchLineups matchLineups)
         {
-            var lineupsGroups = new List<LineupsGroupViewModel>();
-            var homeTeam = matchLineups?.Home;
-            var awayTeam = matchLineups?.Away;
-            if (homeTeam != null && awayTeam != null)
-            {
-                lineupsGroups.Add(BuildLineupsPlayerGroup(homeTeam.Players, awayTeam.Players, AppResources.LineupsPlayers));
-            }
-
-            return lineupsGroups;
-        }
-
-        private List<LineupsGroupViewModel> BuildSubstitutionAndCoachGroups(MatchLineups matchLineups)
-        {
-            var lineupsGroups = new List<LineupsGroupViewModel>();
+            LineupsGroupViewModel lineupsGroups = null;
             var homeTeam = matchLineups?.Home;
             var awayTeam = matchLineups?.Away;
 
             if (homeTeam != null && awayTeam != null)
             {
-                lineupsGroups.Add(BuildLineupsPlayerGroup(homeTeam.Substitutions, awayTeam.Substitutions, AppResources.SubstitutePlayers));
-            }
-
-            if (homeTeam?.Coach != null || awayTeam?.Coach != null)
-            {
-                lineupsGroups.Add(BuildCouchesGroup(homeTeam, awayTeam));
+                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Players, awayTeam.Players, AppResources.LineupsPlayers);
             }
 
             return lineupsGroups;
         }
 
-        private LineupsGroupViewModel BuildCouchesGroup(
-            TeamLineups homeTeam,
-            TeamLineups awayTeam)
-            => new LineupsGroupViewModel(
-                AppResources.Coaches,
-                new List<LineupsPlayerViewModel>
-                {
-                    new LineupsPlayerViewModel(DependencyResolver, homeTeam?.Coach?.Name, awayTeam?.Coach?.Name)
-                });
+        private LineupsGroupViewModel BuildSubstitutePlayers(MatchLineups matchLineups)
+        {
+            LineupsGroupViewModel lineupsGroups = null;
+            var homeTeam = matchLineups?.Home;
+            var awayTeam = matchLineups?.Away;
+
+            if (homeTeam != null && awayTeam != null)
+            {
+                lineupsGroups = BuildLineupsPlayerGroup(homeTeam.Substitutions, awayTeam.Substitutions, AppResources.SubstitutePlayers);
+            }
+
+            return lineupsGroups;
+        }
 
         private LineupsGroupViewModel BuildLineupsPlayerGroup(
-            IEnumerable<Player> homePlayers,
-            IEnumerable<Player> awayPlayers,
-            string groupName)
+              IEnumerable<Player> homePlayers,
+              IEnumerable<Player> awayPlayers,
+              string groupName)
         {
             var totalHomePlayers = homePlayers.Count();
             var totalAwayPlayers = awayPlayers.Count();
@@ -236,6 +256,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
 
             return new LineupsGroupViewModel(groupName, lineupsItems);
+        }
+
+        private LineupsGroupViewModel BuildCoaches(TeamLineups homeTeam, TeamLineups awayTeam)
+        {
+            LineupsGroupViewModel lineupsGroups = null;
+
+            if (homeTeam?.Coach != null || awayTeam?.Coach != null)
+            {
+                lineupsGroups = new LineupsGroupViewModel(
+                    AppResources.Coaches,
+                    new List<LineupsPlayerViewModel>
+                    {
+                        new LineupsPlayerViewModel(DependencyResolver, homeTeam?.Coach?.Name, awayTeam?.Coach?.Name)
+                    });
+            }
+
+            return lineupsGroups;
         }
     }
 }

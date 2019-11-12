@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
-    public class LineupsHeaderViewModel
+    public class LineupsPicthViewModel
     {
 #pragma warning disable S103 // Lines should not be too long
         private const string pitchViewHtml = "<html><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><body style=\"padding: 0; margin: 0;\">{0}</body></html>";
@@ -12,7 +12,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         private const int stadiumHeight = 530;
         private const string formationFormattedSplit = " - ";
 
-        public LineupsHeaderViewModel(
+        public LineupsPicthViewModel(
             string pitchView,
             IDeviceInfo deviceInfo,
             string homeName,

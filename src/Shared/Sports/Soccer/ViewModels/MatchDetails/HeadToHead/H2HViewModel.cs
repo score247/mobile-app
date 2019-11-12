@@ -78,6 +78,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public ObservableCollection<H2HMatchGroupViewModel> HeadToHeadMatches { get; set; }
+
         public ObservableCollection<H2HMatchGroupViewModel> TeamMatches { get; set; }
 
         private void Initialize()
@@ -102,7 +103,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         public override async void OnResumeWhenNetworkOK()
         {
             base.OnResumeWhenNetworkOK();
-            
+
             await RefreshAsync();
         }
 
@@ -198,7 +199,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             => teamIdentifier == HomeIdentifier
                     ? new KeyValuePair<string, string>(match.HomeTeamId, match.AwayTeamId)
                     : new KeyValuePair<string, string>(match.AwayTeamId, match.HomeTeamId);
-
 
         private IEnumerable<H2HMatchGroupViewModel> BuildMatchGroups(IEnumerable<IMatch> headToHeads)
         {

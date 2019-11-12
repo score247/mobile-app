@@ -1,12 +1,22 @@
-﻿using System;
-using LiveScore.Core;
+﻿using LiveScore.Core;
 using LiveScore.Soccer.Models.Matches;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
-    internal class SubstitutionViewModel : LineupsItemViewModel
+    public class SubstitutionViewModel : LineupsItemViewModel
     {
+        public SubstitutionViewModel(
+            IDependencyResolver dependencyResolver,
+            TimelineEvent homeSubstitution,
+            TimelineEvent awaySubstitution)
+            : base(dependencyResolver, true)
+        {
+            BuildHomeSubstitution(homeSubstitution);
+            BuildAwaySubstitution(awaySubstitution);
+        }
+
         public bool IsHaveHomeSubsitution { get; private set; }
+
         public string HomeSubstitutionMinute { get; private set; }
 
         public string HomePlayerInJerseyNumber { get; private set; }
@@ -18,6 +28,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         public string HomePlayerOutName { get; private set; }
 
         public bool IsHaveAwaySubsitution { get; private set; }
+
         public string AwaySubstitutionMinute { get; private set; }
 
         public string AwayPlayerInJerseyNumber { get; private set; }
@@ -27,16 +38,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         public string AwayPlayerOutJerseyNumber { get; private set; }
 
         public string AwayPlayerOutName { get; private set; }
-
-        public SubstitutionViewModel(
-            IDependencyResolver dependencyResolver,
-            TimelineEvent homeSubstitution,
-            TimelineEvent awaySubstitution)
-            : base(dependencyResolver, true)
-        {
-            BuildHomeSubstitution(homeSubstitution);
-            BuildAwaySubstitution(awaySubstitution);
-        }
 
         private void BuildHomeSubstitution(TimelineEvent homeSubstitution)
         {

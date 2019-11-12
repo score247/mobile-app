@@ -29,9 +29,8 @@
                      RefreshColor="White">
             <tabStrip:TabItemCollectionView IsGrouped="True"
                                             BackgroundColor="{StaticResource ListViewBgColor}"
-                                            ItemsSource="{Binding SubstitutionAndCoachGroups}"
+                                            ItemsSource="{Binding LineupsItemGroups}"
                                             ItemTemplate="{StaticResource lineupsItemSelector}"
-                                            HeightRequest="{Binding FooterHeight}"
                                             ItemSizingStrategy="MeasureFirstItem"
                                             IsVisible="{Binding IsNotBusy}"
                                             VerticalOptions="FillAndExpand"
@@ -44,19 +43,19 @@
                                             IsVisible="{Binding HasData}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                           Text="{Binding LineupsHeader.HomeName}" />
+                                           Text="{Binding LineupsPitch.HomeName}" />
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                           Text="{Binding LineupsHeader.HomeFormation}" />
+                                           Text="{Binding LineupsPitch.HomeFormation}" />
                                 </FlexLayout>
-                                <WebView HeightRequest="{Binding LineupsHeader.PitchViewHeight}"
-                                         Source="{Binding LineupsHeader.LineupsPitchView}" />
+                                <WebView HeightRequest="{Binding LineupsPitch.PitchViewHeight}"
+                                         Source="{Binding LineupsPitch.LineupsPitchView}" />
                                 <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
                                             IsVisible="{Binding HasData}"
                                             JustifyContent="SpaceBetween">
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                           Text="{Binding LineupsHeader.AwayName}" />
+                                           Text="{Binding LineupsPitch.AwayName}" />
                                     <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                           Text="{Binding LineupsHeader.AwayFormation}" />
+                                           Text="{Binding LineupsPitch.AwayFormation}" />
                                 </FlexLayout>
                             </StackLayout>
                             <Label Style="{StaticResource NoInfo}"

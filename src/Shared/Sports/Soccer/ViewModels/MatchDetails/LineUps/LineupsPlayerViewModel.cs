@@ -13,40 +13,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                 EventType.ScoreChange,
                 EventType.ScoreChangeByOwnGoal};
 
-        public string HomeName { get; }
-
-        public string AwayName { get; }
-
-        public int? HomeJerseyNumber { get; }
-
-        public int? AwayJerseyNumber { get; }
-
-        public string HomeEventOneImageSource { get; private set; }
-        public int HomeEventOneCount { get; private set; }
-        public bool HomeEventOneVisible { get => HomeEventOneCount > 1; }
-
-        public string HomeEventTwoImageSource { get; private set; }
-        public int HomeEventTwoCount { get; private set; }
-        public bool HomeEventTwoVisible { get => HomeEventTwoCount > 1; }
-
-        public string HomeEventThreeImageSource { get; private set; }
-        public int HomeEventThreeCount { get; private set; }
-        public bool HomeEventThreeVisible { get => HomeEventThreeCount > 1; }
-
-        public string AwayEventOneImageSource { get; private set; }
-        public int AwayEventOneCount { get; private set; }
-        public bool AwayEventOneVisible { get => AwayEventOneCount > 1; }
-
-        public string AwayEventTwoImageSource { get; private set; }
-        public int AwayEventTwoCount { get; private set; }
-        public bool AwayEventTwoVisible { get => AwayEventTwoCount > 1; }
-
-        public string AwayEventThreeImageSource { get; private set; }
-        public int AwayEventThreeCount { get; private set; }
-        public bool AwayEventThreeVisible { get => AwayEventThreeCount > 1; }
-        protected ITimelineEventImageBuilder ImageConverter { get; set; }
-        public bool IsSubstitute { get; private set; }
-
 #pragma warning disable S107 // Methods should not have too many parameters
 
         public LineupsPlayerViewModel(
@@ -70,6 +36,54 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             BuildHomeEventImages(homeEventStatistics);
             BuildAwayEventImages(awayEventStatistics);
         }
+
+        public string HomeName { get; }
+
+        public string AwayName { get; }
+
+        public int? HomeJerseyNumber { get; }
+
+        public int? AwayJerseyNumber { get; }
+
+        public string HomeEventOneImageSource { get; private set; }
+
+        public int HomeEventOneCount { get; private set; }
+
+        public bool HomeEventOneVisible { get => HomeEventOneCount > 1; }
+
+        public string HomeEventTwoImageSource { get; private set; }
+
+        public int HomeEventTwoCount { get; private set; }
+
+        public bool HomeEventTwoVisible { get => HomeEventTwoCount > 1; }
+
+        public string HomeEventThreeImageSource { get; private set; }
+
+        public int HomeEventThreeCount { get; private set; }
+
+        public bool HomeEventThreeVisible { get => HomeEventThreeCount > 1; }
+
+        public string AwayEventOneImageSource { get; private set; }
+
+        public int AwayEventOneCount { get; private set; }
+
+        public bool AwayEventOneVisible { get => AwayEventOneCount > 1; }
+
+        public string AwayEventTwoImageSource { get; private set; }
+
+        public int AwayEventTwoCount { get; private set; }
+
+        public bool AwayEventTwoVisible { get => AwayEventTwoCount > 1; }
+
+        public string AwayEventThreeImageSource { get; private set; }
+
+        public int AwayEventThreeCount { get; private set; }
+
+        public bool AwayEventThreeVisible { get => AwayEventThreeCount > 1; }
+
+        protected ITimelineEventImageBuilder ImageConverter { get; set; }
+
+        public bool IsSubstitute { get; private set; }
 
         private void BuildAwayEventImages(IDictionary<EventType, int> awayEventStatistics)
         {
