@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
-             mc:Ignorable="d"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              mc:Ignorable="d"
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.LineupsPlayerTemplate">
+              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.LineUps.LineupsPlayerTemplate">
     <StackLayout>
         <StackLayout.Resources>
             <ResourceDictionary>
@@ -27,70 +27,78 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="42" />
+                <RowDefinition Height="50" />
             </Grid.RowDefinitions>
-            <StackLayout Grid.Column="0" Style="{StaticResource MatchDetailLineUpsIconArea}">
+            <StackLayout Grid.Column="0"
+                         Style="{StaticResource MatchDetailLineUpsIconArea}">
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding HomeEventThreeImageSource}" />
-                    <Button IsVisible="{Binding HomeEventThreeVisible}" Text="{Binding HomeEventThreeCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding HomeEventThreeImageSource}" />
+                    <Button IsVisible="{Binding HomeEventThreeVisible}"
+                            Text="{Binding HomeEventThreeCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
 
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding HomeEventTwoImageSource}" />
-                    <Button IsVisible="{Binding HomeEventTwoVisible}" Text="{Binding HomeEventTwoCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding HomeEventTwoImageSource}" />
+                    <Button IsVisible="{Binding HomeEventTwoVisible}"
+                            Text="{Binding HomeEventTwoCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding HomeEventOneImageSource}" />
-                    <Button IsVisible="{Binding HomeEventOneVisible}" Text="{Binding HomeEventOneCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding HomeEventOneImageSource}" />
+                    <Button IsVisible="{Binding HomeEventOneVisible}"
+                            Text="{Binding HomeEventOneCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
             </StackLayout>
             <Label Grid.Column="1"
-                Text="{Binding HomeJerseyNumber}"
-                Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
+                   Text="{Binding HomeJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpHomeShirtNumber}" />
             <Label Grid.Column="2"
-                Text="{Binding HomeName}"
-                Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                   Text="{Binding HomeName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
 
-            <StackLayout Grid.Column="3" Style="{StaticResource MatchDetailLineUpsIconArea}">
+            <StackLayout Grid.Column="3"
+                         Style="{StaticResource MatchDetailLineUpsIconArea}">
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding AwayEventThreeImageSource}" />
-                    <Button IsVisible="{Binding AwayEventThreeVisible}" Text="{Binding AwayEventThreeCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding AwayEventThreeImageSource}" />
+                    <Button IsVisible="{Binding AwayEventThreeVisible}"
+                            Text="{Binding AwayEventThreeCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
 
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding AwayEventTwoImageSource}" />
-                    <Button IsVisible="{Binding AwayEventTwoVisible}" Text="{Binding AwayEventTwoCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding AwayEventTwoImageSource}" />
+                    <Button IsVisible="{Binding AwayEventTwoVisible}"
+                            Text="{Binding AwayEventTwoCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
 
                 <AbsoluteLayout Style="{StaticResource MatchDetailLineUpsScoreBox}">
-                    <ffImageLoading:SvgCachedImage
-                                           Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
-                                           DownsampleToViewSize="True"
-                                           Source="{Binding AwayEventOneImageSource}" />
-                    <Button IsVisible="{Binding AwayEventOneVisible}" Text="{Binding AwayEventOneCount}" Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
+                    <ffImageLoading:SvgCachedImage Style="{StaticResource MatchDetailLineUpsSubstitutionImage}"
+                                                   DownsampleToViewSize="True"
+                                                   Source="{Binding AwayEventOneImageSource}" />
+                    <Button IsVisible="{Binding AwayEventOneVisible}"
+                            Text="{Binding AwayEventOneCount}"
+                            Style="{StaticResource MatchDetailLineUpsScoreNumber}" />
                 </AbsoluteLayout>
             </StackLayout>
             <Label Grid.Column="4"
-                Text="{Binding AwayJerseyNumber}"
-                Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
+                   Text="{Binding AwayJerseyNumber}"
+                   Style="{StaticResource MatchDetailLinesUpAwayShirtNumber}" />
             <Label Grid.Column="5"
-                Text="{Binding AwayName}"
-                Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
+                   Text="{Binding AwayName}"
+                   Style="{StaticResource MatchDetailLinesUpSubstitutePlayer}" />
         </Grid>
     </StackLayout>
 </DataTemplate>

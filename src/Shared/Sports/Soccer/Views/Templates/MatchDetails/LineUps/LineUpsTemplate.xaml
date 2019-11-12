@@ -32,7 +32,7 @@
                                             ItemsSource="{Binding SubstitutionAndCoachGroups}"
                                             ItemTemplate="{StaticResource lineupsItemSelector}"
                                             HeightRequest="{Binding FooterHeight}"
-                                            ItemSizingStrategy="None"
+                                            ItemSizingStrategy="MeasureFirstItem"
                                             IsVisible="{Binding IsNotBusy}"
                                             VerticalOptions="FillAndExpand"
                                             Header="{Binding .}">

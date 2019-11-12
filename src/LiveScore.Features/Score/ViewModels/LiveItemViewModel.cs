@@ -86,7 +86,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc);
 
-            HasData = message.NewMatches.Any() || MatchItemsSource.Any();
+            HasData = (message.NewMatches?.Any() == true) || MatchItemsSource.Any();
 
             if (HasData)
             {
