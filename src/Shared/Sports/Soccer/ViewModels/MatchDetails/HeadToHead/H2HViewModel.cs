@@ -104,7 +104,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             base.OnResumeWhenNetworkOK();
 
-            await RefreshAsync();
+            if (HeadToHeadMatches?.Any() == false)
+            {
+                await RefreshAsync();
+            }
         }
 
         public override Task OnNetworkReconnectedAsync() => RefreshAsync();
