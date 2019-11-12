@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
 using LiveScore.Common;
@@ -189,6 +190,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             Assert.True(viewModel.VisibleHomeResults);
             Assert.False(viewModel.VisibleAwayResults);
             Assert.False(viewModel.VisibleHeadToHead);
+            Assert.Null(viewModel.Stats);
         }
 
         [Fact]
@@ -203,6 +205,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             Assert.False(viewModel.VisibleHomeResults);
             Assert.True(viewModel.VisibleAwayResults);
             Assert.False(viewModel.VisibleHeadToHead);
+            Assert.Null(viewModel.Stats);
         }
 
         [Fact]
@@ -258,6 +261,58 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Assert
             await teamService.Received(1).GetHeadToHeadsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName);
             Assert.False(viewModel.IsRefreshing);
+        }
+
+        [Fact]
+        public async Task RefreshCommand_SelectedHome_GetTeamResults()
+        {
+            // Arrange
+            await viewModel.OnTeamResultTapped.ExecuteAsync("home");
+
+            // Act
+            await viewModel.RefreshCommand.ExecuteAsync();
+
+            // Assert
+            await teamService.Received(2).GetTeamResultsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName);
+            Assert.False(viewModel.IsRefreshing);
+        }
+
+        [Fact]
+        public async Task LoadTeamResultAsync_Home_HasData()
+        {
+            // Arrange
+            teamService.GetTeamResultsAsync(match.HomeTeamId, match.AwayTeamId, viewModel.CurrentLanguage.DisplayName)
+                .Returns(new List<SoccerMatch>
+                {
+                    fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.Closed),
+                    fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:2").With(match => match.EventStatus, MatchStatus.Closed)
+                });
+
+            // Act
+            await viewModel.LoadTeamResultAsync("home");
+
+            // Assert
+            Assert.True(viewModel.HasData);
+            Assert.Equal(2, viewModel.HeadToHeadMatches.Count());
+        }
+
+        [Fact]
+        public async Task LoadTeamResultAsync_Away_HasData()
+        {
+            // Arrange
+            teamService.GetTeamResultsAsync(match.AwayTeamId, match.HomeTeamId, viewModel.CurrentLanguage.DisplayName)
+                .Returns(new List<SoccerMatch>
+                {
+                    fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:1").With(match => match.EventStatus, MatchStatus.Closed),
+                    fixture.Create<SoccerMatch>().With(match => match.Id, "sr:match:2").With(match => match.EventStatus, MatchStatus.Closed)
+                });
+
+            // Act
+            await viewModel.LoadTeamResultAsync("away");
+
+            // Assert
+            Assert.True(viewModel.HasData);
+            Assert.Equal(2, viewModel.HeadToHeadMatches.Count());
         }
     }
 }
