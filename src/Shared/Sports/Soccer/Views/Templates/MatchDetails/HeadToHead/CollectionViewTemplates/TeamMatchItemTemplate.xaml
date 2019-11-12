@@ -49,7 +49,14 @@
                          Style="{StaticResource MatchHomeTeam}">
                     <Label AutomationId="HomeTeamName"
                            Style="{StaticResource Team}"
-                           Text="{Binding Match.HomeTeamName, Mode=OneTime}" />
+                           Text="{Binding Match.HomeTeamName, Mode=OneTime}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsHomeSelected}" Value="True">
+                                <Setter Property="TextColor" Value="White" />
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                     </Label>
                     <Label 
                            IsVisible="{Binding Match.HomePenaltyImage, Converter={StaticResource TextNotEmptyConverter}}"
                            Style="{StaticResource MatchPenaltyIcon}" />
@@ -62,7 +69,14 @@
                              Style="{StaticResource MatchAwayTeam}">
                     <Label AutomationId="AwayTeamName"
                            Style="{StaticResource Team}"
-                           Text="{Binding Match.AwayTeamName, Mode=OneTime}"/>
+                           Text="{Binding Match.AwayTeamName, Mode=OneTime}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding IsAwaySelected}" Value="True">
+                                <Setter Property="TextColor" Value="White" />
+                                <Setter Property="FontAttributes" Value="Bold"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
                     <Label 
                            IsVisible="{Binding Match.AwayPenaltyImage, Converter={StaticResource TextNotEmptyConverter}, Mode=OneTime}"
                            Style="{StaticResource MatchPenaltyIcon}" />
