@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Converters;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
+using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
@@ -109,6 +111,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         public override Task OnNetworkReconnectedAsync() => RefreshAsync();
 
+        [Time]
         internal async Task RefreshAsync()
         {
             IsRefreshing = true;
@@ -128,12 +131,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             IsRefreshing = false;
         }
 
+        [Time]
         internal async Task LoadTeamResultAsync(string teamIdentifier)
         {
             SelectedTeamIdentifier = teamIdentifier;
             VisibleHeadToHead = false;
+            Stats = null;
 
-            Device.BeginInvokeOnMainThread(() => TeamMatches?.Clear());
+            Device.BeginInvokeOnMainThread(() => HeadToHeadMatches?.Clear());
 
             var teamResults = await GetMatchesAsync(teamIdentifier);
 
@@ -143,11 +148,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                 return;
             }
 
-            TeamMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
+            HeadToHeadMatches = new ObservableCollection<H2HMatchGroupViewModel>(BuildMatchGroups(teamResults));
 
             HasData = true;
         }
 
+        [Time]
         internal async Task LoadHeadToHeadAsync()
         {
             VisibleHeadToHead = true;
@@ -162,6 +168,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                 return;
             }
 
+            Debug.WriteLine("LoadHeadToHeadAsync - start binding data");
             Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
             VisibleStats = Stats?.Total > 0;
 
