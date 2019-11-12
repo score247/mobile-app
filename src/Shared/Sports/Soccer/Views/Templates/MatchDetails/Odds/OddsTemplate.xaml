@@ -45,28 +45,43 @@
                     </Grid.RowDefinitions>
                     <Button Grid.Row="0"
                             Grid.Column="0"
-                            BackgroundColor="{Binding IsAsianHdpSelected, Converter={StaticResource SelectedTabBgColorConverter}}"
                             Command="{Binding OnOddsTabClicked}"
                             CommandParameter="3"
                             Style="{StaticResource SubTab}"
-                            Text="{languageResources:Translate AsianHDP}"
-                            TextColor="{Binding IsAsianHdpSelected, Converter={StaticResource SelectedTabColorConverter}}" />
+                            Text="{languageResources:Translate AsianHDP}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsAsianHdpSelected}" Value="True">
+                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
+                             </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                     <Button Grid.Row="0"
                             Grid.Column="1"
-                            BackgroundColor="{Binding IsOverUnderSelected, Converter={StaticResource SelectedTabBgColorConverter}}"
                             Command="{Binding OnOddsTabClicked}"
                             CommandParameter="2"
                             Style="{StaticResource SubTab}"
-                            Text="{languageResources:Translate OverUnder}"
-                            TextColor="{Binding IsOverUnderSelected, Converter={StaticResource SelectedTabColorConverter}}" />
+                            Text="{languageResources:Translate OverUnder}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsOverUnderSelected}" Value="True">
+                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
+                             </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                     <Button Grid.Row="0"
                             Grid.Column="2"
-                            BackgroundColor="{Binding IsOneXTwoSelected, Converter={StaticResource SelectedTabBgColorConverter}}"
                             Command="{Binding OnOddsTabClicked}"
                             CommandParameter="1"
                             Style="{StaticResource SubTab}"
-                            Text="{languageResources:Translate OneXTwo}"
-                            TextColor="{Binding IsOneXTwoSelected, Converter={StaticResource SelectedTabColorConverter}}" />
+                            Text="{languageResources:Translate OneXTwo}">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding IsOneXTwoSelected}" Value="True">
+                                    <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}"/>
+                             </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
                 </Grid>
             </Frame>
 
