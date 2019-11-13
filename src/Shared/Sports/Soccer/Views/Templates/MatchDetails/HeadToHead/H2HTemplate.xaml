@@ -20,8 +20,8 @@
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailH2HViewResource />
                 </ResourceDictionary.MergedDictionaries>
-                <collectionViewTemplates:H2HMatchGroupHeaderTemplate x:Key="MatchGroupHeaderTemplate" />
                 <collectionViewTemplates:H2HHeaderTemplate x:Key="HeaderTemplate" />
+                <collectionViewTemplates:H2HMatchGroupHeaderTemplate x:Key="MatchGroupHeaderTemplate" />
                 <headToHead:H2HTemplateSelector x:Key="MatchItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
@@ -49,7 +49,7 @@
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                                     ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                    ItemsSource="{Binding HeadToHeadMatches}"
+                                                    ItemsSource="{Binding GroupedMatches}"
                                                     Header="{Binding Stats}"
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     HeaderTemplate="{StaticResource HeaderTemplate}"
