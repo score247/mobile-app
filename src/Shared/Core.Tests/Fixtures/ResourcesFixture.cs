@@ -63,6 +63,7 @@
             app.Resources["DropdownList"] = new Style(typeof(Picker));
 
             app.Resources["HorizontalLine"] = new Style(typeof(BoxView));
+            app.Resources["ListViewBgColor"] = Color.FromHex("#66FF59");
         }
     }
 }

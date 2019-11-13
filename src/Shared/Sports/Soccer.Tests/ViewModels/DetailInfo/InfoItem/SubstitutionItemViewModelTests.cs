@@ -8,7 +8,7 @@ using Xunit;
 
 namespace Soccer.Tests.ViewModels.DetailInfo.InfoItem
 {
-    public class SubstitutionItemViewModelTests : IClassFixture<ViewModelBaseFixture>
+    public class SubstitutionItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
         private readonly Fixture fixture;
         private readonly INavigationService navigationService;
