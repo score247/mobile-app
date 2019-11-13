@@ -8,6 +8,7 @@ namespace LiveScore.Soccer.Models.Matches
     [MessagePackObject]
     public class MatchCommentary
     {
+#pragma warning disable S107 // Methods should not have too many parameters
         [SerializationConstructor]
         public MatchCommentary(
             string timelineId,
@@ -28,6 +29,7 @@ namespace LiveScore.Soccer.Models.Matches
             GoalScorer = goalScorer;
             IsPenaltyShootOutScored = isPenaltyShootOutScored;
         }
+#pragma warning restore S107 // Methods should not have too many parameters
 
         [Key(0)]
         public string TimelineId { get; }
