@@ -4,7 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OverUnder;
     using NSubstitute;
     using Xunit;
 
@@ -23,8 +23,8 @@
             oddsMovement.UpdateTime.Returns(new System.DateTime(2018, 7, 20, 12, 55, 00));
             oddsMovement.BetOptions.Returns(new List<BetOptionOdds>
             {
-                new BetOptionOdds{ Type = "over", LiveOdds = 5.000m, OpeningOdds = 4.900m, OptionValue="2.5", OddsTrend = OddsTrend.Up },
-                new BetOptionOdds{ Type = "under", LiveOdds = 3.200m, OpeningOdds = 3.200m, OptionValue="2.5", OddsTrend = OddsTrend.Neutral },
+                new BetOptionOdds( "over", 5.000m, 4.900m, "1.5", "1.25", OddsTrend.Up ),
+                new BetOptionOdds( "under", 2.500m, 2.800m, "1.8", "2", OddsTrend.Down )
             });
 
             this.baseFixture = baseFixture;
@@ -53,7 +53,7 @@
             viewModel.CreateInstance();
 
             // Assert
-            Assert.Equal("3.20", viewModel.UnderOdds);
+            Assert.Equal("2.50", viewModel.UnderOdds);
         }
 
         [Fact]
@@ -66,7 +66,7 @@
             viewModel.CreateInstance();
 
             // Assert
-            Assert.Equal("2.5", viewModel.OptionValue);
+            Assert.Equal("1.5", viewModel.OptionValue);
         }
 
         [Fact]

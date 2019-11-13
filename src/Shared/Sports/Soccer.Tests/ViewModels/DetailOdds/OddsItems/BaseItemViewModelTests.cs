@@ -5,10 +5,13 @@
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
     using LiveScore.Soccer.Enumerations;
-    using LiveScore.Soccer.ViewModels.MatchDetails.DetailOdds.OddItems;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.AsianHdp;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OneXTwo;
-    using LiveScore.Soccer.Views.Templates.MatchDetails.DetailOdds.OddsItems.OverUnder;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OneXTwo;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OverUnder;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.AsianHdp;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OneXTwo;
+    using LiveScore.Soccer.Views.Templates.MatchDetails.Odds.OddsItems.OverUnder;
     using NSubstitute;
     using Xunit;
 

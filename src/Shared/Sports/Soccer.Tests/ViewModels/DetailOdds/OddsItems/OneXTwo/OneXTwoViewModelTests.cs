@@ -4,7 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.DetailOdds.OddItems;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.OneXTwo;
     using NSubstitute;
     using Xunit;
 
@@ -17,12 +17,12 @@
         public OneXTwoViewModelTests(ViewModelBaseFixture baseFixture)
         {
             betTypeOdds = Substitute.For<IBetTypeOdds>();
-            betTypeOdds.Bookmaker.Returns(new Bookmaker { Id = "book1", Name = "book1" });
+            betTypeOdds.Bookmaker.Returns(new Bookmaker ( "sr:book:1",  "book1" ));
             betTypeOdds.BetOptions.Returns(new List<BetOptionOdds>
             {
-                new BetOptionOdds{ Type = "home", LiveOdds = 5.000m, OpeningOdds = 4.900m, OddsTrend = OddsTrend.Up },
-                new BetOptionOdds{ Type = "draw", LiveOdds = 3.200m, OpeningOdds = 3.200m, OddsTrend = OddsTrend.Neutral },
-                new BetOptionOdds{ Type = "away", LiveOdds = 2.500m, OpeningOdds = 2.800m, OddsTrend = OddsTrend.Down }
+                new BetOptionOdds( "home", 5.000m, 4.900m, "1.5", "1.25", OddsTrend.Up ),
+                new BetOptionOdds( "draw", 3.200m, 3.200m, "3.2", "3.2", OddsTrend.Neutral ),
+                new BetOptionOdds( "away", 2.500m, 2.800m, "2.5", "2.8", OddsTrend.Down )
             });
 
             this.baseFixture = baseFixture;

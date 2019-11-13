@@ -4,6 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
     using NSubstitute;
     using Xunit;
 
@@ -22,8 +23,8 @@
             oddsMovement.UpdateTime.Returns(new System.DateTime(2018, 7, 20, 12, 55, 00));
             oddsMovement.BetOptions.Returns(new List<BetOptionOdds>
             {
-                new BetOptionOdds{ Type = "home", LiveOdds = 5.000m, OpeningOdds = 4.900m, OptionValue = "1", OddsTrend = OddsTrend.Up },
-                new BetOptionOdds{ Type = "away", LiveOdds = 2.500m, OpeningOdds = 2.800m, OptionValue = "1", OddsTrend = OddsTrend.Down }
+                new BetOptionOdds( "home", 5.000m, 4.900m, "1.5", "1.25", OddsTrend.Up ),
+                new BetOptionOdds( "away", 2.500m, 2.800m, "2.5", "2", OddsTrend.Down )
             });
 
             this.baseFixture = baseFixture;
@@ -52,7 +53,7 @@
             viewModel.CreateInstance();
 
             // Assert
-            Assert.Equal("1", viewModel.OptionValue);
+            Assert.Equal("1.5", viewModel.OptionValue);
         }
 
         [Fact]

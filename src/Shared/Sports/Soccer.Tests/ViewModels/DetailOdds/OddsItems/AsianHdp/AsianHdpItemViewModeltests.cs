@@ -4,6 +4,7 @@
     using LiveScore.Core.Enumerations;
     using LiveScore.Core.Models.Odds;
     using LiveScore.Core.Tests.Fixtures;
+    using LiveScore.Soccer.ViewModels.MatchDetails.Odds.OddItems.AsianHdp;
     using NSubstitute;
     using Xunit;
 
@@ -16,11 +17,11 @@
         public AsianHdpItemViewModeltests(ViewModelBaseFixture baseFixture)
         {
             betTypeOdds = Substitute.For<IBetTypeOdds>();
-            betTypeOdds.Bookmaker.Returns(new Bookmaker { Id = "book1", Name = "book1" });
+            betTypeOdds.Bookmaker.Returns(new Bookmaker("book1", "book1"));
             betTypeOdds.BetOptions.Returns(new List<BetOptionOdds>
             {
-                new BetOptionOdds{ Type = "home", LiveOdds = 5.000m, OpeningOdds = 4.900m, OddsTrend = OddsTrend.Up, OpeningOptionValue= "1.25", OptionValue = "1.5" },
-                new BetOptionOdds{ Type = "away", LiveOdds = 2.500m, OpeningOdds = 2.800m, OddsTrend = OddsTrend.Down, OpeningOptionValue= "2", OptionValue = "2.5" }
+                new BetOptionOdds( "home", 5.000m, 4.900m,  "1.5", "1.25", OddsTrend.Up ),
+                new BetOptionOdds( "away", 2.500m, 2.800m, "2.5", "2", OddsTrend.Down )
             });
 
             this.baseFixture = baseFixture;
