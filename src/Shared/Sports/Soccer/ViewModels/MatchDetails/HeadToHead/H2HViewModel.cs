@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -25,7 +24,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
     public class H2HViewModel : TabItemViewModel
     {
         private const string HomeIdentifier = "home";
-        private const string AwayIdentifier = "away";
 
         private readonly IMatch match;
         private readonly ITeamService teamService;
@@ -54,13 +52,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         }
 
         public bool IsRefreshing { get; set; }
-
-        public bool VisibleTeamResults => !VisibleHeadToHead;
-
-        public bool VisibleHomeResults => VisibleTeamResults && SelectedTeamIdentifier == HomeIdentifier;
-
-        public bool VisibleAwayResults => VisibleTeamResults && SelectedTeamIdentifier == AwayIdentifier;
-
+    
         public bool VisibleHeadToHead { get; private set; }
 
         public bool VisibleStats { get; private set; }
@@ -160,6 +152,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         internal async Task LoadHeadToHeadAsync()
         {
             VisibleHeadToHead = true;
+            SelectedTeamIdentifier = string.Empty;
 
             var headToHeads = await GetAndBindingMatchesAsync();
 
