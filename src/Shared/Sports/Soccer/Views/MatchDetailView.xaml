@@ -32,7 +32,10 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <StackLayout x:Name="MatchDetailLayout">
+            <StackLayout x:Name="MatchDetailLayout"
+                         VerticalOptions="FillAndExpand"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1.25"
+                         AbsoluteLayout.LayoutFlags="SizeProportional">
                 <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
                          Style="{StaticResource HorizontalLine}" />
                 <Frame CornerRadius="0"
@@ -143,6 +146,7 @@
                        Text="{Binding DisplaySecondLeg}" />
                 <tabStrip:TabStrip x:Name="TabStrip"
                                    ItemTappedCommand="{Binding FunctionTabTappedCommand}"
+                                   VerticalOptions="FillAndExpand"
                                    ItemsSource="{Binding TabItems}" />
                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"

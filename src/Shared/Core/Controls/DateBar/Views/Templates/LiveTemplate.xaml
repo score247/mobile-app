@@ -8,11 +8,11 @@
               xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
-    <AbsoluteLayout HorizontalOptions="Center"
-                    Padding="0,12,0,12"
-                    VerticalOptions="Center"
-                    WidthRequest="60">
-        <AbsoluteLayout.Resources>
+    <FlexLayout AlignItems="Center"
+                JustifyContent="Center"
+                HeightRequest="60"
+                WidthRequest="60">
+        <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
@@ -35,8 +35,9 @@
                                                   Easing="Linear" />
                 </xamanimation:StoryBoard>
             </ResourceDictionary>
-        </AbsoluteLayout.Resources>
+        </FlexLayout.Resources>
         <Label Style="{StaticResource LiveIcon}"
+               Margin="15,0,0,0"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}">
         </Label>
         <Grid Style="{StaticResource LiveIndicatorContainer}"
@@ -67,5 +68,5 @@
             <Frame Style="{StaticResource LiveIndicatorCircle}"
                    x:Name="LiveIndicator" />
         </Grid>
-    </AbsoluteLayout>
+    </FlexLayout>
 </DataTemplate>

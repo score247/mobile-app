@@ -9,9 +9,9 @@
               xmlns:headToHead="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;assembly=LiveScore.Soccer"
               xmlns:collectionViewTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate"
-              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common">
-    <StackLayout BackgroundColor="{StaticResource ListViewLightBgColor}">
+              xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate">
+    <StackLayout>
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -28,45 +28,41 @@
 
         <headToHead:H2HOptionsTemplate />
 
-        <Frame Style="{StaticResource MatchDetailH2HContainer}">
-            <StackLayout>
-                <Label IsVisible="{Binding NoData}"
-                       Style="{StaticResource NoInfo}"
-                       Text="{languageResources:Translate NoData}" />
-                <ActivityIndicator Margin="40"
-                                   IsRunning="{Binding IsBusy}"
-                                   IsVisible="{Binding IsBusy}"
-                                   Style="{StaticResource CenterActivityIndicator}"
-                                   VerticalOptions="StartAndExpand" />
+        <ActivityIndicator Margin="40"
+                           IsRunning="{Binding IsBusy}"
+                           IsVisible="{Binding IsBusy}"
+                           Style="{StaticResource CenterActivityIndicator}"
+                           VerticalOptions="Start" />
 
-                <RefreshView IsVisible="{Binding HasData}"
-                             IsRefreshing="{Binding IsRefreshing}"
-                             Command="{Binding RefreshCommand}"
-                             RefreshColor="White">
-                    <tabStrip:TabItemCollectionView x:Name="H2HMatches"
-                                                    IsVisible="{Binding HasData}"
-                                                    IsGrouped="True"
-                                                    GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
-                                                    ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                    ItemsSource="{Binding GroupedMatches}"
-                                                    Header="{Binding Stats}"
-                                                    ItemSizingStrategy="MeasureFirstItem"
-                                                    HeaderTemplate="{StaticResource HeaderTemplate}"
-                                                    BackgroundColor="{StaticResource ListViewBgColor}">
-                        <CollectionView.GroupFooterTemplate>
-                            <DataTemplate>
-                                <StackLayout></StackLayout>
-                            </DataTemplate>
-                        </CollectionView.GroupFooterTemplate>
-                        <CollectionView.Footer>
-                            <StackLayout BackgroundColor="Transparent"
-                                         HeightRequest="400">
-                                <Label Text=" "></Label>
-                            </StackLayout>
-                        </CollectionView.Footer>
-                    </tabStrip:TabItemCollectionView>
-                </RefreshView>
-            </StackLayout>
-        </Frame>
+        <Label Style="{StaticResource NoInfo}"
+               Text="{languageResources:Translate NoData}"
+               IsVisible="{Binding NoData}" />
+
+        <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}"
+                     RefreshColor="White">
+            <tabStrip:TabItemCollectionView x:Name="H2HMatches"
+                                            IsGrouped="True"
+                                            IsVisible="{Binding HasData}"
+                                            GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
+                                            ItemTemplate="{StaticResource MatchItemTemplateSelector}"
+                                            ItemsSource="{Binding GroupedMatches}"
+                                            Header="{Binding Stats}"
+                                            ItemSizingStrategy="MeasureFirstItem"
+                                            HeaderTemplate="{StaticResource HeaderTemplate}"
+                                            BackgroundColor="{StaticResource ListViewBgColor}">
+                <CollectionView.GroupFooterTemplate>
+                    <DataTemplate>
+                        <StackLayout></StackLayout>
+                    </DataTemplate>
+                </CollectionView.GroupFooterTemplate>
+                <CollectionView.Footer>
+                    <StackLayout BackgroundColor="Transparent"
+                                 HeightRequest="400">
+                        <Label Text=" "></Label>
+                    </StackLayout>
+                </CollectionView.Footer>
+            </tabStrip:TabItemCollectionView>
+        </RefreshView>
     </StackLayout>
 </DataTemplate>

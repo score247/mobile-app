@@ -10,9 +10,9 @@
 
     <FlexLayout HorizontalOptions="FillAndExpand"
                 Direction="Column"
-                Padding="0,12,0,12"
+                HeightRequest="60"
                 AlignItems="Center"
-                JustifyContent="SpaceBetween">
+                JustifyContent="Center">
         <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

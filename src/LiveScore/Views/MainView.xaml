@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<MasterDetailPage
-    x:Class="LiveScore.Views.MainView"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-    xmlns:resources="clr-namespace:LiveScore.ViewResources"
-    prism:ViewModelLocator.AutowireViewModel="True">
+<MasterDetailPage x:Class="LiveScore.Views.MainView"
+                  xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+                  xmlns:resources="clr-namespace:LiveScore.ViewResources"
+                  xmlns:views="clr-namespace:LiveScore.Views"
+                  prism:ViewModelLocator.AutowireViewModel="True">
     <MasterDetailPage.Master>
-        <ContentPage
-            Title="Menu"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            Icon="images/common/hamburger.png"
-            WidthRequest="325">
+        <ContentPage Title="Menu"
+                     BackgroundColor="{StaticResource PrimaryColor}"
+                     Icon="images/common/hamburger.png"
+                     WidthRequest="325">
 
             <ContentPage.Resources>
                 <ResourceDictionary>
@@ -25,27 +24,35 @@
                 <StackLayout Style="{StaticResource SideBar}">
                     <!--  Settings  -->
                     <FlexLayout Style="{StaticResource NavGroup}">
-                        <Label Style="{StaticResource NavGroupName}" Text="SETTINGS" />
+                        <Label Style="{StaticResource NavGroupName}"
+                               Text="SETTINGS" />
                     </FlexLayout>
 
-                    <FlexLayout x:Name="Refresh" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="Refresh"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe90d;" />
-                            <Label Style="{StaticResource NavName}" Text="Refresh" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe90d;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Refresh" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="RefreshView" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="RefreshView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="ClearCache" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="ClearCache"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe904;" />
-                            <Label Style="{StaticResource NavName}" Text="Clear Cache" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe904;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Clear Cache" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
@@ -56,60 +63,81 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="DefaultSport" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="DefaultSport"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe907;" />
-                            <Label Style="{StaticResource NavName}" Text="Default sport" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe907;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Default sport" />
                         </StackLayout>
-                        <Label Style="{StaticResource NavValue}" Text="Soccer" />
+                        <Label Style="{StaticResource NavValue}"
+                               Text="Soccer" />
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DefaultSportView" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="DefaultSportView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="DefaultLanguage" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="DefaultLanguage"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe90a;" />
-                            <Label Style="{StaticResource NavName}" Text="Default language" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe90a;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Default language" />
                         </StackLayout>
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Image Aspect="AspectFit" Source="images/common/flag_en.png" />
-                            <Label Style="{StaticResource LanguageName}" Text="English" />
+                            <Image Aspect="AspectFit"
+                                   Source="images/common/flag_en.png" />
+                            <Label Style="{StaticResource LanguageName}"
+                                   Text="English" />
                         </StackLayout>
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="DefaultLanguageView" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="DefaultLanguageView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="TimeZone" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="TimeZone"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe910;" />
-                            <Label Style="{StaticResource NavName}" Text="Time zone" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe910;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Time zone" />
                         </StackLayout>
-                        <Label Style="{StaticResource NavValue}" Text="GMT+7" />
+                        <Label Style="{StaticResource NavValue}"
+                               Text="GMT+7" />
                     </FlexLayout>
                     <BoxView Style="{StaticResource HorizontalLine}" />
 
-                    <FlexLayout x:Name="NightMode" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="NightMode"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe903;" />
-                            <Label Style="{StaticResource NavName}" Text="Night Mode" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe903;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Night Mode" />
                         </StackLayout>
                     </FlexLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="Notification" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="Notification"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe903;" />
-                            <Label Style="{StaticResource NavName}" Text="Notification" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe903;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Notification" />
                         </StackLayout>
                         <Switch IsToggled="True" />
                     </FlexLayout>
@@ -117,39 +145,51 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="InfoAlert" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="InfoAlert"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe903;" />
-                            <Label Style="{StaticResource NavName}" Text="Info alert" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe903;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Info alert" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="InfoAlertView" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="InfoAlertView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
 
                     <!--  Information  -->
                     <FlexLayout Style="{StaticResource NavGroup}">
-                        <Label Style="{StaticResource NavGroupName}" Text="INFORMATION" />
+                        <Label Style="{StaticResource NavGroupName}"
+                               Text="INFORMATION" />
                     </FlexLayout>
-                    <FlexLayout x:Name="FAQ" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="FAQ"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe908;" />
-                            <Label Style="{StaticResource NavName}" Text="FAQ" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe908;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="FAQ" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                         <FlexLayout.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateCommand}" CommandParameter="FAQView" />
+                            <TapGestureRecognizer Command="{Binding NavigateCommand}"
+                                                  CommandParameter="FAQView" />
                         </FlexLayout.GestureRecognizers>
                     </FlexLayout>
                     <ContentView>
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="TellFriend" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="TellFriend"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe909;" />
-                            <Label Style="{StaticResource NavName}" Text="Tell a friend" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe909;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Tell a friend" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
@@ -157,23 +197,30 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="Contact" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="Contact"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe906;" />
-                            <Label Style="{StaticResource NavName}" Text="Contact" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe906;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Contact" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
 
                     <!--  My profiles  -->
                     <FlexLayout Style="{StaticResource NavGroup}">
-                        <Label Style="{StaticResource NavGroupName}" Text="MY PROFILES" />
+                        <Label Style="{StaticResource NavGroupName}"
+                               Text="MY PROFILES" />
                     </FlexLayout>
 
-                    <FlexLayout x:Name="ChangePassword" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="ChangePassword"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe908;" />
-                            <Label Style="{StaticResource NavName}" Text="Change Password" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe908;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Change Password" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
@@ -181,10 +228,13 @@
                         <BoxView Style="{StaticResource HorizontalLine}" />
                     </ContentView>
 
-                    <FlexLayout x:Name="Signout" Style="{StaticResource SettingMenuRow}">
+                    <FlexLayout x:Name="Signout"
+                                Style="{StaticResource SettingMenuRow}">
                         <StackLayout Style="{StaticResource StacklayoutStretchHorizontalCenterVertical}">
-                            <Label Style="{StaticResource NavIcon}" Text="&#xe909;" />
-                            <Label Style="{StaticResource NavName}" Text="Sign out" />
+                            <Label Style="{StaticResource NavIcon}"
+                                   Text="&#xe909;" />
+                            <Label Style="{StaticResource NavName}"
+                                   Text="Sign out" />
                         </StackLayout>
                         <Label Style="{StaticResource ArrowRightIcon}" />
                     </FlexLayout>
@@ -192,4 +242,7 @@
             </ScrollView>
         </ContentPage>
     </MasterDetailPage.Master>
+    <MasterDetailPage.Detail>
+        <views:MenuTabbedView></views:MenuTabbedView>
+    </MasterDetailPage.Detail>
 </MasterDetailPage>

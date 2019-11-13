@@ -10,7 +10,7 @@ namespace LiveScore.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SplashScreen : ContentPage
     {
-        private const int MillisecondsDelay = 500;
+        private const int MillisecondsDelay = 1000;
 
         public SplashScreen()
         {
@@ -31,16 +31,17 @@ namespace LiveScore.Views
         [Time]
         private async Task LoadMainPageAsync()
         {
-            var mainPage = new MainView { Detail = new MenuTabbedView() };
+            var mainPage = new MainView();
 
-            await PageUtilities.OnInitializedAsync(mainPage, null).ConfigureAwait(false);
+            PageUtilities.OnNavigatedTo(mainPage, null);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
             await Task.Delay(MillisecondsDelay);
-            await Task.WhenAll(SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),
-                            SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
 
-            await Navigation.PopToRootAsync(false).ConfigureAwait(false);
+            await Task.WhenAll(SplashIcon.Animate(new ScaleToAnimation { Scale = 0, Duration = "200", Easing = EasingType.Linear }),
+                        SplashIcon.Animate(new FadeToAnimation { Opacity = 0, Duration = "200", Easing = EasingType.Linear }));
+
+            await Navigation.PopToRootAsync(false);
         }
     }
 }

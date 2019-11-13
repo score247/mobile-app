@@ -10,26 +10,15 @@
         <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
     </ContentView.Resources>
     <ContentView.Content>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <local:TabStripHeader Grid.Row="0"
-                                  Grid.Column="0"
-                                  x:Name="TabHeader"
+        <StackLayout VerticalOptions="FillAndExpand">
+            <local:TabStripHeader x:Name="TabHeader"
                                   ItemsSource="{Binding ItemsSource}" />
-
             <cards:CarouselView x:Name="TabContent"
-                                Grid.Row="1"
-                                Grid.Column="0"
                                 IsCyclical="false"
                                 IsViewReusingEnabled="False"
                                 BackViewsDepth="1"
                                 VerticalOptions="FillAndExpand"
+                                IsClippedToBounds="False"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}">
@@ -41,6 +30,6 @@
                                                               OpacityFactor="0.25" />
                 </x:Arguments>
             </cards:CarouselView>
-        </Grid>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

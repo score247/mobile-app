@@ -10,7 +10,7 @@
 
     <FlexLayout AlignItems="Center"
                 JustifyContent="Center"
-                Padding="0,12,0,12"
+                HeightRequest="60"
                 WidthRequest="60">
         <FlexLayout.Resources>
             <ResourceDictionary>

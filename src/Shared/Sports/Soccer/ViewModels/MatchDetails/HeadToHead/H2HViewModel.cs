@@ -52,7 +52,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         }
 
         public bool IsRefreshing { get; set; }
-    
+
         public bool VisibleHeadToHead { get; private set; }
 
         public bool VisibleStats { get; private set; }
@@ -146,7 +146,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             Stats = null;
 
             return GetAndBindingMatchesAsync(teamIdentifier);
-        }        
+        }
 
         [Time]
         internal async Task LoadHeadToHeadAsync()
@@ -162,7 +162,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
         internal async Task<IEnumerable<IMatch>> GetAndBindingMatchesAsync(string teamIdentifier = null)
         {
-            // To hide No Data label 
+            // To hide No Data label
             HasData = true;
 
             Device.BeginInvokeOnMainThread(() =>
