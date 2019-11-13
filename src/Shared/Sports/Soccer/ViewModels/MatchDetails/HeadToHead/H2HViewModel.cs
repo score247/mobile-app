@@ -139,13 +139,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         }
 
         [Time]
-        internal async Task LoadTeamResultAsync(string teamIdentifier)
+        internal Task LoadTeamResultAsync(string teamIdentifier)
         {
             SelectedTeamIdentifier = teamIdentifier;
             VisibleHeadToHead = false;
             Stats = null;
-           
-            await GetAndBindingMatchesAsync(teamIdentifier);
+
+            return GetAndBindingMatchesAsync(teamIdentifier);
         }        
 
         [Time]
