@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Models.TimelineImages;
@@ -363,10 +362,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
         public void BuildEventTimelineImage_EventOwnGoal_OwnGoalImage()
         {
             // Arrange
-            var ownGoalImage = "own goal";
-            var timelineEventImageBuilder = Substitute.For<ITimelineEventImageBuilder>();
-            timelineEventImageBuilder.BuildImageSource(Arg.Is<TimelineEventImage>(x => x.Type == EventType.ScoreChangeByOwnGoal)).Returns(ownGoalImage);
-            denpendacyResolver.Resolve<ITimelineEventImageBuilder>(EventType.ScoreChangeByOwnGoal.Value.ToString()).Returns(timelineEventImageBuilder);
+            var ownGoalImage = "images/common/own_goal_substitution.svg";
             var homeEventTimelines = new Dictionary<EventType, int>
             {
                 { EventType.ScoreChangeByOwnGoal, 1 }
@@ -386,32 +382,5 @@ namespace Soccer.Tests.ViewModels.DetailLineups
             // Assert
             Assert.Equal(ownGoalImage, lineupsPlayer.HomeEventOneImageSource);
         }
-
-        //[Fact]
-        //public void BuildEventTimelineImage_EventSubstitutionIn_SubstitutionInImage()
-        //{
-        //    // Arrange
-        //    var substitutionIn = "scoreImage";
-        //    var timelineEventImageBuilder = Substitute.For<ITimelineEventImageBuilder>();
-        //    timelineEventImageBuilder.BuildImageSource(Arg.Is<TimelineEventImage>(x => x.Type == EventType.SubstitutionIn)).Returns(substitutionIn);
-        //    var homeEventTimelines = new Dictionary<EventType, int>
-        //    {
-        //        { EventType.ScoreChange, 1 }
-        //    };
-
-        //    var lineupsPlayer = new LineupsPlayerViewModel(
-        //        denpendacyResolver,
-        //        "playerHome",
-        //        "playerAway",
-        //        1,
-        //        10,
-        //        homeEventTimelines,
-        //        null);
-
-        //    // Act
-
-        //    // Assert
-        //    Assert.Equal(substitutionIn, lineupsPlayer.HomeEventOneImageSource);
-        //}
     }
 }

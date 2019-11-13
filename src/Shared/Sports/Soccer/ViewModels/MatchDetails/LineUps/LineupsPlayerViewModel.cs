@@ -193,11 +193,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                 displayEventType = IsSubstitute ? EventType.SubstitutionIn : EventType.SubstitutionOut;
             }
 
-            try
+            if (eventType == EventType.ScoreChange || eventType == EventType.PenaltyShootout)
             {
                 ImageConverter = DependencyResolver.Resolve<ITimelineEventImageBuilder>(displayEventType.Value.ToString());
             }
-            catch
+            else
             {
                 ImageConverter = new DefaultEventImageBuilder();
             }
