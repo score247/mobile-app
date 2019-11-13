@@ -109,20 +109,7 @@
             // Assert
             Assert.True(viewModel.HasData);
         }
-
-        [Fact]
-        public void OnAppearing_NoData()
-        {
-            // Arrange
-
-            // Act
-            viewModel.OnAppearing();
-
-            // Assert
-            Assert.False(viewModel.HasData);
-            Assert.False(viewModel.IsRefreshing);
-        }
-
+      
         [Fact]
         public async Task RefreshCommand_OnExecute_LoadOddsMovement()
         {

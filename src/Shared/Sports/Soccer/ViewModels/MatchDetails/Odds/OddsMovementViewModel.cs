@@ -159,23 +159,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
                 .GetOddsMovementAsync(CurrentLanguage.DisplayName, matchId, betType.Value, oddsFormat, bookmaker.Id)
                 .ConfigureAwait(false);
 
-            if (matchOddsMovement == null)
+            if (matchOddsMovement == null || matchOddsMovement.OddsMovements == null || matchOddsMovement?.OddsMovements?.Any() == false)
             {
+                HasData = false;
                 return;
             }
 
-            if (matchOddsMovement.OddsMovements != null && matchOddsMovement.OddsMovements?.Any() == true)
+            var views = matchOddsMovement.OddsMovements
+                .Select(x => new BaseMovementItemViewModel(betType, x, NavigationService, DependencyResolver)
+                .CreateInstance());
+
+            OddsMovementItems.Clear();
+
+            foreach (var view in views)
             {
-                var views = matchOddsMovement.OddsMovements
-                    .Select(x => new BaseMovementItemViewModel(betType, x, NavigationService, DependencyResolver)
-                    .CreateInstance());
-
-                OddsMovementItems.Clear();
-
-                foreach (var view in views)
-                {
-                    OddsMovementItems.Add(view);
-                }
+                OddsMovementItems.Add(view);
             }
 
             HasData = true;
