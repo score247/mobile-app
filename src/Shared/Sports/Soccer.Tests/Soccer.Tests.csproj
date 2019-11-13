@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="ViewModels\DetailInfo\InfoItem\SubstitutionItemViewModelTests.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.11.0" />
     <PackageReference Include="Fanex.Caching" Version="2.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.3.0" />
@@ -34,9 +38,5 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Core.Tests\LiveScore.Core.Tests.csproj" />
     <ProjectReference Include="..\Soccer\Soccer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ViewModels\DetailInfo\" />
   </ItemGroup>
 </Project>
