@@ -176,7 +176,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                     MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
 
                     HasCommentariesData = true;
-                    VisibleShowMore = HasCommentariesData && FullMatchCommentaries.Any();
+                    VisibleShowMore = FullMatchCommentaries.Count() > DefaultLoadingCommentaryItemCount;
                 }
             }
 
