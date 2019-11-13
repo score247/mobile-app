@@ -5,26 +5,34 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:local="clr-namespace:LiveScore.Core.Controls.TabStrip"
              xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-             x:Name="this"
-             HorizontalOptions="FillAndExpand"
-             VerticalOptions="FillAndExpand">
+             x:Name="this">
+    <ContentView.Resources>
+        <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
+    </ContentView.Resources>
     <ContentView.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
-            <StackLayout.Resources>
-                <local:TabItemTemplateSelector x:Key="tabItemTemplateSelector" />
-            </StackLayout.Resources>
-            <local:TabStripHeader x:Name="TabHeader"
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <local:TabStripHeader Grid.Row="0"
+                                  Grid.Column="0"
+                                  x:Name="TabHeader"
                                   ItemsSource="{Binding ItemsSource}" />
 
             <cards:CarouselView x:Name="TabContent"
-                                HorizontalOptions="FillAndExpand"
+                                Grid.Row="1"
+                                Grid.Column="0"
                                 IsCyclical="false"
                                 IsViewReusingEnabled="False"
                                 BackViewsDepth="1"
+                                VerticalOptions="FillAndExpand"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
-                                SelectedIndex="{Binding SelectedIndex}"
-                                VerticalOptions="FillAndExpand">
+                                SelectedIndex="{Binding SelectedIndex}">
                 <x:Arguments>
                     <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
                                                                NoItemMaxPanDistance="1000"
@@ -33,6 +41,6 @@
                                                               OpacityFactor="0.25" />
                 </x:Arguments>
             </cards:CarouselView>
-        </StackLayout>
+        </Grid>
     </ContentView.Content>
 </ContentView>

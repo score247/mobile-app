@@ -36,7 +36,6 @@
                 </xamanimation:StoryBoard>
             </ResourceDictionary>
         </AbsoluteLayout.Resources>
-
         <Label Style="{StaticResource LiveIcon}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}">
         </Label>

@@ -8,15 +8,15 @@
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary.TrackerCommentaryTemplate">
-    <FlexLayout Direction="Column">
-        <FlexLayout.Resources>
+    <StackLayout>
+        <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailTrackerViewResource />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-        </FlexLayout.Resources>
+        </StackLayout.Resources>
         <ActivityIndicator Margin="40"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
@@ -107,7 +107,7 @@
                 </tabStrip:TabItemCollectionView.ItemTemplate>
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="300">
+                                 HeightRequest="400">
                         <!--Work arround for scrolling issue-->
                         <Label Text=" "></Label>
                         <Button Text="{Binding ShowLessMoreButtonText}"
@@ -119,5 +119,5 @@
                 </tabStrip:TabItemCollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
-    </FlexLayout>
+    </StackLayout>
 </DataTemplate>

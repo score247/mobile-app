@@ -25,7 +25,7 @@
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"
-                           VerticalOptions="StartAndExpand" />
+                           VerticalOptions="Start" />
 
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="White"
@@ -34,6 +34,7 @@
                                             IsVisible="{Binding IsNotBusy}"
                                             ItemTemplate="{StaticResource infoItemTemplateSelector}"
                                             ItemSizingStrategy="MeasureFirstItem"
+                                            VerticalOptions="FillAndExpand"
                                             ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"

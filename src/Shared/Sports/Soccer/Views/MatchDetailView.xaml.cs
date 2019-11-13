@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Diagnostics;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Soccer.Views
@@ -14,12 +15,11 @@ namespace LiveScore.Soccer.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
             var tabStripOffset = TabStrip.Y;
+            var layoutHeight = Height + tabStripOffset;
             AbsoluteLayout.SetLayoutBounds(MatchDetailLayout,
-                new Rectangle(0, 0, 1, MatchDetailLayout.Height + tabStripOffset));
+                new Rectangle(0, 0, 1, layoutHeight));
             AbsoluteLayout.SetLayoutFlags(MatchDetailLayout, AbsoluteLayoutFlags.WidthProportional);
-
             TabStrip.OnItemScrolling((scrollOffset) =>
             {
                 var newOffset = scrollOffset <= tabStripOffset ? scrollOffset : tabStripOffset;

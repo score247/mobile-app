@@ -24,7 +24,6 @@ namespace LiveScore.Core.Controls.TabStrip
 
             TabHeader.ItemTappedCommand = new Command((index) =>
             {
-                Debug.WriteLine($"TabHeader tapped {index}");
                 SelectedIndex = (byte)index;
             });
 

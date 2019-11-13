@@ -37,9 +37,9 @@
                     <DataTemplate>
                         <StackLayout>
                             <Label Style="{StaticResource NoInfo}"
-                               Text="{langResources:Translate NoData}"
-                               IsVisible="{Binding .}"
-                               AutomationId="NoDataLabel" />
+                                   Text="{langResources:Translate NoData}"
+                                   IsVisible="{Binding .}"
+                                   AutomationId="NoDataLabel" />
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate>

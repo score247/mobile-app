@@ -22,6 +22,7 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
+            HasData = false;
             EventAggregator
                 .GetEvent<LiveMatchPubSubEvent>()
                 .Subscribe(OnReceivedLiveMatches, true);

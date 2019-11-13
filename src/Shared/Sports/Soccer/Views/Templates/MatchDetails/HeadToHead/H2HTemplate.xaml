@@ -31,20 +31,19 @@
         <Frame Style="{StaticResource MatchDetailH2HContainer}">
             <StackLayout>
                 <Label IsVisible="{Binding NoData}"
-                   Style="{StaticResource NoInfo}"
-                   Text="{languageResources:Translate NoData}" />
+                       Style="{StaticResource NoInfo}"
+                       Text="{languageResources:Translate NoData}" />
                 <ActivityIndicator Margin="40"
                                    IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"
                                    VerticalOptions="StartAndExpand" />
 
-                <RefreshView
-                    IsVisible="{Binding HasData}"
-                    IsRefreshing="{Binding IsRefreshing}"
-                    Command="{Binding RefreshCommand}"
-                    RefreshColor="White">
-                        <tabStrip:TabItemCollectionView x:Name="H2HMatches"
+                <RefreshView IsVisible="{Binding HasData}"
+                             IsRefreshing="{Binding IsRefreshing}"
+                             Command="{Binding RefreshCommand}"
+                             RefreshColor="White">
+                    <tabStrip:TabItemCollectionView x:Name="H2HMatches"
                                                     IsVisible="{Binding HasData}"
                                                     IsGrouped="True"
                                                     GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
@@ -54,18 +53,18 @@
                                                     ItemSizingStrategy="MeasureFirstItem"
                                                     HeaderTemplate="{StaticResource HeaderTemplate}"
                                                     BackgroundColor="{StaticResource ListViewBgColor}">
-                            <CollectionView.GroupFooterTemplate>
-                                <DataTemplate>
-                                    <StackLayout></StackLayout>
-                                </DataTemplate>
-                            </CollectionView.GroupFooterTemplate>
-                            <CollectionView.Footer>
-                                <StackLayout BackgroundColor="Transparent"
-                                             HeightRequest="400">
-                                    <Label Text=" "></Label>
-                                </StackLayout>
-                            </CollectionView.Footer>
-                        </tabStrip:TabItemCollectionView>
+                        <CollectionView.GroupFooterTemplate>
+                            <DataTemplate>
+                                <StackLayout></StackLayout>
+                            </DataTemplate>
+                        </CollectionView.GroupFooterTemplate>
+                        <CollectionView.Footer>
+                            <StackLayout BackgroundColor="Transparent"
+                                         HeightRequest="400">
+                                <Label Text=" "></Label>
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </tabStrip:TabItemCollectionView>
                 </RefreshView>
             </StackLayout>
         </Frame>

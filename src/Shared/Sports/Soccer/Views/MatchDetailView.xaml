@@ -147,7 +147,7 @@
                 <ActivityIndicator IsRunning="{Binding IsBusy}"
                                    IsVisible="{Binding IsBusy}"
                                    Style="{StaticResource CenterActivityIndicator}"
-                                   VerticalOptions="StartAndExpand" />
+                                   VerticalOptions="Start" />
             </StackLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
