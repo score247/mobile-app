@@ -149,33 +149,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         [Time]
         internal async Task LoadTeamResultAsync(string teamIdentifier)
         {
-            Debug.WriteLine($"LoadTeamResultAsync - IsBusy {IsBusy}");
-
             SelectedTeamIdentifier = teamIdentifier;
             VisibleHeadToHead = false;
             Stats = null;
-
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                GroupedMatches?.Clear();
-            });
-
-            var teamResults = await GetMatchesAsync(teamIdentifier);
-
-            if (teamResults == null || !teamResults.Any())
-            {
-                HasData = false;
-                return;
-            }
-
-            var matches = BuildMatchGroups(teamResults);
-
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                GroupedMatches = new ObservableCollection<H2HMatchGroupViewModel>(matches);
-            });
-
-            HasData = true;
+           
+            await GetAndBindingMatchesAsync(teamIdentifier);
         }        
 
         [Time]
@@ -183,23 +161,32 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             VisibleHeadToHead = true;
 
+            var headToHeads = await GetAndBindingMatchesAsync();
+
+            Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
+            VisibleStats = Stats?.Total > 0;
+        }
+
+        internal async Task<IEnumerable<IMatch>> GetAndBindingMatchesAsync(string teamIdentifier = null)
+        {
+            // To hide No Data label 
+            HasData = true;
+
             Device.BeginInvokeOnMainThread(() =>
             {
                 GroupedMatches?.Clear();
             });
 
-            var headToHeads = await GetMatchesAsync();
+            var matchList = await GetMatchesAsync(teamIdentifier);
 
-            if (headToHeads == null || !headToHeads.Any())
+            if (matchList == null || !matchList.Any())
             {
                 HasData = false;
-                return;
+
+                return Enumerable.Empty<IMatch>();
             }
 
-            Stats = GenerateStatsViewModel(headToHeads.Where(match => match.EventStatus.IsClosed));
-            VisibleStats = Stats?.Total > 0;
-
-            var matches = BuildMatchGroups(headToHeads);
+            var matches = BuildMatchGroups(matchList);
 
             Device.BeginInvokeOnMainThread(() =>
             {
@@ -207,6 +194,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             });
 
             HasData = true;
+
+            return matchList;
         }
 
         internal async Task<IEnumerable<IMatch>> GetMatchesAsync(string teamIdentifier = null)
@@ -222,7 +211,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
                                         CurrentLanguage.DisplayName)
                                     .ConfigureAwait(false))
                                     ?.Except(new List<IMatch> { match }).ToList()
-                                : await teamService.GetTeamResultsAsync(teamPair.Key, teamPair.Value, CurrentLanguage.DisplayName);
+                                : await teamService.GetTeamResultsAsync(
+                                        teamPair.Key,
+                                        teamPair.Value,
+                                        CurrentLanguage.DisplayName)
+                                    .ConfigureAwait(false);
             }
             catch (Exception ex)
             {
