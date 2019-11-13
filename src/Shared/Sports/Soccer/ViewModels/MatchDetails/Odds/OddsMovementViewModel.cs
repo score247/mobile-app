@@ -143,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Odds
         }
 
         [Time]
-        private async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
+        internal async Task FirstLoadOrRefreshOddsMovement(bool isRefresh = false)
         {
             IsBusy = !isRefresh;
             await GetOddsMovement().ConfigureAwait(false);

@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <Compile Remove="ViewModels\DetailInfo\DetailInfoViewModelTests.cs" />
-    <Compile Remove="ViewModels\DetailOdds\OddsItems\OddsMovementViewModelTests.cs" />
     <Compile Remove="ViewModels\DetailOdds\OddsMovementViewModelTests.cs" />
     <Compile Remove="ViewModels\MatchDetailViewModelTests.cs" />
   </ItemGroup>
