@@ -31,18 +31,18 @@
                                             ItemsSource="{Binding StatisticItems}"
                                             ItemTemplate="{StaticResource statisticItemTemplateSelector}"
                                             IsVisible="{Binding IsNotBusy}"
-                                            Header="{Binding .}"
+                                            Header="{Binding NoData}"
                                             ItemSizingStrategy="MeasureFirstItem">
-                <tabStrip:TabItemCollectionView.HeaderTemplate>
+                <CollectionView.HeaderTemplate>
                     <DataTemplate>
                         <StackLayout>
                             <Label Style="{StaticResource NoInfo}"
                                Text="{langResources:Translate NoData}"
-                               IsVisible="{Binding NoData}"
+                               IsVisible="{Binding .}"
                                AutomationId="NoDataLabel" />
                         </StackLayout>
                     </DataTemplate>
-                </tabStrip:TabItemCollectionView.HeaderTemplate>
+                </CollectionView.HeaderTemplate>
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="Transparent"
                                  HeightRequest="400">

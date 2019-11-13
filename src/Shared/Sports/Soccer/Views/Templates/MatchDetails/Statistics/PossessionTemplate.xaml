@@ -16,10 +16,6 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </StackLayout.Resources>
-        <!--<Label Style="{StaticResource NoInfo}"
-               Text="{langResources:Translate NoData}"
-               IsVisible="{Binding NoData}"
-               AutomationId="NoDataLabel" />-->
 
         <Grid IsVisible="{Binding IsVisibled}">
             <Grid.RowDefinitions>
