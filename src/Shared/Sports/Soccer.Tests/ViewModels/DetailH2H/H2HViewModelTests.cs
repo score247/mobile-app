@@ -186,9 +186,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Act
             await viewModel.LoadTeamResultAsync("home");
 
-            // Assert
-            Assert.True(viewModel.VisibleHomeResults);
-            Assert.False(viewModel.VisibleAwayResults);
+            // Assert            
             Assert.False(viewModel.VisibleHeadToHead);
             Assert.Null(viewModel.Stats);
         }
@@ -201,9 +199,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Act
             await viewModel.LoadTeamResultAsync("away");
 
-            // Assert
-            Assert.False(viewModel.VisibleHomeResults);
-            Assert.True(viewModel.VisibleAwayResults);
+            // Assert         
             Assert.False(viewModel.VisibleHeadToHead);
             Assert.Null(viewModel.Stats);
         }
@@ -214,11 +210,9 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Arrange
 
             // Act
-            await viewModel.OnTeamResultTapped.ExecuteAsync("away");
+            await viewModel.OnTeamResultTappedCommand.ExecuteAsync("away");
 
             // Assert
-            Assert.False(viewModel.VisibleHomeResults);
-            Assert.True(viewModel.VisibleAwayResults);
             Assert.False(viewModel.VisibleHeadToHead);
         }
 
@@ -228,11 +222,9 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Arrange
 
             // Act
-            await viewModel.OnTeamResultTapped.ExecuteAsync("home");
+            await viewModel.OnTeamResultTappedCommand.ExecuteAsync("home");
 
             // Assert
-            Assert.True(viewModel.VisibleHomeResults);
-            Assert.False(viewModel.VisibleAwayResults);
             Assert.False(viewModel.VisibleHeadToHead);
         }
 
@@ -242,11 +234,9 @@ namespace Soccer.Tests.ViewModels.DetailH2H
             // Arrange
 
             // Act
-            await viewModel.OnHeadToHeadTapped.ExecuteAsync();
+            await viewModel.OnHeadToHeadTappedCommand.ExecuteAsync();
 
             // Assert
-            Assert.False(viewModel.VisibleHomeResults);
-            Assert.False(viewModel.VisibleAwayResults);
             Assert.True(viewModel.VisibleHeadToHead);
         }
 
@@ -267,7 +257,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
         public async Task RefreshCommand_SelectedHome_GetTeamResults()
         {
             // Arrange
-            await viewModel.OnTeamResultTapped.ExecuteAsync("home");
+            await viewModel.OnTeamResultTappedCommand.ExecuteAsync("home");
 
             // Act
             await viewModel.RefreshCommand.ExecuteAsync();
@@ -293,7 +283,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             // Assert
             Assert.True(viewModel.HasData);
-            Assert.Equal(2, viewModel.HeadToHeadMatches.Count());
+            Assert.Equal(2, viewModel.GroupedMatches.Count());
         }
 
         [Fact]
@@ -312,7 +302,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             // Assert
             Assert.True(viewModel.HasData);
-            Assert.Equal(2, viewModel.HeadToHeadMatches.Count());
+            Assert.Equal(2, viewModel.GroupedMatches.Count());
         }
     }
 }
