@@ -73,11 +73,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
                 .GetMatchLineupsAsync(matchId, Language.English)
                 .ConfigureAwait(false);
 
-            RenderMatchLineups(matchLineups);
-        }
-
-        private void RenderMatchLineups(MatchLineups matchLineups)
-        {
             if (string.IsNullOrWhiteSpace(matchLineups?.Id))
             {
                 HasData = false;
@@ -85,44 +80,50 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             else
             {
                 HasData = true;
-                HasFormation = (matchLineups.Home?.Formation != null);
-
-                if (HasFormation)
-                {
-                    var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
-                    beginInvokeOnMainThreadFunc(() =>
-                    {
-                        LineupsPitch = new LineupsPicthViewModel(
-                          matchLineups.PitchView,
-                          deviceInfo,
-                          matchLineups.Home?.Name,
-                          matchLineups.Home?.Formation,
-                          matchLineups.Away?.Name,
-                          matchLineups.Away?.Formation);
-                        LineupsItemGroups = otherLineupsInfo;
-                    });
-                }
-                else
-                {
-                    var noFormationLineups = BuildNoFormationLineupsGroup(matchLineups);
-
-                    if (noFormationLineups != null)
-                    {
-                        beginInvokeOnMainThreadFunc(() =>
-                        {
-                            LineupsItemGroups = new List<LineupsGroupViewModel>
-                            {
-                                noFormationLineups
-                            };
-                        });
-                    }
-
-                    var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
-                    beginInvokeOnMainThreadFunc(() => LineupsItemGroups.AddRange(otherLineupsInfo));
-                }
+                RenderMatchLineups(matchLineups);
             }
 
             IsRefreshing = false;
+        }
+
+        private void RenderMatchLineups(MatchLineups matchLineups)
+        {
+            LineupsItemGroups = new List<LineupsGroupViewModel>();
+            HasFormation = (matchLineups.Home?.Formation != null);
+
+            if (HasFormation)
+            {
+                var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
+                beginInvokeOnMainThreadFunc(() =>
+                {
+                    LineupsPitch = new LineupsPicthViewModel(
+                      matchLineups.PitchView,
+                      deviceInfo,
+                      matchLineups.Home?.Name,
+                      matchLineups.Home?.Formation,
+                      matchLineups.Away?.Name,
+                      matchLineups.Away?.Formation);
+                    LineupsItemGroups = otherLineupsInfo;
+                });
+            }
+            else
+            {
+                var noFormationLineups = BuildNoFormationLineupsGroup(matchLineups);
+
+                if (noFormationLineups != null)
+                {
+                    beginInvokeOnMainThreadFunc(() =>
+                    {
+                        LineupsItemGroups = new List<LineupsGroupViewModel>
+                        {
+                                noFormationLineups
+                        };
+                    });
+                }
+
+                var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
+                beginInvokeOnMainThreadFunc(() => LineupsItemGroups.AddRange(otherLineupsInfo));
+            }
         }
 
         private List<LineupsGroupViewModel> BuildOtherLineupsInfo(MatchLineups matchLineups)

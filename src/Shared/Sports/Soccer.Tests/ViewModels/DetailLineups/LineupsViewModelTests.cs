@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
 using LiveScore.Common;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Models.Teams;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
+using LiveScore.Common.LangResources;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;
@@ -57,20 +61,207 @@ namespace Soccer.Tests.ViewModels.DetailLineups
         [Fact]
         public async Task LoadLineUpsAsync_LineupIsEmpty_SetHasDataToFalse()
         {
+            // Arrange
+
+            // Act
             await lineupsViewModel.LoadLineUpsAsync();
 
+            // Assert
             Assert.False(lineupsViewModel.HasData);
         }
 
         [Fact]
         public async Task LoadLineUpsAsync_LineupIsEmpty_SetHasDataToTrue()
         {
+            // Arrange
             var matchLineups = fixture.Create<MatchLineups>();
             soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
 
+            // Act
             await lineupsViewModel.LoadLineUpsAsync();
 
+            // Assert
             Assert.True(lineupsViewModel.HasData);
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_HasFormation_SetHasFormationToTrue()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                "4-3-3",
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.True(lineupsViewModel.HasFormation);
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_NoFormation_SetHasFormationToFalse()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                null,
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.False(lineupsViewModel.HasFormation);
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_HasFormation_LineupsPitchIsNotNull()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                "4-3-3",
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.NotNull(lineupsViewModel.LineupsPitch);
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_NoFormation_LineupsPitchIsNull()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                null,
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.Null(lineupsViewModel.LineupsPitch);
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_HasFormation_LineupsItemGroupsDoesNotContainLineupsPlayerGroup()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                "4-3-3",
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.Null(lineupsViewModel.LineupsItemGroups.FirstOrDefault(group => group.Name == AppResources.LineupsPlayers));
+        }
+
+        [Fact]
+        public async Task RenderMatchLineups_NoFormation_LineupsItemGroupsContainsLineupsPlayerGroup()
+        {
+            // Arrange
+            var dumpTeamlineups = new TeamLineups(
+                "sr:team:",
+                "home",
+                true,
+                fixture.Create<Coach>(),
+                null,
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<Player>>(),
+                fixture.Create<List<TimelineEvent>>());
+
+            var matchLineups = new MatchLineups(
+                "match:lineups",
+                DateTimeOffset.Now,
+                dumpTeamlineups,
+                dumpTeamlineups,
+                ""
+                );
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+
+            // Act
+            await lineupsViewModel.LoadLineUpsAsync();
+
+            // Assert
+            Assert.NotNull(lineupsViewModel.LineupsItemGroups.FirstOrDefault(group => group.Name == AppResources.LineupsPlayers));
         }
     }
 }

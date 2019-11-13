@@ -49,37 +49,37 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public int HomeEventOneCount { get; private set; }
 
-        public bool HomeEventOneVisible { get => HomeEventOneCount > 1; }
+        public bool HomeEventOneVisible { get; private set; }
 
         public string HomeEventTwoImageSource { get; private set; }
 
         public int HomeEventTwoCount { get; private set; }
 
-        public bool HomeEventTwoVisible { get => HomeEventTwoCount > 1; }
+        public bool HomeEventTwoVisible { get; private set; }
 
         public string HomeEventThreeImageSource { get; private set; }
 
         public int HomeEventThreeCount { get; private set; }
 
-        public bool HomeEventThreeVisible { get => HomeEventThreeCount > 1; }
+        public bool HomeEventThreeVisible { get; private set; }
 
         public string AwayEventOneImageSource { get; private set; }
 
         public int AwayEventOneCount { get; private set; }
 
-        public bool AwayEventOneVisible { get => AwayEventOneCount > 1; }
+        public bool AwayEventOneVisible { get; private set; }
 
         public string AwayEventTwoImageSource { get; private set; }
 
         public int AwayEventTwoCount { get; private set; }
 
-        public bool AwayEventTwoVisible { get => AwayEventTwoCount > 1; }
+        public bool AwayEventTwoVisible { get; private set; }
 
         public string AwayEventThreeImageSource { get; private set; }
 
         public int AwayEventThreeCount { get; private set; }
 
-        public bool AwayEventThreeVisible { get => AwayEventThreeCount > 1; }
+        public bool AwayEventThreeVisible { get; private set; }
 
         protected ITimelineEventImageBuilder ImageConverter { get; set; }
 
@@ -103,16 +103,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             {
                 AwayEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
                 AwayEventOneCount = allEventStatistics[0].Value;
+                AwayEventOneVisible = GetEventVisibility(allEventStatistics[0]);
             }
             if (allEventStatistics.Count > 1)
             {
                 AwayEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
                 AwayEventTwoCount = allEventStatistics[1].Value;
+                AwayEventTwoVisible = GetEventVisibility(allEventStatistics[1]);
             }
             if (allEventStatistics.Count > 2)
             {
                 AwayEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
                 AwayEventThreeCount = allEventStatistics[2].Value;
+                AwayEventThreeVisible = GetEventVisibility(allEventStatistics[2]);
             }
         }
 
@@ -134,16 +137,19 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             {
                 HomeEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
                 HomeEventOneCount = allEventStatistics[0].Value;
+                HomeEventOneVisible = GetEventVisibility(allEventStatistics[0]);
             }
             if (allEventStatistics.Count > 1)
             {
                 HomeEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
                 HomeEventTwoCount = allEventStatistics[1].Value;
+                HomeEventTwoVisible = GetEventVisibility(allEventStatistics[1]);
             }
             if (allEventStatistics.Count > 2)
             {
                 HomeEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
                 HomeEventThreeCount = allEventStatistics[2].Value;
+                HomeEventThreeVisible = GetEventVisibility(allEventStatistics[2]);
             }
         }
 
@@ -197,6 +203,11 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
 
             return ImageConverter.BuildImageSource(new TimelineEventImage(displayEventType));
+        }
+
+        private static bool GetEventVisibility(KeyValuePair<EventType, int> eventTimline)
+        {
+            return eventTimline.Value > 1;
         }
     }
 }
