@@ -1,5 +1,4 @@
-﻿using System;
-namespace LiveScore.Core.Enumerations
+﻿namespace LiveScore.Core.Enumerations
 {
     public class TeamResult : Enumeration
     {

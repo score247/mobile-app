@@ -49,17 +49,17 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e.PropertyName == CircularProgress.ValueProperty.PropertyName
-                || e.PropertyName == CircularProgress.MaximumProperty.PropertyName)
+            if (e.PropertyName == nameof(CircularProgress.Value)
+                || e.PropertyName == nameof(CircularProgress.Maximum))
             {
                 ProgressValue = CalculateValue();
             }
 
-            isSizeChanged |= (e.PropertyName == "Width"
-                || e.PropertyName == "Height"
-                || e.PropertyName == "BarHeight");
+            isSizeChanged |= (e.PropertyName == nameof(CircularProgress.Width) 
+                || e.PropertyName == nameof(CircularProgress.Height)
+                || e.PropertyName == nameof(CircularProgress.BarHeight));
 
-            if (e.PropertyName == CircularProgress.TextProperty.PropertyName)
+            if (e.PropertyName == nameof(CircularProgress.Text))
             {
                 UpdateIndicatorLabelSize();
             }
