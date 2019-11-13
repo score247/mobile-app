@@ -21,9 +21,7 @@
                     <resources:MatchDetailH2HViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <collectionViewTemplates:H2HMatchGroupHeaderTemplate x:Key="MatchGroupHeaderTemplate" />
-                <collectionViewTemplates:H2HMatchItemTemplate x:Key="MatchItemTemplate" />
                 <collectionViewTemplates:H2HHeaderTemplate x:Key="HeaderTemplate" />
-                <collectionViewTemplates:TeamMatchItemTemplate x:Key="TeamMatchItemTemplate" />
                 <headToHead:H2HTemplateSelector x:Key="MatchItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>

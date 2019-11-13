@@ -36,7 +36,7 @@
                         Grid.Column="0"
                         Style="{StaticResource SubTab}"
                         Text="{Binding HomeTeamName, Converter={StaticResource UpperCaseConverter}}"
-                        Command="{Binding OnTeamResultTapped}"
+                        Command="{Binding OnTeamResultTappedCommand}"
                         CommandParameter="home" >
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding VisibleHomeResults}" Value="True">
@@ -50,7 +50,7 @@
                         Grid.Column="1"
                         Style="{StaticResource SubTab}"
                         Text="{langResources:Translate HeadToHead}"
-                        Command="{Binding OnHeadToHeadTapped}" >
+                        Command="{Binding OnHeadToHeadTappedCommand}" >
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding VisibleHeadToHead}" Value="True">
                                 <Setter Property="TextColor" Value="{StaticResource ActiveSubTabColor}" />
@@ -63,7 +63,7 @@
                         Grid.Column="2"
                         Style="{StaticResource SubTab}"
                         Text="{Binding AwayTeamName, Converter={StaticResource UpperCaseConverter}}"
-                        Command="{Binding OnTeamResultTapped}"
+                        Command="{Binding OnTeamResultTappedCommand}"
                         CommandParameter="away" >
                     <Button.Triggers>
                         <DataTrigger TargetType="Button" Binding="{Binding VisibleAwayResults}" Value="True">
