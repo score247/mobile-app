@@ -12,7 +12,6 @@ namespace LiveScore.Features.Score.Views
     {
         private bool secondLoad;
 
-        [Time]
         public ScoresView()
         {
             InitializeComponent();

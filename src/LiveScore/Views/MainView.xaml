@@ -242,7 +242,4 @@
             </ScrollView>
         </ContentPage>
     </MasterDetailPage.Master>
-    <MasterDetailPage.Detail>
-        <views:MenuTabbedView></views:MenuTabbedView>
-    </MasterDetailPage.Detail>
 </MasterDetailPage>

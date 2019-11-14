@@ -74,19 +74,6 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.GroupHeaderTemplate>
-                <CollectionView.GroupFooterTemplate>
-                    <DataTemplate>
-                        <!--Work arround for not showing group footer-->
-                        <StackLayout></StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupFooterTemplate>
-                <CollectionView.Footer>
-                    <!--Work arround for scrolling up issue-->
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="400">
-                        <Label Text=" "></Label>
-                    </StackLayout>
-                </CollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
     </StackLayout>

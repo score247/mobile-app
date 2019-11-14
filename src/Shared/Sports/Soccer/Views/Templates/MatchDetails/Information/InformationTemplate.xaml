@@ -38,7 +38,7 @@
                                             ItemsSource="{Binding InfoItemViewModels}">
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
-                                 HeightRequest="500">
+                                 HeightRequest="300">
                         <FlexLayout Style="{StaticResource Group}">
                             <Label AutomationId="MatchInfoHeaderTitle"
                                    Style="{StaticResource GroupName}"

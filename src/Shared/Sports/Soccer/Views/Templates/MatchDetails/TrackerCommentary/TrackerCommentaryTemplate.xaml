@@ -107,9 +107,7 @@
                 </tabStrip:TabItemCollectionView.ItemTemplate>
                 <tabStrip:TabItemCollectionView.Footer>
                     <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="400">
-                        <!--Work arround for scrolling issue-->
-                        <Label Text=" "></Label>
+                                 HeightRequest="150">
                         <Button Text="{Binding ShowLessMoreButtonText}"
                                 IsVisible="{Binding VisibleShowMore}"
                                 Style="{StaticResource MatchTrackerShowMoreButton}"

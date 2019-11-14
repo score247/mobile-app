@@ -18,7 +18,6 @@
                                 IsViewReusingEnabled="False"
                                 BackViewsDepth="1"
                                 VerticalOptions="FillAndExpand"
-                                IsClippedToBounds="False"
                                 ItemTemplate="{StaticResource tabItemTemplateSelector}"
                                 ItemsSource="{Binding ItemsSource}"
                                 SelectedIndex="{Binding SelectedIndex}">

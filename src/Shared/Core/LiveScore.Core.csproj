@@ -93,6 +93,9 @@
       <EmbeddedResource Update="Views\NetworkConnectionError.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\Templates\EmptyDataTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
     </ItemGroup>
    <!-- <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
       <Exec Command="&quot;$(SolutionDir)tools\mpctools\mpc.exe&quot; -i $(ProjectPath) -o &quot;$(ProjectDir)CoreModelResolver.cs&quot; -r &quot;CoreModelResolver&quot;" />

@@ -31,9 +31,9 @@ namespace LiveScore.Views
         [Time]
         private async Task LoadMainPageAsync()
         {
-            var mainPage = new MainView();
+            var mainPage = new MainView { Detail = new MenuTabbedView() };
 
-            PageUtilities.OnNavigatedTo(mainPage, null);
+            await PageUtilities.OnInitializedAsync(mainPage, null);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
 
             await Task.Delay(MillisecondsDelay);

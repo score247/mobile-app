@@ -51,17 +51,6 @@
                                             ItemSizingStrategy="MeasureFirstItem"
                                             HeaderTemplate="{StaticResource HeaderTemplate}"
                                             BackgroundColor="{StaticResource ListViewBgColor}">
-                <CollectionView.GroupFooterTemplate>
-                    <DataTemplate>
-                        <StackLayout></StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupFooterTemplate>
-                <CollectionView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="400">
-                        <Label Text=" "></Label>
-                    </StackLayout>
-                </CollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
     </StackLayout>

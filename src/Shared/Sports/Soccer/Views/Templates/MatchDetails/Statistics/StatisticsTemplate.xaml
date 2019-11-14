@@ -42,12 +42,6 @@
                         </StackLayout>
                     </DataTemplate>
                 </CollectionView.HeaderTemplate>
-                <tabStrip:TabItemCollectionView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="400">
-                        <Label Text=" "></Label>
-                    </StackLayout>
-                </tabStrip:TabItemCollectionView.Footer>
             </tabStrip:TabItemCollectionView>
         </RefreshView>
     </StackLayout>

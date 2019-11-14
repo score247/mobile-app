@@ -50,8 +50,7 @@
     </ContentPage.Triggers>
     <StackLayout x:Name="ScoreView"
                  Opacity="0.5"
-                 Scale="2"
-                 CompressedLayout.IsHeadless="true">
+                 Scale="2">
         <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
                  Style="{StaticResource HorizontalLine}" />
         <Frame Style="{StaticResource DatebarLayout}">

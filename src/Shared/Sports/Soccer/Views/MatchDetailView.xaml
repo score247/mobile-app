@@ -34,7 +34,7 @@
         <AbsoluteLayout>
             <StackLayout x:Name="MatchDetailLayout"
                          VerticalOptions="FillAndExpand"
-                         AbsoluteLayout.LayoutBounds="0,0,1,1.25"
+                         AbsoluteLayout.LayoutBounds="0,0,1,1.15"
                          AbsoluteLayout.LayoutFlags="SizeProportional">
                 <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
                          Style="{StaticResource HorizontalLine}" />
