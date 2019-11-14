@@ -63,12 +63,12 @@ namespace LiveScore.Core.Models.Odds
 
         public override bool Equals(Object obj)
         {
-            if (!(obj is OddsMovement bookmakerObject))
+            if (!(obj is OddsMovement oddsMovementObj))
             {
                 return false;
             }
 
-            return Equals(bookmakerObject);
+            return Equals(oddsMovementObj);
         }
 
         public override int GetHashCode()
