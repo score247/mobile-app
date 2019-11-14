@@ -92,6 +92,8 @@ namespace LiveScore.Core.Controls.TabStrip
             (args.Item as TabItemViewModel)?.OnDisappearing();
         }
 
+#pragma warning disable S2325 // Methods and properties that don't access instance data should be static
+
         public void OnItemScrolling(Action<double> handler)
         {
             MessagingCenter.Subscribe<string, TabItemScrollingEventArgs>(nameof(TabStrip), TabItemScrollingEventArgs.EventName,
@@ -106,5 +108,7 @@ namespace LiveScore.Core.Controls.TabStrip
         {
             MessagingCenter.Unsubscribe<string, TabItemScrollingEventArgs>(nameof(TabStrip), TabItemScrollingEventArgs.EventName);
         }
+
+#pragma warning restore S2325 // Methods and properties that don't access instance data should be static
     }
 }
