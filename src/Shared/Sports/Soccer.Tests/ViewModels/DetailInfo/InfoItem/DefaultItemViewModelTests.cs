@@ -1,60 +1,68 @@
+using AutoFixture;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.Teams;
+using LiveScore.Soccer.Models.TimelineImages;
+using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using NSubstitute;
+using Xunit;
+
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
-    using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-
-    using NSubstitute;
-
-    using Xunit;
-
     public class DefaultItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly ITimelineEvent timeline;
-        private readonly IMatchResult matchResult;
         private readonly ViewModelBaseFixture baseFixture;
+        private readonly Fixture fixture;
 
         public DefaultItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
-            timeline = Substitute.For<ITimelineEvent>();
-            matchResult = Substitute.For<IMatchResult>();
+            fixture = baseFixture.CommonFixture.Specimens;
+
+            baseFixture.DependencyResolver.Resolve<ITimelineEventImageBuilder>(Arg.Any<string>())
+               .Returns(new DefaultEventImageBuilder());
         }
 
         [Fact]
         public void BuildInfo_IsHomeTeamAndYellowCard_ShowHomePlayerNameAndYellowCard()
         {
             // Arrange
-            timeline.Team.Returns("home");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.YellowCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "home")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.YellowCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/yellow_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
 
         [Fact]
-        public void BuildInfo_IsHomeTeamAndRedYellowCard_ShowHomePlayerNameAndRedYellowCard()
+        public void BuildInfo_IsHomeTeamAndYellowRedCard_ShowHomePlayerNameAndYellowRedCard()
         {
             // Arrange
-            timeline.Team.Returns("home");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.YellowRedCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "home")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.YellowRedCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/red_yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_yellow_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -63,16 +71,20 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_IsHomeTeamAndRedCard_ShowHomePlayerNameAndRedCard()
         {
             // Arrange
-            timeline.Team.Returns("home");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.RedCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "home")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.RedCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/red_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.False(viewModel.VisibleScore);
         }
@@ -81,88 +93,108 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_IsAwayTeamAndYellowCard_ShowAwayPlayerNameAndYellowCard()
         {
             // Arrange
-            timeline.Team.Returns("away");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.YellowCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "away")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.YellowCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/yellow_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
 
         [Fact]
-        public void BuildInfo_IsAwayTeamAndRedYellowCard_ShowAwayPlayerNameAndRedYellowCard()
+        public void BuildInfo_IsAwayTeamAndYellowRedCard_ShowHomePlayerNameAndYellowRedCard()
         {
             // Arrange
-            timeline.Team.Returns("away");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.YellowRedCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "away")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.YellowRedCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/red_yellow_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_yellow_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
 
         [Fact]
-        public void BuildInfo_IsAwayTeamAndRedCard_ShowAwayPlayerNameAndRedCard()
+        public void BuildInfo_IsAwayTeamAndRedCard_ShowHomePlayerNameAndRedCard()
         {
             // Arrange
-            timeline.Team.Returns("away");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.RedCard);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "away")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.RedCard);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/red_card.png", viewModel.ImageSource);
+            Assert.Equal("images/common/red_card.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.False(viewModel.VisibleScore);
         }
 
         [Fact]
-        public void BuildInfo_IsHomeTeam_MissPenalties_ShowExpectedInfo()
+        public void BuildInfo_IsHomeTeam_PenaltyMissed_ShowExpectedInfo()
         {
             // Arrange
-            timeline.Team.Returns("home");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.PenaltyMissed);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "home")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.PenaltyMissed);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.HomePlayerName);
-            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleHomeImage);
             Assert.True(viewModel.VisibleScore);
         }
 
         [Fact]
-        public void BuildInfo_IsAwayTeam_MissPenalties_ShowExpectedInfo()
+        public void BuildInfo_IsAwayTeam_PenaltyMissed_ShowExpectedInfo()
         {
             // Arrange
-            timeline.Team.Returns("away");
-            timeline.Player.Returns(new Player { Name = "Harry Kane" });
-            timeline.Type.Returns(EventType.PenaltyMissed);
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.Team, "away")
+                .With(timeline => timeline.Player, new Player { Name = "Harry Kane" })
+                .With(timeline => timeline.Type, EventType.PenaltyMissed);
+            var viewModel = new DefaultItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new DefaultItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("Harry Kane", viewModel.AwayPlayerName);
-            Assert.Equal("images/common/missed_penalty_goal.png", viewModel.ImageSource);
+            Assert.Equal("images/common/missed_penalty_goal.svg", viewModel.ImageSource);
             Assert.True(viewModel.VisibleAwayImage);
             Assert.True(viewModel.VisibleScore);
         }

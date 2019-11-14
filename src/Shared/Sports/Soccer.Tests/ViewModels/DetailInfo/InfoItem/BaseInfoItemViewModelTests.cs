@@ -6,7 +6,6 @@ using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems;
-using NSubstitute;
 using Prism.Navigation;
 using Xamarin.Forms;
 using Xunit;
