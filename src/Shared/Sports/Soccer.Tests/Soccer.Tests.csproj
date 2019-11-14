@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="ViewModels\DetailInfo\InfoItem\BaseInfoItemViewModelTests.cs" />
     <Compile Include="ViewModels\DetailInfo\InfoItem\DefaultItemViewModelTests.cs" />
+    <Compile Include="ViewModels\DetailInfo\InfoItem\MainEventItemViewModelTests.cs" />
     <Compile Include="ViewModels\DetailInfo\InfoItem\SubstitutionItemViewModelTests.cs" />
   </ItemGroup>
 

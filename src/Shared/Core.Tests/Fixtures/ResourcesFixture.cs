@@ -64,6 +64,7 @@
 
             app.Resources["HorizontalLine"] = new Style(typeof(BoxView));
             app.Resources["ListViewBgColor"] = Color.FromHex("#66FF59");
+            app.Resources["FunctionGroupBgColor"] = Color.FromHex("#1D2133");
         }
     }
 }
