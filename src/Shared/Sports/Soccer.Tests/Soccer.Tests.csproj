@@ -25,6 +25,8 @@
     <Compile Include="ViewModels\DetailInfo\InfoItem\BaseInfoItemViewModelTests.cs" />
     <Compile Include="ViewModels\DetailInfo\InfoItem\DefaultItemViewModelTests.cs" />
     <Compile Include="ViewModels\DetailInfo\InfoItem\MainEventItemViewModelTests.cs" />
+    <Compile Include="ViewModels\DetailInfo\InfoItem\PenaltyShootOutViewModelTests.cs" />
+    <Compile Include="ViewModels\DetailInfo\InfoItem\ScoreChangeItemViewModelTests.cs" />
     <Compile Include="ViewModels\DetailInfo\InfoItem\SubstitutionItemViewModelTests.cs" />
   </ItemGroup>
 
