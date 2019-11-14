@@ -1,23 +1,26 @@
+using AutoFixture;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.Models.Teams;
+using LiveScore.Soccer.Models.TimelineImages;
+using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using NSubstitute;
+using Xunit;
+
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Models.Teams;
-    using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-    using NSubstitute;
-    using Xunit;
-
     public class PenaltyShootOutViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly TimelineEvent timeline;
-        private readonly IMatchResult matchResult;
         private readonly ViewModelBaseFixture baseFixture;
+        private readonly Fixture fixture;
 
         public PenaltyShootOutViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
-            timeline = new TimelineEvent();
-            matchResult = Substitute.For<IMatchResult>();
+            fixture = baseFixture.CommonFixture.Specimens;
+
+            baseFixture.DependencyResolver.Resolve<ITimelineEventImageBuilder>(Arg.Any<string>())
+              .Returns(new PenaltyShootOutImageBuilder());
         }
 
         [Theory]
@@ -30,15 +33,19 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             bool isHomeScored, byte homeScore, bool isAwayScored, byte awayScore, string expectedScore)
         {
             // Arrange
-            timeline.HomeShootoutPlayer = new Player { Name = "Ronaldo" };
-            timeline.IsHomeShootoutScored = isHomeScored;
-            timeline.ShootoutHomeScore = homeScore;
-            timeline.AwayShootoutPlayer = new Player { Name = "Messi" };
-            timeline.IsAwayShootoutScored = isAwayScored;
-            timeline.ShootoutAwayScore = awayScore;
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.HomeShootoutPlayer, new Player { Name = "Ronaldo" })
+                .With(timeline => timeline.IsHomeShootoutScored, isHomeScored)
+                .With(timeline => timeline.ShootoutHomeScore, homeScore)
+                .With(timeline => timeline.AwayShootoutPlayer, new Player { Name = "Messi" })
+                .With(timeline => timeline.IsAwayShootoutScored, isAwayScored)
+                .With(timeline => timeline.ShootoutAwayScore, awayScore);
+
+            var viewModel = new PenaltyShootOutViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new PenaltyShootOutViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal(expectedScore, viewModel.Score);
@@ -52,14 +59,17 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void BuildInfo_HomeShootFirst_ShowHomeShoot()
         {
             // Arrange
-            timeline.HomeShootoutPlayer = new Player { Name = "Ronaldo" };
-            timeline.IsHomeShootoutScored = true;
-            timeline.ShootoutHomeScore = 1;
-            timeline.AwayShootoutPlayer = null;
-            timeline.ShootoutAwayScore = 1;
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.HomeShootoutPlayer, new Player { Name = "Ronaldo" })
+                .With(timeline => timeline.IsHomeShootoutScored, true)
+                .With(timeline => timeline.ShootoutHomeScore, (byte)1)
+                .With(timeline => timeline.AwayShootoutPlayer, null)
+                .With(timeline => timeline.ShootoutAwayScore, (byte)1);
+            var viewModel = new PenaltyShootOutViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
 
             // Act
-            var viewModel = new PenaltyShootOutViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            viewModel.BuildData();
 
             // Assert
             Assert.Equal("1 - 1", viewModel.Score);
@@ -70,6 +80,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         }
 
         private static string GetPenaltyGoalImage(bool isScored)
-            => isScored ? "images/common/ball.png" : "images/common/missed_goal.png";
+            => isScored ? "images/common/ball.svg" : "images/common/missed_goal.svg";
     }
 }
