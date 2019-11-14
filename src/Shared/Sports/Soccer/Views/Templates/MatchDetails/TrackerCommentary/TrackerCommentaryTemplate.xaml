@@ -8,7 +8,7 @@
               xmlns:ffImageLoading="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary.TrackerCommentaryTemplate">
-    <StackLayout>
+    <StackLayout  BackgroundColor="{StaticResource ListViewBgColor}">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

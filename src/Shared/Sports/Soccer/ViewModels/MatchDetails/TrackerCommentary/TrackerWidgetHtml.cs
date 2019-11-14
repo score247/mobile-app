@@ -36,7 +36,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             builder.Append("            body {");
             builder.Append("                display: flex;");
             builder.Append("                justify-content: center;");
-            builder.Append("                background-color: #070915 !important;");
+            builder.Append("                background-color: #161719 !important;");
             builder.Append("            }");
             builder.Append("            .widgets {");
             builder.Append("                max-width: 620px;");

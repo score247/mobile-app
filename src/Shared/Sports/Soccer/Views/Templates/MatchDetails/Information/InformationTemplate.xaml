@@ -9,7 +9,7 @@
               xmlns:tabStrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
               xmlns:information="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Information;assembly=LiveScore.Soccer"
               mc:Ignorable="d">
-    <StackLayout>
+    <StackLayout BackgroundColor="{StaticResource ListViewBgColor}">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

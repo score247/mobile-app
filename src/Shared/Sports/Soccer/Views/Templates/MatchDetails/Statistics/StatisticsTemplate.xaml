@@ -19,30 +19,32 @@
             </ResourceDictionary>
             <statistics:StatisticItemTemplateSelector x:Key="statisticItemTemplateSelector" />
         </StackLayout.Resources>
-        <ActivityIndicator Margin="40"
-                           IsRunning="{Binding IsBusy}"
-                           IsVisible="{Binding IsBusy}"
-                           Style="{StaticResource CenterActivityIndicator}"
-                           VerticalOptions="StartAndExpand" />
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     RefreshColor="White"
-                     Command="{Binding RefreshCommand}">
-            <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
-                                            ItemsSource="{Binding StatisticItems}"
-                                            ItemTemplate="{StaticResource statisticItemTemplateSelector}"
-                                            IsVisible="{Binding IsNotBusy}"
-                                            Header="{Binding NoData}"
-                                            ItemSizingStrategy="MeasureFirstItem">
-                <CollectionView.HeaderTemplate>
-                    <DataTemplate>
-                        <StackLayout>
-                            <Label Style="{StaticResource NoInfo}"
-                                   Text="{langResources:Translate NoData}"
-                                   IsVisible="{Binding .}" />
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.HeaderTemplate>
-            </tabStrip:TabItemCollectionView>
-        </RefreshView>
+        <StackLayout BackgroundColor="{StaticResource StatisticsBackgroundColor}">
+            <ActivityIndicator Margin="40"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Style="{StaticResource CenterActivityIndicator}"
+                               VerticalOptions="StartAndExpand" />
+            <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                         RefreshColor="White"
+                         Command="{Binding RefreshCommand}">
+                <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
+                                                ItemsSource="{Binding StatisticItems}"
+                                                ItemTemplate="{StaticResource statisticItemTemplateSelector}"
+                                                IsVisible="{Binding IsNotBusy}"
+                                                Header="{Binding NoData}"
+                                                ItemSizingStrategy="MeasureFirstItem">
+                    <CollectionView.HeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource NoInfo}"
+                                       Text="{langResources:Translate NoData}"
+                                       IsVisible="{Binding .}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.HeaderTemplate>
+                </tabStrip:TabItemCollectionView>
+            </RefreshView>
+        </StackLayout>
     </StackLayout>
 </DataTemplate>
