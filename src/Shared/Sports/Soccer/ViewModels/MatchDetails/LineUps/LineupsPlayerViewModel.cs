@@ -9,9 +9,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
     public class LineupsPlayerViewModel : LineupsItemViewModel
     {
         private readonly IEnumerable<EventType> LineupsEvents =
-            new List<EventType> { EventType.Substitution,
+            new List<EventType> {
+                EventType.ScoreChangeByOwnGoal,
                 EventType.ScoreChange,
-                EventType.ScoreChangeByOwnGoal};
+                EventType.Substitution};
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -33,9 +34,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             AwayJerseyNumber = awayJerseyNumber;
             IsSubstitute = isSubstitute;
 
-            BuildHomeEventImages(homeEventStatistics);
-            BuildAwayEventImages(awayEventStatistics);
+            HonePlayerStatistics = BuildPlayerStatistics(homeEventStatistics);
+            AwayPlayerStatistics = BuildPlayerStatistics(awayEventStatistics);
         }
+
+        public List<KeyValuePair<string, int>> HonePlayerStatistics { get; private set; }
+        public List<KeyValuePair<string, int>> AwayPlayerStatistics { get; private set; }
 
         public string HomeName { get; }
 
@@ -45,115 +49,36 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public int? AwayJerseyNumber { get; }
 
-        public string HomeEventOneImageSource { get; private set; }
-
-        public int HomeEventOneCount { get; private set; }
-
-        public bool HomeEventOneVisible { get; private set; }
-
-        public string HomeEventTwoImageSource { get; private set; }
-
-        public int HomeEventTwoCount { get; private set; }
-
-        public bool HomeEventTwoVisible { get; private set; }
-
-        public string HomeEventThreeImageSource { get; private set; }
-
-        public int HomeEventThreeCount { get; private set; }
-
-        public bool HomeEventThreeVisible { get; private set; }
-
-        public string AwayEventOneImageSource { get; private set; }
-
-        public int AwayEventOneCount { get; private set; }
-
-        public bool AwayEventOneVisible { get; private set; }
-
-        public string AwayEventTwoImageSource { get; private set; }
-
-        public int AwayEventTwoCount { get; private set; }
-
-        public bool AwayEventTwoVisible { get; private set; }
-
-        public string AwayEventThreeImageSource { get; private set; }
-
-        public int AwayEventThreeCount { get; private set; }
-
-        public bool AwayEventThreeVisible { get; private set; }
-
         protected ITimelineEventImageBuilder ImageConverter { get; set; }
 
         public bool IsSubstitute { get; private set; }
 
-        private void BuildAwayEventImages(IDictionary<EventType, int> awayEventStatistics)
+        private List<KeyValuePair<string, int>> BuildPlayerStatistics(IDictionary<EventType, int> playerStatistics)
         {
             var eventStatistics = InitEventStatistics();
-            if (awayEventStatistics?.Any() == true)
+            if (playerStatistics?.Any() == true)
             {
-                var filteredEventStatistics = UpdateEventStatistics(eventStatistics, awayEventStatistics);
+                var filteredEventStatistics = SumPlayerStatistics(eventStatistics, playerStatistics);
 
-                ApplyAwayEventImage(filteredEventStatistics);
+                return BuilStatisticImage(filteredEventStatistics);
             }
+
+            return new List<KeyValuePair<string, int>>();
         }
 
-        private void ApplyAwayEventImage(IDictionary<EventType, int> eventStatistics)
+        private List<KeyValuePair<string, int>> BuilStatisticImage(IDictionary<EventType, int> eventStatistics)
         {
             var allEventStatistics = eventStatistics.ToList();
-            if (allEventStatistics.Count > 0)
+            var statisticWithImage = new List<KeyValuePair<string, int>>();
+            foreach (var statistic in allEventStatistics)
             {
-                AwayEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
-                AwayEventOneCount = allEventStatistics[0].Value;
-                AwayEventOneVisible = GetEventVisibility(allEventStatistics[0]);
+                statisticWithImage.Add(new KeyValuePair<string, int>(BuildEventTimelineImage(statistic.Key), statistic.Value));
             }
-            if (allEventStatistics.Count > 1)
-            {
-                AwayEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
-                AwayEventTwoCount = allEventStatistics[1].Value;
-                AwayEventTwoVisible = GetEventVisibility(allEventStatistics[1]);
-            }
-            if (allEventStatistics.Count > 2)
-            {
-                AwayEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
-                AwayEventThreeCount = allEventStatistics[2].Value;
-                AwayEventThreeVisible = GetEventVisibility(allEventStatistics[2]);
-            }
+
+            return statisticWithImage;
         }
 
-        private void BuildHomeEventImages(IDictionary<EventType, int> homeEventStatistics)
-        {
-            var eventStatistics = InitEventStatistics();
-            if (homeEventStatistics != null)
-            {
-                var filteredEventStatistics = UpdateEventStatistics(eventStatistics, homeEventStatistics);
-
-                ApplyHomeEventImage(filteredEventStatistics);
-            }
-        }
-
-        private void ApplyHomeEventImage(IDictionary<EventType, int> eventStatistics)
-        {
-            var allEventStatistics = eventStatistics.ToList();
-            if (allEventStatistics.Count > 0)
-            {
-                HomeEventOneImageSource = BuildEventTimelineImage(allEventStatistics[0].Key);
-                HomeEventOneCount = allEventStatistics[0].Value;
-                HomeEventOneVisible = GetEventVisibility(allEventStatistics[0]);
-            }
-            if (allEventStatistics.Count > 1)
-            {
-                HomeEventTwoImageSource = BuildEventTimelineImage(allEventStatistics[1].Key);
-                HomeEventTwoCount = allEventStatistics[1].Value;
-                HomeEventTwoVisible = GetEventVisibility(allEventStatistics[1]);
-            }
-            if (allEventStatistics.Count > 2)
-            {
-                HomeEventThreeImageSource = BuildEventTimelineImage(allEventStatistics[2].Key);
-                HomeEventThreeCount = allEventStatistics[2].Value;
-                HomeEventThreeVisible = GetEventVisibility(allEventStatistics[2]);
-            }
-        }
-
-        private static IDictionary<EventType, int> UpdateEventStatistics(IDictionary<EventType, int> eventStatistics, IDictionary<EventType, int> playerEventStatistics)
+        private static IDictionary<EventType, int> SumPlayerStatistics(IDictionary<EventType, int> eventStatistics, IDictionary<EventType, int> playerEventStatistics)
         {
             foreach (var eventStatistic in playerEventStatistics)
             {
@@ -203,11 +128,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
 
             return ImageConverter.BuildImageSource(new TimelineEventImage(displayEventType));
-        }
-
-        private static bool GetEventVisibility(KeyValuePair<EventType, int> eventTimline)
-        {
-            return eventTimline.Value > 1;
         }
     }
 }

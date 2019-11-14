@@ -144,6 +144,9 @@
     <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HOptionsTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\LineupsPlayerStatisticTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\LineupsPlayerTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
