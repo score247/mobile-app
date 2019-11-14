@@ -65,7 +65,7 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps
 
             var button = new Button
             {
-                IsVisible = statistic.Value > 2,
+                IsVisible = statistic.Value > 1,
                 Text = statistic.Value.ToString(),
                 Style = control.Resources["MatchDetailLineUpsScoreNumber"] as Style
             };
