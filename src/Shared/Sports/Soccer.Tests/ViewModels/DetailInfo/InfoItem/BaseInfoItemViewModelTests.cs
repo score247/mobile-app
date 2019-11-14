@@ -1,30 +1,29 @@
+using System;
+using AutoFixture;
+using LiveScore.Core;
+using LiveScore.Core.Enumerations;
+using LiveScore.Core.Tests.Fixtures;
+using LiveScore.Soccer.Models.Matches;
+using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems;
+using NSubstitute;
+using Prism.Navigation;
+using Xamarin.Forms;
+using Xunit;
+
 namespace Soccer.Tests.ViewModels.MatchDetailInfo
 {
-    using System;
-    using LiveScore.Core.Enumerations;
-    using LiveScore.Core.Models.Matches;
-    using LiveScore.Core.Tests.Fixtures;
-    using LiveScore.Soccer.ViewModels.MatchDetailInfo;
-    using LiveScore.Soccer.Views.Templates.MatchDetailInfo;
-    using NSubstitute;
-    using Xamarin.Forms;
-    using Xunit;
-
     public class BaseInfoItemViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
-        private readonly ITimelineEvent timeline;
-        private readonly IMatchResult matchResult;
-        private readonly BaseItemViewModel viewModel;
+        private readonly INavigationService navigationService;
+        private readonly IDependencyResolver dependencyResolver;
+        private readonly Fixture fixture; 
 
         public BaseInfoItemViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            timeline = Substitute.For<ITimelineEvent>();
-            matchResult = Substitute.For<IMatchResult>();
-
-            timeline.HomeScore.Returns((byte)1);
-            timeline.AwayScore.Returns((byte)2);
-            timeline.MatchTime.Returns((byte)20);
-            viewModel = new BaseItemViewModel(timeline, matchResult, baseFixture.NavigationService, baseFixture.DependencyResolver);
+            navigationService = baseFixture.NavigationService;
+            dependencyResolver = baseFixture.DependencyResolver;
+            fixture = baseFixture.CommonFixture.Specimens;
         }
 
         [Theory]
@@ -38,10 +37,16 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void CreateInstance_Always_GetExpectedViewModelInstance(string eventType, Type expectedType)
         {
             // Arrange
-            timeline.Type.Returns(Enumeration.FromDisplayName<EventType>(eventType));
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.HomeScore, (byte)1)
+                .With(timeline => timeline.AwayScore, (byte)2)
+                .With(timeline => timeline.MatchTime, (byte)20)
+                .With(timeline => timeline.Type, Enumeration.FromDisplayName<EventType>(eventType));
 
             // Act
-            var actual = viewModel.CreateInstance();
+            var actual = BaseItemViewModel.CreateInstance(timeline, matchInfo, navigationService, dependencyResolver);
 
             // Assert
             Assert.Equal(expectedType, actual.GetType());
@@ -58,7 +63,16 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         public void CreateTemplate_Always_GetExpectedTemplate(string eventType, Type expectedType)
         {
             // Arrange
-            timeline.Type.Returns(Enumeration.FromDisplayName<EventType>(eventType));
+            var matchInfo = fixture.Create<MatchInfo>();
+
+            var timeline = fixture.Create<TimelineEvent>()
+                .With(timeline => timeline.HomeScore, (byte)1)
+                .With(timeline => timeline.AwayScore, (byte)2)
+                .With(timeline => timeline.MatchTime, (byte)20)
+                .With(timeline => timeline.Type, Enumeration.FromDisplayName<EventType>(eventType));
+
+            var viewModel = new BaseItemViewModel(timeline, matchInfo, navigationService, dependencyResolver);
+
             // Act
             var actual = viewModel.CreateTemplate();
 
@@ -69,31 +83,46 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         [Fact]
         public void BuildInfo_Always_BuildExpectedScore()
         {
+            // Arrange
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>();
+            var viewModel = new BaseItemViewModel(timeline, matchInfo, navigationService, dependencyResolver);
+
             // Act
-            var actualScore = viewModel.Score;
+            viewModel.BuildData();
 
             // Assert
-            Assert.Equal("1 - 2", actualScore);
+            Assert.Equal($"{timeline.HomeScore} - {timeline.AwayScore}", viewModel.Score);
         }
 
         [Fact]
         public void BuildInfo_Always_BuildExpectedMatchTime()
         {
+            // Arrange
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>().With(timeline => timeline.StoppageTime, null);
+            var viewModel = new BaseItemViewModel(timeline, matchInfo, navigationService, dependencyResolver);
+
             // Act
-            var actualMatchTime = viewModel.MatchTime;
+            viewModel.BuildData();
 
             // Assert
-            Assert.Equal("20'", actualMatchTime);
+            Assert.Equal($"{timeline.MatchTime}'", viewModel.MatchTime);
         }
 
         [Fact]
         public void BuildInfo_Always_BuildExpectedRowColor()
         {
+            // Arrange
+            var matchInfo = fixture.Create<MatchInfo>();
+            var timeline = fixture.Create<TimelineEvent>();
+            var viewModel = new BaseItemViewModel(timeline, matchInfo, navigationService, dependencyResolver);
+
             // Act
-            var actualRowColor = viewModel.RowColor;
+            viewModel.BuildData();
 
             // Assert
-            Assert.Equal(Color.FromHex("#1D2133"), actualRowColor);
+            Assert.Equal(Color.FromHex("#66FF59"), viewModel.RowColor);
         }
     }
 }
