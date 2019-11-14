@@ -49,7 +49,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public List<LineupsGroupViewModel> LineupsItemGroups { get; private set; }
 
-        public bool HasFormation { get; protected set; } = true;
+        public bool HasFormation { get; protected set; }
 
         public bool NoFormation => !HasFormation;
 
