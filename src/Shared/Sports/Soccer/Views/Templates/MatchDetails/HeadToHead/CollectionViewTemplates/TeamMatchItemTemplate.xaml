@@ -17,8 +17,6 @@
                     <resources:MatchDetailH2HViewResource />
                 </ResourceDictionary.MergedDictionaries>
                 <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
-                <commonConverters:FirstCharUpperConverter x:Key="FirstCharUpperConverter" />
-                <soccerConverters:TeamResultConverter x:Key="TeamResultConverter" />
             </ResourceDictionary>
         </StackLayout.Resources>
             <!-- Matches -->
@@ -100,9 +98,20 @@
 
                 <Button Grid.Column="3"
                         Grid.RowSpan="2"
-                        Text="{Binding Result, Converter={StaticResource FirstCharUpperConverter}}"
-                        Style="{StaticResource MatchDetailH2HResultIcon}"
-                        BackgroundColor="{Binding Result, Converter={StaticResource TeamResultConverter}}"/>
+                        Text="{Binding Result}"
+                        Style="{StaticResource MatchDetailH2HResultIcon}">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Result}" Value="W">
+                                <Setter Property="BackgroundColor" Value="{StaticResource WinIconColor}"/>
+                         </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Result}" Value="L">
+                                <Setter Property="BackgroundColor" Value="{StaticResource LoseIconColor}"/>
+                         </DataTrigger>
+                        <DataTrigger TargetType="Button" Binding="{Binding Result}" Value="D">
+                                <Setter Property="BackgroundColor" Value="{StaticResource DrawIconColor}"/>
+                         </DataTrigger>
+                    </Button.Triggers>
+                </Button>
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
     </StackLayout>
