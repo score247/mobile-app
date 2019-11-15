@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\DetailInfo\DetailInfoViewModelTests.cs" />
     <Compile Remove="ViewModels\DetailOdds\OddsMovementViewModelTests.cs" />
   </ItemGroup>
 

@@ -87,7 +87,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
 
         public override void OnSleep() => UnsubscribeEvents();
 
-        private async Task LoadMatchInfoData()
+        internal async Task LoadMatchInfoData()
         {
             try
             {
@@ -139,7 +139,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                     matchEventMessage.MatchEvent.Timeline as TimelineEvent
                 }));
 
-            BuildDetailInfo(MatchInfo);
+            BuildInfoItems(MatchInfo);
         }
 
         private async Task LoadMatchDetail()
@@ -148,14 +148,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                 .GetMatchAsync(match.Id, CurrentLanguage)
                 .ConfigureAwait(false);
 
-            BuildDetailInfo(MatchInfo);
+            BuildInfoItems(MatchInfo);
 
             IsRefreshing = false;
-        }
-
-        private void BuildDetailInfo(MatchInfo matchInfo)
-        {
-            BuildInfoItems(matchInfo);
         }
 
         private void BuildInfoItems(MatchInfo matchInfo)
