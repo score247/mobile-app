@@ -35,7 +35,7 @@ namespace LiveScore.Soccer.Models.Matches
         public string TimelineId { get; }
 
         [Key(1)]
-        public EventType TimelineType { get; }
+        public EventType TimelineType { get; private set; }
 
         [Key(2)]
         public DateTimeOffset Time { get; }
@@ -44,10 +44,10 @@ namespace LiveScore.Soccer.Models.Matches
         public byte MatchTime { get; }
 
         [Key(4)]
-        public string StoppageTime { get; }
+        public string StoppageTime { get; private set; }
 
         [Key(5)]
-        public IEnumerable<Commentary> Commentaries { get; }
+        public IEnumerable<Commentary> Commentaries { get; private set; }
 
         [Key(6)]
         public GoalScorer GoalScorer { get; }
