@@ -29,4 +29,3 @@
 <!-- REQUIRED - Please upload or provide a link to a reproduction case. If no reproduction sample is included, this issue may be closed or ignored until a sample has been provided -->
 
 /label ~bug
-/title [Bug] Bug report

@@ -11,4 +11,3 @@ For whom and why.
 ## Links / references
 
 /label ~enhancement
-/title [Enhancement] Suggest an idea for this project
