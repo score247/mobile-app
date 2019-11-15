@@ -26,7 +26,8 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoreItemViewModel : ViewModelBase
     {
-        private const int DefaultFirstLoadMatchItemCount = 5;
+        private const int EnableLoadOnDemainMatchThreshold = 150;
+        private const int DefaultFirstLoadMatchItemCount = 8;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
 
         protected readonly IMatchDisplayStatusBuilder matchStatusBuilder;
@@ -337,15 +338,21 @@ namespace LiveScore.Features.Score.ViewModels
             var matchItems
                 = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
 
-            var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
-
-            RemainingMatchItemSource
-                = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
-
-            Device.BeginInvokeOnMainThread(() =>
+            if (matchItemViewModels.Count() > EnableLoadOnDemainMatchThreshold)
             {
-                MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems);
-            });
+                var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
+
+                RemainingMatchItemSource
+                    = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
+
+                Device.BeginInvokeOnMainThread(()
+                    => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems));
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(()
+                    => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems));
+            }
         }
     }
 }
