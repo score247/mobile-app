@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoFixture;
 using KellermanSoftware.CompareNetObjects;
@@ -14,7 +12,6 @@ using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;

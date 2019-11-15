@@ -11,22 +11,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\DetailInfo\InfoItem\**" />
-    <EmbeddedResource Remove="ViewModels\DetailInfo\InfoItem\**" />
-    <None Remove="ViewModels\DetailInfo\InfoItem\**" />
+    <Compile Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
+    <EmbeddedResource Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
+    <None Remove="ViewModels\MatchDetails\DetailInfo\InfoItem\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="ViewModels\DetailOdds\OddsMovementViewModelTests.cs" />
+    <Compile Remove="ViewModels\MatchDetails\DetailOdds\OddsMovementViewModelTests.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="ViewModels\DetailInfo\InfoItem\BaseInfoItemViewModelTests.cs" />
-    <Compile Include="ViewModels\DetailInfo\InfoItem\DefaultItemViewModelTests.cs" />
-    <Compile Include="ViewModels\DetailInfo\InfoItem\MainEventItemViewModelTests.cs" />
-    <Compile Include="ViewModels\DetailInfo\InfoItem\PenaltyShootOutViewModelTests.cs" />
-    <Compile Include="ViewModels\DetailInfo\InfoItem\ScoreChangeItemViewModelTests.cs" />
-    <Compile Include="ViewModels\DetailInfo\InfoItem\SubstitutionItemViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\BaseInfoItemViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\DefaultItemViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\MainEventItemViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\PenaltyShootOutViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\ScoreChangeItemViewModelTests.cs" />
+    <Compile Include="ViewModels\MatchDetails\DetailInfo\InfoItem\SubstitutionItemViewModelTests.cs" />
   </ItemGroup>
 
   <ItemGroup>
