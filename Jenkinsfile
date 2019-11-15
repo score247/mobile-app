@@ -101,33 +101,6 @@ pipeline{
                 }
             }
         }
-
-        stage("Run Acceptance Test"){
-            agent {
-                label 'slaveMAC'
-            }
-            when {
-                allOf {
-                    triggeredBy 'TimerTrigger'
-                    expression { BRANCH_NAME ==~ /^(origin\/)*\d+\-Sprint\d+$/ }
-                }
-            }
-            steps{
-                withEnv(['PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Xamarin Workbooks.app/Contents/SharedSupport/path-bin']) {
-
-			        fileOperations([
-			        	fileCopyOperation(excludes: '', flattenFiles: false, includes: '$WORKSPACE/test/automation-tests/Template_Files', targetLocation: '$WORKSPACE/Template_Files')
-			        ])
-
-                    sh label: "Robotframework", script: "robot --outputdir $WORKSPACE/Results --exclude Demo $WORKSPACE/test/automation-tests/Score247.robot"
-                }
-            }
-            post{
-                always{
-                    step([$class: 'RobotPublisher', disableArchiveOutput: false, enableCache: true, logFileName: 'log.html', onlyCritical: true, otherFiles: '', outputFileName: 'output.xml', outputPath: 'Results', passThreshold: 100.0, reportFileName: 'report.html', unstableThreshold: 90.0])
-                }
-            }
-        }
     }
     post{
         unsuccessful{
