@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
@@ -16,6 +17,7 @@ using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
+[assembly: InternalsVisibleTo("Soccer.Tests")]
 namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 {
     public class TrackerCommentaryViewModel : TabItemViewModel
@@ -95,7 +97,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         private Task OnRefresh()
             => LoadDataAsync(LoadMatchCommentariesAsync, false);
 
-        private void ShowMoreCommentaries()
+        internal void ShowMoreCommentaries()
         {
             if (IsShowMore)
             {
@@ -111,7 +113,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             }
         }
 
-        private async Task LoadTrackerAndCommentaries()
+        internal async Task LoadTrackerAndCommentaries()
         {
             if (matchCoverage?.Coverage == null)
             {
