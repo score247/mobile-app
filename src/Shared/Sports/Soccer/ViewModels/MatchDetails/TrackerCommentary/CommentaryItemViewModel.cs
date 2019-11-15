@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Runtime.CompilerServices;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Soccer.Extensions;
@@ -6,6 +7,7 @@ using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using Xamarin.Forms;
 
+[assembly: InternalsVisibleTo("Soccer.Tests")]
 namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 {
     public class CommentaryItemViewModel
@@ -17,10 +19,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             Commentary = commentary;
             this.dependencyResolver = dependencyResolver;
 
-            BuildMatchTime();
-            BuildImageSource();
-            BuildCommentaryText();
-            BuildHighlightColor();
+            BuildData();
         }
 
         public MatchCommentary Commentary { get; }
@@ -35,21 +34,26 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 
         public bool VisibleMatchTime { get; private set; }
 
-        private void BuildMatchTime()
+        internal void BuildData()
         {
             if (Commentary == null)
             {
                 return;
             }
 
-            MatchTime = string.IsNullOrEmpty(Commentary.StoppageTime)
-                ? $"{Commentary.MatchTime}'"
-                : $"{Commentary.MatchTime}+{Commentary.StoppageTime}'";
-
+            MatchTime = BuildMatchTime();
+            ImageSource = BuildImageSource();
+            CommentaryText = BuildCommentaryText();
+            CommentaryTextColor = (Color)Application.Current.Resources[GetColorResourceName()];
             VisibleMatchTime = Commentary.IsVisibleMatchTimeEvent();
         }
 
-        private void BuildImageSource()
+        internal string BuildMatchTime()
+        => string.IsNullOrEmpty(Commentary.StoppageTime)
+                ? $"{Commentary.MatchTime}'"
+                : $"{Commentary.MatchTime}+{Commentary.StoppageTime}'";
+
+        internal string BuildImageSource()
         {
             ITimelineEventImageBuilder imageConverter;
 
@@ -63,30 +67,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                 imageConverter = new DefaultEventImageBuilder();
             }
 
-            ImageSource = imageConverter.BuildImageSource(
+            return imageConverter.BuildImageSource(
                     new TimelineEventImage(
                         Commentary.TimelineType,
                         Commentary.GoalScorer,
                         Commentary.IsPenaltyShootOutScored));
         }
 
-        private void BuildCommentaryText()
-        {
-            if (Commentary == null)
-            {
-                return;
-            }
-
-            CommentaryText = Commentary.Commentaries?.Any() != true
+        internal string BuildCommentaryText()
+        => Commentary.Commentaries?.Any() != true
                 ? EventType.EventTypeNames[Commentary.TimelineType]
                 : string.Join("\r\n", Commentary.Commentaries.Select(c => c.Text));
-        }
 
-        private void BuildHighlightColor()
-        {
-            CommentaryTextColor = Commentary.TimelineType.IsHighlightEvent()
-                ? (Color)Application.Current.Resources["HighlightCommentaryColor"]
-                : (Color)Application.Current.Resources["CommentaryColor"];
-        }
+        internal string GetColorResourceName()
+        => Commentary.TimelineType.IsHighlightEvent()
+                ? "HighlightCommentaryColor"
+                : "CommentaryColor";
     }
 }
