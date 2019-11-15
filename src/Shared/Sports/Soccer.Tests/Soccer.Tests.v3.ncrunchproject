@@ -1,9 +1,0 @@
-﻿<ProjectConfiguration>
-  <Settings>
-    <IgnoredTests>
-      <FixtureTestSelector>
-        <FixtureName>Soccer.Tests.Models.Matches.MatchTests</FixtureName>
-      </FixtureTestSelector>
-    </IgnoredTests>
-  </Settings>
-</ProjectConfiguration>
