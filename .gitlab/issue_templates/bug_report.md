@@ -26,10 +26,8 @@ assignees: ''
 
 ### Basic Information
 
-- Version with issue:
-- Last known good version:
-- Xamarin.Forms version:
-- IDE:
+- App version:
+- User Story redmine link:
 
 ### Screenshots
 
