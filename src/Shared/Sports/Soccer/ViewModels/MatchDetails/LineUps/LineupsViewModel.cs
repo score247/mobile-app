@@ -108,21 +108,21 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             }
             else
             {
+                var allLineUpsPlayersGroup = new List<LineupsGroupViewModel>();
                 var noFormationLineups = BuildNoFormationLineupsGroup(matchLineups);
 
                 if (noFormationLineups != null)
                 {
-                    beginInvokeOnMainThreadFunc(() =>
-                    {
-                        LineupsItemGroups = new List<LineupsGroupViewModel>
-                        {
-                                noFormationLineups
-                        };
-                    });
+                    allLineUpsPlayersGroup.Add(noFormationLineups);
                 }
 
                 var otherLineupsInfo = BuildOtherLineupsInfo(matchLineups);
-                beginInvokeOnMainThreadFunc(() => LineupsItemGroups.AddRange(otherLineupsInfo));
+                allLineUpsPlayersGroup.AddRange(otherLineupsInfo);
+
+                beginInvokeOnMainThreadFunc(() =>
+                {
+                    LineupsItemGroups = allLineUpsPlayersGroup;
+                });
             }
         }
 
