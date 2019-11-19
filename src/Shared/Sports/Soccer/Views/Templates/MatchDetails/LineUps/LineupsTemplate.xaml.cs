@@ -1,4 +1,6 @@
-﻿using Xamarin.Forms;
+﻿using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Controls.TabStrip.EventArgs;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps
@@ -9,6 +11,14 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.LineUps
         public LineUpsTemplate()
         {
             InitializeComponent();
+        }
+
+        public static void TabItemCollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
+        {
+            MessagingCenter.Send(
+               nameof(TabStrip),
+               TabItemScrollingEventArgs.EventName,
+               new TabItemScrollingEventArgs(e.VerticalOffset > 200 ? e.VerticalOffset : 0));
         }
     }
 }
