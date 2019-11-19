@@ -60,9 +60,18 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnSleep() => SelectedScoreItem?.OnSleep();
 
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
-            SelectedScoreItem?.OnAppearing();
+            var todayItem = ScoreItemSources[TodayDateBarItemIndex];
+
+            if (todayItem?.ViewDate != DateTime.Today)
+            {
+                await NavigateToHomeAsync().ConfigureAwait(false);
+            }
+            else
+            {
+                SelectedScoreItem?.OnAppearing();
+            }
         }
 
         public override void OnDisappearing()
