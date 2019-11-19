@@ -43,6 +43,9 @@
     <Compile Update="ViewResources\MatchDetailH2HViewResource.xaml.cs">
       <DependentUpon>MatchDetailH2HViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ViewResources\MatchDetailTableViewResource.xaml.cs">
+      <DependentUpon>MatchDetailTableViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\MatchDetailStatisticViewResource.xaml.cs">
       <DependentUpon>MatchDetailStatisticViewResource.xaml</DependentUpon>
     </Compile>

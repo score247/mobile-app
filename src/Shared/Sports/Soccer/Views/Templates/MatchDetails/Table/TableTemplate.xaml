@@ -2,12 +2,820 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Table.TableTemplate">
-    <Label Margin="16,12"
-           FontSize="12"
-           HorizontalTextAlignment="Center"
-           Text="This is Tracker page"
-           TextColor="White" />
+    <StackLayout>
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <resources:MatchDetailTableViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+
+        <StackLayout Margin="0,8">
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableHeaderContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="#" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="TEAM" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="P" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="W" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="L" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="D" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="GF" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="GA" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="PTS" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="1" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Manchester City" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="20" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="9" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="0" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="77" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="21" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="71" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="2" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Liverpoor" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="19" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="8" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="2" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="51" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="2" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="70" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="3" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Tottebgan Hotspur" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="18" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="1" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="27" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="1" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="61" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="4" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Manchester United" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="18" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="4" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="27" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="58" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeFifthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="5" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Arsenal" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="18" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="5" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="6" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="28" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="6" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="57" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeSixthTeamOnLeague}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="6" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Chelsea" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="28" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="17" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="4" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="23" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="4" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="56" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Wolverhampton Wanderers" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="16" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="6" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="6" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="6" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="43" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="8" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Watford" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="16" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="39" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="9" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableTwoTeamText}"
+                   Text="Crystal Palace" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="16" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="1" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="37" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Everton" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="15" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="9" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="4" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="1" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="11" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="30" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="11" />
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableTwoTeamText}"
+                   Text="Brighton Hove Albion" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="14" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="3" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="1" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="12" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableTwoTeamAlignCenterText}"
+                   Text="21" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeBottomTeamOnLeagueColor}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="12" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Cardiff City" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="13" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="11" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="2" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="2" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="34" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="25" />
+            </Grid>
+
+            <BoxView Style="{StaticResource TableLine}" />
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <StackLayout Grid.Row="0"
+                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
+                    <Frame Margin="0"
+                        Style="{StaticResource MatchDetailTableOutComeBottomTeamOnLeagueColor}">
+                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="13" />
+                    </Frame>
+                </StackLayout>
+                <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource MatchDetailTableText}"
+                   Text="Fullham" />
+                <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="29" />
+                <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="10" />
+                <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="12" />
+                <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="7" />
+                <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="31" />
+                <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource MatchDetailTableAlignCenterText}"
+                   Text="17" />
+            </Grid>
+            <BoxView Style="{StaticResource TableLine}" />
+        </StackLayout>
+        <StackLayout Style="{StaticResource MatchDetailTableFooter}">
+            <Label Style="{StaticResource MatchDetailTableNotes}" Text="Fullham: 3 points deducted due to decision by the Federation" />
+
+            <FlexLayout Style="{StaticResource MatchDetailTableOutComeLayout}">
+                <Frame Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}" />
+                <Label Text="Champion League" Style="{StaticResource MatchDetailTableOutComeLabel}" />
+            </FlexLayout>
+            <FlexLayout HeightRequest="16" AlignItems="Center" Style="{StaticResource MatchDetailTableOutComeLayout}">
+                <Frame Style="{StaticResource MatchDetailTableOutComeFifthTeamOnLeague}" />
+                <Label Text="Europa League" Style="{StaticResource MatchDetailTableOutComeLabel}" />
+            </FlexLayout>
+            <FlexLayout HeightRequest="16" AlignItems="Center" Style="{StaticResource MatchDetailTableOutComeLayout}">
+                <Frame Style="{StaticResource MatchDetailTableOutComeSixthTeamOnLeague}" />
+                <Label Text="Europa Le Qualification" Style="{StaticResource MatchDetailTableOutComeLabel}" />
+            </FlexLayout>
+            <FlexLayout HeightRequest="16" AlignItems="Center" Style="{StaticResource MatchDetailTableOutComeLayout}">
+                <Frame Style="{StaticResource MatchDetailTableOutComeBottomTeamOnLeagueColor}" />
+                <Label Text="Relegation" Style="{StaticResource MatchDetailTableOutComeLabel}" />
+            </FlexLayout>
+        </StackLayout>
+    </StackLayout>
 </DataTemplate>
