@@ -13,6 +13,8 @@ using Xamarin.Forms.Internals;
 
 namespace LiveScore.Features.Score.Extensions
 {
+#pragma warning disable S107 // Methods should not have too many parameters
+
     public static class MatchItemSourceExtension
     {
         public static void AddItems(
@@ -224,4 +226,6 @@ namespace LiveScore.Features.Score.Extensions
                 .IndexOf(leagueOrder);
         }
     }
+
+#pragma warning restore S107 // Methods should not have too many parameters
 }
