@@ -50,8 +50,8 @@ namespace LiveScore.Features.Score.ViewModels
             matchMinuteBuilder = DependencyResolver.Resolve<IMatchMinuteBuilder>(CurrentSportId.ToString());
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
 
-            RemainingMatchItemSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>();
-            InitializeCommand();
+            RemainingMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>();
+            InitializeCommands();
         }
 
         public bool FirstLoad { get; private set; } = true;
@@ -66,9 +66,9 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsNotLoadMore => !IsLoadMore;
 
-        public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> MatchItemsSource { get; protected set; }
+        public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> MatchItemsSource { get; protected set; }
 
-        public ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> RemainingMatchItemSource { get; protected set; }
+        public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> RemainingMatchItemSource { get; protected set; }
 
         public DelegateAsyncCommand RefreshCommand { get; private set; }
 
@@ -186,7 +186,7 @@ namespace LiveScore.Features.Score.ViewModels
                 payload.TeamStatistic);
         }
 
-        private void InitializeCommand()
+        private void InitializeCommands()
         {
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatchAsync);
@@ -241,7 +241,7 @@ namespace LiveScore.Features.Score.ViewModels
                     var matchItems = RemainingMatchItemSource.Take(DefaultLoadingMatchItemCountOnScrolling);
 
                     RemainingMatchItemSource
-                        = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(
+                        = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(
                             RemainingMatchItemSource.Skip(DefaultLoadingMatchItemCountOnScrolling));
 
                     Device.BeginInvokeOnMainThread(() =>
@@ -308,7 +308,9 @@ namespace LiveScore.Features.Score.ViewModels
                         matchStatusBuilder,
                         matchMinuteBuilder,
                         EventAggregator,
-                        buildFlagUrlFunc));
+                        buildFlagUrlFunc,
+                        NavigationService,
+                        CurrentSportId));
 
                 var remainingMatches = matches.Except(loadedMatches);
 
@@ -318,7 +320,9 @@ namespace LiveScore.Features.Score.ViewModels
                         matchStatusBuilder,
                         matchMinuteBuilder,
                         EventAggregator,
-                        buildFlagUrlFunc);
+                        buildFlagUrlFunc,
+                        NavigationService,
+                        CurrentSportId);
             }
             catch (Exception ex)
             {
@@ -336,22 +340,22 @@ namespace LiveScore.Features.Score.ViewModels
                 EventAggregator));
 
             var matchItems
-                = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
+                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
 
             if (matchItemViewModels.Count() > EnableLoadOnDemainMatchThreshold)
             {
                 var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
 
                 RemainingMatchItemSource
-                    = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
+                    = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
 
                 Device.BeginInvokeOnMainThread(()
-                    => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(loadItems));
+                    => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(loadItems));
             }
             else
             {
                 Device.BeginInvokeOnMainThread(()
-                    => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems));
+                    => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems));
             }
         }
     }

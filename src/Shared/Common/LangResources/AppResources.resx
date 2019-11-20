@@ -405,4 +405,7 @@
   <data name="Substitutions" xml:space="preserve">
     <value>SUBSTITUTIONS</value>
   </data>
+  <data name="Fixtures" xml:space="preserve">
+    <value>Fixtures</value>
+  </data>
 </root>

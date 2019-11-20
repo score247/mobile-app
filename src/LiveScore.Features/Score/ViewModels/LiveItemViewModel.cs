@@ -38,10 +38,10 @@ namespace LiveScore.Features.Score.ViewModels
                     EventAggregator));
 
             var matchItems
-                = matchItemViewModels.GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc));
+                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
 
             Device.BeginInvokeOnMainThread(()
-                => MatchItemsSource = new ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>>(matchItems));
+                => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems));
         }
 
         protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
@@ -62,14 +62,16 @@ namespace LiveScore.Features.Score.ViewModels
 
             Device.BeginInvokeOnMainThread(() =>
             {
-                MatchItemsSource.RemoveMatches(removedMatchIds.ToArray(), buildFlagUrlFunc);
+                MatchItemsSource.RemoveMatches(removedMatchIds.ToArray(), buildFlagUrlFunc, NavigationService, CurrentSportId);
 
                 MatchItemsSource.UpdateMatchItems(
                     matches,
                     matchStatusBuilder,
                     matchMinuteBuilder,
                     EventAggregator,
-                    buildFlagUrlFunc);
+                    buildFlagUrlFunc,
+                    NavigationService,
+                    CurrentSportId);
             });
         }
 
@@ -85,7 +87,7 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc);
+            MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc, NavigationService, CurrentSportId);
 
             HasData = (message.NewMatches?.Any() == true) || MatchItemsSource.Any();
 
@@ -96,7 +98,9 @@ namespace LiveScore.Features.Score.ViewModels
                     matchStatusBuilder,
                     matchMinuteBuilder,
                     EventAggregator,
-                    buildFlagUrlFunc));
+                    buildFlagUrlFunc,
+                    NavigationService,
+                    CurrentSportId));
             }
         }
     }

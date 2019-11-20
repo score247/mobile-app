@@ -3,7 +3,7 @@
               xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:viewModels="clr-namespace:LiveScore.Core.ViewModels"
-              x:DataType="viewModels:GroupMatchViewModel"
+              x:DataType="viewModels:MatchGroupViewModel"
               xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     <ViewCell Height="{StaticResource FunctionGroupHeight}">
@@ -48,6 +48,9 @@
                        Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding Key.TapLeagueCommand}" />
+            </StackLayout.GestureRecognizers>
         </StackLayout>
     </ViewCell>
 </DataTemplate>

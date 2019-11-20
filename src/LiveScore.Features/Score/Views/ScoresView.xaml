@@ -12,7 +12,7 @@
              xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
              xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
              xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
-             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels;"
+             xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mvvm:ViewModelLocator.AutowireViewModel="True"

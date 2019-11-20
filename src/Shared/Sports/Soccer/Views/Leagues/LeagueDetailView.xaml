@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             xmlns:cardViewControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+             xmlns:cardView="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:templateSelectors="clr-namespace:LiveScore.Soccer.Views.Leagues.Templates"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Soccer.Views.Leagues.LeagueDetailView"
+             BackgroundColor="{StaticResource SecondColor}">
+    <NavigationPage.TitleView>
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
+                                               CurrentSport="{Binding CurrentSportName}" />
+    </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Search" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <templateSelectors:LeagueDetailItemTemplateSelector x:Key="LeagueDetailItemTemplateSelector" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
+                                          StripeColor="{StaticResource DateBarStripeColor}"
+                                          StripeHeight="1">
+                <cardViewControls:TabsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="FillAndExpand"
+                                     Padding="0,10,0,10">
+                            <Label Text="{Binding Title}"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" />
+                        </StackLayout>
+                    </DataTemplate>
+                </cardViewControls:TabsControl.ItemTemplate>
+            </cardViewControls:TabsControl>
+
+            <cardView:CarouselView x:Name="LeagueDetailCarouselView"
+                                   HorizontalOptions="FillAndExpand"
+                                   IsCyclical="False"
+                                   IsViewReusingEnabled="True"
+                                   ItemsSource="{Binding LeagueDetailItemSources}"
+                                   ItemTemplate="{StaticResource LeagueDetailItemTemplateSelector}"
+                                   VerticalOptions="FillAndExpand">
+                <x:Arguments>
+                    <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
+                                                               NoItemMaxPanDistance="1000"
+                                                               OpacityFactor="0.25" />
+                    <processors:BaseCarouselBackViewProcessor AnimationLength="250"
+                                                              OpacityFactor="0.25" />
+                </x:Arguments>
+            </cardView:CarouselView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

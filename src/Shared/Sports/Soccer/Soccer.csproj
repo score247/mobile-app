@@ -37,7 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="Models\Odds\OddsEventsMessage.cs" />
-    <Compile Remove="Views\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs" />
+    <Compile Remove="Views\Matches\Templates\MatchDetails\HeadToHead\H2HHomeTeamTemplate.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="ViewResources\MatchDetailH2HViewResource.xaml.cs">
@@ -67,51 +67,45 @@
     <Compile Update="ViewResources\MatchDetailViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Views\MatchDetailView.xaml.cs">
+    <Compile Update="Views\Matches\MatchDetailView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\SoccerMatchListViewTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\PenaltyShootOutTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Information\InfomationItems\PenaltyShootOutTemplate.xaml.cs">
       <DependentUpon>PenaltyShootOutTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\ScoreChangeItemTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Information\InfomationItems\ScoreChangeItemTemplate.xaml.cs">
       <DependentUpon>ScoreChangeItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\DefaultItemTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Information\InfomationItems\DefaultItemTemplate.xaml.cs">
       <DependentUpon>DefaultItemTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Information\InfomationItems\MainEventItemTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Information\InfomationItems\MainEventItemTemplate.xaml.cs">
       <DependentUpon>MainEventItemTemplate.xaml</DependentUpon>
       <ExcludeFromStyleCop>false</ExcludeFromStyleCop>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Information\InformationTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Information\InformationTemplate.xaml.cs">
       <DependentUpon>InformationTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\LineUps\LineupsTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\LineUps\LineupsTemplate.xaml.cs">
       <DependentUpon>LineUpsTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Odds\OddsTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsTemplate.xaml.cs">
       <DependentUpon>OddsTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetailInfoTemplate.xaml.cs">
-      <DependentUpon>InfoTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDetailInfo\ScoreChangeItemTemplate %28copy%29.xaml.cs">
-      <DependentUpon>PenaltyMissedItemTemplate.xaml</DependentUpon>
-    </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Templates\MatchDataTemplate.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Matches\Templates\MatchDataTemplate.xaml.cs">
       <DependentUpon>MatchDataTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Odds\OddsMovementView.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Odds\OddsMovementView.xaml.cs">
       <DependentUpon>OddsMovementView.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\Statistics\PossessionTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\Statistics\PossessionTemplate.xaml.cs">
       <DependentUpon>PossessionTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Templates\MatchDetails\TrackerCommentary\TrackerCommentaryTemplate.xaml.cs">
+    <Compile Update="Views\Matches\Templates\MatchDetails\TrackerCommentary\TrackerCommentaryTemplate.xaml.cs">
       <DependentUpon>TrackerCommentaryTemplate.xaml</DependentUpon>
     </Compile>
    
@@ -144,22 +138,31 @@
     <EmbeddedResource Remove="..\..\..\CommonResources\Html\theme.css" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\HeadToHead\H2HOptionsTemplate.xaml">
+    <EmbeddedResource Update="Views\Leagues\LeagueDetailView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\LineupsPlayerStatisticTemplate.xaml">
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Fixtures\FixturesTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\LineupsPlayerTemplate.xaml">
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\LineUps\SubstitutionTemplate.xaml">
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\HeadToHead\H2HOptionsTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\PossessionTemplate.xaml">
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\LineUps\LineupsPlayerStatisticTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\Templates\MatchDetails\Statistics\StatisticsItemTemplate.xaml">
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\LineUps\LineupsPlayerTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\LineUps\SubstitutionTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\Statistics\PossessionTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Matches\Templates\MatchDetails\Statistics\StatisticsItemTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

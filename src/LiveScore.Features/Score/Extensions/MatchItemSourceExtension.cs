@@ -7,6 +7,7 @@ using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Models.Teams;
 using LiveScore.Core.ViewModels;
 using Prism.Events;
+using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -15,8 +16,8 @@ namespace LiveScore.Features.Score.Extensions
     public static class MatchItemSourceExtension
     {
         public static void AddItems(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
-            IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+            this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
+            IEnumerable<IGrouping<MatchGroupViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {
@@ -28,8 +29,8 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void RemoveItems(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
-            IEnumerable<IGrouping<GroupMatchViewModel, MatchViewModel>> newItems)
+            this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
+            IEnumerable<IGrouping<MatchGroupViewModel, MatchViewModel>> newItems)
         {
             foreach (var item in newItems)
             {
@@ -38,12 +39,14 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void UpdateMatchItems(
-                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
+                this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
                 IEnumerable<IMatch> matches,
                 IMatchDisplayStatusBuilder matchStatusBuilder,
                 IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
-                Func<string, string> buildFlagUrlFunc)
+                Func<string, string> buildFlagUrlFunc,
+                INavigationService navigationService,
+                int currentSportId)
         {
             if (matches == null || groupMatchViewModels == null)
             {
@@ -62,7 +65,7 @@ namespace LiveScore.Features.Score.Extensions
                 if (matchViewModel == null)
                 {
                     groupMatchViewModels
-                        .AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc);
+                        .AddNewMatch(match, matchStatusBuilder, matchMinuteBuilder, eventAggregator, buildFlagUrlFunc, navigationService, currentSportId);
                 }
                 else
                 {
@@ -75,12 +78,14 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void AddNewMatch(
-                this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
+                this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
                 IMatch newMatch,
                 IMatchDisplayStatusBuilder matchStatusBuilder,
                 IMatchMinuteBuilder matchMinuteBuilder,
                 IEventAggregator eventAggregator,
-                Func<string, string> buildFlagUrlFunc)
+                Func<string, string> buildFlagUrlFunc,
+                INavigationService navigationService,
+                int currentSportId)
         {
             if (groupMatchViewModels == null || newMatch == null)
             {
@@ -107,7 +112,7 @@ namespace LiveScore.Features.Score.Extensions
                 groupMatchViewModels[currentGroupIndex]
                     = currentMatchViewModels
                         .OrderBy(m => m.Match.EventDate)
-                        .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                        .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, navigationService, currentSportId))
                         .FirstOrDefault();
             }
             else
@@ -119,7 +124,7 @@ namespace LiveScore.Features.Score.Extensions
 
                 var group = currentMatchViewModels
                     .OrderBy(m => m.Match.EventDate)
-                    .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, navigationService, currentSportId))
                     .FirstOrDefault();
 
                 var leagueOrders
@@ -142,9 +147,11 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void RemoveMatches(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
+            this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
             string[] removedMatchIds,
-            Func<string, string> buildFlagUrlFunc)
+            Func<string, string> buildFlagUrlFunc,
+            INavigationService navigationService,
+            int currentSportId)
         {
             if (groupMatchViewModels == null)
             {
@@ -174,13 +181,13 @@ namespace LiveScore.Features.Score.Extensions
 
                 groupMatchViewModels[indexOfLeague]
                     = leagueMatches
-                        .GroupBy(item => new GroupMatchViewModel(item.Match, buildFlagUrlFunc))
+                        .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, navigationService, currentSportId))
                         .FirstOrDefault();
             }
         }
 
         public static void UpdateMatchItemEvent(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
+            this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
             IMatchEvent matchEvent)
         {
             var matchItem
@@ -195,7 +202,7 @@ namespace LiveScore.Features.Score.Extensions
         }
 
         public static void UpdateMatchItemStatistics(
-            this ObservableCollection<IGrouping<GroupMatchViewModel, MatchViewModel>> groupMatchViewModels,
+            this ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> groupMatchViewModels,
             string matchId,
             bool isHome,
             ITeamStatistic statistic)

@@ -4,9 +4,11 @@ using LiveScore.Core.Services;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using LiveScore.Soccer.Services;
+using LiveScore.Soccer.ViewModels.Leagues;
 using LiveScore.Soccer.ViewModels.MatchDetails;
 using LiveScore.Soccer.ViewModels.MatchDetails.Odds;
 using LiveScore.Soccer.Views;
+using LiveScore.Soccer.Views.Leagues;
 using LiveScore.Soccer.Views.Templates;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Odds;
 using Prism.Ioc;
@@ -29,6 +31,9 @@ namespace LiveScore.Soccer
 
             containerRegistry.RegisterForNavigation<OddsMovementView, OddsMovementViewModel>(
                 nameof(OddsMovementView) + SportType.Soccer.Value);
+
+            containerRegistry.RegisterForNavigation<LeagueDetailView, LeagueDetailViewModel>(
+                 nameof(LeagueDetailView) + SportType.Soccer.Value);
 
             containerRegistry.RegisterSingleton<IHubService, SoccerHubService>(SportType.Soccer.Value.ToString());
             containerRegistry.RegisterSingleton<IMatchService, MatchService>(SportType.Soccer.Value.ToString());

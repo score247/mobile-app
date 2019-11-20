@@ -1,13 +1,18 @@
 ﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Matches;
 using MvvmHelpers;
+using Prism.Navigation;
 
 namespace LiveScore.Core.ViewModels
 {
-    public class GroupMatchViewModel : BaseViewModel
+    public class MatchGroupViewModel : BaseViewModel
     {
-        public GroupMatchViewModel(IMatch match, Func<string, string> buildFlagUrl)
+        private readonly INavigationService navigationService;
+        private readonly int currentSportId;
+
+        public MatchGroupViewModel(IMatch match, Func<string, string> buildFlagUrl, INavigationService navigationService, int currentSportId)
         {
             if (match == null)
             {
@@ -22,6 +27,10 @@ namespace LiveScore.Core.ViewModels
             CountryCode = match.CountryCode;
             LeagueOrder = match.LeagueOrder;
             Match = match;
+
+            this.navigationService = navigationService;
+            this.currentSportId = currentSportId;
+            TapLeagueCommand = new DelegateAsyncCommand(OnTapLeagueAsync);
         }
 
         private IMatch Match { get; }
@@ -38,8 +47,22 @@ namespace LiveScore.Core.ViewModels
 
         public int LeagueOrder { get; }
 
+        public DelegateAsyncCommand TapLeagueCommand { get; }
+
+        private async Task OnTapLeagueAsync()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "LeagueId", LeagueId }
+            };
+
+            await navigationService
+                .NavigateAsync("LeagueDetailView" + currentSportId, parameters)
+                .ConfigureAwait(false);
+        }
+
         public override bool Equals(object obj)
-            => (obj is GroupMatchViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
+            => (obj is MatchGroupViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
 
         public override int GetHashCode()
         {
