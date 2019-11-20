@@ -70,10 +70,10 @@
             <Color x:Key="DrawColor">#FF7246</Color>
 
             <!--  Team rank in the TABLE tab  -->
-            <Color x:Key="TopFourthTeamOnLeagueColor">#57BA63</Color>
-            <Color x:Key="FifthTeamOnLeagueColor">#F24822</Color>
-            <Color x:Key="SixthTeamOnLeagueColor">#D9B600</Color>
-            <Color x:Key="BottomTeamOnLeagueColor">#BD0034</Color>
+            <Color x:Key="TopFourthTeamOnLeagueColor">#01C851</Color>
+            <Color x:Key="FifthTeamOnLeagueColor">#33B5E7</Color>
+            <Color x:Key="SixthTeamOnLeagueColor">#0E47A1</Color>
+            <Color x:Key="BottomTeamOnLeagueColor">#FF3548</Color>
 
             <!--  Font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>

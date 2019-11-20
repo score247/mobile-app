@@ -86,13 +86,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0"
                         Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="1" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="1" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -143,13 +141,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0" 
                         Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="2" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="2" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -200,13 +196,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0"
                         Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="3" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="3" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -257,13 +251,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame  Grid.Row="0"
+                        Grid.Column="0" 
                         Style="{StaticResource MatchDetailTableOutComeTopFourthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="4" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="4" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -314,13 +306,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame  Grid.Row="0"
+                        Grid.Column="0"
                         Style="{StaticResource MatchDetailTableOutComeFifthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="5" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="5" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -371,13 +361,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0"
                         Style="{StaticResource MatchDetailTableOutComeSixthTeamOnLeague}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="6" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="6" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -698,13 +686,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0" 
                         Style="{StaticResource MatchDetailTableOutComeBottomTeamOnLeagueColor}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="12" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="12" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
@@ -755,13 +741,11 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="{StaticResource TableRowHeight}" />
                 </Grid.RowDefinitions>
-                <StackLayout Grid.Row="0"
-                        Grid.Column="0" Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLayout}">
-                    <Frame Margin="0"
+                <Frame Grid.Row="0"
+                        Grid.Column="0"
                         Style="{StaticResource MatchDetailTableOutComeBottomTeamOnLeagueColor}">
-                        <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="13" />
-                    </Frame>
-                </StackLayout>
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}" Text="13" />
+                </Frame>
                 <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
