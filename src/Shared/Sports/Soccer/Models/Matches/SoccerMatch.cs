@@ -53,7 +53,11 @@ namespace LiveScore.Soccer.Models.Matches
             DateTimeOffset modifiedTime,
             bool isInternationalLeague,
             int leagueOrder,
-            string seasonId = null)
+            string seasonId,
+            LeagueRoundType leagueRoundType,
+            string leagueRoundName,
+            int leagueRoundNumber,
+            string leagueRoundGroup)
 #pragma warning restore S107 // Methods should not have too many parameters
         {
             Id = id;
@@ -88,6 +92,10 @@ namespace LiveScore.Soccer.Models.Matches
             IsInternationalLeague = isInternationalLeague;
             LeagueOrder = leagueOrder;
             LeagueSeasonId = seasonId;
+            LeagueRoundType = leagueRoundType;
+            LeagueRoundName = leagueRoundName;
+            LeagueRoundNumber = leagueRoundNumber;
+            LeagueRoundGroup = leagueRoundGroup;
         }
 
         internal SoccerMatch(DateTime eventDate, IMatchResult matchResult) : this(matchResult)
@@ -201,6 +209,18 @@ namespace LiveScore.Soccer.Models.Matches
 
         [Key(31)]
         public string LeagueSeasonId { get; private set; }
+
+        [Key(32)]
+        public LeagueRoundType LeagueRoundType { get; private set; }
+
+        [Key(33)]
+        public string LeagueRoundName { get; private set; }
+
+        [Key(34)]
+        public int LeagueRoundNumber { get; private set; }
+
+        [Key(35)]
+        public string LeagueRoundGroup { get; private set; }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
@@ -333,7 +353,7 @@ namespace LiveScore.Soccer.Models.Matches
 
         [IgnoreMember]
         public string LeagueGroupName
-            => $"{(IsInternationalLeague ? string.Empty : CountryName + " ")}{LeagueName}".ToUpperInvariant();
+            => LeagueName?.ToUpperInvariant();
 
         [IgnoreMember]
         private bool HomeWinPenalty
