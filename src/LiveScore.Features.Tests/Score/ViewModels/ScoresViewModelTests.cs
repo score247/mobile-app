@@ -37,7 +37,7 @@ namespace LiveScore.Features.Tests.Score.ViewModels
         public void ScoreItemSources_FirstItem_IsLiveItemViewModel()
         {
             // Arrange && Act
-            var expectedLiveItemViewModel = new LiveItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedLiveItemViewModel = new LiveMatchesViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
 
             // Assert
             Assert.True(comparer.Compare(expectedLiveItemViewModel, scoreViewModel.ScoreItemSources[0]).AreEqual);
@@ -47,11 +47,11 @@ namespace LiveScore.Features.Tests.Score.ViewModels
         public void ScoreItemSources_DateItem_IsScoreItemViewModel()
         {
             // Arrange && Act
-            var expectedSecondItemViewModel = new ScoreItemViewModel(DateTime.Today.AddDays(-2), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
-            var expectedThirdItemViewModel = new ScoreItemViewModel(DateTime.Today.AddDays(-1), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
-            var expectedTodayItemViewModel = new ScoreItemViewModel(DateTime.Today, baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
-            var expectedFifthItemViewModel = new ScoreItemViewModel(DateTime.Today.AddDays(1), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
-            var expectedSixthItemViewModel = new ScoreItemViewModel(DateTime.Today.AddDays(2), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedSecondItemViewModel = new ScoreMatchesViewModel(DateTime.Today.AddDays(-2), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedThirdItemViewModel = new ScoreMatchesViewModel(DateTime.Today.AddDays(-1), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedTodayItemViewModel = new ScoreMatchesViewModel(DateTime.Today, baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedFifthItemViewModel = new ScoreMatchesViewModel(DateTime.Today.AddDays(1), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedSixthItemViewModel = new ScoreMatchesViewModel(DateTime.Today.AddDays(2), baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
 
             // Assert
             Assert.True(comparer.Compare(expectedSecondItemViewModel, scoreViewModel.ScoreItemSources[1]).AreEqual);
@@ -65,7 +65,7 @@ namespace LiveScore.Features.Tests.Score.ViewModels
         public void ScoreItemSources_LastItem_IsCalendarItemViewModel()
         {
             // Arrange && Act
-            var expectedCalendarItemViewModel = new CalendarItemViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
+            var expectedCalendarItemViewModel = new CalendarMatchesViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
 
             // Assert
             Assert.True(comparer.Compare(expectedCalendarItemViewModel, scoreViewModel.ScoreItemSources[6]).AreEqual);

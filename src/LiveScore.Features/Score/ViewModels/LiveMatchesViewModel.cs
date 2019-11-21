@@ -4,19 +4,19 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Core;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.ViewModels;
-using LiveScore.Features.Score.Extensions;
 using Prism.Events;
 using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class LiveItemViewModel : ScoreItemViewModel
+    public class LiveMatchesViewModel : ScoreMatchesViewModel
     {
-        public LiveItemViewModel(
+        public LiveMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)

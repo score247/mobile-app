@@ -37,7 +37,7 @@ namespace LiveScore.Core.Models.Matches
 
         string CountryCode { get; }
 
-        string LeagueGroupName { get; }
+        string LeagueGroupHeaderName { get; }
 
         /// <summary>
         /// Temporary add Soccer properties for compiled binding

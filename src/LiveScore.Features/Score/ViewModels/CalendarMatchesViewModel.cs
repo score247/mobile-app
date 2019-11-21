@@ -1,13 +1,14 @@
 ﻿using System;
 using LiveScore.Core;
+using LiveScore.Core.ViewModels;
 using Prism.Events;
 using Prism.Navigation;
 
 namespace LiveScore.Features.Score.ViewModels
 {
-    public class CalendarItemViewModel : ScoreItemViewModel
+    public class CalendarMatchesViewModel : ScoreMatchesViewModel
     {
-        public CalendarItemViewModel(
+        public CalendarMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)

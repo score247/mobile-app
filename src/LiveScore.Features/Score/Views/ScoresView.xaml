@@ -31,7 +31,7 @@
             </ResourceDictionary.MergedDictionaries>
             <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
-            <coreTemplates:MatchHeaderTemplate x:Key="MatchHeaderTemplate" />
+            <coreTemplates:MatchGroupTemplate x:Key="MatchGroupTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
                 <xamanimation:ScaleToAnimation Easing="Linear"
@@ -77,7 +77,7 @@
                                                           OpacityFactor="0.25" />
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:ScoreItemViewModel">
+                <DataTemplate x:DataType="viewModels:ScoreMatchesViewModel">
                     <FlexLayout JustifyContent="Center">
                         <Label FlexLayout.AlignSelf="Center"
                                IsVisible="{Binding IsComingSoon}"
@@ -92,7 +92,7 @@
                                                            AutomationProperties.IsInAccessibleTree="False"
                                                            Footer="{Binding .}"
                                                            GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchHeaderTemplate}"
+                                                           GroupHeaderTemplate="{StaticResource MatchGroupTemplate}"
                                                            HasUnevenRows="true"
                                                            IsGroupingEnabled="True"
                                                            IsPullToRefreshEnabled="true"

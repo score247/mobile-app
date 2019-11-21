@@ -42,7 +42,7 @@ namespace Soccer.Tests.ViewModels.DetailH2H
 
             var viewModel = new H2HMatchGroupViewModel(viewModels.ToList(), buildFlagUrl);
 
-            Assert.Equal(viewModels.First().Match.LeagueGroupName, viewModel.LeagueName);
+            Assert.Equal(viewModels.First().Match.LeagueGroupHeaderName, viewModel.LeagueName);
         }
     }
 }

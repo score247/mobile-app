@@ -21,7 +21,7 @@ namespace LiveScore.Core.ViewModels
             }
 
             LeagueId = match.LeagueId;
-            LeagueName = match.LeagueGroupName;
+            LeagueName = match.LeagueGroupHeaderName;
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
             CountryFlag = buildFlagUrl(match.CountryCode);
             CountryCode = match.CountryCode;

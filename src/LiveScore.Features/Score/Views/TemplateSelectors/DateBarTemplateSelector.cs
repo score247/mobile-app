@@ -10,8 +10,8 @@ namespace LiveScore.Features.Score.Views.TemplateSelectors
         {
             return item switch
             {
-                LiveItemViewModel _ => new LiveTemplate(),
-                CalendarItemViewModel _ => new CalendarTemplate(),
+                LiveMatchesViewModel _ => new LiveTemplate(),
+                CalendarMatchesViewModel _ => new CalendarTemplate(),
 
                 _ => new DateTemplate(),
             };

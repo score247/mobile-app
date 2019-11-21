@@ -115,9 +115,6 @@
     <Compile Update="Score\ViewResources\ScoreViewResource.xaml.cs">
       <DependentUpon>ScoreViewResource.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Score\Views\LiveView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
     <Compile Update="Score\Views\ScoresView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>

@@ -11,7 +11,7 @@ using Prism.Navigation;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
-namespace LiveScore.Features.Score.Extensions
+namespace LiveScore.Core.Extensions
 {
 #pragma warning disable S107 // Methods should not have too many parameters
 

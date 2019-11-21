@@ -352,7 +352,7 @@ namespace LiveScore.Soccer.Models.Matches
             => MatchPeriods?.Count() >= NumberOfFullTimePeriodsResult;
 
         [IgnoreMember]
-        public string LeagueGroupName
+        public string LeagueGroupHeaderName
             => LeagueName?.ToUpperInvariant();
 
         [IgnoreMember]

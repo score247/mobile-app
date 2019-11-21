@@ -2,9 +2,9 @@
 {
     using Xamarin.Forms;
 
-    public partial class MatchHeaderTemplate : DataTemplate
+    public partial class MatchGroupTemplate : DataTemplate
     {
-        public MatchHeaderTemplate()
+        public MatchGroupTemplate()
         {
             InitializeComponent();
         }

@@ -82,6 +82,9 @@
       <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
         <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Templates\MatchGroupTemplate.xaml.cs">
+        <DependentUpon>MatchGroupTemplate.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Views\Templates\MatchSkeletonTemplate.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
       </Compile>

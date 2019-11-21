@@ -32,9 +32,9 @@ namespace LiveScore.Features.Score.ViewModels
 
         public byte RangeOfDays { get; } = 2;
 
-        public ObservableCollection<ScoreItemViewModel> ScoreItemSources { get; private set; }
+        public ObservableCollection<ScoreMatchesViewModel> ScoreItemSources { get; private set; }
 
-        public ScoreItemViewModel SelectedScoreItem { get; set; }
+        public ScoreMatchesViewModel SelectedScoreItem { get; set; }
 
         public DelegateCommand<ItemAppearedEventArgs> ScoreItemAppearedCommand { get; }
 
@@ -113,19 +113,19 @@ namespace LiveScore.Features.Score.ViewModels
 
         private void InitScoreItemSources()
         {
-            ScoreItemSources = new ObservableCollection<ScoreItemViewModel>
+            ScoreItemSources = new ObservableCollection<ScoreMatchesViewModel>
             {
-                new LiveItemViewModel(NavigationService, DependencyResolver, EventAggregator)
+                new LiveMatchesViewModel(NavigationService, DependencyResolver, EventAggregator)
             };
 
             for (var i = -RangeOfDays; i <= RangeOfDays; i++)
             {
                 ScoreItemSources.Add(
-                    new ScoreItemViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
+                    new ScoreMatchesViewModel(DateTime.Today.AddDays(i), NavigationService, DependencyResolver, EventAggregator));
             }
 
             ScoreItemSources.Add(
-                new CalendarItemViewModel(NavigationService, DependencyResolver, EventAggregator));
+                new CalendarMatchesViewModel(NavigationService, DependencyResolver, EventAggregator));
 
             SelectedScoreItem = ScoreItemSources[TodayDateBarItemIndex];
         }
