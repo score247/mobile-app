@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary
+    x:Class="LiveScore.Soccer.ViewResources.LeagueDetailViewResource"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="LeagueDetailTab" TargetType="StackLayout">
+        <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+        <Setter Property="Padding" Value="0,18,0,0" />
+        <Setter Property="HeightRequest" Value="{StaticResource TabsHeight}" />
+    </Style>
+    <Style x:Key="LeagueDetailTabText" TargetType="Label">
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize" Value="{StaticResource TabFontSize}" />
+        <Setter Property="TextColor" Value="{StaticResource TabColor}" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+    <!-- Fixtures -->
+
+    <Style x:Key="LeagueDetailLeagueBox" TargetType="Grid">
+        <Setter Property="Padding" Value="0,0,12,0" />
+        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
+    </Style>
+
+    <Style x:Key="LeagueDetailButton"
+           TargetType="Button">
+        <Setter Property="HeightRequest"
+                Value="36" />
+        <Setter Property="CornerRadius"
+                Value="18" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize"
+                Value="11" />
+        <Setter Property="Margin"
+                Value="16,8" />
+        <Setter Property="BackgroundColor"
+                Value="#3A3942" />
+        <Setter Property="TextColor"
+                Value="#CBCBCB" />
+    </Style>
+</ResourceDictionary>

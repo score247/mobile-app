@@ -61,6 +61,9 @@
     <Compile Update="ViewResources\MatchDetailOddsViewResource.xaml.cs">
       <DependentUpon>MatchDetailOddsViewResource.xaml</DependentUpon>
     </Compile>
+    <Compile Update="ViewResources\LeagueDetailViewResource.xaml.cs">
+      <DependentUpon>LeagueDetailViewResource.xaml</DependentUpon>
+    </Compile>
     <Compile Update="ViewResources\SoccerViewResource.xaml.cs">
       <DependentUpon>SoccerViewResource.xaml</DependentUpon>
     </Compile>

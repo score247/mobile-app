@@ -106,13 +106,11 @@
                     </DataTemplate>
                 </tabStrip:TabItemCollectionView.ItemTemplate>
                 <tabStrip:TabItemCollectionView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="150">
+                    <StackLayout Style="{StaticResource MatchTrackerShowMoreButtonLayout}">
                         <Button Text="{Binding ShowLessMoreButtonText}"
                                 IsVisible="{Binding VisibleShowMore}"
                                 Style="{StaticResource MatchTrackerShowMoreButton}"
-                                Command="{Binding ShowMoreCommentariesCommand}"
-                                HorizontalOptions="CenterAndExpand" />
+                                Command="{Binding ShowMoreCommentariesCommand}" />
                     </StackLayout>
                 </tabStrip:TabItemCollectionView.Footer>
             </tabStrip:TabItemCollectionView>
