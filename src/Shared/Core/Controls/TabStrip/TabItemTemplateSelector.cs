@@ -2,13 +2,15 @@
 {
     using Xamarin.Forms;
 
-    internal class TabItemTemplateSelector : DataTemplateSelector
+    public class TabItemTemplateSelector : DataTemplateSelector
     {
+        private static readonly DataTemplate EmptyTemplate = new DataTemplate();
+
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             var tabItem = item as TabItemViewModel;
 
-            return tabItem?.Template;
+            return tabItem?.Template ?? EmptyTemplate;
         }
     }
 }

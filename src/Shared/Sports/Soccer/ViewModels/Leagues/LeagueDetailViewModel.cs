@@ -17,8 +17,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
          : base(navigationService, dependencyResolver, eventAggregator)
         {
             LeagueDetailItemSources = new List<object> {
-                new TableViewModel(),
-                new FixturesViewModel()
+                new TableViewModel(navigationService, dependencyResolver),
+                new FixturesViewModel(navigationService, dependencyResolver)
             };
         }
 

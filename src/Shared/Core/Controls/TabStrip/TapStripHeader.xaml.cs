@@ -63,7 +63,7 @@ namespace LiveScore.Core.Controls.TabStrip
 
                 var itemLabel = new Label
                 {
-                    Text = item.TabHeaderName,
+                    Text = item.Title,
                     Style = index == 0 ? (Style)control.Resources["TabActiveText"] : (Style)control.Resources["TabText"]
                 };
 

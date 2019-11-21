@@ -18,14 +18,12 @@
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             Template = dataTemplate;
-            TabHeaderName = tabHeaderName;
+            Title = tabHeaderName;
         }
 
         public bool IsFirstLoad { get; protected set; } = true;
 
         public DataTemplate Template { get; }
-
-        public string TabHeaderName { get; }
 
         protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)
         {

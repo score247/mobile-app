@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using LiveScore.Common.LangResources;
-using LiveScore.Core.ViewModels;
+﻿using LiveScore.Common.LangResources;
+using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
+using Prism.Navigation;
 
 namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 {
-    public class FixturesViewModel : ViewModelBase
+    public class FixturesViewModel : TabItemViewModel
     {
-        public FixturesViewModel()
+        public FixturesViewModel(
+             INavigationService navigationService,
+             IDependencyResolver serviceLocator)
+             : base(navigationService, serviceLocator, null, null, AppResources.Fixtures)
         {
-            Title = AppResources.Fixtures;
         }
     }
 }
