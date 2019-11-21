@@ -574,7 +574,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 36);
+            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 37);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EventDate, formatterResolver);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.CurrentPeriodStartTime, formatterResolver);
@@ -611,6 +611,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueRoundName, formatterResolver);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.LeagueRoundNumber);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueRoundGroup, formatterResolver);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueGroupName, formatterResolver);
             return offset - startOffset;
         }
 
@@ -662,6 +663,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             var __LeagueRoundName__ = default(string);
             var __LeagueRoundNumber__ = default(int);
             var __LeagueRoundGroup__ = default(string);
+            var __LeagueGroupName__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -777,6 +779,9 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                     case 35:
                         __LeagueRoundGroup__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
+                    case 36:
+                        __LeagueGroupName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -786,7 +791,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Matches.SoccerMatch(__Id__, __EventDate__, __CurrentPeriodStartTime__, __LeagueId__, __LeagueName__, __HomeTeamId__, __HomeTeamName__, __AwayTeamId__, __AwayTeamName__, __MatchStatus__, __EventStatus__, __HomeScore__, __AwayScore__, __WinnerId__, __AggregateWinnerId__, __AggregateHomeScore__, __AggregateAwayScore__, __HomeRedCards__, __HomeYellowRedCards__, __AwayRedCards__, __AwayYellowRedCards__, __MatchTime__, __StoppageTime__, __InjuryTimeAnnounced__, __LastTimelineType__, __MatchPeriods__, __CountryCode__, __CountryName__, __ModifiedTime__, __IsInternationalLeague__, __LeagueOrder__, __LeagueSeasonId__, __LeagueRoundType__, __LeagueRoundName__, __LeagueRoundNumber__, __LeagueRoundGroup__);
+            var ____result = new global::LiveScore.Soccer.Models.Matches.SoccerMatch(__Id__, __EventDate__, __CurrentPeriodStartTime__, __LeagueId__, __LeagueName__, __HomeTeamId__, __HomeTeamName__, __AwayTeamId__, __AwayTeamName__, __MatchStatus__, __EventStatus__, __HomeScore__, __AwayScore__, __WinnerId__, __AggregateWinnerId__, __AggregateHomeScore__, __AggregateAwayScore__, __HomeRedCards__, __HomeYellowRedCards__, __AwayRedCards__, __AwayYellowRedCards__, __MatchTime__, __StoppageTime__, __InjuryTimeAnnounced__, __LastTimelineType__, __MatchPeriods__, __CountryCode__, __CountryName__, __ModifiedTime__, __IsInternationalLeague__, __LeagueOrder__, __LeagueSeasonId__, __LeagueRoundType__, __LeagueRoundName__, __LeagueRoundNumber__, __LeagueRoundGroup__, __LeagueGroupName__);
             ____result.CurrentPeriodStartTime = __CurrentPeriodStartTime__;
             ____result.InjuryTimeAnnounced = __InjuryTimeAnnounced__;
             return ____result;
