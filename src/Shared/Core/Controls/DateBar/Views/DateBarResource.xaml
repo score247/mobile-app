@@ -18,10 +18,6 @@
     <Style x:Key="LiveIcon"
            BasedOn="{StaticResource Icons}"
            TargetType="Label">
-        <Setter Property="AbsoluteLayout.LayoutBounds"
-                Value="0.5,0.5,40,40" />
-        <Setter Property="AbsoluteLayout.LayoutFlags"
-                Value="PositionProportional" />
         <Setter Property="FontSize"
                 Value="19" />
         <Setter Property="VerticalTextAlignment"
@@ -34,14 +30,11 @@
 
     <Style x:Key="LiveIndicatorContainer"
            TargetType="Grid">
-        <Setter Property="AbsoluteLayout.LayoutBounds"
-                Value="1,0,20,20" />
-        <Setter Property="AbsoluteLayout.LayoutFlags"
-                Value="PositionProportional" />
         <Setter Property="VerticalOptions"
                 Value="CenterAndExpand" />
-        <Setter Property="Margin"
-                Value="-10,0,10,0" />
+        <Setter Property="HorizontalOptions"
+                Value="CenterAndExpand" />
+        <Setter Property="Margin" Value="20,-6,0,0" />
     </Style>
 
     <Style x:Key="LiveIndicatorCircle"

@@ -8,11 +8,11 @@
               xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
-    <FlexLayout AlignItems="Center"
-                JustifyContent="Center"
-                HeightRequest="60"
-                WidthRequest="60">
-        <FlexLayout.Resources>
+    <Grid  HorizontalOptions="CenterAndExpand"
+           VerticalOptions="CenterAndExpand"
+                WidthRequest="48"
+                HeightRequest="60">
+        <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
@@ -35,13 +35,11 @@
                                                   Easing="Linear" />
                 </xamanimation:StoryBoard>
             </ResourceDictionary>
-        </FlexLayout.Resources>
+        </Grid.Resources>
         <Label Style="{StaticResource LiveIcon}"
-               Margin="15,0,0,0"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}">
         </Label>
-        <Grid Style="{StaticResource LiveIndicatorContainer}"
-              IsVisible="{Binding HasData}">
+        <Grid Style="{StaticResource LiveIndicatorContainer}" IsVisible="{Binding HasData}">
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid"
                              Binding="{Binding HasData}"
@@ -68,5 +66,5 @@
             <Frame Style="{StaticResource LiveIndicatorCircle}"
                    x:Name="LiveIndicator" />
         </Grid>
-    </FlexLayout>
+    </Grid>
 </DataTemplate>
