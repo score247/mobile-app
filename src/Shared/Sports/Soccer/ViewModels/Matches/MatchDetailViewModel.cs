@@ -38,6 +38,7 @@ using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
@@ -45,6 +46,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 {
     public class MatchDetailViewModel : ViewModelBase
     {
+        private static readonly DataTemplate infoTemplate = new InformationTemplate();
+        private static readonly DataTemplate h2hTemplate = new H2HTemplate();
+        private static readonly DataTemplate lineupsTemplate = new LineUpsTemplate();
+        private static readonly DataTemplate statisticsTemplate = new StatisticsTemplate();
+        private static readonly DataTemplate trackerTemplate = new TrackerCommentaryTemplate();
+        private static readonly DataTemplate tableTemplate = new TableTemplate();
+
         private readonly IMatchDisplayStatusBuilder matchStatusConverter;
         private readonly IMatchMinuteBuilder matchMinuteConverter;
         private readonly Func<string, string> buildFlagUrlFunc;
@@ -78,7 +86,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public ObservableCollection<TabItemViewModel> TabItems { get; private set; }
 
-        public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; private set; }
+        public DelegateCommand<TabStripItemTappedEventArgs> FunctionTabTappedCommand { get; }
 
         public override async void Initialize(INavigationParameters parameters)
         {
@@ -257,14 +265,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
             tabItemViewModels = new Dictionary<MatchDetailFunction, TabItemViewModel>
             {
-                [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, new InformationTemplate()),
-                [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, new H2HTemplate()),
-                [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new LineUpsTemplate()),
-                [MatchDetailFunction.Social] = new SocialViewModel(NavigationService, DependencyResolver, new SocialTemplate()),
-                [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, new StatisticsTemplate()),
-                [MatchDetailFunction.Table] = new TableViewModel(NavigationService, DependencyResolver, new TableTemplate()),
-                [MatchDetailFunction.TV] = new TVScheduleViewModel(NavigationService, DependencyResolver, new TVTemplate()),
-                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, new TrackerCommentaryTemplate())
+                [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, infoTemplate),
+                [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
+                [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
+                [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
+                [MatchDetailFunction.Table] = new TableViewModel(NavigationService, DependencyResolver, tableTemplate),
+                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;

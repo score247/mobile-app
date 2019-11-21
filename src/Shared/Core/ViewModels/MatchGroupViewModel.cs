@@ -21,7 +21,7 @@ namespace LiveScore.Core.ViewModels
             }
 
             LeagueId = match.LeagueId;
-            LeagueName = match.LeagueGroupHeaderName;
+            LeagueName = match.LeagueGroupName.ToUpperInvariant();
             EventDate = match.EventDate.ToLocalShortDayMonth().ToUpperInvariant();
             CountryFlag = buildFlagUrl(match.CountryCode);
             CountryCode = match.CountryCode;
@@ -62,13 +62,13 @@ namespace LiveScore.Core.ViewModels
         }
 
         public override bool Equals(object obj)
-            => (obj is MatchGroupViewModel actualObj) && LeagueId == actualObj.LeagueId && EventDate == actualObj.EventDate;
+            => (obj is MatchGroupViewModel actualObj) && LeagueName == actualObj.LeagueName && EventDate == actualObj.EventDate;
 
         public override int GetHashCode()
         {
-            if (string.IsNullOrWhiteSpace(LeagueId))
+            if (string.IsNullOrWhiteSpace(LeagueName))
             {
-                if (string.IsNullOrWhiteSpace(LeagueName))
+                if (string.IsNullOrWhiteSpace(LeagueId))
                 {
                     if (string.IsNullOrWhiteSpace(CountryCode))
                     {
@@ -78,10 +78,10 @@ namespace LiveScore.Core.ViewModels
                     return CountryCode.GetHashCode();
                 }
 
-                return LeagueName.GetHashCode();
+                return LeagueId.GetHashCode();
             }
 
-            return LeagueId.GetHashCode();
+            return LeagueName.GetHashCode();
         }
     }
 }

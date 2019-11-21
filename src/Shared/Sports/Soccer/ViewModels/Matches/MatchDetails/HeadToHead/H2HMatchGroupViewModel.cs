@@ -11,7 +11,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             Func<string, string> buildFlagUrl) : base(matches)
         {
             var match = this.FirstOrDefault()?.Match;
-            LeagueName = match?.LeagueGroupHeaderName;
+            LeagueName = match?.LeagueGroupName;
             CountryFlag = buildFlagUrl(match?.CountryCode);
         }
 
