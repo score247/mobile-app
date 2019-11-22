@@ -2,18 +2,15 @@
 <ContentPage x:Class="LiveScore.Features.Score.Views.ScoresView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
-             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
-             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
              xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
-             xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
-             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
+             xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
+             xmlns:controls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+             xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+             xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
@@ -29,9 +26,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <viewResources:ScoreViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <templateSelectors:MatchItemTemplateSelector x:Key="MatchItemTemplateSelector" />
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
-            <coreTemplates:MatchGroupTemplate x:Key="MatchGroupTemplate" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
                 <xamanimation:ScaleToAnimation Easing="Linear"
@@ -87,35 +82,10 @@
                             <Label IsVisible="{Binding NoData}"
                                    Style="{StaticResource NotificationLabel}"
                                    Text="{langs:Translate NoGames}" />
-                            <customListView:CustomListView x:Name="LeagueTable"
-                                                           AutomationId="LeagueTableId"
-                                                           AutomationProperties.IsInAccessibleTree="False"
-                                                           Footer="{Binding .}"
-                                                           GroupDisplayBinding="{Binding Key}"
-                                                           GroupHeaderTemplate="{StaticResource MatchGroupTemplate}"
-                                                           HasUnevenRows="true"
-                                                           IsGroupingEnabled="True"
-                                                           IsPullToRefreshEnabled="true"
-                                                           IsRefreshing="{Binding IsRefreshing}"
-                                                           ItemTemplate="{StaticResource MatchItemTemplateSelector}"
-                                                           ItemsSource="{Binding MatchItemsSource}"
-                                                           LoadMoreCommand="{Binding LoadMoreCommand}"
-                                                           RefreshCommand="{Binding RefreshCommand}"
-                                                           RefreshControlColor="White"
-                                                           SelectionMode="None"
-                                                           SeparatorVisibility="None"
-                                                           Style="{StaticResource ListViewHasBackground}"
-                                                           TriggerLoadMoreIndex="1"
-                                                           VerticalOptions="FillAndExpand">
-                                <x:Arguments>
-                                    <ListViewCachingStrategy>RecycleElementAndDataTemplate</ListViewCachingStrategy>
-                                </x:Arguments>
-                                <customListView:CustomListView.Behaviors>
-                                    <b:EventToCommandBehavior Command="{Binding TappedMatchCommand}"
-                                                              EventArgsParameterPath="Item"
-                                                              EventName="ItemTapped" />
-                                </customListView:CustomListView.Behaviors>
-                                <customListView:CustomListView.FooterTemplate>
+
+                            <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
+                                                           TriggerLoadMoreIndex="1">
+                                <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                                     <DataTemplate>
                                         <StackLayout>
                                             <coreTemplates:MatchSkeletonTemplate />
@@ -124,8 +94,8 @@
                                             <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
                                         </StackLayout>
                                     </DataTemplate>
-                                </customListView:CustomListView.FooterTemplate>
-                            </customListView:CustomListView>
+                                </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+                            </coreTemplates:MatchesTemplate>
                         </StackLayout>
                     </FlexLayout>
                 </DataTemplate>
