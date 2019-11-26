@@ -88,6 +88,13 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                 currentLeagueRoundGroup,
                 CurrentLanguage) as LeagueTable;
 
+            if (leagueTable == null)
+            {
+                HasData = false;
+                IsRefreshing = false;
+                return;
+            }
+
             var table = leagueTable.GroupTables.FirstOrDefault();
             var teamStandings = table.TeamStandings.OrderBy(standing => standing.Rank);
 
@@ -106,6 +113,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
             OutcomesItemSource = table.OutcomeList.ToList();
 
+            HasData = true;
             IsRefreshing = false;
         }
 

@@ -1,68 +1,94 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary
-    x:Class="LiveScore.Soccer.ViewResources.MatchDetailViewResource"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+<ResourceDictionary x:Class="LiveScore.Soccer.ViewResources.MatchDetailViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
 
-    <Style x:Key="NoInfo" TargetType="Label">
-        <Setter Property="Margin" Value="16,12" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallTextFontSize}" />
-    </Style>
-
-    <Style x:Key="MatchGeneralInfoLeagueBox" TargetType="Grid">
-        <Setter Property="Padding" Value="0,0,12,0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
+    <Style x:Key="MatchGeneralInfoLeagueBox"
+           TargetType="Grid">
+        <Setter Property="Padding"
+                Value="0,0,12,0" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoTeams" TargetType="Grid">
-        <Setter Property="BackgroundColor" Value="{StaticResource ListViewBgColor}" />
-        <Setter Property="Padding" Value="0,0,12,0" />
+    <Style x:Key="MatchGeneralInfoTeams"
+           TargetType="Grid">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource ListViewBgColor}" />
+        <Setter Property="Padding"
+                Value="0,0,12,0" />
     </Style>
 
-    <Style x:Key="MatchGeneralInfoImportantContent" TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
-        <Setter Property="TextColor" Value="{StaticResource TeamColor}" />
-        <Setter Property="Margin" Value="60,8,0,0" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Style x:Key="MatchGeneralInfoImportantContent"
+           TargetType="Label">
+        <Setter Property="FontSize"
+                Value="{StaticResource SmallerTextFontSize}" />
+        <Setter Property="TextColor"
+                Value="{StaticResource TeamColor}" />
+        <Setter Property="Margin"
+                Value="60,8,0,0" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
     </Style>
 
-    <Style
-        x:Key="Group"
-        BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
-        TargetType="FlexLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource FunctionGroupBgColor}" />
-        <Setter Property="Padding" Value="16,0" />
-        <Setter Property="HeightRequest" Value="{StaticResource FunctionGroupHeight}" />
+    <Style x:Key="Group"
+           BasedOn="{StaticResource FlexLayoutHorizontalCenter}"
+           TargetType="FlexLayout">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FunctionGroupBgColor}" />
+        <Setter Property="Padding"
+                Value="16,0" />
+        <Setter Property="HeightRequest"
+                Value="{StaticResource FunctionGroupHeight}" />
     </Style>
-    <Style x:Key="GroupName" TargetType="Label">
-        <Setter Property="TextColor" Value="{StaticResource PrimaryTextColor}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="FontSize" Value="{StaticResource SmallerTextFontSize}" />
+    <Style x:Key="GroupName"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource PrimaryTextColor}" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize"
+                Value="{StaticResource SmallerTextFontSize}" />
     </Style>
-    <Style x:Key="TopInfo" TargetType="FlexLayout">
-        <Setter Property="JustifyContent" Value="SpaceBetween" />
-        <Setter Property="Padding" Value="0,0,0,5" />
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryColor}" />
+    <Style x:Key="TopInfo"
+           TargetType="FlexLayout">
+        <Setter Property="JustifyContent"
+                Value="SpaceBetween" />
+        <Setter Property="Padding"
+                Value="0,0,0,5" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource PrimaryColor}" />
     </Style>
 
     <!--  SubTab  -->
 
-    <Style x:Key="SubTabContainer" TargetType="Frame">
-        <Setter Property="BorderColor" Value="{StaticResource LineColor}" />
-        <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="BackgroundColor" Value="{StaticResource SubTabContainerBgColor}" />
-        <Setter Property="Padding" Value="1" />
+    <Style x:Key="SubTabContainer"
+           TargetType="Frame">
+        <Setter Property="BorderColor"
+                Value="{StaticResource LineColor}" />
+        <Setter Property="CornerRadius"
+                Value="0" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SubTabContainerBgColor}" />
+        <Setter Property="Padding"
+                Value="1" />
     </Style>
-    <Style x:Key="SubTab" TargetType="Button">
-        <Setter Property="FontSize" Value="{StaticResource SubTabsFontSize}" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
-        <Setter Property="CornerRadius" Value="0" />
-        <Setter Property="TextColor" Value="{StaticResource SubTabColor}" />
+    <Style x:Key="SubTab"
+           TargetType="Button">
+        <Setter Property="FontSize"
+                Value="{StaticResource SubTabsFontSize}" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoMedium}" />
+        <Setter Property="CornerRadius"
+                Value="0" />
+        <Setter Property="TextColor"
+                Value="{StaticResource SubTabColor}" />
     </Style>
-    <Style x:Key="SubTabHorizontalLine" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{StaticResource ActiveSubTabBgColor}" />
-        <Setter Property="HeightRequest" Value="1" />
+    <Style x:Key="SubTabHorizontalLine"
+           TargetType="BoxView">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource ActiveSubTabBgColor}" />
+        <Setter Property="HeightRequest"
+                Value="1" />
     </Style>
 </ResourceDictionary>
