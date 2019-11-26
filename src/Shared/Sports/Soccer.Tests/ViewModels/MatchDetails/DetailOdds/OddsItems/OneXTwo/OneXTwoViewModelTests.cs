@@ -17,7 +17,7 @@
         public OneXTwoViewModelTests(ViewModelBaseFixture baseFixture)
         {
             betTypeOdds = Substitute.For<IBetTypeOdds>();
-            betTypeOdds.Bookmaker.Returns(new Bookmaker ( "sr:book:1",  "book1" ));
+            betTypeOdds.Bookmaker.Returns(new Bookmaker("sr:book:1", "book1"));
             betTypeOdds.BetOptions.Returns(new List<BetOptionOdds>
             {
                 new BetOptionOdds( "home", 5.000m, 4.900m, "1.5", "1.25", OddsTrend.Up ),

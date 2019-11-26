@@ -9,8 +9,8 @@ namespace LiveScore.Core.Tests.Controls.CircleProgressBar
         [Fact]
         public void CircularProgress_Init_AssignedCorrectData()
         {
-            var progress = new CircularProgress 
-            { 
+            var progress = new CircularProgress
+            {
                 BackColor = Color.White,
                 ForeColor = Color.Silver,
                 AnimationDuration = 1000,

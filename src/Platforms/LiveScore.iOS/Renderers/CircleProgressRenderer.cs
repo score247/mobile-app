@@ -55,7 +55,7 @@ namespace LiveScore.iOS.Renderers
                 ProgressValue = CalculateValue();
             }
 
-            isSizeChanged |= (e.PropertyName == nameof(CircularProgress.Width) 
+            isSizeChanged |= (e.PropertyName == nameof(CircularProgress.Width)
                 || e.PropertyName == nameof(CircularProgress.Height)
                 || e.PropertyName == nameof(CircularProgress.BarHeight));
 

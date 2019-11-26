@@ -22,7 +22,7 @@ namespace Soccer.Tests.ViewModels.DetailInfo.InfoItem
         }
 
         [Fact]
-        public void BuildData_Home_AssignedHomePlayers() 
+        public void BuildData_Home_AssignedHomePlayers()
         {
             // Arrange
             var timeline = fixture.Create<TimelineEvent>().With(timeline => timeline.Team, "home");

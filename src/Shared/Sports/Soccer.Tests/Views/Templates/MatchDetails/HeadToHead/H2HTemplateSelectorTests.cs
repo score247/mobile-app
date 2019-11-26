@@ -18,8 +18,8 @@ namespace Soccer.Tests.Views.Templates.MatchDetails.HeadToHead
 
         private readonly H2HTemplateSelector h2hTemplateSelector;
 
-        public H2HTemplateSelectorTests(ViewModelBaseFixture baseFixture) 
-        {            
+        public H2HTemplateSelectorTests(ViewModelBaseFixture baseFixture)
+        {
             match = baseFixture.CommonFixture.Specimens.Create<SoccerMatch>();
 
             matchStatusBuilder = Substitute.For<IMatchDisplayStatusBuilder>();
@@ -29,7 +29,7 @@ namespace Soccer.Tests.Views.Templates.MatchDetails.HeadToHead
         }
 
         [Fact]
-        public void OnSelectTemplate_Always_ReturnH2HTemplate() 
+        public void OnSelectTemplate_Always_ReturnH2HTemplate()
         {
             var template = h2hTemplateSelector.SelectTemplate(new object(), null);
 
@@ -39,7 +39,7 @@ namespace Soccer.Tests.Views.Templates.MatchDetails.HeadToHead
         [Fact]
         public void OnSelectTemplate_NotH2H_ReturnTeamMatchItemTemplate()
         {
-            var template = h2hTemplateSelector.SelectTemplate(new H2HMatchViewModel(false, "sr:home",match, matchStatusBuilder), null);
+            var template = h2hTemplateSelector.SelectTemplate(new H2HMatchViewModel(false, "sr:home", match, matchStatusBuilder), null);
 
             Assert.IsType<TeamMatchItemTemplate>(template);
         }

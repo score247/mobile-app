@@ -1,8 +1,6 @@
 using LiveScore.Core;
-using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
 using NSubstitute;
 using Prism.Navigation;
-using System;
 using Xamarin.Forms;
 using Xunit;
 
@@ -10,9 +8,9 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
 {
     public class TableViewModelTests
     {
-        private INavigationService subNavigationService;
-        private IDependencyResolver subDependencyResolver;
-        private DataTemplate subDataTemplate;
+        private readonly INavigationService subNavigationService;
+        private readonly IDependencyResolver subDependencyResolver;
+        private readonly DataTemplate subDataTemplate;
 
         public TableViewModelTests()
         {

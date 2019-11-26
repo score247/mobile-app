@@ -35,7 +35,7 @@
 
         public OddsMovementViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            bookmaker = new Bookmaker ( "sr:book:1", "Bet188" );
+            bookmaker = new Bookmaker("sr:book:1", "Bet188");
 
             comparer = baseFixture.CommonFixture.Comparer;
             loggingService = Substitute.For<ILoggingService>();
@@ -70,14 +70,14 @@
 
         private MatchOddsMovement CreateMatchOddsMovement()
             => new MatchOddsMovement(
-                matchId, 
-                bookmaker, 
+                matchId,
+                bookmaker,
                 new List<OddsMovement> { CreateOddsMovements() });
 
         private OddsMovement CreateOddsMovements() =>
             new OddsMovement("KO", 0, 0, true, CreateBetOptions(), DateTimeOffset.Now);
 
-        private List<BetOptionOdds> CreateBetOptions() 
+        private List<BetOptionOdds> CreateBetOptions()
             => new List<BetOptionOdds>
             {
                 new BetOptionOdds( "home", 5.000m, 4.900m, "", "", OddsTrend.Up ),
@@ -86,7 +86,7 @@
             };
 
         [Fact]
-        public async Task FirstLoadOrRefreshOddsMovement_Always_GetOddsMovement() 
+        public async Task FirstLoadOrRefreshOddsMovement_Always_GetOddsMovement()
         {
             // Act
             await viewModel.FirstLoadOrRefreshOddsMovement();
@@ -109,7 +109,7 @@
             // Assert
             Assert.True(viewModel.HasData);
         }
-      
+
         [Fact]
         public async Task RefreshCommand_OnExecute_LoadOddsMovement()
         {
@@ -159,8 +159,8 @@
 
         private static OddsMovementEvent StubOddsMovementEvent(byte betTypeId, Bookmaker bookmaker)
             => new OddsMovementEvent(
-                betTypeId, 
-                bookmaker, 
+                betTypeId,
+                bookmaker,
                 new OddsMovement("Live", 0, 0, true, new List<BetOptionOdds>
                 {
                     new BetOptionOdds( "home", 5.200m, 4.900m, "", "", OddsTrend.Up ),

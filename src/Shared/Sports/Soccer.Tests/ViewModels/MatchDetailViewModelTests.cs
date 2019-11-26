@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AutoFixture;
 using LiveScore.Core.Converters;
@@ -6,11 +5,7 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
-using LiveScore.Soccer.Converters;
-using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.Models.Teams;
-using LiveScore.Soccer.PubSubEvents.Matches;
 using LiveScore.Soccer.ViewModels.MatchDetails;
 using NSubstitute;
 using Prism.Navigation;
@@ -34,13 +29,13 @@ namespace Soccer.Tests.ViewModels
                 .Resolve<IMatchDisplayStatusBuilder>("1")
                 .Returns(Substitute.For<IMatchDisplayStatusBuilder>());
             baseFixture.DependencyResolver.Resolve<IMatchService>("1").Returns(matchService);
-       
+
             viewModel = new MatchDetailViewModel(
                 baseFixture.NavigationService,
                 baseFixture.DependencyResolver,
                 baseFixture.EventAggregator);
         }
-        
+
         [Fact]
         public void OnNavigatingTo_HasSecondLeg_ShowSecondLegMessage()
         {

@@ -45,7 +45,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
         [Fact]
         public void BuildInfo_IsHomeTeam_IsPenaltyGoal_ShowPenaltyGoalInfo()
-        {            
+        {
             // Arrange
             var matchInfo = fixture.Create<MatchInfo>();
             var timeline = fixture.Create<TimelineEvent>()
@@ -65,7 +65,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
         [Fact]
         public void BuildInfo_IsHomeTeam_IsNormalGoal_ShowNormalGoalInfo()
-        {           
+        {
             // Arrange
             var matchInfo = fixture.Create<MatchInfo>();
             var timeline = fixture.Create<TimelineEvent>()

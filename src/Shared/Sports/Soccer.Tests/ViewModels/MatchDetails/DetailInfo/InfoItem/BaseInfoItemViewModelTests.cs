@@ -16,7 +16,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     {
         private readonly INavigationService navigationService;
         private readonly IDependencyResolver dependencyResolver;
-        private readonly Fixture fixture; 
+        private readonly Fixture fixture;
 
         public BaseInfoItemViewModelTests(ViewModelBaseFixture baseFixture)
         {

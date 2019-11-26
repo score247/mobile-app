@@ -14,7 +14,7 @@ using Xunit;
 namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 {
     public class TrackerCommentaryViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
-    {   
+    {
         private readonly ISoccerMatchService matchService;
         private readonly ILoggingService logService;
         private readonly IEventAggregator eventAggregator;
@@ -22,15 +22,15 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         private readonly ViewModelBaseFixture baseFixture;
 
 
-        public TrackerCommentaryViewModelTests(ViewModelBaseFixture baseFixture) 
+        public TrackerCommentaryViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
             fixture = baseFixture.CommonFixture.Specimens;
-            
+
 
             matchService = Substitute.For<ISoccerMatchService>();
             logService = Substitute.For<ILoggingService>();
-        
+
             eventAggregator = Substitute.For<IEventAggregator>();
             var networkConnectionManager = Substitute.For<INetworkConnection>();
             networkConnectionManager.IsSuccessfulConnection().Returns(true);
@@ -41,7 +41,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         }
 
         [Fact]
-        public async Task LoadTrackerAndCommentaries_CoverageIsNull_ReturnHasDataFalse() 
+        public async Task LoadTrackerAndCommentaries_CoverageIsNull_ReturnHasDataFalse()
         {
             var matchCoverage = fixture.Create<MatchCoverage>()
                 .With(coverage => coverage.Coverage, null);
@@ -62,7 +62,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         public async Task LoadTrackerAndCommentaries_NotCoverageLive_ReturnHasTrackerDataFalse()
         {
             var matchCoverage = fixture.Create<MatchCoverage>()
-                .With(m => m.Coverage, fixture.Create<Coverage>().With(coverage => coverage.Live, false)) ;
+                .With(m => m.Coverage, fixture.Create<Coverage>().With(coverage => coverage.Live, false));
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,

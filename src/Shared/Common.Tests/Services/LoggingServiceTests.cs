@@ -146,7 +146,7 @@ namespace LiveScore.Common.Tests.Services
                     arg => arg[KeyEmpty] == message));
         }
 
-      
+
 
         [Fact]
         public void TrackEvent_ParamIsDictionary_InvokeTrackEventWithParamIsDictionary()

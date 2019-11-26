@@ -1,6 +1,5 @@
 ﻿using System;
 using LiveScore.Core;
-using LiveScore.Core.ViewModels;
 using Prism.Events;
 using Prism.Navigation;
 

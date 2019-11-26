@@ -13,7 +13,7 @@ namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
             var itemViewModel = (MatchStatisticItem)item;
 
             return itemViewModel != null && itemViewModel.IsPossessionStatistic
-                ? possessionTemplate 
+                ? possessionTemplate
                 : statisticItemTemplate;
         }
     }

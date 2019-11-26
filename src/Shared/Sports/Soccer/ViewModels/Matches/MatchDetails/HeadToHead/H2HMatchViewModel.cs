@@ -52,7 +52,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             DisplayEventDate = GetDisplayEventDate(match);
             DisplayMatchStatus = matchDisplayStatusBuilder.BuildDisplayStatus(Match);
 
-            if (!IsH2H)            
+            if (!IsH2H)
             {
                 Result = GetTeamResult(teamId, match);
                 IsHomeSelected = teamId == match.HomeTeamId;

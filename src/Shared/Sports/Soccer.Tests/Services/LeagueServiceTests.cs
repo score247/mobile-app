@@ -1,3 +1,6 @@
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 using AutoFixture;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
@@ -7,9 +10,6 @@ using LiveScore.Soccer.Services;
 using NSubstitute;
 using NSubstitute.ExceptionExtensions;
 using Refit;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Xunit;
 using static LiveScore.Soccer.Services.SoccerApi;
 

@@ -62,7 +62,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(timeline => timeline.HomeScore, (byte)1)
                 .With(timeline => timeline.AwayScore, (byte)2);
             var viewModel = new MainEventItemViewModel(timeline, matchInfo, baseFixture.NavigationService, baseFixture.DependencyResolver);
-           
+
             // Act
             viewModel.BuildData();
 
@@ -210,7 +210,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             // Arrange
             var soccerMatch = fixture.Create<SoccerMatch>()
-                       .With(match => match.MatchPeriods, new List<MatchPeriod> 
+                       .With(match => match.MatchPeriods, new List<MatchPeriod>
                        {
                             new MatchPeriod { HomeScore = 1, AwayScore = 2 },
                             new MatchPeriod { HomeScore = 2, AwayScore = 3 },

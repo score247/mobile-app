@@ -47,7 +47,7 @@
         }
 
         [Theory]
-        [InlineData(1, typeof(OneXTwoItemTemplate))]      
+        [InlineData(1, typeof(OneXTwoItemTemplate))]
         [InlineData(2, typeof(OverUnderItemTemplate))]
         [InlineData(3, typeof(AsianHdpItemTemplate))]
         public void CreateTemplate_Always_GetExpectedTemplate(byte betTypeId, Type expectedType)

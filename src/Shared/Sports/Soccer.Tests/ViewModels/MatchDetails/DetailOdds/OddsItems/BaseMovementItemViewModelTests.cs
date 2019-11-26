@@ -29,7 +29,7 @@
         }
 
         [Theory]
-        [InlineData(1, typeof(OneXTwoMovementItemViewModel))]        
+        [InlineData(1, typeof(OneXTwoMovementItemViewModel))]
         [InlineData(2, typeof(OverUnderMovementItemViewModel))]
         [InlineData(3, typeof(AsianHdpMovementItemViewModel))]
         public void CreateInstance_Always_GetExpectedViewModelInstance(byte betTypeId, Type expectedType)

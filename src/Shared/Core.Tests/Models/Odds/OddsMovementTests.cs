@@ -10,13 +10,13 @@ namespace LiveScore.Core.Tests.Models.Odds
     {
         private readonly Fixture fixture;
 
-        public OddsMovementTests() 
+        public OddsMovementTests()
         {
             fixture = new Fixture();
         }
 
         [Fact]
-        public void Equals_Null_ReturnFalse() 
+        public void Equals_Null_ReturnFalse()
         {
             var oddsMovement = fixture.Create<OddsMovement>();
 

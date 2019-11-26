@@ -13,7 +13,4 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <ContentView.Content>
-        <StackLayout x:Name="Layout"></StackLayout>
-    </ContentView.Content>
 </ContentView>

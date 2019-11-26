@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using AutoFixture;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
@@ -25,7 +24,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
             dependencyResolver = baseFixture.DependencyResolver;
             fixture = baseFixture.CommonFixture.Specimens;
 
-            baseFixture.DependencyResolver.Resolve<ITimelineEventImageBuilder>(Arg.Is<string>(x=> x != "NotFound"))
+            baseFixture.DependencyResolver.Resolve<ITimelineEventImageBuilder>(Arg.Is<string>(x => x != "NotFound"))
                .Returns(new DefaultEventImageBuilder());
         }
 
@@ -63,7 +62,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 
         [Fact]
         public void BuildCommentaryText_Null_ReturnEmpty()
-        {            
+        {
             var viewModel = new CommentaryItemViewModel(null, dependencyResolver);
 
             Assert.Null(viewModel.CommentaryText);
@@ -130,7 +129,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
         [InlineData("yellow_red_card", "images/common/red_yellow_card.svg")]
         [InlineData("red_card", "images/common/red_card.svg")]
         [InlineData("penalty_missed", "images/common/missed_penalty_goal.svg")]
-        [InlineData("yellow_card", "images/common/yellow_card.svg")]        
+        [InlineData("yellow_card", "images/common/yellow_card.svg")]
         public void BuildImageSource_ReturnCorrectImageSource(string eventType, string expectedImageSource)
         {
             var timelineEventType = Enumeration.FromDisplayName<EventType>(eventType);

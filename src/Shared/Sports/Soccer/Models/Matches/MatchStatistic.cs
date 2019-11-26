@@ -75,7 +75,7 @@ namespace LiveScore.Soccer.Models.Matches
     {
         public MatchStatisticItem(
             string statisticName,
-            byte? homeValue, 
+            byte? homeValue,
             byte? awayValue,
             bool isPossessionStatistic = false)
         {

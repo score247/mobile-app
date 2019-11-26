@@ -83,7 +83,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
 
             // Act
             await viewModel.LoadMatchInfoData();
-            
+
             // Assert
             Assert.Equal(returnMatch.Referee, viewModel.DisplayReferee);
         }
@@ -93,7 +93,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         {
             var returnMatch = fixture.Create<MatchInfo>()
                 .With(matchInfo => matchInfo.Match, match)
-                .With(matchInfo => matchInfo.Venue, fixture.Create<Venue>()) ;
+                .With(matchInfo => matchInfo.Venue, fixture.Create<Venue>());
 
             matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
 
@@ -168,10 +168,10 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var actualInfoItemViewModels = viewModel.InfoItemViewModels;
             Assert.Equal(8, actualInfoItemViewModels.Count);
         }
-       
+
         private List<TimelineEvent> StubMainTimelineEvents()
         => new List<TimelineEvent>
-            { 
+            {
                 StubTimeline(EventType.RedCard, new DateTime(2019, 01, 01, 18, 00, 00)),
                 StubTimeline(EventType.Substitution, new DateTime(2019, 01, 01, 17, 15, 00 )),
                 StubTimeline(EventType.YellowRedCard, new DateTime(2019, 01, 01, 17, 00, 00 )),
@@ -187,6 +187,6 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(timeline => timeline.Type, type)
                 .With(timeline => timeline.Time, time);
 
-       
+
     }
 }
