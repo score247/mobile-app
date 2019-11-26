@@ -70,6 +70,9 @@
     <Compile Update="ViewResources\MatchDetailViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="Views\Leagues\Templates\LeagueDetails\Table\TableItemTemplate.xaml.cs">
+      <DependentUpon>TableItemTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Matches\MatchDetailView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -145,6 +148,21 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Fixtures\FixturesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableFooterTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableHeaderTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableItemTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableNotesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableOutcomesTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Leagues\Templates\LeagueDetails\Table\TableTemplate.xaml">

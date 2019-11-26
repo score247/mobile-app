@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:commonConverters="clr-namespace:LiveScore.Common.Converters;assembly=LiveScore.Common"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableHeaderTemplate">
+    <FlexLayout Direction="Column">
+        <FlexLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <coreResources:MatchHeaderViewResource />
+                    <resources:MatchDetailTableViewResource />
+                </ResourceDictionary.MergedDictionaries>
+                <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
+            </ResourceDictionary>
+        </FlexLayout.Resources>
+        <Grid Style="{StaticResource LeagueBox}"
+              IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}"
+              Margin="0,8,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                              Grid.Column="0"
+                                              DownsampleToViewSize="True"
+                                              LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                              Source="{Binding CurrentLeagueFlag}"
+                                              Style="{StaticResource LeagueFlag}" />
+
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   LineBreakMode="TailTruncation"
+                   Style="{StaticResource LeagueName}"
+                   Text="{Binding CurrentLeagueName}" />
+        </Grid>
+        <BoxView Style="{StaticResource TableLine}" />
+        <Grid Style="{StaticResource GridTableHeaderContainer}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource TableRowHeight}" />
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="#" />
+            <Label Grid.Row="0"
+                   Grid.Column="1"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="TEAM" />
+            <Label Grid.Row="0"
+                   Grid.Column="2"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="P" />
+            <Label Grid.Row="0"
+                   Grid.Column="3"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="W" />
+            <Label Grid.Row="0"
+                   Grid.Column="4"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="L" />
+            <Label Grid.Row="0"
+                   Grid.Column="5"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="D" />
+            <Label Grid.Row="0"
+                   Grid.Column="6"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="GF" />
+            <Label Grid.Row="0"
+                   Grid.Column="7"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="GA" />
+            <Label Grid.Row="0"
+                   Grid.Column="8"
+                   Style="{StaticResource TableHeaderText}"
+                   Text="PTS" />
+        </Grid>
+        <BoxView Style="{StaticResource TableLine}" />
+    </FlexLayout>
+</DataTemplate>

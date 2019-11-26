@@ -31,7 +31,6 @@
                      RefreshColor="White"
                      Command="{Binding RefreshCommand}">
             <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource ListViewBgColor}"
-                                            IsVisible="{Binding IsNotBusy}"
                                             ItemTemplate="{StaticResource infoItemTemplateSelector}"
                                             ItemSizingStrategy="MeasureFirstItem"
                                             VerticalOptions="FillAndExpand"

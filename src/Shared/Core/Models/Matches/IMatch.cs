@@ -37,8 +37,6 @@ namespace LiveScore.Core.Models.Matches
 
         string CountryCode { get; }
 
-        string LeagueGroupName { get; }
-
         /// <summary>
         /// Temporary add Soccer properties for compiled binding
         /// </summary>
@@ -88,6 +86,16 @@ namespace LiveScore.Core.Models.Matches
         bool IsInternationalLeague { get; }
 
         int LeagueOrder { get; }
+
+        LeagueRoundType LeagueRoundType { get; }
+
+        string LeagueRoundName { get; }
+
+        int LeagueRoundNumber { get; }
+
+        string LeagueRoundGroup { get; }
+
+        string LeagueGroupName { get; }
 
         void UpdateMatch(IMatch match);
 

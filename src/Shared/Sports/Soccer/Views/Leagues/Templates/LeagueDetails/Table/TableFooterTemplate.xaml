@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:tableTemplate="clr-namespace:LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableFooterTemplate">
+    <StackLayout BackgroundColor="Transparent"
+                 HeightRequest="300">
+        <StackLayout.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <coreResources:MatchHeaderViewResource />
+                    <resources:MatchDetailTableViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </StackLayout.Resources>
+        <StackLayout Style="{StaticResource MatchDetailTableFooter}">
+            <tableTemplate:TableNotesTemplate Notes="{Binding GroupNotesItemSource}" />
+            <tableTemplate:TableOutcomesTemplate Outcomes="{Binding OutcomesItemSource}"></tableTemplate:TableOutcomesTemplate>
+        </StackLayout>
+    </StackLayout>
+</DataTemplate>

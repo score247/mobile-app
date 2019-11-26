@@ -269,7 +269,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
                 [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
-                [MatchDetailFunction.Table] = new TableViewModel(NavigationService, DependencyResolver, tableTemplate),
+                [MatchDetailFunction.Table] = new TableViewModel(match.LeagueId, match.LeagueSeasonId, match.LeagueRoundGroup, NavigationService, DependencyResolver, tableTemplate),
                 [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 

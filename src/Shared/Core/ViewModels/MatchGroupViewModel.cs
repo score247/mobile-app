@@ -53,7 +53,11 @@ namespace LiveScore.Core.ViewModels
         {
             var parameters = new NavigationParameters
             {
-                { "LeagueId", LeagueId }
+                { "LeagueId", LeagueId },
+                { "LeagueSeasonId", Match.LeagueSeasonId },
+                { "LeagueRoundGroup", Match.LeagueRoundGroup },
+                { "LeagueName", LeagueName },
+                { "CountryFlag", CountryFlag }
             };
 
             await navigationService

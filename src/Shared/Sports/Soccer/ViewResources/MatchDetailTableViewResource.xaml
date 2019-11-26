@@ -1,88 +1,128 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<ResourceDictionary
-    x:Class="LiveScore.Soccer.ViewResources.MatchDetailTableViewResource"
-    xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
-    <Style
-        x:Key="MatchDetailTableText"
-        BasedOn="{StaticResource TableText}"
-        TargetType="Label">
-        <Setter Property="Padding" Value="2,0" />
-        <Setter Property="TextColor" Value="#A2A2A3" />
+<ResourceDictionary x:Class="LiveScore.Soccer.ViewResources.MatchDetailTableViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <Style x:Key="MatchDetailTableText"
+           BasedOn="{StaticResource TableText}"
+           TargetType="Label">
+        <Setter Property="Padding"
+                Value="2,0" />
+        <Setter Property="TextColor"
+                Value="#A2A2A3" />
     </Style>
-    <Style
-        x:Key="MatchDetailTableTwoTeamText"
-        BasedOn="{StaticResource TableText}"
-        TargetType="Label">
-        <Setter Property="Padding" Value="2,0" />
-    </Style>
-
-    <Style
-        x:Key="MatchDetailTableTwoTeamAlignCenterText"
-        BasedOn="{StaticResource MatchDetailTableTwoTeamText}"
-        TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-    </Style>
-    <Style
-        x:Key="MatchDetailTableAlignCenterText"
-        BasedOn="{StaticResource MatchDetailTableText}"
-        TargetType="Label">
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-    </Style>
-    <Style x:Key="MatchDetailTableFooter" TargetType="StackLayout">
-        <Setter Property="Padding" Value="12,8" />
+    <Style x:Key="MatchDetailTableTwoTeamText"
+           BasedOn="{StaticResource TableText}"
+           TargetType="Label">
+        <Setter Property="Padding"
+                Value="2,0" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeLabel" TargetType="Label">
-        <Setter Property="Margin" Value="8,0,0,0" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
-        <Setter Property="TextColor" Value="#fff" />
+    <Style x:Key="MatchDetailTableTwoTeamAlignCenterText"
+           BasedOn="{StaticResource MatchDetailTableTwoTeamText}"
+           TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+    </Style>
+    <Style x:Key="MatchDetailTableAlignCenterText"
+           BasedOn="{StaticResource MatchDetailTableText}"
+           TargetType="Label">
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+    </Style>
+    <Style x:Key="MatchDetailTableFooter"
+           TargetType="StackLayout">
+        <Setter Property="Padding"
+                Value="12,8" />
     </Style>
 
-    <Style x:Key="MatchDetailTableNotes" BasedOn="{StaticResource MatchDetailTableOutComeLabel}" TargetType="Label">
-        <Setter Property="Margin" Value="0,0,0,8" />
+    <Style x:Key="MatchDetailTableOutComeLabel"
+           TargetType="Label">
+        <Setter Property="Margin"
+                Value="8,0,0,0" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoLight}" />
+        <Setter Property="TextColor"
+                Value="#fff" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeTeamOnLeague" TargetType="Frame">
-        <Setter Property="HeightRequest" Value="16" />
-        <Setter Property="WidthRequest" Value="16" />
-        <Setter Property="BackgroundColor" Value="#57BA63" />
-        <Setter Property="CornerRadius" Value="1" />
-        <Setter Property="Margin" Value="0" />
-    </Style>
-    <Style x:Key="MatchDetailTableOutComeTopFourthTeamOnLeague" BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource TopFourthTeamOnLeagueColor}" />
+    <Style x:Key="MatchDetailTableNotes"
+           BasedOn="{StaticResource MatchDetailTableOutComeLabel}"
+           TargetType="Label">
+        <Setter Property="Margin"
+                Value="0,0,0,8" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeFifthTeamOnLeague" BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource FifthTeamOnLeagueColor}" />
+    <Style x:Key="MatchDetailTableOutComeTeamOnLeague"
+           TargetType="Frame">
+        <Setter Property="HeightRequest"
+                Value="16" />
+        <Setter Property="WidthRequest"
+                Value="16" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource TableBgColor}" />
+        <Setter Property="CornerRadius"
+                Value="1" />
+        <Setter Property="Margin"
+                Value="0" />
+    </Style>
+    <Style x:Key="MatchDetailTableOutComeTopFourthTeamOnLeague"
+           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
+           TargetType="Frame">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource TopFourthTeamOnLeagueColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeSixthTeamOnLeague" BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource SixthTeamOnLeagueColor}" />
+    <Style x:Key="MatchDetailTableOutComeFifthTeamOnLeague"
+           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
+           TargetType="Frame">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FifthTeamOnLeagueColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeBottomTeamOnLeagueColor" BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}" TargetType="Frame">
-        <Setter Property="BackgroundColor" Value="{StaticResource BottomTeamOnLeagueColor}" />
+    <Style x:Key="MatchDetailTableOutComeSixthTeamOnLeague"
+           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
+           TargetType="Frame">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource SixthTeamOnLeagueColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOrderTeamOnLeagueLayout" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{StaticResource TableBgColor}" />
+    <Style x:Key="MatchDetailTableOutComeBottomTeamOnLeagueColor"
+           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
+           TargetType="Frame">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource BottomTeamOnLeagueColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOrderTeamOnLeagueLabel" TargetType="Label">
-        <Setter Property="TextColor" Value="#fff" />
-        <Setter Property="FontSize" Value="10" />
-        <Setter Property="FontFamily" Value="{StaticResource RobotoBold}" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-        <Setter Property="VerticalTextAlignment" Value="Center" />
+    <Style x:Key="MatchDetailTableOrderTeamOnLeagueLayout"
+           TargetType="StackLayout">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource TableBgColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeLayout" TargetType="FlexLayout">
-        <Setter Property="Margin" Value="0,0,0,8" />
-        <Setter Property="HeightRequest" Value="16" />
-        <Setter Property="AlignItems" Value="Center" />
+    <Style x:Key="MatchDetailTableOrderTeamOnLeagueLabel"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="FontSize"
+                Value="10" />
+        <Setter Property="FontFamily"
+                Value="{StaticResource RobotoBold}" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+    </Style>
+
+    <Style x:Key="MatchDetailTableOutComeLayout"
+           TargetType="FlexLayout">
+        <Setter Property="Margin"
+                Value="0,0,0,8" />
+        <Setter Property="HeightRequest"
+                Value="16" />
+        <Setter Property="AlignItems"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

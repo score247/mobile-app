@@ -31,7 +31,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-
             <BoxView Style="{StaticResource HorizontalLine}" />
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"
@@ -54,7 +53,10 @@
                                    IsViewReusingEnabled="True"
                                    BackgroundColor="{StaticResource ListViewBgColor}"
                                    ItemsSource="{Binding LeagueDetailItemSources}"
-                                   ItemTemplate="{StaticResource LeagueDetailItemTemplateSelector}">
+                                   ItemTemplate="{StaticResource LeagueDetailItemTemplateSelector}"
+                                   ItemAppearedCommand="{Binding ItemAppearedCommand}"
+                                   ItemDisappearingCommand="{Binding ItemDisappearingCommand}"
+                                   SelectedIndex="{Binding SelectedIndex}">
                 <x:Arguments>
                     <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
                                                                NoItemMaxPanDistance="1000"
