@@ -22,18 +22,14 @@ using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
 using LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead;
 using LiveScore.Soccer.ViewModels.MatchDetails.Information;
 using LiveScore.Soccer.ViewModels.MatchDetails.LineUps;
-using LiveScore.Soccer.ViewModels.MatchDetails.Social;
 using LiveScore.Soccer.ViewModels.MatchDetails.Statistics;
 using LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary;
-using LiveScore.Soccer.ViewModels.MatchDetails.TVSchedule;
 using LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table;
 using LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information;
 using LiveScore.Soccer.Views.Templates.MatchDetails.LineUps;
-using LiveScore.Soccer.Views.Templates.MatchDetails.Social;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
 using LiveScore.Soccer.Views.Templates.MatchDetails.TrackerCommentary;
-using LiveScore.Soccer.Views.Templates.MatchDetails.TVSchedule;
 using MethodTimer;
 using Prism.Commands;
 using Prism.Events;
@@ -269,7 +265,15 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
                 [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
                 [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
-                [MatchDetailFunction.Table] = new TableViewModel(match.LeagueId, match.LeagueSeasonId, match.LeagueRoundGroup, NavigationService, DependencyResolver, tableTemplate),
+                [MatchDetailFunction.Table] = new TableViewModel(
+                    match.LeagueId,
+                    match.LeagueSeasonId,
+                    match.LeagueRoundGroup,
+                    NavigationService,
+                    DependencyResolver,
+                    tableTemplate,
+                    homeTeamId: match.HomeTeamId,
+                    awayTeamId: match.AwayTeamId),
                 [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 

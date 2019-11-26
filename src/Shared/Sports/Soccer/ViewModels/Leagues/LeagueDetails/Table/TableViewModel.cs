@@ -34,7 +34,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             IDependencyResolver serviceLocator,
             DataTemplate dataTemplate = null,
             string leagueName = null,
-            string countryFlag = null)
+            string countryFlag = null,
+            string homeTeamId = null,
+            string awayTeamId = null)
             : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
         {
             currentLeagueId = leagueId;
@@ -42,6 +44,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             currentLeagueRoundGroup = leagueRoundGroup;
             CurrentLeagueName = leagueName;
             CurrentLeagueFlag = countryFlag;
+            CurrentHomeTeamId = homeTeamId;
+            CurrentAwayTeamId = awayTeamId;
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
         }
@@ -57,6 +61,10 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         public string CurrentLeagueFlag { get; }
 
         public string CurrentLeagueName { get; }
+
+        public string CurrentHomeTeamId { get; }
+
+        public string CurrentAwayTeamId { get; }
 
         public bool IsRefreshing { get; set; }
 
@@ -88,7 +96,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                 currentLeagueRoundGroup,
                 CurrentLanguage) as LeagueTable;
 
-            if (leagueTable == null)
+            if (leagueTable == null || leagueTable.GroupTables?.Any() != true)
             {
                 HasData = false;
                 IsRefreshing = false;
@@ -100,6 +108,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
             foreach (var teamStanding in teamStandings)
             {
+                if (teamStanding.Id == CurrentHomeTeamId || teamStanding.Id == CurrentAwayTeamId)
+                {
+                    teamStanding.IsHightLight = true;
+                }
+
                 teamStanding.Outcome.Color = Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).Color;
             }
 

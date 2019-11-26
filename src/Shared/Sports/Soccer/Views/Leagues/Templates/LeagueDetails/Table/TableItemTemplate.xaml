@@ -41,7 +41,16 @@
             <Label Grid.Row="0"
                    Grid.Column="1"
                    Style="{StaticResource MatchDetailTableText}"
-                   Text="{Binding Name}" />
+                   Text="{Binding Name}">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label"
+                                 Binding="{Binding IsHightLight}"
+                                 Value="True">
+                        <Setter Property="Style"
+                                Value="{StaticResource MatchDetailTableTwoTeamText}"></Setter>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
             <Label Grid.Row="0"
                    Grid.Column="2"
                    Style="{StaticResource MatchDetailTableAlignCenterText}"

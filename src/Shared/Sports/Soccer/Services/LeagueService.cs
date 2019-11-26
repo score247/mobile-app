@@ -54,7 +54,7 @@ namespace LiveScore.Soccer.Services
             try
             {
                 var leagueTable = await apiService.Execute(()
-                    => leagueApi.GetTable(language.DisplayName, leagueId, seasonId, leagueRoundGroup));
+                    => leagueApi.GetTable(language.DisplayName, leagueId, seasonId, leagueRoundGroup ?? " "));
 
                 return leagueTable;
             }

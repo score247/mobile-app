@@ -45,7 +45,8 @@
                    Style="{StaticResource LeagueName}"
                    Text="{Binding CurrentLeagueName}" />
         </Grid>
-        <BoxView Style="{StaticResource TableLine}" />
+        <BoxView Style="{StaticResource TableLine}"
+                 IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}" />
 
         <Label Style="{StaticResource NoInfo}"
                Text="{langResources:Translate NoData}"

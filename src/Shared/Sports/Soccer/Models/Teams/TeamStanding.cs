@@ -80,6 +80,9 @@ namespace LiveScore.Soccer.Models.Teams
         [Key(12)]
         public int Change { get; }
 
+        [IgnoreMember]
+        public bool IsHightLight { get; set; }
+
 #pragma warning restore S109 // Magic numbers should not be used
     }
 }
