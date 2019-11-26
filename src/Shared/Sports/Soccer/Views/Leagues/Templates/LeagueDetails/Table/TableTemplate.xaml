@@ -32,17 +32,22 @@
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="White"
                      Command="{Binding RefreshCommand}">
-            <tabstrip:TabItemCollectionView ItemsSource="{Binding TeamStandingsItemSource}"
-                                            ItemSizingStrategy="MeasureFirstItem"
-                                            BackgroundColor="{StaticResource ListViewBgColor}"
-                                            ItemTemplate="{StaticResource TableItemTemplate}"
-                                            HeaderTemplate="{StaticResource TableHeaderTemplate}"
-                                            FooterTemplate="{StaticResource TableFooterTemplate}"
-                                            Footer="{Binding .}"
-                                            Header="{Binding .}"
-                                            IsVisible="{Binding IsNotBusy}"
-                                            VerticalOptions="FillAndExpand">
-            </tabstrip:TabItemCollectionView>
+            <tabstrip:TabItemListView ItemsSource="{Binding TeamStandingsItemSource}"
+                                      BackgroundColor="{StaticResource ListViewBgColor}"
+                                      ItemTemplate="{StaticResource TableItemTemplate}"
+                                      HeaderTemplate="{StaticResource TableHeaderTemplate}"
+                                      FooterTemplate="{StaticResource TableFooterTemplate}"
+                                      Footer="{Binding .}"
+                                      Header="{Binding .}"
+                                      SeparatorColor="Transparent"
+                                      SeparatorVisibility="None"
+                                      IsRefreshing="{Binding IsRefreshing}"
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsPullToRefreshEnabled="True"
+                                      HasUnevenRows="True"
+                                      IsVisible="{Binding IsNotBusy}"
+                                      VerticalOptions="FillAndExpand">
+            </tabstrip:TabItemListView>
         </RefreshView>
     </StackLayout>
 </DataTemplate>

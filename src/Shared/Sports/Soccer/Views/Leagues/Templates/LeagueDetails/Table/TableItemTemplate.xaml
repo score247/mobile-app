@@ -7,79 +7,81 @@
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableItemTemplate">
-    <StackLayout>
-        <StackLayout.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <coreResources:MatchHeaderViewResource />
-                    <resources:MatchDetailTableViewResource />
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </StackLayout.Resources>
-        <Grid Style="{StaticResource GridTableContainer}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="4*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="{StaticResource TableRowHeight}" />
-            </Grid.RowDefinitions>
-            <Frame Grid.Row="0"
-                   Grid.Column="0"
-                   Style="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-                   BackgroundColor="{Binding Outcome.Color}">
-                <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}"
-                       Text="{Binding Rank}" />
-            </Frame>
-            <Label Grid.Row="0"
-                   Grid.Column="1"
-                   Style="{StaticResource MatchDetailTableText}"
-                   Text="{Binding Name}">
-                <Label.Triggers>
-                    <DataTrigger TargetType="Label"
-                                 Binding="{Binding IsHightLight}"
-                                 Value="True">
-                        <Setter Property="Style"
-                                Value="{StaticResource MatchDetailTableTwoTeamText}"></Setter>
-                    </DataTrigger>
-                </Label.Triggers>
-            </Label>
-            <Label Grid.Row="0"
-                   Grid.Column="2"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding Played}" />
-            <Label Grid.Row="0"
-                   Grid.Column="3"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding Win}" />
-            <Label Grid.Row="0"
-                   Grid.Column="4"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding Loss}" />
-            <Label Grid.Row="0"
-                   Grid.Column="5"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding Draw}" />
-            <Label Grid.Row="0"
-                   Grid.Column="6"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding GoalsFor}" />
-            <Label Grid.Row="0"
-                   Grid.Column="7"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding GoalsAgainst}" />
-            <Label Grid.Row="0"
-                   Grid.Column="8"
-                   Style="{StaticResource MatchDetailTableAlignCenterText}"
-                   Text="{Binding Points}" />
-        </Grid>
-        <BoxView Style="{StaticResource TableLine}" />
-    </StackLayout>
+    <ViewCell>
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <coreResources:MatchHeaderViewResource />
+                        <resources:MatchDetailTableViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <Grid Style="{StaticResource GridTableContainer}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="4*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource TableRowHeight}" />
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0"
+                       Grid.Column="0"
+                       Style="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
+                       BackgroundColor="{Binding Outcome.Color}">
+                    <Label Style="{StaticResource MatchDetailTableOrderTeamOnLeagueLabel}"
+                           Text="{Binding Rank}" />
+                </Frame>
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       Style="{StaticResource MatchDetailTableText}"
+                       Text="{Binding Name}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableTwoTeamText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Played}" />
+                <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Win}" />
+                <Label Grid.Row="0"
+                       Grid.Column="4"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Loss}" />
+                <Label Grid.Row="0"
+                       Grid.Column="5"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Draw}" />
+                <Label Grid.Row="0"
+                       Grid.Column="6"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding GoalsFor}" />
+                <Label Grid.Row="0"
+                       Grid.Column="7"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding GoalsAgainst}" />
+                <Label Grid.Row="0"
+                       Grid.Column="8"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Points}" />
+            </Grid>
+            <BoxView Style="{StaticResource TableLine}" />
+        </StackLayout>
+    </ViewCell>
 </DataTemplate>
