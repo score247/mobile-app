@@ -9,9 +9,9 @@
               xmlns:tableViews="clr-namespace:LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableTemplate">
-    <StackLayout BackgroundColor="{StaticResource ListViewBgColor}"
+    <Grid BackgroundColor="{StaticResource ListViewBgColor}"
                  VerticalOptions="FillAndExpand">
-        <StackLayout.Resources>
+        <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <coreResources:MatchHeaderViewResource />
@@ -21,13 +21,13 @@
                 <tableViews:TableFooterTemplate  x:Key="TableFooterTemplate" />
                 <tableViews:TableHeaderTemplate  x:Key="TableHeaderTemplate" />
             </ResourceDictionary>
-        </StackLayout.Resources>
-
-        <ActivityIndicator Margin="40"
+        </Grid.Resources>
+        <ActivityIndicator
+            Margin="40"
+            VerticalOptions="Start"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
-                           Style="{StaticResource CenterActivityIndicator}"
-                           VerticalOptions="Start" />
+                           Style="{StaticResource CenterActivityIndicator}"/>
 
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="White"
@@ -49,5 +49,5 @@
                                       VerticalOptions="FillAndExpand">
             </tabstrip:TabItemListView>
         </RefreshView>
-    </StackLayout>
+    </Grid>
 </DataTemplate>

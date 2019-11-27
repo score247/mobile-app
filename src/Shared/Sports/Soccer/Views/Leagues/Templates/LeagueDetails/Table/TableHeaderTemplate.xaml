@@ -10,7 +10,7 @@
               mc:Ignorable="d"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableHeaderTemplate">
-    <FlexLayout Direction="Column">
+    <FlexLayout Direction="Column" Padding="0,8,0,0">
         <FlexLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -22,8 +22,7 @@
         </FlexLayout.Resources>
 
         <Grid Style="{StaticResource LeagueBox}"
-              IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}"
-              Margin="0,8,0,0">
+              IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
             </Grid.RowDefinitions>
@@ -52,6 +51,9 @@
                Text="{langResources:Translate NoData}"
                IsVisible="{Binding NoData}" />
 
+
+        <BoxView Style="{StaticResource TableLine}"
+                 IsVisible="{Binding HasData}" />
         <Grid Style="{StaticResource GridTableHeaderContainer}"
               IsVisible="{Binding HasData}">
             <Grid.ColumnDefinitions>

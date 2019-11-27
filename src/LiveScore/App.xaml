@@ -69,12 +69,6 @@
             <Color x:Key="AwayColor">#FA2E58</Color>
             <Color x:Key="DrawColor">#FF7246</Color>
 
-            <!--  Team rank in the TABLE tab  -->
-            <Color x:Key="TopFourthTeamOnLeagueColor">#01C851</Color>
-            <Color x:Key="FifthTeamOnLeagueColor">#33B5E7</Color>
-            <Color x:Key="SixthTeamOnLeagueColor">#0E47A1</Color>
-            <Color x:Key="BottomTeamOnLeagueColor">#FF3548</Color>
-
             <!--  Font-size  -->
             <x:Double x:Key="GeneralFontSize">14</x:Double>
             <x:Double x:Key="SidebarFontSize">14</x:Double>
@@ -175,6 +169,14 @@
             <x:Double x:Key="SubstitutionIconWidthSize">16</x:Double>
             <x:Double x:Key="SubstitutionShirtNumberWidthSize">30</x:Double>
             <x:Double x:Key="LineupIconWidthSize">57</x:Double>
+            
+            <!--  Team rank in the TABLE tab  -->
+            <Color x:Key="FirstPositiveOutcomeColor">#01C851</Color>
+            <Color x:Key="SecondPositiveOutcomeColor">#33B5E7</Color>
+            <Color x:Key="ThirdPositiveOutcomeColor">#2ABBAC</Color>
+            <Color x:Key="FourthPositiveOutcomeColor">#4385F5</Color>
+            <Color x:Key="FirstNegativeOutcomeColor">#FFBB34</Color>
+            <Color x:Key="SecondNegativeOutcomeColor">#FF3548</Color>
 
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor"
