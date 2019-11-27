@@ -50,6 +50,7 @@
                 Value="{StaticResource HomeColor}" />
         <Setter Property="Rotation"
                 Value="180" />
+        <Setter Property="Margin" Value="0,0,1,0" />
     </Style>
 
     <Style x:Key="MatchDetailStatisticAwayProgressBar"
@@ -60,5 +61,6 @@
                 Value="{StaticResource PrimaryColor}" />
         <Setter Property="ProgressColor"
                 Value="{StaticResource AwayColor}" />
+        <Setter Property="Margin" Value="1,0,0,0" />
     </Style>
 </ResourceDictionary>
