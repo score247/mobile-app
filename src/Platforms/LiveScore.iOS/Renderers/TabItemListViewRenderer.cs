@@ -15,13 +15,13 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            if (Control != null)
-            {
-                var tvDelegate = new TableViewDelegate();
+            //if (Control != null)
+            //{
+            //    var tvDelegate = new TableViewDelegate();
 
-                Control.Delegate = tvDelegate;
-                tvDelegate.OnScrolled += TvDelegate_OnScrolled;
-            }
+            //    Control.Delegate = tvDelegate;
+            //    tvDelegate.OnScrolled += TvDelegate_OnScrolled;
+            //}
         }
 
         protected internal TabItemListView Source => Element as TabItemListView;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using LiveScore.Core;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures;
@@ -42,10 +43,26 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
             LeagueDetailItemSources = new List<ViewModelBase> {
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueName, countryFlag),
-                new FixturesViewModel(NavigationService, DependencyResolver)
+                new FixturesViewModel(leagueId, NavigationService, DependencyResolver, EventAggregator)
             };
 
             LeagueDetailItemSources[SelectedIndex]?.OnAppearing();
+        }
+
+        public override Task OnNetworkReconnectedAsync() => LeagueDetailItemSources[SelectedIndex]?.OnNetworkReconnectedAsync();
+
+        public override void OnResumeWhenNetworkOK()
+        {
+            base.OnResumeWhenNetworkOK();
+
+            LeagueDetailItemSources[SelectedIndex]?.OnResumeWhenNetworkOK();
+        }
+
+        public override void OnSleep()
+        {
+            base.OnSleep();
+
+            LeagueDetailItemSources[SelectedIndex]?.OnSleep();
         }
 
         public override void OnAppearing()

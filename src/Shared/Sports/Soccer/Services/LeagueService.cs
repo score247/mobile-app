@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
+using LiveScore.Soccer.Models.Matches;
 using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services
@@ -62,6 +64,23 @@ namespace LiveScore.Soccer.Services
                 HandleException(ex);
 
                 return null;
+            }
+        }
+
+        public async Task<IEnumerable<IMatch>> GetFixtures(string leagueId, Language language)
+        {
+            try
+            {
+                var matches = await apiService.Execute(()
+                    => leagueApi.GetFixtures(language.DisplayName, leagueId));
+
+                return matches;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<IMatch>();
             }
         }
     }

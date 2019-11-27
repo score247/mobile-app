@@ -1,4 +1,7 @@
-﻿using System.Windows.Input;
+﻿using System.Linq;
+using System.Windows.Input;
+using LiveScore.Core.ViewModels;
+using Prism.Commands;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,6 +13,21 @@ namespace LiveScore.Core.Views.Templates
         public MatchesTemplate()
         {
             InitializeComponent();
+        }
+
+        protected override void OnBindingContextChanged()
+        {
+            base.OnBindingContextChanged();
+
+            if (BindingContext != null)
+            {
+                var viewModel = BindingContext as MatchesViewModel;
+                viewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>((group) =>
+                {
+                    var item = group.First();
+                    MatchesListView.ScrollTo(item, group, ScrollToPosition.Start, false);
+                });
+            }
         }
 
         public static readonly BindableProperty LoadMoreCommandProperty
@@ -69,6 +87,25 @@ namespace LiveScore.Core.Views.Templates
         {
             get => (DataTemplate)GetValue(ListViewFooterTemplateProperty);
             set => SetValue(ListViewFooterTemplateProperty, value);
+        }
+
+        public static readonly BindableProperty ListViewHeaderTemplateProperty
+         = BindableProperty.Create(
+             nameof(ListViewHeaderTemplate),
+             typeof(DataTemplate),
+             typeof(MatchesTemplate),
+             propertyChanged: (bindable, _, newValue) =>
+             {
+                 if (newValue != null && bindable is MatchesTemplate matchesTemplate && matchesTemplate.MatchesListView != null)
+                 {
+                     matchesTemplate.MatchesListView.HeaderTemplate = (DataTemplate)newValue;
+                 }
+             });
+
+        public DataTemplate ListViewHeaderTemplate
+        {
+            get => (DataTemplate)GetValue(ListViewHeaderTemplateProperty);
+            set => SetValue(ListViewHeaderTemplateProperty, value);
         }
     }
 }

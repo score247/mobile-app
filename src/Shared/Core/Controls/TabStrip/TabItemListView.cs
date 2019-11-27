@@ -9,14 +9,23 @@ namespace LiveScore.Core.Controls.TabStrip
         public TabItemListView() : base(ListViewCachingStrategy.RecycleElement)
         {
             RefreshControlColor = Color.White;
+            Scrolled += TabItemListView_Scrolled;
         }
 
-        public static void OnScrolling(double offset)
+        private static void TabItemListView_Scrolled(object sender, ScrolledEventArgs e)
         {
             MessagingCenter.Send(
                 nameof(TabStrip),
                 TabItemScrollingEventArgs.EventName,
-                new TabItemScrollingEventArgs(offset));
+                new TabItemScrollingEventArgs(e.ScrollY > 0 ? e.ScrollY : 0));
+        }
+
+        public static void OnScrolling(double offset)
+        {
+            //MessagingCenter.Send(
+            //    nameof(TabStrip),
+            //    TabItemScrollingEventArgs.EventName,
+            //    new TabItemScrollingEventArgs(offset));
         }
     }
 }

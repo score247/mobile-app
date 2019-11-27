@@ -20,6 +20,7 @@
     <customListView:CustomListView x:Name="MatchesListView"
                                    AutomationProperties.IsInAccessibleTree="False"
                                    Footer="{Binding .}"
+                                   Header="{Binding HeaderViewModel}"
                                    GroupDisplayBinding="{Binding Key}"
                                    GroupHeaderTemplate="{StaticResource MatchGroupTemplate}"
                                    HasUnevenRows="true"

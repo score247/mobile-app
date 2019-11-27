@@ -72,27 +72,18 @@ namespace LiveScore.Features.Score.ViewModels
                 SubscribeEvents();
             }
 
-            networkConnectionManager
-                .OnSuccessfulConnection(() =>
+            if (FirstLoad)
+            {
+                FirstLoad = false;
+                LoadDataAsync(LoadMatchesAsync).ConfigureAwait(false);
+            }
+            else
+            {
+                if (ViewDate.IsTodayOrYesterday())
                 {
-                    if (FirstLoad)
-                    {
-                        FirstLoad = false;
-                        LoadDataAsync(LoadMatchesAsync).ConfigureAwait(false);
-                    }
-                    else
-                    {
-                        if (ViewDate.IsTodayOrYesterday())
-                        {
-                            Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
-                        }
-                    }
-                })
-                .OnFailedConnection(() =>
-                {
-                    IsRefreshing = false;
-                    networkConnectionManager.PublishNetworkConnectionEvent();
-                });
+                    Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
+                }
+            }
         }
 
         protected override void OnReceivedMatchEvent(IMatchEventMessage payload)

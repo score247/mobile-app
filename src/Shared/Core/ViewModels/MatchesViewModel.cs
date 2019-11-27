@@ -12,6 +12,7 @@ using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Core.PubSubEvents.Teams;
 using LiveScore.Core.Services;
 using MethodTimer;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 using Device = Xamarin.Forms.Device;
@@ -48,11 +49,15 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsRefreshing { get; set; }
 
+        public object HeaderViewModel { get; protected set; }
+
         public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> MatchItemsSource { get; protected set; }
 
         public DelegateAsyncCommand RefreshCommand { get; protected set; }
 
         public DelegateAsyncCommand<MatchViewModel> TappedMatchCommand { get; protected set; }
+
+        public DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>> ScrollToCommand { get; set; }
 
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
@@ -152,6 +157,7 @@ namespace LiveScore.Core.ViewModels
             {
                 HasData = false;
                 Device.BeginInvokeOnMainThread(() => MatchItemsSource?.Clear());
+
                 return;
             }
 
@@ -166,8 +172,9 @@ namespace LiveScore.Core.ViewModels
             if (matches?.Any() != true)
             {
                 HasData = false;
-                MatchItemsSource?.Clear();
                 IsRefreshing = false;
+
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource?.Clear());
                 return;
             }
 
@@ -189,6 +196,7 @@ namespace LiveScore.Core.ViewModels
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems));
+
         }
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches) => InitializeMatchItems(matches);
