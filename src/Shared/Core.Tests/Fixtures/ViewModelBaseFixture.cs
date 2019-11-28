@@ -1,21 +1,21 @@
 ﻿using LiveScore.Common.Services;
+using System;
+using System.Threading.Tasks;
+using LiveScore.Core.Services;
+using Microsoft.AspNetCore.Connections;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR.Protocol;
+using Microsoft.Extensions.Logging;
+using NSubstitute;
+using Prism.Behaviors;
+using Prism.Common;
+using Prism.Events;
+using Prism.Ioc;
+using Prism.Logging;
+using Prism.Navigation;
 
 namespace LiveScore.Core.Tests.Fixtures
 {
-    using System;
-    using System.Threading.Tasks;
-    using LiveScore.Core.Services;
-    using Microsoft.AspNetCore.SignalR.Client;
-    using Microsoft.AspNetCore.SignalR.Protocol;
-    using Microsoft.Extensions.Logging;
-    using NSubstitute;
-    using Prism.Behaviors;
-    using Prism.Common;
-    using Prism.Events;
-    using Prism.Ioc;
-    using Prism.Logging;
-    using Prism.Navigation;
-
     public class ViewModelBaseFixture
     {
         public ViewModelBaseFixture()
