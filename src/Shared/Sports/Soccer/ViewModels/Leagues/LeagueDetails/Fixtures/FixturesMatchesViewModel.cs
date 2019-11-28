@@ -18,16 +18,19 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
     {
         private const int DefaultLoadedMatchItemCount = 10;
         private readonly string currentLeagueId;
+        private readonly string currentLeagueGroupName;
         private readonly ILeagueService leagueService;
 
         public FixturesMatchesViewModel(
             string leagueId,
+            string leagueGroupName,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
             : base(navigationService, dependencyResolver, eventAggregator)
         {
             currentLeagueId = leagueId;
+            currentLeagueGroupName = leagueGroupName;
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
 
             LoadResultMatchesCommand = new DelegateCommand(LoadResultMatches);
@@ -55,7 +58,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         }
 
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
-            => leagueService.GetFixtures(currentLeagueId, CurrentLanguage);
+            => leagueService.GetFixtures(currentLeagueId, currentLeagueGroupName, CurrentLanguage);
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {

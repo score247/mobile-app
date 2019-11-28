@@ -18,8 +18,8 @@ namespace LiveScore.Soccer.Services
             [Get("/soccer/{language}/leagues/{leagueId}/season/{seasonId}/table/{leagueRoundGroup}")]
             Task<LeagueTable> GetTable(string language, string leagueId, string seasonId, string leagueRoundGroup);
 
-            [Get("/soccer/{language}/leagues/{leagueId}/matches")]
-            Task<IEnumerable<SoccerMatch>> GetFixtures(string language, string leagueId);
+            [Get("/soccer/{language}/leagues/{leagueId}/matches/{leagueGroupName}")]
+            Task<IEnumerable<SoccerMatch>> GetFixtures(string language, string leagueId, string leagueGroupName);
         }
 
         [Headers("Accept: application/x-msgpack")]

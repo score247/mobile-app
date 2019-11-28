@@ -36,7 +36,7 @@
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
-                       Text="{Binding Key.LeagueName, Mode=OneTime}" />
+                       Text="{Binding Key.LeagueGroupName, Mode=OneTime}" />
                 <Label Grid.Row="0"
                        Grid.Column="2"
                        LineBreakMode="NoWrap"

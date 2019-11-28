@@ -38,12 +38,12 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var leagueId = parameters["LeagueId"]?.ToString();
             var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
             var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
-            var leagueName = parameters["LeagueName"]?.ToString();
+            var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
             var countryFlag = parameters["CountryFlag"]?.ToString();
 
             LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueName, countryFlag),
-                new FixturesViewModel(leagueId, NavigationService, DependencyResolver, EventAggregator)
+                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag),
+                new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
 
             LeagueDetailItemSources[SelectedIndex]?.OnAppearing();

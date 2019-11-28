@@ -12,7 +12,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             }
 
             LeagueId = match.LeagueId;
-            LeagueName = match.LeagueGroupName;
+            LeagueName = match.LeagueGroupName.ToUpperInvariant();
             LeagueSeasonId = match.LeagueSeasonId;
         }
 

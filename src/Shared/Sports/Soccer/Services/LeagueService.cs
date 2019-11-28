@@ -67,12 +67,12 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<IMatch>> GetFixtures(string leagueId, Language language)
+        public async Task<IEnumerable<IMatch>> GetFixtures(string leagueId, string leagueGroupName, Language language)
         {
             try
             {
                 var matches = await apiService.Execute(()
-                    => leagueApi.GetFixtures(language.DisplayName, leagueId));
+                    => leagueApi.GetFixtures(language.DisplayName, leagueId, leagueGroupName));
 
                 return matches;
             }

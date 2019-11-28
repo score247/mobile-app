@@ -11,12 +11,13 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
     {
         public FixturesViewModel(
             string leagueId,
+            string leagueGroupName,
              INavigationService navigationService,
              IDependencyResolver serviceLocator,
              IEventAggregator eventAggregator)
              : base(navigationService, serviceLocator, null, eventAggregator, AppResources.Fixtures)
         {
-            MatchesViewModel = new FixturesMatchesViewModel(leagueId, NavigationService, DependencyResolver, EventAggregator);
+            MatchesViewModel = new FixturesMatchesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator);
         }
 
         public FixturesMatchesViewModel MatchesViewModel { get; }
