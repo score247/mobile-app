@@ -82,8 +82,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             await LoadDataAsync(LoadLeagueTableAsync);
         }
 
-        private Task OnRefresh()
-            => LoadDataAsync(LoadLeagueTableAsync, false);
+        private async Task OnRefresh()
+        {
+            await LoadDataAsync(LoadLeagueTableAsync, false);
+            IsRefreshing = false;
+        }
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
@@ -98,11 +101,19 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             if (leagueTable == null || leagueTable.GroupTables?.Any() != true)
             {
                 HasData = false;
-                IsRefreshing = false;
                 return;
             }
 
             var table = leagueTable.GroupTables.FirstOrDefault();
+            BuildTeamStandings(table);
+            BuildOutcomes(table);
+            GroupNotesItemSource = table.GroupNotes.ToList();
+
+            HasData = true;
+        }
+
+        private void BuildTeamStandings(LeagueGroupTable table)
+        {
             var teamStandings = table.TeamStandings.OrderBy(standing => standing.Rank);
 
             foreach (var teamStanding in teamStandings)
@@ -116,17 +127,16 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             }
 
             TeamStandingsItemSource = teamStandings.ToList();
-            GroupNotesItemSource = table.GroupNotes.ToList();
+        }
 
+        private void BuildOutcomes(LeagueGroupTable table)
+        {
             foreach (var outcome in table.OutcomeList)
             {
                 outcome.Color = Enumeration.FromValue<TeamOutcome>(outcome.Value).Color;
             }
 
             OutcomesItemSource = table.OutcomeList.ToList();
-
-            HasData = true;
-            IsRefreshing = false;
         }
 
 #pragma warning restore S3215 // "interface" instances should not be cast to concrete types
