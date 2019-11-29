@@ -59,6 +59,8 @@ namespace LiveScore.Core.ViewModels
 
         public DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>> ScrollToCommand { get; set; }
 
+        public bool EnableTapLeague { get; protected set; } = true;
+
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
 
@@ -192,11 +194,10 @@ namespace LiveScore.Core.ViewModels
                 EventAggregator));
 
             var matchItems
-                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
+                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
 
             Device.BeginInvokeOnMainThread(()
                 => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems));
-
         }
 
         protected virtual void UpdateMatchItems(IEnumerable<IMatch> matches) => InitializeMatchItems(matches);

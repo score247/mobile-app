@@ -35,6 +35,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 
             LoadResultMatchesCommand = new DelegateCommand(LoadResultMatches);
             LoadFixtureMatchesCommand = new DelegateCommand(LoadFixtureMatches);
+            EnableTapLeague = false;
         }
 
         public IEnumerable<IGrouping<MatchGroupViewModel, MatchViewModel>> ResultMatchItemSource { get; private set; }
@@ -78,7 +79,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             var loadedMatchItems = resultMatches
                     .Concat(fixtureMatches)
                     .Select(match => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator))
-                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
+                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
 
             Device.BeginInvokeOnMainThread(()
                => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(loadedMatchItems));
@@ -141,7 +142,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                 var loadedFixtureMatches = matches.Take(DefaultLoadedMatchItemCount);
                 FixturesMatchItemSource = matches.Skip(DefaultLoadedMatchItemCount)
                      .Select(match => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator))
-                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
+                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
                 ShowLoadFixturesButton = true;
 
                 return loadedFixtureMatches;
@@ -160,7 +161,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                 ResultMatchItemSource = matches.SkipLast(loadedItemCount)
                    .OrderByDescending(match => match.EventDate)
                    .Select(match => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator))
-                   .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
+                   .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
                 ShowLoadResultsButton = true;
                 HeaderViewModel = this;
 

@@ -12,7 +12,7 @@ namespace LiveScore.Core.ViewModels
         private readonly INavigationService navigationService;
         private readonly int currentSportId;
 
-        public MatchGroupViewModel(IMatch match, Func<string, string> buildFlagUrl, INavigationService navigationService, int currentSportId)
+        public MatchGroupViewModel(IMatch match, Func<string, string> buildFlagUrl, INavigationService navigationService, int currentSportId, bool enableTap = true)
         {
             if (match == null)
             {
@@ -27,6 +27,7 @@ namespace LiveScore.Core.ViewModels
             CountryCode = match.CountryCode;
             LeagueOrder = match.LeagueOrder;
             Match = match;
+            EnableTap = enableTap;
 
             this.navigationService = navigationService;
             this.currentSportId = currentSportId;
@@ -47,11 +48,15 @@ namespace LiveScore.Core.ViewModels
 
         public int LeagueOrder { get; }
 
+        public bool EnableTap { get; }
+
         public DelegateAsyncCommand TapLeagueCommand { get; }
 
         private async Task OnTapLeagueAsync()
         {
-            var parameters = new NavigationParameters
+            if (EnableTap)
+            {
+                var parameters = new NavigationParameters
             {
                 { "LeagueId", LeagueId },
                 { "LeagueSeasonId", Match.LeagueSeasonId },
@@ -60,9 +65,10 @@ namespace LiveScore.Core.ViewModels
                 { "CountryFlag", CountryFlag }
             };
 
-            await navigationService
-                .NavigateAsync("LeagueDetailView" + currentSportId, parameters)
-                .ConfigureAwait(false);
+                await navigationService
+                    .NavigateAsync("LeagueDetailView" + currentSportId, parameters)
+                    .ConfigureAwait(false);
+            }
         }
 
         public override bool Equals(object obj)

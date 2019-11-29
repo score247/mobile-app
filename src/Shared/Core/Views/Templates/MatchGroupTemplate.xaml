@@ -45,6 +45,7 @@
                 <Label x:Name="DetailIcon"
                        Grid.Row="0"
                        Grid.Column="3"
+                       IsVisible="{Binding Key.EnableTap}"
                        Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
