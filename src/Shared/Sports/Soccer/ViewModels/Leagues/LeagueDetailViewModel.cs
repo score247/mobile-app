@@ -45,8 +45,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag),
                 new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
-
-            LeagueDetailItemSources[SelectedIndex]?.OnAppearing();
         }
 
         public override Task OnNetworkReconnectedAsync() => LeagueDetailItemSources[SelectedIndex]?.OnNetworkReconnectedAsync();

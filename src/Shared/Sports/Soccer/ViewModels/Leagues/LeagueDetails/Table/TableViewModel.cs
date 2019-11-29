@@ -79,7 +79,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         {
             base.OnAppearing();
 
-            await LoadDataAsync(LoadLeagueTableAsync);
+            await Task.Run(() => LoadDataAsync(LoadLeagueTableAsync));
         }
 
         private async Task OnRefresh()
