@@ -165,14 +165,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
             // To hide No Data label
             HasData = true;
 
-            Device.BeginInvokeOnMainThread(() =>
+            if (!IsRefreshing)
             {
-                GroupedMatches?.Clear();
-            });
+                Device.BeginInvokeOnMainThread(() => GroupedMatches?.Clear());
+            }
 
             var matchList = await GetMatchesAsync(teamIdentifier);
 
-            if (matchList == null || !matchList.Any())
+            if (matchList?.Any() != true)
             {
                 HasData = false;
 
@@ -181,10 +181,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
 
             var matches = BuildMatchGroups(matchList);
 
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                GroupedMatches = new ObservableCollection<H2HMatchGroupViewModel>(matches);
-            });
+            Device.BeginInvokeOnMainThread(() => GroupedMatches = new ObservableCollection<H2HMatchGroupViewModel>(matches));
 
             HasData = true;
 
