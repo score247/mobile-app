@@ -35,10 +35,6 @@
                                Style="{StaticResource CenterActivityIndicator}"
                                VerticalOptions="Start" />
 
-            <Label Style="{StaticResource NoInfo}"
-                   Text="{languageResources:Translate NoData}"
-                   IsVisible="{Binding NoData}" />
-
             <tabStrip:TabItemListView x:Name="H2HMatches"
                                       IsGroupingEnabled="True"
                                       IsPullToRefreshEnabled="True"
@@ -51,7 +47,13 @@
                                       ItemsSource="{Binding GroupedMatches}"
                                       BackgroundColor="{StaticResource ListViewBgColor}">
                 <tabStrip:TabItemListView.Header>
-                    <collectionViewTemplates:H2HHeaderTemplate />
+                    <StackLayout>
+                        <Label Style="{StaticResource NoInfo}"
+                               Text="{languageResources:Translate NoData}"
+                               IsVisible="{Binding NoData}" />
+
+                        <collectionViewTemplates:H2HHeaderTemplate />
+                    </StackLayout>
                 </tabStrip:TabItemListView.Header>
             </tabStrip:TabItemListView>
         </StackLayout>

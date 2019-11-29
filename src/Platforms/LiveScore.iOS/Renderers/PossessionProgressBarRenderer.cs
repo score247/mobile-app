@@ -1,6 +1,6 @@
 ﻿using CoreGraphics;
-using LiveScore.Core.Controls.ProgressBars;
 using LiveScore.iOS.Renderers;
+using LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
@@ -10,7 +10,6 @@ namespace LiveScore.iOS.Renderers
 {
     public class PossessionProgressBarRenderer : ProgressBarRenderer
     {
-
         public override void LayoutSubviews()
         {
             base.LayoutSubviews();
@@ -20,6 +19,8 @@ namespace LiveScore.iOS.Renderers
 
             CGAffineTransform transform = CGAffineTransform.MakeScale(X, Y);
             Control.Transform = transform;
+            Control.ClipsToBounds = true;
+            Control.Layer.MasksToBounds = true;
         }
     }
 }

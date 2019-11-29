@@ -13,6 +13,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
+
     <Grid Style="{StaticResource MatchGeneralInfoTeams}"
           IsVisible="{Binding VisibleStats}">
         <Grid.Resources>

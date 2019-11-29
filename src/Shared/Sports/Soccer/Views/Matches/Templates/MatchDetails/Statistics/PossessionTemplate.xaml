@@ -3,8 +3,8 @@
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              xmlns:progressBars="clr-namespace:LiveScore.Core.Controls.ProgressBars;assembly=LiveScore.Core"
               xmlns:viewResources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
+              xmlns:progressBars="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Statistics"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.PossessionTemplate">
     <ViewCell>

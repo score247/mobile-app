@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace LiveScore.Core.Controls.ProgressBars
+namespace LiveScore.Soccer.Views.Templates.MatchDetails.Statistics
 {
     public class PossessionProgressBar : ProgressBar
     {

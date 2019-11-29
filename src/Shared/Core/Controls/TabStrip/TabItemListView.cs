@@ -24,13 +24,5 @@ namespace LiveScore.Core.Controls.TabStrip
                 TabItemScrollingEventArgs.EventName,
                 new TabItemScrollingEventArgs(e.ScrollY > 0 ? e.ScrollY : 0));
         }
-
-        public static void OnScrolling(double offset)
-        {
-            //MessagingCenter.Send(
-            //    nameof(TabStrip),
-            //    TabItemScrollingEventArgs.EventName,
-            //    new TabItemScrollingEventArgs(offset));
-        }
     }
 }

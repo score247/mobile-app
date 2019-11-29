@@ -321,7 +321,6 @@
     <BundleResource Include="..\..\CommonResources\Image\iOS\sport.gif">
       <Link>Resources\images\sport.gif</Link>
     </BundleResource>
-    <Compile Include="Renderers\TabItemListViewRenderer.cs" />
     <Compile Include="Renderers\TransparentWebViewRenderer.cs" />
     <Compile Include="Renderers\CircleProgressRenderer.cs" />
   </ItemGroup>

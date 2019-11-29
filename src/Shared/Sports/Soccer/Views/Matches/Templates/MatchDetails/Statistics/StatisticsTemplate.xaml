@@ -25,12 +25,14 @@
                                IsVisible="{Binding IsBusy}"
                                Style="{StaticResource CenterActivityIndicator}"
                                VerticalOptions="StartAndExpand" />
+
             <tabStrip:TabItemListView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
                                       ItemsSource="{Binding StatisticItems}"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
                                       IsPullToRefreshEnabled="True"
-                                      ItemTemplate="{StaticResource StatisticItemTemplateSelector}">
+                                      ItemTemplate="{StaticResource StatisticItemTemplateSelector}"
+                                      IsVisible="{Binding IsNotBusy}">
                 <tabStrip:TabItemListView.Header>
                     <StackLayout>
                         <Label Style="{StaticResource NoInfo}"
