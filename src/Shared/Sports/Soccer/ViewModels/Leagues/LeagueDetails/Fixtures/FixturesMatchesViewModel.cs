@@ -58,6 +58,14 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             await Task.Run(() => LoadDataAsync(LoadMatchesAsync).ConfigureAwait(false));
         }
 
+        public override void OnResumeWhenNetworkOK()
+        {
+            base.OnResumeWhenNetworkOK();
+
+            SubscribeEvents();
+            Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
+        }
+
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
             => leagueService.GetFixtures(currentLeagueId, currentLeagueGroupName, CurrentLanguage);
 
