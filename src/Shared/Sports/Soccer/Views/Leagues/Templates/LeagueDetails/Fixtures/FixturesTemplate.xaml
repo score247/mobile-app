@@ -9,7 +9,7 @@
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Fixtures.FixturesTemplate">
-    <StackLayout>
+    <StackLayout Padding="0,8,0,0">
         <StackLayout.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -36,7 +36,7 @@
             </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
             <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                 <DataTemplate>
-                    <StackLayout>
+                    <StackLayout Padding="0,8,0,0">
                         <coreTemplates:MatchSkeletonTemplate />
                         <coreTemplates:MatchSkeletonTemplate />
                         <coreTemplates:MatchSkeletonTemplate />

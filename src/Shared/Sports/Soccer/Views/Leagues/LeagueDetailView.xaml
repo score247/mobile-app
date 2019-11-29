@@ -11,7 +11,7 @@
              xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
              mc:Ignorable="d"
              x:Class="LiveScore.Soccer.Views.Leagues.LeagueDetailView"
-             BackgroundColor="{StaticResource SecondColor}">
+             BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}" />
@@ -35,7 +35,7 @@
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"
                                           StripeHeight="1"
-                                          BackgroundColor="#272830">
+                                          BackgroundColor="{StaticResource SubTabContainerBgColor}">
                 <cardViewControls:TabsControl.ItemTemplate>
                     <DataTemplate>
                         <StackLayout Style="{StaticResource LeagueDetailTab}">

@@ -34,7 +34,7 @@
         <Setter Property="FontSize"
                 Value="11" />
         <Setter Property="Margin"
-                Value="16,8" />
+                Value="16,0,16,8" />
         <Setter Property="BackgroundColor"
                 Value="#3A3942" />
         <Setter Property="TextColor"

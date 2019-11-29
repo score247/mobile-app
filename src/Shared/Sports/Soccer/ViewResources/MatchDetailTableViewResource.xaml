@@ -98,41 +98,6 @@
                 Value="{StaticResource FirstPositiveOutcomeColor}" />
     </Style>
 
-    <Style x:Key="MatchDetailTableOutComeSecondPositive"
-           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-           TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource SecondPositiveOutcomeColor}" />
-    </Style>
-
-    <Style x:Key="MatchDetailTableOutComeThirdPositive"
-           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-           TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource ThirdPositiveOutcomeColor}" />
-    </Style>
-
-    <Style x:Key="MatchDetailTableOutComeFourthPositive"
-           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-           TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource FourthPositiveOutcomeColor}" />
-    </Style>
-
-    <Style x:Key="MatchDetailTableOutComeFirstNegative"
-           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-           TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource FirstNegativeOutcomeColor}" />
-    </Style>
-
-    <Style x:Key="MatchDetailTableOutComeSecondNegative"
-           BasedOn="{StaticResource MatchDetailTableOutComeTeamOnLeague}"
-           TargetType="Frame">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource SecondNegativeOutcomeColor}" />
-    </Style>
-
     <Style x:Key="MatchDetailTableOrderTeamOnLeagueLayout"
            TargetType="StackLayout">
         <Setter Property="BackgroundColor"

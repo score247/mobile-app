@@ -10,7 +10,7 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableTemplate">
     <Grid BackgroundColor="{StaticResource ListViewBgColor}"
-                 VerticalOptions="FillAndExpand">
+                 VerticalOptions="FillAndExpand" Padding="0,8,0,0">
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
@@ -27,7 +27,7 @@
             VerticalOptions="Start"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
-                           Style="{StaticResource CenterActivityIndicator}"/>
+                           Style="{StaticResource CenterActivityIndicator}" />
 
         <RefreshView IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="White"
@@ -40,6 +40,7 @@
                                       Footer="{Binding .}"
                                       Header="{Binding .}"
                                       SeparatorVisibility="None"
+                                      SeparatorColor="Transparent"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
                                       IsPullToRefreshEnabled="True"
