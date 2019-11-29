@@ -11,15 +11,15 @@
         <Setter Property="TextColor"
                 Value="#A2A2A3" />
     </Style>
-    <Style x:Key="MatchDetailTableTwoTeamText"
+    <Style x:Key="MatchDetailTableHighLightRowText"
            BasedOn="{StaticResource TableText}"
            TargetType="Label">
         <Setter Property="Padding"
                 Value="2,0" />
     </Style>
 
-    <Style x:Key="MatchDetailTableTwoTeamAlignCenterText"
-           BasedOn="{StaticResource MatchDetailTableTwoTeamText}"
+    <Style x:Key="MatchDetailTableHighLightRowAlignCenterText"
+           BasedOn="{StaticResource MatchDetailTableHighLightRowText}"
            TargetType="Label">
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
@@ -54,7 +54,30 @@
         <Setter Property="Margin"
                 Value="0,0,0,8" />
     </Style>
+    <Style x:Key="MatchDetailTableHighLightColumn" TargetType="Frame">        
+        <Setter Property="BackgroundColor"
+                Value="#1F2022" />
+        <Setter Property="CornerRadius"
+                Value="0" />
+        <Setter Property="Margin"
+                Value="0" />
+    </Style>
 
+    <Style x:Key="MatchDetailTableHighLightColumnLabel" TargetType="Label">
+        <Setter Property="TextColor"
+                Value="#A2A2A3" />
+        <Setter Property="FontSize"
+                Value="{StaticResource TableRowFontSize}" />
+        <Setter Property="HorizontalTextAlignment"
+                Value="Center" />
+        <Setter Property="VerticalTextAlignment"
+                Value="Center" />
+    </Style>
+    <Style x:Key="MatchDetailTableHighLightColumnRowLabel" BasedOn="{StaticResource MatchDetailTableHighLightColumnLabel}" TargetType="Label">
+        <Setter Property="TextColor"
+                Value="#fff" />
+    </Style>
+    
     <Style x:Key="MatchDetailTableOutComeTeamOnLeague"
            TargetType="Frame">
         <Setter Property="HeightRequest"
@@ -64,7 +87,7 @@
         <Setter Property="BackgroundColor"
                 Value="{StaticResource TableBgColor}" />
         <Setter Property="CornerRadius"
-                Value="1" />
+                Value="0" />
         <Setter Property="Margin"
                 Value="0" />
     </Style>
@@ -122,8 +145,6 @@
                 Value="#fff" />
         <Setter Property="FontSize"
                 Value="10" />
-        <Setter Property="FontFamily"
-                Value="{StaticResource RobotoBold}" />
         <Setter Property="HorizontalTextAlignment"
                 Value="Center" />
         <Setter Property="VerticalTextAlignment"

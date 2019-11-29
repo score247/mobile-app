@@ -39,7 +39,6 @@
                                       FooterTemplate="{StaticResource TableFooterTemplate}"
                                       Footer="{Binding .}"
                                       Header="{Binding .}"
-                                      SeparatorColor="Transparent"
                                       SeparatorVisibility="None"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"

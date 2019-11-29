@@ -24,21 +24,21 @@
             <OnPlatform x:Key="RobotoRegular"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoRegular.ttf#Roboto Regular" />
+                    Value="fonts/Roboto-Regular.ttf#Roboto Regular" />
                 <On Platform="iOS"
                     Value="Roboto-Regular" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoMedium"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoMedium.ttf#Roboto Medium" />
+                    Value="fonts/Roboto-Medium.ttf#Roboto Medium" />
                 <On Platform="iOS"
                     Value="Roboto-Medium" />
             </OnPlatform>
             <OnPlatform x:Key="RobotoBold"
                         x:TypeArguments="x:String">
                 <On Platform="Android"
-                    Value="fonts/RobotoBold.ttf#Roboto Bold" />
+                    Value="fonts/Roboto-Bold.ttf#Roboto Bold" />
                 <On Platform="iOS"
                     Value="Roboto-Bold" />
             </OnPlatform>
@@ -138,7 +138,7 @@
             <!--  Table  -->
             <Color x:Key="TableBgColor">#161719</Color>
             <Color x:Key="TableHeaderBgColor">#272830</Color>
-            <Color x:Key="TableHeaderColor">#CBCBCB</Color>
+            <Color x:Key="TableHeaderColor">#F8F6EB</Color>
             <x:Double x:Key="TableHeaderFontSize">10</x:Double>
             <Color x:Key="TableOddRowBgColor">#06070A</Color>
             <Color x:Key="TableEvenRowBgColor">#131724</Color>

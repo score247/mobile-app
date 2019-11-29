@@ -48,38 +48,108 @@
                                      Binding="{Binding IsHightLight}"
                                      Value="True">
                             <Setter Property="Style"
-                                    Value="{StaticResource MatchDetailTableTwoTeamText}"></Setter>
+                                    Value="{StaticResource MatchDetailTableHighLightRowText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+
+                <Frame Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource MatchDetailTableHighLightColumn}">
+                    <Label 
+                       Style="{StaticResource MatchDetailTableHighLightColumnLabel}"      
+                       Text="{Binding Played}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                                <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightColumnRowLabel}"></Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Frame>                
+                <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource MatchDetailTableAlignCenterText}"
+                       Text="{Binding Win}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightRowAlignCenterText}"></Setter>
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
                 <Label Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding Played}" />
-                <Label Grid.Row="0"
-                       Grid.Column="3"
-                       Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding Win}" />
-                <Label Grid.Row="0"
                        Grid.Column="4"
                        Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding Loss}" />
+                       Text="{Binding Loss}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightRowAlignCenterText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
                 <Label Grid.Row="0"
                        Grid.Column="5"
                        Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding Draw}" />
+                       Text="{Binding Draw}" >
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightRowAlignCenterText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
                 <Label Grid.Row="0"
                        Grid.Column="6"
                        Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding GoalsFor}" />
+                       Text="{Binding GoalsFor}" >
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightRowAlignCenterText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
                 <Label Grid.Row="0"
                        Grid.Column="7"
                        Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding GoalsAgainst}" />
-                <Label Grid.Row="0"
+                       Text="{Binding GoalsAgainst}" >
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                            <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightRowAlignCenterText}"></Setter>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+                <Frame Grid.Row="0"
                        Grid.Column="8"
-                       Style="{StaticResource MatchDetailTableAlignCenterText}"
-                       Text="{Binding Points}" />
+                       Style="{StaticResource MatchDetailTableHighLightColumn}">
+                    <Label 
+                       Style="{StaticResource MatchDetailTableHighLightColumnLabel}"      
+                       Text="{Binding Points}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                     Binding="{Binding IsHightLight}"
+                                     Value="True">
+                                <Setter Property="Style"
+                                    Value="{StaticResource MatchDetailTableHighLightColumnRowLabel}"></Setter>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Frame>
             </Grid>
             <BoxView Style="{StaticResource TableLine}" />
         </StackLayout>
