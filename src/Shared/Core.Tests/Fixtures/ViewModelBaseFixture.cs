@@ -13,6 +13,7 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Logging;
 using Prism.Navigation;
+using System.Net;
 
 namespace LiveScore.Core.Tests.Fixtures
 {
@@ -56,6 +57,7 @@ namespace LiveScore.Core.Tests.Fixtures
         public FakeHubConnection() : base(
             Substitute.For<IConnectionFactory>(),
             Substitute.For<IHubProtocol>(),
+            Substitute.For<EndPoint>(),
             Substitute.For<IServiceProvider>(),
             Substitute.For<ILoggerFactory>())
         {

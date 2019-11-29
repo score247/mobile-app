@@ -39,13 +39,6 @@ namespace LiveScore.Common.Services
 
         [Time]
         public Task<T> Execute<T>(Func<Task<T>> func)
-        {
-            //if (networkConnectionManager.IsSuccessfulConnection())
-            //{
-                return func.Invoke();
-            //}
-
-            //return Task.FromResult(default(T));
-        }
+            => func.Invoke();
     }
 }

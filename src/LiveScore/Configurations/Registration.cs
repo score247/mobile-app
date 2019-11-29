@@ -126,15 +126,8 @@ namespace LiveScore.Configurations
                 BuiltinResolver.Instance,
                 PrimitiveObjectResolver.Instance);
 
-            containerRegistry.RegisterInstance<IHttpService>(
-                new HttpService(
-                    new Uri(Configuration.ApiEndPoint),
-                    container.Resolve<ILoggingService>(),
-                    container.Resolve<INetworkConnection>()));
-
             HttpClientRegistration.SetupHttpClient(Configuration.ApiEndPoint, container, containerRegistry);
-            //containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
-
+ 
             return containerRegistry;
         }
 

@@ -43,6 +43,7 @@ namespace LiveScore.Configurations
     public class RetryHandler : DelegatingHandler
     {
         private const byte retryCount = 5;
+        private const int retryIntervalMiliseconds = 75;
         private readonly ILoggingService loggingService;
         private readonly INetworkConnection networkConnection;
 
@@ -70,25 +71,6 @@ namespace LiveScore.Configurations
 
                 return new HttpResponseMessage(HttpStatusCode.InternalServerError);
             }
-
-            ////for (var i = 0; i < retryCount; i++)
-            ////{
-            ////    try
-            ////    {
-            ////        return await base.SendAsync(request, cancellationToken);
-            ////    }
-            ////    catch (HttpRequestException) when (i == retryCount - 1)
-            ////    {
-            ////        throw;
-            ////    }
-            ////    catch (HttpRequestException)
-            ////    {
-            ////        // Retry
-            ////        await Task.Delay(TimeSpan.FromMilliseconds(50));
-            ////    }
-            ////}
-
-            ////return new HttpResponseMessage(HttpStatusCode.InternalServerError);
         }
 
         private async Task<HttpResponseMessage> SendRequestAsync(HttpRequestMessage request, CancellationToken cancellationToken)
@@ -103,9 +85,9 @@ namespace LiveScore.Configurations
                     }
                     catch (Exception ex)
                     {
-                        await loggingService.TrackEventAsync("Retry Request", ex.ToString());
+                        await loggingService.TrackEventAsync($"Retry Request {retryTime} times", ex.ToString());
 
-                        await Task.Delay(TimeSpan.FromMilliseconds(50));
+                        await Task.Delay(TimeSpan.FromMilliseconds(retryIntervalMiliseconds));
                     }
                 }
             }
