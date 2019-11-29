@@ -16,6 +16,7 @@ namespace LiveScore.Common.Tests.Services
         private readonly Action<string, IDictionary<string, string>> trackEvent;
         private readonly Func<bool> isSentryEnable;
         private readonly Fixture fixture;
+        private readonly INetworkConnection networkConnection;
 
         public LoggingServiceTests()
         {
@@ -23,8 +24,10 @@ namespace LiveScore.Common.Tests.Services
 
             trackError = Substitute.For<Action<Exception, IDictionary<string, string>>>();
             trackEvent = Substitute.For<Action<string, IDictionary<string, string>>>();
+            networkConnection = Substitute.For<INetworkConnection>();
+            networkConnection.IsSuccessfulConnection().Returns(true);
             isSentryEnable = () => true;
-            loggingService = new LoggingService(trackError, trackEvent, isSentryEnable);
+            loggingService = new LoggingService(networkConnection, trackError, trackEvent, isSentryEnable);
         }
 
         [Fact]

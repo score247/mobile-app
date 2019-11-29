@@ -6,7 +6,7 @@ namespace LiveScore.Common.Helpers
 {
     public static class AsyncErrorHandler
     {
-        private static readonly ILoggingService loggingService = new LoggingService();
+        private static readonly ILoggingService loggingService = new LoggingService(new NetworkConnection(null));
 
         public static void HandleException(Exception exception)
         {

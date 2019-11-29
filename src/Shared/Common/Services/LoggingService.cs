@@ -38,12 +38,16 @@ namespace LiveScore.Common.Services
         private readonly string KeyEmpty = string.Empty;
         private readonly Action<Exception, IDictionary<string, string>> trackError;
         private readonly Action<string, IDictionary<string, string>> trackEvent;
+        private readonly INetworkConnection networkConnection;
 
         public LoggingService(
+            INetworkConnection networkConnection,
             Action<Exception, IDictionary<string, string>> trackError = null,
             Action<string, IDictionary<string, string>> trackEvent = null,
             Func<bool> isSentryEnable = null)
         {
+            this.networkConnection = networkConnection;
+
             if (isSentryEnable?.Invoke() == true || SentrySdk.IsEnabled)
             {
                 this.trackError = trackError ?? ((ex, properties) =>
@@ -72,7 +76,12 @@ namespace LiveScore.Common.Services
             => LogException(exception, new Dictionary<string, string> { [KeyEmpty] = message });
 
         public void LogException(Exception exception, IDictionary<string, string> properties)
-            => trackError(exception, properties);
+        {
+            if (networkConnection.IsSuccessfulConnection())
+            {
+                trackError(exception, properties);
+            }
+        }
 
         public Task LogExceptionAsync(Exception exception)
             => Task.Run(() => LogException(exception));
@@ -84,7 +93,12 @@ namespace LiveScore.Common.Services
             => Task.Run(() => LogException(exception, properties));
 
         public void TrackEvent(string trackIdentifier, IDictionary<string, string> properties)
-            => trackEvent(trackIdentifier, properties);
+        {
+            if (networkConnection.IsSuccessfulConnection())
+            {
+                trackEvent(trackIdentifier, properties);
+            }
+        }
 
         public void TrackEvent(string trackIdentifier, string message)
             => TrackEvent(trackIdentifier, new Dictionary<string, string> { [KeyEmpty] = message });

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Threading.Tasks;
 using MethodTimer;
 using Refit;
@@ -15,25 +16,21 @@ namespace LiveScore.Common.Services
 
     public class ApiService : IApiService
     {
-        private readonly IHttpService httpService;
+        private readonly IHttpClientFactory httpClientFactory;
         private readonly RefitSettings refitSettings;
 
-        private readonly INetworkConnection networkConnectionManager;
-
         public ApiService(
-            IHttpService httpService,
-            INetworkConnection networkConnectionManager,
+            IHttpClientFactory httpClientFactory,
             RefitSettings refitSettings)
         {
-            this.httpService = httpService;
-            this.networkConnectionManager = networkConnectionManager;
+            this.httpClientFactory = httpClientFactory;
             this.refitSettings = refitSettings;
         }
 
         // TODO: Need to make it be singleton instance
         public T GetApi<T>()
         {
-            var service = RestService.For<T>(httpService.HttpClient, refitSettings);
+            var service = RestService.For<T>(httpClientFactory.CreateClient(nameof(ApiService)), refitSettings);
 
             Debug.WriteLine(nameof(service) + typeof(T) + "service hashcode:" + service.GetHashCode());
 
@@ -43,12 +40,12 @@ namespace LiveScore.Common.Services
         [Time]
         public Task<T> Execute<T>(Func<Task<T>> func)
         {
-            if (networkConnectionManager.IsSuccessfulConnection())
-            {
+            //if (networkConnectionManager.IsSuccessfulConnection())
+            //{
                 return func.Invoke();
-            }
+            //}
 
-            return Task.FromResult(default(T));
+            //return Task.FromResult(default(T));
         }
     }
 }

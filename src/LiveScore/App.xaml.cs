@@ -93,7 +93,7 @@ namespace LiveScore
                 .UseContainerInstance(Container)
                 .UseConfiguration(new Configuration())
                 .UseSentry()
-                .RegisterServices()
+                .RegisterServices(Container)
                 .RegisterNavigation();
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)

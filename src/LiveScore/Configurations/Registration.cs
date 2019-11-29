@@ -72,7 +72,7 @@ namespace LiveScore.Configurations
             return containerRegistry;
         }
 
-        public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry)
+        public static IContainerRegistry RegisterServices(this IContainerRegistry containerRegistry, IContainerProvider container)
         {
             SetupServicePointManager();
 
@@ -83,7 +83,6 @@ namespace LiveScore.Configurations
 
             AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
 
-            containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
 
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
@@ -126,6 +125,15 @@ namespace LiveScore.Configurations
                 CoreModelResolver.Instance,
                 BuiltinResolver.Instance,
                 PrimitiveObjectResolver.Instance);
+
+            containerRegistry.RegisterInstance<IHttpService>(
+                new HttpService(
+                    new Uri(Configuration.ApiEndPoint),
+                    container.Resolve<ILoggingService>(),
+                    container.Resolve<INetworkConnection>()));
+
+            HttpClientRegistration.SetupHttpClient(Configuration.ApiEndPoint, container, containerRegistry);
+            //containerRegistry.RegisterInstance<IHttpService>(new HttpService(new Uri(Configuration.ApiEndPoint)));
 
             return containerRegistry;
         }

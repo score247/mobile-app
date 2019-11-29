@@ -22,14 +22,13 @@ namespace LiveScore.Core.Tests.Services
         public void GetApi_Always_GetFromRefitRestService()
         {
             // Arrange
-            var httpService = Substitute.For<IHttpService>();
-            var networkConnectionManager = Substitute.For<INetworkConnection>();
-            httpService.HttpClient.Returns(new HttpClient()
+            var httpService = Substitute.For<IHttpClientFactory>();
+            httpService.CreateClient(nameof(ApiService)).Returns(new HttpClient()
             {
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
 
-            var apiService = new ApiService(httpService, networkConnectionManager, new RefitSettings());
+            var apiService = new ApiService(httpService, new RefitSettings());
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act
