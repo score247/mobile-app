@@ -9,6 +9,11 @@ namespace LiveScore.Core.Controls.TabStrip
         public TabItemListView() : base(ListViewCachingStrategy.RecycleElement)
         {
             RefreshControlColor = Color.White;
+            HasUnevenRows = true;
+            SeparatorVisibility = SeparatorVisibility.None;
+            var footerTemplate = new StackLayout { BackgroundColor = Color.Transparent, HeightRequest = 150 };
+            footerTemplate.Children.Add(new Label { Text = " " });
+            Footer = footerTemplate;
             Scrolled += TabItemListView_Scrolled;
         }
 

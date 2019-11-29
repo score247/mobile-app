@@ -143,7 +143,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.HeadToHead
         {
             SelectedTeamIdentifier = teamIdentifier;
             VisibleHeadToHead = false;
-            Stats = null;
+            VisibleStats = false;
 
             return GetAndBindingMatchesAsync(teamIdentifier);
         }

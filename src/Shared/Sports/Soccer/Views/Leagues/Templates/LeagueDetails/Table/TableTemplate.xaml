@@ -22,9 +22,8 @@
                 <tableViews:TableHeaderTemplate  x:Key="TableHeaderTemplate" />
             </ResourceDictionary>
         </Grid.Resources>
-        <ActivityIndicator
-            Margin="40"
-            VerticalOptions="Start"
+        <ActivityIndicator Margin="40"
+                           VerticalOptions="Start"
                            IsRunning="{Binding IsBusy}"
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}" />

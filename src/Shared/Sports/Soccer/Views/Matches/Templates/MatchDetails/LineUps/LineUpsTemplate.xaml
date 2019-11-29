@@ -16,7 +16,7 @@
                     <resources:MatchDetailViewResource />
                     <resources:MatchDetailLinesUpViewResource />
                 </ResourceDictionary.MergedDictionaries>
-                <lineups:LineupsItemTemplateSelector x:Key="lineupsItemSelector" />
+                <lineups:LineupsItemTemplateSelector x:Key="LineupsItemTemplateSelector" />
             </ResourceDictionary>
         </StackLayout.Resources>
         <ActivityIndicator Margin="40"
@@ -24,48 +24,45 @@
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"
                            VerticalOptions="StartAndExpand" />
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     Command="{Binding RefreshCommand}"
-                     RefreshColor="White">
-            <CollectionView IsGrouped="True"
-                            BackgroundColor="{StaticResource ListViewBgColor}"
-                            ItemsSource="{Binding LineupsItemGroups}"
-                            ItemTemplate="{StaticResource lineupsItemSelector}"
-                            ItemSizingStrategy="MeasureFirstItem"
-                            IsVisible="{Binding IsNotBusy}"
-                            VerticalOptions="FillAndExpand"
-                            Scrolled="TabItemCollectionView_Scrolled"
-                            Header="{Binding .}">
-                <CollectionView.HeaderTemplate>
-                    <DataTemplate>
-                        <Grid IsVisible="{Binding IsNotBusy}">
-                            <StackLayout IsVisible="{Binding HasFormation}">
-                                <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
-                                            JustifyContent="SpaceBetween">
-                                    <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                           Text="{Binding LineupsPitch.HomeName}" />
-                                    <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
-                                           Text="{Binding LineupsPitch.HomeFormation}" />
-                                </FlexLayout>
-                                <WebView HeightRequest="{Binding LineupsPitch.PitchViewHeight}"
-                                         Source="{Binding LineupsPitch.LineupsPitchView}" />
-                                <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
-                                            JustifyContent="SpaceBetween">
-                                    <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                           Text="{Binding LineupsPitch.AwayName}" />
-                                    <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
-                                           Text="{Binding LineupsPitch.AwayFormation}" />
-                                </FlexLayout>
-                            </StackLayout>
-                            <Label Style="{StaticResource NoInfo}"
-                                   Text="{languageResources:Translate NoData}"
-                                   IsVisible="{Binding NoData}"
-                                   AutomationId="NoDataLabel" />
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.HeaderTemplate>
-                <CollectionView.GroupHeaderTemplate>
-                    <DataTemplate>
+        <tabStrip:TabItemListView IsPullToRefreshEnabled="True"
+                                  IsRefreshing="{Binding IsRefreshing}"
+                                  RefreshCommand="{Binding RefreshCommand}"
+                                  BackgroundColor="{StaticResource ListViewBgColor}"
+                                  ItemsSource="{Binding LineupsItemGroups}"
+                                  GroupDisplayBinding="{Binding Name}"
+                                  IsGroupingEnabled="True"
+                                  ItemTemplate="{StaticResource LineupsItemTemplateSelector}"
+                                  IsVisible="{Binding IsNotBusy}"
+                                  VerticalOptions="FillAndExpand">
+            <tabStrip:TabItemListView.Header>
+                <Grid IsVisible="{Binding IsNotBusy}">
+                    <StackLayout IsVisible="{Binding HasFormation}">
+                        <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                    JustifyContent="SpaceBetween">
+                            <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
+                                   Text="{Binding LineupsPitch.HomeName}" />
+                            <Label Style="{StaticResource MatchDetailLineUpsFormationHomeLabel}"
+                                   Text="{Binding LineupsPitch.HomeFormation}" />
+                        </FlexLayout>
+                        <WebView HeightRequest="{Binding LineupsPitch.PitchViewHeight}"
+                                 Source="{Binding LineupsPitch.LineupsPitchView}" />
+                        <FlexLayout Style="{StaticResource MatchDetailLineFormationUpLayout}"
+                                    JustifyContent="SpaceBetween">
+                            <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
+                                   Text="{Binding LineupsPitch.AwayName}" />
+                            <Label Style="{StaticResource MatchDetailLineUpsFormationAwayLabel}"
+                                   Text="{Binding LineupsPitch.AwayFormation}" />
+                        </FlexLayout>
+                    </StackLayout>
+                    <Label Style="{StaticResource NoInfo}"
+                           Text="{languageResources:Translate NoData}"
+                           IsVisible="{Binding NoData}"
+                           AutomationId="NoDataLabel" />
+                </Grid>
+            </tabStrip:TabItemListView.Header>
+            <tabStrip:TabItemListView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <StackLayout>
                             <BoxView Style="{StaticResource HorizontalLine}" />
                             <FlexLayout Style="{StaticResource Group}">
@@ -73,18 +70,13 @@
                                        Text="{Binding Name}" />
                             </FlexLayout>
                         </StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupHeaderTemplate>
-                <CollectionView.GroupFooterTemplate>
-                    <DataTemplate>
-                        <StackLayout></StackLayout>
-                    </DataTemplate>
-                </CollectionView.GroupFooterTemplate>
-                <CollectionView.Footer>
-                    <StackLayout BackgroundColor="Transparent"
-                                 HeightRequest="150"></StackLayout>
-                </CollectionView.Footer>
-            </CollectionView>
-        </RefreshView>
+                    </ViewCell>
+                </DataTemplate>
+            </tabStrip:TabItemListView.GroupHeaderTemplate>
+            <tabStrip:TabItemListView.Footer>
+                <StackLayout BackgroundColor="Transparent"
+                             HeightRequest="150"></StackLayout>
+            </tabStrip:TabItemListView.Footer>
+        </tabStrip:TabItemListView>
     </StackLayout>
 </DataTemplate>

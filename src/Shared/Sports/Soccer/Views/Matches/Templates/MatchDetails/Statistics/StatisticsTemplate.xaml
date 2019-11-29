@@ -17,7 +17,7 @@
                     <resources:MatchDetailStatisticViewResource />
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
-            <statistics:StatisticItemTemplateSelector x:Key="statisticItemTemplateSelector" />
+            <statistics:StatisticItemTemplateSelector x:Key="StatisticItemTemplateSelector" />
         </StackLayout.Resources>
         <StackLayout BackgroundColor="{StaticResource StatisticsBackgroundColor}">
             <ActivityIndicator Margin="40"
@@ -25,26 +25,20 @@
                                IsVisible="{Binding IsBusy}"
                                Style="{StaticResource CenterActivityIndicator}"
                                VerticalOptions="StartAndExpand" />
-            <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                         RefreshColor="White"
-                         Command="{Binding RefreshCommand}">
-                <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
-                                                ItemsSource="{Binding StatisticItems}"
-                                                ItemTemplate="{StaticResource statisticItemTemplateSelector}"
-                                                IsVisible="{Binding IsNotBusy}"
-                                                Header="{Binding NoData}"
-                                                ItemSizingStrategy="MeasureFirstItem">
-                    <CollectionView.HeaderTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoData}"
-                                       IsVisible="{Binding .}" />
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.HeaderTemplate>
-                </tabStrip:TabItemCollectionView>
-            </RefreshView>
+            <tabStrip:TabItemListView BackgroundColor="{StaticResource StatisticsBackgroundColor}"
+                                      ItemsSource="{Binding StatisticItems}"
+                                      IsRefreshing="{Binding IsRefreshing}"
+                                      RefreshCommand="{Binding RefreshCommand}"
+                                      IsPullToRefreshEnabled="True"
+                                      ItemTemplate="{StaticResource StatisticItemTemplateSelector}">
+                <tabStrip:TabItemListView.Header>
+                    <StackLayout>
+                        <Label Style="{StaticResource NoInfo}"
+                               Text="{langResources:Translate NoData}"
+                               IsVisible="{Binding NoData}" />
+                    </StackLayout>
+                </tabStrip:TabItemListView.Header>
+            </tabStrip:TabItemListView>
         </StackLayout>
     </StackLayout>
 </DataTemplate>

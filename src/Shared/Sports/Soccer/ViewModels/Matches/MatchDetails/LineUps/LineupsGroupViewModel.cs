@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
-    public class LineupsGroupViewModel : List<LineupsItemViewModel>
+    public class LineupsGroupViewModel : ObservableCollection<LineupsItemViewModel>
     {
         public LineupsGroupViewModel(string name, IEnumerable<LineupsItemViewModel> lineupsItems)
             : base(lineupsItems)

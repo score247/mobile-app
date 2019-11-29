@@ -22,60 +22,59 @@
                            IsVisible="{Binding IsBusy}"
                            Style="{StaticResource CenterActivityIndicator}"
                            VerticalOptions="StartAndExpand" />
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     RefreshColor="White"
-                     Command="{Binding RefreshCommand}">
-            <tabStrip:TabItemCollectionView BackgroundColor="{StaticResource ListViewBgColor}"
-                                            ItemsSource="{Binding MatchCommentaries}"
-                                            ItemSizingStrategy="MeasureAllItems"
-                                            IsVisible="{Binding IsNotBusy}">
-                <tabStrip:TabItemCollectionView.Header>
-                    <StackLayout>
-                        <Label Style="{StaticResource NoInfo}"
-                               IsVisible="{Binding NoData}"
-                               Text="There is no data" />
-                        <Grid IsVisible="{Binding HasTrackerData}">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto" />
-                            </Grid.RowDefinitions>
-                            <FlexLayout Grid.Column="0"
-                                        Grid.Row="0"
-                                        IsVisible="{Binding TrackerVisible}">
-                                <WebView Source="{Binding WidgetContent}"
-                                         Style="{StaticResource MatchBallTrackerWebView}" />
-                            </FlexLayout>
-                            <Button  Grid.Column="0"
-                                     Grid.Row="0"
-                                     IsVisible="{Binding TrackerVisible}"
-                                     Style="{StaticResource MatchBallTrackerCollapseIcon}"
-                                     Command="{Binding OnCollapseTracker}" />
-                        </Grid>
-                        <FlexLayout Style="{StaticResource MatchBallTrackerGroup}"
-                                    IsVisible="{Binding TrackerHidden}">
-                            <Label Text="VIEW BALL TRACKER"
-                                   Style="{StaticResource GroupName}" />
-                            <Button Style="{StaticResource MatchBallTrackerExpandIcon}"
-                                    Command="{Binding OnExpandTracker}" />
-                            <FlexLayout.GestureRecognizers>
-                                <TapGestureRecognizer  Command="{Binding OnExpandTracker}" />
-                            </FlexLayout.GestureRecognizers>
+        <tabStrip:TabItemListView BackgroundColor="{StaticResource ListViewBgColor}"
+                                  ItemsSource="{Binding MatchCommentaries}"
+                                  IsRefreshing="{Binding IsRefreshing}"
+                                  RefreshCommand="{Binding RefreshCommand}"
+                                  IsPullToRefreshEnabled="True"
+                                  IsVisible="{Binding IsNotBusy}">
+            <tabStrip:TabItemListView.Header>
+                <StackLayout>
+                    <Label Style="{StaticResource NoInfo}"
+                           IsVisible="{Binding NoData}"
+                           Text="There is no data" />
+                    <Grid IsVisible="{Binding HasTrackerData}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                        </Grid.RowDefinitions>
+                        <FlexLayout Grid.Column="0"
+                                    Grid.Row="0"
+                                    IsVisible="{Binding TrackerVisible}">
+                            <WebView Source="{Binding WidgetContent}"
+                                     Style="{StaticResource MatchBallTrackerWebView}" />
                         </FlexLayout>
-                        <BoxView Style="{StaticResource HorizontalLine}"
-                                 IsVisible="{Binding TrackerHidden}" />
-                        <FlexLayout Style="{StaticResource Group}"
-                                    IsVisible="{Binding HasCommentariesData}">
-                            <Label Style="{StaticResource GroupName}"
-                                   Text="COMMENTARIES" />
-                        </FlexLayout>
-                    </StackLayout>
-                </tabStrip:TabItemCollectionView.Header>
-                <tabStrip:TabItemCollectionView.ItemTemplate>
-                    <DataTemplate>
+                        <Button  Grid.Column="0"
+                                 Grid.Row="0"
+                                 IsVisible="{Binding TrackerVisible}"
+                                 Style="{StaticResource MatchBallTrackerCollapseIcon}"
+                                 Command="{Binding OnCollapseTracker}" />
+                    </Grid>
+                    <FlexLayout Style="{StaticResource MatchBallTrackerGroup}"
+                                IsVisible="{Binding TrackerHidden}">
+                        <Label Text="VIEW BALL TRACKER"
+                               Style="{StaticResource GroupName}" />
+                        <Button Style="{StaticResource MatchBallTrackerExpandIcon}"
+                                Command="{Binding OnExpandTracker}" />
+                        <FlexLayout.GestureRecognizers>
+                            <TapGestureRecognizer  Command="{Binding OnExpandTracker}" />
+                        </FlexLayout.GestureRecognizers>
+                    </FlexLayout>
+                    <BoxView Style="{StaticResource HorizontalLine}"
+                             IsVisible="{Binding TrackerHidden}" />
+                    <FlexLayout Style="{StaticResource Group}"
+                                IsVisible="{Binding HasCommentariesData}">
+                        <Label Style="{StaticResource GroupName}"
+                               Text="COMMENTARIES" />
+                    </FlexLayout>
+                </StackLayout>
+            </tabStrip:TabItemListView.Header>
+            <tabStrip:TabItemListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
                         <StackLayout>
-                            <BoxView Style="{StaticResource HorizontalLine}" />
                             <Grid Style="{StaticResource MatchTrackerCommentariesRow}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="{StaticResource CommentaryMinuteWidthSize}" />
@@ -102,18 +101,19 @@
                                        TextColor="{Binding CommentaryTextColor, Mode=OneTime}"
                                        Text="{Binding CommentaryText}" />
                             </Grid>
+                            <BoxView Style="{StaticResource HorizontalLine}" />
                         </StackLayout>
-                    </DataTemplate>
-                </tabStrip:TabItemCollectionView.ItemTemplate>
-                <tabStrip:TabItemCollectionView.Footer>
-                    <StackLayout Style="{StaticResource MatchTrackerShowMoreButtonLayout}">
-                        <Button Text="{Binding ShowLessMoreButtonText}"
-                                IsVisible="{Binding VisibleShowMore}"
-                                Style="{StaticResource MatchTrackerShowMoreButton}"
-                                Command="{Binding ShowMoreCommentariesCommand}" />
-                    </StackLayout>
-                </tabStrip:TabItemCollectionView.Footer>
-            </tabStrip:TabItemCollectionView>
-        </RefreshView>
+                    </ViewCell>
+                </DataTemplate>
+            </tabStrip:TabItemListView.ItemTemplate>
+            <tabStrip:TabItemListView.Footer>
+                <StackLayout Style="{StaticResource MatchTrackerShowMoreButtonLayout}">
+                    <Button Text="{Binding ShowLessMoreButtonText}"
+                            IsVisible="{Binding VisibleShowMore}"
+                            Style="{StaticResource MatchTrackerShowMoreButton}"
+                            Command="{Binding ShowMoreCommentariesCommand}" />
+                </StackLayout>
+            </tabStrip:TabItemListView.Footer>
+        </tabStrip:TabItemListView>
     </StackLayout>
 </DataTemplate>

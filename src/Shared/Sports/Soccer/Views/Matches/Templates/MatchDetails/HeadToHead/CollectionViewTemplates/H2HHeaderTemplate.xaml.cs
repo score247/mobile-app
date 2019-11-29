@@ -2,7 +2,7 @@
 
 namespace LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates
 {
-    public partial class H2HHeaderTemplate : DataTemplate
+    public partial class H2HHeaderTemplate : ContentView
     {
         public H2HHeaderTemplate()
         {
