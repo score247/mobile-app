@@ -6,6 +6,7 @@
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
+              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Fixtures.FixturesTemplate">
     <StackLayout>
@@ -22,8 +23,12 @@
         <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
             <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                 <DataTemplate>
-                    <StackLayout  IsVisible="{Binding ShowLoadResultsButton}">
+                    <StackLayout>
+                        <Label Style="{StaticResource NoInfo}"
+                               Text="{langResources:Translate NoData}"
+                               IsVisible="{Binding NoData}" />
                         <Button Text="ALL RESULT"
+                                IsVisible="{Binding ShowLoadResultsButton}"
                                 Style="{StaticResource LeagueDetailButton}"
                                 Command="{Binding LoadResultMatchesCommand}" />
                     </StackLayout>

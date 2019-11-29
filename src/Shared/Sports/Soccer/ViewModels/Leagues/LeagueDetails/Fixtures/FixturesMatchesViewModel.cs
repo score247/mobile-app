@@ -64,6 +64,12 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         {
             (var resultMatches, var fixtureMatches) = GetResultsAndFixtures(matches);
 
+            if (resultMatches?.Any() != true && fixtureMatches?.Any() != true)
+            {
+                HasData = false;
+                return;
+            }
+
             fixtureMatches = GenerateLoadedFixtures(fixtureMatches, ShowLoadFixturesButton || FirstLoad);
 
             var loadedItemCount = DefaultLoadedMatchItemCount - fixtureMatches.Count();

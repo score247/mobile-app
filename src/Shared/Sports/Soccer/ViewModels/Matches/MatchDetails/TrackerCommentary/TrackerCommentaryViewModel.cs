@@ -18,6 +18,7 @@ using Prism.Navigation;
 using Xamarin.Forms;
 
 [assembly: InternalsVisibleTo("Soccer.Tests")]
+
 namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
 {
     public class TrackerCommentaryViewModel : TabItemViewModel
@@ -175,7 +176,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                         .Select(c => new CommentaryItemViewModel(c, DependencyResolver));
                     DefaultMatchCommentaries = FullMatchCommentaries.Take(DefaultLoadingCommentaryItemCount);
 
-                    MatchCommentaries = new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries);
+                    MatchCommentaries = IsShowMore
+                        ? new ObservableCollection<CommentaryItemViewModel>(DefaultMatchCommentaries)
+                        : new ObservableCollection<CommentaryItemViewModel>(FullMatchCommentaries);
 
                     HasCommentariesData = true;
                     VisibleShowMore = FullMatchCommentaries.Count() > DefaultLoadingCommentaryItemCount;
