@@ -17,9 +17,9 @@
                                                CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+        <ToolbarItem IconImageSource="images/common/favorite_header_bar.png"
                      Priority="1"
-                     Text="Search" />
+                     Text="Favorite" />
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -872,5 +872,20 @@
       <Link>Resources\images\common\own_goal_substitution.svg</Link>
     </BundleResource>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_header_bar.png">
+      <Link>Resources\images\common\favorite_header_bar.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_header_bar%402x.png">
+      <Link>Resources\images\common\favorite_header_bar%402x.png</Link>
+    </BundleResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="..\..\CommonResources\Image\iOS\common\favorite_header_bar%403x.png">
+      <Link>Resources\images\common\favorite_header_bar%403x.png</Link>
+    </BundleResource>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
