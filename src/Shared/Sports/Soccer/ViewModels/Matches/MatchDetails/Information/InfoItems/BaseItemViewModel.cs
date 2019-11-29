@@ -108,9 +108,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems
                 RowColor = (Color)Application.Current.Resources["ListViewBgColor"];
             }
 
-            MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
-                ? $"{TimelineEvent.MatchTime}'"
-                : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}'";
+            if (TimelineEvent.MatchTime != 0)
+            {
+                MatchTime = string.IsNullOrEmpty(TimelineEvent.StoppageTime)
+                    ? $"{TimelineEvent.MatchTime}'"
+                    : $"{TimelineEvent.MatchTime}+{TimelineEvent.StoppageTime}'";
+            }
 
             return this;
         }
