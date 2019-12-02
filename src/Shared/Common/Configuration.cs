@@ -1,4 +1,4 @@
-﻿namespace LiveScore.Core
+﻿namespace LiveScore.Common
 {
     public interface IConfiguration
     {
@@ -15,5 +15,7 @@
         string Enviroment { get; }
 
         bool Debug { get; }
+
+        string EncryptKey { get; }
     }
 }

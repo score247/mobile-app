@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using AutoFixture;
 using LiveScore.Common.Services;
 using NSubstitute;
+using Refit;
 using Xunit;
 
 namespace LiveScore.Common.Tests.Services
@@ -200,6 +203,32 @@ namespace LiveScore.Common.Tests.Services
             trackEvent
                 .Received()
                 .Invoke(trackIndentifier, properties);
+        }
+
+        [Fact]
+        public async Task LogExceptionAsync_ExceptionIsApiException_InvokeTrackErrorWithApiInformation()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var exception = await ApiException.Create(
+                                new HttpRequestMessage { 
+                                    RequestUri = new Uri("http://demo.com")
+                                },
+                                HttpMethod.Get,
+                                new HttpResponseMessage(HttpStatusCode.InternalServerError));
+
+            // Act
+            await loggingService.LogExceptionAsync(exception, properties);
+
+            // Assert
+            trackError
+                .Received()
+                .Invoke(exception, Arg.Is<Dictionary<string,string>>(
+                        properties => properties.ContainsKey("Api Exception") 
+                                        && properties["Api Exception"] == string.Join("\r\n", 
+                                                                                "Request URL: http://demo.com/",
+                                                                                "Response: ",
+                                                                                "Reason Phrase: Internal Server Error")));
         }
     }
 }

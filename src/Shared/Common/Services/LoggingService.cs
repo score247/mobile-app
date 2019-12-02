@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using Refit;
 using Sentry;
 using Sentry.Protocol;
 using Xamarin.Essentials;
@@ -79,7 +80,25 @@ namespace LiveScore.Common.Services
         {
             if (networkConnection.IsSuccessfulConnection())
             {
-                trackError(exception, properties);
+                if (exception is ApiException apiException)
+                {
+                    var apiInformation = string.Join(
+                        "\r\n",
+                        $"Request URL: {apiException?.Uri}",
+                        $"Response: {apiException?.Content}",
+                        $"Reason Phrase: {apiException?.ReasonPhrase}");
+
+                    if(properties != null)
+                    {
+                        properties.Add("Api Exception", apiInformation);
+                    }
+
+                    trackError(apiException, properties);
+                }
+                else
+                {
+                    trackError(exception, properties);
+                }
             }
         }
 
@@ -147,9 +166,14 @@ namespace LiveScore.Common.Services
 
         private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties, bool isErrorEvent = true)
         {
-            properties.Add("message", message);
-
-            var logMessage = string.Join(Console.Out.NewLine, properties.Select(kv => $"{kv.Key}:{kv.Value}").ToArray());
+            var logMessage = 
+                $"message: {message}{Console.Out.NewLine}" 
+                + string.Join(
+                    Console.Out.NewLine, 
+                    properties.Select(kv => 
+                        string.IsNullOrWhiteSpace(kv.Key) 
+                            ? kv.Value 
+                            : $"{kv.Key}:{kv.Value}").ToArray());
 
             return DecorateSentryEvent(() => new SentryEvent { Message = logMessage }, isErrorEvent);
         }

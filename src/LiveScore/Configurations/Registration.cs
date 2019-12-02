@@ -100,6 +100,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
             containerRegistry.RegisterSingleton<ISettings, Settings>();
+            containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
 
             containerRegistry.RegisterInstance(new RefitSettings
             {
@@ -126,7 +127,7 @@ namespace LiveScore.Configurations
                 BuiltinResolver.Instance,
                 PrimitiveObjectResolver.Instance);
 
-            HttpClientRegistration.SetupHttpClient(Configuration.ApiEndPoint, container, containerRegistry);
+            HttpClientManager.SetupHttpClient(Configuration.ApiEndPoint, container, containerRegistry);
 
             return containerRegistry;
         }

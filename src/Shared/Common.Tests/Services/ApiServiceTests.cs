@@ -3,6 +3,8 @@ namespace LiveScore.Core.Tests.Services
     using System;
     using System.Net.Http;
     using System.Threading.Tasks;
+    using LiveScore.Common;
+    using LiveScore.Common.Helpers;
     using LiveScore.Common.Services;
     using NSubstitute;
     using Refit;
@@ -28,7 +30,14 @@ namespace LiveScore.Core.Tests.Services
                 BaseAddress = new Uri("https://score247-api1.nexdev.net/dev/api")
             });
 
-            var apiService = new ApiService(httpService, new RefitSettings());
+            var apiService = new ApiService(
+                httpService,
+                new RefitSettings(),
+                Substitute.For<ICacheManager>(),
+                Substitute.For<ILoggingService>(),
+                Substitute.For<IDeviceInfo>(),
+                Substitute.For<ICryptographyHelper>(),
+                Substitute.For<IConfiguration>());
             var mockApi = apiService.GetApi<IMockApi>();
 
             // Act

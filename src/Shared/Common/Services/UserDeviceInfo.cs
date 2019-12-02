@@ -4,6 +4,8 @@ namespace LiveScore.Common.Services
 {
     public interface IDeviceInfo
     {
+        string Id { get; }
+
         double Width { get; }
 
         double Height { get; }
@@ -18,5 +20,7 @@ namespace LiveScore.Common.Services
         public double Height => DeviceDisplay.MainDisplayInfo.Height;
 
         public double Density => DeviceDisplay.MainDisplayInfo.Density;
+
+        public string Id => $"{DeviceInfo.Name}-{DeviceInfo.Model}-{DeviceInfo.DeviceType}"; 
     }
 }
