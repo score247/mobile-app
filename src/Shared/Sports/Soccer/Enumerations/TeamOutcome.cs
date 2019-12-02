@@ -24,7 +24,7 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly TeamOutcome ClubChampionship = new TeamOutcome(8, "club championship", "Club Championship", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome CopaLibertadores = new TeamOutcome(9, "copa libertadores", "Copa Libertadores", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome CopaLibertadoresQualification = new TeamOutcome(10, "copa libertadores qualification", "Copa Libertadores Qualification", SecondPositiveOutcomeColor);
-        public static readonly TeamOutcome CopaSudamericana = new TeamOutcome(11, "copa sudamericana", "Copa Sudamericana", FirstPositiveOutcomeColor);
+        public static readonly TeamOutcome CopaSudamericana = new TeamOutcome(11, "copa sudamericana", "Copa Sudamericana", ThirdPositiveOutcomeColor);
         public static readonly TeamOutcome CupWinners = new TeamOutcome(12, "cup winners", "Cup Winners", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome Eliminated = new TeamOutcome(13, "eliminated", "Eliminated", FirstNegativeOutcomeColor);
         public static readonly TeamOutcome EuropaLeague = new TeamOutcome(14, "europa league", "Europa League", ThirdPositiveOutcomeColor);
