@@ -24,16 +24,16 @@ namespace LiveScore.Soccer.Models.Leagues
         }
 
         [Key(0)]
-        public string Id { get; }
+        public string Id { get; private set; }
 
         [Key(1)]
-        public string Name { get; }
+        public string Name { get; private set; }
 
         [Key(2)]
-        public IEnumerable<LeagueGroupNote> GroupNotes { get; }
+        public IEnumerable<LeagueGroupNote> GroupNotes { get; private set; }
 
         [Key(3)]
-        public IEnumerable<TeamStanding> TeamStandings { get; }
+        public IEnumerable<TeamStanding> TeamStandings { get; private set; }
 
         [Key(4)]
         public IEnumerable<TeamOutcome> OutcomeList { get; private set; }

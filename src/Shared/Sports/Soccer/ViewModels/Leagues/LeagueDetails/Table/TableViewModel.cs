@@ -79,7 +79,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         {
             base.OnAppearing();
 
-            await Task.Run(() => LoadDataAsync(LoadLeagueTableAsync));
+            await LoadDataAsync(LoadLeagueTableAsync);
         }
 
         private async Task OnRefresh()
@@ -90,7 +90,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
 #pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
-        private async Task LoadLeagueTableAsync()
+        internal async Task LoadLeagueTableAsync()
         {
             var leagueTable = await leagueService.GetTable(
                 currentLeagueId,
@@ -107,7 +107,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             var table = leagueTable.GroupTables.FirstOrDefault();
             BuildTeamStandings(table);
             BuildOutcomes(table);
-            GroupNotesItemSource = table.GroupNotes.ToList();
+            GroupNotesItemSource = table.GroupNotes?.ToList();
 
             HasData = true;
         }
@@ -123,7 +123,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
                     teamStanding.IsHightLight = true;
                 }
 
-                teamStanding.Outcome.Color = Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).Color;
+                teamStanding.Outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(teamStanding.Outcome.Value).ColorResourceKey;
             }
 
             TeamStandingsItemSource = teamStandings.ToList();
@@ -131,9 +131,14 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         private void BuildOutcomes(LeagueGroupTable table)
         {
+            if (table.OutcomeList == null)
+            {
+                return;
+            }
+
             foreach (var outcome in table.OutcomeList)
             {
-                outcome.Color = Enumeration.FromValue<TeamOutcome>(outcome.Value).Color;
+                outcome.ColorResourceKey = Enumeration.FromValue<TeamOutcome>(outcome.Value).ColorResourceKey;
             }
 
             OutcomesItemSource = table.OutcomeList.ToList();

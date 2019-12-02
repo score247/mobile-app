@@ -12,7 +12,7 @@ namespace LiveScore.Common.Converters
         {
             if (GetResource == null)
             {
-                this.GetResourceValue = (resourceKey) => (TTarget)Application.Current.Resources[resourceKey];
+                GetResourceValue = (resourceKey) => (TTarget)Application.Current.Resources[resourceKey];
             }
         }
 

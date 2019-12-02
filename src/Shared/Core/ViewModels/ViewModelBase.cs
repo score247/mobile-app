@@ -129,7 +129,7 @@ namespace LiveScore.Core.ViewModels
                      EventAggregator?.GetEvent<StartLoadDataEvent>()?.Publish();
                      IsBusy = showBusy;
 
-                     await loadDataFunc().ConfigureAwait(false);
+                     await loadDataFunc();
 
                      EventAggregator?.GetEvent<StopLoadDataEvent>()?.Publish();
                      IsBusy = false;

@@ -25,7 +25,7 @@ namespace LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table
             set => SetValue(OutcomesProperty, value);
         }
 
-        private static void OnOutcomesPropertyChange(BindableObject bindable, object oldValue, object newValue)
+        internal static void OnOutcomesPropertyChange(BindableObject bindable, object oldValue, object newValue)
         {
             if (!(bindable is TableOutcomesTemplate control) || newValue == null || newValue == oldValue)
             {
@@ -43,7 +43,7 @@ namespace LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table
             foreach (var outcome in outcomes)
             {
                 var colorFrame = new Frame { Style = (Style)control.Resources["MatchDetailTableOutComeTeamOnLeague"] };
-                colorFrame.BackgroundColor = outcome.Color;
+                colorFrame.BackgroundColor = (Color)Application.Current.Resources[outcome.ColorResourceKey];
 
                 var outcomeLabel = new Label
                 {

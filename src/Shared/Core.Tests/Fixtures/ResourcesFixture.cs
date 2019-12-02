@@ -16,6 +16,7 @@
             app.Resources["UppercaseTextFontSize"] = 10;
             app.Resources["SmalleastTextFontSize"] = 10;
             app.Resources["TabFontSize"] = 10;
+            app.Resources["TableRowFontSize"] = 10;
 
             app.Resources["FunctionGroupHeight"] = 10;
             app.Resources["TabsHeight"] = 12;
@@ -44,6 +45,9 @@
             app.Resources["ActiveSubTabColor"] = Color.FromHex("#3EC28F");
             app.Resources["UpLiveOddColor"] = Color.FromHex("#FF222C");
             app.Resources["DownLiveOddColor"] = Color.FromHex("#66FF59");
+            app.Resources["TableBgColor"] = Color.FromHex("#66FF59");
+            app.Resources["FirstPositive"] = Color.FromHex("#66FF59");
+            app.Resources["FirstPositiveOutcomeColor"] = Color.FromHex("#66FF59");
             app.Resources["Icons"] = new Style(typeof(Label));
             app.Resources["LiveIcon"] = new Style(typeof(Label));
             app.Resources["DropdownIcon"] = new Style(typeof(Label));
@@ -51,6 +55,7 @@
             app.Resources["TableText"] = new Style(typeof(Label));
             app.Resources["TableHeaderText"] = new Style(typeof(Label));
             app.Resources["RobotoMedium"] = new Style(typeof(Label));
+            app.Resources["RobotoLight"] = new Style(typeof(Label));
 
             app.Resources["FlexLayoutHorizontalCenter"] = new Style(typeof(FlexLayout));
             app.Resources["FlexLayoutAlignLeft"] = new Style(typeof(FlexLayout));

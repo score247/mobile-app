@@ -25,7 +25,7 @@ namespace LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table
             set => SetValue(NotesProperty, value);
         }
 
-        private static void OnNotesPropertyChange(BindableObject bindable, object oldValue, object newValue)
+        internal static void OnNotesPropertyChange(BindableObject bindable, object oldValue, object newValue)
         {
             if (!(bindable is TableNotesTemplate control) || newValue == null || newValue == oldValue)
             {

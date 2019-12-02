@@ -33,6 +33,8 @@ namespace LiveScore.Core.Tests.Fixtures
             NavigationService = new FakeNavigationService();
             HubService = Substitute.For<IHubService>();
             HubConnection = Substitute.For<FakeHubConnection>();
+            NetworkConnection = Substitute.For<INetworkConnection>();
+            DependencyResolver.Resolve<INetworkConnection>().Returns(NetworkConnection);
         }
 
         public IDependencyResolver DependencyResolver { get; }
@@ -50,6 +52,8 @@ namespace LiveScore.Core.Tests.Fixtures
         public IHubService HubService { get; set; }
 
         public FakeHubConnection HubConnection { get; set; }
+
+        public INetworkConnection NetworkConnection { get; set; }
     }
 
     public class FakeHubConnection : HubConnection

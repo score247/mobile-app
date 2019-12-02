@@ -40,7 +40,7 @@ namespace LiveScore.Soccer.Models.Teams
         }
 
         [Key(0)]
-        public string Id { get; }
+        public string Id { get; private set; }
 
         [Key(1)]
         public string Name { get; }
@@ -48,10 +48,10 @@ namespace LiveScore.Soccer.Models.Teams
 #pragma warning disable S109 // Magic numbers should not be used
 
         [Key(2)]
-        public int Rank { get; }
+        public int Rank { get; private set; }
 
         [Key(3)]
-        public TeamOutcome Outcome { get; }
+        public TeamOutcome Outcome { get; private set; }
 
         [Key(4)]
         public int Played { get; }

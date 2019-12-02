@@ -66,7 +66,7 @@ namespace LiveScore.Soccer.Enumerations
             : base(value, displayName)
         {
             FriendlyName = friendlyName;
-            Color = (Color)Application.Current.Resources[colorResourceKey];
+            ColorResourceKey = colorResourceKey;
         }
 
 #pragma warning disable S109 // Magic numbers should not be used
@@ -75,7 +75,7 @@ namespace LiveScore.Soccer.Enumerations
         public string FriendlyName { get; set; }
 
         [IgnoreMember]
-        public Color Color { get; set; }
+        public string ColorResourceKey { get; set; }
 
         public bool IsUnknown() => this == Unknown;
 
