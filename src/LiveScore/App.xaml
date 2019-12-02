@@ -171,10 +171,10 @@
             <x:Double x:Key="LineupIconWidthSize">57</x:Double>
 
             <!--  Team rank in the TABLE tab  -->
-            <Color x:Key="FirstPositiveOutcomeColor">#00F361</Color>
-            <Color x:Key="SecondPositiveOutcomeColor">#0DD8F3</Color>
-            <Color x:Key="ThirdPositiveOutcomeColor">#07BDAA</Color>
-            <Color x:Key="FourthPositiveOutcomeColor">#2170F5</Color>
+            <Color x:Key="FirstPositiveOutcomeColor">#007E34</Color>
+            <Color x:Key="SecondPositiveOutcomeColor">#0099CB</Color>
+            <Color x:Key="ThirdPositiveOutcomeColor">#2ABBAC</Color>
+            <Color x:Key="FourthPositiveOutcomeColor">#0E47A1</Color>
             <Color x:Key="FirstNegativeOutcomeColor">#E30000</Color>
             <Color x:Key="SecondNegativeOutcomeColor">#E77676</Color>
 
