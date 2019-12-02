@@ -1,6 +1,5 @@
 ﻿using LiveScore.Core.Enumerations;
 using MessagePack;
-using Xamarin.Forms;
 
 namespace LiveScore.Soccer.Enumerations
 {

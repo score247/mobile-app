@@ -1,6 +1,7 @@
-﻿using LiveScore.Common.Services;
-using System;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using LiveScore.Common.Services;
 using LiveScore.Core.Services;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
@@ -13,7 +14,6 @@ using Prism.Events;
 using Prism.Ioc;
 using Prism.Logging;
 using Prism.Navigation;
-using System.Net;
 
 namespace LiveScore.Core.Tests.Fixtures
 {

@@ -7,7 +7,6 @@ using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using LiveScore.Soccer.Models.Matches;
 using static LiveScore.Soccer.Services.SoccerApi;
 
 namespace LiveScore.Soccer.Services

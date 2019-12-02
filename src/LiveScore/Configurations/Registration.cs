@@ -127,7 +127,7 @@ namespace LiveScore.Configurations
                 PrimitiveObjectResolver.Instance);
 
             HttpClientRegistration.SetupHttpClient(Configuration.ApiEndPoint, container, containerRegistry);
- 
+
             return containerRegistry;
         }
 

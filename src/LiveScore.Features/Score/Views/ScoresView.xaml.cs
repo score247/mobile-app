@@ -1,6 +1,6 @@
-﻿using LiveScore.Common.Helpers;
+﻿using System.Diagnostics;
+using LiveScore.Common.Helpers;
 using LiveScore.Features.Score.ViewModels;
-using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

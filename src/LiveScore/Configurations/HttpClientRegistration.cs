@@ -56,7 +56,7 @@ namespace LiveScore.Configurations
         }
 
         protected override async Task<HttpResponseMessage> SendAsync(
-            HttpRequestMessage request, 
+            HttpRequestMessage request,
             CancellationToken cancellationToken)
         {
             try
