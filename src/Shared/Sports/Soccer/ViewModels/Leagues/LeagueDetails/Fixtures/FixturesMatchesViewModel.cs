@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -136,7 +137,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         private static (IEnumerable<IMatch>, IEnumerable<IMatch>) GetResultsAndFixtures(IEnumerable<IMatch> matches)
         {
             var orderedMatches = matches.OrderBy(match => match.EventDate);
-            var fixtures = orderedMatches.Where(match => match.EventStatus.IsNotStarted);
+            var fixtures = orderedMatches.Where(match => match.EventStatus.IsNotStarted || match.EventDate >= DateTime.Today);
             var results = orderedMatches.Except(fixtures);
 
             return (results, fixtures);
