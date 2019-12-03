@@ -126,7 +126,7 @@ namespace LiveScore
 
             base.OnResume();
 
-            await Task.Run(async () => await soccerHub.ReConnect());
+            await Task.Run(async () => await soccerHub.ConnectWithRetry());
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)

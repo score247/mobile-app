@@ -6,6 +6,6 @@ namespace LiveScore.Core.Services
     {
         Task Start();
 
-        Task ReConnect(byte retryTimes = 5);
+        Task ConnectWithRetry(byte retryTimes = 5);
     }
 }

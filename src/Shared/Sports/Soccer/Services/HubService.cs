@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using LiveScore.Common;
 using LiveScore.Common.Services;
@@ -50,14 +51,12 @@ namespace LiveScore.Soccer.Services
                     .Build();
 
                 RegisterHubEvents();
-
-                await hubConnection.StartAsync().ConfigureAwait(false);
-
+                await ConnectWithRetry();
                 SubscribeReConnectEvent();
             }
             catch (Exception ex)
             {
-                await logger.LogExceptionAsync(ex).ConfigureAwait(false);
+                await logger.LogExceptionAsync(ex);
             }
         }
 
@@ -91,13 +90,12 @@ namespace LiveScore.Soccer.Services
                             {
                                 if (isConnected)
                                 {
-                                    await ReConnect();
+                                    await ConnectWithRetry();
                                 }
                             });
 
         private IEnumerable<IPubSubEventHandler> BuildHubEventHandlers()
         {
-            Debug.WriteLine($"BuildHubEventHandlers at {DateTime.Now.ToString("hh:mm:tt zzz")}");
             return new List<IPubSubEventHandler>
             {
                 new MatchEventPubSubEventHandler(eventAggregator),
@@ -116,17 +114,11 @@ namespace LiveScore.Soccer.Services
             }
 
             var ex = new InvalidOperationException($"{DateTime.Now} HubConnection_Closed {arg?.Message}", arg);
-
-            await logger
-                .TrackEventAsync(
-                    "SoccerHubService",
-                    $"HubConnection_Closed {ex}")
-                .ConfigureAwait(false);
-
-            await ReConnect().ConfigureAwait(false);
+            await logger.TrackEventAsync("SoccerHubService", $"HubConnection_Closed {ex}");
+            await ConnectWithRetry();
         }
 
-        public async Task ReConnect(byte retryTimes = 5)
+        public async Task ConnectWithRetry(byte retryTimes = 5)
         {
             var retryCount = 0;
 
@@ -136,37 +128,23 @@ namespace LiveScore.Soccer.Services
             {
                 retryCount++;
                 isConnecting = true;
+
                 try
                 {
-                    await StopCurrentConnection().ConfigureAwait(false);
-                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect).ConfigureAwait(false);
-                    await hubConnection.StartAsync().ConfigureAwait(false);
+                    await hubConnection.StartAsync();
+                    await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
 
-                    await logger
-                        .TrackEventAsync(
+                    await logger.TrackEventAsync(
                             "SoccerHubService",
-                            $"Reconnect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}")
-                        .ConfigureAwait(false);
+                            $"Connect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}");
                 }
                 catch (Exception exception)
                 {
                     await logger
-                        .LogExceptionAsync(exception, $"Reconnect Failed {retryCount} times, at {DateTime.Now}")
-                        .ConfigureAwait(false);
+                        .LogExceptionAsync(exception, $"Connect Failed {retryCount} times, at {DateTime.Now}");
                 }
-                isConnecting = false;
-            }
-        }
 
-        private async Task StopCurrentConnection()
-        {
-            try
-            {
-                await hubConnection.StopAsync().ConfigureAwait(false);
-            }
-            catch (Exception disposeException)
-            {
-                await logger.LogExceptionAsync(disposeException).ConfigureAwait(false);
+                isConnecting = false;
             }
         }
     }
