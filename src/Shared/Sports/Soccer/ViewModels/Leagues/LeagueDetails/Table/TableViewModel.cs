@@ -69,6 +69,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
         public DelegateAsyncCommand RefreshCommand { get; }
 
+        public bool VisibleTableHeader { get; private set; }
+
         public override async void OnResumeWhenNetworkOK()
             => await LoadDataAsync(LoadLeagueTableAsync);
 
@@ -109,6 +111,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             BuildOutcomes(table);
             GroupNotesItemSource = table.GroupNotes?.ToList();
 
+            VisibleTableHeader = true;
             HasData = true;
         }
 

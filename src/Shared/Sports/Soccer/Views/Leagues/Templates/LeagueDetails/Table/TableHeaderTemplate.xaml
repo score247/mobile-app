@@ -45,15 +45,14 @@
                    Style="{StaticResource LeagueName}"
                    Text="{Binding CurrentLeagueName}" />
         </Grid>
-        
 
         <Label Style="{StaticResource NoInfo}"
                Text="{langResources:Translate NoData}"
                IsVisible="{Binding NoData}" />
         <BoxView Style="{StaticResource TableLine}"
-                 IsVisible="{Binding HasData}" />
+                 IsVisible="{Binding VisibleTableHeader}" />
         <Grid Style="{StaticResource GridTableHeaderContainer}"
-              IsVisible="{Binding HasData}">
+              IsVisible="{Binding VisibleTableHeader}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="4*" />
@@ -104,10 +103,10 @@
             <Label Grid.Row="0"
                    Grid.Column="8"
                    Style="{StaticResource TableHeaderText}"
-                       FontFamily="{StaticResource RobotoMedium}"
+                   FontFamily="{StaticResource RobotoMedium}"
                    Text="PTS" />
         </Grid>
         <BoxView Style="{StaticResource TableLine}"
-                 IsVisible="{Binding HasData}" />
+                 IsVisible="{Binding VisibleTableHeader}" />
     </FlexLayout>
 </DataTemplate>

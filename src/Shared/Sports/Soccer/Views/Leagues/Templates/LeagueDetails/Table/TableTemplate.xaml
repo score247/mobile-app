@@ -10,7 +10,8 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableTemplate">
     <Grid BackgroundColor="{StaticResource ListViewBgColor}"
-                 VerticalOptions="FillAndExpand" Padding="0,8,0,0">
+          VerticalOptions="FillAndExpand"
+          Padding="0,8,0,0">
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

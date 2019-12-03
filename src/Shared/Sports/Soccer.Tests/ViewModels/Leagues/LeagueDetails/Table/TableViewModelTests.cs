@@ -133,6 +133,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
 
             // Assert
             Assert.False(viewModel.HasData);
+            Assert.False(viewModel.VisibleTableHeader);
             Assert.Null(viewModel.TeamStandingsItemSource);
             Assert.Null(viewModel.GroupNotesItemSource);
             Assert.Null(viewModel.OutcomesItemSource);
@@ -153,6 +154,7 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
 
             // Assert
             Assert.True(viewModel.HasData);
+            Assert.True(viewModel.VisibleTableHeader);
             Assert.Equal(teamStandings.OrderBy(s => s.Rank), viewModel.TeamStandingsItemSource);
         }
 
