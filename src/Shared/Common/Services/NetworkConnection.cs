@@ -39,7 +39,14 @@ namespace LiveScore.Common.Services
         }
 
         public NetworkAccess GetNetworkAccess()
-            => Connectivity.NetworkAccess;
+        {
+            if (DeviceInfo.Platform == DevicePlatform.Unknown)
+            {
+                return NetworkAccess.Unknown;
+            }
+
+            return Connectivity.NetworkAccess;
+        }
 
         public bool IsFailureConnection()
             => !IsSuccessfulConnection();

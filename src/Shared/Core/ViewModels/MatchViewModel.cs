@@ -57,7 +57,7 @@ namespace LiveScore.Core.ViewModels
             Match.UpdateLastTimeline(matchEvent.Timeline);
             Match.UpdateResult(matchEvent.MatchResult);
 
-            if (matchEvent.Timeline.Type.IsPeriodStart)
+            if (matchEvent.Timeline?.Type.IsPeriodStart == true)
             {
                 Match.CurrentPeriodStartTime = matchEvent.Timeline.Time;
             }

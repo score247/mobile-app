@@ -56,15 +56,15 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             base.OnAppearing();
 
             SubscribeEvents();
-            await Task.Run(() => LoadDataAsync(LoadMatchesAsync).ConfigureAwait(false));
+            await LoadDataAsync(LoadMatchesAsync);
         }
 
-        public override void OnResumeWhenNetworkOK()
+        public override async void OnResumeWhenNetworkOK()
         {
             base.OnResumeWhenNetworkOK();
 
             SubscribeEvents();
-            Task.Run(() => LoadDataAsync(UpdateMatchesAsync, false));
+            await LoadDataAsync(LoadMatchesAsync);
         }
 
         protected override Task<IEnumerable<IMatch>> LoadMatchesFromServiceAsync()
@@ -73,12 +73,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
             (var resultMatches, var fixtureMatches) = GetResultsAndFixtures(matches);
-
-            if (resultMatches?.Any() != true && fixtureMatches?.Any() != true)
-            {
-                HasData = false;
-                return;
-            }
 
             fixtureMatches = GenerateLoadedFixtures(fixtureMatches, ShowLoadFixturesButton || FirstLoad);
 
@@ -109,10 +103,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                         MatchItemsSource.Insert(0, matchGroup);
                     }
 
-                    ScrollToCommand.Execute(currentItem);
-                    ShowLoadResultsButton = false;
-                    HeaderViewModel = null;
-                    ResultMatchItemSource = null;
+                    ScrollToCommand?.Execute(currentItem);
+                    ClearResultButton();
                 });
             }
         }
@@ -128,8 +120,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                         MatchItemsSource.Add(matchGroup);
                     }
 
-                    ShowLoadFixturesButton = false;
-                    FixturesMatchItemSource = null;
+                    ClearFixtureButton();
                 });
             }
         }
@@ -157,8 +148,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                 return loadedFixtureMatches;
             }
 
-            FixturesMatchItemSource = null;
-            ShowLoadFixturesButton = false;
+            ClearFixtureButton();
             return matches;
         }
 
@@ -177,10 +167,21 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                 return loadedResultMatches;
             }
 
+            ClearResultButton();
+            return matches;
+        }
+
+        private void ClearFixtureButton()
+        {
+            FixturesMatchItemSource = null;
+            ShowLoadFixturesButton = false;
+        }
+
+        private void ClearResultButton()
+        {
             ResultMatchItemSource = null;
             HeaderViewModel = null;
             ShowLoadResultsButton = false;
-            return matches;
         }
     }
 }
