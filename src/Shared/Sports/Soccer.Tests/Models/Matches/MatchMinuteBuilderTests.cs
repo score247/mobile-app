@@ -34,16 +34,11 @@ namespace Soccer.Tests.Models.Matches
             Assert.Equal(string.Empty, actual);
         }
 
-
         [Fact]
         public void BuildMatchMinute_MatchIsNullOrNotASoccerMatch_ReturnStringEmpty()
         {
-            // Arrange
-            var matchResult = new MatchResult(fixture.Create<MatchStatus>(), fixture.Create<MatchStatus>());
-            var match = new SoccerMatch(fixture.Create<DateTime>(), matchResult);
-
             // Act
-            var actualDisplayMinute = matchMinuteBuilder.BuildMatchMinute(match, fixture.Create<DateTimeOffset>());
+            var actualDisplayMinute = matchMinuteBuilder.BuildMatchMinute(null, fixture.Create<DateTimeOffset>());
 
             // Assert
             Assert.Equal(string.Empty, actualDisplayMinute);
