@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Enumerations;
@@ -21,8 +22,8 @@ namespace LiveScore.Core.Tests.Controls.TabStrip
             {
                 new OddsViewModel("", MatchStatus.Closed,  baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
                 new InformationViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new TrackerCommentaryViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
-                new StatisticsViewModel(null, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new TrackerCommentaryViewModel(null, DateTime.Now, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
+                new StatisticsViewModel(null, DateTime.Now, baseFixture.NavigationService, baseFixture.DependencyResolver, null, null) ,
             };
         }
 

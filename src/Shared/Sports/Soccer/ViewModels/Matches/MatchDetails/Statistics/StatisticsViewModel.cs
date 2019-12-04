@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
@@ -15,11 +16,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
 {
     public class StatisticsViewModel : TabItemViewModel
     {
-        private readonly ISoccerMatchService soccerMatchService;
         private readonly string matchId;
+        private readonly DateTime eventDate;
+
+        private readonly ISoccerMatchService soccerMatchService;        
 
         public StatisticsViewModel(
             string matchId,
+            DateTime eventDate,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,
@@ -27,6 +31,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
             : base(navigationService, serviceLocator, dataTemplate, eventAggregator, AppResources.Stats)
         {
             this.matchId = matchId;
+            this.eventDate = eventDate;
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
             RefreshCommand = new DelegateAsyncCommand(
                 async () => await LoadDataAsync(LoadStatisticsAsync, false));
@@ -54,7 +59,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
         public async Task LoadStatisticsAsync()
         {
             var matchStatistic = await soccerMatchService
-                    .GetMatchStatisticAsync(matchId, Language.English)
+                    .GetMatchStatisticAsync(matchId, Language.English, eventDate)
                     .ConfigureAwait(false);
 
             if (!string.IsNullOrWhiteSpace(matchStatistic?.MatchId))

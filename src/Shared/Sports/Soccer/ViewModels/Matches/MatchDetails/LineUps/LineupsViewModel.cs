@@ -20,13 +20,17 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 {
     internal class LineupsViewModel : TabItemViewModel
     {
+        private readonly string matchId;
+        private readonly DateTime eventDate;
+
         private readonly ISoccerMatchService soccerMatchService;
         private readonly IDeviceInfo deviceInfo;
-        private readonly string matchId;
+        
         private readonly Action<Action> beginInvokeOnMainThreadFunc;
 
         public LineupsViewModel(
             string matchId,
+            DateTime eventDate,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,
@@ -34,6 +38,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
             : base(navigationService, serviceLocator, dataTemplate, eventAggregator, AppResources.Lineups)
         {
             this.matchId = matchId;
+            this.eventDate = eventDate;
             soccerMatchService = DependencyResolver.Resolve<ISoccerMatchService>();
             deviceInfo = DependencyResolver.Resolve<IDeviceInfo>();
             beginInvokeOnMainThreadFunc = DependencyResolver.Resolve<Action<Action>>(FuncNameConstants.BeginInvokeOnMainThreadFuncName);
@@ -70,7 +75,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
         public async Task LoadLineUpsAsync()
         {
             var matchLineups = await soccerMatchService
-                .GetMatchLineupsAsync(matchId, Language.English)
+                .GetMatchLineupsAsync(matchId, Language.English, eventDate)
                 .ConfigureAwait(false);
 
             if (string.IsNullOrWhiteSpace(matchLineups?.Id))

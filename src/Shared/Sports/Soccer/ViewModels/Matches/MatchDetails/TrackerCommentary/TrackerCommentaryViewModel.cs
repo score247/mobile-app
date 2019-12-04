@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -29,11 +30,14 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         private const string WidgetPrefix = "widget-url";
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
+
+        private readonly DateTime eventDate;
         private readonly MatchCoverage matchCoverage;
         private readonly ISoccerMatchService soccerMatchService;
 
         public TrackerCommentaryViewModel(
             MatchCoverage matchCoverage,
+            DateTime eventDate,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,
@@ -41,6 +45,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             : base(navigationService, dependencyResolver, dataTemplate, eventAggregator, AppResources.Tracker)
         {
             this.matchCoverage = matchCoverage;
+            this.eventDate = eventDate;
             soccerMatchService = dependencyResolver.Resolve<ISoccerMatchService>();
             OnCollapseTracker = new DelegateCommand(() => TrackerVisible = false);
             OnExpandTracker = new DelegateCommand(() => TrackerVisible = true);
@@ -164,7 +169,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
             if (matchCoverage?.Coverage != null && matchCoverage.Coverage.Commentary)
             {
                 var matchCommentaries = (await soccerMatchService
-                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage))
+                        .GetMatchCommentariesAsync(matchCoverage.MatchId, CurrentLanguage, eventDate))
                         .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
                         .OrderByDescending(t => t.MatchTime)
                         .ThenByDescending(t => t.Time)

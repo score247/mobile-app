@@ -57,6 +57,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private readonly ISoccerMatchService soccerMatchService;
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
         private string currentMatchId;
+        private DateTimeOffset currentMatchEventDate;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -89,6 +90,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             if (parameters?["Match"] is IMatch match)
             {
                 currentMatchId = match.Id;
+                currentMatchEventDate = match.EventDate;
+
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(
                     await GenerateTabItemViewModels(MatchViewModel.Match)
@@ -255,6 +258,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             var coverage = await soccerMatchService.GetMatchCoverageAsync(
                     MatchViewModel.Match.Id,
                     CurrentLanguage,
+                    currentMatchEventDate.DateTime,
                     forceFetchLatestData: true).ConfigureAwait(false);
 
             var viewModels = new List<TabItemViewModel>();
@@ -263,8 +267,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             {
                 [MatchDetailFunction.Info] = new InformationViewModel(match, NavigationService, DependencyResolver, EventAggregator, infoTemplate),
                 [MatchDetailFunction.H2H] = new H2HViewModel(match, NavigationService, DependencyResolver, EventAggregator, h2hTemplate),
-                [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
-                [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
+                [MatchDetailFunction.Lineups] = new LineupsViewModel(match.Id, match.EventDate.DateTime, NavigationService, DependencyResolver, EventAggregator, lineupsTemplate),
+                [MatchDetailFunction.Stats] = new StatisticsViewModel(match.Id, match.EventDate.DateTime, NavigationService, DependencyResolver, EventAggregator, statisticsTemplate),
                 [MatchDetailFunction.Table] = new TableViewModel(
                     match.LeagueId,
                     match.LeagueSeasonId,
@@ -274,7 +278,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
                     awayTeamId: match.AwayTeamId),
-                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
+                [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, match.EventDate.DateTime, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 
             Title = tabItemViewModels.First().Key.DisplayName;
@@ -303,6 +307,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         }
 
         private Task<MatchInfo> GetMatch(string id)
-            => soccerMatchService.GetMatchAsync(id, CurrentLanguage);
+            => soccerMatchService.GetMatchAsync(id, CurrentLanguage, currentMatchEventDate.DateTime);
     }
 }

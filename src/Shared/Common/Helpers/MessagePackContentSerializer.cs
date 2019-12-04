@@ -26,7 +26,19 @@ namespace LiveScore.Common.Helpers
         }
 
         public async Task<T> DeserializeAsync<T>(HttpContent content)
-            => MessagePackSerializer.Deserialize<T>(await content.ReadAsStreamAsync().ConfigureAwait(false));
+        {
+            try {
+                var data = MessagePackSerializer.Deserialize<T>(await content.ReadAsStreamAsync());
+
+                return data;
+
+            } catch (Exception ex)
+            {
+                var msg = ex.Message;
+            }
+
+            return default;
+        }
 
         public Task<HttpContent> SerializeAsync<T>(T item)
         {
