@@ -31,19 +31,19 @@ namespace LiveScore.Soccer.Services
             [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
             Task<IEnumerable<SoccerMatch>> GetMatches(string fromDate, string toDate, string language);
 
-            [Get("/soccer/{language}/matches/{matchId}?{eventDate}")]
+            [Get("/soccer/{language}/matches/{matchId}?eventDate={eventDate}")]
             Task<MatchInfo> GetMatchInfo(string matchId, string language, string eventDate);
 
-            [Get("/soccer/{language}/matches/{matchId}/coverage?{eventDate}")]
+            [Get("/soccer/{language}/matches/{matchId}/coverage?eventDate={eventDate}")]
             Task<MatchCoverage> GetMatchCoverage(string matchId, string language, string eventDate);
 
-            [Get("/soccer/{language}/matches/{matchId}/commentaries?{eventDate}")]
+            [Get("/soccer/{language}/matches/{matchId}/commentaries?eventDate={eventDate}")]
             Task<IEnumerable<MatchCommentary>> GetMatchCommentaries(string matchId, string language, string eventDate);
 
-            [Get("/soccer/{language}/matches/{matchId}/statistic?{eventDate}")]
+            [Get("/soccer/{language}/matches/{matchId}/statistic?eventDate={eventDate}")]
             Task<MatchStatistic> GetMatchStatistic(string matchId, string language, string eventDate);
 
-            [Get("/soccer/{language}/matches/{matchId}/lineups?{eventDate}")]
+            [Get("/soccer/{language}/matches/{matchId}/lineups?eventDate={eventDate}")]
             Task<MatchLineups> GetMatchLineups(string matchId, string language, string eventDate);
         }
 
