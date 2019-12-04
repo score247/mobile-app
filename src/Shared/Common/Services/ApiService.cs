@@ -17,10 +17,23 @@ namespace LiveScore.Common.Services
         Task<string> GetToken(bool forceRenew = false);
     }
 
+    public class AuthenticateInfo
+    {
+        public AuthenticateInfo(string userId, string encryptedInfo)
+        {
+            UserId = userId;
+            EncryptedInfo = encryptedInfo;
+        }
+
+        public string UserId { get; }
+
+        public string EncryptedInfo { get; }
+    }
+
     public interface AuthenticateApi
     {
-        [Get("/authenticate/generateToken")]
-        Task<string> Authenticate(string userId, string encryptedInfo);
+        [Post("/authenticate/generateToken")]
+        Task<string> Authenticate([Body]AuthenticateInfo authenticateInfo);
     }
 
     public class ApiService : IApiService
@@ -89,7 +102,8 @@ namespace LiveScore.Common.Services
             {
                 var authenticateApi = GetApi<AuthenticateApi>();
 
-                var token = await authenticateApi.Authenticate(deviceInfo.Id, cryptographyHelper.Encrypt(deviceInfo.Id, configuration.EncryptKey));
+                var authenticateInfo = new AuthenticateInfo(deviceInfo.Id, cryptographyHelper.Encrypt(deviceInfo.Id, configuration.EncryptKey));
+                var token = await authenticateApi.Authenticate(authenticateInfo);
 
                 await loggingService.TrackEventAsync($"Request Token {deviceInfo.Id}", $"Token {token} at {DateTime.Now}");
 
