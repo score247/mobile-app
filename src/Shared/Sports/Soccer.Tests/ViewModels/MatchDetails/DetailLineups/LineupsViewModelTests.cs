@@ -55,7 +55,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
             settings.CurrentSportType.Returns(SportType.Soccer);
             fixture = new Fixture();
 
-            lineupsViewModel = new LineupsViewModel(matchId, navigationService, serviceLocator, eventAggregator, new DataTemplate());
+            lineupsViewModel = new LineupsViewModel(matchId, DateTime.Now, navigationService, serviceLocator, eventAggregator, new DataTemplate());
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
         {
             // Arrange
             var matchLineups = fixture.Create<MatchLineups>();
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -105,7 +105,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -135,7 +135,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -165,7 +165,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -195,7 +195,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -225,7 +225,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();
@@ -255,7 +255,7 @@ namespace Soccer.Tests.ViewModels.DetailLineups
                 dumpTeamlineups,
                 ""
                 );
-            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English).Returns(Task.FromResult(matchLineups));
+            soccerMatchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchLineups));
 
             // Act
             await lineupsViewModel.LoadLineUpsAsync();

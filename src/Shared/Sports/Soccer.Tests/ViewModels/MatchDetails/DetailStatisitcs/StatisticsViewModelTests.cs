@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core;
@@ -40,7 +41,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             serviceLocator.Resolve<ISettings>().Returns(settings);
             settings.CurrentSportType.Returns(SportType.Soccer);
 
-            statisticViewModel = new StatisticsViewModel(matchId, navigationService, serviceLocator, eventAggregator, new DataTemplate());
+            statisticViewModel = new StatisticsViewModel(matchId, DateTime.Now, navigationService, serviceLocator, eventAggregator, new DataTemplate());
         }
 
         [Fact]
@@ -58,7 +59,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
             var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
             var matchStatistic = new MatchStatistic(matchId, homeStatistic, awayStatistic);
-            soccerMatchService.GetMatchStatisticAsync(matchId, Language.English).Returns(Task.FromResult(matchStatistic));
+            soccerMatchService.GetMatchStatisticAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchStatistic));
 
             await statisticViewModel.LoadStatisticsAsync();
 
@@ -72,7 +73,7 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
             var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
             var matchStatistic = new MatchStatistic(matchId, homeStatistic, awayStatistic);
-            soccerMatchService.GetMatchStatisticAsync(matchId, Language.English).Returns(Task.FromResult(matchStatistic));
+            soccerMatchService.GetMatchStatisticAsync(matchId, Language.English, DateTime.Now).Returns(Task.FromResult(matchStatistic));
 
             await statisticViewModel.LoadStatisticsAsync();
 

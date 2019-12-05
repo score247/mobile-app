@@ -43,7 +43,7 @@ namespace Soccer.Tests.Services
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound"));
 
             // Act
-            var match = await matchService.GetMatchAsync("sr:match", Language.English);
+            var match = await matchService.GetMatchAsync("sr:match", Language.English, DateTime.Now);
 
             // Assert
             await loggingService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -60,7 +60,7 @@ namespace Soccer.Tests.Services
             apiService.Execute(Arg.Any<Func<Task<MatchInfo>>>()).Returns(expectedMatch);
 
             // Act
-            var match = await matchService.GetMatchAsync(matchId, Language.English);
+            var match = await matchService.GetMatchAsync(matchId, Language.English, DateTime.Now);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatch, match).AreEqual);
@@ -75,7 +75,7 @@ namespace Soccer.Tests.Services
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound"));
 
             // Act
-            var match = await matchService.GetMatchCoverageAsync("sr:match", Language.English, true);
+            var match = await matchService.GetMatchCoverageAsync("sr:match", Language.English, DateTime.Now, true);
 
             // Assert
             await loggingService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -94,7 +94,7 @@ namespace Soccer.Tests.Services
                 .Returns(expectedMatch);
 
             // Act
-            var match = await matchService.GetMatchCoverageAsync(matchId, Language.English, true);
+            var match = await matchService.GetMatchCoverageAsync(matchId, Language.English, DateTime.Now, true);
 
             // Assert
             Assert.True(comparer.Compare(expectedMatch, match).AreEqual);
@@ -108,7 +108,7 @@ namespace Soccer.Tests.Services
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound"));
 
             // Act
-            var match = await matchService.GetMatchCommentariesAsync("sr:match", Language.English);
+            var match = await matchService.GetMatchCommentariesAsync("sr:match", Language.English, DateTime.Now);
 
             // Assert
             await loggingService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -125,7 +125,7 @@ namespace Soccer.Tests.Services
             apiService.Execute(Arg.Any<Func<Task<IEnumerable<MatchCommentary>>>>()).Returns(expected);
 
             // Act
-            var actual = await matchService.GetMatchCommentariesAsync(matchId, Language.English);
+            var actual = await matchService.GetMatchCommentariesAsync(matchId, Language.English, DateTime.Now);
 
             // Assert
             Assert.True(comparer.Compare(expected, actual).AreEqual);
@@ -139,7 +139,7 @@ namespace Soccer.Tests.Services
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound"));
 
             // Act
-            var match = await matchService.GetMatchStatisticAsync("sr:match", Language.English);
+            var match = await matchService.GetMatchStatisticAsync("sr:match", Language.English, DateTime.Now);
 
             // Assert
             await loggingService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -156,7 +156,7 @@ namespace Soccer.Tests.Services
             apiService.Execute(Arg.Any<Func<Task<MatchStatistic>>>()).Returns(expected);
 
             // Act
-            var actual = await matchService.GetMatchStatisticAsync(matchId, Language.English);
+            var actual = await matchService.GetMatchStatisticAsync(matchId, Language.English, DateTime.Now);
 
             // Assert
             Assert.True(comparer.Compare(expected, actual).AreEqual);
@@ -170,7 +170,7 @@ namespace Soccer.Tests.Services
                 .ThrowsForAnyArgs(new InvalidOperationException("NotFound"));
 
             // Act
-            var match = await matchService.GetMatchLineupsAsync("sr:match", Language.English);
+            var match = await matchService.GetMatchLineupsAsync("sr:match", Language.English, DateTime.Now);
 
             // Assert
             await loggingService.Received(1).LogExceptionAsync(Arg.Any<InvalidOperationException>());
@@ -187,7 +187,7 @@ namespace Soccer.Tests.Services
             apiService.Execute(Arg.Any<Func<Task<MatchLineups>>>()).Returns(expected);
 
             // Act
-            var actual = await matchService.GetMatchLineupsAsync(matchId, Language.English);
+            var actual = await matchService.GetMatchLineupsAsync(matchId, Language.English, DateTime.Now);
 
             // Assert
             Assert.True(comparer.Compare(expected, actual).AreEqual);

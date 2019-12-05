@@ -65,7 +65,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(matchInfo => matchInfo.Match, match)
                 .With(matchInfo => matchInfo.TimelineEvents, null);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -79,7 +79,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = fixture.Create<MatchInfo>()
                 .With(matchInfo => matchInfo.Match, match);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -95,7 +95,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(matchInfo => matchInfo.Match, match)
                 .With(matchInfo => matchInfo.Venue, fixture.Create<Venue>());
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -111,7 +111,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(matchInfo => matchInfo.Match, match)
                 .With(matchInfo => matchInfo.Attendance, 123456);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -126,7 +126,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             var returnMatch = fixture.Create<MatchInfo>()
                 .With(matchInfo => matchInfo.Match, match);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -142,7 +142,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(matchInfo => matchInfo.Match, match)
                 .With(matchInfo => matchInfo.Attendance, 0);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
@@ -160,7 +160,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
                 .With(matchInfo => matchInfo.Match, match)
                 .With(matchInfo => matchInfo.TimelineEvents, returnTimelines);
 
-            matchService.GetMatchAsync(match.Id, Language.English).Returns(returnMatch);
+            matchService.GetMatchAsync(match.Id, Language.English, Arg.Any<DateTime>()).Returns(returnMatch);
 
             // Act
             await viewModel.LoadMatchInfoData();
