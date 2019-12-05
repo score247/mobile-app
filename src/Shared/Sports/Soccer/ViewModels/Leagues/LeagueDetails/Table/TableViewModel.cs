@@ -107,6 +107,18 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             }
 
             var table = leagueTable.GroupTables.FirstOrDefault();
+            if (table == null
+                || !table.TeamStandings.Any(team => team.Id == CurrentHomeTeamId || team.Id == CurrentAwayTeamId))
+            {
+                HasData = false;
+                return;
+            }
+
+            BuildLeagueTable(table);
+        }
+
+        private void BuildLeagueTable(LeagueGroupTable table)
+        {
             BuildTeamStandings(table);
             BuildOutcomes(table);
             GroupNotesItemSource = table.GroupNotes?.ToList();
