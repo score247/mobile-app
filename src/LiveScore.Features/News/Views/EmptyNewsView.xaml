@@ -24,7 +24,7 @@
         <Label
                 FontSize="13"
                 HorizontalOptions="Center"
-                Text="News is comming soon"
+                Text="News is coming soon"
                 TextColor="{StaticResource SecondTextColor}"
                 VerticalOptions="Center" />
     </ContentPage.Content>

@@ -23,7 +23,7 @@
                      Text="Search" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="TV Schedule is comming soon"
+        <Label Text="TV is coming soon"
            TextColor="{StaticResource SecondTextColor}"
            HorizontalOptions="Center"
            VerticalOptions="Center" FontSize="13" />
