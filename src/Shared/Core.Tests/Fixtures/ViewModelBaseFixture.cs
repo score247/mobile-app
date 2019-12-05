@@ -61,7 +61,6 @@ namespace LiveScore.Core.Tests.Fixtures
         public FakeHubConnection() : base(
             Substitute.For<IConnectionFactory>(),
             Substitute.For<IHubProtocol>(),
-            Substitute.For<EndPoint>(),
             Substitute.For<IServiceProvider>(),
             Substitute.For<ILoggerFactory>())
         {
