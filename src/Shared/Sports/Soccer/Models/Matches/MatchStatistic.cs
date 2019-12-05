@@ -6,7 +6,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Matches
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class MatchStatistic
     {
         public MatchStatistic(string matchId)
@@ -25,13 +25,10 @@ namespace LiveScore.Soccer.Models.Matches
             AwayStatistic = awayStatistic;
         }
 
-        [Key(0)]
         public string MatchId { get; }
 
-        [Key(1)]
         public TeamStatistic HomeStatistic { get; }
 
-        [Key(2)]
         public TeamStatistic AwayStatistic { get; }
 
         public MatchStatisticItem GetMainStatistic()

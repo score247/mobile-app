@@ -10,7 +10,7 @@ namespace LiveScore.Core.Enumerations
     using System.Reflection;
     using MessagePack;
 
-    [Serializable, MessagePackObject]
+    [Serializable, MessagePackObject(keyAsPropertyName: true)]
     [Union(0, typeof(EventType))]
     [Union(1, typeof(Language))]
     [Union(2, typeof(LeagueRoundType))]
@@ -28,10 +28,8 @@ namespace LiveScore.Core.Enumerations
             DisplayName = displayName;
         }
 
-        [Key(0)]
         public string DisplayName { get; set; }
 
-        [Key(1)]
         public byte Value { get; set; }
 
         public static T FromDisplayName<T>(string displayName) where T : Enumeration, new()

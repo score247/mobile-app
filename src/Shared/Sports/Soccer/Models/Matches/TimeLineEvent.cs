@@ -77,16 +77,13 @@ namespace LiveScore.Soccer.Models.Matches
         public override int GetHashCode() => Id?.GetHashCode() ?? 0;
     }
 
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class GoalScorer
     {
-        [Key(0)]
         public string Id { get; set; }
 
-        [Key(1)]
         public string Name { get; set; }
 
-        [Key(2)]
         public string Method { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Teams
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class Position : Enumeration
     {
         public static readonly Position Goalkeeper = new Position(1, "Goalkeeper");

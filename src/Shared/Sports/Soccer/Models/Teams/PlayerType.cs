@@ -3,7 +3,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Teams
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class PlayerType : Enumeration
     {
         public static readonly PlayerType Goalkeeper = new PlayerType(1, "goalkeeper");

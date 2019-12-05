@@ -5,7 +5,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Leagues
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class LeagueTable : ILeagueTable
     {
         public LeagueTable(
@@ -20,16 +20,16 @@ namespace LiveScore.Soccer.Models.Leagues
             GroupTables = groupTables;
         }
 
-        [Key(0)]
+        
         public League League { get; }
 
-        [Key(1)]
+        
         public LeagueTableType Type { get; }
 
-        [Key(2)]
+        
         public LeagueSeason LeagueSeason { get; }
 
-        [Key(3)]
+        
         public IEnumerable<LeagueGroupTable> GroupTables { get; private set; }
     }
 }

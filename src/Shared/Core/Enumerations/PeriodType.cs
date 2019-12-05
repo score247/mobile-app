@@ -2,7 +2,7 @@
 {
     using MessagePack;
 
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class PeriodType : Enumeration
     {
         public static readonly PeriodType RegularPeriod = new PeriodType(1, "regular_period");

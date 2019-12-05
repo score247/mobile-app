@@ -155,6 +155,28 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Enumerations
     public sealed class TeamOutcomeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Enumerations.TeamOutcome>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public TeamOutcomeFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "FriendlyName", 0},
+                { "DisplayName", 1},
+                { "Value", 2},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("FriendlyName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DisplayName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Value"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Enumerations.TeamOutcome value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -163,10 +185,13 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Enumerations
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
-            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Value);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.FriendlyName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
+            offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Value);
             return offset - startOffset;
         }
 
@@ -179,7 +204,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Enumerations
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __FriendlyName__ = default(string);
@@ -188,23 +213,32 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Enumerations
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
-                    case 2:
+                    case 0:
                         __FriendlyName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
-                    case 0:
+                    case 1:
                         __DisplayName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
-                    case 1:
+                    case 2:
                         __Value__ = MessagePackBinary.ReadByte(bytes, offset, out readSize);
                         break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -238,6 +272,36 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
     public sealed class LeagueFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Leagues.League>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public LeagueFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "Name", 1},
+                { "Order", 2},
+                { "CategoryId", 3},
+                { "CountryName", 4},
+                { "CountryCode", 5},
+                { "IsInternational", 6},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Order"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CategoryId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryCode"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsInternational"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Leagues.League value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -246,13 +310,20 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Order);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CategoryId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsInternational);
             return offset - startOffset;
         }
@@ -266,7 +337,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -279,7 +350,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -308,6 +386,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -322,6 +402,32 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
     public sealed class LeagueGroupTableFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public LeagueGroupTableFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "Name", 1},
+                { "GroupNotes", 2},
+                { "TeamStandings", 3},
+                { "OutcomeList", 4},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GroupNotes"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TeamStandings"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("OutcomeList"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -330,11 +436,16 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Leagues.LeagueGroupNote>>().Serialize(ref bytes, offset, value.GroupNotes, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Teams.TeamStanding>>().Serialize(ref bytes, offset, value.TeamStandings, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Enumerations.TeamOutcome>>().Serialize(ref bytes, offset, value.OutcomeList, formatterResolver);
             return offset - startOffset;
         }
@@ -348,7 +459,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -359,7 +470,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -382,6 +500,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -396,6 +516,30 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
     public sealed class LeagueTableFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueTable>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public LeagueTableFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "League", 0},
+                { "Type", 1},
+                { "LeagueSeason", 2},
+                { "GroupTables", 3},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("League"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Type"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueSeason"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GroupTables"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Leagues.LeagueTable value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -404,10 +548,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 4);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 4);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Leagues.League>().Serialize(ref bytes, offset, value.League, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.LeagueTableType>().Serialize(ref bytes, offset, value.Type, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Leagues.LeagueSeason>().Serialize(ref bytes, offset, value.LeagueSeason, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>>().Serialize(ref bytes, offset, value.GroupTables, formatterResolver);
             return offset - startOffset;
         }
@@ -421,7 +569,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __League__ = default(global::LiveScore.Soccer.Models.Leagues.League);
@@ -431,7 +579,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -451,6 +606,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -481,6 +638,48 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class TeamStandingFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.TeamStanding>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public TeamStandingFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "Name", 1},
+                { "Rank", 2},
+                { "Outcome", 3},
+                { "Played", 4},
+                { "Win", 5},
+                { "Draw", 6},
+                { "Loss", 7},
+                { "GoalsFor", 8},
+                { "GoalsAgainst", 9},
+                { "GoalDiff", 10},
+                { "Points", 11},
+                { "Change", 12},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Rank"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Outcome"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Played"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Win"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Draw"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Loss"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GoalsFor"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GoalsAgainst"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GoalDiff"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Points"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Change"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.TeamStanding value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -489,19 +688,32 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 13);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 13);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Rank);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Enumerations.TeamOutcome>().Serialize(ref bytes, offset, value.Outcome, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Played);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Win);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Draw);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Loss);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[8]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.GoalsFor);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[9]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.GoalsAgainst);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[10]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.GoalDiff);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[11]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Points);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[12]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Change);
             return offset - startOffset;
         }
@@ -515,7 +727,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -534,7 +746,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -581,6 +800,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -595,6 +816,26 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class PlayerTypeFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.PlayerType>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public PlayerTypeFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "DisplayName", 0},
+                { "Value", 1},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DisplayName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Value"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.PlayerType value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -603,8 +844,10 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Value);
             return offset - startOffset;
         }
@@ -618,7 +861,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __DisplayName__ = default(string);
@@ -626,7 +869,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -640,6 +890,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -656,6 +908,26 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class PositionFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.Position>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public PositionFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "DisplayName", 0},
+                { "Value", 1},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("DisplayName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Value"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.Position value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -664,8 +936,10 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.DisplayName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Value);
             return offset - startOffset;
         }
@@ -679,7 +953,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __DisplayName__ = default(string);
@@ -687,7 +961,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -701,6 +982,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -717,6 +1000,36 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class PlayerFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.Player>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public PlayerFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "Name", 1},
+                { "Type", 2},
+                { "JerseyNumber", 3},
+                { "Position", 4},
+                { "Order", 5},
+                { "EventStatistic", 6},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Type"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("JerseyNumber"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Position"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Order"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("EventStatistic"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.Player value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -725,13 +1038,20 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.PlayerType>().Serialize(ref bytes, offset, value.Type, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.JerseyNumber);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.Position>().Serialize(ref bytes, offset, value.Position, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Order);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IDictionary<global::LiveScore.Core.Enumerations.EventType, int>>().Serialize(ref bytes, offset, value.EventStatistic, formatterResolver);
             return offset - startOffset;
         }
@@ -745,7 +1065,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -758,7 +1078,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -787,6 +1114,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -946,6 +1275,52 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
     public sealed class TeamStatisticFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Teams.TeamStatistic>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public TeamStatisticFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Possession", 0},
+                { "FreeKicks", 1},
+                { "ThrowIns", 2},
+                { "GoalKicks", 3},
+                { "ShotsBlocked", 4},
+                { "ShotsOnTarget", 5},
+                { "ShotsOffTarget", 6},
+                { "CornerKicks", 7},
+                { "Fouls", 8},
+                { "ShotsSaved", 9},
+                { "Offsides", 10},
+                { "YellowCards", 11},
+                { "Injuries", 12},
+                { "RedCards", 13},
+                { "YellowRedCards", 14},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Possession"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("FreeKicks"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ThrowIns"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GoalKicks"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShotsBlocked"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShotsOnTarget"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShotsOffTarget"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CornerKicks"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Fouls"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ShotsSaved"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Offsides"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("YellowCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Injuries"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("RedCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("YellowRedCards"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Teams.TeamStatistic value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -954,21 +1329,36 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 15);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 15);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Possession);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.FreeKicks);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ThrowIns);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.GoalKicks);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ShotsBlocked);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ShotsOnTarget);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ShotsOffTarget);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.CornerKicks);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[8]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Fouls);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[9]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.ShotsSaved);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[10]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Offsides);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[11]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.YellowCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[12]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.Injuries);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[13]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.RedCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[14]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.YellowRedCards);
             return offset - startOffset;
         }
@@ -982,7 +1372,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Possession__ = default(byte);
@@ -1003,7 +1393,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1056,6 +1453,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Teams
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1086,6 +1485,24 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class CommentaryFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public CommentaryFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Text", 0},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Text"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.Commentary value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1094,7 +1511,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Text, formatterResolver);
             return offset - startOffset;
         }
@@ -1108,14 +1526,21 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Text__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1126,6 +1551,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1141,6 +1568,28 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class GoalScorerFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.GoalScorer>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public GoalScorerFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "Name", 1},
+                { "Method", 2},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Name"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Method"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.GoalScorer value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1149,9 +1598,12 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Name, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Method, formatterResolver);
             return offset - startOffset;
         }
@@ -1165,7 +1617,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -1174,7 +1626,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1191,6 +1650,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1208,6 +1669,38 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchCommentaryFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentary>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchCommentaryFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "TimelineId", 0},
+                { "TimelineType", 1},
+                { "Time", 2},
+                { "MatchTime", 3},
+                { "StoppageTime", 4},
+                { "Commentaries", 5},
+                { "GoalScorer", 6},
+                { "IsPenaltyShootOutScored", 7},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TimelineId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TimelineType"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Time"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("StoppageTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Commentaries"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GoalScorer"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsPenaltyShootOutScored"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchCommentary value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1216,14 +1709,22 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 8);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 8);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.TimelineId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Serialize(ref bytes, offset, value.TimelineType, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.Time, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.MatchTime);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.StoppageTime, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.Commentary>>().Serialize(ref bytes, offset, value.Commentaries, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Matches.GoalScorer>().Serialize(ref bytes, offset, value.GoalScorer, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsPenaltyShootOutScored);
             return offset - startOffset;
         }
@@ -1237,7 +1738,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __TimelineId__ = default(string);
@@ -1251,7 +1752,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1283,6 +1791,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1297,6 +1807,24 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchCommentaryListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentaryList>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchCommentaryListFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "MatchCommentaries", 0},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchCommentaries"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchCommentaryList value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1305,7 +1833,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>>().Serialize(ref bytes, offset, value.MatchCommentaries, formatterResolver);
             return offset - startOffset;
         }
@@ -1319,14 +1848,21 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __MatchCommentaries__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>);
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1337,6 +1873,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1352,6 +1890,26 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchCoverageFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchCoverage>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchCoverageFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "MatchId", 0},
+                { "Coverage", 1},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Coverage"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchCoverage value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1360,8 +1918,10 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.MatchId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Matches.Coverage>().Serialize(ref bytes, offset, value.Coverage, formatterResolver);
             return offset - startOffset;
         }
@@ -1375,7 +1935,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __MatchId__ = default(string);
@@ -1383,7 +1943,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1397,6 +1964,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1413,6 +1982,96 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class SoccerMatchFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public SoccerMatchFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "EventDate", 1},
+                { "CurrentPeriodStartTime", 2},
+                { "LeagueId", 3},
+                { "LeagueName", 4},
+                { "HomeTeamId", 5},
+                { "HomeTeamName", 6},
+                { "AwayTeamId", 7},
+                { "AwayTeamName", 8},
+                { "MatchStatus", 9},
+                { "EventStatus", 10},
+                { "HomeScore", 11},
+                { "AwayScore", 12},
+                { "WinnerId", 13},
+                { "AggregateWinnerId", 14},
+                { "AggregateHomeScore", 15},
+                { "AggregateAwayScore", 16},
+                { "HomeRedCards", 17},
+                { "HomeYellowRedCards", 18},
+                { "AwayRedCards", 19},
+                { "AwayYellowRedCards", 20},
+                { "MatchTime", 21},
+                { "StoppageTime", 22},
+                { "InjuryTimeAnnounced", 23},
+                { "LastTimelineType", 24},
+                { "MatchPeriods", 25},
+                { "CountryCode", 26},
+                { "CountryName", 27},
+                { "ModifiedTime", 28},
+                { "IsInternationalLeague", 29},
+                { "LeagueOrder", 30},
+                { "LeagueSeasonId", 31},
+                { "LeagueRoundType", 32},
+                { "LeagueRoundName", 33},
+                { "LeagueRoundNumber", 34},
+                { "LeagueRoundGroup", 35},
+                { "LeagueGroupName", 36},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("EventDate"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CurrentPeriodStartTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeTeamId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeTeamName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayTeamId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayTeamName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchStatus"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("EventStatus"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeScore"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayScore"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("WinnerId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AggregateWinnerId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AggregateHomeScore"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AggregateAwayScore"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeRedCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeYellowRedCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayRedCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayYellowRedCards"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("StoppageTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("InjuryTimeAnnounced"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LastTimelineType"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchPeriods"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryCode"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("ModifiedTime"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsInternationalLeague"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueOrder"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueSeasonId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueRoundType"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueRoundName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueRoundNumber"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueRoundGroup"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueGroupName"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.SoccerMatch value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1421,43 +2080,80 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteArrayHeader(ref bytes, offset, 37);
+            offset += global::MessagePack.MessagePackBinary.WriteMapHeader(ref bytes, offset, 37);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EventDate, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.CurrentPeriodStartTime, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[5]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.HomeTeamName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[8]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AwayTeamName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[9]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.MatchStatus, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[10]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.MatchStatus>().Serialize(ref bytes, offset, value.EventStatus, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[11]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeScore);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[12]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayScore);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[13]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.WinnerId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[14]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.AggregateWinnerId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[15]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateHomeScore);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[16]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AggregateAwayScore);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[17]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeRedCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[18]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.HomeYellowRedCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[19]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayRedCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[20]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.AwayYellowRedCards);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[21]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.MatchTime);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[22]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.StoppageTime, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[23]);
             offset += MessagePackBinary.WriteByte(ref bytes, offset, value.InjuryTimeAnnounced);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[24]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.EventType>().Serialize(ref bytes, offset, value.LastTimelineType, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[25]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>>().Serialize(ref bytes, offset, value.MatchPeriods, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[26]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[27]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[28]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.ModifiedTime, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[29]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsInternationalLeague);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[30]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.LeagueOrder);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[31]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueSeasonId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[32]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Enumerations.LeagueRoundType>().Serialize(ref bytes, offset, value.LeagueRoundType, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[33]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueRoundName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[34]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.LeagueRoundNumber);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[35]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueRoundGroup, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[36]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueGroupName, formatterResolver);
             return offset - startOffset;
         }
@@ -1471,7 +2167,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -1514,7 +2210,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -1633,6 +2336,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -1957,6 +2662,32 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchInfoFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchInfo>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchInfoFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Match", 0},
+                { "TimelineEvents", 1},
+                { "Venue", 2},
+                { "Referee", 3},
+                { "Attendance", 4},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Match"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("TimelineEvents"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Venue"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Referee"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Attendance"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchInfo value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -1965,11 +2696,16 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Matches.SoccerMatch>().Serialize(ref bytes, offset, value.Match, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.TimelineEvent>>().Serialize(ref bytes, offset, value.TimelineEvents, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Matches.Venue>().Serialize(ref bytes, offset, value.Venue, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Referee, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += MessagePackBinary.WriteInt32(ref bytes, offset, value.Attendance);
             return offset - startOffset;
         }
@@ -1983,7 +2719,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Match__ = default(global::LiveScore.Soccer.Models.Matches.SoccerMatch);
@@ -1994,7 +2730,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -2017,6 +2760,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -2031,6 +2776,32 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchLineupsFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchLineups>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchLineupsFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Id", 0},
+                { "EventDate", 1},
+                { "Home", 2},
+                { "Away", 3},
+                { "PitchView", 4},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Id"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("EventDate"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Home"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Away"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("PitchView"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchLineups value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -2039,11 +2810,16 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EventDate, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.TeamLineups>().Serialize(ref bytes, offset, value.Home, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.TeamLineups>().Serialize(ref bytes, offset, value.Away, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.PitchView, formatterResolver);
             return offset - startOffset;
         }
@@ -2057,7 +2833,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Id__ = default(string);
@@ -2068,7 +2844,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -2091,6 +2874,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -2105,6 +2890,28 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchStatisticFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchStatistic>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchStatisticFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "MatchId", 0},
+                { "HomeStatistic", 1},
+                { "AwayStatistic", 2},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("MatchId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("HomeStatistic"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("AwayStatistic"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchStatistic value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -2113,9 +2920,12 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.MatchId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.TeamStatistic>().Serialize(ref bytes, offset, value.HomeStatistic, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
             offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Soccer.Models.Teams.TeamStatistic>().Serialize(ref bytes, offset, value.AwayStatistic, formatterResolver);
             return offset - startOffset;
         }
@@ -2129,7 +2939,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __MatchId__ = default(string);
@@ -2138,7 +2948,14 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -2155,6 +2972,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 
@@ -2169,6 +2988,24 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
     public sealed class MatchListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Matches.MatchList>
     {
 
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public MatchListFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "Matches", 0},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Matches"),
+                
+            };
+        }
+
+
         public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Matches.MatchList value, global::MessagePack.IFormatterResolver formatterResolver)
         {
             if (value == null)
@@ -2177,7 +3014,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedArrayHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>>().Serialize(ref bytes, offset, value.Matches, formatterResolver);
             return offset - startOffset;
         }
@@ -2191,14 +3029,21 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
             }
 
             var startOffset = offset;
-            var length = global::MessagePack.MessagePackBinary.ReadArrayHeader(bytes, offset, out readSize);
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
             offset += readSize;
 
             var __Matches__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>);
 
             for (int i = 0; i < length; i++)
             {
-                var key = i;
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
 
                 switch (key)
                 {
@@ -2209,6 +3054,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Matches
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
                 }
+                
+                NEXT_LOOP:
                 offset += readSize;
             }
 

@@ -4,7 +4,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Matches
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class MatchLineups
     {
         public MatchLineups(string id)
@@ -27,19 +27,14 @@ namespace LiveScore.Soccer.Models.Matches
             PitchView = pitchView;
         }
 
-        [Key(0)]
         public string Id { get; }
 
-        [Key(1)]
         public DateTimeOffset EventDate { get; }
 
-        [Key(2)]
         public TeamLineups Home { get; }
 
-        [Key(3)]
         public TeamLineups Away { get; }
 
-        [Key(4)]
         public string PitchView { get; }
     }
 }

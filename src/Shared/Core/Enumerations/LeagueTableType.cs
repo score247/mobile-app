@@ -2,7 +2,7 @@
 
 namespace LiveScore.Core.Enumerations
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class LeagueTableType : Enumeration
     {
         public const string Total = "total";

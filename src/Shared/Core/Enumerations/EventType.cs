@@ -3,7 +3,7 @@
     using System.Collections.Generic;
     using MessagePack;
 
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class EventType : Enumeration
     {
         //break_start

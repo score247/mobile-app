@@ -3,13 +3,11 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Matches
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class MatchCoverage
     {
-        [Key(0)]
         public string MatchId { get; set; }
 
-        [Key(1)]
         public Coverage Coverage { get; set; }
     }
 }

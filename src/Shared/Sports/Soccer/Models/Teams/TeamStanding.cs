@@ -3,7 +3,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Models.Teams
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class TeamStanding
     {
 #pragma warning disable S107 // Methods should not have too many parameters
@@ -39,45 +39,32 @@ namespace LiveScore.Soccer.Models.Teams
             Change = change;
         }
 
-        [Key(0)]
         public string Id { get; private set; }
 
-        [Key(1)]
         public string Name { get; }
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        [Key(2)]
         public int Rank { get; private set; }
 
-        [Key(3)]
         public TeamOutcome Outcome { get; private set; }
 
-        [Key(4)]
         public int Played { get; }
 
-        [Key(5)]
         public int Win { get; }
 
-        [Key(6)]
         public int Draw { get; }
 
-        [Key(7)]
         public int Loss { get; }
 
-        [Key(8)]
         public int GoalsFor { get; }
 
-        [Key(9)]
         public int GoalsAgainst { get; }
 
-        [Key(10)]
         public int GoalDiff { get; }
 
-        [Key(11)]
         public int Points { get; }
 
-        [Key(12)]
         public int Change { get; }
 
         [IgnoreMember]

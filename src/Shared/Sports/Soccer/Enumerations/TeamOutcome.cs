@@ -3,7 +3,7 @@ using MessagePack;
 
 namespace LiveScore.Soccer.Enumerations
 {
-    [MessagePackObject]
+    [MessagePackObject(keyAsPropertyName: true)]
     public class TeamOutcome : Enumeration
     {
         private const string FirstPositiveOutcomeColor = "FirstPositiveOutcomeColor";
@@ -70,7 +70,7 @@ namespace LiveScore.Soccer.Enumerations
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        [Key(2)]
+        
         public string FriendlyName { get; set; }
 
         [IgnoreMember]
