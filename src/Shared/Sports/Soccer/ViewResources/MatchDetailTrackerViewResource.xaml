@@ -28,7 +28,7 @@
         <Setter Property="WidthRequest"
                 Value="1000" />
         <Setter Property="HeightRequest"
-                Value="300" />
+                Value="230" />
         <Setter Property="Margin"
                 Value="0" />
     </Style>
