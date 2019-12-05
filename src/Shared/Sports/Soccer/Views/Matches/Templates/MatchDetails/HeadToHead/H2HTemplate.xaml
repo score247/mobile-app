@@ -10,7 +10,6 @@
               xmlns:collectionViewTemplates="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.CollectionViewTemplates;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
               xmlns:languageResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-              xmlns:circularProgress="clr-namespace:LiveScore.Core.Controls.CircleProgressBar;assembly=LiveScore.Core"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.HeadToHead.H2HTemplate">
     <StackLayout>
         <StackLayout.Resources>
@@ -40,7 +39,6 @@
                                       IsPullToRefreshEnabled="True"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
-                                      IsVisible="{Binding HasData}"
                                       GroupDisplayBinding="{Binding .}"
                                       GroupHeaderTemplate="{StaticResource MatchGroupHeaderTemplate}"
                                       ItemTemplate="{StaticResource MatchItemTemplateSelector}"
