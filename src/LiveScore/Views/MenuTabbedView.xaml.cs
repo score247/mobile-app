@@ -11,6 +11,9 @@ namespace LiveScore.Views
     {
         public MenuTabbedView()
         {
+            // TODO: Remove this line when enable hamburger
+            NavigationPage.SetHasNavigationBar(this, false);
+
             InitializeComponent();
             if (Device.RuntimePlatform == Device.iOS)
             {

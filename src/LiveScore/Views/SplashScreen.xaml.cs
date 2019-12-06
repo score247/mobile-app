@@ -31,7 +31,9 @@ namespace LiveScore.Views
         [Time]
         private async Task LoadMainPageAsync()
         {
-            var mainPage = new MainView { Detail = new MenuTabbedView() };
+            // TODO: Change this line when enable hamburger
+            //var mainPage = new MainView { Detail = new MenuTabbedView() };
+            var mainPage = new MenuTabbedView();
 
             await PageUtilities.OnInitializedAsync(mainPage, null);
             Navigation.InsertPageBefore(mainPage, Navigation.NavigationStack[0]);
