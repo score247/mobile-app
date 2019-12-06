@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
@@ -183,6 +184,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                     .Subscribe(OnReceivedMatchEvent);
 
                 EventAggregator
+                    .GetEvent<MatchEventRemovedPubSubEvent>()
+                    .Subscribe(OnReceivedMatchEventRemoved);
+
+                EventAggregator
                     .GetEvent<TeamStatisticPubSubEvent>()
                     .Subscribe(OnReceivedTeamStatistic);
             }
@@ -226,6 +231,23 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             MatchViewModel.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
+        }
+
+        protected internal async void OnReceivedMatchEventRemoved(IMatchEventRemovedMessage payload)
+        {
+            if (MatchViewModel.Match.Id != payload.MatchId)
+            {
+                return;
+            }
+
+            Debug.WriteLine($"OnReceivedMatchEventRemoved {payload.MatchId} - need to reload");
+
+            var matchInfo = await GetMatch(currentMatchId);
+
+            if (matchInfo?.Match != null)
+            {
+                BuildViewModel(matchInfo.Match);
+            }
         }
 
         private void BuildGeneralInfo(IMatch match)

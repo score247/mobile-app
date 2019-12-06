@@ -102,7 +102,8 @@ namespace LiveScore.Soccer.Services
                 new LiveMatchPubSubEventHandler(eventAggregator),
                 new OddsComparisonPubSubEventHandler(eventAggregator),
                 new OddsMovementPubSubEventHandler(eventAggregator),
-                new TeamStatisticPubSubEventHandler(eventAggregator)
+                new TeamStatisticPubSubEventHandler(eventAggregator),
+                new MatchEventRemovedPubSubEventHandler(eventAggregator),
             };
         }
 

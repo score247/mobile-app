@@ -106,6 +106,10 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                 eventAggregator
                     .GetEvent<MatchEventPubSubEvent>()
                     .Subscribe(OnReceivedMatchEvent);
+
+                EventAggregator
+                   .GetEvent<MatchEventRemovedPubSubEvent>()
+                   .Subscribe(OnReceivedMatchEventRemoved);
             }
         }
 
@@ -138,6 +142,20 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
                 .Concat(new List<TimelineEvent> {
                     matchEventMessage.MatchEvent.Timeline as TimelineEvent
                 }));
+
+            BuildInfoItems(MatchInfo);
+        }
+
+        protected internal async void OnReceivedMatchEventRemoved(IMatchEventRemovedMessage message)
+        {
+            if (match.Id != message.MatchId || MatchInfo == null)
+            {
+                return;
+            }
+
+            MatchInfo = await matchInfoService
+                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate.DateTime)
+                .ConfigureAwait(false);
 
             BuildInfoItems(MatchInfo);
         }
