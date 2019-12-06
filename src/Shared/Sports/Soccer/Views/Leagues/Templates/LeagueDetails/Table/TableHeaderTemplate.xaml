@@ -20,6 +20,7 @@
                 <commonConverters:TextNotEmptyConverter x:Key="TextNotEmptyConverter" />
             </ResourceDictionary>
         </FlexLayout.Resources>
+
         <BoxView Style="{StaticResource TableLine}"
                  IsVisible="{Binding CurrentLeagueName, Converter={StaticResource TextNotEmptyConverter}}" />
         <Grid Style="{StaticResource LeagueBox}"

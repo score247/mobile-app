@@ -73,31 +73,34 @@
             </x:Arguments>
             <cards:CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:ScoreMatchesViewModel">
-                    <FlexLayout JustifyContent="Center">
-                        <Label FlexLayout.AlignSelf="Center"
-                               IsVisible="{Binding IsComingSoon}"
-                               Style="{StaticResource NotificationLabel}"
-                               Text="Coming Soon" />
-                        <StackLayout IsVisible="{Binding IsNotComingSoon}">
-                            <Label IsVisible="{Binding NoData}"
-                                   Style="{StaticResource NotificationLabel}"
-                                   Text="{langs:Translate NoGames}" />
-
-                            <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
-                                                           TriggerLoadMoreIndex="1">
-                                <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                                    <DataTemplate>
-                                        <StackLayout>
-                                            <coreTemplates:MatchSkeletonTemplate />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                            </coreTemplates:MatchesTemplate>
-                        </StackLayout>
-                    </FlexLayout>
+                    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                                 AbsoluteLayout.LayoutFlags="SizeProportional">
+                        <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
+                                                       TriggerLoadMoreIndex="1">
+                            <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <Label IsVisible="{Binding IsComingSoon}"
+                                               Style="{StaticResource NotificationLabel}"
+                                               Text="Coming Soon" />
+                                        <Label IsVisible="{Binding NoData}"
+                                               Style="{StaticResource NotificationLabel}"
+                                               Text="{langs:Translate NoGames}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+                            <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <coreTemplates:MatchSkeletonTemplate />
+                                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
+                        </coreTemplates:MatchesTemplate>
+                    </ContentView>
                 </DataTemplate>
             </cards:CarouselView.ItemTemplate>
         </cards:CarouselView>

@@ -450,9 +450,9 @@
                 <Setter Property="Color"
                         Value="White" />
                 <Setter Property="HorizontalOptions"
-                        Value="CenterAndExpand" />
+                        Value="Center" />
                 <Setter Property="VerticalOptions"
-                        Value="CenterAndExpand" />
+                        Value="Center" />
             </Style>
             <!--  Define the basic table  -->
             <Style x:Key="TableContainer"

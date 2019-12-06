@@ -37,6 +37,7 @@ namespace LiveScore.Features.Score.ViewModels
             ViewDate = viewDate;
             RemainingMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>();
             LoadMoreCommand = new DelegateCommand(OnLoadMore);
+            HeaderViewModel = this;
         }
 
         public DateTime ViewDate { get; }

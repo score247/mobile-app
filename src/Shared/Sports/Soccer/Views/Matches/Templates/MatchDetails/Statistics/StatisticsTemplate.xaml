@@ -9,8 +9,9 @@
               xmlns:statistics="clr-namespace:LiveScore.Soccer.Views.Templates.MatchDetails.Statistics;assembly=LiveScore.Soccer"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Templates.MatchDetails.Statistics.StatisticsTemplate">
-    <StackLayout>
-        <StackLayout.Resources>
+    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="SizeProportional">
+        <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <resources:MatchDetailViewResource />
@@ -18,8 +19,8 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
             <statistics:StatisticItemTemplateSelector x:Key="StatisticItemTemplateSelector" />
-        </StackLayout.Resources>
-        <StackLayout BackgroundColor="{StaticResource StatisticsBackgroundColor}">
+        </ContentView.Resources>
+        <Grid BackgroundColor="{StaticResource StatisticsBackgroundColor}">
             <ActivityIndicator Margin="40"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
@@ -41,6 +42,6 @@
                     </StackLayout>
                 </tabStrip:TabItemListView.Header>
             </tabStrip:TabItemListView>
-        </StackLayout>
-    </StackLayout>
+        </Grid>
+    </ContentView>
 </DataTemplate>

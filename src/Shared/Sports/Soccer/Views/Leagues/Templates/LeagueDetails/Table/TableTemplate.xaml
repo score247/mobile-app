@@ -9,10 +9,11 @@
               xmlns:tableViews="clr-namespace:LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table"
               mc:Ignorable="d"
               x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Table.TableTemplate">
-    <Grid BackgroundColor="{StaticResource ListViewBgColor}"
-          VerticalOptions="FillAndExpand"
-          Padding="0,8,0,0">
-        <Grid.Resources>
+    <ContentView BackgroundColor="{StaticResource ListViewBgColor}"
+                 AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="SizeProportional"
+                 Padding="0,8,0,0">
+        <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <coreResources:MatchHeaderViewResource />
@@ -22,16 +23,14 @@
                 <tableViews:TableFooterTemplate  x:Key="TableFooterTemplate" />
                 <tableViews:TableHeaderTemplate  x:Key="TableHeaderTemplate" />
             </ResourceDictionary>
-        </Grid.Resources>
-        <ActivityIndicator Margin="40"
-                           VerticalOptions="Start"
-                           IsRunning="{Binding IsBusy}"
-                           IsVisible="{Binding IsBusy}"
-                           Style="{StaticResource CenterActivityIndicator}" />
-
-        <RefreshView IsRefreshing="{Binding IsRefreshing}"
-                     RefreshColor="White"
-                     Command="{Binding RefreshCommand}">
+        </ContentView.Resources>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="SizeProportional">
+            <ActivityIndicator Margin="40"
+                               VerticalOptions="Start"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Style="{StaticResource CenterActivityIndicator}" />
             <tabstrip:TabItemListView ItemsSource="{Binding TeamStandingsItemSource}"
                                       BackgroundColor="{StaticResource ListViewBgColor}"
                                       ItemTemplate="{StaticResource TableItemTemplate}"
@@ -39,15 +38,12 @@
                                       FooterTemplate="{StaticResource TableFooterTemplate}"
                                       Footer="{Binding .}"
                                       Header="{Binding .}"
-                                      SeparatorVisibility="None"
-                                      SeparatorColor="Transparent"
                                       IsRefreshing="{Binding IsRefreshing}"
                                       RefreshCommand="{Binding RefreshCommand}"
                                       IsPullToRefreshEnabled="True"
-                                      HasUnevenRows="True"
                                       IsVisible="{Binding IsNotBusy}"
                                       VerticalOptions="FillAndExpand">
             </tabstrip:TabItemListView>
-        </RefreshView>
-    </Grid>
+        </Grid>
+    </ContentView>
 </DataTemplate>
