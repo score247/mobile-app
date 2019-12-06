@@ -277,7 +277,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                     DependencyResolver,
                     tableTemplate,
                     homeTeamId: match.HomeTeamId,
-                    awayTeamId: match.AwayTeamId),
+                    awayTeamId: match.AwayTeamId,
+                    highlightTeamName: true),
                 [MatchDetailFunction.Tracker] = new TrackerCommentaryViewModel(coverage, match.EventDate.DateTime, NavigationService, DependencyResolver, EventAggregator, trackerTemplate)
             };
 

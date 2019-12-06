@@ -44,7 +44,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var awayId = parameters["AwayId"]?.ToString();
 
             LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId),
+                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
                 new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
         }

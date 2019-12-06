@@ -22,6 +22,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
         private readonly string currentLeagueSeasonId;
         private readonly string currentLeagueRoundGroup;
         private readonly ILeagueService leagueService;
+        private readonly bool highlightTeamName;
 
 #pragma warning disable S107 // Methods should not have too many parameters
 
@@ -35,7 +36,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             string leagueName = null,
             string countryFlag = null,
             string homeTeamId = null,
-            string awayTeamId = null)
+            string awayTeamId = null,
+            bool highlightTeamName = false)
             : base(navigationService, serviceLocator, dataTemplate, null, AppResources.Table)
         {
             currentLeagueId = leagueId;
@@ -47,6 +49,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             CurrentAwayTeamId = awayTeamId;
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
+            this.highlightTeamName = highlightTeamName;
         }
 
 #pragma warning restore S107 // Methods should not have too many parameters
@@ -133,7 +136,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
 
             foreach (var teamStanding in teamStandings)
             {
-                if (teamStanding.Id == CurrentHomeTeamId || teamStanding.Id == CurrentAwayTeamId)
+                if (highlightTeamName && (teamStanding.Id == CurrentHomeTeamId || teamStanding.Id == CurrentAwayTeamId))
                 {
                     teamStanding.IsHightLight = true;
                 }

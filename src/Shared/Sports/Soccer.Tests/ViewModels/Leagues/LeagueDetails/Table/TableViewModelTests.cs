@@ -51,7 +51,8 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Table
                 CurrentLeagueName,
                 CurrentLeagueFlag,
                 homeTeamId: CurrentHomeId,
-                awayTeamId: CurrentAwayId);
+                awayTeamId: CurrentAwayId,
+                highlightTeamName: true);
         }
 
         [Fact]
