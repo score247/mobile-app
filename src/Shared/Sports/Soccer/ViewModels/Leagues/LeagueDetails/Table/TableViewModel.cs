@@ -50,6 +50,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table
             leagueService = DependencyResolver.Resolve<ILeagueService>(SportType.Soccer.Value.ToString());
             RefreshCommand = new DelegateAsyncCommand(OnRefresh);
             this.highlightTeamName = highlightTeamName;
+            IsActive = true;
         }
 
 #pragma warning restore S107 // Methods should not have too many parameters
