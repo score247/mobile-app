@@ -118,6 +118,10 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
             eventAggregator
                 .GetEvent<MatchEventPubSubEvent>()
                 .Unsubscribe(OnReceivedMatchEvent);
+
+            EventAggregator
+                .GetEvent<MatchEventRemovedPubSubEvent>()
+                .Unsubscribe(OnReceivedMatchEventRemoved);
         }
 
         [Time]
