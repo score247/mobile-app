@@ -66,7 +66,7 @@ namespace LiveScore.Configurations
             {
                 o.Dsn = new Dsn(Configuration.SentryDsn);
                 o.Debug = Configuration.Debug;
-                o.Environment = Configuration.Enviroment;
+                o.Environment = Configuration.Environment;
             });
 
             return containerRegistry;

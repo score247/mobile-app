@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using ImTools;
+using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Enumerations;
+using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
@@ -41,7 +44,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 
         public IEnumerable<IGrouping<MatchGroupViewModel, MatchViewModel>> ResultMatchItemSource { get; private set; }
 
-        public IEnumerable<IGrouping<MatchGroupViewModel, MatchViewModel>> FixturesMatchItemSource { get; private set; }
+        public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> FixturesMatchItemSource { get; private set; }
 
         public DelegateCommand LoadResultMatchesCommand { get; }
 
@@ -56,7 +59,15 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             base.OnAppearing();
 
             SubscribeEvents();
-            await LoadDataAsync(LoadMatchesAsync);
+
+            if (FirstLoad)
+            {
+                await LoadDataAsync(LoadMatchesAsync);
+            }
+            else
+            {
+                await Task.Run(() => LoadDataAsync(UpdateMatchesAsync));
+            }
         }
 
         public override async void OnResumeWhenNetworkOK()
@@ -72,9 +83,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
-            (var resultMatches, var fixtureMatches) = GetResultsAndFixtures(matches);
+            var (resultMatches, fixtureMatches) = GetResultsAndFixtures(matches);
 
-            fixtureMatches = GenerateLoadedFixtures(fixtureMatches, ShowLoadFixturesButton || FirstLoad);
+            fixtureMatches = GenerateLoadedFixtures(fixtureMatches, ShowLoadFixturesButton || FirstLoad).ToList();
 
             var loadedItemCount = DefaultLoadedMatchItemCount - fixtureMatches.Count();
             resultMatches = GenerateLoadedResults(resultMatches, loadedItemCount < 0 ? 0 : loadedItemCount, ShowLoadResultsButton || FirstLoad);
@@ -88,6 +99,41 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
                => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(loadedMatchItems));
 
             FirstLoad = false;
+        }
+
+        protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
+        {
+            var matchList = matches?.ToList();
+
+            try
+            {
+                if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matchList?.Any() == true)
+                {
+                    InitializeMatchItems(matchList);
+                    return;
+                }
+
+                var loadedYesterdayOrTodayMatches = matchList.Where(match => MatchItemsSource.Any(item =>
+                    item.Any(matchItem
+                        => matchItem?.Match != null && matchItem.Match.Id == match.Id &&
+                           matchItem.Match.EventDate.IsFromYesterdayUntilNow())));
+
+                Device.BeginInvokeOnMainThread(() =>
+                    MatchItemsSource.UpdateMatchItems(
+                        loadedYesterdayOrTodayMatches,
+                        matchStatusBuilder,
+                        matchMinuteBuilder,
+                        EventAggregator,
+                        buildFlagUrlFunc,
+                        NavigationService,
+                        CurrentSportId));
+
+                ReloadFixtures(matchList, loadedYesterdayOrTodayMatches);
+            }
+            catch (Exception ex)
+            {
+                LoggingService.LogException(ex);
+            }
         }
 
         private void LoadResultMatches()
@@ -127,40 +173,44 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
 
         private static (IEnumerable<IMatch>, IEnumerable<IMatch>) GetResultsAndFixtures(IEnumerable<IMatch> matches)
         {
-            var orderedMatches = matches.OrderBy(match => match.EventDate);
-            var fixtures = orderedMatches.Where(match => match.EventStatus.IsNotStarted || match.EventDate >= DateTime.Today);
-            var results = orderedMatches.Except(fixtures);
+            var orderedMatches = matches.OrderBy(match => match.EventDate).ToList();
+            var fixtures = orderedMatches.Where(IsFixture).ToList();
+            var results = orderedMatches.Except(fixtures).ToList();
 
             return (results, fixtures);
         }
 
         private IEnumerable<IMatch> GenerateLoadedFixtures(IEnumerable<IMatch> matches, bool showLoadFixture = true)
-
         {
-            if (showLoadFixture && matches.Count() > DefaultLoadedMatchItemCount)
+            var fixtures = matches.ToList();
+
+            if (showLoadFixture && fixtures.Count > DefaultLoadedMatchItemCount)
             {
-                var loadedFixtureMatches = matches.Take(DefaultLoadedMatchItemCount);
-                FixturesMatchItemSource = matches.Skip(DefaultLoadedMatchItemCount)
+                var loadedFixtureMatches = fixtures.Take(DefaultLoadedMatchItemCount);
+                FixturesMatchItemSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(
+                    fixtures.Skip(DefaultLoadedMatchItemCount)
                      .Select(match => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator))
-                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
+                     .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague)));
                 ShowLoadFixturesButton = true;
 
                 return loadedFixtureMatches;
             }
 
             ClearFixtureButton();
-            return matches;
+            return fixtures;
         }
 
         private IEnumerable<IMatch> GenerateLoadedResults(IEnumerable<IMatch> matches, int loadedItemCount, bool showLoadResult = true)
         {
-            if (showLoadResult && matches.Count() > loadedItemCount)
+            var results = matches.ToList();
+
+            if (showLoadResult && results.Count > loadedItemCount)
             {
-                var loadedResultMatches = matches.TakeLast(loadedItemCount);
-                ResultMatchItemSource = matches.SkipLast(loadedItemCount)
-                   .OrderByDescending(match => match.EventDate)
+                var loadedResultMatches = results.TakeLast(loadedItemCount);
+                ResultMatchItemSource = results.SkipLast(loadedItemCount)
                    .Select(match => new MatchViewModel(match, matchStatusBuilder, matchMinuteBuilder, EventAggregator))
-                   .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague));
+                   .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId, EnableTapLeague))
+                   .Reverse();
                 ShowLoadResultsButton = true;
                 HeaderViewModel = this;
 
@@ -168,7 +218,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             }
 
             ClearResultButton();
-            return matches;
+            return results;
         }
 
         private void ClearFixtureButton()
@@ -183,5 +233,23 @@ namespace LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures
             HeaderViewModel = null;
             ShowLoadResultsButton = false;
         }
+
+        private void ReloadFixtures(IEnumerable<IMatch> matches, IEnumerable<IMatch> loadedYesterdayOrTodayMatches)
+        {
+            var fixtures = matches
+                .Except(loadedYesterdayOrTodayMatches)
+                .Where(IsFixture);
+
+            FixturesMatchItemSource?.UpdateMatchItems(
+                fixtures,
+                matchStatusBuilder,
+                matchMinuteBuilder,
+                EventAggregator,
+                buildFlagUrlFunc,
+                NavigationService,
+                CurrentSportId);
+        }
+
+        private static bool IsFixture(IMatch match) => match.EventStatus.IsLive || match.EventStatus.IsNotStarted || match.EventDate > DateTimeOffset.Now;
     }
 }

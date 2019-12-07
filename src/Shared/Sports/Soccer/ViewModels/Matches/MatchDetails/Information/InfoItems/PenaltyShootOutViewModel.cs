@@ -3,7 +3,7 @@ using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.TimelineImages;
 using Prism.Navigation;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
 {
     public class PenaltyShootOutViewModel : BaseItemViewModel
     {

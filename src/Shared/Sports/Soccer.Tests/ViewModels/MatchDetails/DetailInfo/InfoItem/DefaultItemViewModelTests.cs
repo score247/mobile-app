@@ -4,7 +4,7 @@ using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Models.Teams;
 using LiveScore.Soccer.Models.TimelineImages;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
 using NSubstitute;
 using Xunit;
 

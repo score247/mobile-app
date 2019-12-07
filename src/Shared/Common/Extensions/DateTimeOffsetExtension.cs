@@ -25,6 +25,11 @@ namespace LiveScore.Common.Extensions
         public static string ToLocalYear(this DateTimeOffset value)
            => value.LocalDateTime.Year.ToString();
 
+        public static DateTimeOffset Yesterday() => DateTime.Today.AddDays(-1);
+
+        public static bool IsFromYesterdayUntilNow(this DateTimeOffset dateTime)
+           => dateTime <= DateTimeOffset.Now || dateTime >= Yesterday();
+
         public static string ToApiFormat(this DateTimeOffset value)
             => value.LocalDateTime.ToString("yyyy-MM-ddTHH:mm:sszzz");
     }

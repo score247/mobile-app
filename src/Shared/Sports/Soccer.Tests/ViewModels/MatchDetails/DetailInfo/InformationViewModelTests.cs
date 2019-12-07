@@ -11,7 +11,7 @@ using LiveScore.Core.Services;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information;
 using NSubstitute;
 using Prism.Events;
 using Prism.Navigation;
@@ -23,15 +23,12 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
     {
         private readonly InformationViewModel viewModel;
         private readonly ISoccerMatchService matchService;
-        private readonly CompareLogic comparer;
-        private readonly IEventAggregator eventAggregator;
 
         private readonly SoccerMatch match;
         private readonly Fixture fixture;
 
         public InformationViewModelTests(ViewModelBaseFixture baseFixture)
         {
-            comparer = baseFixture.CommonFixture.Comparer;
             fixture = baseFixture.CommonFixture.Specimens;
             matchService = Substitute.For<ISoccerMatchService>();
             var networkConnectionManager = Substitute.For<INetworkConnection>();
@@ -41,7 +38,7 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
             baseFixture.DependencyResolver.Resolve<IHubService>("1").Returns(baseFixture.HubService);
             baseFixture.DependencyResolver.Resolve<INetworkConnection>().Returns(networkConnectionManager);
 
-            eventAggregator = Substitute.For<IEventAggregator>();
+            var eventAggregator = Substitute.For<IEventAggregator>();
             eventAggregator.GetEvent<ConnectionChangePubSubEvent>().Returns(new ConnectionChangePubSubEvent());
             eventAggregator.GetEvent<MatchEventPubSubEvent>().Returns(new MatchEventPubSubEvent());
 
@@ -186,7 +183,5 @@ namespace Soccer.Tests.ViewModels.MatchDetailInfo
         => fixture.Create<TimelineEvent>()
                 .With(timeline => timeline.Type, type)
                 .With(timeline => timeline.Time, time);
-
-
     }
 }

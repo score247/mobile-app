@@ -9,7 +9,7 @@ using LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems;
 using Prism.Navigation;
 using Xamarin.Forms;
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems
 {
     public class BaseItemViewModel : ViewModelBase
     {

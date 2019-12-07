@@ -4,7 +4,7 @@ using LiveScore.Core;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
 using LiveScore.Soccer.Views.Templates.MatchDetails.Information.InfomationItems;
 using Prism.Navigation;
 using Xamarin.Forms;

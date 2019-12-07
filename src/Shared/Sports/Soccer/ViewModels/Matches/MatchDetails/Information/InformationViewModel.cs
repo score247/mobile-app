@@ -12,7 +12,7 @@ using LiveScore.Core.PubSubEvents.Matches;
 using LiveScore.Soccer.Extensions;
 using LiveScore.Soccer.Models.Matches;
 using LiveScore.Soccer.Services;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
 using MethodTimer;
 using Prism.Events;
 using Prism.Navigation;
@@ -20,7 +20,7 @@ using Xamarin.Forms;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo("Soccer.Tests")]
 
-namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
+namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 {
     public class InformationViewModel : TabItemViewModel
     {

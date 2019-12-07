@@ -2,7 +2,7 @@
 using LiveScore.Core;
 using LiveScore.Core.Tests.Fixtures;
 using LiveScore.Soccer.Models.Matches;
-using LiveScore.Soccer.ViewModels.MatchDetails.Information.InfoItems;
+using LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information.InfoItems;
 using Prism.Navigation;
 using Xunit;
 

@@ -22,7 +22,7 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class ScoreMatchesViewModel : MatchesViewModel
     {
-        private const int EnableLoadOnDemainMatchThreshold = 150;
+        private const int EnableLoadOnDemandMatchThreshold = 150;
         private const int DefaultFirstLoadMatchItemCount = 8;
         private const int DefaultLoadingMatchItemCountOnScrolling = 16;
 
@@ -155,12 +155,12 @@ namespace LiveScore.Features.Score.ViewModels
                 match,
                 matchStatusBuilder,
                 matchMinuteBuilder,
-                EventAggregator));
+                EventAggregator)).ToList();
 
             var matchItems
-                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId));
+                = matchItemViewModels.GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, NavigationService, CurrentSportId)).ToList();
 
-            if (matchItemViewModels.Count() > EnableLoadOnDemainMatchThreshold)
+            if (matchItemViewModels.Count > EnableLoadOnDemandMatchThreshold)
             {
                 var loadItems = matchItems.Take(DefaultFirstLoadMatchItemCount);
 
@@ -179,15 +179,17 @@ namespace LiveScore.Features.Score.ViewModels
 
         protected override void UpdateMatchItems(IEnumerable<IMatch> matches)
         {
+            var matchList = matches?.ToList();
+
             try
             {
-                if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matches?.Any() == true)
+                if ((MatchItemsSource == null || MatchItemsSource.Count == 0) && matchList?.Any() == true)
                 {
-                    InitializeMatchItems(matches);
+                    InitializeMatchItems(matchList);
                     return;
                 }
 
-                var loadedMatches = matches
+                var loadedMatches = matchList
                     .Where(m => MatchItemsSource.Any(l => l.Any(lm => lm.Match?.Id == m.Id)));
 
                 Device.BeginInvokeOnMainThread(() =>
@@ -200,7 +202,7 @@ namespace LiveScore.Features.Score.ViewModels
                         NavigationService,
                         CurrentSportId));
 
-                var remainingMatches = matches.Except(loadedMatches);
+                var remainingMatches = matchList.Except(loadedMatches);
 
                 RemainingMatchItemSource?
                     .UpdateMatchItems(

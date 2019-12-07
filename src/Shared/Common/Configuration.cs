@@ -12,7 +12,7 @@
 
         string SentryDsn { get; }
 
-        string Enviroment { get; }
+        string Environment { get; }
 
         bool Debug { get; }
 
