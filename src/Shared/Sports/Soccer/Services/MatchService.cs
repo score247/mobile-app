@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
@@ -15,15 +16,15 @@ namespace LiveScore.Soccer.Services
 {
     public interface ISoccerMatchService
     {
-        Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTime eventDate);
+        Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTimeOffset eventDate);
 
-        Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTime eventDate, bool forceFetchLatestData = false);
+        Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false);
 
-        Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, DateTime eventDate);
+        Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, DateTimeOffset eventDate);
 
-        Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, DateTime eventDate);
+        Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, DateTimeOffset eventDate);
 
-        Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language, DateTime eventDate);
+        Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language, DateTimeOffset eventDate);
     }
 
     public class MatchService : BaseService, IMatchService, ISoccerMatchService
@@ -64,10 +65,10 @@ namespace LiveScore.Soccer.Services
         }
 
         [Time]
-        public async Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTime eventDate)
+        public async Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTimeOffset eventDate)
         {
             try
-            {
+            {                
                 return await apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName, eventDate.ToApiFormat()));
             }
             catch (Exception ex)
@@ -92,7 +93,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTime eventDate, bool forceFetchLatestData = false)
+        public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false)
         {
             try
             {
@@ -112,7 +113,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, DateTime eventDate)
+        public async Task<IEnumerable<MatchCommentary>> GetMatchCommentariesAsync(string matchId, Language language, DateTimeOffset eventDate)
         {
             try
             {
@@ -126,7 +127,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, DateTime eventDate)
+        public async Task<MatchStatistic> GetMatchStatisticAsync(string matchId, Language language, DateTimeOffset eventDate)
         {
             try
             {
@@ -140,7 +141,7 @@ namespace LiveScore.Soccer.Services
             }
         }
 
-        public async Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language, DateTime eventDate)
+        public async Task<MatchLineups> GetMatchLineupsAsync(string matchId, Language language, DateTimeOffset eventDate)
         {
             try
             {

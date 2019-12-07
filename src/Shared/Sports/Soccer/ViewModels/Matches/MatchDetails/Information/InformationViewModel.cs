@@ -154,7 +154,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
             }
 
             MatchInfo = await matchInfoService
-                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate.DateTime)
+                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate)
                 .ConfigureAwait(false);
 
             BuildInfoItems(MatchInfo);
@@ -163,7 +163,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Information
         private async Task LoadMatchDetail()
         {
             MatchInfo = await matchInfoService
-                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate.DateTime)
+                .GetMatchAsync(match.Id, CurrentLanguage, match.EventDate)
                 .ConfigureAwait(false);
 
             BuildInfoItems(MatchInfo);

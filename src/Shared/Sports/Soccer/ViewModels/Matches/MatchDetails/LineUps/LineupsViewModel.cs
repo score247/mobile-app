@@ -21,7 +21,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
     internal class LineupsViewModel : TabItemViewModel
     {
         private readonly string matchId;
-        private readonly DateTime eventDate;
+        private readonly DateTimeOffset eventDate;
 
         private readonly ISoccerMatchService soccerMatchService;
         private readonly IDeviceInfo deviceInfo;
@@ -30,7 +30,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
 
         public LineupsViewModel(
             string matchId,
-            DateTime eventDate,
+            DateTimeOffset eventDate,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,

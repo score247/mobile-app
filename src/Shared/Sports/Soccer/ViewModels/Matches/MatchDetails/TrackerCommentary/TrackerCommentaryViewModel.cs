@@ -31,13 +31,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
         private const string LanguagePrefix = "input-language";
         private const string LanguageCode = "en";
 
-        private readonly DateTime eventDate;
+        private readonly DateTimeOffset eventDate;
         private readonly MatchCoverage matchCoverage;
         private readonly ISoccerMatchService soccerMatchService;
 
         public TrackerCommentaryViewModel(
             MatchCoverage matchCoverage,
-            DateTime eventDate,
+            DateTimeOffset eventDate,
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator,

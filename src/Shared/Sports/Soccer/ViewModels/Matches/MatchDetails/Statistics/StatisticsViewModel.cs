@@ -17,13 +17,13 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
     public class StatisticsViewModel : TabItemViewModel
     {
         private readonly string matchId;
-        private readonly DateTime eventDate;
+        private readonly DateTimeOffset eventDate;
 
         private readonly ISoccerMatchService soccerMatchService;        
 
         public StatisticsViewModel(
             string matchId,
-            DateTime eventDate,
+            DateTimeOffset eventDate,
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             IEventAggregator eventAggregator,

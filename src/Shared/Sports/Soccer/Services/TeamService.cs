@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Matches;
@@ -40,6 +41,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
+                Debug.WriteLine($"GetTeamResults teamId: {teamId} opponentTeamId: {opponentTeamId}");
                 return await apiService.Execute(() => teamApi.GetTeamResults(language, teamId, opponentTeamId)).ConfigureAwait(false);
             }
             catch (Exception ex)
