@@ -201,10 +201,10 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
             Assert.True(matchesViewModel.ShowLoadFixturesButton);
             Assert.True(matchesViewModel.ShowLoadResultsButton);
 
-            var expectedFixtures = fixtures.Concat(postponeFixtures).OrderBy(m => m.EventDate).Skip(10);
-            var expectedFixtureItems = expectedFixtures
+            var expectedFixtures = fixtures.Concat(liveMatches).Concat(postponeFixtures).OrderBy(m => m.EventDate).Skip(10);
+            var expectedFixtureItems = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(expectedFixtures
                     .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
-                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
+                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague)));
             Assert.True(comparer.Compare(expectedFixtureItems, matchesViewModel.FixturesMatchItemSource).AreEqual);
         }
 
@@ -238,9 +238,9 @@ namespace Soccer.Tests.ViewModels.Leagues.LeagueDetails.Fixtures
 
             var expectedResults = expectedResult.SkipLast(7);
             var expectedResultItems = expectedResults
-                    .OrderByDescending(m => m.EventDate)
                     .Select(match => new MatchViewModel(match, matchDisplayStatusBuilder, matchMinuteBuilder, baseFixture.EventAggregator))
-                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague));
+                    .GroupBy(item => new MatchGroupViewModel(item.Match, buildFlagUrlFunc, baseFixture.NavigationService, matchesViewModel.CurrentSportId, matchesViewModel.EnableTapLeague))
+                    .Reverse();
             Assert.True(comparer.Compare(expectedResultItems, matchesViewModel.ResultMatchItemSource).AreEqual);
         }
 
