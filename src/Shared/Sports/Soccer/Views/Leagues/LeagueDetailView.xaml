@@ -31,6 +31,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
+            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
             <BoxView Style="{StaticResource HorizontalLine}" />
             <cardViewControls:TabsControl BindingContext="{x:Reference LeagueDetailCarouselView}"
                                           StripeColor="{StaticResource DateBarStripeColor}"

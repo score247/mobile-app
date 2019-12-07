@@ -1,5 +1,8 @@
 ﻿namespace LiveScore.Core.Views.Templates
 {
+    using System;
+    using System.Windows.Input;
+    using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -29,6 +32,19 @@
         {
             get => (string)GetValue(CurrentSportProperty);
             set => SetValue(CurrentSportProperty, value);
+        }
+
+        private void ShowSportSelection(object sender, EventArgs args)
+        {
+            var vm = BindingContext as ViewModelBase;
+            if (vm == null)
+            {
+                return;
+            }
+
+            vm.IsShowSportSelection = !vm.IsShowSportSelection;
+            arrowDownSelection.IsVisible = !vm.IsShowSportSelection;
+            arrowUpSelection.IsVisible = vm.IsShowSportSelection;
         }
     }
 }

@@ -4,28 +4,35 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+    xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-    xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     x:Name="self"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    xmlns:viewModels="clr-namespace:LiveScore.Features.News.ViewModels;"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
     </NavigationPage.TitleView>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
-                     Priority="1"
-                     Text="Search" />
-    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:ScoreViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Label
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label
                 FontSize="13"
                 HorizontalOptions="Center"
                 Text="News is coming soon"
                 TextColor="{StaticResource SecondTextColor}"
                 VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

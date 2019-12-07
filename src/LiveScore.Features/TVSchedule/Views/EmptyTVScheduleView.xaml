@@ -8,24 +8,33 @@
         xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
         xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
         xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+        xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
         Title="{Binding Title}"
         x:Name="self"
         prism:ViewModelLocator.AutowireViewModel="True"
-        BackgroundColor="{StaticResource PrimaryColor}">
+        BackgroundColor="{StaticResource SiteBackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:ScoreViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate
                     Title="{langs:Translate TV}"
                     mvvm:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
     </NavigationPage.TitleView>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
-                     Priority="1"
-                     Text="Search" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Label Text="TV is coming soon"
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label Text="TV is coming soon"
            TextColor="{StaticResource SecondTextColor}"
            HorizontalOptions="Center"
            VerticalOptions="Center" FontSize="13" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

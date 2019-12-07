@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using LiveScore.Core.ViewModels;
+using Xamarin.Forms;
 
 namespace LiveScore.Features.Favorites.Views
 {
@@ -7,6 +8,16 @@ namespace LiveScore.Features.Favorites.Views
         public EmptyFavoriteView()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            (BindingContext as ViewModelBase)?.OnAppearing();
+        }
+
+        protected override void OnDisappearing()
+        {
+            (BindingContext as ViewModelBase)?.OnDisappearing();
         }
     }
 }

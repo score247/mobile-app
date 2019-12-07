@@ -2,21 +2,32 @@
 <ContentPage
     x:Class="LiveScore.Features.Favorites.Views.EmptyFavoriteView"
     xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
-                     Priority="1"
-                     Text="Search" />
-    </ContentPage.ToolbarItems>
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:ScoreViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <Label
-            FontSize="13"
-            HorizontalOptions="Center"
-            Text="Favourite is coming soon"
-            TextColor="{StaticResource SecondTextColor}"
-            VerticalOptions="Center" />
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="13"
+                    HorizontalOptions="Center"
+                    Text="Favourite is coming soon"
+                    TextColor="{StaticResource SecondTextColor}"
+                    VerticalOptions="Center" />
+            </StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

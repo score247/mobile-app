@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using LiveScore.Core.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -28,6 +29,7 @@ namespace LiveScore.Soccer.Views
 
         protected override void OnDisappearing()
         {
+            (BindingContext as ViewModelBase)?.OnDisappearing();
             TabStrip.OnDisappearing();
         }
     }
