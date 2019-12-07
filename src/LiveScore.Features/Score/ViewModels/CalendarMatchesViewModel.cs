@@ -17,9 +17,5 @@ namespace LiveScore.Features.Score.ViewModels
         {
             IsComingSoon = true;
         }
-
-        protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
-        {
-        }
     }
 }
