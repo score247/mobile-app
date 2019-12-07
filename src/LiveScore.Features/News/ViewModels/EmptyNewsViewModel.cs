@@ -16,13 +16,5 @@ namespace LiveScore.Features.News.ViewModels
         {
             Title = "News";
         }
-        public override void OnDisappearing()
-        {
-            IsShowSportSelection = false;
-        }
-        public override void OnAppearing()
-        {
-            IsShowSportSelection = false;
-        }
     }
 }
