@@ -23,6 +23,8 @@
 
         public bool IsFirstLoad { get; protected set; } = true;
 
+        public bool IsActive { get; set; }
+
         public DataTemplate Template { get; }
 
         protected override async Task LoadDataAsync(Func<Task> loadDataFunc, bool showBusy = true)

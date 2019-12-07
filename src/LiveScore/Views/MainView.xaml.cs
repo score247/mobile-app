@@ -10,9 +10,8 @@ namespace LiveScore.Views
         public MainView()
         {
             InitializeComponent();
-#pragma warning disable S3366 // "this" should not be exposed from constructors
-            NavigationPage.SetHasNavigationBar(this, false);
-#pragma warning restore S3366 // "this" should not be exposed from constructors
+            MainView page = this;
+            NavigationPage.SetHasNavigationBar(page, false);
         }
 
         public bool IsPresentedAfterNavigation => Device.Idiom != TargetIdiom.Phone;

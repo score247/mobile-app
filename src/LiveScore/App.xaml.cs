@@ -111,8 +111,6 @@ namespace LiveScore
 
         protected override void OnSleep()
         {
-            Debug.WriteLine("OnSleep");
-
             base.OnSleep();
 
             Analytics.TrackEvent("Application OnSleep");
@@ -120,13 +118,24 @@ namespace LiveScore
 
         protected override async void OnResume()
         {
-            Debug.WriteLine("OnResume");
+            try
+            {
+                Analytics.TrackEvent("Application OnResume");
 
-            Analytics.TrackEvent("Application OnResume");
+                base.OnResume();
 
-            base.OnResume();
+                if (soccerHub == null)
+                {
+                    Analytics.TrackEvent("OnResume SoccerHub Null");
+                    soccerHub = Container.Resolve<IHubService>(SportType.Soccer.Value.ToString());
+                }
 
-            await Task.Run(async () => await soccerHub.ConnectWithRetry());
+                await Task.Run(async () => await soccerHub.ConnectWithRetry());
+            }
+            catch (Exception ex)
+            {
+                Analytics.TrackEvent($"OnResume: {ex}");
+            }
         }
 
         private void StartGlobalTimer(int intervalMinutes = 1)

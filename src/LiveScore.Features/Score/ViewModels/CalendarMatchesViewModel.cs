@@ -15,12 +15,11 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
+            IsComingSoon = true;
         }
 
         protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
         {
-            HasData = true;
-            IsComingSoon = true;
         }
     }
 }

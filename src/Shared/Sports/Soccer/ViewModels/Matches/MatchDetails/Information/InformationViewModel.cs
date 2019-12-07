@@ -146,6 +146,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
             BuildInfoItems(MatchInfo);
         }
 
+#pragma warning disable S3168 // "async" methods should not return "void"
+
         protected internal async void OnReceivedMatchEventRemoved(IMatchEventRemovedMessage message)
         {
             if (match.Id != message.MatchId || MatchInfo == null)
@@ -159,6 +161,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 
             BuildInfoItems(MatchInfo);
         }
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private async Task LoadMatchDetail()
         {

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using LiveScore.Core;
+using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
@@ -69,7 +70,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             base.OnAppearing();
 
-            LeagueDetailItemSources[SelectedIndex]?.OnAppearing();
+            if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
+            {
+                selectedItem.IsActive = true;
+                selectedItem.OnAppearing();
+            }
         }
 
         public override void OnDisappearing()
@@ -81,16 +86,22 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private void OnItemAppeared(ItemAppearedEventArgs args)
         {
-            LeagueDetailItemSources[SelectedIndex]?.OnAppearing();
+            if (LeagueDetailItemSources[SelectedIndex] is TabItemViewModel selectedItem)
+            {
+                selectedItem.IsActive = true;
+                selectedItem.OnAppearing();
+            }
         }
 
         private void OnItemDisappearing(ItemDisappearingEventArgs args)
         {
             if (args.Index >= 0)
             {
-                var previousItem = LeagueDetailItemSources[args.Index];
-
-                previousItem.OnDisappearing();
+                if (LeagueDetailItemSources[args.Index] is TabItemViewModel previousItem)
+                {
+                    previousItem.IsActive = false;
+                    previousItem.OnDisappearing();
+                }
             }
         }
     }
