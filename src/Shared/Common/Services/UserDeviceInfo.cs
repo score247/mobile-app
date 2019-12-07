@@ -21,6 +21,6 @@ namespace LiveScore.Common.Services
 
         public double Density => DeviceDisplay.MainDisplayInfo.Density;
 
-        public string Id => $"{DeviceInfo.Name}-{DeviceInfo.Model}-{DeviceInfo.DeviceType}"; 
+        public string Id => $"{DeviceInfo.Name}-{DeviceInfo.Model}-{DeviceInfo.DeviceType}";
     }
 }

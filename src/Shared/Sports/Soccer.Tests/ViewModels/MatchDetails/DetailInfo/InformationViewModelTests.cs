@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoFixture;
-using KellermanSoftware.CompareNetObjects;
 using LiveScore.Common.Services;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Models.Matches;

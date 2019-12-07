@@ -19,7 +19,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.Statistics
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
 
-        private readonly ISoccerMatchService soccerMatchService;        
+        private readonly ISoccerMatchService soccerMatchService;
 
         public StatisticsViewModel(
             string matchId,

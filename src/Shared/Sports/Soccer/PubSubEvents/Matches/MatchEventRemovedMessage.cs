@@ -2,7 +2,7 @@
 
 namespace LiveScore.Soccer.PubSubEvents.Matches
 {
-    public class MatchEventRemovedMessage: IMatchEventRemovedMessage
+    public class MatchEventRemovedMessage : IMatchEventRemovedMessage
     {
         public MatchEventRemovedMessage(string matchId, string[] timelineIds)
         {

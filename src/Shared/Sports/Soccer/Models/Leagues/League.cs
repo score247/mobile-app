@@ -24,25 +24,25 @@ namespace LiveScore.Soccer.Models.Leagues
             IsInternational = isInternational;
         }
 
-        
+
         public string Id { get; private set; }
 
-        
+
         public string Name { get; private set; }
 
-        
+
         public int Order { get; private set; }
 
-        
+
         public string CategoryId { get; private set; }
 
-        
+
         public string CountryName { get; private set; }
 
-        
+
         public string CountryCode { get; private set; }
 
-        
+
         public bool IsInternational { get; private set; }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using LiveScore.Core.Services;
-using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.SignalR.Protocol;
 using Microsoft.Extensions.Logging;

@@ -211,7 +211,8 @@ namespace LiveScore.Common.Tests.Services
             // Arrange
             var properties = fixture.Create<IDictionary<string, string>>();
             var exception = await ApiException.Create(
-                                new HttpRequestMessage { 
+                                new HttpRequestMessage
+                                {
                                     RequestUri = new Uri("http://demo.com")
                                 },
                                 HttpMethod.Get,
@@ -223,9 +224,9 @@ namespace LiveScore.Common.Tests.Services
             // Assert
             trackError
                 .Received()
-                .Invoke(exception, Arg.Is<Dictionary<string,string>>(
-                        properties => properties.ContainsKey("Api Exception") 
-                                        && properties["Api Exception"] == string.Join("\r\n", 
+                .Invoke(exception, Arg.Is<Dictionary<string, string>>(
+                        properties => properties.ContainsKey("Api Exception")
+                                        && properties["Api Exception"] == string.Join("\r\n",
                                                                                 "Request URL: http://demo.com/",
                                                                                 "Response: ",
                                                                                 "Reason Phrase: Internal Server Error")));

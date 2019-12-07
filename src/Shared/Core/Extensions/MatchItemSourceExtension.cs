@@ -8,7 +8,6 @@ using LiveScore.Core.Models.Teams;
 using LiveScore.Core.ViewModels;
 using Prism.Events;
 using Prism.Navigation;
-using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace LiveScore.Core.Extensions

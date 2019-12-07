@@ -1,5 +1,4 @@
-﻿using System;
-namespace LiveScore.Core.PubSubEvents.Matches
+﻿namespace LiveScore.Core.PubSubEvents.Matches
 {
     public interface IMatchEventRemovedMessage
     {

@@ -33,7 +33,10 @@ namespace LiveScore.Soccer.Models.Matches
 
         // TODO: Remove casting
         public string BuildMatchMinute(IMatch match)
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
             => BuildMatchMinute(match as SoccerMatch, DateTimeOffset.UtcNow);
+
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
         internal string BuildMatchMinute(SoccerMatch match, DateTimeOffset timeToViewMatch)
         {

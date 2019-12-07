@@ -10,7 +10,7 @@ namespace LiveScore.Soccer.PubSubEvents.Matches
             : base(eventAggregator)
         {
         }
-  
+
         public override string HubMethod => "RemovedEvent";
 
         protected override void Publish(MatchEventRemovedMessage message, MatchEventRemovedPubSubEvent pubSubEvent)

@@ -70,7 +70,7 @@ namespace LiveScore.Soccer.Enumerations
 
 #pragma warning disable S109 // Magic numbers should not be used
 
-        
+
         public string FriendlyName { get; set; }
 
         [IgnoreMember]

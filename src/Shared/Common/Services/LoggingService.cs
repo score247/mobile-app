@@ -88,7 +88,7 @@ namespace LiveScore.Common.Services
                         $"Response: {apiException?.Content}",
                         $"Reason Phrase: {apiException?.ReasonPhrase}");
 
-                    if(properties != null)
+                    if (properties != null)
                     {
                         properties.Add("Api Exception", apiInformation);
                     }
@@ -166,13 +166,13 @@ namespace LiveScore.Common.Services
 
         private static SentryEvent CreateSentryEvent(string message, IDictionary<string, string> properties, bool isErrorEvent = true)
         {
-            var logMessage = 
-                $"message: {message}{Console.Out.NewLine}" 
+            var logMessage =
+                $"message: {message}{Console.Out.NewLine}"
                 + string.Join(
-                    Console.Out.NewLine, 
-                    properties.Select(kv => 
-                        string.IsNullOrWhiteSpace(kv.Key) 
-                            ? kv.Value 
+                    Console.Out.NewLine,
+                    properties.Select(kv =>
+                        string.IsNullOrWhiteSpace(kv.Key)
+                            ? kv.Value
                             : $"{kv.Key}:{kv.Value}").ToArray());
 
             return DecorateSentryEvent(() => new SentryEvent { Message = logMessage }, isErrorEvent);

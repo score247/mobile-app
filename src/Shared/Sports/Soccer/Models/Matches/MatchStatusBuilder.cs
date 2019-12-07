@@ -40,7 +40,9 @@ namespace LiveScore.Soccer.Models.Matches
                 return string.Empty;
             }
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
             var soccerMatch = match as SoccerMatch;
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
             if (soccerMatch.EventStatus == null)
             {

@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Views.Templates
 {
     using System;
-    using System.Windows.Input;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;

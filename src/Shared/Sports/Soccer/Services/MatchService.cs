@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
@@ -68,7 +67,7 @@ namespace LiveScore.Soccer.Services
         public async Task<MatchInfo> GetMatchAsync(string matchId, Language language, DateTimeOffset eventDate)
         {
             try
-            {                
+            {
                 return await apiService.Execute(() => matchApi.GetMatchInfo(matchId, language.DisplayName, eventDate.ToApiFormat()));
             }
             catch (Exception ex)

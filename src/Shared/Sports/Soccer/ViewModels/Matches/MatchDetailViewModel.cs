@@ -203,8 +203,12 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
 
             EventAggregator
-              .GetEvent<MatchEventPubSubEvent>()
-              .Unsubscribe(OnReceivedMatchEvent);
+                .GetEvent<MatchEventPubSubEvent>()
+                .Unsubscribe(OnReceivedMatchEvent);
+
+            EventAggregator
+                .GetEvent<MatchEventRemovedPubSubEvent>()
+                .Unsubscribe(OnReceivedMatchEventRemoved);
 
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
@@ -235,6 +239,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             MatchViewModel.OnReceivedTeamStatistic(payload.IsHome, payload.TeamStatistic);
         }
 
+#pragma warning disable S3168 // "async" methods should not return "void"
+
         protected internal async void OnReceivedMatchEventRemoved(IMatchEventRemovedMessage payload)
         {
             if (MatchViewModel.Match.Id != payload.MatchId)
@@ -251,6 +257,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 BuildViewModel(matchInfo.Match);
             }
         }
+
+#pragma warning restore S3168 // "async" methods should not return "void"
 
         private void BuildGeneralInfo(IMatch match)
         {

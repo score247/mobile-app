@@ -23,19 +23,19 @@ namespace LiveScore.Soccer.Models.Leagues
             OutcomeList = outcomeList;
         }
 
-        
+
         public string Id { get; private set; }
 
-        
+
         public string Name { get; private set; }
 
-        
+
         public IEnumerable<LeagueGroupNote> GroupNotes { get; private set; }
 
-        
+
         public IEnumerable<TeamStanding> TeamStandings { get; private set; }
 
-        
+
         public IEnumerable<TeamOutcome> OutcomeList { get; private set; }
     }
 }

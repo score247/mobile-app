@@ -5,12 +5,12 @@ using Xunit;
 
 namespace LiveScore.Core.Tests
 {
-    public class dependencyResolverTests
+    public class DependencyResolverTests
     {
         private readonly IContainerProvider subContainerProvider;
         private readonly IDependencyResolver dependencyResolver;
 
-        public dependencyResolverTests()
+        public DependencyResolverTests()
         {
             subContainerProvider = Substitute.For<IContainerProvider>();
             dependencyResolver = new DependencyResolver(subContainerProvider);

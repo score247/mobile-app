@@ -20,16 +20,16 @@ namespace LiveScore.Soccer.Models.Leagues
             GroupTables = groupTables;
         }
 
-        
+
         public League League { get; }
 
-        
+
         public LeagueTableType Type { get; }
 
-        
+
         public LeagueSeason LeagueSeason { get; }
 
-        
+
         public IEnumerable<LeagueGroupTable> GroupTables { get; private set; }
     }
 }
