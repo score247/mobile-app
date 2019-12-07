@@ -7,7 +7,7 @@
     xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>

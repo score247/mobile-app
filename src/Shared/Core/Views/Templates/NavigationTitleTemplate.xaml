@@ -22,7 +22,7 @@
                    Style="{StaticResource SportName}"
                    Text="{Binding CurrentSport, Converter={StaticResource UpperCaseConverter}}" />
             <Label x:Name="arrowDownSelection" Style="{StaticResource SportDropdownIcon}" />
-            <Label x:Name="arrowUpSelection" Style="{StaticResource SportDropdownIcon}" />
+            <Label x:Name="arrowUpSelection" IsVisible="False" Style="{StaticResource SportDropdownIcon}" />
         </Grid>
     </ContentView.Content>
 </ContentView>

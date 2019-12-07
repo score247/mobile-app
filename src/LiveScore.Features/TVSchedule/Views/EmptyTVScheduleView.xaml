@@ -12,7 +12,7 @@
         Title="{Binding Title}"
         x:Name="self"
         prism:ViewModelLocator.AutowireViewModel="True"
-        BackgroundColor="{StaticResource PrimaryColor}">
+        BackgroundColor="{StaticResource SiteBackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

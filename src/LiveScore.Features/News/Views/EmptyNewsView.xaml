@@ -10,7 +10,7 @@
     x:Name="self"
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
+    BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate News}" prism:ViewModelLocator.AutowirePartialView="{x:Reference self}" />
     </NavigationPage.TitleView>
