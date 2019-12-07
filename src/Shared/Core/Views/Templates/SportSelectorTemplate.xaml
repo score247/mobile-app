@@ -15,21 +15,29 @@
     </ContentView.Resources>
     <ContentView.Content>
         <StackLayout>
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <Label
+                x:Name="Soccer"
+                Style="{StaticResource NavName}"
+                Text="Soccer" />
+                <Label Style="{StaticResource CheckIcon}" />
+            </FlexLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
-            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
-                               Style="{StaticResource SportSelection}"
-                               HorizontalOptions="StartAndExpand"
-                               Text="Soccer" />
-            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
-                               Style="{StaticResource SportSelection}"
-                               TextColor="{StaticResource LineColor}"
-                               HorizontalOptions="StartAndExpand"
-                               Text="Basketball(Coming soon)" />
-            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
-                               Style="{StaticResource SportSelection}"
-                               HorizontalOptions="StartAndExpand"
-                               TextColor="{StaticResource LineColor}"
-                               Text="Esport(Commong soon)" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <Label
+                x:Name="Basketball"
+                Style="{StaticResource NavName}"
+                Text="Basketball(Coming soon)" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <Label
+                x:Name="ESport"
+                Style="{StaticResource NavName}"
+                Text="E-Sport(Coming soon)" />
+            </FlexLayout>
         </StackLayout>
     </ContentView.Content>
 </ContentView>
