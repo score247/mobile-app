@@ -9,6 +9,13 @@
         <Setter Property="FontSize" Value="{StaticResource SportNameFontSize}" />
         <Setter Property="FontAttributes" Value="Bold" />
     </Style>
+    <Style x:Key="SportSelection" BasedOn="{StaticResource NavigationName}" TargetType="Label">
+        <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,6" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoMedium}" />
+        <Setter Property="FontSize" Value="{StaticResource SportNameFontSize}" />
+    </Style>
     <Style x:Key="SportDropdownIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />

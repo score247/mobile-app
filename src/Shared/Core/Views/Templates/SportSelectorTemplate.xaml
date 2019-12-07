@@ -16,9 +16,20 @@
     <ContentView.Content>
         <StackLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
-            <Label FlexLayout.AlignSelf="Center"
-                               Style="{StaticResource NotificationLabel}"
-                               Text="Coming Soon" />
+            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
+                               Style="{StaticResource SportSelection}"
+                               HorizontalOptions="StartAndExpand"
+                               Text="Soccer" />
+            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
+                               Style="{StaticResource SportSelection}"
+                               TextColor="{StaticResource LineColor}"
+                               HorizontalOptions="StartAndExpand"
+                               Text="Basketball(Coming soon)" />
+            <Label Padding="20,0,0,0" FlexLayout.AlignSelf="Start"
+                               Style="{StaticResource SportSelection}"
+                               HorizontalOptions="StartAndExpand"
+                               TextColor="{StaticResource LineColor}"
+                               Text="Esport(Commong soon)" />
         </StackLayout>
     </ContentView.Content>
 </ContentView>
