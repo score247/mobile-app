@@ -12,6 +12,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:score="clr-namespace:LiveScore.Features.Score.Views;assembly=LiveScore.Features"
     xmlns:tv="clr-namespace:LiveScore.Features.TVSchedule.Views;assembly=LiveScore.Features"
+    x:Name="MainTabbedPage"
     android:TabbedPage.BarItemColor="{StaticResource TabColor}"
     android:TabbedPage.BarSelectedItemColor="{StaticResource FunctionBarActiveColor}"
     android:TabbedPage.ToolbarPlacement="Bottom"

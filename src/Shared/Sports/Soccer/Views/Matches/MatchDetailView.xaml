@@ -32,12 +32,13 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
+            <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
+                         Style="{StaticResource HorizontalLine}" />
             <StackLayout x:Name="MatchDetailLayout"
                          VerticalOptions="FillAndExpand"
                          AbsoluteLayout.LayoutBounds="0,0,1,1.22"
                          AbsoluteLayout.LayoutFlags="SizeProportional">
-                <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
-                         Style="{StaticResource HorizontalLine}" />
+                <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
                 <Frame CornerRadius="0"
                        HasShadow="True">
                     <StackLayout x:Name="MatchDetailGeneralInfo">
