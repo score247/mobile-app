@@ -16,18 +16,17 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 {
     public class TrackerCommentaryViewModelTests : IClassFixture<ViewModelBaseFixture>, IClassFixture<ResourcesFixture>
     {
+        private static readonly DateTime MatchEventDate = new DateTime(2019, 01, 01);
         private readonly ISoccerMatchService matchService;
         private readonly ILoggingService logService;
         private readonly IEventAggregator eventAggregator;
         private readonly Fixture fixture;
         private readonly ViewModelBaseFixture baseFixture;
 
-
         public TrackerCommentaryViewModelTests(ViewModelBaseFixture baseFixture)
         {
             this.baseFixture = baseFixture;
             fixture = baseFixture.CommonFixture.Specimens;
-
 
             matchService = Substitute.For<ISoccerMatchService>();
             logService = Substitute.For<ILoggingService>();
@@ -88,7 +87,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -112,7 +111,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -134,7 +133,7 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -155,11 +154,11 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
                 .With(m => m.Coverage, coverage);
 
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), Arg.Any<DateTime>()).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+              MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -180,11 +179,11 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
                 .With(m => m.Coverage, coverage);
 
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), DateTime.Now).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -205,11 +204,11 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
                 .With(m => m.Coverage, coverage);
 
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), Arg.Any<DateTime>()).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,
@@ -233,11 +232,11 @@ namespace Soccer.Tests.ViewModels.MatchDetails.TrackerCommenraty
                 .With(m => m.Coverage, coverage);
 
             var commentaries = fixture.CreateMany<MatchCommentary>();
-            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), Arg.Any<DateTime>()).Returns(commentaries);
+            matchService.GetMatchCommentariesAsync(matchCoverage.MatchId, Arg.Any<Language>(), MatchEventDate).Returns(commentaries);
 
             var viewModel = new TrackerCommentaryViewModel(
                matchCoverage,
-               DateTime.Now,
+               MatchEventDate,
                baseFixture.NavigationService,
                baseFixture.DependencyResolver,
                eventAggregator,

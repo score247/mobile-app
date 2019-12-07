@@ -22,10 +22,9 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.LineUps
     {
         private readonly string matchId;
         private readonly DateTimeOffset eventDate;
-
         private readonly ISoccerMatchService soccerMatchService;
         private readonly IDeviceInfo deviceInfo;
-        
+
         private readonly Action<Action> beginInvokeOnMainThreadFunc;
 
         public LineupsViewModel(
