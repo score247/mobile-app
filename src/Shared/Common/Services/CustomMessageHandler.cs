@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Prism.Ioc;
@@ -60,6 +61,8 @@ namespace LiveScore.Common.Services
                         await HandleRequestException(retryTime, ex).ConfigureAwait(false);
                     }
                 }
+
+                networkConnection.PublishConnectionTimeoutEvent();
             }
             else
             {
@@ -71,10 +74,21 @@ namespace LiveScore.Common.Services
 
         private async Task HandleRequestException(int retryTime, Exception ex)
         {
-            // Temporary workaroung because task cancelled exception
+            // Temporary workaround because task cancelled exception
             await GetAuthenticationToken();
 
             await loggingService.TrackEventAsync($"Retry Request {retryTime} times", ex.ToString()).ConfigureAwait(false);
+
+#pragma warning disable S1067 // Expressions should not be too complex
+            if ((ex is SocketException
+                || ex is WebException
+                || ex?.InnerException is SocketException
+                || ex?.InnerException is WebException) 
+                    && (retryTime >= 1 || ex.Message.Contains("timed out", StringComparison.OrdinalIgnoreCase)))
+#pragma warning restore S1067 // Expressions should not be too complex
+            {
+                networkConnection.PublishConnectionTimeoutEvent();
+            }
 
             await Task.Delay(TimeSpan.FromMilliseconds(retryIntervalMiliseconds));
         }

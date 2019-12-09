@@ -133,9 +133,9 @@ namespace LiveScore.Soccer.Services
                     await hubConnection.StartAsync();
                     await Task.Delay(NumOfDelayMillisecondsBeforeReConnect);
 
-                    await logger.TrackEventAsync(
-                            "SoccerHubService",
-                            $"Connect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}");
+                    ////await logger.TrackEventAsync(
+                    ////        "SoccerHubService",
+                    ////        $"Connect {retryCount} times, hub state {hubConnection.State}, at {DateTime.Now}");
                 }
                 catch (Exception exception)
                 {

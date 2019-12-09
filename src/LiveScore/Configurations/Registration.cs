@@ -104,7 +104,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterInstance(new RefitSettings
             {
-                ContentSerializer = new MessagePackContentSerializer()
+                ContentSerializer = new MessagePackContentSerializer(container.Resolve<ILoggingService>())
             });
 
             containerRegistry.RegisterSingleton<IDependencyResolver, DependencyResolver>();

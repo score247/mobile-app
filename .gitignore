@@ -263,3 +263,5 @@ docs/_build/
 *.blob
 
 *.ncrunchproject
+
+/nCrunchTemp

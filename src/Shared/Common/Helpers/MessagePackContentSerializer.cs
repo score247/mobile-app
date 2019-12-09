@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using LiveScore.Common.Services;
 using MessagePack;
 using Newtonsoft.Json;
 using Refit;
@@ -11,8 +13,9 @@ namespace LiveScore.Common.Helpers
     public class MessagePackContentSerializer : IContentSerializer
     {
         private readonly Lazy<JsonSerializerSettings> jsonSerializerSettings;
+        private readonly ILoggingService loggingService;
 
-        public MessagePackContentSerializer()
+        public MessagePackContentSerializer(ILoggingService loggingService)
         {
             jsonSerializerSettings = new Lazy<JsonSerializerSettings>(() =>
             {
@@ -23,10 +26,37 @@ namespace LiveScore.Common.Helpers
 
                 return JsonConvert.DefaultSettings();
             });
+
+            this.loggingService = loggingService;
         }
 
         public async Task<T> DeserializeAsync<T>(HttpContent content)
-        => MessagePackSerializer.Deserialize<T>(await content.ReadAsStreamAsync().ConfigureAwait(false));
+        {
+            var stream = await content.ReadAsStreamAsync().ConfigureAwait(false);
+
+            try
+            {
+                return MessagePackSerializer.Deserialize<T>(stream);
+            }
+            catch(Exception ex)
+            {
+                await LogException(stream, ex);
+            }
+
+            return default;
+        }
+
+        private async Task LogException(Stream stream, Exception ex)
+        {
+            var requestBody = string.Empty;
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                requestBody = Encoding.UTF8.GetString(memoryStream.ToArray());
+            }
+
+            await loggingService.LogExceptionAsync(ex, $"Body: {requestBody}, Message: {ex.Message}");
+        }
 
         public Task<HttpContent> SerializeAsync<T>(T item)
         {
