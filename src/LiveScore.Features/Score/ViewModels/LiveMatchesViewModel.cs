@@ -87,9 +87,9 @@ namespace LiveScore.Features.Score.ViewModels
                 return;
             }
 
-            MatchItemsSource.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc, NavigationService, CurrentSportId);
+            MatchItemsSource?.RemoveMatches(message.RemoveMatchIds, buildFlagUrlFunc, NavigationService, CurrentSportId);
 
-            HasData = (message.NewMatches?.Any() == true) || MatchItemsSource.Any();
+            HasData = (message.NewMatches?.Any() == true) || MatchItemsSource?.Any() != false;
 
             if (HasData)
             {

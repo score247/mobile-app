@@ -10,6 +10,7 @@ namespace LiveScore.Soccer.Enumerations
         private const string SecondPositiveOutcomeColor = "SecondPositiveOutcomeColor";
         private const string ThirdPositiveOutcomeColor = "ThirdPositiveOutcomeColor";
         private const string FourthPositiveOutcomeColor = "FourthPositiveOutcomeColor";
+        private const string FifthPositiveOutcomeColor = "FifthPositiveOutcomeColor";
         private const string FirstNegativeOutcomeColor = "FirstNegativeOutcomeColor";
         private const string SecondNegativeOutcomeColor = "SecondNegativeOutcomeColor";
 
@@ -35,7 +36,7 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly TeamOutcome GroupMatches = new TeamOutcome(20, "group matches", "Group Matches", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome InternationalCompetition = new TeamOutcome(21, "international competition", "International Competition", FourthPositiveOutcomeColor);
         public static readonly TeamOutcome MainRound = new TeamOutcome(22, "main round", "Main Round", FourthPositiveOutcomeColor);
-        public static readonly TeamOutcome NextGroupPhase = new TeamOutcome(23, "next group phase", "Next Group Phase", FourthPositiveOutcomeColor);
+        public static readonly TeamOutcome NextGroupPhase = new TeamOutcome(23, "next group phase", "Next Group Phase", FifthPositiveOutcomeColor);
         public static readonly TeamOutcome PlacementMatches = new TeamOutcome(24, "placement matches", "Placement Matches", FourthPositiveOutcomeColor);
         public static readonly TeamOutcome Playoffs = new TeamOutcome(25, "playoffs", "Playoffs", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome PreliminaryRound = new TeamOutcome(26, "preliminary round", "Preliminary Round", ThirdPositiveOutcomeColor);
@@ -69,7 +70,6 @@ namespace LiveScore.Soccer.Enumerations
         }
 
 #pragma warning disable S109 // Magic numbers should not be used
-
 
         public string FriendlyName { get; set; }
 
