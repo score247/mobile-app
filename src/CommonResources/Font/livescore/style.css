@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'livescore';
-  src:  url('fonts/livescore.eot?z3mud6');
-  src:  url('fonts/livescore.eot?z3mud6#iefix') format('embedded-opentype'),
-    url('fonts/livescore.ttf?z3mud6') format('truetype'),
-    url('fonts/livescore.woff?z3mud6') format('woff'),
-    url('fonts/livescore.svg?z3mud6#livescore') format('svg');
+  src:  url('fonts/livescore.eot?fafiu1');
+  src:  url('fonts/livescore.eot?fafiu1#iefix') format('embedded-opentype'),
+    url('fonts/livescore.ttf?fafiu1') format('truetype'),
+    url('fonts/livescore.woff?fafiu1') format('woff'),
+    url('fonts/livescore.svg?fafiu1#livescore') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-soccer:before {
+  content: "\e92a";
+  color: #fff;
+}
 .icon-favorite-active:before {
   content: "\e929";
   color: #ff7d00;

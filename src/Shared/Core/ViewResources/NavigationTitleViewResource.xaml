@@ -2,6 +2,10 @@
 <ResourceDictionary x:Class="LiveScore.Core.ViewResources.NavigationTitleViewResource"
                     xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Color x:Key="SportActiveColor">#FF7D00</Color>
+    <Color x:Key="SportDisabledColor">#858585</Color>
+    
     <Style x:Key="SportName" BasedOn="{StaticResource NavigationName}" TargetType="Label">
         <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
         <Setter Property="VerticalOptions" Value="Center" />
@@ -12,9 +16,39 @@
     <Style x:Key="SportDropdownIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Margin" Value="73,-2,0,0" />
-        <Setter Property="FontSize" Value="11" />
+        <Setter Property="Margin" Value="73,0,0,0" />
+        <Setter Property="FontSize" Value="10" />
         <Setter Property="Text" Value="&#xe902;" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
+    </Style>
+    <Style x:Key="SportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="HorizontalTextAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,0,14,0" />
+        <Setter Property="WidthRequest" Value="30" />
+    </Style>
+    <Style x:Key="SoccerIcon" BasedOn="{StaticResource SportsIcon}" TargetType="Label">
+        <Setter Property="Text" Value="&#xe92a;" />
+        <Setter Property="TextColor" Value="{StaticResource SportActiveColor}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style x:Key="BasketBallIcon" BasedOn="{StaticResource SportsIcon}" TargetType="Label">
+        <Setter Property="Text" Value="&#xe900;" />
+        <Setter Property="TextColor" Value="{StaticResource SportDisabledColor}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style x:Key="ESportsIcon" BasedOn="{StaticResource SportsIcon}" TargetType="Label">
+        <Setter Property="Text" Value="&#xe901;" />
+        <Setter Property="TextColor" Value="{StaticResource SportDisabledColor}" />
+        <Setter Property="FontSize" Value="14" />
+    </Style>
+
+    <Style x:Key="SportsDisabledLabel" BasedOn="{StaticResource NavName}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SportDisabledColor}" />
+    </Style>
+    <Style x:Key="SportsActiveLabel" BasedOn="{StaticResource NavName}" TargetType="Label">
+        <Setter Property="TextColor" Value="{StaticResource SportActiveColor}" />
     </Style>
 </ResourceDictionary>

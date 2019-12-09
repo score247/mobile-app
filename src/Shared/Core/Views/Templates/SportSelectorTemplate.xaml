@@ -16,27 +16,29 @@
     <ContentView.Content>
         <StackLayout>
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label
-                x:Name="Soccer"
-                Style="{StaticResource NavName}"
-                Text="Soccer" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource SoccerIcon}" />
+                    <Label x:Name="Soccer" Style="{StaticResource SportsActiveLabel}" Text="Soccer" />
+                </StackLayout>
                 <Label Style="{StaticResource CheckIcon}" />
             </FlexLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label
-                x:Name="Basketball"
-                Style="{StaticResource NavName}"
-                Text="Basketball(Coming soon)" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource BasketBallIcon}" />
+                    <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource SportsDisabledLabel}" />
+                </StackLayout>
+                <Label Style="{StaticResource NavName}" Text="Coming soon" />
             </FlexLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
-                <Label
-                x:Name="ESport"
-                Style="{StaticResource NavName}"
-                Text="E-Sport(Coming soon)" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource ESportsIcon}" />
+                    <Label x:Name="ESport" Style="{StaticResource SportsDisabledLabel}" Text="E-Sport" />
+                </StackLayout>
+                <Label Style="{StaticResource NavName}" Text="Coming soon" />
             </FlexLayout>
         </StackLayout>
     </ContentView.Content>

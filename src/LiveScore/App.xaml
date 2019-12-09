@@ -175,6 +175,7 @@
             <Color x:Key="SecondPositiveOutcomeColor">#0099CB</Color>
             <Color x:Key="ThirdPositiveOutcomeColor">#2ABBAC</Color>
             <Color x:Key="FourthPositiveOutcomeColor">#0E47A1</Color>
+            <Color x:Key="FifthPositiveOutcomeColor">#4F0EA1</Color>
             <Color x:Key="FirstNegativeOutcomeColor">#E30000</Color>
             <Color x:Key="SecondNegativeOutcomeColor">#E77676</Color>
 

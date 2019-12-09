@@ -11,7 +11,8 @@
     <Grid  HorizontalOptions="CenterAndExpand"
            VerticalOptions="CenterAndExpand"
                 WidthRequest="48"
-                HeightRequest="60">
+                HeightRequest="60"
+           Margin="-2,0,0,0">
         <Grid.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
