@@ -22,9 +22,6 @@ using Xamarin.Forms;
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("72bdc44f-c588-44f3-b6df-9aace7daafdd")]
 
-// WebView renderer that replaces UIWebView with WkWebView
-[assembly: ExportRenderer(typeof(WebView), typeof(Xamarin.Forms.Platform.iOS.WkWebViewRenderer))]
-
 // Version information for an assembly consists of the following four values:
 //
 //      Major Version
