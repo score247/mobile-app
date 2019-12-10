@@ -6,6 +6,8 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     Title="Default Sport"
     prism:ViewModelLocator.AutowireViewModel="True"
+    xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+    x:DataType="viewModel:DefaultSportViewModel"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem

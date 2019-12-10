@@ -6,6 +6,8 @@
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:resources="clr-namespace:LiveScore.Features.News.ViewResources"
+    xmlns:viewModel="clr-namespace:LiveScore.Features.News.ViewModels"
+    x:DataType="viewModel:NewsViewModel"
     x:Name="self"
     mvvm:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">

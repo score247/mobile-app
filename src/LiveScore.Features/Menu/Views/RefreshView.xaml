@@ -6,6 +6,8 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     Title="Automatic Refresh"
     prism:ViewModelLocator.AutowireViewModel="True"
+    xmlns:viewModel="clr-namespace:LiveScore.Features.Menu.ViewModels"
+    x:DataType="viewModel:RefreshViewModel"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.ToolbarItems x:Uid="toolbarItem">
         <ToolbarItem

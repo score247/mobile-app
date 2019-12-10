@@ -7,8 +7,10 @@
               xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
               xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources"
               xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+              xmlns:viewModel="clr-namespace:LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures"
               mc:Ignorable="d"
-              x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Fixtures.FixturesTemplate">
+              x:Class="LiveScore.Soccer.Views.Leagues.Templates.LeagueDetails.Fixtures.FixturesTemplate"
+              x:DataType="viewModel:FixturesViewModel">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional"
                  Padding="0,8,0,0">
@@ -23,7 +25,7 @@
         </ContentView.Resources>
         <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
             <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
                     <StackLayout>
                         <Label Style="{StaticResource NoInfo}"
                                Text="{langResources:Translate NoData}"
@@ -36,7 +38,7 @@
                 </DataTemplate>
             </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
             <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
                     <StackLayout Padding="0,8,0,0">
                         <coreTemplates:MatchSkeletonTemplate />
                         <coreTemplates:MatchSkeletonTemplate />
