@@ -2,6 +2,7 @@
 {
     using System;
     using LiveScore.Core.ViewModels;
+    using Rg.Plugins.Popup.Services;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -35,22 +36,13 @@
 
         private async void ShowSportSelection(object sender, EventArgs args)
         {
-            var vm = BindingContext as ViewModelBase;
-            if (vm == null)
+            if (!(BindingContext is ViewModelBase vm))
             {
                 return;
             }
 
-            if (vm.IsShowSportSelection)
-            {
-                await arrowDownSelection.RotateTo(0, 200, Easing.SinIn);
-            }
-            else
-            {
-                await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
-            }
-
-            vm.IsShowSportSelection = !vm.IsShowSportSelection;
+            var selectionPage = new SelectSportView();
+            await PopupNavigation.Instance.PushAsync(selectionPage);
         }
     }
 }

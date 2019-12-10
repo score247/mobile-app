@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="LiveScore.Core.Views.SelectSportView"
+<pages:PopupPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:viewModel="clr-namespace:LiveScore.Core.ViewModels"
-    xmlns:models="clr-namespace:LiveScore.Core.Models"
+    xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
     x:DataType="viewModel:SelectSportViewModel"
     Title="Select Sport"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource PrimaryColor}">
-    <ContentPage.ToolbarItems x:Uid="toolbarItem">
-        <ToolbarItem
-            Name="Done"
-            Command="{Binding DoneCommand}"
-            Order="Primary"
-            Priority="1"
-            Text="Done" />
-    </ContentPage.ToolbarItems>
+    mc:Ignorable="d"
+    x:Class="LiveScore.Core.Views.SelectSportView">
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <resources:NavigationTitleViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </pages:PopupPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Start" Margin="0,50,0,0">
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource SoccerIcon}" />
+                    <Label x:Name="Soccer" Style="{StaticResource SportsActiveLabel}" Text="Soccer" />
+                </StackLayout>
+                <Label Style="{StaticResource CheckIcon}" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
 
-    <StackLayout>
-        <ListView
-            AutomationProperties.IsInAccessibleTree="False"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            ItemsSource="{Binding SportItems}"
-            SelectedItem="{Binding SelectedSportItem}"
-            SeparatorColor="{StaticResource LineColor}"
-            VerticalOptions="FillAndExpand">
-            <ListView.Behaviors>
-                <b:EventToCommandBehavior Command="{Binding SelectSportItemCommand}" EventName="ItemTapped" />
-            </ListView.Behaviors>
-            <ListView.ItemTemplate>
-                <DataTemplate x:DataType="models:SportItem">
-                    <ViewCell>
-                        <FlexLayout Style="{StaticResource SettingMenuRow}">
-                            <Label
-                                Style="{StaticResource NavName}"
-                                Text="{Binding Type.DisplayName}" />
-                            <Label IsVisible="{Binding IsVisible}" Style="{StaticResource CheckIcon}" />
-                        </FlexLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-            <ListView.Footer>
-                <StackLayout Orientation="Horizontal" />
-            </ListView.Footer>
-        </ListView>
-    </StackLayout>
-</ContentPage>
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource BasketBallIcon}" />
+                    <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource SportsDisabledLabel}" />
+                </StackLayout>
+                <Label Style="{StaticResource NavName}" Text="Coming soon" />
+            </FlexLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
+
+            <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <StackLayout Orientation="Horizontal">
+                    <Label Style="{StaticResource ESportsIcon}" />
+                    <Label x:Name="ESport" Style="{StaticResource SportsDisabledLabel}" Text="E-Sport" />
+                </StackLayout>
+                <Label Style="{StaticResource NavName}" Text="Coming soon" />
+            </FlexLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</pages:PopupPage>
