@@ -183,7 +183,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
 
         private void BuildInfoItems(MatchInfo matchInfo)
         {
-            if (matchInfo.TimelineEvents == null)
+            if (matchInfo?.TimelineEvents == null)
             {
                 return;
             }
