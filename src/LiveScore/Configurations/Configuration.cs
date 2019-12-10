@@ -1,4 +1,4 @@
-﻿using LiveScore.Common;
+using LiveScore.Common;
 
 namespace LiveScore.Configurations
 {
@@ -29,7 +29,7 @@ namespace LiveScore.Configurations
 #elif LocalRelease
         public string ApiEndPoint => "https://score247-api3.nexdev.net/main/api";
         public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/main/hubs";
-        public string AssetsEndPoint => "https://assets-dev.nexdev.net/test/";
+        public string AssetsEndPoint => "https://assets-dev.nexdev.net/main/";
         public string AppCenterSecret => "ios=b08e2753-b596-44c9-bed9-701d8dd8be8c;";
         public string SentryDsn => "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
         public string Environment => "Local";
@@ -38,9 +38,9 @@ namespace LiveScore.Configurations
 
 #else
 
-        public string ApiEndPoint => "https://score247-api3.nexdev.net/main/api";
-        public string SignalRHubEndPoint => "https://score247-api4.nexdev.net/main/hubs";
-        public string AssetsEndPoint => "https://assets-dev.nexdev.net/main/";
+        public string ApiEndPoint => "https://api.score247.net/api";
+        public string SignalRHubEndPoint => "https://publisher.score247.net/hubs";
+        public string AssetsEndPoint => "https://assets.score247.net";
         public string AppCenterSecret => "ios=34adf4e9-18dd-4ef0-817f-48bce4ff7159;";
         public string SentryDsn => "https://a75e3e7b51ea4de8baa2c27b67bbede3@sentry.nexdev.net/34";
         public string Environment => "Testflight";
