@@ -105,8 +105,6 @@ namespace LiveScore.Common.Services
                 var authenticateInfo = new AuthenticateInfo(deviceInfo.Id, cryptographyHelper.Encrypt(deviceInfo.Id, configuration.EncryptKey));
                 var token = await authenticateApi.Authenticate(authenticateInfo);
 
-                await loggingService.TrackEventAsync($"Request Token {deviceInfo.Id}", $"Token {token} at {DateTime.Now}");
-
                 return token;
             }
             catch (Exception ex)
