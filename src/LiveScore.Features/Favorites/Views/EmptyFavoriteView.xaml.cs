@@ -10,15 +10,5 @@ namespace LiveScore.Features.Favorites.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnAppearing()
-        {
-            (BindingContext as ViewModelBase)?.OnAppearing();
-        }
-
-        protected override void OnDisappearing()
-        {
-            (BindingContext as ViewModelBase)?.OnDisappearing();
-        }
     }
 }

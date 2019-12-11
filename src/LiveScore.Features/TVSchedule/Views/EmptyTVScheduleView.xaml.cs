@@ -9,15 +9,5 @@ namespace LiveScore.Features.TVSchedule.Views
         {
             InitializeComponent();
         }
-
-        protected override void OnAppearing()
-        {
-            (BindingContext as ViewModelBase)?.OnAppearing();
-        }
-
-        protected override void OnDisappearing()
-        {
-            (BindingContext as ViewModelBase)?.OnDisappearing();
-        }
     }
 }

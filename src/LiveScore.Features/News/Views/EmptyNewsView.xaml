@@ -23,7 +23,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
             <BoxView Style="{StaticResource HorizontalLine}" />
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label

@@ -46,7 +46,6 @@
     <StackLayout x:Name="ScoreView"
                  Opacity="0.5"
                  Scale="2">
-        <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
         <BoxView BackgroundColor="{StaticResource DateBarLineColor}"
                  Style="{StaticResource HorizontalLine}" />
         <Frame Style="{StaticResource DatebarLayout}">

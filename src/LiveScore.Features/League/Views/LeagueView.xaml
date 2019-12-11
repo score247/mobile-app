@@ -2,7 +2,6 @@
 <ContentPage
     x:Class="LiveScore.Features.League.Views.LeagueView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
     xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:b="clr-namespace:Prism.Behaviors;assembly=Prism.Forms"
@@ -18,7 +17,6 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
             <BoxView Style="{StaticResource HorizontalLine}" />
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label Text="Leagues is coming soon"

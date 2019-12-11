@@ -1,7 +1,7 @@
 ﻿namespace LiveScore.Core.Views.Templates
 {
     using System;
-    using LiveScore.Core.ViewModels;
+    using Rg.Plugins.Popup.Extensions;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -33,24 +33,18 @@
             set => SetValue(CurrentSportProperty, value);
         }
 
+        private async void OnSportSelectionClosed(object sender, EventArgs eventArgs)
+        {
+            await arrowDownSelection.RotateTo(0, 200, Easing.SinOut);
+        }
+
         private async void ShowSportSelection(object sender, EventArgs args)
         {
-            var vm = BindingContext as ViewModelBase;
-            if (vm == null)
-            {
-                return;
-            }
+            await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
 
-            if (vm.IsShowSportSelection)
-            {
-                await arrowDownSelection.RotateTo(0, 200, Easing.SinIn);
-            }
-            else
-            {
-                await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
-            }
-
-            vm.IsShowSportSelection = !vm.IsShowSportSelection;
+            var selectionPage = new SelectSportView();
+            selectionPage.CallbackEvent += OnSportSelectionClosed;
+            await Navigation.PushPopupAsync(selectionPage);
         }
     }
 }

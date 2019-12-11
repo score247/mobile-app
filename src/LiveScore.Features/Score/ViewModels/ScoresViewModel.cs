@@ -62,7 +62,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override async void OnAppearing()
         {
-            IsShowSportSelection = false;
             var todayItem = ScoreItemSources[TodayDateBarItemIndex];
 
             if (todayItem?.ViewDate != DateTime.Today)
@@ -77,7 +76,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override void OnDisappearing()
         {
-            IsShowSportSelection = false;
             SelectedScoreItem?.OnDisappearing();
         }
 
