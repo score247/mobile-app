@@ -175,10 +175,10 @@
     <value>World News</value>
   </data>
   <data name="Postp" xml:space="preserve">
-    <value>Postp</value>
+    <value>Postp.</value>
   </data>
   <data name="Postponed" xml:space="preserve">
-    <value>Postponed</value>
+    <value>Postp.</value>
   </data>
   <data name="StartDelayed" xml:space="preserve">
     <value>Start Delayed</value>
@@ -187,10 +187,10 @@
     <value>Delayed</value>
   </data>
   <data name="Canc" xml:space="preserve">
-    <value>Canc</value>
+    <value>Canc.</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
-    <value>Cancelled</value>
+    <value>Canc.</value>
   </data>
   <data name="INT" xml:space="preserve">
     <value>INT</value>
@@ -217,7 +217,7 @@
     <value>After Extra Time</value>
   </data>
   <data name="AwaitET" xml:space="preserve">
-    <value>Await ET</value>
+    <value>Await, ET</value>
   </data>
   <data name="AwaitExtraTime" xml:space="preserve">
     <value>Awaiting Extra Time</value>
@@ -229,7 +229,7 @@
     <value>After Penalties</value>
   </data>
   <data name="AwaitPen" xml:space="preserve">
-    <value>Await Pen</value>
+    <value>Await, Pen</value>
   </data>
   <data name="AwaitPenalties" xml:space="preserve">
     <value>Awaiting Penalties</value>
@@ -244,7 +244,7 @@
     <value>Pause</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Canc.</value>
   </data>
   <data name="PenaltyShootOut" xml:space="preserve">
     <value>Penalty Shoot-Out</value>

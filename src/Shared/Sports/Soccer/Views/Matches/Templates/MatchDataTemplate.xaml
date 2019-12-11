@@ -37,7 +37,7 @@
                            Style="{StaticResource LiveIcon}" />
                     <Label IsVisible="{Binding Match.IsInExtraTime}"
                            Style="{StaticResource ExtraTimeIcon}" />
-                    <Label LineBreakMode="NoWrap"
+                    <Label LineBreakMode="WordWrap"
                            Style="{StaticResource MatchStatus}"
                            Text="{Binding DisplayMatchStatus}" />
                 </StackLayout>

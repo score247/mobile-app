@@ -124,7 +124,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Await ET.
+        ///   Looks up a localized string similar to Await, ET.
         /// </summary>
         public static string AwaitET {
             get {
@@ -142,7 +142,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Await Pen.
+        ///   Looks up a localized string similar to Await, Pen.
         /// </summary>
         public static string AwaitPen {
             get {
@@ -196,7 +196,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Canc.
+        ///   Looks up a localized string similar to Canc..
         /// </summary>
         public static string Canc {
             get {
@@ -205,7 +205,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to Canc..
         /// </summary>
         public static string Cancel {
             get {
@@ -214,7 +214,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancelled.
+        ///   Looks up a localized string similar to Canc..
         /// </summary>
         public static string Cancelled {
             get {
@@ -682,7 +682,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Postp.
+        ///   Looks up a localized string similar to Postp..
         /// </summary>
         public static string Postp {
             get {
@@ -691,7 +691,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Postponed.
+        ///   Looks up a localized string similar to Postp..
         /// </summary>
         public static string Postponed {
             get {
