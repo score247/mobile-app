@@ -229,13 +229,13 @@
     <value>After Penalties</value>
   </data>
   <data name="AwaitPen" xml:space="preserve">
-    <value>Await. Pen</value>
+    <value>Await. PEN</value>
   </data>
   <data name="AwaitPenalties" xml:space="preserve">
     <value>Awaiting Penalties</value>
   </data>
   <data name="Pen" xml:space="preserve">
-    <value>Pen</value>
+    <value>PEN</value>
   </data>
   <data name="Penalties" xml:space="preserve">
     <value>Penalties</value>

@@ -64,8 +64,8 @@ namespace Soccer.Tests.Models.Matches
         [InlineData("abandoned", "AB")]
         [InlineData("pause", "Pause")]
         [InlineData("halftime", "HT")]
-        [InlineData("awaiting_penalties", "Await. Pen")]
-        [InlineData("penalties", "Pen")]
+        [InlineData("awaiting_penalties", "Await. PEN")]
+        [InlineData("penalties", "PEN")]
         [InlineData("extra_time_halftime", "ETHT")]
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
         {

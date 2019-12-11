@@ -142,7 +142,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Await. Pen.
+        ///   Looks up a localized string similar to Await. PEN.
         /// </summary>
         public static string AwaitPen {
             get {
@@ -655,7 +655,7 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pen.
+        ///   Looks up a localized string similar to PEN.
         /// </summary>
         public static string Pen {
             get {
