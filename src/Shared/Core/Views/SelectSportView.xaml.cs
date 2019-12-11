@@ -29,5 +29,10 @@
             base.OnDisappearing();
             InvoceCallback();
         }
+
+        private void SportOptionSelected(object sender, EventArgs e)
+        {
+            OnBackgroundClicked();
+        }
     }
 }
