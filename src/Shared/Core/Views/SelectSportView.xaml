@@ -11,6 +11,7 @@
     x:DataType="viewModel:SelectSportViewModel"
     Title="Select Sport"
     prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundInputTransparent="False"
     mc:Ignorable="d"
     x:Class="LiveScore.Core.Views.SelectSportView">
     <pages:PopupPage.Resources>

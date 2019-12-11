@@ -11,9 +11,15 @@
         {
             InitializeComponent();
 
-            BackgroundInputTransparent = true;
+            BackgroundInputTransparent = false;
             BackgroundColor = Color.Transparent;
             CloseWhenBackgroundIsClicked = true;
+        }
+
+        protected override void OnDisappearing()
+        {
+            var t = this.Parent.BindingContext;
+            base.OnDisappearing();
         }
     }
 }

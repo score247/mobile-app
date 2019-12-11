@@ -2,7 +2,7 @@
 {
     using System;
     using LiveScore.Core.ViewModels;
-    using Rg.Plugins.Popup.Services;
+    using Rg.Plugins.Popup.Extensions;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
 
@@ -41,8 +41,17 @@
                 return;
             }
 
+            if (vm.IsShowSportSelection)
+            {
+                await arrowDownSelection.RotateTo(0, 200, Easing.SinIn);
+            }
+            else
+            {
+                await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
+            }
+
             var selectionPage = new SelectSportView();
-            await PopupNavigation.Instance.PushAsync(selectionPage);
+            await Navigation.PushPopupAsync(selectionPage);
         }
     }
 }
