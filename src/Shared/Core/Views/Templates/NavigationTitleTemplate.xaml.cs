@@ -1,7 +1,6 @@
 ﻿namespace LiveScore.Core.Views.Templates
 {
     using System;
-    using System.Threading.Tasks;
     using LiveScore.Core.ViewModels;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -46,14 +45,12 @@
             {
                 await arrowDownSelection.RotateTo(0, 200, Easing.SinIn);
             }
-            else { 
+            else
+            {
                 await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
             }
 
             vm.IsShowSportSelection = !vm.IsShowSportSelection;
-            //arrowDownSelection.IsVisible = !vm.IsShowSportSelection;
-            //arrowUpSelection.IsVisible = vm.IsShowSportSelection;
-
         }
     }
 }

@@ -64,7 +64,7 @@ namespace Soccer.Tests.Models.Matches
         [InlineData("abandoned", "AB")]
         [InlineData("pause", "Pause")]
         [InlineData("halftime", "HT")]
-        [InlineData("awaiting_penalties", "Await Pen")]
+        [InlineData("awaiting_penalties", "Await. Pen")]
         [InlineData("penalties", "Pen")]
         [InlineData("extra_time_halftime", "ETHT")]
         public void BuildStatus_EventStatusIsLive_TextStatus_ShowExpectedText(string matchStatus, string expectedStatus)
@@ -86,7 +86,7 @@ namespace Soccer.Tests.Models.Matches
         [InlineData("closed", "FT")]
         [InlineData("ended", "FT")]
         [InlineData("full-time", "FT")]
-        [InlineData("awaiting_extra_time", "Await ET")]
+        [InlineData("awaiting_extra_time", "Await. ET")]
         public void BuildStatus_EventStatusIsClosed_ReturnExpectedStatus(string matchStatus, string expectedStatus)
         {
             // Arrange
@@ -102,10 +102,10 @@ namespace Soccer.Tests.Models.Matches
         }
 
         [Theory]
-        [InlineData("postponed", "Postp")]
+        [InlineData("postponed", "Postp.")]
         [InlineData("start_delayed", "Delayed")]
-        [InlineData("cancelled", "Canc")]
-        [InlineData("awaiting_extra_time", "Await ET")]
+        [InlineData("cancelled", "Canc.")]
+        [InlineData("awaiting_extra_time", "Await. ET")]
         public void BuildStatus_OtherStatus_ReturnExpectedStatus(string eventStatus, string expectedStatus)
         {
             // Arrange
