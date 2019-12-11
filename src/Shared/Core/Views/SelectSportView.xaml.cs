@@ -1,5 +1,6 @@
 ﻿namespace LiveScore.Core.Views
 {
+    using System;
     using Rg.Plugins.Popup.Pages;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -16,10 +17,17 @@
             CloseWhenBackgroundIsClicked = true;
         }
 
+        public event EventHandler CallbackEvent;
+
+        private void InvoceCallback()
+        {
+            CallbackEvent?.Invoke(this, EventArgs.Empty);
+        }
+
         protected override void OnDisappearing()
         {
-            var t = this.Parent.BindingContext;
             base.OnDisappearing();
+            InvoceCallback();
         }
     }
 }

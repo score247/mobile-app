@@ -38,7 +38,6 @@
                          VerticalOptions="FillAndExpand"
                          AbsoluteLayout.LayoutBounds="0,0,1,1.22"
                          AbsoluteLayout.LayoutFlags="SizeProportional">
-                <coreTemplates:SportSelectorTemplate IsVisible="{Binding IsShowSportSelection}" />
                 <Frame CornerRadius="0"
                        HasShadow="True">
                     <StackLayout x:Name="MatchDetailGeneralInfo">

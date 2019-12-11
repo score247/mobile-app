@@ -8,6 +8,7 @@
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:viewModel="clr-namespace:LiveScore.Core.ViewModels"
     xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
+    xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
     x:DataType="viewModel:SelectSportViewModel"
     Title="Select Sport"
     prism:ViewModelLocator.AutowireViewModel="True"
@@ -21,6 +22,14 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </pages:PopupPage.Resources>
+    <pages:PopupPage.Animation>
+        <animations:ScaleAnimation
+            DurationIn="100"
+            DurationOut="100"
+            EasingIn="Linear"
+            EasingOut="Linear"
+            HasBackgroundAnimation="True" />
+    </pages:PopupPage.Animation>
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start" Margin="0,50,0,0">
             <FlexLayout Style="{StaticResource SettingMenuRow}">
@@ -48,6 +57,7 @@
                 </StackLayout>
                 <Label Style="{StaticResource NavName}" Text="Coming soon" />
             </FlexLayout>
+            <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ContentPage.Content>
 </pages:PopupPage>

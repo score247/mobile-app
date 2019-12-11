@@ -74,7 +74,6 @@ namespace LiveScore.Core.ViewModels
         public bool HasData { get; protected set; } = true;
 
         public bool NoData => !HasData;
-        public bool IsShowSportSelection { get; set; }
 
         public virtual void Initialize(INavigationParameters parameters)
         {
@@ -86,7 +85,6 @@ namespace LiveScore.Core.ViewModels
 
         public void OnResume()
         {
-            IsShowSportSelection = false;
             if (networkConnectionManager.IsSuccessfulConnection())
             {
                 OnResumeWhenNetworkOK();
@@ -103,7 +101,6 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnAppearing()
         {
-            IsShowSportSelection = false;
             if (isNetworkingViewModel)
             {
                 EventAggregator?
@@ -114,7 +111,6 @@ namespace LiveScore.Core.ViewModels
 
         public virtual void OnDisappearing()
         {
-            IsShowSportSelection = false;
             if (isNetworkingViewModel)
             {
                 EventAggregator?

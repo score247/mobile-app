@@ -103,7 +103,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override async void OnAppearing()
         {
-            IsShowSportSelection = false;
             if (selectedTabItem != null)
             {
                 tabItemViewModels[selectedTabItem]?.OnAppearing();
@@ -148,7 +147,6 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
 
         public override void OnDisappearing()
         {
-            IsShowSportSelection = false;
             if (selectedTabItem != null)
             {
                 tabItemViewModels[selectedTabItem]?.OnDisappearing();
