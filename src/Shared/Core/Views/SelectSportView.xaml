@@ -33,12 +33,12 @@
     <ContentPage.Content>
         <StackLayout VerticalOptions="Start" Margin="0,50,0,0">
             <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SportOptionSelected" />
+                </FlexLayout.GestureRecognizers>
                 <StackLayout Orientation="Horizontal">
                     <Label Style="{StaticResource SoccerIcon}" />
                     <Label x:Name="Soccer" Style="{StaticResource SportsActiveLabel}" Text="Soccer">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="SportOptionSelected" />
-                        </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <Label Style="{StaticResource CheckIcon}" />
@@ -46,12 +46,12 @@
             <BoxView Style="{StaticResource HorizontalLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SportOptionSelected" />
+                </FlexLayout.GestureRecognizers>
                 <StackLayout Orientation="Horizontal">
                     <Label Style="{StaticResource BasketBallIcon}" />
                     <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource SportsDisabledLabel}">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="SportOptionSelected" />
-                        </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <Label Style="{StaticResource NavName}" Text="Coming soon" />
@@ -59,12 +59,12 @@
             <BoxView Style="{StaticResource HorizontalLine}" />
 
             <FlexLayout Style="{StaticResource SettingMenuRow}">
+                <FlexLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="SportOptionSelected" />
+                </FlexLayout.GestureRecognizers>
                 <StackLayout Orientation="Horizontal">
                     <Label Style="{StaticResource ESportsIcon}" />
                     <Label x:Name="ESport" Style="{StaticResource SportsDisabledLabel}" Text="E-Sport">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="SportOptionSelected" />
-                        </Label.GestureRecognizers>
                     </Label>
                 </StackLayout>
                 <Label Style="{StaticResource NavName}" Text="Coming soon" />

@@ -35,6 +35,7 @@
 
         private async void OnSportSelectionClosed(object sender, EventArgs eventArgs)
         {
+            await Navigation.PopAllPopupAsync();
             await arrowDownSelection.RotateTo(0, 200, Easing.SinOut);
         }
 
