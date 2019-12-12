@@ -44,7 +44,7 @@ namespace LiveScore.Soccer.Enumerations
         public static readonly TeamOutcome PromotionPlayoff = new TeamOutcome(28, "promotion playoff", "Promotion Playoff", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome PromotionPlayoffs = new TeamOutcome(29, "promotion playoffs", "Promotion Playoffs", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome PromotionRound = new TeamOutcome(30, "promotion round", "Promotion Round", SecondPositiveOutcomeColor);
-        public static readonly TeamOutcome QualificationPlayoffs = new TeamOutcome(31, "qualification playoffs", "Qualification Playoffs", SecondPositiveOutcomeColor);
+        public static readonly TeamOutcome QualificationPlayoffs = new TeamOutcome(31, "qualification playoffs", "Qualification Playoffs", ThirdPositiveOutcomeColor);
         public static readonly TeamOutcome Qualified = new TeamOutcome(32, "qualified", "Qualified", FirstPositiveOutcomeColor);
         public static readonly TeamOutcome QualifyingRound = new TeamOutcome(33, "qualifying round", "Qualifying Round", SecondPositiveOutcomeColor);
         public static readonly TeamOutcome Relegation = new TeamOutcome(34, "relegation", "Relegation", FirstNegativeOutcomeColor);
