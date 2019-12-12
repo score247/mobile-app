@@ -112,7 +112,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 tabItemViewModels[selectedTabItem]?.OnAppearing();
             }
 
-            if (!firstLoad || (currentMatchStatus?.IsLive == true))
+            if (!firstLoad && (currentMatchStatus?.IsLive == true))
             {
                 var matchInfo = await GetMatch(currentMatchId);
 
