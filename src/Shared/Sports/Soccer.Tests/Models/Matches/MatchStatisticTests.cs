@@ -49,8 +49,8 @@ namespace Soccer.Tests.Models.Matches
         [Fact]
         public void GetSubStatisticItems_SubStatisticHasData_ReturnOrderedSubStatistic()
         {
-            var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
-            var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+            var homeStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
+            var awayStatistic = new TeamStatistic(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 0, 14, 15);
 
             var subStatisticItems = new MatchStatistic("matchId", homeStatistic, awayStatistic).GetSubStatisticItems();
 
