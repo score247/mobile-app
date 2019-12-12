@@ -40,10 +40,10 @@
             <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                 <DataTemplate x:DataType="viewModel:FixturesMatchesViewModel">
                     <StackLayout Padding="0,8,0,0">
-                        <coreTemplates:MatchSkeletonTemplate />
-                        <coreTemplates:MatchSkeletonTemplate />
-                        <coreTemplates:MatchSkeletonTemplate />
-                        <coreTemplates:MatchSkeletonTemplate />
+                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
+                        <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding FirstLoad}" />
 
                         <Button Text="ALL FIXTURES"
                                 IsVisible="{Binding ShowLoadFixturesButton}"
