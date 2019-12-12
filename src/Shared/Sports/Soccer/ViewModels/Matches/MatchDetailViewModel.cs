@@ -59,6 +59,8 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
         private IDictionary<MatchDetailFunction, TabItemViewModel> tabItemViewModels;
         private string currentMatchId;
         private DateTimeOffset currentMatchEventDate;
+        private MatchStatus currentMatchStatus;
+        private bool firstLoad = true;
 
         public MatchDetailViewModel(
             INavigationService navigationService,
@@ -92,6 +94,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             {
                 currentMatchId = match.Id;
                 currentMatchEventDate = match.EventDate;
+                currentMatchStatus = match.EventStatus;
 
                 BuildGeneralInfo(match);
                 TabItems = new ObservableCollection<TabItemViewModel>(
@@ -101,6 +104,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
             }
         }
 
+        [Time]
         public override async void OnAppearing()
         {
             if (selectedTabItem != null)
@@ -108,14 +112,18 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails
                 tabItemViewModels[selectedTabItem]?.OnAppearing();
             }
 
-            var matchInfo = await GetMatch(currentMatchId);
-
-            if (matchInfo?.Match != null)
+            if (!firstLoad || (currentMatchStatus?.IsLive == true))
             {
-                BuildViewModel(matchInfo.Match);
+                var matchInfo = await GetMatch(currentMatchId);
+
+                if (matchInfo?.Match != null)
+                {
+                    BuildViewModel(matchInfo.Match);
+                }
             }
 
             SubscribeEvents();
+            firstLoad = false;
         }
 
         public override async void OnResumeWhenNetworkOK()

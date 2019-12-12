@@ -124,6 +124,8 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
                 .Unsubscribe(OnReceivedMatchEventRemoved);
         }
 
+#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
+
         [Time]
         protected internal void OnReceivedMatchEvent(IMatchEventMessage matchEventMessage)
         {
@@ -140,17 +142,17 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
             {
                 MatchInfo.UpdateTimelineEvents(new List<TimelineEvent>());
             }
-#pragma warning disable S3215 // "interface" instances should not be cast to concrete types
 
             MatchInfo.UpdateTimelineEvents(MatchInfo
                 .TimelineEvents
                 .Concat(new List<TimelineEvent> {
                     matchEventMessage.MatchEvent.Timeline as TimelineEvent
                 }));
-#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
             BuildInfoItems(MatchInfo);
         }
+
+#pragma warning restore S3215 // "interface" instances should not be cast to concrete types
 
 #pragma warning disable S3168 // "async" methods should not return "void"
 
