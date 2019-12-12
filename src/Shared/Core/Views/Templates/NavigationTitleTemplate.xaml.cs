@@ -1,6 +1,7 @@
 ﻿namespace LiveScore.Core.Views.Templates
 {
     using System;
+    using System.Threading.Tasks;
     using Rg.Plugins.Popup.Extensions;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -35,17 +36,14 @@
 
         private async void OnSportSelectionClosed(object sender, EventArgs eventArgs)
         {
-            await Navigation.PopAllPopupAsync();
-            await arrowDownSelection.RotateTo(0, 200, Easing.SinOut);
+            await Task.WhenAll(new Task[] { arrowDownSelection.RotateTo(0, 100, Easing.SinOut), Navigation.PopAllPopupAsync() });
         }
 
         private async void ShowSportSelection(object sender, EventArgs args)
         {
-            await arrowDownSelection.RotateTo(180, 200, Easing.SinOut);
-
             var selectionPage = new SelectSportView();
             selectionPage.CallbackEvent += OnSportSelectionClosed;
-            await Navigation.PushPopupAsync(selectionPage);
+            await Task.WhenAll(new Task[] { arrowDownSelection.RotateTo(180, 100, Easing.SinOut), Navigation.PushPopupAsync(selectionPage) });
         }
     }
 }
