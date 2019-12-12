@@ -430,6 +430,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Injuries.
+        /// </summary>
+        public static string Injuries {
+            get {
+                return ResourceManager.GetString("Injuries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to INT.
         /// </summary>
         public static string INT {

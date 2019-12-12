@@ -57,6 +57,7 @@ namespace LiveScore.Soccer.Models.Matches
                 new MatchStatisticItem(AppResources.ThrowIns, HomeStatistic?.ThrowIns, AwayStatistic?.ThrowIns),
                 new MatchStatisticItem(AppResources.FreeKicks, HomeStatistic?.FreeKicks, AwayStatistic?.FreeKicks),
                 new MatchStatisticItem(AppResources.Fouls, HomeStatistic?.Fouls, AwayStatistic?.Fouls),
+                new MatchStatisticItem(AppResources.Injuries, HomeStatistic?.Injuries, AwayStatistic?.Injuries),
             };
 
             if (subItems.All(item => item.IsHidden))

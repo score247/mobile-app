@@ -98,7 +98,7 @@ namespace LiveScore.Soccer.Models.Matches
             LeagueRoundName = leagueRoundName;
             LeagueRoundNumber = leagueRoundNumber;
             LeagueRoundGroup = leagueRoundGroup;
-            LeagueGroupName = leagueGroupName;
+            LeagueGroupName = string.IsNullOrWhiteSpace(leagueGroupName) ? leagueName : leagueGroupName;
         }
 
         internal SoccerMatch(DateTime eventDate, IMatchResult matchResult) : this(matchResult)

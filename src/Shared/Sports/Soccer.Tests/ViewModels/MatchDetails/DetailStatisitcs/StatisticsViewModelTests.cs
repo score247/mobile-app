@@ -82,6 +82,8 @@ namespace Soccer.Tests.ViewModels.DetailStatisitcs
             Assert.Equal(awayStatistic.Possession, statisticViewModel.StatisticItems.FirstOrDefault().AwayValue);
             Assert.Equal(homeStatistic.ShotsOnTarget, statisticViewModel.StatisticItems.ElementAt(1).HomeValue);
             Assert.Equal(awayStatistic.ShotsOnTarget, statisticViewModel.StatisticItems.ElementAt(1).AwayValue);
+            Assert.Equal(homeStatistic.Offsides, statisticViewModel.StatisticItems.ElementAt(7).HomeValue);
+            Assert.Equal(awayStatistic.Offsides, statisticViewModel.StatisticItems.ElementAt(7).AwayValue);
         }
     }
 }

@@ -408,4 +408,7 @@
   <data name="Fixtures" xml:space="preserve">
     <value>Fixtures</value>
   </data>
+  <data name="Injuries" xml:space="preserve">
+    <value>Injuries</value>
+  </data>
 </root>
