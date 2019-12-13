@@ -7,13 +7,11 @@
               xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.DateTemplate">
-
-    <FlexLayout HorizontalOptions="FillAndExpand"
-                Direction="Column"
-                HeightRequest="60"
-                AlignItems="Center"
-                JustifyContent="Center">
-        <FlexLayout.Resources>
+    <ContentView HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand"
+                 HeightRequest="60"
+                 MinimumHeightRequest="60">
+        <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
@@ -22,12 +20,16 @@
                 <converters:DayMonthConverter x:Key="DayMonthConverter" />
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
-        </FlexLayout.Resources>
-        <Label Text="{Binding ViewDate, Converter={StaticResource DayNameConverter}}"
-               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
-               Style="{StaticResource DateBarDayNameLabel}" />
-        <Label Text="{Binding ViewDate, Converter={StaticResource DayMonthConverter}}"
-               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
-               Style="{StaticResource DateBarDayMonthLabel}" />
-    </FlexLayout>
+        </ContentView.Resources>
+        <StackLayout VerticalOptions="Center">
+            <Label Text="{Binding ViewDate, Converter={StaticResource DayNameConverter}}"
+                   HorizontalTextAlignment="Center"
+                   TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
+                   Style="{StaticResource DateBarDayNameLabel}" />
+            <Label Text="{Binding ViewDate, Converter={StaticResource DayMonthConverter}}"
+                   TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
+                   HorizontalTextAlignment="Center"
+                   Style="{StaticResource DateBarDayMonthLabel}" />
+        </StackLayout>
+    </ContentView>
 </DataTemplate>

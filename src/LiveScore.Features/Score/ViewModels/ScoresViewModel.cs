@@ -94,7 +94,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
-                ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
+                //ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
             }
 
             secondLoad = true;

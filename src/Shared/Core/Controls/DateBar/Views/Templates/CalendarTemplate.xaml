@@ -7,20 +7,18 @@
               xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.CalendarTemplate">
-
-    <FlexLayout AlignItems="Center"
-                JustifyContent="Center"
-                HeightRequest="60"
-                WidthRequest="60">
-        <FlexLayout.Resources>
+    <ContentView WidthRequest="60"
+                 MinimumHeightRequest="60"
+                 HeightRequest="60">
+        <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
                 </ResourceDictionary.MergedDictionaries>
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
-        </FlexLayout.Resources>
+        </ContentView.Resources>
         <Label Style="{StaticResource CalendarIcon}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}" />
-    </FlexLayout>
+    </ContentView>
 </DataTemplate>

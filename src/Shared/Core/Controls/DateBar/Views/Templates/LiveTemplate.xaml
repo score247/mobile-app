@@ -8,12 +8,10 @@
               xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
-    <Grid  HorizontalOptions="CenterAndExpand"
-           VerticalOptions="CenterAndExpand"
-                WidthRequest="48"
-                HeightRequest="60"
-           Margin="-2,0,0,0">
-        <Grid.Resources>
+    <ContentView WidthRequest="60"
+                 HeightRequest="60"
+                 MinimumHeightRequest="60">
+        <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>
                     <views:DateBarResource />
@@ -36,36 +34,38 @@
                                                   Easing="Linear" />
                 </xamanimation:StoryBoard>
             </ResourceDictionary>
-        </Grid.Resources>
-        <Label Style="{StaticResource LiveIcon}"
-               TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}">
-        </Label>
-        <Grid Style="{StaticResource LiveIndicatorContainer}" IsVisible="{Binding HasData}">
-            <Grid.Triggers>
-                <DataTrigger TargetType="Grid"
-                             Binding="{Binding HasData}"
-                             Value="True">
-                    <DataTrigger.EnterActions>
-                        <xamanimation:BeginAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-                <DataTrigger TargetType="Grid"
-                             Binding="{Binding HasData}"
-                             Value="False">
-                    <DataTrigger.EnterActions>
-                        <xamanimation:EndAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-            </Grid.Triggers>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="18" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="18" />
-            </Grid.RowDefinitions>
-            <Frame Style="{StaticResource LiveIndicatorCircle}" />
-            <Frame Style="{StaticResource LiveIndicatorCircle}"
-                   x:Name="LiveIndicator" />
+        </ContentView.Resources>
+        <Grid Margin="-2,0,0,0">
+            <Label Style="{StaticResource LiveIcon}"
+                   TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"></Label>
+            <Grid Style="{StaticResource LiveIndicatorContainer}"
+                  IsVisible="{Binding HasData}">
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasData}"
+                                 Value="True">
+                        <DataTrigger.EnterActions>
+                            <xamanimation:BeginAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                    <DataTrigger TargetType="Grid"
+                                 Binding="{Binding HasData}"
+                                 Value="False">
+                        <DataTrigger.EnterActions>
+                            <xamanimation:EndAnimation Animation="{StaticResource LiveIndicatorAnimation}" />
+                        </DataTrigger.EnterActions>
+                    </DataTrigger>
+                </Grid.Triggers>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="18" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="18" />
+                </Grid.RowDefinitions>
+                <Frame Style="{StaticResource LiveIndicatorCircle}" />
+                <Frame Style="{StaticResource LiveIndicatorCircle}"
+                       x:Name="LiveIndicator" />
+            </Grid>
         </Grid>
-    </Grid>
+    </ContentView>
 </DataTemplate>
