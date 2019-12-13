@@ -83,6 +83,22 @@ namespace LiveScore.Common.Tests.Services
         }
 
         [Fact]
+        public void LogException_ExceptionIsIgnore_NotnvokeTrackError()
+        {
+            // Arrange
+            var properties = fixture.Create<IDictionary<string, string>>();
+            var exception = fixture.Create<TaskCanceledException>();
+
+            // Act
+            loggingService.LogException(exception, properties);
+
+            // Assert
+            trackError
+                .DidNotReceive()
+                .Invoke(exception, properties);
+        }
+
+        [Fact]
         public async Task LogExceptionAsync_ParamIsException_InvokeTrackErrorWithParamIsDictionaryContainsEmptyMessage()
         {
             // Arrange
