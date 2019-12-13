@@ -83,7 +83,7 @@ namespace LiveScore.Common.Tests.Services
         }
 
         [Fact]
-        public void LogException_ExceptionIsIgnore_NotnvokeTrackError()
+        public void LogException_ExceptionIsIgnore_NotInvokeTrackError()
         {
             // Arrange
             var properties = fixture.Create<IDictionary<string, string>>();
