@@ -7,9 +7,7 @@
               xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.CalendarTemplate">
-    <ContentView WidthRequest="60"
-                 MinimumHeightRequest="60"
-                 HeightRequest="60">
+    <ContentView WidthRequest="60">
         <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

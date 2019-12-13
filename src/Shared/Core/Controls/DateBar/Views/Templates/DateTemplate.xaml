@@ -8,9 +8,7 @@
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.DateTemplate">
     <ContentView HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand"
-                 HeightRequest="60"
-                 MinimumHeightRequest="60">
+                 VerticalOptions="FillAndExpand">
         <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

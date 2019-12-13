@@ -8,9 +8,7 @@
               xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
               mc:Ignorable="d"
               x:Class="LiveScore.Core.Controls.DateBar.Views.Templates.LiveTemplate">
-    <ContentView WidthRequest="60"
-                 HeightRequest="60"
-                 MinimumHeightRequest="60">
+    <ContentView WidthRequest="60">
         <ContentView.Resources>
             <ResourceDictionary>
                 <ResourceDictionary.MergedDictionaries>

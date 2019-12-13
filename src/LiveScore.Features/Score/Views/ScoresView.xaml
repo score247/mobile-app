@@ -52,8 +52,8 @@
             <controls:TabsControl BindingContext="{x:Reference ScoresCarouselView}"
                                   ItemTemplate="{StaticResource DateBarTemplateSelector}"
                                   StripeColor="{StaticResource DateBarStripeColor}"
-                                  HeightRequest="60"
-                                  MinimumHeightRequest="60"
+                                  HeightRequest="50"
+                                  MinimumHeightRequest="50"
                                   StripeHeight="1" />
         </Frame>
         <cards:CarouselView x:Name="ScoresCarouselView"
