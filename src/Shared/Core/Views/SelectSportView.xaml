@@ -54,7 +54,6 @@
                     <Label x:Name="Basketball" Text="Basketball" Style="{StaticResource SportsDisabledLabel}">
                     </Label>
                 </StackLayout>
-                <Label Style="{StaticResource NavName}" Text="Coming soon" />
             </FlexLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
 
@@ -67,7 +66,6 @@
                     <Label x:Name="ESport" Style="{StaticResource SportsDisabledLabel}" Text="E-Sport">
                     </Label>
                 </StackLayout>
-                <Label Style="{StaticResource NavName}" Text="Coming soon" />
             </FlexLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
