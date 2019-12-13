@@ -173,6 +173,7 @@ namespace LiveScore.Soccer.ViewModels.MatchDetails.TrackerCommentary
                         .Where(c => c.Commentaries?.Any() == true || c.TimelineType.IsHighlightEvent())
                         .OrderByDescending(t => t.MatchTime)
                         .ThenByDescending(t => t.Time)
+                        .ThenByDescending(t => t.StoppageTime)
                         .ToList();
 
                 if (matchCommentaries.Count > 0)
