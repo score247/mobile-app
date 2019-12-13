@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using LiveScore.Common.Services;
 using Refit;
 
@@ -25,21 +24,14 @@ namespace LiveScore.Core.Services
             else if (ex is AggregateException aggregateException)
             {
                 foreach (var exception in aggregateException.InnerExceptions)
-                {
-                    if (!IsIgnore(ex))
-                    {
-                        LoggingService.LogExceptionAsync(exception, exception.Message);
-                    }
+                {                    
+                    LoggingService.LogExceptionAsync(exception, exception.Message);
                 }
             }
-            else if(!IsIgnore(ex))
+            else
             {
                 LoggingService.LogExceptionAsync(ex);
             }
         }
-
-        private static bool IsIgnore(Exception ex)
-            => ex.GetType() == typeof(OperationCanceledException) ||
-                ex.GetType() == typeof(TaskCanceledException);
     }
 }

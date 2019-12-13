@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using Refit;
@@ -78,6 +79,11 @@ namespace LiveScore.Common.Services
 
         public void LogException(Exception exception, IDictionary<string, string> properties)
         {
+            if (exception.IsIgnore())
+            {
+                return;
+            }
+
             if (networkConnection.IsSuccessfulConnection())
             {
                 if (exception is ApiException apiException)
