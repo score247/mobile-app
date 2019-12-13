@@ -71,7 +71,7 @@ namespace LiveScore.Core.ViewModels
 
         public bool IsNotComingSoon => !IsComingSoon;
 
-        public bool HasData { get; protected set; } = true;
+        public bool HasData { get; set; } = true;
 
         public bool NoData => !HasData;
 

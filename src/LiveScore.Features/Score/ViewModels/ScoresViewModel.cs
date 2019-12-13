@@ -3,11 +3,13 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
@@ -15,6 +17,7 @@ namespace LiveScore.Features.Score.ViewModels
     {
         private const byte LiveDateBarItemIndex = 0;
         private const byte TodayDateBarItemIndex = 3;
+        private readonly IMatchService matchService;
         private bool secondLoad;
 
         public ScoresViewModel(
@@ -26,7 +29,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
-
+            matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             InitScoreItemSources();
         }
 
@@ -94,7 +97,13 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
-                //ScoreItemSources[LiveDateBarItemIndex].OnAppearing();
+                Task.Run(async () =>
+                {
+                    var liveMatchCount = await matchService.GetLiveMatchesCountAsync();
+
+                    Device.BeginInvokeOnMainThread(()
+                        => ScoreItemSources[LiveDateBarItemIndex].HasData = liveMatchCount > 0);
+                });
             }
 
             secondLoad = true;

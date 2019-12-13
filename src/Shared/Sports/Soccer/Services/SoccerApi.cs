@@ -28,6 +28,9 @@ namespace LiveScore.Soccer.Services
             [Get("/soccer/{language}/matches/live")]
             Task<IEnumerable<SoccerMatch>> GetLiveMatches(string language);
 
+            [Get("/soccer/{language}/matches/live/count")]
+            Task<int> GetLiveMatchesCount(string language);
+
             [Get("/soccer/{language}/matches?fd={fromDate}&td={toDate}")]
             Task<IEnumerable<SoccerMatch>> GetMatches(string fromDate, string toDate, string language);
 

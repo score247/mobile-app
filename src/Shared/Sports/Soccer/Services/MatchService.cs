@@ -92,6 +92,20 @@ namespace LiveScore.Soccer.Services
             }
         }
 
+        public async Task<int> GetLiveMatchesCountAsync()
+        {
+            try
+            {
+                return await apiService.Execute(() => matchApi.GetLiveMatchesCount(Language.English.DisplayName));
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return 0;
+            }
+        }
+
         public async Task<MatchCoverage> GetMatchCoverageAsync(string matchId, Language language, DateTimeOffset eventDate, bool forceFetchLatestData = false)
         {
             try

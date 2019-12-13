@@ -11,5 +11,7 @@ namespace LiveScore.Core.Services
         Task<IEnumerable<IMatch>> GetMatchesByDateAsync(DateTime dateTime, Language language);
 
         Task<IEnumerable<IMatch>> GetLiveMatchesAsync(Language language);
+
+        Task<int> GetLiveMatchesCountAsync();
     }
 }
