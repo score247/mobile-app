@@ -25,14 +25,15 @@ namespace LiveScore.Features.Score.ViewModels
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
             calendarView = new CalendarView(105);
             TapCalendarCommand = new DelegateAsyncCommand(OnTapCalendar);
+            IsDateNotSelected = true;
         }
 
         public DelegateAsyncCommand TapCalendarCommand { get; protected set; }
 
         public override async void OnAppearing()
         {
+            IsBusy = false;
             await popupNavigation.PushAsync(calendarView);
-            base.OnAppearing();
         }
 
         private async Task OnTapCalendar()

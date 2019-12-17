@@ -9,10 +9,10 @@ namespace LiveScore.Core.Controls.Calendar
     {
         private readonly CalendarViewModel viewModel;
 
-        public CalendarView(int marginTop = 0)
+        public CalendarView(int marginTop = 0, int monthRange = 2)
         {
             InitializeComponent();
-            viewModel = new CalendarViewModel(2);
+            viewModel = new CalendarViewModel(monthRange);
 
             BindingContext = viewModel;
             BackgroundInputTransparent = false;

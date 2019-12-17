@@ -83,8 +83,12 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
+                            <Label IsVisible="{Binding IsDateNotSelected}"
+                                   Grid.Row="0"
+                                   Style="{StaticResource NotificationLabel}"
+                                   Text="No date is selected" />
                             <Label IsVisible="{Binding NoData}"
-                                   Grid.Row="1"
+                                   Grid.Row="0"
                                    Style="{StaticResource NotificationLabel}"
                                    Text="{langs:Translate NoGames}" />
                             <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"

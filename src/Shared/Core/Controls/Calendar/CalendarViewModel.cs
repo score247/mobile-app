@@ -21,10 +21,10 @@ namespace LiveScore.Core.Controls.Calendar
                 CalendarMonths.Add(new CalendarMonth(BuildCalendar(date.Year, date.Month), date.Month, date.Year));
             }
 
-            SelectedMonth = CalendarMonths[monthRange];
+            SelectedIndex = monthRange;
         }
 
-        public CalendarMonth SelectedMonth { get; }
+        public int SelectedIndex { get; }
 
         public IList<CalendarMonth> CalendarMonths { get; }
 
@@ -46,7 +46,9 @@ namespace LiveScore.Core.Controls.Calendar
             var firstDayInMonth = new DateTime(year, month, 1);
             var firstDayInMonthWeekDay = firstDayInMonth.DayOfWeek;
 
-            var firstRowDateCount = Convert.ToInt32(firstDayInMonthWeekDay + 1);
+            var firstRowDateCount = firstDayInMonthWeekDay == DayOfWeek.Sunday
+                ? 1
+                : Convert.ToInt32(7 - firstDayInMonthWeekDay + 1);
 
             for (var i = 0; i < firstRowDateCount; i++)
             {

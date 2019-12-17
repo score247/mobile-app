@@ -87,8 +87,8 @@
         <CardsView:CarouselView  IsCyclical="False"
                                  IsViewReusingEnabled="False"
                                  VerticalOptions="Start"
-                                 SelectedItem="{Binding SelectedMonth}"
                                  ItemsSource="{Binding CalendarMonths}"
+                                 SelectedIndex="{Binding SelectedIndex}"
                                  ItemAppearingCommand="{Binding CalendarMonthItemAppearingCommand}">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
@@ -128,25 +128,88 @@
                                                 </Grid.RowDefinitions>
                                                 <Button Grid.Column="0"
                                                         Text="{Binding DateList[0].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding  DateList[0].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="1"
                                                         Text="{Binding DateList[1].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[1].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="2"
                                                         Text="{Binding DateList[2].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[2].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="3"
                                                         Text="{Binding DateList[3].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[3].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="4"
                                                         Text="{Binding DateList[4].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[4].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="5"
                                                         Text="{Binding DateList[5].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[5].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                                 <Button Grid.Column="6"
                                                         Text="{Binding DateList[6].Date.Day}"
-                                                        Style="{StaticResource Date}" />
+                                                        Style="{StaticResource Date}">
+                                                    <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[6].IsCurrentDate}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                    </Button.Triggers>
+                                                </Button>
                                             </Grid>
                                         </ViewCell>
                                     </DataTemplate>
