@@ -3,14 +3,53 @@
 // </auto-generated>
 namespace LiveScore.Features.Favorites.ViewModels
 {
+    using System.Collections.Generic;
     using Core;
     using Core.ViewModels;
+    using LiveScore.Core.Controls.TabStrip;
+    using PanCardView.EventArgs;
+    using Prism.Commands;
     using Prism.Navigation;
 
     public class FavoriteViewModel : ViewModelBase
     {
-        public FavoriteViewModel(INavigationService navigationService, IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
+        public FavoriteViewModel(
+            INavigationService navigationService,
+            IDependencyResolver serviceLocator) 
+            : base(navigationService, serviceLocator)
         {
+            ItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnItemAppeared);
+            ItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnItemDisappearing);
+
+            FavoriteItemSources = new List<ViewModelBase> {
+                new FavoriteMatchesViewModel(NavigationService, DependencyResolver, null),
+                new FavoriteLeaguesViewModel(NavigationService, DependencyResolver, null)
+            };
+        }
+
+
+        public IReadOnlyList<ViewModelBase> FavoriteItemSources { get; private set; }
+        public byte SelectedIndex { get; set; }
+        public DelegateCommand<ItemAppearedEventArgs> ItemAppearedCommand { get; }
+
+        public DelegateCommand<ItemDisappearingEventArgs> ItemDisappearingCommand { get; }
+
+        private void OnItemAppeared(ItemAppearedEventArgs args)
+        {
+            if (FavoriteItemSources[SelectedIndex] is TabItemViewModel selectedItem)
+            {
+                selectedItem.IsActive = true;
+                selectedItem.OnAppearing();
+            }
+        }
+
+        private void OnItemDisappearing(ItemDisappearingEventArgs args)
+        {
+            if (args.Index >= 0 && FavoriteItemSources[args.Index] is TabItemViewModel previousItem)
+            {
+                previousItem.IsActive = false;
+                previousItem.OnDisappearing();
+            }
         }
     }
 }

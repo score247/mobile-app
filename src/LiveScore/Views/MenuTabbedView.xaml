@@ -42,11 +42,11 @@
             AutomationId="FavoritesBar"
             IconImageSource="images/common/favorite_function_bar.png">
             <x:Arguments>
-                <favorites:EmptyFavoriteView Title="{langs:Translate Favorites}">
+                <favorites:FavoriteView Title="{langs:Translate Favorites}">
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Favorites}" CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
-                </favorites:EmptyFavoriteView>
+                </favorites:FavoriteView>
             </x:Arguments>
         </NavigationPage>
 

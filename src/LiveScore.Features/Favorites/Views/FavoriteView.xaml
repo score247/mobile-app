@@ -6,9 +6,26 @@
     xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:viewModel="clr-namespace:LiveScore.Features.Favorites.ViewModels"
+    xmlns:templateSelectors="clr-namespace:LiveScore.Features.Favorites.Selectors"
+    xmlns:converters="clr-namespace:LiveScore.Core.Controls.DateBar.Converters;assembly=LiveScore.Core"
+    xmlns:cardViewControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
+    xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+    xmlns:cardView="clr-namespace:PanCardView;assembly=PanCardView"
+    xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
+    xmlns:resources="clr-namespace:LiveScore.Soccer.ViewResources;assembly=LiveScore.Soccer"
     x:DataType="viewModel:FavoriteViewModel"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <templateSelectors:FavoriteItemTemplateSelector x:Key="FavoriteItemTemplateSelector" />
+            <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <resources:LeagueDetailViewResource />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Priority="1">
             <ToolbarItem.Icon>
@@ -18,52 +35,41 @@
             </ToolbarItem.Icon>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout Spacing="0">
-        <FlexLayout Style="{StaticResource NavTabs}">
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Teams"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Teams}" />
-            </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Matches"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Matches}" />
-            </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Leagues"
-                    Style="{StaticResource TabActiveText}"
-                    Text="{langs:Translate Leagues}" />
-                <ContentView>
-                    <BoxView Style="{StaticResource TabActiveLine}" />
-                </ContentView>
-            </StackLayout>
-            <StackLayout Style="{StaticResource Tab}">
-                <Label
-                    x:Name="Nations"
-                    Style="{StaticResource TabText}"
-                    Text="{langs:Translate Nations}" />
-            </StackLayout>
-        </FlexLayout>
-        <FlexLayout x:Name="ChampionLeague" Style="{StaticResource LeagueGroup}">
-            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                <Image Source="images/flag_league/champion_league.png" Style="{StaticResource LeagueLogo}" />
-                <Label Style="{StaticResource LeagueName}" Text="Champion League" />
-            </StackLayout>
-            <Label Style="{StaticResource LeagueArrowRightIcon}" />
-        </FlexLayout>
-        <ContentView>
-            <BoxView Style="{StaticResource HorizontalLine}" />
-        </ContentView>
-        <FlexLayout x:Name="EuropaLeague" Style="{StaticResource LeagueGroup}">
-            <StackLayout HorizontalOptions="StartAndExpand" Orientation="Horizontal">
-                <Image Source="images/flag_league/europa_league.png" Style="{StaticResource LeagueLogo}" />
-                <Label Style="{StaticResource LeagueName}" Text="Europa League" />
-            </StackLayout>
-            <Label Style="{StaticResource LeagueArrowRightIcon}" />
-        </FlexLayout>
+    <StackLayout>
+        <BoxView Style="{StaticResource HorizontalLine}" />
+        <cardViewControls:TabsControl BindingContext="{x:Reference FavoriteCarouselView}"
+                                          StripeColor="{StaticResource DateBarStripeColor}"
+                                          StripeHeight="1"
+                                          BackgroundColor="{StaticResource SubTabContainerBgColor}">
+            <cardViewControls:TabsControl.ItemTemplate>
+                <DataTemplate x:DataType="tabstrip:TabItemViewModel">
+                    <StackLayout Style="{StaticResource LeagueDetailTab}">
+                        <Label Text="{Binding Title}"
+                                   TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}"
+                                   Style="{StaticResource LeagueDetailTabText}" />
+                    </StackLayout>
+                </DataTemplate>
+            </cardViewControls:TabsControl.ItemTemplate>
+        </cardViewControls:TabsControl>
+
+        <cardView:CarouselView x:Name="FavoriteCarouselView"
+                                   HorizontalOptions="FillAndExpand"
+                                   VerticalOptions="FillAndExpand"
+                                   IsCyclical="False"
+                                   IsViewReusingEnabled="True"
+                                   BackgroundColor="{StaticResource ListViewBgColor}"
+                                   ItemsSource="{Binding FavoriteItemSources}"
+                                   ItemTemplate="{StaticResource FavoriteItemTemplateSelector}"
+                                   ItemAppearedCommand="{Binding ItemAppearedCommand}"
+                                   ItemDisappearingCommand="{Binding ItemDisappearingCommand}"
+                                   SelectedIndex="{Binding SelectedIndex}">
+            <x:Arguments>
+                <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
+                                                               NoItemMaxPanDistance="1000"
+                                                               OpacityFactor="0.25" />
+                <processors:BaseCarouselBackViewProcessor AnimationLength="250"
+                                                              OpacityFactor="0.25" />
+            </x:Arguments>
+        </cardView:CarouselView>
     </StackLayout>
 </ContentPage>

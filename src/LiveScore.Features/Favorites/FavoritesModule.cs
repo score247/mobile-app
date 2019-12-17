@@ -15,7 +15,7 @@
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<FavoriteView, FavoriteViewModel>();
-            containerRegistry.RegisterForNavigation<EmptyFavoriteView, EmptyFavoriteViewModel>();
+            // containerRegistry.RegisterForNavigation<EmptyFavoriteView, EmptyFavoriteViewModel>();
         }
     }
 }

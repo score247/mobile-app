@@ -82,6 +82,12 @@
     <Compile Update="Favorites\Views\EmptyFavoriteView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="Favorites\Views\FavoriteLeaguesTemplate.xaml.cs">
+      <DependentUpon>FavoriteLeaguesTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Favorites\Views\FavoriteMatchesTemplate.xaml.cs">
+      <DependentUpon>FavoriteMatchesTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Favorites\Views\FavoriteView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -127,6 +133,15 @@
     <Compile Update="TVSchedule\Views\TVScheduleView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Favorites\Views\FavoriteLeaguesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Favorites\Views\FavoriteMatchesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
