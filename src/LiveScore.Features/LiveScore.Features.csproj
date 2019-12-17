@@ -24,12 +24,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Score\Views\Templates\**" />
-    <EmbeddedResource Remove="Score\Views\Templates\**" />
-    <None Remove="Score\Views\Templates\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Score\ViewResources\MatchH2HViewResource.xaml.cs" />
     <Compile Remove="Score\ViewResources\MatchInfoViewResource.xaml.cs" />
     <Compile Remove="Score\ViewResources\MatchLineUpsViewResource.xaml.cs" />
@@ -124,6 +118,9 @@
     <Compile Update="Score\Views\ScoresView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
+    <Compile Update="Score\Views\Templates\ScoreMatchesTemplate.xaml.cs">
+      <DependentUpon>ScoreMatchesTemplate.xaml</DependentUpon>
+    </Compile>
     <Compile Update="TVSchedule\ViewResources\TVScheduleViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -140,6 +137,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Favorites\Views\FavoriteMatchesTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Score\Views\Templates\CalendarTemplate.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Score\Views\Templates\ScoreMatchesTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

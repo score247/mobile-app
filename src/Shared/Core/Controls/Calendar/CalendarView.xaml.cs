@@ -5,19 +5,19 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Core.Controls.Calendar
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CalendarView : PopupPage
+    public partial class CalendarView : ContentView
     {
         private readonly CalendarViewModel viewModel;
 
-        public CalendarView(int marginTop = 0, int monthRange = 2)
+        public CalendarView()
         {
             InitializeComponent();
-            viewModel = new CalendarViewModel(monthRange);
+            viewModel = new CalendarViewModel(2);
 
             BindingContext = viewModel;
-            BackgroundInputTransparent = false;
-            CloseWhenBackgroundIsClicked = true;
-            Layout.Margin = new Thickness(0, marginTop, 0, 0);
+            //BackgroundInputTransparent = false;
+            //CloseWhenBackgroundIsClicked = true;
+            //Layout.Margin = new Thickness(0, marginTop, 0, 0);
         }
     }
 }

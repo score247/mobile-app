@@ -28,6 +28,7 @@
                 <viewResources:ScoreViewResource />
             </ResourceDictionary.MergedDictionaries>
             <scoreTemplateSelectors:DateBarTemplateSelector x:Key="DateBarTemplateSelector" />
+            <scoreTemplateSelectors:ScoresTemplateSelector x:Key="ScoresTemplateSelector" />
             <xamanimation:StoryBoard x:Key="ScoreViewFadeInAnimation"
                                      Target="{x:Reference ScoreView}">
                 <xamanimation:ScaleToAnimation Easing="Linear"
@@ -66,6 +67,7 @@
                             ItemDisappearingCommand="{Binding ScoreItemDisappearingCommand}"
                             ItemsSource="{Binding ScoreItemSources}"
                             SelectedItem="{Binding SelectedScoreItem}"
+                            ItemTemplate="{StaticResource ScoresTemplateSelector}"
                             VerticalOptions="FillAndExpand">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor AnimationLength="250"
@@ -74,41 +76,6 @@
                 <processors:BaseCarouselBackViewProcessor AnimationLength="250"
                                                           OpacityFactor="0.25" />
             </x:Arguments>
-            <cards:CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="viewModels:ScoreMatchesViewModel">
-                    <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
-                                 AbsoluteLayout.LayoutFlags="SizeProportional">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Label IsVisible="{Binding IsDateNotSelected}"
-                                   Grid.Row="0"
-                                   Style="{StaticResource NotificationLabel}"
-                                   Text="No date is selected" />
-                            <Label IsVisible="{Binding NoData}"
-                                   Grid.Row="0"
-                                   Style="{StaticResource NotificationLabel}"
-                                   Text="{langs:Translate NoGames}" />
-                            <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
-                                                           Grid.Row="1"
-                                                           TriggerLoadMoreIndex="2">
-                                <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                                    <DataTemplate>
-                                        <StackLayout>
-                                            <coreTemplates:MatchSkeletonTemplate />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                            <coreTemplates:MatchSkeletonTemplate IsVisible="{Binding IsNotLoadMore}" />
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </coreTemplates:MatchesTemplate.ListViewFooterTemplate>
-                            </coreTemplates:MatchesTemplate>
-                        </Grid>
-                    </ContentView>
-                </DataTemplate>
-            </cards:CarouselView.ItemTemplate>
         </cards:CarouselView>
     </StackLayout>
 </ContentPage>

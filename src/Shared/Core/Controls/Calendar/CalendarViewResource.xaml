@@ -58,9 +58,9 @@
     <Style x:Key="Date"
            TargetType="Button">
         <Setter Property="WidthRequest"
-                Value="25" />
+                Value="40" />
         <Setter Property="HeightRequest"
-                Value="25" />
+                Value="40" />
         <Setter Property="HorizontalOptions"
                 Value="Center" />
         <Setter Property="VerticalOptions"
@@ -84,6 +84,6 @@
         <Setter Property="BackgroundColor"
                 Value="{StaticResource SecondAccentColor}" />
         <Setter Property="BorderRadius"
-                Value="12" />
+                Value="20" />
     </Style>
 </ResourceDictionary>
