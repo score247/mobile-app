@@ -47,6 +47,8 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool IsNotLoadMore => !IsLoadMore;
 
+        public bool IsCalendar { get; protected set; }
+
         public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> RemainingMatchItemSource { get; protected set; }
 
         public DelegateCommand LoadMoreCommand { get; protected set; }

@@ -29,6 +29,8 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
 using Refit;
+using Rg.Plugins.Popup.Contracts;
+using Rg.Plugins.Popup.Services;
 using Sentry;
 using Xamarin.Forms;
 
@@ -83,7 +85,6 @@ namespace LiveScore.Configurations
 
             AppCenter.Start(Configuration.AppCenterSecret, typeof(Analytics), typeof(Crashes));
 
-
             containerRegistry.RegisterSingleton<IDeviceInfo, UserDeviceInfo>();
             containerRegistry.RegisterSingleton<ICacheManager, CacheManager>();
             containerRegistry.RegisterSingleton<ICacheService, CacheService>();
@@ -134,6 +135,7 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry RegisterNavigation(this IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterInstance<IPopupNavigation>(PopupNavigation.Instance);
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();

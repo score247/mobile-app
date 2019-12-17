@@ -12,6 +12,7 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
+             xmlns:calendar="clr-namespace:LiveScore.Core.Controls.Calendar;assembly=LiveScore.Core"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -82,18 +83,13 @@
                                 <RowDefinition Height="Auto"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Label IsVisible="{Binding IsComingSoon}"
-                                   Grid.Row="0"
-                                   Style="{StaticResource NotificationLabel}"
-                                   Text="Coming Soon" />
                             <Label IsVisible="{Binding NoData}"
-                                   Grid.Row="0"
+                                   Grid.Row="1"
                                    Style="{StaticResource NotificationLabel}"
                                    Text="{langs:Translate NoGames}" />
                             <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
                                                            Grid.Row="1"
-                                                           IsVisible="{Binding IsNotComingSoon}"
-                                                           TriggerLoadMoreIndex="1">
+                                                           TriggerLoadMoreIndex="2">
                                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                                     <DataTemplate>
                                         <StackLayout>

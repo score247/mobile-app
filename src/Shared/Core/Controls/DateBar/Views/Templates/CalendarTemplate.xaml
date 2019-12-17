@@ -16,6 +16,9 @@
                 <converters:ActiveColorConverter x:Key="ActiveColorConverter" />
             </ResourceDictionary>
         </ContentView.Resources>
+        <ContentView.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding TapCalendarCommand}" />
+        </ContentView.GestureRecognizers>
         <Label Style="{StaticResource CalendarIcon}"
                TextColor="{Binding IsActive, Converter={StaticResource ActiveColorConverter}}" />
     </ContentView>
