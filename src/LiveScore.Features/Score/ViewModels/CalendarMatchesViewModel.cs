@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using LiveScore.Core;
 using Prism.Commands;
 using Prism.Events;
@@ -16,14 +17,13 @@ namespace LiveScore.Features.Score.ViewModels
         {
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             IsDateNotSelected = true;
-            VisibleCalendar = true;
         }
 
         public DelegateCommand TapCalendarCommand { get; protected set; }
 
         public bool VisibleCalendar { get; protected set; }
 
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
             if (!FirstLoad)
             {
@@ -32,6 +32,7 @@ namespace LiveScore.Features.Score.ViewModels
             else
             {
                 IsBusy = false;
+                VisibleCalendar = true;
             }
         }
 

@@ -16,13 +16,6 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentView.Resources>
-    <!--<pages:PopupPage.Animation>
-        <animations:FadeAnimation DurationIn="100"
-                                  DurationOut="100"
-                                  EasingIn="Linear"
-                                  EasingOut="Linear"
-                                  HasBackgroundAnimation="True" />
-    </pages:PopupPage.Animation>-->
     <StackLayout Padding="16"
                  x:Name="Layout"
                  VerticalOptions="Start"
