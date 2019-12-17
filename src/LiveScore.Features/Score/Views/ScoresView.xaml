@@ -2,8 +2,6 @@
 <ContentPage x:Class="LiveScore.Features.Score.Views.ScoresView"
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
-             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              xmlns:viewModels="clr-namespace:LiveScore.Features.Score.ViewModels"
              xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
              xmlns:scoreTemplateSelectors="clr-namespace:LiveScore.Features.Score.Views.TemplateSelectors;assembly=LiveScore.Features"
@@ -12,7 +10,6 @@
              xmlns:cards="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:mvvm="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
              xmlns:xamanimation="clr-namespace:Xamanimation;assembly=Xamanimation"
-             xmlns:calendar="clr-namespace:LiveScore.Core.Controls.Calendar;assembly=LiveScore.Core"
              mvvm:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModels:ScoresViewModel"
              BackgroundColor="{StaticResource SiteBackgroundColor}">

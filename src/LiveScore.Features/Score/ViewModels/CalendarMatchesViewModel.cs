@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
-using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
 
@@ -15,14 +14,33 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator)
             : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
-            TapCalendarCommand = new DelegateAsyncCommand(OnTapCalendar);
+            TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             IsDateNotSelected = true;
+            VisibleCalendar = true;
         }
 
-        public DelegateAsyncCommand TapCalendarCommand { get; protected set; }
+        public DelegateCommand TapCalendarCommand { get; protected set; }
 
-        private async Task OnTapCalendar()
+        public bool VisibleCalendar { get; protected set; }
+
+        public override void OnAppearing()
         {
+            if (!FirstLoad)
+            {
+                base.OnAppearing();
+            }
+            else
+            {
+                IsBusy = false;
+            }
+        }
+
+        private void OnTapCalendar()
+        {
+            if (IsActive)
+            {
+                VisibleCalendar = !VisibleCalendar;
+            }
         }
     }
 }

@@ -1,23 +1,42 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-              mc:Ignorable="d"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:langs="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
               xmlns:controls="clr-namespace:LiveScore.Core.Controls.Calendar;assembly=LiveScore.Core"
+              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+              mc:Ignorable="d"
               x:Class="LiveScore.Features.Score.Views.Templates.CalendarTemplate">
     <ContentView AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="SizeProportional">
+
         <Grid>
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding VisibleCalendar}"
+                             Value="False">
+                    <DataTrigger.EnterActions>
+                        <controls:CalendarAnimationTrigger Action="Hide"></controls:CalendarAnimationTrigger>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+                <DataTrigger TargetType="Grid"
+                             Binding="{Binding VisibleCalendar}"
+                             Value="True">
+                    <DataTrigger.EnterActions>
+                        <controls:CalendarAnimationTrigger Action="Show"></controls:CalendarAnimationTrigger>
+                    </DataTrigger.EnterActions>
+                </DataTrigger>
+            </Grid.Triggers>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:CalendarView  Grid.Row="0"
-                                    Margin="0,0,0,10" />
+            <controls:CalendarView  x:Name="Calendar"
+                                    Grid.Row="0"
+                                    Margin="0,0,0,10">
+            </controls:CalendarView>
             <Label IsVisible="{Binding NoData}"
                    Grid.Row="1"
                    Style="{StaticResource NotificationLabel}"
