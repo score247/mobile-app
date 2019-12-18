@@ -194,6 +194,7 @@ namespace LiveScore.Soccer.ViewModels.Matches.MatchDetails.Information
             matchInfo
                 .UpdateTimelineEvents(matchInfo.FilterPenaltyEvents()?
                 .OrderByDescending(t => t.MatchTime)
+                .ThenByDescending(t => t.StoppageTime)
                 .ThenByDescending(t => t.Time));
 
             var timelineEvents = matchInfo.TimelineEvents
