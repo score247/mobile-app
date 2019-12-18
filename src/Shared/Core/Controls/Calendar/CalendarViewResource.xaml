@@ -71,6 +71,8 @@
                 Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize"
                 Value="{StaticResource GeneralFontSize}" />
+        <Setter Property="CornerRadius"
+                Value="20" />
     </Style>
     <Style x:Key="DisabledDate"
            BasedOn="{StaticResource Date}"
@@ -83,7 +85,5 @@
            TargetType="Button">
         <Setter Property="BackgroundColor"
                 Value="{StaticResource SecondAccentColor}" />
-        <Setter Property="BorderRadius"
-                Value="20" />
     </Style>
 </ResourceDictionary>

@@ -22,6 +22,21 @@ namespace LiveScore.Core.Controls.Calendar
             }
 
             SelectedIndex = monthRange;
+
+            ChangeSelectedDateCommand = new DelegateCommand<CalendarDate>(OnChangeSelectedDate);
+
+            foreach (var calendarMonth in CalendarMonths)
+            {
+                foreach (var calendarDates in calendarMonth.CalendarDatesList)
+                {
+                    if (SelectedDate == null)
+                    {
+                        SelectedDate = Array.Find(calendarDates.DateList, date => date?.IsSelected == true);
+                    }
+
+                    calendarDates.ChangeSelectedDateCommand = ChangeSelectedDateCommand;
+                }
+            }
         }
 
         public int SelectedIndex { get; }
@@ -30,7 +45,21 @@ namespace LiveScore.Core.Controls.Calendar
 
         public string CalendarTitle { get; private set; }
 
+        public CalendarDate SelectedDate { get; set; }
+
         public DelegateCommand<ItemAppearingEventArgs> CalendarMonthItemAppearingCommand { get; }
+
+        public DelegateCommand<CalendarDate> ChangeSelectedDateCommand { get; }
+
+        private void OnChangeSelectedDate(CalendarDate date)
+        {
+            if (SelectedDate != null)
+            {
+                SelectedDate.IsSelected = false;
+            }
+
+            SelectedDate = date;
+        }
 
         private void OnCalendarMonthItemAppearing(ItemAppearingEventArgs obj)
         {
