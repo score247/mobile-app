@@ -16,9 +16,9 @@
         <Setter Property="VerticalOptions"
                 Value="Center" />
         <Setter Property="BackgroundColor"
-                Value="{StaticResource SecondColor}" />
+                Value="Transparent" />
         <Setter Property="TextColor"
-                Value="{StaticResource DisabledDateColor}" />
+                Value="{StaticResource CalendarIconColor}" />
         <Setter Property="FontSize"
                 Value="10" />
     </Style>
@@ -38,9 +38,10 @@
     <Style x:Key="CurrentYear"
            TargetType="Label">
         <Setter Property="TextColor"
-                Value="{StaticResource SecondAccentColor}" />
+                Value="{StaticResource CalendarCurrentYear}" />
         <Setter Property="FontSize"
-                Value="20" />
+                Value="{StaticResource CalendarCurrentYearFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource RobotoLight}" />
     </Style>
 
     <Style x:Key="Day"
@@ -50,9 +51,9 @@
         <Setter Property="VerticalTextAlignment"
                 Value="Center" />
         <Setter Property="TextColor"
-                Value="{StaticResource DisabledDateColor}" />
+                Value="{StaticResource CalendarDayColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource UppercaseTextFontSize}" />
+                Value="{StaticResource CalendarDayFontSize}" />
     </Style>
 
     <Style x:Key="Date"
@@ -68,22 +69,22 @@
         <Setter Property="BackgroundColor"
                 Value="Transparent" />
         <Setter Property="TextColor"
-                Value="{StaticResource PrimaryTextColor}" />
+                Value="{StaticResource CalendarDateColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource GeneralFontSize}" />
+                Value="{StaticResource CalendarDateFontSize}" />
         <Setter Property="CornerRadius"
                 Value="20" />
-    </Style>
-    <Style x:Key="DisabledDate"
-           BasedOn="{StaticResource Date}"
-           TargetType="Button">
-        <Setter Property="TextColor"
-                Value="{StaticResource DisabledDateColor}" />
     </Style>
     <Style x:Key="CurrentDate"
            BasedOn="{StaticResource Date}"
            TargetType="Button">
         <Setter Property="BackgroundColor"
-                Value="{StaticResource SecondAccentColor}" />
+                Value="{StaticResource CalendarCurrentDateBgColor}" />
+    </Style>
+    <Style x:Key="SelectedDate"
+           BasedOn="{StaticResource Date}"
+           TargetType="Button">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource CalendarSelectedDateBgColor}" />
     </Style>
 </ResourceDictionary>

@@ -84,9 +84,18 @@
             <Color x:Key="NetworkConnectionBgColor">#EBC8C4</Color>
             <Color x:Key="NetworkConnectionIconColor">#FB0F00</Color>
             <Color x:Key="NetworkConnectionContentColor">#982B31</Color>
+
             <!--  Calendar Page  -->
-            <Color x:Key="DateColor">#fff</Color>
-            <Color x:Key="DisabledDateColor">#636886</Color>
+            <Color x:Key="CalendarCurrentYear">#FF7D00</Color>
+            <x:Double x:Key="CalendarCurrentYearFontSize">20</x:Double>
+            <Color x:Key="CalendarSelectedDateBgColor">#FF7D00</Color>
+            <Color x:Key="CalendarCurrentDateBgColor">#292A2B</Color>
+            <Color x:Key="CalendarDateColor">#E5E5E5</Color>
+            <x:Double x:Key="CalendarDateFontSize">14</x:Double>
+            <Color x:Key="CalendarDayColor">#CBCBCB</Color>
+            <x:Double x:Key="CalendarDayFontSize">12</x:Double>
+            <Color x:Key="CalendarIconColor">#CBCBCB</Color>
+
             <!--  Function Group  -->
             <x:Double x:Key="FunctionGroupHeight">46</x:Double>
             <x:Double x:Key="FunctionGroupFontSize">11</x:Double>

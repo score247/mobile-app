@@ -15,7 +15,7 @@
     <StackLayout Padding="16"
                  x:Name="Layout"
                  VerticalOptions="Start"
-                 BackgroundColor="{StaticResource PrimaryColor}"
+                 BackgroundColor="#161719"
                  Orientation="Vertical">
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
             <Button Style="{StaticResource PrevButton}"
@@ -72,7 +72,7 @@
 
             <BoxView Grid.ColumnSpan="7"
                      Grid.Row="1"
-                     BackgroundColor="{StaticResource LineColor}" />
+                     BackgroundColor="#CBCBCB" />
         </Grid>
 
         <CardsView:CarouselView  IsCyclical="False"
@@ -94,7 +94,7 @@
                         <Grid Margin="0,12,0,0">
                             <ListView SeparatorVisibility="None"
                                       x:Name="CalendarListView"
-                                      BackgroundColor="{StaticResource PrimaryColor}"
+                                      BackgroundColor="#161719"
                                       VerticalScrollBarVisibility="Never"
                                       HasUnevenRows="True"
                                       HeightRequest="300"
@@ -127,7 +127,7 @@
                                                                      Binding="{Binding  DateList[0].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -141,7 +141,7 @@
                                                                      Binding="{Binding DateList[1].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -155,7 +155,7 @@
                                                                      Binding="{Binding DateList[2].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -169,7 +169,7 @@
                                                                      Binding="{Binding DateList[3].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -183,7 +183,7 @@
                                                                      Binding="{Binding DateList[4].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -197,7 +197,7 @@
                                                                      Binding="{Binding DateList[5].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
@@ -211,7 +211,7 @@
                                                                      Binding="{Binding DateList[6].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
-                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                                    Value="{StaticResource SelectedDate}"></Setter>
                                                         </DataTrigger>
                                                     </Button.Triggers>
                                                 </Button>
