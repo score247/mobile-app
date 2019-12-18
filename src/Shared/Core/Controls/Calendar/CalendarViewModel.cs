@@ -10,6 +10,8 @@ namespace LiveScore.Core.Controls.Calendar
     [AddINotifyPropertyChangedInterface]
     public class CalendarViewModel
     {
+        private const int WeekDayCount = 7;
+        private const string TitleDateFormat = "MMMM yyyy";
         private readonly int monthRange;
 
         public CalendarViewModel(int monthRange = 2)
@@ -42,7 +44,7 @@ namespace LiveScore.Core.Controls.Calendar
 
         private void BuildCalendarData(int monthRange)
         {
-            CalendarTitle = DateTime.Today.ToString("MMMM yyyy");
+            CalendarTitle = BuildTitle(DateTime.Today.Year, DateTime.Today.Month);
             CalendarMonths = new List<CalendarMonth>();
 
             for (int monthIndex = -monthRange; monthIndex <= monthRange; monthIndex++)
@@ -86,7 +88,7 @@ namespace LiveScore.Core.Controls.Calendar
         private void OnCalendarMonthItemAppearing(ItemAppearingEventArgs obj)
         {
             var calendarMonth = obj.Item as CalendarMonth;
-            CalendarTitle = new DateTime(calendarMonth.Year, calendarMonth.Month, 1).ToString("MMMM yyyy");
+            CalendarTitle = BuildTitle(calendarMonth.Year, calendarMonth.Month);
         }
 
         private void OnTapPreviousMonth()
@@ -105,34 +107,37 @@ namespace LiveScore.Core.Controls.Calendar
             }
         }
 
+        private static string BuildTitle(int year, int month)
+            => new DateTime(year, month, 1).ToString(TitleDateFormat).ToUpperInvariant();
+
         private static IList<CalendarDates> BuildCalendar(int year, int month)
         {
             var calendarDates = new List<CalendarDates>();
             var daysInMonth = DateTime.DaysInMonth(year, month);
-            var firstRow = new CalendarDate[7];
+            var firstRow = new CalendarDate[WeekDayCount];
             var firstDayInMonth = new DateTime(year, month, 1);
             var firstDayInMonthWeekDay = firstDayInMonth.DayOfWeek;
 
             var firstRowDateCount = firstDayInMonthWeekDay == DayOfWeek.Sunday
                 ? 1
-                : Convert.ToInt32(7 - firstDayInMonthWeekDay + 1);
+                : Convert.ToInt32(WeekDayCount - firstDayInMonthWeekDay + 1);
 
             for (var i = 0; i < firstRowDateCount; i++)
             {
-                firstRow[7 - firstRowDateCount + i] = new CalendarDate(firstDayInMonth.AddDays(i));
+                firstRow[WeekDayCount - firstRowDateCount + i] = new CalendarDate(firstDayInMonth.AddDays(i));
             }
 
             calendarDates.Add(new CalendarDates(firstRow));
 
             var restRowsDateCount = daysInMonth - firstRowDateCount;
-            var restRowsCount = restRowsDateCount / 7;
+            var restRowsCount = restRowsDateCount / WeekDayCount;
 
             for (var i = 0; i < restRowsCount; i++)
             {
-                var restRow = new CalendarDate[7];
-                var firstDate = new DateTime(year, month, firstRowDateCount + 1).AddDays(7 * i);
+                var restRow = new CalendarDate[WeekDayCount];
+                var firstDate = new DateTime(year, month, firstRowDateCount + 1).AddDays(WeekDayCount * i);
 
-                for (var dateAdd = 0; dateAdd < 7; dateAdd++)
+                for (var dateAdd = 0; dateAdd < WeekDayCount; dateAdd++)
                 {
                     restRow[dateAdd] = new CalendarDate(firstDate.AddDays(dateAdd));
                 }
@@ -140,11 +145,11 @@ namespace LiveScore.Core.Controls.Calendar
                 calendarDates.Add(new CalendarDates(restRow));
             }
 
-            var lastRowDatesCount = restRowsDateCount % 7;
+            var lastRowDatesCount = restRowsDateCount % WeekDayCount;
 
             if (lastRowDatesCount > 0)
             {
-                var lastRow = new CalendarDate[7];
+                var lastRow = new CalendarDate[WeekDayCount];
                 var firstDateInLastRow = new DateTime(year, month, daysInMonth - lastRowDatesCount + 1);
 
                 for (var i = 0; i < lastRowDatesCount; i++)

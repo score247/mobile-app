@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Controls.Calendar;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using PanCardView.EventArgs;
@@ -29,6 +30,7 @@ namespace LiveScore.Features.Score.ViewModels
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
+            CalendarDateChangedCommand = new DelegateCommand<CalendarDate>(OnCalendarDateChanged);
             matchService = DependencyResolver.Resolve<IMatchService>(CurrentSportId.ToString());
             InitScoreItemSources();
         }
@@ -44,6 +46,8 @@ namespace LiveScore.Features.Score.ViewModels
         public DelegateCommand<ItemDisappearingEventArgs> ScoreItemDisappearingCommand { get; }
 
         public DelegateAsyncCommand ClickSearchCommand { get; }
+
+        public DelegateCommand<CalendarDate> CalendarDateChangedCommand { get; }
 
         public override async void OnResumeWhenNetworkOK()
         {
@@ -134,7 +138,7 @@ namespace LiveScore.Features.Score.ViewModels
             }
 
             ScoreItemSources.Add(
-                new CalendarMatchesViewModel(NavigationService, DependencyResolver, EventAggregator));
+                new CalendarMatchesViewModel(NavigationService, DependencyResolver, EventAggregator, CalendarDateChangedCommand));
 
             SelectedScoreItem = ScoreItemSources[TodayDateBarItemIndex];
         }
@@ -149,6 +153,12 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        private void OnCalendarDateChanged(CalendarDate date)
+        {
+            var itemIndex = TodayDateBarItemIndex - Convert.ToInt32((DateTime.Today - date.Date).TotalDays);
+            SelectedScoreItem = ScoreItemSources[itemIndex];
         }
     }
 }

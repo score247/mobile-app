@@ -40,7 +40,7 @@ namespace LiveScore.Core.Controls.Calendar
 
             if (screenHeight > 0)
             {
-                await grid.LayoutTo(new Rectangle(0, -height - 10, grid.Width, screenHeight + 10), 250, Easing.Linear);
+                await grid.LayoutTo(new Rectangle(0, -height, grid.Width, screenHeight), 250, Easing.Linear);
             }
         }
 

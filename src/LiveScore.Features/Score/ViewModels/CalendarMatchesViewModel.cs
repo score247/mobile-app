@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.Calendar;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
+using Xamarin.Forms;
 
 namespace LiveScore.Features.Score.ViewModels
 {
     public class CalendarMatchesViewModel : ScoreMatchesViewModel
     {
+        private readonly ICommand calendarDateChangedCommand;
+
         public CalendarMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator)
+            IEventAggregator eventAggregator,
+            ICommand calendarDateChangedCommand)
             : base(DateTime.MinValue, navigationService, dependencyResolver, eventAggregator)
         {
+            this.calendarDateChangedCommand = calendarDateChangedCommand;
             IsBusy = false;
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             CalendarDateSelectedCommand = new DelegateAsyncCommand<CalendarDate>(OnCalendarDateSelected);
@@ -45,12 +51,21 @@ namespace LiveScore.Features.Score.ViewModels
 
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
-            VisibleCalendar = false;
-            ViewDate = calendarDate.Date;
-            HasData = true;
             MatchItemsSource?.Clear();
+            HasData = true;
 
-            await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
+            if (calendarDate.Date.IsInDateRange(2))
+            {
+                calendarDateChangedCommand?.Execute(calendarDate);
+                ViewDate = DateTime.MinValue;
+            }
+            else
+            {
+                VisibleCalendar = false;
+                ViewDate = calendarDate.Date;
+
+                await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
+            }
         }
     }
 }

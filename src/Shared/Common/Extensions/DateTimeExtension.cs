@@ -27,6 +27,9 @@ namespace LiveScore.Common.Extensions
 
         public static bool IsTodayOrYesterday(this DateTime dateTime)
             => dateTime == DateTime.Today || dateTime == Yesterday();
+
+        public static bool IsInDateRange(this DateTime dateTime, int range)
+            => dateTime >= DateTime.Today.AddDays(-range) && dateTime <= DateTime.Today.AddDays(2);
     }
 
 #pragma warning restore S109 // Magic numbers should not be used

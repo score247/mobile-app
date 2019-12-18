@@ -124,6 +124,12 @@
                                                         CommandParameter="{Binding DateList[0]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[0].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Button"
                                                                      Binding="{Binding  DateList[0].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
@@ -137,6 +143,12 @@
                                                         Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[1]}">
                                                     <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[1].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
                                                         <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[1].IsSelected}"
                                                                      Value="True">
@@ -152,6 +164,12 @@
                                                         CommandParameter="{Binding DateList[2]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[2].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[2].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
@@ -165,6 +183,12 @@
                                                         Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[3]}">
                                                     <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[3].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
                                                         <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[3].IsSelected}"
                                                                      Value="True">
@@ -180,6 +204,12 @@
                                                         CommandParameter="{Binding DateList[4]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[4].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[4].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
@@ -194,6 +224,12 @@
                                                         CommandParameter="{Binding DateList[5]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[5].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
+                                                        <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[5].IsSelected}"
                                                                      Value="True">
                                                             <Setter Property="Style"
@@ -207,6 +243,12 @@
                                                         Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[6]}">
                                                     <Button.Triggers>
+                                                        <DataTrigger TargetType="Button"
+                                                                     Binding="{Binding DateList[6].IsToday}"
+                                                                     Value="True">
+                                                            <Setter Property="Style"
+                                                                    Value="{StaticResource CurrentDate}"></Setter>
+                                                        </DataTrigger>
                                                         <DataTrigger TargetType="Button"
                                                                      Binding="{Binding DateList[6].IsSelected}"
                                                                      Value="True">
