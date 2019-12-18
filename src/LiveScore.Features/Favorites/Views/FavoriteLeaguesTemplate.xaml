@@ -1,14 +1,15 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d"
-             x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
     <ContentView>
         <ContentView.Content>
             <StackLayout>
-                <Label Text="This is favorite leagues pages" />
+                <Label Style="{StaticResource NotificationLabel}"
+                       Text="This is favorite leagues pages" />
             </StackLayout>
         </ContentView.Content>
     </ContentView>

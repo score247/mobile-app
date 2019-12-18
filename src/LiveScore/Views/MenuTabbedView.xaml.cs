@@ -2,6 +2,7 @@
 
 namespace LiveScore.Views
 {
+    using Prism.Common;
     using Xamarin.Forms;
     using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
     using Xamarin.Forms.Xaml;
@@ -21,6 +22,12 @@ namespace LiveScore.Views
                 SetUpBarTextColor();
             }
             On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
+
+            CurrentPageChanged += MenuTabbedView_CurrentPageChanged;
+        }
+
+        private void MenuTabbedView_CurrentPageChanged(object sender, System.EventArgs e)
+        {
         }
 
         private void SetUpBarTextColor()
