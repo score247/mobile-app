@@ -4,8 +4,6 @@
              xmlns:resources="clr-namespace:LiveScore.Core.Controls.Calendar"
              xmlns:processors="clr-namespace:PanCardView.Processors;assembly=PanCardView"
              xmlns:CardsView="clr-namespace:PanCardView;assembly=PanCardView"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
-             prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="LiveScore.Core.Controls.Calendar.CalendarView">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -120,7 +118,7 @@
                                                 <Button Grid.Column="0"
                                                         Text="{Binding DateList[0].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[0]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -134,7 +132,7 @@
                                                 <Button Grid.Column="1"
                                                         Text="{Binding DateList[1].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[1]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -148,7 +146,7 @@
                                                 <Button Grid.Column="2"
                                                         Text="{Binding DateList[2].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[2]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -162,7 +160,7 @@
                                                 <Button Grid.Column="3"
                                                         Text="{Binding DateList[3].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[3]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -176,7 +174,7 @@
                                                 <Button Grid.Column="4"
                                                         Text="{Binding DateList[4].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[4]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -190,7 +188,7 @@
                                                 <Button Grid.Column="5"
                                                         Text="{Binding DateList[5].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[5]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"
@@ -204,7 +202,7 @@
                                                 <Button Grid.Column="6"
                                                         Text="{Binding DateList[6].Date.Day}"
                                                         Style="{StaticResource Date}"
-                                                        Command="{Binding SelectDateCommand}"
+                                                        Command="{Binding DateSelectedCommand}"
                                                         CommandParameter="{Binding DateList[6]}">
                                                     <Button.Triggers>
                                                         <DataTrigger TargetType="Button"

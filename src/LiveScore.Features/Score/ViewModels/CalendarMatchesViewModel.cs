@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using LiveScore.Core;
+using LiveScore.Core.Controls.Calendar;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -13,27 +15,24 @@ namespace LiveScore.Features.Score.ViewModels
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
-            : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
+            : base(DateTime.MinValue, navigationService, dependencyResolver, eventAggregator)
         {
+            IsBusy = false;
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
-            IsDateNotSelected = true;
+            CalendarDateSelectedCommand = new DelegateAsyncCommand<CalendarDate>(OnCalendarDateSelected);
         }
 
         public DelegateCommand TapCalendarCommand { get; protected set; }
 
+        public DelegateAsyncCommand<CalendarDate> CalendarDateSelectedCommand { get; }
+
         public bool VisibleCalendar { get; protected set; }
 
-        public override async void OnAppearing()
+        public override void OnAppearing()
         {
-            if (!FirstLoad)
-            {
-                base.OnAppearing();
-            }
-            else
-            {
-                IsBusy = false;
-                VisibleCalendar = true;
-            }
+            base.OnAppearing();
+
+            VisibleCalendar = true;
         }
 
         private void OnTapCalendar()
@@ -42,6 +41,16 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 VisibleCalendar = !VisibleCalendar;
             }
+        }
+
+        private async Task OnCalendarDateSelected(CalendarDate calendarDate)
+        {
+            VisibleCalendar = false;
+            ViewDate = calendarDate.Date;
+            HasData = true;
+            MatchItemsSource?.Clear();
+
+            await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
         }
     }
 }

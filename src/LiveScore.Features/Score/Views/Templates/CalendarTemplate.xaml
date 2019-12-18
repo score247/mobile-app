@@ -33,9 +33,9 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <controls:CalendarView  x:Name="Calendar"
-                                    Grid.Row="0"
-                                    Margin="0,0,0,10">
+            <controls:CalendarView Grid.Row="0"
+                                   Margin="0,0,0,10"
+                                   DateSelectedCommand="{Binding CalendarDateSelectedCommand}">
             </controls:CalendarView>
             <Label IsVisible="{Binding NoData}"
                    Grid.Row="1"

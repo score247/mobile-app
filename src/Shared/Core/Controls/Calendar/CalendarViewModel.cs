@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using PanCardView.EventArgs;
 using Prism.Commands;
 using PropertyChanged;
@@ -23,7 +24,7 @@ namespace LiveScore.Core.Controls.Calendar
 
             SelectedIndex = monthRange;
 
-            ChangeSelectedDateCommand = new DelegateCommand<CalendarDate>(OnChangeSelectedDate);
+            SelectedDateChangedCommand = new DelegateCommand<CalendarDate>(OnChangeSelectedDate);
 
             foreach (var calendarMonth in CalendarMonths)
             {
@@ -34,7 +35,7 @@ namespace LiveScore.Core.Controls.Calendar
                         SelectedDate = Array.Find(calendarDates.DateList, date => date?.IsSelected == true);
                     }
 
-                    calendarDates.ChangeSelectedDateCommand = ChangeSelectedDateCommand;
+                    calendarDates.SelectedDateChangedCommand = SelectedDateChangedCommand;
                 }
             }
         }
@@ -45,20 +46,28 @@ namespace LiveScore.Core.Controls.Calendar
 
         public string CalendarTitle { get; private set; }
 
-        public CalendarDate SelectedDate { get; set; }
+        public CalendarDate SelectedDate { get; internal set; }
 
         public DelegateCommand<ItemAppearingEventArgs> CalendarMonthItemAppearingCommand { get; }
 
-        public DelegateCommand<CalendarDate> ChangeSelectedDateCommand { get; }
+        public DelegateCommand<CalendarDate> SelectedDateChangedCommand { get; }
+
+        public ICommand DateSelectedCommand { get; internal set; }
 
         private void OnChangeSelectedDate(CalendarDate date)
         {
+            if (SelectedDate == date)
+            {
+                return;
+            }
+
             if (SelectedDate != null)
             {
                 SelectedDate.IsSelected = false;
             }
 
             SelectedDate = date;
+            DateSelectedCommand?.Execute(date);
         }
 
         private void OnCalendarMonthItemAppearing(ItemAppearingEventArgs obj)

@@ -39,15 +39,13 @@ namespace LiveScore.Features.Score.ViewModels
             LoadMoreCommand = new DelegateCommand(OnLoadMore);
         }
 
-        public DateTime ViewDate { get; }
+        public DateTime ViewDate { get; protected set; }
 
         public bool IsActive { get; set; }
 
         public bool IsLoadMore { get; private set; }
 
         public bool IsNotLoadMore => !IsLoadMore;
-
-        public bool IsDateNotSelected { get; protected set; }
 
         public ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>> RemainingMatchItemSource { get; protected set; }
 
@@ -67,6 +65,11 @@ namespace LiveScore.Features.Score.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (ViewDate == DateTime.MinValue)
+            {
+                return;
+            }
 
             if (ViewDate.IsTodayOrYesterday())
             {

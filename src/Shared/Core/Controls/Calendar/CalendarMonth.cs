@@ -28,19 +28,19 @@ namespace LiveScore.Core.Controls.Calendar
         public CalendarDates(CalendarDate[] dateList)
         {
             DateList = dateList;
-            SelectDateCommand = new DelegateCommand<CalendarDate>(OnSelectDate);
+            DateSelectedCommand = new DelegateCommand<CalendarDate>(OnSelectDate);
         }
 
         public CalendarDate[] DateList { get; }
 
-        public DelegateCommand<CalendarDate> SelectDateCommand { get; }
+        public DelegateCommand<CalendarDate> DateSelectedCommand { get; }
 
-        public DelegateCommand<CalendarDate> ChangeSelectedDateCommand { get; set; }
+        public DelegateCommand<CalendarDate> SelectedDateChangedCommand { get; set; }
 
         private void OnSelectDate(CalendarDate date)
         {
             date.IsSelected = true;
-            ChangeSelectedDateCommand?.Execute(date);
+            SelectedDateChangedCommand?.Execute(date);
         }
     }
 

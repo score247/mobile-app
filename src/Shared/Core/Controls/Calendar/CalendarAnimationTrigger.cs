@@ -5,6 +5,8 @@ namespace LiveScore.Core.Controls.Calendar
 {
     public class CalendarAnimationTrigger : TriggerAction<Grid>
     {
+        private double screenHeight;
+
         public AnimationAction Action { get; set; }
 
         public enum AnimationAction
@@ -27,16 +29,24 @@ namespace LiveScore.Core.Controls.Calendar
             }
         }
 
-        private static async Task HideCalendar(Grid grid)
+        private async Task HideCalendar(Grid grid)
         {
             var height = grid.Children[0]?.Height ?? 0;
 
-            await grid.TranslateTo(0, -height, 250, Easing.Linear);
+            if (screenHeight <= 0)
+            {
+                screenHeight = grid.Height + height;
+            }
+
+            if (screenHeight > 0)
+            {
+                await grid.LayoutTo(new Rectangle(0, -height - 10, grid.Width, screenHeight + 10), 250, Easing.Linear);
+            }
         }
 
-        private static async Task ShowCalendar(Grid grid)
+        private async Task ShowCalendar(Grid grid)
         {
-            await grid.TranslateTo(0, 0, 250, Easing.Linear);
+            await grid.LayoutTo(new Rectangle(0, 0, grid.Width, grid.Height), 250, Easing.Linear);
         }
     }
 }
