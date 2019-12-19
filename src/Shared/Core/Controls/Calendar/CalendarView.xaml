@@ -15,7 +15,6 @@
     <StackLayout Padding="16"
                  x:Name="Layout"
                  VerticalOptions="Start"
-                 BackgroundColor="#161719"
                  Orientation="Vertical">
         <FlexLayout Style="{StaticResource FlexLayoutHorizontalCenter}">
             <Button Style="{StaticResource PrevButton}"
@@ -72,7 +71,7 @@
 
             <BoxView Grid.ColumnSpan="7"
                      Grid.Row="1"
-                     BackgroundColor="#CBCBCB" />
+                     BackgroundColor="#2C2D2E" />
         </Grid>
 
         <CardsView:CarouselView  IsCyclical="False"

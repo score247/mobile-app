@@ -81,7 +81,7 @@
                        Grid.RowSpan="2"
                        Grid.Column="3"
                        LineBreakMode="NoWrap"
-                       Style="{StaticResource MatchFavoriteIcon}" />
+                       Style="{StaticResource FavoriteIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>

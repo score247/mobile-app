@@ -2,15 +2,142 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"              
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               mc:Ignorable="d"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
     <ContentView>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <coreResources:MatchHeaderViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </ContentView.Resources>
         <ContentView.Content>
-            <StackLayout>
-                <Label Style="{StaticResource NotificationLabel}"
-                       Text="This is favorite leagues pages" />
+            <StackLayout Padding="0,8">
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ENGLAND PREMIER LEAGUE" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ENGLAND CHAMPIONSHIP" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="SPAIN LALIGA SMARTBANK" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ITALY SERIE A" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
+            
         </ContentView.Content>
     </ContentView>
 </DataTemplate>

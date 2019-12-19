@@ -4,12 +4,343 @@
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
               xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               mc:Ignorable="d"
+              xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               x:Class="LiveScore.Features.Favorites.Views.FavoriteMatchesTemplate">
     <ContentView>
+        <ContentView.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <coreResources:MatchHeaderViewResource />
+                    <coreResources:MatchViewResource />
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </ContentView.Resources>
         <ContentView.Content>
-            <StackLayout>
-                <Label Style="{StaticResource NotificationLabel}"
-                       Text="This is favorite matches pages" />
+            <StackLayout Padding="0, 8">
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ENGLAND PREMIER LEAGUE" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource MatchDate}"
+                       Text="30 JAN" />
+                    <Label x:Name="DetailIcon"
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             Style="{StaticResource MatchStatusContainer}">
+                        <Label LineBreakMode="WordWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="21:00" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Sheffield United" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Liverpool" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource HomeScore}"
+                       Text="" />
+                    <Label Grid.Row="1"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource AwayScore}"
+                       Text="" />
+                    <Label Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Grid.Column="3"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ENGLAND CHAMPIONSHIP" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource MatchDate}"
+                       Text="29 JAN" />
+                    <Label
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             Style="{StaticResource MatchStatusContainer}">
+                        <Label LineBreakMode="WordWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="21:00" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Fulham" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Wigan Athletic" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource HomeScore}"
+                       Text="" />
+                    <Label Grid.Row="1"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource AwayScore}"
+                       Text="" />
+                    <Label Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Grid.Column="3"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="SPAIN LALIGA SMARTBANK" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource MatchDate}"
+                       Text="29 JAN" />
+                    <Label
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             Style="{StaticResource MatchStatusContainer}">
+                        <Label LineBreakMode="WordWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="21:00" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Las Palmas" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Albacete" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource HomeScore}"
+                       Text="" />
+                    <Label Grid.Row="1"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource AwayScore}"
+                       Text="" />
+                    <Label Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Grid.Column="3"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="images/flag_league/default_flag.svg"
+                                                  Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="ITALY SERIE A" />
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource MatchDate}"
+                       Text="29 JAN" />
+                    <Label
+                       Grid.Row="0"
+                       Grid.Column="3"
+                       Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="38" />
+                    </Grid.ColumnDefinitions>
+                    <StackLayout Grid.Row="0"
+                             Grid.RowSpan="2"
+                             Grid.Column="0"
+                             Style="{StaticResource MatchStatusContainer}">
+                        <Label LineBreakMode="WordWrap"
+                           Style="{StaticResource MatchStatus}"
+                           Text="21:00" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="0"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchHomeTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="Juventus" />
+                    </StackLayout>
+                    <StackLayout Grid.Row="1"
+                             Grid.Column="1"
+                             Style="{StaticResource MatchAwayTeam}">
+                        <Label Style="{StaticResource Team}"
+                           Text="SPAL" />
+                    </StackLayout>
+                    <Label Grid.Row="0"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource HomeScore}"
+                       Text="" />
+                    <Label Grid.Row="1"
+                       Grid.Column="2"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource AwayScore}"
+                       Text="" />
+                    <Label Grid.Row="0"
+                       Grid.RowSpan="2"
+                       Grid.Column="3"
+                       LineBreakMode="NoWrap"
+                       Style="{StaticResource ActiveFavoriteIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
         </ContentView.Content>
     </ContentView>
