@@ -86,15 +86,17 @@ namespace LiveScore.Features.League.ViewModels
 
             var internationalLeagues = orderedLeague.Where(league => league.IsInternational);
 
-            var allLeagueGroups = BuildInternationalLeaguesGroup(internationalLeagues);
+            var internationalLeaguesGroup = BuildInternationalLeaguesGroup(internationalLeagues);
 
             var countryLeagues = orderedLeague.Where(league => !league.IsInternational);
             var countryGroups = BuildCountryLeaguesGroup(countryLeagues);
 
-            return allLeagueGroups.Concat(countryGroups);
+            var allLeagues = internationalLeaguesGroup.Concat(countryGroups);
+
+            return allLeagues.GroupBy(_ => AppResources.AllLeagues);
         }
 
-        private IEnumerable<IGrouping<string, ViewModelBase>> BuildInternationalLeaguesGroup(IEnumerable<ILeague> internationalLeagues)
+        private IEnumerable<ViewModelBase> BuildInternationalLeaguesGroup(IEnumerable<ILeague> internationalLeagues)
         {
             var internationalCategory = new LeagueCategory
             {
@@ -111,10 +113,10 @@ namespace LiveScore.Features.League.ViewModels
                     buildFlagFunction)
             };
 
-            return internationalViewModels.GroupBy(_ => AppResources.AllLeagues);
+            return internationalViewModels;
         }
 
-        private IEnumerable<IGrouping<string, ViewModelBase>> BuildCountryLeaguesGroup(IEnumerable<ILeague> countryLeagues)
+        private IEnumerable<ViewModelBase> BuildCountryLeaguesGroup(IEnumerable<ILeague> countryLeagues)
         {
             var countryGroup = countryLeagues
                 .GroupBy(league => new LeagueCategory
@@ -137,7 +139,7 @@ namespace LiveScore.Features.League.ViewModels
                     );
             }
 
-            return countryLeaguesItems.GroupBy(_ => AppResources.AllLeagues);
+            return countryLeaguesItems;
         }
     }
 }
