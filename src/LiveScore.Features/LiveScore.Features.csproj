@@ -4,7 +4,6 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <Configurations>Debug;Release;DevRelease;Test</Configurations>
     <LangVersion>8.0</LangVersion>
-   
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -149,5 +148,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

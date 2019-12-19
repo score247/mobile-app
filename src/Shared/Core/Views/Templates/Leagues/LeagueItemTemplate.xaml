@@ -9,7 +9,7 @@
              mc:Ignorable="d"
              x:DataType="viewModel:LeagueItemViewModel"
              x:Class="LiveScore.Core.Views.Templates.Leagues.LeagueItemTemplate">
-    <ViewCell>
+    <ViewCell Height="{StaticResource FunctionGroupHeight}">
         <StackLayout>
             <StackLayout.Resources>
                 <ResourceDictionary>
@@ -19,31 +19,35 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
-            <Grid Style="{StaticResource LeagueBox}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="60" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="36" />
-                </Grid.ColumnDefinitions>
-                <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+            <StackLayout>
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
                                                   Source="{Binding LeagueFlag, Mode=OneTime}"
                                                   Style="{StaticResource LeagueFlag}" />
-                <Label Grid.Row="0"
+                    <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
                        Text="{ Binding League.Name }" />
-                <Label x:Name="DetailIcon"
+                    <Label x:Name="DetailIcon"
                        Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource LeagueDetailIcon}" />
-            </Grid>
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </StackLayout>
+            
         </StackLayout>
     </ViewCell>
 </DataTemplate>

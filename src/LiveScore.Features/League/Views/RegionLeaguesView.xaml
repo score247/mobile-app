@@ -26,12 +26,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand">
+        <StackLayout>
             <BoxView Style="{StaticResource HorizontalLine}" />
-            <Grid Style="{StaticResource RegionBox}">
+            <Grid Style="{StaticResource RegionDetailGroupBox}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="25" />
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60" />
@@ -46,7 +45,7 @@
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
-                       Style="{StaticResource RegionName}"
+                       Style="{StaticResource LeagueName}"
                        Text="{ Binding Region.Name }" />
             </Grid>
             <customListView:CustomListView AutomationProperties.IsInAccessibleTree="False"

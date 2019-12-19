@@ -2,20 +2,20 @@
 <ContentPage
     x:Class="LiveScore.Features.League.Views.LeagueView"
     xmlns="http://xamarin.com/schemas/2014/forms"
-    xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
     xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
     xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
     xmlns:leagueTemplates="clr-namespace:LiveScore.Core.Views.Templates.Leagues;assembly=LiveScore.Core"
     xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+    xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources"
     prism:ViewModelLocator.AutowireViewModel="True"
     x:DataType="viewModel:LeagueViewModel"
     BackgroundColor="{StaticResource PrimaryColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <viewResources:ScoreViewResource />
+                <viewResources:LeagueViewResource />
             </ResourceDictionary.MergedDictionaries>
             <templateSelectors:LeagueItemSelector x:Key="LeagueItemSelector" />
             <leagueTemplates:LeaguesGroupTemplate x:Key="LeaguesGroupTemplate" />
@@ -23,8 +23,15 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <BoxView Style="{StaticResource HorizontalLine}" />
+        <StackLayout>
+            <Grid Style="{StaticResource Searchbar}">
+                <Frame Style="{StaticResource SearchBoxBorder}">
+                    <Grid>
+                        <Entry Placeholder="Find league" Style="{StaticResource SearchBox}" />
+                        <Label Style="{StaticResource SearchIcon}" />
+                    </Grid>
+                </Frame>
+            </Grid>
             <customListView:CustomListView
                                    AutomationProperties.IsInAccessibleTree="False"
                                    HasUnevenRows="true"

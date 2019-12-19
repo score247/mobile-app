@@ -5,53 +5,32 @@
     <Style x:Key="LeagueGroupBox"
            TargetType="StackLayout">
         <Setter Property="BackgroundColor"
-                Value="{StaticResource FunctionGroupBgColor}" />
+                Value="#161719" />
         <Setter Property="HeightRequest"
-                Value="30" />
+                Value="{StaticResource FunctionGroupHeight}" />
+    </Style>
+    <Style x:Key="RegionDetailGroupBox"
+           TargetType="Grid">
+        <Setter Property="BackgroundColor"
+                Value="#161719" />
+        <Setter Property="HeightRequest"
+                Value="{StaticResource FunctionGroupHeight}" />
     </Style>
     <Style x:Key="LeagueGroupName"
            TargetType="Label">
         <Setter Property="TextColor"
-                Value="{StaticResource PrimaryAccentColor}" />
+                Value="{StaticResource PrimaryTextColor}" />
         <Setter Property="FontSize"
-                Value="{StaticResource FunctionGroupFontSize}" />
-        <Setter Property="FontFamily"
-                Value="{StaticResource RobotoMedium}" />
-        <Setter Property="VerticalTextAlignment"
-                Value="Center" />
+                Value="{StaticResource GeneralFontSize}" />
         <Setter Property="VerticalOptions"
                 Value="CenterAndExpand" />
         <Setter Property="Padding"
-                Value="10,0,10,0" />
-    </Style>
-    <Style x:Key="RegionBox"
-           TargetType="Grid">
-        <Setter Property="BackgroundColor"
-                Value="{StaticResource FunctionGroupBgColor}" />
-        <Setter Property="HeightRequest"
-                Value="25" />
-    </Style>
-    <Style x:Key="RegionName"
-           TargetType="Label">
-        <Setter Property="TextColor"
-                Value="{StaticResource FunctionGroupColor}" />
-        <Setter Property="FontSize"
-                Value="{StaticResource FunctionGroupFontSize}" />
-        <Setter Property="FontFamily"
-                Value="{StaticResource RobotoMedium}" />
-        <Setter Property="VerticalTextAlignment"
-                Value="Center" />
-        <Setter Property="VerticalOptions"
-                Value="CenterAndExpand" />
-        <Setter Property="Padding"
-                Value="10,0,10,0" />
+                Value="16,0,10,0" />
     </Style>
     <Style x:Key="LeagueBox"
            TargetType="StackLayout">
         <Setter Property="BackgroundColor"
-                Value="{StaticResource SecondColor}" />
-        <Setter Property="HeightRequest"
-                Value="25" />
+                Value="{StaticResource FunctionGroupBgColor}" />
     </Style>
     <Style x:Key="LeagueName"
            TargetType="Label">
