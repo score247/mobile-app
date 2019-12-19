@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
+using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
@@ -29,15 +30,12 @@ namespace LiveScore.Features.League.ViewModels
             this.leagueService = leagueService;
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>();
-
         }
-
-        
-        public ObservableCollection<IGrouping<string, ViewModelBase>> LeagueGroups { get; set; }
 
         private readonly ILeagueService leagueService;
 
         private readonly Func<string, string> buildFlagFunction;
+        public ObservableCollection<IGrouping<string, ViewModelBase>> LeagueGroups { get; set; }
 
         public async Task BuildLeagueGroup()
         {

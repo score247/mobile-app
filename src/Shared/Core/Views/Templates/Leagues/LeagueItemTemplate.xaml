@@ -4,8 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-              mc:Ignorable="d"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:viewModel="clr-namespace:LiveScore.Core.ViewModels.Leagues"
+             mc:Ignorable="d"
+             x:DataType="viewModel:LeagueItemViewModel"
              x:Class="LiveScore.Core.Views.Templates.Leagues.LeagueItemTemplate">
     <ViewCell>
         <StackLayout>

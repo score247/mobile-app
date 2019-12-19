@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Leagues;
+using Prism.Commands;
 using Prism.Navigation;
 
 namespace LiveScore.Core.ViewModels.Leagues
@@ -18,11 +21,38 @@ namespace LiveScore.Core.ViewModels.Leagues
             Region = leagueCategory;
             RegionLeagues = leagues;
             RegionFlag = buildFlagFunction(Region.CountryCode);
+            try
+            {
+                RegionLeagueTapped = new DelegateAsyncCommand(OnTapRegionAsync);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private async Task OnTapRegionAsync()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "Region", Region },
+                { "RegionLeagues", RegionLeagues }
+            };
+
+            var navigated = await NavigationService
+                .NavigateAsync("RegionLeagueView", parameters)
+                .ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
+            }
         }
 
         public IEnumerable<ILeague> RegionLeagues { get; }
 
         public LeagueCategory Region { get; }
         public string RegionFlag { get; }
+        public DelegateAsyncCommand RegionLeagueTapped { get; protected set; }
     }
 }
