@@ -82,6 +82,9 @@
       <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
         <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\Templates\Leagues\RegionGroupTemplate.xaml.cs">
+        <DependentUpon>RegionGroupTemplate.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Views\Templates\MatchGroupTemplate.xaml.cs">
         <DependentUpon>MatchGroupTemplate.xaml</DependentUpon>
       </Compile>
@@ -96,10 +99,22 @@
       <EmbeddedResource Update="Controls\DateBar\Views\Templates\DateTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="ViewResources\LeagueHeaderViewResource.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Views\NetworkConnectionError.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\EmptyDataTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\Templates\Leagues\LeagueItemTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\Templates\Leagues\LeaguesGroupTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
+      <EmbeddedResource Update="Views\Templates\Leagues\RegionGroupTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\MatchesTemplate.xaml">

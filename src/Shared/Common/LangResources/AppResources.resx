@@ -411,4 +411,13 @@
   <data name="Injuries" xml:space="preserve">
     <value>Injuries</value>
   </data>
+  <data name="Popular" xml:space="preserve">
+    <value>Popular</value>
+  </data>
+  <data name="AllLeagues" xml:space="preserve">
+    <value>All Leagues</value>
+  </data>
+  <data name="International" xml:space="preserve">
+    <value>International</value>
+  </data>
 </root>

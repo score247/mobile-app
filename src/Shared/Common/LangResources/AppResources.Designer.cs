@@ -106,6 +106,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Leagues.
+        /// </summary>
+        public static string AllLeagues {
+            get {
+                return ResourceManager.GetString("AllLeagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AP.
         /// </summary>
         public static string AP {
@@ -448,6 +457,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to International.
+        /// </summary>
+        public static string International {
+            get {
+                return ResourceManager.GetString("International", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Interrupted.
         /// </summary>
         public static string Interrupted {
@@ -687,6 +705,15 @@ namespace LiveScore.Common.LangResources {
         public static string PenaltyShootOut {
             get {
                 return ResourceManager.GetString("PenaltyShootOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Popular.
+        /// </summary>
+        public static string Popular {
+            get {
+                return ResourceManager.GetString("Popular", resourceCulture);
             }
         }
         

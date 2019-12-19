@@ -11,5 +11,11 @@
         {
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            (BindingContext as ViewModelBase).OnAppearing();
+            base.OnAppearing();
+        }
     }
 }

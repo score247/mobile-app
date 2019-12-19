@@ -100,6 +100,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterSingleton<ISportService, SportService>();
             containerRegistry.RegisterSingleton<IMatchService, MatchService>();
+            containerRegistry.RegisterSingleton<ILeagueService, LeagueService>();
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
 
@@ -156,7 +157,8 @@ namespace LiveScore.Configurations
             moduleCatalog.AddModule<ScoreModule>();
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<FavoritesModule>();
-            moduleCatalog.AddModule<NewsModule>();
+            moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
+            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<MenuModule>();
 
             return moduleCatalog;

@@ -1,4 +1,5 @@
-﻿using LiveScore.Core.Models.Leagues;
+﻿using System.Collections.Generic;
+using LiveScore.Core.Models.Leagues;
 using MessagePack;
 
 namespace LiveScore.Soccer.Models.Leagues
@@ -24,25 +25,27 @@ namespace LiveScore.Soccer.Models.Leagues
             IsInternational = isInternational;
         }
 
-
         public string Id { get; private set; }
-
 
         public string Name { get; private set; }
 
-
         public int Order { get; private set; }
-
 
         public string CategoryId { get; private set; }
 
-
         public string CountryName { get; private set; }
-
 
         public string CountryCode { get; private set; }
 
-
         public bool IsInternational { get; private set; }
+    }
+
+    /// <summary>
+    /// Temp class for Message Pack generate AOT class
+    /// </summary>
+    [MessagePackObject(keyAsPropertyName: true)]
+    public class LeagueList
+    {
+        public IEnumerable<League> Leagues { get; set; }
     }
 }
