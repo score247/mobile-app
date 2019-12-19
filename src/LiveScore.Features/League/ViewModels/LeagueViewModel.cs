@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
@@ -26,7 +27,7 @@ namespace LiveScore.Features.League.ViewModels
         {
             Title = "League";
             this.leagueService = leagueService;
-
+            buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>();
 
         }
@@ -35,6 +36,8 @@ namespace LiveScore.Features.League.ViewModels
         public ObservableCollection<IGrouping<string, ViewModelBase>> LeagueGroups { get; set; }
 
         private readonly ILeagueService leagueService;
+
+        private readonly Func<string, string> buildFlagFunction;
 
         public async Task BuildLeagueGroup()
         {
@@ -53,7 +56,7 @@ namespace LiveScore.Features.League.ViewModels
         private void BuildLeagueGroups(List<ILeague> leagues)
         {
 
-            var topLeagues = new ObservableCollection<ILeague>(leagues.Take(10));
+            var topLeagues = new ObservableCollection<ILeague>(leagues.OrderBy(league => league.Order).Take(10));
 
             var topLeagueGroup = BuildTopLeagueGroup(topLeagues);
 
@@ -67,7 +70,7 @@ namespace LiveScore.Features.League.ViewModels
         private IEnumerable<IGrouping<string, ViewModelBase>> BuildTopLeagueGroup(ObservableCollection<ILeague> topLeagues)
         {
             return topLeagues
-                .Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, league))
+                .Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, league, buildFlagFunction))
                 .GroupBy(_ => AppResources.Popular);
         }
 
@@ -93,7 +96,15 @@ namespace LiveScore.Features.League.ViewModels
                 Name = AppResources.International
             };
 
-            var internationalViewModels = new List<RegionGroupViewModel> { new RegionGroupViewModel(NavigationService, DependencyResolver, internationalCategory, internationalLeagues) };
+            var internationalViewModels = new List<RegionGroupViewModel> 
+            { 
+                new RegionGroupViewModel(
+                    NavigationService,
+                    DependencyResolver,
+                    internationalCategory,
+                    internationalLeagues,
+                    buildFlagFunction)
+            };
 
             return internationalViewModels.GroupBy(_ => AppResources.AllLeagues);
         }
@@ -112,7 +123,14 @@ namespace LiveScore.Features.League.ViewModels
             var countryLeaguesItems = new List<ViewModelBase>();
             foreach (var country in countryGroup.Keys)
             {
-                countryLeaguesItems.Add(new RegionGroupViewModel(NavigationService, DependencyResolver, country, countryGroup[country]));
+                countryLeaguesItems.Add(
+                    new RegionGroupViewModel(
+                        NavigationService, 
+                        DependencyResolver,
+                        country,
+                        countryGroup[country],
+                        buildFlagFunction)
+                    );
             }
 
             return countryLeaguesItems.GroupBy( _ => AppResources.AllLeagues);

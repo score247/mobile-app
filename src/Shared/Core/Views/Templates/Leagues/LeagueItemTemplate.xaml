@@ -30,7 +30,7 @@
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="{Binding League.CountryCode, Mode=OneTime}"
+                                                  Source="{Binding LeagueFlag, Mode=OneTime}"
                                                   Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
