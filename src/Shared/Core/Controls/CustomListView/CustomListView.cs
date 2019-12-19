@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace LiveScore.Core.Controls.CustomListView
 {
+    using System;
     using Xamarin.Forms;
 
     public class CustomListView : ListView
@@ -60,6 +61,13 @@ namespace LiveScore.Core.Controls.CustomListView
             {
                 LoadMoreCommand.Execute(null);
             }
+        }
+
+        public event EventHandler ScrollToTopEvent;
+
+        public void ScrollToTop()
+        {
+            ScrollToTopEvent?.Invoke(this, EventArgs.Empty);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using LiveScore.Core.ViewModels;
 using Prism.Commands;
@@ -13,6 +14,8 @@ namespace LiveScore.Core.Views.Templates
         public MatchesTemplate()
         {
             InitializeComponent();
+
+            MatchesListView.Scrolled += MatchesListView_Scrolled;
         }
 
         protected override void OnBindingContextChanged()
@@ -24,9 +27,14 @@ namespace LiveScore.Core.Views.Templates
                 var viewModel = BindingContext as MatchesViewModel;
                 viewModel.ScrollToCommand = new DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>>((group) =>
                 {
-                    var item = group.First();
-                    MatchesListView.ScrollTo(item, group, ScrollToPosition.Start, false);
+                    if (group != null)
+                    {
+                        var item = group.First();
+                        MatchesListView.ScrollTo(item, group, ScrollToPosition.Start, EnableScrollToAnimation);
+                    }
                 });
+
+                viewModel.ScrollToHeaderCommand = new DelegateCommand(() => MatchesListView.ScrollToTop());
             }
         }
 
@@ -106,6 +114,27 @@ namespace LiveScore.Core.Views.Templates
         {
             get => (DataTemplate)GetValue(ListViewHeaderTemplateProperty);
             set => SetValue(ListViewHeaderTemplateProperty, value);
+        }
+
+        public static readonly BindableProperty EnableScrollToAnimationProperty
+           = BindableProperty.Create(
+               nameof(EnableScrollToAnimation),
+               typeof(bool),
+               typeof(MatchesTemplate));
+
+        public bool EnableScrollToAnimation
+        {
+            get => (bool)GetValue(EnableScrollToAnimationProperty);
+            set => SetValue(EnableScrollToAnimationProperty, value);
+        }
+
+        public delegate void ScrolledHandler(object sender, ScrolledEventArgs e);
+
+        public event EventHandler<ScrolledEventArgs> Scrolled;
+
+        private void MatchesListView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            Scrolled?.Invoke(sender, e);
         }
     }
 }

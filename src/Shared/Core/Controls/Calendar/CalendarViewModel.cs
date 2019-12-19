@@ -24,7 +24,7 @@ namespace LiveScore.Core.Controls.Calendar
             BuildCalendarData(monthRange);
         }
 
-        public int SelectedIndex { get; private set; }
+        public int SelectedIndex { get; set; }
 
         public IList<CalendarMonth> CalendarMonths { get; private set; }
 

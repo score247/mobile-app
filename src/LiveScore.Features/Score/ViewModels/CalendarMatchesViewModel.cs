@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.Calendar;
+using LiveScore.Core.Models.Matches;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Navigation;
@@ -13,6 +16,8 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class CalendarMatchesViewModel : ScoreMatchesViewModel
     {
+        private bool firstLoad = true;
+
         public CalendarMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
@@ -22,7 +27,8 @@ namespace LiveScore.Features.Score.ViewModels
             IsBusy = false;
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             CalendarDateSelectedCommand = new DelegateAsyncCommand<CalendarDate>(OnCalendarDateSelected);
-            SwipedUpCommand = new DelegateCommand(OnSwipedUp);
+            HeaderViewModel = this;
+            IsHeaderVisible = true;
         }
 
         public DelegateCommand TapCalendarCommand { get; protected set; }
@@ -31,11 +37,9 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateCommand SwipedUpCommand { get; }
 
-        public bool VisibleCalendar { get; protected set; }
-
         public override async void OnAppearing()
         {
-            VisibleCalendar = true;
+            ScrollToHeaderCommand?.Execute();
 
             await Task.Delay(250).ContinueWith(_ => base.OnAppearing());
         }
@@ -44,23 +48,41 @@ namespace LiveScore.Features.Score.ViewModels
         {
             if (IsActive)
             {
-                VisibleCalendar = !VisibleCalendar;
+                if (!IsHeaderVisible)
+                {
+                    ScrollToHeaderCommand?.Execute();
+                }
+                else
+                {
+                    if (MatchItemsSource?.Any() == true)
+                    {
+                        ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault());
+                    }
+                }
             }
-        }
-
-        private void OnSwipedUp()
-        {
-            VisibleCalendar = false;
         }
 
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
-            MatchItemsSource?.Clear();
             HasData = true;
-            VisibleCalendar = false;
             ViewDate = calendarDate.Date;
 
-            await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
+            await LoadDataAsync(LoadMatchesAsync);
+        }
+
+        protected override void InitializeMatchItems(IEnumerable<IMatch> matches)
+        {
+            base.InitializeMatchItems(matches);
+
+            if (!firstLoad)
+            {
+                Task.Delay(600).ContinueWith(_ =>
+                   Device.BeginInvokeOnMainThread(() =>
+                       ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault())
+                   ));
+            }
+
+            firstLoad = false;
         }
     }
 }

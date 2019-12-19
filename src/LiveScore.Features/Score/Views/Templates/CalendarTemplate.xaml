@@ -12,41 +12,26 @@
                  AbsoluteLayout.LayoutFlags="SizeProportional">
 
         <Grid>
-            <Grid.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Up"
-                                        Command="{Binding SwipedUpCommand}"></SwipeGestureRecognizer>
-            </Grid.GestureRecognizers>
-            <Grid.Triggers>
-                <DataTrigger TargetType="Grid"
-                             Binding="{Binding VisibleCalendar}"
-                             Value="False">
-                    <DataTrigger.EnterActions>
-                        <controls:CalendarAnimationTrigger Action="Hide"></controls:CalendarAnimationTrigger>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-                <DataTrigger TargetType="Grid"
-                             Binding="{Binding VisibleCalendar}"
-                             Value="True">
-                    <DataTrigger.EnterActions>
-                        <controls:CalendarAnimationTrigger Action="Show"></controls:CalendarAnimationTrigger>
-                    </DataTrigger.EnterActions>
-                </DataTrigger>
-            </Grid.Triggers>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-            <controls:CalendarView Grid.Row="0"
-                                   DateSelectedCommand="{Binding CalendarDateSelectedCommand}">
-            </controls:CalendarView>
-            <Label IsVisible="{Binding NoData}"
-                   Grid.Row="1"
-                   Style="{StaticResource NotificationLabel}"
-                   Text="{langs:Translate NoGames}" />
             <coreTemplates:MatchesTemplate LoadMoreCommand="{Binding LoadMoreCommand}"
-                                           Grid.Row="2"
+                                           EnableScrollToAnimation="True"
+                                           Scrolled="MatchesListView_Scrolled"
                                            TriggerLoadMoreIndex="2">
+                <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <controls:CalendarView Grid.Row="0"
+                                                   DateSelectedCommand="{Binding CalendarDateSelectedCommand}"></controls:CalendarView>
+                            <Label IsVisible="{Binding NoData}"
+                                   Grid.Row="1"
+                                   Style="{StaticResource NotificationLabel}"
+                                   Text="{langs:Translate NoGames}" />
+                        </Grid>
+                    </DataTemplate>
+                </coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                 <coreTemplates:MatchesTemplate.ListViewFooterTemplate>
                     <DataTemplate>
                         <StackLayout>

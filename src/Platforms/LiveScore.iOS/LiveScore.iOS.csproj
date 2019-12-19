@@ -286,6 +286,7 @@
     <Compile Include="AppDelegate.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Renderers\CustomListViewRenderer.cs" />
     <Compile Include="Renderers\CalendarDisableScrollListViewRenderer.cs" />
     <Compile Include="Renderers\PossessionProgressBarRenderer.cs" />
     <Compile Include="Renderers\DetailScrollViewRenderer.cs" />

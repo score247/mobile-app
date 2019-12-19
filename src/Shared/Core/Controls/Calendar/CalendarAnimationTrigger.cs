@@ -44,7 +44,7 @@ namespace LiveScore.Core.Controls.Calendar
             }
         }
 
-        private async Task ShowCalendar(Grid grid)
+        private static async Task ShowCalendar(Grid grid)
         {
             await grid.LayoutTo(new Rectangle(0, 0, grid.Width, grid.Height), 250, Easing.Linear);
         }

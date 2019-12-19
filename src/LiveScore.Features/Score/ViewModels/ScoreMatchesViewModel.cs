@@ -169,8 +169,7 @@ namespace LiveScore.Features.Score.ViewModels
                 RemainingMatchItemSource
                     = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(matchItems.Skip(DefaultFirstLoadMatchItemCount));
 
-                Device.BeginInvokeOnMainThread(()
-                    => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(loadItems));
+                Device.BeginInvokeOnMainThread(() => MatchItemsSource = new ObservableCollection<IGrouping<MatchGroupViewModel, MatchViewModel>>(loadItems));
             }
             else
             {

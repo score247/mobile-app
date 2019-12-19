@@ -59,7 +59,11 @@ namespace LiveScore.Core.ViewModels
 
         public DelegateCommand<IGrouping<MatchGroupViewModel, MatchViewModel>> ScrollToCommand { get; set; }
 
+        public DelegateCommand ScrollToHeaderCommand { get; set; }
+
         public bool EnableTapLeague { get; protected set; } = true;
+
+        public bool IsHeaderVisible { get; set; }
 
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
