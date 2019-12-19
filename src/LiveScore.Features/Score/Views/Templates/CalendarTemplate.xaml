@@ -12,6 +12,10 @@
                  AbsoluteLayout.LayoutFlags="SizeProportional">
 
         <Grid>
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Command="{Binding SwipedUpCommand}"></SwipeGestureRecognizer>
+            </Grid.GestureRecognizers>
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid"
                              Binding="{Binding VisibleCalendar}"

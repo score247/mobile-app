@@ -39,8 +39,11 @@ namespace LiveScore.Core.Controls.Calendar
 
         private void OnSelectDate(CalendarDate date)
         {
-            date.IsSelected = true;
-            SelectedDateChangedCommand?.Execute(date);
+            if (date != null)
+            {
+                date.IsSelected = true;
+                SelectedDateChangedCommand?.Execute(date);
+            }
         }
     }
 

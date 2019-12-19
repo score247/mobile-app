@@ -26,7 +26,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
             <BoxView Style="{StaticResource HorizontalLine}" />
             <Grid Style="{StaticResource RegionBox}">
                 <Grid.RowDefinitions>
@@ -48,19 +49,18 @@
                        Style="{StaticResource RegionName}"
                        Text="{ Binding Region.Name }" />
             </Grid>
-            <customListView:CustomListView
-                                   AutomationProperties.IsInAccessibleTree="False"
-                                   HasUnevenRows="true"
-                                   IsPullToRefreshEnabled="false"
-                                   HorizontalScrollBarVisibility="Never"
-                                   VerticalScrollBarVisibility="Never"
-                                   ItemTemplate="{StaticResource LeagueItemTemplate}"
-                                   ItemsSource="{Binding LeaguesItems}"
-                                   RefreshControlColor="White"
-                                   SelectionMode="None"
-                                   SeparatorVisibility="None"
-                                   Style="{StaticResource ListViewHasBackground}"
-                                   VerticalOptions="FillAndExpand">
+            <customListView:CustomListView AutomationProperties.IsInAccessibleTree="False"
+                                           HasUnevenRows="true"
+                                           IsPullToRefreshEnabled="false"
+                                           HorizontalScrollBarVisibility="Never"
+                                           VerticalScrollBarVisibility="Never"
+                                           ItemTemplate="{StaticResource LeagueItemTemplate}"
+                                           ItemsSource="{Binding LeaguesItems}"
+                                           RefreshControlColor="White"
+                                           SelectionMode="None"
+                                           SeparatorVisibility="None"
+                                           Style="{StaticResource ListViewHasBackground}"
+                                           VerticalOptions="FillAndExpand">
                 <customListView:CustomListView.Behaviors>
                 </customListView:CustomListView.Behaviors>
             </customListView:CustomListView>

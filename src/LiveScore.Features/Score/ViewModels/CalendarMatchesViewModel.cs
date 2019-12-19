@@ -13,26 +13,32 @@ namespace LiveScore.Features.Score.ViewModels
 {
     public class CalendarMatchesViewModel : ScoreMatchesViewModel
     {
-        private readonly ICommand calendarDateChangedCommand;
-
         public CalendarMatchesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
-            IEventAggregator eventAggregator,
-            ICommand calendarDateChangedCommand)
+            IEventAggregator eventAggregator)
             : base(DateTime.MinValue, navigationService, dependencyResolver, eventAggregator)
         {
-            this.calendarDateChangedCommand = calendarDateChangedCommand;
             IsBusy = false;
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             CalendarDateSelectedCommand = new DelegateAsyncCommand<CalendarDate>(OnCalendarDateSelected);
+            SwipedUpCommand = new DelegateCommand(OnSwipedUp);
+        }
+
+        private void OnSwipedUp()
+        {
+            VisibleCalendar = false;
         }
 
         public DelegateCommand TapCalendarCommand { get; protected set; }
 
         public DelegateAsyncCommand<CalendarDate> CalendarDateSelectedCommand { get; }
 
+        public DelegateCommand SwipedUpCommand { get; }
+
         public bool VisibleCalendar { get; protected set; }
+
+        public CalendarDate SelectedDate { get; private set; }
 
         public override void OnAppearing()
         {
@@ -53,19 +59,11 @@ namespace LiveScore.Features.Score.ViewModels
         {
             MatchItemsSource?.Clear();
             HasData = true;
+            SelectedDate = calendarDate;
+            VisibleCalendar = false;
+            ViewDate = calendarDate.Date;
 
-            if (calendarDate.Date.IsInDateRange(2))
-            {
-                calendarDateChangedCommand?.Execute(calendarDate);
-                ViewDate = DateTime.MinValue;
-            }
-            else
-            {
-                VisibleCalendar = false;
-                ViewDate = calendarDate.Date;
-
-                await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
-            }
+            await Task.Delay(250).ContinueWith(async _ => await LoadDataAsync(LoadMatchesAsync));
         }
     }
 }

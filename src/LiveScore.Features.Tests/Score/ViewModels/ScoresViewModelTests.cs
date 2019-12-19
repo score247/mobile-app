@@ -65,7 +65,7 @@ namespace LiveScore.Features.Tests.Score.ViewModels
         public void ScoreItemSources_LastItem_IsCalendarItemViewModel()
         {
             // Arrange && Act
-            var expectedCalendarItemViewModel = new CalendarMatchesViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator, null);
+            var expectedCalendarItemViewModel = new CalendarMatchesViewModel(baseFixture.NavigationService, baseFixture.DependencyResolver, baseFixture.EventAggregator);
 
             // Assert
             Assert.True(comparer.Compare(expectedCalendarItemViewModel, scoreViewModel.ScoreItemSources[6]).AreEqual);

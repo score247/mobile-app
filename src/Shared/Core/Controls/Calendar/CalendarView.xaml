@@ -91,15 +91,14 @@
                 <DataTemplate>
                     <ContentView>
                         <Grid Margin="0,12,0,0">
-                            <ListView SeparatorVisibility="None"
-                                      x:Name="CalendarListView"
-                                      BackgroundColor="{StaticResource ListViewBgColor}"
-                                      VerticalScrollBarVisibility="Never"
-                                      HasUnevenRows="True"
-                                      HeightRequest="300"
-                                      ItemsSource="{Binding CalendarDatesList}"
-                                      CachingStrategy="RecycleElement"
-                                      SeparatorColor="Transparent">
+                            <resources:CalendarListView SeparatorVisibility="None"
+                                                        x:Name="CalendarListView"
+                                                        BackgroundColor="{StaticResource ListViewBgColor}"
+                                                        VerticalScrollBarVisibility="Never"
+                                                        HasUnevenRows="True"
+                                                        HeightRequest="300"
+                                                        ItemsSource="{Binding CalendarDatesList}"
+                                                        SeparatorColor="Transparent">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
                                         <ViewCell Height="50">
@@ -260,7 +259,7 @@
                                         </ViewCell>
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
-                            </ListView>
+                            </resources:CalendarListView>
                         </Grid>
                     </ContentView>
                 </DataTemplate>

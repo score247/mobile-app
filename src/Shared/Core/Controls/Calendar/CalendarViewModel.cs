@@ -108,7 +108,7 @@ namespace LiveScore.Core.Controls.Calendar
         }
 
         private static string BuildTitle(int year, int month)
-            => new DateTime(year, month, 1).ToString(TitleDateFormat).ToUpperInvariant();
+            => new DateTime(year, month, 1).ToString(TitleDateFormat);
 
         private static IList<CalendarDates> BuildCalendar(int year, int month)
         {
