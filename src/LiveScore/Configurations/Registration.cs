@@ -8,11 +8,14 @@ using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.SearchPage;
+using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Core.Views;
 using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
+using LiveScore.Features.League.ViewModels;
+using LiveScore.Features.League.Views;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
 using LiveScore.Features.Score;
@@ -143,6 +146,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
+            containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeaguesViewModel>(nameof(RegionLeaguesView) + SportType.Soccer.Value);
 
             return containerRegistry;
         }

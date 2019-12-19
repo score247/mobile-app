@@ -8,8 +8,13 @@
              xmlns:leagueTemplates="clr-namespace:LiveScore.Core.Views.Templates.Leagues;assembly=LiveScore.Core"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              mc:Ignorable="d"
              x:Class="LiveScore.Features.League.Views.RegionLeaguesView">
+    <NavigationPage.TitleView>
+        <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
+                                               CurrentSport="{Binding CurrentSportName}" />
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -30,23 +35,18 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="60" />
                     <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="36" />
                 </Grid.ColumnDefinitions>
                 <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
                                                   Source="{Binding RegionFlag, Mode=OneTime}"
-                                                  Style="{StaticResource RegionFlag}" />
+                                                  Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource RegionName}"
                        Text="{ Binding Region.Name }" />
-                <Label x:Name="DetailIcon"
-                       Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource LeagueDetailIcon}" />
             </Grid>
             <customListView:CustomListView
                                    AutomationProperties.IsInAccessibleTree="False"

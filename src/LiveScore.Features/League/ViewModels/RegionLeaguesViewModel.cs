@@ -10,11 +10,11 @@ using Prism.Navigation;
 
 namespace LiveScore.Features.League.ViewModels
 {
-    public class RegionLeagueViewModel : ViewModelBase
+    public class RegionLeaguesViewModel : ViewModelBase
     {
         private readonly Func<string, string> buildFlagUrlFunc;
 
-        public RegionLeagueViewModel(
+        public RegionLeaguesViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
             : base(navigationService, dependencyResolver, true)
@@ -34,7 +34,7 @@ namespace LiveScore.Features.League.ViewModels
                 RegionFlag = buildFlagUrlFunc(region.CountryCode);
             }
 
-            if (parameters?["Leagues"] is IEnumerable<ILeague> leagues)
+            if (parameters?["RegionLeagues"] is IEnumerable<ILeague> leagues)
             {
                 LeaguesItems = leagues.Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, league, buildFlagUrlFunc));
             }

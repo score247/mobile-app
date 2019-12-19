@@ -21,14 +21,7 @@ namespace LiveScore.Core.ViewModels.Leagues
             Region = leagueCategory;
             RegionLeagues = leagues;
             RegionFlag = buildFlagFunction(Region.CountryCode);
-            try
-            {
-                RegionLeagueTapped = new DelegateAsyncCommand(OnTapRegionAsync);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            RegionLeagueTapped = new DelegateAsyncCommand(OnTapRegionAsync);
         }
 
         private async Task OnTapRegionAsync()
@@ -40,7 +33,7 @@ namespace LiveScore.Core.ViewModels.Leagues
             };
 
             var navigated = await NavigationService
-                .NavigateAsync("RegionLeagueView", parameters)
+                .NavigateAsync("RegionLeaguesView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
 
             if (!navigated.Success)

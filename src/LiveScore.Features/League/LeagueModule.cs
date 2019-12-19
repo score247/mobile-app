@@ -17,7 +17,7 @@ namespace LiveScore.Features.League
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<LeagueView, LeagueViewModel>();
-            containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeagueViewModel>();
+            containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeaguesViewModel>();
         }
     }
 }
