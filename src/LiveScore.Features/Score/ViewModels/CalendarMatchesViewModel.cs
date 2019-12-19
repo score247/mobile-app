@@ -17,17 +17,12 @@ namespace LiveScore.Features.Score.ViewModels
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             IEventAggregator eventAggregator)
-            : base(DateTime.MinValue, navigationService, dependencyResolver, eventAggregator)
+            : base(DateTime.Today, navigationService, dependencyResolver, eventAggregator)
         {
             IsBusy = false;
             TapCalendarCommand = new DelegateCommand(OnTapCalendar);
             CalendarDateSelectedCommand = new DelegateAsyncCommand<CalendarDate>(OnCalendarDateSelected);
             SwipedUpCommand = new DelegateCommand(OnSwipedUp);
-        }
-
-        private void OnSwipedUp()
-        {
-            VisibleCalendar = false;
         }
 
         public DelegateCommand TapCalendarCommand { get; protected set; }
@@ -38,13 +33,11 @@ namespace LiveScore.Features.Score.ViewModels
 
         public bool VisibleCalendar { get; protected set; }
 
-        public CalendarDate SelectedDate { get; private set; }
-
-        public override void OnAppearing()
+        public override async void OnAppearing()
         {
-            base.OnAppearing();
-
             VisibleCalendar = true;
+
+            await Task.Delay(250).ContinueWith(_ => base.OnAppearing());
         }
 
         private void OnTapCalendar()
@@ -55,11 +48,15 @@ namespace LiveScore.Features.Score.ViewModels
             }
         }
 
+        private void OnSwipedUp()
+        {
+            VisibleCalendar = false;
+        }
+
         private async Task OnCalendarDateSelected(CalendarDate calendarDate)
         {
             MatchItemsSource?.Clear();
             HasData = true;
-            SelectedDate = calendarDate;
             VisibleCalendar = false;
             ViewDate = calendarDate.Date;
 
