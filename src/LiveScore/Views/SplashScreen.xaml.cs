@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using MethodTimer;
 using Prism.Common;
+using Prism.Modularity;
 using Xamanimation;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

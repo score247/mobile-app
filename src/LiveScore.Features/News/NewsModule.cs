@@ -10,6 +10,8 @@ namespace LiveScore.Features.News
 
     public class NewsModule : IModule
     {
+        public const string ModuleName = nameof(EmptyNewsView);
+
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // OnInitialized

@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using LiveScore.Common.Helpers;
-using LiveScore.Features.Score.ViewModels;
-using Xamarin.Forms;
+﻿using LiveScore.Features.Score.ViewModels;
 using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Features.Score.Views
@@ -20,9 +17,10 @@ namespace LiveScore.Features.Score.Views
 
         protected override void OnAppearing()
         {
-            if (secondLoad)
+            if (secondLoad && BindingContext is ScoresViewModel viewModel)
             {
-                (BindingContext as ScoresViewModel)?.OnAppearing();
+                viewModel.IsActive = true;
+                viewModel.OnAppearing();
             }
 
             secondLoad = true;
@@ -30,32 +28,13 @@ namespace LiveScore.Features.Score.Views
 
         protected override void OnDisappearing()
         {
-            (BindingContext as ScoresViewModel)?.OnDisappearing();
-
-            // Remove first load event triggers
-            Triggers.Clear();
-        }
-
-        private static void LeagueTable_ItemAppearing(object sender, ItemVisibilityEventArgs e)
-        {
-#if DEBUG
-            const int lastMatchItemIndexShowedOnTheScreen = 9;
-
-            if (e.ItemIndex != lastMatchItemIndexShowedOnTheScreen)
+            if (BindingContext is ScoresViewModel viewModel)
             {
-                return;
+                viewModel.IsActive = false;
+                viewModel.OnDisappearing();
             }
 
-            Profiler.Stop("IOS Application");
-            Profiler.Stop("ScoreItemViewModel.LoadMatches.SelectDate");
-            Profiler.Stop("ScoreItemViewModel.OnNavigatedTo");
-            Profiler.Stop("ScoreItemViewModel.OnResume");
-            Profiler.Stop("ScoresView.Render");
-
-            Debug.WriteLine("");
-            Debug.WriteLine("=======================================");
-            Debug.WriteLine("");
-#endif
+            Triggers.Clear();
         }
     }
 }

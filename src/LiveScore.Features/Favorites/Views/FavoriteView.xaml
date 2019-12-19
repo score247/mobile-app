@@ -62,6 +62,7 @@
                                ItemTemplate="{StaticResource FavoriteItemTemplateSelector}"
                                ItemAppearedCommand="{Binding ItemAppearedCommand}"
                                ItemDisappearingCommand="{Binding ItemDisappearingCommand}"
+                               SelectedItem="{Binding SelectedItem}"
                                SelectedIndex="{Binding SelectedIndex}">
             <x:Arguments>
                 <processors:BaseCarouselFrontViewProcessor AnimationLength="250"

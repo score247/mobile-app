@@ -1,9 +1,9 @@
-﻿namespace LiveScore.Features.League.Views
-{
-    using LiveScore.Core.ViewModels;
-    using Xamarin.Forms;
-    using Xamarin.Forms.Xaml;
+﻿using LiveScore.Features.League.ViewModels;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
+namespace LiveScore.Features.League.Views
+{
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LeagueView : ContentPage
     {
@@ -14,8 +14,20 @@
 
         protected override void OnAppearing()
         {
-            (BindingContext as ViewModelBase).OnAppearing();
-            base.OnAppearing();
+            if (BindingContext is LeagueViewModel viewModel)
+            {
+                viewModel.IsActive = true;
+                viewModel.OnAppearing();
+            }
+        }
+
+        protected override void OnDisappearing()
+        {
+            if (BindingContext is LeagueViewModel viewModel)
+            {
+                viewModel.IsActive = false;
+                viewModel.OnDisappearing();
+            }
         }
     }
 }

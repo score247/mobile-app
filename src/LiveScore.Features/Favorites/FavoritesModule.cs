@@ -7,6 +7,8 @@
 
     public class FavoritesModule : IModule
     {
+        public const string ModuleName = nameof(FavoriteView);
+
         public void OnInitialized(IContainerProvider containerProvider)
         {
             // On initialized

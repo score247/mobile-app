@@ -27,6 +27,7 @@ namespace LiveScore.Features.Score.ViewModels
             IEventAggregator eventAggregator) : base(navigationService, dependencyResolver, eventAggregator)
 
         {
+            IsActive = true;
             ScoreItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnScoreItemAppeared);
             ScoreItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnScoreItemDisappearing);
             ClickSearchCommand = new DelegateAsyncCommand(OnClickSearchAsync);
@@ -69,6 +70,11 @@ namespace LiveScore.Features.Score.ViewModels
 
         public override async void OnAppearing()
         {
+            if (!IsActive)
+            {
+                return;
+            }
+
             var todayItem = ScoreItemSources[TodayDateBarItemIndex];
 
             if (todayItem?.ViewDate != DateTime.Today)

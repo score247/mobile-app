@@ -1,12 +1,11 @@
 ﻿using Prism;
+using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Views
 {
-    using Prism.Common;
-    using Xamarin.Forms;
-    using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
-    using Xamarin.Forms.Xaml;
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MenuTabbedView : Xamarin.Forms.TabbedPage
     {
@@ -21,18 +20,13 @@ namespace LiveScore.Views
             {
                 SetUpBarTextColor();
             }
-            On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
-
-            CurrentPageChanged += MenuTabbedView_CurrentPageChanged;
-        }
-
-        private void MenuTabbedView_CurrentPageChanged(object sender, System.EventArgs e)
-        {
+            On<Android>().SetIsSwipePagingEnabled(false);
         }
 
         private void SetUpBarTextColor()
         {
             var color = PrismApplicationBase.Current.Resources["FunctionBarActiveColor"];
+
             if (color != null)
             {
                 BarTextColor = (Color)color;

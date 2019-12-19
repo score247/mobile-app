@@ -55,7 +55,6 @@ namespace LiveScore
                 .Initialize(new FFImageLoading.Config.Configuration { Logger = Container.Resolve<IMiniLogger>() });
 
             MainPage = new NavigationPage(new SplashScreen());
-
             InitializeComponent();
 
             StartEventHubs();

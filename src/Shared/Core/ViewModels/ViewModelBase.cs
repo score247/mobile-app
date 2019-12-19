@@ -75,6 +75,8 @@ namespace LiveScore.Core.ViewModels
 
         public bool NoData => !HasData;
 
+        public bool IsActive { get; set; }
+
         public virtual void Initialize(INavigationParameters parameters)
         {
         }

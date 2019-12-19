@@ -41,8 +41,6 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DateTime ViewDate { get; protected set; }
 
-        public bool IsActive { get; set; }
-
         public bool IsLoadMore { get; private set; }
 
         public bool IsNotLoadMore => !IsLoadMore;
