@@ -41,7 +41,7 @@
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="{Binding RegionFlag, Mode=OneTime}"
+                                                  Source="{Binding RegionFlag, Mode=TwoWay}"
                                                   Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"

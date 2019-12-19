@@ -22,7 +22,7 @@ namespace LiveScore.Features.League.ViewModels
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
         }
 
-        public string RegionFlag { get; private set; }
+        public string RegionFlag { get; set; }
         public IEnumerable<LeagueItemViewModel> LeaguesItems { get; private set; }
         public LeagueCategory Region { get; private set; }
 
@@ -36,7 +36,7 @@ namespace LiveScore.Features.League.ViewModels
 
             if (parameters?["RegionLeagues"] is IEnumerable<ILeague> leagues)
             {
-                LeaguesItems = leagues.Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, league, buildFlagUrlFunc));
+                LeaguesItems = leagues.Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, buildFlagUrlFunc, league, false));
             }
         }
     }
