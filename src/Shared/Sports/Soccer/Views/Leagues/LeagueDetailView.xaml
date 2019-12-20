@@ -22,12 +22,6 @@
                                                IsFavorite="{Binding IsFavorite}"
                                                FavoriteCommand="{Binding FavoriteCommand}"/>
     </NavigationPage.TitleView>
-    <!--<ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="{Binding FavoriteImageSource}"
-                     Priority="1"
-                     Text="Favorite"
-                     Command="{Binding FavoriteCommand}"/>
-    </ContentPage.ToolbarItems>-->
     <ContentPage.Resources>
         <ResourceDictionary>
             <templateSelectors:LeagueDetailItemTemplateSelector x:Key="LeagueDetailItemTemplateSelector" />

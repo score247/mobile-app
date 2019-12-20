@@ -36,7 +36,7 @@
         }
 
         public static readonly BindableProperty VisibleFavoriteProperty
-            = BindableProperty.Create("VisibleFavorite", typeof(bool), typeof(NavigationTitleTemplate));
+            = BindableProperty.Create("VisibleFavorite", typeof(bool), typeof(NavigationTitleTemplate), false);
 
         public bool VisibleFavorite
         {
@@ -45,11 +45,11 @@
         }
 
         public static readonly BindableProperty IsFavoriteProperty
-            = BindableProperty.Create("IsFavorite", typeof(bool), typeof(NavigationTitleTemplate));
+            = BindableProperty.Create("IsFavorite", typeof(bool), typeof(NavigationTitleTemplate), false);
 
-        public string IsFavorite
+        public bool IsFavorite
         {
-            get => (string)GetValue(IsFavoriteProperty);
+            get => (bool)GetValue(IsFavoriteProperty);
             set => SetValue(IsFavoriteProperty, value);
         }
 
