@@ -384,7 +384,7 @@
                 <Setter Property="FontSize"
                         Value="14" />
             </Style>
-            <Style x:Key="FavoriteIcon"
+            <Style x:Key="InActiveFavoriteIcon"
                    BasedOn="{StaticResource ButtonIcon}"
                    TargetType="Button">
                 <Setter Property="HorizontalOptions"
@@ -402,7 +402,7 @@
                         Value="16" />
             </Style>
             <Style x:Key="ActiveFavoriteIcon"
-                   BasedOn="{StaticResource FavoriteIcon}"
+                   BasedOn="{StaticResource InActiveFavoriteIcon}"
                    TargetType="Button">
                 <Setter Property="Text"
                         Value="&#xe929;" />
