@@ -2,7 +2,7 @@
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"              
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               mc:Ignorable="d"
@@ -41,7 +41,7 @@
                     <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource LeagueDetailIcon}" />
-                    <Label Grid.Row="0"
+                    <Button Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource ActiveFavoriteIcon}" />
                 </Grid>
@@ -71,7 +71,7 @@
                     <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource LeagueDetailIcon}" />
-                    <Label Grid.Row="0"
+                    <Button Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource ActiveFavoriteIcon}" />
                 </Grid>
@@ -101,7 +101,7 @@
                     <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource LeagueDetailIcon}" />
-                    <Label Grid.Row="0"
+                    <Button Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource ActiveFavoriteIcon}" />
                 </Grid>
@@ -131,13 +131,12 @@
                     <Label Grid.Row="0"
                        Grid.Column="2"
                        Style="{StaticResource LeagueDetailIcon}" />
-                    <Label Grid.Row="0"
+                    <Button Grid.Row="0"
                        Grid.Column="3"
                        Style="{StaticResource ActiveFavoriteIcon}" />
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
-            
         </ContentView.Content>
     </ContentView>
 </DataTemplate>

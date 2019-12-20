@@ -77,10 +77,9 @@
                        LineBreakMode="NoWrap"
                        Style="{StaticResource AwayScore}"
                        Text="{Binding Match.AwayScore}" />
-                <Label Grid.Row="0"
+                <Button Grid.Row="0"
                        Grid.RowSpan="2"
                        Grid.Column="3"
-                       LineBreakMode="NoWrap"
                        Style="{StaticResource FavoriteIcon}" />
             </Grid>
             <BoxView Style="{StaticResource HorizontalLine}" />
