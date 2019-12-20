@@ -6,7 +6,9 @@
               xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
               xmlns:coreResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
               mc:Ignorable="d"
-              x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate">
+              x:Class="LiveScore.Features.Favorites.Views.FavoriteLeaguesTemplate"
+              xmlns:tabstrip="clr-namespace:LiveScore.Core.Controls.TabStrip;assembly=LiveScore.Core"
+              xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common" xmlns:b="http://prismlibrary.com">
     <ContentView>
         <ContentView.Resources>
             <ResourceDictionary>
@@ -16,127 +18,68 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <StackLayout Padding="0,8">
-                <Grid Style="{StaticResource LeagueBox}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="38" />
-                    </Grid.ColumnDefinitions>
-                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                  Grid.Column="0"
-                                                  DownsampleToViewSize="True"
-                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="images/flag_league/default_flag.svg"
-                                                  Style="{StaticResource LeagueFlag}" />
-                    <Label Grid.Row="0"
-                       Grid.Column="1"
-                       LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueName}"
-                       Text="ENGLAND PREMIER LEAGUE" />
-                    <Label Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource LeagueDetailIcon}" />
-                    <Button Grid.Row="0"
-                       Grid.Column="3"
-                       Style="{StaticResource ActiveFavoriteIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                <Grid Style="{StaticResource LeagueBox}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="38" />
-                    </Grid.ColumnDefinitions>
-                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                  Grid.Column="0"
-                                                  DownsampleToViewSize="True"
-                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="images/flag_league/default_flag.svg"
-                                                  Style="{StaticResource LeagueFlag}" />
-                    <Label Grid.Row="0"
-                       Grid.Column="1"
-                       LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueName}"
-                       Text="ENGLAND CHAMPIONSHIP" />
-                    <Label Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource LeagueDetailIcon}" />
-                    <Button Grid.Row="0"
-                       Grid.Column="3"
-                       Style="{StaticResource ActiveFavoriteIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                <Grid Style="{StaticResource LeagueBox}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="38" />
-                    </Grid.ColumnDefinitions>
-                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                  Grid.Column="0"
-                                                  DownsampleToViewSize="True"
-                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="images/flag_league/default_flag.svg"
-                                                  Style="{StaticResource LeagueFlag}" />
-                    <Label Grid.Row="0"
-                       Grid.Column="1"
-                       LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueName}"
-                       Text="SPAIN LALIGA SMARTBANK" />
-                    <Label Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource LeagueDetailIcon}" />
-                    <Button Grid.Row="0"
-                       Grid.Column="3"
-                       Style="{StaticResource ActiveFavoriteIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-
-                <Grid Style="{StaticResource LeagueBox}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="10" />
-                        <ColumnDefinition Width="38" />
-                    </Grid.ColumnDefinitions>
-                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
-                                                  Grid.Column="0"
-                                                  DownsampleToViewSize="True"
-                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="images/flag_league/default_flag.svg"
-                                                  Style="{StaticResource LeagueFlag}" />
-                    <Label Grid.Row="0"
-                       Grid.Column="1"
-                       LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueName}"
-                       Text="ITALY SERIE A" />
-                    <Label Grid.Row="0"
-                       Grid.Column="2"
-                       Style="{StaticResource LeagueDetailIcon}" />
-                    <Button Grid.Row="0"
-                       Grid.Column="3"
-                       Style="{StaticResource ActiveFavoriteIcon}" />
-                </Grid>
-                <BoxView Style="{StaticResource HorizontalLine}" />
-            </StackLayout>
+            <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                  Padding="0,8,0,8"
+                    AbsoluteLayout.LayoutFlags="SizeProportional">
+                <ActivityIndicator Margin="40"
+                                   VerticalOptions="Start"
+                                   IsRunning="{Binding IsBusy}"
+                                   IsVisible="{Binding IsBusy}"
+                                   Style="{StaticResource CenterActivityIndicator}" />
+                 <StackLayout>
+                                <Label Style="{StaticResource NoInfo}"
+                                       Text="{langResources:Translate NoFavoriteLeagues}"
+                                       IsVisible="{Binding NoData}" />
+                 </StackLayout>
+                <tabstrip:TabItemListView ItemsSource="{Binding FavoriteLeagues}"
+                                          BackgroundColor="{StaticResource ListViewBgColor}"
+                                          IsPullToRefreshEnabled="False"
+                                          IsVisible="{Binding IsNotBusy}"
+                                          VerticalOptions="FillAndExpand">
+                    <tabstrip:TabItemListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Grid Style="{StaticResource LeagueBox}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="10" />
+                                            <ColumnDefinition Width="38" />
+                                        </Grid.ColumnDefinitions>
+                                        <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                                      Grid.Column="0"
+                                                                      DownsampleToViewSize="True"
+                                                                      LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                                      Source="{Binding CountryFlag}"
+                                                                      Style="{StaticResource LeagueFlag}" />
+                                        <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           LineBreakMode="TailTruncation"
+                                           Style="{StaticResource LeagueName}"
+                                           Text="{Binding LeagueGroupName}" />
+                                        <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           Style="{StaticResource LeagueDetailIcon}" />
+                                        <Button Grid.Row="0"
+                                           Grid.Column="3"
+                                           Style="{StaticResource ActiveFavoriteIcon}" />
+                                    </Grid>
+                                    <BoxView Style="{StaticResource HorizontalLine}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </tabstrip:TabItemListView.ItemTemplate>
+                    <tabstrip:TabItemListView.Behaviors>
+                        <b:EventToCommandBehavior Command="{Binding TapLeagueCommand}"
+                                                  EventArgsParameterPath="Item"
+                                                  EventName="ItemTapped" />
+                    </tabstrip:TabItemListView.Behaviors>
+                </tabstrip:TabItemListView>
+            </Grid>
         </ContentView.Content>
     </ContentView>
 </DataTemplate>

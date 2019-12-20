@@ -21,9 +21,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private readonly IFavoriteService favoriteService;
 
-        private string LeagueId;
-        private string LeagueGroupName;
-        private string CountryFlag;
+        private FavoriteLeague favoriteLeague;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -58,20 +56,22 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             base.Initialize(parameters);
 
-            LeagueId = parameters["LeagueId"]?.ToString();
-            LeagueGroupName = parameters["LeagueGroupName"]?.ToString();
-            CountryFlag = parameters["CountryFlag"]?.ToString();
+            var leagueId = parameters["LeagueId"]?.ToString();
+            var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
+            var countryFlag = parameters["CountryFlag"]?.ToString();
 
-            IsFavorite = favoriteService.IsFavoriteLeague(LeagueId);
+            IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
 
             var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
             var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
+            favoriteLeague = new FavoriteLeague(leagueId, leagueGroupName, countryFlag, leagueSeasonId, leagueRoundGroup);
+
             LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(LeagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, LeagueGroupName, CountryFlag, homeId, awayId, false),
-                new FixturesViewModel(LeagueId, LeagueGroupName, NavigationService, DependencyResolver, EventAggregator)
+                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
+                new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
         }
 
@@ -131,11 +131,11 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         {
             if (IsFavorite)
             {
-                favoriteService.RemoveLeague(new FavoriteLeague(LeagueId, LeagueGroupName, CountryFlag));
+                favoriteService.RemoveLeague(favoriteLeague);
             }
             else
             {
-                favoriteService.AddLeague(new FavoriteLeague(LeagueId, LeagueGroupName, CountryFlag));
+                favoriteService.AddLeague(favoriteLeague);
             }
 
             IsFavorite = !IsFavorite;

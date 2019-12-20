@@ -14,16 +14,15 @@ namespace LiveScore.Soccer.Services
 
         private readonly IUserSettingService userSettingService;
 
-        public IList<IMatch> Matches;
-        public IList<FavoriteLeague> Leagues;
+        private IList<IMatch> Matches;
+        private IList<FavoriteLeague> Leagues;
 
         public FavoriteService(IUserSettingService userSettingService)
         {
             this.userSettingService = userSettingService;
 
             Init();
-        }
-       
+        }       
 
         public void Init()
         {
