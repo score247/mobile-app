@@ -114,6 +114,9 @@
       <EmbeddedResource Update="Views\Templates\Leagues\LeaguesGroupTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
+      <EmbeddedResource Update="Views\Templates\Leagues\NoFlagLeagueItemTemplate.xaml">
+        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\Leagues\RegionGroupTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>

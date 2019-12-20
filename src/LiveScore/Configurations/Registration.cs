@@ -11,7 +11,9 @@ using LiveScore.Core.Controls.SearchPage;
 using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
+using LiveScore.Core.ViewModels.Leagues;
 using LiveScore.Core.Views;
+using LiveScore.Core.Views.Templates.Leagues;
 using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
 using LiveScore.Features.League.ViewModels;
@@ -31,6 +33,7 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Refit;
 using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Services;
@@ -187,6 +190,11 @@ namespace LiveScore.Configurations
             {
                 throw new InvalidOperationException($"Module {nameof(SoccerModule)} doest not exist");
             }
+        }
+
+        public static void RegisterCustomViewModels()
+        {
+            ViewModelLocationProvider.Register<NoFlagLeagueItemTemplate, LeagueItemViewModel>();
         }
 
         private static void SetupServicePointManager()

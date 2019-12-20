@@ -7,16 +7,16 @@ namespace LiveScore.Core.Views.Selectors
     public class LeagueItemSelector : DataTemplateSelector
     {
         private static readonly DataTemplate LeagueItemTemplate = new LeagueItemTemplate();
+        private static readonly DataTemplate NoFlagLeagueTemplate = new NoFlagLeagueItemTemplate();
         private static readonly DataTemplate RegionGroupTemplate = new RegionGroupTemplate();
 
         protected override DataTemplate OnSelectTemplate(object item, BindableObject container)
         {
             return item switch
             {
-                LeagueItemViewModel _ => LeagueItemTemplate,
+                LeagueItemViewModel viewModel when viewModel.IsShowFlag => LeagueItemTemplate,
                 RegionGroupViewModel _ => RegionGroupTemplate,
-
-                _ => LeagueItemTemplate,
+                _ => NoFlagLeagueTemplate,
             };
         }
     }
