@@ -82,7 +82,7 @@ namespace LiveScore.Features.League.ViewModels
 
         private void BuildLeagueGroups(IList<ILeague> leagues)
         {
-            var topLeagues = new List<ILeague>(leagues.OrderBy(league => league.Order).Take(10));
+            var topLeagues = new List<ILeague>(leagues.OrderBy(league => league.Order).Take(6));
             var topLeaguesGroup = BuildTopLeaguesGroup(topLeagues);
             var allLeaguesGroup = BuildAllLeaguesGroup(leagues);
             var leagueGroups = topLeaguesGroup.Concat(allLeaguesGroup);
