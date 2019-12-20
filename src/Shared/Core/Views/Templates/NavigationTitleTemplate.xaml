@@ -13,7 +13,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <ContentView.Content>
-        <Grid AutomationProperties.IsInAccessibleTree="False" >
+        <Grid AutomationProperties.IsInAccessibleTree="False">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer Tapped="ShowSportSelection" />
             </Grid.GestureRecognizers>
@@ -21,9 +21,10 @@
                    AutomationId="{Binding CurrentSport, StringFormat='NavigationSportName-{0}'}"
                    Style="{StaticResource SportName}"
                    Text="{Binding CurrentSport, Converter={StaticResource UpperCaseConverter}}" />
-            <Label x:Name="arrowDownSelection" Style="{StaticResource SportDropdownIcon}" />
+            <Label x:Name="arrowDownSelection"
+                   Style="{StaticResource SportDropdownIcon}" />
 
-            <Button Style="{StaticResource InActiveFavoriteIcon}" HorizontalOptions="End" />
+            <!--<Button Style="{StaticResource InActiveFavoriteIcon}" HorizontalOptions="End" />-->
         </Grid>
     </ContentView.Content>
 </ContentView>

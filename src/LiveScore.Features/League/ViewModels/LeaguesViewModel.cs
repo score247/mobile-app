@@ -18,6 +18,7 @@ namespace LiveScore.Features.League.ViewModels
     {
         private readonly ILeagueService leagueService;
         private readonly Func<string, string> buildFlagFunction;
+        private bool firstLoad = true;
 
         public LeaguesViewModel(
             INavigationService navigationService,
@@ -51,12 +52,13 @@ namespace LiveScore.Features.League.ViewModels
         {
             base.OnAppearing();
 
-            if (!IsActive)
+            if (!IsActive || !firstLoad)
             {
                 return;
             }
 
             await LoadDataAsync(LoadLeagues);
+            firstLoad = false;
         }
 
         private async Task OnRefreshing()

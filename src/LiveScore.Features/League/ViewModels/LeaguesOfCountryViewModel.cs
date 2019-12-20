@@ -34,7 +34,7 @@ namespace LiveScore.Features.League.ViewModels
         {
             if (parameters?["Country"] is LeagueCategory country)
             {
-                LeagueName = country.Name;
+                LeagueName = country.Name.ToUpperInvariant();
                 CountryCode = country.CountryCode;
                 LeagueFlag = buildFlagFunction(CountryCode);
             }
