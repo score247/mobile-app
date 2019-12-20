@@ -55,7 +55,8 @@
             </Grid>
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       HasUnevenRows="true"
-                      IsPullToRefreshEnabled="false"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsRefreshing}"
                       HorizontalScrollBarVisibility="Never"
                       VerticalScrollBarVisibility="Never"
                       ItemTemplate="{StaticResource LeagueItemSelector}"
@@ -64,6 +65,7 @@
                       SelectionMode="None"
                       SeparatorVisibility="None"
                       Style="{StaticResource ListViewHasBackground}"
+                      RefreshCommand="{Binding RefreshCommand}"
                       VerticalOptions="FillAndExpand">
             </ListView>
         </StackLayout>

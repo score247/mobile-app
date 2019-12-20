@@ -20,6 +20,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{language}/leagues/{leagueId}/matches/{leagueGroupName}")]
             Task<IEnumerable<SoccerMatch>> GetFixtures(string language, string leagueId, string leagueGroupName);
+
+            [Get("/soccer/{language}/leagues/countryLeagues")]
+            Task<IEnumerable<League>> GetCountryLeagues(string language, string countryCode);
         }
 
         [Headers("Accept: application/x-msgpack")]

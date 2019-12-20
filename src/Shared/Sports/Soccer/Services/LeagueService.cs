@@ -82,5 +82,22 @@ namespace LiveScore.Soccer.Services
                 return Enumerable.Empty<IMatch>();
             }
         }
+
+        public async Task<IEnumerable<ILeague>> GetCountryLeagues(string countryCode, Language language)
+        {
+            try
+            {
+                var countryLeagues = await apiService.Execute(()
+                       => leagueApi.GetCountryLeagues(language.DisplayName, countryCode));
+
+                return countryLeagues;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<ILeague>();
+            }
+        }
     }
 }
