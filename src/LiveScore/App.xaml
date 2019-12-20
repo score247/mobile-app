@@ -46,6 +46,7 @@
             <Color x:Key="PrimaryColor">#272830</Color>
             <Color x:Key="SecondColor">#202124</Color>
             <Color x:Key="SiteBackgroundColor">#161719</Color>
+
             <Color x:Key="PrimaryTextColor">#fff</Color>
             <Color x:Key="SecondTextColor">#CBCBCB</Color>
             <Color x:Key="ThirdTextColor">#676C8B</Color>
@@ -126,6 +127,11 @@
             <Color x:Key="FunctionBarColor">#FFFFFF</Color>
             <Color x:Key="FunctionBarActiveColor">#FF7D00</Color>
             <x:Double x:Key="FunctionBarFontSize">12</x:Double>
+
+            <!-- Search Bar -->
+            <Color x:Key="SearchBarTextBoxBackgroundColor">#161719</Color>
+            <Color x:Key="SearchBarPlaceholderColor">#616163</Color>
+            <Color x:Key="SearchBarBackgroundColor">#272830</Color>
 
             <!--  Tabs  -->
             <Color x:Key="TabLayoutBgColor">#202124</Color>
@@ -391,9 +397,12 @@
                         Value="Center" />
                 <Setter Property="VerticalOptions"
                         Value="Center" />
-                <Setter Property="BackgroundColor" Value="Transparent" />
-                <Setter Property="HeightRequest" Value="46" />
-                <Setter Property="WidthRequest" Value="36" />
+                <Setter Property="BackgroundColor"
+                        Value="Transparent" />
+                <Setter Property="HeightRequest"
+                        Value="46" />
+                <Setter Property="WidthRequest"
+                        Value="36" />
                 <Setter Property="Text"
                         Value="&#xe91f;" />
                 <Setter Property="TextColor"

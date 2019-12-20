@@ -227,7 +227,19 @@ namespace LiveScore.Common.LangResources {
             }
         }
         
-        public static string Abandoned {
+        /// <summary>
+        ///   Looks up a localized string similar to Find leagues.
+        /// </summary>
+        public static string FindLeagues {
+            get {
+                return ResourceManager.GetString("FindLeagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fixtures.
+        /// </summary>
+        public static string Fixtures {
             get {
                 return ResourceManager.GetString("Abandoned", resourceCulture);
             }

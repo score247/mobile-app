@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:b="http://prismlibrary.com"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
+             mc:Ignorable="d"
+             x:Class="LiveScore.Core.Controls.SearchPage.SearchBarTemplate">
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SearchBar"
+                   TargetType="SearchBar">
+                <Setter Property="FontSize"
+                        Value="{StaticResource MediumTextFontSize}" />
+                <Setter Property="BackgroundColor"
+                        Value="{StaticResource SearchBarBackgroundColor}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource PrimaryTextColor}" />
+            </Style>
+            <Style x:Key="CancelLabel"
+                   TargetType="Label">
+                <Setter Property="WidthRequest"
+                        Value="90" />
+                <Setter Property="FontSize"
+                        Value="{StaticResource MediumTextFontSize}" />
+                <Setter Property="TextColor"
+                        Value="{StaticResource FourthTextColor}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+        <FlexLayout Direction="Row"
+                    x:Name="Layout"
+                    AlignItems="Center">
+            <SearchBar x:Name="SearchTextBox"
+                       Text="{Binding SearchText}"
+                       Placeholder="{Binding PlaceholderText}"
+                       PlaceholderColor="{StaticResource SearchBarPlaceholderColor}"
+                       Style="{StaticResource SearchBar}">
+                <SearchBar.Behaviors>
+                    <b:EventToCommandBehavior EventName="TextChanged"
+                                              Command="{Binding TextChangeCommand}" />
+                </SearchBar.Behaviors>
+            </SearchBar>
+            <Label x:Name="CancelLabel"
+                   Text="Cancel"
+                   Margin="0,0,5,0"
+                   Style="{StaticResource CancelLabel}"
+                   HorizontalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding CancelCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </FlexLayout>
+    </ContentView.Content>
+</ContentView>

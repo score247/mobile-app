@@ -10,6 +10,7 @@ using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.League.ViewModels.LeagueItemViewModels;
+using Prism.Commands;
 using Prism.Navigation;
 
 namespace LiveScore.Features.League.ViewModels
@@ -28,6 +29,7 @@ namespace LiveScore.Features.League.ViewModels
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             LeagueGroups = new List<IGrouping<string, LeagueViewModel>>();
             RefreshCommand = new DelegateAsyncCommand(OnRefreshing);
+            SearchCommand = new DelegateCommand<string>(OnSearch);
         }
 
         public IList<IGrouping<string, LeagueViewModel>> LeagueGroups { get; private set; }
@@ -35,6 +37,8 @@ namespace LiveScore.Features.League.ViewModels
         public DelegateAsyncCommand RefreshCommand { get; }
 
         public bool IsRefreshing { get; set; }
+
+        public DelegateCommand<string> SearchCommand { get; }
 
         public override async Task OnNetworkReconnectedAsync()
         {
@@ -63,7 +67,7 @@ namespace LiveScore.Features.League.ViewModels
 
         private async Task OnRefreshing()
         {
-            await LoadDataAsync(LoadLeagues);
+            await LoadDataAsync(LoadLeagues, false);
 
             IsRefreshing = false;
         }
@@ -147,6 +151,10 @@ namespace LiveScore.Features.League.ViewModels
                            country,
                            countriesGroup[country],
                            buildFlagFunction));
+        }
+
+        private void OnSearch(string searchText)
+        {
         }
     }
 }
