@@ -80,7 +80,5 @@ namespace LiveScore.Soccer.Services
 
         private IList<IMatch> LoadMatchesFromSetting()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
-
-        
     }
 }

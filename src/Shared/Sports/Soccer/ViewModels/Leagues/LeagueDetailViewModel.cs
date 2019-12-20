@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
@@ -17,6 +16,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 {
     public class LeagueDetailViewModel : ViewModelBase
     {
+        private const string InactiveFavoriteImageSource = "images/common/inactive_favorite_header_bar.png";
+        private const string ActiveFavoriteImageSource = "images/common/active_favorite_header_bar.png";
+
         private readonly IFavoriteService favoriteService;
 
         private string LeagueId;
@@ -40,6 +42,8 @@ namespace LiveScore.Soccer.ViewModels.Leagues
         public byte SelectedIndex { get; set; }
 
         public bool IsFavorite { get; private set; }
+
+        public string FavoriteImageSource => IsFavorite ? ActiveFavoriteImageSource : InactiveFavoriteImageSource;
 
         public IReadOnlyList<ViewModelBase> LeagueDetailItemSources { get; private set; }
 
@@ -135,8 +139,6 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             }
 
             IsFavorite = !IsFavorite;
-            
-            Debug.WriteLine("OnFavourite");
         }
     }
 }
