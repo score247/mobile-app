@@ -87,9 +87,6 @@
     <Compile Update="League\ViewResources\LeagueHeaderViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="League\Views\LeagueGroupStagesView.xaml.cs">
-      <DependentUpon>LeagueGroupStagesView.xaml</DependentUpon>
-    </Compile>
     <Compile Update="League\Views\LeaguesOfCountryView.xaml.cs">
       <DependentUpon>LeaguesOfCountryView.xaml</DependentUpon>
     </Compile>
@@ -154,9 +151,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Favorites\Views\FavoriteMatchesTemplate.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="League\Views\LeagueGroupStagesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="League\Views\LeaguesOfCountryView.xaml">
