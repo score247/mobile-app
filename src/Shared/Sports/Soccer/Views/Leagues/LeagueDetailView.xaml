@@ -20,7 +20,8 @@
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}"
                                                IsFavorite="{Binding IsFavorite}"
-                                               FavoriteCommand="{Binding FavoriteCommand}"/>
+                                               FavoriteCommand="{Binding FavoriteCommand}"
+                                               VisibleFavorite="True"/>
     </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>

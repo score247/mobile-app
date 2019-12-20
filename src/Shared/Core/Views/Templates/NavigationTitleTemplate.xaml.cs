@@ -15,6 +15,7 @@
             InitializeComponent();
             var navigationTitleTemplate = this;
             sportLabel.BindingContext = navigationTitleTemplate;
+            favoriteButton.BindingContext = navigationTitleTemplate;
         }
 
         public static readonly BindableProperty TitleProperty
@@ -36,7 +37,11 @@
         }
 
         public static readonly BindableProperty VisibleFavoriteProperty
-            = BindableProperty.Create("VisibleFavorite", typeof(bool), typeof(NavigationTitleTemplate), false);
+            = BindableProperty.Create(
+                propertyName: "VisibleFavorite",
+                returnType: typeof(bool),
+                declaringType: typeof(NavigationTitleTemplate),
+                defaultValue:false);
 
         public bool VisibleFavorite
         {
