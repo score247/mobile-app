@@ -18,7 +18,7 @@ namespace LiveScore.Features.League
         {
             containerRegistry.RegisterForNavigation<LeaguesView, LeaguesViewModel>();
             containerRegistry.RegisterForNavigation<LeaguesOfCountryView, LeaguesOfCountryViewModel>();
-            containerRegistry.RegisterForNavigation<LeagueGroupStagesView, LeaguesGroupViewModel>();
+            containerRegistry.RegisterForNavigation<LeagueGroupStagesView, LeagueGroupStagesViewModel>();
         }
     }
 }
