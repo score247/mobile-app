@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common;
+using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
@@ -25,10 +25,27 @@ namespace LiveScore.Features.League.ViewModels
         {
             leagueService = DependencyResolver.Resolve<ILeagueService>(CurrentSportId.ToString());
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
-            LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>();
+            LeagueGroups = new List<IGrouping<string, LeagueViewModel>>();
+            RefreshCommand = new DelegateAsyncCommand(OnRefreshing);
         }
 
-        public ObservableCollection<IGrouping<string, ViewModelBase>> LeagueGroups { get; set; }
+        public IList<IGrouping<string, LeagueViewModel>> LeagueGroups { get; private set; }
+
+        public DelegateAsyncCommand RefreshCommand { get; }
+
+        public bool IsRefreshing { get; set; }
+
+        public override async Task OnNetworkReconnectedAsync()
+        {
+            await base.OnNetworkReconnectedAsync();
+            await LoadDataAsync(LoadLeagues);
+        }
+
+        public override async void OnResumeWhenNetworkOK()
+        {
+            base.OnResumeWhenNetworkOK();
+            await LoadDataAsync(LoadLeagues);
+        }
 
         public override async void OnAppearing()
         {
@@ -39,53 +56,54 @@ namespace LiveScore.Features.League.ViewModels
                 return;
             }
 
-            await BuildLeagueGroup();
+            await LoadDataAsync(LoadLeagues);
         }
 
-        public async Task BuildLeagueGroup()
+        private async Task OnRefreshing()
+        {
+            await LoadDataAsync(LoadLeagues);
+
+            IsRefreshing = false;
+        }
+
+        public async Task LoadLeagues()
         {
             var leagues = (await leagueService.GetMajorLeaguesAsync(CurrentLanguage))?.ToList();
 
-            if (leagues != null)
+            if (leagues?.Any() == true)
             {
                 BuildLeagueGroups(leagues);
             }
 
-            IsBusy = false;
-            HasData = IsNotBusy;
+            HasData = false;
         }
 
-        private void BuildLeagueGroups(List<ILeague> leagues)
+        private void BuildLeagueGroups(IList<ILeague> leagues)
         {
-            var topLeagues = new ObservableCollection<ILeague>(leagues.OrderBy(league => league.Order).Take(10));
+            var topLeagues = new List<ILeague>(leagues.OrderBy(league => league.Order).Take(10));
+            var topLeaguesGroup = BuildTopLeaguesGroup(topLeagues);
+            var allLeaguesGroup = BuildAllLeaguesGroup(leagues);
+            var leagueGroups = topLeaguesGroup.Concat(allLeaguesGroup);
 
-            var topLeagueGroup = BuildTopLeagueGroup(topLeagues);
-
-            var countryLeagueGroup = BuildAllLeagueGroup(leagues);
-
-            var leagueGroups = topLeagueGroup.Concat(countryLeagueGroup);
-
-            LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>(leagueGroups);
+            LeagueGroups = new List<IGrouping<string, LeagueViewModel>>(leagueGroups);
         }
 
-        private IEnumerable<IGrouping<string, ViewModelBase>> BuildTopLeagueGroup(ObservableCollection<ILeague> topLeagues)
-        {
-            return topLeagues
+        private IEnumerable<IGrouping<string, LeagueViewModel>> BuildTopLeaguesGroup(IEnumerable<ILeague> topLeagues)
+            => topLeagues
                 .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode))
                 .GroupBy(_ => AppResources.Popular);
-        }
 
-        private IEnumerable<IGrouping<string, ViewModelBase>> BuildAllLeagueGroup(IEnumerable<ILeague> leagues)
+        private IEnumerable<IGrouping<string, LeagueViewModel>> BuildAllLeaguesGroup(IEnumerable<ILeague> leagues)
         {
-            var orderedLeague = leagues
+            var orderedLeagues = leagues
                 .OrderBy(league => league.CountryName)
-                .ThenBy(league => league.Name);
+                .ThenBy(league => league.Name)
+                .ToList();
 
-            var internationalLeagues = orderedLeague.Where(league => league.IsInternational);
-
+            var internationalLeagues = orderedLeagues.Where(league => league.IsInternational);
             var internationalLeaguesGroup = BuildInternationalLeaguesGroup(internationalLeagues);
 
-            var countryLeagues = orderedLeague.Where(league => !league.IsInternational);
+            var countryLeagues = orderedLeagues.Where(league => !league.IsInternational);
             var countryGroups = BuildCountryLeaguesGroup(countryLeagues);
 
             var allLeagues = internationalLeaguesGroup.Concat(countryGroups);
@@ -93,14 +111,14 @@ namespace LiveScore.Features.League.ViewModels
             return allLeagues.GroupBy(_ => AppResources.AllLeagues);
         }
 
-        private IEnumerable<ViewModelBase> BuildInternationalLeaguesGroup(IEnumerable<ILeague> internationalLeagues)
+        private IEnumerable<LeagueViewModel> BuildInternationalLeaguesGroup(IEnumerable<ILeague> internationalLeagues)
         {
             var internationalCategory = new LeagueCategory
             {
                 Name = AppResources.International
             };
 
-            var internationalViewModels = new List<CountryViewModel>
+            return new List<CountryViewModel>
             {
                 new CountryViewModel(
                     NavigationService,
@@ -109,34 +127,24 @@ namespace LiveScore.Features.League.ViewModels
                     internationalLeagues,
                     buildFlagFunction)
             };
-
-            return internationalViewModels;
         }
 
-        private IEnumerable<ViewModelBase> BuildCountryLeaguesGroup(IEnumerable<ILeague> countryLeagues)
+        private IEnumerable<LeagueViewModel> BuildCountryLeaguesGroup(IEnumerable<ILeague> countryLeagues)
         {
-            var countryGroup = countryLeagues
+            var countriesGroup = countryLeagues
                 .GroupBy(league => new LeagueCategory
                 {
                     CountryCode = league.CountryCode,
                     Name = league.CountryName
                 })
-                .ToDictionary(league
-                => league.Key);
-            var countryLeaguesItems = new List<ViewModelBase>();
-            foreach (var country in countryGroup.Keys)
-            {
-                countryLeaguesItems.Add(
-                    new CountryViewModel(
-                        NavigationService,
-                        DependencyResolver,
-                        country,
-                        countryGroup[country],
-                        buildFlagFunction)
-                    );
-            }
+                .ToDictionary(league => league.Key);
 
-            return countryLeaguesItems;
+            return countriesGroup.Keys.Select(country => new CountryViewModel(
+                           NavigationService,
+                           DependencyResolver,
+                           country,
+                           countriesGroup[country],
+                           buildFlagFunction));
         }
     }
 }

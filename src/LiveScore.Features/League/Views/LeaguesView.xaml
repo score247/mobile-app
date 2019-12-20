@@ -31,9 +31,10 @@
                 </Frame>
             </Grid>
             <ListView AutomationProperties.IsInAccessibleTree="False"
-                      HasUnevenRows="true"
-                      IsPullToRefreshEnabled="false"
-                      HorizontalScrollBarVisibility="Never"
+                      HasUnevenRows="True"
+                      IsPullToRefreshEnabled="True"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      IsRefreshing="{Binding IsRefreshing}"
                       VerticalScrollBarVisibility="Never"
                       GroupDisplayBinding="{Binding Key}"
                       GroupHeaderTemplate="{StaticResource LeaguesGroupTemplate}"
@@ -44,6 +45,7 @@
                       SelectionMode="None"
                       SeparatorVisibility="None"
                       SeparatorColor="Transparent"
+                      CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
                       VerticalOptions="FillAndExpand">
             </ListView>
