@@ -18,60 +18,64 @@ namespace LiveScore.Soccer.Services
         public FavouriteService(IUserSettingService userSettingService)
         {
             this.userSettingService = userSettingService;
+
+            Init();
+        }
+
+        public IList<IMatch> Matches { get; private set; }
+        
+        public IList<ILeague> Leagues { get; private set; }
+
+        public void Init()
+        {
+            Matches = GetMatches();
+            Leagues = GetLeagues();
         }
 
         public void AddLeague(ILeague league)
         {
-            var leagues = GetLeagues();
-
-            if (!leagues.Any(m => m.Id == league.Id))
+            if (!Leagues.Any(m => m.Id == league.Id))
             {
-                leagues.Append(league);
+                Leagues.Append(league);
             }
 
-            userSettingService.AddOrUpdateValue(LeagueKey, leagues);
+            userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
         }
 
         public void RemoveLeague(ILeague league)
         {
-            var leagues = GetLeagues();
-
-            if (leagues.Any(m => m.Id == league.Id))
+            if (Leagues.Any(m => m.Id == league.Id))
             {
-                leagues.Remove(league);
+                Leagues.Remove(league);
             }
 
-            userSettingService.AddOrUpdateValue(LeagueKey, leagues);
+            userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
         }
-
-        public IList<ILeague> GetLeagues()
-            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<ILeague>()).ToList();
 
         public void AddMatch(IMatch match)
         {
-            var matches = GetMatches();
-
-            if (!matches.Any(m => m.Id == match.Id))
+            if (!Matches.Any(m => m.Id == match.Id))
             {
-                matches.Append(match);
+                Matches.Append(match);
             }
 
-            userSettingService.AddOrUpdateValue(MatchKey, matches);
+            userSettingService.AddOrUpdateValue(MatchKey, Matches);
         }
 
         public void RemoveMatch(IMatch match)
-        {
-            var matches = GetMatches();
-
-            if (matches.Any(m => m.Id == match.Id))
+        {            
+            if (Matches.Any(m => m.Id == match.Id))
             {
-                matches.Remove(match);
+                Matches.Remove(match);
             }
 
-            userSettingService.AddOrUpdateValue(MatchKey, matches);
+            userSettingService.AddOrUpdateValue(MatchKey, Matches);
         }
 
-        public IList<IMatch> GetMatches()
+        private IList<ILeague> GetLeagues()
+            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<ILeague>()).ToList();
+
+        private IList<IMatch> GetMatches()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
     }
 }

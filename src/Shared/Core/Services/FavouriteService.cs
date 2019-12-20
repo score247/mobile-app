@@ -10,12 +10,8 @@ namespace LiveScore.Core.Services
 
         void RemoveMatch(IMatch match);
 
-        IList<IMatch> GetMatches();
-
         void AddLeague(ILeague league);
 
         void RemoveLeague(ILeague league);
-
-        IList<ILeague> GetLeagues();
     }
 }
