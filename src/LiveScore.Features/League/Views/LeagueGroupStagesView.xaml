@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
              mc:Ignorable="d"
-             x:Class="LiveScore.Features.League.Views.LeagueGroupView"
+             x:Class="LiveScore.Features.League.Views.LeagueGroupStagesView"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
@@ -19,9 +19,9 @@
     <ContentPage.Content>
         <StackLayout>
             <Label Text="League group is coming soon!"
-                TextColor="White"
-                VerticalOptions="CenterAndExpand"
-                HorizontalOptions="CenterAndExpand" />
+                   TextColor="White"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="CenterAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

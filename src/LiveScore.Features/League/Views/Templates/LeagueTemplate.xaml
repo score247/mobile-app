@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+              xmlns:viewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources1="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
+              xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels.LeagueItemViewModels"
+              mc:Ignorable="d"
+              x:DataType="viewModel:LeagueViewModel"
+              x:Class="LiveScore.Features.League.Views.Templates.LeagueTemplate">
+    <ViewCell Height="{StaticResource FunctionGroupHeight}">
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <viewResources1:LeagueHeaderViewResource />
+                        <viewResources:MatchHeaderViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LeagueTapped}" />
+            </StackLayout.GestureRecognizers>
+            <StackLayout>
+                <Grid Style="{StaticResource LeagueBox}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                      Grid.Column="0"
+                                                      DownsampleToViewSize="True"
+                                                      LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                      Source="{Binding LeagueFlag, Mode=OneTime}"
+                                                      Style="{StaticResource LeagueFlag}" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource LeagueName}"
+                           Text="{ Binding LeagueName }" />
+                    <Label x:Name="DetailIcon"
+                           Grid.Row="0"
+                           Grid.Column="2"
+                           Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </StackLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

@@ -1,12 +1,12 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace LiveScore.Core.Views.Templates.Leagues
+namespace LiveScore.Features.League.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LeaguesGroupTemplate : DataTemplate
+    public partial class LeagueGroupStagesView : ContentPage
     {
-        public LeaguesGroupTemplate()
+        public LeagueGroupStagesView()
         {
             InitializeComponent();
         }

@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Features.League.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LeagueGroupView : ContentPage
+    public partial class LeaguesOfCountryView : ContentPage
     {
-        public LeagueGroupView()
+        public LeaguesOfCountryView()
         {
             InitializeComponent();
         }

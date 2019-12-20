@@ -24,10 +24,13 @@
     <ItemGroup>
       <Compile Remove="Animations\**" />
       <Compile Remove="Triggers\**" />
+      <Compile Remove="Views\Selectors\**" />
       <EmbeddedResource Remove="Animations\**" />
       <EmbeddedResource Remove="Triggers\**" />
+      <EmbeddedResource Remove="Views\Selectors\**" />
       <None Remove="Animations\**" />
       <None Remove="Triggers\**" />
+      <None Remove="Views\Selectors\**" />
       <Compile Remove="Models\Odds\OddsChangedMessage.cs" />
     </ItemGroup>
     <ItemGroup>
@@ -53,7 +56,7 @@
         </Folder>
         <Folder Include="PubSubEvents\Odds\" />
         <Folder Include="Controls\CircleProgressBar\" />
-        <Folder Include="Views\Selectors\" />
+        <Folder Include="ViewModels\Leagues\" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
@@ -86,9 +89,6 @@
       <Compile Update="Views\NetworkConnectionErrorPopupView.xaml.cs">
         <DependentUpon>NetworkConnectionErrorPopupView.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Views\Templates\Leagues\RegionGroupTemplate.xaml.cs">
-        <DependentUpon>RegionGroupTemplate.xaml</DependentUpon>
-      </Compile>
       <Compile Update="Views\Templates\Matches\MatchGroupTemplate.xaml.cs">
         <DependentUpon>MatchGroupTemplate.xaml</DependentUpon>
       </Compile>
@@ -103,25 +103,10 @@
       <EmbeddedResource Update="Controls\DateBar\Views\Templates\DateTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="ViewResources\LeagueHeaderViewResource.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
       <EmbeddedResource Update="Views\NetworkConnectionErrorPopupView.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\EmptyDataTemplate.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\Templates\Leagues\LeagueItemTemplate.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\Templates\Leagues\LeaguesGroupTemplate.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\Templates\Leagues\NoFlagLeagueItemTemplate.xaml">
-        <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      </EmbeddedResource>
-      <EmbeddedResource Update="Views\Templates\Leagues\RegionGroupTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\Matches\MatchesTemplate.xaml">

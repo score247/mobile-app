@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Net;
 using Fanex.Caching;
 using FFImageLoading.Helpers;
@@ -8,20 +7,12 @@ using LiveScore.Common.Helpers;
 using LiveScore.Common.Services;
 using LiveScore.Core;
 using LiveScore.Core.Controls.SearchPage;
-using LiveScore.Core.Enumerations;
 using LiveScore.Core.Services;
-using LiveScore.Core.ViewModels;
-using LiveScore.Core.ViewModels.Leagues;
-using LiveScore.Core.Views;
-using LiveScore.Core.Views.Templates.Leagues;
 using LiveScore.Features.Favorites;
 using LiveScore.Features.League;
-using LiveScore.Features.League.ViewModels;
-using LiveScore.Features.League.Views;
 using LiveScore.Features.Menu;
 using LiveScore.Features.News;
 using LiveScore.Features.Score;
-using LiveScore.Features.TVSchedule;
 using LiveScore.Soccer;
 using LiveScore.Soccer.Services;
 using LiveScore.ViewModels;
@@ -33,7 +24,6 @@ using Microsoft.AppCenter.Crashes;
 using Microsoft.AspNetCore.SignalR.Client;
 using Prism.Ioc;
 using Prism.Modularity;
-using Prism.Mvvm;
 using Refit;
 using Rg.Plugins.Popup.Contracts;
 using Rg.Plugins.Popup.Services;
@@ -48,7 +38,6 @@ namespace LiveScore.Configurations
 
         public static IContainerRegistry UseContainerInstance(this IContainerRegistry containerRegistry, IContainerProvider container)
         {
-            Debug.WriteLine($"UseContainerInstance {DateTime.Now.ToString("hh:mm:ss")}");
             if (container == null)
             {
                 throw new ArgumentNullException(nameof(container));
@@ -105,8 +94,7 @@ namespace LiveScore.Configurations
             containerRegistry.Register<IHubConnectionBuilder, HubConnectionBuilder>();
 
             containerRegistry.RegisterSingleton<ISportService, SportService>();
-            containerRegistry.RegisterSingleton<IMatchService, MatchService>();
-            containerRegistry.RegisterSingleton<ILeagueService, LeagueService>();
+
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
             containerRegistry.RegisterSingleton<IUserSettingService, UserSettingService>();

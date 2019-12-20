@@ -9,22 +9,21 @@ using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
-using LiveScore.Core.ViewModels.Leagues;
+using LiveScore.Features.League.ViewModels.LeagueItemViewModels;
 using Prism.Navigation;
 
 namespace LiveScore.Features.League.ViewModels
 {
-    public class LeagueViewModel : ViewModelBase
+    public class LeaguesViewModel : ViewModelBase
     {
         private readonly ILeagueService leagueService;
         private readonly Func<string, string> buildFlagFunction;
 
-        public LeagueViewModel(
+        public LeaguesViewModel(
             INavigationService navigationService,
-            IDependencyResolver serviceLocator,
-            ILeagueService leagueService) : base(navigationService, serviceLocator)
+            IDependencyResolver serviceLocator) : base(navigationService, serviceLocator)
         {
-            this.leagueService = leagueService;
+            leagueService = DependencyResolver.Resolve<ILeagueService>(CurrentSportId.ToString());
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>();
         }
@@ -72,7 +71,7 @@ namespace LiveScore.Features.League.ViewModels
         private IEnumerable<IGrouping<string, ViewModelBase>> BuildTopLeagueGroup(ObservableCollection<ILeague> topLeagues)
         {
             return topLeagues
-                .Select(league => new LeagueItemViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, true))
+                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode))
                 .GroupBy(_ => AppResources.Popular);
         }
 
@@ -101,9 +100,9 @@ namespace LiveScore.Features.League.ViewModels
                 Name = AppResources.International
             };
 
-            var internationalViewModels = new List<RegionGroupViewModel>
+            var internationalViewModels = new List<CountryViewModel>
             {
-                new RegionGroupViewModel(
+                new CountryViewModel(
                     NavigationService,
                     DependencyResolver,
                     internationalCategory,
@@ -128,7 +127,7 @@ namespace LiveScore.Features.League.ViewModels
             foreach (var country in countryGroup.Keys)
             {
                 countryLeaguesItems.Add(
-                    new RegionGroupViewModel(
+                    new CountryViewModel(
                         NavigationService,
                         DependencyResolver,
                         country,

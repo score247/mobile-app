@@ -54,12 +54,12 @@
                         AutomationId="LeaguesBar"
                         IconImageSource="images/common/league.png">
             <x:Arguments>
-                <league:LeagueView Title="{langs:Translate Leagues}">
+                <league:LeaguesView Title="{langs:Translate Leagues}">
                     <NavigationPage.TitleView>
                         <coreTemplates:NavigationTitleTemplate Title="{langs:Translate Leagues}"
                                                                CurrentSport="{Binding CurrentSportName}" />
                     </NavigationPage.TitleView>
-                </league:LeagueView>
+                </league:LeaguesView>
             </x:Arguments>
         </NavigationPage>
 

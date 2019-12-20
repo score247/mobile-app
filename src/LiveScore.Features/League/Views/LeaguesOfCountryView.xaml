@@ -1,16 +1,17 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:customListView="clr-namespace:LiveScore.Core.Controls.CustomListView;assembly=LiveScore.Core"
-             xmlns:viewResources="clr-namespace:LiveScore.Features.Score.ViewResources"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-             xmlns:resources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
-             xmlns:templateSelectors="clr-namespace:LiveScore.Core.Views.Selectors;assembly=LiveScore.Core"
+             xmlns:viewResource="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
+             xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
+             xmlns:mvvm="http://prismlibrary.com"
              mc:Ignorable="d"
-             x:Class="LiveScore.Features.League.Views.RegionLeaguesView">
+             mvvm:ViewModelLocator.AutowireViewModel="True"
+             x:Class="LiveScore.Features.League.Views.LeaguesOfCountryView">
     <NavigationPage.TitleView>
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}" />
@@ -23,11 +24,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <viewResources:ScoreViewResource />
-                <resources:LeagueHeaderViewResource />
-                <resources:MatchHeaderViewResource />
+                <viewResource:LeagueHeaderViewResource />
+                <coreViewResources:MatchHeaderViewResource />
             </ResourceDictionary.MergedDictionaries>
-            <templateSelectors:LeagueItemSelector x:Key="LeagueItemSelector" />
+            <selectors:LeagueItemSelector x:Key="LeagueItemSelector" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -45,26 +45,26 @@
                                                   Grid.Column="0"
                                                   DownsampleToViewSize="True"
                                                   LoadingPlaceholder="images/flag_league/default_flag.svg"
-                                                  Source="{Binding RegionFlag, Mode=TwoWay}"
+                                                  Source="{Binding LeagueFlag, Mode=TwoWay}"
                                                   Style="{StaticResource LeagueFlag}" />
                 <Label Grid.Row="0"
                        Grid.Column="1"
                        LineBreakMode="TailTruncation"
                        Style="{StaticResource LeagueName}"
-                       Text="{ Binding Region.Name }" />
+                       Text="{ Binding LeagueName }" />
             </Grid>
             <ListView AutomationProperties.IsInAccessibleTree="False"
-                                           HasUnevenRows="true"
-                                           IsPullToRefreshEnabled="false"
-                                           HorizontalScrollBarVisibility="Never"
-                                           VerticalScrollBarVisibility="Never"
-                                           ItemTemplate="{StaticResource LeagueItemSelector}"
-                                           ItemsSource="{Binding LeaguesItems}"
-                                           RefreshControlColor="White"
-                                           SelectionMode="None"
-                                           SeparatorVisibility="None"
-                                           Style="{StaticResource ListViewHasBackground}"
-                                           VerticalOptions="FillAndExpand">
+                      HasUnevenRows="true"
+                      IsPullToRefreshEnabled="false"
+                      HorizontalScrollBarVisibility="Never"
+                      VerticalScrollBarVisibility="Never"
+                      ItemTemplate="{StaticResource LeagueItemSelector}"
+                      ItemsSource="{Binding LeaguesItems}"
+                      RefreshControlColor="White"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      Style="{StaticResource ListViewHasBackground}"
+                      VerticalOptions="FillAndExpand">
             </ListView>
         </StackLayout>
     </ContentPage.Content>

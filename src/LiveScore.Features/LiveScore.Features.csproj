@@ -84,8 +84,26 @@
     <Compile Update="Favorites\Views\FavoriteView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="League\Views\LeagueView.xaml.cs">
+    <Compile Update="League\ViewResources\LeagueHeaderViewResource.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\LeagueGroupStagesView.xaml.cs">
+      <DependentUpon>LeagueGroupStagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\LeaguesOfCountryView.xaml.cs">
+      <DependentUpon>LeaguesOfCountryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\Templates\LeagueTemplate.xaml.cs">
+      <DependentUpon>LeagueTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\Templates\LeaguesGroupTemplate.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\LeaguesView.xaml.cs">
+      <DependentUpon>LeaguesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="League\Views\Templates\NoFlagLeagueTemplate.xaml.cs">
+      <DependentUpon>NoFlagLeagueTemplate.xaml</DependentUpon>
     </Compile>
     <Compile Update="Menu\Views\DefaultLanguageView.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
@@ -138,10 +156,10 @@
     <EmbeddedResource Update="Favorites\Views\FavoriteMatchesTemplate.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="League\Views\LeagueGroupView.xaml">
+    <EmbeddedResource Update="League\Views\LeagueGroupStagesView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="League\Views\RegionLeaguesView.xaml">
+    <EmbeddedResource Update="League\Views\LeaguesOfCountryView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Score\Views\Templates\CalendarTemplate.xaml">

@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+              xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources;assembly=LiveScore.Features"
+              xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels.LeagueItemViewModels"
+              mc:Ignorable="d"
+              x:DataType="viewModel:LeagueViewModel"
+              x:Class="LiveScore.Features.League.Views.Templates.NoFlagLeagueTemplate">
+    <ViewCell Height="{StaticResource FunctionGroupHeight}">
+        <StackLayout>
+            <StackLayout.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <viewResources:LeagueHeaderViewResource />
+                        <coreViewResources:MatchHeaderViewResource />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </StackLayout.Resources>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LeagueTapped}" />
+            </StackLayout.GestureRecognizers>
+            <StackLayout>
+                <Grid Style="{StaticResource LeagueBox}"
+                      Padding="16,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="36" />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           LineBreakMode="TailTruncation"
+                           Style="{StaticResource LeagueName}"
+                           Text="{ Binding LeagueName }" />
+                    <Label x:Name="DetailIcon"
+                           Grid.Row="0"
+                           Grid.Column="1"
+                           Style="{StaticResource LeagueDetailIcon}" />
+                </Grid>
+                <BoxView Style="{StaticResource HorizontalLine}" />
+            </StackLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

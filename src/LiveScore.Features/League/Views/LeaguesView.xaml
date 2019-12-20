@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage x:Class="LiveScore.Features.League.Views.LeaguesView"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:LiveScore.Features.League.ViewModels"
+             xmlns:viewResources="clr-namespace:LiveScore.Features.League.ViewResources"
+             xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
+             xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates;assembly=LiveScore.Features"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:DataType="viewModel:LeaguesViewModel"
+             BackgroundColor="{StaticResource PrimaryColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResources:LeagueViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <selectors:LeagueItemSelector x:Key="LeagueItemSelector" />
+            <templates:LeaguesGroupTemplate x:Key="LeaguesGroupTemplate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Style="{StaticResource Searchbar}">
+                <Frame Style="{StaticResource SearchBoxBorder}">
+                    <Grid>
+                        <Entry Placeholder="Find league"
+                               Style="{StaticResource SearchBox}" />
+                        <Label Style="{StaticResource SearchIcon}" />
+                    </Grid>
+                </Frame>
+            </Grid>
+            <ListView AutomationProperties.IsInAccessibleTree="False"
+                      HasUnevenRows="true"
+                      IsPullToRefreshEnabled="false"
+                      HorizontalScrollBarVisibility="Never"
+                      VerticalScrollBarVisibility="Never"
+                      GroupDisplayBinding="{Binding Key}"
+                      GroupHeaderTemplate="{StaticResource LeaguesGroupTemplate}"
+                      IsGroupingEnabled="True"
+                      ItemTemplate="{StaticResource LeagueItemSelector}"
+                      ItemsSource="{Binding LeagueGroups}"
+                      RefreshControlColor="White"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      SeparatorColor="Transparent"
+                      Style="{StaticResource ListViewHasBackground}"
+                      VerticalOptions="FillAndExpand">
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

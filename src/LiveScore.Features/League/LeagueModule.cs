@@ -7,7 +7,7 @@ namespace LiveScore.Features.League
 {
     public class LeagueModule : IModule
     {
-        public const string ModuleName = nameof(LeagueView);
+        public const string ModuleName = nameof(LeaguesView);
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
@@ -16,9 +16,9 @@ namespace LiveScore.Features.League
 
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<LeagueView, LeagueViewModel>();
-            containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeaguesViewModel>();
-            containerRegistry.RegisterForNavigation<LeagueGroupView, LeagueGroupViewModel>();
+            containerRegistry.RegisterForNavigation<LeaguesView, LeaguesViewModel>();
+            containerRegistry.RegisterForNavigation<LeaguesOfCountryView, LeaguesOfCountryViewModel>();
+            containerRegistry.RegisterForNavigation<LeagueGroupStagesView, LeaguesGroupViewModel>();
         }
     }
 }

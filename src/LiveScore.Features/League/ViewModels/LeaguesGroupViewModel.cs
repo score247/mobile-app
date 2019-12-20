@@ -4,9 +4,9 @@ using Prism.Navigation;
 
 namespace LiveScore.Features.League.ViewModels
 {
-    public class LeagueGroupViewModel : ViewModelBase
+    public class LeaguesGroupViewModel : ViewModelBase
     {
-        public LeagueGroupViewModel(
+        public LeaguesGroupViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver)
             : base(navigationService, dependencyResolver, false)

@@ -5,16 +5,16 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Features.League.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LeagueView : ContentPage
+    public partial class LeaguesView : ContentPage
     {
-        public LeagueView()
+        public LeaguesView()
         {
             InitializeComponent();
         }
 
         protected override void OnAppearing()
         {
-            if (BindingContext is LeagueViewModel viewModel)
+            if (BindingContext is LeaguesViewModel viewModel)
             {
                 viewModel.IsActive = true;
                 viewModel.OnAppearing();
@@ -23,7 +23,7 @@ namespace LiveScore.Features.League.Views
 
         protected override void OnDisappearing()
         {
-            if (BindingContext is LeagueViewModel viewModel)
+            if (BindingContext is LeaguesViewModel viewModel)
             {
                 viewModel.IsActive = false;
                 viewModel.OnDisappearing();

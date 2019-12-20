@@ -20,14 +20,6 @@ namespace Soccer.Tests.ViewModels.Leagues
             this.subEventAggregator = Substitute.For<IEventAggregator>();
         }
 
-        private LeagueDetailViewModel CreateViewModel()
-        {
-            return new LeagueDetailViewModel(
-                this.subNavigationService,
-                this.subDependencyResolver,
-                this.subEventAggregator);
-        }
-
         [Fact]
         public void Initialize_StateUnderTest_ExpectedBehavior()
         {
