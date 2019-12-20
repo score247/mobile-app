@@ -23,7 +23,10 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="images/common/inactive_favorite_header_bar.png"
                      Priority="1"
-                     Text="Favorite" />
+                     Text="Favorite"
+                     Command="{Binding FavoriteCommand}">
+           
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>

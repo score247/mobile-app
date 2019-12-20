@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
+using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
@@ -14,39 +17,56 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 {
     public class LeagueDetailViewModel : ViewModelBase
     {
+        private readonly IFavoriteService favoriteService;
+
+        private string LeagueId;
+        private string LeagueGroupName;
+
         public LeagueDetailViewModel(
          INavigationService navigationService,
          IDependencyResolver dependencyResolver,
-         IEventAggregator eventAggregator)
+         IEventAggregator eventAggregator,
+         IFavoriteService favoriteService)
          : base(navigationService, dependencyResolver, eventAggregator)
         {
+            this.favoriteService = favoriteService;
+
             ItemAppearedCommand = new DelegateCommand<ItemAppearedEventArgs>(OnItemAppeared);
             ItemDisappearingCommand = new DelegateCommand<ItemDisappearingEventArgs>(OnItemDisappearing);
+
+            FavoriteCommand = new DelegateCommand(OnFavorite);
         }
 
-        public IReadOnlyList<ViewModelBase> LeagueDetailItemSources { get; private set; }
-
         public byte SelectedIndex { get; set; }
+
+        public bool IsFavorite { get; private set; }
+
+        public IReadOnlyList<ViewModelBase> LeagueDetailItemSources { get; private set; }
 
         public DelegateCommand<ItemAppearedEventArgs> ItemAppearedCommand { get; }
 
         public DelegateCommand<ItemDisappearingEventArgs> ItemDisappearingCommand { get; }
 
+        public DelegateCommand FavoriteCommand { get; }
+
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
 
-            var leagueId = parameters["LeagueId"]?.ToString();
+            LeagueId = parameters["LeagueId"]?.ToString();
+            LeagueGroupName = parameters["LeagueGroupName"]?.ToString();
+
+            IsFavorite = favoriteService.IsFavoriteLeague(LeagueId);
+
             var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
-            var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
-            var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
+            var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();            
             var countryFlag = parameters["CountryFlag"]?.ToString();
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
             LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
-                new FixturesViewModel(leagueId, leagueGroupName, NavigationService, DependencyResolver, EventAggregator)
+                new TableViewModel(LeagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, LeagueGroupName, countryFlag, homeId, awayId, false),
+                new FixturesViewModel(LeagueId, LeagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
         }
 
@@ -100,6 +120,23 @@ namespace LiveScore.Soccer.ViewModels.Leagues
                 previousItem.IsActive = false;
                 previousItem.OnDisappearing();
             }
+        }
+
+        private void OnFavorite()
+        {
+            //TODO add CountryCode
+            if (IsFavorite)
+            {
+                favoriteService.RemoveLeague(new FavoriteLeague(LeagueId, LeagueGroupName, string.Empty));
+            }
+            else
+            {
+                favoriteService.AddLeague(new FavoriteLeague(LeagueId, LeagueGroupName, string.Empty));
+            }
+
+            IsFavorite = !IsFavorite;
+            
+            Debug.WriteLine("OnFavourite");
         }
     }
 }

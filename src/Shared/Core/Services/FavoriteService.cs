@@ -4,14 +4,18 @@ using LiveScore.Core.Models.Matches;
 
 namespace LiveScore.Core.Services
 {
-    public interface IFavouriteService
+    public interface IFavoriteService
     {
         void AddMatch(IMatch match);
 
         void RemoveMatch(IMatch match);
 
-        void AddLeague(ILeague league);
+        void AddLeague(FavoriteLeague league);
 
-        void RemoveLeague(ILeague league);
+        void RemoveLeague(FavoriteLeague league);
+
+        IList<FavoriteLeague> GetLeagues();
+
+        bool IsFavoriteLeague(string leagueId);
     }
 }

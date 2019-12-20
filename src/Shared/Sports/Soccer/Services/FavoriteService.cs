@@ -7,42 +7,41 @@ using LiveScore.Core.Services;
 
 namespace LiveScore.Soccer.Services
 {
-    public class FavouriteService : IFavouriteService
+    public class FavoriteService : IFavoriteService
     {
         private readonly string MatchKey = "Matches";
         private readonly string LeagueKey = "Leagues";
 
         private readonly IUserSettingService userSettingService;
-        
 
-        public FavouriteService(IUserSettingService userSettingService)
+        public IList<IMatch> Matches;
+        public IList<FavoriteLeague> Leagues;
+
+        public FavoriteService(IUserSettingService userSettingService)
         {
             this.userSettingService = userSettingService;
 
             Init();
         }
-
-        public IList<IMatch> Matches { get; private set; }
-        
-        public IList<ILeague> Leagues { get; private set; }
+       
 
         public void Init()
         {
-            Matches = GetMatches();
-            Leagues = GetLeagues();
+            Matches = LoadMatchesFromSetting();
+            Leagues = LoadLeaguesFromSetting();
         }
 
-        public void AddLeague(ILeague league)
+        public void AddLeague(FavoriteLeague league)
         {
             if (!Leagues.Any(m => m.Id == league.Id))
             {
-                Leagues.Append(league);
+                Leagues.Add(league);
             }
 
             userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
         }
 
-        public void RemoveLeague(ILeague league)
+        public void RemoveLeague(FavoriteLeague league)
         {
             if (Leagues.Any(m => m.Id == league.Id))
             {
@@ -52,11 +51,15 @@ namespace LiveScore.Soccer.Services
             userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
         }
 
+        public IList<FavoriteLeague> GetLeagues() => Leagues;
+
+        public bool IsFavoriteLeague(string leagueId) => Leagues.Any(league => league.Id == leagueId);
+
         public void AddMatch(IMatch match)
         {
             if (!Matches.Any(m => m.Id == match.Id))
             {
-                Matches.Append(match);
+                Matches.Add(match);
             }
 
             userSettingService.AddOrUpdateValue(MatchKey, Matches);
@@ -72,10 +75,12 @@ namespace LiveScore.Soccer.Services
             userSettingService.AddOrUpdateValue(MatchKey, Matches);
         }
 
-        private IList<ILeague> GetLeagues()
-            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<ILeague>()).ToList();
+        private IList<FavoriteLeague> LoadLeaguesFromSetting()
+            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<FavoriteLeague>()).ToList();
 
-        private IList<IMatch> GetMatches()
+        private IList<IMatch> LoadMatchesFromSetting()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
+
+        
     }
 }
