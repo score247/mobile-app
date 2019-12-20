@@ -22,7 +22,7 @@
                 <TapGestureRecognizer Command="{Binding LeagueTapped}" />
             </StackLayout.GestureRecognizers>
             <StackLayout>
-                <Grid Style="{StaticResource LeagueBox}">
+                <Grid Style="{StaticResource LeagueBox}" Padding="16,0,0,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
                     </Grid.RowDefinitions>
