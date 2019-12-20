@@ -2,17 +2,17 @@
 {
     public class FavoriteLeague
     {
-        public FavoriteLeague(string id, string groupName, string countryCode)
+        public FavoriteLeague(string id, string name, string countryFlag)
         {
             Id = id;
-            GroupName = groupName;
-            CountryCode = countryCode;
+            Name = name;
+            CountryFlag = countryFlag;
         }
 
         public string Id { get; }
 
-        public string GroupName { get; }
+        public string Name { get; }
 
-        public string CountryCode { get; }
+        public string CountryFlag { get; }
     }
 }

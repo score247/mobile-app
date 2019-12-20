@@ -23,6 +23,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private string LeagueId;
         private string LeagueGroupName;
+        private string CountryFlag;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -59,17 +60,17 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
             LeagueId = parameters["LeagueId"]?.ToString();
             LeagueGroupName = parameters["LeagueGroupName"]?.ToString();
+            CountryFlag = parameters["CountryFlag"]?.ToString();
 
             IsFavorite = favoriteService.IsFavoriteLeague(LeagueId);
 
             var leagueSeasonId = parameters["LeagueSeasonId"]?.ToString();
-            var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();            
-            var countryFlag = parameters["CountryFlag"]?.ToString();
+            var leagueRoundGroup = parameters["LeagueRoundGroup"]?.ToString();
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
             LeagueDetailItemSources = new List<ViewModelBase> {
-                new TableViewModel(LeagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, LeagueGroupName, countryFlag, homeId, awayId, false),
+                new TableViewModel(LeagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, LeagueGroupName, CountryFlag, homeId, awayId, false),
                 new FixturesViewModel(LeagueId, LeagueGroupName, NavigationService, DependencyResolver, EventAggregator)
             };
         }
@@ -128,14 +129,13 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private void OnFavorite()
         {
-            //TODO add CountryCode
             if (IsFavorite)
             {
-                favoriteService.RemoveLeague(new FavoriteLeague(LeagueId, LeagueGroupName, string.Empty));
+                favoriteService.RemoveLeague(new FavoriteLeague(LeagueId, LeagueGroupName, CountryFlag));
             }
             else
             {
-                favoriteService.AddLeague(new FavoriteLeague(LeagueId, LeagueGroupName, string.Empty));
+                favoriteService.AddLeague(new FavoriteLeague(LeagueId, LeagueGroupName, CountryFlag));
             }
 
             IsFavorite = !IsFavorite;

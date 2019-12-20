@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using System.Windows.Input;
     using Rg.Plugins.Popup.Extensions;
     using Xamarin.Forms;
     using Xamarin.Forms.Xaml;
@@ -32,6 +33,33 @@
         {
             get => (string)GetValue(CurrentSportProperty);
             set => SetValue(CurrentSportProperty, value);
+        }
+
+        public static readonly BindableProperty VisibleFavoriteProperty
+            = BindableProperty.Create("VisibleFavorite", typeof(bool), typeof(NavigationTitleTemplate));
+
+        public bool VisibleFavorite
+        {
+            get => (bool)GetValue(VisibleFavoriteProperty);
+            set => SetValue(VisibleFavoriteProperty, value);
+        }
+
+        public static readonly BindableProperty IsFavoriteProperty
+            = BindableProperty.Create("IsFavorite", typeof(bool), typeof(NavigationTitleTemplate));
+
+        public string IsFavorite
+        {
+            get => (string)GetValue(IsFavoriteProperty);
+            set => SetValue(IsFavoriteProperty, value);
+        }
+
+        public static readonly BindableProperty FavoriteCommandProperty
+            = BindableProperty.Create("FavoriteCommand", typeof(ICommand), typeof(NavigationTitleTemplate));
+
+        public ICommand FavoriteCommand
+        {
+            get => (ICommand)GetValue(FavoriteCommandProperty);
+            set => SetValue(FavoriteCommandProperty, value);
         }
 
         private async void OnSportSelectionClosed(object sender, EventArgs eventArgs)

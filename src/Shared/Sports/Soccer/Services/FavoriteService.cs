@@ -43,9 +43,10 @@ namespace LiveScore.Soccer.Services
 
         public void RemoveLeague(FavoriteLeague league)
         {
-            if (Leagues.Any(m => m.Id == league.Id))
+            var favoriteLeague = Leagues.FirstOrDefault(l => l.Id == league.Id);
+            if (favoriteLeague != null)
             {
-                Leagues.Remove(league);
+                Leagues.Remove(favoriteLeague);
             }
 
             userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
