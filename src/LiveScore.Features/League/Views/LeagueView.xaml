@@ -32,23 +32,23 @@
                     </Grid>
                 </Frame>
             </Grid>
-            <customListView:CustomListView
-                                   AutomationProperties.IsInAccessibleTree="False"
-                                   HasUnevenRows="true"
-                                   IsPullToRefreshEnabled="false"
-                                   HorizontalScrollBarVisibility="Never"
-                                   VerticalScrollBarVisibility="Never"
-                                   GroupDisplayBinding="{Binding Key}"
-                                   GroupHeaderTemplate="{StaticResource LeaguesGroupTemplate}"
-                                   IsGroupingEnabled="True"
-                                   ItemTemplate="{StaticResource LeagueItemSelector}"
-                                   ItemsSource="{Binding LeagueGroups}"
-                                   RefreshControlColor="White"
-                                   SelectionMode="None"
-                                   SeparatorVisibility="None"
-                                   Style="{StaticResource ListViewHasBackground}"
-                                   VerticalOptions="FillAndExpand">
-            </customListView:CustomListView>
+            <ListView
+                    AutomationProperties.IsInAccessibleTree="False"
+                    HasUnevenRows="true"
+                    IsPullToRefreshEnabled="false"
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Never"
+                    GroupDisplayBinding="{Binding Key}"
+                    GroupHeaderTemplate="{StaticResource LeaguesGroupTemplate}"
+                    IsGroupingEnabled="True"
+                    ItemTemplate="{StaticResource LeagueItemSelector}"
+                    ItemsSource="{Binding LeagueGroups}"
+                    RefreshControlColor="White"
+                    SelectionMode="None"
+                    SeparatorVisibility="None"
+                    Style="{StaticResource ListViewHasBackground}"
+                    VerticalOptions="FillAndExpand">
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

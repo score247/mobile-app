@@ -19,6 +19,9 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </StackLayout.Resources>
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding LeagueTapped}" />
+            </StackLayout.GestureRecognizers>
             <StackLayout>
                 <Grid Style="{StaticResource LeagueBox}">
                     <Grid.RowDefinitions>
@@ -47,7 +50,6 @@
                 </Grid>
                 <BoxView Style="{StaticResource HorizontalLine}" />
             </StackLayout>
-            
         </StackLayout>
     </ViewCell>
 </DataTemplate>

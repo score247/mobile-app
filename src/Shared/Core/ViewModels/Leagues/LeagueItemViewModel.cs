@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading.Tasks;
+using LiveScore.Common.Extensions;
 using LiveScore.Core.Models.Leagues;
 using Prism.Navigation;
 
@@ -17,6 +19,7 @@ namespace LiveScore.Core.ViewModels.Leagues
             League = league;
             LeagueFlag = buildFlagFunction(league.CountryCode);
             IsShowFlag = isShowFlag;
+            LeagueTapped = new DelegateAsyncCommand(OnTapLeagueAsync);
         }
 
         public ILeague League { get; }
@@ -24,5 +27,23 @@ namespace LiveScore.Core.ViewModels.Leagues
         public bool IsShowFlag { get; }
 
         public string LeagueFlag { get; }
+        public DelegateAsyncCommand LeagueTapped { get; protected set; }
+
+        private async Task OnTapLeagueAsync()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "League", League }
+            };
+
+            var navigated = await NavigationService
+                .NavigateAsync("LeagueGroupView" + CurrentSportId, parameters)
+                .ConfigureAwait(false);
+
+            if (!navigated.Success)
+            {
+                await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
+            }
+        }
     }
 }

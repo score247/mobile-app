@@ -147,6 +147,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
             containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeaguesViewModel>(nameof(RegionLeaguesView) + SportType.Soccer.Value);
+            containerRegistry.RegisterForNavigation<LeagueGroupView, LeagueGroupViewModel>(nameof(LeagueGroupView) + SportType.Soccer.Value);
 
             return containerRegistry;
         }

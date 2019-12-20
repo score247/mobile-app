@@ -24,6 +24,14 @@ namespace LiveScore.Core.ViewModels.Leagues
             RegionLeagueTapped = new DelegateAsyncCommand(OnTapRegionAsync);
         }
 
+        public IEnumerable<ILeague> RegionLeagues { get; }
+
+        public LeagueCategory Region { get; }
+
+        public string RegionFlag { get; }
+
+        public DelegateAsyncCommand RegionLeagueTapped { get; protected set; }
+
         private async Task OnTapRegionAsync()
         {
             var parameters = new NavigationParameters
@@ -41,11 +49,5 @@ namespace LiveScore.Core.ViewModels.Leagues
                 await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
         }
-
-        public IEnumerable<ILeague> RegionLeagues { get; }
-
-        public LeagueCategory Region { get; }
-        public string RegionFlag { get; }
-        public DelegateAsyncCommand RegionLeagueTapped { get; protected set; }
     }
 }
