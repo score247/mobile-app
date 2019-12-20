@@ -21,6 +21,14 @@
         <Setter Property="Text" Value="&#xe902;" />
         <Setter Property="TextColor" Value="{StaticResource PrimaryAccentColor}" />
     </Style>
+    <!-- Header with favorite -->
+    <Style x:Key="SportNameWithFavorite" BasedOn="{StaticResource SportName}" TargetType="Label">
+        <Setter Property="Margin" Value="0,0,38,0" />
+    </Style>
+    <Style x:Key="SportWithFavoriteDropdownIcon" BasedOn="{StaticResource SportDropdownIcon}" TargetType="Label">
+        <Setter Property="Margin" Value="36,0,0,0" />
+    </Style>
+    
     <Style x:Key="SportsIcon" BasedOn="{StaticResource Icons}" TargetType="Label">
         <Setter Property="HorizontalTextAlignment" Value="Center" />
         <Setter Property="HorizontalTextAlignment" Value="Center" />
