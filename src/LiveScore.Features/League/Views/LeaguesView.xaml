@@ -30,6 +30,10 @@
                     </Grid>
                 </Frame>
             </Grid>
+            <ActivityIndicator Margin="0, 40, 0, 0"
+                               IsRunning="{Binding IsBusy}"
+                               IsVisible="{Binding IsBusy}"
+                               Style="{StaticResource CenterActivityIndicator}" />
             <ListView AutomationProperties.IsInAccessibleTree="False"
                       HasUnevenRows="True"
                       IsPullToRefreshEnabled="True"
@@ -45,6 +49,7 @@
                       SelectionMode="None"
                       SeparatorVisibility="None"
                       SeparatorColor="Transparent"
+                      IsVisible="{Binding IsNotBusy}"
                       CachingStrategy="RecycleElementAndDataTemplate"
                       Style="{StaticResource ListViewHasBackground}"
                       VerticalOptions="FillAndExpand">

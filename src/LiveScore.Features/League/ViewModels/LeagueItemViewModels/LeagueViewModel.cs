@@ -22,7 +22,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
         {
             BuildFlagFunction = buildFlagFunction;
             LeagueId = league?.Id;
-            LeagueName = league?.Name;
+            LeagueName = league?.Name.ToUpperInvariant();
             CountryCode = countryCode;
             LeagueFlag = buildFlagFunction(countryCode);
             IsShowFlag = isShowFlag;
