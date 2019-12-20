@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using LiveScore.Core.Controls.CustomListView;
+﻿using LiveScore.Core.Controls.CustomListView;
 using LiveScore.iOS.Renderers;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -14,9 +13,10 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            var listView = Element as CustomListView;
-
-            listView.ScrollToTopEvent += ListView_ScrollToTop;
+            if (Element is CustomListView listView)
+            {
+                listView.ScrollToTopEvent += ListView_ScrollToTop;
+            }
         }
 
         private void ListView_ScrollToTop(object sender, System.EventArgs e)

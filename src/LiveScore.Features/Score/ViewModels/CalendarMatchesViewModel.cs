@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Controls.Calendar;
@@ -66,6 +65,7 @@ namespace LiveScore.Features.Score.ViewModels
         {
             HasData = true;
             ViewDate = calendarDate.Date;
+            MatchItemsSource?.Clear();
 
             await LoadDataAsync(LoadMatchesAsync);
         }
@@ -76,7 +76,7 @@ namespace LiveScore.Features.Score.ViewModels
 
             if (!firstLoad)
             {
-                Task.Delay(600).ContinueWith(_ =>
+                Task.Delay(500).ContinueWith(_ =>
                    Device.BeginInvokeOnMainThread(() =>
                        ScrollToCommand?.Execute(MatchItemsSource.FirstOrDefault())
                    ));
