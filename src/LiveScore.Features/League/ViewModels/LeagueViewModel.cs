@@ -16,21 +16,20 @@ namespace LiveScore.Features.League.ViewModels
 {
     public class LeagueViewModel : ViewModelBase
     {
+        private readonly ILeagueService leagueService;
+        private readonly Func<string, string> buildFlagFunction;
+
         public LeagueViewModel(
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
             ILeagueService leagueService)
                 : base(navigationService, serviceLocator)
         {
-            Title = "League";
             this.leagueService = leagueService;
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             LeagueGroups = new ObservableCollection<IGrouping<string, ViewModelBase>>();
         }
 
-        private readonly ILeagueService leagueService;
-
-        private readonly Func<string, string> buildFlagFunction;
         public ObservableCollection<IGrouping<string, ViewModelBase>> LeagueGroups { get; set; }
 
         public override async void OnAppearing()
