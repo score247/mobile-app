@@ -420,4 +420,7 @@
   <data name="International" xml:space="preserve">
     <value>International</value>
   </data>
+  <data name="FindLeagues" xml:space="preserve">
+    <value>Find leagues</value>
+  </data>
 </root>

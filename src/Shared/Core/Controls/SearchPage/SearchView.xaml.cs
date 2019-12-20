@@ -13,7 +13,7 @@
 
         protected override void OnAppearing()
         {
-            searchTextBox.Focus();
+            SearchBarControl.OnAppearing();
         }
     }
 }

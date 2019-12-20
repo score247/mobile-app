@@ -59,6 +59,8 @@ namespace LiveScore.Features.Score.ViewModels
             {
                 SelectedScoreItem?.OnResumeWhenNetworkOK();
             }
+
+            GetLiveMatchesCount();
         }
 
         public override Task OnNetworkReconnectedAsync() => SelectedScoreItem?.OnNetworkReconnectedAsync();
@@ -104,16 +106,21 @@ namespace LiveScore.Features.Score.ViewModels
             }
             else
             {
-                Task.Run(async () =>
-                {
-                    var liveMatchCount = await matchService.GetLiveMatchesCountAsync();
-
-                    Device.BeginInvokeOnMainThread(()
-                        => ScoreItemSources[LiveDateBarItemIndex].HasData = liveMatchCount > 0);
-                });
+                GetLiveMatchesCount();
             }
 
             secondLoad = true;
+        }
+
+        private void GetLiveMatchesCount()
+        {
+            Task.Run(async () =>
+            {
+                var liveMatchCount = await matchService.GetLiveMatchesCountAsync();
+
+                Device.BeginInvokeOnMainThread(()
+                    => ScoreItemSources[LiveDateBarItemIndex].HasData = liveMatchCount > 0);
+            });
         }
 
         private void OnScoreItemDisappearing(ItemDisappearingEventArgs args)

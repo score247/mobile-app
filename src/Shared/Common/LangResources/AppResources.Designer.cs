@@ -331,6 +331,15 @@ namespace LiveScore.Common.LangResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Find leagues.
+        /// </summary>
+        public static string FindLeagues {
+            get {
+                return ResourceManager.GetString("FindLeagues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fixtures.
         /// </summary>
         public static string Fixtures {

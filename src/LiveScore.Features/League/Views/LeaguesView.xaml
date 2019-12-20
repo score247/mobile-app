@@ -7,6 +7,8 @@
              xmlns:selectors="clr-namespace:LiveScore.Features.League.Views.Templates.Selectors;assembly=LiveScore.Features"
              xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates;assembly=LiveScore.Features"
              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Forms"
+             xmlns:searchPage="clr-namespace:LiveScore.Core.Controls.SearchPage;assembly=LiveScore.Core"
+             xmlns:langResources="clr-namespace:LiveScore.Common.LangResources;assembly=LiveScore.Common"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:DataType="viewModel:LeaguesViewModel"
              BackgroundColor="{StaticResource PrimaryColor}">
@@ -21,15 +23,8 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Grid Style="{StaticResource Searchbar}">
-                <Frame Style="{StaticResource SearchBoxBorder}">
-                    <Grid>
-                        <Entry Placeholder="Find league"
-                               Style="{StaticResource SearchBox}" />
-                        <Label Style="{StaticResource SearchIcon}" />
-                    </Grid>
-                </Frame>
-            </Grid>
+            <searchPage:SearchBarTemplate PlaceHolderText="{langResources:Translate FindLeagues}"
+                                          SearchCommand="{Binding SearchCommand}" />
             <ActivityIndicator Margin="0, 40, 0, 0"
                                IsRunning="{Binding IsBusy}"
                                IsVisible="{Binding IsBusy}"
