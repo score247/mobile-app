@@ -41,7 +41,7 @@
 
         private async void ShowSportSelection(object sender, EventArgs args)
         {
-            var selectionPage = new SelectSportView();
+            var selectionPage = new SelectSportPopupView();
             selectionPage.CallbackEvent += OnSportSelectionClosed;
             await Task.WhenAll(new Task[] { arrowDownSelection.RotateTo(180, 100, Easing.SinOut), Navigation.PushPopupAsync(selectionPage) });
         }

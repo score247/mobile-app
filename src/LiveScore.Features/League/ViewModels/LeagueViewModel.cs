@@ -22,8 +22,7 @@ namespace LiveScore.Features.League.ViewModels
         public LeagueViewModel(
             INavigationService navigationService,
             IDependencyResolver serviceLocator,
-            ILeagueService leagueService)
-                : base(navigationService, serviceLocator)
+            ILeagueService leagueService) : base(navigationService, serviceLocator)
         {
             this.leagueService = leagueService;
             buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);

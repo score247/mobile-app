@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <DataTemplate xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-             mc:Ignorable="d"
-             x:Class="LiveScore.Core.Views.Templates.Leagues.LeaguesGroupTemplate">
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
+              mc:Ignorable="d"
+              x:Class="LiveScore.Core.Views.Templates.Leagues.LeaguesGroupTemplate">
     <ViewCell>
-        <StackLayout Style="{StaticResource LeagueGroupBox}">
+        <StackLayout Style="{ StaticResource LeagueGroupBox }">
             <StackLayout.Resources>
                 <resources:LeagueHeaderViewResource />
             </StackLayout.Resources>
             <Label LineBreakMode="TailTruncation"
-                       Style="{StaticResource LeagueGroupName}"
-                       Text="{ Binding Key}" />
-            <BoxView VerticalOptions="End" Style="{StaticResource HorizontalLine}" />
+                   Style="{ StaticResource LeagueGroupName }"
+                   Text="{ Binding Key}" />
+            <BoxView VerticalOptions="End"
+                     Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>
 </DataTemplate>

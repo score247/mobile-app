@@ -6,9 +6,9 @@
     using Xamarin.Forms.Xaml;
 
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SelectSportView : PopupPage
+    public partial class SelectSportPopupView : PopupPage
     {
-        public SelectSportView()
+        public SelectSportPopupView()
         {
             InitializeComponent();
 

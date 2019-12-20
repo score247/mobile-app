@@ -6,7 +6,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  mc:Ignorable="d"
                  xmlns:resources="clr-namespace:LiveScore.Core.ViewResources"
-                 x:Class="LiveScore.Core.Views.NetworkConnectionError">
+                 x:Class="LiveScore.Core.Views.NetworkConnectionErrorPopupView">
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

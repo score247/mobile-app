@@ -41,7 +41,7 @@ namespace LiveScore.Core.ViewModels.Leagues
             };
 
             var navigated = await NavigationService
-                .NavigateAsync("RegionLeaguesView" + CurrentSportId, parameters)
+                .NavigateAsync("RegionLeaguesView", parameters)
                 .ConfigureAwait(false);
 
             if (!navigated.Success)

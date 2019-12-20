@@ -37,7 +37,7 @@ namespace LiveScore.Core.ViewModels.Leagues
             };
 
             var navigated = await NavigationService
-                .NavigateAsync("LeagueGroupView" + CurrentSportId, parameters)
+                .NavigateAsync("LeagueGroupView", parameters)
                 .ConfigureAwait(false);
 
             if (!navigated.Success)

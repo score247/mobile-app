@@ -31,7 +31,7 @@ namespace LiveScore.ViewModels
             {
                 if (!isConnected)
                 {
-                    PopupNavigation.Instance.PushAsync(new NetworkConnectionError());
+                    PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView());
                 }
                 else
                 {
@@ -48,7 +48,7 @@ namespace LiveScore.ViewModels
         }
 
         private static void OnConnectionTimeout()
-            => PopupNavigation.Instance.PushAsync(new NetworkConnectionError(AppResources.ConnectionTimeoutMessage));
+            => PopupNavigation.Instance.PushAsync(new NetworkConnectionErrorPopupView(AppResources.ConnectionTimeoutMessage));
 
         public override void Destroy()
         {

@@ -147,10 +147,7 @@ namespace LiveScore.Configurations
             containerRegistry.RegisterForNavigation<SearchNavigationPage>();
             containerRegistry.RegisterForNavigation<MenuTabbedView, MenuTabbedViewModel>();
             containerRegistry.RegisterForNavigation<MainView, MainViewModel>();
-            containerRegistry.RegisterForNavigation<SelectSportView, SelectSportViewModel>();
             containerRegistry.RegisterForNavigation<SearchView, SearchViewModel>();
-            containerRegistry.RegisterForNavigation<RegionLeaguesView, RegionLeaguesViewModel>(nameof(RegionLeaguesView) + SportType.Soccer.Value);
-            containerRegistry.RegisterForNavigation<LeagueGroupView, LeagueGroupViewModel>(nameof(LeagueGroupView) + SportType.Soccer.Value);
 
             return containerRegistry;
         }
@@ -166,7 +163,6 @@ namespace LiveScore.Configurations
             moduleCatalog.AddModule<LeagueModule>();
             moduleCatalog.AddModule<FavoritesModule>();
             moduleCatalog.AddModule<NewsModule>(InitializationMode.OnDemand);
-            moduleCatalog.AddModule<TVScheduleModule>(InitializationMode.OnDemand);
             moduleCatalog.AddModule<MenuModule>();
 
             return moduleCatalog;
@@ -190,11 +186,6 @@ namespace LiveScore.Configurations
             {
                 throw new InvalidOperationException($"Module {nameof(SoccerModule)} doest not exist");
             }
-        }
-
-        public static void RegisterCustomViewModels()
-        {
-            ViewModelLocationProvider.Register<NoFlagLeagueItemTemplate, LeagueItemViewModel>();
         }
 
         private static void SetupServicePointManager()

@@ -9,11 +9,11 @@ using Xamarin.Forms.Xaml;
 namespace LiveScore.Core.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class NetworkConnectionError : PopupPage
+    public partial class NetworkConnectionErrorPopupView : PopupPage
     {
         private const byte timeoutSeconds = 5;
 
-        public NetworkConnectionError(string message = null)
+        public NetworkConnectionErrorPopupView(string message = null)
         {
             ErrorMessage = message ?? AppResources.ConnectionLostMessage;
             InitializeComponent();

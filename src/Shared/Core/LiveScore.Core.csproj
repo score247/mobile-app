@@ -53,6 +53,7 @@
         </Folder>
         <Folder Include="PubSubEvents\Odds\" />
         <Folder Include="Controls\CircleProgressBar\" />
+        <Folder Include="Views\Selectors\" />
     </ItemGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Shared\Common\LiveScore.Common.csproj" />
@@ -82,13 +83,16 @@
       <Compile Update="ViewResources\NetworkConnectionErrorViewResource.xaml.cs">
         <DependentUpon>NetworkConnectionErrorViewResource.xaml</DependentUpon>
       </Compile>
+      <Compile Update="Views\NetworkConnectionErrorPopupView.xaml.cs">
+        <DependentUpon>NetworkConnectionErrorPopupView.xaml</DependentUpon>
+      </Compile>
       <Compile Update="Views\Templates\Leagues\RegionGroupTemplate.xaml.cs">
         <DependentUpon>RegionGroupTemplate.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Views\Templates\MatchGroupTemplate.xaml.cs">
+      <Compile Update="Views\Templates\Matches\MatchGroupTemplate.xaml.cs">
         <DependentUpon>MatchGroupTemplate.xaml</DependentUpon>
       </Compile>
-      <Compile Update="Views\Templates\MatchSkeletonTemplate.xaml.cs">
+      <Compile Update="Views\Templates\Matches\MatchSkeletonTemplate.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
       </Compile>
     </ItemGroup>
@@ -102,7 +106,7 @@
       <EmbeddedResource Update="ViewResources\LeagueHeaderViewResource.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Views\NetworkConnectionError.xaml">
+      <EmbeddedResource Update="Views\NetworkConnectionErrorPopupView.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
       <EmbeddedResource Update="Views\Templates\EmptyDataTemplate.xaml">
@@ -120,7 +124,7 @@
       <EmbeddedResource Update="Views\Templates\Leagues\RegionGroupTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
-      <EmbeddedResource Update="Views\Templates\MatchesTemplate.xaml">
+      <EmbeddedResource Update="Views\Templates\Matches\MatchesTemplate.xaml">
         <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       </EmbeddedResource>
     </ItemGroup>

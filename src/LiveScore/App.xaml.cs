@@ -85,8 +85,6 @@ namespace LiveScore
 
                 return Type.GetType(viewModelName);
             });
-
-            Registration.RegisterCustomViewModels();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
