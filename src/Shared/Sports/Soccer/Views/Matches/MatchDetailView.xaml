@@ -14,6 +14,12 @@
         <coreTemplates:NavigationTitleTemplate Title="{Binding Title}"
                                                CurrentSport="{Binding CurrentSportName}" />
     </NavigationPage.TitleView>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="images/common/icon_transparent.png"
+                     Priority="1"
+                     Text="Transparent Icon" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
