@@ -26,7 +26,7 @@
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
                             <StackLayout>
                                 <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoData}"
+                                       Text="{langResources:Translate NoFavoriteMatches}"
                                        IsVisible="{Binding NoData}" />
                             </StackLayout>
                         </DataTemplate>

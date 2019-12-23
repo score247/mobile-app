@@ -424,6 +424,11 @@
     <value>Find leagues</value>
   </data>
   <data name="NoFavoriteLeagues" xml:space="preserve">
-    <value>There are no leagues in Favorites. To add a favorite league, open the league detail page and tap the star icon at the top right corner.</value>
-  </data>    
+    <value>There are no leagues in Favorites.
+To add a favorite league, open the league detail page and tap the star icon at the top right corner.</value>
+  </data>
+  <data name="NoFavoriteMatches" xml:space="preserve">
+    <value>There are no matches in Favorites.
+To add a favorite match, tap the star right next to it.</value>
+  </data>
 </root>
