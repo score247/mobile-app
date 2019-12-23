@@ -1056,14 +1056,12 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Leagues
             {
                 { "StartDate", 0},
                 { "EndDate", 1},
-                { "Year", 2},
             };
 
             this.____stringByteKeys = new byte[][]
             {
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("StartDate"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("EndDate"),
-                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Year"),
                 
             };
         }
@@ -1077,13 +1075,11 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Leagues
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 3);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 2);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.StartDate, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
             offset += formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Serialize(ref bytes, offset, value.EndDate, formatterResolver);
-            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
-            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Year, formatterResolver);
             return offset - startOffset;
         }
 
@@ -1101,7 +1097,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Leagues
 
             var __StartDate__ = default(global::System.DateTimeOffset);
             var __EndDate__ = default(global::System.DateTimeOffset);
-            var __Year__ = default(string);
 
             for (int i = 0; i < length; i++)
             {
@@ -1122,9 +1117,6 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Leagues
                     case 1:
                         __EndDate__ = formatterResolver.GetFormatterWithVerify<global::System.DateTimeOffset>().Deserialize(bytes, offset, formatterResolver, out readSize);
                         break;
-                    case 2:
-                        __Year__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
-                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -1136,7 +1128,7 @@ namespace MessagePack.Formatters.LiveScore.Core.Models.Leagues
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Core.Models.Leagues.LeagueSeasonDates(__StartDate__, __EndDate__, __Year__);
+            var ____result = new global::LiveScore.Core.Models.Leagues.LeagueSeasonDates(__StartDate__, __EndDate__);
             return ____result;
         }
     }
