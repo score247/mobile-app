@@ -61,6 +61,7 @@ namespace LiveScore.Core.ViewModels
                 { "LeagueId", LeagueId },
                 { "LeagueSeasonId", Match.LeagueSeasonId },
                 { "LeagueRoundGroup", Match.LeagueRoundGroup },
+                { "LeagueOrder", Match.LeagueOrder },
                 { "LeagueGroupName", LeagueGroupName },
                 { "CountryFlag", CountryFlag },
                 { "HomeId", Match.HomeTeamId },

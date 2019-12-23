@@ -59,6 +59,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var leagueId = parameters["LeagueId"]?.ToString();
             var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
             var countryFlag = parameters["CountryFlag"]?.ToString();
+            var order = (int)parameters["LeagueOrder"];
 
             IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
 
@@ -67,7 +68,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
-            favoriteLeague = new FavoriteLeague(leagueId, leagueGroupName, countryFlag, leagueSeasonId, leagueRoundGroup);
+            favoriteLeague = new FavoriteLeague(leagueId, leagueGroupName, countryFlag, leagueSeasonId, leagueRoundGroup, order);
 
             LeagueDetailItemSources = new List<ViewModelBase> {
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),

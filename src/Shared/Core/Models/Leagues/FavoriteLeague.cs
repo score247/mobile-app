@@ -2,13 +2,14 @@
 {
     public class FavoriteLeague
     {
-        public FavoriteLeague(string id, string leagueGroupName, string countryFlag, string leagueSeasonId, string leagueRoundGroup)
+        public FavoriteLeague(string id, string leagueGroupName, string countryFlag, string leagueSeasonId, string leagueRoundGroup, int order)
         {
             Id = id;
             LeagueGroupName = leagueGroupName;
             CountryFlag = countryFlag;
             LeagueSeasonId = leagueSeasonId;
             LeagueRoundGroup = leagueRoundGroup;
+            Order = order;
         }
 
         public string Id { get; }
@@ -20,5 +21,7 @@
         public string LeagueSeasonId { get; }
 
         public string LeagueRoundGroup { get; }
+
+        public int Order { get; }
     }
 }

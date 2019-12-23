@@ -46,7 +46,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             Debug.WriteLine($"FavoriteLeaguesViewModel OnAppearing");
 
-            FavoriteLeagues = new ObservableCollection<FavoriteLeague>(favoriteService.GetLeagues());
+            FavoriteLeagues = new ObservableCollection<FavoriteLeague>(favoriteService.GetLeagues().OrderBy(league => league.Order));
 
             HasData = FavoriteLeagues.Any();
 
