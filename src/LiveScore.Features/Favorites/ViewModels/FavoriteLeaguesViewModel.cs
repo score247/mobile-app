@@ -9,12 +9,15 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
+using LiveScore.Core.Views;
 using Prism.Navigation;
+using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Features.Favorites.ViewModels
 {
     public class FavoriteLeaguesViewModel : TabItemViewModel
     {
+        private static string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService favoriteService;
 
         public FavoriteLeaguesViewModel(
@@ -24,6 +27,10 @@ namespace LiveScore.Features.Favorites.ViewModels
             : base(navigationService, dependencyResolver, null, null, AppResources.Leagues)
         {
             this.favoriteService = favoriteService;
+            this.favoriteService.OnAddedFunc = OnAddedFavorite;
+            this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
+            this.favoriteService.OnReachedLimit = OnReachedLimitation;
+
             TapLeagueCommand = new DelegateAsyncCommand<FavoriteLeague>(OnTapLeagueAsync);
         }
 
@@ -62,5 +69,14 @@ namespace LiveScore.Features.Favorites.ViewModels
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
         }
+
+        private static Task OnAddedFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
+
+        private static Task OnRemovedFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
+
+        private static Task OnReachedLimitation()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(LeagueLimitationMessage));
     }
 }

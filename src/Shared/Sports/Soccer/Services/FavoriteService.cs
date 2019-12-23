@@ -1,13 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
-using LiveScore.Core.Views;
-using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Soccer.Services
 {
@@ -19,9 +17,6 @@ namespace LiveScore.Soccer.Services
         private const int LeagueLimitation = 30;
         private const int MatchLimitation = 99;
 
-        private readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, LeagueLimitation);
-        private readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, MatchLimitation);
-
         private readonly IUserSettingService userSettingService;
 
         private IList<IMatch> Matches;
@@ -31,8 +26,14 @@ namespace LiveScore.Soccer.Services
         {
             this.userSettingService = userSettingService;
 
-            Init();
-        }       
+            Init();            
+        }
+
+        public Func<Task> OnAddedFunc { get; set; }
+
+        public Func<Task> OnRemovedFunc { get; set; }
+
+        public Func<Task> OnReachedLimit { get; set; }
 
         public void Init()
         {
@@ -44,7 +45,7 @@ namespace LiveScore.Soccer.Services
         {
             if (Leagues.Count() >= LeagueLimitation)
             {
-                OnReachedLimitation(LeagueLimitationMessage);
+                OnReachedLimit?.Invoke();
             }
 
             if (!Leagues.Any(m => m.Id == league.Id))
@@ -54,7 +55,7 @@ namespace LiveScore.Soccer.Services
             
             Task.Run(() => userSettingService.AddOrUpdateValue(LeagueKey, Leagues)).ConfigureAwait(false);
 
-            OnAddedFavorite();
+            OnAddedFunc?.Invoke();
         }
 
         public void RemoveLeague(FavoriteLeague league)
@@ -67,9 +68,7 @@ namespace LiveScore.Soccer.Services
             
             Task.Run(() => userSettingService.AddOrUpdateValue(LeagueKey, Leagues)).ConfigureAwait(false);
 
-            userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
-
-            OnRemovedFavorite();
+            OnRemovedFunc?.Invoke();
         }
 
         public IList<FavoriteLeague> GetLeagues() => Leagues;
@@ -90,7 +89,7 @@ namespace LiveScore.Soccer.Services
         {
             if (Matches.Count() >= MatchLimitation)
             {
-                OnReachedLimitation(MatchLimitationMessage);
+                OnReachedLimit?.Invoke();
             }
 
             if (Matches.Any(m => m.Id == match.Id))
@@ -99,6 +98,8 @@ namespace LiveScore.Soccer.Services
             }
 
             Task.Run(() => userSettingService.AddOrUpdateValue(MatchKey, Matches)).ConfigureAwait(false);
+
+            OnRemovedFunc?.Invoke();
         }
 
         private IList<FavoriteLeague> LoadLeaguesFromSetting()
@@ -106,14 +107,5 @@ namespace LiveScore.Soccer.Services
 
         private IList<IMatch> LoadMatchesFromSetting()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
-
-        private static void OnAddedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
-
-        private static void OnRemovedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
-
-        private static void OnReachedLimitation(string message)
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(message));
     }
 }

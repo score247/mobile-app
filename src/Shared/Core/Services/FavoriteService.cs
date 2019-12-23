@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
 
@@ -17,5 +19,11 @@ namespace LiveScore.Core.Services
         IList<FavoriteLeague> GetLeagues();
 
         bool IsFavoriteLeague(string leagueId);
+
+        public Func<Task> OnAddedFunc { get; set; }
+
+        public Func<Task> OnRemovedFunc { get; set; }
+
+        public Func<Task> OnReachedLimit { get; set; }
     }
 }
