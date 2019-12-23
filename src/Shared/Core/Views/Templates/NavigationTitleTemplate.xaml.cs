@@ -15,6 +15,7 @@
             InitializeComponent();
             var navigationTitleTemplate = this;
             sportLabel.BindingContext = navigationTitleTemplate;
+            arrowDownSelection.BindingContext = navigationTitleTemplate;
             favoriteButton.BindingContext = navigationTitleTemplate;
         }
 

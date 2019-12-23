@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -55,7 +54,6 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         private async Task OnTapLeagueAsync(FavoriteLeague league)
         {
-
             var parameters = new NavigationParameters
             {
                 { "LeagueId", league.Id },
