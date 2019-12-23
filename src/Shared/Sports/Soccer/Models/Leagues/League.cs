@@ -7,6 +7,8 @@ namespace LiveScore.Soccer.Models.Leagues
     [MessagePackObject(keyAsPropertyName: true)]
     public class League : ILeague
     {
+#pragma warning disable S107 // Methods should not have too many parameters
+
         public League(
             string id,
             string name,
@@ -14,7 +16,8 @@ namespace LiveScore.Soccer.Models.Leagues
             string categoryId,
             string countryName,
             string countryCode,
-            bool isInternational)
+            bool isInternational,
+            LeagueSeasonDates seasonDates)
         {
             Id = id;
             Name = name;
@@ -23,7 +26,10 @@ namespace LiveScore.Soccer.Models.Leagues
             CountryName = countryName;
             CountryCode = countryCode;
             IsInternational = isInternational;
+            SeasonDates = seasonDates;
         }
+
+#pragma warning restore S107 // Methods should not have too many parameters
 
         public string Id { get; private set; }
 
@@ -38,6 +44,8 @@ namespace LiveScore.Soccer.Models.Leagues
         public string CountryCode { get; private set; }
 
         public bool IsInternational { get; private set; }
+
+        public LeagueSeasonDates SeasonDates { get; private set; }
     }
 
     /// <summary>

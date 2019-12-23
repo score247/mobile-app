@@ -290,6 +290,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                 { "CountryName", 4},
                 { "CountryCode", 5},
                 { "IsInternational", 6},
+                { "SeasonDates", 7},
             };
 
             this.____stringByteKeys = new byte[][]
@@ -301,6 +302,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryName"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("CountryCode"),
                 global::MessagePack.MessagePackBinary.GetEncodedStringBytes("IsInternational"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("SeasonDates"),
                 
             };
         }
@@ -314,7 +316,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             }
             
             var startOffset = offset;
-            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 7);
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 8);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Id, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
@@ -329,6 +331,8 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.CountryCode, formatterResolver);
             offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[6]);
             offset += MessagePackBinary.WriteBoolean(ref bytes, offset, value.IsInternational);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[7]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Leagues.LeagueSeasonDates>().Serialize(ref bytes, offset, value.SeasonDates, formatterResolver);
             return offset - startOffset;
         }
 
@@ -351,6 +355,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
             var __CountryName__ = default(string);
             var __CountryCode__ = default(string);
             var __IsInternational__ = default(bool);
+            var __SeasonDates__ = default(global::LiveScore.Core.Models.Leagues.LeagueSeasonDates);
 
             for (int i = 0; i < length; i++)
             {
@@ -386,6 +391,9 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
                     case 6:
                         __IsInternational__ = MessagePackBinary.ReadBoolean(bytes, offset, out readSize);
                         break;
+                    case 7:
+                        __SeasonDates__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Leagues.LeagueSeasonDates>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
                     default:
                         readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
                         break;
@@ -397,7 +405,7 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
 
             readSize = offset - startOffset;
 
-            var ____result = new global::LiveScore.Soccer.Models.Leagues.League(__Id__, __Name__, __Order__, __CategoryId__, __CountryName__, __CountryCode__, __IsInternational__);
+            var ____result = new global::LiveScore.Soccer.Models.Leagues.League(__Id__, __Name__, __Order__, __CategoryId__, __CountryName__, __CountryCode__, __IsInternational__, __SeasonDates__);
             return ____result;
         }
     }

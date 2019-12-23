@@ -37,6 +37,7 @@ namespace LiveScore.Features.League.ViewModels
         public string LeagueFlag { get; private set; }
 
         public bool IsRefreshing { get; set; }
+
         public DelegateAsyncCommand RefreshCommand { get; protected set; }
 
         public override void Initialize(INavigationParameters parameters)

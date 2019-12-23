@@ -15,5 +15,7 @@
         string CountryCode { get; }
 
         bool IsInternational { get; }
+
+        LeagueSeasonDates SeasonDates { get; }
     }
 }
