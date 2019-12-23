@@ -1,7 +1,9 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core;
@@ -18,6 +20,7 @@ namespace LiveScore.Features.Favorites.ViewModels
     {
         private static string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, 30);
         private readonly IFavoriteService favoriteService;
+        private readonly Func<string, string> buildFlagFunction;
 
         public FavoriteLeaguesViewModel(
             INavigationService navigationService,
@@ -30,14 +33,16 @@ namespace LiveScore.Features.Favorites.ViewModels
             this.favoriteService.OnRemovedFunc = OnRemovedFavorite;
             this.favoriteService.OnReachedLimit = OnReachedLimitation;
 
-            TapLeagueCommand = new DelegateAsyncCommand<FavoriteLeague>(OnTapLeagueAsync);
+            buildFlagFunction = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
+
+            TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
         }
 
-        public ObservableCollection<FavoriteLeague> FavoriteLeagues { get; private set; }
+        public ObservableCollection<LeagueItemViewModel> FavoriteLeagues { get; private set; }
 
         public bool? HasHeader { get; private set; }
 
-        public DelegateAsyncCommand<FavoriteLeague> TapLeagueCommand { get; }
+        public DelegateAsyncCommand<LeagueItemViewModel> TapLeagueCommand { get; }
 
         public override void OnAppearing()
         {
@@ -45,25 +50,31 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             Debug.WriteLine($"FavoriteLeaguesViewModel OnAppearing");
 
-            FavoriteLeagues = new ObservableCollection<FavoriteLeague>(favoriteService.GetLeagues().OrderBy(league => league.Order));
+            FavoriteLeagues = new ObservableCollection<LeagueItemViewModel>(
+                favoriteService.GetLeagues()
+                .OrderBy(league => league.Order)
+                .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
             HasData = FavoriteLeagues.Any();
 
             HasHeader = HasData ? null : (bool?)true;
         }
 
-        private async Task OnTapLeagueAsync(FavoriteLeague league)
+        private async Task OnTapLeagueAsync(LeagueItemViewModel item)
         {
             var parameters = new NavigationParameters
             {
-                { "LeagueId", league.Id },
-                { "LeagueSeasonId", league.LeagueSeasonId },
-                { "LeagueRoundGroup", league.LeagueRoundGroup },
-                { "LeagueGroupName", league.LeagueGroupName },
-                { "CountryFlag", league.CountryFlag }
+                { "LeagueId", item.League.Id },
+                { "LeagueSeasonId", item.League.SeasonId },
+                { "LeagueRoundGroup", item.League.RoundGroup },
+                { "LeagueGroupName", item.League.Name },
+                { "CountryFlag", item.CountryFlag},
+                { "LeagueOrder", item.League.Order },
+                { "CountryCode", item.League.CountryCode },
+                { "IsInternational", item.League.IsInternational }
             };
 
-            await NavigationService
+            var isSuccess = await NavigationService
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
         }

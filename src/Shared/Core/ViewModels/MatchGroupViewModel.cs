@@ -57,16 +57,18 @@ namespace LiveScore.Core.ViewModels
             if (EnableTap)
             {
                 var parameters = new NavigationParameters
-            {
-                { "LeagueId", LeagueId },
-                { "LeagueSeasonId", Match.LeagueSeasonId },
-                { "LeagueRoundGroup", Match.LeagueRoundGroup },
-                { "LeagueOrder", Match.LeagueOrder },
-                { "LeagueGroupName", LeagueGroupName },
-                { "CountryFlag", CountryFlag },
-                { "HomeId", Match.HomeTeamId },
-                { "AwayId", Match.HomeTeamId },
-            };
+                {
+                    { "LeagueId", LeagueId },
+                    { "LeagueSeasonId", Match.LeagueSeasonId },
+                    { "LeagueRoundGroup", Match.LeagueRoundGroup },
+                    { "LeagueOrder", Match.LeagueOrder },
+                    { "LeagueGroupName", LeagueGroupName },
+                    { "CountryFlag", CountryFlag },
+                    { "HomeId", Match.HomeTeamId },
+                    { "AwayId", Match.HomeTeamId },
+                    { "CountryCode", Match.CountryCode },
+                    { "IsInternational", Match.IsInternationalLeague },
+                };
 
                 await navigationService
                     .NavigateAsync("LeagueDetailView" + currentSportId, parameters)

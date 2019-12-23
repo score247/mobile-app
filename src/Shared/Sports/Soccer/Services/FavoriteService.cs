@@ -20,7 +20,7 @@ namespace LiveScore.Soccer.Services
         private readonly IUserSettingService userSettingService;
 
         private IList<IMatch> Matches;
-        private IList<FavoriteLeague> Leagues;
+        private IList<ILeague> Leagues;
 
         public FavoriteService(IUserSettingService userSettingService)
         {
@@ -41,7 +41,7 @@ namespace LiveScore.Soccer.Services
             Leagues = LoadLeaguesFromSetting();
         }
 
-        public void AddLeague(FavoriteLeague league)
+        public void AddLeague(ILeague league)
         {
             if (Leagues.Count() >= LeagueLimitation)
             {
@@ -58,7 +58,7 @@ namespace LiveScore.Soccer.Services
             OnAddedFunc?.Invoke();
         }
 
-        public void RemoveLeague(FavoriteLeague league)
+        public void RemoveLeague(ILeague league)
         {
             var favoriteLeague = Leagues.FirstOrDefault(l => l.Id == league.Id);
             if (favoriteLeague != null)
@@ -71,7 +71,7 @@ namespace LiveScore.Soccer.Services
             OnRemovedFunc?.Invoke();
         }
 
-        public IList<FavoriteLeague> GetLeagues() => Leagues;
+        public IList<ILeague> GetLeagues() => Leagues;
 
         public bool IsFavoriteLeague(string leagueId) => Leagues.Any(league => league.Id == leagueId);
 
@@ -102,8 +102,8 @@ namespace LiveScore.Soccer.Services
             OnRemovedFunc?.Invoke();
         }
 
-        private IList<FavoriteLeague> LoadLeaguesFromSetting()
-            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<FavoriteLeague>()).ToList();
+        private IList<ILeague> LoadLeaguesFromSetting()
+            => userSettingService.GetValueOrDefault(LeagueKey, Enumerable.Empty<ILeague>()).ToList();
 
         private IList<IMatch> LoadMatchesFromSetting()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();

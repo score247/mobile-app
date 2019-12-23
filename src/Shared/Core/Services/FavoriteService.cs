@@ -12,11 +12,11 @@ namespace LiveScore.Core.Services
 
         void RemoveMatch(IMatch match);
 
-        void AddLeague(FavoriteLeague league);
+        void AddLeague(ILeague league);
 
-        void RemoveLeague(FavoriteLeague league);
+        void RemoveLeague(ILeague league);
 
-        IList<FavoriteLeague> GetLeagues();
+        IList<ILeague> GetLeagues();
 
         bool IsFavoriteLeague(string leagueId);
 

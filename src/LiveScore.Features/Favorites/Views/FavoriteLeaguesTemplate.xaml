@@ -60,7 +60,7 @@
                                            Grid.Column="1"
                                            LineBreakMode="TailTruncation"
                                            Style="{StaticResource LeagueName}"
-                                           Text="{Binding LeagueGroupName}" />
+                                           Text="{Binding League.Name}" />
                                         <Label Grid.Row="0"
                                            Grid.Column="2"
                                            Style="{StaticResource LeagueDetailIcon}" />

@@ -5,6 +5,7 @@ using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
+using LiveScore.Soccer.Models.Leagues;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Fixtures;
 using LiveScore.Soccer.ViewModels.Leagues.LeagueDetails.Table;
 using PanCardView.EventArgs;
@@ -21,7 +22,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private readonly IFavoriteService favoriteService;
 
-        private FavoriteLeague favoriteLeague;
+        private ILeague favoriteLeague;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,
@@ -59,7 +60,9 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var leagueId = parameters["LeagueId"]?.ToString();
             var leagueGroupName = parameters["LeagueGroupName"]?.ToString();
             var countryFlag = parameters["CountryFlag"]?.ToString();
-            var order = (int)parameters["LeagueOrder"];
+            var countryCode = parameters["CountryCode"]?.ToString();
+            var isInternational = parameters["IsInternational"] == null ? false : (bool)parameters["IsInternational"];
+            var order = parameters["LeagueOrder"] == null ? 0 : (int)parameters["LeagueOrder"];
 
             IsFavorite = favoriteService.IsFavoriteLeague(leagueId);
 
@@ -68,7 +71,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
             var homeId = parameters["HomeId"]?.ToString();
             var awayId = parameters["AwayId"]?.ToString();
 
-            favoriteLeague = new FavoriteLeague(leagueId, leagueGroupName, countryFlag, leagueSeasonId, leagueRoundGroup, order);
+            favoriteLeague = new League(leagueId, leagueGroupName, order, null, null, countryCode, isInternational, null, leagueRoundGroup, leagueSeasonId );
 
             LeagueDetailItemSources = new List<ViewModelBase> {
                 new TableViewModel(leagueId, leagueSeasonId, leagueRoundGroup, NavigationService, DependencyResolver, null, leagueGroupName, countryFlag, homeId, awayId, false),
