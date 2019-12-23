@@ -17,7 +17,7 @@
             </StackLayout.Resources>
             <Label LineBreakMode="TailTruncation"
                    Style="{ StaticResource LeagueGroupName }"
-                   Text="{ Binding Key}" />
+                   Text="{ Binding Key.Name}" />
             <BoxView Style="{StaticResource HorizontalLine}" />
         </StackLayout>
     </ViewCell>

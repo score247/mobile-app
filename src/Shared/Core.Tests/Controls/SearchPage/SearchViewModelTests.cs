@@ -16,10 +16,7 @@ namespace LiveScore.Core.Tests.Controls.SearchPage
         public SearchViewModelTests(ViewModelBaseFixture baseFixture)
         {
             comparer = baseFixture.CommonFixture.Comparer;
-            searchViewModel = new SearchViewModel(
-                baseFixture.NavigationService,
-                baseFixture.DependencyResolver,
-                baseFixture.EventAggregator);
+            searchViewModel = new SearchViewModel();
         }
 
         [Fact]
@@ -30,21 +27,6 @@ namespace LiveScore.Core.Tests.Controls.SearchPage
 
             // Assert
             Assert.Equal("test", searchViewModel.SearchText);
-        }
-
-        [Fact]
-        public void TextChangedCommand_OnTextChanged_GetExpectedSuggestionItem()
-        {
-            // Arrange
-            searchViewModel.SearchText = "Ase";
-
-            // Act
-            searchViewModel.TextChangeCommand.Execute();
-
-            // Assert
-            var actualSuggestionItem = searchViewModel.SuggestionItemSource.ToList();
-            var expectedSuggestionItem = new List<SearchSuggestion> { new SearchSuggestion { Name = "Asernal" } };
-            Assert.True(comparer.Compare(expectedSuggestionItem, actualSuggestionItem).AreEqual);
         }
 
         [Fact]
@@ -59,20 +41,6 @@ namespace LiveScore.Core.Tests.Controls.SearchPage
             // Assert
             var actualSuggestionItem = searchViewModel.SuggestionItemSource;
             Assert.Null(actualSuggestionItem);
-        }
-
-        [Fact]
-        public async Task CancelCommand_OnExecuted_CallNavigationServiceGoBack()
-        {
-            // Arrange
-            var navigationService = searchViewModel.NavigationService as FakeNavigationService;
-
-            // Act
-            await searchViewModel.CancelCommand.ExecuteAsync();
-
-            // Assert
-            Assert.True(navigationService.UseModalNavigation);
-            Assert.True(navigationService.IsGoBack);
         }
     }
 }

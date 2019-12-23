@@ -7,6 +7,13 @@
 
     public class LeagueCategory : Entity<string, string>, ILeagueCategory
     {
+        public LeagueCategory(string id, string name, string countryCode)
+        {
+            Id = id;
+            Name = name;
+            CountryCode = countryCode;
+        }
+
         public string CountryCode { get; set; }
 
         public override bool Equals(object obj)
