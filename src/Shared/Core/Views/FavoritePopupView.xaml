@@ -21,7 +21,7 @@
             </StackLayout.GestureRecognizers>
             <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
                 <Button Style="{StaticResource NetworkConnectionIcon}" />
-                <Label Text="{Binding ErrorMessage}"
+                <Label Text="{Binding Message}"
                        Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
             </FlexLayout>
         </StackLayout>

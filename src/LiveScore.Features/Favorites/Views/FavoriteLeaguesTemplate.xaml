@@ -21,11 +21,6 @@
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                   Padding="0,8,0,8"
                     AbsoluteLayout.LayoutFlags="SizeProportional">
-                <ActivityIndicator Margin="40"
-                                   VerticalOptions="Start"
-                                   IsRunning="{Binding IsBusy}"
-                                   IsVisible="{Binding IsBusy}"
-                                   Style="{StaticResource CenterActivityIndicator}" />
                  <StackLayout>
                                 <Label Style="{StaticResource NoInfo}"
                                        Text="{langResources:Translate NoFavoriteLeagues}"

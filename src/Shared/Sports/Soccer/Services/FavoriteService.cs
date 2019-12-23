@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LiveScore.Common.LangResources;
 using LiveScore.Common.Services;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
@@ -17,6 +18,9 @@ namespace LiveScore.Soccer.Services
 
         private const int LeagueLimitation = 30;
         private const int MatchLimitation = 99;
+
+        private readonly string LeagueLimitationMessage = string.Format(AppResources.FavoriteLeagueLimitation, LeagueLimitation);
+        private readonly string MatchLimitationMessage = string.Format(AppResources.FavoriteMatchLimitation, MatchLimitation);
 
         private readonly IUserSettingService userSettingService;
 
@@ -40,7 +44,7 @@ namespace LiveScore.Soccer.Services
         {
             if (Leagues.Count() >= LeagueLimitation)
             {
-                OnReachedLimitation("You have reached the limit of 30 favorite leagues. Please remove some of your favorite leagues and try again.");
+                OnReachedLimitation(LeagueLimitationMessage);
             }
 
             if (!Leagues.Any(m => m.Id == league.Id))
@@ -83,7 +87,12 @@ namespace LiveScore.Soccer.Services
         }
 
         public void RemoveMatch(IMatch match)
-        {            
+        {
+            if (Matches.Count() >= MatchLimitation)
+            {
+                OnReachedLimitation(MatchLimitationMessage);
+            }
+
             if (Matches.Any(m => m.Id == match.Id))
             {
                 Matches.Remove(match);
@@ -99,10 +108,10 @@ namespace LiveScore.Soccer.Services
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
 
         private static void OnAddedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView("Added to Favorites"));
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
         private static void OnRemovedFavorite()
-            => PopupNavigation.Instance.PushAsync(new FavoritePopupView("Removed from Favorites"));
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
         private static void OnReachedLimitation(string message)
             => PopupNavigation.Instance.PushAsync(new FavoritePopupView(message));

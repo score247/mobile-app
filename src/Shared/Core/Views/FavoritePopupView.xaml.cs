@@ -15,7 +15,7 @@ namespace LiveScore.Core.Views
 
         public FavoritePopupView(string message = null)
         {
-            ErrorMessage = message ?? AppResources.ConnectionLostMessage;
+            Message = message ?? AppResources.ConnectionLostMessage;
             InitializeComponent();
             InitConnectionLostMessage();
         }
@@ -47,7 +47,7 @@ namespace LiveScore.Core.Views
         }
 
 #pragma warning disable S2325 // Methods and properties that don't access instance data should be static
-        public string ErrorMessage { get; }
+        public string Message { get; }
 
         public async void OnTapped(object sender, EventArgs e)
 #pragma warning restore S2325 // Methods and properties that don't access instance data should be static

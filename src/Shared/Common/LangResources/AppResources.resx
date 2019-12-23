@@ -431,4 +431,16 @@ To add a favorite league, open the league detail page and tap the star icon at t
     <value>There are no matches in Favorites.
 To add a favorite match, tap the star right next to it.</value>
   </data>
+  <data name="AddedFavorite" xml:space="preserve">
+    <value>Added to Favorites.</value>
+  </data>
+  <data name="RemovedFavorite" xml:space="preserve">
+    <value>Removed from Favorites.</value>
+  </data>
+  <data name="FavoriteLeagueLimitation" xml:space="preserve">
+    <value>You have reached the limit of {0} favorite leagues. Please remove some of your favorite leagues and try again.</value>
+  </data>
+  <data name="FavoriteMatchLimitation" xml:space="preserve">
+    <value>You have reached the limit of {0} favorite matches. Please remove some of your favorite matches and try again.</value>
+  </data>
 </root>
