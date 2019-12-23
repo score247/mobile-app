@@ -59,16 +59,9 @@ namespace LiveScore.Features.League.ViewModels
 
         protected virtual async Task OnRefreshAsync()
         {
-            if (networkConnectionManager.IsFailureConnection())
-            {
-                IsRefreshing = false;
-                networkConnectionManager.PublishNetworkConnectionEvent();
-                return;
-            }
+            await LoadDataAsync(UpdateCountryLeaguesAsync, false);
 
-            await Task.Run(
-                () => LoadDataAsync(UpdateCountryLeaguesAsync, false))
-                .ConfigureAwait(false);
+            IsRefreshing = false;
         }
 
         protected virtual async Task UpdateCountryLeaguesAsync()

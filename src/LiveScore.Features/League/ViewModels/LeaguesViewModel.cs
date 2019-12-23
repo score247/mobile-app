@@ -17,6 +17,7 @@ namespace LiveScore.Features.League.ViewModels
 {
     public class LeaguesViewModel : ViewModelBase
     {
+        private const string InternationalCode = "INTL";
         private readonly ILeagueService leagueService;
         private readonly Func<string, string> buildFlagFunction;
         private bool firstLoad = true;
@@ -127,7 +128,7 @@ namespace LiveScore.Features.League.ViewModels
         private IEnumerable<LeagueViewModel> BuildInternationalLeaguesGroup(IEnumerable<ILeague> internationalLeagues)
         {
             var internationalCategory =
-                new LeagueCategory(string.Empty, AppResources.International, AppResources.International);
+                new LeagueCategory(string.Empty, AppResources.International, InternationalCode);
 
             return new List<CountryViewModel>
             {
@@ -155,7 +156,7 @@ namespace LiveScore.Features.League.ViewModels
 
         private void OnSearch(string searchText)
         {
-            if (!string.IsNullOrEmpty((searchText)))
+            if (!string.IsNullOrEmpty(searchText))
             {
                 var lowerCaseSearchText = searchText.ToLowerInvariant();
                 LeagueGroups.Clear();

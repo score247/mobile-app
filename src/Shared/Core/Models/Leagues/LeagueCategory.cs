@@ -14,7 +14,7 @@
             CountryCode = countryCode;
         }
 
-        public string CountryCode { get; set; }
+        public string CountryCode { get; }
 
         public override bool Equals(object obj)
             => (obj is LeagueCategory actualObj) && Name == actualObj.Name;
