@@ -22,8 +22,10 @@ namespace LiveScore.iOS.Renderers
         {
             base.OnElementChanged(e);
 
-            var txSearchField = (UITextField)Control.ValueForKey(new Foundation.NSString("searchField"));
-            var glassIcon = txSearchField.LeftView as UIImageView;
+            if (!(Control.ValueForKey(new Foundation.NSString("searchField")) is UITextField txSearchField))
+            {
+                return;
+            }
 
             var backgroundColor = (Color)App.Current.Resources["SearchBarTextBoxBackgroundColor"];
 
@@ -31,14 +33,16 @@ namespace LiveScore.iOS.Renderers
                 (nfloat)backgroundColor.R,
                 (nfloat)backgroundColor.G,
                 (nfloat)backgroundColor.B);
-
-            var placeHolderColor = (Color)App.Current.Resources["SearchBarPlaceholderColor"];
-            glassIcon.TintColor = UIColor.FromRGB(
-                (nfloat)placeHolderColor.R,
-                (nfloat)placeHolderColor.G,
-                (nfloat)placeHolderColor.B);
-
             txSearchField.ClipsToBounds = true;
+
+            if (txSearchField.LeftView is UIImageView glassIcon)
+            {
+                var placeHolderColor = (Color)App.Current.Resources["SearchBarPlaceholderColor"];
+                glassIcon.TintColor = UIColor.FromRGB(
+                    (nfloat)placeHolderColor.R,
+                    (nfloat)placeHolderColor.G,
+                    (nfloat)placeHolderColor.B);
+            }
         }
     }
 }

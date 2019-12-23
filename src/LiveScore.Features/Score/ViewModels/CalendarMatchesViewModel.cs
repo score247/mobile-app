@@ -34,11 +34,12 @@ namespace LiveScore.Features.Score.ViewModels
 
         public DelegateAsyncCommand<CalendarDate> CalendarDateSelectedCommand { get; }
 
-        public DelegateCommand SwipedUpCommand { get; }
-
         public override async void OnAppearing()
         {
-            ScrollToHeaderCommand?.Execute();
+            if (firstLoad)
+            {
+                ScrollToHeaderCommand?.Execute();
+            }
 
             await Task.Delay(250).ContinueWith(_ => base.OnAppearing());
         }
