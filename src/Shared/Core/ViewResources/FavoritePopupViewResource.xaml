@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ResourceDictionary x:Class="LiveScore.Core.ViewResources.FavoritePopupViewResource"
+                    xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+
+    <Style x:Key="FavoritePopupContainer" TargetType="StackLayout">
+        <Setter Property="VerticalOptions"
+                Value="EndAndExpand" />
+        <Setter Property="Margin"
+                Value="0,0,0,50" />
+    </Style>
+    <Style x:Key="FavoritePopupLayout"
+           TargetType="FlexLayout">
+        <Setter Property="HeightRequest"
+                Value="60" />
+        <Setter Property="Grid.Row"
+                Value="0" />
+        <Setter Property="Grid.Column"
+                Value="1" />
+        <Setter Property="AlignItems"
+                Value="Center" />
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FavoritePopupBgColor}" />
+    </Style>
+    <Style x:Key="FavoriteIcon"
+           BasedOn="{StaticResource ButtonIcon}"
+           TargetType="Button">
+        <Setter Property="BackgroundColor"
+                Value="{StaticResource FavoritePopupIconColor}" />
+        <Setter Property="HeightRequest"
+                Value="26" />
+        <Setter Property="WidthRequest"
+                Value="26" />
+        <Setter Property="CornerRadius"
+                Value="13" />
+        <Setter Property="Margin"
+                Value="8,0,8,0" />
+        <Setter Property="HorizontalOptions"
+                Value="Center" />
+        <Setter Property="FontSize"
+                Value="18" />
+        <Setter Property="TextColor"
+                Value="#fff" />
+        <Setter Property="Text"
+                Value="&#xe929;" />
+    </Style>
+    <Style x:Key="FavoriteContentLabel"
+           TargetType="Label">
+        <Setter Property="TextColor"
+                Value="{StaticResource FavoritePopupContentColor}" />
+        <Setter Property="FontSize"
+                Value="13" />
+    </Style>
+</ResourceDictionary>

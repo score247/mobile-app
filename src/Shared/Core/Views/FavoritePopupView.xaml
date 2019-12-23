@@ -10,19 +10,19 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <resources:NetworkConnectionErrorViewResource />
+                <resources:FavoritePopupViewResource />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Style="{StaticResource NetworkConnectionErrorContainer}">
+        <StackLayout Style="{StaticResource FavoritePopupContainer}">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnTapped" />
             </StackLayout.GestureRecognizers>
-            <FlexLayout Style="{StaticResource NetworkConnectionErrorLayout}">
-                <Button Style="{StaticResource NetworkConnectionIcon}" />
+            <FlexLayout Style="{StaticResource FavoritePopupLayout}">
+                <Button Style="{StaticResource FavoriteIcon}" />
                 <Label Text="{Binding Message}"
-                       Style="{StaticResource NetworkConnectionErrorMainContentLabel}" />
+                       Style="{StaticResource FavoriteContentLabel}" />
             </FlexLayout>
         </StackLayout>
     </ContentPage.Content>
