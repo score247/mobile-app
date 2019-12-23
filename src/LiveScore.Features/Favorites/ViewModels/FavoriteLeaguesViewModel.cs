@@ -29,6 +29,8 @@ namespace LiveScore.Features.Favorites.ViewModels
 
         public ObservableCollection<FavoriteLeague> FavoriteLeagues { get; private set; }
 
+        public bool? HasHeader { get; private set; }
+
         public DelegateAsyncCommand<FavoriteLeague> TapLeagueCommand { get; }
 
         public override void OnAppearing()
@@ -40,6 +42,8 @@ namespace LiveScore.Features.Favorites.ViewModels
             FavoriteLeagues = new ObservableCollection<FavoriteLeague>(favoriteService.GetLeagues());
 
             HasData = FavoriteLeagues.Any();
+
+            HasHeader = HasData ? null : (bool?)true;
         }
 
         private async Task OnTapLeagueAsync(FavoriteLeague league)

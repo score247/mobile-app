@@ -20,17 +20,22 @@
         <ContentView.Content>
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                   Padding="0,8,0,8"
-                    AbsoluteLayout.LayoutFlags="SizeProportional">
-                 <StackLayout>
-                                <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoFavoriteLeagues}"
-                                       IsVisible="{Binding NoData}" />
-                 </StackLayout>
+                  AbsoluteLayout.LayoutFlags="SizeProportional">
+                 
                 <tabstrip:TabItemListView ItemsSource="{Binding FavoriteLeagues}"
                                           BackgroundColor="{StaticResource ListViewBgColor}"
                                           IsPullToRefreshEnabled="False"
                                           IsVisible="{Binding IsNotBusy}"
-                                          VerticalOptions="FillAndExpand">
+                                          VerticalOptions="FillAndExpand"
+                                          Header="{Binding HasHeader}">
+                    <tabstrip:TabItemListView.HeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Style="{StaticResource NoInfo}"
+                                       Text="{langResources:Translate NoFavoriteLeagues}"/>
+                                </StackLayout>
+                        </DataTemplate>                        
+                    </tabstrip:TabItemListView.HeaderTemplate>
                     <tabstrip:TabItemListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
