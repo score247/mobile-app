@@ -4,6 +4,8 @@ using LiveScore.Common.Services;
 using LiveScore.Core.Models.Leagues;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.Services;
+using LiveScore.Core.Views;
+using Rg.Plugins.Popup.Services;
 
 namespace LiveScore.Soccer.Services
 {
@@ -38,6 +40,8 @@ namespace LiveScore.Soccer.Services
             }
 
             userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
+
+            OnAddedFavorite();
         }
 
         public void RemoveLeague(FavoriteLeague league)
@@ -48,7 +52,10 @@ namespace LiveScore.Soccer.Services
                 Leagues.Remove(favoriteLeague);
             }
 
+            //TODO add task run
             userSettingService.AddOrUpdateValue(LeagueKey, Leagues);
+
+            OnRemoveFavorite();
         }
 
         public IList<FavoriteLeague> GetLeagues() => Leagues;
@@ -80,5 +87,11 @@ namespace LiveScore.Soccer.Services
 
         private IList<IMatch> LoadMatchesFromSetting()
             => userSettingService.GetValueOrDefault(MatchKey, Enumerable.Empty<IMatch>()).ToList();
+
+        private static void OnAddedFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView("Added to Favorites"));
+
+        private static void OnRemoveFavorite()
+            => PopupNavigation.Instance.PushAsync(new FavoritePopupView("Removed from Favorites"));
     }
 }
