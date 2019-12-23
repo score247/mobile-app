@@ -16,8 +16,10 @@ namespace LiveScore.Soccer.Models.Leagues
             string categoryId,
             string countryName,
             string countryCode,
-            bool isInternational,
-            LeagueSeasonDates seasonDates)
+            bool isInternational,           
+            LeagueSeasonDates seasonDates,
+            string roundGroup,
+            string seasonId)
         {
             Id = id;
             Name = name;
@@ -26,6 +28,8 @@ namespace LiveScore.Soccer.Models.Leagues
             CountryName = countryName;
             CountryCode = countryCode;
             IsInternational = isInternational;
+            RoundGroup = roundGroup;
+            SeasonId = seasonId;
             SeasonDates = seasonDates;
         }
 
@@ -46,6 +50,10 @@ namespace LiveScore.Soccer.Models.Leagues
         public bool IsInternational { get; private set; }
 
         public LeagueSeasonDates SeasonDates { get; private set; }
+
+        public string RoundGroup { get; private set; }
+
+        public string SeasonId { get; private set; }
     }
 
     /// <summary>

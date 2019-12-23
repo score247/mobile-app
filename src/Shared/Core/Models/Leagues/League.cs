@@ -16,6 +16,10 @@
 
         bool IsInternational { get; }
 
+        string RoundGroup { get; }
+
+        string SeasonId { get; }
+
         LeagueSeasonDates SeasonDates { get; }
     }
 }
