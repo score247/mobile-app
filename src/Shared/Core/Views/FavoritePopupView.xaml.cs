@@ -4,9 +4,11 @@ using LiveScore.Common.LangResources;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace LiveScore.Core.Views
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FavoritePopupView : PopupPage
     {
         private const byte timeoutSeconds = 5;
