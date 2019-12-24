@@ -10,6 +10,7 @@ using LiveScore.Core;
 using LiveScore.Core.Controls.TabStrip;
 using LiveScore.Core.Services;
 using LiveScore.Core.Views;
+using Prism.Commands;
 using Prism.Navigation;
 using Rg.Plugins.Popup.Contracts;
 
@@ -37,6 +38,8 @@ namespace LiveScore.Features.Favorites.ViewModels
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
 
             TapLeagueCommand = new DelegateAsyncCommand<LeagueItemViewModel>(OnTapLeagueAsync);
+
+            UnfavoriteCommand = new DelegateCommand<string>(UnfavoriteLeague);
         }
 
         public ObservableCollection<LeagueItemViewModel> FavoriteLeagues { get; private set; }
@@ -44,6 +47,8 @@ namespace LiveScore.Features.Favorites.ViewModels
         public bool? HasHeader { get; private set; }
 
         public DelegateAsyncCommand<LeagueItemViewModel> TapLeagueCommand { get; }
+
+        public DelegateCommand<string> UnfavoriteCommand { get; }
 
         public override void OnAppearing()
         {
@@ -56,9 +61,7 @@ namespace LiveScore.Features.Favorites.ViewModels
                 .OrderBy(league => league.Order)
                 .Select(league => new LeagueItemViewModel(league, buildFlagFunction(league.CountryCode))));
 
-            HasData = FavoriteLeagues.Any();
-
-            HasHeader = HasData ? null : (bool?)true;
+            SetHasDataAndHeader();
         }
 
         private async Task OnTapLeagueAsync(LeagueItemViewModel item)
@@ -78,6 +81,23 @@ namespace LiveScore.Features.Favorites.ViewModels
             await NavigationService
                 .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
                 .ConfigureAwait(false);
+        }
+
+        private void UnfavoriteLeague(string id)
+        {
+            var viewModel = FavoriteLeagues.FirstOrDefault(league => league.League.Id == id);
+
+            FavoriteLeagues.Remove(viewModel);
+
+            favoriteService.RemoveLeague(viewModel.League);
+
+            SetHasDataAndHeader();
+        }
+
+        private void SetHasDataAndHeader()
+        {
+            HasData = FavoriteLeagues.Any();
+            HasHeader = HasData ? null : (bool?)true;
         }
 
         private Task OnAddedFavorite()

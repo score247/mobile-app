@@ -22,7 +22,7 @@
                   Padding="0,8,0,8"
                   AbsoluteLayout.LayoutFlags="SizeProportional">
                  
-                <tabstrip:TabItemListView ItemsSource="{Binding FavoriteLeagues}"
+                <tabstrip:TabItemListView x:Name="FavoriteLeaguesView" ItemsSource="{Binding FavoriteLeagues}"
                                           BackgroundColor="{StaticResource ListViewBgColor}"
                                           IsPullToRefreshEnabled="False"
                                           IsVisible="{Binding IsNotBusy}"
@@ -61,12 +61,18 @@
                                            LineBreakMode="TailTruncation"
                                            Style="{StaticResource LeagueName}"
                                            Text="{Binding League.Name}" />
+
                                         <Label Grid.Row="0"
                                            Grid.Column="2"
-                                           Style="{StaticResource LeagueDetailIcon}" />
+                                           Style="{StaticResource LeagueDetailIcon}"
+                                               />
+                                        
                                         <Button Grid.Row="0"
-                                           Grid.Column="3"
-                                           Style="{StaticResource ActiveFavoriteIcon}" />
+                                                Grid.Column="3"
+                                                Style="{StaticResource ActiveFavoriteIcon}"
+                                                Command="{Binding Path=BindingContext. UnfavoriteCommand, Source={x:Reference Name=FavoriteLeaguesView}}"
+                                                CommandParameter="{Binding League.Id}"
+                                                />
                                     </Grid>
                                     <BoxView Style="{StaticResource HorizontalLine}" />
                                 </StackLayout>
