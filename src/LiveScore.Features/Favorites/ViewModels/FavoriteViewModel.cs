@@ -23,7 +23,7 @@ namespace LiveScore.Features.Favorites.ViewModels
 
             FavoriteItemSources = new List<TabItemViewModel> {
                 new FavoriteMatchesViewModel(NavigationService, DependencyResolver, eventAggregator),
-                new FavoriteLeaguesViewModel(NavigationService, DependencyResolver)
+                new FavoriteLeaguesViewModel(NavigationService, DependencyResolver, eventAggregator)
             };
         }
 
