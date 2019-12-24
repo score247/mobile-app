@@ -110,7 +110,7 @@ namespace LiveScore.Soccer.Services
         {
             try
             {
-                return await apiService.Execute(() => matchApi.GetMatchByIds(string.Join(",", ids), language.DisplayName));
+                return await apiService.Execute(() => matchApi.GetMatchByIds(ids, language.DisplayName));
             }
             catch (Exception ex)
             {

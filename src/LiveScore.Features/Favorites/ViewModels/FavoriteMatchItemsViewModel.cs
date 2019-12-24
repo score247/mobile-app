@@ -67,6 +67,12 @@ namespace LiveScore.Features.Favorites.ViewModels
             await base.OnRemovedFavorite(match);
 
             MatchItemsSource.RemoveMatches(new[] { match.Id }, buildFlagUrlFunc, NavigationService, CurrentSportId);
+
+            if (MatchItemsSource?.Any() != true)
+            {
+                HeaderViewModel = this;
+                HasData = false;
+            }
         }
     }
 }
