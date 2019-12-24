@@ -40,6 +40,7 @@ namespace LiveScore.Soccer.Services
             if (Objects.Count >= Limitation)
             {
                 OnReachedLimit?.Invoke();
+                return;
             }
 
             if (!Objects.Contains(obj))
