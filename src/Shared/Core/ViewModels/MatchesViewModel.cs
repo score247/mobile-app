@@ -7,6 +7,7 @@ using LiveScore.Common;
 using LiveScore.Common.Extensions;
 using LiveScore.Common.LangResources;
 using LiveScore.Core.Converters;
+using LiveScore.Core.Events.FavoriteEvents.Matches;
 using LiveScore.Core.Extensions;
 using LiveScore.Core.Models.Matches;
 using LiveScore.Core.PubSubEvents.Matches;
@@ -49,9 +50,6 @@ namespace LiveScore.Core.ViewModels
             buildFlagUrlFunc = DependencyResolver.Resolve<Func<string, string>>(FuncNameConstants.BuildFlagUrlFuncName);
             popupNavigation = DependencyResolver.Resolve<IPopupNavigation>();
             favoriteService = DependencyResolver.Resolve<IFavoriteService<IMatch>>(CurrentSportId.ToString());
-            favoriteService.OnAddedFunc = OnAddedFavorite;
-            favoriteService.OnRemovedFunc = OnRemovedFavorite;
-            favoriteService.OnReachedLimit = OnReachedLimitation;
 
             RefreshCommand = new DelegateAsyncCommand(OnRefreshAsync);
             TappedMatchCommand = new DelegateAsyncCommand<MatchViewModel>(OnTapMatchAsync);
@@ -76,6 +74,20 @@ namespace LiveScore.Core.ViewModels
         public bool EnableTapLeague { get; protected set; } = true;
 
         public bool IsHeaderVisible { get; set; }
+
+        public override void OnResumeWhenNetworkOK()
+        {
+            base.OnResumeWhenNetworkOK();
+
+            SubscribeFavoriteEvents();
+        }
+
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            SubscribeFavoriteEvents();
+        }
 
         public override Task OnNetworkReconnectedAsync()
             => Task.Run(() => LoadDataAsync(LoadMatchesAsync));
@@ -111,6 +123,33 @@ namespace LiveScore.Core.ViewModels
             EventAggregator
                 .GetEvent<TeamStatisticPubSubEvent>()
                 .Unsubscribe(OnReceivedTeamStatistic);
+
+            EventAggregator
+                .GetEvent<AddFavoriteMatchEvent>()
+                .Unsubscribe(OnAddedFavorite);
+
+            EventAggregator
+                .GetEvent<RemoveFavoriteMatchEvent>()
+                .Unsubscribe(OnRemovedFavorite);
+
+            EventAggregator
+                .GetEvent<ReachLimitFavoriteMatchesEvent>()
+                .Unsubscribe(OnReachedLimitation);
+        }
+
+        private void SubscribeFavoriteEvents()
+        {
+            EventAggregator
+                .GetEvent<AddFavoriteMatchEvent>()
+                .Subscribe(OnAddedFavorite);
+
+            EventAggregator
+                .GetEvent<RemoveFavoriteMatchEvent>()
+                .Subscribe(OnRemovedFavorite);
+
+            EventAggregator
+                .GetEvent<ReachLimitFavoriteMatchesEvent>()
+                .Subscribe(OnReachedLimitation);
         }
 
         protected virtual void OnReceivedMatchEvent(IMatchEventMessage payload)
@@ -233,13 +272,13 @@ namespace LiveScore.Core.ViewModels
             }
         }
 
-        protected virtual Task OnAddedFavorite()
+        protected virtual void OnAddedFavorite()
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
-        protected virtual Task OnRemovedFavorite(IMatch match)
+        protected virtual void OnRemovedFavorite(IMatch match)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
-        protected virtual Task OnReachedLimitation()
+        protected virtual void OnReachedLimitation()
             => popupNavigation.PushAsync(new FavoritePopupView(MatchLimitationMessage));
     }
 }

@@ -62,9 +62,9 @@ namespace LiveScore.Features.Favorites.ViewModels
             return matches;
         }
 
-        protected override async Task OnRemovedFavorite(IMatch match)
+        protected override void OnRemovedFavorite(IMatch match)
         {
-            await base.OnRemovedFavorite(match);
+            base.OnRemovedFavorite(match);
 
             MatchItemsSource.RemoveMatches(new[] { match.Id }, buildFlagUrlFunc, NavigationService, CurrentSportId);
 
