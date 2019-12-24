@@ -19,9 +19,9 @@
         </ContentView.Resources>
         <ContentView.Content>
             <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
-                  Padding="0,8,0,8"
+                  Padding="0,8"
                   AbsoluteLayout.LayoutFlags="SizeProportional">
-                 
+
                 <tabstrip:TabItemListView x:Name="FavoriteLeaguesView" ItemsSource="{Binding FavoriteLeagues}"
                                           BackgroundColor="{StaticResource ListViewBgColor}"
                                           IsPullToRefreshEnabled="False"
@@ -32,9 +32,9 @@
                         <DataTemplate>
                             <StackLayout>
                                 <Label Style="{StaticResource NoInfo}"
-                                       Text="{langResources:Translate NoFavoriteLeagues}"/>
-                                </StackLayout>
-                        </DataTemplate>                        
+                                       Text="{langResources:Translate NoFavoriteLeagues}" />
+                            </StackLayout>
+                        </DataTemplate>
                     </tabstrip:TabItemListView.HeaderTemplate>
                     <tabstrip:TabItemListView.ItemTemplate>
                         <DataTemplate>
@@ -64,15 +64,13 @@
 
                                         <Label Grid.Row="0"
                                            Grid.Column="2"
-                                           Style="{StaticResource LeagueDetailIcon}"
-                                               />
-                                        
+                                           Style="{StaticResource LeagueDetailIcon}" />
+
                                         <Button Grid.Row="0"
                                                 Grid.Column="3"
                                                 Style="{StaticResource ActiveFavoriteIcon}"
                                                 Command="{Binding Path=BindingContext. UnfavoriteCommand, Source={x:Reference Name=FavoriteLeaguesView}}"
-                                                CommandParameter="{Binding League.Id}"
-                                                />
+                                                CommandParameter="{Binding League.Id}" />
                                     </Grid>
                                     <BoxView Style="{StaticResource HorizontalLine}" />
                                 </StackLayout>

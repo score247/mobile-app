@@ -20,7 +20,7 @@
             </ResourceDictionary>
         </ContentView.Resources>
         <ContentView.Content>
-            <Grid>
+            <Grid Padding="0,8">
                 <coreTemplates:MatchesTemplate BindingContext="{Binding MatchesViewModel}">
                     <coreTemplates:MatchesTemplate.ListViewHeaderTemplate>
                         <DataTemplate x:DataType="viewModel:FavoriteMatchItemsViewModel">
