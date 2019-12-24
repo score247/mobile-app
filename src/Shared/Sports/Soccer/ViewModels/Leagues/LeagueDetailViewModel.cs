@@ -22,7 +22,7 @@ namespace LiveScore.Soccer.ViewModels.Leagues
 
         private readonly IFavoriteService favoriteService;
 
-        private ILeague favoriteLeague;
+        private League favoriteLeague;
 
         public LeagueDetailViewModel(
          INavigationService navigationService,

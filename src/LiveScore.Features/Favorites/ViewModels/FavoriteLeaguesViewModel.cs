@@ -103,7 +103,7 @@ namespace LiveScore.Features.Favorites.ViewModels
         private Task OnAddedFavorite()
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.AddedFavorite));
 
-        private Task OnRemovedFavorite()
+        private Task OnRemovedFavorite(string id)
             => popupNavigation.PushAsync(new FavoritePopupView(AppResources.RemovedFavorite));
 
         private Task OnReachedLimitation()

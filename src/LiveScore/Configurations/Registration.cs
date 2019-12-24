@@ -95,8 +95,7 @@ namespace LiveScore.Configurations
 
             containerRegistry.RegisterSingleton<ISettings, Settings>();
             containerRegistry.RegisterSingleton<ICryptographyHelper, CryptographyHelper>();
-            containerRegistry.RegisterSingleton<IUserSettingService, UserSettingService>();
-            containerRegistry.RegisterSingleton<IFavoriteService, FavoriteService>();
+            containerRegistry.RegisterSingleton<IUserSettingService, UserSettingService>();            
 
             containerRegistry.RegisterInstance(new RefitSettings
             {
