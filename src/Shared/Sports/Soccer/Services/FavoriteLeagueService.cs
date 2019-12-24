@@ -12,7 +12,7 @@ namespace LiveScore.Soccer.Services
 {
     public class FavoriteLeagueService : FavoriteService<ILeague>
     {
-        private const int LeagueLimit = 10;
+        private const int LeagueLimit = 30;
        
         public FavoriteLeagueService(IUserSettingService userSettingService, IEventAggregator eventAggrerator)
                 : base(userSettingService, eventAggrerator)
