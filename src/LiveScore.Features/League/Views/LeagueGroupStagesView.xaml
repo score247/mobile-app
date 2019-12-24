@@ -4,6 +4,10 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:coreTemplates="clr-namespace:LiveScore.Core.Views.Templates;assembly=LiveScore.Core"
+             xmlns:viewResource="clr-namespace:LiveScore.Features.League.ViewResources"
+             xmlns:coreViewResources="clr-namespace:LiveScore.Core.ViewResources;assembly=LiveScore.Core"
+             xmlns:templates="clr-namespace:LiveScore.Features.League.Views.Templates"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              mc:Ignorable="d"
              x:Class="LiveScore.Features.League.Views.LeagueGroupStagesView"
              BackgroundColor="{StaticResource SiteBackgroundColor}">
@@ -16,12 +20,53 @@
                      Priority="1"
                      Text="Search" />
     </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <viewResource:LeagueHeaderViewResource />
+                <coreViewResources:MatchHeaderViewResource />
+            </ResourceDictionary.MergedDictionaries>
+            <templates:NoFlagLeagueTemplate x:Key="NoFlagLeagueTemplate" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="League group is coming soon!"
-                   TextColor="White"
-                   VerticalOptions="CenterAndExpand"
-                   HorizontalOptions="CenterAndExpand" />
+            <BoxView Style="{StaticResource HorizontalLine}" />
+            <Grid Style="{StaticResource RegionDetailGroupBox}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="{StaticResource FunctionGroupHeight}" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="60" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ffimageloadingsvg:SvgCachedImage Grid.Row="0"
+                                                  Grid.Column="0"
+                                                  DownsampleToViewSize="True"
+                                                  LoadingPlaceholder="images/flag_league/default_flag.svg"
+                                                  Source="{Binding LeagueFlag, Mode=TwoWay}"
+                                                  Style="{StaticResource LeagueFlag}" />
+                <Label Grid.Row="0"
+                       Grid.Column="1"
+                       LineBreakMode="TailTruncation"
+                       Style="{StaticResource LeagueName}"
+                       Text="{ Binding LeagueName }" />
+            </Grid>
+            <ListView AutomationProperties.IsInAccessibleTree="False"
+                      HasUnevenRows="true"
+                      IsPullToRefreshEnabled="true"
+                      IsRefreshing="{Binding IsRefreshing}"
+                      HorizontalScrollBarVisibility="Never"
+                      VerticalScrollBarVisibility="Never"
+                      ItemTemplate="{StaticResource NoFlagLeagueTemplate}"
+                      ItemsSource="{Binding LeagueGroupStages}"
+                      RefreshControlColor="White"
+                      SelectionMode="None"
+                      SeparatorVisibility="None"
+                      Style="{StaticResource ListViewHasBackground}"
+                      RefreshCommand="{Binding RefreshCommand}"
+                      VerticalOptions="FillAndExpand">
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

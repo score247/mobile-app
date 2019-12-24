@@ -23,6 +23,9 @@ namespace LiveScore.Soccer.Services
 
             [Get("/soccer/{language}/leagues/country/{countryCode}")]
             Task<IEnumerable<League>> GetCountryLeagues(string language, string countryCode);
+
+            [Get("/soccer/{language}/leagues/{leagueId}/{seasonId}/groups")]
+            Task<IEnumerable<LeagueGroupStage>> GetLeagueGroupStages(string language, string leagueId, string seasonId);
         }
 
         [Headers("Accept: application/x-msgpack")]

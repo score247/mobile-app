@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using LiveScore.Common.Extensions;
 using LiveScore.Core;
 using LiveScore.Core.Models.Leagues;
+using LiveScore.Core.Services;
 using LiveScore.Core.ViewModels;
 using LiveScore.Features.League.Views;
 using Prism.Navigation;
@@ -11,26 +14,35 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 {
     public class LeagueViewModel : ViewModelBase
     {
+        private readonly ILeagueService leagueService;
+#pragma warning disable S107 // Methods should not have too many parameters
+
         public LeagueViewModel(
             INavigationService navigationService,
             IDependencyResolver dependencyResolver,
             Func<string, string> buildFlagFunction,
             ILeague league,
             string countryCode,
+            ILeagueService leagueService = null,
             bool isShowFlag = true)
+#pragma warning restore S107 // Methods should not have too many parameters
             : base(navigationService, dependencyResolver)
         {
             BuildFlagFunction = buildFlagFunction;
             LeagueId = league?.Id;
+            LeagueSeasonId = league?.SeasonId;
             LeagueName = league?.Name.ToUpperInvariant();
             CountryName = league?.CountryName;
             CountryCode = countryCode;
             LeagueFlag = buildFlagFunction(countryCode);
+            this.leagueService = leagueService;
             IsShowFlag = isShowFlag;
             LeagueTapped = new DelegateAsyncCommand(OnTapLeagueAsync);
         }
 
-        public string LeagueId { get; }
+        public string LeagueId { get; protected set; }
+
+        public string LeagueSeasonId { get; protected set; }
 
         public string CountryCode { get; protected set; }
 
@@ -40,7 +52,7 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         public bool IsShowFlag { get; }
 
-        public string LeagueFlag { get; }
+        public string LeagueFlag { get; protected set; }
 
         public DelegateAsyncCommand LeagueTapped { get; protected set; }
 
@@ -48,9 +60,26 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
 
         private async Task OnTapLeagueAsync()
         {
+            var leagueGroup = await leagueService?.GetLeagueGroupStages(LeagueId, LeagueSeasonId, CurrentLanguage);
+            if (leagueGroup?.Any() == true)
+            {
+                await NavigateToLeagueGroupStages(leagueGroup);
+            }
+            else
+            {
+                await NavigateToLeagueDetail();
+            }
+        }
+
+        private async Task NavigateToLeagueGroupStages(IEnumerable<ILeagueGroupStage> leagueGroupStages)
+        {
             var parameters = new NavigationParameters
             {
-                { "LeagueId", LeagueId }
+                { "LeagueId", LeagueId },
+                { "LeagueSeasonId", LeagueSeasonId },
+                { "LeagueName", LeagueName },
+                { "LeagueFlag", LeagueFlag },
+                { "LeagueGroupStages", leagueGroupStages }
             };
 
             var navigated = await NavigationService
@@ -61,6 +90,22 @@ namespace LiveScore.Features.League.ViewModels.LeagueItemViewModels
             {
                 await LoggingService.LogExceptionAsync(navigated.Exception).ConfigureAwait(false);
             }
+        }
+
+        private async Task NavigateToLeagueDetail()
+        {
+            var parameters = new NavigationParameters
+                {
+                    { "LeagueId", LeagueId },
+                    { "LeagueSeasonId", LeagueSeasonId },
+                    { "LeagueGroupName", LeagueName },
+                    { "CountryFlag", LeagueFlag },
+                    { "CountryCode", CountryCode }
+                };
+
+            await NavigationService
+                .NavigateAsync("LeagueDetailView" + CurrentSportId, parameters)
+                .ConfigureAwait(false);
         }
     }
 }

@@ -99,5 +99,22 @@ namespace LiveScore.Soccer.Services
                 return Enumerable.Empty<ILeague>();
             }
         }
+
+        public async Task<IEnumerable<ILeagueGroupStage>> GetLeagueGroupStages(string leagueId, string seasonId, Language language)
+        {
+            try
+            {
+                var countryLeagues = await apiService.Execute(()
+                       => leagueApi.GetLeagueGroupStages(language.DisplayName, leagueId, seasonId));
+
+                return countryLeagues;
+            }
+            catch (Exception ex)
+            {
+                HandleException(ex);
+
+                return Enumerable.Empty<ILeagueGroupStage>();
+            }
+        }
     }
 }

@@ -104,7 +104,7 @@ namespace LiveScore.Features.League.ViewModels
 
         private IEnumerable<IGrouping<LeagueCategory, LeagueViewModel>> BuildTopLeaguesGroup(IEnumerable<ILeague> topLeagues)
             => topLeagues
-                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode))
+                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, leagueService))
                 .GroupBy(_ => new LeagueCategory(string.Empty, AppResources.Popular, AppResources.Popular));
 
         private IEnumerable<IGrouping<LeagueCategory, LeagueViewModel>> BuildAllLeaguesGroup(IEnumerable<ILeague> leagues)

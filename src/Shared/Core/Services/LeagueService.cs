@@ -15,5 +15,7 @@ namespace LiveScore.Core.Services
         Task<IEnumerable<IMatch>> GetFixtures(string leagueId, string leagueGroupName, Language language);
 
         Task<IEnumerable<ILeague>> GetCountryLeagues(string countryCode, Language language);
+
+        Task<IEnumerable<ILeagueGroupStage>> GetLeagueGroupStages(string leagueId, string seasonId, Language language);
     }
 }

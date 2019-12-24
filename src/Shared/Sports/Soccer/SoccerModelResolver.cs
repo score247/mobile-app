@@ -44,46 +44,49 @@ namespace MessagePack.Resolvers
 
         static SoccerModelResolverGetFormatterHelper()
         {
-            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(38)
+            lookup = new global::System.Collections.Generic.Dictionary<Type, int>(41)
             {
                 {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.League>), 0 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Leagues.LeagueGroupNote>), 1 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Teams.TeamStanding>), 2 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Enumerations.TeamOutcome>), 3 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>), 4 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.Commentary>), 5 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>), 6 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>), 7 },
-                {typeof(global::System.Collections.Generic.IDictionary<global::LiveScore.Core.Enumerations.EventType, int>), 8 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.TimelineEvent>), 9 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Teams.Player>), 10 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>), 11 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetTypeOdds>), 12 },
-                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.OddsMovement>), 13 },
-                {typeof(global::LiveScore.Soccer.Enumerations.TeamOutcome), 14 },
-                {typeof(global::LiveScore.Soccer.Models.Leagues.League), 15 },
-                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueList), 16 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStanding), 17 },
-                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable), 18 },
-                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueTable), 19 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.Commentary), 20 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.GoalScorer), 21 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentary), 22 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentaryList), 23 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCoverage), 24 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.SoccerMatch), 25 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.PlayerType), 26 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.Position), 27 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.Player), 28 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.TimelineEvent), 29 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchInfo), 30 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.TeamLineups), 31 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchLineups), 32 },
-                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStatistic), 33 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchStatistic), 34 },
-                {typeof(global::LiveScore.Soccer.Models.Matches.MatchList), 35 },
-                {typeof(global::LiveScore.Soccer.Models.Odds.MatchOdds), 36 },
-                {typeof(global::LiveScore.Soccer.Models.Odds.MatchOddsMovement), 37 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>), 1 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Leagues.LeagueGroupNote>), 2 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Teams.TeamStanding>), 3 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Enumerations.TeamOutcome>), 4 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>), 5 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.Commentary>), 6 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.MatchCommentary>), 7 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Matches.MatchPeriod>), 8 },
+                {typeof(global::System.Collections.Generic.IDictionary<global::LiveScore.Core.Enumerations.EventType, int>), 9 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.TimelineEvent>), 10 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Teams.Player>), 11 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Matches.SoccerMatch>), 12 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.BetTypeOdds>), 13 },
+                {typeof(global::System.Collections.Generic.IEnumerable<global::LiveScore.Core.Models.Odds.OddsMovement>), 14 },
+                {typeof(global::LiveScore.Soccer.Enumerations.TeamOutcome), 15 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.League), 16 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueList), 17 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage), 18 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueGroupStageList), 19 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStanding), 20 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable), 21 },
+                {typeof(global::LiveScore.Soccer.Models.Leagues.LeagueTable), 22 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.Commentary), 23 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.GoalScorer), 24 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentary), 25 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCommentaryList), 26 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchCoverage), 27 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.SoccerMatch), 28 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.PlayerType), 29 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.Position), 30 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.Player), 31 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.TimelineEvent), 32 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchInfo), 33 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.TeamLineups), 34 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchLineups), 35 },
+                {typeof(global::LiveScore.Soccer.Models.Teams.TeamStatistic), 36 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchStatistic), 37 },
+                {typeof(global::LiveScore.Soccer.Models.Matches.MatchList), 38 },
+                {typeof(global::LiveScore.Soccer.Models.Odds.MatchOdds), 39 },
+                {typeof(global::LiveScore.Soccer.Models.Odds.MatchOddsMovement), 40 },
             };
         }
 
@@ -95,43 +98,46 @@ namespace MessagePack.Resolvers
             switch (key)
             {
                 case 0: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Leagues.League>();
-                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Leagues.LeagueGroupNote>();
-                case 2: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Teams.TeamStanding>();
-                case 3: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Enumerations.TeamOutcome>();
-                case 4: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>();
-                case 5: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>();
-                case 6: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentary>();
-                case 7: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.MatchPeriod>();
-                case 8: return new global::MessagePack.Formatters.InterfaceDictionaryFormatter<global::LiveScore.Core.Enumerations.EventType, int>();
-                case 9: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.TimelineEvent>();
-                case 10: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Teams.Player>();
-                case 11: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>();
-                case 12: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.BetTypeOdds>();
-                case 13: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.OddsMovement>();
-                case 14: return new MessagePack.Formatters.LiveScore.Soccer.Enumerations.TeamOutcomeFormatter();
-                case 15: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueFormatter();
-                case 16: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueListFormatter();
-                case 17: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStandingFormatter();
-                case 18: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueGroupTableFormatter();
-                case 19: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueTableFormatter();
-                case 20: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.CommentaryFormatter();
-                case 21: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.GoalScorerFormatter();
-                case 22: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryFormatter();
-                case 23: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryListFormatter();
-                case 24: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCoverageFormatter();
-                case 25: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.SoccerMatchFormatter();
-                case 26: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PlayerTypeFormatter();
-                case 27: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PositionFormatter();
-                case 28: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PlayerFormatter();
-                case 29: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.TimelineEventFormatter();
-                case 30: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchInfoFormatter();
-                case 31: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamLineupsFormatter();
-                case 32: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchLineupsFormatter();
-                case 33: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStatisticFormatter();
-                case 34: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchStatisticFormatter();
-                case 35: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchListFormatter();
-                case 36: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsFormatter();
-                case 37: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsMovementFormatter();
+                case 1: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>();
+                case 2: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Leagues.LeagueGroupNote>();
+                case 3: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Teams.TeamStanding>();
+                case 4: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Enumerations.TeamOutcome>();
+                case 5: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupTable>();
+                case 6: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.Commentary>();
+                case 7: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.MatchCommentary>();
+                case 8: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Matches.MatchPeriod>();
+                case 9: return new global::MessagePack.Formatters.InterfaceDictionaryFormatter<global::LiveScore.Core.Enumerations.EventType, int>();
+                case 10: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.TimelineEvent>();
+                case 11: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Teams.Player>();
+                case 12: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Soccer.Models.Matches.SoccerMatch>();
+                case 13: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.BetTypeOdds>();
+                case 14: return new global::MessagePack.Formatters.InterfaceEnumerableFormatter<global::LiveScore.Core.Models.Odds.OddsMovement>();
+                case 15: return new MessagePack.Formatters.LiveScore.Soccer.Enumerations.TeamOutcomeFormatter();
+                case 16: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueFormatter();
+                case 17: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueListFormatter();
+                case 18: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueGroupStageFormatter();
+                case 19: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueGroupStageListFormatter();
+                case 20: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStandingFormatter();
+                case 21: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueGroupTableFormatter();
+                case 22: return new MessagePack.Formatters.LiveScore.Soccer.Models.Leagues.LeagueTableFormatter();
+                case 23: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.CommentaryFormatter();
+                case 24: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.GoalScorerFormatter();
+                case 25: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryFormatter();
+                case 26: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCommentaryListFormatter();
+                case 27: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchCoverageFormatter();
+                case 28: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.SoccerMatchFormatter();
+                case 29: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PlayerTypeFormatter();
+                case 30: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PositionFormatter();
+                case 31: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.PlayerFormatter();
+                case 32: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.TimelineEventFormatter();
+                case 33: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchInfoFormatter();
+                case 34: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamLineupsFormatter();
+                case 35: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchLineupsFormatter();
+                case 36: return new MessagePack.Formatters.LiveScore.Soccer.Models.Teams.TeamStatisticFormatter();
+                case 37: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchStatisticFormatter();
+                case 38: return new MessagePack.Formatters.LiveScore.Soccer.Models.Matches.MatchListFormatter();
+                case 39: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsFormatter();
+                case 40: return new MessagePack.Formatters.LiveScore.Soccer.Models.Odds.MatchOddsMovementFormatter();
                 default: return null;
             }
         }
@@ -505,6 +511,203 @@ namespace MessagePack.Formatters.LiveScore.Soccer.Models.Leagues
 
             var ____result = new global::LiveScore.Soccer.Models.Leagues.LeagueList();
             ____result.Leagues = __Leagues__;
+            return ____result;
+        }
+    }
+
+
+    public sealed class LeagueGroupStageFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>
+    {
+
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public LeagueGroupStageFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "LeagueId", 0},
+                { "LeagueSeasonId", 1},
+                { "GroupStageName", 2},
+                { "LeagueRound", 3},
+                { "Language", 4},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueSeasonId"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("GroupStageName"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueRound"),
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("Language"),
+                
+            };
+        }
+
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 5);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[1]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.LeagueSeasonId, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[2]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.GroupStageName, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[3]);
+            offset += formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Leagues.LeagueRound>().Serialize(ref bytes, offset, value.LeagueRound, formatterResolver);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[4]);
+            offset += formatterResolver.GetFormatterWithVerify<string>().Serialize(ref bytes, offset, value.Language, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __LeagueId__ = default(string);
+            var __LeagueSeasonId__ = default(string);
+            var __GroupStageName__ = default(string);
+            var __LeagueRound__ = default(global::LiveScore.Core.Models.Leagues.LeagueRound);
+            var __Language__ = default(string);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
+
+                switch (key)
+                {
+                    case 0:
+                        __LeagueId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 1:
+                        __LeagueSeasonId__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 2:
+                        __GroupStageName__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 3:
+                        __LeagueRound__ = formatterResolver.GetFormatterWithVerify<global::LiveScore.Core.Models.Leagues.LeagueRound>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    case 4:
+                        __Language__ = formatterResolver.GetFormatterWithVerify<string>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                
+                NEXT_LOOP:
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage(__LeagueId__, __LeagueSeasonId__, __GroupStageName__, __LeagueRound__, __Language__);
+            return ____result;
+        }
+    }
+
+
+    public sealed class LeagueGroupStageListFormatter : global::MessagePack.Formatters.IMessagePackFormatter<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStageList>
+    {
+
+        readonly global::MessagePack.Internal.AutomataDictionary ____keyMapping;
+        readonly byte[][] ____stringByteKeys;
+
+        public LeagueGroupStageListFormatter()
+        {
+            this.____keyMapping = new global::MessagePack.Internal.AutomataDictionary()
+            {
+                { "LeagueGroupStages", 0},
+            };
+
+            this.____stringByteKeys = new byte[][]
+            {
+                global::MessagePack.MessagePackBinary.GetEncodedStringBytes("LeagueGroupStages"),
+                
+            };
+        }
+
+
+        public int Serialize(ref byte[] bytes, int offset, global::LiveScore.Soccer.Models.Leagues.LeagueGroupStageList value, global::MessagePack.IFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                return global::MessagePack.MessagePackBinary.WriteNil(ref bytes, offset);
+            }
+            
+            var startOffset = offset;
+            offset += global::MessagePack.MessagePackBinary.WriteFixedMapHeaderUnsafe(ref bytes, offset, 1);
+            offset += global::MessagePack.MessagePackBinary.WriteRaw(ref bytes, offset, this.____stringByteKeys[0]);
+            offset += formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>>().Serialize(ref bytes, offset, value.LeagueGroupStages, formatterResolver);
+            return offset - startOffset;
+        }
+
+        public global::LiveScore.Soccer.Models.Leagues.LeagueGroupStageList Deserialize(byte[] bytes, int offset, global::MessagePack.IFormatterResolver formatterResolver, out int readSize)
+        {
+            if (global::MessagePack.MessagePackBinary.IsNil(bytes, offset))
+            {
+                readSize = 1;
+                return null;
+            }
+
+            var startOffset = offset;
+            var length = global::MessagePack.MessagePackBinary.ReadMapHeader(bytes, offset, out readSize);
+            offset += readSize;
+
+            var __LeagueGroupStages__ = default(global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>);
+
+            for (int i = 0; i < length; i++)
+            {
+                var stringKey = global::MessagePack.MessagePackBinary.ReadStringSegment(bytes, offset, out readSize);
+                offset += readSize;
+                int key;
+                if (!____keyMapping.TryGetValueSafe(stringKey, out key))
+                {
+                    readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                    goto NEXT_LOOP;
+                }
+
+                switch (key)
+                {
+                    case 0:
+                        __LeagueGroupStages__ = formatterResolver.GetFormatterWithVerify<global::System.Collections.Generic.IEnumerable<global::LiveScore.Soccer.Models.Leagues.LeagueGroupStage>>().Deserialize(bytes, offset, formatterResolver, out readSize);
+                        break;
+                    default:
+                        readSize = global::MessagePack.MessagePackBinary.ReadNextBlock(bytes, offset);
+                        break;
+                }
+                
+                NEXT_LOOP:
+                offset += readSize;
+            }
+
+            readSize = offset - startOffset;
+
+            var ____result = new global::LiveScore.Soccer.Models.Leagues.LeagueGroupStageList();
+            ____result.LeagueGroupStages = __LeagueGroupStages__;
             return ____result;
         }
     }

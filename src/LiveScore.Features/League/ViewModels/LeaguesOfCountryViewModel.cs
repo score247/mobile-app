@@ -53,7 +53,7 @@ namespace LiveScore.Features.League.ViewModels
             {
                 LeaguesItems = leagues
                     .OrderBy(league => league.Name)
-                    .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, false));
+                    .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, leagueService, false));
             }
         }
 
@@ -69,7 +69,7 @@ namespace LiveScore.Features.League.ViewModels
             var leagues = await leagueService.GetCountryLeagues(CountryCode, CurrentLanguage);
             LeaguesItems = leagues
                 .OrderBy(league => league.Name)
-                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, false));
+                .Select(league => new LeagueViewModel(NavigationService, DependencyResolver, buildFlagFunction, league, league.CountryCode, leagueService, false));
 
             IsRefreshing = false;
             HasData = true;
